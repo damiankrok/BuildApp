@@ -20,7 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.0.0' as const
+export const MODEL_SCHEMA_VERSION = '1.1.0' as const
+/** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -142,6 +144,62 @@ export const WallSchema = z
   })
   .strict()
 export type Wall = z.infer<typeof WallSchema>
+
+/** One end of a wall: `START` is where the wall's outer-face line begins, `END` where it ends. */
+export const WallEndSchema = z.enum(['START', 'END'])
+export type WallEnd = z.infer<typeof WallEndSchema>
+
+export const WallEndRefSchema = z.object({ wallId: IdSchema, end: WallEndSchema }).strict()
+export type WallEndRef = z.infer<typeof WallEndRefSchema>
+
+export const WallJunctionKindSchema = z.enum(['CORNER', 'BUTT', 'T'])
+export type WallJunctionKind = z.infer<typeof WallJunctionKindSchema>
+
+/**
+ * A wall junction: the caller states how walls meet, the model resolves the
+ * physical wall extents (see topology.ts and docs/WALL_TOPOLOGY.md).
+ *
+ * CORNER — the ends `a` and `b` of two walls meet at their outer corner. The
+ *   `owner` wall runs through the corner block and takes its material; the
+ *   other wall stops at the owner's near face.
+ * BUTT — the end `wall` terminates against a face of `againstWallId`, which
+ *   is not modified and owns the material; the terminating wall stops at the
+ *   host's near face. The contact must lie on the host's physical face.
+ * T — a BUTT whose contact lies strictly inside the host's length (the host
+ *   continues on both sides).
+ *
+ * Endpoints are stated in natural footprint coordinates: an endpoint may sit
+ * anywhere within the other wall's thickness band (on its outer line, on its
+ * inner face, or between). `tolerance` (m) bounds how far an endpoint may miss
+ * that band before the junction is reported as a gap or an overshoot.
+ */
+const junctionBase = { ...base, tolerance: nonNegative }
+export const WallJunctionSchema = z.discriminatedUnion('kind', [
+  z.object({ ...junctionBase, kind: z.literal('CORNER'), a: WallEndRefSchema, b: WallEndRefSchema, owner: IdSchema }).strict(),
+  z.object({ ...junctionBase, kind: z.literal('BUTT'), wall: WallEndRefSchema, againstWallId: IdSchema }).strict(),
+  z.object({ ...junctionBase, kind: z.literal('T'), wall: WallEndRefSchema, againstWallId: IdSchema }).strict(),
+])
+export type WallJunction = z.infer<typeof WallJunctionSchema>
+
+/** Default junction tolerance: one millimetre. */
+export const DEFAULT_JUNCTION_TOLERANCE = 0.001
+
+/**
+ * A closed ring of walls on one level: `wallIds` in traversal order (wall i
+ * runs from ring vertex i to vertex i+1) and `junctionIds[i]`, the CORNER
+ * junction at vertex i between wall i-1's END and wall i's START. The ring
+ * is a grouping over ordinary walls: they stay editable, and the ring's
+ * polygon is the walls' start points (`ringPolygon`).
+ */
+export const WallRingSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    wallIds: z.array(IdSchema).min(3),
+    junctionIds: z.array(IdSchema).min(3),
+  })
+  .strict()
+export type WallRing = z.infer<typeof WallRingSchema>
 
 export const OpeningKindSchema = z.enum(['WINDOW', 'DOOR', 'PASSAGE'])
 export type OpeningKind = z.infer<typeof OpeningKindSchema>
@@ -339,6 +397,8 @@ export const CanonicalBuildingModelSchema = z
     levels: z.array(LevelSchema),
     rooms: z.array(RoomSchema),
     walls: z.array(WallSchema),
+    wallJunctions: z.array(WallJunctionSchema),
+    wallRings: z.array(WallRingSchema),
     openings: z.array(OpeningSchema),
     windows: z.array(WindowSchema),
     doors: z.array(DoorSchema),
@@ -367,6 +427,8 @@ export const OBJECT_COLLECTIONS = [
   'levels',
   'rooms',
   'walls',
+  'wallJunctions',
+  'wallRings',
   'openings',
   'windows',
   'doors',
@@ -388,6 +450,8 @@ export const SEMANTIC_KINDS = [
   'level',
   'room',
   'wall',
+  'wallJunction',
+  'wallRing',
   'opening',
   'window',
   'door',
@@ -408,6 +472,8 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   level: 'levels',
   room: 'rooms',
   wall: 'walls',
+  wallJunction: 'wallJunctions',
+  wallRing: 'wallRings',
   opening: 'openings',
   window: 'windows',
   door: 'doors',
@@ -426,6 +492,8 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   levels: 'level',
   rooms: 'room',
   walls: 'wall',
+  wallJunctions: 'wallJunction',
+  wallRings: 'wallRing',
   openings: 'opening',
   windows: 'window',
   doors: 'door',
@@ -445,6 +513,8 @@ export type SemanticObject =
   | Level
   | Room
   | Wall
+  | WallJunction
+  | WallRing
   | Opening
   | Window
   | Door
@@ -470,6 +540,8 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     levels: [],
     rooms: [],
     walls: [],
+    wallJunctions: [],
+    wallRings: [],
     openings: [],
     windows: [],
     doors: [],

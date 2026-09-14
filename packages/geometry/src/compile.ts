@@ -10,6 +10,9 @@
  * result is one) always get geometry.
  */
 import {
+  nominalExtent,
+  physicalSpan,
+  resolveWallTopology,
   validateModel,
   wallFrame,
   wallPlanPoint,
@@ -28,8 +31,18 @@ const byId = <T extends { id: string }>(list: readonly T[]): T[] => [...list].so
 
 export type WallTop = { top: TopFunction; breaks: number[]; diagnostics: CompileDiagnostic[] }
 
-/** The top function of a wall: flat, an explicit polyline, or the underside of a roof. */
-export function wallTopFunction(wall: Wall, level: Level, roofs: ReadonlyMap<string, { roof: Roof; geometry: RoofGeometry }>): WallTop {
+/**
+ * The top function of a wall: flat, an explicit polyline, or the underside of
+ * a roof. `span` is the physical `a` range the wall occupies after topology
+ * resolution (it may extend past the nominal ends at a reflex corner); roof
+ * break points are collected over it.
+ */
+export function wallTopFunction(
+  wall: Wall,
+  level: Level,
+  roofs: ReadonlyMap<string, { roof: Roof; geometry: RoofGeometry }>,
+  span: { a0: number; a1: number } = physicalSpan(nominalExtent(wall)),
+): WallTop {
   const profile = wall.topProfile
   if (!profile || profile.kind === 'FLAT') return { top: () => wall.height, breaks: [], diagnostics: [] }
   if (profile.kind === 'POLYLINE') {
@@ -66,9 +79,9 @@ export function wallTopFunction(wall: Wall, level: Level, roofs: ReadonlyMap<str
   const diagnostics: CompileDiagnostic[] = []
   let uncovered = false
   for (const c of [0, wall.thickness]) {
-    const p = wallPlanPoint(f, 0, c)
-    breaks.push(...roofBreaksAlong(g, p, { x: f.u.x, z: f.u.z }, f.length))
-    for (const u of [0, f.length, ...breaks]) {
+    const p = wallPlanPoint(f, span.a0, c)
+    breaks.push(...roofBreaksAlong(g, p, { x: f.u.x, z: f.u.z }, span.a1 - span.a0).map((t) => t + span.a0))
+    for (const u of [span.a0, span.a1, ...breaks]) {
       const q = wallPlanPoint(f, u, c)
       if (!g.covers(q.x, q.z)) uncovered = true
     }
@@ -111,6 +124,9 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     roofs.set(roof.id, { roof, geometry: roofGeometry(roof, level) })
   }
 
+  // Junctions and rings -> physical wall extents. The model validated, so the resolution carries no errors.
+  const topology = resolveWallTopology(model)
+
   const openingsByWall = new Map<string, typeof model.openings>()
   for (const o of byId(model.openings)) openingsByWall.set(o.wallId, [...(openingsByWall.get(o.wallId) ?? []), o])
   const windowByOpening = new Map(model.windows.map((w) => [w.openingId, w]))
@@ -120,9 +136,10 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     const level = levelOf(wall.levelId, wall.id)
     if (!level) continue
     const openings = openingsByWall.get(wall.id) ?? []
-    const wt = wallTopFunction(wall, level, roofs)
+    const extent = topology.extents.get(wall.id) ?? nominalExtent(wall)
+    const wt = wallTopFunction(wall, level, roofs, physicalSpan(extent))
     diagnostics.push(...wt.diagnostics)
-    const r = compileWall({ wall, level, openings, top: wt.top, topBreaks: wt.breaks })
+    const r = compileWall({ wall, level, openings, top: wt.top, topBreaks: wt.breaks, extent })
     diagnostics.push(...r.diagnostics)
     if (r.wallTriangles.length === 0) continue
     meshes.push({

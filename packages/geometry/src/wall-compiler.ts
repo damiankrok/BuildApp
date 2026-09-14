@@ -1,6 +1,7 @@
 /**
- * Wall compiler: one wall, its own openings, a top function -> a closed,
- * outward-wound solid with every opening really cut through it.
+ * Wall compiler: one wall, its own openings, a top function, its physical
+ * extent -> a closed, outward-wound solid with every opening really cut
+ * through it.
  *
  * ## The idea (adapted from the reference wall-local compiler)
  *
@@ -9,19 +10,33 @@
  * reads any other wall, any bounding box or any facade: a recessed wall and a
  * flush wall compile to the same local triangles.
  *
+ * ## Physical extent
+ *
+ * The wall's material does not necessarily span its nominal `0..L`: junction
+ * resolution (packages/model/src/topology.ts) states where the material
+ * stops at each end, separately on the outer face and on the inner face
+ * (`EndCut { outer, inner }`). Equal values give the usual end face
+ * perpendicular to the wall; different values give an end cut that lies in
+ * another wall's face plane, which is how corners at any angle close without
+ * gap or overlap. The wall then consists of a *core* `[max(start), min(end)]`
+ * that both faces share — the only place openings may be — and up to two
+ * skewed *end zones* where only one face continues.
+ *
  * ## Why it is watertight
  *
- * The wall boundary is tiled on one grid. Breaks along `a` are the wall ends,
+ * The core boundary is tiled on one grid. Breaks along `a` are the core ends,
  * every opening edge, every point where the top changes slope, and every
  * point where the top crosses a height break; breaks along `b` are the base
  * and every opening sill and head; the top boundary is the top function
  * itself. Outer and inner faces are tiled cell by cell on that grid, skipping
  * cells inside a hole and clipping cells to the top; the bottom, the top
  * ribbon and the sill/head reveals are split per strip; the jamb reveals are
- * split on the height breaks; the two end faces are triangulated between the
- * outer and inner edge chains using only grid vertices. Two faces that share
- * an edge therefore compute it from identical local values, which is what
- * lets the manifold oracle compare vertices exactly.
+ * split on the height breaks. An end zone adds one more face strip on the
+ * longer face, a bottom triangle, a top triangle and the skewed end face; a
+ * plain end adds the perpendicular end face. End faces are triangulated
+ * between the outer and inner edge chains using only grid vertices. Two
+ * faces that share an edge therefore compute it from identical local values,
+ * which is what lets the manifold oracle compare vertices exactly.
  *
  * ## Top function
  *
@@ -31,7 +46,7 @@
  * height that differs between its two faces, which closes the eave wedge.
  * Between two consecutive `topBreaks` the function must be linear in `u`.
  */
-import { wallFrame, wallPoint, type Level, type Opening, type Wall, type WallFrame } from '@buildapp/model'
+import { nominalExtent, wallFrame, wallPoint, type Level, type Opening, type Wall, type WallExtent, type WallFrame } from '@buildapp/model'
 import { quadOut, triOut } from './primitives.js'
 import { scale, type CompileDiagnostic, type Triangle, type Vec3 } from './types.js'
 
@@ -40,15 +55,18 @@ export type TopFunction = (u: number, c: number) => number
 export type WallCompileInput = {
   wall: Wall
   level: Level
-  /** Openings hosted by this wall; already validated as inside and non-overlapping. */
+  /** Openings hosted by this wall; already validated as inside the physical core and non-overlapping. */
   openings: readonly Opening[]
   top: TopFunction
   /** `u` values where `top` changes slope, in addition to the wall ends. */
   topBreaks: readonly number[]
+  /** Physical extent from topology resolution; the nominal `0..L` when absent. */
+  extent?: WallExtent
 }
 
 export type WallCompileOutput = {
   frame: WallFrame
+  extent: WallExtent
   /** Faces, ends, bottom and top of the wall itself. */
   wallTriangles: Triangle[]
   /** Reveal faces lining each cut opening, by opening id. */
@@ -73,8 +91,8 @@ function uniqueSorted(values: number[], lo: number, hi: number): number[] {
 export function compileWall(input: WallCompileInput): WallCompileOutput {
   const { wall, level, openings } = input
   const frame = wallFrame(wall, level)
-  const L = frame.length
   const T = wall.thickness
+  const extent = input.extent ?? nominalExtent(wall)
   const diagnostics: CompileDiagnostic[] = []
   const wallTriangles: Triangle[] = []
   const reveals = new Map<string, Triangle[]>()
@@ -85,9 +103,33 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   const nIn = scale(frame.n, -1)
   const uPlus = frame.u
   const uMinus = scale(frame.u, -1)
+  const empty = (): WallCompileOutput => ({ frame, extent, wallTriangles: [], reveals: new Map(), cutOpeningIds: [], diagnostics })
+
+  // --- Physical core and end zones -----------------------------------------
+  const A0 = Math.max(extent.start.outer, extent.start.inner)
+  const A1 = Math.min(extent.end.outer, extent.end.inner)
+  if (A1 - A0 <= EPS) {
+    diagnostics.push({
+      code: 'WALL_CONSUMED',
+      severity: 'ERROR',
+      message: `wall ${wall.id}: its junctions leave no material (physical core ${A0.toFixed(3)}..${A1.toFixed(3)} m); it was not compiled`,
+      objectId: wall.id,
+    })
+    return empty()
+  }
+  type Zone = { at: 'start' | 'end'; face: number; other: number; uFar: number; uCore: number }
+  const zones: Zone[] = []
+  if (Math.abs(extent.start.outer - extent.start.inner) > EPS) {
+    const face = extent.start.outer < extent.start.inner ? 0 : T
+    zones.push({ at: 'start', face, other: T - face, uFar: Math.min(extent.start.outer, extent.start.inner), uCore: A0 })
+  }
+  if (Math.abs(extent.end.outer - extent.end.inner) > EPS) {
+    const face = extent.end.outer > extent.end.inner ? 0 : T
+    zones.push({ at: 'end', face, other: T - face, uFar: Math.max(extent.end.outer, extent.end.inner), uCore: A1 })
+  }
 
   // --- Height breaks come from the openings; the top function is snapped to them ---
-  const candidateBreaks = uniqueSorted([0, L, ...input.topBreaks, ...openings.flatMap((o) => [o.offset, o.offset + o.width])], 0, L)
+  const candidateBreaks = uniqueSorted([A0, A1, ...input.topBreaks, ...openings.flatMap((o) => [o.offset, o.offset + o.width])], A0, A1)
 
   // Accept openings whose head clears the top everywhere along their span, on both faces.
   const accepted: Opening[] = []
@@ -138,63 +180,70 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     return t
   }
 
-  // The wall must have material everywhere along its length.
-  for (const u of candidateBreaks) {
-    for (const c of [0, T]) {
-      const t = topAt(u, c)
-      if (!Number.isFinite(t) || t <= EPS) {
-        diagnostics.push({
-          code: 'WALL_TOP_BELOW_BASE',
-          severity: 'ERROR',
-          message: `wall ${wall.id}: its top is ${Number.isFinite(t) ? t.toFixed(3) : t} m above the base at u = ${u.toFixed(3)}, so the wall has no material there; it was not compiled`,
-          objectId: wall.id,
-        })
-        return { frame, wallTriangles, reveals, cutOpeningIds: [], diagnostics }
-      }
+  // The wall must have material everywhere along its physical length.
+  const probes: Array<[number, number]> = candidateBreaks.flatMap((u) => [[u, 0] as [number, number], [u, T] as [number, number]])
+  for (const z of zones) probes.push([z.uFar, z.face])
+  for (const [u, c] of probes) {
+    const t = topAt(u, c)
+    if (!Number.isFinite(t) || t <= EPS) {
+      diagnostics.push({
+        code: 'WALL_TOP_BELOW_BASE',
+        severity: 'ERROR',
+        message: `wall ${wall.id}: its top is ${Number.isFinite(t) ? t.toFixed(3) : t} m above the base at u = ${u.toFixed(3)}, so the wall has no material there; it was not compiled`,
+        objectId: wall.id,
+      })
+      return empty()
     }
   }
 
-  // --- a-breaks: candidates plus every crossing of the top with a height break ---
-  const crossings: number[] = []
-  for (let i = 0; i + 1 < candidateBreaks.length; i++) {
-    const u0 = candidateBreaks[i]
-    const u1 = candidateBreaks[i + 1]
-    for (const c of [0, T]) {
+  /** Where the top on face `c` crosses a height break between two `u` values. */
+  const crossingsBetween = (u0: number, u1: number, faces: readonly number[]): number[] => {
+    const out: number[] = []
+    for (const c of faces) {
       const t0 = topAt(u0, c)
       const t1 = topAt(u1, c)
       for (const b of bBreaks) {
         if (b <= 0) continue
         const d0 = t0 - b
         const d1 = t1 - b
-        if ((d0 < -EPS && d1 > EPS) || (d0 > EPS && d1 < -EPS)) crossings.push(u0 + (d0 / (d0 - d1)) * (u1 - u0))
+        if ((d0 < -EPS && d1 > EPS) || (d0 > EPS && d1 < -EPS)) out.push(u0 + (d0 / (d0 - d1)) * (u1 - u0))
       }
     }
+    return out
   }
-  const aBreaks = uniqueSorted([...candidateBreaks, ...crossings], 0, L)
+
+  // --- a-breaks: candidates plus every crossing of the top with a height break ---
+  const crossings: number[] = []
+  for (let i = 0; i + 1 < candidateBreaks.length; i++) crossings.push(...crossingsBetween(candidateBreaks[i], candidateBreaks[i + 1], [0, T]))
+  const aBreaks = uniqueSorted([...candidateBreaks, ...crossings], A0, A1)
 
   const covering = (u0: number, u1: number): Opening[] => accepted.filter((o) => o.offset <= u0 + EPS && o.offset + o.width >= u1 - EPS)
   const isVoid = (strip: Opening[], lo: number, hi: number): boolean =>
     Number.isFinite(hi) && strip.some((o) => sillOf(o) <= lo + EPS && headOf(o) >= hi - EPS)
 
-  // --- Faces, bottom, top ribbon, sill and head reveals: per strip ---
+  /** One face strip `[u0, u1]` on face `c`, split on the height breaks, skipping hole cells. */
+  const tileFace = (u0: number, u1: number, c: number, strip: Opening[]): void => {
+    const outward = c === 0 ? nOut : nIn
+    const t0 = topAt(u0, c)
+    const t1 = topAt(u1, c)
+    for (let j = 0; j < bBreaks.length; j++) {
+      const lo = bBreaks[j]
+      const hi = j + 1 < bBreaks.length ? bBreaks[j + 1] : Infinity
+      if (t0 <= lo + EPS && t1 <= lo + EPS) continue
+      if (isVoid(strip, lo, hi)) continue
+      const top0 = Math.min(hi, t0)
+      const top1 = Math.min(hi, t1)
+      quadOut(wallTriangles, P(u0, lo, c), P(u1, lo, c), P(u1, top1, c), P(u0, top0, c), outward)
+    }
+  }
+
+  // --- Core: faces, bottom, top ribbon, sill and head reveals, per strip ---
   for (let i = 0; i + 1 < aBreaks.length; i++) {
     const u0 = aBreaks[i]
     const u1 = aBreaks[i + 1]
     const strip = covering(u0, u1)
-    for (const c of [0, T]) {
-      const outward = c === 0 ? nOut : nIn
-      const t0 = topAt(u0, c)
-      const t1 = topAt(u1, c)
-      for (let j = 0; j < bBreaks.length; j++) {
-        const lo = bBreaks[j]
-        const hi = j + 1 < bBreaks.length ? bBreaks[j + 1] : Infinity
-        if (t0 <= lo + EPS && t1 <= lo + EPS) continue
-        if (isVoid(strip, lo, hi)) continue
-        const top0 = Math.min(hi, t0)
-        const top1 = Math.min(hi, t1)
-        quadOut(wallTriangles, P(u0, lo, c), P(u1, lo, c), P(u1, top1, c), P(u0, top0, c), outward)
-      }
-    }
+    tileFace(u0, u1, 0, strip)
+    tileFace(u0, u1, T, strip)
     const openToBase = strip.some((o) => sillOf(o) <= EPS)
     if (!openToBase) quadOut(wallTriangles, P(u0, 0, 0), P(u1, 0, 0), P(u1, 0, T), P(u0, 0, T), down)
     quadOut(wallTriangles, P(u0, topAt(u0, 0), 0), P(u1, topAt(u1, 0), 0), P(u1, topAt(u1, T), T), P(u0, topAt(u0, T), T), up)
@@ -226,17 +275,12 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   }
 
   // --- End faces: zip the outer and inner edge chains, using grid vertices only ---
-  for (const [u, outward] of [
-    [0, uMinus],
-    [L, uPlus],
-  ] as const) {
-    const chain = (c: number): Vec3[] => {
-      const t = topAt(u, c)
-      const hs = [0, ...bBreaks.filter((b) => b > EPS && b < t - EPS), t]
-      return hs.map((b) => P(u, b, c))
-    }
-    const A = chain(0)
-    const B = chain(T)
+  const chainAt = (u: number, c: number): Vec3[] => {
+    const t = topAt(u, c)
+    const hs = [0, ...bBreaks.filter((b) => b > EPS && b < t - EPS), t]
+    return hs.map((b) => P(u, b, c))
+  }
+  const zip = (A: Vec3[], B: Vec3[], outward: Vec3): void => {
     let i = 0
     let j = 0
     const hA = A.map((p) => p.y)
@@ -253,5 +297,27 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     }
   }
 
-  return { frame, wallTriangles, reveals, cutOpeningIds: accepted.map((o) => o.id), diagnostics }
+  for (const at of ['start', 'end'] as const) {
+    const outward = at === 'start' ? uMinus : uPlus
+    const zone = zones.find((z) => z.at === at)
+    if (!zone) {
+      const u = at === 'start' ? A0 : A1
+      zip(chainAt(u, 0), chainAt(u, T), outward)
+      continue
+    }
+    // The longer face continues alone through the zone.
+    const lo = Math.min(zone.uFar, zone.uCore)
+    const hi = Math.max(zone.uFar, zone.uCore)
+    const zoneBreaks = uniqueSorted([lo, hi, ...input.topBreaks, ...crossingsBetween(lo, hi, [zone.face])], lo, hi)
+    for (let i = 0; i + 1 < zoneBreaks.length; i++) tileFace(zoneBreaks[i], zoneBreaks[i + 1], zone.face, [])
+    // Bottom and top close the wedge between the two faces' ends.
+    triOut(wallTriangles, P(zone.uFar, 0, zone.face), P(zone.uCore, 0, zone.face), P(zone.uCore, 0, zone.other), down)
+    triOut(wallTriangles, P(zone.uFar, topAt(zone.uFar, zone.face), zone.face), P(zone.uCore, topAt(zone.uCore, zone.face), zone.face), P(zone.uCore, topAt(zone.uCore, zone.other), zone.other), up)
+    // The skewed end face joins the far end of the longer face to the core end of the other face.
+    const A = chainAt(zone.uFar, zone.face)
+    const B = chainAt(zone.uCore, zone.other)
+    zip(zone.face === 0 ? A : B, zone.face === 0 ? B : A, outward)
+  }
+
+  return { frame, extent, wallTriangles, reveals, cutOpeningIds: accepted.map((o) => o.id), diagnostics }
 }

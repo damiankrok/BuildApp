@@ -42,6 +42,17 @@ opening cases generalised.
   face. Openings are stated in this frame. Nothing reads another wall, a
   bounding box or a facade: a recessed wall compiles like a flush one
   (tested by rotating and translating a wall and measuring the hole).
+- **Physical extent.** `compileBuilding` resolves the model's junctions
+  (`resolveWallTopology`, in the model package) and hands each wall its
+  `WallExtent`: an `EndCut { outer, inner }` per end, the `a` values where the
+  material stops on the outer and on the inner face. The *core*
+  `[max(start), min(end)]` is tiled as below and is the only place openings
+  may be; where one face continues past the other (a cut lying in another
+  wall's face plane, i.e. an oblique corner or a reflex-corner extension) an
+  *end zone* adds one face strip, a bottom and a top triangle and the skewed
+  end face on the same grid. Equal cuts give the plain perpendicular end
+  face. A wall consumed by its junctions is `WALL_CONSUMED` and not compiled
+  (validation refuses it first). See `docs/WALL_TOPOLOGY.md`.
 - **One grid, watertight by construction.** Breaks along `a`: the ends, every
   opening edge, every point where the top changes slope, every crossing of
   the top with a height break. Breaks along `b`: the base and every sill and
@@ -67,6 +78,8 @@ opening cases generalised.
 - **Ownership.** Wall faces: `objectId = wall`, `solidId = wall`. Reveals:
   `objectId = opening`, `solidId = wall`, `hostWallId`, `openingId`. The
   wall's closed solid is therefore `meshes.filter(m => m.solidId === wallId)`.
+  Junction resolution never merges solids: a corner block is part of exactly
+  one wall's solid, the owner's, and a picked corner resolves to that wall.
 
 ## Roofs (`roof-compiler.ts`)
 
@@ -108,18 +121,23 @@ thin placeholder plate.
 
 ## Diagnostics
 
-`MODEL_INVALID`, `UNKNOWN_LEVEL`, `WALL_TOP_BELOW_BASE`, `WALL_NOT_UNDER_ROOF`
-(warning), `OPENING_ABOVE_WALL_TOP`, `FILL_WITHOUT_OPENING` (warning),
-`POLYGON_NOT_TRIANGULATED`. The compiler never repairs.
+`MODEL_INVALID`, `UNKNOWN_LEVEL`, `WALL_TOP_BELOW_BASE`, `WALL_CONSUMED`,
+`WALL_NOT_UNDER_ROOF` (warning), `OPENING_ABOVE_WALL_TOP`,
+`FILL_WITHOUT_OPENING` (warning), `POLYGON_NOT_TRIANGULATED`. The compiler
+never repairs. Openings that reach into a cut-away junction zone are refused
+by validation (`OPENING_IN_JUNCTION_ZONE`) before the compiler sees them.
 
 ## Verification (`packages/verification`)
 
 Independent oracles that share no code with the compiler: `meshVolume`
 (divergence theorem, sign-sensitive), `manifoldReport` (directed-edge
 pairing, exact vertices), `rayHits` / `materialRuns` / `materialLength`
-(Möller–Trumbore, both facings), `sharedMaterialLength` and
-`overlapEstimate` (grid of vertical rays over two solids' box intersection),
-`planeClusters` / `upwardPlanes` (pitch from normals), `boundsOf`.
+(Möller–Trumbore, both facings), `unionMaterialRuns` (several solids, runs
+unioned — a ray through the concatenated triangles of abutting solids is not
+sound), `sharedMaterialLength` and `overlapEstimate` (grid of vertical rays
+over two solids' box intersection), `planeClusters` / `upwardPlanes` (pitch
+from normals), `boundsOf`, and `ringClosureReport` (storey envelope probes,
+`docs/WALL_TOPOLOGY.md`).
 
 The geometry tests measure, they do not read back: wall volume `L·H·T`,
 `(L·H − w·h)·T` with a window, rays through opening centres meeting 0 wall
@@ -142,6 +160,8 @@ stated penetration (the chimney through the roof).
 - Provenance vocabulary; refusing rather than repairing; oracles independent
   of the compiler; ray-based shared-material detection.
 
-Not carried over: the explicit junction/ring records (corner ownership is
-expressed by wall extents in this stage), gold fixtures, facade recess/
-portal specs, interior room solver, and every analyzer component.
+Not carried over: gold fixtures, facade recess/portal specs, interior room
+solver, and every analyzer component. Junction and ring records exist since
+STAGE BUILDAPP-00A, designed for this model (owner-through corners with cuts
+in the other wall's face planes, BUTT/T against physical faces) rather than
+copied.

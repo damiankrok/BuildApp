@@ -10,6 +10,7 @@
  */
 import { z } from 'zod'
 import {
+  DEFAULT_JUNCTION_TOLERANCE,
   EvidenceSchema,
   EvidenceSourceSchema,
   IdSchema,
@@ -18,6 +19,8 @@ import {
   PlanRectSchema,
   RoofKindSchema,
   Vec2Schema,
+  WallEndRefSchema,
+  WallJunctionKindSchema,
   WallTopProfileSchema,
 } from '@buildapp/model'
 
@@ -49,6 +52,23 @@ export const CreateRoomSchema = z
   })
   .strict()
 
+/**
+ * How one end of a wall being created meets an existing wall. Stated inline
+ * on `createWall` so that a wall and its junctions enter the model in one
+ * step: a wall drawn from footprint line to footprint line overlaps its
+ * neighbours until its junctions exist, and every command must leave the
+ * model valid. CORNER: `with` names the other wall's end, `owner` says which
+ * of the two takes the corner block (SELF = the wall being created).
+ */
+export const WallEndJunctionSpecSchema = z.discriminatedUnion('kind', [
+  z
+    .object({ kind: z.literal('CORNER'), id: IdSchema.optional(), with: WallEndRefSchema, owner: z.enum(['SELF', 'OTHER']).default('SELF'), tolerance: nonNegative.default(DEFAULT_JUNCTION_TOLERANCE) })
+    .strict(),
+  z.object({ kind: z.literal('BUTT'), id: IdSchema.optional(), againstWallId: IdSchema, tolerance: nonNegative.default(DEFAULT_JUNCTION_TOLERANCE) }).strict(),
+  z.object({ kind: z.literal('T'), id: IdSchema.optional(), againstWallId: IdSchema, tolerance: nonNegative.default(DEFAULT_JUNCTION_TOLERANCE) }).strict(),
+])
+export type WallEndJunctionSpec = z.input<typeof WallEndJunctionSpecSchema>
+
 export const CreateWallSchema = z
   .object({
     type: z.literal('createWall'),
@@ -62,6 +82,68 @@ export const CreateWallSchema = z
     kind: z.enum(['EXTERIOR', 'INTERIOR']).default('EXTERIOR'),
     topProfile: WallTopProfileSchema.optional(),
     materialId: IdSchema.optional(),
+    /** Junctions at this wall's START and END, created together with the wall (ids `<wall>-j-start` / `<wall>-j-end` unless given). */
+    startJunction: WallEndJunctionSpecSchema.optional(),
+    endJunction: WallEndJunctionSpecSchema.optional(),
+  })
+  .strict()
+
+/**
+ * Declare how walls meet; the model resolves the physical extents (see
+ * docs/WALL_TOPOLOGY.md). CORNER takes `a`, `b` and optionally `owner`
+ * (default: `a`'s wall); BUTT and T take `wall` and `againstWallId`.
+ */
+export const CreateWallJunctionSchema = z
+  .object({
+    type: z.literal('createWallJunction'),
+    ...withId,
+    kind: WallJunctionKindSchema,
+    a: WallEndRefSchema.optional(),
+    b: WallEndRefSchema.optional(),
+    owner: IdSchema.optional(),
+    wall: WallEndRefSchema.optional(),
+    againstWallId: IdSchema.optional(),
+    tolerance: nonNegative.default(DEFAULT_JUNCTION_TOLERANCE),
+  })
+  .strict()
+
+/** Per-edge overrides for `createWallRing`, in polygon order. */
+export const RingWallOverrideSchema = z
+  .object({
+    id: IdSchema.optional(),
+    name: z.string().optional(),
+    evidence: EvidenceSchema.optional(),
+    tags: z.array(z.string()).optional(),
+    height: positive.optional(),
+    thickness: positive.optional(),
+    materialId: IdSchema.optional(),
+    topProfile: WallTopProfileSchema.optional(),
+  })
+  .strict()
+
+/**
+ * A closed ring of walls from a natural footprint polygon: one wall per edge
+ * along the polygon's outer line, one CORNER junction per vertex, and a
+ * WallRing record grouping them. The caller never trims a corner: the
+ * junctions resolve exactly-once corner material. Ids are deterministic:
+ * `<ring>-w<i>` and `<ring>-j<i>` unless overridden.
+ */
+export const CreateWallRingSchema = z
+  .object({
+    type: z.literal('createWallRing'),
+    ...withId,
+    levelId: IdSchema,
+    polygon: PlanPolygonSchema,
+    thickness: positive,
+    height: positive,
+    baseOffset: finite.default(0),
+    kind: z.enum(['EXTERIOR', 'INTERIOR']).default('EXTERIOR'),
+    topProfile: WallTopProfileSchema.optional(),
+    materialId: IdSchema.optional(),
+    walls: z.array(RingWallOverrideSchema).optional(),
+    /** Who owns each corner: ALTERNATE gives even-numbered edges their corners (front/rear on a rectangle); PRECEDING / FOLLOWING name the edge before / after the vertex. */
+    cornerOwnership: z.enum(['ALTERNATE', 'PRECEDING', 'FOLLOWING']).default('ALTERNATE'),
+    tolerance: nonNegative.default(DEFAULT_JUNCTION_TOLERANCE),
   })
   .strict()
 
@@ -278,6 +360,8 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   CreateLevelSchema,
   CreateRoomSchema,
   CreateWallSchema,
+  CreateWallJunctionSchema,
+  CreateWallRingSchema,
   CreateSlabSchema,
   CreateRoofSchema,
   CutOpeningSchema,

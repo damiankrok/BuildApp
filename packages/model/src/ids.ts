@@ -15,6 +15,8 @@ export const ID_PREFIX: Record<SemanticKind, string> = {
   level: 'level',
   room: 'room',
   wall: 'wall',
+  wallJunction: 'junction',
+  wallRing: 'ring',
   opening: 'opening',
   window: 'window',
   door: 'door',

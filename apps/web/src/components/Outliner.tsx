@@ -8,6 +8,8 @@ const KIND_ABBR: Record<string, string> = {
   level: 'LVL',
   room: 'RM',
   wall: 'WL',
+  wallJunction: 'JN',
+  wallRing: 'RNG',
   opening: 'OP',
   window: 'WIN',
   door: 'DR',

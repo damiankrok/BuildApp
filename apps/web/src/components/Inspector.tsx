@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 import { useEffect, useState } from 'react'
-import type { PropertySpec } from '@buildapp/editor'
+import type { PropertySpec, TopologyDescription } from '@buildapp/editor'
 import type { Evidence } from '@buildapp/model'
 import { useSnapshot, useStore } from '../use-store.js'
 
@@ -79,6 +79,81 @@ function EvidenceView({ evidence }: { evidence: Evidence | undefined }): JSX.Ele
             {k}: <span className={`tag status-${v}`}>{v}</span>
           </div>
         ))}
+    </div>
+  )
+}
+
+const f3 = (n: number): string => n.toFixed(3)
+
+/** Resolved wall topology, read-only: what the junction records were resolved to. */
+function TopologyView({ t }: { t: TopologyDescription }): JSX.Element {
+  return (
+    <div className="kv" data-testid="inspector-topology">
+      {t.extent && (
+        <>
+          <span className="k">physical outer</span>
+          <span className="v" data-testid="topology-outer">
+            {f3(t.extent.start.outer)} – {f3(t.extent.end.outer)} m
+          </span>
+          <span className="k">physical inner</span>
+          <span className="v" data-testid="topology-inner">
+            {f3(t.extent.start.inner)} – {f3(t.extent.end.inner)} m
+          </span>
+        </>
+      )}
+      {t.junctions?.map((j) => (
+        <span key={j.id} className="v" style={{ gridColumn: '1 / -1' }}>
+          {j.end ? `${j.end} ` : ''}
+          {j.kind} {j.id} · {j.role.toLowerCase()} {j.ok ? '' : '· unresolved'}
+        </span>
+      ))}
+      {t.rings && t.rings.length > 0 && (
+        <>
+          <span className="k">ring</span>
+          <span className="v">{t.rings.join(', ')}</span>
+        </>
+      )}
+      {t.junction && (
+        <>
+          <span className="k">resolved</span>
+          <span className="v" data-testid="topology-junction-ok">
+            {t.junction.ok ? 'yes' : 'no'}
+          </span>
+          {t.junction.point && (
+            <>
+              <span className="k">point</span>
+              <span className="v">
+                x {f3(t.junction.point.x)} z {f3(t.junction.point.z)}
+              </span>
+            </>
+          )}
+          {t.junction.participants.map((p) => (
+            <span key={`${p.wallId}:${p.end ?? 'host'}`} className="v" style={{ gridColumn: '1 / -1' }}>
+              {p.wallId}
+              {p.end ? `/${p.end}` : ''} · {p.role.toLowerCase()}
+              {p.cut ? ` · cut outer ${f3(p.cut.outer)} inner ${f3(p.cut.inner)}` : ''}
+            </span>
+          ))}
+          {t.junction.contact && (
+            <>
+              <span className="k">contact</span>
+              <span className="v">
+                {t.junction.contact.face.toLowerCase()} face {f3(t.junction.contact.a0)} – {f3(t.junction.contact.a1)} m
+              </span>
+            </>
+          )}
+        </>
+      )}
+      {t.ringWalls && (
+        <>
+          <span className="k">closed</span>
+          <span className="v" data-testid="topology-ring-closed">
+            {t.ringClosed ? 'yes' : 'no'}
+          </span>
+          <span className="k">walls</span>
+          <span className="v">{t.ringWalls.join(' → ')}</span>
+        </>
+      )}
     </div>
   )
 }
@@ -171,6 +246,14 @@ export function Inspector(): JSX.Element {
           </div>
         )}
       </div>
+      {d.topology && (
+        <div className="section">
+          <div className="panel-title" style={{ padding: '0 0 4px' }}>
+            Topology
+          </div>
+          <TopologyView t={d.topology} />
+        </div>
+      )}
       <div className="section">
         <div className="panel-title" style={{ padding: '0 0 4px' }}>
           Evidence

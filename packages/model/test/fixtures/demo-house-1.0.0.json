@@ -262,7 +262,7 @@
       "height": 1,
       "id": "op-gar-1",
       "kind": "WINDOW",
-      "offset": 2.8,
+      "offset": 2.5,
       "sill": 1.2,
       "wallId": "gar-right",
       "width": 1
@@ -314,7 +314,7 @@
       "height": 1.4,
       "id": "op-gl-1",
       "kind": "WINDOW",
-      "offset": 2.8,
+      "offset": 2.5,
       "sill": 0.9,
       "wallId": "g-left",
       "width": 1.5
@@ -341,7 +341,7 @@
       "height": 1.2,
       "id": "op-grt-1",
       "kind": "WINDOW",
-      "offset": 6.5,
+      "offset": 6.2,
       "sill": 1,
       "wallId": "g-right",
       "width": 0.8
@@ -351,7 +351,7 @@
       "id": "op-partition",
       "kind": "DOOR",
       "name": "Kitchen door opening",
-      "offset": 3.3,
+      "offset": 3,
       "sill": 0,
       "wallId": "g-partition",
       "width": 0.9
@@ -379,7 +379,7 @@
       "id": "op-ul-gable",
       "kind": "WINDOW",
       "name": "Gable window opening",
-      "offset": 3.4,
+      "offset": 3.1,
       "sill": 0.9,
       "wallId": "u-left",
       "width": 1.2
@@ -626,7 +626,7 @@
     }
   ],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.0.0",
   "slabs": [
     {
       "evidence": {
@@ -744,284 +744,6 @@
     "angle": "deg",
     "length": "m"
   },
-  "wallJunctions": [
-    {
-      "againstWallId": "g-front",
-      "id": "g-partition-j-end",
-      "kind": "T",
-      "tolerance": 0.001,
-      "wall": {
-        "end": "END",
-        "wallId": "g-partition"
-      }
-    },
-    {
-      "againstWallId": "g-rear",
-      "id": "g-partition-j-start",
-      "kind": "T",
-      "tolerance": 0.001,
-      "wall": {
-        "end": "START",
-        "wallId": "g-partition"
-      }
-    },
-    {
-      "againstWallId": "g-right",
-      "id": "gar-rear-j-end",
-      "kind": "T",
-      "tolerance": 0.001,
-      "wall": {
-        "end": "END",
-        "wallId": "gar-rear"
-      }
-    },
-    {
-      "a": {
-        "end": "START",
-        "wallId": "gar-rear"
-      },
-      "b": {
-        "end": "END",
-        "wallId": "gar-right"
-      },
-      "id": "gar-rear-j-start",
-      "kind": "CORNER",
-      "owner": "gar-rear",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "START",
-        "wallId": "gar-right"
-      },
-      "b": {
-        "end": "END",
-        "wallId": "gar-front"
-      },
-      "id": "gar-right-j-start",
-      "kind": "CORNER",
-      "owner": "gar-front",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "g-left"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "g-front"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-ground-j0",
-      "kind": "CORNER",
-      "owner": "g-front",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "g-front"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "g-right"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-ground-j1",
-      "kind": "CORNER",
-      "owner": "g-front",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "g-right"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "g-rear"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-ground-j2",
-      "kind": "CORNER",
-      "owner": "g-rear",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "g-rear"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "g-left"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-ground-j3",
-      "kind": "CORNER",
-      "owner": "g-rear",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "u-left"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "u-front"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-upper-j0",
-      "kind": "CORNER",
-      "owner": "u-front",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "u-front"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "u-right"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-upper-j1",
-      "kind": "CORNER",
-      "owner": "u-front",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "u-right"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "u-rear"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-upper-j2",
-      "kind": "CORNER",
-      "owner": "u-rear",
-      "tolerance": 0.001
-    },
-    {
-      "a": {
-        "end": "END",
-        "wallId": "u-rear"
-      },
-      "b": {
-        "end": "START",
-        "wallId": "u-left"
-      },
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-upper-j3",
-      "kind": "CORNER",
-      "owner": "u-rear",
-      "tolerance": 0.001
-    }
-  ],
-  "wallRings": [
-    {
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-ground",
-      "junctionIds": [
-        "ring-ground-j0",
-        "ring-ground-j1",
-        "ring-ground-j2",
-        "ring-ground-j3"
-      ],
-      "levelId": "ground",
-      "name": "Ground floor exterior ring",
-      "wallIds": [
-        "g-front",
-        "g-right",
-        "g-rear",
-        "g-left"
-      ]
-    },
-    {
-      "evidence": {
-        "source": "author",
-        "sourceIds": [
-          "src-author"
-        ],
-        "status": "ASSUMED"
-      },
-      "id": "ring-upper",
-      "junctionIds": [
-        "ring-upper-j0",
-        "ring-upper-j1",
-        "ring-upper-j2",
-        "ring-upper-j3"
-      ],
-      "levelId": "upper",
-      "name": "Upper floor exterior ring",
-      "wallIds": [
-        "u-front",
-        "u-right",
-        "u-rear",
-        "u-left"
-      ]
-    }
-  ],
   "walls": [
     {
       "baseOffset": 0,
@@ -1053,7 +775,7 @@
       "baseOffset": 0,
       "end": {
         "x": 0,
-        "z": 0
+        "z": 0.3
       },
       "evidence": {
         "source": "author",
@@ -1070,7 +792,7 @@
       "name": "Left wall",
       "start": {
         "x": 0,
-        "z": 8
+        "z": 7.7
       },
       "thickness": 0.3
     },
@@ -1078,7 +800,7 @@
       "baseOffset": 0,
       "end": {
         "x": 6,
-        "z": 0
+        "z": 0.3
       },
       "evidence": {
         "source": "author",
@@ -1094,7 +816,7 @@
       "name": "Living / kitchen partition",
       "start": {
         "x": 6,
-        "z": 8
+        "z": 7.7
       },
       "thickness": 0.12
     },
@@ -1127,7 +849,7 @@
       "baseOffset": 0,
       "end": {
         "x": 10,
-        "z": 8
+        "z": 7.7
       },
       "evidence": {
         "source": "author",
@@ -1144,7 +866,7 @@
       "name": "Right wall",
       "start": {
         "x": 10,
-        "z": 0
+        "z": 0.3
       },
       "thickness": 0.3
     },
@@ -1210,7 +932,7 @@
       "baseOffset": 0,
       "end": {
         "x": 15,
-        "z": 6
+        "z": 5.7
       },
       "evidence": {
         "source": "author",
@@ -1227,7 +949,7 @@
       "name": "Garage right wall",
       "start": {
         "x": 15,
-        "z": 0
+        "z": 0.3
       },
       "thickness": 0.3,
       "topProfile": {
@@ -1268,7 +990,7 @@
       "baseOffset": 0,
       "end": {
         "x": 0,
-        "z": 0
+        "z": 0.3
       },
       "evidence": {
         "source": "author",
@@ -1285,7 +1007,7 @@
       "name": "Upper left gable wall",
       "start": {
         "x": 0,
-        "z": 8
+        "z": 7.7
       },
       "thickness": 0.3,
       "topProfile": {
@@ -1326,7 +1048,7 @@
       "baseOffset": 0,
       "end": {
         "x": 10,
-        "z": 8
+        "z": 7.7
       },
       "evidence": {
         "source": "author",
@@ -1343,7 +1065,7 @@
       "name": "Upper right gable wall",
       "start": {
         "x": 10,
-        "z": 0
+        "z": 0.3
       },
       "thickness": 0.3,
       "topProfile": {

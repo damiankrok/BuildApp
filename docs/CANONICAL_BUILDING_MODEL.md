@@ -9,21 +9,23 @@ Three.js objects. Implemented in `packages/model`.
 ```json
 {
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "id": "demo-house",
   "name": "BuildApp demo house",
   "units": { "length": "m", "angle": "deg" },
   "frame": { ... },
   "building": { "id": "house", "name": "Demo house" },
-  "levels": [...], "rooms": [...], "walls": [...], "openings": [...], "windows": [...], "doors": [...],
+  "levels": [...], "rooms": [...], "walls": [...], "wallJunctions": [...], "wallRings": [...],
+  "openings": [...], "windows": [...], "doors": [...],
   "slabs": [...], "roofs": [...], "balconies": [...], "railings": [...], "chimneys": [...], "stairs": [...],
   "materials": [...], "constraints": [...], "evidenceSources": [...],
   "meta": { "createdWith": "buildapp-demo", "notes": [] }
 }
 ```
 
-`schema` and `schemaVersion` are literals in the Zod schema; a file that
-states anything else is refused. Every semantic object has a stable `id`
+`schema` is a literal in the Zod schema. `schemaVersion` is the current
+version `1.1.0`; older supported versions are migrated explicitly (below) and
+anything else is refused. Every semantic object has a stable `id`
 (`[A-Za-z0-9_.:-]+`), unique across all collections including the building.
 Ids are never renamed (`setProperty` refuses `id`) and survive save/load
 byte for byte.
@@ -60,10 +62,15 @@ drawn with the front facade at the bottom**: front wall left→right (+x),
 right wall front→back (+z), rear wall right→left (−x), left wall back→front
 (−z). Material is on the left of the direction of travel.
 
-Corners are owned by whichever wall runs through them; the abutting wall
-starts/ends at the owner's inner face (the demo's side walls run from
-`z = thickness` to `z = depth − thickness`). This is how duplicate corner
-volume is avoided without a junction record in this stage.
+Walls are stated on the natural footprint: an exterior ring's walls run
+corner to corner along the outer footprint polygon, a partition runs from
+footprint line to footprint line. Where walls meet, a `WallJunction` record
+(CORNER with an owner, BUTT, T) says so, and the model resolves the physical
+extent of each wall end — see `docs/WALL_TOPOLOGY.md`. A wall without
+junctions keeps its nominal extent, so a hand-trimmed BUILDAPP-00 file still
+means what it meant. Two walls whose physical footprints overlap in plan over
+a common height range are an error (`WALLS_OVERLAP`) unless a junction
+resolves them.
 
 ## Vertical positions
 
@@ -80,6 +87,8 @@ level moves what stands on it. Opening `sill` is above the wall base.
 | `Level` | `index`, `elevation`, `height` | `buildingId` |
 | `Room` | `polygon` (plan, simple), `usage` | `levelId` |
 | `Wall` | `start`, `end`, `thickness`, `height`, `baseOffset`, `kind` EXTERIOR/INTERIOR, `topProfile`, `materialId` | `levelId`, `topProfile.roofId` |
+| `WallJunction` | `kind` CORNER (`a`, `b` wall ends, `owner`) / BUTT / T (`wall` end, `againstWallId`), `tolerance` | wall ends `{ wallId, end: START/END }` |
+| `WallRing` | `wallIds` in traversal order, `junctionIds` one per vertex | `levelId`, walls, junctions |
 | `Opening` | `kind` WINDOW/DOOR/PASSAGE, `offset` (along the wall), `sill`, `width`, `height` — wall-local | `wallId` |
 | `Window` | `frameWidth`, `frameDepth`, `frameInset`, `glassThickness`, `divisions` | `openingId` |
 | `Door` | `hingeSide` LEFT/RIGHT, `swing` IN/OUT, `openAngle` 0..180°, `leafThickness`, `frameWidth`, `frameDepth`, `frameInset` | `openingId` |
@@ -131,8 +140,39 @@ sill at the base is allowed; side and top edges are not), `OPENINGS_OVERLAP`,
 `FILL_KIND_MISMATCH`, `OPENING_FILLED_TWICE`, `FILL_TOO_LARGE`,
 `MALFORMED_POLYGON`, `INVALID_RECT`, `INVALID_ROOF`, `DEGENERATE_WALL`,
 `DEGENERATE_RAILING`, and `SCHEMA` for shape errors (negative heights, bad
-enums, a wrong frame). Every command re-validates the whole model and is
-rejected with these codes if it would break it.
+enums, a wrong frame). Wall topology adds `JUNCTION_GAP`,
+`JUNCTION_OVERSHOOT`, `JUNCTION_PARALLEL_WALLS`, `JUNCTION_SELF_REFERENCE`,
+`JUNCTION_OWNER_NOT_PARTICIPANT`, `JUNCTION_LEVEL_MISMATCH`,
+`ENDPOINT_JUNCTION_CONFLICT`, `BUTT_OFF_HOST`, `T_JUNCTION_POSITION`,
+`WALL_CONSUMED`, `OPENING_IN_JUNCTION_ZONE`, `WALLS_OVERLAP`,
+`RING_DEGENERATE`, `RING_NOT_CLOSED`, `RING_LEVEL_MISMATCH`, `UNKNOWN_JUNCTION`
+and the warning `JUNCTION_KIND_MIX` (all in `docs/WALL_TOPOLOGY.md`); issues
+that come from a measurement carry it in `measured`. Every command
+re-validates the whole model and is rejected with these codes if it would
+break it.
+
+## Schema evolution
+
+| version | stage | content |
+| --- | --- | --- |
+| `1.0.0` | BUILDAPP-00 | no topology; corner ownership expressed by hand-trimmed wall extents |
+| `1.1.0` | BUILDAPP-00A | `wallJunctions` and `wallRings` collections; walls on the natural footprint |
+
+Policy (`packages/model/src/migrate.ts`, run by `validateModel` and therefore
+by `loadModel`, `compileBuilding` and the editor's Load):
+
+- a `1.1.0` file loads as is;
+- a `1.0.0` file is migrated **explicitly**: empty `wallJunctions` and
+  `wallRings` are added, `schemaVersion` becomes `1.1.0`, a note is appended
+  to `meta.notes`, and the load reports the warning `SCHEMA_MIGRATED`. Its
+  walls keep their stated extents, so it compiles to exactly the geometry it
+  compiled to under 1.0.0 (tested against the BUILDAPP-00 demo file kept as a
+  fixture: same per-wall bounds and volumes, same triangle count). Re-saving
+  writes a 1.1.0 file;
+- a `1.0.0` file that already carries topology collections is refused
+  (`SCHEMA`), because it would be a mislabelled 1.1.0 file;
+- any other version is refused with `UNSUPPORTED_SCHEMA_VERSION`, naming the
+  supported versions. Nothing is ever reinterpreted silently.
 
 ## Persistence
 

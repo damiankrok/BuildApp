@@ -139,6 +139,25 @@ export function materialLength(tris: readonly OTri[], origin: OVec3, dir: OVec3)
   return materialRuns(tris, origin, dir).reduce((s, r) => s + (r.t1 - r.t0), 0)
 }
 
+/**
+ * Material runs of a ray through *several* closed solids, as the union of
+ * the runs through each. Casting one ray through the concatenated triangles
+ * of separate solids is not the same thing: a hit on one solid's face can
+ * coincide with a hit on another's (two walls that abut), and the parity
+ * count then goes wrong. Runs that touch are merged, so two abutting solids
+ * read as one continuous run.
+ */
+export function unionMaterialRuns(solids: ReadonlyArray<readonly OTri[]>, origin: OVec3, dir: OVec3, eps = 1e-9): MaterialRun[] {
+  const all = solids.flatMap((s) => materialRuns(s, origin, dir)).sort((a, b) => a.t0 - b.t0)
+  const out: MaterialRun[] = []
+  for (const r of all) {
+    const last = out[out.length - 1]
+    if (last && r.t0 <= last.t1 + eps) last.t1 = Math.max(last.t1, r.t1)
+    else out.push({ ...r })
+  }
+  return out
+}
+
 /** Length along the ray inside BOTH solids: the shared material along that line. */
 export function sharedMaterialLength(a: readonly OTri[], b: readonly OTri[], origin: OVec3, dir: OVec3): number {
   const ra = materialRuns(a, origin, dir)
@@ -245,3 +264,173 @@ export function planeClusters(tris: readonly OTri[], angleTolDeg = 0.01): PlaneC
 
 /** Upward-facing planes only (roof tops), largest first. */
 export const upwardPlanes = (tris: readonly OTri[]): PlaneCluster[] => planeClusters(tris).filter((c) => c.normal.y > 1e-9)
+
+// ---------------------------------------------------------------------------
+// Storey ring closure
+// ---------------------------------------------------------------------------
+
+export type OVec2 = { x: number; z: number }
+
+export type RingProbeOptions = {
+  /** World y values to probe at; a point on the envelope counts as covered when any height finds material. */
+  heights: number[]
+  /** Spacing of probe points along each edge (m). */
+  step?: number
+  /** Distance from each vertex of the first and last probe on an edge (m). */
+  endInset?: number
+  /** How far material may begin inside the outer line before the probe counts as a gap (m). */
+  tolerance?: number
+  /** Minimum material depth a probe must find (m). */
+  minThickness?: number
+  /** Grid step of the pairwise overlap estimate (m). */
+  overlapStep?: number
+}
+
+export type RingGap = { edge: number; from: number; to: number; length: number; probes: number; worstStart: number }
+export type RingCornerProbe = { vertex: number; reflex: boolean; materialStart: number; materialLength: number; ok: boolean }
+export type RingOverlap = { a: string; b: string; volume: number; worstSharedLength: number }
+
+export type RingClosureReport = {
+  closed: boolean
+  /** Edge spans of the declared envelope where no wall material starts at the outer line. */
+  gaps: RingGap[]
+  corners: RingCornerProbe[]
+  /** Pairs of the given solids that share volume. */
+  overlaps: RingOverlap[]
+  /** Edges where material was found *outside* the envelope but not inside (a reversed wall). */
+  outsideOnly: number[]
+  probes: number
+  edgeLengths: number[]
+}
+
+/**
+ * Independent storey-envelope oracle. Given the declared outer footprint
+ * polygon and the compiled solids of the storey's walls (and nothing else —
+ * no junction record, no compiler function), it walks the envelope and fires
+ * rays from just outside the outer line inward at several heights: at every
+ * probe point material must begin at the outer line (within `tolerance`) and
+ * run at least `minThickness` deep at one of the heights; at every vertex a
+ * ray along the inward bisector must find the corner block filled. Contiguous
+ * failing probes are reported as measured gaps; pairwise shared volume of the
+ * given solids is reported as overlaps. A missing wall, a shifted endpoint, a
+ * reversed wall, a duplicated wall or an unfilled corner all show up here by
+ * measurement.
+ */
+export function ringClosureReport(polygon: readonly OVec2[], solids: ReadonlyArray<{ id: string; triangles: readonly OTri[] }>, opts: RingProbeOptions): RingClosureReport {
+  const step = opts.step ?? 0.25
+  const endInset = opts.endInset ?? 0.05
+  const tol = opts.tolerance ?? 1e-3
+  const minT = opts.minThickness ?? 0.05
+  const OUTSIDE = 0.01
+  const perSolid = solids.map((s) => s.triangles)
+  // Orientation by the shoelace formula (local; the oracle shares no code with the model).
+  let area2 = 0
+  for (let i = 0; i < polygon.length; i++) {
+    const a = polygon[i]
+    const b = polygon[(i + 1) % polygon.length]
+    area2 += a.x * b.z - b.x * a.z
+  }
+  const sign = area2 >= 0 ? 1 : -1
+  const n = polygon.length
+  const gaps: RingGap[] = []
+  const outsideOnly: number[] = []
+  const edgeLengths: number[] = []
+  let probes = 0
+
+  /** Material found from a start point along a horizontal direction, at any probe height. */
+  const probe = (p: OVec2, d: OVec2): { start: number; length: number } => {
+    let best: { start: number; length: number } = { start: Infinity, length: 0 }
+    for (const y of opts.heights) {
+      const runs = unionMaterialRuns(perSolid, { x: p.x, y, z: p.z }, { x: d.x, y: 0, z: d.z })
+      probes++
+      if (runs.length === 0) continue
+      const r = runs[0]
+      const cand = { start: r.t0 - OUTSIDE, length: r.t1 - r.t0 }
+      if (cand.start < best.start || (Math.abs(cand.start - best.start) <= 1e-12 && cand.length > best.length)) best = cand
+    }
+    return best
+  }
+
+  for (let i = 0; i < n; i++) {
+    const a = polygon[i]
+    const b = polygon[(i + 1) % n]
+    const L = Math.hypot(b.x - a.x, b.z - a.z)
+    edgeLengths.push(L)
+    const u = { x: (b.x - a.x) / L, z: (b.z - a.z) / L }
+    // Inward is to the left of travel for a positively oriented polygon.
+    const inward = { x: -u.z * sign, z: u.x * sign }
+    const count = Math.max(2, Math.ceil((L - 2 * endInset) / step) + 1)
+    const spacing = (L - 2 * endInset) / (count - 1)
+    let open: RingGap | null = null
+    let anyInside = false
+    let anyOutside = false
+    for (let k = 0; k < count; k++) {
+      // Probe positions are nudged off round numbers so a ray never runs exactly along a jamb or a corner.
+      const s = Math.min(L - endInset, endInset + spacing * k + 0.00371)
+      const p = { x: a.x + u.x * s - inward.x * OUTSIDE, z: a.z + u.z * s - inward.z * OUTSIDE }
+      const r = probe(p, inward)
+      const ok = r.start <= tol && r.start >= -OUTSIDE - 1e-9 && r.length >= minT
+      if (ok) anyInside = true
+      if (!ok) {
+        const back = probe({ x: a.x + u.x * s + inward.x * OUTSIDE, z: a.z + u.z * s + inward.z * OUTSIDE }, { x: -inward.x, z: -inward.z })
+        if (back.start <= tol && back.length >= minT) anyOutside = true
+        if (!open) open = { edge: i, from: s, to: s, length: 0, probes: 0, worstStart: r.start }
+        open.to = s
+        open.probes++
+        open.worstStart = Math.max(open.worstStart, r.start)
+        open.length = open.probes * spacing
+      } else if (open) {
+        gaps.push(open)
+        open = null
+      }
+    }
+    if (open) gaps.push(open)
+    if (anyOutside && !anyInside) outsideOnly.push(i)
+  }
+
+  const corners: RingCornerProbe[] = []
+  for (let i = 0; i < n; i++) {
+    const p0 = polygon[(i + n - 1) % n]
+    const p1 = polygon[i]
+    const p2 = polygon[(i + 1) % n]
+    const d0 = norm2({ x: p1.x - p0.x, z: p1.z - p0.z })
+    const d1 = norm2({ x: p2.x - p1.x, z: p2.z - p1.z })
+    const cross = d0.x * d1.z - d0.z * d1.x
+    const reflex = cross * sign < 0
+    // Bisector of the interior angle, pointing into the polygon.
+    let bis = norm2({ x: -d0.x + d1.x, z: -d0.z + d1.z })
+    if (bis.x === 0 && bis.z === 0) bis = { x: -d0.z * sign, z: d0.x * sign }
+    const inwardNormal = { x: (-d0.z - d1.z) * sign, z: (d0.x + d1.x) * sign }
+    if (bis.x * inwardNormal.x + bis.z * inwardNormal.z < 0) bis = { x: -bis.x, z: -bis.z }
+    // Two rays parallel to the bisector, one nudged along each edge, so neither passes exactly through
+    // the inner corner point where three walls' corners meet (a grazing hit would fool the parity count).
+    const nudge = 0.02
+    let worst: { start: number; length: number } = { start: -Infinity, length: Infinity }
+    for (const from of [
+      { x: p1.x + d1.x * nudge, z: p1.z + d1.z * nudge },
+      { x: p1.x - d0.x * nudge, z: p1.z - d0.z * nudge },
+    ]) {
+      const r = probe({ x: from.x - bis.x * OUTSIDE, z: from.z - bis.z * OUTSIDE }, bis)
+      worst = { start: Math.max(worst.start, r.start), length: Math.min(worst.length, r.length) }
+    }
+    corners.push({ vertex: i, reflex, materialStart: worst.start, materialLength: worst.length, ok: worst.start <= tol && worst.start >= -OUTSIDE - 1e-9 && worst.length >= minT })
+  }
+
+  const overlaps: RingOverlap[] = []
+  for (let i = 0; i < solids.length; i++) {
+    for (let k = i + 1; k < solids.length; k++) {
+      const ba = boundsOf(solids[i].triangles)
+      const bb = boundsOf(solids[k].triangles)
+      if (!ba || !bb || !boxesOverlap(ba, bb)) continue
+      const est = overlapEstimate(solids[i].triangles, solids[k].triangles, opts.overlapStep ?? 0.05)
+      if (est.volume > 1e-6 || est.worstSharedLength > 1e-6) overlaps.push({ a: solids[i].id, b: solids[k].id, volume: est.volume, worstSharedLength: est.worstSharedLength })
+    }
+  }
+
+  return { closed: gaps.length === 0 && corners.every((c) => c.ok), gaps, corners, overlaps, outsideOnly, probes, edgeLengths }
+}
+
+const norm2 = (v: OVec2): OVec2 => {
+  const l = Math.hypot(v.x, v.z)
+  return l > 0 ? { x: v.x / l, z: v.z / l } : v
+}

@@ -8,7 +8,7 @@ import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { createDemoBuilding, demoBuildingCommands } from '@buildapp/demo'
 import { createEmptyModel, loadModel, serializeModel } from '@buildapp/model'
-import { runCommands } from '@buildapp/commands'
+import { applyCommand, runCommands } from '@buildapp/commands'
 import { compileBuilding, solidTriangles } from '@buildapp/geometry'
 import { EditorStore } from '@buildapp/editor'
 import { materialLength, meshVolume } from '@buildapp/verification'
@@ -153,11 +153,23 @@ describe('semantic guarantees', () => {
       expect(meshes.length, fill.id).toBeGreaterThan(0)
       for (const mesh of meshes) expect(mesh).toMatchObject({ hostWallId: wall.id, openingId: opening.id, levelId: wall.levelId })
     }
-    // moving a wall moves its fills with it: the association is geometric, not just nominal
-    const moved = compileBuilding(runCommands(m, [{ type: 'moveFeature', targetId: 'g-front', dz: -2 }]))
-    const before = scene.meshes.find((x) => x.objectId === 'door-entrance' && x.part === 'DOOR_LEAF')!
-    const after = moved.meshes.find((x) => x.objectId === 'door-entrance' && x.part === 'DOOR_LEAF')!
+    // moving a wall moves its fills with it: the association is geometric, not just nominal.
+    // (A ring wall cannot be moved on its own — its corner junctions would gap — so a free wall is used.)
+    const free = runCommands(createEmptyModel('f', 'f'), [
+      { type: 'createBuilding', id: 'b' },
+      { type: 'createLevel', id: 'l', index: 0, elevation: 0, height: 3 },
+      { type: 'createWall', id: 'w', levelId: 'l', start: { x: 0, z: 0 }, end: { x: 6, z: 0 }, thickness: 0.3, height: 3 },
+      { type: 'cutOpening', id: 'o', wallId: 'w', kind: 'DOOR', offset: 1, sill: 0, width: 1, height: 2.1 },
+      { type: 'placeDoor', id: 'd', openingId: 'o' },
+    ])
+    const stay = compileBuilding(free)
+    const moved = compileBuilding(runCommands(free, [{ type: 'moveFeature', targetId: 'w', dz: -2 }]))
+    const before = stay.meshes.find((x) => x.objectId === 'd' && x.part === 'DOOR_LEAF')!
+    const after = moved.meshes.find((x) => x.objectId === 'd' && x.part === 'DOOR_LEAF')!
     expect(after.triangles[0].a.z).toBeCloseTo(before.triangles[0].a.z - 2, 9)
+    const refused = applyCommand(m, { type: 'moveFeature', targetId: 'g-front', dz: -2 })
+    expect(refused.ok).toBe(false)
+    if (!refused.ok) expect(refused.errors.map((e) => e.code)).toContain('JUNCTION_GAP')
   })
 
   it('editing a wall property changes the canonical model first, then geometry is regenerated', () => {

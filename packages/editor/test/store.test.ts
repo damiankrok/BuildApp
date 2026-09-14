@@ -11,15 +11,19 @@ describe('EditorStore', () => {
     const before = store.getSnapshot().scene
     const heightBefore = store.model.walls.find((w) => w.id === 'g-front')!.height
     store.trace.length = 0
-    const r = store.setProperty('g-front', 'height', heightBefore + 0.5)
+    // lower the wall: raising it would overlap the upper front wall, which the model now refuses by name
+    const r = store.setProperty('g-front', 'height', heightBefore - 0.5)
     expect(r.ok).toBe(true)
     expect(store.trace.map((t) => t.step)).toEqual(['command', 'model-updated', 'geometry-compiled', 'listeners-notified'])
-    expect(store.model.walls.find((w) => w.id === 'g-front')!.height).toBe(heightBefore + 0.5)
+    expect(store.model.walls.find((w) => w.id === 'g-front')!.height).toBe(heightBefore - 0.5)
     const after = store.getSnapshot().scene
     expect(after).not.toBe(before)
     const wallTris = after.meshes.filter((m) => m.solidId === 'g-front').flatMap((m) => m.triangles)
-    expect(boundsOf(wallTris)!.max.y).toBeCloseTo(heightBefore + 0.5, 12)
+    expect(boundsOf(wallTris)!.max.y).toBeCloseTo(heightBefore - 0.5, 12)
     expect(notified).toEqual([1])
+    const taller = store.setProperty('g-front', 'height', heightBefore + 0.5)
+    expect(taller.ok).toBe(false)
+    expect(store.getSnapshot().lastError).toContain('WALLS_OVERLAP')
   })
 
   it('rejected edits leave model and geometry untouched and report the error', () => {

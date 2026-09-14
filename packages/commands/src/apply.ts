@@ -23,11 +23,16 @@ import {
   SlabSchema,
   StairSchema,
   WallSchema,
+  WallJunctionSchema,
+  WallRingSchema,
   WindowSchema,
   BuildingSchema,
   EvidenceSourceSchema,
   findObject,
+  junctionWallIds,
   nextId,
+  polygonIsSimple,
+  polygonSignedArea,
   semanticIssues,
   wallLength,
   type CanonicalBuildingModel,
@@ -69,6 +74,8 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   level: LevelSchema,
   room: RoomSchema,
   wall: WallSchema,
+  wallJunction: WallJunctionSchema,
+  wallRing: WallRingSchema,
   opening: OpeningSchema,
   window: WindowSchema,
   door: DoorSchema,
@@ -199,8 +206,8 @@ function execute(d: Draft, c: ResolvedCommand): void {
     case 'createRoom':
       add('rooms', 'room', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, usage: c.usage })
       return
-    case 'createWall':
-      add('walls', 'wall', {
+    case 'createWall': {
+      const wallId = add('walls', 'wall', {
         id: c.id,
         ...common(c),
         levelId: c.levelId,
@@ -213,7 +220,91 @@ function execute(d: Draft, c: ResolvedCommand): void {
         topProfile: c.topProfile,
         materialId: c.materialId,
       })
+      for (const [end, spec] of [
+        ['START', c.startJunction],
+        ['END', c.endJunction],
+      ] as const) {
+        if (!spec) continue
+        const id = spec.id ?? `${wallId}-j-${end.toLowerCase()}`
+        if (spec.kind === 'CORNER') {
+          add('wallJunctions', 'wallJunction', {
+            id,
+            kind: 'CORNER',
+            a: { wallId, end },
+            b: spec.with,
+            owner: spec.owner === 'SELF' ? wallId : spec.with.wallId,
+            tolerance: spec.tolerance,
+          })
+        } else {
+          add('wallJunctions', 'wallJunction', { id, kind: spec.kind, wall: { wallId, end }, againstWallId: spec.againstWallId, tolerance: spec.tolerance })
+        }
+      }
       return
+    }
+    case 'createWallJunction': {
+      if (c.kind === 'CORNER') {
+        if (!c.a || !c.b) return fail('INVALID_COMMAND', 'createWallJunction CORNER needs the two wall ends `a` and `b`')
+        if (c.wall || c.againstWallId) return fail('INVALID_COMMAND', 'createWallJunction CORNER takes `a`, `b` and `owner`, not `wall` / `againstWallId`')
+        add('wallJunctions', 'wallJunction', { id: c.id, ...common(c), kind: 'CORNER', a: c.a, b: c.b, owner: c.owner ?? c.a.wallId, tolerance: c.tolerance })
+        return
+      }
+      if (!c.wall || !c.againstWallId) return fail('INVALID_COMMAND', `createWallJunction ${c.kind} needs the terminating \`wall\` end and \`againstWallId\``)
+      if (c.a || c.b || c.owner) return fail('INVALID_COMMAND', `createWallJunction ${c.kind} takes \`wall\` and \`againstWallId\`, not \`a\` / \`b\` / \`owner\``)
+      add('wallJunctions', 'wallJunction', { id: c.id, ...common(c), kind: c.kind, wall: c.wall, againstWallId: c.againstWallId, tolerance: c.tolerance })
+      return
+    }
+    case 'createWallRing': {
+      if (!polygonIsSimple(c.polygon)) return fail('RING_DEGENERATE', 'createWallRing: the footprint polygon must be a simple polygon with area')
+      // The wall convention puts material to the left of travel, so the ring is
+      // traversed with positive signed area; a clockwise footprint is reversed
+      // and its per-edge overrides follow their edges.
+      const n = c.polygon.length
+      let polygon = c.polygon
+      let overrides = c.walls ?? []
+      if (polygonSignedArea(polygon) < 0) {
+        polygon = [polygon[0], ...polygon.slice(1).reverse()]
+        const mapped: typeof overrides = []
+        for (let i = 0; i < n; i++) if (overrides[i]) mapped[(n - 1 - i) % n] = overrides[i]
+        overrides = mapped
+      }
+      const ringId = nextId(m, 'wallRing', c.id)
+      const wallIds = polygon.map((_, i) => overrides[i]?.id ?? `${ringId}-w${i}`)
+      const junctionIds = polygon.map((_, i) => `${ringId}-j${i}`)
+      for (let i = 0; i < n; i++) {
+        const o = overrides[i] ?? {}
+        add('walls', 'wall', {
+          id: wallIds[i],
+          name: o.name,
+          evidence: o.evidence ?? c.evidence,
+          tags: o.tags ?? c.tags,
+          levelId: c.levelId,
+          start: polygon[i],
+          end: polygon[(i + 1) % n],
+          thickness: o.thickness ?? c.thickness,
+          height: o.height ?? c.height,
+          baseOffset: c.baseOffset,
+          kind: c.kind,
+          topProfile: o.topProfile ?? c.topProfile,
+          materialId: o.materialId ?? c.materialId,
+        })
+      }
+      for (let i = 0; i < n; i++) {
+        const prev = wallIds[(i + n - 1) % n]
+        const cur = wallIds[i]
+        const owner = c.cornerOwnership === 'PRECEDING' ? prev : c.cornerOwnership === 'FOLLOWING' ? cur : i % 2 === 0 ? cur : prev
+        add('wallJunctions', 'wallJunction', {
+          id: junctionIds[i],
+          evidence: c.evidence,
+          kind: 'CORNER',
+          a: { wallId: prev, end: 'END' },
+          b: { wallId: cur, end: 'START' },
+          owner,
+          tolerance: c.tolerance,
+        })
+      }
+      add('wallRings', 'wallRing', { id: ringId, ...common(c), levelId: c.levelId, wallIds, junctionIds })
+      return
+    }
     case 'createSlab':
       add('slabs', 'slab', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, topOffset: c.topOffset, thickness: c.thickness, materialId: c.materialId })
       return
@@ -478,7 +569,13 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
       }
       for (const s of m.stairs) if (s.toLevelId === id) out.push(s.id)
     }
-    if (k === 'wall') for (const o of m.openings) if (o.wallId === id) out.push(o.id)
+    if (k === 'wall') {
+      for (const o of m.openings) if (o.wallId === id) out.push(o.id)
+      for (const j of m.wallJunctions) if (junctionWallIds(j).includes(id)) out.push(j.id)
+      for (const r of m.wallRings) if (r.wallIds.includes(id)) out.push(r.id)
+    }
+    if (k === 'wallJunction') for (const r of m.wallRings) if (r.junctionIds.includes(id)) out.push(r.id)
+    if (k === 'level') for (const r of m.wallRings) if (r.levelId === id) out.push(r.id)
     if (k === 'opening') {
       for (const w of m.windows) if (w.openingId === id) out.push(w.id)
       for (const x of m.doors) if (x.openingId === id) out.push(x.id)
@@ -510,6 +607,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
   m.levels = keep(m.levels)
   m.rooms = keep(m.rooms)
   m.walls = keep(m.walls)
+  m.wallJunctions = keep(m.wallJunctions)
+  m.wallRings = keep(m.wallRings)
   m.openings = keep(m.openings)
   m.windows = keep(m.windows)
   m.doors = keep(m.doors)
@@ -578,6 +677,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     m.levels = scrub(m.levels)
     m.rooms = scrub(m.rooms)
     m.walls = scrub(m.walls)
+    m.wallJunctions = scrub(m.wallJunctions)
+    m.wallRings = scrub(m.wallRings)
     m.openings = scrub(m.openings)
     m.windows = scrub(m.windows)
     m.doors = scrub(m.doors)

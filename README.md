@@ -5,7 +5,10 @@ commands constructs a **CanonicalBuildingModel** (the single source of truth);
 a **geometry compiler** turns validated model data into tagged triangle meshes;
 **BuildWorld** is the React + Three.js editor/viewer that renders and edits
 that model. Future reconstruction analyzers issue commands like
-`createWall`, `cutOpening`, `placeWindow` — never triangles.
+`createWallRing`, `createWall`, `cutOpening`, `placeWindow` — never triangles,
+and never corner arithmetic: walls are stated on the natural footprint and
+junction records let the model resolve exactly-once corner material
+(`docs/WALL_TOPOLOGY.md`).
 
 ```
 Building DSL / semantic commands   packages/commands
@@ -25,11 +28,11 @@ BuildWorld                         packages/editor + apps/web
 | `packages/commands` | Building DSL, `applyCommand`, `BuildingSession` (undo/redo) | model |
 | `packages/demo` | the demo house, as a command list | model, commands |
 | `packages/geometry` | model → `CompiledScene` (walls with real openings, roofs, fills, slabs, …) | model |
-| `packages/verification` | independent oracles: volume, manifold, rays, overlap, plane pitch | nothing |
+| `packages/verification` | independent oracles: volume, manifold, rays, overlap, plane pitch, storey ring closure | nothing |
 | `packages/editor` | framework-agnostic `EditorStore`: command → model → compile → notify | model, commands, geometry, demo |
 | `apps/web` | BuildWorld UI (React, Three.js) | editor, model types, geometry types |
 | `tests/architecture` | boundary tests that enforce the table above | everything |
-| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md` | |
+| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md` | |
 | `stage-reports/` | per-stage measured results and browser screenshots | |
 
 ## Commands

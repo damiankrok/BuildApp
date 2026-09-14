@@ -16,12 +16,19 @@
  */
 import {
   findObject,
+  junctionsOfWall,
   levelIdOf,
   loadModel,
+  resolveWallTopology,
+  ringsOfWall,
   serializeModel,
   type CanonicalBuildingModel,
   type LoadResult,
+  type ResolvedJunction,
   type SemanticKind,
+  type WallExtent,
+  type WallJunction,
+  type WallRing,
 } from '@buildapp/model'
 import { BuildingSession, type BuildingCommand, type CommandResult } from '@buildapp/commands'
 import { compileBuilding, type CompiledMesh, type CompiledScene } from '@buildapp/geometry'
@@ -281,6 +288,16 @@ export class EditorStore {
     if (hit.kind === 'wall') {
       for (const o of m.openings) if (o.wallId === id) out.add(o.id)
     }
+    if (hit.kind === 'wallRing') {
+      for (const wallId of (hit.object as WallRing).wallIds) {
+        out.add(wallId)
+        for (const o of m.openings) if (o.wallId === wallId) out.add(o.id)
+      }
+    }
+    if (hit.kind === 'wallJunction') {
+      const j = hit.object as WallJunction
+      for (const wallId of j.kind === 'CORNER' ? [j.a.wallId, j.b.wallId] : [j.wall.wallId, j.againstWallId]) out.add(wallId)
+    }
     for (const o of [...out]) {
       for (const w of m.windows) if (w.openingId === o) out.add(w.id)
       for (const d of m.doors) if (d.openingId === o) out.add(d.id)
@@ -335,10 +352,45 @@ export class EditorStore {
       levelId,
       hostWallId,
       openingId: hit.kind === 'window' || hit.kind === 'door' ? (o.openingId as string) : undefined,
-      properties: editableProperties(hit.kind),
+      properties: editableProperties(hit.kind, hit.object),
       meshCount: this.scene.meshes.filter((mm) => mm.objectId === id).length,
+      topology: this.topologyOf(id, hit.kind),
     }
   }
+
+  /**
+   * The resolved wall topology around an object, for the inspector: a wall's
+   * physical extent and the junctions at its ends; a junction's resolution;
+   * a ring's walls and corners. Nothing here is persisted — it is derived
+   * from the junction records exactly as the compiler derives it.
+   */
+  topologyOf(id: string, kind: SemanticKind): TopologyDescription | undefined {
+    const m = this.session.model
+    if (kind !== 'wall' && kind !== 'wallJunction' && kind !== 'wallRing') return undefined
+    const topo = resolveWallTopology(m)
+    if (kind === 'wall') {
+      const extent = topo.extents.get(id)
+      const junctions = junctionsOfWall(m, id).map((j) => {
+        const r = topo.junctions.get(j.id)
+        const part = r?.participants.find((p) => p.wallId === id)
+        return { id: j.id, kind: j.kind, role: part?.role ?? 'HOST', end: part?.end, ok: r?.ok ?? false }
+      })
+      return { extent, junctions, rings: ringsOfWall(m, id).map((r) => r.id) }
+    }
+    if (kind === 'wallJunction') return { junction: topo.junctions.get(id) }
+    const ring = m.wallRings.find((r) => r.id === id)
+    return ring ? { ringWalls: ring.wallIds, ringJunctions: ring.junctionIds, ringClosed: ring.junctionIds.every((j) => topo.junctions.get(j)?.ok) } : undefined
+  }
+}
+
+export type TopologyDescription = {
+  extent?: WallExtent
+  junctions?: Array<{ id: string; kind: WallJunction['kind']; role: string; end?: string; ok: boolean }>
+  rings?: string[]
+  junction?: ResolvedJunction
+  ringWalls?: string[]
+  ringJunctions?: string[]
+  ringClosed?: boolean
 }
 
 export type TreeNode = { id: string; kind: SemanticKind; label: string; children: TreeNode[] }
@@ -364,6 +416,7 @@ export type ObjectDescription = {
   openingId?: string
   properties: PropertySpec[]
   meshCount: number
+  topology?: TopologyDescription
 }
 
 const num = (key: string, label: string, unit = 'm', step = 0.05, min?: number, max?: number): PropertySpec => ({ key, label, type: 'number', unit, step, min, max })
@@ -371,8 +424,16 @@ const text = (key: string, label: string): PropertySpec => ({ key, label, type: 
 const sel = (key: string, label: string, options: readonly string[]): PropertySpec => ({ key, label, type: 'select', options })
 
 /** Which properties the inspector may edit, per kind. Everything goes through setProperty. */
-export function editableProperties(kind: SemanticKind): PropertySpec[] {
+export function editableProperties(kind: SemanticKind, object?: unknown): PropertySpec[] {
   switch (kind) {
+    case 'wallJunction': {
+      const j = object as WallJunction | undefined
+      const specs: PropertySpec[] = [text('name', 'Name'), num('tolerance', 'Tolerance', 'm', 0.001, 0)]
+      if (j?.kind === 'CORNER') specs.push(sel('owner', 'Corner owner', [j.a.wallId, j.b.wallId]))
+      return specs
+    }
+    case 'wallRing':
+      return [text('name', 'Name')]
     case 'building':
       return [text('name', 'Name')]
     case 'level':
@@ -406,6 +467,12 @@ export function editableProperties(kind: SemanticKind): PropertySpec[] {
     case 'evidenceSource':
       return [text('label', 'Label')]
   }
+}
+
+/** A junction's default label: kind, participants and owner. */
+export function junctionLabel(j: WallJunction): string {
+  if (j.kind === 'CORNER') return `CORNER ${j.a.wallId}/${j.a.end} + ${j.b.wallId}/${j.b.end} (owner ${j.owner})`
+  return `${j.kind} ${j.wall.wallId}/${j.wall.end} → ${j.againstWallId}`
 }
 
 function buildTree(m: CanonicalBuildingModel): TreeNode[] {
@@ -443,6 +510,27 @@ function buildTree(m: CanonicalBuildingModel): TreeNode[] {
             })),
         })),
     )
+    const junctionNode = (j: WallJunction): TreeNode => ({ id: j.id, kind: 'wallJunction' as const, label: label(j, junctionLabel(j)), children: [] })
+    const levelWallIds = new Set(m.walls.filter((w) => w.levelId === level.id).map((w) => w.id))
+    const rings = m.wallRings.filter((r) => r.levelId === level.id)
+    const inRing = new Set(rings.flatMap((r) => r.junctionIds))
+    const looseJunctions = m.wallJunctions.filter((j) => !inRing.has(j.id) && levelWallIds.has(j.kind === 'CORNER' ? j.a.wallId : j.wall.wallId))
+    if (rings.length > 0 || looseJunctions.length > 0) {
+      node.children.push({
+        id: `${level.id}:topology`,
+        kind: 'wallJunction',
+        label: `Topology (${rings.length} ring${rings.length === 1 ? '' : 's'}, ${m.wallJunctions.filter((j) => levelWallIds.has(j.kind === 'CORNER' ? j.a.wallId : j.wall.wallId)).length} junctions)`,
+        children: [
+          ...rings.map((r) => ({
+            id: r.id,
+            kind: 'wallRing' as const,
+            label: label(r, `Ring of ${r.wallIds.length} walls`),
+            children: r.junctionIds.map((jid) => m.wallJunctions.find((j) => j.id === jid)).filter((j): j is WallJunction => !!j).map(junctionNode),
+          })),
+          ...looseJunctions.map(junctionNode),
+        ],
+      })
+    }
     group('room', 'Rooms', m.rooms.filter((r) => r.levelId === level.id).map((r) => ({ id: r.id, kind: 'room' as const, label: label(r), children: [] })))
     group('slab', 'Slabs', m.slabs.filter((s) => s.levelId === level.id).map((s) => ({ id: s.id, kind: 'slab' as const, label: label(s), children: [] })))
     group('roof', 'Roofs', m.roofs.filter((r) => r.levelId === level.id).map((r) => ({ id: r.id, kind: 'roof' as const, label: label(r), children: [] })))

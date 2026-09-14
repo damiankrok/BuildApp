@@ -41,7 +41,9 @@ and defaulted before it touches the model.
 | `createBuilding` | the model's single building | refused if one exists |
 | `createLevel` | a level (`index`, `elevation`, `height`) | needs a building |
 | `createRoom` | a room polygon on a level | polygon must be simple |
-| `createWall` | a wall from `start` to `end` (outer face), `thickness`, `height`, `baseOffset` = 0, `kind` = EXTERIOR, `topProfile?` | see the wall convention in `CANONICAL_BUILDING_MODEL.md` |
+| `createWall` | a wall from `start` to `end` (outer face), `thickness`, `height`, `baseOffset` = 0, `kind` = EXTERIOR, `topProfile?`; `startJunction?` / `endJunction?` create the junctions at its ends in the same step (`{ kind: 'CORNER', with: { wallId, end }, owner: SELF/OTHER }` or `{ kind: 'BUTT' \| 'T', againstWallId }`) | see the wall convention in `CANONICAL_BUILDING_MODEL.md` and `WALL_TOPOLOGY.md` |
+| `createWallRing` | a closed ring from a natural footprint `polygon`: one wall per edge, one CORNER per vertex, a `WallRing` record; `thickness`, `height`, `baseOffset`, `kind`, `topProfile`, `materialId` as ring defaults, `walls[]` per-edge overrides (`id`, `name`, `height`, `thickness`, `materialId`, `topProfile`, `evidence`, `tags`), `cornerOwnership` ALTERNATE/PRECEDING/FOLLOWING, `tolerance` | ids `<ring>-w<i>` / `<ring>-j<i>`; a clockwise polygon is reversed |
+| `createWallJunction` | a CORNER (`a`, `b`, `owner` = `a`'s wall), BUTT or T (`wall`, `againstWallId`) between existing walls | refused if the endpoints gap or overshoot, if an end is already claimed, or if the walls overlap without it |
 | `createSlab` | a slab from a polygon, `topOffset` = 0, `thickness` | |
 | `createRoof` | GABLE or FLAT over a footprint: `eaveOffset`, `pitchDeg`, `ridgeAxis` = X, `overhang` = 0, `thickness` = 0.25; `capWallIds` sets those walls' `topProfile` to `FOLLOW_ROOF` | a FLAT roof gets pitch 0 |
 | `cutOpening` | a structural opening in a wall: `kind`, `offset`, `sill`, `width`, `height` | validated inside the host, not touching side/top edges, not overlapping |
@@ -62,7 +64,31 @@ and defaulted before it touches the model.
 
 After every command the whole model is re-validated; a command that would
 leave it invalid is rejected with the validation codes
-(`OPENING_OUTSIDE_HOST`, `UNKNOWN_WALL`, …) and the model is unchanged.
+(`OPENING_OUTSIDE_HOST`, `UNKNOWN_WALL`, `WALLS_OVERLAP`, `JUNCTION_GAP`, …)
+and the model is unchanged. That is why a wall drawn from footprint line to
+footprint line states its junctions inline: without them it overlaps its
+neighbours and is refused. `removeFeature` on a wall cascades to its
+junctions and rings; on a corner junction alone it is refused, because the
+two walls would overlap again.
+
+## Building a house the analyzer way
+
+```ts
+runCommands(createEmptyModel('house', 'house'), [
+  { type: 'createBuilding', id: 'b' },
+  { type: 'createLevel', id: 'ground', index: 0, elevation: 0, height: 3 },
+  { type: 'createWallRing', id: 'house', levelId: 'ground', polygon: [{ x: 0, z: 0 }, { x: 10, z: 0 }, { x: 10, z: 8 }, { x: 0, z: 8 }], thickness: 0.3, height: 3 },
+  { type: 'createWall', id: 'partition', levelId: 'ground', start: { x: 6, z: 8 }, end: { x: 6, z: 0 }, thickness: 0.12, height: 2.75, kind: 'INTERIOR',
+    startJunction: { kind: 'T', againstWallId: 'house-w2' }, endJunction: { kind: 'T', againstWallId: 'house-w0' } },
+  { type: 'cutOpening', id: 'door-op', wallId: 'house-w0', kind: 'DOOR', offset: 1, sill: 0, width: 1, height: 2.1 },
+  { type: 'placeDoor', id: 'door', openingId: 'door-op' },
+  ...
+])
+```
+
+No coordinate above is a thickness offset; `tests/architecture/topology.test.ts`
+builds exactly this house and proves the ring closes, the corner volumes are
+counted once and the openings are real holes.
 
 ## Session, undo/redo, history
 
@@ -80,8 +106,9 @@ State an `id` to choose it; omit it to get a deterministic `<kind>-<n>`.
 ## The demo building
 
 `packages/demo` builds the demonstration house with 70-odd commands and no
-geometry: two levels, an exterior ring per level, an interior partition, a
-garage wing, three slabs, a 35° gable roof and a flat garage roof (both
+geometry: two levels, an exterior ring per level (`createWallRing` on the
+10 × 8 footprint), an interior partition with T-junctions, a garage wing
+with corner junctions and a T into the main body, three slabs, a 35° gable roof and a flat garage roof (both
 capping their walls), eleven windows, four doors (entrance, kitchen, garage,
 balcony — the kitchen door stands 35° open), five rooms, a rear balcony with
 three railings, a chimney, a stair placeholder, materials, constraints and

@@ -8,6 +8,8 @@
  * about and the code a caller can act on.
  */
 import { polygonIsSimple, rectIsValid, type PlanRect } from './geometry-types.js'
+import { fmtNumber, type ValidationCode, type ValidationIssue, type ValidationResult } from './issues.js'
+import { migrateModelInput } from './migrate.js'
 import { allObjectIds, wallLength } from './query.js'
 import {
   CanonicalBuildingModelSchema,
@@ -15,47 +17,21 @@ import {
   type CanonicalBuildingModel,
   type Opening,
 } from './schema.js'
+import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
 
-export type ValidationCode =
-  | 'SCHEMA'
-  | 'DUPLICATE_ID'
-  | 'MISSING_BUILDING'
-  | 'UNKNOWN_BUILDING'
-  | 'UNKNOWN_LEVEL'
-  | 'UNKNOWN_WALL'
-  | 'UNKNOWN_OPENING'
-  | 'UNKNOWN_ROOF'
-  | 'UNKNOWN_MATERIAL'
-  | 'UNKNOWN_TARGET'
-  | 'UNKNOWN_EVIDENCE_SOURCE'
-  | 'DUPLICATE_LEVEL_INDEX'
-  | 'DEGENERATE_WALL'
-  | 'OPENING_OUTSIDE_HOST'
-  | 'OPENING_TOUCHES_WALL_EDGE'
-  | 'OPENINGS_OVERLAP'
-  | 'FILL_KIND_MISMATCH'
-  | 'OPENING_FILLED_TWICE'
-  | 'MALFORMED_POLYGON'
-  | 'INVALID_RECT'
-  | 'INVALID_ROOF'
-  | 'DEGENERATE_RAILING'
-  | 'FILL_TOO_LARGE'
-
-export type ValidationIssue = {
-  code: ValidationCode
-  severity: 'ERROR' | 'WARNING'
-  message: string
-  objectId?: string
-  path?: string
-}
-
-export type ValidationResult = { ok: boolean; issues: ValidationIssue[] }
+export type { ValidationCode, ValidationIssue, ValidationResult } from './issues.js'
 
 const EPS = 1e-9
 
-/** Validate an unknown value as a model. Schema first; semantic checks only if the shape is right. */
-export function validateModel(input: unknown): ValidationResult & { model?: CanonicalBuildingModel } {
-  const parsed = CanonicalBuildingModelSchema.safeParse(input)
+/**
+ * Validate an unknown value as a model. Older supported schema versions are
+ * migrated first and the migration reported; then the Zod schema; then the
+ * semantic checks, only if the shape is right.
+ */
+export function validateModel(input: unknown): ValidationResult & { model?: CanonicalBuildingModel; migrated?: boolean } {
+  const migration = migrateModelInput(input)
+  if (migration.issues.some((i) => i.severity === 'ERROR')) return { ok: false, issues: migration.issues }
+  const parsed = CanonicalBuildingModelSchema.safeParse(migration.input)
   if (!parsed.success) {
     const issues: ValidationIssue[] = parsed.error.issues.map((i) => ({
       code: 'SCHEMA',
@@ -63,17 +39,17 @@ export function validateModel(input: unknown): ValidationResult & { model?: Cano
       message: i.message,
       path: i.path.join('.'),
     }))
-    return { ok: false, issues }
+    return { ok: false, issues: [...migration.issues, ...issues] }
   }
-  const issues = semanticIssues(parsed.data)
-  return { ok: !issues.some((i) => i.severity === 'ERROR'), issues, model: parsed.data }
+  const issues = [...migration.issues, ...semanticIssues(parsed.data)]
+  return { ok: !issues.some((i) => i.severity === 'ERROR'), issues, model: parsed.data, migrated: migration.migrated }
 }
 
 /** Semantic checks over a model whose shape is already known to be right. */
 export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
   const out: ValidationIssue[] = []
-  const err = (code: ValidationCode, message: string, objectId?: string, path?: string): void => {
-    out.push({ code, severity: 'ERROR', message, objectId, path })
+  const err = (code: ValidationCode, message: string, objectId?: string, path?: string, measured?: number): void => {
+    out.push({ code, severity: 'ERROR', message, objectId, path, measured })
   }
   const warn = (code: ValidationCode, message: string, objectId?: string, path?: string): void => {
     out.push({ code, severity: 'WARNING', message, objectId, path })
@@ -148,7 +124,13 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     }
   }
 
-  // Openings inside their host, not touching its side or top edges, not overlapping each other.
+  // Wall topology: junctions and rings resolve to physical extents (see topology.ts).
+  const topology = resolveWallTopology(m)
+  out.push(...topology.issues)
+  out.push(...wallOverlapIssues(m, topology.extents))
+
+  // Openings inside their host, not touching its side or top edges, not reaching
+  // into a junction zone, not overlapping each other.
   const byWall = new Map<string, Opening[]>()
   for (const o of m.openings) {
     needSources(o.id, o.evidence?.sourceIds)
@@ -177,6 +159,21 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
         o.id,
       )
       continue
+    }
+    const extent = topology.extents.get(wall.id)
+    if (extent) {
+      const core = physicalCore(extent)
+      if (a0 <= core.a0 + EPS || a1 >= core.a1 - EPS) {
+        const intrusion = Math.max(core.a0 - a0, a1 - core.a1)
+        err(
+          'OPENING_IN_JUNCTION_ZONE',
+          `opening ${o.id} spans ${fmt(a0)}..${fmt(a1)} m along wall ${wall.id}, but junctions leave that wall material only between ${fmt(core.a0)} and ${fmt(core.a1)} m; the opening reaches ${fmt(intrusion)} m into a consumed junction zone and was not shrunk`,
+          o.id,
+          undefined,
+          intrusion,
+        )
+        continue
+      }
     }
     const list = byWall.get(wall.id) ?? []
     for (const p of list) {
@@ -280,7 +277,7 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
   return out
 }
 
-const fmt = (n: number): string => (Math.abs(n - Math.round(n)) < 1e-9 ? String(Math.round(n)) : n.toFixed(3))
+const fmt = fmtNumber
 
 /** Throw with every issue listed when the model is invalid. */
 export function assertValidModel(input: unknown): CanonicalBuildingModel {

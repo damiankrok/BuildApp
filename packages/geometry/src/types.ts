@@ -61,6 +61,7 @@ export type CompileDiagnosticCode =
   | 'MODEL_INVALID'
   | 'UNKNOWN_LEVEL'
   | 'WALL_TOP_BELOW_BASE'
+  | 'WALL_CONSUMED'
   | 'WALL_NOT_UNDER_ROOF'
   | 'OPENING_ABOVE_WALL_TOP'
   | 'OPENING_NOT_CUT'

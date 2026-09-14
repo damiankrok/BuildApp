@@ -6,7 +6,14 @@ import { fileURLToPath } from 'node:url'
 const ART = resolve(dirname(fileURLToPath(import.meta.url)), '../../../stage-reports/artifacts')
 mkdirSync(ART, { recursive: true })
 
-type Handle = { store: { model: { walls: Array<{ id: string; height: number }>; roofs: Array<{ id: string; pitchDeg: number }>; name: string } }; meshCount: number; objectIds: string[] }
+type Handle = {
+  store: {
+    model: { walls: Array<{ id: string; height: number }>; roofs: Array<{ id: string; pitchDeg: number }>; wallJunctions: Array<{ id: string }>; wallRings: Array<{ id: string }>; name: string }
+    describe(id: string): { topology?: { extent?: { start: { outer: number }; end: { outer: number } }; ringClosed?: boolean } } | undefined
+  }
+  meshCount: number
+  objectIds: string[]
+}
 
 const handle = (page: Page) => page.evaluate(() => {
   const h = (window as unknown as { __buildworld: Handle }).__buildworld
@@ -60,13 +67,13 @@ test('scene tree selection drives the inspector; inspector edits update the mode
   const trisBefore = Number(await page.getByTestId('status-triangles').textContent())
   const height = page.getByTestId('prop-height')
   await expect(height).toHaveValue('3')
-  await height.fill('3.4')
+  await height.fill('2.7')
   await height.press('Enter')
   await expect(page.getByTestId('status-revision')).toHaveText('1')
   const after = await handle(page)
-  expect(after.walls.find((w) => w.id === 'g-front')!.height).toBe(3.4)
+  expect(after.walls.find((w) => w.id === 'g-front')!.height).toBe(2.7)
   expect(before.walls.find((w) => w.id === 'g-front')!.height).toBe(3)
-  // geometry was regenerated from the model (the wall got taller; triangle count is stable, bounds moved)
+  // geometry was regenerated from the model (the wall got shorter; triangle count is stable, bounds moved)
   expect(Number(await page.getByTestId('status-triangles').textContent())).toBe(trisBefore)
   // an invalid edit is rejected with an error and the model is unchanged
   await page.getByTestId('tree-row-op-gf-1').click()
@@ -81,7 +88,7 @@ test('scene tree selection drives the inspector; inspector edits update the mode
   const undone = await handle(page)
   expect(undone.walls.find((w) => w.id === 'g-front')!.height).toBe(3)
   await page.getByTestId('redo').click()
-  expect((await handle(page)).walls.find((w) => w.id === 'g-front')!.height).toBe(3.4)
+  expect((await handle(page)).walls.find((w) => w.id === 'g-front')!.height).toBe(2.7)
 })
 
 test('door open angle and roof pitch are editable semantic parameters', async ({ page }) => {
@@ -176,12 +183,12 @@ test('save writes canonical JSON and load restores it', async ({ page }) => {
 
   // modify and load back
   json.name = 'Loaded from file'
-  json.walls.find((w) => w.id === 'g-front')!.height = 3.8
+  json.walls.find((w) => w.id === 'g-front')!.height = 2.8
   const tmp = resolve(ART, 'building-model.modified.json')
   writeFileSync(tmp, JSON.stringify(json))
   await page.getByTestId('load-input').setInputFiles(tmp)
   await expect(page.getByTestId('status-model')).toHaveText('Loaded from file')
-  expect((await handle(page)).walls.find((w) => w.id === 'g-front')!.height).toBe(3.8)
+  expect((await handle(page)).walls.find((w) => w.id === 'g-front')!.height).toBe(2.8)
   await expect(page.getByTestId('status-diagnostics')).toHaveText('geometry ok')
 
   // a broken file is refused with an error and nothing changes
@@ -190,4 +197,41 @@ test('save writes canonical JSON and load restores it', async ({ page }) => {
   await page.getByTestId('load-input').setInputFiles(bad)
   await expect(page.getByTestId('inspector-error')).toBeVisible()
   await expect(page.getByTestId('status-model')).toHaveText('Loaded from file')
+})
+
+test('wall topology is visible and re-resolved after an edit: rings and junctions in the tree, physical extents in the inspector', async ({ page }) => {
+  const h = await page.evaluate(() => {
+    const w = (window as unknown as { __buildworld: Handle }).__buildworld
+    return { junctions: w.store.model.wallJunctions.length, rings: w.store.model.wallRings.map((r) => r.id), right: w.store.describe('g-right')?.topology?.extent }
+  })
+  expect(h.rings).toEqual(['ring-ground', 'ring-upper'])
+  expect(h.junctions).toBeGreaterThanOrEqual(13)
+  expect(h.right!.start.outer).toBeCloseTo(0.3, 9)
+  expect(h.right!.end.outer).toBeCloseTo(7.7, 9)
+  // the ring and its corners are in the scene tree under the level's Topology group (expanded by default); a corner has no meshes
+  await expect(page.getByTestId('tree-row-ground:topology')).toBeVisible()
+  await page.getByTestId('tree-row-ring-ground').click()
+  await expect(page.getByTestId('inspector-kind')).toHaveText('wallRing')
+  await expect(page.getByTestId('topology-ring-closed')).toHaveText('yes')
+  await page.getByTestId('tree-row-ring-ground-j1').click()
+  await expect(page.getByTestId('inspector-kind')).toHaveText('wallJunction')
+  await expect(page.getByTestId('topology-junction-ok')).toHaveText('yes')
+  expect((await handle(page)).objectIds).toContain('g-front')
+  // a wall shows its physical extent; making the front wall thicker moves the right wall's physical start
+  await page.getByTestId('tree-row-g-right').click()
+  await expect(page.getByTestId('topology-outer')).toHaveText('0.300 – 7.700 m')
+  await page.getByTestId('tree-row-g-front').click()
+  await page.getByTestId('prop-thickness').fill('0.45')
+  await page.getByTestId('prop-thickness').press('Enter')
+  await expect(page.getByTestId('status-revision')).toHaveText('1')
+  await page.getByTestId('tree-row-g-right').click()
+  await expect(page.getByTestId('topology-outer')).toHaveText('0.450 – 7.700 m')
+  await expect(page.getByTestId('status-diagnostics')).toHaveText('geometry ok')
+  // moving a ring wall on its own is refused by name and nothing changes
+  await page.evaluate(() => {
+    const w = (window as unknown as { __buildworld: { store: { execute(c: unknown): unknown } } }).__buildworld
+    w.store.execute({ type: 'moveFeature', targetId: 'g-front', dz: -1 })
+  })
+  await expect(page.getByTestId('inspector-error')).toContainText('JUNCTION_GAP')
+  await expect(page.getByTestId('status-revision')).toHaveText('1')
 })

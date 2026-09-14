@@ -15,6 +15,8 @@ import {
   type SemanticKind,
   type SemanticObject,
   type Wall,
+  type WallJunction,
+  type WallRing,
   type Window,
 } from './schema.js'
 
@@ -62,6 +64,15 @@ export const openingsOfWall = (m: CanonicalBuildingModel, wallId: string): Openi
   m.openings.filter((o) => o.wallId === wallId)
 export const wallsOfLevel = (m: CanonicalBuildingModel, levelId: string): Wall[] =>
   m.walls.filter((w) => w.levelId === levelId)
+export const junctionById = (m: CanonicalBuildingModel, id: string): WallJunction | undefined =>
+  m.wallJunctions.find((j) => j.id === id)
+export const ringById = (m: CanonicalBuildingModel, id: string): WallRing | undefined => m.wallRings.find((r) => r.id === id)
+/** Every junction a wall takes part in, as owner, trimmed end or host. */
+export const junctionsOfWall = (m: CanonicalBuildingModel, wallId: string): WallJunction[] =>
+  m.wallJunctions.filter((j) => (j.kind === 'CORNER' ? j.a.wallId === wallId || j.b.wallId === wallId : j.wall.wallId === wallId || j.againstWallId === wallId))
+export const ringsOfWall = (m: CanonicalBuildingModel, wallId: string): WallRing[] => m.wallRings.filter((r) => r.wallIds.includes(wallId))
+export const ringsOfJunction = (m: CanonicalBuildingModel, junctionId: string): WallRing[] =>
+  m.wallRings.filter((r) => r.junctionIds.includes(junctionId))
 
 /** The level an object stands on, following Window/Door -> Opening -> Wall -> Level. */
 export function levelIdOf(model: CanonicalBuildingModel, id: string): string | undefined {
@@ -78,6 +89,10 @@ export function levelIdOf(model: CanonicalBuildingModel, id: string): string | u
     const op = openingById(model, (hit.object as Window | Door).openingId)
     if (!op) return undefined
     return wallById(model, op.wallId)?.levelId
+  }
+  if (hit.kind === 'wallJunction') {
+    const j = hit.object as WallJunction
+    return wallById(model, j.kind === 'CORNER' ? j.a.wallId : j.wall.wallId)?.levelId
   }
   return undefined
 }

@@ -128,9 +128,9 @@ describe('CanonicalBuildingModel', () => {
   it('serializes deterministically and round-trips with identical ids', () => {
     const a = smallModel()
     const b = smallModel()
-    // different insertion order, same content
-    b.walls.push({ ...a.walls[0], id: 'aaa-first' })
-    a.walls.unshift({ ...a.walls[0], id: 'aaa-first' })
+    // different insertion order, same content (the copy stands 5 m back so the two walls do not overlap)
+    b.walls.push({ ...a.walls[0], id: 'aaa-first', start: { x: 0, z: 5 }, end: { x: 8, z: 5 } })
+    a.walls.unshift({ ...a.walls[0], id: 'aaa-first', start: { x: 0, z: 5 }, end: { x: 8, z: 5 } })
     const ja = serializeModel(a)
     const jb = serializeModel(b)
     expect(ja).toBe(jb)

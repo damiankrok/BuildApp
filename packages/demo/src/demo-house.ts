@@ -20,6 +20,13 @@
  * Every dimension below is the author's choice and is tagged ASSUMED, except a
  * handful that are tagged as if read from a drawing to show that the evidence
  * vocabulary travels with the objects.
+ *
+ * Walls are stated on the natural footprint: the exterior rings come from the
+ * footprint polygons (`createWallRing`), the garage walls and the partition
+ * run from footprint line to footprint line, and junction records say how
+ * they meet. No wall endpoint is trimmed by a thickness here; the model
+ * resolves corner ownership (STAGE BUILDAPP-00A). An architecture test fails
+ * if a wall endpoint is ever moved into another wall's thickness band again.
  */
 import { createEmptyModel, type CanonicalBuildingModel, type Evidence } from '@buildapp/model'
 import { runCommands, type BuildingCommand } from '@buildapp/commands'
@@ -52,29 +59,96 @@ export function demoBuildingCommands(): BuildingCommand[] {
     { type: 'createLevel', id: 'ground', name: 'Ground floor', index: 0, elevation: 0, height: GROUND_H, evidence: exact('section datum ±0,00') },
     { type: 'createLevel', id: 'upper', name: 'Upper floor', index: 1, elevation: UPPER_ELEV, height: 3.0, evidence: exact('section datum +3,00') },
 
-    // --- Ground floor exterior ring (counter-clockwise on the plan; front and rear own the corners) ---
-    { type: 'createWall', id: 'g-front', name: 'Front wall', levelId: 'ground', start: { x: 0, z: 0 }, end: { x: W, z: 0 }, thickness: T, height: GROUND_H, materialId: 'mat-render', evidence: exact('plan chain 1000') },
-    { type: 'createWall', id: 'g-right', name: 'Right wall', levelId: 'ground', start: { x: W, z: T }, end: { x: W, z: D - T }, thickness: T, height: GROUND_H, materialId: 'mat-render', evidence: assumed },
-    { type: 'createWall', id: 'g-rear', name: 'Rear wall', levelId: 'ground', start: { x: W, z: D }, end: { x: 0, z: D }, thickness: T, height: GROUND_H, materialId: 'mat-render', evidence: assumed },
-    { type: 'createWall', id: 'g-left', name: 'Left wall', levelId: 'ground', start: { x: 0, z: D - T }, end: { x: 0, z: T }, thickness: T, height: GROUND_H, materialId: 'mat-render', evidence: assumed },
-    // interior partition between living room and kitchen; stops at the slab underside
-    { type: 'createWall', id: 'g-partition', name: 'Living / kitchen partition', levelId: 'ground', start: { x: 6, z: D - T }, end: { x: 6, z: T }, thickness: 0.12, height: 2.75, kind: 'INTERIOR', evidence: assumed },
+    // --- Ground floor exterior ring: the natural footprint, corner ownership resolved by the model ---
+    {
+      type: 'createWallRing',
+      id: 'ring-ground',
+      name: 'Ground floor exterior ring',
+      levelId: 'ground',
+      polygon: [{ x: 0, z: 0 }, { x: W, z: 0 }, { x: W, z: D }, { x: 0, z: D }],
+      thickness: T,
+      height: GROUND_H,
+      materialId: 'mat-render',
+      evidence: assumed,
+      walls: [
+        { id: 'g-front', name: 'Front wall', evidence: exact('plan chain 1000') },
+        { id: 'g-right', name: 'Right wall' },
+        { id: 'g-rear', name: 'Rear wall' },
+        { id: 'g-left', name: 'Left wall' },
+      ],
+    },
+    // interior partition between living room and kitchen, stated from footprint line to footprint line;
+    // it stops at the slab underside, and its T-junctions resolve its ends against the exterior walls' inner faces
+    {
+      type: 'createWall',
+      id: 'g-partition',
+      name: 'Living / kitchen partition',
+      levelId: 'ground',
+      start: { x: 6, z: D },
+      end: { x: 6, z: 0 },
+      thickness: 0.12,
+      height: 2.75,
+      kind: 'INTERIOR',
+      evidence: assumed,
+      startJunction: { kind: 'T', againstWallId: 'g-rear' },
+      endJunction: { kind: 'T', againstWallId: 'g-front' },
+    },
 
-    // --- Garage ring, attached to the right wall of the main body ---
+    // --- Garage: three walls on the natural footprint, attached to the main body ---
+    // gar-front continues the front wall's line (contact, no junction needed); the garage corners are
+    // explicit CORNER junctions; gar-rear terminates against the main body's right wall (T).
     { type: 'createWall', id: 'gar-front', name: 'Garage front wall', levelId: 'ground', start: { x: W, z: 0 }, end: { x: W + GW, z: 0 }, thickness: T, height: 3.0, materialId: 'mat-brick', evidence: assumed },
-    { type: 'createWall', id: 'gar-right', name: 'Garage right wall', levelId: 'ground', start: { x: W + GW, z: T }, end: { x: W + GW, z: GD - T }, thickness: T, height: 3.0, materialId: 'mat-brick', evidence: assumed },
-    { type: 'createWall', id: 'gar-rear', name: 'Garage rear wall', levelId: 'ground', start: { x: W + GW, z: GD }, end: { x: W, z: GD }, thickness: T, height: 3.0, materialId: 'mat-brick', evidence: assumed },
+    {
+      type: 'createWall',
+      id: 'gar-right',
+      name: 'Garage right wall',
+      levelId: 'ground',
+      start: { x: W + GW, z: 0 },
+      end: { x: W + GW, z: GD },
+      thickness: T,
+      height: 3.0,
+      materialId: 'mat-brick',
+      evidence: assumed,
+      startJunction: { kind: 'CORNER', with: { wallId: 'gar-front', end: 'END' }, owner: 'OTHER' },
+    },
+    {
+      type: 'createWall',
+      id: 'gar-rear',
+      name: 'Garage rear wall',
+      levelId: 'ground',
+      start: { x: W + GW, z: GD },
+      end: { x: W, z: GD },
+      thickness: T,
+      height: 3.0,
+      materialId: 'mat-brick',
+      evidence: assumed,
+      startJunction: { kind: 'CORNER', with: { wallId: 'gar-right', end: 'END' }, owner: 'SELF' },
+      endJunction: { kind: 'T', againstWallId: 'g-right' },
+    },
 
     // --- Slabs ---
     { type: 'createSlab', id: 'slab-ground', name: 'Ground slab', levelId: 'ground', polygon: [{ x: 0, z: 0 }, { x: W, z: 0 }, { x: W, z: D }, { x: 0, z: D }], topOffset: 0, thickness: 0.3, evidence: assumed },
     { type: 'createSlab', id: 'slab-garage', name: 'Garage slab', levelId: 'ground', polygon: [{ x: W, z: 0 }, { x: W + GW, z: 0 }, { x: W + GW, z: GD }, { x: W, z: GD }], topOffset: 0, thickness: 0.3, evidence: assumed },
     { type: 'createSlab', id: 'slab-upper', name: 'Upper floor slab', levelId: 'upper', polygon: [{ x: T, z: T }, { x: W - T, z: T }, { x: W - T, z: D - T }, { x: T, z: D - T }], topOffset: 0, thickness: 0.25, evidence: assumed },
 
-    // --- Upper floor exterior ring ---
-    { type: 'createWall', id: 'u-front', name: 'Upper front wall', levelId: 'upper', start: { x: 0, z: 0 }, end: { x: W, z: 0 }, thickness: T, height: 3.0, materialId: 'mat-render', evidence: assumed },
-    { type: 'createWall', id: 'u-right', name: 'Upper right gable wall', levelId: 'upper', start: { x: W, z: T }, end: { x: W, z: D - T }, thickness: T, height: 6.0, materialId: 'mat-render', evidence: assumed },
-    { type: 'createWall', id: 'u-rear', name: 'Upper rear wall', levelId: 'upper', start: { x: W, z: D }, end: { x: 0, z: D }, thickness: T, height: 3.0, materialId: 'mat-render', evidence: assumed },
-    { type: 'createWall', id: 'u-left', name: 'Upper left gable wall', levelId: 'upper', start: { x: 0, z: D - T }, end: { x: 0, z: T }, thickness: T, height: 6.0, materialId: 'mat-render', evidence: assumed },
+    // --- Upper floor exterior ring: same footprint; the gable walls are taller and the roof caps all four ---
+    {
+      type: 'createWallRing',
+      id: 'ring-upper',
+      name: 'Upper floor exterior ring',
+      levelId: 'upper',
+      polygon: [{ x: 0, z: 0 }, { x: W, z: 0 }, { x: W, z: D }, { x: 0, z: D }],
+      thickness: T,
+      height: 3.0,
+      materialId: 'mat-render',
+      evidence: assumed,
+      walls: [
+        { id: 'u-front', name: 'Upper front wall' },
+        { id: 'u-right', name: 'Upper right gable wall', height: 6.0 },
+        { id: 'u-rear', name: 'Upper rear wall' },
+        { id: 'u-left', name: 'Upper left gable wall', height: 6.0 },
+      ],
+    },
 
     // --- Roofs (cap the walls that die into them) ---
     {
@@ -119,17 +193,17 @@ export function demoBuildingCommands(): BuildingCommand[] {
     { type: 'placeWindow', id: 'win-gr-1', openingId: 'op-gr-1' },
     { type: 'cutOpening', id: 'op-gr-2', wallId: 'g-rear', kind: 'WINDOW', offset: 6.5, sill: 0.9, width: 1.8, height: 1.4 },
     { type: 'placeWindow', id: 'win-gr-2', openingId: 'op-gr-2', divisions: 3 },
-    { type: 'cutOpening', id: 'op-gl-1', wallId: 'g-left', kind: 'WINDOW', offset: 2.5, sill: 0.9, width: 1.5, height: 1.4 },
+    { type: 'cutOpening', id: 'op-gl-1', wallId: 'g-left', kind: 'WINDOW', offset: 2.8, sill: 0.9, width: 1.5, height: 1.4 },
     { type: 'placeWindow', id: 'win-gl-1', openingId: 'op-gl-1' },
-    { type: 'cutOpening', id: 'op-grt-1', wallId: 'g-right', kind: 'WINDOW', offset: 6.2, sill: 1.0, width: 0.8, height: 1.2 },
+    { type: 'cutOpening', id: 'op-grt-1', wallId: 'g-right', kind: 'WINDOW', offset: 6.5, sill: 1.0, width: 0.8, height: 1.2 },
     { type: 'placeWindow', id: 'win-grt-1', openingId: 'op-grt-1' },
-    { type: 'cutOpening', id: 'op-partition', name: 'Kitchen door opening', wallId: 'g-partition', kind: 'DOOR', offset: 3.0, sill: 0, width: 0.9, height: 2.05 },
+    { type: 'cutOpening', id: 'op-partition', name: 'Kitchen door opening', wallId: 'g-partition', kind: 'DOOR', offset: 3.3, sill: 0, width: 0.9, height: 2.05 },
     { type: 'placeDoor', id: 'door-kitchen', name: 'Kitchen door', openingId: 'op-partition', hingeSide: 'RIGHT', swing: 'IN', openAngle: 35, frameDepth: 0.1, frameInset: 0.01, materialId: 'mat-timber' },
 
     // --- Openings: garage ---
     { type: 'cutOpening', id: 'op-garage-door', name: 'Garage door opening', wallId: 'gar-front', kind: 'DOOR', offset: 1.0, sill: 0, width: 2.5, height: 2.2 },
     { type: 'placeDoor', id: 'door-garage', name: 'Garage door', openingId: 'op-garage-door', hingeSide: 'LEFT', swing: 'OUT', openAngle: 0, leafThickness: 0.05, frameWidth: 0.08 },
-    { type: 'cutOpening', id: 'op-gar-1', wallId: 'gar-right', kind: 'WINDOW', offset: 2.5, sill: 1.2, width: 1.0, height: 1.0 },
+    { type: 'cutOpening', id: 'op-gar-1', wallId: 'gar-right', kind: 'WINDOW', offset: 2.8, sill: 1.2, width: 1.0, height: 1.0 },
     { type: 'placeWindow', id: 'win-gar-1', openingId: 'op-gar-1' },
 
     // --- Openings: upper floor ---
@@ -141,7 +215,7 @@ export function demoBuildingCommands(): BuildingCommand[] {
     { type: 'placeDoor', id: 'door-balcony', name: 'Balcony door', openingId: 'op-balcony', hingeSide: 'RIGHT', swing: 'IN', openAngle: 0, materialId: 'mat-timber' },
     { type: 'cutOpening', id: 'op-ur-1', wallId: 'u-rear', kind: 'WINDOW', offset: 1.5, sill: 0.9, width: 1.2, height: 1.4 },
     { type: 'placeWindow', id: 'win-ur-1', openingId: 'op-ur-1' },
-    { type: 'cutOpening', id: 'op-ul-gable', name: 'Gable window opening', wallId: 'u-left', kind: 'WINDOW', offset: 3.1, sill: 0.9, width: 1.2, height: 1.4 },
+    { type: 'cutOpening', id: 'op-ul-gable', name: 'Gable window opening', wallId: 'u-left', kind: 'WINDOW', offset: 3.4, sill: 0.9, width: 1.2, height: 1.4 },
     { type: 'placeWindow', id: 'win-ul-gable', openingId: 'op-ul-gable' },
 
     // --- Balcony at the rear with railings ---
