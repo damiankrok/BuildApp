@@ -8,7 +8,8 @@
 | Starting HEAD | none — the repository was empty (no commits) |
 | Branch | `claude/buildapp-buildworld-v1-7y6yqh` — the branch designated by the execution harness. The brief named `claude/buildapp-buildworld-v1`; the harness forbids pushing to any other branch, so the suffixed name was used and is recorded here. It is also the repository's first and only branch. |
 | Implementation HEAD | `8a1406e19433dc752202641356fbca50df858f3c` |
-| Final HEAD | the commit adding this report and `PROJECT_STATUS.md` (one docs commit above the implementation HEAD; see `git log`) |
+| Docs HEAD | `bd035ebce5c17f25098228b56493ce0bdae0614b` — adds this report, `PROJECT_STATUS.md`, `README.md` and `docs/` |
+| Final HEAD | the one commit above the docs HEAD; it changes only the SHA lines in this table and in `PROJECT_STATUS.md`, so every gate result above describes its tree |
 | Reference repository | `damiankrok/Web-analizer-builder` @ `claude/new-session-pvd4ik` (`a44081d9739afa45b8cc8f52dfec651d30defe41`), read only, not modified |
 
 Commits, oldest first: `cb04ec9` bootstrap and operational files · `59e65fc`

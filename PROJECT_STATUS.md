@@ -8,7 +8,7 @@
 
 | stage | branch | final commit | result |
 | --- | --- | --- | --- |
-| STAGE BUILDAPP-00 — BUILDWORLD / SEMANTIC BUILDING EDITOR / BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` (the execution harness's designated branch; the brief named `claude/buildapp-buildworld-v1`) | implementation `8a1406e19433dc752202641356fbca50df858f3c`; final HEAD is the commit that adds this status and `stage-reports/STAGE_BUILDAPP_00.md` (see `git log`) | PASS |
+| STAGE BUILDAPP-00 — BUILDWORLD / SEMANTIC BUILDING EDITOR / BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` (the execution harness's designated branch; the brief named `claude/buildapp-buildworld-v1`) | implementation `8a1406e19433dc752202641356fbca50df858f3c`; docs `bd035ebce5c17f25098228b56493ce0bdae0614b`; final HEAD is the one commit above it that records these SHAs (see `git log`) | PASS |
 
 ## Current capabilities
 
