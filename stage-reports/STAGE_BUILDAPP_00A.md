@@ -7,8 +7,8 @@
 | Repository | `damiankrok/BuildApp` |
 | Starting HEAD | `da01f5d328fc2d4f54aabb6b8fff669508d2d805` (the BUILDAPP-00 final HEAD, as inspected by the orchestrator) |
 | Branch | `claude/buildapp-buildworld-v1-7y6yqh` — the harness-designated branch; the same branch BUILDAPP-00 was delivered on. No further suffix was forced. |
-| Implementation HEAD | `50a4637` — model, DSL, compiler, oracles, demo, editor, web, tests |
-| Docs HEAD | the commit after it — this report, `PROJECT_STATUS.md`, `docs/` |
+| Implementation HEAD | `50a46370994e3cad7180857a19b87a9f9979d43f` — model, DSL, compiler, oracles, demo, editor, web, tests |
+| Docs HEAD | `a8ac902cc4e74f2102adb5b9e1b56bc341a04cf1` — this report, `PROJECT_STATUS.md`, `docs/` |
 | Final HEAD | the one commit above the docs HEAD; it changes only the SHA lines in this table and in `PROJECT_STATUS.md`, so every gate result below describes its tree |
 | Schema version | `1.0.0` → **`1.1.0`** (explicit migration, §4) |
 | Reference repository | `damiankrok/Web-analizer-builder` @ `claude/new-session-pvd4ik`, read only, not modified; its junction/ring concepts were the prompt for a design fitted to this model, not copied |
