@@ -7,3 +7,5 @@ apps/web/test-results/
 apps/web/playwright-report/
 .DS_Store
 *.log
+stage-reports/artifacts/*.modified.json
+stage-reports/artifacts/*.bad.json

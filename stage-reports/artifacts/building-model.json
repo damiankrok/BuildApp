@@ -1,0 +1,1178 @@
+{
+  "balconies": [
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 7,
+        "maxZ": 9.5,
+        "minX": 3,
+        "minZ": 8
+      },
+      "id": "balcony-rear",
+      "kind": "BALCONY",
+      "levelId": "upper",
+      "name": "Rear balcony",
+      "thickness": 0.2,
+      "topOffset": 0
+    }
+  ],
+  "building": {
+    "evidence": {
+      "source": "author",
+      "sourceIds": [
+        "src-author"
+      ],
+      "status": "ASSUMED"
+    },
+    "id": "house",
+    "name": "Demo house"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 7.6,
+        "maxZ": 3.6,
+        "minX": 7,
+        "minZ": 3
+      },
+      "height": 6,
+      "id": "chimney-1",
+      "levelId": "upper",
+      "materialId": "mat-brick",
+      "name": "Chimney"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "c-pitch",
+      "kind": "FIXED_VALUE",
+      "note": "declared roof pitch",
+      "property": "pitchDeg",
+      "targetIds": [
+        "roof-main"
+      ],
+      "tolerance": 0.01,
+      "value": 35
+    },
+    {
+      "id": "c-wall-thickness",
+      "kind": "EQUAL",
+      "note": "exterior walls share one build-up",
+      "property": "thickness",
+      "targetIds": [
+        "g-front",
+        "g-rear",
+        "g-left",
+        "g-right"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "door-balcony",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "name": "Balcony door",
+      "openAngle": 0,
+      "openingId": "op-balcony",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "door-entrance",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "name": "Entrance door",
+      "openAngle": 0,
+      "openingId": "op-entrance",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.08,
+      "hingeSide": "LEFT",
+      "id": "door-garage",
+      "leafThickness": 0.05,
+      "name": "Garage door",
+      "openAngle": 0,
+      "openingId": "op-garage-door",
+      "swing": "OUT"
+    },
+    {
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "door-kitchen",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "name": "Kitchen door",
+      "openAngle": 35,
+      "openingId": "op-partition",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-author",
+      "kind": "MANUAL",
+      "label": "author decisions for the demo building"
+    },
+    {
+      "id": "src-plan",
+      "kind": "DRAWING",
+      "label": "hypothetical demo plan sheet A-01"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "demo-house",
+  "levels": [
+    {
+      "buildingId": "house",
+      "elevation": 0,
+      "evidence": {
+        "locator": "section datum ±0,00",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3,
+      "id": "ground",
+      "index": 0,
+      "name": "Ground floor"
+    },
+    {
+      "buildingId": "house",
+      "elevation": 3,
+      "evidence": {
+        "locator": "section datum +3,00",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3,
+      "id": "upper",
+      "index": 1,
+      "name": "Upper floor"
+    }
+  ],
+  "materials": [
+    {
+      "color": "#b0725a",
+      "id": "mat-brick",
+      "name": "brick"
+    },
+    {
+      "color": "#4a4f57",
+      "id": "mat-membrane",
+      "name": "flat roof membrane"
+    },
+    {
+      "color": "#d9d4c7",
+      "id": "mat-render",
+      "name": "white render"
+    },
+    {
+      "color": "#6f4a3d",
+      "id": "mat-tile",
+      "name": "roof tile"
+    },
+    {
+      "color": "#8a6a3d",
+      "id": "mat-timber",
+      "name": "timber"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp-demo",
+    "notes": []
+  },
+  "name": "BuildApp demo house",
+  "openings": [
+    {
+      "height": 2.1,
+      "id": "op-balcony",
+      "kind": "DOOR",
+      "name": "Balcony door opening",
+      "offset": 4.55,
+      "sill": 0,
+      "wallId": "u-rear",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "plan callout 100/210",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 2.1,
+      "id": "op-entrance",
+      "kind": "DOOR",
+      "name": "Entrance door opening",
+      "offset": 1,
+      "sill": 0,
+      "wallId": "g-front",
+      "width": 1
+    },
+    {
+      "height": 1,
+      "id": "op-gar-1",
+      "kind": "WINDOW",
+      "offset": 2.5,
+      "sill": 1.2,
+      "wallId": "gar-right",
+      "width": 1
+    },
+    {
+      "height": 2.2,
+      "id": "op-garage-door",
+      "kind": "DOOR",
+      "name": "Garage door opening",
+      "offset": 1,
+      "sill": 0,
+      "wallId": "gar-front",
+      "width": 2.5
+    },
+    {
+      "evidence": {
+        "locator": "plan callout 150/140",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 1.4,
+      "id": "op-gf-1",
+      "kind": "WINDOW",
+      "offset": 3.5,
+      "sill": 0.9,
+      "wallId": "g-front",
+      "width": 1.5
+    },
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 1.4,
+      "id": "op-gf-2",
+      "kind": "WINDOW",
+      "offset": 7,
+      "sill": 0.9,
+      "wallId": "g-front",
+      "width": 1.8
+    },
+    {
+      "height": 1.4,
+      "id": "op-gl-1",
+      "kind": "WINDOW",
+      "offset": 2.5,
+      "sill": 0.9,
+      "wallId": "g-left",
+      "width": 1.5
+    },
+    {
+      "height": 1.4,
+      "id": "op-gr-1",
+      "kind": "WINDOW",
+      "offset": 2,
+      "sill": 0.9,
+      "wallId": "g-rear",
+      "width": 1.5
+    },
+    {
+      "height": 1.4,
+      "id": "op-gr-2",
+      "kind": "WINDOW",
+      "offset": 6.5,
+      "sill": 0.9,
+      "wallId": "g-rear",
+      "width": 1.8
+    },
+    {
+      "height": 1.2,
+      "id": "op-grt-1",
+      "kind": "WINDOW",
+      "offset": 6.2,
+      "sill": 1,
+      "wallId": "g-right",
+      "width": 0.8
+    },
+    {
+      "height": 2.05,
+      "id": "op-partition",
+      "kind": "DOOR",
+      "name": "Kitchen door opening",
+      "offset": 3,
+      "sill": 0,
+      "wallId": "g-partition",
+      "width": 0.9
+    },
+    {
+      "height": 1.4,
+      "id": "op-uf-1",
+      "kind": "WINDOW",
+      "offset": 1.5,
+      "sill": 0.9,
+      "wallId": "u-front",
+      "width": 1.5
+    },
+    {
+      "height": 1.4,
+      "id": "op-uf-2",
+      "kind": "WINDOW",
+      "offset": 6.5,
+      "sill": 0.9,
+      "wallId": "u-front",
+      "width": 1.5
+    },
+    {
+      "height": 1.4,
+      "id": "op-ul-gable",
+      "kind": "WINDOW",
+      "name": "Gable window opening",
+      "offset": 3.1,
+      "sill": 0.9,
+      "wallId": "u-left",
+      "width": 1.2
+    },
+    {
+      "height": 1.4,
+      "id": "op-ur-1",
+      "kind": "WINDOW",
+      "offset": 1.5,
+      "sill": 0.9,
+      "wallId": "u-rear",
+      "width": 1.2
+    }
+  ],
+  "railings": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3,
+        "z": 9.5
+      },
+      "height": 1.1,
+      "hostId": "balcony-rear",
+      "id": "rail-left",
+      "infill": "BARS",
+      "levelId": "upper",
+      "name": "Balcony railing, left",
+      "postSpacing": 0.75,
+      "start": {
+        "x": 3,
+        "z": 8
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7,
+        "z": 9.5
+      },
+      "height": 1.1,
+      "hostId": "balcony-rear",
+      "id": "rail-rear",
+      "infill": "GLASS",
+      "levelId": "upper",
+      "name": "Balcony railing, rear",
+      "postSpacing": 1,
+      "start": {
+        "x": 3,
+        "z": 9.5
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7,
+        "z": 8
+      },
+      "height": 1.1,
+      "hostId": "balcony-rear",
+      "id": "rail-right",
+      "infill": "BARS",
+      "levelId": "upper",
+      "name": "Balcony railing, right",
+      "postSpacing": 0.75,
+      "start": {
+        "x": 7,
+        "z": 9.5
+      }
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 2.85,
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 15,
+        "maxZ": 6,
+        "minX": 10,
+        "minZ": 0
+      },
+      "id": "roof-garage",
+      "kind": "FLAT",
+      "levelId": "ground",
+      "materialId": "mat-membrane",
+      "name": "Garage flat roof",
+      "overhang": 0,
+      "pitchDeg": 0,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    },
+    {
+      "eaveOffset": 2.9,
+      "evidence": {
+        "locator": "section: pitch 35°",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "footprint": {
+        "maxX": 10,
+        "maxZ": 8,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-main",
+      "kind": "GABLE",
+      "levelId": "upper",
+      "materialId": "mat-tile",
+      "name": "Main gable roof",
+      "overhang": 0.4,
+      "pitchDeg": 35,
+      "ridgeAxis": "X",
+      "thickness": 0.25
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room-bath",
+      "levelId": "upper",
+      "name": "Bathroom",
+      "polygon": [
+        {
+          "x": 5,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 7.7
+        },
+        {
+          "x": 5,
+          "z": 7.7
+        }
+      ],
+      "usage": "bathroom"
+    },
+    {
+      "id": "room-bedroom",
+      "levelId": "upper",
+      "name": "Bedroom",
+      "polygon": [
+        {
+          "x": 0.3,
+          "z": 0.3
+        },
+        {
+          "x": 5,
+          "z": 0.3
+        },
+        {
+          "x": 5,
+          "z": 7.7
+        },
+        {
+          "x": 0.3,
+          "z": 7.7
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "id": "room-garage",
+      "levelId": "ground",
+      "name": "Garage",
+      "polygon": [
+        {
+          "x": 10,
+          "z": 0.3
+        },
+        {
+          "x": 14.7,
+          "z": 0.3
+        },
+        {
+          "x": 14.7,
+          "z": 5.7
+        },
+        {
+          "x": 10,
+          "z": 5.7
+        }
+      ],
+      "usage": "garage"
+    },
+    {
+      "id": "room-kitchen",
+      "levelId": "ground",
+      "name": "Kitchen",
+      "polygon": [
+        {
+          "x": 6.12,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 7.7
+        },
+        {
+          "x": 6.12,
+          "z": 7.7
+        }
+      ],
+      "usage": "kitchen"
+    },
+    {
+      "id": "room-living",
+      "levelId": "ground",
+      "name": "Living room",
+      "polygon": [
+        {
+          "x": 0.3,
+          "z": 0.3
+        },
+        {
+          "x": 6,
+          "z": 0.3
+        },
+        {
+          "x": 6,
+          "z": 7.7
+        },
+        {
+          "x": 0.3,
+          "z": 7.7
+        }
+      ],
+      "usage": "living"
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.0.0",
+  "slabs": [
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "id": "slab-garage",
+      "levelId": "ground",
+      "name": "Garage slab",
+      "polygon": [
+        {
+          "x": 10,
+          "z": 0
+        },
+        {
+          "x": 15,
+          "z": 0
+        },
+        {
+          "x": 15,
+          "z": 6
+        },
+        {
+          "x": 10,
+          "z": 6
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    },
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "id": "slab-ground",
+      "levelId": "ground",
+      "name": "Ground slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 0
+        },
+        {
+          "x": 10,
+          "z": 0
+        },
+        {
+          "x": 10,
+          "z": 8
+        },
+        {
+          "x": 0,
+          "z": 8
+        }
+      ],
+      "thickness": 0.3,
+      "topOffset": 0
+    },
+    {
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "id": "slab-upper",
+      "levelId": "upper",
+      "name": "Upper floor slab",
+      "polygon": [
+        {
+          "x": 0.3,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 0.3
+        },
+        {
+          "x": 9.7,
+          "z": 7.7
+        },
+        {
+          "x": 0.3,
+          "z": 7.7
+        }
+      ],
+      "thickness": 0.25,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [
+    {
+      "footprint": {
+        "maxX": 9.5,
+        "maxZ": 6.5,
+        "minX": 6.5,
+        "minZ": 4
+      },
+      "id": "stair-1",
+      "kind": "PLACEHOLDER",
+      "levelId": "ground",
+      "name": "Stair (placeholder)",
+      "toLevelId": "upper"
+    }
+  ],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 0
+      },
+      "evidence": {
+        "locator": "plan chain 1000",
+        "source": "demo plan sheet",
+        "sourceIds": [
+          "src-plan"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3,
+      "id": "g-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Front wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0.3
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "g-left",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Left wall",
+      "start": {
+        "x": 0,
+        "z": 7.7
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6,
+        "z": 0.3
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 2.75,
+      "id": "g-partition",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Living / kitchen partition",
+      "start": {
+        "x": 6,
+        "z": 7.7
+      },
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "g-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Rear wall",
+      "start": {
+        "x": 10,
+        "z": 8
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 7.7
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "g-right",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Right wall",
+      "start": {
+        "x": 10,
+        "z": 0.3
+      },
+      "thickness": 0.3
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15,
+        "z": 0
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "gar-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-brick",
+      "name": "Garage front wall",
+      "start": {
+        "x": 10,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 6
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "gar-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-brick",
+      "name": "Garage rear wall",
+      "start": {
+        "x": 15,
+        "z": 6
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 15,
+        "z": 5.7
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "gar-right",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-brick",
+      "name": "Garage right wall",
+      "start": {
+        "x": 15,
+        "z": 0.3
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 0
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "u-front",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Upper front wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0.3
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 6,
+      "id": "u-left",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Upper left gable wall",
+      "start": {
+        "x": 0,
+        "z": 7.7
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 3,
+      "id": "u-rear",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Upper rear wall",
+      "start": {
+        "x": 10,
+        "z": 8
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 7.7
+      },
+      "evidence": {
+        "source": "author",
+        "sourceIds": [
+          "src-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "height": 6,
+      "id": "u-right",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Upper right gable wall",
+      "start": {
+        "x": 10,
+        "z": 0.3
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gar-1",
+      "openingId": "op-gar-1"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gf-1",
+      "openingId": "op-gf-1"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gf-2",
+      "openingId": "op-gf-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gl-1",
+      "openingId": "op-gl-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gr-1",
+      "openingId": "op-gr-1"
+    },
+    {
+      "divisions": 3,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-gr-2",
+      "openingId": "op-gr-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-grt-1",
+      "openingId": "op-grt-1"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-uf-1",
+      "openingId": "op-uf-1"
+    },
+    {
+      "divisions": 2,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-uf-2",
+      "openingId": "op-uf-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-ul-gable",
+      "openingId": "op-ul-gable"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "win-ur-1",
+      "openingId": "op-ur-1"
+    }
+  ]
+}

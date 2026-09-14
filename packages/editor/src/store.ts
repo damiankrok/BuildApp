@@ -39,6 +39,8 @@ export type EditorSnapshot = {
   showGrid: boolean
   showAxes: boolean
   view: ViewPreset
+  /** Increments on every setView, so applying the same preset again still re-frames. */
+  viewNonce: number
   canUndo: boolean
   canRedo: boolean
   revision: number
@@ -65,6 +67,7 @@ export class EditorStore {
   private showGrid = true
   private showAxes = true
   private view: ViewPreset = 'perspective'
+  private viewNonce = 0
   private revision = 0
   private lastError: string | null = null
   private listeners = new Set<Listener>()
@@ -96,6 +99,7 @@ export class EditorStore {
         showGrid: this.showGrid,
         showAxes: this.showAxes,
         view: this.view,
+        viewNonce: this.viewNonce,
         canUndo: this.session.canUndo,
         canRedo: this.session.canRedo,
         revision: this.revision,
@@ -261,6 +265,7 @@ export class EditorStore {
 
   setView(v: ViewPreset): void {
     this.view = v
+    this.viewNonce++
     this.notify()
   }
 
