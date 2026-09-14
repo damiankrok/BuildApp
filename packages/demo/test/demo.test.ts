@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { loadModel, serializeModel, validateModel } from '@buildapp/model'
 import { createDemoBuilding, demoBuildingCommands } from '../src/index.js'
@@ -56,5 +58,11 @@ describe('demo building', () => {
     expect(ids(back.model)).toEqual(ids(m))
     // building twice gives identical bytes: the DSL is deterministic
     expect(serializeModel(createDemoBuilding())).toBe(json)
+  })
+
+  it('matches the frozen 1.1.0 fixture byte for byte', () => {
+    // If the demo or the serializer changes on purpose, re-freeze packages/model/test/fixtures/demo-house-1.1.0.json in the same change.
+    const fixture = readFileSync(resolve(import.meta.dirname, '../../model/test/fixtures/demo-house-1.1.0.json'), 'utf8')
+    expect(serializeModel(createDemoBuilding())).toBe(fixture)
   })
 })
