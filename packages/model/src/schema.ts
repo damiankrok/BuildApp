@@ -1,0 +1,487 @@
+/**
+ * CanonicalBuildingModel — the versioned source of truth.
+ *
+ * Every semantic object has a stable `id`. Objects reference each other by id:
+ *
+ *   Window -> Opening -> Wall -> Level -> Building
+ *   Door   -> Opening -> Wall -> Level -> Building
+ *   Room   -> Level, Slab -> Level, Roof -> Level, Balcony -> Level, ...
+ *
+ * Vertical positions inside a level are *offsets from that level's finished
+ * floor elevation*, so moving a level moves everything that stands on it. Plan
+ * positions are world x/z. Lengths are metres, angles degrees.
+ *
+ * The schemas here are runtime validation (Zod) and the TypeScript types are
+ * inferred from them, so a model that type-checks and a model that validates
+ * are the same thing.
+ */
+import { z } from 'zod'
+import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
+import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, finite, nonNegative, positive } from './geometry-types.js'
+
+export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
+export const MODEL_SCHEMA_VERSION = '1.0.0' as const
+
+/** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
+export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
+
+/**
+ * The world frame, recorded verbatim in every persisted model so that a file
+ * can never be read in the wrong frame. The values are constants; a model
+ * that states a different frame fails validation.
+ */
+export const MODEL_FRAME = {
+  x: 'right when looking at the front facade',
+  y: 'up (vertical)',
+  z: 'away from the front facade, into the building',
+  origin: 'finished ground-floor level is y = 0; the front facade outer face is z = 0',
+  handedness: 'LEFT_HANDED_AS_SPECIFIED',
+  wallConvention:
+    'a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, ' +
+    'so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom ' +
+    'and material lies to the left of the direction of travel',
+  viewerNote: 'renderers working in a right-handed frame mirror z when building their scene',
+} as const
+
+export const FrameSchema = z
+  .object({
+    x: z.literal(MODEL_FRAME.x),
+    y: z.literal(MODEL_FRAME.y),
+    z: z.literal(MODEL_FRAME.z),
+    origin: z.literal(MODEL_FRAME.origin),
+    handedness: z.literal(MODEL_FRAME.handedness),
+    wallConvention: z.literal(MODEL_FRAME.wallConvention),
+    viewerNote: z.literal(MODEL_FRAME.viewerNote),
+  })
+  .strict()
+
+export const UnitsSchema = z.object({ length: z.literal('m'), angle: z.literal('deg') }).strict()
+export const MODEL_UNITS = { length: 'm', angle: 'deg' } as const
+
+// ---------------------------------------------------------------------------
+// Semantic objects
+// ---------------------------------------------------------------------------
+
+const base = {
+  id: IdSchema,
+  name: z.string().optional(),
+  evidence: EvidenceSchema.optional(),
+  /** Free-form tags for future tooling (e.g. "front-facade"). */
+  tags: z.array(z.string()).optional(),
+}
+
+export const BuildingSchema = z
+  .object({
+    ...base,
+    note: z.string().optional(),
+  })
+  .strict()
+export type Building = z.infer<typeof BuildingSchema>
+
+export const LevelSchema = z
+  .object({
+    ...base,
+    buildingId: IdSchema,
+    /** Ordering, ground floor = 0, upper floors positive, basements negative. */
+    index: z.number().int(),
+    /** Finished floor elevation, world y. */
+    elevation: finite,
+    /** Nominal storey height (finished floor to next finished floor). */
+    height: positive,
+  })
+  .strict()
+export type Level = z.infer<typeof LevelSchema>
+
+export const RoomSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    polygon: PlanPolygonSchema,
+    /** Room usage label, free text ("kitchen"). */
+    usage: z.string().optional(),
+  })
+  .strict()
+export type Room = z.infer<typeof RoomSchema>
+
+/**
+ * Where a wall stops at the top.
+ *
+ * FLAT — at `height`.
+ * FOLLOW_ROOF — at min(`height`, underside of the named roof). A gable end
+ *   wall under a gable roof therefore rises into the gable; an eave wall
+ *   under the same roof is capped at the roof's underside.
+ * POLYLINE — an explicit height along the wall's own `u` axis.
+ */
+export const WallTopProfileSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('FLAT') }).strict(),
+  z.object({ kind: z.literal('FOLLOW_ROOF'), roofId: IdSchema }).strict(),
+  z
+    .object({
+      kind: z.literal('POLYLINE'),
+      points: z.array(z.object({ u: finite, height: positive }).strict()).min(2),
+    })
+    .strict(),
+])
+export type WallTopProfile = z.infer<typeof WallTopProfileSchema>
+
+export const WallSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    /** Outer-face line at the wall base, world x/z. */
+    start: Vec2Schema,
+    end: Vec2Schema,
+    thickness: positive,
+    /** Nominal height above the wall base. */
+    height: positive,
+    /** Base above the level's finished floor (normally 0). */
+    baseOffset: finite,
+    kind: z.enum(['EXTERIOR', 'INTERIOR']),
+    topProfile: WallTopProfileSchema.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Wall = z.infer<typeof WallSchema>
+
+export const OpeningKindSchema = z.enum(['WINDOW', 'DOOR', 'PASSAGE'])
+export type OpeningKind = z.infer<typeof OpeningKindSchema>
+
+/**
+ * A rectangular hole through its host wall, stated in the host wall's own
+ * frame: `offset` along the wall from `start`, `sill` above the wall base.
+ */
+export const OpeningSchema = z
+  .object({
+    ...base,
+    wallId: IdSchema,
+    kind: OpeningKindSchema,
+    offset: nonNegative,
+    sill: nonNegative,
+    width: positive,
+    height: positive,
+  })
+  .strict()
+export type Opening = z.infer<typeof OpeningSchema>
+
+/**
+ * A window filling an opening: frame + glazing, as separate geometry parts.
+ * `divisions` splits the glazing into vertical panes with mullions, which is
+ * where future sash/pivot behaviour attaches.
+ */
+export const WindowSchema = z
+  .object({
+    ...base,
+    openingId: IdSchema,
+    frameWidth: positive,
+    frameDepth: positive,
+    /** Distance from the wall's outer face to the frame's outer face. */
+    frameInset: nonNegative,
+    glassThickness: positive,
+    divisions: z.number().int().min(1),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Window = z.infer<typeof WindowSchema>
+
+/**
+ * A door filling an opening: frame, leaf, handle. The leaf pivots about a
+ * vertical axis on `hingeSide` (as seen from outside, along the wall's `u`)
+ * and is rotated by `openAngle` degrees towards `swing`.
+ */
+export const DoorSchema = z
+  .object({
+    ...base,
+    openingId: IdSchema,
+    hingeSide: z.enum(['LEFT', 'RIGHT']),
+    swing: z.enum(['IN', 'OUT']),
+    openAngle: z.number().finite().min(0).max(180),
+    leafThickness: positive,
+    frameWidth: positive,
+    frameDepth: positive,
+    frameInset: nonNegative,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Door = z.infer<typeof DoorSchema>
+
+export const SlabSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    polygon: PlanPolygonSchema,
+    /** Top surface above the level's finished floor (0 = it is the floor). */
+    topOffset: finite,
+    thickness: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Slab = z.infer<typeof SlabSchema>
+
+export const RoofKindSchema = z.enum(['GABLE', 'FLAT'])
+export type RoofKind = z.infer<typeof RoofKindSchema>
+
+/**
+ * A roof over a plan rectangle. `eaveOffset` is the height of the roof's top
+ * surface at the footprint edge, above the level's finished floor. A gable
+ * rises from both eaves at `pitchDeg` to a ridge along `ridgeAxis` through the
+ * footprint's middle; a flat roof is a plate at the eave.
+ */
+export const RoofSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    kind: RoofKindSchema,
+    footprint: PlanRectSchema,
+    eaveOffset: finite,
+    pitchDeg: z.number().finite().min(0).max(85),
+    ridgeAxis: z.enum(['X', 'Z']),
+    overhang: nonNegative,
+    thickness: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Roof = z.infer<typeof RoofSchema>
+
+export const BalconySchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    kind: z.enum(['BALCONY', 'TERRACE', 'LOGGIA']),
+    footprint: PlanRectSchema,
+    topOffset: finite,
+    thickness: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Balcony = z.infer<typeof BalconySchema>
+
+export const RailingSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    start: Vec2Schema,
+    end: Vec2Schema,
+    /** Base of the railing above the level's finished floor. */
+    baseOffset: finite,
+    height: positive,
+    postSpacing: positive,
+    infill: z.enum(['GLASS', 'BARS', 'NONE']),
+    /** The balcony / terrace this railing guards, when it does. */
+    hostId: IdSchema.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Railing = z.infer<typeof RailingSchema>
+
+export const ChimneySchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    footprint: PlanRectSchema,
+    baseOffset: finite,
+    height: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Chimney = z.infer<typeof ChimneySchema>
+
+/** Stair placeholder: a footprint that connects two levels. Geometry is a later stage. */
+export const StairSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    toLevelId: IdSchema,
+    footprint: PlanRectSchema,
+    kind: z.literal('PLACEHOLDER'),
+  })
+  .strict()
+export type Stair = z.infer<typeof StairSchema>
+
+export const MaterialSchema = z
+  .object({
+    id: IdSchema,
+    name: z.string(),
+    /** `#rrggbb` */
+    color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+    opacity: z.number().min(0).max(1).optional(),
+    note: z.string().optional(),
+  })
+  .strict()
+export type Material = z.infer<typeof MaterialSchema>
+
+export const ConstraintSchema = z
+  .object({
+    ...base,
+    kind: z.enum(['FIXED_VALUE', 'EQUAL', 'ALIGN', 'NOTE']),
+    targetIds: z.array(IdSchema).min(1),
+    /** Property the constraint speaks about, e.g. "height", "thickness". */
+    property: z.string().optional(),
+    value: finite.optional(),
+    tolerance: nonNegative.optional(),
+    note: z.string().optional(),
+  })
+  .strict()
+export type Constraint = z.infer<typeof ConstraintSchema>
+
+// ---------------------------------------------------------------------------
+// The model
+// ---------------------------------------------------------------------------
+
+export const CanonicalBuildingModelSchema = z
+  .object({
+    schema: z.literal(MODEL_SCHEMA_NAME),
+    schemaVersion: z.literal(MODEL_SCHEMA_VERSION),
+    id: IdSchema,
+    name: z.string(),
+    units: UnitsSchema,
+    frame: FrameSchema,
+    building: BuildingSchema.nullable(),
+    levels: z.array(LevelSchema),
+    rooms: z.array(RoomSchema),
+    walls: z.array(WallSchema),
+    openings: z.array(OpeningSchema),
+    windows: z.array(WindowSchema),
+    doors: z.array(DoorSchema),
+    slabs: z.array(SlabSchema),
+    roofs: z.array(RoofSchema),
+    balconies: z.array(BalconySchema),
+    railings: z.array(RailingSchema),
+    chimneys: z.array(ChimneySchema),
+    stairs: z.array(StairSchema),
+    materials: z.array(MaterialSchema),
+    constraints: z.array(ConstraintSchema),
+    evidenceSources: z.array(EvidenceSourceSchema),
+    meta: z
+      .object({
+        createdWith: z.string(),
+        notes: z.array(z.string()),
+      })
+      .strict(),
+  })
+  .strict()
+
+export type CanonicalBuildingModel = z.infer<typeof CanonicalBuildingModelSchema>
+
+/** The collections that hold semantic objects, in canonical order. */
+export const OBJECT_COLLECTIONS = [
+  'levels',
+  'rooms',
+  'walls',
+  'openings',
+  'windows',
+  'doors',
+  'slabs',
+  'roofs',
+  'balconies',
+  'railings',
+  'chimneys',
+  'stairs',
+  'materials',
+  'constraints',
+  'evidenceSources',
+] as const
+
+export type ObjectCollection = (typeof OBJECT_COLLECTIONS)[number]
+
+export const SEMANTIC_KINDS = [
+  'building',
+  'level',
+  'room',
+  'wall',
+  'opening',
+  'window',
+  'door',
+  'slab',
+  'roof',
+  'balcony',
+  'railing',
+  'chimney',
+  'stair',
+  'material',
+  'constraint',
+  'evidenceSource',
+] as const
+
+export type SemanticKind = (typeof SEMANTIC_KINDS)[number]
+
+export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, ObjectCollection> = {
+  level: 'levels',
+  room: 'rooms',
+  wall: 'walls',
+  opening: 'openings',
+  window: 'windows',
+  door: 'doors',
+  slab: 'slabs',
+  roof: 'roofs',
+  balcony: 'balconies',
+  railing: 'railings',
+  chimney: 'chimneys',
+  stair: 'stairs',
+  material: 'materials',
+  constraint: 'constraints',
+  evidenceSource: 'evidenceSources',
+}
+
+export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 'building'>> = {
+  levels: 'level',
+  rooms: 'room',
+  walls: 'wall',
+  openings: 'opening',
+  windows: 'window',
+  doors: 'door',
+  slabs: 'slab',
+  roofs: 'roof',
+  balconies: 'balcony',
+  railings: 'railing',
+  chimneys: 'chimney',
+  stairs: 'stair',
+  materials: 'material',
+  constraints: 'constraint',
+  evidenceSources: 'evidenceSource',
+}
+
+export type SemanticObject =
+  | Building
+  | Level
+  | Room
+  | Wall
+  | Opening
+  | Window
+  | Door
+  | Slab
+  | Roof
+  | Balcony
+  | Railing
+  | Chimney
+  | Stair
+  | Material
+  | Constraint
+
+/** A fresh, empty, valid model. */
+export function createEmptyModel(id: string, name: string, createdWith = 'buildapp'): CanonicalBuildingModel {
+  return {
+    schema: MODEL_SCHEMA_NAME,
+    schemaVersion: MODEL_SCHEMA_VERSION,
+    id,
+    name,
+    units: { ...MODEL_UNITS },
+    frame: { ...MODEL_FRAME },
+    building: null,
+    levels: [],
+    rooms: [],
+    walls: [],
+    openings: [],
+    windows: [],
+    doors: [],
+    slabs: [],
+    roofs: [],
+    balconies: [],
+    railings: [],
+    chimneys: [],
+    stairs: [],
+    materials: [],
+    constraints: [],
+    evidenceSources: [],
+    meta: { createdWith, notes: [] },
+  }
+}

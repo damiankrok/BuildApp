@@ -1,0 +1,29 @@
+{
+  "name": "@buildapp/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BuildWorld: the semantic 3D building editor / viewer (React + Three.js).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort"
+  },
+  "dependencies": {
+    "@buildapp/commands": "*",
+    "@buildapp/demo": "*",
+    "@buildapp/editor": "*",
+    "@buildapp/geometry": "*",
+    "@buildapp/model": "*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.1.0"
+  }
+}

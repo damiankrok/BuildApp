@@ -1,0 +1,13 @@
+{
+  "name": "@buildapp/architecture-tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@buildapp/model": "*",
+    "@buildapp/commands": "*",
+    "@buildapp/geometry": "*",
+    "@buildapp/demo": "*",
+    "@buildapp/editor": "*"
+  }
+}
