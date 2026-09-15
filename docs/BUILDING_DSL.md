@@ -46,19 +46,21 @@ and defaulted before it touches the model.
 | `createWallJunction` | a CORNER (`a`, `b`, `owner` = `a`'s wall), BUTT or T (`wall`, `againstWallId`) between existing walls | refused if the endpoints gap or overshoot, if an end is already claimed, or if the walls overlap without it |
 | `createSlab` | a slab from a polygon, `topOffset` = 0, `thickness` | |
 | `createRoof` | GABLE or FLAT over a footprint: `eaveOffset`, `pitchDeg`, `ridgeAxis` = X, `overhang` = 0, `thickness` = 0.25; `capWallIds` sets those walls' `topProfile` to `FOLLOW_ROOF` | a FLAT roof gets pitch 0 |
-| `cutOpening` | a structural opening in a wall: `kind`, `offset`, `sill`, `width`, `height` | validated inside the host, not touching side/top edges, not overlapping |
-| `placeWindow` | a window in a WINDOW opening; defaults `frameWidth` 0.07, `frameDepth` 0.08, `frameInset` 0.12, `glassThickness` 0.024, `divisions` 1 | one fill per opening |
+| `cutOpening` | a structural opening in a wall: `kind`, `offset`, `sill`, `width`, `height`; `head?` `{ kind: 'RAKED', heightFar }` for a head that rises from `height` at the near jamb to `heightFar` at the far jamb; `leaves?` `[{ wallId, offset }]` for further parallel walls the same hole passes through | validated inside the host (and inside every leaf), not touching side/top edges, not overlapping |
+| `cutRoofOpening` | a ROOFLIGHT or PENETRATION cut through a roof over a plan `footprint`; a penetration names its chimney in `throughId` | strictly inside the covered rectangle, on one slope, clear of other roof openings |
+| `placeWindow` | a window in a WINDOW opening; defaults `frameWidth` 0.07, `frameDepth` 0.08, `frameInset` 0.12, `glassThickness` 0.024, `divisions` 1; `mullions?` explicit fractions of the width | one fill per opening; a raked opening gets a trapezoid frame |
+| `placeRooflight` | a rooflight unit in a ROOFLIGHT roof opening; defaults `frameWidth` 0.07, `glassThickness` 0.024 | one unit per roof opening |
 | `placeDoor` | a door in a DOOR opening; defaults `hingeSide` LEFT, `swing` IN, `openAngle` 0, `leafThickness` 0.045, `frameWidth` 0.06, `frameDepth` 0.12, `frameInset` 0.1 | |
 | `createBalcony` | BALCONY/TERRACE/LOGGIA plate over a footprint | |
 | `createRailing` | posts, top rail and infill from `start` to `end`; `height` 1.1, `postSpacing` 1.2, `infill` BARS, `hostId?` | |
 | `placeChimney` | a box over a footprint, `baseOffset`, `height` | |
 | `createStairPlaceholder` | a footprint linking two levels | geometry is a later stage |
 | `defineMaterial` / `assignMaterial` | materials and their assignment (`materialId: null` clears) | walls, windows, doors, slabs, roofs, balconies, railings, chimneys |
-| `moveFeature` | `dx`, `dy`, `dz`, `dAlong` — walls/railings/rooms/slabs/rect features move in plan, openings along their wall, levels vertically | windows/doors move with their opening |
-| `resizeFeature` | `width`, `height`, `thickness`, `length`, `footprint` — accepted per kind, the rest rejected by name | |
+| `moveFeature` | `dx`, `dy`, `dz`, `dAlong` — walls/railings/rooms/slabs/rect features (roof openings included) move in plan, openings along their wall (their leaves follow, signed by each leaf wall's direction), levels vertically | windows/doors move with their opening |
+| `resizeFeature` | `width`, `height`, `thickness`, `length`, `footprint` (rect features and roof openings) — accepted per kind, the rest rejected by name | |
 | `setProperty` | one property (`"height"`, `"start.x"`, …); the object is re-validated against its schema | `id` is immutable |
 | `addConstraint` | FIXED_VALUE / EQUAL / ALIGN / NOTE over target ids | recorded, not yet solved |
-| `removeFeature` | removes the object and, with `cascade` (default), its dependants: a wall's openings and their fills, a level's features, an opening's fill; clears dangling material/host/roof references; reports every removed id | `cascade: false` refuses when dependants exist |
+| `removeFeature` | removes the object and, with `cascade` (default), its dependants: a wall's openings and their fills, a level's features, an opening's fill, a roof's openings and their rooflights, a chimney's penetrations; removing a leaf wall strips that leaf from its opening; clears dangling material/host/roof references; reports every removed id | `cascade: false` refuses when dependants exist |
 | `setEvidence` / `addEvidenceSource` | provenance | |
 | `setModelName` | | |
 
@@ -101,7 +103,8 @@ written by hand.
 
 ## Ids
 
-State an `id` to choose it; omit it to get a deterministic `<kind>-<n>`.
+State an `id` to choose it; omit it to get a deterministic `<kind>-<n>`
+(`roof-opening-<n>`, `rooflight-<n>` for the 1.2.0 kinds).
 
 ## The demo building
 
@@ -114,3 +117,15 @@ balcony — the kitchen door stands 35° open), five rooms, a rear balcony with
 three railings, a chimney, a stair placeholder, materials, constraints and
 evidence. `createDemoBuilding()` is `runCommands(createEmptyModel(...), demoBuildingCommands())`,
 which an architecture test asserts.
+
+## The Marcówki reference
+
+`packages/reference-marcowki` transcribes a real catalogue house, *Dom w
+marcówkach (GE)*, into 145 commands of this vocabulary and nothing else —
+no new command was added for it. `marcowkiCommands()` is the stream,
+`createMarcowkiReferenceBuilding()` its replay from an empty model (byte
+equivalence asserted). It exercises everything above including
+`createWallRing` on both storeys, a garage wing joined by a T into the ring,
+five returns butted against ring walls, `FOLLOW_ROOF` partitions, three
+raked gable windows with explicit mullions, three rooflights and two chimney
+penetrations. See `docs/MARCOWKI_REFERENCE_MODEL.md`.

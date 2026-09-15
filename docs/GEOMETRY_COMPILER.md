@@ -12,12 +12,14 @@ type CompiledMesh = {
   objectId: string        // semantic owner — what a picked mesh resolves to
   objectKind: SemanticKind
   part: GeometryPart      // WALL, WALL_REVEAL, WINDOW_FRAME, WINDOW_GLASS, WINDOW_MULLION, DOOR_FRAME,
-                          // DOOR_LEAF, DOOR_HANDLE, SLAB, ROOF, BALCONY, RAILING_POST, RAILING_RAIL,
-                          // RAILING_INFILL, CHIMNEY, ROOM_FLOOR, STAIR_PLACEHOLDER
+                          // DOOR_LEAF, DOOR_HANDLE, SLAB, ROOF, ROOF_REVEAL, ROOFLIGHT_FRAME, ROOFLIGHT_GLASS,
+                          // BALCONY, RAILING_POST, RAILING_RAIL, RAILING_INFILL, CHIMNEY, ROOM_FLOOR,
+                          // STAIR_PLACEHOLDER
   levelId?: string        // for storey isolation
   solidId: string         // the closed solid these triangles belong to
   hostWallId?: string     // reveals and fills: the wall that hosts the opening
-  openingId?: string
+  hostRoofId?: string     // roof reveals and rooflight units: the roof that hosts the roof opening
+  openingId?: string      // the wall opening or roof opening
   structural: boolean     // takes part in duplicate-volume checks
   materialId?: string
   triangles: { a, b, c }[]
@@ -69,12 +71,32 @@ opening cases generalised.
   on its inner face and the eave wedge closes (the reference's PLANE top,
   derived here from the roof). A gable end wall under a gable roof rises to
   the ridge underside. Break points come from the roof's crease line and
-  covered rectangle.
+  covered rectangle, plus every point on either face where the soffit
+  crosses the wall's nominal height (a capped partition that follows the
+  roof only where the roof is lower kinks there, and the kink is a grid
+  line).
 - **Openings.** Real through-cuts. A sill at the base (door) leaves the bottom
   open across the doorway and the solid still closes. Openings whose head
   would reach above the top are refused by name (`OPENING_ABOVE_WALL_TOP`)
   rather than clipped; a wall whose top falls below its base is not compiled
   (`WALL_TOP_BELOW_BASE`).
+- **Raked heads.** An opening with `head: RAKED` has a head line rising
+  linearly from `sill + height` at its near jamb to `sill + heightFar` at
+  the far jamb. Both heads are `b` breaks; the crossings of the head line
+  with every `b` break (and with the top) are `a` breaks, so the head line
+  runs along grid diagonals: cells wholly above the line are solid, cells
+  wholly below are the hole, a cell the line crosses is one quad from the
+  line up to the cell's top. The head reveal is the sloped quad along the
+  line; jambs stop at the head height of their own edge. The trapezoid the
+  wall loses is exactly `(height + heightFar) / 2 · width · thickness`
+  (measured in the generic tests, on a wall that is not the reference).
+- **Multi-leaf openings.** `openingLeaves(opening)` turns one semantic
+  opening into one cut per wall (the host first, then each leaf at its own
+  offset). Every leaf wall tiles its own hole with its own reveals
+  (`objectId = opening`, `solidId = that leaf`, `hostWallId = that leaf`);
+  the fill is emitted once, in the host wall. A ray through the passage
+  meets no material in either leaf; a leaf without its cut is a mutation
+  the generic tests catch.
 - **Ownership.** Wall faces: `objectId = wall`, `solidId = wall`. Reveals:
   `objectId = opening`, `solidId = wall`, `hostWallId`, `openingId`. The
   wall's closed solid is therefore `meshes.filter(m => m.solidId === wallId)`.
@@ -93,6 +115,26 @@ plate `thickness` deep below the eave height over the covered rectangle.
 for FOLLOW_ROOF walls. Pitch is measured back from the emitted normals in
 tests (`upwardPlanes`), never read from the record.
 
+**Roof openings.** Each `RoofOpening` of a roof is a vertical prism cut
+through the plate over its plan rectangle. The plate is tiled in *bands*
+across the ridge direction, broken at every opening's cross edges; along the
+ridge one global set of breaks (every opening's along edges, on every band,
+on both slopes and on the eave faces) keeps the tiling watertight: a band
+edge on one slope always meets a vertex on its neighbour, the eave and end
+faces are split on the same breaks, and the four reveals of a hole are split
+wherever a band or an along-break crosses them. The eave and ridge heights
+are computed once and shared so every vertex on a shared edge is the same
+double. Reveals carry `objectId = roofOpening`, `part = ROOF_REVEAL`,
+`solidId = roof`, `hostRoofId`; the roof's closed solid is still
+`meshes.filter(m => m.solidId === roofId)`. A PENETRATION carries its
+chimney's rectangle, so the chimney stack passes through a real hole and the
+overlap oracle reports no shared volume. A ROOFLIGHT opening may be filled by
+a `Rooflight`: a frame ring and a glass pane between the roof's top and
+underside planes over the rectangle inset by `frameWidth`
+(`ROOFLIGHT_FRAME`, `ROOFLIGHT_GLASS`, non-structural, `hostRoofId`,
+`openingId`). The cut is a vertical prism rather than a prism normal to the
+slope; this is stated in the reference model's ledger, not hidden.
+
 Unlike the reference (which built from eave and ridge datums and ignored
 the declared pitch), BuildApp's semantic parameter is the pitch, because it is
 what an editor edits; the ridge height is derived.
@@ -100,8 +142,13 @@ what an editor edits; the ridge height is derived.
 ## Fills (`fills.ts`)
 
 - **Window**: a frame **ring** (one closed manifold, not four boxes), glass
-  panes and mullions per `divisions`, all boxes in the wall's frame at
+  panes and mullions per `divisions` — or at the explicit `mullions`
+  fractions when the record states them — all in the wall's frame at
   `frameInset..frameInset+frameDepth`, glass centred in the frame depth.
+  Under a raked head the ring is a trapezoid (the inner head line is offset
+  from the outer one by `frameWidth · √(1 + rake²)`), the panes are
+  trapezoids and the mullions stop at the inner head line; nothing of the
+  fill reaches above the head (measured).
 - **Door**: a U-shaped frame (jambs + head, one closed solid), a leaf box
   rotated by `openAngle` about a vertical hinge axis on `hingeSide`, towards
   `swing` (IN = into the building), and a handle on the inside face. The
@@ -136,8 +183,12 @@ pairing, exact vertices), `rayHits` / `materialRuns` / `materialLength`
 unioned — a ray through the concatenated triangles of abutting solids is not
 sound), `sharedMaterialLength` and `overlapEstimate` (grid of vertical rays
 over two solids' box intersection), `planeClusters` / `upwardPlanes` (pitch
-from normals), `boundsOf`, and `ringClosureReport` (storey envelope probes,
-`docs/WALL_TOPOLOGY.md`).
+from normals), `boundsOf`, `ringClosureReport` (storey envelope probes,
+`docs/WALL_TOPOLOGY.md`), and since BUILDAPP-01 `depthProbeReport` (a grid
+of parallel rays across a rectangle: first-hit depth per ray, how many stop
+at a stated plane — the recess oracle), `lineCoverage` (what fraction of a
+segment lies inside material, and the longest gap — the balustrade-glass
+oracle) and `pointInPolygon` (plan adjacency of rooms and openings).
 
 The geometry tests measure, they do not read back: wall volume `L·H·T`,
 `(L·H − w·h)·T` with a window, rays through opening centres meeting 0 wall

@@ -27,12 +27,13 @@ BuildWorld                         packages/editor + apps/web
 | `packages/model` | versioned schema (Zod), evidence vocabulary, ids, validation, canonical JSON | zod |
 | `packages/commands` | Building DSL, `applyCommand`, `BuildingSession` (undo/redo) | model |
 | `packages/demo` | the demo house, as a command list | model, commands |
+| `packages/reference-marcowki` | the Marcówki reference specimen: evidence sources, facts, command generation, expected metrics, unresolved ledger (`docs/MARCOWKI_REFERENCE_MODEL.md`) | model, commands |
 | `packages/geometry` | model → `CompiledScene` (walls with real openings, roofs, fills, slabs, …) | model |
 | `packages/verification` | independent oracles: volume, manifold, rays, overlap, plane pitch, storey ring closure | nothing |
 | `packages/editor` | framework-agnostic `EditorStore`: command → model → compile → notify | model, commands, geometry, demo |
-| `apps/web` | BuildWorld UI (React, Three.js) | editor, model types, geometry types |
+| `apps/web` | BuildWorld UI (React, Three.js) | editor, model types, geometry types, the demo and reference factories (toolbar only) |
 | `tests/architecture` | boundary tests that enforce the table above | everything |
-| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md` | |
+| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md` | |
 | `stage-reports/` | per-stage measured results and browser screenshots | |
 
 ## Commands
@@ -43,6 +44,7 @@ npm run typecheck        # tsc over packages and the web app
 npm test                 # vitest: domain, geometry, editor and architecture tests
 npm run build            # typecheck + production build of BuildWorld into apps/web/dist
 npm run e2e              # build + Playwright browser verification of the production build
+npm run audit:marcowki   # measured source parity of the Marcówki reference model (independent oracles)
 npm run dev              # BuildWorld dev server, http://localhost:5173
 npm run preview          # serve the production build, http://localhost:4173
 npm run verify           # typecheck + test + build + e2e

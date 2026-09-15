@@ -9,7 +9,7 @@ Three.js objects. Implemented in `packages/model`.
 ```json
 {
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.2.0",
   "id": "demo-house",
   "name": "BuildApp demo house",
   "units": { "length": "m", "angle": "deg" },
@@ -17,15 +17,16 @@ Three.js objects. Implemented in `packages/model`.
   "building": { "id": "house", "name": "Demo house" },
   "levels": [...], "rooms": [...], "walls": [...], "wallJunctions": [...], "wallRings": [...],
   "openings": [...], "windows": [...], "doors": [...],
-  "slabs": [...], "roofs": [...], "balconies": [...], "railings": [...], "chimneys": [...], "stairs": [...],
+  "slabs": [...], "roofs": [...], "roofOpenings": [...], "rooflights": [...],
+  "balconies": [...], "railings": [...], "chimneys": [...], "stairs": [...],
   "materials": [...], "constraints": [...], "evidenceSources": [...],
   "meta": { "createdWith": "buildapp-demo", "notes": [] }
 }
 ```
 
 `schema` is a literal in the Zod schema. `schemaVersion` is the current
-version `1.1.0`; older supported versions are migrated explicitly (below) and
-anything else is refused. Every semantic object has a stable `id`
+version `1.2.0`; older supported versions (`1.0.0`, `1.1.0`) are migrated
+explicitly (below) and anything else is refused. Every semantic object has a stable `id`
 (`[A-Za-z0-9_.:-]+`), unique across all collections including the building.
 Ids are never renamed (`setProperty` refuses `id`) and survive save/load
 byte for byte.
@@ -89,11 +90,13 @@ level moves what stands on it. Opening `sill` is above the wall base.
 | `Wall` | `start`, `end`, `thickness`, `height`, `baseOffset`, `kind` EXTERIOR/INTERIOR, `topProfile`, `materialId` | `levelId`, `topProfile.roofId` |
 | `WallJunction` | `kind` CORNER (`a`, `b` wall ends, `owner`) / BUTT / T (`wall` end, `againstWallId`), `tolerance` | wall ends `{ wallId, end: START/END }` |
 | `WallRing` | `wallIds` in traversal order, `junctionIds` one per vertex | `levelId`, walls, junctions |
-| `Opening` | `kind` WINDOW/DOOR/PASSAGE, `offset` (along the wall), `sill`, `width`, `height` — wall-local | `wallId` |
-| `Window` | `frameWidth`, `frameDepth`, `frameInset`, `glassThickness`, `divisions` | `openingId` |
+| `Opening` | `kind` WINDOW/DOOR/PASSAGE, `offset` (along the wall), `sill`, `width`, `height` — wall-local; `head` LEVEL (default) or RAKED `{ heightFar }` (the head rises linearly from `height` at the near jamb to `heightFar` at the far jamb — a gable window under a rake); `leaves` `[{ wallId, offset }]` — further parallel walls on the same level the same hole passes through (a passage through two abutting leaves) | `wallId`, `leaves[].wallId` |
+| `Window` | `frameWidth`, `frameDepth`, `frameInset`, `glassThickness`, `divisions`, `mullions` (explicit fractions 0..1 of the width, overriding equal `divisions`) | `openingId` |
 | `Door` | `hingeSide` LEFT/RIGHT, `swing` IN/OUT, `openAngle` 0..180°, `leafThickness`, `frameWidth`, `frameDepth`, `frameInset` | `openingId` |
 | `Slab` | `polygon`, `topOffset`, `thickness` | `levelId` |
 | `Roof` | `kind` GABLE/FLAT, `footprint` (plan rect), `eaveOffset`, `pitchDeg`, `ridgeAxis` X/Z, `overhang`, `thickness` | `levelId` |
+| `RoofOpening` | `kind` ROOFLIGHT/PENETRATION, `footprint` (plan rect inside the covered rectangle, on one slope), `throughId` (a PENETRATION names the chimney whose footprint it carries) | `roofId`, `throughId` |
+| `Rooflight` | `frameWidth`, `glassThickness`, `materialId` — the unit filling a ROOFLIGHT opening | `roofOpeningId` |
 | `Balcony` | `kind` BALCONY/TERRACE/LOGGIA, `footprint`, `topOffset`, `thickness` | `levelId` |
 | `Railing` | `start`, `end`, `baseOffset`, `height`, `postSpacing`, `infill` GLASS/BARS/NONE | `levelId`, `hostId` |
 | `Chimney` | `footprint`, `baseOffset`, `height` | `levelId` |
@@ -105,6 +108,21 @@ level moves what stands on it. Opening `sill` is above the wall base.
 `Wall.topProfile` is `FLAT` (default), `FOLLOW_ROOF { roofId }` (the wall
 stops at `min(height, roof underside)` — gable ends rise into the gable, eave
 walls die into the soffit) or `POLYLINE { points: [{u, height}] }`.
+
+A raked head is a property of the hole, not of the fill: the window in it
+gets a trapezoid frame from the compiler. A door refuses a raked opening
+(`FILL_PROFILE_UNSUPPORTED`). Leaves make one semantic opening span several
+walls; the host wall's leaf comes first, each leaf states the opening's
+offset along its own wall, and every leaf must be a distinct wall on the
+same level, parallel to the host (`OPENING_LEAF_INVALID`,
+`OPENING_LEAF_LEVEL_MISMATCH`, `OPENING_LEAF_NOT_PARALLEL`). A roof opening
+is a vertical prism cut through the roof plate over its plan rectangle; it
+must lie strictly inside the roof's covered rectangle
+(`ROOF_OPENING_OUTSIDE_HOST`), on one side of a gable's ridge
+(`ROOF_OPENING_CROSSES_RIDGE`), and clear of the roof's other openings
+(`ROOF_OPENINGS_OVERLAP`); a penetration's rectangle equals its chimney's
+(`ROOF_PENETRATION_MISMATCH`); a rooflight fills a ROOFLIGHT opening once
+(`ROOF_OPENING_FILLED_TWICE`, `UNKNOWN_ROOF_OPENING`).
 
 Doors are not flattened into geometry: the model holds a hinge side, a swing
 direction and an open angle; the compiler derives frame, leaf and handle from
@@ -140,7 +158,14 @@ sill at the base is allowed; side and top edges are not), `OPENINGS_OVERLAP`,
 `FILL_KIND_MISMATCH`, `OPENING_FILLED_TWICE`, `FILL_TOO_LARGE`,
 `MALFORMED_POLYGON`, `INVALID_RECT`, `INVALID_ROOF`, `DEGENERATE_WALL`,
 `DEGENERATE_RAILING`, and `SCHEMA` for shape errors (negative heights, bad
-enums, a wrong frame). Wall topology adds `JUNCTION_GAP`,
+enums, a wrong frame, window mullions not strictly increasing). Schema 1.2.0
+adds `FILL_PROFILE_UNSUPPORTED`, `OPENING_LEAF_INVALID`,
+`OPENING_LEAF_LEVEL_MISMATCH`, `OPENING_LEAF_NOT_PARALLEL`,
+`UNKNOWN_ROOF_OPENING`, `ROOF_OPENING_OUTSIDE_HOST`,
+`ROOF_OPENING_CROSSES_RIDGE`, `ROOF_OPENINGS_OVERLAP`,
+`ROOF_OPENING_FILLED_TWICE` and `ROOF_PENETRATION_MISMATCH`; every leaf of a
+multi-leaf opening is validated against its own wall with the opening codes
+above. Wall topology adds `JUNCTION_GAP`,
 `JUNCTION_OVERSHOOT`, `JUNCTION_PARALLEL_WALLS`, `JUNCTION_SELF_REFERENCE`,
 `JUNCTION_OWNER_NOT_PARTICIPANT`, `JUNCTION_LEVEL_MISMATCH`,
 `ENDPOINT_JUNCTION_CONFLICT`, `BUTT_OFF_HOST`, `T_JUNCTION_POSITION`,
@@ -157,20 +182,28 @@ break it.
 | --- | --- | --- |
 | `1.0.0` | BUILDAPP-00 | no topology; corner ownership expressed by hand-trimmed wall extents |
 | `1.1.0` | BUILDAPP-00A | `wallJunctions` and `wallRings` collections; walls on the natural footprint |
+| `1.2.0` | BUILDAPP-01 | `roofOpenings` and `rooflights` collections; optional `Opening.head`, `Opening.leaves`, `Window.mullions` |
 
 Policy (`packages/model/src/migrate.ts`, run by `validateModel` and therefore
 by `loadModel`, `compileBuilding` and the editor's Load):
 
-- a `1.1.0` file loads as is;
-- a `1.0.0` file is migrated **explicitly**: empty `wallJunctions` and
-  `wallRings` are added, `schemaVersion` becomes `1.1.0`, a note is appended
-  to `meta.notes`, and the load reports the warning `SCHEMA_MIGRATED`. Its
-  walls keep their stated extents, so it compiles to exactly the geometry it
-  compiled to under 1.0.0 (tested against the BUILDAPP-00 demo file kept as a
-  fixture: same per-wall bounds and volumes, same triangle count). Re-saving
-  writes a 1.1.0 file;
-- a `1.0.0` file that already carries topology collections is refused
-  (`SCHEMA`), because it would be a mislabelled 1.1.0 file;
+- a `1.2.0` file loads as is;
+- a `1.1.0` file is migrated **explicitly**: empty `roofOpenings` and
+  `rooflights` are added, `schemaVersion` becomes `1.2.0`, a note is appended
+  to `meta.notes`, and the load reports the warning `SCHEMA_MIGRATED`. The
+  optional opening and window fields are absent, so it compiles to exactly
+  the geometry it compiled to under 1.1.0 (tested against the BUILDAPP-00A
+  demo file kept as a fixture: the migrated scene deep-equals the current
+  demo's). Re-saving writes a 1.2.0 file;
+- a `1.0.0` file is migrated through the chain: empty `wallJunctions` and
+  `wallRings` (1.0.0 → 1.1.0), then the roof-opening collections (1.1.0 →
+  1.2.0), one `SCHEMA_MIGRATED` warning and one note per step. Its walls
+  keep their stated extents, so it compiles to exactly the geometry it
+  compiled to under 1.0.0 (same per-wall bounds and volumes, same triangle
+  count);
+- a file stating an older version but already carrying a newer version's
+  collections is refused (`SCHEMA`, naming the collection), because it would
+  be a mislabelled file;
 - any other version is refused with `UNSUPPORTED_SCHEMA_VERSION`, naming the
   supported versions. Nothing is ever reinterpreted silently.
 
@@ -181,8 +214,13 @@ keys sorted recursively, numbers in JavaScript's shortest round-trip form, two
 space indentation, trailing newline. Two models with the same content produce
 identical bytes whatever order they were built in. `loadModel(text)` parses,
 validates and canonicalizes; `parseModel` throws with the issues listed.
-Round-trip tests live in `packages/model/test`, `packages/demo/test` and
-`tests/architecture`.
+Round-trip tests live in `packages/model/test`, `packages/demo/test`,
+`packages/reference-marcowki/test` and `tests/architecture`. Two models are
+frozen as fixtures under `packages/model/test/fixtures`: the demo house at
+every schema version (`demo-house-1.0.0/1.1.0/1.2.0.json`) and the Marcówki
+reference (`marcowki-ge-1.2.0.json`, `docs/MARCOWKI_REFERENCE_MODEL.md`);
+the model and geometry packages load and compile the reference from that
+file alone, without the reference package.
 
 ## Ids
 
