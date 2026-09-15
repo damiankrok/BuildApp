@@ -13,12 +13,13 @@
 | STAGE BUILDAPP-01 — MARCÓWKI REFERENCE MODEL THROUGH THE REAL BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `0df518186bb61b8a365cd9fc11d68ad875be88ca`; implementation `7a6d6168d44f2c75eb0a6bd0974ed1cda72e4478`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01.md` and this row | PASS |
 | STAGE BUILDAPP-01A — MARCÓWKI ARCHITECTURAL FIDELITY CLOSURE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d40fa39733c80bf0b1e35c2233c8ea8ba0c542b7`; implementation `2de2f26328ec45ad99b47da0d9d956e8bc4d4cf9`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01A.md` and this row (the final HEAD, see `git log`) | PASS |
 | STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row | PASS |
-| STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_02.md` and this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs `ced70f0` | PASS |
+| STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `8524a89`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03.md` and this row (the final HEAD, see `git log`) | PASS |
 
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
-  (`buildapp.canonical-building-model` **1.3.0**), explicit units and world
+  (`buildapp.canonical-building-model` **1.4.0**), explicit units and world
   frame recorded in every file, stable ids, evidence vocabulary (SOURCE_EXACT …
   UNRESOLVED) per object and per property, referential and geometric
   validation with named codes, deterministic canonical JSON save/load.
@@ -40,10 +41,16 @@
   `SLAB_HOLES_OVERLAP`, `STAIR_RISE_INVALID`, `STAIR_LAYOUT_INVALID`,
   `STAIR_OUTSIDE_FOOTPRINT`, `DOOR_ASSEMBLY_INVALID`,
   `SURFACE_REGION_HOST_INVALID`, `SURFACE_REGION_OUTSIDE_HOST`.
-  **Explicit schema evolution**: 1.0.0, 1.1.0 and 1.2.0 files migrate on load
-  through explicit chained steps (empty collections added, one
+  Schema 1.4.0 (BUILDAPP-03) adds the `linearSolids` collection: a generic
+  `LinearSolid` is a rectangular bar between two 3D points with its own
+  cross-section basis (`width` seen in elevation, `depth` proud of the host,
+  an optional `rollDeg`), hosted on a wall, roof or slab — the primitive a
+  facade band, a beam, a portal reveal, a fin or a parapet compiles to, with
+  codes `LINEAR_SOLID_DEGENERATE` and `LINEAR_SOLID_HOST_INVALID`.
+  **Explicit schema evolution**: 1.0.0, 1.1.0, 1.2.0 and 1.3.0 files migrate on
+  load through explicit chained steps (empty collections added, one
   `SCHEMA_MIGRATED` warning and one `meta.notes` entry per step, geometry
-  unchanged — tested against the frozen 1.0.0/1.1.0/1.2.0 demo files and the
+  unchanged — tested against the frozen demo files at every version and the
   BUILDAPP-01 Marcówki freeze); a file stating an older version but carrying
   newer collections is refused; other versions are refused
   (`UNSUPPORTED_SCHEMA_VERSION`).
@@ -237,19 +244,49 @@ No emulator or device was available (no `/dev/kvm`, no nested virtualisation),
 so there are no Android screenshots and the GPU render path is unverified by
 execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
 
-## Test / build / browser results (STAGE BUILDAPP-02)
+- **Metric evidence and the reconstruction solver** (STAGE BUILDAPP-03): four
+  new packages that turn what was SEEN into a building candidate, and one that
+  renders the fixtures they are held to.
+  - **`packages/source-metrics`** — `buildapp.metric-evidence-set` **1.0.0**: a
+    real numeric OCR (skeleton matching after Zhang–Suen thinning,
+    aspect-preserving resampling, gap-maximising de-skew, three page
+    orientations with a page-wide vote, per-glyph runners-up and a separate
+    *decidedness*), dimension chains solved as a discrete partition by dynamic
+    programming against one sheet-wide scale voted in pixels, a ladder of level
+    datums fitted as one straight line, and axis-aligned affine registration
+    with robust seeded fitting and reported outliers. Sealed against the source
+    package's bytes AND the observation graph's content.
+  - **`packages/reconstruction`** — `buildapp.primitive-hypothesis-set` **1.0.0**
+    and `buildapp.reconstruction-candidate` **1.0.0**: hypotheses with an
+    explicit basis per parameter (MEASURED / DERIVED / SCALED / CROSS_VIEW /
+    ASSUMED), five-stage fusion that accounts for every sighting it drops,
+    HARD / SOFT / UNRESOLVED constraint classes that are never mixed,
+    contradictions reported rather than averaged, a deterministic solver with a
+    per-step trace, a sealed candidate carrying four input hashes and a
+    Building DSL program that replays to its model byte for byte, a
+    non-iterative projection audit, and post-seal evaluation reporting
+    geometric accuracy and evidence-supported completeness separately.
+  - **`packages/synthetic-drawings`** — complete synthetic sheets (plan, four
+    elevations, section) for a house that exists only in the fixture, in its
+    own typeface, encoded to real PNG bytes by a dependency-free encoder.
+  - **`packages/candidates`** — sealed candidates as data; BuildWorld and the
+    mobile exporter both load by replaying the program, never by re-solving.
+  - `docs/METRIC_EVIDENCE.md`, `docs/PRIMITIVE_RECONSTRUCTION.md`,
+    `docs/RECONSTRUCTION_SOLVER.md`.
+
+## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
 
 | gate | result |
 | --- | --- |
 | `npm run typecheck` | PASS (packages + web app) |
-| `npm test` | **676 passed, 60 files** (379 at the stage's starting HEAD) |
+| `npm test` | **790 passed, 68 files** (737 at the stage's starting HEAD) |
 | `npm run build` | PASS |
-| `npm run e2e` | **18 passed** — 14 existing plus 4 for the Sources panel |
-| `npm run android:test` | 89 Kotlin unit tests passed |
-| `npm run android:assembleDebug` | BUILD SUCCESSFUL |
-| `npm run observations:audit` on the benchmark graph | 0 errors, 0 warnings |
+| `npm run e2e` | **21 passed** — 18 existing plus 3 for the reconstruction candidate |
+| `npm run android:test` | PASS |
+| `npm run android:assembleDebug` | BUILD SUCCESSFUL; preview APK refreshed |
+| `npm run reconstruct:no-reference` | candidate produced with `packages/reference-marcowki` absent from the tree |
 
 Marcówki observation benchmark (`npm run observations:marcowki`): package
 `src-m2fa281446a8ca-c0499d9df3` (20 assets, 10 published figures, 18 rooms),
@@ -312,27 +349,50 @@ pretending.
   at that separation a flight cannot be told from a fill pattern, so no
   staircase is read from them and the candidates are recorded with the reason
   each was rejected. No side returns were found on the real loggia (18 named
-  gaps say which sides). There is no OCR: dimension chains and level datums are
-  located, not valued. Openings over-detect on rendered elevations, where
+  gaps say which sides). *(BUILDAPP-03 added the OCR: dimension chains and
+  level datums are now valued, and the stair is still refused — see below.)* Openings over-detect on rendered elevations, where
   vertical cladding produces real closed rectangles. The site plan has no
   extractor. Renders are analysed with elevation extractors and their
   measurements corroborate rather than measure. The byte cache is not committed,
   so re-running the benchmark needs one `source:acquire` first.
 
 
+## Known gaps and honest limits (STAGE BUILDAPP-03)
+
+- **The automatic candidate is not final and is not claimed to be.** It gets
+  the footprint width and the ridge height exactly, the depth to 2.1 %, and 3
+  of the reference's 23 openings. Geometric accuracy 56.3 %,
+  evidence-supported completeness 54.3 % — reported separately, never combined.
+- **The stair is REFUSED.** One stair symbol was observed and nothing fixes a
+  going, a rise, a width or a landing. There is no stair in the candidate and
+  the refusal is in the artefact with its reason. The hand-built reference
+  stair was not consulted and not copied.
+- **The roof is one gable over the whole footprint.** The sources show a more
+  complex roof; the derived 28.6° is the pitch that puts the ridge at the
+  height the section states, over the span the solver assumed.
+- **Facade members have no measured depth.** A view that can see depth says
+  they stand proud; nothing says how far. Each is built square in section and
+  named as a hole.
+- **63 observed openings are unexplained** by the candidate, and 8 detections
+  that did not fit the wall they were measured against were refused rather than
+  forced.
+- **No live vision call has been made** in this stage either: `LIVE_PROVIDER_NOT_RUN`.
+
 ## Recommended technical next step
 
-**BUILDAPP-03 — Primitive Reconstruction Solver v1.** The observation layer now
-exists: readings in source-native 2D with tolerances, alternatives, conflicts
-and named gaps, sealed and content-addressed. What is missing is the layer that
-turns them into primitive hypotheses and solves those against each other across
-views, with a scale anchor, into the Building DSL. BUILDAPP-02 deliberately
-stopped short of it and claims no automatic 3D reconstruction.
+**BUILDAPP-04 — Camera-aware Source-View Verification + Semantic Repair Loop.**
+The three things BUILDAPP-03 leaves on the table want the same tool. The roof
+is one gable because nothing decomposed the massing into wings; 63 observed
+openings are unexplained because nothing looked back at the drawing to ask what
+they were; the facade members have no depth because no view was ever solved for
+a camera. A verification pass that renders the candidate into a source view and
+reasons about the DIFFERENCE — rather than measuring the agreement once, as the
+current projection audit does — turns each of those from a hole into a repair.
 
-Two things would make that solver's job materially easier and can be done
+Two things would make that loop's job materially easier and can be done
 alongside it: a **live vision pass** (the provider path is complete and a key is
-all it needs), and an **OCR pass on the dimension chains**, which is the only
-route from pixels to metres that does not depend on a guessed scale.
+all it needs), and **multi-wing massing** in the solver, which is the single
+largest source of the completeness gap above.
 
 ### Standing engineering items, unchanged by this stage
 

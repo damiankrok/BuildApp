@@ -50,8 +50,27 @@ The consequences are deliberate:
   line.
 - **The model stays the only source of truth.** If the bundle and the compiler
   ever disagree, the bundle is wrong. `packages/mobile-scene/test/parity.test.ts`
-  compares them triangle by triangle, for both shipped scenes, against the
+  compares them triangle by triangle, for every shipped scene, against the
   compiler itself rather than against a stored table of expectations.
+
+### The three scenes
+
+| key | what it is |
+| --- | --- |
+| `marcowki` | the hand-built Marcówki reference model |
+| `marcowki-auto` | the **automatic reconstruction candidate**, replayed from its sealed program |
+| `demo` | the BuildApp demo house |
+
+The candidate is built by `modelOf('marcowki-auto')`, which replays the sealed
+`ReconstructionCandidate` and checks the model comes back byte for byte. The
+exporter does not run a solver, and neither does the phone: what ships in the
+APK is the building that was sealed and evaluated, not whatever a solver
+running on a laptop produced that afternoon.
+
+It is a candidate and looks like one on screen only if you know: it has 80
+meshes to the reference's 178, no staircase at all — the solver refused to
+invent one — and a simpler roof. `stage-reports/STAGE_BUILDAPP_03.md` §9 lists
+what it does not know.
 
 ### What is in a bundle
 

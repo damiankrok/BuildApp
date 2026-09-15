@@ -1,0 +1,501 @@
+TRACE  candidate-marcowki-5f452153b8e6c036
+  source package   189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86
+  observations     8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043
+  metric evidence  de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351
+  hypotheses       7713696c8ca6069ce7034d7819ebfce70b33f7f0a54d1d3a46b4df9f045ba01e
+  model            290a173abec8cbe4edc278401fa330ed2b4686229ec3e94eb4ba4eae8d59c096
+
+HARD DIMENSIONS — what was read, where, and how far off the sheet scale it landed
+  hyp-mass.width = 12.05 m
+    two horizontal chains agree on 12.05 m, on asset-rzut-19a11bc745
+    ← 17.18223 cm (DERIVED) on asset-rzut-19a11bc745
+        read as "" at —, DIMENSION_LINE: nothing is printed on this 6.5 px span; its value follows from the scale the rest of the chain agrees on
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 100 cm (READ) on asset-rzut-19a11bc745
+        read as "100" at [530,229 → 543,247], WITNESS_LINE_PAIR: printed between the tick marks 38 px apart on the vertical chain at 547, missing the chain's own scale by 0.170219 px
+        glyphs 1(0.46/0.79) 0(0.59/0.74 alt 4) 0(0.63/0.68 alt 48)
+        token box [530,229 → 543,247] at 14 px, slant -6.842773°, bytes abfdb2625576ef47
+        rejected "104" = 104 cm: a weaker reading of the same characters
+        rejected "108" = 108 cm: implies 2.842105 cm/px against the chain's 2.64342
+        rejected "140" = 140 cm: implies 3.684211 cm/px against the chain's 2.64342
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 30.39933 cm (DERIVED) on asset-rzut-19a11bc745
+        read as "" at —, DIMENSION_LINE: nothing is printed on this 11.5 px span; its value follows from the scale the rest of the chain agrees on
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 1205 cm (READ) on asset-rzut-19a11bc745
+        read as "1205" at [271,9 → 296,22], WITNESS_LINE_PAIR: printed between the tick marks 456 px apart on the horizontal chain at 26, missing the chain's own scale by 0.009467 px
+        glyphs 1(0.52/0.76) 2(0.50/0.52 alt 137) 0(0.63/0.70 alt 845) 5(0.55/0.62 alt 130)
+        token box [271,9 → 296,22] at 14 px, slant -6.842773°, bytes abfdb2625576ef47
+        rejected "1105" = 1105 cm: implies 2.423246 cm/px against the chain's 2.642489
+        rejected "1305" = 1305 cm: implies 2.861842 cm/px against the chain's 2.642489
+        rejected "1705" = 1705 cm: implies 3.739035 cm/px against the chain's 2.642489
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 81.94602 cm (DERIVED) on asset-rzut-19a11bc745
+        read as "" at —, DIMENSION_LINE: nothing is printed on this 31 px span; its value follows from the scale the rest of the chain agrees on
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 751 cm (CHAIN_CORRECTED) on asset-rzut-19a11bc745
+        read as "751" at [530,587 → 543,606], WITNESS_LINE_PAIR: printed between the tick marks 283.5 px apart on the vertical chain at 547, missing the chain's own scale by 0.601656 px
+        glyphs 1(0.41/0.54 alt 375) 5(0.37/0.59 alt 237) 1(0.43/0.79)
+        token box [530,587 → 543,606] at 14 px, slant -13.495733°, bytes abfdb2625576ef47
+        rejected "151" = 151 cm: implies 0.532628 cm/px against the chain's 2.64342
+        rejected "351" = 351 cm: implies 1.238095 cm/px against the chain's 2.64342
+        rejected "121" = 121 cm: implies 0.426808 cm/px against the chain's 2.64342
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+    ← 510 cm (READ) on asset-rzut-19a11bc745
+        read as "510" at [530,349 → 543,368], WITNESS_LINE_PAIR: printed between the tick marks 193 px apart on the vertical chain at 547, missing the chain's own scale by 0.068116 px
+        glyphs 5(0.41/0.58 alt 312) 1(0.58/0.78) 0(0.50/0.70 alt 4)
+        token box [530,349 → 543,368] at 14 px, slant -6.842773°, bytes abfdb2625576ef47
+        rejected "310" = 310 cm: implies 1.606218 cm/px against the chain's 2.64342
+        rejected "110" = 110 cm: implies 0.569948 cm/px against the chain's 2.64342
+        rejected "210" = 210 cm: implies 1.088083 cm/px against the chain's 2.64342
+        sheet registered at 0.026426 m/px, residual 0.019392 m rms over 9 anchors, 0 rejected
+
+  hyp-level-0.height = 3.06 m
+    two printed level datums 3.06 m apart
+
+FACADE LINEAR SOLIDS — the candidates, the depth cues, and what was rejected
+  solid-0
+    7.149938 m long, 0.651899 m in elevation, standing 0.45 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [181,343 → 717,392] depth PROUD_OF_WALL confidence 0.628571
+      length = 7.149938 m [SCALED] 6.577943..7.721933 — 536.017542 px on a facade registered at 0.013339 m/px
+      width = 0.651899 m [SCALED] 0.554114..0.749684 — the member as it is seen in elevation
+      depth = 0.45 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-1
+    12.125151 m long, 0.360153 m in elevation, standing 0.360153 m proud of the left wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [184,316 → 1093,343] depth PROUD_OF_WALL confidence 0.85
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [184,317 → 304,343] depth PROUD_OF_WALL confidence 0.85
+      length = 12.125151 m [SCALED] 11.155139..13.095163 — 909.000005 px on a facade registered at 0.013339 m/px
+      width = 0.360153 m [SCALED] 0.30613..0.414176 — the member as it is seen in elevation
+      depth = 0.360153 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-10
+    3.268055 m long, 0.226464 m in elevation, standing 0.226464 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,142 → 453,159] depth PROUD_OF_WALL confidence 0.91
+      length = 3.268055 m [SCALED] 3.006611..3.529499 — 245 px on a facade registered at 0.013339 m/px
+      width = 0.226464 m [SCALED] 0.192494..0.260434 — the member as it is seen in elevation
+      depth = 0.226464 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-11
+    3.268057 m long, 0.173669 m in elevation, standing 0.173669 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,159 → 453,172] depth PROUD_OF_WALL confidence 0.91
+      length = 3.268057 m [SCALED] 3.006612..3.529502 — 245.000131 px on a facade registered at 0.013339 m/px
+      width = 0.173669 m [SCALED] 0.147619..0.199719 — the member as it is seen in elevation
+      depth = 0.173669 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-12
+    3.268057 m long, 0.213461 m in elevation, standing 0.213461 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,172 → 453,188] depth PROUD_OF_WALL confidence 0.75
+      length = 3.268057 m [SCALED] 3.006612..3.529502 — 245.000128 px on a facade registered at 0.013339 m/px
+      width = 0.213461 m [SCALED] 0.181442..0.24548 — the member as it is seen in elevation
+      depth = 0.213461 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-13
+    3.268055 m long, 0.200085 m in elevation, standing 0.200085 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,187 → 453,202] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [234,186 → 348,202] depth PROUD_OF_WALL confidence 0.75
+      length = 3.268055 m [SCALED] 3.006611..3.529499 — 245 px on a facade registered at 0.013339 m/px
+      width = 0.200085 m [SCALED] 0.170072..0.230098 — the member as it is seen in elevation
+      depth = 0.200085 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-14
+    6.816229 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,204 → 719,219] depth PROUD_OF_WALL confidence 0.81
+      length = 6.816229 m [SCALED] 6.270931..7.361527 — 511 px on a facade registered at 0.013339 m/px
+      width = 0.200468 m [SCALED] 0.170398..0.230538 — the member as it is seen in elevation
+      depth = 0.200468 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-15
+    11.559156 m long, 0.186155 m in elevation, standing 0.186155 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,158 → 1081,172] depth PROUD_OF_WALL confidence 0.75
+      length = 11.559156 m [SCALED] 10.634424..12.483888 — 868 px on a facade registered at 0.013317 m/px
+      width = 0.186155 m [SCALED] 0.158232..0.214078 — the member as it is seen in elevation
+      depth = 0.186155 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-16
+    1.783985 m long, 0.195699 m in elevation, standing 0.195699 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,204 → 347,219] depth PROUD_OF_WALL confidence 0.75
+      length = 1.783985 m [SCALED] 1.641266..1.926704 — 133.962975 px on a facade registered at 0.013317 m/px
+      width = 0.195699 m [SCALED] 0.166344..0.225054 — the member as it is seen in elevation
+      depth = 0.195699 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-17
+    8.016834 m long, 0.253151 m in elevation, standing 0.253151 m proud of the rear wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [223,574 → 500,593] depth PROUD_OF_WALL confidence 0.91
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [501,575 → 825,591] depth PROUD_OF_WALL confidence 0.56
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [217,577 → 1073,593] depth PROUD_OF_WALL confidence 0.56
+      length = 8.016834 m [SCALED] 7.375487..8.658181 — 602 px on a facade registered at 0.013317 m/px
+      width = 0.253151 m [SCALED] 0.215178..0.291124 — the member as it is seen in elevation
+      depth = 0.253151 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-18
+    1.785304 m long, 0.199953 m in elevation, standing 0.199953 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [348,204 → 482,219] depth PROUD_OF_WALL confidence 0.75
+      length = 1.785304 m [SCALED] 1.64248..1.928128 — 134.061993 px on a facade registered at 0.013317 m/px
+      width = 0.199953 m [SCALED] 0.16996..0.229946 — the member as it is seen in elevation
+      depth = 0.199953 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-19
+    3.329681 m long, 0.194279 m in elevation, standing 0.194279 m proud of the right wall; 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [361,234 → 479,248] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [468,234 → 611,249] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [196,234 → 601,248] depth PROUD_OF_WALL confidence 0.81
+      length = 3.329681 m [SCALED] 3.063307..3.596055 — 250.032323 px on a facade registered at 0.013317 m/px
+      width = 0.194279 m [SCALED] 0.165137..0.223421 — the member as it is seen in elevation
+      depth = 0.194279 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-2
+    12.058456 m long, 0.266476 m in elevation, standing 0.266476 m proud of the left wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [185,296 → 1089,316] depth PROUD_OF_WALL confidence 0.817143
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [185,296 → 304,317] depth PROUD_OF_WALL confidence 0.56
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [187,297 → 1091,316] depth PROUD_OF_WALL confidence 0.817143
+      length = 12.058456 m [SCALED] 11.09378..13.023132 — 904.000063 px on a facade registered at 0.013339 m/px
+      width = 0.266476 m [SCALED] 0.226505..0.306447 — the member as it is seen in elevation
+      depth = 0.266476 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-20
+    8.456932 m long, 0.575495 m in elevation, standing 0.45 m proud of the front wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [413,395 → 1047,438] depth PROUD_OF_WALL confidence 0.631429
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [763,395 → 1097,432] depth PROUD_OF_WALL confidence 0.5
+      length = 8.456932 m [SCALED] 7.780377..9.133487 — 634.000405 px on a facade registered at 0.013339 m/px
+      width = 0.575495 m [SCALED] 0.489171..0.661819 — the member as it is seen in elevation
+      depth = 0.45 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-21
+    8.456932 m long, 0.120443 m in elevation, standing 0.120443 m proud of the front wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [413,438 → 1047,447] depth PROUD_OF_WALL confidence 0.56
+      length = 8.456932 m [SCALED] 7.780377..9.133487 — 634.000405 px on a facade registered at 0.013339 m/px
+      width = 0.120443 m [SCALED] 0.102377..0.138509 — the member as it is seen in elevation
+      depth = 0.120443 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-22
+    3.027957 m long, 0.201272 m in elevation, standing 0.201272 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [488,125 → 715,140] depth PROUD_OF_WALL confidence 0.75
+      length = 3.027957 m [SCALED] 2.78572..3.270194 — 227.000293 px on a facade registered at 0.013339 m/px
+      width = 0.201272 m [SCALED] 0.171081..0.231463 — the member as it is seen in elevation
+      depth = 0.201272 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-23
+    3.027947 m long, 0.226204 m in elevation, standing 0.226204 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [488,142 → 715,159] depth PROUD_OF_WALL confidence 0.91
+      length = 3.027947 m [SCALED] 2.785711..3.270183 — 226.999517 px on a facade registered at 0.013339 m/px
+      width = 0.226204 m [SCALED] 0.192273..0.260135 — the member as it is seen in elevation
+      depth = 0.226204 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-24
+    2.947921 m long, 0.173966 m in elevation, standing 0.173966 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [488,159 → 709,172] depth PROUD_OF_WALL confidence 0.75
+      length = 2.947921 m [SCALED] 2.712087..3.183755 — 221.000162 px on a facade registered at 0.013339 m/px
+      width = 0.173966 m [SCALED] 0.147871..0.200061 — the member as it is seen in elevation
+      depth = 0.173966 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-25
+    2.947921 m long, 0.213444 m in elevation, standing 0.213444 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [488,172 → 709,188] depth PROUD_OF_WALL confidence 0.75
+      length = 2.947921 m [SCALED] 2.712087..3.183755 — 221.00012 px on a facade registered at 0.013339 m/px
+      width = 0.213444 m [SCALED] 0.181427..0.245461 — the member as it is seen in elevation
+      depth = 0.213444 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-26
+    3.027955 m long, 0.186726 m in elevation, standing 0.186726 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [488,188 → 715,202] depth PROUD_OF_WALL confidence 0.75
+      length = 3.027955 m [SCALED] 2.785719..3.270191 — 227.000078 px on a facade registered at 0.013339 m/px
+      width = 0.186726 m [SCALED] 0.158717..0.214735 — the member as it is seen in elevation
+      depth = 0.186726 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-27
+    1.639549 m long, 0.19676 m in elevation, standing 0.19676 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [539,204 → 662,219] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,204 → 1081,220] depth PROUD_OF_WALL confidence 0.75
+      length = 1.639549 m [SCALED] 1.508385..1.770713 — 123.117053 px on a facade registered at 0.013317 m/px
+      width = 0.19676 m [SCALED] 0.167246..0.226274 — the member as it is seen in elevation
+      depth = 0.19676 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-28
+    5.206933 m long, 0.2152 m in elevation, standing 0.2152 m proud of the rear wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [542,343 → 933,359] depth PROUD_OF_WALL confidence 0.56
+      length = 5.206933 m [SCALED] 4.790378..5.623488 — 390.998985 px on a facade registered at 0.013317 m/px
+      width = 0.2152 m [SCALED] 0.18292..0.24748 — the member as it is seen in elevation
+      depth = 0.2152 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-29
+    6.896263 m long, 0.170951 m in elevation, standing 0.170951 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [559,250 → 1076,262] depth PROUD_OF_WALL confidence 0.75
+      length = 6.896263 m [SCALED] 6.344562..7.447964 — 516.999995 px on a facade registered at 0.013339 m/px
+      width = 0.170951 m [SCALED] 0.145308..0.196594 — the member as it is seen in elevation
+      depth = 0.170951 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-3
+    4.088319 m long, 0.306286 m in elevation, standing 0.306286 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [185,316 → 492,339] depth PROUD_OF_WALL confidence 0.85
+      length = 4.088319 m [SCALED] 3.761253..4.415385 — 307 px on a facade registered at 0.013317 m/px
+      width = 0.306286 m [SCALED] 0.260343..0.352229 — the member as it is seen in elevation
+      depth = 0.306286 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-30
+    6.896263 m long, 0.191493 m in elevation, standing 0.191493 m proud of the left wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [559,264 → 1076,278] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [785,264 → 1081,278] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [953,264 → 1067,278] depth PROUD_OF_WALL confidence 0.75
+      length = 6.896263 m [SCALED] 6.344562..7.447964 — 517 px on a facade registered at 0.013339 m/px
+      width = 0.191493 m [SCALED] 0.162769..0.220217 — the member as it is seen in elevation
+      depth = 0.191493 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-31
+    1.803183 m long, 0.221715 m in elevation, standing 0.221715 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [590,278 → 725,295] depth PROUD_OF_WALL confidence 0.5
+      length = 1.803183 m [SCALED] 1.658928..1.947438 — 135.181248 px on a facade registered at 0.013339 m/px
+      width = 0.221715 m [SCALED] 0.188458..0.254972 — the member as it is seen in elevation
+      depth = 0.221715 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-32
+    1.986833 m long, 0.214513 m in elevation, standing 0.214513 m proud of the left wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [636,234 → 785,250] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [559,235 → 1076,250] depth PROUD_OF_WALL confidence 0.75
+      length = 1.986833 m [SCALED] 1.827886..2.14578 — 148.949171 px on a facade registered at 0.013339 m/px
+      width = 0.214513 m [SCALED] 0.182336..0.24669 — the member as it is seen in elevation
+      depth = 0.214513 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-33
+    3.369201 m long, 0.346242 m in elevation, standing 0.346242 m proud of the rear wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [680,359 → 933,385] depth PROUD_OF_WALL confidence 0.514286
+      length = 3.369201 m [SCALED] 3.099665..3.638737 — 253 px on a facade registered at 0.013317 m/px
+      width = 0.346242 m [SCALED] 0.294306..0.398178 — the member as it is seen in elevation
+      depth = 0.346242 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-34
+    2.601106 m long, 0.546713 m in elevation, standing 0.45 m proud of the front wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [683,447 → 878,488] depth PROUD_OF_WALL confidence 0.92
+      length = 2.601106 m [SCALED] 2.393018..2.809194 — 195.000059 px on a facade registered at 0.013339 m/px
+      width = 0.546713 m [SCALED] 0.464706..0.62872 — the member as it is seen in elevation
+      depth = 0.45 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-35
+    4.501146 m long, 0.195884 m in elevation, standing 0.195884 m proud of the right wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [743,186 → 1081,201] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,186 → 1081,202] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [754,188 → 1076,202] depth PROUD_OF_WALL confidence 0.75
+      length = 4.501146 m [SCALED] 4.141054..4.861238 — 338 px on a facade registered at 0.013317 m/px
+      width = 0.195884 m [SCALED] 0.166501..0.225267 — the member as it is seen in elevation
+      depth = 0.195884 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-36
+    4.295159 m long, 0.201854 m in elevation, standing 0.201854 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [754,125 → 1076,140] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,125 → 1081,140] depth PROUD_OF_WALL confidence 0.75
+      length = 4.295159 m [SCALED] 3.951546..4.638772 — 322.000121 px on a facade registered at 0.013339 m/px
+      width = 0.201854 m [SCALED] 0.171576..0.232132 — the member as it is seen in elevation
+      depth = 0.201854 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-37
+    4.295158 m long, 0.173876 m in elevation, standing 0.173876 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [754,159 → 1076,172] depth PROUD_OF_WALL confidence 0.75
+      length = 4.295158 m [SCALED] 3.951545..4.638771 — 322.000032 px on a facade registered at 0.013339 m/px
+      width = 0.173876 m [SCALED] 0.147795..0.199957 — the member as it is seen in elevation
+      depth = 0.173876 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-38
+    4.295158 m long, 0.226308 m in elevation, standing 0.226308 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [754,142 → 1076,159] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,142 → 1081,158] depth PROUD_OF_WALL confidence 0.75
+      length = 4.295158 m [SCALED] 3.951545..4.638771 — 322 px on a facade registered at 0.013339 m/px
+      width = 0.226308 m [SCALED] 0.192362..0.260254 — the member as it is seen in elevation
+      depth = 0.226308 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-39
+    4.295158 m long, 0.213382 m in elevation, standing 0.213382 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [754,172 → 1076,188] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [213,172 → 1081,187] depth PROUD_OF_WALL confidence 0.75
+      length = 4.295158 m [SCALED] 3.951545..4.638771 — 322 px on a facade registered at 0.013339 m/px
+      width = 0.213382 m [SCALED] 0.181375..0.245389 — the member as it is seen in elevation
+      depth = 0.213382 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-4
+    4.268483 m long, 0.196449 m in elevation, standing 0.196449 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [196,235 → 516,250] depth PROUD_OF_WALL confidence 0.81
+      length = 4.268483 m [SCALED] 3.927004..4.609962 — 320.000235 px on a facade registered at 0.013339 m/px
+      width = 0.196449 m [SCALED] 0.166982..0.225916 — the member as it is seen in elevation
+      depth = 0.196449 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-40
+    4.281819 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [755,204 → 1076,219] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [914,204 → 1049,219] depth PROUD_OF_WALL confidence 0.75
+      length = 4.281819 m [SCALED] 3.939273..4.624365 — 321 px on a facade registered at 0.013339 m/px
+      width = 0.200468 m [SCALED] 0.170398..0.230538 — the member as it is seen in elevation
+      depth = 0.200468 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-41
+    1.758246 m long, 0.187549 m in elevation, standing 0.187549 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [787,234 → 901,248] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [826,234 → 958,248] depth PROUD_OF_WALL confidence 0.75
+      length = 1.758246 m [SCALED] 1.617586..1.898906 — 132.030153 px on a facade registered at 0.013317 m/px
+      width = 0.187549 m [SCALED] 0.159417..0.215681 — the member as it is seen in elevation
+      depth = 0.187549 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-42
+    1.517377 m long, 0.215142 m in elevation, standing 0.215142 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [787,248 → 901,265] depth PROUD_OF_WALL confidence 0.75
+      length = 1.517377 m [SCALED] 1.395987..1.638767 — 113.942833 px on a facade registered at 0.013317 m/px
+      width = 0.215142 m [SCALED] 0.182871..0.247413 — the member as it is seen in elevation
+      depth = 0.215142 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-43
+    1.517933 m long, 0.192263 m in elevation, standing 0.192263 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [920,234 → 1034,248] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [767,234 → 1081,248] depth PROUD_OF_WALL confidence 0.75
+      length = 1.517933 m [SCALED] 1.396498..1.639368 — 113.984626 px on a facade registered at 0.013317 m/px
+      width = 0.192263 m [SCALED] 0.163424..0.221102 — the member as it is seen in elevation
+      depth = 0.192263 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-44
+    1.517933 m long, 0.215383 m in elevation, standing 0.215383 m proud of the right wall; 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 3 sightings, fused from 3
+    rule linear-solid-from-depth-cue: 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [920,248 → 1034,265] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [953,248 → 1067,264] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [785,248 → 1081,265] depth PROUD_OF_WALL confidence 0.75
+      length = 1.517933 m [SCALED] 1.396498..1.639368 — 113.984626 px on a facade registered at 0.013317 m/px
+      width = 0.215383 m [SCALED] 0.183076..0.24769 — the member as it is seen in elevation
+      depth = 0.215383 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-5
+    4.255142 m long, 0.170506 m in elevation, standing 0.170506 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 2 sightings, fused from 2
+    rule linear-solid-from-depth-cue: 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [197,250 → 516,262] depth PROUD_OF_WALL confidence 0.888571
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [196,248 → 601,257] depth PROUD_OF_WALL confidence 0.8
+      length = 4.255142 m [SCALED] 3.914731..4.595553 — 319.00005 px on a facade registered at 0.013339 m/px
+      width = 0.170506 m [SCALED] 0.14493..0.196082 — the member as it is seen in elevation
+      depth = 0.170506 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-6
+    4.108413 m long, 0.191444 m in elevation, standing 0.191444 m proud of the left wall; 4 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 4 sightings, fused from 4
+    rule linear-solid-from-depth-cue: 4 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [197,264 → 505,278] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [199,265 → 601,280] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [199,263 → 303,280] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [328,264 → 442,280] depth PROUD_OF_WALL confidence 0.75
+      length = 4.108413 m [SCALED] 3.77974..4.437086 — 308.000078 px on a facade registered at 0.013339 m/px
+      width = 0.191444 m [SCALED] 0.162727..0.220161 — the member as it is seen in elevation
+      depth = 0.191444 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-7
+    1.597663 m long, 0.188789 m in elevation, standing 0.188789 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [199,234 → 319,248] depth PROUD_OF_WALL confidence 0.81
+      length = 1.597663 m [SCALED] 1.46985..1.725476 — 119.971658 px on a facade registered at 0.013317 m/px
+      width = 0.188789 m [SCALED] 0.160471..0.217107 — the member as it is seen in elevation
+      depth = 0.188789 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-8
+    11.705643 m long, 0.186735 m in elevation, standing 0.186735 m proud of the right wall; 9 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 2 drawings, 9 sightings, fused from 9
+    rule linear-solid-from-depth-cue: 9 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [202,220 → 1081,234] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [205,219 → 347,234] depth PROUD_OF_WALL confidence 0.81
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [914,219 → 1049,234] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [539,219 → 662,234] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [348,219 → 482,234] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [736,220 → 875,234] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [826,220 → 958,234] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [202,219 → 1076,235] depth PROUD_OF_WALL confidence 0.75
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [636,219 → 785,234] depth PROUD_OF_WALL confidence 0.75
+      length = 11.705643 m [SCALED] 10.769192..12.642094 — 879 px on a facade registered at 0.013317 m/px
+      width = 0.186735 m [SCALED] 0.158725..0.214745 — the member as it is seen in elevation
+      depth = 0.186735 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+  solid-9
+    3.268061 m long, 0.201054 m in elevation, standing 0.201054 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+    seen on 1 drawing, 1 sighting, fused from 1
+    rule linear-solid-from-depth-cue: 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it
+      frame-asset-gotowy-projekt-dom-w-marcowkach- [208,125 → 453,140] depth PROUD_OF_WALL confidence 0.75
+      length = 3.268061 m [SCALED] 3.006616..3.529506 — 245.000491 px on a facade registered at 0.013339 m/px
+      width = 0.201054 m [SCALED] 0.170896..0.231212 — the member as it is seen in elevation
+      depth = 0.201054 m [ASSUMED] 0.1..0.5 — a view that can see depth says it stands proud of wall, but nothing measures how far
+
+NAMED HOLES — what the sources do not determine
+  2 MISSING, 80 AMBIGUOUS, 1 REFUSED
+  [MISSING] a printed roof pitch: no legible angle on any sheet is attached to a sloping edge; the pitch is derived from the ridge height and the span instead
+  [MISSING] the external wall thickness: no dimension on the plan measures a wall; a domestic external wall is assumed
+  [REFUSED] the stair between the storeys: 1 stair symbols were observed, but none of them fixes a going, a rise, a width or a landing; a stair built from that would be a guess dressed as a measurement

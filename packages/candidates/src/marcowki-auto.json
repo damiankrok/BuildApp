@@ -1,9 +1,9 @@
 {
-  "contentHash": "93b4a2109990d354126bccef77c6530969722e31358ec67f8e4d4c3a3d6a65a3",
+  "contentHash": "5f452153b8e6c0364f1ee2601cc833a9757d16167ea9203053de042ce70b9581",
   "contradictions": [],
-  "hypothesisSetHash": "b7ec92621ffe03e4fd91136fa7a9fd5d9dbd7f88a2a19fa45504aa4ec49ec840",
-  "hypothesisSetId": "hypotheses-marcowki-b7ec92621ffe03e4",
-  "id": "candidate-marcowki-93b4a2109990d354",
+  "hypothesisSetHash": "7713696c8ca6069ce7034d7819ebfce70b33f7f0a54d1d3a46b4df9f045ba01e",
+  "hypothesisSetId": "hypotheses-marcowki-7713696c8ca6069c",
+  "id": "candidate-marcowki-5f452153b8e6c036",
   "label": "Marcówki (auto)",
   "metricEvidenceHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
   "metricEvidenceId": "metrics-marcowki-de932f82192aed04",
@@ -1330,7 +1330,7 @@
       "what": "elevations registered against the massing"
     },
     {
-      "detail": "151 sightings -> 103 members; 27 a second detection of the same feature on the same drawing, 5 a collinear piece of a member interrupted by something crossing it, 1 the same feature on a second rendering of the same drawing",
+      "detail": "151 sightings -> 103 members; 27 a second detection of the same feature on the same drawing, 15 the same feature corroborated from a second drawing, 5 a collinear piece of a member interrupted by something crossing it, 1 the same feature on a second rendering of the same drawing",
       "index": 3,
       "inputs": 151,
       "method": "DISCRETE_SELECTION",
@@ -1474,12 +1474,17 @@
     },
     {
       "evidenceIds": [
-        "constraint-hyp-mass-width-53397a8c11",
-        "constraint-hyp-mass-depth-e27f7afe03",
-        "metric-level-736b8c6e31",
+        "metric-dimension-0193723f04",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-597cd37632",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67",
         "metric-level-70deeedf63",
-        "metric-level-c977b973a3",
-        "metric-level-714c90d304"
+        "metric-level-714c90d304",
+        "metric-level-736b8c6e31",
+        "metric-level-c977b973a3"
       ],
       "hypothesisId": "hyp-ring-0",
       "kind": "wallRing",
@@ -1490,12 +1495,17 @@
     },
     {
       "evidenceIds": [
-        "constraint-hyp-mass-width-53397a8c11",
-        "constraint-hyp-mass-depth-e27f7afe03",
-        "metric-level-736b8c6e31",
+        "metric-dimension-0193723f04",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-597cd37632",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67",
         "metric-level-70deeedf63",
-        "metric-level-c977b973a3",
-        "metric-level-714c90d304"
+        "metric-level-714c90d304",
+        "metric-level-736b8c6e31",
+        "metric-level-c977b973a3"
       ],
       "hypothesisId": "hyp-ring-1",
       "kind": "wallRing",

@@ -62,8 +62,12 @@ metre or a DSL command, and a vision model can only answer in that vocabulary â€
 | `packages/source-observations` | the SourceObservationGraph: what was SEEN, in source-native 2D (`docs/SOURCE_OBSERVATION_GRAPH.md`) | source-common, zod |
 | `packages/source-vision` | provider-neutral `VisionReasoner` and schema-constrained visual tasks (`docs/VISION_REASONER.md`) | source-observations |
 | `packages/source-analyzer` | extractors, depth reasoning, stair reading, cross-view relations, debug overlays | every source-* package |
+| `packages/source-metrics` | what a drawing STATES: numeric OCR, dimension chains, the level ladder, frame registration, the sealed `MetricEvidenceSet` (`docs/METRIC_EVIDENCE.md`) | source-common, source-cv, source-observations |
+| `packages/reconstruction` | hypotheses, fusion, constraint classes, the solver, the sealed `ReconstructionCandidate`, the projection audit, evaluation (`docs/PRIMITIVE_RECONSTRUCTION.md`, `docs/RECONSTRUCTION_SOLVER.md`) | model, commands, source-* |
+| `packages/synthetic-drawings` | complete synthetic sheets for a house that exists only in the fixture, rendered to real PNG bytes | source-common, source-cv |
+| `packages/candidates` | sealed candidates as data; every viewer replays the program rather than re-solving | model, reconstruction |
 | `tests/architecture` | boundary tests that enforce the table above | everything |
-| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md`, `ANDROID_MODEL_PREVIEW.md`, `SOURCE_PACKAGE.md`, `SOURCE_OBSERVATION_GRAPH.md`, `VISION_REASONER.md` | |
+| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md`, `ANDROID_MODEL_PREVIEW.md`, `SOURCE_PACKAGE.md`, `SOURCE_OBSERVATION_GRAPH.md`, `VISION_REASONER.md`, `METRIC_EVIDENCE.md`, `PRIMITIVE_RECONSTRUCTION.md`, `RECONSTRUCTION_SOLVER.md` | |
 | `stage-reports/` | per-stage measured results and browser screenshots | |
 
 ## Commands
@@ -95,6 +99,21 @@ A live vision pass needs a key and nothing else:
 `ANTHROPIC_API_KEY=â€¦ npm run observations:extract -- pkg.json --cache .cache --live --record fixtures/`.
 Without one the extractors still run and the run reports that no provider
 answered, rather than pretending one did.
+
+### Reconstruction
+
+```
+npm run reconstruct -- --url <project url> --slug <name> --label "<name>"   # acquire, analyse, read, solve, seal
+npm run reconstruct -- --package pkg.json --graph graph.json --slug <name>  # the same from sealed inputs
+npm run reconstruct:marcowki                                                # evaluation, on the sealed artefact
+npm run reconstruct:no-reference                                            # the anti-cheating boundary, proved by execution
+```
+
+`reconstruct` writes the metric evidence, the hypothesis set, the candidate,
+the DSL program, the model and the projection audit as JSON. The candidate is
+sealed against four input hashes and replays to its model byte for byte;
+BuildWorld and the mobile exporter both load it by replaying that program,
+never by running a solver of their own.
 
 ### Android model preview
 

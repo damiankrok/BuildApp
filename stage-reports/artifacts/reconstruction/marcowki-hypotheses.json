@@ -1,5 +1,5 @@
 {
-  "contentHash": "b7ec92621ffe03e4fd91136fa7a9fd5d9dbd7f88a2a19fa45504aa4ec49ec840",
+  "contentHash": "7713696c8ca6069ce7034d7819ebfce70b33f7f0a54d1d3a46b4df9f045ba01e",
   "fusion": {
     "accepted": 103,
     "afterClustering": 123,
@@ -10,6 +10,10 @@
       {
         "count": 27,
         "why": "a second detection of the same feature on the same drawing"
+      },
+      {
+        "count": 15,
+        "why": "the same feature corroborated from a second drawing"
       },
       {
         "count": 5,
@@ -25,8 +29,13 @@
     {
       "confidence": 0.5,
       "evidenceIds": [
-        "constraint-hyp-mass-width-53397a8c11",
-        "constraint-hyp-mass-depth-e27f7afe03"
+        "metric-dimension-0193723f04",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-597cd37632",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
       ],
       "id": "hyp-mass",
       "kind": "BUILDING_MASS",
@@ -4308,7 +4317,7 @@
       "viewSupport": 1
     }
   ],
-  "id": "hypotheses-marcowki-b7ec92621ffe03e4",
+  "id": "hypotheses-marcowki-7713696c8ca6069c",
   "metricEvidenceHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
   "metricEvidenceId": "metrics-marcowki-de932f82192aed04",
   "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",

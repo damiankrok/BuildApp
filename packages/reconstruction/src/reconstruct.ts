@@ -106,6 +106,11 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   // -------------------------------------------------------------------------
   const plan = choosePlan(graph, metrics, keep)
   const massId = 'hyp-mass'
+  // The metric readings the footprint rests on, kept so the mass hypothesis
+  // can cite EVIDENCE rather than the constraints derived from it — a trace
+  // that stops at a constraint id cannot be followed back to a character on a
+  // drawing, which is the whole point of having one.
+  const footprintEvidenceIds: string[] = []
   if (!plan) {
     step({ stage: 'massing', what: 'a registered ground plan to measure the building from', method: 'REFUSED', detail: 'no plan on this package registered against a consistent scale', inputs: metrics.coordinateRegistrations.length, outputs: 0 })
     gap({ what: 'the building footprint', reason: 'no ground plan registered against a consistent scale, so nothing states how large the building is', status: 'MISSING', observationIds: [], evidenceIds: [] })
@@ -118,6 +123,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     ]
     for (const [name, found] of axes) {
       if (found) {
+        footprintEvidenceIds.push(...found.evidenceIds)
         constrain({
           class: found.hard ? 'HARD' : 'SOFT',
           subject: { hypothesisId: massId, parameter: name },
@@ -274,7 +280,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
       confidence: round6(levels.measured ? 0.8 : 0.4),
       provenance: { rule: 'ring-from-footprint', detail: 'the footprint the plan chains measure, extruded to the storey height the section states', merged: 0 },
     })
-    traces.push({ objectId: ringId, kind: 'wallRing', hypothesisId: `hyp-ring-${i}`, evidenceIds: [...new Set([...widthQ.constraintIds, ...depthQ.constraintIds, ...levels.evidenceIds])], observationIds: [], rejected: [], why: `footprint ${W} by ${D} m from the plan chains, ${heightQ.value} m high from the section datums` })
+    traces.push({ objectId: ringId, kind: 'wallRing', hypothesisId: `hyp-ring-${i}`, evidenceIds: [...new Set([...footprintEvidenceIds, ...levels.evidenceIds])].sort(), observationIds: [], rejected: [], why: `footprint ${W} by ${D} m from the plan chains, ${heightQ.value} m high from the section datums` })
     elevation = round6(elevation + heightQ.value)
   })
 
@@ -526,7 +532,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     sightings: [],
     rivalIds: [],
     observationIds: [],
-    evidenceIds: [...widthQ.constraintIds, ...depthQ.constraintIds],
+    evidenceIds: [...new Set(footprintEvidenceIds)].sort(),
     viewSupport: plan ? 1 : 0,
     confidence: round6(widthQ.class === 'HARD' && depthQ.class === 'HARD' ? 0.9 : 0.5),
     provenance: { rule: 'mass-from-plan-chains', detail: plan ? `${plan.frame.assetId}, ${plan.registration.anchors.length} anchors` : 'no registered plan', merged: 0 },
