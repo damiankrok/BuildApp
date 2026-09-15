@@ -49,6 +49,7 @@ const STYLE: Record<GeometryPart, PartStyle> = {
   STAIR_PLACEHOLDER: { color: 0xe0a24d, opacity: 0.5, roughness: 1 },
   STAIR_STEP: { color: 0xb9b3a8, roughness: 0.9, edges: true },
   SURFACE_REGION: { color: 0x9a7a4a, roughness: 0.85 },
+  LINEAR_SOLID: { color: 0xb0aaa0, roughness: 0.8, edges: true },
 }
 
 const SELECTED = new THREE.Color(0x4fa3ff)
@@ -83,7 +84,7 @@ export function buildThreeScene(meshes: readonly CompiledMesh[], materials: read
     const geometry = geometryFor(cm)
     const own = cm.materialId ? modelMaterial.get(cm.materialId) : undefined
     // A model material colours structural parts; fills keep their part colour.
-    const usesOwn = own && (cm.part === 'WALL' || cm.part === 'WALL_REVEAL' || cm.part === 'ROOF' || cm.part === 'ROOF_REVEAL' || cm.part === 'SLAB' || cm.part === 'CHIMNEY' || cm.part === 'BALCONY' || cm.part === 'DOOR_LEAF' || cm.part === 'DOOR_PANEL' || cm.part === 'STAIR_STEP' || cm.part === 'SURFACE_REGION')
+    const usesOwn = own && (cm.part === 'WALL' || cm.part === 'WALL_REVEAL' || cm.part === 'ROOF' || cm.part === 'ROOF_REVEAL' || cm.part === 'SLAB' || cm.part === 'CHIMNEY' || cm.part === 'BALCONY' || cm.part === 'DOOR_LEAF' || cm.part === 'DOOR_PANEL' || cm.part === 'STAIR_STEP' || cm.part === 'SURFACE_REGION' || cm.part === 'LINEAR_SOLID')
     const color = new THREE.Color(usesOwn ? own.color : style.color)
     const selected = selection !== null && cm.objectId === selection
     const material = new THREE.MeshStandardMaterial({

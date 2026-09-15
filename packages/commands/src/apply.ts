@@ -25,6 +25,7 @@ import {
   SlabSchema,
   StairSchema,
   SurfaceRegionSchema,
+  LinearSolidSchema,
   WallSchema,
   WallJunctionSchema,
   WallRingSchema,
@@ -93,12 +94,13 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   chimney: ChimneySchema,
   stair: StairSchema,
   surfaceRegion: SurfaceRegionSchema,
+  linearSolid: LinearSolidSchema,
   material: MaterialSchema,
   constraint: ConstraintSchema,
   evidenceSource: EvidenceSourceSchema,
 }
 
-const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney', 'stair', 'surfaceRegion']
+const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney', 'stair', 'surfaceRegion', 'linearSolid']
 
 const stripUndefined = <T extends object>(o: T): T => {
   const out: Record<string, unknown> = {}
@@ -439,6 +441,9 @@ function execute(d: Draft, c: ResolvedCommand): void {
     }
     case 'createSurfaceRegion':
       add('surfaceRegions', 'surfaceRegion', { id: c.id, ...common(c), hostId: c.hostId, face: c.face, rect: c.rect, materialId: c.materialId })
+      return
+    case 'createLinearSolid':
+      add('linearSolids', 'linearSolid', { id: c.id, ...common(c), levelId: c.levelId, hostId: c.hostId, start: c.start, end: c.end, width: c.width, depth: c.depth, rollDeg: c.rollDeg, materialId: c.materialId })
       return
     case 'defineMaterial':
       add('materials', 'material', { id: c.id, name: c.name, color: c.color, opacity: c.opacity, note: c.note })

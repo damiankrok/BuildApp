@@ -10,7 +10,7 @@ import { boundsOf, manifoldReport, materialLength, unionMaterialRuns } from '@bu
  * reference package: the compiler sees an ordinary model and must reproduce
  * the characteristic depth and the recesses from the records in the file.
  */
-const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.3.0.json')
+const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.4.0.json')
 const BASELINE_1_2_0 = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.2.0.json')
 
 describe('Marcówki from JSON alone', () => {

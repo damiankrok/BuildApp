@@ -29,6 +29,7 @@ export const ID_PREFIX: Record<SemanticKind, string> = {
   chimney: 'chimney',
   stair: 'stair',
   surfaceRegion: 'region',
+  linearSolid: 'solid',
   material: 'material',
   constraint: 'constraint',
   evidenceSource: 'source',

@@ -40,6 +40,7 @@ export type GeometryPart =
   | 'STAIR_PLACEHOLDER'
   | 'STAIR_STEP'
   | 'SURFACE_REGION'
+  | 'LINEAR_SOLID'
 
 export type CompiledMesh = {
   /** The semantic object this geometry belongs to; what selection resolves to. */
@@ -78,6 +79,7 @@ export type CompileDiagnosticCode =
   | 'POLYGON_NOT_TRIANGULATED'
   | 'ROOF_OPENING_NOT_CUT'
   | 'STAIR_NOT_LAID_OUT'
+  | 'LINEAR_SOLID_DEGENERATE'
 
 export type CompileDiagnostic = {
   code: CompileDiagnosticCode

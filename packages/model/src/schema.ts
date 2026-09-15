@@ -17,12 +17,12 @@
  */
 import { z } from 'zod'
 import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
-import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, finite, nonNegative, positive } from './geometry-types.js'
+import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.3.0' as const
+export const MODEL_SCHEMA_VERSION = '1.4.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -553,6 +553,64 @@ export const SurfaceRegionSchema = z
   .strict()
 export type SurfaceRegion = z.infer<typeof SurfaceRegionSchema>
 
+
+/**
+ * A linear architectural solid: a straight member with a rectangular
+ * cross-section, extruded along its own centreline.
+ *
+ * This is the primitive a `SurfaceRegion` could not be. A region is a finish
+ * band painted on a wall face; it has no thickness and it cannot cast a
+ * shadow, turn a corner or be seen from the side. Real facades are full of
+ * members that do all three — a frame standing proud of the wall, a beam over
+ * an opening, a fin, a parapet upstand, a deep reveal — and modelling them as
+ * colour is what makes a reconstruction come out flat.
+ *
+ * It is deliberately generic. Nothing about it names a project, a facade or a
+ * style: it is a box swept along a line, which is what every one of those
+ * members is.
+ *
+ * **The cross-section basis.** The member's own axes are derived from its
+ * path, so two members with the same numbers are the same shape wherever they
+ * are:
+ *
+ * - `pathDir` = normalize(end − start);
+ * - `depthAxis` = normalize(pathDir × up) — for a horizontal member this is
+ *   horizontal and perpendicular to the path, which is the direction it stands
+ *   proud of a wall. For a vertical member the cross product degenerates and
+ *   the axis falls back to world +z;
+ * - `widthAxis` = normalize(depthAxis × pathDir) — for a horizontal member this
+ *   is world up, which is the dimension you see in elevation.
+ *
+ * `rollDeg` then rotates both about the path, for a member whose section is not
+ * square to the world (a raking gable member, a canted fin).
+ *
+ * So for a facade beam 0.40 m tall standing 0.30 m out of the wall:
+ * `width = 0.40`, `depth = 0.30`.
+ */
+export const LinearSolidSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    /**
+     * The wall, roof or slab the member runs on, when it has one. Purely a
+     * statement of relation: the member's geometry is world-space and does not
+     * depend on its host, so a host that moves does not drag it.
+     */
+    hostId: IdSchema.optional(),
+    /** The centreline, in world coordinates. */
+    start: Vec3Schema,
+    end: Vec3Schema,
+    /** Across the member, along `widthAxis`: what you see in elevation. */
+    width: positive,
+    /** Across the member, along `depthAxis`: how far it stands proud. */
+    depth: positive,
+    /** Rotation of the cross-section about the path, in degrees. */
+    rollDeg: finite.optional(),
+    materialId: IdSchema,
+  })
+  .strict()
+export type LinearSolid = z.infer<typeof LinearSolidSchema>
+
 export const MaterialSchema = z
   .object({
     id: IdSchema,
@@ -609,6 +667,7 @@ export const CanonicalBuildingModelSchema = z
     chimneys: z.array(ChimneySchema),
     stairs: z.array(StairSchema),
     surfaceRegions: z.array(SurfaceRegionSchema),
+    linearSolids: z.array(LinearSolidSchema),
     materials: z.array(MaterialSchema),
     constraints: z.array(ConstraintSchema),
     evidenceSources: z.array(EvidenceSourceSchema),
@@ -642,6 +701,7 @@ export const OBJECT_COLLECTIONS = [
   'chimneys',
   'stairs',
   'surfaceRegions',
+  'linearSolids',
   'materials',
   'constraints',
   'evidenceSources',
@@ -668,6 +728,7 @@ export const SEMANTIC_KINDS = [
   'chimney',
   'stair',
   'surfaceRegion',
+  'linearSolid',
   'material',
   'constraint',
   'evidenceSource',
@@ -693,6 +754,7 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   chimney: 'chimneys',
   stair: 'stairs',
   surfaceRegion: 'surfaceRegions',
+  linearSolid: 'linearSolids',
   material: 'materials',
   constraint: 'constraints',
   evidenceSource: 'evidenceSources',
@@ -716,6 +778,7 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   chimneys: 'chimney',
   stairs: 'stair',
   surfaceRegions: 'surfaceRegion',
+  linearSolids: 'linearSolid',
   materials: 'material',
   constraints: 'constraint',
   evidenceSources: 'evidenceSource',
@@ -740,6 +803,7 @@ export type SemanticObject =
   | Chimney
   | Stair
   | SurfaceRegion
+  | LinearSolid
   | Material
   | Constraint
 
@@ -770,6 +834,7 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     chimneys: [],
     stairs: [],
     surfaceRegions: [],
+    linearSolids: [],
     materials: [],
     constraints: [],
     evidenceSources: [],

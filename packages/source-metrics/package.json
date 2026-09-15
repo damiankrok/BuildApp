@@ -1,0 +1,12 @@
+{
+  "name": "@buildapp/source-metrics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Metric evidence read off published drawings: numeric OCR of printed dimensions, level datums and angles, the chains they belong to, and the registration that turns a drawing's pixels into a metric frame. Pure and browser-safe; produces evidence, never a building.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@buildapp/source-common": "*", "@buildapp/source-cv": "*", "@buildapp/source-observations": "*", "zod": "^3.25.76" },
+  "devDependencies": { "@buildapp/synthetic-drawings": "*" }
+}

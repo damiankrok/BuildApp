@@ -28,6 +28,7 @@ import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compi
 import { compileRoofTriangles, compileRooflightFill, roofBreaksAlong, roofGeometry, type RoofGeometry } from './roof-compiler.js'
 import { compileStair } from './stair-compiler.js'
 import { compileSurfaceRegion } from './surface-regions.js'
+import { compileLinearSolid } from './linear-solids.js'
 import { compileWall, type TopFunction } from './wall-compiler.js'
 import { boundsOfTriangles, type Bounds, type CompileDiagnostic, type CompiledMesh, type CompiledScene } from './types.js'
 
@@ -257,6 +258,29 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
         triangles: tris,
       })
     }
+  }
+
+  // Linear solids: world-space members, compiled on their own rather than as
+  // part of a host, because a member often runs past the wall it names.
+  for (const solid of byId(model.linearSolids)) {
+    const level = levelOf(solid.levelId, solid.id)
+    if (!level) continue
+    const tris = compileLinearSolid(solid)
+    if (tris.length === 0) {
+      diagnostics.push({ code: 'LINEAR_SOLID_DEGENERATE', severity: 'ERROR', message: `linear solid ${solid.id}: its ends coincide, so there is nothing to extrude`, objectId: solid.id })
+      continue
+    }
+    meshes.push({
+      objectId: solid.id,
+      objectKind: 'linearSolid',
+      part: 'LINEAR_SOLID',
+      levelId: solid.levelId,
+      solidId: solid.id,
+      ...(solid.hostId !== undefined ? { hostWallId: model.walls.some((w) => w.id === solid.hostId) ? solid.hostId : undefined } : {}),
+      structural: false,
+      materialId: solid.materialId,
+      triangles: tris,
+    })
   }
 
   for (const slab of byId(model.slabs)) {

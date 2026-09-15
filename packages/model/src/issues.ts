@@ -52,6 +52,9 @@ export type ValidationCode =
   | 'DOOR_ASSEMBLY_INVALID'
   | 'SURFACE_REGION_HOST_INVALID'
   | 'SURFACE_REGION_OUTSIDE_HOST'
+  // --- schema 1.4.0: linear solids ---
+  | 'LINEAR_SOLID_DEGENERATE'
+  | 'LINEAR_SOLID_HOST_INVALID'
   // --- wall topology (topology.ts) ---
   | 'JUNCTION_SELF_REFERENCE'
   | 'JUNCTION_OWNER_NOT_PARTICIPANT'

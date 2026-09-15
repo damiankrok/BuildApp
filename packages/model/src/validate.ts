@@ -20,6 +20,7 @@ import {
   type Wall,
 } from './schema.js'
 import { layoutStair } from './stair-layout.js'
+import { linearSolidIsDegenerate } from './linear-solid.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
 
 export type { ValidationCode, ValidationIssue, ValidationResult } from './issues.js'
@@ -459,6 +460,24 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     const L = wallLength(host)
     if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > host.height + EPS) {
       err('SURFACE_REGION_OUTSIDE_HOST', `surface region ${r.id} spans a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} on wall ${host.id}, which is ${fmt(L)} x ${fmt(host.height)}`, r.id, 'rect')
+    }
+  }
+  for (const s of m.linearSolids) {
+    needSources(s.id, s.evidence?.sourceIds)
+    if (!levelIds.has(s.levelId)) err('UNKNOWN_LEVEL', `linear solid ${s.id} refers to level "${s.levelId}", which does not exist`, s.id, 'levelId')
+    if (!materialIds.has(s.materialId)) err('UNKNOWN_MATERIAL', `${s.id} refers to material "${s.materialId}", which does not exist`, s.id, 'materialId')
+    if (linearSolidIsDegenerate(s)) {
+      err('LINEAR_SOLID_DEGENERATE', `linear solid ${s.id}: its start and end coincide at (${fmt(s.start.x)}, ${fmt(s.start.y)}, ${fmt(s.start.z)}), so there is nothing to extrude along`, s.id, 'end')
+    }
+    if (s.hostId !== undefined) {
+      // A host is a statement of relation, not a parent: the member's geometry
+      // is world-space either way. But naming a host that is not a surface a
+      // member could run on is a mistake worth reporting.
+      const hosted = m.walls.some((w) => w.id === s.hostId) || m.roofs.some((r) => r.id === s.hostId) || m.slabs.some((x) => x.id === s.hostId)
+      if (!hosted) {
+        if (seen.has(s.hostId)) err('LINEAR_SOLID_HOST_INVALID', `linear solid ${s.id} names host "${s.hostId}", which is not a wall, a roof or a slab`, s.id, 'hostId')
+        else err('UNKNOWN_TARGET', `linear solid ${s.id} names host "${s.hostId}", which does not exist`, s.id, 'hostId')
+      }
     }
   }
   for (const c of m.constraints) {

@@ -42,6 +42,7 @@ const KIND_LABEL: Record<SemanticKind, string> = {
   chimney: 'Chimney',
   stair: 'Stair',
   surfaceRegion: 'Surface region',
+  linearSolid: 'Linear solid',
   material: 'Material',
   constraint: 'Constraint',
   evidenceSource: 'Evidence source',

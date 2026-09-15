@@ -30,6 +30,12 @@
  * vertical, every door one leaf and every stair a placeholder, and compiles
  * to exactly the geometry it compiled to before.
  *
+ * 1.3.0 -> 1.4.0 (STAGE BUILDAPP-03): the model gained the `linearSolids`
+ * collection — a straight member with a rectangular cross-section, extruded
+ * along its own centreline, which is what a `SurfaceRegion` could not be. A
+ * 1.3.0 file has none; it loads with an empty collection and compiles to
+ * exactly the geometry it compiled to before.
+ *
  * A file that states an older version but already carries a newer version's
  * collections is refused: it would be a mislabelled newer file.
  */
@@ -52,6 +58,8 @@ export const MIGRATION_NOTE_1_1_0 =
 
 export const MIGRATION_NOTE_1_2_0 =
   'migrated from schema 1.2.0 to 1.3.0: the file carried no surface regions; every slab stays solid, every roof cut vertical, every door one leaf and every stair a placeholder'
+
+export const MIGRATION_NOTE_1_3_0 = 'migrated from schema 1.3.0 to 1.4.0: the file carried no linear solids; every facade member it describes is still a flat region'
 
 type Step = {
   from: string
@@ -83,6 +91,13 @@ const STEPS: Step[] = [
     newCollections: ['surfaceRegions'],
     note: MIGRATION_NOTE_1_2_0,
     message: 'model migrated from schema 1.2.0 to 1.3.0: an empty surfaceRegions collection was added; slabs stay solid, roof cuts vertical, doors one leaf, stairs placeholders',
+  },
+  {
+    from: '1.3.0',
+    to: '1.4.0',
+    newCollections: ['linearSolids'],
+    note: MIGRATION_NOTE_1_3_0,
+    message: 'model migrated from schema 1.3.0 to 1.4.0: an empty linearSolids collection was added; the file carries no volumetric facade members',
   },
 ]
 

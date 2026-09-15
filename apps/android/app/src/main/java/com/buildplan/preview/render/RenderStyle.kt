@@ -107,6 +107,7 @@ enum class RenderStyle(val label: String, val description: String) {
             GeometryPart.STAIR_PLACEHOLDER to Entry(hex(0xe0a24d), alpha = 0.5f, roughness = 1f),
             GeometryPart.STAIR_STEP to Entry(hex(0xb9b3a8), roughness = 0.9f, acceptsModelMaterial = true),
             GeometryPart.SURFACE_REGION to Entry(hex(0x9a7a4a), roughness = 0.85f, acceptsModelMaterial = true),
+            GeometryPart.LINEAR_SOLID to Entry(hex(0xb0aaa0), roughness = 0.8f, acceptsModelMaterial = true),
             GeometryPart.OTHER to DEFAULT_ENTRY,
         )
 

@@ -8,7 +8,7 @@ import { MODEL_SCHEMA_VERSION, loadModel, serializeModel, validateModel } from '
  * imports `@buildapp/reference-marcowki`: the file must be an ordinary
  * CanonicalBuildingModel that loads through the generic loader alone.
  */
-const FIXTURE = resolve(import.meta.dirname, 'fixtures/marcowki-ge-1.3.0.json')
+const FIXTURE = resolve(import.meta.dirname, 'fixtures/marcowki-ge-1.4.0.json')
 const BASELINE_1_2_0 = resolve(import.meta.dirname, 'fixtures/marcowki-ge-1.2.0.json')
 
 describe('Marcówki fixture loads without the reference package', () => {
@@ -56,11 +56,11 @@ describe('Marcówki fixture loads without the reference package', () => {
     expect(m.surfaceRegions).toHaveLength(6)
   })
 
-  it('the 1.2.0 Marcówki file (the STAGE BUILDAPP-01 freeze) migrates through one explicit step and keeps its placeholder stair', () => {
+  it('the 1.2.0 Marcówki file (the STAGE BUILDAPP-01 freeze) migrates through two explicit steps and keeps its placeholder stair', () => {
     const r = loadModel(readFileSync(BASELINE_1_2_0, 'utf8'))
     expect(r.ok).toBe(true)
     if (!r.ok) return
-    expect(r.issues.map((i) => i.code)).toEqual(['SCHEMA_MIGRATED'])
+    expect(r.issues.map((i) => i.code)).toEqual(['SCHEMA_MIGRATED', 'SCHEMA_MIGRATED'])
     expect(r.model.schemaVersion).toBe(MODEL_SCHEMA_VERSION)
     expect(r.model.surfaceRegions).toEqual([])
     expect(r.model.stairs[0].kind).toBe('PLACEHOLDER')

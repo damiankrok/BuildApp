@@ -26,6 +26,7 @@ import {
   StairDirectionSchema,
   StairSegmentSchema,
   Vec2Schema,
+  Vec3Schema,
   WallEndRefSchema,
   WallJunctionKindSchema,
   WallTopProfileSchema,
@@ -369,6 +370,36 @@ export const CreateSurfaceRegionSchema = z
   })
   .strict()
 
+/**
+ * A straight member with a rectangular cross-section, extruded along its own
+ * centreline: a facade frame, a beam over an opening, a fin, a parapet
+ * upstand, a deep reveal.
+ *
+ * Stated in world coordinates rather than host-local ones, because a member
+ * often runs past its host — across a setback, from a garage face to a balcony
+ * — and a host-local statement of that is a statement about two hosts.
+ * `hostId` records the relation without making the geometry depend on it.
+ *
+ * `width` is the dimension seen in elevation and `depth` how far the member
+ * stands proud; the axes they are measured along come from the path itself
+ * (see `linearSolidBasis`), so the same numbers are the same shape wherever
+ * the member is.
+ */
+export const CreateLinearSolidSchema = z
+  .object({
+    type: z.literal('createLinearSolid'),
+    ...withId,
+    levelId: IdSchema,
+    hostId: IdSchema.optional(),
+    start: Vec3Schema,
+    end: Vec3Schema,
+    width: positive,
+    depth: positive,
+    rollDeg: finite.optional(),
+    materialId: IdSchema,
+  })
+  .strict()
+
 export const DefineMaterialSchema = z
   .object({
     type: z.literal('defineMaterial'),
@@ -473,6 +504,7 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   CreateStairPlaceholderSchema,
   CreateStairSchema,
   CreateSurfaceRegionSchema,
+  CreateLinearSolidSchema,
   DefineMaterialSchema,
   AssignMaterialSchema,
   MoveFeatureSchema,

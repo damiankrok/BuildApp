@@ -1,0 +1,11 @@
+{
+  "name": "@buildapp/synthetic-drawings",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Synthetic architectural drawings rendered from a known building: plans, elevations and sections with real dimension chains, level datums and callouts. The ground truth the reconstruction pipeline is held to when no publisher is involved.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@buildapp/source-common": "*", "@buildapp/source-cv": "*" }
+}
