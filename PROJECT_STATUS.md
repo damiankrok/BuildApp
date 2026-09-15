@@ -14,7 +14,7 @@
 | STAGE BUILDAPP-01A — MARCÓWKI ARCHITECTURAL FIDELITY CLOSURE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d40fa39733c80bf0b1e35c2233c8ea8ba0c542b7`; implementation `2de2f26328ec45ad99b47da0d9d956e8bc4d4cf9`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01A.md` and this row (the final HEAD, see `git log`) | PASS |
 | STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row | PASS |
 | STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs `ced70f0` | PASS |
-| STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `8524a89`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03.md` and this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `fad9f39`, `8524a89`; docs `c1a9872` and the commit that carries this row (the final HEAD, see `git log`) | PASS |
 
 ## Current capabilities
 

@@ -6,8 +6,8 @@
 | --- | --- |
 | branch | `claude/buildapp-buildworld-v1-7y6yqh` |
 | starting HEAD | `ced70f0dba7d32caa32ef726a5118643796a80fe` (the BUILDAPP-02 docs commit, verified equal to the remote tip before work began) |
-| implementation commits | `361e466` — schema 1.4.0 and the metric reader · `5ab618b` — the solver and its candidate · `8524a89` — the viewers and the tests |
-| docs commit | the commit that carries this report (`docs/`, `PROJECT_STATUS.md`, `stage-reports/`); its SHA is the final HEAD in `git log` |
+| implementation commits | `361e466` — schema 1.4.0 and the metric reader · `5ab618b` — the solver and its candidate · `fad9f39` — the audit and the evaluation · `8524a89` — the viewers and the tests |
+| docs commit | `c1a9872` — the trace script, the three new `docs/` pages and this report; the final HEAD is the commit above it that records these SHAs (see `git log`) |
 | model schema | `buildapp.canonical-building-model` **1.4.0** — `linearSolids` added, migrated from 1.3.0 |
 | new schemas | `buildapp.metric-evidence-set` **1.0.0**, `buildapp.primitive-hypothesis-set` **1.0.0**, `buildapp.reconstruction-candidate` **1.0.0** |
 | mobile bundle | `buildapp.mobile-scene-bundle` **1.0.0** — unchanged |
