@@ -1,0 +1,145 @@
+name: BuildApp CI
+
+on:
+  push:
+    branches:
+      - main
+      - "claude/**"
+      - "orchestrator/**"
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: buildapp-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CI: "true"
+
+jobs:
+  core:
+    name: Core / Analyzer / Reconstruction
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit / integration / architecture tests
+        run: npm test
+      - name: Production web build
+        run: npm run build
+      - name: Marcówki semantic audit
+        run: npm run audit:marcowki
+      - name: Marcówki facade audit
+        run: npm run audit:marcowki:facades
+      - name: Prove reconstruction works with reference package absent
+        run: npm run reconstruct:no-reference
+      - name: Upload reconstruction diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reconstruction-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            stage-reports/artifacts/reconstruction/**
+            .cache/no-reference/**
+
+  browser:
+    name: Browser / Playwright
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Production browser verification
+        run: npm run e2e
+      - name: Upload Playwright failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failures
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            apps/web/test-results/**
+            stage-reports/artifacts/**/*.png
+
+  android:
+    name: Android / APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Ensure Android 35 SDK
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Install JS dependencies
+        run: npm ci
+      - name: Regenerate mobile scene bundles
+        run: npm run mobile:export-scenes
+      - name: Assert committed mobile bundles are current
+        run: git diff --exit-code -- apps/android/app/src/main/assets/scenes
+      - name: Android JVM tests
+        run: npm run android:test
+      - name: Assemble preview APKs
+        run: npm run android:assembleDebug
+      - name: Upload installable APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: buildplan-model-preview-apks
+          if-no-files-found: error
+          retention-days: 30
+          path: apps/android/app/build/preview-apks/*.apk
+
+  dependency-security:
+    name: Dependency security (advisory)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Production dependency audit
+        run: npm audit --omit=dev --audit-level=high
