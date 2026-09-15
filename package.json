@@ -2,7 +2,7 @@
   "name": "buildapp",
   "version": "0.1.0",
   "private": true,
-  "description": "BuildApp \u2014 BuildWorld semantic building editor, Building DSL and geometry compiler",
+  "description": "BuildApp — BuildWorld semantic building editor, Building DSL and geometry compiler",
   "type": "module",
   "workspaces": [
     "tests/architecture",
@@ -19,7 +19,10 @@
     "e2e": "npm run build --workspace apps/web && playwright test -c apps/web/playwright.config.ts",
     "verify": "npm run typecheck && npm test && npm run build && npm run e2e",
     "audit:marcowki": "vite-node packages/reference-marcowki/scripts/audit.ts",
-    "audit:marcowki:facades": "vite-node packages/reference-marcowki/scripts/audit-facades.ts"
+    "audit:marcowki:facades": "vite-node packages/reference-marcowki/scripts/audit-facades.ts",
+    "mobile:export-scenes": "vite-node packages/mobile-scene/scripts/export-scenes.ts",
+    "android:test": "npm run test --workspace apps/android",
+    "android:assembleDebug": "npm run assembleDebug --workspace apps/android"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

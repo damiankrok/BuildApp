@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A gabled house silhouette drawn as an axonometric line study. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M32,52 L54,36 L76,52 L76,76 L32,76 Z"
+        android:strokeColor="#FF8FC6F0"
+        android:strokeWidth="3.5"
+        android:fillColor="#3345B0F0"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M26,54 L54,33 L82,54"
+        android:strokeColor="#FFE0A24D"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M48,76 L48,62 L60,62 L60,76"
+        android:strokeColor="#FFE8EEF5"
+        android:strokeWidth="3"
+        android:strokeLineJoin="round" />
+</vector>

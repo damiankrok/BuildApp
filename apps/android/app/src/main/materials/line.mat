@@ -1,0 +1,21 @@
+// Unlit lines: the ground grid and the selection box.
+//
+// Position-only geometry — no tangent frame — because a line has no surface to
+// shade. Used for guides, never for building material.
+material {
+    name : line,
+    shadingModel : unlit,
+    blending : transparent,
+    culling : none,
+    depthWrite : false,
+    parameters : [
+        { type : float4, name : baseColor }
+    ]
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        material.baseColor = materialParams.baseColor;
+    }
+}

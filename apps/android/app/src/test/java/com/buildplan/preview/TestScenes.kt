@@ -1,0 +1,45 @@
+package com.buildplan.preview
+
+import com.buildplan.preview.scene.BundleParser
+import com.buildplan.preview.scene.BundleResult
+import com.buildplan.preview.scene.ModelScene
+import com.buildplan.preview.scene.SceneBundle
+import com.buildplan.preview.scene.SceneIndexEntry
+import java.io.File
+
+/**
+ * The real shipped scene bundles, read straight from the app's assets.
+ *
+ * Tests run against the same asset the APK carries — not a fixture written by
+ * hand. That is deliberate: a Kotlin file holding expected Marcówki
+ * coordinates would be a second source of truth, which is the failure this
+ * whole architecture exists to prevent. Every expectation in these tests is
+ * either a generic invariant or something derived from the bundle itself.
+ */
+object TestScenes {
+    private val assetRoot: File = sequenceOf(
+        File("src/main/assets/scenes"),
+        File("app/src/main/assets/scenes"),
+        File("apps/android/app/src/main/assets/scenes"),
+    ).firstOrNull { it.isDirectory } ?: error("scene assets not found from ${File(".").absolutePath}")
+
+    fun text(name: String): String = File(assetRoot, name).readText()
+
+    val index: List<SceneIndexEntry> by lazy { BundleParser.parseIndex(text("index.json")) }
+
+    fun bundle(key: String): SceneBundle {
+        val entry = index.first { it.key == key }
+        return when (val r = BundleParser.parse(text(entry.asset))) {
+            is BundleResult.Ok -> r.bundle
+            is BundleResult.Failure -> error("${entry.asset} did not parse: ${r.message}")
+        }
+    }
+
+    fun scene(key: String): ModelScene {
+        val entry = index.first { it.key == key }
+        return ModelScene.from(bundle(key), entry.key, entry.title, entry.subtitle)
+    }
+
+    val marcowki: ModelScene by lazy { scene("marcowki") }
+    val demo: ModelScene by lazy { scene("demo") }
+}

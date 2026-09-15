@@ -1,0 +1,31 @@
+// Translucent technical surface: glazing and glass railing infill.
+//
+// Same inputs as `technical`, with alpha blending and no back-face culling so
+// a window reads as a pane seen from either side. Kept a separate material so
+// the opaque building never pays for blending.
+material {
+    name : translucent,
+    shadingModel : lit,
+    blending : transparent,
+    culling : none,
+    refractionMode : none,
+    requires : [ tangents ],
+    parameters : [
+        { type : float4, name : baseColor },
+        { type : float,  name : roughness },
+        { type : float,  name : metallic },
+        { type : float,  name : reflectance },
+        { type : float3, name : emissive }
+    ]
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        material.baseColor = materialParams.baseColor;
+        material.roughness = materialParams.roughness;
+        material.metallic = materialParams.metallic;
+        material.reflectance = materialParams.reflectance;
+        material.emissive = vec4(materialParams.emissive, 0.0);
+    }
+}

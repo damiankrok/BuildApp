@@ -1,0 +1,11 @@
+{
+  "name": "@buildapp/android-preview",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BuildPlan Model Preview: native Android viewer for compiled BuildApp scenes (Kotlin, Compose, Filament). Built by Gradle; this manifest only exposes the build to the monorepo's npm scripts.",
+  "scripts": {
+    "test": "./gradlew --no-daemon testDebugUnitTest",
+    "assembleDebug": "./gradlew --no-daemon previewApks",
+    "clean": "./gradlew --no-daemon clean"
+  }
+}

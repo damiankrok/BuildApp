@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      The window is the viewport: it starts on the renderer's own background so
+      launching the app does not flash a white frame before the first draw.
+    -->
+    <style name="Theme.BuildPlanPreview" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/viewport_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

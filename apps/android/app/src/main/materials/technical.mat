@@ -1,0 +1,32 @@
+// Opaque technical surface: the default material of the whole building.
+//
+// One material serves every opaque part; the per-part and per-style
+// differences (wall, roof, slab, stair, clay, selection) are parameters on the
+// material instance, not separate shaders. Nothing here is textured: the
+// viewer draws compiled geometry, and colour comes from the model's own
+// material ids and the render style.
+material {
+    name : technical,
+    shadingModel : lit,
+    blending : opaque,
+    culling : back,
+    requires : [ tangents ],
+    parameters : [
+        { type : float4, name : baseColor },
+        { type : float,  name : roughness },
+        { type : float,  name : metallic },
+        { type : float,  name : reflectance },
+        { type : float3, name : emissive }
+    ]
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        material.baseColor = materialParams.baseColor;
+        material.roughness = materialParams.roughness;
+        material.metallic = materialParams.metallic;
+        material.reflectance = materialParams.reflectance;
+        material.emissive = vec4(materialParams.emissive, 0.0);
+    }
+}
