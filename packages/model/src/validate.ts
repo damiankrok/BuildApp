@@ -7,15 +7,16 @@
  * repairs anything: a problem is reported with the id of the object it is
  * about and the code a caller can act on.
  */
-import { polygonIsSimple, rectIsValid, type PlanRect } from './geometry-types.js'
+import { polygonIsSimple, rectIsValid, rectWidth, rectDepth, type PlanRect } from './geometry-types.js'
 import { fmtNumber, type ValidationCode, type ValidationIssue, type ValidationResult } from './issues.js'
 import { migrateModelInput } from './migrate.js'
-import { allObjectIds, wallLength } from './query.js'
+import { allObjectIds, openingHeadRange, openingIsRaked, openingLeaves, roofCoveredRect, roofCreaseLine, wallLength } from './query.js'
 import {
   CanonicalBuildingModelSchema,
   OBJECT_COLLECTIONS,
   type CanonicalBuildingModel,
   type Opening,
+  type Wall,
 } from './schema.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
 
@@ -130,63 +131,99 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
   out.push(...wallOverlapIssues(m, topology.extents))
 
   // Openings inside their host, not touching its side or top edges, not reaching
-  // into a junction zone, not overlapping each other.
-  const byWall = new Map<string, Opening[]>()
+  // into a junction zone, not overlapping each other. An opening with further
+  // leaves is checked once per leaf: every leaf is a real cut in its own wall.
+  type Cut = { openingId: string; a0: number; a1: number; b0: number; b1: number }
+  const byWall = new Map<string, Cut[]>()
+  const wallDirection = (w: Wall): { x: number; z: number } => {
+    const L = wallLength(w)
+    return { x: (w.end.x - w.start.x) / L, z: (w.end.z - w.start.z) / L }
+  }
   for (const o of m.openings) {
     needSources(o.id, o.evidence?.sourceIds)
-    const wall = m.walls.find((w) => w.id === o.wallId)
-    if (!wall) {
+    const host = m.walls.find((w) => w.id === o.wallId)
+    if (!host) {
       err('UNKNOWN_WALL', `opening ${o.id} refers to wall "${o.wallId}", which does not exist`, o.id, 'wallId')
       continue
     }
-    const L = wallLength(wall)
-    const a0 = o.offset
-    const a1 = o.offset + o.width
-    const b0 = o.sill
-    const b1 = o.sill + o.height
-    if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > wall.height + EPS) {
-      err(
-        'OPENING_OUTSIDE_HOST',
-        `opening ${o.id} spans ${fmt(a0)}..${fmt(a1)} along and ${fmt(b0)}..${fmt(b1)} up wall ${wall.id}, which is ${fmt(L)} x ${fmt(wall.height)}`,
-        o.id,
-      )
-      continue
+    const leaves = openingLeaves(o)
+    const seenLeaf = new Set<string>()
+    let leafOk = true
+    for (let i = 1; i < leaves.length; i++) {
+      const leaf = leaves[i]
+      if (leaf.wallId === o.wallId || seenLeaf.has(leaf.wallId)) {
+        err('OPENING_LEAF_INVALID', `opening ${o.id} names wall ${leaf.wallId} as a further leaf more than once (or as its own host)`, o.id, 'leaves')
+        leafOk = false
+        continue
+      }
+      seenLeaf.add(leaf.wallId)
+      const w = m.walls.find((x) => x.id === leaf.wallId)
+      if (!w) {
+        err('UNKNOWN_WALL', `opening ${o.id} names leaf wall "${leaf.wallId}", which does not exist`, o.id, 'leaves')
+        leafOk = false
+        continue
+      }
+      if (w.levelId !== host.levelId) {
+        err('OPENING_LEAF_LEVEL_MISMATCH', `opening ${o.id} is hosted on level ${host.levelId} but its leaf wall ${w.id} stands on level ${w.levelId}`, o.id, 'leaves')
+        leafOk = false
+      }
+      const u0 = wallDirection(host)
+      const u1 = wallDirection(w)
+      if (Math.abs(u0.x * u1.z - u0.z * u1.x) > 1e-9) {
+        err('OPENING_LEAF_NOT_PARALLEL', `opening ${o.id} passes through wall ${w.id}, which is not parallel to its host wall ${host.id}; one opening cuts parallel leaves only`, o.id, 'leaves')
+        leafOk = false
+      }
     }
-    if (a0 <= EPS || a1 >= L - EPS || b1 >= wall.height - EPS) {
-      err(
-        'OPENING_TOUCHES_WALL_EDGE',
-        `opening ${o.id} touches a side or the top edge of wall ${wall.id}; an opening must leave wall material on both sides and above it (a sill at the base is allowed)`,
-        o.id,
-      )
-      continue
-    }
-    const extent = topology.extents.get(wall.id)
-    if (extent) {
-      const core = physicalCore(extent)
-      if (a0 <= core.a0 + EPS || a1 >= core.a1 - EPS) {
-        const intrusion = Math.max(core.a0 - a0, a1 - core.a1)
+    if (!leafOk) continue
+    const range = openingHeadRange(o)
+    for (const leaf of leaves) {
+      const wall = m.walls.find((w) => w.id === leaf.wallId)!
+      const where = leaf.wallId === o.wallId ? `wall ${wall.id}` : `leaf wall ${wall.id}`
+      const L = wallLength(wall)
+      const a0 = leaf.offset
+      const a1 = leaf.offset + o.width
+      const b0 = o.sill
+      const b1 = range.max
+      if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > wall.height + EPS) {
         err(
-          'OPENING_IN_JUNCTION_ZONE',
-          `opening ${o.id} spans ${fmt(a0)}..${fmt(a1)} m along wall ${wall.id}, but junctions leave that wall material only between ${fmt(core.a0)} and ${fmt(core.a1)} m; the opening reaches ${fmt(intrusion)} m into a consumed junction zone and was not shrunk`,
+          'OPENING_OUTSIDE_HOST',
+          `opening ${o.id} spans ${fmt(a0)}..${fmt(a1)} along and ${fmt(b0)}..${fmt(b1)} up ${where}, which is ${fmt(L)} x ${fmt(wall.height)}`,
           o.id,
-          undefined,
-          intrusion,
         )
         continue
       }
-    }
-    const list = byWall.get(wall.id) ?? []
-    for (const p of list) {
-      const pa0 = p.offset
-      const pa1 = p.offset + p.width
-      const pb0 = p.sill
-      const pb1 = p.sill + p.height
-      if (a0 < pa1 - EPS && pa0 < a1 - EPS && b0 < pb1 - EPS && pb0 < b1 - EPS) {
-        err('OPENINGS_OVERLAP', `openings ${o.id} and ${p.id} overlap on wall ${wall.id}`, o.id)
+      if (a0 <= EPS || a1 >= L - EPS || b1 >= wall.height - EPS) {
+        err(
+          'OPENING_TOUCHES_WALL_EDGE',
+          `opening ${o.id} touches a side or the top edge of ${where}; an opening must leave wall material on both sides and above it (a sill at the base is allowed)`,
+          o.id,
+        )
+        continue
       }
+      const extent = topology.extents.get(wall.id)
+      if (extent) {
+        const core = physicalCore(extent)
+        if (a0 <= core.a0 + EPS || a1 >= core.a1 - EPS) {
+          const intrusion = Math.max(core.a0 - a0, a1 - core.a1)
+          err(
+            'OPENING_IN_JUNCTION_ZONE',
+            `opening ${o.id} spans ${fmt(a0)}..${fmt(a1)} m along ${where}, but junctions leave that wall material only between ${fmt(core.a0)} and ${fmt(core.a1)} m; the opening reaches ${fmt(intrusion)} m into a consumed junction zone and was not shrunk`,
+            o.id,
+            undefined,
+            intrusion,
+          )
+          continue
+        }
+      }
+      const list = byWall.get(wall.id) ?? []
+      for (const p of list) {
+        if (a0 < p.a1 - EPS && p.a0 < a1 - EPS && b0 < p.b1 - EPS && p.b0 < b1 - EPS) {
+          err('OPENINGS_OVERLAP', `openings ${o.id} and ${p.openingId} overlap on ${where}`, o.id)
+        }
+      }
+      list.push({ openingId: o.id, a0, a1, b0, b1 })
+      byWall.set(wall.id, list)
     }
-    list.push(o)
-    byWall.set(wall.id, list)
   }
 
   // Fills: one per opening, of the matching kind.
@@ -207,9 +244,18 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
   for (const w of m.windows) {
     needMaterial(w.id, w.materialId)
     needSources(w.id, w.evidence?.sourceIds)
+    if (w.mullions) {
+      for (let i = 1; i < w.mullions.length; i++) {
+        if (w.mullions[i] <= w.mullions[i - 1]) {
+          err('SCHEMA', `window ${w.id}: mullion fractions must be strictly increasing`, w.id, 'mullions')
+          break
+        }
+      }
+    }
     fill(w.id, w.openingId, 'WINDOW', (o) => {
+      const lowest = openingHeadRange(o).min - o.sill
       if (2 * w.frameWidth >= o.width) return `frame width ${w.frameWidth} leaves no glazing in a ${o.width} m wide opening`
-      if (2 * w.frameWidth >= o.height) return `frame width ${w.frameWidth} leaves no glazing in a ${o.height} m tall opening`
+      if (2 * w.frameWidth >= lowest) return `frame width ${w.frameWidth} leaves no glazing in an opening only ${fmt(lowest)} m tall at its lowest edge`
       const wall = m.walls.find((x) => x.id === o.wallId)
       if (wall && w.frameInset + w.frameDepth > wall.thickness + EPS) return `frame reaches ${w.frameInset + w.frameDepth} m into a ${wall.thickness} m wall`
       return undefined
@@ -218,6 +264,8 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
   for (const d of m.doors) {
     needMaterial(d.id, d.materialId)
     needSources(d.id, d.evidence?.sourceIds)
+    const op = m.openings.find((x) => x.id === d.openingId)
+    if (op && openingIsRaked(op)) err('FILL_PROFILE_UNSUPPORTED', `door ${d.id} fills opening ${op.id}, whose head is raked; door fills take level heads only`, d.id)
     fill(d.id, d.openingId, 'DOOR', (o) => {
       if (2 * d.frameWidth >= o.width) return `frame width ${d.frameWidth} leaves no leaf in a ${o.width} m wide opening`
       if (d.frameWidth >= o.height) return `frame width ${d.frameWidth} leaves no leaf in a ${o.height} m tall opening`
@@ -240,6 +288,75 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needRect(r.id, r.footprint, 'footprint')
     if (r.kind === 'GABLE' && r.pitchDeg <= 0) err('INVALID_ROOF', `gable roof ${r.id} needs a positive pitch`, r.id, 'pitchDeg')
     if (r.kind === 'FLAT' && r.pitchDeg !== 0) err('INVALID_ROOF', `flat roof ${r.id} must have pitch 0`, r.id, 'pitchDeg')
+  }
+
+  // Roof openings: inside the roof's covered area (never touching its edges), within one
+  // slope of a gable, not overlapping each other; a penetration's element fits its hole.
+  const byRoof = new Map<string, PlanRect[]>()
+  for (const o of m.roofOpenings) {
+    needSources(o.id, o.evidence?.sourceIds)
+    needRect(o.id, o.footprint, 'footprint')
+    const roof = m.roofs.find((r) => r.id === o.roofId)
+    if (!roof) {
+      err('UNKNOWN_ROOF', `roof opening ${o.id} refers to roof "${o.roofId}", which does not exist`, o.id, 'roofId')
+      continue
+    }
+    if (!rectIsValid(o.footprint) || !rectIsValid(roof.footprint)) continue
+    const c = roofCoveredRect(roof)
+    const f = o.footprint
+    if (f.minX <= c.minX + EPS || f.maxX >= c.maxX - EPS || f.minZ <= c.minZ + EPS || f.maxZ >= c.maxZ - EPS) {
+      err(
+        'ROOF_OPENING_OUTSIDE_HOST',
+        `roof opening ${o.id} spans x ${fmt(f.minX)}..${fmt(f.maxX)} z ${fmt(f.minZ)}..${fmt(f.maxZ)}, which is not strictly inside the area x ${fmt(c.minX)}..${fmt(c.maxX)} z ${fmt(c.minZ)}..${fmt(c.maxZ)} covered by roof ${roof.id}`,
+        o.id,
+      )
+      continue
+    }
+    const crease = roofCreaseLine(roof)
+    if (crease) {
+      const lo = crease.axis === 'X' ? f.minX : f.minZ
+      const hi = crease.axis === 'X' ? f.maxX : f.maxZ
+      if (lo < crease.value - EPS ? hi >= crease.value - EPS : lo <= crease.value + EPS) {
+        err('ROOF_OPENING_CROSSES_RIDGE', `roof opening ${o.id} crosses or touches the ridge of roof ${roof.id} at ${crease.axis.toLowerCase()} = ${fmt(crease.value)}; an opening lies strictly within one slope`, o.id)
+        continue
+      }
+    }
+    for (const p of byRoof.get(roof.id) ?? []) {
+      if (f.minX < p.maxX - EPS && p.minX < f.maxX - EPS && f.minZ < p.maxZ - EPS && p.minZ < f.maxZ - EPS) {
+        err('ROOF_OPENINGS_OVERLAP', `roof openings ${o.id} and another opening overlap on roof ${roof.id}`, o.id)
+      }
+    }
+    byRoof.set(roof.id, [...(byRoof.get(roof.id) ?? []), f])
+    if (o.throughId !== undefined) {
+      const chimney = m.chimneys.find((x) => x.id === o.throughId)
+      if (!chimney) {
+        if (!seen.has(o.throughId)) err('UNKNOWN_TARGET', `roof opening ${o.id} lets "${o.throughId}" through, which does not exist`, o.id, 'throughId')
+        else err('ROOF_PENETRATION_MISMATCH', `roof opening ${o.id} lets "${o.throughId}" through, which is not a chimney`, o.id, 'throughId')
+        continue
+      }
+      if (o.kind !== 'PENETRATION') err('ROOF_PENETRATION_MISMATCH', `roof opening ${o.id} names a chimney but is a ${o.kind}; only a PENETRATION lets an element through`, o.id, 'kind')
+      const cf = chimney.footprint
+      if (cf.minX < f.minX - EPS || cf.maxX > f.maxX + EPS || cf.minZ < f.minZ - EPS || cf.maxZ > f.maxZ + EPS) {
+        err('ROOF_PENETRATION_MISMATCH', `roof opening ${o.id} (x ${fmt(f.minX)}..${fmt(f.maxX)} z ${fmt(f.minZ)}..${fmt(f.maxZ)}) does not contain the footprint of chimney ${chimney.id} it lets through`, o.id, 'footprint')
+      }
+    }
+  }
+  const roofFilled = new Map<string, string>()
+  for (const r of m.rooflights) {
+    needMaterial(r.id, r.materialId)
+    needSources(r.id, r.evidence?.sourceIds)
+    const o = m.roofOpenings.find((x) => x.id === r.roofOpeningId)
+    if (!o) {
+      err('UNKNOWN_ROOF_OPENING', `rooflight ${r.id} refers to roof opening "${r.roofOpeningId}", which does not exist`, r.id, 'roofOpeningId')
+      continue
+    }
+    if (o.kind !== 'ROOFLIGHT') err('FILL_KIND_MISMATCH', `rooflight ${r.id} fills roof opening ${o.id}, which is a ${o.kind}, not a ROOFLIGHT`, r.id)
+    const prev = roofFilled.get(o.id)
+    if (prev) err('ROOF_OPENING_FILLED_TWICE', `roof opening ${o.id} is filled by both ${prev} and ${r.id}`, r.id)
+    roofFilled.set(o.id, r.id)
+    if (rectIsValid(o.footprint) && 2 * r.frameWidth >= Math.min(rectWidth(o.footprint), rectDepth(o.footprint))) {
+      err('FILL_TOO_LARGE', `rooflight ${r.id}: frame width ${r.frameWidth} leaves no glazing in a ${fmt(rectWidth(o.footprint))} x ${fmt(rectDepth(o.footprint))} m roof opening`, r.id)
+    }
   }
   for (const b of m.balconies) {
     needLevel(b.id, b.levelId)

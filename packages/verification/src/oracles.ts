@@ -434,3 +434,132 @@ const norm2 = (v: OVec2): OVec2 => {
   const l = Math.hypot(v.x, v.z)
   return l > 0 ? { x: v.x / l, z: v.z / l } : v
 }
+
+// ---------------------------------------------------------------------------
+// Depth probing (recesses, portals, characteristic zones)
+// ---------------------------------------------------------------------------
+
+export type DepthProbeOptions = {
+  /** Corner of the probe rectangle, in world coordinates. */
+  origin: OVec3
+  /** Edge vectors of the probe rectangle: probe points are `origin + s·ea + t·eb`, s, t in [0, 1]. */
+  ea: OVec3
+  eb: OVec3
+  /** Direction every ray travels (need not be unit; distances are reported in world units). */
+  dir: OVec3
+  /** Samples along `ea` and along `eb`; points sit at cell centres, nudged off round numbers. */
+  samples: [number, number]
+  /** Distance from the probe plane within which material counts as "at the plane" (m). */
+  planeTolerance?: number
+}
+
+export type DepthProbeReport = {
+  rays: number
+  /** Distance along each ray to the first material (Infinity when the ray meets none). */
+  firstHit: number[]
+  /** The nearest first material found by any ray. */
+  shallowest: number
+  /** The farthest first material found by any ray that met material. */
+  deepest: number
+  /** Rays whose first material lies within `planeTolerance` of the probe plane. */
+  atPlane: number
+  /** Rays that met no material at all. */
+  open: number
+}
+
+/**
+ * Fire a grid of parallel rays from a rectangle and report, per ray, how far
+ * the first material lies (through the union of the given solids). Used to
+ * measure a recess: from the outer plane inward, every ray across the mouth
+ * must find its first material at the back plane, none at the outer plane.
+ */
+export function depthProbeReport(solids: ReadonlyArray<readonly OTri[]>, opts: DepthProbeOptions): DepthProbeReport {
+  const [na, nb] = opts.samples
+  const tol = opts.planeTolerance ?? 1e-3
+  const dl = len(opts.dir)
+  const dir = { x: opts.dir.x / dl, y: opts.dir.y / dl, z: opts.dir.z / dl }
+  const firstHit: number[] = []
+  let shallowest = Infinity
+  let deepest = -Infinity
+  let atPlane = 0
+  let open = 0
+  for (let i = 0; i < na; i++) {
+    for (let j = 0; j < nb; j++) {
+      const s = (i + 0.5) / na + 0.00137 / na
+      const t = (j + 0.5) / nb + 0.00091 / nb
+      const p = { x: opts.origin.x + opts.ea.x * s + opts.eb.x * t, y: opts.origin.y + opts.ea.y * s + opts.eb.y * t, z: opts.origin.z + opts.ea.z * s + opts.eb.z * t }
+      const runs = unionMaterialRuns(solids, p, dir)
+      const d = runs.length > 0 ? runs[0].t0 : Infinity
+      firstHit.push(d)
+      if (d === Infinity) open++
+      else {
+        shallowest = Math.min(shallowest, d)
+        deepest = Math.max(deepest, d)
+        if (d <= tol) atPlane++
+      }
+    }
+  }
+  return { rays: firstHit.length, firstHit, shallowest, deepest, atPlane, open }
+}
+
+// ---------------------------------------------------------------------------
+// Coverage along a line (railing infill, continuity of a fascia)
+// ---------------------------------------------------------------------------
+
+export type LineCoverage = {
+  length: number
+  /** Total length of the segment inside any of the solids. */
+  covered: number
+  /** covered / length. */
+  fraction: number
+  /** The longest uncovered stretch strictly inside the segment. */
+  longestGap: number
+  runs: MaterialRun[]
+}
+
+/**
+ * How much of the segment `from -> to` lies inside the union of the given
+ * solids, as distances from `from`. A glass balustrade reads as one long run
+ * with small gaps at its posts; a bar balustrade as many short runs; an
+ * absent one as nothing.
+ */
+export function lineCoverage(solids: ReadonlyArray<readonly OTri[]>, from: OVec3, to: OVec3): LineCoverage {
+  const d = sub(to, from)
+  const length = len(d)
+  const dir = { x: d.x / length, y: d.y / length, z: d.z / length }
+  // start just before the segment so a run beginning exactly at `from` is entered cleanly
+  const back = 1e-3
+  const origin = { x: from.x - dir.x * back, y: from.y - dir.y * back, z: from.z - dir.z * back }
+  const runs = unionMaterialRuns(solids, origin, dir)
+    .map((r) => ({ t0: Math.max(0, r.t0 - back), t1: Math.min(length, r.t1 - back) }))
+    .filter((r) => r.t1 > r.t0)
+  let covered = 0
+  let longestGap = 0
+  let cursor = 0
+  for (const r of runs) {
+    covered += r.t1 - r.t0
+    longestGap = Math.max(longestGap, r.t0 - cursor)
+    cursor = r.t1
+  }
+  longestGap = Math.max(longestGap, length - cursor)
+  return { length, covered, fraction: covered / length, longestGap, runs }
+}
+
+// ---------------------------------------------------------------------------
+// Plan point-in-polygon (room adjacency)
+// ---------------------------------------------------------------------------
+
+/** Even-odd test of a plan point against a simple polygon. Points on an edge count as inside. */
+export function pointInPolygon(p: OVec2, polygon: readonly OVec2[]): boolean {
+  let inside = false
+  const n = polygon.length
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const a = polygon[i]
+    const b = polygon[j]
+    // on the edge?
+    const cross = (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x)
+    if (Math.abs(cross) < 1e-12 && Math.min(a.x, b.x) - 1e-12 <= p.x && p.x <= Math.max(a.x, b.x) + 1e-12 && Math.min(a.z, b.z) - 1e-12 <= p.z && p.z <= Math.max(a.z, b.z) + 1e-12) return true
+    if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
+  }
+  return inside
+}

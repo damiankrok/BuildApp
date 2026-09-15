@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 import { useEffect, useState } from 'react'
-import type { PropertySpec, TopologyDescription } from '@buildapp/editor'
+import type { ObjectDescription, PropertySpec, TopologyDescription } from '@buildapp/editor'
 import type { Evidence } from '@buildapp/model'
 import { useSnapshot, useStore } from '../use-store.js'
 
@@ -59,19 +59,37 @@ function PropertyField({ id, spec, value }: { id: string; spec: PropertySpec; va
   )
 }
 
-function EvidenceView({ evidence }: { evidence: Evidence | undefined }): JSX.Element {
+function EvidenceView({ evidence, sources }: { evidence: Evidence | undefined; sources: ObjectDescription['evidenceSources'] }): JSX.Element {
   if (!evidence) {
     return (
-      <div className="evidence">
-        <span className="tag status-UNRESOLVED">no evidence</span>
+      <div className="evidence" data-testid="inspector-evidence">
+        <span className="tag status-UNRESOLVED" data-testid="inspector-evidence-status">
+          no evidence
+        </span>
       </div>
     )
   }
   return (
-    <div className="evidence">
-      <span className={`tag status-${evidence.status}`}>{evidence.status}</span>
+    <div className="evidence" data-testid="inspector-evidence">
+      <span className={`tag status-${evidence.status}`} data-testid="inspector-evidence-status">
+        {evidence.status}
+      </span>
+      {sources.length > 0 && (
+        <div data-testid="inspector-evidence-sources">
+          sources:
+          <ul style={{ margin: '2px 0 4px', paddingLeft: 16 }}>
+            {sources.map((src) => (
+              <li key={src.id} title={src.id}>
+                {src.label}
+                {src.kind ? ` (${src.kind.toLowerCase()})` : ''}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {evidence.source && <div>source: {evidence.source}</div>}
-      {evidence.locator && <div>locator: {evidence.locator}</div>}
+      {evidence.locator && <div data-testid="inspector-evidence-locator">locator: {evidence.locator}</div>}
+      {evidence.interpretation && <div>interpretation: {evidence.interpretation}</div>}
       {evidence.note && <div>note: {evidence.note}</div>}
       {evidence.properties &&
         Object.entries(evidence.properties).map(([k, v]) => (
@@ -202,6 +220,24 @@ export function Inspector(): JSX.Element {
               <span className="v">{d.levelId}</span>
             </>
           )}
+          {d.host && (
+            <>
+              <span className="k">{d.host.relation}</span>
+              <span className="v" data-testid="inspector-host">
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    store.select(d.host!.id)
+                  }}
+                  title={`select ${d.host.kind} ${d.host.id}`}
+                >
+                  {d.host.id}
+                </a>{' '}
+                <span className="unit">{d.host.kind}</span>
+              </span>
+            </>
+          )}
           {d.hostWallId && (
             <>
               <span className="k">host wall</span>
@@ -258,7 +294,7 @@ export function Inspector(): JSX.Element {
         <div className="panel-title" style={{ padding: '0 0 4px' }}>
           Evidence
         </div>
-        <EvidenceView evidence={obj.evidence as Evidence | undefined} />
+        <EvidenceView evidence={obj.evidence as Evidence | undefined} sources={d.evidenceSources} />
       </div>
       <div className="section">
         <div className="panel-title" style={{ padding: '0 0 4px' }}>

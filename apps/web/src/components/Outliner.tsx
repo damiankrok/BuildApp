@@ -15,6 +15,8 @@ const KIND_ABBR: Record<string, string> = {
   door: 'DR',
   slab: 'SLB',
   roof: 'RF',
+  roofOpening: 'ROP',
+  rooflight: 'RLT',
   balcony: 'BAL',
   railing: 'RL',
   chimney: 'CH',

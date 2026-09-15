@@ -2,7 +2,20 @@ import type { JSX } from 'react'
 import { useRef } from 'react'
 import type { ViewPreset } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
+import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
 import { useSnapshot, useStore } from '../use-store.js'
+
+/**
+ * The models BuildWorld can load from its own packages. Each entry is a
+ * factory returning a CanonicalBuildingModel built by the Building DSL; the
+ * store replaces its model with the result and the viewport recompiles.
+ * Nothing about a model is special to the UI: a file loaded from disk shows
+ * as "(file)" in the same selector.
+ */
+export const BUILTIN_MODELS: ReadonlyArray<{ id: string; label: string; create: () => ReturnType<typeof createDemoBuilding> }> = [
+  { id: 'demo-house', label: 'Demo house', create: () => createDemoBuilding() },
+  { id: 'marcowki-ge', label: 'Dom w marcówkach (GE)', create: () => createMarcowkiReferenceBuilding() },
+]
 
 const VIEWS: Array<{ id: ViewPreset; label: string }> = [
   { id: 'perspective', label: 'Persp' },
@@ -68,8 +81,27 @@ export function Toolbar(): JSX.Element {
           Load JSON
         </button>
         <input ref={fileRef} type="file" accept="application/json,.json" style={{ display: 'none' }} data-testid="load-input" onChange={onFile} />
+        <label>model</label>
+        <select
+          data-testid="model-select"
+          value={BUILTIN_MODELS.some((m) => m.id === snap.model.id) ? snap.model.id : '__file'}
+          onChange={(e) => {
+            const entry = BUILTIN_MODELS.find((m) => m.id === e.target.value)
+            if (entry) store.replaceModel(entry.create())
+          }}
+          title="Replace the model in the editor with one built from its command list"
+        >
+          {BUILTIN_MODELS.map((m) => (
+            <option key={m.id} value={m.id}>
+              {m.label}
+            </option>
+          ))}
+          <option value="__file" disabled>
+            (file)
+          </option>
+        </select>
         <button data-testid="reload-demo" onClick={() => store.replaceModel(createDemoBuilding())} title="Rebuild the demo building from its command list">
-          Demo
+          Reset
         </button>
       </div>
       <div className="group">

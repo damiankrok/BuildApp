@@ -22,6 +22,8 @@ export const ID_PREFIX: Record<SemanticKind, string> = {
   door: 'door',
   slab: 'slab',
   roof: 'roof',
+  roofOpening: 'roof-opening',
+  rooflight: 'rooflight',
   balcony: 'balcony',
   railing: 'railing',
   chimney: 'chimney',

@@ -16,14 +16,16 @@ import {
   validateModel,
   wallFrame,
   wallPlanPoint,
+  openingLeaves,
   type CanonicalBuildingModel,
   type Level,
+  type Opening,
   type Roof,
   type Wall,
 } from '@buildapp/model'
 import { compileDoorFill, compileWindowFill } from './fills.js'
 import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compileSlab, compileStairPlaceholder } from './features.js'
-import { compileRoofTriangles, roofBreaksAlong, roofGeometry, type RoofGeometry } from './roof-compiler.js'
+import { compileRoofTriangles, compileRooflightFill, roofBreaksAlong, roofGeometry, type RoofGeometry } from './roof-compiler.js'
 import { compileWall, type TopFunction } from './wall-compiler.js'
 import { boundsOfTriangles, type Bounds, type CompileDiagnostic, type CompiledMesh, type CompiledScene } from './types.js'
 
@@ -86,6 +88,22 @@ export function wallTopFunction(
       if (!g.covers(q.x, q.z)) uncovered = true
     }
   }
+  // Where the roof underside rises through the wall's nominal height the top
+  // changes from the soffit to the flat cap: that kink is a break too. The
+  // underside is linear between the roof's own breaks, so the crossing on each
+  // face is found exactly by interpolation over consecutive breaks.
+  const sorted = [...new Set([span.a0, span.a1, ...breaks])].sort((a, b) => a - b)
+  for (const c of [0, wall.thickness]) {
+    const under = (u: number): number => {
+      const q = wallPlanPoint(f, u, c)
+      return g.covers(q.x, q.z) ? g.undersideAt(q.x, q.z) - f.baseY - wall.height : 0
+    }
+    for (let i = 0; i + 1 < sorted.length; i++) {
+      const d0 = under(sorted[i])
+      const d1 = under(sorted[i + 1])
+      if ((d0 < -1e-9 && d1 > 1e-9) || (d0 > 1e-9 && d1 < -1e-9)) breaks.push(sorted[i] + (d0 / (d0 - d1)) * (sorted[i + 1] - sorted[i]))
+    }
+  }
   if (uncovered) {
     diagnostics.push({
       code: 'WALL_NOT_UNDER_ROOF',
@@ -127,15 +145,23 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
   // Junctions and rings -> physical wall extents. The model validated, so the resolution carries no errors.
   const topology = resolveWallTopology(model)
 
-  const openingsByWall = new Map<string, typeof model.openings>()
-  for (const o of byId(model.openings)) openingsByWall.set(o.wallId, [...(openingsByWall.get(o.wallId) ?? []), o])
+  // Every cut each wall carries: its own openings plus the leaves of openings hosted elsewhere.
+  // A leaf is the same semantic opening restated in that wall's frame (same id, its own offset).
+  const cutsByWall = new Map<string, Opening[]>()
+  for (const o of byId(model.openings)) {
+    for (const leaf of openingLeaves(o)) {
+      const cut: Opening = leaf.wallId === o.wallId ? o : { ...o, wallId: leaf.wallId, offset: leaf.offset, leaves: undefined }
+      cutsByWall.set(leaf.wallId, [...(cutsByWall.get(leaf.wallId) ?? []), cut])
+    }
+  }
+  const primaryWallOf = new Map(model.openings.map((o) => [o.id, o.wallId]))
   const windowByOpening = new Map(model.windows.map((w) => [w.openingId, w]))
   const doorByOpening = new Map(model.doors.map((d) => [d.openingId, d]))
 
   for (const wall of byId(model.walls)) {
     const level = levelOf(wall.levelId, wall.id)
     if (!level) continue
-    const openings = openingsByWall.get(wall.id) ?? []
+    const openings = cutsByWall.get(wall.id) ?? []
     const extent = topology.extents.get(wall.id) ?? nominalExtent(wall)
     const wt = wallTopFunction(wall, level, roofs, physicalSpan(extent))
     diagnostics.push(...wt.diagnostics)
@@ -153,9 +179,10 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
       triangles: r.wallTriangles,
     })
     for (const o of openings) {
+      const primary = primaryWallOf.get(o.id) === wall.id
       const reveal = r.reveals.get(o.id)
       if (!reveal) {
-        if (windowByOpening.has(o.id) || doorByOpening.has(o.id)) {
+        if (primary && (windowByOpening.has(o.id) || doorByOpening.has(o.id))) {
           diagnostics.push({ code: 'FILL_WITHOUT_OPENING', severity: 'WARNING', message: `the fill of opening ${o.id} was skipped because the opening was not cut`, objectId: o.id })
         }
         continue
@@ -172,6 +199,8 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
         materialId: materialOf(wall),
         triangles: reveal,
       })
+      // Fills sit in the host wall's leaf only.
+      if (!primary) continue
       const win = windowByOpening.get(o.id)
       if (win) {
         for (const piece of compileWindowFill(win, o, r.frame)) {
@@ -220,10 +249,28 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     meshes.push({ objectId: slab.id, objectKind: 'slab', part: 'SLAB', levelId: slab.levelId, solidId: slab.id, structural: true, materialId: materialOf(slab), triangles: tris })
   }
 
-  for (const [id, { roof }] of [...roofs.entries()].sort(([a], [b]) => (a < b ? -1 : 1))) {
+  const roofOpeningsByRoof = new Map<string, typeof model.roofOpenings>()
+  for (const o of byId(model.roofOpenings)) roofOpeningsByRoof.set(o.roofId, [...(roofOpeningsByRoof.get(o.roofId) ?? []), o])
+  const rooflightByOpening = new Map(model.rooflights.map((r) => [r.roofOpeningId, r]))
+  for (const [id, { roof, geometry }] of [...roofs.entries()].sort(([a], [b]) => (a < b ? -1 : 1))) {
     const level = levels.get(roof.levelId)!
-    const { triangles } = compileRoofTriangles(roof, level)
-    meshes.push({ objectId: id, objectKind: 'roof', part: 'ROOF', levelId: roof.levelId, solidId: id, structural: true, materialId: materialOf(roof), triangles })
+    const openings = roofOpeningsByRoof.get(id) ?? []
+    const r = compileRoofTriangles(roof, level, openings)
+    meshes.push({ objectId: id, objectKind: 'roof', part: 'ROOF', levelId: roof.levelId, solidId: id, structural: true, materialId: materialOf(roof), triangles: r.triangles })
+    for (const o of openings) {
+      const reveal = r.reveals.get(o.id)
+      if (!reveal) {
+        diagnostics.push({ code: 'ROOF_OPENING_NOT_CUT', severity: 'ERROR', message: `roof opening ${o.id} was not cut through roof ${id}`, objectId: o.id })
+        continue
+      }
+      meshes.push({ objectId: o.id, objectKind: 'roofOpening', part: 'ROOF_REVEAL', levelId: roof.levelId, solidId: id, hostRoofId: id, openingId: o.id, structural: true, materialId: materialOf(roof), triangles: reveal })
+      const rl = rooflightByOpening.get(o.id)
+      if (rl) {
+        for (const piece of compileRooflightFill(rl, o, geometry)) {
+          meshes.push({ objectId: rl.id, objectKind: 'rooflight', part: piece.part, levelId: roof.levelId, solidId: `${rl.id}:${piece.part}`, hostRoofId: id, openingId: o.id, structural: false, materialId: materialOf(rl), triangles: piece.triangles })
+        }
+      }
+    }
   }
 
   for (const b of byId(model.balconies)) {

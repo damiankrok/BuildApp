@@ -14,10 +14,13 @@ import {
   EvidenceSchema,
   EvidenceSourceSchema,
   IdSchema,
+  OpeningHeadSchema,
   OpeningKindSchema,
+  OpeningLeafSchema,
   PlanPolygonSchema,
   PlanRectSchema,
   RoofKindSchema,
+  RoofOpeningKindSchema,
   Vec2Schema,
   WallEndRefSchema,
   WallJunctionKindSchema,
@@ -177,6 +180,12 @@ export const CreateRoofSchema = z
   })
   .strict()
 
+/**
+ * A structural hole in a wall. `head` shapes the head (absent = level; RAKED
+ * slopes it from `height` at the near edge to `heightFar` at the far edge);
+ * `leaves` names further parallel wall leaves the same opening passes
+ * through, each with its own offset along its own wall.
+ */
 export const CutOpeningSchema = z
   .object({
     type: z.literal('cutOpening'),
@@ -187,6 +196,8 @@ export const CutOpeningSchema = z
     sill: nonNegative,
     width: positive,
     height: positive,
+    head: OpeningHeadSchema.optional(),
+    leaves: z.array(OpeningLeafSchema).optional(),
   })
   .strict()
 
@@ -200,6 +211,35 @@ export const PlaceWindowSchema = z
     frameInset: nonNegative.default(0.12),
     glassThickness: positive.default(0.024),
     divisions: z.number().int().min(1).default(1),
+    /** Mullion positions as fractions of the opening width; when given, they replace the equal `divisions`. */
+    mullions: z.array(z.number().gt(0).lt(1)).optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * A structural hole through a roof: the vertical prism over `footprint` is
+ * removed from the roof. ROOFLIGHT holes take a `placeRooflight` fill; a
+ * PENETRATION names the chimney that passes through it in `throughId`.
+ */
+export const CutRoofOpeningSchema = z
+  .object({
+    type: z.literal('cutRoofOpening'),
+    ...withId,
+    roofId: IdSchema,
+    kind: RoofOpeningKindSchema,
+    footprint: PlanRectSchema,
+    throughId: IdSchema.optional(),
+  })
+  .strict()
+
+export const PlaceRooflightSchema = z
+  .object({
+    type: z.literal('placeRooflight'),
+    ...withId,
+    roofOpeningId: IdSchema,
+    frameWidth: positive.default(0.07),
+    glassThickness: positive.default(0.024),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -367,6 +407,8 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   CutOpeningSchema,
   PlaceWindowSchema,
   PlaceDoorSchema,
+  CutRoofOpeningSchema,
+  PlaceRooflightSchema,
   CreateBalconySchema,
   CreateRailingSchema,
   PlaceChimneySchema,

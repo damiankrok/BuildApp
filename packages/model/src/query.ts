@@ -2,7 +2,7 @@
  * Read-only helpers over a CanonicalBuildingModel: lookups by id, wall frame
  * arithmetic, and the relations the rest of the system relies on.
  */
-import type { Vec2, Vec3 } from './geometry-types.js'
+import type { PlanRect, Vec2, Vec3 } from './geometry-types.js'
 import {
   COLLECTION_OF_KIND,
   OBJECT_COLLECTIONS,
@@ -11,7 +11,10 @@ import {
   type Level,
   type ObjectCollection,
   type Opening,
+  type OpeningLeaf,
   type Roof,
+  type RoofOpening,
+  type Rooflight,
   type SemanticKind,
   type SemanticObject,
   type Wall,
@@ -62,6 +65,49 @@ export const doorByOpening = (m: CanonicalBuildingModel, openingId: string): Doo
   m.doors.find((d) => d.openingId === openingId)
 export const openingsOfWall = (m: CanonicalBuildingModel, wallId: string): Opening[] =>
   m.openings.filter((o) => o.wallId === wallId)
+export const roofOpeningById = (m: CanonicalBuildingModel, id: string): RoofOpening | undefined =>
+  m.roofOpenings.find((o) => o.id === id)
+export const roofOpeningsOfRoof = (m: CanonicalBuildingModel, roofId: string): RoofOpening[] =>
+  m.roofOpenings.filter((o) => o.roofId === roofId)
+export const rooflightByOpening = (m: CanonicalBuildingModel, roofOpeningId: string): Rooflight | undefined =>
+  m.rooflights.find((r) => r.roofOpeningId === roofOpeningId)
+
+// ---------------------------------------------------------------------------
+// Opening shape helpers
+// ---------------------------------------------------------------------------
+
+/** Height of the opening's head above the wall base at `a` along the host wall (linear across a raked head, clamped to the opening's span). */
+export function openingHeadAt(o: Pick<Opening, 'offset' | 'width' | 'sill' | 'height' | 'head'>, a: number): number {
+  if (!o.head || o.head.kind === 'LEVEL') return o.sill + o.height
+  const f = Math.min(1, Math.max(0, (a - o.offset) / o.width))
+  return o.sill + o.height + f * (o.head.heightFar - o.height)
+}
+
+/** The tallest and the lowest head height of the opening above the wall base. */
+export const openingHeadRange = (o: Pick<Opening, 'sill' | 'height' | 'head'>): { min: number; max: number } => {
+  const far = o.head?.kind === 'RAKED' ? o.head.heightFar : o.height
+  return { min: o.sill + Math.min(o.height, far), max: o.sill + Math.max(o.height, far) }
+}
+
+/** True when the opening's head is not level. */
+export const openingIsRaked = (o: Pick<Opening, 'head' | 'height'>): boolean => o.head?.kind === 'RAKED' && o.head.heightFar !== o.height
+
+/** Every wall leaf an opening cuts: the host wall first, then the further leaves. */
+export const openingLeaves = (o: Opening): OpeningLeaf[] => [{ wallId: o.wallId, offset: o.offset }, ...(o.leaves ?? [])]
+
+/** The plan rectangle a roof covers, overhang included. */
+export const roofCoveredRect = (r: Pick<Roof, 'footprint' | 'overhang'>): PlanRect => ({
+  minX: r.footprint.minX - r.overhang,
+  maxX: r.footprint.maxX + r.overhang,
+  minZ: r.footprint.minZ - r.overhang,
+  maxZ: r.footprint.maxZ + r.overhang,
+})
+
+/** The crease line of a gable roof (`x = value` when the ridge runs along Z, `z = value` when it runs along X); none for a flat roof. */
+export const roofCreaseLine = (r: Pick<Roof, 'kind' | 'footprint' | 'ridgeAxis'>): { axis: 'X' | 'Z'; value: number } | undefined => {
+  if (r.kind !== 'GABLE') return undefined
+  return r.ridgeAxis === 'X' ? { axis: 'Z', value: (r.footprint.minZ + r.footprint.maxZ) / 2 } : { axis: 'X', value: (r.footprint.minX + r.footprint.maxX) / 2 }
+}
 export const wallsOfLevel = (m: CanonicalBuildingModel, levelId: string): Wall[] =>
   m.walls.filter((w) => w.levelId === levelId)
 export const junctionById = (m: CanonicalBuildingModel, id: string): WallJunction | undefined =>
@@ -93,6 +139,11 @@ export function levelIdOf(model: CanonicalBuildingModel, id: string): string | u
   if (hit.kind === 'wallJunction') {
     const j = hit.object as WallJunction
     return wallById(model, j.kind === 'CORNER' ? j.a.wallId : j.wall.wallId)?.levelId
+  }
+  if (hit.kind === 'roofOpening') return roofById(model, (hit.object as RoofOpening).roofId)?.levelId
+  if (hit.kind === 'rooflight') {
+    const ro = roofOpeningById(model, (hit.object as Rooflight).roofOpeningId)
+    return ro ? roofById(model, ro.roofId)?.levelId : undefined
   }
   return undefined
 }

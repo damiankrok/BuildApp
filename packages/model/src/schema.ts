@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.1.0' as const
+export const MODEL_SCHEMA_VERSION = '1.2.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -205,8 +205,34 @@ export const OpeningKindSchema = z.enum(['WINDOW', 'DOOR', 'PASSAGE'])
 export type OpeningKind = z.infer<typeof OpeningKindSchema>
 
 /**
- * A rectangular hole through its host wall, stated in the host wall's own
- * frame: `offset` along the wall from `start`, `sill` above the wall base.
+ * The shape of an opening's head. LEVEL (the default when absent) is the
+ * rectangular opening of schema 1.0.0 / 1.1.0. RAKED slopes the head in a
+ * straight line from `height` at the opening's near edge (`offset`) to
+ * `heightFar` at its far edge (`offset + width`), both above the wall base —
+ * a gable window whose head follows the roof. The structural hole is the
+ * trapezoid; nothing is painted.
+ */
+export const OpeningHeadSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('LEVEL') }).strict(),
+  z.object({ kind: z.literal('RAKED'), heightFar: positive }).strict(),
+])
+export type OpeningHead = z.infer<typeof OpeningHeadSchema>
+
+/**
+ * A further wall leaf the same physical opening passes through. Where two
+ * walls stand back to back (two rings abutting, a cavity wall stated as two
+ * leaves), one door is one semantic opening cut through every leaf; each leaf
+ * has its own `offset` along its own wall because each wall has its own
+ * origin. Sill, width, height and head are shared.
+ */
+export const OpeningLeafSchema = z.object({ wallId: IdSchema, offset: nonNegative }).strict()
+export type OpeningLeaf = z.infer<typeof OpeningLeafSchema>
+
+/**
+ * A hole through its host wall, stated in the host wall's own frame:
+ * `offset` along the wall from `start`, `sill` above the wall base, `height`
+ * to the head at the near edge. `head` shapes the head (absent = level);
+ * `leaves` names further wall leaves the same opening cuts through.
  */
 export const OpeningSchema = z
   .object({
@@ -217,6 +243,8 @@ export const OpeningSchema = z
     sill: nonNegative,
     width: positive,
     height: positive,
+    head: OpeningHeadSchema.optional(),
+    leaves: z.array(OpeningLeafSchema).optional(),
   })
   .strict()
 export type Opening = z.infer<typeof OpeningSchema>
@@ -236,6 +264,12 @@ export const WindowSchema = z
     frameInset: nonNegative,
     glassThickness: positive,
     divisions: z.number().int().min(1),
+    /**
+     * Where the mullions stand, as fractions of the opening width from the
+     * near edge, strictly increasing. When absent the glazing is split into
+     * `divisions` equal panes.
+     */
+    mullions: z.array(z.number().gt(0).lt(1)).optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -299,6 +333,44 @@ export const RoofSchema = z
   })
   .strict()
 export type Roof = z.infer<typeof RoofSchema>
+
+export const RoofOpeningKindSchema = z.enum(['ROOFLIGHT', 'PENETRATION'])
+export type RoofOpeningKind = z.infer<typeof RoofOpeningKindSchema>
+
+/**
+ * A structural hole through a roof: the vertical prism over a plan rectangle
+ * is removed from the roof solid, so a ray through it meets no roof material.
+ * ROOFLIGHT holes take a `Rooflight` fill; a PENETRATION lets the element
+ * named by `throughId` (a chimney) pass through the roof without sharing its
+ * volume. The rectangle must lie inside the roof's covered area and, on a
+ * gable, within one slope.
+ */
+export const RoofOpeningSchema = z
+  .object({
+    ...base,
+    roofId: IdSchema,
+    kind: RoofOpeningKindSchema,
+    footprint: PlanRectSchema,
+    throughId: IdSchema.optional(),
+  })
+  .strict()
+export type RoofOpening = z.infer<typeof RoofOpeningSchema>
+
+/**
+ * A rooflight filling a ROOFLIGHT roof opening: a frame ring between the
+ * roof's top surface and its underside, glazing at mid-depth. Separate
+ * geometry parts, like a window.
+ */
+export const RooflightSchema = z
+  .object({
+    ...base,
+    roofOpeningId: IdSchema,
+    frameWidth: positive,
+    glassThickness: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Rooflight = z.infer<typeof RooflightSchema>
 
 export const BalconySchema = z
   .object({
@@ -404,6 +476,8 @@ export const CanonicalBuildingModelSchema = z
     doors: z.array(DoorSchema),
     slabs: z.array(SlabSchema),
     roofs: z.array(RoofSchema),
+    roofOpenings: z.array(RoofOpeningSchema),
+    rooflights: z.array(RooflightSchema),
     balconies: z.array(BalconySchema),
     railings: z.array(RailingSchema),
     chimneys: z.array(ChimneySchema),
@@ -434,6 +508,8 @@ export const OBJECT_COLLECTIONS = [
   'doors',
   'slabs',
   'roofs',
+  'roofOpenings',
+  'rooflights',
   'balconies',
   'railings',
   'chimneys',
@@ -457,6 +533,8 @@ export const SEMANTIC_KINDS = [
   'door',
   'slab',
   'roof',
+  'roofOpening',
+  'rooflight',
   'balcony',
   'railing',
   'chimney',
@@ -479,6 +557,8 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   door: 'doors',
   slab: 'slabs',
   roof: 'roofs',
+  roofOpening: 'roofOpenings',
+  rooflight: 'rooflights',
   balcony: 'balconies',
   railing: 'railings',
   chimney: 'chimneys',
@@ -499,6 +579,8 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   doors: 'door',
   slabs: 'slab',
   roofs: 'roof',
+  roofOpenings: 'roofOpening',
+  rooflights: 'rooflight',
   balconies: 'balcony',
   railings: 'railing',
   chimneys: 'chimney',
@@ -520,6 +602,8 @@ export type SemanticObject =
   | Door
   | Slab
   | Roof
+  | RoofOpening
+  | Rooflight
   | Balcony
   | Railing
   | Chimney
@@ -547,6 +631,8 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     doors: [],
     slabs: [],
     roofs: [],
+    roofOpenings: [],
+    rooflights: [],
     balconies: [],
     railings: [],
     chimneys: [],

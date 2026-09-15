@@ -81,37 +81,124 @@ function extrudeLocalPolygon(out: Triangle[], f: WallFrame, poly: ReadonlyArray<
   }
 }
 
+/**
+ * A ring between two four-sided polygons in the wall's (a, b) plane — the
+ * outer outline `O` and the inner outline `I`, both in the same cyclic order —
+ * extruded from `c0` to `c1`. One closed manifold: caps between matching
+ * edges, outer sides facing away from the ring, inner sides facing into the
+ * hole. `localRing` is the rectangular case; a raked-head window frame is a
+ * trapezoid one.
+ */
+function localRingPolygon(out: Triangle[], f: WallFrame, O: ReadonlyArray<readonly [number, number]>, I: ReadonlyArray<readonly [number, number]>, c0: number, c1: number): void {
+  const P = (ab: readonly [number, number], c: number): Vec3 => wallPoint(f, ab[0], ab[1], c)
+  const ccw = polygonSignedArea(O.map(([a, b]) => ({ x: a, z: b }))) > 0
+  for (let i = 0; i < O.length; i++) {
+    const j = (i + 1) % O.length
+    const da = O[j][0] - O[i][0]
+    const db = O[j][1] - O[i][1]
+    const outward = add(scale(f.u, ccw ? db : -db), scale(f.up, ccw ? -da : da))
+    quadOut(out, P(O[i], c0), P(O[j], c0), P(I[j], c0), P(I[i], c0), f.n)
+    quadOut(out, P(O[i], c1), P(O[j], c1), P(I[j], c1), P(I[i], c1), scale(f.n, -1))
+    quadOut(out, P(O[i], c0), P(O[j], c0), P(O[j], c1), P(O[i], c1), outward)
+    quadOut(out, P(I[i], c0), P(I[j], c0), P(I[j], c1), P(I[i], c1), scale(outward, -1))
+  }
+}
+
 const MULLION_WIDTH = 0.05
 
+/**
+ * A window fill: a frame ring following the opening's outline (a rectangle,
+ * or a trapezoid under a raked head), glass panes and mullions inside it. The
+ * head line of the inner outline is the outer head offset by the frame width
+ * measured perpendicular to it, so the frame member is the same width all
+ * round.
+ */
 export function compileWindowFill(win: Window, opening: Opening, f: WallFrame): FillPiece[] {
   const a0 = opening.offset
   const a1 = opening.offset + opening.width
   const b0 = opening.sill
-  const b1 = opening.sill + opening.height
+  const hNear = opening.sill + opening.height
+  const hFar = opening.head?.kind === 'RAKED' ? opening.sill + opening.head.heightFar : hNear
   const fw = win.frameWidth
   const c0 = win.frameInset
   const c1 = win.frameInset + win.frameDepth
-  const frame: Triangle[] = []
-  localRing(frame, f, a0, a1, b0, b1, fw, c0, c1)
+  /** Outer head height at `a`. */
+  const headAt = (a: number): number => (hFar === hNear ? hNear : hNear + ((a - a0) / (a1 - a0)) * (hFar - hNear))
+  const rake = (hFar - hNear) / (a1 - a0)
+  /** Inner head height at `a`: the outer head lowered by the frame width, perpendicular to the head line. */
+  const innerHeadAt = (a: number): number => headAt(a) - fw * Math.sqrt(1 + rake * rake)
 
+  const frame: Triangle[] = []
   const innerA0 = a0 + fw
   const innerA1 = a1 - fw
   const innerB0 = b0 + fw
-  const innerB1 = b1 - fw
+  if (hFar === hNear) {
+    localRing(frame, f, a0, a1, b0, hNear, fw, c0, c1)
+  } else {
+    localRingPolygon(
+      frame,
+      f,
+      [
+        [a0, b0],
+        [a1, b0],
+        [a1, hFar],
+        [a0, hNear],
+      ],
+      [
+        [innerA0, innerB0],
+        [innerA1, innerB0],
+        [innerA1, innerHeadAt(innerA1)],
+        [innerA0, innerHeadAt(innerA0)],
+      ],
+      c0,
+      c1,
+    )
+  }
+
   const gc0 = c0 + win.frameDepth / 2 - win.glassThickness / 2
   const gc1 = gc0 + win.glassThickness
   const glass: Triangle[] = []
   const mullions: Triangle[] = []
-  const n = Math.max(1, win.divisions)
+  // Mullion positions: stated fractions of the opening width, or `divisions` equal panes.
+  const stated = win.mullions?.map((m) => a0 + m * opening.width).filter((ma) => ma > innerA0 + fw && ma < innerA1 - fw)
+  const n = stated ? stated.length + 1 : Math.max(1, win.divisions)
   const paneW = (innerA1 - innerA0) / n
   const mw = Math.min(MULLION_WIDTH, paneW / 3)
+  const mullionAt = (k: number): number => (stated ? stated[k - 1] : innerA0 + k * paneW)
+  const paneTop = (a: number): number => (hFar === hNear ? hNear - fw : innerHeadAt(a))
   for (let k = 0; k < n; k++) {
-    const pa0 = innerA0 + k * paneW + (k > 0 ? mw / 2 : 0)
-    const pa1 = innerA0 + (k + 1) * paneW - (k < n - 1 ? mw / 2 : 0)
-    localBox(glass, f, pa0, pa1, innerB0, innerB1, gc0, gc1)
+    const pa0 = k > 0 ? mullionAt(k) + mw / 2 : innerA0
+    const pa1 = k < n - 1 ? mullionAt(k + 1) - mw / 2 : innerA1
+    if (hFar === hNear) localBox(glass, f, pa0, pa1, innerB0, paneTop(pa0), gc0, gc1)
+    else
+      extrudeLocalPolygon(
+        glass,
+        f,
+        [
+          [pa0, innerB0],
+          [pa1, innerB0],
+          [pa1, paneTop(pa1)],
+          [pa0, paneTop(pa0)],
+        ],
+        gc0,
+        gc1,
+      )
     if (k > 0) {
-      const ma = innerA0 + k * paneW
-      localBox(mullions, f, ma - mw / 2, ma + mw / 2, innerB0, innerB1, c0, c1)
+      const ma = mullionAt(k)
+      if (hFar === hNear) localBox(mullions, f, ma - mw / 2, ma + mw / 2, innerB0, paneTop(ma), c0, c1)
+      else
+        extrudeLocalPolygon(
+          mullions,
+          f,
+          [
+            [ma - mw / 2, innerB0],
+            [ma + mw / 2, innerB0],
+            [ma + mw / 2, paneTop(ma + mw / 2)],
+            [ma - mw / 2, paneTop(ma - mw / 2)],
+          ],
+          c0,
+          c1,
+        )
     }
   }
   const out: FillPiece[] = [

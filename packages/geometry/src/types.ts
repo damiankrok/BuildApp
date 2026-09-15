@@ -26,6 +26,9 @@ export type GeometryPart =
   | 'DOOR_HANDLE'
   | 'SLAB'
   | 'ROOF'
+  | 'ROOF_REVEAL'
+  | 'ROOFLIGHT_FRAME'
+  | 'ROOFLIGHT_GLASS'
   | 'BALCONY'
   | 'RAILING_POST'
   | 'RAILING_RAIL'
@@ -47,9 +50,11 @@ export type CompiledMesh = {
    * exactly the triangles a closed-surface oracle should see together.
    */
   solidId: string
-  /** For reveals and fills: the wall that hosts the opening. */
+  /** For reveals and fills: the wall that hosts the opening (for a multi-leaf opening, the leaf this reveal lines). */
   hostWallId?: string
-  /** For reveals and fills: the opening. */
+  /** For roof reveals and rooflight fills: the roof that hosts the roof opening. */
+  hostRoofId?: string
+  /** For reveals and fills: the opening (a wall opening or a roof opening). */
   openingId?: string
   /** Structural solids take part in duplicate-volume checks; markers and glazing do not. */
   structural: boolean
@@ -67,6 +72,7 @@ export type CompileDiagnosticCode =
   | 'OPENING_NOT_CUT'
   | 'FILL_WITHOUT_OPENING'
   | 'POLYGON_NOT_TRIANGULATED'
+  | 'ROOF_OPENING_NOT_CUT'
 
 export type CompileDiagnostic = {
   code: CompileDiagnosticCode

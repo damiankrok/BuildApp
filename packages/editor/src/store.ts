@@ -286,8 +286,13 @@ export class EditorStore {
       for (const mesh of this.scene.meshes) if (mesh.levelId === id) out.add(mesh.objectId)
     }
     if (hit.kind === 'wall') {
-      for (const o of m.openings) if (o.wallId === id) out.add(o.id)
+      for (const o of m.openings) if (o.wallId === id || o.leaves?.some((l) => l.wallId === id)) out.add(o.id)
     }
+    if (hit.kind === 'roof') {
+      for (const o of m.roofOpenings) if (o.roofId === id) out.add(o.id)
+    }
+    if (hit.kind === 'roofOpening') out.add(id)
+    for (const o of [...out]) for (const r of m.rooflights) if (r.roofOpeningId === o) out.add(r.id)
     if (hit.kind === 'wallRing') {
       for (const wallId of (hit.object as WallRing).wallIds) {
         out.add(wallId)
@@ -308,7 +313,7 @@ export class EditorStore {
 
   /** Whether a compiled mesh is currently shown. */
   isMeshVisible(mesh: CompiledMesh): boolean {
-    if (!this.roofsVisible && mesh.objectKind === 'roof') return false
+    if (!this.roofsVisible && (mesh.objectKind === 'roof' || mesh.hostRoofId)) return false
     if (this.isolatedLevelId && mesh.levelId !== this.isolatedLevelId) return false
     if (this.isolated) {
       const fam = this.familyOf(this.isolated)
@@ -316,6 +321,7 @@ export class EditorStore {
     }
     if (this.hidden.has(mesh.objectId)) return false
     if (mesh.hostWallId && this.hidden.has(mesh.hostWallId)) return false
+    if (mesh.hostRoofId && this.hidden.has(mesh.hostRoofId)) return false
     if (mesh.openingId && this.hidden.has(mesh.openingId)) return false
     if (mesh.levelId && this.hidden.has(mesh.levelId)) return false
     return true
@@ -344,6 +350,12 @@ export class EditorStore {
     const levelId = levelIdOf(m, id)
     const o = hit.object as Record<string, unknown>
     const hostWallId = hit.kind === 'opening' ? (o.wallId as string) : hit.kind === 'window' || hit.kind === 'door' ? m.openings.find((x) => x.id === o.openingId)?.wallId : undefined
+    const host = hostOf(m, hit.kind, hit.object)
+    const evidence = o.evidence as { sourceIds?: string[] } | undefined
+    const evidenceSources = (evidence?.sourceIds ?? []).map((sid) => {
+      const src = m.evidenceSources.find((x) => x.id === sid)
+      return { id: sid, label: src?.label ?? sid, kind: src?.kind, uri: src?.uri }
+    })
     return {
       id,
       kind: hit.kind,
@@ -351,6 +363,8 @@ export class EditorStore {
       name: (o.name as string | undefined) ?? id,
       levelId,
       hostWallId,
+      host,
+      evidenceSources,
       openingId: hit.kind === 'window' || hit.kind === 'door' ? (o.openingId as string) : undefined,
       properties: editableProperties(hit.kind, hit.object),
       meshCount: this.scene.meshes.filter((mm) => mm.objectId === id).length,
@@ -406,6 +420,9 @@ export type PropertySpec = {
   options?: readonly string[]
 }
 
+/** The object an object is hosted by: its parent in the model's ownership chain. */
+export type HostRef = { id: string; kind: SemanticKind; relation: string }
+
 export type ObjectDescription = {
   id: string
   kind: SemanticKind
@@ -413,10 +430,50 @@ export type ObjectDescription = {
   name: string
   levelId?: string
   hostWallId?: string
+  /** Generic parent: a wall for an opening, an opening for a fill, a roof for a roof opening, a balcony for a railing, ... */
+  host?: HostRef
+  /** The evidence sources the object's `evidence.sourceIds` cite, resolved to their labels. */
+  evidenceSources: Array<{ id: string; label: string; kind?: string; uri?: string }>
   openingId?: string
   properties: PropertySpec[]
   meshCount: number
   topology?: TopologyDescription
+}
+
+/** The ownership parent of an object, by kind. Nothing here is project-specific: it reads the generic reference fields. */
+export function hostOf(m: CanonicalBuildingModel, kind: SemanticKind, object: unknown): HostRef | undefined {
+  const o = object as Record<string, unknown>
+  switch (kind) {
+    case 'opening':
+      return { id: o.wallId as string, kind: 'wall', relation: 'cut through' }
+    case 'window':
+    case 'door':
+      return { id: o.openingId as string, kind: 'opening', relation: 'fills' }
+    case 'roofOpening':
+      return { id: o.roofId as string, kind: 'roof', relation: 'cut through' }
+    case 'rooflight':
+      return { id: o.roofOpeningId as string, kind: 'roofOpening', relation: 'fills' }
+    case 'railing':
+      return typeof o.hostId === 'string' ? { id: o.hostId, kind: m.balconies.some((b) => b.id === o.hostId) ? 'balcony' : 'slab', relation: 'stands on' } : undefined
+    case 'wall':
+    case 'room':
+    case 'slab':
+    case 'roof':
+    case 'balcony':
+    case 'chimney':
+    case 'stair':
+      return typeof o.levelId === 'string' ? { id: o.levelId, kind: 'level', relation: 'on level' } : undefined
+    case 'wallRing':
+      return typeof o.levelId === 'string' ? { id: o.levelId, kind: 'level', relation: 'on level' } : undefined
+    case 'wallJunction': {
+      const j = object as WallJunction
+      return j.kind === 'CORNER' ? { id: j.a.wallId, kind: 'wall', relation: 'joins' } : { id: j.againstWallId, kind: 'wall', relation: 'against' }
+    }
+    case 'level':
+      return m.building ? { id: m.building.id, kind: 'building', relation: 'in building' } : undefined
+    default:
+      return undefined
+  }
 }
 
 const num = (key: string, label: string, unit = 'm', step = 0.05, min?: number, max?: number): PropertySpec => ({ key, label, type: 'number', unit, step, min, max })
@@ -450,6 +507,10 @@ export function editableProperties(kind: SemanticKind, object?: unknown): Proper
       return [text('name', 'Name'), num('topOffset', 'Top offset'), num('thickness', 'Thickness', 'm', 0.01, 0.01)]
     case 'roof':
       return [text('name', 'Name'), num('pitchDeg', 'Pitch', '°', 1, 0, 85), num('eaveOffset', 'Eave offset'), num('overhang', 'Overhang', 'm', 0.05, 0), num('thickness', 'Thickness', 'm', 0.01, 0.01), sel('ridgeAxis', 'Ridge axis', ['X', 'Z'])]
+    case 'roofOpening':
+      return [text('name', 'Name'), num('footprint.minX', 'Min x'), num('footprint.maxX', 'Max x'), num('footprint.minZ', 'Min z'), num('footprint.maxZ', 'Max z')]
+    case 'rooflight':
+      return [text('name', 'Name'), num('frameWidth', 'Frame width', 'm', 0.01, 0.01), num('glassThickness', 'Glass thickness', 'm', 0.002, 0.002)]
     case 'balcony':
       return [text('name', 'Name'), sel('kind', 'Kind', ['BALCONY', 'TERRACE', 'LOGGIA']), num('topOffset', 'Top offset'), num('thickness', 'Thickness', 'm', 0.01, 0.01)]
     case 'railing':
@@ -533,7 +594,25 @@ function buildTree(m: CanonicalBuildingModel): TreeNode[] {
     }
     group('room', 'Rooms', m.rooms.filter((r) => r.levelId === level.id).map((r) => ({ id: r.id, kind: 'room' as const, label: label(r), children: [] })))
     group('slab', 'Slabs', m.slabs.filter((s) => s.levelId === level.id).map((s) => ({ id: s.id, kind: 'slab' as const, label: label(s), children: [] })))
-    group('roof', 'Roofs', m.roofs.filter((r) => r.levelId === level.id).map((r) => ({ id: r.id, kind: 'roof' as const, label: label(r), children: [] })))
+    group(
+      'roof',
+      'Roofs',
+      m.roofs
+        .filter((r) => r.levelId === level.id)
+        .map((r) => ({
+          id: r.id,
+          kind: 'roof' as const,
+          label: label(r),
+          children: m.roofOpenings
+            .filter((o) => o.roofId === r.id)
+            .map((o) => ({
+              id: o.id,
+              kind: 'roofOpening' as const,
+              label: label(o, `${o.kind.toLowerCase()} ${o.footprint.maxX - o.footprint.minX}×${o.footprint.maxZ - o.footprint.minZ}`),
+              children: m.rooflights.filter((x) => x.roofOpeningId === o.id).map((x) => ({ id: x.id, kind: 'rooflight' as const, label: label(x, 'Rooflight'), children: [] })),
+            })),
+        })),
+    )
     group(
       'balcony',
       'Balconies',

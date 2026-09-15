@@ -1,0 +1,14 @@
+{
+  "name": "@buildapp/reference-marcowki",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reference specimen: Dom w marcówkach (GE) transcribed from the researched source truth into Building DSL commands. Evidence, facts, command generation, expected metrics and the unresolved ledger. No geometry, no renderer.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": { "@buildapp/model": "*", "@buildapp/commands": "*" },
+  "devDependencies": { "@buildapp/geometry": "*", "@buildapp/verification": "*" }
+}

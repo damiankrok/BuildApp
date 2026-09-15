@@ -18,6 +18,8 @@ import {
   MaterialSchema,
   OpeningSchema,
   RailingSchema,
+  RoofOpeningSchema,
+  RooflightSchema,
   RoofSchema,
   RoomSchema,
   SlabSchema,
@@ -81,6 +83,8 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   door: DoorSchema,
   slab: SlabSchema,
   roof: RoofSchema,
+  roofOpening: RoofOpeningSchema,
+  rooflight: RooflightSchema,
   balcony: BalconySchema,
   railing: RailingSchema,
   chimney: ChimneySchema,
@@ -90,7 +94,7 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   evidenceSource: EvidenceSourceSchema,
 }
 
-const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'balcony', 'railing', 'chimney']
+const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney']
 
 const stripUndefined = <T extends object>(o: T): T => {
   const out: Record<string, unknown> = {}
@@ -330,7 +334,18 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return
     }
     case 'cutOpening':
-      add('openings', 'opening', { id: c.id, ...common(c), wallId: c.wallId, kind: c.kind, offset: c.offset, sill: c.sill, width: c.width, height: c.height })
+      add('openings', 'opening', {
+        id: c.id,
+        ...common(c),
+        wallId: c.wallId,
+        kind: c.kind,
+        offset: c.offset,
+        sill: c.sill,
+        width: c.width,
+        height: c.height,
+        head: c.head,
+        leaves: c.leaves,
+      })
       return
     case 'placeWindow':
       add('windows', 'window', {
@@ -342,8 +357,15 @@ function execute(d: Draft, c: ResolvedCommand): void {
         frameInset: c.frameInset,
         glassThickness: c.glassThickness,
         divisions: c.divisions,
+        mullions: c.mullions,
         materialId: c.materialId,
       })
+      return
+    case 'cutRoofOpening':
+      add('roofOpenings', 'roofOpening', { id: c.id, ...common(c), roofId: c.roofId, kind: c.kind, footprint: c.footprint, throughId: c.throughId })
+      return
+    case 'placeRooflight':
+      add('rooflights', 'rooflight', { id: c.id, ...common(c), roofOpeningId: c.roofOpeningId, frameWidth: c.frameWidth, glassThickness: c.glassThickness, materialId: c.materialId })
       return
     case 'placeDoor':
       add('doors', 'door', {
@@ -485,8 +507,26 @@ function move(d: Draft, c: Extract<ResolvedCommand, { type: 'moveFeature' }>): v
     case 'wall':
     case 'railing':
       return put({ ...o, start: shift(o.start as Vec2, c.dx, c.dz), end: shift(o.end as Vec2, c.dx, c.dz), baseOffset: (o.baseOffset as number) + c.dy })
-    case 'opening':
-      return put({ ...o, offset: (o.offset as number) + c.dAlong, sill: (o.sill as number) + c.dy })
+    case 'opening': {
+      // Further leaves move the same distance along their own walls, in the direction that keeps the passage aligned.
+      const opening = o as unknown as Opening
+      const host = m.walls.find((w) => w.id === opening.wallId)
+      const dirOf = (w: Wall): Vec2 => {
+        const L = wallLength(w)
+        return { x: (w.end.x - w.start.x) / L, z: (w.end.z - w.start.z) / L }
+      }
+      const leaves = opening.leaves?.map((leaf) => {
+        const w = m.walls.find((x) => x.id === leaf.wallId)
+        if (!w || !host) return leaf
+        const u0 = dirOf(host)
+        const u1 = dirOf(w)
+        const sign = u0.x * u1.x + u0.z * u1.z >= 0 ? 1 : -1
+        return { ...leaf, offset: leaf.offset + sign * c.dAlong }
+      })
+      return put(stripUndefined({ ...o, offset: (o.offset as number) + c.dAlong, sill: (o.sill as number) + c.dy, leaves }))
+    }
+    case 'roofOpening':
+      return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz) })
     case 'room':
       return put({ ...o, polygon: (o.polygon as Vec2[]).map((p) => shift(p, c.dx, c.dz)) })
     case 'slab':
@@ -515,6 +555,7 @@ function resize(d: Draft, c: Extract<ResolvedCommand, { type: 'resizeFeature' }>
     opening: ['width', 'height'],
     railing: ['length', 'height'],
     roof: ['footprint', 'thickness'],
+    roofOpening: ['footprint'],
     balcony: ['footprint', 'thickness'],
     chimney: ['footprint', 'height'],
     stair: ['footprint'],
@@ -574,6 +615,9 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
       for (const j of m.wallJunctions) if (junctionWallIds(j).includes(id)) out.push(j.id)
       for (const r of m.wallRings) if (r.wallIds.includes(id)) out.push(r.id)
     }
+    if (k === 'roof') for (const o of m.roofOpenings) if (o.roofId === id) out.push(o.id)
+    if (k === 'roofOpening') for (const r of m.rooflights) if (r.roofOpeningId === id) out.push(r.id)
+    if (k === 'chimney') for (const o of m.roofOpenings) if (o.throughId === id) out.push(o.id)
     if (k === 'wallJunction') for (const r of m.wallRings) if (r.junctionIds.includes(id)) out.push(r.id)
     if (k === 'level') for (const r of m.wallRings) if (r.levelId === id) out.push(r.id)
     if (k === 'opening') {
@@ -614,6 +658,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
   m.doors = keep(m.doors)
   m.slabs = keep(m.slabs)
   m.roofs = keep(m.roofs)
+  m.roofOpenings = keep(m.roofOpenings)
+  m.rooflights = keep(m.rooflights)
   m.balconies = keep(m.balconies)
   m.railings = keep(m.railings)
   m.chimneys = keep(m.chimneys)
@@ -645,7 +691,15 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
   m.doors = fixMaterial(m.doors)
   m.slabs = fixMaterial(m.slabs)
   m.roofs = fixMaterial(m.roofs)
+  m.rooflights = fixMaterial(m.rooflights)
   m.balconies = fixMaterial(m.balconies)
+  // An opening keeps its other leaves when one leaf wall goes.
+  m.openings = m.openings.map((o) => {
+    if (!o.leaves || !o.leaves.some((l) => toRemove.has(l.wallId))) return o
+    d.changed.push(o.id)
+    const leaves = o.leaves.filter((l) => !toRemove.has(l.wallId))
+    return stripUndefined({ ...o, leaves: leaves.length > 0 ? leaves : undefined })
+  })
   m.chimneys = fixMaterial(m.chimneys)
   m.railings = fixMaterial(m.railings).map((r) => {
     if (r.hostId !== undefined && toRemove.has(r.hostId)) {
@@ -684,6 +738,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     m.doors = scrub(m.doors)
     m.slabs = scrub(m.slabs)
     m.roofs = scrub(m.roofs)
+    m.roofOpenings = scrub(m.roofOpenings)
+    m.rooflights = scrub(m.rooflights)
     m.balconies = scrub(m.balconies)
     m.railings = scrub(m.railings)
     m.chimneys = scrub(m.chimneys)

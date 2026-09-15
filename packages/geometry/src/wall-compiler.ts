@@ -45,8 +45,18 @@
  * peaked polyline; a wall that dies into a sloping roof soffit returns a
  * height that differs between its two faces, which closes the eave wedge.
  * Between two consecutive `topBreaks` the function must be linear in `u`.
+ *
+ * ## Raked heads
+ *
+ * An opening whose head is RAKED is a trapezoid: its head runs in a straight
+ * line from the near-edge height to the far-edge height. Both heights are
+ * height breaks, and every `u` where the head line crosses another height
+ * break is an a-break, so inside one strip the head line stays inside one
+ * band; the cell that band makes is then the material *above* the line, the
+ * head reveal is the sloped quad along it, and the two jambs are as tall as
+ * the head is at their edge. The hole is real and the wall closes over it.
  */
-import { nominalExtent, wallFrame, wallPoint, type Level, type Opening, type Wall, type WallExtent, type WallFrame } from '@buildapp/model'
+import { nominalExtent, openingHeadAt, wallFrame, wallPoint, type Level, type Opening, type Wall, type WallExtent, type WallFrame } from '@buildapp/model'
 import { quadOut, triOut } from './primitives.js'
 import { scale, type CompileDiagnostic, type Triangle, type Vec3 } from './types.js'
 
@@ -129,6 +139,11 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   }
 
   // --- Height breaks come from the openings; the top function is snapped to them ---
+  /** Head height of an opening at `u` before snapping: level, or linear across a raked head. */
+  const rawHeadAt = (o: Opening, u: number): number => openingHeadAt(o, u)
+  const headNear = (o: Opening): number => o.sill + o.height
+  const headFar = (o: Opening): number => (o.head?.kind === 'RAKED' ? o.sill + o.head.heightFar : o.sill + o.height)
+
   const candidateBreaks = uniqueSorted([A0, A1, ...input.topBreaks, ...openings.flatMap((o) => [o.offset, o.offset + o.width])], A0, A1)
 
   // Accept openings whose head clears the top everywhere along their span, on both faces.
@@ -136,15 +151,24 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
   for (const o of openings) {
     const a0 = o.offset
     const a1 = o.offset + o.width
-    const head = o.sill + o.height
     const us = [a0, a1, ...candidateBreaks.filter((u) => u > a0 + EPS && u < a1 - EPS)]
-    let lowest = Infinity
-    for (const u of us) for (const c of [0, T]) lowest = Math.min(lowest, input.top(u, c))
-    if (head > lowest + EPS) {
+    let worst = -Infinity
+    let lowestTop = Infinity
+    for (const u of us) {
+      const head = rawHeadAt(o, u)
+      for (const c of [0, T]) {
+        const t = input.top(u, c)
+        if (head - t > worst) {
+          worst = head - t
+          lowestTop = t
+        }
+      }
+    }
+    if (worst > EPS) {
       diagnostics.push({
         code: 'OPENING_ABOVE_WALL_TOP',
         severity: 'ERROR',
-        message: `opening ${o.id} reaches ${head.toFixed(3)} m above the base of wall ${wall.id}, whose top is only ${lowest.toFixed(3)} m there; the opening was not cut and not clipped`,
+        message: `opening ${o.id} reaches ${(lowestTop + worst).toFixed(3)} m above the base of wall ${wall.id}, whose top is only ${lowestTop.toFixed(3)} m there; the opening was not cut and not clipped`,
         objectId: o.id,
       })
       continue
@@ -152,22 +176,39 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     accepted.push(o)
   }
 
-  // Height breaks: the base and every sill and head. The top function is the upper boundary.
+  // Height breaks: the base and every sill and head (both heads of a raked opening). The top function is the upper boundary.
   const bBreaks: number[] = [0]
-  for (const b of accepted.flatMap((o) => [o.sill, o.sill + o.height]).sort((x, y) => x - y)) {
+  for (const b of accepted.flatMap((o) => [o.sill, headNear(o), headFar(o)]).sort((x, y) => x - y)) {
     if (b - bBreaks[bBreaks.length - 1] > EPS) bBreaks.push(b)
   }
 
-  // Every opening's sill and head, snapped to the canonical break values so
+  // Every opening's sill and heads, snapped to the canonical break values so
   // that 0.8 + 1 and 1.2 + 0.6 are the same height everywhere they are used.
   const snapB = (b: number): number => {
     for (const x of bBreaks) if (Math.abs(x - b) <= EPS) return x
     return b
   }
-  const band = new Map<string, { s: number; h: number }>()
-  for (const o of accepted) band.set(o.id, { s: snapB(o.sill), h: snapB(o.sill + o.height) })
+  const band = new Map<string, { s: number; h0: number; h1: number }>()
+  for (const o of accepted) band.set(o.id, { s: snapB(o.sill), h0: snapB(headNear(o)), h1: snapB(headFar(o)) })
   const sillOf = (o: Opening): number => band.get(o.id)!.s
-  const headOf = (o: Opening): number => band.get(o.id)!.h
+  /** Head height at `u`, from the snapped near and far heads: exact at the opening's edges, linear between. */
+  const headAt = (o: Opening, u: number): number => {
+    const b = band.get(o.id)!
+    if (b.h0 === b.h1 || u <= o.offset) return b.h0
+    if (u >= o.offset + o.width) return b.h1
+    return b.h0 + ((u - o.offset) / o.width) * (b.h1 - b.h0)
+  }
+  /** `u` values where a raked head crosses a height break, so that no strip's head line leaves one band. */
+  const headCrossings: number[] = []
+  for (const o of accepted) {
+    const b = band.get(o.id)!
+    if (b.h0 === b.h1) continue
+    const lo = Math.min(b.h0, b.h1)
+    const hi = Math.max(b.h0, b.h1)
+    for (const x of bBreaks) {
+      if (x > lo + EPS && x < hi - EPS) headCrossings.push(o.offset + ((x - b.h0) / (b.h1 - b.h0)) * o.width)
+    }
+  }
 
   const topCache = new Map<string, number>()
   const topAt = (u: number, c: number): number => {
@@ -212,16 +253,20 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     return out
   }
 
-  // --- a-breaks: candidates plus every crossing of the top with a height break ---
+  // --- a-breaks: candidates, every crossing of a raked head with a height break, every crossing of the top with a height break ---
+  const withHeads = uniqueSorted([...candidateBreaks, ...headCrossings], A0, A1)
   const crossings: number[] = []
-  for (let i = 0; i + 1 < candidateBreaks.length; i++) crossings.push(...crossingsBetween(candidateBreaks[i], candidateBreaks[i + 1], [0, T]))
-  const aBreaks = uniqueSorted([...candidateBreaks, ...crossings], A0, A1)
+  for (let i = 0; i + 1 < withHeads.length; i++) crossings.push(...crossingsBetween(withHeads[i], withHeads[i + 1], [0, T]))
+  const aBreaks = uniqueSorted([...withHeads, ...crossings], A0, A1)
 
   const covering = (u0: number, u1: number): Opening[] => accepted.filter((o) => o.offset <= u0 + EPS && o.offset + o.width >= u1 - EPS)
-  const isVoid = (strip: Opening[], lo: number, hi: number): boolean =>
-    Number.isFinite(hi) && strip.some((o) => sillOf(o) <= lo + EPS && headOf(o) >= hi - EPS)
 
-  /** One face strip `[u0, u1]` on face `c`, split on the height breaks, skipping hole cells. */
+  /**
+   * One face strip `[u0, u1]` on face `c`, split on the height breaks, skipping
+   * hole cells. Within a strip a raked head is a straight line that stays inside
+   * one band (the a-breaks include its crossings), so a cell is either solid,
+   * void, or the part above the head line.
+   */
   const tileFace = (u0: number, u1: number, c: number, strip: Opening[]): void => {
     const outward = c === 0 ? nOut : nIn
     const t0 = topAt(u0, c)
@@ -230,10 +275,28 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
       const lo = bBreaks[j]
       const hi = j + 1 < bBreaks.length ? bBreaks[j + 1] : Infinity
       if (t0 <= lo + EPS && t1 <= lo + EPS) continue
-      if (isVoid(strip, lo, hi)) continue
+      let bottom0 = lo
+      let bottom1 = lo
+      let skip = false
+      for (const o of strip) {
+        const s = sillOf(o)
+        const h0 = headAt(o, u0)
+        const h1 = headAt(o, u1)
+        if (hi <= s + EPS) continue // below the sill: solid
+        if (lo >= Math.max(h0, h1) - EPS) continue // above the head: solid
+        if (Number.isFinite(hi) && hi <= Math.min(h0, h1) + EPS) {
+          skip = true // inside the opening
+          break
+        }
+        // the head line runs through this band: keep the material above it
+        bottom0 = Math.max(bottom0, h0)
+        bottom1 = Math.max(bottom1, h1)
+      }
+      if (skip) continue
       const top0 = Math.min(hi, t0)
       const top1 = Math.min(hi, t1)
-      quadOut(wallTriangles, P(u0, lo, c), P(u1, lo, c), P(u1, top1, c), P(u0, top0, c), outward)
+      if (top0 <= bottom0 + EPS && top1 <= bottom1 + EPS) continue
+      quadOut(wallTriangles, P(u0, bottom0, c), P(u1, bottom1, c), P(u1, top1, c), P(u0, top0, c), outward)
     }
   }
 
@@ -250,23 +313,25 @@ export function compileWall(input: WallCompileInput): WallCompileOutput {
     for (const o of strip) {
       const list = reveals.get(o.id) ?? []
       const s = sillOf(o)
-      const h = headOf(o)
+      const h0 = headAt(o, u0)
+      const h1 = headAt(o, u1)
       if (s > EPS) quadOut(list, P(u0, s, 0), P(u1, s, 0), P(u1, s, T), P(u0, s, T), up)
-      quadOut(list, P(u0, h, 0), P(u1, h, 0), P(u1, h, T), P(u0, h, T), down)
+      // the head reveal follows the head line: level, or raked in one plane per strip
+      quadOut(list, P(u0, h0, 0), P(u1, h1, 0), P(u1, h1, T), P(u0, h0, T), down)
       reveals.set(o.id, list)
     }
   }
 
-  // --- Jambs: split on the height breaks between sill and head ---
+  // --- Jambs: split on the height breaks between sill and the head at that edge ---
   for (const o of accepted) {
     const list = reveals.get(o.id) ?? []
     const s = sillOf(o)
-    const h = headOf(o)
-    const bs = [s, ...bBreaks.filter((b) => b > s + EPS && b < h - EPS), h]
     for (const [a, outward] of [
       [o.offset, uPlus],
       [o.offset + o.width, uMinus],
     ] as const) {
+      const h = headAt(o, a)
+      const bs = [s, ...bBreaks.filter((b) => b > s + EPS && b < h - EPS), h]
       for (let j = 0; j + 1 < bs.length; j++) {
         quadOut(list, P(a, bs[j], 0), P(a, bs[j], T), P(a, bs[j + 1], T), P(a, bs[j + 1], 0), outward)
       }

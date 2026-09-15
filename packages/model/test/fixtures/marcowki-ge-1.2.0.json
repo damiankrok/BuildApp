@@ -1,0 +1,4475 @@
+{
+  "balconies": [
+    {
+      "evidence": {
+        "locator": "attic plan balcony floor from the 0.026 m edge line at x 3.338 to the east return it carries; top and thickness from the rear elevation fascia 2.41..2.96",
+        "properties": {
+          "minX": "SOURCE_DERIVED",
+          "thickness": "VISUAL_INFERRED",
+          "topOffset": "VISUAL_INFERRED"
+        },
+        "source": "src-attic-plan + src-gold-facade + src-elev-rear",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-rear"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "footprint": {
+        "maxX": 7.9,
+        "maxZ": 1,
+        "minX": 3.338,
+        "minZ": 0
+      },
+      "id": "balcony-front",
+      "kind": "BALCONY",
+      "levelId": "upper",
+      "materialId": "mat-render-dark",
+      "name": "Front balcony slab",
+      "tags": [
+        "front-zone"
+      ],
+      "thickness": 0.55,
+      "topOffset": -0.1
+    },
+    {
+      "evidence": {
+        "locator": "attic plan balcony floor between the two rear returns; rear elevation fascia continuous x 0.647..7.254 at y 2.60",
+        "properties": {
+          "thickness": "VISUAL_INFERRED",
+          "topOffset": "VISUAL_INFERRED"
+        },
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-rear",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-rear"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "footprint": {
+        "maxX": 7.29,
+        "maxZ": 14.6,
+        "minX": 0.61,
+        "minZ": 13.6
+      },
+      "id": "balcony-rear",
+      "kind": "BALCONY",
+      "levelId": "upper",
+      "materialId": "mat-render-dark",
+      "name": "Rear balcony slab (over the loggia)",
+      "tags": [
+        "rear-zone"
+      ],
+      "thickness": 0.55,
+      "topOffset": -0.1
+    }
+  ],
+  "building": {
+    "evidence": {
+      "locator": "published project page and the reference gold files",
+      "source": "src-published-facts + src-gold-shell",
+      "sourceIds": [
+        "src-published-facts",
+        "src-gold-shell"
+      ],
+      "status": "SOURCE_CORROBORATED"
+    },
+    "id": "marcowki",
+    "name": "Dom w marcówkach (GE)",
+    "note": "Reference specimen transcribed from the researched source truth; published at https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+  },
+  "chimneys": [
+    {
+      "baseOffset": 0,
+      "evidence": {
+        "locator": "attic plan solid ink px 254..273 × 531..551 = x 5.484..6.000, z 8.900..9.452; east elevation stack at z 8.931..9.508",
+        "note": "top 7.88 is VISUAL (cap 0.07 m below the ridge); shafts below the attic floor are not modelled",
+        "properties": {
+          "height": "VISUAL_INFERRED"
+        },
+        "source": "src-attic-plan + src-elev-east + src-elev-front + src-gold-roof-features",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-elev-east",
+          "src-elev-front",
+          "src-gold-roof-features"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 6,
+        "maxZ": 4.7,
+        "minX": 5.484,
+        "minZ": 4.148
+      },
+      "height": 4.82,
+      "id": "chimney-boiler",
+      "levelId": "upper",
+      "materialId": "mat-brick",
+      "name": "Kotłownia flue stack"
+    },
+    {
+      "baseOffset": 0,
+      "evidence": {
+        "locator": "attic plan block x 5.484..6.093, z 4.417..5.027 (0.61 × 0.61); east elevation stack at z 4.415..5.043",
+        "note": "top 7.88 is VISUAL (cap 0.07 m below the ridge); shafts below the attic floor are not modelled",
+        "properties": {
+          "height": "VISUAL_INFERRED"
+        },
+        "source": "src-attic-plan + src-elev-east + src-elev-front + src-gold-roof-features",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-elev-east",
+          "src-elev-front",
+          "src-gold-roof-features"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "footprint": {
+        "maxX": 6.11,
+        "maxZ": 9.18,
+        "minX": 5.5,
+        "minZ": 8.57
+      },
+      "height": 4.82,
+      "id": "chimney-salon",
+      "levelId": "upper",
+      "materialId": "mat-brick",
+      "name": "Salon fireplace stack"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "c-depth",
+      "kind": "NOTE",
+      "note": "characteristic depth 14.60 m: the west return faces span reference z −1.00..13.60 on both plans and the east elevation silhouette",
+      "targetIds": [
+        "ret-west-front",
+        "ret-west-rear"
+      ]
+    },
+    {
+      "id": "c-eave-datum",
+      "kind": "NOTE",
+      "note": "the printed eave datum +4,67 sits 0.034 m above the structural plane 4.63556 the model uses; both readings are kept",
+      "targetIds": [
+        "roof-main"
+      ]
+    },
+    {
+      "id": "c-pitch",
+      "kind": "FIXED_VALUE",
+      "note": "printed 40° on the section; fitted 40.014°",
+      "property": "pitchDeg",
+      "targetIds": [
+        "roof-main"
+      ],
+      "tolerance": 0.05,
+      "value": 40
+    },
+    {
+      "id": "c-wall-thickness",
+      "kind": "EQUAL",
+      "note": "one external build-up, 25 + 20",
+      "property": "thickness",
+      "targetIds": [
+        "g-front",
+        "g-right",
+        "g-rear",
+        "g-left",
+        "u-front",
+        "u-right",
+        "u-rear",
+        "u-left",
+        "gar-front",
+        "gar-right",
+        "gar-rear"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "gd-bathroom-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "gd-bathroom",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "gd-boiler-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "gd-boiler",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "gd-entry-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "gd-entry",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "gd-pantry-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "gd-pantry",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "gd-room-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "gd-room",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "leaf as one panel; sidelights, panels and glazing of leaves are not modelled",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "og-east-garage-door-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "og-east-garage-door",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "leaf as one panel; sidelights, panels and glazing of leaves are not modelled",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "og-front-entrance-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "og-front-entrance",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "leaf as one panel; sidelights, panels and glazing of leaves are not modelled",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.08,
+      "hingeSide": "LEFT",
+      "id": "og-garage-door-leaf",
+      "leafThickness": 0.05,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "og-garage-door",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "leaf as one panel; sidelights, panels and glazing of leaves are not modelled",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "og-garage-side-door-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "og-garage-side-door",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "ud-bathroom-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-bathroom",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "ud-garderoba-sw-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-garderoba-sw",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "ud-pokoj-ne-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-pokoj-ne",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "ud-pokoj-nw-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-pokoj-nw",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "RIGHT",
+      "id": "ud-pokoj-s-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-pokoj-s",
+      "swing": "IN"
+    },
+    {
+      "evidence": {
+        "locator": "door furniture is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "ud-pralnia-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "ud-pralnia",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-attic-plan",
+      "kind": "DRAWING",
+      "label": "Attic floor plan, dimensioned (rzut poddasza)",
+      "note": "asset_8460d17163a4, 853×853 px; 37.74 px/m; the attic partitions and rooms, the 270/320 and 234/303 callouts, the three 78/118 rooflight callouts, the balustrade post marks, the two chimney blocks",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-elev-east",
+      "kind": "DRAWING",
+      "label": "East elevation (published side elevation, identified by content)",
+      "note": "asset_fcb1602240db, 1280×597 px; the 14.60 m silhouette px 212..1072 at 58.9 px/m; the 300/230 window; the published LEFT/RIGHT labels do not say which side this is",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-elev-front",
+      "kind": "DRAWING",
+      "label": "Front elevation (published render)",
+      "note": "asset_3c991e46a7e7, 1280×597 px; registered x 0 at px 376, 59.34 px/m; sill and head heights, the portal band, the balustrade glass; heights read from it are VISUAL_INFERRED",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-elev-rear",
+      "kind": "DRAWING",
+      "label": "Rear elevation (published render)",
+      "note": "asset_863c2909651e, 1280×598 px; registered x 0 at px 970, 58.73 px/m leftwards; the balcony fascia 2.41..2.96, the rear gable rake, the garage north wall",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-elev-west",
+      "kind": "DRAWING",
+      "label": "West elevation (published side elevation, identified by content)",
+      "note": "asset_3915ee416ac4, 1280×598 px; the 90/230 and 140/140 windows, two rooflights in the slope, the dark render band",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-frame-transform",
+      "kind": "DERIVATION",
+      "label": "Frame transform reference → BuildApp",
+      "note": "x_app = x_ref, y_app = y_ref, z_app = 13.60 − z_ref (packages/reference-marcowki/src/transform.ts); x orientation verified against the plans: east stays on the right of the front view"
+    },
+    {
+      "id": "src-gold-facade",
+      "kind": "DERIVATION",
+      "label": "Reference gold: characteristic facade (marcowki-facade-v1.json)",
+      "note": "two recesses, five returns, three slabs, one portal, two balustrades, the roof extent, twelve openings; docs/MARCOWKI_CHARACTERISTIC_FACADE_REPORT.md",
+      "uri": "https://github.com/damiankrok/Web-analizer-builder @ claude/new-session-pvd4ik"
+    },
+    {
+      "id": "src-gold-interior",
+      "kind": "DERIVATION",
+      "label": "Reference gold: interior (marcowki-interior-v1.json)",
+      "note": "21 walls, 12 openings, 18 rooms, the stair and the slab void, from both dimensioned plans; docs/MARCOWKI_INTERIOR_ARCHITECTURALSPEC_REPORT.md",
+      "uri": "https://github.com/damiankrok/Web-analizer-builder @ claude/new-session-pvd4ik"
+    },
+    {
+      "id": "src-gold-roof-features",
+      "kind": "DERIVATION",
+      "label": "Reference gold: roof features (marcowki-roof-features-v1.json)",
+      "note": "three 78/118 rooflights, two chimney stacks, the upper slab reconciliation",
+      "uri": "https://github.com/damiankrok/Web-analizer-builder @ claude/new-session-pvd4ik"
+    },
+    {
+      "id": "src-gold-shell",
+      "kind": "DERIVATION",
+      "label": "Reference gold: exterior shell (marcowki-exterior-shell-v1.json)",
+      "note": "32 observations transcribed by hand from the drawings and measured off the rasters with scripts/source-measure.ts; docs/MARCOWKI_STRUCTURAL_SHELL_ROOF_PROOF.md",
+      "uri": "https://github.com/damiankrok/Web-analizer-builder @ claude/new-session-pvd4ik"
+    },
+    {
+      "id": "src-ground-plan",
+      "kind": "DRAWING",
+      "label": "Ground floor plan, dimensioned (rzut parteru)",
+      "note": "asset_8fda78f8654c, 853×853 px; 37.76 px/m; the 1205 / 1260 chains, the 100|510|750|100 depth column, every ground wall, room and opening gap",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-published-facts",
+      "kind": "PUBLISHED_FACT",
+      "label": "Published facts table",
+      "note": "building height 8.27 m, footprint area 131.16 m², room table with areas",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-render-garden",
+      "kind": "RENDER",
+      "label": "Garden perspective render",
+      "note": "asset_ac9a07c288f1, 800×600 px; depth ordering only",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-render-hero",
+      "kind": "RENDER",
+      "label": "Hero perspective render",
+      "note": "asset_a26220a6e905, 1600×900 px; depth ordering and appearance only, never a metric source",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-section",
+      "kind": "DRAWING",
+      "label": "Building section (przekrój)",
+      "note": "asset_b1e8c064c1ba, 1138×854 px; 72.59 px/m; datums +7,95 / +4,67 / +3,06 / ±0,00 / −0,32, the printed 40°, the 130 knee wall, the 272 / 266 / 252 clear heights, the slab and roof build-ups",
+      "uri": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+    },
+    {
+      "id": "src-stage-author",
+      "kind": "MANUAL",
+      "label": "STAGE BUILDAPP-01 modelling decisions",
+      "note": "choices no source settles, each stated in the unresolved ledger (packages/reference-marcowki/src/ledger.ts)"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "marcowki-ge",
+  "levels": [
+    {
+      "buildingId": "marcowki",
+      "elevation": 0,
+      "evidence": {
+        "locator": "section datums ±0,00 and +3,06",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3.06,
+      "id": "ground",
+      "index": 0,
+      "name": "Parter (ground floor)"
+    },
+    {
+      "buildingId": "marcowki",
+      "elevation": 3.06,
+      "evidence": {
+        "locator": "section datums +3,06 and +7,95",
+        "note": "the storey height is stated to the ridge; the attic clear height 2.66 is printed at the tall part of the room",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 4.89,
+      "id": "upper",
+      "index": 1,
+      "name": "Poddasze (attic)"
+    }
+  ],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-brick",
+      "name": "chimney"
+    },
+    {
+      "color": "#a8a5a0",
+      "id": "mat-concrete",
+      "name": "concrete slab"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-membrane",
+      "name": "flat roof membrane"
+    },
+    {
+      "color": "#e4e0d8",
+      "id": "mat-render",
+      "name": "light render",
+      "note": "the white render of the returns, gable and side walls (renders)"
+    },
+    {
+      "color": "#3b3d40",
+      "id": "mat-render-dark",
+      "name": "dark render (portal)",
+      "note": "the dark render band behind the front portal and on the portal head (front elevation, VISUAL)"
+    },
+    {
+      "color": "#4a4b4e",
+      "id": "mat-tile",
+      "name": "roof covering"
+    },
+    {
+      "color": "#8a6a3d",
+      "id": "mat-timber",
+      "name": "timber",
+      "note": "door leaves; the flush timber cladding bands are recorded, not modelled"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp-reference-marcowki",
+    "notes": []
+  },
+  "name": "Dom w marcówkach (GE)",
+  "openings": [
+    {
+      "evidence": {
+        "locator": "the gap between the two ink runs in the column scan at x 3.42; swing drawn into the hall",
+        "note": "connects g-bathroom and g-hall; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-ground-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "gd-bathroom",
+      "kind": "DOOR",
+      "name": "Bathroom door",
+      "offset": 0.07,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:g-bathroom",
+        "room:g-hall"
+      ],
+      "wallId": "gw-bath-east",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "the 10.456..11.382 gap in the column scan at x 5.43; swing drawn into the kotłownia",
+        "note": "connects g-boiler and g-entry; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-ground-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "gd-boiler",
+      "kind": "DOOR",
+      "name": "Kotłownia door",
+      "offset": 0.79,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:g-boiler",
+        "room:g-entry"
+      ],
+      "wallId": "gw-boiler-west",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "the 4.211..5.138 gap in the row scan at z 10.07; leaf drawn open towards the hall",
+        "note": "connects g-entry and g-hall; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-ground-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "gd-entry",
+      "kind": "DOOR",
+      "name": "Wiatrołap door",
+      "offset": 0.73,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:g-entry",
+        "room:g-hall"
+      ],
+      "wallId": "gw-entry-north",
+      "width": 0.93
+    },
+    {
+      "evidence": {
+        "locator": "the 5.241..6.062 gap in the column scan at x 5.43; swing drawn into the hall",
+        "note": "connects g-pantry and g-hall; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-ground-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "gd-pantry",
+      "kind": "DOOR",
+      "name": "Pantry door",
+      "offset": 0.12,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:g-pantry",
+        "room:g-hall"
+      ],
+      "wallId": "gw-pantry-west",
+      "width": 0.8
+    },
+    {
+      "evidence": {
+        "locator": "the 9.000..9.926 gap in the column scan at x 3.42; swing drawn into the Pokój",
+        "note": "connects g-room and g-hall; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-ground-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "gd-room",
+      "kind": "DOOR",
+      "name": "Front room door",
+      "offset": 2.25,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:g-room",
+        "room:g-hall"
+      ],
+      "wallId": "gw-room-east",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "the 10.456..11.382 gap in the column scans at x 7.6 and 7.75, straight through the one 0.45 m house/garage wall",
+        "note": "head 2.10 is an assumption matching every other single door; concealed by the garage, counted on no elevation. The reference cut it through two abutting leaves because it had no shared-wall semantics; the drawings show one wall, which the T-junction models",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-ground-plan + src-gold-interior + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "og-east-garage-door",
+      "kind": "DOOR",
+      "name": "Kotłownia / garage door (concealed)",
+      "offset": 1.216,
+      "sill": 0,
+      "tags": [
+        "room:g-boiler",
+        "facade",
+        "concealed",
+        "room:g-garage"
+      ],
+      "wallId": "g-right",
+      "width": 0.93
+    },
+    {
+      "evidence": {
+        "locator": "printed 300/230; centred on the measured gap reference z 0.874..3.918; east elevation z 0.884..3.906",
+        "source": "src-ground-plan + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.3,
+      "id": "og-east-living-window",
+      "kind": "WINDOW",
+      "name": "East living glazing 300/230",
+      "offset": 8.704,
+      "sill": 0,
+      "tags": [
+        "room:g-salon",
+        "facade"
+      ],
+      "wallId": "g-right",
+      "width": 3
+    },
+    {
+      "evidence": {
+        "locator": "printed 105/210; centred on the measured gap x 4.158..5.244; front elevation leaf x 4.196..5.174",
+        "note": "the hero render shows one leaf with a narrow glazed sidelight; modelled as one leaf",
+        "source": "src-ground-plan + src-elev-front + src-render-hero + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-front",
+          "src-render-hero",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.1,
+      "id": "og-front-entrance",
+      "kind": "DOOR",
+      "name": "Entrance door 105/210",
+      "offset": 4.176,
+      "sill": 0,
+      "tags": [
+        "room:g-entry",
+        "facade"
+      ],
+      "wallId": "g-front",
+      "width": 1.05
+    },
+    {
+      "evidence": {
+        "locator": "printed 270/320 on the attic plan; offset 3.94 = 149 px from the west outer face; head raked parallel to the roof: 3.20 at the ridge side, 3.20 − 2.70 × tan 40° = 0.93443 at the far edge",
+        "note": "a door onto the terrace over the garage: sill at the attic floor; the elevation render places the head ≈0.35 m lower than the callout — the callout is preferred",
+        "properties": {
+          "head": "SOURCE_CORROBORATED",
+          "offset": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-elev-front + src-gold-shell + src-gold-facade",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-elev-front",
+          "src-gold-shell",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "head": {
+        "heightFar": 0.93443,
+        "kind": "RAKED"
+      },
+      "height": 3.2,
+      "id": "og-front-gable-glazing",
+      "kind": "WINDOW",
+      "name": "Front gable glazing 270/320, raked head",
+      "offset": 3.94,
+      "sill": 0,
+      "tags": [
+        "room:u-pokoj-s",
+        "facade",
+        "raked"
+      ],
+      "wallId": "u-front",
+      "width": 2.7
+    },
+    {
+      "evidence": {
+        "locator": "printed 110/230; centred on the measured gap x 1.377..2.516; front elevation glass 1.50..2.33, head 2.29",
+        "source": "src-ground-plan + src-elev-front + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-front",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.3,
+      "id": "og-front-room-window",
+      "kind": "WINDOW",
+      "name": "Front room window 110/230",
+      "offset": 1.397,
+      "sill": 0,
+      "tags": [
+        "room:g-room",
+        "facade"
+      ],
+      "wallId": "g-front",
+      "width": 1.1
+    },
+    {
+      "evidence": {
+        "locator": "printed 275/225; centred on the measured gap x 8.554..11.308; front elevation reveal x 8.470..11.303, head 2.270",
+        "note": "the render shows the door rolled up; the structural opening is the whole 275/225 and it is filled with one leaf",
+        "source": "src-ground-plan + src-elev-front + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-front",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.25,
+      "id": "og-garage-door",
+      "kind": "DOOR",
+      "name": "Garage door 275/225",
+      "offset": 0.656,
+      "sill": 0,
+      "tags": [
+        "room:g-garage",
+        "facade"
+      ],
+      "wallId": "gar-front",
+      "width": 2.75
+    },
+    {
+      "evidence": {
+        "locator": "printed 100/210; centred on the measured gap x 9.905..10.938; rear elevation glazed leaf x 9.893..10.914, head 2.05",
+        "source": "src-ground-plan + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.1,
+      "id": "og-garage-side-door",
+      "kind": "DOOR",
+      "name": "Garage side door 100/210",
+      "offset": 1.128,
+      "sill": 0,
+      "tags": [
+        "room:g-garage",
+        "facade"
+      ],
+      "wallId": "gar-rear",
+      "width": 1
+    },
+    {
+      "evidence": {
+        "locator": "printed 234/303; centred on the measured gap x 4.583..6.941; head 3.03 at the ridge side falling to 1.0634 at the eave side, a constant 1.05 m under the roof; rear elevation glass reaches x 6.538 / 5.72 / 4.887 at y 4.30 / 5.00 / 5.70",
+        "properties": {
+          "head": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "head": {
+        "heightFar": 3.03,
+        "kind": "RAKED"
+      },
+      "height": 1.06651,
+      "id": "og-rear-gable-east",
+      "kind": "WINDOW",
+      "name": "Rear gable glazing, east 234/303, raked head",
+      "offset": 0.97,
+      "sill": 0,
+      "tags": [
+        "room:u-pokoj-ne",
+        "facade",
+        "raked"
+      ],
+      "wallId": "u-rear",
+      "width": 2.34
+    },
+    {
+      "evidence": {
+        "locator": "printed 234/303; centred on the measured gap x 0.927..3.285; the mirror of the east window about the ridge; rear elevation mullion at x 2.33",
+        "properties": {
+          "head": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "head": {
+        "heightFar": 1.06651,
+        "kind": "RAKED"
+      },
+      "height": 3.03,
+      "id": "og-rear-gable-west",
+      "kind": "WINDOW",
+      "name": "Rear gable glazing, west 234/303, raked head",
+      "offset": 4.62,
+      "sill": 0,
+      "tags": [
+        "room:u-pokoj-nw",
+        "facade",
+        "raked"
+      ],
+      "wallId": "u-rear",
+      "width": 2.34
+    },
+    {
+      "evidence": {
+        "locator": "printed 470/230; centred on the measured gap x 2.251..6.965; rear elevation glass x 2.12..6.90, central mullion at 4.63, head 2.285",
+        "source": "src-ground-plan + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.3,
+      "id": "og-rear-living-glazing",
+      "kind": "WINDOW",
+      "name": "Rear living glazing 470/230",
+      "offset": 0.942,
+      "sill": 0,
+      "tags": [
+        "room:g-salon",
+        "facade"
+      ],
+      "wallId": "g-rear",
+      "width": 4.7
+    },
+    {
+      "evidence": {
+        "locator": "printed 140/140; measured gap reference z 5.400..6.803; west elevation sill 0.93 and head 2.29 fix the sill at 0.90",
+        "source": "src-ground-plan + src-elev-west + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-west",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 1.4,
+      "id": "og-west-kitchen-window",
+      "kind": "WINDOW",
+      "name": "West kitchen window 140/140",
+      "offset": 5.402,
+      "sill": 0.9,
+      "tags": [
+        "room:g-kitchen",
+        "facade"
+      ],
+      "wallId": "g-left",
+      "width": 1.4
+    },
+    {
+      "evidence": {
+        "locator": "printed 90/230; measured gap reference z 3.653..4.553; west elevation z 3.635..4.568, head 2.38",
+        "source": "src-ground-plan + src-elev-west + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-elev-west",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.3,
+      "id": "og-west-living-window",
+      "kind": "WINDOW",
+      "name": "West living window 90/230",
+      "offset": 3.653,
+      "sill": 0,
+      "tags": [
+        "room:g-salon",
+        "facade"
+      ],
+      "wallId": "g-left",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "the gap below 7.756 in the column scan at x 3.9",
+        "note": "connects u-bathroom and u-corridor; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-bathroom",
+      "kind": "DOOR",
+      "name": "Bathroom door",
+      "offset": 0.2,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-bathroom",
+        "room:u-corridor"
+      ],
+      "wallId": "uw-corridor-west",
+      "width": 0.75
+    },
+    {
+      "evidence": {
+        "locator": "the 10.697..11.519 gap in the column scan at x 3.42",
+        "note": "connects u-garderoba-sw and u-pokoj-s; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-garderoba-sw",
+      "kind": "DOOR",
+      "name": "South-west Garderoba door",
+      "offset": 0.63,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-garderoba-sw",
+        "room:u-pokoj-s"
+      ],
+      "wallId": "uw-room2-west",
+      "width": 0.82
+    },
+    {
+      "evidence": {
+        "locator": "the 4.159..5.007 gap in the row scan at z 3.70",
+        "note": "connects u-pokoj-ne and u-corridor; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-pokoj-ne",
+      "kind": "DOOR",
+      "name": "North-east Pokój door",
+      "offset": 0.19,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-pokoj-ne",
+        "room:u-corridor"
+      ],
+      "wallId": "uw-pokoj-ne-south",
+      "width": 0.8
+    },
+    {
+      "evidence": {
+        "locator": "the 3.967..4.735 gap in the column scan at x 3.9",
+        "note": "connects u-pokoj-nw and u-corridor; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-pokoj-nw",
+      "kind": "DOOR",
+      "name": "North-west Pokój door",
+      "offset": 4.01,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-pokoj-nw",
+        "room:u-corridor"
+      ],
+      "wallId": "uw-corridor-west",
+      "width": 0.83
+    },
+    {
+      "evidence": {
+        "locator": "the 4.080..5.007 gap in the row scan at z 8.84",
+        "note": "connects u-corridor and u-pokoj-s; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-pokoj-s",
+      "kind": "DOOR",
+      "name": "South Pokój door",
+      "offset": 0.73,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-corridor",
+        "room:u-pokoj-s"
+      ],
+      "wallId": "uw-corridor-south",
+      "width": 0.9
+    },
+    {
+      "evidence": {
+        "locator": "the 5.504..6.405 gap in the column scan at x 3.9",
+        "note": "connects u-pralnia and u-corridor; head 2.00 m is an assumption — no interior opening is dimensioned vertically",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-gold-interior + src-attic-plan",
+        "sourceIds": [
+          "src-gold-interior",
+          "src-attic-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2,
+      "id": "ud-pralnia",
+      "kind": "DOOR",
+      "name": "Pralnia door",
+      "offset": 2.38,
+      "sill": 0,
+      "tags": [
+        "interior-door",
+        "room:u-pralnia",
+        "room:u-corridor"
+      ],
+      "wallId": "uw-corridor-west",
+      "width": 0.76
+    }
+  ],
+  "railings": [
+    {
+      "baseOffset": -0.1,
+      "end": {
+        "x": 7.153,
+        "z": 0.025
+      },
+      "evidence": {
+        "locator": "attic plan post marks at z 13.55: x 3.444..7.153, four equal 0.821 m panels; front elevation glass 3.13..3.89",
+        "note": "posts are the plan marks; BuildApp spaces them equally over the measured run",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "postSpacing": "SOURCE_DERIVED"
+        },
+        "source": "src-elev-front + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "height": 0.9,
+      "hostId": "balcony-front",
+      "id": "rail-front",
+      "infill": "GLASS",
+      "levelId": "upper",
+      "name": "Front balcony glass balustrade",
+      "postSpacing": 0.93,
+      "start": {
+        "x": 3.444,
+        "z": 0.025
+      },
+      "tags": [
+        "front-zone"
+      ]
+    },
+    {
+      "baseOffset": -0.1,
+      "end": {
+        "x": 7.153,
+        "z": 14.48
+      },
+      "evidence": {
+        "locator": "attic plan post marks at z −0.88: x 0.689..7.153, four 1.48..1.51 m panels; rear elevation glass top 3.85",
+        "note": "posts are the plan marks; BuildApp spaces them equally over the measured run",
+        "properties": {
+          "height": "VISUAL_INFERRED",
+          "postSpacing": "SOURCE_DERIVED"
+        },
+        "source": "src-elev-front + src-elev-rear + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "height": 0.9,
+      "hostId": "balcony-rear",
+      "id": "rail-rear",
+      "infill": "GLASS",
+      "levelId": "upper",
+      "name": "Rear balcony glass balustrade",
+      "postSpacing": 1.62,
+      "start": {
+        "x": 0.689,
+        "z": 14.48
+      },
+      "tags": [
+        "rear-zone"
+      ]
+    }
+  ],
+  "roofOpenings": [
+    {
+      "evidence": {
+        "locator": "cut to the stack itself, clearance zero",
+        "source": "src-gold-roof-features + src-stage-author",
+        "sourceIds": [
+          "src-gold-roof-features",
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 6,
+        "maxZ": 4.7,
+        "minX": 5.484,
+        "minZ": 4.148
+      },
+      "id": "pen-boiler",
+      "kind": "PENETRATION",
+      "name": "Roof penetration, kotłownia stack",
+      "roofId": "roof-main",
+      "throughId": "chimney-boiler"
+    },
+    {
+      "evidence": {
+        "locator": "the roof is cut to the stack itself: flashing and clearance are drawn nowhere",
+        "source": "src-gold-roof-features + src-stage-author",
+        "sourceIds": [
+          "src-gold-roof-features",
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 6.11,
+        "maxZ": 9.18,
+        "minX": 5.5,
+        "minZ": 8.57
+      },
+      "id": "pen-salon",
+      "kind": "PENETRATION",
+      "name": "Roof penetration, salon stack",
+      "roofId": "roof-main",
+      "throughId": "chimney-salon"
+    },
+    {
+      "evidence": {
+        "locator": "attic plan symbol py 488.8..518.2 = z 7.777..8.556, centre 8.167; west elevation glazed patch centre 8.185",
+        "note": "over u-bathroom; the 1.18 m slope length projects to 0.90393 m in plan; the cut is a vertical prism with no clearance (a stated simplification)",
+        "properties": {
+          "footprint": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-gold-roof-features + src-elev-west",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-roof-features",
+          "src-elev-west"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "footprint": {
+        "maxX": 1.35393,
+        "maxZ": 5.823,
+        "minX": 0.45,
+        "minZ": 5.043
+      },
+      "id": "rl-lazienka-w",
+      "kind": "ROOFLIGHT",
+      "name": "Rooflight, west slope over the bathroom",
+      "roofId": "roof-main",
+      "tags": [
+        "room:u-bathroom"
+      ]
+    },
+    {
+      "evidence": {
+        "locator": "attic plan dashed symbol py 407..437 = z 5.610..6.405, centre 6.008; west elevation glazed patch centre 5.978",
+        "note": "over u-pralnia; the 1.18 m slope length projects to 0.90393 m in plan; the cut is a vertical prism with no clearance (a stated simplification)",
+        "properties": {
+          "footprint": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-gold-roof-features + src-elev-west",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-roof-features",
+          "src-elev-west"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "footprint": {
+        "maxX": 1.35393,
+        "maxZ": 7.982,
+        "minX": 0.45,
+        "minZ": 7.202
+      },
+      "id": "rl-pralnia-w",
+      "kind": "ROOFLIGHT",
+      "name": "Rooflight, west slope over the laundry",
+      "roofId": "roof-main",
+      "tags": [
+        "room:u-pralnia"
+      ]
+    },
+    {
+      "evidence": {
+        "locator": "attic plan symbol py 489..518 = z 7.783..8.551, centre 8.167; east elevation glazed patch centre 8.167",
+        "note": "over u-stairs; the 1.18 m slope length projects to 0.90393 m in plan; the cut is a vertical prism with no clearance (a stated simplification)",
+        "properties": {
+          "footprint": "SOURCE_DERIVED"
+        },
+        "source": "src-attic-plan + src-gold-roof-features + src-elev-west",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-roof-features",
+          "src-elev-west"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "footprint": {
+        "maxX": 7.45,
+        "maxZ": 5.823,
+        "minX": 6.54607,
+        "minZ": 5.043
+      },
+      "id": "rl-schody-e",
+      "kind": "ROOFLIGHT",
+      "name": "Rooflight, east slope over the stair",
+      "roofId": "roof-main",
+      "tags": [
+        "room:u-stairs"
+      ]
+    }
+  ],
+  "rooflights": [
+    {
+      "evidence": {
+        "locator": "glazed area about 0.65 across a 0.78 frame and 1.04 up a 1.18 one: 0.065..0.070 m of frame per side",
+        "source": "src-elev-west + src-gold-roof-features",
+        "sourceIds": [
+          "src-elev-west",
+          "src-gold-roof-features"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rl-lazienka-w-unit",
+      "roofOpeningId": "rl-lazienka-w"
+    },
+    {
+      "evidence": {
+        "locator": "glazed area about 0.65 across a 0.78 frame and 1.04 up a 1.18 one: 0.065..0.070 m of frame per side",
+        "source": "src-elev-west + src-gold-roof-features",
+        "sourceIds": [
+          "src-elev-west",
+          "src-gold-roof-features"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rl-pralnia-w-unit",
+      "roofOpeningId": "rl-pralnia-w"
+    },
+    {
+      "evidence": {
+        "locator": "glazed area about 0.65 across a 0.78 frame and 1.04 up a 1.18 one: 0.065..0.070 m of frame per side",
+        "source": "src-elev-west + src-gold-roof-features",
+        "sourceIds": [
+          "src-elev-west",
+          "src-gold-roof-features"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "rl-schody-e-unit",
+      "roofOpeningId": "rl-schody-e"
+    }
+  ],
+  "roofs": [
+    {
+      "eaveOffset": 2.88,
+      "evidence": {
+        "locator": "section: garage roof fill rows 433..458; soffit on the printed 252",
+        "note": "the ~0.2 m parapet upstand the elevations show is not modelled",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 12.05,
+        "maxZ": 8.5,
+        "minX": 7.9,
+        "minZ": 1
+      },
+      "id": "roof-garage",
+      "kind": "FLAT",
+      "levelId": "ground",
+      "materialId": "mat-membrane",
+      "name": "Garage flat roof",
+      "overhang": 0,
+      "pitchDeg": 0,
+      "ridgeAxis": "X",
+      "thickness": 0.34
+    },
+    {
+      "eaveOffset": 1.57556,
+      "evidence": {
+        "locator": "section: printed 40°, +7,95 ridge; eave plane derived 4.63556 (printed +4,67 recorded beside it); the roof runs over both recesses, reference z −1.00..13.60",
+        "source": "src-section + src-gold-shell + src-elev-east + src-elev-west + src-gold-facade",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell",
+          "src-elev-east",
+          "src-elev-west",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 7.9,
+        "maxZ": 14.6,
+        "minX": 0,
+        "minZ": 0
+      },
+      "id": "roof-main",
+      "kind": "GABLE",
+      "levelId": "upper",
+      "materialId": "mat-tile",
+      "name": "Main gable roof, 40°",
+      "overhang": 0,
+      "pitchDeg": 40,
+      "ridgeAxis": "Z",
+      "thickness": 0.21109
+    }
+  ],
+  "rooms": [
+    {
+      "evidence": {
+        "locator": "the printed 142 fixes the depth",
+        "note": "published area 3.95 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-bathroom",
+      "levelId": "ground",
+      "name": "Łazienka",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 6.24
+        },
+        {
+          "x": 3.36,
+          "z": 6.24
+        },
+        {
+          "x": 3.36,
+          "z": 4.82
+        },
+        {
+          "x": 0.45,
+          "z": 4.82
+        }
+      ],
+      "usage": "bathroom"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 196 fixes the width and 312 the depth",
+        "note": "published area 5.8 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-boiler",
+      "levelId": "ground",
+      "name": "Kotłownia",
+      "polygon": [
+        {
+          "x": 5.49,
+          "z": 4.57
+        },
+        {
+          "x": 7.45,
+          "z": 4.57
+        },
+        {
+          "x": 7.45,
+          "z": 1.45
+        },
+        {
+          "x": 5.49,
+          "z": 1.45
+        }
+      ],
+      "usage": "boiler"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 190 fixes the width and 203 the depth",
+        "note": "published area 3.7 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-entry",
+      "levelId": "ground",
+      "name": "Wiatrołap",
+      "polygon": [
+        {
+          "x": 3.48,
+          "z": 3.47
+        },
+        {
+          "x": 5.37,
+          "z": 3.47
+        },
+        {
+          "x": 5.37,
+          "z": 1.45
+        },
+        {
+          "x": 3.48,
+          "z": 1.45
+        }
+      ],
+      "usage": "entry"
+    },
+    {
+      "evidence": {
+        "locator": "between the main body east wall and the garage east wall; the printed 660 fixes the depth",
+        "note": "published area 24.1 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-garage",
+      "levelId": "ground",
+      "name": "Garaż",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 8.05
+        },
+        {
+          "x": 11.6,
+          "z": 8.05
+        },
+        {
+          "x": 11.6,
+          "z": 1.45
+        },
+        {
+          "x": 7.9,
+          "z": 1.45
+        }
+      ],
+      "usage": "garage"
+    },
+    {
+      "evidence": {
+        "locator": "the circulation space between the measured walls once the stair footprint is taken out",
+        "note": "published area 9.18 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "g-hall",
+      "levelId": "ground",
+      "name": "Hol",
+      "polygon": [
+        {
+          "x": 4.11,
+          "z": 8.69
+        },
+        {
+          "x": 5.37,
+          "z": 8.69
+        },
+        {
+          "x": 5.37,
+          "z": 7.32
+        },
+        {
+          "x": 6.44,
+          "z": 7.32
+        },
+        {
+          "x": 6.44,
+          "z": 7.44
+        },
+        {
+          "x": 7.45,
+          "z": 7.44
+        },
+        {
+          "x": 7.45,
+          "z": 6.81
+        },
+        {
+          "x": 5.37,
+          "z": 6.81
+        },
+        {
+          "x": 5.37,
+          "z": 3.59
+        },
+        {
+          "x": 3.48,
+          "z": 3.59
+        },
+        {
+          "x": 3.48,
+          "z": 6.24
+        },
+        {
+          "x": 4.11,
+          "z": 6.24
+        }
+      ],
+      "usage": "hall"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 414 | 265 chain fixes both z boundaries; the east boundary is the free end of the kitchen partition",
+        "note": "published area 9.63 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-kitchen",
+      "levelId": "ground",
+      "name": "Kuchnia",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 9.01
+        },
+        {
+          "x": 4.11,
+          "z": 9.01
+        },
+        {
+          "x": 4.11,
+          "z": 6.36
+        },
+        {
+          "x": 0.45,
+          "z": 6.36
+        }
+      ],
+      "usage": "kitchen"
+    },
+    {
+      "evidence": {
+        "locator": "bounded by the three pantry partitions; open to the stair at its south-east corner",
+        "note": "published area 1.44 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "g-pantry",
+      "levelId": "ground",
+      "name": "Spiżarnia",
+      "polygon": [
+        {
+          "x": 5.49,
+          "z": 8.57
+        },
+        {
+          "x": 7.45,
+          "z": 8.57
+        },
+        {
+          "x": 7.45,
+          "z": 7.44
+        },
+        {
+          "x": 5.49,
+          "z": 7.44
+        }
+      ],
+      "usage": "pantry"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 290 fixes the width and 325 the depth",
+        "note": "published area 9.18 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-room",
+      "levelId": "ground",
+      "name": "Pokój",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 4.7
+        },
+        {
+          "x": 3.36,
+          "z": 4.7
+        },
+        {
+          "x": 3.36,
+          "z": 1.45
+        },
+        {
+          "x": 0.45,
+          "z": 1.45
+        }
+      ],
+      "usage": "room"
+    },
+    {
+      "evidence": {
+        "locator": "printed 700 fixes the width, 414 the notional kitchen split, 446 the south boundary",
+        "note": "published area 29.52 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-ground-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "g-salon",
+      "levelId": "ground",
+      "name": "Salon + Jadalnia",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 13.15
+        },
+        {
+          "x": 7.45,
+          "z": 13.15
+        },
+        {
+          "x": 7.45,
+          "z": 8.69
+        },
+        {
+          "x": 4.11,
+          "z": 8.69
+        },
+        {
+          "x": 4.11,
+          "z": 9.01
+        },
+        {
+          "x": 0.45,
+          "z": 9.01
+        }
+      ],
+      "usage": "living"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 248 fixes the depth; the east face steps at the corridor south partition",
+        "note": "published area 7.81 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "u-bathroom",
+      "levelId": "upper",
+      "name": "Łazienka (attic)",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 6.4
+        },
+        {
+          "x": 3.89,
+          "z": 6.4
+        },
+        {
+          "x": 3.89,
+          "z": 4.82
+        },
+        {
+          "x": 3.35,
+          "z": 4.82
+        },
+        {
+          "x": 3.35,
+          "z": 3.92
+        },
+        {
+          "x": 0.45,
+          "z": 3.92
+        }
+      ],
+      "usage": "bathroom"
+    },
+    {
+      "evidence": {
+        "locator": "the circulation space between the corridor west partition and the Garderoba / stair walls; its boundary with the stair is not drawn",
+        "note": "published area 6.17 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "u-corridor",
+      "levelId": "upper",
+      "name": "Korytarz",
+      "polygon": [
+        {
+          "x": 4.01,
+          "z": 9.78
+        },
+        {
+          "x": 5.16,
+          "z": 9.78
+        },
+        {
+          "x": 5.16,
+          "z": 4.82
+        },
+        {
+          "x": 4.01,
+          "z": 4.82
+        }
+      ],
+      "usage": "corridor"
+    },
+    {
+      "evidence": {
+        "locator": "the printed 217 fixes the width; the notch is the measured flue block",
+        "note": "published area 2.38 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "u-garderoba-ne",
+      "levelId": "upper",
+      "name": "Garderoba (north-east)",
+      "polygon": [
+        {
+          "x": 5.28,
+          "z": 9.9
+        },
+        {
+          "x": 7.45,
+          "z": 9.9
+        },
+        {
+          "x": 7.45,
+          "z": 8.57
+        },
+        {
+          "x": 6.11,
+          "z": 8.57
+        },
+        {
+          "x": 6.11,
+          "z": 9.18
+        },
+        {
+          "x": 5.5,
+          "z": 9.18
+        },
+        {
+          "x": 5.5,
+          "z": 8.57
+        },
+        {
+          "x": 5.28,
+          "z": 8.57
+        }
+      ],
+      "usage": "wardrobe"
+    },
+    {
+      "evidence": {
+        "locator": "printed 290 × 235",
+        "note": "published area 6.53 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "u-garderoba-sw",
+      "levelId": "upper",
+      "name": "Garderoba (south-west)",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 3.8
+        },
+        {
+          "x": 3.35,
+          "z": 3.8
+        },
+        {
+          "x": 3.35,
+          "z": 1.45
+        },
+        {
+          "x": 0.45,
+          "z": 1.45
+        }
+      ],
+      "usage": "wardrobe"
+    },
+    {
+      "evidence": {
+        "locator": "printed 344 × 325",
+        "note": "published area 10.88 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "u-pokoj-ne",
+      "levelId": "upper",
+      "name": "Pokój (north-east)",
+      "polygon": [
+        {
+          "x": 4.01,
+          "z": 13.15
+        },
+        {
+          "x": 7.45,
+          "z": 13.15
+        },
+        {
+          "x": 7.45,
+          "z": 9.9
+        },
+        {
+          "x": 4.01,
+          "z": 9.9
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "evidence": {
+        "locator": "printed 344 × 449",
+        "note": "published area 15.13 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "u-pokoj-nw",
+      "levelId": "upper",
+      "name": "Pokój (north-west)",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 13.15
+        },
+        {
+          "x": 3.89,
+          "z": 13.15
+        },
+        {
+          "x": 3.89,
+          "z": 8.66
+        },
+        {
+          "x": 0.45,
+          "z": 8.66
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "evidence": {
+        "locator": "printed 398 × 325; the kotłownia stack stands inside this polygon, as the reference kept it",
+        "note": "published area 11.88 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "u-pokoj-s",
+      "levelId": "upper",
+      "name": "Pokój (south)",
+      "polygon": [
+        {
+          "x": 3.47,
+          "z": 4.7
+        },
+        {
+          "x": 7.45,
+          "z": 4.7
+        },
+        {
+          "x": 7.45,
+          "z": 1.45
+        },
+        {
+          "x": 3.47,
+          "z": 1.45
+        }
+      ],
+      "usage": "bedroom"
+    },
+    {
+      "evidence": {
+        "locator": "printed 344 × 202",
+        "note": "published area 6.73 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "u-pralnia",
+      "levelId": "upper",
+      "name": "Pralnia",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 8.54
+        },
+        {
+          "x": 3.89,
+          "z": 8.54
+        },
+        {
+          "x": 3.89,
+          "z": 6.52
+        },
+        {
+          "x": 0.45,
+          "z": 6.52
+        }
+      ],
+      "usage": "laundry"
+    },
+    {
+      "evidence": {
+        "locator": "the stair compartment between the stair north and corridor south partitions; the polygon includes the floor void",
+        "note": "published area 5.63 m² (measured to finished surfaces, 20 mm of finish per face)",
+        "source": "src-attic-plan + src-gold-interior + src-published-facts",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior",
+          "src-published-facts"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "u-stairs",
+      "levelId": "upper",
+      "name": "Schody",
+      "polygon": [
+        {
+          "x": 5.16,
+          "z": 8.45
+        },
+        {
+          "x": 7.45,
+          "z": 8.45
+        },
+        {
+          "x": 7.45,
+          "z": 4.82
+        },
+        {
+          "x": 5.16,
+          "z": 4.82
+        }
+      ],
+      "usage": "stair"
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.2.0",
+  "slabs": [
+    {
+      "evidence": {
+        "locator": "the dark band over the entrance and the garage door: front elevation 3.081 / 3.097, soffit at the balcony soffit 2.41; it stops at x 11.44 so the garage return carries it",
+        "source": "src-elev-front + src-elev-east + src-elev-rear + src-gold-facade + src-ground-plan",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-east",
+          "src-elev-rear",
+          "src-gold-facade",
+          "src-ground-plan"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "id": "portal-head",
+      "levelId": "ground",
+      "materialId": "mat-render-dark",
+      "name": "Portal head over the entrance and garage door",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 0
+        },
+        {
+          "x": 11.44,
+          "z": 0
+        },
+        {
+          "x": 11.44,
+          "z": 1
+        },
+        {
+          "x": 7.9,
+          "z": 1
+        }
+      ],
+      "tags": [
+        "portal",
+        "front-zone"
+      ],
+      "thickness": 0.67,
+      "topOffset": 3.08
+    },
+    {
+      "evidence": {
+        "locator": "the L footprint of the printed chains; depth = the plinth to the −0,32 terrain datum",
+        "note": "the slab build-up is not drawn; the plinth height is what is modelled",
+        "properties": {
+          "thickness": "GEOMETRIC_INFERRED"
+        },
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "id": "slab-ground",
+      "levelId": "ground",
+      "materialId": "mat-concrete",
+      "name": "Ground slab (plinth to terrain)",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 1
+        },
+        {
+          "x": 12.05,
+          "z": 1
+        },
+        {
+          "x": 12.05,
+          "z": 8.5
+        },
+        {
+          "x": 7.9,
+          "z": 8.5
+        },
+        {
+          "x": 7.9,
+          "z": 13.6
+        },
+        {
+          "x": 0,
+          "z": 13.6
+        }
+      ],
+      "thickness": 0.32,
+      "topOffset": 0
+    },
+    {
+      "evidence": {
+        "locator": "section: one solid from the outer face inwards at +3,06, so the plate is the bearing rectangle inside the 0.45 m walls; the void x 5.37..7.45, reference z 6.79..8.77, is the stair shaft the section finds at X 5.351..7.441",
+        "note": "the void reaches the east inner face, so it is a notch in the plate outline, not a hole",
+        "source": "src-section + src-gold-shell + src-gold-roof-features + src-ground-plan",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell",
+          "src-gold-roof-features",
+          "src-ground-plan"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "slab-upper",
+      "levelId": "upper",
+      "materialId": "mat-concrete",
+      "name": "Upper floor slab (bearing rectangle, stair void)",
+      "polygon": [
+        {
+          "x": 0.45,
+          "z": 1.45
+        },
+        {
+          "x": 7.45,
+          "z": 1.45
+        },
+        {
+          "x": 7.45,
+          "z": 4.83
+        },
+        {
+          "x": 5.37,
+          "z": 4.83
+        },
+        {
+          "x": 5.37,
+          "z": 6.81
+        },
+        {
+          "x": 7.45,
+          "z": 6.81
+        },
+        {
+          "x": 7.45,
+          "z": 13.15
+        },
+        {
+          "x": 0.45,
+          "z": 13.15
+        }
+      ],
+      "thickness": 0.33,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [
+    {
+      "evidence": {
+        "locator": "the 2.08 × 1.98 m shaft east of the hall between the top-step line at reference z 6.78..6.99 and the kotłownia north wall face at 8.77; the section finds the void at X 5.351..7.441",
+        "note": "BuildApp models stairs as placeholders in this stage; the winders are not represented",
+        "source": "src-ground-plan + src-section + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-section",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "footprint": {
+        "maxX": 7.45,
+        "maxZ": 6.81,
+        "minX": 5.37,
+        "minZ": 4.83
+      },
+      "id": "stair-main",
+      "kind": "PLACEHOLDER",
+      "levelId": "ground",
+      "name": "Main stair (placeholder; two flights with winders in the source)",
+      "toLevelId": "upper"
+    }
+  ],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "againstWallId": "g-right",
+      "id": "gar-rear-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gar-rear"
+      }
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "gar-rear"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "gar-right"
+      },
+      "id": "gar-rear-j-start",
+      "kind": "CORNER",
+      "owner": "gar-rear",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "START",
+        "wallId": "gar-right"
+      },
+      "b": {
+        "end": "END",
+        "wallId": "gar-front"
+      },
+      "id": "gar-right-j-start",
+      "kind": "CORNER",
+      "owner": "gar-front",
+      "tolerance": 0.001
+    },
+    {
+      "againstWallId": "gw-kitchen-south",
+      "id": "gw-bath-east-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-bath-east"
+      }
+    },
+    {
+      "againstWallId": "gw-bath-south",
+      "id": "gw-bath-east-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-bath-east"
+      }
+    },
+    {
+      "againstWallId": "g-left",
+      "id": "gw-bath-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-bath-south"
+      }
+    },
+    {
+      "againstWallId": "g-right",
+      "id": "gw-boiler-north-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-boiler-north"
+      }
+    },
+    {
+      "againstWallId": "gw-boiler-north",
+      "evidence": {
+        "locator": "the partition stops at the 0.26 m wall",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "gw-boiler-west-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-boiler-west"
+      }
+    },
+    {
+      "againstWallId": "g-front",
+      "id": "gw-boiler-west-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-boiler-west"
+      }
+    },
+    {
+      "againstWallId": "gw-boiler-west",
+      "id": "gw-entry-north-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-entry-north"
+      }
+    },
+    {
+      "againstWallId": "gw-room-east",
+      "id": "gw-entry-north-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-entry-north"
+      }
+    },
+    {
+      "againstWallId": "g-left",
+      "id": "gw-kitchen-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-kitchen-south"
+      }
+    },
+    {
+      "againstWallId": "g-right",
+      "id": "gw-pantry-north-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-pantry-north"
+      }
+    },
+    {
+      "againstWallId": "gw-pantry-north",
+      "id": "gw-pantry-west-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-pantry-west"
+      }
+    },
+    {
+      "againstWallId": "gw-pantry-south",
+      "id": "gw-pantry-west-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-pantry-west"
+      }
+    },
+    {
+      "againstWallId": "gw-bath-south",
+      "id": "gw-room-east-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "gw-room-east"
+      }
+    },
+    {
+      "againstWallId": "g-front",
+      "id": "gw-room-east-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "gw-room-east"
+      }
+    },
+    {
+      "againstWallId": "u-front",
+      "id": "ret-east-front-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "ret-east-front"
+      }
+    },
+    {
+      "againstWallId": "g-rear",
+      "id": "ret-east-rear-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "ret-east-rear"
+      }
+    },
+    {
+      "againstWallId": "gar-front",
+      "id": "ret-garage-front-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "ret-garage-front"
+      }
+    },
+    {
+      "againstWallId": "g-front",
+      "id": "ret-west-front-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "ret-west-front"
+      }
+    },
+    {
+      "againstWallId": "g-rear",
+      "id": "ret-west-rear-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "ret-west-rear"
+      }
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "g-left"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "g-front"
+      },
+      "evidence": {
+        "locator": "plan chains 790 and 1260; wall build-up 25 + 20",
+        "note": "walls run to the +3,06 slab top",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "ring-ground-j0",
+      "kind": "CORNER",
+      "owner": "g-front",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "g-front"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "g-right"
+      },
+      "evidence": {
+        "locator": "plan chains 790 and 1260; wall build-up 25 + 20",
+        "note": "walls run to the +3,06 slab top",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "ring-ground-j1",
+      "kind": "CORNER",
+      "owner": "g-front",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "g-right"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "g-rear"
+      },
+      "evidence": {
+        "locator": "plan chains 790 and 1260; wall build-up 25 + 20",
+        "note": "walls run to the +3,06 slab top",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "ring-ground-j2",
+      "kind": "CORNER",
+      "owner": "g-rear",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "g-rear"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "g-left"
+      },
+      "evidence": {
+        "locator": "plan chains 790 and 1260; wall build-up 25 + 20",
+        "note": "walls run to the +3,06 slab top",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "ring-ground-j3",
+      "kind": "CORNER",
+      "owner": "g-rear",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "u-left"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "u-front"
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-upper-j0",
+      "kind": "CORNER",
+      "owner": "u-front",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "u-front"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "u-right"
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-upper-j1",
+      "kind": "CORNER",
+      "owner": "u-front",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "u-right"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "u-rear"
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-upper-j2",
+      "kind": "CORNER",
+      "owner": "u-rear",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "u-rear"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "u-left"
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-upper-j3",
+      "kind": "CORNER",
+      "owner": "u-rear",
+      "tolerance": 0.001
+    },
+    {
+      "againstWallId": "uw-room2-west",
+      "id": "uw-bath-south-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-bath-south"
+      }
+    },
+    {
+      "againstWallId": "u-left",
+      "id": "uw-bath-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-bath-south"
+      }
+    },
+    {
+      "againstWallId": "u-right",
+      "id": "uw-corridor-south-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-corridor-south"
+      }
+    },
+    {
+      "againstWallId": "u-rear",
+      "id": "uw-corridor-west-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-corridor-west"
+      }
+    },
+    {
+      "againstWallId": "uw-corridor-south",
+      "id": "uw-corridor-west-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-corridor-west"
+      }
+    },
+    {
+      "againstWallId": "uw-pokoj-ne-south",
+      "id": "uw-garderoba-ne-west-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-garderoba-ne-west"
+      }
+    },
+    {
+      "againstWallId": "uw-stair-north",
+      "id": "uw-garderoba-ne-west-j-start",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-garderoba-ne-west"
+      }
+    },
+    {
+      "againstWallId": "uw-corridor-west",
+      "id": "uw-pokoj-ne-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-pokoj-ne-south"
+      }
+    },
+    {
+      "againstWallId": "uw-corridor-west",
+      "id": "uw-pokoj-nw-south-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-pokoj-nw-south"
+      }
+    },
+    {
+      "againstWallId": "u-left",
+      "id": "uw-pokoj-nw-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-pokoj-nw-south"
+      }
+    },
+    {
+      "againstWallId": "uw-corridor-west",
+      "id": "uw-pralnia-south-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-pralnia-south"
+      }
+    },
+    {
+      "againstWallId": "u-left",
+      "id": "uw-pralnia-south-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-pralnia-south"
+      }
+    },
+    {
+      "againstWallId": "uw-corridor-south",
+      "id": "uw-room2-west-j-end",
+      "kind": "BUTT",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-room2-west"
+      }
+    },
+    {
+      "againstWallId": "u-front",
+      "id": "uw-room2-west-j-start",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "START",
+        "wallId": "uw-room2-west"
+      }
+    },
+    {
+      "againstWallId": "u-right",
+      "id": "uw-stair-north-j-end",
+      "kind": "T",
+      "tolerance": 0.001,
+      "wall": {
+        "end": "END",
+        "wallId": "uw-stair-north"
+      }
+    }
+  ],
+  "wallRings": [
+    {
+      "evidence": {
+        "locator": "plan chains 790 and 1260; wall build-up 25 + 20",
+        "note": "walls run to the +3,06 slab top",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "ring-ground",
+      "junctionIds": [
+        "ring-ground-j0",
+        "ring-ground-j1",
+        "ring-ground-j2",
+        "ring-ground-j3"
+      ],
+      "levelId": "ground",
+      "name": "Main body, ground floor exterior ring",
+      "wallIds": [
+        "g-front",
+        "g-right",
+        "g-rear",
+        "g-left"
+      ]
+    },
+    {
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-upper",
+      "junctionIds": [
+        "ring-upper-j0",
+        "ring-upper-j1",
+        "ring-upper-j2",
+        "ring-upper-j3"
+      ],
+      "levelId": "upper",
+      "name": "Attic exterior ring",
+      "wallIds": [
+        "u-front",
+        "u-right",
+        "u-rear",
+        "u-left"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "front wall face at the end of the printed 1260; its dark render is VISUAL",
+        "properties": {
+          "materialId": "VISUAL_INFERRED"
+        },
+        "source": "src-ground-plan + src-gold-shell + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3.06,
+      "id": "g-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render-dark",
+      "name": "Ground front wall (recessed, behind the portal)",
+      "start": {
+        "x": 0,
+        "z": 1
+      },
+      "thickness": 0.45
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "west outer face x = 0",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 3.06,
+      "id": "g-left",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Ground west wall",
+      "start": {
+        "x": 0,
+        "z": 13.6
+      },
+      "thickness": 0.45
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 13.6
+      },
+      "evidence": {
+        "locator": "rear wall face at the start of the printed 1260",
+        "source": "src-ground-plan + src-gold-shell + src-gold-facade",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-gold-facade"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 3.06,
+      "id": "g-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Ground rear wall (recessed, behind the loggia)",
+      "start": {
+        "x": 7.9,
+        "z": 13.6
+      },
+      "thickness": 0.45
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 13.6
+      },
+      "evidence": {
+        "locator": "one 0.45 m wall in both plans and the section; the garage interior 7.90..11.60 confirms a single leaf",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 3.06,
+      "id": "g-right",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Ground east wall (shared with the garage)",
+      "start": {
+        "x": 7.9,
+        "z": 1
+      },
+      "thickness": 0.45
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "plan chains 415 and 750; walls to the flat roof underside 2.54 (printed 252 + slab)",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.54,
+      "id": "gar-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Garage front wall",
+      "start": {
+        "x": 7.9,
+        "z": 1
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 8.5
+      },
+      "evidence": {
+        "locator": "the 510 | 750 split of the printed 1260 puts the garage north wall at reference z 5.10",
+        "source": "src-ground-plan + src-gold-shell",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_EXACT"
+      },
+      "height": 2.54,
+      "id": "gar-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Garage north wall",
+      "start": {
+        "x": 12.05,
+        "z": 8.5
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 8.5
+      },
+      "evidence": {
+        "locator": "plan chains 415 and 750; walls to the flat roof underside 2.54 (printed 252 + slab)",
+        "source": "src-ground-plan + src-gold-shell + src-section",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-shell",
+          "src-section"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.54,
+      "id": "gar-right",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "Garage east wall",
+      "start": {
+        "x": 12.05,
+        "z": 1
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-garage"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.48,
+        "z": 6.24
+      },
+      "evidence": {
+        "locator": "raster x 3.363..3.469 at z 7.6; column scan at x 3.42 shows the two jambs of the bathroom door",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.73,
+      "id": "gw-bath-east",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Bathroom east partition",
+      "start": {
+        "x": 3.48,
+        "z": 4.82
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.48,
+        "z": 4.7
+      },
+      "evidence": {
+        "locator": "raster z 8.815..8.894, x 0.00..3.469; the west chain closes 7.36 + 1.42 = 8.78 on its north face",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-bath-south",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Bathroom south partition",
+      "start": {
+        "x": 0.45,
+        "z": 4.7
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.45,
+        "z": 4.57
+      },
+      "evidence": {
+        "locator": "raster z 8.788..9.026 at three columns, 0.24 m thick; the printed 312 closes 12.15 − 3.12 = 9.03 on its south face",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-boiler-north",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Kotłownia north wall (0.26 m)",
+      "start": {
+        "x": 5.37,
+        "z": 4.57
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.26
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.49,
+        "z": 4.57
+      },
+      "evidence": {
+        "locator": "raster x 5.376..5.482, z 8.815..10.456 and 11.382..12.600; the south chain closes 0.45 + 2.90 + 0.12 + 1.90 = 5.37 on its west face",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-boiler-west",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Kotłownia west partition",
+      "start": {
+        "x": 5.49,
+        "z": 1.45
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.37,
+        "z": 3.47
+      },
+      "evidence": {
+        "locator": "raster z 10.032..10.112; the printed 203 closes 12.15 − 2.03 = 10.12 on its south face",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-entry-north",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Wiatrołap north partition",
+      "start": {
+        "x": 3.48,
+        "z": 3.47
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.11,
+        "z": 6.24
+      },
+      "evidence": {
+        "locator": "raster z 7.253..7.359; the west chain closes 0.45 + 4.14 + 2.65 = 7.24 on its north face; free east end at x 4.105",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-kitchen-south",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Kitchen south partition",
+      "start": {
+        "x": 0.45,
+        "z": 6.24
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.45,
+        "z": 8.57
+      },
+      "evidence": {
+        "locator": "raster z 4.950..5.082; the printed 446 closes 0.45 + 4.46 = 4.91 on its north face (the raster is 1.5 px lower; the chain is taken)",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-pantry-north",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Pantry north partition",
+      "start": {
+        "x": 5.37,
+        "z": 8.57
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.44,
+        "z": 7.32
+      },
+      "evidence": {
+        "locator": "raster z 6.168..6.274, x 5.403..6.435; its east end is free — the pantry corner is open to the stair",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.73,
+      "id": "gw-pantry-south",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Pantry south partition",
+      "start": {
+        "x": 5.37,
+        "z": 7.32
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.49,
+        "z": 8.57
+      },
+      "evidence": {
+        "locator": "raster x 5.376..5.482; column scan at x 5.43 shows the two jambs of the pantry door",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.73,
+      "id": "gw-pantry-west",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Pantry west partition",
+      "start": {
+        "x": 5.49,
+        "z": 7.44
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.48,
+        "z": 4.7
+      },
+      "evidence": {
+        "locator": "raster x 3.363..3.469, z 9.926..12.600; the south chain closes 0.45 + 2.90 = 3.35 on its west face",
+        "note": "height to the slab underside 3.06 − 0.33 = 2.73",
+        "source": "src-ground-plan + src-gold-interior",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.73,
+      "id": "gw-room-east",
+      "kind": "INTERIOR",
+      "levelId": "ground",
+      "name": "Front room east partition",
+      "start": {
+        "x": 3.48,
+        "z": 1.45
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12
+    },
+    {
+      "baseOffset": -0.1,
+      "end": {
+        "x": 7.9,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "attic plan ink x 7.259..7.895 at z 12.8/13.1/13.4 where the ground plan has none: this return stands on the balcony slab",
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-front",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-front"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.11185,
+      "id": "ret-east-front",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "East return, front recess (above the balcony)",
+      "start": {
+        "x": 7.9,
+        "z": 0
+      },
+      "tags": [
+        "return",
+        "front-zone"
+      ],
+      "thickness": 0.61,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 14.6
+      },
+      "evidence": {
+        "locator": "both plans: ink x 7.283..7.892 (ground) / 7.259..7.895 (attic) at z −0.3/−0.6/−0.9",
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-east",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-east"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 5.07185,
+      "id": "ret-east-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "East return, rear loggia",
+      "start": {
+        "x": 7.9,
+        "z": 13.6
+      },
+      "tags": [
+        "return",
+        "rear-zone"
+      ],
+      "thickness": 0.61,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 12.05,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "ground plan ink x 11.441..12.050; top at the dark band 3.08 (front elevation)",
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-front",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-front"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "height": 3.08,
+      "id": "ret-garage-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render-dark",
+      "name": "Garage east return, front recess",
+      "start": {
+        "x": 12.05,
+        "z": 0
+      },
+      "tags": [
+        "return",
+        "front-zone"
+      ],
+      "thickness": 0.61
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "locator": "ground plan ink x 0.000..0.636 at z 12.8/13.1/13.4; attic plan x 0.000..0.609; runs the full height into the roof soffit",
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-east",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-east"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 5.07185,
+      "id": "ret-west-front",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "West return, front recess",
+      "start": {
+        "x": 0,
+        "z": 1
+      },
+      "tags": [
+        "return",
+        "front-zone"
+      ],
+      "thickness": 0.61,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 13.6
+      },
+      "evidence": {
+        "locator": "both plans: ink x 0.000..0.636 at z −0.3/−0.6/−0.9",
+        "source": "src-ground-plan + src-attic-plan + src-gold-facade + src-elev-east",
+        "sourceIds": [
+          "src-ground-plan",
+          "src-attic-plan",
+          "src-gold-facade",
+          "src-elev-east"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 5.07185,
+      "id": "ret-west-rear",
+      "kind": "EXTERIOR",
+      "levelId": "ground",
+      "materialId": "mat-render",
+      "name": "West return, rear loggia",
+      "start": {
+        "x": 0,
+        "z": 14.6
+      },
+      "tags": [
+        "return",
+        "rear-zone"
+      ],
+      "thickness": 0.61,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.71444,
+      "id": "u-front",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Attic front gable wall",
+      "start": {
+        "x": 0,
+        "z": 1
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.71444,
+      "id": "u-left",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Attic west eave wall (knee wall)",
+      "start": {
+        "x": 0,
+        "z": 13.6
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 13.6
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.71444,
+      "id": "u-rear",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Attic rear gable wall",
+      "start": {
+        "x": 7.9,
+        "z": 13.6
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.9,
+        "z": 13.6
+      },
+      "evidence": {
+        "locator": "attic plan outer walls at x 47..345 and z 195..671 px = the main body footprint; side walls to the printed 130 knee wall, gable ends to the roof underside",
+        "source": "src-section + src-gold-shell",
+        "sourceIds": [
+          "src-section",
+          "src-gold-shell"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 4.71444,
+      "id": "u-right",
+      "kind": "EXTERIOR",
+      "levelId": "upper",
+      "materialId": "mat-render",
+      "name": "Attic east eave wall (knee wall)",
+      "start": {
+        "x": 7.9,
+        "z": 1
+      },
+      "thickness": 0.45,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.35,
+        "z": 3.8
+      },
+      "evidence": {
+        "locator": "raster z 9.690..9.796; the west chain closes 7.20 + 2.48 = 9.68 on its north face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-bath-south",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "Bathroom south partition",
+      "start": {
+        "x": 0.45,
+        "z": 3.8
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.45,
+        "z": 4.7
+      },
+      "evidence": {
+        "locator": "raster z 8.790..8.896; the printed 325 depth of the south Pokój closes 12.15 − 3.25 = 8.90 on its south face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-corridor-south",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "Corridor south partition",
+      "start": {
+        "x": 3.35,
+        "z": 4.7
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.01,
+        "z": 13.15
+      },
+      "evidence": {
+        "locator": "raster x 3.894..3.974; the north chain closes 0.45 + 3.44 = 3.89 on its west face; column scan at x 3.9 shows the three door jambs",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-corridor-west",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "Corridor west partition",
+      "start": {
+        "x": 4.01,
+        "z": 4.82
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.28,
+        "z": 9.78
+      },
+      "evidence": {
+        "locator": "raster x 5.166..5.272 at z 3.85 and 4.3; the printed 217 closes 7.45 − 2.17 = 5.28 on its east face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-garderoba-ne-west",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "North-east Garderoba west partition",
+      "start": {
+        "x": 5.28,
+        "z": 8.57
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.28,
+        "z": 9.78
+      },
+      "evidence": {
+        "locator": "raster z 3.702..3.781; the printed 325 closes 0.45 + 3.25 = 3.70 on its north face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-pokoj-ne-south",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "North-east Pokój south partition",
+      "start": {
+        "x": 4.01,
+        "z": 9.78
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.89,
+        "z": 8.54
+      },
+      "evidence": {
+        "locator": "raster z 4.947..5.027; the west chain closes 0.45 + 4.49 = 4.94 on its north face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-pokoj-nw-south",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "North-west Pokój south partition",
+      "start": {
+        "x": 0.45,
+        "z": 8.54
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.89,
+        "z": 6.4
+      },
+      "evidence": {
+        "locator": "raster z 7.094..7.173; the west chain closes 5.06 + 2.02 = 7.08 on its north face",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-pralnia-south",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "Pralnia south partition",
+      "start": {
+        "x": 0.45,
+        "z": 6.4
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.47,
+        "z": 4.7
+      },
+      "evidence": {
+        "locator": "raster x 3.338..3.444; the south chain closes 0.45 + 2.90 = 3.35 on its west face; column scan shows the Garderoba door jambs",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 2.6,
+      "id": "uw-room2-west",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "South Pokój west partition",
+      "start": {
+        "x": 3.47,
+        "z": 1.45
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 7.45,
+        "z": 8.45
+      },
+      "evidence": {
+        "locator": "raster z 5.027..5.133 at x 6.5 and 7.0, x 5.166..7.895",
+        "note": "capped at 2.60 above the attic floor where the roof is higher (an assumption: the plans dimension the knee wall and the ridge, not the ceiling line); follows the roof underside where it is lower",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "source": "src-attic-plan + src-gold-interior",
+        "sourceIds": [
+          "src-attic-plan",
+          "src-gold-interior"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.6,
+      "id": "uw-stair-north",
+      "kind": "INTERIOR",
+      "levelId": "upper",
+      "name": "Stair north partition",
+      "start": {
+        "x": 5.16,
+        "z": 8.45
+      },
+      "tags": [
+        "interior-partition"
+      ],
+      "thickness": 0.12,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-main"
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "mullion breaks read on the elevations",
+        "source": "src-elev-front + src-elev-rear + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-east-living-window-glazing",
+      "mullions": [
+        0.5
+      ],
+      "openingId": "og-east-living-window"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "mullion breaks read on the elevations",
+        "source": "src-elev-front + src-elev-rear + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-front-gable-glazing-glazing",
+      "mullions": [
+        0.374
+      ],
+      "openingId": "og-front-gable-glazing"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "frame profile is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-front-room-window-glazing",
+      "openingId": "og-front-room-window"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "mullion breaks read on the elevations",
+        "source": "src-elev-front + src-elev-rear + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-rear-gable-east-glazing",
+      "mullions": [
+        0.573
+      ],
+      "openingId": "og-rear-gable-east"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "mullion breaks read on the elevations",
+        "source": "src-elev-front + src-elev-rear + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-rear-gable-west-glazing",
+      "mullions": [
+        0.406
+      ],
+      "openingId": "og-rear-gable-west"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "mullion breaks read on the elevations",
+        "source": "src-elev-front + src-elev-rear + src-elev-east + src-gold-facade",
+        "sourceIds": [
+          "src-elev-front",
+          "src-elev-rear",
+          "src-elev-east",
+          "src-gold-facade"
+        ],
+        "status": "VISUAL_INFERRED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-rear-living-glazing-glazing",
+      "mullions": [
+        0.5
+      ],
+      "openingId": "og-rear-living-glazing"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "frame profile is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-west-kitchen-window-glazing",
+      "openingId": "og-west-kitchen-window"
+    },
+    {
+      "divisions": 1,
+      "evidence": {
+        "locator": "frame profile is not drawn",
+        "source": "src-stage-author",
+        "sourceIds": [
+          "src-stage-author"
+        ],
+        "status": "ASSUMED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "og-west-living-window-glazing",
+      "openingId": "og-west-living-window"
+    }
+  ]
+}
