@@ -45,6 +45,7 @@ npm test                 # vitest: domain, geometry, editor and architecture tes
 npm run build            # typecheck + production build of BuildWorld into apps/web/dist
 npm run e2e              # build + Playwright browser verification of the production build
 npm run audit:marcowki   # measured source parity of the Marcówki reference model (independent oracles)
+npm run audit:marcowki:facades  # four-facade orthographic comparison against the registered elevation readings
 npm run dev              # BuildWorld dev server, http://localhost:5173
 npm run preview          # serve the production build, http://localhost:4173
 npm run verify           # typecheck + test + build + e2e

@@ -134,11 +134,19 @@ the model is typed twice. The headline facts:
 | 19 partitions (10 ground, 9 attic) with T/BUTT junctions, 11 interior doors | `gw-*`, `uw-*` (attic ones `FOLLOW_ROOF`, capped at 2.60), `gd-*`, `ud-*` | plan ink and door gaps | SOURCE_CORROBORATED / DERIVED |
 | stair | `stair-main` placeholder over the void `x 5.37..7.45`, `z 4.83..6.81` | both plans | SIMPLIFICATION |
 
+> **STAGE BUILDAPP-01A** closed the architectural gaps this stage recorded as
+> simplifications: the stair, the slab void, the rooflight cut mode, the
+> entrance assembly, the cladding bands and the recess floors.
+> See **`docs/MARCOWKI_ARCHITECTURAL_FIDELITY.md`** for what changed and
+> **`docs/MARCOWKI_SOURCE_REVISION_POLICY.md`** for which published revision
+> the reference follows. The sections below describe the model as it stands.
+
 ## Generic capabilities added for it
 
-Each is a schema 1.2.0 primitive with commands, validation, compiler support
+Each is a schema primitive with commands, validation, compiler support
 and tests on buildings that are not the reference
-(`packages/{model,commands,geometry}/test/openings-1.2.0.test.ts`):
+(`packages/{model,commands,geometry}/test/openings-1.2.0.test.ts` for 1.2.0,
+`.../fidelity-1.3.0.test.ts` for 1.3.0):
 
 - **Raked opening heads** — `Opening.head: { kind: 'RAKED', heightFar }`;
   the three gable windows under the 40° rake. A window in a raked opening
@@ -149,8 +157,8 @@ and tests on buildings that are not the reference
   reference: the house/garage wall is one leaf (ledger).
 - **Roof openings and rooflights** — `RoofOpening` (ROOFLIGHT / PENETRATION
   with `throughId`) and `Rooflight`; `cutRoofOpening`, `placeRooflight`;
-  vertical prism cuts through the roof plate with reveals, watertight
-  band tiling, chimney penetrations without shared volume.
+  cuts through the roof plate with reveals, watertight band tiling, chimney
+  penetrations without shared volume.
 - **Explicit window mullions** — `Window.mullions` fractions, for the
   divided gable glazing and the living-room glazing.
 - **FOLLOW_ROOF crossing breaks** — a capped partition that follows the roof
@@ -158,13 +166,23 @@ and tests on buildings that are not the reference
   (found by the attic corridor partition; a generic compiler fix).
 - **Oracles** — `depthProbeReport`, `lineCoverage`, `pointInPolygon`.
 
-Not implemented, deliberately: slab holes (the stair void is a notch in the
-bearing rectangle's polygon), roof cuts normal to the slope (vertical prisms
-are used and stated), stair flights.
+Added in schema 1.3.0 (STAGE BUILDAPP-01A):
+
+- **Regions with holes** — `tessellateRegion`: `outer − holes` as one closed
+  extrusion, holes allowed to share boundary with the outline. Used by
+  `Slab.holes`, by composite door frames and by finish skins.
+- **Real staircases** — `Stair` FLIGHTS with FLIGHT / WINDER / LANDING
+  segments, `layoutStair` in the model package and a stair compiler that
+  emits one edge-manifold solid of treads.
+- **Roof cut modes** — `RoofOpening.cut` VERTICAL / NORMAL_TO_ROOF.
+- **Composite openings** — `Door.assembly` of LEAF / GLAZED / PANEL panels
+  with mullions.
+- **Surface regions** — `SurfaceRegion`, a finish band on a wall face with no
+  thickness of its own, clipped to the wall's real material.
 
 ## Decisions no source settles
 
-The ledger (`src/ledger.ts`, 24 entries, printed by `npm run audit:marcowki`)
+The ledger (`src/ledger.ts`, 33 entries, printed by `npm run audit:marcowki`)
 records every contradiction, simplification and omission with the reason and
 the handling. The ones that shape geometry:
 
@@ -175,8 +193,11 @@ the handling. The ones that shape geometry:
   because its compiler had no T-junctions; the drawings show one wall and the
   published garage area only closes with one. One leaf, T-junctioned; the
   kotłownia door is therefore a single-leaf opening.
-- **Upper slab** — bearing rectangle `x 0.45..7.45` notched by the stair
-  void, as the roof-features gold reconciled it.
+- **Upper slab** — bearing rectangle `x 0.45..7.45` with the stair void as a
+  real L-shaped hole (4.158 m²) touching the east inner face.
+- **Stair winders** — thirteen straight risers are counted on the plans; the
+  four winders in the corner are inferred from the printed 3.06 m rise
+  (0.18 m risers). Three and five winders are admissible and recorded.
 - **Balcony thickness, railing height, portal head, garage parapet,
   chimney tops** — read off elevations, `VISUAL_INFERRED`, listed.
 - **Attic ceiling** — partitions capped at 2.60 above the attic floor where
@@ -184,20 +205,23 @@ the handling. The ones that shape geometry:
 
 ## The model in numbers
 
-145 commands: 16 evidence sources, 7 materials, 1 building, 2 levels,
+159 commands: 19 evidence sources, 9 materials, 1 building, 2 levels,
 2 rings, 27 walls (3 garage, 5 returns, 19 partitions), 1 loose junction,
-3 slabs, 2 roofs, 2 balconies, 2 railings, 2 chimneys, 5 roof openings,
-3 rooflights, 23 openings, 8 windows, 15 doors, 18 rooms, 1 stair,
-4 constraints. Result: 35 walls, 45 junctions (10 CORNER, 22 T, 13 BUTT),
-122 objects carrying evidence (12 `SOURCE_EXACT`, 41 `SOURCE_CORROBORATED`,
-35 `SOURCE_DERIVED`, 14 `VISUAL_INFERRED`, 20 `ASSUMED`), zero validation
-issues, zero compile diagnostics, 44 closed structural solids, bounds
-`x 0..12.05`, `y −0.32..7.95`, `z 0..14.60`.
+3 slabs, 2 roofs, 4 balcony/terrace plates, 2 railings, 2 chimneys,
+5 roof openings, 3 rooflights, 23 openings, 8 windows, 15 doors, 18 rooms,
+1 stair, 6 surface regions, 5 constraints. Result: 35 walls, 45 junctions
+(10 CORNER, 22 T, 13 BUTT), 130 objects carrying evidence
+(12 `SOURCE_EXACT`, 41 `SOURCE_CORROBORATED`, 34 `SOURCE_DERIVED`,
+3 `GEOMETRIC_INFERRED`, 23 `VISUAL_INFERRED`, 17 `ASSUMED`), zero validation
+issues, zero compile diagnostics, 47 closed structural solids, 4480
+triangles in 178 meshes, bounds `x 0..12.05` (the finish skins stand 5 mm
+proud of the west face), `y −0.32..7.95`, `z 0..14.60`.
 
 ## Measured source parity
 
 From `npm run audit:marcowki` and `packages/reference-marcowki/test`
-(42 metric tests + 16 mutation tests + 3 persistence tests). Every number is
+(104 tests across nine files: metrics, the 01A fidelity suite, two mutation
+catalogues and persistence). Every number is
 an oracle reading of the compiled scene.
 
 | claim | measured |
@@ -208,7 +232,7 @@ an oracle reading of the compiled scene.
 | rear loggia mouth | the same, 180 rays |
 | portal mouth | 0 of 64 rays blocked at the outer plane; 1.00 m jambs either side; head = portal head 2.41..3.08 over the garage part, balcony slab 2.41..2.96 over the rest |
 | ring closure | ground 836 probes, attic 836, garage 504: 0 gaps, 0 overlaps, 0 reversed walls |
-| solids | 44 structural solids closed; pairwise overlap between all of them: none |
+| solids | 47 structural solids closed; pairwise overlap between all of them: none |
 | roof | both slopes 40.00° from normals; ridge 7.950; extent `z 0..14.6`; closed; eave walls meet the underside with worst gap and overlap 9e−16 |
 | twelve openings | each: 0 material through the centre, 0.45 beside the jamb and above the head, fill hosted inside the hole, reveals closing the wall solid, 4 rays inside the printed rectangle read 0 and 4 cm outside read 0.45; the room behind each by point-in-polygon equals the room the plan names |
 | raked heads | worst error between the printed callout line and where material begins: 1.8e−15 over 11 stations per window; the wall loses exactly the trapezoid; fills stay under the head; ≥ 1.05 m of wall above each head to the soffit |
@@ -216,14 +240,26 @@ an oracle reading of the compiled scene.
 | balconies / portal | closed solids of the stated volumes and bounds; the whole front zone is open below 2.41 |
 | balustrades | glass over 92.5 % (front) / 95.7 % (rear) of the run, longest gap 0.070 (a post), tops at 3.860, four panels each |
 | chimneys | two stacks through penetrations, no shared volume with the roof, roof material right beside each |
-| rooflights | three 0.78 × 1.18·cos 40° cuts, lower edge 0.45 in from the eave, frame and glass closed, glass 0.024 through the pane, each over the attic room the plan places it in |
-| upper slab | closed, volume `(inner − void) × 0.33`, real void 2.08 × 1.98, bounds on the bearing rectangle |
+| rooflights | three 0.78 × 1.18·cos 40° cuts, lower edge 0.45 in from the eave, frame and glass closed, glass 0.024 through the pane, each over the attic room the plan places it in; all three cut **normal to the roof** — 96/96 rays along the roof normal pass clean, underside outline 0.135686 m uphill against 0.21109 × sin 40° predicted |
+| upper slab | closed, volume `(inner − void) × 0.33`, the void a real **L-shaped hole** of 4.158 m² touching the east inner face: 1680 rays inside it meet no slab, 924 outside it meet 0.33 |
+| stair | one closed solid; 17 risers of 0.180 m measured by rays up the walking line; arrives exactly on +3,06; first riser on the plan's nosing line x 5.370; inside the shaft `x 5.37..7.45 z 4.83..7.94`; no volume shared with the slab or any wall |
+| finish regions | six bands, each a 2 mm skin 5 mm clear of its wall face, changing no wall volume; the front gable band's top follows the 40° rake to within 1 mm; no band covers an opening |
+| door assemblies | entrance `LEAF 0.72 │ mullion 0.04 │ GLAZED 0.28` with the pane on the east side, garage one flush `PANEL`, garage side door one fully glazed `LEAF`; the concealed kotłownia door stays a plain leaf |
+| four facades | 47 registered elevation readings compared orthographically: 36 pass, 9 deviate (each a recorded source conflict), 2 not modelled, 0 not found; worst deviation 0.185 m |
 | interior | 18 rooms, no two overlapping (grid points); 19 partitions closed, inside the shell, touching without overlapping it; 11 interior doors real cuts between exactly the two rooms the plans connect; the corridor partition follows the soffit where the roof is lower |
 
 ## Mutation catalogue
 
-`test/mutations.test.ts` applies thirteen mutations to the real model and
-proves a named checker passes the reference and catches each:
+Two catalogues apply mutations to the real model and prove a named checker
+passes the reference and catches each. `test/mutations.test.ts` covers the
+shell and the openings (below); `test/mutations-01a.test.ts` covers the
+architectural fidelity this stage added — the stair back to a placeholder,
+the wrong rise, the footprint shifted, the void filled, a rooflight cut
+vertically, the sidelight removed, the sidelight on the wrong side, a region
+omitted, a region on the wrong wall, the balcony edge moved, the balustrade
+shortened, a door re-dimensioned and a raked head squared off.
+
+`test/mutations.test.ts`:
 
 | # | mutation | caught by |
 | --- | --- | --- |

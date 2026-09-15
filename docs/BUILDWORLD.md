@@ -90,7 +90,8 @@ viewport never builds building geometry (architecture tests grep for both).
   house* / *Dom w marcówkach (GE)* — that replaces the model in the same
   store with the chosen factory's `CanonicalBuildingModel` (a loaded file
   shows as *(file)*), Reset (rebuilds the demo), Hide/Show roofs, storey
-  isolation select, Show all, Grid, Axes. The reference enters the app
+  isolation select, Show all, Grid, Axes, and **Frame** — frames the selected
+  object in the current view (again: frames the whole building). The reference enters the app
   exactly as the demo does: `createMarcowkiReferenceBuilding()` handed to
   `replaceModel`; the viewport, adapter, store and inspector never import
   the reference package (architecture test).
@@ -101,7 +102,16 @@ viewport never builds building geometry (architecture tests grep for both).
   count; Hide/Show, Isolate, Delete (a cascading `removeFeature`); editable
   properties (commit on Enter/blur; a corner junction's `owner` is a select
   of its two walls, `tolerance` a number; roof opening rectangles and
-  rooflight frame/glass are editable); a Topology section for walls,
+  rooflight frame/glass are editable; a roof opening's `cut` mode and a
+  surface region's face, rectangle and material are selects and numbers like
+  any other); a **Composition** section that states what the selected object
+  is made of — a stair's rise, riser count, width, start and every segment,
+  plus the slab void it rises through as a link; a slab's outline area,
+  each hole's vertex count and area, and the stair through it; a roof
+  opening's cut mode with its top and underside outlines and how far the
+  underside is shifted uphill; a door's assembly panel by panel; a surface
+  region's host wall, face, rectangle and material — all read-only and
+  re-derived after every edit; a Topology section for walls,
   junctions and rings (read-only, re-derived after every edit — thicken the
   front wall and the side walls' physical starts move); an Evidence section
   with the status tag, the cited evidence sources by label and kind, the

@@ -92,15 +92,17 @@ level moves what stands on it. Opening `sill` is above the wall base.
 | `WallRing` | `wallIds` in traversal order, `junctionIds` one per vertex | `levelId`, walls, junctions |
 | `Opening` | `kind` WINDOW/DOOR/PASSAGE, `offset` (along the wall), `sill`, `width`, `height` — wall-local; `head` LEVEL (default) or RAKED `{ heightFar }` (the head rises linearly from `height` at the near jamb to `heightFar` at the far jamb — a gable window under a rake); `leaves` `[{ wallId, offset }]` — further parallel walls on the same level the same hole passes through (a passage through two abutting leaves) | `wallId`, `leaves[].wallId` |
 | `Window` | `frameWidth`, `frameDepth`, `frameInset`, `glassThickness`, `divisions`, `mullions` (explicit fractions 0..1 of the width, overriding equal `divisions`) | `openingId` |
-| `Door` | `hingeSide` LEFT/RIGHT, `swing` IN/OUT, `openAngle` 0..180°, `leafThickness`, `frameWidth`, `frameDepth`, `frameInset` | `openingId` |
-| `Slab` | `polygon`, `topOffset`, `thickness` | `levelId` |
+| `Door` | `hingeSide` LEFT/RIGHT, `swing` IN/OUT, `openAngle` 0..180°, `leafThickness`, `frameWidth`, `frameDepth`, `frameInset`; `assembly?` `{ panels, mullionWidth }` — panels side by side across the opening, each a `fraction` of the width: `LEAF` (own `hinge`, `glazing` NONE/FULL), `GLAZED` (a fixed pane), `PANEL` (a fixed solid) | `openingId` |
+| `Slab` | `polygon`, `holes?` (plan polygons removed through the full thickness; a hole may share boundary with the outer polygon), `topOffset`, `thickness` | `levelId` |
 | `Roof` | `kind` GABLE/FLAT, `footprint` (plan rect), `eaveOffset`, `pitchDeg`, `ridgeAxis` X/Z, `overhang`, `thickness` | `levelId` |
-| `RoofOpening` | `kind` ROOFLIGHT/PENETRATION, `footprint` (plan rect inside the covered rectangle, on one slope), `throughId` (a PENETRATION names the chimney whose footprint it carries) | `roofId`, `throughId` |
+| `RoofOpening` | `kind` ROOFLIGHT/PENETRATION, `footprint` (plan rect inside the covered rectangle, on one slope), `cut?` VERTICAL (default) / NORMAL_TO_ROOF, `throughId` (a PENETRATION names the chimney whose footprint it carries) | `roofId`, `throughId` |
 | `Rooflight` | `frameWidth`, `glassThickness`, `materialId` — the unit filling a ROOFLIGHT opening | `roofOpeningId` |
 | `Balcony` | `kind` BALCONY/TERRACE/LOGGIA, `footprint`, `topOffset`, `thickness` | `levelId` |
 | `Railing` | `start`, `end`, `baseOffset`, `height`, `postSpacing`, `infill` GLASS/BARS/NONE | `levelId`, `hostId` |
 | `Chimney` | `footprint`, `baseOffset`, `height` | `levelId` |
-| `Stair` | `footprint`, `kind` PLACEHOLDER | `levelId`, `toLevelId` |
+| `Stair` | `footprint`; `kind` PLACEHOLDER (a footprint only) or FLIGHTS (`start` — the left end of the first riser line facing `direction` — `direction` PLUS_X/MINUS_X/PLUS_Z/MINUS_Z, `width`, `baseOffset`, `topOffset`, `waist`, `segments`) | `levelId`, `toLevelId` |
+| `StairSegment` | `FLIGHT { risers, going }`, `WINDER { risers, turn LEFT/RIGHT, angleDeg 90/180 }` (riser lines fan from a newel on the turn side), `LANDING { length, turn NONE/LEFT/RIGHT }` | in walking order |
+| `SurfaceRegion` | `hostId` (a wall), `face` OUTER/INNER, `rect` `{ a0, a1, b0, b1 }` wall-local, `materialId` — a finish band with **no thickness of its own** | `hostId`, `materialId` |
 | `Material` | `name`, `color` `#rrggbb`, `opacity` | referenced by `materialId` |
 | `Constraint` | `kind` FIXED_VALUE/EQUAL/ALIGN/NOTE, `targetIds`, `property`, `value`, `tolerance` | any object |
 | `EvidenceSource` | `kind` DRAWING/PHOTO/RENDER/PUBLISHED_FACT/MANUAL/DERIVATION/OTHER, `label`, `uri` | referenced by `evidence.sourceIds` |
@@ -115,9 +117,14 @@ gets a trapezoid frame from the compiler. A door refuses a raked opening
 walls; the host wall's leaf comes first, each leaf states the opening's
 offset along its own wall, and every leaf must be a distinct wall on the
 same level, parallel to the host (`OPENING_LEAF_INVALID`,
-`OPENING_LEAF_LEVEL_MISMATCH`, `OPENING_LEAF_NOT_PARALLEL`). A roof opening
-is a vertical prism cut through the roof plate over its plan rectangle; it
-must lie strictly inside the roof's covered rectangle
+`OPENING_LEAF_LEVEL_MISMATCH`, `OPENING_LEAF_NOT_PARALLEL`). A roof opening is cut through the roof plate over its plan rectangle. With
+`cut: VERTICAL` (the default) it is a vertical prism: the same outline on
+both surfaces. With `cut: NORMAL_TO_ROOF` the sides are perpendicular to the
+roof plane, so the underside outline is the footprint shifted
+`thickness · sin(pitch)` towards the ridge and the reveals are tilted — the
+physically right cut for a roof window, and the one a stack must *not* use
+(a PENETRATION is refused unless it is VERTICAL). The opening's hull over
+both outlines must lie strictly inside the roof's covered rectangle
 (`ROOF_OPENING_OUTSIDE_HOST`), on one side of a gable's ridge
 (`ROOF_OPENING_CROSSES_RIDGE`), and clear of the roof's other openings
 (`ROOF_OPENINGS_OVERLAP`); a penetration's rectangle equals its chimney's
@@ -183,21 +190,28 @@ break it.
 | `1.0.0` | BUILDAPP-00 | no topology; corner ownership expressed by hand-trimmed wall extents |
 | `1.1.0` | BUILDAPP-00A | `wallJunctions` and `wallRings` collections; walls on the natural footprint |
 | `1.2.0` | BUILDAPP-01 | `roofOpenings` and `rooflights` collections; optional `Opening.head`, `Opening.leaves`, `Window.mullions` |
+| `1.3.0` | BUILDAPP-01A | `surfaceRegions` collection; `Stair` becomes PLACEHOLDER \| FLIGHTS; optional `Slab.holes`, `RoofOpening.cut`, `Door.assembly` |
 
 Policy (`packages/model/src/migrate.ts`, run by `validateModel` and therefore
 by `loadModel`, `compileBuilding` and the editor's Load):
 
-- a `1.2.0` file loads as is;
-- a `1.1.0` file is migrated **explicitly**: empty `roofOpenings` and
-  `rooflights` are added, `schemaVersion` becomes `1.2.0`, a note is appended
-  to `meta.notes`, and the load reports the warning `SCHEMA_MIGRATED`. The
+- a `1.3.0` file loads as is;
+- a `1.2.0` file is migrated **explicitly**: an empty `surfaceRegions` is
+  added, `schemaVersion` becomes `1.3.0`, a note is appended and the load
+  reports `SCHEMA_MIGRATED`. Every new field is optional and every old stair
+  stays a PLACEHOLDER, so it compiles to exactly the geometry it compiled to
+  under 1.2.0 (tested against the BUILDAPP-01 Marcówki file kept as a
+  fixture: a placeholder stair, a notched slab, vertical roof cuts);
+- a `1.1.0` file is migrated through the chain: empty `roofOpenings` and
+  `rooflights` are added (1.1.0 → 1.2.0), then `surfaceRegions` (1.2.0 →
+  1.3.0), one `SCHEMA_MIGRATED` warning and one note per step. The
   optional opening and window fields are absent, so it compiles to exactly
   the geometry it compiled to under 1.1.0 (tested against the BUILDAPP-00A
   demo file kept as a fixture: the migrated scene deep-equals the current
   demo's). Re-saving writes a 1.2.0 file;
-- a `1.0.0` file is migrated through the chain: empty `wallJunctions` and
-  `wallRings` (1.0.0 → 1.1.0), then the roof-opening collections (1.1.0 →
-  1.2.0), one `SCHEMA_MIGRATED` warning and one note per step. Its walls
+- a `1.0.0` file is migrated through the whole chain: empty `wallJunctions`
+  and `wallRings` (1.0.0 → 1.1.0), the roof-opening collections (1.1.0 →
+  1.2.0), then `surfaceRegions` (1.2.0 → 1.3.0). Its walls
   keep their stated extents, so it compiles to exactly the geometry it
   compiled to under 1.0.0 (same per-wall bounds and volumes, same triangle
   count);
@@ -217,8 +231,10 @@ validates and canonicalizes; `parseModel` throws with the issues listed.
 Round-trip tests live in `packages/model/test`, `packages/demo/test`,
 `packages/reference-marcowki/test` and `tests/architecture`. Two models are
 frozen as fixtures under `packages/model/test/fixtures`: the demo house at
-every schema version (`demo-house-1.0.0/1.1.0/1.2.0.json`) and the Marcówki
-reference (`marcowki-ge-1.2.0.json`, `docs/MARCOWKI_REFERENCE_MODEL.md`);
+every schema version (`demo-house-1.0.0/1.1.0/1.2.0/1.3.0.json`) and the
+Marcówki reference at the current version (`marcowki-ge-1.3.0.json`,
+`docs/MARCOWKI_REFERENCE_MODEL.md`) with its BUILDAPP-01 freeze
+(`marcowki-ge-1.2.0.json`) kept as the migration baseline;
 the model and geometry packages load and compile the reference from that
 file alone, without the reference package.
 

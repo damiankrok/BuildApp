@@ -10,12 +10,13 @@
 | --- | --- | --- | --- |
 | STAGE BUILDAPP-00 — BUILDWORLD / SEMANTIC BUILDING EDITOR / BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | `da01f5d328fc2d4f54aabb6b8fff669508d2d805` | PASS |
 | STAGE BUILDAPP-00A — WALL TOPOLOGY / JUNCTIONS / ANALYZER-FRIENDLY WALL RINGS | `claude/buildapp-buildworld-v1-7y6yqh` (same harness-designated branch; no suffix was forced beyond the one recorded in BUILDAPP-00) | implementation `50a46370994e3cad7180857a19b87a9f9979d43f`; docs `a8ac902cc4e74f2102adb5b9e1b56bc341a04cf1`; the final HEAD is the one commit above the docs commit that records these SHAs (see `stage-reports/STAGE_BUILDAPP_00A.md` and `git log`) | PASS |
-| STAGE BUILDAPP-01 — MARCÓWKI REFERENCE MODEL THROUGH THE REAL BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `0df518186bb61b8a365cd9fc11d68ad875be88ca`; implementation `7a6d6168d44f2c75eb0a6bd0974ed1cda72e4478`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01.md` and this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-01 — MARCÓWKI REFERENCE MODEL THROUGH THE REAL BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `0df518186bb61b8a365cd9fc11d68ad875be88ca`; implementation `7a6d6168d44f2c75eb0a6bd0974ed1cda72e4478`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01.md` and this row | PASS |
+| STAGE BUILDAPP-01A — MARCÓWKI ARCHITECTURAL FIDELITY CLOSURE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d40fa39733c80bf0b1e35c2233c8ea8ba0c542b7`; implementation `2de2f26328ec45ad99b47da0d9d956e8bc4d4cf9`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01A.md` and this row (the final HEAD, see `git log`) | PASS |
 
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
-  (`buildapp.canonical-building-model` **1.2.0**), explicit units and world
+  (`buildapp.canonical-building-model` **1.3.0**), explicit units and world
   frame recorded in every file, stable ids, evidence vocabulary (SOURCE_EXACT …
   UNRESOLVED) per object and per property, referential and geometric
   validation with named codes, deterministic canonical JSON save/load.
@@ -27,12 +28,23 @@
   `UNKNOWN_ROOF_OPENING`, `ROOF_OPENING_OUTSIDE_HOST`,
   `ROOF_OPENING_CROSSES_RIDGE`, `ROOF_OPENINGS_OVERLAP`,
   `ROOF_OPENING_FILLED_TWICE`, `ROOF_PENETRATION_MISMATCH`.
-  **Explicit schema evolution**: 1.0.0 and 1.1.0 files migrate on load
+  Schema 1.3.0 (BUILDAPP-01A) adds real staircases (`Stair` PLACEHOLDER |
+  FLIGHTS with FLIGHT / WINDER / LANDING segments and `layoutStair`), slab
+  holes (`Slab.holes`, a hole may touch the outline), roof cut modes
+  (`RoofOpening.cut` VERTICAL | NORMAL_TO_ROOF), composite doors
+  (`Door.assembly` of LEAF / GLAZED / PANEL panels) and the
+  `surfaceRegions` collection (a finish band on a wall face with no
+  thickness of its own), with codes `SLAB_HOLE_OUTSIDE`,
+  `SLAB_HOLES_OVERLAP`, `STAIR_RISE_INVALID`, `STAIR_LAYOUT_INVALID`,
+  `STAIR_OUTSIDE_FOOTPRINT`, `DOOR_ASSEMBLY_INVALID`,
+  `SURFACE_REGION_HOST_INVALID`, `SURFACE_REGION_OUTSIDE_HOST`.
+  **Explicit schema evolution**: 1.0.0, 1.1.0 and 1.2.0 files migrate on load
   through explicit chained steps (empty collections added, one
   `SCHEMA_MIGRATED` warning and one `meta.notes` entry per step, geometry
-  unchanged — tested against the frozen 1.0.0 and 1.1.0 demo files); a file
-  stating an older version but carrying newer collections is refused; other
-  versions are refused (`UNSUPPORTED_SCHEMA_VERSION`).
+  unchanged — tested against the frozen 1.0.0/1.1.0/1.2.0 demo files and the
+  BUILDAPP-01 Marcówki freeze); a file stating an older version but carrying
+  newer collections is refused; other versions are refused
+  (`UNSUPPORTED_SCHEMA_VERSION`).
 - **Wall topology** (`packages/model/src/topology.ts`): `WallJunction`
   records (CORNER with an owner, BUTT, T) and `WallRing` records; a
   line-arithmetic resolver derives every wall end's physical cut on its outer
@@ -105,15 +117,16 @@
   inspector. The viewport, adapter, store and generic packages never import
   the reference package (architecture tests).
 
-## Test / build / browser results (STAGE BUILDAPP-01)
+## Test / build / browser results (STAGE BUILDAPP-01A)
 
 | gate | result |
 | --- | --- |
 | `npm run typecheck` | clean (packages + web app) |
-| `npm test` | 252 passed, 32 files (model 47; commands 30; demo 5; verification 15; geometry 55; editor 6; reference-marcowki 61; architecture 33) |
-| `npm run build` | clean; `apps/web/dist` ≈ 964 KB (three 480 KB, app 467 KB, react 12 KB, css 5 KB) |
-| `npm run e2e` | 12 passed (Playwright 1.56, Chromium headless, SwiftShader WebGL) against the production build; screenshots in `stage-reports/artifacts/` |
-| `npm run audit:marcowki` | AUDIT PASS — every headline metric of the reference model measured by the oracles |
+| `npm test` | 317 passed, 37 files |
+| `npm run build` | clean; `apps/web/dist` ≈ 1.0 MB (three 480 KB, app 515 KB, react 12 KB, css 5 KB) |
+| `npm run e2e` | 14 passed (Playwright 1.56, Chromium headless, SwiftShader WebGL) against the production build; 13 screenshots in `stage-reports/artifacts/` |
+| `npm run audit:marcowki` | AUDIT PASS — 95 checks, every headline metric measured by the oracles |
+| `npm run audit:marcowki:facades` | 47 registered elevation features: 36 pass, 9 explained deviations, 2 not modelled, 0 not found, worst 0.185 m |
 
 ## Known limitations
 
@@ -129,26 +142,35 @@
   physical plan footprint; roofs, slabs and other elements are not part of it
   (the demo's chimney/roof penetration remains the stated exception in the
   geometry overlap test).
-- Roof openings are vertical prisms over a plan rectangle, on one slope of
-  a gable; a rooflight unit sits in that vertical cut (the built unit sits
-  in a cut normal to the slope — ledger `rooflight-cut`). Multi-leaf
-  openings require parallel leaves on the same level. Roofs: axis-aligned
-  rectangular gable and flat only. Slabs without holes (a void is a notch in
-  the polygon); stairs placeholders; rooms are floor markers. Constraints
-  recorded, not solved. Inspector-driven editing only. The model frame is
-  left-handed as specified and mirrored by the viewer.
+- Roof openings are cut over a plan rectangle on one slope of a gable,
+  VERTICAL or NORMAL_TO_ROOF; there is no clearance between a rooflight unit
+  and its cut (ledger `rooflight-clearance`). Multi-leaf openings require
+  parallel leaves on the same level. Roofs: axis-aligned rectangular gable
+  and flat only. Stairs have flights, winders and landings but no
+  balustrade, and a slab hole has no upstand along its edge. Surface regions
+  are wall-local rectangles on one face (not polygons, not on slabs or
+  roofs). Rooms are floor markers. Constraints recorded, not solved.
+  Inspector-driven editing only. The model frame is left-handed as specified
+  and mirrored by the viewer.
 - The Marcówki reference carries its unresolved source evidence in
-  `packages/reference-marcowki/src/ledger.ts` (eave datum contradiction,
-  balcony and railing heights read off elevations, garage parapet, verge,
-  stair flights, cladding bands and chimney shafts not modelled).
+  `packages/reference-marcowki/src/ledger.ts` (33 entries: the eave datum
+  contradiction, the stair's winder count, the entrance panel split, balcony
+  and railing heights read off elevations, the garage parapet, the verge
+  band and chimney shafts not modelled, and the drift between the two
+  published revisions). ARCHON publishes the project in more than one
+  revision; `docs/MARCOWKI_SOURCE_REVISION_POLICY.md` states which one the
+  reference follows and why, and no published aggregate is allowed to move a
+  dimension.
 
 ## Recommended technical next step
 
-Roof cuts normal to the slope (`RoofOpening.cut: VERTICAL | NORMAL`) and
-slab holes (`Slab.holes`) as first-class generic primitives, closing the two
-simplifications the reference model states in its ledger; the oracles
-already measure both. After that, unchanged from BUILDAPP-00A:
-topology-aware plan editing (`moveJunction` / `moveWallWithNeighbours`) and
-rooms derived from the resolved wall topology, the smallest step between the
-analyzer-friendly ring/junction API and an analyzer that emits a full storey
-plan from a drawing.
+Guarding: a balustrade that follows a stair's own path (rather than a
+straight run) and an upstand along a slab hole's edge. The stair is now a
+real staircase and the void a real hole, but neither carries the guarding a
+built stair must have, and the attic plan draws a line along the void's north
+and west edges. Both are generic capabilities provable on a non-Marcówki
+building first. After that, unchanged from BUILDAPP-00A: topology-aware plan
+editing (`moveJunction` / `moveWallWithNeighbours`) and rooms derived from
+the resolved wall topology, the smallest step between the analyzer-friendly
+ring/junction API and an analyzer that emits a full storey plan from a
+drawing.

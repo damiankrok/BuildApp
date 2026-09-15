@@ -158,13 +158,69 @@ what an editor edits; the ridge height is derived.
 Fill parts are separate meshes with `objectId = window/door`,
 `hostWallId`, `openingId`, `structural: false`.
 
+## Regions with holes (`region.ts`)
+
+`tessellateRegion(outer, holes)` turns `outer − holes` into triangles plus a
+boundary, in abstract `(u, v)` coordinates: plan `(x, z)` for a slab,
+wall-local `(a, b)` for a door frame or a finish skin.
+
+The region is cut into horizontal bands at every vertex. Inside a band no
+edge starts or ends, so the edges crossing it, sorted by `u`, pair up
+left/right under the even-odd rule into trapezoids — a hole is simply two
+more crossings. Every trapezoid corner on a scanline becomes a break on that
+line and every trapezoid edge is split on all of its line's breaks, so
+triangles either side of a scanline meet vertex for vertex and the boundary
+walls, split on the same lines, share those vertices: no T-junctions.
+
+A hole **may share boundary with the outer polygon** — a stair void against a
+wall. The two coincident, opposite boundary segments have no material between
+them and cancel, which is exactly the region difference. No bridging, no ear
+clipping, no repair. `extrudePlanRegion` and `extrudeLocalRegion` extrude the
+result into one closed, outward-wound solid.
+
+## Stairs (`stair-compiler.ts`)
+
+`layoutStair` (model package) turns a FLIGHTS stair into risers: each with
+its riser line, its travel direction, its tread polygon and its top height,
+plus landing plates. A WINDER fans its riser lines from a newel on the turn
+side; the arrival riser has no tread of its own, because the destination
+floor is its tread.
+
+The compiler treats every tread and landing as a **cell**: a plan polygon
+between `max(base, top − riserHeight − waist)` and `top`, so the underside
+steps down with the flight as a folded plate. The solid is the union of the
+cells, emitted as exposed faces only, from plan adjacency alone: on an edge
+two cells share, the riser above the lower cell's tread and the soffit step
+below its bottom; on an unshared edge, the cell's side — which is also the
+first riser off the floor and the back face on the arrival line. A strip of
+40 mm is cut off the back of the last cell and raised to the arrival height,
+so the stair's highest emitted point is measured, not assumed.
+
+Every cell vertex is inserted into the other cells' edges it lies on, and
+every vertical edge is split at every height another face has a vertex at on
+the same plan point, so the surface is edge-manifold everywhere — including
+along a winder's newel, where riser and soffit faces fan around one vertical
+line. Nothing here reads the slab: the void a stair needs is the slab's own
+hole.
+
+## Surface regions (`surface-regions.ts`)
+
+A finish band becomes a 2 mm skin standing 3 mm clear of its wall face (so
+the two surfaces never z-fight), clipped to the wall's real material: bounded
+above by the wall's own top function (a roof soffit, a gable rake), along by
+the face's physical extent, and with every opening the wall carries cut out
+of it (Sutherland–Hodgman against the band's rectangle, so an opening
+straddling an edge becomes a notch). It is non-structural, changes no wall
+volume, and is hidden with its host wall.
+
 ## Features (`features.ts`)
 
 Slabs and balconies: polygon extrusion (ear clipping) between `top −
-thickness` and `top`. Chimney: a box. Railing: posts at every `postSpacing`,
+thickness` and `top`; a slab with `holes` goes through the region
+tessellator instead. Chimney: a box. Railing: posts at every `postSpacing`,
 a top rail, and BARS / GLASS / NONE infill, all as separate parts. Room: a thin
-translucent floor plate so a room is selectable (non-structural). Stair: a
-thin placeholder plate.
+translucent floor plate so a room is selectable (non-structural). A
+PLACEHOLDER stair: a thin plate; a FLIGHTS stair goes to the stair compiler.
 
 ## Diagnostics
 
