@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import type { ViewPreset } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
+import { SEALED_CANDIDATES, modelOf } from '@buildapp/candidates'
 import { useSnapshot, useStore } from '../use-store.js'
 
 /**
@@ -15,6 +16,11 @@ import { useSnapshot, useStore } from '../use-store.js'
 export const BUILTIN_MODELS: ReadonlyArray<{ id: string; label: string; create: () => ReturnType<typeof createDemoBuilding> }> = [
   { id: 'demo-house', label: 'Demo house', create: () => createDemoBuilding() },
   { id: 'marcowki-ge', label: 'Dom w marcówkach (GE)', create: () => createMarcowkiReferenceBuilding() },
+  // A reconstruction candidate is loaded by REPLAYING its sealed program, not
+  // by running a solver here. BuildWorld shows the building that was sealed,
+  // evaluated and shipped, or it shows an error — never a fourth building that
+  // happens to be what this copy of the solver produces today.
+  ...SEALED_CANDIDATES.map((c) => ({ id: c.id, label: c.label, create: () => modelOf(c.id) })),
 ]
 
 const VIEWS: Array<{ id: ViewPreset; label: string }> = [

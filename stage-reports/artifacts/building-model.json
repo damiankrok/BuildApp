@@ -197,6 +197,7 @@
       "name": "Upper floor"
     }
   ],
+  "linearSolids": [],
   "materials": [
     {
       "color": "#b0725a",
@@ -628,7 +629,7 @@
     }
   ],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.3.0",
+  "schemaVersion": "1.4.0",
   "slabs": [
     {
       "evidence": {

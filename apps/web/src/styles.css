@@ -465,3 +465,72 @@ select:focus {
   background: #e0f2fe;
   border-color: #bae6fd;
 }
+
+/* --- the reconstruction card ------------------------------------------- */
+/* A candidate must not look like a surveyed building. The card sits above the
+   observations and states, without softening it, how much of what is on screen
+   the drawings actually say. */
+.reconstruction {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px 10px;
+  background: color-mix(in srgb, var(--panel) 92%, #c08a3e 8%);
+}
+.reconstruction .panel-title {
+  border: 0;
+  padding: 0 0 6px;
+}
+.recon-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--line);
+  margin-bottom: 6px;
+}
+.recon-seg {
+  display: block;
+  height: 100%;
+}
+.recon-hard {
+  background: #4f8a5b;
+}
+.recon-soft {
+  background: #c08a3e;
+}
+.recon-unresolved {
+  background: #8a5b5b;
+}
+.recon-legend {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.recon-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.6;
+}
+.recon-legend .swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+.reconstruction .hashes {
+  margin-top: 6px;
+  border-top: 1px dashed var(--line);
+  padding-top: 6px;
+}
+.reconstruction .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+.recon-note {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+}

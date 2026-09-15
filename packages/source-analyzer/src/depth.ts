@@ -1,7 +1,7 @@
 /**
  * Telling a solid from a stripe.
  *
- * This is the file the owner's finding about the Marcówki facade comes down
+ * This is the file the owner's finding about a flat-looking facade comes down
  * to. An elevation drawing and a render both show a long straight member the
  * same way at first glance — two parallel lines with something between them —
  * whether that member is a 300 mm deep concrete frame standing proud of the

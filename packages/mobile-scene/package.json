@@ -9,6 +9,14 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "dependencies": { "@buildapp/model": "*", "@buildapp/geometry": "*" },
-  "devDependencies": { "@buildapp/commands": "*", "@buildapp/demo": "*", "@buildapp/reference-marcowki": "*" }
+  "dependencies": {
+    "@buildapp/model": "*",
+    "@buildapp/geometry": "*"
+  },
+  "devDependencies": {
+    "@buildapp/commands": "*",
+    "@buildapp/demo": "*",
+    "@buildapp/reference-marcowki": "*",
+    "@buildapp/candidates": "*"
+  }
 }

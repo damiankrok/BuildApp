@@ -1,0 +1,11 @@
+{
+  "name": "@buildapp/candidates",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sealed reconstruction candidates, as data. Every consumer — BuildWorld, the mobile exporter, the evaluation scripts — replays the same sealed program rather than re-running a solver, so what everyone looks at is the same building.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@buildapp/model": "*", "@buildapp/reconstruction": "*" }
+}

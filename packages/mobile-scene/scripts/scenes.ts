@@ -12,6 +12,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
+import { modelOf } from '@buildapp/candidates'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..')
@@ -31,6 +32,15 @@ export const SCENES: readonly SceneSpec[] = [
     title: 'Marcówki',
     subtitle: 'Dom w marcówkach (GE) — reference model',
     build: createMarcowkiReferenceBuilding,
+  },
+  {
+    // The automatic candidate, replayed from its sealed program. The phone
+    // shows the building that was sealed and evaluated, not whatever a solver
+    // running on a laptop produced this afternoon.
+    key: 'marcowki-auto',
+    title: 'Marcówki (auto)',
+    subtitle: 'Reconstructed from the published drawings — a candidate, not final',
+    build: () => modelOf('marcowki-auto'),
   },
   {
     key: 'demo',

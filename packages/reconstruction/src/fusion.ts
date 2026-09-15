@@ -259,6 +259,10 @@ export function fuseCandidates<T>(raw: readonly RawCandidate<T>[], options: Fusi
       }
       // Extents come from whichever view can actually measure them.
       if (EXTENT_AUTHORITY[candidate.members[0].viewRole] > EXTENT_AUTHORITY[twin.members[0].viewRole]) twin.norm = candidate.norm
+      // Counted, because every candidate that goes in must be accounted for on
+      // the way out. This one is not an error — it is the same member seen from
+      // a second drawing, which is the best thing that can happen to it.
+      reject('the same feature corroborated from a second drawing')
       continue
     }
     crossView.push(candidate)

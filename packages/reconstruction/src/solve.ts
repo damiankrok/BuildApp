@@ -154,24 +154,43 @@ export function choosePlan(graph: SourceObservationGraph, metrics: MetricEvidenc
  * the chains they are, so the zones and the subdivisions remain on the record.
  */
 export function footprintFrom(metrics: MetricEvidenceSet, frameId: string): { width?: { value: number; chainId: string; evidenceIds: string[]; hard: boolean; why: string }; depth?: { value: number; chainId: string; evidenceIds: string[]; hard: boolean; why: string } } {
-  const chains = metrics.chains.filter((c) => c.frameId === frameId && c.derivedTotalCm !== undefined)
+  const byId = new Map(metrics.evidence.map((e) => [e.id, e]))
+  // A chain's total is recomputed here from the EVIDENCE its segments cite,
+  // not read off the chain record. The chain knows the structure — which
+  // segments there are and in what order — and the evidence knows the values,
+  // and keeping one copy of each means a corrected reading reaches the
+  // building instead of being shadowed by a total computed before the
+  // correction.
+  const valued = (c: (typeof metrics.chains)[number]): Array<{ value: number; origin: string; confidence: number; id?: string }> =>
+    c.segments.map((s) => {
+      const evidence = s.evidenceId ? byId.get(s.evidenceId) : undefined
+      return { value: evidence?.value ?? s.valueCm ?? Number.NaN, origin: evidence?.origin ?? s.origin ?? 'UNRESOLVED', confidence: evidence?.confidence ?? s.confidence, id: s.evidenceId }
+    })
+  const chains = metrics.chains.filter((c) => c.frameId === frameId && c.segments.length > 0 && valued(c).every((v) => Number.isFinite(v.value)))
   const pick = (axis: 'HORIZONTAL' | 'VERTICAL') => {
     const mine = chains.filter((c) => c.axis === axis)
     if (mine.length === 0) return undefined
     const span = (c: (typeof mine)[number]): number => c.ticksPx[c.ticksPx.length - 1] - c.ticksPx[0]
-    const readFraction = (c: (typeof mine)[number]): number => (c.segments.length === 0 ? 0 : c.segments.filter((s) => s.origin === 'READ' || s.origin === 'CHAIN_CORRECTED').length / c.segments.length)
+    const readFraction = (c: (typeof mine)[number]): number => {
+      const parts = valued(c)
+      return parts.length === 0 ? 0 : parts.filter((p) => (p.origin === 'READ' || p.origin === 'CHAIN_CORRECTED') && p.confidence > 0.05).length / parts.length
+    }
+    const totalOf = (c: (typeof mine)[number]): number => round6(valued(c).reduce((a, p) => a + p.value, 0))
     const widest = Math.max(...mine.map(span))
     const scored = mine.map((c) => {
-      const total = c.derivedTotalCm as number
-      const agrees = mine.filter((other) => other.id !== c.id && Math.abs((other.derivedTotalCm as number) - total) <= Math.max(2, total * 0.01))
+      const total = totalOf(c)
+      const agrees = mine.filter((other) => other.id !== c.id && Math.abs(totalOf(other) - total) <= Math.max(2, total * 0.01))
       return { chain: c, total, agrees, score: agrees.length * 10 + readFraction(c) * 5 + span(c) / Math.max(1, widest) }
     })
     const best = scored.sort((a, b) => b.score - a.score || b.total - a.total || a.chain.id.localeCompare(b.chain.id))[0]
-    const evidenceIds = best.chain.segments.map((s) => s.evidenceId).filter((id): id is string => id !== undefined)
+    const evidenceIds = valued(best.chain).map((p) => p.id).filter((id): id is string => id !== undefined)
     const fraction = readFraction(best.chain)
     // A total is a STATEMENT of the drawing only when every part of it was
-    // printed there, or when a second chain says the same thing.
-    const hard = fraction === 1 || best.agrees.length > 0
+    // printed there, or when a second chain that has SOME printed part says
+    // the same thing. Two chains agreeing where neither carries a legible
+    // number are not two statements — they are one sheet scale, derived
+    // twice, and treating that as exact would make an inference unfalsifiable.
+    const hard = fraction === 1 || (best.agrees.length > 0 && fraction > 0)
     return {
       value: round6(best.total / 100),
       chainId: best.chain.id,

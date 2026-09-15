@@ -28,7 +28,8 @@
     "observations:audit": "vite-node packages/source-analyzer/scripts/audit.ts --",
     "observations:marcowki": "vite-node packages/source-analyzer/scripts/marcowki.ts --",
     "reconstruct": "vite-node packages/reconstruction/scripts/reconstruct.ts --",
-    "reconstruct:marcowki": "vite-node packages/reconstruction/scripts/marcowki.ts --"
+    "reconstruct:marcowki": "vite-node packages/reconstruction/scripts/marcowki.ts --",
+    "reconstruct:no-reference": "vite-node packages/reconstruction/scripts/no-reference.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from 'react'
 import { SourceObservationGraphSchema, errorsOnly, graphHashIsIntact, observationsOn, validateObservationGraph } from '@buildapp/source-observations'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import sample from '../sample-observations.json'
+import { Reconstruction } from './Reconstruction.js'
 
 /**
  * The Sources / Observations surface.
@@ -137,6 +138,7 @@ export function Sources(): JSX.Element {
 
   return (
     <div className="sources" data-testid="sources">
+      <Reconstruction />
       <div className="panel-title">
         Sources / Observations
         <span className="readonly" data-testid="sources-readonly">
