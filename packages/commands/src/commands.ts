@@ -11,6 +11,7 @@
 import { z } from 'zod'
 import {
   DEFAULT_JUNCTION_TOLERANCE,
+  DoorAssemblySchema,
   EvidenceSchema,
   EvidenceSourceSchema,
   IdSchema,
@@ -19,8 +20,11 @@ import {
   OpeningLeafSchema,
   PlanPolygonSchema,
   PlanRectSchema,
+  RoofCutModeSchema,
   RoofKindSchema,
   RoofOpeningKindSchema,
+  StairDirectionSchema,
+  StairSegmentSchema,
   Vec2Schema,
   WallEndRefSchema,
   WallJunctionKindSchema,
@@ -150,12 +154,14 @@ export const CreateWallRingSchema = z
   })
   .strict()
 
+/** A slab from its outer polygon; `holes` are polygons the compiler removes through the whole thickness (a stair void). */
 export const CreateSlabSchema = z
   .object({
     type: z.literal('createSlab'),
     ...withId,
     levelId: IdSchema,
     polygon: PlanPolygonSchema,
+    holes: z.array(PlanPolygonSchema).optional(),
     topOffset: finite.default(0),
     thickness: positive,
     materialId: IdSchema.optional(),
@@ -218,9 +224,10 @@ export const PlaceWindowSchema = z
   .strict()
 
 /**
- * A structural hole through a roof: the vertical prism over `footprint` is
- * removed from the roof. ROOFLIGHT holes take a `placeRooflight` fill; a
- * PENETRATION names the chimney that passes through it in `throughId`.
+ * A structural hole through a roof over `footprint` (the outline on the top
+ * surface), cut VERTICAL (default) or NORMAL_TO_ROOF. ROOFLIGHT holes take a
+ * `placeRooflight` fill; a PENETRATION names the chimney that passes through
+ * it in `throughId` (a chimney needs a VERTICAL cut).
  */
 export const CutRoofOpeningSchema = z
   .object({
@@ -229,6 +236,7 @@ export const CutRoofOpeningSchema = z
     roofId: IdSchema,
     kind: RoofOpeningKindSchema,
     footprint: PlanRectSchema,
+    cut: RoofCutModeSchema.optional(),
     throughId: IdSchema.optional(),
   })
   .strict()
@@ -244,6 +252,13 @@ export const PlaceRooflightSchema = z
   })
   .strict()
 
+/**
+ * A door in a DOOR opening. Without `assembly` it is one hinged leaf; with
+ * one, the opening hosts the stated panels side by side (`LEAF` with its
+ * own hinge edge and optional full glazing, `GLAZED` fixed sidelights,
+ * `PANEL` fixed solid panels) with mullions of `assembly.mullionWidth`
+ * between them; the fractions sum to 1.
+ */
 export const PlaceDoorSchema = z
   .object({
     type: z.literal('placeDoor'),
@@ -256,6 +271,7 @@ export const PlaceDoorSchema = z
     frameWidth: positive.default(0.06),
     frameDepth: positive.default(0.12),
     frameInset: nonNegative.default(0.1),
+    assembly: DoorAssemblySchema.optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -308,6 +324,48 @@ export const CreateStairPlaceholderSchema = z
     levelId: IdSchema,
     toLevelId: IdSchema,
     footprint: PlanRectSchema,
+  })
+  .strict()
+
+/**
+ * A real staircase from `levelId` up to `toLevelId`: the first riser line's
+ * left-hand end `start` (facing `direction`), the stair `width`, and the
+ * `segments` walked in order (FLIGHT / WINDER / LANDING, see the model). The
+ * rise is `toLevel.elevation + topOffset − (level.elevation + baseOffset)`,
+ * shared equally by every riser. `footprint` may be omitted: it is then the
+ * rectangle the laid-out steps occupy.
+ */
+export const CreateStairSchema = z
+  .object({
+    type: z.literal('createStair'),
+    ...withId,
+    levelId: IdSchema,
+    toLevelId: IdSchema,
+    footprint: PlanRectSchema.optional(),
+    start: Vec2Schema,
+    direction: StairDirectionSchema,
+    width: positive,
+    baseOffset: finite.default(0),
+    topOffset: finite.default(0),
+    waist: positive.default(0.18),
+    segments: z.array(StairSegmentSchema).min(1),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * A finish region on one face of a wall: a wall-local rectangle (`a` along
+ * the wall from its start, `b` up from its base) showing `materialId`. The
+ * compiler clips it to the wall's real material (roof soffit, openings).
+ */
+export const CreateSurfaceRegionSchema = z
+  .object({
+    type: z.literal('createSurfaceRegion'),
+    ...withId,
+    hostId: IdSchema,
+    face: z.enum(['OUTER', 'INNER']).default('OUTER'),
+    rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
+    materialId: IdSchema,
   })
   .strict()
 
@@ -413,6 +471,8 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   CreateRailingSchema,
   PlaceChimneySchema,
   CreateStairPlaceholderSchema,
+  CreateStairSchema,
+  CreateSurfaceRegionSchema,
   DefineMaterialSchema,
   AssignMaterialSchema,
   MoveFeatureSchema,

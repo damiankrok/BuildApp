@@ -35,14 +35,14 @@ describe('the reference model is a replay of its command stream', () => {
     const m = createMarcowkiReferenceBuilding()
     const sources = new Set(m.evidenceSources.map((s) => s.id))
     expect(sources.size).toBeGreaterThanOrEqual(12)
-    const objects = [m.building!, ...m.levels, ...m.rooms, ...m.walls, ...m.openings, ...m.windows, ...m.doors, ...m.slabs, ...m.roofs, ...m.roofOpenings, ...m.rooflights, ...m.balconies, ...m.railings, ...m.chimneys, ...m.stairs]
+    const objects = [m.building!, ...m.levels, ...m.rooms, ...m.walls, ...m.openings, ...m.windows, ...m.doors, ...m.slabs, ...m.roofs, ...m.roofOpenings, ...m.rooflights, ...m.balconies, ...m.railings, ...m.chimneys, ...m.stairs, ...m.surfaceRegions]
     for (const o of objects) {
       expect(o.evidence, o.id).toBeDefined()
       expect(o.evidence!.sourceIds!.length, o.id).toBeGreaterThan(0)
       for (const s of o.evidence!.sourceIds!) expect(sources.has(s), `${o.id} cites ${s}`).toBe(true)
     }
     const statuses = new Set(objects.map((o) => o.evidence!.status))
-    expect([...statuses].sort()).toEqual(['ASSUMED', 'SOURCE_CORROBORATED', 'SOURCE_DERIVED', 'SOURCE_EXACT', 'VISUAL_INFERRED'])
+    expect([...statuses].sort()).toEqual(['ASSUMED', 'GEOMETRIC_INFERRED', 'SOURCE_CORROBORATED', 'SOURCE_DERIVED', 'SOURCE_EXACT', 'VISUAL_INFERRED'])
     for (const [k, f] of Object.entries(FACTS)) expect(f.status, k).toBeDefined()
     expect(MARCOWKI_LEDGER.length).toBeGreaterThan(15)
   })
@@ -61,8 +61,14 @@ describe('the reference model is a replay of its command stream', () => {
     expect(m.roofOpenings.filter((o) => o.kind === 'PENETRATION')).toHaveLength(2)
     expect(m.rooflights).toHaveLength(3)
     expect(m.chimneys).toHaveLength(2)
-    expect(m.balconies).toHaveLength(2)
+    expect(m.balconies.filter((b) => b.kind === 'BALCONY')).toHaveLength(2)
+    expect(m.balconies.filter((b) => b.kind === 'TERRACE').map((b) => b.id).sort()).toEqual(['terrace-front-portal', 'terrace-rear-loggia'])
     expect(m.railings).toHaveLength(2)
+    expect(m.surfaceRegions).toHaveLength(6)
+    expect(m.stairs[0].kind).toBe('FLIGHTS')
+    expect(m.slabs.find((x) => x.id === 'slab-upper')!.holes).toHaveLength(1)
+    expect(m.roofOpenings.filter((o) => o.cut === 'NORMAL_TO_ROOF')).toHaveLength(3)
+    expect(m.doors.filter((d) => d.assembly).map((d) => d.id).sort()).toEqual(['og-front-entrance-leaf', 'og-garage-door-leaf', 'og-garage-side-door-leaf'])
     expect(m.slabs.map((s) => s.id).sort()).toEqual(['portal-head', 'slab-ground', 'slab-upper'])
     expect(m.rooms).toHaveLength(18)
     expect(m.stairs).toHaveLength(1)

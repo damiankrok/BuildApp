@@ -40,10 +40,11 @@ describe('Marcówki shell: depth, recesses, rings, roof', () => {
     expect(eastHigh[0].t0 - 1).toBeCloseTo(E.frontOuterPlaneZ, 9)
     // both rows end at the rear outer plane: the east rear return stands at ground level
     expect(eastLow[eastLow.length - 1].t1 - 1).toBeCloseTo(E.rearOuterPlaneZ, 9)
-    // nothing stands at ground level in the front zone at x 7.595 (the plan has no ink there): the first material is the balcony soffit
+    // nothing stands on the portal floor in the front zone at x 7.595 (the plan has no ink there): the first material above ±0,00 is the balcony soffit
     const column = verticalRuns(s, 7.595, 0.5)
-    expect(column[0].y0).toBeCloseTo(E.portalSoffit, 9)
-    expect(column.every((r) => r.y0 >= E.portalSoffit - 1e-9)).toBe(true)
+    expect(column[0]).toMatchObject({ y0: expect.closeTo(E.terrain, 9), y1: expect.closeTo(E.groundFfl, 9) })
+    expect(column[1].y0).toBeCloseTo(E.portalSoffit, 9)
+    expect(column.slice(1).every((r) => r.y0 >= E.portalSoffit - 1e-9)).toBe(true)
   })
 
   it('both characteristic zones are real 1.00 m recesses: no material at the outer plane across the mouth, first material at the back wall', () => {
@@ -71,9 +72,9 @@ describe('Marcówki shell: depth, recesses, rings, roof', () => {
       expect(report.overlaps, name).toEqual([])
       expect(report.outsideOnly, name).toEqual([])
     }
-    // the house/garage wall is one 0.45 m leaf: a ray across it at the garage meets 0.45, not 0.90
-    expect(materialLength(solidTriangles(s.scene, 'g-right'), V(6, 1.2, 5), V(1, 0, 0))).toBeCloseTo(E.wallThickness, 9)
-    const total = [...structuralSolids(s.scene).values()].reduce((sum, t) => sum + materialLength(t, V(6, 1.2, 5), V(1, 0, 0)), 0)
+    // the house/garage wall is one 0.45 m leaf: a ray across it at the garage meets 0.45, not 0.90 (probed above the stair's winders)
+    expect(materialLength(solidTriangles(s.scene, 'g-right'), V(6, 2.5, 5), V(1, 0, 0))).toBeCloseTo(E.wallThickness, 9)
+    const total = [...structuralSolids(s.scene).values()].reduce((sum, t) => sum + materialLength(t, V(6, 2.5, 5), V(1, 0, 0)), 0)
     expect(total).toBeCloseTo(E.wallThickness + E.wallThickness, 9) // g-right and then the garage east wall
   })
 
@@ -86,6 +87,10 @@ describe('Marcówki shell: depth, recesses, rings, roof', () => {
     expect(r.closed).toBe(true)
     expect(r.pitches).toHaveLength(2)
     for (const p of r.pitches) expect(p).toBeCloseTo(E.pitchDeg, 4)
+    // the only other upward planes are the rooflights' lower reveals, cut normal to the roof: they face up at 90° − 40°
+    expect(r.minorPlanes.length).toBeGreaterThan(0)
+    for (const p of r.minorPlanes) expect(p.pitchDeg).toBeCloseTo(90 - E.pitchDeg, 4)
+    expect(r.minorPlanes.reduce((a, p) => a + p.area, 0)).toBeCloseTo(3 * 0.78 * E.roofBuildUp, 4)
     expect(r.ridgeY).toBeCloseTo(E.ridge, 4)
     expect(r.minZ).toBeCloseTo(E.frontOuterPlaneZ, 9)
     expect(r.maxZ).toBeCloseTo(E.rearOuterPlaneZ, 9)

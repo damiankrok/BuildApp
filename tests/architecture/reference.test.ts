@@ -105,7 +105,7 @@ describe('the reference boundary', () => {
     expect(fromFile.diagnostics).toEqual([])
     expect(fromFile).toEqual(compileBuilding(createMarcowkiReferenceBuilding()))
     // the frozen fixture the model and geometry packages test against is this file
-    expect(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.2.0.json'), 'utf8')).toBe(json)
+    expect(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.3.0.json'), 'utf8')).toBe(json)
   })
 
   it('5. every generic primitive the stage added has a test that is not about Marcówki', () => {
@@ -120,6 +120,28 @@ describe('the reference boundary', () => {
     const commandTests = readFileSync(resolve(ROOT, 'packages/commands/test/openings-1.2.0.test.ts'), 'utf8')
     expect(commandTests).not.toMatch(REFERENCE)
     for (const cmd of ['cutRoofOpening', 'placeRooflight', 'leaves', 'head']) expect(commandTests, cmd).toContain(cmd)
+    // STAGE BUILDAPP-01A: the stair, slab holes, roof cut modes, door assemblies and surface regions have generic tests in every layer
+    const geometry13 = readFileSync(resolve(ROOT, 'packages/geometry/test/fidelity-1.3.0.test.ts'), 'utf8')
+    expect(geometry13).not.toMatch(REFERENCE)
+    for (const feature of ['holes', 'WINDER', 'LANDING', 'NORMAL_TO_ROOF', 'assembly', 'GLAZED', 'createSurfaceRegion']) expect(geometry13, feature).toContain(feature)
+    const commands13 = readFileSync(resolve(ROOT, 'packages/commands/test/fidelity-1.3.0.test.ts'), 'utf8')
+    expect(commands13).not.toMatch(REFERENCE)
+    for (const cmd of ['createStair', 'createSurfaceRegion', 'holes', 'cut', 'assembly']) expect(commands13, cmd).toContain(cmd)
+    const editor13 = readFileSync(resolve(ROOT, 'packages/editor/test/fidelity-1.3.0.test.ts'), 'utf8')
+    expect(editor13).not.toMatch(REFERENCE)
+    for (const what of ['createSurfaceRegion', 'createStair', 'details']) expect(editor13, what).toContain(what)
+    const migration = readFileSync(resolve(ROOT, 'packages/model/test/migration.test.ts'), 'utf8')
+    expect(migration).not.toMatch(REFERENCE)
+    expect(migration).toContain('1.3.0')
+    // a slab with a hole in a plain building loses exactly the hole's area times its thickness
+    const slabbed = runCommands(createEmptyModel('s', 's'), [
+      { type: 'createBuilding', id: 'b' },
+      { type: 'createLevel', id: 'l', index: 0, elevation: 0, height: 3 },
+      { type: 'createSlab', id: 'plain', levelId: 'l', polygon: [{ x: 0, z: 0 }, { x: 6, z: 0 }, { x: 6, z: 4 }, { x: 0, z: 4 }], thickness: 0.25 },
+      { type: 'createSlab', id: 'holed', levelId: 'l', polygon: [{ x: 10, z: 0 }, { x: 16, z: 0 }, { x: 16, z: 4 }, { x: 10, z: 4 }], holes: [[{ x: 11, z: 1 }, { x: 13, z: 1 }, { x: 13, z: 2 }, { x: 12, z: 2 }, { x: 12, z: 3 }, { x: 11, z: 3 }]], thickness: 0.25 },
+    ])
+    const slabScene = compileBuilding(slabbed)
+    expect(meshVolume(solidTriangles(slabScene, 'plain')) - meshVolume(solidTriangles(slabScene, 'holed'))).toBeCloseTo((2 * 1 + 1 * 1) * 0.25, 9)
     // the primitives work on a building that is not the reference: a raked opening in a plain wall loses exactly its trapezoid
     const plain = runCommands(createEmptyModel('p', 'p'), [
       { type: 'createBuilding', id: 'b' },
@@ -154,12 +176,17 @@ describe('the reference boundary', () => {
     expect(materialLength(solidTriangles(store.getSnapshot().scene, 'g-front'), { x: 0.9, y: 1.2, z: -1 }, { x: 0, y: 0, z: 1 })).toBeCloseTo(0.45, 9)
   })
 
-  it('7. the schema 1.2.0 migration changes no geometry: the frozen 1.1.0 demo file compiles to exactly the current demo scene', () => {
-    const migrated = loadModel(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/demo-house-1.1.0.json'), 'utf8'))
-    expect(migrated.ok).toBe(true)
-    if (!migrated.ok) return
-    expect(migrated.issues.map((i) => i.code)).toEqual(['SCHEMA_MIGRATED'])
-    expect(migrated.model.schemaVersion).toBe('1.2.0')
-    expect(compileBuilding(migrated.model)).toEqual(compileBuilding(createDemoBuilding()))
+  it('7. the schema migrations change no geometry: the frozen 1.1.0 and 1.2.0 demo files compile to exactly the current demo scene', () => {
+    for (const [file, steps] of [
+      ['demo-house-1.1.0.json', 2],
+      ['demo-house-1.2.0.json', 1],
+    ] as const) {
+      const migrated = loadModel(readFileSync(resolve(ROOT, `packages/model/test/fixtures/${file}`), 'utf8'))
+      expect(migrated.ok, file).toBe(true)
+      if (!migrated.ok) return
+      expect(migrated.issues.map((i) => i.code)).toEqual(Array(steps).fill('SCHEMA_MIGRATED'))
+      expect(migrated.model.schemaVersion).toBe('1.3.0')
+      expect(compileBuilding(migrated.model)).toEqual(compileBuilding(createDemoBuilding()))
+    }
   })
 })

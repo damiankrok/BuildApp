@@ -22,6 +22,14 @@
  * opening collections, every opening keeps its level head and its single
  * leaf, and it compiles to exactly the geometry it compiled to before.
  *
+ * 1.2.0 -> 1.3.0 (STAGE BUILDAPP-01A): the model gained the `surfaceRegions`
+ * collection and four optional extensions — `Slab.holes`, `RoofOpening.cut`
+ * (VERTICAL when absent), `Door.assembly` (one leaf when absent) and the
+ * FLIGHTS stair kind beside PLACEHOLDER. A 1.2.0 file has none of them; it
+ * loads with an empty region collection, every slab solid, every roof cut
+ * vertical, every door one leaf and every stair a placeholder, and compiles
+ * to exactly the geometry it compiled to before.
+ *
  * A file that states an older version but already carries a newer version's
  * collections is refused: it would be a mislabelled newer file.
  */
@@ -41,6 +49,9 @@ export const MIGRATION_NOTE_1_0_0 =
 
 export const MIGRATION_NOTE_1_1_0 =
   'migrated from schema 1.1.0 to 1.2.0: the file carried no roof openings; every opening keeps a level head and a single wall leaf'
+
+export const MIGRATION_NOTE_1_2_0 =
+  'migrated from schema 1.2.0 to 1.3.0: the file carried no surface regions; every slab stays solid, every roof cut vertical, every door one leaf and every stair a placeholder'
 
 type Step = {
   from: string
@@ -65,6 +76,13 @@ const STEPS: Step[] = [
     newCollections: ['roofOpenings', 'rooflights'],
     note: MIGRATION_NOTE_1_1_0,
     message: 'model migrated from schema 1.1.0 to 1.2.0: empty roofOpenings and rooflights were added; openings keep level heads and single leaves',
+  },
+  {
+    from: '1.2.0',
+    to: '1.3.0',
+    newCollections: ['surfaceRegions'],
+    note: MIGRATION_NOTE_1_2_0,
+    message: 'model migrated from schema 1.2.0 to 1.3.0: an empty surfaceRegions collection was added; slabs stay solid, roof cuts vertical, doors one leaf, stairs placeholders',
   },
 ]
 

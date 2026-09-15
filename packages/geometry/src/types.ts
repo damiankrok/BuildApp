@@ -23,6 +23,8 @@ export type GeometryPart =
   | 'WINDOW_MULLION'
   | 'DOOR_FRAME'
   | 'DOOR_LEAF'
+  | 'DOOR_GLASS'
+  | 'DOOR_PANEL'
   | 'DOOR_HANDLE'
   | 'SLAB'
   | 'ROOF'
@@ -36,6 +38,8 @@ export type GeometryPart =
   | 'CHIMNEY'
   | 'ROOM_FLOOR'
   | 'STAIR_PLACEHOLDER'
+  | 'STAIR_STEP'
+  | 'SURFACE_REGION'
 
 export type CompiledMesh = {
   /** The semantic object this geometry belongs to; what selection resolves to. */
@@ -73,6 +77,7 @@ export type CompileDiagnosticCode =
   | 'FILL_WITHOUT_OPENING'
   | 'POLYGON_NOT_TRIANGULATED'
   | 'ROOF_OPENING_NOT_CUT'
+  | 'STAIR_NOT_LAID_OUT'
 
 export type CompileDiagnostic = {
   code: CompileDiagnosticCode

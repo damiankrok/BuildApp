@@ -100,9 +100,101 @@ export const EXPECTED_SHELL = {
   railingFrontRun: [fact('railing.frontFromX'), fact('railing.frontToX')] as [number, number],
   railingRearRun: [fact('railing.rearFromX'), fact('railing.rearToX')] as [number, number],
   chimneyTop: fact('chimney.top'),
-  stairVoid: { minX: 5.37, maxX: 7.45, minZ: refZRangeToApp(6.79, 8.77).map(q)[0], maxZ: refZRangeToApp(6.79, 8.77).map(q)[1] },
+  /** The shaft the stair and its void occupy (BuildApp): the first riser to the east inner face, the kotłownia wall to the arrival. */
+  stairShaft: { minX: fact('stair.firstRiserX'), maxX: q(fact('plan.mainBodyWidth') - T), minZ: Z(fact('stair.southBandToZ')), maxZ: Z(fact('stair.topRiserZ')) },
   buildingHeightAboveTerrain: fact('building.height'),
   terrain: fact('level.terrain'),
+  plinth: fact('terrace.plinth'),
+} as const
+
+// ---------------------------------------------------------------------------
+// STAGE BUILDAPP-01A: the stair, its void, the finish regions, the assemblies, the cut mode, the recess floors
+// ---------------------------------------------------------------------------
+
+const SIN = Math.sin((fact('roof.pitch') * Math.PI) / 180)
+
+/** The stair as the plans draw it, in BuildApp coordinates. */
+export const EXPECTED_STAIR = {
+  /** Left end of the first riser line facing +x. */
+  start: { x: fact('stair.firstRiserX'), z: Z(fact('stair.southBandFromZ')) }, // (5.37, 5.82)
+  direction: 'PLUS_X' as const,
+  width: fact('stair.width'),
+  lowerRisers: fact('stair.lowerRisers'),
+  lowerGoing: fact('stair.lowerGoing'),
+  winders: fact('stair.winderRisers'),
+  turn: 'LEFT' as const,
+  upperRisers: fact('stair.upperRisers'),
+  upperGoing: fact('stair.upperGoing'),
+  risers: fact('stair.risers'),
+  riserHeight: fact('stair.riserHeight'),
+  rise: q(UPPER - fact('level.groundFfl')),
+  waist: fact('stair.waist'),
+  cornerX: fact('stair.cornerX'),
+  /** The southern band across z, the eastern band across x. */
+  southBand: [Z(fact('stair.southBandToZ')), Z(fact('stair.southBandFromZ'))] as [number, number], // 4.83..5.82
+  eastBand: [fact('stair.cornerX'), q(fact('plan.mainBodyWidth') - T)] as [number, number], // 6.46..7.45
+  arrivalZ: Z(fact('stair.topRiserZ')), // 7.94
+  extent: { minX: fact('stair.firstRiserX'), maxX: q(fact('plan.mainBodyWidth') - T), minZ: Z(fact('stair.southBandToZ')), maxZ: Z(fact('stair.topRiserZ')) },
+} as const
+
+/** The L-shaped void in the upper slab: the southern band, then the eastern band north to the arrival; it touches the east inner face. */
+export const EXPECTED_STAIR_VOID: readonly { x: number; z: number }[] = [
+  { x: EXPECTED_STAIR.extent.minX, z: EXPECTED_STAIR.southBand[0] },
+  { x: EXPECTED_STAIR.extent.maxX, z: EXPECTED_STAIR.southBand[0] },
+  { x: EXPECTED_STAIR.extent.maxX, z: EXPECTED_STAIR.arrivalZ },
+  { x: EXPECTED_STAIR.cornerX, z: EXPECTED_STAIR.arrivalZ },
+  { x: EXPECTED_STAIR.cornerX, z: EXPECTED_STAIR.southBand[1] },
+  { x: EXPECTED_STAIR.extent.minX, z: EXPECTED_STAIR.southBand[1] },
+]
+export const EXPECTED_STAIR_VOID_AREA = q((EXPECTED_STAIR.extent.maxX - EXPECTED_STAIR.extent.minX) * EXPECTED_STAIR.width + EXPECTED_STAIR.width * (EXPECTED_STAIR.arrivalZ - EXPECTED_STAIR.southBand[1])) // 4.158
+
+export type ExpectedRegion = {
+  id: string
+  hostId: string
+  facade: 'FRONT' | 'REAR' | 'EAST' | 'WEST'
+  /** The host's outer face plane (z for front/rear, x for the sides) and which way it looks. */
+  facePlane: number
+  outward: 1 | -1
+  /** World span along the host's axis (x for front/rear, z for the sides). */
+  across: [number, number]
+  /** World y range; `upToRoof` when the band runs to the roof soffit. */
+  up: [number, number]
+  upToRoof: boolean
+  materialId: string
+  /** Openings the band is clipped around. */
+  openings: string[]
+}
+
+/** The finish regions the elevations show, in world coordinates. */
+export const EXPECTED_REGIONS: readonly ExpectedRegion[] = [
+  { id: 'sr-front-timber-ground', hostId: 'g-front', facade: 'FRONT', facePlane: FRONT_WALL_Z, outward: -1, across: [fact('band.frontTimberFromX'), fact('band.frontTimberToX')], up: [0, UPPER], upToRoof: false, materialId: 'mat-timber-clad', openings: ['og-front-room-window'] },
+  { id: 'sr-front-timber-gable', hostId: 'u-front', facade: 'FRONT', facePlane: FRONT_WALL_Z, outward: -1, across: [fact('band.frontTimberFromX'), fact('band.frontGableTimberToX')], up: [UPPER, 0], upToRoof: true, materialId: 'mat-timber-clad', openings: ['og-front-gable-glazing'] },
+  { id: 'sr-rear-timber-west', hostId: 'g-rear', facade: 'REAR', facePlane: REAR_WALL_Z, outward: 1, across: [fact('recess.rearFromX'), fact('band.rearTimberWestToX')], up: [0, fact('band.rearTimberTop')], upToRoof: false, materialId: 'mat-timber-clad', openings: [] },
+  { id: 'sr-rear-timber-east', hostId: 'g-rear', facade: 'REAR', facePlane: REAR_WALL_Z, outward: 1, across: [fact('band.rearTimberEastFromX'), fact('recess.rearToX')], up: [0, fact('band.rearTimberTop')], upToRoof: false, materialId: 'mat-timber-clad', openings: [] },
+  { id: 'sr-west-dark', hostId: 'g-left', facade: 'WEST', facePlane: 0, outward: -1, across: refZRangeToApp(fact('band.westDarkFromZ'), fact('band.westDarkToZ')).map(q) as [number, number], up: [0, fact('band.westDarkTop')], upToRoof: false, materialId: 'mat-render-dark', openings: ['og-west-kitchen-window'] },
+  { id: 'sr-east-dark', hostId: 'g-right', facade: 'EAST', facePlane: 7.9, outward: 1, across: [GARAGE_NORTH_Z, q(FRONT_WALL_Z + 8.704)], up: [0, fact('band.eastDarkTop')], upToRoof: false, materialId: 'mat-render-dark', openings: [] },
+]
+
+/** The door assemblies: which panels fill each facade door, from the near jamb. */
+export const EXPECTED_ASSEMBLIES: Record<string, { panels: Array<'LEAF' | 'GLAZED' | 'PANEL'>; leafFraction: number | null; mullion: number | null; glazedLeaf: boolean }> = {
+  'og-front-entrance-leaf': { panels: ['LEAF', 'GLAZED'], leafFraction: fact('door.entranceLeafFraction'), mullion: fact('door.entranceMullion'), glazedLeaf: false },
+  'og-garage-door-leaf': { panels: ['PANEL'], leafFraction: null, mullion: null, glazedLeaf: false },
+  'og-garage-side-door-leaf': { panels: ['LEAF'], leafFraction: 1, mullion: null, glazedLeaf: true },
+  'og-east-garage-door-leaf': { panels: [], leafFraction: 1, mullion: null, glazedLeaf: false },
+}
+
+/** The rooflight cut: normal to the roof, so the underside outline sits `thickness · sin(pitch)` uphill of the top one. */
+export const EXPECTED_ROOFLIGHT_CUT = {
+  mode: 'NORMAL_TO_ROOF' as const,
+  /** Not rounded: this is the physical prediction the compiled geometry is measured against. */
+  undersideShift: fact('roof.buildUp') * SIN,
+  revealPitchDeg: q(90 - fact('roof.pitch')),
+}
+
+/** The recess floors: the loggia and the portal stand on a plinth to the terrain datum. */
+export const EXPECTED_TERRACES = {
+  'terrace-rear-loggia': { minX: fact('recess.rearFromX'), maxX: fact('recess.rearToX'), minZ: REAR_WALL_Z, maxZ: Z(fact('recess.rearOuterPlane')), top: fact('level.groundFfl'), bottom: fact('level.terrain') },
+  'terrace-front-portal': { minX: fact('recess.frontFromX'), maxX: fact('recess.frontToX'), minZ: Z(fact('recess.frontOuterPlane')), maxZ: FRONT_WALL_Z, top: fact('level.groundFfl'), bottom: fact('level.terrain') },
 } as const
 
 /** Expected room → level map, and the room each rooflight lies over. */

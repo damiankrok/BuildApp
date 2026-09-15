@@ -5,11 +5,23 @@
  */
 import { rectToPolygon, type Balcony, type Chimney, type Level, type Railing, type Room, type Slab, type Stair } from '@buildapp/model'
 import { extrudePolygon, worldBox } from './primitives.js'
+import { extrudePlanRegion } from './region.js'
 import type { GeometryPart, Triangle } from './types.js'
 
+/**
+ * A slab: its polygon extruded between `top − thickness` and `top`. Without
+ * holes it is the plain ear-clipped extrusion of earlier schema versions;
+ * with holes it is the region `polygon − holes` (region.ts), so every hole is
+ * a real through-void with its own reveals and the plate stays one closed
+ * solid.
+ */
 export function compileSlab(slab: Slab, level: Level): Triangle[] | null {
   const top = level.elevation + slab.topOffset
   const out: Triangle[] = []
+  if (slab.holes && slab.holes.length > 0) {
+    extrudePlanRegion(out, slab.polygon, slab.holes, top - slab.thickness, top)
+    return out.length > 0 ? out : null
+  }
   return extrudePolygon(out, slab.polygon, top - slab.thickness, top) ? out : null
 }
 
@@ -33,7 +45,7 @@ export function compileRoomFloor(r: Room, level: Level): Triangle[] | null {
   return extrudePolygon(out, r.polygon, level.elevation + 0.005, level.elevation + 0.02) ? out : null
 }
 
-export function compileStairPlaceholder(s: Stair, level: Level): Triangle[] {
+export function compileStairPlaceholder(s: Pick<Stair, 'footprint'>, level: Level): Triangle[] {
   const out: Triangle[] = []
   worldBox(out, s.footprint.minX, s.footprint.maxX, level.elevation + 0.005, level.elevation + 0.06, s.footprint.minZ, s.footprint.maxZ)
   return out

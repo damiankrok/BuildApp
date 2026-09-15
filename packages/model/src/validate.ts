@@ -7,10 +7,11 @@
  * repairs anything: a problem is reported with the id of the object it is
  * about and the code a caller can act on.
  */
-import { polygonIsSimple, rectIsValid, rectWidth, rectDepth, type PlanRect } from './geometry-types.js'
+import { polygonIsSimple, rectIsValid, rectWidth, rectDepth, type PlanRect, type Vec2 } from './geometry-types.js'
 import { fmtNumber, type ValidationCode, type ValidationIssue, type ValidationResult } from './issues.js'
 import { migrateModelInput } from './migrate.js'
 import { allObjectIds, openingHeadRange, openingIsRaked, openingLeaves, roofCoveredRect, roofCreaseLine, wallLength } from './query.js'
+import { roofCutMode, roofOpeningUndersideRect } from './roof-cut.js'
 import {
   CanonicalBuildingModelSchema,
   OBJECT_COLLECTIONS,
@@ -18,6 +19,7 @@ import {
   type Opening,
   type Wall,
 } from './schema.js'
+import { layoutStair } from './stair-layout.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
 
 export type { ValidationCode, ValidationIssue, ValidationResult } from './issues.js'
@@ -266,6 +268,18 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needSources(d.id, d.evidence?.sourceIds)
     const op = m.openings.find((x) => x.id === d.openingId)
     if (op && openingIsRaked(op)) err('FILL_PROFILE_UNSUPPORTED', `door ${d.id} fills opening ${op.id}, whose head is raked; door fills take level heads only`, d.id)
+    if (d.assembly) {
+      const sum = d.assembly.panels.reduce((a, p) => a + p.fraction, 0)
+      if (Math.abs(sum - 1) > 1e-6) err('DOOR_ASSEMBLY_INVALID', `door ${d.id}: the assembly's panel fractions sum to ${fmt(sum)}, not 1`, d.id, 'assembly.panels')
+      if (op) {
+        const mullions = (d.assembly.panels.length - 1) * d.assembly.mullionWidth
+        if (mullions + 2 * d.frameWidth >= op.width) err('DOOR_ASSEMBLY_INVALID', `door ${d.id}: frame and mullions leave no panel width in a ${op.width} m wide opening`, d.id, 'assembly.mullionWidth')
+        for (const [i, panel] of d.assembly.panels.entries()) {
+          const clear = panel.fraction * op.width - (i === 0 ? d.frameWidth : d.assembly.mullionWidth / 2) - (i === d.assembly.panels.length - 1 ? d.frameWidth : d.assembly.mullionWidth / 2)
+          if (clear <= 0.02) err('DOOR_ASSEMBLY_INVALID', `door ${d.id}: panel ${i} (${panel.kind}) is only ${fmt(clear)} m wide once its frame members are taken out`, d.id, 'assembly.panels')
+        }
+      }
+    }
     fill(d.id, d.openingId, 'DOOR', (o) => {
       if (2 * d.frameWidth >= o.width) return `frame width ${d.frameWidth} leaves no leaf in a ${o.width} m wide opening`
       if (d.frameWidth >= o.height) return `frame width ${d.frameWidth} leaves no leaf in a ${o.height} m tall opening`
@@ -279,7 +293,29 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needLevel(s.id, s.levelId)
     needMaterial(s.id, s.materialId)
     needSources(s.id, s.evidence?.sourceIds)
-    if (!polygonIsSimple(s.polygon)) err('MALFORMED_POLYGON', `slab ${s.id} polygon is not a simple polygon with area`, s.id, 'polygon')
+    const outerOk = polygonIsSimple(s.polygon)
+    if (!outerOk) err('MALFORMED_POLYGON', `slab ${s.id} polygon is not a simple polygon with area`, s.id, 'polygon')
+    const holes = s.holes ?? []
+    for (const [i, h] of holes.entries()) {
+      if (!polygonIsSimple(h)) {
+        err('MALFORMED_POLYGON', `slab ${s.id} hole ${i} is not a simple polygon with area`, s.id, `holes.${i}`)
+        continue
+      }
+      if (!outerOk) continue
+      // every hole vertex inside or on the outer polygon, no hole edge crossing an outer edge
+      const outside = h.filter((q) => !pointInOrOnPolygon(q, s.polygon))
+      const crossing = polygonsEdgesCross(h, s.polygon)
+      if (outside.length > 0 || crossing) {
+        err('SLAB_HOLE_OUTSIDE', `slab ${s.id} hole ${i} is not inside the slab polygon (${outside.length} vertices outside${crossing ? ', edges crossing the outline' : ''})`, s.id, `holes.${i}`)
+        continue
+      }
+      for (let j = 0; j < i; j++) {
+        const other = holes[j]
+        if (!polygonIsSimple(other)) continue
+        const inside = h.some((q) => pointStrictlyInPolygon(q, other)) || other.some((q) => pointStrictlyInPolygon(q, h))
+        if (inside || polygonsEdgesCross(h, other)) err('SLAB_HOLES_OVERLAP', `slab ${s.id} holes ${j} and ${i} overlap`, s.id, `holes.${i}`)
+      }
+    }
   }
   for (const r of m.roofs) {
     needLevel(r.id, r.levelId)
@@ -304,22 +340,29 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     if (!rectIsValid(o.footprint) || !rectIsValid(roof.footprint)) continue
     const c = roofCoveredRect(roof)
     const f = o.footprint
-    if (f.minX <= c.minX + EPS || f.maxX >= c.maxX - EPS || f.minZ <= c.minZ + EPS || f.maxZ >= c.maxZ - EPS) {
+    // a normal cut's underside outline is shifted uphill: both outlines must lie inside the slope
+    const under = roofOpeningUndersideRect(roof, o)
+    const hull: PlanRect = { minX: Math.min(f.minX, under.minX), maxX: Math.max(f.maxX, under.maxX), minZ: Math.min(f.minZ, under.minZ), maxZ: Math.max(f.maxZ, under.maxZ) }
+    const where = roofCutMode(o) === 'NORMAL_TO_ROOF' ? ' (its underside outline included)' : ''
+    if (hull.minX <= c.minX + EPS || hull.maxX >= c.maxX - EPS || hull.minZ <= c.minZ + EPS || hull.maxZ >= c.maxZ - EPS) {
       err(
         'ROOF_OPENING_OUTSIDE_HOST',
-        `roof opening ${o.id} spans x ${fmt(f.minX)}..${fmt(f.maxX)} z ${fmt(f.minZ)}..${fmt(f.maxZ)}, which is not strictly inside the area x ${fmt(c.minX)}..${fmt(c.maxX)} z ${fmt(c.minZ)}..${fmt(c.maxZ)} covered by roof ${roof.id}`,
+        `roof opening ${o.id} spans x ${fmt(hull.minX)}..${fmt(hull.maxX)} z ${fmt(hull.minZ)}..${fmt(hull.maxZ)}${where}, which is not strictly inside the area x ${fmt(c.minX)}..${fmt(c.maxX)} z ${fmt(c.minZ)}..${fmt(c.maxZ)} covered by roof ${roof.id}`,
         o.id,
       )
       continue
     }
     const crease = roofCreaseLine(roof)
     if (crease) {
-      const lo = crease.axis === 'X' ? f.minX : f.minZ
-      const hi = crease.axis === 'X' ? f.maxX : f.maxZ
+      const lo = crease.axis === 'X' ? hull.minX : hull.minZ
+      const hi = crease.axis === 'X' ? hull.maxX : hull.maxZ
       if (lo < crease.value - EPS ? hi >= crease.value - EPS : lo <= crease.value + EPS) {
-        err('ROOF_OPENING_CROSSES_RIDGE', `roof opening ${o.id} crosses or touches the ridge of roof ${roof.id} at ${crease.axis.toLowerCase()} = ${fmt(crease.value)}; an opening lies strictly within one slope`, o.id)
+        err('ROOF_OPENING_CROSSES_RIDGE', `roof opening ${o.id}${where} crosses or touches the ridge of roof ${roof.id} at ${crease.axis.toLowerCase()} = ${fmt(crease.value)}; an opening lies strictly within one slope`, o.id)
         continue
       }
+    }
+    if (o.kind === 'PENETRATION' && roofCutMode(o) === 'NORMAL_TO_ROOF') {
+      err('ROOF_PENETRATION_MISMATCH', `roof opening ${o.id} is a PENETRATION cut NORMAL_TO_ROOF; a vertical element passes through a VERTICAL cut`, o.id, 'cut')
     }
     for (const p of byRoof.get(roof.id) ?? []) {
       if (f.minX < p.maxX - EPS && p.minX < f.maxX - EPS && f.minZ < p.maxZ - EPS && p.minZ < f.maxZ - EPS) {
@@ -381,6 +424,42 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needLevel(s.id, s.levelId)
     if (!levelIds.has(s.toLevelId)) err('UNKNOWN_LEVEL', `stair ${s.id} leads to level "${s.toLevelId}", which does not exist`, s.id, 'toLevelId')
     needRect(s.id, s.footprint, 'footprint')
+    needSources(s.id, s.evidence?.sourceIds)
+    if (s.kind !== 'FLIGHTS') continue
+    needMaterial(s.id, s.materialId)
+    const from = m.levels.find((l) => l.id === s.levelId)
+    const to = m.levels.find((l) => l.id === s.toLevelId)
+    if (!from || !to) continue
+    const layout = layoutStair(s, from, to)
+    if (layout.rise <= 1e-9) err('STAIR_RISE_INVALID', `stair ${s.id} does not rise: from ${fmt(layout.baseY)} to ${fmt(layout.topY)}`, s.id, 'topOffset', layout.rise)
+    for (const issue of layout.issues) if (!issue.startsWith('the stair must rise')) err('STAIR_LAYOUT_INVALID', `stair ${s.id}: ${issue}`, s.id, 'segments')
+    if (layout.extent && rectIsValid(s.footprint)) {
+      const e = layout.extent
+      const f = s.footprint
+      const out = Math.max(f.minX - e.minX, e.maxX - f.maxX, f.minZ - e.minZ, e.maxZ - f.maxZ)
+      if (out > 1e-6) {
+        err('STAIR_OUTSIDE_FOOTPRINT', `stair ${s.id}: its steps span x ${fmt(e.minX)}..${fmt(e.maxX)} z ${fmt(e.minZ)}..${fmt(e.maxZ)}, ${fmt(out)} m outside the stated footprint x ${fmt(f.minX)}..${fmt(f.maxX)} z ${fmt(f.minZ)}..${fmt(f.maxZ)}`, s.id, 'footprint', out)
+      }
+    }
+  }
+  for (const r of m.surfaceRegions) {
+    needSources(r.id, r.evidence?.sourceIds)
+    if (!materialIds.has(r.materialId)) err('UNKNOWN_MATERIAL', `${r.id} refers to material "${r.materialId}", which does not exist`, r.id, 'materialId')
+    const host = m.walls.find((w) => w.id === r.hostId)
+    if (!host) {
+      if (seen.has(r.hostId)) err('SURFACE_REGION_HOST_INVALID', `surface region ${r.id} is hosted by "${r.hostId}", which is not a wall; regions sit on wall faces`, r.id, 'hostId')
+      else err('UNKNOWN_WALL', `surface region ${r.id} refers to wall "${r.hostId}", which does not exist`, r.id, 'hostId')
+      continue
+    }
+    const { a0, a1, b0, b1 } = r.rect
+    if (a1 - a0 <= EPS || b1 - b0 <= EPS) {
+      err('INVALID_RECT', `surface region ${r.id}: rect a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} has no area`, r.id, 'rect')
+      continue
+    }
+    const L = wallLength(host)
+    if (a0 < -EPS || a1 > L + EPS || b0 < -EPS || b1 > host.height + EPS) {
+      err('SURFACE_REGION_OUTSIDE_HOST', `surface region ${r.id} spans a ${fmt(a0)}..${fmt(a1)} b ${fmt(b0)}..${fmt(b1)} on wall ${host.id}, which is ${fmt(L)} x ${fmt(host.height)}`, r.id, 'rect')
+    }
   }
   for (const c of m.constraints) {
     for (const t of c.targetIds) {
@@ -395,6 +474,55 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
 }
 
 const fmt = fmtNumber
+
+// --- plan polygon relations for slab holes ---------------------------------
+
+const onSegment = (p: Vec2, a: Vec2, b: Vec2): boolean => {
+  const cross = (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x)
+  if (Math.abs(cross) > 1e-9) return false
+  return p.x >= Math.min(a.x, b.x) - 1e-9 && p.x <= Math.max(a.x, b.x) + 1e-9 && p.z >= Math.min(a.z, b.z) - 1e-9 && p.z <= Math.max(a.z, b.z) + 1e-9
+}
+
+/** Even-odd containment; points on an edge count as inside. */
+export function pointInOrOnPolygon(p: Vec2, poly: readonly Vec2[]): boolean {
+  const n = poly.length
+  for (let i = 0, j = n - 1; i < n; j = i++) if (onSegment(p, poly[i], poly[j])) return true
+  return pointStrictlyInPolygon(p, poly)
+}
+
+/** Even-odd containment; points on an edge count as outside. */
+export function pointStrictlyInPolygon(p: Vec2, poly: readonly Vec2[]): boolean {
+  const n = poly.length
+  for (let i = 0, j = n - 1; i < n; j = i++) if (onSegment(p, poly[i], poly[j])) return false
+  let inside = false
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const a = poly[i]
+    const b = poly[j]
+    if (a.z > p.z !== b.z > p.z && p.x < ((b.x - a.x) * (p.z - a.z)) / (b.z - a.z) + a.x) inside = !inside
+  }
+  return inside
+}
+
+const orient = (a: Vec2, b: Vec2, c: Vec2): number => (b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x)
+
+/** True when an edge of `a` properly crosses an edge of `b` (touching and collinear overlap are not crossings). */
+export function polygonsEdgesCross(a: readonly Vec2[], b: readonly Vec2[]): boolean {
+  const eps = 1e-9
+  for (let i = 0; i < a.length; i++) {
+    const p1 = a[i]
+    const p2 = a[(i + 1) % a.length]
+    for (let j = 0; j < b.length; j++) {
+      const q1 = b[j]
+      const q2 = b[(j + 1) % b.length]
+      const d1 = orient(q1, q2, p1)
+      const d2 = orient(q1, q2, p2)
+      const d3 = orient(p1, p2, q1)
+      const d4 = orient(p1, p2, q2)
+      if (((d1 > eps && d2 < -eps) || (d1 < -eps && d2 > eps)) && ((d3 > eps && d4 < -eps) || (d3 < -eps && d4 > eps))) return true
+    }
+  }
+  return false
+}
 
 /** Throw with every issue listed when the model is invalid. */
 export function assertValidModel(input: unknown): CanonicalBuildingModel {

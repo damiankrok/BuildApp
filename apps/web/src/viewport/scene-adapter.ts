@@ -32,6 +32,8 @@ const STYLE: Record<GeometryPart, PartStyle> = {
   WINDOW_MULLION: { color: 0x2c3036, roughness: 0.6 },
   DOOR_FRAME: { color: 0x2c3036, roughness: 0.6 },
   DOOR_LEAF: { color: 0x8a6a3d, roughness: 0.7, edges: true },
+  DOOR_GLASS: { color: 0x9ec7e6, opacity: 0.35, roughness: 0.1, metalness: 0.1 },
+  DOOR_PANEL: { color: 0x3a3d42, roughness: 0.7, edges: true },
   DOOR_HANDLE: { color: 0xb8b8b8, roughness: 0.3, metalness: 0.8 },
   SLAB: { color: 0x9b9b98, roughness: 0.9, edges: true },
   ROOF: { color: 0x6f4a3d, roughness: 0.9, edges: true },
@@ -45,6 +47,8 @@ const STYLE: Record<GeometryPart, PartStyle> = {
   CHIMNEY: { color: 0x9c5f4a, roughness: 0.9, edges: true },
   ROOM_FLOOR: { color: 0x3fa7a0, opacity: 0.28, roughness: 1 },
   STAIR_PLACEHOLDER: { color: 0xe0a24d, opacity: 0.5, roughness: 1 },
+  STAIR_STEP: { color: 0xb9b3a8, roughness: 0.9, edges: true },
+  SURFACE_REGION: { color: 0x9a7a4a, roughness: 0.85 },
 }
 
 const SELECTED = new THREE.Color(0x4fa3ff)
@@ -79,7 +83,7 @@ export function buildThreeScene(meshes: readonly CompiledMesh[], materials: read
     const geometry = geometryFor(cm)
     const own = cm.materialId ? modelMaterial.get(cm.materialId) : undefined
     // A model material colours structural parts; fills keep their part colour.
-    const usesOwn = own && (cm.part === 'WALL' || cm.part === 'WALL_REVEAL' || cm.part === 'ROOF' || cm.part === 'ROOF_REVEAL' || cm.part === 'SLAB' || cm.part === 'CHIMNEY' || cm.part === 'BALCONY' || cm.part === 'DOOR_LEAF')
+    const usesOwn = own && (cm.part === 'WALL' || cm.part === 'WALL_REVEAL' || cm.part === 'ROOF' || cm.part === 'ROOF_REVEAL' || cm.part === 'SLAB' || cm.part === 'CHIMNEY' || cm.part === 'BALCONY' || cm.part === 'DOOR_LEAF' || cm.part === 'DOOR_PANEL' || cm.part === 'STAIR_STEP' || cm.part === 'SURFACE_REGION')
     const color = new THREE.Color(usesOwn ? own.color : style.color)
     const selected = selection !== null && cm.objectId === selection
     const material = new THREE.MeshStandardMaterial({

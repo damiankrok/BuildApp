@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { compileBuilding, solidTriangles } from '@buildapp/geometry'
 import { boundsOf, manifoldReport, materialLength, materialRuns, meshVolume, overlapEstimate } from '@buildapp/verification'
-import { EXPECTED_ROOFLIGHT_ROOMS } from '../src/index.js'
-import { EXPECTED_SHELL, marcowkiScene, railingReport, roomAt, structuralSolids, V, verticalRuns } from './measure.js'
+import { EXPECTED_ROOFLIGHT_ROOMS, EXPECTED_STAIR, EXPECTED_STAIR_VOID, EXPECTED_STAIR_VOID_AREA, EXPECTED_TERRACES } from '../src/index.js'
+import { EXPECTED_SHELL, marcowkiScene, railingReport, roomAt, slabVoidReport, structuralSolids, V, verticalRuns } from './measure.js'
 
 const s = marcowkiScene()
 const E = EXPECTED_SHELL
@@ -19,10 +19,20 @@ describe('Marcówki balconies, portal, railings', () => {
     expect(boundsOf(front)).toEqual({ min: V(3.338, E.balconyTop - E.balconyThickness, E.frontOuterPlaneZ), max: V(E.mainWidth, E.balconyTop, E.frontBackPlaneZ) })
     expect(boundsOf(rear)).toEqual({ min: V(E.rearRecessX[0], E.balconyTop - E.balconyThickness, E.rearBackPlaneZ), max: V(E.rearRecessX[1], E.balconyTop, E.rearOuterPlaneZ) })
     expect(boundsOf(head)).toEqual({ min: V(E.mainWidth, E.portalSoffit, E.frontOuterPlaneZ), max: V(E.frontRecessX[1], E.portalHeadTop, E.frontBackPlaneZ) })
-    // the whole front zone at ground level is open below the portal soffit / balcony soffit: a vertical probe from the ground meets nothing before 2.41
+    // the whole front zone above the portal floor is open below the portal soffit / balcony soffit: a vertical probe from the ground meets nothing before 2.41
     for (const x of [1, 3, 5, 7.5, 9, 11]) {
-      const runs = verticalRuns(s, x, 0.5).filter((r) => r.y1 > 0)
+      const runs = verticalRuns(s, x, 0.5).filter((r) => r.y1 > 1e-9)
       expect(runs.length > 0 ? runs[0].y0 : Infinity, `x ${x}`).toBeGreaterThanOrEqual(E.portalSoffit - 1e-9)
+      // the portal floor: the plinth from the terrain datum to ±0,00
+      const floor = verticalRuns(s, x, 0.5)[0]
+      expect(floor.y0, `floor at x ${x}`).toBeCloseTo(E.terrain, 9)
+      expect(floor.y1, `floor at x ${x}`).toBeCloseTo(E.groundFfl, 9)
+    }
+    for (const [id, t] of Object.entries(EXPECTED_TERRACES)) {
+      const tris = solidTriangles(s.scene, id)
+      expect(manifoldReport(tris).closed, id).toBe(true)
+      expect(boundsOf(tris), id).toEqual({ min: V(t.minX, t.bottom, t.minZ), max: V(t.maxX, t.top, t.maxZ) })
+      expect(s.model.balconies.find((b) => b.id === id)!.kind).toBe('TERRACE')
     }
     // the east front return stands on the balcony: its base is the slab top
     const ret = boundsOf(solidTriangles(s.scene, 'ret-east-front'))!
@@ -48,9 +58,10 @@ describe('Marcówki balconies, portal, railings', () => {
       expect(runs[0].t0).toBeCloseTo(0.5, 9)
       expect(runs[0].t1 - runs[0].t0).toBeCloseTo(1.0, 9)
     }
-    // the head over the mouth's centre at the garage: the portal head; over the balcony part: the slab
-    expect(verticalRuns(s, 9.5, 0.5)[0]).toMatchObject({ y0: expect.closeTo(E.portalSoffit, 9), y1: expect.closeTo(E.portalHeadTop, 9) })
-    expect(verticalRuns(s, 5, 0.5)[0]).toMatchObject({ y0: expect.closeTo(E.portalSoffit, 9), y1: expect.closeTo(E.balconyTop, 9) })
+    // the head over the mouth's centre at the garage: the portal head; over the balcony part: the slab (above the portal floor)
+    const above = (x: number) => verticalRuns(s, x, 0.5).filter((r) => r.y1 > 1e-9)
+    expect(above(9.5)[0]).toMatchObject({ y0: expect.closeTo(E.portalSoffit, 9), y1: expect.closeTo(E.portalHeadTop, 9) })
+    expect(above(5)[0]).toMatchObject({ y0: expect.closeTo(E.portalSoffit, 9), y1: expect.closeTo(E.balconyTop, 9) })
   })
 
   it('the balustrades are glass: four panels each, glass over more than 85 % of the run, posts the only gaps', () => {
@@ -126,25 +137,35 @@ describe('Marcówki roof features and slabs', () => {
     }
   })
 
-  it('the upper slab bears inside the walls with a real stair void; the ground slab reaches the terrain', () => {
+  it('the upper slab bears inside the walls with the L-shaped stair void as a hole that touches the east face; the ground slab reaches the terrain', () => {
     const slab = solidTriangles(s.scene, 'slab-upper')
     expect(manifoldReport(slab).closed).toBe(true)
-    const v = E.stairVoid
     const inner = (E.mainWidth - 2 * E.wallThickness) * (E.nominalDepth - 2 * E.wallThickness)
-    const voidArea = (v.maxX - v.minX) * (v.maxZ - v.minZ)
-    expect(meshVolume(slab)).toBeCloseTo((inner - voidArea) * E.slabThickness, 9)
-    expect(voidArea).toBeCloseTo(2.08 * 1.98, 9)
-    expect(materialLength(slab, V((v.minX + v.maxX) / 2, 0, (v.minZ + v.maxZ) / 2), V(0, 1, 0))).toBe(0)
-    expect(materialLength(slab, V(v.minX - 0.2, 0, (v.minZ + v.maxZ) / 2), V(0, 1, 0))).toBeCloseTo(E.slabThickness, 9)
-    expect(materialLength(slab, V((v.minX + v.maxX) / 2, 0, v.maxZ + 0.2), V(0, 1, 0))).toBeCloseTo(E.slabThickness, 9)
+    expect(EXPECTED_STAIR_VOID_AREA).toBeCloseTo(2.08 * 0.99 + 0.99 * 2.12, 9)
+    expect(meshVolume(slab)).toBeCloseTo((inner - EXPECTED_STAIR_VOID_AREA) * E.slabThickness, 9)
+    const v = slabVoidReport(s)
+    expect(v.holes).toBe(1)
+    expect(v.holeArea).toBeCloseTo(EXPECTED_STAIR_VOID_AREA, 9)
+    expect(v.insideRays).toBeGreaterThan(1500)
+    expect(v.insideBlocked).toBe(0)
+    expect(v.outsideRays).toBeGreaterThan(800)
+    expect(v.outsideThin).toBe(0)
+    expect(v.eastFaceOpen).toBe(true)
+    const shaft = EXPECTED_STAIR.extent
+    expect(materialLength(slab, V(shaft.minX - 0.2, 0, (shaft.minZ + shaft.maxZ) / 2), V(0, 1, 0))).toBeCloseTo(E.slabThickness, 9)
+    expect(materialLength(slab, V((shaft.minX + shaft.maxX) / 2, 0, shaft.maxZ + 0.2), V(0, 1, 0))).toBeCloseTo(E.slabThickness, 9)
+    // the corner of the shaft the L leaves out (west of the eastern band, north of the southern band) is slab
+    expect(materialLength(slab, V(EXPECTED_STAIR.cornerX - 0.2, 0, EXPECTED_STAIR.southBand[1] + 0.5), V(0, 1, 0))).toBeCloseTo(E.slabThickness, 9)
     const b = boundsOf(slab)!
     expect(b.max.y).toBeCloseTo(E.upperFfl, 9)
     expect(b.min.y).toBeCloseTo(E.upperFfl - E.slabThickness, 9)
     expect([b.min.x, b.max.x, b.min.z, b.max.z]).toEqual([E.wallThickness, E.mainWidth - E.wallThickness, E.frontBackPlaneZ + E.wallThickness, E.rearBackPlaneZ - E.wallThickness])
-    // the stair placeholder sits in the void and the attic stair compartment lies over it
+    // the stair occupies the shaft and the attic stair compartment lies over it
     const stair = s.model.stairs[0]
-    expect(stair.footprint).toEqual(v)
-    expect(roomAt(s.model, 'upper', { x: (v.minX + v.maxX) / 2, z: (v.minZ + v.maxZ) / 2 })).toBe('u-stairs')
+    expect(stair.kind).toBe('FLIGHTS')
+    expect(stair.footprint).toEqual(shaft)
+    expect(s.model.slabs.find((x) => x.id === 'slab-upper')!.holes![0]).toEqual(EXPECTED_STAIR_VOID)
+    expect(roomAt(s.model, 'upper', { x: (EXPECTED_STAIR.eastBand[0] + EXPECTED_STAIR.eastBand[1]) / 2, z: (shaft.minZ + shaft.maxZ) / 2 })).toBe('u-stairs')
     const ground = boundsOf(solidTriangles(s.scene, 'slab-ground'))!
     expect(ground.min.y).toBeCloseTo(E.terrain, 9)
     expect(ground.max.y).toBeCloseTo(E.groundFfl, 9)

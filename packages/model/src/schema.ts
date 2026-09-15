@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.2.0' as const
+export const MODEL_SCHEMA_VERSION = '1.3.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -276,9 +276,37 @@ export const WindowSchema = z
 export type Window = z.infer<typeof WindowSchema>
 
 /**
+ * One panel of a composite door assembly, across the opening from its near
+ * jamb (`offset` side) to its far jamb. `fraction` is the panel's share of
+ * the opening width; the fractions of an assembly sum to 1. LEAF pivots on
+ * its own `hinge` edge (LEFT = the edge nearer the opening's near jamb) by
+ * the door's `openAngle` towards `swing`; `glazing: FULL` makes it a glazed
+ * leaf (stiles and rails around a pane). GLAZED is a fixed glazed panel (a
+ * sidelight) in its own frame; PANEL is a fixed solid panel (a sectional or
+ * blank door). Mullions of `mullionWidth` stand between adjacent panels.
+ */
+export const DoorPanelSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('LEAF'), fraction: z.number().gt(0).lte(1), hinge: z.enum(['LEFT', 'RIGHT']), glazing: z.enum(['NONE', 'FULL']) }).strict(),
+  z.object({ kind: z.literal('GLAZED'), fraction: z.number().gt(0).lte(1) }).strict(),
+  z.object({ kind: z.literal('PANEL'), fraction: z.number().gt(0).lte(1) }).strict(),
+])
+export type DoorPanel = z.infer<typeof DoorPanelSchema>
+
+export const DoorAssemblySchema = z
+  .object({
+    panels: z.array(DoorPanelSchema).min(1),
+    mullionWidth: positive,
+  })
+  .strict()
+export type DoorAssembly = z.infer<typeof DoorAssemblySchema>
+
+/**
  * A door filling an opening: frame, leaf, handle. The leaf pivots about a
  * vertical axis on `hingeSide` (as seen from outside, along the wall's `u`)
- * and is rotated by `openAngle` degrees towards `swing`.
+ * and is rotated by `openAngle` degrees towards `swing`. With an `assembly`
+ * the opening hosts several panels side by side (a leaf and a glazed
+ * sidelight, a sectional panel, a fully glazed leaf); each LEAF panel then
+ * states its own hinge edge and `hingeSide` is not used.
  */
 export const DoorSchema = z
   .object({
@@ -291,16 +319,25 @@ export const DoorSchema = z
     frameWidth: positive,
     frameDepth: positive,
     frameInset: nonNegative,
+    assembly: DoorAssemblySchema.optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
 export type Door = z.infer<typeof DoorSchema>
 
+/**
+ * A slab: its outer `polygon` less zero or more `holes` (each a simple plan
+ * polygon lying inside the outer polygon; a hole may share part of its
+ * boundary with the outer polygon — a stair void against a wall — but never
+ * cross it or another hole). The compiler removes each hole through the
+ * whole thickness, so a vertical ray through a hole meets no slab material.
+ */
 export const SlabSchema = z
   .object({
     ...base,
     levelId: IdSchema,
     polygon: PlanPolygonSchema,
+    holes: z.array(PlanPolygonSchema).optional(),
     /** Top surface above the level's finished floor (0 = it is the floor). */
     topOffset: finite,
     thickness: positive,
@@ -338,11 +375,25 @@ export const RoofOpeningKindSchema = z.enum(['ROOFLIGHT', 'PENETRATION'])
 export type RoofOpeningKind = z.infer<typeof RoofOpeningKindSchema>
 
 /**
- * A structural hole through a roof: the vertical prism over a plan rectangle
- * is removed from the roof solid, so a ray through it meets no roof material.
- * ROOFLIGHT holes take a `Rooflight` fill; a PENETRATION lets the element
- * named by `throughId` (a chimney) pass through the roof without sharing its
- * volume. The rectangle must lie inside the roof's covered area and, on a
+ * How a roof opening is cut through the roof plate. VERTICAL (the default
+ * when absent, and the only cut of schema 1.2.0): the prism over the plan
+ * rectangle, its sides vertical — a chimney passes through such a hole.
+ * NORMAL_TO_ROOF: the sides are perpendicular to the roof plane, so the hole
+ * has the same outline on the top surface and on the underside measured
+ * along the roof normal — how a rooflight unit sits in a pitched roof. The
+ * `footprint` is always the outline on the roof's top surface in plan; a
+ * normal cut's underside outline is shifted uphill by `thickness · sin pitch`.
+ */
+export const RoofCutModeSchema = z.enum(['VERTICAL', 'NORMAL_TO_ROOF'])
+export type RoofCutMode = z.infer<typeof RoofCutModeSchema>
+
+/**
+ * A structural hole through a roof over a plan rectangle (the outline on the
+ * top surface), cut VERTICAL or NORMAL_TO_ROOF (`cut`), so a ray through it
+ * meets no roof material. ROOFLIGHT holes take a `Rooflight` fill; a
+ * PENETRATION lets the element named by `throughId` (a chimney) pass through
+ * the roof without sharing its volume. The rectangle (and, for a normal cut,
+ * its underside outline) must lie inside the roof's covered area and, on a
  * gable, within one slope.
  */
 export const RoofOpeningSchema = z
@@ -351,6 +402,7 @@ export const RoofOpeningSchema = z
     roofId: IdSchema,
     kind: RoofOpeningKindSchema,
     footprint: PlanRectSchema,
+    cut: RoofCutModeSchema.optional(),
     throughId: IdSchema.optional(),
   })
   .strict()
@@ -415,17 +467,91 @@ export const ChimneySchema = z
   .strict()
 export type Chimney = z.infer<typeof ChimneySchema>
 
-/** Stair placeholder: a footprint that connects two levels. Geometry is a later stage. */
-export const StairSchema = z
+/** Direction of travel in plan, for stairs. */
+export const StairDirectionSchema = z.enum(['PLUS_X', 'MINUS_X', 'PLUS_Z', 'MINUS_Z'])
+export type StairDirection = z.infer<typeof StairDirectionSchema>
+
+/**
+ * One segment of a stair's path, in travel order.
+ *
+ * FLIGHT — `risers` straight risers, each tread `going` deep; the first riser
+ *   stands on the current riser line.
+ * WINDER — `risers` tapered treads turning `angleDeg` (90 or 180) about the
+ *   newel corner on the `turn` side, in the square (90°) or double square
+ *   (180°) in front of the current riser line; the riser lines fan from the
+ *   newel at equal angles and the next segment's first riser is the exit line.
+ * LANDING — a level platform `length` along the travel direction (at least
+ *   the stair width when it turns), optionally turning 90° LEFT or RIGHT.
+ *
+ * LEFT / RIGHT are as seen walking up, on a plan drawn with x to the right
+ * and z up the page: walking +x, LEFT turns towards +z.
+ */
+export const StairSegmentSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('FLIGHT'), risers: z.number().int().min(1), going: positive }).strict(),
+  z.object({ kind: z.literal('WINDER'), risers: z.number().int().min(1), turn: z.enum(['LEFT', 'RIGHT']), angleDeg: z.union([z.literal(90), z.literal(180)]) }).strict(),
+  z.object({ kind: z.literal('LANDING'), length: positive, turn: z.enum(['NONE', 'LEFT', 'RIGHT']) }).strict(),
+])
+export type StairSegment = z.infer<typeof StairSegmentSchema>
+
+const stairBase = {
+  ...base,
+  levelId: IdSchema,
+  toLevelId: IdSchema,
+  /** The overall plan footprint the stair occupies (a placeholder's only geometry; a flight stair's steps must lie inside it). */
+  footprint: PlanRectSchema,
+}
+
+/**
+ * A stair from `levelId` up to `toLevelId`.
+ *
+ * PLACEHOLDER — a footprint only (schema 1.0.0 – 1.2.0).
+ * FLIGHTS — a real staircase: the path starts on the first riser line, whose
+ *   left-hand end (facing `direction`) is `start` and which runs `width`
+ *   across the travel direction; `segments` describe flights, winders and
+ *   landings in walking order; the total rise is from `level.elevation +
+ *   baseOffset` to `toLevel.elevation + topOffset`, divided equally over
+ *   every riser; the last segment must be a FLIGHT whose last riser is the
+ *   arrival at the destination floor (its tread is that floor). `waist` is
+ *   the vertical depth of each step's solid below its tread nosing.
+ */
+export const StairSchema = z.discriminatedUnion('kind', [
+  z.object({ ...stairBase, kind: z.literal('PLACEHOLDER') }).strict(),
+  z
+    .object({
+      ...stairBase,
+      kind: z.literal('FLIGHTS'),
+      start: Vec2Schema,
+      direction: StairDirectionSchema,
+      width: positive,
+      baseOffset: finite,
+      topOffset: finite,
+      waist: positive,
+      segments: z.array(StairSegmentSchema).min(1),
+      materialId: IdSchema.optional(),
+    })
+    .strict(),
+])
+export type Stair = z.infer<typeof StairSchema>
+export type FlightStair = Extract<Stair, { kind: 'FLIGHTS' }>
+
+/**
+ * A finish region on one face of a wall: a wall-local rectangle (`a` along
+ * the wall from its start, `b` up from its base) on the OUTER or INNER face
+ * that shows `materialId` instead of the wall's own material. It is
+ * appearance, not structure: it has no thickness of its own, changes no
+ * wall volume, and is clipped by the compiler to the wall's real material —
+ * its top follows a roof soffit and every opening is left out of it.
+ */
+export const SurfaceRegionSchema = z
   .object({
     ...base,
-    levelId: IdSchema,
-    toLevelId: IdSchema,
-    footprint: PlanRectSchema,
-    kind: z.literal('PLACEHOLDER'),
+    hostId: IdSchema,
+    face: z.enum(['OUTER', 'INNER']),
+    rect: z.object({ a0: finite, a1: finite, b0: finite, b1: finite }).strict(),
+    materialId: IdSchema,
   })
   .strict()
-export type Stair = z.infer<typeof StairSchema>
+export type SurfaceRegion = z.infer<typeof SurfaceRegionSchema>
 
 export const MaterialSchema = z
   .object({
@@ -482,6 +608,7 @@ export const CanonicalBuildingModelSchema = z
     railings: z.array(RailingSchema),
     chimneys: z.array(ChimneySchema),
     stairs: z.array(StairSchema),
+    surfaceRegions: z.array(SurfaceRegionSchema),
     materials: z.array(MaterialSchema),
     constraints: z.array(ConstraintSchema),
     evidenceSources: z.array(EvidenceSourceSchema),
@@ -514,6 +641,7 @@ export const OBJECT_COLLECTIONS = [
   'railings',
   'chimneys',
   'stairs',
+  'surfaceRegions',
   'materials',
   'constraints',
   'evidenceSources',
@@ -539,6 +667,7 @@ export const SEMANTIC_KINDS = [
   'railing',
   'chimney',
   'stair',
+  'surfaceRegion',
   'material',
   'constraint',
   'evidenceSource',
@@ -563,6 +692,7 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   railing: 'railings',
   chimney: 'chimneys',
   stair: 'stairs',
+  surfaceRegion: 'surfaceRegions',
   material: 'materials',
   constraint: 'constraints',
   evidenceSource: 'evidenceSources',
@@ -585,6 +715,7 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   railings: 'railing',
   chimneys: 'chimney',
   stairs: 'stair',
+  surfaceRegions: 'surfaceRegion',
   materials: 'material',
   constraints: 'constraint',
   evidenceSources: 'evidenceSource',
@@ -608,6 +739,7 @@ export type SemanticObject =
   | Railing
   | Chimney
   | Stair
+  | SurfaceRegion
   | Material
   | Constraint
 
@@ -637,6 +769,7 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     railings: [],
     chimneys: [],
     stairs: [],
+    surfaceRegions: [],
     materials: [],
     constraints: [],
     evidenceSources: [],

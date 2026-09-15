@@ -24,6 +24,7 @@ import {
   RoomSchema,
   SlabSchema,
   StairSchema,
+  SurfaceRegionSchema,
   WallSchema,
   WallJunctionSchema,
   WallRingSchema,
@@ -32,6 +33,7 @@ import {
   EvidenceSourceSchema,
   findObject,
   junctionWallIds,
+  layoutStair,
   nextId,
   polygonIsSimple,
   polygonSignedArea,
@@ -42,6 +44,7 @@ import {
   type Opening,
   type PlanRect,
   type SemanticKind,
+  type Stair,
   type Vec2,
   type Wall,
   type ValidationIssue,
@@ -89,12 +92,13 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   railing: RailingSchema,
   chimney: ChimneySchema,
   stair: StairSchema,
+  surfaceRegion: SurfaceRegionSchema,
   material: MaterialSchema,
   constraint: ConstraintSchema,
   evidenceSource: EvidenceSourceSchema,
 }
 
-const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney']
+const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney', 'stair', 'surfaceRegion']
 
 const stripUndefined = <T extends object>(o: T): T => {
   const out: Record<string, unknown> = {}
@@ -310,7 +314,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return
     }
     case 'createSlab':
-      add('slabs', 'slab', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, topOffset: c.topOffset, thickness: c.thickness, materialId: c.materialId })
+      add('slabs', 'slab', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, holes: c.holes, topOffset: c.topOffset, thickness: c.thickness, materialId: c.materialId })
       return
     case 'createRoof': {
       const id = add('roofs', 'roof', {
@@ -362,7 +366,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       })
       return
     case 'cutRoofOpening':
-      add('roofOpenings', 'roofOpening', { id: c.id, ...common(c), roofId: c.roofId, kind: c.kind, footprint: c.footprint, throughId: c.throughId })
+      add('roofOpenings', 'roofOpening', { id: c.id, ...common(c), roofId: c.roofId, kind: c.kind, footprint: c.footprint, cut: c.cut, throughId: c.throughId })
       return
     case 'placeRooflight':
       add('rooflights', 'rooflight', { id: c.id, ...common(c), roofOpeningId: c.roofOpeningId, frameWidth: c.frameWidth, glassThickness: c.glassThickness, materialId: c.materialId })
@@ -379,6 +383,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
         frameWidth: c.frameWidth,
         frameDepth: c.frameDepth,
         frameInset: c.frameInset,
+        assembly: c.assembly,
         materialId: c.materialId,
       })
       return
@@ -405,6 +410,35 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return
     case 'createStairPlaceholder':
       add('stairs', 'stair', { id: c.id, ...common(c), levelId: c.levelId, toLevelId: c.toLevelId, footprint: c.footprint, kind: 'PLACEHOLDER' })
+      return
+    case 'createStair': {
+      const from = m.levels.find((l) => l.id === c.levelId)
+      const to = m.levels.find((l) => l.id === c.toLevelId)
+      if (!from) return fail('UNKNOWN_LEVEL', `createStair: level "${c.levelId}" does not exist`, c.levelId)
+      if (!to) return fail('UNKNOWN_LEVEL', `createStair: level "${c.toLevelId}" does not exist`, c.toLevelId)
+      const draft = { kind: 'FLIGHTS' as const, id: c.id ?? 'stair', levelId: c.levelId, toLevelId: c.toLevelId, footprint: c.footprint ?? { minX: 0, maxX: 1, minZ: 0, maxZ: 1 }, start: c.start, direction: c.direction, width: c.width, baseOffset: c.baseOffset, topOffset: c.topOffset, waist: c.waist, segments: c.segments }
+      const layout = layoutStair(draft, from, to)
+      const footprint = c.footprint ?? layout.extent ?? draft.footprint
+      add('stairs', 'stair', {
+        id: c.id,
+        ...common(c),
+        levelId: c.levelId,
+        toLevelId: c.toLevelId,
+        footprint,
+        kind: 'FLIGHTS',
+        start: c.start,
+        direction: c.direction,
+        width: c.width,
+        baseOffset: c.baseOffset,
+        topOffset: c.topOffset,
+        waist: c.waist,
+        segments: c.segments,
+        materialId: c.materialId,
+      })
+      return
+    }
+    case 'createSurfaceRegion':
+      add('surfaceRegions', 'surfaceRegion', { id: c.id, ...common(c), hostId: c.hostId, face: c.face, rect: c.rect, materialId: c.materialId })
       return
     case 'defineMaterial':
       add('materials', 'material', { id: c.id, name: c.name, color: c.color, opacity: c.opacity, note: c.note })
@@ -537,8 +571,11 @@ function move(d: Draft, c: Extract<ResolvedCommand, { type: 'moveFeature' }>): v
       return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz), topOffset: (o.topOffset as number) + c.dy })
     case 'chimney':
       return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz), baseOffset: (o.baseOffset as number) + c.dy })
-    case 'stair':
+    case 'stair': {
+      const st = o as unknown as Stair
+      if (st.kind === 'FLIGHTS') return put({ ...o, footprint: shiftRect(st.footprint, c.dx, c.dz), start: shift(st.start, c.dx, c.dz), baseOffset: st.baseOffset + c.dy, topOffset: st.topOffset + c.dy })
       return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz) })
+    }
     default:
       d.errors.push({ code: 'UNSUPPORTED_TARGET', message: `a ${hit.kind} cannot be moved on its own (move its host instead)`, objectId: c.targetId })
   }
@@ -614,7 +651,9 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
       for (const o of m.openings) if (o.wallId === id) out.push(o.id)
       for (const j of m.wallJunctions) if (junctionWallIds(j).includes(id)) out.push(j.id)
       for (const r of m.wallRings) if (r.wallIds.includes(id)) out.push(r.id)
+      for (const r of m.surfaceRegions) if (r.hostId === id) out.push(r.id)
     }
+    if (k === 'material') for (const r of m.surfaceRegions) if (r.materialId === id) out.push(r.id)
     if (k === 'roof') for (const o of m.roofOpenings) if (o.roofId === id) out.push(o.id)
     if (k === 'roofOpening') for (const r of m.rooflights) if (r.roofOpeningId === id) out.push(r.id)
     if (k === 'chimney') for (const o of m.roofOpenings) if (o.throughId === id) out.push(o.id)
@@ -664,6 +703,7 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
   m.railings = keep(m.railings)
   m.chimneys = keep(m.chimneys)
   m.stairs = keep(m.stairs)
+  m.surfaceRegions = keep(m.surfaceRegions)
   m.materials = keep(m.materials)
   m.constraints = keep(m.constraints)
   m.evidenceSources = keep(m.evidenceSources)
@@ -701,6 +741,13 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     return stripUndefined({ ...o, leaves: leaves.length > 0 ? leaves : undefined })
   })
   m.chimneys = fixMaterial(m.chimneys)
+  m.stairs = m.stairs.map((st) => {
+    if (st.kind === 'FLIGHTS' && st.materialId !== undefined && removedMaterials.includes(st.materialId)) {
+      d.changed.push(st.id)
+      return stripUndefined({ ...st, materialId: undefined })
+    }
+    return st
+  })
   m.railings = fixMaterial(m.railings).map((r) => {
     if (r.hostId !== undefined && toRemove.has(r.hostId)) {
       d.changed.push(r.id)
@@ -743,6 +790,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     m.balconies = scrub(m.balconies)
     m.railings = scrub(m.railings)
     m.chimneys = scrub(m.chimneys)
+    m.stairs = scrub(m.stairs)
+    m.surfaceRegions = scrub(m.surfaceRegions)
   }
   d.removed.push(...toRemove)
   d.changed = d.changed.filter((id) => !toRemove.has(id))

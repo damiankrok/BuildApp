@@ -68,7 +68,7 @@ describe('Building DSL — schema 1.2.0 primitives', () => {
     const anon = runCommands(base(), [{ type: 'cutRoofOpening', roofId: 'roof', kind: 'ROOFLIGHT', footprint: { minX: 1, maxX: 1.78, minZ: 2, maxZ: 3.2 } }, { type: 'placeRooflight', roofOpeningId: 'roof-opening-1' }])
     expect(anon.roofOpenings[0].id).toBe('roof-opening-1')
     expect(anon.rooflights[0].id).toBe('rooflight-1')
-    expect(serializeModel(anon)).toContain('"schemaVersion": "1.2.0"')
+    expect(serializeModel(anon)).toContain('"schemaVersion": "1.3.0"')
   })
 
   it('removal cascades roof -> roof openings -> rooflights and chimney -> its penetration; a leaf wall removal keeps the opening', () => {

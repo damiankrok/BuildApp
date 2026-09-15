@@ -18,7 +18,8 @@
     "preview": "npm run preview --workspace apps/web",
     "e2e": "npm run build --workspace apps/web && playwright test -c apps/web/playwright.config.ts",
     "verify": "npm run typecheck && npm test && npm run build && npm run e2e",
-    "audit:marcowki": "vite-node packages/reference-marcowki/scripts/audit.ts"
+    "audit:marcowki": "vite-node packages/reference-marcowki/scripts/audit.ts",
+    "audit:marcowki:facades": "vite-node packages/reference-marcowki/scripts/audit-facades.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

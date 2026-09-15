@@ -21,6 +21,7 @@ const KIND_ABBR: Record<string, string> = {
   railing: 'RL',
   chimney: 'CH',
   stair: 'ST',
+  surfaceRegion: 'FIN',
   material: 'MAT',
   constraint: 'CON',
   evidenceSource: 'SRC',

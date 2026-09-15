@@ -7,6 +7,12 @@
  * the model they produce compiles through the generic geometry compiler like
  * any other, and nothing in the generic packages knows this house exists.
  *
+ * STAGE BUILDAPP-01A closed the architectural fidelity of the specimen with
+ * generic capabilities the schema 1.3.0 gained: a real two-flight stair with
+ * winders, an L-shaped slab void (a hole, not a notch), rooflight cuts
+ * normal to the roof, an entrance leaf + sidelight assembly, the cladding
+ * bands as surface regions, and the two recess floors.
+ *
  * The house, in BuildApp coordinates (front at the bottom, x right, z into the
  * building):
  *
@@ -20,7 +26,7 @@
  *            x 0          x 7.90            x 12.05
  */
 import type { BuildingCommand } from '@buildapp/commands'
-import type { Evidence, EvidenceStatus, Vec2 } from '@buildapp/model'
+import type { DoorAssembly, Evidence, EvidenceStatus, Vec2 } from '@buildapp/model'
 import { FACTS, fact, factRecord, weakest, type FactKey } from './facts.js'
 import { SRC, ev, evidenceSourceCommands, type SourceId } from './sources.js'
 import { q, refPlanToApp, refPolygonToApp, refZRangeToApp } from './transform.js'
@@ -173,8 +179,10 @@ export function marcowkiCommands(): BuildingCommand[] {
   // --- materials (appearance only; every feature below is geometry) ---
   push(
     { type: 'defineMaterial', id: 'mat-render', name: 'light render', color: '#e4e0d8', note: 'the white render of the returns, gable and side walls (renders)' },
-    { type: 'defineMaterial', id: 'mat-render-dark', name: 'dark render (portal)', color: '#3b3d40', note: 'the dark render band behind the front portal and on the portal head (front elevation, VISUAL)' },
-    { type: 'defineMaterial', id: 'mat-timber', name: 'timber', color: '#8a6a3d', note: 'door leaves; the flush timber cladding bands are recorded, not modelled' },
+    { type: 'defineMaterial', id: 'mat-render-dark', name: 'dark render', color: '#3b3d40', note: 'the anthracite render: the recessed front wall and the portal head, the rear gable, the garage, and the ground-storey bands on the side walls (elevations, VISUAL)' },
+    { type: 'defineMaterial', id: 'mat-timber', name: 'timber', color: '#8a6a3d', note: 'door leaves and frames' },
+    { type: 'defineMaterial', id: 'mat-timber-clad', name: 'timber cladding', color: '#9a7a4a', note: 'the flush timber boarding of the front (ground and gable) and rear bands, modelled as surface regions on the rendered walls' },
+    { type: 'defineMaterial', id: 'mat-joinery-dark', name: 'dark joinery', color: '#33363a', note: 'the two garage doors: the front elevation reads the 275/225 reveal dark at y 0.5 and 1.2, and the rear elevation reads the side door leaf dark at y 1.2 and 2.0 (VISUAL)' },
     { type: 'defineMaterial', id: 'mat-tile', name: 'roof covering', color: '#4a4b4e' },
     { type: 'defineMaterial', id: 'mat-membrane', name: 'flat roof membrane', color: '#55585c' },
     { type: 'defineMaterial', id: 'mat-concrete', name: 'concrete slab', color: '#a8a5a0' },
@@ -218,11 +226,11 @@ export function marcowkiCommands(): BuildingCommand[] {
   registerRingWall('g-left', mainPoly[3], mainPoly[0], T)
 
   // --- garage wing: three walls on the natural footprint, attached to the main body's east wall ---
-  const garageEv = fromFacts(['plan.garageWidth', 'plan.garageDepth', 'garage.clearHeight', 'garage.roofThickness'], 'plan chains 415 and 750; walls to the flat roof underside 2.54 (printed 252 + slab)')
+  const garageEv = fromFacts(['plan.garageWidth', 'plan.garageDepth', 'garage.clearHeight', 'garage.roofThickness'], 'plan chains 415 and 750; walls to the flat roof underside 2.54 (printed 252 + slab)', 'the garage reads dark render on the front, east and rear elevations up to the 3.12 parapet band', { materialId: 'VISUAL_INFERRED' })
   push(
-    { type: 'createWall', id: 'gar-front', name: 'Garage front wall', levelId: 'ground', start: { x: GARAGE.minX, z: GARAGE.minZ }, end: { x: GARAGE.maxX, z: GARAGE.minZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render', evidence: garageEv },
-    { type: 'createWall', id: 'gar-right', name: 'Garage east wall', levelId: 'ground', start: { x: GARAGE.maxX, z: GARAGE.minZ }, end: { x: GARAGE.maxX, z: GARAGE.maxZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render', evidence: garageEv, startJunction: { kind: 'CORNER', with: { wallId: 'gar-front', end: 'END' }, owner: 'OTHER' } },
-    { type: 'createWall', id: 'gar-rear', name: 'Garage north wall', levelId: 'ground', start: { x: GARAGE.maxX, z: GARAGE.maxZ }, end: { x: GARAGE.minX, z: GARAGE.maxZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render', evidence: fromFacts(['plan.rearZoneToGarage', 'plan.garageWidth'], 'the 510 | 750 split of the printed 1260 puts the garage north wall at reference z 5.10'), startJunction: { kind: 'CORNER', with: { wallId: 'gar-right', end: 'END' }, owner: 'SELF' }, endJunction: { kind: 'T', againstWallId: 'g-right' } },
+    { type: 'createWall', id: 'gar-front', name: 'Garage front wall', levelId: 'ground', start: { x: GARAGE.minX, z: GARAGE.minZ }, end: { x: GARAGE.maxX, z: GARAGE.minZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render-dark', evidence: garageEv },
+    { type: 'createWall', id: 'gar-right', name: 'Garage east wall', levelId: 'ground', start: { x: GARAGE.maxX, z: GARAGE.minZ }, end: { x: GARAGE.maxX, z: GARAGE.maxZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render-dark', evidence: garageEv, startJunction: { kind: 'CORNER', with: { wallId: 'gar-front', end: 'END' }, owner: 'OTHER' } },
+    { type: 'createWall', id: 'gar-rear', name: 'Garage north wall', levelId: 'ground', start: { x: GARAGE.maxX, z: GARAGE.maxZ }, end: { x: GARAGE.minX, z: GARAGE.maxZ }, thickness: T, height: GARAGE_WALL_TOP, materialId: 'mat-render-dark', evidence: fromFacts(['plan.rearZoneToGarage', 'plan.garageWidth'], 'the 510 | 750 split of the printed 1260 puts the garage north wall at reference z 5.10', 'dark render on the rear elevation', { materialId: 'VISUAL_INFERRED' }), startJunction: { kind: 'CORNER', with: { wallId: 'gar-right', end: 'END' }, owner: 'SELF' }, endJunction: { kind: 'T', againstWallId: 'g-right' } },
   )
   registerRingWall('gar-front', { x: GARAGE.minX, z: GARAGE.minZ }, { x: GARAGE.maxX, z: GARAGE.minZ }, T)
   registerRingWall('gar-right', { x: GARAGE.maxX, z: GARAGE.minZ }, { x: GARAGE.maxX, z: GARAGE.maxZ }, T)
@@ -242,7 +250,7 @@ export function marcowkiCommands(): BuildingCommand[] {
     walls: [
       { id: 'u-front', name: 'Attic front gable wall' },
       { id: 'u-right', name: 'Attic east eave wall (knee wall)' },
-      { id: 'u-rear', name: 'Attic rear gable wall' },
+      { id: 'u-rear', name: 'Attic rear gable wall (dark render)', materialId: 'mat-render-dark', evidence: fromFacts(['wall.kneeWall', 'level.ridge', 'roof.buildUp'], 'the rear gable reads dark render on the rear elevation at y 4.0 / 5.0 between and beside the two raked windows', undefined, { materialId: 'VISUAL_INFERRED' }) },
       { id: 'u-left', name: 'Attic west eave wall (knee wall)' },
     ],
   })
@@ -273,7 +281,24 @@ export function marcowkiCommands(): BuildingCommand[] {
 
   // --- slabs ---
   const inner = { minX: MAIN.minX + T, maxX: MAIN.maxX - T, minZ: MAIN.minZ + T, maxZ: MAIN.maxZ - T }
-  const voidRect = { minX: 5.37, maxX: 7.45, ...(() => { const [a, b] = refZRangeToApp(6.79, 8.77).map(q); return { minZ: a, maxZ: b } })() }
+  // The stair and its void, from the plans (reference frame → BuildApp): the
+  // southern band z 7.78..8.77 (app 4.83..5.82) from the first riser x 5.37 to
+  // the east inner face 7.45; the eastern band x 6.46..7.45 north to the
+  // arrival riser at reference z 5.66 (app 7.94). Together an L that touches
+  // the east wall: a hole in the bearing plate, not a notch in its outline.
+  const stairX0 = fact('stair.firstRiserX') // 5.37
+  const stairCornerX = fact('stair.cornerX') // 6.46
+  const stairW = fact('stair.width') // 0.99
+  const southBand = refZRangeToApp(fact('stair.southBandFromZ'), fact('stair.southBandToZ')).map(q) as [number, number] // app z 4.83..5.82
+  const stairTopZ = Z(fact('stair.topRiserZ')) // app z 7.94
+  const stairVoid: Vec2[] = [
+    { x: stairX0, z: southBand[0] },
+    { x: inner.maxX, z: southBand[0] },
+    { x: inner.maxX, z: stairTopZ },
+    { x: stairCornerX, z: stairTopZ },
+    { x: stairCornerX, z: southBand[1] },
+    { x: stairX0, z: southBand[1] },
+  ]
   push(
     {
       type: 'createSlab',
@@ -296,23 +321,20 @@ export function marcowkiCommands(): BuildingCommand[] {
     {
       type: 'createSlab',
       id: 'slab-upper',
-      name: 'Upper floor slab (bearing rectangle, stair void)',
+      name: 'Upper floor slab (bearing rectangle with the L-shaped stair void)',
       levelId: 'upper',
-      // the bearing rectangle inside the walls, notched by the stair void, which abuts the east inner face
+      // the bearing rectangle inside the walls; the stair void is a hole that shares the east inner face with the outline
       polygon: [
         { x: inner.minX, z: inner.minZ },
         { x: inner.maxX, z: inner.minZ },
-        { x: inner.maxX, z: voidRect.minZ },
-        { x: voidRect.minX, z: voidRect.minZ },
-        { x: voidRect.minX, z: voidRect.maxZ },
-        { x: inner.maxX, z: voidRect.maxZ },
         { x: inner.maxX, z: inner.maxZ },
         { x: inner.minX, z: inner.maxZ },
       ],
+      holes: [stairVoid],
       topOffset: 0,
       thickness: SLAB_T,
       materialId: 'mat-concrete',
-      evidence: fromFacts(['slab.upperThickness', 'level.upperFfl', 'wall.externalThickness'], 'section: one solid from the outer face inwards at +3,06, so the plate is the bearing rectangle inside the 0.45 m walls; the void x 5.37..7.45, reference z 6.79..8.77, is the stair shaft the section finds at X 5.351..7.441', 'the void reaches the east inner face, so it is a notch in the plate outline, not a hole'),
+      evidence: fromFacts(['slab.upperThickness', 'level.upperFfl', 'wall.externalThickness', 'stair.firstRiserX', 'stair.cornerX', 'stair.southBandFromZ', 'stair.southBandToZ', 'stair.topRiserZ'], 'section: one solid from the outer face inwards at +3,06, so the plate is the bearing rectangle inside the 0.45 m walls; the void is the L the stair occupies on both plans: the southern band x 5.37..7.45 × reference z 7.78..8.77 and the eastern band x 6.46..7.45 × z 5.66..7.78 (the section finds the shaft at X 5.351..7.441)', 'the void is a hole that touches the east inner face; the BUILDAPP-01 rectangle z 6.79..8.77 stopped at the void edge the interior gold drew and left the northern flight under the slab', { holes: 'SOURCE_DERIVED' }),
     },
   )
 
@@ -358,6 +380,12 @@ export function marcowkiCommands(): BuildingCommand[] {
     { type: 'createBalcony', id: 'balcony-rear', name: 'Rear balcony slab (over the loggia)', levelId: 'upper', kind: 'BALCONY', footprint: { minX: rr0, maxX: rr1, minZ: MAIN.maxZ, maxZ: REAR_OUTER }, topOffset: q(balconyTop - UPPER_FFL), thickness: balconyT, materialId: 'mat-render-dark', tags: ['rear-zone'], evidence: fromFacts(['recess.rearFromX', 'recess.rearToX', 'balcony.top', 'balcony.thickness'], 'attic plan balcony floor between the two rear returns; rear elevation fascia continuous x 0.647..7.254 at y 2.60', undefined, { topOffset: 'VISUAL_INFERRED', thickness: 'VISUAL_INFERRED' }) },
     { type: 'createSlab', id: 'portal-head', name: 'Portal head over the entrance and garage door', levelId: 'ground', polygon: [{ x: MAIN_W, z: FRONT_OUTER }, { x: rf1, z: FRONT_OUTER }, { x: rf1, z: MAIN.minZ }, { x: MAIN_W, z: MAIN.minZ }], topOffset: fact('portal.headTop'), thickness: fact('portal.headThickness'), materialId: 'mat-render-dark', tags: ['portal', 'front-zone'], evidence: fromFacts(['portal.headTop', 'portal.headThickness', 'recess.frontToX'], 'the dark band over the entrance and the garage door: front elevation 3.081 / 3.097, soffit at the balcony soffit 2.41; it stops at x 11.44 so the garage return carries it') },
   )
+  // --- the recess floors: the loggia and the portal stand on a plinth to the terrain datum, like the ground slab ---
+  const plinth = fact('terrace.plinth')
+  push(
+    { type: 'createBalcony', id: 'terrace-rear-loggia', name: 'Rear loggia floor (plinth to the terrain)', levelId: 'ground', kind: 'TERRACE', footprint: { minX: rr0, maxX: rr1, minZ: MAIN.maxZ, maxZ: REAR_OUTER }, topOffset: 0, thickness: plinth, materialId: 'mat-concrete', tags: ['rear-zone'], evidence: fromFacts(['terrace.plinth', 'recess.rearFromX', 'recess.rearToX', 'recess.rearOuterPlane'], 'the loggia floor between the rear returns at ±0,00; the rear elevation draws the plinth line continuous under the returns and across the recess', 'the garden paving beyond the outer plane and the terrace finish are not modelled', { thickness: 'GEOMETRIC_INFERRED' }) },
+    { type: 'createBalcony', id: 'terrace-front-portal', name: 'Front portal floor (plinth to the terrain)', levelId: 'ground', kind: 'TERRACE', footprint: { minX: rf0, maxX: rf1, minZ: FRONT_OUTER, maxZ: MAIN.minZ }, topOffset: 0, thickness: plinth, materialId: 'mat-concrete', tags: ['front-zone'], evidence: fromFacts(['terrace.plinth', 'recess.frontFromX', 'recess.frontToX', 'recess.frontOuterPlane'], 'the portal floor between the west return and the garage return at ±0,00; the front elevation draws the plinth line continuous under the recess', 'the entrance step and the driveway fall beyond the outer plane and are not modelled', { thickness: 'GEOMETRIC_INFERRED' }) },
+  )
   const railEv = (locator: string): Evidence => fromFacts(['railing.height', 'balcony.top'], locator, 'posts are the plan marks; BuildApp spaces them equally over the measured run', { postSpacing: 'SOURCE_DERIVED', height: 'VISUAL_INFERRED' })
   push(
     { type: 'createRailing', id: 'rail-front', name: 'Front balcony glass balustrade', levelId: 'upper', start: { x: fact('railing.frontFromX'), z: Z(fact('railing.frontLine')) }, end: { x: fact('railing.frontToX'), z: Z(fact('railing.frontLine')) }, baseOffset: q(balconyTop - UPPER_FFL), height: fact('railing.height'), postSpacing: 0.93, infill: 'GLASS', hostId: 'balcony-front', tags: ['front-zone'], evidence: railEv('attic plan post marks at z 13.55: x 3.444..7.153, four equal 0.821 m panels; front elevation glass 3.13..3.89') },
@@ -376,16 +404,16 @@ export function marcowkiCommands(): BuildingCommand[] {
     { type: 'cutRoofOpening', id: 'pen-boiler', name: 'Roof penetration, kotłownia stack', roofId: 'roof-main', kind: 'PENETRATION', footprint: boiler, throughId: 'chimney-boiler', evidence: ev('ASSUMED', [SRC.goldRoof, SRC.author], 'cut to the stack itself, clearance zero') },
   )
 
-  // --- rooflights: three 78/118 units, cut as the vertical prism over their plan rectangle ---
+  // --- rooflights: three 78/118 units, each cut normal to the roof plane over its plan rectangle ---
   const rlW = fact('rooflight.width')
   const rlCross = q(fact('rooflight.slopeLength') * Math.cos((PITCH * Math.PI) / 180))
   const rlIn = fact('rooflight.lowerEdgeFromEave')
   const rooflight = (id: string, name: string, side: 'WEST' | 'EAST', refCentreZ: number, roomBelow: string, locator: string): BuildingCommand[] => {
     const zc = Z(refCentreZ)
     const footprint = side === 'WEST' ? { minX: rlIn, maxX: q(rlIn + rlCross), minZ: q(zc - rlW / 2), maxZ: q(zc + rlW / 2) } : { minX: q(MAIN_W - rlIn - rlCross), maxX: q(MAIN_W - rlIn), minZ: q(zc - rlW / 2), maxZ: q(zc + rlW / 2) }
-    const evidence = fromFacts(['rooflight.width', 'rooflight.slopeLength', 'rooflight.lowerEdgeFromEave'], locator, `over ${roomBelow}; the 1.18 m slope length projects to ${rlCross} m in plan; the cut is a vertical prism with no clearance (a stated simplification)`, { footprint: 'SOURCE_DERIVED' })
+    const evidence = fromFacts(['rooflight.width', 'rooflight.slopeLength', 'rooflight.lowerEdgeFromEave'], locator, `over ${roomBelow}; the 1.18 m slope length projects to ${rlCross} m in plan; the cut is normal to the roof plane (a roof window sits perpendicular to its slope), with no clearance around the unit`, { footprint: 'SOURCE_DERIVED', cut: 'GEOMETRIC_INFERRED' })
     return [
-      { type: 'cutRoofOpening', id, name, roofId: 'roof-main', kind: 'ROOFLIGHT', footprint, evidence, tags: [`room:${roomBelow}`] },
+      { type: 'cutRoofOpening', id, name, roofId: 'roof-main', kind: 'ROOFLIGHT', footprint, cut: 'NORMAL_TO_ROOF', evidence, tags: [`room:${roomBelow}`] },
       { type: 'placeRooflight', id: `${id}-unit`, roofOpeningId: id, frameWidth: 0.07, glassThickness: 0.024, evidence: ev('VISUAL_INFERRED', [SRC.elevWest, SRC.goldRoof], 'glazed area about 0.65 across a 0.78 frame and 1.04 up a 1.18 one: 0.065..0.070 m of frame per side') },
     ]
   }
@@ -401,25 +429,53 @@ export function marcowkiCommands(): BuildingCommand[] {
     { type: 'cutOpening', id, name, wallId, kind: 'WINDOW', offset, sill, width, height, ...(headFar !== undefined ? { head: { kind: 'RAKED', heightFar: headFar } } : {}), evidence, tags: [`room:${roomId}`, 'facade', ...tags] },
     { type: 'placeWindow', id: `${id}-glazing`, openingId: id, frameWidth: 0.07, frameDepth: 0.08, frameInset: 0.12, glassThickness: 0.024, divisions: 1, ...(mullions ? { mullions } : {}), evidence: ev(mullions ? 'VISUAL_INFERRED' : 'ASSUMED', mullions ? [SRC.elevFront, SRC.elevRear, SRC.elevEast, SRC.goldFacade] : [SRC.author], mullions ? 'mullion breaks read on the elevations' : 'frame profile is not drawn') },
   ]
-  const door = (id: string, name: string, wallId: string, offset: number, width: number, height: number, roomId: string, evidence: Evidence, hingeSide: 'LEFT' | 'RIGHT', extra: Record<string, unknown> = {}, tags: string[] = []): BuildingCommand[] => [
+  type Fill = { assembly: DoorAssembly; evidence: Evidence }
+  const door = (id: string, name: string, wallId: string, offset: number, width: number, height: number, roomId: string, evidence: Evidence, hingeSide: 'LEFT' | 'RIGHT', extra: Record<string, unknown> = {}, tags: string[] = [], fill?: Fill): BuildingCommand[] => [
     { type: 'cutOpening', id, name, wallId, kind: 'DOOR', offset, sill: 0, width, height, evidence, tags: [`room:${roomId}`, 'facade', ...tags] },
-    { type: 'placeDoor', id: `${id}-leaf`, openingId: id, hingeSide, swing: 'IN', openAngle: 0, materialId: 'mat-timber', evidence: ev('ASSUMED', [SRC.author], 'leaf as one panel; sidelights, panels and glazing of leaves are not modelled'), ...extra },
+    { type: 'placeDoor', id: `${id}-leaf`, openingId: id, hingeSide, swing: 'IN', openAngle: 0, materialId: 'mat-timber', evidence: fill?.evidence ?? ev('ASSUMED', [SRC.author], 'leaf as one panel; no drawing shows its furniture'), ...(fill ? { assembly: fill.assembly } : {}), ...extra },
   ]
+  const leafFraction = fact('door.entranceLeafFraction')
+  const entranceFill: Fill = {
+    assembly: { panels: [{ kind: 'LEAF', fraction: leafFraction, hinge: 'LEFT', glazing: 'NONE' }, { kind: 'GLAZED', fraction: q(1 - leafFraction) }], mullionWidth: fact('door.entranceMullion') },
+    evidence: fromFacts(['door.entranceLeafFraction', 'door.entranceMullion'], 'hero render and front elevation: one solid leaf over the west 0.72 of the 105 opening, a 0.04 mullion, a fixed glazed sidelight over the east 0.28', 'the split is read off renders (±0.07 of the width); the hinge at the west jamb is assumed — the leaf is drawn closed', { hinge: 'ASSUMED' }),
+  }
+  const garageDoorFill: Fill = {
+    assembly: { panels: [{ kind: 'PANEL', fraction: 1 }], mullionWidth: 0.04 },
+    evidence: ev('VISUAL_INFERRED', [SRC.elevFront, SRC.renderHero, SRC.goldFacade], 'a sectional door: the front elevation reads one flush dark panel across the whole 275/225 reveal at y 0.5 and 1.2 with no visible joints; the hero render shows it rolled up', 'the sectional panel heights are not readable: one panel'),
+  }
+  const garageSideFill: Fill = {
+    assembly: { panels: [{ kind: 'LEAF', fraction: 1, hinge: 'LEFT', glazing: 'FULL' }], mullionWidth: 0.04 },
+    evidence: ev('VISUAL_INFERRED', [SRC.elevRear, SRC.goldFacade], 'the rear elevation reads the leaf as one glazed panel in a frame, x 9.893..10.914', 'the hinge edge is assumed', { hinge: 'ASSUMED' }),
+  }
   const gableFar = q(3.2 - 2.7 * TAN) // 0.93443
   const rearGableLow = q(3.03 - 2.34 * TAN) // 1.0634
   push(
     ...glazing('og-front-room-window', 'Front room window 110/230', 'g-front', 1.397, 1.1, 0, 2.3, 'g-room', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevFront], 'printed 110/230; centred on the measured gap x 1.377..2.516; front elevation glass 1.50..2.33, head 2.29'), undefined),
-    ...door('og-front-entrance', 'Entrance door 105/210', 'g-front', 4.176, 1.05, 2.1, 'g-entry', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevFront, SRC.renderHero], 'printed 105/210; centred on the measured gap x 4.158..5.244; front elevation leaf x 4.196..5.174', 'the hero render shows one leaf with a narrow glazed sidelight; modelled as one leaf'), 'LEFT'),
+    ...door('og-front-entrance', 'Entrance door 105/210', 'g-front', 4.176, 1.05, 2.1, 'g-entry', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevFront, SRC.renderHero], 'printed 105/210; centred on the measured gap x 4.158..5.244; front elevation leaf x 4.196..5.174', 'one leaf with a narrow glazed sidelight on its east side, modelled as an assembly'), 'LEFT', {}, [], entranceFill),
     ...glazing('og-east-living-window', 'East living glazing 300/230', 'g-right', 8.704, 3.0, 0, 2.3, 'g-salon', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevEast], 'printed 300/230; centred on the measured gap reference z 0.874..3.918; east elevation z 0.884..3.906'), [0.5]),
     ...door('og-east-garage-door', 'Kotłownia / garage door (concealed)', 'g-right', 1.216, 0.93, 2.1, 'g-boiler', facadeEv('SOURCE_DERIVED', [SRC.groundPlan, SRC.goldInterior], 'the 10.456..11.382 gap in the column scans at x 7.6 and 7.75, straight through the one 0.45 m house/garage wall', 'head 2.10 is an assumption matching every other single door; concealed by the garage, counted on no elevation. The reference cut it through two abutting leaves because it had no shared-wall semantics; the drawings show one wall, which the T-junction models', { height: 'ASSUMED' }), 'RIGHT', {}, ['concealed', 'room:g-garage']),
     ...glazing('og-rear-living-glazing', 'Rear living glazing 470/230', 'g-rear', 0.942, 4.7, 0, 2.3, 'g-salon', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevRear], 'printed 470/230; centred on the measured gap x 2.251..6.965; rear elevation glass x 2.12..6.90, central mullion at 4.63, head 2.285'), [0.5]),
     ...glazing('og-west-living-window', 'West living window 90/230', 'g-left', 3.653, 0.9, 0, 2.3, 'g-salon', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevWest], 'printed 90/230; measured gap reference z 3.653..4.553; west elevation z 3.635..4.568, head 2.38'), undefined),
     ...glazing('og-west-kitchen-window', 'West kitchen window 140/140', 'g-left', 5.402, 1.4, 0.9, 1.4, 'g-kitchen', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevWest], 'printed 140/140; measured gap reference z 5.400..6.803; west elevation sill 0.93 and head 2.29 fix the sill at 0.90'), undefined),
-    ...door('og-garage-door', 'Garage door 275/225', 'gar-front', 0.656, 2.75, 2.25, 'g-garage', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevFront], 'printed 275/225; centred on the measured gap x 8.554..11.308; front elevation reveal x 8.470..11.303, head 2.270', 'the render shows the door rolled up; the structural opening is the whole 275/225 and it is filled with one leaf'), 'LEFT', { leafThickness: 0.05, frameWidth: 0.08 }),
-    ...door('og-garage-side-door', 'Garage side door 100/210', 'gar-rear', 1.128, 1.0, 2.1, 'g-garage', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevRear], 'printed 100/210; centred on the measured gap x 9.905..10.938; rear elevation glazed leaf x 9.893..10.914, head 2.05'), 'LEFT'),
+    ...door('og-garage-door', 'Garage door 275/225', 'gar-front', 0.656, 2.75, 2.25, 'g-garage', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevFront], 'printed 275/225; centred on the measured gap x 8.554..11.308; front elevation reveal x 8.470..11.303, head 2.270', 'the render shows the door rolled up; the structural opening is the whole 275/225 and it is filled with one sectional panel'), 'LEFT', { leafThickness: 0.05, frameWidth: 0.08, materialId: 'mat-joinery-dark' }, [], garageDoorFill),
+    ...door('og-garage-side-door', 'Garage side door 100/210', 'gar-rear', 1.128, 1.0, 2.1, 'g-garage', facadeEv('SOURCE_CORROBORATED', [SRC.groundPlan, SRC.elevRear], 'printed 100/210; centred on the measured gap x 9.905..10.938; rear elevation glazed leaf x 9.893..10.914, head 2.05'), 'LEFT', { materialId: 'mat-joinery-dark' }, [], garageSideFill),
     ...glazing('og-front-gable-glazing', 'Front gable glazing 270/320, raked head', 'u-front', 3.94, 2.7, 0, 3.2, 'u-pokoj-s', facadeEv('SOURCE_EXACT', [SRC.atticPlan, SRC.elevFront, SRC.goldShell], 'printed 270/320 on the attic plan; offset 3.94 = 149 px from the west outer face; head raked parallel to the roof: 3.20 at the ridge side, 3.20 − 2.70 × tan 40° = 0.93443 at the far edge', 'a door onto the terrace over the garage: sill at the attic floor; the elevation render places the head ≈0.35 m lower than the callout — the callout is preferred', { offset: 'SOURCE_DERIVED', head: 'SOURCE_CORROBORATED' }), [0.374], gableFar, ['raked']),
     ...glazing('og-rear-gable-east', 'Rear gable glazing, east 234/303, raked head', 'u-rear', 0.97, 2.34, 0, rearGableLow, 'u-pokoj-ne', facadeEv('SOURCE_CORROBORATED', [SRC.atticPlan, SRC.elevRear], 'printed 234/303; centred on the measured gap x 4.583..6.941; head 3.03 at the ridge side falling to 1.0634 at the eave side, a constant 1.05 m under the roof; rear elevation glass reaches x 6.538 / 5.72 / 4.887 at y 4.30 / 5.00 / 5.70', undefined, { head: 'SOURCE_DERIVED' }), [0.573], 3.03, ['raked']),
     ...glazing('og-rear-gable-west', 'Rear gable glazing, west 234/303, raked head', 'u-rear', 4.62, 2.34, 0, 3.03, 'u-pokoj-nw', facadeEv('SOURCE_CORROBORATED', [SRC.atticPlan, SRC.elevRear], 'printed 234/303; centred on the measured gap x 0.927..3.285; the mirror of the east window about the ridge; rear elevation mullion at x 2.33', undefined, { head: 'SOURCE_DERIVED' }), [0.406], rearGableLow, ['raked']),
+  )
+
+  // --- finish regions: the cladding bands the elevations show, as surface regions on the wall faces (appearance, no thickness) ---
+  const tf0 = fact('band.frontTimberFromX') // 0.657
+  const tf1 = fact('band.frontTimberToX') // 3.185
+  const tg1 = fact('band.frontGableTimberToX') // 3.94, the gable glazing's west jamb
+  const rearTop = fact('band.rearTimberTop') // 2.41
+  push(
+    { type: 'createSurfaceRegion', id: 'sr-front-timber-ground', name: 'Timber cladding, recessed front wall west of the balcony', hostId: 'g-front', face: 'OUTER', rect: { a0: tf0, a1: tf1, b0: 0, b1: q(UPPER_FFL - GROUND_FFL) }, materialId: 'mat-timber-clad', tags: ['finish', 'front-zone'], evidence: fromFacts(['band.frontTimberFromX', 'band.frontTimberToX'], 'front elevation rows y 0.5 / 1.2 / 2.7: timber x 0.657..3.185 (3.202 on the 1280 px render), dark from 3.202..3.236 where the balcony fascia begins', 'flush boarding on the printed wall: the band has no thickness of its own') },
+    { type: 'createSurfaceRegion', id: 'sr-front-timber-gable', name: 'Timber cladding, front gable to the glazing', hostId: 'u-front', face: 'OUTER', rect: { a0: tf0, a1: tg1, b0: 0, b1: ATTIC_NOMINAL_H }, materialId: 'mat-timber-clad', tags: ['finish', 'front-zone'], evidence: fromFacts(['band.frontTimberFromX', 'band.frontGableTimberToX'], 'front elevation rows y 4.0 / 4.5 / 5.0 / 5.5 / 6.0: timber to x 3.927 beside the glazing; the roof edge band hides the west part of the gable above y 4.5', 'the compiler clips the band to the roof soffit and leaves the glazing out of it') },
+    { type: 'createSurfaceRegion', id: 'sr-rear-timber-west', name: 'Timber cladding, rear wall west of the glazing (under the balcony)', hostId: 'g-rear', face: 'OUTER', rect: { a0: q(MAIN_W - fact('band.rearTimberWestToX')), a1: q(MAIN_W - rr0), b0: 0, b1: rearTop }, materialId: 'mat-timber-clad', tags: ['finish', 'rear-zone'], evidence: fromFacts(['band.rearTimberWestToX', 'band.rearTimberTop', 'recess.rearFromX'], 'rear elevation row y 1.2: timber x 0.681..2.214 between the west return and the glazing frame; column x 2.0: timber to 2.263 under the fascia shadow', 'to the balcony soffit 2.41') },
+    { type: 'createSurfaceRegion', id: 'sr-rear-timber-east', name: 'Timber cladding, rear wall east of the glazing (under the balcony)', hostId: 'g-rear', face: 'OUTER', rect: { a0: q(MAIN_W - rr1), a1: q(MAIN_W - fact('band.rearTimberEastFromX')), b0: 0, b1: rearTop }, materialId: 'mat-timber-clad', tags: ['finish', 'rear-zone'], evidence: fromFacts(['band.rearTimberEastFromX', 'band.rearTimberTop', 'recess.rearToX'], 'rear elevation row y 1.2: timber x 6.964..7.202 between the glazing frame and the east return') },
+    { type: 'createSurfaceRegion', id: 'sr-west-dark', name: 'Dark render band, west wall ground storey', hostId: 'g-left', face: 'OUTER', rect: { a0: fact('band.westDarkFromZ'), a1: fact('band.westDarkToZ'), b0: 0, b1: fact('band.westDarkTop') }, materialId: 'mat-render-dark', tags: ['finish'], evidence: fromFacts(['band.westDarkFromZ', 'band.westDarkToZ', 'band.westDarkTop'], 'west elevation rows y 1.2 / 2.0: dark reference z 4.568..9.909 (4.535..9.917 re-read); columns z 5.0 / 8.0 / 9.5: dark to 2.309..2.377', 'the wall-local a of g-left is reference z') },
+    { type: 'createSurfaceRegion', id: 'sr-east-dark', name: 'Dark render band, east wall between the garage and the living window', hostId: 'g-right', face: 'OUTER', rect: { a0: q(DEPTH - fact('plan.rearZoneToGarage')), a1: 8.704, b0: 0, b1: fact('band.eastDarkTop') }, materialId: 'mat-render-dark', tags: ['finish'], evidence: fromFacts(['band.eastDarkFromZ', 'band.eastDarkTop', 'plan.rearZoneToGarage'], 'east elevation row y 1.2: dark from the garage north wall (reference z 5.10) to the living window at z 3.906 (the printed opening edge is 3.896: the band ends at the jamb, wall-local a 8.704); columns z 4.2 / 4.5: dark to 2.343..2.377') },
   )
 
   // --- interior partitions, ground floor (to the slab underside 2.73) ---
@@ -505,8 +561,40 @@ export function marcowkiCommands(): BuildingCommand[] {
     room('u-stairs', 'Schody', 'upper', 'stair', [[5.16, 5.15], [7.45, 5.15], [7.45, 8.78], [5.16, 8.78]], 'SOURCE_DERIVED', 'the stair compartment between the stair north and corridor south partitions; the polygon includes the floor void', 5.63),
   )
 
-  // --- stair (placeholder footprint; flights are a later capability) ---
-  push({ type: 'createStairPlaceholder', id: 'stair-main', name: 'Main stair (placeholder; two flights with winders in the source)', levelId: 'ground', toLevelId: 'upper', footprint: voidRect, evidence: ev('SOURCE_DERIVED', [SRC.groundPlan, SRC.section, SRC.goldInterior], 'the 2.08 × 1.98 m shaft east of the hall between the top-step line at reference z 6.78..6.99 and the kotłownia north wall face at 8.77; the section finds the void at X 5.351..7.441', 'BuildApp models stairs as placeholders in this stage; the winders are not represented') })
+  // --- the main stair: a straight flight east along the kotłownia wall, a quarter turn of winders in the corner, a straight flight north to the attic ---
+  // The first riser line's left end (facing +x) is (5.37, app z 5.82): the
+  // line runs 0.99 across the southern band to z 4.83. Four risers of 0.2725
+  // reach the corner line x 6.46; four winders fan about the newel at
+  // (6.46, 5.82) and leave facing +z on the line z 5.82 (x 6.46..7.45); nine
+  // risers of 0.265 climb north, the ninth being the arrival at app z 7.94
+  // (reference 5.66) on the attic floor. 17 risers × 0.18 = 3.06.
+  push({
+    type: 'createStair',
+    id: 'stair-main',
+    name: 'Main stair: 4 risers east, 4 winders turning north, 9 risers to the attic',
+    levelId: 'ground',
+    toLevelId: 'upper',
+    start: { x: stairX0, z: southBand[1] },
+    direction: 'PLUS_X',
+    width: stairW,
+    baseOffset: 0,
+    topOffset: 0,
+    waist: fact('stair.waist'),
+    segments: [
+      { kind: 'FLIGHT', risers: fact('stair.lowerRisers'), going: fact('stair.lowerGoing') },
+      { kind: 'WINDER', risers: fact('stair.winderRisers'), turn: 'LEFT', angleDeg: 90 },
+      { kind: 'FLIGHT', risers: fact('stair.upperRisers'), going: fact('stair.upperGoing') },
+    ],
+    materialId: 'mat-concrete',
+    // the waist is deliberately NOT in this list: it is the one assumed figure and is recorded as a property
+    // override below, so the stair's own status stays the one its measured geometry earns
+    evidence: fromFacts(
+      ['stair.width', 'stair.firstRiserX', 'stair.southBandFromZ', 'stair.southBandToZ', 'stair.lowerRisers', 'stair.lowerGoing', 'stair.cornerX', 'stair.upperRisers', 'stair.upperGoing', 'stair.topRiserZ', 'stair.winderRisers', 'stair.riserHeight'],
+      'ground plan: four nosing lines x 5.376..6.197 in the southern band z 7.78..8.77, the corner line at 6.462, nine nosing lines z 7.782..5.665 in the eastern band x 6.46..7.45; attic plan: the same eastern lines and the walking line turning west at z 5.69; section: the shaft at X 5.351..7.441 and the rise ±0,00 → +3,06',
+      'the straight risers (13) and both goings are SOURCE_DERIVED from the nosing lines; the winder count (4) is GEOMETRIC_INFERRED: the plans draw no fan lines in the corner and 3.06 / 17 = 0.18 is the riser the 13 straight risers imply (3 winders → 0.191, 5 → 0.170 are admissible alternatives); the waist 0.18 is ASSUMED',
+      { segments: 'GEOMETRIC_INFERRED', waist: 'ASSUMED', width: 'SOURCE_DERIVED', start: 'SOURCE_DERIVED' },
+    ),
+  })
 
   // --- constraints: the facts a later solver may hold hard ---
   push(
@@ -514,6 +602,7 @@ export function marcowkiCommands(): BuildingCommand[] {
     { type: 'addConstraint', id: 'c-wall-thickness', kind: 'EQUAL', targetIds: ['g-front', 'g-right', 'g-rear', 'g-left', 'u-front', 'u-right', 'u-rear', 'u-left', 'gar-front', 'gar-right', 'gar-rear'], property: 'thickness', note: 'one external build-up, 25 + 20' },
     { type: 'addConstraint', id: 'c-depth', kind: 'NOTE', targetIds: [westFront.id, westRear.id], note: 'characteristic depth 14.60 m: the west return faces span reference z −1.00..13.60 on both plans and the east elevation silhouette' },
     { type: 'addConstraint', id: 'c-eave-datum', kind: 'NOTE', targetIds: ['roof-main'], note: 'the printed eave datum +4,67 sits 0.034 m above the structural plane 4.63556 the model uses; both readings are kept' },
+    { type: 'addConstraint', id: 'c-stair-rise', kind: 'NOTE', targetIds: ['stair-main', 'slab-upper'], note: 'the stair rises the printed 3.06 in 17 risers (13 counted straight + 4 inferred winders) of 0.18; the slab void is the L the stair occupies and touches the east inner face' },
   )
 
   return out

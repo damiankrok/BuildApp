@@ -91,6 +91,43 @@ export const FACTS = {
   'rooflight.width': m(0.78, 'SOURCE_EXACT', [SRC.atticPlan, SRC.goldRoof], 'printed 78/118: 78 across the slope'),
   'rooflight.slopeLength': m(1.18, 'SOURCE_EXACT', [SRC.atticPlan, SRC.goldRoof], 'printed 78/118: 118 up the slope'),
   'rooflight.lowerEdgeFromEave': m(0.45, 'SOURCE_CORROBORATED', [SRC.atticPlan, SRC.elevWest, SRC.goldRoof], 'each dashed symbol begins at the external wall inner face (px 64..65 west, 328 east); the west elevation frame lower edge at y 4.81..5.03 against 5.013 predicted'),
+
+  // --- the stair (both plans, STAGE BUILDAPP-01A; reference frame, x east, z south) ---
+  'stair.width': m(0.99, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.atticPlan, SRC.goldInterior, SRC.author01a], 'the two bands of the shaft: 8.77 − 7.78 across the southern flight and 7.45 − 6.46 across the eastern one, both 0.99 on the ground plan raster'),
+  'stair.firstRiserX': m(5.37, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.section, SRC.goldInterior], 'the first nosing line at x 5.376 in the row scans at z 7.9..8.65; the section finds the void from X 5.351'),
+  'stair.southBandFromZ': m(7.78, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.goldInterior], 'the line at z 7.782 that closes the southern band and is the first riser of the northern flight'),
+  'stair.southBandToZ': m(8.77, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.goldInterior], 'the kotłownia north wall face, the shaft’s south edge'),
+  'stair.lowerRisers': { value: 4, unit: 'm', status: 'SOURCE_DERIVED', sourceIds: [SRC.groundPlan, SRC.author01a], locator: 'nosing lines at x 5.376, 5.641, 5.919, 6.197 in the row scans at z 7.9..8.65 (four risers before the corner line at 6.462)' },
+  'stair.lowerGoing': m(0.2725, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.author01a], '(6.46 − 5.37) / 4 from the measured nosing lines; individual spacings 0.265..0.278'),
+  'stair.cornerX': m(6.46, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.author01a], 'the line at x 6.462 where the southern flight ends and the turn begins; 7.45 − 0.99'),
+  'stair.upperRisers': { value: 9, unit: 'm', status: 'SOURCE_DERIVED', sourceIds: [SRC.groundPlan, SRC.atticPlan, SRC.author01a], locator: 'nosing lines at z 7.782, 7.518, 7.253, 6.988, 6.697, 6.432, 6.168, 5.903, 5.665 in the column scans at x 6.55..7.3 of the ground plan; the attic plan draws the same lines in the eastern band up to its walking-line turn at z 5.69' },
+  'stair.upperGoing': m(0.265, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.atticPlan, SRC.author01a], '(7.78 − 5.66) / 8 from the measured nosing lines; individual spacings 0.238..0.291'),
+  'stair.topRiserZ': m(5.66, 'SOURCE_DERIVED', [SRC.groundPlan, SRC.atticPlan, SRC.author01a], 'the last nosing line at z 5.665 (ground plan column scans) and the attic walking line turning west at z 5.69: the arrival at the attic floor', 'the BUILDAPP-01 model and the interior gold took the void’s north edge z 6.79 as the top step; the northern flight is drawn past it on both plans'),
+  'stair.winderRisers': { value: 4, unit: 'm', status: 'GEOMETRIC_INFERRED', sourceIds: [SRC.groundPlan, SRC.section, SRC.author01a], locator: 'the plan draws no fan lines in the 0.99 × 0.99 corner; 13 straight risers are counted and the rise is the printed 3.06, so 17 risers of 0.18 m need 4 winders (3 winders would give 16 × 0.191)', note: 'alternatives 3 (0.191 m) and 5 (0.17 m) are geometrically admissible; 0.18 is the riser the interior gold assumed and the usual one' },
+  'stair.risers': { value: 17, unit: 'm', status: 'GEOMETRIC_INFERRED', sourceIds: [SRC.section, SRC.groundPlan, SRC.author01a], locator: '13 counted straight risers + 4 inferred winders; 3.06 / 17 = 0.18' },
+  'stair.riserHeight': m(0.18, 'GEOMETRIC_INFERRED', [SRC.section, SRC.author01a], '3.06 / 17', 'a consequence of the winder count, not a printed dimension'),
+  'stair.waist': m(0.18, 'ASSUMED', [SRC.author01a], 'the vertical depth of each step below its nosing; no drawing shows the stair soffit'),
+
+  // --- the entrance assembly and the door panels (renders, STAGE BUILDAPP-01A) ---
+  'door.entranceLeafFraction': m(0.72, 'VISUAL_INFERRED', [SRC.renderHero, SRC.elevFront, SRC.goldFacade], 'hero render and front elevation: one leaf with a narrow glazed sidelight on its east side; the facade gold reads the leaf over 0..0.72 of the width and the glass over 0.76..1.00', 'a re-read of the 1280 px front elevation at y 0.5 puts the glass at x 4.853..5.174 (0.645..0.95 of the width); the boundary is uncertain by ±0.07 of the width'),
+  'door.entranceMullion': m(0.04, 'VISUAL_INFERRED', [SRC.renderHero, SRC.goldFacade], 'the gap 0.72..0.76 of the width between the leaf and the glass'),
+
+  // --- finish regions (elevation renders, STAGE BUILDAPP-01A; VISUAL) ---
+  'band.frontTimberFromX': m(0.657, 'VISUAL_INFERRED', [SRC.elevFront, SRC.goldFacade], 'timber-classified pixels from x 0.657 at y 0.5, 1.2, 2.7 and 5.0 on the front elevation; re-read on the 1280 px render: 0.657'),
+  'band.frontTimberToX': m(3.185, 'VISUAL_INFERRED', [SRC.elevFront, SRC.goldFacade], 'timber to x 3.185 at y 0.5, 1.2 and 2.7 (3.202 on the 1280 px render); dark from 3.202..3.236 where the balcony fascia begins', 'the band is flush cladding on the recessed front wall west of the balcony'),
+  'band.frontGableTimberToX': m(3.94, 'VISUAL_INFERRED', [SRC.elevFront, SRC.author01a], 'above the balcony the timber continues to the gable glazing: rows y 4.0 / 4.5 / 5.0 / 5.5 / 6.0 read timber to x 3.927 and glass from 4.061; the printed opening jamb is at 3.94', 'the gable band is taken to the jamb; the roof edge band hides its west part above y 4.5'),
+  'band.rearTimberWestToX': m(2.258, 'VISUAL_INFERRED', [SRC.elevRear, SRC.goldFacade], 'timber from the west return to the glazing’s west edge on the rear elevation'),
+  'band.rearTimberEastFromX': m(6.958, 'VISUAL_INFERRED', [SRC.elevRear, SRC.goldFacade], 'timber from the glazing’s east edge to the east return'),
+  'band.rearTimberTop': m(2.41, 'VISUAL_INFERRED', [SRC.elevRear, SRC.goldFacade], 'up to the balcony fascia; re-read at x 2.0: timber to 2.263, fascia from 2.433'),
+  'band.westDarkFromZ': m(4.568, 'VISUAL_INFERRED', [SRC.elevWest, SRC.goldFacade], 'the living window’s far edge, where the dark render band begins on the west elevation'),
+  'band.westDarkToZ': m(9.909, 'VISUAL_INFERRED', [SRC.elevWest, SRC.goldFacade], 'the band ends at z 9.909; re-read at y 1.2 and 2.0: dark to z 9.917, white from 9.934'),
+  'band.westDarkTop': m(2.377, 'VISUAL_INFERRED', [SRC.elevWest, SRC.goldFacade], 'the band top on the west elevation; re-read at z 5.0 / 8.0 / 9.5: dark to 2.309, white from 2.343'),
+  'band.eastDarkFromZ': m(3.906, 'VISUAL_INFERRED', [SRC.elevEast, SRC.author01a], 'east elevation at y 1.2: dark from the garage return to z 3.906, the living window’s south edge; white beyond the window'),
+  'band.eastDarkTop': m(2.36, 'VISUAL_INFERRED', [SRC.elevEast, SRC.author01a], 'east elevation columns at z 4.2 and 4.5: dark to 2.343, white from 2.377'),
+  'garage.bandTop': m(3.12, 'VISUAL_INFERRED', [SRC.elevEast, SRC.elevRear, SRC.goldFacade], 'the garage’s faces read dark render to 3.124 (east, z 6.0 / 12.0) and 3.029 (rear, x 9.0): the parapet band the section does not draw'),
+
+  // --- recess floors (STAGE BUILDAPP-01A) ---
+  'terrace.plinth': m(0.32, 'GEOMETRIC_INFERRED', [SRC.section, SRC.elevFront, SRC.elevRear, SRC.author01a], 'the loggia and portal floors are modelled to the −0,32 terrain datum like the ground slab; the front and rear elevations draw the plinth line continuous under the returns and the recesses'),
 } as const satisfies Record<string, Fact>
 
 export type FactKey = keyof typeof FACTS

@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 import { useEffect, useState } from 'react'
-import type { ObjectDescription, PropertySpec, TopologyDescription } from '@buildapp/editor'
+import type { DetailRow, ObjectDescription, PropertySpec, TopologyDescription } from '@buildapp/editor'
 import type { Evidence } from '@buildapp/model'
 import { useSnapshot, useStore } from '../use-store.js'
 
@@ -102,6 +102,34 @@ function EvidenceView({ evidence, sources }: { evidence: Evidence | undefined; s
 }
 
 const f3 = (n: number): string => n.toFixed(3)
+
+/** Derived composition of the selected object (stair layout, slab holes, roof cut, door panels, finish region), read-only. */
+function DetailsView({ rows }: { rows: DetailRow[] }): JSX.Element {
+  const store = useStore()
+  return (
+    <div className="kv" data-testid="inspector-details">
+      {rows.map((r, i) => (
+        <span key={i} className="v" style={{ gridColumn: '1 / -1' }} data-testid={`detail-${r.label.replace(/\s+/g, '-')}`}>
+          <span className="k">{r.label}: </span>
+          {r.ref ? (
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                store.select(r.ref!)
+              }}
+              title={`select ${r.ref}`}
+            >
+              {r.value}
+            </a>
+          ) : (
+            r.value
+          )}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 /** Resolved wall topology, read-only: what the junction records were resolved to. */
 function TopologyView({ t }: { t: TopologyDescription }): JSX.Element {
@@ -282,6 +310,14 @@ export function Inspector(): JSX.Element {
           </div>
         )}
       </div>
+      {d.details.length > 0 && (
+        <div className="section">
+          <div className="panel-title" style={{ padding: '0 0 4px' }}>
+            Composition
+          </div>
+          <DetailsView rows={d.details} />
+        </div>
+      )}
       {d.topology && (
         <div className="section">
           <div className="panel-title" style={{ padding: '0 0 4px' }}>

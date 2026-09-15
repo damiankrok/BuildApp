@@ -66,6 +66,11 @@ export function Toolbar(): JSX.Element {
         ))}
       </div>
       <div className="group">
+        <button data-testid="frame-selection" disabled={!snap.selection} className={snap.focus ? 'active' : ''} onClick={() => store.frame(snap.focus && snap.focus === snap.selection ? null : snap.selection)} title="Frame the selected object in the current view (again: frame the whole building)">
+          {snap.focus ? 'Unframe' : 'Frame'}
+        </button>
+      </div>
+      <div className="group">
         <button data-testid="undo" disabled={!snap.canUndo} onClick={() => store.undo()} title="Undo (Ctrl+Z)">
           Undo
         </button>

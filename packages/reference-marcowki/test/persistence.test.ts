@@ -13,7 +13,7 @@ import { MARCOWKI_MODEL_ID, MARCOWKI_MODEL_NAME, createMarcowkiReferenceBuilding
  * to what the command stream builds today: a change to the reference model
  * must regenerate the fixture in the same commit.
  */
-const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.2.0.json')
+const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.3.0.json')
 
 describe('Marcówki persistence', () => {
   it('saves through the normal deterministic serializer and reloads byte for byte with every id kept', () => {
@@ -32,7 +32,7 @@ describe('Marcówki persistence', () => {
     expect(back.model.schemaVersion).toBe(MODEL_SCHEMA_VERSION)
   })
 
-  it('equals the frozen fixture packages/model/test/fixtures/marcowki-ge-1.2.0.json', () => {
+  it('equals the frozen fixture packages/model/test/fixtures/marcowki-ge-1.3.0.json', () => {
     expect(serializeModel(createMarcowkiReferenceBuilding())).toBe(readFileSync(FIXTURE, 'utf8'))
   })
 

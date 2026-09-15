@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { parseModel } from '@buildapp/model'
+import { loadModel, parseModel } from '@buildapp/model'
 import { compileBuilding, solidTriangles } from '../src/index.js'
 import { boundsOf, manifoldReport, materialLength, unionMaterialRuns } from '@buildapp/verification'
 
@@ -10,7 +10,8 @@ import { boundsOf, manifoldReport, materialLength, unionMaterialRuns } from '@bu
  * reference package: the compiler sees an ordinary model and must reproduce
  * the characteristic depth and the recesses from the records in the file.
  */
-const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.2.0.json')
+const FIXTURE = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.3.0.json')
+const BASELINE_1_2_0 = resolve(import.meta.dirname, '../../model/test/fixtures/marcowki-ge-1.2.0.json')
 
 describe('Marcówki from JSON alone', () => {
   const model = parseModel(readFileSync(FIXTURE, 'utf8'))
@@ -20,14 +21,16 @@ describe('Marcówki from JSON alone', () => {
     expect(scene.diagnostics).toEqual([])
     expect(scene.stats.triangleCount).toBeGreaterThan(3000)
     expect(scene.stats.objectCount).toBeGreaterThan(100)
-    const ids = new Set([model.building!.id, ...[...model.walls, ...model.openings, ...model.windows, ...model.doors, ...model.slabs, ...model.roofs, ...model.roofOpenings, ...model.rooflights, ...model.balconies, ...model.railings, ...model.chimneys, ...model.stairs, ...model.rooms, ...model.levels].map((o) => o.id)])
+    const ids = new Set([model.building!.id, ...[...model.walls, ...model.openings, ...model.windows, ...model.doors, ...model.slabs, ...model.roofs, ...model.roofOpenings, ...model.rooflights, ...model.balconies, ...model.railings, ...model.chimneys, ...model.stairs, ...model.rooms, ...model.levels, ...model.surfaceRegions].map((o) => o.id)])
     for (const mesh of scene.meshes) expect(ids.has(mesh.objectId), mesh.objectId).toBe(true)
   })
 
   it('measures 14.60 m front to rear over 12.60 m of walls, with 1.00 m recesses at both ends', () => {
-    const b = scene.bounds!
+    // the structural extent (the finish skins on the side walls stand 5 mm proud of the render and are not structure)
+    const b = boundsOf(scene.meshes.filter((m) => m.structural).flatMap((m) => m.triangles))!
     expect(b.max.z - b.min.z).toBeCloseTo(14.6, 9)
     expect(b.max.x - b.min.x).toBeCloseTo(12.05, 9)
+    expect(scene.bounds!.max.x - scene.bounds!.min.x).toBeCloseTo(12.05 + 0.005, 9)
     // the ring walls stop 1.00 m short of both outer planes
     const ring = model.wallRings.flatMap((r) => r.wallIds)
     let zMin = Infinity
@@ -59,5 +62,27 @@ describe('Marcówki from JSON alone', () => {
     const under = (x: number): number => unionMaterialRuns([roof], { x, y: 0, z: 7 }, { x: 0, y: 1, z: 0 })[0].t0
     expect(under(2) - under(1)).toBeCloseTo(Math.tan((40 * Math.PI) / 180), 6)
     expect(materialLength(roof, { x: 2, y: 0, z: 7 }, { x: 0, y: 1, z: 0 })).toBeGreaterThan(0.2)
+  })
+
+  it('the stair in the file is one closed solid that climbs from the ground floor to the attic floor; the slab hole above it is open', () => {
+    const stair = solidTriangles(scene, 'stair-main')
+    expect(manifoldReport(stair).closed).toBe(true)
+    const sb = boundsOf(stair)!
+    expect(sb.min.y).toBeCloseTo(0, 9)
+    expect(sb.max.y).toBeCloseTo(3.06, 9)
+    const slab = solidTriangles(scene, 'slab-upper')
+    expect(materialLength(slab, { x: 7.0, y: 2.5, z: 7.0 }, { x: 0, y: 1, z: 0 })).toBe(0)
+    expect(materialLength(slab, { x: 3.0, y: 2.5, z: 7.0 }, { x: 0, y: 1, z: 0 })).toBeCloseTo(0.33, 9)
+  })
+
+  it('the 1.2.0 Marcówki file still compiles after migration: the same shell, with its placeholder stair and notched slab', () => {
+    const r = loadModel(readFileSync(BASELINE_1_2_0, 'utf8'))
+    expect(r.ok).toBe(true)
+    if (!r.ok) return
+    const old = compileBuilding(r.model)
+    expect(old.diagnostics).toEqual([])
+    expect(old.bounds!.max.z - old.bounds!.min.z).toBeCloseTo(14.6, 9)
+    expect(old.meshes.some((m) => m.part === 'STAIR_PLACEHOLDER')).toBe(true)
+    expect(old.meshes.some((m) => m.part === 'STAIR_STEP')).toBe(false)
   })
 })

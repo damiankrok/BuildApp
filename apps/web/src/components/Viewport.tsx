@@ -180,9 +180,12 @@ export function Viewport(): JSX.Element {
   useEffect(() => {
     const st = stateRef.current
     if (!st) return
-    // Frame the whole compiled building, not just what is visible, so presets are stable.
-    const all = buildThreeScene(snap.scene.meshes, snap.model.materials, null)
+    // Frame the whole compiled building, not just what is visible, so presets are stable;
+    // with a focus object, frame that object's compiled meshes (padded so it stays in context).
+    const focusMeshes = snap.focus ? snap.scene.meshes.filter((m) => m.objectId === snap.focus) : []
+    const all = buildThreeScene(focusMeshes.length > 0 ? focusMeshes : snap.scene.meshes, snap.model.materials, null)
     const framing = framingOf(all.bounds)
+    if (focusMeshes.length > 0) framing.radius = Math.max(1.5, framing.radius * 1.4)
     disposeGroup(all.group)
     st.lastRadius = framing.radius
     const { position, up } = presetPosition(snap.view, framing)
@@ -209,7 +212,7 @@ export function Viewport(): JSX.Element {
       st.ortho.zoom = 1
       st.ortho.updateProjectionMatrix()
     }
-  }, [snap.view, snap.viewNonce, snap.scene, snap.model.materials])
+  }, [snap.view, snap.viewNonce, snap.focus, snap.scene, snap.model.materials])
 
   return (
     <div className="viewport" ref={hostRef} data-testid="viewport">

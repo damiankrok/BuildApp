@@ -165,7 +165,15 @@ const CATALOGUE: Catalogue[] = [
         for (const c of m.chimneys) rect(c.footprint)
         for (const r of m.roofs) rect(r.footprint)
         for (const r of m.roofOpenings) rect(r.footprint)
-        for (const st of m.stairs) rect(st.footprint)
+        for (const st of m.stairs) {
+          rect(st.footprint)
+          if (st.kind === 'FLIGHTS') {
+            // a mirror swaps hands: the left end of the first riser line is the mirrored right end, every turn goes the other way
+            st.start = { ...st.start, z: flip(st.start.z - st.width) }
+            st.segments = st.segments.map((seg) => (seg.kind === 'WINDER' ? { ...seg, turn: seg.turn === 'LEFT' ? 'RIGHT' : 'LEFT' } : seg.kind === 'LANDING' && seg.turn !== 'NONE' ? { ...seg, turn: seg.turn === 'LEFT' ? 'RIGHT' : 'LEFT' } : seg))
+          }
+        }
+        for (const sl of m.slabs) sl.holes = sl.holes?.map((hole) => hole.map((p) => ({ ...p, z: flip(p.z) })).reverse())
         for (const r of m.railings) {
           r.start = { ...r.start, z: flip(r.start.z) }
           r.end = { ...r.end, z: flip(r.end.z) }

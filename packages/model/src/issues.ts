@@ -43,6 +43,15 @@ export type ValidationCode =
   | 'ROOF_OPENINGS_OVERLAP'
   | 'ROOF_OPENING_FILLED_TWICE'
   | 'ROOF_PENETRATION_MISMATCH'
+  // --- schema 1.3.0: slab holes, stairs, door assemblies, surface regions ---
+  | 'SLAB_HOLE_OUTSIDE'
+  | 'SLAB_HOLES_OVERLAP'
+  | 'STAIR_RISE_INVALID'
+  | 'STAIR_LAYOUT_INVALID'
+  | 'STAIR_OUTSIDE_FOOTPRINT'
+  | 'DOOR_ASSEMBLY_INVALID'
+  | 'SURFACE_REGION_HOST_INVALID'
+  | 'SURFACE_REGION_OUTSIDE_HOST'
   // --- wall topology (topology.ts) ---
   | 'JUNCTION_SELF_REFERENCE'
   | 'JUNCTION_OWNER_NOT_PARTICIPANT'

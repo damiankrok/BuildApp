@@ -17,15 +17,24 @@
 import {
   findObject,
   junctionsOfWall,
+  layoutStair,
   levelIdOf,
   loadModel,
+  polygonArea,
   resolveWallTopology,
   ringsOfWall,
+  roofCutMode,
+  roofOpeningUndersideRect,
   serializeModel,
   type CanonicalBuildingModel,
+  type Door,
   type LoadResult,
   type ResolvedJunction,
+  type RoofOpening,
   type SemanticKind,
+  type Slab,
+  type Stair,
+  type SurfaceRegion,
   type WallExtent,
   type WallJunction,
   type WallRing,
@@ -48,6 +57,8 @@ export type EditorSnapshot = {
   view: ViewPreset
   /** Increments on every setView, so applying the same preset again still re-frames. */
   viewNonce: number
+  /** The object the camera should frame instead of the whole building (null = the whole building). */
+  focus: string | null
   canUndo: boolean
   canRedo: boolean
   revision: number
@@ -75,6 +86,7 @@ export class EditorStore {
   private showAxes = true
   private view: ViewPreset = 'perspective'
   private viewNonce = 0
+  private focus: string | null = null
   private revision = 0
   private lastError: string | null = null
   private listeners = new Set<Listener>()
@@ -107,6 +119,7 @@ export class EditorStore {
         showAxes: this.showAxes,
         view: this.view,
         viewNonce: this.viewNonce,
+        focus: this.focus,
         canUndo: this.session.canUndo,
         canRedo: this.session.canRedo,
         revision: this.revision,
@@ -143,6 +156,7 @@ export class EditorStore {
     if (this.selection && !findObject(this.session.model, this.selection)) this.selection = null
     if (this.isolated && !findObject(this.session.model, this.isolated)) this.isolated = null
     if (this.isolatedLevelId && !findObject(this.session.model, this.isolatedLevelId)) this.isolatedLevelId = null
+    if (this.focus && !findObject(this.session.model, this.focus)) this.focus = null
     for (const id of [...this.hidden]) if (!findObject(this.session.model, id)) this.hidden.delete(id)
     this.notify()
     this.record({ step: 'listeners-notified' })
@@ -192,6 +206,7 @@ export class EditorStore {
     this.hidden.clear()
     this.isolated = null
     this.isolatedLevelId = null
+    this.focus = null
     this.lastError = null
     this.record({ step: 'command', type: 'replace' })
     this.afterModelChange()
@@ -276,6 +291,13 @@ export class EditorStore {
     this.notify()
   }
 
+  /** Frame one object (the selection by default) in the current view; `frame(null)` frames the whole building again. */
+  frame(id: string | null = this.selection): void {
+    this.focus = id !== null && findObject(this.session.model, id) ? id : null
+    this.viewNonce++
+    this.notify()
+  }
+
   /** The object ids that make up one object's visual family (a wall with its openings and fills). */
   familyOf(id: string): Set<string> {
     const m = this.session.model
@@ -287,6 +309,7 @@ export class EditorStore {
     }
     if (hit.kind === 'wall') {
       for (const o of m.openings) if (o.wallId === id || o.leaves?.some((l) => l.wallId === id)) out.add(o.id)
+      for (const r of m.surfaceRegions) if (r.hostId === id) out.add(r.id)
     }
     if (hit.kind === 'roof') {
       for (const o of m.roofOpenings) if (o.roofId === id) out.add(o.id)
@@ -366,9 +389,10 @@ export class EditorStore {
       host,
       evidenceSources,
       openingId: hit.kind === 'window' || hit.kind === 'door' ? (o.openingId as string) : undefined,
-      properties: editableProperties(hit.kind, hit.object),
+      properties: editableProperties(hit.kind, hit.object, m),
       meshCount: this.scene.meshes.filter((mm) => mm.objectId === id).length,
       topology: this.topologyOf(id, hit.kind),
+      details: describeDetails(m, hit.kind, hit.object),
     }
   }
 
@@ -438,6 +462,107 @@ export type ObjectDescription = {
   properties: PropertySpec[]
   meshCount: number
   topology?: TopologyDescription
+  /** Derived, read-only facts about the object's composition (stair layout, slab holes, roof cut, door panels, finish region), re-derived from the records like the compiler does. */
+  details: DetailRow[]
+}
+
+export type DetailRow = { label: string; value: string; /** Another object this row points at, selectable. */ ref?: string }
+
+const f3 = (n: number): string => (Math.abs(n - Math.round(n)) < 1e-9 ? String(Math.round(n)) : n.toFixed(3))
+
+/** The derived composition of an object, by kind. Nothing here is project-specific. */
+export function describeDetails(m: CanonicalBuildingModel, kind: SemanticKind, object: unknown): DetailRow[] {
+  const rows: DetailRow[] = []
+  switch (kind) {
+    case 'stair': {
+      const st = object as Stair
+      rows.push({ label: 'kind', value: st.kind })
+      if (st.kind !== 'FLIGHTS') break
+      const from = m.levels.find((l) => l.id === st.levelId)
+      const to = m.levels.find((l) => l.id === st.toLevelId)
+      rows.push({ label: 'to level', value: st.toLevelId, ref: st.toLevelId })
+      if (!from || !to) break
+      const lay = layoutStair(st, from, to)
+      rows.push({ label: 'rise', value: `${f3(lay.rise)} m (${f3(lay.baseY)} → ${f3(lay.topY)})` })
+      rows.push({ label: 'risers', value: `${lay.risers} × ${f3(lay.riserHeight)} m` })
+      rows.push({ label: 'width', value: `${f3(st.width)} m` })
+      rows.push({ label: 'start', value: `x ${f3(st.start.x)} z ${f3(st.start.z)} → ${st.direction}` })
+      st.segments.forEach((seg, i) => {
+        const v = seg.kind === 'FLIGHT' ? `${seg.risers} risers, going ${f3(seg.going)} m` : seg.kind === 'WINDER' ? `${seg.risers} winders, ${seg.turn} ${seg.angleDeg}°` : `landing ${f3(seg.length)} m${seg.turn === 'NONE' ? '' : ', ' + seg.turn}`
+        rows.push({ label: `segment ${i + 1}`, value: `${seg.kind}: ${v}` })
+      })
+      if (lay.extent) rows.push({ label: 'steps extent', value: `x ${f3(lay.extent.minX)}..${f3(lay.extent.maxX)} z ${f3(lay.extent.minZ)}..${f3(lay.extent.maxZ)}` })
+      const voids = m.slabs.filter((sl) => (sl.holes ?? []).length > 0 && sl.levelId === st.toLevelId)
+      for (const sl of voids) rows.push({ label: 'slab void', value: `${sl.id} (${sl.holes!.length} hole${sl.holes!.length === 1 ? '' : 's'})`, ref: sl.id })
+      break
+    }
+    case 'slab': {
+      const sl = object as Slab
+      const gross = polygonArea(sl.polygon)
+      const holes = sl.holes ?? []
+      const holeArea = holes.reduce((a, h) => a + polygonArea(h), 0)
+      rows.push({ label: 'outline area', value: `${f3(gross)} m²` })
+      rows.push({ label: 'holes', value: holes.length === 0 ? 'none (solid plate)' : `${holes.length}, ${f3(holeArea)} m² removed` })
+      holes.forEach((h, i) => {
+        const xs = h.map((p) => p.x)
+        const zs = h.map((p) => p.z)
+        rows.push({ label: `hole ${i + 1}`, value: `${h.length} vertices, ${f3(polygonArea(h))} m², x ${f3(Math.min(...xs))}..${f3(Math.max(...xs))} z ${f3(Math.min(...zs))}..${f3(Math.max(...zs))}` })
+      })
+      if (holes.length > 0) rows.push({ label: 'net area', value: `${f3(gross - holeArea)} m²` })
+      for (const st of m.stairs) if (st.toLevelId === sl.levelId && holes.length > 0) rows.push({ label: 'stair through', value: st.id, ref: st.id })
+      break
+    }
+    case 'roofOpening': {
+      const o = object as RoofOpening
+      const roof = m.roofs.find((r) => r.id === o.roofId)
+      rows.push({ label: 'cut', value: roofCutMode(o) })
+      if (roof) {
+        const u = roofOpeningUndersideRect(roof, o)
+        const dx = u.minX - o.footprint.minX
+        const dz = u.minZ - o.footprint.minZ
+        rows.push({ label: 'top outline', value: `x ${f3(o.footprint.minX)}..${f3(o.footprint.maxX)} z ${f3(o.footprint.minZ)}..${f3(o.footprint.maxZ)}` })
+        rows.push({ label: 'underside outline', value: `x ${f3(u.minX)}..${f3(u.maxX)} z ${f3(u.minZ)}..${f3(u.maxZ)}${Math.abs(dx) + Math.abs(dz) > 1e-9 ? ` (shifted ${f3(Math.hypot(dx, dz))} m uphill)` : ' (same: vertical cut)'}` })
+      }
+      if (o.throughId) rows.push({ label: 'lets through', value: o.throughId, ref: o.throughId })
+      break
+    }
+    case 'door': {
+      const d = object as Door
+      const op = m.openings.find((x) => x.id === d.openingId)
+      if (!d.assembly) {
+        rows.push({ label: 'assembly', value: `one leaf, hinge ${d.hingeSide}, swing ${d.swing}` })
+        break
+      }
+      rows.push({ label: 'assembly', value: `${d.assembly.panels.length} panels, mullions ${f3(d.assembly.mullionWidth)} m` })
+      let cursor = 0
+      d.assembly.panels.forEach((p, i) => {
+        const w = op ? p.fraction * op.width : NaN
+        const span = op ? `${f3(cursor)}..${f3(cursor + p.fraction)} of the width (${f3(w)} m)` : `${f3(cursor)}..${f3(cursor + p.fraction)}`
+        cursor += p.fraction
+        const extra = p.kind === 'LEAF' ? `, hinge ${p.hinge}${p.glazing === 'FULL' ? ', fully glazed' : ''}` : ''
+        rows.push({ label: `panel ${i + 1}`, value: `${p.kind}: ${span}${extra}` })
+      })
+      break
+    }
+    case 'surfaceRegion': {
+      const r = object as SurfaceRegion
+      const mat = m.materials.find((x) => x.id === r.materialId)
+      rows.push({ label: 'host wall', value: r.hostId, ref: r.hostId })
+      rows.push({ label: 'face', value: r.face })
+      rows.push({ label: 'rect', value: `a ${f3(r.rect.a0)}..${f3(r.rect.a1)} b ${f3(r.rect.b0)}..${f3(r.rect.b1)} (${f3((r.rect.a1 - r.rect.a0) * (r.rect.b1 - r.rect.b0))} m² before clipping)` })
+      rows.push({ label: 'material', value: mat ? `${mat.name} (${mat.color})` : r.materialId, ref: r.materialId })
+      rows.push({ label: 'thickness', value: 'none: appearance only, clipped to the wall material' })
+      break
+    }
+    case 'wall': {
+      const w = object as { id: string }
+      for (const r of m.surfaceRegions.filter((x) => x.hostId === w.id)) rows.push({ label: 'finish region', value: `${r.id} (${r.face}, ${r.materialId})`, ref: r.id })
+      break
+    }
+    default:
+      break
+  }
+  return rows
 }
 
 /** The ownership parent of an object, by kind. Nothing here is project-specific: it reads the generic reference fields. */
@@ -455,6 +580,8 @@ export function hostOf(m: CanonicalBuildingModel, kind: SemanticKind, object: un
       return { id: o.roofOpeningId as string, kind: 'roofOpening', relation: 'fills' }
     case 'railing':
       return typeof o.hostId === 'string' ? { id: o.hostId, kind: m.balconies.some((b) => b.id === o.hostId) ? 'balcony' : 'slab', relation: 'stands on' } : undefined
+    case 'surfaceRegion':
+      return { id: o.hostId as string, kind: 'wall', relation: 'finish on' }
     case 'wall':
     case 'room':
     case 'slab':
@@ -481,8 +608,10 @@ const text = (key: string, label: string): PropertySpec => ({ key, label, type: 
 const sel = (key: string, label: string, options: readonly string[]): PropertySpec => ({ key, label, type: 'select', options })
 
 /** Which properties the inspector may edit, per kind. Everything goes through setProperty. */
-export function editableProperties(kind: SemanticKind, object?: unknown): PropertySpec[] {
+export function editableProperties(kind: SemanticKind, object?: unknown, model?: CanonicalBuildingModel): PropertySpec[] {
   switch (kind) {
+    case 'surfaceRegion':
+      return [text('name', 'Name'), sel('face', 'Face', ['OUTER', 'INNER']), num('rect.a0', 'From (along)', 'm', 0.05), num('rect.a1', 'To (along)', 'm', 0.05), num('rect.b0', 'Bottom', 'm', 0.05), num('rect.b1', 'Top', 'm', 0.05), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
     case 'wallJunction': {
       const j = object as WallJunction | undefined
       const specs: PropertySpec[] = [text('name', 'Name'), num('tolerance', 'Tolerance', 'm', 0.001, 0)]
@@ -508,7 +637,7 @@ export function editableProperties(kind: SemanticKind, object?: unknown): Proper
     case 'roof':
       return [text('name', 'Name'), num('pitchDeg', 'Pitch', '°', 1, 0, 85), num('eaveOffset', 'Eave offset'), num('overhang', 'Overhang', 'm', 0.05, 0), num('thickness', 'Thickness', 'm', 0.01, 0.01), sel('ridgeAxis', 'Ridge axis', ['X', 'Z'])]
     case 'roofOpening':
-      return [text('name', 'Name'), num('footprint.minX', 'Min x'), num('footprint.maxX', 'Max x'), num('footprint.minZ', 'Min z'), num('footprint.maxZ', 'Max z')]
+      return [text('name', 'Name'), sel('cut', 'Cut', ['VERTICAL', 'NORMAL_TO_ROOF']), num('footprint.minX', 'Min x'), num('footprint.maxX', 'Max x'), num('footprint.minZ', 'Min z'), num('footprint.maxZ', 'Max z')]
     case 'rooflight':
       return [text('name', 'Name'), num('frameWidth', 'Frame width', 'm', 0.01, 0.01), num('glassThickness', 'Glass thickness', 'm', 0.002, 0.002)]
     case 'balcony':
@@ -519,8 +648,11 @@ export function editableProperties(kind: SemanticKind, object?: unknown): Proper
       return [num('baseOffset', 'Base offset'), num('height', 'Height', 'm', 0.1, 0.1)]
     case 'room':
       return [text('name', 'Name'), text('usage', 'Usage')]
-    case 'stair':
+    case 'stair': {
+      const st = object as Stair | undefined
+      if (st?.kind === 'FLIGHTS') return [text('name', 'Name'), num('width', 'Width', 'm', 0.05, 0.5), num('baseOffset', 'Base offset', 'm', 0.01), num('topOffset', 'Top offset', 'm', 0.01), num('waist', 'Waist', 'm', 0.01, 0.02)]
       return [text('name', 'Name')]
+    }
     case 'material':
       return [text('name', 'Name'), text('color', 'Colour')]
     case 'constraint':
@@ -558,17 +690,20 @@ function buildTree(m: CanonicalBuildingModel): TreeNode[] {
           id: w.id,
           kind: 'wall' as const,
           label: label(w),
-          children: m.openings
-            .filter((o) => o.wallId === w.id)
-            .map((o) => ({
-              id: o.id,
-              kind: 'opening' as const,
-              label: label(o, `${o.kind.toLowerCase()} opening ${o.width}×${o.height}`),
-              children: [
-                ...m.windows.filter((x) => x.openingId === o.id).map((x) => ({ id: x.id, kind: 'window' as const, label: label(x, 'Window'), children: [] })),
-                ...m.doors.filter((x) => x.openingId === o.id).map((x) => ({ id: x.id, kind: 'door' as const, label: label(x, 'Door'), children: [] })),
-              ],
-            })),
+          children: [
+            ...m.openings
+              .filter((o) => o.wallId === w.id)
+              .map((o) => ({
+                id: o.id,
+                kind: 'opening' as const,
+                label: label(o, `${o.kind.toLowerCase()} opening ${o.width}×${o.height}`),
+                children: [
+                  ...m.windows.filter((x) => x.openingId === o.id).map((x) => ({ id: x.id, kind: 'window' as const, label: label(x, 'Window'), children: [] })),
+                  ...m.doors.filter((x) => x.openingId === o.id).map((x) => ({ id: x.id, kind: 'door' as const, label: label(x, 'Door'), children: [] })),
+                ],
+              })),
+            ...m.surfaceRegions.filter((r) => r.hostId === w.id).map((r) => ({ id: r.id, kind: 'surfaceRegion' as const, label: label(r, `${r.face.toLowerCase()} finish ${r.materialId}`), children: [] })),
+          ],
         })),
     )
     const junctionNode = (j: WallJunction): TreeNode => ({ id: j.id, kind: 'wallJunction' as const, label: label(j, junctionLabel(j)), children: [] })

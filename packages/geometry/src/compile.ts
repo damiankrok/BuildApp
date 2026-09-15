@@ -26,6 +26,8 @@ import {
 import { compileDoorFill, compileWindowFill } from './fills.js'
 import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compileSlab, compileStairPlaceholder } from './features.js'
 import { compileRoofTriangles, compileRooflightFill, roofBreaksAlong, roofGeometry, type RoofGeometry } from './roof-compiler.js'
+import { compileStair } from './stair-compiler.js'
+import { compileSurfaceRegion } from './surface-regions.js'
 import { compileWall, type TopFunction } from './wall-compiler.js'
 import { boundsOfTriangles, type Bounds, type CompileDiagnostic, type CompiledMesh, type CompiledScene } from './types.js'
 
@@ -157,6 +159,8 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
   const primaryWallOf = new Map(model.openings.map((o) => [o.id, o.wallId]))
   const windowByOpening = new Map(model.windows.map((w) => [w.openingId, w]))
   const doorByOpening = new Map(model.doors.map((d) => [d.openingId, d]))
+  const regionsByWall = new Map<string, typeof model.surfaceRegions>()
+  for (const r of byId(model.surfaceRegions)) regionsByWall.set(r.hostId, [...(regionsByWall.get(r.hostId) ?? []), r])
 
   for (const wall of byId(model.walls)) {
     const level = levelOf(wall.levelId, wall.id)
@@ -236,6 +240,23 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
         }
       }
     }
+    // Finish regions on this wall's faces: skins clipped to the wall's real material (its top, its cut openings).
+    for (const region of regionsByWall.get(wall.id) ?? []) {
+      const cuts = openings.filter((o) => r.cutOpeningIds.includes(o.id))
+      const tris = compileSurfaceRegion(region, wall, level, { top: wt.top, topBreaks: wt.breaks, openings: cuts, extent })
+      if (tris.length === 0) continue
+      meshes.push({
+        objectId: region.id,
+        objectKind: 'surfaceRegion',
+        part: 'SURFACE_REGION',
+        levelId: wall.levelId,
+        solidId: region.id,
+        hostWallId: wall.id,
+        structural: false,
+        materialId: region.materialId,
+        triangles: tris,
+      })
+    }
   }
 
   for (const slab of byId(model.slabs)) {
@@ -266,7 +287,7 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
       meshes.push({ objectId: o.id, objectKind: 'roofOpening', part: 'ROOF_REVEAL', levelId: roof.levelId, solidId: id, hostRoofId: id, openingId: o.id, structural: true, materialId: materialOf(roof), triangles: reveal })
       const rl = rooflightByOpening.get(o.id)
       if (rl) {
-        for (const piece of compileRooflightFill(rl, o, geometry)) {
+        for (const piece of compileRooflightFill(rl, o, geometry, roof)) {
           meshes.push({ objectId: rl.id, objectKind: 'rooflight', part: piece.part, levelId: roof.levelId, solidId: `${rl.id}:${piece.part}`, hostRoofId: id, openingId: o.id, structural: false, materialId: materialOf(rl), triangles: piece.triangles })
         }
       }
@@ -307,6 +328,17 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
   for (const s of byId(model.stairs)) {
     const level = levelOf(s.levelId, s.id)
     if (!level) continue
+    if (s.kind === 'FLIGHTS') {
+      const to = levelOf(s.toLevelId, s.id)
+      if (!to) continue
+      const r = compileStair(s, level, to)
+      if (!r.ok) {
+        diagnostics.push({ code: 'STAIR_NOT_LAID_OUT', severity: 'ERROR', message: `stair ${s.id} could not be laid out: ${r.issues.join('; ')}`, objectId: s.id })
+        continue
+      }
+      meshes.push({ objectId: s.id, objectKind: 'stair', part: 'STAIR_STEP', levelId: s.levelId, solidId: s.id, structural: true, materialId: materialOf(s), triangles: r.triangles })
+      continue
+    }
     meshes.push({ objectId: s.id, objectKind: 'stair', part: 'STAIR_PLACEHOLDER', levelId: s.levelId, solidId: s.id, structural: false, triangles: compileStairPlaceholder(s, level) })
   }
 

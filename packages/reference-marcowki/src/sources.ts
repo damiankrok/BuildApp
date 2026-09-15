@@ -27,6 +27,9 @@ export const SRC = {
   goldRoof: 'src-gold-roof-features',
   transform: 'src-frame-transform',
   author: 'src-stage-author',
+  pageCurrent: 'src-page-2026-09',
+  projectCard: 'src-project-card-pdf',
+  author01a: 'src-stage-author-01a',
 } as const
 
 export type SourceId = (typeof SRC)[keyof typeof SRC]
@@ -51,6 +54,9 @@ export function evidenceSourceCommands(): BuildingCommand[] {
     { type: 'addEvidenceSource', id: SRC.goldRoof, kind: 'DERIVATION', label: 'Reference gold: roof features (marcowki-roof-features-v1.json)', uri: REFERENCE_REPO, note: 'three 78/118 rooflights, two chimney stacks, the upper slab reconciliation' },
     { type: 'addEvidenceSource', id: SRC.transform, kind: 'DERIVATION', label: 'Frame transform reference → BuildApp', note: 'x_app = x_ref, y_app = y_ref, z_app = 13.60 − z_ref (packages/reference-marcowki/src/transform.ts); x orientation verified against the plans: east stays on the right of the front view' },
     { type: 'addEvidenceSource', id: SRC.author, kind: 'MANUAL', label: 'STAGE BUILDAPP-01 modelling decisions', note: 'choices no source settles, each stated in the unresolved ledger (packages/reference-marcowki/src/ledger.ts)' },
+    { type: 'addEvidenceSource', id: SRC.pageCurrent, kind: 'PUBLISHED_FACT', label: 'Official project page, current revision (fetched 2026-09-15)', uri: PROJECT_URL, note: 'house 129.04 m², garage 24.10, boiler 5.80, usable 153.31, footprint 131.16, floors 170.62, total 231.11, roof 150.57, height 8.27 m, knee wall 130 cm, pitch 40°, room table with net (and gross) areas, Schody 5.63; the dimensioned plans 853×853 px (rzut parteru / poddasza), the 400×300 section and the 1280-px elevations were re-fetched from the same page (docs/MARCOWKI_SOURCE_REVISION_POLICY.md)' },
+    { type: 'addEvidenceSource', id: SRC.projectCard, kind: 'PUBLISHED_FACT', label: 'Older ARCHON project card (PDF), previous revision', uri: PROJECT_URL, note: 'not retrievable in the stage session (the download is behind a request form); its figures — house 129.15 m², garage 23.85, stairs 5.62, roof 168.48 — are as quoted by the BUILDAPP-01A brief; its printed geometric datums (1205/1260 chains, +3,06, +7,95, 40°, 130 knee wall, section dimensions) are the same drawings the plans and section carry (docs/MARCOWKI_SOURCE_REVISION_POLICY.md)' },
+    { type: 'addEvidenceSource', id: SRC.author01a, kind: 'MANUAL', label: 'STAGE BUILDAPP-01A modelling decisions', note: 'the stair path read off both plans, the L-shaped slab void, winder count by riser arithmetic, rooflight cuts normal to the slope, the entrance assembly proportions, the finish regions, the recess floors; each stated in the ledger' },
   ]
 }
 

@@ -24,11 +24,22 @@
  * has the same plan outline on the top surface and on the underside, and a
  * chimney whose footprint is the hole passes through without sharing volume.
  *
+ * A hole cut NORMAL_TO_ROOF has sides perpendicular to the roof plane: its
+ * underside outline is the footprint shifted uphill by `t · sin pitch`
+ * (`roofOpeningUndersideShift`, model package), so both outlines are breaks
+ * of the same grid, the top surface skips the footprint's cells and the
+ * underside skips the shifted ones. The reveals across the ridge direction
+ * are tilted quads between the two outlines (planar: both edges run along
+ * the ridge); the reveals at the hole's along-ends are one planar polygon
+ * each, zipped between the top and underside edge chains, so every vertex
+ * is shared with the cells beside it. A VERTICAL cut is the shift-zero case
+ * and compiles exactly as before.
+ *
  * `roofGeometry` also exposes the roof's underside as a function of plan
  * position, which is what lets a wall die into the roof (FOLLOW_ROOF).
  */
-import type { Level, PlanRect, Roof, RoofOpening, Vec2 } from '@buildapp/model'
-import { quadOut } from './primitives.js'
+import { roofOpeningUndersideShift, type Level, type PlanRect, type Roof, type RoofOpening, type Vec2 } from '@buildapp/model'
+import { quadOut, triOut } from './primitives.js'
 import { v3, type Triangle, type Vec3 } from './types.js'
 
 export type RoofGeometry = {
@@ -123,7 +134,8 @@ function uniqueSorted(values: number[]): number[] {
   return out
 }
 
-type Hole = { id: string; a0: number; a1: number; c0: number; c1: number }
+/** A hole in plate coordinates: `a` along the ridge, `c` across; `shift` moves the underside outline across (a normal cut), 0 for a vertical cut. */
+type Hole = { id: string; a0: number; a1: number; c0: number; c1: number; shift: number }
 
 /**
  * One plate — a slope of a gable or a flat roof — in plan coordinates `along`
@@ -152,48 +164,73 @@ function tilePlate(
     crossDir: Vec3
   },
 ): void {
-  const crossBreaks = uniqueSorted([p.cross0, p.cross1, ...p.holes.flatMap((h) => [h.c0, h.c1])])
+  const crossBreaks = uniqueSorted([p.cross0, p.cross1, ...p.holes.flatMap((h) => [h.c0, h.c1, h.c0 + h.shift, h.c1 + h.shift])])
   const ys = crossBreaks.map((c) => p.topY(c))
   const snap = (v: number, list: number[]): number => list.find((x) => Math.abs(x - v) <= EPS) ?? v
   const alongBreaks = p.alongBreaks
-  const holes = p.holes.map((h) => ({ ...h, a0: snap(h.a0, alongBreaks), a1: snap(h.a1, alongBreaks), c0: snap(h.c0, crossBreaks), c1: snap(h.c1, crossBreaks) }))
+  const holes = p.holes.map((h) => ({
+    ...h,
+    a0: snap(h.a0, alongBreaks),
+    a1: snap(h.a1, alongBreaks),
+    c0: snap(h.c0, crossBreaks),
+    c1: snap(h.c1, crossBreaks),
+    u0: snap(h.c0 + h.shift, crossBreaks),
+    u1: snap(h.c1 + h.shift, crossBreaks),
+  }))
   const neg = (a: Vec3): Vec3 => v3(-a.x, -a.y, -a.z)
   const outBottom = neg(p.outTop)
+  const yOf = (c: number): number => ys[crossBreaks.indexOf(c)]
   for (let k = 0; k + 1 < crossBreaks.length; k++) {
     const c0 = crossBreaks[k]
     const c1 = crossBreaks[k + 1]
     const y0 = ys[k]
     const y1 = ys[k + 1]
-    const inBand = holes.filter((h) => h.c0 <= c0 + EPS && h.c1 >= c1 - EPS)
+    const topInBand = holes.filter((h) => h.c0 <= c0 + EPS && h.c1 >= c1 - EPS)
+    const underInBand = holes.filter((h) => h.u0 <= c0 + EPS && h.u1 >= c1 - EPS)
     for (let i = 0; i + 1 < alongBreaks.length; i++) {
       const a0 = alongBreaks[i]
       const a1 = alongBreaks[i + 1]
       const mid = (a0 + a1) / 2
-      if (inBand.some((h) => h.a0 <= mid && mid <= h.a1)) continue
-      quadOut(out, p.P(a0, c0, y0), p.P(a1, c0, y0), p.P(a1, c1, y1), p.P(a0, c1, y1), p.outTop)
-      quadOut(out, p.P(a0, c0, y0 - p.drop), p.P(a1, c0, y0 - p.drop), p.P(a1, c1, y1 - p.drop), p.P(a0, c1, y1 - p.drop), outBottom)
+      if (!topInBand.some((h) => h.a0 <= mid && mid <= h.a1)) quadOut(out, p.P(a0, c0, y0), p.P(a1, c0, y0), p.P(a1, c1, y1), p.P(a0, c1, y1), p.outTop)
+      if (!underInBand.some((h) => h.a0 <= mid && mid <= h.a1)) quadOut(out, p.P(a0, c0, y0 - p.drop), p.P(a1, c0, y0 - p.drop), p.P(a1, c1, y1 - p.drop), p.P(a0, c1, y1 - p.drop), outBottom)
     }
     // End faces at along0 and along1, one per band so they share the top and underside edges exactly.
     quadOut(out, p.P(p.along0, c0, y0), p.P(p.along0, c1, y1), p.P(p.along0, c1, y1 - p.drop), p.P(p.along0, c0, y0 - p.drop), neg(p.alongDir))
     quadOut(out, p.P(p.along1, c0, y0), p.P(p.along1, c1, y1), p.P(p.along1, c1, y1 - p.drop), p.P(p.along1, c0, y0 - p.drop), p.alongDir)
   }
-  // Reveals: vertical faces around each hole, facing into it, split on the same
-  // breaks as the cells beside them so that every edge is shared exactly.
+  // Reveals: faces around each hole, facing into it, split on the same breaks
+  // as the cells beside them so that every edge is shared exactly. Across the
+  // ridge direction they run from the top outline down to the underside
+  // outline (vertical for a vertical cut, tilted for a normal cut); at the
+  // hole's along-ends they are one planar polygon zipped between the top and
+  // underside edge chains.
   for (const h of holes) {
     const list = reveals.get(h.id) ?? []
-    const cs = crossBreaks.filter((c) => c >= h.c0 - EPS && c <= h.c1 + EPS)
     const as = alongBreaks.filter((a) => a >= h.a0 - EPS && a <= h.a1 + EPS)
-    for (let k = 0; k + 1 < cs.length; k++) {
-      const y0 = ys[crossBreaks.indexOf(cs[k])]
-      const y1 = ys[crossBreaks.indexOf(cs[k + 1])]
-      quadOut(list, p.P(h.a0, cs[k], y0), p.P(h.a0, cs[k + 1], y1), p.P(h.a0, cs[k + 1], y1 - p.drop), p.P(h.a0, cs[k], y0 - p.drop), p.alongDir)
-      quadOut(list, p.P(h.a1, cs[k], y0), p.P(h.a1, cs[k + 1], y1), p.P(h.a1, cs[k + 1], y1 - p.drop), p.P(h.a1, cs[k], y0 - p.drop), neg(p.alongDir))
-    }
-    const y0 = ys[crossBreaks.indexOf(h.c0)]
-    const y1 = ys[crossBreaks.indexOf(h.c1)]
     for (let i = 0; i + 1 < as.length; i++) {
-      quadOut(list, p.P(as[i], h.c0, y0), p.P(as[i + 1], h.c0, y0), p.P(as[i + 1], h.c0, y0 - p.drop), p.P(as[i], h.c0, y0 - p.drop), p.crossDir)
-      quadOut(list, p.P(as[i], h.c1, y1), p.P(as[i + 1], h.c1, y1), p.P(as[i + 1], h.c1, y1 - p.drop), p.P(as[i], h.c1, y1 - p.drop), neg(p.crossDir))
+      quadOut(list, p.P(as[i], h.c0, yOf(h.c0)), p.P(as[i + 1], h.c0, yOf(h.c0)), p.P(as[i + 1], h.u0, yOf(h.u0) - p.drop), p.P(as[i], h.u0, yOf(h.u0) - p.drop), p.crossDir)
+      quadOut(list, p.P(as[i], h.c1, yOf(h.c1)), p.P(as[i + 1], h.c1, yOf(h.c1)), p.P(as[i + 1], h.u1, yOf(h.u1) - p.drop), p.P(as[i], h.u1, yOf(h.u1) - p.drop), neg(p.crossDir))
+    }
+    const topChain = crossBreaks.filter((c) => c >= h.c0 - EPS && c <= h.c1 + EPS)
+    const underChain = crossBreaks.filter((c) => c >= h.u0 - EPS && c <= h.u1 + EPS)
+    for (const [a, outward] of [
+      [h.a0, p.alongDir],
+      [h.a1, neg(p.alongDir)],
+    ] as const) {
+      const T = topChain.map((c) => ({ c, pt: p.P(a, c, yOf(c)) }))
+      const U = underChain.map((c) => ({ c, pt: p.P(a, c, yOf(c) - p.drop) }))
+      let i = 0
+      let j = 0
+      while (i < T.length - 1 || j < U.length - 1) {
+        const advanceT = j === U.length - 1 || (i < T.length - 1 && T[i + 1].c <= U[j + 1].c)
+        if (advanceT) {
+          triOut(list, T[i].pt, T[i + 1].pt, U[j].pt, outward)
+          i++
+        } else {
+          triOut(list, T[i].pt, U[j + 1].pt, U[j].pt, outward)
+          j++
+        }
+      }
     }
     reveals.set(h.id, list)
   }
@@ -213,13 +250,17 @@ export function compileRoofTriangles(roof: Roof, level: Level, openings: readonl
   const along1 = alongX ? c.maxX : c.maxZ
   const cross0 = alongX ? c.minZ : c.minX
   const cross1 = alongX ? c.maxZ : c.maxX
-  const holeOf = (o: RoofOpening): Hole => ({
-    id: o.id,
-    a0: alongX ? o.footprint.minX : o.footprint.minZ,
-    a1: alongX ? o.footprint.maxX : o.footprint.maxZ,
-    c0: alongX ? o.footprint.minZ : o.footprint.minX,
-    c1: alongX ? o.footprint.maxZ : o.footprint.maxX,
-  })
+  const holeOf = (o: RoofOpening): Hole => {
+    const sh = roofOpeningUndersideShift(roof, o)
+    return {
+      id: o.id,
+      a0: alongX ? o.footprint.minX : o.footprint.minZ,
+      a1: alongX ? o.footprint.maxX : o.footprint.maxZ,
+      c0: alongX ? o.footprint.minZ : o.footprint.minX,
+      c1: alongX ? o.footprint.maxZ : o.footprint.maxX,
+      shift: alongX ? sh.dz : sh.dx,
+    }
+  }
   const holes = openings.map(holeOf)
   const drop = g.verticalDrop
   const alongBreaks = uniqueSorted([along0, along1, ...holes.flatMap((h) => [h.a0, h.a1])])
@@ -250,7 +291,7 @@ export function compileRoofTriangles(roof: Roof, level: Level, openings: readonl
     const eaveCross = side < 0 ? cross0 : cross1
     // Top slope surface: outward is up and towards the eave. Underside: down and towards the ridge.
     const outTop = v3(crossDir.x * side, 1, crossDir.z * side)
-    const slopeHoles = holes.filter((h) => (side < 0 ? h.c1 <= mid + EPS : h.c0 >= mid - EPS))
+    const slopeHoles = holes.filter((h) => (side < 0 ? Math.max(h.c1, h.c1 + h.shift) <= mid + EPS : Math.min(h.c0, h.c0 + h.shift) >= mid - EPS))
     // The eave and ridge values are the shared ones, so the eave face and the other slope compute identical vertices.
     const topY = (cross: number): number => (cross === eaveCross ? eaveTop : cross === mid ? ridgeTop : topOf(cross))
     tilePlate(out, reveals, {
@@ -310,11 +351,11 @@ const rectCorners = (r: PlanRect): Vec2[] => [
   { x: r.minX, z: r.maxZ },
 ]
 
-/** A vertical prism over a plan rectangle, capped by two sloped (or level) planes. One closed solid. */
-function prismBetweenPlanes(out: Triangle[], r: PlanRect, yTop: (x: number, z: number) => number, yBot: (x: number, z: number) => number): void {
+/** A prism over a plan rectangle capped by two sloped (or level) planes, its bottom outline shifted by `shift` in plan (sheared for a normal cut). One closed solid. */
+function prismBetweenPlanes(out: Triangle[], r: PlanRect, yTop: (x: number, z: number) => number, yBot: (x: number, z: number) => number, shift: Vec2 = { x: 0, z: 0 }): void {
   const C = rectCorners(r)
   const T = C.map((p) => v3(p.x, yTop(p.x, p.z), p.z))
-  const B = C.map((p) => v3(p.x, yBot(p.x, p.z), p.z))
+  const B = C.map((p) => v3(p.x + shift.x, yBot(p.x + shift.x, p.z + shift.z), p.z + shift.z))
   quadOut(out, T[0], T[1], T[2], T[3], v3(0, 1, 0))
   quadOut(out, B[0], B[1], B[2], B[3], v3(0, -1, 0))
   const cx = (r.minX + r.maxX) / 2
@@ -327,44 +368,49 @@ function prismBetweenPlanes(out: Triangle[], r: PlanRect, yTop: (x: number, z: n
   }
 }
 
-/** A ring between an outer and an inner plan rectangle, vertical sides, capped by two sloped planes. One closed solid. */
-function ringBetweenPlanes(out: Triangle[], outer: PlanRect, inner: PlanRect, yTop: (x: number, z: number) => number, yBot: (x: number, z: number) => number): void {
+/** A ring between an outer and an inner plan rectangle, capped by two sloped planes, its bottom outlines shifted by `shift` in plan (vertical sides when the shift is zero, sides normal to the slope otherwise). One closed solid. */
+function ringBetweenPlanes(out: Triangle[], outer: PlanRect, inner: PlanRect, yTop: (x: number, z: number) => number, yBot: (x: number, z: number) => number, shift: Vec2 = { x: 0, z: 0 }): void {
   const O = rectCorners(outer)
   const I = rectCorners(inner)
   const cx = (outer.minX + outer.maxX) / 2
   const cz = (outer.minZ + outer.maxZ) / 2
-  const at = (p: Vec2, y: (x: number, z: number) => number): Vec3 => v3(p.x, y(p.x, p.z), p.z)
+  const top = (p: Vec2): Vec3 => v3(p.x, yTop(p.x, p.z), p.z)
+  const bot = (p: Vec2): Vec3 => v3(p.x + shift.x, yBot(p.x + shift.x, p.z + shift.z), p.z + shift.z)
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4
-    quadOut(out, at(O[i], yTop), at(O[j], yTop), at(I[j], yTop), at(I[i], yTop), v3(0, 1, 0))
-    quadOut(out, at(O[i], yBot), at(O[j], yBot), at(I[j], yBot), at(I[i], yBot), v3(0, -1, 0))
+    quadOut(out, top(O[i]), top(O[j]), top(I[j]), top(I[i]), v3(0, 1, 0))
+    quadOut(out, bot(O[i]), bot(O[j]), bot(I[j]), bot(I[i]), v3(0, -1, 0))
     const mx = (O[i].x + O[j].x) / 2 - cx
     const mz = (O[i].z + O[j].z) / 2 - cz
-    quadOut(out, at(O[i], yBot), at(O[j], yBot), at(O[j], yTop), at(O[i], yTop), v3(mx, 0, mz))
-    quadOut(out, at(I[i], yBot), at(I[j], yBot), at(I[j], yTop), at(I[i], yTop), v3(-mx, 0, -mz))
+    quadOut(out, bot(O[i]), bot(O[j]), top(O[j]), top(O[i]), v3(mx, 0, mz))
+    quadOut(out, bot(I[i]), bot(I[j]), top(I[j]), top(I[i]), v3(-mx, 0, -mz))
   }
 }
 
 /**
  * A rooflight in a cut roof opening: a frame ring filling the hole between
  * the roof's top surface and its underside (its outer sides coincide with the
- * reveals), and a pane at mid-depth inside the frame. Both are separate,
- * non-structural solids.
+ * reveals, vertical or normal to the slope as the opening's cut is), and a
+ * pane parallel to the roof at mid-depth inside the frame. Both are
+ * separate, non-structural solids.
  */
-export function compileRooflightFill(fill: { frameWidth: number; glassThickness: number }, opening: RoofOpening, g: RoofGeometry): RooflightPiece[] {
+export function compileRooflightFill(fill: { frameWidth: number; glassThickness: number }, opening: RoofOpening, g: RoofGeometry, roof: Roof): RooflightPiece[] {
   const fw = fill.frameWidth
   const outer = opening.footprint
   const inner = { minX: outer.minX + fw, maxX: outer.maxX - fw, minZ: outer.minZ + fw, maxZ: outer.maxZ - fw }
   const top = (x: number, z: number): number => g.topAt(x, z)
   const bottom = (x: number, z: number): number => g.undersideAt(x, z)
+  const shift = roofOpeningUndersideShift(roof, opening)
   const frame: Triangle[] = []
-  ringBetweenPlanes(frame, outer, inner, top, bottom)
+  ringBetweenPlanes(frame, outer, inner, top, bottom, { x: shift.dx, z: shift.dz })
   const glass: Triangle[] = []
   const midDepth = g.verticalDrop / 2
   const gt = fill.glassThickness / 2
+  // the pane sits at mid-depth along the cut: half the underside shift across, for a normal cut
+  const paneRect = { minX: inner.minX + shift.dx / 2, maxX: inner.maxX + shift.dx / 2, minZ: inner.minZ + shift.dz / 2, maxZ: inner.maxZ + shift.dz / 2 }
   prismBetweenPlanes(
     glass,
-    inner,
+    paneRect,
     (x, z) => top(x, z) - midDepth + gt,
     (x, z) => top(x, z) - midDepth - gt,
   )
