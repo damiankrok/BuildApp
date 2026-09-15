@@ -1,0 +1,186 @@
+{
+  "candidateHash": "93b4a2109990d354126bccef77c6530969722e31358ec67f8e4d4c3a3d6a65a3",
+  "candidateId": "candidate-marcowki-93b4a2109990d354",
+  "honesty": {
+    "assumed": 1,
+    "hardCorrect": 1,
+    "hardQuantities": 2,
+    "justified": 3,
+    "unresolvedCount": 83
+  },
+  "linearSolids": {
+    "candidate": 45,
+    "centreRmsM": 0,
+    "matched": 0,
+    "missed": 0,
+    "notComparable": true,
+    "reference": 0,
+    "spurious": 0
+  },
+  "openings": {
+    "candidate": 8,
+    "comparisons": [
+      {
+        "matched": false,
+        "referenceId": "gd-bathroom"
+      },
+      {
+        "matched": false,
+        "referenceId": "gd-boiler"
+      },
+      {
+        "matched": false,
+        "referenceId": "gd-entry"
+      },
+      {
+        "matched": false,
+        "referenceId": "gd-pantry"
+      },
+      {
+        "matched": false,
+        "referenceId": "gd-room"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-east-garage-door"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-east-living-window"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-front-entrance"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-front-gable-glazing"
+      },
+      {
+        "candidateId": "opening-6",
+        "heightError": -1.221323,
+        "matched": true,
+        "positionError": 1.114347,
+        "referenceId": "og-front-room-window",
+        "widthError": -0.727124
+      },
+      {
+        "candidateId": "opening-2",
+        "heightError": -1.890441,
+        "matched": true,
+        "positionError": 1.658213,
+        "referenceId": "og-garage-door",
+        "widthError": -0.206453
+      },
+      {
+        "matched": false,
+        "referenceId": "og-garage-side-door"
+      },
+      {
+        "candidateId": "opening-5",
+        "heightError": -0.412899,
+        "matched": true,
+        "positionError": 1.578704,
+        "referenceId": "og-rear-gable-east",
+        "widthError": -1.512982
+      },
+      {
+        "matched": false,
+        "referenceId": "og-rear-gable-west"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-rear-living-glazing"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-west-kitchen-window"
+      },
+      {
+        "matched": false,
+        "referenceId": "og-west-living-window"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-bathroom"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-garderoba-sw"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-pokoj-ne"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-pokoj-nw"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-pokoj-s"
+      },
+      {
+        "matched": false,
+        "referenceId": "ud-pralnia"
+      }
+    ],
+    "matched": 3,
+    "missed": 20,
+    "positionRmsM": 1.470119,
+    "reference": 23,
+    "sizeRmsM": 1.161632,
+    "spurious": 5
+  },
+  "referenceId": "marcowki-ge",
+  "scores": {
+    "evidenceSupportedCompleteness": 0.543478,
+    "geometricAccuracy": 0.562961
+  },
+  "shell": [
+    {
+      "candidate": 12.05,
+      "class": "HARD",
+      "error": 0,
+      "name": "footprint width",
+      "reference": 12.05,
+      "relative": 0,
+      "unit": "m"
+    },
+    {
+      "candidate": 14.905276,
+      "class": "SOFT",
+      "error": 0.305276,
+      "name": "footprint depth",
+      "reference": 14.6,
+      "relative": 0.020909,
+      "unit": "m"
+    },
+    {
+      "candidate": 7.95,
+      "error": -0.000004,
+      "name": "ridge height",
+      "reference": 7.950004,
+      "relative": -0.000001,
+      "unit": "m"
+    },
+    {
+      "candidate": 2,
+      "error": 0,
+      "name": "storey count",
+      "reference": 2,
+      "relative": 0,
+      "unit": "count"
+    }
+  ],
+  "topology": {
+    "candidateLevels": 2,
+    "candidateRoofs": 1,
+    "candidateWalls": 8,
+    "heightError": -0.000004,
+    "referenceLevels": 2,
+    "referenceRoofs": 2,
+    "referenceWalls": 35
+  }
+}
+

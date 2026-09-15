@@ -313,7 +313,9 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     levelId: topLevelId,
     kind: 'GABLE',
     footprint: { minX: 0, minZ: 0, maxX: round6(W), maxZ: round6(D) },
-    eaveOffset: 0,
+    // The eaves sit at the top of the top storey's walls, and `eaveOffset` is
+    // measured from that storey's own floor.
+    eaveOffset: round6(levelHeights[levelHeights.length - 1].value),
     pitchDeg: pitchQ.value,
     ridgeAxis,
     overhang: overhangQ.value,

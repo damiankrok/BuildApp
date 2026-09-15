@@ -26,7 +26,9 @@
     "source:acquire": "vite-node packages/source-package/scripts/acquire.ts --",
     "observations:extract": "vite-node packages/source-analyzer/scripts/extract.ts --",
     "observations:audit": "vite-node packages/source-analyzer/scripts/audit.ts --",
-    "observations:marcowki": "vite-node packages/source-analyzer/scripts/marcowki.ts --"
+    "observations:marcowki": "vite-node packages/source-analyzer/scripts/marcowki.ts --",
+    "reconstruct": "vite-node packages/reconstruction/scripts/reconstruct.ts --",
+    "reconstruct:marcowki": "vite-node packages/reconstruction/scripts/marcowki.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

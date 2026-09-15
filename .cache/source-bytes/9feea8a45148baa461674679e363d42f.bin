@@ -1,0 +1,183 @@
+<div id="fancybox_floor" class="border-radius-15" style="width:80%">
+<div class="row margin-0" >
+    <div class="col-md-9 text-center has-watermark45 f-panzoom myPanzoom has-watermark45 border-radius-15">
+				<div class="f-custom-controls fixed-projection-controls" >       
+						<div class="btn btn-default margin-bottom-10 changeMirrorIcon" data-panzoom-action='flipX' alt="changeMirror", id="changeMirrorIcon" title="Zmień na lustrzane odbicie">
+							<div style="padding-bottom: 2px; width: 27px; height: 27px;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="m3 7 5 5-5 5V7"></path>
+									<path d="m21 7-5 5 5 5V7"></path>
+									<path d="M12 20v2"></path>
+									<path d="M12 14v2"></path>
+									<path d="M12 8v2"></path>
+									<path d="M12 2v2"></path>
+								</svg>
+							</div>
+						</div> 
+                       <div class="btn btn-default margin-bottom-10 zoomIcons" data-panzoom-action="zoomIn" id="zoomInIcon" title="Przybliż rzut">
+                       <img alt="zoomIn" height="27px" src="https://assets.archon.pl/img/icons/lupa.svg" width="24px" />  
+                       </div>
+                       <div class="btn btn-default margin-bottom-10 zoomIcons" data-panzoom-action="zoomOut" id="zoomOutIcon" title="Oddal rzut">
+                       <img alt="zoomOut" height="27px" src="https://assets.archon.pl/img/icons/lupa_minus.svg" width="24px" />
+                       </div>
+               </div>
+        		<img alt="gotowy projekt Dom w marcówkach (GE) rzut poddasza" class="js-generated-floors fit has-mirror f-panzoom__content can_zoom_in " data-floor-pom-img="https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge-117abb705763e8815846decc6fef54fd__11917.gif" src="https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-9d1547b712997f93462fc19e9eefb963__11817.gif" />
+		</div>
+	<div class="col-md-3 padding-12 margin-top-40" style="position: sticky; top: 40px;">
+		<div  id="inside-projection-symbols" class="col-xs-12 product-projection-symbols-item" >
+
+		<div id="symbolDetails" class="product-projection-symbol-item" >
+				<div  align="center"  class="product-projection-symbol-button collapsed" data-toggle="collapse" data-target="#projectionSymbols" data-parent="#symbolDetails" aria-expanded="false" aria-controls="projectionSymbols"  >
+					Symbole zastosowane na rzutach&nbsp;&nbsp;<i class="fa fa-angle-down"></i> 
+				</div>
+				<div class="projection-symbols-container collapse" id="projectionSymbols">
+					<div class= "product-projection-symbol-description-container-fancybox" >
+ 						<div class="product-projection-symbol-description-item-projection ">
+            				<img alt="Ikona kuchenka" class=" square-symbol-projection-icon-projection"  src="https://assets.archon.pl/img/icons/ikona-kuchenka.png"/> kuchenka
+        				</div>
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona lodówka" class=" square-symbol-projection-icon-projection"  src="https://assets.archon.pl/img/icons/ikona-lodowka.png"/> lodówka
+        				</div>
+        
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona piekarnik" class=" square-symbol-projection-icon-projection"  src="https://assets.archon.pl/img/icons/ikona-piekarnik.png"/> piekarnik
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona zamrażarka" class=" square-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-zamrazarka.png"/> zamrażarka
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona zmywarka" class=" square-symbol-projection-icon-projection"  src="https://assets.archon.pl/img/icons/ikona-zmywarka.png"/> zmywarka
+        				</div>
+
+       					<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona suszarka" class=" square-symbol-projection-icon-projection"  src="https://assets.archon.pl/img/icons/ikona-suszarka.png"/> suszarka
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection" >
+            				<img alt="Ikona pralka" class=" square-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-pralka.png"/> pralka
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona suszarka nad pralką" class=" square-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-pralka-suszarka.png"/> suszarka nad&nbsp;pralką
+        				</div>
+
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona szafa" class=" rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-szafa.png"/> szafa
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona szafka wisząca" class=" rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-szafka-wiszaca.png"/> szafka wisząca
+        				</div>
+
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona kominek" class=" rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-kominek.png"/> kominek
+        				</div>
+
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona kocioł na paliwo stałe" class=" rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-kociol-paliwo-stale.png"/> kocioł&nbsp;na paliwo&nbsp;stałe
+        				</div>
+
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona rekuperator" class=" rectangle-symbol-projection-icon-projection " src="https://assets.archon.pl/img/icons/ikona-rekuperator.png"/> rekuperator
+        				</div>
+
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona kocioł gazowy" class=" rectangle-symbol-projection-icon-projection" src="https://assets.archon.pl/img/icons/ikona-kociol-gazowy.png"/> kocioł gazowy
+        				</div>
+						
+						<div class="product-projection-symbol-description-item-projection">
+            				<img alt="Ikona pompa ciepła wewnętrzna" class=" square-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-pompa-ciepla-wew.png"/> pompa&nbsp;ciepła wewnętrzna
+        				</div>
+
+        				<div class="product-projection-symbol-description-item-projection">
+          					<img alt="Ikona pompa ciepła zewnętrzna" class=" rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-pompa-ciepla-zew.png"/> pompa&nbsp;ciepła zewnętrzna
+        				</div>
+
+        		
+       					<div class="product-projection-symbol-description-item-projection-full-width">
+            				<img alt="Ikona oznaczenie wymiarów stolarki" class=" wide-rectangle-symbol-projection-icon-projection "  src="https://assets.archon.pl/img/icons/ikona-okno-ver2.png"/>  oznaczenie wymiarów stolarki
+        				</div>
+					</div>
+        		</div>
+    		</div>
+			<table class="table table-striped table-hover small">
+						<thead>
+							<tr>
+								<th>PODDASZE</th>
+								<th title="powierzchnia użytkowa">62,44</th>
+								<th title="powierzchnia podłogi"> (73,14) </th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>1. Korytarz</td>
+							<td title="powierzchnia użytkowa">6,17</td>
+							<td title="powierzchnia podłogi"></td>
+						</tr>
+						<tr>
+							<td>2. Pokój</td>
+							<td title="powierzchnia użytkowa">10,25</td>
+							<td title="powierzchnia podłogi"> (11,88) </td>
+						</tr>
+						<tr>
+							<td>3. Garderoba</td>
+							<td title="powierzchnia użytkowa">5,19</td>
+							<td title="powierzchnia podłogi"> (6,53) </td>
+						</tr>
+						<tr>
+							<td>4. Łazienka</td>
+							<td title="powierzchnia użytkowa">6,40</td>
+							<td title="powierzchnia podłogi"> (7,81) </td>
+						</tr>
+						<tr>
+							<td>5. Pralnia</td>
+							<td title="powierzchnia użytkowa">5,59</td>
+							<td title="powierzchnia podłogi"> (6,73) </td>
+						</tr>
+						<tr>
+							<td>6. Pokój</td>
+							<td title="powierzchnia użytkowa">12,57</td>
+							<td title="powierzchnia podłogi"> (15,13) </td>
+						</tr>
+						<tr>
+							<td>7. Pokój</td>
+							<td title="powierzchnia użytkowa">9,02</td>
+							<td title="powierzchnia podłogi"> (10,88) </td>
+						</tr>
+						<tr>
+							<td>8. Garderoba</td>
+							<td title="powierzchnia użytkowa">1,62</td>
+							<td title="powierzchnia podłogi"> (2,38) </td>
+						</tr>
+						<tr>
+							<td>9. Schody</td>
+							<td title="powierzchnia użytkowa">5,63</td>
+							<td title="powierzchnia podłogi"></td>
+						</tr>
+				</tbody>
+			</table>
+
+				<div class="floors-checkbox-wrapper js-toggle-floors-views-wrapper js-toggle-floors-views-wrapper--generated">
+					<span class="js-toggle-floors-views js-generated-floors-switches checkbox-imitation"></span>
+					<span>Pokaż powierzchnie pomieszczeń</span>
+				</div>
+				<script type="text/javascript">setStateOfGeneratedFloors();assignSwitchFloorsEventToGeneratedSwitches()</script>
+
+
+				<a class="btn btn-default w-100 margin-bottom-5 margin-top-10 hidden-xs hidden-sm inline-block" href="/rzut/m2fa281446a8ca/3" rel="nofollow" style="border-color: #e20000; color: #e20000;" target="_blank"><img alt="2022 10 20 rzut interaktywny ikona red" src="https://assets.archon.pl/img/banners/2022/10/2022-10-20-rzut-interaktywny-ikona-red.svg" style="width: 16px; vertical-align: middle;" />&nbsp;<span style='vertical-align: text-top;'>Zobacz rzut szczegółowy</span></a>
+
+		</div>
+					 
+			<script>
+				if(typeof(Panzoom) === 'undefined'){
+					$.cachedScript( window.download_map.js["panzoom"] )
+				}
+				else {
+					triggerEvent(document.querySelector("body"), "panzoom:reload");
+				}							
+			</script>
+	</div>
+</div>
+

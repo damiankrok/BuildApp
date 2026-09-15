@@ -1,0 +1,30 @@
+candidate    candidate-marcowki-93b4a2109990d354
+model        290a173abec8cbe4 (replayed byte-identically)
+reference    marcowki-ge
+
+SHELL
+  footprint width       12.050 vs    12.050 m (+0.000 m, 0.0%)  [HARD]
+  footprint depth       14.905 vs    14.600 m (+0.305 m, 2.1%)  [SOFT]
+  ridge height           7.950 vs     7.950 m (-0.000 m, -0.0%)
+  storey count           2.000 vs     2.000 count (+0.000 count, 0.0%)
+
+TOPOLOGY
+  levels   2 vs 2
+  walls    8 vs 35
+  roofs    1 vs 2
+
+OPENINGS
+  3 of 23 reference openings matched; 5 built that the reference has nothing for
+  position 1.470 m rms, size 1.162 m rms
+
+FACADE LINEAR SOLIDS
+  the reference carries no linear solids, so the candidate's 45 cannot be scored against it — they are judged against the source observations and the owner's findings instead
+
+HONESTY
+  83 named holes, 3 of them MISSING or REFUSED outright
+  1 of 2 quantities settled as HARD are within a centimetre of the reference
+  1 quantities fell back on a building convention
+
+SCORES, reported separately and never combined
+  geometric accuracy               56.3%  — of what it built, how close it is
+  evidence-supported completeness  54.3%  — of the building, how much it built at all
