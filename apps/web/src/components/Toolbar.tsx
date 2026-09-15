@@ -26,7 +26,9 @@ const VIEWS: Array<{ id: ViewPreset; label: string }> = [
   { id: 'top', label: 'Top' },
 ]
 
-export function Toolbar(): JSX.Element {
+export type RightPanel = 'inspector' | 'sources'
+
+export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: RightPanel) => void }): JSX.Element {
   const store = useStore()
   const snap = useSnapshot()
   const fileRef = useRef<HTMLInputElement>(null)
@@ -56,6 +58,15 @@ export function Toolbar(): JSX.Element {
     <div className="toolbar" data-testid="toolbar">
       <div className="brand">
         BuildWorld <span>· BuildApp</span>
+      </div>
+      <div className="group">
+        <label>panel</label>
+        <button data-testid="panel-inspector" className={panel === 'inspector' ? 'active' : ''} onClick={() => onPanel('inspector')} title="Inspect the selected object in the building model">
+          Model
+        </button>
+        <button data-testid="panel-sources" className={panel === 'sources' ? 'active' : ''} onClick={() => onPanel('sources')} title="What was observed in the published sources — read-only evidence, never edits">
+          Sources
+        </button>
       </div>
       <div className="group">
         <label>view</label>

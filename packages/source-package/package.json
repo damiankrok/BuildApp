@@ -1,0 +1,11 @@
+{
+  "name": "@buildapp/source-package",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic acquisition of a project's public sources into one sealed, content-addressed SourcePackage. Safe fetching, adapter discovery, decoding from bytes, variant selection and multi-dimensional role classification. No geometry, no building model.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@buildapp/source-common": "*", "zod": "^3.25.76", "jpeg-js": "0.4.4", "pngjs": "7.0.0", "omggif": "1.0.10" }
+}

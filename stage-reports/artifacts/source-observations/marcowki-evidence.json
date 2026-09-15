@@ -1,0 +1,111 @@
+{
+  "evidence": {
+    "facadeMembers": {
+      "front": 4,
+      "rear": 4,
+      "side": 72,
+      "render": 58,
+      "total": 138,
+      "volumetric": 138,
+      "flat": 67
+    },
+    "sideReturns": 0,
+    "recesses": 18,
+    "openings": 145,
+    "roofAnglesDeg": [
+      2.307494,
+      140.083825,
+      139.962197,
+      39.937513,
+      10.732065,
+      14.770347,
+      169.471065,
+      11.563431,
+      134.977033,
+      167.806791,
+      167.661159,
+      168.240611,
+      134.838092,
+      44.858702,
+      16.422287,
+      13.474686,
+      11.571263,
+      135.074064,
+      44.966557,
+      10.5961,
+      169.386308,
+      168.49908,
+      11.578006,
+      44.80947,
+      12.749227,
+      15.436468,
+      165.718913,
+      10.248437,
+      17.307646,
+      45.029515,
+      10.338184,
+      167.717605,
+      135.231344,
+      45.248189,
+      15.312086,
+      11.462371
+    ],
+    "levelDatums": 6,
+    "stair": {
+      "symbols": 0,
+      "treadFamilies": 0,
+      "treadCounts": [],
+      "winders": 0,
+      "directionMarks": 0,
+      "sectionChains": 1,
+      "candidatesConsidered": 5
+    },
+    "namedGaps": {
+      "missing": 41,
+      "ambiguous": 4,
+      "notAttempted": 36
+    }
+  },
+  "findings": [
+    {
+      "id": "FACADE_FRAME_SOLIDS",
+      "owner": "the characteristic front/rear facade carries thick real 3D frame/beam-like solids that the model under-models",
+      "sources": "138 linear members carry a depth cue (front 4, rear 4, side 72, renders 58); 67 further bands carry none and are recorded as surface regions",
+      "model": "the reference model carries the same facade zones as SURFACE_REGIONs — finish assignments on a flat wall — and no solid linear member anywhere on the front or rear",
+      "verdict": "SOURCE_SUPPORTS_MORE",
+      "note": "this is the owner’s finding, recovered from the images rather than asserted: each member names the cue that promoted it, and the bands that carry only a change of tone are kept apart from those that do not"
+    },
+    {
+      "id": "FRAME_CONTINUITY",
+      "owner": "the major facade frame appears to continue from the garage zone toward/under the balcony and along facade edges",
+      "sources": "the front elevation’s longest member spans most of the facade width and CONTINUES_ACROSS relations link horizontal members to the vertical ones they meet",
+      "model": "the reference model has no element that runs across the garage/house junction: the zones are separate finish regions on separate walls",
+      "verdict": "SOURCE_SUPPORTS_MORE",
+      "note": "a CONTINUES_ACROSS relation is what lets a later solver recover ONE member turning a corner instead of two unrelated lumps"
+    },
+    {
+      "id": "BALCONY_SIDE_RETURNS",
+      "owner": "balcony/loggia side walls/returns are incomplete",
+      "sources": "18 recess mouths found; 0 side returns found closing them; every side with no return found is recorded as a named gap",
+      "model": "the reference model’s loggia is a recess in the wall with no modelled return walls",
+      "verdict": "SOURCE_SILENT",
+      "note": "a recess with no side returns is a hole in a wall rather than a room, which is exactly what the preview showed"
+    },
+    {
+      "id": "STAIR_TOPOLOGY",
+      "owner": "the staircase topology/orientation does not match the published plan closely enough",
+      "sources": "NO tread run on any published plan could be held to be a staircase: 5 regular run(s) of strokes were considered and each was rejected with its reason. The section yields 1 stepped chain(s)",
+      "model": "the reference model asserts a 4-riser flight, 4 winders and a 9-riser flight (17 risers at 0.18 m)",
+      "verdict": "SOURCE_SILENT",
+      "note": "the published plans are 853 px for a 12 m house, so a 0.27 m going is about 9 px and a fill pattern is 4 px. At that separation a hatch and a flight are not distinguishable, and a stair invented from a planting symbol cannot be undone downstream. The model’s stair is therefore an assertion the current sources do not corroborate — which is the finding, not a defect in it"
+    },
+    {
+      "id": "ROOF_PITCH",
+      "owner": "not raised; checked because it is the one angle the model claims to have measured",
+      "sources": "36 roof edges measured in image space, closest to the model within 0.04 degrees",
+      "model": "the reference model uses a 40 degree pitch from the section’s printed annotation",
+      "verdict": "AGREED",
+      "note": "an image-space angle is a true pitch only on a drawing with the same scale in both axes; this corroborates rather than measures"
+    }
+  ]
+}

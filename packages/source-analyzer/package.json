@@ -1,0 +1,17 @@
+{
+  "name": "@buildapp/source-analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reads a sealed SourcePackage and produces a SourceObservationGraph: deterministic CV extractors for elevations, plans, sections and renders, plus optional vision passes. Publisher-agnostic and project-agnostic; emits observations only, never geometry or DSL.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@buildapp/source-common": "*",
+    "@buildapp/source-cv": "*",
+    "@buildapp/source-observations": "*",
+    "@buildapp/source-package": "*",
+    "@buildapp/source-vision": "*"
+  }
+}

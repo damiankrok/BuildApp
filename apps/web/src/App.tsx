@@ -1,13 +1,15 @@
 import type { JSX } from 'react'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { EditorStore } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
 import { StoreContext } from './use-store.js'
 import { Toolbar } from './components/Toolbar.js'
+import type { RightPanel } from './components/Toolbar.js'
 import { Outliner } from './components/Outliner.js'
 import { Viewport } from './components/Viewport.js'
 import { Inspector } from './components/Inspector.js'
 import { StatusBar } from './components/StatusBar.js'
+import { Sources } from './components/Sources.js'
 
 /**
  * BuildWorld. The store is created once with the demo building — which is a
@@ -16,6 +18,10 @@ import { StatusBar } from './components/StatusBar.js'
  */
 export function App(): JSX.Element {
   const store = useMemo(() => new EditorStore(createDemoBuilding()), [])
+  // The right-hand column shows either the model or the sources it came from.
+  // The two are deliberately separate surfaces: the model can be edited and
+  // the observations cannot.
+  const [panel, setPanel] = useState<RightPanel>('inspector')
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent): void => {
@@ -38,10 +44,10 @@ export function App(): JSX.Element {
   return (
     <StoreContext.Provider value={store}>
       <div className="app">
-        <Toolbar />
+        <Toolbar panel={panel} onPanel={setPanel} />
         <Outliner />
         <Viewport />
-        <Inspector />
+        {panel === 'inspector' ? <Inspector /> : <Sources />}
         <StatusBar />
       </div>
     </StoreContext.Provider>

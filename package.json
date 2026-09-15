@@ -2,7 +2,7 @@
   "name": "buildapp",
   "version": "0.1.0",
   "private": true,
-  "description": "BuildApp — BuildWorld semantic building editor, Building DSL and geometry compiler",
+  "description": "BuildApp \u2014 BuildWorld semantic building editor, Building DSL and geometry compiler",
   "type": "module",
   "workspaces": [
     "tests/architecture",
@@ -22,15 +22,26 @@
     "audit:marcowki:facades": "vite-node packages/reference-marcowki/scripts/audit-facades.ts",
     "mobile:export-scenes": "vite-node packages/mobile-scene/scripts/export-scenes.ts",
     "android:test": "npm run test --workspace apps/android",
-    "android:assembleDebug": "npm run assembleDebug --workspace apps/android"
+    "android:assembleDebug": "npm run assembleDebug --workspace apps/android",
+    "source:acquire": "vite-node packages/source-package/scripts/acquire.ts --",
+    "observations:extract": "vite-node packages/source-analyzer/scripts/extract.ts --",
+    "observations:audit": "vite-node packages/source-analyzer/scripts/audit.ts --",
+    "observations:marcowki": "vite-node packages/source-analyzer/scripts/marcowki.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",
     "@types/node": "^22.19.0",
+    "@types/pngjs": "6.0.5",
     "typescript": "~5.9.3",
     "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.125.0",
+    "jpeg-js": "0.4.4",
+    "omggif": "1.0.10",
+    "pngjs": "7.0.0"
   }
 }

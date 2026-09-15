@@ -7,7 +7,7 @@
  * These tests read the Android sources and the Gradle configuration and fail
  * by name when that starts to happen.
  */
-import { execFileSync } from 'node:child_process'
+
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -303,7 +303,7 @@ describe('the mobile scene export stays on the production path', () => {
   })
 })
 
-describe('the web BuildWorld is untouched by this stage', () => {
+describe('the web BuildWorld stays clear of the mobile layer', () => {
   it('does not depend on the mobile bundle or on anything Android', () => {
     for (const file of filesUnder(resolve(ROOT, 'apps/web/src'), /\.(ts|tsx)$/)) {
       const code = readFileSync(file, 'utf8')
@@ -325,9 +325,12 @@ describe('the web BuildWorld is untouched by this stage', () => {
     expect(adapter).toMatch(/meshToObject/)
   })
 
-  it('has no uncommitted change under apps/web from this stage', () => {
-    // A mobile stage that edits the web app has gone outside its brief.
-    const changed = execFileSync('git', ['status', '--porcelain', '--', 'apps/web'], { cwd: ROOT, encoding: 'utf8' }).trim()
-    expect(changed, `apps/web has uncommitted changes:\n${changed}`).toBe('')
-  })
+  // A working-tree check ("apps/web has no uncommitted change") lived here
+  // during the mobile stage, when editing the web app WOULD have been outside
+  // the brief. It was a stage-local guard wearing an architecture test's
+  // clothes: it fails for any later stage that is asked to change BuildWorld,
+  // which BUILDAPP-02 was. What it was really protecting — that the web viewer
+  // does not acquire a second geometry path — is the rule above, and the rules
+  // in `analyzer.test.ts` that keep the browser from scraping or extracting
+  // anything of its own.
 })

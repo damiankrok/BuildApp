@@ -1,0 +1,1765 @@
+{
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.0.0",
+  "id": "src-m2fa281446a8ca-c0499d9df3",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "pageHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063",
+  "project": {
+    "externalId": "m2fa281446a8ca",
+    "name": "Projekt domu Dom w marcówkach (GE) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja boczna ",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna \")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna \")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e181-1ba0852c8a",
+          "url": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e1813919bc611b95__11265.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 402646,
+          "byteHash": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd",
+          "decoded": {
+            "width": 1280,
+            "height": 597
+          },
+          "declaredMismatch": false,
+          "aspect": 2.144054
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-marcowkach-ge-b723-d1be123705",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-b72318402d5f7c263303f0bf13597c8b__265.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 92015,
+          "byteHash": "149d9116dff22b309fad7f8820a15b9760456f3ac872b7b283192293d776764e",
+          "decoded": {
+            "width": 550,
+            "height": 256
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.148438
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e181-1ba0852c8a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x597 over 550x256"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja boczna",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w marcowkach (ge) elewacja boczna\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295-55f90b216c",
+          "url": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295fabdb1b26fb7__11266.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 386559,
+          "byteHash": "0015dfde66b5657c771e703e2cfdb3e068f6e30ff2f8e1435ce950e98a3b11c6",
+          "decoded": {
+            "width": 1280,
+            "height": 598
+          },
+          "declaredMismatch": false,
+          "aspect": 2.140468
+        },
+        {
+          "id": "var-elewacja-boczna-projekt-dom-w-marcowkach-ge-2413-e5c521cafb",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-24130d2bfa16ddf40cd1a16f8e154ce2__266.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 88728,
+          "byteHash": "a5cc1beb64b8558475390a9c1b20a2a8feb451d458736f0705fd6485b6a8c972",
+          "decoded": {
+            "width": 550,
+            "height": 255
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.156863
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295-55f90b216c",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x598 over 550x255"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja frontowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja frontowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w marcowkach (ge) elewacja frontowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w marcowkach (ge) elewacja frontowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+          "url": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcca0fbf7e8362c__11264.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 501412,
+          "byteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+          "decoded": {
+            "width": 1280,
+            "height": 597
+          },
+          "declaredMismatch": false,
+          "aspect": 2.144054
+        },
+        {
+          "id": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-frontowa-projekt-dom-w-marcowkach-ge-b165fc1dadc0b7ef46c3d1d74725aea3__264.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 116496,
+          "byteHash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+          "decoded": {
+            "width": 550,
+            "height": 256
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.148438
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x597 over 550x256"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja ogrodowa",
+      "roles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w marcowkach (ge) elewacja ogrodowa\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "view",
+          "signal": "url-slug",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w marcowkach (ge) elewacja ogrodowa\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "view",
+          "signal": "caption",
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w marcowkach (ge) elewacja ogrodowa\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+          "url": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcfc89f76bc4795__11267.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 493637,
+          "byteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+          "decoded": {
+            "width": 1280,
+            "height": 598
+          },
+          "declaredMismatch": false,
+          "aspect": 2.140468
+        },
+        {
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b-48cdba522f",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b95a143134b5e1afdf79034a2391bd8__267.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 117020,
+          "byteHash": "f156ae82210a277f04aeaec210724204b78a4153da9393820ab3b6980debb13b",
+          "decoded": {
+            "width": 550,
+            "height": 255
+          },
+          "declared": {
+            "width": 550,
+            "height": 213
+          },
+          "declaredMismatch": true,
+          "aspect": 2.156863
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x598 over 550x255"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+      "caption": "gotowy projekt Dom w marcówkach (GE) przekroj budynku",
+      "roles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w marcowkach (ge) przekroj budynku \")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w marcowkach (ge) przekroj budynku\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w marcowkach (ge) przekroj budynku\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-marcowkach-ge-2bd-4cca8b2cb0",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/przekroj-budynku-projekt-dom-w-marcowkach-ge-2bdfa17711fbe9d7bc173014765d5d51__11256.jpg",
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m2fa281446a8ca/przekroj-budynku-projekt-dom-w-marcowkach-ge-2bdfa17711fbe9d7bc173014765d5d51__256.jpg",
+          "mediaType": "image/jpeg",
+          "byteLength": 77410,
+          "byteHash": "2201a9c1186d2f0cd4e10a747ce39f1b36d08d48781fca980bcdf22b2d27e188",
+          "decoded": {
+            "width": 1138,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 1.332553
+        },
+        {
+          "id": "var-przekroj-budynku-projekt-dom-w-marcowkach-ge-2bd-91ec967ede",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/przekroj-budynku-projekt-dom-w-marcowkach-ge-2bdfa17711fbe9d7bc173014765d5d51__256.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 20510,
+          "byteHash": "d05811554a2132cec06d95185cb9ccae73c3563da88472609c5651bdfc6a1718",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-marcowkach-ge-2bd-4cca8b2cb0",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+      "caption": "gotowy projekt Dom w marcówkach (GE) rzut parteru",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1f-5ea0f22644",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1fa8972faf58ffa0f452fae9b54__706.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 45273,
+          "byteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1f-5ea0f22644",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+      "caption": "gotowy projekt Dom w marcówkach (GE) rzut poddasza",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500-c5ef071db2",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500b75f6134ddd0a0920d81a46242__707.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/carousel_images",
+          "mediaType": "image/gif",
+          "byteLength": 34483,
+          "byteHash": "daf775db8978912c9131602a710ab1d43881860b189d371d9fd12d7e4b0b116b",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "declared": {
+            "width": 87,
+            "height": 87
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500-c5ef071db2",
+      "selectionReason": "only variant (550x550, decoded from bytes)"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+      "caption": "gotowy projekt Dom w marcówkach (GE) sytuacja",
+      "roles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w marcowkach (ge) sytuacja\")",
+          "confidence": 0.77
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w marcowkach (ge) sytuacja\")",
+          "confidence": 0.77
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19-36b1c4c574",
+          "url": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19792a93b91ddb__11255.jpg",
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 212208,
+          "byteHash": "331087c2c5f258eb55fd99bc462feda6649e8a7e80e843839ca9c58c8bdb0bf2",
+          "decoded": {
+            "width": 734,
+            "height": 854
+          },
+          "declaredMismatch": false,
+          "aspect": 0.859485
+        },
+        {
+          "id": "var-sytuacja-projekt-dom-w-marcowkach-ge-88bea7ab3c6-fdae517167",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/sytuacja-projekt-dom-w-marcowkach-ge-88bea7ab3c6f0e8c5710051590dc2f56__255.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 46379,
+          "byteHash": "8c77e06e421fdf324b63d715f3064e0e2e8a9dd7e309a1de8c5ac8943839e523",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "declared": {
+            "width": 344,
+            "height": 400
+          },
+          "declaredMismatch": false,
+          "aspect": 0.86
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19-36b1c4c574",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400"
+    },
+    {
+      "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+      "caption": "gotowy projekt Dom w marcówkach (GE) widok 1",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w marcowkach (ge) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6482164d8bac42da94f77__259.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 8260,
+          "byteHash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "declared": {
+            "width": 200,
+            "height": 150
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+      "selectionReason": "only variant (200x150, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "caption": "projekt Dom w marcówkach (GE)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-461582-b217ba38f9",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-461582e4d5f90e078fd80632a0152d26__270.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 22684,
+          "byteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-461582-b217ba38f9",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-marcowkach-ge-0b42f7006f",
+      "caption": "projekt Dom w marcówkach (GE)",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b-7c3bc1e564",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b5ec9a7a2e0cc__252.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 25880,
+          "byteHash": "71241f80e71a4ffb60e78de78d81879bc860c56c9673e28a8843bfb120980f68",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b-7c3bc1e564",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+      "caption": "projekt Dom w marcówkach (GE)",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-marcowkach-ge-34000bff0452-112d24fbd4",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-34000bff0452e3ba78188291cb3c9910__260.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/related?scope=family",
+          "mediaType": "image/jpeg",
+          "byteLength": 31395,
+          "byteHash": "34a03ffdddd56f4d963eb91cb64ed0136c4361ccd576585b729d4029f682907e",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-marcowkach-ge-34000bff0452-112d24fbd4",
+      "selectionReason": "only variant (400x300, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+      "caption": "Projekt dom w marcowkach ge 8533a257062bd0260f2a1bc81908b0ca  49832",
+      "roles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      },
+      "roleEvidence": [],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-4f29f2e570",
+          "url": "https://cdn1.archon.pl/images/products/m2fa281446a8ca/i/projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a1bc81908b0ca__49832.jpg",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m2fa281446a8ca/image/49832?showHotspots=false",
+          "mediaType": "image/jpeg",
+          "byteLength": 501607,
+          "byteHash": "685a5d68132e3c53f28763ac61edb4a2ea285cb629b8153bdb4c40182977d5a1",
+          "decoded": {
+            "width": 1600,
+            "height": 900
+          },
+          "declaredMismatch": false,
+          "aspect": 1.777778
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-4f29f2e570",
+      "selectionReason": "only variant (1600x900, decoded from bytes)"
+    },
+    {
+      "id": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+      "caption": "projekt Dom w marcówkach (GE)",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee77-6f4ef06fee",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee778cc80d1b703c1ffc3f9eae0b7__269.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m2fa281446a8ca/related?scope=family",
+          "mediaType": "image/gif",
+          "byteLength": 28941,
+          "byteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "declared": {
+            "width": 400,
+            "height": 300
+          },
+          "declaredMismatch": true,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee77-6f4ef06fee",
+      "selectionReason": "only variant (400x400, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-117027f690",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-9d1547b712997f93462f-1294d96fef",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-9d1547b712997f93462fc19e9eefb963__11817.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/gif",
+          "byteLength": 71733,
+          "byteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-9d1547b712997f93462f-1294d96fef",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-19a11bc745",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "confidence": 0.6
+        },
+        {
+          "dimension": "annotation",
+          "signal": "endpoint",
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "confidence": 0.55
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-projekt-dom-w-marcowkach-ge-7af59bb86c46a8a68634-69c3a68cc9",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-7af59bb86c46a8a68634e3630da6cd81__11815.gif",
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/gif",
+          "byteLength": 92426,
+          "byteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-projekt-dom-w-marcowkach-ge-7af59bb86c46a8a68634-69c3a68cc9",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-aa1526220f",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/1",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w marcowkach (ge) rzut parteru\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-marc-0e6a5585e6",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge-7056fa04af38f4015f8f19d40910c89c__11915.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/gif",
+          "byteLength": 94087,
+          "byteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-marc-0e6a5585e6",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-rzut-f028d28aba",
+      "caption": "rzut",
+      "roles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "url-slug",
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.9
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "annotation",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "document",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "channel",
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "confidence": 0.8
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "confidence": 0.78
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "url-slug",
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.92
+        },
+        {
+          "dimension": "storey",
+          "signal": "endpoint",
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m2fa281446a8ca/3",
+          "confidence": 0.86
+        },
+        {
+          "dimension": "storey",
+          "signal": "caption",
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w marcowkach (ge) rzut poddasza\")",
+          "confidence": 0.78
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-mar-15a7de14c0",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge-117abb705763e8815846decc6fef54fd__11917.gif",
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/gif",
+          "byteLength": 71843,
+          "byteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f",
+          "decoded": {
+            "width": 853,
+            "height": 853
+          },
+          "declaredMismatch": false,
+          "aspect": 1
+        }
+      ],
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-mar-15a7de14c0",
+      "selectionReason": "only variant (853x853, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w marcowkach (ge) widok 1\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-6965a4a29ffff6828c320d5f7b3bb7c6__289.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 301066,
+          "byteHash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+      "roles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      },
+      "roleEvidence": [
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "url-slug",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-marcowkach-ge\")",
+          "confidence": 0.88
+        },
+        {
+          "dimension": "document",
+          "signal": "caption",
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w marcowkach (ge) widok 2\")",
+          "confidence": 0.75
+        }
+      ],
+      "variants": [
+        {
+          "id": "var-widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6e-83ea61861e",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6ed48a60468842a964ad20__290.jpg",
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+          "mediaType": "image/jpeg",
+          "byteLength": 351077,
+          "byteHash": "5b9c39379f85723eef64d045cfc995ffec5c35c3c1ab6b4e6d2b696b66f228f1",
+          "decoded": {
+            "width": 800,
+            "height": 600
+          },
+          "declaredMismatch": false,
+          "aspect": 1.333333
+        }
+      ],
+      "selectedVariantId": "var-widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6e-83ea61861e",
+      "selectionReason": "only variant (800x600, decoded from bytes)"
+    }
+  ],
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "value": 5.8,
+      "unit": "m2",
+      "raw": "5,8 m&sup2;"
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "value": 8.27,
+      "unit": "m",
+      "raw": "8,27 m"
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "value": 170.62,
+      "unit": "m2",
+      "raw": "170,62 m&sup2;"
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "value": 131.16,
+      "unit": "m2",
+      "raw": "131,16 m&sup2;"
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "value": 24.1,
+      "unit": "m2",
+      "raw": "24,1 m&sup2;"
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "value": 129.04,
+      "unit": "m2",
+      "raw": "129,04 m&sup2;"
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "value": 150.57,
+      "unit": "m2",
+      "raw": "150,57 m&sup2;"
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "value": 231.11,
+      "unit": "m2",
+      "raw": "231,11 m&sup2;"
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "value": 153.31,
+      "unit": "m2",
+      "raw": "153,31 m&sup2;"
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "value": 779.94,
+      "unit": "none",
+      "raw": "779,94 m&sup3;"
+    }
+  ],
+  "publishedRooms": [
+    {
+      "storey": "ATTIC",
+      "index": 1,
+      "label": "Korytarz",
+      "area": 6.17,
+      "raw": "1. Korytarz | 6,17 | "
+    },
+    {
+      "storey": "ATTIC",
+      "index": 2,
+      "label": "Pokój",
+      "area": 10.25,
+      "raw": "2. Pokój | 10,25 | (11,88)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 3,
+      "label": "Garderoba",
+      "area": 5.19,
+      "raw": "3. Garderoba | 5,19 | (6,53)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 4,
+      "label": "Łazienka",
+      "area": 6.4,
+      "raw": "4. Łazienka | 6,40 | (7,81)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 5,
+      "label": "Pralnia",
+      "area": 5.59,
+      "raw": "5. Pralnia | 5,59 | (6,73)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 6,
+      "label": "Pokój",
+      "area": 12.57,
+      "raw": "6. Pokój | 12,57 | (15,13)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 7,
+      "label": "Pokój",
+      "area": 9.02,
+      "raw": "7. Pokój | 9,02 | (10,88)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 8,
+      "label": "Garderoba",
+      "area": 1.62,
+      "raw": "8. Garderoba | 1,62 | (2,38)"
+    },
+    {
+      "storey": "ATTIC",
+      "index": 9,
+      "label": "Schody",
+      "area": 5.63,
+      "raw": "9. Schody | 5,63 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 1,
+      "label": "Wiatrołap",
+      "area": 3.7,
+      "raw": "1. Wiatrołap | 3,70 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 2,
+      "label": "Hol",
+      "area": 9.18,
+      "raw": "2. Hol | 9,18 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 3,
+      "label": "Kuchnia",
+      "area": 9.63,
+      "raw": "3. Kuchnia | 9,63 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 4,
+      "label": "Salon + Jadalnia",
+      "area": 29.52,
+      "raw": "4. Salon + Jadalnia | 29,52 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 5,
+      "label": "Spiżarnia",
+      "area": 1.44,
+      "raw": "5. Spiżarnia | 1,44 | (2,42)"
+    },
+    {
+      "storey": "GROUND",
+      "index": 6,
+      "label": "Łazienka",
+      "area": 3.95,
+      "raw": "6. Łazienka | 3,95 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 7,
+      "label": "Pokój",
+      "area": 9.18,
+      "raw": "7. Pokój | 9,18 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 8,
+      "label": "Kotłownia",
+      "area": 5.8,
+      "raw": "8. Kotłownia | 5,80 | "
+    },
+    {
+      "storey": "GROUND",
+      "index": 9,
+      "label": "Garaż",
+      "area": 24.1,
+      "raw": "9. Garaż | 24,10 | "
+    }
+  ],
+  "failures": [
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b5ec9a7a2e0cc__11252.jpg",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1fa8972faf58ffa0f452fae9b54__11706.gif",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee778cc80d1b703c1ffc3f9eae0b7__11269.gif",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500b75f6134ddd0a0920d81a46242__11707.gif",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-461582e4d5f90e078fd80632a0152d26__11270.gif",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6482164d8bac42da94f77__11259.jpg",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-6965a4a29ffff6828c320d5f7b3bb7c6__11289.jpg",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-34000bff0452e3ba78188291cb3c9910__11260.jpg",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ASSET_FETCH",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6ed48a60468842a964ad20__11290.jpg",
+      "code": "OFFLINE_CACHE_MISS",
+      "message": "offline acquisition and this address is not in the cache"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-24130d2bfa16ddf40cd1a16f8e154ce2__11266.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295fabdb1b26fb7__11266.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-b72318402d5f7c263303f0bf13597c8b__11265.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e1813919bc611b95__11265.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-frontowa-projekt-dom-w-marcowkach-ge-b165fc1dadc0b7ef46c3d1d74725aea3__11264.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcca0fbf7e8362c__11264.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b95a143134b5e1afdf79034a2391bd8__11267.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcfc89f76bc4795__11267.jpg: one copy published at two addresses, counted once"
+    },
+    {
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m2fa281446a8ca/sytuacja-projekt-dom-w-marcowkach-ge-88bea7ab3c6f0e8c5710051590dc2f56__11255.jpg",
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19792a93b91ddb__11255.jpg: one copy published at two addresses, counted once"
+    }
+  ],
+  "contentHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86"
+}
