@@ -818,8 +818,23 @@ function dedupeOrientations(tokens: readonly TextToken[]): TextToken[] {
     if (w <= 0 || h <= 0) return 0
     return (w * h) / Math.max(1, area(inner))
   }
+  // A SHEET turns its vertical text one way, not both.
+  //
+  // Deciding each clash on its own merits is not enough: a mirrored `1260`
+  // sometimes matches better than the real one, and a page then comes back
+  // with most of its vertical dimensions read correctly and one of them
+  // reversed — which is far worse than either all right or all wrong, because
+  // nothing downstream can tell which is which. Summing the evidence across
+  // the whole page and letting the winning turn take every clash is both more
+  // accurate and more predictable.
+  const totalFor = (orientation: TextOrientation): number => tokens.filter((t) => t.orientation === orientation).reduce((a, t) => a + merit(t), 0)
+  const cw = totalFor('ROTATED_CW')
+  const ccw = totalFor('ROTATED_CCW')
+  const losing: TextOrientation | undefined = cw > ccw * 1.1 ? 'ROTATED_CCW' : ccw > cw * 1.1 ? 'ROTATED_CW' : undefined
+
   const kept: TextToken[] = []
   for (const token of [...tokens].sort((a, b) => merit(b) - merit(a) || a.box.x0 - b.box.x0 || a.box.y0 - b.box.y0)) {
+    if (token.orientation === losing) continue
     // Overlap alone is not enough to spot the duplicates. The wrong-way pass
     // rarely returns one mirrored token covering the same box: it returns a
     // handful of short fragments scattered ACROSS it, each too small for their
