@@ -28,6 +28,20 @@ The Android preview is a **viewer** over derived data: it renders the
 compiler's own output and contains no geometry kernel of its own
 (`docs/ANDROID_MODEL_PREVIEW.md`).
 
+Upstream of the model there is now a **source analyzer**, which reads a
+project's published drawings and records what was seen in them:
+
+```text
+URL → SourcePackage → SourceObservationGraph → hypotheses → solver → Building DSL
+      └─────────── observation only, no geometry ────────┘   └─ future stage ─┘
+```
+
+An observation is a 2D reading on one image, with a confidence, a tolerance, an
+extractor and a sentence of evidence. Nothing in the analyzer produces a mesh, a
+metre or a DSL command, and a vision model can only answer in that vocabulary —
+`docs/SOURCE_PACKAGE.md`, `docs/SOURCE_OBSERVATION_GRAPH.md`,
+`docs/VISION_REASONER.md`.
+
 ## Layout
 
 | Path | Role | May import |
@@ -42,8 +56,14 @@ compiler's own output and contains no geometry kernel of its own
 | `apps/web` | BuildWorld UI (React, Three.js) | editor, model types, geometry types, the demo and reference factories (toolbar only) |
 | `packages/mobile-scene` | `CompiledScene` → deterministic `MobileSceneBundle` JSON asset for the native mobile viewer (derived data only) | model, geometry |
 | `apps/android` | `BuildPlan Model Preview`: native Android viewer (Kotlin, Compose, Filament) over the exported bundles | nothing in this table — it reads the asset |
+| `packages/source-common` | canonical JSON, pure SHA-256, deterministic ids, normalized 2D geometry | zod |
+| `packages/source-cv` | deterministic computer vision over decoded rasters; knows nothing about buildings | source-common |
+| `packages/source-package` | the one acquisition path: safe fetching, adapters, decoding from bytes, variants, roles, sealing (`docs/SOURCE_PACKAGE.md`) | source-common, image decoders |
+| `packages/source-observations` | the SourceObservationGraph: what was SEEN, in source-native 2D (`docs/SOURCE_OBSERVATION_GRAPH.md`) | source-common, zod |
+| `packages/source-vision` | provider-neutral `VisionReasoner` and schema-constrained visual tasks (`docs/VISION_REASONER.md`) | source-observations |
+| `packages/source-analyzer` | extractors, depth reasoning, stair reading, cross-view relations, debug overlays | every source-* package |
 | `tests/architecture` | boundary tests that enforce the table above | everything |
-| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md`, `ANDROID_MODEL_PREVIEW.md` | |
+| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md`, `ANDROID_MODEL_PREVIEW.md`, `SOURCE_PACKAGE.md`, `SOURCE_OBSERVATION_GRAPH.md`, `VISION_REASONER.md` | |
 | `stage-reports/` | per-stage measured results and browser screenshots | |
 
 ## Commands
@@ -60,6 +80,21 @@ npm run dev              # BuildWorld dev server, http://localhost:5173
 npm run preview          # serve the production build, http://localhost:4173
 npm run verify           # typecheck + test + build + e2e
 ```
+
+### Source analyzer
+
+```
+npm run source:acquire        -- <url> --out pkg.json --cache .cache      # seal a project's public sources
+npm run source:acquire        -- <url> --cache .cache --offline           # replay the same package with no network
+npm run observations:extract  -- pkg.json --cache .cache --out graph.json --overlays out/
+npm run observations:audit    -- graph.json                               # non-zero exit on any validation error
+npm run observations:marcowki                                             # the benchmark, against the reference model
+```
+
+A live vision pass needs a key and nothing else:
+`ANTHROPIC_API_KEY=… npm run observations:extract -- pkg.json --cache .cache --live --record fixtures/`.
+Without one the extractors still run and the run reports that no provider
+answered, rather than pretending one did.
 
 ### Android model preview
 

@@ -12,7 +12,8 @@
 | STAGE BUILDAPP-00A — WALL TOPOLOGY / JUNCTIONS / ANALYZER-FRIENDLY WALL RINGS | `claude/buildapp-buildworld-v1-7y6yqh` (same harness-designated branch; no suffix was forced beyond the one recorded in BUILDAPP-00) | implementation `50a46370994e3cad7180857a19b87a9f9979d43f`; docs `a8ac902cc4e74f2102adb5b9e1b56bc341a04cf1`; the final HEAD is the one commit above the docs commit that records these SHAs (see `stage-reports/STAGE_BUILDAPP_00A.md` and `git log`) | PASS |
 | STAGE BUILDAPP-01 — MARCÓWKI REFERENCE MODEL THROUGH THE REAL BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `0df518186bb61b8a365cd9fc11d68ad875be88ca`; implementation `7a6d6168d44f2c75eb0a6bd0974ed1cda72e4478`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01.md` and this row | PASS |
 | STAGE BUILDAPP-01A — MARCÓWKI ARCHITECTURAL FIDELITY CLOSURE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d40fa39733c80bf0b1e35c2233c8ea8ba0c542b7`; implementation `2de2f26328ec45ad99b47da0d9d956e8bc4d4cf9`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01A.md` and this row (the final HEAD, see `git log`) | PASS |
-| STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row | PASS |
+| STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_02.md` and this row (the final HEAD, see `git log`) | PASS |
 
 ## Current capabilities
 
@@ -151,6 +152,54 @@
   an architecture test. 89 Kotlin unit tests run on the JVM against the real
   shipped bundles, with no GPU. `docs/ANDROID_MODEL_PREVIEW.md`.
 
+- **Source analyzer, layers 1 and 2** (STAGE BUILDAPP-02): six new packages
+  that read a project's published sources and record what was SEEN in them.
+  Nothing in them produces a Building DSL command, a mesh or a metre.
+  - **`packages/source-common`** — canonical JSON, a pure SHA-256, deterministic
+    content-addressed ids, normalized 2D geometry. No Node, no DOM.
+  - **`packages/source-cv`** — deterministic computer vision over decoded
+    rasters: ink and gradient masks, connected components, runs, axis-aligned
+    and Hough segments with total-least-squares angle refinement, parallel
+    families, rectangles, profiles, silhouettes, slope histograms. 57 tests on
+    synthetic pictures with exact expected answers.
+  - **`packages/source-package`** — `buildapp.source-package` **1.0.0**: the one
+    authoritative acquisition path. Safe fetching (HTTPS only, every resolved
+    address classified, redirects re-validated per hop, bounded and anonymous),
+    publisher adapters, decoding FROM THE BYTES, variant grouping and selection
+    on measured pixels, five independent role dimensions each separately
+    UNKNOWN-able, published figures, recorded failures, content hash, offline
+    replay from a byte cache. `docs/SOURCE_PACKAGE.md`.
+  - **`packages/source-observations`** — `buildapp.source-observation-graph`
+    **1.0.0**: coordinate frames per asset variant, observations with pixel and
+    derived normalized geometry, separate confidence and positional uncertainty,
+    alternatives, relations (depth, topology, direction, cross-view identity),
+    conflicts that are never averaged, named gaps, order-independent content
+    hash, and a validator that refuses a graph whose coordinates, frames,
+    relations, tolerances or ids do not hold together.
+    `docs/SOURCE_OBSERVATION_GRAPH.md`.
+  - **`packages/source-vision`** — a provider-neutral `VisionReasoner`, narrow
+    schema-constrained tasks whose JSON Schema is generated from the observation
+    vocabulary, twelve named rejection codes, and three providers: a live
+    Anthropic adapter (forced tool use, temperature 0, no prose fallback), a
+    recorded-fixture replayer keyed by the bytes it describes, and a null
+    provider that admits there is none. No secret in the repository.
+    `docs/VISION_REASONER.md`.
+  - **`packages/source-analyzer`** — extractors for elevations, plans, sections
+    and renders; **depth reasoning** that promotes a band to a
+    `LINEAR_VOLUME_CANDIDATE` only on a cue implying a third dimension
+    (shadow, visible end face, occlusion break, return face) and records a band
+    with only a change of tone as a `SURFACE_REGION`; a **stair reader** that
+    reads a run of tread lines, its flights, its winders and its direction mark
+    and never infers a staircase from the size of a shaft; cross-view relations;
+    and self-contained SVG debug overlays.
+- **CLI**: `source:acquire`, `observations:extract`, `observations:audit`,
+  `observations:marcowki`. The audit exits non-zero on any validation error.
+- **BuildWorld Sources / Observations panel**: a read-only surface showing a
+  sealed graph — frames, observations with evidence, tolerance and alternatives,
+  conflicts and named gaps. Structurally read-only (no store, no command
+  imported) and it does not fetch: a graph arrives as the built-in sample or
+  from a file the viewer opens.
+
 ## Test / build / browser results (STAGE BUILDAPP-01A)
 
 | gate | result |
@@ -187,6 +236,30 @@ permission. arm64 SHA-256
 No emulator or device was available (no `/dev/kvm`, no nested virtualisation),
 so there are no Android screenshots and the GPU render path is unverified by
 execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
+
+## Test / build / browser results (STAGE BUILDAPP-02)
+
+Run on the final HEAD of this stage:
+
+| gate | result |
+| --- | --- |
+| `npm run typecheck` | PASS (packages + web app) |
+| `npm test` | **676 passed, 60 files** (379 at the stage's starting HEAD) |
+| `npm run build` | PASS |
+| `npm run e2e` | **18 passed** — 14 existing plus 4 for the Sources panel |
+| `npm run android:test` | 89 Kotlin unit tests passed |
+| `npm run android:assembleDebug` | BUILD SUCCESSFUL |
+| `npm run observations:audit` on the benchmark graph | 0 errors, 0 warnings |
+
+Marcówki observation benchmark (`npm run observations:marcowki`): package
+`src-m2fa281446a8ca-c0499d9df3` (20 assets, 10 published figures, 18 rooms),
+graph `obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229` — 18 frames, 888
+observations, 461 relations, 81 named gaps, **138 LINEAR_VOLUME_CANDIDATEs**
+carrying a depth cue against 67 bands that carry none. Artifacts, overlays and
+the finding-by-finding comparison with the reference model are in
+`stage-reports/artifacts/source-observations/`. **LIVE_PROVIDER_NOT_RUN** — no
+`ANTHROPIC_API_KEY` in this environment, and `--live` refuses rather than
+pretending.
 
 ## Known limitations
 
@@ -233,24 +306,45 @@ execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
   revision; `docs/MARCOWKI_SOURCE_REVISION_POLICY.md` states which one the
   reference follows and why, and no published aggregate is allowed to move a
   dimension.
+- **Source analyzer (BUILDAPP-02).** No live vision call has been made (no
+  credentials). The published Marcówki plans are 853 px for a 12 m house, so a
+  0.27 m stair going is about 9 px while terrain hatch and paving sit at 4 px;
+  at that separation a flight cannot be told from a fill pattern, so no
+  staircase is read from them and the candidates are recorded with the reason
+  each was rejected. No side returns were found on the real loggia (18 named
+  gaps say which sides). There is no OCR: dimension chains and level datums are
+  located, not valued. Openings over-detect on rendered elevations, where
+  vertical cladding produces real closed rectangles. The site plan has no
+  extractor. Renders are analysed with elevation extractors and their
+  measurements corroborate rather than measure. The byte cache is not committed,
+  so re-running the benchmark needs one `source:acquire` first.
 
 
 ## Recommended technical next step
 
-**Owner visual review of the BUILDAPP-01M preview APK** — it is committed at
-`stage-reports/artifacts/android-preview/BuildPlan-Model-Preview-arm64-v8a-debug.apk`
-— then a targeted FIX stage if the model or the navigation reads wrong on the
-phone, then resume the orchestrator's BUILDAPP-02. Because no GPU path could be
-executed in the build environment, a FIX stage should be assumed likely rather
-than exceptional.
+**BUILDAPP-03 — Primitive Reconstruction Solver v1.** The observation layer now
+exists: readings in source-native 2D with tolerances, alternatives, conflicts
+and named gaps, sealed and content-addressed. What is missing is the layer that
+turns them into primitive hypotheses and solves those against each other across
+views, with a scale anchor, into the Building DSL. BUILDAPP-02 deliberately
+stopped short of it and claims no automatic 3D reconstruction.
 
-The standing engineering next step, unchanged by this stage: guarding — a
-balustrade that follows a stair's own path (rather than a straight run) and an
-upstand along a slab hole's edge. The stair is now a real staircase and the
-void a real hole, but neither carries the guarding a built stair must have, and
-the attic plan draws a line along the void's north and west edges. Both are
+Two things would make that solver's job materially easier and can be done
+alongside it: a **live vision pass** (the provider path is complete and a key is
+all it needs), and an **OCR pass on the dimension chains**, which is the only
+route from pixels to metres that does not depend on a guessed scale.
+
+### Standing engineering items, unchanged by this stage
+
+Owner visual review of the BUILDAPP-01M preview APK — committed at
+`stage-reports/artifacts/android-preview/BuildPlan-Model-Preview-arm64-v8a-debug.apk`
+— remains outstanding; because no GPU path could be executed in the build
+environment, a FIX stage should be assumed likely rather than exceptional.
+
+Guarding: a balustrade that follows a stair's own path (rather than a straight
+run) and an upstand along a slab hole's edge. The stair is a real staircase and
+the void a real hole, but neither carries the guarding a built stair must have,
+and the attic plan draws a line along the void's north and west edges. Both are
 generic capabilities provable on a non-Marcówki building first. After that,
 unchanged from BUILDAPP-00A: topology-aware plan editing (`moveJunction` /
-`moveWallWithNeighbours`) and rooms derived from the resolved wall topology,
-the smallest step between the analyzer-friendly ring/junction API and an
-analyzer that emits a full storey plan from a drawing.
+`moveWallWithNeighbours`) and rooms derived from the resolved wall topology.
