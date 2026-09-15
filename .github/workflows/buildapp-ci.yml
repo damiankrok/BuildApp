@@ -106,8 +106,10 @@ jobs:
           cache: gradle
       - name: Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: ""
       - name: Ensure Android 35 SDK
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - name: Install JS dependencies
         run: npm ci
       - name: Regenerate mobile scene bundles
