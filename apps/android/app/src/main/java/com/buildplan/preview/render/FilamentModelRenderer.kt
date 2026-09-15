@@ -72,6 +72,17 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     private var skybox: Skybox? = null
 
     private var model: ModelEntities? = null
+    /**
+     * The scene whose geometry is currently on the GPU.
+     *
+     * Held here rather than passed in every frame: viewer state is a set of
+     * object ids, and ids only mean something inside the model they came
+     * from. A caller that hands this renderer a different scene than the one
+     * it uploaded would resolve those ids against the wrong building and show
+     * whatever the two happen to have a name in common — which is a blank
+     * viewport, not an error anyone would notice.
+     */
+    private var uploadedScene: ModelScene? = null
     private var grid: LineEntity? = null
     private var selectionBox: LineEntity? = null
 
@@ -163,6 +174,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     /** Upload a model. The previous one is fully released first. */
     fun setModel(scene: ModelScene) {
         releaseModel()
+        uploadedScene = scene
         model = ModelEntities.build(engine, scene, opaqueMaterial, translucentMaterial)
         grid = LineEntity.grid(engine, lineMaterial, scene.bounds)
         selectionBox = LineEntity.box(engine, lineMaterial, Selection.OUTLINE)
@@ -178,8 +190,9 @@ class FilamentModelRenderer(private val assets: AssetManager) {
      * parameters, a visibility change moves entities in and out of the scene,
      * a selection change updates two objects' emissive and the outline box.
      */
-    fun setState(scene: ModelScene, state: ViewerState) {
+    fun setState(state: ViewerState) {
         val entities = model ?: return
+        val scene = uploadedScene ?: return
         val previous = currentState
         // Called every frame; nothing below is worth doing when nothing moved.
         if (previous == state) return
@@ -188,7 +201,9 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             entities.applyStyle(engine, scene, state.style)
         }
 
-        val visible = state.visibleObjectIds(scene)
+        // Restricted to what was actually uploaded, so the scene can only
+        // ever be asked to show entities that exist.
+        val visible = state.visibleObjectIds(scene) intersect scene.renderableObjectIds
         if (visible != visibleNow) {
             for (id in visibleNow - visible) entities.byId[id]?.let { filamentScene.removeEntity(it.entity) }
             for (id in visible - visibleNow) entities.byId[id]?.let { filamentScene.addEntity(it.entity) }
@@ -317,6 +332,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             entities.destroy(engine)
         }
         model = null
+        uploadedScene = null
         grid?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         grid = null
         selectionBox?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
@@ -436,7 +452,7 @@ class ModelEntities(val all: List<ObjectEntity>, private val byEntity: Map<Int, 
             val byEntity = HashMap<Int, String>(scene.objects.size * 2)
 
             for (obj in scene.objects) {
-                if (obj.vertexCount == 0) continue
+                if (!obj.hasGeometry) continue
                 val entity = EntityManager.get().create()
                 val vertexBuffer = buildVertexBuffer(engine, obj)
                 val indexBuffer = buildIndexBuffer(engine, obj.vertexCount)

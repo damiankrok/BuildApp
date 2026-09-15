@@ -35,12 +35,17 @@ function filesUnder(dir: string, ext: RegExp): string[] {
   return out
 }
 
-/** Source with comments and string literals removed: only code is scanned. */
-function codeOf(file: string): string {
-  return readFileSync(file, 'utf8')
+/** Comments and string literals removed: only code is scanned. */
+function codeOfSource(source: string): string {
+  return source
     .replace(/\/\*[\s\S]*?\*\//g, ' ')
     .replace(/\/\/.*$/gm, ' ')
     .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+}
+
+/** The same, for a whole file. */
+function codeOf(file: string): string {
+  return codeOfSource(readFileSync(file, 'utf8'))
 }
 
 const kotlinMain = filesUnder(KOTLIN_MAIN, /\.kt$/)
@@ -109,6 +114,34 @@ describe('the Android viewer is a viewer, not a second compiler', () => {
     }
     const frame = readFileSync(conversionFile, 'utf8')
     expect(frame).toMatch(/Z_SIGN\s*=\s*-1\.0/)
+  })
+
+  it('applies viewer state to the model it uploaded, never to one a caller supplies', () => {
+    // A real owner-device failure: the viewport's frame callback captured the
+    // scene that was open when it was installed, so after switching models it
+    // kept resolving viewer state against the PREVIOUS building. Visibility
+    // answers with object ids, and ids only mean something inside their own
+    // model — the two buildings shared exactly one object name, so exactly one
+    // entity was ever added to the Filament scene and the viewer drew a bare
+    // roof. The renderer therefore OWNS the scene it uploaded.
+    const renderer = readFileSync(resolve(KOTLIN_MAIN, 'render/FilamentModelRenderer.kt'), 'utf8')
+    expect(renderer, 'the renderer must remember the scene it uploaded').toMatch(/private var uploadedScene: ModelScene\?/)
+    expect(renderer).toMatch(/fun setState\(state: ViewerState\)/)
+    expect(
+      /fun setState\([^)]*ModelScene/.test(renderer),
+      'setState must not take a scene: a caller cannot be trusted to pass the one that is on the GPU',
+    ).toBe(false)
+
+    // And the frame callback must capture nothing that can go stale. It
+    // outlives the composition that installed it, so a scene captured there is
+    // the previously opened building for the rest of the session.
+    const viewport = readFileSync(resolve(KOTLIN_MAIN, 'ui/Viewport.kt'), 'utf8')
+    const callback = /canvas\.onFrame = \{([\s\S]*?)\n {8}\}/.exec(viewport)
+    expect(callback, 'the viewport must install a frame callback').not.toBeNull()
+    expect(
+      /\bscene\b/.test(codeOfSource(callback?.[1] ?? '')),
+      'the frame callback captures the scene, which is stale as soon as another model is opened',
+    ).toBe(false)
   })
 
   it('imports no Marcówki-specific coordinate constants', () => {

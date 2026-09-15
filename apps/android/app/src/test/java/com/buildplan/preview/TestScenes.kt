@@ -42,4 +42,16 @@ object TestScenes {
 
     val marcowki: ModelScene by lazy { scene("marcowki") }
     val demo: ModelScene by lazy { scene("demo") }
+
+    /**
+     * The reconstructed candidate: a SECOND building in the same build.
+     *
+     * It matters that it is a different building rather than a variant of the
+     * reference — it names its own storeys and its own objects, so any code
+     * that reads one scene's ids against another resolves almost nothing.
+     */
+    val autoCandidate: ModelScene by lazy { scene("marcowki-auto") }
+
+    /** Every scene the build ships, which is what a viewer can switch between. */
+    val all: List<ModelScene> by lazy { index.map { scene(it.key) } }
 }

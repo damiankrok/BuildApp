@@ -26,6 +26,15 @@ class SceneObject(
     val metadata: BundleObject?,
 ) {
     val vertexCount: Int get() = positions.size / 3
+
+    /**
+     * Whether this object becomes a renderable on the GPU.
+     *
+     * An object the model names but compiles to nothing — a zone, a region
+     * with no surface — is still a semantic object and still appears in the
+     * inspector; it simply has no triangles to draw.
+     */
+    val hasGeometry: Boolean get() = vertexCount > 0
     val label: String get() = metadata?.label ?: id
     val kindLabel: String get() = metadata?.kindLabel ?: kind
 }
@@ -78,6 +87,18 @@ class ModelScene(
     private val index = objects.associateBy { it.id }
 
     fun objectById(id: String?): SceneObject? = if (id == null) null else index[id]
+
+    /**
+     * The objects that carry geometry, and therefore the exact set of ids the
+     * renderer can have entities for.
+     *
+     * Object ids are only meaningful inside their own model: two buildings
+     * name their walls independently, so a visible-id set computed against one
+     * scene resolves to almost nothing in another. Stating the uploadable set
+     * here lets the renderer — and the tests — check that what it is asked to
+     * show belongs to the model it uploaded.
+     */
+    val renderableObjectIds: Set<String> = objects.filter { it.hasGeometry }.mapTo(LinkedHashSet()) { it.id }
 
     val triangleCount: Int get() = bundle.scene.stats.triangleCount
     val meshCount: Int get() = bundle.scene.stats.meshCount

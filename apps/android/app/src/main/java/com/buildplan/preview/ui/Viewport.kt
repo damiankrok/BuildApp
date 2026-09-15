@@ -44,15 +44,23 @@ fun Viewport(
     val canvas = remember { FilamentCanvas(context) }
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // Upload geometry once per model, never per frame.
-    LaunchedEffect(canvas, scene.key) {
+    // Upload geometry once per model, never per frame. Keyed on the scene
+    // itself, so opening a different building — or the same one again after a
+    // reload — always re-uploads.
+    LaunchedEffect(canvas, scene) {
         canvas.modelRenderer.setModel(scene)
     }
 
+    // The frame callback outlives the composition that installed it, so it may
+    // only read state that is still live: the view model, which is the same
+    // instance for the whole screen. The scene is deliberately NOT captured
+    // here — the renderer applies viewer state to the model it uploaded, and a
+    // callback holding on to the previously opened building would resolve
+    // object ids against the wrong model.
     LaunchedEffect(canvas, model) {
         canvas.onFrame = { frameTimeNanos ->
             val nowMs = frameTimeNanos / 1_000_000
-            canvas.modelRenderer.setState(scene, model.viewer)
+            canvas.modelRenderer.setState(model.viewer)
             canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs))
         }
     }

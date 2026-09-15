@@ -15,6 +15,7 @@
 | STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row | PASS |
 | STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs `ced70f0` | PASS |
 | STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `fad9f39`, `8524a89`; docs `c1a9872` and the commit that carries this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-03M-FIX — ANDROID AUTO CANDIDATE RENDERING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `f3766237840514fc60178ca6c9bf4f3c9e13ebbd`; CI micro-task `781d6d6`, `13108e5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03M_FIX.md` and this row | PASS |
 
 ## Current capabilities
 
@@ -357,6 +358,21 @@ pretending.
   so re-running the benchmark needs one `source:acquire` first.
 
 
+## Android viewer (STAGE BUILDAPP-03M-FIX)
+
+The phone viewer showed the automatic candidate as a bare roof: the viewport's
+frame callback captured the scene open when it was installed, so after
+switching models it resolved viewer state against the PREVIOUS building.
+Visibility answers with object ids, and the two buildings share exactly one
+name (`roof-main`), so one entity reached the Filament scene and no layer mode
+could reveal the rest. The renderer now owns the scene it uploaded —
+`setState` takes only viewer state — and the visible set is intersected with
+the objects that actually carry geometry. Nothing in the reconstruction, the
+bundles or the compiled geometry was changed: the candidate's geometry was
+verified correct at every step before the GPU, including its winding. Twelve
+regression assertions run against the real committed candidate bundle, and an
+architecture test fails if the per-frame scene argument ever comes back.
+
 ## Known gaps and honest limits (STAGE BUILDAPP-03)
 
 - **The automatic candidate is not final and is not claimed to be.** It gets
@@ -396,10 +412,13 @@ largest source of the completeness gap above.
 
 ### Standing engineering items, unchanged by this stage
 
-Owner visual review of the BUILDAPP-01M preview APK — committed at
-`stage-reports/artifacts/android-preview/BuildPlan-Model-Preview-arm64-v8a-debug.apk`
-— remains outstanding; because no GPU path could be executed in the build
-environment, a FIX stage should be assumed likely rather than exceptional.
+Owner visual review of the preview APK — committed at
+`stage-reports/artifacts/android-preview/BuildPlan-Model-Preview-arm64-v8a-debug.apk`,
+now the BUILDAPP-03M-FIX build — remains outstanding; because no GPU path can be
+executed in the build environment, a further FIX stage should be assumed likely
+rather than exceptional. That assumption has already paid once: BUILDAPP-03M-FIX
+exists because the owner's review found the automatic candidate drawing nothing
+but its roof.
 
 Guarding: a balustrade that follows a stair's own path (rather than a straight
 run) and an upstand along a slab hole's edge. The stair is a real staircase and
