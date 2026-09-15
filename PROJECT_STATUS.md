@@ -12,6 +12,7 @@
 | STAGE BUILDAPP-00A — WALL TOPOLOGY / JUNCTIONS / ANALYZER-FRIENDLY WALL RINGS | `claude/buildapp-buildworld-v1-7y6yqh` (same harness-designated branch; no suffix was forced beyond the one recorded in BUILDAPP-00) | implementation `50a46370994e3cad7180857a19b87a9f9979d43f`; docs `a8ac902cc4e74f2102adb5b9e1b56bc341a04cf1`; the final HEAD is the one commit above the docs commit that records these SHAs (see `stage-reports/STAGE_BUILDAPP_00A.md` and `git log`) | PASS |
 | STAGE BUILDAPP-01 — MARCÓWKI REFERENCE MODEL THROUGH THE REAL BUILDING DSL | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `0df518186bb61b8a365cd9fc11d68ad875be88ca`; implementation `7a6d6168d44f2c75eb0a6bd0974ed1cda72e4478`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01.md` and this row | PASS |
 | STAGE BUILDAPP-01A — MARCÓWKI ARCHITECTURAL FIDELITY CLOSURE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d40fa39733c80bf0b1e35c2233c8ea8ba0c542b7`; implementation `2de2f26328ec45ad99b47da0d9d956e8bc4d4cf9`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01A.md` and this row (the final HEAD, see `git log`) | PASS |
+| STAGE BUILDAPP-01M — ANDROID BUILDWORLD MODEL PREVIEW APK | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `2949580af66f4d7ec848793a9469763afc4209f5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_01M.md` and this row (the final HEAD, see `git log`) | PASS |
 
 ## Current capabilities
 
@@ -117,6 +118,39 @@
   inspector. The viewport, adapter, store and generic packages never import
   the reference package (architecture tests).
 
+- **Mobile scene bundle** (`packages/mobile-scene`, BUILDAPP-01M): a
+  separately versioned derived format,
+  `buildapp.mobile-scene-bundle` **1.0.0** — the compiler's `CompiledScene`
+  re-encoded (triangles flattened losslessly, every mesh keeping its
+  `objectId` / `objectKind` / `part` / `levelId` / `solidId` / host / opening /
+  structural / material tags) plus the storey list, per-object inspector
+  metadata already formatted as `label: value` rows, relationships, evidence
+  and materials. Deterministic and content-addressed (sha256 of canonical
+  JSON): the same model always writes the same bytes, and collection or export
+  order cannot reach the hash. `npm run mobile:export-scenes` writes the
+  Marcówki and demo bundles into the Android app's assets. It is DERIVED data
+  — the CanonicalBuildingModel remains the source of truth, and
+  `packages/mobile-scene/test/parity.test.ts` holds the bundle to the
+  compiler's output triangle by triangle for both scenes.
+- **Android model preview** (`apps/android`, BUILDAPP-01M):
+  `BuildPlan Model Preview`, application id `com.buildplan.preview` (distinct
+  from the owner's older `com.buildplan.app`), Kotlin + Jetpack Compose +
+  Material 3 + Google Filament 1.75.1, minSdk 26 / targetSdk 35, no
+  permissions, fully offline, no account, no database. It renders the exported
+  bundle natively: one Filament entity per semantic object (so `View.pick()`
+  resolves straight to an `objectId`), Construction and Clay styles with the
+  same palette the web viewer uses, translucent glazing, a technical grid, sun
+  and spherical-harmonic ambient light, SSAO and shadows. Orbit / pinch-zoom /
+  two-finger pan / tap-to-select / double-tap-to-isolate, all with button
+  alternatives; visibility modes All, Roof off, Ground, Attic, Cutaway,
+  Isolate, Show all, implemented by adding and removing entities (hidden
+  geometry is therefore unpickable, and nothing is recompiled); 11 camera
+  presets with truly orthographic elevations and plans, Frame selection and
+  Reset; a bottom-sheet inspector. Exactly one coordinate conversion
+  (`scene/ModelFrame.kt`: mirror z, re-wind each triangle a, c, b), guarded by
+  an architecture test. 89 Kotlin unit tests run on the JVM against the real
+  shipped bundles, with no GPU. `docs/ANDROID_MODEL_PREVIEW.md`.
+
 ## Test / build / browser results (STAGE BUILDAPP-01A)
 
 | gate | result |
@@ -127,6 +161,32 @@
 | `npm run e2e` | 14 passed (Playwright 1.56, Chromium headless, SwiftShader WebGL) against the production build; 13 screenshots in `stage-reports/artifacts/` |
 | `npm run audit:marcowki` | AUDIT PASS — 95 checks, every headline metric measured by the oracles |
 | `npm run audit:marcowki:facades` | 47 registered elevation features: 36 pass, 9 explained deviations, 2 not modelled, 0 not found, worst 0.185 m |
+
+## Test / build / browser results (STAGE BUILDAPP-01M)
+
+Run on the final HEAD of this stage:
+
+| gate | result |
+| --- | --- |
+| `npm run typecheck` | PASS |
+| `npm test` | 379 passed, 40 files (317 at the stage's starting HEAD) |
+| `npm run build` | PASS |
+| `npm run e2e` | 14 passed (Playwright) |
+| `npm run audit:marcowki` | AUDIT PASS |
+| `npm run audit:marcowki:facades` | 47 features: 36 pass, 9 deviation, 2 not modelled, 0 not found; worst delta 0.185 m — unchanged from BUILDAPP-01A |
+| `npm run mobile:export-scenes` | PASS; Marcówki 178 meshes / 4480 triangles / 127 objects, bundle `3998e33c…`; demo 88 / 2332 / 58, bundle `1427a5d8…` |
+| `npm run android:test` | 89 Kotlin unit tests passed (JVM, no device) |
+| `npm run android:assembleDebug` | PASS — arm64-v8a 12.7 MiB, universal 18.3 MiB |
+
+APK verified with `aapt2` and `apksigner`: `com.buildplan.preview`
+`0.1.0-preview` (versionCode 1), minSdk 26 / targetSdk 35, OpenGL ES 3.0,
+arm64-v8a, debug-signed, scene and material assets bundled, no INTERNET
+permission. arm64 SHA-256
+`8bc00dcc54684373e2499378c8368adbbd089cbcbcb395667715e06a01e8bc31`.
+
+No emulator or device was available (no `/dev/kvm`, no nested virtualisation),
+so there are no Android screenshots and the GPU render path is unverified by
+execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
 
 ## Known limitations
 
@@ -152,6 +212,18 @@
   roofs). Rooms are floor markers. Constraints recorded, not solved.
   Inspector-driven editing only. The model frame is left-handed as specified
   and mirrored by the viewer.
+- The Android preview (BUILDAPP-01M) was **never executed on a device or an
+  emulator**: the build container has no `/dev/kvm` and no nested
+  virtualisation, so no Android screenshots exist and the GPU path — shader
+  compilation, the Filament render loop on a real surface, the on-screen
+  result — is unverified by execution. Everything not requiring a GPU was
+  tested (89 Kotlin unit tests over the real bundles, plus structural
+  verification of the built APK with `aapt2` and `apksigner`). The owner's
+  first launch is the first real test of the render path. The preview is also
+  read-only, has no line-study style, and does not recompute the bundle hash
+  on the phone (that would be a second canonical-JSON implementation in
+  Kotlin); it validates structural self-consistency and the shipped index
+  instead.
 - The Marcówki reference carries its unresolved source evidence in
   `packages/reference-marcowki/src/ledger.ts` (33 entries: the eave datum
   contradiction, the stair's winder count, the entrance panel split, balcony
@@ -162,15 +234,23 @@
   reference follows and why, and no published aggregate is allowed to move a
   dimension.
 
+
 ## Recommended technical next step
 
-Guarding: a balustrade that follows a stair's own path (rather than a
-straight run) and an upstand along a slab hole's edge. The stair is now a
-real staircase and the void a real hole, but neither carries the guarding a
-built stair must have, and the attic plan draws a line along the void's north
-and west edges. Both are generic capabilities provable on a non-Marcówki
-building first. After that, unchanged from BUILDAPP-00A: topology-aware plan
-editing (`moveJunction` / `moveWallWithNeighbours`) and rooms derived from
-the resolved wall topology, the smallest step between the analyzer-friendly
-ring/junction API and an analyzer that emits a full storey plan from a
-drawing.
+**Owner visual review of the BUILDAPP-01M preview APK** — it is committed at
+`stage-reports/artifacts/android-preview/BuildPlan-Model-Preview-arm64-v8a-debug.apk`
+— then a targeted FIX stage if the model or the navigation reads wrong on the
+phone, then resume the orchestrator's BUILDAPP-02. Because no GPU path could be
+executed in the build environment, a FIX stage should be assumed likely rather
+than exceptional.
+
+The standing engineering next step, unchanged by this stage: guarding — a
+balustrade that follows a stair's own path (rather than a straight run) and an
+upstand along a slab hole's edge. The stair is now a real staircase and the
+void a real hole, but neither carries the guarding a built stair must have, and
+the attic plan draws a line along the void's north and west edges. Both are
+generic capabilities provable on a non-Marcówki building first. After that,
+unchanged from BUILDAPP-00A: topology-aware plan editing (`moveJunction` /
+`moveWallWithNeighbours`) and rooms derived from the resolved wall topology,
+the smallest step between the analyzer-friendly ring/junction API and an
+analyzer that emits a full storey plan from a drawing.

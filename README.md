@@ -17,8 +17,16 @@ CanonicalBuildingModel             packages/model
             ↓
 Geometry Compiler                  packages/geometry
             ↓
-BuildWorld                         packages/editor + apps/web
+CompiledScene
+            ↓                ↘
+BuildWorld                    MobileSceneBundle      packages/mobile-scene
+packages/editor + apps/web          ↓
+                              Android model preview   apps/android
 ```
+
+The Android preview is a **viewer** over derived data: it renders the
+compiler's own output and contains no geometry kernel of its own
+(`docs/ANDROID_MODEL_PREVIEW.md`).
 
 ## Layout
 
@@ -32,8 +40,10 @@ BuildWorld                         packages/editor + apps/web
 | `packages/verification` | independent oracles: volume, manifold, rays, overlap, plane pitch, storey ring closure | nothing |
 | `packages/editor` | framework-agnostic `EditorStore`: command → model → compile → notify | model, commands, geometry, demo |
 | `apps/web` | BuildWorld UI (React, Three.js) | editor, model types, geometry types, the demo and reference factories (toolbar only) |
+| `packages/mobile-scene` | `CompiledScene` → deterministic `MobileSceneBundle` JSON asset for the native mobile viewer (derived data only) | model, geometry |
+| `apps/android` | `BuildPlan Model Preview`: native Android viewer (Kotlin, Compose, Filament) over the exported bundles | nothing in this table — it reads the asset |
 | `tests/architecture` | boundary tests that enforce the table above | everything |
-| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md` | |
+| `docs/` | `CANONICAL_BUILDING_MODEL.md`, `BUILDING_DSL.md`, `WALL_TOPOLOGY.md`, `GEOMETRY_COMPILER.md`, `BUILDWORLD.md`, `MARCOWKI_REFERENCE_MODEL.md`, `ANDROID_MODEL_PREVIEW.md` | |
 | `stage-reports/` | per-stage measured results and browser screenshots | |
 
 ## Commands
@@ -50,6 +60,22 @@ npm run dev              # BuildWorld dev server, http://localhost:5173
 npm run preview          # serve the production build, http://localhost:4173
 npm run verify           # typecheck + test + build + e2e
 ```
+
+### Android model preview
+
+```
+npm run mobile:export-scenes     # CanonicalBuildingModel -> apps/android/.../assets/scenes
+npm run android:test             # Kotlin unit tests (no device or emulator needed)
+npm run android:assembleDebug    # debug APKs in apps/android/app/build/preview-apks/
+```
+
+Needs a JDK 17+ and an Android SDK (`ANDROID_HOME`, or
+`apps/android/local.properties` with `sdk.dir=…`); the Gradle wrapper is
+committed and no Android Studio installation is involved. Install the result
+with `adb install -r BuildPlan-Model-Preview-arm64-v8a-debug.apk`, or copy it
+to the phone and open it. The app is `com.buildplan.preview`, declares no
+permissions, works offline, and coexists with an older `com.buildplan.app`
+build. See `docs/ANDROID_MODEL_PREVIEW.md`.
 
 ## Coordinate system
 
