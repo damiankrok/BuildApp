@@ -1,6 +1,6 @@
 {
   "schema": "buildapp.source-package",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "id": "src-m2fa281446a8ca-c0499d9df3",
   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
   "pageHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063",
@@ -1547,6 +1547,58 @@
       "raw": "779,94 m&sup3;"
     }
   ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem użytkowym, idealny dla osób ceniących innowacyjne rozwiązania. Charakterystyczny dwuspadowy dach bez okapów nadaje budynkowi elegancki i minimalistyczny wygląd, doskonale wpisując się w nowoczesne projekty domów . Garaż jednostanowiskowy, zlokalizowany z boku domu, harmonijnie komponuje się z bryłą budynku, zapewniając spójność architektoniczną. Wnętrze domu zostało zaprojektowane z myślą o funkcjonalności i komforcie. Na parterze znajduje się przestronny salon z kominkiem, który tworzy wyjątkowy klimat w chłodniejsze dni, a kuchnia z wyspą stanowi centralny punkt strefy dziennej, uzupełniona o funkcjonalną spiżarnię. Dodatkowy pokój na parterze może pełnić różne funkcje, dopasowując się do indywidualnych potrzeb mieszkańców. Na poddaszu znajdują się trzy komfortowe pokoje, z czego jeden został wyposażony w garderobę, co zwiększa wygodę użytkowania. Dwie łazienki rozmieszczone na obu kondygnacjach zapewniają swobodę domownikom, a pralnia dodaje praktyczności codziennemu życiu. Duży taras osłonięty przedłużonym okapem to idealne miejsce na relaks na świeżym powietrzu. Projekt domu uwzględnia rekuperacje, dzięki czemu dom jest nie tylko estetyczny, ale także energooszczędny."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "130 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 129.04 m² + 24.1 m² + 5.8 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
   "publishedRooms": [
     {
       "storey": "ATTIC",
@@ -1761,5 +1813,5 @@
       "message": "byte-identical to https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19792a93b91ddb__11255.jpg: one copy published at two addresses, counted once"
     }
   ],
-  "contentHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86"
+  "contentHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b"
 }

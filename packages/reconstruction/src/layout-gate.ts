@@ -58,6 +58,15 @@ export type LayoutGateOptions = {
   publishedAreas?: readonly PublishedArea[]
   /** How far a metric check may be out and still count as agreement, in metres. */
   toleranceM?: number
+  /**
+   * Findings from a check that runs beside this one and is weighed with it —
+   * §21's projection audit, which needs the elevations and so cannot be done
+   * from the numbers alone. They are the gate's own reasons once they arrive:
+   * a BLOCKING one rejects the layout exactly as a dimension contradiction
+   * would, because a shape that does not project is as wrong as a width that
+   * does not add up.
+   */
+  extraReasons?: readonly LayoutGateReason[]
 }
 
 /**
@@ -94,7 +103,7 @@ const corroborates = (spans: ReturnType<typeof statedSpans>, metres: number, tol
  */
 export function evaluateLayoutGate(options: LayoutGateOptions): LayoutGate {
   const tolerance = options.toleranceM ?? 0.25
-  const reasons: LayoutGateReason[] = []
+  const reasons: LayoutGateReason[] = [...(options.extraReasons ?? [])]
   const { masses, roofs, storeys, regions, metrics } = options
   const say = (code: string, severity: LayoutGateReason['severity'], what: string, why: string, itemIds: string[] = []): void => {
     reasons.push({ code, severity, what, why, itemIds })

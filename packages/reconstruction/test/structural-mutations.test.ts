@@ -196,14 +196,22 @@ describe('§26 mutations of the sources', () => {
     expect(bodies(mutated)).toEqual(bodies(before))
   })
 
-  it('12. the overall chain disagreeing with the contour: the conflict is named', async () => {
+  it('12. the overall chain disagreeing with the contour: the layout is refused, loudly', async () => {
     const mutated = await run({ ...HOLLOWAY, chainsX: [HOLLOWAY.width, HOLLOWAY.wings![0].width + 1] })
-    // The chain now claims 13.00 m across a building drawn 12.00 m wide.
-    expect(mutated.layout.masses.length).toBeGreaterThanOrEqual(1)
+    // The chain now claims 13.00 m across a building drawn 12.00 m wide, so
+    // everything it scales comes out 8% small and the bodies no longer land
+    // where the elevations draw them. Two bodies are still found — the walls
+    // are where the walls are — and §21's audit catches what the chain did to
+    // them before a single wall is emitted.
+    expect(mutated.layout.masses).toHaveLength(2)
     expect(collapsedToOneBox(mutated, 13, HOLLOWAY.depth)).toBe(false)
-    const said = [...mutated.layout.conflicts.map((c) => c.what), ...mutated.layout.unresolved.map((u) => u.reason), ...mutated.layout.gate.reasons.map((r) => r.what)].join(' | ')
-    expect(said.length).toBeGreaterThan(0)
-    expect(mutated.layout.gate.status).not.toBe('STRUCTURAL_LAYOUT_REJECTED')
+    expect(mutated.layout.gate.status).toBe('STRUCTURAL_LAYOUT_REJECTED')
+    const blocking = mutated.layout.gate.reasons.filter((r) => r.severity === 'BLOCKING')
+    expect(blocking.map((r) => r.code)).toContain('STRUCTURE_SILHOUETTE_DISAGREES')
+    for (const reason of blocking) expect(reason.what).toMatch(/\d/)
+    // §27: a refused layout is a REPORTED outcome, not a crash and not a
+    // silent one-box fallback.
+    expect(mutated.candidate.structuralStatus).toBe('STRUCTURAL_LAYOUT_REJECTED')
   })
 
   it('13. the upper plan omitted: the storey survives on the section, and the garage does not gain one', async () => {

@@ -13,20 +13,53 @@
  * anything. Replaying a sealed program makes the thing on the screen the thing
  * that was measured.
  */
-import { ReconstructionCandidateSchema, buildCandidateModel, verifyReplay } from '@buildapp/reconstruction'
-import type { ReconstructionCandidate } from '@buildapp/reconstruction'
+import { ReconstructionCandidateSchema, StructuralLayoutHypothesisSetSchema, buildCandidateModel, verifyReplay } from '@buildapp/reconstruction'
+import type { ReconstructionCandidate, StructuralLayoutHypothesisSet } from '@buildapp/reconstruction'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import marcowkiAuto from './marcowki-auto.json' with { type: 'json' }
+import marcowkiAutoLayout from './marcowki-auto-layout.json' with { type: 'json' }
 
 export type SealedCandidate = {
   /** A short, stable id used by selectors and scene bundles. */
   id: string
   label: string
   candidate: ReconstructionCandidate
+  /**
+   * What the solver decided the building was MADE OF, sealed beside the
+   * program that draws it.
+   *
+   * The candidate carries the layout's id and hash but not the layout, and a
+   * hash on its own answers no question anybody actually has: how many bodies,
+   * which storeys they reach, what is over each of them, what the pass could
+   * not settle. That is the part a reviewer reads and the part a benchmark
+   * scores, so it travels with the candidate rather than being left behind in
+   * a build directory.
+   */
+  layout: StructuralLayoutHypothesisSet
 }
 
 /** Every candidate committed to the repository, in a fixed order. */
-export const SEALED_CANDIDATES: readonly SealedCandidate[] = [{ id: 'marcowki-auto', label: 'Marcówki (auto)', candidate: marcowkiAuto as unknown as ReconstructionCandidate }]
+export const SEALED_CANDIDATES: readonly SealedCandidate[] = [
+  { id: 'marcowki-auto', label: 'Marcówki (auto)', candidate: marcowkiAuto as unknown as ReconstructionCandidate, layout: marcowkiAutoLayout as unknown as StructuralLayoutHypothesisSet },
+]
+
+/**
+ * A sealed candidate's layout, validated and checked against the candidate.
+ *
+ * The check is the point: a layout file that is not the one the candidate was
+ * sealed from describes a different building, and silently showing it beside
+ * this one would be worse than having no layout at all.
+ */
+export function layoutOf(id: string): StructuralLayoutHypothesisSet {
+  const sealed = sealedCandidate(id)
+  if (!sealed) throw new Error(`no sealed candidate called ${id}`)
+  const parsed = StructuralLayoutHypothesisSetSchema.safeParse(sealed.layout)
+  if (!parsed.success) throw new Error(`the layout sealed with ${id} does not validate: ${parsed.error.issues[0]?.message ?? 'unknown'}`)
+  if (sealed.layout.contentHash !== sealed.candidate.structuralLayoutHash) {
+    throw new Error(`the layout sealed with ${id} hashes to ${sealed.layout.contentHash.slice(0, 16)} and the candidate was built from ${(sealed.candidate.structuralLayoutHash ?? '').slice(0, 16)}`)
+  }
+  return sealed.layout
+}
 
 export const sealedCandidate = (id: string): SealedCandidate | undefined => SEALED_CANDIDATES.find((c) => c.id === id)
 

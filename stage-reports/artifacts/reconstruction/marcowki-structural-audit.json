@@ -1,0 +1,186 @@
+{
+  "reasons": [
+    {
+      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+      "itemIds": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876"
+      ],
+      "severity": "NOTED",
+      "what": "the shape could not be checked against the rear elevation",
+      "why": "the outline traced on it is 4.98 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+    },
+    {
+      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+      "itemIds": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+      ],
+      "severity": "NOTED",
+      "what": "the shape could not be checked against the front elevation",
+      "why": "the outline traced on it is 5.01 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+    },
+    {
+      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+      "itemIds": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
+      ],
+      "severity": "NOTED",
+      "what": "the shape could not be checked against the left elevation",
+      "why": "the outline traced on it is 4.45 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+    },
+    {
+      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+      "itemIds": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c"
+      ],
+      "severity": "NOTED",
+      "what": "the shape could not be checked against the right elevation",
+      "why": "the outline traced on it is 4.42 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+    }
+  ],
+  "refused": [],
+  "steps": 2,
+  "views": [
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "heightResidualM": 0.000249,
+      "masses": [
+        {
+          "massId": "mass-1",
+          "overhangM": 0,
+          "topM": 3.06,
+          "u0": 0,
+          "u1": 4.15,
+          "why": "the top of its own walls, with a level roof over them"
+        },
+        {
+          "massId": "mass-0",
+          "overhangM": 0,
+          "topM": 7.95,
+          "u0": 4.15,
+          "u1": 12.05,
+          "why": "the ridge, seen end on over the gable"
+        }
+      ],
+      "observed": {
+        "heightM": 7.950249,
+        "widthM": 17.032443
+      },
+      "projected": {
+        "heightM": 7.95,
+        "widthM": 17.03191
+      },
+      "side": "REAR",
+      "steps": 2,
+      "surplusM": 4.98191,
+      "why": "2 bodies at 2 heights — mass-1 0.00–4.15 m to 3.06 m (the top of its own walls, with a level roof over them); mass-0 4.15–12.05 m to 7.95 m (the ridge, seen end on over the gable)",
+      "widthResidualM": 0.000533
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "heightResidualM": 0.000044,
+      "masses": [
+        {
+          "massId": "mass-0",
+          "overhangM": 0,
+          "topM": 7.95,
+          "u0": 0,
+          "u1": 7.9,
+          "why": "the ridge, seen end on over the gable"
+        },
+        {
+          "massId": "mass-1",
+          "overhangM": 0,
+          "topM": 3.06,
+          "u0": 7.9,
+          "u1": 12.05,
+          "why": "the top of its own walls, with a level roof over them"
+        }
+      ],
+      "observed": {
+        "heightM": 7.950044,
+        "widthM": 17.060581
+      },
+      "projected": {
+        "heightM": 7.95,
+        "widthM": 17.060486
+      },
+      "side": "FRONT",
+      "steps": 2,
+      "surplusM": 5.010486,
+      "why": "2 bodies at 2 heights — mass-0 0.00–7.90 m to 7.95 m (the ridge, seen end on over the gable); mass-1 7.90–12.05 m to 3.06 m (the top of its own walls, with a level roof over them)",
+      "widthResidualM": 0.000095
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "heightResidualM": 0.000044,
+      "masses": [
+        {
+          "massId": "mass-0",
+          "overhangM": 0,
+          "topM": 7.95,
+          "u0": 0,
+          "u1": 12.61,
+          "why": "the ridge, seen along its length above the eaves"
+        },
+        {
+          "massId": "mass-1",
+          "overhangM": 0,
+          "topM": 3.06,
+          "u0": 0,
+          "u1": 7.51,
+          "why": "the top of its own walls, with a level roof over them"
+        }
+      ],
+      "observed": {
+        "heightM": 7.950044,
+        "widthM": 17.060581
+      },
+      "projected": {
+        "heightM": 7.95,
+        "widthM": 17.060486
+      },
+      "side": "LEFT",
+      "steps": 2,
+      "surplusM": 4.450486,
+      "why": "2 bodies at 2 heights — mass-0 0.00–12.61 m to 7.95 m (the ridge, seen along its length above the eaves); mass-1 0.00–7.51 m to 3.06 m (the top of its own walls, with a level roof over them)",
+      "widthResidualM": 0.000095
+    },
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "heightResidualM": 0.000249,
+      "masses": [
+        {
+          "massId": "mass-0",
+          "overhangM": 0,
+          "topM": 7.95,
+          "u0": 0,
+          "u1": 12.61,
+          "why": "the ridge, seen along its length above the eaves"
+        },
+        {
+          "massId": "mass-1",
+          "overhangM": 0,
+          "topM": 3.06,
+          "u0": 5.1,
+          "u1": 12.61,
+          "why": "the top of its own walls, with a level roof over them"
+        }
+      ],
+      "observed": {
+        "heightM": 7.950249,
+        "widthM": 17.032443
+      },
+      "projected": {
+        "heightM": 7.95,
+        "widthM": 17.03191
+      },
+      "side": "RIGHT",
+      "steps": 2,
+      "surplusM": 4.42191,
+      "why": "2 bodies at 2 heights — mass-0 0.00–12.61 m to 7.95 m (the ridge, seen along its length above the eaves); mass-1 5.10–12.61 m to 3.06 m (the top of its own walls, with a level roof over them)",
+      "widthResidualM": 0.000533
+    }
+  ],
+  "worstResidualM": 0
+}
+

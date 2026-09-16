@@ -27,6 +27,7 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { Raster } from '@buildapp/source-cv'
 import { CONVENTIONS, SOLVER_NAME, SOLVER_VERSION, candidatesFrom, levelsFrom, registerElevationFrames } from './solve.js'
 import { composeStructuralLayout } from './structural.js'
+import type { StructuralProjectionAudit } from './structural-audit.js'
 import type { PublishedArea } from './layout-gate.js'
 import { ringBounds } from './structural-layout.js'
 import type { MassHypothesis, PlanSide, RoofSupportHypothesis, StructuralLayoutHypothesisSet } from './structural-layout.js'
@@ -60,6 +61,8 @@ export type ReconstructionOptions = {
 
 export type ReconstructionResult = {
   layout: StructuralLayoutHypothesisSet
+  /** §21's audit, run before the DSL was emitted and reported whether it passed or not. */
+  projection: StructuralProjectionAudit
   hypotheses: PrimitiveHypothesisSet
   candidate: ReconstructionCandidate
   model: CanonicalBuildingModel
@@ -130,7 +133,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   // -------------------------------------------------------------------------
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   const levels = levelsFrom(metrics, sectionFrame?.id)
-  const { draft: layoutDraft, layout } = composeStructuralLayout({
+  const { draft: layoutDraft, layout, projection } = composeStructuralLayout({
     slug: options.slug,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,
@@ -1047,7 +1050,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     options.slug,
   )
 
-  return { layout, hypotheses: hypothesisSet, candidate, model }
+  return { layout, projection, hypotheses: hypothesisSet, candidate, model }
 }
 
 /** Which storey a height range belongs to: the one whose band it sits mostly inside. */

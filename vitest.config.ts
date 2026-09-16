@@ -12,6 +12,7 @@ export default defineConfig({
       'packages/*/test/**/*.test.ts',
       'apps/web/src/**/*.test.ts',
       'tests/architecture/**/*.test.ts',
+      'tests/benchmark/**/*.test.ts',
     ],
     exclude: ['**/node_modules/**', '**/dist/**', 'apps/web/e2e/**'],
     environment: 'node',

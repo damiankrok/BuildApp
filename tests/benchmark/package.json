@@ -1,0 +1,15 @@
+{
+  "name": "@buildapp/benchmark-tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Evaluation, and nothing else. These tests know which building the sealed candidate is of and what it should have come out as; nothing in the production path may import them, and they run only after a candidate has been sealed.",
+  "dependencies": {
+    "@buildapp/model": "*",
+    "@buildapp/geometry": "*",
+    "@buildapp/verification": "*",
+    "@buildapp/reference-marcowki": "*",
+    "@buildapp/reconstruction": "*",
+    "@buildapp/candidates": "*"
+  }
+}

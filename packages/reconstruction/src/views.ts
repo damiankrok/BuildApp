@@ -51,6 +51,23 @@ export type ElevationRegistration = {
   why: string
 }
 
+/**
+ * The drawing's outline as it was traced, points and all.
+ *
+ * The extent below throws the shape away, which is all a SCALE needs and
+ * exactly what a shape check must not do: the step where a garage meets a
+ * house, and the triangle of a gable end, live in these points and nowhere
+ * else on the sheet.
+ */
+export function silhouettePolygon(observations: readonly SourceObservation[]): Array<{ x: number; y: number }> | undefined {
+  const traced = observations.filter((o) => o.kind === 'SILHOUETTE').sort((a, b) => b.confidence - a.confidence)
+  for (const o of traced) {
+    const g = o.pixelGeometry
+    if (g.type === 'POLYGON' && g.points.length >= 3) return g.points.map((p) => ({ x: p.x, y: p.y }))
+  }
+  return undefined
+}
+
 /** The drawing's outline, as a box. A polygon silhouette is reduced to its extent, which is all a scale needs. */
 export function silhouetteExtent(observations: readonly SourceObservation[]): PixelRect | undefined {
   const boxOf = (o: SourceObservation): PixelRect | undefined => {

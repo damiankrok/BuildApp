@@ -6,6 +6,7 @@
   "type": "module",
   "workspaces": [
     "tests/architecture",
+    "tests/benchmark",
     "packages/*",
     "apps/*"
   ],

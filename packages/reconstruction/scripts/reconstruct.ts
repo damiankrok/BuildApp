@@ -85,7 +85,7 @@ async function main(): Promise<void> {
   process.stdout.write(`metric evidence: ${metrics.evidence.length} readings, ${metrics.chains.length} chains, ${metrics.coordinateRegistrations.length} registrations (${metrics.contentHash.slice(0, 16)})\n`)
 
   // --- the candidate ---
-  const { layout, hypotheses, candidate, model } = reconstruct({
+  const { layout, projection, hypotheses, candidate, model } = reconstruct({
     label,
     slug,
     sourcePackageId: pkg.id,
@@ -103,6 +103,13 @@ async function main(): Promise<void> {
   process.stdout.write(`hypotheses: ${hypotheses.hypotheses.length} (${hypotheses.contentHash.slice(0, 16)})\n`)
   process.stdout.write(`candidate: ${candidate.program.length} commands, model ${candidate.modelHash.slice(0, 16)}, replay ${replay.ok ? 'byte-identical' : `FAILED: ${replay.reason}`}\n`)
   process.stdout.write(`  ${candidate.residuals.hard} hard, ${candidate.residuals.soft} soft, ${candidate.residuals.unresolved} unresolved quantities; ${candidate.unresolved.length} named holes; ${candidate.contradictions.length} contradictions\n`)
+
+  // --- §21's structural audit, which ran BEFORE any of this was emitted ---
+  process.stdout.write(`structural projection: ${projection.views.length} elevation${projection.views.length === 1 ? '' : 's'} registered, ${projection.steps} distinct height${projection.steps === 1 ? '' : 's'} in the outline\n`)
+  for (const view of projection.views) {
+    const shape = view.profile ? `${view.profile.maxM.toFixed(2)} m worst, ${view.profile.rmsM.toFixed(2)} m rms over ${view.profile.samples} samples` : `not checkable (the outline traced is ${view.surplusM.toFixed(2)} m wider than the bodies under it)`
+    process.stdout.write(`  ${view.side.toLowerCase().padEnd(6)} ${view.steps} height${view.steps === 1 ? ' ' : 's'}  ${shape}\n`)
+  }
 
   // --- projection audit ---
   // The massing the elevations are registered against is the LAYOUT's, not a
@@ -132,6 +139,7 @@ async function main(): Promise<void> {
   await write(`${slug}-candidate.json`, candidate)
   await write(`${slug}-dsl.json`, { schema: 'buildapp.reconstruction-dsl', candidateId: candidate.id, candidateHash: candidate.contentHash, modelHash: candidate.modelHash, program: candidate.program })
   await write(`${slug}-projection-audit.json`, audit)
+  await write(`${slug}-structural-audit.json`, projection)
   await writeFile(join(outDir, `${slug}-model.json`), serializeModel(model), 'utf8')
   process.stdout.write(`  wrote ${slug}-model.json\n`)
 }

@@ -20,6 +20,8 @@ import type { StructuralLayoutDraft, StructuralLayoutOptions } from './layout.js
 import { inferRoofSystems } from './roof-systems.js'
 import type { RoofLevels } from './roof-systems.js'
 import { evaluateLayoutGate, sealStructuralLayout } from './layout-gate.js'
+import { auditStructuralProjection } from './structural-audit.js'
+import type { StructuralProjectionAudit } from './structural-audit.js'
 import type { PublishedArea } from './layout-gate.js'
 import type { LayoutQuantity, StructuralLayoutHypothesisSet } from './structural-layout.js'
 
@@ -33,6 +35,8 @@ export type StructuralPassOptions = StructuralLayoutOptions & {
 export type StructuralPassResult = {
   draft: StructuralLayoutDraft
   layout: StructuralLayoutHypothesisSet
+  /** §21's pre-emission audit: the massing drawn against the elevations it was read from. */
+  projection: StructuralProjectionAudit
 }
 
 const quantity = (value: number, spread: number, basis: LayoutQuantity['basis'], evidenceIds: string[], why: string): LayoutQuantity => ({
@@ -123,6 +127,14 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
   const conflicts = [...draft.conflicts, ...roofing.conflicts]
   const unresolved = [...draft.unresolved, ...roofing.unresolved]
 
+  // --- §21: draw the massing against the elevations, before anything is built
+  //
+  // Deliberately here, between the composition and the gate. Once the DSL has
+  // been emitted the question has moved on to whether the walls are in the
+  // right places; the question NOW is whether the shape is the shape, and the
+  // elevations are the only sources that answer it.
+  const projection = auditStructuralProjection({ graph: options.graph, masses: draft.masses, roofs: roofing.roofs, storeys: draft.storeys })
+
   // --- the gate, then the hash ---------------------------------------------
   const gate = evaluateLayoutGate({
     masses: draft.masses,
@@ -134,6 +146,7 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
     metrics,
     baseFrameId: draft.base?.frame.id ?? '',
     publishedAreas: options.publishedAreas,
+    extraReasons: projection.reasons,
   })
 
   const layout = sealStructuralLayout(
@@ -159,7 +172,7 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
     },
     options.slug,
   )
-  return { draft, layout }
+  return { draft, layout, projection }
 }
 
 /** The plans a package carries, for a caller that wants to know before running the pass. */
