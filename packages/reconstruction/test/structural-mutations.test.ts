@@ -51,6 +51,7 @@ const replace = (sheets: Sheets, slug: string, canvas: ReturnType<typeof renderG
 
 const BASE = await run(HOLLOWAY)
 const RED = await run(REDMIRE)
+const LARCH = await run(LARCHFIELD)
 
 // ---------------------------------------------------------------------------
 
@@ -169,9 +170,8 @@ describe('§26 mutations of the sources', () => {
   it('10. one window drawn as four lights: still one opening in the wall', async () => {
     const wide = { ...LARCHFIELD, openings: LARCHFIELD.openings.map((o) => (o.side === 'FRONT' && o.kind === 'WINDOW' ? { ...o, lights: 4 } : o)) }
     const mutated = await run(wide)
-    const before = await run(LARCHFIELD)
     // §12: a mullion is not another opening.
-    expect(mutated.model.openings.length).toBe(before.model.openings.length)
+    expect(mutated.model.openings.length).toBe(LARCH.model.openings.length)
   })
 
   it('11. the side elevation printed back to front: the plan still decides where the openings are', async () => {
@@ -187,13 +187,12 @@ describe('§26 mutations of the sources', () => {
     }
     const bytes = encodePng(flipped as unknown as ReturnType<typeof decodeImage> & object)
     const mutated = await runFrom(sheets.map((s) => (s.slug === 'elewacja-lewa' ? { ...s, bytes, byteHash: sha256Bytes(bytes) } : s)))
-    const before = await run(LARCHFIELD)
     const openings = (r: ReconstructionResult): string[] =>
       r.model.openings.map((o) => `${o.wallId}@${o.offset.toFixed(2)}`).sort()
     // Openings come from the PLAN, which is measured; a mirrored render cannot
     // move them. It can only leave more of itself unexplained.
-    expect(openings(mutated)).toEqual(openings(before))
-    expect(bodies(mutated)).toEqual(bodies(before))
+    expect(openings(mutated)).toEqual(openings(LARCH))
+    expect(bodies(mutated)).toEqual(bodies(LARCH))
   })
 
   it('12. the overall chain disagreeing with the contour: the layout is refused, loudly', async () => {

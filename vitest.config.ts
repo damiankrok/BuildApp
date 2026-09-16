@@ -1,3 +1,4 @@
+import { availableParallelism, cpus } from 'node:os'
 import { defineConfig } from 'vitest/config'
 
 /**
@@ -23,5 +24,14 @@ export default defineConfig({
     // not the five the default allows.
     testTimeout: 120_000,
     hookTimeout: 120_000,
+    // And they are CPU-bound for tens of seconds at a stretch, which is why
+    // the number of workers is capped BELOW the core count rather than set to
+    // it. Vitest's main thread has to service each worker's progress calls
+    // while they run; with one worker per core and two of them pegged by the
+    // fixture and mutation suites, it does not get scheduled, the calls time
+    // out, and a run in which every test passed is reported as a failure.
+    // Leaving a core for the reporter costs a little wall time and buys a
+    // result that means what it says.
+    maxWorkers: Math.max(1, (availableParallelism?.() ?? cpus().length) - 1),
   },
 })
