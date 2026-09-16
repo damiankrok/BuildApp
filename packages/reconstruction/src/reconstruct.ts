@@ -928,26 +928,27 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     //     run of glazing reflecting the sky does not.
     //
     // Neither failure announces itself. So where both readings exist they have
-    // to agree: two of them landing within a quarter of a metre of each other
-    // are unlikely to have found the same wrong thing, and where they disagree
-    // the honest answer is that this drawing does not measure this opening,
-    // which is then said in as many words as a named hole.
+    // to agree: two of them landing on the same answer are unlikely to have
+    // found the same wrong thing, and where they disagree the honest answer is
+    // that this drawing does not measure this opening — which is then said in
+    // as many words, as a named hole.
     //
-    // DISAGREEMENT is the evidence of unreliability, though — not the absence
-    // of a second opinion. On a technical line drawing the detector's
+    // DISAGREEMENT is the evidence of unreliability, though, and not the
+    // absence of a second opinion. On a technical line drawing the detector's
     // rectangle simply is the opening, cleanly and on its own, and there is
     // often no differential profile to find because there is no rendered wall
     // to differ from. Throwing that away because nothing corroborated it would
     // discard the good case to guard against the bad one.
-    const measured = measureOnElevation(side, u0, u1, floor, ceiling)
     //
-    // Both readings, and the printed callout where there is one, go through
-    // §13's objective as observations of the same two metres: the head above
-    // the floor, and the sill. `fuseQuantity` applies §24's order, weighs each
-    // by its own uncertainty, uses a robust loss so a source that has found
-    // the wrong feature bends the answer rather than breaking it, and comes
-    // back saying whether the sources AGREED, DISPUTED each other, or were a
-    // SINGLE_SOURCE with nothing to check against.
+    // Both readings go to §13's objective as observations of the same two
+    // metres — the head above the floor, and the sill. `fuseQuantity` weighs
+    // each by its own uncertainty, uses a robust loss so that a source which
+    // has found the wrong feature bends the answer rather than breaking it,
+    // and reports whether they AGREED, DISPUTED each other, or were a
+    // SINGLE_SOURCE with nothing to check against. A printed callout does not
+    // go through it, because it is not a reading of this drawing at all: it
+    // is the publisher stating the number, and it is taken as stated.
+    const measured = measureOnElevation(side, u0, u1, floor, ceiling)
     const observe = (which: 'head' | 'sill'): QuantityObservation[] => {
       const out: QuantityObservation[] = []
       if (measured) {
