@@ -167,7 +167,7 @@ build.
 ## The package
 
 `packages/image-metrology` — no React, no Three.js, no knowledge of any
-particular building. 80 tests of its own.
+particular building. 93 tests of its own.
 
 - `bounds.ts` — finding the building in the picture. Straightness, with the
   gradient threshold **derived from the image** rather than fixed: a
@@ -184,6 +184,53 @@ particular building. 80 tests of its own.
 - `opening.ts` — §15's differential extent, §10's `drawingCharacter`, and
   the silhouette profile that decides which way round an elevation reads.
 - `overlay.ts` — §22's visual debugger.
+- `homography.ts` — §11A. A facade seen at an angle is a plane, and a pinhole
+  camera maps one plane to another by a 3×3 projective transform. Four
+  correspondences fix its eight degrees of freedom; more than four say whether
+  the wall is really a plane. Hartley normalisation, because the raw system
+  mixes pixel coordinates in the hundreds with metric ones in the units and
+  the answer is otherwise dominated by rounding; and RANSAC over minimal sets
+  **enumerated in a fixed order rather than sampled**, because one
+  correspondence on the wrong feature does not bend a homography — eight
+  degrees of freedom will contort to pass through a bad point and take the
+  other seven with them.
+- `camera.ts` — §11B and §12. A homography measures a plane and is useless for
+  anything that stands off one: a balcony's depth, an eaves projection, a
+  garage's set-back. `solveCamera` resects the 3×4 projection matrix from six
+  or more world points, polishes it by minimising **reprojection** error
+  rather than the algebraic error the linear solve minimises, and factors the
+  left block by RQ into intrinsics, rotation and position. `vanishingPoint`
+  and `heightByCrossRatio` are §12's fallback: where a camera cannot be
+  solved, a family of parallel lines still meets at a point, and one vertical
+  of known height measures any other on the same ground.
+
+### The metric frame
+
+One contract covers all three. `MetricImageFrame` carries the anchors it was
+fitted to, a residual per anchor, the anchors **held back** as an independent
+check, the transform (affine, homography or camera), and an uncertainty with
+its parts separated: metres per pixel on each axis, the anchor rms and worst,
+and the systematic floor under anything measured from it. A measurement off it
+carries its own pixel interval, its metric interval, its role — registration
+anchor, independent measurement or corroborating measurement — and an
+uncertainty decomposed into edges, scale and registration.
+
+### Perspective, measured
+
+| what | result |
+| --- | --- |
+| §20 D: scene A's 10 m facade photographed by a stated camera | its three openings measure within **0.08 m** through the homography |
+| the camera resected from that picture | within **0.2 m** of where it stood, focal length 900 px recovered |
+| a point the solve never saw | reprojects within **1 px** of where that camera would put it |
+| nine perfectly measured **coplanar** points | **refused** — six points on one plane do not determine a camera, however well measured |
+| a correspondence 60 px out | **named**, not absorbed |
+| a height by cross-ratio, no camera at all | 4.5 m measured to within **0.2 m** against a 3 m reference |
+
+A perspective frame measures the same way an orthographic one does, with one
+difference a caller has to respect: **the scale varies across the picture**.
+`metresPerPixel` on a homography transform is the scale at the middle of the
+region and nothing more, so a measurement maps both of its ends and subtracts,
+never multiplies a pixel length by a number.
 
 ### What the tests establish
 
@@ -256,29 +303,55 @@ measure from a render and said so.
 | gate | result |
 | --- | --- |
 | `npm run typecheck` | clean |
-| `npm test` | **1043 tests, 81 files, all passing** |
+| `npm test` | **1056 tests, 82 files, all passing** |
 | `npm run build` | clean |
 | `npm run audit:marcowki` | AUDIT PASS |
 | `npm run audit:marcowki:facades` | 47 features: 36 pass, 9 deviation, 2 not modelled, worst 0.185 m |
 | `npm run reconstruct:no-reference` | `STRUCTURAL_LAYOUT_ACCEPTED` with the reference package removed from the tree |
+| `npm run e2e` | **22 passed** |
+| CI | <https://github.com/damiankrok/BuildApp/actions/workflows/buildapp-ci.yml> — core, browser, Android and no-reference jobs |
+| APK artifact | `buildplan-model-preview-apks`, published by the Android job on every run |
+
+### §27's fourteen conditions
+
+| # | condition | where |
+| --- | --- | --- |
+| 1 | a real image-metrology package exists | `packages/image-metrology`, 93 tests |
+| 2 | technical elevations have metric registrations | the four frames above, and `stage-reports/artifacts/image-metrology/` |
+| 3 | opening sizes come from pixel-to-metre measurement, not only OCR | every width is measured; **no callout was read at all** on this project |
+| 4 | perspective facade planes can be rectified via homography | `registerPerspectivePlane`, §20 D within 0.08 m |
+| 5 | camera PnP path exists and is tested | `solveCamera`, resected within 0.2 m and 900 px focal |
+| 6 | measurement uncertainty is recorded | `uncertaintyParts`: edges, scale, registration, separately |
+| 7 | opening edge refinement exists | `refineEdge`, sub-pixel, with its own sigma from the edge's profile |
+| 8 | mullions do not alter structural opening width | §7 and §21.1 |
+| 9 | raster scaling does not materially change metric results | §19, mandatory, six variants |
+| 10 | median opening width error ≤ 0.15 m | **0.066 m** |
+| 11 | median opening height error ≤ 0.15 m | **0.100 m** |
+| 12 | median centre error ≤ 0.20 m | **0.133 m** |
+| 13 | the 03R structural benchmark stays green | 25 benchmark assertions, all passing |
+| 14 | an updated APK is published by CI | `buildplan-model-preview-apks`, 46.7 MB |
 
 ## What this stage did not do
 
 Stated plainly, because the brief asks for a great deal and some of it is
 untouched.
 
-- **§11 planar homography and §12 vanishing points.** Not built. Nothing here
-  measures a perspective view; §21's mutation 8 asserts only that a
-  perspective view registered as orthographic does not come back clean, which
-  it does not.
-- **§13's multi-view joint fit.** Not built. Each elevation is registered
-  independently, and the agreement between the four — 16.26 to 16.49 mm/px —
-  is reported rather than used as a constraint.
-- **§20 scene D**, the perspective of scene A with a known camera, follows
-  the homography work and is not written.
+- **§13's multi-view joint fit.** Not built. Each drawing is registered
+  independently, and the agreement between the four elevations — 16.26 to
+  16.49 mm/px, a 0.9% spread on four independent measurements of one building
+  — is reported rather than used as a constraint.
+- **The perspective path is not wired into the reconstruction.** `homography.ts`
+  and `camera.ts` are built and tested against a stated camera, and the
+  pipeline does not yet call them: this project's perspective renders are
+  still used for nothing metric. What the stage establishes is that the
+  capability exists and measures correctly, not that the reconstruction uses
+  it.
 - **§8's `IMAGE_METRIC_REGISTERED` evidence class** is not added to the
   evidence schema. `metricFrameOf` builds the frame an image-registered
   measurement would cite, and the measurements themselves carry their role,
   their pixel interval and their decomposed uncertainty, but they do not yet
   travel through `MetricEvidenceSet`.
+- **§17's characteristic facade members** are not measured. A front elevation
+  cannot measure outward depth by itself, and nothing here uses a second view
+  to do it.
 - **Raked openings** are refused rather than measured, as above.

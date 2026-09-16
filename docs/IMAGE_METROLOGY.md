@@ -206,11 +206,59 @@ The metric grid is the reason to open one. A registration a few per cent out
 reads perfectly well as a number and is obvious the moment its half-metre
 ticks are laid over a building whose storeys are three metres: they drift.
 
+## A facade seen at an angle: `registerPerspectivePlane`
+
+An orthographic elevation collapses to a scale and an offset per axis. A
+photograph of the same wall does not, and no affine map can express a far end
+that is smaller. A planar homography can, because the wall is a plane and a
+pinhole camera maps one plane to another by a 3×3 projective transform.
+
+Two things are not optional, both about conditioning. **Hartley
+normalisation**, because solving the raw system mixes pixel coordinates in the
+hundreds with metric ones in the units, and the answer is otherwise dominated
+by rounding. And **RANSAC**, because a single correspondence on the wrong
+feature does not bend a homography, it breaks it: eight degrees of freedom
+will contort to pass through a bad point and take the other seven with them.
+The minimal sets are enumerated in a fixed order rather than sampled, so the
+same correspondences always give the same plane.
+
+A perspective frame measures the same way an orthographic one does, with one
+difference a caller has to respect: **the scale varies across the picture**.
+`metresPerPixel` on the transform is the scale at the middle of the region and
+nothing more, so a measurement maps both of its ends and subtracts, never
+multiplies a pixel length by a number.
+
+## Where the camera was: `solveCamera`
+
+A homography measures a plane and is useless for anything that stands off one
+— a balcony's depth, an eaves projection, the set-back of a garage. For those
+the camera itself has to be solved: the 3×4 projection matrix has eleven
+degrees of freedom, six correspondences over-determine it, and its left block
+factors by RQ into intrinsics, rotation and position. The linear solve
+minimises an algebraic error, so the pose is then polished against the one
+that matters — how far each point lands from where it was seen.
+
+The configuration matters more than the count. Six points on **one plane** do
+not determine a camera however well they are measured; the system is rank
+deficient and a solve would return a confident answer to a question that has
+none. That is measured, by how far the points sit from their own best-fitting
+plane, and refused.
+
+## Without a camera at all: `vanishingPoint`, `heightByCrossRatio`
+
+A family of parallel lines meets at a point, and that point is a direction in
+space. Lines that really are parallel in the picture give a point at infinity,
+which is correct rather than a failure, so it comes back in homogeneous form
+and is converted to pixels only where that means something.
+
+Given the vertical vanishing point, the ground plane's horizon and one
+vertical of known height, the height of any other vertical standing on the
+same ground follows from a cross-ratio — no camera, no focal length, no plane
+fit. It is a fallback and it is ranked as one: what it must never do is
+outrank a printed dimension.
+
 ## What this package does not do
 
-- **No perspective.** Planar homography, camera pose and vanishing-point
-  metrology are not built. A perspective view registered as orthographic does
-  not come back clean — the residuals say so — but nothing here measures one.
 - **No multi-view fit.** Each drawing is registered independently. Where four
   elevations of one building agree to 0.9% on the scale, that agreement is
   reported rather than used as a constraint.
