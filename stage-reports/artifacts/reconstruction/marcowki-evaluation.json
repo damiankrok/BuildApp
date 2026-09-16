@@ -1,12 +1,12 @@
 {
-  "candidateHash": "72357011d6bd977d3c034dc9a7e0fa6130930750a8da456e9d30f6062a7c62ec",
-  "candidateId": "candidate-marcowki-72357011d6bd977d",
+  "candidateHash": "98dbbf504c0a42632c1c688ffd65671371e0644b8d945ec0202baafbda48350d",
+  "candidateId": "candidate-marcowki-98dbbf504c0a4263",
   "honesty": {
     "assumed": 2,
     "hardCorrect": 0,
     "hardQuantities": 3,
     "justified": 14,
-    "unresolvedCount": 83
+    "unresolvedCount": 81
   },
   "linearSolids": {
     "candidate": 2,
@@ -68,9 +68,9 @@
         "candidateId": "opening-1",
         "heightError": -1.972812,
         "matched": true,
-        "positionError": 0.988006,
+        "positionError": 0.991838,
         "referenceId": "og-front-gable-glazing",
-        "widthError": 1.63593
+        "widthError": 1.731033
       },
       {
         "candidateId": "opening-11",
@@ -100,17 +100,17 @@
         "candidateId": "opening-3",
         "heightError": 0.535869,
         "matched": true,
-        "positionError": 0.337569,
+        "positionError": 0.309286,
         "referenceId": "og-rear-gable-east",
-        "widthError": 0.533394
+        "widthError": 0.635123
       },
       {
         "candidateId": "opening-5",
         "heightError": -1.427621,
         "matched": true,
-        "positionError": 0.744501,
+        "positionError": 0.756057,
         "referenceId": "og-rear-gable-west",
-        "widthError": 0.460952
+        "widthError": 0.385662
       },
       {
         "candidateId": "opening-0",
@@ -163,15 +163,15 @@
     ],
     "matched": 12,
     "missed": 11,
-    "positionRmsM": 0.411934,
+    "positionRmsM": 0.412604,
     "reference": 23,
-    "sizeRmsM": 0.68263,
+    "sizeRmsM": 0.693991,
     "spurious": 1
   },
   "referenceId": "marcowki-ge",
   "scores": {
     "evidenceSupportedCompleteness": 0.84058,
-    "geometricAccuracy": 0.492825
+    "geometricAccuracy": 0.492717
   },
   "shell": [
     {

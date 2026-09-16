@@ -46,6 +46,37 @@ export type SyntheticMember = {
   y: number
 }
 
+/**
+ * A body attached along the main one's right-hand side.
+ *
+ * Enough to draw a garage or an annex: its own width and depth, how far down
+ * the main body's side it starts, how many storeys it reaches, and whether it
+ * carries a roof of its own or is flat. It shares the main body's right-hand
+ * wall, as an attached body does.
+ */
+export type SyntheticWing = {
+  name: string
+  width: number
+  depth: number
+  /** Where along the main body's depth it begins, in metres from the origin corner. */
+  offsetZ: number
+  /** How many storeys it reaches. One is a garage; two is another wing of the house. */
+  storeys: number
+  roof: 'FLAT' | 'GABLE'
+  openings?: SyntheticOpening[]
+}
+
+/** A pocket bitten out of one facade: a loggia, a recessed entrance, a covered terrace. */
+export type SyntheticRecess = {
+  side: Side
+  /** Along the wall from the corner the ring starts at, in metres. */
+  at: number
+  width: number
+  /** How far into the building it goes. */
+  depth: number
+  storey: number
+}
+
 export type SyntheticHouse = {
   name: string
   /** The footprint, in metres. `width` runs west-east (x), `depth` north-south (z). */
@@ -57,10 +88,22 @@ export type SyntheticHouse = {
   roof: { pitchDeg: number; overhang: number; ridgeAxis: 'X' | 'Z' }
   openings: SyntheticOpening[]
   members: SyntheticMember[]
-  /** How the plan divides each axis into printed dimensions, in metres. Must sum to the footprint. */
+  /** How the plan divides each axis into printed dimensions, in metres. Must sum to the OVERALL footprint, wings included. */
   chainsX: number[]
   chainsZ: number[]
+  /** Bodies attached along the right-hand side. */
+  wings?: SyntheticWing[]
+  /** Pockets bitten out of a facade. */
+  recesses?: SyntheticRecess[]
+  /** How far the upper storeys are inset from the main body on each side, in metres. Zero is the same ring. */
+  upperInset?: { minX?: number; maxX?: number; minZ?: number; maxZ?: number }
+  /** The chains the upper storey's own plan prints. They must sum to what that storey actually covers. */
+  upperChainsX?: number[]
+  upperChainsZ?: number[]
 }
+
+/** The whole building's extent, wings included. */
+export const overallWidth = (house: SyntheticHouse): number => house.width + (house.wings ?? []).reduce((a, w) => Math.max(a, w.width), 0)
 
 /** The level datums a section prints, ground up, in metres above the entrance floor. */
 export function levelsOf(house: SyntheticHouse): Array<{ label: string; value: number }> {
@@ -124,16 +167,23 @@ function chain(c: Canvas, options: { axis: 'HORIZONTAL' | 'VERTICAL'; at: number
   }
 }
 
-/** The ground plan: walls, openings and the dimension chains that measure them. */
-export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions = {}): Canvas {
+/** The plan of one storey: walls, openings and the dimension chains that measure them. */
+export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & { storey?: number } = {}): Canvas {
   const o = { ...DEFAULTS, ...options }
+  const storeyIndex = options.storey ?? 0
   const ppm = o.pixelsPerMetre
-  const w = house.width * ppm
-  const d = house.depth * ppm
-  const c = new Canvas(Math.round(w + o.margin * 2), Math.round(d + o.margin * 2))
-  const x0 = o.margin
-  const y0 = o.margin
+  const inset = house.upperInset ?? {}
+  const shrink = storeyIndex === 0 ? { minX: 0, maxX: 0, minZ: 0, maxZ: 0 } : { minX: inset.minX ?? 0, maxX: inset.maxX ?? 0, minZ: inset.minZ ?? 0, maxZ: inset.maxZ ?? 0 }
+  const wings = (house.wings ?? []).filter((wing) => storeyIndex < wing.storeys)
+  const overall = overallWidth(house)
+  const c = new Canvas(Math.round(overall * ppm + o.margin * 2), Math.round(house.depth * ppm + o.margin * 2))
+  const originX = o.margin
+  const originY = o.margin
   const t = house.wallThickness * ppm
+  const x0 = originX + shrink.minX * ppm
+  const y0 = originY + shrink.minZ * ppm
+  const w = (house.width - shrink.minX - shrink.maxX) * ppm
+  const d = (house.depth - shrink.minZ - shrink.maxZ) * ppm
 
   // Walls, drawn as a solid ring the way a plan hatches them.
   c.fill(x0, y0, x0 + w, y0 + t)
@@ -141,9 +191,52 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions = 
   c.fill(x0, y0, x0 + t, y0 + d)
   c.fill(x0 + w - t, y0, x0 + w, y0 + d)
 
+  // Attached bodies, sharing the main body's right-hand wall.
+  for (const wing of wings) {
+    const wx0 = originX + house.width * ppm - t
+    const wy0 = originY + wing.offsetZ * ppm
+    const ww = wing.width * ppm + t
+    const wd = wing.depth * ppm
+    c.fill(wx0, wy0, wx0 + ww, wy0 + t)
+    c.fill(wx0, wy0 + wd - t, wx0 + ww, wy0 + wd)
+    c.fill(wx0 + ww - t, wy0, wx0 + ww, wy0 + wd)
+    for (const opening of wing.openings ?? []) {
+      const at = opening.at * ppm
+      const width = opening.width * ppm
+      if (opening.side === 'FRONT' || opening.side === 'REAR') {
+        const y = opening.side === 'FRONT' ? wy0 + wd - t : wy0
+        const along = opening.side === 'FRONT' ? ww - at - width : at
+        c.fill(wx0 + along, y, wx0 + along + width, y + t, 255)
+      } else if (opening.side === 'RIGHT') {
+        c.fill(wx0 + ww - t, wy0 + at, wx0 + ww, wy0 + at + width, 255)
+      }
+    }
+  }
+
+  // Pockets bitten out of a facade: the wall steps in and back out again.
+  for (const recess of house.recesses ?? []) {
+    if (recess.storey !== storeyIndex) continue
+    const at = recess.at * ppm
+    const width = recess.width * ppm
+    const depth = recess.depth * ppm
+    if (recess.side === 'FRONT' || recess.side === 'REAR') {
+      const outer = recess.side === 'FRONT' ? y0 + d - t : y0
+      const along = recess.side === 'FRONT' ? w - at - width : at
+      // Cut the facade away over the recess's width, put the back wall in at
+      // its depth, and close both ends with returns.
+      c.fill(x0 + along, outer, x0 + along + width, outer + t, 255)
+      const back = recess.side === 'FRONT' ? y0 + d - depth - t : y0 + depth
+      c.fill(x0 + along, back, x0 + along + width, back + t)
+      const side0 = recess.side === 'FRONT' ? back : y0
+      const side1 = recess.side === 'FRONT' ? y0 + d : back + t
+      c.fill(x0 + along, side0, x0 + along + t, side1)
+      c.fill(x0 + along + width - t, side0, x0 + along + width, side1)
+    }
+  }
+
   // Openings: a gap in the wall with its reveal lines, as a plan draws them.
   for (const opening of house.openings) {
-    if (opening.storey !== 0) continue
+    if (opening.storey !== storeyIndex) continue
     const at = opening.at * ppm
     const width = opening.width * ppm
     if (opening.side === 'FRONT' || opening.side === 'REAR') {
@@ -169,17 +262,41 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions = 
     }
   }
 
-  // The chains: an overall dimension above the parts, on each axis.
-  chain(c, { axis: 'HORIZONTAL', at: y0 - 74, start: x0, parts: [house.width], ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'HORIZONTAL', at: y0 - 34, start: x0, parts: house.chainsX, ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'VERTICAL', at: x0 - 74, start: y0, parts: [house.depth], ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'VERTICAL', at: x0 - 34, start: y0, parts: house.chainsZ, ppm, capHeight: o.capHeight, slant: o.slant })
+  const partsX = storeyIndex === 0 ? house.chainsX : (house.upperChainsX ?? house.chainsX)
+  const partsZ = storeyIndex === 0 ? house.chainsZ : (house.upperChainsZ ?? house.chainsZ)
+  const spanX = partsX.reduce((a, b) => a + b, 0)
+  const spanZ = partsZ.reduce((a, b) => a + b, 0)
+  // The chains: an overall dimension above the parts, on each axis. They
+  // measure WHAT THIS STOREY COVERS, wings included — which is what a plan
+  // does, and what makes the breakpoint between two bodies, and the step where
+  // an upper storey stops short of the one below, printed facts rather than
+  // inferences from ink.
+  // A chain is hung off the face it ends at, so that a storey which prints the
+  // whole building's depth and a storey which prints only its own both start
+  // where their own numbers say they do. That is what lets the two plans be
+  // put over one another later: a chain is the only thing on either sheet that
+  // says where this storey sits in the building.
+  const farX = Math.max(house.width - shrink.maxX, ...wings.map((wing) => house.width + wing.width))
+  const farZ = house.depth - shrink.maxZ
+  const chainX0 = originX + (farX - spanX) * ppm
+  const chainZ0 = originY + (farZ - spanZ) * ppm
+  chain(c, { axis: 'HORIZONTAL', at: originY - 74, start: chainX0, parts: [spanX], ppm, capHeight: o.capHeight, slant: o.slant })
+  chain(c, { axis: 'HORIZONTAL', at: originY - 34, start: chainX0, parts: partsX, ppm, capHeight: o.capHeight, slant: o.slant })
+  chain(c, { axis: 'VERTICAL', at: originX - 74, start: chainZ0, parts: [spanZ], ppm, capHeight: o.capHeight, slant: o.slant })
+  chain(c, { axis: 'VERTICAL', at: originX - 34, start: chainZ0, parts: partsZ, ppm, capHeight: o.capHeight, slant: o.slant })
   if (o.speckle > 0) c.speckle(o.speckle, 11)
   return c
 }
 
-/** Which wall an elevation shows, and how long it is. */
-export const elevationSpan = (house: SyntheticHouse, side: Side): number => (side === 'FRONT' || side === 'REAR' ? house.width : house.depth)
+/** Which wall an elevation shows, and how long it is. Front and rear see the wings too. */
+export const elevationSpan = (house: SyntheticHouse, side: Side): number => (side === 'FRONT' || side === 'REAR' ? overallWidth(house) : house.depth)
+
+/** How tall a wing's walls stand, and how far its own ridge rises above them. */
+export function wingHeights(house: SyntheticHouse, wing: SyntheticWing): { wall: number; rise: number } {
+  const wall = house.storeys.slice(0, wing.storeys).reduce((a, s) => a + s.height, 0)
+  const rise = wing.roof === 'FLAT' ? 0 : Number(((wing.width / 2) * Math.tan((house.roof.pitchDeg * Math.PI) / 180)).toFixed(4))
+  return { wall, rise }
+}
 
 /** An orthographic elevation: silhouette, roof, openings and the members that stand proud. */
 export function renderElevation(house: SyntheticHouse, side: Side, options: SheetOptions = {}): Canvas {
@@ -193,24 +310,41 @@ export function renderElevation(house: SyntheticHouse, side: Side, options: Shee
   const ground = o.margin + (wallHeight + rise) * ppm
   const yOf = (metres: number): number => ground - metres * ppm
 
-  // The wall block.
-  c.rect(x0, yOf(wallHeight), x0 + span * ppm, ground, 2)
+  // The main body's wall block, which on a front or rear view occupies only
+  // its own width: a wing standing beside it is a separate block, of its own
+  // height, under its own roof, and drawing the two as one rectangle is
+  // exactly the reading this stage exists to stop.
+  const bodySpan = side === 'FRONT' || side === 'REAR' ? house.width : house.depth
+  const bodyX = side === 'REAR' ? x0 + (span - bodySpan) * ppm : x0
+  c.rect(bodyX, yOf(wallHeight), bodyX + bodySpan * ppm, ground, 2)
   // The roof: a gable when the ridge runs across this view, a rake when along it.
   const gable = (house.roof.ridgeAxis === 'X') === (side === 'LEFT' || side === 'RIGHT')
   const overhang = house.roof.overhang * ppm
   if (gable) {
-    c.line(x0 - overhang, yOf(wallHeight), x0 + (span * ppm) / 2, yOf(wallHeight + rise), 2)
-    c.line(x0 + (span * ppm) / 2, yOf(wallHeight + rise), x0 + span * ppm + overhang, yOf(wallHeight), 2)
+    c.line(bodyX - overhang, yOf(wallHeight), bodyX + (bodySpan * ppm) / 2, yOf(wallHeight + rise), 2)
+    c.line(bodyX + (bodySpan * ppm) / 2, yOf(wallHeight + rise), bodyX + bodySpan * ppm + overhang, yOf(wallHeight), 2)
   } else {
-    c.line(x0 - overhang, yOf(wallHeight + rise), x0 + span * ppm + overhang, yOf(wallHeight + rise), 2)
-    c.line(x0 - overhang, yOf(wallHeight), x0 - overhang, yOf(wallHeight + rise), 1)
-    c.line(x0 + span * ppm + overhang, yOf(wallHeight), x0 + span * ppm + overhang, yOf(wallHeight + rise), 1)
+    c.line(bodyX - overhang, yOf(wallHeight + rise), bodyX + bodySpan * ppm + overhang, yOf(wallHeight + rise), 2)
+    c.line(bodyX - overhang, yOf(wallHeight), bodyX - overhang, yOf(wallHeight + rise), 1)
+    c.line(bodyX + bodySpan * ppm + overhang, yOf(wallHeight), bodyX + bodySpan * ppm + overhang, yOf(wallHeight + rise), 1)
+  }
+  // The wings, on the views that see them side on.
+  if (side === 'FRONT' || side === 'REAR') {
+    for (const wing of house.wings ?? []) {
+      const { wall, rise: wingRise } = wingHeights(house, wing)
+      const left = side === 'FRONT' ? x0 + house.width * ppm : x0
+      c.rect(left, yOf(wall), left + wing.width * ppm, ground, 2)
+      if (wingRise > 0) {
+        c.line(left, yOf(wall), left + (wing.width * ppm) / 2, yOf(wall + wingRise), 2)
+        c.line(left + (wing.width * ppm) / 2, yOf(wall + wingRise), left + wing.width * ppm, yOf(wall), 2)
+      }
+    }
   }
 
   const floorOf = (storey: number): number => house.storeys.slice(0, storey).reduce((a, s) => a + s.height, 0)
   for (const opening of house.openings) {
     if (opening.side !== side) continue
-    const left = x0 + opening.at * ppm
+    const left = bodyX + opening.at * ppm
     const bottom = yOf(floorOf(opening.storey) + opening.sill)
     const top = yOf(floorOf(opening.storey) + opening.sill + opening.height)
     c.rect(left, top, left + opening.width * ppm, bottom, 2)
@@ -219,7 +353,7 @@ export function renderElevation(house: SyntheticHouse, side: Side, options: Shee
   // because that is what a shadowed solid looks like on a technical elevation.
   for (const member of house.members) {
     if (member.side !== side) continue
-    const left = x0 + member.at * ppm
+    const left = bodyX + member.at * ppm
     if (member.orientation === 'HORIZONTAL') c.fill(left, yOf(member.y + member.width), left + member.length * ppm, yOf(member.y), 40)
     else c.fill(left, yOf(member.y + member.length), left + member.width * ppm, yOf(member.y), 40)
   }

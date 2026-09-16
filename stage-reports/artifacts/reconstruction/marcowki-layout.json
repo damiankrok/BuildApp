@@ -3,17 +3,27 @@
     {
       "chosenId": "region-built-0-1",
       "id": "alternative-storey-attic-feea62a1fa",
-      "margin": 0.513758,
+      "margin": 0.054393,
       "members": [
         {
           "id": "region-built-0-1",
-          "score": 0.642288,
-          "summary": "54% of this plan's wall lands on wall when it is scaled by 1.022 onto region-built-0-1, which is 66% of the building below"
+          "score": 0.701971,
+          "summary": "60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
         },
         {
-          "id": "region-built-6-2",
-          "score": 0.12853,
-          "summary": "10% of this plan's wall lands on wall when it is scaled by 0.572 onto region-built-6-2, which is 20% of the building below"
+          "id": "region-built-0-1",
+          "score": 0.647578,
+          "summary": "55% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and where its own chains put it along z of region-built-0-1, covering 66% of the building below"
+        },
+        {
+          "id": "region-built-0-1",
+          "score": 0.622997,
+          "summary": "52% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its min z face of region-built-0-1, covering 66% of the building below"
+        },
+        {
+          "id": "region-built-0-1",
+          "score": 0.451448,
+          "summary": "35% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its max x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
         }
       ],
       "what": "which part of the building below the attic storey plan sits over",
@@ -62,12 +72,12 @@
     }
   ],
   "conflicts": [],
-  "contentHash": "8f2f9657b301180d439bc35e7056a57ef659d5e321718a7b01644f4861a6af02",
+  "contentHash": "75c11a22c43a58cbab565cb468ff6d0a426daad27016954a7a3f384d0c98df29",
   "facadePlanes": [
     {
       "at": 7.9,
       "axis": "X",
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "exterior": true,
       "frameIds": [],
       "from": 0,
@@ -84,7 +94,7 @@
     {
       "at": 7.9,
       "axis": "X",
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "exterior": false,
       "frameIds": [],
       "from": 5.1,
@@ -101,7 +111,7 @@
     {
       "at": 12.61,
       "axis": "Z",
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "exterior": true,
       "frameIds": [],
       "from": 0,
@@ -118,7 +128,7 @@
     {
       "at": 0,
       "axis": "X",
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "exterior": true,
       "frameIds": [],
       "from": 0,
@@ -135,7 +145,7 @@
     {
       "at": 0,
       "axis": "Z",
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "exterior": true,
       "frameIds": [],
       "from": 0,
@@ -152,7 +162,7 @@
     {
       "at": 12.05,
       "axis": "X",
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "exterior": true,
       "frameIds": [],
       "from": 5.1,
@@ -168,7 +178,7 @@
     {
       "at": 12.61,
       "axis": "Z",
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "exterior": true,
       "frameIds": [],
       "from": 7.9,
@@ -184,7 +194,7 @@
     {
       "at": 7.9,
       "axis": "X",
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "exterior": false,
       "frameIds": [],
       "from": 5.1,
@@ -200,7 +210,7 @@
     {
       "at": 5.1,
       "axis": "Z",
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "exterior": true,
       "frameIds": [],
       "from": 7.9,
@@ -217,7 +227,7 @@
   "footprintRegions": [
     {
       "areaM2": 99.619,
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -260,15 +270,15 @@
       },
       "storeyId": "storey-0",
       "wallEvidence": {
-        "fraction": 0.644849,
+        "fraction": 0.674501,
         "perimeterM": 41.026752,
-        "walledM": 26.456073
+        "walledM": 27.672592
       },
-      "why": "18 adjacent built cells merged; 64% of its perimeter is drawn as wall"
+      "why": "18 adjacent built cells merged; 67% of its perimeter is drawn as wall"
     },
     {
       "areaM2": 31.1665,
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -310,15 +320,15 @@
       },
       "storeyId": "storey-0",
       "wallEvidence": {
-        "fraction": 0.687492,
+        "fraction": 0.745362,
         "perimeterM": 23.30512,
-        "walledM": 16.022091
+        "walledM": 17.370741
       },
-      "why": "6 adjacent built cells merged; 69% of its perimeter is drawn as wall"
+      "why": "6 adjacent built cells merged; 75% of its perimeter is drawn as wall"
     },
     {
-      "areaM2": 97.238421,
-      "confidence": 0.671511,
+      "areaM2": 97.256416,
+      "confidence": 0.707067,
       "evidenceIds": [],
       "frameId": "frame-asset-rzut-117027f690-fed2722c38",
       "id": "footprint-1-mass-0",
@@ -333,26 +343,26 @@
       "ring": {
         "points": [
           {
-            "x": 0.095107,
+            "x": 0,
             "z": 0
           },
           {
-            "x": 0.095107,
+            "x": 0,
             "z": 12.61
           },
           {
-            "x": 7.806322,
+            "x": 7.712642,
             "z": 12.61
           },
           {
-            "x": 7.806322,
+            "x": 7.712642,
             "z": 0
           }
         ]
       },
       "storeyId": "storey-1",
       "wallEvidence": {
-        "fraction": 0.543933,
+        "fraction": 0.603556,
         "perimeterM": 0,
         "walledM": 0
       },
@@ -485,10 +495,10 @@
     ],
     "status": "STRUCTURAL_LAYOUT_ACCEPTED"
   },
-  "id": "layout-marcowki-8f2f9657b301180d",
+  "id": "layout-marcowki-75c11a22c43a58cb",
   "masses": [
     {
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "depthM": {
         "basis": "MEASURED",
         "evidenceIds": [
@@ -554,7 +564,7 @@
         ],
         "toIndex": 1
       },
-      "why": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 64% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do",
+      "why": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 67% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do",
       "widthM": {
         "basis": "MEASURED",
         "evidenceIds": [
@@ -568,7 +578,7 @@
       }
     },
     {
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "depthM": {
         "basis": "MEASURED",
         "evidenceIds": [
@@ -629,7 +639,7 @@
         ],
         "toIndex": 0
       },
-      "why": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 69% of its perimeter is drawn as wall; it shares a wall line with the main body",
+      "why": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 75% of its perimeter is drawn as wall; it shares a wall line with the main body",
       "widthM": {
         "basis": "MEASURED",
         "evidenceIds": [
@@ -643,10 +653,10 @@
       }
     }
   ],
-  "metricEvidenceHash": "6a7fadc29463bf278a53aaaa00f47e73799957be232f594f4b970b1457640ec9",
-  "metricEvidenceId": "metrics-marcowki-6a7fadc29463bf27",
-  "observationGraphHash": "ea76c6603a089dfc5bdcb1089cebb4d320436d56e9be1a3b69c44c41f2600a5a",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-d8cef2c4eb",
+  "metricEvidenceHash": "730ccdd128b5aba11711f7a4b8bfa5e8f4e91f56a1095cc88788eecebc359e3f",
+  "metricEvidenceId": "metrics-marcowki-730ccdd128b5aba1",
+  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
   "recesses": [],
   "roofSupports": [
     {
@@ -857,7 +867,7 @@
       "why": "the plan the building's coordinates are taken from: the dimension chains' own span, with 1746 px of the 2328 px of wall found lying inside it"
     },
     {
-      "confidence": 0.67636,
+      "confidence": 0.712134,
       "elevation": {
         "basis": "MEASURED",
         "evidenceIds": [
@@ -895,7 +905,7 @@
       "id": "storey-1",
       "index": 1,
       "registeredFrom": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-      "why": "registered onto the plan below: 54% of this plan's wall lands on wall when it is scaled by 1.022 onto region-built-0-1, which is 66% of the building below"
+      "why": "registered onto the plan below: 60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
     }
   ],
   "traces": [
@@ -959,7 +969,7 @@
         "y1": 671.5
       },
       "what": "the attic storey over this body",
-      "why": "54% of this plan's wall lands on wall when it is scaled by 1.022 onto region-built-0-1, which is 66% of the building below"
+      "why": "60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
     }
   ],
   "unresolved": [

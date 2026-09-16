@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { runLengthBands } from '@buildapp/source-cv'
 import { claddingField, groupFacadeOpenings, openingPair, planOpenings, rectangleRing, sameAssembly } from '../src/index.js'
-import type { FacadeRect, MassHypothesis, MetricEvidence } from '../src/index.js'
+import type { MetricEvidence } from '@buildapp/source-metrics'
+import type { FacadeRect, MassHypothesis } from '../src/index.js'
 import { WALL, mask, sheet, walls } from './plan.js'
 
 const rect = (u0: number, v0: number, u1: number, v1: number): FacadeRect => ({ u0, v0, u1, v1 })

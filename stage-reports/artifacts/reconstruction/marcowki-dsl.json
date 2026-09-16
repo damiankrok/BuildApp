@@ -1,15 +1,15 @@
 {
-  "candidateHash": "72357011d6bd977d3c034dc9a7e0fa6130930750a8da456e9d30f6062a7c62ec",
-  "candidateId": "candidate-marcowki-72357011d6bd977d",
-  "modelHash": "a548974dd2a8cb10b0bd8991c6757ccd2cc6e92be5f4d380c5903d27dc35cea3",
+  "candidateHash": "98dbbf504c0a42632c1c688ffd65671371e0644b8d945ec0202baafbda48350d",
+  "candidateId": "candidate-marcowki-98dbbf504c0a4263",
+  "modelHash": "e00b125cc599c1967da367cc74669e6a43af0b517ddbc00d733613a22cf3879b",
   "program": [
     {
-      "name": "Automatic candidate",
+      "name": "Marcówki (auto)",
       "type": "setModelName"
     },
     {
       "id": "bld-auto",
-      "name": "Automatic candidate",
+      "name": "Marcówki (auto)",
       "type": "createBuilding"
     },
     {
@@ -296,7 +296,7 @@
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.33593
+      "width": 4.431033
     },
     {
       "id": "opening-1-w",
@@ -324,11 +324,11 @@
       "height": 1.602379,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 4.52858,
+      "offset": 4.426851,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.873394
+      "width": 2.975123
     },
     {
       "id": "opening-3-w",
@@ -360,7 +360,7 @@
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.800952
+      "width": 2.725662
     },
     {
       "id": "opening-5-w",
@@ -468,11 +468,11 @@
       "height": 0.702379,
       "id": "opening-12",
       "kind": "WINDOW",
-      "offset": 6.805554,
+      "offset": 6.900657,
       "sill": 0.9,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 0.59642
+      "width": 0.501317
     },
     {
       "id": "opening-12-w",

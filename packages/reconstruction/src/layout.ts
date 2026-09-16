@@ -40,7 +40,7 @@ import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
-import { bandWallThickness, decomposePlan, planExtent } from './plan-decomposition.js'
+import { bandWallThickness, decomposePlan, planBodies, planExtent } from './plan-decomposition.js'
 import type { GridLine, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
@@ -95,8 +95,12 @@ export type PlanAlignment = {
   /** The region of the base plan this alignment maps the other plan's walls onto. */
   targetId: string
   targetRect: PixelRect
+  /** Where this alignment actually puts the other plan's walls, in the base plan's pixels. */
+  placedRect: PixelRect
   /** Fraction of the other plan's wall length that lands on a wall of the base plan. */
   agreement: number
+  /** True when both offsets come from the two plans' own dimension chains rather than from an assumption about how storeys stack. */
+  stated: boolean
   score: number
   why: string
 }
@@ -309,9 +313,10 @@ export function alignmentTargets(base: PlanReading): Array<{ id: string; rect: P
  * decide between them will happily return the average of the two, which is a
  * building that exists nowhere.
  */
-export function alignPlans(base: PlanReading, other: PlanReading, options: { maxAnisotropy?: number; coverageWeight?: number } = {}): { best: PlanAlignment | undefined; considered: PlanAlignment[] } {
+export function alignPlans(base: PlanReading, other: PlanReading, options: { maxAnisotropy?: number; coverageWeight?: number; statedBonus?: number } = {}): { best: PlanAlignment | undefined; considered: PlanAlignment[] } {
   const maxAnisotropy = options.maxAnisotropy ?? 1.15
   const coverageWeight = options.coverageWeight ?? 0.15
+  const statedBonus = options.statedBonus ?? 0.03
   const source = other.decomposition.envelope?.rect ?? other.extent
   const envelope = base.decomposition.envelope?.rect ?? base.extent
   const considered: PlanAlignment[] = []
@@ -335,44 +340,122 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
   if (totalLength === 0) return { best: undefined, considered }
   const tolerance = Math.max(3, base.wallPx / 2)
 
+  // The scales worth trying, and nothing between them. Each one is a
+  // STATEMENT about the two drawings rather than a parameter to be tuned:
+  // either the two plans state their own scales, in which case the ratio of
+  // those is the scale and there is nothing to search, or one plan states
+  // none and the only way in is to assume it covers some part of the plan
+  // below exactly.
+  const stated =
+    base.registration && other.registration
+      ? {
+          k: (other.registration.metresPerPixelX / base.registration.metresPerPixelX + other.registration.metresPerPixelY / base.registration.metresPerPixelY) / 2,
+          anisotropy:
+            Math.max(other.registration.metresPerPixelX / base.registration.metresPerPixelX, other.registration.metresPerPixelY / base.registration.metresPerPixelY) /
+            Math.max(1e-9, Math.min(other.registration.metresPerPixelX / base.registration.metresPerPixelX, other.registration.metresPerPixelY / base.registration.metresPerPixelY)),
+        }
+      : undefined
+
   for (const target of alignmentTargets(base)) {
     const sx = width(target.rect) / width(source)
     const sy = height(target.rect) / height(source)
-    const anisotropy = Math.max(sx, sy) / Math.max(1e-9, Math.min(sx, sy))
-    if (!Number.isFinite(anisotropy) || anisotropy > maxAnisotropy) continue
-    const scale = (sx + sy) / 2
-    const sc = centre(source)
-    const tc = centre(target.rect)
-    const offsetX = tc.x - sc.x * scale
-    const offsetY = tc.y - sc.y * scale
-
-    let matched = 0
-    for (const axis of ['VERTICAL', 'HORIZONTAL'] as const) {
-      for (const band of otherAxes[axis]) {
-        const mapped = axis === 'VERTICAL' ? band.axisPx * scale + offsetX : band.axisPx * scale + offsetY
-        const near = baseAxes[axis].some((b) => Math.abs(b.axisPx - mapped) <= tolerance)
-        if (near) matched += band.length
+    const fitted = Math.max(sx, sy) / Math.max(1e-9, Math.min(sx, sy))
+    const scales: Array<{ k: number; why: string }> = []
+    if (stated && stated.anisotropy <= maxAnisotropy) scales.push({ k: stated.k, why: 'the scale both plans print on their own chains' })
+    if (Number.isFinite(fitted) && fitted <= maxAnisotropy) scales.push({ k: (sx + sy) / 2, why: `the scale that makes this plan the size of ${target.id}` })
+    for (const { k: scale, why: scaleWhy } of scales) {
+      if (!Number.isFinite(scale) || scale <= 0) continue
+      // An upper storey does not have to be concentric with the one below. It
+      // steps back from one wall and stays flush with the other, so the
+      // offsets worth trying are the ones that put a face of this plan on a
+      // face of the target — plus the centre, for the case where it is inset
+      // all round. Nine of them, discrete, each one a claim about which walls
+      // continue up.
+      const sc = centre(source)
+      const tc = centre(target.rect)
+      const offsetsX = [
+        { v: target.rect.x0 - source.x0 * scale, stated: false, why: 'flush at its min x face' },
+        { v: target.rect.x1 - source.x1 * scale, stated: false, why: 'flush at its max x face' },
+        { v: tc.x - sc.x * scale, stated: false, why: 'centred across x' },
+      ]
+      const offsetsY = [
+        { v: target.rect.y0 - source.y0 * scale, stated: false, why: 'flush at its min z face' },
+        { v: target.rect.y1 - source.y1 * scale, stated: false, why: 'flush at its max z face' },
+        { v: tc.y - sc.y * scale, stated: false, why: 'centred across z' },
+      ]
+      // And where the two plans' OWN CHAINS put this storey. A plan that
+      // prints the whole building's depth and then breaks it where its own
+      // walls start has said, in its own numbers, how far in it sits — and
+      // that is the one candidate here which is a reading of the drawings
+      // rather than an assumption about how storeys usually stack.
+      if (base.registration && other.registration) {
+        const px = (v: number, axis: 'x' | 'y'): number => {
+          const mpp = axis === 'x' ? other.registration!.metresPerPixelX : other.registration!.metresPerPixelY
+          const baseMpp = axis === 'x' ? base.registration!.metresPerPixelX : base.registration!.metresPerPixelY
+          const origin = axis === 'x' ? other.registration!.originPx.x : other.registration!.originPx.y
+          const baseOrigin = axis === 'x' ? base.registration!.originPx.x : base.registration!.originPx.y
+          return baseOrigin + ((v - origin) * mpp) / baseMpp
+        }
+        offsetsX.push({ v: px(source.x0, 'x') - source.x0 * scale, stated: true, why: 'where its own chains put it along x' })
+        offsetsY.push({ v: px(source.y0, 'y') - source.y0 * scale, stated: true, why: 'where its own chains put it along z' })
+      }
+      for (const ox of offsetsX) {
+        for (const oy of offsetsY) {
+          const offsetX = ox.v
+          const offsetY = oy.v
+          let matched = 0
+          for (const axis of ['VERTICAL', 'HORIZONTAL'] as const) {
+            for (const band of otherAxes[axis]) {
+              const mapped = axis === 'VERTICAL' ? band.axisPx * scale + offsetX : band.axisPx * scale + offsetY
+              const near = baseAxes[axis].some((b) => Math.abs(b.axisPx - mapped) <= tolerance)
+              if (near) matched += band.length
+            }
+          }
+          const agreement = round6(matched / totalLength)
+          // §20's simple-explanation prior, as a small thumb on the scale and
+          // not more: an upper storey usually covers most of the storey below,
+          // so where two targets explain the walls equally well the larger is
+          // the likelier reading. It must never outweigh the walls themselves.
+          const placed: PixelRect = { x0: source.x0 * scale + offsetX, y0: source.y0 * scale + offsetY, x1: source.x1 * scale + offsetX, y1: source.y1 * scale + offsetY }
+          // Covering all of the storey below is the likeliest reading; covering
+          // TWICE it is not a simpler explanation but a wrong one, so the prior
+          // has to fall away past a full covering rather than keep climbing.
+          const ratio = (width(placed) * height(placed)) / Math.max(1, width(envelope) * height(envelope))
+          const coverage = round6(ratio <= 1 ? Math.max(0, ratio) : Math.max(0, 2 - ratio))
+          // Where the storey sits is stated by its own chains or guessed from
+          // how storeys usually stack, and the two must not be weighed as if
+          // they were the same kind of thing. The bonus is small enough that
+          // any real difference in how the walls line up still decides.
+          const isStated = ox.stated && oy.stated
+          considered.push({
+            scale: round6(scale),
+            offsetX: round6(offsetX),
+            offsetY: round6(offsetY),
+            targetId: target.id,
+            targetRect: target.rect,
+            placedRect: { x0: round6(placed.x0), y0: round6(placed.y0), x1: round6(placed.x1), y1: round6(placed.y1) },
+            agreement,
+            stated: isStated,
+            score: round6(agreement + coverageWeight * coverage + (isStated ? statedBonus : 0)),
+            why: `${Math.round(agreement * 100)}% of this plan's wall lands on wall at ${scaleWhy} (${scale.toFixed(3)}), ${ox.why} and ${oy.why} of ${target.id}, covering ${Math.round(coverage * 100)}% of the building below`,
+          })
+        }
       }
     }
-    const agreement = round6(matched / totalLength)
-    // §20's simple-explanation prior, as a small thumb on the scale and not
-    // more: an upper storey usually covers most of the storey below, so where
-    // two targets explain the walls equally well the larger is the likelier
-    // reading. It must never outweigh the walls themselves.
-    const coverage = round6((width(target.rect) * height(target.rect)) / Math.max(1, width(envelope) * height(envelope)))
-    considered.push({
-      scale: round6(scale),
-      offsetX: round6(offsetX),
-      offsetY: round6(offsetY),
-      targetId: target.id,
-      targetRect: target.rect,
-      agreement,
-      score: round6(agreement + coverageWeight * coverage),
-      why: `${Math.round(agreement * 100)}% of this plan's wall lands on wall when it is scaled by ${scale.toFixed(3)} onto ${target.id}, which is ${Math.round(coverage * 100)}% of the building below`,
-    })
   }
-  considered.sort((a, b) => b.score - a.score || a.targetId.localeCompare(b.targetId))
-  return { best: considered[0], considered }
+  considered.sort((a, b) => b.score - a.score || a.targetId.localeCompare(b.targetId) || a.offsetX - b.offsetX || a.offsetY - b.offsetY)
+  // Two candidates that put the plan in the same place are one candidate,
+  // however differently they were arrived at: a square plan is flush with
+  // both its side walls and centred between them at once, and reporting that
+  // as three readings of the building would turn agreement into ambiguity.
+  const seen = new Set<string>()
+  const distinct = considered.filter((c) => {
+    const key = `${c.scale.toFixed(3)}:${Math.round(c.offsetX / tolerance)}:${Math.round(c.offsetY / tolerance)}`
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+  return { best: distinct[0], considered: distinct }
 }
 
 // ---------------------------------------------------------------------------
@@ -394,6 +477,15 @@ function storeyIndices(plans: readonly PlanReading[]): Map<string, number> {
 }
 
 const overlap1d = (a0: number, a1: number, b0: number, b1: number): number => Math.max(0, Math.min(a1, b1) - Math.max(a0, b0))
+
+/** How much two pixel rectangles are the same rectangle: intersection over union, 0..1. */
+const rectIoU = (a: PixelRect, b: PixelRect): number => {
+  const w = Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
+  const h = Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0))
+  const inter = w * h
+  const union = Math.max(0, a.x1 - a.x0) * Math.max(0, a.y1 - a.y0) + Math.max(0, b.x1 - b.x0) * Math.max(0, b.y1 - b.y0) - inter
+  return union <= 0 ? 0 : inter / union
+}
 
 const rectOverlapArea = (a: PlanRing, b: PlanRing): number => {
   const ab = ringBoundsOf(a)
@@ -674,6 +766,20 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   const wallM = round6(base.wallPx * Math.max(frame.metresPerPixelX, frame.metresPerPixelY))
   const indices = storeyIndices(plans)
 
+  // The bodies of the base plan, wanted twice: once to say which of them each
+  // upper storey stands on, and once to build the masses from.
+  const built = planBodies(base.decomposition)
+  const standsOn = (rect: PixelRect): string =>
+    built
+      .filter((region) => {
+        const w = Math.max(0, Math.min(rect.x1, region.rect.x1) - Math.max(rect.x0, region.rect.x0))
+        const h = Math.max(0, Math.min(rect.y1, region.rect.y1) - Math.max(rect.y0, region.rect.y0))
+        return (w * h) / Math.max(1, (region.rect.x1 - region.rect.x0) * (region.rect.y1 - region.rect.y0)) >= 0.5
+      })
+      .map((region) => region.id)
+      .sort()
+      .join(',')
+
   // --- storeys, and the alignment of each onto the base ---------------------
   for (const plan of plans) {
     const index = indices.get(plan.storey) ?? 0
@@ -689,7 +795,13 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
         confidence = round6(Math.min(0.92, 0.35 + best.agreement * 0.6))
         why = `registered onto the plan below: ${best.why}`
         if (considered.length > 1) {
-          const runnerUp = considered[1]
+          // The runner-up worth reporting is the best one that puts the storey
+          // somewhere ELSE. Two candidates that land the plan on the same
+          // walls are one reading arrived at twice — a plan flush with a wall
+          // is also centred on it when it is the same size — and calling that
+          // a disagreement turns agreement into doubt.
+          const elsewhere = considered.slice(1).find((c) => rectIoU(c.placedRect, best.placedRect) < 0.7)
+          const runnerUp = elsewhere ?? considered[1]
           alternatives.push({
             id: stableId('alternative', `storey-${plan.storey.toLowerCase()}`, { frameId: plan.frame.id }),
             what: `which part of the building below the ${plan.storey.toLowerCase()} storey plan sits over`,
@@ -698,14 +810,21 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
             margin: round6(best.score - runnerUp.score),
             why: `the walls of this plan land on the walls of ${best.targetId} better than on any other part of the building below`,
           })
-          if (best.score - runnerUp.score < 0.1) {
+          // A disagreement about COVERAGE is a disagreement about which bodies
+          // this storey stands on — §6's question, the one that decides
+          // whether a single-storey garage gains an upper ring. Two readings
+          // that stand the storey on the same bodies and differ only in where
+          // exactly they sit on them are a wobble, reported as the alternative
+          // it is and not as a contradiction in the building's composition.
+          const different = elsewhere !== undefined && standsOn(elsewhere.placedRect) !== standsOn(best.placedRect)
+          if (elsewhere && different && best.score - elsewhere.score < 0.1 && !(best.stated && !elsewhere.stated)) {
             conflicts.push({
               id: stableId('conflict', `storey-${plan.storey.toLowerCase()}`, { frameId: plan.frame.id }),
               kind: 'STOREY_COVERAGE_DISAGREES',
-              what: `the ${plan.storey.toLowerCase()} storey plan fits ${best.targetId} and ${runnerUp.targetId} almost equally well`,
-              itemIds: [best.targetId, runnerUp.targetId],
+              what: `the ${plan.storey.toLowerCase()} storey plan fits ${best.targetId} and ${elsewhere.targetId} almost equally well, in two places ${Math.round((1 - rectIoU(elsewhere.placedRect, best.placedRect)) * 100)}% apart`,
+              itemIds: [best.targetId, elsewhere.targetId],
               evidenceIds: [],
-              magnitude: round6(best.score - runnerUp.score),
+              magnitude: round6(best.score - elsewhere.score),
               unit: 'none',
             })
           }
@@ -736,7 +855,6 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   if (!baseStorey) return { ...empty, base, frame }
 
   // --- the base storey's regions -------------------------------------------
-  const built = base.decomposition.regions.filter((r) => r.classification === 'BUILT')
   for (const region of built) {
     const ring = ringOfRect(region.rect, frame)
     const wallEvidence = perimeterWallEvidence(region, base.decomposition, frame)

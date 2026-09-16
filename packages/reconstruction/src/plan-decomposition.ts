@@ -58,6 +58,19 @@ export type GridLineSupport = {
   bandLength: number
   /** How much of the plan's extent the supporting bands span. */
   bandCoverage: number
+  /**
+   * True when a supporting band runs wall to wall.
+   *
+   * Coverage alone cannot see a return. The two side walls of a 1.60 m loggia
+   * are a tenth of the plan long and are structure all the same: they carry
+   * the facade over the mouth, they are what makes the pocket a pocket, and
+   * without a grid line on them the recess has no sides and the flood fill
+   * walks through the whole front of the building. What tells them from a
+   * stray mark is not their length but their ENDS — a member that lands on a
+   * wall at both ends spans between them, and a member that stops in mid-air
+   * does not.
+   */
+  bandSpans: boolean
 }
 
 export type GridLine = {
@@ -84,7 +97,9 @@ export type EdgeClosure = {
   wall: number
   /** Fraction covered by continuous ink of any weight — glazing, a thin contour, a balustrade. */
   line: number
-  /** The two combined: what the flood fill is stopped by. */
+  /** Fraction taken up by holes in a wall that carries on either side of them: doors and windows. */
+  opening: number
+  /** The three combined: what the flood fill is stopped by. */
   closure: number
 }
 
@@ -164,6 +179,8 @@ export type PlanDecompositionOptions = {
   fallbackWallPx?: number
   /** Shortest unbroken stretch of line work worth believing, in pixels. */
   minLinePx?: number
+  /** The widest hole a wall may have and still count as a wall, in metres. */
+  maxOpeningM?: number
 }
 
 const DEFAULTS: Required<PlanDecompositionOptions> = {
@@ -174,6 +191,11 @@ const DEFAULTS: Required<PlanDecompositionOptions> = {
   minCellM: 0.45,
   fallbackWallPx: 12,
   minLinePx: 18,
+  // A garage door is about 2.4 m and the widest domestic one about 3.0. Past
+  // that a hole is not a hole: it is where the wall stops, which is what the
+  // mouth of a loggia and the open side of a carport are. The number is a
+  // convention, and it is the only thing separating the two.
+  maxOpeningM: 3.2,
 }
 
 const at = (m: Mask, x: number, y: number): number => (x < 0 || y < 0 || x >= m.width || y >= m.height ? 0 : m.data[y * m.width + x])
@@ -200,6 +222,36 @@ export function bandWallThickness(bands: readonly Band[], fallbackPx: number): n
 }
 
 type RawLine = { px: number; support: GridLineSupport; probes: number[] }
+
+/**
+ * A band that lands on another wall at both of its ends.
+ *
+ * The junction itself is invisible to the band reader — where two walls meet,
+ * the run ACROSS one of them is the length of the other and every pixel of the
+ * corner fails the thickness test — so the two are never quite touching in the
+ * output, and the test allows for that gap. Length is not the criterion but
+ * there is still a floor on it: a mark shorter than a couple of wall
+ * thicknesses is a mark.
+ */
+function spansWallToWall(band: Band, bands: readonly Band[]): boolean {
+  if (band.length < band.thickness * 2.5) return false
+  const gap = Math.max(3, band.thickness * 1.2)
+  const vertical = band.axis === 'VERTICAL'
+  const ends = vertical ? [band.bounds.y0, band.bounds.y1] : [band.bounds.x0, band.bounds.x1]
+  const side0 = vertical ? band.bounds.x0 : band.bounds.y0
+  const side1 = vertical ? band.bounds.x1 : band.bounds.y1
+  const lands = (end: number): boolean =>
+    bands.some((other) => {
+      if (other === band || other.axis === band.axis) return false
+      const across0 = vertical ? other.bounds.y0 : other.bounds.x0
+      const across1 = vertical ? other.bounds.y1 : other.bounds.x1
+      if (end < across0 - gap || end > across1 + gap) return false
+      const along0 = vertical ? other.bounds.x0 : other.bounds.y0
+      const along1 = vertical ? other.bounds.x1 : other.bounds.y1
+      return along1 >= side0 - gap && along0 <= side1 + gap
+    })
+  return ends.every(lands)
+}
 
 /**
  * The grid lines a plan's own evidence supports.
@@ -251,7 +303,7 @@ export function gridLines(
         for (const px of [segment.fromPx, segment.toPx]) {
           if (px < low || px > high) continue
           const held = nearest(px, opt.snapPx)
-          const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
+          const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0, bandSpans: false }, probes: [round6(px)] }
           if (!held) raw.push(line)
           if (!line.support.chainIds.includes(chain.id)) line.support.chainIds.push(chain.id)
           if (printed && !line.support.printedChainIds.includes(chain.id)) line.support.printedChainIds.push(chain.id)
@@ -280,10 +332,11 @@ export function gridLines(
       const claimants = raw.filter((l) => Math.abs(l.px - px) <= window || faces.some((f) => Math.abs(l.px - f) <= faceWindow))
       claimants.sort((a, b) => b.support.chainSpanPx - a.support.chainSpanPx || Math.abs(a.px - px) - Math.abs(b.px - px) || a.px - b.px)
       const held = claimants[0] ?? nearest(px, window)
-      const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
+      const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0, bandSpans: false }, probes: [round6(px)] }
       if (!held) raw.push(line)
       line.support.bandLength += band.length
       line.support.bandCoverage = Math.min(1, line.support.bandLength / span)
+      if (spansWallToWall(band, bands)) line.support.bandSpans = true
       // A wall has two faces and an axis, and which of the three a drawing
       // hangs its openings off varies: a window is drawn across the wall, a
       // garage door along its inner face, a terrace edge along its outer one.
@@ -293,11 +346,11 @@ export function gridLines(
     }
 
     return raw
-      .filter((line) => line.support.chainIds.length > 0 || line.support.bandCoverage >= opt.minBandCoverage)
+      .filter((line) => line.support.chainIds.length > 0 || line.support.bandCoverage >= opt.minBandCoverage || line.support.bandSpans)
       .map((line) => {
         const chain = line.support.chainIds.length > 0
         const printed = line.support.printedChainIds.length > 0
-        const band = line.support.bandCoverage >= opt.minBandCoverage
+        const band = line.support.bandCoverage >= opt.minBandCoverage || line.support.bandSpans
         // A tick whose number was READ is a statement; a tick whose number the
         // chain worked out from its own scale is an inference, and an
         // inference must not outrank the statement it was inferred from —
@@ -355,13 +408,27 @@ function thinLines(lines: readonly GridLine[], minGapPx: number, probeGapPx: num
 function wallIntervals(bands: readonly Band[], axis: 'X' | 'Y', line: GridLine, from: number, to: number, tolerance: number): Array<[number, number]> {
   const covered: Array<[number, number]> = []
   for (const band of bands) {
-    const across = (band.axis === 'VERTICAL') === (axis === 'X')
-    if (!across) continue
-    // Compare against the band's extent across rather than its centre alone: a
-    // wall drawn 18 px thick still shuts an edge falling anywhere inside it.
-    const lo = axis === 'X' ? band.bounds.x0 : band.bounds.y0
-    const hi = axis === 'X' ? band.bounds.x1 : band.bounds.y1
-    if (!line.probesPx.some((p) => p >= lo - tolerance && p <= hi + tolerance)) continue
+    const along = (band.axis === 'VERTICAL') === (axis === 'X')
+    if (along) {
+      // Compare against the band's extent across rather than its centre alone: a
+      // wall drawn 18 px thick still shuts an edge falling anywhere inside it.
+      const lo = axis === 'X' ? band.bounds.x0 : band.bounds.y0
+      const hi = axis === 'X' ? band.bounds.x1 : band.bounds.y1
+      if (!line.probesPx.some((p) => p >= lo - tolerance && p <= hi + tolerance)) continue
+      const a = axis === 'X' ? band.bounds.y0 : band.bounds.x0
+      const b = axis === 'X' ? band.bounds.y1 : band.bounds.x1
+      const overlap: [number, number] = [Math.max(from, a), Math.min(to, b)]
+      if (overlap[1] > overlap[0]) covered.push(overlap)
+      continue
+    }
+    // A wall CROSSING this line is solid where it crosses, and the band reader
+    // cannot see it: at a junction the run ACROSS belongs to the other wall, so
+    // every pixel of the corner fails the thickness test and drops out. Left
+    // out, a 0.6 m pier between a garage door and the corner disappears
+    // entirely, the garage's front reads as a wall that simply stops, and the
+    // flood fill walks in through it and calls the garage ground.
+    const segment = band.segments.some((g) => g.from - tolerance <= line.px && g.to + tolerance >= line.px)
+    if (!segment) continue
     const a = axis === 'X' ? band.bounds.y0 : band.bounds.x0
     const b = axis === 'X' ? band.bounds.y1 : band.bounds.x1
     const overlap: [number, number] = [Math.max(from, a), Math.min(to, b)]
@@ -468,13 +535,23 @@ function interiorInk(mask: Mask, bands: readonly Band[], rect: PixelRect): numbe
 }
 
 /**
- * One edge's closure, from the wall it is built of and the line work drawn on it.
+ * One edge's closure, from the wall it is built of, the line work drawn on it,
+ * and the doors and windows cut through it.
  *
- * The two are unioned rather than maxed, because half a wall and half a
+ * Wall and line are unioned rather than maxed, because half a wall and half a
  * window in line with each other make one shut edge, and taking the larger of
  * the halves would call it half open.
+ *
+ * The third term is the one that matters for a garage. A wall with a 2.4 m
+ * door in it is 36% covered and 100% a wall: it encloses the garage, it holds
+ * the storey above up, and a reader that treats it as a missing face floods
+ * straight through the door and reports the garage as ground. So a hole
+ * BETWEEN TWO PIECES OF THE SAME WALL counts as shut, and a hole at the END
+ * of one does not — that is where the wall stops, not where it is pierced.
+ * The width cap keeps the rule honest: the open side of a carport and the
+ * mouth of a loggia are wider than any lintel spans, and stay open.
  */
-function closureOf(walls: ReadonlyArray<readonly [number, number]>, lines: ReadonlyArray<readonly [number, number]>, from: number, to: number): EdgeClosure {
+function closureOf(walls: ReadonlyArray<readonly [number, number]>, lines: ReadonlyArray<readonly [number, number]>, from: number, to: number, maxOpeningPx: number, minJambPx: number): EdgeClosure {
   const span = Math.max(1, to - from)
   const clip = (intervals: ReadonlyArray<readonly [number, number]>): Array<[number, number]> => {
     const out: Array<[number, number]> = []
@@ -487,10 +564,25 @@ function closureOf(walls: ReadonlyArray<readonly [number, number]>, lines: Reado
   }
   const w = clip(walls)
   const l = clip(lines)
+  // The pieces of wall on this edge, in order, with the touching ones joined.
+  const pieces: Array<[number, number]> = []
+  for (const [a, b] of [...w].sort((p, q) => p[0] - q[0])) {
+    const last = pieces[pieces.length - 1]
+    if (last && a <= last[1] + 1) last[1] = Math.max(last[1], b)
+    else pieces.push([a, b])
+  }
+  const holes: Array<[number, number]> = []
+  for (let i = 0; i + 1 < pieces.length; i += 1) {
+    const [, end] = pieces[i]
+    const [start] = pieces[i + 1]
+    const jambs = Math.min(pieces[i][1] - pieces[i][0], pieces[i + 1][1] - pieces[i + 1][0])
+    if (start - end <= maxOpeningPx && jambs >= minJambPx) holes.push([end, start])
+  }
   return {
     wall: round6(Math.min(1, unionLength([...w]) / span)),
     line: round6(Math.min(1, unionLength([...l]) / span)),
-    closure: round6(Math.min(1, unionLength([...w, ...l]) / span)),
+    opening: round6(Math.min(1, unionLength([...holes]) / span)),
+    closure: round6(Math.min(1, unionLength([...w, ...l, ...holes]) / span)),
   }
 }
 
@@ -739,6 +831,8 @@ export function decomposePlan(
   const ny = linesY.length - 1
   const tolerance = Math.max(4, wallPx * 0.6)
   const lineTolerance = Math.max(3, wallPx * 0.35)
+  const maxOpeningPx = opt.maxOpeningM / Math.max(mppX, mppY)
+  const minJambPx = Math.max(2, wallPx * 0.5)
 
   // --- closures of every edge of the grid, computed once ---
   // vEdge[ix][iy] is the vertical edge on line ix beside cell row iy.
@@ -751,7 +845,7 @@ export function decomposePlan(
     const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance)
     const drawn = lineIntervals(mask, 'X', linesX[ix], topY, bottomY, lineTolerance, opt.minLinePx)
     const column: EdgeClosure[] = []
-    for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px))
+    for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px, maxOpeningPx, minJambPx))
     vEdge.push(column)
   }
   const hEdge: EdgeClosure[][] = []
@@ -759,7 +853,7 @@ export function decomposePlan(
     const walls = wallIntervals(inside, 'Y', linesY[iy], leftX, rightX, tolerance)
     const drawn = lineIntervals(mask, 'Y', linesY[iy], leftX, rightX, lineTolerance, opt.minLinePx)
     const row: EdgeClosure[] = []
-    for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px))
+    for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px, maxOpeningPx, minJambPx))
     hEdge.push(row)
   }
 
@@ -954,4 +1048,130 @@ function mergeRegions(
     })
   }
   return regions.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || a.id.localeCompare(b.id))
+}
+
+/**
+ * The BUILT regions of a plan gathered into BODIES.
+ *
+ * Regions are maximal RECTANGLES, and a building is not obliged to be one. A
+ * house with a loggia bitten out of its front decomposes into the big
+ * rectangle behind the pocket and the two strips either side of it, and those
+ * three are one house: nothing is drawn between them, you walk from one to
+ * the next without passing a wall, and reporting them as three bodies is the
+ * same error as reporting the whole plan as one box, made in the other
+ * direction.
+ *
+ * So two adjacent regions are one body when NO WALL IS DRAWN between them. A
+ * wall is what divides a garage from the house it stands against; an
+ * unmarked grid line, struck where a dimension chain happens to break or
+ * where a recess's return wall ends, divides nothing.
+ *
+ * A body is only turned back into a rectangle when it IS one — when its
+ * bounding box is covered by its own cells and by the pockets bitten out of
+ * it. A body that is genuinely L-shaped stays as its separate regions, to be
+ * reported as two bodies standing against each other, because inflating it to
+ * its bounding box would build over ground the plan shows as open.
+ */
+export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): PlanRegion[] {
+  const built = decomposition.regions.filter((r) => r.classification === 'BUILT')
+  if (built.length < 2) return built
+  const byCell = new Map<string, number>()
+  built.forEach((region, index) => {
+    for (const cell of region.cells) byCell.set(`${cell.ix}:${cell.iy}`, index)
+  })
+  const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const parent = built.map((_, i) => i)
+  const find = (i: number): number => {
+    let root = i
+    while (parent[root] !== root) root = parent[root]
+    let walk = i
+    while (parent[walk] !== walk) {
+      const next = parent[walk]
+      parent[walk] = root
+      walk = next
+    }
+    return root
+  }
+
+  // How much of each pair's shared boundary carries a wall.
+  const shared = new Map<string, { length: number; walled: number }>()
+  for (const cell of decomposition.cells) {
+    const mine = byCell.get(`${cell.ix}:${cell.iy}`)
+    if (mine === undefined) continue
+    const neighbours: Array<[number, number]> = [
+      [cell.ix, cell.iy - 1],
+      [cell.ix + 1, cell.iy],
+      [cell.ix, cell.iy + 1],
+      [cell.ix - 1, cell.iy],
+    ]
+    for (let s = 0; s < 4; s += 1) {
+      const theirs = byCell.get(`${neighbours[s][0]}:${neighbours[s][1]}`)
+      if (theirs === undefined || theirs === mine) continue
+      const key = mine < theirs ? `${mine}:${theirs}` : `${theirs}:${mine}`
+      const lengthPx = s % 2 === 0 ? cell.rect.x1 - cell.rect.x0 : cell.rect.y1 - cell.rect.y0
+      const entry = shared.get(key) ?? { length: 0, walled: 0 }
+      entry.length += lengthPx
+      entry.walled += lengthPx * cell.edges[s].wall
+      shared.set(key, entry)
+    }
+  }
+  for (const [key, entry] of shared) {
+    if (entry.length <= 0 || entry.walled / entry.length >= wallShare) continue
+    const [a, b] = key.split(':').map(Number)
+    const ra = find(a)
+    const rb = find(b)
+    if (ra !== rb) parent[rb] = ra
+  }
+
+  const groups = new Map<number, number[]>()
+  built.forEach((_, index) => {
+    const root = find(index)
+    groups.set(root, [...(groups.get(root) ?? []), index])
+  })
+  const out: PlanRegion[] = []
+  for (const [, members] of groups) {
+    if (members.length === 1) {
+      out.push(built[members[0]])
+      continue
+    }
+    const parts = members.map((i) => built[i])
+    const rect: PixelRect = {
+      x0: Math.min(...parts.map((p) => p.rect.x0)),
+      y0: Math.min(...parts.map((p) => p.rect.y0)),
+      x1: Math.max(...parts.map((p) => p.rect.x1)),
+      y1: Math.max(...parts.map((p) => p.rect.y1)),
+    }
+    const cells = parts.flatMap((p) => p.cells)
+    const own = new Set(cells.map((c) => `${c.ix}:${c.iy}`))
+    // Everything inside the bounding box has to be either this body or a
+    // pocket in it, or the box is not the body's shape.
+    const rectangular = decomposition.cells.every((c) => {
+      const inside = c.rect.x0 >= rect.x0 && c.rect.x1 <= rect.x1 && c.rect.y0 >= rect.y0 && c.rect.y1 <= rect.y1
+      if (!inside) return true
+      return own.has(`${c.ix}:${c.iy}`) || c.classification === 'RECESS'
+    })
+    if (!rectangular) {
+      for (const part of parts) out.push(part)
+      continue
+    }
+    const pockets = decomposition.regions.filter(
+      (r) => r.classification === 'RECESS' && r.rect.x0 >= rect.x0 && r.rect.x1 <= rect.x1 && r.rect.y0 >= rect.y0 && r.rect.y1 <= rect.y1,
+    ).length
+    const widest = [...parts].sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0))[0]
+    out.push({
+      id: widest.id,
+      classification: 'BUILT',
+      rect,
+      metric: {
+        x0: Math.min(...parts.map((p) => p.metric.x0)),
+        z0: Math.min(...parts.map((p) => p.metric.z0)),
+        x1: Math.max(...parts.map((p) => p.metric.x1)),
+        z1: Math.max(...parts.map((p) => p.metric.z1)),
+      },
+      cells,
+      confidence: round6(Math.min(...parts.map((p) => p.confidence))),
+      why: `${parts.length} built regions with no wall drawn between them, making one body${pockets > 0 ? ` with ${pockets} pocket${pockets === 1 ? '' : 's'} bitten out of it` : ''}`,
+    })
+  }
+  return out.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || a.id.localeCompare(b.id))
 }

@@ -239,7 +239,11 @@ export const SourcePackageSchema = z
     adapter: z.object({ id: z.string().min(1), version: z.string().min(1) }).strict(),
     assets: z.array(SourceAssetSchema),
     publishedFacts: z.array(PublishedFactSchema),
-    publishedSpecifications: z.array(PublishedSpecificationSchema),
+    // Packages sealed before specifications were read carry none, and a
+    // package sealed at 1.0.0 is still a package this version reads: the
+    // supported-version list says so, and a schema that rejects them makes
+    // that promise a lie. An absent list is an empty one.
+    publishedSpecifications: z.array(PublishedSpecificationSchema).default([]),
     publishedRooms: z.array(PublishedRoomSchema),
     failures: z.array(AcquisitionFailureSchema),
     /** Hash of everything above that is content. Excludes fetch timings and any wall-clock value. */

@@ -1,5 +1,5 @@
 {
-  "contentHash": "732d9e3356e8a8171da6b36ebbfd84067ccebfecedf178fadd3badc29577f28f",
+  "contentHash": "5b56e0e3a59f06cf5afc03d1a3c810348565df7644f4729c277912c5805fcef7",
   "fusion": {
     "accepted": 103,
     "afterClustering": 123,
@@ -27,7 +27,7 @@
   },
   "hypotheses": [
     {
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -68,7 +68,7 @@
         }
       ],
       "provenance": {
-        "detail": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 64% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do",
+        "detail": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 67% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do",
         "merged": 2,
         "rule": "mass-from-plan-decomposition"
       },
@@ -79,7 +79,7 @@
       "viewSupport": 2
     },
     {
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -119,7 +119,7 @@
         }
       ],
       "provenance": {
-        "detail": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 69% of its perimeter is drawn as wall; it shares a wall line with the main body",
+        "detail": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 75% of its perimeter is drawn as wall; it shares a wall line with the main body",
         "merged": 1,
         "rule": "mass-from-plan-decomposition"
       },
@@ -241,12 +241,12 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 4.39593,
-          "low": 4.27593,
+          "high": 4.491033,
+          "low": 4.371033,
           "name": "width",
           "unit": "m",
-          "value": 4.33593,
-          "why": "a 4.447632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+          "value": 4.431033,
+          "why": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "CROSS_VIEW",
@@ -271,7 +271,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 4.447632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; a rectangle group on the front elevation stands over this gap, between 2.561088 and 3.788276 m",
+        "detail": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; a rectangle group on the front elevation stands over this gap, between 2.561088 and 3.788276 m",
         "merged": 6,
         "rule": "opening-from-plan-gap"
       },
@@ -577,12 +577,12 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 0.65642,
-          "low": 0.53642,
+          "high": 0.561317,
+          "low": 0.441317,
           "name": "width",
           "unit": "m",
-          "value": 0.59642,
-          "why": "a 0.702236 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+          "value": 0.501317,
+          "why": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
@@ -607,7 +607,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 0.702236 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it",
+        "detail": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it",
         "merged": 0,
         "rule": "opening-from-plan-gap"
       },
@@ -695,12 +695,12 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 2.933394,
-          "low": 2.813394,
+          "high": 3.035123,
+          "low": 2.915123,
           "name": "width",
           "unit": "m",
-          "value": 2.873394,
-          "why": "a 2.985096 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+          "value": 2.975123,
+          "why": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
@@ -725,7 +725,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 2.985096 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
+        "detail": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
         "merged": 3,
         "rule": "opening-from-plan-gap"
       },
@@ -913,12 +913,12 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 2.860952,
-          "low": 2.740952,
+          "high": 2.785662,
+          "low": 2.665662,
           "name": "width",
           "unit": "m",
-          "value": 2.800952,
-          "why": "a 2.906768 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+          "value": 2.725662,
+          "why": "a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
@@ -943,7 +943,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 2.906768 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
+        "detail": "a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
         "merged": 2,
         "rule": "opening-from-plan-gap"
       },
@@ -1344,7 +1344,7 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -1403,7 +1403,7 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.694931,
+      "confidence": 0.704538,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -1462,7 +1462,7 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.708747,
+      "confidence": 0.727497,
       "evidenceIds": [
         "metric-dimension-0193723f04",
         "metric-dimension-07b24ca33a",
@@ -1801,11 +1801,11 @@
       "viewSupport": 2
     }
   ],
-  "id": "hypotheses-marcowki-732d9e3356e8a817",
-  "metricEvidenceHash": "6a7fadc29463bf278a53aaaa00f47e73799957be232f594f4b970b1457640ec9",
-  "metricEvidenceId": "metrics-marcowki-6a7fadc29463bf27",
-  "observationGraphHash": "ea76c6603a089dfc5bdcb1089cebb4d320436d56e9be1a3b69c44c41f2600a5a",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-d8cef2c4eb",
+  "id": "hypotheses-marcowki-5b56e0e3a59f06cf",
+  "metricEvidenceHash": "730ccdd128b5aba11711f7a4b8bfa5e8f4e91f56a1095cc88788eecebc359e3f",
+  "metricEvidenceId": "metrics-marcowki-730ccdd128b5aba1",
+  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
   "proposers": [
     {
       "name": "reconstruction.structural-layout",

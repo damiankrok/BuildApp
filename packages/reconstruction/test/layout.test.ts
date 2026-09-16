@@ -224,9 +224,14 @@ describe('storey registration', () => {
     const { best, considered } = alignPlans(base!, other!)
     expect(considered.length).toBeGreaterThanOrEqual(1)
     expect(best?.agreement).toBeGreaterThan(0.8)
-    // The chosen target must be the larger body, which is the one whose walls it matches.
-    const chosen = considered.find((c) => c.targetId === best?.targetId)
-    expect(chosen!.targetRect.x1 - chosen!.targetRect.x0).toBeCloseTo(240, 0)
+    // What matters is where the plan is PUT, not which candidate rectangle the
+    // placement was named after: several targets produce the same placement
+    // once the scale is one. It has to land on the 240 px body and not spread
+    // itself over the 400 px the building and its wing occupy together.
+    const source = other!.decomposition.envelope!.rect
+    const placed = { x0: source.x0 * best!.scale + best!.offsetX, x1: source.x1 * best!.scale + best!.offsetX }
+    expect(placed.x1 - placed.x0).toBeCloseTo(240, 0)
+    expect(Math.abs(placed.x0 - 40.5)).toBeLessThan(1.5)
   })
 
   it('reports greyscale it was given, not colour it was not', () => {
