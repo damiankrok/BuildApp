@@ -1,5 +1,5 @@
-candidate    candidate-marcowki-6b2438068eb26900
-model        0686d5ffd3c251a5 (replayed byte-identically)
+candidate    candidate-marcowki-9891d63b1d65adeb
+model        2a1bda898e9379de (replayed byte-identically)
 reference    marcowki-ge
 
 SHELL
@@ -15,16 +15,16 @@ TOPOLOGY
 
 OPENINGS
   12 of 23 reference openings matched; 1 built that the reference has nothing for
-  position 0.391 m rms, size 0.643 m rms
+  position 0.359 m rms, size 0.593 m rms
 
 FACADE LINEAR SOLIDS
   the reference carries no linear solids, so the candidate's 1 cannot be scored against it — they are judged against the source observations and the owner's findings instead
 
 HONESTY
-  81 named holes, 15 of them MISSING or REFUSED outright
+  81 named holes, 16 of them MISSING or REFUSED outright
   0 of 3 quantities settled as HARD are within a centimetre of the reference
   1 quantities fell back on a building convention
 
 SCORES, reported separately and never combined
-  geometric accuracy               49.6%  — of what it built, how close it is
+  geometric accuracy               50.3%  — of what it built, how close it is
   evidence-supported completeness  84.1%  — of the building, how much it built at all

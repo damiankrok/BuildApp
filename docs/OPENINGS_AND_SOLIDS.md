@@ -4,6 +4,13 @@
 
 ## Openings come from the plan
 
+> Since BUILDAPP-03R1 the plan gap is a PROPOSAL and not the answer: a
+> run-length band gives up a few pixels before the wall actually stops, so
+> each reveal is then found in the drawing itself, sub-pixel. On the reference
+> project's ground-floor plan that is the difference between a 5.03 m rear
+> glazing and the 4.70 m the publisher prints. See `docs/IMAGE_METROLOGY.md`.
+
+
 An elevation of a published project is very often a photo-realistic render, and
 a rectangle detector run over one returns panes, cladding boards, shadows and
 reflections along with the windows. A floor plan is the opposite: it is a

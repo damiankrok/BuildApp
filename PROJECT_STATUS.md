@@ -16,6 +16,7 @@
 | STAGE BUILDAPP-02 — SOURCEPACKAGE + VISUAL SOURCE OBSERVATION GRAPH | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `dc6407e95f308fedfef064f09582ffa4df230810`; implementation `2b92d1f`; docs `ced70f0` | PASS |
 | STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `fad9f39`, `8524a89`; docs `c1a9872` and the commit that carries this row (the final HEAD, see `git log`) | PASS |
 | STAGE BUILDAPP-03M-FIX — ANDROID AUTO CANDIDATE RENDERING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `f3766237840514fc60178ca6c9bf4f3c9e13ebbd`; CI micro-task `781d6d6`, `13108e5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03M_FIX.md` and this row | PASS |
+| STAGE BUILDAPP-03R1 — IMAGE METROLOGY + PROPORTIONAL FACADE FITTING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4505e148cf03197b899d49c5335ed893e013ab1d`; implementation `c4c8816`, `ed83d0d`, `c315a35`, `0ec3291`, `067fd41`, `3ee3277`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` and this row | PASS |
 
 ## Current capabilities
 
@@ -305,6 +306,39 @@ now:
 
 `stage-reports/STAGE_BUILDAPP_03R.md` carries the full report, the §22
 benchmark table, the fourteen mutations and the known limitations.
+
+## Where the measuring stands (STAGE BUILDAPP-03R1)
+
+03R left a 0.329 m median error on the reference project's opening widths
+that it could not account for. 03R1 built `packages/image-metrology` and
+found it: the ink-silhouette extractor had traced all four of that project's
+elevations as the ENTIRE IMAGE, 1279 × 596 px, because on a photo-realistic
+render it traces the lawn, the trees and the sky along with the house. The
+ridge is 485 px tall in a 596 px image, so every height read off those
+drawings came out 23% short — invisible, because a silhouette that is wrong
+is still a silhouette.
+
+| | 03R | 03R1 |
+| --- | --- | --- |
+| elevation outline surplus over the bodies beneath it | 4.98, 5.01, 4.45, 4.42 m | **0.00, 0.00, 1.91, 1.53 m** |
+| major facade openings recovered | 12 / 12 | 12 / 12 |
+| median centre error | 0.161 m | **0.133 m** |
+| median width error | 0.329 m | **0.066 m** |
+| median height error | 0.100 m | 0.100 m |
+
+Three things it now measures rather than assumes: where a wall actually
+stops, by finding the reveal in the drawing instead of where a thickness
+test gave up; which way round an elevation reads, from the drawing's own top
+edge rather than from a traversal convention that is the wrong way round for
+this project; and whether an "elevation" is a line drawing or a render,
+which decides how much a single reading of it is worth. On a render a height
+is taken only where two independent readings agree, and otherwise the
+opening's height is declared unmeasured and named as a hole.
+
+`stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` carries the full
+report, the per-opening table, the four registered elevations proved from
+content, §21's twelve wrong-boundary mutations, three approaches that look
+right and are wrong, and what the stage did not do.
 
 ## Test / build / browser results (STAGE BUILDAPP-03)
 

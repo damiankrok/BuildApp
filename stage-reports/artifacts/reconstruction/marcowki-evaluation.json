@@ -1,11 +1,11 @@
 {
-  "candidateHash": "6b2438068eb269002f77f3b31b4cd89594da3f19096f18b4c8b91d976f8364d2",
-  "candidateId": "candidate-marcowki-6b2438068eb26900",
+  "candidateHash": "9891d63b1d65adeb875bb00a7f8e1052c473e5bb1dadf6766df720d800c4d05a",
+  "candidateId": "candidate-marcowki-9891d63b1d65adeb",
   "honesty": {
     "assumed": 1,
     "hardCorrect": 0,
     "hardQuantities": 3,
-    "justified": 15,
+    "justified": 16,
     "unresolvedCount": 81
   },
   "linearSolids": {
@@ -41,7 +41,7 @@
         "referenceId": "gd-room"
       },
       {
-        "candidateId": "opening-8",
+        "candidateId": "opening-7",
         "heightError": 0.1,
         "matched": true,
         "positionError": 0.108757,
@@ -52,89 +52,89 @@
         "candidateId": "opening-2",
         "heightError": -0.1,
         "matched": true,
-        "positionError": 0.215636,
+        "positionError": 0.051874,
         "referenceId": "og-east-living-window",
-        "widthError": 0.38643
+        "widthError": -0.020051
       },
       {
-        "candidateId": "opening-7",
+        "candidateId": "opening-8",
         "heightError": 0.1,
         "matched": true,
-        "positionError": 0.08965,
+        "positionError": 0.172117,
         "referenceId": "og-front-entrance",
-        "widthError": 0.486262
+        "widthError": 0.066257
       },
       {
         "candidateId": "opening-1",
-        "heightError": -1.597621,
+        "heightError": -1.516301,
         "matched": true,
-        "positionError": 0.805508,
+        "positionError": 0.773253,
         "referenceId": "og-front-gable-glazing",
-        "widthError": 1.731033
+        "widthError": 1.63412
       },
       {
         "candidateId": "opening-11",
         "heightError": -0.1,
         "matched": true,
-        "positionError": 0.133464,
+        "positionError": 0.133441,
         "referenceId": "og-front-room-window",
-        "widthError": -0.254404
+        "widthError": -0.280139
       },
       {
         "candidateId": "opening-4",
         "heightError": -0.05,
         "matched": true,
-        "positionError": 0.081127,
+        "positionError": 0.02552,
         "referenceId": "og-garage-door",
-        "widthError": 0.161914
+        "widthError": 0.047663
       },
       {
         "candidateId": "opening-9",
-        "heightError": 0.308124,
+        "heightError": 0.1,
         "matched": true,
-        "positionError": 0.352074,
+        "positionError": 0.050785,
         "referenceId": "og-garage-side-door",
-        "widthError": -0.001391
+        "widthError": -0.053839
       },
       {
         "candidateId": "opening-3",
-        "heightError": 0.535869,
+        "heightError": 0.614908,
         "matched": true,
-        "positionError": 0.309286,
+        "positionError": 0.331575,
         "referenceId": "og-rear-gable-east",
-        "widthError": 0.635123
+        "widthError": 0.507454
       },
       {
         "candidateId": "opening-5",
-        "heightError": -1.427621,
+        "heightError": -1.369631,
         "matched": true,
-        "positionError": 0.756057,
+        "positionError": 0.717114,
         "referenceId": "og-rear-gable-west",
-        "widthError": 0.385662
+        "widthError": 0.32026
       },
       {
         "candidateId": "opening-0",
         "heightError": -0.1,
         "matched": true,
-        "positionError": 0.160776,
+        "positionError": 0.053119,
         "referenceId": "og-rear-living-glazing",
-        "widthError": 0.329133
+        "widthError": -0.031646
       },
       {
         "candidateId": "opening-6",
         "heightError": 0.8,
         "matched": true,
-        "positionError": 0.520898,
+        "positionError": 0.500244,
         "referenceId": "og-west-kitchen-window",
-        "widthError": 0.268889
+        "widthError": -0.001188
       },
       {
         "candidateId": "opening-10",
         "heightError": -0.1,
         "matched": true,
-        "positionError": 0.050011,
+        "positionError": 0.05001,
         "referenceId": "og-west-living-window",
-        "widthError": 0.07772
+        "widthError": -0.002368
       },
       {
         "matched": false,
@@ -163,15 +163,15 @@
     ],
     "matched": 12,
     "missed": 11,
-    "positionRmsM": 0.390568,
+    "positionRmsM": 0.358569,
     "reference": 23,
-    "sizeRmsM": 0.643259,
+    "sizeRmsM": 0.592637,
     "spurious": 1
   },
   "referenceId": "marcowki-ge",
   "scores": {
     "evidenceSupportedCompleteness": 0.84058,
-    "geometricAccuracy": 0.496243
+    "geometricAccuracy": 0.503326
   },
   "shell": [
     {

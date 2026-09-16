@@ -1,5 +1,5 @@
 {
-  "candidateHash": "c2d7552eb75af1fd55b5a7140209bffb9043da352204f805de4dbe9371c6b750",
+  "candidateHash": "37db303502955182f6964522308efb53ef92c303c7514a73ec18af807756c6ea",
   "matches": [
     {
       "centreM": 0,
@@ -9,18 +9,18 @@
       "kind": "opening",
       "objectId": "opening-0",
       "projected": {
-        "x0": 355.719006,
-        "x1": 733.366599,
-        "y0": 431.797627,
-        "y1": 597
+        "x0": 390.813326,
+        "x1": 673.846793,
+        "y0": 452.618164,
+        "y1": 586
       },
       "status": "UNMATCHED"
     },
     {
-      "centreM": 1.832511,
-      "centrePx": 137.379958,
+      "centreM": 0.299165,
+      "centrePx": 18.250681,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "iou": 0.184598,
+      "iou": 0.646434,
       "kind": "opening",
       "objectId": "opening-1",
       "observationId": "obs-opening-reveal-7a4c68bf33",
@@ -31,56 +31,42 @@
         "y1": 396
       },
       "projected": {
-        "x0": 225.149486,
-        "x1": 557.335782,
-        "y0": 274.597496,
-        "y1": 366.597496
+        "x0": 410.294473,
+        "x1": 674.699061,
+        "y0": 299.608895,
+        "y1": 402.323572
       },
       "status": "MATCHED"
     },
     {
-      "centreM": 0.39188,
-      "centrePx": 29.378551,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-      "iou": 0.458597,
+      "centreM": 0,
+      "centrePx": 0,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "iou": 0,
       "kind": "opening",
       "objectId": "opening-10",
-      "observationId": "obs-opening-reveal-6158097359",
-      "observed": {
-        "x0": 791,
-        "x1": 876,
-        "y0": 444,
-        "y1": 570
-      },
       "projected": {
-        "x0": 767.472524,
-        "x1": 840.770373,
-        "y0": 444,
-        "y1": 570
+        "x0": 746.259356,
+        "x1": 800.793499,
+        "y0": 449.342649,
+        "y1": 583
       },
-      "status": "MATCHED"
+      "status": "UNMATCHED"
     },
     {
-      "centreM": 0.111849,
-      "centrePx": 8.385107,
+      "centreM": 0,
+      "centrePx": 0,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "iou": 0.237199,
+      "iou": 0,
       "kind": "opening",
       "objectId": "opening-11",
-      "observationId": "obs-opening-reveal-59831ad1d4",
-      "observed": {
-        "x0": 625,
-        "x1": 645,
-        "y0": 451,
-        "y1": 575
-      },
       "projected": {
-        "x0": 611.67164,
-        "x1": 675.064398,
-        "y0": 431.070095,
-        "y1": 596
+        "x0": 719.698389,
+        "x1": 769.714312,
+        "y0": 454.788189,
+        "y1": 589
       },
-      "status": "MATCHED"
+      "status": "UNMATCHED"
     },
     {
       "centreM": 0,
@@ -90,33 +76,33 @@
       "kind": "opening",
       "objectId": "opening-12",
       "projected": {
-        "x0": 705.142814,
-        "x1": 742.725617,
-        "y0": 246.470125,
-        "y1": 299.126171
+        "x0": 794.977123,
+        "x1": 825.560151,
+        "y0": 304.569851,
+        "y1": 347.418741
       },
       "status": "UNMATCHED"
     },
     {
       "centreM": 0,
       "centrePx": 0,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
       "iou": 0,
       "kind": "opening",
       "objectId": "opening-2",
       "projected": {
-        "x0": 203.422768,
-        "x1": 457.716528,
-        "y0": 431.797627,
-        "y1": 597
+        "x0": 308.367634,
+        "x1": 491.658876,
+        "y0": 453.682003,
+        "y1": 589
       },
       "status": "UNMATCHED"
     },
     {
-      "centreM": 1.080653,
-      "centrePx": 81.148351,
+      "centreM": 1.23665,
+      "centrePx": 74.975767,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-      "iou": 0.100353,
+      "iou": 0.206721,
       "kind": "opening",
       "objectId": "opening-3",
       "observationId": "obs-opening-reveal-ca142040fe",
@@ -127,27 +113,34 @@
         "y1": 397
       },
       "projected": {
-        "x0": 519.471803,
-        "x1": 742.879703,
-        "y0": 246.892694,
-        "y1": 367.218518
+        "x0": 524.421062,
+        "x1": 697.056809,
+        "y0": 298.536801,
+        "y1": 400.477992
       },
       "status": "MATCHED"
     },
     {
-      "centreM": 0,
-      "centrePx": 0,
+      "centreM": 0.858077,
+      "centrePx": 52.347304,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "iou": 0,
+      "iou": 0.221292,
       "kind": "opening",
       "objectId": "opening-4",
-      "projected": {
-        "x0": 243.294325,
-        "x1": 461.595097,
-        "y0": 431.070095,
-        "y1": 596
+      "observationId": "obs-opening-reveal-ff08485326",
+      "observed": {
+        "x0": 415,
+        "x1": 487,
+        "y0": 481,
+        "y1": 555
       },
-      "status": "UNMATCHED"
+      "projected": {
+        "x0": 417.866032,
+        "x1": 588.538494,
+        "y0": 454.788189,
+        "y1": 589
+      },
+      "status": "MATCHED"
     },
     {
       "centreM": 0,
@@ -157,12 +150,34 @@
       "kind": "opening",
       "objectId": "opening-5",
       "projected": {
-        "x0": 224.448524,
-        "x1": 429.123902,
-        "y0": 246.892694,
-        "y1": 367.218518
+        "x0": 288.384322,
+        "x1": 449.67085,
+        "y0": 299.812962,
+        "y1": 400.477992
       },
       "status": "UNMATCHED"
+    },
+    {
+      "centreM": 0.356714,
+      "centrePx": 21.671557,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "iou": 0.140963,
+      "kind": "opening",
+      "objectId": "opening-6",
+      "observationId": "obs-opening-reveal-914c75f37c",
+      "observed": {
+        "x0": 600,
+        "x1": 676,
+        "y0": 488,
+        "y1": 513
+      },
+      "projected": {
+        "x0": 610.477582,
+        "x1": 695.460085,
+        "y0": 449.342649,
+        "y1": 583
+      },
+      "status": "MATCHED"
     },
     {
       "centreM": 0,
@@ -170,124 +185,102 @@
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
       "iou": 0,
       "kind": "opening",
-      "objectId": "opening-6",
+      "objectId": "opening-7",
       "projected": {
-        "x0": 602.733638,
-        "x1": 727.84714,
-        "y0": 431.070095,
-        "y1": 596
+        "x0": 896.00652,
+        "x1": 966.069443,
+        "y0": 453.682003,
+        "y1": 589
       },
       "status": "UNMATCHED"
     },
     {
-      "centreM": 0.244759,
-      "centrePx": 18.349111,
+      "centreM": 0.514015,
+      "centrePx": 31.357673,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "iou": 0.280493,
+      "iou": 0.184404,
       "kind": "opening",
-      "objectId": "opening-7",
-      "observationId": "obs-opening-reveal-ff08485326",
+      "objectId": "opening-8",
+      "observationId": "obs-opening-reveal-0add3cf7bd",
       "observed": {
-        "x0": 415,
-        "x1": 487,
-        "y0": 481,
-        "y1": 555
+        "x0": 536,
+        "x1": 561,
+        "y0": 456,
+        "y1": 575
       },
       "projected": {
-        "x0": 375.617063,
-        "x1": 490.787765,
-        "y0": 431.070095,
-        "y1": 596
+        "x0": 545.150012,
+        "x1": 613.247682,
+        "y0": 454.788189,
+        "y1": 589
       },
       "status": "MATCHED"
     },
     {
       "centreM": 0,
       "centrePx": 0,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "iou": 0,
       "kind": "opening",
-      "objectId": "opening-8",
+      "objectId": "opening-9",
       "projected": {
-        "x0": 950.814373,
-        "x1": 1036.350379,
-        "y0": 431.797627,
-        "y1": 597
+        "x0": 377.77604,
+        "x1": 435.13999,
+        "y0": 452.618164,
+        "y1": 586
       },
       "status": "UNMATCHED"
-    },
-    {
-      "centreM": 0.255805,
-      "centrePx": 19.208936,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-      "iou": 0.183079,
-      "kind": "opening",
-      "objectId": "opening-9",
-      "observationId": "obs-opening-reveal-0257884b05",
-      "observed": {
-        "x0": 351,
-        "x1": 379,
-        "y0": 489,
-        "y1": 570
-      },
-      "projected": {
-        "x0": 339.377938,
-        "x1": 414.365473,
-        "y0": 431.797627,
-        "y1": 597
-      },
-      "status": "MATCHED"
     }
   ],
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "summary": {
-    "centreMaxM": 1.832511,
-    "centreRmsM": 0.89604,
-    "iouMean": 0.24072,
-    "matched": 6,
+    "centreMaxM": 1.23665,
+    "centreRmsM": 0.741155,
+    "iouMean": 0.279963,
+    "matched": 5,
     "objects": 13,
-    "unexplained": 65,
-    "unmatched": 7
+    "unexplained": 66,
+    "unmatched": 8
   },
   "views": [
     {
-      "centreRmsM": 1.069348,
+      "centreRmsM": 0.602773,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "iouMean": 0.234097,
+      "iouMean": 0.35071,
       "matched": 3,
-      "metresPerPixel": 0.013339,
+      "metresPerPixel": 0.016392,
       "side": "FRONT",
       "unexplained": 16,
       "unmatched": 2
     },
     {
-      "centreRmsM": 0.39188,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-      "iouMean": 0.458597,
+      "centreRmsM": 0.356714,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "iouMean": 0.140963,
       "matched": 1,
-      "metresPerPixel": 0.013339,
+      "metresPerPixel": 0.01646,
       "side": "LEFT",
-      "unexplained": 21,
+      "unexplained": 12,
       "unmatched": 1
     },
     {
-      "centreRmsM": 0.785254,
+      "centreRmsM": 1.23665,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-      "iouMean": 0.141716,
-      "matched": 2,
-      "metresPerPixel": 0.013317,
+      "iouMean": 0.206721,
+      "matched": 1,
+      "metresPerPixel": 0.016494,
       "side": "REAR",
-      "unexplained": 15,
-      "unmatched": 2
+      "unexplained": 16,
+      "unmatched": 3
     },
     {
       "centreRmsM": 0,
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
       "iouMean": 0,
       "matched": 0,
-      "metresPerPixel": 0.013317,
+      "metresPerPixel": 0.016258,
       "side": "RIGHT",
-      "unexplained": 13,
+      "unexplained": 22,
       "unmatched": 2
     }
   ]

@@ -1,13 +1,13 @@
 {
-  "contentHash": "c2d7552eb75af1fd55b5a7140209bffb9043da352204f805de4dbe9371c6b750",
+  "contentHash": "37db303502955182f6964522308efb53ef92c303c7514a73ec18af807756c6ea",
   "contradictions": [],
-  "hypothesisSetHash": "efc538fb74bef440c079424cf3205a20e6156e05bdd821c3b40031d6d1947302",
-  "hypothesisSetId": "hypotheses-no-reference-efc538fb74bef440",
-  "id": "candidate-no-reference-c2d7552eb75af1fd",
+  "hypothesisSetHash": "cf87d0741234f244bd25feb45be0f5deed1593e34d04669ec339b790dace68c6",
+  "hypothesisSetId": "hypotheses-no-reference-cf87d0741234f244",
+  "id": "candidate-no-reference-37db303502955182",
   "label": "Candidate built with no reference package present",
   "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
   "metricEvidenceId": "metrics-no-reference-3737dc29d37cee61",
-  "modelHash": "d3e3ed94a5dc80ac16d929924374e7c985a6220134d3478fc49b45b2cdc133cb",
+  "modelHash": "748f2bc82b3db7f043ac577c5e15de5e02bcee3d0bc98ae7162c38d28f2a1688",
   "modelId": "m-auto-no-reference",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
@@ -275,7 +275,7 @@
       "kind": "FLAT",
       "levelId": "lvl-0",
       "materialId": "mat-roof",
-      "overhang": 0,
+      "overhang": 0.838176,
       "pitchDeg": 0,
       "ridgeAxis": "Z",
       "thickness": 0.28,
@@ -285,11 +285,11 @@
       "height": 2.2,
       "id": "opening-0",
       "kind": "DOOR",
-      "offset": 2.246155,
+      "offset": 2.256599,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w0",
-      "width": 5.029133
+      "width": 4.668354
     },
     {
       "id": "opening-0-d",
@@ -298,14 +298,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.227188,
+      "height": 1.683699,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 0.498026,
+      "offset": 0.594939,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.431033
+      "width": 4.33412
     },
     {
       "id": "opening-1-w",
@@ -317,11 +317,11 @@
       "height": 2.2,
       "id": "opening-2",
       "kind": "DOOR",
-      "offset": 0.498026,
+      "offset": 0.897207,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w1",
-      "width": 3.38643
+      "width": 2.979949
     },
     {
       "id": "opening-2-d",
@@ -330,14 +330,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.602379,
+      "height": 1.681418,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 4.426851,
+      "offset": 4.460325,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.975123
+      "width": 2.847454
     },
     {
       "id": "opening-3-w",
@@ -349,11 +349,11 @@
       "height": 2.2,
       "id": "opening-4",
       "kind": "DOOR",
-      "offset": 0.74006,
+      "offset": 0.719052,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.911914
+      "width": 2.797663
     },
     {
       "id": "opening-4-d",
@@ -362,14 +362,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.602379,
+      "height": 1.660369,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 0.498026,
+      "offset": 0.567135,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.725662
+      "width": 2.66026
     },
     {
       "id": "opening-5-w",
@@ -381,11 +381,11 @@
       "height": 2.2,
       "id": "opening-6",
       "kind": "DOOR",
-      "offset": 5.814621,
+      "offset": 5.819225,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w3",
-      "width": 1.668889
+      "width": 1.398812
     },
     {
       "id": "opening-6-d",
@@ -397,11 +397,11 @@
       "height": 2.2,
       "id": "opening-7",
       "kind": "DOOR",
-      "offset": 2.505113,
+      "offset": 10.45104,
       "sill": 0,
       "type": "cutOpening",
-      "wallId": "ring-mass-0-0-w2",
-      "width": 1.536262
+      "wallId": "ring-mass-0-0-w1",
+      "width": 1.139083
     },
     {
       "id": "opening-7-d",
@@ -413,11 +413,11 @@
       "height": 2.2,
       "id": "opening-8",
       "kind": "DOOR",
-      "offset": 10.45104,
+      "offset": 2.805491,
       "sill": 0,
       "type": "cutOpening",
-      "wallId": "ring-mass-0-0-w1",
-      "width": 1.139083
+      "wallId": "ring-mass-0-0-w2",
+      "width": 1.116257
     },
     {
       "id": "opening-8-d",
@@ -429,11 +429,11 @@
       "height": 2.2,
       "id": "opening-9",
       "kind": "DOOR",
-      "offset": 2.028541,
+      "offset": 2.041562,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w0",
-      "width": 0.998609
+      "width": 0.946161
     },
     {
       "id": "opening-9-d",
@@ -442,30 +442,30 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.680714,
+      "height": 2.2,
       "id": "opening-10",
-      "kind": "WINDOW",
-      "offset": 8.012073,
-      "sill": 0.346814,
+      "kind": "DOOR",
+      "offset": 8.054193,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w3",
-      "width": 0.97772
+      "width": 0.897632
     },
     {
-      "id": "opening-10-w",
-      "materialId": "mat-glass",
+      "id": "opening-10-d",
+      "materialId": "mat-wall",
       "openingId": "opening-10",
-      "type": "placeWindow"
+      "type": "placeDoor"
     },
     {
       "height": 2.2,
       "id": "opening-11",
       "kind": "DOOR",
-      "offset": 5.653845,
+      "offset": 5.666688,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w2",
-      "width": 0.845596
+      "width": 0.819861
     },
     {
       "id": "opening-11-d",
@@ -490,42 +490,23 @@
       "type": "placeWindow"
     },
     {
-      "depth": 0.266476,
+      "depth": 0.313544,
       "end": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 0.309072
-      },
-      "hostId": "ring-mass-0-1-w3",
-      "id": "solid-0",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 12.367528
-      },
-      "type": "createLinearSolid",
-      "width": 0.266476
-    },
-    {
-      "depth": 0.253151,
-      "end": {
-        "x": 8.49557,
-        "y": 0.179716,
+        "x": 9.929388,
+        "y": 0.041156,
         "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
-      "id": "solid-1",
+      "id": "solid-0",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 0.478736,
-        "y": 0.179716,
+        "x": 0,
+        "y": 0.041156,
         "z": -0.234013
       },
       "type": "createLinearSolid",
-      "width": 0.253151
+      "width": 0.313544
     }
   ],
   "quantities": [
@@ -657,16 +638,19 @@
       "why": "printed as \"40 st.\": the publisher prints the roof pitch as \"40 st.\""
     },
     {
-      "class": "UNRESOLVED",
-      "constraintIds": [],
-      "high": 1.2,
+      "class": "SOFT",
+      "constraintIds": [
+        "constraint-hyp-roof-mass-1-overhang-37666a4351",
+        "constraint-hyp-roof-mass-1-overhang-4d2d3cec09"
+      ],
+      "high": 1.153696,
       "hypothesisId": "hyp-roof-mass-1",
-      "low": 0,
+      "low": 0.567086,
       "parameter": "overhang",
-      "residual": 0,
-      "unit": "none",
-      "value": 0,
-      "why": "no constraint of any kind bears on this quantity"
+      "residual": 0.090622,
+      "unit": "m",
+      "value": 0.838176,
+      "why": "weighted fit of 2 suggestions, spread 0.090622 m"
     },
     {
       "class": "UNRESOLVED",
@@ -683,10 +667,10 @@
   ],
   "residuals": {
     "hard": 3,
-    "metricMaxM": 0.019747,
-    "metricRmsM": 0.008062,
-    "soft": 6,
-    "unresolved": 2
+    "metricMaxM": 0.090622,
+    "metricRmsM": 0.035056,
+    "soft": 7,
+    "unresolved": 1
   },
   "schema": "buildapp.reconstruction-candidate",
   "schemaVersion": "1.1.0",
@@ -716,7 +700,7 @@
       "what": "the storeys, from the section ladder"
     },
     {
-      "detail": "REAR: 0.013317 m/px across, 0.013317 up, anisotropy 1; FRONT: 0.013339 m/px across, 0.013339 up, anisotropy 1; LEFT: 0.013339 m/px across, 0.013339 up, anisotropy 1; RIGHT: 0.013317 m/px across, 0.013317 up, anisotropy 1",
+      "detail": "REAR: 0.016494 m/px across, 0.016494 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 97 verticals and 9 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 113 horizontal and 198 vertical candidates leaves 717 × 482 px (untrimmed 717 × 482), 25% of the perimeter on a straight edge; FRONT: 0.016392 m/px across, 0.016392 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 140 verticals and 11 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 160 horizontal and 287 vertical candidates leaves 715 × 485 px (untrimmed 974 × 485), 60% of the perimeter on a straight edge; LEFT: 0.01646 m/px across, 0.01646 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 23 verticals and 54 horizontals run straight for at least 90 and 192 px above a derived 10.0/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 125 horizontal and 94 vertical candidates leaves 882 × 483 px (untrimmed 882 × 483), 44% of the perimeter on a straight edge; RIGHT: 0.016258 m/px across, 0.016258 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 15 verticals and 34 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 81 horizontal and 59 vertical candidates leaves 870 × 489 px (untrimmed 981 × 489), 59% of the perimeter on a straight edge",
       "index": 2,
       "inputs": 4,
       "method": "DIRECT",
@@ -772,7 +756,7 @@
       "what": "gaps in the walls the plans draw"
     },
     {
-      "detail": "15 plan gaps and 36 elevation assemblies -> 13 openings; 34 assemblies unaccounted for",
+      "detail": "15 plan gaps and 36 elevation assemblies -> 13 openings; 36 assemblies unaccounted for",
       "index": 8,
       "inputs": 15,
       "method": "DISCRETE_SELECTION",
@@ -781,11 +765,11 @@
       "what": "openings cut from the plans, sized by the elevations"
     },
     {
-      "detail": "80 sightings -> 2 solids; 43 refused for want of depth evidence",
+      "detail": "80 sightings -> 1 solids; 44 refused for want of depth evidence",
       "index": 9,
       "inputs": 80,
       "method": "DISCRETE_SELECTION",
-      "outputs": 2,
+      "outputs": 1,
       "stage": "facade",
       "what": "linear solids from corroborated depth cues"
     },
@@ -809,12 +793,13 @@
       "kind": "door",
       "objectId": "opening-0",
       "observationIds": [
-        "obs-opening-reveal-0257884b05",
+        "obs-opening-reveal-0330224147",
+        "obs-opening-reveal-12d5f7840b",
         "obs-opening-reveal-20f04c7d08",
         "obs-opening-reveal-900b0e8b1a"
       ],
       "rejected": [],
-      "why": "5.029133 by 2.2 m at 2.246155 m along the rear wall of mass-0, sill 0 m; a 5.029133 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "4.668354 by 2.2 m at 2.256599 m along the rear wall of mass-0, sill 0 m; a 4.668354 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -824,39 +809,32 @@
       "observationIds": [
         "obs-opening-reveal-7a4c68bf33",
         "obs-opening-reveal-ae70b5010e",
-        "obs-opening-reveal-59831ad1d4",
         "obs-opening-reveal-7b6ed293b4",
-        "obs-opening-reveal-0add3cf7bd",
         "obs-opening-reveal-9bf565a42b"
       ],
       "rejected": [],
-      "why": "4.431033 by 1.227188 m at 0.498026 m along the front wall of mass-0, sill 0 m; a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "4.33412 by 1.683699 m at 0.594939 m along the front wall of mass-0, sill 0 m; a 4.33412 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, not moved and -4.32015 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-10",
-      "kind": "window",
+      "kind": "door",
       "objectId": "opening-10",
-      "observationIds": [
-        "obs-opening-reveal-1577e3b900",
-        "obs-opening-reveal-0c289fb583",
-        "obs-opening-reveal-35d1302474",
-        "obs-opening-reveal-6158097359",
-        "obs-opening-reveal-a1a2e784a9",
-        "obs-opening-reveal-cfba2025ef",
-        "obs-opening-reveal-e768165002"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "0.97772 by 1.680714 m at 8.012073 m along the left wall of mass-0, sill 0.346814 m; a 0.97772 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.897632 by 2.2 m at 8.054193 m along the left wall of mass-0, sill 0 m; a 0.897632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-11",
       "kind": "door",
       "objectId": "opening-11",
-      "observationIds": [],
+      "observationIds": [
+        "obs-opening-reveal-f6109117ba",
+        "obs-opening-reveal-ff08485326"
+      ],
       "rejected": [],
-      "why": "0.845596 by 2.2 m at 5.653845 m along the front wall of mass-0, sill 0 m; a 0.845596 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.819861 by 2.2 m at 5.666688 m along the front wall of mass-0, sill 0 m; a 0.819861 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -872,11 +850,9 @@
       "hypothesisId": "hyp-opening-2",
       "kind": "door",
       "objectId": "opening-2",
-      "observationIds": [
-        "obs-opening-reveal-cdb6b1125d"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "3.38643 by 2.2 m at 0.498026 m along the right wall of mass-0, sill 0 m; a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.979949 by 2.2 m at 0.897207 m along the right wall of mass-0, sill 0 m; a 2.979949 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -885,26 +861,19 @@
       "objectId": "opening-3",
       "observationIds": [
         "obs-opening-reveal-6b516b8104",
-        "obs-opening-reveal-b1afd81ec7",
-        "obs-opening-reveal-20f04c7d08",
-        "obs-opening-reveal-900b0e8b1a"
+        "obs-opening-reveal-b1afd81ec7"
       ],
       "rejected": [],
-      "why": "2.975123 by 1.602379 m at 4.426851 m along the rear wall of mass-0, sill 0 m; a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.847454 by 1.681418 m at 4.460325 m along the rear wall of mass-0, sill 0 m; a 2.847454 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-4",
       "kind": "door",
       "objectId": "opening-4",
-      "observationIds": [
-        "obs-opening-reveal-9f4a163104",
-        "obs-opening-reveal-bfbf9aa87c",
-        "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "2.911914 by 2.2 m at 0.74006 m along the front wall of mass-1, sill 0 m; a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.797663 by 2.2 m at 0.719052 m along the front wall of mass-1, sill 0 m; a 2.797663 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -912,11 +881,12 @@
       "kind": "window",
       "objectId": "opening-5",
       "observationIds": [
-        "obs-opening-reveal-0257884b05",
-        "obs-opening-reveal-b51b54ea40"
+        "obs-opening-reveal-6b516b8104",
+        "obs-opening-reveal-b1afd81ec7",
+        "obs-opening-reveal-deffad0e49"
       ],
       "rejected": [],
-      "why": "2.725662 by 1.602379 m at 0.498026 m along the rear wall of mass-0, sill 0 m; a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.66026 by 1.660369 m at 0.567135 m along the rear wall of mass-0, sill 0 m; a 2.66026 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -924,12 +894,10 @@
       "kind": "door",
       "objectId": "opening-6",
       "observationIds": [
-        "obs-opening-reveal-610a296c59",
-        "obs-opening-reveal-58dfb2afbf",
-        "obs-opening-reveal-2e3b626cea"
+        "obs-opening-reveal-914c75f37c"
       ],
       "rejected": [],
-      "why": "1.668889 by 2.2 m at 5.814621 m along the left wall of mass-0, sill 0 m; a 1.668889 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "1.398812 by 2.2 m at 5.819225 m along the left wall of mass-0, sill 0 m; a 1.398812 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -937,12 +905,10 @@
       "kind": "door",
       "objectId": "opening-7",
       "observationIds": [
-        "obs-opening-reveal-ae70b5010e",
-        "obs-opening-reveal-7b6ed293b4",
-        "obs-opening-reveal-9bf565a42b"
+        "obs-opening-reveal-19966d6216"
       ],
       "rejected": [],
-      "why": "1.536262 by 2.2 m at 2.505113 m along the front wall of mass-0, sill 0 m; a 1.536262 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "1.139083 by 2.2 m at 10.45104 m along the right wall of mass-0, sill 0 m; a 1.139083 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -950,23 +916,22 @@
       "kind": "door",
       "objectId": "opening-8",
       "observationIds": [
-        "obs-opening-reveal-0a04d248c6",
-        "obs-opening-reveal-e67c2df7e1",
-        "obs-opening-reveal-7812a0c6f9",
-        "obs-opening-reveal-9620bed99b",
-        "obs-opening-reveal-f3cc7839ad"
+        "obs-opening-reveal-59831ad1d4"
       ],
       "rejected": [],
-      "why": "1.139083 by 2.2 m at 10.45104 m along the right wall of mass-0, sill 0 m; a 1.139083 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "1.116257 by 2.2 m at 2.805491 m along the front wall of mass-0, sill 0 m; a 1.116257 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-9",
       "kind": "door",
       "objectId": "opening-9",
-      "observationIds": [],
+      "observationIds": [
+        "obs-opening-reveal-0257884b05",
+        "obs-opening-reveal-b51b54ea40"
+      ],
       "rejected": [],
-      "why": "0.998609 by 2.2 m at 2.028541 m along the rear wall of mass-1, sill 0 m; a 0.998609 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.946161 by 2.2 m at 2.041562 m along the rear wall of mass-1, sill 0 m; a 0.946161 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them"
     },
     {
       "evidenceIds": [
@@ -1068,36 +1033,15 @@
       "kind": "linearSolid",
       "objectId": "solid-0",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-51264c4bd1",
-        "obs-linear-volume-candidate-beam-cff798139b",
-        "obs-linear-volume-candidate-beam-def101d470"
-      ],
-      "rejected": [],
-      "why": "12.058456 m long, 0.266476 m in elevation, standing 0.266476 m proud of the left wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-1",
-      "kind": "linearSolid",
-      "objectId": "solid-1",
-      "observationIds": [
         "obs-linear-volume-candidate-beam-3b6208d04e",
         "obs-linear-volume-candidate-beam-9f08f35c3b",
         "obs-linear-volume-candidate-beam-b27bd35495"
       ],
       "rejected": [],
-      "why": "8.016834 m long, 0.253151 m in elevation, standing 0.253151 m proud of the rear wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "9.929388 m long, 0.313544 m in elevation, standing 0.313544 m proud of the rear wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     }
   ],
   "unresolved": [
-    {
-      "evidenceIds": [],
-      "id": "gap-0-200923-m-of-the-opening-at-0-297103-m-adc300d748",
-      "observationIds": [],
-      "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
-      "status": "AMBIGUOUS",
-      "what": "0.200923 m of the opening at 0.297103 m along the min_z wall of mass-0"
-    },
     {
       "evidenceIds": [],
       "id": "gap-0-200923-m-of-the-opening-at-6-900657-m-117719ffc5",
@@ -1108,202 +1052,172 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-292974-by-1-944282-m-rectangle-on-th-2a404a1431",
+      "id": "gap-a-0-362868-by-2-408124-m-rectangle-on-th-9a05e7cebc",
       "observationIds": [
         "obs-opening-reveal-f56e2444a9"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.292974 by 1.944282 m rectangle on the rear elevation"
+      "what": "a 0.362868 by 2.408124 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-306797-by-1-120476-m-rectangle-on-th-09d5d8cdc1",
+      "id": "gap-a-0-377016-by-1-376928-m-rectangle-on-th-38293ecd02",
       "observationIds": [
         "obs-opening-reveal-9bf565a42b"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.306797 by 1.120476 m rectangle on the front elevation"
+      "what": "a 0.377016 by 1.376928 m rectangle on the front elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-333475-by-1-587341-m-rectangle-on-th-4277b5f8ea",
+      "id": "gap-a-0-4098-by-1-950648-m-rectangle-on-the-27037adb62",
       "observationIds": [
         "obs-opening-reveal-0add3cf7bd"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.333475 by 1.587341 m rectangle on the front elevation"
+      "what": "a 0.4098 by 1.950648 m rectangle on the front elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-372876-by-1-078677-m-rectangle-on-th-1fc8db2f5e",
+      "id": "gap-a-0-461832-by-1-336014-m-rectangle-on-th-dbe6f81b45",
       "observationIds": [
         "obs-opening-reveal-0257884b05"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.372876 by 1.078677 m rectangle on the rear elevation"
+      "what": "a 0.461832 by 1.336014 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-40017-by-1-654036-m-rectangle-on-the-389da96a8c",
+      "id": "gap-a-0-49176-by-2-032608-m-rectangle-on-the-1f5fbff810",
       "observationIds": [
         "obs-opening-reveal-59831ad1d4"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.40017 by 1.654036 m rectangle on the front elevation"
+      "what": "a 0.49176 by 2.032608 m rectangle on the front elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-426144-by-0-905556-m-rectangle-on-th-3fb8cc72d6",
+      "id": "gap-a-0-51026-by-0-36212-m-rectangle-on-the-6f2094be26",
+      "observationIds": [
+        "obs-opening-reveal-4f3c11e68c"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 0.51026 by 0.36212 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-0-527808-by-1-121592-m-rectangle-on-th-f71df515be",
       "observationIds": [
         "obs-opening-reveal-b51b54ea40"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.426144 by 0.905556 m rectangle on the rear elevation"
+      "what": "a 0.527808 by 1.121592 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-452778-by-0-878922-m-rectangle-on-th-1beb8bcb08",
+      "id": "gap-a-0-560796-by-1-088604-m-rectangle-on-th-488ed90e17",
       "observationIds": [
         "obs-opening-reveal-20f04c7d08"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.452778 by 0.878922 m rectangle on the rear elevation"
+      "what": "a 0.560796 by 1.088604 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-506882-by-1-06712-m-rectangle-on-the-73467707f4",
+      "id": "gap-a-0-622896-by-1-31136-m-rectangle-on-the-d9e8c56702",
       "observationIds": [
         "obs-opening-reveal-7b6ed293b4"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.506882 by 1.06712 m rectangle on the front elevation"
+      "what": "a 0.622896 by 1.31136 m rectangle on the front elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-559314-by-0-426144-m-rectangle-on-th-8cc4bb7d4d",
+      "id": "gap-a-0-6584-by-0-51026-m-rectangle-on-the-l-60dee8d7a0",
+      "observationIds": [
+        "obs-opening-reveal-8ee62fe61b"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 0.6584 by 0.51026 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-0-67486-by-0-70778-m-rectangle-on-the-2243bf09c6",
+      "observationIds": [
+        "obs-opening-reveal-0a78dd76ba"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 0.67486 by 0.70778 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-0-692748-by-0-527808-m-rectangle-on-th-28b2b0097e",
       "observationIds": [
         "obs-opening-reveal-900b0e8b1a"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.559314 by 0.426144 m rectangle on the rear elevation"
+      "what": "a 0.692748 by 0.527808 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-585948-by-0-972141-m-rectangle-on-th-dbf146ef9c",
+      "id": "gap-a-0-696961-by-1-3-m-opening-at-8-714222-ff57c32893",
+      "observationIds": [],
+      "reason": "its sill is 0.9 m up a wall with only 1.244486 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
+      "status": "AMBIGUOUS",
+      "what": "a 0.696961 by 1.3 m opening at 8.714222 m along the right wall of mass-0"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-0-725736-by-1-204062-m-rectangle-on-th-6be410527e",
       "observationIds": [
         "obs-opening-reveal-deffad0e49"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.585948 by 0.972141 m rectangle on the rear elevation"
+      "what": "a 0.725736 by 1.204062 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-653611-by-3-321411-m-rectangle-on-th-fa21af0daa",
+      "id": "gap-a-0-803208-by-4-081608-m-rectangle-on-th-94d3f13619",
       "observationIds": [
         "obs-opening-reveal-9f4a163104",
         "obs-opening-reveal-bfbf9aa87c"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.653611 by 3.321411 m rectangle on the front elevation"
+      "what": "a 0.803208 by 4.081608 m rectangle on the front elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-679167-by-1-771161-m-rectangle-on-th-f9102b2d44",
+      "id": "gap-a-0-83946-by-2-18918-m-rectangle-on-the-7355b791ff",
       "observationIds": [
         "obs-opening-reveal-b571455087"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.679167 by 1.771161 m rectangle on the right elevation"
+      "what": "a 0.83946 by 2.18918 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-0-731026-by-1-3-m-opening-at-8-670586-b2f2c5c2e2",
-      "observationIds": [],
-      "reason": "its sill is 0.9 m up a wall with only 1.244486 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
-      "status": "AMBIGUOUS",
-      "what": "a 0.731026 by 1.3 m opening at 8.670586 m along the right wall of mass-0"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-760323-by-0-413509-m-rectangle-on-th-6456558135",
-      "observationIds": [
-        "obs-opening-reveal-19966d6216"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 0.760323 by 0.413509 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-787001-by-0-333475-m-rectangle-on-th-f739e8a5bd",
-      "observationIds": [
-        "obs-opening-reveal-2e3b626cea"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 0.787001 by 0.333475 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-787001-by-0-413509-m-rectangle-on-th-954ef1da81",
-      "observationIds": [
-        "obs-opening-reveal-58dfb2afbf"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 0.787001 by 0.413509 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-918873-by-1-944282-m-rectangle-on-th-a80da0339e",
+      "id": "gap-a-1-138086-by-2-408124-m-rectangle-on-th-71b7ee10eb",
       "observationIds": [
         "obs-opening-reveal-bd8f6514b8"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 0.918873 by 1.944282 m rectangle on the rear elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-998775-by-0-39951-m-rectangle-on-the-a9011498d0",
-      "observationIds": [
-        "obs-opening-reveal-aa3372ec79"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 0.998775 by 0.39951 m rectangle on the right elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-1-012092-by-0-332925-m-rectangle-on-th-0bdeab3745",
-      "observationIds": [
-        "obs-opening-reveal-914c75f37c"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 1.012092 by 0.332925 m rectangle on the right elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-1-107137-by-0-653611-m-rectangle-on-th-2eb7f2086b",
-      "observationIds": [
-        "obs-opening-reveal-ae70b5010e"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 1.107137 by 0.653611 m rectangle on the front elevation"
+      "what": "a 1.138086 by 2.408124 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
@@ -1315,18 +1229,47 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-1-640697-by-0-987086-m-rectangle-on-th-d26e800ff9",
+      "id": "gap-a-1-2345-by-0-4938-m-rectangle-on-the-le-aa0d043dbe",
       "observationIds": [
-        "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326"
+        "obs-opening-reveal-aa3372ec79"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 1.640697 by 0.987086 m rectangle on the front elevation"
+      "what": "a 1.2345 by 0.4938 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-11-705643-m-member-at-5-020862-m-on-th-f4300dff3f",
+      "id": "gap-a-1-25096-by-0-4115-m-rectangle-on-the-l-0c64e7b2ae",
+      "observationIds": [
+        "obs-opening-reveal-914c75f37c"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 1.25096 by 0.4115 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-1-360536-by-0-803208-m-rectangle-on-th-d5e6966509",
+      "observationIds": [
+        "obs-opening-reveal-ae70b5010e"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 1.360536 by 0.803208 m rectangle on the front elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-1-54724-by-0-31274-m-rectangle-on-the-4f957081f3",
+      "observationIds": [
+        "obs-opening-reveal-6e90f3f571"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 1.54724 by 0.31274 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-14-46834-m-member-at-5-975417-m-on-the-2231bd036e",
       "observationIds": [
         "obs-linear-volume-candidate-beam-1199ec1b6b",
         "obs-linear-volume-candidate-beam-389fc35baa",
@@ -1340,63 +1283,86 @@
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 11.705643 m member at 5.020862 m on the right facade"
+      "what": "a 14.46834 m member at 5.975417 m on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-2-543547-by-0-359559-m-rectangle-on-th-45d21ae739",
+      "id": "gap-a-14-697234-m-member-at-4-763224-m-on-th-09527d6c9f",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-51264c4bd1",
+        "obs-linear-volume-candidate-beam-cff798139b",
+        "obs-linear-volume-candidate-beam-def101d470"
+      ],
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "status": "AMBIGUOUS",
+      "what": "a 14.697234 m member at 4.763224 m on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-2-016216-by-1-213008-m-rectangle-on-th-7de02c84d9",
+      "observationIds": [
+        "obs-opening-reveal-f6109117ba",
+        "obs-opening-reveal-ff08485326"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 2.016216 by 1.213008 m rectangle on the front elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-3-150354-by-0-445338-m-rectangle-on-th-99b9645d9e",
       "observationIds": [
         "obs-opening-reveal-0330224147",
         "obs-opening-reveal-12d5f7840b"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 2.543547 by 0.359559 m rectangle on the rear elevation"
+      "what": "a 3.150354 by 0.445338 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-2-583498-by-0-332925-m-rectangle-on-th-d56b7ad94b",
+      "id": "gap-a-3-19324-by-0-4115-m-rectangle-on-the-l-37db5c5d02",
       "observationIds": [
         "obs-opening-reveal-530d813eef"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 2.583498 by 0.332925 m rectangle on the right elevation"
+      "what": "a 3.19324 by 0.4115 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-3-014614-by-1-027103-m-rectangle-on-th-5fc62fea80",
+      "id": "gap-a-3-966952-by-1-511994-m-rectangle-on-th-87d6a6c6ca",
       "observationIds": [
-        "obs-opening-reveal-610a296c59"
+        "obs-opening-reveal-71a8a40e34"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 3.014614 by 1.027103 m rectangle on the left elevation"
+      "what": "a 3.966952 by 1.511994 m rectangle on the right elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-3-254716-by-1-240527-m-rectangle-on-th-f23a1f6b46",
-      "observationIds": [
-        "obs-opening-reveal-ea22d297c5"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 3.254716 by 1.240527 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-3-268055-m-member-at-5-455651-m-on-the-bd0198696d",
+      "id": "gap-a-3-98321-m-member-at-6-535716-m-on-the-c8d27d9abc",
       "observationIds": [
         "obs-linear-volume-candidate-beam-92cff6d900",
         "obs-linear-volume-candidate-beam-fafed6a4b1"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 3.268055 m member at 5.455651 m on the left facade"
+      "what": "a 3.98321 m member at 6.535716 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-108413-m-member-at-4-428548-m-on-the-4d629dfdc9",
+      "id": "gap-a-4-491408-by-1-508064-m-rectangle-on-th-8ea1b1a517",
+      "observationIds": [
+        "obs-opening-reveal-7a4c68bf33"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 4.491408 by 1.508064 m rectangle on the front elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-5-007465-m-member-at-5-28385-m-on-the-2e437c5f0e",
       "observationIds": [
         "obs-linear-volume-candidate-beam-0879579945",
         "obs-linear-volume-candidate-beam-7d39c891e8",
@@ -1405,87 +1371,77 @@
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.108413 m member at 4.428548 m on the left facade"
+      "what": "a 5.007465 m member at 5.28385 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-141587-by-0-745752-m-rectangle-on-th-834166233b",
+      "id": "gap-a-5-129634-by-0-923664-m-rectangle-on-th-274c81fb48",
       "observationIds": [
         "obs-opening-reveal-6b516b8104",
         "obs-opening-reveal-b1afd81ec7"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 4.141587 by 0.745752 m rectangle on the rear elevation"
+      "what": "a 5.129634 by 0.923664 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-255142-m-member-at-4-620738-m-on-the-c4950d575a",
+      "id": "gap-a-5-186303-m-member-at-5-518097-m-on-the-d3462f1f6b",
       "observationIds": [
         "obs-linear-volume-candidate-beam-06c7a0c9f8",
         "obs-linear-volume-candidate-beam-233e69c1df"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.255142 m member at 4.620738 m on the left facade"
+      "what": "a 5.186303 m member at 5.518097 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-281819-m-member-at-5-228888-m-on-the-88a7024b60",
+      "id": "gap-a-5-218818-m-member-at-6-25933-m-on-the-2a7a162a54",
       "observationIds": [
         "obs-linear-volume-candidate-beam-387c8a7c55",
         "obs-linear-volume-candidate-beam-babac45875"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.281819 m member at 5.228888 m on the left facade"
+      "what": "a 5.218818 m member at 6.25933 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-295158-by-0-546899-m-rectangle-on-th-a4e1835c2e",
-      "observationIds": [
-        "obs-opening-reveal-1577e3b900"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 4.295158 by 0.546899 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-4-295158-m-member-at-5-655722-m-on-the-c8b80b2e6b",
+      "id": "gap-a-5-235076-m-member-at-6-779569-m-on-the-a3bd7ca452",
       "observationIds": [
         "obs-linear-volume-candidate-beam-773602e63d",
         "obs-linear-volume-candidate-beam-b47e04ef7f"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.295158 m member at 5.655722 m on the left facade"
+      "what": "a 5.235076 m member at 6.779569 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-295158-m-member-at-6-055906-m-on-the-4ddca79cc8",
+      "id": "gap-a-5-235076-m-member-at-7-267326-m-on-the-bdbe734eee",
       "observationIds": [
         "obs-linear-volume-candidate-beam-6fa0f0b886",
         "obs-linear-volume-candidate-beam-d169456d9b"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.295158 m member at 6.055906 m on the left facade"
+      "what": "a 5.235076 m member at 7.267326 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-295159-m-member-at-6-278977-m-on-the-45f05bb41c",
+      "id": "gap-a-5-235078-m-member-at-7-539212-m-on-the-2b02e37fcb",
       "observationIds": [
         "obs-linear-volume-candidate-beam-4f560cadfd",
         "obs-linear-volume-candidate-beam-f0439de1e5"
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.295159 m member at 6.278977 m on the left facade"
+      "what": "a 5.235078 m member at 7.539212 m on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-487829-by-0-572631-m-rectangle-on-th-c1cecf3ed2",
+      "id": "gap-a-5-54702-by-0-70778-m-rectangle-on-the-e7f6db6be1",
       "observationIds": [
         "obs-opening-reveal-7812a0c6f9",
         "obs-opening-reveal-9620bed99b",
@@ -1493,11 +1449,11 @@
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 4.487829 by 0.572631 m rectangle on the right elevation"
+      "what": "a 5.54702 by 0.70778 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-501146-m-member-at-5-469416-m-on-the-4759cb3bf5",
+      "id": "gap-a-5-56348-m-member-at-6-529836-m-on-the-9826e01cd8",
       "observationIds": [
         "obs-linear-volume-candidate-beam-18511fbef4",
         "obs-linear-volume-candidate-beam-2cd52d310d",
@@ -1505,42 +1461,42 @@
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 4.501146 m member at 5.469416 m on the right facade"
+      "what": "a 5.56348 m member at 6.529836 m on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-541097-by-0-838971-m-rectangle-on-th-28cf0c8f13",
+      "id": "gap-a-5-61286-by-1-03698-m-rectangle-on-the-171fa61139",
       "observationIds": [
         "obs-opening-reveal-0a04d248c6",
         "obs-opening-reveal-e67c2df7e1"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 4.541097 by 0.838971 m rectangle on the right elevation"
+      "what": "a 5.61286 by 1.03698 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-4-66865-by-1-120476-m-rectangle-on-the-098665ec67",
+      "id": "gap-a-5-6903-by-1-365672-m-rectangle-on-the-1cb734624f",
       "observationIds": [
         "obs-opening-reveal-20488d3aab"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 4.66865 by 1.120476 m rectangle on the left elevation"
+      "what": "a 5.6903 by 1.365672 m rectangle on the right elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-5-220264-by-0-812337-m-rectangle-on-th-15db173e9a",
+      "id": "gap-a-6-45232-by-1-00406-m-rectangle-on-the-a7de02bdc5",
       "observationIds": [
         "obs-opening-reveal-cdb6b1125d"
       ],
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
-      "what": "a 5.220264 by 0.812337 m rectangle on the right elevation"
+      "what": "a 6.45232 by 1.00406 m rectangle on the left elevation"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-6-896263-m-member-at-4-428548-m-on-the-12b42db4d7",
+      "id": "gap-a-8-405386-m-member-at-5-28385-m-on-the-25cd8842e3",
       "observationIds": [
         "obs-linear-volume-candidate-beam-0931728dc7",
         "obs-linear-volume-candidate-beam-1af284fe76",
@@ -1548,7 +1504,7 @@
       ],
       "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
-      "what": "a 6.896263 m member at 4.428548 m on the left facade"
+      "what": "a 8.405386 m member at 5.28385 m on the right facade"
     },
     {
       "evidenceIds": [],
@@ -1575,176 +1531,55 @@
       "evidenceIds": [],
       "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-45bf7be1d8"
-      ],
-      "reason": "seen on 1 independent drawing at 0.628571 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-4729575a22",
-        "obs-linear-volume-candidate-beam-5c180cd9c4"
-      ],
-      "reason": "seen on 1 independent drawing at 0.85 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-4e2149b567"
-      ],
-      "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-4c764b1c14"
-      ],
-      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-7251c194ed"
-      ],
-      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-fc9eb854fb"
-      ],
-      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-320fac4597"
-      ],
-      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-c5af1dbba2"
-      ],
-      "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-17465db073"
-      ],
-      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-ffec9b6eec"
-      ],
-      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-afa3396c9e"
-      ],
-      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-7854cefa59"
-      ],
-      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
-      "status": "AMBIGUOUS",
-      "what": "a linear member on the left facade"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
-      "observationIds": [
         "obs-linear-volume-candidate-beam-b87c3373ef"
       ],
       "reason": "seen on 1 independent drawing at 0.85 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "a linear member on the right facade"
+      "what": "a linear member on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
         "obs-linear-volume-candidate-beam-842d9b77a4"
       ],
       "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "a linear member on the right facade"
+      "what": "a linear member on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
         "obs-linear-volume-candidate-beam-6c7e1bbefe"
       ],
       "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "a linear member on the right facade"
+      "what": "a linear member on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
         "obs-linear-volume-candidate-beam-685c045bd7"
       ],
       "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "a linear member on the right facade"
+      "what": "a linear member on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
         "obs-linear-volume-candidate-beam-2b558faa85"
       ],
       "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "a linear member on the right facade"
+      "what": "a linear member on the left facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
       "observationIds": [
         "obs-linear-volume-candidate-beam-496fc9f596",
         "obs-linear-volume-candidate-beam-d3aaf908f3",
@@ -1752,33 +1587,139 @@
       ],
       "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-45bf7be1d8"
+      ],
+      "reason": "seen on 1 independent drawing at 0.628571 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
       "what": "a linear member on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-0-s-e52e3a90ed",
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-51264c4bd1",
-        "obs-linear-volume-candidate-beam-cff798139b",
-        "obs-linear-volume-candidate-beam-def101d470"
+        "obs-linear-volume-candidate-beam-4729575a22",
+        "obs-linear-volume-candidate-beam-5c180cd9c4"
       ],
-      "placeholderId": "solid-0",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
+      "reason": "seen on 1 independent drawing at 0.85 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
       "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-0 stands proud of the wall"
+      "what": "a linear member on the right facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-rear-facade-member-solid-1-s-82c190795b",
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-4e2149b567"
+      ],
+      "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-4c764b1c14"
+      ],
+      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-7251c194ed"
+      ],
+      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-fc9eb854fb"
+      ],
+      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-320fac4597"
+      ],
+      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-c5af1dbba2"
+      ],
+      "reason": "seen on 1 independent drawing at 0.81 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-17465db073"
+      ],
+      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-ffec9b6eec"
+      ],
+      "reason": "seen on 1 independent drawing at 0.91 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-afa3396c9e"
+      ],
+      "reason": "seen on 1 independent drawing at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-how-far-the-rear-facade-member-solid-0-s-53790070da",
       "observationIds": [
         "obs-linear-volume-candidate-beam-3b6208d04e",
         "obs-linear-volume-candidate-beam-9f08f35c3b",
         "obs-linear-volume-candidate-beam-b27bd35495"
       ],
-      "placeholderId": "solid-1",
+      "placeholderId": "solid-0",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the rear facade member solid-1 stands proud of the wall"
+      "what": "how far the rear facade member solid-0 stands proud of the wall"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-the-height-of-the-0-696961-m-opening-at-1169ae4df7",
+      "observationIds": [],
+      "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
+      "status": "MISSING",
+      "what": "the height of the 0.696961 m opening at 8.714222 m along the max_x wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1790,27 +1731,35 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-731026-m-opening-at-3cbd9ff3e8",
+      "id": "gap-the-height-of-the-0-819861-m-opening-at-ff44274822",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.731026 m opening at 8.670586 m along the max_x wall of mass-0"
+      "what": "the height of the 0.819861 m opening at 5.666688 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-845596-m-opening-at-eb17f39fb3",
+      "id": "gap-the-height-of-the-0-897632-m-opening-at-f7c0a9045a",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.845596 m opening at 5.653845 m along the max_z wall of mass-0"
+      "what": "the height of the 0.897632 m opening at 8.054193 m along the min_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-998609-m-opening-at-b43d12c412",
+      "id": "gap-the-height-of-the-0-946161-m-opening-at-dd18ac9e01",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.998609 m opening at 2.028541 m along the min_z wall of mass-1"
+      "what": "the height of the 0.946161 m opening at 2.041562 m along the min_z wall of mass-1"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-the-height-of-the-1-116257-m-opening-at-24c54145dd",
+      "observationIds": [],
+      "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
+      "status": "MISSING",
+      "what": "the height of the 1.116257 m opening at 2.805491 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1822,59 +1771,59 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-1-536262-m-opening-at-d7d16fd185",
+      "id": "gap-the-height-of-the-1-398812-m-opening-at-01d774e963",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 1.536262 m opening at 2.505113 m along the max_z wall of mass-0"
+      "what": "the height of the 1.398812 m opening at 5.819225 m along the min_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-1-668889-m-opening-at-3db4949621",
+      "id": "gap-the-height-of-the-2-66026-m-opening-at-0-6704a7a85f",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 1.668889 m opening at 5.814621 m along the min_x wall of mass-0"
+      "what": "the height of the 2.66026 m opening at 0.567135 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-926585-m-opening-at-dc7196a0a7",
+      "id": "gap-the-height-of-the-2-797663-m-opening-at-0dca490b76",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.926585 m opening at 0.297103 m along the min_z wall of mass-0"
+      "what": "the height of the 2.797663 m opening at 0.719052 m along the max_z wall of mass-1"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-956938-m-opening-at-0c64aef5ad",
+      "id": "gap-the-height-of-the-2-847454-m-opening-at-6aaf956ecf",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.956938 m opening at 0.74006 m along the max_z wall of mass-1"
+      "what": "the height of the 2.847454 m opening at 4.460325 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-993144-m-opening-at-a05cae4522",
+      "id": "gap-the-height-of-the-2-979949-m-opening-at-c1711b583d",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.993144 m opening at 4.426851 m along the min_z wall of mass-0"
+      "what": "the height of the 2.979949 m opening at 0.897207 m along the max_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-3-43193-m-opening-at-0-7a95e7a2fa",
+      "id": "gap-the-height-of-the-4-33412-m-opening-at-0-3965f0bb2c",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 3.43193 m opening at 0.452526 m along the max_x wall of mass-0"
+      "what": "the height of the 4.33412 m opening at 0.594939 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-5-029133-m-opening-at-cb7bd5bb98",
+      "id": "gap-the-height-of-the-4-668354-m-opening-at-b782192b34",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 5.029133 m opening at 2.246155 m along the min_z wall of mass-0"
+      "what": "the height of the 4.668354 m opening at 2.256599 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1896,11 +1845,11 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-which-wall-the-elevation-on-asset-gotowy-03c5ab2348",
+      "id": "gap-which-wall-the-elevation-on-asset-gotowy-f3ff216fb9",
       "observationIds": [],
-      "reason": "the silhouette is 17.060487 m across, which is 4.450487 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one; it was placed on the LEFT and the placement is not certain",
+      "reason": "the silhouette is 14.517391 m across, which is 1.907391 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one; it was placed on the LEFT and the placement is not certain",
       "status": "AMBIGUOUS",
-      "what": "which wall the elevation on asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d shows"
+      "what": "which wall the elevation on asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62 shows"
     }
   ]
 }
