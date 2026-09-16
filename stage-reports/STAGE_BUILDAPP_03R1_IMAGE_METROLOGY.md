@@ -340,8 +340,11 @@ measure from a render and said so.
 | `npm run audit:marcowki:facades` | 47 features: 36 pass, 9 deviation, 2 not modelled, worst 0.185 m |
 | `npm run reconstruct:no-reference` | `STRUCTURAL_LAYOUT_ACCEPTED` with the reference package removed from the tree |
 | `npm run e2e` | **22 passed** |
-| CI | <https://github.com/damiankrok/BuildApp/actions/workflows/buildapp-ci.yml> — core, browser, Android and no-reference jobs |
-| APK artifact | `buildplan-model-preview-apks`, published by the Android job on every run |
+| CI | run 21 on `9907dac`, all four jobs green: <https://github.com/damiankrok/BuildApp/actions/runs/35112728261> |
+| APK artifact | `buildplan-model-preview-apks`, 46.7 MB, uploaded by the Android job on that run |
+
+The CI run above is the last one over the whole of this stage's code. The only
+commit after it is this line and the table it sits in.
 
 ### §27's fourteen conditions
 
