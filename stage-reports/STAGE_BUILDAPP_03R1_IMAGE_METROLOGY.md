@@ -279,6 +279,27 @@ Recorded because each looks obviously right and cost real accuracy.
    edge decides it instead, and a tall house beside a low garage cannot be
    mistaken for its mirror image.
 
+## §13, wired
+
+The opening-height decision goes through `fuseQuantity`. Both readings of a
+drawing — the differential profile and the rectangle group — are observations
+of the same two metres, the head above the floor and the sill, each with its
+own uncertainty: 0.04 m for a boundary the refinement could put on a drawn
+line, 0.20 m for one the profile only guessed at, 0.08 m for a detector's
+rectangle. §24's order weighs them, a robust loss keeps a source that has
+found the wrong feature from breaking the answer, and what comes back says
+whether they AGREED, DISPUTED each other, or were a SINGLE_SOURCE with
+nothing to check against.
+
+A height is taken when they agree, or when there is only one of them and the
+drawing is the kind a single reading can be trusted on. Otherwise the opening
+is named as a hole.
+
+The sealed candidate's model hash is unchanged by this rewiring —
+`2a1bda898e9379de` before and after — which is the strongest evidence
+available that it is a faithful re-expression of the rule rather than a change
+of behaviour dressed as one.
+
 ## Also fixed
 
 - **§24's authority order is enforced.** A printed callout previously lost to
@@ -346,13 +367,13 @@ measure from a render and said so.
 Stated plainly, because the brief asks for a great deal and some of it is
 untouched.
 
-- **§13's joint objective is built but not wired in.** `fuseQuantity` fuses
-  several measurements of one quantity under §24's authority order with a
-  robust loss and per-source residuals, and is tested; the reconstruction does
-  not yet route its opening measurements through it. Each drawing is still
-  registered independently, and the agreement between the four elevations —
-  16.26 to 16.49 mm/px, a 0.9% spread on four independent measurements of one
-  building — is reported rather than used as a constraint.
+- **No joint multi-view REGISTRATION.** `fuseQuantity` combines finished
+  measurements and the reconstruction routes its opening heights through it;
+  what is not done is re-fitting several drawings against each other. Each is
+  still registered independently, and the agreement between the four
+  elevations — 16.26 to 16.49 mm/px, a 0.9% spread on four independent
+  measurements of one building — is reported rather than used as a
+  constraint.
 - **The perspective path is not wired into the reconstruction.** `homography.ts`
   and `camera.ts` are built and tested against a stated camera, and the
   pipeline does not yet call them: this project's perspective renders are

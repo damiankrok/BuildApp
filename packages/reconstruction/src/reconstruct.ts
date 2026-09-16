@@ -35,7 +35,8 @@ import { detectContradictions, solveQuantity } from './constraints.js'
 import type { Constraint, SolvedQuantity } from './constraints.js'
 import { fuseCandidates } from './fusion.js'
 import type { FusionCounts } from './fusion.js'
-import { drawingCharacter, silhouetteTop, verticalOpeningExtent } from '@buildapp/image-metrology'
+import { drawingCharacter, fuseQuantity, silhouetteTop, verticalOpeningExtent } from '@buildapp/image-metrology'
+import type { QuantityObservation } from '@buildapp/image-metrology'
 import { claddingField, groupFacadeOpenings } from './openings.js'
 import { planOpenings } from './plan-openings.js'
 import { elevationMetric, elevationPixel } from './views.js'
@@ -82,12 +83,6 @@ export type ReconstructionResult = {
  */
 const WALL_INDEX: Record<BuildingSide, number> = { REAR: 0, RIGHT: 1, FRONT: 2, LEFT: 3 }
 
-/**
- * How close two readings of the same opening have to be to be corroborating
- * each other rather than disagreeing. A reveal, a frame and a shadow account
- * for a few centimetres between them; a quarter of a metre does not.
- */
-const CORROBORATION_M = 0.25
 
 const MATERIALS = {
   wall: 'mat-wall',
@@ -945,36 +940,61 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     // to differ from. Throwing that away because nothing corroborated it would
     // discard the good case to guard against the bad one.
     const measured = measureOnElevation(side, u0, u1, floor, ceiling)
-    const agreement =
-      measured === undefined || run === undefined
-        ? 'ALONE'
-        : Math.abs(measured.headM - run.v1) <= CORROBORATION_M && Math.abs(measured.sillM - run.v0) <= CORROBORATION_M
-          ? 'AGREE'
-          : 'DISAGREE'
+    //
+    // Both readings, and the printed callout where there is one, go through
+    // §13's objective as observations of the same two metres: the head above
+    // the floor, and the sill. `fuseQuantity` applies §24's order, weighs each
+    // by its own uncertainty, uses a robust loss so a source that has found
+    // the wrong feature bends the answer rather than breaking it, and comes
+    // back saying whether the sources AGREED, DISPUTED each other, or were a
+    // SINGLE_SOURCE with nothing to check against.
+    const observe = (which: 'head' | 'sill'): QuantityObservation[] => {
+      const out: QuantityObservation[] = []
+      if (measured) {
+        out.push({
+          id: `${which}-measured`,
+          sourceId: `${side.toLowerCase()} elevation, measured`,
+          authority: 'REGISTERED_TECHNICAL_DRAWING',
+          valueM: which === 'head' ? measured.headM : measured.sillM,
+          // A boundary the refinement could put on a drawn line is worth far
+          // more than one the differential profile only guessed at.
+          uncertaintyM: measured.onDrawnEdges ? 0.04 : 0.2,
+          why: measured.why,
+        })
+      }
+      if (believable) {
+        out.push({
+          id: `${which}-assembly`,
+          sourceId: `${side.toLowerCase()} elevation, rectangle group`,
+          authority: 'REGISTERED_TECHNICAL_DRAWING',
+          valueM: which === 'head' ? run.v1 : run.v0,
+          uncertaintyM: 0.08,
+          why: `${run.pieces.length === 1 ? 'a rectangle group' : `${run.pieces.length} stacked rectangle groups`} on the ${side.toLowerCase()} elevation`,
+        })
+      }
+      return out
+    }
+    const head = fuseQuantity(observe('head'))
+    const sillAt = fuseQuantity(observe('sill'))
+    // Believed when the two readings agree, or when there is only one and the
+    // drawing is the kind a single reading can be trusted on.
+    const settled =
+      head !== null &&
+      sillAt !== null &&
+      head.status === sillAt.status &&
+      (head.status === 'AGREED' || (head.status === 'SINGLE_SOURCE' && facadeLegibility(side).legible)) &&
+      head.valueM - sillAt.valueM >= 0.9
     if (opening.heightM !== undefined) {
       sill = opening.sillM ?? 0
       height = opening.heightM
       basis = 'MEASURED'
       heightWhy = `the callout "${opening.callout?.widthCm}/${opening.callout?.heightCm}" printed against it`
-    } else if (measured && agreement === 'AGREE') {
-      sill = round6(Math.max(0, measured.sillM - floor))
-      height = round6(measured.headM - measured.sillM)
-      basis = 'MEASURED'
-      heightWhy = `${measured.why}; and a rectangle group found independently on the same drawing agrees to within ${CORROBORATION_M} m`
+    } else if (settled && head && sillAt) {
+      sill = round6(Math.max(0, sillAt.valueM - floor))
+      height = round6(head.valueM - sillAt.valueM)
+      basis = head.status === 'AGREED' ? 'MEASURED' : 'CROSS_VIEW'
+      heightWhy = `its head is at ${round6(head.valueM)} ± ${head.uncertaintyM} m and its sill at ${round6(sillAt.valueM)} ± ${sillAt.uncertaintyM} m: ${head.why}`
       for (const piece of run?.pieces ?? []) usedAssemblies.add(piece)
-    } else if (measured && agreement === 'ALONE' && measured.onDrawnEdges && facadeLegibility(side).legible) {
-      sill = round6(Math.max(0, measured.sillM - floor))
-      height = round6(measured.headM - measured.sillM)
-      basis = 'MEASURED'
-      heightWhy = `${measured.why}; no rectangle group was found over this gap to check it against`
-    } else if (believable && agreement === 'ALONE' && facadeLegibility(side).legible) {
-      sill = round6(Math.max(0, run.v0 - floor))
-      height = round6(run.v1 - run.v0)
-      basis = 'CROSS_VIEW'
-      heightWhy =
-        `${run.pieces.length === 1 ? 'a rectangle group' : `${run.pieces.length} stacked rectangle groups`} on the ${side.toLowerCase()} elevation stand over this gap, ` +
-        `between ${round6(run.v0)} and ${round6(run.v1)} m, and nothing on that drawing contradicts them — ${facadeLegibility(side).why}`
-      for (const piece of run.pieces) usedAssemblies.add(piece)
     } else {
       // Nothing measures it. A domestic opening has its head at about the
       // same height whatever it is — a door, a window, a run of glazing — so
