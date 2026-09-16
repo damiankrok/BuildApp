@@ -8,7 +8,8 @@
  */
 import { inkMask, toGray } from '@buildapp/source-cv'
 import type { Mask } from '@buildapp/source-cv'
-import type { CoordinateRegistration, DimensionChain, MetricProvenance } from '@buildapp/source-metrics'
+import type { CoordinateRegistration, DimensionChain, MetricEvidenceSet, MetricProvenance } from '@buildapp/source-metrics'
+import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import { BLACK, drawLine, fillRect, whiteRaster } from '../../source-cv/test/draw.js'
 import type { Raster } from '@buildapp/source-cv'
 
@@ -59,11 +60,11 @@ export const mask = (r: Raster): Mask => inkMask(toGray(r))
  * at the fixture's scale, so the chain agrees with the drawing by construction
  * and a test that wants them to disagree has to say so.
  */
-export function chain(id: string, axis: 'HORIZONTAL' | 'VERTICAL', ticks: readonly number[], options: { read?: boolean; baselinePx?: number } = {}): DimensionChain {
+export function chain(id: string, axis: 'HORIZONTAL' | 'VERTICAL', ticks: readonly number[], options: { read?: boolean; baselinePx?: number; frameId?: string } = {}): DimensionChain {
   const read = options.read ?? true
   return {
     id,
-    frameId: 'frame-test',
+    frameId: options.frameId ?? 'frame-test',
     assetId: 'asset-test',
     axis,
     baselinePx: options.baselinePx ?? 0,
@@ -83,10 +84,10 @@ export function chain(id: string, axis: 'HORIZONTAL' | 'VERTICAL', ticks: readon
   }
 }
 
-export function registration(): CoordinateRegistration {
+export function registration(frameId = 'frame-test'): CoordinateRegistration {
   return {
-    id: 'reg-test',
-    frameId: 'frame-test',
+    id: `reg-${frameId}`,
+    frameId,
     assetId: 'asset-test',
     variantByteHash: 'b'.repeat(64),
     plane: 'PLAN_XZ',
@@ -103,3 +104,55 @@ export function registration(): CoordinateRegistration {
     provenance: PROVENANCE,
   }
 }
+
+/** A coordinate frame for a synthetic plan, so the layout pass can find it the way it finds a real one. */
+export function planFrame(id: string, storey: 'GROUND' | 'UPPER' | 'ATTIC', size: { width: number; height: number }): SourceCoordinateFrame {
+  return {
+    id,
+    assetId: `asset-${id}`,
+    variantByteHash: 'c'.repeat(64),
+    size,
+    roles: { document: 'FLOOR_PLAN', storey, annotation: 'DIMENSIONED', view: 'NOT_APPLICABLE', projection: 'ORTHOGRAPHIC_PLAN' },
+  }
+}
+
+export function graphOf(frames: readonly SourceCoordinateFrame[]): SourceObservationGraph {
+  return {
+    schema: 'buildapp.source-observation-graph',
+    schemaVersion: '1.0.0',
+    id: 'graph-test',
+    sourcePackageId: 'src-test',
+    sourcePackageHash: 'd'.repeat(64),
+    extractors: [],
+    coordinateFrames: [...frames],
+    observations: [],
+    relations: [],
+    conflicts: [],
+    unresolved: [],
+    contentHash: 'e'.repeat(64),
+  }
+}
+
+export function metricsOf(chains: readonly DimensionChain[], registrations: readonly CoordinateRegistration[]): MetricEvidenceSet {
+  return {
+    schema: 'buildapp.metric-evidence-set',
+    schemaVersion: '1.1.0',
+    id: 'metrics-test',
+    sourcePackageId: 'src-test',
+    sourcePackageHash: 'd'.repeat(64),
+    observationGraphId: 'graph-test',
+    observationGraphHash: 'e'.repeat(64),
+    extractors: [],
+    ocrTokens: [],
+    evidence: [],
+    chains: [...chains],
+    coordinateRegistrations: [...registrations],
+    specificationFindings: [],
+    conflicts: [],
+    unresolved: [],
+    contentHash: 'f'.repeat(64),
+  }
+}
+
+/** Retarget a chain and a registration at a named frame, so one fixture can serve two storeys. */
+export const onFrame = <T extends { frameId: string; assetId?: string }>(item: T, frameId: string): T => ({ ...item, frameId, ...(item.assetId === undefined ? {} : { assetId: `asset-${frameId}` }) })

@@ -41,6 +41,17 @@ import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-me
 export type GridLineSupport = {
   /** Chains whose segment boundaries fall on this line. */
   chainIds: string[]
+  /**
+   * The longest span, in pixels, of any chain that breaks here.
+   *
+   * A plan carries chains at several depths — one across the whole building,
+   * one along a wing, one from a door to a corner — and they state different
+   * KINDS of thing. Two lines a few centimetres apart, each with a printed
+   * number on it, are told apart by which of them the longer chain broke at,
+   * because the chain that measures more of the building is the one stating
+   * structure rather than detail.
+   */
+  chainSpanPx: number
   /** Of those, the chains that had a number PRINTED on the segment, rather than deriving it from their own scale. */
   printedChainIds: string[]
   /** Wall bands whose axis lies on this line, by total length in pixels. */
@@ -231,6 +242,7 @@ export function gridLines(
     for (const chain of chains) {
       const runsAlong = (chain.axis === 'HORIZONTAL') === (axis === 'X')
       if (!runsAlong) continue
+      const chainSpan = Math.max(...chain.ticksPx) - Math.min(...chain.ticksPx)
       for (const segment of chain.segments) {
         // A span nothing was read on and nothing derived is a tick the chain
         // itself does not believe.
@@ -239,26 +251,36 @@ export function gridLines(
         for (const px of [segment.fromPx, segment.toPx]) {
           if (px < low || px > high) continue
           const held = nearest(px, opt.snapPx)
-          const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
+          const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
           if (!held) raw.push(line)
           if (!line.support.chainIds.includes(chain.id)) line.support.chainIds.push(chain.id)
           if (printed && !line.support.printedChainIds.includes(chain.id)) line.support.printedChainIds.push(chain.id)
+          line.support.chainSpanPx = Math.max(line.support.chainSpanPx, round6(chainSpan))
           if (!line.probes.some((p) => Math.abs(p - px) <= 1)) line.probes.push(round6(px))
         }
       }
     }
 
-    // --- then the bands, which join a chain line within a wall's thickness ---
+    // --- then the bands, which join the chain line they belong to ------------
     for (const band of bands) {
       const across = (band.axis === 'VERTICAL') === (axis === 'X')
       if (!across) continue
       const px = band.axisPx
       if (px < low || px > high) continue
-      // A band's axis is half a wall away from the face the chain was struck
-      // on, so the match window is the wall, not the snap tolerance.
+      // A witness line is struck on a wall's FACE and a band's axis runs down
+      // its CENTRE, so a band belongs to a chain line that sits on its axis OR
+      // on either of its faces. Where several chains break inside one wall —
+      // an overall dimension to the outside of it and a room dimension to the
+      // inside — the one that measures more of the building takes the band,
+      // because that is the line the building's own outline follows and the
+      // other is a note about a room.
+      const faces = axis === 'X' ? [band.bounds.x0, band.bounds.x1] : [band.bounds.y0, band.bounds.y1]
       const window = Math.max(opt.snapPx, band.thickness * 0.75)
-      const held = nearest(px, window)
-      const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
+      const faceWindow = Math.max(opt.snapPx, band.thickness * 0.35)
+      const claimants = raw.filter((l) => Math.abs(l.px - px) <= window || faces.some((f) => Math.abs(l.px - f) <= faceWindow))
+      claimants.sort((a, b) => b.support.chainSpanPx - a.support.chainSpanPx || Math.abs(a.px - px) - Math.abs(b.px - px) || a.px - b.px)
+      const held = claimants[0] ?? nearest(px, window)
+      const line = held ?? { px: round6(px), support: { chainIds: [], printedChainIds: [], chainSpanPx: 0, bandLength: 0, bandCoverage: 0 }, probes: [round6(px)] }
       if (!held) raw.push(line)
       line.support.bandLength += band.length
       line.support.bandCoverage = Math.min(1, line.support.bandLength / span)
@@ -267,7 +289,6 @@ export function gridLines(
       // garage door along its inner face, a terrace edge along its outer one.
       // All three are recorded so that looking for ink on this line looks
       // where the ink of this wall actually is.
-      const faces = axis === 'X' ? [band.bounds.x0, band.bounds.x1] : [band.bounds.y0, band.bounds.y1]
       for (const probe of [px, ...faces]) if (!line.probes.some((q) => Math.abs(q - probe) <= 1)) line.probes.push(round6(probe))
     }
 
@@ -312,7 +333,7 @@ export function gridLines(
  * they were drawn from is still looked at when edges are measured.
  */
 function thinLines(lines: readonly GridLine[], minGapPx: number, probeGapPx: number): GridLine[] {
-  const rank = (l: GridLine): number => l.confidence * 1e6 + l.support.chainIds.length * 1e3 + Math.min(999, l.support.bandLength)
+  const rank = (l: GridLine): number => l.confidence * 1e9 + Math.min(9999, l.support.chainSpanPx) * 1e3 + Math.min(999, l.support.bandLength)
   const order = [...lines].sort((a, b) => rank(b) - rank(a) || a.px - b.px)
   const kept: GridLine[] = []
   for (const line of order) {
@@ -487,9 +508,23 @@ export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect 
     let best: { lo: number; hi: number } | null = null
     for (const chain of chains) {
       if (chain.axis !== axis) continue
-      if (!chain.segments.some((seg) => seg.origin === 'READ' || seg.origin === 'CHAIN_CORRECTED')) continue
-      const lo = Math.min(...chain.ticksPx)
-      const hi = Math.max(...chain.ticksPx)
+      const read = chain.segments.filter((seg) => seg.origin === 'READ' || seg.origin === 'CHAIN_CORRECTED')
+      if (read.length === 0) continue
+      // A chain's outermost segments are often not segments at all: a witness
+      // line struck a centimetre past the last one, the end of the rule, a
+      // tick belonging to a different chain that happened to be collinear. One
+      // the chain could not read AND which is far shorter than the shortest it
+      // could is not a span of the building, and letting it set the frame adds
+      // a strip of nothing to whichever end it is on.
+      const floor = Math.min(...read.map((seg) => seg.pixelLength)) * 0.5
+      const segments = [...chain.segments].sort((a, b) => a.fromPx - b.fromPx)
+      let first = 0
+      let last = segments.length - 1
+      while (first <= last && segments[first].origin !== 'READ' && segments[first].origin !== 'CHAIN_CORRECTED' && segments[first].pixelLength < floor) first += 1
+      while (last >= first && segments[last].origin !== 'READ' && segments[last].origin !== 'CHAIN_CORRECTED' && segments[last].pixelLength < floor) last -= 1
+      if (first > last) continue
+      const lo = segments[first].fromPx
+      const hi = segments[last].toPx
       if (!best || hi - lo > best.hi - best.lo) best = { lo, hi }
     }
     return best
