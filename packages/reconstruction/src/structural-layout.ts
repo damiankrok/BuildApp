@@ -280,7 +280,7 @@ export const RoofSupportHypothesisSchema = z
      * a corroborated elevation, which beats a perspective. Stated so that a
      * later fit cannot quietly overrule a printed number.
      */
-    authority: z.enum(['PRINTED_ANGLE', 'SECTION', 'ELEVATION_GEOMETRY', 'PERSPECTIVE', 'CONVENTION', 'NONE']),
+    authority: z.enum(['PUBLISHED_SPECIFICATION', 'PRINTED_ANGLE', 'SECTION', 'ELEVATION_GEOMETRY', 'PERSPECTIVE', 'CONVENTION', 'NONE']),
     observationIds: z.array(z.string().min(1)),
     evidenceIds: z.array(z.string().min(1)),
     confidence: z.number().min(0).max(1),
