@@ -24,6 +24,18 @@
       "frameInset": 0.1,
       "frameWidth": 0.06,
       "hingeSide": "LEFT",
+      "id": "opening-10-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-10",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
       "id": "opening-11-d",
       "leafThickness": 0.045,
       "materialId": "mat-wall",
@@ -90,18 +102,6 @@
       "openAngle": 0,
       "openingId": "opening-8",
       "swing": "IN"
-    },
-    {
-      "frameDepth": 0.12,
-      "frameInset": 0.1,
-      "frameWidth": 0.06,
-      "hingeSide": "LEFT",
-      "id": "opening-9-d",
-      "leafThickness": 0.045,
-      "materialId": "mat-wall",
-      "openAngle": 0,
-      "openingId": "opening-9",
-      "swing": "IN"
     }
   ],
   "evidenceSources": [],
@@ -135,40 +135,22 @@
   ],
   "linearSolids": [
     {
-      "depth": 0.266476,
+      "depth": 0.313544,
       "end": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 0.309072
-      },
-      "hostId": "ring-mass-0-1-w3",
-      "id": "solid-0",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 12.367528
-      },
-      "width": 0.266476
-    },
-    {
-      "depth": 0.253151,
-      "end": {
-        "x": 8.49557,
-        "y": 0.179716,
+        "x": 9.929388,
+        "y": 0.041156,
         "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
-      "id": "solid-1",
+      "id": "solid-0",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 0.478736,
-        "y": 0.179716,
+        "x": 0,
+        "y": 0.041156,
         "z": -0.234013
       },
-      "width": 0.253151
+      "width": 0.313544
     }
   ],
   "materials": [
@@ -215,7 +197,7 @@
       "width": 5.029133
     },
     {
-      "height": 1.227188,
+      "height": 1.602379,
       "id": "opening-1",
       "kind": "WINDOW",
       "offset": 0.498026,
@@ -224,11 +206,11 @@
       "width": 4.431033
     },
     {
-      "height": 1.680714,
+      "height": 2.2,
       "id": "opening-10",
-      "kind": "WINDOW",
+      "kind": "DOOR",
       "offset": 8.012073,
-      "sill": 0.346814,
+      "sill": 0,
       "wallId": "ring-mass-0-0-w3",
       "width": 0.97772
     },
@@ -314,11 +296,11 @@
       "width": 1.139083
     },
     {
-      "height": 2.2,
+      "height": 2.408124,
       "id": "opening-9",
-      "kind": "DOOR",
+      "kind": "WINDOW",
       "offset": 2.028541,
-      "sill": 0,
+      "sill": 0.197928,
       "wallId": "ring-mass-1-0-w0",
       "width": 0.998609
     }
@@ -356,7 +338,7 @@
       "kind": "FLAT",
       "levelId": "lvl-0",
       "materialId": "mat-roof",
-      "overhang": 0,
+      "overhang": 0.838176,
       "pitchDeg": 0,
       "ridgeAxis": "Z",
       "thickness": 0.28
@@ -923,16 +905,6 @@
       "frameInset": 0.12,
       "frameWidth": 0.07,
       "glassThickness": 0.024,
-      "id": "opening-10-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-10"
-    },
-    {
-      "divisions": 1,
-      "frameDepth": 0.08,
-      "frameInset": 0.12,
-      "frameWidth": 0.07,
-      "glassThickness": 0.024,
       "id": "opening-12-w",
       "materialId": "mat-glass",
       "openingId": "opening-12"
@@ -956,6 +928,16 @@
       "id": "opening-5-w",
       "materialId": "mat-glass",
       "openingId": "opening-5"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-9-w",
+      "materialId": "mat-glass",
+      "openingId": "opening-9"
     }
   ]
 }

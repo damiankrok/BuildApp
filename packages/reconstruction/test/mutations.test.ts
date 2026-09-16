@@ -112,10 +112,43 @@ describe('mutating the sources moves the candidate', () => {
     expect(changed.candidate.contentHash).not.toBe(baseline.candidate.contentHash)
   })
 
-  it('6. removing a mass region from a view costs that view its registration', () => {
+  it('6. removing the traced outline falls back to measuring the drawing itself', () => {
+    // This used to cost the view its registration, and it no longer does —
+    // because the drawing is still there. A traced silhouette and the pixels
+    // it was traced from are two sources, not one under two names, and the
+    // second survives the first being deleted. What must not happen is the
+    // fallback being silent.
     const elevations = observationsOnElevations(base)
     const changed = solve(base, withGraph((observations) => observations.filter((o) => !(elevations.has(o.frameId) && (o.kind === 'SILHOUETTE' || o.kind === 'MASS_REGION')))))
-    expect(changed.candidate.unresolved.some((u) => u.reason.includes('no silhouette'))).toBe(true)
+    const views = changed.candidate.steps.find((s) => s.stage === 'views')
+    expect(views?.detail).toContain('measured from the pixels')
+    expect(baseline.candidate.steps.find((s) => s.stage === 'views')?.detail).not.toContain('measured from the pixels')
+    // Some of them, not all: on a technical LINE DRAWING the dimension chains
+    // are as long, straight and rectilinear as the building is, so measuring
+    // the outline off the pixels reads wider than the walls and two of these
+    // four views can no longer be told which wall they show. That is the
+    // reason a traced silhouette is preferred wherever it is believable, and
+    // the fallback is for the rendered elevations where tracing returns the
+    // sky. What matters here is that the loss is partial and reported, not
+    // that nothing was lost.
+    expect(views?.outputs).toBeGreaterThan(0)
+    expect(views?.outputs).toBeLessThan(baseline.candidate.steps.find((s) => s.stage === 'views')?.outputs ?? 0)
+    // And the elevations that did survive still do the job they were
+    // registered for.
+    const after = changed.hypotheses.hypotheses.filter((h) => h.kind === 'WINDOW' || h.kind === 'DOOR').filter((h) => h.parameters.find((p) => p.name === 'height')?.basis === 'CROSS_VIEW').length
+    expect(after).toBeGreaterThan(0)
+  })
+
+  it('6b. removing the drawings themselves does cost those views their registration', () => {
+    // The original mutation, done properly: take away the pixels as well as
+    // the tracing, and there is nothing left to register against.
+    const elevations = new Set(base.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION').map((f) => f.assetId))
+    const changed = solve(base, (f) => {
+      const bytesByUrl = new Map(f.bytesByUrl)
+      for (const asset of f.pkg.assets) if (elevations.has(asset.id)) for (const v of asset.variants) bytesByUrl.delete(v.url)
+      return { ...f, bytesByUrl, graph: { ...f.graph, observations: deepCopy(f.graph.observations).filter((o) => !(observationsOnElevations(f).has(o.frameId) && (o.kind === 'SILHOUETTE' || o.kind === 'MASS_REGION'))) } }
+    })
+    expect(changed.candidate.unresolved.some((u) => u.reason.includes('nothing was traced'))).toBe(true)
     // The openings do not disappear — the PLAN still draws their gaps, and the
     // plan is what states where they are. What is lost is the one thing the
     // elevations were for: an opening the elevations can no longer be asked

@@ -1,5 +1,5 @@
 {
-  "contentHash": "21d5a2a8ba9d1a0ced1f17ea5cbdf78cd0961e730264b2c65e6f52c25814caf8",
+  "contentHash": "77af9ce7ebe443bac43a9467a92e37821d347807a99f92622b63fd2dee570196",
   "fusion": {
     "accepted": 103,
     "afterClustering": 123,
@@ -130,15 +130,11 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.7,
+      "confidence": 0.55,
       "evidenceIds": [],
       "id": "hyp-opening-0",
       "kind": "DOOR",
-      "observationIds": [
-        "obs-opening-reveal-0257884b05",
-        "obs-opening-reveal-20f04c7d08",
-        "obs-opening-reveal-900b0e8b1a"
-      ],
+      "observationIds": [],
       "parameters": [
         {
           "basis": "SCALED",
@@ -174,55 +170,12 @@
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
         "detail": "a 5.029133 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 3,
+        "merged": 0,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
-      "sightings": [
-        {
-          "box": {
-            "x0": 351,
-            "x1": 379,
-            "y0": 489,
-            "y1": 570
-          },
-          "confidence": 0.840826,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-0257884b05"
-          ]
-        },
-        {
-          "box": {
-            "x0": 702,
-            "x1": 730,
-            "y0": 500,
-            "y1": 556
-          },
-          "confidence": 0.841072,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-20f04c7d08"
-          ]
-        },
-        {
-          "box": {
-            "x0": 714,
-            "x1": 756,
-            "y0": 463,
-            "y1": 495
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-900b0e8b1a"
-          ]
-        }
-      ],
-      "viewSupport": 2
+      "sightings": [],
+      "viewSupport": 1
     },
     {
       "confidence": 0.7,
@@ -230,11 +183,8 @@
       "id": "hyp-opening-1",
       "kind": "WINDOW",
       "observationIds": [
-        "obs-opening-reveal-7a4c68bf33",
         "obs-opening-reveal-ae70b5010e",
-        "obs-opening-reveal-59831ad1d4",
         "obs-opening-reveal-7b6ed293b4",
-        "obs-opening-reveal-0add3cf7bd",
         "obs-opening-reveal-9bf565a42b"
       ],
       "parameters": [
@@ -249,17 +199,17 @@
           "why": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
-          "basis": "CROSS_VIEW",
+          "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 1.325363,
-          "low": 1.129013,
+          "high": 1.730569,
+          "low": 1.474189,
           "name": "height",
           "unit": "m",
-          "value": 1.227188,
-          "why": "a rectangle group on the front elevation stands over this gap, between 2.561088 and 3.788276 m"
+          "value": 1.602379,
+          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it"
         },
         {
-          "basis": "CROSS_VIEW",
+          "basis": "ASSUMED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -271,26 +221,12 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; a rectangle group on the front elevation stands over this gap, between 2.561088 and 3.788276 m",
-        "merged": 6,
+        "detail": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
+        "merged": 3,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
       "sightings": [
-        {
-          "box": {
-            "x0": 420,
-            "x1": 629,
-            "y0": 312,
-            "y1": 396
-          },
-          "confidence": 0.835495,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-7a4c68bf33"
-          ]
-        },
         {
           "box": {
             "x0": 694,
@@ -307,20 +243,6 @@
         },
         {
           "box": {
-            "x0": 625,
-            "x1": 645,
-            "y0": 451,
-            "y1": 575
-          },
-          "confidence": 0.848264,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-59831ad1d4"
-          ]
-        },
-        {
-          "box": {
             "x0": 777,
             "x1": 801,
             "y0": 316,
@@ -331,20 +253,6 @@
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
           "observationIds": [
             "obs-opening-reveal-7b6ed293b4"
-          ]
-        },
-        {
-          "box": {
-            "x0": 536,
-            "x1": 561,
-            "y0": 456,
-            "y1": 575
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-0add3cf7bd"
           ]
         },
         {
@@ -365,18 +273,16 @@
       "viewSupport": 2
     },
     {
-      "confidence": 0.7,
+      "confidence": 0.55,
       "evidenceIds": [],
       "id": "hyp-opening-10",
-      "kind": "WINDOW",
+      "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-1577e3b900",
-        "obs-opening-reveal-0c289fb583",
-        "obs-opening-reveal-35d1302474",
-        "obs-opening-reveal-6158097359",
-        "obs-opening-reveal-a1a2e784a9",
-        "obs-opening-reveal-cfba2025ef",
-        "obs-opening-reveal-e768165002"
+        "obs-opening-reveal-0a04d248c6",
+        "obs-opening-reveal-e67c2df7e1",
+        "obs-opening-reveal-7812a0c6f9",
+        "obs-opening-reveal-9620bed99b",
+        "obs-opening-reveal-f3cc7839ad"
       ],
       "parameters": [
         {
@@ -390,29 +296,29 @@
           "why": "a 0.97772 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
-          "basis": "CROSS_VIEW",
+          "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 1.815171,
-          "low": 1.546257,
+          "high": 2.376,
+          "low": 2.024,
           "name": "height",
           "unit": "m",
-          "value": 1.680714,
-          "why": "a rectangle group on the left elevation stands over this gap, between 0.346814 and 2.027528 m"
+          "value": 2.2,
+          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
         },
         {
-          "basis": "CROSS_VIEW",
+          "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 0.466814,
-          "low": 0.226814,
+          "high": 0.12,
+          "low": 0,
           "name": "sill",
           "unit": "m",
-          "value": 0.346814,
+          "value": 0,
           "why": "measured from the floor of the storey the opening sits in"
         }
       ],
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
-        "detail": "a 0.97772 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; a rectangle group on the left elevation stands over this gap, between 0.346814 and 2.027528 m",
+        "detail": "a 0.97772 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
         "merged": 2,
         "rule": "opening-from-plan-gap"
       },
@@ -420,104 +326,76 @@
       "sightings": [
         {
           "box": {
+            "x0": 777,
+            "x1": 1081,
+            "y0": 219,
+            "y1": 264
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+          "observationIds": [
+            "obs-opening-reveal-0a04d248c6"
+          ]
+        },
+        {
+          "box": {
             "x0": 754,
             "x1": 1076,
-            "y0": 101,
-            "y1": 142
+            "y0": 202,
+            "y1": 248
           },
-          "confidence": 0.836226,
+          "confidence": 0.836413,
           "depthLayer": "UNKNOWN",
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
           "observationIds": [
-            "obs-opening-reveal-1577e3b900"
+            "obs-opening-reveal-e67c2df7e1"
           ]
         },
         {
           "box": {
-            "x0": 791,
-            "x1": 876,
-            "y0": 444,
-            "y1": 570
+            "x0": 744,
+            "x1": 1081,
+            "y0": 158,
+            "y1": 201
           },
-          "confidence": 0.847631,
+          "confidence": 0.842106,
           "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
           "observationIds": [
-            "obs-opening-reveal-6158097359"
+            "obs-opening-reveal-f3cc7839ad"
           ]
         },
         {
           "box": {
-            "x0": 812,
-            "x1": 848,
-            "y0": 477,
-            "y1": 500
+            "x0": 754,
+            "x1": 1076,
+            "y0": 173,
+            "y1": 219
           },
-          "confidence": 0.845763,
+          "confidence": 0.83981,
           "depthLayer": "UNKNOWN",
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
           "observationIds": [
-            "obs-opening-reveal-e768165002"
+            "obs-opening-reveal-9620bed99b"
           ]
         },
         {
           "box": {
-            "x0": 827,
-            "x1": 876,
-            "y0": 444,
-            "y1": 482
+            "x0": 754,
+            "x1": 1076,
+            "y0": 142,
+            "y1": 187
           },
-          "confidence": 0.84138,
+          "confidence": 0.837057,
           "depthLayer": "UNKNOWN",
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
           "observationIds": [
-            "obs-opening-reveal-35d1302474"
-          ]
-        },
-        {
-          "box": {
-            "x0": 791,
-            "x1": 812,
-            "y0": 475,
-            "y1": 508
-          },
-          "confidence": 0.840741,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-0c289fb583"
-          ]
-        },
-        {
-          "box": {
-            "x0": 791,
-            "x1": 827,
-            "y0": 444,
-            "y1": 482
-          },
-          "confidence": 0.839865,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-a1a2e784a9"
-          ]
-        },
-        {
-          "box": {
-            "x0": 842,
-            "x1": 876,
-            "y0": 478,
-            "y1": 504
-          },
-          "confidence": 0.8375,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-cfba2025ef"
+            "obs-opening-reveal-7812a0c6f9"
           ]
         }
       ],
-      "viewSupport": 2
+      "viewSupport": 1
     },
     {
       "confidence": 0.55,
@@ -621,7 +499,8 @@
       "id": "hyp-opening-2",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-cdb6b1125d"
+        "obs-opening-reveal-20488d3aab",
+        "obs-opening-reveal-71a8a40e34"
       ],
       "parameters": [
         {
@@ -658,23 +537,37 @@
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
         "detail": "a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 1,
+        "merged": 2,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
       "sightings": [
         {
           "box": {
-            "x0": 213,
-            "x1": 605,
-            "y0": 187,
-            "y1": 248
+            "x0": 201,
+            "x1": 514,
+            "y0": 219,
+            "y1": 264
           },
-          "confidence": 0.840066,
+          "confidence": 0.85,
           "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
           "observationIds": [
-            "obs-opening-reveal-cdb6b1125d"
+            "obs-opening-reveal-20488d3aab"
+          ]
+        },
+        {
+          "box": {
+            "x0": 208,
+            "x1": 452,
+            "y0": 111,
+            "y1": 142
+          },
+          "confidence": 0.837273,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+          "observationIds": [
+            "obs-opening-reveal-71a8a40e34"
           ]
         }
       ],
@@ -687,9 +580,7 @@
       "kind": "WINDOW",
       "observationIds": [
         "obs-opening-reveal-6b516b8104",
-        "obs-opening-reveal-b1afd81ec7",
-        "obs-opening-reveal-20f04c7d08",
-        "obs-opening-reveal-900b0e8b1a"
+        "obs-opening-reveal-b1afd81ec7"
       ],
       "parameters": [
         {
@@ -726,7 +617,7 @@
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
         "detail": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
-        "merged": 3,
+        "merged": 1,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
@@ -758,34 +649,6 @@
           "observationIds": [
             "obs-opening-reveal-6b516b8104"
           ]
-        },
-        {
-          "box": {
-            "x0": 702,
-            "x1": 730,
-            "y0": 500,
-            "y1": 556
-          },
-          "confidence": 0.841072,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-20f04c7d08"
-          ]
-        },
-        {
-          "box": {
-            "x0": 714,
-            "x1": 756,
-            "y0": 463,
-            "y1": 495
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-900b0e8b1a"
-          ]
         }
       ],
       "viewSupport": 2
@@ -796,10 +659,12 @@
       "id": "hyp-opening-4",
       "kind": "DOOR",
       "observationIds": [
+        "obs-opening-reveal-7a4c68bf33",
         "obs-opening-reveal-9f4a163104",
         "obs-opening-reveal-bfbf9aa87c",
         "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326"
+        "obs-opening-reveal-ff08485326",
+        "obs-opening-reveal-0add3cf7bd"
       ],
       "parameters": [
         {
@@ -836,11 +701,25 @@
       "parentId": "hyp-ring-mass-1-0",
       "provenance": {
         "detail": "a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 2,
+        "merged": 4,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
       "sightings": [
+        {
+          "box": {
+            "x0": 420,
+            "x1": 629,
+            "y0": 312,
+            "y1": 396
+          },
+          "confidence": 0.835495,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-7a4c68bf33"
+          ]
+        },
         {
           "box": {
             "x0": 446,
@@ -895,6 +774,20 @@
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
           "observationIds": [
             "obs-opening-reveal-f6109117ba"
+          ]
+        },
+        {
+          "box": {
+            "x0": 536,
+            "x1": 561,
+            "y0": 456,
+            "y1": 575
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-0add3cf7bd"
           ]
         }
       ],
@@ -981,14 +874,15 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.55,
+      "confidence": 0.7,
       "evidenceIds": [],
       "id": "hyp-opening-6",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-610a296c59",
-        "obs-opening-reveal-58dfb2afbf",
-        "obs-opening-reveal-2e3b626cea"
+        "obs-opening-reveal-aa3372ec79",
+        "obs-opening-reveal-914c75f37c",
+        "obs-opening-reveal-6e90f3f571",
+        "obs-opening-reveal-0a78dd76ba"
       ],
       "parameters": [
         {
@@ -1025,65 +919,77 @@
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
         "detail": "a 1.668889 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 3,
+        "merged": 4,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
       "sightings": [
         {
           "box": {
-            "x0": 488,
-            "x1": 714,
-            "y0": 187,
-            "y1": 219
-          },
-          "confidence": 0.841279,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-610a296c59"
-          ]
-        },
-        {
-          "box": {
-            "x0": 662,
+            "x0": 646,
             "x1": 721,
-            "y0": 204,
-            "y1": 235
-          },
-          "confidence": 0.847222,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-58dfb2afbf"
-          ]
-        },
-        {
-          "box": {
-            "x0": 578,
-            "x1": 637,
-            "y0": 292,
-            "y1": 317
+            "y0": 219,
+            "y1": 249
           },
           "confidence": 0.85,
           "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
           "observationIds": [
-            "obs-opening-reveal-2e3b626cea"
+            "obs-opening-reveal-aa3372ec79"
+          ]
+        },
+        {
+          "box": {
+            "x0": 600,
+            "x1": 676,
+            "y0": 488,
+            "y1": 513
+          },
+          "confidence": 0.84505,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+          "observationIds": [
+            "obs-opening-reveal-914c75f37c"
+          ]
+        },
+        {
+          "box": {
+            "x0": 646,
+            "x1": 740,
+            "y0": 263,
+            "y1": 282
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+          "observationIds": [
+            "obs-opening-reveal-6e90f3f571"
+          ]
+        },
+        {
+          "box": {
+            "x0": 605,
+            "x1": 646,
+            "y0": 233,
+            "y1": 276
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+          "observationIds": [
+            "obs-opening-reveal-0a78dd76ba"
           ]
         }
       ],
-      "viewSupport": 1
+      "viewSupport": 2
     },
     {
-      "confidence": 0.7,
+      "confidence": 0.55,
       "evidenceIds": [],
       "id": "hyp-opening-7",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-ae70b5010e",
-        "obs-opening-reveal-7b6ed293b4",
-        "obs-opening-reveal-9bf565a42b"
+        "obs-opening-reveal-7b6ed293b4"
       ],
       "parameters": [
         {
@@ -1120,25 +1026,11 @@
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
         "detail": "a 1.536262 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 3,
+        "merged": 1,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
       "sightings": [
-        {
-          "box": {
-            "x0": 694,
-            "x1": 756,
-            "y0": 291,
-            "y1": 340
-          },
-          "confidence": 0.838739,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-ae70b5010e"
-          ]
-        },
         {
           "box": {
             "x0": 777,
@@ -1152,35 +1044,18 @@
           "observationIds": [
             "obs-opening-reveal-7b6ed293b4"
           ]
-        },
-        {
-          "box": {
-            "x0": 742,
-            "x1": 765,
-            "y0": 312,
-            "y1": 396
-          },
-          "confidence": 0.845327,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-9bf565a42b"
-          ]
         }
       ],
-      "viewSupport": 2
+      "viewSupport": 1
     },
     {
-      "confidence": 0.55,
+      "confidence": 0.7,
       "evidenceIds": [],
       "id": "hyp-opening-8",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-0a04d248c6",
-        "obs-opening-reveal-e67c2df7e1",
-        "obs-opening-reveal-7812a0c6f9",
-        "obs-opening-reveal-9620bed99b",
-        "obs-opening-reveal-f3cc7839ad"
+        "obs-opening-reveal-1577e3b900",
+        "obs-opening-reveal-19966d6216"
       ],
       "parameters": [
         {
@@ -1224,83 +1099,48 @@
       "sightings": [
         {
           "box": {
-            "x0": 777,
-            "x1": 1081,
-            "y0": 219,
-            "y1": 264
+            "x0": 754,
+            "x1": 1076,
+            "y0": 101,
+            "y1": 142
+          },
+          "confidence": 0.836226,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+          "observationIds": [
+            "obs-opening-reveal-1577e3b900"
+          ]
+        },
+        {
+          "box": {
+            "x0": 868,
+            "x1": 925,
+            "y0": 436,
+            "y1": 467
           },
           "confidence": 0.85,
           "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
-          "observationIds": [
-            "obs-opening-reveal-0a04d248c6"
-          ]
-        },
-        {
-          "box": {
-            "x0": 754,
-            "x1": 1076,
-            "y0": 202,
-            "y1": 248
-          },
-          "confidence": 0.836413,
-          "depthLayer": "UNKNOWN",
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
           "observationIds": [
-            "obs-opening-reveal-e67c2df7e1"
-          ]
-        },
-        {
-          "box": {
-            "x0": 744,
-            "x1": 1081,
-            "y0": 158,
-            "y1": 201
-          },
-          "confidence": 0.842106,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
-          "observationIds": [
-            "obs-opening-reveal-f3cc7839ad"
-          ]
-        },
-        {
-          "box": {
-            "x0": 754,
-            "x1": 1076,
-            "y0": 173,
-            "y1": 219
-          },
-          "confidence": 0.83981,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-9620bed99b"
-          ]
-        },
-        {
-          "box": {
-            "x0": 754,
-            "x1": 1076,
-            "y0": 142,
-            "y1": 187
-          },
-          "confidence": 0.837057,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-opening-reveal-7812a0c6f9"
+            "obs-opening-reveal-19966d6216"
           ]
         }
       ],
-      "viewSupport": 1
+      "viewSupport": 2
     },
     {
-      "confidence": 0.55,
+      "confidence": 0.7,
       "evidenceIds": [],
       "id": "hyp-opening-9",
-      "kind": "DOOR",
-      "observationIds": [],
+      "kind": "WINDOW",
+      "observationIds": [
+        "obs-opening-reveal-6b516b8104",
+        "obs-opening-reveal-b1afd81ec7",
+        "obs-opening-reveal-bd8f6514b8",
+        "obs-opening-reveal-0330224147",
+        "obs-opening-reveal-12d5f7840b",
+        "obs-opening-reveal-f56e2444a9"
+      ],
       "parameters": [
         {
           "basis": "SCALED",
@@ -1313,35 +1153,120 @@
           "why": "a 0.998609 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "CROSS_VIEW",
           "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
+          "high": 2.600774,
+          "low": 2.215474,
           "name": "height",
           "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
+          "value": 2.408124,
+          "why": "a rectangle group on the rear elevation stands over this gap, between 0.197928 and 2.606052 m"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "CROSS_VIEW",
           "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
+          "high": 0.317928,
+          "low": 0.077928,
           "name": "sill",
           "unit": "m",
-          "value": 0,
+          "value": 0.197928,
           "why": "measured from the floor of the storey the opening sits in"
         }
       ],
       "parentId": "hyp-ring-mass-1-0",
       "provenance": {
-        "detail": "a 0.998609 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 0,
+        "detail": "a 0.998609 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; a rectangle group on the rear elevation stands over this gap, between 0.197928 and 2.606052 m",
+        "merged": 4,
         "rule": "opening-from-plan-gap"
       },
       "rivalIds": [],
-      "sightings": [],
-      "viewSupport": 1
+      "sightings": [
+        {
+          "box": {
+            "x0": 745,
+            "x1": 830,
+            "y0": 342,
+            "y1": 397
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-b1afd81ec7"
+          ]
+        },
+        {
+          "box": {
+            "x0": 845,
+            "x1": 932,
+            "y0": 341,
+            "y1": 397
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-6b516b8104"
+          ]
+        },
+        {
+          "box": {
+            "x0": 862,
+            "x1": 884,
+            "y0": 428,
+            "y1": 574
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-bd8f6514b8"
+          ]
+        },
+        {
+          "box": {
+            "x0": 740,
+            "x1": 793,
+            "y0": 479,
+            "y1": 506
+          },
+          "confidence": 0.846875,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-12d5f7840b"
+          ]
+        },
+        {
+          "box": {
+            "x0": 793,
+            "x1": 931,
+            "y0": 479,
+            "y1": 498
+          },
+          "confidence": 0.845223,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-0330224147"
+          ]
+        },
+        {
+          "box": {
+            "x0": 845,
+            "x1": 867,
+            "y0": 428,
+            "y1": 574
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-f56e2444a9"
+          ]
+        }
+      ],
+      "viewSupport": 2
     },
     {
       "confidence": 0.704538,
@@ -1591,13 +1516,16 @@
         },
         {
           "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 1.2,
-          "low": 0,
+          "evidenceIds": [
+            "constraint-hyp-roof-mass-1-overhang-37666a4351",
+            "constraint-hyp-roof-mass-1-overhang-4d2d3cec09"
+          ],
+          "high": 1.153696,
+          "low": 0.567086,
           "name": "overhang",
           "unit": "m",
-          "value": 0,
-          "why": "no constraint of any kind bears on this quantity"
+          "value": 0.838176,
+          "why": "weighted fit of 2 suggestions, spread 0.090622 m"
         }
       ],
       "parentId": "hyp-mass-1",
@@ -1616,101 +1544,6 @@
       "id": "hyp-solid-0",
       "kind": "LINEAR_SOLID",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-51264c4bd1",
-        "obs-linear-volume-candidate-beam-cff798139b",
-        "obs-linear-volume-candidate-beam-def101d470"
-      ],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 13.023132,
-          "low": 11.09378,
-          "name": "length",
-          "unit": "m",
-          "value": 12.058456,
-          "why": "904.000063 px on a facade registered at 0.013339 m/px"
-        },
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 0.306447,
-          "low": 0.226505,
-          "name": "width",
-          "unit": "m",
-          "value": 0.266476,
-          "why": "the member as it is seen in elevation"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.5,
-          "low": 0.1,
-          "name": "depth",
-          "unit": "m",
-          "value": 0.266476,
-          "why": "2 views and a proud of wall depth cue say it stands proud, but nothing measures how far"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-1",
-      "provenance": {
-        "detail": "3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it",
-        "merged": 3,
-        "rule": "linear-solid-from-corroborated-depth"
-      },
-      "rivalIds": [],
-      "sightings": [
-        {
-          "box": {
-            "x0": 184.999968,
-            "x1": 1089.000031,
-            "y0": 296.022759,
-            "y1": 316.000003
-          },
-          "confidence": 0.817143,
-          "depthLayer": "PROUD_OF_WALL",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-linear-volume-candidate-beam-51264c4bd1"
-          ]
-        },
-        {
-          "box": {
-            "x0": 184.999968,
-            "x1": 303.961333,
-            "y0": 296.022759,
-            "y1": 316.73363
-          },
-          "confidence": 0.56,
-          "depthLayer": "PROUD_OF_WALL",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-          "observationIds": [
-            "obs-linear-volume-candidate-beam-def101d470"
-          ]
-        },
-        {
-          "box": {
-            "x0": 187.000049,
-            "x1": 1090.99996,
-            "y0": 296.551466,
-            "y1": 316.000369
-          },
-          "confidence": 0.817143,
-          "depthLayer": "PROUD_OF_WALL",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
-          "observationIds": [
-            "obs-linear-volume-candidate-beam-cff798139b"
-          ]
-        }
-      ],
-      "viewSupport": 2
-    },
-    {
-      "confidence": 0.97,
-      "evidenceIds": [],
-      "id": "hyp-solid-1",
-      "kind": "LINEAR_SOLID",
-      "observationIds": [
         "obs-linear-volume-candidate-beam-3b6208d04e",
         "obs-linear-volume-candidate-beam-9f08f35c3b",
         "obs-linear-volume-candidate-beam-b27bd35495"
@@ -1719,21 +1552,21 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 8.658181,
-          "low": 7.375487,
+          "high": 10.723739,
+          "low": 9.135037,
           "name": "length",
           "unit": "m",
-          "value": 8.016834,
-          "why": "602 px on a facade registered at 0.013317 m/px"
+          "value": 9.929388,
+          "why": "602 px on a facade registered at 0.016494 m/px"
         },
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 0.291124,
-          "low": 0.215178,
+          "high": 0.360576,
+          "low": 0.266512,
           "name": "width",
           "unit": "m",
-          "value": 0.253151,
+          "value": 0.313544,
           "why": "the member as it is seen in elevation"
         },
         {
@@ -1743,7 +1576,7 @@
           "low": 0.1,
           "name": "depth",
           "unit": "m",
-          "value": 0.253151,
+          "value": 0.313544,
           "why": "2 views and a proud of wall depth cue say it stands proud, but nothing measures how far"
         }
       ],
@@ -1801,7 +1634,7 @@
       "viewSupport": 2
     }
   ],
-  "id": "hypotheses-marcowki-21d5a2a8ba9d1a0c",
+  "id": "hypotheses-marcowki-77af9ce7ebe443ba",
   "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
   "metricEvidenceId": "metrics-marcowki-3737dc29d37cee61",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",

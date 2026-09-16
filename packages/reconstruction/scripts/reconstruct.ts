@@ -124,7 +124,7 @@ async function main(): Promise<void> {
       ...layout.roofSupports.map((r) => r.ridgeLevelM?.value ?? 0),
     ),
   }
-  const { registrations } = registerElevationFrames(graph, massing)
+  const { registrations } = registerElevationFrames(graph, massing, undefined, (frame) => rasterCache.get(frame.variantByteHash))
   const audit = auditProjection(model, graph, registrations, candidate.contentHash)
   process.stdout.write(`projection audit: ${audit.summary.matched}/${audit.summary.objects} openings land on an observation, mean overlap ${audit.summary.iouMean}, centres ${audit.summary.centreRmsM} m rms, ${audit.summary.unexplained} observed openings unexplained\n`)
 

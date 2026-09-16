@@ -462,7 +462,7 @@
         ],
         "severity": "NOTED",
         "what": "the shape could not be checked against the rear elevation",
-        "why": "the outline traced on it is 4.98 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+        "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
       },
       {
         "code": "STRUCTURE_SHAPE_NOT_CHECKED",
@@ -471,16 +471,7 @@
         ],
         "severity": "NOTED",
         "what": "the shape could not be checked against the front elevation",
-        "why": "the outline traced on it is 5.01 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
-      },
-      {
-        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
-        "itemIds": [
-          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
-        ],
-        "severity": "NOTED",
-        "what": "the shape could not be checked against the left elevation",
-        "why": "the outline traced on it is 4.45 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+        "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
       },
       {
         "code": "STRUCTURE_SHAPE_NOT_CHECKED",
@@ -488,8 +479,17 @@
           "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c"
         ],
         "severity": "NOTED",
+        "what": "the shape could not be checked against the left elevation",
+        "why": "the outline traced on it is 1.91 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      },
+      {
+        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+        "itemIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
+        ],
+        "severity": "NOTED",
         "what": "the shape could not be checked against the right elevation",
-        "why": "the outline traced on it is 4.42 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+        "why": "the outline traced on it is 1.53 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
       },
       {
         "code": "WIDTH_CORROBORATED",

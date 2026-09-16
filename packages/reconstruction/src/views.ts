@@ -26,6 +26,8 @@
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservation } from '@buildapp/source-observations'
+import type { Raster } from '@buildapp/source-cv'
+import { architecturalBounds } from '@buildapp/image-metrology'
 
 export type BuildingSide = 'FRONT' | 'REAR' | 'LEFT' | 'RIGHT'
 
@@ -39,8 +41,10 @@ export type ElevationRegistration = {
   /** Metres per pixel along the wall, and up it. */
   metresPerPixelU: number
   metresPerPixelV: number
-  /** The silhouette in the frame's pixels: the box both scales were fitted to. */
+  /** The building's box in the frame's pixels: what both scales were fitted to. */
   extent: PixelRect
+  /** Where that box came from — a traced silhouette, or an outline measured off the pixels. */
+  extentWhy: string
   /** The metric length of the wall this view shows, and the height it was fitted against. */
   spanM: number
   heightM: number
@@ -96,6 +100,60 @@ export function silhouetteExtent(observations: readonly SourceObservation[]): Pi
   return undefined
 }
 
+/**
+ * How big the building is in this picture, and which reading of that to trust.
+ *
+ * Two readings are available and they fail in opposite directions.
+ *
+ * The SILHOUETTE above is what an ink extractor traced. On a line drawing that
+ * is the building. On a photo-realistic rendered elevation it is the building,
+ * the lawn, the trees, the sky and the publisher's logo — and on the four
+ * rendered elevations of the reference project it came back as the entire
+ * frame, 1279 x 596 px, every time. An elevation registered against the whole
+ * frame is registered against the sky: that building's ridge is 485 px tall in
+ * a 596 px image, so every height read off those drawings came out 23% short.
+ * That is most of the opening error the previous stage reported and could not
+ * account for, and it was invisible because a silhouette that is wrong is
+ * still a silhouette.
+ *
+ * The ARCHITECTURAL BOUNDS are the long straight rectilinear structure of the
+ * picture, which finds a building in a render and is blind to foliage. But on
+ * a technical line drawing the dimension chains are also long, straight and
+ * rectilinear, so that reading can come out WIDER than the building where the
+ * silhouette comes out narrower.
+ *
+ * So neither is preferred by decree. A silhouette covering essentially the
+ * whole sheet has failed on its own terms — every drawing has margins — and
+ * only then is the outline measured off the pixels instead.
+ */
+export type MeasuredExtent = {
+  rect: PixelRect
+  /** Whether the traced silhouette was believed, and so whether its polygon means anything. */
+  traced: boolean
+  why: string
+}
+
+const DEGENERATE_SILHOUETTE_COVERAGE = 0.85
+
+export function buildingExtent(frame: SourceCoordinateFrame, observations: readonly SourceObservation[], raster?: Raster): MeasuredExtent | undefined {
+  const traced = silhouetteExtent(observations)
+  const sheet = frame.size.width * frame.size.height
+  const coverage = traced && sheet > 0 ? ((traced.x1 - traced.x0) * (traced.y1 - traced.y0)) / sheet : 0
+  if (traced && coverage < DEGENERATE_SILHOUETTE_COVERAGE) return { rect: traced, traced: true, why: 'the traced silhouette of the drawing' }
+  const measured = raster ? architecturalBounds(raster) : null
+  if (measured) {
+    return {
+      rect: measured.rect,
+      traced: false,
+      why: traced
+        ? `the traced silhouette covers ${Math.round(coverage * 100)}% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: ${measured.why}`
+        : `nothing was traced on this drawing, so the outline was measured from the pixels: ${measured.why}`,
+    }
+  }
+  if (traced) return { rect: traced, traced: true, why: `the traced silhouette, which covers ${Math.round(coverage * 100)}% of the sheet and may well be the sky; the pixels were not available to check it against` }
+  return undefined
+}
+
 export type MassingFacts = {
   /** The footprint, in metres. */
   width: number
@@ -121,18 +179,18 @@ export type MassingFacts = {
  * width in metres is either the footprint width plus a little, or the depth
  * plus a little, and "plus a little" is the only direction an overhang can go.
  */
-export function registerElevations(frames: ReadonlyArray<{ frame: SourceCoordinateFrame; extent: PixelRect }>, massing: MassingFacts): { registrations: ElevationRegistration[]; refused: Array<{ frameId: string; why: string }> } {
+export function registerElevations(frames: ReadonlyArray<{ frame: SourceCoordinateFrame; extent: PixelRect; extentWhy?: string }>, massing: MassingFacts): { registrations: ElevationRegistration[]; refused: Array<{ frameId: string; why: string }> } {
   const registrations: ElevationRegistration[] = []
   const refused: Array<{ frameId: string; why: string }> = []
   const taken = new Set<BuildingSide>()
 
   const measured = frames
-    .map(({ frame, extent }) => {
+    .map(({ frame, extent, extentWhy }) => {
       const pixelHeight = extent.y1 - extent.y0
       const pixelWidth = extent.x1 - extent.x0
       if (pixelHeight <= 0 || pixelWidth <= 0) return undefined
       const scale = massing.totalHeight / pixelHeight
-      return { frame, extent, scale, widthM: round6(pixelWidth * scale) }
+      return { frame, extent, extentWhy, scale, widthM: round6(pixelWidth * scale) }
     })
     .filter((m): m is NonNullable<typeof m> => m !== undefined)
     // A labelled view first, so an unlabelled one cannot take its wall.
@@ -156,13 +214,17 @@ export function registerElevations(frames: ReadonlyArray<{ frame: SourceCoordina
       metresPerPixelU: round6(m.scale),
       metresPerPixelV: round6(m.scale),
       extent: m.extent,
+      extentWhy: m.extentWhy ?? 'the traced silhouette of the drawing',
       spanM: round6(spanM),
       heightM: round6(massing.totalHeight),
       anisotropy: 1,
       /** The eaves projection this view measures, half the surplus width. */
       overhangM: overhang,
       confidence: round6(Math.max(0.15, Math.min(0.9, chosen.confidence * 0.95))),
-      why: `${round6(m.extent.y1 - m.extent.y0)} px tall is the ${round6(massing.totalHeight)} m the section measures, so the sheet is ${round6(m.scale)} m/px; at that scale the silhouette is ${m.widthM} m across a ${round6(spanM)} m wall, which puts the eaves ${overhang} m proud`,
+      why:
+        `${round6(m.extent.y1 - m.extent.y0)} px tall is the ${round6(massing.totalHeight)} m the section measures, so the sheet is ${round6(m.scale)} m/px; ` +
+        `at that scale the outline is ${m.widthM} m across a ${round6(spanM)} m wall, which puts the eaves ${overhang} m proud` +
+        (m.extentWhy ? `; that outline is ${m.extentWhy}` : ''),
     })
   }
   return { registrations, refused: refused.sort((a, b) => a.frameId.localeCompare(b.frameId)) }

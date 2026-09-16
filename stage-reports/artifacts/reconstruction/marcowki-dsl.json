@@ -1,7 +1,7 @@
 {
-  "candidateHash": "0ff43a5bd817b9ee3c5653a56bf8df5f7cd113b0da2c70ee55bb9ac76f37db08",
-  "candidateId": "candidate-marcowki-0ff43a5bd817b9ee",
-  "modelHash": "e00b125cc599c1967da367cc74669e6a43af0b517ddbc00d733613a22cf3879b",
+  "candidateHash": "6b2438068eb269002f77f3b31b4cd89594da3f19096f18b4c8b91d976f8364d2",
+  "candidateId": "candidate-marcowki-6b2438068eb26900",
+  "modelHash": "0686d5ffd3c251a5760511bce18b1cc1795e0d7231160b45f296f690adfc9bae",
   "program": [
     {
       "name": "Marcówki (auto)",
@@ -266,7 +266,7 @@
       "kind": "FLAT",
       "levelId": "lvl-0",
       "materialId": "mat-roof",
-      "overhang": 0,
+      "overhang": 0.838176,
       "pitchDeg": 0,
       "ridgeAxis": "Z",
       "thickness": 0.28,
@@ -289,7 +289,7 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.227188,
+      "height": 1.602379,
       "id": "opening-1",
       "kind": "WINDOW",
       "offset": 0.498026,
@@ -417,36 +417,36 @@
       "type": "placeDoor"
     },
     {
-      "height": 2.2,
+      "height": 2.408124,
       "id": "opening-9",
-      "kind": "DOOR",
+      "kind": "WINDOW",
       "offset": 2.028541,
-      "sill": 0,
+      "sill": 0.197928,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w0",
       "width": 0.998609
     },
     {
-      "id": "opening-9-d",
-      "materialId": "mat-wall",
+      "id": "opening-9-w",
+      "materialId": "mat-glass",
       "openingId": "opening-9",
-      "type": "placeDoor"
+      "type": "placeWindow"
     },
     {
-      "height": 1.680714,
+      "height": 2.2,
       "id": "opening-10",
-      "kind": "WINDOW",
+      "kind": "DOOR",
       "offset": 8.012073,
-      "sill": 0.346814,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w3",
       "width": 0.97772
     },
     {
-      "id": "opening-10-w",
-      "materialId": "mat-glass",
+      "id": "opening-10-d",
+      "materialId": "mat-wall",
       "openingId": "opening-10",
-      "type": "placeWindow"
+      "type": "placeDoor"
     },
     {
       "height": 2.2,
@@ -481,42 +481,23 @@
       "type": "placeWindow"
     },
     {
-      "depth": 0.266476,
+      "depth": 0.313544,
       "end": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 0.309072
-      },
-      "hostId": "ring-mass-0-1-w3",
-      "id": "solid-0",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 3.868158,
-        "z": 12.367528
-      },
-      "type": "createLinearSolid",
-      "width": 0.266476
-    },
-    {
-      "depth": 0.253151,
-      "end": {
-        "x": 8.49557,
-        "y": 0.179716,
+        "x": 9.929388,
+        "y": 0.041156,
         "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
-      "id": "solid-1",
+      "id": "solid-0",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 0.478736,
-        "y": 0.179716,
+        "x": 0,
+        "y": 0.041156,
         "z": -0.234013
       },
       "type": "createLinearSolid",
-      "width": 0.253151
+      "width": 0.313544
     }
   ],
   "schema": "buildapp.reconstruction-dsl"

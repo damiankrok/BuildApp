@@ -7,7 +7,7 @@
       ],
       "severity": "NOTED",
       "what": "the shape could not be checked against the rear elevation",
-      "why": "the outline traced on it is 4.98 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
     },
     {
       "code": "STRUCTURE_SHAPE_NOT_CHECKED",
@@ -16,16 +16,7 @@
       ],
       "severity": "NOTED",
       "what": "the shape could not be checked against the front elevation",
-      "why": "the outline traced on it is 5.01 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
-    },
-    {
-      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
-      "itemIds": [
-        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
-      ],
-      "severity": "NOTED",
-      "what": "the shape could not be checked against the left elevation",
-      "why": "the outline traced on it is 4.45 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
     },
     {
       "code": "STRUCTURE_SHAPE_NOT_CHECKED",
@@ -33,8 +24,17 @@
         "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c"
       ],
       "severity": "NOTED",
+      "what": "the shape could not be checked against the left elevation",
+      "why": "the outline traced on it is 1.91 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+    },
+    {
+      "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+      "itemIds": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
+      ],
+      "severity": "NOTED",
       "what": "the shape could not be checked against the right elevation",
-      "why": "the outline traced on it is 4.42 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      "why": "the outline traced on it is 1.53 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
     }
   ],
   "refused": [],
@@ -42,7 +42,7 @@
   "views": [
     {
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-      "heightResidualM": 0.000249,
+      "heightResidualM": 0.000108,
       "masses": [
         {
           "massId": "mass-1",
@@ -62,22 +62,22 @@
         }
       ],
       "observed": {
-        "heightM": 7.950249,
-        "widthM": 17.032443
+        "heightM": 7.950108,
+        "widthM": 11.826198
       },
       "projected": {
         "heightM": 7.95,
-        "widthM": 17.03191
+        "widthM": 12.05
       },
       "side": "REAR",
       "steps": 2,
-      "surplusM": 4.98191,
+      "surplusM": 0,
       "why": "2 bodies at 2 heights — mass-1 0.00–4.15 m to 3.06 m (the top of its own walls, with a level roof over them); mass-0 4.15–12.05 m to 7.95 m (the ridge, seen end on over the gable)",
-      "widthResidualM": 0.000533
+      "widthResidualM": 0.223802
     },
     {
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "heightResidualM": 0.000044,
+      "heightResidualM": 0.00012,
       "masses": [
         {
           "massId": "mass-0",
@@ -97,22 +97,22 @@
         }
       ],
       "observed": {
-        "heightM": 7.950044,
-        "widthM": 17.060581
+        "heightM": 7.95012,
+        "widthM": 11.72028
       },
       "projected": {
         "heightM": 7.95,
-        "widthM": 17.060486
+        "widthM": 12.05
       },
       "side": "FRONT",
       "steps": 2,
-      "surplusM": 5.010486,
+      "surplusM": 0,
       "why": "2 bodies at 2 heights — mass-0 0.00–7.90 m to 7.95 m (the ridge, seen end on over the gable); mass-1 7.90–12.05 m to 3.06 m (the top of its own walls, with a level roof over them)",
-      "widthResidualM": 0.000095
+      "widthResidualM": 0.32972
     },
     {
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-      "heightResidualM": 0.000044,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "heightResidualM": 0.00018,
       "masses": [
         {
           "massId": "mass-0",
@@ -132,22 +132,22 @@
         }
       ],
       "observed": {
-        "heightM": 7.950044,
-        "widthM": 17.060581
+        "heightM": 7.95018,
+        "widthM": 14.51772
       },
       "projected": {
         "heightM": 7.95,
-        "widthM": 17.060486
+        "widthM": 14.517392
       },
       "side": "LEFT",
       "steps": 2,
-      "surplusM": 4.450486,
+      "surplusM": 1.907392,
       "why": "2 bodies at 2 heights — mass-0 0.00–12.61 m to 7.95 m (the ridge, seen along its length above the eaves); mass-1 0.00–7.51 m to 3.06 m (the top of its own walls, with a level roof over them)",
-      "widthResidualM": 0.000095
+      "widthResidualM": 0.000328
     },
     {
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
-      "heightResidualM": 0.000249,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "heightResidualM": 0.000162,
       "masses": [
         {
           "massId": "mass-0",
@@ -167,18 +167,18 @@
         }
       ],
       "observed": {
-        "heightM": 7.950249,
-        "widthM": 17.032443
+        "heightM": 7.950162,
+        "widthM": 14.14446
       },
       "projected": {
         "heightM": 7.95,
-        "widthM": 17.03191
+        "widthM": 14.144172
       },
       "side": "RIGHT",
       "steps": 2,
-      "surplusM": 4.42191,
+      "surplusM": 1.534172,
       "why": "2 bodies at 2 heights — mass-0 0.00–12.61 m to 7.95 m (the ridge, seen along its length above the eaves); mass-1 5.10–12.61 m to 3.06 m (the top of its own walls, with a level roof over them)",
-      "widthResidualM": 0.000533
+      "widthResidualM": 0.000288
     }
   ],
   "worstResidualM": 0

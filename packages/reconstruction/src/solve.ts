@@ -35,13 +35,14 @@
 import { round6, stableId } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
+import type { Raster } from '@buildapp/source-cv'
 import type { CoordinateRegistration, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { BuildingCommand } from '@buildapp/commands'
 import { detectContradictions, solveQuantity } from './constraints.js'
 import type { Constraint, SolvedQuantity } from './constraints.js'
 import { fuseCandidates } from './fusion.js'
 import type { FusionCounts, RawCandidate } from './fusion.js'
-import { elevationMetric, registerElevations, silhouetteExtent } from './views.js'
+import { buildingExtent, elevationMetric, registerElevations } from './views.js'
 import type { BuildingSide, ElevationRegistration, MassingFacts } from './views.js'
 import type { PrimitiveHypothesis, PrimitiveHypothesisSet, UnresolvedHypothesis } from './hypotheses.js'
 import type { CandidateContradiction, PrimitiveTrace, SolverStep, UnresolvedCandidate } from './candidate.js'
@@ -280,10 +281,15 @@ export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string): LevelF
 // ---------------------------------------------------------------------------
 
 /** Register every elevation the graph carries against the massing already established. */
-export function registerElevationFrames(graph: SourceObservationGraph, massing: MassingFacts, keep?: (f: SourceCoordinateFrame) => boolean): { registrations: ElevationRegistration[]; refused: Array<{ frameId: string; why: string }> } {
+export function registerElevationFrames(
+  graph: SourceObservationGraph,
+  massing: MassingFacts,
+  keep?: (f: SourceCoordinateFrame) => boolean,
+  raster?: (frame: SourceCoordinateFrame) => Raster | undefined,
+): { registrations: ElevationRegistration[]; refused: Array<{ frameId: string; why: string }> } {
   const seenAsset = new Set<string>()
   const refusedEarly: Array<{ frameId: string; why: string }> = []
-  const frames: Array<{ frame: SourceCoordinateFrame; extent: PixelRect }> = []
+  const frames: Array<{ frame: SourceCoordinateFrame; extent: PixelRect; extentWhy: string }> = []
   const ordered = graph.coordinateFrames
     .filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION')
     .filter((f) => (keep ? keep(f) : true))
@@ -292,13 +298,17 @@ export function registerElevationFrames(graph: SourceObservationGraph, massing: 
     // One registration per drawing: a second rendering of the same elevation
     // adds pixels, not evidence.
     if (seenAsset.has(frame.assetId)) continue
-    const extent = silhouetteExtent(graph.observations.filter((o) => o.frameId === frame.id))
-    if (!extent) {
-      refusedEarly.push({ frameId: frame.id, why: 'no silhouette was found on this drawing, so there is nothing to scale against' })
+    const measured = buildingExtent(
+      frame,
+      graph.observations.filter((o) => o.frameId === frame.id),
+      raster?.(frame),
+    )
+    if (!measured) {
+      refusedEarly.push({ frameId: frame.id, why: 'nothing was traced on this drawing and its pixels show no straight architectural structure, so there is nothing to scale against' })
       continue
     }
     seenAsset.add(frame.assetId)
-    frames.push({ frame, extent })
+    frames.push({ frame, extent: measured.rect, extentWhy: measured.why })
   }
   const { registrations, refused } = registerElevations(frames, massing)
   return { registrations, refused: [...refusedEarly, ...refused].sort((a, b) => a.frameId.localeCompare(b.frameId)) }

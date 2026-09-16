@@ -216,8 +216,8 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   // 3. views
   // -------------------------------------------------------------------------
   const massing = { width: W, depth: D, totalHeight }
-  const { registrations, refused } = registerElevationFrames(graph, massing, keep)
-  step({ stage: 'views', what: 'elevations registered against the massing', method: 'DIRECT', detail: registrations.map((r) => `${r.side}: ${r.metresPerPixelU} m/px across, ${r.metresPerPixelV} up, anisotropy ${r.anisotropy}`).join('; ') || 'none', inputs: graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION').length, outputs: registrations.length })
+  const { registrations, refused } = registerElevationFrames(graph, massing, keep, options.raster)
+  step({ stage: 'views', what: 'elevations registered against the massing', method: 'DIRECT', detail: registrations.map((r) => `${r.side}: ${r.metresPerPixelU} m/px across, ${r.metresPerPixelV} up, anisotropy ${r.anisotropy}, outline from ${r.extentWhy}`).join('; ') || 'none', inputs: graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_ELEVATION').length, outputs: registrations.length })
   for (const r of refused) gap({ what: `a metric registration for elevation ${r.frameId}`, reason: r.why, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
   for (const r of registrations) {
     if (r.sideConfidence >= 0.6) continue

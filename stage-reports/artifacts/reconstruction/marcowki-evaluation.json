@@ -1,15 +1,15 @@
 {
-  "candidateHash": "0ff43a5bd817b9ee3c5653a56bf8df5f7cd113b0da2c70ee55bb9ac76f37db08",
-  "candidateId": "candidate-marcowki-0ff43a5bd817b9ee",
+  "candidateHash": "6b2438068eb269002f77f3b31b4cd89594da3f19096f18b4c8b91d976f8364d2",
+  "candidateId": "candidate-marcowki-6b2438068eb26900",
   "honesty": {
-    "assumed": 2,
+    "assumed": 1,
     "hardCorrect": 0,
     "hardQuantities": 3,
-    "justified": 14,
+    "justified": 15,
     "unresolvedCount": 81
   },
   "linearSolids": {
-    "candidate": 2,
+    "candidate": 1,
     "centreRmsM": 0,
     "matched": 0,
     "missed": 0,
@@ -66,9 +66,9 @@
       },
       {
         "candidateId": "opening-1",
-        "heightError": -1.972812,
+        "heightError": -1.597621,
         "matched": true,
-        "positionError": 0.991838,
+        "positionError": 0.805508,
         "referenceId": "og-front-gable-glazing",
         "widthError": 1.731033
       },
@@ -90,9 +90,9 @@
       },
       {
         "candidateId": "opening-9",
-        "heightError": 0.1,
+        "heightError": 0.308124,
         "matched": true,
-        "positionError": 0.050588,
+        "positionError": 0.352074,
         "referenceId": "og-garage-side-door",
         "widthError": -0.001391
       },
@@ -130,9 +130,9 @@
       },
       {
         "candidateId": "opening-10",
-        "heightError": -0.619286,
+        "heightError": -0.1,
         "matched": true,
-        "positionError": 0.037186,
+        "positionError": 0.050011,
         "referenceId": "og-west-living-window",
         "widthError": 0.07772
       },
@@ -163,15 +163,15 @@
     ],
     "matched": 12,
     "missed": 11,
-    "positionRmsM": 0.412604,
+    "positionRmsM": 0.390568,
     "reference": 23,
-    "sizeRmsM": 0.693991,
+    "sizeRmsM": 0.643259,
     "spurious": 1
   },
   "referenceId": "marcowki-ge",
   "scores": {
     "evidenceSupportedCompleteness": 0.84058,
-    "geometricAccuracy": 0.492717
+    "geometricAccuracy": 0.496243
   },
   "shell": [
     {

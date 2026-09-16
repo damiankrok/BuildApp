@@ -24,7 +24,8 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
-import { registerElevations, silhouetteExtent, silhouettePolygon } from './views.js'
+import type { Raster } from '@buildapp/source-cv'
+import { buildingExtent, registerElevations, silhouettePolygon } from './views.js'
 import type { BuildingSide, ElevationRegistration } from './views.js'
 import { ringBounds } from './structural-layout.js'
 import type { LayoutGateReason, MassHypothesis, RoofSupportHypothesis, StoreyLayoutHypothesis } from './structural-layout.js'
@@ -95,6 +96,8 @@ export type StructuralAuditOptions = {
   storeys: readonly StoreyLayoutHypothesis[]
   /** How far a silhouette may be out and still count as the same shape, in metres. */
   toleranceM?: number
+  /** The drawing's own pixels, so an outline that traced the sky can be measured instead. */
+  raster?: (frame: SourceCoordinateFrame) => Raster | undefined
 }
 
 /** Where the top of a mass is, in metres above the lowest storey's floor. */
@@ -137,12 +140,19 @@ export function auditStructuralProjection(options: StructuralAuditOptions): Stru
     return { views: [], refused: [], worstResidualM: 0, steps: 0, reasons: [{ code: 'STRUCTURE_NOT_PROJECTED', what: 'the massing has no extent to project', severity: 'BLOCKING', itemIds: masses.map((m) => m.id), why: `the bodies measure ${width} by ${depth} m and stand ${totalHeight} m tall` }] }
   }
 
-  const candidates: Array<{ frame: SourceCoordinateFrame; extent: { x0: number; y0: number; x1: number; y1: number } }> = []
+  const candidates: Array<{ frame: SourceCoordinateFrame; extent: { x0: number; y0: number; x1: number; y1: number }; extentWhy: string }> = []
+  // Whether the traced outline was believed, per frame. Where it was not, the
+  // extent below is measured off the pixels and the POLYGON is not used at
+  // all: an outline that traced the sky gives a box that can be corrected and
+  // a profile that cannot, so the shape check is skipped rather than run
+  // against the treeline.
+  const tracedOutline = new Map<string, boolean>()
   for (const frame of graph.coordinateFrames) {
     if (frame.roles.projection !== 'ORTHOGRAPHIC_ELEVATION') continue
-    const extent = silhouetteExtent(observationsOf(graph, frame))
-    if (!extent) continue
-    candidates.push({ frame, extent })
+    const measured = buildingExtent(frame, observationsOf(graph, frame), options.raster?.(frame))
+    if (!measured) continue
+    tracedOutline.set(frame.id, measured.traced)
+    candidates.push({ frame, extent: measured.rect, extentWhy: measured.why })
   }
   const { registrations, refused } = registerElevations(candidates, { width, depth, totalHeight })
 
@@ -150,7 +160,8 @@ export function auditStructuralProjection(options: StructuralAuditOptions): Stru
   for (const registration of registrations) {
     if (!registration.side) continue
     const frame = graph.coordinateFrames.find((f) => f.id === registration.frameId)
-    const view = auditOneView(registration, masses, roofs, storeys, frame ? silhouettePolygon(observationsOf(graph, frame)) : undefined)
+    const profile = frame && tracedOutline.get(frame.id) ? silhouettePolygon(observationsOf(graph, frame)) : undefined
+    const view = auditOneView(registration, masses, roofs, storeys, profile)
     views.push(view)
   }
 

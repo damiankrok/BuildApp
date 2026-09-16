@@ -133,7 +133,7 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
   // been emitted the question has moved on to whether the walls are in the
   // right places; the question NOW is whether the shape is the shape, and the
   // elevations are the only sources that answer it.
-  const projection = auditStructuralProjection({ graph: options.graph, masses: draft.masses, roofs: roofing.roofs, storeys: draft.storeys })
+  const projection = auditStructuralProjection({ graph: options.graph, masses: draft.masses, roofs: roofing.roofs, storeys: draft.storeys, raster: options.raster })
 
   // --- the gate, then the hash ---------------------------------------------
   const gate = evaluateLayoutGate({
