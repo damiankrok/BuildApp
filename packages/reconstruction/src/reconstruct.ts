@@ -35,9 +35,10 @@ import { detectContradictions, solveQuantity } from './constraints.js'
 import type { Constraint, SolvedQuantity } from './constraints.js'
 import { fuseCandidates } from './fusion.js'
 import type { FusionCounts } from './fusion.js'
+import { drawingCharacter, silhouetteTop, verticalOpeningExtent } from '@buildapp/image-metrology'
 import { claddingField, groupFacadeOpenings } from './openings.js'
 import { planOpenings } from './plan-openings.js'
-import { elevationMetric } from './views.js'
+import { elevationMetric, elevationPixel } from './views.js'
 import type { BuildingSide, ElevationRegistration } from './views.js'
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from './hypotheses.js'
 import type { HypothesisParameter, PrimitiveHypothesis, PrimitiveHypothesisSet, UnresolvedHypothesis } from './hypotheses.js'
@@ -80,6 +81,13 @@ export type ReconstructionResult = {
  * opening on that facade being reflected about its centre.
  */
 const WALL_INDEX: Record<BuildingSide, number> = { REAR: 0, RIGHT: 1, FRONT: 2, LEFT: 3 }
+
+/**
+ * How close two readings of the same opening have to be to be corroborating
+ * each other rather than disagreeing. A reveal, a frame and a shadow account
+ * for a few centimetres between them; a quarter of a metre does not.
+ */
+const CORROBORATION_M = 0.25
 
 const MATERIALS = {
   wall: 'mat-wall',
@@ -630,7 +638,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
         : { x0: (ringBounds(mass.ring).x0 === 0 ? plan.decomposition.envelope?.rect.x0 ?? 0 : 0), y0: 0, x1: 0, y1: 0 }
       const rect = inPlan.x1 > inPlan.x0 && inPlan.y1 > inPlan.y0 ? inPlan : undefined
       if (!rect) continue
-      for (const opening of planOpenings(mass, rect, plan.bands, plan.wallPx, toMetric, callouts)) planFound.push({ opening, storeyIndex: storey.index })
+      for (const opening of planOpenings(mass, rect, plan.bands, plan.wallPx, toMetric, callouts, {}, options.raster(plan.frame))) planFound.push({ opening, storeyIndex: storey.index })
     }
   }
   step({ stage: 'openings', what: 'gaps in the walls the plans draw', method: 'DIRECT', detail: `${planFound.length} gaps across ${layoutDraft.plans.length} plan${layoutDraft.plans.length === 1 ? '' : 's'}`, inputs: layoutDraft.plans.length, outputs: planFound.length })
@@ -643,6 +651,220 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     if (side === 'REAR') return b.x0 - envelope.x0 + offset
     if (side === 'RIGHT') return b.z0 - envelope.z0 + offset
     return envelope.z1 - b.z1 + offset
+  }
+
+  /**
+   * Which way round an elevation reads, decided rather than assumed.
+   *
+   * There is a convention for this — a wall is traversed with the building on
+   * its left, so an elevation's left-hand edge is the wall's far end — and on
+   * the reference project it is the wrong way round. Whether it is right
+   * depends on which way the plan's own axes were read and which face of the
+   * building the drawing shows, and getting it wrong is invisible: every
+   * opening still lands on the correct facade at the correct offset, because
+   * that comes from the plan. What breaks is every QUESTION put to the
+   * elevation, silently, in the mirror.
+   *
+   * So it is measured, from the drawing's own PROFILE. The composition already
+   * knows how tall the building is at every point along each facade — that is
+   * what the masses and their roofs are — and the drawing's top edge says the
+   * same thing column by column. Laying the two against each other both ways
+   * round and keeping the better fit answers the question in metres, and an
+   * elevation that fits neither way says so instead of picking one.
+   *
+   * The openings were tried for this first and are not good enough. A facade
+   * has contrast wherever the interesting part of the building is, so matching
+   * the plan's gaps against the drawing's openings points at whichever end has
+   * the windows: on this project's front elevation that is the house, and the
+   * answer is the garage. A tall house beside a low garage cannot be mistaken
+   * for its own mirror image in profile.
+   */
+  const facadeLengthOf = (side: BuildingSide): number => (side === 'FRONT' || side === 'REAR' ? envelope.x1 - envelope.x0 : envelope.z1 - envelope.z0)
+
+  const orientationOf = new Map<BuildingSide, { reversed: boolean; forward: number; mirrored: number; why: string } | undefined>()
+  const decideOrientation = (side: BuildingSide): { reversed: boolean; forward: number; mirrored: number; why: string } | undefined => {
+    if (orientationOf.has(side)) return orientationOf.get(side)
+    const registration = registrations.find((r) => r.side === side)
+    const frame = registration ? graph.coordinateFrames.find((f) => f.id === registration.frameId) : undefined
+    const pixels = frame ? options.raster(frame) : undefined
+    if (!registration || !pixels) {
+      orientationOf.set(side, undefined)
+      return undefined
+    }
+    const length = facadeLengthOf(side)
+    // How tall the composition is at a point along this facade, before the
+    // drawing is consulted at all.
+    const expected = (u: number): number => {
+      let top = 0
+      for (const mass of masses) {
+        const b = ringBounds(mass.ring)
+        const from = uOfOffset(mass, side, 0)
+        const span = side === 'FRONT' || side === 'REAR' ? b.x1 - b.x0 : b.z1 - b.z0
+        const lo = Math.min(from, from + span)
+        if (u < lo - 0.01 || u > lo + span + 0.01) continue
+        const roof = layout.roofSupports.find((r) => r.massId === mass.id)
+        const storeyTop = wallTopOf.get(mass.storeySpan.toIndex) ?? 0
+        const ridge = roof?.ridgeLevelM?.value
+        top = Math.max(top, roof?.kind === 'FLAT' || ridge === undefined ? storeyTop + CONVENTIONS.roofThickness : ridge)
+      }
+      return top
+    }
+    const profile = silhouetteTop(pixels, registration.extent)
+    const samples = 96
+    const fit = (reversed: boolean): number => {
+      let error = 0
+      let counted = 0
+      for (let i = 0; i < samples; i += 1) {
+        const u = ((i + 0.5) / samples) * length
+        const want = expected(reversed ? length - u : u)
+        if (!(want > 0)) continue
+        const pixel = elevationPixel(registration, u, 0)
+        const column = Math.round(pixel.x - registration.extent.x0)
+        const top = profile[column]
+        if (top === null || top === undefined) continue
+        const got = elevationMetric(registration, pixel.x, top).v
+        error += Math.abs(got - want)
+        counted += 1
+      }
+      return counted === 0 ? Number.POSITIVE_INFINITY : round6(error / counted)
+    }
+    const forward = fit(false)
+    const mirrored = fit(true)
+    const decided =
+      !Number.isFinite(forward) && !Number.isFinite(mirrored)
+        ? undefined
+        : {
+            reversed: mirrored < forward,
+            forward,
+            mirrored,
+            why:
+              `the drawing's top edge follows the composition to ${Math.min(forward, mirrored).toFixed(2)} m on average read ${mirrored < forward ? 'mirrored' : 'forward'}, ` +
+              `against ${Math.max(forward, mirrored).toFixed(2)} m the other way round`,
+          }
+    orientationOf.set(side, decided)
+    return decided
+  }
+
+  /**
+   * The head and the sill of an opening, measured on the registered elevation
+   * that shows its facade.
+   *
+   * The plan says which COLUMNS of the drawing the hole occupies, to a couple
+   * of centimetres now that its reveals are found in the drawing rather than
+   * inferred. That is exactly the input the measurement needs and exactly the
+   * thing an elevation is worst at. What the elevation is best at is the other
+   * axis, and it is asked only for that.
+   */
+  const measureOnElevation = (side: BuildingSide, u0: number, u1: number, floor: number, ceiling: number): { sillM: number; headM: number; onDrawnEdges: boolean; why: string } | undefined => {
+    const registration = registrations.find((r) => r.side === side)
+    if (!registration) return undefined
+    const frame = graph.coordinateFrames.find((f) => f.id === registration.frameId)
+    const pixels = frame ? options.raster(frame) : undefined
+    if (!pixels) return undefined
+    const left = elevationPixel(registration, u0, 0)
+    const right = elevationPixel(registration, u1, 0)
+    // A little beyond the storey at each end: a sill can sit on the floor and
+    // a head can reach the ceiling, and a search that stopped exactly at both
+    // could never find either.
+    const top = elevationPixel(registration, u0, ceiling + 0.15)
+    const bottom = elevationPixel(registration, u0, Math.max(0, floor - 0.15))
+    const extent = verticalOpeningExtent(pixels, { from: left.x, to: right.x }, { from: top.y, to: bottom.y })
+    if (!extent) return undefined
+    const headM = elevationMetric(registration, left.x, extent.fromPx).v
+    const sillM = elevationMetric(registration, left.x, extent.toPx).v
+    if (!(headM > sillM)) return undefined
+    const sigmaM = round6(Math.hypot(extent.fromSigmaPx, extent.toSigmaPx) * registration.metresPerPixelV)
+    return {
+      sillM,
+      headM,
+      // §15, applied to this pipeline's own output: a proposal is not
+      // geometry. The differential profile says which rows the opening
+      // occupies; a boundary that could not then be put on a line the drawing
+      // actually draws is a guess about a rendered reflection, and on these
+      // elevations those guesses come out short — a 2.3 m run of glazing
+      // reflecting sky reads as the 1.5 m of it that is dark.
+      onDrawnEdges: extent.fromRefined && extent.toRefined,
+      why:
+        `measured on the ${side.toLowerCase()} elevation, in the ${round6(right.x - left.x)} px of it the plan's gap covers: ` +
+        `${extent.why}, which at ${registration.metresPerPixelV} m per pixel is a head at ${round6(headM)} m and a sill at ${round6(sillM)} m, ± ${sigmaM} m`,
+    }
+  }
+
+  /**
+   * The rectangle group over a gap, as one opening.
+   *
+   * §7's rule, which is about the hole and not about the joinery: the
+   * architectural opening is the OUTER host cut, and what divides it inside
+   * does not change it. Horizontally that means a mullion is not two windows.
+   * Vertically it means the same about a transom, a garage door's panel joints
+   * and the glazing bar under a fanlight — a 2.25 m garage door drawn as four
+   * stacked panels was being reported as whichever panel happened to overlap
+   * the gap best, 1.21 m tall.
+   *
+   * Not the union of everything overlapping, though. An elevation of a render
+   * carries cladding and shadow as well as glass, and unioning those turns a
+   * 2.3 m window into a 5 m one. Only rectangles that are the SHAPE of this
+   * gap — as wide as the plan says the hole is, give or take a reveal — and
+   * only where their pieces are genuinely contiguous, within a transom's
+   * width. A shadow half a metre below a sill is not part of the window.
+   */
+  const assemblyOver = (side: BuildingSide, u0: number, u1: number, widthM: number, floor: number, ceiling: number): { v0: number; v1: number; pieces: Array<(typeof assembled)[number]> } | undefined => {
+    const gapShaped = assembled.filter((entry) => {
+      if (entry.side !== side) return false
+      if (!(entry.rect.v1 > floor + 0.05 && entry.rect.v0 < ceiling - 0.05)) return false
+      const w = entry.rect.u1 - entry.rect.u0
+      if (w < widthM * 0.7 || w > widthM * 1.6 + 0.3) return false
+      return Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0)) >= Math.min(widthM, w) * 0.5
+    })
+    const runs: Array<{ v0: number; v1: number; pieces: typeof gapShaped }> = []
+    for (const entry of [...gapShaped].sort((a, b) => a.rect.v0 - b.rect.v0 || a.rect.v1 - b.rect.v1)) {
+      const open = runs[runs.length - 1]
+      if (open && entry.rect.v0 <= open.v1 + CONVENTIONS.transomM) {
+        open.v1 = Math.max(open.v1, entry.rect.v1)
+        open.pieces.push(entry)
+        continue
+      }
+      runs.push({ v0: entry.rect.v0, v1: entry.rect.v1, pieces: [entry] })
+    }
+    // The tallest run, because the host cut contains everything drawn inside
+    // it: a band crossing a window can never be taller than the window.
+    return [...runs].sort((a, b) => b.v1 - b.v0 - (a.v1 - a.v0) || a.v0 - b.v0)[0]
+  }
+
+  /**
+   * Whether a drawing can be believed one reading at a time.
+   *
+   * §10's question, answered from the pixels. A source package can say
+   * ELEVATION, and be right, about an image that is a photo-realistic RENDER
+   * of the building rather than a line drawing of it. Both are orthographic
+   * elevations, both register perfectly well for scale and extent, and they
+   * are not remotely the same thing to read: on a line drawing the rectangle
+   * detector returns the openings, and on a render it returns bands of shadow
+   * and strips of cladding that are every bit as crisp. Neither failure
+   * announces itself.
+   *
+   * So on a line drawing a lone reading is believed, and on a render it is
+   * not — there, a height is taken only where two independent readings agree,
+   * and otherwise the opening's height is declared unmeasured and named as a
+   * hole. On this project's four renders that is every one of them, which is
+   * a finding about the sources rather than a failure of nerve: the
+   * measurements a render does support, the building's extent and the plan's
+   * own reveals, are used exactly as before.
+   */
+  const characterOf = new Map<BuildingSide, { legible: boolean; why: string }>()
+  const facadeLegibility = (side: BuildingSide): { legible: boolean; why: string } => {
+    const cached = characterOf.get(side)
+    if (cached) return cached
+    const registration = registrations.find((r) => r.side === side)
+    const frame = registration ? graph.coordinateFrames.find((f) => f.id === registration.frameId) : undefined
+    const pixels = frame ? options.raster(frame) : undefined
+    const character = pixels && registration ? drawingCharacter(pixels, registration.extent) : undefined
+    const decided = {
+      legible: character?.kind === 'LINE_DRAWING',
+      why: character ? character.why : `the ${side.toLowerCase()} elevation's pixels were not available, so nothing can be said about how legible it is`,
+    }
+    characterOf.set(side, decided)
+    return decided
   }
 
   let openingCount = 0
@@ -666,47 +888,93 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
 
     // What the elevations say about this gap's height. The plan already fixed
     // where it is and how wide; this is the one question it cannot answer.
-    const u0 = uOfOffset(mass, side, opening.offsetM)
+    const orientation = decideOrientation(side)
+    const rawU = uOfOffset(mass, side, opening.offsetM)
+    const u0 = orientation?.reversed ? facadeLengthOf(side) - rawU - opening.widthM : rawU
     const u1 = u0 + opening.widthM
-    const seen = assembled.filter((entry) => {
-      if (entry.side !== side) return false
-      const share = Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0))
-      return share >= Math.min(opening.widthM, entry.rect.u1 - entry.rect.u0) * 0.4
-    })
     const floor = floorsByStorey[slot] ?? 0
     const ceiling = floor + (heightsByStorey[slot] ?? CONVENTIONS.storeyHeight)
-    const inStorey = seen.filter((entry) => entry.rect.v1 > floor + 0.05 && entry.rect.v0 < ceiling - 0.05)
     let sill: number
     let height: number
     let basis: HypothesisParameter['basis']
     let heightWhy: string
-    // ONE assembly, not the union of everything overlapping. An elevation of a
-    // render carries cladding and shadow as well as glass, and unioning them
-    // turns a 2.3 m window into a 5 m one. The assembly that covers most of
-    // the gap is the one that is the gap; an assembly under a metre tall is a
-    // fragment of something rather than a whole opening, and is not believed.
-    const best = [...inStorey].sort((a, b) => {
-      const share = (entry: (typeof inStorey)[number]): number => Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0)) / Math.max(1e-9, entry.rect.u1 - entry.rect.u0 + opening.widthM)
-      return share(b) - share(a) || b.rect.v1 - b.rect.v0 - (a.rect.v1 - a.rect.v0)
-    })[0]
-    // Believed only when the rectangle is the SHAPE of the gap. A render's
+    const run = assemblyOver(side, u0, u1, opening.widthM, floor, ceiling)
+    // Everything the elevations showed over this gap, for the trace: the
+    // hypothesis records what was LOOKED at, whether or not it settled the
+    // height.
+    const seen = assembled.filter((entry) => {
+      if (entry.side !== side) return false
+      if (!(entry.rect.v1 > floor + 0.05 && entry.rect.v0 < ceiling - 0.05)) return false
+      const share = Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0))
+      return share >= Math.min(opening.widthM, entry.rect.u1 - entry.rect.u0) * 0.4
+    })
+    // Believed only when what is left is the shape of an opening. A render's
     // facade is full of long thin bands — a floor line, a shadow under a
     // balcony, the top of a clad panel — and one of them crossing a window is
     // not a measurement of that window's height.
-    const seenWidth = best === undefined ? 0 : best.rect.u1 - best.rect.u0
-    const seenHeight = best === undefined ? 0 : best.rect.v1 - best.rect.v0
-    const believable = best !== undefined && seenHeight >= 1 && seenWidth >= opening.widthM * 0.7 && seenWidth <= opening.widthM * 1.6 + 0.3
-    if (believable) {
-      sill = round6(Math.max(0, best.rect.v0 - floor))
-      height = round6(best.rect.v1 - best.rect.v0)
-      basis = 'CROSS_VIEW'
-      heightWhy = `a rectangle group on the ${side.toLowerCase()} elevation stands over this gap, between ${round6(best.rect.v0)} and ${round6(best.rect.v1)} m`
-      usedAssemblies.add(best)
-    } else if (opening.heightM !== undefined) {
+    const believable = run !== undefined && run.v1 - run.v0 >= 1
+
+    // §24's order: a printed callout is the publisher stating the number, a
+    // reading off a registered drawing is this pipeline measuring it, and a
+    // convention is nobody measuring anything. They are not interchangeable
+    // and the strongest available one wins.
+    //
+    // The middle one has TWO independent readings of the same drawing behind
+    // it, and it requires both of them to agree. That is the finding of this
+    // stage rather than a cautious default, because either one alone is
+    // confidently wrong on a photo-realistic elevation:
+    //
+    //   - the detector returns bands and slivers rather than windows — thirty
+    //     of them across this project's four facades, not one an opening —
+    //     and its best rectangle over a 2.25 m garage door is 1.21 m of one
+    //     of its panels;
+    //   - the differential profile reports a 1.40 m window as 0.23 m tall,
+    //     because a shadow band across it has two perfectly crisp edges and a
+    //     run of glazing reflecting the sky does not.
+    //
+    // Neither failure announces itself. So where both readings exist they have
+    // to agree: two of them landing within a quarter of a metre of each other
+    // are unlikely to have found the same wrong thing, and where they disagree
+    // the honest answer is that this drawing does not measure this opening,
+    // which is then said in as many words as a named hole.
+    //
+    // DISAGREEMENT is the evidence of unreliability, though — not the absence
+    // of a second opinion. On a technical line drawing the detector's
+    // rectangle simply is the opening, cleanly and on its own, and there is
+    // often no differential profile to find because there is no rendered wall
+    // to differ from. Throwing that away because nothing corroborated it would
+    // discard the good case to guard against the bad one.
+    const measured = measureOnElevation(side, u0, u1, floor, ceiling)
+    const agreement =
+      measured === undefined || run === undefined
+        ? 'ALONE'
+        : Math.abs(measured.headM - run.v1) <= CORROBORATION_M && Math.abs(measured.sillM - run.v0) <= CORROBORATION_M
+          ? 'AGREE'
+          : 'DISAGREE'
+    if (opening.heightM !== undefined) {
       sill = opening.sillM ?? 0
       height = opening.heightM
       basis = 'MEASURED'
       heightWhy = `the callout "${opening.callout?.widthCm}/${opening.callout?.heightCm}" printed against it`
+    } else if (measured && agreement === 'AGREE') {
+      sill = round6(Math.max(0, measured.sillM - floor))
+      height = round6(measured.headM - measured.sillM)
+      basis = 'MEASURED'
+      heightWhy = `${measured.why}; and a rectangle group found independently on the same drawing agrees to within ${CORROBORATION_M} m`
+      for (const piece of run?.pieces ?? []) usedAssemblies.add(piece)
+    } else if (measured && agreement === 'ALONE' && measured.onDrawnEdges && facadeLegibility(side).legible) {
+      sill = round6(Math.max(0, measured.sillM - floor))
+      height = round6(measured.headM - measured.sillM)
+      basis = 'MEASURED'
+      heightWhy = `${measured.why}; no rectangle group was found over this gap to check it against`
+    } else if (believable && agreement === 'ALONE' && facadeLegibility(side).legible) {
+      sill = round6(Math.max(0, run.v0 - floor))
+      height = round6(run.v1 - run.v0)
+      basis = 'CROSS_VIEW'
+      heightWhy =
+        `${run.pieces.length === 1 ? 'a rectangle group' : `${run.pieces.length} stacked rectangle groups`} on the ${side.toLowerCase()} elevation stand over this gap, ` +
+        `between ${round6(run.v0)} and ${round6(run.v1)} m, and nothing on that drawing contradicts them — ${facadeLegibility(side).why}`
+      for (const piece of run.pieces) usedAssemblies.add(piece)
     } else {
       // Nothing measures it. A domestic opening has its head at about the
       // same height whatever it is — a door, a window, a run of glazing — so
@@ -789,8 +1057,8 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
       rivalIds: [],
       observationIds,
       evidenceIds: opening.callout ? [opening.callout.evidenceId] : [],
-      viewSupport: 1 + (inStorey.length > 0 ? 1 : 0),
-      confidence: round6(Math.min(0.92, opening.confidence + (inStorey.length > 0 ? 0.15 : 0))),
+      viewSupport: 1 + (seen.length > 0 ? 1 : 0),
+      confidence: round6(Math.min(0.92, opening.confidence + (seen.length > 0 ? 0.15 : 0))),
       provenance: { rule: 'opening-from-plan-gap', detail: `${opening.why}; ${heightWhy}`, merged: seen.length },
     })
     traces.push({

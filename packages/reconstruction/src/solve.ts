@@ -76,6 +76,14 @@ export const CONVENTIONS = {
   windowSill: 0.9,
   /** A door leaf, when nothing states one. */
   doorHeight: 2.1,
+  /**
+   * The widest bar that can divide one opening without making it two.
+   *
+   * The same number as a mullion, and for the same reason: a transom, a
+   * garage door's panel joint and the glazing bar under a fanlight all divide
+   * a hole that the wall was built with as one hole.
+   */
+  transomM: 0.16,
 } as const
 
 export type ReconstructionInput = {

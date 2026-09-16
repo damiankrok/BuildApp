@@ -288,3 +288,9 @@ export const elevationMetric = (registration: ElevationRegistration, x: number, 
   u: round6((x - registration.extent.x0) * registration.metresPerPixelU - registration.overhangM),
   v: round6((registration.extent.y1 - y) * registration.metresPerPixelV),
 })
+
+/** And back: where on the drawing a known point of the wall is. */
+export const elevationPixel = (registration: ElevationRegistration, u: number, v: number): { x: number; y: number } => ({
+  x: round6(registration.extent.x0 + (u + registration.overhangM) / Math.max(1e-9, registration.metresPerPixelU)),
+  y: round6(registration.extent.y1 - v / Math.max(1e-9, registration.metresPerPixelV)),
+})

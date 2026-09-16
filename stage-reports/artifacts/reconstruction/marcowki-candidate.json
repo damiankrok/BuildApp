@@ -1,13 +1,13 @@
 {
-  "contentHash": "6b2438068eb269002f77f3b31b4cd89594da3f19096f18b4c8b91d976f8364d2",
+  "contentHash": "9891d63b1d65adeb875bb00a7f8e1052c473e5bb1dadf6766df720d800c4d05a",
   "contradictions": [],
-  "hypothesisSetHash": "77af9ce7ebe443bac43a9467a92e37821d347807a99f92622b63fd2dee570196",
-  "hypothesisSetId": "hypotheses-marcowki-77af9ce7ebe443ba",
-  "id": "candidate-marcowki-6b2438068eb26900",
+  "hypothesisSetHash": "77c2c91c0cafd6be208f18166c4d8ab201da99e610b955c23780a87af4d1c583",
+  "hypothesisSetId": "hypotheses-marcowki-77c2c91c0cafd6be",
+  "id": "candidate-marcowki-9891d63b1d65adeb",
   "label": "Marcówki (auto)",
   "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
   "metricEvidenceId": "metrics-marcowki-3737dc29d37cee61",
-  "modelHash": "0686d5ffd3c251a5760511bce18b1cc1795e0d7231160b45f296f690adfc9bae",
+  "modelHash": "2a1bda898e9379de0e3b4dab33845b7f97cd111aa437c0ce7d7f31a9beffcfaa",
   "modelId": "m-auto-marcowki",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
@@ -285,11 +285,11 @@
       "height": 2.2,
       "id": "opening-0",
       "kind": "DOOR",
-      "offset": 2.246155,
+      "offset": 2.256599,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w0",
-      "width": 5.029133
+      "width": 4.668354
     },
     {
       "id": "opening-0-d",
@@ -298,14 +298,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.602379,
+      "height": 1.683699,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 0.498026,
+      "offset": 0.594939,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.431033
+      "width": 4.33412
     },
     {
       "id": "opening-1-w",
@@ -317,11 +317,11 @@
       "height": 2.2,
       "id": "opening-2",
       "kind": "DOOR",
-      "offset": 0.498026,
+      "offset": 0.897207,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w1",
-      "width": 3.38643
+      "width": 2.979949
     },
     {
       "id": "opening-2-d",
@@ -330,14 +330,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.602379,
+      "height": 1.681418,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 4.426851,
+      "offset": 4.460325,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.975123
+      "width": 2.847454
     },
     {
       "id": "opening-3-w",
@@ -349,11 +349,11 @@
       "height": 2.2,
       "id": "opening-4",
       "kind": "DOOR",
-      "offset": 0.74006,
+      "offset": 0.719052,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.911914
+      "width": 2.797663
     },
     {
       "id": "opening-4-d",
@@ -362,14 +362,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.602379,
+      "height": 1.660369,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 0.498026,
+      "offset": 0.567135,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.725662
+      "width": 2.66026
     },
     {
       "id": "opening-5-w",
@@ -381,11 +381,11 @@
       "height": 2.2,
       "id": "opening-6",
       "kind": "DOOR",
-      "offset": 5.814621,
+      "offset": 5.819225,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w3",
-      "width": 1.668889
+      "width": 1.398812
     },
     {
       "id": "opening-6-d",
@@ -397,11 +397,11 @@
       "height": 2.2,
       "id": "opening-7",
       "kind": "DOOR",
-      "offset": 2.505113,
+      "offset": 10.45104,
       "sill": 0,
       "type": "cutOpening",
-      "wallId": "ring-mass-0-0-w2",
-      "width": 1.536262
+      "wallId": "ring-mass-0-0-w1",
+      "width": 1.139083
     },
     {
       "id": "opening-7-d",
@@ -413,11 +413,11 @@
       "height": 2.2,
       "id": "opening-8",
       "kind": "DOOR",
-      "offset": 10.45104,
+      "offset": 2.805491,
       "sill": 0,
       "type": "cutOpening",
-      "wallId": "ring-mass-0-0-w1",
-      "width": 1.139083
+      "wallId": "ring-mass-0-0-w2",
+      "width": 1.116257
     },
     {
       "id": "opening-8-d",
@@ -426,30 +426,30 @@
       "type": "placeDoor"
     },
     {
-      "height": 2.408124,
+      "height": 2.2,
       "id": "opening-9",
-      "kind": "WINDOW",
-      "offset": 2.028541,
-      "sill": 0.197928,
+      "kind": "DOOR",
+      "offset": 2.041562,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w0",
-      "width": 0.998609
+      "width": 0.946161
     },
     {
-      "id": "opening-9-w",
-      "materialId": "mat-glass",
+      "id": "opening-9-d",
+      "materialId": "mat-wall",
       "openingId": "opening-9",
-      "type": "placeWindow"
+      "type": "placeDoor"
     },
     {
       "height": 2.2,
       "id": "opening-10",
       "kind": "DOOR",
-      "offset": 8.012073,
+      "offset": 8.054193,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w3",
-      "width": 0.97772
+      "width": 0.897632
     },
     {
       "id": "opening-10-d",
@@ -461,11 +461,11 @@
       "height": 2.2,
       "id": "opening-11",
       "kind": "DOOR",
-      "offset": 5.653845,
+      "offset": 5.666688,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w2",
-      "width": 0.845596
+      "width": 0.819861
     },
     {
       "id": "opening-11-d",
@@ -700,7 +700,7 @@
       "what": "the storeys, from the section ladder"
     },
     {
-      "detail": "REAR: 0.016494 m/px across, 0.016494 up, anisotropy 1; FRONT: 0.016392 m/px across, 0.016392 up, anisotropy 1; LEFT: 0.01646 m/px across, 0.01646 up, anisotropy 1; RIGHT: 0.016258 m/px across, 0.016258 up, anisotropy 1",
+      "detail": "REAR: 0.016494 m/px across, 0.016494 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 97 verticals and 9 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 113 horizontal and 198 vertical candidates leaves 717 × 482 px (untrimmed 717 × 482), 25% of the perimeter on a straight edge; FRONT: 0.016392 m/px across, 0.016392 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 140 verticals and 11 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 160 horizontal and 287 vertical candidates leaves 715 × 485 px (untrimmed 974 × 485), 60% of the perimeter on a straight edge; LEFT: 0.01646 m/px across, 0.01646 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 23 verticals and 54 horizontals run straight for at least 90 and 192 px above a derived 10.0/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 125 horizontal and 94 vertical candidates leaves 882 × 483 px (untrimmed 882 × 483), 44% of the perimeter on a straight edge; RIGHT: 0.016258 m/px across, 0.016258 up, anisotropy 1, outline from the traced silhouette covers 100% of the sheet, which is the sky and not a building, so the outline was measured from the pixels instead: 15 verticals and 34 horizontals run straight for at least 90 and 192 px above a derived 13.9/255 gradient; discarding endpoints within 6 px of the frame and peeling strays more than 64 × 30 px clear of the 81 horizontal and 59 vertical candidates leaves 870 × 489 px (untrimmed 981 × 489), 59% of the perimeter on a straight edge",
       "index": 2,
       "inputs": 4,
       "method": "DIRECT",
@@ -756,7 +756,7 @@
       "what": "gaps in the walls the plans draw"
     },
     {
-      "detail": "15 plan gaps and 36 elevation assemblies -> 13 openings; 35 assemblies unaccounted for",
+      "detail": "15 plan gaps and 36 elevation assemblies -> 13 openings; 36 assemblies unaccounted for",
       "index": 8,
       "inputs": 15,
       "method": "DISCRETE_SELECTION",
@@ -792,9 +792,14 @@
       "hypothesisId": "hyp-opening-0",
       "kind": "door",
       "objectId": "opening-0",
-      "observationIds": [],
+      "observationIds": [
+        "obs-opening-reveal-0330224147",
+        "obs-opening-reveal-12d5f7840b",
+        "obs-opening-reveal-20f04c7d08",
+        "obs-opening-reveal-900b0e8b1a"
+      ],
       "rejected": [],
-      "why": "5.029133 by 2.2 m at 2.246155 m along the rear wall of mass-0, sill 0 m; a 5.029133 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "4.668354 by 2.2 m at 2.256599 m along the rear wall of mass-0, sill 0 m; a 4.668354 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -802,36 +807,34 @@
       "kind": "window",
       "objectId": "opening-1",
       "observationIds": [
+        "obs-opening-reveal-7a4c68bf33",
         "obs-opening-reveal-ae70b5010e",
         "obs-opening-reveal-7b6ed293b4",
         "obs-opening-reveal-9bf565a42b"
       ],
       "rejected": [],
-      "why": "4.431033 by 1.602379 m at 0.498026 m along the front wall of mass-0, sill 0 m; a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "4.33412 by 1.683699 m at 0.594939 m along the front wall of mass-0, sill 0 m; a 4.33412 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, not moved and -4.32015 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-10",
       "kind": "door",
       "objectId": "opening-10",
-      "observationIds": [
-        "obs-opening-reveal-0a04d248c6",
-        "obs-opening-reveal-e67c2df7e1",
-        "obs-opening-reveal-7812a0c6f9",
-        "obs-opening-reveal-9620bed99b",
-        "obs-opening-reveal-f3cc7839ad"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "0.97772 by 2.2 m at 8.012073 m along the left wall of mass-0, sill 0 m; a 0.97772 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.897632 by 2.2 m at 8.054193 m along the left wall of mass-0, sill 0 m; a 0.897632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-11",
       "kind": "door",
       "objectId": "opening-11",
-      "observationIds": [],
+      "observationIds": [
+        "obs-opening-reveal-f6109117ba",
+        "obs-opening-reveal-ff08485326"
+      ],
       "rejected": [],
-      "why": "0.845596 by 2.2 m at 5.653845 m along the front wall of mass-0, sill 0 m; a 0.845596 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.819861 by 2.2 m at 5.666688 m along the front wall of mass-0, sill 0 m; a 0.819861 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -847,12 +850,9 @@
       "hypothesisId": "hyp-opening-2",
       "kind": "door",
       "objectId": "opening-2",
-      "observationIds": [
-        "obs-opening-reveal-20488d3aab",
-        "obs-opening-reveal-71a8a40e34"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "3.38643 by 2.2 m at 0.498026 m along the right wall of mass-0, sill 0 m; a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.979949 by 2.2 m at 0.897207 m along the right wall of mass-0, sill 0 m; a 2.979949 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -864,23 +864,16 @@
         "obs-opening-reveal-b1afd81ec7"
       ],
       "rejected": [],
-      "why": "2.975123 by 1.602379 m at 4.426851 m along the rear wall of mass-0, sill 0 m; a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.847454 by 1.681418 m at 4.460325 m along the rear wall of mass-0, sill 0 m; a 2.847454 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-4",
       "kind": "door",
       "objectId": "opening-4",
-      "observationIds": [
-        "obs-opening-reveal-7a4c68bf33",
-        "obs-opening-reveal-9f4a163104",
-        "obs-opening-reveal-bfbf9aa87c",
-        "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326",
-        "obs-opening-reveal-0add3cf7bd"
-      ],
+      "observationIds": [],
       "rejected": [],
-      "why": "2.911914 by 2.2 m at 0.74006 m along the front wall of mass-1, sill 0 m; a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.797663 by 2.2 m at 0.719052 m along the front wall of mass-1, sill 0 m; a 2.797663 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -888,11 +881,12 @@
       "kind": "window",
       "objectId": "opening-5",
       "observationIds": [
-        "obs-opening-reveal-0257884b05",
-        "obs-opening-reveal-b51b54ea40"
+        "obs-opening-reveal-6b516b8104",
+        "obs-opening-reveal-b1afd81ec7",
+        "obs-opening-reveal-deffad0e49"
       ],
       "rejected": [],
-      "why": "2.725662 by 1.602379 m at 0.498026 m along the rear wall of mass-0, sill 0 m; a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.66026 by 1.660369 m at 0.567135 m along the rear wall of mass-0, sill 0 m; a 2.66026 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -900,13 +894,10 @@
       "kind": "door",
       "objectId": "opening-6",
       "observationIds": [
-        "obs-opening-reveal-aa3372ec79",
-        "obs-opening-reveal-914c75f37c",
-        "obs-opening-reveal-6e90f3f571",
-        "obs-opening-reveal-0a78dd76ba"
+        "obs-opening-reveal-914c75f37c"
       ],
       "rejected": [],
-      "why": "1.668889 by 2.2 m at 5.814621 m along the left wall of mass-0, sill 0 m; a 1.668889 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "1.398812 by 2.2 m at 5.819225 m along the left wall of mass-0, sill 0 m; a 1.398812 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them"
     },
     {
       "evidenceIds": [],
@@ -914,18 +905,6 @@
       "kind": "door",
       "objectId": "opening-7",
       "observationIds": [
-        "obs-opening-reveal-7b6ed293b4"
-      ],
-      "rejected": [],
-      "why": "1.536262 by 2.2 m at 2.505113 m along the front wall of mass-0, sill 0 m; a 1.536262 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-opening-8",
-      "kind": "door",
-      "objectId": "opening-8",
-      "observationIds": [
-        "obs-opening-reveal-1577e3b900",
         "obs-opening-reveal-19966d6216"
       ],
       "rejected": [],
@@ -933,19 +912,26 @@
     },
     {
       "evidenceIds": [],
-      "hypothesisId": "hyp-opening-9",
-      "kind": "window",
-      "objectId": "opening-9",
+      "hypothesisId": "hyp-opening-8",
+      "kind": "door",
+      "objectId": "opening-8",
       "observationIds": [
-        "obs-opening-reveal-6b516b8104",
-        "obs-opening-reveal-b1afd81ec7",
-        "obs-opening-reveal-bd8f6514b8",
-        "obs-opening-reveal-0330224147",
-        "obs-opening-reveal-12d5f7840b",
-        "obs-opening-reveal-f56e2444a9"
+        "obs-opening-reveal-59831ad1d4"
       ],
       "rejected": [],
-      "why": "0.998609 by 2.408124 m at 2.028541 m along the rear wall of mass-1, sill 0.197928 m; a 0.998609 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "1.116257 by 2.2 m at 2.805491 m along the front wall of mass-0, sill 0 m; a 1.116257 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them"
+    },
+    {
+      "evidenceIds": [],
+      "hypothesisId": "hyp-opening-9",
+      "kind": "door",
+      "objectId": "opening-9",
+      "observationIds": [
+        "obs-opening-reveal-0257884b05",
+        "obs-opening-reveal-b51b54ea40"
+      ],
+      "rejected": [],
+      "why": "0.946161 by 2.2 m at 2.041562 m along the rear wall of mass-1, sill 0 m; a 0.946161 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them"
     },
     {
       "evidenceIds": [
@@ -1056,14 +1042,6 @@
     }
   ],
   "unresolved": [
-    {
-      "evidenceIds": [],
-      "id": "gap-0-200923-m-of-the-opening-at-0-297103-m-adc300d748",
-      "observationIds": [],
-      "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
-      "status": "AMBIGUOUS",
-      "what": "0.200923 m of the opening at 0.297103 m along the min_z wall of mass-0"
-    },
     {
       "evidenceIds": [],
       "id": "gap-0-200923-m-of-the-opening-at-6-900657-m-117719ffc5",
@@ -1194,6 +1172,14 @@
     },
     {
       "evidenceIds": [],
+      "id": "gap-a-0-696961-by-1-3-m-opening-at-8-714222-ff57c32893",
+      "observationIds": [],
+      "reason": "its sill is 0.9 m up a wall with only 1.244486 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
+      "status": "AMBIGUOUS",
+      "what": "a 0.696961 by 1.3 m opening at 8.714222 m along the right wall of mass-0"
+    },
+    {
+      "evidenceIds": [],
       "id": "gap-a-0-725736-by-1-204062-m-rectangle-on-th-6be410527e",
       "observationIds": [
         "obs-opening-reveal-deffad0e49"
@@ -1201,14 +1187,6 @@
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
       "what": "a 0.725736 by 1.204062 m rectangle on the rear elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-0-731026-by-1-3-m-opening-at-8-670586-b2f2c5c2e2",
-      "observationIds": [],
-      "reason": "its sill is 0.9 m up a wall with only 1.244486 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
-      "status": "AMBIGUOUS",
-      "what": "a 0.731026 by 1.3 m opening at 8.670586 m along the right wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1230,6 +1208,16 @@
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
       "what": "a 0.83946 by 2.18918 m rectangle on the left elevation"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-1-138086-by-2-408124-m-rectangle-on-th-71b7ee10eb",
+      "observationIds": [
+        "obs-opening-reveal-bd8f6514b8"
+      ],
+      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
+      "status": "AMBIGUOUS",
+      "what": "a 1.138086 by 2.408124 m rectangle on the rear elevation"
     },
     {
       "evidenceIds": [],
@@ -1340,16 +1328,6 @@
       "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
       "status": "AMBIGUOUS",
       "what": "a 3.19324 by 0.4115 m rectangle on the left elevation"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-3-674308-by-1-251866-m-rectangle-on-th-e14ffbc141",
-      "observationIds": [
-        "obs-opening-reveal-610a296c59"
-      ],
-      "reason": "no gap in any plan wall stands where it does, so nothing measured states where on the building it is",
-      "status": "AMBIGUOUS",
-      "what": "a 3.674308 by 1.251866 m rectangle on the right elevation"
     },
     {
       "evidenceIds": [],
@@ -1737,6 +1715,14 @@
     },
     {
       "evidenceIds": [],
+      "id": "gap-the-height-of-the-0-696961-m-opening-at-1169ae4df7",
+      "observationIds": [],
+      "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
+      "status": "MISSING",
+      "what": "the height of the 0.696961 m opening at 8.714222 m along the max_x wall of mass-0"
+    },
+    {
+      "evidenceIds": [],
       "id": "gap-the-height-of-the-0-70224-m-opening-at-6-b4d8ebdb5e",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
@@ -1745,27 +1731,35 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-731026-m-opening-at-3cbd9ff3e8",
+      "id": "gap-the-height-of-the-0-819861-m-opening-at-ff44274822",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.731026 m opening at 8.670586 m along the max_x wall of mass-0"
+      "what": "the height of the 0.819861 m opening at 5.666688 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-845596-m-opening-at-eb17f39fb3",
+      "id": "gap-the-height-of-the-0-897632-m-opening-at-f7c0a9045a",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.845596 m opening at 5.653845 m along the max_z wall of mass-0"
+      "what": "the height of the 0.897632 m opening at 8.054193 m along the min_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-0-97772-m-opening-at-8-1c09988ff8",
+      "id": "gap-the-height-of-the-0-946161-m-opening-at-dd18ac9e01",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 0.97772 m opening at 8.012073 m along the min_x wall of mass-0"
+      "what": "the height of the 0.946161 m opening at 2.041562 m along the min_z wall of mass-1"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-the-height-of-the-1-116257-m-opening-at-24c54145dd",
+      "observationIds": [],
+      "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
+      "status": "MISSING",
+      "what": "the height of the 1.116257 m opening at 2.805491 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1777,67 +1771,59 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-1-536262-m-opening-at-d7d16fd185",
+      "id": "gap-the-height-of-the-1-398812-m-opening-at-01d774e963",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 1.536262 m opening at 2.505113 m along the max_z wall of mass-0"
+      "what": "the height of the 1.398812 m opening at 5.819225 m along the min_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-1-668889-m-opening-at-3db4949621",
+      "id": "gap-the-height-of-the-2-66026-m-opening-at-0-6704a7a85f",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 1.668889 m opening at 5.814621 m along the min_x wall of mass-0"
+      "what": "the height of the 2.66026 m opening at 0.567135 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-926585-m-opening-at-dc7196a0a7",
+      "id": "gap-the-height-of-the-2-797663-m-opening-at-0dca490b76",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.926585 m opening at 0.297103 m along the min_z wall of mass-0"
+      "what": "the height of the 2.797663 m opening at 0.719052 m along the max_z wall of mass-1"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-956938-m-opening-at-0c64aef5ad",
+      "id": "gap-the-height-of-the-2-847454-m-opening-at-6aaf956ecf",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.956938 m opening at 0.74006 m along the max_z wall of mass-1"
+      "what": "the height of the 2.847454 m opening at 4.460325 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-2-993144-m-opening-at-a05cae4522",
+      "id": "gap-the-height-of-the-2-979949-m-opening-at-c1711b583d",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 2.993144 m opening at 4.426851 m along the min_z wall of mass-0"
+      "what": "the height of the 2.979949 m opening at 0.897207 m along the max_x wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-3-43193-m-opening-at-0-7a95e7a2fa",
+      "id": "gap-the-height-of-the-4-33412-m-opening-at-0-3965f0bb2c",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 3.43193 m opening at 0.452526 m along the max_x wall of mass-0"
+      "what": "the height of the 4.33412 m opening at 0.594939 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-height-of-the-4-449054-m-opening-at-fcdb72f8d7",
+      "id": "gap-the-height-of-the-4-668354-m-opening-at-b782192b34",
       "observationIds": [],
       "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
       "status": "MISSING",
-      "what": "the height of the 4.449054 m opening at 0.480005 m along the max_z wall of mass-0"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-the-height-of-the-5-029133-m-opening-at-cb7bd5bb98",
-      "observationIds": [],
-      "reason": "the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed",
-      "status": "MISSING",
-      "what": "the height of the 5.029133 m opening at 2.246155 m along the min_z wall of mass-0"
+      "what": "the height of the 4.668354 m opening at 2.256599 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],

@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
+import { drawingCharacter, measureVertical, silhouetteTop, verticalOpeningExtent } from '../src/index.js'
 import { measureOpening, medianOf, paint, registerScene } from './scene.js'
 import type { Opening, Painted, Scene } from './scene.js'
+
+const near = (got: number, want: number, tol: number): void => expect(Math.abs(got - want), `${got} vs ${want}`).toBeLessThanOrEqual(tol)
 
 /**
  * §20 A: a ten-metre facade with a 1.00 m door, a 2.40 m window and a 4.70 m
@@ -192,5 +195,164 @@ describe('§19: the same facade, resized and spoiled', () => {
     expect(e).not.toBeNull()
     expect(e!.measured).toBe(3)
     expect(medianOf(e!.widths)).toBeLessThanOrEqual(0.08)
+  })
+})
+
+/**
+ * §15: a detector says about here; this says where. Measured against the wall
+ * immediately either side, so the render's tone, light and reflections move
+ * both strips together and only a hole moves one.
+ */
+describe('§15: how tall an opening is, measured against the wall beside it', () => {
+  const painted = paint(SCENE_A, 120)
+  const U = (x: number): number => painted.originU + x * painted.pxPerMU
+  const V = (y: number): number => painted.groundV - y * painted.pxPerMV
+  const storey = { from: V(6.4), to: V(0.05) }
+
+  for (const o of SCENE_A.openings) {
+    it(`measures the ${o.id} between its head and its sill`, () => {
+      const got = verticalOpeningExtent(painted.raster, { from: U(o.x0), to: U(o.x1) }, storey)
+      expect(got, o.id).not.toBeNull()
+      // Within a pixel and a half of the rows the opening was drawn on.
+      near(got!.fromPx, V(o.y1), 2)
+      near(got!.toPx, V(o.y0), 2)
+      expect(got!.fromRefined && got!.toRefined, o.id).toBe(true)
+    })
+  }
+
+  it('§7: the mullions do not break the run of glazing into four openings', () => {
+    const o = SCENE_A.openings[2]
+    const got = verticalOpeningExtent(painted.raster, { from: U(o.x0), to: U(o.x1) }, storey)
+    near(got!.toPx - got!.fromPx, (o.y1 - o.y0) * painted.pxPerMV, 3)
+  })
+
+  it('reports nothing over the pier between two windows', () => {
+    // Half a metre of wall between a 2.4 m window and a 4.7 m run of glazing.
+    // This is the case a generously sized reference strip gets wrong, by
+    // reaching through the pier into the glazing and calling all three of them
+    // one opening.
+    expect(verticalOpeningExtent(painted.raster, { from: U(4.55), to: U(4.95) }, storey)).toBeNull()
+  })
+
+  it('turns into metres through the frame the drawing was registered with', () => {
+    const frame = registerScene(painted.raster, SCENE_A)!
+    const o = SCENE_A.openings[1]
+    const got = verticalOpeningExtent(painted.raster, { from: U(o.x0), to: U(o.x1) }, storey)!
+    const m = measureVertical(frame, { id: 'h', quantity: 'OPENING_HEIGHT', from: got.fromPx, to: got.toPx, fromSigmaPx: got.fromSigmaPx, toSigmaPx: got.toSigmaPx })
+    expect(Math.abs(m.valueM - (o.y1 - o.y0))).toBeLessThanOrEqual(0.03)
+  })
+
+  it('is not fooled by a wall that is a different colour from its neighbour', () => {
+    // A rendered panel beside a clad one differs all the way up. That is two
+    // materials meeting, not a hole, and a rule that only looked at contrast
+    // would report a six-metre window.
+    const scene = paint(SCENE_A, 120)
+    for (let v = 0; v < scene.raster.height; v += 1) {
+      for (let u = Math.round(U(4.6)); u <= Math.round(U(4.95)); u += 1) {
+        if (v < V(6.5) || v > V(0)) continue
+        const i = (v * scene.raster.width + u) * 4
+        scene.raster.data[i] = 150
+        scene.raster.data[i + 1] = 150
+        scene.raster.data[i + 2] = 150
+      }
+    }
+    expect(verticalOpeningExtent(scene.raster, { from: U(4.6), to: U(4.95) }, storey)).toBeNull()
+  })
+})
+
+/** §10: whether a drawing is a line drawing or a render, from the pixels. */
+describe('§10: what kind of drawing this is', () => {
+  /** A technical elevation: white paper, thin ink, and nothing else. */
+  const lineDrawing = (): Raster => {
+    const r: Raster = { width: 900, height: 600, data: new Uint8ClampedArray(900 * 600 * 4).fill(255) }
+    const ink = (x0: number, y0: number, x1: number, y1: number): void => {
+      for (let y = y0; y <= y1; y += 1) {
+        for (let x = x0; x <= x1; x += 1) {
+          if (x > x0 + 1 && x < x1 - 1 && y > y0 + 1 && y < y1 - 1) continue
+          const i = (y * r.width + x) * 4
+          r.data[i] = 20
+          r.data[i + 1] = 20
+          r.data[i + 2] = 20
+        }
+      }
+    }
+    ink(100, 90, 800, 520)
+    ink(180, 180, 300, 320)
+    ink(400, 180, 520, 320)
+    ink(620, 240, 740, 520)
+    return r
+  }
+
+  it('calls an elevation drawn as ink on paper a line drawing', () => {
+    const got = drawingCharacter(lineDrawing())
+    expect(got.kind).toBe('LINE_DRAWING')
+    expect(got.flatShare).toBeGreaterThan(0.6)
+    expect(got.tonesForHalf).toBe(1)
+  })
+
+  it('calls one drawn with a graded sky and a lit wall a render', () => {
+    // Every tone in this one is a gradient, which is what a render is and
+    // what a rectangle detector cannot be trusted on.
+    const scene = paint(SCENE_A, 120)
+    for (let y = 0; y < scene.raster.height; y += 1) {
+      for (let x = 0; x < scene.raster.width; x += 1) {
+        const i = (y * scene.raster.width + x) * 4
+        const shade = Math.round((x / scene.raster.width) * 40 + (y / scene.raster.height) * 30)
+        scene.raster.data[i] = Math.max(0, scene.raster.data[i] - shade)
+        scene.raster.data[i + 1] = scene.raster.data[i]
+        scene.raster.data[i + 2] = scene.raster.data[i]
+      }
+    }
+    const got = drawingCharacter(scene.raster)
+    expect(got.kind).toBe('RENDERED')
+    expect(got.tonesForHalf).toBeGreaterThan(3)
+  })
+
+  it('says which it is in words a reader can check', () => {
+    expect(drawingCharacter(lineDrawing()).why).toContain('ink on paper')
+  })
+})
+
+/** The drawing's own top edge, which is what says which end of it is which. */
+describe('the profile of a drawing', () => {
+  it('follows a gable up to its apex and down again', () => {
+    const painted = paint(SCENE_B, 130)
+    const bounds = { x0: painted.originU, y0: 0, x1: painted.originU + SCENE_B.widthM * painted.pxPerMU, y1: painted.groundV }
+    const top = silhouetteTop(painted.raster, bounds)
+    const at = (x: number): number | null => top[Math.round(x * painted.pxPerMU)]
+    const height = (x: number): number => {
+      const row = at(x)
+      return row === null || row === undefined ? Number.NaN : (painted.groundV - row) / painted.pxPerMV
+    }
+    // The eaves at each end, the apex in the middle.
+    near(height(0.3), SCENE_B.heightM, 0.25)
+    near(height(SCENE_B.widthM / 2), SCENE_B.heightM + (SCENE_B.gableM ?? 0), 0.25)
+    near(height(SCENE_B.widthM - 0.3), SCENE_B.heightM, 0.25)
+  })
+
+  it('tells a building from its own mirror image', () => {
+    // Two masses of different heights: the profile says which end is which,
+    // where the openings on such a facade cannot.
+    const scene: Scene = { widthM: 12, heightM: 6.4, openings: [{ id: 'w', x0: 1, x1: 2.4, y0: 1, y1: 2.6 }] }
+    const painted = paint(scene, 100)
+    // Knock the right-hand third down to a low flat-roofed block.
+    for (let v = 0; v < painted.raster.height; v += 1) {
+      for (let u = Math.round(painted.originU + 8 * painted.pxPerMU); u < painted.originU + 12 * painted.pxPerMU; u += 1) {
+        if (v > painted.groundV - 3.0 * painted.pxPerMV) continue
+        const i = (v * painted.raster.width + u) * 4
+        painted.raster.data[i] = 250
+        painted.raster.data[i + 1] = 250
+        painted.raster.data[i + 2] = 250
+      }
+    }
+    const bounds = { x0: painted.originU, y0: 0, x1: painted.originU + 12 * painted.pxPerMU, y1: painted.groundV }
+    const top = silhouetteTop(painted.raster, bounds)
+    const height = (x: number): number => {
+      const row = top[Math.round(x * painted.pxPerMU)]
+      return row === null || row === undefined ? 0 : (painted.groundV - row) / painted.pxPerMV
+    }
+    expect(height(2)).toBeGreaterThan(5.5)
+    expect(height(10)).toBeLessThan(3.5)
+    expect(height(10)).toBeGreaterThan(2.5)
   })
 })

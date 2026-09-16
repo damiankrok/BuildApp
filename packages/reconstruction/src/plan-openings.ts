@@ -25,6 +25,8 @@
  * floor — and said to be a convention where it is one.
  */
 import { round6 } from '@buildapp/source-common'
+import type { Raster } from '@buildapp/source-cv'
+import { refineEdge } from '@buildapp/image-metrology'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Band } from '@buildapp/source-cv'
 import type { MetricEvidence } from '@buildapp/source-metrics'
@@ -59,9 +61,11 @@ export type PlanOpeningOptions = {
   calloutReachM?: number
   /** How far a callout's width may be from the gap it is matched to, as a fraction of the gap. */
   calloutTolerance?: number
+  /** How far a reveal may be refined from where the band reader left it, as a fraction of the wall's thickness. */
+  revealSearch?: number
 }
 
-const DEFAULTS: Required<PlanOpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: 2.2, calloutTolerance: 0.35 }
+const DEFAULTS: Required<PlanOpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: 2.2, calloutTolerance: 0.35, revealSearch: 1 }
 
 /**
  * The stretches of a line that are masonry rather than opening.
@@ -104,6 +108,45 @@ function coveredAlong(bands: readonly Band[], axis: 'X' | 'Z', linePx: number, t
 }
 
 /**
+ * Where the wall actually stops.
+ *
+ * The band reader finds a gap between two pieces of masonry, and it finds it
+ * a few pixels wide of the truth at each end: a run-length band needs its
+ * thickness to hold all the way along, and the last few pixels of a wall
+ * beside an opening are drawn with a reveal, a nib or an antialiased edge, so
+ * the band gives up early. On the reference project's ground-floor plan the
+ * rear glazing reads 5.03 m between band ends where the black poché actually
+ * stops 4.74 m apart, against a printed 4.70 — about five pixels of lost wall
+ * at each end, and a third of a metre on the answer.
+ *
+ * Those five pixels are not missing from the DRAWING. The end of the wall is
+ * one of the hardest edges on the sheet — solid ink against an empty opening,
+ * running the full thickness of the wall and nothing else — so it is found
+ * here directly, and to a fraction of a pixel, instead of being inferred from
+ * where a thickness test happened to fail.
+ *
+ * The search is deliberately short. A reveal is refined by a wall's thickness
+ * at most, and never by enough to reach the next opening, because a reveal
+ * that moves further than that is not a reveal being corrected; it is a
+ * different feature being adopted.
+ */
+function refineReveal(raster: Raster, axis: 'X' | 'Z', linePx: number, atPx: number, wallPx: number, limitPx: number): { atPx: number; sigmaPx: number; why: string } | null {
+  const search = Math.max(2, Math.min(wallPx, limitPx))
+  // Across the wall's own thickness, a little either side of it: the reveal is
+  // the one edge that runs the whole way through.
+  const within = { from: linePx - wallPx * 0.6, to: linePx + wallPx * 1.6 }
+  const found = refineEdge(raster, {
+    axis: axis === 'Z' ? 'VERTICAL' : 'HORIZONTAL',
+    nearPx: atPx,
+    searchPx: search,
+    within: axis === 'Z' ? within : within,
+    minCoverageFraction: 0.3,
+  })
+  if (!found) return null
+  return { atPx: found.atPx, sigmaPx: found.sigmaPx, why: found.why }
+}
+
+/**
  * Openings in one body's exterior walls, from the gaps in the walls that
  * enclose it.
  *
@@ -119,6 +162,8 @@ export function planOpenings(
   toMetric: { x: (px: number) => number; z: (px: number) => number },
   callouts: readonly MetricEvidence[],
   options: PlanOpeningOptions = {},
+  /** The plan's own pixels, so a reveal can be found rather than inferred. */
+  raster?: Raster,
 ): PlanOpening[] {
   const opt = { ...DEFAULTS, ...options }
   const bounds = ringBounds(mass.ring)
@@ -148,7 +193,20 @@ export function planOpenings(
     }
     if (cursor < to) gaps.push([cursor, to])
 
-    for (const [a, b] of gaps) {
+    for (const [rawA, rawB] of gaps) {
+      // The band reader's ends are a proposal; the drawing says where the wall
+      // stops. Refined outward-in from each end, and only ever by a fraction
+      // of the gap, so a correction can never swallow the opening.
+      const limit = Math.max(2, (rawB - rawA) * 0.2)
+      const revealLo = raster ? refineReveal(raster, side.axis, side.linePx, rawA, wallPx, limit) : null
+      const revealHi = raster ? refineReveal(raster, side.axis, side.linePx, rawB, wallPx, limit) : null
+      const a = revealLo?.atPx ?? rawA
+      const b = revealHi?.atPx ?? rawB
+      if (b <= a) continue
+      const refinedWhy =
+        revealLo || revealHi
+          ? `; its reveals were found in the drawing itself, ${revealLo ? `${round6(a - rawA)} px` : 'not moved'} and ${revealHi ? `${round6(b - rawB)} px` : 'not moved'} from where the band reader left them`
+          : ''
       const alongMetric = side.axis === 'X' ? toMetric.z : toMetric.x
       const world0 = alongMetric(a)
       const world1 = alongMetric(b)
@@ -205,8 +263,8 @@ export function planOpenings(
         pixelRect,
         confidence: round6(matched ? Math.min(0.9, 0.6 + (1 - matched.distanceM / opt.calloutReachM) * 0.3) : 0.55),
         why: matched
-          ? `a ${round6(widthM)} m gap in the wall with "${matched.widthCm}/${matched.heightCm}" printed ${matched.distanceM} m from it: the plan and the callout agree on the width`
-          : `a ${widthM} m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it`,
+          ? `a ${round6(widthM)} m gap in the wall with "${matched.widthCm}/${matched.heightCm}" printed ${matched.distanceM} m from it: the plan and the callout agree on the width${refinedWhy}`
+          : `a ${widthM} m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it${refinedWhy}`,
       })
     }
   }
