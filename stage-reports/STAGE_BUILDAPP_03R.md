@@ -345,8 +345,8 @@ responses were hand-authored.
 
 `npm run build` green. BuildWorld keeps Reference / Auto / Demo in the model
 selector; the Auto entry replays the resealed program and compiles through the
-same store and the same compiler as everything else. 21 Playwright tests pass,
-including a new §23 recognizability run that saves the five source views
+same store and the same compiler as everything else. 22 Playwright tests pass —
+the 21 this stage inherited plus a §23 recognizability run that saves the five source views
 (`stage-reports/artifacts/auto-01-perspective.png`, `-02-front`, `-03-rear`,
 `-04-top`, `-05-roof-off`) and asserts the structure they are supposed to show:
 two roofs of different kinds more than a metre apart in height, ≥ 8 openings,
