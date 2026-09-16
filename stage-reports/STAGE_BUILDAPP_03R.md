@@ -1,7 +1,10 @@
 # STAGE BUILDAPP-03R — Structural reconstruction rebuild
 
 **START HEAD** `1c2894cd91411451100697e8e0b7de72c4d2b859`
-**FINAL HEAD** *(see the last commit on `claude/buildapp-buildworld-v1-7y6yqh`; recorded below after the final push)*
+**FINAL HEAD** `6bb4fce1bedfc0070890e6de1ad8feb216d8d1c3` — the commit CI run
+[#10](https://github.com/damiankrok/BuildApp/actions/runs/35086600835) is green
+on. The commit above it on the branch records these two SHAs, the run URL and
+the guard described under CI RUN, and changes nothing else.
 
 The BUILDAPP-03 candidate was one slab 12.05 × 14.905 m, one exterior ring
 reused on both levels, one gable over the whole rectangle at 28.563799°, eight
@@ -357,10 +360,23 @@ renderer was not modified: no renderer bug was found in this stage.
 
 ## CI RUN
 
-*(filled in from the workflow run for the final commit on this branch)*
+https://github.com/damiankrok/BuildApp/actions/runs/35086600835 — run #10 on
+`claude/buildapp-buildworld-v1-7y6yqh`, commit `6bb4fce`.
 
-Required green jobs: **Core / Analyzer / Reconstruction**, **Browser /
-Playwright**, **Android / APK**.
+| job | result |
+| --- | --- |
+| **Core / Analyzer / Reconstruction** | green — typecheck, **962 tests in 77 files**, production web build, both Marcówki audits, and the reference-absent run |
+| **Browser / Playwright** | green — **22 tests**, including the §23 recognizability views |
+| **Android / APK** | green — bundles asserted current, JVM tests, APKs assembled and uploaded |
+| Dependency security (advisory) | green |
+
+One thing had to be fixed to get there, and it was mine. Run #9 reported a
+failure on a run in which **all 962 tests passed**: the heavy fixture and
+mutation suites pegged one worker per core for a minute each, vitest's main
+thread never got scheduled to answer their progress calls, and
+`[vitest-worker]: Timeout calling "onTaskUpdate"` turned a green run red.
+Capping the worker count below the core count fixed it and cost no wall time
+(64 s in CI, against 77 s before).
 
 ## APK ARTIFACT
 

@@ -32,6 +32,8 @@ export default defineConfig({
     // out, and a run in which every test passed is reported as a failure.
     // Leaving a core for the reporter costs a little wall time and buys a
     // result that means what it says.
-    maxWorkers: Math.max(1, (availableParallelism?.() ?? cpus().length) - 1),
+    // Never below two, though: on a small runner one worker would mean a
+    // serial run, which trades a reporting problem for a slow one.
+    maxWorkers: Math.max(2, (availableParallelism?.() ?? cpus().length) - 1),
   },
 })
