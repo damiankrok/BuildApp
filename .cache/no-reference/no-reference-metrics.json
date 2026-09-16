@@ -11078,7 +11078,7 @@
     }
   ],
   "conflicts": [],
-  "contentHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
+  "contentHash": "a48bd035cdb003227a49dd07935543c60c4524f482b2c1f168cfbdb11e4d8d10",
   "coordinateRegistrations": [
     {
       "anchors": [
@@ -17079,9 +17079,13 @@
     {
       "name": "metrics.axis-aligned-affine",
       "version": "1"
+    },
+    {
+      "name": "published-specification-reader",
+      "version": "1.0.0"
     }
   ],
-  "id": "metrics-no-reference-de932f82192aed04",
+  "id": "metrics-no-reference-a48bd035cdb00322",
   "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
   "ocrTokens": [
@@ -64039,9 +64043,10 @@
     }
   ],
   "schema": "buildapp.metric-evidence-set",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "specificationFindings": [],
   "unresolved": [
     {
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",

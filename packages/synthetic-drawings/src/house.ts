@@ -29,6 +29,8 @@ export type SyntheticOpening = {
   /** Above the storey's floor, in metres. A door sits on the floor. */
   sill: number
   storey: number
+  /** How many lights the ELEVATION draws it as, divided by mullions. The plan still draws one hole, because that is what the wall has. */
+  lights?: number
 }
 
 /** A member that stands proud of the wall: what the model calls a linear solid. */
@@ -75,6 +77,8 @@ export type SyntheticRecess = {
   /** How far into the building it goes. */
   depth: number
   storey: number
+  /** Leave one of the two return walls undrawn: a pocket open along one side is not a pocket. */
+  omitReturn?: 'LOW' | 'HIGH'
 }
 
 export type SyntheticHouse = {
@@ -139,15 +143,22 @@ export type SheetOptions = {
   /** Compression speckle, as a fraction of pixels disturbed. */
   speckle?: number
   margin?: number
+  /** How heavily the thin line work is drawn: reveals, chain lines, level rules. Walls keep their own thickness. */
+  lineWeight?: number
+  /** Room names, area callouts and furniture drawn inside the plan, 0..1: everything a sheet carries that is not structure. */
+  clutter?: number
+  /** An angle printed against the roof slope on the section, in degrees. Some publishers print one; most do not. */
+  printedPitchDeg?: number
 }
 
-const DEFAULTS: Required<SheetOptions> = { pixelsPerMetre: 38, capHeight: 16, slant: 0.18, speckle: 0, margin: 120 }
+const DEFAULTS: Omit<Required<SheetOptions>, 'printedPitchDeg'> = { pixelsPerMetre: 38, capHeight: 16, slant: 0.18, speckle: 0, margin: 120, lineWeight: 1, clutter: 0 }
 
 const cm = (metres: number): string => String(Math.round(metres * 100))
 
 /** A chain of printed dimensions along the top or the left of the plan. */
-function chain(c: Canvas, options: { axis: 'HORIZONTAL' | 'VERTICAL'; at: number; start: number; parts: number[]; ppm: number; capHeight: number; slant: number }): void {
+function chain(c: Canvas, options: { axis: 'HORIZONTAL' | 'VERTICAL'; at: number; start: number; parts: number[]; ppm: number; capHeight: number; slant: number; weight?: number }): void {
   const { axis, at, ppm, capHeight, slant } = options
+  const weight = options.weight ?? 1
   let position = options.start
   const place = (p: number) => (axis === 'HORIZONTAL' ? c.tick(p, at, 'HORIZONTAL') : c.tick(at, p, 'VERTICAL'))
   place(position)
@@ -156,10 +167,10 @@ function chain(c: Canvas, options: { axis: 'HORIZONTAL' | 'VERTICAL'; at: number
     const text = cm(part)
     const width = c.textWidth(text, capHeight)
     if (axis === 'HORIZONTAL') {
-      c.line(position, at, position + span, at, 1)
+      c.line(position, at, position + span, at, weight)
       c.text(text, position + span / 2 - width / 2, at - capHeight - 6, capHeight, { slant })
     } else {
-      c.line(at, position, at, position + span, 1)
+      c.line(at, position, at, position + span, weight)
       c.text(text, at - capHeight - 6, position + span / 2 + width / 2, capHeight, { rotate: 'CW' })
     }
     position += span
@@ -229,8 +240,8 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
       c.fill(x0 + along, back, x0 + along + width, back + t)
       const side0 = recess.side === 'FRONT' ? back : y0
       const side1 = recess.side === 'FRONT' ? y0 + d : back + t
-      c.fill(x0 + along, side0, x0 + along + t, side1)
-      c.fill(x0 + along + width - t, side0, x0 + along + width, side1)
+      if (recess.omitReturn !== 'LOW') c.fill(x0 + along, side0, x0 + along + t, side1)
+      if (recess.omitReturn !== 'HIGH') c.fill(x0 + along + width - t, side0, x0 + along + width, side1)
     }
   }
 
@@ -245,8 +256,8 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
       // right-hand end of the plan, so `at` counts from there.
       const along = opening.side === 'FRONT' ? w - at - width : at
       c.fill(x0 + along, y, x0 + along + width, y + t, 255)
-      c.line(x0 + along, y, x0 + along, y + t, 1)
-      c.line(x0 + along + width, y, x0 + along + width, y + t, 1)
+      c.line(x0 + along, y, x0 + along, y + t, o.lineWeight)
+      c.line(x0 + along + width, y, x0 + along + width, y + t, o.lineWeight)
     } else {
       const x = opening.side === 'LEFT' ? x0 : x0 + w - t
       // `at` is measured along the wall the way the model measures it: each
@@ -257,8 +268,8 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
       // a mirror apart, which is a fixture that cannot be reconstructed.
       const along = opening.side === 'LEFT' ? d - at - width : at
       c.fill(x, y0 + along, x + t, y0 + along + width, 255)
-      c.line(x, y0 + along, x + t, y0 + along, 1)
-      c.line(x, y0 + along + width, x + t, y0 + along + width, 1)
+      c.line(x, y0 + along, x + t, y0 + along, o.lineWeight)
+      c.line(x, y0 + along + width, x + t, y0 + along + width, o.lineWeight)
     }
   }
 
@@ -280,12 +291,51 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions & 
   const farZ = house.depth - shrink.maxZ
   const chainX0 = originX + (farX - spanX) * ppm
   const chainZ0 = originY + (farZ - spanZ) * ppm
-  chain(c, { axis: 'HORIZONTAL', at: originY - 74, start: chainX0, parts: [spanX], ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'HORIZONTAL', at: originY - 34, start: chainX0, parts: partsX, ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'VERTICAL', at: originX - 74, start: chainZ0, parts: [spanZ], ppm, capHeight: o.capHeight, slant: o.slant })
-  chain(c, { axis: 'VERTICAL', at: originX - 34, start: chainZ0, parts: partsZ, ppm, capHeight: o.capHeight, slant: o.slant })
+  chain(c, { axis: 'HORIZONTAL', at: originY - 74, start: chainX0, parts: [spanX], ppm, capHeight: o.capHeight, slant: o.slant, weight: o.lineWeight })
+  chain(c, { axis: 'HORIZONTAL', at: originY - 34, start: chainX0, parts: partsX, ppm, capHeight: o.capHeight, slant: o.slant, weight: o.lineWeight })
+  chain(c, { axis: 'VERTICAL', at: originX - 74, start: chainZ0, parts: [spanZ], ppm, capHeight: o.capHeight, slant: o.slant, weight: o.lineWeight })
+  chain(c, { axis: 'VERTICAL', at: originX - 34, start: chainZ0, parts: partsZ, ppm, capHeight: o.capHeight, slant: o.slant, weight: o.lineWeight })
+  if (o.clutter > 0) annotate(c, { x0, y0, x1: x0 + w, y1: y0 + d }, o.clutter, o.capHeight, ppm, storeyIndex)
   if (o.speckle > 0) c.speckle(o.speckle, 11)
   return c
+}
+
+/**
+ * Everything a published plan carries that is not the building.
+ *
+ * Room names, areas to two decimal places, a furniture block, a hatched
+ * terrace: all of it drawn inside the walls, all of it ink, none of it
+ * structure. A reader that takes the largest connected component, or that
+ * counts ink to decide what is enclosed, fails here and should.
+ */
+function annotate(c: Canvas, inside: { x0: number; y0: number; x1: number; y1: number }, amount: number, capHeight: number, ppm: number, seed: number): void {
+  const names = ['SALON', 'KUCHNIA', 'HOL', 'LAZIENKA', 'POKOJ', 'GARDEROBA', 'SPIZARNIA', 'PRALNIA']
+  const width = inside.x1 - inside.x0
+  const height = inside.y1 - inside.y0
+  const rows = Math.max(1, Math.round(3 * amount))
+  const columns = Math.max(1, Math.round(3 * amount))
+  let n = seed
+  const next = (): number => {
+    n = (n * 1103515245 + 12345) & 0x7fffffff
+    return n / 0x7fffffff
+  }
+  const small = Math.max(7, Math.round(capHeight * 0.55))
+  for (let r = 0; r < rows; r += 1) {
+    for (let k = 0; k < columns; k += 1) {
+      const cx = inside.x0 + ((k + 0.5) * width) / columns
+      const cy = inside.y0 + ((r + 0.5) * height) / rows
+      const label = names[(r * columns + k) % names.length]
+      c.text(label, cx - c.textWidth(label, small) / 2, cy - small - 2, small)
+      const area = `${(6 + next() * 18).toFixed(2)} m2`
+      c.text(area, cx - c.textWidth(area, small) / 2, cy + 4, small)
+      // A furniture block: thin outline, no thickness, nothing structural.
+      if (next() < amount) {
+        const fw = ppm * (0.6 + next() * 1.2)
+        const fh = ppm * (0.5 + next() * 0.9)
+        c.rect(cx - fw / 2, cy + small + 6, cx + fw / 2, cy + small + 6 + fh, 1)
+      }
+    }
+  }
 }
 
 /** Which wall an elevation shows, and how long it is. Front and rear see the wings too. */
@@ -348,6 +398,18 @@ export function renderElevation(house: SyntheticHouse, side: Side, options: Shee
     const bottom = yOf(floorOf(opening.storey) + opening.sill)
     const top = yOf(floorOf(opening.storey) + opening.sill + opening.height)
     c.rect(left, top, left + opening.width * ppm, bottom, 2)
+    // A window divided by mullions is drawn as one reveal with several lights
+    // inside it. Each light is a closed rectangle and none of them is a window.
+    const lights = opening.lights ?? 1
+    if (lights > 1) {
+      const inner = (opening.width * ppm) / lights
+      const bar = Math.max(2, 0.06 * ppm)
+      for (let i = 0; i < lights; i += 1) {
+        const l0 = left + i * inner + (i === 0 ? bar : bar / 2)
+        const l1 = left + (i + 1) * inner - (i === lights - 1 ? bar : bar / 2)
+        c.rect(l0, top + bar, l1, bottom - bar, 1)
+      }
+    }
   }
   // A member proud of the wall reads as a filled band: darker than the wall,
   // because that is what a shadowed solid looks like on a technical elevation.
@@ -378,6 +440,14 @@ export function renderSection(house: SyntheticHouse, options: SheetOptions = {})
   c.fill(x0 + span * ppm - t, yOf(wallHeight), x0 + span * ppm, ground)
   c.line(x0, yOf(wallHeight), x0 + (span * ppm) / 2, yOf(wallHeight + rise), 2)
   c.line(x0 + (span * ppm) / 2, yOf(wallHeight + rise), x0 + span * ppm, yOf(wallHeight), 2)
+  // An angle printed against the slope, where the publisher prints one. It is
+  // written where a draughtsman writes it: just above the eaves, inside the
+  // triangle, close enough to the rake to belong to it.
+  if (options.printedPitchDeg !== undefined) {
+    const text = `${Math.round(options.printedPitchDeg)}\u00b0`
+    const size = Math.round(o.capHeight * 1.1)
+    c.text(text, x0 + span * ppm * 0.16, yOf(wallHeight) - Math.round(rise * ppm * 0.14) - size, size)
+  }
 
   // Heights are printed in the margin, clear of the section body: a number
   // written over a hatched wall is a number nobody can read, on a real sheet

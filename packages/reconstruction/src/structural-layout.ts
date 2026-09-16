@@ -4,8 +4,8 @@
  *
  * The layer this introduces sits between the metric evidence and the primitive
  * hypotheses, and it exists because of a specific failure. A reconstruction
- * that goes straight from "the widest dimension is 12.05 m and the deepest is
- * 14.91 m" to "here is a wall ring" has already decided that the building is
+ * that goes straight from "the widest dimension is 15.30 m and the deepest is
+ * 11.44 m" to "here is a wall ring" has already decided that the building is
  * one rectangle, and no amount of careful fitting afterwards can undo that: the
  * garage, the recess, the second roof and the storey that covers only half the
  * plan are all gone before the first wall is emitted.

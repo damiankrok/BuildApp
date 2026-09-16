@@ -34,7 +34,18 @@ const PROJECTION: Record<string, string> = { FLOOR_PLAN: 'ORTHOGRAPHIC_PLAN', SE
 
 /** Build the package, analyse it and read its metrics. Everything downstream starts from the result. */
 export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: SheetOptions = {}, only?: (slug: string) => boolean): Promise<Fixture> {
-  const sheets = renderSheets(house, options).filter((s) => (only ? only(s.slug) : true))
+  return buildFixtureFrom(renderSheets(house, options).filter((s) => (only ? only(s.slug) : true)))
+}
+
+/**
+ * The same, from a sheet list somebody else assembled.
+ *
+ * A mutation is very often ONE sheet drawn differently — an upper plan that
+ * shows a garage the ground plan does not, an elevation printed back to front
+ * — and expressing that means building the package from sheets that did not
+ * all come from the same spec.
+ */
+export async function buildFixtureFrom(sheets: ReturnType<typeof renderSheets>): Promise<Fixture> {
   const bytesByUrl = new Map<string, Uint8Array>()
   const assets = sheets.map((s) => {
     const url = `https://synthetic.invalid/${s.slug}.png`
@@ -54,7 +65,7 @@ export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: 
     id: 'pkg-larchfield',
     canonicalUrl: 'https://synthetic.invalid/larchfield',
     pageHash: sha256Bytes(new Uint8Array([1])),
-    project: { publisher: 'synthetic-fixture', name: house.name },
+    project: { publisher: 'synthetic-fixture', name: 'synthetic' },
     adapter: { id: 'fixture', version: '1' },
     assets,
     publishedFacts: [],

@@ -117,9 +117,9 @@ export function statedKind(findings: readonly SpecificationFinding[]): { kind: R
  * Not a convention. A gable of span `s` at pitch `p` rises `s/2 * tan(p)` above
  * its eaves, and a section states the eaves and the ridge, so the rise is
  * known. Of a rectangular mass's two spans only one of them produces that rise
- * — for a 7.9 by 12.6 body at 40 degrees the two candidates are 3.3 m and
- * 5.3 m apart, which no measurement error covers — and that is the span the
- * slopes fall across, so the ridge runs along the other axis.
+ * — for a 9 by 15 body at 35 degrees the two candidates are 3.15 m and 5.25 m,
+ * two metres apart, which no measurement error covers — and that is the span
+ * the slopes fall across, so the ridge runs along the other axis.
  */
 export function ridgeAxisFromRise(
   widthM: number,

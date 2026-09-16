@@ -168,6 +168,81 @@ describe('6. every artefact is sealed against the exact inputs it was made from'
   })
 })
 
+/**
+ * §24 of BUILDAPP-03R, enforced rather than promised.
+ *
+ * The decomposition modules are the ones that decide WHAT THE BUILDING IS —
+ * how many bodies it has, which storeys they reach, what is over them. They
+ * are where a shortcut would do the most damage and be the hardest to see, so
+ * they are held to a tighter rule than the rest of the production path: not
+ * only no reference package and no project name, but none of the numbers the
+ * benchmark measures them against.
+ *
+ * §13's opening targets and §22's Marcówki figures are EVALUATION numbers. A
+ * solver that contains them has been told the answer.
+ */
+const STRUCTURAL_FILES = [
+  'packages/reconstruction/src/plan-decomposition.ts',
+  'packages/reconstruction/src/layout.ts',
+  'packages/reconstruction/src/layout-gate.ts',
+  'packages/reconstruction/src/structural-layout.ts',
+  'packages/reconstruction/src/structural.ts',
+  'packages/reconstruction/src/roof-systems.ts',
+  'packages/reconstruction/src/openings.ts',
+  'packages/reconstruction/src/plan-openings.ts',
+  'packages/reconstruction/src/reconstruct.ts',
+]
+
+describe('6b. the structural decomposition does not know which building it is looking at', () => {
+  it('every module the stage names exists and is read by this test', () => {
+    for (const file of STRUCTURAL_FILES) expect(() => read(join(ROOT, file)), file).not.toThrow()
+  })
+
+  it('none of them carries a figure from the benchmark they are scored against', () => {
+    // Every published dimension of the reference project, and the figures §13
+    // sets as opening targets. Written as digit strings and matched on word
+    // boundaries so that 12.05 is caught and 112.057 is not.
+    const BENCHMARK = ['12.05', '14.6', '14.60', '7.9', '7.90', '4.15', '12.6', '12.60', '7.5', '7.51', '131.16', '28.563799']
+    const offenders: string[] = []
+    for (const file of STRUCTURAL_FILES) {
+      const text = read(join(ROOT, file))
+      for (const needle of BENCHMARK) {
+        const pattern = new RegExp(`(?<![\\d.])${needle.replace('.', '\\.')}(?![\\d])`)
+        if (pattern.test(text)) offenders.push(`${file} contains ${needle}`)
+      }
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('and the scan it is made of would catch one that did', () => {
+    const pretend = 'const OVERALL_WIDTH_M = 12.05'
+    expect(/(?<![\d.])12\.05(?![\d])/.test(pretend)).toBe(true)
+    expect(/(?<![\d.])12\.05(?![\d])/.test('const ratio = 112.057')).toBe(false)
+  })
+
+  it('none of them reaches for a gold model, a fixture on disk, or a benchmark file', () => {
+    const offenders: string[] = []
+    for (const file of STRUCTURAL_FILES) {
+      const text = read(join(ROOT, file))
+      if (/\bgold\b|\bGOLD\b/.test(text)) offenders.push(`${file} mentions a gold model`)
+      if (/stage-reports|\.cache\/|fixtures?\//.test(text)) offenders.push(`${file} names a path on disk`)
+      if (/benchmark/i.test(text)) offenders.push(`${file} mentions the benchmark`)
+      if (/@buildapp\/(reference-|synthetic-drawings|candidates)/.test(text)) offenders.push(`${file} imports a specimen package`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('and the evaluation numbers live only where evaluation does', () => {
+    // §13's targets — twelve major openings, a quarter of a metre of centre
+    // error, 0.15 m of size error — may appear in the evaluator and in the
+    // tests that hold the pipeline to them. Never in the pipeline.
+    const evaluationOnly = ['packages/reconstruction/src/evaluate.ts', 'packages/reconstruction/src/benchmark.ts']
+    for (const file of STRUCTURAL_FILES) {
+      expect(evaluationOnly, `${file} is a solver module and must not be an evaluator`).not.toContain(file)
+    }
+  })
+})
+
 describe('7. the layers run one way', () => {
   it('nothing upstream of the solver imports it', () => {
     const upstream = ['packages/source-package/src', 'packages/source-cv/src', 'packages/source-observations/src', 'packages/source-analyzer/src', 'packages/source-metrics/src'].flatMap((d) => sourceFiles(join(ROOT, d)))

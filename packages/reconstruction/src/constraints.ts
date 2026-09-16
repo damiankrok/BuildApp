@@ -75,10 +75,10 @@ export type Contradiction = {
 /**
  * Hard constraints on one quantity that disagree beyond their own tolerances.
  *
- * Reported, never reconciled. A drawing that states 12.05 in one place and
- * 12.60 in another has a problem the reconstruction cannot solve, and the only
+ * Reported, never reconciled. A drawing that states 15.30 in one place and
+ * 15.85 in another has a problem the reconstruction cannot solve, and the only
  * honest responses are to pick one with a stated reason or to leave the
- * quantity unresolved — not to build 12.325 metres of wall.
+ * quantity unresolved — not to build 15.575 metres of wall.
  */
 export function detectContradictions(constraints: readonly Constraint[]): Contradiction[] {
   const bySubject = new Map<string, Constraint[]>()
