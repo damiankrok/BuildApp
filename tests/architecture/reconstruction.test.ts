@@ -187,6 +187,7 @@ const STRUCTURAL_FILES = [
   'packages/reconstruction/src/layout-gate.ts',
   'packages/reconstruction/src/structural-layout.ts',
   'packages/reconstruction/src/structural.ts',
+  'packages/reconstruction/src/structural-audit.ts',
   'packages/reconstruction/src/roof-systems.ts',
   'packages/reconstruction/src/openings.ts',
   'packages/reconstruction/src/plan-openings.ts',

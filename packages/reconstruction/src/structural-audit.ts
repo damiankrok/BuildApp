@@ -46,9 +46,16 @@ export type StructuralViewAudit = {
   side: BuildingSide
   /** The bodies this view sees, left to right. */
   masses: ProjectedMass[]
-  /** What the model's outline measures, in metres. */
+  /**
+   * What the model's outline measures, in metres, against what the drawing's
+   * does — and the difference between them.
+   *
+   * Reported for a reader, never judged. The elevation's scale was FITTED to
+   * this massing, so these two agree to a fraction of a millimetre whatever
+   * the shape is, and a gate watching them would be watching its own
+   * arithmetic. What is judged is `profile`.
+   */
   projected: { widthM: number; heightM: number }
-  /** What the drawing's own outline measures, through this view's registration. */
   observed: { widthM: number; heightM: number }
   widthResidualM: number
   heightResidualM: number
@@ -74,6 +81,7 @@ export type StructuralProjectionAudit = {
   views: StructuralViewAudit[]
   /** Elevations that could not be registered, and why: a view nobody could scale proves nothing either way. */
   refused: Array<{ frameId: string; why: string }>
+  /** The worst SHAPE residual over the views that could be checked, in metres. */
   worstResidualM: number
   /** The most steps any view sees. A building of several bodies must step in at least one view. */
   steps: number
