@@ -105,14 +105,19 @@ async function main(): Promise<void> {
   process.stdout.write(`  ${candidate.residuals.hard} hard, ${candidate.residuals.soft} soft, ${candidate.residuals.unresolved} unresolved quantities; ${candidate.unresolved.length} named holes; ${candidate.contradictions.length} contradictions\n`)
 
   // --- projection audit ---
+  // The massing the elevations are registered against is the LAYOUT's, not a
+  // rectangle re-derived here: the same envelope the walls were built on, and
+  // the ridge the roof inference settled.
+  const bounds = layout.masses.flatMap((m) => m.ring.points)
   const massing = {
-    width: candidate.quantities.find((q) => q.parameter === 'width')?.value ?? 0,
-    depth: candidate.quantities.find((q) => q.parameter === 'depth')?.value ?? 0,
-    totalHeight: model.levels.reduce((a, l) => Math.max(a, l.elevation + l.height), 0) + (model.roofs[0] ? Math.max(0, 0) : 0),
+    width: bounds.length > 0 ? Math.max(...bounds.map((p) => p.x)) - Math.min(...bounds.map((p) => p.x)) : 0,
+    depth: bounds.length > 0 ? Math.max(...bounds.map((p) => p.z)) - Math.min(...bounds.map((p) => p.z)) : 0,
+    totalHeight: Math.max(
+      model.levels.reduce((a, l) => Math.max(a, l.elevation + l.height), 0),
+      ...layout.roofSupports.map((r) => r.ridgeLevelM?.value ?? 0),
+    ),
   }
-  const heights = model.levels.reduce((a, l) => Math.max(a, l.elevation + l.height), 0)
-  const ridge = model.roofs[0] ? heights + (Math.tan(((model.roofs[0].pitchDeg ?? 0) * Math.PI) / 180) * (model.roofs[0].ridgeAxis === 'X' ? massing.depth : massing.width)) / 2 : heights
-  const { registrations } = registerElevationFrames(graph, { ...massing, totalHeight: ridge })
+  const { registrations } = registerElevationFrames(graph, massing)
   const audit = auditProjection(model, graph, registrations, candidate.contentHash)
   process.stdout.write(`projection audit: ${audit.summary.matched}/${audit.summary.objects} openings land on an observation, mean overlap ${audit.summary.iouMean}, centres ${audit.summary.centreRmsM} m rms, ${audit.summary.unexplained} observed openings unexplained\n`)
 

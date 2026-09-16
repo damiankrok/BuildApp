@@ -1,15 +1,15 @@
 {
-  "candidateHash": "5f452153b8e6c0364f1ee2601cc833a9757d16167ea9203053de042ce70b9581",
-  "candidateId": "candidate-marcowki-5f452153b8e6c036",
+  "candidateHash": "72357011d6bd977d3c034dc9a7e0fa6130930750a8da456e9d30f6062a7c62ec",
+  "candidateId": "candidate-marcowki-72357011d6bd977d",
   "honesty": {
-    "assumed": 1,
-    "hardCorrect": 1,
-    "hardQuantities": 2,
-    "justified": 3,
+    "assumed": 2,
+    "hardCorrect": 0,
+    "hardQuantities": 3,
+    "justified": 14,
     "unresolvedCount": 83
   },
   "linearSolids": {
-    "candidate": 45,
+    "candidate": 2,
     "centreRmsM": 0,
     "matched": 0,
     "missed": 0,
@@ -18,7 +18,7 @@
     "spurious": 0
   },
   "openings": {
-    "candidate": 8,
+    "candidate": 13,
     "comparisons": [
       {
         "matched": false,
@@ -41,64 +41,100 @@
         "referenceId": "gd-room"
       },
       {
-        "matched": false,
-        "referenceId": "og-east-garage-door"
-      },
-      {
-        "matched": false,
-        "referenceId": "og-east-living-window"
-      },
-      {
-        "matched": false,
-        "referenceId": "og-front-entrance"
-      },
-      {
-        "matched": false,
-        "referenceId": "og-front-gable-glazing"
-      },
-      {
-        "candidateId": "opening-6",
-        "heightError": -1.221323,
+        "candidateId": "opening-8",
+        "heightError": 0.1,
         "matched": true,
-        "positionError": 1.114347,
-        "referenceId": "og-front-room-window",
-        "widthError": -0.727124
+        "positionError": 0.108757,
+        "referenceId": "og-east-garage-door",
+        "widthError": 0.209083
       },
       {
         "candidateId": "opening-2",
-        "heightError": -1.890441,
+        "heightError": -0.1,
         "matched": true,
-        "positionError": 1.658213,
-        "referenceId": "og-garage-door",
-        "widthError": -0.206453
+        "positionError": 0.215636,
+        "referenceId": "og-east-living-window",
+        "widthError": 0.38643
       },
       {
-        "matched": false,
-        "referenceId": "og-garage-side-door"
+        "candidateId": "opening-7",
+        "heightError": 0.1,
+        "matched": true,
+        "positionError": 0.08965,
+        "referenceId": "og-front-entrance",
+        "widthError": 0.486262
+      },
+      {
+        "candidateId": "opening-1",
+        "heightError": -1.972812,
+        "matched": true,
+        "positionError": 0.988006,
+        "referenceId": "og-front-gable-glazing",
+        "widthError": 1.63593
+      },
+      {
+        "candidateId": "opening-11",
+        "heightError": -0.1,
+        "matched": true,
+        "positionError": 0.133464,
+        "referenceId": "og-front-room-window",
+        "widthError": -0.254404
+      },
+      {
+        "candidateId": "opening-4",
+        "heightError": -0.05,
+        "matched": true,
+        "positionError": 0.081127,
+        "referenceId": "og-garage-door",
+        "widthError": 0.161914
+      },
+      {
+        "candidateId": "opening-9",
+        "heightError": 0.1,
+        "matched": true,
+        "positionError": 0.050588,
+        "referenceId": "og-garage-side-door",
+        "widthError": -0.001391
+      },
+      {
+        "candidateId": "opening-3",
+        "heightError": 0.535869,
+        "matched": true,
+        "positionError": 0.337569,
+        "referenceId": "og-rear-gable-east",
+        "widthError": 0.533394
       },
       {
         "candidateId": "opening-5",
-        "heightError": -0.412899,
+        "heightError": -1.427621,
         "matched": true,
-        "positionError": 1.578704,
-        "referenceId": "og-rear-gable-east",
-        "widthError": -1.512982
+        "positionError": 0.744501,
+        "referenceId": "og-rear-gable-west",
+        "widthError": 0.460952
       },
       {
-        "matched": false,
-        "referenceId": "og-rear-gable-west"
+        "candidateId": "opening-0",
+        "heightError": -0.1,
+        "matched": true,
+        "positionError": 0.160776,
+        "referenceId": "og-rear-living-glazing",
+        "widthError": 0.329133
       },
       {
-        "matched": false,
-        "referenceId": "og-rear-living-glazing"
+        "candidateId": "opening-6",
+        "heightError": 0.8,
+        "matched": true,
+        "positionError": 0.520898,
+        "referenceId": "og-west-kitchen-window",
+        "widthError": 0.268889
       },
       {
-        "matched": false,
-        "referenceId": "og-west-kitchen-window"
-      },
-      {
-        "matched": false,
-        "referenceId": "og-west-living-window"
+        "candidateId": "opening-10",
+        "heightError": -0.619286,
+        "matched": true,
+        "positionError": 0.037186,
+        "referenceId": "og-west-living-window",
+        "widthError": 0.07772
       },
       {
         "matched": false,
@@ -125,22 +161,22 @@
         "referenceId": "ud-pralnia"
       }
     ],
-    "matched": 3,
-    "missed": 20,
-    "positionRmsM": 1.470119,
+    "matched": 12,
+    "missed": 11,
+    "positionRmsM": 0.411934,
     "reference": 23,
-    "sizeRmsM": 1.161632,
-    "spurious": 5
+    "sizeRmsM": 0.68263,
+    "spurious": 1
   },
   "referenceId": "marcowki-ge",
   "scores": {
-    "evidenceSupportedCompleteness": 0.543478,
-    "geometricAccuracy": 0.562961
+    "evidenceSupportedCompleteness": 0.84058,
+    "geometricAccuracy": 0.492825
   },
   "shell": [
     {
       "candidate": 12.05,
-      "class": "HARD",
+      "class": "SOFT",
       "error": 0,
       "name": "footprint width",
       "reference": 12.05,
@@ -148,20 +184,20 @@
       "unit": "m"
     },
     {
-      "candidate": 14.905276,
+      "candidate": 12.61,
       "class": "SOFT",
-      "error": 0.305276,
+      "error": -1.99,
       "name": "footprint depth",
       "reference": 14.6,
-      "relative": 0.020909,
+      "relative": -0.136301,
       "unit": "m"
     },
     {
-      "candidate": 7.95,
-      "error": -0.000004,
+      "candidate": 7.984444,
+      "error": 0.03444,
       "name": "ridge height",
       "reference": 7.950004,
-      "relative": -0.000001,
+      "relative": 0.004332,
       "unit": "m"
     },
     {
@@ -175,9 +211,9 @@
   ],
   "topology": {
     "candidateLevels": 2,
-    "candidateRoofs": 1,
-    "candidateWalls": 8,
-    "heightError": -0.000004,
+    "candidateRoofs": 2,
+    "candidateWalls": 12,
+    "heightError": 0.03444,
     "referenceLevels": 2,
     "referenceRoofs": 2,
     "referenceWalls": 35

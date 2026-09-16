@@ -69,6 +69,12 @@ export const CONVENTIONS = {
   roofOverhang: 0.6,
   /** A storey, when the section gives no second datum. */
   storeyHeight: 2.8,
+  /** The head of a domestic opening above its floor, when nothing states one. */
+  openingHead: 2.2,
+  /** A window's sill above its floor, when nothing states one. */
+  windowSill: 0.9,
+  /** A door leaf, when nothing states one. */
+  doorHeight: 2.1,
 } as const
 
 export type ReconstructionInput = {

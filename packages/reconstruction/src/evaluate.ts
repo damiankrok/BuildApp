@@ -153,6 +153,14 @@ function openingCentre(model: CanonicalBuildingModel, o: Opening): { x: number; 
 
 const distance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }): number => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z)
 
+/** The centre of a model's walls in plan, which is what two readings of one building share whichever way round they chose to draw it. */
+function boundsOf(model: CanonicalBuildingModel): { cx: number; cz: number } {
+  const xs = model.walls.flatMap((w) => [w.start.x, w.end.x])
+  const zs = model.walls.flatMap((w) => [w.start.z, w.end.z])
+  if (xs.length === 0) return { cx: 0, cz: 0 }
+  return { cx: round6((Math.min(...xs) + Math.max(...xs)) / 2), cz: round6((Math.min(...zs) + Math.max(...zs)) / 2) }
+}
+
 /**
  * Compare a sealed candidate with a reference model.
  *
@@ -192,31 +200,72 @@ export function evaluateCandidate(candidate: ReconstructionCandidate, model: Can
   ]
 
   // --- openings ---
+  //
+  // Two things have to be settled before an opening in one model can be
+  // compared with an opening in the other.
+  //
+  // The first is WHICH WAY ROUND the buildings are. Nothing in a floor plan
+  // says where north is, so two readings of the same drawings can pick
+  // opposite ends for the origin and both be right; comparing them without
+  // allowing for that measures the choice of origin rather than the building.
+  // The four axis-aligned reflections are tried and the one that explains the
+  // most openings is used. A rotation is NOT tried: both models take their x
+  // and z from the same sheet, so a building that only matches when turned
+  // through a right angle has not been reconstructed.
+  //
+  // The second is the ORDER the matching runs in. Taken reference by reference,
+  // the first one claims whichever candidate opening happens to be nearest and
+  // a later one that the same opening belongs to has to settle for something
+  // else. Matching in order of increasing distance over ALL pairs gives each
+  // opening to its nearest partner.
   const referenceOpenings = reference.openings.map((o) => ({ opening: o, centre: openingCentre(reference, o) })).filter((x) => x.centre !== undefined)
-  const candidateOpenings = model.openings.map((o) => ({ opening: o, centre: openingCentre(model, o) })).filter((x) => x.centre !== undefined)
-  const takenCandidates = new Set<string>()
-  const comparisons: OpeningComparison[] = []
-  for (const ref of referenceOpenings) {
-    let best: { id: string; distance: number; opening: Opening } | undefined
-    for (const got2 of candidateOpenings) {
-      if (takenCandidates.has(got2.opening.id)) continue
-      const d = distance(ref.centre as { x: number; y: number; z: number }, got2.centre as { x: number; y: number; z: number })
-      if (!best || d < best.distance) best = { id: got2.opening.id, distance: d, opening: got2.opening }
+  const rawCandidates = model.openings.map((o) => ({ opening: o, centre: openingCentre(model, o) })).filter((x) => x.centre !== undefined)
+  const gotBounds = boundsOf(model)
+  const wantBounds = boundsOf(reference)
+  const matchUnder = (sx: number, sz: number): { comparisons: OpeningComparison[]; matched: number; rms: number } => {
+    const place = (c: { x: number; y: number; z: number }): { x: number; y: number; z: number } => ({
+      x: round6(wantBounds.cx + sx * (c.x - gotBounds.cx)),
+      y: c.y,
+      z: round6(wantBounds.cz + sz * (c.z - gotBounds.cz)),
+    })
+    const pairs: Array<{ ref: (typeof referenceOpenings)[number]; got: (typeof rawCandidates)[number]; d: number }> = []
+    for (const ref of referenceOpenings) {
+      for (const got2 of rawCandidates) {
+        const d = distance(ref.centre as { x: number; y: number; z: number }, place(got2.centre as { x: number; y: number; z: number }))
+        if (d <= radius) pairs.push({ ref, got: got2, d })
+      }
     }
-    if (best && best.distance <= radius) {
-      takenCandidates.add(best.id)
-      comparisons.push({
-        referenceId: ref.opening.id,
-        candidateId: best.id,
-        positionError: round6(best.distance),
-        widthError: round6(best.opening.width - ref.opening.width),
-        heightError: round6(best.opening.height - ref.opening.height),
+    pairs.sort((a, b) => a.d - b.d || a.ref.opening.id.localeCompare(b.ref.opening.id) || a.got.opening.id.localeCompare(b.got.opening.id))
+    const takenRef = new Set<string>()
+    const takenGot = new Set<string>()
+    const out: OpeningComparison[] = []
+    for (const pair of pairs) {
+      if (takenRef.has(pair.ref.opening.id) || takenGot.has(pair.got.opening.id)) continue
+      takenRef.add(pair.ref.opening.id)
+      takenGot.add(pair.got.opening.id)
+      out.push({
+        referenceId: pair.ref.opening.id,
+        candidateId: pair.got.opening.id,
+        positionError: round6(pair.d),
+        widthError: round6(pair.got.opening.width - pair.ref.opening.width),
+        heightError: round6(pair.got.opening.height - pair.ref.opening.height),
         matched: true,
       })
-    } else {
-      comparisons.push({ referenceId: ref.opening.id, matched: false })
     }
+    for (const ref of referenceOpenings) if (!takenRef.has(ref.opening.id)) out.push({ referenceId: ref.opening.id, matched: false })
+    const hit = out.filter((c) => c.matched)
+    return { comparisons: out, matched: hit.length, rms: hit.length === 0 ? Infinity : Math.sqrt(hit.reduce((a, c) => a + (c.positionError ?? 0) ** 2, 0) / hit.length) }
   }
+  const attempts = [
+    { sx: 1, sz: 1 },
+    { sx: -1, sz: 1 },
+    { sx: 1, sz: -1 },
+    { sx: -1, sz: -1 },
+  ].map((a) => ({ ...a, ...matchUnder(a.sx, a.sz) }))
+  const chosen = attempts.sort((a, b) => b.matched - a.matched || a.rms - b.rms || b.sx - a.sx || b.sz - a.sz)[0]
+  const candidateOpenings = rawCandidates
+  const takenCandidates = new Set(chosen.comparisons.filter((c) => c.candidateId !== undefined).map((c) => c.candidateId as string))
+  const comparisons = chosen.comparisons.sort((a, b) => a.referenceId.localeCompare(b.referenceId))
   const matchedOpenings = comparisons.filter((c) => c.matched)
   const positionRms = round6(matchedOpenings.length === 0 ? 0 : Math.sqrt(matchedOpenings.reduce((a, c) => a + (c.positionError ?? 0) ** 2, 0) / matchedOpenings.length))
   const sizeRms = round6(matchedOpenings.length === 0 ? 0 : Math.sqrt(matchedOpenings.reduce((a, c) => a + ((c.widthError ?? 0) ** 2 + (c.heightError ?? 0) ** 2) / 2, 0) / matchedOpenings.length))

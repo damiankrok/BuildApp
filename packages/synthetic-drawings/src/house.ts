@@ -148,14 +148,24 @@ export function renderGroundPlan(house: SyntheticHouse, options: SheetOptions = 
     const width = opening.width * ppm
     if (opening.side === 'FRONT' || opening.side === 'REAR') {
       const y = opening.side === 'FRONT' ? y0 + d - t : y0
-      c.fill(x0 + at, y, x0 + at + width, y + t, 255)
-      c.line(x0 + at, y, x0 + at, y + t, 1)
-      c.line(x0 + at + width, y, x0 + at + width, y + t, 1)
+      // Same rule as the side walls: the front wall is traversed from the
+      // right-hand end of the plan, so `at` counts from there.
+      const along = opening.side === 'FRONT' ? w - at - width : at
+      c.fill(x0 + along, y, x0 + along + width, y + t, 255)
+      c.line(x0 + along, y, x0 + along, y + t, 1)
+      c.line(x0 + along + width, y, x0 + along + width, y + t, 1)
     } else {
       const x = opening.side === 'LEFT' ? x0 : x0 + w - t
-      c.fill(x, y0 + at, x + t, y0 + at + width, 255)
-      c.line(x, y0 + at, x + t, y0 + at, 1)
-      c.line(x, y0 + at + width, x + t, y0 + at + width, 1)
+      // `at` is measured along the wall the way the model measures it: each
+      // wall is traversed with the building on its left, so the left-hand wall
+      // runs from the far end of the plan back towards its origin and an
+      // opening 2.4 m along it is 2.4 m from the BOTTOM of the sheet. Drawing
+      // it from the top would put the plan and the elevation of the same wall
+      // a mirror apart, which is a fixture that cannot be reconstructed.
+      const along = opening.side === 'LEFT' ? d - at - width : at
+      c.fill(x, y0 + along, x + t, y0 + along + width, 255)
+      c.line(x, y0 + along, x + t, y0 + along, 1)
+      c.line(x, y0 + along + width, x + t, y0 + along + width, 1)
     }
   }
 

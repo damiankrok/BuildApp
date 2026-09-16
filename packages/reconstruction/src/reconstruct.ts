@@ -34,6 +34,8 @@ import { detectContradictions, solveQuantity } from './constraints.js'
 import type { Constraint, SolvedQuantity } from './constraints.js'
 import { fuseCandidates } from './fusion.js'
 import type { FusionCounts } from './fusion.js'
+import { claddingField, groupFacadeOpenings } from './openings.js'
+import { planOpenings } from './plan-openings.js'
 import { elevationMetric } from './views.js'
 import type { BuildingSide, ElevationRegistration } from './views.js'
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from './hypotheses.js'
@@ -272,19 +274,33 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   const thicknessQ = settle('hyp-building', 'wallThickness', { value: CONVENTIONS.wallThickness, low: 0.2, high: 0.55 })
 
   // --- one level per storey the layout found, shared by every mass ---------
+  //
+  // The top storey under a pitched roof is as tall as the RIDGE, not as tall
+  // as its walls. That is how a section states it and it is not a technicality:
+  // the space under a gable is part of the storey, the gable end is a wall with
+  // a window in it, and a top storey that stops at the eaves has nowhere to put
+  // either. The walls are told to die into the roof, so the eave sides come out
+  // at the eaves and the gable ends come out as triangles.
   const storeyIndices = layout.storeys.map((s) => s.index).sort((a, b) => a - b)
+  const topStorey = storeyIndices[storeyIndices.length - 1]
+  const pitchedTop = layout.roofSupports.some((r) => r.kind !== 'FLAT' && r.kind !== 'UNKNOWN' && (r.ridgeLevelM?.value ?? 0) > 0 && masses.some((m) => m.id === r.massId && m.storeySpan.toIndex === topStorey))
   const levelIdOf = new Map<number, string>()
   const levelHeightOf = new Map<number, number>()
+  /** The top of the WALLS of a storey: where the eaves sit when a roof follows them. */
+  const wallTopOf = new Map<number, number>()
   const levelElevationOf = new Map<number, number>()
   storeyIndices.forEach((index, i) => {
     const storey = layout.storeys.find((s) => s.index === index)
-    const height = storey?.height?.value ?? levelHeights[i]?.value ?? CONVENTIONS.storeyHeight
+    const stated = storey?.height?.value ?? levelHeights[i]?.value ?? CONVENTIONS.storeyHeight
     const elevation = storey?.elevation?.value ?? round6(levels.floors[0] + levelHeights.slice(0, i).reduce((a, q) => a + q.value, 0))
+    const ridge = layout.roofSupports.map((r) => r.ridgeLevelM?.value ?? 0).reduce((a, b) => Math.max(a, b), 0)
+    const height = index === topStorey && pitchedTop && ridge > elevation + stated ? round6(ridge - elevation) : round6(stated)
     const levelId = `lvl-${i}`
     levelIdOf.set(index, levelId)
-    levelHeightOf.set(index, round6(height))
+    levelHeightOf.set(index, height)
+    wallTopOf.set(index, round6(elevation + stated))
     levelElevationOf.set(index, round6(elevation))
-    program.push({ type: 'createLevel', id: levelId, name: i === 0 ? 'Ground' : `Level ${i}`, index: i, elevation: round6(elevation), height: round6(height) })
+    program.push({ type: 'createLevel', id: levelId, name: i === 0 ? 'Ground' : `Level ${i}`, index: i, elevation: round6(elevation), height })
   })
 
   // --- one slab, one ring per storey, per MASS -----------------------------
@@ -398,7 +414,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     const levelId = levelIdOf.get(topIndex)
     if (!levelId) continue
     const b = ringBounds(mass.ring)
-    const storeyHeight = levelHeightOf.get(topIndex) ?? CONVENTIONS.storeyHeight
+    const eaveOffset = round6((wallTopOf.get(topIndex) ?? 0) - (levelElevationOf.get(topIndex) ?? 0))
     // The eaves projection each registered elevation measured, unless the
     // publisher has already said there are none: a stated fact is not a
     // starting point for a fit.
@@ -438,7 +454,7 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
       // silently smoothed away.
       kind: kind === 'FLAT' ? 'FLAT' : 'GABLE',
       footprint: { minX: round6(b.x0), minZ: round6(b.z0), maxX: round6(b.x1), maxZ: round6(b.z1) },
-      eaveOffset: round6(storeyHeight),
+      eaveOffset,
       pitchDeg: kind === 'FLAT' ? 0 : pitchQ.value,
       ridgeAxis: roof.ridgeAxis ?? (b.z1 - b.z0 >= b.x1 - b.x0 ? 'Z' : 'X'),
       overhang: overhangQ.value,
@@ -506,112 +522,352 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   const floorsByStorey = storeyOrder.map((i) => levelElevationOf.get(i) ?? 0)
   const heightsByStorey = storeyOrder.map((i) => levelHeightOf.get(i) ?? CONVENTIONS.storeyHeight)
 
-  let openingCount = 0
+  /**
+   * How much wall there is above a point on a facade.
+   *
+   * On the eave side of a pitched roof the answer is the top of the walls, and
+   * on a gable end it rises to the ridge and falls away again — which is the
+   * difference between a gable window that fits and one the geometry layer
+   * would have to put outside the building. Measured at the WORST point of the
+   * opening's span, because a window has to fit under the slope along its whole
+   * width and not only at its middle.
+   */
+  const headRoom = (mass: MassHypothesis, storeyIndex: number, side: BuildingSide, offset: number, width: number): number => {
+    const floor = levelElevationOf.get(storeyIndex) ?? 0
+    const wallTop = (wallTopOf.get(storeyIndex) ?? 0) - floor
+    const roof = layout.roofSupports.find((r) => r.massId === mass.id)
+    if (!roof || storeyIndex !== mass.storeySpan.toIndex || roof.kind === 'FLAT' || roof.kind === 'UNKNOWN') return wallTop
+    const pitch = roof.pitchDeg?.value
+    const ridgeAxis = roof.ridgeAxis
+    if (pitch === undefined || ridgeAxis === undefined) return wallTop
+    const b = ringBounds(mass.ring)
+    // A wall that dies into a roof stops at the roof's UNDERSIDE, which is the
+    // covering's thickness below its surface — measured down the slope, so the
+    // vertical drop is that thickness over the cosine of the pitch.
+    const under = round6(CONVENTIONS.roofThickness / Math.cos((pitch * Math.PI) / 180))
+    // A gable END is the wall the ridge runs INTO — the one whose own
+    // direction is ACROSS the ridge. A ridge along Z gables the walls that run
+    // along X, and those are the ones that come to a point.
+    const runsAlongX = side === 'FRONT' || side === 'REAR'
+    const gableEnd = (ridgeAxis === 'Z' && runsAlongX) || (ridgeAxis === 'X' && !runsAlongX)
+    if (!gableEnd) return round6(Math.max(0, wallTop - under))
+    const wallLength = runsAlongX ? b.x1 - b.x0 : b.z1 - b.z0
+    const half = wallLength / 2
+    const rise = (at: number): number => Math.max(0, half - Math.abs(at - half)) * Math.tan((pitch * Math.PI) / 180)
+    return round6(Math.max(0, wallTop - under + Math.min(rise(offset), rise(offset + width))))
+  }
+
   const occupied = new Map<string, Array<{ id: string; from: number; to: number; sill: number; height: number }>>()
-  // Biggest first: where two detections of one hole disagree, the one that
-  // explains more of the facade is the one to keep.
-  for (const fused of [...openingFusion.fused].sort((a, b) => (b.box.x1 - b.box.x0) * (b.box.y1 - b.box.y0) - (a.box.x1 - a.box.x0) * (a.box.y1 - a.box.y0) || a.id.localeCompare(b.id))) {
+
+  // §12. A detector returns rectangles; a building has openings. Before
+  // anything becomes a hole in a wall, each facade's rectangles are grouped
+  // into the assemblies they belong to — a frame inside its reveal, two lights
+  // either side of a mullion, a transom light over a door — and the regular
+  // fields of identical rectangles that are cladding rather than windows are
+  // put aside with their own name.
+  type OpeningSource = (typeof openingFusion.fused)[number]
+  const bySide = new Map<BuildingSide, Array<{ rect: { u0: number; v0: number; u1: number; v1: number }; source: OpeningSource }>>()
+  for (const fused of openingFusion.fused) {
     const payload = fused.members[0].payload
     if (!payload) continue
-    const { side, registration } = payload
-    const slot = levelForBox(fused.box, registration, floorsByStorey, heightsByStorey)
-    if (slot === undefined) {
-      gap({ what: `an opening on the ${side.toLowerCase()} facade`, reason: 'the opening spans a floor line, so no single storey owns it', status: 'AMBIGUOUS', observationIds: fused.observationIds, evidenceIds: [] })
-      continue
-    }
-    const storeyIndex = storeyOrder[slot]
-    const a = elevationMetric(registration, fused.box.x0, fused.box.y1)
-    const b = elevationMetric(registration, fused.box.x1, fused.box.y0)
-    const width = round6(Math.abs(b.u - a.u))
-    const height = round6(Math.abs(b.v - a.v))
-    if (width < 0.35 || height < 0.35 || height > 3.2) continue
-    const uLow = Math.min(a.u, b.u)
-    const host = facadeAt(side, uLow + width / 2, storeyIndex)
-    if (!host) {
+    const a = elevationMetric(payload.registration, fused.box.x0, fused.box.y1)
+    const b = elevationMetric(payload.registration, fused.box.x1, fused.box.y0)
+    const rect = { u0: Math.min(a.u, b.u), v0: Math.min(a.v, b.v), u1: Math.max(a.u, b.u), v1: Math.max(a.v, b.v) }
+    bySide.set(payload.side, [...(bySide.get(payload.side) ?? []), { rect, source: fused }])
+  }
+  const assembled: Array<{ side: BuildingSide; rect: { u0: number; v0: number; u1: number; v1: number }; source: OpeningSource; merged: number; why: string }> = []
+  let claddingRefused = 0
+  for (const [side, pieces] of [...bySide].sort((a, b) => String(a[0]).localeCompare(String(b[0])))) {
+    const { assemblies, cladding } = groupFacadeOpenings(pieces)
+    claddingRefused += cladding.length
+    if (cladding.length > 0) {
       gap({
-        what: `an opening ${width} by ${height} m on the ${side.toLowerCase()} facade`,
-        reason: `nothing stands on that facade at ${round6(uLow + width / 2)} m along it on storey ${storeyIndex}: the detection falls outside every body the plans found`,
-        status: 'AMBIGUOUS',
-        observationIds: fused.observationIds,
+        what: `${cladding.length} rectangles on the ${side.toLowerCase()} facade`,
+        reason: 'they form a regular field of identical rectangles at an even rhythm: cladding, boarding or a panel grid rather than windows',
+        status: 'REFUSED',
+        observationIds: cladding.flatMap((c) => c.source.observationIds).slice(0, 40),
         evidenceIds: [],
       })
+    }
+    for (const assembly of assemblies) {
+      // The assembly speaks for its pieces, and the largest piece speaks for
+      // the assembly: it carries the most sightings and the best extent.
+      const lead = [...assembly.pieces].sort((p, q) => (q.rect.u1 - q.rect.u0) * (q.rect.v1 - q.rect.v0) - (p.rect.u1 - p.rect.u0) * (p.rect.v1 - p.rect.v0))[0]
+      assembled.push({ side, rect: assembly.rect, source: lead.source, merged: assembly.merged, why: assembly.why })
+    }
+  }
+  step({ stage: 'openings', what: 'rectangles grouped into assemblies', method: 'DISCRETE_SELECTION', detail: `${openingFusion.fused.length} rectangles -> ${assembled.length} assemblies; ${claddingRefused} refused as cladding`, inputs: openingFusion.fused.length, outputs: assembled.length })
+
+  // §12. The PLAN is where an opening's position and width come from. It is a
+  // measured drawing and an opening in it is a gap in a wall, at the place and
+  // the width the building has; an elevation of a published project is a
+  // render, and a rectangle detector run over one returns panes, boards and
+  // shadows along with the windows. So the plan says WHERE and HOW WIDE, and
+  // the elevation is asked only for the one thing a plan cannot show: how far
+  // up the opening starts and how tall it is.
+  const planFound: Array<{ opening: ReturnType<typeof planOpenings>[number]; storeyIndex: number }> = []
+  for (const plan of layoutDraft.plans) {
+    const storey = layout.storeys.find((st) => st.frameIds.includes(plan.frame.id))
+    if (!storey) continue
+    const alignment = layoutDraft.alignments.get(plan.frame.id)
+    const isBase = plan.frame.id === layoutDraft.base?.frame.id
+    if (!isBase && !alignment) continue
+    const scale = alignment?.scale ?? 1
+    const dx = alignment?.offsetX ?? 0
+    const dy = alignment?.offsetY ?? 0
+    const toBaseX = (px: number): number => px * scale + dx
+    const toBaseY = (px: number): number => px * scale + dy
+    const toMetric = { x: (px: number) => layoutDraft.frame?.x?.(toBaseX(px)) ?? 0, z: (px: number) => layoutDraft.frame?.z?.(toBaseY(px)) ?? 0 }
+    const callouts = metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === plan.frame.id)
+    for (const mass of masses) {
+      if (storey.index < mass.storeySpan.fromIndex || storey.index > mass.storeySpan.toIndex) continue
+      const region = layout.footprintRegions.find((r) => r.storeyId === storey.id && r.ring === mass.ring) ?? layout.footprintRegions.find((r) => r.storeyId === storey.id && r.id.includes(mass.id))
+      const inPlan = region && region.frameId === plan.frame.id
+        ? region.pixelRect
+        : { x0: (ringBounds(mass.ring).x0 === 0 ? plan.decomposition.envelope?.rect.x0 ?? 0 : 0), y0: 0, x1: 0, y1: 0 }
+      const rect = inPlan.x1 > inPlan.x0 && inPlan.y1 > inPlan.y0 ? inPlan : undefined
+      if (!rect) continue
+      for (const opening of planOpenings(mass, rect, plan.bands, plan.wallPx, toMetric, callouts)) planFound.push({ opening, storeyIndex: storey.index })
+    }
+  }
+  step({ stage: 'openings', what: 'gaps in the walls the plans draw', method: 'DIRECT', detail: `${planFound.length} gaps across ${layoutDraft.plans.length} plan${layoutDraft.plans.length === 1 ? '' : 's'}`, inputs: layoutDraft.plans.length, outputs: planFound.length })
+
+  const PLAN_TO_SIDE: Record<PlanSide, BuildingSide> = { MIN_Z: 'REAR', MAX_X: 'RIGHT', MAX_Z: 'FRONT', MIN_X: 'LEFT' }
+  /** Where along an elevation an offset along one body's wall falls. */
+  const uOfOffset = (mass: MassHypothesis, side: BuildingSide, offset: number): number => {
+    const b = ringBounds(mass.ring)
+    if (side === 'FRONT') return envelope.x1 - b.x1 + offset
+    if (side === 'REAR') return b.x0 - envelope.x0 + offset
+    if (side === 'RIGHT') return b.z0 - envelope.z0 + offset
+    return envelope.z1 - b.z1 + offset
+  }
+
+  let openingCount = 0
+  const usedAssemblies = new Set<(typeof assembled)[number]>()
+  // Widest first: where two gaps in one wall would overlap after a callout has
+  // widened one of them, the better-measured one keeps the wall.
+  for (const found of [...planFound].sort((a, b) => b.opening.widthM - a.opening.widthM || a.opening.id.localeCompare(b.opening.id))) {
+    const { opening, storeyIndex } = found
+    const mass = masses.find((m) => m.id === opening.massId)
+    const slot = storeyOrder.indexOf(storeyIndex)
+    const ringId = ringIdOf.get(`${opening.massId}@${storeyIndex}`)
+    if (!mass || !ringId || slot < 0) continue
+    const side = PLAN_TO_SIDE[opening.side]
+    const exterior = layout.facadePlanes.some((f) => f.massId === mass.id && f.side === opening.side && f.exterior)
+    if (!exterior) {
+      gap({ what: `a ${opening.widthM} m gap in the ${opening.side.toLowerCase()} wall of ${mass.id}`, reason: 'that face is shared with another body, so the gap is a doorway between them rather than an opening in a facade', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       continue
     }
+    const b = ringBounds(mass.ring)
+    const wallLength = side === 'FRONT' || side === 'REAR' ? b.x1 - b.x0 : b.z1 - b.z0
+
+    // What the elevations say about this gap's height. The plan already fixed
+    // where it is and how wide; this is the one question it cannot answer.
+    const u0 = uOfOffset(mass, side, opening.offsetM)
+    const u1 = u0 + opening.widthM
+    const seen = assembled.filter((entry) => {
+      if (entry.side !== side) return false
+      const share = Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0))
+      return share >= Math.min(opening.widthM, entry.rect.u1 - entry.rect.u0) * 0.4
+    })
     const floor = floorsByStorey[slot] ?? 0
-    const storeyHeight = heightsByStorey[slot]
-    const sill = round6(Math.max(0, Math.min(a.v, b.v) - floor))
-    // The opening's own offset along its host wall, from the same point the
-    // ring starts at, with the edge of the detection rather than its centre.
-    // No clamping. An opening that does not fit where it was measured is not
-    // an opening that needs nudging into place — it is a detection the solver
-    // has not understood, and sliding it along the wall until it fits would
-    // turn a visible failure into an invisible one.
-    const offset = round6(host.offset - width / 2)
-    if (width > host.wallLength * 0.92) {
-      gap({ what: `an opening ${width} m wide on the ${side.toLowerCase()} facade`, reason: `the wall it was measured against is only ${host.wallLength} m long, so whatever was detected spans more than one body`, status: 'AMBIGUOUS', observationIds: fused.observationIds, evidenceIds: [] })
-      continue
-    }
-    if (offset < 0.05 || sill + height > storeyHeight - 0.05 || offset + width > host.wallLength - 0.05) {
+    const ceiling = floor + (heightsByStorey[slot] ?? CONVENTIONS.storeyHeight)
+    const inStorey = seen.filter((entry) => entry.rect.v1 > floor + 0.05 && entry.rect.v0 < ceiling - 0.05)
+    let sill: number
+    let height: number
+    let basis: HypothesisParameter['basis']
+    let heightWhy: string
+    // ONE assembly, not the union of everything overlapping. An elevation of a
+    // render carries cladding and shadow as well as glass, and unioning them
+    // turns a 2.3 m window into a 5 m one. The assembly that covers most of
+    // the gap is the one that is the gap; an assembly under a metre tall is a
+    // fragment of something rather than a whole opening, and is not believed.
+    const best = [...inStorey].sort((a, b) => {
+      const share = (entry: (typeof inStorey)[number]): number => Math.max(0, Math.min(u1, entry.rect.u1) - Math.max(u0, entry.rect.u0)) / Math.max(1e-9, entry.rect.u1 - entry.rect.u0 + opening.widthM)
+      return share(b) - share(a) || b.rect.v1 - b.rect.v0 - (a.rect.v1 - a.rect.v0)
+    })[0]
+    // Believed only when the rectangle is the SHAPE of the gap. A render's
+    // facade is full of long thin bands — a floor line, a shadow under a
+    // balcony, the top of a clad panel — and one of them crossing a window is
+    // not a measurement of that window's height.
+    const seenWidth = best === undefined ? 0 : best.rect.u1 - best.rect.u0
+    const seenHeight = best === undefined ? 0 : best.rect.v1 - best.rect.v0
+    const believable = best !== undefined && seenHeight >= 1 && seenWidth >= opening.widthM * 0.7 && seenWidth <= opening.widthM * 1.6 + 0.3
+    if (believable) {
+      sill = round6(Math.max(0, best.rect.v0 - floor))
+      height = round6(best.rect.v1 - best.rect.v0)
+      basis = 'CROSS_VIEW'
+      heightWhy = `a rectangle group on the ${side.toLowerCase()} elevation stands over this gap, between ${round6(best.rect.v0)} and ${round6(best.rect.v1)} m`
+      usedAssemblies.add(best)
+    } else if (opening.heightM !== undefined) {
+      sill = opening.sillM ?? 0
+      height = opening.heightM
+      basis = 'MEASURED'
+      heightWhy = `the callout "${opening.callout?.widthCm}/${opening.callout?.heightCm}" printed against it`
+    } else {
+      // Nothing measures it. A domestic opening has its head at about the
+      // same height whatever it is — a door, a window, a run of glazing — so
+      // the head is the convention and the sill follows from it. A gap too
+      // narrow to be a door is taken as a window at the usual sill; anything
+      // wider runs to the floor, which is what a door, a terrace door and a
+      // glazed wall all do. Both are conventions and both say so.
+      const narrow = opening.widthM < 0.75
+      sill = narrow ? CONVENTIONS.windowSill : 0
+      height = round6(Math.max(0.9, CONVENTIONS.openingHead - sill))
+      basis = 'ASSUMED'
+      heightWhy = `no elevation shows this gap and no callout names it, so its head is taken at the usual ${CONVENTIONS.openingHead} m and its sill ${narrow ? `at the usual ${CONVENTIONS.windowSill} m` : 'at the floor'}`
       gap({
-        what: `an opening ${width} by ${height} m on the ${side.toLowerCase()} facade`,
-        reason: `it does not fit the ${host.wallLength} by ${storeyHeight} m wall it was measured against (offset ${offset}, sill ${sill}), so whatever the detector saw there is not a window`,
-        status: 'AMBIGUOUS',
-        observationIds: fused.observationIds,
+        what: `the height of the ${opening.widthM} m opening at ${opening.offsetM} m along the ${opening.side.toLowerCase()} wall of ${mass.id}`,
+        reason: 'the plan shows the gap and nothing states how tall it is; a domestic opening height is assumed',
+        status: 'MISSING',
+        observationIds: [],
         evidenceIds: [],
       })
+    }
+
+    // A wall ring's corners are consumed by the junctions, so the last wall
+    // thickness at each end belongs to the wall around the corner. A gap the
+    // plan draws right up to a corner is trimmed back to the material that is
+    // actually there, and a trim worth noticing is noticed.
+    const margin = round6(thicknessQ.value + 0.03)
+    const from = round6(Math.max(opening.offsetM, margin))
+    const to = round6(Math.min(opening.offsetM + opening.widthM, wallLength - margin))
+    const width = round6(to - from)
+    const offset = from
+    if (width < 0.45) {
+      gap({ what: `a ${opening.widthM} m opening at ${opening.offsetM} m along the ${opening.side.toLowerCase()} wall of ${mass.id}`, reason: `the wall is ${round6(wallLength)} m long and its junctions leave only ${round6(wallLength - margin * 2)} m of material, which the gap runs off the end of`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       continue
     }
-    const claimed = occupied.get(host.wallId) ?? []
+    if (width < opening.widthM - 0.05) {
+      gap({ what: `${round6(opening.widthM - width)} m of the opening at ${opening.offsetM} m along the ${opening.side.toLowerCase()} wall of ${mass.id}`, reason: 'the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in', status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    }
+    const available = headRoom(mass, storeyIndex, side, offset, width)
+    if (sill + height > available - 0.05) {
+      const room = round6(available - sill - 0.06)
+      if (room < 0.5) {
+        gap({
+          what: `a ${width} by ${height} m opening at ${offset} m along the ${side.toLowerCase()} wall of ${mass.id}`,
+          reason: `its sill is ${sill} m up a wall with only ${round6(available)} m of height where it falls, which leaves no room for it: the height read for it belongs to something else`,
+          status: 'AMBIGUOUS',
+          observationIds: [],
+          evidenceIds: [],
+        })
+        continue
+      }
+      height = room
+      heightWhy = `${heightWhy}; cut down to the ${round6(available)} m of wall standing over it`
+    }
+    const wallId = `${ringId}-w${WALL_INDEX[side]}`
+    const claimed = occupied.get(wallId) ?? []
     const clash = claimed.find((c) => offset < c.to - 0.02 && offset + width > c.from + 0.02 && Math.abs(sill - c.sill) < Math.max(height, c.height))
     if (clash) {
-      gap({
-        what: `a second opening ${width} by ${height} m at ${offset} m along the ${side.toLowerCase()} wall of ${host.mass.id}`,
-        reason: `it overlaps ${clash.id}, which already occupies ${round6(clash.from)} to ${round6(clash.to)} m of that wall; two detections of one hole, or two readings that disagree`,
-        status: 'AMBIGUOUS',
-        observationIds: fused.observationIds,
-        evidenceIds: [],
-      })
+      gap({ what: `a second opening ${width} by ${height} m at ${offset} m along the ${side.toLowerCase()} wall of ${mass.id}`, reason: `it overlaps ${clash.id}, which already occupies ${round6(clash.from)} to ${round6(clash.to)} m of that wall`, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
       continue
     }
     const id = `opening-${openingCount}`
     const kind = sill <= 0.12 && height >= 1.7 ? 'DOOR' : 'WINDOW'
     claimed.push({ id, from: offset, to: round6(offset + width), sill, height })
-    occupied.set(host.wallId, claimed)
-    program.push({ type: 'cutOpening', id, wallId: host.wallId, kind, offset, sill, width, height })
+    occupied.set(wallId, claimed)
+    program.push({ type: 'cutOpening', id, wallId, kind, offset, sill, width, height })
     if (kind === 'WINDOW') program.push({ type: 'placeWindow', id: `${id}-w`, openingId: id, materialId: MATERIALS.glass })
     else program.push({ type: 'placeDoor', id: `${id}-d`, openingId: id, materialId: MATERIALS.wall })
     const hypothesisId = `hyp-${id}`
+    const observationIds = [...new Set(seen.flatMap((entry) => entry.source.observationIds))].slice(0, 12)
     hypotheses.push({
       id: hypothesisId,
       kind: kind === 'DOOR' ? 'DOOR' : 'WINDOW',
-      parentId: `hyp-ring-${host.mass.id}-${storeyIndex}`,
+      parentId: `hyp-ring-${mass.id}-${storeyIndex}`,
       parameters: [
-        { name: 'width', value: width, low: round6(width * 0.94), high: round6(width * 1.06), unit: 'm', basis: 'SCALED', evidenceIds: [], why: `${round6(fused.box.x1 - fused.box.x0)} px on a facade registered at ${registration.metresPerPixelU} m/px` },
-        { name: 'height', value: height, low: round6(height * 0.94), high: round6(height * 1.06), unit: 'm', basis: 'SCALED', evidenceIds: [], why: `${round6(fused.box.y1 - fused.box.y0)} px up a facade registered at ${registration.metresPerPixelV} m/px` },
-        { name: 'sill', value: sill, low: round6(Math.max(0, sill - 0.12)), high: round6(sill + 0.12), unit: 'm', basis: 'SCALED', evidenceIds: [], why: 'measured from the storey floor the opening sits above' },
+        { name: 'width', value: width, low: round6(width - 0.06), high: round6(width + 0.06), unit: 'm', basis: opening.callout ? 'MEASURED' : 'SCALED', evidenceIds: opening.callout ? [opening.callout.evidenceId] : [], why: opening.why },
+        { name: 'height', value: height, low: round6(height * 0.92), high: round6(height * 1.08), unit: 'm', basis, evidenceIds: opening.callout ? [opening.callout.evidenceId] : [], why: heightWhy },
+        { name: 'sill', value: sill, low: round6(Math.max(0, sill - 0.12)), high: round6(sill + 0.12), unit: 'm', basis, evidenceIds: [], why: 'measured from the floor of the storey the opening sits in' },
       ],
-      sightings: fused.members.map((m) => ({ frameId: m.frameId, box: m.box, observationIds: m.observationIds, confidence: m.confidence, depthLayer: m.depthLayer })),
+      sightings: seen.flatMap((entry) => entry.source.members.map((m) => ({ frameId: m.frameId, box: m.box, observationIds: m.observationIds, confidence: m.confidence, depthLayer: m.depthLayer }))).slice(0, 12),
       rivalIds: [],
-      observationIds: fused.observationIds,
-      evidenceIds: [],
-      viewSupport: fused.viewSupport,
-      confidence: fused.confidence,
-      provenance: { rule: 'opening-from-elevation', detail: fused.trace.join('; '), merged: fused.members.length },
+      observationIds,
+      evidenceIds: opening.callout ? [opening.callout.evidenceId] : [],
+      viewSupport: 1 + (inStorey.length > 0 ? 1 : 0),
+      confidence: round6(Math.min(0.92, opening.confidence + (inStorey.length > 0 ? 0.15 : 0))),
+      provenance: { rule: 'opening-from-plan-gap', detail: `${opening.why}; ${heightWhy}`, merged: seen.length },
     })
-    traces.push({ objectId: id, kind: kind.toLowerCase(), hypothesisId, evidenceIds: [], observationIds: fused.observationIds, rejected: [], why: `${width} by ${height} m at ${offset} m along the ${side.toLowerCase()} wall of ${host.mass.id}, sill ${sill} m; ${fused.trace[0]}` })
+    traces.push({
+      objectId: id,
+      kind: kind.toLowerCase(),
+      hypothesisId,
+      evidenceIds: opening.callout ? [opening.callout.evidenceId] : [],
+      observationIds,
+      rejected: [],
+      why: `${width} by ${height} m at ${offset} m along the ${side.toLowerCase()} wall of ${mass.id}, sill ${sill} m; ${opening.why}`,
+    })
     openingCount += 1
   }
-  step({ stage: 'openings', what: 'openings cut from registered elevations', method: 'DISCRETE_SELECTION', detail: `${openingFusion.counts.rawCandidates} sightings -> ${openingCount} openings`, inputs: openingFusion.counts.rawCandidates, outputs: openingCount })
+
+  // What the elevations showed and the plans do not account for. Not built —
+  // an opening whose position only a render states is a position nothing
+  // measured — but named, because a window the pipeline could not place is
+  // exactly what a reviewer needs to see.
+  const unexplained = assembled.filter((entry) => !usedAssemblies.has(entry))
+  for (const entry of unexplained.slice(0, 30)) {
+    gap({
+      what: `a ${round6(entry.rect.u1 - entry.rect.u0)} by ${round6(entry.rect.v1 - entry.rect.v0)} m rectangle on the ${entry.side.toLowerCase()} elevation`,
+      reason: 'no gap in any plan wall stands where it does, so nothing measured states where on the building it is',
+      status: 'AMBIGUOUS',
+      observationIds: entry.source.observationIds,
+      evidenceIds: [],
+    })
+  }
+  step({ stage: 'openings', what: 'openings cut from the plans, sized by the elevations', method: 'DISCRETE_SELECTION', detail: `${planFound.length} plan gaps and ${assembled.length} elevation assemblies -> ${openingCount} openings; ${unexplained.length} assemblies unaccounted for`, inputs: planFound.length, outputs: openingCount })
 
   // -------------------------------------------------------------------------
   // facade linear solids
   // -------------------------------------------------------------------------
   let memberCount = 0
   let memberRefused = 0
+
+  // §14, second half. Repeated parallel members are not repeated members: a
+  // clad facade is ONE surface treatment drawn as forty boards, and building
+  // forty solids out of it is the forest of strips this stage exists to stop.
+  // The same regular-field test the openings use finds them, per facade, and
+  // the whole field is refused together with one name for all of it.
+  const memberBySide = new Map<BuildingSide, Array<{ rect: { u0: number; v0: number; u1: number; v1: number }; source: (typeof memberFusion.fused)[number] }>>()
+  for (const fused of memberFusion.fused) {
+    const payload = fused.members[0].payload
+    if (!payload) continue
+    const a = elevationMetric(payload.registration, fused.box.x0, fused.box.y1)
+    const b = elevationMetric(payload.registration, fused.box.x1, fused.box.y0)
+    memberBySide.set(payload.side, [
+      ...(memberBySide.get(payload.side) ?? []),
+      { rect: { u0: Math.min(a.u, b.u), v0: Math.min(a.v, b.v), u1: Math.max(a.u, b.u), v1: Math.max(a.v, b.v) }, source: fused },
+    ])
+  }
+  const claddingMembers = new Set<(typeof memberFusion.fused)[number]>()
+  for (const [side, members] of [...memberBySide].sort((a, b) => String(a[0]).localeCompare(String(b[0])))) {
+    const field = claddingField(members, { claddingRun: 3, rhythmTolerance: 0.3 })
+    if (field.size === 0) continue
+    for (const index of field) claddingMembers.add(members[index].source)
+    gap({
+      what: `${field.size} parallel members on the ${side.toLowerCase()} facade`,
+      reason: 'they run at an even rhythm at the same size: cladding, boarding or a louvre read as one surface treatment rather than as that many separate solids',
+      status: 'REFUSED',
+      observationIds: [...field].flatMap((i) => members[i].source.observationIds).slice(0, 40),
+      evidenceIds: [],
+    })
+  }
+
+  // How many INDEPENDENT sources saw it. Two renderings of one drawing are one
+  // drawing, whatever their pixel dimensions, and a member corroborated only
+  // by a second copy of the picture it was found in is corroborated by nothing.
+  const assetOfFrame = new Map(graph.coordinateFrames.map((f) => [f.id, f.assetId]))
+  const independentViews = (fused: (typeof memberFusion.fused)[number]): number => new Set(fused.members.map((m) => assetOfFrame.get(m.frameId) ?? m.frameId)).size
+
   for (const fused of memberFusion.fused) {
     const payload = fused.members[0].payload
     if (!payload) continue
     const { side, registration } = payload
+    if (claddingMembers.has(fused)) {
+      memberRefused += 1
+      continue
+    }
     // §14. A linear solid is a claim that something has DEPTH, and an
     // elevation cannot see depth. So one of three things has to be true before
     // anything is built: two independent technical views agree it is there; or
@@ -619,15 +875,20 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     // view carries an explicit depth cue of its own. A tone band on one
     // drawing is a stripe of paint until something says otherwise, and the
     // hundred stripes of a clad facade are exactly that.
-    const proud = fused.depthLayer === 'PROUD_OF_WALL' || fused.depthLayer === 'FRONT'
-    const corroborated = fused.viewSupport >= 2
-    const qualifies = (corroborated && proud) || (corroborated && fused.confidence >= 0.75) || (proud && fused.confidence >= 0.8)
+    const proud = fused.depthLayer === 'PROUD_OF_WALL'
+    const corroborated = independentViews(fused) >= 2
+    // A: two independent views AND a depth cue. C: one view, a depth cue, and
+    // an explicit RETURN FACE — the analyzer marks a member it found closing
+    // the end of a recess, which is an end face seen rather than a tone
+    // inferred. Nothing else builds.
+    const returnFace = fused.members.some((m) => graph.observations.some((o) => m.observationIds.includes(o.id) && o.semanticHints.includes('side-return')))
+    const qualifies = (corroborated && proud) || (proud && returnFace)
     if (!qualifies) {
       memberRefused += 1
       if (memberRefused <= 24) {
         gap({
           what: `a linear member on the ${side.toLowerCase()} facade`,
-          reason: `seen on ${fused.viewSupport} view${fused.viewSupport === 1 ? '' : 's'} at ${fused.confidence} confidence, depth ${fused.depthLayer.toLowerCase().replace(/_/g, ' ')}: not enough to say anything stands proud of the wall there`,
+          reason: `seen on ${independentViews(fused)} independent drawing${independentViews(fused) === 1 ? '' : 's'} at ${fused.confidence} confidence, depth ${fused.depthLayer.toLowerCase().replace(/_/g, ' ')}: not enough to say anything stands proud of the wall there`,
           status: 'AMBIGUOUS',
           observationIds: fused.observationIds,
           evidenceIds: [],
@@ -644,10 +905,27 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
     const uStart = round6(Math.max(0, Math.min(a.u, b.u)))
     const yLow = round6(Math.min(a.v, b.v))
     const yHigh = round6(Math.max(a.v, b.v))
-    const storeyIndex = storeyOrder[0]
+    const slot = levelForRange(yLow, yHigh, floorsByStorey, heightsByStorey) ?? 0
+    const storeyIndex = storeyOrder[slot]
     const host = facadeAt(side, horizontal ? uStart + length / 2 : uStart + width / 2, storeyIndex)
     if (!host) {
       memberRefused += 1
+      continue
+    }
+    // Above the top of a wall there is no wall. On the eave side of a pitched
+    // roof that is everything over the eaves, and a band drawn up there is the
+    // roof, its fascia, its underside or the sky behind it — not something
+    // standing proud of a facade that is not there.
+    const room = headRoom(host.mass, storeyIndex, side, Math.max(0, host.offset - length / 2), length)
+    if (yHigh > (floorsByStorey[slot] ?? 0) + room + 0.05) {
+      memberRefused += 1
+      gap({
+        what: `a ${length} m member at ${round6(yHigh)} m on the ${side.toLowerCase()} facade`,
+        reason: `the wall beneath it stops at ${round6((floorsByStorey[slot] ?? 0) + room)} m, so whatever the elevation shows there belongs to the roof rather than to a wall`,
+        status: 'AMBIGUOUS',
+        observationIds: fused.observationIds,
+        evidenceIds: [],
+      })
       continue
     }
     const id = `solid-${memberCount}`
@@ -772,10 +1050,8 @@ export function reconstruct(options: ReconstructionOptions): ReconstructionResul
   return { layout, hypotheses: hypothesisSet, candidate, model }
 }
 
-/** Which storey an elevation box belongs to: the one whose band it sits mostly inside. */
-function levelForBox(box: { y0: number; y1: number }, registration: ElevationRegistration, floors: readonly number[], heights: readonly number[]): number | undefined {
-  const low = elevationMetric(registration, 0, box.y1).v
-  const high = elevationMetric(registration, 0, box.y0).v
+/** Which storey a height range belongs to: the one whose band it sits mostly inside. */
+function levelForRange(low: number, high: number, floors: readonly number[], heights: readonly number[]): number | undefined {
   let best: { index: number; overlap: number } | undefined
   for (let i = 0; i < heights.length; i += 1) {
     const floor = floors[i] ?? (floors[0] ?? 0) + heights.slice(0, i).reduce((a, h) => a + h, 0)

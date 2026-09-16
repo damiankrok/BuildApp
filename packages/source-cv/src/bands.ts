@@ -37,6 +37,14 @@ export type Band = {
   axisPx: number
   /** How many separate pieces were merged to make it: a wall interrupted by openings. */
   pieces: number
+  /**
+   * Where each of those pieces runs, along the band's own axis, in ascending
+   * order. The gaps BETWEEN them are what a wall is interrupted by — a door, a
+   * window, a garage opening — so they are kept rather than averaged into a
+   * fill fraction: the fraction says how much wall there is and these say
+   * where the wall is not.
+   */
+  segments: Array<{ from: number; to: number }>
 }
 
 export type BandOptions = {
@@ -164,6 +172,7 @@ export function runLengthBands(m: Mask, options: BandOptions = {}): Band[] {
         fill: 1,
         axisPx: round6((p.b0 + p.b1) / 2),
         pieces: count,
+        segments: [{ from: p.a0, to: p.a1 }],
       }
     }
 
@@ -199,6 +208,7 @@ export function runLengthBands(m: Mask, options: BandOptions = {}): Band[] {
       host.thickness = round6((host.thickness + band.thickness) / 2)
       host.axisPx = round6((host.axisPx + band.axisPx) / 2)
       host.pieces += 1
+      host.segments = [...host.segments, ...band.segments].sort((p, q) => p.from - q.from)
     }
 
     // Fill: how much of the merged span is really inked, so a band held

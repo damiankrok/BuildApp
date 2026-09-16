@@ -116,7 +116,15 @@ describe('mutating the sources moves the candidate', () => {
     const elevations = observationsOnElevations(base)
     const changed = solve(base, withGraph((observations) => observations.filter((o) => !(elevations.has(o.frameId) && (o.kind === 'SILHOUETTE' || o.kind === 'MASS_REGION')))))
     expect(changed.candidate.unresolved.some((u) => u.reason.includes('no silhouette'))).toBe(true)
-    expect(changed.model.openings.length).toBeLessThan(baseline.model.openings.length)
+    // The openings do not disappear — the PLAN still draws their gaps, and the
+    // plan is what states where they are. What is lost is the one thing the
+    // elevations were for: an opening the elevations can no longer be asked
+    // about falls back on a convention for its height, and says so.
+    const before = baseline.hypotheses.hypotheses.filter((h) => h.kind === 'WINDOW' || h.kind === 'DOOR').filter((h) => h.parameters.find((p) => p.name === 'height')?.basis === 'CROSS_VIEW').length
+    const after = changed.hypotheses.hypotheses.filter((h) => h.kind === 'WINDOW' || h.kind === 'DOOR').filter((h) => h.parameters.find((p) => p.name === 'height')?.basis === 'CROSS_VIEW').length
+    expect(before).toBeGreaterThan(0)
+    expect(after).toBe(0)
+    expect(changed.candidate.unresolved.filter((u) => u.what.includes('the height of')).length).toBeGreaterThan(baseline.candidate.unresolved.filter((u) => u.what.includes('the height of')).length)
   })
 
   it('7. removing a major opening removes it from the candidate', () => {
@@ -132,7 +140,7 @@ describe('mutating the sources moves the candidate', () => {
     expect(changed.candidate.contentHash).not.toBe(baseline.candidate.contentHash)
   })
 
-  it('8. a mirrored elevation produces a mirrored facade, and the audit can see it', () => {
+  it('8. a mirrored elevation no longer mirrors the facade, and is seen as unexplained instead', () => {
     const front = base.graph.coordinateFrames.find((f) => f.roles.view === 'FRONT')
     expect(front).toBeDefined()
     const changed = solve(base, withGraph((observations) =>
@@ -147,7 +155,15 @@ describe('mutating the sources moves the candidate', () => {
         .filter((o) => o.wallId.endsWith('w2'))
         .map((o) => Number(o.offset.toFixed(2)))
         .sort((a, b) => a - b)
-    expect(offsetsOf(changed)).not.toEqual(offsetsOf(baseline))
+    // The positions come from the PLAN, so a mirrored elevation cannot move
+    // them: this is the property the rebuild was for, and it is the opposite
+    // of what the same mutation did before. What the mirroring costs is the
+    // elevation's corroboration — its rectangles no longer stand over the
+    // gaps, so they are reported as explaining nothing.
+    expect(offsetsOf(changed)).toEqual(offsetsOf(baseline))
+    const unexplained = (r: typeof baseline): number => r.candidate.unresolved.filter((u) => u.reason.includes('no gap in any plan wall stands where it does')).length
+    expect(unexplained(changed)).toBeGreaterThan(unexplained(baseline))
+    expect(changed.candidate.contentHash).not.toBe(baseline.candidate.contentHash)
   })
 
   it('9. one confident false linear-volume candidate does not become a solid without a depth cue', () => {

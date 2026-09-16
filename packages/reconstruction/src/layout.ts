@@ -118,8 +118,8 @@ export type StructuralLayoutOptions = {
 export type StructuralLayoutDraft = {
   plans: PlanReading[]
   base: PlanReading | undefined
-  /** Metres per pixel on the base plan, and the pixel that maps to the world origin. */
-  frame: { metresPerPixelX: number; metresPerPixelY: number; originPx: { x: number; y: number } } | undefined
+  /** Metres per pixel on the base plan, the pixel that maps to the world origin, and the chains' own ladder along each axis. */
+  frame: WorldFrame | undefined
   alignments: Map<string, PlanAlignment>
   storeys: StoreyLayoutHypothesis[]
   footprintRegions: FootprintRegionHypothesis[]

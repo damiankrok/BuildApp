@@ -6,7 +6,104 @@
   },
   "chimneys": [],
   "constraints": [],
-  "doors": [],
+  "doors": [
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-11-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-11",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-2-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-4-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-4",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-6-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-6",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-7-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-7",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-8-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-8",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-9-d",
+      "leafThickness": 0.045,
+      "materialId": "mat-wall",
+      "openAngle": 0,
+      "openingId": "opening-9",
+      "swing": "IN"
+    }
+  ],
   "evidenceSources": [],
   "frame": {
     "handedness": "LEFT_HANDED_AS_SPECIFIED",
@@ -30,7 +127,7 @@
     {
       "buildingId": "bld-auto",
       "elevation": 3.06,
-      "height": 1.61,
+      "height": 4.89,
       "id": "lvl-1",
       "index": 1,
       "name": "Level 1"
@@ -38,33 +135,15 @@
   ],
   "linearSolids": [
     {
-      "depth": 0.360153,
-      "end": {
-        "x": -0.234013,
-        "y": 3.554843,
-        "z": 0.255715
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-0",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 3.554843,
-        "z": 12.380867
-      },
-      "width": 0.360153
-    },
-    {
       "depth": 0.266476,
       "end": {
         "x": -0.234013,
         "y": 3.868158,
         "z": 0.309072
       },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-1",
-      "levelId": "lvl-0",
+      "hostId": "ring-mass-0-1-w3",
+      "id": "solid-0",
+      "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
         "x": -0.234013,
@@ -74,42 +153,6 @@
       "width": 0.266476
     },
     {
-      "depth": 0.200085,
-      "end": {
-        "x": -0.234013,
-        "y": 5.355609,
-        "z": 8.792676
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-10",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.355609,
-        "z": 12.060731
-      },
-      "width": 0.200085
-    },
-    {
-      "depth": 0.200468,
-      "end": {
-        "x": -0.234013,
-        "y": 5.128654,
-        "z": 5.244502
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-11",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.128654,
-        "z": 12.060732
-      },
-      "width": 0.200468
-    },
-    {
       "depth": 0.253151,
       "end": {
         "x": 8.49557,
@@ -117,7 +160,7 @@
         "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
-      "id": "solid-12",
+      "id": "solid-1",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
@@ -126,348 +169,6 @@
         "z": -0.234013
       },
       "width": 0.253151
-    },
-    {
-      "depth": 0.194279,
-      "end": {
-        "x": 8.134013,
-        "y": 4.736988,
-        "z": 5.926483
-      },
-      "hostId": "ring-mass-0-0-w1",
-      "id": "solid-13",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 8.134013,
-        "y": 4.736988,
-        "z": 2.596802
-      },
-      "width": 0.194279
-    },
-    {
-      "depth": 0.226204,
-      "end": {
-        "x": -0.234013,
-        "y": 5.942804,
-        "z": 5.297863
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-14",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.942804,
-        "z": 8.32581
-      },
-      "width": 0.226204
-    },
-    {
-      "depth": 0.19676,
-      "end": {
-        "x": 12.284013,
-        "y": 5.135201,
-        "z": 6.605806
-      },
-      "hostId": "ring-mass-1-0-w1",
-      "id": "solid-15",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.284013,
-        "y": 5.135201,
-        "z": 4.966257
-      },
-      "width": 0.19676
-    },
-    {
-      "depth": 0.191493,
-      "end": {
-        "x": -0.234013,
-        "y": 4.332802,
-        "z": 0.482479
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-16",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 4.332802,
-        "z": 7.378742
-      },
-      "width": 0.191493
-    },
-    {
-      "depth": 0.214513,
-      "end": {
-        "x": -0.234013,
-        "y": 4.728113,
-        "z": 4.364468
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-17",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 4.728113,
-        "z": 6.351301
-      },
-      "width": 0.214513
-    },
-    {
-      "depth": 0.45,
-      "end": {
-        "x": 2.843601,
-        "y": 1.714155,
-        "z": 12.844013
-      },
-      "hostId": "ring-mass-0-0-w2",
-      "id": "solid-18",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 5.444707,
-        "y": 1.714155,
-        "z": 12.844013
-      },
-      "width": 0.546713
-    },
-    {
-      "depth": 0.195884,
-      "end": {
-        "x": 12.284013,
-        "y": 5.371474,
-        "z": 12.184722
-      },
-      "hostId": "ring-mass-1-0-w1",
-      "id": "solid-19",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.284013,
-        "y": 5.371474,
-        "z": 7.683576
-      },
-      "width": 0.195884
-    },
-    {
-      "depth": 0.306286,
-      "end": {
-        "x": 8.134013,
-        "y": 3.588929,
-        "z": 4.34101
-      },
-      "hostId": "ring-mass-0-0-w1",
-      "id": "solid-2",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 8.134013,
-        "y": 3.588929,
-        "z": 0.25269
-      },
-      "width": 0.306286
-    },
-    {
-      "depth": 0.201854,
-      "end": {
-        "x": -0.234013,
-        "y": 6.17805,
-        "z": 0.482477
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-20",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 6.17805,
-        "z": 4.777636
-      },
-      "width": 0.201854
-    },
-    {
-      "depth": 0.226308,
-      "end": {
-        "x": -0.234013,
-        "y": 5.942752,
-        "z": 0.482479
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-21",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.942752,
-        "z": 4.777637
-      },
-      "width": 0.226308
-    },
-    {
-      "depth": 0.213382,
-      "end": {
-        "x": -0.234013,
-        "y": 5.549031,
-        "z": 0.482479
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-22",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.549031,
-        "z": 4.777637
-      },
-      "width": 0.213382
-    },
-    {
-      "depth": 0.200468,
-      "end": {
-        "x": -0.234013,
-        "y": 5.128654,
-        "z": 0.482479
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-23",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.128654,
-        "z": 4.764298
-      },
-      "width": 0.200468
-    },
-    {
-      "depth": 0.196449,
-      "end": {
-        "x": -0.234013,
-        "y": 4.718963,
-        "z": 7.952316
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-3",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 4.718963,
-        "z": 12.220799
-      },
-      "width": 0.196449
-    },
-    {
-      "depth": 0.170506,
-      "end": {
-        "x": -0.234013,
-        "y": 4.535485,
-        "z": 7.952318
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-4",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 4.535485,
-        "z": 12.20746
-      },
-      "width": 0.170506
-    },
-    {
-      "depth": 0.191444,
-      "end": {
-        "x": -0.234013,
-        "y": 4.332826,
-        "z": 8.099048
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-5",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 4.332826,
-        "z": 12.207461
-      },
-      "width": 0.191444
-    },
-    {
-      "depth": 0.188789,
-      "end": {
-        "x": 8.134013,
-        "y": 4.742028,
-        "z": 2.036779
-      },
-      "hostId": "ring-mass-0-0-w1",
-      "id": "solid-6",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 8.134013,
-        "y": 4.742028,
-        "z": 0.439115
-      },
-      "width": 0.188789
-    },
-    {
-      "depth": 0.186735,
-      "end": {
-        "x": 12.284013,
-        "y": 4.927495,
-        "z": 12.184723
-      },
-      "hostId": "ring-mass-1-0-w1",
-      "id": "solid-7",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.284013,
-        "y": 4.927495,
-        "z": 0.479079
-      },
-      "width": 0.186735
-    },
-    {
-      "depth": 0.226464,
-      "end": {
-        "x": -0.234013,
-        "y": 5.942674,
-        "z": 8.792676
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-8",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.942674,
-        "z": 12.060731
-      },
-      "width": 0.226464
-    },
-    {
-      "depth": 0.173669,
-      "end": {
-        "x": -0.234013,
-        "y": 5.742608,
-        "z": 8.792674
-      },
-      "hostId": "ring-mass-0-0-w3",
-      "id": "solid-9",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.234013,
-        "y": 5.742608,
-        "z": 12.060732
-      },
-      "width": 0.173669
     }
   ],
   "materials": [
@@ -505,58 +206,121 @@
   "name": "Automatic candidate",
   "openings": [
     {
-      "height": 1.680714,
+      "height": 2.2,
       "id": "opening-0",
-      "kind": "WINDOW",
-      "offset": 8.325906,
-      "sill": 0.346814,
-      "wallId": "ring-mass-0-0-w3",
-      "width": 1.133815
+      "kind": "DOOR",
+      "offset": 2.246155,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w0",
+      "width": 5.029133
     },
     {
-      "height": 1.771161,
+      "height": 1.227188,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 4.620666,
-      "sill": 0.359559,
-      "wallId": "ring-mass-0-0-w1",
-      "width": 0.39951
-    },
-    {
-      "height": 0.653611,
-      "id": "opening-2",
-      "kind": "WINDOW",
-      "offset": 2.602023,
-      "sill": 0.354784,
+      "offset": 0.498026,
+      "sill": 0,
       "wallId": "ring-mass-0-1-w2",
-      "width": 0.827018
+      "width": 4.33593
     },
     {
-      "height": 1.078677,
+      "height": 1.680714,
+      "id": "opening-10",
+      "kind": "WINDOW",
+      "offset": 8.012073,
+      "sill": 0.346814,
+      "wallId": "ring-mass-0-0-w3",
+      "width": 0.97772
+    },
+    {
+      "height": 2.2,
+      "id": "opening-11",
+      "kind": "DOOR",
+      "offset": 5.653845,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w2",
+      "width": 0.845596
+    },
+    {
+      "height": 0.702379,
+      "id": "opening-12",
+      "kind": "WINDOW",
+      "offset": 6.805554,
+      "sill": 0.9,
+      "wallId": "ring-mass-0-1-w2",
+      "width": 0.59642
+    },
+    {
+      "height": 2.2,
+      "id": "opening-2",
+      "kind": "DOOR",
+      "offset": 0.498026,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w1",
+      "width": 3.38643
+    },
+    {
+      "height": 1.602379,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 2.183312,
-      "sill": 0.359559,
-      "wallId": "ring-mass-0-0-w0",
-      "width": 0.372876
+      "offset": 4.52858,
+      "sill": 0,
+      "wallId": "ring-mass-0-1-w0",
+      "width": 2.873394
     },
     {
-      "height": 0.745752,
+      "height": 2.2,
       "id": "opening-4",
-      "kind": "WINDOW",
-      "offset": 6.857579,
-      "sill": 0.545997,
-      "wallId": "ring-mass-0-0-w0",
-      "width": 0.372876
+      "kind": "DOOR",
+      "offset": 0.74006,
+      "sill": 0,
+      "wallId": "ring-mass-1-0-w2",
+      "width": 2.911914
     },
     {
-      "height": 0.426144,
+      "height": 1.602379,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 7.017383,
-      "sill": 1.358334,
-      "wallId": "ring-mass-0-0-w0",
-      "width": 0.559314
+      "offset": 0.498026,
+      "sill": 0,
+      "wallId": "ring-mass-0-1-w0",
+      "width": 2.800952
+    },
+    {
+      "height": 2.2,
+      "id": "opening-6",
+      "kind": "DOOR",
+      "offset": 5.814621,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w3",
+      "width": 1.668889
+    },
+    {
+      "height": 2.2,
+      "id": "opening-7",
+      "kind": "DOOR",
+      "offset": 2.505113,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w2",
+      "width": 1.536262
+    },
+    {
+      "height": 2.2,
+      "id": "opening-8",
+      "kind": "DOOR",
+      "offset": 10.45104,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w1",
+      "width": 1.139083
+    },
+    {
+      "height": 2.2,
+      "id": "opening-9",
+      "kind": "DOOR",
+      "offset": 2.028541,
+      "sill": 0,
+      "wallId": "ring-mass-1-0-w0",
+      "width": 0.998609
     }
   ],
   "railings": [],
@@ -979,7 +743,7 @@
         "x": 7.9,
         "z": 0
       },
-      "height": 1.61,
+      "height": 4.89,
       "id": "ring-mass-0-1-w0",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
@@ -1000,7 +764,7 @@
         "x": 7.9,
         "z": 12.61
       },
-      "height": 1.61,
+      "height": 4.89,
       "id": "ring-mass-0-1-w1",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
@@ -1021,7 +785,7 @@
         "x": 0,
         "z": 12.61
       },
-      "height": 1.61,
+      "height": 4.89,
       "id": "ring-mass-0-1-w2",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
@@ -1042,7 +806,7 @@
         "x": 0,
         "z": 0
       },
-      "height": 1.61,
+      "height": 4.89,
       "id": "ring-mass-0-1-w3",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
@@ -1149,16 +913,6 @@
       "frameInset": 0.12,
       "frameWidth": 0.07,
       "glassThickness": 0.024,
-      "id": "opening-0-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-0"
-    },
-    {
-      "divisions": 1,
-      "frameDepth": 0.08,
-      "frameInset": 0.12,
-      "frameWidth": 0.07,
-      "glassThickness": 0.024,
       "id": "opening-1-w",
       "materialId": "mat-glass",
       "openingId": "opening-1"
@@ -1169,9 +923,19 @@
       "frameInset": 0.12,
       "frameWidth": 0.07,
       "glassThickness": 0.024,
-      "id": "opening-2-w",
+      "id": "opening-10-w",
       "materialId": "mat-glass",
-      "openingId": "opening-2"
+      "openingId": "opening-10"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-12-w",
+      "materialId": "mat-glass",
+      "openingId": "opening-12"
     },
     {
       "divisions": 1,
@@ -1182,16 +946,6 @@
       "id": "opening-3-w",
       "materialId": "mat-glass",
       "openingId": "opening-3"
-    },
-    {
-      "divisions": 1,
-      "frameDepth": 0.08,
-      "frameInset": 0.12,
-      "frameWidth": 0.07,
-      "glassThickness": 0.024,
-      "id": "opening-4-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-4"
     },
     {
       "divisions": 1,
