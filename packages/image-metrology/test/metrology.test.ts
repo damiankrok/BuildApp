@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
-import { drawingCharacter, measureVertical, silhouetteTop, verticalOpeningExtent } from '../src/index.js'
+import { drawingCharacter, measureVertical, registrationOverlay, silhouetteTop, verticalOpeningExtent } from '../src/index.js'
 import { measureOpening, medianOf, paint, registerScene } from './scene.js'
 import type { Opening, Painted, Scene } from './scene.js'
 
@@ -354,5 +354,42 @@ describe('the profile of a drawing', () => {
     expect(height(2)).toBeGreaterThan(5.5)
     expect(height(10)).toBeLessThan(3.5)
     expect(height(10)).toBeGreaterThan(2.5)
+  })
+})
+
+/** §22: the picture with everything the registration believes drawn on it. */
+describe('§22: the overlay', () => {
+  const painted = paint(SCENE_A, 120)
+  const frame = registerScene(painted.raster, SCENE_A)!
+
+  it('draws every anchor, its residual and which one was held back', () => {
+    const svg = registrationOverlay(frame, { width: painted.raster.width, height: painted.raster.height })
+    for (const anchor of frame.anchors) expect(svg, anchor.id).toContain(anchor.id)
+    expect(svg).toContain('mm/px')
+    expect(svg).toContain(frame.status)
+  })
+
+  it('rules a metric grid across the drawing in its own metres', () => {
+    const svg = registrationOverlay(frame, { width: painted.raster.width, height: painted.raster.height, gridM: 1 })
+    expect(svg).toContain('grid 1 m')
+    // One line per metre across a 10 m facade and up a 6.5 m wall, at least.
+    expect(svg.split('<line').length).toBeGreaterThan(16)
+  })
+
+  it('draws each measurement where it was read, with its error bar', () => {
+    const o = SCENE_A.openings[1]
+    const U = (x: number): number => painted.originU + x * painted.pxPerMU
+    const V = (y: number): number => painted.groundV - y * painted.pxPerMV
+    const got = measureOpening(painted.raster, frame, o, { u0: U(o.x0), u1: U(o.x1), v0: V(o.y0), v1: V(o.y1) }, 14)!
+    const svg = registrationOverlay(frame, { width: painted.raster.width, height: painted.raster.height, measurements: [got.width, got.height] })
+    expect(svg).toContain(`${got.width.valueM.toFixed(3)} ± ${got.width.uncertaintyM.toFixed(3)} m`)
+    expect(svg).toContain('OPENING_WIDTH')
+  })
+
+  it('is a self-contained SVG with the drawing embedded', () => {
+    const svg = registrationOverlay(frame, { width: 10, height: 10, imageHref: 'data:image/png;base64,AAAA' })
+    expect(svg.startsWith('<svg')).toBe(true)
+    expect(svg.trimEnd().endsWith('</svg>')).toBe(true)
+    expect(svg).toContain('data:image/png;base64,AAAA')
   })
 })

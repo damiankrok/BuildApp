@@ -31,7 +31,8 @@
     "reconstruct": "vite-node packages/reconstruction/scripts/reconstruct.ts --",
     "reconstruct:marcowki": "vite-node packages/reconstruction/scripts/marcowki.ts --",
     "reconstruct:no-reference": "vite-node packages/reconstruction/scripts/no-reference.ts --",
-    "reconstruct:trace": "vite-node packages/reconstruction/scripts/trace.ts --"
+    "reconstruct:trace": "vite-node packages/reconstruction/scripts/trace.ts --",
+    "overlays": "vite-node packages/reconstruction/scripts/overlays.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",
