@@ -20,6 +20,16 @@
  * The fit is robust, and it holds one anchor back where it can afford to. A
  * least-squares fit always explains what it was fitted to; the only honest
  * test of a registration is a coordinate it has never seen.
+ *
+ * And it only fits what the anchors can actually see. The `b` terms above are
+ * unidentifiable when every anchor for an axis was read off the same scanline
+ * — which is the normal case, not a corner one, since wall faces are naturally
+ * read across a single row. Left to itself the solver happily returns a
+ * spurious cross term that explains all of those anchors to the millimetre:
+ * on a four-anchor fixture it reported a scale seventeen per cent wrong, an
+ * rms of 0.000 m and a VALID frame. Silently wrong geometry with maximum
+ * confidence is the one outcome this package must never produce, so a term the
+ * anchors cannot resolve is dropped and the fit says so.
  */
 import { round6 } from '@buildapp/source-common'
 import { huberWeights, leastSquares, median } from './linalg.js'
@@ -33,11 +43,35 @@ export type OrthographicFitOptions = {
   rounds?: number
   /** Hold one anchor per axis out of the fit and report how far the frame misses it. */
   holdOut?: boolean
-  /** Refuse a fit whose two scales differ by more than this. A facade is not a funhouse mirror. */
+  /**
+   * Refuse a fit whose two scales differ by more than this.
+   *
+   * Deliberately loose. A published raster is routinely resized
+   * anisotropically — §19 requires a 0.7 vertical squash to register, which is
+   * a ratio of 1.43 — so this is not a squareness check. It is there for the
+   * case a squareness check cannot be replaced by anything better: two anchors
+   * per axis leave no residual to inspect, and a ratio of three or four means
+   * an anchor is on the wrong feature rather than that the raster was resized.
+   */
   maxAnisotropy?: number
 }
 
-const DEFAULTS: Required<OrthographicFitOptions> = { toleranceM: 0.25, rounds: 3, holdOut: true, maxAnisotropy: 1.35 }
+/**
+ * Twelve decimals, not six.
+ *
+ * `round6` is the repo's determinism helper and it is right for a pixel
+ * coordinate, where six decimals is far more than a raster can mean. It is
+ * wrong for a metres-per-pixel coefficient: 0.008333… rounds to 0.008333,
+ * which is four significant figures, and that is a fifth of a millimetre of
+ * error per hundred pixels built into every measurement the frame ever makes.
+ * Twelve is still exactly reproducible and costs nothing.
+ */
+const exact = (v: number): number => {
+  const r = Math.round(v * 1e12) / 1e12
+  return r === 0 ? 0 : r
+}
+
+const DEFAULTS: Required<OrthographicFitOptions> = { toleranceM: 0.25, rounds: 3, holdOut: true, maxAnisotropy: 2.5 }
 
 export type OrthographicFitInput = {
   id: string
@@ -55,7 +89,13 @@ export type OrthographicFitInput = {
  * derived eaves level — then reweighted twice by Huber so that one anchor
  * placed on the wrong edge bends the line rather than breaking it.
  */
-function fitAxis(anchors: readonly MetricAnchor[], value: (a: MetricAnchor) => number | undefined, rounds: number): { a: number; b: number; c: number; residuals: Map<string, number>; used: MetricAnchor[] } | null {
+function fitAxis(
+  anchors: readonly MetricAnchor[],
+  value: (a: MetricAnchor) => number | undefined,
+  /** Which pixel coordinate this metric axis mainly runs along. */
+  primary: 'u' | 'v',
+  rounds: number,
+): { a: number; b: number; c: number; residuals: Map<string, number>; used: MetricAnchor[]; flat: boolean } | null {
   const used = anchors.filter((anchor) => value(anchor) !== undefined)
   if (used.length < 2) return null
   const rows = used.map((anchor) => [anchor.pixel.u, anchor.pixel.v, 1])
@@ -65,10 +105,25 @@ function fitAxis(anchors: readonly MetricAnchor[], value: (a: MetricAnchor) => n
   // not something any drawing can express.
   const base = used.map((anchor) => 1 / Math.max(1e-3, anchor.metricSigma) ** 2)
 
-  // With only two anchors the plane is under-determined in v; drop the v term
-  // and fit a line, which is exactly what a pair of wall faces supports.
-  const flat = used.length < 3
-  const design = flat ? rows.map((row) => [row[0], row[2]]) : rows
+  // Which columns the anchors can actually resolve.
+  //
+  // WHICH term to drop depends on the axis. A facade coordinate runs along u
+  // and a height runs along v, so dropping v for both would fit height against
+  // horizontal position — a number that means nothing, and one that two
+  // anchors at different places on the facade will happily produce.
+  const keep = primary === 'u' ? 0 : 1
+  const cross = 1 - keep
+  const spread = (j: number): number => {
+    const values = rows.map((row) => row[j])
+    return Math.max(...values) - Math.min(...values)
+  }
+  // The cross term is worth fitting only when the anchors move along it enough
+  // to say anything. Below a tenth of their spread along the primary axis it
+  // is fitted to rounding, and a rank-deficient system does not announce
+  // itself: it returns an exact fit and a wrong scale.
+  const crossSpread = spread(cross)
+  const flat = used.length < 3 || crossSpread < 0.1 * spread(keep)
+  const design = flat ? rows.map((row) => [row[keep], row[2]]) : rows
   let weights = base
   let solution = leastSquares(design, values, weights)
   if (!solution) return null
@@ -81,12 +136,17 @@ function fitAxis(anchors: readonly MetricAnchor[], value: (a: MetricAnchor) => n
     if (!next) break
     solution = next
   }
-  const coefficients = flat ? { a: solution[0], b: 0, c: solution[1] } : { a: solution[0], b: solution[1], c: solution[2] }
+  const coefficients = flat
+    ? primary === 'u'
+      ? { a: solution[0], b: 0, c: solution[1] }
+      : { a: 0, b: solution[0], c: solution[1] }
+    : { a: solution[0], b: solution[1], c: solution[2] }
+  if (!Number.isFinite(coefficients.a) || !Number.isFinite(coefficients.b) || !Number.isFinite(coefficients.c)) return null
   const residuals = new Map<string, number>()
   used.forEach((anchor, i) => {
     residuals.set(anchor.id, values[i] - (coefficients.a * anchor.pixel.u + coefficients.b * anchor.pixel.v + coefficients.c))
   })
-  return { ...coefficients, residuals, used }
+  return { ...coefficients, residuals, used, flat }
 }
 
 /**
@@ -118,8 +178,8 @@ export function registerOrthographic(input: OrthographicFitInput, options: Ortho
   }
   const fitting = anchors.filter((a) => !heldOut.has(a.id))
 
-  const horizontal = fitAxis(fitting, (a) => a.metric.x, opt.rounds)
-  const vertical = fitAxis(fitting, (a) => a.metric.y, opt.rounds)
+  const horizontal = fitAxis(fitting, (a) => a.metric.x, 'u', opt.rounds)
+  const vertical = fitAxis(fitting, (a) => a.metric.y, 'v', opt.rounds)
 
   const residuals: AnchorResidual[] = []
   const allResidualsM: number[] = []
@@ -166,8 +226,18 @@ export function registerOrthographic(input: OrthographicFitInput, options: Ortho
     why,
   })
 
-  if (!horizontal) return failed(`only ${horizontalAnchors.length} anchor states a horizontal coordinate, and a scale needs two`)
-  if (!vertical) return failed(`only ${verticalAnchors.length} anchor states a height, and a scale needs two`)
+  if (!horizontal) {
+    return failed(
+      horizontalAnchors.length < 2
+        ? `only ${horizontalAnchors.length} anchor states a horizontal coordinate, and a scale needs two`
+        : `${horizontalAnchors.length} anchors state a horizontal coordinate but they do not pin a scale between them`,
+    )
+  }
+  if (!vertical) {
+    return failed(
+      verticalAnchors.length < 2 ? `only ${verticalAnchors.length} anchor states a height, and a scale needs two` : `${verticalAnchors.length} anchors state a height but they do not pin a scale between them`,
+    )
+  }
 
   const metresPerPixelU = Math.hypot(horizontal.a, vertical.a)
   const metresPerPixelV = Math.hypot(horizontal.b, vertical.b)
@@ -195,14 +265,14 @@ export function registerOrthographic(input: OrthographicFitInput, options: Ortho
 
   const transform: OrthographicTransform = {
     kind: 'ORTHOGRAPHIC_AFFINE',
-    ax: round6(horizontal.a),
-    bx: round6(horizontal.b),
-    cx: round6(horizontal.c),
-    ay: round6(vertical.a),
-    by: round6(vertical.b),
-    cy: round6(vertical.c),
-    metresPerPixelU: round6(metresPerPixelU),
-    metresPerPixelV: round6(metresPerPixelV),
+    ax: exact(horizontal.a),
+    bx: exact(horizontal.b),
+    cx: exact(horizontal.c),
+    ay: exact(vertical.a),
+    by: exact(vertical.b),
+    cy: exact(vertical.c),
+    metresPerPixelU: exact(metresPerPixelU),
+    metresPerPixelV: exact(metresPerPixelV),
     anisotropy: round6(anisotropy),
     scaleSigmaU: round6(scaleSigmaU),
     scaleSigmaV: round6(scaleSigmaV),
@@ -245,7 +315,9 @@ export function registerOrthographic(input: OrthographicFitInput, options: Ortho
     why:
       `${horizontal.used.length} horizontal and ${vertical.used.length} vertical anchors over ${spanX.toFixed(2)} × ${spanY.toFixed(2)} m give ` +
       `${(metresPerPixelU * 1000).toFixed(1)} and ${(metresPerPixelV * 1000).toFixed(1)} mm per pixel, ${rmsM.toFixed(3)} m rms` +
-      (held.length > 0 ? `; ${held.length} anchor${held.length === 1 ? '' : 's'} held out and missed by ${heldWorst.toFixed(3)} m` : '') +
+      (held.length > 0
+        ? `; ${held.length} anchor${held.length === 1 ? '' : 's'} held out and missed by ${heldWorst.toFixed(3)} m`
+        : '; with no anchor to spare none was held back, so nothing here has been checked against a coordinate the fit did not already see') +
       (outliers > 0 ? `; ${outliers} anchor${outliers === 1 ? '' : 's'} beyond tolerance` : ''),
   }
 }

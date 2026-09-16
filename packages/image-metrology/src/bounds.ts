@@ -334,19 +334,47 @@ export function architecturalBounds(source: Raster | Gray, options: BoundsOption
 }
 
 /**
- * Refine an expected line to the strongest long straight edge near it.
+ * Refine an expected line to the straight edge nearest it.
  *
  * §6's job, and the one that makes the whole package honest: a detector only
  * has to say "the wall is about here", and this says where it actually is, to
  * a fraction of a pixel. The sub-pixel step is a gradient-weighted centroid
  * across the edge, which is what turns a five-pixel guess into a nine-
  * centimetre measurement on a 17 mm-per-pixel drawing.
+ *
+ * Lines are ranked by COVERAGE — how much of the search window they are drawn
+ * across, counting every segment long enough to be drawn on purpose — and not
+ * by their longest unbroken run. Finding the building wants the unbroken run,
+ * because that is what a tree has none of. Refining a line that is already
+ * known to be there wants coverage, because §7's mullions break the head of a
+ * window into four pieces and none of them is long. A head covered 99% by four
+ * segments is the head; insisting on one run of 60% finds nothing at all, and
+ * a run of glazing is exactly the opening whose width matters most.
  */
-export type RefinedEdge = { atPx: number; sigmaPx: number; lengthPx: number; strength: number; why: string }
+export type RefinedEdge = {
+  atPx: number
+  sigmaPx: number
+  /** How much of the search window the edge is drawn across, in pixels. */
+  lengthPx: number
+  /** In how many pieces. More than one is a mullion, a downpipe or a balcony. */
+  segments: number
+  strength: number
+  why: string
+}
 
 export function refineEdge(
   source: Raster | Gray,
-  options: { axis: 'VERTICAL' | 'HORIZONTAL'; nearPx: number; searchPx: number; within?: { from: number; to: number }; minStrength?: number; minRunFraction?: number },
+  options: {
+    axis: 'VERTICAL' | 'HORIZONTAL'
+    nearPx: number
+    searchPx: number
+    within?: { from: number; to: number }
+    minStrength?: number
+    /** How much of the window the edge must be drawn across, counting all its pieces. */
+    minCoverageFraction?: number
+    /** And how short a piece has to be before it is noise rather than a piece. */
+    minSegmentFraction?: number
+  },
 ): RefinedEdge | null {
   const g = grayOf(source)
   const minStrength = options.minStrength ?? 8
@@ -354,35 +382,41 @@ export function refineEdge(
   const across = options.axis === 'VERTICAL' ? g.width : g.height
   const from = Math.max(1, Math.floor(options.within?.from ?? 1))
   const to = Math.min(along - 2, Math.ceil(options.within?.to ?? along - 2))
-  const minRun = Math.max(6, Math.round((to - from) * (options.minRunFraction ?? 0.5)))
+  const window = Math.max(1, to - from)
+  const minCoverage = Math.max(4, window * (options.minCoverageFraction ?? 0.5))
+  const minSegment = Math.max(3, window * (options.minSegmentFraction ?? 0.04))
   const gradient = (at: number, t: number): number =>
     options.axis === 'VERTICAL' ? Math.abs(g.data[t * g.width + at + 1] - g.data[t * g.width + at - 1]) : Math.abs(g.data[(at + 1) * g.width + t] - g.data[(at - 1) * g.width + t])
 
   const lo = Math.max(1, Math.round(options.nearPx - options.searchPx))
   const hi = Math.min(across - 2, Math.round(options.nearPx + options.searchPx))
-  let best: { at: number; run: number; sum: number } | null = null
+  let best: { at: number; covered: number; segments: number; sum: number } | null = null
   for (let at = lo; at <= hi; at += 1) {
     let run = 0
-    let longest = 0
     let sum = 0
-    let bestSum = 0
+    let covered = 0
+    let segments = 0
+    let total = 0
+    const close = (): void => {
+      if (run >= minSegment) {
+        covered += run
+        segments += 1
+        total += sum
+      }
+      run = 0
+      sum = 0
+    }
     for (let t = from; t <= to; t += 1) {
       if (gradient(at, t) >= minStrength) {
         run += 1
         sum += gradient(at, t)
-        if (run > longest) {
-          longest = run
-          bestSum = sum
-        }
-      } else {
-        run = 0
-        sum = 0
-      }
+      } else close()
     }
-    if (longest < minRun) continue
-    // Longest first, then strongest: a wall edge beats a shadow beside it
-    // because it runs further, not because it is darker.
-    if (!best || longest > best.run || (longest === best.run && bestSum > best.sum)) best = { at, run: longest, sum: bestSum }
+    close()
+    if (covered < minCoverage) continue
+    // Most covered first, then hardest drawn: a wall edge beats a shadow
+    // beside it because it is drawn further, not because it is darker.
+    if (!best || covered > best.covered || (covered === best.covered && total > best.sum)) best = { at, covered, segments, sum: total }
   }
   if (!best) return null
 
@@ -413,12 +447,15 @@ export function refineEdge(
     for (let i = 0; i < profile.length; i += 1) spread += profile[i] * (lo3 + i - centre) ** 2
     spread = Math.sqrt(spread / weight)
   }
-  const sigma = Math.max(0.25, Math.min(3, spread / Math.sqrt(Math.max(1, best.run))))
+  const sigma = Math.max(0.25, Math.min(3, spread / Math.sqrt(Math.max(1, best.covered))))
   return {
     atPx: round6(centre),
     sigmaPx: round6(sigma),
-    lengthPx: best.run,
-    strength: round6(best.sum / Math.max(1, best.run)),
-    why: `the strongest straight ${options.axis.toLowerCase()} edge within ${options.searchPx} px of ${Math.round(options.nearPx)} runs ${best.run} px at ${(best.sum / Math.max(1, best.run)).toFixed(0)}/255 contrast, centred at ${centre.toFixed(2)} px`,
+    lengthPx: best.covered,
+    segments: best.segments,
+    strength: round6(best.sum / Math.max(1, best.covered)),
+    why:
+      `the straightest ${options.axis.toLowerCase()} edge within ${options.searchPx} px of ${Math.round(options.nearPx)} is drawn across ${best.covered} of ${window} px` +
+      `${best.segments > 1 ? ` in ${best.segments} pieces` : ''} at ${(best.sum / Math.max(1, best.covered)).toFixed(0)}/255 contrast, centred at ${centre.toFixed(2)} px with a profile ${spread.toFixed(2)} px wide`,
   }
 }
