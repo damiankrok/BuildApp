@@ -167,7 +167,7 @@ build.
 ## The package
 
 `packages/image-metrology` — no React, no Three.js, no knowledge of any
-particular building. 93 tests of its own.
+particular building. 104 tests of its own.
 
 - `bounds.ts` — finding the building in the picture. Straightness, with the
   gradient threshold **derived from the image** rather than fixed: a
@@ -203,6 +203,16 @@ particular building. 93 tests of its own.
   and `heightByCrossRatio` are §12's fallback: where a camera cannot be
   solved, a family of parallel lines still meets at a point, and one vertical
   of known height measures any other on the same ground.
+
+- `fuse.ts` — §13 and §24. One semantic quantity observed several times, and
+  what to believe. Authority decides the kind of source and precision decides
+  between two of the same kind, so the weight is `rank / σ²`; the loss is
+  robust because a measurement that has found the wrong feature is not a
+  little wrong but a different number about a different thing. Two sources
+  that agree produce a value tighter than either; two that disagree produce
+  the same value with the disagreement as its error bar, the offending source
+  named, and the status saying DISPUTED. A quantity measured once comes back
+  marked SINGLE_SOURCE, which is the thing a caller most needs to know.
 
 ### The metric frame
 
@@ -303,7 +313,7 @@ measure from a render and said so.
 | gate | result |
 | --- | --- |
 | `npm run typecheck` | clean |
-| `npm test` | **1056 tests, 82 files, all passing** |
+| `npm test` | **1067 tests, 83 files, all passing** |
 | `npm run build` | clean |
 | `npm run audit:marcowki` | AUDIT PASS |
 | `npm run audit:marcowki:facades` | 47 features: 36 pass, 9 deviation, 2 not modelled, worst 0.185 m |
@@ -316,7 +326,7 @@ measure from a render and said so.
 
 | # | condition | where |
 | --- | --- | --- |
-| 1 | a real image-metrology package exists | `packages/image-metrology`, 93 tests |
+| 1 | a real image-metrology package exists | `packages/image-metrology`, 104 tests |
 | 2 | technical elevations have metric registrations | the four frames above, and `stage-reports/artifacts/image-metrology/` |
 | 3 | opening sizes come from pixel-to-metre measurement, not only OCR | every width is measured; **no callout was read at all** on this project |
 | 4 | perspective facade planes can be rectified via homography | `registerPerspectivePlane`, §20 D within 0.08 m |
@@ -336,10 +346,13 @@ measure from a render and said so.
 Stated plainly, because the brief asks for a great deal and some of it is
 untouched.
 
-- **§13's multi-view joint fit.** Not built. Each drawing is registered
-  independently, and the agreement between the four elevations — 16.26 to
-  16.49 mm/px, a 0.9% spread on four independent measurements of one building
-  — is reported rather than used as a constraint.
+- **§13's joint objective is built but not wired in.** `fuseQuantity` fuses
+  several measurements of one quantity under §24's authority order with a
+  robust loss and per-source residuals, and is tested; the reconstruction does
+  not yet route its opening measurements through it. Each drawing is still
+  registered independently, and the agreement between the four elevations —
+  16.26 to 16.49 mm/px, a 0.9% spread on four independent measurements of one
+  building — is reported rather than used as a constraint.
 - **The perspective path is not wired into the reconstruction.** `homography.ts`
   and `camera.ts` are built and tested against a stated camera, and the
   pipeline does not yet call them: this project's perspective renders are

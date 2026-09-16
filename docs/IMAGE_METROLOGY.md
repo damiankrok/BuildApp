@@ -257,11 +257,37 @@ same ground follows from a cross-ratio — no camera, no focal length, no plane
 fit. It is a fallback and it is ranked as one: what it must never do is
 outrank a printed dimension.
 
+## One quantity, several drawings: `fuseQuantity`
+
+A semantic opening is observed more than once: the plan draws its gap, an
+elevation shows its reveals, a callout prints its size, a render shows it
+foreshortened. They will not agree.
+
+Two different questions decide the answer. **Authority** is about the kind of
+source — a printed dimension is the publisher stating the number, a
+measurement off a registered drawing is this pipeline reading it, a convention
+is nobody measuring anything — and that order is not negotiable by a source
+being very sure of itself. **Precision** is about the individual measurement,
+and two readings of the same authority combine by inverse variance, which is
+the reason every measurement here carries a computed uncertainty.
+
+The loss is robust because the failure that matters is not noise: a
+measurement that has found the wrong feature is a different number about a
+different thing, and least squares given one of those moves most of the way
+towards it.
+
+What it deliberately does not do is hide the disagreement. Sources that agree
+within their own error bars produce a value tighter than any of them; sources
+that do not produce the same value with the disagreement stated, the offending
+source named, and the status saying so.
+
 ## What this package does not do
 
-- **No multi-view fit.** Each drawing is registered independently. Where four
-  elevations of one building agree to 0.9% on the scale, that agreement is
-  reported rather than used as a constraint.
+- **No joint multi-view registration.** `fuseQuantity` combines finished
+  measurements; it does not re-fit several drawings against each other. Each
+  is registered independently, and where four elevations of one building agree
+  to 0.9% on the scale, that agreement is reported rather than used as a
+  constraint.
 - **No gable apex.** An apex is where two diagonals meet, so there is no long
   horizontal or vertical edge there at all. `rect` reaches it only when
   something rectilinear — usually a chimney — happens to stand as tall, and
