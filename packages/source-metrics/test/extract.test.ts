@@ -3,7 +3,7 @@ import { LARCHFIELD, renderElevation, renderGroundPlan, renderSection } from '@b
 import { sha256Hex } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { Raster } from '@buildapp/source-cv'
-import { MetricEvidenceSetSchema, extractMetricEvidence, metricEvidenceContentHash } from '../src/index.js'
+import { METRIC_EVIDENCE_SCHEMA_VERSION, MetricEvidenceSetSchema, extractMetricEvidence, findingOf, metricEvidenceContentHash, readSpecifications } from '../src/index.js'
 
 /**
  * The whole metric pass, run on a house that exists nowhere but in the fixture.
@@ -62,7 +62,7 @@ describe('the metric pass, end to end on a house the pipeline has never seen', (
 
   it('produces a valid, sealed, self-describing set', () => {
     expect(MetricEvidenceSetSchema.safeParse(set).success).toBe(true)
-    expect(set.schemaVersion).toBe('1.0.0')
+    expect(set.schemaVersion).toBe(METRIC_EVIDENCE_SCHEMA_VERSION)
     expect(set.contentHash).toMatch(/^[0-9a-f]{64}$/)
     expect(set.id).toContain(set.contentHash.slice(0, 16))
     expect(set.sourcePackageHash).toBe('b'.repeat(64))
@@ -169,5 +169,66 @@ describe('the content hash', () => {
     const set = run()
     const shuffled = { ...set, evidence: [...set.evidence].reverse(), ocrTokens: [...set.ocrTokens].reverse(), chains: [...set.chains].reverse() }
     expect(metricEvidenceContentHash(shuffled)).toBe(set.contentHash)
+  })
+})
+
+/**
+ * §8 of the stage brief: a printed angle outranks a silhouette fit, and the
+ * plainest printed angle a catalogue project has is the one in the sentence
+ * the publisher wrote about its roof.
+ */
+describe('reading the publisher’s technical specification', () => {
+  const PAGE = sha256Hex('a page')
+
+  it('reads a pitch printed in words', () => {
+    const r = readSpecifications([{ key: 'roof', label: 'dach', text: 'dwuspadowy, nachylenie 40 st. , więźba drewniana' }], PAGE)
+    const angle = r.evidence.find((e) => e.kind === 'ANGLE')
+    expect(angle?.value).toBe(40)
+    expect(angle?.unit).toBe('deg')
+    expect(angle?.origin).toBe('READ')
+    expect(angle?.association.kind).toBe('PUBLISHED_SPECIFICATION')
+    expect(angle?.variantByteHash).toBe(PAGE)
+  })
+
+  it('reads the roof’s kind from the word used for it', () => {
+    expect(findingOf(readSpecifications([{ key: 'roof', label: 'dach', text: 'dwuspadowy' }], PAGE).findings, 'ROOF_KIND')?.value).toBe('GABLE')
+    expect(findingOf(readSpecifications([{ key: 'roof', label: 'dach', text: 'czterospadowy' }], PAGE).findings, 'ROOF_KIND')?.value).toBe('HIP')
+    expect(findingOf(readSpecifications([{ key: 'roof', label: 'dach', text: 'dach płaski' }], PAGE).findings, 'ROOF_KIND')?.value).toBe('FLAT')
+  })
+
+  it('believes a publisher who says the roof has no eaves', () => {
+    const r = readSpecifications([{ key: 'description', label: 'description', text: 'Charakterystyczny dwuspadowy dach bez okapów nadaje budynkowi elegancki wygląd.' }], PAGE)
+    expect(findingOf(r.findings, 'ROOF_EAVES')?.value).toBe('NONE')
+  })
+
+  it('sums a wall build-up but marks it derived, and never calls it a reading', () => {
+    const r = readSpecifications([{ key: 'walls', label: 'ściany', text: 'pustak ceramiczny 25 cm, styropian 20 cm, tynk' }], PAGE)
+    const wall = r.evidence.find((e) => e.kind === 'LINEAR_DIMENSION')
+    expect(wall?.value).toBe(45)
+    expect(wall?.origin).toBe('DERIVED')
+  })
+
+  it('refuses a number in the pitch position that cannot be a pitch', () => {
+    const r = readSpecifications([{ key: 'roof', label: 'dach', text: 'dwuspadowy, nachylenie 140 st.' }], PAGE)
+    expect(r.evidence.filter((e) => e.kind === 'ANGLE')).toEqual([])
+    expect(r.unread.length).toBe(1)
+  })
+
+  it('says nothing at all about a specification that says nothing', () => {
+    const r = readSpecifications([{ key: 'joinery', label: 'stolarka', text: 'PCV, trzyszybowa' }], PAGE)
+    expect(r.evidence).toEqual([])
+    expect(r.findings).toEqual([])
+  })
+
+  it('counts two statements of the same thing as corroboration, not as two things', () => {
+    const r = readSpecifications(
+      [
+        { key: 'roof', label: 'dach', text: 'dwuspadowy, nachylenie 40 st.' },
+        { key: 'description', label: 'description', text: 'Charakterystyczny dwuspadowy dach.' },
+      ],
+      PAGE,
+    )
+    expect(r.findings.filter((f) => f.subject === 'ROOF_KIND').length).toBe(1)
+    expect(findingOf(r.findings, 'ROOF_KIND')?.confidence).toBeGreaterThan(0.9)
   })
 })

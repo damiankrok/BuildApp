@@ -12,7 +12,7 @@
  * nothing about how a package behaves.
  */
 import type { DiscoveredCandidate, DiscoveryChannel } from './discovery.js'
-import type { PublishedFact, PublishedRoom } from './schema.js'
+import type { PublishedFact, PublishedRoom, PublishedSpecification } from './schema.js'
 import type { RoleClaim } from './roles.js'
 
 export type ProjectIdentity = { externalId?: string; name?: string; publisher: string }
@@ -43,7 +43,7 @@ export type SourceAdapter = {
   roleClaims: (candidate: DiscoveredCandidate) => RoleClaim[]
   /** A key that forces candidates into the same logical asset regardless of naming, or undefined. */
   groupKey?: (candidate: DiscoveredCandidate) => string | undefined
-  parsePublished: (ctx: AdapterContext) => { facts: PublishedFact[]; rooms: PublishedRoom[] }
+  parsePublished: (ctx: AdapterContext) => { facts: PublishedFact[]; specifications: PublishedSpecification[]; rooms: PublishedRoom[] }
 }
 
 /** Claims derived purely from the channel, common to every publisher. */

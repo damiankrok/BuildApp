@@ -73,7 +73,15 @@ async function main(): Promise<void> {
       rasterCache.set(variant.byteHash, undefined)
     }
   }
-  const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug, raster: (frame) => rasterCache.get(frame.variantByteHash) })
+  const metrics = extractMetricEvidence({
+    sourcePackageId: pkg.id,
+    sourcePackageHash: pkg.contentHash,
+    graph,
+    slug,
+    raster: (frame) => rasterCache.get(frame.variantByteHash),
+    specifications: pkg.publishedSpecifications,
+    pageHash: pkg.pageHash,
+  })
   process.stdout.write(`metric evidence: ${metrics.evidence.length} readings, ${metrics.chains.length} chains, ${metrics.coordinateRegistrations.length} registrations (${metrics.contentHash.slice(0, 16)})\n`)
 
   // --- the candidate ---

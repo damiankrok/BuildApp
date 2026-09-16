@@ -43,6 +43,7 @@ export function sourcePackageContentHash(draft: Draft): string {
     { label: 'identity', ordered: { canonicalUrl: draft.canonicalUrl, pageHash: draft.pageHash, project: draft.project, adapter: draft.adapter } },
     { label: 'assets', unordered: draft.assets.map(assetView) },
     { label: 'publishedFacts', unordered: draft.publishedFacts.map((f) => ({ key: f.key, value: f.value, unit: f.unit })) },
+    { label: 'publishedSpecifications', unordered: draft.publishedSpecifications.map((s) => ({ key: s.key, label: s.label, text: s.text })) },
     { label: 'publishedRooms', unordered: draft.publishedRooms.map((r) => ({ storey: r.storey, index: r.index, label: r.label, area: r.area })) },
     { label: 'failures', unordered: draft.failures.map((f) => ({ stage: f.stage, target: f.target, code: f.code })) },
   ])

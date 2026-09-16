@@ -1,15 +1,15 @@
 {
-  "candidateHash": "5f452153b8e6c0364f1ee2601cc833a9757d16167ea9203053de042ce70b9581",
-  "candidateId": "candidate-marcowki-5f452153b8e6c036",
-  "modelHash": "290a173abec8cbe4edc278401fa330ed2b4686229ec3e94eb4ba4eae8d59c096",
+  "candidateHash": "ee6a7ac04c9646c5ba322320839780dcc619b00b2abf890e09b02eaf96440023",
+  "candidateId": "candidate-marcowki-ee6a7ac04c9646c5",
+  "modelHash": "d78c09c7ccfe39138dac55385fef1772988d5724d12107423d16f9a7ced41b41",
   "program": [
     {
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "setModelName"
     },
     {
       "id": "bld-auto",
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "createBuilding"
     },
     {

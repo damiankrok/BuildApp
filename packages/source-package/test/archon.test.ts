@@ -7,6 +7,7 @@ import {
   archonAdapter,
   archonPublished,
   archonResolutionCandidates,
+  archonSpecifications,
   archonRoleClaims,
   assetSlug,
   captionFromSlug,
@@ -238,5 +239,56 @@ describe('published figures, from the publisher’s own markup', () => {
     const empty = archonPublished('<html><body><p>Nothing to see</p></body></html>')
     expect(empty.facts).toEqual([])
     expect(empty.rooms).toEqual([])
+  })
+})
+
+/**
+ * §8 of the stage brief needs a source-supported roof pitch, and the plainest
+ * statement of one a catalogue page carries is the sentence the publisher
+ * wrote about the roof. It is scraped as TEXT: what it means is the reading
+ * layer's business, not the adapter's.
+ */
+describe('archonSpecifications', () => {
+  const page = `
+    <div class="product-data technical-data-item">
+      <div class="product-data__item"><div class="product-data__header"><div class="product-data__title">
+        <strong>ściany:</strong> pustak ceramiczny 25 cm, styropian 20 cm, tynk
+      </div></div></div>
+      <div class="product-data__item"><div class="product-data__header"><div class="product-data__title">
+        <strong>ścianka kolankowa:</strong> 130 cm
+      </div></div></div>
+      <div class="product-data__item"><div class="product-data__header"><div class="product-data__title">
+        <strong>dach:</strong> dwuspadowy, nachylenie 40 st. , dachówka ceramiczna
+      </div></div></div>
+      <div class="product-data__item"><div class="product-data__header"><div class="product-data__title">
+        <strong>kocioł:</strong> gazowy
+      </div></div></div>
+    </div>
+    <div class="row"><div class="col-md-12 big" id="bottom-description"><p>Dach bez okapów.</p></div></div>`
+
+  it('keeps each line under a key, with the label and text as printed', () => {
+    const specs = archonSpecifications(page)
+    const roof = specs.find((s) => s.key === 'roof')
+    expect(roof?.label).toBe('dach')
+    expect(roof?.text).toBe('dwuspadowy, nachylenie 40 st. , dachówka ceramiczna')
+  })
+
+  it('separates a knee wall from the walls it is not', () => {
+    const specs = archonSpecifications(page)
+    expect(specs.find((s) => s.key === 'knee_wall')?.text).toBe('130 cm')
+    expect(specs.find((s) => s.key === 'walls')?.text).toBe('pustak ceramiczny 25 cm, styropian 20 cm, tynk')
+  })
+
+  it('keeps a line it has no key for rather than dropping it', () => {
+    expect(archonSpecifications(page).some((s) => s.key === 'other' && s.label === 'kocioł')).toBe(true)
+  })
+
+  it('takes the prose below the drawings too, because that is where a publisher says "no eaves"', () => {
+    expect(archonSpecifications(page).find((s) => s.key === 'description')?.text).toBe('Dach bez okapów.')
+  })
+
+  it('is deterministic and finds nothing in a page that has none', () => {
+    expect(archonSpecifications('<html><body><p>nothing here</p></body></html>')).toEqual([])
+    expect(JSON.stringify(archonSpecifications(page))).toBe(JSON.stringify(archonSpecifications(page)))
   })
 })

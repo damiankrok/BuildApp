@@ -170,6 +170,7 @@ function packageOf(assets: SourceAsset[]): SourcePackage {
     adapter: { id: 'archon.pl', version: '1.0.0' },
     assets,
     publishedFacts: [],
+    publishedSpecifications: [],
     publishedRooms: [],
     failures: [],
   }

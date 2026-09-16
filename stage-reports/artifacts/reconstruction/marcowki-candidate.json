@@ -1,24 +1,24 @@
 {
-  "contentHash": "5f452153b8e6c0364f1ee2601cc833a9757d16167ea9203053de042ce70b9581",
+  "contentHash": "ee6a7ac04c9646c5ba322320839780dcc619b00b2abf890e09b02eaf96440023",
   "contradictions": [],
-  "hypothesisSetHash": "7713696c8ca6069ce7034d7819ebfce70b33f7f0a54d1d3a46b4df9f045ba01e",
-  "hypothesisSetId": "hypotheses-marcowki-7713696c8ca6069c",
-  "id": "candidate-marcowki-5f452153b8e6c036",
-  "label": "Marcówki (auto)",
-  "metricEvidenceHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
-  "metricEvidenceId": "metrics-marcowki-de932f82192aed04",
-  "modelHash": "290a173abec8cbe4edc278401fa330ed2b4686229ec3e94eb4ba4eae8d59c096",
+  "hypothesisSetHash": "d0f1723060d081e91fcfe2662dbc355aaf6c58b53f10e65f86796a3da3c75065",
+  "hypothesisSetId": "hypotheses-marcowki-d0f1723060d081e9",
+  "id": "candidate-marcowki-ee6a7ac04c9646c5",
+  "label": "Automatic candidate",
+  "metricEvidenceHash": "6a7fadc29463bf278a53aaaa00f47e73799957be232f594f4b970b1457640ec9",
+  "metricEvidenceId": "metrics-marcowki-6a7fadc29463bf27",
+  "modelHash": "d78c09c7ccfe39138dac55385fef1772988d5724d12107423d16f9a7ced41b41",
   "modelId": "m-auto-marcowki",
-  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
+  "observationGraphHash": "ea76c6603a089dfc5bdcb1089cebb4d320436d56e9be1a3b69c44c41f2600a5a",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-d8cef2c4eb",
   "program": [
     {
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "setModelName"
     },
     {
       "id": "bld-auto",
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "createBuilding"
     },
     {
@@ -1298,7 +1298,7 @@
     "name": "reconstruction.solver",
     "version": "1.0.0"
   },
-  "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
+  "sourcePackageHash": "607f1b899933247a5c2b7be018689c357b79cd58ba3544596e367761f8889892",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
   "steps": [
     {

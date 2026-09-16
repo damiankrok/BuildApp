@@ -105,6 +105,7 @@ export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
     { label: 'evidence', unordered: draft.evidence.map(evidenceMember) },
     { label: 'chains', unordered: draft.chains.map(chainMember) },
     { label: 'registrations', unordered: draft.coordinateRegistrations.map(registrationMember) },
+    { label: 'specificationFindings', unordered: draft.specificationFindings.map((f) => ({ key: f.key, subject: f.subject, value: f.value })) },
     { label: 'conflicts', unordered: draft.conflicts.map(conflictMember) },
     { label: 'unresolved', unordered: draft.unresolved.map(gapMember) },
   ])

@@ -29,8 +29,8 @@ import { PixelPointSchema, PixelRectSchema } from '@buildapp/source-common'
 import { PixelGeometrySchema } from '@buildapp/source-observations'
 
 export const METRIC_EVIDENCE_SCHEMA = 'buildapp.metric-evidence-set' as const
-export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.0.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0'] as const
+export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.1.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0'] as const
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -150,6 +150,13 @@ export const AssociationKindSchema = z.enum([
   'OPENING_SYMBOL',
   'ROOM_STAMP',
   'SCALE_BAR',
+  /**
+   * The number was printed in the publisher's own technical specification
+   * rather than on a drawing. There is no geometry to attach it to and none is
+   * needed: "dach: dwuspadowy, nachylenie 40 st." states the pitch more plainly
+   * than any drawn triangle does.
+   */
+  'PUBLISHED_SPECIFICATION',
   /** The number was read but could not be attached to anything. Kept, never used as a constraint. */
   'UNATTACHED',
 ])
@@ -392,6 +399,31 @@ export const UnresolvedMetricSchema = z
   .strict()
 export type UnresolvedMetric = z.infer<typeof UnresolvedMetricSchema>
 
+/**
+ * What the publisher's printed specification says about the building, beyond
+ * its numbers.
+ *
+ * A roof's KIND and whether it has eaves are not measurements, so they are not
+ * evidence in the metric sense, and they are exactly the sort of thing that a
+ * silhouette fit will otherwise decide for itself. They are kept here, beside
+ * the pitch that came from the same sentence, because the sentence is one
+ * statement and splitting it across two artifacts loses the fact that they
+ * corroborate each other.
+ */
+export const SpecificationFindingSchema = z
+  .object({
+    /** The specification key the finding was read from. */
+    key: z.string().min(1),
+    subject: z.enum(['ROOF_KIND', 'ROOF_EAVES', 'STOREY_COUNT', 'GARAGE_PRESENT']),
+    value: z.string().min(1),
+    /** The words that said so, quoted from the specification. */
+    quote: z.string().min(1),
+    confidence: z.number().min(0).max(1),
+    why: z.string().min(1),
+  })
+  .strict()
+export type SpecificationFinding = z.infer<typeof SpecificationFindingSchema>
+
 export const MetricEvidenceSetSchema = z
   .object({
     schema: z.literal(METRIC_EVIDENCE_SCHEMA),
@@ -407,6 +439,8 @@ export const MetricEvidenceSetSchema = z
     evidence: z.array(MetricEvidenceSchema),
     chains: z.array(DimensionChainSchema),
     coordinateRegistrations: z.array(CoordinateRegistrationSchema),
+    /** Non-numeric statements from the publisher's technical specification. Empty when the package carries none. */
+    specificationFindings: z.array(SpecificationFindingSchema).default([]),
     conflicts: z.array(MetricConflictSchema),
     unresolved: z.array(UnresolvedMetricSchema),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),

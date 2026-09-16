@@ -79,7 +79,7 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   }
 
   const identity = adapter.identify(ctx)
-  const published = safely(() => adapter.parsePublished(ctx), { facts: [], rooms: [] }, failures, 'FACTS', pageUrl)
+  const published = safely(() => adapter.parsePublished(ctx), { facts: [], specifications: [], rooms: [] }, failures, 'FACTS', pageUrl)
 
   // --- discovery ----------------------------------------------------------
   let candidates = await adapter.discover(ctx)
@@ -159,6 +159,7 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
     adapter: { id: adapter.id, version: adapter.version },
     assets,
     publishedFacts: published.facts,
+    publishedSpecifications: published.specifications,
     publishedRooms: published.rooms,
     failures: failures.slice().sort((a, b) => a.stage.localeCompare(b.stage) || a.target.localeCompare(b.target) || a.code.localeCompare(b.code)),
   }

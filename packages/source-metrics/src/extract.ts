@@ -35,8 +35,11 @@ import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
 import type { ScaleAnchorInput } from './registration.js'
+import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './specifications.js'
+import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
+import { METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
 import type { Association, DimensionChain, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
 export const METRIC_READER_VERSION = '1.0.0' as const
@@ -55,6 +58,14 @@ export type ExtractOptions = {
   tolerancePx?: number
   /** Frames to read. Defaults to every frame whose projection is orthographic. */
   frameFilter?: (frame: SourceCoordinateFrame) => boolean
+  /**
+   * The publisher's printed technical specification, when the package carries
+   * one. It is read for the numbers in it — a roof pitch above all — because a
+   * printed angle is worth more than one measured off a raster.
+   */
+  specifications?: readonly PublishedSpecificationInput[]
+  /** Sha-256 of the page the specification was printed on. Required to read one. */
+  pageHash?: string
 }
 
 /** Orthographic sheets carry printed measurements; renders and site plans do not, and reading numbers off them invents scale. */
@@ -447,12 +458,33 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     }
   }
 
+  // --- what the publisher wrote down, as against what it drew ---
+  const spec = options.specifications && options.specifications.length > 0 && options.pageHash ? readSpecifications(options.specifications, options.pageHash) : undefined
+  if (spec) {
+    evidence.push(...spec.evidence)
+    for (const line of spec.unread) {
+      unresolved.push({
+        id: stableId('gap', 'specification', { key: line.key }),
+        what: `a measurement from the published specification line "${line.label}"`,
+        reason: line.why,
+        status: 'AMBIGUOUS',
+      })
+    }
+  } else if (options.specifications && options.specifications.length > 0) {
+    unresolved.push({
+      id: stableId('gap', 'specification', { key: 'page-hash' }),
+      what: "the publisher's printed technical specification",
+      reason: 'the specification was supplied without the hash of the page it was printed on, and a reading is only valid for the bytes it came from',
+      status: 'NOT_ATTEMPTED',
+    })
+  }
+
   // --- disagreements between sheets ---
   conflicts.push(...scaleConflicts(registrations, graph.coordinateFrames))
 
   const draft: MetricEvidenceDraft = {
     schema: 'buildapp.metric-evidence-set',
-    schemaVersion: '1.0.0',
+    schemaVersion: METRIC_EVIDENCE_SCHEMA_VERSION,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,
     observationGraphId: graph.id,
@@ -462,11 +494,13 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       { name: 'metrics.dimension-lines', version: METRIC_READER_VERSION },
       { name: 'metrics.chain-solver', version: METRIC_READER_VERSION },
       { name: 'metrics.axis-aligned-affine', version: '1' },
+      { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
     chains: chains.sort((a, b) => a.id.localeCompare(b.id)),
     coordinateRegistrations: registrations.sort((a, b) => a.id.localeCompare(b.id)),
+    specificationFindings: (spec?.findings ?? []).slice(),
     conflicts: conflicts.sort((a, b) => a.id.localeCompare(b.id)),
     unresolved: unresolved.sort((a, b) => a.id.localeCompare(b.id)),
   }

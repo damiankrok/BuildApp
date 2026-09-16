@@ -60,6 +60,7 @@ export function scene(drawings: readonly SceneDrawing[]): { pkg: SourcePackage; 
     adapter: { id: 'example.test', version: '1.0.0' },
     assets,
     publishedFacts: [],
+    publishedSpecifications: [],
     publishedRooms: [],
     failures: [],
   }

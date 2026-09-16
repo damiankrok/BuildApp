@@ -27,8 +27,8 @@ import { z } from 'zod'
 import { PixelSizeSchema } from '@buildapp/source-common'
 
 export const SOURCE_PACKAGE_SCHEMA = 'buildapp.source-package' as const
-export const SOURCE_PACKAGE_SCHEMA_VERSION = '1.0.0' as const
-export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0'] as const
+export const SOURCE_PACKAGE_SCHEMA_VERSION = '1.1.0' as const
+export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0', '1.1.0'] as const
 
 // ---------------------------------------------------------------------------
 // Roles — multi-dimensional, independently UNKNOWN-able
@@ -157,6 +157,34 @@ export const PublishedFactSchema = z
   .strict()
 export type PublishedFact = z.infer<typeof PublishedFactSchema>
 
+/**
+ * A line of the publisher's technical specification, as printed.
+ *
+ * Distinct from a published FACT, and the distinction matters. A fact is an
+ * aggregate — a floor area, a volume — from which no geometry may be derived,
+ * because an area is a sum and a sum does not say what it is a sum of. A
+ * specification is the opposite: a direct statement about the building's
+ * construction, in the publisher's own words. "dach: dwuspadowy, nachylenie 40
+ * st." states a roof kind and a roof pitch, and it states them more plainly
+ * than any drawing does.
+ *
+ * The text is kept whole and unparsed. Turning "25 cm + 20 cm" into a wall
+ * thickness is a reading, readings belong in the metric layer where they can
+ * carry an association and a confidence, and a package that parsed them here
+ * would be deciding what they mean before anything has looked at the drawings.
+ */
+export const PublishedSpecificationSchema = z
+  .object({
+    /** A stable key for the subject, from the publisher's own label: `roof`, `walls`, `windows`. `UNKNOWN` when the label is not one this adapter recognises. */
+    key: z.string().min(1),
+    /** The label exactly as printed, in the publisher's language. */
+    label: z.string().min(1),
+    /** The text after the label, exactly as printed. */
+    text: z.string().min(1),
+  })
+  .strict()
+export type PublishedSpecification = z.infer<typeof PublishedSpecificationSchema>
+
 export const PublishedRoomSchema = z
   .object({
     storey: StoreyRoleSchema,
@@ -211,6 +239,7 @@ export const SourcePackageSchema = z
     adapter: z.object({ id: z.string().min(1), version: z.string().min(1) }).strict(),
     assets: z.array(SourceAssetSchema),
     publishedFacts: z.array(PublishedFactSchema),
+    publishedSpecifications: z.array(PublishedSpecificationSchema),
     publishedRooms: z.array(PublishedRoomSchema),
     failures: z.array(AcquisitionFailureSchema),
     /** Hash of everything above that is content. Excludes fetch timings and any wall-clock value. */

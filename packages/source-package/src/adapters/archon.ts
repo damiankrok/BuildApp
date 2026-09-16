@@ -32,7 +32,7 @@ import { slugify } from '@buildapp/source-common'
 import { CHANNEL_TRUST, decodeEntities, discoverEndpoints, discoverImages, stripScripts, type DiscoveredCandidate } from '../discovery.js'
 import type { AdapterContext, ProjectIdentity, SourceAdapter } from '../adapter.js'
 import type { RoleClaim } from '../roles.js'
-import type { PublishedFact, PublishedRoom, StoreyRole } from '../schema.js'
+import type { PublishedFact, PublishedRoom, PublishedSpecification, StoreyRole } from '../schema.js'
 
 export const ARCHON_ADAPTER_ID = 'archon.pl'
 export const ARCHON_ADAPTER_VERSION = '1.0.0'
@@ -201,7 +201,73 @@ export function parsePlNumber(text: string): number | null {
 
 const stripTags = (html: string): string => decodeEntities(html.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim()
 
-export function archonPublished(html: string): { facts: PublishedFact[]; rooms: PublishedRoom[] } {
+/**
+ * Canonical keys for the subjects this publisher writes a specification line
+ * about, matched on the deaccented label it prints.
+ *
+ * Deliberately small and deliberately not exhaustive: a line whose label is
+ * not here is still kept, under the key `other`, because the reading layer
+ * searches the text and an unrecognised label is a reason to read it, not a
+ * reason to throw it away.
+ */
+const SPEC_KEYS: Array<{ test: RegExp; key: string }> = [
+  { test: /^dach\b/, key: 'roof' },
+  { test: /^scianka kolankowa/, key: 'knee_wall' },
+  { test: /^scian/, key: 'walls' },
+  { test: /^strop/, key: 'floor_structure' },
+  { test: /^fundament/, key: 'foundation' },
+  { test: /^stolarka|^okna|^drzwi/, key: 'joinery' },
+  { test: /^brama gara/, key: 'garage_door' },
+  { test: /^komin/, key: 'chimney' },
+  { test: /^schod/, key: 'stairs' },
+  { test: /^taras|^balkon/, key: 'terrace' },
+  { test: /^elewacj/, key: 'facade' },
+]
+
+/**
+ * The publisher's technical specification list, and its prose description.
+ *
+ * Both are printed statements about the building, and between them they carry
+ * things no drawing states as plainly: the roof's kind and pitch in words, the
+ * wall build-up in centimetres, the height of a knee wall, and whether the
+ * roof has eaves at all. They are returned as text and nothing here decides
+ * what they mean.
+ */
+export function archonSpecifications(html: string): PublishedSpecification[] {
+  const text = stripScripts(html)
+  const out: PublishedSpecification[] = []
+  const seen = new Set<string>()
+  const push = (key: string, label: string, body: string): void => {
+    const trimmed = body.replace(/\s+/g, ' ').trim()
+    if (trimmed.length < 3) return
+    const dedupe = `${key}::${trimmed}`
+    if (seen.has(dedupe)) return
+    seen.add(dedupe)
+    out.push({ key, label, text: trimmed })
+  }
+
+  for (const m of text.matchAll(/<div[^>]*class="[^"]*technical-data-item[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]*class="[^"]*technical-data-item|$)/gi)) {
+    for (const item of m[1].matchAll(/class="product-data__title"[^>]*>\s*<strong>([\s\S]*?)<\/strong>([\s\S]*?)<\/div>/gi)) {
+      const label = stripTags(item[1]).replace(/:\s*$/, '')
+      const body = stripTags(item[2])
+      if (label.length === 0) continue
+      const slug = deaccent(label)
+      push(SPEC_KEYS.find((k) => k.test.test(slug))?.key ?? 'other', label, body)
+    }
+  }
+
+  const meta = /<meta[^>]*name="description"[^>]*content="([^"]+)"/i.exec(html)
+  if (meta) push('summary', 'meta description', decodeEntities(meta[1]))
+  // The prose below the drawings is marketing copy, and it is also the only
+  // place this publisher says things like "a gable roof with no eaves" — which
+  // is a statement about the building's geometry however it was meant.
+  const prose = /<div[^>]*id="bottom-description"[^>]*>([\s\S]*?)<\/div>/i.exec(text)
+  if (prose) push('description', 'description', stripTags(prose[1]))
+  out.sort((a, b) => a.key.localeCompare(b.key) || a.label.localeCompare(b.label) || a.text.localeCompare(b.text))
+  return out
+}
+
+export function archonPublished(html: string): { facts: PublishedFact[]; specifications: PublishedSpecification[]; rooms: PublishedRoom[] } {
   const text = stripScripts(html)
   const facts: PublishedFact[] = []
   const seen = new Set<string>()
@@ -242,7 +308,7 @@ export function archonPublished(html: string): { facts: PublishedFact[]; rooms: 
   }
   rooms.sort((a, b) => a.storey.localeCompare(b.storey) || a.index - b.index)
   facts.sort((a, b) => a.key.localeCompare(b.key))
-  return { facts, rooms }
+  return { facts, specifications: archonSpecifications(html), rooms }
 }
 
 // ---------------------------------------------------------------------------

@@ -11078,7 +11078,7 @@
     }
   ],
   "conflicts": [],
-  "contentHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
+  "contentHash": "6a7fadc29463bf278a53aaaa00f47e73799957be232f594f4b970b1457640ec9",
   "coordinateRegistrations": [
     {
       "anchors": [
@@ -17061,6 +17061,84 @@
       "unit": "m",
       "value": 4.67,
       "variantByteHash": "2201a9c1186d2f0cd4e10a747ce39f1b36d08d48781fca980bcdf22b2d27e188"
+    },
+    {
+      "alternatives": [],
+      "assetId": "asset-published-page",
+      "association": {
+        "kind": "PUBLISHED_SPECIFICATION",
+        "observationIds": [],
+        "score": 0.85,
+        "why": "the height of the knee wall, printed in the specification"
+      },
+      "confidence": 0.85,
+      "frameId": "frame-published-page",
+      "id": "metric-spec-knee-wall-linear-dimension-5243dfcc8f",
+      "kind": "LINEAR_DIMENSION",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "ścianka kolankowa: 130 cm",
+        "extractor": "PACKAGE_METADATA",
+        "name": "published-specification-reader@1.0.0"
+      },
+      "rawText": "130 cm",
+      "unit": "cm",
+      "value": 130,
+      "variantByteHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063"
+    },
+    {
+      "alternatives": [],
+      "assetId": "asset-published-page",
+      "association": {
+        "kind": "PUBLISHED_SPECIFICATION",
+        "observationIds": [],
+        "score": 0.92,
+        "why": "the publisher prints the roof pitch as \"40 st.\""
+      },
+      "confidence": 0.92,
+      "frameId": "frame-published-page",
+      "id": "metric-spec-roof-angle-a196295353",
+      "kind": "ANGLE",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "dach: dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO",
+        "extractor": "PACKAGE_METADATA",
+        "name": "published-specification-reader@1.0.0"
+      },
+      "rawText": "40 st.",
+      "unit": "deg",
+      "value": 40,
+      "variantByteHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063"
+    },
+    {
+      "alternatives": [],
+      "assetId": "asset-published-page",
+      "association": {
+        "kind": "PUBLISHED_SPECIFICATION",
+        "observationIds": [],
+        "score": 0.7,
+        "why": "2 layers of wall build-up printed in the specification, summed; a render coat is usually not given a thickness and is not in this number"
+      },
+      "confidence": 0.7,
+      "frameId": "frame-published-page",
+      "id": "metric-spec-walls-linear-dimension-59bab51979",
+      "kind": "LINEAR_DIMENSION",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "DERIVED",
+      "provenance": {
+        "detail": "ściany: pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk",
+        "extractor": "PACKAGE_METADATA",
+        "name": "published-specification-reader@1.0.0"
+      },
+      "rawText": "25 cm + 20 cm",
+      "unit": "cm",
+      "value": 45,
+      "variantByteHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063"
     }
   ],
   "extractors": [
@@ -17079,11 +17157,15 @@
     {
       "name": "metrics.axis-aligned-affine",
       "version": "1"
+    },
+    {
+      "name": "published-specification-reader",
+      "version": "1.0.0"
     }
   ],
-  "id": "metrics-marcowki-de932f82192aed04",
-  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
+  "id": "metrics-marcowki-6a7fadc29463bf27",
+  "observationGraphHash": "ea76c6603a089dfc5bdcb1089cebb4d320436d56e9be1a3b69c44c41f2600a5a",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-d8cef2c4eb",
   "ocrTokens": [
     {
       "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
@@ -64039,9 +64121,27 @@
     }
   ],
   "schema": "buildapp.metric-evidence-set",
-  "schemaVersion": "1.0.0",
-  "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
+  "schemaVersion": "1.1.0",
+  "sourcePackageHash": "607f1b899933247a5c2b7be018689c357b79cd58ba3544596e367761f8889892",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "specificationFindings": [
+    {
+      "confidence": 0.85,
+      "key": "description",
+      "quote": "Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem użytkowym, idealny dla osób ceniących innowacyjne rozwiązania. Charakterystyczny dwuspadowy dach bez okapów nadaje budy",
+      "subject": "ROOF_EAVES",
+      "value": "NONE",
+      "why": "the specification says the roof has no eaves"
+    },
+    {
+      "confidence": 0.95,
+      "key": "description",
+      "quote": "Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem użytkowym, idealny dla osób ceniących innowacyjne rozwiązania. Charakterystyczny dwuspadowy dach bez okapów nadaje budy",
+      "subject": "ROOF_KIND",
+      "value": "GABLE",
+      "why": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page"
+    }
+  ],
   "unresolved": [
     {
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
