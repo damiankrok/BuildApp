@@ -3,8 +3,9 @@
 **START HEAD** `1c2894cd91411451100697e8e0b7de72c4d2b859`
 **FINAL HEAD** `6bb4fce1bedfc0070890e6de1ad8feb216d8d1c3` — the commit CI run
 [#10](https://github.com/damiankrok/BuildApp/actions/runs/35086600835) is green
-on. The commit above it on the branch records these two SHAs, the run URL and
-the guard described under CI RUN, and changes nothing else.
+on. The commits above it on the branch record these two SHAs, the run URL, the
+guard described under CI RUN, and this paragraph; they change nothing the
+benchmark measures, and CI is green on them too.
 
 The BUILDAPP-03 candidate was one slab 12.05 × 14.905 m, one exterior ring
 reused on both levels, one gable over the whole rectangle at 28.563799°, eight
@@ -382,8 +383,10 @@ Capping the worker count below the core count fixed it and cost no wall time
 
 Built by the `Android / APK` job and uploaded as the
 `buildplan-model-preview-apks` artifact (30-day retention,
-`if-no-files-found: error`). No APK is committed to git: CI artifact delivery is
-sufficient.
+`if-no-files-found: error`). This stage committed no APK: CI artifact delivery
+is sufficient. The BUILDAPP-03M-FIX preview build still in
+`stage-reports/artifacts/android-preview/` is that stage's, untouched here and
+now superseded by the artifact above.
 
 ## KNOWN LIMITATIONS
 
