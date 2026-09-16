@@ -66,3 +66,80 @@ test('the reference model shows no reconstruction panel: it was not reconstructe
   await page.getByTestId('panel-sources').click()
   await expect(page.getByTestId('reconstruction')).toHaveCount(0)
 })
+
+/**
+ * §23's recognizability audit, in the viewer the owner actually looks at.
+ *
+ * The condition the stage sets is that the source-view renders visibly show a
+ * main body distinct from the garage, the roof split between them, and
+ * plausible openings — and that nobody looking at them would call the result
+ * a forest of strips. A screenshot cannot be asserted about, so the run below
+ * does two things with each view: it SAVES it, for a person to look at, and it
+ * checks the property that makes the picture worth looking at — that the
+ * geometry drawn in it has the features the structure claims.
+ */
+test('§23 recognizability: the five source views of the automatic candidate', async ({ page }) => {
+  await page.getByTestId('model-select').selectOption('marcowki-auto')
+  await expect(page.getByTestId('status-diagnostics')).toHaveText('geometry ok')
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: resolve(ART, 'auto-01-perspective.png') })
+
+  // The canvas drew a building rather than a blank: several shades in the
+  // middle of the perspective view, which a flat background does not have.
+  const shades = await page.evaluate(() => {
+    const c = document.querySelector('[data-testid="viewport-canvas"]') as HTMLCanvasElement
+    const gl = c.getContext('webgl2') ?? c.getContext('webgl')
+    if (!gl) return 0
+    const px = new Uint8Array(4 * 64 * 64)
+    gl.readPixels(Math.floor(c.width / 2) - 32, Math.floor(c.height / 2) - 32, 64, 64, gl.RGBA, gl.UNSIGNED_BYTE, px)
+    const distinct = new Set<string>()
+    for (let i = 0; i < px.length; i += 4) distinct.add(`${px[i]},${px[i + 1]},${px[i + 2]}`)
+    return distinct.size
+  })
+  expect(shades).toBeGreaterThan(3)
+
+  for (const [n, view] of [
+    ['02', 'front'],
+    ['03', 'rear'],
+    ['04', 'top'],
+  ] as const) {
+    await page.getByTestId(`view-${view}`).click()
+    await expect(page.getByTestId(`view-${view}`)).toHaveClass(/active/)
+    await page.waitForTimeout(300)
+    await page.screenshot({ path: resolve(ART, `auto-${n}-${view}.png`) })
+  }
+
+  // Roof off: the two roofs go and the walls stay, which is what makes the
+  // garage's separate roof visible as a separate thing at all.
+  const all = await handle(page)
+  await page.getByTestId('view-perspective').click()
+  await page.getByTestId('toggle-roofs').click()
+  const noRoof = await handle(page)
+  expect(noRoof.meshCount).toBeLessThan(all.meshCount)
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: resolve(ART, 'auto-05-roof-off.png') })
+  await page.getByTestId('show-all').click()
+
+  // And the structure the pictures are supposed to show: two bodies at
+  // different heights, each with its own roof, and openings rather than a
+  // barcode of strips.
+  const structure = await page.evaluate(() => {
+    const h = (window as unknown as { __buildworld: { store: { model: { roofs: Array<{ id: string; kind: string; eaveOffset: number; levelId: string }>; levels: Array<{ id: string; elevation: number }>; openings: unknown[]; linearSolids: unknown[]; slabs: unknown[] } } } }).__buildworld
+    const m = h.store.model
+    return {
+      roofs: m.roofs.map((r) => ({ kind: r.kind, top: (m.levels.find((l) => l.id === r.levelId)?.elevation ?? 0) + r.eaveOffset })),
+      openings: m.openings.length,
+      solids: m.linearSolids.length,
+      slabs: m.slabs.length,
+    }
+  })
+  expect(structure.roofs.length).toBeGreaterThanOrEqual(2)
+  expect(new Set(structure.roofs.map((r) => r.kind)).size).toBeGreaterThanOrEqual(2)
+  const tops = structure.roofs.map((r) => r.top)
+  expect(Math.max(...tops) - Math.min(...tops)).toBeGreaterThan(1)
+  expect(structure.openings).toBeGreaterThanOrEqual(8)
+  // The BUILDAPP-03 candidate carried twenty-four of these. A facade is not a
+  // barcode.
+  expect(structure.solids).toBeLessThanOrEqual(8)
+  expect(structure.slabs).toBeGreaterThanOrEqual(3)
+})

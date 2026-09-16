@@ -1,5 +1,5 @@
 {
-  "contentHash": "570ad57754be28e3afcf11b50a9f82a555cb7374e73d2db2021ca601b1749f8a",
+  "contentHash": "efc538fb74bef440c079424cf3205a20e6156e05bdd821c3b40031d6d1947302",
   "fusion": {
     "accepted": 103,
     "afterClustering": 123,
@@ -241,11 +241,11 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 4.469401,
-          "low": 4.349401,
+          "high": 4.491033,
+          "low": 4.371033,
           "name": "width",
           "unit": "m",
-          "value": 4.409401,
+          "value": 4.431033,
           "why": "a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
@@ -577,22 +577,22 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 0.539685,
-          "low": 0.419685,
+          "high": 0.561317,
+          "low": 0.441317,
           "name": "width",
           "unit": "m",
-          "value": 0.479685,
+          "value": 0.501317,
           "why": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 0.774969,
-          "low": 0.660159,
+          "high": 0.758569,
+          "low": 0.646189,
           "name": "height",
           "unit": "m",
-          "value": 0.717564,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.677564 m of wall standing over it"
+          "value": 0.702379,
+          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it"
         },
         {
           "basis": "ASSUMED",
@@ -607,7 +607,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.677564 m of wall standing over it",
+        "detail": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it",
         "merged": 0,
         "rule": "opening-from-plan-gap"
       },
@@ -627,11 +627,11 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 3.424798,
-          "low": 3.304798,
+          "high": 3.44643,
+          "low": 3.32643,
           "name": "width",
           "unit": "m",
-          "value": 3.364798,
+          "value": 3.38643,
           "why": "a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
@@ -695,22 +695,22 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 3.013491,
-          "low": 2.893491,
+          "high": 3.035123,
+          "low": 2.915123,
           "name": "width",
           "unit": "m",
-          "value": 2.953491,
+          "value": 2.975123,
           "why": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 1.746969,
-          "low": 1.488159,
+          "high": 1.730569,
+          "low": 1.474189,
           "name": "height",
           "unit": "m",
-          "value": 1.617564,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.677564 m of wall standing over it"
+          "value": 1.602379,
+          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it"
         },
         {
           "basis": "ASSUMED",
@@ -725,7 +725,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.677564 m of wall standing over it",
+        "detail": "a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
         "merged": 3,
         "rule": "opening-from-plan-gap"
       },
@@ -805,11 +805,11 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 2.950282,
-          "low": 2.830282,
+          "high": 2.971914,
+          "low": 2.851914,
           "name": "width",
           "unit": "m",
-          "value": 2.890282,
+          "value": 2.911914,
           "why": "a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
@@ -913,22 +913,22 @@
         {
           "basis": "SCALED",
           "evidenceIds": [],
-          "high": 2.76403,
-          "low": 2.64403,
+          "high": 2.785662,
+          "low": 2.665662,
           "name": "width",
           "unit": "m",
-          "value": 2.70403,
+          "value": 2.725662,
           "why": "a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
         },
         {
           "basis": "ASSUMED",
           "evidenceIds": [],
-          "high": 1.746969,
-          "low": 1.488159,
+          "high": 1.730569,
+          "low": 1.474189,
           "name": "height",
           "unit": "m",
-          "value": 1.617564,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.677564 m of wall standing over it"
+          "value": 1.602379,
+          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it"
         },
         {
           "basis": "ASSUMED",
@@ -943,7 +943,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.677564 m of wall standing over it",
+        "detail": "a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.662379 m of wall standing over it",
         "merged": 2,
         "rule": "opening-from-plan-gap"
       },
@@ -1381,14 +1381,15 @@
         {
           "basis": "SCALED",
           "evidenceIds": [
+            "constraint-hyp-building-wallthickness-226ec91177",
             "constraint-hyp-building-wallthickness-ff7ae3d115"
           ],
           "high": 0.569658,
-          "low": 0.409658,
+          "low": 0.39,
           "name": "wallThickness",
           "unit": "m",
-          "value": 0.489658,
-          "why": "the plan draws its walls 18.5 px thick, which is 0.490 m at this sheet's scale"
+          "value": 0.468026,
+          "why": "weighted fit of 2 suggestions, spread 0.019747 m"
         }
       ],
       "parentId": "hyp-mass-0",
@@ -1439,14 +1440,15 @@
         {
           "basis": "SCALED",
           "evidenceIds": [
+            "constraint-hyp-building-wallthickness-226ec91177",
             "constraint-hyp-building-wallthickness-ff7ae3d115"
           ],
           "high": 0.569658,
-          "low": 0.409658,
+          "low": 0.39,
           "name": "wallThickness",
           "unit": "m",
-          "value": 0.489658,
-          "why": "the plan draws its walls 18.5 px thick, which is 0.490 m at this sheet's scale"
+          "value": 0.468026,
+          "why": "weighted fit of 2 suggestions, spread 0.019747 m"
         }
       ],
       "parentId": "hyp-mass-0",
@@ -1496,14 +1498,15 @@
         {
           "basis": "SCALED",
           "evidenceIds": [
+            "constraint-hyp-building-wallthickness-226ec91177",
             "constraint-hyp-building-wallthickness-ff7ae3d115"
           ],
           "high": 0.569658,
-          "low": 0.409658,
+          "low": 0.39,
           "name": "wallThickness",
           "unit": "m",
-          "value": 0.489658,
-          "why": "the plan draws its walls 18.5 px thick, which is 0.490 m at this sheet's scale"
+          "value": 0.468026,
+          "why": "weighted fit of 2 suggestions, spread 0.019747 m"
         }
       ],
       "parentId": "hyp-mass-1",
@@ -1517,8 +1520,9 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.8,
+      "confidence": 0.95,
       "evidenceIds": [
+        "metric-spec-roof-angle-a196295353",
         "metric-level-736b8c6e31",
         "metric-level-70deeedf63",
         "metric-level-c977b973a3",
@@ -1529,33 +1533,35 @@
       "observationIds": [],
       "parameters": [
         {
-          "basis": "DERIVED",
+          "basis": "MEASURED",
           "evidenceIds": [
-            "constraint-hyp-roof-mass-0-pitchdeg-9e60377de0"
+            "constraint-hyp-roof-mass-0-pitchdeg-bc1ee3494e"
           ],
-          "high": 42.205554,
-          "low": 37.205554,
+          "high": 40,
+          "low": 40,
           "name": "pitchDeg",
           "unit": "deg",
-          "value": 39.705554,
-          "why": "from the rise the section measures over the span the plan measures"
+          "value": 40,
+          "why": "printed as \"40 st.\": the publisher prints the roof pitch as \"40 st.\""
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 1.2,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "constraint-hyp-roof-mass-0-overhang-372a481847"
+          ],
+          "high": 0,
           "low": 0,
           "name": "overhang",
           "unit": "m",
-          "value": 0.6,
-          "why": "no constraint of any kind bears on this quantity"
+          "value": 0,
+          "why": "the publisher states the roof has no eaves: \"Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem\""
         }
       ],
       "parentId": "hyp-mass-0",
       "provenance": {
-        "detail": "no specification names the roof kind; no printed pitch; nothing measures the ridge height against the pitch, so the ridge is taken to run the long way, along Z",
+        "detail": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page; pitch printed as \"40 st.\"; a 40° roof over the 7.90 m span rises 3.31 m, and the section measures 3.28 m from eaves to ridge — 0.03 m apart",
         "merged": 0,
-        "rule": "roof-section"
+        "rule": "roof-published_specification"
       },
       "rivalIds": [],
       "sightings": [],
@@ -1795,11 +1801,11 @@
       "viewSupport": 2
     }
   ],
-  "id": "hypotheses-no-reference-570ad57754be28e3",
-  "metricEvidenceHash": "a48bd035cdb003227a49dd07935543c60c4524f482b2c1f168cfbdb11e4d8d10",
-  "metricEvidenceId": "metrics-no-reference-a48bd035cdb00322",
-  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
+  "id": "hypotheses-no-reference-efc538fb74bef440",
+  "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
+  "metricEvidenceId": "metrics-no-reference-3737dc29d37cee61",
+  "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
   "proposers": [
     {
       "name": "reconstruction.structural-layout",
@@ -1820,7 +1826,7 @@
   ],
   "schema": "buildapp.primitive-hypothesis-set",
   "schemaVersion": "1.0.0",
-  "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
+  "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
   "unresolved": []
 }

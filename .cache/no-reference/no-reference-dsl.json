@@ -1,7 +1,7 @@
 {
-  "candidateHash": "e194f6f0247043f05a213e699e4c184d19dcf025430a2f09acc26874064dbbd1",
-  "candidateId": "candidate-no-reference-e194f6f0247043f0",
-  "modelHash": "28c450d8a2c1a58125dc4f08d80ac898c5294dad08a74ea77779a6cfaf325786",
+  "candidateHash": "c2d7552eb75af1fd55b5a7140209bffb9043da352204f805de4dbe9371c6b750",
+  "candidateId": "candidate-no-reference-c2d7552eb75af1fd",
+  "modelHash": "d3e3ed94a5dc80ac16d929924374e7c985a6220134d3478fc49b45b2cdc133cb",
   "program": [
     {
       "name": "Candidate built with no reference package present",
@@ -111,7 +111,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -166,7 +166,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -221,7 +221,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -242,8 +242,8 @@
       "kind": "GABLE",
       "levelId": "lvl-1",
       "materialId": "mat-roof",
-      "overhang": 0.6,
-      "pitchDeg": 39.705554,
+      "overhang": 0,
+      "pitchDeg": 40,
       "ridgeAxis": "Z",
       "thickness": 0.28,
       "type": "createRoof"
@@ -292,11 +292,11 @@
       "height": 1.227188,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.409401
+      "width": 4.431033
     },
     {
       "id": "opening-1-w",
@@ -308,11 +308,11 @@
       "height": 2.2,
       "id": "opening-2",
       "kind": "DOOR",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w1",
-      "width": 3.364798
+      "width": 3.38643
     },
     {
       "id": "opening-2-d",
@@ -321,14 +321,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-3",
       "kind": "WINDOW",
       "offset": 4.426851,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.953491
+      "width": 2.975123
     },
     {
       "id": "opening-3-w",
@@ -344,7 +344,7 @@
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.890282
+      "width": 2.911914
     },
     {
       "id": "opening-4-d",
@@ -353,14 +353,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.70403
+      "width": 2.725662
     },
     {
       "id": "opening-5-w",
@@ -465,14 +465,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 0.717564,
+      "height": 0.702379,
       "id": "opening-12",
       "kind": "WINDOW",
       "offset": 6.900657,
       "sill": 0.9,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 0.479685
+      "width": 0.501317
     },
     {
       "id": "opening-12-w",
@@ -483,7 +483,7 @@
     {
       "depth": 0.266476,
       "end": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 0.309072
       },
@@ -492,7 +492,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 12.367528
       },
@@ -504,7 +504,7 @@
       "end": {
         "x": 8.49557,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
       "id": "solid-1",
@@ -513,7 +513,7 @@
       "start": {
         "x": 0.478736,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "type": "createLinearSolid",
       "width": 0.253151

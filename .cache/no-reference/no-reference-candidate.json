@@ -1,16 +1,16 @@
 {
-  "contentHash": "e194f6f0247043f05a213e699e4c184d19dcf025430a2f09acc26874064dbbd1",
+  "contentHash": "c2d7552eb75af1fd55b5a7140209bffb9043da352204f805de4dbe9371c6b750",
   "contradictions": [],
-  "hypothesisSetHash": "570ad57754be28e3afcf11b50a9f82a555cb7374e73d2db2021ca601b1749f8a",
-  "hypothesisSetId": "hypotheses-no-reference-570ad57754be28e3",
-  "id": "candidate-no-reference-e194f6f0247043f0",
+  "hypothesisSetHash": "efc538fb74bef440c079424cf3205a20e6156e05bdd821c3b40031d6d1947302",
+  "hypothesisSetId": "hypotheses-no-reference-efc538fb74bef440",
+  "id": "candidate-no-reference-c2d7552eb75af1fd",
   "label": "Candidate built with no reference package present",
-  "metricEvidenceHash": "a48bd035cdb003227a49dd07935543c60c4524f482b2c1f168cfbdb11e4d8d10",
-  "metricEvidenceId": "metrics-no-reference-a48bd035cdb00322",
-  "modelHash": "28c450d8a2c1a58125dc4f08d80ac898c5294dad08a74ea77779a6cfaf325786",
+  "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
+  "metricEvidenceId": "metrics-no-reference-3737dc29d37cee61",
+  "modelHash": "d3e3ed94a5dc80ac16d929924374e7c985a6220134d3478fc49b45b2cdc133cb",
   "modelId": "m-auto-no-reference",
-  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
+  "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
   "program": [
     {
       "name": "Candidate built with no reference package present",
@@ -120,7 +120,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -175,7 +175,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -230,7 +230,7 @@
           "z": 12.61
         }
       ],
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
@@ -251,8 +251,8 @@
       "kind": "GABLE",
       "levelId": "lvl-1",
       "materialId": "mat-roof",
-      "overhang": 0.6,
-      "pitchDeg": 39.705554,
+      "overhang": 0,
+      "pitchDeg": 40,
       "ridgeAxis": "Z",
       "thickness": 0.28,
       "type": "createRoof"
@@ -301,11 +301,11 @@
       "height": 1.227188,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.409401
+      "width": 4.431033
     },
     {
       "id": "opening-1-w",
@@ -317,11 +317,11 @@
       "height": 2.2,
       "id": "opening-2",
       "kind": "DOOR",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-0-w1",
-      "width": 3.364798
+      "width": 3.38643
     },
     {
       "id": "opening-2-d",
@@ -330,14 +330,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-3",
       "kind": "WINDOW",
       "offset": 4.426851,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.953491
+      "width": 2.975123
     },
     {
       "id": "opening-3-w",
@@ -353,7 +353,7 @@
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.890282
+      "width": 2.911914
     },
     {
       "id": "opening-4-d",
@@ -362,14 +362,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.70403
+      "width": 2.725662
     },
     {
       "id": "opening-5-w",
@@ -474,14 +474,14 @@
       "type": "placeDoor"
     },
     {
-      "height": 0.717564,
+      "height": 0.702379,
       "id": "opening-12",
       "kind": "WINDOW",
       "offset": 6.900657,
       "sill": 0.9,
       "type": "cutOpening",
       "wallId": "ring-mass-0-1-w2",
-      "width": 0.479685
+      "width": 0.501317
     },
     {
       "id": "opening-12-w",
@@ -492,7 +492,7 @@
     {
       "depth": 0.266476,
       "end": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 0.309072
       },
@@ -501,7 +501,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 12.367528
       },
@@ -513,7 +513,7 @@
       "end": {
         "x": 8.49557,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
       "id": "solid-1",
@@ -522,7 +522,7 @@
       "start": {
         "x": 0.478736,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "type": "createLinearSolid",
       "width": 0.253151
@@ -560,16 +560,17 @@
     {
       "class": "SOFT",
       "constraintIds": [
+        "constraint-hyp-building-wallthickness-226ec91177",
         "constraint-hyp-building-wallthickness-ff7ae3d115"
       ],
       "high": 0.569658,
       "hypothesisId": "hyp-building",
-      "low": 0.409658,
+      "low": 0.39,
       "parameter": "wallThickness",
-      "residual": 0,
+      "residual": 0.019747,
       "unit": "m",
-      "value": 0.489658,
-      "why": "the plan draws its walls 18.5 px thick, which is 0.490 m at this sheet's scale"
+      "value": 0.468026,
+      "why": "weighted fit of 2 suggestions, spread 0.019747 m"
     },
     {
       "class": "SOFT",
@@ -628,30 +629,32 @@
       "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 751 cm"
     },
     {
-      "class": "UNRESOLVED",
-      "constraintIds": [],
-      "high": 1.2,
+      "class": "HARD",
+      "constraintIds": [
+        "constraint-hyp-roof-mass-0-overhang-372a481847"
+      ],
+      "high": 0,
       "hypothesisId": "hyp-roof-mass-0",
       "low": 0,
       "parameter": "overhang",
       "residual": 0,
-      "unit": "none",
-      "value": 0.6,
-      "why": "no constraint of any kind bears on this quantity"
+      "unit": "m",
+      "value": 0,
+      "why": "the publisher states the roof has no eaves: \"Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem\""
     },
     {
-      "class": "SOFT",
+      "class": "HARD",
       "constraintIds": [
-        "constraint-hyp-roof-mass-0-pitchdeg-9e60377de0"
+        "constraint-hyp-roof-mass-0-pitchdeg-bc1ee3494e"
       ],
-      "high": 42.205554,
+      "high": 40,
       "hypothesisId": "hyp-roof-mass-0",
-      "low": 37.205554,
+      "low": 40,
       "parameter": "pitchDeg",
       "residual": 0,
       "unit": "deg",
-      "value": 39.705554,
-      "why": "from the rise the section measures over the span the plan measures"
+      "value": 40,
+      "why": "printed as \"40 st.\": the publisher prints the roof pitch as \"40 st.\""
     },
     {
       "class": "UNRESOLVED",
@@ -679,11 +682,11 @@
     }
   ],
   "residuals": {
-    "hard": 1,
-    "metricMaxM": 0,
-    "metricRmsM": 0,
-    "soft": 7,
-    "unresolved": 3
+    "hard": 3,
+    "metricMaxM": 0.019747,
+    "metricRmsM": 0.008062,
+    "soft": 6,
+    "unresolved": 2
   },
   "schema": "buildapp.reconstruction-candidate",
   "schemaVersion": "1.1.0",
@@ -691,7 +694,7 @@
     "name": "reconstruction.solver",
     "version": "1.0.0"
   },
-  "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
+  "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
   "steps": [
     {
@@ -731,9 +734,9 @@
       "what": "source sightings reduced to members"
     },
     {
-      "detail": "gable at 39.705554° with its ridge along Z, on the authority of section",
+      "detail": "gable at 40° with its ridge along Z, on the authority of published specification",
       "index": 4,
-      "inputs": 4,
+      "inputs": 5,
       "method": "DISCRETE_SELECTION",
       "outputs": 1,
       "residual": 0,
@@ -796,8 +799,8 @@
       "what": "a stair between the storeys"
     }
   ],
-  "structuralLayoutHash": "b16c33175c15b246154af9db85ff5c2622f70df1cf46202025cc3e00ab9556bd",
-  "structuralLayoutId": "layout-no-reference-b16c33175c15b246",
+  "structuralLayoutHash": "b5e2aef12201766dddcfc83a331af92585e63974bb04a0eeee408483681b3d4d",
+  "structuralLayoutId": "layout-no-reference-b5e2aef12201766d",
   "structuralStatus": "STRUCTURAL_LAYOUT_ACCEPTED",
   "traces": [
     {
@@ -827,7 +830,7 @@
         "obs-opening-reveal-9bf565a42b"
       ],
       "rejected": [],
-      "why": "4.409401 by 1.227188 m at 0.519658 m along the front wall of mass-0, sill 0 m; a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "4.431033 by 1.227188 m at 0.498026 m along the front wall of mass-0, sill 0 m; a 4.449054 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -862,7 +865,7 @@
       "objectId": "opening-12",
       "observationIds": [],
       "rejected": [],
-      "why": "0.479685 by 0.717564 m at 6.900657 m along the front wall of mass-0, sill 0.9 m; a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "0.501317 by 0.702379 m at 6.900657 m along the front wall of mass-0, sill 0.9 m; a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -873,7 +876,7 @@
         "obs-opening-reveal-cdb6b1125d"
       ],
       "rejected": [],
-      "why": "3.364798 by 2.2 m at 0.519658 m along the right wall of mass-0, sill 0 m; a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "3.38643 by 2.2 m at 0.498026 m along the right wall of mass-0, sill 0 m; a 3.43193 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -887,7 +890,7 @@
         "obs-opening-reveal-900b0e8b1a"
       ],
       "rejected": [],
-      "why": "2.953491 by 1.617564 m at 4.426851 m along the rear wall of mass-0, sill 0 m; a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.975123 by 1.602379 m at 4.426851 m along the rear wall of mass-0, sill 0 m; a 2.993144 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -901,7 +904,7 @@
         "obs-opening-reveal-ff08485326"
       ],
       "rejected": [],
-      "why": "2.890282 by 2.2 m at 0.74006 m along the front wall of mass-1, sill 0 m; a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.911914 by 2.2 m at 0.74006 m along the front wall of mass-1, sill 0 m; a 2.956938 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -913,7 +916,7 @@
         "obs-opening-reveal-b51b54ea40"
       ],
       "rejected": [],
-      "why": "2.70403 by 1.617564 m at 0.519658 m along the rear wall of mass-0, sill 0 m; a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
+      "why": "2.725662 by 1.602379 m at 0.498026 m along the rear wall of mass-0, sill 0 m; a 2.926585 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
     },
     {
       "evidenceIds": [],
@@ -1032,6 +1035,7 @@
     },
     {
       "evidenceIds": [
+        "metric-spec-roof-angle-a196295353",
         "metric-level-736b8c6e31",
         "metric-level-70deeedf63",
         "metric-level-c977b973a3",
@@ -1042,7 +1046,7 @@
       "objectId": "roof-mass-0",
       "observationIds": [],
       "rejected": [],
-      "why": "no specification names the roof kind; no printed pitch; nothing measures the ridge height against the pitch, so the ridge is taken to run the long way, along Z"
+      "why": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page; pitch printed as \"40 st.\"; a 40° roof over the 7.90 m span rises 3.31 m, and the section measures 3.28 m from eaves to ridge — 0.03 m apart"
     },
     {
       "evidenceIds": [
@@ -1088,35 +1092,19 @@
   "unresolved": [
     {
       "evidenceIds": [],
-      "id": "gap-0-066656-m-of-the-opening-at-0-74006-m-a-dd1d449986",
+      "id": "gap-0-200923-m-of-the-opening-at-0-297103-m-adc300d748",
       "observationIds": [],
       "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
       "status": "AMBIGUOUS",
-      "what": "0.066656 m of the opening at 0.74006 m along the max_z wall of mass-1"
+      "what": "0.200923 m of the opening at 0.297103 m along the min_z wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-0-067132-m-of-the-opening-at-0-452526-m-c15a575117",
+      "id": "gap-0-200923-m-of-the-opening-at-6-900657-m-117719ffc5",
       "observationIds": [],
       "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
       "status": "AMBIGUOUS",
-      "what": "0.067132 m of the opening at 0.452526 m along the max_x wall of mass-0"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-0-222555-m-of-the-opening-at-0-297103-m-8552e68fc1",
-      "observationIds": [],
-      "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
-      "status": "AMBIGUOUS",
-      "what": "0.222555 m of the opening at 0.297103 m along the min_z wall of mass-0"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-0-222555-m-of-the-opening-at-6-900657-m-ab6b2eb1d0",
-      "observationIds": [],
-      "reason": "the gap the plan draws reaches into the corner, where the wall material belongs to the wall around it; the opening is cut back to the wall it is in",
-      "status": "AMBIGUOUS",
-      "what": "0.222555 m of the opening at 6.900657 m along the max_z wall of mass-0"
+      "what": "0.200923 m of the opening at 6.900657 m along the max_z wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -1243,7 +1231,7 @@
       "evidenceIds": [],
       "id": "gap-a-0-731026-by-1-3-m-opening-at-8-670586-b2f2c5c2e2",
       "observationIds": [],
-      "reason": "its sill is 0.9 m up a wall with only 1.246051 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
+      "reason": "its sill is 0.9 m up a wall with only 1.244486 m of height where it falls, which leaves no room for it: the height read for it belongs to something else",
       "status": "AMBIGUOUS",
       "what": "a 0.731026 by 1.3 m opening at 8.670586 m along the right wall of mass-0"
     },
@@ -1350,7 +1338,7 @@
         "obs-linear-volume-candidate-beam-e13d880c95",
         "obs-linear-volume-candidate-beam-e2e7a90bf5"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 11.705643 m member at 5.020862 m on the right facade"
     },
@@ -1402,7 +1390,7 @@
         "obs-linear-volume-candidate-beam-92cff6d900",
         "obs-linear-volume-candidate-beam-fafed6a4b1"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 3.268055 m member at 5.455651 m on the left facade"
     },
@@ -1415,7 +1403,7 @@
         "obs-linear-volume-candidate-beam-8eda518742",
         "obs-linear-volume-candidate-beam-d880992643"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.108413 m member at 4.428548 m on the left facade"
     },
@@ -1437,7 +1425,7 @@
         "obs-linear-volume-candidate-beam-06c7a0c9f8",
         "obs-linear-volume-candidate-beam-233e69c1df"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.255142 m member at 4.620738 m on the left facade"
     },
@@ -1448,7 +1436,7 @@
         "obs-linear-volume-candidate-beam-387c8a7c55",
         "obs-linear-volume-candidate-beam-babac45875"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.281819 m member at 5.228888 m on the left facade"
     },
@@ -1469,7 +1457,7 @@
         "obs-linear-volume-candidate-beam-773602e63d",
         "obs-linear-volume-candidate-beam-b47e04ef7f"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.295158 m member at 5.655722 m on the left facade"
     },
@@ -1480,7 +1468,7 @@
         "obs-linear-volume-candidate-beam-6fa0f0b886",
         "obs-linear-volume-candidate-beam-d169456d9b"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.295158 m member at 6.055906 m on the left facade"
     },
@@ -1491,7 +1479,7 @@
         "obs-linear-volume-candidate-beam-4f560cadfd",
         "obs-linear-volume-candidate-beam-f0439de1e5"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.295159 m member at 6.278977 m on the left facade"
     },
@@ -1515,7 +1503,7 @@
         "obs-linear-volume-candidate-beam-2cd52d310d",
         "obs-linear-volume-candidate-beam-3874e0caad"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 4.501146 m member at 5.469416 m on the right facade"
     },
@@ -1558,7 +1546,7 @@
         "obs-linear-volume-candidate-beam-1af284fe76",
         "obs-linear-volume-candidate-beam-abbe667a2c"
       ],
-      "reason": "the wall beneath it stops at 4.306051 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
+      "reason": "the wall beneath it stops at 4.304486 m, so whatever the elevation shows there belongs to the roof rather than to a wall",
       "status": "AMBIGUOUS",
       "what": "a 6.896263 m member at 4.428548 m on the left facade"
     },
@@ -1898,14 +1886,6 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-pitch-of-the-roof-over-mass-0-c7f6cb06fc",
-      "observationIds": [],
-      "reason": "no angle is printed on any drawing and no specification states one",
-      "status": "AMBIGUOUS",
-      "what": "the pitch of the roof over mass-0"
-    },
-    {
-      "evidenceIds": [],
       "id": "gap-the-stair-between-the-storeys-6c981bb3d7",
       "observationIds": [
         "obs-stair-stair-flight-92c3ff0934"
@@ -1921,14 +1901,6 @@
       "reason": "the silhouette is 17.060487 m across, which is 4.450487 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one; it was placed on the LEFT and the placement is not certain",
       "status": "AMBIGUOUS",
       "what": "which wall the elevation on asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d shows"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-which-way-the-ridge-runs-over-mass-0-3f3f59d71f",
-      "observationIds": [],
-      "reason": "neither span reproduces the measured rise at the stated pitch",
-      "status": "AMBIGUOUS",
-      "what": "which way the ridge runs over mass-0"
     }
   ]
 }

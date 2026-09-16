@@ -137,7 +137,7 @@
     {
       "depth": 0.266476,
       "end": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 0.309072
       },
@@ -146,7 +146,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": -0.244829,
+        "x": -0.234013,
         "y": 3.868158,
         "z": 12.367528
       },
@@ -157,7 +157,7 @@
       "end": {
         "x": 8.49557,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "hostId": "ring-mass-0-0-w0",
       "id": "solid-1",
@@ -166,7 +166,7 @@
       "start": {
         "x": 0.478736,
         "y": 0.179716,
-        "z": -0.244829
+        "z": -0.234013
       },
       "width": 0.253151
     }
@@ -218,10 +218,10 @@
       "height": 1.227188,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "wallId": "ring-mass-0-1-w2",
-      "width": 4.409401
+      "width": 4.431033
     },
     {
       "height": 1.680714,
@@ -242,31 +242,31 @@
       "width": 0.845596
     },
     {
-      "height": 0.717564,
+      "height": 0.702379,
       "id": "opening-12",
       "kind": "WINDOW",
       "offset": 6.900657,
       "sill": 0.9,
       "wallId": "ring-mass-0-1-w2",
-      "width": 0.479685
+      "width": 0.501317
     },
     {
       "height": 2.2,
       "id": "opening-2",
       "kind": "DOOR",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "wallId": "ring-mass-0-0-w1",
-      "width": 3.364798
+      "width": 3.38643
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-3",
       "kind": "WINDOW",
       "offset": 4.426851,
       "sill": 0,
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.953491
+      "width": 2.975123
     },
     {
       "height": 2.2,
@@ -275,16 +275,16 @@
       "offset": 0.74006,
       "sill": 0,
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.890282
+      "width": 2.911914
     },
     {
-      "height": 1.617564,
+      "height": 1.602379,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 0.519658,
+      "offset": 0.498026,
       "sill": 0,
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.70403
+      "width": 2.725662
     },
     {
       "height": 2.2,
@@ -339,8 +339,8 @@
       "kind": "GABLE",
       "levelId": "lvl-1",
       "materialId": "mat-roof",
-      "overhang": 0.6,
-      "pitchDeg": 39.705554,
+      "overhang": 0,
+      "pitchDeg": 40,
       "ridgeAxis": "Z",
       "thickness": 0.28
     },
@@ -684,7 +684,7 @@
         "x": 0,
         "z": 0
       },
-      "thickness": 0.489658
+      "thickness": 0.468026
     },
     {
       "baseOffset": 0,
@@ -701,7 +701,7 @@
         "x": 7.9,
         "z": 0
       },
-      "thickness": 0.489658
+      "thickness": 0.468026
     },
     {
       "baseOffset": 0,
@@ -718,7 +718,7 @@
         "x": 7.9,
         "z": 12.61
       },
-      "thickness": 0.489658
+      "thickness": 0.468026
     },
     {
       "baseOffset": 0,
@@ -735,7 +735,7 @@
         "x": 0,
         "z": 12.61
       },
-      "thickness": 0.489658
+      "thickness": 0.468026
     },
     {
       "baseOffset": 0,
@@ -752,7 +752,7 @@
         "x": 0,
         "z": 0
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-0"
@@ -773,7 +773,7 @@
         "x": 7.9,
         "z": 0
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-0"
@@ -794,7 +794,7 @@
         "x": 7.9,
         "z": 12.61
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-0"
@@ -815,7 +815,7 @@
         "x": 0,
         "z": 12.61
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-0"
@@ -836,7 +836,7 @@
         "x": 7.9,
         "z": 5.1
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-1"
@@ -857,7 +857,7 @@
         "x": 12.05,
         "z": 5.1
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-1"
@@ -878,7 +878,7 @@
         "x": 12.05,
         "z": 12.61
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-1"
@@ -899,7 +899,7 @@
         "x": 7.9,
         "z": 12.61
       },
-      "thickness": 0.489658,
+      "thickness": 0.468026,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-mass-1"
