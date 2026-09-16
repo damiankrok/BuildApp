@@ -4,20 +4,28 @@
 
 ## The order is the argument
 
-1. **Massing** from the plan's dimension chains. The footprint is the one thing
-   a set of drawings states unambiguously and repeatedly, so it is settled
-   first and everything else is measured against it.
+1. **Composition** — the bodies the plans enclose, the storeys each reaches,
+   and the roof over each. Settled first, separately, and sealed as a
+   [StructuralLayoutHypothesisSet](./STRUCTURAL_LAYOUT.md) before a wall
+   exists. A solver that settles the footprint before the composition has
+   already decided the building is one rectangle.
 2. **Levels** from the section's ladder of level datums. A section marks the
    floor of each storey, then the EAVES where the walls stop, then the ridge —
    so the top two datums are not storeys, and reading them as storeys is how a
    two-storey house comes out three storeys tall with a flat roof inside it.
-3. **Views** registered against 1 and 2. An elevation states no dimension of
+3. **The pre-emission gate**: the layout is judged against every other source,
+   and the massing is drawn against the elevations it was read from. A layout
+   that contradicts a printed number, or whose shape does not project, is
+   refused here rather than emitted confidently.
+4. **Views** registered against 1 and 2. An elevation states no dimension of
    its own, so it borrows both of its scales from numbers already established —
    never from a camera fitted to its own pixels.
-4. **Openings and facade solids** read off those registered views, after fusion.
-5. **The roof**, derived: the ridge above the eaves over the span gives the
-   pitch, and a printed pitch corroborates it where one is legible.
-6. **The program**, emitted and sealed. Nothing else may touch the model.
+5. **Openings** off the PLANS, where they are drawn to scale, with heights from
+   a callout or an elevation assembly; facade solids only where two views or an
+   explicit depth cue support them. See
+   [Openings, mullions and things that look like volumes](./OPENINGS_AND_SOLIDS.md).
+6. **The program**, emitted per mass and sealed. Nothing else may touch the
+   model.
 
 ## Registering an elevation
 

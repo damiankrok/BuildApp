@@ -257,8 +257,15 @@ execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
     datums fitted as one straight line, and axis-aligned affine registration
     with robust seeded fitting and reported outliers. Sealed against the source
     package's bytes AND the observation graph's content.
-  - **`packages/reconstruction`** — `buildapp.primitive-hypothesis-set` **1.0.0**
-    and `buildapp.reconstruction-candidate` **1.0.0**: hypotheses with an
+  - **`packages/reconstruction`** — `buildapp.structural-layout-hypothesis-set`
+    **1.0.0** (BUILDAPP-03R): what the building is MADE OF — storeys, footprint
+    regions, masses, attachments, recesses, one roof system per mass, facade
+    planes, alternatives, conflicts, named holes and a gate — settled and sealed
+    before a wall exists, from a plan decomposition that reads wall bands,
+    strikes grid lines on chains and band axes, floods CELLS rather than pixels,
+    and treats a hole between two pieces of one wall as the door it is. Then
+    `buildapp.primitive-hypothesis-set` **1.0.0**
+    and `buildapp.reconstruction-candidate` **1.1.0**: hypotheses with an
     explicit basis per parameter (MEASURED / DERIVED / SCALED / CROSS_VIEW /
     ASSUMED), five-stage fusion that accounts for every sighting it drops,
     HARD / SOFT / UNRESOLVED constraint classes that are never mixed,
@@ -273,7 +280,31 @@ execution. See `stage-reports/STAGE_BUILDAPP_01M.md`.
   - **`packages/candidates`** — sealed candidates as data; BuildWorld and the
     mobile exporter both load by replaying the program, never by re-solving.
   - `docs/METRIC_EVIDENCE.md`, `docs/PRIMITIVE_RECONSTRUCTION.md`,
-    `docs/RECONSTRUCTION_SOLVER.md`.
+    `docs/RECONSTRUCTION_SOLVER.md`, `docs/STRUCTURAL_LAYOUT.md`,
+    `docs/OPENINGS_AND_SOLIDS.md`.
+  - **`tests/benchmark`** (BUILDAPP-03R) — evaluation as its own workspace. It
+    may know which building the sealed candidate is of, because it runs only on
+    sealed artefacts and nothing in the production path may import it.
+
+## Where the reconstruction stands (STAGE BUILDAPP-03R)
+
+BUILDAPP-03 produced one slab 12.05 × 14.905 m, one wall ring reused on both
+levels, one gable over the whole rectangle at 28.563799°, eight openings and
+twenty-four facade strips. BUILDAPP-03R rebuilt structural inference from the
+source evidence rather than repairing that box, and the Marcówki candidate is
+now:
+
+| | BUILDAPP-03 | BUILDAPP-03R |
+| --- | --- | --- |
+| bodies | one 12.05 × 14.91 m slab | **two**: 7.90 × 12.61 m main body, 4.15 × 7.51 m attached garage |
+| storeys | one ring on both levels | storey 0 over both bodies, storey 1 over the house alone |
+| roofs | one gable over the bounding box at 28.563799° | **two**: a 40° gable over the house on the publisher's own specification, a flat roof over the garage as a stated convention |
+| openings | 8 | 13, with **12 of the 12** major facade openings recovered (median centre error 0.161 m, height 0.100 m) |
+| facade solids | 24 | **2** |
+| gate | — | `STRUCTURAL_LAYOUT_ACCEPTED` |
+
+`stage-reports/STAGE_BUILDAPP_03R.md` carries the full report, the §22
+benchmark table, the fourteen mutations and the known limitations.
 
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
