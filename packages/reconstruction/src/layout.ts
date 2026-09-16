@@ -39,9 +39,9 @@ import type { PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv'
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
-import type { CoordinateRegistration, DimensionChain, MetricEvidenceSet } from '@buildapp/source-metrics'
+import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bandWallThickness, decomposePlan, planExtent } from './plan-decomposition.js'
-import type { PlanDecomposition, PlanRegion } from './plan-decomposition.js'
+import type { GridLine, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
   AlternativeGroup,
@@ -407,14 +407,180 @@ const ringBoundsOf = (ring: PlanRing): { x0: number; z0: number; x1: number; z1:
   return { x0: Math.min(...xs), z0: Math.min(...zs), x1: Math.max(...xs), z1: Math.max(...zs) }
 }
 
-export type WorldFrame = { metresPerPixelX: number; metresPerPixelY: number; originPx: { x: number; y: number } }
+export type WorldFrame = {
+  metresPerPixelX: number
+  metresPerPixelY: number
+  originPx: { x: number; y: number }
+  /** Pixels to metres along each axis, through the chains where the chains state a span. */
+  x?: (px: number) => number
+  z?: (px: number) => number
+}
+
+/**
+ * Metres along one axis of a plan, taken from the CHAINS and not from the scale.
+ *
+ * A registration's metres-per-pixel is a fit over every anchor on the sheet,
+ * so it carries the average of all their errors: a span the draughtsman wrote
+ * 960 on comes back as 9.596 and every dimension downstream inherits the
+ * rounding. But the grid lines the decomposition cut the plan on ARE the
+ * chains' own tick marks, so where a chain states the span between two of
+ * them, that statement is the answer, exactly, and the scale is needed only
+ * between lines no chain measured.
+ *
+ * The result is a ladder: a metric value for every grid line, built by walking
+ * along it and adding the chain's own centimetres wherever they are stated.
+ */
+export type AxisSpan = { metres: number; evidenceIds: string[]; chainIds: string[]; stated: boolean; agreed: number; why: string }
+export type AxisLadder = { at: (px: number) => number; span: (fromPx: number, toPx: number) => AxisSpan }
+
+export function axisLadder(
+  lines: readonly GridLine[],
+  chains: readonly DimensionChain[],
+  evidence: readonly MetricEvidence[],
+  axis: 'X' | 'Y',
+  mpp: number,
+  originPx: number,
+  tolerancePx: number,
+): AxisLadder {
+  const alongAxis = chains.filter((c) => (c.axis === 'HORIZONTAL') === (axis === 'X'))
+  const byId = new Map(evidence.map((e) => [e.id, e]))
+  // A segment's value is whatever the EVIDENCE it cites says, not whatever the
+  // chain cached when it was solved. A reading corrected, doubted or removed
+  // downstream has to reach the building, and a chain that answers from its
+  // own memory is a chain that has stopped reading its sources.
+  const valueOf = (segment: DimensionChain['segments'][number]): number | undefined => {
+    if (segment.evidenceId !== undefined) {
+      const cited = byId.get(segment.evidenceId)
+      if (cited && (cited.unit === 'cm' || cited.unit === 'mm' || cited.unit === 'm')) {
+        const cm = cited.unit === 'cm' ? cited.value : cited.unit === 'mm' ? cited.value / 10 : cited.value * 100
+        return cm > 0 ? cm : undefined
+      }
+    }
+    return segment.valueCm
+  }
+
+  /** Every chain that states the span between two pixel positions, with the centimetres it states. */
+  const statements = (fromPx: number, toPx: number): Array<{ cm: number; chainId: string; evidenceIds: string[] }> => {
+    const out: Array<{ cm: number; chainId: string; evidenceIds: string[] }> = []
+    for (const chain of alongAxis) {
+      const segments = [...chain.segments].sort((a, b) => a.fromPx - b.fromPx)
+      const first = segments.findIndex((seg) => Math.abs(seg.fromPx - fromPx) <= tolerancePx)
+      if (first < 0) continue
+      let total = 0
+      const ids: string[] = []
+      for (let i = first; i < segments.length; i += 1) {
+        const value = valueOf(segments[i])
+        if (value === undefined) break
+        total += value
+        if (segments[i].evidenceId !== undefined) ids.push(segments[i].evidenceId as string)
+        if (Math.abs(segments[i].toPx - toPx) <= tolerancePx) {
+          out.push({ cm: round6(total), chainId: chain.id, evidenceIds: ids })
+          break
+        }
+        if (segments[i].toPx > toPx + tolerancePx) break
+        if (i + 1 < segments.length && Math.abs(segments[i + 1].fromPx - segments[i].toPx) > tolerancePx) break
+      }
+    }
+    return out
+  }
+
+  const span = (fromPx: number, toPx: number): AxisSpan => {
+    const said = statements(Math.min(fromPx, toPx), Math.max(fromPx, toPx))
+    const pixels = round6(Math.abs(toPx - fromPx) * mpp)
+    if (said.length === 0) {
+      return { metres: pixels, evidenceIds: [], chainIds: [], stated: false, agreed: 0, why: `${Math.round(Math.abs(toPx - fromPx))} px at the sheet's own scale of ${mpp} m/px; no chain measures this span` }
+    }
+    const best = [...said].sort((a, b) => b.evidenceIds.length - a.evidenceIds.length || a.chainId.localeCompare(b.chainId))[0]
+    const agreed = said.filter((x) => Math.abs(x.cm - best.cm) <= 2).length
+    return {
+      metres: round6(best.cm / 100),
+      evidenceIds: [...new Set(said.flatMap((x) => x.evidenceIds))].sort(),
+      chainIds: said.map((x) => x.chainId).sort(),
+      stated: true,
+      agreed,
+      why:
+        agreed > 1
+          ? `${agreed} dimension chains agree that this span is ${round6(best.cm)} cm`
+          : `a dimension chain states this span as ${round6(best.cm)} cm${said.length > 1 ? `, against ${said.length - 1} that state it differently` : ''}`,
+    }
+  }
+
+  // Positions along the axis, taken from the chains where the chains speak and
+  // from the sheet's scale where they do not.
+  //
+  // Not accumulated line by line, which would throw away every statement that
+  // spans more than one gap: a chain saying the building is 1205 cm across is
+  // an exact statement about two lines eleven lines apart, and adding up the
+  // eleven scaled gaps between them gets 1204.7 and loses it. So the stated
+  // spans are applied LONGEST FIRST — the overall dimension pins the ends, the
+  // dimensions inside it pin the breaks, and only the lines nothing measures
+  // are left to the scale, interpolated between their fixed neighbours.
+  const metric: number[] = lines.map((l) => round6((l.px - lines[0]?.px) * mpp))
+  const fixed = new Array<boolean>(lines.length).fill(false)
+  const claims: Array<{ i: number; j: number; metres: number; length: number }> = []
+  for (let i = 0; i < lines.length; i += 1) {
+    for (let j = i + 1; j < lines.length; j += 1) {
+      const said = span(lines[i].px, lines[j].px)
+      if (said.stated) claims.push({ i, j, metres: said.metres, length: lines[j].px - lines[i].px })
+    }
+  }
+  claims.sort((a, b) => b.length - a.length || a.i - b.i || a.j - b.j)
+  for (const claim of claims) {
+    if (fixed[claim.i] && fixed[claim.j]) continue
+    if (!fixed[claim.i] && !fixed[claim.j]) {
+      fixed[claim.i] = true
+      metric[claim.j] = round6(metric[claim.i] + claim.metres)
+      fixed[claim.j] = true
+    } else if (fixed[claim.i]) {
+      metric[claim.j] = round6(metric[claim.i] + claim.metres)
+      fixed[claim.j] = true
+    } else {
+      metric[claim.i] = round6(metric[claim.j] - claim.metres)
+      fixed[claim.i] = true
+    }
+  }
+  // Everything nothing measured: proportional to pixels between the nearest
+  // fixed lines either side, and at the sheet's scale beyond the last of them.
+  for (let i = 0; i < lines.length; i += 1) {
+    if (fixed[i]) continue
+    let before = -1
+    let after = -1
+    for (let k = i - 1; k >= 0; k -= 1) if (fixed[k]) { before = k; break }
+    for (let k = i + 1; k < lines.length; k += 1) if (fixed[k]) { after = k; break }
+    if (before >= 0 && after >= 0) {
+      const t = (lines[i].px - lines[before].px) / Math.max(1e-9, lines[after].px - lines[before].px)
+      metric[i] = round6(metric[before] + t * (metric[after] - metric[before]))
+    } else if (before >= 0) metric[i] = round6(metric[before] + (lines[i].px - lines[before].px) * mpp)
+    else if (after >= 0) metric[i] = round6(metric[after] - (lines[after].px - lines[i].px) * mpp)
+  }
+  let zeroAt = 0
+  for (let i = 0; i < lines.length; i += 1) if (Math.abs(lines[i].px - originPx) < Math.abs(lines[zeroAt].px - originPx)) zeroAt = i
+  const offset = lines.length > 0 ? metric[zeroAt] - (lines[zeroAt].px - originPx) * mpp : 0
+  for (let i = 0; i < metric.length; i += 1) metric[i] = round6(metric[i] - offset)
+
+  const at = (px: number): number => {
+    if (lines.length === 0) return round6((px - originPx) * mpp)
+    for (let i = 0; i < lines.length; i += 1) if (Math.abs(lines[i].px - px) < 0.5) return metric[i]
+    if (px < lines[0].px) return round6(metric[0] - (lines[0].px - px) * mpp)
+    if (px > lines[lines.length - 1].px) return round6(metric[metric.length - 1] + (px - lines[lines.length - 1].px) * mpp)
+    for (let i = 0; i + 1 < lines.length; i += 1) {
+      if (px < lines[i].px || px > lines[i + 1].px) continue
+      const t = (px - lines[i].px) / Math.max(1e-9, lines[i + 1].px - lines[i].px)
+      return round6(metric[i] + t * (metric[i + 1] - metric[i]))
+    }
+    return round6((px - originPx) * mpp)
+  }
+  return { at, span }
+}
 
 /** Turn a rectangle of the base plan's pixels into a plan ring in metres. */
 export function ringOfRect(rect: PixelRect, frame: WorldFrame): PlanRing {
-  const x0 = (rect.x0 - frame.originPx.x) * frame.metresPerPixelX
-  const x1 = (rect.x1 - frame.originPx.x) * frame.metresPerPixelX
-  const z0 = (rect.y0 - frame.originPx.y) * frame.metresPerPixelY
-  const z1 = (rect.y1 - frame.originPx.y) * frame.metresPerPixelY
+  const toX = frame.x ?? ((px: number): number => (px - frame.originPx.x) * frame.metresPerPixelX)
+  const toZ = frame.z ?? ((px: number): number => (px - frame.originPx.y) * frame.metresPerPixelY)
+  const x0 = toX(rect.x0)
+  const x1 = toX(rect.x1)
+  const z0 = toZ(rect.y0)
+  const z1 = toZ(rect.y1)
   return rectangleRing(round6(Math.min(x0, x1)), round6(Math.min(z0, z1)), round6(Math.max(x0, x1)), round6(Math.max(z0, z1)))
 }
 
@@ -494,7 +660,17 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
     })
     return { ...empty, base }
   }
-  const frame: WorldFrame = { metresPerPixelX: base.registration.metresPerPixelX, metresPerPixelY: base.registration.metresPerPixelY, originPx: { x: envelope.rect.x0, y: envelope.rect.y0 } }
+  const baseChains = options.metrics.chains.filter((c) => c.frameId === base.frame.id)
+  const tolerancePx = Math.max(2, base.wallPx / 2)
+  const ladderX = axisLadder(base.decomposition.linesX, baseChains, options.metrics.evidence, 'X', base.registration.metresPerPixelX, envelope.rect.x0, tolerancePx)
+  const ladderZ = axisLadder(base.decomposition.linesY, baseChains, options.metrics.evidence, 'Y', base.registration.metresPerPixelY, envelope.rect.y0, tolerancePx)
+  const frame: WorldFrame = {
+    metresPerPixelX: base.registration.metresPerPixelX,
+    metresPerPixelY: base.registration.metresPerPixelY,
+    originPx: { x: envelope.rect.x0, y: envelope.rect.y0 },
+    x: ladderX.at,
+    z: ladderZ.at,
+  }
   const wallM = round6(base.wallPx * Math.max(frame.metresPerPixelX, frame.metresPerPixelY))
   const indices = storeyIndices(plans)
 
@@ -615,6 +791,9 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   // --- masses ---------------------------------------------------------------
   for (const region of footprintRegions.filter((r) => r.storeyId === baseStorey.id && r.kind === 'BUILT')) {
     const bounds = ringBoundsOf(region.ring)
+    const spanX = ladderX.span(region.pixelRect.x0, region.pixelRect.x1)
+    const spanZ = ladderZ.span(region.pixelRect.y0, region.pixelRect.y1)
+    const spread = (sp: AxisSpan): number => (sp.stated ? (sp.agreed > 1 ? 0.01 : 0.02) : wallM / 2)
     masses.push({
       id: `mass-${masses.length}`,
       role: 'UNKNOWN',
@@ -622,8 +801,8 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
       footprintRegionIds: [region.id],
       storeySpan: { fromIndex: baseStorey.index, toIndex: baseStorey.index, storeyIds: [baseStorey.id] },
       facadePlaneIds: [],
-      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - wallM / 2, bounds.x1 - bounds.x0 + wallM / 2, 'm', 'DERIVED', region.evidenceIds, 'the distance between the outer faces of this body’s own walls'),
-      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - wallM / 2, bounds.z1 - bounds.z0 + wallM / 2, 'm', 'DERIVED', region.evidenceIds, 'the distance between the outer faces of this body’s own walls'),
+      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', spanX.stated ? 'MEASURED' : 'SCALED', spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}`),
+      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', spanZ.stated ? 'MEASURED' : 'SCALED', spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}`),
       observationIds: [],
       evidenceIds: region.evidenceIds,
       confidence: region.confidence,

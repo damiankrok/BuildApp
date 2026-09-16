@@ -1,24 +1,24 @@
 {
-  "contentHash": "5f452153b8e6c0364f1ee2601cc833a9757d16167ea9203053de042ce70b9581",
+  "contentHash": "01d94c6fdc11f0632cab0c903244894c638c0c5330b7493134d6454e3b5f05b2",
   "contradictions": [],
-  "hypothesisSetHash": "7713696c8ca6069ce7034d7819ebfce70b33f7f0a54d1d3a46b4df9f045ba01e",
-  "hypothesisSetId": "hypotheses-marcowki-7713696c8ca6069c",
-  "id": "candidate-marcowki-5f452153b8e6c036",
-  "label": "Marcówki (auto)",
-  "metricEvidenceHash": "de932f82192aed04cfa4b1b72386d60d2a88dc29e7b4d4795acb3216b29f2351",
-  "metricEvidenceId": "metrics-marcowki-de932f82192aed04",
-  "modelHash": "290a173abec8cbe4edc278401fa330ed2b4686229ec3e94eb4ba4eae8d59c096",
+  "hypothesisSetHash": "8b046b1d5567bc0e99a2b1645c6d2f45b0954f3d634ea474089bd813f56f544f",
+  "hypothesisSetId": "hypotheses-marcowki-8b046b1d5567bc0e",
+  "id": "candidate-marcowki-01d94c6fdc11f063",
+  "label": "Automatic candidate",
+  "metricEvidenceHash": "6a7fadc29463bf278a53aaaa00f47e73799957be232f594f4b970b1457640ec9",
+  "metricEvidenceId": "metrics-marcowki-6a7fadc29463bf27",
+  "modelHash": "02e16eb277a3f2c92abf55337d82fc5b48f35da0ac1a06a8b2b4a96b789acd63",
   "modelId": "m-auto-marcowki",
-  "observationGraphHash": "8415a4e00349441433c055b219bbb5ef645dcda951519dc57d6ec6b4dc6c9043",
-  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-0dff45f229",
+  "observationGraphHash": "ea76c6603a089dfc5bdcb1089cebb4d320436d56e9be1a3b69c44c41f2600a5a",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-d8cef2c4eb",
   "program": [
     {
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "setModelName"
     },
     {
       "id": "bld-auto",
-      "name": "Marcówki (auto)",
+      "name": "Automatic candidate",
       "type": "createBuilding"
     },
     {
@@ -61,7 +61,15 @@
       "type": "createLevel"
     },
     {
-      "id": "slab-0",
+      "elevation": 3.06,
+      "height": 1.61,
+      "id": "lvl-1",
+      "index": 1,
+      "name": "Level 1",
+      "type": "createLevel"
+    },
+    {
+      "id": "slab-mass-0-0",
       "levelId": "lvl-0",
       "materialId": "mat-slab",
       "polygon": [
@@ -70,16 +78,16 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
       "thickness": 0.28,
@@ -90,7 +98,7 @@
       "baseOffset": 0,
       "cornerOwnership": "ALTERNATE",
       "height": 3.06,
-      "id": "ring-0",
+      "id": "ring-mass-0-0",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
       "materialId": "mat-wall",
@@ -100,31 +108,23 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
-      "thickness": 0.38,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
-      "elevation": 3.06,
-      "height": 1.61,
-      "id": "lvl-1",
-      "index": 1,
-      "name": "Level 1",
-      "type": "createLevel"
-    },
-    {
-      "id": "slab-1",
+      "id": "slab-mass-0-1",
       "levelId": "lvl-1",
       "materialId": "mat-slab",
       "polygon": [
@@ -133,16 +133,16 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
       "thickness": 0.28,
@@ -153,7 +153,7 @@
       "baseOffset": 0,
       "cornerOwnership": "ALTERNATE",
       "height": 1.61,
-      "id": "ring-1",
+      "id": "ring-mass-0-1",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
       "materialId": "mat-wall",
@@ -163,41 +163,120 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
-      "thickness": 0.38,
+      "thickness": 0.468026,
+      "type": "createWallRing"
+    },
+    {
+      "id": "slab-mass-1-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 12.61
+        },
+        {
+          "x": 7.9,
+          "z": 12.61
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0,
+      "type": "createSlab"
+    },
+    {
+      "baseOffset": 0,
+      "cornerOwnership": "ALTERNATE",
+      "height": 3.06,
+      "id": "ring-mass-1-0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 12.61
+        },
+        {
+          "x": 7.9,
+          "z": 12.61
+        }
+      ],
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
       "capWallIds": [
-        "ring-1-w0",
-        "ring-1-w1",
-        "ring-1-w2",
-        "ring-1-w3"
+        "ring-mass-0-1-w0",
+        "ring-mass-0-1-w1",
+        "ring-mass-0-1-w2",
+        "ring-mass-0-1-w3"
       ],
       "eaveOffset": 1.61,
       "footprint": {
-        "maxX": 12.05,
-        "maxZ": 14.905276,
+        "maxX": 7.9,
+        "maxZ": 12.61,
         "minX": 0,
         "minZ": 0
       },
-      "id": "roof-main",
+      "id": "roof-mass-0",
       "kind": "GABLE",
       "levelId": "lvl-1",
       "materialId": "mat-roof",
-      "overhang": 1.06876,
-      "pitchDeg": 28.563799,
+      "overhang": 0,
+      "pitchDeg": 40,
+      "ridgeAxis": "Z",
+      "thickness": 0.28,
+      "type": "createRoof"
+    },
+    {
+      "capWallIds": [
+        "ring-mass-1-0-w0",
+        "ring-mass-1-0-w1",
+        "ring-mass-1-0-w2",
+        "ring-mass-1-0-w3"
+      ],
+      "eaveOffset": 3.06,
+      "footprint": {
+        "maxX": 12.05,
+        "maxZ": 12.61,
+        "minX": 7.9,
+        "minZ": 5.1
+      },
+      "id": "roof-mass-1",
+      "kind": "FLAT",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 0,
       "ridgeAxis": "Z",
       "thickness": 0.28,
       "type": "createRoof"
@@ -206,10 +285,10 @@
       "height": 1.680714,
       "id": "opening-0",
       "kind": "WINDOW",
-      "offset": 9.473544,
+      "offset": 8.325906,
       "sill": 0.346814,
       "type": "cutOpening",
-      "wallId": "ring-0-w3",
+      "wallId": "ring-mass-0-0-w3",
       "width": 1.133815
     },
     {
@@ -219,14 +298,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.987086,
+      "height": 1.771161,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 3.030442,
-      "sill": 0.546899,
+      "offset": 4.620666,
+      "sill": 0.359559,
       "type": "cutOpening",
-      "wallId": "ring-0-w2",
-      "width": 1.640697
+      "wallId": "ring-mass-0-0-w1",
+      "width": 0.39951
     },
     {
       "id": "opening-1-w",
@@ -235,14 +314,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.359559,
+      "height": 0.653611,
       "id": "opening-2",
       "kind": "WINDOW",
-      "offset": 7.363625,
-      "sill": 1.211847,
+      "offset": 2.602023,
+      "sill": 0.354784,
       "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 2.543547
+      "wallId": "ring-mass-0-1-w2",
+      "width": 0.827018
     },
     {
       "id": "opening-2-w",
@@ -251,14 +330,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 1.771161,
+      "height": 1.078677,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 5.768304,
+      "offset": 2.183312,
       "sill": 0.359559,
       "type": "cutOpening",
-      "wallId": "ring-0-w1",
-      "width": 0.39951
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.372876
     },
     {
       "id": "opening-3-w",
@@ -267,14 +346,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.972141,
+      "height": 0.745752,
       "id": "opening-4",
       "kind": "WINDOW",
-      "offset": 7.976207,
-      "sill": 0.282567,
+      "offset": 6.857579,
+      "sill": 0.545997,
       "type": "cutOpening",
-      "wallId": "ring-1-w0",
-      "width": 0.585948
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.372876
     },
     {
       "id": "opening-4-w",
@@ -283,14 +362,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.653611,
+      "height": 0.426144,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 6.752023,
-      "sill": 0.354784,
+      "offset": 7.017383,
+      "sill": 1.358334,
       "type": "cutOpening",
-      "wallId": "ring-1-w2",
-      "width": 0.827018
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.559314
     },
     {
       "id": "opening-5-w",
@@ -299,71 +378,20 @@
       "type": "placeWindow"
     },
     {
-      "height": 1.078677,
-      "id": "opening-6",
-      "kind": "WINDOW",
-      "offset": 2.183312,
-      "sill": 0.359559,
-      "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 0.372876
-    },
-    {
-      "id": "opening-6-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-6",
-      "type": "placeWindow"
-    },
-    {
-      "height": 0.745752,
-      "id": "opening-7",
-      "kind": "WINDOW",
-      "offset": 6.857579,
-      "sill": 0.545997,
-      "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 0.372876
-    },
-    {
-      "id": "opening-7-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-7",
-      "type": "placeWindow"
-    },
-    {
-      "depth": 0.45,
+      "depth": 0.360153,
       "end": {
-        "x": -0.19,
-        "y": 3.048818,
-        "z": 6.418895
+        "x": -0.234013,
+        "y": 3.554843,
+        "z": 0.255715
       },
-      "hostId": "ring-0-w3",
+      "hostId": "ring-mass-0-0-w3",
       "id": "solid-0",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
-        "y": 3.048818,
-        "z": 13.568833
-      },
-      "type": "createLinearSolid",
-      "width": 0.651899
-    },
-    {
-      "depth": 0.360153,
-      "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.554843,
-        "z": 1.403354
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-1",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 3.554843,
-        "z": 13.528505
+        "z": 12.380867
       },
       "type": "createLinearSolid",
       "width": 0.360153
@@ -371,18 +399,18 @@
     {
       "depth": 0.266476,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.868158,
-        "z": 1.45671
+        "z": 0.309072
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-2",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-1",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.868158,
-        "z": 13.515166
+        "z": 12.367528
       },
       "type": "createLinearSolid",
       "width": 0.266476
@@ -390,18 +418,18 @@
     {
       "depth": 0.306286,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 3.588929,
-        "z": 5.488647
+        "z": 4.34101
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-3",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-2",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 3.588929,
-        "z": 1.400328
+        "z": 0.25269
       },
       "type": "createLinearSolid",
       "width": 0.306286
@@ -409,18 +437,18 @@
     {
       "depth": 0.196449,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.718963,
-        "z": 9.099955
+        "z": 7.952316
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-4",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-3",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.718963,
-        "z": 13.368438
+        "z": 12.220799
       },
       "type": "createLinearSolid",
       "width": 0.196449
@@ -428,18 +456,18 @@
     {
       "depth": 0.170506,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.535485,
-        "z": 9.099956
+        "z": 7.952318
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-5",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-4",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.535485,
-        "z": 13.355098
+        "z": 12.20746
       },
       "type": "createLinearSolid",
       "width": 0.170506
@@ -447,18 +475,18 @@
     {
       "depth": 0.191444,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332826,
-        "z": 9.246685
+        "z": 8.099048
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-6",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-5",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332826,
-        "z": 13.355098
+        "z": 12.207461
       },
       "type": "createLinearSolid",
       "width": 0.191444
@@ -466,18 +494,18 @@
     {
       "depth": 0.188789,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.742028,
-        "z": 3.184416
+        "z": 2.036779
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-7",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-6",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.742028,
-        "z": 1.586753
+        "z": 0.439115
       },
       "type": "createLinearSolid",
       "width": 0.188789
@@ -485,56 +513,37 @@
     {
       "depth": 0.186735,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 4.927495,
-        "z": 13.33236
+        "z": 12.184723
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-8",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-7",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 4.927495,
-        "z": 1.626717
+        "z": 0.479079
       },
       "type": "createLinearSolid",
       "width": 0.186735
     },
     {
-      "depth": 0.201054,
-      "end": {
-        "x": -0.19,
-        "y": 6.178702,
-        "z": 9.940312
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-9",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 6.178702,
-        "z": 13.208373
-      },
-      "type": "createLinearSolid",
-      "width": 0.201054
-    },
-    {
       "depth": 0.226464,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942674,
-        "z": 9.940314
+        "z": 8.792676
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-10",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-8",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942674,
-        "z": 13.208369
+        "z": 12.060731
       },
       "type": "createLinearSolid",
       "width": 0.226464
@@ -542,56 +551,37 @@
     {
       "depth": 0.173669,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.742608,
-        "z": 9.940313
+        "z": 8.792674
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-11",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-9",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.742608,
-        "z": 13.20837
+        "z": 12.060732
       },
       "type": "createLinearSolid",
       "width": 0.173669
     },
     {
-      "depth": 0.213461,
-      "end": {
-        "x": -0.19,
-        "y": 5.549043,
-        "z": 9.940313
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-12",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.549043,
-        "z": 13.20837
-      },
-      "type": "createLinearSolid",
-      "width": 0.213461
-    },
-    {
       "depth": 0.200085,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.355609,
-        "z": 9.940314
+        "z": 8.792676
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-13",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-10",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.355609,
-        "z": 13.208369
+        "z": 12.060731
       },
       "type": "createLinearSolid",
       "width": 0.200085
@@ -599,398 +589,151 @@
     {
       "depth": 0.200468,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 6.39214
+        "z": 5.244502
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-14",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-11",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 13.208369
+        "z": 12.060732
       },
       "type": "createLinearSolid",
       "width": 0.200468
-    },
-    {
-      "depth": 0.186155,
-      "end": {
-        "x": 12.24,
-        "y": 5.752803,
-        "z": 13.33236
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-15",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.752803,
-        "z": 1.773204
-      },
-      "type": "createLinearSolid",
-      "width": 0.186155
-    },
-    {
-      "depth": 0.195699,
-      "end": {
-        "x": 12.24,
-        "y": 5.135732,
-        "z": 3.557189
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-16",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.135732,
-        "z": 1.773204
-      },
-      "type": "createLinearSolid",
-      "width": 0.195699
     },
     {
       "depth": 0.253151,
       "end": {
         "x": 8.49557,
         "y": 0.179716,
-        "z": -0.19
+        "z": -0.234013
       },
-      "hostId": "ring-0-w0",
-      "id": "solid-17",
+      "hostId": "ring-mass-0-0-w0",
+      "id": "solid-12",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
         "x": 0.478736,
         "y": 0.179716,
-        "z": -0.19
+        "z": -0.234013
       },
       "type": "createLinearSolid",
       "width": 0.253151
     },
     {
-      "depth": 0.199953,
-      "end": {
-        "x": 12.24,
-        "y": 5.133605,
-        "z": 5.356699
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-18",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.133605,
-        "z": 3.571395
-      },
-      "type": "createLinearSolid",
-      "width": 0.199953
-    },
-    {
       "depth": 0.194279,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.736988,
-        "z": 7.07412
+        "z": 5.926483
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-19",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-13",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.736988,
-        "z": 3.744439
+        "z": 2.596802
       },
       "type": "createLinearSolid",
       "width": 0.194279
     },
     {
-      "depth": 0.45,
-      "end": {
-        "x": 0.589307,
-        "y": 2.395702,
-        "z": 15.095276
-      },
-      "hostId": "ring-0-w2",
-      "id": "solid-20",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 9.046239,
-        "y": 2.395702,
-        "z": 15.095276
-      },
-      "type": "createLinearSolid",
-      "width": 0.575495
-    },
-    {
-      "depth": 0.120443,
-      "end": {
-        "x": 0.589307,
-        "y": 2.047733,
-        "z": 15.095276
-      },
-      "hostId": "ring-0-w2",
-      "id": "solid-21",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 9.046239,
-        "y": 2.047733,
-        "z": 15.095276
-      },
-      "type": "createLinearSolid",
-      "width": 0.120443
-    },
-    {
-      "depth": 0.201272,
-      "end": {
-        "x": -0.19,
-        "y": 6.178492,
-        "z": 6.445493
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-22",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 6.178492,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.201272
-    },
-    {
       "depth": 0.226204,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942804,
-        "z": 6.445502
+        "z": 5.297863
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-23",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-14",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942804,
-        "z": 9.473449
+        "z": 8.32581
       },
       "type": "createLinearSolid",
       "width": 0.226204
     },
     {
-      "depth": 0.173966,
-      "end": {
-        "x": -0.19,
-        "y": 5.742719,
-        "z": 6.525529
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-24",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.742719,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.173966
-    },
-    {
-      "depth": 0.213444,
-      "end": {
-        "x": -0.19,
-        "y": 5.549014,
-        "z": 6.525529
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-25",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.549014,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.213444
-    },
-    {
-      "depth": 0.186726,
-      "end": {
-        "x": -0.19,
-        "y": 5.348929,
-        "z": 6.445495
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-26",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.348929,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.186726
-    },
-    {
       "depth": 0.19676,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.135201,
-        "z": 7.753444
+        "z": 6.605806
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-27",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-15",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.135201,
-        "z": 6.113895
+        "z": 4.966257
       },
       "type": "createLinearSolid",
       "width": 0.19676
     },
     {
-      "depth": 0.2152,
-      "end": {
-        "x": 9.933806,
-        "y": 3.277046,
-        "z": -0.19
-      },
-      "hostId": "ring-0-w0",
-      "id": "solid-28",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 4.726873,
-        "y": 3.277046,
-        "z": -0.19
-      },
-      "type": "createLinearSolid",
-      "width": 0.2152
-    },
-    {
-      "depth": 0.170951,
-      "end": {
-        "x": -0.19,
-        "y": 4.535381,
-        "z": 1.630116
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-29",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 4.535381,
-        "z": 8.526379
-      },
-      "type": "createLinearSolid",
-      "width": 0.170951
-    },
-    {
       "depth": 0.191493,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332802,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-30",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-16",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332802,
-        "z": 8.52638
+        "z": 7.378742
       },
       "type": "createLinearSolid",
       "width": 0.191493
     },
     {
-      "depth": 0.221715,
-      "end": {
-        "x": -0.19,
-        "y": 4.126198,
-        "z": 6.31091
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-31",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 4.126198,
-        "z": 8.114093
-      },
-      "type": "createLinearSolid",
-      "width": 0.221715
-    },
-    {
       "depth": 0.214513,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.728113,
-        "z": 5.512106
+        "z": 4.364468
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-32",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-17",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.728113,
-        "z": 7.498939
+        "z": 6.351301
       },
       "type": "createLinearSolid",
       "width": 0.214513
-    },
-    {
-      "depth": 0.346242,
-      "end": {
-        "x": 9.933806,
-        "y": 2.996325,
-        "z": -0.19
-      },
-      "hostId": "ring-0-w0",
-      "id": "solid-33",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 6.564605,
-        "y": 2.996325,
-        "z": -0.19
-      },
-      "type": "createLinearSolid",
-      "width": 0.346242
     },
     {
       "depth": 0.45,
       "end": {
         "x": 2.843601,
         "y": 1.714155,
-        "z": 15.095276
+        "z": 12.844013
       },
-      "hostId": "ring-0-w2",
-      "id": "solid-34",
+      "hostId": "ring-mass-0-0-w2",
+      "id": "solid-18",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
         "x": 5.444707,
         "y": 1.714155,
-        "z": 15.095276
+        "z": 12.844013
       },
       "type": "createLinearSolid",
       "width": 0.546713
@@ -998,18 +741,18 @@
     {
       "depth": 0.195884,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.371474,
-        "z": 13.33236
+        "z": 12.184722
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-35",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-19",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.371474,
-        "z": 8.831214
+        "z": 7.683576
       },
       "type": "createLinearSolid",
       "width": 0.195884
@@ -1017,56 +760,37 @@
     {
       "depth": 0.201854,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 6.17805,
-        "z": 1.630116
+        "z": 0.482477
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-36",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-20",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 6.17805,
-        "z": 5.925275
+        "z": 4.777636
       },
       "type": "createLinearSolid",
       "width": 0.201854
     },
     {
-      "depth": 0.173876,
-      "end": {
-        "x": -0.19,
-        "y": 5.74266,
-        "z": 1.630117
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-37",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.74266,
-        "z": 5.925275
-      },
-      "type": "createLinearSolid",
-      "width": 0.173876
-    },
-    {
       "depth": 0.226308,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942752,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-38",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-21",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942752,
-        "z": 5.925275
+        "z": 4.777637
       },
       "type": "createLinearSolid",
       "width": 0.226308
@@ -1074,18 +798,18 @@
     {
       "depth": 0.213382,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.549031,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-39",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-22",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.549031,
-        "z": 5.925275
+        "z": 4.777637
       },
       "type": "createLinearSolid",
       "width": 0.213382
@@ -1093,128 +817,24 @@
     {
       "depth": 0.200468,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-40",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-23",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 5.911936
+        "z": 4.764298
       },
       "type": "createLinearSolid",
       "width": 0.200468
-    },
-    {
-      "depth": 0.187549,
-      "end": {
-        "x": 12.24,
-        "y": 4.741423,
-        "z": 11.694086
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-41",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.741423,
-        "z": 9.93584
-      },
-      "type": "createLinearSolid",
-      "width": 0.187549
-    },
-    {
-      "depth": 0.215142,
-      "end": {
-        "x": 12.24,
-        "y": 4.534052,
-        "z": 10.934945
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-42",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.534052,
-        "z": 9.417568
-      },
-      "type": "createLinearSolid",
-      "width": 0.215142
-    },
-    {
-      "depth": 0.192263,
-      "end": {
-        "x": 12.24,
-        "y": 4.737996,
-        "z": 12.706136
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-43",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.737996,
-        "z": 11.188203
-      },
-      "type": "createLinearSolid",
-      "width": 0.192263
-    },
-    {
-      "depth": 0.215383,
-      "end": {
-        "x": 12.24,
-        "y": 4.534173,
-        "z": 12.706136
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-44",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.534173,
-        "z": 11.188203
-      },
-      "type": "createLinearSolid",
-      "width": 0.215383
     }
   ],
   "quantities": [
-    {
-      "class": "HARD",
-      "constraintIds": [
-        "constraint-hyp-mass-width-53397a8c11"
-      ],
-      "high": 12.05,
-      "hypothesisId": "hyp-mass",
-      "low": 12.05,
-      "parameter": "width",
-      "residual": 0,
-      "unit": "m",
-      "value": 12.05,
-      "why": "two horizontal chains agree on 12.05 m, on asset-rzut-19a11bc745"
-    },
-    {
-      "class": "SOFT",
-      "constraintIds": [
-        "constraint-hyp-mass-depth-e27f7afe03"
-      ],
-      "high": 15.055276,
-      "hypothesisId": "hyp-mass",
-      "low": 14.755276,
-      "parameter": "depth",
-      "residual": 0,
-      "unit": "m",
-      "value": 14.905276,
-      "why": "the best-supported vertical chain sums to 14.905276 m, with 50 per cent of it derived from the sheet scale rather than printed, on asset-rzut-19a11bc745"
-    },
     {
       "class": "HARD",
       "constraintIds": [
@@ -1244,72 +864,153 @@
       "why": "the top storey is not closed by a datum above it, so it takes the height of the storey below"
     },
     {
-      "class": "UNRESOLVED",
-      "constraintIds": [],
-      "high": 0.5,
-      "hypothesisId": "hyp-mass",
-      "low": 0.25,
+      "class": "SOFT",
+      "constraintIds": [
+        "constraint-hyp-building-wallthickness-226ec91177",
+        "constraint-hyp-building-wallthickness-ff7ae3d115"
+      ],
+      "high": 0.569658,
+      "hypothesisId": "hyp-building",
+      "low": 0.39,
       "parameter": "wallThickness",
-      "residual": 0,
-      "unit": "none",
-      "value": 0.38,
-      "why": "no constraint of any kind bears on this quantity"
+      "residual": 0.019747,
+      "unit": "m",
+      "value": 0.468026,
+      "why": "weighted fit of 2 suggestions, spread 0.019747 m"
     },
     {
       "class": "SOFT",
       "constraintIds": [
-        "constraint-hyp-roof-pitchdeg-c874e49042"
+        "constraint-hyp-mass-0-width-8802f9c97d"
       ],
-      "high": 31.563799,
-      "hypothesisId": "hyp-roof",
-      "low": 25.563799,
+      "high": 8.02,
+      "hypothesisId": "hyp-mass-0",
+      "low": 7.78,
+      "parameter": "width",
+      "residual": 0,
+      "unit": "m",
+      "value": 7.9,
+      "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 790 cm"
+    },
+    {
+      "class": "SOFT",
+      "constraintIds": [
+        "constraint-hyp-mass-0-depth-d5feefb572"
+      ],
+      "high": 12.73,
+      "hypothesisId": "hyp-mass-0",
+      "low": 12.49,
+      "parameter": "depth",
+      "residual": 0,
+      "unit": "m",
+      "value": 12.61,
+      "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 1261 cm"
+    },
+    {
+      "class": "SOFT",
+      "constraintIds": [
+        "constraint-hyp-mass-1-width-f10ddf82f7"
+      ],
+      "high": 4.27,
+      "hypothesisId": "hyp-mass-1",
+      "low": 4.03,
+      "parameter": "width",
+      "residual": 0,
+      "unit": "m",
+      "value": 4.15,
+      "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 415 cm"
+    },
+    {
+      "class": "SOFT",
+      "constraintIds": [
+        "constraint-hyp-mass-1-depth-ba35fb9c2a"
+      ],
+      "high": 7.63,
+      "hypothesisId": "hyp-mass-1",
+      "low": 7.39,
+      "parameter": "depth",
+      "residual": 0,
+      "unit": "m",
+      "value": 7.51,
+      "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 751 cm"
+    },
+    {
+      "class": "HARD",
+      "constraintIds": [
+        "constraint-hyp-roof-mass-0-overhang-372a481847"
+      ],
+      "high": 0,
+      "hypothesisId": "hyp-roof-mass-0",
+      "low": 0,
+      "parameter": "overhang",
+      "residual": 0,
+      "unit": "m",
+      "value": 0,
+      "why": "the publisher states the roof has no eaves: \"Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem\""
+    },
+    {
+      "class": "HARD",
+      "constraintIds": [
+        "constraint-hyp-roof-mass-0-pitchdeg-bc1ee3494e"
+      ],
+      "high": 40,
+      "hypothesisId": "hyp-roof-mass-0",
+      "low": 40,
       "parameter": "pitchDeg",
       "residual": 0,
       "unit": "deg",
-      "value": 28.563799,
-      "why": "the ridge stands 3.28 m above the eaves over a 6.025 m half-span"
+      "value": 40,
+      "why": "printed as \"40 st.\": the publisher prints the roof pitch as \"40 st.\""
     },
     {
-      "class": "SOFT",
-      "constraintIds": [
-        "constraint-hyp-roof-overhang-13970b7c97",
-        "constraint-hyp-roof-overhang-599a19e9f4"
-      ],
-      "high": 1.277605,
-      "hypothesisId": "hyp-roof",
-      "low": 0.863317,
+      "class": "UNRESOLVED",
+      "constraintIds": [],
+      "high": 1.2,
+      "hypothesisId": "hyp-roof-mass-1",
+      "low": 0,
       "parameter": "overhang",
-      "residual": 0.006939,
-      "unit": "m",
-      "value": 1.06876,
-      "why": "weighted fit of 2 suggestions, spread 0.006939 m"
+      "residual": 0,
+      "unit": "none",
+      "value": 0,
+      "why": "no constraint of any kind bears on this quantity"
+    },
+    {
+      "class": "UNRESOLVED",
+      "constraintIds": [],
+      "high": 60,
+      "hypothesisId": "hyp-roof-mass-1",
+      "low": 0,
+      "parameter": "pitchDeg",
+      "residual": 0,
+      "unit": "none",
+      "value": 0,
+      "why": "no constraint of any kind bears on this quantity"
     }
   ],
   "residuals": {
-    "hard": 2,
-    "metricMaxM": 0.006939,
-    "metricRmsM": 0.004006,
-    "soft": 4,
-    "unresolved": 1
+    "hard": 3,
+    "metricMaxM": 0.019747,
+    "metricRmsM": 0.008062,
+    "soft": 6,
+    "unresolved": 2
   },
   "schema": "buildapp.reconstruction-candidate",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "solver": {
     "name": "reconstruction.solver",
     "version": "1.0.0"
   },
-  "sourcePackageHash": "189a0c53fdd06c7bfcd349aec91c607ee7b136dfdfbdc7f10ffc327f238ece86",
+  "sourcePackageHash": "607f1b899933247a5c2b7be018689c357b79cd58ba3544596e367761f8889892",
   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
   "steps": [
     {
-      "detail": "asset-rzut-19a11bc745 at 0.026426 m/px, 9 anchors, rms 0.019392 m",
+      "detail": "2 bodies: mass-0 7.90×12.61 m on storeys 0..1 (main); mass-1 4.15×7.51 m on storeys 0..0 (attached); gate STRUCTURAL_LAYOUT_ACCEPTED",
       "index": 0,
-      "inputs": 57,
+      "inputs": 2,
       "method": "DISCRETE_SELECTION",
       "outputs": 2,
-      "residual": 0.019392,
       "stage": "massing",
-      "what": "the footprint, from the plan chains"
+      "what": "the building, decomposed into the bodies its plans enclose"
     },
     {
       "detail": "2 floor datums and a top datum at 7.95 m",
@@ -1339,36 +1040,46 @@
       "what": "source sightings reduced to members"
     },
     {
-      "detail": "28.563799 degrees (soft), ridge 3.28 m above eaves over 6.025 m",
+      "detail": "gable at 40° with its ridge along Z, on the authority of published specification",
       "index": 4,
-      "inputs": 1,
-      "method": "DIRECT",
+      "inputs": 5,
+      "method": "DISCRETE_SELECTION",
       "outputs": 1,
       "residual": 0,
       "stage": "roof",
-      "what": "the pitch"
+      "what": "the roof over mass-0"
     },
     {
-      "detail": "71 sightings -> 8 openings",
+      "detail": "flat, on the authority of convention",
       "index": 5,
+      "inputs": 4,
+      "method": "REFUSED",
+      "outputs": 1,
+      "residual": 0,
+      "stage": "roof",
+      "what": "the roof over mass-1"
+    },
+    {
+      "detail": "71 sightings -> 6 openings",
+      "index": 6,
       "inputs": 71,
       "method": "DISCRETE_SELECTION",
-      "outputs": 8,
+      "outputs": 6,
       "stage": "openings",
       "what": "openings cut from registered elevations"
     },
     {
-      "detail": "80 sightings -> 45 solids",
-      "index": 6,
+      "detail": "80 sightings -> 24 solids; 21 refused for want of depth evidence",
+      "index": 7,
       "inputs": 80,
       "method": "DISCRETE_SELECTION",
-      "outputs": 45,
+      "outputs": 24,
       "stage": "facade",
       "what": "linear solids from corroborated depth cues"
     },
     {
       "detail": "1 stair observations, none of which fixes a going, a rise or a landing",
-      "index": 7,
+      "index": 8,
       "inputs": 1,
       "method": "REFUSED",
       "outputs": 0,
@@ -1376,6 +1087,9 @@
       "what": "a stair between the storeys"
     }
   ],
+  "structuralLayoutHash": "8f2f9657b301180d439bc35e7056a57ef659d5e321718a7b01644f4861a6af02",
+  "structuralLayoutId": "layout-marcowki-8f2f9657b301180d",
+  "structuralStatus": "STRUCTURAL_LAYOUT_ACCEPTED",
   "traces": [
     {
       "evidenceIds": [],
@@ -1391,7 +1105,7 @@
         "obs-opening-reveal-e768165002"
       ],
       "rejected": [],
-      "why": "1.133815 by 1.680714 m at 9.473544 m along the left wall, sill 0.346814 m; 6 sightings across 1 drawing"
+      "why": "1.133815 by 1.680714 m at 8.325906 m along the left wall of mass-0, sill 0.346814 m; 6 sightings across 1 drawing"
     },
     {
       "evidenceIds": [],
@@ -1399,11 +1113,10 @@
       "kind": "window",
       "objectId": "opening-1",
       "observationIds": [
-        "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326"
+        "obs-opening-reveal-b571455087"
       ],
       "rejected": [],
-      "why": "1.640697 by 0.987086 m at 3.030442 m along the front wall, sill 0.546899 m; 2 sightings across 1 drawing"
+      "why": "0.39951 by 1.771161 m at 4.620666 m along the right wall of mass-0, sill 0.359559 m; 1 sighting across 1 drawing"
     },
     {
       "evidenceIds": [],
@@ -1411,11 +1124,10 @@
       "kind": "window",
       "objectId": "opening-2",
       "observationIds": [
-        "obs-opening-reveal-0330224147",
-        "obs-opening-reveal-12d5f7840b"
+        "obs-opening-reveal-ae70b5010e"
       ],
       "rejected": [],
-      "why": "2.543547 by 0.359559 m at 7.363625 m along the rear wall, sill 1.211847 m; 2 sightings across 1 drawing"
+      "why": "0.827018 by 0.653611 m at 2.602023 m along the front wall of mass-0, sill 0.354784 m; 1 sighting across 1 drawing"
     },
     {
       "evidenceIds": [],
@@ -1423,10 +1135,10 @@
       "kind": "window",
       "objectId": "opening-3",
       "observationIds": [
-        "obs-opening-reveal-b571455087"
+        "obs-opening-reveal-0257884b05"
       ],
       "rejected": [],
-      "why": "0.39951 by 1.771161 m at 5.768304 m along the right wall, sill 0.359559 m; 1 sighting across 1 drawing"
+      "why": "0.372876 by 1.078677 m at 2.183312 m along the rear wall of mass-0, sill 0.359559 m; 1 sighting across 1 drawing"
     },
     {
       "evidenceIds": [],
@@ -1434,10 +1146,10 @@
       "kind": "window",
       "objectId": "opening-4",
       "observationIds": [
-        "obs-opening-reveal-deffad0e49"
+        "obs-opening-reveal-20f04c7d08"
       ],
       "rejected": [],
-      "why": "0.585948 by 0.972141 m at 7.976207 m along the rear wall, sill 0.282567 m; 1 sighting across 1 drawing"
+      "why": "0.372876 by 0.745752 m at 6.857579 m along the rear wall of mass-0, sill 0.545997 m; 1 sighting across 1 drawing"
     },
     {
       "evidenceIds": [],
@@ -1445,38 +1157,17 @@
       "kind": "window",
       "objectId": "opening-5",
       "observationIds": [
-        "obs-opening-reveal-ae70b5010e"
+        "obs-opening-reveal-900b0e8b1a"
       ],
       "rejected": [],
-      "why": "0.827018 by 0.653611 m at 6.752023 m along the front wall, sill 0.354784 m; 1 sighting across 1 drawing"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-opening-6",
-      "kind": "window",
-      "objectId": "opening-6",
-      "observationIds": [
-        "obs-opening-reveal-0257884b05"
-      ],
-      "rejected": [],
-      "why": "0.372876 by 1.078677 m at 2.183312 m along the rear wall, sill 0.359559 m; 1 sighting across 1 drawing"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-opening-7",
-      "kind": "window",
-      "objectId": "opening-7",
-      "observationIds": [
-        "obs-opening-reveal-20f04c7d08"
-      ],
-      "rejected": [],
-      "why": "0.372876 by 0.745752 m at 6.857579 m along the rear wall, sill 0.545997 m; 1 sighting across 1 drawing"
+      "why": "0.559314 by 0.426144 m at 7.017383 m along the rear wall of mass-0, sill 1.358334 m; 1 sighting across 1 drawing"
     },
     {
       "evidenceIds": [
         "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
         "metric-dimension-1d2590265b",
-        "metric-dimension-597cd37632",
+        "metric-dimension-4af572f280",
         "metric-dimension-98bf0f74d5",
         "metric-dimension-b8faf29e24",
         "metric-dimension-c7e4ed94b9",
@@ -1486,18 +1177,19 @@
         "metric-level-736b8c6e31",
         "metric-level-c977b973a3"
       ],
-      "hypothesisId": "hyp-ring-0",
+      "hypothesisId": "hyp-ring-mass-0-0",
       "kind": "wallRing",
-      "objectId": "ring-0",
+      "objectId": "ring-mass-0-0",
       "observationIds": [],
       "rejected": [],
-      "why": "footprint 12.05 by 14.905276 m from the plan chains, 3.06 m high from the section datums"
+      "why": "7.9 by 12.61 m from the plan's own walls, 3.06 m high from the section datums, on storey 0"
     },
     {
       "evidenceIds": [
         "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
         "metric-dimension-1d2590265b",
-        "metric-dimension-597cd37632",
+        "metric-dimension-4af572f280",
         "metric-dimension-98bf0f74d5",
         "metric-dimension-b8faf29e24",
         "metric-dimension-c7e4ed94b9",
@@ -1507,12 +1199,48 @@
         "metric-level-736b8c6e31",
         "metric-level-c977b973a3"
       ],
-      "hypothesisId": "hyp-ring-1",
+      "hypothesisId": "hyp-ring-mass-0-1",
       "kind": "wallRing",
-      "objectId": "ring-1",
+      "objectId": "ring-mass-0-1",
       "observationIds": [],
       "rejected": [],
-      "why": "footprint 12.05 by 14.905276 m from the plan chains, 1.61 m high from the section datums"
+      "why": "7.9 by 12.61 m from the plan's own walls, 1.61 m high from the section datums, on storey 1"
+    },
+    {
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67",
+        "metric-level-70deeedf63",
+        "metric-level-714c90d304",
+        "metric-level-736b8c6e31",
+        "metric-level-c977b973a3"
+      ],
+      "hypothesisId": "hyp-ring-mass-1-0",
+      "kind": "wallRing",
+      "objectId": "ring-mass-1-0",
+      "observationIds": [],
+      "rejected": [],
+      "why": "4.15 by 7.51 m from the plan's own walls, 3.06 m high from the section datums, on storey 0"
+    },
+    {
+      "evidenceIds": [
+        "metric-spec-roof-angle-a196295353",
+        "metric-level-736b8c6e31",
+        "metric-level-70deeedf63",
+        "metric-level-c977b973a3",
+        "metric-level-714c90d304"
+      ],
+      "hypothesisId": "hyp-roof-mass-0",
+      "kind": "roof",
+      "objectId": "roof-mass-0",
+      "observationIds": [],
+      "rejected": [],
+      "why": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page; pitch printed as \"40 st.\"; a 40° roof over the 7.90 m span rises 3.31 m, and the section measures 3.28 m from eaves to ridge — 0.03 m apart"
     },
     {
       "evidenceIds": [
@@ -1521,12 +1249,12 @@
         "metric-level-c977b973a3",
         "metric-level-714c90d304"
       ],
-      "hypothesisId": "hyp-roof",
+      "hypothesisId": "hyp-roof-mass-1",
       "kind": "roof",
-      "objectId": "roof-main",
+      "objectId": "roof-mass-1",
       "observationIds": [],
       "rejected": [],
-      "why": "a gable along Z, pitched 28.563799 degrees to put the ridge at 7.95 m"
+      "why": "a body reaching only storey 0, below the main roof, with nothing in the sources describing its own: taken as level, which is the commonest roof over an attached single-storey body and is recorded here as a convention rather than a reading"
     },
     {
       "evidenceIds": [],
@@ -1534,10 +1262,11 @@
       "kind": "linearSolid",
       "objectId": "solid-0",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-45bf7be1d8"
+        "obs-linear-volume-candidate-beam-4729575a22",
+        "obs-linear-volume-candidate-beam-5c180cd9c4"
       ],
       "rejected": [],
-      "why": "7.149938 m long, 0.651899 m in elevation, standing 0.45 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "12.125151 m long, 0.360153 m in elevation, standing 0.360153 m proud of the left wall of mass-0; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1545,11 +1274,12 @@
       "kind": "linearSolid",
       "objectId": "solid-1",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4729575a22",
-        "obs-linear-volume-candidate-beam-5c180cd9c4"
+        "obs-linear-volume-candidate-beam-51264c4bd1",
+        "obs-linear-volume-candidate-beam-cff798139b",
+        "obs-linear-volume-candidate-beam-def101d470"
       ],
       "rejected": [],
-      "why": "12.125151 m long, 0.360153 m in elevation, standing 0.360153 m proud of the left wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "12.058456 m long, 0.266476 m in elevation, standing 0.266476 m proud of the left wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1557,10 +1287,11 @@
       "kind": "linearSolid",
       "objectId": "solid-10",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-7251c194ed"
+        "obs-linear-volume-candidate-beam-92cff6d900",
+        "obs-linear-volume-candidate-beam-fafed6a4b1"
       ],
       "rejected": [],
-      "why": "3.268055 m long, 0.226464 m in elevation, standing 0.226464 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "3.268055 m long, 0.200085 m in elevation, standing 0.200085 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1568,10 +1299,10 @@
       "kind": "linearSolid",
       "objectId": "solid-11",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-fc9eb854fb"
+        "obs-linear-volume-candidate-beam-c5af1dbba2"
       ],
       "rejected": [],
-      "why": "3.268057 m long, 0.173669 m in elevation, standing 0.173669 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "6.816229 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1579,10 +1310,12 @@
       "kind": "linearSolid",
       "objectId": "solid-12",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-320fac4597"
+        "obs-linear-volume-candidate-beam-3b6208d04e",
+        "obs-linear-volume-candidate-beam-9f08f35c3b",
+        "obs-linear-volume-candidate-beam-b27bd35495"
       ],
       "rejected": [],
-      "why": "3.268057 m long, 0.213461 m in elevation, standing 0.213461 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "8.016834 m long, 0.253151 m in elevation, standing 0.253151 m proud of the rear wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1590,11 +1323,12 @@
       "kind": "linearSolid",
       "objectId": "solid-13",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-92cff6d900",
-        "obs-linear-volume-candidate-beam-fafed6a4b1"
+        "obs-linear-volume-candidate-beam-496fc9f596",
+        "obs-linear-volume-candidate-beam-d3aaf908f3",
+        "obs-linear-volume-candidate-beam-e9e37a15b9"
       ],
       "rejected": [],
-      "why": "3.268055 m long, 0.200085 m in elevation, standing 0.200085 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "3.329681 m long, 0.194279 m in elevation, standing 0.194279 m proud of the right wall of mass-0; 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1602,10 +1336,10 @@
       "kind": "linearSolid",
       "objectId": "solid-14",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-c5af1dbba2"
+        "obs-linear-volume-candidate-beam-ffec9b6eec"
       ],
       "rejected": [],
-      "why": "6.816229 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "3.027947 m long, 0.226204 m in elevation, standing 0.226204 m proud of the left wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1613,10 +1347,11 @@
       "kind": "linearSolid",
       "objectId": "solid-15",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-6c7e1bbefe"
+        "obs-linear-volume-candidate-beam-b36c3ead9e",
+        "obs-linear-volume-candidate-beam-ede457e076"
       ],
       "rejected": [],
-      "why": "11.559156 m long, 0.186155 m in elevation, standing 0.186155 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "1.639549 m long, 0.19676 m in elevation, standing 0.19676 m proud of the right wall of mass-1; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1624,10 +1359,12 @@
       "kind": "linearSolid",
       "objectId": "solid-16",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-685c045bd7"
+        "obs-linear-volume-candidate-beam-0931728dc7",
+        "obs-linear-volume-candidate-beam-1af284fe76",
+        "obs-linear-volume-candidate-beam-abbe667a2c"
       ],
       "rejected": [],
-      "why": "1.783985 m long, 0.195699 m in elevation, standing 0.195699 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "6.896263 m long, 0.191493 m in elevation, standing 0.191493 m proud of the left wall of mass-0; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1635,12 +1372,11 @@
       "kind": "linearSolid",
       "objectId": "solid-17",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-3b6208d04e",
-        "obs-linear-volume-candidate-beam-9f08f35c3b",
-        "obs-linear-volume-candidate-beam-b27bd35495"
+        "obs-linear-volume-candidate-beam-1be413e7cc",
+        "obs-linear-volume-candidate-beam-4e8ae8cda1"
       ],
       "rejected": [],
-      "why": "8.016834 m long, 0.253151 m in elevation, standing 0.253151 m proud of the rear wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "1.986833 m long, 0.214513 m in elevation, standing 0.214513 m proud of the left wall of mass-0; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1648,10 +1384,10 @@
       "kind": "linearSolid",
       "objectId": "solid-18",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-2b558faa85"
+        "obs-linear-volume-candidate-beam-e8de30aaa2"
       ],
       "rejected": [],
-      "why": "1.785304 m long, 0.199953 m in elevation, standing 0.199953 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "2.601106 m long, 0.546713 m in elevation, standing 0.45 m proud of the front wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1659,12 +1395,12 @@
       "kind": "linearSolid",
       "objectId": "solid-19",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-496fc9f596",
-        "obs-linear-volume-candidate-beam-d3aaf908f3",
-        "obs-linear-volume-candidate-beam-e9e37a15b9"
+        "obs-linear-volume-candidate-beam-18511fbef4",
+        "obs-linear-volume-candidate-beam-2cd52d310d",
+        "obs-linear-volume-candidate-beam-3874e0caad"
       ],
       "rejected": [],
-      "why": "3.329681 m long, 0.194279 m in elevation, standing 0.194279 m proud of the right wall; 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.501146 m long, 0.195884 m in elevation, standing 0.195884 m proud of the right wall of mass-1; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1672,12 +1408,10 @@
       "kind": "linearSolid",
       "objectId": "solid-2",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-51264c4bd1",
-        "obs-linear-volume-candidate-beam-cff798139b",
-        "obs-linear-volume-candidate-beam-def101d470"
+        "obs-linear-volume-candidate-beam-b87c3373ef"
       ],
       "rejected": [],
-      "why": "12.058456 m long, 0.266476 m in elevation, standing 0.266476 m proud of the left wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.088319 m long, 0.306286 m in elevation, standing 0.306286 m proud of the right wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1685,11 +1419,11 @@
       "kind": "linearSolid",
       "objectId": "solid-20",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-40513cf04d",
-        "obs-linear-volume-candidate-beam-71d9a3fe9c"
+        "obs-linear-volume-candidate-beam-4f560cadfd",
+        "obs-linear-volume-candidate-beam-f0439de1e5"
       ],
       "rejected": [],
-      "why": "8.456932 m long, 0.575495 m in elevation, standing 0.45 m proud of the front wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.295159 m long, 0.201854 m in elevation, standing 0.201854 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1697,10 +1431,11 @@
       "kind": "linearSolid",
       "objectId": "solid-21",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-e879b923aa"
+        "obs-linear-volume-candidate-beam-6fa0f0b886",
+        "obs-linear-volume-candidate-beam-d169456d9b"
       ],
       "rejected": [],
-      "why": "8.456932 m long, 0.120443 m in elevation, standing 0.120443 m proud of the front wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.295158 m long, 0.226308 m in elevation, standing 0.226308 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1708,10 +1443,11 @@
       "kind": "linearSolid",
       "objectId": "solid-22",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-17465db073"
+        "obs-linear-volume-candidate-beam-773602e63d",
+        "obs-linear-volume-candidate-beam-b47e04ef7f"
       ],
       "rejected": [],
-      "why": "3.027957 m long, 0.201272 m in elevation, standing 0.201272 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.295158 m long, 0.213382 m in elevation, standing 0.213382 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1719,77 +1455,11 @@
       "kind": "linearSolid",
       "objectId": "solid-23",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-ffec9b6eec"
+        "obs-linear-volume-candidate-beam-387c8a7c55",
+        "obs-linear-volume-candidate-beam-babac45875"
       ],
       "rejected": [],
-      "why": "3.027947 m long, 0.226204 m in elevation, standing 0.226204 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-24",
-      "kind": "linearSolid",
-      "objectId": "solid-24",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-afa3396c9e"
-      ],
-      "rejected": [],
-      "why": "2.947921 m long, 0.173966 m in elevation, standing 0.173966 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-25",
-      "kind": "linearSolid",
-      "objectId": "solid-25",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-7854cefa59"
-      ],
-      "rejected": [],
-      "why": "2.947921 m long, 0.213444 m in elevation, standing 0.213444 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-26",
-      "kind": "linearSolid",
-      "objectId": "solid-26",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0efa76c165"
-      ],
-      "rejected": [],
-      "why": "3.027955 m long, 0.186726 m in elevation, standing 0.186726 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-27",
-      "kind": "linearSolid",
-      "objectId": "solid-27",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-b36c3ead9e",
-        "obs-linear-volume-candidate-beam-ede457e076"
-      ],
-      "rejected": [],
-      "why": "1.639549 m long, 0.19676 m in elevation, standing 0.19676 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-28",
-      "kind": "linearSolid",
-      "objectId": "solid-28",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-dd3ddf7a1e"
-      ],
-      "rejected": [],
-      "why": "5.206933 m long, 0.2152 m in elevation, standing 0.2152 m proud of the rear wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-29",
-      "kind": "linearSolid",
-      "objectId": "solid-29",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-934dbbe071"
-      ],
-      "rejected": [],
-      "why": "6.896263 m long, 0.170951 m in elevation, standing 0.170951 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.281819 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1797,128 +1467,10 @@
       "kind": "linearSolid",
       "objectId": "solid-3",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-b87c3373ef"
+        "obs-linear-volume-candidate-beam-4e2149b567"
       ],
       "rejected": [],
-      "why": "4.088319 m long, 0.306286 m in elevation, standing 0.306286 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-30",
-      "kind": "linearSolid",
-      "objectId": "solid-30",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0931728dc7",
-        "obs-linear-volume-candidate-beam-1af284fe76",
-        "obs-linear-volume-candidate-beam-abbe667a2c"
-      ],
-      "rejected": [],
-      "why": "6.896263 m long, 0.191493 m in elevation, standing 0.191493 m proud of the left wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-31",
-      "kind": "linearSolid",
-      "objectId": "solid-31",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-b4d725db07"
-      ],
-      "rejected": [],
-      "why": "1.803183 m long, 0.221715 m in elevation, standing 0.221715 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-32",
-      "kind": "linearSolid",
-      "objectId": "solid-32",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-1be413e7cc",
-        "obs-linear-volume-candidate-beam-4e8ae8cda1"
-      ],
-      "rejected": [],
-      "why": "1.986833 m long, 0.214513 m in elevation, standing 0.214513 m proud of the left wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-33",
-      "kind": "linearSolid",
-      "objectId": "solid-33",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-2233df6f52"
-      ],
-      "rejected": [],
-      "why": "3.369201 m long, 0.346242 m in elevation, standing 0.346242 m proud of the rear wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-34",
-      "kind": "linearSolid",
-      "objectId": "solid-34",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-e8de30aaa2"
-      ],
-      "rejected": [],
-      "why": "2.601106 m long, 0.546713 m in elevation, standing 0.45 m proud of the front wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-35",
-      "kind": "linearSolid",
-      "objectId": "solid-35",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-18511fbef4",
-        "obs-linear-volume-candidate-beam-2cd52d310d",
-        "obs-linear-volume-candidate-beam-3874e0caad"
-      ],
-      "rejected": [],
-      "why": "4.501146 m long, 0.195884 m in elevation, standing 0.195884 m proud of the right wall; 3 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-36",
-      "kind": "linearSolid",
-      "objectId": "solid-36",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-4f560cadfd",
-        "obs-linear-volume-candidate-beam-f0439de1e5"
-      ],
-      "rejected": [],
-      "why": "4.295159 m long, 0.201854 m in elevation, standing 0.201854 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-37",
-      "kind": "linearSolid",
-      "objectId": "solid-37",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-c481f3f726"
-      ],
-      "rejected": [],
-      "why": "4.295158 m long, 0.173876 m in elevation, standing 0.173876 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-38",
-      "kind": "linearSolid",
-      "objectId": "solid-38",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-6fa0f0b886",
-        "obs-linear-volume-candidate-beam-d169456d9b"
-      ],
-      "rejected": [],
-      "why": "4.295158 m long, 0.226308 m in elevation, standing 0.226308 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-39",
-      "kind": "linearSolid",
-      "objectId": "solid-39",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-773602e63d",
-        "obs-linear-volume-candidate-beam-b47e04ef7f"
-      ],
-      "rejected": [],
-      "why": "4.295158 m long, 0.213382 m in elevation, standing 0.213382 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.268483 m long, 0.196449 m in elevation, standing 0.196449 m proud of the left wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1926,70 +1478,11 @@
       "kind": "linearSolid",
       "objectId": "solid-4",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4e2149b567"
+        "obs-linear-volume-candidate-beam-06c7a0c9f8",
+        "obs-linear-volume-candidate-beam-233e69c1df"
       ],
       "rejected": [],
-      "why": "4.268483 m long, 0.196449 m in elevation, standing 0.196449 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-40",
-      "kind": "linearSolid",
-      "objectId": "solid-40",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-387c8a7c55",
-        "obs-linear-volume-candidate-beam-babac45875"
-      ],
-      "rejected": [],
-      "why": "4.281819 m long, 0.200468 m in elevation, standing 0.200468 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-41",
-      "kind": "linearSolid",
-      "objectId": "solid-41",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-d64804690b",
-        "obs-linear-volume-candidate-beam-f276fc746b"
-      ],
-      "rejected": [],
-      "why": "1.758246 m long, 0.187549 m in elevation, standing 0.187549 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-42",
-      "kind": "linearSolid",
-      "objectId": "solid-42",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-452cd45e26"
-      ],
-      "rejected": [],
-      "why": "1.517377 m long, 0.215142 m in elevation, standing 0.215142 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-43",
-      "kind": "linearSolid",
-      "objectId": "solid-43",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0fe3e39ecc",
-        "obs-linear-volume-candidate-beam-8670ef0e8c"
-      ],
-      "rejected": [],
-      "why": "1.517933 m long, 0.192263 m in elevation, standing 0.192263 m proud of the right wall; 2 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-44",
-      "kind": "linearSolid",
-      "objectId": "solid-44",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-02c787a83b",
-        "obs-linear-volume-candidate-beam-7598ebfa55",
-        "obs-linear-volume-candidate-beam-e46f3a1238"
-      ],
-      "rejected": [],
-      "why": "1.517933 m long, 0.215383 m in elevation, standing 0.215383 m proud of the right wall; 3 sightings across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.255142 m long, 0.170506 m in elevation, standing 0.170506 m proud of the left wall of mass-0; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -1997,11 +1490,13 @@
       "kind": "linearSolid",
       "objectId": "solid-5",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-06c7a0c9f8",
-        "obs-linear-volume-candidate-beam-233e69c1df"
+        "obs-linear-volume-candidate-beam-0879579945",
+        "obs-linear-volume-candidate-beam-7d39c891e8",
+        "obs-linear-volume-candidate-beam-8eda518742",
+        "obs-linear-volume-candidate-beam-d880992643"
       ],
       "rejected": [],
-      "why": "4.255142 m long, 0.170506 m in elevation, standing 0.170506 m proud of the left wall; 2 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "4.108413 m long, 0.191444 m in elevation, standing 0.191444 m proud of the left wall of mass-0; 4 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -2009,30 +1504,16 @@
       "kind": "linearSolid",
       "objectId": "solid-6",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-0879579945",
-        "obs-linear-volume-candidate-beam-7d39c891e8",
-        "obs-linear-volume-candidate-beam-8eda518742",
-        "obs-linear-volume-candidate-beam-d880992643"
+        "obs-linear-volume-candidate-beam-842d9b77a4"
       ],
       "rejected": [],
-      "why": "4.108413 m long, 0.191444 m in elevation, standing 0.191444 m proud of the left wall; 4 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "1.597663 m long, 0.188789 m in elevation, standing 0.188789 m proud of the right wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-solid-7",
       "kind": "linearSolid",
       "objectId": "solid-7",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-842d9b77a4"
-      ],
-      "rejected": [],
-      "why": "1.597663 m long, 0.188789 m in elevation, standing 0.188789 m proud of the right wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
-    },
-    {
-      "evidenceIds": [],
-      "hypothesisId": "hyp-solid-8",
-      "kind": "linearSolid",
-      "objectId": "solid-8",
       "observationIds": [
         "obs-linear-volume-candidate-beam-1199ec1b6b",
         "obs-linear-volume-candidate-beam-389fc35baa",
@@ -2045,7 +1526,18 @@
         "obs-linear-volume-candidate-beam-e2e7a90bf5"
       ],
       "rejected": [],
-      "why": "11.705643 m long, 0.186735 m in elevation, standing 0.186735 m proud of the right wall; 9 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "11.705643 m long, 0.186735 m in elevation, standing 0.186735 m proud of the right wall of mass-1; 9 sightings across 2 drawings; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+    },
+    {
+      "evidenceIds": [],
+      "hypothesisId": "hyp-solid-8",
+      "kind": "linearSolid",
+      "objectId": "solid-8",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-7251c194ed"
+      ],
+      "rejected": [],
+      "why": "3.268055 m long, 0.226464 m in elevation, standing 0.226464 m proud of the left wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     },
     {
       "evidenceIds": [],
@@ -2053,80 +1545,277 @@
       "kind": "linearSolid",
       "objectId": "solid-9",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4c764b1c14"
+        "obs-linear-volume-candidate-beam-fc9eb854fb"
       ],
       "rejected": [],
-      "why": "3.268061 m long, 0.201054 m in elevation, standing 0.201054 m proud of the left wall; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
+      "why": "3.268057 m long, 0.173669 m in elevation, standing 0.173669 m proud of the left wall of mass-0; 1 sighting across 1 drawing; extent from a orthographic elevation; depth proud of wall, from a view that can see it"
     }
   ],
   "unresolved": [
     {
       "evidenceIds": [],
-      "id": "gap-a-printed-roof-pitch-240abd7ca8",
-      "observationIds": [],
-      "reason": "no legible angle on any sheet is attached to a sloping edge; the pitch is derived from the ridge height and the span instead",
-      "status": "MISSING",
-      "what": "a printed roof pitch"
+      "id": "gap-a-linear-member-on-the-front-facade-0ca8ec256f",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-40513cf04d",
+        "obs-linear-volume-candidate-beam-71d9a3fe9c"
+      ],
+      "reason": "seen on 1 view at 0.631429 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the front facade"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-second-opening-0-372876-by-0-39951-m-a-3d2a98c281",
+      "id": "gap-a-linear-member-on-the-front-facade-0ca8ec256f",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-e879b923aa"
+      ],
+      "reason": "seen on 1 view at 0.56 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the front facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-45bf7be1d8"
+      ],
+      "reason": "seen on 1 view at 0.628571 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-4c764b1c14"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-320fac4597"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-17465db073"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-afa3396c9e"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-7854cefa59"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-0efa76c165"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-934dbbe071"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-b4d725db07"
+      ],
+      "reason": "seen on 1 view at 0.5 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-left-facade-d6f645b5de",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-c481f3f726"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-rear-facade-05266c03c1",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-dd3ddf7a1e"
+      ],
+      "reason": "seen on 1 view at 0.56 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the rear facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-rear-facade-05266c03c1",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-2233df6f52"
+      ],
+      "reason": "seen on 1 view at 0.514286 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the rear facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-6c7e1bbefe"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-685c045bd7"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-2b558faa85"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-d64804690b",
+        "obs-linear-volume-candidate-beam-f276fc746b"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-452cd45e26"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-0fe3e39ecc",
+        "obs-linear-volume-candidate-beam-8670ef0e8c"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-linear-member-on-the-right-facade-c843353180",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-02c787a83b",
+        "obs-linear-volume-candidate-beam-7598ebfa55",
+        "obs-linear-volume-candidate-beam-e46f3a1238"
+      ],
+      "reason": "seen on 1 view at 0.75 confidence, depth proud of wall: not enough to say anything stands proud of the wall there",
+      "status": "AMBIGUOUS",
+      "what": "a linear member on the right facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-a-second-opening-0-372876-by-0-39951-m-a-9d61366610",
       "observationIds": [
         "obs-opening-reveal-8e8444a4ea"
       ],
-      "reason": "it overlaps opening-6, which already occupies 2.183312 to 2.556188 m of that wall; two detections of one hole, or two readings that disagree",
+      "reason": "it overlaps opening-3, which already occupies 2.183312 to 2.556188 m of that wall; two detections of one hole, or two readings that disagree",
       "status": "AMBIGUOUS",
-      "what": "a second opening 0.372876 by 0.39951 m at 1.97024 m along the rear wall"
+      "what": "a second opening 0.372876 by 0.39951 m at 1.97024 m along the rear wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-second-opening-0-426144-by-0-506046-m-5604ef0f79",
+      "id": "gap-a-second-opening-0-426144-by-0-506046-m-9978da5c43",
       "observationIds": [
         "obs-opening-reveal-b51b54ea40"
       ],
-      "reason": "it overlaps opening-6, which already occupies 2.183312 to 2.556188 m of that wall; two detections of one hole, or two readings that disagree",
+      "reason": "it overlaps opening-3, which already occupies 2.183312 to 2.556188 m of that wall; two detections of one hole, or two readings that disagree",
       "status": "AMBIGUOUS",
-      "what": "a second opening 0.426144 by 0.506046 m at 1.97024 m along the rear wall"
+      "what": "a second opening 0.426144 by 0.506046 m at 1.97024 m along the rear wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-second-opening-0-452778-by-0-372876-m-858b10a3c2",
+      "id": "gap-a-second-opening-0-452778-by-0-372876-m-7057fe10bb",
       "observationIds": [
         "obs-opening-reveal-456af44864"
       ],
-      "reason": "it overlaps opening-7, which already occupies 6.857579 to 7.230455 m of that wall; two detections of one hole, or two readings that disagree",
+      "reason": "it overlaps opening-4, which already occupies 6.857579 to 7.230455 m of that wall; two detections of one hole, or two readings that disagree",
       "status": "AMBIGUOUS",
-      "what": "a second opening 0.452778 by 0.372876 m at 6.857579 m along the rear wall"
+      "what": "a second opening 0.452778 by 0.372876 m at 6.857579 m along the rear wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-second-opening-0-53268-by-0-412827-m-a-8724aaa348",
+      "id": "gap-a-second-opening-0-53268-by-0-412827-m-a-21d80babbd",
       "observationIds": [
         "obs-opening-reveal-8ee62fe61b"
       ],
-      "reason": "it overlaps opening-3, which already occupies 5.768304 to 6.167814 m of that wall; two detections of one hole, or two readings that disagree",
+      "reason": "it overlaps opening-1, which already occupies 4.620666 to 5.020176 m of that wall; two detections of one hole, or two readings that disagree",
       "status": "AMBIGUOUS",
-      "what": "a second opening 0.53268 by 0.412827 m at 5.488647 m along the right wall"
+      "what": "a second opening 0.53268 by 0.412827 m at 4.341009 m along the right wall of mass-0"
     },
     {
       "evidenceIds": [],
-      "id": "gap-a-second-opening-0-559314-by-0-426144-m-1c23322bef",
-      "observationIds": [
-        "obs-opening-reveal-900b0e8b1a"
-      ],
-      "reason": "it overlaps opening-2, which already occupies 7.363625 to 9.907172 m of that wall; two detections of one hole, or two readings that disagree",
-      "status": "AMBIGUOUS",
-      "what": "a second opening 0.559314 by 0.426144 m at 7.017383 m along the rear wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-a-second-opening-0-760323-by-0-413509-m-00fbd2f817",
+      "id": "gap-a-second-opening-0-760323-by-0-413509-m-b73e93663f",
       "observationIds": [
         "obs-opening-reveal-19966d6216"
       ],
-      "reason": "it overlaps opening-0, which already occupies 9.473544 to 10.607359 m of that wall; two detections of one hole, or two readings that disagree",
+      "reason": "it overlaps opening-0, which already occupies 8.325906 to 9.459721 m of that wall; two detections of one hole, or two readings that disagree",
       "status": "AMBIGUOUS",
-      "what": "a second opening 0.760323 by 0.413509 m at 10.500647 m along the left wall"
+      "what": "a second opening 0.760323 by 0.413509 m at 9.35301 m along the left wall of mass-0"
     },
     {
       "evidenceIds": [],
@@ -2134,7 +1823,7 @@
       "observationIds": [
         "obs-opening-reveal-6c4add9a5a"
       ],
-      "reason": "it does not fit the 14.905276 by 1.61 m wall it was measured against (offset 8.791263, sill 1.134855), so whatever the detector saw there is not a window",
+      "reason": "it does not fit the 12.61 by 1.61 m wall it was measured against (offset 7.643626, sill 1.134855), so whatever the detector saw there is not a window",
       "status": "AMBIGUOUS",
       "what": "an opening 0.492729 by 0.652533 m on the right facade"
     },
@@ -2144,9 +1833,41 @@
       "observationIds": [
         "obs-opening-reveal-d254e8da98"
       ],
-      "reason": "it does not fit the 14.905276 by 1.61 m wall it was measured against (offset 5.778641, sill 1.088429), so whatever the detector saw there is not a window",
+      "reason": "it does not fit the 12.61 by 1.61 m wall it was measured against (offset 4.631003, sill 1.088429), so whatever the detector saw there is not a window",
       "status": "AMBIGUOUS",
       "what": "an opening 0.493543 by 0.66695 m on the left facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-an-opening-0-585948-by-0-972141-m-on-the-3cc85581a6",
+      "observationIds": [
+        "obs-opening-reveal-deffad0e49"
+      ],
+      "reason": "nothing stands on that facade at 8.269181 m along it on storey 1: the detection falls outside every body the plans found",
+      "status": "AMBIGUOUS",
+      "what": "an opening 0.585948 by 0.972141 m on the rear facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-an-opening-1-640697-by-0-987086-m-on-the-958b9f52e6",
+      "observationIds": [
+        "obs-opening-reveal-f6109117ba",
+        "obs-opening-reveal-ff08485326"
+      ],
+      "reason": "it does not fit the 4.15 by 3.06 m wall it was measured against (offset 3.030443, sill 0.546899), so whatever the detector saw there is not a window",
+      "status": "AMBIGUOUS",
+      "what": "an opening 1.640697 by 0.987086 m on the front facade"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-an-opening-2-543547-by-0-359559-m-on-the-0b2a351e13",
+      "observationIds": [
+        "obs-opening-reveal-0330224147",
+        "obs-opening-reveal-12d5f7840b"
+      ],
+      "reason": "it does not fit the 4.15 by 3.06 m wall it was measured against (offset -0.536375, sill 1.211847), so whatever the detector saw there is not a window",
+      "status": "AMBIGUOUS",
+      "what": "an opening 2.543547 by 0.359559 m on the rear facade"
     },
     {
       "evidenceIds": [],
@@ -2416,43 +2137,21 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-front-facade-member-solid-20-31df68827d",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-40513cf04d",
-        "obs-linear-volume-candidate-beam-71d9a3fe9c"
-      ],
-      "placeholderId": "solid-20",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the front facade member solid-20 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-front-facade-member-solid-21-b530dbad80",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-e879b923aa"
-      ],
-      "placeholderId": "solid-21",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the front facade member solid-21 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-front-facade-member-solid-34-7f8f4b3c74",
+      "id": "gap-how-far-the-front-facade-member-solid-18-8f020ab26d",
       "observationIds": [
         "obs-linear-volume-candidate-beam-e8de30aaa2"
       ],
-      "placeholderId": "solid-34",
+      "placeholderId": "solid-18",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the front facade member solid-34 stands proud of the wall"
+      "what": "how far the front facade member solid-18 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-0-s-e52e3a90ed",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-45bf7be1d8"
+        "obs-linear-volume-candidate-beam-4729575a22",
+        "obs-linear-volume-candidate-beam-5c180cd9c4"
       ],
       "placeholderId": "solid-0",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2463,8 +2162,9 @@
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-1-s-27da7c1000",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4729575a22",
-        "obs-linear-volume-candidate-beam-5c180cd9c4"
+        "obs-linear-volume-candidate-beam-51264c4bd1",
+        "obs-linear-volume-candidate-beam-cff798139b",
+        "obs-linear-volume-candidate-beam-def101d470"
       ],
       "placeholderId": "solid-1",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2475,7 +2175,8 @@
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-10-abaaa0e331",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-7251c194ed"
+        "obs-linear-volume-candidate-beam-92cff6d900",
+        "obs-linear-volume-candidate-beam-fafed6a4b1"
       ],
       "placeholderId": "solid-10",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2486,7 +2187,7 @@
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-11-111b3c8fe8",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-fc9eb854fb"
+        "obs-linear-volume-candidate-beam-c5af1dbba2"
       ],
       "placeholderId": "solid-11",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2495,32 +2196,9 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-12-371e56a972",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-320fac4597"
-      ],
-      "placeholderId": "solid-12",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-12 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-13-3fbc95ddab",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-92cff6d900",
-        "obs-linear-volume-candidate-beam-fafed6a4b1"
-      ],
-      "placeholderId": "solid-13",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-13 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-14-5db1db6d9a",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-c5af1dbba2"
+        "obs-linear-volume-candidate-beam-ffec9b6eec"
       ],
       "placeholderId": "solid-14",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2529,22 +2207,59 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-2-s-d93406dc79",
+      "id": "gap-how-far-the-left-facade-member-solid-16-17c64a7ced",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-51264c4bd1",
-        "obs-linear-volume-candidate-beam-cff798139b",
-        "obs-linear-volume-candidate-beam-def101d470"
+        "obs-linear-volume-candidate-beam-0931728dc7",
+        "obs-linear-volume-candidate-beam-1af284fe76",
+        "obs-linear-volume-candidate-beam-abbe667a2c"
       ],
-      "placeholderId": "solid-2",
+      "placeholderId": "solid-16",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-2 stands proud of the wall"
+      "what": "how far the left facade member solid-16 stands proud of the wall"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-how-far-the-left-facade-member-solid-17-2dfad919f6",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-1be413e7cc",
+        "obs-linear-volume-candidate-beam-4e8ae8cda1"
+      ],
+      "placeholderId": "solid-17",
+      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
+      "status": "AMBIGUOUS",
+      "what": "how far the left facade member solid-17 stands proud of the wall"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-how-far-the-left-facade-member-solid-20-de0c5900db",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-4f560cadfd",
+        "obs-linear-volume-candidate-beam-f0439de1e5"
+      ],
+      "placeholderId": "solid-20",
+      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
+      "status": "AMBIGUOUS",
+      "what": "how far the left facade member solid-20 stands proud of the wall"
+    },
+    {
+      "evidenceIds": [],
+      "id": "gap-how-far-the-left-facade-member-solid-21-6cd65fefb9",
+      "observationIds": [
+        "obs-linear-volume-candidate-beam-6fa0f0b886",
+        "obs-linear-volume-candidate-beam-d169456d9b"
+      ],
+      "placeholderId": "solid-21",
+      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
+      "status": "AMBIGUOUS",
+      "what": "how far the left facade member solid-21 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-22-86899055de",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-17465db073"
+        "obs-linear-volume-candidate-beam-773602e63d",
+        "obs-linear-volume-candidate-beam-b47e04ef7f"
       ],
       "placeholderId": "solid-22",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2555,7 +2270,8 @@
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-23-a6ce8a91f0",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-ffec9b6eec"
+        "obs-linear-volume-candidate-beam-387c8a7c55",
+        "obs-linear-volume-candidate-beam-babac45875"
       ],
       "placeholderId": "solid-23",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2564,136 +2280,21 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-24-99e69c3c3e",
+      "id": "gap-how-far-the-left-facade-member-solid-3-s-64ede16aa0",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-afa3396c9e"
+        "obs-linear-volume-candidate-beam-4e2149b567"
       ],
-      "placeholderId": "solid-24",
+      "placeholderId": "solid-3",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-24 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-25-4cf8aa5ea3",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-7854cefa59"
-      ],
-      "placeholderId": "solid-25",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-25 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-26-57b2753082",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0efa76c165"
-      ],
-      "placeholderId": "solid-26",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-26 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-29-73a3cdc758",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-934dbbe071"
-      ],
-      "placeholderId": "solid-29",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-29 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-30-9b7a776d7e",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0931728dc7",
-        "obs-linear-volume-candidate-beam-1af284fe76",
-        "obs-linear-volume-candidate-beam-abbe667a2c"
-      ],
-      "placeholderId": "solid-30",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-30 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-31-d5ee5e74ea",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-b4d725db07"
-      ],
-      "placeholderId": "solid-31",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-31 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-32-54b444e4db",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-1be413e7cc",
-        "obs-linear-volume-candidate-beam-4e8ae8cda1"
-      ],
-      "placeholderId": "solid-32",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-32 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-36-9ae63acaea",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-4f560cadfd",
-        "obs-linear-volume-candidate-beam-f0439de1e5"
-      ],
-      "placeholderId": "solid-36",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-36 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-37-dd265ec606",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-c481f3f726"
-      ],
-      "placeholderId": "solid-37",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-37 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-38-07a9608561",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-6fa0f0b886",
-        "obs-linear-volume-candidate-beam-d169456d9b"
-      ],
-      "placeholderId": "solid-38",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-38 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-39-2a3c805650",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-773602e63d",
-        "obs-linear-volume-candidate-beam-b47e04ef7f"
-      ],
-      "placeholderId": "solid-39",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-39 stands proud of the wall"
+      "what": "how far the left facade member solid-3 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-4-s-263aeac1b1",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4e2149b567"
+        "obs-linear-volume-candidate-beam-06c7a0c9f8",
+        "obs-linear-volume-candidate-beam-233e69c1df"
       ],
       "placeholderId": "solid-4",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2702,22 +2303,12 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-40-c80b217aee",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-387c8a7c55",
-        "obs-linear-volume-candidate-beam-babac45875"
-      ],
-      "placeholderId": "solid-40",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-40 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-5-s-c093713b59",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-06c7a0c9f8",
-        "obs-linear-volume-candidate-beam-233e69c1df"
+        "obs-linear-volume-candidate-beam-0879579945",
+        "obs-linear-volume-candidate-beam-7d39c891e8",
+        "obs-linear-volume-candidate-beam-8eda518742",
+        "obs-linear-volume-candidate-beam-d880992643"
       ],
       "placeholderId": "solid-5",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2726,23 +2317,20 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-left-facade-member-solid-6-s-14dc965e30",
+      "id": "gap-how-far-the-left-facade-member-solid-8-s-d7b1680110",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-0879579945",
-        "obs-linear-volume-candidate-beam-7d39c891e8",
-        "obs-linear-volume-candidate-beam-8eda518742",
-        "obs-linear-volume-candidate-beam-d880992643"
+        "obs-linear-volume-candidate-beam-7251c194ed"
       ],
-      "placeholderId": "solid-6",
+      "placeholderId": "solid-8",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the left facade member solid-6 stands proud of the wall"
+      "what": "how far the left facade member solid-8 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-left-facade-member-solid-9-s-84d53254b8",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-4c764b1c14"
+        "obs-linear-volume-candidate-beam-fc9eb854fb"
       ],
       "placeholderId": "solid-9",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2751,44 +2339,36 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-rear-facade-member-solid-17-6ff26d7fb7",
+      "id": "gap-how-far-the-rear-facade-member-solid-12-9d68e67113",
       "observationIds": [
         "obs-linear-volume-candidate-beam-3b6208d04e",
         "obs-linear-volume-candidate-beam-9f08f35c3b",
         "obs-linear-volume-candidate-beam-b27bd35495"
       ],
-      "placeholderId": "solid-17",
+      "placeholderId": "solid-12",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the rear facade member solid-17 stands proud of the wall"
+      "what": "how far the rear facade member solid-12 stands proud of the wall"
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-rear-facade-member-solid-28-932141218d",
+      "id": "gap-how-far-the-right-facade-member-solid-13-441b559e4c",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-dd3ddf7a1e"
+        "obs-linear-volume-candidate-beam-496fc9f596",
+        "obs-linear-volume-candidate-beam-d3aaf908f3",
+        "obs-linear-volume-candidate-beam-e9e37a15b9"
       ],
-      "placeholderId": "solid-28",
+      "placeholderId": "solid-13",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the rear facade member solid-28 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-rear-facade-member-solid-33-13c82eac50",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-2233df6f52"
-      ],
-      "placeholderId": "solid-33",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the rear facade member solid-33 stands proud of the wall"
+      "what": "how far the right facade member solid-13 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-right-facade-member-solid-15-03975a48b4",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-6c7e1bbefe"
+        "obs-linear-volume-candidate-beam-b36c3ead9e",
+        "obs-linear-volume-candidate-beam-ede457e076"
       ],
       "placeholderId": "solid-15",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2797,33 +2377,11 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-16-00343b12d7",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-685c045bd7"
-      ],
-      "placeholderId": "solid-16",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-16 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-18-9dcd05f6d6",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-2b558faa85"
-      ],
-      "placeholderId": "solid-18",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-18 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
       "id": "gap-how-far-the-right-facade-member-solid-19-5e6217615e",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-496fc9f596",
-        "obs-linear-volume-candidate-beam-d3aaf908f3",
-        "obs-linear-volume-candidate-beam-e9e37a15b9"
+        "obs-linear-volume-candidate-beam-18511fbef4",
+        "obs-linear-volume-candidate-beam-2cd52d310d",
+        "obs-linear-volume-candidate-beam-3874e0caad"
       ],
       "placeholderId": "solid-19",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
@@ -2832,102 +2390,29 @@
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-27-1c8680f6d5",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-b36c3ead9e",
-        "obs-linear-volume-candidate-beam-ede457e076"
-      ],
-      "placeholderId": "solid-27",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-27 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-3-8ab360b7b4",
+      "id": "gap-how-far-the-right-facade-member-solid-2-2b88c0d68f",
       "observationIds": [
         "obs-linear-volume-candidate-beam-b87c3373ef"
       ],
-      "placeholderId": "solid-3",
+      "placeholderId": "solid-2",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-3 stands proud of the wall"
+      "what": "how far the right facade member solid-2 stands proud of the wall"
     },
     {
       "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-35-98ce96e12d",
+      "id": "gap-how-far-the-right-facade-member-solid-6-72c60cbbe2",
       "observationIds": [
-        "obs-linear-volume-candidate-beam-18511fbef4",
-        "obs-linear-volume-candidate-beam-2cd52d310d",
-        "obs-linear-volume-candidate-beam-3874e0caad"
+        "obs-linear-volume-candidate-beam-842d9b77a4"
       ],
-      "placeholderId": "solid-35",
+      "placeholderId": "solid-6",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-35 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-41-1155279783",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-d64804690b",
-        "obs-linear-volume-candidate-beam-f276fc746b"
-      ],
-      "placeholderId": "solid-41",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-41 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-42-4ed10e619b",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-452cd45e26"
-      ],
-      "placeholderId": "solid-42",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-42 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-43-99706674bb",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-0fe3e39ecc",
-        "obs-linear-volume-candidate-beam-8670ef0e8c"
-      ],
-      "placeholderId": "solid-43",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-43 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-44-3c2f97763e",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-02c787a83b",
-        "obs-linear-volume-candidate-beam-7598ebfa55",
-        "obs-linear-volume-candidate-beam-e46f3a1238"
-      ],
-      "placeholderId": "solid-44",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-44 stands proud of the wall"
+      "what": "how far the right facade member solid-6 stands proud of the wall"
     },
     {
       "evidenceIds": [],
       "id": "gap-how-far-the-right-facade-member-solid-7-f5c0785c85",
-      "observationIds": [
-        "obs-linear-volume-candidate-beam-842d9b77a4"
-      ],
-      "placeholderId": "solid-7",
-      "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
-      "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-7 stands proud of the wall"
-    },
-    {
-      "evidenceIds": [],
-      "id": "gap-how-far-the-right-facade-member-solid-8-b87f1d0dc6",
       "observationIds": [
         "obs-linear-volume-candidate-beam-1199ec1b6b",
         "obs-linear-volume-candidate-beam-389fc35baa",
@@ -2939,18 +2424,18 @@
         "obs-linear-volume-candidate-beam-e13d880c95",
         "obs-linear-volume-candidate-beam-e2e7a90bf5"
       ],
-      "placeholderId": "solid-8",
+      "placeholderId": "solid-7",
       "reason": "no view measures the projection; the member is built square in section and the depth is unresolved",
       "status": "AMBIGUOUS",
-      "what": "how far the right facade member solid-8 stands proud of the wall"
+      "what": "how far the right facade member solid-7 stands proud of the wall"
     },
     {
       "evidenceIds": [],
-      "id": "gap-the-external-wall-thickness-5c8fb5cd6d",
+      "id": "gap-the-kind-of-roof-over-mass-1-b54aba502a",
       "observationIds": [],
-      "reason": "no dimension on the plan measures a wall; a domestic external wall is assumed",
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
       "status": "MISSING",
-      "what": "the external wall thickness"
+      "what": "the kind of roof over mass-1"
     },
     {
       "evidenceIds": [],
@@ -2966,7 +2451,7 @@
       "evidenceIds": [],
       "id": "gap-which-wall-the-elevation-on-asset-gotowy-03c5ab2348",
       "observationIds": [],
-      "reason": "the silhouette is 17.060487 m across, which is 2.155211 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one; it was placed on the LEFT and the placement is not certain",
+      "reason": "the silhouette is 17.060487 m across, which is 4.450487 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one; it was placed on the LEFT and the placement is not certain",
       "status": "AMBIGUOUS",
       "what": "which wall the elevation on asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d shows"
     }

@@ -32,8 +32,8 @@ import type { CanonicalBuildingModel } from '@buildapp/model'
 import { ConstraintClassSchema } from './constraints.js'
 
 export const CANDIDATE_SCHEMA = 'buildapp.reconstruction-candidate' as const
-export const CANDIDATE_SCHEMA_VERSION = '1.0.0' as const
-export const SUPPORTED_CANDIDATE_VERSIONS = ['1.0.0'] as const
+export const CANDIDATE_SCHEMA_VERSION = '1.1.0' as const
+export const SUPPORTED_CANDIDATE_VERSIONS = ['1.0.0', '1.1.0'] as const
 
 /** One quantity the solver settled, and how. */
 export const SolvedQuantityRecordSchema = z
@@ -136,6 +136,17 @@ export const ReconstructionCandidateSchema = z
     metricEvidenceHash: z.string().regex(/^[0-9a-f]{64}$/),
     hypothesisSetId: z.string().min(1),
     hypothesisSetHash: z.string().regex(/^[0-9a-f]{64}$/),
+    /**
+     * The structural layout this candidate was built from, and the verdict the
+     * layout gate reached on it.
+     *
+     * Carried here rather than left behind because §27 makes the verdict part
+     * of the candidate: a viewer may show a PARTIAL candidate for debugging,
+     * and it must be able to say that is what it is showing.
+     */
+    structuralLayoutId: z.string().min(1),
+    structuralLayoutHash: z.string().regex(/^[0-9a-f]{64}$/),
+    structuralStatus: z.enum(['STRUCTURAL_LAYOUT_ACCEPTED', 'STRUCTURAL_LAYOUT_PARTIAL', 'STRUCTURAL_LAYOUT_REJECTED']),
     solver: z.object({ name: z.string().min(1), version: z.string().min(1) }).strict(),
     /** The Building DSL program. Running it against an empty model builds the candidate. */
     program: z.array(BuildingCommandSchema),
@@ -215,6 +226,7 @@ export function candidateContentHash(draft: Omit<ReconstructionCandidate, 'id' |
     { label: 'observations', ordered: { id: draft.observationGraphId, hash: draft.observationGraphHash } },
     { label: 'metrics', ordered: { id: draft.metricEvidenceId, hash: draft.metricEvidenceHash } },
     { label: 'hypotheses', ordered: { id: draft.hypothesisSetId, hash: draft.hypothesisSetHash } },
+    { label: 'layout', ordered: { id: draft.structuralLayoutId, hash: draft.structuralLayoutHash, status: draft.structuralStatus } },
     { label: 'solver', ordered: draft.solver },
     { label: 'model-id', ordered: { id: draft.modelId, label: draft.label } },
     { label: 'program', ordered: draft.program },

@@ -67,11 +67,19 @@ describe('a house the pipeline has never seen, reconstructed from its own drawin
     }
   })
 
-  it('never claims more than the drawings support: conventions are marked and named', () => {
+  it('measures the wall thickness off the plan rather than assuming one', () => {
     const thickness = quantity(result, 'wallThickness')
-    // Nothing on these sheets measures a wall, so the thickness is a convention.
-    expect(thickness?.class).toBe('UNRESOLVED')
-    expect(result.candidate.unresolved.some((u) => u.what.includes('wall thickness'))).toBe(true)
+    // The plan draws its walls at a thickness, and the decomposition measures
+    // it: a scaled reading, not a convention.
+    expect(thickness?.class).toBe('SOFT')
+    expect(Math.abs((thickness?.value ?? 0) - LARCHFIELD.wallThickness)).toBeLessThan(0.08)
+  })
+
+  it('never claims more than the drawings support: conventions are marked and named', () => {
+    const assumed = result.hypotheses.hypotheses.flatMap((h) => h.parameters).filter((p) => p.basis === 'ASSUMED')
+    for (const p of assumed) expect(p.why.length).toBeGreaterThan(10)
+    // Anything assumed has to leave a trace a reader can find.
+    expect(result.candidate.unresolved.length).toBeGreaterThan(0)
   })
 
   it('refuses the stair rather than inventing one', () => {

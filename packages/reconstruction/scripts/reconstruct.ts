@@ -85,8 +85,21 @@ async function main(): Promise<void> {
   process.stdout.write(`metric evidence: ${metrics.evidence.length} readings, ${metrics.chains.length} chains, ${metrics.coordinateRegistrations.length} registrations (${metrics.contentHash.slice(0, 16)})\n`)
 
   // --- the candidate ---
-  const { hypotheses, candidate, model } = reconstruct({ label, slug, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics })
+  const { layout, hypotheses, candidate, model } = reconstruct({
+    label,
+    slug,
+    sourcePackageId: pkg.id,
+    sourcePackageHash: pkg.contentHash,
+    graph,
+    metrics,
+    raster: (frame) => rasterCache.get(frame.variantByteHash),
+    publishedAreas: pkg.publishedFacts,
+  })
   const replay = verifyReplay(candidate)
+  process.stdout.write(`structural layout: ${layout.masses.length} masses, ${layout.roofSupports.length} roofs, ${layout.storeys.length} storeys, gate ${layout.gate.status} (${layout.contentHash.slice(0, 16)})\n`)
+  for (const mass of layout.masses) process.stdout.write(`  ${mass.id} ${mass.role} ${mass.widthM.value} x ${mass.depthM.value} m, storeys ${mass.storeySpan.fromIndex}..${mass.storeySpan.toIndex}\n`)
+  for (const roof of layout.roofSupports) process.stdout.write(`  ${roof.id} ${roof.kind}${roof.pitchDeg ? ` ${roof.pitchDeg.value} deg` : ''}${roof.ridgeAxis ? ` ridge ${roof.ridgeAxis}` : ''} [${roof.authority}]\n`)
+  for (const reason of layout.gate.reasons) process.stdout.write(`  [${reason.severity}] ${reason.code}: ${reason.what}\n`)
   process.stdout.write(`hypotheses: ${hypotheses.hypotheses.length} (${hypotheses.contentHash.slice(0, 16)})\n`)
   process.stdout.write(`candidate: ${candidate.program.length} commands, model ${candidate.modelHash.slice(0, 16)}, replay ${replay.ok ? 'byte-identical' : `FAILED: ${replay.reason}`}\n`)
   process.stdout.write(`  ${candidate.residuals.hard} hard, ${candidate.residuals.soft} soft, ${candidate.residuals.unresolved} unresolved quantities; ${candidate.unresolved.length} named holes; ${candidate.contradictions.length} contradictions\n`)
@@ -109,6 +122,7 @@ async function main(): Promise<void> {
     process.stdout.write(`  wrote ${name}\n`)
   }
   await write(`${slug}-metrics.json`, metrics)
+  await write(`${slug}-layout.json`, layout)
   await write(`${slug}-hypotheses.json`, hypotheses)
   await write(`${slug}-candidate.json`, candidate)
   await write(`${slug}-dsl.json`, { schema: 'buildapp.reconstruction-dsl', candidateId: candidate.id, candidateHash: candidate.contentHash, modelHash: candidate.modelHash, program: candidate.program })

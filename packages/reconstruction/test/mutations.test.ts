@@ -84,25 +84,32 @@ describe('mutating the sources moves the candidate', () => {
     }))
     const before = quantity(baseline, 'pitchDeg')?.value ?? 0
     const after = quantity(changed, 'pitchDeg')?.value ?? 0
-    // It moves — a printed angle is evidence — but it does not win outright
-    // against the ridge height and the span, which are also evidence.
+    // §8 fixes the order of authority: a printed angle is a statement and the
+    // geometry is a measurement, so the printed angle stands EXACTLY and the
+    // disagreement is reported rather than split.
     expect(after).toBeLessThan(before)
-    expect(after).toBeGreaterThan(12)
+    expect(after).toBe(12)
+    expect(changed.layout.roofSupports.some((r) => r.authority === 'PRINTED_ANGLE')).toBe(true)
+    expect(changed.layout.conflicts.some((c) => c.kind === 'ROOF_EVIDENCE_DISAGREES')).toBe(true)
   })
 
-  it('5. removing a zone from the plan chains changes the depth the solver reports', () => {
-    // The sheet no longer shows the front zone: it is gone from the chain that
-    // subdivides the depth AND from the overall dimension above it.
-    const zone = 180
+  it('5. a depth no chain states any more is still measured, and stops being a statement', () => {
+    // The chains that measured the depth are gone from the sheet. The WALLS
+    // have not moved, so the building has not moved either — but nothing
+    // prints the number any more, so it stops being something the candidate
+    // would defend and becomes something it scaled off the drawing.
     const changed = solve(base, (f) => ({
       ...f,
       metrics: {
         ...f.metrics,
-        evidence: deepCopy(f.metrics.evidence).map((e) => (e.kind === 'LINEAR_DIMENSION' && Math.abs(e.value - LARCHFIELD.depth * 100) < 1 ? { ...e, value: e.value - zone } : e)),
-        chains: deepCopy(f.metrics.chains).map((c) => (c.axis === 'VERTICAL' && c.segments.length > 1 ? { ...c, segments: c.segments.slice(1) } : c)),
+        chains: deepCopy(f.metrics.chains).filter((c) => c.axis !== 'VERTICAL'),
       },
     }))
-    expect(quantity(changed, 'depth')?.value).toBeCloseTo(LARCHFIELD.depth - zone / 100, 3)
+    expect(quantity(baseline, 'depth')?.class).toBe('HARD')
+    expect(quantity(changed, 'depth')?.class).toBe('SOFT')
+    // Within a wall's thickness of where it was: the walls are where they were.
+    expect(Math.abs((quantity(changed, 'depth')?.value ?? 0) - LARCHFIELD.depth)).toBeLessThan(0.4)
+    expect(changed.candidate.contentHash).not.toBe(baseline.candidate.contentHash)
   })
 
   it('6. removing a mass region from a view costs that view its registration', () => {
@@ -213,13 +220,15 @@ describe('mutating the sources moves the candidate', () => {
     // This is the property worth having, and it is not obvious: a printed
     // dimension is a statement in centimetres and does not depend on the
     // sheet's scale at all, so pushing the registration ten per cent out
-    // leaves the footprint exactly where it was. What it MAY change is which
-    // plan the solver measures from, and the trace says which one it used.
+    // leaves the footprint exactly where it was — every span the chains state
+    // comes through the chains. What moves is everything the chains do NOT
+    // state, which on a plan is the wall thickness, measured off the ink.
     expect(quantity(changed, 'width')?.value).toBe(quantity(baseline, 'width')?.value)
     expect(quantity(changed, 'depth')?.value).toBe(quantity(baseline, 'depth')?.value)
-    const before = baseline.candidate.steps.find((s) => s.stage === 'massing')
-    const after = changed.candidate.steps.find((s) => s.stage === 'massing')
-    expect(after?.detail).not.toBe(before?.detail)
+    const before = quantity(baseline, 'wallThickness')?.value ?? 0
+    const after = quantity(changed, 'wallThickness')?.value ?? 0
+    expect(after).not.toBe(before)
+    expect(after).toBeCloseTo(before * 1.1, 2)
   })
 
   it('13. with no stair observations at all, the refusal is still explicit', () => {

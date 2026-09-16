@@ -58,6 +58,7 @@ export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: 
     adapter: { id: 'fixture', version: '1' },
     assets,
     publishedFacts: [],
+    publishedSpecifications: [],
     publishedRooms: [],
     failures: [],
     contentHash: sha256Bytes(new Uint8Array([2])),
@@ -81,7 +82,19 @@ export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: 
 /** Reconstruct from a fixture, optionally after mutating what it saw. */
 export function solve(fixture: Fixture, mutate?: (f: Fixture) => Fixture): ReconstructionResult {
   const f = mutate ? mutate(fixture) : fixture
-  return reconstruct({ label: 'Larchfield (auto)', slug: 'larchfield', sourcePackageId: f.pkg.id, sourcePackageHash: f.pkg.contentHash, graph: f.graph, metrics: f.metrics })
+  return reconstruct({
+    label: 'Larchfield (auto)',
+    slug: 'larchfield',
+    sourcePackageId: f.pkg.id,
+    sourcePackageHash: f.pkg.contentHash,
+    graph: f.graph,
+    metrics: f.metrics,
+    raster: (frame) => {
+      const asset = f.pkg.assets.find((a) => a.id === frame.assetId)
+      const bytes = asset ? f.bytesByUrl.get(asset.variants[0].url) : undefined
+      return bytes ? decodeImage(bytes) : undefined
+    },
+  })
 }
 
 /** The value of one solved quantity, for a test that cares about a number. */

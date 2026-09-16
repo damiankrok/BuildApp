@@ -1,7 +1,7 @@
 {
-  "candidateHash": "ee6a7ac04c9646c5ba322320839780dcc619b00b2abf890e09b02eaf96440023",
-  "candidateId": "candidate-marcowki-ee6a7ac04c9646c5",
-  "modelHash": "d78c09c7ccfe39138dac55385fef1772988d5724d12107423d16f9a7ced41b41",
+  "candidateHash": "01d94c6fdc11f0632cab0c903244894c638c0c5330b7493134d6454e3b5f05b2",
+  "candidateId": "candidate-marcowki-01d94c6fdc11f063",
+  "modelHash": "02e16eb277a3f2c92abf55337d82fc5b48f35da0ac1a06a8b2b4a96b789acd63",
   "program": [
     {
       "name": "Automatic candidate",
@@ -52,7 +52,15 @@
       "type": "createLevel"
     },
     {
-      "id": "slab-0",
+      "elevation": 3.06,
+      "height": 1.61,
+      "id": "lvl-1",
+      "index": 1,
+      "name": "Level 1",
+      "type": "createLevel"
+    },
+    {
+      "id": "slab-mass-0-0",
       "levelId": "lvl-0",
       "materialId": "mat-slab",
       "polygon": [
@@ -61,16 +69,16 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
       "thickness": 0.28,
@@ -81,7 +89,7 @@
       "baseOffset": 0,
       "cornerOwnership": "ALTERNATE",
       "height": 3.06,
-      "id": "ring-0",
+      "id": "ring-mass-0-0",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
       "materialId": "mat-wall",
@@ -91,31 +99,23 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
-      "thickness": 0.38,
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
-      "elevation": 3.06,
-      "height": 1.61,
-      "id": "lvl-1",
-      "index": 1,
-      "name": "Level 1",
-      "type": "createLevel"
-    },
-    {
-      "id": "slab-1",
+      "id": "slab-mass-0-1",
       "levelId": "lvl-1",
       "materialId": "mat-slab",
       "polygon": [
@@ -124,16 +124,16 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
       "thickness": 0.28,
@@ -144,7 +144,7 @@
       "baseOffset": 0,
       "cornerOwnership": "ALTERNATE",
       "height": 1.61,
-      "id": "ring-1",
+      "id": "ring-mass-0-1",
       "kind": "EXTERIOR",
       "levelId": "lvl-1",
       "materialId": "mat-wall",
@@ -154,41 +154,120 @@
           "z": 0
         },
         {
-          "x": 12.05,
+          "x": 7.9,
           "z": 0
         },
         {
-          "x": 12.05,
-          "z": 14.905276
+          "x": 7.9,
+          "z": 12.61
         },
         {
           "x": 0,
-          "z": 14.905276
+          "z": 12.61
         }
       ],
-      "thickness": 0.38,
+      "thickness": 0.468026,
+      "type": "createWallRing"
+    },
+    {
+      "id": "slab-mass-1-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 12.61
+        },
+        {
+          "x": 7.9,
+          "z": 12.61
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0,
+      "type": "createSlab"
+    },
+    {
+      "baseOffset": 0,
+      "cornerOwnership": "ALTERNATE",
+      "height": 3.06,
+      "id": "ring-mass-1-0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "polygon": [
+        {
+          "x": 7.9,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 5.1
+        },
+        {
+          "x": 12.05,
+          "z": 12.61
+        },
+        {
+          "x": 7.9,
+          "z": 12.61
+        }
+      ],
+      "thickness": 0.468026,
       "type": "createWallRing"
     },
     {
       "capWallIds": [
-        "ring-1-w0",
-        "ring-1-w1",
-        "ring-1-w2",
-        "ring-1-w3"
+        "ring-mass-0-1-w0",
+        "ring-mass-0-1-w1",
+        "ring-mass-0-1-w2",
+        "ring-mass-0-1-w3"
       ],
       "eaveOffset": 1.61,
       "footprint": {
-        "maxX": 12.05,
-        "maxZ": 14.905276,
+        "maxX": 7.9,
+        "maxZ": 12.61,
         "minX": 0,
         "minZ": 0
       },
-      "id": "roof-main",
+      "id": "roof-mass-0",
       "kind": "GABLE",
       "levelId": "lvl-1",
       "materialId": "mat-roof",
-      "overhang": 1.06876,
-      "pitchDeg": 28.563799,
+      "overhang": 0,
+      "pitchDeg": 40,
+      "ridgeAxis": "Z",
+      "thickness": 0.28,
+      "type": "createRoof"
+    },
+    {
+      "capWallIds": [
+        "ring-mass-1-0-w0",
+        "ring-mass-1-0-w1",
+        "ring-mass-1-0-w2",
+        "ring-mass-1-0-w3"
+      ],
+      "eaveOffset": 3.06,
+      "footprint": {
+        "maxX": 12.05,
+        "maxZ": 12.61,
+        "minX": 7.9,
+        "minZ": 5.1
+      },
+      "id": "roof-mass-1",
+      "kind": "FLAT",
+      "levelId": "lvl-0",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 0,
       "ridgeAxis": "Z",
       "thickness": 0.28,
       "type": "createRoof"
@@ -197,10 +276,10 @@
       "height": 1.680714,
       "id": "opening-0",
       "kind": "WINDOW",
-      "offset": 9.473544,
+      "offset": 8.325906,
       "sill": 0.346814,
       "type": "cutOpening",
-      "wallId": "ring-0-w3",
+      "wallId": "ring-mass-0-0-w3",
       "width": 1.133815
     },
     {
@@ -210,14 +289,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.987086,
+      "height": 1.771161,
       "id": "opening-1",
       "kind": "WINDOW",
-      "offset": 3.030442,
-      "sill": 0.546899,
+      "offset": 4.620666,
+      "sill": 0.359559,
       "type": "cutOpening",
-      "wallId": "ring-0-w2",
-      "width": 1.640697
+      "wallId": "ring-mass-0-0-w1",
+      "width": 0.39951
     },
     {
       "id": "opening-1-w",
@@ -226,14 +305,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.359559,
+      "height": 0.653611,
       "id": "opening-2",
       "kind": "WINDOW",
-      "offset": 7.363625,
-      "sill": 1.211847,
+      "offset": 2.602023,
+      "sill": 0.354784,
       "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 2.543547
+      "wallId": "ring-mass-0-1-w2",
+      "width": 0.827018
     },
     {
       "id": "opening-2-w",
@@ -242,14 +321,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 1.771161,
+      "height": 1.078677,
       "id": "opening-3",
       "kind": "WINDOW",
-      "offset": 5.768304,
+      "offset": 2.183312,
       "sill": 0.359559,
       "type": "cutOpening",
-      "wallId": "ring-0-w1",
-      "width": 0.39951
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.372876
     },
     {
       "id": "opening-3-w",
@@ -258,14 +337,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.972141,
+      "height": 0.745752,
       "id": "opening-4",
       "kind": "WINDOW",
-      "offset": 7.976207,
-      "sill": 0.282567,
+      "offset": 6.857579,
+      "sill": 0.545997,
       "type": "cutOpening",
-      "wallId": "ring-1-w0",
-      "width": 0.585948
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.372876
     },
     {
       "id": "opening-4-w",
@@ -274,14 +353,14 @@
       "type": "placeWindow"
     },
     {
-      "height": 0.653611,
+      "height": 0.426144,
       "id": "opening-5",
       "kind": "WINDOW",
-      "offset": 6.752023,
-      "sill": 0.354784,
+      "offset": 7.017383,
+      "sill": 1.358334,
       "type": "cutOpening",
-      "wallId": "ring-1-w2",
-      "width": 0.827018
+      "wallId": "ring-mass-0-0-w0",
+      "width": 0.559314
     },
     {
       "id": "opening-5-w",
@@ -290,71 +369,20 @@
       "type": "placeWindow"
     },
     {
-      "height": 1.078677,
-      "id": "opening-6",
-      "kind": "WINDOW",
-      "offset": 2.183312,
-      "sill": 0.359559,
-      "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 0.372876
-    },
-    {
-      "id": "opening-6-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-6",
-      "type": "placeWindow"
-    },
-    {
-      "height": 0.745752,
-      "id": "opening-7",
-      "kind": "WINDOW",
-      "offset": 6.857579,
-      "sill": 0.545997,
-      "type": "cutOpening",
-      "wallId": "ring-0-w0",
-      "width": 0.372876
-    },
-    {
-      "id": "opening-7-w",
-      "materialId": "mat-glass",
-      "openingId": "opening-7",
-      "type": "placeWindow"
-    },
-    {
-      "depth": 0.45,
+      "depth": 0.360153,
       "end": {
-        "x": -0.19,
-        "y": 3.048818,
-        "z": 6.418895
+        "x": -0.234013,
+        "y": 3.554843,
+        "z": 0.255715
       },
-      "hostId": "ring-0-w3",
+      "hostId": "ring-mass-0-0-w3",
       "id": "solid-0",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
-        "y": 3.048818,
-        "z": 13.568833
-      },
-      "type": "createLinearSolid",
-      "width": 0.651899
-    },
-    {
-      "depth": 0.360153,
-      "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.554843,
-        "z": 1.403354
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-1",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 3.554843,
-        "z": 13.528505
+        "z": 12.380867
       },
       "type": "createLinearSolid",
       "width": 0.360153
@@ -362,18 +390,18 @@
     {
       "depth": 0.266476,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.868158,
-        "z": 1.45671
+        "z": 0.309072
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-2",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-1",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 3.868158,
-        "z": 13.515166
+        "z": 12.367528
       },
       "type": "createLinearSolid",
       "width": 0.266476
@@ -381,18 +409,18 @@
     {
       "depth": 0.306286,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 3.588929,
-        "z": 5.488647
+        "z": 4.34101
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-3",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-2",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 3.588929,
-        "z": 1.400328
+        "z": 0.25269
       },
       "type": "createLinearSolid",
       "width": 0.306286
@@ -400,18 +428,18 @@
     {
       "depth": 0.196449,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.718963,
-        "z": 9.099955
+        "z": 7.952316
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-4",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-3",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.718963,
-        "z": 13.368438
+        "z": 12.220799
       },
       "type": "createLinearSolid",
       "width": 0.196449
@@ -419,18 +447,18 @@
     {
       "depth": 0.170506,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.535485,
-        "z": 9.099956
+        "z": 7.952318
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-5",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-4",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.535485,
-        "z": 13.355098
+        "z": 12.20746
       },
       "type": "createLinearSolid",
       "width": 0.170506
@@ -438,18 +466,18 @@
     {
       "depth": 0.191444,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332826,
-        "z": 9.246685
+        "z": 8.099048
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-6",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-5",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332826,
-        "z": 13.355098
+        "z": 12.207461
       },
       "type": "createLinearSolid",
       "width": 0.191444
@@ -457,18 +485,18 @@
     {
       "depth": 0.188789,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.742028,
-        "z": 3.184416
+        "z": 2.036779
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-7",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-6",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.742028,
-        "z": 1.586753
+        "z": 0.439115
       },
       "type": "createLinearSolid",
       "width": 0.188789
@@ -476,56 +504,37 @@
     {
       "depth": 0.186735,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 4.927495,
-        "z": 13.33236
+        "z": 12.184723
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-8",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-7",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 4.927495,
-        "z": 1.626717
+        "z": 0.479079
       },
       "type": "createLinearSolid",
       "width": 0.186735
     },
     {
-      "depth": 0.201054,
-      "end": {
-        "x": -0.19,
-        "y": 6.178702,
-        "z": 9.940312
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-9",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 6.178702,
-        "z": 13.208373
-      },
-      "type": "createLinearSolid",
-      "width": 0.201054
-    },
-    {
       "depth": 0.226464,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942674,
-        "z": 9.940314
+        "z": 8.792676
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-10",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-8",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942674,
-        "z": 13.208369
+        "z": 12.060731
       },
       "type": "createLinearSolid",
       "width": 0.226464
@@ -533,56 +542,37 @@
     {
       "depth": 0.173669,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.742608,
-        "z": 9.940313
+        "z": 8.792674
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-11",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-9",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.742608,
-        "z": 13.20837
+        "z": 12.060732
       },
       "type": "createLinearSolid",
       "width": 0.173669
     },
     {
-      "depth": 0.213461,
-      "end": {
-        "x": -0.19,
-        "y": 5.549043,
-        "z": 9.940313
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-12",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.549043,
-        "z": 13.20837
-      },
-      "type": "createLinearSolid",
-      "width": 0.213461
-    },
-    {
       "depth": 0.200085,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.355609,
-        "z": 9.940314
+        "z": 8.792676
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-13",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-10",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.355609,
-        "z": 13.208369
+        "z": 12.060731
       },
       "type": "createLinearSolid",
       "width": 0.200085
@@ -590,398 +580,151 @@
     {
       "depth": 0.200468,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 6.39214
+        "z": 5.244502
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-14",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-11",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 13.208369
+        "z": 12.060732
       },
       "type": "createLinearSolid",
       "width": 0.200468
-    },
-    {
-      "depth": 0.186155,
-      "end": {
-        "x": 12.24,
-        "y": 5.752803,
-        "z": 13.33236
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-15",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.752803,
-        "z": 1.773204
-      },
-      "type": "createLinearSolid",
-      "width": 0.186155
-    },
-    {
-      "depth": 0.195699,
-      "end": {
-        "x": 12.24,
-        "y": 5.135732,
-        "z": 3.557189
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-16",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.135732,
-        "z": 1.773204
-      },
-      "type": "createLinearSolid",
-      "width": 0.195699
     },
     {
       "depth": 0.253151,
       "end": {
         "x": 8.49557,
         "y": 0.179716,
-        "z": -0.19
+        "z": -0.234013
       },
-      "hostId": "ring-0-w0",
-      "id": "solid-17",
+      "hostId": "ring-mass-0-0-w0",
+      "id": "solid-12",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
         "x": 0.478736,
         "y": 0.179716,
-        "z": -0.19
+        "z": -0.234013
       },
       "type": "createLinearSolid",
       "width": 0.253151
     },
     {
-      "depth": 0.199953,
-      "end": {
-        "x": 12.24,
-        "y": 5.133605,
-        "z": 5.356699
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-18",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 5.133605,
-        "z": 3.571395
-      },
-      "type": "createLinearSolid",
-      "width": 0.199953
-    },
-    {
       "depth": 0.194279,
       "end": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.736988,
-        "z": 7.07412
+        "z": 5.926483
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-19",
+      "hostId": "ring-mass-0-0-w1",
+      "id": "solid-13",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 8.134013,
         "y": 4.736988,
-        "z": 3.744439
+        "z": 2.596802
       },
       "type": "createLinearSolid",
       "width": 0.194279
     },
     {
-      "depth": 0.45,
-      "end": {
-        "x": 0.589307,
-        "y": 2.395702,
-        "z": 15.095276
-      },
-      "hostId": "ring-0-w2",
-      "id": "solid-20",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 9.046239,
-        "y": 2.395702,
-        "z": 15.095276
-      },
-      "type": "createLinearSolid",
-      "width": 0.575495
-    },
-    {
-      "depth": 0.120443,
-      "end": {
-        "x": 0.589307,
-        "y": 2.047733,
-        "z": 15.095276
-      },
-      "hostId": "ring-0-w2",
-      "id": "solid-21",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 9.046239,
-        "y": 2.047733,
-        "z": 15.095276
-      },
-      "type": "createLinearSolid",
-      "width": 0.120443
-    },
-    {
-      "depth": 0.201272,
-      "end": {
-        "x": -0.19,
-        "y": 6.178492,
-        "z": 6.445493
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-22",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 6.178492,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.201272
-    },
-    {
       "depth": 0.226204,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942804,
-        "z": 6.445502
+        "z": 5.297863
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-23",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-14",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942804,
-        "z": 9.473449
+        "z": 8.32581
       },
       "type": "createLinearSolid",
       "width": 0.226204
     },
     {
-      "depth": 0.173966,
-      "end": {
-        "x": -0.19,
-        "y": 5.742719,
-        "z": 6.525529
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-24",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.742719,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.173966
-    },
-    {
-      "depth": 0.213444,
-      "end": {
-        "x": -0.19,
-        "y": 5.549014,
-        "z": 6.525529
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-25",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.549014,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.213444
-    },
-    {
-      "depth": 0.186726,
-      "end": {
-        "x": -0.19,
-        "y": 5.348929,
-        "z": 6.445495
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-26",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.348929,
-        "z": 9.47345
-      },
-      "type": "createLinearSolid",
-      "width": 0.186726
-    },
-    {
       "depth": 0.19676,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.135201,
-        "z": 7.753444
+        "z": 6.605806
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-27",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-15",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.135201,
-        "z": 6.113895
+        "z": 4.966257
       },
       "type": "createLinearSolid",
       "width": 0.19676
     },
     {
-      "depth": 0.2152,
-      "end": {
-        "x": 9.933806,
-        "y": 3.277046,
-        "z": -0.19
-      },
-      "hostId": "ring-0-w0",
-      "id": "solid-28",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 4.726873,
-        "y": 3.277046,
-        "z": -0.19
-      },
-      "type": "createLinearSolid",
-      "width": 0.2152
-    },
-    {
-      "depth": 0.170951,
-      "end": {
-        "x": -0.19,
-        "y": 4.535381,
-        "z": 1.630116
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-29",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 4.535381,
-        "z": 8.526379
-      },
-      "type": "createLinearSolid",
-      "width": 0.170951
-    },
-    {
       "depth": 0.191493,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332802,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-30",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-16",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.332802,
-        "z": 8.52638
+        "z": 7.378742
       },
       "type": "createLinearSolid",
       "width": 0.191493
     },
     {
-      "depth": 0.221715,
-      "end": {
-        "x": -0.19,
-        "y": 4.126198,
-        "z": 6.31091
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-31",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 4.126198,
-        "z": 8.114093
-      },
-      "type": "createLinearSolid",
-      "width": 0.221715
-    },
-    {
       "depth": 0.214513,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.728113,
-        "z": 5.512106
+        "z": 4.364468
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-32",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-17",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 4.728113,
-        "z": 7.498939
+        "z": 6.351301
       },
       "type": "createLinearSolid",
       "width": 0.214513
-    },
-    {
-      "depth": 0.346242,
-      "end": {
-        "x": 9.933806,
-        "y": 2.996325,
-        "z": -0.19
-      },
-      "hostId": "ring-0-w0",
-      "id": "solid-33",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 6.564605,
-        "y": 2.996325,
-        "z": -0.19
-      },
-      "type": "createLinearSolid",
-      "width": 0.346242
     },
     {
       "depth": 0.45,
       "end": {
         "x": 2.843601,
         "y": 1.714155,
-        "z": 15.095276
+        "z": 12.844013
       },
-      "hostId": "ring-0-w2",
-      "id": "solid-34",
+      "hostId": "ring-mass-0-0-w2",
+      "id": "solid-18",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
         "x": 5.444707,
         "y": 1.714155,
-        "z": 15.095276
+        "z": 12.844013
       },
       "type": "createLinearSolid",
       "width": 0.546713
@@ -989,18 +732,18 @@
     {
       "depth": 0.195884,
       "end": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.371474,
-        "z": 13.33236
+        "z": 12.184722
       },
-      "hostId": "ring-0-w1",
-      "id": "solid-35",
+      "hostId": "ring-mass-1-0-w1",
+      "id": "solid-19",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.24,
+        "x": 12.284013,
         "y": 5.371474,
-        "z": 8.831214
+        "z": 7.683576
       },
       "type": "createLinearSolid",
       "width": 0.195884
@@ -1008,56 +751,37 @@
     {
       "depth": 0.201854,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 6.17805,
-        "z": 1.630116
+        "z": 0.482477
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-36",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-20",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 6.17805,
-        "z": 5.925275
+        "z": 4.777636
       },
       "type": "createLinearSolid",
       "width": 0.201854
     },
     {
-      "depth": 0.173876,
-      "end": {
-        "x": -0.19,
-        "y": 5.74266,
-        "z": 1.630117
-      },
-      "hostId": "ring-0-w3",
-      "id": "solid-37",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": -0.19,
-        "y": 5.74266,
-        "z": 5.925275
-      },
-      "type": "createLinearSolid",
-      "width": 0.173876
-    },
-    {
       "depth": 0.226308,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942752,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-38",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-21",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.942752,
-        "z": 5.925275
+        "z": 4.777637
       },
       "type": "createLinearSolid",
       "width": 0.226308
@@ -1065,18 +789,18 @@
     {
       "depth": 0.213382,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.549031,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-39",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-22",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.549031,
-        "z": 5.925275
+        "z": 4.777637
       },
       "type": "createLinearSolid",
       "width": 0.213382
@@ -1084,97 +808,21 @@
     {
       "depth": 0.200468,
       "end": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 1.630117
+        "z": 0.482479
       },
-      "hostId": "ring-0-w3",
-      "id": "solid-40",
+      "hostId": "ring-mass-0-0-w3",
+      "id": "solid-23",
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": -0.19,
+        "x": -0.234013,
         "y": 5.128654,
-        "z": 5.911936
+        "z": 4.764298
       },
       "type": "createLinearSolid",
       "width": 0.200468
-    },
-    {
-      "depth": 0.187549,
-      "end": {
-        "x": 12.24,
-        "y": 4.741423,
-        "z": 11.694086
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-41",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.741423,
-        "z": 9.93584
-      },
-      "type": "createLinearSolid",
-      "width": 0.187549
-    },
-    {
-      "depth": 0.215142,
-      "end": {
-        "x": 12.24,
-        "y": 4.534052,
-        "z": 10.934945
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-42",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.534052,
-        "z": 9.417568
-      },
-      "type": "createLinearSolid",
-      "width": 0.215142
-    },
-    {
-      "depth": 0.192263,
-      "end": {
-        "x": 12.24,
-        "y": 4.737996,
-        "z": 12.706136
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-43",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.737996,
-        "z": 11.188203
-      },
-      "type": "createLinearSolid",
-      "width": 0.192263
-    },
-    {
-      "depth": 0.215383,
-      "end": {
-        "x": 12.24,
-        "y": 4.534173,
-        "z": 12.706136
-      },
-      "hostId": "ring-0-w1",
-      "id": "solid-44",
-      "levelId": "lvl-0",
-      "materialId": "mat-member",
-      "start": {
-        "x": 12.24,
-        "y": 4.534173,
-        "z": 11.188203
-      },
-      "type": "createLinearSolid",
-      "width": 0.215383
     }
   ],
   "schema": "buildapp.reconstruction-dsl"
