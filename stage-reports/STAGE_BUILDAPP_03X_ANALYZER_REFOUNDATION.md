@@ -2,8 +2,12 @@
 
 Branch `claude/buildapp-buildworld-v1-7y6yqh`. START HEAD
 `d5d6375d8675143730307d71f45c0d940fcd134b` (the sealed end of BUILDAPP-03R1).
-END HEAD: the commit that carries this report and the `PROJECT_STATUS.md` row
-(see `git log`).
+Implementation commits `9363d6b` (research), `13896a1` (audit and v2
+schemas), `59d5676` (pipeline), `7e01828` (callouts, gates, apps, CI),
+`606c829` (fixtures, ridge axis, docs), `9f67eb9` (test runner). CI is green
+on `9f67eb9` — `BuildApp CI` run 36057369183, all four jobs (core, browser,
+Android, dependency audit). END HEAD: the commit that carries this
+paragraph and the `PROJECT_STATUS.md` row (see `git log`).
 
 ## What this stage was for
 
