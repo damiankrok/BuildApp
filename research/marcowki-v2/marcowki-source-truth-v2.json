@@ -44,7 +44,7 @@
    "uncertainty": {},
    "status": "SOURCE_DERIVED",
    "method": "convention stated once; every other item is in this frame",
-   "notes": "the current Marcówki Auto puts the FRONT WALL at z=0 and its zone at z -1..0; this set puts the outermost front plane at z=0 as the reference model does (z_v2 = z_auto + 1.00)",
+   "notes": "the current Marcówki Auto (03R1) runs z the OTHER WAY: its plan frame puts z=0 at the REAR wall outer face (row 259 of the ground plan) and z grows towards the front, so its front wall face is at z 12.61, its zone-max_z (12.61..13.60) is the portal zone and its zone-min_z (-1..0) the loggia zone; the solver labels the max-z ring wall FRONT. That contradicts MODEL_FRAME (front facade outer face at z = 0). Conversion: z_v2 = 13.60 - z_auto. This set puts the outermost front plane at z=0 as the reference model does",
    "ownerReviewNeeded": false
   },
   {

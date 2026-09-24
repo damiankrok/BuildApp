@@ -19,7 +19,7 @@ The owner's suspicion about the stair was right. Evaluation fixtures built on `E
 
 | | v1 | current Auto | v2 | verdict |
 | --- | --- | --- | --- | --- |
-| characteristic depth | 14.60 (z 0..14.60) | detected as `zone-min_z` (−1..0) and `zone-max_z` (12.61..13.60), **recesses: []**, masses 0..12.61 | 14.60, re-proved from the chain, four row-scan sets and both side silhouettes | v1 CORRECT; Auto **WRONG** (a diagnostic zone, no geometry; frame shifted 1.00) |
+| characteristic depth | 14.60 (z 0..14.60) | detected as `zone-min_z` (−1..0, the loggia zone in its mirrored frame) and `zone-max_z` (12.61..13.60, the portal zone), **recesses: []**, masses 0..12.61 | 14.60, re-proved from the chain, four row-scan sets and both side silhouettes | v1 CORRECT; Auto **WRONG** (a diagnostic zone, no geometry; frame shifted 1.00) |
 | front recess | mouth 0, back 1.00, x 0.61..11.44 | — | mouth 0, back 1.00, x 0.61..11.42 (ground), 0.61..7.26 (attic) | v1 CORRECT; Auto MISSING |
 | east front return | above the balcony only (base 2.96) | — | above the balcony only, base 3.06 | v1 CORRECT (CHANGED base by 0.10) |
 | rear recess | mouth 14.60, back 13.60, x 0.61..7.29, both storeys | — | same | v1 CORRECT; Auto MISSING |
@@ -47,22 +47,25 @@ The owner's suspicion about the stair was right. Evaluation fixtures built on `E
 
 ## 5. Openings
 
-| opening | v1 | Auto (in v2 z; Auto z + 1.00) | v2 | verdict |
-| --- | --- | --- | --- | --- |
-| 110/230 front room | 1.397..2.497, 0/2.30 | opening-0: x 2.26..6.93, 0/2.20 on the front wall (one 4.67 wide blob) | 1.40..2.50, 0/2.30 | v1 CORRECT; Auto WRONG (merged with the entrance) |
-| 105/210 entrance | 4.176..5.226 | (inside opening-0) | 4.18..5.23; leaf split UNRESOLVED | v1 CORRECT; Auto MISSING |
-| 275/225 garage door | 8.556..11.306, 0/2.25 | opening-9 on mass-1 front: x 9.94..10.89, 0/2.20 | 8.55..11.30, 0/2.25 | v1 CORRECT; Auto WRONG (0.95 wide) |
-| 270/320 gable glazing | 3.94..6.64, raked | opening-3: 4.46..7.31, 0/1.68 (LEVEL); opening-5: 0.57..3.23, 0/1.66 | 3.95..6.65, sill 3.06, head 6.26→4.02 RAKED_SINGLE | v1 CORRECT; Auto WRONG (two level strips, one on the timber panel) |
-| 470/230 rear glazing | 2.258..6.958 | opening-8: 2.81..3.93; opening-11: 5.67..6.49 | 2.25..6.95 | v1 CORRECT; Auto WRONG (split by the mullion into two narrow openings) |
-| 234/303 rear gable ×2 | 0.94..3.28 / 4.59..6.93, tall edge to the ridge | opening-1: 0.59..4.92, 0/1.68 (attic rear, level) ; opening-12: 6.90..7.40, 0.9/0.7 | 0.95..3.29 / 4.61..6.95, raked, tall edge to the ridge | v1 CORRECT; Auto WRONG |
-| 90/230 west living | z 9.05..9.95 | opening-10 on the west wall: z 9.05..9.95, 0/2.20 | 9.07..9.97 | CORRECT (Auto head 2.20 vs 2.30) |
-| 140/140 west kitchen | z 6.80..8.20, sill 0.9 | opening-6: z 6.82..8.22, sill 0 | 6.80..8.20, sill 0.90 | v1 CORRECT; Auto WRONG sill (sill-only reading not attempted) |
-| 300/230 east living | z 9.70..12.70 | opening-2: z 1.90..4.88 on the east wall | 9.70..12.70 | v1 CORRECT; Auto WRONG (wrong end of the wall: the mass-0 east ring wall ignores the garage attachment) |
-| 100/210 garage side | 9.92..10.92 in the garage rear wall | opening-4 on mass-1 rear wall: x 8.62..11.42 (2.8 wide) | 9.90..10.90 | v1 CORRECT; Auto WRONG width |
-| boiler→garage | z 2.22..3.15 | opening-7: z 11.45..12.59 on the east wall | z 2.24..3.06 | v1 CORRECT; Auto WRONG |
-| profiles / families | 3 raked (correct), fills window/door | all LEVEL, no families | RAKED_SINGLE ×3 with families | Auto WRONG |
+The current Auto's z axis runs from the rear wall (z 0) to the front (12.61), so its openings are converted with `z_v2 = 13.60 − z_auto`; wall `w0` of a ring is its min-z (rear) wall, `w2` its max-z (front) wall traversed from +x to −x, `w1` the +x wall, `w3` the −x wall traversed from max z to min z.
 
-Auto's projection audit at the stage start: 5 of 13 objects matched, 8 unmatched, 66 observed reveals unexplained.
+| opening | v1 | current Auto (converted) | v2 | verdict |
+| --- | --- | --- | --- | --- |
+| 110/230 front room | 1.397..2.497, 0/2.30 | opening-11: x 1.41..2.23, 0/2.20 | 1.40..2.50, 0/2.30 | v1 CORRECT; Auto position CORRECT, width 0.82 WRONG (0.28 short), head 2.20 |
+| 105/210 entrance | 4.176..5.226 | opening-8: x 3.97..5.09, 0/2.20, no door family | 4.18..5.23; leaf split UNRESOLVED | v1 CORRECT; Auto CORRECT within 0.2 |
+| 275/225 garage door | 8.556..11.306, 0/2.25 | opening-4: x 8.53..11.33, 0/2.20 | 8.55..11.30, 0/2.25 | CORRECT (Auto head 2.20) |
+| 270/320 gable glazing | 3.94..6.64, raked | opening-1: x 2.98..7.31, 0/1.68 LEVEL on the attic front wall; opening-12: x 0.5..1.0, sill 0.9 (spurious) | 3.95..6.65, sill 3.06, head 6.26→4.02 RAKED_SINGLE | v1 CORRECT; Auto **WRONG** (1.6 m too wide, level, 1.68 tall) |
+| 470/230 rear glazing | 2.258..6.958 | opening-0: x 2.26..6.93, 0/2.20 | 2.25..6.95 | CORRECT (Auto head 2.20) |
+| 234/303 rear gable W | 0.94..3.28, raked, tall edge to the ridge | opening-5: x 0.57..3.23, 0/1.66 LEVEL | 0.95..3.29 raked | v1 CORRECT; Auto position roughly right, profile **WRONG** |
+| 234/303 rear gable E | 4.59..6.93, raked | opening-3: x 4.46..7.31, 0/1.68 LEVEL | 4.61..6.95 raked | as above |
+| 90/230 west living | z 9.05..9.95 | opening-10: z 9.04..9.94, 0/2.20 | 9.07..9.97 | CORRECT |
+| 140/140 west kitchen | z 6.80..8.20, sill 0.9 | opening-6: z 6.81..8.21, sill 0, 2.20 tall | 6.80..8.20, sill 0.90 | v1 CORRECT; Auto sill **WRONG** (no callout read) |
+| 300/230 east living | z 9.70..12.70 | opening-2: z 9.72..12.70, 0/2.20 | 9.70..12.70 | CORRECT |
+| 100/210 garage side | 9.92..10.92 in the garage rear wall | opening-9: x 9.94..10.89 in the garage rear wall | 9.90..10.90 | CORRECT |
+| boiler→garage | z 2.22..3.15 | opening-7: z 2.01..3.15 on the main east wall (cut as an exterior opening, the garage covers it) | z 2.24..3.06 | CORRECT position; Auto exposes it as a facade opening |
+| profiles / families / heights | 3 raked; fills window/door; heights from callouts | all LEVEL; every head 2.20 (convention), every sill 0; no families, no callout read | RAKED_SINGLE ×3 with families and printed heights | Auto **WRONG** on every height and profile |
+
+So the current Auto places 10 of the 12 major openings within 0.2 m (the reference audit's earlier draft under-counted this by converting the frame wrongly), and gets every height, sill and head profile from a convention because the printed `w/h` callouts are never read. Its own projection audit matched 5 of 13 objects because the rendered elevations were registered against a 14.5 m silhouette that includes the recess zones.
 
 ## 6. Rooflights, chimneys
 
@@ -83,7 +86,7 @@ Auto's projection audit at the stage start: 5 of 13 objects matched, 8 unmatched
 
 ## 8. Main structure, roof, levels
 
-Everything in the v1 facts table that is a printed dimension or a section datum is CORRECT and unchanged in v2 (87 SAME rows). The current Auto is CORRECT on the two masses (7.90 × 12.61 and 4.15 × 7.51), the 40° gable with ridge along z, the attic level 3.06 and the ridge, and WRONG on: the frame (front wall at z 0), the garage roof height (3.06 instead of 2.88 + parapet 3.09) and overhang (0.84 instead of 0 with a 1.00 projection over the portal), the roof extent (12.61 instead of 14.60), the eave (`eaveOffset` 1.61 above 3.06 = 4.67, acceptable) and the wall thickness (0.468 measured instead of 0.45; acceptable).
+Everything in the v1 facts table that is a printed dimension or a section datum is CORRECT and unchanged in v2 (87 SAME rows). The current Auto is CORRECT on the two masses (7.90 × 12.61 and 4.15 × 7.51), the 40° gable with ridge along z, the attic level 3.06 and the ridge, and WRONG on: the frame (z runs from the rear wall towards the front, so its FRONT is at max z, against MODEL_FRAME), the garage roof height (3.06 instead of 2.88 + parapet 3.09) and overhang (0.84 instead of 0 with a 1.00 projection over the portal), the roof extent (12.61 instead of 14.60), the eave (`eaveOffset` 1.61 above 3.06 = 4.67, acceptable) and the wall thickness (0.468 measured instead of 0.45; acceptable).
 
 ## 9. What v2 changes in the evaluation fixtures (§23)
 

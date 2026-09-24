@@ -20,7 +20,7 @@ Counts by status: SOURCE_EXACT 26, SOURCE_CORROBORATED 31, SOURCE_DERIVED 49, IM
 
 ## 1. Frame
 
-APP frame, as `APP_SPEC.md` defines it: **x** east of the west outer face (0..12.05), **y** up from the ground finished floor (±0,00; terrain −0.32), **z** north of the **front outer plane**. The outer face of the front returns is z = 0, the front wall's outer face is z = 1.00, the rear wall's outer face z = 13.60, the rear outer plane (loggia mouth) z = 14.60. This is the frame the reference model uses; the current Marcówki Auto puts the *front wall* at z = 0 (its `zone-min_z` at −1..0), so `z_v2 = z_auto + 1.00`.
+APP frame, as `APP_SPEC.md` defines it: **x** east of the west outer face (0..12.05), **y** up from the ground finished floor (±0,00; terrain −0.32), **z** north of the **front outer plane**. The outer face of the front returns is z = 0, the front wall's outer face is z = 1.00, the rear wall's outer face z = 13.60, the rear outer plane (loggia mouth) z = 14.60. This is the frame the reference model uses. The current Marcówki Auto (03R1) runs z the other way: its plan frame puts z = 0 at the *rear* wall outer face and z grows towards the front (front wall face at 12.61; `zone-max_z` 12.61..13.60 is the portal zone, `zone-min_z` −1..0 the loggia zone), and the solver labels the max-z ring wall FRONT, against `MODEL_FRAME`. Conversion: `z_v2 = 13.60 − z_auto`.
 
 ## 2. Source atlas (summary; full data in `source-atlas.json`)
 
