@@ -65,6 +65,8 @@ export type ReconstructionV2Options = {
   publishedAreas?: readonly PublishedArea[]
   publishedRooms?: ReadonlyArray<{ storey: string; index: number; label: string; area: number }>
   frameFilter?: (frame: SourceCoordinateFrame) => boolean
+  /** Diagnostic lines from the readers, for a developer watching a run; never part of the result. */
+  debug?: (message: string) => void
 }
 
 export type ReconstructionV2Result = {
@@ -78,7 +80,7 @@ export type ReconstructionV2Result = {
   quality: FeatureQualityReport
   residuals: SourceViewResidual[]
   repair: RepairTrace
-  registrations: { plans: PlanFrameV2[]; elevations: ElevationRegistrationV2[]; section?: { frameId: string; mpp: number; originCol: number; zeroRow: number }; cameras: Array<{ frameId: string; solved: boolean; residualPx?: number; why: string }> }
+  registrations: { plans: PlanFrameV2[]; elevations: ElevationRegistrationV2[]; section?: { frameId: string; mpp: number; originCol: number; zeroRow: number }; cameras: Array<{ frameId: string; solved: boolean; residualPx?: number; why: string; camera?: PerspectiveCameraV2 }> }
   world: WorldFrameV2
   steps: SolverStep[]
   unresolved: UnresolvedCandidate[]
@@ -412,7 +414,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       })
     }
     for (const m of masses.filter((x) => x.storeys.includes(index))) {
-      const reading = readInterior(entry.raster, entry.frame, { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, T, index, tokens, rooms, { extraBarriers: barriers })
+      const reading = readInterior(entry.raster, entry.frame, { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, T, index, tokens, rooms, { extraBarriers: barriers, onDebug: options.debug ? (info) => options.debug?.(`interior ${m.id} storey ${index}: ${info.axis} band at px ${info.centrePx.toFixed(1)} (${info.axis === 'Z' ? 'x' : 'z'} ${(info.axis === 'Z' ? entry.frame.toWorld(info.centrePx, 0).x : entry.frame.toWorld(0, info.centrePx).z).toFixed(2)}), ${info.thick} px thick: ${info.runsPx.map((r) => `${(info.axis === 'Z' ? entry.frame.toWorld(0, r.to).z : entry.frame.toWorld(r.from, 0).x).toFixed(2)}..${(info.axis === 'Z' ? entry.frame.toWorld(0, r.from).z : entry.frame.toWorld(r.to, 0).x).toFixed(2)}`).join(', ')}`) : undefined })
       reading.walls = reading.walls.map((w) => ({ ...w, id: `${m.id}-${w.id}` }))
       reading.doors = reading.doors.map((d) => ({ ...d, id: `${m.id}-${d.id}`, betweenIds: [d.betweenIds[0].includes(':') ? d.betweenIds[0] : `${m.id}-${d.betweenIds[0]}`, d.betweenIds[1].includes(':') ? d.betweenIds[1] : `${m.id}-${d.betweenIds[1]}`] as [string, string] }))
       reading.rooms = reading.rooms.map((r) => ({ ...r, id: `${m.id}-${r.id}`, doorIds: r.doorIds.map((d) => `${m.id}-${d}`) }))
@@ -559,14 +561,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       if (!eaveSide) continue
       const eaveAlong = mainRoof.ridgeAxis === 'Z' ? (eaveSide === 'LOW' ? main.x0 : main.x1) : eaveSide === 'LOW' ? main.z0 : main.z1
       const walledAlong = mainRoof.ridgeAxis === 'Z' ? { from: world.walled.z0, to: world.walled.z1 } : { from: world.walled.x0, to: world.walled.x1 }
-      const found = readRooflights(v.view, v.raster, { eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, pitchDeg: mainRoof.pitchDeg, eaveAlong, ridgeAlong: mainRoof.ridgeAt, slope: eaveSide }, walledAlong)
+      const found = readRooflights(v.view, v.raster, { eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, pitchDeg: mainRoof.pitchDeg, eaveAlong, ridgeAlong: mainRoof.ridgeAt, slope: eaveSide }, walledAlong, options.debug)
       for (const r of found) {
-        // Not a chimney: no chimney block within 0.4 m along the ridge on this slope.
+        // Not a chimney: the patch does not overlap a chimney block's run along the ridge on this slope.
         const chimneyThere = chimneys.some((c) => {
           const along = mainRoof.ridgeAxis === 'Z' ? [c.z0, c.z1] : [c.x0, c.x1]
           const across = mainRoof.ridgeAxis === 'Z' ? (c.x0 + c.x1) / 2 : (c.z0 + c.z1) / 2
           const onThisSlope = eaveSide === 'LOW' ? across < mainRoof.ridgeAt : across > mainRoof.ridgeAt
-          return onThisSlope && Math.min(along[1], r.alongTo) - Math.max(along[0], r.alongFrom) > -0.4
+          return onThisSlope && Math.min(along[1], r.alongTo) - Math.max(along[0], r.alongFrom) > -0.05
         })
         if (chimneyThere) continue
         const frame = frameById.get(r.frameId)
@@ -705,7 +707,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const raster = options.raster(frame)
     if (!raster || !mainRoof) continue
     const cam = solvePerspectiveCamera(raster, frame.id, { x0: world.envelope.x0, x1: world.envelope.x1, z0: world.envelope.z0, z1: world.envelope.z1, eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, groundY: 0, attached: attachedRoofs.map((r) => ({ x0: r.footprint.x0, x1: r.footprint.x1, z0: r.footprint.z0, z1: r.footprint.z1, topY: r.parapetTopY ?? r.slabTopY })) })
-    cameras.push({ frameId: frame.id, solved: !!cam, residualPx: cam?.residualPx.rms, why: cam ? cam.why : 'no camera hypothesis aligned enough silhouette corners with a plausible residual' })
+    cameras.push({ frameId: frame.id, solved: !!cam, residualPx: cam?.residualPx.rms, why: cam ? cam.why : 'no camera hypothesis aligned enough silhouette corners with a plausible residual', ...(cam ? { camera: cam } : {}) })
     if (cam) {
       solvedCameras.push(cam)
       feature('CAMERA', `camera-${frame.id.slice(-10)}`, { residualPx: { value: cam.residualPx.rms, low: 0, high: cam.residualPx.max, unit: 'none' } }, [sighting(frame, 'silhouette corners of the perspective', cam.confidence)], 'IMAGE_METRIC_REGISTERED', cam.why)
@@ -841,7 +843,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const plan = planFrames.find((p) => p.frameId === e.frameId)
     let disposition: EvidenceConsumptionRecord['disposition'] = 'USED_AS_CORROBORATION'
     let reason = 'a printed figure on a registered drawing that corroborates the frame it was read through'
-    if (e.kind === 'OPENING_CALLOUT') { disposition = 'UNRESOLVED'; reason = 'a printed opening callout that matched no wall gap within reach' }
+    if (e.kind === 'OPENING_CALLOUT') {
+      // A ring the reader could not read as one coherent pair of numbers is
+      // a circle on the sheet — furniture, a plant, a fitting — not a callout;
+      // one it could read, that no wall gap of that width lies near, is a
+      // callout of an opening this pass did not cut.
+      const coherent = e.confidence >= 0.2
+      disposition = coherent ? 'UNRESOLVED' : 'REJECTED_WITH_REASON'
+      reason = coherent ? 'a printed opening callout that matched no wall gap of its width within reach' : `a ring read as "${e.rawText}" at no coherent confidence (${e.confidence}): a circle on the sheet, not a callout`
+    }
     else if (e.kind === 'LINEAR_DIMENSION' && !plan) { disposition = 'IGNORED_WITH_REASON'; reason = 'a dimension on a drawing the v2 frame does not register (a variant, the section, the site plan)' }
     else if (e.kind === 'ANGLE') { disposition = 'USED_AS_CORROBORATION'; reason = 'an angle reading beside the printed pitch' }
     record({ evidenceId: e.id, evidenceKind: 'METRIC', what: `${e.kind} ${e.rawText} on ${e.frameId.slice(-10)}`, authority: e.confidence >= 0.6 ? 'HIGH' : 'MEDIUM', disposition, reason, stage: 'METRIC' })

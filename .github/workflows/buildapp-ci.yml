@@ -46,6 +46,20 @@ jobs:
         run: npm run audit:marcowki:facades
       - name: Prove reconstruction works with reference package absent
         run: npm run reconstruct:no-reference
+      - name: Analyzer-v2 gates
+        run: npm run audit:analyzer-v2
+      - name: Prove analyzer-v2 works with the benchmark absent
+        run: npm run reconstruct:no-benchmark
+      - name: Evaluate the v2 candidate against source truth v2
+        run: npm run evaluate:v2
+      - name: Upload analyzer-v2 artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analyzer-v2
+          if-no-files-found: ignore
+          retention-days: 14
+          path: stage-reports/artifacts/analyzer-v2/**
       - name: Upload reconstruction diagnostics
         if: always()
         uses: actions/upload-artifact@v4

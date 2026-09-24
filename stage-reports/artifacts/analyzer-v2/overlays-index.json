@@ -1,0 +1,202 @@
+{
+  "schema": "buildapp.analyzer-v2.overlays-index",
+  "schemaVersion": "1.0.0",
+  "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
+  "inputs": {
+    "package": "/home/user/BuildApp/stage-reports/artifacts/source-observations/marcowki-source-package.json",
+    "graph": "/home/user/BuildApp/stage-reports/artifacts/source-observations/marcowki-observation-graph.json",
+    "artifacts": "/home/user/BuildApp/stage-reports/artifacts/analyzer-v2",
+    "atlas": "/home/user/BuildApp/research/marcowki-v2/source-atlas.json",
+    "cache": "/home/user/BuildApp/.cache/source-bytes"
+  },
+  "embedding": "the publisher's cached bytes, base64, once per sheet; never re-encoded",
+  "files": [
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-przekro-5270f96cea",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-przekro-5270f96cea.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacj-7e88f36a4d",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacj-7e88f36a4d.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+      "path": "source-atlas/asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "path": "source-atlas/asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a",
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+      "path": "source-atlas/asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+      "path": "source-atlas/asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "assetId": "asset-rzut-117027f690",
+      "path": "source-atlas/asset-rzut-117027f690-fed2722c38.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "assetId": "asset-rzut-19a11bc745",
+      "path": "source-atlas/asset-rzut-19a11bc745-33a5ff46cd.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "assetId": "asset-rzut-aa1526220f",
+      "path": "source-atlas/asset-rzut-aa1526220f-863ec969ff.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "assetId": "asset-rzut-f028d28aba",
+      "path": "source-atlas/asset-rzut-f028d28aba-d7b403e37e.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070",
+      "assetId": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+      "path": "source-atlas/asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070.svg"
+    },
+    {
+      "kind": "source-atlas",
+      "frameId": "frame-asset-widok-2-projekt-dom-w-marcowkach-ge-67e404-8948cc28a7",
+      "assetId": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+      "path": "source-atlas/asset-widok-2-projekt-dom-w-marcowkach-ge-67e404-8948cc28a7.svg"
+    },
+    {
+      "kind": "plan",
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "assetId": "asset-rzut-19a11bc745",
+      "storeyIndex": 0,
+      "note": "wallPx is not serialised in registrations.json; derived from wallThicknessM",
+      "path": "plan-overlays/storey-0.svg"
+    },
+    {
+      "kind": "plan",
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "assetId": "asset-rzut-117027f690",
+      "storeyIndex": 1,
+      "note": "wallPx is not serialised in registrations.json; derived from wallThicknessM",
+      "path": "plan-overlays/storey-1.svg"
+    },
+    {
+      "kind": "elevation",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+      "side": "REAR",
+      "path": "elevation-overlays/rear.svg"
+    },
+    {
+      "kind": "elevation",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+      "side": "FRONT",
+      "path": "elevation-overlays/front.svg"
+    },
+    {
+      "kind": "elevation",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+      "side": "LEFT",
+      "path": "elevation-overlays/left.svg"
+    },
+    {
+      "kind": "elevation",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+      "side": "RIGHT",
+      "path": "elevation-overlays/right.svg"
+    },
+    {
+      "kind": "perspective",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa",
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+      "solved": true,
+      "path": "perspective-overlays/asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa.svg"
+    },
+    {
+      "kind": "perspective",
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a",
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+      "solved": true,
+      "path": "perspective-overlays/asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a.svg"
+    },
+    {
+      "kind": "perspective",
+      "frameId": "frame-asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070",
+      "assetId": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+      "solved": true,
+      "path": "perspective-overlays/asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070.svg"
+    },
+    {
+      "kind": "perspective",
+      "frameId": "frame-asset-widok-2-projekt-dom-w-marcowkach-ge-67e404-8948cc28a7",
+      "assetId": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+      "solved": false,
+      "note": "the sealed run solved no camera for this render",
+      "path": "perspective-overlays/asset-widok-2-projekt-dom-w-marcowkach-ge-67e404-8948cc28a7.svg"
+    }
+  ],
+  "gaps": [
+    "the atlas at /home/user/BuildApp/research/marcowki-v2/source-atlas.json carries view metadata (family, projection, orientation, variants) but no pixel regions or zones, so the source-atlas sheets show its metadata and the analyzer's sightings instead",
+    "wallPx is not serialised in registrations.json; derived from wallThicknessM",
+    "the sealed run solved no camera for this render"
+  ]
+}

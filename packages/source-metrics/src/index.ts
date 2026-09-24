@@ -1,5 +1,6 @@
 export * from './font.js'
 export * from './ocr.js'
+export * from './callouts.js'
 export * from './schema.js'
 export * from './parse.js'
 export * from './chains.js'

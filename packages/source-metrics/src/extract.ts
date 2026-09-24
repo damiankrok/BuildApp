@@ -31,6 +31,7 @@ import type { RawChain, SolvedChain } from './chains.js'
 import { findDimensionLines, findStraightRuns } from './dimension-lines.js'
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
+import { readOpeningCallouts } from './callouts.js'
 import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
@@ -316,6 +317,49 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
           note: parsed.secondValue === undefined ? undefined : `width ${parsed.value} cm over height ${parsed.secondValue} cm`,
         })
         usedTokens.add(token)
+      }
+    }
+
+    // --- ring callouts on plan sheets ---
+    // The circled `width / height` beside each opening is one symbol, not a
+    // token: the ring reader finds the circles and reads the halves, and each
+    // half arrives as a short list of readings rather than one number, so the
+    // reconstruction can pick the one its own evidence — the plan gap, the
+    // elevation — agrees with.
+    if (plane === 'PLAN_XZ') {
+      for (const ring of readOpeningCallouts(raster, { frameId: frame.id })) {
+        if (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0) continue
+        const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }
+        const near = nearest(observations, ['OPENING', 'WINDOW', 'DOOR', 'OPENING_INTERVAL'], centre)
+        const attached = near !== undefined && near.distance <= ring.circle.radiusPx * 6
+        const width = ring.widthCandidates[0]
+        const height = ring.heightCandidates[0]
+        const readable = ring.widthCm !== null && ring.heightCm !== null
+        evidence.push({
+          id: stableId('metric', 'callout-ring', { frameId: frame.id, cx: ring.circle.cx, cy: ring.circle.cy }),
+          kind: 'OPENING_CALLOUT',
+          frameId: frame.id,
+          assetId: frame.assetId,
+          variantByteHash: frame.variantByteHash,
+          value: width.value,
+          unit: 'cm',
+          origin: 'READ',
+          rawText: `${width.text}/${height.text}`,
+          textBox: ring.box,
+          measuredGeometry: attached ? near.observation.pixelGeometry : undefined,
+          association: attached
+            ? { kind: 'OPENING_SYMBOL', score: round6(Math.max(0.1, 1 - near.distance / Math.max(1, ring.circle.radiusPx * 6))), why: `${near.distance} px from an opening symbol on the same sheet`, observationIds: [near.observation.id] }
+            : UNATTACHED,
+          ocrTokenIds: [],
+          observationIds: attached ? [near.observation.id] : [],
+          alternatives: [
+            ...ring.widthCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `width candidate: the upper half read as ${c.text} (match ${c.score})` })),
+            ...ring.heightCandidates.map((c) => ({ value: c.value, unit: 'cm' as const, rawText: c.text, confidence: round6(Math.min(1, c.score)), why: `height candidate: the lower half read as ${c.text} (match ${c.score})` })),
+          ],
+          confidence: round6(Math.min(1, Math.max(0.05, Math.min(width.score, height.score))) * (ring.bar ? 1 : 0.5) * (readable ? 1 : 0.6)),
+          provenance: { extractor: 'NUMERIC_OCR', name: `metrics.callout-ring@${METRIC_READER_VERSION}`, detail: ring.why },
+          note: `width ${width.value} cm over height ${height.value} cm, from a ${2 * ring.circle.radiusPx} px ring callout${readable ? '' : ' (halves not read as one coherent pair)'}`,
+        })
       }
     }
 

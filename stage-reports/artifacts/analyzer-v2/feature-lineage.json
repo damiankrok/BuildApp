@@ -661,188 +661,216 @@
     },
     {
       "commandIndex": 163,
+      "id": "bind-rooflight-left-1",
+      "objectId": "rooflight-left-1",
+      "objectKind": "roofOpenings",
+      "solvedFeatureId": "feat-rooflight-left-1"
+    },
+    {
+      "commandIndex": 164,
+      "id": "bind-rooflight-left-1-unit",
+      "objectId": "rooflight-left-1-unit",
+      "objectKind": "rooflights",
+      "solvedFeatureId": "feat-rooflight-left-1"
+    },
+    {
+      "commandIndex": 166,
+      "id": "bind-rooflight-right-0",
+      "objectId": "rooflight-right-0",
+      "objectKind": "roofOpenings",
+      "solvedFeatureId": "feat-rooflight-right-0"
+    },
+    {
+      "commandIndex": 167,
+      "id": "bind-rooflight-right-0-unit",
+      "objectId": "rooflight-right-0-unit",
+      "objectKind": "rooflights",
+      "solvedFeatureId": "feat-rooflight-right-0"
+    },
+    {
+      "commandIndex": 169,
       "id": "bind-opening-0-front-0-0",
       "objectId": "opening-0-front-0-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-front-0-0"
     },
     {
-      "commandIndex": 164,
+      "commandIndex": 170,
       "id": "bind-opening-0-front-0-0-unit",
       "objectId": "opening-0-front-0-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-front-0-0"
     },
     {
-      "commandIndex": 166,
+      "commandIndex": 172,
       "id": "bind-opening-0-front-0-1",
       "objectId": "opening-0-front-0-1",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-front-0-1"
     },
     {
-      "commandIndex": 167,
+      "commandIndex": 173,
       "id": "bind-opening-0-front-0-1-unit",
       "objectId": "opening-0-front-0-1-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-front-0-1"
     },
     {
-      "commandIndex": 169,
+      "commandIndex": 175,
       "id": "bind-opening-0-east-1-0",
       "objectId": "opening-0-east-1-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-east-1-0"
     },
     {
-      "commandIndex": 170,
+      "commandIndex": 176,
       "id": "bind-opening-0-east-1-0-unit",
       "objectId": "opening-0-east-1-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-east-1-0"
     },
     {
-      "commandIndex": 172,
+      "commandIndex": 178,
       "id": "bind-opening-0-rear-2-0",
       "objectId": "opening-0-rear-2-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-rear-2-0"
     },
     {
-      "commandIndex": 173,
+      "commandIndex": 179,
       "id": "bind-opening-0-rear-2-0-unit",
       "objectId": "opening-0-rear-2-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-rear-2-0"
     },
     {
-      "commandIndex": 175,
+      "commandIndex": 181,
       "id": "bind-opening-0-west-3-0",
       "objectId": "opening-0-west-3-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-west-3-0"
     },
     {
-      "commandIndex": 176,
+      "commandIndex": 182,
       "id": "bind-opening-0-west-3-0-leaf",
       "objectId": "opening-0-west-3-0-leaf",
       "objectKind": "doors",
       "solvedFeatureId": "feat-opening-0-west-3-0"
     },
     {
-      "commandIndex": 178,
+      "commandIndex": 184,
       "id": "bind-opening-0-west-3-1",
       "objectId": "opening-0-west-3-1",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-west-3-1"
     },
     {
-      "commandIndex": 179,
-      "id": "bind-opening-0-west-3-1-leaf",
-      "objectId": "opening-0-west-3-1-leaf",
-      "objectKind": "doors",
+      "commandIndex": 185,
+      "id": "bind-opening-0-west-3-1-unit",
+      "objectId": "opening-0-west-3-1-unit",
+      "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-west-3-1"
     },
     {
-      "commandIndex": 181,
+      "commandIndex": 187,
       "id": "bind-opening-1-front-4-0",
       "objectId": "opening-1-front-4-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-1-front-4-0"
     },
     {
-      "commandIndex": 182,
+      "commandIndex": 188,
       "id": "bind-opening-1-front-4-0-unit",
       "objectId": "opening-1-front-4-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-1-front-4-0"
     },
     {
-      "commandIndex": 184,
+      "commandIndex": 190,
       "id": "bind-opening-1-rear-6-0",
       "objectId": "opening-1-rear-6-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-1-rear-6-0"
     },
     {
-      "commandIndex": 185,
+      "commandIndex": 191,
       "id": "bind-opening-1-rear-6-0-unit",
       "objectId": "opening-1-rear-6-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-1-rear-6-0"
     },
     {
-      "commandIndex": 187,
+      "commandIndex": 193,
       "id": "bind-opening-1-rear-6-1",
       "objectId": "opening-1-rear-6-1",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-1-rear-6-1"
     },
     {
-      "commandIndex": 188,
+      "commandIndex": 194,
       "id": "bind-opening-1-rear-6-1-unit",
       "objectId": "opening-1-rear-6-1-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-1-rear-6-1"
     },
     {
-      "commandIndex": 190,
+      "commandIndex": 196,
       "id": "bind-opening-0-front-8-0",
       "objectId": "opening-0-front-8-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-front-8-0"
     },
     {
-      "commandIndex": 191,
+      "commandIndex": 197,
       "id": "bind-opening-0-front-8-0-leaf",
       "objectId": "opening-0-front-8-0-leaf",
       "objectKind": "doors",
       "solvedFeatureId": "feat-opening-0-front-8-0"
     },
     {
-      "commandIndex": 193,
+      "commandIndex": 199,
       "id": "bind-opening-0-rear-10-0",
       "objectId": "opening-0-rear-10-0",
       "objectKind": "openings",
       "solvedFeatureId": "feat-opening-0-rear-10-0"
     },
     {
-      "commandIndex": 194,
+      "commandIndex": 200,
       "id": "bind-opening-0-rear-10-0-unit",
       "objectId": "opening-0-rear-10-0-unit",
       "objectKind": "windows",
       "solvedFeatureId": "feat-opening-0-rear-10-0"
     },
     {
-      "commandIndex": 196,
+      "commandIndex": 202,
       "id": "bind-shared-opening-0-east-1-1",
       "objectId": "shared-opening-0-east-1-1",
       "objectKind": "openings",
       "solvedFeatureId": "feat-shared-opening-0-east-1-1"
     },
     {
-      "commandIndex": 197,
+      "commandIndex": 203,
       "id": "bind-shared-opening-0-east-1-1-leaf",
       "objectId": "shared-opening-0-east-1-1-leaf",
       "objectKind": "doors",
       "solvedFeatureId": "feat-shared-opening-0-east-1-1"
     },
     {
-      "commandIndex": 199,
+      "commandIndex": 205,
       "id": "bind-stair-main",
       "objectId": "stair-main",
       "objectKind": "stairs",
       "solvedFeatureId": "feat-stair-main"
     },
     {
-      "commandIndex": 201,
+      "commandIndex": 207,
       "id": "bind-finish-front-66",
       "objectId": "finish-front-66",
       "objectKind": "surfaceRegions",
       "solvedFeatureId": "feat-finish-front-66"
     }
   ],
-  "contentHash": "3822a54904a8d48ad6374273bc9612cbd0c7ecf4c63f616b7af36bf78ac103c8",
+  "contentHash": "96baa85a5147cc40314b1419ad7c8e119902c776c7618eb8864246d2730071ec",
   "hypotheses": [
     {
       "confidence": 0.7,
@@ -3005,56 +3033,56 @@
       "why": "14.81 m² enclosed by 8 wall faces"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.92,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-front-0-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 1.460578,
-          "low": 1.340578,
+          "high": 1.435524,
+          "low": 1.375524,
           "unit": "m",
-          "value": 1.400578
+          "value": 1.405524
         },
         "headY": {
-          "high": 2.426119,
-          "low": 2.226119,
+          "high": 2.435119,
+          "low": 2.235119,
           "unit": "m",
-          "value": 2.326119
+          "value": 2.335119
         },
         "sillY": {
-          "high": 0.144119,
-          "low": -0.055881,
+          "high": 0.135119,
+          "low": -0.064881,
           "unit": "m",
-          "value": 0.044119
+          "value": 0.035119
         },
         "width": {
-          "high": 1.169892,
-          "low": 1.049892,
+          "high": 1.13,
+          "low": 1.07,
           "unit": "m",
-          "value": 1.109892
+          "value": 1.1
         }
       },
       "sightingIds": [
-        "sight-wall-gap-1-40-2-51-on-t-a5ff46cd-0ff2fdb0fd",
+        "sight-wall-gap-1-41-2-51-on-t-a5ff46cd-968de413af",
         "sight-opening-extent-on-the-fr-462d58b4-00bbabfb15"
       ],
       "storeyIndex": 0,
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation"
     },
     {
-      "confidence": 0.5,
+      "confidence": 0.7,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-front-0-1",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 4.235308,
-          "low": 4.115308,
+          "high": 4.208828,
+          "low": 4.148828,
           "unit": "m",
-          "value": 4.175308
+          "value": 4.178828
         },
         "headY": {
           "high": 2.2,
@@ -3069,36 +3097,36 @@
           "value": 0
         },
         "width": {
-          "high": 1.11704,
-          "low": 0.99704,
+          "high": 1.08,
+          "low": 1.02,
           "unit": "m",
-          "value": 1.05704
+          "value": 1.05
         }
       },
       "sightingIds": [
         "sight-wall-gap-4-18-5-23-on-t-a5ff46cd-329f94c3bd"
       ],
       "storeyIndex": 0,
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.92,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-east-1-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 9.744019,
-          "low": 9.624019,
+          "high": 9.722695,
+          "low": 9.662695,
           "unit": "m",
-          "value": 9.684019
+          "value": 9.692695
         },
         "headY": {
-          "high": 2.372648,
-          "low": 2.172648,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 2.272648
+          "value": 2.3
         },
         "sillY": {
           "high": 0.1,
@@ -3107,76 +3135,76 @@
           "value": 0
         },
         "width": {
-          "high": 3.077352,
-          "low": 2.957352,
+          "high": 3.03,
+          "low": 2.97,
           "unit": "m",
-          "value": 3.017352
+          "value": 3
         }
       },
       "sightingIds": [
-        "sight-wall-gap-9-68-12-70-on-a5ff46cd-0e09c86a2f",
+        "sight-wall-gap-9-69-12-69-on-a5ff46cd-02251f7b7f",
         "sight-opening-extent-on-the-ea-c53f7671-fba5e90072"
       ],
       "storeyIndex": 0,
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.85,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-rear-2-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 2.332636,
-          "low": 2.212636,
+          "high": 2.291337,
+          "low": 2.231337,
           "unit": "m",
-          "value": 2.272636
+          "value": 2.261337
         },
         "headY": {
-          "high": 1.715926,
-          "low": 1.515926,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 1.615926
+          "value": 2.3
         },
         "sillY": {
-          "high": 0.150512,
-          "low": -0.049488,
+          "high": 0.1,
+          "low": -0.1,
           "unit": "m",
-          "value": 0.050512
+          "value": 0
         },
         "width": {
-          "high": 4.737402,
-          "low": 4.617402,
+          "high": 4.73,
+          "low": 4.67,
           "unit": "m",
-          "value": 4.677402
+          "value": 4.7
         }
       },
       "sightingIds": [
-        "sight-wall-gap-2-27-6-95-on-t-a5ff46cd-4b1fc17361",
+        "sight-wall-gap-2-26-6-96-on-t-a5ff46cd-8193ca6c66",
         "sight-opening-extent-on-the-re-a4552876-a026a69f36"
       ],
       "storeyIndex": 0,
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation"
     },
     {
-      "confidence": 0.5,
+      "confidence": 0.7,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-west-3-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 9.082319,
-          "low": 8.962319,
+          "high": 9.052275,
+          "low": 8.992275,
           "unit": "m",
-          "value": 9.022319
+          "value": 9.022275
         },
         "headY": {
-          "high": 2.2,
-          "low": 2,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 2.1
+          "value": 2.3
         },
         "sillY": {
           "high": 0.1,
@@ -3185,185 +3213,223 @@
           "value": 0
         },
         "width": {
-          "high": 0.959912,
-          "low": 0.839912,
+          "high": 0.93,
+          "low": 0.87,
           "unit": "m",
-          "value": 0.899912
+          "value": 0.9
         }
       },
       "sightingIds": [
         "sight-wall-gap-9-02-9-92-on-t-a5ff46cd-3228318bcb"
       ],
       "storeyIndex": 0,
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation"
     },
     {
-      "confidence": 0.5,
+      "confidence": 0.7,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-0-west-3-1",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 6.859007,
-          "low": 6.739007,
+          "high": 6.830409,
+          "low": 6.770409,
           "unit": "m",
-          "value": 6.799007
+          "value": 6.800409
         },
         "headY": {
-          "high": 2.2,
-          "low": 2,
+          "high": 2.3,
+          "low": 2.1,
           "unit": "m",
-          "value": 2.1
+          "value": 2.2
         },
         "sillY": {
-          "high": 0.1,
-          "low": -0.1,
+          "high": 0.9,
+          "low": 0.7,
           "unit": "m",
-          "value": 0
+          "value": 0.8
         },
         "width": {
-          "high": 1.462804,
-          "low": 1.342804,
+          "high": 1.43,
+          "low": 1.37,
           "unit": "m",
-          "value": 1.402804
+          "value": 1.4
         }
       },
       "sightingIds": [
         "sight-wall-gap-6-80-8-20-on-t-a5ff46cd-ecd4fdcb5e"
       ],
       "storeyIndex": 0,
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.85,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-1-front-4-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 3.996877,
-          "low": 3.876877,
+          "high": 3.955415,
+          "low": 3.895415,
           "unit": "m",
-          "value": 3.936877
+          "value": 3.925415
         },
         "headY": {
-          "high": 5.471422,
-          "low": 5.271422,
+          "high": 6.36,
+          "low": 6.16,
           "unit": "m",
-          "value": 5.371422
+          "value": 6.26
         },
         "sillY": {
-          "high": 4.915273,
-          "low": 4.715273,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 4.815273
+          "value": 3.06
         },
         "width": {
-          "high": 2.737076,
-          "low": 2.617076,
+          "high": 2.73,
+          "low": 2.67,
           "unit": "m",
-          "value": 2.677076
+          "value": 2.7
         }
       },
       "sightingIds": [
-        "sight-wall-gap-3-94-6-61-on-t-d2722c38-a43b2d95f6",
+        "sight-wall-gap-3-93-6-63-on-t-d2722c38-12b8d89723",
         "sight-opening-extent-on-the-fr-462d58b4-00bbabfb15"
       ],
       "storeyIndex": 1,
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.85,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-1-rear-6-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 1.031096,
-          "low": 0.911096,
+          "high": 0.985913,
+          "low": 0.925913,
           "unit": "m",
-          "value": 0.971096
+          "value": 0.955913
         },
         "headY": {
-          "high": 6.419753,
-          "low": 6.219753,
+          "high": 6.2,
+          "low": 6,
           "unit": "m",
-          "value": 6.319753
+          "value": 6.1
         },
         "sillY": {
-          "high": 5.663483,
-          "low": 5.463483,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 5.563483
+          "value": 3.06
         },
         "width": {
-          "high": 2.369635,
-          "low": 2.249635,
+          "high": 2.37,
+          "low": 2.31,
           "unit": "m",
-          "value": 2.309635
+          "value": 2.34
         }
       },
       "sightingIds": [
-        "sight-wall-gap-0-97-3-28-on-t-d2722c38-0d298011a4",
+        "sight-wall-gap-0-96-3-30-on-t-d2722c38-02b81483b8",
         "sight-opening-extent-on-the-re-a4552876-a026a69f36"
       ],
       "storeyIndex": 1,
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14"
     },
     {
-      "confidence": 0.65,
+      "confidence": 0.85,
       "family": "OPENING",
       "hostId": "feat-main",
       "id": "hyp-opening-1-rear-6-1",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 4.653023,
-          "low": 4.533023,
+          "high": 4.607841,
+          "low": 4.547841,
           "unit": "m",
-          "value": 4.593023
+          "value": 4.577841
         },
         "headY": {
-          "high": 5.210751,
-          "low": 5.010751,
+          "high": 6.19,
+          "low": 5.99,
           "unit": "m",
-          "value": 5.110751
+          "value": 6.09
         },
         "sillY": {
-          "high": 4.470257,
-          "low": 4.270257,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 4.370257
+          "value": 3.06
         },
         "width": {
-          "high": 2.369635,
-          "low": 2.249635,
+          "high": 2.37,
+          "low": 2.31,
           "unit": "m",
-          "value": 2.309635
+          "value": 2.34
         }
       },
       "sightingIds": [
-        "sight-wall-gap-4-59-6-90-on-t-d2722c38-630bae47f8",
+        "sight-wall-gap-4-58-6-92-on-t-d2722c38-6bd19f93fd",
         "sight-opening-extent-on-the-re-a4552876-a026a69f36"
       ],
       "storeyIndex": 1,
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13"
     },
     {
-      "confidence": 0.5,
+      "confidence": 0.7,
       "family": "OPENING",
       "hostId": "feat-attached-0",
       "id": "hyp-opening-0-front-8-0",
       "measurementIds": [],
       "parameters": {
         "from": {
-          "high": 8.622024,
-          "low": 8.502024,
+          "high": 8.577963,
+          "low": 8.517963,
           "unit": "m",
-          "value": 8.562024
+          "value": 8.547963
+        },
+        "headY": {
+          "high": 2.85,
+          "low": 2.65,
+          "unit": "m",
+          "value": 2.75
+        },
+        "sillY": {
+          "high": 0.1,
+          "low": -0.1,
+          "unit": "m",
+          "value": 0
+        },
+        "width": {
+          "high": 2.78,
+          "low": 2.72,
+          "unit": "m",
+          "value": 2.75
+        }
+      },
+      "sightingIds": [
+        "sight-wall-gap-8-55-11-30-on-a5ff46cd-cba0a07748"
+      ],
+      "storeyIndex": 0,
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation"
+    },
+    {
+      "confidence": 0.85,
+      "family": "OPENING",
+      "hostId": "feat-attached-0",
+      "id": "hyp-opening-0-rear-10-0",
+      "measurementIds": [],
+      "parameters": {
+        "from": {
+          "high": 9.941844,
+          "low": 9.881844,
+          "unit": "m",
+          "value": 9.911844
         },
         "headY": {
           "high": 2.2,
@@ -3378,48 +3444,10 @@
           "value": 0
         },
         "width": {
-          "high": 2.781878,
-          "low": 2.661878,
+          "high": 1.03,
+          "low": 0.97,
           "unit": "m",
-          "value": 2.721878
-        }
-      },
-      "sightingIds": [
-        "sight-wall-gap-8-56-11-28-on-a5ff46cd-8c1ca5c5da"
-      ],
-      "storeyIndex": 0,
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
-    },
-    {
-      "confidence": 0.65,
-      "family": "OPENING",
-      "hostId": "feat-attached-0",
-      "id": "hyp-opening-0-rear-10-0",
-      "measurementIds": [],
-      "parameters": {
-        "from": {
-          "high": 9.96975,
-          "low": 9.84975,
-          "unit": "m",
-          "value": 9.90975
-        },
-        "headY": {
-          "high": 1.361065,
-          "low": 1.161065,
-          "unit": "m",
-          "value": 1.261065
-        },
-        "sillY": {
-          "high": 0.372268,
-          "low": 0.172268,
-          "unit": "m",
-          "value": 0.272268
-        },
-        "width": {
-          "high": 1.064188,
-          "low": 0.944188,
-          "unit": "m",
-          "value": 1.004188
+          "value": 1
         }
       },
       "sightingIds": [
@@ -3427,7 +3455,7 @@
         "sight-opening-extent-on-the-re-a4552876-a026a69f36"
       ],
       "storeyIndex": 0,
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation"
     },
     {
       "confidence": 0.5,
@@ -3588,6 +3616,66 @@
         "sight-a-light-patch-in-the-roo-66c9827c-02e4bf162e"
       ],
       "why": "a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)"
+    },
+    {
+      "confidence": 0.7,
+      "family": "ROOFLIGHT",
+      "id": "hyp-rooflight-left-1",
+      "measurementIds": [],
+      "parameters": {
+        "along": {
+          "high": 7.284643,
+          "low": 7.084643,
+          "unit": "m",
+          "value": 7.184643
+        },
+        "length": {
+          "high": 1.1802,
+          "low": 0.8802,
+          "unit": "m",
+          "value": 1.0302
+        },
+        "width": {
+          "high": 0.72909,
+          "low": 0.52909,
+          "unit": "m",
+          "value": 0.62909
+        }
+      },
+      "sightingIds": [
+        "sight-a-light-patch-in-the-roo-66c9827c-02e4bf162e"
+      ],
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)"
+    },
+    {
+      "confidence": 0.7,
+      "family": "ROOFLIGHT",
+      "id": "hyp-rooflight-right-0",
+      "measurementIds": [],
+      "parameters": {
+        "along": {
+          "high": 5.269164,
+          "low": 5.069164,
+          "unit": "m",
+          "value": 5.169164
+        },
+        "length": {
+          "high": 1.168278,
+          "low": 0.868278,
+          "unit": "m",
+          "value": 1.018278
+        },
+        "width": {
+          "high": 0.720971,
+          "low": 0.520971,
+          "unit": "m",
+          "value": 0.620971
+        }
+      },
+      "sightingIds": [
+        "sight-a-light-patch-in-the-roo-c53f7671-609b22ac3e"
+      ],
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)"
     },
     {
       "confidence": 0.7,
@@ -3893,7 +3981,7 @@
   ],
   "id": "feature-graph-marcowki",
   "measurements": [],
-  "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
+  "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "relations": [
     {
@@ -4553,7 +4641,7 @@
       "assetId": "asset-rzut-19a11bc745",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-      "id": "sight-wall-gap-1-40-2-51-on-t-a5ff46cd-0ff2fdb0fd",
+      "id": "sight-wall-gap-1-41-2-51-on-t-a5ff46cd-968de413af",
       "observationIds": [],
       "pixelRect": {
         "x0": 111,
@@ -4562,7 +4650,7 @@
         "y1": 735.4317058784361
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 1.40..2.51 on the front wall"
+      "what": "wall gap 1.41..2.51 on the front wall"
     },
     {
       "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
@@ -4592,7 +4680,7 @@
       "assetId": "asset-rzut-19a11bc745",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-      "id": "sight-wall-gap-9-68-12-70-on-a5ff46cd-0e09c86a2f",
+      "id": "sight-wall-gap-9-69-12-69-on-a5ff46cd-02251f7b7f",
       "observationIds": [],
       "pixelRect": {
         "x0": 338.4259591215639,
@@ -4601,11 +4689,11 @@
         "y1": 406
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 9.68..12.70 on the east wall"
+      "what": "wall gap 9.69..12.69 on the east wall"
     },
     {
       "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
-      "confidence": 0.82,
+      "confidence": 0.815,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
       "id": "sight-opening-extent-on-the-ea-c53f7671-fba5e90072",
       "observationIds": [],
@@ -4616,7 +4704,7 @@
       "assetId": "asset-rzut-19a11bc745",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-      "id": "sight-wall-gap-2-27-6-95-on-t-a5ff46cd-4b1fc17361",
+      "id": "sight-wall-gap-2-26-6-96-on-t-a5ff46cd-8193ca6c66",
       "observationIds": [],
       "pixelRect": {
         "x0": 144,
@@ -4625,7 +4713,7 @@
         "y1": 277.50734487843613
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 2.27..6.95 on the rear wall"
+      "what": "wall gap 2.26..6.96 on the rear wall"
     },
     {
       "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
@@ -4670,7 +4758,7 @@
       "assetId": "asset-rzut-117027f690",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-117027f690-fed2722c38",
-      "id": "sight-wall-gap-3-94-6-61-on-t-d2722c38-a43b2d95f6",
+      "id": "sight-wall-gap-3-93-6-63-on-t-d2722c38-12b8d89723",
       "observationIds": [],
       "pixelRect": {
         "x0": 196,
@@ -4679,13 +4767,13 @@
         "y1": 673.0140384995054
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 3.94..6.61 on the front wall"
+      "what": "wall gap 3.93..6.63 on the front wall"
     },
     {
       "assetId": "asset-rzut-117027f690",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-117027f690-fed2722c38",
-      "id": "sight-wall-gap-0-97-3-28-on-t-d2722c38-0d298011a4",
+      "id": "sight-wall-gap-0-96-3-30-on-t-d2722c38-02b81483b8",
       "observationIds": [],
       "pixelRect": {
         "x0": 83,
@@ -4694,13 +4782,13 @@
         "y1": 212.61405249950545
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 0.97..3.28 on the rear wall"
+      "what": "wall gap 0.96..3.30 on the rear wall"
     },
     {
       "assetId": "asset-rzut-117027f690",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-117027f690-fed2722c38",
-      "id": "sight-wall-gap-4-59-6-90-on-t-d2722c38-630bae47f8",
+      "id": "sight-wall-gap-4-58-6-92-on-t-d2722c38-6bd19f93fd",
       "observationIds": [],
       "pixelRect": {
         "x0": 221,
@@ -4709,13 +4797,13 @@
         "y1": 212.61405249950545
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 4.59..6.90 on the rear wall"
+      "what": "wall gap 4.58..6.92 on the rear wall"
     },
     {
       "assetId": "asset-rzut-19a11bc745",
       "confidence": 0.7,
       "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
-      "id": "sight-wall-gap-8-56-11-28-on-a5ff46cd-8c1ca5c5da",
+      "id": "sight-wall-gap-8-55-11-30-on-a5ff46cd-cba0a07748",
       "observationIds": [],
       "pixelRect": {
         "x0": 382,
@@ -4724,7 +4812,7 @@
         "y1": 735.4317058784361
       },
       "viewFamily": "PLAN",
-      "what": "wall gap 8.56..11.28 on the front wall"
+      "what": "wall gap 8.55..11.30 on the front wall"
     },
     {
       "assetId": "asset-rzut-19a11bc745",
@@ -4815,6 +4903,15 @@
       "confidence": 0.75,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
       "id": "sight-a-light-patch-in-the-roo-66c9827c-02e4bf162e",
+      "observationIds": [],
+      "viewFamily": "ELEVATION",
+      "what": "a light patch in the roof plane"
+    },
+    {
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+      "confidence": 0.75,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "id": "sight-a-light-patch-in-the-roo-c53f7671-609b22ac3e",
       "observationIds": [],
       "viewFamily": "ELEVATION",
       "what": "a light patch in the roof plane"
@@ -7882,42 +7979,42 @@
       "id": "feat-opening-0-front-0-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_CORROBORATED",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_CORROBORATED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 1.460578,
-          "low": 1.340578,
+          "high": 1.435524,
+          "low": 1.375524,
           "unit": "m",
-          "value": 1.400578
+          "value": 1.405524
         },
         "headY": {
-          "high": 2.426119,
-          "low": 2.226119,
+          "high": 2.435119,
+          "low": 2.235119,
           "unit": "m",
-          "value": 2.326119
+          "value": 2.335119
         },
         "sillY": {
-          "high": 0.144119,
-          "low": -0.055881,
+          "high": 0.135119,
+          "low": -0.064881,
           "unit": "m",
-          "value": 0.044119
+          "value": 0.035119
         },
         "width": {
-          "high": 1.169892,
-          "low": 1.049892,
+          "high": 1.13,
+          "low": 1.07,
           "unit": "m",
-          "value": 1.109892
+          "value": 1.1
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_CORROBORATED",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -7926,10 +8023,10 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [],
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -7938,17 +8035,17 @@
       "id": "feat-opening-0-front-0-1",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "ASSUMED_FOR_RENDERING",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
-        "sillY": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 4.235308,
-          "low": 4.115308,
+          "high": 4.208828,
+          "low": 4.148828,
           "unit": "m",
-          "value": 4.175308
+          "value": 4.178828
         },
         "headY": {
           "high": 2.2,
@@ -7963,17 +8060,17 @@
           "value": 0
         },
         "width": {
-          "high": 1.11704,
-          "low": 0.99704,
+          "high": 1.08,
+          "low": 1.02,
           "unit": "m",
-          "value": 1.05704
+          "value": 1.05
         }
       },
-      "provenance": "SOURCE_DERIVED",
-      "quality": "L1",
+      "provenance": "SOURCE_EXACT",
+      "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
@@ -7981,12 +8078,10 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
-      ],
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+      "unresolvedProperties": [],
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation"
     },
     {
       "family": "OPENING",
@@ -7995,23 +8090,23 @@
       "id": "feat-opening-0-east-1-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_CORROBORATED",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_CORROBORATED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 9.744019,
-          "low": 9.624019,
+          "high": 9.722695,
+          "low": 9.662695,
           "unit": "m",
-          "value": 9.684019
+          "value": 9.692695
         },
         "headY": {
-          "high": 2.372648,
-          "low": 2.172648,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 2.272648
+          "value": 2.3
         },
         "sillY": {
           "high": 0.1,
@@ -8020,17 +8115,17 @@
           "value": 0
         },
         "width": {
-          "high": 3.077352,
-          "low": 2.957352,
+          "high": 3.03,
+          "low": 2.97,
           "unit": "m",
-          "value": 3.017352
+          "value": 3
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_CORROBORATED",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8039,10 +8134,10 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [],
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -8051,42 +8146,42 @@
       "id": "feat-opening-0-rear-2-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 2.332636,
-          "low": 2.212636,
+          "high": 2.291337,
+          "low": 2.231337,
           "unit": "m",
-          "value": 2.272636
+          "value": 2.261337
         },
         "headY": {
-          "high": 1.715926,
-          "low": 1.515926,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 1.615926
+          "value": 2.3
         },
         "sillY": {
-          "high": 0.150512,
-          "low": -0.049488,
+          "high": 0.1,
+          "low": -0.1,
           "unit": "m",
-          "value": 0.050512
+          "value": 0
         },
         "width": {
-          "high": 4.737402,
-          "low": 4.617402,
+          "high": 4.73,
+          "low": 4.67,
           "unit": "m",
-          "value": 4.677402
+          "value": 4.7
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8095,10 +8190,12 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 1.57 m tall (0.05..1.62) against the printed 2.30; the printed height stands"
+      ],
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -8107,23 +8204,23 @@
       "id": "feat-opening-0-west-3-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "ASSUMED_FOR_RENDERING",
+        "headY": "UNRESOLVED",
         "profile": "SOURCE_DERIVED",
-        "sillY": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 9.082319,
-          "low": 8.962319,
+          "high": 9.052275,
+          "low": 8.992275,
           "unit": "m",
-          "value": 9.022319
+          "value": 9.022275
         },
         "headY": {
-          "high": 2.2,
-          "low": 2,
+          "high": 2.4,
+          "low": 2.2,
           "unit": "m",
-          "value": 2.1
+          "value": 2.3
         },
         "sillY": {
           "high": 0.1,
@@ -8132,17 +8229,17 @@
           "value": 0
         },
         "width": {
-          "high": 0.959912,
-          "low": 0.839912,
+          "high": 0.93,
+          "low": 0.87,
           "unit": "m",
-          "value": 0.899912
+          "value": 0.9
         }
       },
-      "provenance": "SOURCE_DERIVED",
-      "quality": "L1",
+      "provenance": "SOURCE_EXACT",
+      "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
@@ -8150,12 +8247,12 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "the printed height reads 230 or 290 alike, and no elevation shows this wall"
       ],
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation"
     },
     {
       "family": "OPENING",
@@ -8164,42 +8261,42 @@
       "id": "feat-opening-0-west-3-1",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "ASSUMED_FOR_RENDERING",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
         "sillY": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 6.859007,
-          "low": 6.739007,
+          "high": 6.830409,
+          "low": 6.770409,
           "unit": "m",
-          "value": 6.799007
+          "value": 6.800409
         },
         "headY": {
-          "high": 2.2,
-          "low": 2,
+          "high": 2.3,
+          "low": 2.1,
           "unit": "m",
-          "value": 2.1
+          "value": 2.2
         },
         "sillY": {
-          "high": 0.1,
-          "low": -0.1,
+          "high": 0.9,
+          "low": 0.7,
           "unit": "m",
-          "value": 0
+          "value": 0.8
         },
         "width": {
-          "high": 1.462804,
-          "low": 1.342804,
+          "high": 1.43,
+          "low": 1.37,
           "unit": "m",
-          "value": 1.402804
+          "value": 1.4
         }
       },
-      "provenance": "SOURCE_DERIVED",
-      "quality": "L1",
+      "provenance": "SOURCE_EXACT",
+      "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
@@ -8207,12 +8304,12 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "sill height (no elevation reading; a common head is assumed)"
       ],
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation"
     },
     {
       "family": "OPENING",
@@ -8221,42 +8318,42 @@
       "id": "feat-opening-1-front-4-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 3.996877,
-          "low": 3.876877,
+          "high": 3.955415,
+          "low": 3.895415,
           "unit": "m",
-          "value": 3.936877
+          "value": 3.925415
         },
         "headY": {
-          "high": 5.471422,
-          "low": 5.271422,
+          "high": 6.36,
+          "low": 6.16,
           "unit": "m",
-          "value": 5.371422
+          "value": 6.26
         },
         "sillY": {
-          "high": 4.915273,
-          "low": 4.715273,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 4.815273
+          "value": 3.06
         },
         "width": {
-          "high": 2.737076,
-          "low": 2.617076,
+          "high": 2.73,
+          "low": 2.67,
           "unit": "m",
-          "value": 2.677076
+          "value": 2.7
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8265,10 +8362,12 @@
       },
       "storeyIndex": 1,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.54 m tall (4.82..5.35) against the printed 3.20; the printed height stands"
+      ],
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99"
     },
     {
       "family": "OPENING",
@@ -8277,42 +8376,42 @@
       "id": "feat-opening-1-rear-6-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 1.031096,
-          "low": 0.911096,
+          "high": 0.985913,
+          "low": 0.925913,
           "unit": "m",
-          "value": 0.971096
+          "value": 0.955913
         },
         "headY": {
-          "high": 6.419753,
-          "low": 6.219753,
+          "high": 6.2,
+          "low": 6,
           "unit": "m",
-          "value": 6.319753
+          "value": 6.1
         },
         "sillY": {
-          "high": 5.663483,
-          "low": 5.463483,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 5.563483
+          "value": 3.06
         },
         "width": {
-          "high": 2.369635,
-          "low": 2.249635,
+          "high": 2.37,
+          "low": 2.31,
           "unit": "m",
-          "value": 2.309635
+          "value": 2.34
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8321,12 +8420,12 @@
       },
       "storeyIndex": 1,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "the raked head would meet the sill: the opening is narrower or lower than read"
+        "the elevation reads 1.16 m tall (3.94..5.11) against the printed 3.04; the printed height stands"
       ],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14"
     },
     {
       "family": "OPENING",
@@ -8335,42 +8434,42 @@
       "id": "feat-opening-1-rear-6-1",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
+        "headY": "SOURCE_EXACT",
         "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 4.653023,
-          "low": 4.533023,
+          "high": 4.607841,
+          "low": 4.547841,
           "unit": "m",
-          "value": 4.593023
+          "value": 4.577841
         },
         "headY": {
-          "high": 5.210751,
-          "low": 5.010751,
+          "high": 6.19,
+          "low": 5.99,
           "unit": "m",
-          "value": 5.110751
+          "value": 6.09
         },
         "sillY": {
-          "high": 4.470257,
-          "low": 4.270257,
+          "high": 3.16,
+          "low": 2.96,
           "unit": "m",
-          "value": 4.370257
+          "value": 3.06
         },
         "width": {
-          "high": 2.369635,
-          "low": 2.249635,
+          "high": 2.37,
+          "low": 2.31,
           "unit": "m",
-          "value": 2.309635
+          "value": 2.34
         }
       },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8379,10 +8478,12 @@
       },
       "storeyIndex": 1,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.76 m tall (4.35..5.11) against the printed 3.03; the printed height stands"
+      ],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13"
     },
     {
       "family": "OPENING",
@@ -8391,17 +8492,74 @@
       "id": "feat-opening-0-front-8-0",
       "parameterProvenance": {
         "family": "VISUAL_SEMANTIC",
-        "headY": "ASSUMED_FOR_RENDERING",
+        "headY": "UNRESOLVED",
         "profile": "SOURCE_DERIVED",
-        "sillY": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "parameters": {
         "from": {
-          "high": 8.622024,
-          "low": 8.502024,
+          "high": 8.577963,
+          "low": 8.517963,
           "unit": "m",
-          "value": 8.562024
+          "value": 8.547963
+        },
+        "headY": {
+          "high": 2.85,
+          "low": 2.65,
+          "unit": "m",
+          "value": 2.75
+        },
+        "sillY": {
+          "high": 0.1,
+          "low": -0.1,
+          "unit": "m",
+          "value": 0
+        },
+        "width": {
+          "high": 2.78,
+          "low": 2.72,
+          "unit": "m",
+          "value": 2.75
+        }
+      },
+      "provenance": "SOURCE_EXACT",
+      "quality": "L2",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "storeyIndex": 0,
+      "uncertainty": {
+        "m": 0.03
+      },
+      "unresolvedProperties": [
+        "the printed height reads 275 or 225 alike, and no elevation shows this wall"
+      ],
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation"
+    },
+    {
+      "family": "OPENING",
+      "hostId": "feat-attached-0",
+      "hypothesisId": "hyp-opening-0-rear-10-0",
+      "id": "feat-opening-0-rear-10-0",
+      "parameterProvenance": {
+        "family": "VISUAL_SEMANTIC",
+        "headY": "SOURCE_EXACT",
+        "profile": "SOURCE_DERIVED",
+        "sillY": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
+      },
+      "parameters": {
+        "from": {
+          "high": 9.941844,
+          "low": 9.881844,
+          "unit": "m",
+          "value": 9.911844
         },
         "headY": {
           "high": 2.2,
@@ -8416,74 +8574,17 @@
           "value": 0
         },
         "width": {
-          "high": 2.781878,
-          "low": 2.661878,
+          "high": 1.03,
+          "low": 0.97,
           "unit": "m",
-          "value": 2.721878
+          "value": 1
         }
       },
-      "provenance": "SOURCE_DERIVED",
-      "quality": "L1",
-      "sourceCoverage": {
-        "independentAssets": 1,
-        "printed": false,
-        "sightings": 1,
-        "viewFamilies": [
-          "PLAN"
-        ]
-      },
-      "storeyIndex": 0,
-      "uncertainty": {
-        "m": 0.06
-      },
-      "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
-      ],
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
-    },
-    {
-      "family": "OPENING",
-      "hostId": "feat-attached-0",
-      "hypothesisId": "hyp-opening-0-rear-10-0",
-      "id": "feat-opening-0-rear-10-0",
-      "parameterProvenance": {
-        "family": "VISUAL_SEMANTIC",
-        "headY": "IMAGE_METRIC_REGISTERED",
-        "profile": "SOURCE_DERIVED",
-        "sillY": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
-      },
-      "parameters": {
-        "from": {
-          "high": 9.96975,
-          "low": 9.84975,
-          "unit": "m",
-          "value": 9.90975
-        },
-        "headY": {
-          "high": 1.361065,
-          "low": 1.161065,
-          "unit": "m",
-          "value": 1.261065
-        },
-        "sillY": {
-          "high": 0.372268,
-          "low": 0.172268,
-          "unit": "m",
-          "value": 0.272268
-        },
-        "width": {
-          "high": 1.064188,
-          "low": 0.944188,
-          "unit": "m",
-          "value": 1.004188
-        }
-      },
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "quality": "L2",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -8492,10 +8593,12 @@
       },
       "storeyIndex": 0,
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.99 m tall (0.27..1.26) against the printed 2.10; the printed height stands"
+      ],
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -8721,6 +8824,92 @@
         "exact position up the slope"
       ],
       "why": "a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)"
+    },
+    {
+      "family": "ROOFLIGHT",
+      "hypothesisId": "hyp-rooflight-left-1",
+      "id": "feat-rooflight-left-1",
+      "parameterProvenance": {},
+      "parameters": {
+        "along": {
+          "high": 7.284643,
+          "low": 7.084643,
+          "unit": "m",
+          "value": 7.184643
+        },
+        "length": {
+          "high": 1.1802,
+          "low": 0.8802,
+          "unit": "m",
+          "value": 1.0302
+        },
+        "width": {
+          "high": 0.72909,
+          "low": 0.52909,
+          "unit": "m",
+          "value": 0.62909
+        }
+      },
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "quality": "L1",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.1
+      },
+      "unresolvedProperties": [
+        "exact position up the slope"
+      ],
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)"
+    },
+    {
+      "family": "ROOFLIGHT",
+      "hypothesisId": "hyp-rooflight-right-0",
+      "id": "feat-rooflight-right-0",
+      "parameterProvenance": {},
+      "parameters": {
+        "along": {
+          "high": 5.269164,
+          "low": 5.069164,
+          "unit": "m",
+          "value": 5.169164
+        },
+        "length": {
+          "high": 1.168278,
+          "low": 0.868278,
+          "unit": "m",
+          "value": 1.018278
+        },
+        "width": {
+          "high": 0.720971,
+          "low": 0.520971,
+          "unit": "m",
+          "value": 0.620971
+        }
+      },
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "quality": "L1",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.1
+      },
+      "unresolvedProperties": [
+        "exact position up the slope"
+      ],
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)"
     },
     {
       "family": "ROOF_MEMBER",

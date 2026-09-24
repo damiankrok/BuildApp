@@ -9,13 +9,18 @@
  * there, carries the four input hashes, and counts the holes.
  */
 import { expect, test, type Page } from '@playwright/test'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ART = resolve(HERE, '../../../stage-reports/artifacts')
 mkdirSync(ART, { recursive: true })
+
+/** The sealed analyzer-v2 data the app bundles, read from the same files so the run asserts against what shipped. */
+const SEALED_V2 = resolve(HERE, '../../../packages/candidates/src')
+const sealedV2 = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v2.json'), 'utf8')) as { modelId: string; contentHash: string }
+const sealedV2Residuals = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v2-residuals.json'), 'utf8')) as { candidateHash: string; residuals: Array<{ withinTolerance: boolean }> }
 
 type Handle = { store: { model: { id: string; name: string; walls: Array<{ id: string }>; linearSolids: Array<{ id: string }>; stairs: unknown[] } }; meshCount: number; objectIds: string[] }
 
@@ -142,4 +147,60 @@ test('§23 recognizability: the five source views of the automatic candidate', a
   // barcode.
   expect(structure.solids).toBeLessThanOrEqual(8)
   expect(structure.slabs).toBeGreaterThanOrEqual(3)
+})
+
+/**
+ * The second sealed candidate, from analyzer v2, sits beside the first in the
+ * same selector and loads the same way. What is new is the comparison against
+ * the source views: the verifier's residuals ship with the candidate, and the
+ * panel shows them as a table a reviewer can read row by row.
+ */
+test('both sealed candidates are offered in the model selector', async ({ page }) => {
+  const labels = await page.getByTestId('model-select').locator('option').allTextContents()
+  expect(labels).toContain('Marcówki (auto)')
+  expect(labels).toContain('Marcówki (auto v2)')
+  const values = await page.getByTestId('model-select').locator('option').evaluateAll((os) => os.map((o) => (o as HTMLOptionElement).value))
+  expect(values).toContain('marcowki-auto')
+  expect(values).toContain('marcowki-auto-v2')
+})
+
+test('the analyzer-v2 candidate loads from its sealed program and compiles like any other model', async ({ page }) => {
+  await page.getByTestId('model-select').selectOption('marcowki-auto-v2')
+  await expect(page.getByTestId('status-model')).toHaveText('Marcówki (auto v2)')
+  // The selector says which candidate is on screen rather than falling back to "(file)".
+  await expect(page.getByTestId('model-select')).toHaveValue('marcowki-auto-v2')
+  await expect(page.getByTestId('status-diagnostics')).toHaveText('geometry ok')
+  const m = await handle(page)
+  expect(m.id).toBe(sealedV2.modelId)
+  expect(m.walls).toBeGreaterThan(0)
+  expect(m.solids).toBeGreaterThan(0)
+  expect(Number(await page.getByTestId('status-triangles').textContent())).toBeGreaterThan(500)
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: resolve(ART, 'buildworld-marcowki-auto-v2.png'), fullPage: false })
+})
+
+test('the analyzer-v2 candidate shows its comparison against the source views, tied to the candidate by hash', async ({ page }) => {
+  await page.getByTestId('model-select').selectOption('marcowki-auto-v2')
+  await page.getByTestId('panel-sources').click()
+  await expect(page.getByTestId('reconstruction')).toBeVisible()
+  await expect(page.getByTestId('recon-candidate-hash')).toHaveText(sealedV2.contentHash.slice(0, 16))
+  expect(sealedV2Residuals.candidateHash).toBe(sealedV2.contentHash)
+
+  const panel = page.getByTestId('source-view-comparison')
+  await expect(panel).toBeVisible()
+  const rows = page.getByTestId('source-view-row')
+  await expect(rows).toHaveCount(sealedV2Residuals.residuals.length)
+  const within = sealedV2Residuals.residuals.filter((r) => r.withinTolerance).length
+  await expect(page.getByTestId('source-view-summary')).toHaveText(`${within} of ${sealedV2Residuals.residuals.length} within tolerance`)
+  await expect(panel.locator('.svc-ok')).toHaveCount(within)
+  await expect(panel.locator('.svc-off')).toHaveCount(sealedV2Residuals.residuals.length - within)
+  await expect(panel).toContainText('sill')
+  await page.screenshot({ path: resolve(ART, 'buildworld-source-view-comparison.png'), fullPage: false })
+})
+
+test('the first candidate shows no source-view comparison: its solver never verified against the views', async ({ page }) => {
+  await page.getByTestId('model-select').selectOption('marcowki-auto')
+  await page.getByTestId('panel-sources').click()
+  await expect(page.getByTestId('reconstruction')).toBeVisible()
+  await expect(page.getByTestId('source-view-comparison')).toHaveCount(0)
 })

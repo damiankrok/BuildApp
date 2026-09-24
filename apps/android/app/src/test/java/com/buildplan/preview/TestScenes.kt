@@ -52,6 +52,18 @@ object TestScenes {
      */
     val autoCandidate: ModelScene by lazy { scene("marcowki-auto") }
 
+    /** The analyzer-v2 candidate: the same drawings through the second pipeline, and a THIRD building. */
+    val autoCandidateV2: ModelScene by lazy { scene("marcowki-auto-v2") }
+
+    /** Every reconstructed candidate the build ships, by scene key, for tests that hold each one to the same bar. */
+    val candidateKeys: List<String> = listOf("marcowki-auto", "marcowki-auto-v2")
+
+    private val candidates: Map<String, ModelScene> by lazy {
+        mapOf("marcowki-auto" to autoCandidate, "marcowki-auto-v2" to autoCandidateV2)
+    }
+
+    fun candidate(key: String): ModelScene = candidates.getValue(key)
+
     /** Every scene the build ships, which is what a viewer can switch between. */
     val all: List<ModelScene> by lazy { index.map { scene(it.key) } }
 }

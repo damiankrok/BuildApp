@@ -1,6 +1,6 @@
 {
-  "contentHash": "32db61a5ab85a962014886c98e7718adcdff656b286af5f1faefd4013fb9d0de",
-  "featureGraphHash": "3822a54904a8d48ad6374273bc9612cbd0c7ecf4c63f616b7af36bf78ac103c8",
+  "contentHash": "0e94cf0d50a711f073ffbca3f6ef93299a904d0153fc0637633810a65b6aa411",
+  "featureGraphHash": "96baa85a5147cc40314b1419ad7c8e119902c776c7618eb8864246d2730071ec",
   "id": "quality-marcowki",
   "records": [
     {
@@ -1480,10 +1480,10 @@
         "opening-0-east-1-0",
         "opening-0-east-1-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_CORROBORATED",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1491,10 +1491,10 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [],
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -1504,10 +1504,10 @@
         "opening-0-front-0-0",
         "opening-0-front-0-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_CORROBORATED",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1515,60 +1515,58 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [],
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation"
     },
     {
       "family": "OPENING",
       "featureId": "feat-opening-0-front-0-1",
-      "level": "L1",
+      "level": "L2",
       "objectIds": [
         "opening-0-front-0-1",
         "opening-0-front-0-1-unit"
       ],
-      "provenance": "SOURCE_DERIVED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
-      ],
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+      "unresolvedProperties": [],
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation"
     },
     {
       "family": "OPENING",
       "featureId": "feat-opening-0-front-8-0",
-      "level": "L1",
+      "level": "L2",
       "objectIds": [
         "opening-0-front-8-0",
         "opening-0-front-8-0-leaf"
       ],
-      "provenance": "SOURCE_DERIVED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "the printed height reads 275 or 225 alike, and no elevation shows this wall"
       ],
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation"
     },
     {
       "family": "OPENING",
@@ -1578,10 +1576,10 @@
         "opening-0-rear-10-0",
         "opening-0-rear-10-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1589,10 +1587,12 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.99 m tall (0.27..1.26) against the printed 2.10; the printed height stands"
+      ],
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation"
     },
     {
       "family": "OPENING",
@@ -1602,10 +1602,10 @@
         "opening-0-rear-2-0",
         "opening-0-rear-2-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1613,60 +1613,62 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 1.57 m tall (0.05..1.62) against the printed 2.30; the printed height stands"
+      ],
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation"
     },
     {
       "family": "OPENING",
       "featureId": "feat-opening-0-west-3-0",
-      "level": "L1",
+      "level": "L2",
       "objectIds": [
         "opening-0-west-3-0",
         "opening-0-west-3-0-leaf"
       ],
-      "provenance": "SOURCE_DERIVED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "the printed height reads 230 or 290 alike, and no elevation shows this wall"
       ],
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation"
     },
     {
       "family": "OPENING",
       "featureId": "feat-opening-0-west-3-1",
-      "level": "L1",
+      "level": "L2",
       "objectIds": [
         "opening-0-west-3-1",
-        "opening-0-west-3-1-leaf"
+        "opening-0-west-3-1-unit"
       ],
-      "provenance": "SOURCE_DERIVED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 1,
-        "printed": false,
+        "printed": true,
         "sightings": 1,
         "viewFamilies": [
           "PLAN"
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "sill height (no elevation reading; a common head is assumed)"
       ],
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation"
     },
     {
       "family": "OPENING",
@@ -1676,10 +1678,10 @@
         "opening-1-front-4-0",
         "opening-1-front-4-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1687,10 +1689,12 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.54 m tall (4.82..5.35) against the printed 3.20; the printed height stands"
+      ],
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99"
     },
     {
       "family": "OPENING",
@@ -1700,10 +1704,10 @@
         "opening-1-rear-6-0",
         "opening-1-rear-6-0-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1711,12 +1715,12 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
       "unresolvedProperties": [
-        "the raked head would meet the sill: the opening is narrower or lower than read"
+        "the elevation reads 1.16 m tall (3.94..5.11) against the printed 3.04; the printed height stands"
       ],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14"
     },
     {
       "family": "OPENING",
@@ -1726,10 +1730,10 @@
         "opening-1-rear-6-1",
         "opening-1-rear-6-1-unit"
       ],
-      "provenance": "IMAGE_METRIC_REGISTERED",
+      "provenance": "SOURCE_EXACT",
       "sourceCoverage": {
         "independentAssets": 2,
-        "printed": false,
+        "printed": true,
         "sightings": 2,
         "viewFamilies": [
           "PLAN",
@@ -1737,10 +1741,12 @@
         ]
       },
       "uncertainty": {
-        "m": 0.06
+        "m": 0.03
       },
-      "unresolvedProperties": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+      "unresolvedProperties": [
+        "the elevation reads 0.76 m tall (4.35..5.11) against the printed 3.03; the printed height stands"
+      ],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13"
     },
     {
       "family": "FACADE_MEMBER",
@@ -2143,6 +2149,56 @@
       "why": "a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)"
     },
     {
+      "family": "ROOFLIGHT",
+      "featureId": "feat-rooflight-left-1",
+      "level": "L1",
+      "objectIds": [
+        "rooflight-left-1",
+        "rooflight-left-1-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.1
+      },
+      "unresolvedProperties": [
+        "exact position up the slope"
+      ],
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)"
+    },
+    {
+      "family": "ROOFLIGHT",
+      "featureId": "feat-rooflight-right-0",
+      "level": "L1",
+      "objectIds": [
+        "rooflight-right-0",
+        "rooflight-right-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.1
+      },
+      "unresolvedProperties": [
+        "exact position up the slope"
+      ],
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)"
+    },
+    {
       "family": "OPENING",
       "featureId": "feat-shared-opening-0-east-1-1",
       "level": "L1",
@@ -2317,8 +2373,8 @@
       "L2": 2
     },
     "OPENING": {
-      "L1": 5,
-      "L2": 7
+      "L1": 1,
+      "L2": 11
     },
     "RAILING": {
       "L2": 2
@@ -2333,7 +2389,7 @@
       "L2": 1
     },
     "ROOFLIGHT": {
-      "L1": 1
+      "L1": 3
     },
     "ROOF_MEMBER": {
       "L1": 2

@@ -534,3 +534,64 @@ select:focus {
   line-height: 1.45;
   color: var(--muted);
 }
+
+/* --- the source-view comparison ---------------------------------------- */
+/* One row per feature the analyzer-v2 verifier projected back into a source
+   view. It reads as a table on purpose: a reviewer wants to know which sill
+   is out and by how much, which an average would hide. */
+.source-views {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px 10px;
+}
+.source-views .panel-title {
+  border: 0;
+  padding: 0 0 6px;
+}
+.svc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  table-layout: fixed;
+}
+.svc-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--fg-dim);
+  padding: 2px 3px 3px 0;
+  border-bottom: 1px solid var(--line);
+}
+.svc-table td {
+  padding: 2px 3px 2px 0;
+  border-bottom: 1px dashed var(--line);
+  vertical-align: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.svc-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.svc-col-kind {
+  width: 17%;
+}
+.svc-col-object {
+  width: 21%;
+}
+.svc-col-num {
+  width: 13%;
+}
+.svc-col-verdict {
+  width: 10%;
+}
+.svc-table .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+.svc-ok .svc-verdict {
+  color: #4f8a5b;
+}
+.svc-off .svc-verdict {
+  color: #8a5b5b;
+  font-weight: 600;
+}

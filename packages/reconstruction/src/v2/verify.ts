@@ -13,7 +13,7 @@ import type { Raster } from '@buildapp/source-cv'
 import type { BuildingV2 } from './building.js'
 import type { ElevationFrameV2 } from './frame.js'
 import { elevationExtent } from './openings-v2.js'
-import { silhouetteTop } from '@buildapp/image-metrology'
+import { lumaAt } from './scan.js'
 
 export type ResidualKind = 'OPENING_SILL' | 'OPENING_HEAD' | 'ROOF_EDGE' | 'RECESS_PLANE' | 'MEMBER_EDGE' | 'SILHOUETTE_WIDTH'
 
@@ -55,27 +55,57 @@ export function verifyAgainstViews(input: VerificationInput): SourceViewResidual
       out.push({ featureId: o.id, objectId: o.id, frameId: view.registration.frameId, kind: 'OPENING_HEAD', modelM: modelHead, observedM: ext.headY, residualM: round6(modelHead - ext.headY), toleranceM: tol, withinTolerance: Math.abs(modelHead - ext.headY) <= tol, why: ext.why })
     }
   }
-  // Roof edges: the building's top edge at sample columns against the roof
-  // plane. The edge is found by the metrology package's silhouette tracer over
-  // the registered extent, which is blind to the sky and the trees above it.
+  // Roof edges: at sample columns, the strongest horizontal edge within
+  // reach of where the model puts the roof's top surface. A published render
+  // has trees and a sky gradient above the building, so the topmost non-sky
+  // pixel is the tree line as often as the roof; the roof's edge is the sharp
+  // change of tone nearest the model, and how far it lies from the model is
+  // the residual. No edge within reach is recorded as such, not as agreement.
   if (b.mainRoof) {
     const roof = b.mainRoof
     for (const { view, raster } of views) {
       const extent = view.registration.extent
-      // The tracer takes each column's sky from the first rows of its region,
-      // so the region starts well above the registered extent: the sky, not the ridge.
-      const skyRows = Math.max(12, Math.round((extent.y1 - extent.y0) * 0.08))
-      const regionTop = Math.max(0, extent.y0 - skyRows)
-      const top = silhouetteTop(raster, { x0: extent.x0, y0: regionTop, x1: extent.x1, y1: extent.y1 }, { runPx: Math.max(6, Math.round((extent.y1 - extent.y0) * 0.03)) })
       const samples = view.side === 'FRONT' || view.side === 'REAR' ? [0.15, 0.3, 0.5, 0.7, 0.85].map((f) => roof.footprint.x0 + (roof.footprint.x1 - roof.footprint.x0) * f) : [0.2, 0.5, 0.8].map((f) => roof.footprint.z0 + (roof.footprint.z1 - roof.footprint.z0) * f)
+      const reachM = 0.6
       for (const along of samples) {
-        const px = Math.round(view.pxOf(along))
-        const column = px - extent.x0
-        const topRow = column >= 0 && column < top.length ? top[column] : null
-        if (topRow === null || topRow === undefined) continue
-        const observed = view.yOf(topRow)
+        // A column a chimney stands in shows the chimney's top, not the roof's.
+        const chimneyThere = b.chimneys.some((c) => (view.side === 'FRONT' || view.side === 'REAR' ? along >= c.x0 - 0.35 && along <= c.x1 + 0.35 : along >= c.z0 - 0.35 && along <= c.z1 + 0.35))
+        if (chimneyThere) continue
         const model = view.side === 'FRONT' || view.side === 'REAR' ? roofTopAt(roof, along) : roof.ridgeY
-        out.push({ featureId: roof.featureId, objectId: 'roof-main', frameId: view.registration.frameId, kind: 'ROOF_EDGE', modelM: round6(model), observedM: round6(observed), residualM: round6(model - observed), toleranceM: 0.25, withinTolerance: Math.abs(model - observed) <= 0.25, why: `the traced top edge at ${along.toFixed(2)} m along the ${view.side.toLowerCase()} view` })
+        const px = Math.round(view.pxOf(along))
+        if (px < extent.x0 || px > extent.x1) continue
+        const rowModel = view.pyOf(model)
+        const reachPx = reachM / view.registration.metresPerPixelV
+        const y0 = Math.max(2, Math.round(rowModel - reachPx))
+        const y1 = Math.min(raster.height - 3, Math.round(rowModel + reachPx))
+        // Contrast per row: mean luma over a 5-column window, two rows above against two rows below.
+        const contrastAt = (y: number): number => {
+          let above = 0
+          let below = 0
+          for (let dx = -2; dx <= 2; dx += 1) {
+            above += lumaAt(raster, px + dx, y - 2) + lumaAt(raster, px + dx, y - 1)
+            below += lumaAt(raster, px + dx, y) + lumaAt(raster, px + dx, y + 1)
+          }
+          return Math.abs(above - below) / 10
+        }
+        let bestContrast = 0
+        for (let y = y0; y <= y1; y += 1) bestContrast = Math.max(bestContrast, contrastAt(y))
+        // The roof's edge is the FIRST strong edge from the sky down, not the
+        // strongest: below it lie the ridge cap, the tile courses and the
+        // shading of the slope, all of them sharper than the sky's boundary.
+        let bestRow = -1
+        for (let y = y0; y <= y1; y += 1) {
+          if (contrastAt(y) >= Math.max(20, bestContrast * 0.5)) {
+            bestRow = y
+            break
+          }
+        }
+        if (bestRow < 0 || bestContrast < 18) {
+          out.push({ featureId: roof.featureId, objectId: 'roof-main', frameId: view.registration.frameId, kind: 'ROOF_EDGE', modelM: round6(model), observedM: round6(model), residualM: 0, toleranceM: 0.25, withinTolerance: false, why: `no edge of the roof within ${reachM} m of the model at ${along.toFixed(2)} m along the ${view.side.toLowerCase()} view (best contrast ${bestContrast.toFixed(0)}): not observed` })
+          continue
+        }
+        const observed = view.yOf(bestRow)
+        out.push({ featureId: roof.featureId, objectId: 'roof-main', frameId: view.registration.frameId, kind: 'ROOF_EDGE', modelM: round6(model), observedM: round6(observed), residualM: round6(model - observed), toleranceM: 0.25, withinTolerance: Math.abs(model - observed) <= 0.25, why: `the strongest horizontal edge (contrast ${bestContrast.toFixed(0)}) within ${reachM} m of the model's roof line at ${along.toFixed(2)} m along the ${view.side.toLowerCase()} view` })
       }
     }
   }

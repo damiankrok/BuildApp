@@ -1,6 +1,6 @@
 {
-  "contentHash": "0bb4ed209c2283f0dbc918215b52af2df9464f4bfe04d967df118988891140e0",
-  "featureGraphHash": "3822a54904a8d48ad6374273bc9612cbd0c7ecf4c63f616b7af36bf78ac103c8",
+  "contentHash": "d6587c77f84c9bc0cae041953f679e62833185df4b8cf8bfc368c48f49d96093",
+  "featureGraphHash": "96baa85a5147cc40314b1419ad7c8e119902c776c7618eb8864246d2730071ec",
   "id": "ledger-marcowki",
   "records": [
     {
@@ -56,6 +56,521 @@
       "reason": "an angle reading beside the printed pitch",
       "stage": "METRIC",
       "what": "ANGLE 1° on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-06c77cf6b8",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 48/400 on 33a5ff46cd"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-079087d3e2",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 440/146 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-0bc9f910ef",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 80/160 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-0ccc286015",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"626/400\" at no coherent confidence (0.158132): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 626/400 on 33a5ff46cd"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-0f0f35cacc",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 90/290 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-146cd2d9d5",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 400/400 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-1c06b29d90",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"101/400\" at no coherent confidence (0.070204): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 101/400 on 2ffc3c0fba"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-1e0d9c07eb",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 400/400 on d7b403e37e"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-1e165965dd",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 110/290 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-2ee8447f6a",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"626/400\" at no coherent confidence (0.158252): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 626/400 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-3453db5d6e",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 110/40 on 6eb2541c24"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-39437bd98a",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"91/110\" at no coherent confidence (0.197254): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 91/110 on 2ffc3c0fba"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-43b168a2d1",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 111/111 on 6eb2541c24"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-4e7bbde720",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"406/400\" at no coherent confidence (0.15817): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 406/400 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-4f0b0b862c",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 270/320 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-5161c192d5",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 100/100 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-5230e20136",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"51/47\" at no coherent confidence (0.055872): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 51/47 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-588ac60df8",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"406/400\" at no coherent confidence (0.080528): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 406/400 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-64cb5b2505",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"122/60\" at no coherent confidence (0.188212): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 122/60 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-69f0fe8c44",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"226/400\" at no coherent confidence (0.078901): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 226/400 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-6bfb65d95b",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 275/275 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-6d3a713075",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-front-8-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 275/275"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-6ea9241c20",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"60/81\" at no coherent confidence (0.099132): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 60/81 on 20f3864e88"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-768b25eb8d",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"76/400\" at no coherent confidence (0.082604): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 76/400 on 33a5ff46cd"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-79c253f876",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 470/230 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-7bdd5d8540",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 100/210 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-9903866a53",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-front-0-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 110/230"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-9a52f774ea",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 400/400 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-a2fb64a4a4",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"62/400\" at no coherent confidence (0.048908): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 62/400 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-a810e408e0",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"77/400\" at no coherent confidence (0.134177): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 77/400 on 33a5ff46cd"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-ab145c97ec",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 105/210 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-aba66e11a5",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-1-front-4-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 270/320"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-aba8418210",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 300/290 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-ad248f8f2b",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-west-3-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 90/230"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-aebacf6659",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 41/41 on 2ffc3c0fba"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-af8cd95252",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-rear-10-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 100/210"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-b21e934abd",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"61/77\" at no coherent confidence (0.157412): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 61/77 on 20f3864e88"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-b3de3b099a",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-front-0-1",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 105/210"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-b6da4e1e66",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 400/400 on fed2722c38"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-b84ecaf3c0",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"406/400\" at no coherent confidence (0.183589): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 406/400 on d7b403e37e"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-bd21082add",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-rear-2-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 470/230"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-c7ca9263ac",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 140/140 on 863ec969ff"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-cd86064f86",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"50/77\" at no coherent confidence (0.066872): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 50/77 on 20f3864e88"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-ce16675d27",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"446/46\" at no coherent confidence (0.128088): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 446/46 on 7e88f36a4d"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-ce328e2939",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-1-rear-6-1",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 234/303"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-ce703d9234",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"62/400\" at no coherent confidence (0.191381): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 62/400 on 33a5ff46cd"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-cf0f88ab40",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 234/304 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-db59776072",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 81/71 on 6eb2541c24"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-e5bd5494bb",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"70/400\" at no coherent confidence (0.129005): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 70/400 on 863ec969ff"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-e90f122d42",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-1-rear-6-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 234/304"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-ee40483e37",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-east-1-0",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 300/230"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-f053cd987f",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 234/303 on d7b403e37e"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-f0c4f929c3",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"41/148\" at no coherent confidence (0.13132): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 41/148 on 5926d3fb6c"
+    },
+    {
+      "authority": "HIGH",
+      "disposition": "USED_IN_MODEL",
+      "evidenceId": "metric-callout-ring-f5c321c11a",
+      "evidenceKind": "METRIC",
+      "featureId": "feat-opening-0-west-3-1",
+      "reason": "the opening’s printed width and height",
+      "stage": "METRIC_SOLVE",
+      "what": "callout 140/140"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "UNRESOLVED",
+      "evidenceId": "metric-callout-ring-fa73feaf9c",
+      "evidenceKind": "METRIC",
+      "reason": "a printed opening callout that matched no wall gap of its width within reach",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 140/174 on 20f3864e88"
+    },
+    {
+      "authority": "MEDIUM",
+      "disposition": "REJECTED_WITH_REASON",
+      "evidenceId": "metric-callout-ring-fc53a1d139",
+      "evidenceKind": "METRIC",
+      "reason": "a ring read as \"400/400\" at no coherent confidence (0.119583): a circle on the sheet, not a callout",
+      "stage": "METRIC",
+      "what": "OPENING_CALLOUT 400/400 on d7b403e37e"
     },
     {
       "authority": "MEDIUM",
@@ -9039,10 +9554,10 @@
   "schemaVersion": "1.0.0",
   "summary": {
     "IGNORED_WITH_REASON": 163,
-    "REJECTED_WITH_REASON": 78,
-    "UNRESOLVED": 16,
+    "REJECTED_WITH_REASON": 99,
+    "UNRESOLVED": 40,
     "USED_AS_CORROBORATION": 732,
-    "USED_IN_MODEL": 13
+    "USED_IN_MODEL": 24
   }
 }
 

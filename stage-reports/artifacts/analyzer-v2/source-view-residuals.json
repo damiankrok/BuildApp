@@ -1,15 +1,15 @@
 {
-  "candidateHash": "0b414e957cfe8bc75f7a87feb50d760a784b53e1194b24d784d931205a2ed4a4",
+  "candidateHash": "3530eef866c2ab531308552c1fdc8868a36f9aa7d66025513f5e10f11daa2010",
   "residuals": [
     {
       "featureId": "opening-0-front-0-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
       "kind": "OPENING_SILL",
-      "modelM": 0.044119,
+      "modelM": 0.035119,
       "objectId": "opening-0-front-0-0",
       "observedM": 0.044119,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": -0.009,
+      "toleranceM": 0.13,
       "why": "over 46 px of band against 7 px of wall 3 px either side, rows 449 to 575 differ from the wall by 106/255 where the wall differs from itself by 21 ± 11.5; the head refines to 437.70 and the sill to 573.10",
       "withinTolerance": true
     },
@@ -17,11 +17,11 @@
       "featureId": "opening-0-front-0-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
       "kind": "OPENING_HEAD",
-      "modelM": 2.326119,
+      "modelM": 2.335119,
       "objectId": "opening-0-front-0-0",
       "observedM": 2.326119,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": 0.009,
+      "toleranceM": 0.13,
       "why": "over 46 px of band against 7 px of wall 3 px either side, rows 449 to 575 differ from the wall by 106/255 where the wall differs from itself by 21 ± 11.5; the head refines to 437.70 and the sill to 573.10",
       "withinTolerance": true
     },
@@ -33,31 +33,31 @@
       "objectId": "opening-0-east-1-0",
       "observedM": 0,
       "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 126 px of band against 18 px of wall 7 px either side, rows 439 to 568 differ from the wall by 42/255 where the wall differs from itself by 0 ± 0.0; the head refines to 438.28 and the sill to 583.08",
+      "toleranceM": 0.13,
+      "why": "over 124 px of band against 18 px of wall 7 px either side, rows 439 to 570 differ from the wall by 42/255 where the wall differs from itself by 0 ± 0.0; the head refines to 438.28 and the sill to 583.08",
       "withinTolerance": true
     },
     {
       "featureId": "opening-0-east-1-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
       "kind": "OPENING_HEAD",
-      "modelM": 2.272648,
+      "modelM": 2.3,
       "objectId": "opening-0-east-1-0",
-      "observedM": 2.272648,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 126 px of band against 18 px of wall 7 px either side, rows 439 to 568 differ from the wall by 42/255 where the wall differs from itself by 0 ± 0.0; the head refines to 438.28 and the sill to 583.08",
+      "observedM": 2.272647,
+      "residualM": 0.027353,
+      "toleranceM": 0.13,
+      "why": "over 124 px of band against 18 px of wall 7 px either side, rows 439 to 570 differ from the wall by 42/255 where the wall differs from itself by 0 ± 0.0; the head refines to 438.28 and the sill to 583.08",
       "withinTolerance": true
     },
     {
       "featureId": "opening-0-rear-2-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_SILL",
-      "modelM": 0.050512,
+      "modelM": 0,
       "objectId": "opening-0-rear-2-0",
       "observedM": 0.050512,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": -0.050512,
+      "toleranceM": 0.13,
       "why": "over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04",
       "withinTolerance": true
     },
@@ -65,109 +65,109 @@
       "featureId": "opening-0-rear-2-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_HEAD",
-      "modelM": 1.615926,
+      "modelM": 2.3,
       "objectId": "opening-0-rear-2-0",
       "observedM": 1.615926,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": 0.684074,
+      "toleranceM": 0.13,
       "why": "over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04",
-      "withinTolerance": true
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-front-4-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
       "kind": "OPENING_SILL",
-      "modelM": 4.815273,
+      "modelM": 3.06,
       "objectId": "opening-1-front-4-0",
       "observedM": 4.815273,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 110 px of band against 16 px of wall 6 px either side, rows 257 to 290 differ from the wall by 102/255 where the wall differs from itself by 12 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "residualM": -1.755273,
+      "toleranceM": 0.13,
+      "why": "over 112 px of band against 16 px of wall 6 px either side, rows 258 to 290 differ from the wall by 102/255 where the wall differs from itself by 11 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-front-4-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
       "kind": "OPENING_HEAD",
-      "modelM": 5.371422,
+      "modelM": 6.26,
       "objectId": "opening-1-front-4-0",
-      "observedM": 5.371422,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 110 px of band against 16 px of wall 6 px either side, rows 257 to 290 differ from the wall by 102/255 where the wall differs from itself by 12 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "observedM": 5.354569,
+      "residualM": 0.905431,
+      "toleranceM": 0.13,
+      "why": "over 112 px of band against 16 px of wall 6 px either side, rows 258 to 290 differ from the wall by 102/255 where the wall differs from itself by 11 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-rear-6-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_SILL",
-      "modelM": 5.563483,
+      "modelM": 3.06,
       "objectId": "opening-1-rear-6-0",
-      "observedM": 5.563483,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 95 px of band against 14 px of wall 5 px either side, rows 201 to 246 differ from the wall by 45/255 where the wall differs from itself by 9 ± 5.9; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "observedM": 3.944814,
+      "residualM": -0.884814,
+      "toleranceM": 0.13,
+      "why": "over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-rear-6-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_HEAD",
-      "modelM": 6.319753,
+      "modelM": 6.1,
       "objectId": "opening-1-rear-6-0",
-      "observedM": 6.319753,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 95 px of band against 14 px of wall 5 px either side, rows 201 to 246 differ from the wall by 45/255 where the wall differs from itself by 9 ± 5.9; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "observedM": 5.108357,
+      "residualM": 0.991643,
+      "toleranceM": 0.13,
+      "why": "over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-rear-6-1",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_SILL",
-      "modelM": 4.370257,
+      "modelM": 3.06,
       "objectId": "opening-1-rear-6-1",
-      "observedM": 4.370257,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 96 px of band against 14 px of wall 6 px either side, rows 274 to 317 differ from the wall by 65/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "observedM": 4.353451,
+      "residualM": -1.293451,
+      "toleranceM": 0.13,
+      "why": "over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-1-rear-6-1",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_HEAD",
-      "modelM": 5.110751,
+      "modelM": 6.09,
       "objectId": "opening-1-rear-6-1",
-      "observedM": 5.110751,
-      "residualM": 0,
-      "toleranceM": 0.16,
-      "why": "over 96 px of band against 14 px of wall 6 px either side, rows 274 to 317 differ from the wall by 65/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands",
-      "withinTolerance": true
+      "observedM": 5.110733,
+      "residualM": 0.979267,
+      "toleranceM": 0.13,
+      "why": "over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands",
+      "withinTolerance": false
     },
     {
       "featureId": "opening-0-rear-10-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_SILL",
-      "modelM": 0.272268,
+      "modelM": 0,
       "objectId": "opening-0-rear-10-0",
       "observedM": 0.272268,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": -0.272268,
+      "toleranceM": 0.13,
       "why": "over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84",
-      "withinTolerance": true
+      "withinTolerance": false
     },
     {
       "featureId": "opening-0-rear-10-0",
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
       "kind": "OPENING_HEAD",
-      "modelM": 1.261065,
+      "modelM": 2.1,
       "objectId": "opening-0-rear-10-0",
       "observedM": 1.261065,
-      "residualM": 0,
-      "toleranceM": 0.16,
+      "residualM": 0.838935,
+      "toleranceM": 0.13,
       "why": "over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84",
-      "withinTolerance": true
+      "withinTolerance": false
     },
     {
       "featureId": "feat-roof-main",
@@ -175,11 +175,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 7.832293,
-      "residualM": -2.202403,
+      "observedM": 5.765155,
+      "residualM": -0.135265,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 1.19 m along the rear view",
-      "withinTolerance": false
+      "why": "the strongest horizontal edge (contrast 69) within 0.6 m of the model's roof line at 1.19 m along the rear view",
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -190,7 +190,7 @@
       "observedM": 6.723097,
       "residualM": -0.098874,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 2.37 m along the rear view",
+      "why": "the strongest horizontal edge (contrast 65) within 0.6 m of the model's roof line at 2.37 m along the rear view",
       "withinTolerance": true
     },
     {
@@ -199,23 +199,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 8.000353,
-      "residualM": -0.050353,
+      "observedM": 7.983547,
+      "residualM": -0.033547,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 3.95 m along the rear view",
+      "why": "the strongest horizontal edge (contrast 74) within 0.6 m of the model's roof line at 3.95 m along the rear view",
       "withinTolerance": true
-    },
-    {
-      "featureId": "feat-roof-main",
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-      "kind": "ROOF_EDGE",
-      "modelM": 6.624223,
-      "objectId": "roof-main",
-      "observedM": 7.933129,
-      "residualM": -1.308906,
-      "toleranceM": 0.25,
-      "why": "the traced top edge at 5.53 m along the rear view",
-      "withinTolerance": false
     },
     {
       "featureId": "feat-roof-main",
@@ -223,59 +211,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 6.672679,
-      "residualM": -1.042789,
+      "observedM": 5.697931,
+      "residualM": -0.068041,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 6.71 m along the rear view",
-      "withinTolerance": false
-    },
-    {
-      "featureId": "feat-roof-main",
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "kind": "ROOF_EDGE",
-      "modelM": 5.62989,
-      "objectId": "roof-main",
-      "observedM": 6.854486,
-      "residualM": -1.224596,
-      "toleranceM": 0.25,
-      "why": "the traced top edge at 1.19 m along the front view",
-      "withinTolerance": false
-    },
-    {
-      "featureId": "feat-roof-main",
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "kind": "ROOF_EDGE",
-      "modelM": 6.624223,
-      "objectId": "roof-main",
-      "observedM": 6.534279,
-      "residualM": 0.089944,
-      "toleranceM": 0.25,
-      "why": "the traced top edge at 2.37 m along the front view",
+      "why": "the strongest horizontal edge (contrast 73) within 0.6 m of the model's roof line at 6.71 m along the rear view",
       "withinTolerance": true
-    },
-    {
-      "featureId": "feat-roof-main",
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "kind": "ROOF_EDGE",
-      "modelM": 7.95,
-      "objectId": "roof-main",
-      "observedM": 7.83196,
-      "residualM": 0.11804,
-      "toleranceM": 0.25,
-      "why": "the traced top edge at 3.95 m along the front view",
-      "withinTolerance": true
-    },
-    {
-      "featureId": "feat-roof-main",
-      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-      "kind": "ROOF_EDGE",
-      "modelM": 6.624223,
-      "objectId": "roof-main",
-      "observedM": 7.949931,
-      "residualM": -1.325708,
-      "toleranceM": 0.25,
-      "why": "the traced top edge at 5.53 m along the front view",
-      "withinTolerance": false
     },
     {
       "featureId": "feat-roof-main",
@@ -286,7 +226,43 @@
       "observedM": 5.759041,
       "residualM": -0.129151,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 6.71 m along the front view",
+      "why": "the strongest horizontal edge (contrast 74) within 0.6 m of the model's roof line at 1.19 m along the front view",
+      "withinTolerance": true
+    },
+    {
+      "featureId": "feat-roof-main",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "kind": "ROOF_EDGE",
+      "modelM": 6.624223,
+      "objectId": "roof-main",
+      "observedM": 6.719662,
+      "residualM": -0.095439,
+      "toleranceM": 0.25,
+      "why": "the strongest horizontal edge (contrast 73) within 0.6 m of the model's roof line at 2.37 m along the front view",
+      "withinTolerance": true
+    },
+    {
+      "featureId": "feat-roof-main",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "kind": "ROOF_EDGE",
+      "modelM": 7.95,
+      "objectId": "roof-main",
+      "observedM": 8.00049,
+      "residualM": -0.05049,
+      "toleranceM": 0.25,
+      "why": "the strongest horizontal edge (contrast 78) within 0.6 m of the model's roof line at 3.95 m along the front view",
+      "withinTolerance": true
+    },
+    {
+      "featureId": "feat-roof-main",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "kind": "ROOF_EDGE",
+      "modelM": 5.62989,
+      "objectId": "roof-main",
+      "observedM": 5.742188,
+      "residualM": -0.112298,
+      "toleranceM": 0.25,
+      "why": "the strongest horizontal edge (contrast 69) within 0.6 m of the model's roof line at 6.71 m along the front view",
       "withinTolerance": true
     },
     {
@@ -298,7 +274,7 @@
       "observedM": 7.933569,
       "residualM": 0.016431,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 2.92 m along the left view",
+      "why": "the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 2.92 m along the left view",
       "withinTolerance": true
     },
     {
@@ -310,7 +286,7 @@
       "observedM": 7.933569,
       "residualM": 0.016431,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 7.30 m along the left view",
+      "why": "the strongest horizontal edge (contrast 96) within 0.6 m of the model's roof line at 7.30 m along the left view",
       "withinTolerance": true
     },
     {
@@ -322,7 +298,7 @@
       "observedM": 7.933569,
       "residualM": 0.016431,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 11.68 m along the left view",
+      "why": "the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 11.68 m along the left view",
       "withinTolerance": true
     },
     {
@@ -334,7 +310,7 @@
       "observedM": 7.933177,
       "residualM": 0.016823,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 2.92 m along the right view",
+      "why": "the strongest horizontal edge (contrast 93) within 0.6 m of the model's roof line at 2.92 m along the right view",
       "withinTolerance": true
     },
     {
@@ -346,7 +322,7 @@
       "observedM": 7.933177,
       "residualM": 0.016823,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 7.30 m along the right view",
+      "why": "the strongest horizontal edge (contrast 94) within 0.6 m of the model's roof line at 7.30 m along the right view",
       "withinTolerance": true
     },
     {
@@ -358,7 +334,7 @@
       "observedM": 7.933177,
       "residualM": 0.016823,
       "toleranceM": 0.25,
-      "why": "the traced top edge at 11.68 m along the right view",
+      "why": "the strongest horizontal edge (contrast 93) within 0.6 m of the model's roof line at 11.68 m along the right view",
       "withinTolerance": true
     }
   ]

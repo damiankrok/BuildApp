@@ -12,6 +12,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
 /**
  * The reconstructed candidate has to reach the GPU as a building, not as a
@@ -27,12 +29,21 @@ import org.junit.Test
  * exactly one entity was ever added to the Filament scene — and no layer mode
  * could reveal the rest, because every mode asked the wrong building.
  *
- * These tests run against the committed bundle the APK ships, so they describe
- * the real candidate rather than a fixture that could agree with a bug.
+ * These tests run against the committed bundles the APK ships, so they describe
+ * the real candidates rather than a fixture that could agree with a bug. They
+ * run once per sealed candidate: the first solver's and analyzer v2's are
+ * different buildings, and each has to reach the GPU whole.
  */
-class AutoCandidateRenderingTest {
+@RunWith(Parameterized::class)
+class AutoCandidateRenderingTest(private val key: String) {
 
-    private val auto: ModelScene get() = TestScenes.autoCandidate
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0}")
+        fun candidates(): List<String> = TestScenes.candidateKeys
+    }
+
+    private val auto: ModelScene get() = TestScenes.candidate(key)
 
     /**
      * What the renderer actually puts in the Filament scene for a mode: the

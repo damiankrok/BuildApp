@@ -43,6 +43,14 @@ export const SCENES: readonly SceneSpec[] = [
     build: () => modelOf('marcowki-auto'),
   },
   {
+    // The analyzer-v2 candidate, sealed beside the first: the same drawings
+    // through the second pipeline, replayed the same way.
+    key: 'marcowki-auto-v2',
+    title: 'Marcówki (auto v2)',
+    subtitle: 'Reconstructed by analyzer v2 and verified against the source views — a candidate, not final',
+    build: () => modelOf('marcowki-auto-v2'),
+  },
+  {
     key: 'demo',
     title: 'Demo',
     subtitle: 'BuildApp demo house',

@@ -13,14 +13,17 @@ import { useSnapshot, useStore } from '../use-store.js'
  * Nothing about a model is special to the UI: a file loaded from disk shows
  * as "(file)" in the same selector.
  */
-export const BUILTIN_MODELS: ReadonlyArray<{ id: string; label: string; create: () => ReturnType<typeof createDemoBuilding> }> = [
-  { id: 'demo-house', label: 'Demo house', create: () => createDemoBuilding() },
-  { id: 'marcowki-ge', label: 'Dom w marcówkach (GE)', create: () => createMarcowkiReferenceBuilding() },
+export const BUILTIN_MODELS: ReadonlyArray<{ id: string; label: string; modelId: string; create: () => ReturnType<typeof createDemoBuilding> }> = [
+  { id: 'demo-house', label: 'Demo house', modelId: 'demo-house', create: () => createDemoBuilding() },
+  { id: 'marcowki-ge', label: 'Dom w marcówkach (GE)', modelId: 'marcowki-ge', create: () => createMarcowkiReferenceBuilding() },
   // A reconstruction candidate is loaded by REPLAYING its sealed program, not
   // by running a solver here. BuildWorld shows the building that was sealed,
   // evaluated and shipped, or it shows an error — never a fourth building that
   // happens to be what this copy of the solver produces today.
-  ...SEALED_CANDIDATES.map((c) => ({ id: c.id, label: c.label, create: () => modelOf(c.id) })),
+  // A candidate's selector id is its sealed id; the model it replays to has
+  // the id the solver gave it. Both are kept so the selector can show which
+  // candidate is on screen instead of falling back to "(file)".
+  ...SEALED_CANDIDATES.map((c) => ({ id: c.id, label: c.label, modelId: c.candidate.modelId, create: () => modelOf(c.id) })),
 ]
 
 const VIEWS: Array<{ id: ViewPreset; label: string }> = [
@@ -106,7 +109,7 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
         <label>model</label>
         <select
           data-testid="model-select"
-          value={BUILTIN_MODELS.some((m) => m.id === snap.model.id) ? snap.model.id : '__file'}
+          value={BUILTIN_MODELS.find((m) => m.modelId === snap.model.id)?.id ?? '__file'}
           onChange={(e) => {
             const entry = BUILTIN_MODELS.find((m) => m.id === e.target.value)
             if (entry) store.replaceModel(entry.create())

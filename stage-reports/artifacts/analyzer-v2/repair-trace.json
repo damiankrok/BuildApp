@@ -4,9 +4,55 @@
     {
       "applied": [],
       "index": 0,
-      "refused": [],
-      "residualsAfter": 5,
-      "residualsBefore": 5
+      "refused": [
+        {
+          "featureId": "opening-0-rear-2-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_head is source exact and a view reading 0.68 m away does not overrule it"
+        },
+        {
+          "featureId": "opening-1-front-4-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_sill already comes from a view; a second reading is recorded, not applied"
+        },
+        {
+          "featureId": "opening-1-front-4-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_head is source exact and a view reading 0.91 m away does not overrule it"
+        },
+        {
+          "featureId": "opening-1-rear-6-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_sill already comes from a view; a second reading is recorded, not applied"
+        },
+        {
+          "featureId": "opening-1-rear-6-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_head is source exact and a view reading 0.99 m away does not overrule it"
+        },
+        {
+          "featureId": "opening-1-rear-6-1",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_sill already comes from a view; a second reading is recorded, not applied"
+        },
+        {
+          "featureId": "opening-1-rear-6-1",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_head is source exact and a view reading 0.98 m away does not overrule it"
+        },
+        {
+          "featureId": "opening-0-rear-10-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_sill already comes from a view; a second reading is recorded, not applied"
+        },
+        {
+          "featureId": "opening-0-rear-10-0",
+          "kind": "RESIZE_OPENING",
+          "why": "opening_head is source exact and a view reading 0.84 m away does not overrule it"
+        }
+      ],
+      "residualsAfter": 9,
+      "residualsBefore": 9
     }
   ]
 }

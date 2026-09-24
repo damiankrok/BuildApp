@@ -1,18 +1,526 @@
 {
   "cameras": [
     {
+      "camera": {
+        "anchors": [
+          {
+            "confidence": 0.632251,
+            "id": "attached0:ground:x1z1",
+            "image": {
+              "u": -0.052661,
+              "v": 150
+            },
+            "kind": "GROUND_CORNER",
+            "why": "a ground corner of attached body 1, seen as a convex corner of the silhouette at (-0.1, 150.0) px, 1.47 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 0,
+              "z": 8.501283
+            }
+          },
+          {
+            "confidence": 0.709997,
+            "id": "attached0:top:x1z1",
+            "image": {
+              "u": 0,
+              "v": 85.5
+            },
+            "kind": "ATTACHED_TOP_CORNER",
+            "why": "a top corner of attached body 1, seen as a convex corner of the silhouette at (0.0, 85.5) px, 1.16 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 3.124804,
+              "z": 8.501283
+            }
+          },
+          {
+            "confidence": 0.795683,
+            "id": "eave:x0z0",
+            "image": {
+              "u": 200,
+              "v": 84.5
+            },
+            "kind": "EAVE_CORNER",
+            "why": "the left front eave corner of the main body, seen as a convex corner of the silhouette at (200.0, 84.5) px, 0.82 px from where the camera puts it",
+            "world": {
+              "x": 0,
+              "y": 4.635556,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.486448,
+            "id": "eave:x1z1",
+            "image": {
+              "u": 16.48784,
+              "v": 58.85441
+            },
+            "kind": "EAVE_CORNER",
+            "why": "the right rear eave corner of the main body, seen as a convex corner of the silhouette at (16.5, 58.9) px, 2.05 px from where the camera puts it",
+            "world": {
+              "x": 7.9,
+              "y": 4.635556,
+              "z": 14.601283
+            }
+          },
+          {
+            "confidence": 0.840444,
+            "id": "ground:x0z0",
+            "image": {
+              "u": 200,
+              "v": 150
+            },
+            "kind": "GROUND_CORNER",
+            "why": "the left front corner of the main body at the ground, seen as a convex corner of the silhouette at (200.0, 150.0) px, 0.64 px from where the camera puts it",
+            "world": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.647158,
+            "id": "ridge:z1",
+            "image": {
+              "u": 63.518703,
+              "v": 10.981297
+            },
+            "kind": "RIDGE_END",
+            "why": "the rear end of the ridge, seen as a convex corner of the silhouette at (63.5, 11.0) px, 1.41 px from where the camera puts it",
+            "world": {
+              "x": 3.95,
+              "y": 7.95,
+              "z": 14.601283
+            }
+          }
+        ],
+        "confidence": 0.668457,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa",
+        "rejected": [],
+        "residualPx": {
+          "max": 2.054209,
+          "rms": 1.34142
+        },
+        "solution": {
+          "centre": {
+            "x": 34.51945,
+            "y": 4.658923,
+            "z": -36.924997
+          },
+          "errorsPx": [
+            1.470995,
+            1.160013,
+            0.817269,
+            2.054209,
+            0.638225,
+            1.411368
+          ],
+          "focalPx": {
+            "x": 278.019556,
+            "y": 546.935431
+          },
+          "inlierIds": [
+            "attached0:ground:x1z1",
+            "attached0:top:x1z1",
+            "eave:x0z0",
+            "eave:x1z1",
+            "ground:x0z0",
+            "ridge:z1"
+          ],
+          "maxPx": 2.054209,
+          "principal": {
+            "u": 441.772186,
+            "v": 175.642087
+          },
+          "projection": [
+            7.865878,
+            0.323324,
+            3.909701,
+            -128.666451,
+            2.034639,
+            9.444627,
+            0.467156,
+            -96.986699,
+            0.016665,
+            0.001764,
+            -0.001638,
+            -0.643976
+          ],
+          "rmsPx": 1.34142,
+          "rotation": [
+            0.105083,
+            -0.071699,
+            0.991875,
+            -0.096909,
+            0.991912,
+            0.081968,
+            0.98973,
+            0.104735,
+            -0.097285
+          ],
+          "translation": [
+            33.331633,
+            1.750671,
+            -38.245141
+          ],
+          "why": "6 world points, 18.9% off coplanar, resect a camera at (34.51945, 4.658923, -36.924997) m with a 278 px focal length; they reproject 1.34 px rms and 2.05 px worst"
+        },
+        "visibleSides": [
+          "FRONT",
+          "RIGHT"
+        ],
+        "why": "a silhouette of 17474 px against sky and vegetation, 200×139 px, with 8 hull corners and 73 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 74.5% of the silhouette (IoU) from 6 anchors that reproject 1.34 px rms and 2.05 px worst; the camera stands at (34.52, 4.66, -36.92) m with a 278 px focal length"
+      },
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa",
       "residualPx": 1.34142,
       "solved": true,
       "why": "a silhouette of 17474 px against sky and vegetation, 200×139 px, with 8 hull corners and 73 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 74.5% of the silhouette (IoU) from 6 anchors that reproject 1.34 px rms and 2.05 px worst; the camera stands at (34.52, 4.66, -36.92) m with a 278 px focal length"
     },
     {
+      "camera": {
+        "anchors": [
+          {
+            "confidence": 0.914618,
+            "id": "attached0:ground:x1z0",
+            "image": {
+              "u": 400.049835,
+              "v": 300
+            },
+            "kind": "GROUND_CORNER",
+            "why": "a ground corner of attached body 1, seen as a convex corner of the silhouette at (400.0, 300.0) px, 0.68 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 0,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.946776,
+            "id": "attached0:ground:x1z1",
+            "image": {
+              "u": 400,
+              "v": 234.5
+            },
+            "kind": "GROUND_CORNER",
+            "why": "a ground corner of attached body 1, seen as a convex corner of the silhouette at (400.0, 234.5) px, 0.43 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 0,
+              "z": 8.501283
+            }
+          },
+          {
+            "confidence": 0.80084,
+            "id": "attached0:top:x0z0",
+            "image": {
+              "u": 311,
+              "v": 240.982125
+            },
+            "kind": "ATTACHED_TOP_CORNER",
+            "why": "a top corner of attached body 1, seen as a kink of the silhouette at (311.0, 241.0) px, 1.59 px from where the camera puts it",
+            "world": {
+              "x": 7.9,
+              "y": 3.124804,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.956514,
+            "id": "attached0:top:x1z0",
+            "image": {
+              "u": 306,
+              "v": 250.641476
+            },
+            "kind": "ATTACHED_TOP_CORNER",
+            "why": "a top corner of attached body 1, seen as a kink of the silhouette at (306.0, 250.6) px, 0.35 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 3.124804,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.968408,
+            "id": "eave:x1z1",
+            "image": {
+              "u": 296.486466,
+              "v": 123.500793
+            },
+            "kind": "EAVE_CORNER",
+            "why": "the right rear eave corner of the main body, seen as a kink of the silhouette at (296.5, 123.5) px, 0.25 px from where the camera puts it",
+            "world": {
+              "x": 7.9,
+              "y": 4.635556,
+              "z": 14.601283
+            }
+          },
+          {
+            "confidence": 0.84907,
+            "id": "ridge:z0",
+            "image": {
+              "u": 101.099793,
+              "v": 121.400207
+            },
+            "kind": "GABLE_APEX",
+            "why": "the front end of the ridge, seen as a convex corner of the silhouette at (101.1, 121.4) px, 1.21 px from where the camera puts it",
+            "world": {
+              "x": 3.95,
+              "y": 7.95,
+              "z": 0
+            }
+          }
+        ],
+        "confidence": 0.666192,
+        "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a",
+        "rejected": [],
+        "residualPx": {
+          "max": 1.593281,
+          "rms": 0.897147
+        },
+        "solution": {
+          "centre": {
+            "x": -8.217952,
+            "y": 3.396836,
+            "z": -4.816489
+          },
+          "errorsPx": [
+            0.683053,
+            0.425795,
+            1.593281,
+            0.347888,
+            0.252736,
+            1.207444
+          ],
+          "focalPx": {
+            "x": 316.941331,
+            "y": 340.428389
+          },
+          "inlierIds": [
+            "attached0:ground:x1z0",
+            "attached0:ground:x1z1",
+            "attached0:top:x0z0",
+            "attached0:top:x1z0",
+            "eave:x1z1",
+            "ridge:z0"
+          ],
+          "maxPx": 1.593281,
+          "principal": {
+            "u": 246.498513,
+            "v": 179.473415
+          },
+          "projection": [
+            -6.071342,
+            13.514677,
+            -4.191557,
+            -115.989716,
+            -6.136442,
+            6.700844,
+            1.173007,
+            -67.540881,
+            -0.021249,
+            -0.00245,
+            -0.010451,
+            -0.216632
+          ],
+          "rmsPx": 0.897147,
+          "rotation": [
+            0.348083,
+            0.461598,
+            -0.815944,
+            -0.286628,
+            0.881097,
+            0.376181,
+            -0.892571,
+            -0.10293,
+            -0.439002
+          ],
+          "translation": [
+            -2.637432,
+            -3.536562,
+            -9.099916
+          ],
+          "why": "6 world points, 16.2% off coplanar, resect a camera at (-8.217952, 3.396836, -4.816489) m with a 317 px focal length; they reproject 0.90 px rms and 1.59 px worst"
+        },
+        "visibleSides": [
+          "FRONT",
+          "LEFT"
+        ],
+        "why": "a silhouette of 54674 px against sky and vegetation, 400×259 px, with 9 hull corners and 105 further kinks in its outline; of 8 viewpoint hypotheses, 1 resect a camera, and the one seeing FRONT+LEFT covers 28.9% of the silhouette (IoU) from 6 anchors that reproject 0.90 px rms and 1.59 px worst; the camera stands at (-8.22, 3.40, -4.82) m with a 317 px focal length"
+      },
       "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a",
       "residualPx": 0.897147,
       "solved": true,
       "why": "a silhouette of 54674 px against sky and vegetation, 400×259 px, with 9 hull corners and 105 further kinks in its outline; of 8 viewpoint hypotheses, 1 resect a camera, and the one seeing FRONT+LEFT covers 28.9% of the silhouette (IoU) from 6 anchors that reproject 0.90 px rms and 1.59 px worst; the camera stands at (-8.22, 3.40, -4.82) m with a 317 px focal length"
     },
     {
+      "camera": {
+        "anchors": [
+          {
+            "confidence": 0.711933,
+            "id": "attached0:ground:x1z0",
+            "image": {
+              "u": 800.064416,
+              "v": 599.997697
+            },
+            "kind": "GROUND_CORNER",
+            "why": "a ground corner of attached body 1, seen as a convex corner of the silhouette at (800.1, 600.0) px, 4.61 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 0,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.966029,
+            "id": "attached0:top:x0z1",
+            "image": {
+              "u": 794.952751,
+              "v": 303.979339
+            },
+            "kind": "ATTACHED_TOP_CORNER",
+            "why": "a top corner of attached body 1, seen as a kink of the silhouette at (795.0, 304.0) px, 0.54 px from where the camera puts it",
+            "world": {
+              "x": 7.9,
+              "y": 3.124804,
+              "z": 8.501283
+            }
+          },
+          {
+            "confidence": 0.98211,
+            "id": "attached0:top:x1z1",
+            "image": {
+              "u": 799.730841,
+              "v": 305.230841
+            },
+            "kind": "ATTACHED_TOP_CORNER",
+            "why": "a top corner of attached body 1, seen as a convex corner of the silhouette at (799.7, 305.2) px, 0.29 px from where the camera puts it",
+            "world": {
+              "x": 12.05,
+              "y": 3.124804,
+              "z": 8.501283
+            }
+          },
+          {
+            "confidence": 0.992629,
+            "id": "eave:x1z1",
+            "image": {
+              "u": 797.682198,
+              "v": 303.182198
+            },
+            "kind": "EAVE_CORNER",
+            "why": "the right rear eave corner of the main body, seen as a convex corner of the silhouette at (797.7, 303.2) px, 0.12 px from where the camera puts it",
+            "world": {
+              "x": 7.9,
+              "y": 4.635556,
+              "z": 14.601283
+            }
+          },
+          {
+            "confidence": 0.541153,
+            "id": "ground:x0z0",
+            "image": {
+              "u": 0.052603,
+              "v": 599.962032
+            },
+            "kind": "GROUND_CORNER",
+            "why": "the left front corner of the main body at the ground, seen as a convex corner of the silhouette at (0.1, 600.0) px, 7.34 px from where the camera puts it",
+            "world": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          },
+          {
+            "confidence": 0.975902,
+            "id": "ridge:z0",
+            "image": {
+              "u": 262.528713,
+              "v": 49.883884
+            },
+            "kind": "GABLE_APEX",
+            "why": "the front end of the ridge, seen as a kink of the silhouette at (262.5, 49.9) px, 0.39 px from where the camera puts it",
+            "world": {
+              "x": 3.95,
+              "y": 7.95,
+              "z": 0
+            }
+          }
+        ],
+        "confidence": 0.750448,
+        "frameId": "frame-asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070",
+        "rejected": [],
+        "residualPx": {
+          "max": 7.341547,
+          "rms": 3.551566
+        },
+        "solution": {
+          "centre": {
+            "x": 18.11592,
+            "y": 3.100031,
+            "z": -0.304116
+          },
+          "errorsPx": [
+            4.609066,
+            0.543529,
+            0.286245,
+            0.11794,
+            7.341547,
+            0.385572
+          ],
+          "focalPx": {
+            "x": 8.6827,
+            "y": 19.28251
+          },
+          "inlierIds": [
+            "attached0:top:x0z1",
+            "attached0:top:x1z1",
+            "eave:x1z1",
+            "ridge:z0"
+          ],
+          "maxPx": 7.341547,
+          "principal": {
+            "u": 805.706135,
+            "v": 305.11203
+          },
+          "projection": [
+            1.289976,
+            0.831993,
+            85.198841,
+            -0.038013,
+            0.207407,
+            -0.966213,
+            32.307208,
+            9.063041,
+            0.000331,
+            0.003502,
+            0.105666,
+            0.015281
+          ],
+          "rmsPx": 3.551566,
+          "rotation": [
+            0.998632,
+            0.052065,
+            -0.004854,
+            0.052197,
+            -0.998094,
+            0.032917,
+            0.003131,
+            0.033125,
+            0.999446
+          ],
+          "translation": [
+            -18.254015,
+            2.158534,
+            0.14454
+          ],
+          "why": "6 world points, 50.5% off coplanar, resect a camera at (18.11592, 3.100031, -0.304116) m with a 9 px focal length; they reproject 3.55 px rms and 7.34 px worst"
+        },
+        "visibleSides": [
+          "FRONT",
+          "RIGHT"
+        ],
+        "why": "a silhouette of 293035 px against sky and vegetation, 800×555 px, with 8 hull corners and 203 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 84.6% of the silhouette (IoU) from 6 anchors that reproject 3.55 px rms and 7.34 px worst; the camera stands at (18.12, 3.10, -0.30) m with a 9 px focal length"
+      },
       "frameId": "frame-asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070",
       "residualPx": 3.551566,
       "solved": true,
@@ -129,6 +637,7 @@
         "y": 772.876492
       },
       "storeyIndex": 0,
+      "wallPx": 17.125,
       "why": "the base plan, through the chain-registered world frame of the 03R layout"
     },
     {
@@ -141,6 +650,7 @@
         "y": 710.654604
       },
       "storeyIndex": 1,
+      "wallPx": 11,
       "why": "its outer wall faces (px 46..347 × 194..673) put on the 7.90 × 12.61 m body this storey covers; the two axes agree to 0.3 %"
     }
   ],

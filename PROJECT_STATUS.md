@@ -17,6 +17,7 @@
 | STAGE BUILDAPP-03 — PRIMITIVE RECONSTRUCTION + METRIC SOLVER | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `ced70f0dba7d32caa32ef726a5118643796a80fe`; implementation `361e466`, `5ab618b`, `fad9f39`, `8524a89`; docs `c1a9872` and the commit that carries this row (the final HEAD, see `git log`) | PASS |
 | STAGE BUILDAPP-03M-FIX — ANDROID AUTO CANDIDATE RENDERING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `f3766237840514fc60178ca6c9bf4f3c9e13ebbd`; CI micro-task `781d6d6`, `13108e5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03M_FIX.md` and this row | PASS |
 | STAGE BUILDAPP-03R1 — IMAGE METROLOGY + PROPORTIONAL FACADE FITTING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4505e148cf03197b899d49c5335ed893e013ab1d`; implementation `c4c8816`, `ed83d0d`, `c315a35`, `0ec3291`, `067fd41`, `3ee3277`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` and this row | PASS |
+| STAGE BUILDAPP-03X — ANALYZER REFOUNDATION AUDIT + MARCÓWKI AUTO V2 | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d5d6375d8675143730307d71f45c0d940fcd134b`; research `9363d6b`; audit and v2 schemas `13896a1`; pipeline `59d5676`; implementation and docs: the commits that carry `stage-reports/STAGE_BUILDAPP_03X_ANALYZER_REFOUNDATION.md` and this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
 
 ## Current capabilities
 
@@ -340,6 +341,48 @@ report, the per-opening table, the four registered elevations proved from
 content, §21's twelve wrong-boundary mutations, three approaches that look
 right and are wrong, and what the stage did not do.
 
+## Where the analyzer stands (STAGE BUILDAPP-03X)
+
+03R1 measured the facades and still shipped a candidate with no recesses, no
+interior, a roof stopping short of the zones, no stair and heights from
+conventions. 03X sealed a source truth v2 first (`research/marcowki-v2/`,
+138 items, never imported by production code), audited where each family's
+evidence was lost (`docs/ANALYZER_FORENSIC_AUDIT.md`, eleven facts with
+file and line), and refounded the analyzer as `packages/reconstruction/src/v2/`
+(`npm run reconstruct:v2:marcowki`). Both candidates stay sealed side by side
+in `packages/candidates` (`marcowki-auto`, `marcowki-auto-v2`) and both are
+selectable on the web and on Android.
+
+| | 03R1 Auto | 03X Auto v2 |
+| --- | --- | --- |
+| frame | z mirrored against the sheet (z = 0 at the rear wall) | z from the front outer plane, the mirror against 03R stated once |
+| roof | over the walled body (12.61 m) | over the zones (z 0..14.60), `coversZones` with its reason |
+| recesses / returns | none | four recess readings, eight return walls, terraces on the recess floors |
+| interior | none | 31 partitions, 9 doors, 12 rooms, chimney blocks |
+| stair | none | U-stair 5+7+5 = 17 risers over 3.06 m, two quarter landings, emitted as FLIGHTS |
+| opening heights | conventions | printed callouts on all eleven facade openings (a ring reader with candidate readings resolved by plan gaps and elevations); two heights flagged ambiguous |
+| raked heads | none | the three gable windows, from the printed height and the roof soffit |
+| roof details | flat garage roof by convention | garage slab and parapet from the section, two chimneys, three rooflights |
+| facade | 2 solids | verges, fascias, railings, the portal head, three assemblies |
+| cameras | none | three of four perspectives solved and sealed |
+| verification | NOT_CHECKED on every silhouette | 28 source-view residuals; a bounded repair that applied nothing and refused nine changes with reasons |
+| evidence accounting | none | a ledger over every observation, metric reading, page fact and room; a feature graph with quality L0/L1/L2 |
+
+Evaluated per item against the sealed truth with the truth's own tolerances
+and no aggregate score (`stage-reports/artifacts/analyzer-v2/marcowki-v2-evaluation.md`):
+masses, recesses, roof, verge, portal and the stair match; openings match in
+interval and width everywhere and in height wherever a callout was read
+unambiguously; what is PARTIAL is named per property (opening families from
+visual cues, open-plan rooms merged, room numbers mostly unread, chimney and
+rooflight extents 0.1–0.2 m off, fascia ends short). Gates:
+`npm run audit:analyzer-v2` (22 checks), `npm run reconstruct:no-benchmark`
+(reference, truth and research physically absent), `tests/architecture/analyzer-v2.test.ts`,
+the 100-stripe facade stress test, synthetic fixtures through v2. Overlays,
+evaluation, lineage, ledger, quality, residuals and the repair trace are
+under `stage-reports/artifacts/analyzer-v2/` and uploaded by CI.
+`docs/ANALYZER_V2_ARCHITECTURE.md`, `docs/EVIDENCE_CONSUMPTION.md` and
+`docs/FEATURE_IDENTITY_GRAPH.md` describe the design.
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -460,6 +503,16 @@ architecture test fails if the per-frame scene argument ever comes back.
 - **No live vision call has been made** in this stage either: `LIVE_PROVIDER_NOT_RUN`.
 
 ## Recommended technical next step
+
+**After BUILDAPP-03X**: the five items at the end of
+`stage-reports/STAGE_BUILDAPP_03X_ANALYZER_REFOUNDATION.md`, in that order —
+a door-symbol reader for the opening families and the all-door wall, rooflight
+callouts matched to the rooflight symbols, the terrain datum and roof build-up
+from the section, a room-number reader, and elevation extents taken on more
+than one view. Each is a reader feeding the same ledger and graph; none
+changes the pipeline's shape.
+
+The earlier recommendation stands behind those, now largely built:
 
 **BUILDAPP-04 — Camera-aware Source-View Verification + Semantic Repair Loop.**
 The three things BUILDAPP-03 leaves on the table want the same tool. The roof

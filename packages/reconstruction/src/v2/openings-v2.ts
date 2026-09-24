@@ -55,7 +55,7 @@ export type OpeningV2 = {
   tallEdge?: 'LOW' | 'HIGH'
   profile: HeadProfile
   family: OpeningFamily
-  callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number }
+  callout?: { widthCm: number; heightCm: number; evidenceId: string; distanceM: number; heightCandidates?: Array<{ cm: number; score: number }>; resolvedBy?: string }
   elevation?: { frameId: string; sillY: number; headY: number; contrast: number; confidence: number }
   /** Mullion positions as fractions of the width, from stubs the plan draws inside the gap. */
   mullions: number[]
@@ -69,6 +69,22 @@ export type OpeningV2 = {
 
 export type OpeningOptions = { minWidthM?: number; maxWidthM?: number; calloutReachM?: number; stubMaxM?: number }
 const DEFAULTS: Required<OpeningOptions> = { minWidthM: 0.5, maxWidthM: 6.5, calloutReachM: 2.0, stubMaxM: 0.3 }
+
+/**
+ * The readings a callout evidence supports for each half, best first.
+ *
+ * A ring callout carries them as alternatives tagged `width candidate` and
+ * `height candidate`; a callout read as one OCR token carries one reading per
+ * half, at the token's confidence.
+ */
+export function calloutCandidates(evidence: MetricEvidence): { widths: Array<{ cm: number; score: number }>; heights: Array<{ cm: number; score: number }> } | null {
+  const widths = evidence.alternatives.filter((a) => a.why.startsWith('width candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
+  const heights = evidence.alternatives.filter((a) => a.why.startsWith('height candidate')).map((a) => ({ cm: a.value, score: a.confidence }))
+  if (widths.length > 0 && heights.length > 0) return { widths, heights }
+  const pair = calloutPair(evidence)
+  if (!pair) return null
+  return { widths: [{ cm: pair.widthCm, score: evidence.confidence }], heights: [{ cm: pair.heightCm, score: evidence.confidence }] }
+}
 
 /** `110/230` read as a width and a height in centimetres, from a callout evidence's raw text. */
 export function calloutPair(evidence: MetricEvidence): { widthCm: number; heightCm: number } | null {
@@ -169,22 +185,27 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     const widthPlan = round6(hi - lo)
     const centre = (lo + hi) / 2
     const unresolved: string[] = []
-    // --- the callout: nearest printed w/h within reach whose width agrees with the gap
+    // --- the callout: nearest printed w/h within reach with a width reading that agrees with the gap.
+    // The gap's own width is the evidence that picks among the reader's width
+    // candidates; the height candidates travel on for the elevation to pick among.
     let callout: OpeningV2['callout']
     for (const ev of input.callouts) {
       if (!ev.textBox) continue
-      const pair = calloutPair(ev)
-      if (!pair) continue
+      const cands = calloutCandidates(ev)
+      if (!cands) continue
       const cx = (ev.textBox.x0 + ev.textBox.x1) / 2
       const cy = (ev.textBox.y0 + ev.textBox.y1) / 2
       const w = plan.toWorld(cx, cy)
       const alongDistance = Math.abs((along === 'X' ? w.x : w.z) - centre)
       const acrossDistance = Math.abs((along === 'X' ? w.z : w.x) - host.centreAt)
       if (alongDistance > opt.calloutReachM || acrossDistance > opt.calloutReachM) continue
-      if (Math.abs(pair.widthCm / 100 - widthPlan) > Math.max(0.2, widthPlan * 0.3)) continue
+      if (ev.confidence < 0.2) continue
+      const agreeing = cands.widths.slice(0, 3).filter((c) => Math.abs(c.cm / 100 - widthPlan) <= Math.max(0.12, widthPlan * 0.12))
+      if (agreeing.length === 0) continue
+      const width = agreeing.reduce((best, c) => (c.score > best.score ? c : best), agreeing[0])
       const distance = round6(Math.hypot(alongDistance, acrossDistance))
       if (callout && callout.distanceM <= distance) continue
-      callout = { widthCm: pair.widthCm, heightCm: pair.heightCm, evidenceId: ev.id, distanceM: distance }
+      callout = { widthCm: width.cm, heightCm: cands.heights[0].cm, evidenceId: ev.id, distanceM: distance, heightCandidates: cands.heights, ...(width !== cands.widths[0] ? { resolvedBy: `the ${widthPlan.toFixed(2)} m plan gap picked the width reading ${width.cm} over ${cands.widths[0].cm}` } : {}) }
     }
     // The interval: the plan gap, its width corrected to the printed one about the gap's centre.
     const widthM = callout ? round6(callout.widthCm / 100) : widthPlan
@@ -203,13 +224,44 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
     let headY: number
     const prov: OpeningV2['provenance'] = { interval: 'SOURCE_DERIVED', width: callout ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', sill: 'UNRESOLVED', head: 'UNRESOLVED', profile: 'SOURCE_DERIVED', family: 'VISUAL_SEMANTIC' }
     if (callout && elevation) {
+      // The elevation's own height picks among the reader's height candidates
+      // when the best one disagrees with it and another, nearly as good, does not.
+      const drawn = elevation.headY - elevation.sillY
+      if (Math.abs(drawn - callout.heightCm / 100) > 0.2 && callout.heightCandidates) {
+        const top = callout.heightCandidates[0]?.score ?? 0
+        const fitting = callout.heightCandidates.filter((c) => Math.abs(c.cm / 100 - drawn) <= 0.15 && c.score >= top * 0.7)
+        if (fitting.length > 0) {
+          // Among readings the matcher rates alike, the one the elevation is nearest to.
+          const pick = fitting.reduce((best, c) => (Math.abs(c.cm / 100 - drawn) < Math.abs(best.cm / 100 - drawn) ? c : best), fitting[0])
+          callout = { ...callout, heightCm: pick.cm, resolvedBy: `${callout.resolvedBy ? `${callout.resolvedBy}; ` : ''}the elevation's ${drawn.toFixed(2)} m picked the height reading ${pick.cm} over ${callout.heightCandidates[0].cm}` }
+        }
+      }
       const h = callout.heightCm / 100
       const agree = Math.abs(elevation.headY - elevation.sillY - h) <= 0.2
-      sillY = agree ? round6((elevation.sillY + Math.max(host.floorY, elevation.headY - h)) / 2) : elevation.sillY
-      headY = round6(sillY + h)
-      prov.sill = agree ? 'SOURCE_CORROBORATED' : 'IMAGE_METRIC_REGISTERED'
-      prov.head = agree ? 'SOURCE_CORROBORATED' : 'SOURCE_EXACT'
-      if (!agree) unresolved.push(`the elevation reads ${(elevation.headY - elevation.sillY).toFixed(2)} m tall against the printed ${h.toFixed(2)}`)
+      if (agree) {
+        sillY = round6((elevation.sillY + Math.max(host.floorY, elevation.headY - h)) / 2)
+        headY = round6(sillY + h)
+        prov.sill = 'SOURCE_CORROBORATED'
+        prov.head = 'SOURCE_CORROBORATED'
+      } else {
+        // The printed height stands over a contrast band that contradicts it;
+        // the band's sill is kept only where an opening of the printed height
+        // starting there would still fit in the storey.
+        const fits = elevation.sillY >= host.floorY - 0.05 && elevation.sillY + h <= host.floorY + host.storeyHeightM + 0.05
+        if (h >= 1.95) {
+          sillY = host.floorY
+          prov.sill = 'SOURCE_DERIVED'
+        } else if (fits) {
+          sillY = elevation.sillY
+          prov.sill = 'IMAGE_METRIC_REGISTERED'
+        } else {
+          sillY = round6(host.floorY + Math.max(0, 2.2 - h))
+          prov.sill = 'ASSUMED_FOR_RENDERING'
+        }
+        headY = round6(sillY + h)
+        prov.head = 'SOURCE_EXACT'
+        unresolved.push(`the elevation reads ${(elevation.headY - elevation.sillY).toFixed(2)} m tall (${elevation.sillY.toFixed(2)}..${elevation.headY.toFixed(2)}) against the printed ${h.toFixed(2)}; the printed height stands`)
+      }
     } else if (callout) {
       const h = callout.heightCm / 100
       // A printed height with no elevation reading: a door-height opening reaches the floor, a shorter one takes a common head.
@@ -218,6 +270,12 @@ export function readWallOpenings(input: OpeningReadingInput, options: OpeningOpt
       prov.sill = h >= 1.95 ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING'
       prov.head = 'SOURCE_EXACT'
       if (h < 1.95) unresolved.push('sill height (no elevation reading; a common head is assumed)')
+      // Two readings the matcher cannot tell apart, and nothing else to tell them by.
+      const rival = callout.heightCandidates?.slice(1).find((c) => c.score >= (callout?.heightCandidates?.[0].score ?? 0) - 0.02 && Math.abs(c.cm - (callout?.heightCm ?? 0)) >= 15)
+      if (rival) {
+        prov.head = 'UNRESOLVED'
+        unresolved.push(`the printed height reads ${callout.heightCm} or ${rival.cm} alike, and no elevation shows this wall`)
+      }
     } else if (elevation) {
       sillY = elevation.sillY
       headY = elevation.headY

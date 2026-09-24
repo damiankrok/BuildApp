@@ -14,10 +14,21 @@
  * that was measured.
  */
 import { ReconstructionCandidateSchema, StructuralLayoutHypothesisSetSchema, buildCandidateModel, verifyReplay } from '@buildapp/reconstruction'
-import type { ReconstructionCandidate, StructuralLayoutHypothesisSet } from '@buildapp/reconstruction'
+import type { ReconstructionCandidate, SourceViewResidual, StructuralLayoutHypothesisSet } from '@buildapp/reconstruction'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import marcowkiAuto from './marcowki-auto.json' with { type: 'json' }
 import marcowkiAutoLayout from './marcowki-auto-layout.json' with { type: 'json' }
+import marcowkiAutoV2 from './marcowki-auto-v2.json' with { type: 'json' }
+import marcowkiAutoV2Layout from './marcowki-auto-v2-layout.json' with { type: 'json' }
+import marcowkiAutoV2Residuals from './marcowki-auto-v2-residuals.json' with { type: 'json' }
+
+/**
+ * What the analyzer-v2 verifier measured when it projected the candidate back
+ * into the source views: one row per feature, the model's value against the
+ * drawing's, and whether the two agree within the feature's own uncertainty.
+ * Sealed against the candidate by hash, like the layout.
+ */
+export type SourceViewResiduals = { candidateHash: string; residuals: SourceViewResidual[] }
 
 export type SealedCandidate = {
   /** A short, stable id used by selectors and scene bundles. */
@@ -36,11 +47,28 @@ export type SealedCandidate = {
    * a build directory.
    */
   layout: StructuralLayoutHypothesisSet
+  /**
+   * The source-view comparison, for a candidate whose solver produced one.
+   * The first solver did not verify against the views, so it carries none;
+   * absence is a fact about that solver, not a missing file.
+   */
+  residuals?: SourceViewResiduals
 }
 
 /** Every candidate committed to the repository, in a fixed order. */
 export const SEALED_CANDIDATES: readonly SealedCandidate[] = [
   { id: 'marcowki-auto', label: 'Marcówki (auto)', candidate: marcowkiAuto as unknown as ReconstructionCandidate, layout: marcowkiAutoLayout as unknown as StructuralLayoutHypothesisSet },
+  // The analyzer-v2 candidate: same building, second pipeline. It is sealed
+  // beside the first rather than in its place so that the two can be put on
+  // the same screen and compared; `npm run candidates:seal-v2` copies it in
+  // from the pipeline's artefacts.
+  {
+    id: 'marcowki-auto-v2',
+    label: 'Marcówki (auto v2)',
+    candidate: marcowkiAutoV2 as unknown as ReconstructionCandidate,
+    layout: marcowkiAutoV2Layout as unknown as StructuralLayoutHypothesisSet,
+    residuals: marcowkiAutoV2Residuals as unknown as SourceViewResiduals,
+  },
 ]
 
 /**
@@ -62,6 +90,23 @@ export function layoutOf(id: string): StructuralLayoutHypothesisSet {
 }
 
 export const sealedCandidate = (id: string): SealedCandidate | undefined => SEALED_CANDIDATES.find((c) => c.id === id)
+
+/**
+ * A sealed candidate's source-view residuals, checked against the candidate,
+ * or null when its solver produced none.
+ *
+ * Residuals measured on a different candidate would describe how well some
+ * OTHER building matches the drawings, which is worse than showing nothing.
+ */
+export function sourceViewResidualsOf(id: string): SourceViewResiduals | null {
+  const sealed = sealedCandidate(id)
+  if (!sealed) throw new Error(`no sealed candidate called ${id}`)
+  if (!sealed.residuals) return null
+  if (sealed.residuals.candidateHash !== sealed.candidate.contentHash) {
+    throw new Error(`the residuals sealed with ${id} were measured on ${sealed.residuals.candidateHash.slice(0, 16)} and the candidate is ${sealed.candidate.contentHash.slice(0, 16)}`)
+  }
+  return sealed.residuals
+}
 
 /**
  * Build a sealed candidate's model by replaying its own program.

@@ -62,6 +62,9 @@ export type CalloutReading = {
   /** Raw text of each half, exactly as read. */
   upperText: string
   lowerText: string
+  /** The in-range readings each half supports, best first: what a consumer with its own evidence chooses among. */
+  widthCandidates: HalfCandidate[]
+  heightCandidates: HalfCandidate[]
   /** Min of the two halves' token confidences; 0 when either number is missing. */
   confidence: number
   /** The circle's bounding box, in the raster's pixels. */
@@ -87,6 +90,16 @@ const WIDTH_RANGE = { min: 40, max: 700 } as const
 const HEIGHT_RANGE = { min: 40, max: 400 } as const
 
 const DEFAULTS = { minRadiusPx: 9, maxRadiusPx: 60, useColour: true, frameId: '' } as const
+
+/**
+ * How the halves are matched. Prototypes at more than one scale, because the
+ * digits' x-height varies with the anti-aliasing of a six-pixel glyph; a
+ * prior on the pitch, because at this size a wrong cell count can always be
+ * paid for with cells that happen to look like digits; and a higher "on"
+ * threshold, because the faint fringe under the bar is the bar's, not a
+ * digit's. Generic to small italic numerals; nothing here is a building.
+ */
+const HALF_TUNING: Tuning = { scales: true, pitchPrior: 0.5, on: 0.5 }
 
 /** Saturation above which a pixel is coloured ink rather than grey line work. */
 const SATURATION_INK = 60
@@ -582,6 +595,8 @@ export function classifyDigit(cache: RenderCache, cell: Float64Array, w: number,
 // reading a half
 // ---------------------------------------------------------------------------
 
+export type HalfCandidate = { text: string; value: number; score: number }
+
 type HalfReading = {
   text: string
   value: number | null
@@ -591,9 +606,18 @@ type HalfReading = {
   /** Glyph height and horizontal centre, in the source's pixels, for judging whether two halves are set in one font. */
   height: number
   centreX: number
+  /**
+   * The other in-range readings the ink supports, best first, the winner
+   * included. Six-pixel digits are read at the edge of what a matcher can
+   * tell apart, so the reading is a short list rather than one number, and
+   * whoever holds independent evidence — a plan gap of a known width, an
+   * elevation the opening is drawn on — picks from the list rather than
+   * inheriting the matcher's coin toss.
+   */
+  candidates: HalfCandidate[]
 }
 
-const EMPTY_HALF: HalfReading = { text: '', value: null, confidence: 0, score: 0, height: 0, centreX: 0 }
+const EMPTY_HALF: HalfReading = { text: '', value: null, confidence: 0, score: 0, height: 0, centreX: 0, candidates: [] }
 
 /** Bilinear darkness at a continuous position in a grey crop, pixel centres at half-integers. */
 function darknessAt(g: Gray, x: number, y: number): number {
@@ -809,8 +833,27 @@ export function readHalf(cache: RenderCache, g: Gray, range: { min: number; max:
   candidates.sort((a, b) => b.score - a.score || a.narrow - b.narrow || a.text.localeCompare(b.text))
   const best = candidates[0]
   if (!best) return EMPTY_HALF
-  const geometry = { height: round6(bandH / UPSAMPLE), centreX: round6((left + right + 1) / 2 / UPSAMPLE - (up.width / UPSAMPLE - g.width) / 2) }
   const inRange = (v: number): boolean => v >= range.min && v <= range.max
+  // Every layout's text, and every single-cell runner-up of the two best
+  // layouts, scored as the mean of its cells; distinct in-range values only.
+  const pool = new Map<string, number>()
+  const offer = (text: string, score: number): void => {
+    const v = Number(text)
+    if (!/^\d+$/.test(text) || !inRange(v)) return
+    const key = String(v)
+    pool.set(key, Math.max(pool.get(key) ?? 0, round6(score)))
+  }
+  for (const c of candidates) offer(c.text, c.score)
+  for (const layout of candidates.slice(0, 2)) {
+    layout.cells.forEach((cell, i) => {
+      for (const alt of cell.alternatives) {
+        const text = layout.cells.map((c, j) => (j === i ? alt.char : c.char)).join('')
+        offer(text, (layout.score * layout.cells.length - cell.score + alt.score) / layout.cells.length)
+      }
+    })
+  }
+  const shortlist: HalfCandidate[] = [...pool].map(([key, score]) => ({ text: key, value: Number(key), score })).sort((a, b) => b.score - a.score || a.value - b.value).slice(0, 6)
+  const geometry = { height: round6(bandH / UPSAMPLE), centreX: round6((left + right + 1) / 2 / UPSAMPLE - (up.width / UPSAMPLE - g.width) / 2), candidates: shortlist }
   const value = Number(best.text)
   const confidence = round6(Math.min(...best.cells.map((c) => c.confidence)))
   if (inRange(value)) return { text: best.text, value, confidence, score: best.score, ...geometry }
@@ -925,8 +968,8 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
       for (let y = 0; y < h; y += 1) for (let x = 0; x < size; x += 1) data[y * size + x] = crop.data[(y0 + y) * size + x]
       return { width: size, height: h, data }
     }
-    const upper = splitTop > 0 ? readHalf(cache, half(0, splitTop - 1), WIDTH_RANGE) : EMPTY_HALF
-    const lower = splitBottom < size - 1 ? readHalf(cache, half(splitBottom + 1, size - 1), HEIGHT_RANGE) : EMPTY_HALF
+    const upper = splitTop > 0 ? readHalf(cache, half(0, splitTop - 1), WIDTH_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
+    const lower = splitBottom < size - 1 ? readHalf(cache, half(splitBottom + 1, size - 1), HEIGHT_RANGE, undefined, classifyDigit, HALF_TUNING) : EMPTY_HALF
     const complete = coherent(upper, lower, ring)
     // A ring with no bar is a circle, not this symbol — unless it reads as
     // one anyway, in which case the bar was lost to the rendering, not absent.
@@ -940,6 +983,8 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
       heightCm: complete ? lower.value : null,
       upperText: upper.text,
       lowerText: lower.text,
+      widthCandidates: upper.candidates,
+      heightCandidates: lower.candidates,
       confidence,
       box,
       why: `a ${2 * ring.r} px ring on the ${source.label} (${round6(ring.annulus * 100)} per cent of its circumference inked, interior ${round6(ring.interior * 100)} per cent), ${bar ? `split by a bar at row ${round6((bar.y0 + bar.y1) / 2)}` : 'with no bar found, split at its centre'}; read "${upper.text || '?'}" (match ${upper.score}, ${upper.height} px tall) over "${lower.text || '?'}" (match ${lower.score}, ${lower.height} px tall)${complete ? '' : ': not a coherent pair of numbers'}`,

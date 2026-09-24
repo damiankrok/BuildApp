@@ -67,6 +67,7 @@ async function main(): Promise<void> {
   process.stdout.write(`metric evidence: ${metrics.evidence.length} readings (${metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT').length} callouts), ${metrics.chains.length} chains, ${metrics.coordinateRegistrations.length} registrations (${metrics.contentHash.slice(0, 16)})\n`)
 
   const result = reconstructV2({
+    debug: process.env.V2_DEBUG ? (message) => process.stderr.write(`  · ${message}\n`) : undefined,
     label,
     slug,
     sourcePackageId: pkg.id,
@@ -99,7 +100,7 @@ async function main(): Promise<void> {
   await write('feature-quality.json', result.quality)
   await write('source-view-residuals.json', { candidateHash: result.candidate.contentHash, residuals: result.residuals })
   await write('repair-trace.json', result.repair)
-  await write('registrations.json', { ...result.registrations, plans: result.registrations.plans.map((p) => ({ frameId: p.frameId, assetId: p.assetId, storeyIndex: p.storeyIndex, mppX: p.mppX, mppY: p.mppY, originPx: p.originPx, why: p.why })), world: result.world })
+  await write('registrations.json', { ...result.registrations, plans: result.registrations.plans.map((p) => ({ frameId: p.frameId, assetId: p.assetId, storeyIndex: p.storeyIndex, mppX: p.mppX, mppY: p.mppY, originPx: p.originPx, wallPx: p.wallPx, why: p.why })), world: result.world })
   await write(`${slug}-hypotheses-v2.json`, result.hypotheses)
   await writeFile(join(outDir, `${slug}-model.json`), serializeModel(result.model), 'utf8')
   process.stdout.write(`  wrote ${slug}-model.json\n`)

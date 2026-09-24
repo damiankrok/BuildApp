@@ -2211,7 +2211,40 @@
   ],
   "openings": [
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.815893,
+        "evidenceId": "metric-callout-ring-9903866a53",
+        "heightCandidates": [
+          {
+            "cm": 290,
+            "score": 0.609084
+          },
+          {
+            "cm": 230,
+            "score": 0.598392
+          },
+          {
+            "cm": 240,
+            "score": 0.592363
+          },
+          {
+            "cm": 390,
+            "score": 0.563369
+          },
+          {
+            "cm": 296,
+            "score": 0.545986
+          },
+          {
+            "cm": 299,
+            "score": 0.542055
+          }
+        ],
+        "heightCm": 230,
+        "resolvedBy": "the elevation's 2.28 m picked the height reading 230 over 290",
+        "widthCm": 110
+      },
+      "confidence": 0.92,
       "elevation": {
         "confidence": 0.85,
         "contrast": 106,
@@ -2221,11 +2254,11 @@
       },
       "facade": "FRONT",
       "family": "WINDOW",
-      "headY": 2.326119,
+      "headY": 2.335119,
       "id": "opening-0-front-0-0",
       "interval": [
-        1.400578,
-        2.51047
+        1.405524,
+        2.505524
       ],
       "massId": "main",
       "mullions": [],
@@ -2242,28 +2275,60 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_CORROBORATED",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_CORROBORATED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 0.044119,
+      "sillY": 0.035119,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [],
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation",
-      "widthM": 1.109892
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation",
+      "widthM": 1.1
     },
     {
-      "confidence": 0.5,
+      "callout": {
+        "distanceM": 0.815893,
+        "evidenceId": "metric-callout-ring-b3de3b099a",
+        "heightCandidates": [
+          {
+            "cm": 210,
+            "score": 0.678919
+          },
+          {
+            "cm": 216,
+            "score": 0.642301
+          },
+          {
+            "cm": 219,
+            "score": 0.631463
+          },
+          {
+            "cm": 240,
+            "score": 0.578073
+          },
+          {
+            "cm": 270,
+            "score": 0.561027
+          },
+          {
+            "cm": 90,
+            "score": 0.112096
+          }
+        ],
+        "heightCm": 210,
+        "widthCm": 105
+      },
+      "confidence": 0.7,
       "facade": "FRONT",
       "family": "WINDOW",
       "headY": 2.1,
       "id": "opening-0-front-0-1",
       "interval": [
-        4.175308,
-        5.232348
+        4.178828,
+        5.228828
       ],
       "massId": "main",
       "mullions": [],
@@ -2280,37 +2345,68 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "ASSUMED_FOR_RENDERING",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
-      "unresolved": [
-        "sill and head (no callout read and no elevation shows this wall)"
-      ],
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
-      "widthM": 1.05704
+      "uncertaintyM": 0.03,
+      "unresolved": [],
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
+      "widthM": 1.05
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.880427,
+        "evidenceId": "metric-callout-ring-ee40483e37",
+        "heightCandidates": [
+          {
+            "cm": 290,
+            "score": 0.577426
+          },
+          {
+            "cm": 240,
+            "score": 0.569215
+          },
+          {
+            "cm": 230,
+            "score": 0.542672
+          },
+          {
+            "cm": 200,
+            "score": 0.53555
+          },
+          {
+            "cm": 296,
+            "score": 0.531124
+          },
+          {
+            "cm": 299,
+            "score": 0.519807
+          }
+        ],
+        "heightCm": 230,
+        "resolvedBy": "the elevation's 2.27 m picked the height reading 230 over 290",
+        "widthCm": 300
+      },
+      "confidence": 0.92,
       "elevation": {
-        "confidence": 0.82,
-        "contrast": 42,
+        "confidence": 0.815,
+        "contrast": 41.5,
         "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
-        "headY": 2.272648,
+        "headY": 2.272647,
         "sillY": 0
       },
       "facade": "EAST",
       "family": "MULTI_PANEL_GLAZING",
-      "headY": 2.272648,
+      "headY": 2.3,
       "id": "opening-0-east-1-0",
       "interval": [
-        9.684019,
-        12.701371
+        9.692695,
+        12.692695
       ],
       "massId": "main",
       "mullions": [],
@@ -2327,21 +2423,53 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_CORROBORATED",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_CORROBORATED",
+        "width": "SOURCE_EXACT"
       },
       "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [],
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation",
-      "widthM": 3.017352
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation",
+      "widthM": 3
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.750634,
+        "evidenceId": "metric-callout-ring-bd21082add",
+        "heightCandidates": [
+          {
+            "cm": 230,
+            "score": 0.563008
+          },
+          {
+            "cm": 240,
+            "score": 0.55103
+          },
+          {
+            "cm": 290,
+            "score": 0.545555
+          },
+          {
+            "cm": 239,
+            "score": 0.543166
+          },
+          {
+            "cm": 235,
+            "score": 0.51177
+          },
+          {
+            "cm": 330,
+            "score": 0.476159
+          }
+        ],
+        "heightCm": 230,
+        "widthCm": 470
+      },
+      "confidence": 0.85,
       "elevation": {
         "confidence": 0.85,
         "contrast": 143,
@@ -2351,11 +2479,11 @@
       },
       "facade": "REAR",
       "family": "MULTI_PANEL_GLAZING",
-      "headY": 1.615926,
+      "headY": 2.3,
       "id": "opening-0-rear-2-0",
       "interval": [
-        2.272636,
-        6.950038
+        2.261337,
+        6.961337
       ],
       "massId": "main",
       "mullions": [],
@@ -2372,28 +2500,62 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 0.050512,
+      "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
-      "unresolved": [],
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation",
-      "widthM": 4.677402
+      "uncertaintyM": 0.03,
+      "unresolved": [
+        "the elevation reads 1.57 m tall (0.05..1.62) against the printed 2.30; the printed height stands"
+      ],
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation",
+      "widthM": 4.7
     },
     {
-      "confidence": 0.5,
+      "callout": {
+        "distanceM": 0.799775,
+        "evidenceId": "metric-callout-ring-ad248f8f2b",
+        "heightCandidates": [
+          {
+            "cm": 230,
+            "score": 0.536622
+          },
+          {
+            "cm": 290,
+            "score": 0.535082
+          },
+          {
+            "cm": 240,
+            "score": 0.526557
+          },
+          {
+            "cm": 236,
+            "score": 0.483153
+          },
+          {
+            "cm": 239,
+            "score": 0.48145
+          },
+          {
+            "cm": 237,
+            "score": 0.469392
+          }
+        ],
+        "heightCm": 230,
+        "widthCm": 90
+      },
+      "confidence": 0.7,
       "facade": "WEST",
       "family": "DOOR",
-      "headY": 2.1,
+      "headY": 2.3,
       "id": "opening-0-west-3-0",
       "interval": [
-        9.022319,
-        9.922231
+        9.022275,
+        9.922275
       ],
       "massId": "main",
       "mullions": [],
@@ -2410,30 +2572,62 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "ASSUMED_FOR_RENDERING",
+        "head": "UNRESOLVED",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "the printed height reads 230 or 290 alike, and no elevation shows this wall"
       ],
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
-      "widthM": 0.899912
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation",
+      "widthM": 0.9
     },
     {
-      "confidence": 0.5,
+      "callout": {
+        "distanceM": 0.799884,
+        "evidenceId": "metric-callout-ring-f5c321c11a",
+        "heightCandidates": [
+          {
+            "cm": 140,
+            "score": 0.691699
+          },
+          {
+            "cm": 100,
+            "score": 0.669636
+          },
+          {
+            "cm": 110,
+            "score": 0.66464
+          },
+          {
+            "cm": 149,
+            "score": 0.637803
+          },
+          {
+            "cm": 146,
+            "score": 0.630079
+          },
+          {
+            "cm": 107,
+            "score": 0.500286
+          }
+        ],
+        "heightCm": 140,
+        "widthCm": 140
+      },
+      "confidence": 0.7,
       "facade": "WEST",
-      "family": "GLAZED_DOOR",
-      "headY": 2.1,
+      "family": "WINDOW",
+      "headY": 2.2,
       "id": "opening-0-west-3-1",
       "interval": [
-        6.799007,
-        8.201811
+        6.800409,
+        8.200409
       ],
       "massId": "main",
       "mullions": [],
@@ -2450,37 +2644,70 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "ASSUMED_FOR_RENDERING",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
         "sill": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 0,
+      "sillY": 0.8,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "sill height (no elevation reading; a common head is assumed)"
       ],
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
-      "widthM": 1.402804
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation",
+      "widthM": 1.4
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.771789,
+        "evidenceId": "metric-callout-ring-aba66e11a5",
+        "heightCandidates": [
+          {
+            "cm": 320,
+            "score": 0.539387
+          },
+          {
+            "cm": 370,
+            "score": 0.522935
+          },
+          {
+            "cm": 329,
+            "score": 0.491932
+          },
+          {
+            "cm": 120,
+            "score": 0.484325
+          },
+          {
+            "cm": 326,
+            "score": 0.475653
+          },
+          {
+            "cm": 330,
+            "score": 0.445265
+          }
+        ],
+        "heightCm": 320,
+        "widthCm": 270
+      },
+      "confidence": 0.85,
       "elevation": {
         "confidence": 0.85,
         "contrast": 102,
         "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-        "headY": 5.371422,
+        "headY": 5.354569,
         "sillY": 4.815273
       },
       "facade": "FRONT",
-      "family": "WINDOW",
-      "headY": 5.371422,
+      "family": "MULTI_PANEL_GLAZING",
+      "headFarY": 3.994431,
+      "headY": 6.26,
       "id": "opening-1-front-4-0",
       "interval": [
-        3.936877,
-        6.613953
+        3.925415,
+        6.625415
       ],
       "massId": "main",
       "mullions": [],
@@ -2494,39 +2721,66 @@
         }
       },
       "planeAt": 0.991283,
-      "profile": "RECTANGULAR",
+      "profile": "RAKED_SINGLE",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 4.815273,
+      "sillY": 3.06,
       "storeyIndex": 1,
-      "uncertaintyM": 0.06,
-      "unresolved": [],
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation",
-      "widthM": 2.677076
+      "tallEdge": "LOW",
+      "uncertaintyM": 0.03,
+      "unresolved": [
+        "the elevation reads 0.54 m tall (4.82..5.35) against the printed 3.20; the printed height stands"
+      ],
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99",
+      "widthM": 2.7
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.71917,
+        "evidenceId": "metric-callout-ring-e90f122d42",
+        "heightCandidates": [
+          {
+            "cm": 304,
+            "score": 0.580606
+          },
+          {
+            "cm": 400,
+            "score": 0.565022
+          },
+          {
+            "cm": 300,
+            "score": 0.558752
+          },
+          {
+            "cm": 40,
+            "score": 0.177504
+          }
+        ],
+        "heightCm": 304,
+        "widthCm": 234
+      },
+      "confidence": 0.85,
       "elevation": {
         "confidence": 0.85,
-        "contrast": 45,
+        "contrast": 73,
         "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-        "headY": 6.319753,
-        "sillY": 5.563483
+        "headY": 5.108357,
+        "sillY": 3.944814
       },
       "facade": "REAR",
-      "family": "WINDOW",
-      "headFarY": 4.381739,
-      "headY": 6.319753,
+      "family": "MULTI_PANEL_GLAZING",
+      "headFarY": 4.136507,
+      "headY": 6.1,
       "id": "opening-1-rear-6-0",
       "interval": [
-        0.971096,
-        3.280731
+        0.955913,
+        3.295913
       ],
       "massId": "main",
       "mullions": [],
@@ -2543,38 +2797,71 @@
       "profile": "RAKED_SINGLE",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 5.563483,
+      "sillY": 3.06,
       "storeyIndex": 1,
       "tallEdge": "HIGH",
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [
-        "the raked head would meet the sill: the opening is narrower or lower than read"
+        "the elevation reads 1.16 m tall (3.94..5.11) against the printed 3.04; the printed height stands"
       ],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38",
-      "widthM": 2.309635
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14",
+      "widthM": 2.34
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.718691,
+        "evidenceId": "metric-callout-ring-ce328e2939",
+        "heightCandidates": [
+          {
+            "cm": 303,
+            "score": 0.53113
+          },
+          {
+            "cm": 309,
+            "score": 0.530163
+          },
+          {
+            "cm": 302,
+            "score": 0.516249
+          },
+          {
+            "cm": 307,
+            "score": 0.515205
+          },
+          {
+            "cm": 363,
+            "score": 0.486083
+          },
+          {
+            "cm": 393,
+            "score": 0.471637
+          }
+        ],
+        "heightCm": 303,
+        "widthCm": 234
+      },
+      "confidence": 0.85,
       "elevation": {
         "confidence": 0.85,
-        "contrast": 65,
+        "contrast": 66,
         "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-        "headY": 5.110751,
-        "sillY": 4.370257
+        "headY": 5.110733,
+        "sillY": 4.353451
       },
       "facade": "REAR",
-      "family": "WINDOW",
-      "headY": 5.110751,
+      "family": "MULTI_PANEL_GLAZING",
+      "headFarY": 4.126507,
+      "headY": 6.09,
       "id": "opening-1-rear-6-1",
       "interval": [
-        4.593023,
-        6.902658
+        4.577841,
+        6.917841
       ],
       "massId": "main",
       "mullions": [],
@@ -2588,31 +2875,66 @@
         }
       },
       "planeAt": 13.601283,
-      "profile": "RECTANGULAR",
+      "profile": "RAKED_SINGLE",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 4.370257,
+      "sillY": 3.06,
       "storeyIndex": 1,
-      "uncertaintyM": 0.06,
-      "unresolved": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation",
-      "widthM": 2.309635
+      "tallEdge": "LOW",
+      "uncertaintyM": 0.03,
+      "unresolved": [
+        "the elevation reads 0.76 m tall (4.35..5.11) against the printed 3.03; the printed height stands"
+      ],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13",
+      "widthM": 2.34
     },
     {
-      "confidence": 0.5,
+      "callout": {
+        "distanceM": 0.60775,
+        "evidenceId": "metric-callout-ring-6d3a713075",
+        "heightCandidates": [
+          {
+            "cm": 275,
+            "score": 0.598784
+          },
+          {
+            "cm": 225,
+            "score": 0.597893
+          },
+          {
+            "cm": 224,
+            "score": 0.57552
+          },
+          {
+            "cm": 276,
+            "score": 0.572125
+          },
+          {
+            "cm": 229,
+            "score": 0.559308
+          },
+          {
+            "cm": 270,
+            "score": 0.553878
+          }
+        ],
+        "heightCm": 275,
+        "widthCm": 275
+      },
+      "confidence": 0.7,
       "facade": "FRONT",
       "family": "GARAGE_DOOR",
-      "headY": 2.1,
+      "headY": 2.75,
       "id": "opening-0-front-8-0",
       "interval": [
-        8.562024,
-        11.283902
+        8.547963,
+        11.297963
       ],
       "massId": "attached-0",
       "mullions": [],
@@ -2629,23 +2951,55 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "ASSUMED_FOR_RENDERING",
+        "head": "UNRESOLVED",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "ASSUMED_FOR_RENDERING",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
       "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
+      "uncertaintyM": 0.03,
       "unresolved": [
-        "sill and head (no callout read and no elevation shows this wall)"
+        "the printed height reads 275 or 225 alike, and no elevation shows this wall"
       ],
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation",
-      "widthM": 2.721878
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation",
+      "widthM": 2.75
     },
     {
-      "confidence": 0.65,
+      "callout": {
+        "distanceM": 0.792333,
+        "evidenceId": "metric-callout-ring-af8cd95252",
+        "heightCandidates": [
+          {
+            "cm": 210,
+            "score": 0.653905
+          },
+          {
+            "cm": 216,
+            "score": 0.617025
+          },
+          {
+            "cm": 240,
+            "score": 0.611877
+          },
+          {
+            "cm": 219,
+            "score": 0.608024
+          },
+          {
+            "cm": 270,
+            "score": 0.561191
+          },
+          {
+            "cm": 90,
+            "score": 0.107305
+          }
+        ],
+        "heightCm": 210,
+        "widthCm": 100
+      },
+      "confidence": 0.85,
       "elevation": {
         "confidence": 0.82,
         "contrast": 42,
@@ -2655,11 +3009,11 @@
       },
       "facade": "REAR",
       "family": "WINDOW",
-      "headY": 1.261065,
+      "headY": 2.1,
       "id": "opening-0-rear-10-0",
       "interval": [
-        9.90975,
-        10.913938
+        9.911844,
+        10.911844
       ],
       "massId": "attached-0",
       "mullions": [],
@@ -2676,18 +3030,20 @@
       "profile": "RECTANGULAR",
       "provenance": {
         "family": "VISUAL_SEMANTIC",
-        "head": "IMAGE_METRIC_REGISTERED",
+        "head": "SOURCE_EXACT",
         "interval": "SOURCE_DERIVED",
         "profile": "SOURCE_DERIVED",
-        "sill": "IMAGE_METRIC_REGISTERED",
-        "width": "SOURCE_DERIVED"
+        "sill": "SOURCE_DERIVED",
+        "width": "SOURCE_EXACT"
       },
-      "sillY": 0.272268,
+      "sillY": 0,
       "storeyIndex": 0,
-      "uncertaintyM": 0.06,
-      "unresolved": [],
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation",
-      "widthM": 1.004188
+      "uncertaintyM": 0.03,
+      "unresolved": [
+        "the elevation reads 0.99 m tall (0.27..1.26) against the printed 2.10; the printed height stands"
+      ],
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation",
+      "widthM": 1
     }
   ],
   "portalHeads": [
@@ -3094,6 +3450,40 @@
       "widthM": 0.612535,
       "yFrom": 5.036444,
       "yTo": 5.682089
+    },
+    {
+      "alongFrom": 7.184643,
+      "alongTo": 7.813733,
+      "confidence": 0.721382,
+      "featureId": "feat-rooflight-left-1",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "id": "rooflight-left-1",
+      "lengthM": 1.0302,
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "slope": "LOW",
+      "slopeFrom": 0.45803,
+      "slopeTo": 1.247209,
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)",
+      "widthM": 0.62909,
+      "yFrom": 5.019889,
+      "yTo": 5.682089
+    },
+    {
+      "alongFrom": 5.169164,
+      "alongTo": 5.790135,
+      "confidence": 0.75,
+      "featureId": "feat-rooflight-right-0",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "id": "rooflight-right-0",
+      "lengthM": 1.018278,
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "slope": "HIGH",
+      "slopeFrom": 7.470258,
+      "slopeTo": 6.690212,
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)",
+      "widthM": 0.620971,
+      "yFrom": 4.996152,
+      "yTo": 5.650689
     }
   ],
   "sharedDoors": [

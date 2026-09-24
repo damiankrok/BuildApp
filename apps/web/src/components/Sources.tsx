@@ -4,6 +4,7 @@ import { SourceObservationGraphSchema, errorsOnly, graphHashIsIntact, observatio
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import sample from '../sample-observations.json'
 import { Reconstruction } from './Reconstruction.js'
+import { SourceViewComparison } from './SourceViewComparison.js'
 
 /**
  * The Sources / Observations surface.
@@ -139,6 +140,7 @@ export function Sources(): JSX.Element {
   return (
     <div className="sources" data-testid="sources">
       <Reconstruction />
+      <SourceViewComparison />
       <div className="panel-title">
         Sources / Observations
         <span className="readonly" data-testid="sources-readonly">

@@ -233,7 +233,7 @@ export type RooflightReading = {
  * chimney is darker than the covering and never qualifies; the caller also
  * removes patches that overlap a chimney's plan position.
  */
-export function readRooflights(view: ElevationFrameV2, raster: Raster, roof: { eaveY: number; ridgeY: number; pitchDeg: number; eaveAlong: number; ridgeAlong: number; slope: 'LOW' | 'HIGH' }, walledAlong: { from: number; to: number }): RooflightReading[] {
+export function readRooflights(view: ElevationFrameV2, raster: Raster, roof: { eaveY: number; ridgeY: number; pitchDeg: number; eaveAlong: number; ridgeAlong: number; slope: 'LOW' | 'HIGH' }, walledAlong: { from: number; to: number }, onDebug?: (message: string) => void): RooflightReading[] {
   const yEave = view.pyOf(roof.eaveY + 0.15)
   const yRidge = view.pyOf(roof.ridgeY - 0.15)
   const top = Math.round(Math.min(yEave, yRidge))
@@ -249,11 +249,16 @@ export function readRooflights(view: ElevationFrameV2, raster: Raster, roof: { e
   const lumas: number[] = []
   for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) lumas.push(lumaAt(raster, left + x, top + y))
   const roofMedian = median(lumas)
-  const threshold = roofMedian + 30
+  const out: RooflightReading[] = []
+  // Glass reflecting the sky is far lighter than the covering, but how far
+  // depends on the render: the patch is taken at the lowest step above the
+  // covering at which it comes out as a filled rectangle on its own, rather
+  // than merged with a lit strip of roof beside it.
+  for (const step of [30, 50, 70]) {
+  const threshold = roofMedian + step
   const mask = new Uint8Array(W * H)
   for (let y = 0; y < H; y += 1) for (let x = 0; x < W; x += 1) mask[y * W + x] = lumaAt(raster, left + x, top + y) > threshold ? 1 : 0
   const seen = new Uint8Array(W * H)
-  const out: RooflightReading[] = []
   for (let y = 0; y < H; y += 1) {
     for (let x = 0; x < W; x += 1) {
       if (seen[y * W + x] || !mask[y * W + x]) continue
@@ -282,8 +287,13 @@ export function readRooflights(view: ElevationFrameV2, raster: Raster, roof: { e
       const wM = (x1 - x0 + 1) * mpp
       const hM = (y1 - y0 + 1) * view.registration.metresPerPixelV
       const fill = n / ((x1 - x0 + 1) * (y1 - y0 + 1))
-      if (wM < 0.45 || wM > 1.8 || hM < 0.35 || hM > 1.8 || fill < 0.55) continue
+      if (n >= 12 && step === 30) onDebug?.(`${view.side} patch px ${left + x0}..${left + x1} × ${top + y0}..${top + y1}: ${wM.toFixed(2)} × ${hM.toFixed(2)} m, fill ${fill.toFixed(2)}, along ${view.alongOf(left + x0).toFixed(2)}..${view.alongOf(left + x1 + 1).toFixed(2)}, y ${view.yOf(top + y1 + 1).toFixed(2)}..${view.yOf(top + y0).toFixed(2)}${x0 === 0 || y0 === 0 || x1 === W - 1 || y1 === H - 1 ? ' (touches the region edge)' : ''}`)
+      if (wM < 0.45 || wM > 1.8 || hM < 0.35 || hM > 1.8 || fill < 0.8) continue
       if (x0 === 0 || y0 === 0 || x1 === W - 1 || y1 === H - 1) continue
+      // Already found at a lower step: the same glass.
+      const a0px = view.alongOf(left + x0)
+      const a1px = view.alongOf(left + x1 + 1)
+      if (out.some((r) => Math.min(r.alongTo, Math.max(a0px, a1px)) - Math.max(r.alongFrom, Math.min(a0px, a1px)) > 0.1)) continue
       const a0 = view.alongOf(left + x0)
       const a1 = view.alongOf(left + x1 + 1)
       const yLow = view.yOf(top + y1 + 1)
@@ -307,7 +317,9 @@ export function readRooflights(view: ElevationFrameV2, raster: Raster, roof: { e
       })
     }
   }
-  return out.sort((a, b) => a.alongFrom - b.alongFrom)
+  }
+  out.sort((a, b) => a.alongFrom - b.alongFrom)
+  return out.map((r, i) => ({ ...r, id: `rooflight-${view.side.toLowerCase()}-${i}` }))
 }
 
 const median = (xs: readonly number[]): number => {

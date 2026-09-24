@@ -1,13 +1,13 @@
 {
-  "contentHash": "0b414e957cfe8bc75f7a87feb50d760a784b53e1194b24d784d931205a2ed4a4",
+  "contentHash": "3530eef866c2ab531308552c1fdc8868a36f9aa7d66025513f5e10f11daa2010",
   "contradictions": [],
-  "hypothesisSetHash": "740e003a900924addf16b9d79d43769f8a2c0908d4d48250283866401ddb60ea",
-  "hypothesisSetId": "hypotheses-v2-740e003a900924ad",
-  "id": "candidate-marcowki-0b414e957cfe8bc7",
+  "hypothesisSetHash": "a0794fd8db1b3b29b6f88589a2be6487d45bf17a112316202b512b0f9460364b",
+  "hypothesisSetId": "hypotheses-v2-a0794fd8db1b3b29",
+  "id": "candidate-marcowki-3530eef866c2ab53",
   "label": "Marcówki (auto v2)",
-  "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
-  "metricEvidenceId": "metrics-marcowki-3737dc29d37cee61",
-  "modelHash": "757b7130c58a2dbc228c4195c1370097ae20f06e9cb5aaaf45b15375e03cabfb",
+  "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+  "metricEvidenceId": "metrics-marcowki-5f12247b7585701f",
+  "modelHash": "64618ed5c38f921e9fe79ba9bbf32695467015bdf8dfc0fbd80cf05def73cafd",
   "modelId": "m-auto-v2-marcowki",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
@@ -2694,14 +2694,68 @@
       "type": "setEvidence"
     },
     {
-      "height": 2.282,
+      "cut": "NORMAL_TO_ROOF",
+      "footprint": {
+        "maxX": 1.247209,
+        "maxZ": 7.813733,
+        "minX": 0.45803,
+        "minZ": 7.184643
+      },
+      "id": "rooflight-left-1",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main",
+      "type": "cutRoofOpening"
+    },
+    {
+      "id": "rooflight-left-1-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-left-1",
+      "type": "placeRooflight"
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)",
+        "status": "VISUAL_INFERRED"
+      },
+      "targetId": "rooflight-left-1",
+      "type": "setEvidence"
+    },
+    {
+      "cut": "NORMAL_TO_ROOF",
+      "footprint": {
+        "maxX": 7.470258,
+        "maxZ": 5.790135,
+        "minX": 6.690212,
+        "minZ": 5.169164
+      },
+      "id": "rooflight-right-0",
+      "kind": "ROOFLIGHT",
+      "roofId": "roof-main",
+      "type": "cutRoofOpening"
+    },
+    {
+      "id": "rooflight-right-0-unit",
+      "materialId": "mat-glass",
+      "roofOpeningId": "rooflight-right-0",
+      "type": "placeRooflight"
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)",
+        "status": "VISUAL_INFERRED"
+      },
+      "targetId": "rooflight-right-0",
+      "type": "setEvidence"
+    },
+    {
+      "height": 2.3,
       "id": "opening-0-front-0-0",
       "kind": "WINDOW",
-      "offset": 1.400578,
-      "sill": 0.044119,
+      "offset": 1.405524,
+      "sill": 0.035119,
       "type": "cutOpening",
       "wallId": "ring-main-0-w0",
-      "width": 1.109892
+      "width": 1.1
     },
     {
       "id": "opening-0-front-0-0-unit",
@@ -2711,16 +2765,16 @@
     },
     {
       "evidence": {
-        "interpretation": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation",
+        "interpretation": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_CORROBORATED",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_CORROBORATED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-front-0-0",
       "type": "setEvidence"
@@ -2729,11 +2783,11 @@
       "height": 2.1,
       "id": "opening-0-front-0-1",
       "kind": "WINDOW",
-      "offset": 4.175308,
+      "offset": 4.178828,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-0-w0",
-      "width": 1.05704
+      "width": 1.05
     },
     {
       "id": "opening-0-front-0-1-unit",
@@ -2743,29 +2797,29 @@
     },
     {
       "evidence": {
-        "interpretation": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "interpretation": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "ASSUMED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "ASSUMED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "ASSUMED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-front-0-1",
       "type": "setEvidence"
     },
     {
-      "height": 2.272648,
+      "height": 2.3,
       "id": "opening-0-east-1-0",
       "kind": "WINDOW",
-      "offset": 8.692736,
+      "offset": 8.701412,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-0-w1",
-      "width": 3.017352
+      "width": 3
     },
     {
       "id": "opening-0-east-1-0-unit",
@@ -2775,29 +2829,29 @@
     },
     {
       "evidence": {
-        "interpretation": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation",
+        "interpretation": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_CORROBORATED",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_CORROBORATED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-east-1-0",
       "type": "setEvidence"
     },
     {
-      "height": 1.565414,
+      "height": 2.3,
       "id": "opening-0-rear-2-0",
       "kind": "WINDOW",
-      "offset": 0.949962,
-      "sill": 0.050512,
+      "offset": 0.938663,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-0-w2",
-      "width": 4.677402
+      "width": 4.7
     },
     {
       "id": "opening-0-rear-2-0-unit",
@@ -2807,29 +2861,29 @@
     },
     {
       "evidence": {
-        "interpretation": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation",
+        "interpretation": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-rear-2-0",
       "type": "setEvidence"
     },
     {
-      "height": 2.1,
+      "height": 2.3,
       "id": "opening-0-west-3-0",
       "kind": "DOOR",
-      "offset": 3.679052,
+      "offset": 3.679008,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-0-w3",
-      "width": 0.899912
+      "width": 0.9
     },
     {
       "id": "opening-0-west-3-0-leaf",
@@ -2839,72 +2893,65 @@
     },
     {
       "evidence": {
-        "interpretation": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+        "interpretation": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "ASSUMED",
+          "height": "UNRESOLVED",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "ASSUMED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "ASSUMED"
+        "status": "SOURCE_DERIVED"
       },
       "targetId": "opening-0-west-3-0",
       "type": "setEvidence"
     },
     {
-      "height": 2.1,
+      "height": 1.4,
       "id": "opening-0-west-3-1",
-      "kind": "DOOR",
-      "offset": 5.399472,
-      "sill": 0,
+      "kind": "WINDOW",
+      "offset": 5.400874,
+      "sill": 0.8,
       "type": "cutOpening",
       "wallId": "ring-main-0-w3",
-      "width": 1.402804
+      "width": 1.4
     },
     {
-      "assembly": {
-        "mullionWidth": 0.04,
-        "panels": [
-          {
-            "fraction": 1,
-            "glazing": "FULL",
-            "hinge": "LEFT",
-            "kind": "LEAF"
-          }
-        ]
-      },
-      "id": "opening-0-west-3-1-leaf",
+      "id": "opening-0-west-3-1-unit",
       "materialId": "mat-glass",
       "openingId": "opening-0-west-3-1",
-      "type": "placeDoor"
+      "type": "placeWindow"
     },
     {
       "evidence": {
-        "interpretation": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+        "interpretation": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "ASSUMED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
           "sill": "ASSUMED",
-          "width": "SOURCE_DERIVED"
+          "width": "SOURCE_EXACT"
         },
-        "status": "ASSUMED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-west-3-1",
       "type": "setEvidence"
     },
     {
-      "height": 0.556149,
+      "head": {
+        "heightFar": 0.934431,
+        "kind": "RAKED"
+      },
+      "height": 3.2,
       "id": "opening-1-front-4-0",
       "kind": "WINDOW",
-      "offset": 3.936877,
-      "sill": 1.755273,
+      "offset": 3.925415,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-1-w0",
-      "width": 2.677076
+      "width": 2.7
     },
     {
       "id": "opening-1-front-4-0-unit",
@@ -2914,33 +2961,33 @@
     },
     {
       "evidence": {
-        "interpretation": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation",
+        "interpretation": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-1-front-4-0",
       "type": "setEvidence"
     },
     {
       "head": {
-        "heightFar": 0.3,
+        "heightFar": 1.076507,
         "kind": "RAKED"
       },
-      "height": 0.75627,
+      "height": 3.04,
       "id": "opening-1-rear-6-0",
       "kind": "WINDOW",
-      "offset": 4.619269,
-      "sill": 2.503483,
+      "offset": 4.604087,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-1-w2",
-      "width": 2.309635
+      "width": 2.34
     },
     {
       "id": "opening-1-rear-6-0-unit",
@@ -2950,29 +2997,33 @@
     },
     {
       "evidence": {
-        "interpretation": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38",
+        "interpretation": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-1-rear-6-0",
       "type": "setEvidence"
     },
     {
-      "height": 0.740494,
+      "head": {
+        "heightFar": 3.03,
+        "kind": "RAKED"
+      },
+      "height": 1.066507,
       "id": "opening-1-rear-6-1",
       "kind": "WINDOW",
-      "offset": 0.997342,
-      "sill": 1.310257,
+      "offset": 0.982159,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-main-1-w2",
-      "width": 2.309635
+      "width": 2.34
     },
     {
       "id": "opening-1-rear-6-1-unit",
@@ -2982,29 +3033,29 @@
     },
     {
       "evidence": {
-        "interpretation": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation",
+        "interpretation": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-1-rear-6-1",
       "type": "setEvidence"
     },
     {
-      "height": 2.1,
+      "height": 2.75,
       "id": "opening-0-front-8-0",
       "kind": "DOOR",
-      "offset": 0.662024,
+      "offset": 0.647963,
       "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-attached-0-0-w0",
-      "width": 2.721878
+      "width": 2.75
     },
     {
       "assembly": {
@@ -3022,29 +3073,29 @@
     },
     {
       "evidence": {
-        "interpretation": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation",
+        "interpretation": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "ASSUMED",
+          "height": "UNRESOLVED",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "ASSUMED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "ASSUMED"
+        "status": "SOURCE_DERIVED"
       },
       "targetId": "opening-0-front-8-0",
       "type": "setEvidence"
     },
     {
-      "height": 0.988797,
+      "height": 2.1,
       "id": "opening-0-rear-10-0",
       "kind": "WINDOW",
-      "offset": 1.136062,
-      "sill": 0.272268,
+      "offset": 1.138156,
+      "sill": 0,
       "type": "cutOpening",
       "wallId": "ring-attached-0-0-w2",
-      "width": 1.004188
+      "width": 1
     },
     {
       "id": "opening-0-rear-10-0-unit",
@@ -3054,16 +3105,16 @@
     },
     {
       "evidence": {
-        "interpretation": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation",
+        "interpretation": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation",
         "properties": {
           "head": "SOURCE_DERIVED",
-          "height": "VISUAL_INFERRED",
+          "height": "SOURCE_EXACT",
           "kind": "VISUAL_INFERRED",
           "offset": "SOURCE_DERIVED",
-          "sill": "VISUAL_INFERRED",
-          "width": "SOURCE_DERIVED"
+          "sill": "SOURCE_DERIVED",
+          "width": "SOURCE_EXACT"
         },
-        "status": "SOURCE_DERIVED"
+        "status": "SOURCE_CORROBORATED"
       },
       "targetId": "opening-0-rear-10-0",
       "type": "setEvidence"
@@ -3172,11 +3223,11 @@
   ],
   "quantities": [],
   "residuals": {
-    "hard": 6,
-    "metricMaxM": 2.202403,
-    "metricRmsM": 0.604457,
-    "soft": 93,
-    "unresolved": 29
+    "hard": 15,
+    "metricMaxM": 1.755273,
+    "metricRmsM": 0.586296,
+    "soft": 86,
+    "unresolved": 34
   },
   "schema": "buildapp.reconstruction-candidate",
   "schemaVersion": "1.1.0",
@@ -3260,7 +3311,7 @@
       "what": "partitions, doors and rooms"
     },
     {
-      "detail": "11 facade openings (0 with a printed callout, 7 read on an elevation, 1 raked) and 1 doorway between bodies",
+      "detail": "11 facade openings (11 with a printed callout, 7 read on an elevation, 3 raked) and 1 doorway between bodies",
       "index": 8,
       "inputs": 8,
       "method": "DISCRETE_SELECTION",
@@ -3278,11 +3329,11 @@
       "what": "section registered by its wall columns"
     },
     {
-      "detail": "1 attached roof (1 from the section), 2 chimneys, 1 rooflight",
+      "detail": "1 attached roof (1 from the section), 2 chimneys, 3 rooflights",
       "index": 10,
       "inputs": 4,
       "method": "DISCRETE_SELECTION",
-      "outputs": 4,
+      "outputs": 6,
       "stage": "roof-details",
       "what": "attached roofs, chimneys, rooflights"
     },
@@ -3305,26 +3356,26 @@
       "what": "perspective cameras"
     },
     {
-      "detail": "30 residuals, 5 outside tolerance after 1 repair round (0 applied, 0 refused)",
+      "detail": "28 residuals, 9 outside tolerance after 1 repair round (0 applied, 9 refused)",
       "index": 13,
-      "inputs": 30,
+      "inputs": 28,
       "method": "DIRECT",
-      "outputs": 30,
+      "outputs": 28,
       "stage": "verification",
       "what": "the model projected into the registered views"
     },
     {
-      "detail": "FACADE_ASSEMBLY L1:2, MASS L2:2, INTERIOR_WALL L1:29/L0:2, ROOM L1:10/L2:2, BALCONY L2:2/L0:2, CAMERA L1:3, CHIMNEY L2:2, SURFACE_REGION L0:1, LEVEL L2:2, INTERIOR_DOOR L1:9, OPENING L2:7/L1:5, FACADE_MEMBER L2:1, RAILING L2:2, RECESS L2:4, RETURN_WALL L1:8, ATTACHED_ROOF L2:1, ROOF L2:1, ROOFLIGHT L1:1, STAIR L2:1, ROOF_MEMBER L1:2",
+      "detail": "FACADE_ASSEMBLY L1:2, MASS L2:2, INTERIOR_WALL L1:29/L0:2, ROOM L1:10/L2:2, BALCONY L2:2/L0:2, CAMERA L1:3, CHIMNEY L2:2, SURFACE_REGION L0:1, LEVEL L2:2, INTERIOR_DOOR L1:9, OPENING L2:11/L1:1, FACADE_MEMBER L2:1, RAILING L2:2, RECESS L2:4, RETURN_WALL L1:8, ATTACHED_ROOF L2:1, ROOF L2:1, ROOFLIGHT L1:3, STAIR L2:1, ROOF_MEMBER L1:2",
       "index": 14,
-      "inputs": 101,
+      "inputs": 103,
       "method": "DIRECT",
-      "outputs": 101,
+      "outputs": 103,
       "stage": "quality",
       "what": "per-feature quality"
     }
   ],
-  "structuralLayoutHash": "ec7456c4d85138e1d8af251d69a76b6808e0c2f7797193331387566cfbae5ce4",
-  "structuralLayoutId": "layout-marcowki-ec7456c4d85138e1",
+  "structuralLayoutHash": "899f9449c27d0b4911887151ea431d9ae62c777ec62c7f2a900d7630974450e0",
+  "structuralLayoutId": "layout-marcowki-899f9449c27d0b49",
   "structuralStatus": "STRUCTURAL_LAYOUT_ACCEPTED",
   "traces": [
     {
@@ -4175,12 +4226,48 @@
     },
     {
       "evidenceIds": [],
+      "hypothesisId": "hyp-rooflight-left-1",
+      "kind": "roofOpenings",
+      "objectId": "rooflight-left-1",
+      "observationIds": [],
+      "rejected": [],
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)"
+    },
+    {
+      "evidenceIds": [],
+      "hypothesisId": "hyp-rooflight-left-1",
+      "kind": "rooflights",
+      "objectId": "rooflight-left-1-unit",
+      "observationIds": [],
+      "rejected": [],
+      "why": "a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)"
+    },
+    {
+      "evidenceIds": [],
+      "hypothesisId": "hyp-rooflight-right-0",
+      "kind": "roofOpenings",
+      "objectId": "rooflight-right-0",
+      "observationIds": [],
+      "rejected": [],
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)"
+    },
+    {
+      "evidenceIds": [],
+      "hypothesisId": "hyp-rooflight-right-0",
+      "kind": "rooflights",
+      "objectId": "rooflight-right-0-unit",
+      "observationIds": [],
+      "rejected": [],
+      "why": "a 0.62 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the right render (100 % filled)"
+    },
+    {
+      "evidenceIds": [],
       "hypothesisId": "hyp-opening-0-front-0-0",
       "kind": "openings",
       "objectId": "opening-0-front-0-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4189,7 +4276,7 @@
       "objectId": "opening-0-front-0-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+      "why": "a 1.11 m gap in the front wall of main on storey 0, printed 110/230, 2.28 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4198,7 +4285,7 @@
       "objectId": "opening-0-front-0-1",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4207,7 +4294,7 @@
       "objectId": "opening-0-front-0-1-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.06 m gap in the front wall of main on storey 0, printed 105/210, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4216,7 +4303,7 @@
       "objectId": "opening-0-east-1-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4225,7 +4312,7 @@
       "objectId": "opening-0-east-1-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+      "why": "a 3.02 m gap in the east wall of main on storey 0, printed 300/230, 2.27 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4234,7 +4321,7 @@
       "objectId": "opening-0-rear-2-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4243,7 +4330,7 @@
       "objectId": "opening-0-rear-2-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4252,7 +4339,7 @@
       "objectId": "opening-0-west-3-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4261,7 +4348,7 @@
       "objectId": "opening-0-west-3-0-leaf",
       "observationIds": [],
       "rejected": [],
-      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4270,16 +4357,16 @@
       "objectId": "opening-0-west-3-1",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation"
     },
     {
       "evidenceIds": [],
       "hypothesisId": "hyp-opening-0-west-3-1",
-      "kind": "doors",
-      "objectId": "opening-0-west-3-1-leaf",
+      "kind": "windows",
+      "objectId": "opening-0-west-3-1-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+      "why": "a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4288,7 +4375,7 @@
       "objectId": "opening-1-front-4-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99"
     },
     {
       "evidenceIds": [],
@@ -4297,7 +4384,7 @@
       "objectId": "opening-1-front-4-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+      "why": "a 2.68 m gap in the front wall of main on storey 1, printed 270/320, 0.54 m tall on the elevation; on a gable end its head rakes from 6.26 to 3.99"
     },
     {
       "evidenceIds": [],
@@ -4306,7 +4393,7 @@
       "objectId": "opening-1-rear-6-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14"
     },
     {
       "evidenceIds": [],
@@ -4315,7 +4402,7 @@
       "objectId": "opening-1-rear-6-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14"
     },
     {
       "evidenceIds": [],
@@ -4324,7 +4411,7 @@
       "objectId": "opening-1-rear-6-1",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13"
     },
     {
       "evidenceIds": [],
@@ -4333,7 +4420,7 @@
       "objectId": "opening-1-rear-6-1-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13"
     },
     {
       "evidenceIds": [],
@@ -4342,7 +4429,7 @@
       "objectId": "opening-0-front-8-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4351,7 +4438,7 @@
       "objectId": "opening-0-front-8-0-leaf",
       "observationIds": [],
       "rejected": [],
-      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, printed 275/275, not read on an elevation"
     },
     {
       "evidenceIds": [],
@@ -4360,7 +4447,7 @@
       "objectId": "opening-0-rear-10-0",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation"
     },
     {
       "evidenceIds": [],
@@ -4369,7 +4456,7 @@
       "objectId": "opening-0-rear-10-0-unit",
       "observationIds": [],
       "rejected": [],
-      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation"
     },
     {
       "evidenceIds": [],
