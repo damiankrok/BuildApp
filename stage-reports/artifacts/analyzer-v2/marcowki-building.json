@@ -1,0 +1,3362 @@
+{
+  "assemblies": [
+    {
+      "confidence": 0.7,
+      "continuityRelations": [
+        {
+          "from": "feat-return-front-0-0",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-front"
+        },
+        {
+          "from": "feat-return-front-0-1",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-front"
+        },
+        {
+          "from": "feat-return-front-1-0",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-front"
+        },
+        {
+          "from": "feat-return-front-1-1",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-front"
+        }
+      ],
+      "evidenceIds": [
+        "sight-verge-band-along-the-rak-462d58b4-3e0a15c749"
+      ],
+      "facadeId": "FRONT",
+      "id": "assembly-gable-front",
+      "kind": "GABLE_FRAME",
+      "memberHypothesisIds": [
+        "feat-verge-front",
+        "feat-return-front-0-0",
+        "feat-return-front-0-1",
+        "feat-return-front-1-0",
+        "feat-return-front-1-1"
+      ],
+      "planeOffsets": {
+        "feat-return-front-0-0": 0,
+        "feat-return-front-0-1": 0,
+        "feat-return-front-1-0": 0,
+        "feat-return-front-1-1": 0,
+        "feat-verge-front": 0
+      },
+      "why": "the returns of the front recess continue as the verge band along the rakes in the same plane"
+    },
+    {
+      "confidence": 0.85,
+      "continuityRelations": [
+        {
+          "from": "feat-return-rear-0-0",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-rear"
+        },
+        {
+          "from": "feat-return-rear-0-1",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-rear"
+        },
+        {
+          "from": "feat-return-rear-1-0",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-rear"
+        },
+        {
+          "from": "feat-return-rear-1-1",
+          "kind": "CONTINUES_AS",
+          "to": "feat-verge-rear"
+        }
+      ],
+      "evidenceIds": [
+        "sight-verge-band-along-the-rak-a4552876-7149258522"
+      ],
+      "facadeId": "REAR",
+      "id": "assembly-gable-rear",
+      "kind": "GABLE_FRAME",
+      "memberHypothesisIds": [
+        "feat-verge-rear",
+        "feat-return-rear-0-0",
+        "feat-return-rear-0-1",
+        "feat-return-rear-1-0",
+        "feat-return-rear-1-1"
+      ],
+      "planeOffsets": {
+        "feat-return-rear-0-0": 0,
+        "feat-return-rear-0-1": 0,
+        "feat-return-rear-1-0": 0,
+        "feat-return-rear-1-1": 0,
+        "feat-verge-rear": 0
+      },
+      "why": "the returns of the rear recess continue as the verge band along the rakes in the same plane"
+    },
+    {
+      "confidence": 0.7,
+      "continuityRelations": [
+        {
+          "from": "feat-balcony-front-1",
+          "kind": "CONTINUES_AS",
+          "to": "feat-portal-head-attached-0"
+        }
+      ],
+      "evidenceIds": [
+        "sight-balcony-fascia-band-462d58b4-2a91b2396e",
+        "sight-balcony-floor-in-the-zon-d2722c38-a69e06dfc3"
+      ],
+      "facadeId": "FRONT",
+      "id": "assembly-portal-attached-0",
+      "kind": "PORTAL_FRAME",
+      "memberHypothesisIds": [
+        "feat-portal-head-attached-0",
+        "feat-balcony-front-1",
+        "feat-return-front-0-0",
+        "feat-return-front-0-1"
+      ],
+      "planeOffsets": {},
+      "why": "the balcony fascia, the projecting roof edge and the ground-storey returns frame the portal"
+    }
+  ],
+  "attachedRoofs": [
+    {
+      "featureId": "feat-roof-attached-0",
+      "footprint": {
+        "x0": 7.9,
+        "x1": 12.05,
+        "z0": 0,
+        "z1": 8.501283
+      },
+      "massId": "attached-0",
+      "parapetTopY": 3.124804,
+      "projectsOverZone": true,
+      "provenance": "SOURCE_EXACT",
+      "reading": {
+        "clearHeightM": 2.531955,
+        "confidence": 0.75,
+        "massId": "attached-0",
+        "parapetTopY": 3.124804,
+        "slabSoffitY": 2.531955,
+        "slabTopY": 2.890422,
+        "why": "the section draws a 0.36 m slab with its top at 2.89 over this body on 6 columns and its outer wall continues to 3.12"
+      },
+      "slabSoffitY": 2.531955,
+      "slabTopY": 2.890422
+    }
+  ],
+  "balconies": [
+    {
+      "fascia": {
+        "along": [
+          0.656146,
+          7.217608
+        ],
+        "confidence": 0.7,
+        "continuity": [],
+        "evidence": "RENDER_BAND",
+        "facade": "FRONT",
+        "frameIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+        ],
+        "id": "fascia-front-66",
+        "kind": "FASCIA_BAND",
+        "planeAt": 0,
+        "why": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)",
+        "y": [
+          2.321029,
+          3.028855
+        ]
+      },
+      "featureId": "feat-balcony-front-1",
+      "id": "balcony-front-1",
+      "kind": "BALCONY",
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "storeyIndex": 1,
+      "thicknessM": 0.707826,
+      "topY": 3.028855,
+      "why": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)",
+      "x0": 3.134658,
+      "x1": 7.229937,
+      "z0": 0,
+      "z1": 0.991283
+    },
+    {
+      "fascia": {
+        "along": [
+          0.656146,
+          7.217608
+        ],
+        "confidence": 0.75,
+        "continuity": [],
+        "evidence": "RENDER_BAND",
+        "facade": "REAR",
+        "frameIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876"
+        ],
+        "id": "fascia-rear-66",
+        "kind": "FASCIA_BAND",
+        "planeAt": 14.601283,
+        "why": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)",
+        "y": [
+          2.521597,
+          3.025777
+        ]
+      },
+      "featureId": "feat-balcony-rear-1",
+      "id": "balcony-rear-1",
+      "kind": "BALCONY",
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "storeyIndex": 1,
+      "thicknessM": 0.50418,
+      "topY": 3.025777,
+      "why": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)",
+      "x0": 0.638726,
+      "x1": 7.17626,
+      "z0": 13.601283,
+      "z1": 14.601283
+    },
+    {
+      "featureId": "feat-terrace-front-66",
+      "id": "terrace-front-66",
+      "kind": "TERRACE",
+      "provenance": "ASSUMED_FOR_RENDERING",
+      "storeyIndex": 0,
+      "thicknessM": 0.2,
+      "topY": 0,
+      "why": "the floor of the recess",
+      "x0": 0.66065,
+      "x1": 11.416032,
+      "z0": 0,
+      "z1": 0.991283
+    },
+    {
+      "featureId": "feat-terrace-rear-66",
+      "id": "terrace-rear-66",
+      "kind": "TERRACE",
+      "provenance": "ASSUMED_FOR_RENDERING",
+      "storeyIndex": 0,
+      "thicknessM": 0.2,
+      "topY": 0,
+      "why": "the floor of the recess",
+      "x0": 0.66065,
+      "x1": 7.26715,
+      "z0": 13.601283,
+      "z1": 14.601283
+    }
+  ],
+  "chimneys": [
+    {
+      "confidence": 0.9,
+      "featureId": "feat-chimney-0",
+      "id": "chimney-0",
+      "provenance": "SOURCE_CORROBORATED",
+      "renderFrames": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+      ],
+      "storeysSeen": [
+        0,
+        1
+      ],
+      "topY": 7.862072,
+      "why": "a 0.63 × 0.74 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders",
+      "x0": 5.43289,
+      "x1": 6.062791,
+      "z0": 8.44145,
+      "z1": 9.178569
+    },
+    {
+      "confidence": 0.9,
+      "featureId": "feat-chimney-1",
+      "id": "chimney-1",
+      "provenance": "SOURCE_CORROBORATED",
+      "renderFrames": [
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+      ],
+      "storeysSeen": [
+        0,
+        1
+      ],
+      "topY": 7.861447,
+      "why": "a 0.55 × 0.66 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders",
+      "x0": 5.43289,
+      "x1": 5.984053,
+      "z0": 4.17669,
+      "z1": 4.834832
+    }
+  ],
+  "interior": [
+    {
+      "blocks": [
+        {
+          "id": "main-block-0-0",
+          "pixelRect": {
+            "x0": 270,
+            "x1": 287,
+            "y0": 431,
+            "y1": 455
+          },
+          "storeyIndex": 0,
+          "why": "a 0.45 × 0.63 m block of solid ink (100 % filled)",
+          "x0": 5.602312,
+          "x1": 6.051554,
+          "z0": 8.413555,
+          "z1": 9.048787
+        },
+        {
+          "id": "main-block-0-1",
+          "pixelRect": {
+            "x0": 262,
+            "x1": 281,
+            "y0": 591,
+            "y1": 612
+          },
+          "storeyIndex": 0,
+          "why": "a 0.50 × 0.56 m block of solid ink (96 % filled)",
+          "x0": 5.390904,
+          "x1": 5.892998,
+          "z0": 4.258079,
+          "z1": 4.813907
+        }
+      ],
+      "doors": [
+        {
+          "at": 3.408954,
+          "betweenIds": [
+            "main-iwall-0-z-2",
+            "main-iwall-0-z-1"
+          ],
+          "confidence": 0.76,
+          "from": 3.702251,
+          "id": "main-idoor-0-0",
+          "storeyIndex": 0,
+          "to": 4.575695,
+          "wallAxis": "Z",
+          "why": "a 0.87 m break between two pieces of the same partition",
+          "widthM": 0.873444
+        },
+        {
+          "at": 3.408954,
+          "betweenIds": [
+            "main-iwall-0-z-1",
+            "main-iwall-0-z-0"
+          ],
+          "confidence": 0.6175,
+          "from": 4.866843,
+          "id": "main-idoor-0-1",
+          "storeyIndex": 0,
+          "to": 5.713819,
+          "wallAxis": "Z",
+          "why": "a 0.85 m break between two pieces of the same partition",
+          "widthM": 0.846976
+        },
+        {
+          "at": 5.410724,
+          "betweenIds": [
+            "main-iwall-0-z-6",
+            "main-iwall-0-z-5"
+          ],
+          "confidence": 0.6175,
+          "from": 2.220043,
+          "id": "main-idoor-0-2",
+          "storeyIndex": 0,
+          "to": 3.119955,
+          "wallAxis": "Z",
+          "why": "a 0.90 m break between two pieces of the same partition",
+          "widthM": 0.899912
+        },
+        {
+          "at": 5.41733,
+          "betweenIds": [
+            "main-iwall-0-z-4",
+            "main-iwall-0-z-3"
+          ],
+          "confidence": 0.76,
+          "from": 7.593047,
+          "id": "main-idoor-0-3",
+          "storeyIndex": 0,
+          "to": 8.254747,
+          "wallAxis": "Z",
+          "why": "a 0.66 m break between two pieces of the same partition",
+          "widthM": 0.6617
+        },
+        {
+          "at": 3.536826,
+          "betweenIds": [
+            "main-iwall-0-x-6",
+            "main-iwall-0-x-7"
+          ],
+          "confidence": 0.6175,
+          "from": 4.22816,
+          "id": "main-idoor-0-4",
+          "storeyIndex": 0,
+          "to": 5.126644,
+          "wallAxis": "X",
+          "why": "a 0.90 m break between two pieces of the same partition",
+          "widthM": 0.898484
+        }
+      ],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "rooms": [
+        {
+          "areaM2": 9.03,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 3.339658,
+            "z0": 1.480941,
+            "z1": 4.680941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-0-0"
+          ],
+          "id": "main-room-0-0",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 1.480941
+            },
+            {
+              "x": 3.339658,
+              "z": 1.480941
+            },
+            {
+              "x": 3.339658,
+              "z": 3.680941
+            },
+            {
+              "x": 3.239658,
+              "z": 3.680941
+            },
+            {
+              "x": 3.239658,
+              "z": 4.580941
+            },
+            {
+              "x": 3.339658,
+              "z": 4.580941
+            },
+            {
+              "x": 3.339658,
+              "z": 4.680941
+            },
+            {
+              "x": 0.489658,
+              "z": 4.680941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "9.03 m² enclosed by 8 wall faces"
+        },
+        {
+          "areaM2": 3.43,
+          "bounds": {
+            "x0": 3.489658,
+            "x1": 5.339658,
+            "z0": 1.480941,
+            "z1": 3.430941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-0-2"
+          ],
+          "id": "main-room-0-1",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 3.489658,
+              "z": 1.480941
+            },
+            {
+              "x": 5.289658,
+              "z": 1.480941
+            },
+            {
+              "x": 5.289658,
+              "z": 2.180941
+            },
+            {
+              "x": 5.239658,
+              "z": 2.180941
+            },
+            {
+              "x": 5.239658,
+              "z": 3.130941
+            },
+            {
+              "x": 5.339658,
+              "z": 3.130941
+            },
+            {
+              "x": 5.339658,
+              "z": 3.430941
+            },
+            {
+              "x": 5.139658,
+              "z": 3.430941
+            },
+            {
+              "x": 5.139658,
+              "z": 3.380941
+            },
+            {
+              "x": 4.189658,
+              "z": 3.380941
+            },
+            {
+              "x": 4.189658,
+              "z": 3.430941
+            },
+            {
+              "x": 3.489658,
+              "z": 3.430941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "3.43 m² enclosed by 12 wall faces"
+        },
+        {
+          "areaM2": 5.555,
+          "bounds": {
+            "x0": 5.489658,
+            "x1": 7.389658,
+            "z0": 1.480941,
+            "z1": 4.530941
+          },
+          "confidence": 0.5,
+          "doorIds": [
+            "main-idoor-0-2"
+          ],
+          "id": "main-room-0-2",
+          "number": "9",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 5.489658,
+              "z": 1.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 1.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 4.530941
+            },
+            {
+              "x": 5.939658,
+              "z": 4.530941
+            },
+            {
+              "x": 5.939658,
+              "z": 4.230941
+            },
+            {
+              "x": 5.489658,
+              "z": 4.230941
+            },
+            {
+              "x": 5.489658,
+              "z": 3.630941
+            },
+            {
+              "x": 5.539658,
+              "z": 3.630941
+            },
+            {
+              "x": 5.539658,
+              "z": 3.430941
+            },
+            {
+              "x": 5.489658,
+              "z": 3.430941
+            },
+            {
+              "x": 5.489658,
+              "z": 3.130941
+            },
+            {
+              "x": 5.589658,
+              "z": 3.130941
+            },
+            {
+              "x": 5.589658,
+              "z": 2.180941
+            },
+            {
+              "x": 5.489658,
+              "z": 2.180941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "5.56 m² enclosed by 14 wall faces; numbered 9 = Garaż 24.1 m² published (-77 % off)"
+        },
+        {
+          "areaM2": 47.5925,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 7.389658,
+            "z0": 3.630941,
+            "z1": 13.130941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-0-0",
+            "main-idoor-0-1",
+            "main-idoor-0-3",
+            "main-idoor-0-4"
+          ],
+          "id": "main-room-0-3",
+          "label": "Kuchnia",
+          "number": "3",
+          "openPlan": true,
+          "polygon": [
+            {
+              "x": 3.489658,
+              "z": 3.630941
+            },
+            {
+              "x": 4.189658,
+              "z": 3.630941
+            },
+            {
+              "x": 4.189658,
+              "z": 3.730941
+            },
+            {
+              "x": 5.139658,
+              "z": 3.730941
+            },
+            {
+              "x": 5.139658,
+              "z": 3.630941
+            },
+            {
+              "x": 5.339658,
+              "z": 3.630941
+            },
+            {
+              "x": 5.339658,
+              "z": 5.780941
+            },
+            {
+              "x": 6.389658,
+              "z": 5.780941
+            },
+            {
+              "x": 6.389658,
+              "z": 6.280941
+            },
+            {
+              "x": 6.289658,
+              "z": 6.280941
+            },
+            {
+              "x": 6.289658,
+              "z": 7.280941
+            },
+            {
+              "x": 5.339658,
+              "z": 7.280941
+            },
+            {
+              "x": 5.339658,
+              "z": 7.580941
+            },
+            {
+              "x": 5.239658,
+              "z": 7.580941
+            },
+            {
+              "x": 5.239658,
+              "z": 8.280941
+            },
+            {
+              "x": 5.339658,
+              "z": 8.280941
+            },
+            {
+              "x": 5.339658,
+              "z": 8.780941
+            },
+            {
+              "x": 5.589658,
+              "z": 8.780941
+            },
+            {
+              "x": 5.589658,
+              "z": 9.080941
+            },
+            {
+              "x": 6.089658,
+              "z": 9.080941
+            },
+            {
+              "x": 6.089658,
+              "z": 8.780941
+            },
+            {
+              "x": 7.389658,
+              "z": 8.780941
+            },
+            {
+              "x": 7.389658,
+              "z": 13.130941
+            },
+            {
+              "x": 0.489658,
+              "z": 13.130941
+            },
+            {
+              "x": 0.489658,
+              "z": 6.380941
+            },
+            {
+              "x": 4.139658,
+              "z": 6.380941
+            },
+            {
+              "x": 4.139658,
+              "z": 6.180941
+            },
+            {
+              "x": 3.489658,
+              "z": 6.180941
+            },
+            {
+              "x": 3.489658,
+              "z": 5.730941
+            },
+            {
+              "x": 3.589658,
+              "z": 5.730941
+            },
+            {
+              "x": 3.589658,
+              "z": 4.830941
+            },
+            {
+              "x": 3.489658,
+              "z": 4.830941
+            },
+            {
+              "x": 3.489658,
+              "z": 4.580941
+            },
+            {
+              "x": 3.589658,
+              "z": 4.580941
+            },
+            {
+              "x": 3.589658,
+              "z": 3.680941
+            },
+            {
+              "x": 3.489658,
+              "z": 3.680941
+            }
+          ],
+          "publishedAreaM2": 9.63,
+          "storeyIndex": 0,
+          "why": "47.59 m² enclosed by 36 wall faces; several published rooms may share it (open plan); numbered 3 = Kuchnia 9.63 m² published (394 % off)"
+        },
+        {
+          "areaM2": 3.7575,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 3.339658,
+            "z0": 4.830941,
+            "z1": 6.180941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-0-1"
+          ],
+          "id": "main-room-0-4",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 4.830941
+            },
+            {
+              "x": 3.239658,
+              "z": 4.830941
+            },
+            {
+              "x": 3.239658,
+              "z": 5.730941
+            },
+            {
+              "x": 3.339658,
+              "z": 5.730941
+            },
+            {
+              "x": 3.339658,
+              "z": 6.180941
+            },
+            {
+              "x": 0.489658,
+              "z": 6.180941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "3.76 m² enclosed by 6 wall faces"
+        },
+        {
+          "areaM2": 1.7,
+          "bounds": {
+            "x0": 5.489658,
+            "x1": 7.389658,
+            "z0": 7.480941,
+            "z1": 8.430941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-0-3"
+          ],
+          "id": "main-room-0-5",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 5.489658,
+              "z": 7.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 7.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 8.430941
+            },
+            {
+              "x": 6.489658,
+              "z": 8.430941
+            },
+            {
+              "x": 6.489658,
+              "z": 8.380941
+            },
+            {
+              "x": 6.289658,
+              "z": 8.380941
+            },
+            {
+              "x": 6.289658,
+              "z": 8.430941
+            },
+            {
+              "x": 6.089658,
+              "z": 8.430941
+            },
+            {
+              "x": 6.089658,
+              "z": 8.380941
+            },
+            {
+              "x": 5.589658,
+              "z": 8.380941
+            },
+            {
+              "x": 5.589658,
+              "z": 8.430941
+            },
+            {
+              "x": 5.489658,
+              "z": 8.430941
+            },
+            {
+              "x": 5.489658,
+              "z": 8.280941
+            },
+            {
+              "x": 5.589658,
+              "z": 8.280941
+            },
+            {
+              "x": 5.589658,
+              "z": 7.580941
+            },
+            {
+              "x": 5.489658,
+              "z": 7.580941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "1.70 m² enclosed by 16 wall faces"
+        }
+      ],
+      "storeyIndex": 0,
+      "unresolved": [
+        {
+          "reason": "its 5.555 m² is 77 % off the published Garaż 24.1 m²; by area it would be 8 Kotłownia 5.8",
+          "what": "the label of room-0-2 (read as 9)"
+        }
+      ],
+      "walls": [
+        {
+          "at": 3.408954,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 5.713819,
+          "id": "main-iwall-0-z-0",
+          "pixelRect": {
+            "x0": 184.5,
+            "x1": 189.5,
+            "y0": 533,
+            "y1": 556
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 6.349051,
+          "why": "0.13 m of neutral ink running 0.64 m along z at x 3.41"
+        },
+        {
+          "at": 3.408954,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 4.575695,
+          "id": "main-iwall-0-z-1",
+          "pixelRect": {
+            "x0": 184.5,
+            "x1": 189.5,
+            "y0": 589,
+            "y1": 599
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 4.866843,
+          "why": "0.13 m of neutral ink running 0.29 m along z at x 3.41"
+        },
+        {
+          "at": 3.408954,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 1.478939,
+          "id": "main-iwall-0-z-2",
+          "pixelRect": {
+            "x0": 184.5,
+            "x1": 189.5,
+            "y0": 633,
+            "y1": 716
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 3.702251,
+          "why": "0.13 m of neutral ink running 2.22 m along z at x 3.41"
+        },
+        {
+          "at": 5.41733,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 8.254747,
+          "id": "main-iwall-0-z-3",
+          "pixelRect": {
+            "x0": 260.5,
+            "x1": 265.5,
+            "y0": 445,
+            "y1": 460
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 8.678235,
+          "why": "0.13 m of neutral ink running 0.42 m along z at x 5.42"
+        },
+        {
+          "at": 5.41733,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 7.301899,
+          "id": "main-iwall-0-z-4",
+          "pixelRect": {
+            "x0": 261,
+            "x1": 265,
+            "y0": 486,
+            "y1": 496
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.105788,
+          "to": 7.593047,
+          "why": "0.11 m of neutral ink running 0.29 m along z at x 5.42"
+        },
+        {
+          "at": 5.41733,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 3.119955,
+          "id": "main-iwall-0-z-5",
+          "pixelRect": {
+            "x0": 260.5,
+            "x1": 265.5,
+            "y0": 592,
+            "y1": 654
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 4.787439,
+          "why": "0.13 m of neutral ink running 1.67 m along z at x 5.42"
+        },
+        {
+          "at": 5.404117,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "FREE",
+            "start": "JUNCTION"
+          },
+          "from": 1.478939,
+          "id": "main-iwall-0-z-6",
+          "pixelRect": {
+            "x0": 259.5,
+            "x1": 265.5,
+            "y0": 689,
+            "y1": 716
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.158682,
+          "to": 2.220043,
+          "why": "0.16 m of neutral ink running 0.74 m along z at x 5.40"
+        },
+        {
+          "at": 6.395092,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 8.413555,
+          "id": "main-iwall-0-z-7",
+          "pixelRect": {
+            "x0": 297.5,
+            "x1": 302.5,
+            "y0": 442,
+            "y1": 454
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 8.757639,
+          "why": "0.13 m of neutral ink running 0.34 m along z at x 6.40"
+        },
+        {
+          "at": 6.395092,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 6.322583,
+          "id": "main-iwall-0-z-8",
+          "pixelRect": {
+            "x0": 297.5,
+            "x1": 302.5,
+            "y0": 492,
+            "y1": 533
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 7.434239,
+          "why": "0.13 m of neutral ink running 1.11 m along z at x 6.40"
+        },
+        {
+          "at": 6.395092,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 4.549227,
+          "id": "main-iwall-0-z-9",
+          "pixelRect": {
+            "x0": 297.5,
+            "x1": 302.5,
+            "y0": 591,
+            "y1": 600
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 4.813907,
+          "why": "0.13 m of neutral ink running 0.26 m along z at x 6.40"
+        },
+        {
+          "at": 8.598831,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 5.364478,
+          "id": "main-iwall-0-x-0",
+          "pixelRect": {
+            "x0": 261,
+            "x1": 338,
+            "y0": 442,
+            "y1": 454
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.317364,
+          "to": 7.425706,
+          "why": "0.32 m of neutral ink running 2.06 m along x at z 8.60"
+        },
+        {
+          "at": 7.381303,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 5.390904,
+          "id": "main-iwall-0-x-1",
+          "pixelRect": {
+            "x0": 262,
+            "x1": 301,
+            "y0": 491.5,
+            "y1": 496.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 6.447944,
+          "why": "0.13 m of neutral ink running 1.06 m along x at z 7.38"
+        },
+        {
+          "at": 6.772539,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 6.34224,
+          "id": "main-iwall-0-x-2",
+          "pixelRect": {
+            "x0": 298,
+            "x1": 332,
+            "y0": 514.5,
+            "y1": 519.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 7.26715,
+          "why": "0.13 m of neutral ink running 0.92 m along x at z 6.77"
+        },
+        {
+          "at": 6.296115,
+          "axis": "X",
+          "confidence": 0.65,
+          "ends": {
+            "end": "FREE",
+            "start": "JUNCTION"
+          },
+          "from": 0.502094,
+          "id": "main-iwall-0-x-3",
+          "pixelRect": {
+            "x0": 77,
+            "x1": 213,
+            "y0": 532.5,
+            "y1": 537.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 4.122456,
+          "why": "0.13 m of neutral ink running 3.62 m along x at z 6.30"
+        },
+        {
+          "at": 4.760971,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 0.502094,
+          "id": "main-iwall-0-x-4",
+          "pixelRect": {
+            "x0": 77,
+            "x1": 189,
+            "y0": 590.5,
+            "y1": 595.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 3.488232,
+          "why": "0.13 m of neutral ink running 2.99 m along x at z 4.76"
+        },
+        {
+          "at": 4.681567,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 5.390904,
+          "id": "main-iwall-0-x-5",
+          "pixelRect": {
+            "x0": 262,
+            "x1": 338,
+            "y0": 591,
+            "y1": 601
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.26447,
+          "to": 7.425706,
+          "why": "0.26 m of neutral ink running 2.03 m along x at z 4.68"
+        },
+        {
+          "at": 3.530209,
+          "axis": "X",
+          "confidence": 0.65,
+          "ends": {
+            "end": "FREE",
+            "start": "JUNCTION"
+          },
+          "from": 3.356102,
+          "id": "main-iwall-0-x-6",
+          "pixelRect": {
+            "x0": 185,
+            "x1": 217,
+            "y0": 637.5,
+            "y1": 641.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.105788,
+          "to": 4.22816,
+          "why": "0.11 m of neutral ink running 0.87 m along x at z 3.53"
+        },
+        {
+          "at": 3.543443,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 5.126644,
+          "id": "main-iwall-0-x-7",
+          "pixelRect": {
+            "x0": 252,
+            "x1": 265,
+            "y0": 636.5,
+            "y1": 641.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.132235,
+          "to": 5.496608,
+          "why": "0.13 m of neutral ink running 0.37 m along x at z 3.54"
+        }
+      ]
+    },
+    {
+      "blocks": [],
+      "doors": [],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "rooms": [
+        {
+          "areaM2": 20.5575,
+          "bounds": {
+            "x0": 8.389658,
+            "x1": 11.539658,
+            "z0": 1.480941,
+            "z1": 8.030941
+          },
+          "confidence": 0.6,
+          "doorIds": [],
+          "id": "attached-0-room-0-0",
+          "openPlan": true,
+          "polygon": [
+            {
+              "x": 8.389658,
+              "z": 1.480941
+            },
+            {
+              "x": 11.539658,
+              "z": 1.480941
+            },
+            {
+              "x": 11.539658,
+              "z": 8.030941
+            },
+            {
+              "x": 8.889658,
+              "z": 8.030941
+            },
+            {
+              "x": 8.889658,
+              "z": 7.880941
+            },
+            {
+              "x": 8.389658,
+              "z": 7.880941
+            }
+          ],
+          "storeyIndex": 0,
+          "why": "20.56 m² enclosed by 6 wall faces; several published rooms may share it (open plan)"
+        }
+      ],
+      "storeyIndex": 0,
+      "unresolved": [],
+      "walls": [
+        {
+          "at": 7.950365,
+          "axis": "X",
+          "confidence": 0.65,
+          "ends": {
+            "end": "FREE",
+            "start": "JUNCTION"
+          },
+          "from": 8.403468,
+          "id": "attached-0-iwall-0-x-0",
+          "pixelRect": {
+            "x0": 376,
+            "x1": 392,
+            "y0": 470.5,
+            "y1": 474.5
+          },
+          "storeyIndex": 0,
+          "thicknessM": 0.105788,
+          "to": 8.85271,
+          "why": "0.11 m of neutral ink running 0.45 m along x at z 7.95"
+        }
+      ]
+    },
+    {
+      "blocks": [
+        {
+          "id": "main-block-1-0",
+          "pixelRect": {
+            "x0": 253,
+            "x1": 277,
+            "y0": 362,
+            "y1": 390
+          },
+          "storeyIndex": 1,
+          "why": "a 0.63 × 0.74 m block of solid ink (100 % filled)",
+          "x0": 5.43289,
+          "x1": 6.062791,
+          "z0": 8.44145,
+          "z1": 9.178569
+        },
+        {
+          "id": "main-block-1-1",
+          "pixelRect": {
+            "x0": 253,
+            "x1": 274,
+            "y0": 527,
+            "y1": 552
+          },
+          "storeyIndex": 1,
+          "why": "a 0.55 × 0.66 m block of solid ink (100 % filled)",
+          "x0": 5.43289,
+          "x1": 5.984053,
+          "z0": 4.17669,
+          "z1": 4.834832
+        },
+        {
+          "id": "main-block-1-2",
+          "pixelRect": {
+            "x0": 313,
+            "x1": 329,
+            "y0": 527,
+            "y1": 552
+          },
+          "storeyIndex": 1,
+          "why": "a 0.42 × 0.66 m block of solid ink (100 % filled)",
+          "x0": 7.007641,
+          "x1": 7.427575,
+          "z0": 4.17669,
+          "z1": 4.834832
+        },
+        {
+          "id": "main-block-1-3",
+          "pixelRect": {
+            "x0": 173,
+            "x1": 191,
+            "y0": 632,
+            "y1": 655
+          },
+          "storeyIndex": 1,
+          "why": "a 0.47 × 0.60 m block of solid ink (100 % filled)",
+          "x0": 3.333223,
+          "x1": 3.805648,
+          "z0": 1.465145,
+          "z1": 2.070636
+        }
+      ],
+      "doors": [
+        {
+          "at": 3.923754,
+          "betweenIds": [
+            "main-iwall-1-z-5",
+            "main-iwall-1-z-4"
+          ],
+          "confidence": 0.3325,
+          "from": 4.96646,
+          "id": "main-idoor-1-0",
+          "storeyIndex": 1,
+          "to": 5.861534,
+          "wallAxis": "Z",
+          "why": "a 0.90 m break between two pieces of the same partition",
+          "widthM": 0.895074
+        },
+        {
+          "at": 3.923754,
+          "betweenIds": [
+            "main-iwall-1-z-4",
+            "main-iwall-1-z-3"
+          ],
+          "confidence": 0.3325,
+          "from": 7.177817,
+          "id": "main-idoor-1-1",
+          "storeyIndex": 1,
+          "to": 8.072891,
+          "wallAxis": "Z",
+          "why": "a 0.90 m break between two pieces of the same partition",
+          "widthM": 0.895074
+        },
+        {
+          "at": 3.923754,
+          "betweenIds": [
+            "main-iwall-1-z-3",
+            "main-iwall-1-z-2"
+          ],
+          "confidence": 0.6175,
+          "from": 8.757358,
+          "id": "main-idoor-1-2",
+          "storeyIndex": 1,
+          "to": 9.652431,
+          "wallAxis": "Z",
+          "why": "a 0.90 m break between two pieces of the same partition",
+          "widthM": 0.895073
+        },
+        {
+          "at": 4.788763,
+          "betweenIds": [
+            "main-iwall-1-x-3",
+            "main-iwall-1-x-4"
+          ],
+          "confidence": 0.6175,
+          "from": 4.094352,
+          "id": "main-idoor-1-3",
+          "storeyIndex": 1,
+          "to": 4.986711,
+          "wallAxis": "X",
+          "why": "a 0.89 m break between two pieces of the same partition",
+          "widthM": 0.892359
+        }
+      ],
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "rooms": [
+        {
+          "areaM2": 18.275,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 7.389658,
+            "z0": 1.480941,
+            "z1": 4.680941
+          },
+          "confidence": 0.6,
+          "doorIds": [],
+          "id": "main-room-1-0",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 1.480941
+            },
+            {
+              "x": 3.289658,
+              "z": 1.480941
+            },
+            {
+              "x": 3.289658,
+              "z": 2.080941
+            },
+            {
+              "x": 3.839658,
+              "z": 2.080941
+            },
+            {
+              "x": 3.839658,
+              "z": 1.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 1.480941
+            },
+            {
+              "x": 7.389658,
+              "z": 4.130941
+            },
+            {
+              "x": 6.989658,
+              "z": 4.130941
+            },
+            {
+              "x": 6.989658,
+              "z": 4.680941
+            },
+            {
+              "x": 5.989658,
+              "z": 4.680941
+            },
+            {
+              "x": 5.989658,
+              "z": 4.130941
+            },
+            {
+              "x": 5.389658,
+              "z": 4.130941
+            },
+            {
+              "x": 5.389658,
+              "z": 4.680941
+            },
+            {
+              "x": 4.989658,
+              "z": 4.680941
+            },
+            {
+              "x": 4.989658,
+              "z": 4.630941
+            },
+            {
+              "x": 4.089658,
+              "z": 4.630941
+            },
+            {
+              "x": 4.089658,
+              "z": 4.680941
+            },
+            {
+              "x": 3.489658,
+              "z": 4.680941
+            },
+            {
+              "x": 3.489658,
+              "z": 2.880941
+            },
+            {
+              "x": 3.289658,
+              "z": 2.880941
+            },
+            {
+              "x": 3.289658,
+              "z": 3.780941
+            },
+            {
+              "x": 0.489658,
+              "z": 3.780941
+            }
+          ],
+          "storeyIndex": 1,
+          "why": "18.28 m² enclosed by 22 wall faces"
+        },
+        {
+          "areaM2": 7.45,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 3.839658,
+            "z0": 3.980941,
+            "z1": 6.380941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-1-0"
+          ],
+          "id": "main-room-1-1",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 3.980941
+            },
+            {
+              "x": 3.289658,
+              "z": 3.980941
+            },
+            {
+              "x": 3.289658,
+              "z": 4.880941
+            },
+            {
+              "x": 3.839658,
+              "z": 4.880941
+            },
+            {
+              "x": 3.839658,
+              "z": 4.930941
+            },
+            {
+              "x": 3.739658,
+              "z": 4.930941
+            },
+            {
+              "x": 3.739658,
+              "z": 5.880941
+            },
+            {
+              "x": 3.839658,
+              "z": 5.880941
+            },
+            {
+              "x": 3.839658,
+              "z": 6.380941
+            },
+            {
+              "x": 0.489658,
+              "z": 6.380941
+            }
+          ],
+          "storeyIndex": 1,
+          "why": "7.45 m² enclosed by 10 wall faces"
+        },
+        {
+          "areaM2": 20.895,
+          "bounds": {
+            "x0": 3.989658,
+            "x1": 7.389658,
+            "z0": 4.880941,
+            "z1": 13.130941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-1-0",
+            "main-idoor-1-1",
+            "main-idoor-1-2",
+            "main-idoor-1-3"
+          ],
+          "id": "main-room-1-2",
+          "openPlan": true,
+          "polygon": [
+            {
+              "x": 4.989658,
+              "z": 4.880941
+            },
+            {
+              "x": 7.389658,
+              "z": 4.880941
+            },
+            {
+              "x": 7.389658,
+              "z": 5.730941
+            },
+            {
+              "x": 5.289658,
+              "z": 5.730941
+            },
+            {
+              "x": 5.289658,
+              "z": 8.430941
+            },
+            {
+              "x": 5.089658,
+              "z": 8.430941
+            },
+            {
+              "x": 5.089658,
+              "z": 9.930941
+            },
+            {
+              "x": 5.289658,
+              "z": 9.930941
+            },
+            {
+              "x": 5.289658,
+              "z": 8.630941
+            },
+            {
+              "x": 5.389658,
+              "z": 8.630941
+            },
+            {
+              "x": 5.389658,
+              "z": 9.180941
+            },
+            {
+              "x": 6.089658,
+              "z": 9.180941
+            },
+            {
+              "x": 6.089658,
+              "z": 8.630941
+            },
+            {
+              "x": 7.389658,
+              "z": 8.630941
+            },
+            {
+              "x": 7.389658,
+              "z": 13.130941
+            },
+            {
+              "x": 3.989658,
+              "z": 13.130941
+            },
+            {
+              "x": 3.989658,
+              "z": 9.680941
+            },
+            {
+              "x": 4.089658,
+              "z": 9.680941
+            },
+            {
+              "x": 4.089658,
+              "z": 8.730941
+            },
+            {
+              "x": 3.989658,
+              "z": 8.730941
+            },
+            {
+              "x": 3.989658,
+              "z": 8.080941
+            },
+            {
+              "x": 4.089658,
+              "z": 8.080941
+            },
+            {
+              "x": 4.089658,
+              "z": 7.130941
+            },
+            {
+              "x": 3.989658,
+              "z": 7.130941
+            },
+            {
+              "x": 3.989658,
+              "z": 5.880941
+            },
+            {
+              "x": 4.089658,
+              "z": 5.880941
+            },
+            {
+              "x": 4.089658,
+              "z": 4.980941
+            },
+            {
+              "x": 4.989658,
+              "z": 4.980941
+            }
+          ],
+          "storeyIndex": 1,
+          "why": "20.90 m² enclosed by 28 wall faces; several published rooms may share it (open plan)"
+        },
+        {
+          "areaM2": 6.4375,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 3.839658,
+            "z0": 6.580941,
+            "z1": 8.530941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-1-1"
+          ],
+          "id": "main-room-1-3",
+          "label": "Pralnia",
+          "number": "5",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 6.580941
+            },
+            {
+              "x": 3.839658,
+              "z": 6.580941
+            },
+            {
+              "x": 3.839658,
+              "z": 7.130941
+            },
+            {
+              "x": 3.739658,
+              "z": 7.130941
+            },
+            {
+              "x": 3.739658,
+              "z": 8.080941
+            },
+            {
+              "x": 3.839658,
+              "z": 8.080941
+            },
+            {
+              "x": 3.839658,
+              "z": 8.530941
+            },
+            {
+              "x": 0.489658,
+              "z": 8.530941
+            }
+          ],
+          "publishedAreaM2": 5.59,
+          "storeyIndex": 1,
+          "why": "6.44 m² enclosed by 8 wall faces; numbered 5 = Pralnia 5.59 m² published (15 % off)"
+        },
+        {
+          "areaM2": 14.8125,
+          "bounds": {
+            "x0": 0.489658,
+            "x1": 3.839658,
+            "z0": 8.680941,
+            "z1": 13.130941
+          },
+          "confidence": 0.6,
+          "doorIds": [
+            "main-idoor-1-2"
+          ],
+          "id": "main-room-1-4",
+          "openPlan": false,
+          "polygon": [
+            {
+              "x": 0.489658,
+              "z": 8.680941
+            },
+            {
+              "x": 3.839658,
+              "z": 8.680941
+            },
+            {
+              "x": 3.839658,
+              "z": 8.730941
+            },
+            {
+              "x": 3.739658,
+              "z": 8.730941
+            },
+            {
+              "x": 3.739658,
+              "z": 9.680941
+            },
+            {
+              "x": 3.839658,
+              "z": 9.680941
+            },
+            {
+              "x": 3.839658,
+              "z": 13.130941
+            },
+            {
+              "x": 0.489658,
+              "z": 13.130941
+            }
+          ],
+          "storeyIndex": 1,
+          "why": "14.81 m² enclosed by 8 wall faces"
+        }
+      ],
+      "storeyIndex": 1,
+      "unresolved": [],
+      "walls": [
+        {
+          "at": 3.385714,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 2.913058,
+          "id": "main-iwall-1-z-0",
+          "pixelRect": {
+            "x0": 172.5,
+            "x1": 177.5,
+            "y0": 526,
+            "y1": 599
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.13143,
+          "to": 4.861158,
+          "why": "0.13 m of neutral ink running 1.95 m along z at x 3.39"
+        },
+        {
+          "at": 3.923754,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 9.652431,
+          "id": "main-iwall-1-z-2",
+          "pixelRect": {
+            "x0": 193.5,
+            "x1": 197.5,
+            "y0": 213,
+            "y1": 343
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 13.101095,
+          "why": "0.11 m of neutral ink running 3.45 m along z at x 3.92"
+        },
+        {
+          "at": 3.923754,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 8.072891,
+          "id": "main-iwall-1-z-3",
+          "pixelRect": {
+            "x0": 193.5,
+            "x1": 197.5,
+            "y0": 378,
+            "y1": 403
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 8.757358,
+          "why": "0.11 m of neutral ink running 0.68 m along z at x 3.92"
+        },
+        {
+          "at": 3.923754,
+          "axis": "Z",
+          "confidence": 0.35,
+          "ends": {
+            "end": "FREE",
+            "start": "FREE"
+          },
+          "from": 5.861534,
+          "id": "main-iwall-1-z-4",
+          "pixelRect": {
+            "x0": 193.5,
+            "x1": 197.5,
+            "y0": 438,
+            "y1": 487
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 7.177817,
+          "why": "0.11 m of neutral ink running 1.32 m along z at x 3.92"
+        },
+        {
+          "at": 3.923754,
+          "axis": "Z",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 4.703204,
+          "id": "main-iwall-1-z-5",
+          "pixelRect": {
+            "x0": 193.5,
+            "x1": 197.5,
+            "y0": 522,
+            "y1": 531
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 4.96646,
+          "why": "0.11 m of neutral ink running 0.26 m along z at x 3.92"
+        },
+        {
+          "at": 5.196678,
+          "axis": "Z",
+          "confidence": 0.65,
+          "ends": {
+            "end": "FREE",
+            "start": "JUNCTION"
+          },
+          "from": 8.44145,
+          "id": "main-iwall-1-z-6",
+          "pixelRect": {
+            "x0": 241.5,
+            "x1": 246.5,
+            "y0": 335,
+            "y1": 389
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.13143,
+          "to": 9.889362,
+          "why": "0.13 m of neutral ink running 1.45 m along z at x 5.20"
+        },
+        {
+          "at": 8.612567,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 0.498671,
+          "id": "main-iwall-1-x-0",
+          "pixelRect": {
+            "x0": 65,
+            "x1": 197,
+            "y0": 381.5,
+            "y1": 385.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 3.989369,
+          "why": "0.11 m of neutral ink running 3.49 m along x at z 8.61"
+        },
+        {
+          "at": 8.520427,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 5.144186,
+          "id": "main-iwall-1-x-1",
+          "pixelRect": {
+            "x0": 242,
+            "x1": 328,
+            "y0": 384.5,
+            "y1": 389.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.13143,
+          "to": 7.427575,
+          "why": "0.13 m of neutral ink running 2.28 m along x at z 8.52"
+        },
+        {
+          "at": 6.480187,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 0.498671,
+          "id": "main-iwall-1-x-2",
+          "pixelRect": {
+            "x0": 65,
+            "x1": 197,
+            "y0": 462.5,
+            "y1": 466.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.105144,
+          "to": 3.989369,
+          "why": "0.11 m of neutral ink running 3.49 m along x at z 6.48"
+        },
+        {
+          "at": 4.795344,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 3.333223,
+          "id": "main-iwall-1-x-3",
+          "pixelRect": {
+            "x0": 173,
+            "x1": 201,
+            "y0": 525.5,
+            "y1": 531.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.157716,
+          "to": 4.094352,
+          "why": "0.16 m of neutral ink running 0.76 m along x at z 4.80"
+        },
+        {
+          "at": 4.782181,
+          "axis": "X",
+          "confidence": 0.65,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "FREE"
+          },
+          "from": 4.986711,
+          "id": "main-iwall-1-x-4",
+          "pixelRect": {
+            "x0": 236,
+            "x1": 328,
+            "y0": 526.5,
+            "y1": 531.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.13143,
+          "to": 7.427575,
+          "why": "0.13 m of neutral ink running 2.44 m along x at z 4.78"
+        },
+        {
+          "at": 3.887108,
+          "axis": "X",
+          "confidence": 0.8,
+          "ends": {
+            "end": "JUNCTION",
+            "start": "JUNCTION"
+          },
+          "from": 0.498671,
+          "id": "main-iwall-1-x-5",
+          "pixelRect": {
+            "x0": 65,
+            "x1": 177,
+            "y0": 560.5,
+            "y1": 565.5
+          },
+          "storeyIndex": 1,
+          "thicknessM": 0.13143,
+          "to": 3.464452,
+          "why": "0.13 m of neutral ink running 2.97 m along x at z 3.89"
+        }
+      ]
+    }
+  ],
+  "label": "Marcówki (auto v2)",
+  "levels": [
+    {
+      "elevation": 0,
+      "featureId": "feat-level-0",
+      "height": 3.06,
+      "id": "lvl-0",
+      "index": 0,
+      "wallTop": 3.06
+    },
+    {
+      "elevation": 3.06,
+      "featureId": "feat-level-1",
+      "height": 4.89,
+      "id": "lvl-1",
+      "index": 1,
+      "wallTop": 4.67
+    }
+  ],
+  "mainRoof": {
+    "authority": "PUBLISHED_SPECIFICATION",
+    "buildUpVerticalM": 0.15,
+    "coversZones": true,
+    "coversZonesWhy": "both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes",
+    "eaveY": 4.635556,
+    "featureId": "feat-roof-main",
+    "footprint": {
+      "x0": 0,
+      "x1": 7.9,
+      "z0": 0,
+      "z1": 14.601283
+    },
+    "kind": "GABLE",
+    "massId": "main",
+    "pitchDeg": 40,
+    "provenance": "SOURCE_EXACT",
+    "ridgeAt": 3.95,
+    "ridgeAxis": "Z",
+    "ridgeY": 7.95,
+    "thicknessM": 0.28
+  },
+  "masses": [
+    {
+      "featureId": "feat-main",
+      "id": "main",
+      "role": "MAIN",
+      "sourceMassId": "mass-0",
+      "storeys": [
+        0,
+        1
+      ],
+      "x0": 0,
+      "x1": 7.9,
+      "z0": 0.991283,
+      "z1": 13.601283
+    },
+    {
+      "featureId": "feat-attached-0",
+      "id": "attached-0",
+      "role": "ATTACHED",
+      "sourceMassId": "mass-1",
+      "storeys": [
+        0
+      ],
+      "x0": 7.9,
+      "x1": 12.05,
+      "z0": 0.991283,
+      "z1": 8.501283
+    }
+  ],
+  "openings": [
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.85,
+        "contrast": 106,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+        "headY": 2.326119,
+        "sillY": 0.044119
+      },
+      "facade": "FRONT",
+      "family": "WINDOW",
+      "headY": 2.326119,
+      "id": "opening-0-front-0-0",
+      "interval": [
+        1.400578,
+        2.51047
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 111,
+          "x1": 152,
+          "y0": 716.9170161215638,
+          "y1": 735.4317058784361
+        }
+      },
+      "planeAt": 0.991283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0.044119,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation",
+      "widthM": 1.109892
+    },
+    {
+      "confidence": 0.5,
+      "facade": "FRONT",
+      "family": "WINDOW",
+      "headY": 2.1,
+      "id": "opening-0-front-0-1",
+      "interval": [
+        4.175308,
+        5.232348
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 216,
+          "x1": 255,
+          "y0": 716.9170161215638,
+          "y1": 735.4317058784361
+        }
+      },
+      "planeAt": 0.991283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "ASSUMED_FOR_RENDERING",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "ASSUMED_FOR_RENDERING",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+      "widthM": 1.05704
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.82,
+        "contrast": 42,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+        "headY": 2.272648,
+        "sillY": 0
+      },
+      "facade": "EAST",
+      "family": "MULTI_PANEL_GLAZING",
+      "headY": 2.272648,
+      "id": "opening-0-east-1-0",
+      "interval": [
+        9.684019,
+        12.701371
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 338.4259591215639,
+          "x1": 356.94064887843615,
+          "y0": 293,
+          "y1": 406
+        }
+      },
+      "planeAt": 7.9,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation",
+      "widthM": 3.017352
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.85,
+        "contrast": 143,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "headY": 1.615926,
+        "sillY": 0.050512
+      },
+      "facade": "REAR",
+      "family": "MULTI_PANEL_GLAZING",
+      "headY": 1.615926,
+      "id": "opening-0-rear-2-0",
+      "interval": [
+        2.272636,
+        6.950038
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 144,
+          "x1": 320,
+          "y0": 258.99265512156387,
+          "y1": 277.50734487843613
+        }
+      },
+      "planeAt": 13.601283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0.050512,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation",
+      "widthM": 4.677402
+    },
+    {
+      "confidence": 0.5,
+      "facade": "WEST",
+      "family": "DOOR",
+      "headY": 2.1,
+      "id": "opening-0-west-3-0",
+      "interval": [
+        9.022319,
+        9.922231
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 58.00735612156389,
+          "x1": 76.52204587843612,
+          "y0": 398,
+          "y1": 431
+        }
+      },
+      "planeAt": 0,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "ASSUMED_FOR_RENDERING",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "ASSUMED_FOR_RENDERING",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+      "widthM": 0.899912
+    },
+    {
+      "confidence": 0.5,
+      "facade": "WEST",
+      "family": "GLAZED_DOOR",
+      "headY": 2.1,
+      "id": "opening-0-west-3-1",
+      "interval": [
+        6.799007,
+        8.201811
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 58.00735612156389,
+          "x1": 76.52204587843612,
+          "y0": 463,
+          "y1": 515
+        }
+      },
+      "planeAt": 0,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "ASSUMED_FOR_RENDERING",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "ASSUMED_FOR_RENDERING",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation",
+      "widthM": 1.402804
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.85,
+        "contrast": 102,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+        "headY": 5.371422,
+        "sillY": 4.815273
+      },
+      "facade": "FRONT",
+      "family": "WINDOW",
+      "headY": 5.371422,
+      "id": "opening-1-front-4-0",
+      "interval": [
+        3.936877,
+        6.613953
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+        "pixelRect": {
+          "x0": 196,
+          "x1": 297,
+          "y0": 654.3859475004945,
+          "y1": 673.0140384995054
+        }
+      },
+      "planeAt": 0.991283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 4.815273,
+      "storeyIndex": 1,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation",
+      "widthM": 2.677076
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.85,
+        "contrast": 45,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "headY": 6.319753,
+        "sillY": 5.563483
+      },
+      "facade": "REAR",
+      "family": "WINDOW",
+      "headFarY": 4.381739,
+      "headY": 6.319753,
+      "id": "opening-1-rear-6-0",
+      "interval": [
+        0.971096,
+        3.280731
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+        "pixelRect": {
+          "x0": 83,
+          "x1": 170,
+          "y0": 193.98596150049454,
+          "y1": 212.61405249950545
+        }
+      },
+      "planeAt": 13.601283,
+      "profile": "RAKED_SINGLE",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 5.563483,
+      "storeyIndex": 1,
+      "tallEdge": "HIGH",
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "the raked head would meet the sill: the opening is narrower or lower than read"
+      ],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38",
+      "widthM": 2.309635
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.85,
+        "contrast": 65,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "headY": 5.110751,
+        "sillY": 4.370257
+      },
+      "facade": "REAR",
+      "family": "WINDOW",
+      "headY": 5.110751,
+      "id": "opening-1-rear-6-1",
+      "interval": [
+        4.593023,
+        6.902658
+      ],
+      "massId": "main",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+        "pixelRect": {
+          "x0": 221,
+          "x1": 308,
+          "y0": 193.98596150049454,
+          "y1": 212.61405249950545
+        }
+      },
+      "planeAt": 13.601283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 4.370257,
+      "storeyIndex": 1,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation",
+      "widthM": 2.309635
+    },
+    {
+      "confidence": 0.5,
+      "facade": "FRONT",
+      "family": "GARAGE_DOOR",
+      "headY": 2.1,
+      "id": "opening-0-front-8-0",
+      "interval": [
+        8.562024,
+        11.283902
+      ],
+      "massId": "attached-0",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 382,
+          "x1": 484,
+          "y0": 716.9170161215638,
+          "y1": 735.4317058784361
+        }
+      },
+      "planeAt": 0.991283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "ASSUMED_FOR_RENDERING",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "ASSUMED_FOR_RENDERING",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation",
+      "widthM": 2.721878
+    },
+    {
+      "confidence": 0.65,
+      "elevation": {
+        "confidence": 0.82,
+        "contrast": 42,
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "headY": 1.261065,
+        "sillY": 0.272268
+      },
+      "facade": "REAR",
+      "family": "WINDOW",
+      "headY": 1.261065,
+      "id": "opening-0-rear-10-0",
+      "interval": [
+        9.90975,
+        10.913938
+      ],
+      "massId": "attached-0",
+      "mullions": [],
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 433,
+          "x1": 470,
+          "y0": 451.67816212156384,
+          "y1": 470.1928518784361
+        }
+      },
+      "planeAt": 8.501283,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "IMAGE_METRIC_REGISTERED",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "IMAGE_METRIC_REGISTERED",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0.272268,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [],
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation",
+      "widthM": 1.004188
+    }
+  ],
+  "portalHeads": [
+    {
+      "featureId": "feat-portal-head-attached-0",
+      "id": "portal-head-attached-0",
+      "massId": "attached-0",
+      "provenance": "SOURCE_CORROBORATED",
+      "why": "the roof of attached-0 projects over its zone; its edge is the 0.71 m band",
+      "x0": 7.9,
+      "x1": 12.05,
+      "y0": 2.321029,
+      "y1": 3.028855,
+      "z0": 0,
+      "z1": 0.991283
+    }
+  ],
+  "railings": [
+    {
+      "baseY": 3.028855,
+      "end": {
+        "x": 7.179937,
+        "z": 0.05
+      },
+      "featureId": "feat-railing-front-1",
+      "heightM": 0.910062,
+      "id": "railing-front-1",
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "start": {
+        "x": 3.184658,
+        "z": 0.05
+      },
+      "storeyIndex": 1,
+      "why": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth"
+    },
+    {
+      "baseY": 3.025777,
+      "end": {
+        "x": 7.12626,
+        "z": 14.551283
+      },
+      "featureId": "feat-railing-rear-1",
+      "heightM": 0.92433,
+      "id": "railing-rear-1",
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "start": {
+        "x": 0.688726,
+        "z": 14.551283
+      },
+      "storeyIndex": 1,
+      "why": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth"
+    }
+  ],
+  "recesses": [
+    {
+      "backAt": 0.991283,
+      "confidence": 0.85,
+      "depthM": 0.991283,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "recess-front-0",
+      "mouthAt": 0,
+      "open": [
+        {
+          "from": 0.66065,
+          "to": 11.416032
+        }
+      ],
+      "returns": [
+        {
+          "from": 0,
+          "pixelRect": {
+            "x0": 58,
+            "x1": 82,
+            "y0": 735.424361,
+            "y1": 772.876492
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.66065,
+          "to": 0.66065
+        },
+        {
+          "from": 11.416032,
+          "pixelRect": {
+            "x0": 490,
+            "x1": 513,
+            "y0": 735.424361,
+            "y1": 772.876492
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.634224,
+          "to": 12.050256
+        }
+      ],
+      "side": "FRONT",
+      "spanFrom": 0,
+      "spanTo": 12.05,
+      "storeyIndex": 0,
+      "why": "2 return walls of 0.66 / 0.63 m stand in the 0.99 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..11.42"
+    },
+    {
+      "backAt": 0.991283,
+      "confidence": 0.85,
+      "depthM": 0.991283,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "recess-front-1",
+      "mouthAt": 0,
+      "open": [
+        {
+          "from": 0.656146,
+          "to": 7.217608
+        }
+      ],
+      "returns": [
+        {
+          "from": 0.026246,
+          "pixelRect": {
+            "x0": 47,
+            "x1": 70,
+            "y0": 673,
+            "y1": 710.654604
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.6299,
+          "to": 0.656146
+        },
+        {
+          "from": 7.217608,
+          "pixelRect": {
+            "x0": 321,
+            "x1": 345,
+            "y0": 673,
+            "y1": 710.654604
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.656146,
+          "to": 7.873754
+        }
+      ],
+      "side": "FRONT",
+      "spanFrom": 0,
+      "spanTo": 7.9,
+      "storeyIndex": 1,
+      "why": "2 return walls of 0.63 / 0.66 m stand in the 0.99 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22"
+    },
+    {
+      "backAt": 13.601283,
+      "confidence": 0.85,
+      "depthM": 1,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "recess-rear-0",
+      "mouthAt": 14.601283,
+      "open": [
+        {
+          "from": 0.66065,
+          "to": 7.26715
+        }
+      ],
+      "returns": [
+        {
+          "from": 0,
+          "pixelRect": {
+            "x0": 58,
+            "x1": 82,
+            "y0": 221.218528,
+            "y1": 259
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.66065,
+          "to": 0.66065
+        },
+        {
+          "from": 7.26715,
+          "pixelRect": {
+            "x0": 333,
+            "x1": 356,
+            "y0": 221.218528,
+            "y1": 259
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.634224,
+          "to": 7.901374
+        }
+      ],
+      "side": "REAR",
+      "spanFrom": 0,
+      "spanTo": 7.9,
+      "storeyIndex": 0,
+      "why": "2 return walls of 0.66 / 0.63 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.27"
+    },
+    {
+      "backAt": 13.601283,
+      "confidence": 0.85,
+      "depthM": 1,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "recess-rear-1",
+      "mouthAt": 14.601283,
+      "open": [
+        {
+          "from": 0.656146,
+          "to": 7.217608
+        }
+      ],
+      "returns": [
+        {
+          "from": 0.026246,
+          "pixelRect": {
+            "x0": 47,
+            "x1": 70,
+            "y0": 156.014274,
+            "y1": 194
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.6299,
+          "to": 0.656146
+        },
+        {
+          "from": 7.217608,
+          "pixelRect": {
+            "x0": 321,
+            "x1": 345,
+            "y0": 156.014274,
+            "y1": 194
+          },
+          "scanLines": 5,
+          "support": 5,
+          "thicknessM": 0.656146,
+          "to": 7.873754
+        }
+      ],
+      "side": "REAR",
+      "spanFrom": 0,
+      "spanTo": 7.9,
+      "storeyIndex": 1,
+      "why": "2 return walls of 0.63 / 0.66 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22"
+    }
+  ],
+  "returns": [
+    {
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "featureId": "feat-return-front-0-0",
+      "id": "return-front-0-0",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-front-0",
+      "side": "FRONT",
+      "start": {
+        "x": 0,
+        "z": 0.991283
+      },
+      "storeyIndex": 0,
+      "thicknessM": 0.66065,
+      "why": "a 0.66 m return standing in the 0.99 m front zone on the storey 0 plan"
+    },
+    {
+      "end": {
+        "x": 12.050256,
+        "z": 0.991283
+      },
+      "featureId": "feat-return-front-0-1",
+      "id": "return-front-0-1",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-front-0",
+      "side": "FRONT",
+      "start": {
+        "x": 12.050256,
+        "z": 0
+      },
+      "storeyIndex": 0,
+      "thicknessM": 0.634224,
+      "why": "a 0.63 m return standing in the 0.99 m front zone on the storey 0 plan"
+    },
+    {
+      "end": {
+        "x": 0.026246,
+        "z": 0
+      },
+      "featureId": "feat-return-front-1-0",
+      "id": "return-front-1-0",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-front-1",
+      "side": "FRONT",
+      "start": {
+        "x": 0.026246,
+        "z": 0.991283
+      },
+      "storeyIndex": 1,
+      "thicknessM": 0.6299,
+      "why": "a 0.63 m return standing in the 0.99 m front zone on the storey 1 plan"
+    },
+    {
+      "end": {
+        "x": 7.873754,
+        "z": 0.991283
+      },
+      "featureId": "feat-return-front-1-1",
+      "id": "return-front-1-1",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-front-1",
+      "side": "FRONT",
+      "start": {
+        "x": 7.873754,
+        "z": 0
+      },
+      "storeyIndex": 1,
+      "thicknessM": 0.656146,
+      "why": "a 0.66 m return standing in the 0.99 m front zone on the storey 1 plan"
+    },
+    {
+      "end": {
+        "x": 0,
+        "z": 13.601283
+      },
+      "featureId": "feat-return-rear-0-0",
+      "id": "return-rear-0-0",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-rear-0",
+      "side": "REAR",
+      "start": {
+        "x": 0,
+        "z": 14.601283
+      },
+      "storeyIndex": 0,
+      "thicknessM": 0.66065,
+      "why": "a 0.66 m return standing in the 1.00 m rear zone on the storey 0 plan"
+    },
+    {
+      "end": {
+        "x": 7.901374,
+        "z": 14.601283
+      },
+      "featureId": "feat-return-rear-0-1",
+      "id": "return-rear-0-1",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-rear-0",
+      "side": "REAR",
+      "start": {
+        "x": 7.901374,
+        "z": 13.601283
+      },
+      "storeyIndex": 0,
+      "thicknessM": 0.634224,
+      "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 0 plan"
+    },
+    {
+      "end": {
+        "x": 0.026246,
+        "z": 13.601283
+      },
+      "featureId": "feat-return-rear-1-0",
+      "id": "return-rear-1-0",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-rear-1",
+      "side": "REAR",
+      "start": {
+        "x": 0.026246,
+        "z": 14.601283
+      },
+      "storeyIndex": 1,
+      "thicknessM": 0.6299,
+      "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 1 plan"
+    },
+    {
+      "end": {
+        "x": 7.873754,
+        "z": 14.601283
+      },
+      "featureId": "feat-return-rear-1-1",
+      "id": "return-rear-1-1",
+      "provenance": "SOURCE_DERIVED",
+      "recessId": "recess-rear-1",
+      "side": "REAR",
+      "start": {
+        "x": 7.873754,
+        "z": 13.601283
+      },
+      "storeyIndex": 1,
+      "thicknessM": 0.656146,
+      "why": "a 0.66 m return standing in the 1.00 m rear zone on the storey 1 plan"
+    }
+  ],
+  "rooflights": [
+    {
+      "alongFrom": 5.015938,
+      "alongTo": 5.628473,
+      "confidence": 0.75,
+      "featureId": "feat-rooflight-left-0",
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "id": "rooflight-left-0",
+      "lengthM": 1.004445,
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "slope": "LOW",
+      "slopeFrom": 0.47776,
+      "slopeTo": 1.247209,
+      "why": "a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)",
+      "widthM": 0.612535,
+      "yFrom": 5.036444,
+      "yTo": 5.682089
+    }
+  ],
+  "sharedDoors": [
+    {
+      "confidence": 0.5,
+      "facade": "EAST",
+      "family": "DOOR",
+      "headY": 2.1,
+      "id": "shared-opening-0-east-1-1",
+      "interval": [
+        2.220043,
+        3.119955
+      ],
+      "massId": "main",
+      "mullions": [],
+      "otherMassId": "attached-0",
+      "planGap": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "pixelRect": {
+          "x0": 338.4259591215639,
+          "x1": 356.94064887843615,
+          "y0": 655,
+          "y1": 688
+        }
+      },
+      "planeAt": 7.9,
+      "profile": "RECTANGULAR",
+      "provenance": {
+        "family": "VISUAL_SEMANTIC",
+        "head": "ASSUMED_FOR_RENDERING",
+        "interval": "SOURCE_DERIVED",
+        "profile": "SOURCE_DERIVED",
+        "sill": "ASSUMED_FOR_RENDERING",
+        "width": "SOURCE_DERIVED"
+      },
+      "sillY": 0,
+      "storeyIndex": 0,
+      "uncertaintyM": 0.06,
+      "unresolved": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 0.90 m gap in the east wall of main on storey 0, no callout read, not read on an elevation; this face is shared with attached-0, so the gap is a doorway between the two bodies",
+      "widthM": 0.899912
+    }
+  ],
+  "slabThicknessM": 0.34,
+  "stair": {
+    "emit": "FLIGHTS",
+    "featureId": "feat-stair-main",
+    "fromLevel": 0,
+    "hypothesis": {
+      "arrow": {
+        "x": 5.43289,
+        "z": 7.967588
+      },
+      "confidence": 0.9,
+      "directionEvidence": "ARROW",
+      "flights": [
+        {
+          "band": {
+            "from": 4.813907,
+            "to": 5.766755
+          },
+          "direction": "PLUS_X",
+          "from": 5.365736,
+          "goingM": 0.26447,
+          "index": 0,
+          "ladderId": "ladder-x-1",
+          "riserLines": [
+            5.365736,
+            5.629977,
+            5.904972,
+            6.183684,
+            6.447944
+          ],
+          "risers": 5,
+          "to": 6.447944
+        },
+        {
+          "band": {
+            "from": 6.403987,
+            "to": 7.427575
+          },
+          "direction": "PLUS_Z",
+          "from": 5.766755,
+          "goingM": 0.26286,
+          "index": 1,
+          "ladderId": "ladder-z-2",
+          "riserLines": [
+            5.766755,
+            6.107679,
+            6.387577,
+            6.651304,
+            6.91851,
+            7.19098,
+            7.452983
+          ],
+          "risers": 7,
+          "to": 7.452983
+        },
+        {
+          "band": {
+            "from": 7.441074,
+            "to": 8.467776
+          },
+          "direction": "MINUS_X",
+          "from": 6.403987,
+          "goingM": 0.269432,
+          "index": 2,
+          "ladderId": "ladder-x-0",
+          "riserLines": [
+            6.403987,
+            6.141528,
+            5.87907,
+            5.602642,
+            5.328754
+          ],
+          "risers": 5,
+          "to": 5.328754
+        }
+      ],
+      "id": "stair-0",
+      "landings": [
+        {
+          "index": 0,
+          "turn": "LEFT",
+          "x0": 6.447944,
+          "x1": 7.471532,
+          "z0": 4.813907,
+          "z1": 5.766755
+        },
+        {
+          "index": 1,
+          "turn": "LEFT",
+          "x0": 6.403987,
+          "x1": 7.427575,
+          "z0": 7.452983,
+          "z1": 8.476571
+        }
+      ],
+      "riserCountInterval": {
+        "high": 20,
+        "low": 14
+      },
+      "risersTotal": 17,
+      "shaft": {
+        "x0": 5.328754,
+        "x1": 7.427575,
+        "z0": 4.813907,
+        "z1": 8.467776
+      },
+      "start": {
+        "x": 5.365736,
+        "z": 4.813907
+      },
+      "storeyIndex": 0,
+      "turnKind": "U",
+      "unresolved": [],
+      "why": "3 tread ladders (5 risers plus x at 0.264 m, 7 risers plus z at 0.263 m, 5 risers minus x at 0.269 m) with 2 corner squares between them; 17 risers over 3.06 m = 0.180 m each; the arrowhead at (5.43289, 7.967588) fixes the climb",
+      "widthM": 1.023588,
+      "winderRegions": []
+    },
+    "provenance": "SOURCE_CORROBORATED",
+    "slabHole": {
+      "x0": 5.328754,
+      "x1": 7.427575,
+      "z0": 5.766755,
+      "z1": 8.476571
+    },
+    "toLevel": 1
+  },
+  "surfaceRegions": [
+    {
+      "along": [
+        0.66065,
+        7.9
+      ],
+      "featureId": "feat-finish-front-66",
+      "id": "finish-front-66",
+      "tone": "MID",
+      "wallRef": {
+        "massId": "main",
+        "side": "FRONT",
+        "storeyIndex": 0
+      },
+      "y": [
+        0,
+        3.06
+      ]
+    }
+  ],
+  "verges": [
+    {
+      "depthM": 0.3,
+      "featureId": "feat-verge-front",
+      "id": "verge-front",
+      "member": {
+        "along": [
+          0,
+          7.9
+        ],
+        "confidence": 0.7,
+        "continuity": [],
+        "depthM": 0.991283,
+        "evidence": "PLAN_AND_RENDER",
+        "facade": "FRONT",
+        "frameIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+        ],
+        "id": "verge-front",
+        "kind": "VERGE_MEMBER",
+        "planeAt": 0,
+        "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.54 m), standing in the outer plane 0.99 m in front of the recessed wall",
+        "widthM": 0.606777,
+        "y": [
+          4.635556,
+          7.95
+        ],
+        "yAtEnds": [
+          4.635556,
+          4.635556
+        ]
+      },
+      "planeAt": 0,
+      "provenance": "SOURCE_CORROBORATED",
+      "side": "FRONT"
+    },
+    {
+      "depthM": 0.3,
+      "featureId": "feat-verge-rear",
+      "id": "verge-rear",
+      "member": {
+        "along": [
+          0,
+          7.9
+        ],
+        "confidence": 0.85,
+        "continuity": [],
+        "depthM": 1,
+        "evidence": "PLAN_AND_RENDER",
+        "facade": "REAR",
+        "frameIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876"
+        ],
+        "id": "verge-rear",
+        "kind": "VERGE_MEMBER",
+        "planeAt": 14.601283,
+        "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall",
+        "widthM": 0.605085,
+        "y": [
+          4.635556,
+          7.95
+        ],
+        "yAtEnds": [
+          4.635556,
+          4.635556
+        ]
+      },
+      "planeAt": 14.601283,
+      "provenance": "SOURCE_CORROBORATED",
+      "side": "REAR"
+    }
+  ],
+  "wallThicknessM": 0.489658
+}
+

@@ -2,7 +2,7 @@
   "name": "buildapp",
   "version": "0.1.0",
   "private": true,
-  "description": "BuildApp \u2014 BuildWorld semantic building editor, Building DSL and geometry compiler",
+  "description": "BuildApp — BuildWorld semantic building editor, Building DSL and geometry compiler",
   "type": "module",
   "workspaces": [
     "tests/architecture",
@@ -32,7 +32,11 @@
     "reconstruct:marcowki": "vite-node packages/reconstruction/scripts/marcowki.ts --",
     "reconstruct:no-reference": "vite-node packages/reconstruction/scripts/no-reference.ts --",
     "reconstruct:trace": "vite-node packages/reconstruction/scripts/trace.ts --",
-    "overlays": "vite-node packages/reconstruction/scripts/overlays.ts --"
+    "overlays": "vite-node packages/reconstruction/scripts/overlays.ts --",
+    "reconstruct:v2": "vite-node packages/reconstruction/scripts/reconstruct-v2.ts --",
+    "reconstruct:v2:marcowki": "vite-node packages/reconstruction/scripts/reconstruct-v2.ts -- --package stage-reports/artifacts/source-observations/marcowki-source-package.json --graph stage-reports/artifacts/source-observations/marcowki-observation-graph.json --slug marcowki --label \"Marcówki (auto v2)\"",
+    "reconstruct:no-benchmark": "vite-node packages/reconstruction/scripts/no-benchmark.ts --",
+    "audit:analyzer-v2": "vite-node packages/reconstruction/scripts/audit-v2.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

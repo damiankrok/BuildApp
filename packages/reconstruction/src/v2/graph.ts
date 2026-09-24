@@ -113,7 +113,7 @@ export const FeatureHypothesisSchema = z
 export type FeatureHypothesis = z.infer<typeof FeatureHypothesisSchema>
 
 /** Rival readings of one thing, and the one taken. */
-export const AlternativeGroupSchema = z
+export const FeatureAlternativeGroupSchema = z
   .object({
     id: z.string().min(1),
     question: z.string().min(1),
@@ -122,7 +122,7 @@ export const AlternativeGroupSchema = z
     why: z.string().min(1),
   })
   .strict()
-export type AlternativeGroup = z.infer<typeof AlternativeGroupSchema>
+export type FeatureAlternativeGroup = z.infer<typeof FeatureAlternativeGroupSchema>
 
 /** The §1 quality levels: what kind of statement the solved feature is. */
 export const QualityLevelSchema = z.enum([
@@ -212,7 +212,7 @@ export const ArchitecturalEvidenceGraphSchema = z
     sightings: z.array(SourceSightingSchema),
     measurements: z.array(MetricMeasurementSchema),
     hypotheses: z.array(FeatureHypothesisSchema),
-    alternatives: z.array(AlternativeGroupSchema),
+    alternatives: z.array(FeatureAlternativeGroupSchema),
     solved: z.array(SolvedFeatureSchema),
     bindings: z.array(SemanticObjectBindingSchema),
     relations: z.array(FeatureRelationSchema),
@@ -268,7 +268,7 @@ export function featureGraphViolations(graph: FeatureGraphDraft): string[] {
     if (assumed && s.unresolvedProperties.length === 0) out.push(`solved feature ${s.id} assumes a value and names nothing unresolved`)
     // L2 needs corroboration or a printed figure; L0 may not claim a source-exact provenance.
     if (s.quality === 'L2' && !(s.sourceCoverage.printed || s.sourceCoverage.independentAssets >= 2)) out.push(`solved feature ${s.id} claims L2 with ${s.sourceCoverage.independentAssets} independent asset(s) and nothing printed`)
-    if (s.quality === 'L0' && (s.provenance === 'SOURCE_EXACT' || s.provenance === 'SOURCE_CORROBORATED')) out.push(`solved feature ${s.id} is L0 (topology only) yet claims ${s.provenance}`)
+    if (s.quality === 'L0' && (s.provenance === 'SOURCE_EXACT' || s.provenance === 'SOURCE_CORROBORATED') && Object.keys(s.parameters).length > 0) out.push(`solved feature ${s.id} is L0 (topology only) yet claims ${s.provenance}`)
   }
   const boundFeatures = new Set(graph.bindings.map((b) => b.solvedFeatureId))
   for (const b of graph.bindings) if (!solved.has(b.solvedFeatureId)) out.push(`binding ${b.id} names unknown solved feature ${b.solvedFeatureId}`)
@@ -276,6 +276,8 @@ export function featureGraphViolations(graph: FeatureGraphDraft): string[] {
     if (!ids.has(r.fromId)) out.push(`relation ${r.id} starts at unknown ${r.fromId}`)
     if (!ids.has(r.toId)) out.push(`relation ${r.id} ends at unknown ${r.toId}`)
   }
-  for (const s of graph.solved) if (s.quality !== 'L0' && !boundFeatures.has(s.id) && s.family !== 'CAMERA' && s.family !== 'FACADE_ASSEMBLY') out.push(`solved feature ${s.id} (${s.family}, ${s.quality}) became no model object`)
+  // Topological features are expressed through their members: a recess through its returns and floor, an assembly through its members, a camera through nothing.
+  const throughMembers = new Set<string>(['CAMERA', 'FACADE_ASSEMBLY', 'RECESS'])
+  for (const s of graph.solved) if (s.quality !== 'L0' && !boundFeatures.has(s.id) && !throughMembers.has(s.family)) out.push(`solved feature ${s.id} (${s.family}, ${s.quality}) became no model object`)
   return out
 }

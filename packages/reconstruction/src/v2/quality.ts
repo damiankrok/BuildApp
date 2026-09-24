@@ -50,7 +50,8 @@ export type FeatureQualityReport = z.infer<typeof FeatureQualityReportSchema>
 export function qualityLevelOf(feature: Pick<SolvedFeature, 'provenance' | 'sourceCoverage' | 'parameters' | 'unresolvedProperties'>): QualityLevel {
   const c = feature.sourceCoverage
   if (feature.provenance === 'UNRESOLVED' || feature.provenance === 'ASSUMED_FOR_RENDERING') return 'L0'
-  if (Object.keys(feature.parameters).length === 0) return 'L0'
+  // A feature with no metric parameters of its own (an assembly, a finish region) is topology: L0 unless it is corroborated, when it is L1.
+  if (Object.keys(feature.parameters).length === 0) return feature.provenance === 'SOURCE_CORROBORATED' ? 'L1' : 'L0'
   if (c.printed || c.independentAssets >= 2) return feature.provenance === 'VISUAL_SEMANTIC' ? 'L1' : 'L2'
   return 'L1'
 }

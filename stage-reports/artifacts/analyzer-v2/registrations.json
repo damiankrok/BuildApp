@@ -1,0 +1,171 @@
+{
+  "cameras": [
+    {
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-82806cd4fa",
+      "residualPx": 1.34142,
+      "solved": true,
+      "why": "a silhouette of 17474 px against sky and vegetation, 200×139 px, with 8 hull corners and 73 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 74.5% of the silhouette (IoU) from 6 anchors that reproject 1.34 px rms and 2.05 px worst; the camera stands at (34.52, 4.66, -36.92) m with a 278 px focal length"
+    },
+    {
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-485a3aa4e3-ab6b2a505a",
+      "residualPx": 0.897147,
+      "solved": true,
+      "why": "a silhouette of 54674 px against sky and vegetation, 400×259 px, with 9 hull corners and 105 further kinks in its outline; of 8 viewpoint hypotheses, 1 resect a camera, and the one seeing FRONT+LEFT covers 28.9% of the silhouette (IoU) from 6 anchors that reproject 0.90 px rms and 1.59 px worst; the camera stands at (-8.22, 3.40, -4.82) m with a 317 px focal length"
+    },
+    {
+      "frameId": "frame-asset-widok-1-projekt-dom-w-marcowkach-ge-89e353-f476a9b070",
+      "residualPx": 3.551566,
+      "solved": true,
+      "why": "a silhouette of 293035 px against sky and vegetation, 800×555 px, with 8 hull corners and 203 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 84.6% of the silhouette (IoU) from 6 anchors that reproject 3.55 px rms and 7.34 px worst; the camera stands at (18.12, 3.10, -0.30) m with a 9 px focal length"
+    },
+    {
+      "frameId": "frame-asset-widok-2-projekt-dom-w-marcowkach-ge-67e404-8948cc28a7",
+      "solved": false,
+      "why": "no camera hypothesis aligned enough silhouette corners with a plausible residual"
+    }
+  ],
+  "elevations": [
+    {
+      "alongAtLeft": 12.05,
+      "alongSign": -1,
+      "anisotropyCheck": 0.150558,
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+      "bottomY": -0.150558,
+      "confidence": 0.764498,
+      "extent": {
+        "x0": 254,
+        "x1": 971,
+        "y0": 104,
+        "y1": 586
+      },
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "mpp": 0.016806,
+      "side": "REAR",
+      "sideConfidence": 0.9,
+      "sideWhy": "the publisher labels this drawing the rear elevation",
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "why": "717 px across is the 12.05 m width of the envelope, so 0.016806 m/px; the apex at row 104 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.15 m",
+      "zeroRow": 577.041494
+    },
+    {
+      "alongAtLeft": 0,
+      "alongSign": 1,
+      "anisotropyCheck": 0.223776,
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+      "bottomY": -0.223776,
+      "confidence": 0.698601,
+      "extent": {
+        "x0": 374,
+        "x1": 1089,
+        "y0": 104,
+        "y1": 589
+      },
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+      "mpp": 0.016853,
+      "side": "FRONT",
+      "sideConfidence": 0.9,
+      "sideWhy": "the publisher labels this drawing the front elevation",
+      "spanM": 12.05,
+      "spanWhy": "the 12.05 m width of the envelope",
+      "why": "715 px across is the 12.05 m width of the envelope, so 0.016853 m/px; the apex at row 104 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.22 m",
+      "zeroRow": 575.721992
+    },
+    {
+      "alongAtLeft": 14.601283,
+      "alongSign": -1,
+      "anisotropyCheck": 0.045941,
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+      "bottomY": -0.045941,
+      "confidence": 0.381624,
+      "extent": {
+        "x0": 199,
+        "x1": 1081,
+        "y0": 100,
+        "y1": 583
+      },
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+      "mpp": 0.016555,
+      "side": "LEFT",
+      "sideConfidence": 0.4,
+      "sideWhy": "the silhouette is 14.517391 m across, which is 1.907391 m more than the footprint depth — the overhang of a roof, on the only axis it can be; which of the two it is cannot be told from the drawing, so it takes the first free one",
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 1.04 m)",
+      "why": "882 px across is the 14.60 m characteristic depth (the roof over the zones), so 0.016555 m/px; the apex at row 100 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.05 m",
+      "zeroRow": 580.224923
+    },
+    {
+      "alongAtLeft": 0,
+      "alongSign": 1,
+      "anisotropyCheck": 0.256928,
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+      "bottomY": -0.256928,
+      "confidence": 0.482997,
+      "extent": {
+        "x0": 206,
+        "x1": 1076,
+        "y0": 100,
+        "y1": 589
+      },
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671",
+      "mpp": 0.016783,
+      "side": "RIGHT",
+      "sideConfidence": 0.65,
+      "sideWhy": "the silhouette is 14.144172 m across, which is 1.534172 m more than the footprint depth — the overhang of a roof, on the only axis it can be, and it is the only wall on that axis not already assigned",
+      "spanM": 14.601283,
+      "spanWhy": "the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the ground 0.86 m)",
+      "why": "870 px across is the 14.60 m characteristic depth (the roof over the zones), so 0.016783 m/px; the apex at row 100 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.26 m",
+      "zeroRow": 573.69125
+    }
+  ],
+  "plans": [
+    {
+      "assetId": "asset-rzut-19a11bc745",
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "mppX": 0.026426,
+      "mppY": 0.026468,
+      "originPx": {
+        "x": 58,
+        "y": 772.876492
+      },
+      "storeyIndex": 0,
+      "why": "the base plan, through the chain-registered world frame of the 03R layout"
+    },
+    {
+      "assetId": "asset-rzut-117027f690",
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "mppX": 0.026246,
+      "mppY": 0.026326,
+      "originPx": {
+        "x": 46,
+        "y": 710.654604
+      },
+      "storeyIndex": 1,
+      "why": "its outer wall faces (px 46..347 × 194..673) put on the 7.90 × 12.61 m body this storey covers; the two axes agree to 0.3 %"
+    }
+  ],
+  "section": {
+    "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-przekro-5270f96cea",
+    "mpp": 0.013787185354691076,
+    "originCol": 128,
+    "zeroRow": 642.645531
+  },
+  "world": {
+    "envelope": {
+      "x0": 0,
+      "x1": 12.05,
+      "z0": 0,
+      "z1": 14.601283
+    },
+    "frontSide": "SHEET_BOTTOM",
+    "walled": {
+      "x0": 0,
+      "x1": 12.05,
+      "z0": 0.991283,
+      "z1": 13.601283
+    },
+    "why": "the front is the bottom of the plan sheet; the front outer plane (a 0.99 m zone in front of the front wall) is z = 0 and the 03R layout's z is mirrored about 13.601",
+    "zFlip": 13.601283
+  }
+}
+

@@ -1,0 +1,2353 @@
+{
+  "contentHash": "32db61a5ab85a962014886c98e7718adcdff656b286af5f1faefd4013fb9d0de",
+  "featureGraphHash": "3822a54904a8d48ad6374273bc9612cbd0c7ecf4c63f616b7af36bf78ac103c8",
+  "id": "quality-marcowki",
+  "records": [
+    {
+      "family": "FACADE_ASSEMBLY",
+      "featureId": "feat-assembly-gable-front",
+      "level": "L1",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the returns of the front recess continue as the verge band along the rakes in the same plane"
+    },
+    {
+      "family": "FACADE_ASSEMBLY",
+      "featureId": "feat-assembly-gable-rear",
+      "level": "L1",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the returns of the rear recess continue as the verge band along the rakes in the same plane"
+    },
+    {
+      "family": "MASS",
+      "featureId": "feat-attached-0",
+      "level": "L2",
+      "objectIds": [
+        "ring-attached-0-0",
+        "slab-attached-0-0"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 0,
+        "printed": true,
+        "sightings": 0,
+        "viewFamilies": []
+      },
+      "uncertainty": {
+        "m": 0.02
+      },
+      "unresolvedProperties": [],
+      "why": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 75% of its perimeter is drawn as wall; it shares a wall line with the main body"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-attached-0-iwall-0-x-0",
+      "level": "L1",
+      "objectIds": [
+        "attached-0-iwall-0-x-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 0.45 m along x at z 7.95"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-attached-0-room-0-0",
+      "level": "L1",
+      "objectIds": [
+        "attached-0-room-0-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "subdivision (open plan)"
+      ],
+      "why": "20.56 m² enclosed by 6 wall faces; several published rooms may share it (open plan)"
+    },
+    {
+      "family": "BALCONY",
+      "featureId": "feat-balcony-front-1",
+      "level": "L2",
+      "objectIds": [
+        "balcony-front-1"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "ELEVATION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "slab section (fascia only)"
+      ],
+      "why": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m); the slab top is the storey floor"
+    },
+    {
+      "family": "BALCONY",
+      "featureId": "feat-balcony-rear-1",
+      "level": "L2",
+      "objectIds": [
+        "balcony-rear-1"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "ELEVATION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "slab section (fascia only)"
+      ],
+      "why": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m); the slab top is the storey floor"
+    },
+    {
+      "family": "CAMERA",
+      "featureId": "feat-camera-82806cd4fa",
+      "level": "L1",
+      "objectIds": [],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PERSPECTIVE"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "a silhouette of 17474 px against sky and vegetation, 200×139 px, with 8 hull corners and 73 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 74.5% of the silhouette (IoU) from 6 anchors that reproject 1.34 px rms and 2.05 px worst; the camera stands at (34.52, 4.66, -36.92) m with a 278 px focal length"
+    },
+    {
+      "family": "CAMERA",
+      "featureId": "feat-camera-ab6b2a505a",
+      "level": "L1",
+      "objectIds": [],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PERSPECTIVE"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "a silhouette of 54674 px against sky and vegetation, 400×259 px, with 9 hull corners and 105 further kinks in its outline; of 8 viewpoint hypotheses, 1 resect a camera, and the one seeing FRONT+LEFT covers 28.9% of the silhouette (IoU) from 6 anchors that reproject 0.90 px rms and 1.59 px worst; the camera stands at (-8.22, 3.40, -4.82) m with a 317 px focal length"
+    },
+    {
+      "family": "CAMERA",
+      "featureId": "feat-camera-f476a9b070",
+      "level": "L1",
+      "objectIds": [],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PERSPECTIVE"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "a silhouette of 293035 px against sky and vegetation, 800×555 px, with 8 hull corners and 203 further kinks in its outline; of 8 viewpoint hypotheses, 2 resect a camera, and the one seeing FRONT+RIGHT covers 84.6% of the silhouette (IoU) from 6 anchors that reproject 3.55 px rms and 7.34 px worst; the camera stands at (18.12, 3.10, -0.30) m with a 9 px focal length"
+    },
+    {
+      "family": "CHIMNEY",
+      "featureId": "feat-chimney-0",
+      "level": "L2",
+      "objectIds": [
+        "chimney-0",
+        "chimney-0-pen"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 4,
+        "printed": false,
+        "sightings": 4,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 0.63 × 0.74 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders"
+    },
+    {
+      "family": "CHIMNEY",
+      "featureId": "feat-chimney-1",
+      "level": "L2",
+      "objectIds": [
+        "chimney-1",
+        "chimney-1-pen"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 4,
+        "printed": false,
+        "sightings": 4,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 0.55 × 0.66 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "featureId": "feat-finish-front-66",
+      "level": "L0",
+      "objectIds": [
+        "finish-front-66"
+      ],
+      "provenance": "VISUAL_SEMANTIC",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the recessed wall reads mid on 45 % of its area"
+    },
+    {
+      "family": "LEVEL",
+      "featureId": "feat-level-0",
+      "level": "L2",
+      "objectIds": [
+        "lvl-0"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "SECTION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "a printed level datum on the section"
+    },
+    {
+      "family": "LEVEL",
+      "featureId": "feat-level-1",
+      "level": "L2",
+      "objectIds": [
+        "lvl-1"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "SECTION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "a printed level datum on the section"
+    },
+    {
+      "family": "MASS",
+      "featureId": "feat-main",
+      "level": "L2",
+      "objectIds": [
+        "ring-main-0",
+        "ring-main-1",
+        "slab-main-0",
+        "slab-main-1"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 0,
+        "printed": true,
+        "sightings": 0,
+        "viewFamilies": []
+      },
+      "uncertainty": {
+        "m": 0.02
+      },
+      "unresolvedProperties": [],
+      "why": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 67% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-0-0",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-0-0",
+        "main-idoor-0-0-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.87 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-0-1",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-0-1",
+        "main-idoor-0-1-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.85 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-0-2",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-0-2",
+        "main-idoor-0-2-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.90 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-0-3",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-0-3",
+        "main-idoor-0-3-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.66 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-0-4",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-0-4",
+        "main-idoor-0-4-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.90 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-1-0",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-1-0",
+        "main-idoor-1-0-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.90 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-1-1",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-1-1",
+        "main-idoor-1-1-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.90 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-1-2",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-1-2",
+        "main-idoor-1-2-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.90 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_DOOR",
+      "featureId": "feat-main-idoor-1-3",
+      "level": "L1",
+      "objectIds": [
+        "main-idoor-1-3",
+        "main-idoor-1-3-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "height"
+      ],
+      "why": "a 0.89 m break between two pieces of the same partition"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-0",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.32 m of neutral ink running 2.06 m along x at z 8.60"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-1",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 1.06 m along x at z 7.38"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-2",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 0.92 m along x at z 6.77"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-3",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-3"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 3.62 m along x at z 6.30"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-4",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-4"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 2.99 m along x at z 4.76"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-5",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-5"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.26 m of neutral ink running 2.03 m along x at z 4.68"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-6",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-6"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 0.87 m along x at z 3.53"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-x-7",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-x-6"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 0.37 m along x at z 3.54"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-0",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 0.64 m along z at x 3.41"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-1",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 0.29 m along z at x 3.41"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-2",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 2.22 m along z at x 3.41"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-3",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-3"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 0.42 m along z at x 5.42"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-4",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-3"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 0.29 m along z at x 5.42"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-5",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-5"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 1.67 m along z at x 5.42"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-6",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-5"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.16 m of neutral ink running 0.74 m along z at x 5.40"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-7",
+      "level": "L0",
+      "objectIds": [],
+      "provenance": "UNRESOLVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "not built: the partition is -0.35 m long once trimmed to the walls it meets"
+      ],
+      "why": "0.13 m of neutral ink running 0.34 m along z at x 6.40"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-8",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-0-z-8"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 1.11 m along z at x 6.40"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-0-z-9",
+      "level": "L0",
+      "objectIds": [],
+      "provenance": "UNRESOLVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "not built: the partition is -0.29 m long once trimmed to the walls it meets"
+      ],
+      "why": "0.13 m of neutral ink running 0.26 m along z at x 6.40"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-0",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 3.49 m along x at z 8.61"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-1",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 2.28 m along x at z 8.52"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-2",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 3.49 m along x at z 6.48"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-3",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-3"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.16 m of neutral ink running 0.76 m along x at z 4.80"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-4",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-3"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 2.44 m along x at z 4.78"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-x-5",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-x-5"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 2.97 m along x at z 3.89"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-0",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 1.95 m along z at x 3.39"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-2",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 3.45 m along z at x 3.92"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-3",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 0.68 m along z at x 3.92"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-4",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 1.32 m along z at x 3.92"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-5",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.11 m of neutral ink running 0.26 m along z at x 3.92"
+    },
+    {
+      "family": "INTERIOR_WALL",
+      "featureId": "feat-main-iwall-1-z-6",
+      "level": "L1",
+      "objectIds": [
+        "main-iwall-1-z-6"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "0.13 m of neutral ink running 1.45 m along z at x 5.20"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-0",
+      "level": "L1",
+      "objectIds": [
+        "main-room-0-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "9.03 m² enclosed by 8 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-1",
+      "level": "L1",
+      "objectIds": [
+        "main-room-0-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "3.43 m² enclosed by 12 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-2",
+      "level": "L1",
+      "objectIds": [
+        "main-room-0-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "5.56 m² enclosed by 14 wall faces; numbered 9 = Garaż 24.1 m² published (-77 % off)"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-3",
+      "level": "L2",
+      "objectIds": [
+        "main-room-0-3"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "subdivision (open plan)"
+      ],
+      "why": "47.59 m² enclosed by 36 wall faces; several published rooms may share it (open plan); numbered 3 = Kuchnia 9.63 m² published (394 % off)"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-4",
+      "level": "L1",
+      "objectIds": [
+        "main-room-0-4"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "3.76 m² enclosed by 6 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-0-5",
+      "level": "L1",
+      "objectIds": [
+        "main-room-0-5"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "1.70 m² enclosed by 16 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-1-0",
+      "level": "L1",
+      "objectIds": [
+        "main-room-1-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "18.28 m² enclosed by 22 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-1-1",
+      "level": "L1",
+      "objectIds": [
+        "main-room-1-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "7.45 m² enclosed by 10 wall faces"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-1-2",
+      "level": "L1",
+      "objectIds": [
+        "main-room-1-2"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "subdivision (open plan)"
+      ],
+      "why": "20.90 m² enclosed by 28 wall faces; several published rooms may share it (open plan)"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-1-3",
+      "level": "L2",
+      "objectIds": [
+        "main-room-1-3"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "6.44 m² enclosed by 8 wall faces; numbered 5 = Pralnia 5.59 m² published (15 % off)"
+    },
+    {
+      "family": "ROOM",
+      "featureId": "feat-main-room-1-4",
+      "level": "L1",
+      "objectIds": [
+        "main-room-1-4"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "14.81 m² enclosed by 8 wall faces"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-east-1-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-0-east-1-0",
+        "opening-0-east-1-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 3.02 m gap in the east wall of main on storey 0, no callout read, 2.27 m tall on the elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-front-0-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-0-front-0-0",
+        "opening-0-front-0-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 1.11 m gap in the front wall of main on storey 0, no callout read, 2.28 m tall on the elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-front-0-1",
+      "level": "L1",
+      "objectIds": [
+        "opening-0-front-0-1",
+        "opening-0-front-0-1-unit"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 1.06 m gap in the front wall of main on storey 0, no callout read, not read on an elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-front-8-0",
+      "level": "L1",
+      "objectIds": [
+        "opening-0-front-8-0",
+        "opening-0-front-8-0-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 2.72 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-rear-10-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-0-rear-10-0",
+        "opening-0-rear-10-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-rear-2-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-0-rear-2-0",
+        "opening-0-rear-2-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-west-3-0",
+      "level": "L1",
+      "objectIds": [
+        "opening-0-west-3-0",
+        "opening-0-west-3-0-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-0-west-3-1",
+      "level": "L1",
+      "objectIds": [
+        "opening-0-west-3-1",
+        "opening-0-west-3-1-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-1-front-4-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-1-front-4-0",
+        "opening-1-front-4-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 2.68 m gap in the front wall of main on storey 1, no callout read, 0.56 m tall on the elevation"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-1-rear-6-0",
+      "level": "L2",
+      "objectIds": [
+        "opening-1-rear-6-0",
+        "opening-1-rear-6-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "the raked head would meet the sill: the opening is narrower or lower than read"
+      ],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-opening-1-rear-6-1",
+      "level": "L2",
+      "objectIds": [
+        "opening-1-rear-6-1",
+        "opening-1-rear-6-1-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "PLAN",
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [],
+      "why": "a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation"
+    },
+    {
+      "family": "FACADE_MEMBER",
+      "featureId": "feat-portal-head-attached-0",
+      "level": "L2",
+      "objectIds": [
+        "portal-head-attached-0"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "ELEVATION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "the fascia band continues across attached-0’s zone at the same level: the projecting roof’s edge"
+    },
+    {
+      "family": "RAILING",
+      "featureId": "feat-railing-front-1",
+      "level": "L2",
+      "objectIds": [
+        "railing-front-1"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "ELEVATION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "post spacing"
+      ],
+      "why": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth"
+    },
+    {
+      "family": "RAILING",
+      "featureId": "feat-railing-rear-1",
+      "level": "L2",
+      "objectIds": [
+        "railing-rear-1"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": false,
+        "sightings": 2,
+        "viewFamilies": [
+          "ELEVATION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [
+        "post spacing"
+      ],
+      "why": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth"
+    },
+    {
+      "family": "RECESS",
+      "featureId": "feat-recess-front-0",
+      "level": "L2",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "2 return walls of 0.66 / 0.63 m stand in the 0.99 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..11.42"
+    },
+    {
+      "family": "RECESS",
+      "featureId": "feat-recess-front-1",
+      "level": "L2",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "2 return walls of 0.63 / 0.66 m stand in the 0.99 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22"
+    },
+    {
+      "family": "RECESS",
+      "featureId": "feat-recess-rear-0",
+      "level": "L2",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "2 return walls of 0.66 / 0.63 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.27"
+    },
+    {
+      "family": "RECESS",
+      "featureId": "feat-recess-rear-1",
+      "level": "L2",
+      "objectIds": [],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": true,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "2 return walls of 0.63 / 0.66 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-front-0-0",
+      "level": "L1",
+      "objectIds": [
+        "return-front-0-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-front-0-1",
+      "level": "L1",
+      "objectIds": [
+        "return-front-0-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-front-1-0",
+      "level": "L1",
+      "objectIds": [
+        "return-front-1-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-front-1-1",
+      "level": "L1",
+      "objectIds": [
+        "return-front-1-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-rear-0-0",
+      "level": "L1",
+      "objectIds": [
+        "return-rear-0-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-rear-0-1",
+      "level": "L1",
+      "objectIds": [
+        "return-rear-0-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-rear-1-0",
+      "level": "L1",
+      "objectIds": [
+        "return-rear-1-0"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "RETURN_WALL",
+      "featureId": "feat-return-rear-1-1",
+      "level": "L1",
+      "objectIds": [
+        "return-rear-1-1"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "wall-thick ink on 5 of 5 scan lines across the zone"
+    },
+    {
+      "family": "ATTACHED_ROOF",
+      "featureId": "feat-roof-attached-0",
+      "level": "L2",
+      "objectIds": [
+        "roof-attached-0"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 2,
+        "printed": true,
+        "sightings": 2,
+        "viewFamilies": [
+          "SECTION",
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "the section draws a 0.36 m slab with its top at 2.89 over this body on 6 columns and its outer wall continues to 3.12"
+    },
+    {
+      "family": "ROOF",
+      "featureId": "feat-roof-main",
+      "level": "L2",
+      "objectIds": [
+        "roof-main"
+      ],
+      "provenance": "SOURCE_EXACT",
+      "sourceCoverage": {
+        "independentAssets": 3,
+        "printed": true,
+        "sightings": 3,
+        "viewFamilies": [
+          "ELEVATION",
+          "SECTION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.05
+      },
+      "unresolvedProperties": [],
+      "why": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page; pitch printed as \"40 st.\"; a 40° roof over the 7.90 m span rises 3.31 m, and the section measures 3.28 m from eaves to ridge — 0.03 m apart"
+    },
+    {
+      "family": "ROOFLIGHT",
+      "featureId": "feat-rooflight-left-0",
+      "level": "L1",
+      "objectIds": [
+        "rooflight-left-0",
+        "rooflight-left-0-unit"
+      ],
+      "provenance": "IMAGE_METRIC_REGISTERED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.1
+      },
+      "unresolvedProperties": [
+        "exact position up the slope"
+      ],
+      "why": "a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)"
+    },
+    {
+      "family": "OPENING",
+      "featureId": "feat-shared-opening-0-east-1-1",
+      "level": "L1",
+      "objectIds": [
+        "shared-opening-0-east-1-1",
+        "shared-opening-0-east-1-1-leaf"
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "sill and head (no callout read and no elevation shows this wall)"
+      ],
+      "why": "a 0.90 m gap in the east wall of main on storey 0, no callout read, not read on an elevation; this face is shared with attached-0, so the gap is a doorway between the two bodies"
+    },
+    {
+      "family": "STAIR",
+      "featureId": "feat-stair-main",
+      "level": "L2",
+      "objectIds": [
+        "stair-main"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 3,
+        "printed": false,
+        "sightings": 3,
+        "viewFamilies": [
+          "PLAN",
+          "SECTION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.04
+      },
+      "unresolvedProperties": [],
+      "why": "3 tread ladders (5 risers plus x at 0.264 m, 7 risers plus z at 0.263 m, 5 risers minus x at 0.269 m) with 2 corner squares between them; 17 risers over 3.06 m = 0.180 m each; the arrowhead at (5.43289, 7.967588) fixes the climb"
+    },
+    {
+      "family": "BALCONY",
+      "featureId": "feat-terrace-front-66",
+      "level": "L0",
+      "objectIds": [
+        "terrace-front-66"
+      ],
+      "provenance": "ASSUMED_FOR_RENDERING",
+      "sourceCoverage": {
+        "independentAssets": 0,
+        "printed": false,
+        "sightings": 0,
+        "viewFamilies": []
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [
+        "plinth"
+      ],
+      "why": "the recess floor at the storey level, standing on the plinth to the terrain"
+    },
+    {
+      "family": "BALCONY",
+      "featureId": "feat-terrace-rear-66",
+      "level": "L0",
+      "objectIds": [
+        "terrace-rear-66"
+      ],
+      "provenance": "ASSUMED_FOR_RENDERING",
+      "sourceCoverage": {
+        "independentAssets": 0,
+        "printed": false,
+        "sightings": 0,
+        "viewFamilies": []
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [
+        "plinth"
+      ],
+      "why": "the recess floor at the storey level, standing on the plinth to the terrain"
+    },
+    {
+      "family": "ROOF_MEMBER",
+      "featureId": "feat-verge-front",
+      "level": "L1",
+      "objectIds": [
+        "verge-front-e",
+        "verge-front-w"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "depth"
+      ],
+      "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.54 m), standing in the outer plane 0.99 m in front of the recessed wall"
+    },
+    {
+      "family": "ROOF_MEMBER",
+      "featureId": "feat-verge-rear",
+      "level": "L1",
+      "objectIds": [
+        "verge-rear-e",
+        "verge-rear-w"
+      ],
+      "provenance": "SOURCE_CORROBORATED",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {
+        "m": 0.06
+      },
+      "unresolvedProperties": [
+        "depth"
+      ],
+      "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall"
+    }
+  ],
+  "schema": "buildapp.feature-quality-report",
+  "schemaVersion": "1.0.0",
+  "summary": {
+    "ATTACHED_ROOF": {
+      "L2": 1
+    },
+    "BALCONY": {
+      "L0": 2,
+      "L2": 2
+    },
+    "CAMERA": {
+      "L1": 3
+    },
+    "CHIMNEY": {
+      "L2": 2
+    },
+    "FACADE_ASSEMBLY": {
+      "L1": 2
+    },
+    "FACADE_MEMBER": {
+      "L2": 1
+    },
+    "INTERIOR_DOOR": {
+      "L1": 9
+    },
+    "INTERIOR_WALL": {
+      "L0": 2,
+      "L1": 29
+    },
+    "LEVEL": {
+      "L2": 2
+    },
+    "MASS": {
+      "L2": 2
+    },
+    "OPENING": {
+      "L1": 5,
+      "L2": 7
+    },
+    "RAILING": {
+      "L2": 2
+    },
+    "RECESS": {
+      "L2": 4
+    },
+    "RETURN_WALL": {
+      "L1": 8
+    },
+    "ROOF": {
+      "L2": 1
+    },
+    "ROOFLIGHT": {
+      "L1": 1
+    },
+    "ROOF_MEMBER": {
+      "L1": 2
+    },
+    "ROOM": {
+      "L1": 10,
+      "L2": 2
+    },
+    "STAIR": {
+      "L2": 1
+    },
+    "SURFACE_REGION": {
+      "L0": 1
+    }
+  }
+}
+
