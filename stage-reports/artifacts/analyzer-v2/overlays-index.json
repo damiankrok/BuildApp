@@ -125,7 +125,6 @@
       "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
       "assetId": "asset-rzut-19a11bc745",
       "storeyIndex": 0,
-      "note": "wallPx is not serialised in registrations.json; derived from wallThicknessM",
       "path": "plan-overlays/storey-0.svg"
     },
     {
@@ -133,7 +132,6 @@
       "frameId": "frame-asset-rzut-117027f690-fed2722c38",
       "assetId": "asset-rzut-117027f690",
       "storeyIndex": 1,
-      "note": "wallPx is not serialised in registrations.json; derived from wallThicknessM",
       "path": "plan-overlays/storey-1.svg"
     },
     {
@@ -196,7 +194,6 @@
   ],
   "gaps": [
     "the atlas at /home/user/BuildApp/research/marcowki-v2/source-atlas.json carries view metadata (family, projection, orientation, variants) but no pixel regions or zones, so the source-atlas sheets show its metadata and the analyzer's sightings instead",
-    "wallPx is not serialised in registrations.json; derived from wallThicknessM",
     "the sealed run solved no camera for this render"
   ]
 }

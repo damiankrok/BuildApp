@@ -26,22 +26,22 @@
 <line x1="500.94" y1="405.05" x2="254" y2="405.05" stroke="#c2410c" stroke-width="1.5" stroke-dasharray="6 3"><title>attached-0 slab top 2.89</title></line>
 <line x1="500.94" y1="391.11" x2="254" y2="391.11" stroke="#c2410c" stroke-width="2"><title>attached-0 parapet top 3.12</title></line>
 <text x="257" y="387.11" font-size="9" text-anchor="start" fill="#c2410c" stroke="#ffffff" stroke-width="3" paint-order="stroke">attached-0 parapet 3.12</text>
-<polygon points="835.78,574.04 557.46,574.04 557.46,480.89 835.78,480.89" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-rear-2-0: a 4.68 m gap in the rear wall of main on storey 0, no callout read, 1.57 m tall on the elevation</title></polygon>
-<text x="696.62" y="476.89" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">multi_panel_glazing 4.68×1.57</text>
-<text x="559.46" y="577.04" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.05</text>
-<text x="559.46" y="483.89" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 1.62</text>
-<polygon points="913.22,246 775.79,246 775.79,201 913.22,316.32" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-1-rear-6-0: a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.76 m tall on the elevation; on a gable end its head rakes from 6.32 to 4.38; unresolved: the raked head would meet the sill: the opening is narrower or lower than read</title></polygon>
-<text x="844.51" y="197" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 2.31×0.76 raked_single</text>
-<text x="777.79" y="249" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 5.56</text>
-<text x="777.79" y="204" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 6.32</text>
-<polygon points="697.71,317 560.28,317 560.28,272.94 697.71,272.94" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-1-rear-6-1: a 2.31 m gap in the rear wall of main on storey 1, no callout read, 0.74 m tall on the elevation</title></polygon>
-<text x="628.99" y="268.94" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 2.31×0.74</text>
-<text x="562.28" y="320" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 4.37</text>
-<text x="562.28" y="275.94" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 5.11</text>
-<polygon points="381.35,560.84 321.6,560.84 321.6,502 381.35,502" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-rear-10-0: a 1.00 m gap in the rear wall of attached-0 on storey 0, no callout read, 0.99 m tall on the elevation</title></polygon>
-<text x="351.47" y="498" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 1.00×0.99</text>
-<text x="323.6" y="563.84" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.27</text>
-<text x="323.6" y="505" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 1.26</text>
+<polygon points="836.45,577.04 556.79,577.04 556.79,440.19 836.45,440.19" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-rear-2-0: a 4.68 m gap in the rear wall of main on storey 0, printed 470/230, 1.57 m tall on the elevation; unresolved: the elevation reads 1.57 m tall (0.05..1.62) against the printed 2.30; the printed height stands</title></polygon>
+<text x="696.62" y="436.19" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">multi_panel_glazing 4.70×2.30</text>
+<text x="558.79" y="580.04" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
+<text x="558.79" y="443.19" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.30</text>
+<polygon points="914.13,394.96 774.89,394.96 774.89,214.08 914.13,330.91" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-1-rear-6-0: a 2.31 m gap in the rear wall of main on storey 1, printed 234/304, 1.16 m tall on the elevation; on a gable end its head rakes from 6.10 to 4.14; unresolved: the elevation reads 1.16 m tall (3.94..5.11) against the printed 3.04; the printed height stands</title></polygon>
+<text x="844.51" y="210.08" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">multi_panel_glazing 2.34×3.04 raked_single</text>
+<text x="776.89" y="397.96" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 3.06</text>
+<text x="776.89" y="217.08" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 6.10</text>
+<polygon points="698.61,394.96 559.38,394.96 559.38,331.5 698.61,214.67" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-1-rear-6-1: a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13; unresolved: the elevation reads 0.76 m tall (4.35..5.11) against the printed 3.03; the printed height stands</title></polygon>
+<text x="628.99" y="210.67" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">multi_panel_glazing 2.34×3.03 raked_single</text>
+<text x="561.38" y="397.96" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 3.06</text>
+<text x="561.38" y="334.5" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 4.13</text>
+<polygon points="381.23,577.04 321.72,577.04 321.72,452.09 381.23,452.09" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-rear-10-0: a 1.00 m gap in the rear wall of attached-0 on storey 0, printed 100/210, 0.99 m tall on the elevation; unresolved: the elevation reads 0.99 m tall (0.27..1.26) against the printed 2.10; the printed height stands</title></polygon>
+<text x="351.47" y="448.09" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 1.00×2.10</text>
+<text x="323.72" y="580.04" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
+<text x="323.72" y="455.09" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.10</text>
 <rect x="544" y="397" width="389" height="30" fill="#a16207" fill-opacity="0.15" stroke="#a16207" stroke-width="1.5"><title>balcony-rear-1 (BALCONY): a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
 <text x="547" y="438" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony top 3.03</text>
 <rect x="541.54" y="397" width="390.42" height="30" fill="none" stroke="#a16207" stroke-width="1" stroke-dasharray="4 2"><title>fascia-rear-66: a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
@@ -57,72 +57,86 @@
 <rect x="614.94" y="109.27" width="32.8" height="96.29" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.5"><title>chimney-1: a 0.55 × 0.66 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders</title></rect>
 <text x="631.34" y="105.27" font-size="9" text-anchor="middle" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">chimney-1 top 7.86</text>
 <g>
-<title>OPENING_SILL opening-0-rear-2-0: model 0.051, observed 0.051, residual 0.000 (tol 0.16) — over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04</title>
-<circle cx="689.62" cy="574.04" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="695.62" y="578.04" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill +0.00 m</text>
+<title>OPENING_SILL opening-0-rear-2-0: model 0.000, observed 0.051, residual -0.051 (tol 0.13) — over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04</title>
+<line x1="689.62" y1="577.04" x2="689.62" y2="574.04" stroke="#16a34a" stroke-width="3"></line>
+<line x1="684.62" y1="574.04" x2="694.62" y2="574.04" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="689.62" cy="577.04" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="695.62" y="579.54" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill −0.05 m</text>
 </g>
 <g>
-<title>OPENING_HEAD opening-0-rear-2-0: model 1.616, observed 1.616, residual 0.000 (tol 0.16) — over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04</title>
-<circle cx="703.62" cy="480.89" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="709.62" y="484.89" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.00 m</text>
+<title>OPENING_HEAD opening-0-rear-2-0: model 2.300, observed 1.616, residual 0.684 (tol 0.13) — over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04</title>
+<line x1="703.62" y1="440.19" x2="703.62" y2="480.89" stroke="#dc2626" stroke-width="3"></line>
+<line x1="698.62" y1="480.89" x2="708.62" y2="480.89" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="703.62" cy="440.19" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="709.62" y="464.54" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.68 m</text>
 </g>
 <g>
-<title>OPENING_SILL opening-1-rear-6-0: model 5.563, observed 5.563, residual 0.000 (tol 0.16) — over 95 px of band against 14 px of wall 5 px either side, rows 201 to 246 differ from the wall by 45/255 where the wall differs from itself by 9 ± 5.9; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands</title>
-<circle cx="837.51" cy="246" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="843.51" y="250" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill +0.00 m</text>
+<title>OPENING_SILL opening-1-rear-6-0: model 3.060, observed 3.945, residual -0.885 (tol 0.13) — over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31</title>
+<line x1="837.51" y1="394.96" x2="837.51" y2="342.31" stroke="#dc2626" stroke-width="3"></line>
+<line x1="832.51" y1="342.31" x2="842.51" y2="342.31" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="837.51" cy="394.96" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="843.51" y="372.64" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill −0.88 m</text>
 </g>
 <g>
-<title>OPENING_HEAD opening-1-rear-6-0: model 6.320, observed 6.320, residual 0.000 (tol 0.16) — over 95 px of band against 14 px of wall 5 px either side, rows 201 to 246 differ from the wall by 45/255 where the wall differs from itself by 9 ± 5.9; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands</title>
-<circle cx="851.51" cy="201" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="857.51" y="205" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.00 m</text>
+<title>OPENING_HEAD opening-1-rear-6-0: model 6.100, observed 5.108, residual 0.992 (tol 0.13) — over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31</title>
+<line x1="851.51" y1="214.08" x2="851.51" y2="273.08" stroke="#dc2626" stroke-width="3"></line>
+<line x1="846.51" y1="273.08" x2="856.51" y2="273.08" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="851.51" cy="214.08" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="857.51" y="247.58" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.99 m</text>
 </g>
 <g>
-<title>OPENING_SILL opening-1-rear-6-1: model 4.370, observed 4.370, residual 0.000 (tol 0.16) — over 96 px of band against 14 px of wall 6 px either side, rows 274 to 317 differ from the wall by 65/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands</title>
-<circle cx="621.99" cy="317" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="627.99" y="321" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill +0.00 m</text>
+<title>OPENING_SILL opening-1-rear-6-1: model 3.060, observed 4.353, residual -1.293 (tol 0.13) — over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands</title>
+<line x1="621.99" y1="394.96" x2="621.99" y2="318" stroke="#dc2626" stroke-width="3"></line>
+<line x1="616.99" y1="318" x2="626.99" y2="318" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="621.99" cy="394.96" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="627.99" y="360.48" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill −1.29 m</text>
 </g>
 <g>
-<title>OPENING_HEAD opening-1-rear-6-1: model 5.111, observed 5.111, residual 0.000 (tol 0.16) — over 96 px of band against 14 px of wall 6 px either side, rows 274 to 317 differ from the wall by 65/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands</title>
-<circle cx="635.99" cy="272.94" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="641.99" y="276.94" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.00 m</text>
+<title>OPENING_HEAD opening-1-rear-6-1: model 6.090, observed 5.111, residual 0.979 (tol 0.13) — over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands</title>
+<line x1="635.99" y1="214.67" x2="635.99" y2="272.94" stroke="#dc2626" stroke-width="3"></line>
+<line x1="630.99" y1="272.94" x2="640.99" y2="272.94" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="635.99" cy="214.67" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="641.99" y="247.81" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.98 m</text>
 </g>
 <g>
-<title>OPENING_SILL opening-0-rear-10-0: model 0.272, observed 0.272, residual 0.000 (tol 0.16) — over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84</title>
-<circle cx="344.47" cy="560.84" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="350.47" y="564.84" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill +0.00 m</text>
+<title>OPENING_SILL opening-0-rear-10-0: model 0.000, observed 0.272, residual -0.272 (tol 0.13) — over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84</title>
+<line x1="344.47" y1="577.04" x2="344.47" y2="560.84" stroke="#dc2626" stroke-width="3"></line>
+<line x1="339.47" y1="560.84" x2="349.47" y2="560.84" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="344.47" cy="577.04" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="350.47" y="572.94" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill −0.27 m</text>
 </g>
 <g>
-<title>OPENING_HEAD opening-0-rear-10-0: model 1.261, observed 1.261, residual 0.000 (tol 0.16) — over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84</title>
-<circle cx="358.47" cy="502" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="364.47" y="506" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.00 m</text>
+<title>OPENING_HEAD opening-0-rear-10-0: model 2.100, observed 1.261, residual 0.839 (tol 0.13) — over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84</title>
+<line x1="358.47" y1="452.09" x2="358.47" y2="502" stroke="#dc2626" stroke-width="3"></line>
+<line x1="353.47" y1="502" x2="363.47" y2="502" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="358.47" cy="452.09" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="364.47" y="481.05" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">head +0.84 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 5.630, observed 7.832, residual -2.202 (tol 0.25) — the traced top edge at 1.19 m along the rear view</title>
-<line x1="900.2" y1="242.05" x2="900.2" y2="111" stroke="#dc2626" stroke-width="3"></line>
-<line x1="895.2" y1="111" x2="905.2" y2="111" stroke="#dc2626" stroke-width="2"></line>
-<circle cx="900.2" cy="242.05" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
-<text x="906.2" y="180.52" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −2.20 m</text>
+<title>ROOF_EDGE roof-main: model 5.630, observed 5.765, residual -0.135 (tol 0.25) — the strongest horizontal edge (contrast 69) within 0.6 m of the model's roof line at 1.19 m along the rear view</title>
+<line x1="900.2" y1="242.05" x2="900.2" y2="234" stroke="#16a34a" stroke-width="3"></line>
+<line x1="895.2" y1="234" x2="905.2" y2="234" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="900.2" cy="242.05" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="906.2" y="242.02" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.14 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 6.624, observed 6.723, residual -0.099 (tol 0.25) — the traced top edge at 2.37 m along the rear view</title>
+<title>ROOF_EDGE roof-main: model 6.624, observed 6.723, residual -0.099 (tol 0.25) — the strongest horizontal edge (contrast 65) within 0.6 m of the model's roof line at 2.37 m along the rear view</title>
 <line x1="829.98" y1="182.88" x2="829.98" y2="177" stroke="#16a34a" stroke-width="3"></line>
 <line x1="824.98" y1="177" x2="834.98" y2="177" stroke="#16a34a" stroke-width="2"></line>
 <circle cx="829.98" cy="182.88" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="835.98" y="183.94" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.10 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 7.950, observed 8.000, residual -0.050 (tol 0.25) — the traced top edge at 3.95 m along the rear view</title>
-<line x1="735.97" y1="104" x2="735.97" y2="101" stroke="#16a34a" stroke-width="3"></line>
-<line x1="730.97" y1="101" x2="740.97" y2="101" stroke="#16a34a" stroke-width="2"></line>
+<title>ROOF_EDGE roof-main: model 7.950, observed 7.984, residual -0.034 (tol 0.25) — the strongest horizontal edge (contrast 74) within 0.6 m of the model's roof line at 3.95 m along the rear view</title>
 <circle cx="735.97" cy="104" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
-<text x="741.97" y="106.5" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.05 m</text>
+<text x="741.97" y="107" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.03 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 5.630, observed 6.673, residual -1.043 (tol 0.25) — the traced top edge at 6.71 m along the rear view</title>
-<line x1="571.74" y1="242.05" x2="571.74" y2="180" stroke="#dc2626" stroke-width="3"></line>
-<line x1="566.74" y1="180" x2="576.74" y2="180" stroke="#dc2626" stroke-width="2"></line>
-<circle cx="571.74" cy="242.05" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
-<text x="577.74" y="215.02" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −1.04 m</text>
+<title>ROOF_EDGE roof-main: model 5.630, observed 5.698, residual -0.068 (tol 0.25) — the strongest horizontal edge (contrast 73) within 0.6 m of the model's roof line at 6.71 m along the rear view</title>
+<line x1="571.74" y1="242.05" x2="571.74" y2="238" stroke="#16a34a" stroke-width="3"></line>
+<line x1="566.74" y1="238" x2="576.74" y2="238" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="571.74" cy="242.05" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="577.74" y="244.02" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.07 m</text>
 </g>
 <rect x="8" y="8" width="760" height="154" fill="#ffffff" fill-opacity="0.88" stroke="#16a34a" stroke-width="1.5"/>
 <text x="16" y="25" font-size="11" fill="#0f172a">REAR — frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876</text>
@@ -131,7 +145,7 @@
 <text x="16" y="73" font-size="11" fill="#0f172a">16.806 mm/px isotropic; extent 254,104 – 971,586; y = 0 at row 577.0; along = x from 12.05 falling to the</text>
 <text x="16" y="89" font-size="11" fill="#0f172a">  right</text>
 <text x="16" y="105" font-size="11" fill="#0f172a">span 12.05 m (the 12.05 m width of the envelope); bottom lands at -0.15 m; confidence 0.76</text>
-<text x="16" y="121" font-size="11" fill="#0f172a">grid 0.5 m; 12 residuals (10 within tolerance, green; 2 out, red)</text>
+<text x="16" y="121" font-size="11" fill="#0f172a">grid 0.5 m; 12 residuals (5 within tolerance, green; 7 out, red)</text>
 <text x="16" y="137" font-size="11" fill="#0f172a">why: 717 px across is the 12.05 m width of the envelope, so 0.016806 m/px; the apex at row 104 is the ridge</text>
 <text x="16" y="153" font-size="11" fill="#0f172a">  datum 7.95 and the silhouette's bottom then lands at -0.15 m</text>
 </svg>

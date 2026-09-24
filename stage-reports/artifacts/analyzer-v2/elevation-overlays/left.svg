@@ -28,32 +28,34 @@
 <line x1="1080.99" y1="405.63" x2="567.47" y2="405.63" stroke="#c2410c" stroke-width="1.5" stroke-dasharray="6 3"><title>attached-0 slab top 2.89</title></line>
 <line x1="1080.99" y1="391.47" x2="567.47" y2="391.47" stroke="#c2410c" stroke-width="2"><title>attached-0 parapet top 3.12</title></line>
 <text x="570.47" y="387.47" font-size="9" text-anchor="start" fill="#c2410c" stroke="#ffffff" stroke-width="3" paint-order="stroke">attached-0 parapet 3.12</text>
-<polygon points="536,580.22 481.64,580.22 481.64,453.38 536,453.38" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-west-3-0: a 0.90 m gap in the west wall of main on storey 0, no callout read, not read on an elevation; unresolved: sill and head (no callout read and no elevation shows this wall)</title></polygon>
-<text x="508.82" y="449.38" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">door 0.90×2.10</text>
-<text x="483.64" y="583.22" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
-<text x="483.64" y="456.38" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.10</text>
-<polygon points="670.29,580.22 585.56,580.22 585.56,453.38 670.29,453.38" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-west-3-1: a 1.40 m gap in the west wall of main on storey 0, no callout read, not read on an elevation; unresolved: sill and head (no callout read and no elevation shows this wall)</title></polygon>
-<text x="627.93" y="449.38" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">glazed_door 1.40×2.10</text>
-<text x="587.56" y="583.22" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
-<text x="587.56" y="456.38" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.10</text>
+<polygon points="536,580.22 481.63,580.22 481.63,441.29 536,441.29" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-west-3-0: a 0.90 m gap in the west wall of main on storey 0, printed 90/230, not read on an elevation; unresolved: the printed height reads 230 or 290 alike, and no elevation shows this wall</title></polygon>
+<text x="508.82" y="437.29" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">door 0.90×2.30</text>
+<text x="483.63" y="583.22" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
+<text x="483.63" y="444.29" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.30</text>
+<polygon points="670.21,531.9 585.64,531.9 585.64,447.33 670.21,447.33" fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="1.8"><title>opening-0-west-3-1: a 1.40 m gap in the west wall of main on storey 0, printed 140/140, not read on an elevation; unresolved: sill height (no elevation reading; a common head is assumed)</title></polygon>
+<text x="627.93" y="443.33" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 1.40×1.40</text>
+<text x="587.64" y="534.9" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.80</text>
+<text x="587.64" y="450.33" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.20</text>
 <rect x="526.56" y="105.32" width="44.53" height="101.78" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.5"><title>chimney-0: a 0.63 × 0.74 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders</title></rect>
 <text x="548.82" y="101.32" font-size="9" text-anchor="middle" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">chimney-0 top 7.86</text>
 <rect x="788.94" y="105.36" width="39.75" height="97.75" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.5"><title>chimney-1: a 0.55 × 0.66 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders</title></rect>
 <text x="808.82" y="101.36" font-size="9" text-anchor="middle" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">chimney-1 top 7.86</text>
 <rect x="741" y="237" width="37" height="39" fill="#0891b2" fill-opacity="0.2" stroke="#0891b2" stroke-width="1.5"><title>rooflight-left-0: a 0.61 × 0.65 m patch 30 luma lighter than the covering in the roof plane of the left render (100 % filled)</title></rect>
 <text x="741" y="233" font-size="9" text-anchor="start" fill="#0891b2" stroke="#ffffff" stroke-width="3" paint-order="stroke">rooflight 0.61×1.00 (low slope)</text>
+<rect x="609" y="237" width="38" height="40" fill="#0891b2" fill-opacity="0.2" stroke="#0891b2" stroke-width="1.5"><title>rooflight-left-1: a 0.63 × 0.66 m patch 50 luma lighter than the covering in the roof plane of the left render (90 % filled)</title></rect>
+<text x="609" y="233" font-size="9" text-anchor="start" fill="#0891b2" stroke="#ffffff" stroke-width="3" paint-order="stroke">rooflight 0.63×1.03 (low slope)</text>
 <g>
-<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the traced top edge at 2.92 m along the left view</title>
+<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 2.92 m along the left view</title>
 <circle cx="904.6" cy="100.01" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="910.6" y="104.5" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof +0.02 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the traced top edge at 7.30 m along the left view</title>
+<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the strongest horizontal edge (contrast 96) within 0.6 m of the model's roof line at 7.30 m along the left view</title>
 <circle cx="640.03" cy="100.01" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="646.03" y="104.5" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof +0.02 m</text>
 </g>
 <g>
-<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the traced top edge at 11.68 m along the left view</title>
+<title>ROOF_EDGE roof-main: model 7.950, observed 7.934, residual 0.016 (tol 0.25) — the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 11.68 m along the left view</title>
 <circle cx="375.46" cy="100.01" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="381.46" y="104.5" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof +0.02 m</text>
 </g>

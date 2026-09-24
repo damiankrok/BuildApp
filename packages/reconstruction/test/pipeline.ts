@@ -33,9 +33,12 @@ export type Fixture = {
 const PROJECTION: Record<string, string> = { FLOOR_PLAN: 'ORTHOGRAPHIC_PLAN', SECTION: 'ORTHOGRAPHIC_SECTION', ELEVATION: 'ORTHOGRAPHIC_ELEVATION' }
 
 /** Build the package, analyse it and read its metrics. Everything downstream starts from the result. */
-export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: SheetOptions = {}, only?: (slug: string) => boolean): Promise<Fixture> {
-  return buildFixtureFrom(renderSheets(house, options).filter((s) => (only ? only(s.slug) : true)))
+export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: SheetOptions = {}, only?: (slug: string) => boolean, published: PublishedFacts = {}): Promise<Fixture> {
+  return buildFixtureFrom(renderSheets(house, options).filter((s) => (only ? only(s.slug) : true)), published)
 }
+
+/** What the publisher's page says besides the drawings: for now the room list, which the v2 interior pass corroborates its rooms against. */
+export type PublishedFacts = { rooms?: SourcePackage['publishedRooms'] }
 
 /**
  * The same, from a sheet list somebody else assembled.
@@ -45,7 +48,7 @@ export async function buildFixture(house: SyntheticHouse = LARCHFIELD, options: 
  * — and expressing that means building the package from sheets that did not
  * all come from the same spec.
  */
-export async function buildFixtureFrom(sheets: ReturnType<typeof renderSheets>): Promise<Fixture> {
+export async function buildFixtureFrom(sheets: ReturnType<typeof renderSheets>, published: PublishedFacts = {}): Promise<Fixture> {
   const bytesByUrl = new Map<string, Uint8Array>()
   const assets = sheets.map((s) => {
     const url = `https://synthetic.invalid/${s.slug}.png`
@@ -70,7 +73,7 @@ export async function buildFixtureFrom(sheets: ReturnType<typeof renderSheets>):
     assets,
     publishedFacts: [],
     publishedSpecifications: [],
-    publishedRooms: [],
+    publishedRooms: published.rooms ?? [],
     failures: [],
     contentHash: sha256Bytes(new Uint8Array([2])),
   } as unknown as SourcePackage

@@ -50,7 +50,7 @@ import { qualityLevelOf, sealQualityReport } from './quality.js'
 import type { FeatureQualityReport } from './quality.js'
 import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
-import { dominantTone } from './scan.js'
+import { dominantTone, lumaAt } from './scan.js'
 
 export const SOLVER_V2_VERSION = '2.0.0' as const
 
@@ -255,10 +255,43 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const support = layout.roofSupports.find((r) => r.massId === main.sourceMassId)
   let mainRoof: BuildingV2['mainRoof']
   if (support && support.kind !== 'FLAT' && support.kind !== 'UNKNOWN' && support.pitchDeg && ridgeY !== undefined) {
-    const pitch = support.pitchDeg.value
-    const ridgeAxis = support.ridgeAxis ?? 'Z'
+    // Which way the ridge runs is read off the renders: a gable end has an
+    // apex at mid-span, a side view a flat top. A view votes only when the
+    // difference is unmistakable; the layout's own axis stands when no view
+    // does, or when the views disagree.
+    const apexVotes: Array<{ side: string; peakM: number; gableEnd: boolean }> = []
+    for (const v of views) {
+      const extent = v.view.registration.extent
+      // The topmost ink in a column: an outline on a line drawing, the roof
+      // or a tree on a render. Trees only lower a peak, and a lowered peak
+      // only withholds a vote.
+      // Sampled on the main body's own span, so an attached body in the same
+      // view does not move the apex column off the gable.
+      const along = v.view.side === 'FRONT' || v.view.side === 'REAR' ? [main.x0, main.x1] : [main.z0, main.z1]
+      const at = (f: number): number | undefined => {
+        const x = Math.round(v.view.pxOf(along[0] + (along[1] - along[0]) * f))
+        if (x < extent.x0 || x > extent.x1) return undefined
+        for (let y = Math.max(0, extent.y0 - 4); y <= extent.y1; y += 1) if (lumaAt(v.raster, x, y) < 200) return v.view.yOf(y)
+        return undefined
+      }
+      const mid = at(0.5)
+      const ends = [at(0.15), at(0.85)].filter((y): y is number => y !== undefined)
+      if (mid === undefined || ends.length < 2) continue
+      const peakM = round6(mid - Math.max(...ends))
+      apexVotes.push({ side: v.view.side, peakM, gableEnd: peakM > 0.6 })
+    }
+    const endsFrontRear = apexVotes.filter((a) => (a.side === 'FRONT' || a.side === 'REAR') && a.gableEnd).length
+    const endsSides = apexVotes.filter((a) => (a.side === 'LEFT' || a.side === 'RIGHT') && a.gableEnd).length
+    const votedAxis: 'X' | 'Z' | undefined = endsFrontRear > 0 && endsSides === 0 ? 'Z' : endsSides > 0 && endsFrontRear === 0 ? 'X' : undefined
+    const ridgeAxis: 'X' | 'Z' = votedAxis ?? support.ridgeAxis ?? 'Z'
     const ridgeAt = ridgeAxis === 'Z' ? round6((main.x0 + main.x1) / 2) : round6((main.z0 + main.z1) / 2)
     const halfSpan = ridgeAxis === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
+    // A measured pitch is a rise over the layout's half span; if the views put
+    // the ridge the other way, the rise stands and the pitch follows the true span.
+    const printedPitch = support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE'
+    const supportHalfSpan = (support.ridgeAxis ?? 'Z') === 'Z' ? (main.x1 - main.x0) / 2 : (main.z1 - main.z0) / 2
+    const pitch = !printedPitch && support.ridgeAxis && support.ridgeAxis !== ridgeAxis ? round6((Math.atan((supportHalfSpan * Math.tan((support.pitchDeg.value * Math.PI) / 180)) / halfSpan) * 180) / Math.PI) : support.pitchDeg.value
+    const axisWhy = votedAxis ? `the ${apexVotes.filter((a) => a.gableEnd).map((a) => a.side.toLowerCase()).join(' and ')} render${apexVotes.filter((a) => a.gableEnd).length === 1 ? ' shows' : 's show'} a gable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM >= 0 ? '+' : ''}${a.peakM.toFixed(2)}`).join(', ')})` : `no render shows an unmistakable apex (${apexVotes.map((a) => `${a.side.toLowerCase()} ${a.peakM.toFixed(2)}`).join(', ') || 'none registered'}); the layout's axis stands`
     const derivedEave = round6(ridgeY - halfSpan * Math.tan((pitch * Math.PI) / 180))
     const eaveY = derivedEave
     const sideViews = views.filter((v) => (ridgeAxis === 'Z' ? v.view.side === 'LEFT' || v.view.side === 'RIGHT' : v.view.side === 'FRONT' || v.view.side === 'REAR'))
@@ -271,7 +304,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const featureId = feature('ROOF', 'roof-main', { pitchDeg: { value: pitch, low: pitch - 0.5, high: pitch + 0.5, unit: 'deg' }, ridgeY: { value: ridgeY, low: ridgeY - 0.02, high: ridgeY + 0.02 }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, extent: { value: footprint.z1 - footprint.z0, low: footprint.z1 - footprint.z0 - 0.1, high: footprint.z1 - footprint.z0 + 0.1 } }, sids, support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED', support.why, { printed: true, uncertaintyM: 0.05, parameterProvenance: { extent: coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', eaveY: 'SOURCE_DERIVED' } })
     mainRoof = { massId: main.id, kind: 'GABLE', pitchDeg: pitch, ridgeAxis, ridgeAt, eaveY, ridgeY, footprint, coversZones, coversZonesWhy: coversZones ? `both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes` : 'the side renders span the walled depth only', buildUpVerticalM: round6(Math.max(0.15, eaveY - (levelOf(topStorey)?.wallTop ?? eaveY))), thicknessM: CONVENTIONS.roofThickness, authority: support.authority, featureId, provenance: support.authority === 'PUBLISHED_SPECIFICATION' || support.authority === 'PRINTED_ANGLE' ? 'SOURCE_EXACT' : 'SOURCE_DERIVED' }
     for (const e of support.evidenceIds) record({ evidenceId: e, evidenceKind: 'METRIC', what: 'the roof pitch statement', authority: 'HIGH', featureId, disposition: 'USED_IN_MODEL', reason: 'the main roof pitch', stage: 'METRIC_SOLVE' })
-    step({ stage: 'roof', what: 'the main roof', method: 'DISCRETE_SELECTION', detail: `${pitch}° ${support.kind.toLowerCase()} ridge along ${ridgeAxis}, eave ${eaveY}, ${mainRoof.coversZonesWhy}`, inputs: sideViews.length, outputs: 1 })
+    step({ stage: 'roof', what: 'the main roof', method: 'DISCRETE_SELECTION', detail: `${pitch}° ${support.kind.toLowerCase()} ridge along ${ridgeAxis} (${axisWhy}), eave ${eaveY}, ${mainRoof.coversZonesWhy}`, inputs: sideViews.length, outputs: 1 })
   } else {
     gap({ what: 'the main roof', reason: 'no pitched roof with a stated pitch and a ridge datum was inferred over the main body', status: 'MISSING', observationIds: [], evidenceIds: [] })
   }

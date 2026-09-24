@@ -1,5 +1,5 @@
 {
-  "candidateHash": "bbb44f6dc5d10ae92f0e672c92f4801bea97eab2cd380d85ee62cc6737f69c2d",
+  "candidateHash": "3530eef866c2ab531308552c1fdc8868a36f9aa7d66025513f5e10f11daa2010",
   "residuals": [
     {
       "featureId": "opening-0-front-0-0",
@@ -175,8 +175,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 5.748349,
-      "residualM": -0.118459,
+      "observedM": 5.765155,
+      "residualM": -0.135265,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 69) within 0.6 m of the model's roof line at 1.19 m along the rear view",
       "withinTolerance": true
@@ -187,8 +187,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 6.624223,
       "objectId": "roof-main",
-      "observedM": 6.555037,
-      "residualM": 0.069186,
+      "observedM": 6.723097,
+      "residualM": -0.098874,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 65) within 0.6 m of the model's roof line at 2.37 m along the rear view",
       "withinTolerance": true
@@ -199,8 +199,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.815487,
-      "residualM": 0.134513,
+      "observedM": 7.983547,
+      "residualM": -0.033547,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 74) within 0.6 m of the model's roof line at 3.95 m along the rear view",
       "withinTolerance": true
@@ -211,8 +211,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 5.462647,
-      "residualM": 0.167243,
+      "observedM": 5.697931,
+      "residualM": -0.068041,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 73) within 0.6 m of the model's roof line at 6.71 m along the rear view",
       "withinTolerance": true
@@ -223,8 +223,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 5.539952,
-      "residualM": 0.089938,
+      "observedM": 5.759041,
+      "residualM": -0.129151,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 74) within 0.6 m of the model's roof line at 1.19 m along the front view",
       "withinTolerance": true
@@ -235,8 +235,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 6.624223,
       "objectId": "roof-main",
-      "observedM": 6.551132,
-      "residualM": 0.073091,
+      "observedM": 6.719662,
+      "residualM": -0.095439,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 73) within 0.6 m of the model's roof line at 2.37 m along the front view",
       "withinTolerance": true
@@ -247,8 +247,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.83196,
-      "residualM": 0.11804,
+      "observedM": 8.00049,
+      "residualM": -0.05049,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 78) within 0.6 m of the model's roof line at 3.95 m along the front view",
       "withinTolerance": true
@@ -259,8 +259,8 @@
       "kind": "ROOF_EDGE",
       "modelM": 5.62989,
       "objectId": "roof-main",
-      "observedM": 5.489393,
-      "residualM": 0.140497,
+      "observedM": 5.742188,
+      "residualM": -0.112298,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 69) within 0.6 m of the model's roof line at 6.71 m along the front view",
       "withinTolerance": true
@@ -271,11 +271,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.486584,
-      "residualM": 0.463416,
+      "observedM": 7.933569,
+      "residualM": 0.016431,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 2.92 m along the left view",
-      "withinTolerance": false
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -283,11 +283,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.486584,
-      "residualM": 0.463416,
+      "observedM": 7.933569,
+      "residualM": 0.016431,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 96) within 0.6 m of the model's roof line at 7.30 m along the left view",
-      "withinTolerance": false
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -295,11 +295,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.486584,
-      "residualM": 0.463416,
+      "observedM": 7.933569,
+      "residualM": 0.016431,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 95) within 0.6 m of the model's roof line at 11.68 m along the left view",
-      "withinTolerance": false
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -307,11 +307,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.513602,
-      "residualM": 0.436398,
+      "observedM": 7.933177,
+      "residualM": 0.016823,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 93) within 0.6 m of the model's roof line at 2.92 m along the right view",
-      "withinTolerance": false
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -319,11 +319,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.513602,
-      "residualM": 0.436398,
+      "observedM": 7.933177,
+      "residualM": 0.016823,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 94) within 0.6 m of the model's roof line at 7.30 m along the right view",
-      "withinTolerance": false
+      "withinTolerance": true
     },
     {
       "featureId": "feat-roof-main",
@@ -331,11 +331,11 @@
       "kind": "ROOF_EDGE",
       "modelM": 7.95,
       "objectId": "roof-main",
-      "observedM": 7.480036,
-      "residualM": 0.469964,
+      "observedM": 7.933177,
+      "residualM": 0.016823,
       "toleranceM": 0.25,
       "why": "the strongest horizontal edge (contrast 93) within 0.6 m of the model's roof line at 11.68 m along the right view",
-      "withinTolerance": false
+      "withinTolerance": true
     }
   ]
 }

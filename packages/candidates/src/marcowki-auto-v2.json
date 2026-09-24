@@ -1,9 +1,9 @@
 {
-  "contentHash": "bbb44f6dc5d10ae92f0e672c92f4801bea97eab2cd380d85ee62cc6737f69c2d",
+  "contentHash": "3530eef866c2ab531308552c1fdc8868a36f9aa7d66025513f5e10f11daa2010",
   "contradictions": [],
   "hypothesisSetHash": "a0794fd8db1b3b29b6f88589a2be6487d45bf17a112316202b512b0f9460364b",
   "hypothesisSetId": "hypotheses-v2-a0794fd8db1b3b29",
-  "id": "candidate-marcowki-bbb44f6dc5d10ae9",
+  "id": "candidate-marcowki-3530eef866c2ab53",
   "label": "Marcówki (auto v2)",
   "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
   "metricEvidenceId": "metrics-marcowki-5f12247b7585701f",
@@ -3225,7 +3225,7 @@
   "residuals": {
     "hard": 15,
     "metricMaxM": 1.755273,
-    "metricRmsM": 0.62411,
+    "metricRmsM": 0.586296,
     "soft": 86,
     "unresolved": 34
   },
@@ -3275,7 +3275,7 @@
       "what": "renders registered on the ridge datum"
     },
     {
-      "detail": "40° gable ridge along Z, eave 4.635556, both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes",
+      "detail": "40° gable ridge along Z (no render shows an unmistakable apex (rear 0.00, front 0.00, left 0.00, right 0.00); the layout's axis stands), eave 4.635556, both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes",
       "index": 4,
       "inputs": 2,
       "method": "DISCRETE_SELECTION",
@@ -3356,7 +3356,7 @@
       "what": "perspective cameras"
     },
     {
-      "detail": "28 residuals, 15 outside tolerance after 1 repair round (0 applied, 9 refused)",
+      "detail": "28 residuals, 9 outside tolerance after 1 repair round (0 applied, 9 refused)",
       "index": 13,
       "inputs": 28,
       "method": "DIRECT",

@@ -165,8 +165,23 @@ a lost piece of evidence.
 - `packages/reconstruction/test/facade-stripes.test.ts`: 100 alternating
   stripes do not become 100 members; a fascia is only ever the band at the
   slab level passed in.
-- Synthetic fixtures through v2: see `packages/reconstruction/test/fixtures-v2.test.ts`
-  (§25; no reference to the Marcówki project anywhere in them).
+- Synthetic fixtures through v2 (`packages/reconstruction/test/fixtures-v2.test.ts`,
+  §25): ten houses that exist only in `packages/synthetic-drawings/src/fixtures-v2.ts`,
+  drawn in the model frame with nothing of the reference project in them —
+  one storey with a gable; two storeys; a lower attached body with a flat
+  roof; a front loggia with two returns and the roof running over it; a
+  partition with a door and numbered, labelled rooms on each storey; a
+  straight stair of sixteen risers with its arrow; a chimney on both plans
+  and above the roof; a rooflight in the roof plane; an attic window with a
+  raked head on the gable end; an upper loggia with a balcony slab, fascia
+  and railing. Every expectation is the number the sheet was drawn from, and
+  every fixture seals a replayable candidate with an empty graph and ledger
+  violation list. All eleven tests pass. Writing them found and fixed one
+  real defect: the ridge axis had been taken from the 03R layout, which
+  picks the longer plan side; v2 now votes it from the renders' own apex
+  (a gable end has a peak at mid-span, a side view a flat top) and keeps the
+  layout's axis only when no render shows an unmistakable apex, re-deriving
+  a measured pitch over the true half span when the axis changes.
 - CI (`.github/workflows/buildapp-ci.yml`): the core job runs the audit, the
   no-benchmark proof and the evaluation, and uploads
   `stage-reports/artifacts/analyzer-v2/**`; browser and Android jobs carry the

@@ -341,7 +341,16 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const l = levelOf(0)
     const top = c.topY ?? (b.mainRoof ? b.mainRoof.ridgeY - 0.1 : 0)
     push({ type: 'placeChimney', id: c.id, levelId: l?.id ?? 'lvl-0', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, baseOffset: 0, height: round6(top - (l?.elevation ?? 0)), materialId: MATERIALS_V2.chimney }, c.featureId, 'chimneys')
-    if (b.mainRoof) push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: 'roof-main', kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, throughId: c.id }, c.featureId, 'roofOpenings')
+    if (b.mainRoof) {
+      // The model cuts a penetration strictly within one slope; a stack that
+      // straddles the ridge pierces both, so it is placed through the roof
+      // without a cut and the fact is noted rather than the footprint bent.
+      const roof = b.mainRoof
+      const across: [number, number] = roof.ridgeAxis === 'Z' ? [c.x0, c.x1] : [c.z0, c.z1]
+      const straddles = roof.kind === 'GABLE' && across[0] < roof.ridgeAt + 0.01 && across[1] > roof.ridgeAt - 0.01
+      if (straddles) notes.push(`${c.id} straddles the ridge at ${roof.ridgeAt}: placed through the roof without a penetration cut, which the model confines to one slope`)
+      else push({ type: 'cutRoofOpening', id: `${c.id}-pen`, roofId: 'roof-main', kind: 'PENETRATION', footprint: { minX: c.x0, maxX: c.x1, minZ: c.z0, maxZ: c.z1 }, throughId: c.id }, c.featureId, 'roofOpenings')
+    }
     evidence(c.id, c.provenance, c.why, { height: c.topY === undefined ? 'ASSUMED_FOR_RENDERING' : 'IMAGE_METRIC_REGISTERED' })
   }
   for (const r of b.rooflights) {
