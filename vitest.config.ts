@@ -24,6 +24,12 @@ export default defineConfig({
     // not the five the default allows.
     testTimeout: 120_000,
     hookTimeout: 120_000,
+    // And they block a worker's event loop for as long as they run, so the
+    // runner's acknowledgement of each finished test cannot be received
+    // until the file is done; past sixty seconds of that the worker gives
+    // up waiting and the run is failed. The setup file yields the loop once
+    // before every test. See tests/setup/yield-between-tests.ts.
+    setupFiles: ['tests/setup/yield-between-tests.ts'],
     // And they are CPU-bound for tens of seconds at a stretch, which is why
     // the number of workers is capped BELOW the core count rather than set to
     // it. Vitest's main thread has to service each worker's progress calls

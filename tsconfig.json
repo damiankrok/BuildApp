@@ -8,6 +8,7 @@
     "packages/*/test/**/*.ts",
     "packages/*/scripts/**/*.ts",
     "tests/architecture/**/*.ts",
+    "tests/setup/**/*.ts",
     "vitest.config.ts"
   ],
   "exclude": ["**/node_modules/**", "**/dist/**"]
