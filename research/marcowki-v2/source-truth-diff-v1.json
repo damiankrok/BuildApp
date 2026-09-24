@@ -1,0 +1,1398 @@
+{
+ "schema": "buildapp.research.source-truth-diff",
+ "schemaVersion": "1.0.0",
+ "v1": "packages/reference-marcowki (facts.ts + expected.ts), reference frame converted with z_app = 13.60 - z_ref",
+ "v2": "research/marcowki-v2/marcowki-source-truth-v2.json",
+ "v1FactCount": 87,
+ "verdicts": {
+  "SAME": 87,
+  "V1_UNCERTAIN_V2_RESOLVED": 1,
+  "V1_WRONG": 5,
+  "CHANGED": 1,
+  "V1_MISSING": 8,
+  "SAME_UNRESOLVED": 1,
+  "V2_UNRESOLVED": 1
+ },
+ "rows": [
+  {
+   "v1Key": "plan.overallWidth",
+   "v1Value": 12.05,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-ENVELOPE",
+   "v2Value": 12.05,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "plan.mainBodyWidth",
+   "v1Value": 7.9,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-MAIN",
+   "v2Value": 7.9,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "plan.garageWidth",
+   "v1Value": 4.15,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-GARAGE",
+   "v2Value": 4.15,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "plan.overallDepth",
+   "v1Value": 12.6,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-MAIN",
+   "v2Value": 12.6,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "plan.garageDepth",
+   "v1Value": 7.5,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-GARAGE",
+   "v2Value": 7.5,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "plan.rearZoneToGarage",
+   "v1Value": 5.1,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-MASS-GARAGE",
+   "v2Value": 5.1,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": "rear wall face 13.60 to the garage rear wall 8.50"
+  },
+  {
+   "v1Key": "wall.externalThickness",
+   "v1Value": 0.45,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-MASS-MAIN",
+   "v2Value": 0.45,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "wall.partitionThickness",
+   "v1Value": 0.12,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-IWALL-G-ROOM_EAST",
+   "v2Value": 0.12,
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "wall.boilerNorthThickness",
+   "v1Value": 0.26,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-IWALL-G-BOILER_NORTH",
+   "v2Value": 0.26,
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "wall.returnThickness",
+   "v1Value": 0.61,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RETURN-THICKNESS",
+   "v2Value": 0.61,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.terrain",
+   "v1Value": -0.32,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-TERRAIN",
+   "v2Value": -0.32,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.groundFfl",
+   "v1Value": 0.0,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-GROUND_FFL",
+   "v2Value": 0.0,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.upperFfl",
+   "v1Value": 3.06,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-UPPER_FFL",
+   "v2Value": 3.06,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.printedEave",
+   "v1Value": 4.67,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-EAVE_DATUM",
+   "v2Value": 4.67,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.ridge",
+   "v1Value": 7.95,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-RIDGE",
+   "v2Value": 7.95,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.groundClearHeight",
+   "v1Value": 2.72,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-GROUND_CLEAR",
+   "v2Value": 2.72,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "level.atticClearHeight",
+   "v1Value": 2.66,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-ATTIC_CLEAR",
+   "v2Value": 2.66,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": "v2 adds the ceiling span x 2.45..5.43 and its underside 5.72, which v1 recorded but did not use"
+  },
+  {
+   "v1Key": "level.eave",
+   "v1Value": 4.63556,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-ROOF-MAIN",
+   "v2Value": 4.636,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": "both take the derived plane; the printed 4.67 stays a recorded conflict"
+  },
+  {
+   "v1Key": "slab.upperThickness",
+   "v1Value": 0.33,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-LEVEL-GROUND_CLEAR",
+   "v2Value": 0.33,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "wall.kneeWall",
+   "v1Value": 1.3,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-PAGE-KNEEWALL",
+   "v2Value": 1.3,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "building.height",
+   "v1Value": 8.27,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-PAGE-BUILDING_HEIGHT",
+   "v2Value": 8.27,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "footprint.area",
+   "v1Value": 131.16,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-PAGE-FOOTPRINT_AREA",
+   "v2Value": 131.16,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "roof.pitch",
+   "v1Value": 40.0,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-ROOF-MAIN",
+   "v2Value": 40,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "roof.buildUp",
+   "v1Value": 0.21109,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-ROOF-BUILDUP",
+   "v2Value": 0.211,
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "roof.overhang",
+   "v1Value": 0.0,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-ROOF-MAIN",
+   "v2Value": 0.0,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "roof.extentFront",
+   "v1Value": 0.0,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-ROOF-EXTENT",
+   "v2Value": 0.0,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "v1 ref z 13.60 = app z 0"
+  },
+  {
+   "v1Key": "roof.extentRear",
+   "v1Value": 14.6,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-ROOF-EXTENT",
+   "v2Value": 14.6,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "v1 ref z -1.00 = app z 14.60"
+  },
+  {
+   "v1Key": "garage.clearHeight",
+   "v1Value": 2.52,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-LEVEL-GARAGE_CLEAR",
+   "v2Value": 2.52,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "garage.roofTop",
+   "v1Value": 2.88,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-ROOF-GARAGE",
+   "v2Value": 2.88,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "garage.roofThickness",
+   "v1Value": 0.34,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-LEVEL-GARAGE_CLEAR",
+   "v2Value": 0.35,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "garage.bandTop",
+   "v1Value": 3.12,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-ROOF-GARAGE",
+   "v2Value": 3.09,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_UNCERTAIN_V2_RESOLVED",
+   "note": "v1 left the parapet \"unresolved ~0.2 m\"; v2 finds the upstand on the section itself (px 970..1001 rising to row 417 = 3.10) and corroborates it on three renders: RESOLVED as a parapet 3.09"
+  },
+  {
+   "v1Key": "recess.frontOuterPlane",
+   "v1Value": 0.0,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-RECESS-FRONT-GROUND",
+   "v2Value": 0.0,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.frontBackPlane",
+   "v1Value": 1.0,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-RECESS-FRONT-GROUND",
+   "v2Value": 1.0,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.frontFromX",
+   "v1Value": 0.61,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RECESS-FRONT-GROUND",
+   "v2Value": 0.61,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.frontToX",
+   "v1Value": 11.44,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RECESS-FRONT-GROUND",
+   "v2Value": 11.42,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.rearOuterPlane",
+   "v1Value": 14.6,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-RECESS-REAR",
+   "v2Value": 14.6,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.rearBackPlane",
+   "v1Value": 13.6,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-RECESS-REAR",
+   "v2Value": 13.6,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.rearFromX",
+   "v1Value": 0.61,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RECESS-REAR",
+   "v2Value": 0.61,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "recess.rearToX",
+   "v1Value": 7.29,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RECESS-REAR",
+   "v2Value": 7.29,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "return.eastFrontBase",
+   "v1Value": 2.96,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RECESS-FRONT-ATTIC",
+   "v2Value": 3.06,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "v1 put the return base at the render-read slab top 2.96; v2 takes the attic floor 3.06 with the fascia measured 2.28..3.07 on the front render (its top IS the slab top within 0.04)"
+  },
+  {
+   "v1Key": "return.garageTop",
+   "v1Value": 3.08,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-ROOF-GARAGE",
+   "v2Value": 3.09,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "balcony.frontFromX",
+   "v1Value": 3.338,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-BALCONY-FRONT",
+   "v2Value": 3.25,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": "v1 plan edge line 3.338; v2 front-render fascia end 3.25 with the plan line at 3.25..3.34: within the 0.1 the two sources disagree by"
+  },
+  {
+   "v1Key": "balcony.frontToX",
+   "v1Value": 7.9,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-BALCONY-FRONT",
+   "v2Value": 7.9,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "balcony.top",
+   "v1Value": 2.96,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-BALCONY-FRONT",
+   "v2Value": 3.06,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": "v1 2.96 (rear render read); v2 3.06 = the attic floor, the fascia top measured 3.02..3.10 on both renders"
+  },
+  {
+   "v1Key": "balcony.thickness",
+   "v1Value": 0.55,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-BALCONY-REAR",
+   "v2Value": 0.56,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": "rear fascia: v1 0.55, v2 0.56"
+  },
+  {
+   "v1Key": "balcony.thickness",
+   "v1Value": 0.55,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-BALCONY-FRONT",
+   "v2Value": 0.79,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "V1_WRONG",
+   "note": "FRONT fascia: v1 applied the rear 0.55 to both balconies; v2 measures the front band 2.28..3.07 = 0.79 (it is continuous with the garage roof edge)"
+  },
+  {
+   "v1Key": "portal.headTop",
+   "v1Value": 3.08,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-PORTAL-HEAD",
+   "v2Value": 3.07,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "portal.headThickness",
+   "v1Value": 0.67,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-PORTAL-HEAD",
+   "v2Value": 0.79,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "CHANGED",
+   "note": "v1 assumed the portal soffit at the rear balcony soffit 2.41 (0.67 thick); v2 measures the soffit at 2.28 right on the garage door head (0.79 thick)"
+  },
+  {
+   "v1Key": "railing.height",
+   "v1Value": 0.9,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-RAILING-FRONT",
+   "v2Value": 0.87,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "railing.frontFromX",
+   "v1Value": 3.444,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-FRONT",
+   "v2Value": 3.3,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": "v1 first post mark 3.444; v2 glass edge 3.30 on the render"
+  },
+  {
+   "v1Key": "railing.frontToX",
+   "v1Value": 7.153,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-FRONT",
+   "v2Value": 7.26,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "railing.rearFromX",
+   "v1Value": 0.689,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-REAR",
+   "v2Value": 0.64,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "railing.rearToX",
+   "v1Value": 7.153,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-REAR",
+   "v2Value": 7.26,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "railing.frontLine",
+   "v1Value": 0.025,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-FRONT",
+   "v2Value": 0.05,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "railing.rearLine",
+   "v1Value": 14.48,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-RAILING-REAR",
+   "v2Value": 14.55,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "chimney.top",
+   "v1Value": 7.88,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-CHIMNEY-1",
+   "v2Value": 7.86,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "rooflight.width",
+   "v1Value": 0.78,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-ROOFLIGHT-W1",
+   "v2Value": 0.78,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "rooflight.slopeLength",
+   "v1Value": 1.18,
+   "v1Status": "SOURCE_EXACT",
+   "v2Id": "T2-ROOFLIGHT-W1",
+   "v2Value": 1.18,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "rooflight.lowerEdgeFromEave",
+   "v1Value": 0.45,
+   "v1Status": "SOURCE_CORROBORATED",
+   "v2Id": "T2-ROOFLIGHT-W1",
+   "v2Value": 0.44,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-CHIMNEY-1",
+   "v2Value": {
+    "x": [
+     5.46,
+     6.07
+    ],
+    "z": [
+     8.62,
+     9.05
+    ],
+    "topY": 7.86,
+    "slope": "EAST"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_MISSING",
+   "note": "chimney plan positions are not in the v1 facts table (they lived in the old gold JSON only); v2 states both from the attic plan blocks"
+  },
+  {
+   "v1Key": "stair.width",
+   "v1Value": 0.99,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 1.0,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.firstRiserX",
+   "v1Value": 5.37,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 5.36,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.southBandFromZ",
+   "v1Value": 5.82,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 5.84,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "ref 7.78 = app 5.82"
+  },
+  {
+   "v1Key": "stair.southBandToZ",
+   "v1Value": 4.83,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 4.81,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "ref 8.77 = app 4.83"
+  },
+  {
+   "v1Key": "stair.cornerX",
+   "v1Value": 6.46,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 6.45,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.lowerRisers",
+   "v1Value": 4.0,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 5,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_WRONG",
+   "note": "v1 counted 4 nosing lines before the corner (5.376, 5.641, 5.919, 6.197) and treated the corner square as winders; v2 counts the corner line 6.45 as the fifth riser onto a LEVEL landing (the section draws the platform at 0.90 = 5 x 0.18)"
+  },
+  {
+   "v1Key": "stair.upperRisers",
+   "v1Value": 9.0,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 7,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_WRONG",
+   "note": "v1: 9 risers up the east band to an arrival at app z 7.94; v2: 7 risers up the east band (5.82..7.43) onto a second level landing (z 7.46..8.44), then a THIRD flight of 5 risers WEST along the north band to the arrival at x 5.36 (the attic plan draws its four tread lines and the walking-line arrow pointing west at z 7.94)"
+  },
+  {
+   "v1Key": "stair.winderRisers",
+   "v1Value": 4.0,
+   "v1Status": "GEOMETRIC_INFERRED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 0,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_WRONG",
+   "note": "v1 inferred 4 winders to make 17; v2 finds 5 + 7 + 5 = 17 straight risers with no winders: both corner squares are drawn as level landings (no fan lines; the section shows the first platform flat)"
+  },
+  {
+   "v1Key": "stair.risers",
+   "v1Value": 17.0,
+   "v1Status": "GEOMETRIC_INFERRED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 17,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.riserHeight",
+   "v1Value": 0.18,
+   "v1Status": "GEOMETRIC_INFERRED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 0.18,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.lowerGoing",
+   "v1Value": 0.2725,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 0.27,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.upperGoing",
+   "v1Value": 0.265,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": 0.265,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "stair.topRiserZ",
+   "v1Value": 5.66,
+   "v1Status": "SOURCE_DERIVED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": null,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_WRONG",
+   "note": "v1 arrival at app z 7.94 at the end of the east band; v2: the east band ends on landing 2 (z 7.46..8.44) and the arrival is at x 5.36 in the north band"
+  },
+  {
+   "v1Key": "stair.waist",
+   "v1Value": 0.18,
+   "v1Status": "ASSUMED",
+   "v2Id": "T2-STAIR-TOPOLOGY",
+   "v2Value": null,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME_UNRESOLVED",
+   "note": "no drawing shows the soffit in either audit"
+  },
+  {
+   "v1Key": "door.entranceLeafFraction",
+   "v1Value": 0.72,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-OPEN-FRONT-ENTRANCE",
+   "v2Value": null,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V2_UNRESOLVED",
+   "note": "v2 leaves the leaf/sidelight split UNRESOLVED (render-only, the hero and the elevation disagree on the side)"
+  },
+  {
+   "v1Key": "band.frontTimberFromX",
+   "v1Value": 0.657,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-MAT-TIMBER-FRONT",
+   "v2Value": 0.61,
+   "v2Status": "VISUAL_SEMANTIC",
+   "verdict": "SAME",
+   "note": "v2 measures the timber from the return face"
+  },
+  {
+   "v1Key": "band.frontTimberToX",
+   "v1Value": 3.185,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-MAT-TIMBER-FRONT",
+   "v2Value": 3.25,
+   "v2Status": "VISUAL_SEMANTIC",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "band.frontGableTimberToX",
+   "v1Value": 3.94,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-OPEN-FRONT-GABLE",
+   "v2Value": 3.95,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "band.rearTimberWestToX",
+   "v1Value": 2.258,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-OPEN-REAR-GLAZING",
+   "v2Value": 2.25,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "band.rearTimberEastFromX",
+   "v1Value": 6.958,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-OPEN-REAR-GLAZING",
+   "v2Value": 6.95,
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "band.rearTimberTop",
+   "v1Value": 2.41,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-BALCONY-REAR",
+   "v2Value": 2.49,
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "SAME",
+   "note": "v1 2.41 vs v2 2.49: a 0.08 registration offset between the two rear-render readings (v2 anchors the plinth top row 574 and the apex row 104)"
+  },
+  {
+   "v1Key": "band.westDarkFromZ",
+   "v1Value": 3.691,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-MAT-DARK-SIDE-BANDS",
+   "v2Value": 3.74,
+   "v2Status": "VISUAL_SEMANTIC",
+   "verdict": "SAME",
+   "note": "v1 ref 4.568 = app 9.03?? no: v1 band.westDarkFromZ is the window far edge in REF z (4.568 -> app 9.03) and band.westDarkToZ 9.909 -> app 3.69; v2 z 3.74..9.92: SAME span, opposite naming"
+  },
+  {
+   "v1Key": "band.westDarkTop",
+   "v1Value": 2.377,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-MAT-DARK-SIDE-BANDS",
+   "v2Value": 2.29,
+   "v2Status": "VISUAL_SEMANTIC",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "band.eastDarkTop",
+   "v1Value": 2.36,
+   "v1Status": "VISUAL_INFERRED",
+   "v2Id": "T2-MAT-DARK-SIDE-BANDS",
+   "v2Value": 2.3,
+   "v2Status": "VISUAL_SEMANTIC",
+   "verdict": "SAME",
+   "note": ""
+  },
+  {
+   "v1Key": "terrace.plinth",
+   "v1Value": 0.32,
+   "v1Status": "GEOMETRIC_INFERRED",
+   "v2Id": "T2-LEVEL-TERRAIN",
+   "v2Value": 0.32,
+   "v2Status": "SOURCE_EXACT",
+   "verdict": "SAME",
+   "note": "v2 records the plinth as a material band; the recess floors at ±0,00 over the -0,32 terrain are the same reading"
+  },
+  {
+   "v1Key": "og-front-room-window",
+   "v1Value": {
+    "span": [
+     1.397,
+     2.497
+    ],
+    "sill": 0,
+    "headNear": 2.3,
+    "headFar": 2.3
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-FRONT-ROOM",
+   "v2Value": {
+    "interval": [
+     1.4,
+     2.5
+    ],
+    "sill": 0.0,
+    "head": 2.3,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.003 m"
+  },
+  {
+   "v1Key": "og-front-entrance",
+   "v1Value": {
+    "span": [
+     4.176,
+     5.226
+    ],
+    "sill": 0,
+    "headNear": 2.1,
+    "headFar": 2.1
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-FRONT-ENTRANCE",
+   "v2Value": {
+    "interval": [
+     4.18,
+     5.23
+    ],
+    "sill": 0.0,
+    "head": 2.1,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "DOOR"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.004 m"
+  },
+  {
+   "v1Key": "og-east-living-window",
+   "v1Value": {
+    "span": [
+     9.704,
+     12.704
+    ],
+    "sill": 0,
+    "headNear": 2.3,
+    "headFar": 2.3
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-EAST-LIVING",
+   "v2Value": {
+    "interval": [
+     9.7,
+     12.7
+    ],
+    "sill": 0.0,
+    "head": 2.3,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "MULTI_PANEL_GLAZING"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.004 m"
+  },
+  {
+   "v1Key": "og-east-garage-door",
+   "v1Value": {
+    "span": [
+     2.216,
+     3.146
+    ],
+    "sill": 0,
+    "headNear": 2.1,
+    "headFar": 2.1
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-BOILER-GARAGE",
+   "v2Value": {
+    "interval": [
+     2.24,
+     3.06
+    ],
+    "sill": 0.0,
+    "head": 2.1,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "DOOR"
+   },
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "SAME",
+   "note": "within the plan-gap uncertainty (max difference 0.086 m; the swing arc shortens the drawn gap)"
+  },
+  {
+   "v1Key": "og-rear-living-glazing",
+   "v1Value": {
+    "span": [
+     2.258,
+     6.958
+    ],
+    "sill": 0,
+    "headNear": 2.3,
+    "headFar": 2.3
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-REAR-GLAZING",
+   "v2Value": {
+    "interval": [
+     2.25,
+     6.95
+    ],
+    "sill": 0.0,
+    "head": 2.3,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "MULTI_PANEL_GLAZING"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.008 m"
+  },
+  {
+   "v1Key": "og-west-living-window",
+   "v1Value": {
+    "span": [
+     9.047,
+     9.947
+    ],
+    "sill": 0,
+    "headNear": 2.3,
+    "headFar": 2.3
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-WEST-LIVING",
+   "v2Value": {
+    "interval": [
+     9.07,
+     9.97
+    ],
+    "sill": 0.0,
+    "head": 2.3,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.023 m"
+  },
+  {
+   "v1Key": "og-west-kitchen-window",
+   "v1Value": {
+    "span": [
+     6.798,
+     8.198
+    ],
+    "sill": 0.9,
+    "headNear": 2.3,
+    "headFar": 2.3
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-WEST-KITCHEN",
+   "v2Value": {
+    "interval": [
+     6.8,
+     8.2
+    ],
+    "sill": 0.9,
+    "head": 2.3,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.002 m"
+  },
+  {
+   "v1Key": "og-garage-door",
+   "v1Value": {
+    "span": [
+     8.556,
+     11.306
+    ],
+    "sill": 0,
+    "headNear": 2.25,
+    "headFar": 2.25
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-GARAGE-DOOR",
+   "v2Value": {
+    "interval": [
+     8.55,
+     11.3
+    ],
+    "sill": 0.0,
+    "head": 2.25,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "GARAGE_DOOR"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "max coordinate difference 0.006 m"
+  },
+  {
+   "v1Key": "og-garage-side-door",
+   "v1Value": {
+    "span": [
+     9.922,
+     10.922
+    ],
+    "sill": 0,
+    "headNear": 2.1,
+    "headFar": 2.1
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-GARAGE-SIDE",
+   "v2Value": {
+    "interval": [
+     9.9,
+     10.9
+    ],
+    "sill": 0.0,
+    "head": 2.1,
+    "headFar": null,
+    "profile": "RECTANGULAR",
+    "family": "GLAZED_DOOR"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "within the plan-gap uncertainty (max difference 0.022 m; the swing arc shortens the drawn gap)"
+  },
+  {
+   "v1Key": "og-front-gable-glazing",
+   "v1Value": {
+    "span": [
+     3.94,
+     6.64
+    ],
+    "sill": 3.06,
+    "headNear": 6.26,
+    "headFar": 3.994
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-FRONT-GABLE",
+   "v2Value": {
+    "interval": [
+     3.95,
+     6.65
+    ],
+    "sill": 3.06,
+    "head": 6.26,
+    "headFar": 4.02,
+    "profile": "RAKED_SINGLE",
+    "family": "GLAZED_DOOR"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "same span and rake; v2 classifies it GLAZED_DOOR (it holds the balcony door) and marks the mullions VISUAL"
+  },
+  {
+   "v1Key": "og-rear-gable-east",
+   "v1Value": {
+    "span": [
+     4.59,
+     6.93
+    ],
+    "sill": 3.06,
+    "headNear": 4.127,
+    "headFar": 6.09
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-REAR-GABLE-E",
+   "v2Value": {
+    "interval": [
+     4.61,
+     6.95
+    ],
+    "sill": 3.06,
+    "head": 6.09,
+    "headFar": 4.13,
+    "profile": "RAKED_SINGLE",
+    "family": "WINDOW"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "v1's headNear/headFar run along the host wall's direction (the rear wall runs -x), so both readings put the tall 6.09 edge towards the ridge (x 3.29 and 4.61); a tall edge at the outer jamb would stand above the roof soffit there (5.1 m at x 0.95), which is why v2 re-proved the orientation on the rear render"
+  },
+  {
+   "v1Key": "og-rear-gable-west",
+   "v1Value": {
+    "span": [
+     0.94,
+     3.28
+    ],
+    "sill": 3.06,
+    "headNear": 6.09,
+    "headFar": 4.127
+   },
+   "v1Status": "EXPECTED_OPENING",
+   "v2Id": "T2-OPEN-REAR-GABLE-W",
+   "v2Value": {
+    "interval": [
+     0.95,
+     3.29
+    ],
+    "sill": 3.06,
+    "head": 6.09,
+    "headFar": 4.13,
+    "profile": "RAKED_SINGLE",
+    "family": "WINDOW"
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "SAME",
+   "note": "v1's headNear/headFar run along the host wall's direction (the rear wall runs -x), so both readings put the tall 6.09 edge towards the ridge (x 3.29 and 4.61); a tall edge at the outer jamb would stand above the roof soffit there (5.1 m at x 0.95), which is why v2 re-proved the orientation on the rear render"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-IWALL-U-CORRIDOR_WEST",
+   "v2Value": {
+    "storey": 1,
+    "axis": "Z",
+    "centre": 3.95,
+    "span": [
+     4.71,
+     13.15
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-U-BATH",
+      "interval": [
+       4.94,
+       5.87
+      ],
+      "connects": [
+       "4 Łazienka",
+       "1 Korytarz"
+      ]
+     },
+     {
+      "id": "T2-IDOOR-U-PRALNIA",
+      "interval": [
+       7.17,
+       8.09
+      ],
+      "connects": [
+       "5 Pralnia",
+       "1 Korytarz"
+      ]
+     },
+     {
+      "id": "T2-IDOOR-U-POKOJ_NW",
+      "interval": [
+       8.76,
+       9.68
+      ],
+      "connects": [
+       "6 Pokój",
+       "1 Korytarz"
+      ]
+     }
+    ]
+   },
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "V1_MISSING",
+   "note": "v1 kept the interior in the old gold JSON, not in FACTS; v2 states every partition with its band and door gaps"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-ROOM-G-3",
+   "v2Value": {
+    "storey": 0,
+    "number": "3",
+    "label": "Kuchnia",
+    "polygon": [
+     [
+      0.45,
+      6.36
+     ],
+     [
+      4.08,
+      6.36
+     ],
+     [
+      4.08,
+      9.01
+     ],
+     [
+      0.45,
+      9.01
+     ]
+    ],
+    "polygonAreaM2": 9.62,
+    "publishedAreaM2": 9.63
+   },
+   "v2Status": "SOURCE_DERIVED",
+   "verdict": "V1_MISSING",
+   "note": "v2 room polygons with the open-plan boundaries from the printed 265/414/446"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-ROOF-VERGE-MEMBER",
+   "v2Value": {
+    "verticalExtentM": 0.83,
+    "perpendicularWidthM": 0.64,
+    "plane": "outer planes z=0 and z=14.60",
+    "continuousWithReturns": true
+   },
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "V1_MISSING",
+   "note": "v1 has no verge member: the gable-edge band the owner reported missing"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-ASSEMBLY-FRONT-GABLE-FRAME",
+   "v2Value": {
+    "kind": "GABLE_FRAME",
+    "plane": "z = 0",
+    "members": [
+     "T2-RECESS-FRONT-GROUND.returns.west",
+     "T2-ROOF-VERGE-MEMBER (west rake)",
+     "T2-ROOF-VERGE-MEMBER (east rake)",
+     "T2-RECESS-FRONT-ATTIC.returns.east"
+    ],
+    "continuity": [
+     "west return CONTINUES_AS the west verge member",
+     "east verge member CONTINUES_AS the east return above the balcony",
+     "east verge member TERMINATES_AT the garage roof edge"
+    ]
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_MISSING",
+   "note": "v1 has no facade assembly; v2 groups the returns and the verge members into the characteristic frame"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-FACADE-FRONT-BAND",
+   "v2Value": {
+    "x": [
+     3.25,
+     12.05
+    ],
+    "y": [
+     2.28,
+     3.07
+    ],
+    "plane": "z = 0 (the outer plane)",
+    "kind": "BALCONY_FRAME + PORTAL fascia"
+   },
+   "v2Status": "IMAGE_METRIC_REGISTERED",
+   "verdict": "V1_MISSING",
+   "note": "the continuous balcony fascia + garage roof edge band; v1 modelled two separate solids of different thickness"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-ROOF-GARAGE",
+   "v2Value": {
+    "kind": "FLAT",
+    "x": [
+     7.9,
+     12.05
+    ],
+    "z": [
+     0.0,
+     8.5
+    ],
+    "slabTopY": 2.88,
+    "parapetTopY": 3.09,
+    "coversPortalRecess": true
+   },
+   "v2Status": "SOURCE_CORROBORATED",
+   "verdict": "V1_MISSING",
+   "note": "v1: flat slab 2.88 with an unresolved band; v2: slab 2.88 + parapet 3.09 from the section upstand"
+  },
+  {
+   "v1Key": null,
+   "v1Value": null,
+   "v1Status": null,
+   "v2Id": "T2-UNRES-140-220",
+   "v2Value": {
+    "handling": "candidates: balustrade panel divisions, a terrace step, a roof-window layout line"
+   },
+   "v2Status": "UNRESOLVED",
+   "verdict": "V1_MISSING",
+   "note": "v1 does not mention the 140|220 chain"
+  }
+ ]
+}

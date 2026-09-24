@@ -1,0 +1,5116 @@
+{
+ "schema": "buildapp.research.marcowki-source-truth",
+ "schemaVersion": "2.0.0",
+ "sealed": "2026-09-24",
+ "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+ "sourcePackageContentHash": "331d98cc10cd1c208868a08cde0347dd024475c4ea29c48d5f5035e847d8a9d7",
+ "pageHash": "e2c98181d6119d59",
+ "frame": {
+  "x": "metres east of the west outer face (0..12.05)",
+  "y": "metres above the ground finished floor (+-0,00); terrain -0.32",
+  "z": "metres north of the front outer plane: the outer face of the front returns is z=0, the front wall outer face z=1.00, the rear wall outer face z=13.60, the rear outer plane z=14.60"
+ },
+ "statusVocabulary": [
+  "SOURCE_EXACT",
+  "SOURCE_CORROBORATED",
+  "SOURCE_DERIVED",
+  "IMAGE_METRIC_REGISTERED",
+  "VISUAL_SEMANTIC",
+  "OWNER_OBSERVED",
+  "ASSUMED_FOR_RENDERING",
+  "UNRESOLVED"
+ ],
+ "itemCount": 138,
+ "items": [
+  {
+   "id": "T2-FRAME-001",
+   "kind": "FRAME",
+   "name": "coordinate frame of this truth set",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "plan orientation: the 105/210 entrance and the 275/225 garage door callouts sit along the bottom edge (rows 745..760), so the FRONT is at the bottom of the sheet"
+    }
+   ],
+   "value": {
+    "x": "metres east of the west outer face (0..12.05)",
+    "y": "metres above the ground finished floor (+-0,00); terrain -0.32",
+    "z": "metres north of the front outer plane: the outer face of the front returns is z=0, the front wall outer face z=1.00, the rear wall outer face z=13.60, the rear outer plane z=14.60"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_DERIVED",
+   "method": "convention stated once; every other item is in this frame",
+   "notes": "the current Marcówki Auto puts the FRONT WALL at z=0 and its zone at z -1..0; this set puts the outermost front plane at z=0 as the reference model does (z_v2 = z_auto + 1.00)",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-GP",
+   "kind": "REGISTRATION",
+   "name": "metric registration of gp",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "chain 1205 at row 40 spans px 58..514; chain 1260 in the right column spans rows 259..735; front wall outer face row 735, rear wall outer face row 259"
+    }
+   ],
+   "value": {
+    "x": "(px-58)/37.842",
+    "z": "(735-py)/37.778+1.00",
+    "anchors": "chain 1205 at row 40 spans px 58..514; chain 1260 in the right column spans rows 259..735; front wall outer face row 735, rear wall outer face row 259"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0265
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-AP",
+   "kind": "REGISTRATION",
+   "name": "metric registration of ap",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "west outer face px 47, east outer face px 345 (790 chain); front wall outer face row 671, rear outer face row 195"
+    }
+   ],
+   "value": {
+    "x": "(px-47)/37.72",
+    "z": "(671-py)/37.778+1.00",
+    "anchors": "west outer face px 47, east outer face px 345 (790 chain); front wall outer face row 671, rear outer face row 195"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0265
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-SEC",
+   "kind": "REGISTRATION",
+   "name": "metric registration of sec",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "datum rows 65 (+7,95), 303 (+4,67), 420 (+3,06), 642 (+-0,00), 665 (-0,32): every pair gives 72.5..72.7 px/m; west outer face px 128, house/garage wall px 669..697, garage east face px 1001"
+    }
+   ],
+   "value": {
+    "x": "(px-128)/72.58",
+    "y": "(642-py)/72.58",
+    "anchors": "datum rows 65 (+7,95), 303 (+4,67), 420 (+3,06), 642 (+-0,00), 665 (-0,32): every pair gives 72.5..72.7 px/m; west outer face px 128, house/garage wall px 669..697, garage east face px 1001"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0138
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-FRONT",
+   "kind": "REGISTRATION",
+   "name": "metric registration of front",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "silhouette px 376..1084 = 12.05 m (58.75 px/m); ridge apex row 104 and plinth top row 572 = 7.95 m (58.87 px/m); both scales agree to 0.2%"
+    }
+   ],
+   "value": {
+    "x": "(px-376)/58.8",
+    "y": "(572-py)/58.8",
+    "anchors": "silhouette px 376..1084 = 12.05 m (58.75 px/m); ridge apex row 104 and plinth top row 572 = 7.95 m (58.87 px/m); both scales agree to 0.2%"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0169
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-REAR",
+   "kind": "REGISTRATION",
+   "name": "metric registration of rear",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "returns W 506..542 and 933..970 (7.90 m between outer faces = 59.0 px/m); garage 259..503; apex row 104, plinth top 574"
+    }
+   ],
+   "value": {
+    "x": "(970-px)/59.0",
+    "y": "(574-py)/59.0",
+    "anchors": "returns W 506..542 and 933..970 (7.90 m between outer faces = 59.0 px/m); garage 259..503; apex row 104, plinth top 574"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0169
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-EAST",
+   "kind": "REGISTRATION",
+   "name": "metric registration of east",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "ridge apex row 100 to plinth top 574 = 7.95 m (59.6 px/m); garage rear wall px 713 = z 8.50 and window jamb px 790 = z 9.80 fix 59.2 px/m"
+    }
+   ],
+   "value": {
+    "z": "(px-210)/59.2",
+    "y": "(574-py)/59.2",
+    "anchors": "ridge apex row 100 to plinth top 574 = 7.95 m (59.6 px/m); garage rear wall px 713 = z 8.50 and window jamb px 790 = z 9.80 fix 59.2 px/m"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0169
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-WEST",
+   "kind": "REGISTRATION",
+   "name": "metric registration of west",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "ridge apex row 100 to plinth top 574; silhouette 214..1080"
+    }
+   ],
+   "value": {
+    "z": "(1080-px)/59.3",
+    "y": "(574-py)/59.3",
+    "anchors": "ridge apex row 100 to plinth top 574; silhouette 214..1080"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0169
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-REG-SITE",
+   "kind": "REGISTRATION",
+   "name": "metric registration of site",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "roof outline 242..462 x 134..546; coarse: +-0.4 m"
+    }
+   ],
+   "value": {
+    "x": "(px-242)/27.8",
+    "z": "14.60-(py-134)/28.7",
+    "anchors": "roof outline 242..462 x 134..546; coarse: +-0.4 m"
+   },
+   "uncertainty": {
+    "mPerPx": 0.0357
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "two anchors per axis from printed chains/datums (plans, section) or from the silhouette against the plan width and the section ridge (renders)",
+   "notes": "the plan scales agree to 0.2% on both axes; the four render scales span 58.8..59.6 px/m",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-HOUSE_NET_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published house_net_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource house_net_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 129.04,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-USABLE_AREA_WITHOUT_STAIRS",
+   "kind": "PAGE_FACT",
+   "name": "published usable_area_without_stairs",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource usable_area_without_stairs",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 153.31,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-GARAGE_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published garage_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource garage_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 24.1,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-BOILER_ROOM_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published boiler_room_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource boiler_room_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 5.8,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-FOOTPRINT_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published footprint_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource footprint_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 131.16,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-FLOOR_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published floor_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource floor_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 170.62,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-TOTAL_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published total_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource total_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 231.11,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-ROOF_AREA",
+   "kind": "PAGE_FACT",
+   "name": "published roof_area",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource roof_area",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 150.57,
+    "unit": "m2"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-VOLUME",
+   "kind": "PAGE_FACT",
+   "name": "published volume",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource volume",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 779.94,
+    "unit": "m3"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-BUILDING_HEIGHT",
+   "kind": "PAGE_FACT",
+   "name": "published building_height",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "product-data item data-resource building_height",
+     "pageHash": "e2c98181d6119d59..."
+    }
+   ],
+   "value": {
+    "value": 8.27,
+    "unit": "m"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "read from the page markup by the ARCHON adapter (identical to the 2026-09-15 acquisition)",
+   "notes": "an aggregate: no geometry may be derived from it; used to CHECK the layout only",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-ROOF",
+   "kind": "PAGE_SPEC",
+   "name": "published roof specification",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "technical-data item \"dach\""
+    }
+   ],
+   "value": {
+    "text": "dwuspadowy, nachylenie 40 st., więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO",
+    "kind": "GABLE",
+    "pitchDeg": 40,
+    "rooflights": "FAKRO"
+   },
+   "uncertainty": {
+    "deg": 0.5
+   },
+   "status": "SOURCE_EXACT",
+   "method": "publisher text",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-KNEEWALL",
+   "kind": "PAGE_SPEC",
+   "name": "published knee wall",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "technical-data item \"ścianka kolankowa\""
+    }
+   ],
+   "value": {
+    "text": "130 cm",
+    "m": 1.3
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "publisher text; the section prints the same 130",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-EAVES",
+   "kind": "PAGE_SPEC",
+   "name": "published \"no eaves\"",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "bottom description: \"Charakterystyczny dwuspadowy dach bez okapów\""
+    }
+   ],
+   "value": {
+    "eavesOverhang": "NONE (side eaves)"
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "publisher prose",
+   "notes": "about the SIDE eaves; the gable ends carry the roof over the recesses (see T2-ROOF-EXTENT)",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PAGE-ROOMS",
+   "kind": "PAGE_ROOM_TABLE",
+   "name": "published room table",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "two tables headed Parter / Poddasze"
+    }
+   ],
+   "value": {
+    "GROUND": [
+     [
+      "1",
+      "Wiatrołap",
+      3.7
+     ],
+     [
+      "2",
+      "Hol",
+      9.18
+     ],
+     [
+      "3",
+      "Kuchnia",
+      9.63
+     ],
+     [
+      "4",
+      "Salon + Jadalnia",
+      29.52
+     ],
+     [
+      "5",
+      "Spiżarnia",
+      1.44
+     ],
+     [
+      "6",
+      "Łazienka",
+      3.95
+     ],
+     [
+      "7",
+      "Pokój",
+      9.18
+     ],
+     [
+      "8",
+      "Kotłownia",
+      5.8
+     ],
+     [
+      "9",
+      "Garaż",
+      24.1
+     ]
+    ],
+    "ATTIC": [
+     [
+      "1",
+      "Korytarz",
+      6.17
+     ],
+     [
+      "2",
+      "Pokój",
+      10.25
+     ],
+     [
+      "3",
+      "Garderoba",
+      5.19
+     ],
+     [
+      "4",
+      "Łazienka",
+      6.4
+     ],
+     [
+      "5",
+      "Pralnia",
+      5.59
+     ],
+     [
+      "6",
+      "Pokój",
+      12.57
+     ],
+     [
+      "7",
+      "Pokój",
+      9.02
+     ],
+     [
+      "8",
+      "Garderoba",
+      1.62
+     ],
+     [
+      "9",
+      "Schody",
+      5.63
+     ]
+    ]
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "page tables",
+   "notes": "attic figures are NET (headroom rule); the area-labelled plans print gross figures in brackets: 6 Pokój 15.13, 7 Pokój 10.88, 8 Garderoba 2.38, 5 Pralnia 6.73, 4 Łazienka 7.81, 3 Garderoba 6.53, 2 Pokój 11.88; ground Spiżarnia 2.42 gross",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-GROUND_FFL",
+   "kind": "LEVEL",
+   "name": "ground finished floor +-0,00",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "printed datum marker at row 642"
+    }
+   ],
+   "value": {
+    "y": 0.0
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed level datum; the five markers fit one scale to 0.15%",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-UPPER_FFL",
+   "kind": "LEVEL",
+   "name": "attic finished floor +3,06",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "printed datum marker at row 420"
+    }
+   ],
+   "value": {
+    "y": 3.06
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed level datum; the five markers fit one scale to 0.15%",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-EAVE_DATUM",
+   "kind": "LEVEL",
+   "name": "eave datum +4,67",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "printed datum marker at row 303"
+    }
+   ],
+   "value": {
+    "y": 4.67
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed level datum; the five markers fit one scale to 0.15%",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-RIDGE",
+   "kind": "LEVEL",
+   "name": "ridge +7,95",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "printed datum marker at row 65"
+    }
+   ],
+   "value": {
+    "y": 7.95
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed level datum; the five markers fit one scale to 0.15%",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-TERRAIN",
+   "kind": "LEVEL",
+   "name": "terrain -0,32",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "printed datum marker at row 665"
+    }
+   ],
+   "value": {
+    "y": -0.32
+   },
+   "uncertainty": {
+    "m": 0.005
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed level datum; the five markers fit one scale to 0.15%",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-KNEEWALL_TOP",
+   "kind": "LEVEL",
+   "name": "attic masonry top (knee wall 130 above +3,06)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "vertical dimension 130, ticks rows 325..420"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "tiles end and white wall begins at row 316..317 on every column = 4.36 m"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "same, rows 316..317"
+    }
+   ],
+   "value": {
+    "y": 4.36
+   },
+   "uncertainty": {
+    "m": 0.02
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "printed 130 + page spec + the visible roof/wall line on both side renders",
+   "notes": "the +4,67 datum is the roof surface at the outer wall face; the tiles meet the wall 0.31 m below it",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-GROUND_CLEAR",
+   "kind": "LEVEL",
+   "name": "ground storey clear height 272",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "vertical dimension 272; slab soffit row 444 to floor row 642 = 2.73 m"
+    }
+   ],
+   "value": {
+    "m": 2.72
+   },
+   "uncertainty": {
+    "m": 0.01
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed; upper slab 0.33 thick (rows 420..444)",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-ATTIC_CLEAR",
+   "kind": "LEVEL",
+   "name": "attic clear height 266 under a flat ceiling",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "vertical dimension 266; ceiling band rows 200..226 spanning px 306..522 = x 2.45..5.43"
+    }
+   ],
+   "value": {
+    "m": 2.66,
+    "ceilingUndersideY": 5.72,
+    "ceilingTopY": 6.1,
+    "ceilingSpanX": [
+     2.45,
+     5.43
+    ]
+   },
+   "uncertainty": {
+    "m": 0.02
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed; the horizontal ceiling (collar) spans the middle 3.0 m of the attic",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-LEVEL-GARAGE_CLEAR",
+   "kind": "LEVEL",
+   "name": "garage clear height 252",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "vertical dimension 252 in the garage; roof slab rows 433..458"
+    }
+   ],
+   "value": {
+    "m": 2.52,
+    "roofSlabTopY": 2.88,
+    "roofSlabSoffitY": 2.53
+   },
+   "uncertainty": {
+    "m": 0.02
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed 252; slab rows measured",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MASS-MAIN",
+   "kind": "MASS",
+   "name": "main body walled envelope",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "chain 790 (row 40, px 58..357) and chain 1260 = 510 + 750 (right column rows 259..735); outer wall bands 17 px = 0.45 m"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "outer faces px 47..345 (7.90) and rows 195..671 (12.60)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "west face px 128 to shared wall px 697 = 7.84 m"
+    }
+   ],
+   "value": {
+    "x": [
+     0.0,
+     7.9
+    ],
+    "z": [
+     1.0,
+     13.6
+    ],
+    "widthM": 7.9,
+    "depthM": 12.6,
+    "storeys": [
+     0,
+     1
+    ],
+    "wallThicknessM": 0.45
+   },
+   "uncertainty": {
+    "m": 0.01
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed chains 790 and 1260 both close (790+415=1205, 510+750=1260); wall thickness measured 17 px on both plans and 33 px on the section (0.45)",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MASS-GARAGE",
+   "kind": "MASS",
+   "name": "garage walled envelope",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "chain 415 (row 40, px 357..514) and 750 (right column rows 452..735); garage east wall band px 497..513; garage rear wall band rows 452..468"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "garage px 697..1001 = 4.19 m"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "garage roof outline drawn px 345..505 x rows 387..707"
+    }
+   ],
+   "value": {
+    "x": [
+     7.9,
+     12.05
+    ],
+    "z": [
+     1.0,
+     8.5
+    ],
+    "widthM": 4.15,
+    "depthM": 7.5,
+    "storeys": [
+     0
+    ],
+    "sharedWallX": 7.9,
+    "sharedWallThicknessM": 0.39
+   },
+   "uncertainty": {
+    "m": 0.01
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed 415 and 750; the house/garage wall measures 28 px = 0.39 m on the section (one wall, not two)",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MASS-ENVELOPE",
+   "kind": "MASS",
+   "name": "characteristic outer envelope",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "chain 100|510|750|100 in the right column: rows 221..259, 259..452, 452..735, 735..773"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "silhouette px 210..1075 = 865 px at 59.2..59.6 px/m = 14.5..14.6 m"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "silhouette px 214..1080 = 866 px"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "roof outline rows 134..546 = 412 px at 28.7 px/m = 14.35 m, 26 px past the 1260 chain at each end"
+    }
+   ],
+   "value": {
+    "x": [
+     0.0,
+     12.05
+    ],
+    "z": [
+     0.0,
+     14.6
+    ],
+    "widthM": 12.05,
+    "depthM": 14.6
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "the printed 100 zones at both ends of the 1260 chain, the return stubs drawn in them on both plans, and both side silhouettes measuring 14.5..14.6 m at the scale that puts the ridge at 7.95 and the garage rear wall at z 8.50",
+   "notes": "the 14.60 depth of the old finding is RE-PROVED, independently, from the current bytes",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MASS-STOREY_COVERAGE",
+   "kind": "MASS",
+   "name": "storey coverage",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "the attic plan draws the garage only as a roof outline (double-line rectangle with mitred corners), no walls, no rooms"
+    }
+   ],
+   "value": {
+    "storey0": [
+     "main",
+     "garage"
+    ],
+    "storey1": [
+     "main"
+    ]
+   },
+   "uncertainty": {},
+   "status": "SOURCE_EXACT",
+   "method": "the attic plan shows no garage storey",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MASS-FOOTPRINT_AREA",
+   "kind": "MASS",
+   "name": "walled footprint area",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "powierzchnia zabudowy 131,16"
+    }
+   ],
+   "value": {
+    "walledM2": 130.665,
+    "publishedM2": 131.16
+   },
+   "uncertainty": {
+    "m2": 0.5
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "7.90 x 12.60 + 4.15 x 7.50 = 130.665 against the published 131.16 (0.38%)",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-RECESS-FRONT-GROUND",
+   "kind": "RECESS",
+   "name": "front recess (portal) at ground level",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row scans at rows 743, 752, 761, 771 (z -0.2..-0.95 below the front wall): black only at px 58..82 (x 0.00..0.63) and 490..513 (x 11.42..12.02); NOTHING at px 333..357 (x 7.27..7.87)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "west return W 376..412 (x 0.00..0.61) rows 301..573; garage return G 1047..1084 (x 11.41..12.04); the recess x 3.23..11.38 reads dark at every row 445..560"
+    }
+   ],
+   "value": {
+    "mouthZ": 0.0,
+    "backZ": 1.0,
+    "depthM": 1.0,
+    "x": [
+     0.61,
+     11.42
+    ],
+    "returns": {
+     "west": [
+      0.0,
+      0.61
+     ],
+     "east": null,
+     "garageEast": [
+      11.42,
+      12.05
+     ]
+    },
+    "storey": 0
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan row scans in the zone + the front render",
+   "notes": "at ground level the recess runs unbroken from the west return to the garage return: the house/garage line x 7.29..7.90 has NO return below the balcony slab",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-RECESS-FRONT-ATTIC",
+   "kind": "RECESS",
+   "name": "front recess (balcony) at attic level",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row scans at rows 679, 688, 697, 707: black at px 47..70 (x 0.00..0.61) and 321..345 (x 7.26..7.90)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "W 802..839 at row 330 (x 7.24..7.87, 4.11 m): the east return above the balcony"
+    }
+   ],
+   "value": {
+    "mouthZ": 0.0,
+    "backZ": 1.0,
+    "depthM": 1.0,
+    "x": [
+     0.61,
+     7.26
+    ],
+    "returns": {
+     "west": [
+      0.0,
+      0.61
+     ],
+     "east": [
+      7.26,
+      7.9
+     ]
+    },
+    "storey": 1,
+    "eastReturnBaseY": 3.06
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan row scans + the front render",
+   "notes": "the east return exists only above the balcony slab; the ground plan draws nothing there",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-RECESS-REAR",
+   "kind": "RECESS",
+   "name": "rear recess (loggia) both storeys",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row scans at rows 251, 242, 233, 223 (z 12.8..13.55 above the rear wall): black at px 58..82 (0.00..0.63) and 333..356 (7.27..7.87)"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "rows 187, 178, 169, 159: black at px 47..70 and 321..345"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "returns W 506..542 and 933..970 at rows 300..574; timber T 542..933 at row 575"
+    }
+   ],
+   "value": {
+    "mouthZ": 14.6,
+    "backZ": 13.6,
+    "depthM": 1.0,
+    "x": [
+     0.61,
+     7.29
+    ],
+    "returns": {
+     "west": [
+      0.0,
+      0.61
+     ],
+     "east": [
+      7.29,
+      7.9
+     ]
+    },
+    "storeys": [
+     0,
+     1
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "both plans + the rear render + the garden perspective",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-RETURN-THICKNESS",
+   "kind": "RETURN",
+   "name": "return wall thickness",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "24 px of black at each return = 0.63 m"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "23..24 px = 0.61..0.64"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "W 376..412 = 36 px = 0.61 m"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "W 506..542 = 36 px = 0.61"
+    }
+   ],
+   "value": {
+    "m": 0.61
+   },
+   "uncertainty": {
+    "m": 0.03
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan ink + render face width agree",
+   "notes": "thicker than the 0.45 external wall: the return is the external wall plus its 0.16 m outer leaf/cladding return",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-RETURN-HEIGHT",
+   "kind": "RETURN",
+   "name": "return walls die into the roof soffit",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "x=390: white to row 292 (4.76 m), roof edge 280..292; x=380: W 301..573 (4.61)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "x=520: W 348..574 under the verge band W 296..343"
+    }
+   ],
+   "value": {
+    "topY": "the roof underside at the outer plane (4.61..4.76 measured; 4.64 derived)"
+   },
+   "uncertainty": {
+    "m": 0.1
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "the returns and the verge band are one continuous white face on every render",
+   "notes": "the exact junction is a roof-edge detail",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOF-MAIN",
+   "kind": "ROOF",
+   "name": "main gable roof",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "40° printed against the west slope; slope rows 161..80 over px 300..420"
+    },
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "dach: dwuspadowy, nachylenie 40 st."
+    }
+   ],
+   "value": {
+    "kind": "GABLE",
+    "pitchDeg": 40,
+    "ridgeAxis": "Z",
+    "ridgeX": 3.95,
+    "eaveY": 4.67,
+    "ridgeY": 7.95,
+    "supportX": [
+     0.0,
+     7.9
+    ],
+    "sideEavesOverhangM": 0.0
+   },
+   "uncertainty": {
+    "deg": 0.5,
+    "m": 0.02
+   },
+   "status": "SOURCE_EXACT",
+   "method": "printed angle + page spec + section datums; 7.95 - 3.95*tan40 = 4.636 against the printed 4.67 (0.034 m)",
+   "notes": "",
+   "conflict": "the printed eave datum +4,67 and the derived plane 4.636 differ by 0.034 m; both kept",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOF-EXTENT",
+   "kind": "ROOF",
+   "name": "main roof spans the full 14.60 m (over both recesses)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "tiles G rows 101..316 from px 210 to 1075 on every scanned row"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "tiles from px 215 to 1079"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "roof outline rows 134..546 reaches 26 px (0.9 m) past the 1260 chain at both ends"
+    }
+   ],
+   "value": {
+    "z": [
+     0.0,
+     14.6
+    ],
+    "gableOverhangBeyondWallM": 1.0
+   },
+   "uncertainty": {
+    "m": 0.1
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "both side renders + the site plan",
+   "notes": "the gable ends therefore stand in the outer planes z=0 and z=14.60, on the returns",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOF-VERGE-MEMBER",
+   "kind": "ROOF_MEMBER",
+   "name": "white verge band along both rakes (gable-edge member)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "x=470: G 216..224 (roof edge line) then W 225..272 (48 px vertical = 0.82 m); x=600: W 115..164 (49 px)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "x=560: W 262..303; x=520: W 296..343"
+    },
+    {
+     "asset": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+     "what": "the white rake band shows a visible underside and reads as a thick frame continuous with the returns"
+    }
+   ],
+   "value": {
+    "verticalExtentM": 0.83,
+    "perpendicularWidthM": 0.64,
+    "plane": "outer planes z=0 and z=14.60",
+    "continuousWithReturns": true
+   },
+   "uncertainty": {
+    "m": 0.06
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "measured on the registered front and rear renders; corroborated by the perspectives",
+   "notes": "a facade assembly member (GABLE_FRAME): the roof edge over the recess, not a flush band; its depth (along z) is not measured",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-ROOF-SHADOW-BAND",
+   "kind": "SHADOW",
+   "name": "shadow band under the verge on the recessed timber wall",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "x=470: dark 273..316 (0.73 m) between the verge band and the timber; x=600: 164..207"
+    }
+   ],
+   "value": {
+    "verticalExtentM": 0.73
+   },
+   "uncertainty": {
+    "m": 0.1
+   },
+   "status": "VISUAL_SEMANTIC",
+   "method": "shading only: the recessed wall is 1.0 m behind the verge",
+   "notes": "NOT geometry; recorded so it is not mistaken for a second member",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOF-GARAGE",
+   "kind": "ROOF",
+   "name": "garage flat roof with parapet",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "slab rows 433..458 from px 669 to 1001; east wall px 970..1001 rises to row 417 (3.10 m) as a parapet; slab top 2.88 at px 700 rising to 2.95 near the parapet"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "roof outline px 345..505 x rows 387..707 = x 7.90..12.14, z 0.05..8.52, with an edge line 3..4 px inside it"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "garage top edge rows 390..392 = 3.07..3.11 m"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "band top rows 390..394 = 3.03..3.10"
+    }
+   ],
+   "value": {
+    "kind": "FLAT",
+    "x": [
+     7.9,
+     12.05
+    ],
+    "z": [
+     0.0,
+     8.5
+    ],
+    "slabTopY": 2.88,
+    "parapetTopY": 3.09,
+    "coversPortalRecess": true
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "section (slab + upstand) + attic plan outline (extends to z=0) + three renders (top edge 3.07..3.11)",
+   "notes": "the garage roof projects 1.00 m over the portal recess in front of the garage door; its edge is the dark fascia that continues into the balcony fascia",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOF-BUILDUP",
+   "kind": "ROOF",
+   "name": "roof build-up between the knee wall top and the eave plane",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "derived eave plane 4.636 (printed 4.67) vs the 130 knee wall top 4.36"
+    }
+   ],
+   "value": {
+    "verticalM": 0.276,
+    "perpendicularM": 0.211,
+    "fromPrintedDatumVerticalM": 0.31
+   },
+   "uncertainty": {
+    "m": 0.03
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "4.636 - 4.36 on the section; perpendicular = vertical * cos 40; 0.31 if the printed +4,67 is used instead",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-CHIMNEY-1",
+   "kind": "CHIMNEY",
+   "name": "chimney 1 (fireplace flue, east slope, rear half)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "solid black block px 253..276 x rows 368..384 = x 5.46..6.07, z 8.62..9.05"
+    },
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "black block x 5.60..6.03 at z 8.8..9.1 (rows 440..452)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "dark column x=740 rows 110..206 = top 7.84, meets the roof at 6.22; x-extent px 705..750 = z 8.36..9.12"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "grey square px 395..412 x rows 285..296"
+    }
+   ],
+   "value": {
+    "x": [
+     5.46,
+     6.07
+    ],
+    "z": [
+     8.62,
+     9.05
+    ],
+    "topY": 7.86,
+    "slope": "EAST"
+   },
+   "uncertainty": {
+    "m": 0.06
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "both plans + site plan + three renders",
+   "notes": "the fireplace icon sits at x 6.07..6.79, z 8.73..9.30 on the ground plan, beside the flue",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-CHIMNEY-2",
+   "kind": "CHIMNEY",
+   "name": "chimney 2 (boiler flue, east slope, front half)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "black block px 253..273 x rows 531..551 = x 5.46..5.99, z 4.15..4.70"
+    },
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "black block x 5.39..5.87 at z 4.2..4.6"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "dark column x=470 rows 110..202: top 7.84, meets roof at 6.28; px 445..490 = z 3.97..4.73"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "dark square px 395..412 x rows 430..441"
+    }
+   ],
+   "value": {
+    "x": [
+     5.42,
+     5.99
+    ],
+    "z": [
+     4.15,
+     4.7
+    ],
+    "topY": 7.86,
+    "slope": "EAST"
+   },
+   "uncertainty": {
+    "m": 0.06
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "both plans + site plan + two renders",
+   "notes": "the front and rear renders each show one chimney because the two align along z; the side renders show both",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOFLIGHT-W1",
+   "kind": "ROOFLIGHT",
+   "name": "rooflight, west slope, over the laundry",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "callout 78/118 at px 62,410 with a dashed rectangle at the west wall between rows 395..430"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "glass px 600..655 rows 237..275 = z 7.17..8.09, y 5.04..5.68"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "blue square px 250..272 x rows 323..338"
+    }
+   ],
+   "value": {
+    "widthAlongRidgeM": 0.78,
+    "lengthAlongSlopeM": 1.18,
+    "zCentre": 7.63,
+    "slopeXFromEave": [
+     0.44,
+     1.2
+    ],
+    "yBottom": 5.04,
+    "slope": "WEST"
+   },
+   "uncertainty": {
+    "m": 0.08
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "printed 78/118 + the west render + the site plan",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOFLIGHT-W2",
+   "kind": "ROOFLIGHT",
+   "name": "rooflight, west slope, over the bathroom",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "callout 78/118 at px 62,500"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "glass px 738..778 rows 237..275 = z 5.09..5.77"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "blue square rows 386..393"
+    }
+   ],
+   "value": {
+    "widthAlongRidgeM": 0.78,
+    "lengthAlongSlopeM": 1.18,
+    "zCentre": 5.43,
+    "slopeXFromEave": [
+     0.44,
+     1.2
+    ],
+    "yBottom": 5.04,
+    "slope": "WEST"
+   },
+   "uncertainty": {
+    "m": 0.1
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "printed callout + west render + site plan",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOFLIGHT-E1",
+   "kind": "ROOFLIGHT",
+   "name": "rooflight, east slope, over the stair/corridor",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "callout 78/118 at px 325,500 with a dashed rectangle at the east wall rows 475..515"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "glass px 515..549 rows 237..275 = z 5.15..5.73"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "what": "blue square px 438..458 rows 385..400"
+    }
+   ],
+   "value": {
+    "widthAlongRidgeM": 0.78,
+    "lengthAlongSlopeM": 1.18,
+    "zCentre": 5.44,
+    "slopeXFromEave": [
+     6.7,
+     7.46
+    ],
+    "yBottom": 5.04,
+    "slope": "EAST"
+   },
+   "uncertainty": {
+    "m": 0.1
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "printed callout + east render + site plan",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-FRONT-ROOM",
+   "kind": "OPENING",
+   "name": "front room window 110/230",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap in the front wall band at row 727: px 111..152 = x 1.40..2.48; callout 110/230 at px 130,750"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "glass/frame edges x 1.43..2.45 at rows 455..470; head edge row 438 (2.28 m); sill at the floor"
+    }
+   ],
+   "value": {
+    "facade": "FRONT",
+    "storey": 0,
+    "host": "main front wall z 1.00..1.45",
+    "interval": [
+     1.4,
+     2.5
+    ],
+    "widthM": 1.1,
+    "sillY": 0.0,
+    "headY": 2.3,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW",
+    "printedCallout": "110/230"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "full-height window (sill 0) per the render",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-FRONT-ENTRANCE",
+   "kind": "OPENING",
+   "name": "entrance door 105/210",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap px 216..255 = x 4.18..5.21; callout 105/210 at px 240,750"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "leaf + narrow sidelight at px 625..682 (x 4.23..5.20)"
+    }
+   ],
+   "value": {
+    "facade": "FRONT",
+    "storey": 0,
+    "host": "main front wall",
+    "interval": [
+     4.18,
+     5.23
+    ],
+    "widthM": 1.05,
+    "sillY": 0.0,
+    "headY": 2.1,
+    "profile": "RECTANGULAR",
+    "family": "DOOR",
+    "printedCallout": "105/210"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "leaf/sidelight split VISUAL only (leaf ~0.7 west + glass strip ~0.3 east is the hero reading; the old gold read the opposite order): UNRESOLVED",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-OPEN-GARAGE-DOOR",
+   "kind": "OPENING",
+   "name": "garage door 275/225",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap px 382..484 = x 8.56..11.26; callout 275/225 at px 430,750"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "sectional door px 880..1045 (x 8.57..11.38), head row 442 (2.21 m)"
+    }
+   ],
+   "value": {
+    "facade": "FRONT",
+    "storey": 0,
+    "host": "garage front wall z 1.00..1.45",
+    "interval": [
+     8.55,
+     11.3
+    ],
+    "widthM": 2.75,
+    "sillY": 0.0,
+    "headY": 2.25,
+    "profile": "RECTANGULAR",
+    "family": "GARAGE_DOOR",
+    "printedCallout": "275/225"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "the portal fascia soffit (2.28) sits right on the door head",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-FRONT-GABLE",
+   "kind": "OPENING",
+   "name": "front gable glazing 270/320",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "gap in the front wall band at row 663: px 196..297 = x 3.95..6.63; callout 270/320 at px 245,690"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "west jamb x 3.96 on every row 3.95..6.16 m; head edge descends 2.45 m in x over 2.04 m in y (tan 39.8°): 6.24 at x 3.96, 4.02 at x 6.63; glass continues below the balustrade top 3.93"
+    }
+   ],
+   "value": {
+    "facade": "FRONT",
+    "storey": 1,
+    "host": "main front wall (attic)",
+    "interval": [
+     3.95,
+     6.65
+    ],
+    "widthM": 2.7,
+    "sillY": 3.06,
+    "headY": 6.26,
+    "profile": "RAKED_SINGLE",
+    "family": "GLAZED_DOOR",
+    "printedCallout": "270/320",
+    "headFarY": 4.02
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "tall edge at the ridge side (x 3.95), head raked at the roof pitch; sill at the attic floor; contains the balcony door; mullions VISUAL at x~4.65 and ~5.10",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-OPEN-REAR-GLAZING",
+   "kind": "OPENING",
+   "name": "rear living glazing 470/230",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gaps px 144..229 and 235..320 with a 6 px mullion stub between = x 2.27..6.92; callout 470/230 at px 232,235"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "glass/frame x 2.22..6.92 at row 440 (2.27 m)"
+    }
+   ],
+   "value": {
+    "facade": "REAR",
+    "storey": 0,
+    "host": "main rear wall z 13.15..13.60",
+    "interval": [
+     2.25,
+     6.95
+    ],
+    "widthM": 4.7,
+    "sillY": 0.0,
+    "headY": 2.3,
+    "profile": "RECTANGULAR",
+    "family": "MULTI_PANEL_GLAZING",
+    "printedCallout": "470/230"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "one structural opening drawn with a central division; sliding door + fixed lights",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-REAR-GABLE-W",
+   "kind": "OPENING",
+   "name": "rear gable window west 234/303",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "gap in the rear wall band at row 203: px 83..170 = x 0.95..3.26; callout 234/303 at px 130,178"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "trapezoid glass with its tall edge towards the ridge (x 3.29) and its head falling towards x 0.95"
+    }
+   ],
+   "value": {
+    "facade": "REAR",
+    "storey": 1,
+    "host": "main rear wall (attic)",
+    "interval": [
+     0.95,
+     3.29
+    ],
+    "widthM": 2.34,
+    "sillY": 3.06,
+    "headY": 6.09,
+    "profile": "RAKED_SINGLE",
+    "family": "WINDOW",
+    "printedCallout": "234/303",
+    "headFarY": 4.13
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "303 = the tall edge above the attic floor at the ridge side (x 3.29); the far head 6.09-2.34*tan40 = 4.13",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-REAR-GABLE-E",
+   "kind": "OPENING",
+   "name": "rear gable window east 234/303",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "gap px 221..308 = x 4.61..6.92; callout 234/303 at px 265,178"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "mirror of the west window about the ridge x 3.95; old reading of the render corroborates the rake at three heights"
+    }
+   ],
+   "value": {
+    "facade": "REAR",
+    "storey": 1,
+    "host": "main rear wall (attic)",
+    "interval": [
+     4.61,
+     6.95
+    ],
+    "widthM": 2.34,
+    "sillY": 3.06,
+    "headY": 6.09,
+    "profile": "RAKED_SINGLE",
+    "family": "WINDOW",
+    "printedCallout": "234/303",
+    "headFarY": 4.13
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "tall edge at x 4.61 (ridge side)",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-WEST-LIVING",
+   "kind": "OPENING",
+   "name": "west living window 90/230",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gaps in the west wall band at column px 66: rows 432..447 and 449..463 = z 9.07..9.92 with a 1 px mullion stub; callout 90/230 at px 40,410"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "glass column x=520 rows 441..570 = y 0.07..2.24; window px 492..545 = z 9.02..9.92"
+    }
+   ],
+   "value": {
+    "facade": "WEST",
+    "storey": 0,
+    "host": "main west wall x 0..0.45",
+    "interval": [
+     9.07,
+     9.97
+    ],
+    "widthM": 0.9,
+    "sillY": 0.0,
+    "headY": 2.3,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW",
+    "printedCallout": "90/230"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "interval is along z; full height (sill 0)",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-WEST-KITCHEN",
+   "kind": "OPENING",
+   "name": "west kitchen window 140/140",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gaps rows 469..492 and 493..518 = z 5.82..7.17 (+1.00) = 6.82..8.17; callout 140/140 at px 40,480"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "glass column x=640 rows 453..510 = y 1.08..2.04 inside frames"
+    }
+   ],
+   "value": {
+    "facade": "WEST",
+    "storey": 0,
+    "host": "main west wall",
+    "interval": [
+     6.8,
+     8.2
+    ],
+    "widthM": 1.4,
+    "sillY": 0.9,
+    "headY": 2.3,
+    "profile": "RECTANGULAR",
+    "family": "WINDOW",
+    "printedCallout": "140/140"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "sill 0.90 = 2.30 - 1.40 (the head aligns with the other ground-floor heads)",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-EAST-LIVING",
+   "kind": "OPENING",
+   "name": "east living window 300/230",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap in the east wall band at column px 349: rows 293..406 = z 9.71..12.70; callout 300/230 at px 385,350"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "window px 790..960 = z 9.80..12.67 (frames inside); head row 438 (2.30)"
+    }
+   ],
+   "value": {
+    "facade": "EAST",
+    "storey": 0,
+    "host": "main east wall x 7.45..7.90 (z 8.50..13.60 exterior)",
+    "interval": [
+     9.7,
+     12.7
+    ],
+    "widthM": 3.0,
+    "sillY": 0.0,
+    "headY": 2.3,
+    "profile": "RECTANGULAR",
+    "family": "MULTI_PANEL_GLAZING",
+    "printedCallout": "300/230"
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-GARAGE-SIDE",
+   "kind": "OPENING",
+   "name": "garage side door 100/210 (rear wall of the garage)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap in the garage rear wall band at row 460: px 436..466 = x 9.99..10.78 (the swing arc shortens it); callout 100/210 at px 452,432"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "fully glazed leaf; head edge row 450 at x=350 = 2.10"
+    }
+   ],
+   "value": {
+    "facade": "REAR",
+    "storey": 0,
+    "host": "garage rear wall z 8.05..8.50",
+    "interval": [
+     9.9,
+     10.9
+    ],
+    "widthM": 1.0,
+    "sillY": 0.0,
+    "headY": 2.1,
+    "profile": "RECTANGULAR",
+    "family": "GLAZED_DOOR",
+    "printedCallout": "100/210"
+   },
+   "uncertainty": {
+    "m": 0.06
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "faces the garden at z 8.50; visible on the rear render left of the loggia",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-OPEN-BOILER-GARAGE",
+   "kind": "OPENING",
+   "name": "boiler room to garage door (shared wall)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "gap in the shared wall band at column px 349: rows 657..688 = z 2.24..3.06"
+    }
+   ],
+   "value": {
+    "facade": "INTERIOR",
+    "storey": 0,
+    "host": "house/garage wall x 7.45..7.90",
+    "interval": [
+     2.24,
+     3.06
+    ],
+    "widthM": 0.82,
+    "sillY": 0.0,
+    "headY": 2.1,
+    "profile": "RECTANGULAR",
+    "family": "DOOR",
+    "printedCallout": null
+   },
+   "uncertainty": {
+    "m": 0.06
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "plan gap between wall band pieces (position + width) + printed callout (width/height) + render for sill/head/profile",
+   "notes": "no callout; head 2.10 ASSUMED like the other single doors; one leaf through one 0.39 m wall",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-ROOM_EAST",
+   "kind": "INTERIOR_WALL",
+   "name": "wall east of the front room (pokój 7) / hall",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "column px 187: pieces z 1.45..3.67 and 4.60..4.86; printed 290 room width closes on its west face"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "Z",
+    "centre": 3.41,
+    "span": [
+     1.45,
+     4.7
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-G-ROOM",
+      "interval": [
+       3.67,
+       4.6
+      ],
+      "connects": [
+       "7 Pokój",
+       "2 Hol"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-BATH_EAST",
+   "kind": "INTERIOR_WALL",
+   "name": "wall east of the bathroom (6) / hall",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "column px 187: piece z 5.79..6.35"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "Z",
+    "centre": 3.41,
+    "span": [
+     4.82,
+     6.3
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-G-BATH",
+      "interval": [
+       4.86,
+       5.79
+      ],
+      "connects": [
+       "6 Łazienka",
+       "2 Hol"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-BATH_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "bathroom south wall (bathroom / front room)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 4.72: black x 0.45..3.46 (row px 594)"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 4.76,
+    "span": [
+     0.45,
+     3.46
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-KITCHEN_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "kitchen south wall (kitchen / bathroom)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 6.30 (px 535): black x 0.45..3.49, meeting the x 3.41 wall; east of 3.49 the hall opens into the kitchen (no wall). The printed 265 (kitchen) + 414 (salon) = 679 run from this wall face (6.36) to the rear wall face (13.15): the kitchen/salon virtual boundary is at z 9.01; the printed 446 on the east runs from 13.15 down to the pantry north wall face 8.69"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 6.3,
+    "span": [
+     0.45,
+     3.49
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-ENTRY_NORTH",
+   "kind": "INTERIOR_WALL",
+   "name": "vestibule north wall (wiatrołap / hall)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 3.53 (px 639): pieces x 3.36..4.20 and 5.13..5.47"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 3.53,
+    "span": [
+     3.36,
+     5.47
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-G-ENTRY",
+      "interval": [
+       4.2,
+       5.13
+      ],
+      "connects": [
+       "1 Wiatrołap",
+       "2 Hol"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-BOILER_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "boiler room west wall (kotłownia / vestibule+hall)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "column px 263: pieces z 1.45..2.22 and 3.14..4.79"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "Z",
+    "centre": 5.42,
+    "span": [
+     1.45,
+     4.79
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-G-BOILER",
+      "interval": [
+       2.22,
+       3.14
+      ],
+      "connects": [
+       "8 Kotłownia",
+       "1 Wiatrołap"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-BOILER_NORTH",
+   "kind": "INTERIOR_WALL",
+   "name": "boiler room north wall (kotłownia / stair)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 4.70 (px 595): black x 5.39..7.45; band rows 589..598 = 0.24..0.26 m; printed 312 boiler depth closes on its south face"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 4.7,
+    "span": [
+     5.39,
+     7.45
+    ],
+    "thicknessM": 0.26,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-PANTRY_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "pantry west wall (spiżarnia / hall)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "column px 263: pieces z 7.33..7.54 and 8.36..8.68"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "Z",
+    "centre": 5.42,
+    "span": [
+     7.33,
+     8.68
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-G-PANTRY",
+      "interval": [
+       7.54,
+       8.36
+      ],
+      "connects": [
+       "5 Spiżarnia",
+       "2 Hol"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-PANTRY_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "pantry south wall (over the stair well)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 7.40 (px 493): black x 5.39..6.42 only; east of 6.42 the pantry runs on to z 6.82 over the upper flight (the 160 dimension)"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 7.4,
+    "span": [
+     5.39,
+     6.42
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-PANTRY_NORTH",
+   "kind": "INTERIOR_WALL",
+   "name": "pantry north wall (spiżarnia / salon)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "row z 8.63 (px 447): black x 5.36..7.45; band rows 441..454"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 8.57,
+    "span": [
+     5.36,
+     7.45
+    ],
+    "thicknessM": 0.22,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-WELL_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "stair well west wall (well / hall)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "column px 300: piece z 6.35..7.43; the wall/balustrade line on the hall side of the well (x 5.36..6.45, z 5.84..7.46)"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "Z",
+    "centre": 6.39,
+    "span": [
+     6.35,
+     7.43
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-G-CHIMNEY1",
+   "kind": "INTERIOR_WALL",
+   "name": "fireplace flue block (ground)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "black block x 5.60..6.03, z 8.7..9.1 (rows 440..452)"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "axis": "X",
+    "centre": 8.9,
+    "span": [
+     5.6,
+     6.03
+    ],
+    "thicknessM": 0.4,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-CORRIDOR_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "corridor west wall (rooms 6,5,4 / corridor 1)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "column px 196: pieces z 4.71..4.94, 5.87..7.17, 8.09..8.76, 9.68..13.15; printed 344 | 344 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "Z",
+    "centre": 3.95,
+    "span": [
+     4.71,
+     13.15
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-U-BATH",
+      "interval": [
+       4.94,
+       5.87
+      ],
+      "connects": [
+       "4 Łazienka",
+       "1 Korytarz"
+      ]
+     },
+     {
+      "id": "T2-IDOOR-U-PRALNIA",
+      "interval": [
+       7.17,
+       8.09
+      ],
+      "connects": [
+       "5 Pralnia",
+       "1 Korytarz"
+      ]
+     },
+     {
+      "id": "T2-IDOOR-U-POKOJ_NW",
+      "interval": [
+       8.76,
+       9.68
+      ],
+      "connects": [
+       "6 Pokój",
+       "1 Korytarz"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-ROOM2_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "south room west wall (garderoba 3 / pokój 2)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "column px 175: pieces z 1.45..2.09 and 2.91..4.84; printed 290 | 398 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "Z",
+    "centre": 3.4,
+    "span": [
+     1.45,
+     4.84
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-U-GARDEROBA_SW",
+      "interval": [
+       2.09,
+       2.91
+      ],
+      "connects": [
+       "3 Garderoba",
+       "2 Pokój"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-BATH_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "bathroom south wall (łazienka 4 / garderoba 3)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 3.86 (px 563): black x 0.45..3.45; printed 235 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 3.86,
+    "span": [
+     0.45,
+     3.45
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-PRALNIA_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "laundry south wall (pralnia 5 / łazienka 4)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 6.47 (px 464): black x 0.45..3.95; printed 248 | 202 close on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 6.47,
+    "span": [
+     0.45,
+     3.95
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-POKOJ_NW_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "north-west room south wall (pokój 6 / pralnia 5)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 8.60 (px 384): black x 0.45..3.95; printed 449 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 8.6,
+    "span": [
+     0.45,
+     3.95
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-CORRIDOR_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "corridor south wall (corridor 1 + stair 9 / pokój 2)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 4.68 (px 532): pieces x 3.34..4.08, 5.01..6.02, 6.31..7.45; the 6.02..6.31 gap is beside chimney 2 (ambiguous: a duct or a drawing break, not a door); printed 325 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 4.7,
+    "span": [
+     3.34,
+     7.45
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-U-POKOJ_S",
+      "interval": [
+       4.08,
+       5.01
+      ],
+      "connects": [
+       "1 Korytarz",
+       "2 Pokój"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-POKOJ_NE_SOUTH",
+   "kind": "INTERIOR_WALL",
+   "name": "north-east room south wall (pokój 7 / garderoba 8 + corridor)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 9.80 (px 339): pieces x 3.98..4.14 and 5.01..5.28; printed 325 closes on it"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 9.84,
+    "span": [
+     3.98,
+     5.28
+    ],
+    "thicknessM": 0.12,
+    "doors": [
+     {
+      "id": "T2-IDOOR-U-POKOJ_NE",
+      "interval": [
+       4.14,
+       5.01
+      ],
+      "connects": [
+       "7 Pokój",
+       "1 Korytarz"
+      ]
+     }
+    ]
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-GARDEROBA_NE_WEST",
+   "kind": "INTERIOR_WALL",
+   "name": "north-east wardrobe west wall (garderoba 8 / corridor)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "column px 244: piece z 8.46..9.89; printed 134 | 217 (garderoba 8 is 1.34 wide, 2.17 deep) close on it; no door: room 8 opens off room 7"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "Z",
+    "centre": 5.23,
+    "span": [
+     8.46,
+     9.89
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-STAIR_NORTH",
+   "kind": "INTERIOR_WALL",
+   "name": "stair compartment north wall (stair 9 / garderoba 8)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "row z 8.50 (px 388): black x 5.17..7.45"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 8.5,
+    "span": [
+     5.17,
+     7.45
+    ],
+    "thicknessM": 0.12,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-CHIMNEY1",
+   "kind": "INTERIOR_WALL",
+   "name": "chimney 1 block (attic)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "solid black px 253..276 x rows 368..384"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 8.83,
+    "span": [
+     5.46,
+     6.07
+    ],
+    "thicknessM": 0.43,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-U-CHIMNEY2",
+   "kind": "INTERIOR_WALL",
+   "name": "chimney 2 block (attic)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "solid black rows 531..551"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "axis": "X",
+    "centre": 4.43,
+    "span": [
+     5.46,
+     5.99
+    ],
+    "thicknessM": 0.55,
+    "doors": []
+   },
+   "uncertainty": {
+    "m": 0.04
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "black band centre and extent measured on the plan through the chain frame; doors are the gaps between pieces of the band",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-IWALL-ATTIC-TOP",
+   "kind": "INTERIOR_WALL",
+   "name": "attic partition heights",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "ceiling band rows 200..226 over px 306..522: underside 5.72"
+    }
+   ],
+   "value": {
+    "capY": 5.72,
+    "belowCap": "follow the roof underside"
+   },
+   "uncertainty": {
+    "m": 0.03
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "the flat ceiling at +5.72 (266 above +3.06) caps every partition; below it they die into the roof",
+   "notes": "the old reference capped them at 2.60 above the floor (5.66): 0.06 m lower",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-1",
+   "kind": "ROOM",
+   "name": "room 1 Wiatrołap",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 1 printed inside; area-labelled copy prints Wiatrołap 3.7"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "1",
+    "label": "Wiatrołap",
+    "polygon": [
+     [
+      3.47,
+      1.45
+     ],
+     [
+      5.36,
+      1.45
+     ],
+     [
+      5.36,
+      3.47
+     ],
+     [
+      3.47,
+      3.47
+     ]
+    ],
+    "polygonAreaM2": 3.82,
+    "publishedAreaM2": 3.7
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 3.82 m2 vs published 3.7",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-2",
+   "kind": "ROOM",
+   "name": "room 2 Hol",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 2 printed inside; area-labelled copy prints Hol 9.18"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "2",
+    "label": "Hol",
+    "polygon": [
+     [
+      3.47,
+      3.59
+     ],
+     [
+      5.36,
+      3.59
+     ],
+     [
+      5.36,
+      9.01
+     ],
+     [
+      4.08,
+      9.01
+     ],
+     [
+      4.08,
+      6.36
+     ],
+     [
+      3.47,
+      6.36
+     ]
+    ],
+    "polygonAreaM2": 8.63,
+    "publishedAreaM2": 9.18
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 8.63 m2 vs published 9.18; the kitchen, hall and living room are one open space: their mutual boundaries are the printed 265/414/446 lines, not walls",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-3",
+   "kind": "ROOM",
+   "name": "room 3 Kuchnia",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 3 printed inside; area-labelled copy prints Kuchnia 9.63"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "3",
+    "label": "Kuchnia",
+    "polygon": [
+     [
+      0.45,
+      6.36
+     ],
+     [
+      4.08,
+      6.36
+     ],
+     [
+      4.08,
+      9.01
+     ],
+     [
+      0.45,
+      9.01
+     ]
+    ],
+    "polygonAreaM2": 9.62,
+    "publishedAreaM2": 9.63
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 9.62 m2 vs published 9.63; the kitchen, hall and living room are one open space: their mutual boundaries are the printed 265/414/446 lines, not walls",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-4",
+   "kind": "ROOM",
+   "name": "room 4 Salon + Jadalnia",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 4 printed inside; area-labelled copy prints Salon + Jadalnia 29.52"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "4",
+    "label": "Salon + Jadalnia",
+    "polygon": [
+     [
+      0.45,
+      9.01
+     ],
+     [
+      5.48,
+      9.01
+     ],
+     [
+      5.48,
+      8.69
+     ],
+     [
+      7.45,
+      8.69
+     ],
+     [
+      7.45,
+      13.15
+     ],
+     [
+      0.45,
+      13.15
+     ]
+    ],
+    "polygonAreaM2": 29.61,
+    "publishedAreaM2": 29.52
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 29.61 m2 vs published 29.52; the kitchen, hall and living room are one open space: their mutual boundaries are the printed 265/414/446 lines, not walls",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-5",
+   "kind": "ROOM",
+   "name": "room 5 Spiżarnia",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 5 printed inside; area-labelled copy prints Spiżarnia 1.44"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "5",
+    "label": "Spiżarnia",
+    "polygon": [
+     [
+      5.48,
+      7.46
+     ],
+     [
+      7.45,
+      7.46
+     ],
+     [
+      7.45,
+      8.46
+     ],
+     [
+      5.48,
+      8.46
+     ]
+    ],
+    "polygonAreaM2": 1.97,
+    "publishedAreaM2": 1.44
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 1.97 m2 vs published 1.44",
+   "conflict": "polygon 1.97 vs published 1.44 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-6",
+   "kind": "ROOM",
+   "name": "room 6 Łazienka",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 6 printed inside; area-labelled copy prints Łazienka 3.95"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "6",
+    "label": "Łazienka",
+    "polygon": [
+     [
+      0.45,
+      4.82
+     ],
+     [
+      3.35,
+      4.82
+     ],
+     [
+      3.35,
+      6.24
+     ],
+     [
+      0.45,
+      6.24
+     ]
+    ],
+    "polygonAreaM2": 4.12,
+    "publishedAreaM2": 3.95
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 4.12 m2 vs published 3.95",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-7",
+   "kind": "ROOM",
+   "name": "room 7 Pokój",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 7 printed inside; area-labelled copy prints Pokój 9.18"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "7",
+    "label": "Pokój",
+    "polygon": [
+     [
+      0.45,
+      1.45
+     ],
+     [
+      3.35,
+      1.45
+     ],
+     [
+      3.35,
+      4.7
+     ],
+     [
+      0.45,
+      4.7
+     ]
+    ],
+    "polygonAreaM2": 9.43,
+    "publishedAreaM2": 9.18
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 9.43 m2 vs published 9.18",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-8",
+   "kind": "ROOM",
+   "name": "room 8 Kotłownia",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 8 printed inside; area-labelled copy prints Kotłownia 5.8"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "8",
+    "label": "Kotłownia",
+    "polygon": [
+     [
+      5.48,
+      1.45
+     ],
+     [
+      7.45,
+      1.45
+     ],
+     [
+      7.45,
+      4.57
+     ],
+     [
+      5.48,
+      4.57
+     ]
+    ],
+    "polygonAreaM2": 6.15,
+    "publishedAreaM2": 5.8
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 6.15 m2 vs published 5.8",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-9",
+   "kind": "ROOM",
+   "name": "room 9 Garaż",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number 9 printed inside; area-labelled copy prints Garaż 24.1"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "9",
+    "label": "Garaż",
+    "polygon": [
+     [
+      7.9,
+      1.45
+     ],
+     [
+      11.6,
+      1.45
+     ],
+     [
+      11.6,
+      8.05
+     ],
+     [
+      7.9,
+      8.05
+     ]
+    ],
+    "polygonAreaM2": 24.42,
+    "publishedAreaM2": 24.1
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 24.42 m2 vs published 24.1",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-G-STAIR",
+   "kind": "ROOM",
+   "name": "room stair Schody (shaft, no number on the ground table)",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-aa1526220f",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "polygon bounded by the wall faces above; room number stair printed inside; area-labelled copy prints Schody (shaft, no number on the ground table) None"
+    }
+   ],
+   "value": {
+    "storey": 0,
+    "number": "stair",
+    "label": "Schody (shaft, no number on the ground table)",
+    "polygon": [
+     [
+      5.36,
+      4.83
+     ],
+     [
+      7.45,
+      4.83
+     ],
+     [
+      7.45,
+      7.4
+     ],
+     [
+      5.36,
+      7.4
+     ]
+    ],
+    "polygonAreaM2": 5.37,
+    "publishedAreaM2": null
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "the ground-floor stair shaft is not a numbered room; the U-stair and its well occupy it",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-1",
+   "kind": "ROOM",
+   "name": "room 1 Korytarz",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 1 printed inside; area-labelled copy prints Korytarz 6.17"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "1",
+    "label": "Korytarz",
+    "polygon": [
+     [
+      4.01,
+      4.76
+     ],
+     [
+      5.36,
+      4.76
+     ],
+     [
+      5.36,
+      8.44
+     ],
+     [
+      5.29,
+      8.44
+     ],
+     [
+      5.29,
+      9.78
+     ],
+     [
+      4.01,
+      9.78
+     ]
+    ],
+    "polygonAreaM2": 6.68,
+    "publishedAreaM2": 6.17
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 6.68 m2 vs published 6.17; attic figures are NET under a headroom rule, the polygon is gross",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-2",
+   "kind": "ROOM",
+   "name": "room 2 Pokój (south)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 2 printed inside; area-labelled copy prints Pokój (south) 10.25"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "2",
+    "label": "Pokój (south)",
+    "polygon": [
+     [
+      3.46,
+      1.45
+     ],
+     [
+      7.45,
+      1.45
+     ],
+     [
+      7.45,
+      4.64
+     ],
+     [
+      3.46,
+      4.64
+     ]
+    ],
+    "polygonAreaM2": 12.73,
+    "publishedAreaM2": 10.25
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 12.73 m2 vs published 10.25; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 12.73 vs published 10.25 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-3",
+   "kind": "ROOM",
+   "name": "room 3 Garderoba (south-west)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 3 printed inside; area-labelled copy prints Garderoba (south-west) 5.19"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "3",
+    "label": "Garderoba (south-west)",
+    "polygon": [
+     [
+      0.45,
+      1.45
+     ],
+     [
+      3.34,
+      1.45
+     ],
+     [
+      3.34,
+      3.8
+     ],
+     [
+      0.45,
+      3.8
+     ]
+    ],
+    "polygonAreaM2": 6.79,
+    "publishedAreaM2": 5.19
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 6.79 m2 vs published 5.19; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 6.79 vs published 5.19 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-4",
+   "kind": "ROOM",
+   "name": "room 4 Łazienka",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 4 printed inside; area-labelled copy prints Łazienka 6.4"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "4",
+    "label": "Łazienka",
+    "polygon": [
+     [
+      0.45,
+      3.92
+     ],
+     [
+      3.89,
+      3.92
+     ],
+     [
+      3.89,
+      6.41
+     ],
+     [
+      0.45,
+      6.41
+     ]
+    ],
+    "polygonAreaM2": 8.57,
+    "publishedAreaM2": 6.4
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 8.57 m2 vs published 6.4; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 8.57 vs published 6.4 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-5",
+   "kind": "ROOM",
+   "name": "room 5 Pralnia",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 5 printed inside; area-labelled copy prints Pralnia 5.59"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "5",
+    "label": "Pralnia",
+    "polygon": [
+     [
+      0.45,
+      6.53
+     ],
+     [
+      3.89,
+      6.53
+     ],
+     [
+      3.89,
+      8.54
+     ],
+     [
+      0.45,
+      8.54
+     ]
+    ],
+    "polygonAreaM2": 6.91,
+    "publishedAreaM2": 5.59
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 6.91 m2 vs published 5.59; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 6.91 vs published 5.59 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-6",
+   "kind": "ROOM",
+   "name": "room 6 Pokój (north-west)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 6 printed inside; area-labelled copy prints Pokój (north-west) 12.57"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "6",
+    "label": "Pokój (north-west)",
+    "polygon": [
+     [
+      0.45,
+      8.66
+     ],
+     [
+      3.89,
+      8.66
+     ],
+     [
+      3.89,
+      13.15
+     ],
+     [
+      0.45,
+      13.15
+     ]
+    ],
+    "polygonAreaM2": 15.45,
+    "publishedAreaM2": 12.57
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 15.45 m2 vs published 12.57; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 15.45 vs published 12.57 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-7",
+   "kind": "ROOM",
+   "name": "room 7 Pokój (north-east)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 7 printed inside; area-labelled copy prints Pokój (north-east) 9.02"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "7",
+    "label": "Pokój (north-east)",
+    "polygon": [
+     [
+      4.01,
+      9.9
+     ],
+     [
+      7.45,
+      9.9
+     ],
+     [
+      7.45,
+      13.15
+     ],
+     [
+      4.01,
+      13.15
+     ]
+    ],
+    "polygonAreaM2": 11.18,
+    "publishedAreaM2": 9.02
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 11.18 m2 vs published 9.02; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 11.18 vs published 9.02 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-8",
+   "kind": "ROOM",
+   "name": "room 8 Garderoba (north-east)",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 8 printed inside; area-labelled copy prints Garderoba (north-east) 1.62"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "8",
+    "label": "Garderoba (north-east)",
+    "polygon": [
+     [
+      5.29,
+      8.56
+     ],
+     [
+      7.45,
+      8.56
+     ],
+     [
+      7.45,
+      9.78
+     ],
+     [
+      5.29,
+      9.78
+     ]
+    ],
+    "polygonAreaM2": 2.64,
+    "publishedAreaM2": 1.62
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 2.64 m2 vs published 1.62; attic figures are NET under a headroom rule, the polygon is gross",
+   "conflict": "polygon 2.64 vs published 1.62 differs by more than 10%",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ROOM-U-9",
+   "kind": "ROOM",
+   "name": "room 9 Schody",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-rzut-f028d28aba",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "polygon bounded by the wall faces above; room number 9 printed inside; area-labelled copy prints Schody 5.63"
+    }
+   ],
+   "value": {
+    "storey": 1,
+    "number": "9",
+    "label": "Schody",
+    "polygon": [
+     [
+      5.36,
+      4.76
+     ],
+     [
+      7.45,
+      4.76
+     ],
+     [
+      7.45,
+      8.44
+     ],
+     [
+      5.36,
+      8.44
+     ],
+     [
+      5.36,
+      7.46
+     ],
+     [
+      6.45,
+      7.46
+     ],
+     [
+      6.45,
+      5.84
+     ],
+     [
+      5.36,
+      5.84
+     ]
+    ],
+    "polygonAreaM2": 5.93,
+    "publishedAreaM2": 5.63
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_DERIVED",
+   "method": "polygon from the wall graph (wall faces); the published area is a corroboration constraint only",
+   "notes": "polygon 5.93 m2 vs published 5.63; attic figures are NET under a headroom rule, the polygon is gross",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-STAIR-TOPOLOGY",
+   "kind": "STAIR",
+   "name": "stair topology: U-stair of three flights and two quarter landings",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "five tread lines running along z at px 261, 271, 281, 292, 302 (x 5.36, 5.63, 5.90, 6.18, 6.45) between rows 553..591 (z 4.81..5.84): the LOWER flight climbs EAST; the walking line at row 572 (z 5.32) runs x 5.31..6.92 and turns north at px 321 (x 6.95); tread lines at rows 553, 543, 533, 492 (z 5.82, 6.08, 6.35, 7.43) across px 302..340 (x 6.45..7.43): the MIDDLE flight climbs NORTH in the east band; the plant symbol at px 261..299 x rows 496..551 (x 5.36..6.37, z 5.87..7.33) stands in the WELL between the flights"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "seven tread lines at rows 489, 479, 468, 458, 448, 438, 428 (z 5.82, 6.08, 6.37, 6.64, 6.90, 7.17, 7.43) across px 290..327 (x 6.45..7.42); four tread lines along z at px 259, 270, 280, 290 (x 5.62, 5.91, 6.18, 6.44) between rows 390..427 (z 7.46..8.44): the UPPER flight climbs WEST in the north band; walking line at px 309 (x 6.95) rows 409..505 (z 5.34..7.94) turning west at row 409 to an arrowhead at px 250..259 (x 5.38..5.62)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "the cut shows five risers at x 5.37, 5.63, 5.91, 6.17, 6.44 rising 0.17, 0.36, 0.52, 0.72, 0.88 m, then a level platform from x 6.44 to the shared wall (7.45) at 0.88..0.90; beyond the cut, seven nosings in the east band x 6.45..7.44 at 1.05, 1.23, 1.41, 1.58, 1.76, 1.94, 2.12..2.16 m"
+    }
+   ],
+   "value": {
+    "shaft": {
+     "x": [
+      5.36,
+      7.45
+     ],
+     "z": [
+      4.81,
+      8.44
+     ]
+    },
+    "well": {
+     "x": [
+      5.36,
+      6.45
+     ],
+     "z": [
+      5.84,
+      7.46
+     ]
+    },
+    "widthM": 1.0,
+    "start": {
+     "x": 5.36,
+     "z": [
+      4.81,
+      5.84
+     ],
+     "level": "ground floor, from the hall (2)"
+    },
+    "flights": [
+     {
+      "index": 1,
+      "direction": "PLUS_X",
+      "band": {
+       "z": [
+        4.81,
+        5.84
+       ]
+      },
+      "riserLinesX": [
+       5.36,
+       5.63,
+       5.9,
+       6.18,
+       6.45
+      ],
+      "risers": 5,
+      "goingM": 0.27,
+      "from": 0.0,
+      "to": 0.9
+     },
+     {
+      "index": "landing-1",
+      "kind": "QUARTER_LANDING",
+      "x": [
+       6.45,
+       7.45
+      ],
+      "z": [
+       4.81,
+       5.84
+      ],
+      "levelY": 0.9,
+      "turn": "LEFT (to +z)"
+     },
+     {
+      "index": 2,
+      "direction": "PLUS_Z",
+      "band": {
+       "x": [
+        6.45,
+        7.45
+       ]
+      },
+      "riserLinesZ": [
+       5.84,
+       6.1,
+       6.37,
+       6.64,
+       6.9,
+       7.17,
+       7.43
+      ],
+      "risers": 7,
+      "goingM": 0.265,
+      "from": 0.9,
+      "to": 2.16
+     },
+     {
+      "index": "landing-2",
+      "kind": "QUARTER_LANDING",
+      "x": [
+       6.45,
+       7.45
+      ],
+      "z": [
+       7.46,
+       8.44
+      ],
+      "levelY": 2.16,
+      "turn": "LEFT (to -x)"
+     },
+     {
+      "index": 3,
+      "direction": "MINUS_X",
+      "band": {
+       "z": [
+        7.46,
+        8.44
+       ]
+      },
+      "riserLinesX": [
+       6.44,
+       6.18,
+       5.91,
+       5.62,
+       5.36
+      ],
+      "risers": 5,
+      "goingM": 0.265,
+      "from": 2.16,
+      "to": 3.06,
+      "arrival": "attic corridor (1) at x 5.36, z 7.46..8.44"
+     }
+    ],
+    "risersTotal": 17,
+    "riserM": 0.18,
+    "totalRiseM": 3.06,
+    "turnKind": "U (two left quarter turns)",
+    "winders": 0
+   },
+   "uncertainty": {
+    "m": 0.04,
+    "risers": 0
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "tread ladders read on both plans through the chain frames; riser count and going corroborated by the section (5 risers at 0.267 m going, landing at 0.90, seven nosings 0.18 m apart in the east band); 17 x 0.18 = 3.06 closes on the printed +3,06 exactly",
+   "notes": "this CONTRADICTS the old reference (a dog-leg of 4 + 4 winders + 9) and the current Auto (no stair). Nothing in either plan fans: both corner squares are level landings, and the third flight along the north band is what both earlier readings missed",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-BALCONY-FRONT",
+   "kind": "BALCONY",
+   "name": "front balcony slab over the portal recess",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "the attic front zone px 70..321 is floored between rows 671..707; the balustrade line at row 705 (z 0.08)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "dark fascia band: top edge rows 390..394 (3.03..3.10), bottom edge row 438 (2.28) on every column x 700..1065; its west end at px 567 (x 3.25)"
+    }
+   ],
+   "value": {
+    "x": [
+     3.25,
+     7.9
+    ],
+    "z": [
+     0.0,
+     1.0
+    ],
+    "topY": 3.06,
+    "fasciaTopY": 3.07,
+    "fasciaSoffitY": 2.28,
+    "fasciaThicknessM": 0.79
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "plan extent (west edge 3.25..3.34) + registered front render for the fascia",
+   "notes": "the fascia is measured 0.79 m tall on the front render (the old gold read 0.55); the slab top is taken as the attic floor 3.06",
+   "conflict": "front fascia 0.79 m vs rear fascia 0.56 m: the two balconies are not the same section; the front one is continuous with the garage roof edge",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-BALCONY-REAR",
+   "kind": "BALCONY",
+   "name": "rear balcony slab over the loggia",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "attic rear zone px 70..321 rows 159..195; balustrade line at row 161"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "fascia top rows 393..396 (3.02..3.07), bottom rows 426..428 (2.47..2.51) at x 700..900; darker shadow on the timber down to rows 471..478 (1.63..1.75)"
+    }
+   ],
+   "value": {
+    "x": [
+     0.61,
+     7.29
+    ],
+    "z": [
+     13.6,
+     14.6
+    ],
+    "topY": 3.06,
+    "fasciaTopY": 3.05,
+    "fasciaSoffitY": 2.49,
+    "fasciaThicknessM": 0.56
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "plan extent + registered rear render",
+   "notes": "the 0.7 m darker zone under the fascia is the shadow on the timber, not a member",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-PORTAL-HEAD",
+   "kind": "PORTAL",
+   "name": "portal head over the garage door: the garage roof edge over the recess",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "the same dark band 2.28..3.07 continues from the balcony (x 3.25) to the garage return (x 12.05) with no break at x 7.90"
+    },
+    {
+     "asset": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+     "what": "the band turns the corner as one member; a lit timber soffit runs under it over the garage door"
+    },
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "garage roof outline reaches row 707 (z 0.05)"
+    }
+   ],
+   "value": {
+    "x": [
+     7.9,
+     12.05
+    ],
+    "z": [
+     0.0,
+     1.0
+    ],
+    "fasciaTopY": 3.07,
+    "fasciaSoffitY": 2.28,
+    "soffitFinish": "timber (VISUAL)"
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "attic plan outline + section parapet + front render + hero",
+   "notes": "the recess mouth at ground level is x 0.61..11.42 wide and 2.28 m tall under this head",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-FACADE-FRONT-BAND",
+   "kind": "FACADE_MEMBER",
+   "name": "continuous dark front band (balcony fascia + portal head)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+    "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "rows 394..438 dark/grey from px 567 to 1084 (x 3.25..12.04) at every sampled column; no break"
+    }
+   ],
+   "value": {
+    "x": [
+     3.25,
+     12.05
+    ],
+    "y": [
+     2.28,
+     3.07
+    ],
+    "plane": "z = 0 (the outer plane)",
+    "kind": "BALCONY_FRAME + PORTAL fascia"
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "registered front render; continuity confirmed on the hero perspective",
+   "notes": "the member the owner described as continuous around the garage/balcony region",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-RAILING-FRONT",
+   "kind": "RAILING",
+   "name": "front glass balustrade",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "balustrade line at row 705 (z 0.08) from px 172 to 321 with post marks"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "bluish glass rows 342..390 from px 570 to 800 (x 3.30..7.23); top edge rows 340..342 (3.93..3.95)"
+    }
+   ],
+   "value": {
+    "x": [
+     3.3,
+     7.26
+    ],
+    "z": 0.05,
+    "baseY": 3.06,
+    "topY": 3.93,
+    "heightM": 0.87,
+    "infill": "GLASS"
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "plan line + registered front render",
+   "notes": "below a normal 1.0..1.1 balustrade; either the slab top is lower than 3.06 or the render omits a top rail: UNRESOLVED",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-RAILING-REAR",
+   "kind": "RAILING",
+   "name": "rear glass balustrade",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "balustrade line at row 161 (z 14.50) from px 70 to 321"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "glass rows 343..390 from px 545 to 932 (x 0.64..7.22); top row 341..343 (3.92..3.95)"
+    }
+   ],
+   "value": {
+    "x": [
+     0.64,
+     7.26
+    ],
+    "z": 14.55,
+    "baseY": 3.06,
+    "topY": 3.93,
+    "heightM": 0.87,
+    "infill": "GLASS"
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "IMAGE_METRIC_REGISTERED",
+   "method": "plan line + registered rear render",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ASSEMBLY-FRONT-GABLE-FRAME",
+   "kind": "FACADE_ASSEMBLY",
+   "name": "front gable frame: west return + verge members + east return above the balcony",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+     "what": "the white shell reads as one thick frame around the recessed timber panel: left upright (the return), two raking members (the verge) meeting at the ridge, and a short right upright standing on the balcony slab"
+    }
+   ],
+   "value": {
+    "kind": "GABLE_FRAME",
+    "plane": "z = 0",
+    "members": [
+     "T2-RECESS-FRONT-GROUND.returns.west",
+     "T2-ROOF-VERGE-MEMBER (west rake)",
+     "T2-ROOF-VERGE-MEMBER (east rake)",
+     "T2-RECESS-FRONT-ATTIC.returns.east"
+    ],
+    "continuity": [
+     "west return CONTINUES_AS the west verge member",
+     "east verge member CONTINUES_AS the east return above the balcony",
+     "east verge member TERMINATES_AT the garage roof edge"
+    ]
+   },
+   "uncertainty": {},
+   "status": "SOURCE_CORROBORATED",
+   "method": "plans give the returns as ink; the front render and the hero give the verge as a member of measured width; continuity is visible on the hero",
+   "notes": "the owner-reported characteristic frame",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-ASSEMBLY-REAR-GABLE-FRAME",
+   "kind": "FACADE_ASSEMBLY",
+   "name": "rear gable frame: two full-height returns + verge members",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+    "asset-rzut-19a11bc745",
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+     "what": "the garden perspective shows the white frame (two uprights + rake) around the dark gable and the loggia"
+    }
+   ],
+   "value": {
+    "kind": "GABLE_FRAME",
+    "plane": "z = 14.60",
+    "members": [
+     "T2-RECESS-REAR.returns.west",
+     "T2-RECESS-REAR.returns.east",
+     "T2-ROOF-VERGE-MEMBER (both rakes)"
+    ]
+   },
+   "uncertainty": {},
+   "status": "SOURCE_CORROBORATED",
+   "method": "plans + rear render + garden perspective",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ASSEMBLY-FRONT-PORTAL",
+   "kind": "FACADE_ASSEMBLY",
+   "name": "front portal: balcony fascia + garage roof edge + garage return + west return jamb",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "band 2.28..3.07 from x 3.25 to 12.05; jambs at x 0.61 (west return) and 11.42 (garage return)"
+    }
+   ],
+   "value": {
+    "kind": "PORTAL_FRAME",
+    "mouth": {
+     "x": [
+      0.61,
+      11.42
+     ],
+     "y": [
+      0.0,
+      2.28
+     ]
+    },
+    "head": "T2-FACADE-FRONT-BAND",
+    "jambs": [
+     "west return",
+     "garage east return"
+    ],
+    "depthM": 1.0
+   },
+   "uncertainty": {},
+   "status": "SOURCE_CORROBORATED",
+   "method": "plan returns + registered front render + hero",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-ASSEMBLY-GARAGE-BOX",
+   "kind": "FACADE_ASSEMBLY",
+   "name": "garage: dark box with a flat roof and a parapet band",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "dark block px 212..713 (z 0.03..8.50) to rows 390..392 (3.07..3.11)"
+    },
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "dark block px 259..503 (x 7.92..12.05) to row 396 (3.02)"
+    }
+   ],
+   "value": {
+    "kind": "FASCIA",
+    "parapetTopY": 3.09,
+    "slabTopY": 2.88,
+    "finish": "dark render on all faces"
+   },
+   "uncertainty": {
+    "m": 0.05
+   },
+   "status": "SOURCE_CORROBORATED",
+   "method": "section upstand + three renders",
+   "notes": "",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-WHITE-SHELL",
+   "kind": "MATERIAL_REGION",
+   "name": "white render: returns, verge band, side walls above the dark band, front gable outside the timber panel",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-TIMBER-FRONT",
+   "kind": "MATERIAL_REGION",
+   "name": "timber cladding: the recessed front wall from the west return to the balcony edge (x 0.61..3.25) full height and the gable panel up to the glazing (x 3.25..3.95 above 3.06; the gable above the balustrade x 3.95..7.26)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-TIMBER-REAR",
+   "kind": "MATERIAL_REGION",
+   "name": "timber cladding: the recessed rear wall either side of the 470/230 glazing under the balcony (x 0.61..2.25 and 6.95..7.29, y 0..2.28)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-DARK-FRONT",
+   "kind": "MATERIAL_REGION",
+   "name": "anthracite render: the portal walls (x 3.25..11.42, y 0..2.28 at z=1.00), the front band, the garage box",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-DARK-REAR-GABLE",
+   "kind": "MATERIAL_REGION",
+   "name": "anthracite render: the rear gable wall above the balcony between the returns",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+    "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-DARK-SIDE-BANDS",
+   "kind": "MATERIAL_REGION",
+   "name": "anthracite render bands on the ground floor: west z 3.74..9.92 to y 2.29; east from the garage (z 8.50) to the 300/230 jamb (z 9.70) to y 2.30",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-MAT-ROOF",
+   "kind": "MATERIAL_REGION",
+   "name": "grey clay tiles on both slopes; grey plinth 0.32 m at the base",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "what": "colour-class row/column scans"
+    }
+   ],
+   "value": {
+    "geometry": "NONE: a flush finish region"
+   },
+   "uncertainty": {},
+   "status": "VISUAL_SEMANTIC",
+   "method": "material classes from the renders",
+   "notes": "colour never creates geometry",
+   "ownerReviewNeeded": false
+  },
+  {
+   "id": "T2-UNRES-140-220",
+   "kind": "UNRESOLVED",
+   "name": "the printed 140 | 220 pair at the head of the attic plan and its mirror",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "extension lines at px 100 and 140 (x 1.40, 2.47) on both ends of the rear outer plane; 140+220 = 360 from each corner leaves 70 in the middle; matches no wall, window (0.95..3.29) or balustrade post found"
+    }
+   ],
+   "value": {
+    "handling": "candidates: balustrade panel divisions, a terrace step, a roof-window layout line"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "extension lines at px 100 and 140 (x 1.40, 2.47) on both ends of the rear outer plane; 140+220 = 360 from each corner leaves 70 in the middle; matches no wall, window (0.95..3.29) or balustrade post found",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-ENTRANCE-SPLIT",
+   "kind": "UNRESOLVED",
+   "name": "the leaf / sidelight split of the 105 entrance",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "a narrow glass strip and a grey leaf; which side the strip is on differs between the old gold and the hero reading"
+    }
+   ],
+   "value": {
+    "handling": "render only"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "a narrow glass strip and a grey leaf; which side the strip is on differs between the old gold and the hero reading",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-FRONT-FASCIA-SECTION",
+   "kind": "UNRESOLVED",
+   "name": "what the 0.79 m front fascia is made of (slab + downstand? parapet?)",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "the section does not cut the balcony"
+    }
+   ],
+   "value": {
+    "handling": "modelled as a slab whose fascia is the measured band"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "the section does not cut the balcony",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-VERGE-DEPTH",
+   "kind": "UNRESOLVED",
+   "name": "the depth (along z) of the white verge member and whether it is solid or a fascia board",
+   "sourceAssetIds": [
+    "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+   ],
+   "locators": [
+    {
+     "asset": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+     "what": "only the face width 0.64 is measured"
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "only the face width 0.64 is measured",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-EAVE-DATUM",
+   "kind": "UNRESOLVED",
+   "name": "eave datum +4,67 vs the derived 4.636",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "0.034 m"
+    }
+   ],
+   "value": {
+    "handling": "both kept; the model uses the derived plane so that 40°, 7.90 and 7.95 hold together"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "0.034 m",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-GARAGE-ROOF-FALL",
+   "kind": "UNRESOLVED",
+   "name": "the garage roof slab top: 2.88 at the house rising to ~2.95 at the parapet on the section",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "what": "a drainage fall or a drawing artefact"
+    }
+   ],
+   "value": {
+    "handling": "modelled level at 2.88 with a parapet to 3.09"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "a drainage fall or a drawing artefact",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-ROOFLIGHT-SILL",
+   "kind": "UNRESOLVED",
+   "name": "the exact position of each rooflight along its slope",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "what": "read to +-0.1 m off the renders; the plan symbols are dashed rectangles against the wall"
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "read to +-0.1 m off the renders; the plan symbols are dashed rectangles against the wall",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-RAILING-HEIGHT",
+   "kind": "UNRESOLVED",
+   "name": "balustrade height 0.87 above the slab",
+   "sourceAssetIds": [
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+   ],
+   "locators": [
+    {
+     "asset": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "what": "below code; a top rail may be omitted from the render"
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "below code; a top rail may be omitted from the render",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-PANTRY-SHAPE",
+   "kind": "UNRESOLVED",
+   "name": "the pantry: its south wall stops at x 6.42 and the space runs under the upper flight to z 6.82 (the 160 dimension); published 1.44 net / 2.42 gross",
+   "sourceAssetIds": [
+    "asset-rzut-19a11bc745",
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-19a11bc745",
+     "what": "an L-shaped room whose east leg is under the stair"
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "an L-shaped room whose east leg is under the stair",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-CORRIDOR-SOUTH-GAP",
+   "kind": "UNRESOLVED",
+   "name": "a 0.29 m break in the attic corridor south wall at x 6.02..6.31 beside chimney 2",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": "a duct, a niche, or the chimney outline"
+    }
+   ],
+   "value": {
+    "handling": "not a door"
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "a duct, a niche, or the chimney outline",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-ATTIC-NET-AREAS",
+   "kind": "UNRESOLVED",
+   "name": "the attic table prints NET areas under an unstated headroom rule (e.g. 12.57 net vs 15.13 gross)",
+   "sourceAssetIds": [
+    "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+    "asset-rzut-f028d28aba"
+   ],
+   "locators": [
+    {
+     "asset": "page:https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+     "what": "polygons are gross"
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "polygons are gross",
+   "ownerReviewNeeded": true
+  },
+  {
+   "id": "T2-UNRES-CHIMNEY-DEPTH",
+   "kind": "UNRESOLVED",
+   "name": "chimney plan dimensions to better than +-0.06",
+   "sourceAssetIds": [
+    "asset-rzut-117027f690",
+    "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+   ],
+   "locators": [
+    {
+     "asset": "asset-rzut-117027f690",
+     "what": ""
+    }
+   ],
+   "value": {
+    "handling": ""
+   },
+   "uncertainty": {},
+   "status": "UNRESOLVED",
+   "method": "named, not hidden",
+   "notes": "",
+   "ownerReviewNeeded": true
+  }
+ ]
+}

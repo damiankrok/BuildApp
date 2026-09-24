@@ -1,0 +1,900 @@
+{
+  "schema": "buildapp.research.source-atlas",
+  "schemaVersion": "2.0.0",
+  "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "sourcePackageContentHash": "331d98cc10cd1c208868a08cde0347dd024475c4ea29c48d5f5035e847d8a9d7",
+  "pageHash": "e2c98181d6119d59934f63c9ece5afa09662ad870b1fd7a2d27887b164768952",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "method": "variants decoded from the cached bytes and grouped by a 64-bit dHash (distance <= 10) plus aspect (3%) plus the same annotation role; never by filename, aspect or id alone. Projection model and rendering character are independent axes.",
+  "variantCount": 26,
+  "viewCount": 14,
+  "views": [
+    {
+      "viewId": "view-page-facts",
+      "sourceFamily": "PAGE_STRUCTURED_FACTS",
+      "projectionModel": "NONE",
+      "renderingCharacter": "TEXT",
+      "annotationMode": "PUBLISHED_FIGURES",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+      "selectedVariant": {
+        "pageHash": "e2c98181d6119d59934f63c9ece5afa09662ad870b1fd7a2d27887b164768952"
+      },
+      "siblingVariants": [],
+      "packageAssetIds": [],
+      "packageSplitsThisView": false,
+      "facts": [
+        {
+          "key": "boiler_room_area",
+          "label": "Powierzchnia kotłowni",
+          "value": 5.8,
+          "unit": "m2",
+          "raw": "5,8 m&sup2;"
+        },
+        {
+          "key": "building_height",
+          "label": "Wysokość budynku",
+          "value": 8.27,
+          "unit": "m",
+          "raw": "8,27 m"
+        },
+        {
+          "key": "floor_area",
+          "label": "Powierzchnia podłóg",
+          "value": 170.62,
+          "unit": "m2",
+          "raw": "170,62 m&sup2;"
+        },
+        {
+          "key": "footprint_area",
+          "label": "Powierzchnia zabudowy",
+          "value": 131.16,
+          "unit": "m2",
+          "raw": "131,16 m&sup2;"
+        },
+        {
+          "key": "garage_area",
+          "label": "Powierzchnia garażu",
+          "value": 24.1,
+          "unit": "m2",
+          "raw": "24,1 m&sup2;"
+        },
+        {
+          "key": "house_net_area",
+          "label": "Powierzchnia netto domu bez kotłowni, garażu",
+          "value": 129.04,
+          "unit": "m2",
+          "raw": "129,04 m&sup2;"
+        },
+        {
+          "key": "roof_area",
+          "label": "Powierzchnia dachu",
+          "value": 150.57,
+          "unit": "m2",
+          "raw": "150,57 m&sup2;"
+        },
+        {
+          "key": "total_area",
+          "label": "Powierzchnia całkowita",
+          "value": 231.11,
+          "unit": "m2",
+          "raw": "231,11 m&sup2;"
+        },
+        {
+          "key": "usable_area_without_stairs",
+          "label": "Powierzchnia użytkowa (bez schodów)",
+          "value": 153.31,
+          "unit": "m2",
+          "raw": "153,31 m&sup2;"
+        },
+        {
+          "key": "volume",
+          "label": "Kubatura",
+          "value": 779.94,
+          "unit": "none",
+          "raw": "779,94 m&sup3;"
+        }
+      ],
+      "specifications": [
+        {
+          "key": "description",
+          "label": "description",
+          "text": "Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem użytkowym, idealny dla osób ceniących innowacyjne rozwiązania. Charakterystyczny dwuspadowy dach bez okapów nadaje budynkowi elegancki i minimalistyczny wygląd, doskonale wpisując się w nowoczesne projekty domów . Garaż jednostanowiskowy, zlokalizowany z boku domu, harmonijnie komponuje się z bryłą budynku, zapewniając spójność architektoniczną. Wnętrze domu zostało zaprojektowane z myślą o funkcjonalności i komforcie. Na parterze znajduje się przestronny salon z kominkiem, który tworzy wyjątkowy klimat w chłodniejsze dni, a kuchnia z wyspą stanowi centralny punkt strefy dziennej, uzupełniona o funkcjonalną spiżarnię. Dodatkowy pokój na parterze może pełnić różne funkcje, dopasowując się do indywidualnych potrzeb mieszkańców. Na poddaszu znajdują się trzy komfortowe pokoje, z czego jeden został wyposażony w garderobę, co zwiększa wygodę użytkowania. Dwie łazienki rozmieszczone na obu kondygnacjach zapewniają swobodę domownikom, a pralnia dodaje praktyczności codziennemu życiu. Duży taras osłonięty przedłużonym okapem to idealne miejsce na relaks na świeżym powietrzu. Projekt domu uwzględnia rekuperacje, dzięki czemu dom jest nie tylko estetyczny, ale także energooszczędny."
+        },
+        {
+          "key": "floor_structure",
+          "label": "strop",
+          "text": "płyta żelbetowa"
+        },
+        {
+          "key": "garage_door",
+          "label": "brama garażowa",
+          "text": "HÖRMANN"
+        },
+        {
+          "key": "knee_wall",
+          "label": "ścianka kolankowa",
+          "text": "130 cm"
+        },
+        {
+          "key": "other",
+          "label": "kocioł",
+          "text": "gazowy"
+        },
+        {
+          "key": "other",
+          "label": "ogrzewanie podłogowe",
+          "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+        },
+        {
+          "key": "other",
+          "label": "wentylacja",
+          "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+        },
+        {
+          "key": "roof",
+          "label": "dach",
+          "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO"
+        },
+        {
+          "key": "summary",
+          "label": "meta description",
+          "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 129.04 m² + 24.1 m² + 5.8 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż"
+        },
+        {
+          "key": "walls",
+          "label": "ściany",
+          "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+        }
+      ],
+      "rooms": [
+        {
+          "storey": "ATTIC",
+          "index": 1,
+          "label": "Korytarz",
+          "area": 6.17,
+          "raw": "1. Korytarz | 6,17 | "
+        },
+        {
+          "storey": "ATTIC",
+          "index": 2,
+          "label": "Pokój",
+          "area": 10.25,
+          "raw": "2. Pokój | 10,25 | (11,88)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 3,
+          "label": "Garderoba",
+          "area": 5.19,
+          "raw": "3. Garderoba | 5,19 | (6,53)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 4,
+          "label": "Łazienka",
+          "area": 6.4,
+          "raw": "4. Łazienka | 6,40 | (7,81)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 5,
+          "label": "Pralnia",
+          "area": 5.59,
+          "raw": "5. Pralnia | 5,59 | (6,73)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 6,
+          "label": "Pokój",
+          "area": 12.57,
+          "raw": "6. Pokój | 12,57 | (15,13)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 7,
+          "label": "Pokój",
+          "area": 9.02,
+          "raw": "7. Pokój | 9,02 | (10,88)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 8,
+          "label": "Garderoba",
+          "area": 1.62,
+          "raw": "8. Garderoba | 1,62 | (2,38)"
+        },
+        {
+          "storey": "ATTIC",
+          "index": 9,
+          "label": "Schody",
+          "area": 5.63,
+          "raw": "9. Schody | 5,63 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 1,
+          "label": "Wiatrołap",
+          "area": 3.7,
+          "raw": "1. Wiatrołap | 3,70 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 2,
+          "label": "Hol",
+          "area": 9.18,
+          "raw": "2. Hol | 9,18 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 3,
+          "label": "Kuchnia",
+          "area": 9.63,
+          "raw": "3. Kuchnia | 9,63 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 4,
+          "label": "Salon + Jadalnia",
+          "area": 29.52,
+          "raw": "4. Salon + Jadalnia | 29,52 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 5,
+          "label": "Spiżarnia",
+          "area": 1.44,
+          "raw": "5. Spiżarnia | 1,44 | (2,42)"
+        },
+        {
+          "storey": "GROUND",
+          "index": 6,
+          "label": "Łazienka",
+          "area": 3.95,
+          "raw": "6. Łazienka | 3,95 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 7,
+          "label": "Pokój",
+          "area": 9.18,
+          "raw": "7. Pokój | 9,18 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 8,
+          "label": "Kotłownia",
+          "area": 5.8,
+          "raw": "8. Kotłownia | 5,80 | "
+        },
+        {
+          "storey": "GROUND",
+          "index": 9,
+          "label": "Garaż",
+          "area": 24.1,
+          "raw": "9. Garaż | 24,10 | "
+        }
+      ],
+      "orientationHypothesis": "not applicable"
+    },
+    {
+      "viewId": "view-a1b96ef3af",
+      "sourceFamily": "TECHNICAL_PLAN",
+      "projectionModel": "ORTHOGRAPHIC_PLAN",
+      "renderingCharacter": "LINE_DRAWING",
+      "annotationMode": "AREA_LABELS",
+      "storeyRelevance": "ATTIC",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-z-powierzchniami-projekt-dom-w-marcowkach-ge-117abb705763e8815846decc6fef54fd__11917.gif",
+      "selectedVariant": {
+        "variantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-mar-15a7de14c0",
+        "assetId": "asset-rzut-f028d28aba",
+        "decoded": {
+          "width": 853,
+          "height": 853
+        },
+        "byteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f",
+        "byteLength": 71843,
+        "mediaType": "image/gif"
+      },
+      "siblingVariants": [],
+      "packageAssetIds": [
+        "asset-rzut-f028d28aba"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "102828626020281c",
+      "orientationHypothesis": "north up is not stated; the entrance callout 105/210 and the garage door 275/225 lie along the bottom edge, so the FRONT facade is at the bottom of the sheet and x grows to the right (east when looking at the front)",
+      "caption": "rzut",
+      "packageRoles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      }
+    },
+    {
+      "viewId": "view-06af9e9122",
+      "sourceFamily": "TECHNICAL_PLAN",
+      "projectionModel": "ORTHOGRAPHIC_PLAN",
+      "renderingCharacter": "LINE_DRAWING",
+      "annotationMode": "DIMENSIONED",
+      "storeyRelevance": "ATTIC",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-9d1547b712997f93462fc19e9eefb963__11817.gif",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-9d1547b712997f93462f-1294d96fef",
+        "assetId": "asset-rzut-117027f690",
+        "decoded": {
+          "width": 853,
+          "height": 853
+        },
+        "byteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46",
+        "byteLength": 71733,
+        "mediaType": "image/gif"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500-c5ef071db2",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-3fd500b75f6134ddd0a0920d81a46242__707.gif",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "byteHash": "daf775db8978912c9131602a710ab1d43881860b189d371d9fd12d7e4b0b116b",
+          "dhashDistance": 2
+        },
+        {
+          "variantId": "var-rzut-poddasza-projekt-dom-w-marcowkach-ge-461582-b217ba38f9",
+          "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-poddasza-projekt-dom-w-marcowkach-ge-461582e4d5f90e078fd80632a0152d26__270.gif",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "byteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece",
+          "dhashDistance": 8
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+        "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+        "asset-rzut-117027f690"
+      ],
+      "packageSplitsThisView": true,
+      "dhash": "102828626020281c",
+      "orientationHypothesis": "north up is not stated; the entrance callout 105/210 and the garage door 275/225 lie along the bottom edge, so the FRONT facade is at the bottom of the sheet and x grows to the right (east when looking at the front)",
+      "caption": "rzut",
+      "packageRoles": {
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      }
+    },
+    {
+      "viewId": "view-87ab5a71a0",
+      "sourceFamily": "TECHNICAL_PLAN",
+      "projectionModel": "ORTHOGRAPHIC_PLAN",
+      "renderingCharacter": "LINE_DRAWING",
+      "annotationMode": "AREA_LABELS",
+      "storeyRelevance": "GROUND",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-z-powierzchniami-projekt-dom-w-marcowkach-ge-7056fa04af38f4015f8f19d40910c89c__11915.gif",
+      "selectedVariant": {
+        "variantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-marc-0e6a5585e6",
+        "assetId": "asset-rzut-aa1526220f",
+        "decoded": {
+          "width": 853,
+          "height": 853
+        },
+        "byteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593",
+        "byteLength": 94087,
+        "mediaType": "image/gif"
+      },
+      "siblingVariants": [],
+      "packageAssetIds": [
+        "asset-rzut-aa1526220f"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "80a82820622a2aa8",
+      "orientationHypothesis": "north up is not stated; the entrance callout 105/210 and the garage door 275/225 lie along the bottom edge, so the FRONT facade is at the bottom of the sheet and x grows to the right (east when looking at the front)",
+      "caption": "rzut",
+      "packageRoles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      }
+    },
+    {
+      "viewId": "view-abfdb26255",
+      "sourceFamily": "TECHNICAL_PLAN",
+      "projectionModel": "ORTHOGRAPHIC_PLAN",
+      "renderingCharacter": "LINE_DRAWING",
+      "annotationMode": "DIMENSIONED",
+      "storeyRelevance": "GROUND",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-7af59bb86c46a8a68634e3630da6cd81__11815.gif",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-7af59bb86c46a8a68634-69c3a68cc9",
+        "assetId": "asset-rzut-19a11bc745",
+        "decoded": {
+          "width": 853,
+          "height": 853
+        },
+        "byteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+        "byteLength": 92426,
+        "mediaType": "image/gif"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1f-5ea0f22644",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ab67f1fa8972faf58ffa0f452fae9b54__706.gif",
+          "decoded": {
+            "width": 550,
+            "height": 550
+          },
+          "byteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309",
+          "dhashDistance": 3
+        },
+        {
+          "variantId": "var-rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee77-6f4ef06fee",
+          "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/rzut-parteru-projekt-dom-w-marcowkach-ge-ad6ee778cc80d1b703c1ffc3f9eae0b7__269.gif",
+          "decoded": {
+            "width": 400,
+            "height": 400
+          },
+          "byteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476",
+          "dhashDistance": 3
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+        "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+        "asset-rzut-19a11bc745"
+      ],
+      "packageSplitsThisView": true,
+      "dhash": "80a82820622aaaa8",
+      "orientationHypothesis": "north up is not stated; the entrance callout 105/210 and the garage door 275/225 lie along the bottom edge, so the FRONT facade is at the bottom of the sheet and x grows to the right (east when looking at the front)",
+      "caption": "rzut",
+      "packageRoles": {
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      }
+    },
+    {
+      "viewId": "view-2201a9c118",
+      "sourceFamily": "TECHNICAL_SECTION",
+      "projectionModel": "ORTHOGRAPHIC_SECTION",
+      "renderingCharacter": "LINE_DRAWING",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/przekroj-budynku-projekt-dom-w-marcowkach-ge-2bdfa17711fbe9d7bc173014765d5d51__11256.jpg",
+      "selectedVariant": {
+        "variantId": "var-przekroj-budynku-projekt-dom-w-marcowkach-ge-2bd-4cca8b2cb0",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+        "decoded": {
+          "width": 1138,
+          "height": 854
+        },
+        "byteHash": "2201a9c1186d2f0cd4e10a747ce39f1b36d08d48781fca980bcdf22b2d27e188",
+        "byteLength": 77410,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-przekroj-budynku-projekt-dom-w-marcowkach-ge-2bd-91ec967ede",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/przekroj-budynku-projekt-dom-w-marcowkach-ge-2bdfa17711fbe9d7bc173014765d5d51__256.jpg",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "byteHash": "d05811554a2132cec06d95185cb9ccae73c3563da88472609c5651bdfc6a1718",
+          "dhashDistance": 3
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "28c4c088aa9aba07",
+      "orientationHypothesis": "a cross-section through the main body looking from the front towards the rear: the garage lies on the right, so east is on the right; +7.95 ridge at the top",
+      "caption": "gotowy projekt Dom w marcówkach (GE) przekroj budynku",
+      "packageRoles": {
+        "document": "SECTION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_SECTION"
+      }
+    },
+    {
+      "viewId": "view-0015dfde66",
+      "sourceFamily": "RENDERED_ELEVATION",
+      "projectionModel": "ORTHOGRAPHIC_ELEVATION",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295fabdb1b26fb7__11266.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-8f98908ca2aeb8a51295-55f90b216c",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+        "decoded": {
+          "width": 1280,
+          "height": 598
+        },
+        "byteHash": "0015dfde66b5657c771e703e2cfdb3e068f6e30ff2f8e1435ce950e98a3b11c6",
+        "byteLength": 386559,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-elewacja-boczna-projekt-dom-w-marcowkach-ge-2413-e5c521cafb",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-24130d2bfa16ddf40cd1a16f8e154ce2__266.jpg",
+          "decoded": {
+            "width": 550,
+            "height": 255
+          },
+          "byteHash": "a5cc1beb64b8558475390a9c1b20a2a8feb451d458736f0705fd6485b6a8c972",
+          "dhashDistance": 0
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "f154444c0b333333",
+      "orientationHypothesis": "HYPOTHESIS: the WEST side, seen from the west: two rooflights on the slope and the 90/230 + 140/140 windows in the dark band; the front is on the right, z grows to the left",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja boczna",
+      "packageRoles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      }
+    },
+    {
+      "viewId": "view-130edece30",
+      "sourceFamily": "RENDERED_ELEVATION",
+      "projectionModel": "ORTHOGRAPHIC_ELEVATION",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcca0fbf7e8362c__11264.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-8a360613d4ba290cafcc-feecd7e3e5",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+        "decoded": {
+          "width": 1280,
+          "height": 597
+        },
+        "byteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142",
+        "byteLength": 501412,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-elewacja-frontowa-projekt-dom-w-marcowkach-ge-b1-1fe8b3da8f",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-frontowa-projekt-dom-w-marcowkach-ge-b165fc1dadc0b7ef46c3d1d74725aea3__264.jpg",
+          "decoded": {
+            "width": 550,
+            "height": 256
+          },
+          "byteHash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+          "dhashDistance": 1
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "f05a32310c169a1a",
+      "orientationHypothesis": "seen from the front (south side of the plan): west on the left, east (garage) on the right",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja frontowa",
+      "packageRoles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "FRONT",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      }
+    },
+    {
+      "viewId": "view-84ebf5b306",
+      "sourceFamily": "RENDERED_ELEVATION",
+      "projectionModel": "ORTHOGRAPHIC_ELEVATION",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcfc89f76bc4795__11267.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-6ac4e6285d1a0b8cffcf-03247e20e6",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+        "decoded": {
+          "width": 1280,
+          "height": 598
+        },
+        "byteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e",
+        "byteLength": 493637,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b-48cdba522f",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-ogrodowa-projekt-dom-w-marcowkach-ge-9b95a143134b5e1afdf79034a2391bd8__267.jpg",
+          "decoded": {
+            "width": 550,
+            "height": 255
+          },
+          "byteHash": "f156ae82210a277f04aeaec210724204b78a4153da9393820ab3b6980debb13b",
+          "dhashDistance": 0
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "f0763a39125ada5a",
+      "orientationHypothesis": "seen from the garden: mirrored, east (garage) on the left, west on the right",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja ogrodowa",
+      "packageRoles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "REAR",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      }
+    },
+    {
+      "viewId": "view-93e150872f",
+      "sourceFamily": "RENDERED_ELEVATION",
+      "projectionModel": "ORTHOGRAPHIC_ELEVATION",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e1813919bc611b95__11265.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-24f222ed091cf3f3e181-1ba0852c8a",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+        "decoded": {
+          "width": 1280,
+          "height": 597
+        },
+        "byteHash": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd",
+        "byteLength": 402646,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-elewacja-boczna-projekt-dom-w-marcowkach-ge-b723-d1be123705",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/elewacja-boczna-projekt-dom-w-marcowkach-ge-b72318402d5f7c263303f0bf13597c8b__265.jpg",
+          "decoded": {
+            "width": 550,
+            "height": 256
+          },
+          "byteHash": "149d9116dff22b309fad7f8820a15b9760456f3ac872b7b283192293d776764e",
+          "dhashDistance": 1
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "f1d4444c2b538969",
+      "orientationHypothesis": "HYPOTHESIS: the EAST side, seen from the east: the garage (low, dark, flat roof) on the left means the front is on the left; z grows to the right",
+      "caption": "gotowy projekt Dom w marcówkach (GE) elewacja boczna ",
+      "packageRoles": {
+        "document": "ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "SIDE_UNSPECIFIED",
+        "projection": "ORTHOGRAPHIC_ELEVATION"
+      }
+    },
+    {
+      "viewId": "view-685a5d6813",
+      "sourceFamily": "PERSPECTIVE_RENDER",
+      "projectionModel": "PERSPECTIVE",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://cdn1.archon.pl/images/products/m2fa281446a8ca/i/projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a1bc81908b0ca__49832.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-4f29f2e570",
+        "assetId": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+        "decoded": {
+          "width": 1600,
+          "height": 900
+        },
+        "byteHash": "685a5d68132e3c53f28763ac61edb4a2ea285cb629b8153bdb4c40182977d5a1",
+        "byteLength": 501607,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [],
+      "packageAssetIds": [
+        "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "7d6b63477e3c332d",
+      "orientationHypothesis": "hero front three-quarter view from the south-west: the west return and gable on the left, the garage portal on the right",
+      "caption": "Projekt dom w marcowkach ge 8533a257062bd0260f2a1bc81908b0ca  49832",
+      "packageRoles": {
+        "document": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "UNKNOWN"
+      }
+    },
+    {
+      "viewId": "view-5b9c39379f",
+      "sourceFamily": "PERSPECTIVE_RENDER",
+      "projectionModel": "PERSPECTIVE",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6ed48a60468842a964ad20__290.jpg",
+      "selectedVariant": {
+        "variantId": "var-widok-2-projekt-dom-w-marcowkach-ge-c275acb47b6e-83ea61861e",
+        "assetId": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+        "decoded": {
+          "width": 800,
+          "height": 600
+        },
+        "byteHash": "5b9c39379f85723eef64d045cfc995ffec5c35c3c1ab6b4e6d2b696b66f228f1",
+        "byteLength": 351077,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-widok-2-projekt-dom-w-marcowkach-ge-34000bff0452-112d24fbd4",
+          "assetId": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-2-projekt-dom-w-marcowkach-ge-34000bff0452e3ba78188291cb3c9910__260.jpg",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "byteHash": "34a03ffdddd56f4d963eb91cb64ed0136c4361ccd576585b729d4029f682907e",
+          "dhashDistance": 0
+        }
+      ],
+      "packageAssetIds": [
+        "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+        "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7"
+      ],
+      "packageSplitsThisView": true,
+      "dhash": "4ad5f2797939272c",
+      "orientationHypothesis": "garden (rear) three-quarter view from the north-east: the garage block on the left, the rear gable and loggia in the middle",
+      "caption": null,
+      "packageRoles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      }
+    },
+    {
+      "viewId": "view-d32a9a4157",
+      "sourceFamily": "PERSPECTIVE_RENDER",
+      "projectionModel": "PERSPECTIVE",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ALL",
+      "canonicalUrl": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-6965a4a29ffff6828c320d5f7b3bb7c6__289.jpg",
+      "selectedVariant": {
+        "variantId": "var-widok-1-projekt-dom-w-marcowkach-ge-6965a4a29fff-a52e850125",
+        "assetId": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+        "decoded": {
+          "width": 800,
+          "height": 600
+        },
+        "byteHash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+        "byteLength": 301066,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b-7c3bc1e564",
+          "assetId": "asset-projekt-dom-w-marcowkach-ge-0b42f7006f",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-66a5085190e74b554b0b5ec9a7a2e0cc__252.jpg",
+          "decoded": {
+            "width": 400,
+            "height": 300
+          },
+          "byteHash": "71241f80e71a4ffb60e78de78d81879bc860c56c9673e28a8843bfb120980f68",
+          "dhashDistance": 0
+        },
+        {
+          "variantId": "var-widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6-20f2640bd7",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/widok-1-projekt-dom-w-marcowkach-ge-3ece6f305bf6482164d8bac42da94f77__259.jpg",
+          "decoded": {
+            "width": 200,
+            "height": 150
+          },
+          "byteHash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027",
+          "dhashDistance": 0
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+        "asset-projekt-dom-w-marcowkach-ge-0b42f7006f",
+        "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb"
+      ],
+      "packageSplitsThisView": true,
+      "dhash": "fcc9c1c3ff7c7b76",
+      "orientationHypothesis": "hero front three-quarter view from the south-west: the west return and gable on the left, the garage portal on the right",
+      "caption": null,
+      "packageRoles": {
+        "document": "PERSPECTIVE_RENDER",
+        "storey": "NOT_APPLICABLE",
+        "annotation": "UNKNOWN",
+        "view": "UNKNOWN",
+        "projection": "PERSPECTIVE"
+      }
+    },
+    {
+      "viewId": "view-331087c2c5",
+      "sourceFamily": "SITE_PLAN",
+      "projectionModel": "ORTHOGRAPHIC_PLAN",
+      "renderingCharacter": "RENDERED",
+      "annotationMode": "NONE",
+      "storeyRelevance": "ROOF",
+      "canonicalUrl": "https://www.archon.pl/images/products/m2fa281446a8ca/projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19792a93b91ddb__11255.jpg",
+      "selectedVariant": {
+        "variantId": "var-projekt-dom-w-marcowkach-ge-3ad115c5cde6a0d24b19-36b1c4c574",
+        "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+        "decoded": {
+          "width": 734,
+          "height": 854
+        },
+        "byteHash": "331087c2c5f258eb55fd99bc462feda6649e8a7e80e843839ca9c58c8bdb0bf2",
+        "byteLength": 212208,
+        "mediaType": "image/jpeg"
+      },
+      "siblingVariants": [
+        {
+          "variantId": "var-sytuacja-projekt-dom-w-marcowkach-ge-88bea7ab3c6-fdae517167",
+          "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+          "url": "https://assets.archon.pl/images/products/m2fa281446a8ca/sytuacja-projekt-dom-w-marcowkach-ge-88bea7ab3c6f0e8c5710051590dc2f56__255.jpg",
+          "decoded": {
+            "width": 344,
+            "height": 400
+          },
+          "byteHash": "8c77e06e421fdf324b63d715f3064e0e2e8a9dd7e309a1de8c5ac8943839e523",
+          "dhashDistance": 2
+        }
+      ],
+      "packageAssetIds": [
+        "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f"
+      ],
+      "packageSplitsThisView": false,
+      "dhash": "cecaf2fcf8e2da1c",
+      "orientationHypothesis": "roof plan with the entrance arrow at the bottom: front at the bottom, rear terrace at the top, garage on the right (east)",
+      "caption": "gotowy projekt Dom w marcówkach (GE) sytuacja",
+      "packageRoles": {
+        "document": "SITE_PLAN",
+        "storey": "UNKNOWN",
+        "annotation": "UNKNOWN",
+        "view": "NOT_APPLICABLE",
+        "projection": "ORTHOGRAPHIC_PLAN"
+      }
+    }
+  ]
+}
