@@ -10,6 +10,7 @@
 import { compileBuilding, boundsOfTriangles, type Bounds, type CompiledMesh, type CompiledScene, type GeometryPart } from '@buildapp/geometry'
 import { findObject, serializeModel, type CanonicalBuildingModel, type SemanticKind } from '@buildapp/model'
 import { describeObject, kindLabel, labelOf, levelIdOf, materialIdOf } from './describe.js'
+import { bundleStyling, semanticGroupOf, TONE_HINTABLE_GROUPS, toneOfColor, type ObjectFacts, type SemanticGroup, type ToneHints } from './semantics.js'
 import { bundleContentHash, sha256 } from './serialize.js'
 import {
   MOBILE_SCENE_BUNDLE_SCHEMA,
@@ -26,7 +27,7 @@ import {
 const byId = <T extends { id: string }>(list: readonly T[]): T[] => [...list].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
 
 /** Flatten one compiled mesh. No transform, no rounding: the same numbers. */
-export function flattenMesh(mesh: CompiledMesh): MobileMesh {
+export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): MobileMesh {
   const positions = new Array<number>(mesh.triangles.length * 9)
   let i = 0
   for (const t of mesh.triangles) {
@@ -44,6 +45,7 @@ export function flattenMesh(mesh: CompiledMesh): MobileMesh {
     objectId: mesh.objectId,
     objectKind: mesh.objectKind,
     part: mesh.part,
+    semanticGroup,
     levelId: mesh.levelId,
     solidId: mesh.solidId,
     hostWallId: mesh.hostWallId,
@@ -56,14 +58,100 @@ export function flattenMesh(mesh: CompiledMesh): MobileMesh {
   }
 }
 
+/**
+ * Each exterior wall's finish relative to the others (see `ObjectFacts.finish`).
+ *
+ * The dominant exterior finish is the material covering the largest exterior
+ * wall area (length × height, openings not subtracted: a finish is chosen
+ * for a wall, not for what is left of it). Frame-member finishes are the
+ * materials the model gives its frame members — roof verge and fascia
+ * boards, free linear members. Nothing here reads a colour or a name.
+ */
+export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNullable<ObjectFacts['finish']>> {
+  const area = new Map<string, number>()
+  const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR' && w.materialId)
+  for (const w of exterior) {
+    const length = Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z)
+    area.set(w.materialId as string, (area.get(w.materialId as string) ?? 0) + length * w.height)
+  }
+  const out = new Map<string, NonNullable<ObjectFacts['finish']>>()
+  if (area.size === 0) return out
+  const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0]
+  const members = new Set<string>()
+  for (const r of model.roofs) {
+    const e = r.edgeMembers
+    if (e?.verge?.materialId) members.add(e.verge.materialId)
+    if (e?.fascia?.materialId) members.add(e.fascia.materialId)
+  }
+  for (const l of model.linearSolids) if (l.materialId) members.add(l.materialId)
+  for (const w of exterior) {
+    const m = w.materialId as string
+    out.set(w.id, m === dominant ? 'PRIMARY' : members.has(m) ? 'MEMBER' : 'SECONDARY')
+  }
+  return out
+}
+
+/**
+ * The facts `semanticGroupOf` may read about one object: its own `kind`
+ * field where its schema has one, read off the model and nothing else. A
+ * door has no kind, so its assembly is read as one word — PANEL when every
+ * panel is a solid panel. Mass roles are not in the CanonicalBuildingModel,
+ * so `massRole` is never set here; an exterior wall's `finish` is, from
+ * `finishes` (see `wallFinishes`).
+ */
+export function objectFactsOf(model: CanonicalBuildingModel, objectId: string, finishes?: ReadonlyMap<string, NonNullable<ObjectFacts['finish']>>): ObjectFacts | undefined {
+  const hit = findObject(model, objectId)
+  if (!hit) return undefined
+  const o = hit.object as unknown as Record<string, unknown>
+  switch (hit.kind) {
+    case 'wall': {
+      const finish = finishes?.get(objectId)
+      return finish ? { wallKind: String(o.kind), finish } : { wallKind: String(o.kind) }
+    }
+    case 'roof':
+      return { roofKind: String(o.kind) }
+    case 'balcony':
+    case 'stair':
+      return { kind: String(o.kind) }
+    case 'railing':
+      return { kind: String(o.infill) }
+    case 'door': {
+      const panels = (o.assembly as { panels?: { kind: string }[] } | undefined)?.panels ?? []
+      return panels.length > 0 && panels.every((p) => p.kind === 'PANEL') ? { kind: 'PANEL' } : undefined
+    }
+    default:
+      return undefined
+  }
+}
+
 /** The compiled scene, re-encoded. Mesh order is the compiler's own. */
-export const flattenScene = (scene: CompiledScene): MobileScene => ({
-  modelId: scene.modelId,
-  meshes: scene.meshes.map(flattenMesh),
-  diagnostics: scene.diagnostics,
-  bounds: scene.bounds,
-  stats: scene.stats,
-})
+export function flattenScene(scene: CompiledScene, model: CanonicalBuildingModel): MobileScene {
+  const materialName = new Map(model.materials.map((m) => [m.id, m.name]))
+  const facts = new Map<string, ObjectFacts | undefined>()
+  const finishes = wallFinishes(model)
+  const factsOf = (objectId: string): ObjectFacts | undefined => {
+    if (!facts.has(objectId)) facts.set(objectId, objectFactsOf(model, objectId, finishes))
+    return facts.get(objectId)
+  }
+  return {
+    modelId: scene.modelId,
+    meshes: scene.meshes.map((mesh) =>
+      flattenMesh(
+        mesh,
+        semanticGroupOf({
+          objectKind: mesh.objectKind,
+          part: mesh.part,
+          materialId: mesh.materialId,
+          materialName: mesh.materialId ? materialName.get(mesh.materialId) : undefined,
+          objectFacts: factsOf(mesh.objectId),
+        }),
+      ),
+    ),
+    diagnostics: scene.diagnostics,
+    bounds: scene.bounds,
+    stats: scene.stats,
+  }
+}
 
 /**
  * Metadata for every semantic object that owns geometry in the scene.
@@ -150,6 +238,38 @@ const materialMetadata = (model: CanonicalBuildingModel): MobileMaterialMetadata
 export type BuildBundleOptions = {
   /** A scene already compiled from this model, to avoid compiling twice. */
   scene?: CompiledScene
+  /**
+   * Tone hints for the palette, per semantic group. When absent, they are
+   * read off the model's own finishes (`toneHintsOf`): a reconstruction that
+   * read a grey-rendered garage on the render gave its walls a grey render,
+   * and the palette puts the secondary walls on its grey rung.
+   */
+  toneHints?: ToneHints
+}
+
+/**
+ * Tone hints from the model's own finishes: for each hintable group, the
+ * tone family of the material covering most of its triangles. The chain is
+ * render → tone family (the reconstruction) → model material → tone family
+ * → palette rung (here); no colour from a render reaches the screen.
+ */
+export function toneHintsOf(scene: MobileScene, model: CanonicalBuildingModel): ToneHints {
+  const colorOf = new Map(model.materials.map((m) => [m.id, m.color]))
+  const counts = new Map<SemanticGroup, Map<string, number>>()
+  for (const mesh of scene.meshes) {
+    if (!TONE_HINTABLE_GROUPS.includes(mesh.semanticGroup) || !mesh.materialId || !colorOf.has(mesh.materialId)) continue
+    const c = counts.get(mesh.semanticGroup) ?? new Map<string, number>()
+    c.set(mesh.materialId, (c.get(mesh.materialId) ?? 0) + mesh.triangleCount)
+    counts.set(mesh.semanticGroup, c)
+  }
+  const hints: ToneHints = {}
+  for (const group of TONE_HINTABLE_GROUPS) {
+    const c = counts.get(group)
+    if (!c) continue
+    const [material] = [...c].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]
+    hints[group] = toneOfColor(colorOf.get(material) as string)
+  }
+  return hints
 }
 
 /**
@@ -159,6 +279,7 @@ export type BuildBundleOptions = {
  */
 export function buildMobileSceneBundle(model: CanonicalBuildingModel, options: BuildBundleOptions = {}): MobileSceneBundle {
   const scene = options.scene ?? compileBuilding(model)
+  const flat = flattenScene(scene, model)
   const bundle: MobileSceneBundle = {
     schema: MOBILE_SCENE_BUNDLE_SCHEMA,
     schemaVersion: MOBILE_SCENE_BUNDLE_VERSION,
@@ -169,10 +290,11 @@ export function buildMobileSceneBundle(model: CanonicalBuildingModel, options: B
       modelSchemaVersion: model.schemaVersion,
       modelContentHash: sha256(serializeModel(model)),
     },
-    scene: flattenScene(scene),
+    scene: flat,
     levels: levelMetadata(model),
     objects: objectMetadata(model, scene),
     materials: materialMetadata(model),
+    styling: bundleStyling(options.toneHints ?? toneHintsOf(flat, model)),
     contentHash: '',
   }
   bundle.contentHash = bundleContentHash(bundle)

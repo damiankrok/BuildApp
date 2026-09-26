@@ -22,7 +22,8 @@
     "audit:marcowki": "vite-node packages/reference-marcowki/scripts/audit.ts",
     "audit:marcowki:facades": "vite-node packages/reference-marcowki/scripts/audit-facades.ts",
     "mobile:export-scenes": "vite-node packages/mobile-scene/scripts/export-scenes.ts",
-    "candidates:seal-v2": "vite-node packages/candidates/scripts/seal-v2.ts",
+    "candidates:seal": "vite-node packages/candidates/scripts/seal.ts --",
+    "candidates:reseal": "vite-node packages/candidates/scripts/reseal.ts --",
     "android:test": "npm run test --workspace apps/android",
     "android:assembleDebug": "npm run assembleDebug --workspace apps/android",
     "source:acquire": "vite-node packages/source-package/scripts/acquire.ts --",
@@ -36,10 +37,11 @@
     "overlays": "vite-node packages/reconstruction/scripts/overlays.ts --",
     "overlays:v2": "vite-node packages/reconstruction/scripts/overlays-v2.ts --",
     "reconstruct:v2": "vite-node packages/reconstruction/scripts/reconstruct-v2.ts --",
-    "reconstruct:v2:marcowki": "vite-node packages/reconstruction/scripts/reconstruct-v2.ts -- --package stage-reports/artifacts/source-observations/marcowki-source-package.json --graph stage-reports/artifacts/source-observations/marcowki-observation-graph.json --slug marcowki --label \"Marcówki (auto v2)\"",
+    "reconstruct:v2:marcowki": "vite-node packages/reconstruction/scripts/reconstruct-v2.ts -- --package stage-reports/artifacts/source-observations/marcowki-source-package.json --graph stage-reports/artifacts/source-observations/marcowki-observation-graph.json --slug marcowki --label \"Marcówki (auto v3)\" --model-id m-auto-v3-marcowki",
     "reconstruct:no-benchmark": "vite-node packages/reconstruction/scripts/no-benchmark.ts --",
     "audit:analyzer-v2": "vite-node packages/reconstruction/scripts/audit-v2.ts --",
-    "evaluate:v2": "vite-node packages/reconstruction/scripts/evaluate-v2.ts --"
+    "evaluate:v2": "vite-node packages/reconstruction/scripts/evaluate-v2.ts --",
+    "review:shots": "vite-node apps/web/tools/review-shots.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

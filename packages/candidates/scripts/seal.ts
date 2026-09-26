@@ -1,12 +1,15 @@
 /**
- * `npm run candidates:seal-v2` — seal the analyzer-v2 candidate into this package.
+ * `npm run candidates:seal [-- --as <id>]` — seal the analyzer-v2 run into this package.
  *
  * The v2 pipeline (`npm run reconstruct:v2:marcowki`) writes its artefacts to
  * `stage-reports/artifacts/analyzer-v2/`. This copies the three that every
  * viewer needs — the candidate, the layout it was built from and the
- * source-view residuals that verified it — into `src/`, byte for byte, so
- * that BuildWorld, the mobile exporter and the tests all replay the same
- * sealed program. Rerun it whenever the artefacts are regenerated.
+ * source-view residuals that verified it — into `src/<id>*.json`, byte for
+ * byte, so that BuildWorld, the mobile exporter and the tests all replay the
+ * same sealed program. The default id is the current candidate,
+ * `marcowki-auto-v3`; an earlier candidate kept for comparison
+ * (`marcowki-auto-v2`) is never the target of a seal again — it is frozen,
+ * and only `candidates:reseal` may restate it under a newer model schema.
  *
  * It refuses to seal an incoherent set. A layout whose hash is not the one the
  * candidate names, or residuals measured on a different candidate, would put
@@ -22,16 +25,30 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..')
 const ARTIFACTS = join(ROOT, 'stage-reports/artifacts/analyzer-v2')
 const SRC = join(ROOT, 'packages/candidates/src')
 
+/** The candidates that are frozen for comparison and may not be sealed over. */
+export const FROZEN_CANDIDATES: readonly string[] = ['marcowki-auto', 'marcowki-auto-v2']
+
+const argValue = (name: string): string | undefined => {
+  const i = process.argv.indexOf(`--${name}`)
+  return i >= 0 && i + 1 < process.argv.length ? process.argv[i + 1] : undefined
+}
+
 /** What is copied, and under which name it is sealed. */
-export const SEAL_V2_COPIES: ReadonlyArray<{ from: string; to: string }> = [
-  { from: 'marcowki-auto-v2.json', to: 'marcowki-auto-v2.json' },
-  { from: 'marcowki-layout.json', to: 'marcowki-auto-v2-layout.json' },
-  { from: 'source-view-residuals.json', to: 'marcowki-auto-v2-residuals.json' },
+export const sealCopies = (as: string): ReadonlyArray<{ from: string; to: string }> => [
+  { from: 'marcowki-auto-v2.json', to: `${as}.json` },
+  { from: 'marcowki-layout.json', to: `${as}-layout.json` },
+  { from: 'source-view-residuals.json', to: `${as}-residuals.json` },
 ]
 
 type Hashed = { contentHash?: string; id?: string; structuralLayoutHash?: string; structuralLayoutId?: string; candidateHash?: string; label?: string }
 
 function main(): void {
+  const as = argValue('as') ?? 'marcowki-auto-v3'
+  if (FROZEN_CANDIDATES.includes(as)) {
+    process.stderr.write(`refusing to seal over ${as}: it is frozen for comparison (use candidates:reseal to restate it under a newer model schema)\n`)
+    process.exit(1)
+  }
+  const SEAL_V2_COPIES = sealCopies(as)
   const text = (name: string): string => readFileSync(join(ARTIFACTS, name), 'utf8')
   const missing = SEAL_V2_COPIES.filter((c) => !existsSync(join(ARTIFACTS, c.from))).map((c) => c.from)
   if (missing.length > 0) {

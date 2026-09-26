@@ -30,7 +30,12 @@ export const MATERIALS_V2 = {
   timber: 'mat-timber',
   partition: 'mat-partition',
   chimney: 'mat-chimney',
+  terrace: 'mat-terrace',
+  mid: 'mat-render-mid',
 } as const
+
+/** The material a broad tone read off the renders stands for. */
+const materialForTone = (tone: string | undefined, fallback: string): string => (tone === 'DARK' ? MATERIALS_V2.dark : tone === 'MID' ? MATERIALS_V2.mid : fallback)
 
 const modelStatus = (p: ProvenanceStatus): EvidenceStatus => {
   switch (p) {
@@ -91,6 +96,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   push({ type: 'defineMaterial', id: MATERIALS_V2.timber, name: 'Timber cladding', color: '#b07a4a' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.partition, name: 'Partition', color: '#d9d5cc' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.chimney, name: 'Chimney', color: '#6d6a66' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.terrace, name: 'Terrace paving', color: '#a49c92' })
+  push({ type: 'defineMaterial', id: MATERIALS_V2.mid, name: 'Grey render', color: '#8e8983' })
 
   const levelId = (index: number): string => b.levels.find((l) => l.index === index)?.id ?? 'lvl-0'
   const levelOf = (index: number) => b.levels.find((l) => l.index === index)
@@ -115,11 +122,26 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       const isTop = storey === Math.max(...m.storeys)
       const attached = b.attachedRoofs.find((r) => r.massId === m.id)
       const holes = b.stair && b.stair.toLevel === storey && m.id === b.masses.find((x) => x.role === 'MAIN')?.id ? [[{ x: b.stair.slabHole.x0, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z0 }, { x: b.stair.slabHole.x1, z: b.stair.slabHole.z1 }, { x: b.stair.slabHole.x0, z: b.stair.slabHole.z1 }]] : undefined
-      push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon, ...(holes ? { holes } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
+      // A floor slab over a storey of this body spans between the inner faces
+      // of the walls that carry it: the walls run from the ground to the
+      // eaves in one face, and the slab meets them face to face. A slab edge
+      // drawn in the plane of the wall's outer face — or a slab top in the
+      // plane of the wall's top, seen through a door at floor level — is two
+      // faces in one place. The lowest slab is the plinth and keeps the full
+      // outline.
+      const bearsOnWalls = storey !== Math.min(...m.storeys)
+      const inset = bearsOnWalls ? round6(b.wallThicknessM) : 0
+      const slabPolygon = inset > 0 ? [{ x: round6(m.x0 + inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z0 + inset) }, { x: round6(m.x1 - inset), z: round6(m.z1 - inset) }, { x: round6(m.x0 + inset), z: round6(m.z1 - inset) }] : polygon
+      // A stair void that reaches a wall ends at the wall's inner face: the slab is not there to be cut.
+      const clippedHoles = holes?.map((h) => h.map((p) => ({ x: round6(Math.min(Math.max(p.x, m.x0 + inset), m.x1 - inset)), z: round6(Math.min(Math.max(p.z, m.z0 + inset), m.z1 - inset)) })))
+      push({ type: 'createSlab', id: `slab-${m.id}-${storey}`, levelId: l.id, polygon: slabPolygon, ...(clippedHoles ? { holes: clippedHoles } : {}), topOffset: 0, thickness: b.slabThicknessM, materialId: MATERIALS_V2.slab }, m.featureId, 'slabs')
       // A single-storey attached body under a flat roof: its walls rise to the parapet where the section draws one.
       const height = attached && isTop ? round6((attached.parapetTopY ?? attached.slabTopY) - l.elevation) : round6(l.height)
       const ringId = `ring-${m.id}-${storey}`
-      push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: b.wallThicknessM, height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', materialId: MATERIALS_V2.wall }, m.featureId, 'wallRings')
+      // The body's walls take the tone the renders show for them: a dark body is built in dark render.
+      const tone = b.massTones.find((t) => t.massId === m.id)
+      const ringMaterial = tone && tone.share >= 0.5 ? materialForTone(tone.tone, MATERIALS_V2.wall) : MATERIALS_V2.wall
+      push({ type: 'createWallRing', id: ringId, levelId: l.id, polygon, thickness: b.wallThicknessM, height, baseOffset: 0, kind: 'EXTERIOR', cornerOwnership: 'ALTERNATE', materialId: ringMaterial }, m.featureId, 'wallRings')
       if (isTop && !attached) capWallIds.push(`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`)
       if (attached && isTop) attachedCapIds.set(m.id, [`${ringId}-w0`, `${ringId}-w1`, `${ringId}-w2`, `${ringId}-w3`])
     }
@@ -127,13 +149,25 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   }
 
   // --- return walls (the recess topology) -------------------------------------
+  // A return standing under an attached body's roof dies into that roof: the portal pier under the head.
+  const returnsUnderAttached = new Map<string, string[]>()
   for (const r of b.returns) {
     const l = levelOf(r.storeyIndex)
     if (!l) continue
     const mainMass = b.masses.find((m) => m.role === 'MAIN')
     const isTop = r.storeyIndex === Math.max(...(mainMass?.storeys ?? [0]))
-    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: MATERIALS_V2.member }, r.featureId, 'walls')
-    if (isTop) capWallIds.push(r.id)
+    const frameTone = b.frameTones.find((t) => t.side === r.side)
+    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: frameTone && frameTone.share >= 0.5 ? materialForTone(frameTone.tone, MATERIALS_V2.member) : MATERIALS_V2.member }, r.featureId, 'walls')
+    const x0 = Math.min(r.start.x, r.end.x)
+    const x1 = Math.max(r.start.x, r.end.x)
+    const z0 = Math.min(r.start.z, r.end.z)
+    const z1 = Math.max(r.start.z, r.end.z)
+    const under = b.attachedRoofs.find((a) => {
+      const mass = b.masses.find((m) => m.id === a.massId)
+      return !!mass && mass.storeys.includes(r.storeyIndex) && x0 >= a.footprint.x0 - 0.01 && x1 <= a.footprint.x1 + 0.01 && z0 >= a.footprint.z0 - 0.01 && z1 <= a.footprint.z1 + 0.01 && (r.side === 'FRONT' || r.side === 'REAR' ? r.alongInterval[0] >= a.footprint.x0 - 0.01 && r.alongInterval[1] <= a.footprint.x1 + 0.01 : r.alongInterval[0] >= a.footprint.z0 - 0.01 && r.alongInterval[1] <= a.footprint.z1 + 0.01)
+    })
+    if (under) returnsUnderAttached.set(under.massId, [...(returnsUnderAttached.get(under.massId) ?? []), r.id])
+    else if (isTop) capWallIds.push(r.id)
     evidence(r.id, r.provenance, r.why)
   }
 
@@ -249,6 +283,20 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   }
 
   // --- roofs -------------------------------------------------------------------
+  /**
+   * The verge boards, as the main roof's own edge members: vertical depth
+   * from the member's perpendicular width at the pitch, depth along the
+   * ridge from the closure (the depth of the frame's returns). A gable read
+   * at one end only takes its board at that end.
+   */
+  function vergeMembers(): { edgeMembers?: { verge: { width: number; depth: number; materialId: string; ends: Array<{ side: 'MIN_X' | 'MAX_X' | 'MIN_Z' | 'MAX_Z'; width: number; depth: number }> } } } {
+    const roof = b.mainRoof
+    if (!roof || b.verges.length === 0) return {}
+    const cos = Math.cos((roof.pitchDeg * Math.PI) / 180)
+    const ends = b.verges.map((v) => ({ side: (roof.ridgeAxis === 'Z' ? (v.side === 'FRONT' ? 'MIN_Z' : 'MAX_Z') : v.side === 'FRONT' ? 'MIN_X' : 'MAX_X') as 'MIN_X' | 'MAX_X' | 'MIN_Z' | 'MAX_Z', width: round6((v.member.widthM ?? 0.5) / cos), depth: round6(v.depthM) }))
+    const first = ends[0]
+    return { edgeMembers: { verge: { width: first.width, depth: first.depth, materialId: MATERIALS_V2.member, ends } } }
+  }
   if (b.mainRoof) {
     const roof = b.mainRoof
     const l = levelOf(Math.max(...(b.masses.find((m) => m.id === roof.massId)?.storeys ?? [0])))
@@ -265,17 +313,24 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         ridgeAxis: roof.ridgeAxis,
         overhang: 0,
         thickness: roof.thicknessM,
+        ...vergeMembers(),
         materialId: MATERIALS_V2.roof,
         capWallIds: [...capWallIds, ...interiorTop],
       },
       roof.featureId,
       'roofs',
     )
-    evidence('roof-main', roof.provenance, `${roof.pitchDeg}° gable on the authority of ${roof.authority.toLowerCase().replace(/_/g, ' ')}; ${roof.coversZonesWhy}`, { footprint: roof.coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED' })
+    for (const v of b.verges) bindings.push({ featureId: v.featureId, objectId: 'roof-main', objectKind: 'roofs', commandIndex: program.length - 1 })
+    evidence('roof-main', roof.provenance, `${roof.pitchDeg}° gable on the authority of ${roof.authority.toLowerCase().replace(/_/g, ' ')}; ${roof.coversZonesWhy}${b.verges.length > 0 ? `; verge boards along both rakes, ${b.verges.map((v) => `${v.side.toLowerCase()} ${(v.member.widthM ?? 0).toFixed(2)} m wide by ${v.depthM.toFixed(2)} m deep`).join(', ')}` : ''}`, { footprint: roof.coversZones ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', ...(b.verges.length > 0 ? { 'edgeMembers.verge': b.verges.every((v) => v.depthProvenance === 'SOURCE_DERIVED') ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED' } : {}) })
   }
   for (const r of b.attachedRoofs) {
     const mass = b.masses.find((m) => m.id === r.massId)
     const l = levelOf(Math.max(...(mass?.storeys ?? [0])))
+    // The plate bears into the walls that carry it (to their centreline); the
+    // head that edges it over the zone in front is its own fascia member.
+    const half = round6(b.wallThicknessM / 2)
+    const head = b.portalHeads.find((p) => p.massId === r.massId)
+    const fascia = head && mass ? { sides: ['MIN_Z' as const], topOffset: round6(head.y1 - r.slabTopY), height: round6(head.y1 - head.y0), depth: round6(mass.z0 - r.footprint.z0), materialId: MATERIALS_V2.dark } : undefined
     push(
       {
         type: 'createRoof',
@@ -286,54 +341,39 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
         eaveOffset: round6(r.slabTopY - (l?.elevation ?? 0)),
         overhang: 0,
         thickness: round6(Math.max(0.12, r.slabTopY - r.slabSoffitY)),
+        ...(fascia && fascia.depth > 0.05 ? { edgeMembers: { fascia } } : {}),
+        plateInset: { minX: half, maxX: half, minZ: half, maxZ: half },
         materialId: MATERIALS_V2.roof,
-        capWallIds: [],
+        // Its returns under the head, and the partitions of its top storey, die into the plate.
+        capWallIds: [...(returnsUnderAttached.get(r.massId) ?? []), ...(l ? (emittedInteriorByStorey.get(l.index) ?? []).filter((id) => id.startsWith(`${r.massId}-iwall-`)) : [])],
       },
       r.featureId,
       'roofs',
     )
-    evidence(`roof-${r.massId}`, r.provenance, r.reading ? r.reading.why : 'no section draws this roof; its height is the storey height', { eaveOffset: r.reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING' })
+    if (head) bindings.push({ featureId: head.featureId, objectId: `roof-${r.massId}`, objectKind: 'roofs', commandIndex: program.length - 1 })
+    evidence(`roof-${r.massId}`, r.provenance, `${r.reading ? r.reading.why : 'no section draws this roof; its height is the storey height'}${head ? `; its edge over the zone is the portal head, ${head.why}` : ''}`, { eaveOffset: r.reading ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', ...(head ? { 'edgeMembers.fascia': head.provenance } : {}) })
   }
 
-  // --- portal heads, balconies, terraces, railings, verge members -------------
-  for (const p of b.portalHeads) {
-    const l = levelOf(0)
-    push({ type: 'createLinearSolid', id: p.id, levelId: l?.id ?? 'lvl-0', start: { x: p.x0, y: round6((p.y0 + p.y1) / 2), z: round6((p.z0 + p.z1) / 2) }, end: { x: p.x1, y: round6((p.y0 + p.y1) / 2), z: round6((p.z0 + p.z1) / 2) }, width: round6(p.y1 - p.y0), depth: round6(p.z1 - p.z0), materialId: MATERIALS_V2.dark }, p.featureId, 'linearSolids')
-    evidence(p.id, p.provenance, p.why)
-  }
+  // --- balconies, railings, terraces -------------------------------------------
+  // Portal heads and verges are the roofs' own edge members (above); nothing here stands proud as a loose bar.
   for (const bal of b.balconies) {
     const l = levelOf(bal.storeyIndex)
     if (!l) continue
     push({ type: 'createBalcony', id: bal.id, levelId: l.id, kind: bal.kind, footprint: { minX: bal.x0, maxX: bal.x1, minZ: bal.z0, maxZ: bal.z1 }, topOffset: round6(bal.topY - l.elevation), thickness: bal.thicknessM, materialId: bal.kind === 'TERRACE' ? MATERIALS_V2.slab : MATERIALS_V2.dark }, bal.featureId, 'balconies')
-    evidence(bal.id, bal.provenance, bal.why)
+    evidence(bal.id, bal.provenance, `${bal.why}${bal.ends ? `; ends: ${bal.ends.map((e) => `${e.kind.toLowerCase()} at ${e.at.toFixed(2)}`).join(', ')}` : ''}`)
   }
   for (const r of b.railings) {
     const l = levelOf(r.storeyIndex)
     if (!l) continue
-    push({ type: 'createRailing', id: r.id, levelId: l.id, start: r.start, end: r.end, baseOffset: round6(r.baseY - l.elevation), height: r.heightM, postSpacing: 1.0, infill: 'GLASS', materialId: MATERIALS_V2.glass }, r.featureId, 'railings')
-    evidence(r.id, r.provenance, r.why)
+    push({ type: 'createRailing', id: r.id, levelId: l.id, start: r.start, end: r.end, ...(r.path ? { path: r.path } : {}), baseOffset: round6(r.baseY - l.elevation), height: r.heightM, postSpacing: 1.0, infill: 'GLASS', ...(r.hostId ? { hostId: r.hostId } : {}), materialId: MATERIALS_V2.glass }, r.featureId, 'railings')
+    evidence(r.id, r.provenance, r.why, r.path ? { path: 'SOURCE_DERIVED' } : undefined)
   }
-  for (const v of b.verges) {
-    const roof = b.mainRoof
-    if (!roof) continue
-    const l = levelOf(Math.max(...(b.masses.find((m) => m.id === roof.massId)?.storeys ?? [0])))
-    const w = v.member.widthM ?? 0.5
-    const pitch = (roof.pitchDeg * Math.PI) / 180
-    // The member's top edge follows the roof line; its centreline sits half a width below, measured vertically.
-    const drop = w / 2 / Math.cos(pitch)
-    const inward = v.side === 'FRONT' ? 1 : -1
-    const zc = round6(v.planeAt + (inward * v.depthM) / 2)
-    const x0 = roof.footprint.x0
-    const x1 = roof.footprint.x1
-    const rakes: Array<[{ x: number; y: number; z: number }, { x: number; y: number; z: number }]> = [
-      [{ x: x0, y: round6(roof.eaveY - drop), z: zc }, { x: roof.ridgeAt, y: round6(roof.ridgeY - drop), z: zc }],
-      [{ x: roof.ridgeAt, y: round6(roof.ridgeY - drop), z: zc }, { x: x1, y: round6(roof.eaveY - drop), z: zc }],
-    ]
-    rakes.forEach((rake, i) => {
-      const id = `${v.id}-${i === 0 ? 'w' : 'e'}`
-      push({ type: 'createLinearSolid', id, levelId: l?.id ?? 'lvl-0', start: rake[0], end: rake[1], width: round6(w), depth: v.depthM, materialId: MATERIALS_V2.member }, v.featureId, 'linearSolids')
-      evidence(id, v.provenance, v.member.why, { depth: 'ASSUMED_FOR_RENDERING' })
-    })
+  for (const t of b.terraces) {
+    const l = levelOf(t.storeyIndex)
+    if (!l) continue
+    const hostWallIds = t.massIds.map((mid) => ringWallId(mid, t.storeyIndex, t.side === 'WEST' ? 'WEST' : t.side === 'EAST' ? 'EAST' : t.side))
+    push({ type: 'createTerrace', id: t.id, levelId: l.id, polygon: t.polygon, topOffset: round6(t.topY - l.elevation), thickness: t.thicknessM, surface: t.surface, edge: t.edge, hostWallIds, materialId: MATERIALS_V2.terrace }, t.featureId, 'terraces')
+    evidence(t.id, t.provenance, t.why, { thickness: b.terrainY === undefined ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED' })
   }
 
   // --- chimneys and rooflights ---------------------------------------------------

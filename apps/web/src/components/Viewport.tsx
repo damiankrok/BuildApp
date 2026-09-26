@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { useSnapshot, useStore } from '../use-store.js'
-import { buildThreeScene, disposeGroup, modelAxes, type SceneBuild } from '../viewport/scene-adapter.js'
+import { boundsOfMeshes, buildThreeScene, disposeGroup, modelAxes, probeBuild, type SceneBuild } from '../viewport/scene-adapter.js'
 import { framingOf, isOrthographic, presetPosition } from '../viewport/camera-presets.js'
 
 type ThreeState = {
@@ -159,13 +159,17 @@ export function Viewport(): JSX.Element {
       st.scene.remove(st.build.group)
       disposeGroup(st.build.group)
     }
-    const build = buildThreeScene(store.visibleMeshes(), snap.model.materials, snap.selection)
+    const build = buildThreeScene(store.visibleMeshes(), snap.model.materials, snap.selection, undefined, snap.model)
     st.scene.add(build.group)
     st.build = build
     ;(window as unknown as { __buildworld?: unknown }).__buildworld = {
       store,
       meshCount: build.pickables.length,
       objectIds: [...new Set(build.meshToObject.values())],
+      // Read at call time: a style change restyles this build in place.
+      probe: () => probeBuild(build),
+      // GPU resources three.js holds: what a rebuild must give back.
+      memory: () => ({ ...st.renderer.info.memory }),
     }
   }, [store, snap.scene, snap.hidden, snap.isolated, snap.isolatedLevelId, snap.roofsVisible, snap.selection, snap.model.materials])
 
@@ -183,10 +187,8 @@ export function Viewport(): JSX.Element {
     // Frame the whole compiled building, not just what is visible, so presets are stable;
     // with a focus object, frame that object's compiled meshes (padded so it stays in context).
     const focusMeshes = snap.focus ? snap.scene.meshes.filter((m) => m.objectId === snap.focus) : []
-    const all = buildThreeScene(focusMeshes.length > 0 ? focusMeshes : snap.scene.meshes, snap.model.materials, null)
-    const framing = framingOf(all.bounds)
+    const framing = framingOf(boundsOfMeshes(focusMeshes.length > 0 ? focusMeshes : snap.scene.meshes))
     if (focusMeshes.length > 0) framing.radius = Math.max(1.5, framing.radius * 1.4)
-    disposeGroup(all.group)
     st.lastRadius = framing.radius
     const { position, up } = presetPosition(snap.view, framing)
     const orthoView = isOrthographic(snap.view)

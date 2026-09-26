@@ -48,6 +48,7 @@ export const FeatureFamilySchema = z.enum([
   'FACADE_ASSEMBLY',
   'SURFACE_REGION',
   'CAMERA',
+  'TERRACE',
 ])
 export type FeatureFamily = z.infer<typeof FeatureFamilySchema>
 
@@ -185,7 +186,7 @@ export const SemanticObjectBindingSchema = z
   .strict()
 export type SemanticObjectBinding = z.infer<typeof SemanticObjectBindingSchema>
 
-export const FeatureRelationKindSchema = z.enum(['SAME_FEATURE_AS', 'HOSTED_BY', 'PART_OF', 'ALIGNED_WITH', 'CONTINUES_AS', 'ABOVE', 'BELOW', 'PROJECTS_FROM', 'RECESSED_FROM', 'SUPPORTS', 'CONTRADICTS', 'CORROBORATES'])
+export const FeatureRelationKindSchema = z.enum(['SAME_FEATURE_AS', 'HOSTED_BY', 'PART_OF', 'ALIGNED_WITH', 'CONTINUES_AS', 'ABOVE', 'BELOW', 'PROJECTS_FROM', 'RECESSED_FROM', 'SUPPORTS', 'CONTRADICTS', 'CORROBORATES', 'TERMINATES_AT', 'TURNS_AT', 'MEETS_HOST'])
 export type FeatureRelationKind = z.infer<typeof FeatureRelationKindSchema>
 
 export const FeatureRelationSchema = z

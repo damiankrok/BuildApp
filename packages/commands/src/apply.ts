@@ -49,6 +49,7 @@ import {
   type Vec2,
   type Wall,
   type ValidationIssue,
+  TerraceSchema,
 } from '@buildapp/model'
 import type { ZodTypeAny } from 'zod'
 import { BuildingCommandSchema, type BuildingCommand, type ResolvedCommand } from './commands.js'
@@ -95,6 +96,7 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   stair: StairSchema,
   surfaceRegion: SurfaceRegionSchema,
   linearSolid: LinearSolidSchema,
+  terrace: TerraceSchema,
   material: MaterialSchema,
   constraint: ConstraintSchema,
   evidenceSource: EvidenceSourceSchema,
@@ -330,6 +332,8 @@ function execute(d: Draft, c: ResolvedCommand): void {
         ridgeAxis: c.ridgeAxis,
         overhang: c.overhang,
         thickness: c.thickness,
+        edgeMembers: c.edgeMembers,
+        plateInset: c.plateInset,
         materialId: c.materialId,
       })
       for (const wallId of c.capWallIds) {
@@ -389,6 +393,9 @@ function execute(d: Draft, c: ResolvedCommand): void {
         materialId: c.materialId,
       })
       return
+    case 'createTerrace':
+      add('terraces', 'terrace', { id: c.id, ...common(c), levelId: c.levelId, polygon: c.polygon, topOffset: c.topOffset, thickness: c.thickness, surface: c.surface, edge: c.edge, hostWallIds: c.hostWallIds.length > 0 ? c.hostWallIds : undefined, materialId: c.materialId })
+      return
     case 'createBalcony':
       add('balconies', 'balcony', { id: c.id, ...common(c), levelId: c.levelId, kind: c.kind, footprint: c.footprint, topOffset: c.topOffset, thickness: c.thickness, materialId: c.materialId })
       return
@@ -404,6 +411,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
         postSpacing: c.postSpacing,
         infill: c.infill,
         hostId: c.hostId,
+        path: c.path,
         materialId: c.materialId,
       })
       return

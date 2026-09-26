@@ -24,7 +24,7 @@ import {
   type Wall,
 } from '@buildapp/model'
 import { compileDoorFill, compileWindowFill } from './fills.js'
-import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compileSlab, compileStairPlaceholder } from './features.js'
+import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compileSlab, compileStairPlaceholder, compileTerrace } from './features.js'
 import { compileRoofTriangles, compileRooflightFill, roofBreaksAlong, roofGeometry, type RoofGeometry } from './roof-compiler.js'
 import { compileStair } from './stair-compiler.js'
 import { compileSurfaceRegion } from './surface-regions.js'
@@ -302,6 +302,9 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     const openings = roofOpeningsByRoof.get(id) ?? []
     const r = compileRoofTriangles(roof, level, openings)
     meshes.push({ objectId: id, objectKind: 'roof', part: 'ROOF', levelId: roof.levelId, solidId: id, structural: true, materialId: materialOf(roof), triangles: r.triangles })
+    for (const trim of r.trims) {
+      meshes.push({ objectId: id, objectKind: 'roof', part: 'ROOF_TRIM', levelId: roof.levelId, solidId: trim.id, structural: true, materialId: trim.materialId ?? materialOf(roof), triangles: trim.triangles })
+    }
     for (const o of openings) {
       const reveal = r.reveals.get(o.id)
       if (!reveal) {
@@ -330,6 +333,17 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     for (const piece of compileRailing(r, level)) {
       meshes.push({ objectId: r.id, objectKind: 'railing', part: piece.part, levelId: r.levelId, solidId: `${r.id}:${piece.part}`, structural: false, materialId: materialOf(r), triangles: piece.triangles })
     }
+  }
+
+  for (const t of byId(model.terraces)) {
+    const level = levelOf(t.levelId, t.id)
+    if (!level) continue
+    const tris = compileTerrace(t, level)
+    if (!tris) {
+      diagnostics.push({ code: 'POLYGON_NOT_TRIANGULATED', severity: 'ERROR', message: `terrace ${t.id}: polygon could not be triangulated`, objectId: t.id })
+      continue
+    }
+    meshes.push({ objectId: t.id, objectKind: 'terrace', part: 'TERRACE', levelId: t.levelId, solidId: t.id, structural: true, materialId: materialOf(t), triangles: tris })
   }
 
   for (const c of byId(model.chimneys)) {

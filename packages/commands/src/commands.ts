@@ -29,6 +29,8 @@ import {
   Vec3Schema,
   WallEndRefSchema,
   WallJunctionKindSchema,
+  RoofEdgeMembersSchema,
+  RoofPlateInsetSchema,
   WallTopProfileSchema,
 } from '@buildapp/model'
 
@@ -181,6 +183,10 @@ export const CreateRoofSchema = z
     ridgeAxis: z.enum(['X', 'Z']).default('X'),
     overhang: nonNegative.default(0),
     thickness: positive.default(0.25),
+    /** Verge boards along the rakes and fascia boards along named edges, compiled with the roof. */
+    edgeMembers: RoofEdgeMembersSchema.optional(),
+    /** How far the plate stops short of the footprint on each side: it bears on the walls there. */
+    plateInset: RoofPlateInsetSchema.optional(),
     materialId: IdSchema.optional(),
     /** Walls whose top should die into this roof (their topProfile becomes FOLLOW_ROOF). */
     capWallIds: z.array(IdSchema).default([]),
@@ -302,6 +308,27 @@ export const CreateRailingSchema = z
     postSpacing: positive.default(1.2),
     infill: z.enum(['GLASS', 'BARS', 'NONE']).default('BARS'),
     hostId: IdSchema.optional(),
+    /** A railing that turns: its plan polyline from `start` to `end`, one post at every vertex. */
+    path: z.array(Vec2Schema).min(2).optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * A terrace: an exterior floor against a facade, at or near the threshold it
+ * serves, on the ground rather than carried by the building.
+ */
+export const CreateTerraceSchema = z
+  .object({
+    type: z.literal('createTerrace'),
+    ...withId,
+    levelId: IdSchema,
+    polygon: PlanPolygonSchema,
+    topOffset: finite.default(0),
+    thickness: positive.default(0.15),
+    surface: z.enum(['PAVED', 'DECK', 'UNKNOWN']).default('UNKNOWN'),
+    edge: z.enum(['PLINTH', 'FLUSH']).default('FLUSH'),
+    hostWallIds: z.array(IdSchema).default([]),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -500,6 +527,7 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   PlaceRooflightSchema,
   CreateBalconySchema,
   CreateRailingSchema,
+  CreateTerraceSchema,
   PlaceChimneySchema,
   CreateStairPlaceholderSchema,
   CreateStairSchema,

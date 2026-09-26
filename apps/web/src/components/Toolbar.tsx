@@ -4,7 +4,7 @@ import type { ViewPreset } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
 import { SEALED_CANDIDATES, modelOf } from '@buildapp/candidates'
-import { useSnapshot, useStore } from '../use-store.js'
+import { RENDER_STYLES, renderStyleStore, useRenderStyle, useSnapshot, useStore, type RenderStyleId } from '../use-store.js'
 
 /**
  * The models BuildWorld can load from its own packages. Each entry is a
@@ -40,6 +40,7 @@ export type RightPanel = 'inspector' | 'sources'
 export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: RightPanel) => void }): JSX.Element {
   const store = useStore()
   const snap = useSnapshot()
+  const renderStyle = useRenderStyle()
   const fileRef = useRef<HTMLInputElement>(null)
 
   const save = (): void => {
@@ -155,6 +156,21 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
         <button data-testid="toggle-axes" className={snap.showAxes ? 'active' : ''} onClick={() => store.setAxes(!snap.showAxes)}>
           Axes
         </button>
+      </div>
+      <div className="group">
+        <label>style</label>
+        <select
+          data-testid="style-select"
+          value={renderStyle}
+          onChange={(e) => renderStyleStore.set(e.target.value as RenderStyleId)}
+          title={RENDER_STYLES.find((s) => s.id === renderStyle)?.title ?? 'Render style'}
+        >
+          {RENDER_STYLES.map((s) => (
+            <option key={s.id} value={s.id} title={s.title}>
+              {s.label}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   )

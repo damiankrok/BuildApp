@@ -15,6 +15,7 @@
  */
 import type { Bounds, CompileDiagnostic, GeometryPart, Triangle } from '@buildapp/geometry'
 import type { EvidenceStatus, SemanticKind } from '@buildapp/model'
+import type { BundleStyling, SemanticGroup } from './semantics.js'
 
 export const MOBILE_SCENE_BUNDLE_SCHEMA = 'buildapp.mobile-scene-bundle'
 export const MOBILE_SCENE_BUNDLE_VERSION = '1.0.0'
@@ -32,6 +33,12 @@ export type MobileMesh = {
   objectId: string
   objectKind: SemanticKind
   part: GeometryPart
+  /**
+   * The styling group this mesh belongs to, derived from the part and the
+   * object's facts by `semanticGroupOf`. Derived data: a viewer looks it up
+   * in `styling.groups` and never has to know what a balcony kind is.
+   */
+  semanticGroup: SemanticGroup
   levelId?: string
   solidId: string
   hostWallId?: string
@@ -138,6 +145,12 @@ export type MobileSceneBundle = {
   levels: MobileLevel[]
   objects: MobileObjectMetadata[]
   materials: MobileMaterialMetadata[]
+  /**
+   * The architectural palette, one appearance per semantic group, so a
+   * viewer's Architectural style draws from the bundle rather than from a
+   * copy of its own. Produced from the one shared constant in `semantics.ts`.
+   */
+  styling: BundleStyling
   /** sha256 of the canonical JSON of this bundle with `contentHash` removed. */
   contentHash: string
 }

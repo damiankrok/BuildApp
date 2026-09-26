@@ -60,11 +60,112 @@ export type AttachedRoofV2 = {
   provenance: ProvenanceStatus
 }
 
-export type BalconyV2 = { id: string; kind: 'BALCONY' | 'TERRACE'; storeyIndex: number; x0: number; z0: number; x1: number; z1: number; topY: number; thicknessM: number; fascia?: FacadeMember; featureId: string; provenance: ProvenanceStatus; why: string }
-export type RailingV2 = { id: string; storeyIndex: number; start: { x: number; z: number }; end: { x: number; z: number }; baseY: number; heightM: number; featureId: string; provenance: ProvenanceStatus; why: string }
-export type ReturnWallV2 = { id: string; side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; storeyIndex: number; start: { x: number; z: number }; end: { x: number; z: number }; thicknessM: number; recessId: string; featureId: string; provenance: ProvenanceStatus; why: string }
-export type PortalHeadV2 = { id: string; massId: string; x0: number; x1: number; z0: number; z1: number; y0: number; y1: number; featureId: string; provenance: ProvenanceStatus; why: string }
-export type VergeV2 = { id: string; side: 'FRONT' | 'REAR'; planeAt: number; member: FacadeMember; depthM: number; featureId: string; provenance: ProvenanceStatus }
+/**
+ * How one end of a slab or member terminates: FREE (a drop, guarded if the
+ * slab is), WALL (against a wall face that stands beside it), CARRIES (the
+ * slab runs under a wall standing on it), MEETS (end to end with the next
+ * member of its assembly).
+ */
+export type EndCondition = { kind: 'FREE' | 'WALL' | 'CARRIES' | 'MEETS'; at: number; againstId?: string; why: string }
+
+export type BalconyV2 = {
+  id: string
+  kind: 'BALCONY' | 'TERRACE'
+  storeyIndex: number
+  x0: number
+  z0: number
+  x1: number
+  z1: number
+  topY: number
+  thicknessM: number
+  fascia?: FacadeMember
+  /** The two ends along the facade, low then high, after the assembly closure. */
+  ends?: [EndCondition, EndCondition]
+  /** The facade whose zone the slab stands in. */
+  side?: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+export type RailingV2 = {
+  id: string
+  storeyIndex: number
+  start: { x: number; z: number }
+  end: { x: number; z: number }
+  /** A railing that turns: its plan polyline from start to end, one post per vertex. */
+  path?: Array<{ x: number; z: number }>
+  /** The slab it guards. */
+  hostId?: string
+  baseY: number
+  heightM: number
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+export type ReturnWallV2 = {
+  id: string
+  side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  storeyIndex: number
+  start: { x: number; z: number }
+  end: { x: number; z: number }
+  thicknessM: number
+  /** The interval along the facade the return's material occupies. */
+  alongInterval: [number, number]
+  recessId: string
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+export type PortalHeadV2 = { id: string; massId: string; x0: number; x1: number; z0: number; z1: number; y0: number; y1: number; continuesFromId?: string; featureId: string; provenance: ProvenanceStatus; why: string }
+export type VergeV2 = { id: string; side: 'FRONT' | 'REAR'; planeAt: number; member: FacadeMember; depthM: number; depthProvenance?: ProvenanceStatus; depthWhy?: string; featureId: string; provenance: ProvenanceStatus }
+
+/**
+ * A terrace: an exterior floor at the ground storey, first-class rather than
+ * a balcony of kind TERRACE. Its polygon is the recess floor it continues,
+ * plus the outlined platform beyond the mouth where the plan draws one.
+ */
+export type TerraceV2 = {
+  id: string
+  storeyIndex: number
+  side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  polygon: Array<{ x: number; z: number }>
+  topY: number
+  thicknessM: number
+  surface: 'PAVED' | 'DECK' | 'UNKNOWN'
+  edge: 'PLINTH' | 'FLUSH'
+  /** The masses whose facade the terrace lies against. */
+  massIds: string[]
+  /** The platform beyond the mouth, when the plan outlines one. */
+  extension?: { from: number; to: number; reach: number; frameId: string; why: string }
+  featureId: string
+  provenance: ProvenanceStatus
+  why: string
+}
+
+/** A broad tone read for one body's walls on the registered renders. */
+export type MassToneV2 = { massId: string; tone: string; share: number; views: number; why: string }
+
+/** A broad tone read for one gable frame (its returns, and the verge that continues them). */
+export type FrameToneV2 = { side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; tone: string; share: number; why: string }
+
+/**
+ * The facade composition as a graph: every member that makes up a frame, a
+ * portal or a balcony assembly, and how each meets the next. Built after the
+ * assembly closure, from the positions the model will carry.
+ */
+export type FacadeGraphNode = {
+  id: string
+  kind: 'RETURN' | 'VERGE' | 'BALCONY_SLAB' | 'PORTAL_HEAD' | 'RAILING' | 'TERRACE'
+  featureId: string
+  hostId?: string
+  facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'
+  start: { x: number; y: number; z: number }
+  end: { x: number; y: number; z: number }
+  depthM?: number
+  termination: { start: EndCondition['kind'] | 'TURNS'; end: EndCondition['kind'] | 'TURNS' }
+}
+export type FacadeGraphEdge = { from: string; to: string; kind: 'CONTINUES_TO' | 'TERMINATES_AT' | 'TURNS_AT' | 'MEETS_HOST'; gapM: number; why: string }
+export type FacadeGraph = { nodes: FacadeGraphNode[]; edges: FacadeGraphEdge[] }
 export type SurfaceRegionV2 = { id: string; wallRef: { massId: string; storeyIndex: number; side: 'FRONT' | 'REAR' | 'WEST' | 'EAST' }; along: [number, number]; y: [number, number]; tone: string; featureId: string }
 
 export type BuildingV2 = {
@@ -81,6 +182,10 @@ export type BuildingV2 = {
   railings: RailingV2[]
   portalHeads: PortalHeadV2[]
   verges: VergeV2[]
+  terraces: TerraceV2[]
+  massTones: MassToneV2[]
+  frameTones: FrameToneV2[]
+  facadeGraph: FacadeGraph
   chimneys: Array<ChimneyReading & { featureId: string; provenance: ProvenanceStatus }>
   rooflights: Array<RooflightReading & { featureId: string; provenance: ProvenanceStatus; widthM: number; lengthM: number }>
   openings: OpeningV2[]

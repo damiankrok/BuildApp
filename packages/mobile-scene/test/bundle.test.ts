@@ -26,7 +26,7 @@ describe('mobile scene bundle', () => {
     expect(bundle.schema).toBe('buildapp.mobile-scene-bundle')
     expect(bundle.schemaVersion).toBe('1.0.0')
     expect(bundle.generatedFrom.modelId).toBe(marcowki.id)
-    expect(bundle.generatedFrom.modelSchemaVersion).toBe('1.4.0')
+    expect(bundle.generatedFrom.modelSchemaVersion).toBe(marcowki.schemaVersion)
     expect(bundle.generatedFrom.modelContentHash).toMatch(/^[0-9a-f]{64}$/)
   })
 

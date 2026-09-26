@@ -61,6 +61,8 @@ export const MIGRATION_NOTE_1_2_0 =
 
 export const MIGRATION_NOTE_1_3_0 = 'migrated from schema 1.3.0 to 1.4.0: the file carried no linear solids; every facade member it describes is still a flat region'
 
+export const MIGRATION_NOTE_1_4_0 = 'migrated from schema 1.4.0 to 1.5.0: the file carried no terraces; its roofs carry no edge members or plate insets and its railings no turning paths'
+
 type Step = {
   from: string
   to: string
@@ -98,6 +100,13 @@ const STEPS: Step[] = [
     newCollections: ['linearSolids'],
     note: MIGRATION_NOTE_1_3_0,
     message: 'model migrated from schema 1.3.0 to 1.4.0: an empty linearSolids collection was added; the file carries no volumetric facade members',
+  },
+  {
+    from: '1.4.0',
+    to: '1.5.0',
+    newCollections: ['terraces'],
+    note: MIGRATION_NOTE_1_4_0,
+    message: 'model migrated from schema 1.4.0 to 1.5.0: an empty terraces collection was added; roofs carry no edge members or plate insets, railings no turning paths',
   },
 ]
 

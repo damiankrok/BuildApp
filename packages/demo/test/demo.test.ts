@@ -61,8 +61,8 @@ describe('demo building', () => {
   })
 
   it('matches the frozen 1.3.0 fixture byte for byte', () => {
-    // If the demo or the serializer changes on purpose, re-freeze packages/model/test/fixtures/demo-house-1.4.0.json in the same change.
-    const fixture = readFileSync(resolve(import.meta.dirname, '../../model/test/fixtures/demo-house-1.4.0.json'), 'utf8')
+    // If the demo or the serializer changes on purpose, re-freeze packages/model/test/fixtures/demo-house-1.5.0.json in the same change.
+    const fixture = readFileSync(resolve(import.meta.dirname, '../../model/test/fixtures/demo-house-1.5.0.json'), 'utf8')
     expect(serializeModel(createDemoBuilding())).toBe(fixture)
   })
 })

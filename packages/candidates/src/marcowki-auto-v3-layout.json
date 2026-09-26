@@ -1,0 +1,1021 @@
+{
+  "alternatives": [
+    {
+      "chosenId": "region-built-0-1",
+      "id": "alternative-storey-attic-feea62a1fa",
+      "margin": 0.054393,
+      "members": [
+        {
+          "id": "region-built-0-1",
+          "score": 0.701971,
+          "summary": "60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
+        },
+        {
+          "id": "region-built-0-1",
+          "score": 0.647578,
+          "summary": "55% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and where its own chains put it along z of region-built-0-1, covering 66% of the building below"
+        },
+        {
+          "id": "region-built-0-1",
+          "score": 0.622997,
+          "summary": "52% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its min z face of region-built-0-1, covering 66% of the building below"
+        },
+        {
+          "id": "region-built-0-1",
+          "score": 0.451448,
+          "summary": "35% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its max x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
+        }
+      ],
+      "what": "which part of the building below the attic storey plan sits over",
+      "why": "the walls of this plan land on the walls of region-built-0-1 better than on any other part of the building below"
+    }
+  ],
+  "attachments": [
+    {
+      "confidence": 0.9,
+      "contact": {
+        "at": 7.9,
+        "axis": "X",
+        "from": 5.1,
+        "to": 12.61
+      },
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "fromId": "mass-0",
+      "id": "attachment-mass-0-mass-1-shares-a0d359eef3",
+      "kind": "SHARES_WALL_WITH",
+      "toId": "mass-1",
+      "why": "their outlines meet along 7.51 m of the line X = 7.90"
+    },
+    {
+      "confidence": 0.85,
+      "contact": {
+        "at": 7.9,
+        "axis": "X",
+        "from": 5.1,
+        "to": 12.61
+      },
+      "evidenceIds": [],
+      "fromId": "mass-1",
+      "id": "attachment-mass-1-mass-0-attached-1923d68aaf",
+      "kind": "ATTACHED_TO",
+      "toId": "mass-0",
+      "why": "mass-1 is the smaller of the two and stands against mass-0 rather than on its own"
+    }
+  ],
+  "conflicts": [],
+  "contentHash": "899f9449c27d0b4911887151ea431d9ae62c777ec62c7f2a900d7630974450e0",
+  "facadePlanes": [
+    {
+      "at": 7.9,
+      "axis": "X",
+      "confidence": 0.704538,
+      "exterior": true,
+      "frameIds": [],
+      "from": 0,
+      "id": "facade-mass-0-max-x-4ae20c5f66",
+      "massId": "mass-0",
+      "side": "MAX_X",
+      "storeyIds": [
+        "storey-0",
+        "storey-1"
+      ],
+      "to": 5.1,
+      "why": "5.10 m of this body's max x face with nothing standing against it"
+    },
+    {
+      "at": 7.9,
+      "axis": "X",
+      "confidence": 0.704538,
+      "exterior": false,
+      "frameIds": [],
+      "from": 5.1,
+      "id": "facade-mass-0-max-x-4fc686a30d",
+      "massId": "mass-0",
+      "side": "MAX_X",
+      "storeyIds": [
+        "storey-0",
+        "storey-1"
+      ],
+      "to": 12.61,
+      "why": "7.51 m of this body's max x face shared with another body: a party wall, not a facade"
+    },
+    {
+      "at": 12.61,
+      "axis": "Z",
+      "confidence": 0.704538,
+      "exterior": true,
+      "frameIds": [],
+      "from": 0,
+      "id": "facade-mass-0-max-z-5aceef902f",
+      "massId": "mass-0",
+      "side": "MAX_Z",
+      "storeyIds": [
+        "storey-0",
+        "storey-1"
+      ],
+      "to": 7.9,
+      "why": "7.90 m of this body's max z face with nothing standing against it"
+    },
+    {
+      "at": 0,
+      "axis": "X",
+      "confidence": 0.704538,
+      "exterior": true,
+      "frameIds": [],
+      "from": 0,
+      "id": "facade-mass-0-min-x-591dca9628",
+      "massId": "mass-0",
+      "side": "MIN_X",
+      "storeyIds": [
+        "storey-0",
+        "storey-1"
+      ],
+      "to": 12.61,
+      "why": "12.61 m of this body's min x face with nothing standing against it"
+    },
+    {
+      "at": 0,
+      "axis": "Z",
+      "confidence": 0.704538,
+      "exterior": true,
+      "frameIds": [],
+      "from": 0,
+      "id": "facade-mass-0-min-z-22e5144e8c",
+      "massId": "mass-0",
+      "side": "MIN_Z",
+      "storeyIds": [
+        "storey-0",
+        "storey-1"
+      ],
+      "to": 7.9,
+      "why": "7.90 m of this body's min z face with nothing standing against it"
+    },
+    {
+      "at": 12.05,
+      "axis": "X",
+      "confidence": 0.727497,
+      "exterior": true,
+      "frameIds": [],
+      "from": 5.1,
+      "id": "facade-mass-1-max-x-880e8827e7",
+      "massId": "mass-1",
+      "side": "MAX_X",
+      "storeyIds": [
+        "storey-0"
+      ],
+      "to": 12.61,
+      "why": "7.51 m of this body's max x face with nothing standing against it"
+    },
+    {
+      "at": 12.61,
+      "axis": "Z",
+      "confidence": 0.727497,
+      "exterior": true,
+      "frameIds": [],
+      "from": 7.9,
+      "id": "facade-mass-1-max-z-3b31196221",
+      "massId": "mass-1",
+      "side": "MAX_Z",
+      "storeyIds": [
+        "storey-0"
+      ],
+      "to": 12.05,
+      "why": "4.15 m of this body's max z face with nothing standing against it"
+    },
+    {
+      "at": 7.9,
+      "axis": "X",
+      "confidence": 0.727497,
+      "exterior": false,
+      "frameIds": [],
+      "from": 5.1,
+      "id": "facade-mass-1-min-x-987dea7622",
+      "massId": "mass-1",
+      "side": "MIN_X",
+      "storeyIds": [
+        "storey-0"
+      ],
+      "to": 12.61,
+      "why": "7.51 m of this body's min x face shared with another body: a party wall, not a facade"
+    },
+    {
+      "at": 5.1,
+      "axis": "Z",
+      "confidence": 0.727497,
+      "exterior": true,
+      "frameIds": [],
+      "from": 7.9,
+      "id": "facade-mass-1-min-z-a5cc656668",
+      "massId": "mass-1",
+      "side": "MIN_Z",
+      "storeyIds": [
+        "storey-0"
+      ],
+      "to": 12.05,
+      "why": "4.15 m of this body's min z face with nothing standing against it"
+    }
+  ],
+  "footprintRegions": [
+    {
+      "areaM2": 99.619,
+      "confidence": 0.704538,
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "footprint-0-region-built-0-1",
+      "kind": "BUILT",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 58,
+        "x1": 357,
+        "y0": 259,
+        "y1": 735.5
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 0
+          }
+        ]
+      },
+      "storeyId": "storey-0",
+      "wallEvidence": {
+        "fraction": 0.674501,
+        "perimeterM": 41.026752,
+        "walledM": 27.672592
+      },
+      "why": "18 adjacent built cells merged; 67% of its perimeter is drawn as wall"
+    },
+    {
+      "areaM2": 31.1665,
+      "confidence": 0.727497,
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "footprint-0-region-built-6-2",
+      "kind": "BUILT",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 357,
+        "x1": 514,
+        "y0": 452,
+        "y1": 735.5
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 7.9,
+            "z": 5.1
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 5.1
+          }
+        ]
+      },
+      "storeyId": "storey-0",
+      "wallEvidence": {
+        "fraction": 0.745362,
+        "perimeterM": 23.30512,
+        "walledM": 17.370741
+      },
+      "why": "6 adjacent built cells merged; 75% of its perimeter is drawn as wall"
+    },
+    {
+      "areaM2": 97.256416,
+      "confidence": 0.707067,
+      "evidenceIds": [],
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "footprint-1-mass-0",
+      "kind": "BUILT",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 50,
+        "x1": 335.5,
+        "y0": 193.5,
+        "y1": 671.5
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "z": 12.61
+          },
+          {
+            "x": 7.712642,
+            "z": 12.61
+          },
+          {
+            "x": 7.712642,
+            "z": 0
+          }
+        ]
+      },
+      "storeyId": "storey-1",
+      "wallEvidence": {
+        "fraction": 0.603556,
+        "perimeterM": 0,
+        "walledM": 0
+      },
+      "why": "the attic storey plan covers 98% of this body once registered onto the plan below"
+    },
+    {
+      "areaM2": 11.94496,
+      "confidence": 0.6,
+      "evidenceIds": [],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "zone-max_z",
+      "kind": "ZONE",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 58,
+        "x1": 514,
+        "y0": 735.5,
+        "y1": 773
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": 12.61
+          },
+          {
+            "x": 0,
+            "z": 13.601283
+          },
+          {
+            "x": 12.05,
+            "z": 13.601283
+          },
+          {
+            "x": 12.05,
+            "z": 12.61
+          }
+        ]
+      },
+      "storeyId": "storey-0",
+      "wallEvidence": {
+        "fraction": 0,
+        "perimeterM": 0,
+        "walledM": 0
+      },
+      "why": "dimensioned on the plan and outside every wall on it: a zone the building reaches over or stands back from, not a part of it"
+    },
+    {
+      "areaM2": 12.05,
+      "confidence": 0.6,
+      "evidenceIds": [],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "zone-min_z",
+      "kind": "ZONE",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 58,
+        "x1": 514,
+        "y0": 221,
+        "y1": 259
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": -1
+          },
+          {
+            "x": 0,
+            "z": 0
+          },
+          {
+            "x": 12.05,
+            "z": 0
+          },
+          {
+            "x": 12.05,
+            "z": -1
+          }
+        ]
+      },
+      "storeyId": "storey-0",
+      "wallEvidence": {
+        "fraction": 0,
+        "perimeterM": 0,
+        "walledM": 0
+      },
+      "why": "dimensioned on the plan and outside every wall on it: a zone the building reaches over or stands back from, not a part of it"
+    }
+  ],
+  "gate": {
+    "reasons": [
+      {
+        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+        "itemIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876"
+        ],
+        "severity": "NOTED",
+        "what": "the shape could not be checked against the rear elevation",
+        "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
+      },
+      {
+        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+        "itemIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4"
+        ],
+        "severity": "NOTED",
+        "what": "the shape could not be checked against the front elevation",
+        "why": "no silhouette polygon was extracted from this drawing; only its bounding box was, and a box has no shape to disagree with"
+      },
+      {
+        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+        "itemIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c"
+        ],
+        "severity": "NOTED",
+        "what": "the shape could not be checked against the left elevation",
+        "why": "the outline traced on it is 1.91 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      },
+      {
+        "code": "STRUCTURE_SHAPE_NOT_CHECKED",
+        "itemIds": [
+          "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-62c53f7671"
+        ],
+        "severity": "NOTED",
+        "what": "the shape could not be checked against the right elevation",
+        "why": "the outline traced on it is 1.53 m wider than the bodies under it, so what was traced is the render's ground and planting as well as the building"
+      },
+      {
+        "code": "WIDTH_CORROBORATED",
+        "itemIds": [],
+        "severity": "NOTED",
+        "what": "a second drawing states 12.05 m across",
+        "why": "chain chain-horizontal-26-2d8002efe2 on frame-asset-rzut-aa1526220f-863ec969ff agrees with the 12.05 m the walls measure"
+      },
+      {
+        "code": "DEPTH_CORROBORATED",
+        "itemIds": [],
+        "severity": "NOTED",
+        "what": "a second drawing states 12.66 m deep",
+        "why": "chain chain-vertical-568-aac5754e82 on frame-asset-rzut-aa1526220f-863ec969ff agrees with the 12.61 m the walls measure"
+      },
+      {
+        "code": "FOOTPRINT_AREA_AGREES",
+        "itemIds": [],
+        "severity": "NOTED",
+        "what": "the lowest storey covers 130.79 m² against the 131.16 m² the publisher prints",
+        "why": "0.3% apart, which is closer than a rounded published figure can distinguish"
+      },
+      {
+        "code": "ROOF_BY_CONVENTION",
+        "itemIds": [
+          "roof-mass-1"
+        ],
+        "severity": "NOTED",
+        "what": "the roof over mass-1 is a convention rather than a reading",
+        "why": "a body reaching only storey 0, below the main roof, with nothing in the sources describing its own: taken as level, which is the commonest roof over an attached single-storey body and is recorded here as a convention rather than a reading"
+      },
+      {
+        "code": "NAMED_HOLES",
+        "itemIds": [],
+        "severity": "NOTED",
+        "what": "1 structural thing the sources do not settle",
+        "why": "the kind of roof over mass-1"
+      }
+    ],
+    "status": "STRUCTURAL_LAYOUT_ACCEPTED"
+  },
+  "id": "layout-marcowki-899f9449c27d0b49",
+  "masses": [
+    {
+      "confidence": 0.704538,
+      "depthM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-dimension-c7e4ed94b9",
+          "metric-dimension-d1422a5b67"
+        ],
+        "high": 12.63,
+        "low": 12.59,
+        "unit": "m",
+        "value": 12.61,
+        "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 1261 cm"
+      },
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "facadePlaneIds": [
+        "facade-mass-0-max-x-4ae20c5f66",
+        "facade-mass-0-max-x-4fc686a30d",
+        "facade-mass-0-max-z-5aceef902f",
+        "facade-mass-0-min-x-591dca9628",
+        "facade-mass-0-min-z-22e5144e8c"
+      ],
+      "footprintRegionIds": [
+        "footprint-0-region-built-0-1",
+        "footprint-1-mass-0"
+      ],
+      "id": "mass-0",
+      "observationIds": [],
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 0
+          }
+        ]
+      },
+      "role": "MAIN",
+      "roofSupportId": "roof-mass-0",
+      "storeySpan": {
+        "fromIndex": 0,
+        "storeyIds": [
+          "storey-0",
+          "storey-1"
+        ],
+        "toIndex": 1
+      },
+      "why": "a region of the base plan enclosed by its own walls: 18 adjacent built cells merged; 67% of its perimeter is drawn as wall; the body that reaches highest, and the largest of those that do",
+      "widthM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-dimension-4af572f280"
+        ],
+        "high": 7.92,
+        "low": 7.88,
+        "unit": "m",
+        "value": 7.9,
+        "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 790 cm"
+      }
+    },
+    {
+      "confidence": 0.727497,
+      "depthM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-dimension-c7e4ed94b9"
+        ],
+        "high": 7.53,
+        "low": 7.49,
+        "unit": "m",
+        "value": 7.51,
+        "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 751 cm"
+      },
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "facadePlaneIds": [
+        "facade-mass-1-max-x-880e8827e7",
+        "facade-mass-1-max-z-3b31196221",
+        "facade-mass-1-min-x-987dea7622",
+        "facade-mass-1-min-z-a5cc656668"
+      ],
+      "footprintRegionIds": [
+        "footprint-0-region-built-6-2"
+      ],
+      "id": "mass-1",
+      "observationIds": [],
+      "ring": {
+        "points": [
+          {
+            "x": 7.9,
+            "z": 5.1
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 5.1
+          }
+        ]
+      },
+      "role": "ATTACHED",
+      "roofSupportId": "roof-mass-1",
+      "storeySpan": {
+        "fromIndex": 0,
+        "storeyIds": [
+          "storey-0"
+        ],
+        "toIndex": 0
+      },
+      "why": "a region of the base plan enclosed by its own walls: 6 adjacent built cells merged; 75% of its perimeter is drawn as wall; it shares a wall line with the main body",
+      "widthM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-dimension-07b24ca33a"
+        ],
+        "high": 4.17,
+        "low": 4.13,
+        "unit": "m",
+        "value": 4.15,
+        "why": "the distance between the outer faces of this body’s own walls: a dimension chain states this span as 415 cm"
+      }
+    }
+  ],
+  "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+  "metricEvidenceId": "metrics-marcowki-5f12247b7585701f",
+  "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+  "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
+  "recesses": [],
+  "roofSupports": [
+    {
+      "adjacentRoofIds": [
+        "roof-mass-1"
+      ],
+      "authority": "PUBLISHED_SPECIFICATION",
+      "confidence": 0.95,
+      "eaveLevelM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 4.77,
+        "low": 4.57,
+        "unit": "m",
+        "value": 4.67,
+        "why": "the level datum where the walls stop"
+      },
+      "evidenceIds": [
+        "metric-spec-roof-angle-a196295353",
+        "metric-level-736b8c6e31",
+        "metric-level-70deeedf63",
+        "metric-level-c977b973a3",
+        "metric-level-714c90d304"
+      ],
+      "id": "roof-mass-0",
+      "kind": "GABLE",
+      "massId": "mass-0",
+      "observationIds": [],
+      "overhangM": {
+        "basis": "MEASURED",
+        "evidenceIds": [],
+        "high": 0.05,
+        "low": 0,
+        "unit": "m",
+        "value": 0,
+        "why": "the publisher states the roof has no eaves: \"Projekt domu „Dom w marcówkach (GE)” to nowoczesny dom jednorodzinny z poddaszem\""
+      },
+      "pitchDeg": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-spec-roof-angle-a196295353"
+        ],
+        "high": 40.5,
+        "low": 39.5,
+        "unit": "deg",
+        "value": 40,
+        "why": "printed as \"40 st.\": the publisher prints the roof pitch as \"40 st.\""
+      },
+      "ridgeAxis": "Z",
+      "ridgeLevelM": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 8.05,
+        "low": 7.85,
+        "unit": "m",
+        "value": 7.95,
+        "why": "the highest level datum the section prints"
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 0,
+            "z": 0
+          },
+          {
+            "x": 0,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 7.9,
+            "z": 0
+          }
+        ]
+      },
+      "why": "a roof described as falling two ways off a ridge, in the publisher's own specification, said in 2 places on the page; pitch printed as \"40 st.\"; a 40° roof over the 7.90 m span rises 3.31 m, and the section measures 3.28 m from eaves to ridge — 0.03 m apart"
+    },
+    {
+      "adjacentRoofIds": [
+        "roof-mass-0"
+      ],
+      "authority": "CONVENTION",
+      "confidence": 0.55,
+      "eaveLevelM": {
+        "basis": "DERIVED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 3.26,
+        "low": 2.86,
+        "unit": "m",
+        "value": 3.06,
+        "why": "the top of this body’s own walls, from the section’s level datums"
+      },
+      "evidenceIds": [
+        "metric-level-736b8c6e31",
+        "metric-level-70deeedf63",
+        "metric-level-c977b973a3",
+        "metric-level-714c90d304"
+      ],
+      "id": "roof-mass-1",
+      "kind": "FLAT",
+      "massId": "mass-1",
+      "observationIds": [],
+      "overhangM": {
+        "basis": "ASSUMED",
+        "evidenceIds": [],
+        "high": 0.3,
+        "low": 0,
+        "unit": "m",
+        "value": 0,
+        "why": "nothing states an eaves projection for this body"
+      },
+      "ridgeLevelM": {
+        "basis": "ASSUMED",
+        "evidenceIds": [],
+        "high": 3.26,
+        "low": 2.86,
+        "unit": "m",
+        "value": 3.06,
+        "why": "a level roof has no ridge above its eaves"
+      },
+      "ring": {
+        "points": [
+          {
+            "x": 7.9,
+            "z": 5.1
+          },
+          {
+            "x": 7.9,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 12.61
+          },
+          {
+            "x": 12.05,
+            "z": 5.1
+          }
+        ]
+      },
+      "why": "a body reaching only storey 0, below the main roof, with nothing in the sources describing its own: taken as level, which is the commonest roof over an attached single-storey body and is recorded here as a convention rather than a reading"
+    }
+  ],
+  "schema": "buildapp.structural-layout-hypothesis-set",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+  "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "storeys": [
+    {
+      "confidence": 0.9,
+      "elevation": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 0.05,
+        "low": -0.05,
+        "unit": "m",
+        "value": 0,
+        "why": "a level datum printed on the section"
+      },
+      "footprintRegionIds": [
+        "footprint-0-region-built-0-1",
+        "footprint-0-region-built-6-2",
+        "zone-min_z",
+        "zone-max_z"
+      ],
+      "frameIds": [
+        "frame-asset-rzut-19a11bc745-33a5ff46cd"
+      ],
+      "height": {
+        "basis": "DERIVED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 3.11,
+        "low": 3.01,
+        "unit": "m",
+        "value": 3.06,
+        "why": "the gap between this storey’s datum and the next"
+      },
+      "id": "storey-0",
+      "index": 0,
+      "why": "the plan the building's coordinates are taken from: the dimension chains' own span, with 1746 px of the 2328 px of wall found lying inside it"
+    },
+    {
+      "confidence": 0.712134,
+      "elevation": {
+        "basis": "MEASURED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 3.11,
+        "low": 3.01,
+        "unit": "m",
+        "value": 3.06,
+        "why": "a level datum printed on the section"
+      },
+      "footprintRegionIds": [
+        "footprint-1-mass-0"
+      ],
+      "frameIds": [
+        "frame-asset-rzut-117027f690-fed2722c38"
+      ],
+      "height": {
+        "basis": "DERIVED",
+        "evidenceIds": [
+          "metric-level-736b8c6e31",
+          "metric-level-70deeedf63",
+          "metric-level-c977b973a3",
+          "metric-level-714c90d304"
+        ],
+        "high": 1.66,
+        "low": 1.56,
+        "unit": "m",
+        "value": 1.61,
+        "why": "the gap between this storey’s datum and the next"
+      },
+      "id": "storey-1",
+      "index": 1,
+      "registeredFrom": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "why": "registered onto the plan below: 60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
+    }
+  ],
+  "traces": [
+    {
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-1d2590265b",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "trace-footprint-0-region-built-0-1-1d4a7b0e18",
+      "itemId": "footprint-0-region-built-0-1",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 58,
+        "x1": 357,
+        "y0": 259,
+        "y1": 735.5
+      },
+      "what": "a walled region of the base plan",
+      "why": "cut from the plan between grid lines the dimension chains and wall bands agree on: 18 adjacent built cells merged"
+    },
+    {
+      "evidenceIds": [
+        "metric-dimension-0193723f04",
+        "metric-dimension-07b24ca33a",
+        "metric-dimension-4af572f280",
+        "metric-dimension-98bf0f74d5",
+        "metric-dimension-b8faf29e24",
+        "metric-dimension-c7e4ed94b9",
+        "metric-dimension-d1422a5b67"
+      ],
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "trace-footprint-0-region-built-6-2-5f6c75b006",
+      "itemId": "footprint-0-region-built-6-2",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 357,
+        "x1": 514,
+        "y0": 452,
+        "y1": 735.5
+      },
+      "what": "a walled region of the base plan",
+      "why": "cut from the plan between grid lines the dimension chains and wall bands agree on: 6 adjacent built cells merged"
+    },
+    {
+      "evidenceIds": [],
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "trace-footprint-1-mass-0-7333ab8635",
+      "itemId": "footprint-1-mass-0",
+      "observationIds": [],
+      "pixelRect": {
+        "x0": 50,
+        "x1": 335.5,
+        "y0": 193.5,
+        "y1": 671.5
+      },
+      "what": "the attic storey over this body",
+      "why": "60% of this plan's wall lands on wall at the scale that makes this plan the size of region-built-0-1 (1.022), flush at its min x face and flush at its max z face of region-built-0-1, covering 66% of the building below"
+    }
+  ],
+  "unresolved": [
+    {
+      "frameIds": [],
+      "id": "gap-roof-kind-mass-1-dfaddbcd7c",
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-1"
+    }
+  ]
+}
+

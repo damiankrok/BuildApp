@@ -34,6 +34,15 @@ export const SCENES: readonly SceneSpec[] = [
     build: createMarcowkiReferenceBuilding,
   },
   {
+    // The current automatic candidate: analyzer v2 after the exterior closure
+    // of BUILDAPP-03Y. Listed first among the candidates because it is the one
+    // under review; the earlier ones follow for comparison.
+    key: 'marcowki-auto-v3',
+    title: 'Marcówki (auto v3)',
+    subtitle: 'Analyzer v2 with exterior closure: joins, roof edges, balcony, terraces — a candidate, not final',
+    build: () => modelOf('marcowki-auto-v3'),
+  },
+  {
     // The automatic candidate, replayed from its sealed program. The phone
     // shows the building that was sealed and evaluated, not whatever a solver
     // running on a laptop produced this afternoon.

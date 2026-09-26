@@ -83,6 +83,38 @@ viewport never builds building geometry (architecture tests grep for both).
 - `window.__buildworld` exposes the store and the visible mesh/object lists
   for browser verification.
 
+## Styles
+
+The toolbar's **style** select (`style-select`) sets how the viewport draws.
+It is viewer state, not model state: it lives in `renderStyleStore`
+(`use-store.ts`), is remembered per browser, never enters the undo history or
+a saved file, and survives a model switch. Switching style restyles the live
+build in place, changing materials and edge overlays only. Nothing is
+recompiled, and styling never changes geometry.
+
+- **Construction** (default), for diagnosis: part colours, the model's own
+  material on structural parts, and edge lines on walls, roofs, trims, slabs
+  and terraces.
+- **Clay**, for diagnosing massing and openings: one neutral on every opaque
+  surface, with glazing still translucent.
+- **Architectural**, for owner review: every mesh is placed in a semantic
+  group and coloured from the shared `architectural-v1` palette. The adapter
+  holds a copy of `packages/mobile-scene/src/semantics.ts`, and
+  `semantics.test.ts` proves the two equal. The groups are main, secondary
+  and interior wall; roof, flat roof and roof trim; window glass and frame;
+  door and garage door; slab, balcony slab and terrace surface; railing;
+  facade frame; chimney; rooflight; stair; room; other. The values are a
+  luminance ladder, so adjacent elements never blend. Structural groups also
+  get a thin, 0.35-opacity feature-edge overlay (`EdgesGeometry`, 20° crease).
+  An overlay is built when first shown and released when hidden or rebuilt.
+  The adapter sees meshes and materials, not objects, so it places groups by
+  part and material name; the mobile bundle's derivation reads the model.
+
+No style thickens outlines, colours objects individually or adds a
+screen-space pass. Glazing stays translucent in every style.
+`window.__buildworld.probe()` reports the style, the live edge overlays and
+each group's material state; `e2e/styles.spec.ts` uses it.
+
 ## Panels
 
 - **Toolbar**: view presets, Undo/Redo (also Ctrl+Z / Ctrl+Y), Save JSON

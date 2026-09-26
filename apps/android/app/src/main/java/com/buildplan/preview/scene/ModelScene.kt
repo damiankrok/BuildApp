@@ -50,6 +50,18 @@ class ScenePart(
     /** First vertex index of this part within the object's buffers. */
     val first: Int,
     val count: Int,
+    /**
+     * The styling group of this primitive: the bundle's own `semanticGroup`
+     * when it names one this build knows, else derived from the part (older
+     * bundles carry no group). Used by the Architectural style only.
+     */
+    val semanticGroup: SemanticGroup = SemanticGroup.derive(part),
+    /**
+     * The group exactly as the bundle wrote it, or null for an older bundle.
+     * Looked up in `styling.groups` first, so a group added to the palette
+     * after this build still draws in the colour the exporter chose.
+     */
+    val rawSemanticGroup: String? = null,
 )
 
 /** The compiler's geometry-part vocabulary, with a fallback that never throws. */
@@ -60,6 +72,10 @@ enum class GeometryPart {
     SLAB, ROOF, ROOF_REVEAL, ROOFLIGHT_FRAME, ROOFLIGHT_GLASS,
     BALCONY, RAILING_POST, RAILING_RAIL, RAILING_INFILL,
     CHIMNEY, ROOM_FLOOR, STAIR_PLACEHOLDER, STAIR_STEP, SURFACE_REGION, LINEAR_SOLID,
+    /** A terrace platform: an exterior floor at or near the ground, distinct from a slab. */
+    TERRACE,
+    /** A roof edge member compiled with its roof: a verge board or a fascia. */
+    ROOF_TRIM,
     OTHER;
 
     /** Glazing and markers read through; they blend and never cast shadows. */
@@ -70,6 +86,98 @@ enum class GeometryPart {
     companion object {
         private val byName = entries.associateBy { it.name }
         fun of(raw: String): GeometryPart = byName[raw] ?: OTHER
+    }
+}
+
+/**
+ * The styling vocabulary between a part and an object, mirroring
+ * `SemanticGroup` in `packages/mobile-scene/src/semantics.ts`: coarse enough
+ * that a palette can give every group a deliberately separated value, fine
+ * enough that what a person tells apart on a drawing — main wall, secondary
+ * wall, trim, glass, frame, roof, flat roof, terrace — stays apart on screen.
+ *
+ * The exporter derives each mesh's group from the model and writes it into
+ * the bundle; that is the authoritative placement. `derive` is only the
+ * fallback for bundles exported before groups existed, and reads what a
+ * bundle always has: the part, the material's name, and the other parts of
+ * the same object. It never reads a coordinate and never names a building.
+ */
+enum class SemanticGroup {
+    WALL_MAIN,
+    WALL_SECONDARY,
+    WALL_INTERIOR,
+    ROOF_MAIN,
+    FLAT_ROOF,
+    ROOF_TRIM,
+    WINDOW_GLASS,
+    WINDOW_FRAME,
+    DOOR,
+    GARAGE_DOOR,
+    SLAB,
+    BALCONY_SLAB,
+    RAILING,
+    FACADE_FRAME,
+    TERRACE_SURFACE,
+    CHIMNEY,
+    ROOFLIGHT,
+    STAIR,
+    ROOM,
+    OTHER;
+
+    companion object {
+        private val byName = entries.associateBy { it.name }
+        private val INTERIOR_MATERIAL = Regex("PARTITION|INTERIOR")
+        private val FLAT_MATERIAL = Regex("MEMBRANE|FLAT")
+        private val GLASS_MATERIAL = Regex("GLASS|GLAZ")
+
+        /** The group a bundle names, or null for none or a name this build does not know. */
+        fun of(raw: String?): SemanticGroup? = raw?.let { byName[it] }
+
+        /**
+         * The group of one primitive when the bundle does not say.
+         *
+         * `materialText` is the material's id and name, when the model gave the
+         * object a material: a "flat roof membrane" or a "partition" stated as
+         * a finish is the only hint an older bundle carries. `objectParts`
+         * tells a sectional door (solid panels, no leaf, no glazing) from a
+         * door you walk through.
+         */
+        fun derive(
+            part: GeometryPart,
+            materialText: String = "",
+            objectParts: Set<GeometryPart> = emptySet(),
+        ): SemanticGroup {
+            val material = materialText.uppercase()
+            return when (part) {
+                GeometryPart.WALL, GeometryPart.WALL_REVEAL ->
+                    if (INTERIOR_MATERIAL.containsMatchIn(material)) WALL_INTERIOR else WALL_MAIN
+                GeometryPart.ROOF, GeometryPart.ROOF_REVEAL ->
+                    if (FLAT_MATERIAL.containsMatchIn(material)) FLAT_ROOF else ROOF_MAIN
+                GeometryPart.ROOF_TRIM -> ROOF_TRIM
+                GeometryPart.WINDOW_GLASS, GeometryPart.DOOR_GLASS, GeometryPart.ROOFLIGHT_GLASS -> WINDOW_GLASS
+                GeometryPart.WINDOW_FRAME, GeometryPart.WINDOW_MULLION -> WINDOW_FRAME
+                GeometryPart.DOOR_FRAME, GeometryPart.DOOR_LEAF, GeometryPart.DOOR_PANEL, GeometryPart.DOOR_HANDLE -> {
+                    val sectional = GeometryPart.DOOR_PANEL in objectParts &&
+                        GeometryPart.DOOR_LEAF !in objectParts &&
+                        GeometryPart.DOOR_GLASS !in objectParts
+                    if (sectional) GARAGE_DOOR else DOOR
+                }
+                GeometryPart.SLAB -> SLAB
+                GeometryPart.BALCONY -> BALCONY_SLAB
+                GeometryPart.TERRACE -> TERRACE_SURFACE
+                GeometryPart.RAILING_POST, GeometryPart.RAILING_RAIL -> RAILING
+                GeometryPart.RAILING_INFILL -> if (GLASS_MATERIAL.containsMatchIn(material)) WINDOW_GLASS else RAILING
+                GeometryPart.CHIMNEY -> CHIMNEY
+                GeometryPart.ROOFLIGHT_FRAME -> ROOFLIGHT
+                GeometryPart.STAIR_STEP, GeometryPart.STAIR_PLACEHOLDER -> STAIR
+                GeometryPart.ROOM_FLOOR -> ROOM
+                // A finish region is a secondary surface of its wall: it reads as a band.
+                GeometryPart.SURFACE_REGION -> WALL_SECONDARY
+                // Free members — portal heads, boards not compiled with a roof — frame the facade.
+                GeometryPart.LINEAR_SOLID -> FACADE_FRAME
+                GeometryPart.OTHER -> OTHER
+            }
+        }
     }
 }
 
@@ -85,6 +193,9 @@ class ModelScene(
     val materials: Map<String, BundleMaterial>,
 ) {
     private val index = objects.associateBy { it.id }
+
+    /** The bundle's palette block, or null for a bundle exported before it existed. */
+    val styling: BundleStyling? get() = bundle.styling
 
     fun objectById(id: String?): SceneObject? = if (id == null) null else index[id]
 
@@ -150,7 +261,10 @@ class ModelScene(
             val metadata = bundle.objects.associateBy { it.id }
             val objects = ArrayList<SceneObject>(meshesByObject.size)
 
+            val materialsById = bundle.materials.associateBy { it.id }
+
             for ((objectId, meshes) in meshesByObject) {
+                val objectParts = meshes.mapTo(HashSet()) { GeometryPart.of(it.part) }
                 val triangles = meshes.sumOf { it.triangleCount }
                 val vertices = triangles * 3
                 val positions = FloatArray(vertices * 3)
@@ -180,13 +294,20 @@ class ModelScene(
                         i += 3
                     }
 
+                    val part = GeometryPart.of(mesh.part)
                     parts.add(
                         ScenePart(
-                            part = GeometryPart.of(mesh.part),
+                            part = part,
                             rawPart = mesh.part,
                             materialId = mesh.materialId,
                             first = vertexCursor,
                             count = mesh.triangleCount * 3,
+                            semanticGroup = SemanticGroup.of(mesh.semanticGroup) ?: SemanticGroup.derive(
+                                part,
+                                mesh.materialId?.let { id -> "$id ${materialsById[id]?.name ?: ""}" } ?: "",
+                                objectParts,
+                            ),
+                            rawSemanticGroup = mesh.semanticGroup,
                         ),
                     )
                     vertexCursor += mesh.triangleCount * 3

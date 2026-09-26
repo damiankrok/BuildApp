@@ -41,6 +41,10 @@ export type GeometryPart =
   | 'STAIR_STEP'
   | 'SURFACE_REGION'
   | 'LINEAR_SOLID'
+  /** A terrace platform: an exterior floor at or near the ground datum, distinct from a slab. */
+  | 'TERRACE'
+  /** A roof edge member compiled with its roof: a verge board along a rake or a fascia along an eave. */
+  | 'ROOF_TRIM'
 
 export type CompiledMesh = {
   /** The semantic object this geometry belongs to; what selection resolves to. */

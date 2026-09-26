@@ -104,6 +104,16 @@ jobs:
     name: Android / APK
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    env:
+      # Optional private preview signing identity. These are empty unless the
+      # repository defines secrets of the same names, and the Gradle script
+      # treats empty as unset: the APKs are then signed with the committed
+      # preview key (apps/android/keystore/README.md), which is what gives
+      # every CI build the same signature and lets it install over the last.
+      BUILDPLAN_PREVIEW_KEYSTORE_BASE64: ${{ secrets.BUILDPLAN_PREVIEW_KEYSTORE_BASE64 }}
+      BUILDPLAN_PREVIEW_KEYSTORE_PASSWORD: ${{ secrets.BUILDPLAN_PREVIEW_KEYSTORE_PASSWORD }}
+      BUILDPLAN_PREVIEW_KEY_ALIAS: ${{ secrets.BUILDPLAN_PREVIEW_KEY_ALIAS }}
+      BUILDPLAN_PREVIEW_KEY_PASSWORD: ${{ secrets.BUILDPLAN_PREVIEW_KEY_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -132,15 +142,37 @@ jobs:
         run: git diff --exit-code -- apps/android/app/src/main/assets/scenes
       - name: Android JVM tests
         run: npm run android:test
+      - name: Private preview signing key (only when the secret is defined)
+        if: env.BUILDPLAN_PREVIEW_KEYSTORE_BASE64 != ''
+        run: |
+          printf '%s' "$BUILDPLAN_PREVIEW_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/preview.keystore"
+          echo "BUILDPLAN_PREVIEW_KEYSTORE=$RUNNER_TEMP/preview.keystore" >> "$GITHUB_ENV"
       - name: Assemble preview APKs
+        # versionCode = 1000 + GITHUB_RUN_NUMBER and versionName = 0.<run>.0-preview
+        # are derived by app/build.gradle.kts from the environment GitHub sets;
+        # nothing to pass here. The result is signed with the preview key.
         run: npm run android:assembleDebug
+      - name: Verify the signer and record the preview version
+        run: |
+          apps/android/tools/verify-preview-signature.sh
+          {
+            echo '### BuildPlan Model Preview APKs'
+            echo
+            echo 'Signed with the preview key: a phone with an earlier preview build installs this one as an update.'
+            echo
+            echo '```'
+            cat apps/android/app/build/preview-apks/VERSION.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload installable APKs
         uses: actions/upload-artifact@v4
         with:
           name: buildplan-model-preview-apks
           if-no-files-found: error
           retention-days: 30
-          path: apps/android/app/build/preview-apks/*.apk
+          path: |
+            apps/android/app/build/preview-apks/*.apk
+            apps/android/app/build/preview-apks/VERSION.txt
 
   dependency-security:
     name: Dependency security (advisory)

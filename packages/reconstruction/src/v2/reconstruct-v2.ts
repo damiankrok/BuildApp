@@ -41,7 +41,11 @@ import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { solvePerspectiveCamera } from './camera.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
-import type { BuildingV2, MassV2, ReturnWallV2 } from './building.js'
+import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
+import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeVerges, snapReturnsToBodyFaces } from './assembly-closure.js'
+import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
+import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
+import { readFrameTones, readMassTones } from './tones.js'
 import { featureGraphViolations, sealFeatureGraph } from './graph.js'
 import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, ProvenanceStatus, SolvedFeature, SourceSighting, ViewFamily } from './graph.js'
 import { ledgerViolations, sealLedger } from './ledger.js'
@@ -67,6 +71,8 @@ export type ReconstructionV2Options = {
   frameFilter?: (frame: SourceCoordinateFrame) => boolean
   /** Diagnostic lines from the readers, for a developer watching a run; never part of the result. */
   debug?: (message: string) => void
+  /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
+  modelId?: string
 }
 
 export type ReconstructionV2Result = {
@@ -85,6 +91,8 @@ export type ReconstructionV2Result = {
   steps: SolverStep[]
   unresolved: UnresolvedCandidate[]
   violations: { graph: string[]; ledger: string[] }
+  /** Every decision the assembly closure took, with its reason. */
+  closure: ClosureNote[]
 }
 
 type Ctx = {
@@ -363,7 +371,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const rsid = sighting(entry.plan.frame, `return wall ink in the ${side.toLowerCase()} zone`, r.support / r.scanLines, [], r.pixelRect)
         const returnFeature = feature('RETURN_WALL', id, { from: { value: r.from, low: r.from - 0.04, high: r.from + 0.04 }, to: { value: r.to, low: r.to - 0.04, high: r.to + 0.04 }, thickness: { value: r.thicknessM, low: r.thicknessM - 0.05, high: r.thicknessM + 0.05 } }, [rsid], 'SOURCE_DERIVED', `wall-thick ink on ${r.support} of ${r.scanLines} scan lines across the zone`, { storeyIndex: index, hostId: recessFeature, uncertaintyM: 0.04 })
         relate('PART_OF', returnFeature, recessFeature, 'a return of the recess')
-        returns.push({ id, side, storeyIndex: index, start: { x: round6(start.x), z: round6(start.z) }, end: { x: round6(end.x), z: round6(end.z) }, thicknessM: r.thicknessM, recessId: topology.id, featureId: returnFeature, provenance: 'SOURCE_DERIVED', why: `a ${r.thicknessM.toFixed(2)} m return standing in the ${topology.depthM.toFixed(2)} m ${side.toLowerCase()} zone on the storey ${index} plan` })
+        const occupied: [number, number] = outerAtLow ? [round6(faceAt), round6(faceAt + r.thicknessM)] : [round6(faceAt - r.thicknessM), round6(faceAt)]
+        returns.push({ id, side, storeyIndex: index, start: { x: round6(start.x), z: round6(start.z) }, end: { x: round6(end.x), z: round6(end.z) }, thicknessM: r.thicknessM, alongInterval: occupied, recessId: topology.id, featureId: returnFeature, provenance: 'SOURCE_DERIVED', why: `a ${r.thicknessM.toFixed(2)} m return standing in the ${topology.depthM.toFixed(2)} m ${side.toLowerCase()} zone on the storey ${index} plan` })
       })
     }
   }
@@ -672,7 +681,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
         const featureId = feature('BALCONY', id, { from: { value: extent.from, low: extent.from - 0.1, high: extent.from + 0.1 }, to: { value: extent.to, low: extent.to - 0.1, high: extent.to + 0.1 }, topY: { value: topY, low: topY - 0.05, high: topY + 0.05 }, thickness: { value: thickness, low: thickness - 0.08, high: thickness + 0.08 } }, sids, 'IMAGE_METRIC_REGISTERED', `${fascia.why}; the slab top is the storey floor`, { storeyIndex: recess.storeyIndex, uncertaintyM: 0.05, unresolvedProperties: ['slab section (fascia only)'] })
         const z0 = recess.side === 'FRONT' ? recess.mouthAt : recess.backAt
         const z1 = recess.side === 'FRONT' ? recess.backAt : recess.mouthAt
-        balconies.push({ id, kind: 'BALCONY', storeyIndex: recess.storeyIndex, x0: extent.from, z0: Math.min(z0, z1), x1: extent.to, z1: Math.max(z0, z1), topY, thicknessM: thickness, fascia, featureId, provenance: 'IMAGE_METRIC_REGISTERED', why: fascia.why })
+        balconies.push({ id, kind: 'BALCONY', side: recess.side, storeyIndex: recess.storeyIndex, x0: extent.from, z0: Math.min(z0, z1), x1: extent.to, z1: Math.max(z0, z1), topY, thicknessM: thickness, fascia, featureId, provenance: 'IMAGE_METRIC_REGISTERED', why: fascia.why })
         const rail = readRailing(v.raster, v.view, { along0: extent.from, along1: extent.to }, topY, recess.mouthAt)
         if (rail) {
           const rid = `railing-${recess.side.toLowerCase()}-${recess.storeyIndex}`
@@ -693,27 +702,43 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           const pf = feature('FACADE_MEMBER', pid, { y0: { value: fascia.y[0], low: fascia.y[0] - 0.05, high: fascia.y[0] + 0.05 }, y1: { value: fascia.y[1], low: fascia.y[1] - 0.05, high: fascia.y[1] + 0.05 } }, sids, 'SOURCE_CORROBORATED', `the fascia band continues across ${m.id}’s zone at the same level: the projecting roof’s edge`, { uncertaintyM: 0.05 })
           relate('CONTINUES_AS', featureId, pf, 'the balcony fascia continues as the portal head')
           relate('SUPPORTS', m.featureId, pf, 'the attached body carries the head')
-          portalHeads.push({ id: pid, massId: m.id, x0: m.x0, x1: m.x1, z0: roof.footprint.z0, z1: lower ? lower.backAt : roof.footprint.z0 + 1, y0: fascia.y[0], y1: fascia.y[1], featureId: pf, provenance: 'SOURCE_CORROBORATED', why: `the roof of ${m.id} projects over its zone; its edge is the ${(fascia.y[1] - fascia.y[0]).toFixed(2)} m band` })
+          portalHeads.push({ id: pid, massId: m.id, x0: m.x0, x1: m.x1, z0: roof.footprint.z0, z1: lower ? lower.backAt : roof.footprint.z0 + 1, y0: fascia.y[0], y1: fascia.y[1], continuesFromId: id, featureId: pf, provenance: 'SOURCE_CORROBORATED', why: `the roof of ${m.id} projects over its zone; its edge is the ${(fascia.y[1] - fascia.y[0]).toFixed(2)} m band` })
           assemblies.push({ id: `assembly-portal-${m.id}`, facadeId: recess.side, kind: 'PORTAL_FRAME', memberHypothesisIds: [pf, featureId, ...returns.filter((r) => r.side === recess.side && r.storeyIndex === 0).map((r) => r.featureId)], planeOffsets: {}, evidenceIds: sids, continuityRelations: [{ from: featureId, to: pf, kind: 'CONTINUES_AS' }], confidence: 0.7, why: 'the balcony fascia, the projecting roof edge and the ground-storey returns frame the portal' })
         }
         break
       }
     }
   }
-  // Terraces: the recess floors at the ground storey, from the floor to the terrain datum.
+  // Terraces: the recess floors at the ground storey, and the outlined platform beyond the mouth where the plan draws one.
+  const terraces: TerraceV2[] = []
+  const groundPlan = planByStorey.get(0)
   for (const recess of recesses.filter((r) => r.storeyIndex === 0)) {
     const l = levelOf(0)
     if (!l) continue
+    const ax = recess.side === 'FRONT' || recess.side === 'REAR'
     for (const open of recess.open) {
       const id = `terrace-${recess.side.toLowerCase()}-${Math.round(open.from * 100)}`
-      const plinth = terrain !== undefined ? round6(l.elevation - terrain) : 0.2
-      const sids = sectionFrame && terrain !== undefined ? [sighting(sectionFrame, 'terrain datum', 0.8)] : []
-      const featureId = feature('BALCONY', id, { plinth: { value: plinth, low: plinth - 0.05, high: plinth + 0.05 } }, sids, terrain !== undefined ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING', 'the recess floor at the storey level, standing on the plinth to the terrain', { storeyIndex: 0, unresolvedProperties: terrain === undefined ? ['plinth'] : [] })
-      const z0 = recess.side === 'FRONT' ? recess.mouthAt : recess.side === 'REAR' ? recess.backAt : main.z0
-      const z1 = recess.side === 'FRONT' ? recess.backAt : recess.side === 'REAR' ? recess.mouthAt : main.z1
-      const x0 = recess.side === 'WEST' ? recess.mouthAt : recess.side === 'EAST' ? recess.backAt : open.from
-      const x1 = recess.side === 'WEST' ? recess.backAt : recess.side === 'EAST' ? recess.mouthAt : open.to
-      balconies.push({ id, kind: 'TERRACE', storeyIndex: 0, x0: round6(Math.min(x0, x1)), z0: round6(Math.min(z0, z1)), x1: round6(Math.max(x0, x1)), z1: round6(Math.max(z0, z1)), topY: l.elevation, thicknessM: plinth, featureId, provenance: terrain !== undefined ? 'SOURCE_DERIVED' : 'ASSUMED_FOR_RENDERING', why: 'the floor of the recess' })
+      const floorRect = ax ? { x0: open.from, x1: open.to, z0: Math.min(recess.mouthAt, recess.backAt), z1: Math.max(recess.mouthAt, recess.backAt) } : { x0: Math.min(recess.mouthAt, recess.backAt), x1: Math.max(recess.mouthAt, recess.backAt), z0: open.from, z1: open.to }
+      // The platform beyond the mouth, across the recess's whole span (returns included).
+      const ext = groundPlan ? readTerraceExtension(groundPlan.raster, groundPlan.frame, recess.side, recess.mouthAt, [recess.spanFrom, recess.spanTo]) : undefined
+      // A platform that would run into another body is not this terrace's.
+      const extClear = ext && !masses.some((m) => {
+        const far = recess.mouthAt + (recess.side === 'FRONT' || recess.side === 'WEST' ? -1 : 1) * ext.reach
+        const c0 = Math.min(recess.mouthAt, far)
+        const c1 = Math.max(recess.mouthAt, far)
+        return ax ? m.x0 < ext.to - 0.05 && m.x1 > ext.from + 0.05 && m.z0 < c1 - 0.05 && m.z1 > c0 + 0.05 : m.z0 < ext.to - 0.05 && m.z1 > ext.from + 0.05 && m.x0 < c1 - 0.05 && m.x1 > c0 + 0.05
+      })
+      const extension = ext && extClear ? ext : undefined
+      const polygon = terracePolygon(recess.side, recess.mouthAt, recess.backAt, [open.from, open.to], extension)
+      const drawn = groundPlan ? drawnShareOf(groundPlan.raster, groundPlan.frame, floorRect) : 0
+      const plinth = terrain !== undefined ? round6(l.elevation - terrain) : 0.15
+      const sids = groundPlan ? [sighting(groundPlan.plan.frame, extension ? 'the recess floor and the outlined platform beyond its mouth' : 'the recess floor', extension ? 0.8 : 0.6)] : []
+      if (sectionFrame && terrain !== undefined) sids.push(sighting(sectionFrame, 'terrain datum', 0.8))
+      const massIds = masses.filter((m) => m.storeys.includes(0) && (recess.side === 'FRONT' ? Math.abs(m.z0 - recess.backAt) < 0.1 && m.x0 < open.to && m.x1 > open.from : recess.side === 'REAR' ? Math.abs(m.z1 - recess.backAt) < 0.1 && m.x0 < open.to && m.x1 > open.from : recess.side === 'WEST' ? Math.abs(m.x0 - recess.backAt) < 0.1 && m.z0 < open.to && m.z1 > open.from : Math.abs(m.x1 - recess.backAt) < 0.1 && m.z0 < open.to && m.z1 > open.from)).map((m) => m.id)
+      const provenance: ProvenanceStatus = 'SOURCE_DERIVED'
+      const featureId = feature('TERRACE', id, { topY: { value: l.elevation, low: l.elevation - 0.02, high: l.elevation + 0.02 }, thickness: { value: plinth, low: plinth - 0.05, high: plinth + 0.05 }, ...(extension ? { reach: { value: extension.reach, low: extension.reach - 0.05, high: extension.reach + 0.05 } } : {}) }, sids, provenance, extension ? `the recess floor, continuing ${extension.reach.toFixed(2)} m past the mouth to the outline the plan draws (${extension.why})` : 'the recess floor at the threshold', { storeyIndex: 0, unresolvedProperties: terrain === undefined ? ['thickness (the terrain datum was not read)'] : [], parameterProvenance: { thickness: terrain === undefined ? 'ASSUMED_FOR_RENDERING' : 'SOURCE_DERIVED' } })
+      terraces.push({ id, storeyIndex: 0, side: recess.side, polygon, topY: l.elevation, thicknessM: plinth, surface: extension || drawn >= 0.3 ? 'PAVED' : 'UNKNOWN', edge: plinth > 0.05 ? 'PLINTH' : 'FLUSH', massIds, ...(extension && groundPlan ? { extension: { from: extension.from, to: extension.to, reach: extension.reach, frameId: groundPlan.plan.frame.id, why: extension.why } } : {}), featureId, provenance, why: extension ? `the floor of the ${recess.side.toLowerCase()} recess and the platform the plan outlines beyond it` : `the floor of the ${recess.side.toLowerCase()} recess` })
+      for (const m of massIds) relate('MEETS_HOST', featureId, masses.find((x) => x.id === m)?.featureId ?? m, 'the terrace lies against this body at its threshold')
     }
   }
   step({ stage: 'facade', what: 'verge members, balconies, railings, portal heads', method: 'DISCRETE_SELECTION', detail: `${verges.length} verge members, ${balconies.filter((b) => b.kind === 'BALCONY').length} balconies, ${railings.length} railings, ${portalHeads.length} portal heads, ${assemblies.length} assemblies`, inputs: views.length, outputs: verges.length + balconies.length + railings.length + portalHeads.length })
@@ -779,9 +804,77 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
 
   // ---------------------------------------------------------------------------
+  // I2. assembly closure: how the members meet
+  // ---------------------------------------------------------------------------
+  const closureNotes: ClosureNote[] = []
+  {
+    const snapped = snapReturnsToBodyFaces(returns, masses)
+    returns.splice(0, returns.length, ...snapped.returns)
+    closureNotes.push(...snapped.notes)
+    const plansForClosure = new Map([...planByStorey].map(([i, e]) => [i, { frame: e.frame, raster: e.raster, frameId: e.plan.frame.id }]))
+    const bal = closeBalconies({ balconies, returns, recesses, levels: levelsV2, portalHeads, plans: plansForClosure, elevations: views })
+    balconies.splice(0, balconies.length, ...bal.balconies)
+    closureNotes.push(...bal.notes)
+    const rails = closeRailings(railings, balconies, recesses, bal.ends)
+    railings.splice(0, railings.length, ...rails.railings)
+    closureNotes.push(...rails.notes)
+    // A railing turning at a line the plan draws is read there too: the plan is a second source for it.
+    for (const r of railings) {
+      const b = balconies.find((x) => x.id === r.hostId)
+      const e = b ? bal.ends.get(b.id) : undefined
+      const solved = ctx.solved.find((x) => x.id === r.featureId)
+      if (!e || !solved) continue
+      for (const end of e) {
+        if (!end.turns || !end.lineFrameId) continue
+        const frame = frameById.get(end.lineFrameId)
+        if (!frame) continue
+        const sid = sighting(frame, `the balustrade drawn across the zone at ${end.at.toFixed(2)}`, 0.7)
+        const hyp = ctx.hypotheses.find((h) => h.id === solved.hypothesisId)
+        if (hyp) hyp.sightingIds.push(sid)
+        solved.sourceCoverage = { ...solved.sourceCoverage, sightings: solved.sourceCoverage.sightings + 1, independentAssets: solved.sourceCoverage.independentAssets + 1, viewFamilies: [...new Set([...solved.sourceCoverage.viewFamilies, 'PLAN' as ViewFamily])] }
+        solved.parameterProvenance = { ...solved.parameterProvenance, path: 'SOURCE_DERIVED' }
+        solved.quality = qualityLevelOf(solved)
+      }
+      if (b) relate('SUPPORTS', b.featureId, r.featureId, 'the balustrade stands on the slab it guards')
+      if ((r.path?.length ?? 2) > 2) relate('TURNS_AT', r.featureId, b?.featureId ?? r.featureId, 'the balustrade turns round the free end of the slab to the wall')
+    }
+    for (const b of balconies) {
+      for (const end of b.ends ?? []) {
+        const other = returns.find((x) => x.id === end.againstId) ?? portalHeads.find((x) => x.id === end.againstId)
+        if (!other) continue
+        relate(end.kind === 'MEETS' ? 'CONTINUES_AS' : end.kind === 'CARRIES' ? 'SUPPORTS' : 'TERMINATES_AT', b.featureId, other.featureId, end.why)
+      }
+    }
+    const vg = closeVerges(verges, recesses, returns)
+    verges.splice(0, verges.length, ...vg.verges)
+    closureNotes.push(...vg.notes)
+    for (const v of verges) {
+      const solved = ctx.solved.find((x) => x.id === v.featureId)
+      if (!solved || v.depthProvenance !== 'SOURCE_DERIVED') continue
+      solved.parameters = { ...solved.parameters, depth: { value: round6(v.depthM), low: round6(v.depthM - 0.05), high: round6(v.depthM + 0.05), unit: 'm' } }
+      solved.parameterProvenance = { ...solved.parameterProvenance, depth: 'SOURCE_DERIVED' }
+      solved.unresolvedProperties = solved.unresolvedProperties.filter((p) => p !== 'depth')
+      solved.quality = qualityLevelOf(solved)
+    }
+    const ph = closePortalHeads(portalHeads, balconies)
+    portalHeads.splice(0, portalHeads.length, ...ph.portalHeads)
+    closureNotes.push(...ph.notes)
+  }
+  // Broad tone of each body's walls, where they stand in the open on a registered render.
+  const massTones: MassToneV2[] = readMassTones(masses, views, openings, recesses, levelsV2)
+  const frameTones = readFrameTones(returns, views, levelsV2)
+  for (const t of frameTones) closureNotes.push({ subject: `${t.side.toLowerCase()} frame`, what: `returns read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
+  for (const t of massTones) {
+    const m = masses.find((x) => x.id === t.massId)
+    if (m) closureNotes.push({ subject: m.id, what: `walls read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
+  }
+  const facadeGraph = buildFacadeGraph({ returns, verges, balconies, railings, portalHeads, terraces, recesses, levels: levelsV2, ends: new Map(balconies.filter((b) => b.ends).map((b) => [b.id, (b.ends as [EndCondition, EndCondition]).map((e) => ({ ...e, railStopAt: e.at, turns: false })) as [BalconyEnd, BalconyEnd]])), roofEaveY: mainRoof?.eaveY })
+  step({ stage: 'facade', what: 'assembly closure: how the members meet', method: 'DISCRETE_SELECTION', detail: `${closureNotes.length} decisions; ${terraces.length} terrace${terraces.length === 1 ? '' : 's'}${terraces.some((t) => t.extension) ? ` (${terraces.filter((t) => t.extension).length} with a platform beyond the mouth)` : ''}; ${railings.filter((r) => (r.path?.length ?? 2) > 2).length} railing${railings.filter((r) => (r.path?.length ?? 2) > 2).length === 1 ? '' : 's'} turning; facade graph ${facadeGraph.nodes.length} nodes, ${facadeGraph.edges.length} edges`, inputs: balconies.length + railings.length + verges.length + portalHeads.length + returns.length, outputs: facadeGraph.edges.length })
+
+  // ---------------------------------------------------------------------------
   // J. emit, K. seal, L. verify, M. repair, N. quality
   // ---------------------------------------------------------------------------
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, frameTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })
@@ -796,7 +889,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     solved.provenance = 'UNRESOLVED'
     solved.unresolvedProperties = [...solved.unresolvedProperties, `not built: ${d.why}`]
   }
-  const modelId = `m-auto-v2-${options.slug}`.replace(/[^A-Za-z0-9_.:-]+/g, '-')
+  const modelId = (options.modelId ?? `m-auto-v2-${options.slug}`).replace(/[^A-Za-z0-9_.:-]+/g, '-')
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
     schemaVersion: HYPOTHESIS_SET_SCHEMA_VERSION,
@@ -905,7 +998,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

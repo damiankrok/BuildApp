@@ -1,4 +1,5 @@
 export * from './types.js'
 export * from './serialize.js'
 export * from './describe.js'
+export * from './semantics.js'
 export * from './bundle.js'

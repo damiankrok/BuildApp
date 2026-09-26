@@ -38,8 +38,8 @@
  * `roofGeometry` also exposes the roof's underside as a function of plan
  * position, which is what lets a wall die into the roof (FOLLOW_ROOF).
  */
-import { roofOpeningUndersideShift, type Level, type PlanRect, type Roof, type RoofOpening, type Vec2 } from '@buildapp/model'
-import { quadOut, triOut } from './primitives.js'
+import { roofOpeningUndersideShift, type Level, type PlanRect, type Roof, type RoofOpening, type Vec2, type RoofEdgeSide } from '@buildapp/model'
+import { quadOut, triOut, worldBox } from './primitives.js'
 import { v3, type Triangle, type Vec3 } from './types.js'
 
 export type RoofGeometry = {
@@ -60,11 +60,16 @@ export type RoofGeometry = {
   /** World y of the underside; only meaningful where `covers`. */
   undersideAt(x: number, z: number): number
   /**
-   * Plan lines across which the underside changes slope (the ridge), as
+   * Plan lines across which the underside changes slope (the ridge), or
+   * changes level (the inner edge of a verge or fascia strip), as
    * `{ axis, value }`: the line `z = value` when axis is 'Z', `x = value`
    * when axis is 'X'.
    */
   creaseLines: Array<{ axis: 'X' | 'Z'; value: number }>
+  /** The plate: the covered rectangle less the edge members' strips and the plate insets. */
+  plate: { minX: number; maxX: number; minZ: number; maxZ: number }
+  /** The strips the edge members occupy, in plan, each with the member's underside height at a point in it. */
+  memberStrips: Array<{ kind: 'VERGE' | 'FASCIA'; side: RoofEdgeSide; minX: number; maxX: number; minZ: number; maxZ: number; undersideAt: (x: number, z: number) => number }>
 }
 
 export function roofGeometry(roof: Roof, level: Level): RoofGeometry {
@@ -73,56 +78,94 @@ export function roofGeometry(roof: Roof, level: Level): RoofGeometry {
   const eaveY = level.elevation + roof.eaveOffset
   const covered = { minX: f.minX - oh, maxX: f.maxX + oh, minZ: f.minZ - oh, maxZ: f.maxZ + oh }
   const covers = (x: number, z: number): boolean => x >= covered.minX - 1e-9 && x <= covered.maxX + 1e-9 && z >= covered.minZ - 1e-9 && z <= covered.maxZ + 1e-9
-  if (roof.kind === 'FLAT') {
-    return {
-      kind: 'FLAT',
-      eaveY,
-      ridgeY: eaveY,
-      slope: 0,
-      pitchDeg: 0,
-      verticalDrop: roof.thickness,
-      covered,
-      covers,
-      topAt: () => eaveY,
-      undersideAt: () => eaveY - roof.thickness,
-      creaseLines: [],
-    }
-  }
-  const slope = Math.tan((roof.pitchDeg * Math.PI) / 180)
-  const alongX = roof.ridgeAxis === 'X'
+  const flat = roof.kind === 'FLAT'
+  const slope = flat ? 0 : Math.tan((roof.pitchDeg * Math.PI) / 180)
+  const alongX = flat ? true : roof.ridgeAxis === 'X'
   const crossMin = alongX ? f.minZ : f.minX
   const crossMax = alongX ? f.maxZ : f.maxX
   const mid = (crossMin + crossMax) / 2
   const halfSpan = (crossMax - crossMin) / 2
-  const ridgeY = eaveY + halfSpan * slope
-  const verticalDrop = roof.thickness / Math.cos((roof.pitchDeg * Math.PI) / 180)
+  const ridgeY = flat ? eaveY : eaveY + halfSpan * slope
+  const verticalDrop = flat ? roof.thickness : roof.thickness / Math.cos((roof.pitchDeg * Math.PI) / 180)
   const topAt = (x: number, z: number): number => {
+    if (flat) return eaveY
     const cross = alongX ? z : x
     return eaveY + (halfSpan - Math.abs(cross - mid)) * slope
   }
+  const plateUnderside = (x: number, z: number): number => topAt(x, z) - verticalDrop
+
+  // The edge members' strips, and what stands under each: a wall under a
+  // verge or fascia board stops at the board's underside, not the plate's.
+  const strips: RoofGeometry['memberStrips'] = []
+  const creaseLines: RoofGeometry['creaseLines'] = flat ? [] : [{ axis: alongX ? 'Z' : 'X', value: mid }]
+  const plate = { ...covered }
+  const sideOf = (side: RoofEdgeSide): { axis: 'X' | 'Z'; edge: number; inward: 1 | -1 } => (side === 'MIN_X' ? { axis: 'X', edge: covered.minX, inward: 1 } : side === 'MAX_X' ? { axis: 'X', edge: covered.maxX, inward: -1 } : side === 'MIN_Z' ? { axis: 'Z', edge: covered.minZ, inward: 1 } : { axis: 'Z', edge: covered.maxZ, inward: -1 })
+  const stripRect = (side: RoofEdgeSide, depth: number): { minX: number; maxX: number; minZ: number; maxZ: number } => {
+    const { axis, edge, inward } = sideOf(side)
+    const inner = edge + inward * depth
+    return axis === 'X' ? { minX: Math.min(edge, inner), maxX: Math.max(edge, inner), minZ: covered.minZ, maxZ: covered.maxZ } : { minX: covered.minX, maxX: covered.maxX, minZ: Math.min(edge, inner), maxZ: Math.max(edge, inner) }
+  }
+  const shrink = (side: RoofEdgeSide, by: number): void => {
+    if (side === 'MIN_X') plate.minX += by
+    else if (side === 'MAX_X') plate.maxX -= by
+    else if (side === 'MIN_Z') plate.minZ += by
+    else plate.maxZ -= by
+    const { axis, edge, inward } = sideOf(side)
+    creaseLines.push({ axis, value: edge + inward * by })
+  }
+  const verge = roof.edgeMembers?.verge
+  if (verge && !flat) {
+    for (const end of vergeEnds(roof)) {
+      strips.push({ kind: 'VERGE', side: end.side, ...stripRect(end.side, end.depth), undersideAt: (x, z) => topAt(x, z) - end.width })
+      shrink(end.side, end.depth)
+    }
+  }
+  const fascia = roof.edgeMembers?.fascia
+  if (fascia) {
+    for (const side of fascia.sides) {
+      const bottom = eaveY + fascia.topOffset - fascia.height
+      strips.push({ kind: 'FASCIA', side, ...stripRect(side, fascia.depth), undersideAt: () => bottom })
+      shrink(side, fascia.depth)
+    }
+  }
+  for (const side of ['MIN_X', 'MAX_X', 'MIN_Z', 'MAX_Z'] as const) {
+    const by = roof.plateInset?.[side === 'MIN_X' ? 'minX' : side === 'MAX_X' ? 'maxX' : side === 'MIN_Z' ? 'minZ' : 'maxZ']
+    if (by !== undefined && by > 0) shrink(side, by)
+  }
+  const inStrip = (s: RoofGeometry['memberStrips'][number], x: number, z: number): boolean => x >= s.minX - 1e-9 && x <= s.maxX + 1e-9 && z >= s.minZ - 1e-9 && z <= s.maxZ + 1e-9
+  const undersideAt = (x: number, z: number): number => {
+    let y = plateUnderside(x, z)
+    for (const strip of strips) if (inStrip(strip, x, z)) y = Math.min(y, strip.undersideAt(x, z))
+    return y
+  }
   return {
-    kind: 'GABLE',
+    kind: flat ? 'FLAT' : 'GABLE',
     eaveY,
     ridgeY,
     slope,
-    pitchDeg: roof.pitchDeg,
+    pitchDeg: flat ? 0 : roof.pitchDeg,
     verticalDrop,
     covered,
     covers,
     topAt,
-    undersideAt: (x, z) => topAt(x, z) - verticalDrop,
-    // The ridge runs along the ridge axis at the middle of the cross axis.
-    creaseLines: [{ axis: alongX ? 'Z' : 'X', value: mid }],
+    undersideAt,
+    creaseLines,
+    plate,
+    memberStrips: strips,
   }
 }
 
+export type RoofTrim = { id: string; kind: 'VERGE' | 'FASCIA'; side: RoofEdgeSide; triangles: Triangle[]; materialId?: string }
+
 export type RoofCompileOutput = {
-  /** Faces of the roof itself. */
+  /** Faces of the roof plate itself. */
   triangles: Triangle[]
   /** Reveal faces lining each cut roof opening, by opening id. */
   reveals: Map<string, Triangle[]>
   cutOpeningIds: string[]
   geometry: RoofGeometry
+  /** The edge members, one closed solid each, compiled from the same geometry as the plate they trim. */
+  trims: RoofTrim[]
 }
 
 const EPS = 1e-9
@@ -241,7 +284,9 @@ export function compileRoofTriangles(roof: Roof, level: Level, openings: readonl
   const g = roofGeometry(roof, level)
   const out: Triangle[] = []
   const reveals = new Map<string, Triangle[]>()
-  const c = g.covered
+  const trims = compileRoofTrims(roof, g)
+  // The plate bears on its walls and stops where its edge members begin.
+  const c = g.plate
   const alongX = roof.kind === 'FLAT' ? true : roof.ridgeAxis === 'X'
   const P = (along: number, cross: number, y: number): Vec3 => (alongX ? v3(along, y, cross) : v3(cross, y, along))
   const alongDir = alongX ? v3(1, 0, 0) : v3(0, 0, 1)
@@ -279,7 +324,7 @@ export function compileRoofTriangles(roof: Roof, level: Level, openings: readonl
     // the two faces across the plate
     crossFace(cross0, y1, v3(-crossDir.x, 0, -crossDir.z))
     crossFace(cross1, y1, crossDir)
-    return { triangles: out, reveals, cutOpeningIds: openings.map((o) => o.id), geometry: g }
+    return { triangles: out, reveals, cutOpeningIds: openings.map((o) => o.id), geometry: g, trims }
   }
 
   const mid = (cross0 + cross1) / 2
@@ -311,7 +356,75 @@ export function compileRoofTriangles(roof: Roof, level: Level, openings: readonl
     // Eave end face: vertical, outward along ±cross.
     crossFace(eaveCross, eaveTop, v3(crossDir.x * side, 0, crossDir.z * side))
   }
-  return { triangles: out, reveals, cutOpeningIds: openings.map((o) => o.id), geometry: g }
+  return { triangles: out, reveals, cutOpeningIds: openings.map((o) => o.id), geometry: g, trims }
+}
+
+/**
+ * The edge members as closed solids.
+ *
+ * A verge is a chevron-section board at a gable end: its top follows both
+ * slopes from eave to ridge to eave, its underside lies `width` below
+ * (vertically), it is `depth` deep along the ridge, and its outer face
+ * stands in the plane of the gable end — the plane the return walls under
+ * it share. A fascia is a plain board along a named edge, `depth` deep into
+ * the footprint, from `height` below its top to `topOffset` above the plate.
+ */
+export function compileRoofTrims(roof: Roof, g: RoofGeometry): RoofTrim[] {
+  const trims: RoofTrim[] = []
+  const members = roof.edgeMembers
+  if (!members) return trims
+  const c = g.covered
+  const flat = roof.kind === 'FLAT'
+  const alongX = flat ? true : roof.ridgeAxis === 'X'
+  if (members.verge && !flat) {
+    const v = members.verge
+    const ends = vergeEnds(roof).map((end) => ({ ...end, e: end.side === 'MIN_X' ? c.minX : end.side === 'MAX_X' ? c.maxX : end.side === 'MIN_Z' ? c.minZ : c.maxZ, inward: (end.side === 'MIN_X' || end.side === 'MIN_Z' ? 1 : -1) as 1 | -1 }))
+    const cross0 = alongX ? c.minZ : c.minX
+    const cross1 = alongX ? c.maxZ : c.maxX
+    const mid = (cross0 + cross1) / 2
+    const P = (along: number, cross: number, y: number): Vec3 => (alongX ? v3(along, y, cross) : v3(cross, y, along))
+    const topOf = (cross: number): number => (alongX ? g.topAt(0, cross) : g.topAt(cross, 0))
+    for (const end of ends) {
+      const tris: Triangle[] = []
+      const a0 = end.e
+      const a1 = end.e + end.inward * end.depth
+      const outerN = alongX ? v3(-end.inward, 0, 0) : v3(0, 0, -end.inward)
+      const innerN = v3(-outerN.x, 0, -outerN.z)
+      const t0 = topOf(cross0)
+      const tm = g.ridgeY
+      const w = end.width
+      // The chevron at along = a: two planar quads, eave-to-ridge each side.
+      const chevron = (a: number, outward: Vec3): void => {
+        quadOut(tris, P(a, cross0, t0), P(a, mid, tm), P(a, mid, tm - w), P(a, cross0, t0 - w), outward)
+        quadOut(tris, P(a, mid, tm), P(a, cross1, t0), P(a, cross1, t0 - w), P(a, mid, tm - w), outward)
+      }
+      chevron(a0, outerN)
+      chevron(a1, innerN)
+      // Top surfaces, one per slope, outward up and towards that eave.
+      const crossDir = alongX ? v3(0, 0, 1) : v3(1, 0, 0)
+      quadOut(tris, P(a0, cross0, t0), P(a1, cross0, t0), P(a1, mid, tm), P(a0, mid, tm), v3(-crossDir.x, 1, -crossDir.z))
+      quadOut(tris, P(a0, mid, tm), P(a1, mid, tm), P(a1, cross1, t0), P(a0, cross1, t0), v3(crossDir.x, 1, crossDir.z))
+      // Undersides, outward down and towards the ridge.
+      quadOut(tris, P(a0, cross0, t0 - w), P(a1, cross0, t0 - w), P(a1, mid, tm - w), P(a0, mid, tm - w), v3(crossDir.x, -1, crossDir.z))
+      quadOut(tris, P(a0, mid, tm - w), P(a1, mid, tm - w), P(a1, cross1, t0 - w), P(a0, cross1, t0 - w), v3(-crossDir.x, -1, -crossDir.z))
+      // The two eave ends: vertical quads facing out along ±cross.
+      quadOut(tris, P(a0, cross0, t0), P(a1, cross0, t0), P(a1, cross0, t0 - w), P(a0, cross0, t0 - w), v3(-crossDir.x, 0, -crossDir.z))
+      quadOut(tris, P(a0, cross1, t0), P(a1, cross1, t0), P(a1, cross1, t0 - w), P(a0, cross1, t0 - w), crossDir)
+      trims.push({ id: `${roof.id}:verge-${end.side.toLowerCase().replace('_', '-')}`, kind: 'VERGE', side: end.side, triangles: tris, materialId: v.materialId })
+    }
+  }
+  if (members.fascia) {
+    const fa = members.fascia
+    for (const side of fa.sides) {
+      const tris: Triangle[] = []
+      const top = g.eaveY + fa.topOffset
+      const bottom = top - fa.height
+      const box = side === 'MIN_X' ? { minX: c.minX, maxX: c.minX + fa.depth, minZ: c.minZ, maxZ: c.maxZ } : side === 'MAX_X' ? { minX: c.maxX - fa.depth, maxX: c.maxX, minZ: c.minZ, maxZ: c.maxZ } : side === 'MIN_Z' ? { minX: c.minX, maxX: c.maxX, minZ: c.minZ, maxZ: c.minZ + fa.depth } : { minX: c.minX, maxX: c.maxX, minZ: c.maxZ - fa.depth, maxZ: c.maxZ }
+      worldBox(tris, box.minX, box.maxX, bottom, top, box.minZ, box.maxZ)
+      trims.push({ id: `${roof.id}:fascia-${side.toLowerCase().replace('_', '-')}`, kind: 'FASCIA', side, triangles: tris, materialId: fa.materialId })
+    }
+  }
+  return trims
 }
 
 /**
@@ -418,4 +531,14 @@ export function compileRooflightFill(fill: { frameWidth: number; glassThickness:
     { part: 'ROOFLIGHT_FRAME', triangles: frame },
     { part: 'ROOFLIGHT_GLASS', triangles: glass },
   ]
+}
+
+
+/** The gable ends that carry a verge board, with each end's width and depth. */
+export function vergeEnds(roof: Roof): Array<{ side: RoofEdgeSide; width: number; depth: number }> {
+  const v = roof.edgeMembers?.verge
+  if (!v || roof.kind === 'FLAT') return []
+  if (v.ends && v.ends.length > 0) return v.ends.map((e) => ({ side: e.side, width: e.width, depth: e.depth }))
+  const sides: RoofEdgeSide[] = roof.ridgeAxis === 'X' ? ['MIN_X', 'MAX_X'] : ['MIN_Z', 'MAX_Z']
+  return sides.map((side) => ({ side, width: v.width, depth: v.depth }))
 }

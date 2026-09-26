@@ -21,6 +21,9 @@ import marcowkiAutoLayout from './marcowki-auto-layout.json' with { type: 'json'
 import marcowkiAutoV2 from './marcowki-auto-v2.json' with { type: 'json' }
 import marcowkiAutoV2Layout from './marcowki-auto-v2-layout.json' with { type: 'json' }
 import marcowkiAutoV2Residuals from './marcowki-auto-v2-residuals.json' with { type: 'json' }
+import marcowkiAutoV3 from './marcowki-auto-v3.json' with { type: 'json' }
+import marcowkiAutoV3Layout from './marcowki-auto-v3-layout.json' with { type: 'json' }
+import marcowkiAutoV3Residuals from './marcowki-auto-v3-residuals.json' with { type: 'json' }
 
 /**
  * What the analyzer-v2 verifier measured when it projected the candidate back
@@ -58,16 +61,25 @@ export type SealedCandidate = {
 /** Every candidate committed to the repository, in a fixed order. */
 export const SEALED_CANDIDATES: readonly SealedCandidate[] = [
   { id: 'marcowki-auto', label: 'Marcówki (auto)', candidate: marcowkiAuto as unknown as ReconstructionCandidate, layout: marcowkiAutoLayout as unknown as StructuralLayoutHypothesisSet },
-  // The analyzer-v2 candidate: same building, second pipeline. It is sealed
-  // beside the first rather than in its place so that the two can be put on
-  // the same screen and compared; `npm run candidates:seal-v2` copies it in
-  // from the pipeline's artefacts.
+  // The analyzer-v2 candidate as the owner first reviewed it (BUILDAPP-03X):
+  // frozen for comparison, restated under newer model schemas by
+  // `npm run candidates:reseal` only when the building it builds is unchanged.
   {
     id: 'marcowki-auto-v2',
     label: 'Marcówki (auto v2)',
     candidate: marcowkiAutoV2 as unknown as ReconstructionCandidate,
     layout: marcowkiAutoV2Layout as unknown as StructuralLayoutHypothesisSet,
     residuals: marcowkiAutoV2Residuals as unknown as SourceViewResiduals,
+  },
+  // The same analyzer after the exterior closure (BUILDAPP-03Y): joins,
+  // roof edge members, balcony assembly, terraces. `npm run candidates:seal`
+  // copies it in from the pipeline's artefacts.
+  {
+    id: 'marcowki-auto-v3',
+    label: 'Marcówki (auto v3)',
+    candidate: marcowkiAutoV3 as unknown as ReconstructionCandidate,
+    layout: marcowkiAutoV3Layout as unknown as StructuralLayoutHypothesisSet,
+    residuals: marcowkiAutoV3Residuals as unknown as SourceViewResiduals,
   },
 ]
 

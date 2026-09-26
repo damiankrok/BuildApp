@@ -118,7 +118,17 @@ describe('§25 synthetic fixtures through the v2 analyzer', () => {
     expect(r.building.returns).toHaveLength(2)
     expect(r.building.mainRoof?.coversZones).toBe(true)
     expect(r.building.mainRoof?.footprint.z0).toBe(0)
-    expect(r.building.balconies.some((b) => b.kind === 'TERRACE')).toBe(true)
+    // The loggia's floor is a first-class terrace: at the threshold, against the front facade, covering the open mouth.
+    const terrace = r.building.terraces.find((t) => t.side === 'FRONT' && t.storeyIndex === 0)
+    expect(terrace).toBeDefined()
+    expect(r.building.balconies.some((b) => b.kind === 'TERRACE')).toBe(false)
+    const xs = terrace?.polygon.map((p) => p.x) ?? []
+    const zs = terrace?.polygon.map((p) => p.z) ?? []
+    expect(Math.min(...xs)).toBeLessThan((front?.open[0].from ?? 0) + 0.1)
+    expect(Math.max(...xs)).toBeGreaterThan((front?.open[0].to ?? 0) - 0.1)
+    expect(Math.min(...zs)).toBeLessThan(0.1)
+    expect(Math.max(...zs)).toBeGreaterThan(1.5)
+    expect(r.model.terraces.find((t) => t.id === terrace?.id)).toBeDefined()
     expectOpenings(DUNMORE, r)
   }, 60_000)
 

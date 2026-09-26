@@ -3,7 +3,7 @@
  * markers and stair placeholders. Each is an independent semantic scene
  * object with its own mesh, never a painted appearance trick.
  */
-import { rectToPolygon, type Balcony, type Chimney, type Level, type Railing, type Room, type Slab, type Stair } from '@buildapp/model'
+import { rectToPolygon, type Balcony, type Chimney, type Level, type Railing, type Room, type Slab, type Stair, type Terrace } from '@buildapp/model'
 import { extrudePolygon, worldBox } from './primitives.js'
 import { extrudePlanRegion } from './region.js'
 import type { GeometryPart, Triangle } from './types.js'
@@ -65,50 +65,66 @@ const GLASS_T = 0.012
  * infill: vertical bars, a glass panel, or nothing.
  */
 export function compileRailing(r: Railing, level: Level): RailingPiece[] {
-  const dx = r.end.x - r.start.x
-  const dz = r.end.z - r.start.z
-  const L = Math.hypot(dx, dz)
-  const ux = dx / L
-  const uz = dz / L
-  // Perpendicular in plan.
-  const px = -uz
-  const pz = ux
   const y0 = level.elevation + r.baseOffset
   const y1 = y0 + r.height
   const posts: Triangle[] = []
   const rails: Triangle[] = []
   const infill: Triangle[] = []
-  const boxAlong = (out: Triangle[], s0: number, s1: number, w: number, yb: number, yt: number): void => {
-    // A box spanning s0..s1 along the railing, w wide across it, in the world
-    // frame along the railing's own axes (via extrudePolygon of its plan rect).
-    const corners = [
-      { x: r.start.x + ux * s0 + px * (w / 2), z: r.start.z + uz * s0 + pz * (w / 2) },
-      { x: r.start.x + ux * s1 + px * (w / 2), z: r.start.z + uz * s1 + pz * (w / 2) },
-      { x: r.start.x + ux * s1 - px * (w / 2), z: r.start.z + uz * s1 - pz * (w / 2) },
-      { x: r.start.x + ux * s0 - px * (w / 2), z: r.start.z + uz * s0 - pz * (w / 2) },
-    ]
-    extrudePolygon(out, corners, yb, yt)
-  }
-  const count = Math.max(1, Math.ceil(L / r.postSpacing - 1e-9))
-  const positions: number[] = []
-  for (let k = 0; k <= count; k++) positions.push((k / count) * L)
-  for (const s of positions) boxAlong(posts, Math.max(0, s - POST / 2), Math.min(L, s + POST / 2), POST, y0, y1)
-  boxAlong(rails, 0, L, RAIL_W, y1 - RAIL_H, y1)
-  if (r.infill === 'BARS') {
-    for (let k = 0; k + 1 < positions.length; k++) {
-      const s0 = positions[k] + POST / 2
-      const s1 = positions[k + 1] - POST / 2
-      const n = Math.max(0, Math.floor((s1 - s0) / BAR_STEP))
-      for (let i = 1; i <= n; i++) {
-        const s = s0 + ((s1 - s0) * i) / (n + 1)
-        boxAlong(infill, s - BAR / 2, s + BAR / 2, BAR, y0 + 0.05, y1 - RAIL_H)
-      }
+  // A turning railing is its polyline; a straight one is the two-point case
+  // of the same thing. The path's two ends are the railing's extent: the end
+  // posts stand inside it, their outer faces on the end points, so a railing
+  // drawn to a wall face meets the wall and does not enter it. Every corner
+  // has one square post centred on its vertex, not one from each run.
+  const path = r.path && r.path.length >= 2 ? r.path : [r.start, r.end]
+  for (const v of path.slice(1, -1)) worldBox(posts, v.x - POST / 2, v.x + POST / 2, y0, y1, v.z - POST / 2, v.z + POST / 2)
+  const last = path.length - 2
+  for (let seg = 0; seg + 1 < path.length; seg += 1) {
+    const a = path[seg]
+    const b = path[seg + 1]
+    const dx = b.x - a.x
+    const dz = b.z - a.z
+    const L = Math.hypot(dx, dz)
+    if (L < 1e-9) continue
+    const ux = dx / L
+    const uz = dz / L
+    // Perpendicular in plan.
+    const px = -uz
+    const pz = ux
+    const boxAlong = (out: Triangle[], s0: number, s1: number, w: number, yb: number, yt: number): void => {
+      const corners = [
+        { x: a.x + ux * s0 + px * (w / 2), z: a.z + uz * s0 + pz * (w / 2) },
+        { x: a.x + ux * s1 + px * (w / 2), z: a.z + uz * s1 + pz * (w / 2) },
+        { x: a.x + ux * s1 - px * (w / 2), z: a.z + uz * s1 - pz * (w / 2) },
+        { x: a.x + ux * s0 - px * (w / 2), z: a.z + uz * s0 - pz * (w / 2) },
+      ]
+      extrudePolygon(out, corners, yb, yt)
     }
-  } else if (r.infill === 'GLASS') {
-    for (let k = 0; k + 1 < positions.length; k++) {
-      const s0 = positions[k] + POST / 2 + 0.01
-      const s1 = positions[k + 1] - POST / 2 - 0.01
-      if (s1 > s0) boxAlong(infill, s0, s1, GLASS_T, y0 + 0.05, y1 - RAIL_H)
+    const count = Math.max(1, Math.ceil(L / r.postSpacing - 1e-9))
+    const positions: number[] = []
+    for (let k = 0; k <= count; k++) positions.push((k / count) * L)
+    // Intermediate posts, and the end posts at the path's two ends (inside
+    // the run); a corner's post is already standing.
+    if (seg === 0) boxAlong(posts, 0, POST / 2, POST, y0, y1)
+    for (const s of positions.slice(1, -1)) boxAlong(posts, s - POST / 2, s + POST / 2, POST, y0, y1)
+    if (seg === last) boxAlong(posts, L - POST / 2, L, POST, y0, y1)
+    // The rail runs end to end; at a corner the two rails stop at the faces of the corner post.
+    boxAlong(rails, seg === 0 ? 0 : POST / 2, seg === last ? L : L - POST / 2, RAIL_W, y1 - RAIL_H, y1)
+    if (r.infill === 'BARS') {
+      for (let k = 0; k + 1 < positions.length; k++) {
+        const s0 = positions[k] + POST / 2
+        const s1 = positions[k + 1] - POST / 2
+        const n = Math.max(0, Math.floor((s1 - s0) / BAR_STEP))
+        for (let i = 1; i <= n; i++) {
+          const s = s0 + ((s1 - s0) * i) / (n + 1)
+          boxAlong(infill, s - BAR / 2, s + BAR / 2, BAR, y0 + 0.05, y1 - RAIL_H)
+        }
+      }
+    } else if (r.infill === 'GLASS') {
+      for (let k = 0; k + 1 < positions.length; k++) {
+        const s0 = positions[k] + POST / 2 + 0.01
+        const s1 = positions[k + 1] - POST / 2 - 0.01
+        if (s1 > s0) boxAlong(infill, s0, s1, GLASS_T, y0 + 0.05, y1 - RAIL_H)
+      }
     }
   }
   const out: RailingPiece[] = [
@@ -117,4 +133,11 @@ export function compileRailing(r: Railing, level: Level): RailingPiece[] {
   ]
   if (infill.length > 0) out.push({ part: 'RAILING_INFILL', triangles: infill })
   return out
+}
+
+/** A terrace: its polygon extruded from `top − thickness` to `top`, one closed platform. */
+export function compileTerrace(t: Terrace, level: Level): Triangle[] | null {
+  const top = level.elevation + t.topOffset
+  const out: Triangle[] = []
+  return extrudePolygon(out, t.polygon, top - t.thickness, top) ? out : null
 }

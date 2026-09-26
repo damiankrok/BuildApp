@@ -88,7 +88,7 @@ fun ControlBar(
             MenuButton(label = "Style: ${state.style.label}", description = "Render style, currently ${state.style.label}") { dismiss ->
                 for (style in RenderStyle.entries) {
                     DropdownMenuItem(
-                        text = { Text(if (style == state.style) "${style.label}  ✓" else style.label) },
+                        text = { Text(if (style == state.style) "${style.label}  ✓   ·   ${style.description}" else "${style.label}   ·   ${style.description}") },
                         onClick = { onStyle(style); dismiss() },
                         modifier = Modifier.semantics {
                             contentDescription = "${style.label}. ${style.description}.${if (style == state.style) " Selected." else ""}"

@@ -9,6 +9,8 @@
  * evaluated, under a label that says otherwise.
  */
 import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { serializeModel } from '@buildapp/model'
 import { ReconstructionCandidateSchema, StructuralLayoutHypothesisSetSchema, verifyReplay } from '@buildapp/reconstruction'
@@ -18,18 +20,18 @@ const sha256 = (text: string): string => createHash('sha256').update(text, 'utf8
 const HEX64 = /^[0-9a-f]{64}$/
 
 describe('the sealed set', () => {
-  it('carries both Marcówki candidates, in a fixed order, under distinct ids', () => {
-    expect(SEALED_CANDIDATES.map((c) => c.id)).toEqual(['marcowki-auto', 'marcowki-auto-v2'])
-    expect(SEALED_CANDIDATES.map((c) => c.label)).toEqual(['Marcówki (auto)', 'Marcówki (auto v2)'])
+  it('carries the three Marcówki candidates, in a fixed order, under distinct ids', () => {
+    expect(SEALED_CANDIDATES.map((c) => c.id)).toEqual(['marcowki-auto', 'marcowki-auto-v2', 'marcowki-auto-v3'])
+    expect(SEALED_CANDIDATES.map((c) => c.label)).toEqual(['Marcówki (auto)', 'Marcówki (auto v2)', 'Marcówki (auto v3)'])
     expect(new Set(SEALED_CANDIDATES.map((c) => c.candidate.modelId)).size).toBe(SEALED_CANDIDATES.length)
     expect(new Set(SEALED_CANDIDATES.map((c) => c.candidate.contentHash)).size).toBe(SEALED_CANDIDATES.length)
   })
 
   it('refuses an id it does not know', () => {
-    expect(sealedCandidate('marcowki-auto-v3')).toBeUndefined()
-    expect(() => modelOf('marcowki-auto-v3')).toThrow(/no sealed candidate/)
-    expect(() => layoutOf('marcowki-auto-v3')).toThrow(/no sealed candidate/)
-    expect(() => sourceViewResidualsOf('marcowki-auto-v3')).toThrow(/no sealed candidate/)
+    expect(sealedCandidate('marcowki-auto-v4')).toBeUndefined()
+    expect(() => modelOf('marcowki-auto-v4')).toThrow(/no sealed candidate/)
+    expect(() => layoutOf('marcowki-auto-v4')).toThrow(/no sealed candidate/)
+    expect(() => sourceViewResidualsOf('marcowki-auto-v4')).toThrow(/no sealed candidate/)
   })
 })
 
@@ -102,5 +104,36 @@ describe('marcowki-auto-v2', () => {
 
   it('the first candidate carries none: its solver never verified against the views', () => {
     expect(sourceViewResidualsOf('marcowki-auto')).toBeNull()
+  })
+})
+
+describe('the reseal log', () => {
+  // `candidates:reseal` restated the frozen candidates under model schema
+  // 1.5.0. Each entry must be a pure restatement: the candidate as committed
+  // replays to the new model hash, and that model with the collections the
+  // schema step added (empty) taken out and the old version string put back
+  // hashes to the model hash the candidate was first sealed with.
+  const log = JSON.parse(readFileSync(resolve(import.meta.dirname, '../src/reseal-log.json'), 'utf8')) as Array<{ id: string; fromSchema: string; toSchema: string; from: { modelHash: string; contentHash: string }; to: { modelHash: string; contentHash: string } }>
+  const ADDED: Record<string, string[]> = { '1.5.0': ['terraces'] }
+
+  it('records every restated candidate once', () => {
+    expect(log.map((e) => e.id).sort()).toEqual(['marcowki-auto', 'marcowki-auto-v2'])
+  })
+
+  it.each(log.map((e) => [e.id, e] as const))('%s: the restated model is the sealed building byte for byte', (id, entry) => {
+    const sealed = sealedCandidate(id)
+    expect(sealed).toBeDefined()
+    if (!sealed) return
+    expect(sealed.candidate.contentHash).toBe(entry.to.contentHash)
+    expect(sealed.candidate.modelHash).toBe(entry.to.modelHash)
+    const text = serializeModel(modelOf(id))
+    expect(sha256(text)).toBe(entry.to.modelHash)
+    const older = JSON.parse(text) as Record<string, unknown>
+    for (const c of ADDED[entry.toSchema] ?? []) {
+      expect(older[c], c).toEqual([])
+      delete older[c]
+    }
+    older.schemaVersion = entry.fromSchema
+    expect(sha256(JSON.stringify(older, null, 2) + '\n')).toBe(entry.from.modelHash)
   })
 })

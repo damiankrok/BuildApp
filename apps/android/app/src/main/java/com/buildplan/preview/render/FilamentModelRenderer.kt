@@ -121,20 +121,30 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             enabled = true
             sampleCount = 4
         }
-        view.ambientOcclusionOptions = View.AmbientOcclusionOptions().apply {
-            enabled = true
-            quality = View.QualityLevel.LOW
-            // Contact darkening at reveals and under eaves is what makes the
-            // depth of an opening readable; more than that is noise.
-            intensity = 0.7f
-            radius = 0.35f
-        }
+        setAmbientOcclusion(RenderStyle.CONSTRUCTION.ambientOcclusion)
         view.setShadowingEnabled(true)
         view.dynamicResolutionOptions = View.DynamicResolutionOptions().apply {
             enabled = true
             quality = View.QualityLevel.MEDIUM
         }
         view.blendMode = View.BlendMode.OPAQUE
+    }
+
+    /**
+     * Screen-space ambient occlusion, per style. Construction and Clay keep it:
+     * contact darkening at reveals and under eaves is what makes the depth of
+     * an opening readable there. Architectural turns it off and reads by the
+     * palette's value contrast alone — no screen-space pass to shimmer on a
+     * phone or to darken a gap that is really a geometry defect.
+     */
+    private fun setAmbientOcclusion(enabled: Boolean) {
+        view.ambientOcclusionOptions = View.AmbientOcclusionOptions().apply {
+            this.enabled = enabled
+            quality = View.QualityLevel.LOW
+            // More than light contact darkening is noise.
+            intensity = 0.7f
+            radius = 0.35f
+        }
     }
 
     private fun createEnvironment() {
@@ -199,6 +209,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
 
         if (previous == null || previous.style != state.style) {
             entities.applyStyle(engine, scene, state.style)
+            setAmbientOcclusion(state.style.ambientOcclusion)
         }
 
         // Restricted to what was actually uploaded, so the scene can only
@@ -425,7 +436,7 @@ class ModelEntities(val all: List<ObjectEntity>, private val byEntity: Map<Int, 
             for ((i, part) in obj.parts.withIndex()) {
                 val instance = entity.instances.getOrNull(i) ?: continue
                 val material = part.materialId?.let { scene.materials[it] }
-                val a = style.appearanceOf(part.part, material)
+                val a = style.appearanceOf(part, material, scene.styling)
                 instance.setParameter("baseColor", a.red, a.green, a.blue, a.alpha)
                 instance.setParameter("roughness", a.roughness)
                 instance.setParameter("metallic", a.metallic)

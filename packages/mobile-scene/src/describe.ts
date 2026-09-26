@@ -43,6 +43,7 @@ const KIND_LABEL: Record<SemanticKind, string> = {
   stair: 'Stair',
   surfaceRegion: 'Surface region',
   linearSolid: 'Linear solid',
+  terrace: 'Terrace',
   material: 'Material',
   constraint: 'Constraint',
   evidenceSource: 'Evidence source',
@@ -292,6 +293,16 @@ export function describeObject(
         )
         fact(ctx, 'Waist', len(any.waist as number))
       }
+      break
+    }
+    case 'terrace': {
+      const poly = any.polygon as { x: number; z: number }[]
+      fact(ctx, 'Area', area(polygonArea(poly)))
+      fact(ctx, 'Top offset', len(any.topOffset as number))
+      fact(ctx, 'Thickness', len(any.thickness as number))
+      fact(ctx, 'Surface', titleCase(String(any.surface)))
+      fact(ctx, 'Edge', titleCase(String(any.edge)))
+      for (const w of (any.hostWallIds as string[] | undefined) ?? []) relate(ctx, 'lies against wall', w)
       break
     }
     case 'surfaceRegion': {

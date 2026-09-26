@@ -74,7 +74,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
                 val model = result.scene
                 camera = OrbitCamera(model.bounds)
                 pose = camera.home()
-                viewer = ViewerState()
+                // Selection, isolation and layers name objects of the old
+                // model and start over; the style is how the viewer draws,
+                // not part of the model, so it carries across a model switch.
+                viewer = ViewerState(style = viewer.style)
                 animation = null
                 screen = ScreenState.Ready(model)
             }

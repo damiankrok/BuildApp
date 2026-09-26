@@ -412,8 +412,21 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needLevel(r.id, r.levelId)
     needMaterial(r.id, r.materialId)
     needSources(r.id, r.evidence?.sourceIds)
-    if (Math.hypot(r.end.x - r.start.x, r.end.z - r.start.z) <= EPS) err('DEGENERATE_RAILING', `railing ${r.id} has zero length`, r.id)
+    if (Math.hypot(r.end.x - r.start.x, r.end.z - r.start.z) <= EPS && !r.path) err('DEGENERATE_RAILING', `railing ${r.id} has zero length`, r.id)
     if (r.hostId !== undefined && !seen.has(r.hostId)) err('UNKNOWN_TARGET', `railing ${r.id} guards "${r.hostId}", which does not exist`, r.id, 'hostId')
+    if (r.path) {
+      const first = r.path[0]
+      const last = r.path[r.path.length - 1]
+      if (Math.hypot(first.x - r.start.x, first.z - r.start.z) > EPS || Math.hypot(last.x - r.end.x, last.z - r.end.z) > EPS) err('DEGENERATE_RAILING', `railing ${r.id}: its path must begin at start and end at end`, r.id, 'path')
+      for (let i = 0; i + 1 < r.path.length; i += 1) if (Math.hypot(r.path[i + 1].x - r.path[i].x, r.path[i + 1].z - r.path[i].z) <= EPS) err('DEGENERATE_RAILING', `railing ${r.id}: path segment ${i} has zero length`, r.id, 'path')
+    }
+  }
+  for (const t of m.terraces) {
+    needLevel(t.id, t.levelId)
+    needMaterial(t.id, t.materialId)
+    needSources(t.id, t.evidence?.sourceIds)
+    if (!polygonIsSimple(t.polygon)) err('MALFORMED_POLYGON', `terrace ${t.id} polygon is not a simple polygon with area`, t.id, 'polygon')
+    for (const w of t.hostWallIds ?? []) if (!m.walls.some((x) => x.id === w)) err('UNKNOWN_WALL', `terrace ${t.id} lies against wall "${w}", which does not exist`, t.id, 'hostWallIds')
   }
   for (const c of m.chimneys) {
     needLevel(c.id, c.levelId)

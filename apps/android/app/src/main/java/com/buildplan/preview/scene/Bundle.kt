@@ -20,6 +20,12 @@ class SceneBundle(
     val levels: List<BundleLevel> = emptyList(),
     val objects: List<BundleObject> = emptyList(),
     val materials: List<BundleMaterial> = emptyList(),
+    /**
+     * The architectural palette the exporter wrote, one appearance per
+     * semantic group. Absent from bundles exported before the palette
+     * existed; the Architectural style then falls back to its built-in copy.
+     */
+    val styling: BundleStyling? = null,
     val contentHash: String = "",
 )
 
@@ -61,6 +67,14 @@ class BundleMesh(
     val openingId: String? = null,
     val structural: Boolean = false,
     val materialId: String? = null,
+    /**
+     * The styling group the exporter derived for this mesh (`WALL_MAIN`,
+     * `WINDOW_GLASS`, `TERRACE_SURFACE`, ...). Kept as the raw string: a group
+     * this build does not know still finds its appearance in `styling.groups`.
+     * Absent from older bundles, in which case `SemanticGroup.derive` places
+     * the mesh from its part.
+     */
+    val semanticGroup: String? = null,
     val triangleCount: Int = 0,
     val positions: DoubleArray = DoubleArray(0),
 )
@@ -133,6 +147,34 @@ data class BundleMaterial(
     val color: String = "#cccccc",
     val opacity: Double? = null,
     val note: String? = null,
+)
+
+/**
+ * The bundle's `styling` block: `{ palette, groups, toneHints? }`.
+ *
+ * `groups` is keyed by semantic-group name. It is derived data, written by the
+ * exporter from the one shared palette in `packages/mobile-scene`; the app
+ * reads it and never edits it.
+ */
+@Serializable
+data class BundleStyling(
+    val palette: String = "",
+    val groups: Map<String, BundleGroupAppearance> = emptyMap(),
+    val toneHints: Map<String, String> = emptyMap(),
+)
+
+/**
+ * How one semantic group looks: `#rrggbb` sRGB, an opacity only for
+ * translucent groups, PBR roughness and metalness, and the edge treatment the
+ * palette asks for (`SOFT` or `NONE`).
+ */
+@Serializable
+data class BundleGroupAppearance(
+    val color: String = "#b6b2ad",
+    val opacity: Double? = null,
+    val roughness: Double = 0.9,
+    val metalness: Double = 0.0,
+    val edge: String = "NONE",
 )
 
 /** One entry of `scenes/index.json`: what the app offers on the start screen. */

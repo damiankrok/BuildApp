@@ -165,6 +165,41 @@ its own tangent frame. Filament wants that frame as a quaternion in the
 `TANGENTS` attribute; `TangentFrames.fromNormal` builds it, and a unit test
 checks that rotating +Z by the quaternion returns the normal it was built from.
 
+## Styles
+
+The **Style** menu offers three. A style only rewrites material parameters on
+primitives uploaded once: it never changes, hides or re-uploads geometry, so
+no style can hide a geometry defect. The chosen style is kept across a model
+switch.
+
+| Style | For | How it draws |
+| --- | --- | --- |
+| Construction (default) | diagnosis | part colours; the model's own material on walls, roof, trim, slab, terrace, chimney, doors; SSAO on |
+| Clay | diagnosis of massing and openings | one neutral on every opaque surface; glazing still translucent; SSAO on |
+| Architectural | owner review | one colour per semantic group from the architectural palette; SSAO off |
+
+**Architectural** looks up each mesh's `semanticGroup` in the bundle's
+`styling.groups` (palette `architectural-v1`). A bundle exported before that
+block existed falls back to `ArchitecturalPalette.BUILT_IN` in
+`render/RenderStyle.kt`, a copy of `packages/mobile-scene/src/semantics.ts`
+that tests on both sides hold equal. A mesh with no group is placed by its
+part and material name. The groups are `WALL_MAIN`, `WALL_SECONDARY`,
+`WALL_INTERIOR`, `ROOF_MAIN`, `FLAT_ROOF`, `ROOF_TRIM`, `WINDOW_GLASS`,
+`WINDOW_FRAME`, `DOOR`, `GARAGE_DOOR`, `SLAB`, `BALCONY_SLAB`, `RAILING`,
+`FACADE_FRAME`, `TERRACE_SURFACE`, `CHIMNEY`, `ROOFLIGHT`, `STAIR`, `ROOM` and
+`OTHER`.
+
+The palette is a luminance ladder: off-white main walls with lighter trims, a
+mid-grey secondary body, a deep warm-grey roof, near-black frames, cool glass,
+timber doors, light concrete slabs and a darker stone terrace. Adjacent groups
+therefore never blend, and edges read from that value contrast plus each
+group's roughness. There are no outlines, no per-object colours and no
+screen-space effects, and screen-space AO is switched off in this style.
+Translucency is still chosen per part at upload, so glass stays on the
+existing translucent path at alpha 0.35 in every style and a stair placeholder
+stays a marker. The palette's `SOFT` edge, a thin line in the web viewer, is
+not drawn here because this renderer builds no feature-edge geometry.
+
 ## Gestures
 
 | Input | Effect |
@@ -279,6 +314,7 @@ apps/android/app/build/preview-apks/
   BuildPlan-Model-Preview-universal-debug.apk     ← if you do not know the ABI
   BuildPlan-Model-Preview-armeabi-v7a-debug.apk
   BuildPlan-Model-Preview-x86_64-debug.apk
+  VERSION.txt                                     ← versionCode, versionName, commit, signing key
 ```
 
 Install with `adb install -r <file>.apk`, or copy the APK to the phone and open
@@ -300,6 +336,96 @@ nothing to grant on first launch and the app works in flight mode.
 minSdk is 26 (Android 8.0) and targetSdk 35; the app requires OpenGL ES 3.0. It
 supports portrait and landscape, and an ordinary rotation keeps the camera,
 style, visibility and selection because they live in a `ViewModel`.
+
+### Installing and updating the preview
+
+Android installs an APK as an **update** of the app already on the phone only
+when two things hold: the new APK is signed by the **same certificate** as the
+installed one, and its **`versionCode` is not lower**. Otherwise the installer
+stops with "App not installed" (or, over `adb`, `INSTALL_FAILED_UPDATE_INCOMPATIBLE`
+/ `INSTALL_FAILED_VERSION_DOWNGRADE`), and the only way forward is to uninstall.
+
+Both conditions used to fail for CI builds: every runner signed with its own
+freshly generated `~/.android/debug.keystore`, and `versionCode` was a constant
+`1`. So the installed preview could never be updated from a new CI artifact.
+Now:
+
+- **One key, every build.** Every APK — from CI or from
+  `npm run android:assembleDebug` on any machine — is signed with the committed
+  preview key `apps/android/keystore/preview.keystore` (alias and password in
+  `apps/android/keystore/README.md`). It is a deliberately public *preview*
+  identity, not a production secret: it signs only this sideloaded viewer and
+  grants nothing. Its certificate fingerprint is
+
+  ```
+  SHA-256 6E:48:FA:C4:AF:AA:3D:70:E7:0D:E5:BC:60:8A:A4:C4:19:42:06:A9:E6:BC:99:3D:AB:56:38:2B:92:1C:A0:DA
+  ```
+
+  The debug build type uses this key instead of the machine's debug keystore,
+  so two `assembleDebug` runs on two laptops also update each other.
+- **`versionCode` rises on every CI run.** It is derived, never typed in:
+
+  | where | `versionCode` | `versionName` |
+  | --- | --- | --- |
+  | CI | `1000 + GITHUB_RUN_NUMBER` | `0.<run>.0-preview` |
+  | local, in a git checkout | `git rev-list --count HEAD` (number of commits) | `0.<count>.0-local` |
+  | local, no git history | `1` | `0.0.1-local` |
+
+  The workflow run number only ever goes up, so each CI artifact installs over
+  the previous one. CI starts at 1001 and gains one per run (at least one per
+  push), while the commit count gains one per commit, so a CI APK also
+  outranks a local build. `VERSION.txt` next to the APKs, and the Android job's
+  summary on the run page, state the numbers and the signer of that build.
+  The run number belongs to the workflow *file*: if `buildapp-ci.yml` is ever
+  renamed, its counter restarts at 1 and `PREVIEW_VERSION_CODE_BASE` in
+  `app/build.gradle.kts` must be raised above the last published code.
+
+**One-time step, now.** The preview currently on the phone is signed with an
+old ephemeral runner key that no longer exists, so no APK can update it.
+Uninstall it **once** — Settings → Apps → *BuildPlan Model Preview* →
+Uninstall, or `adb uninstall com.buildplan.preview` — then install the next
+CI APK. From then on every later CI APK installs in place over the previous
+one; nothing is lost, because the viewer keeps no data. The older
+`com.buildplan.app` prototype is a different app id and is not affected.
+
+**Getting the APK.** Actions → *BuildApp CI* → the run → artifact
+`buildplan-model-preview-apks`: a zip with the four APKs and `VERSION.txt`.
+Copy `BuildPlan-Model-Preview-arm64-v8a-debug.apk` (or the universal one) to
+the phone and open it, or `adb install -r <file>.apk`. Android reports the
+installed build under Settings → Apps → *BuildPlan Model Preview* (the version
+name), or `adb shell dumpsys package com.buildplan.preview | grep -E "versionCode|versionName"`.
+
+**If "App not installed" appears**, one of these is true:
+
+1. *The installed copy was signed with a different key* — the old ephemeral
+   key from before this fix, or a build made with a private override key (see
+   below). Uninstall once, then install the new APK. To see which key signed an
+   APK: `apksigner verify --print-certs <file>.apk` (from the SDK build-tools;
+   compare the SHA-256 with the fingerprint above), or
+   `apps/android/tools/verify-preview-signature.sh <file>.apk`, which does the
+   comparison for you. `keytool -printcert -jarfile` shows nothing, because the
+   APKs carry only a v2 signature.
+2. *The APK's `versionCode` is lower than the installed one* — an artifact from
+   an older run, or a CI APK over a locally built one whose commit count got
+   ahead. Take the newest run's artifact. For a deliberate downgrade use
+   `adb install -r -d <file>.apk`, which Android allows because the preview is
+   debuggable.
+3. *Wrong ABI* — `x86_64` or `armeabi-v7a` on an arm64 phone. Use the
+   `arm64-v8a` or the `universal` APK.
+4. Play Protect may warn about an unknown developer; that is expected for a
+   self-signed sideloaded app and is not this error.
+
+**Overriding the key with secrets.** `app/build.gradle.kts` reads four
+environment variables and falls back to the committed key when they are blank:
+`BUILDPLAN_PREVIEW_KEYSTORE` (path), `BUILDPLAN_PREVIEW_KEYSTORE_PASSWORD`,
+`BUILDPLAN_PREVIEW_KEY_ALIAS`, `BUILDPLAN_PREVIEW_KEY_PASSWORD` (defaults to
+the store password). The Android job already maps repository secrets of those
+names, plus `BUILDPLAN_PREVIEW_KEYSTORE_BASE64` (`base64 -w0 my.keystore`) for
+the file itself, so switching CI to a private key is: define the secrets, push.
+No workflow or Gradle change. Locally, export the same variables before
+`npm run android:assembleDebug`. Changing the key means one more uninstall on
+every phone that has the preview; the CI step *Verify the signer* fails the job
+if an APK was not signed by the key in force.
 
 ## Limitations
 

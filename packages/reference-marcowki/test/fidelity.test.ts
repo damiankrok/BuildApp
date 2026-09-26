@@ -435,6 +435,6 @@ describe('Marcówki: the whole model still replays, validates and compiles', () 
   it('validates with no issues and compiles with no diagnostics after every 01A addition', () => {
     expect(validateModel(s.model).issues).toEqual([])
     expect(s.scene.diagnostics).toEqual([])
-    expect(runCommands(createMarcowkiReferenceBuilding(), []).schemaVersion).toBe('1.4.0')
+    expect(runCommands(createMarcowkiReferenceBuilding(), []).schemaVersion).toBe('1.5.0')
   })
 })

@@ -5,11 +5,23 @@
     "subtitle": "Dom w marcówkach (GE) — reference model",
     "asset": "marcowki.scene.json",
     "modelId": "marcowki-ge",
-    "modelSchemaVersion": "1.4.0",
-    "contentHash": "52be0215a16d24673f47605e0e8fddf8d2f7bf97d7ddf72d61744c4d17f52e22",
+    "modelSchemaVersion": "1.5.0",
+    "contentHash": "a26d0841ce9c2d396d9a0024da3405fc5f502e6142f34328678ba430167fe6c6",
     "meshCount": 178,
     "triangleCount": 4480,
     "objectCount": 127
+  },
+  {
+    "key": "marcowki-auto-v3",
+    "title": "Marcówki (auto v3)",
+    "subtitle": "Analyzer v2 with exterior closure: joins, roof edges, balcony, terraces — a candidate, not final",
+    "asset": "marcowki-auto-v3.scene.json",
+    "modelId": "m-auto-v3-marcowki",
+    "modelSchemaVersion": "1.5.0",
+    "contentHash": "b4de13d4034d62d0bafded8d6ab164f7822308e3bb3cd09cb6069007fdc6cbec",
+    "meshCount": 160,
+    "triangleCount": 5078,
+    "objectCount": 117
   },
   {
     "key": "marcowki-auto",
@@ -17,8 +29,8 @@
     "subtitle": "Reconstructed from the published drawings — a candidate, not final",
     "asset": "marcowki-auto.scene.json",
     "modelId": "m-auto-marcowki",
-    "modelSchemaVersion": "1.4.0",
-    "contentHash": "b24cac30316e7050d11d8e1bc983800f20ae4fe7f8526929159dcff5ab0fa994",
+    "modelSchemaVersion": "1.5.0",
+    "contentHash": "a115b219c4eba4b89dd5d8ea489ecab6bdf786ac3e7a03780265045ffcea252b",
     "meshCount": 66,
     "triangleCount": 1404,
     "objectCount": 44
@@ -29,8 +41,8 @@
     "subtitle": "Reconstructed by analyzer v2 and verified against the source views — a candidate, not final",
     "asset": "marcowki-auto-v2.scene.json",
     "modelId": "m-auto-v2-marcowki",
-    "modelSchemaVersion": "1.4.0",
-    "contentHash": "f283942c21972f9439a6c6a954d6d7dccaddb0ee5210dca3395040b5a03e77ce",
+    "modelSchemaVersion": "1.5.0",
+    "contentHash": "f762a4b7f0da467db0a868bbe9a0a4d8536b0ebdbb4e484760bdc7f810fe2231",
     "meshCount": 162,
     "triangleCount": 4906,
     "objectCount": 122
@@ -41,8 +53,8 @@
     "subtitle": "BuildApp demo house",
     "asset": "demo.scene.json",
     "modelId": "demo-house",
-    "modelSchemaVersion": "1.4.0",
-    "contentHash": "54944be5a55b93e8de1a7ceb406940ae75960414ed37d0a93c5de8a43df5db01",
+    "modelSchemaVersion": "1.5.0",
+    "contentHash": "fb3851984753d330c1c835ddb77a426651d3247aac5b8b52dfc187fcdc9e028e",
     "meshCount": 88,
     "triangleCount": 2332,
     "objectCount": 58

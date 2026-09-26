@@ -105,7 +105,7 @@ describe('the reference boundary', () => {
     expect(fromFile.diagnostics).toEqual([])
     expect(fromFile).toEqual(compileBuilding(createMarcowkiReferenceBuilding()))
     // the frozen fixture the model and geometry packages test against is this file
-    expect(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.4.0.json'), 'utf8')).toBe(json)
+    expect(readFileSync(resolve(ROOT, 'packages/model/test/fixtures/marcowki-ge-1.5.0.json'), 'utf8')).toBe(json)
   })
 
   it('5. every generic primitive the stage added has a test that is not about Marcówki', () => {
@@ -176,17 +176,18 @@ describe('the reference boundary', () => {
     expect(materialLength(solidTriangles(store.getSnapshot().scene, 'g-front'), { x: 0.9, y: 1.2, z: -1 }, { x: 0, y: 0, z: 1 })).toBeCloseTo(0.45, 9)
   })
 
-  it('7. the schema migrations change no geometry: the frozen 1.1.0, 1.2.0 and 1.3.0 demo files compile to exactly the current demo scene', () => {
+  it('7. the schema migrations change no geometry: the frozen 1.1.0, 1.2.0, 1.3.0 and 1.4.0 demo files compile to exactly the current demo scene', () => {
     for (const [file, steps] of [
-      ['demo-house-1.1.0.json', 3],
-      ['demo-house-1.2.0.json', 2],
-      ['demo-house-1.3.0.json', 1],
+      ['demo-house-1.1.0.json', 4],
+      ['demo-house-1.2.0.json', 3],
+      ['demo-house-1.3.0.json', 2],
+      ['demo-house-1.4.0.json', 1],
     ] as const) {
       const migrated = loadModel(readFileSync(resolve(ROOT, `packages/model/test/fixtures/${file}`), 'utf8'))
       expect(migrated.ok, file).toBe(true)
       if (!migrated.ok) return
       expect(migrated.issues.map((i) => i.code)).toEqual(Array(steps).fill('SCHEMA_MIGRATED'))
-      expect(migrated.model.schemaVersion).toBe('1.4.0')
+      expect(migrated.model.schemaVersion).toBe('1.5.0')
       expect(compileBuilding(migrated.model)).toEqual(compileBuilding(createDemoBuilding()))
     }
   })

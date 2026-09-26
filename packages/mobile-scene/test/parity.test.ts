@@ -91,15 +91,20 @@ describe.each(cases)('$name: the mobile bundle is the compiler output', ({ scene
     expect(bundle.scene.diagnostics).toEqual(scene.diagnostics)
   })
 
-  it('carries every mesh tag through unchanged', () => {
+  it('carries every mesh tag through unchanged, adding only the styling group', () => {
     for (let i = 0; i < scene.meshes.length; i++) {
       const a = scene.meshes[i]
       const b = bundle.scene.meshes[i]
-      expect({ ...b, positions: undefined, triangleCount: undefined }).toEqual({
+      // `semanticGroup` is the one field the bundle adds to a compiled mesh;
+      // semantics.test.ts holds it to `semanticGroupOf`. Everything else is
+      // the compiler's own tag, untouched.
+      expect(typeof b.semanticGroup).toBe('string')
+      expect({ ...b, positions: undefined, triangleCount: undefined, semanticGroup: undefined }).toEqual({
         ...a,
         triangles: undefined,
         positions: undefined,
         triangleCount: undefined,
+        semanticGroup: undefined,
       })
     }
   })

@@ -2,80 +2,44 @@
   "balconies": [
     {
       "evidence": {
-        "interpretation": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)",
+        "interpretation": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m); ends: free at 3.31, carries at 7.90",
         "status": "VISUAL_INFERRED"
       },
       "footprint": {
-        "maxX": 7.229937,
+        "maxX": 7.9,
         "maxZ": 0.991283,
-        "minX": 3.134658,
+        "minX": 3.310378,
         "minZ": 0
       },
       "id": "balcony-front-1",
       "kind": "BALCONY",
       "levelId": "lvl-1",
       "materialId": "mat-render-dark",
-      "thickness": 0.707826,
-      "topOffset": -0.031145
+      "thickness": 0.738971,
+      "topOffset": 0
     },
     {
       "evidence": {
-        "interpretation": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)",
+        "interpretation": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m); ends: wall at 0.66, wall at 7.27",
         "status": "VISUAL_INFERRED"
       },
       "footprint": {
-        "maxX": 7.17626,
+        "maxX": 7.265776,
         "maxZ": 14.601283,
-        "minX": 0.638726,
+        "minX": 0.66065,
         "minZ": 13.601283
       },
       "id": "balcony-rear-1",
       "kind": "BALCONY",
       "levelId": "lvl-1",
       "materialId": "mat-render-dark",
-      "thickness": 0.50418,
-      "topOffset": -0.034223
-    },
-    {
-      "evidence": {
-        "interpretation": "the floor of the recess",
-        "status": "ASSUMED"
-      },
-      "footprint": {
-        "maxX": 11.416032,
-        "maxZ": 0.991283,
-        "minX": 0.66065,
-        "minZ": 0
-      },
-      "id": "terrace-front-66",
-      "kind": "TERRACE",
-      "levelId": "lvl-0",
-      "materialId": "mat-slab",
-      "thickness": 0.2,
-      "topOffset": 0
-    },
-    {
-      "evidence": {
-        "interpretation": "the floor of the recess",
-        "status": "ASSUMED"
-      },
-      "footprint": {
-        "maxX": 7.26715,
-        "maxZ": 14.601283,
-        "minX": 0.66065,
-        "minZ": 13.601283
-      },
-      "id": "terrace-rear-66",
-      "kind": "TERRACE",
-      "levelId": "lvl-0",
-      "materialId": "mat-slab",
-      "thickness": 0.2,
+      "thickness": 0.538403,
       "topOffset": 0
     }
   ],
   "building": {
     "id": "bld-auto-v2",
-    "name": "Marcówki (auto v2)"
+    "name": "Marcówki (auto v3)"
   },
   "chimneys": [
     {
@@ -284,7 +248,7 @@
     "y": "up (vertical)",
     "z": "away from the front facade, into the building"
   },
-  "id": "m-auto-v2-marcowki",
+  "id": "m-auto-v3-marcowki",
   "levels": [
     {
       "buildingId": "bld-auto-v2",
@@ -303,125 +267,7 @@
       "name": "Level 1"
     }
   ],
-  "linearSolids": [
-    {
-      "depth": 0.991283,
-      "end": {
-        "x": 12.05,
-        "y": 2.674942,
-        "z": 0.495642
-      },
-      "evidence": {
-        "interpretation": "the roof of attached-0 projects over its zone; its edge is the 0.71 m band",
-        "status": "SOURCE_CORROBORATED"
-      },
-      "id": "portal-head-attached-0",
-      "levelId": "lvl-0",
-      "materialId": "mat-render-dark",
-      "start": {
-        "x": 7.9,
-        "y": 2.674942,
-        "z": 0.495642
-      },
-      "width": 0.707826
-    },
-    {
-      "depth": 0.3,
-      "end": {
-        "x": 7.9,
-        "y": 4.23951,
-        "z": 0.15
-      },
-      "evidence": {
-        "interpretation": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.54 m), standing in the outer plane 0.99 m in front of the recessed wall",
-        "properties": {
-          "depth": "ASSUMED"
-        },
-        "status": "SOURCE_CORROBORATED"
-      },
-      "id": "verge-front-e",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": 3.95,
-        "y": 7.553954,
-        "z": 0.15
-      },
-      "width": 0.606777
-    },
-    {
-      "depth": 0.3,
-      "end": {
-        "x": 3.95,
-        "y": 7.553954,
-        "z": 0.15
-      },
-      "evidence": {
-        "interpretation": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.54 m), standing in the outer plane 0.99 m in front of the recessed wall",
-        "properties": {
-          "depth": "ASSUMED"
-        },
-        "status": "SOURCE_CORROBORATED"
-      },
-      "id": "verge-front-w",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": 0,
-        "y": 4.23951,
-        "z": 0.15
-      },
-      "width": 0.606777
-    },
-    {
-      "depth": 0.3,
-      "end": {
-        "x": 7.9,
-        "y": 4.240615,
-        "z": 14.451283
-      },
-      "evidence": {
-        "interpretation": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall",
-        "properties": {
-          "depth": "ASSUMED"
-        },
-        "status": "SOURCE_CORROBORATED"
-      },
-      "id": "verge-rear-e",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": 3.95,
-        "y": 7.555059,
-        "z": 14.451283
-      },
-      "width": 0.605085
-    },
-    {
-      "depth": 0.3,
-      "end": {
-        "x": 3.95,
-        "y": 7.555059,
-        "z": 14.451283
-      },
-      "evidence": {
-        "interpretation": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall",
-        "properties": {
-          "depth": "ASSUMED"
-        },
-        "status": "SOURCE_CORROBORATED"
-      },
-      "id": "verge-rear-w",
-      "levelId": "lvl-1",
-      "materialId": "mat-member",
-      "start": {
-        "x": 0,
-        "y": 4.240615,
-        "z": 14.451283
-      },
-      "width": 0.605085
-    }
-  ],
+  "linearSolids": [],
   "materials": [
     {
       "color": "#6d6a66",
@@ -450,6 +296,11 @@
       "name": "Dark render"
     },
     {
+      "color": "#8e8983",
+      "id": "mat-render-mid",
+      "name": "Grey render"
+    },
+    {
       "color": "#5a5550",
       "id": "mat-roof",
       "name": "Roof covering"
@@ -458,6 +309,11 @@
       "color": "#c9c6c0",
       "id": "mat-slab",
       "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Terrace paving"
     },
     {
       "color": "#b07a4a",
@@ -474,7 +330,7 @@
     "createdWith": "buildapp",
     "notes": []
   },
-  "name": "Marcówki (auto v2)",
+  "name": "Marcówki (auto v3)",
   "openings": [
     {
       "evidence": {
@@ -888,44 +744,63 @@
   ],
   "railings": [
     {
-      "baseOffset": -0.031145,
+      "baseOffset": 0,
       "end": {
-        "x": 7.179937,
+        "x": 7.218854,
         "z": 0.05
       },
       "evidence": {
-        "interpretation": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth",
+        "interpretation": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth; along the mouth, turning back to the wall at the low end; low end free, high end carries (return-front-1-1)",
+        "properties": {
+          "path": "SOURCE_DERIVED"
+        },
         "status": "VISUAL_INFERRED"
       },
       "height": 0.910062,
+      "hostId": "balcony-front-1",
       "id": "railing-front-1",
       "infill": "GLASS",
       "levelId": "lvl-1",
       "materialId": "mat-glass",
+      "path": [
+        {
+          "x": 3.360378,
+          "z": 0.966283
+        },
+        {
+          "x": 3.360378,
+          "z": 0.05
+        },
+        {
+          "x": 7.218854,
+          "z": 0.05
+        }
+      ],
       "postSpacing": 1,
       "start": {
-        "x": 3.184658,
-        "z": 0.05
+        "x": 3.360378,
+        "z": 0.966283
       }
     },
     {
-      "baseOffset": -0.034223,
+      "baseOffset": 0,
       "end": {
-        "x": 7.12626,
+        "x": 7.240776,
         "z": 14.551283
       },
       "evidence": {
-        "interpretation": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth",
+        "interpretation": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth; along the mouth; low end wall (return-rear-0-0), high end wall (return-rear-0-1)",
         "status": "VISUAL_INFERRED"
       },
       "height": 0.92433,
+      "hostId": "balcony-rear-1",
       "id": "railing-rear-1",
       "infill": "GLASS",
       "levelId": "lvl-1",
       "materialId": "mat-glass",
       "postSpacing": 1,
       "start": {
-        "x": 0.688726,
+        "x": 0.68565,
         "z": 14.551283
       }
     }
@@ -1030,10 +905,22 @@
   "roofs": [
     {
       "eaveOffset": 2.890422,
+      "edgeMembers": {
+        "fascia": {
+          "depth": 0.991283,
+          "height": 0.738971,
+          "materialId": "mat-render-dark",
+          "sides": [
+            "MIN_Z"
+          ],
+          "topOffset": 0.169578
+        }
+      },
       "evidence": {
-        "interpretation": "the section draws a 0.36 m slab with its top at 2.89 over this body on 6 columns and its outer wall continues to 3.12",
+        "interpretation": "the section draws a 0.36 m slab with its top at 2.89 over this body on 6 columns and its outer wall continues to 3.12; its edge over the zone is the portal head, the roof of attached-0 projects over its zone; its edge is the 0.71 m band",
         "properties": {
-          "eaveOffset": "SOURCE_EXACT"
+          "eaveOffset": "SOURCE_EXACT",
+          "edgeMembers.fascia": "SOURCE_CORROBORATED"
         },
         "status": "SOURCE_EXACT"
       },
@@ -1049,14 +936,40 @@
       "materialId": "mat-roof",
       "overhang": 0,
       "pitchDeg": 0,
+      "plateInset": {
+        "maxX": 0.244829,
+        "maxZ": 0.244829,
+        "minX": 0.244829,
+        "minZ": 0.244829
+      },
       "ridgeAxis": "X",
       "thickness": 0.358467
     },
     {
       "eaveOffset": 1.575556,
+      "edgeMembers": {
+        "verge": {
+          "depth": 0.991283,
+          "ends": [
+            {
+              "depth": 0.991283,
+              "side": "MIN_Z",
+              "width": 0.792091
+            },
+            {
+              "depth": 1,
+              "side": "MAX_Z",
+              "width": 0.789882
+            }
+          ],
+          "materialId": "mat-member",
+          "width": 0.792091
+        }
+      },
       "evidence": {
-        "interpretation": "40° gable on the authority of published specification; both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes",
+        "interpretation": "40° gable on the authority of published specification; both side renders span the characteristic depth at the ridge scale, so the roof reaches the outer planes; verge boards along both rakes, front 0.61 m wide by 0.99 m deep, rear 0.61 m wide by 1.00 m deep",
         "properties": {
+          "edgeMembers.verge": "SOURCE_DERIVED",
           "footprint": "SOURCE_CORROBORATED"
         },
         "status": "SOURCE_EXACT"
@@ -1898,7 +1811,7 @@
     }
   ],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.4.0",
+  "schemaVersion": "1.5.0",
   "slabs": [
     {
       "id": "slab-attached-0-0",
@@ -1958,11 +1871,11 @@
             "z": 5.766755
           },
           {
-            "x": 7.427575,
+            "x": 7.410342,
             "z": 5.766755
           },
           {
-            "x": 7.427575,
+            "x": 7.410342,
             "z": 8.476571
           },
           {
@@ -1976,20 +1889,20 @@
       "materialId": "mat-slab",
       "polygon": [
         {
-          "x": 0,
-          "z": 0.991283
+          "x": 0.489658,
+          "z": 1.480941
         },
         {
-          "x": 7.9,
-          "z": 0.991283
+          "x": 7.410342,
+          "z": 1.480941
         },
         {
-          "x": 7.9,
-          "z": 13.601283
+          "x": 7.410342,
+          "z": 13.111625
         },
         {
-          "x": 0,
-          "z": 13.601283
+          "x": 0.489658,
+          "z": 13.111625
         }
       ],
       "thickness": 0.34,
@@ -2066,6 +1979,99 @@
         "b0": 0,
         "b1": 3.06
       }
+    }
+  ],
+  "terraces": [
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "interpretation": "the floor of the front recess",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-main-0-w0",
+        "ring-attached-0-0-w0"
+      ],
+      "id": "terrace-front-66",
+      "levelId": "lvl-0",
+      "materialId": "mat-terrace",
+      "polygon": [
+        {
+          "x": 0.66065,
+          "z": 0
+        },
+        {
+          "x": 11.416032,
+          "z": 0
+        },
+        {
+          "x": 11.416032,
+          "z": 0.991283
+        },
+        {
+          "x": 0.66065,
+          "z": 0.991283
+        }
+      ],
+      "surface": "PAVED",
+      "thickness": 0.15,
+      "topOffset": 0
+    },
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "interpretation": "the floor of the rear recess and the platform the plan outlines beyond it",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-main-0-w2"
+      ],
+      "id": "terrace-rear-66",
+      "levelId": "lvl-0",
+      "materialId": "mat-terrace",
+      "polygon": [
+        {
+          "x": 0.66065,
+          "z": 13.601283
+        },
+        {
+          "x": 7.26715,
+          "z": 13.601283
+        },
+        {
+          "x": 7.26715,
+          "z": 14.601283
+        },
+        {
+          "x": 7.890603,
+          "z": 14.601283
+        },
+        {
+          "x": 7.890603,
+          "z": 16.708361
+        },
+        {
+          "x": 0.009397,
+          "z": 16.708361
+        },
+        {
+          "x": 0.009397,
+          "z": 14.601283
+        },
+        {
+          "x": 0.66065,
+          "z": 14.601283
+        }
+      ],
+      "surface": "PAVED",
+      "thickness": 0.15,
+      "topOffset": 0
     }
   ],
   "units": {
@@ -2323,7 +2329,11 @@
         "x": 8.404658,
         "z": 7.897471
       },
-      "thickness": 0.105788
+      "thickness": 0.105788,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-attached-0"
+      }
     },
     {
       "baseOffset": 0,
@@ -2837,7 +2847,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 12.050256,
+        "x": 12.05,
         "z": 0.991283
       },
       "evidence": {
@@ -2850,15 +2860,19 @@
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 12.050256,
+        "x": 12.05,
         "z": 0
       },
-      "thickness": 0.634224
+      "thickness": 0.634224,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-attached-0"
+      }
     },
     {
       "baseOffset": 0,
       "end": {
-        "x": 0.026246,
+        "x": 0,
         "z": 0
       },
       "evidence": {
@@ -2871,7 +2885,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": 0.026246,
+        "x": 0,
         "z": 0.991283
       },
       "thickness": 0.6299,
@@ -2883,7 +2897,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 0.991283
       },
       "evidence": {
@@ -2896,7 +2910,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 0
       },
       "thickness": 0.656146,
@@ -2929,7 +2943,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 7.901374,
+        "x": 7.9,
         "z": 14.601283
       },
       "evidence": {
@@ -2942,7 +2956,7 @@
       "levelId": "lvl-0",
       "materialId": "mat-member",
       "start": {
-        "x": 7.901374,
+        "x": 7.9,
         "z": 13.601283
       },
       "thickness": 0.634224
@@ -2950,7 +2964,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 0.026246,
+        "x": 0,
         "z": 13.601283
       },
       "evidence": {
@@ -2963,7 +2977,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": 0.026246,
+        "x": 0,
         "z": 14.601283
       },
       "thickness": 0.6299,
@@ -2975,7 +2989,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 14.601283
       },
       "evidence": {
@@ -2988,7 +3002,7 @@
       "levelId": "lvl-1",
       "materialId": "mat-member",
       "start": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 13.601283
       },
       "thickness": 0.656146,
@@ -3007,7 +3021,7 @@
       "id": "ring-attached-0-0-w0",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
-      "materialId": "mat-wall",
+      "materialId": "mat-render-dark",
       "start": {
         "x": 7.9,
         "z": 0.991283
@@ -3024,7 +3038,7 @@
       "id": "ring-attached-0-0-w1",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
-      "materialId": "mat-wall",
+      "materialId": "mat-render-dark",
       "start": {
         "x": 12.05,
         "z": 0.991283
@@ -3041,7 +3055,7 @@
       "id": "ring-attached-0-0-w2",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
-      "materialId": "mat-wall",
+      "materialId": "mat-render-dark",
       "start": {
         "x": 12.05,
         "z": 8.501283
@@ -3058,7 +3072,7 @@
       "id": "ring-attached-0-0-w3",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
-      "materialId": "mat-wall",
+      "materialId": "mat-render-dark",
       "start": {
         "x": 7.9,
         "z": 8.501283

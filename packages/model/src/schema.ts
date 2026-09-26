@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.4.0' as const
+export const MODEL_SCHEMA_VERSION = '1.5.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -355,6 +355,53 @@ export type RoofKind = z.infer<typeof RoofKindSchema>
  * rises from both eaves at `pitchDeg` to a ridge along `ridgeAxis` through the
  * footprint's middle; a flat roof is a plate at the eave.
  */
+/** One side of a roof's footprint rectangle. */
+export const RoofEdgeSideSchema = z.enum(['MIN_X', 'MAX_X', 'MIN_Z', 'MAX_Z'])
+export type RoofEdgeSide = z.infer<typeof RoofEdgeSideSchema>
+
+/**
+ * Members compiled WITH the roof, at its edges, so that the roof and its trim
+ * are one closed composition rather than a plate with bars laid over it.
+ *
+ * `verge`: a board along each rake of a gable end, its top flush with the
+ * slope, hanging `width` below it (measured vertically), `depth` deep along
+ * the ridge axis; the plate stops where the board begins, and a wall under
+ * the board follows the board's underside, not the plate's. `fascia`: a
+ * board along the named eave or flat-roof edges, its top `topOffset` above
+ * the plate top (0 = flush; a parapet-height band is positive), `height`
+ * tall, `depth` deep across the edge; the plate stops at its inner face.
+ */
+export const RoofEdgeMembersSchema = z
+  .object({
+    verge: z
+      .object({
+        width: positive,
+        depth: positive,
+        materialId: IdSchema.optional(),
+        /** The gable ends that carry a board, each with its own width and depth; absent = both ends, at `width` × `depth`. */
+        ends: z.array(z.object({ side: RoofEdgeSideSchema, width: positive, depth: positive }).strict()).min(1).optional(),
+      })
+      .strict()
+      .optional(),
+    fascia: z.object({ sides: z.array(RoofEdgeSideSchema).min(1), topOffset: finite, height: positive, depth: positive, materialId: IdSchema.optional() }).strict().optional(),
+  })
+  .strict()
+export type RoofEdgeMembers = z.infer<typeof RoofEdgeMembersSchema>
+
+/**
+ * How far the roof PLATE stops short of the footprint on each side, in
+ * metres. The footprint is still what the roof covers (walls under it follow
+ * it; its edge members sit on it); the plate is the slab that bears on the
+ * walls, and a plate that bears on a wall ends inside that wall — at its
+ * centreline, conventionally — rather than in the plane of the wall's outer
+ * face, where a viewer would draw the plate's edge and the wall's face in one
+ * place.
+ */
+export const RoofPlateInsetSchema = z
+  .object({ minX: nonNegative.optional(), maxX: nonNegative.optional(), minZ: nonNegative.optional(), maxZ: nonNegative.optional() })
+  .strict()
+export type RoofPlateInset = z.infer<typeof RoofPlateInsetSchema>
+
 export const RoofSchema = z
   .object({
     ...base,
@@ -366,6 +413,8 @@ export const RoofSchema = z
     ridgeAxis: z.enum(['X', 'Z']),
     overhang: nonNegative,
     thickness: positive,
+    edgeMembers: RoofEdgeMembersSchema.optional(),
+    plateInset: RoofPlateInsetSchema.optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -450,10 +499,43 @@ export const RailingSchema = z
     infill: z.enum(['GLASS', 'BARS', 'NONE']),
     /** The balcony / terrace this railing guards, when it does. */
     hostId: IdSchema.optional(),
+    /**
+     * A railing that turns: the vertices of its plan polyline, `start` first
+     * and `end` last. One post stands at every vertex, so two runs that meet
+     * at a corner are one railing here rather than two railings with two
+     * posts in one place.
+     */
+    path: z.array(Vec2Schema).min(2).optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
 export type Railing = z.infer<typeof RailingSchema>
+
+/**
+ * A terrace: an exterior floor a building stands beside — the paved platform
+ * outside a living-room glazing, the floor of a loggia at ground level.
+ * Distinct from a slab (which is the building's own floor plate) and from a
+ * balcony (which is carried by the building): it lies on the ground, at or
+ * near the finished-floor datum it serves, against the facade it names.
+ */
+export const TerraceSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    polygon: PlanPolygonSchema,
+    /** Top surface above the level's finished floor (0 = flush with the threshold). */
+    topOffset: finite,
+    /** Down to the terrain or the plinth: what the platform's edge shows. */
+    thickness: positive,
+    surface: z.enum(['PAVED', 'DECK', 'UNKNOWN']),
+    /** PLINTH: the edge is a visible upstand to the terrain; FLUSH: the platform meets the ground. */
+    edge: z.enum(['PLINTH', 'FLUSH']),
+    /** The exterior walls the terrace lies against. */
+    hostWallIds: z.array(IdSchema).optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Terrace = z.infer<typeof TerraceSchema>
 
 export const ChimneySchema = z
   .object({
@@ -668,6 +750,7 @@ export const CanonicalBuildingModelSchema = z
     stairs: z.array(StairSchema),
     surfaceRegions: z.array(SurfaceRegionSchema),
     linearSolids: z.array(LinearSolidSchema),
+    terraces: z.array(TerraceSchema),
     materials: z.array(MaterialSchema),
     constraints: z.array(ConstraintSchema),
     evidenceSources: z.array(EvidenceSourceSchema),
@@ -702,6 +785,7 @@ export const OBJECT_COLLECTIONS = [
   'stairs',
   'surfaceRegions',
   'linearSolids',
+  'terraces',
   'materials',
   'constraints',
   'evidenceSources',
@@ -729,6 +813,7 @@ export const SEMANTIC_KINDS = [
   'stair',
   'surfaceRegion',
   'linearSolid',
+  'terrace',
   'material',
   'constraint',
   'evidenceSource',
@@ -755,6 +840,7 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   stair: 'stairs',
   surfaceRegion: 'surfaceRegions',
   linearSolid: 'linearSolids',
+  terrace: 'terraces',
   material: 'materials',
   constraint: 'constraints',
   evidenceSource: 'evidenceSources',
@@ -779,6 +865,7 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   stairs: 'stair',
   surfaceRegions: 'surfaceRegion',
   linearSolids: 'linearSolid',
+  terraces: 'terrace',
   materials: 'material',
   constraints: 'constraint',
   evidenceSources: 'evidenceSource',
@@ -804,6 +891,7 @@ export type SemanticObject =
   | Stair
   | SurfaceRegion
   | LinearSolid
+  | Terrace
   | Material
   | Constraint
 
@@ -835,6 +923,7 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     stairs: [],
     surfaceRegions: [],
     linearSolids: [],
+    terraces: [],
     materials: [],
     constraints: [],
     evidenceSources: [],

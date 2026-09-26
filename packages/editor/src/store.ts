@@ -614,6 +614,8 @@ export function editableProperties(kind: SemanticKind, object?: unknown, model?:
       return [text('name', 'Name'), sel('face', 'Face', ['OUTER', 'INNER']), num('rect.a0', 'From (along)', 'm', 0.05), num('rect.a1', 'To (along)', 'm', 0.05), num('rect.b0', 'Bottom', 'm', 0.05), num('rect.b1', 'Top', 'm', 0.05), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
     case 'linearSolid':
       return [text('name', 'Name'), num('width', 'Width (seen)', 'm', 0.01, 0.001), num('depth', 'Depth (proud)', 'm', 0.01, 0.001), num('rollDeg', 'Roll', '°', 1), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
+    case 'terrace':
+      return [text('name', 'Name'), num('topOffset', 'Top (above floor)', 'm', 0.01), num('thickness', 'Thickness', 'm', 0.01, 0.01), sel('surface', 'Surface', ['PAVED', 'DECK', 'UNKNOWN']), sel('edge', 'Edge', ['PLINTH', 'FLUSH']), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
     case 'wallJunction': {
       const j = object as WallJunction | undefined
       const specs: PropertySpec[] = [text('name', 'Name'), num('tolerance', 'Tolerance', 'm', 0.001, 0)]

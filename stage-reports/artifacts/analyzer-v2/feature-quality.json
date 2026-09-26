@@ -1,6 +1,6 @@
 {
-  "contentHash": "0e94cf0d50a711f073ffbca3f6ef93299a904d0153fc0637633810a65b6aa411",
-  "featureGraphHash": "96baa85a5147cc40314b1419ad7c8e119902c776c7618eb8864246d2730071ec",
+  "contentHash": "26c5e1531f7a6995d5d94e3c5d432a20045a4e837766c76ce26462090955587a",
+  "featureGraphHash": "d098761242dc9e231abfb6d8c4cd9da9ff6a59a49a7f9726f1365b79a2184de8",
   "id": "quality-marcowki",
   "records": [
     {
@@ -1753,7 +1753,7 @@
       "featureId": "feat-portal-head-attached-0",
       "level": "L2",
       "objectIds": [
-        "portal-head-attached-0"
+        "roof-attached-0"
       ],
       "provenance": "SOURCE_CORROBORATED",
       "sourceCoverage": {
@@ -1780,9 +1780,9 @@
       ],
       "provenance": "IMAGE_METRIC_REGISTERED",
       "sourceCoverage": {
-        "independentAssets": 2,
+        "independentAssets": 3,
         "printed": false,
-        "sightings": 2,
+        "sightings": 3,
         "viewFamilies": [
           "ELEVATION",
           "PLAN"
@@ -2247,52 +2247,55 @@
       "why": "3 tread ladders (5 risers plus x at 0.264 m, 7 risers plus z at 0.263 m, 5 risers minus x at 0.269 m) with 2 corner squares between them; 17 risers over 3.06 m = 0.180 m each; the arrowhead at (5.43289, 7.967588) fixes the climb"
     },
     {
-      "family": "BALCONY",
+      "family": "TERRACE",
       "featureId": "feat-terrace-front-66",
-      "level": "L0",
+      "level": "L1",
       "objectIds": [
         "terrace-front-66"
       ],
-      "provenance": "ASSUMED_FOR_RENDERING",
+      "provenance": "SOURCE_DERIVED",
       "sourceCoverage": {
-        "independentAssets": 0,
+        "independentAssets": 1,
         "printed": false,
-        "sightings": 0,
-        "viewFamilies": []
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
       },
       "uncertainty": {},
       "unresolvedProperties": [
-        "plinth"
+        "thickness (the terrain datum was not read)"
       ],
-      "why": "the recess floor at the storey level, standing on the plinth to the terrain"
+      "why": "the recess floor at the threshold"
     },
     {
-      "family": "BALCONY",
+      "family": "TERRACE",
       "featureId": "feat-terrace-rear-66",
-      "level": "L0",
+      "level": "L1",
       "objectIds": [
         "terrace-rear-66"
       ],
-      "provenance": "ASSUMED_FOR_RENDERING",
+      "provenance": "SOURCE_DERIVED",
       "sourceCoverage": {
-        "independentAssets": 0,
+        "independentAssets": 1,
         "printed": false,
-        "sightings": 0,
-        "viewFamilies": []
+        "sightings": 1,
+        "viewFamilies": [
+          "PLAN"
+        ]
       },
       "uncertainty": {},
       "unresolvedProperties": [
-        "plinth"
+        "thickness (the terrain datum was not read)"
       ],
-      "why": "the recess floor at the storey level, standing on the plinth to the terrain"
+      "why": "the recess floor, continuing 2.11 m past the mouth to the outline the plan draws (a thin outline 2.11 m out from the mouth spans 100 % of the facade (0.01..7.89); the plan between is drawn on over 51 % of it)"
     },
     {
       "family": "ROOF_MEMBER",
       "featureId": "feat-verge-front",
       "level": "L1",
       "objectIds": [
-        "verge-front-e",
-        "verge-front-w"
+        "roof-main"
       ],
       "provenance": "SOURCE_CORROBORATED",
       "sourceCoverage": {
@@ -2306,9 +2309,7 @@
       "uncertainty": {
         "m": 0.06
       },
-      "unresolvedProperties": [
-        "depth"
-      ],
+      "unresolvedProperties": [],
       "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.54 m), standing in the outer plane 0.99 m in front of the recessed wall"
     },
     {
@@ -2316,8 +2317,7 @@
       "featureId": "feat-verge-rear",
       "level": "L1",
       "objectIds": [
-        "verge-rear-e",
-        "verge-rear-w"
+        "roof-main"
       ],
       "provenance": "SOURCE_CORROBORATED",
       "sourceCoverage": {
@@ -2331,9 +2331,7 @@
       "uncertainty": {
         "m": 0.06
       },
-      "unresolvedProperties": [
-        "depth"
-      ],
+      "unresolvedProperties": [],
       "why": "a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall"
     }
   ],
@@ -2344,7 +2342,6 @@
       "L2": 1
     },
     "BALCONY": {
-      "L0": 2,
       "L2": 2
     },
     "CAMERA": {
@@ -2403,6 +2400,9 @@
     },
     "SURFACE_REGION": {
       "L0": 1
+    },
+    "TERRACE": {
+      "L1": 2
     }
   }
 }

@@ -103,7 +103,8 @@
       ],
       "evidenceIds": [
         "sight-balcony-fascia-band-462d58b4-2a91b2396e",
-        "sight-balcony-floor-in-the-zon-d2722c38-a69e06dfc3"
+        "sight-balcony-floor-in-the-zon-d2722c38-a69e06dfc3",
+        "sight-the-balustrade-drawn-acr-d2722c38-0650423dc7"
       ],
       "facadeId": "FRONT",
       "id": "assembly-portal-attached-0",
@@ -146,6 +147,19 @@
   ],
   "balconies": [
     {
+      "ends": [
+        {
+          "at": 3.310378,
+          "kind": "FREE",
+          "why": "a free end; the plan draws a line across the zone at 3.31 (100 % of its depth): the balustrade turning to the wall"
+        },
+        {
+          "againstId": "return-front-1-1",
+          "at": 7.9,
+          "kind": "CARRIES",
+          "why": "return-front-1-1 stands over the open recess of the storey below, on nothing but the slab; the slab runs on under it to its far face (the band reads 33 % of the front render's white over the slab and 33 % across 7.24..7.90: one band)"
+        }
+      ],
       "fascia": {
         "along": [
           0.656146,
@@ -171,16 +185,31 @@
       "id": "balcony-front-1",
       "kind": "BALCONY",
       "provenance": "IMAGE_METRIC_REGISTERED",
+      "side": "FRONT",
       "storeyIndex": 1,
-      "thicknessM": 0.707826,
-      "topY": 3.028855,
+      "thicknessM": 0.738971,
+      "topY": 3.06,
       "why": "a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)",
-      "x0": 3.134658,
-      "x1": 7.229937,
+      "x0": 3.310378,
+      "x1": 7.9,
       "z0": 0,
       "z1": 0.991283
     },
     {
+      "ends": [
+        {
+          "againstId": "return-rear-0-0",
+          "at": 0.66065,
+          "kind": "WALL",
+          "why": "against the face of return-rear-0-0, which stands beside the slab"
+        },
+        {
+          "againstId": "return-rear-0-1",
+          "at": 7.265776,
+          "kind": "WALL",
+          "why": "against the face of return-rear-0-1, which stands beside the slab"
+        }
+      ],
       "fascia": {
         "along": [
           0.656146,
@@ -206,40 +235,13 @@
       "id": "balcony-rear-1",
       "kind": "BALCONY",
       "provenance": "IMAGE_METRIC_REGISTERED",
+      "side": "REAR",
       "storeyIndex": 1,
-      "thicknessM": 0.50418,
-      "topY": 3.025777,
+      "thicknessM": 0.538403,
+      "topY": 3.06,
       "why": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)",
-      "x0": 0.638726,
-      "x1": 7.17626,
-      "z0": 13.601283,
-      "z1": 14.601283
-    },
-    {
-      "featureId": "feat-terrace-front-66",
-      "id": "terrace-front-66",
-      "kind": "TERRACE",
-      "provenance": "ASSUMED_FOR_RENDERING",
-      "storeyIndex": 0,
-      "thicknessM": 0.2,
-      "topY": 0,
-      "why": "the floor of the recess",
       "x0": 0.66065,
-      "x1": 11.416032,
-      "z0": 0,
-      "z1": 0.991283
-    },
-    {
-      "featureId": "feat-terrace-rear-66",
-      "id": "terrace-rear-66",
-      "kind": "TERRACE",
-      "provenance": "ASSUMED_FOR_RENDERING",
-      "storeyIndex": 0,
-      "thicknessM": 0.2,
-      "topY": 0,
-      "why": "the floor of the recess",
-      "x0": 0.66065,
-      "x1": 7.26715,
+      "x1": 7.265776,
       "z0": 13.601283,
       "z1": 14.601283
     }
@@ -284,6 +286,503 @@
       "x1": 5.984053,
       "z0": 4.17669,
       "z1": 4.834832
+    }
+  ],
+  "facadeGraph": {
+    "edges": [
+      {
+        "from": "return-front-1-0",
+        "gapM": 0,
+        "kind": "CONTINUES_TO",
+        "to": "verge-front",
+        "why": "the return’s top follows the verge’s underside across the zone; any depth of return beyond the verge meets the plate instead"
+      },
+      {
+        "from": "return-front-1-1",
+        "gapM": 0,
+        "kind": "CONTINUES_TO",
+        "to": "verge-front",
+        "why": "the return’s top follows the verge’s underside across the zone; any depth of return beyond the verge meets the plate instead"
+      },
+      {
+        "from": "return-rear-1-0",
+        "gapM": 0,
+        "kind": "CONTINUES_TO",
+        "to": "verge-rear",
+        "why": "the return’s top follows the verge’s underside across the zone; any depth of return beyond the verge meets the plate instead"
+      },
+      {
+        "from": "return-rear-1-1",
+        "gapM": 0,
+        "kind": "CONTINUES_TO",
+        "to": "verge-rear",
+        "why": "the return’s top follows the verge’s underside across the zone; any depth of return beyond the verge meets the plate instead"
+      },
+      {
+        "from": "balcony-front-1",
+        "gapM": 0,
+        "kind": "TERMINATES_AT",
+        "to": "return-front-1-1",
+        "why": "return-front-1-1 stands over the open recess of the storey below, on nothing but the slab; the slab runs on under it to its far face (the band reads 33 % of the front render's white over the slab and 33 % across 7.24..7.90: one band)"
+      },
+      {
+        "from": "balcony-front-1",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "front wall",
+        "why": "the slab's back edge is the front wall face at 0.991"
+      },
+      {
+        "from": "balcony-rear-1",
+        "gapM": 0,
+        "kind": "TERMINATES_AT",
+        "to": "return-rear-0-0",
+        "why": "against the face of return-rear-0-0, which stands beside the slab"
+      },
+      {
+        "from": "balcony-rear-1",
+        "gapM": 0,
+        "kind": "TERMINATES_AT",
+        "to": "return-rear-0-1",
+        "why": "against the face of return-rear-0-1, which stands beside the slab"
+      },
+      {
+        "from": "balcony-rear-1",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "rear wall",
+        "why": "the slab's back edge is the rear wall face at 13.601"
+      },
+      {
+        "from": "balcony-front-1",
+        "gapM": 0,
+        "kind": "CONTINUES_TO",
+        "to": "portal-head-attached-0",
+        "why": "one band across the portal: the balcony fascia continues as the garage roof edge"
+      },
+      {
+        "from": "portal-head-attached-0",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "roof-attached-0",
+        "why": "the head is the roof’s own edge member"
+      },
+      {
+        "from": "railing-front-1",
+        "gapM": 0,
+        "kind": "TURNS_AT",
+        "to": "railing-front-1",
+        "why": "a corner post at (3.36, 0.05)"
+      },
+      {
+        "from": "railing-front-1",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "balcony-front-1",
+        "why": "the balustrade stands on the slab it guards"
+      },
+      {
+        "from": "railing-rear-1",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "balcony-rear-1",
+        "why": "the balustrade stands on the slab it guards"
+      },
+      {
+        "from": "terrace-front-66",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "main",
+        "why": "the terrace lies against the body’s facade at the threshold"
+      },
+      {
+        "from": "terrace-front-66",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "attached-0",
+        "why": "the terrace lies against the body’s facade at the threshold"
+      },
+      {
+        "from": "terrace-rear-66",
+        "gapM": 0,
+        "kind": "MEETS_HOST",
+        "to": "main",
+        "why": "the terrace lies against the body’s facade at the threshold"
+      }
+    ],
+    "nodes": [
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-return-front-0-0",
+        "id": "return-front-0-0",
+        "kind": "RETURN",
+        "start": {
+          "x": 0,
+          "y": 0,
+          "z": 0.991283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 12.05,
+          "y": 0,
+          "z": 0.991283
+        },
+        "facade": "FRONT",
+        "featureId": "feat-return-front-0-1",
+        "id": "return-front-0-1",
+        "kind": "RETURN",
+        "start": {
+          "x": 12.05,
+          "y": 0,
+          "z": 0
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 0,
+          "y": 3.06,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-return-front-1-0",
+        "id": "return-front-1-0",
+        "kind": "RETURN",
+        "start": {
+          "x": 0,
+          "y": 3.06,
+          "z": 0.991283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 0.991283
+        },
+        "facade": "FRONT",
+        "featureId": "feat-return-front-1-1",
+        "id": "return-front-1-1",
+        "kind": "RETURN",
+        "start": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 0
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 0,
+          "y": 0,
+          "z": 13.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-return-rear-0-0",
+        "id": "return-rear-0-0",
+        "kind": "RETURN",
+        "start": {
+          "x": 0,
+          "y": 0,
+          "z": 14.601283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 7.9,
+          "y": 0,
+          "z": 14.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-return-rear-0-1",
+        "id": "return-rear-0-1",
+        "kind": "RETURN",
+        "start": {
+          "x": 7.9,
+          "y": 0,
+          "z": 13.601283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 0,
+          "y": 3.06,
+          "z": 13.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-return-rear-1-0",
+        "id": "return-rear-1-0",
+        "kind": "RETURN",
+        "start": {
+          "x": 0,
+          "y": 3.06,
+          "z": 14.601283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 14.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-return-rear-1-1",
+        "id": "return-rear-1-1",
+        "kind": "RETURN",
+        "start": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 13.601283
+        },
+        "termination": {
+          "end": "FREE",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 0,
+          "y": 4.635556,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-verge-front",
+        "hostId": "roof-main",
+        "id": "verge-front",
+        "kind": "VERGE",
+        "start": {
+          "x": 0,
+          "y": 4.635556,
+          "z": 0
+        },
+        "termination": {
+          "end": "MEETS",
+          "start": "MEETS"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 0,
+          "y": 4.635556,
+          "z": 14.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-verge-rear",
+        "hostId": "roof-main",
+        "id": "verge-rear",
+        "kind": "VERGE",
+        "start": {
+          "x": 0,
+          "y": 4.635556,
+          "z": 14.601283
+        },
+        "termination": {
+          "end": "MEETS",
+          "start": "MEETS"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-balcony-front-1",
+        "id": "balcony-front-1",
+        "kind": "BALCONY_SLAB",
+        "start": {
+          "x": 3.310378,
+          "y": 3.06,
+          "z": 0
+        },
+        "termination": {
+          "end": "CARRIES",
+          "start": "FREE"
+        }
+      },
+      {
+        "depthM": 1,
+        "end": {
+          "x": 7.265776,
+          "y": 3.06,
+          "z": 14.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-balcony-rear-1",
+        "id": "balcony-rear-1",
+        "kind": "BALCONY_SLAB",
+        "start": {
+          "x": 0.66065,
+          "y": 3.06,
+          "z": 14.601283
+        },
+        "termination": {
+          "end": "WALL",
+          "start": "WALL"
+        }
+      },
+      {
+        "depthM": 0.991283,
+        "end": {
+          "x": 12.05,
+          "y": 3.06,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-portal-head-attached-0",
+        "hostId": "roof-attached-0",
+        "id": "portal-head-attached-0",
+        "kind": "PORTAL_HEAD",
+        "start": {
+          "x": 7.9,
+          "y": 3.06,
+          "z": 0
+        },
+        "termination": {
+          "end": "WALL",
+          "start": "MEETS"
+        }
+      },
+      {
+        "end": {
+          "x": 7.218854,
+          "y": 3.06,
+          "z": 0.05
+        },
+        "facade": "FRONT",
+        "featureId": "feat-railing-front-1",
+        "hostId": "balcony-front-1",
+        "id": "railing-front-1",
+        "kind": "RAILING",
+        "start": {
+          "x": 3.360378,
+          "y": 3.06,
+          "z": 0.966283
+        },
+        "termination": {
+          "end": "TURNS",
+          "start": "TURNS"
+        }
+      },
+      {
+        "end": {
+          "x": 7.240776,
+          "y": 3.06,
+          "z": 14.551283
+        },
+        "facade": "REAR",
+        "featureId": "feat-railing-rear-1",
+        "hostId": "balcony-rear-1",
+        "id": "railing-rear-1",
+        "kind": "RAILING",
+        "start": {
+          "x": 0.68565,
+          "y": 3.06,
+          "z": 14.551283
+        },
+        "termination": {
+          "end": "WALL",
+          "start": "WALL"
+        }
+      },
+      {
+        "end": {
+          "x": 11.416032,
+          "y": 0,
+          "z": 0
+        },
+        "facade": "FRONT",
+        "featureId": "feat-terrace-front-66",
+        "id": "terrace-front-66",
+        "kind": "TERRACE",
+        "start": {
+          "x": 0.66065,
+          "y": 0,
+          "z": 0
+        },
+        "termination": {
+          "end": "WALL",
+          "start": "WALL"
+        }
+      },
+      {
+        "end": {
+          "x": 7.26715,
+          "y": 0,
+          "z": 13.601283
+        },
+        "facade": "REAR",
+        "featureId": "feat-terrace-rear-66",
+        "id": "terrace-rear-66",
+        "kind": "TERRACE",
+        "start": {
+          "x": 0.66065,
+          "y": 0,
+          "z": 13.601283
+        },
+        "termination": {
+          "end": "WALL",
+          "start": "WALL"
+        }
+      }
+    ]
+  },
+  "frameTones": [
+    {
+      "share": 0.671431,
+      "side": "FRONT",
+      "tone": "LIGHT",
+      "why": "the median of 6367 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
+    },
+    {
+      "share": 0.939044,
+      "side": "REAR",
+      "tone": "LIGHT",
+      "why": "the median of 6316 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
     }
   ],
   "interior": [
@@ -2139,7 +2638,7 @@
       ]
     }
   ],
-  "label": "Marcówki (auto v2)",
+  "label": "Marcówki (auto v3)",
   "levels": [
     {
       "elevation": 0,
@@ -2180,6 +2679,22 @@
     "ridgeY": 7.95,
     "thicknessM": 0.28
   },
+  "massTones": [
+    {
+      "massId": "main",
+      "share": 0.651826,
+      "tone": "LIGHT",
+      "views": 4,
+      "why": "the median of 24370 samples of its open ground-storey faces on the rear, front, left, right renders is 94 % of the render's white: light (65 % of the samples read light)"
+    },
+    {
+      "massId": "attached-0",
+      "share": 0.984848,
+      "tone": "DARK",
+      "views": 3,
+      "why": "the median of 19602 samples of its open ground-storey faces on the rear, front, right renders is 34 % of the render's white: dark (98 % of the samples read dark)"
+    }
+  ],
   "masses": [
     {
       "featureId": "feat-main",
@@ -3048,6 +3563,7 @@
   ],
   "portalHeads": [
     {
+      "continuesFromId": "balcony-front-1",
       "featureId": "feat-portal-head-attached-0",
       "id": "portal-head-attached-0",
       "massId": "attached-0",
@@ -3056,45 +3572,61 @@
       "x0": 7.9,
       "x1": 12.05,
       "y0": 2.321029,
-      "y1": 3.028855,
+      "y1": 3.06,
       "z0": 0,
       "z1": 0.991283
     }
   ],
   "railings": [
     {
-      "baseY": 3.028855,
+      "baseY": 3.06,
       "end": {
-        "x": 7.179937,
+        "x": 7.218854,
         "z": 0.05
       },
       "featureId": "feat-railing-front-1",
       "heightM": 0.910062,
+      "hostId": "balcony-front-1",
       "id": "railing-front-1",
+      "path": [
+        {
+          "x": 3.360378,
+          "z": 0.966283
+        },
+        {
+          "x": 3.360378,
+          "z": 0.05
+        },
+        {
+          "x": 7.218854,
+          "z": 0.05
+        }
+      ],
       "provenance": "IMAGE_METRIC_REGISTERED",
       "start": {
-        "x": 3.184658,
-        "z": 0.05
+        "x": 3.360378,
+        "z": 0.966283
       },
       "storeyIndex": 1,
-      "why": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth"
+      "why": "a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth; along the mouth, turning back to the wall at the low end; low end free, high end carries (return-front-1-1)"
     },
     {
-      "baseY": 3.025777,
+      "baseY": 3.06,
       "end": {
-        "x": 7.12626,
+        "x": 7.240776,
         "z": 14.551283
       },
       "featureId": "feat-railing-rear-1",
       "heightM": 0.92433,
+      "hostId": "balcony-rear-1",
       "id": "railing-rear-1",
       "provenance": "IMAGE_METRIC_REGISTERED",
       "start": {
-        "x": 0.688726,
+        "x": 0.68565,
         "z": 14.551283
       },
       "storeyIndex": 1,
-      "why": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth"
+      "why": "a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth; along the mouth; low end wall (return-rear-0-0), high end wall (return-rear-0-1)"
     }
   ],
   "recesses": [
@@ -3289,6 +3821,10 @@
   ],
   "returns": [
     {
+      "alongInterval": [
+        0,
+        0.66065
+      ],
       "end": {
         "x": 0,
         "z": 0
@@ -3307,8 +3843,12 @@
       "why": "a 0.66 m return standing in the 0.99 m front zone on the storey 0 plan"
     },
     {
+      "alongInterval": [
+        11.415776,
+        12.05
+      ],
       "end": {
-        "x": 12.050256,
+        "x": 12.05,
         "z": 0.991283
       },
       "featureId": "feat-return-front-0-1",
@@ -3317,7 +3857,7 @@
       "recessId": "recess-front-0",
       "side": "FRONT",
       "start": {
-        "x": 12.050256,
+        "x": 12.05,
         "z": 0
       },
       "storeyIndex": 0,
@@ -3325,8 +3865,12 @@
       "why": "a 0.63 m return standing in the 0.99 m front zone on the storey 0 plan"
     },
     {
+      "alongInterval": [
+        0,
+        0.6299
+      ],
       "end": {
-        "x": 0.026246,
+        "x": 0,
         "z": 0
       },
       "featureId": "feat-return-front-1-0",
@@ -3335,7 +3879,7 @@
       "recessId": "recess-front-1",
       "side": "FRONT",
       "start": {
-        "x": 0.026246,
+        "x": 0,
         "z": 0.991283
       },
       "storeyIndex": 1,
@@ -3343,8 +3887,12 @@
       "why": "a 0.63 m return standing in the 0.99 m front zone on the storey 1 plan"
     },
     {
+      "alongInterval": [
+        7.243854,
+        7.9
+      ],
       "end": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 0.991283
       },
       "featureId": "feat-return-front-1-1",
@@ -3353,7 +3901,7 @@
       "recessId": "recess-front-1",
       "side": "FRONT",
       "start": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 0
       },
       "storeyIndex": 1,
@@ -3361,6 +3909,10 @@
       "why": "a 0.66 m return standing in the 0.99 m front zone on the storey 1 plan"
     },
     {
+      "alongInterval": [
+        0,
+        0.66065
+      ],
       "end": {
         "x": 0,
         "z": 13.601283
@@ -3379,8 +3931,12 @@
       "why": "a 0.66 m return standing in the 1.00 m rear zone on the storey 0 plan"
     },
     {
+      "alongInterval": [
+        7.265776,
+        7.9
+      ],
       "end": {
-        "x": 7.901374,
+        "x": 7.9,
         "z": 14.601283
       },
       "featureId": "feat-return-rear-0-1",
@@ -3389,7 +3945,7 @@
       "recessId": "recess-rear-0",
       "side": "REAR",
       "start": {
-        "x": 7.901374,
+        "x": 7.9,
         "z": 13.601283
       },
       "storeyIndex": 0,
@@ -3397,8 +3953,12 @@
       "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 0 plan"
     },
     {
+      "alongInterval": [
+        0,
+        0.6299
+      ],
       "end": {
-        "x": 0.026246,
+        "x": 0,
         "z": 13.601283
       },
       "featureId": "feat-return-rear-1-0",
@@ -3407,7 +3967,7 @@
       "recessId": "recess-rear-1",
       "side": "REAR",
       "start": {
-        "x": 0.026246,
+        "x": 0,
         "z": 14.601283
       },
       "storeyIndex": 1,
@@ -3415,8 +3975,12 @@
       "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 1 plan"
     },
     {
+      "alongInterval": [
+        7.243854,
+        7.9
+      ],
       "end": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 14.601283
       },
       "featureId": "feat-return-rear-1-1",
@@ -3425,7 +3989,7 @@
       "recessId": "recess-rear-1",
       "side": "REAR",
       "start": {
-        "x": 7.873754,
+        "x": 7.9,
         "z": 13.601283
       },
       "storeyIndex": 1,
@@ -3675,9 +4239,103 @@
       ]
     }
   ],
+  "terraces": [
+    {
+      "edge": "PLINTH",
+      "featureId": "feat-terrace-front-66",
+      "id": "terrace-front-66",
+      "massIds": [
+        "main",
+        "attached-0"
+      ],
+      "polygon": [
+        {
+          "x": 0.66065,
+          "z": 0
+        },
+        {
+          "x": 11.416032,
+          "z": 0
+        },
+        {
+          "x": 11.416032,
+          "z": 0.991283
+        },
+        {
+          "x": 0.66065,
+          "z": 0.991283
+        }
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "side": "FRONT",
+      "storeyIndex": 0,
+      "surface": "PAVED",
+      "thicknessM": 0.15,
+      "topY": 0,
+      "why": "the floor of the front recess"
+    },
+    {
+      "edge": "PLINTH",
+      "extension": {
+        "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "from": 0.009397,
+        "reach": 2.107078,
+        "to": 7.890603,
+        "why": "a thin outline 2.11 m out from the mouth spans 100 % of the facade (0.01..7.89); the plan between is drawn on over 51 % of it"
+      },
+      "featureId": "feat-terrace-rear-66",
+      "id": "terrace-rear-66",
+      "massIds": [
+        "main"
+      ],
+      "polygon": [
+        {
+          "x": 0.66065,
+          "z": 13.601283
+        },
+        {
+          "x": 7.26715,
+          "z": 13.601283
+        },
+        {
+          "x": 7.26715,
+          "z": 14.601283
+        },
+        {
+          "x": 7.890603,
+          "z": 14.601283
+        },
+        {
+          "x": 7.890603,
+          "z": 16.708361
+        },
+        {
+          "x": 0.009397,
+          "z": 16.708361
+        },
+        {
+          "x": 0.009397,
+          "z": 14.601283
+        },
+        {
+          "x": 0.66065,
+          "z": 14.601283
+        }
+      ],
+      "provenance": "SOURCE_DERIVED",
+      "side": "REAR",
+      "storeyIndex": 0,
+      "surface": "PAVED",
+      "thicknessM": 0.15,
+      "topY": 0,
+      "why": "the floor of the rear recess and the platform the plan outlines beyond it"
+    }
+  ],
   "verges": [
     {
-      "depthM": 0.3,
+      "depthM": 0.991283,
+      "depthProvenance": "SOURCE_DERIVED",
+      "depthWhy": "the depth of the zone the frame's returns stand in (recess-front-1)",
       "featureId": "feat-verge-front",
       "id": "verge-front",
       "member": {
@@ -3712,7 +4370,9 @@
       "side": "FRONT"
     },
     {
-      "depthM": 0.3,
+      "depthM": 1,
+      "depthProvenance": "SOURCE_DERIVED",
+      "depthWhy": "the depth of the zone the frame's returns stand in (recess-rear-1)",
       "featureId": "feat-verge-rear",
       "id": "verge-rear",
       "member": {
