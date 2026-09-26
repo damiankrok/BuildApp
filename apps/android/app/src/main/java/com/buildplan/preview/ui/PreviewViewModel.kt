@@ -10,8 +10,9 @@ import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.PoseAnimation
 import com.buildplan.preview.camera.ViewPreset
 import com.buildplan.preview.render.RenderStyle
+import com.buildplan.preview.scene.DownloadedScenes
 import com.buildplan.preview.scene.ModelScene
-import com.buildplan.preview.scene.SceneIndexEntry
+import com.buildplan.preview.scene.SceneEntry
 import com.buildplan.preview.scene.SceneLoadResult
 import com.buildplan.preview.scene.SceneRepository
 import com.buildplan.preview.scene.ViewerState
@@ -30,9 +31,14 @@ sealed interface ScreenState {
  */
 class PreviewViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = SceneRepository(application.assets)
+    /** Bundled scenes first, in their exported order, then the analyses downloaded to this phone. */
+    private val repository = SceneRepository(
+        application.assets,
+        DownloadedScenes(java.io.File(application.filesDir, "analyses")),
+    )
 
-    val scenes: List<SceneIndexEntry> = repository.index()
+    var scenes: List<SceneEntry> by mutableStateOf(repository.entries())
+        private set
 
     var screen by mutableStateOf<ScreenState>(ScreenState.Loading)
         private set
@@ -66,7 +72,25 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
             ?: run { screen = ScreenState.Failed("This build carries no scene bundles. Run `npm run mobile:export-scenes` and rebuild.") }
     }
 
-    fun open(entry: SceneIndexEntry) {
+    /**
+     * Re-read the scene list (an analysis was downloaded or deleted). If the
+     * open scene was a downloaded one that is gone now, fall back to the
+     * first scene rather than keep showing something the list no longer has.
+     */
+    fun refreshScenes() {
+        scenes = repository.entries()
+        val openKey = scene?.key ?: return
+        if (scenes.none { it.key == openKey }) scenes.firstOrNull()?.let { open(it) }
+    }
+
+    /** Open the scene with this key, if the list has it. */
+    fun openKey(key: String): Boolean {
+        val entry = scenes.firstOrNull { it.key == key } ?: return false
+        open(entry)
+        return true
+    }
+
+    fun open(entry: SceneEntry) {
         screen = ScreenState.Loading
         when (val result = repository.load(entry)) {
             is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message)

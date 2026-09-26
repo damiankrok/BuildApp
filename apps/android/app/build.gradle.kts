@@ -111,10 +111,53 @@ val previewVersion: PreviewVersion = run {
 
 val previewCommit: String = previewEnv("GITHUB_SHA") ?: gitStdout("rev-parse", "HEAD") ?: "unknown"
 
+// ---------------------------------------------------------------------------
+// Analyzer service address
+// ---------------------------------------------------------------------------
+
+/**
+ * Where the Analyzer screen sends project links: the base URL of a deployed
+ * `apps/analyzer-api` service (docs/ANALYZER_API.md). It is an ADDRESS, not a
+ * secret — the API has no key, token or cookie, and nothing secret is read
+ * here. Taken from, in order:
+ *
+ *   -PanalyzerApiBaseUrl=https://...    Gradle property
+ *   ANALYZER_API_BASE_URL=https://...   environment (a CI repository variable)
+ *
+ * Empty when neither is set: the app then says no analyzer service is
+ * configured and lets the owner type an address on the phone. The app accepts
+ * https only and refuses anything else at runtime; a non-https value is
+ * warned about here rather than silently shipped.
+ */
+val analyzerApiBaseUrl: String =
+    providers.gradleProperty("analyzerApiBaseUrl").orNull?.trim()?.takeIf { it.isNotEmpty() }
+        ?: previewEnv("ANALYZER_API_BASE_URL")
+        ?: ""
+
+if (analyzerApiBaseUrl.isNotEmpty() && !analyzerApiBaseUrl.startsWith("https://")) {
+    logger.warn("ANALYZER_API_BASE_URL is not an https:// address; the app will refuse it and report that no analyzer is configured.")
+}
+
+/** `value` as a Java string literal for BuildConfig: quotes, backslashes and control characters escaped. */
+fun javaStringLiteral(value: String): String = buildString {
+    append('"')
+    for (c in value) {
+        when {
+            c == '\\' -> append("\\\\")
+            c == '"' -> append("\\\"")
+            // Octal rather than \uXXXX: javac turns unicode escapes into characters before it reads a literal.
+            c.code < 0x20 || c.code == 0x7f -> append('\\').append(Integer.toOctalString(c.code).padStart(3, '0'))
+            c.code > 0x7e -> append("\\u").append(Integer.toHexString(c.code).padStart(4, '0'))
+            else -> append(c)
+        }
+    }
+    append('"')
+}
+
 logger.lifecycle(
     "BuildPlan Model Preview: versionCode ${previewVersion.code}, versionName ${previewVersion.name} " +
         "(from ${previewVersion.source}); signing with ${previewKeystoreFile.path} alias '$previewKeyAlias' " +
-        "(signer SHA-256 $previewSignerSha256)",
+        "(signer SHA-256 $previewSignerSha256); analyzer service: ${analyzerApiBaseUrl.ifEmpty { "not configured" }}",
 )
 
 android {
@@ -131,7 +174,8 @@ android {
         targetSdk = 35
         versionCode = previewVersion.code
         versionName = previewVersion.name
-        // No permissions at all: the preview reads bundled assets and nothing else.
+        // One permission, INTERNET, for the Analyzer screen; the bundled scenes need none.
+        buildConfigField("String", "ANALYZER_API_BASE_URL", javaStringLiteral(analyzerApiBaseUrl))
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
     }
 

@@ -2,11 +2,18 @@
 <!--
   BuildPlan Model Preview.
 
-  Declares no permissions on purpose. The viewer reads scene bundles that ship
-  inside the APK: it needs no network, no storage, no location and no camera,
-  and it works with the phone in flight mode.
+  One permission, INTERNET, and nothing else. The bundled scenes ship inside
+  the APK and still open with no network, in flight mode. The Analyzer screen
+  needs the network: it sends a project link to the analyzer service over
+  https and downloads the scene the service made, which is verified and kept
+  in the app's private storage (no storage permission is involved). No
+  location, camera, microphone, storage or network-state permission, no
+  network security config, and cleartext traffic stays disabled (the
+  targetSdk default).
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
 

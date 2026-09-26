@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,27 +31,35 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.scene.ModelScene
+import com.buildplan.preview.scene.SceneSourceKind
 
 /**
  * The whole app: a viewport with a thin band of chrome.
  *
  * The 3D model gets the screen. The top strip says what is loaded, the bottom
  * strip holds the tools, and the inspector only appears once there is
- * something to inspect.
+ * something to inspect. `onAnalyze` opens the Analyzer screen, which turns a
+ * project link into a downloaded scene listed beside the bundled ones.
  */
 @Composable
-fun PreviewScreen(model: PreviewViewModel) {
+fun PreviewScreen(model: PreviewViewModel, onAnalyze: () -> Unit = {}) {
     Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
         when (val screen = model.screen) {
             is ScreenState.Loading -> CentredMessage("Loading model…", null)
-            is ScreenState.Failed -> CentredMessage("The model could not be loaded", screen.message)
-            is ScreenState.Ready -> ReadyScreen(model, screen.scene)
+            is ScreenState.Failed -> CentredMessage("The model could not be loaded", screen.message) {
+                // A downloaded scene can fail to open (a damaged file); never strand the owner here.
+                model.scenes.firstOrNull()?.let { first ->
+                    FilledTonalButton(onClick = { model.open(first) }) { Text("Open ${first.title}") }
+                }
+                TextButton(onClick = onAnalyze) { Text("Analyze link") }
+            }
+            is ScreenState.Ready -> ReadyScreen(model, screen.scene, onAnalyze)
         }
     }
 }
 
 @Composable
-private fun ReadyScreen(model: PreviewViewModel, scene: ModelScene) {
+private fun ReadyScreen(model: PreviewViewModel, scene: ModelScene, onAnalyze: () -> Unit) {
     var showInspector by remember { mutableStateOf(false) }
     val selected = model.selected
 
@@ -57,7 +67,7 @@ private fun ReadyScreen(model: PreviewViewModel, scene: ModelScene) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
         Column(Modifier.fillMaxSize().safeDrawingPadding()) {
-            TopStrip(model, scene)
+            TopStrip(model, scene, onAnalyze)
             Box(Modifier.weight(1f))
 
             AnimatedVisibility(
@@ -97,7 +107,7 @@ private fun ReadyScreen(model: PreviewViewModel, scene: ModelScene) {
 }
 
 @Composable
-private fun TopStrip(model: PreviewViewModel, scene: ModelScene) {
+private fun TopStrip(model: PreviewViewModel, scene: ModelScene, onAnalyze: () -> Unit) {
     var pickerOpen by remember { mutableStateOf(false) }
     Surface(
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.88f),
@@ -115,6 +125,10 @@ private fun TopStrip(model: PreviewViewModel, scene: ModelScene) {
                         "${scene.triangleCount} triangles · bundle ${scene.bundle.contentHash.take(8)}$selectedLabel",
                 )
             }
+            TextButton(
+                onClick = onAnalyze,
+                modifier = Modifier.semantics { contentDescription = "Analyze link: turn a project page into a model on this phone" },
+            ) { Text("Analyze link") }
             if (model.scenes.size > 1) {
                 Box {
                     TextButton(
@@ -122,11 +136,16 @@ private fun TopStrip(model: PreviewViewModel, scene: ModelScene) {
                         modifier = Modifier.semantics { contentDescription = "Choose which model to inspect. Currently ${scene.title}." },
                     ) { Text("Model") }
                     DropdownMenu(expanded = pickerOpen, onDismissRequest = { pickerOpen = false }) {
-                        for (entry in model.scenes) {
+                        for ((i, entry) in model.scenes.withIndex()) {
+                            val downloaded = entry.source == SceneSourceKind.DOWNLOADED
+                            // Bundled scenes first, then downloaded analyses, with a rule between the two sources.
+                            if (downloaded && model.scenes.getOrNull(i - 1)?.source == SceneSourceKind.BUNDLED) HorizontalDivider()
                             DropdownMenuItem(
                                 text = { Text(if (entry.key == scene.key) "${entry.title}  ✓" else entry.title) },
                                 onClick = { pickerOpen = false; if (entry.key != scene.key) model.open(entry) },
-                                modifier = Modifier.semantics { contentDescription = "${entry.title}. ${entry.subtitle}" },
+                                modifier = Modifier.semantics {
+                                    contentDescription = "${entry.title}. ${entry.subtitle}" + if (downloaded) ". Downloaded analysis." else ""
+                                },
                             )
                         }
                     }
@@ -137,7 +156,7 @@ private fun TopStrip(model: PreviewViewModel, scene: ModelScene) {
 }
 
 @Composable
-private fun CentredMessage(title: String, detail: String?) {
+private fun CentredMessage(title: String, detail: String?, actions: (@Composable () -> Unit)? = null) {
     Box(Modifier.fillMaxSize().safeDrawingPadding(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier.padding(28.dp),
@@ -152,6 +171,7 @@ private fun CentredMessage(title: String, detail: String?) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            actions?.invoke()
         }
     }
 }
