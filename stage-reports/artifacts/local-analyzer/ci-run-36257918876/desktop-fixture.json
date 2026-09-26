@@ -1,0 +1,22 @@
+{
+  "runtime": "v22.23.2",
+  "project": "larchfield-lf01",
+  "url": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "label": "Larchfield (analysis)",
+  "sourcePackageHash": "66ef293001041ad4c2215d8d225f5d3e5d1f8a85134c9b847806541e5e4fa3d8",
+  "observationGraphHash": "969c810eec9ef47f90e480a3df3e9f4b70cee8276ecd5868b13b3ddab7dc5c08",
+  "metricEvidenceHash": "4b6bb7039c4d3b919909d30751e972a864aee026afdd792a615305f4bd2d64ce",
+  "candidateHash": "186f40f115185800e3054165796e886df8cc3114fd702a755bf1e2b35efb2dc4",
+  "modelHash": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+  "sceneContentHash": "ce1a5fc67d7c26f173a12c1d295bc23f5104a9b33ad2f70e006deff85b568115",
+  "sceneSha256": "6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63",
+  "timings": {
+    "acquisitionMs": 437,
+    "observationMs": 1079,
+    "metricExtractionMs": 374,
+    "reconstructionMs": 387,
+    "compileMs": 19,
+    "verificationMs": 45,
+    "totalMs": 2341
+  }
+}

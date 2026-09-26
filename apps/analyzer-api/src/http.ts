@@ -249,9 +249,12 @@ export function createApiServer(deps: ApiDeps): Server {
       .catch((error: unknown) => {
         const e = error instanceof HttpError ? error : new HttpError(500, 'INTERNAL', 'the service could not handle this request')
         if (!(error instanceof HttpError)) log({ level: 'error', msg: 'unhandled', kind: error instanceof Error ? error.name : typeof error })
-        if (!res.headersSent) json(req, res, e.status, { error: { code: e.code, message: e.message } }, e.headers)
+        // A 413 stops reading the body, so the connection cannot be reused: say so, and close it only
+        // once the answer is out. (Destroying it at once let a client's next request race onto a dying socket.)
+        const closing = e.status === 413
+        if (closing) res.once('finish', () => req.destroy())
+        if (!res.headersSent) json(req, res, e.status, { error: { code: e.code, message: e.message } }, closing ? { ...e.headers, connection: 'close' } : e.headers)
         else res.destroy()
-        if (e.status === 413) req.destroy()
       })
       .finally(() => {
         const route = (req.url ?? '').replace(/[0-9a-f]{32}/g, ':id').split('?')[0].slice(0, 80)

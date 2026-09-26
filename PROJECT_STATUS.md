@@ -20,6 +20,7 @@
 | STAGE BUILDAPP-03X — ANALYZER REFOUNDATION AUDIT + MARCÓWKI AUTO V2 | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d5d6375d8675143730307d71f45c0d940fcd134b`; research `9363d6b`; audit and v2 schemas `13896a1`; pipeline `59d5676`; callouts, gates, apps and CI `7e01828`; fixtures, ridge axis and docs `606c829`; test runner `9f67eb9` (CI run 36057369183 green); docs: the commit that carries this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
 | STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`, `1437954`, `74d4646`, `603eb2e` (CI run 36240702093 green; APK artifact 10905870947, versionCode 1029); docs `9de7979` | **PASS — owner-accepted** (Auto v3 reviewed and accepted on the owner's phone) |
 | STAGE BUILDAPP-03Y1 — IN-APP LINK ANALYZER + STABLE MOBILE CAMERA | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `9de7979c78468e91ce2ba29438258b527de5ffac`; implementation `aaa7f69`, `a1e1b13`, `950d401`, `7d9c85f`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y1_IN_APP_ANALYZER_AND_GESTURES.md`) | **BLOCKED_STAGE_BUILDAPP_03Y1_ANALYZER_SERVICE_NOT_DEPLOYED** — all code, tests and CI green (run 36248477257; APK artifact 10908651204, versionCode 1034); the analyzer API is not deployed (no hosting credential); the phone gate and the owner's camera check remain |
+| STAGE BUILDAPP-03Y2 — EMBEDDED LOCAL ANALYZER RUNTIME PROOF | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `743bb26dfec85658f643ac71797153832ebd20da`; implementation `ec25e4f`, `1b3e17e`, `55c50cc`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`) | **LOCAL_ANALYZER_PROOF_PARTIAL** — the production analyzer runs inside the APK (nodejs-mobile 18.20.4); on an Android 14 x86_64 emulator in CI it analysed the live Marcówki URL in two CI runs (215.5 s and 142.1 s, peak 1 788 / 1 791 MiB, model `4a8e8ddc…` = desktop) and matched every desktop hash on the fixture; arm64 APK 29 911 875 B (+18 000 437 B); the arm64 runtime was never executed (`PHYSICAL_DEVICE_NOT_RUN`) — the owner's phone gate decides PASS |
 
 ## Current capabilities
 
@@ -463,6 +464,47 @@ environment, so no public HTTPS analyzer service is running, and the phone
 flow cannot be exercised end to end until one is (steps in
 `docs/ANALYZER_API.md` → Deployment).
 
+## Where the local analyzer stands (STAGE BUILDAPP-03Y2)
+
+The phone no longer needs a server to analyse a link. The APK embeds the
+**production analyzer** and a Node runtime to run it:
+
+- **`apps/local-analyzer`** — `runLocalAnalysis` = `runAnalysis` with a scratch
+  byte cache that is removed on every outcome; a one-job-per-process program
+  (events and cancel over pipes, atomic result files); the esbuild bundle
+  (`analyzer.mjs`, target node18, 1 455 782 B) built into the APK's assets at
+  build time. No second solver, geometry kernel or mobile variant
+  (`tests/architecture/local-analyzer.test.ts`).
+- **Runtime** — nodejs-mobile **18.20.4** `libnode.so` (arm64-v8a, x86_64;
+  pinned and integrity-checked by `apps/android/tools/fetch-nodejs-mobile.mjs`,
+  never committed), a JNI bridge to `node::Start`, `LocalAnalyzerService` in a
+  separate non-exported `:analyzer` process — one job, one process, ended when
+  the job ends.
+- **Two compatibility gaps, closed without touching the analyzer:**
+  `AbortSignal.any` (a shim), and **no ICU** — nodejs-mobile builds Android Node
+  `--with-intl=none`, which would reorder 5 357 of 50 412 Marcówki comparisons
+  and seal different evidence and candidate; a text adapter generated from and
+  verified against the desktop's ICU stands in (`apps/local-analyzer/src/text.ts`),
+  refusing by name the text it cannot reproduce exactly.
+- **Android** — "Analyzer: Local" (preferred; the service mode stays), stage
+  progress, elapsed time and memory, cancel (asked, then enforced by ending the
+  process), named errors, `INTERRUPTED` after a restart, the verified scene
+  stored like a download and opened in the viewer by itself, and a persistent
+  "Local runs on this phone" log of time, memory and scene size.
+
+| measured | value |
+| --- | --- |
+| APK arm64-v8a with / without / delta | 29 911 875 / 11 911 438 / **+18 000 437 B** (runtime 17 077 722 B compressed, 49 522 248 B installed; JS 440 860 B compressed) |
+| Marcówki live, Android 14 emulator (x86_64, KVM, 4 cores) | **215.5 s** and **142.1 s** (two CI runs), peak **1 788 / 1 791 MiB**; model `4a8e8ddc…`, scene `44cc19be…` — the desktop's building from byte-identical drawings |
+| Marcówki live, desktop Node 22 / host Node 18.20.4 | 128.0 s, 1 641 MiB / 201.8 s, 1 583 MiB |
+| fixture on the emulator | 4.7 s and 3.3 s; candidate, model, scene hashes = desktop |
+| where the time and memory go | reading printed dimensions: 81 % of the time; its per-page callout render cache holds up to 1 077 MiB |
+| physical phone | **PHYSICAL_DEVICE_NOT_RUN** |
+
+Verdict **LOCAL_ANALYZER_PROOF_PARTIAL**: proven on Android x86_64; the arm64
+phone run is the owner's gate (`stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`,
+`docs/LOCAL_ANALYZER.md`).
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -511,6 +553,12 @@ pretending.
   roofs). Rooms are floor markers. Constraints recorded, not solved.
   Inspector-driven editing only. The model frame is left-handed as specified
   and mirrored by the viewer.
+- **Local analyzer (BUILDAPP-03Y2):** executed on an Android emulator
+  (x86_64) in CI, never on arm64 or a phone; peak 1.6–1.8 GB for Marcówki;
+  +18 MB APK / +51 MB installed; no foreground service (a long run left in the
+  background may be ended and is then reported INTERRUPTED); compared text
+  outside the verified repertoire (curly quotes, `…`, `ß`, Greek, CJK) is refused
+  as `TEXT_NOT_SUPPORTED_ON_DEVICE`; armeabi-v7a has no runtime.
 - The Android preview (BUILDAPP-01M) was **never executed on a device or an
   emulator**: the build container has no `/dev/kvm` and no nested
   virtualisation, so no Android screenshots exist and the GPU path — shader
@@ -584,9 +632,14 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**Now: BUILDAPP-03Y1 — deploy the analyzer service** (owner action: a
-hosting account; then the phone gate of §28 of its brief). **Then**, in the
-orchestrator's sequence:
+**Now: the BUILDAPP-03Y2 owner phone gate** — install the arm64 APK, analyse
+the Marcówki link with "Analyzer: Local", send back time, peak memory and the
+model/scene hashes (steps in the 03Y2 report). If the phone runs short of
+memory, the one lever is the callout reader's render cache
+(`packages/source-metrics/src/callouts.ts`), to be bounded in an analyzer
+stage held to 03Y2's parity gates. Deploying the 03Y1 service is no longer
+required for the phone to analyse a link; it remains the optional fallback.
+**Then**, in the orchestrator's sequence:
 **BUILDAPP-03Z — Interior Topology + Semantic Completion** — declared
 interior junctions instead of partitions trimmed 15 mm short (the 35
 INTERIOR gaps the closure audit reports), the stair against its walls and

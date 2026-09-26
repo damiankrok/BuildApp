@@ -1,0 +1,100 @@
+{
+  "schema": "buildapp.local-analyzer-size-report",
+  "apks": {
+    "local": {
+      "file": "app-x86_64-debug.apk",
+      "bytes": 31822048,
+      "MiB": 30.35
+    },
+    "withoutLocalAnalyzer": {
+      "file": "app-x86_64-debug.apk",
+      "bytes": 12032464,
+      "MiB": 11.48
+    }
+  },
+  "delta": {
+    "bytes": 19789584,
+    "MiB": 18.87,
+    "MB": 19.79
+  },
+  "runtime": {
+    "entries": [
+      {
+        "name": "lib/x86_64/libnode.so",
+        "method": "deflated",
+        "compressed": 18858140,
+        "uncompressed": 54165616
+      }
+    ],
+    "inApkCompressedBytes": 18858140,
+    "strippedBytes": 54165616,
+    "fetchedUnstrippedBytes": {
+      "arm64-v8a": 62475584,
+      "x86_64": 65361944
+    }
+  },
+  "analyzerJs": {
+    "entries": [
+      {
+        "name": "assets/local-analyzer/analyzer.mjs",
+        "method": "deflated",
+        "compressed": 440629,
+        "uncompressed": 1455782
+      },
+      {
+        "name": "assets/local-analyzer/main.mjs",
+        "method": "deflated",
+        "compressed": 231,
+        "uncompressed": 372
+      }
+    ],
+    "bytes": 1456154,
+    "inApkCompressedBytes": 440860,
+    "byPackage": {
+      "packages/reconstruction": 446555,
+      "packages/source-metrics": 137569,
+      "node_modules/zod": 120940,
+      "packages/geometry": 110175,
+      "packages/model": 79592,
+      "packages/source-analyzer": 78489,
+      "node_modules/pngjs": 67555,
+      "node_modules/jpeg-js": 65497,
+      "packages/source-package": 55305,
+      "apps/local-analyzer": 52464,
+      "packages/commands": 42631,
+      "packages/source-observations": 35654,
+      "packages/image-metrology": 34018,
+      "packages/source-cv": 32592,
+      "packages/mobile-scene": 28523,
+      "node_modules/omggif": 19457,
+      "packages/analysis-service": 18382,
+      "packages/source-vision": 13264,
+      "packages/source-common": 6389
+    }
+  },
+  "otherNew": {
+    "entries": [
+      {
+        "name": "lib/x86_64/libbuildapp_node_bridge.so",
+        "method": "deflated",
+        "compressed": 29798,
+        "uncompressed": 72088
+      },
+      {
+        "name": "lib/x86_64/libc++_shared.so",
+        "method": "deflated",
+        "compressed": 459698,
+        "uncompressed": 1252080
+      },
+      {
+        "name": "assets/local-analyzer/manifest.json",
+        "method": "deflated",
+        "compressed": 265,
+        "uncompressed": 466
+      }
+    ],
+    "bytes": 1324634,
+    "inApkCompressedBytes": 489761
+  },
+  "addedEntriesCompressedTotal": 19788761
+}

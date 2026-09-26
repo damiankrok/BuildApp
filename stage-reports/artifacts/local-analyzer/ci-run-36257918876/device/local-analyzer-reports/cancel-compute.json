@@ -1,0 +1,42 @@
+{
+    "test": "cancel-compute",
+    "device": "unknown Android SDK built for x86_64",
+    "sdk": 34,
+    "supportedAbis": "x86_64",
+    "final": "Cancelled",
+    "wallMs": 1434,
+    "states": 20,
+    "report": {
+        "jobId": "22cae439ac4719a0deb6d1d5c7f266a3",
+        "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+        "outcome": "CANCELLED",
+        "code": null,
+        "abi": "x86_64",
+        "runtime": {
+            "node": "v18.20.4",
+            "v8": "10.2.154.26-node.37",
+            "icu": null,
+            "text": "embedded-tables",
+            "platform": "android",
+            "arch": "x64",
+            "cpus": 0,
+            "totalMemoryBytes": 6220120064,
+            "collatorLocale": "none (no Intl)"
+        },
+        "analyzerService": "1.0.0",
+        "analyzerSolver": "2.0.0",
+        "elapsedMs": 1014,
+        "rssBytes": 241315840,
+        "peakRssBytes": 243871744,
+        "peakSource": "VmHWM",
+        "timings": null,
+        "sceneBytes": null,
+        "sceneSha256": null,
+        "modelHash": null,
+        "candidateHash": null,
+        "startedAtMs": 1790442717529,
+        "cancelRequested": true,
+        "forcedStop": false,
+        "sources": null
+    }
+}

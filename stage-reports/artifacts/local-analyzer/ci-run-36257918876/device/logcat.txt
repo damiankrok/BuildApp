@@ -1,0 +1,26 @@
+--------- beginning of system
+09-26 17:11:56.948 I/ActivityManager(  531): Force stopping com.buildplan.preview appid=10141 user=0: start instr
+09-26 17:11:56.957 I/ActivityManager(  531): Start proc 2388:com.buildplan.preview/u0a141 for added application com.buildplan.preview
+09-26 17:11:57.432 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2388
+09-26 17:11:57.537 I/ActivityManager(  531): Start proc 2459:com.buildplan.preview:analyzer/u0a141 for service {com.buildplan.preview/com.buildplan.preview.analyzer.local.LocalAnalyzerService}
+09-26 17:11:57.751 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2459
+09-26 17:11:58.937 I/ActivityManager(  531): Process com.buildplan.preview:analyzer (pid 2459) has died: fg  SVC 
+09-26 17:11:58.976 I/ActivityManager(  531): Start proc 2510:com.buildplan.preview:analyzer/u0a141 for service {com.buildplan.preview/com.buildplan.preview.analyzer.local.LocalAnalyzerService}
+09-26 17:11:59.168 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2510
+09-26 17:11:59.807 I/ActivityManager(  531): reportOnUserCompletedEvent(0): stored=10, eligible=111
+09-26 17:12:02.713 I/ActivityManager(  531): Process com.buildplan.preview:analyzer (pid 2510) has died: fg  SVC 
+09-26 17:12:02.920 I/ActivityManager(  531): Start proc 2563:com.buildplan.preview:analyzer/u0a141 for service {com.buildplan.preview/com.buildplan.preview.analyzer.local.LocalAnalyzerService}
+09-26 17:12:03.119 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2563
+09-26 17:12:03.684 I/ActivityManager(  531): Process com.buildplan.preview:analyzer (pid 2563) has died: fg  SVC 
+09-26 17:12:03.692 I/ActivityManager(  531): Force stopping com.buildplan.preview appid=10141 user=0: finished inst
+09-26 17:12:03.698 E/ActivityManager(  531): Unable to freeze binder for 2388: -11
+09-26 17:12:03.699 I/ActivityManager(  531): Killing 2388:com.buildplan.preview/u0a141 (adj 0): stop com.buildplan.preview due to finished inst
+09-26 17:12:03.806 I/ActivityManager(  531): Force stopping com.buildplan.preview appid=10141 user=0: start instr
+09-26 17:12:03.813 I/ActivityManager(  531): Start proc 2616:com.buildplan.preview/u0a141 for added application com.buildplan.preview
+09-26 17:12:04.188 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2616
+09-26 17:12:04.250 I/ActivityManager(  531): Start proc 2645:com.buildplan.preview:analyzer/u0a141 for service {com.buildplan.preview/com.buildplan.preview.analyzer.local.LocalAnalyzerService}
+09-26 17:12:04.462 I/ActivityManager(  531): Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2645
+09-26 17:14:26.739 I/ActivityManager(  531): Process com.buildplan.preview:analyzer (pid 2645) has died: fg  SVC 
+09-26 17:14:27.099 I/ActivityManager(  531): Force stopping com.buildplan.preview appid=10141 user=0: finished inst
+09-26 17:14:27.102 E/ActivityManager(  531): Unable to freeze binder for 2616: -11
+09-26 17:14:27.103 I/ActivityManager(  531): Killing 2616:com.buildplan.preview/u0a141 (adj 0): stop com.buildplan.preview due to finished inst
