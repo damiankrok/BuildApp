@@ -372,6 +372,97 @@ function spansFor(chain: RawChain, tokens: readonly ChainToken[], tokenIndex: nu
   return spans
 }
 
+/** The proposals a scale explains to within the tolerance, the best-fitting one per number. */
+function gatherAround(proposals: readonly ScaleProposal[], centre: number, tolerancePx: number): ScaleProposal[] {
+  const byToken = new Map<string, { p: ScaleProposal; merit: number }>()
+  for (const p of proposals) {
+    const missPx = Math.abs(p.valueCm / centre - p.pixelLength)
+    if (missPx > tolerancePx) continue
+    const merit = p.weight * Math.max(0.02, 1 - missPx / tolerancePx)
+    const key = `${p.chain}:${p.tokenIndex}`
+    const held = byToken.get(key)
+    if (!held || merit > held.merit) byToken.set(key, { p, merit })
+  }
+  return [...byToken.values()].map((v) => v.p)
+}
+
+/** The support one scale attracts: how many numbers, from how many chains, at what weight. */
+function supportFor(proposals: readonly ScaleProposal[], cmPerPixel: number, tolerancePx: number): ScaleVote {
+  const members = gatherAround(proposals, cmPerPixel, tolerancePx)
+  const chains = new Set(members.map((m) => m.chain)).size
+  // Corroboration across CHAINS is worth more than repetition inside one:
+  // two chains that agree are two independent statements of the same scale.
+  const weight = round6(members.reduce((a, p) => a + p.weight, 0) * (1 + 0.5 * (chains - 1)))
+  return { cmPerPixel, support: members.length, weight, chains }
+}
+
+/** A seed scale moved to the weighted least-squares centre of its own inliers, three times at most. */
+function refineScale(proposals: readonly ScaleProposal[], seed: number, tolerancePx: number): number {
+  let centre = seed
+  for (let round = 0; round < 3; round += 1) {
+    let num = 0
+    let den = 0
+    for (const p of gatherAround(proposals, centre, tolerancePx)) {
+      num += p.weight * p.valueCm * p.pixelLength
+      den += p.weight * p.pixelLength * p.pixelLength
+    }
+    if (den <= 0) break
+    const next = num / den
+    if (Math.abs(next - centre) < 1e-9) break
+    centre = next
+  }
+  return centre
+}
+
+/**
+ * Every DISTINCT scale the proposals support, strongest first.
+ *
+ * The vote keeps its winner; this keeps the field. Two seeds within a few per
+ * cent of each other are one hypothesis arrived at twice, so the field is
+ * thinned by ratio before it is refined — otherwise a well-supported scale
+ * shows up eight times and pushes the runner-up off the end of the list, which
+ * is exactly the case where the runner-up matters.
+ */
+export function scaleCandidates(proposals: readonly ScaleProposal[], tolerancePx: number, options: { distinctRatio?: number } = {}): ScaleVote[] {
+  const distinct = options.distinctRatio ?? 0.03
+  const seeds = proposals.map((p) => supportFor(proposals, p.cmPerPixel, tolerancePx))
+  seeds.sort((a, b) => b.weight - a.weight || b.support - a.support || a.cmPerPixel - b.cmPerPixel)
+  const kept: ScaleVote[] = []
+  for (const seed of seeds) {
+    if (kept.some((k) => Math.abs(Math.log(seed.cmPerPixel / k.cmPerPixel)) < distinct)) continue
+    kept.push(seed)
+  }
+  const refined = kept.map((k) => {
+    const centre = refineScale(proposals, k.cmPerPixel, tolerancePx)
+    const support = supportFor(proposals, centre, tolerancePx)
+    return { ...support, cmPerPixel: round6(centre) }
+  })
+  return refined.sort((a, b) => b.weight - a.weight || b.support - a.support || a.cmPerPixel - b.cmPerPixel)
+}
+
+/**
+ * What a drawing's own content says about a candidate scale.
+ *
+ * The vote asks only whether numbers agree with one another, and on a sheet
+ * whose typeface the reader half-knows, a handful of misreadings CAN agree —
+ * `0551` over the overall depth, `515` over a room, `827` over another — on a
+ * scale three times the real one. Nothing in the arithmetic of the chains can
+ * see that. The drawing can: at that scale its walls are more than a metre
+ * thick. A check like this one is given by the caller, who knows what kind of
+ * drawing the frame is; the chain layer knows only numbers and pixels.
+ */
+export type ScalePlausibility = (cmPerPixel: number) => { plausible: boolean; why: string }
+
+/** Why the frame's scale is not the vote's winner, when it is not. */
+export type ScaleDecision = {
+  /** The vote's own winner, which the drawing's content rules out. */
+  rejected: ScaleVote & { why: string }
+  /** The best-supported scale the drawing does allow, or null when none is supported well enough to take. */
+  chosen: (ScaleVote & { why: string }) | null
+  /** Every distinct candidate that was weighed, strongest first. */
+  considered: Array<ScaleVote & { plausible: boolean; why: string }>
+}
+
 /**
  * The scale with the most weighted support.
  *
@@ -389,43 +480,15 @@ function spansFor(chain: RawChain, tokens: readonly ChainToken[], tokenIndex: nu
  */
 export function voteScale(proposals: readonly ScaleProposal[], tolerancePx: number): { cmPerPixel: number; votes: ScaleVote[] } | undefined {
   if (proposals.length === 0) return undefined
-  const gather = (centre: number): ScaleProposal[] => {
-    const byToken = new Map<string, { p: ScaleProposal; merit: number }>()
-    for (const p of proposals) {
-      const missPx = Math.abs(p.valueCm / centre - p.pixelLength)
-      if (missPx > tolerancePx) continue
-      const merit = p.weight * Math.max(0.02, 1 - missPx / tolerancePx)
-      const key = `${p.chain}:${p.tokenIndex}`
-      const held = byToken.get(key)
-      if (!held || merit > held.merit) byToken.set(key, { p, merit })
-    }
-    return [...byToken.values()].map((v) => v.p)
-  }
   const votes: ScaleVote[] = []
   let best: { cmPerPixel: number; weight: number; support: number; chains: number } | undefined
   for (const seed of proposals) {
-    const members = gather(seed.cmPerPixel)
-    const chains = new Set(members.map((m) => m.chain)).size
-    // Corroboration across CHAINS is worth more than repetition inside one:
-    // two chains that agree are two independent statements of the same scale.
-    const weight = round6(members.reduce((a, p) => a + p.weight, 0) * (1 + 0.5 * (chains - 1)))
-    votes.push({ cmPerPixel: seed.cmPerPixel, support: members.length, weight, chains })
-    if (!best || weight > best.weight || (weight === best.weight && members.length > best.support)) best = { cmPerPixel: seed.cmPerPixel, weight, support: members.length, chains }
+    const vote = supportFor(proposals, seed.cmPerPixel, tolerancePx)
+    votes.push(vote)
+    if (!best || vote.weight > best.weight || (vote.weight === best.weight && vote.support > best.support)) best = vote
   }
   if (!best) return undefined
-  let centre = best.cmPerPixel
-  for (let round = 0; round < 3; round += 1) {
-    let num = 0
-    let den = 0
-    for (const p of gather(centre)) {
-      num += p.weight * p.valueCm * p.pixelLength
-      den += p.weight * p.pixelLength * p.pixelLength
-    }
-    if (den <= 0) break
-    const next = num / den
-    if (Math.abs(next - centre) < 1e-9) break
-    centre = next
-  }
+  const centre = refineScale(proposals, best.cmPerPixel, tolerancePx)
   return {
     cmPerPixel: round6(centre),
     votes: votes
@@ -490,6 +553,41 @@ export type FrameChainSolution = {
   inliersY: number
   solved: SolvedChain[]
   tokensPerChain: ChainToken[][]
+  /** Present only when the drawing's content ruled out the vote's winner. */
+  scaleDecision?: ScaleDecision
+}
+
+/**
+ * The frame's scale: the vote's winner, unless the drawing rules it out.
+ *
+ * A replacement has to be a scale the SHEET states, not one this function
+ * prefers: at least three numbers, on at least two chains, agreeing on it. A
+ * single number over a single span gives some ratio whatever it is, and taking
+ * one of those because the winner was implausible would be choosing a scale
+ * for its plausibility alone — which is guessing. When nothing qualifies the
+ * frame is left without a scale, and says why.
+ */
+function decideScale(
+  proposals: readonly ScaleProposal[],
+  winner: { cmPerPixel: number; votes: ScaleVote[] },
+  tolerancePx: number,
+  plausibility: ScalePlausibility,
+): { cmPerPixel: number | undefined; decision?: ScaleDecision } {
+  const verdict = plausibility(winner.cmPerPixel)
+  if (verdict.plausible) return { cmPerPixel: winner.cmPerPixel }
+  const own = supportFor(proposals, winner.cmPerPixel, tolerancePx)
+  const considered = scaleCandidates(proposals, tolerancePx).map((c) => ({ ...c, ...plausibility(c.cmPerPixel) }))
+  const chosen = considered.find((c) => c.plausible && c.support >= 3 && c.chains >= 2 && Math.abs(Math.log(c.cmPerPixel / winner.cmPerPixel)) >= 0.03)
+  return {
+    cmPerPixel: chosen?.cmPerPixel,
+    decision: {
+      rejected: { ...own, cmPerPixel: winner.cmPerPixel, why: verdict.why },
+      chosen: chosen
+        ? { cmPerPixel: chosen.cmPerPixel, weight: chosen.weight, support: chosen.support, chains: chosen.chains, why: `the best-supported scale the drawing allows: ${chosen.support} numbers on ${chosen.chains} chains agree on it, and ${chosen.why}` }
+        : null,
+      considered: considered.slice(0, 8),
+    },
+  }
 }
 
 /**
@@ -510,26 +608,36 @@ export type FrameChainSolution = {
  * within a third of a pixel, and only the nine horizontal spans that agree on
  * 2.6424 say which of them the sheet actually prints.
  */
-export function solveFrameChains(chains: readonly RawChain[], tokens: readonly TextToken[], options: { tolerancePx?: number; minPixelLength?: number; maxOffsetHeights?: number } = {}): FrameChainSolution {
+export function solveFrameChains(
+  chains: readonly RawChain[],
+  tokens: readonly TextToken[],
+  options: { tolerancePx?: number; minPixelLength?: number; maxOffsetHeights?: number; plausibility?: ScalePlausibility } = {},
+): FrameChainSolution {
   const tolerance = options.tolerancePx ?? 2.2
   const minLength = options.minPixelLength ?? 6
   const tokensPerChain = assignTokens(chains, tokens, options)
   const proposals = chains.map((c, i) => proposalsOf(i, c, tokensPerChain[i], minLength))
   const horizontal = chains.flatMap((c, i) => (c.axis === 'HORIZONTAL' ? proposals[i] : []))
   const vertical = chains.flatMap((c, i) => (c.axis === 'VERTICAL' ? proposals[i] : []))
-  const pooled = voteScale([...horizontal, ...vertical], tolerance)
-  const scaleX = pooled ? refineAxis(horizontal, pooled.cmPerPixel, tolerance) : undefined
-  const scaleY = pooled ? refineAxis(vertical, pooled.cmPerPixel, tolerance) : undefined
-  const solved = chains.map((chain, i) => solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled?.cmPerPixel }))
+  const vote = voteScale([...horizontal, ...vertical], tolerance)
+  const decided = vote && options.plausibility ? decideScale([...horizontal, ...vertical], vote, tolerance, options.plausibility) : { cmPerPixel: vote?.cmPerPixel }
+  const pooled = decided.cmPerPixel
+  const scaleX = pooled !== undefined ? refineAxis(horizontal, pooled, tolerance) : undefined
+  const scaleY = pooled !== undefined ? refineAxis(vertical, pooled, tolerance) : undefined
+  // A frame whose only supported scale the drawing rules out has no scale. Its
+  // chains are still cut — at no scale, so nothing on them is derived — and
+  // the numbers they carry stay unread rather than being bent to fit.
+  const solved = chains.map((chain, i) => (pooled === undefined ? solveChain(chain, [], { ...options, fixedScale: undefined }) : solveChain(chain, tokensPerChain[i], { ...options, fixedScale: (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled })))
   return {
     scaleX,
     scaleY,
-    pooledScale: pooled?.cmPerPixel,
-    votes: pooled?.votes ?? [],
+    pooledScale: pooled,
+    votes: vote?.votes ?? [],
     inliersX: scaleX === undefined ? 0 : inlierCount(horizontal, scaleX, tolerance),
     inliersY: scaleY === undefined ? 0 : inlierCount(vertical, scaleY, tolerance),
     solved,
     tokensPerChain,
+    ...(decided.decision ? { scaleDecision: decided.decision } : {}),
   }
 }
 

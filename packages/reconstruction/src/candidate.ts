@@ -24,10 +24,10 @@
  * lying, and the second is much more likely.
  */
 import { z } from 'zod'
-import { hashArtifact, sha256Hex } from '@buildapp/source-common'
-import { BuildingCommandSchema, runCommands } from '@buildapp/commands'
-import type { BuildingCommand } from '@buildapp/commands'
-import { createEmptyModel, serializeModel } from '@buildapp/model'
+import { hashArtifact, round6, sha256Hex } from '@buildapp/source-common'
+import { BuildingCommandSchema, applyCommand, runCommands } from '@buildapp/commands'
+import type { BuildingCommand, CommandFailure } from '@buildapp/commands'
+import { createEmptyModel, openingHeadRange, physicalCore, resolveWallTopology, serializeModel, wallLength } from '@buildapp/model'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { ConstraintClassSchema } from './constraints.js'
 
@@ -258,4 +258,149 @@ export function verifyReplay(candidate: ReconstructionCandidate): ReplayResult {
   const actual = sha256Hex(serializeModel(model))
   if (actual !== candidate.modelHash) return { ok: false, reason: 'the program built a different model than the candidate was sealed with', expected: candidate.modelHash, actual }
   return { ok: true, model }
+}
+
+// ---------------------------------------------------------------------------
+// Openings fitted to their hosts: the program run once more, command by command
+// ---------------------------------------------------------------------------
+
+/**
+ * Openings fitted to the walls that host them, before the candidate is sealed.
+ *
+ * The readers measure an opening where the drawing puts it: its printed width
+ * and height, the interval the plan shows. The model has rules the drawing
+ * does not state — a corner consumes the end of the wall it owns, a storey is
+ * as tall as its datum says or as its convention assumes, an opening leaves
+ * wall above it — and a reading can be true to the drawing and still not fit
+ * the model's wall. A 2.90 m window printed on a gable end is a real window;
+ * a storey taken at 2.80 m because no section datum was read cannot hold it.
+ *
+ * What this pass does NOT do is decide what fits. It applies the program
+ * command by command and lets the model's own validator refuse; only an
+ * opening refused for not fitting its host (OPENING_OUTSIDE_HOST,
+ * OPENING_TOUCHES_WALL_EDGE, OPENING_IN_JUNCTION_ZONE) is changed, and only
+ * by shrinking it into the wall material the model says is there. Every
+ * change is returned so the caller names it as a hole; an opening that cannot
+ * be kept at a useful size is dropped and named too. Any other refusal is not
+ * this pass's business and is returned as the failure it is.
+ */
+
+export type OpeningFit = {
+  openingId: string
+  action: 'SHRUNK' | 'LOWERED' | 'DROPPED'
+  code: string
+  why: string
+}
+
+export type FitResult =
+  /** `indexMap[i]` is where command i of the input landed in `program`, or -1 when it was dropped. */
+  | { ok: true; program: BuildingCommand[]; fits: OpeningFit[]; indexMap: number[] }
+  | { ok: false; program: BuildingCommand[]; fits: OpeningFit[]; indexMap: number[]; failedAt: number; command: BuildingCommand; errors: CommandFailure['errors'] }
+
+const FIT_CODES = new Set(['OPENING_OUTSIDE_HOST', 'OPENING_TOUCHES_WALL_EDGE', 'OPENING_IN_JUNCTION_ZONE'])
+
+/** Wall material an opening leaves beside it at a corner, and above it under the wall's top. */
+const SIDE_MARGIN_M = 0.05
+const HEAD_MARGIN_M = 0.1
+const MIN_WIDTH_M = 0.4
+const MIN_HEIGHT_M = 0.5
+
+type CutOpening = Extract<BuildingCommand, { type: 'cutOpening' }>
+
+/** The same opening, shrunk into the wall material the model says its host has. */
+function fitted(model: CanonicalBuildingModel, command: CutOpening): { command: CutOpening; action: OpeningFit['action']; why: string } | { drop: string } {
+  const walls = [command.wallId, ...(command.leaves ?? []).map((l) => l.wallId)]
+  const offsets = [command.offset, ...(command.leaves ?? []).map((l) => l.offset)]
+  const topology = resolveWallTopology(model)
+  let lo = -Infinity
+  let hi = Infinity
+  let top = Infinity
+  // One interval along the host that every leaf allows, expressed as a shift of the host's own offset.
+  walls.forEach((id, i) => {
+    const wall = model.walls.find((w) => w.id === id)
+    if (!wall) return
+    const L = wallLength(wall)
+    const extent = topology.extents.get(wall.id)
+    const core = extent ? physicalCore(extent) : { a0: 0, a1: L }
+    const shift = offsets[i] - command.offset
+    lo = Math.max(lo, Math.max(core.a0, 0) + SIDE_MARGIN_M - shift)
+    hi = Math.min(hi, Math.min(core.a1, L) - SIDE_MARGIN_M - shift)
+    top = Math.min(top, wall.height - HEAD_MARGIN_M)
+  })
+  if (!Number.isFinite(lo) || !Number.isFinite(hi) || !Number.isFinite(top)) return { drop: 'its host wall is not in the model' }
+  const a0 = Math.max(command.offset, lo)
+  const a1 = Math.min(command.offset + command.width, hi)
+  const width = round6(a1 - a0)
+  if (width < MIN_WIDTH_M) return { drop: `the wall material its host leaves beside the corners is ${Math.max(0, hi - lo).toFixed(2)} m, too little to hold it` }
+  const range = openingHeadRange(command)
+  const headRoom = top - command.sill
+  if (headRoom < MIN_HEIGHT_M) return { drop: `its sill at ${command.sill.toFixed(2)} m leaves ${Math.max(0, headRoom).toFixed(2)} m under the wall's top` }
+  const scale = range.max > top ? headRoom / Math.max(1e-9, range.max - command.sill) : 1
+  const height = round6(command.height * scale)
+  const head = command.head && command.head.kind === 'RAKED' ? { ...command.head, heightFar: round6(Math.max(0.3, command.head.heightFar * scale)) } : command.head
+  const shifted = round6(a0 - command.offset)
+  const next: CutOpening = {
+    ...command,
+    offset: round6(a0),
+    width,
+    height: Math.max(0.3, height),
+    ...(head ? { head } : {}),
+    ...(command.leaves ? { leaves: command.leaves.map((l) => ({ ...l, offset: round6(l.offset + shifted) })) } : {}),
+  }
+  const narrowed = width < command.width - 1e-6
+  const lowered = scale < 1 - 1e-9
+  const why = [
+    narrowed ? `narrowed from ${command.width.toFixed(2)} to ${width.toFixed(2)} m to stay within the wall material its host's corners leave` : '',
+    lowered ? `its head brought down from ${range.max.toFixed(2)} to ${(command.sill + (range.max - command.sill) * scale).toFixed(2)} m to leave wall under the ${(top + HEAD_MARGIN_M).toFixed(2)} m wall top` : '',
+  ]
+    .filter(Boolean)
+    .join('; ')
+  return { command: next, action: lowered && !narrowed ? 'LOWERED' : 'SHRUNK', why: why || 'moved inside its host' }
+}
+
+/**
+ * Run a program, fitting the openings its walls refuse.
+ *
+ * Commands that refer to a dropped opening — its window or door, its evidence
+ * — are dropped with it, since they describe a thing the model does not have.
+ */
+export function fitOpeningsToHosts(program: readonly BuildingCommand[], label: string, modelId: string): FitResult {
+  const out: BuildingCommand[] = []
+  const fits: OpeningFit[] = []
+  const indexMap: number[] = program.map(() => -1)
+  const dropped = new Set<string>()
+  let model = createEmptyModel(modelId, label)
+  for (let i = 0; i < program.length; i += 1) {
+    const command = program[i]
+    const refers = (command.type === 'placeWindow' || command.type === 'placeDoor') && dropped.has(command.openingId)
+    const describes = command.type === 'setEvidence' && dropped.has(command.targetId)
+    if (refers || describes) continue
+    const result = applyCommand(model, command)
+    if (!result.ok && command.type === 'cutOpening' && result.errors.every((e) => FIT_CODES.has(e.code))) {
+      const code = result.errors[0].code
+      const openingId = command.id ?? `command-${i}`
+      const fit = fitted(model, command)
+      if ('drop' in fit) {
+        dropped.add(openingId)
+        fits.push({ openingId, action: 'DROPPED', code, why: `not built: ${fit.drop}` })
+        continue
+      }
+      const retry = applyCommand(model, fit.command)
+      if (!retry.ok) {
+        dropped.add(openingId)
+        fits.push({ openingId, action: 'DROPPED', code, why: `not built: even fitted, the model refuses it (${retry.errors.map((e) => e.code).join(', ')})` })
+        continue
+      }
+      fits.push({ openingId, action: fit.action, code, why: fit.why })
+      indexMap[i] = out.length
+      out.push(fit.command)
+      model = retry.model
+      continue
+    }
+    if (!result.ok) return { ok: false, program: out, fits, indexMap, failedAt: i, command, errors: result.errors }
+    indexMap[i] = out.length
+    out.push(command)
+    model = result.model
+  }
+  return { ok: true, program: out, fits, indexMap }
 }

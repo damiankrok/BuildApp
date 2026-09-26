@@ -57,6 +57,12 @@ export type ZoneSpec = {
   /** Where the wall face is and where the outer plane is, along the depth axis. */
   backAt: number
   mouthAt: number
+  /**
+   * Stretches of the zone, along the wall, that another body stands in: a
+   * garage wing projecting through it. Its walls are that body's, not
+   * returns of a recess, and its footprint is not open.
+   */
+  occupied?: ReadonlyArray<readonly [number, number]>
 }
 
 /**
@@ -133,12 +139,19 @@ export function scanZoneForReturns(raster: Raster, plan: PlanFrameV2, world: Wor
     })
   }
   returns.sort((a, b) => a.from - b.from)
-  // Open intervals between the returns, within the zone.
+  // Ink standing where another body stands is that body's wall.
+  const occupied = (zone.occupied ?? []).map(([a, b]) => [Math.min(a, b), Math.max(a, b)] as const)
+  const slack = Math.max(0.05, (wallPx * 1.5) * Math.abs(plan.mppX))
+  const own = returns.filter((r) => !occupied.some(([a, b]) => r.to >= a - slack && r.from <= b + slack))
+  returns.length = 0
+  returns.push(...own)
+  // Open intervals between the returns, within the zone, where no body stands.
+  const blocks = [...returns.map((r) => [r.from, r.to] as const), ...occupied].sort((p, q) => p[0] - q[0])
   const open: Array<{ from: number; to: number }> = []
   let cursor = zone.from
-  for (const r of returns) {
-    if (r.from - cursor > 0.3) open.push({ from: round6(cursor), to: round6(r.from) })
-    cursor = Math.max(cursor, r.to)
+  for (const [a, b] of blocks) {
+    if (a - cursor > 0.3) open.push({ from: round6(cursor), to: round6(Math.min(a, zone.to)) })
+    cursor = Math.max(cursor, b)
   }
   if (zone.to - cursor > 0.3) open.push({ from: round6(cursor), to: round6(zone.to) })
   const confidence = returns.length === 0 ? 0.35 : round6(Math.min(0.9, 0.55 + 0.1 * returns.length + 0.05 * Math.min(...returns.map((r) => r.support / r.scanLines)) * 2))

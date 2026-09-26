@@ -21,7 +21,7 @@ import type { PublishedArea } from '../layout-gate.js'
 import { ringBounds } from '../structural-layout.js'
 import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import type { PlanReading } from '../layout.js'
-import { sealCandidate } from '../candidate.js'
+import { fitOpeningsToHosts, sealCandidate } from '../candidate.js'
 import type { ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from '../hypotheses.js'
 import type { PrimitiveHypothesisSet } from '../hypotheses.js'
@@ -41,6 +41,9 @@ import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { solvePerspectiveCamera } from './camera.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
+import { ReconstructionFailure, planCounts } from '../failure.js'
+import type { PlanDiagnosticsReport } from '../failure.js'
+import { layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
 import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
@@ -79,6 +82,22 @@ export type ReconstructionV2Options = {
    * it does can reach the result.
    */
   onPhase?: (phase: ReconstructionV2Phase) => void
+  /**
+   * Told what each step of the solver established, as counts: the trace a
+   * failure screen and a diagnostics bundle are built from. Deterministic;
+   * nothing it receives can reach the result.
+   */
+  trace?: (event: SolverTraceEvent) => void
+}
+
+/** One step of the solver, as the service's trace records it. */
+export type SolverTraceEvent = {
+  phase: ReconstructionV2Phase
+  substage: string
+  status: 'PASSED' | 'DEGRADED' | 'FAILED'
+  counts: Record<string, number | string | boolean>
+  reasonCode?: string
+  detail?: string
 }
 
 /** The solver's phases, in the order it runs them. */
@@ -102,6 +121,8 @@ export type ReconstructionV2Result = {
   violations: { graph: string[]; ledger: string[] }
   /** Every decision the assembly closure took, with its reason. */
   closure: ClosureNote[]
+  /** The plan decomposition, in the plans' own pixels: what the overlays and a diagnostics bundle are drawn from. */
+  planDiagnostics: PlanDiagnosticsReport
 }
 
 type Ctx = {
@@ -180,8 +201,27 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   const levels = levelsFrom(metrics, sectionFrame?.id)
   const { draft, layout } = composeStructuralLayout({ slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas })
+  const planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
+  const planCountsNow = planCounts(planDiagnostics)
+  const trace = (event: SolverTraceEvent): void => options.trace?.(event)
+  trace({ phase: 'REGISTRATION', substage: 'PLAN_READ', status: draft.plans.length > 0 ? 'PASSED' : 'FAILED', counts: { planFrames: planDiagnostics.planFrames, plansRead: draft.plans.length, plansSkipped: draft.skippedPlans.length, ...(planDiagnostics.selectedPlanFrameId ? { selectedPlanFrameId: planDiagnostics.selectedPlanFrameId } : {}) } })
   const world = worldFrameFrom(draft)
-  if (!world || layout.masses.length === 0) throw new Error('no walled body could be decomposed from the plans; the v2 analyzer has nothing to register against')
+  if (!world || layout.masses.length === 0) {
+    const failure = planFailureOf(draft, layout, planDiagnostics)
+    trace({ phase: 'REGISTRATION', substage: failure.substage ?? 'PLAN_DECOMPOSITION', status: 'FAILED', counts: planCountsNow, reasonCode: failure.code, detail: failure.message })
+    throw failure
+  }
+  trace({ phase: 'REGISTRATION', substage: 'PLAN_DECOMPOSITION', status: 'PASSED', counts: planCountsNow })
+  // The gate's verdict is part of what is sealed, and a BLOCKING one says the
+  // reading is not of this building. Building it anyway only moves the
+  // failure downstream, where it surfaces as a model the drawings never
+  // described; stopping here names what is wrong.
+  if (layoutRefused(layout)) {
+    const failure = layoutRejectionOf(layout, planDiagnostics)
+    trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: 'FAILED', counts: { ...planCountsNow, gate: layout.gate.status }, reasonCode: failure.code, detail: failure.message })
+    throw failure
+  }
+  trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: layout.gate.status === 'STRUCTURAL_LAYOUT_ACCEPTED' ? 'PASSED' : 'DEGRADED', counts: { masses: layout.masses.length, recesses: layout.recesses.length, roofs: layout.roofSupports.length, gate: layout.gate.status, gateReasons: layout.gate.reasons.filter((r) => r.severity !== 'NOTED').map((r) => `${r.severity}:${r.code}`).join(',') } })
   step({ stage: 'massing', what: 'the bodies the plans enclose, in the v2 frame', method: 'DISCRETE_SELECTION', detail: `${layout.masses.length} bodies; front outer plane at z = 0 (${world.why})`, inputs: draft.plans.length, outputs: layout.masses.length })
   for (const hole of layout.unresolved) gap({ what: hole.what, reason: hole.reason, status: hole.status === 'REFUSED' ? 'REFUSED' : hole.status, observationIds: [], evidenceIds: [] })
 
@@ -244,6 +284,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     step({ stage: 'registration', what: `storey ${index} plan registered`, method: 'DIRECT', detail: `${frame.mppX} m/px; ${why}`, inputs: 1, outputs: 1 })
   }
 
+  trace({ phase: 'REGISTRATION', substage: 'PLAN_REGISTRATION', status: planFrames.length === draft.plans.length ? 'PASSED' : 'DEGRADED', counts: { plans: draft.plans.length, registered: planFrames.length }, ...(planFrames.length === draft.plans.length ? {} : { reasonCode: 'PLAN_STOREY_ALIGNMENT_FAILED' }) })
+
   // Elevation registrations (v2): silhouettes from the 03R extents, scales from the plan width and the ridge datum.
   const terrain = metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM' && e.value < 0 && e.value > -1.5).sort((a, b) => b.confidence - a.confidence)[0]?.value
   const { registrations: legacy } = registerElevationFrames(graph, { width: main.x1 - main.x0 + masses.filter((m) => m.id !== main.id).reduce((a, m) => a + Math.max(0, m.x1 - main.x1) + Math.max(0, main.x0 - m.x0), 0), depth: world.walled.z1 - world.walled.z0, totalHeight: ridgeY ?? levelsV2[levelsV2.length - 1].wallTop }, keep, options.raster)
@@ -266,6 +308,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
   const viewsOf = (facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): Array<{ view: ElevationFrameV2; raster: Raster }> => views.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))
+  if (ridgeY === undefined && legacy.length > 0) gap({ what: 'a registration for the elevations', reason: 'no ridge datum was read from a section, and the elevations are registered on it', status: 'MISSING', observationIds: [], evidenceIds: [] })
+  trace({
+    phase: 'REGISTRATION',
+    substage: 'ELEVATION_REGISTRATION',
+    status: elevations.length > 0 ? 'PASSED' : 'DEGRADED',
+    counts: { elevationFrames: legacy.length, registered: elevations.length, ridgeDatum: ridgeY !== undefined },
+    ...(elevations.length > 0 ? {} : { reasonCode: ridgeY === undefined ? 'VIEW_REGISTRATION_NO_ANCHORS' : 'ELEVATION_REGISTRATION_FAILED', detail: ridgeY === undefined ? 'no ridge datum was read, and the elevations are registered on it' : 'no elevation silhouette fitted the walled or the characteristic span' }),
+  })
 
   options.onPhase?.('TOPOLOGY')
   // ---------------------------------------------------------------------------
@@ -315,7 +365,11 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const eaveY = derivedEave
     const sideViews = views.filter((v) => (ridgeAxis === 'Z' ? v.view.side === 'LEFT' || v.view.side === 'RIGHT' : v.view.side === 'FRONT' || v.view.side === 'REAR'))
     const zoneVotes = sideViews.map((v) => elevations.find((e) => e.frameId === v.view.registration.frameId)?.spanM ?? 0)
-    const walledSpan = ridgeAxis === 'Z' ? world.walled.z1 - world.walled.z0 : world.walled.x1 - world.walled.x0
+    // What the side views have to exceed is the depth the BODIES already
+    // explain, all of them: a wing projecting past the main body widens the
+    // view by its own depth, and that is not the roof reaching a zone.
+    const bodiesSpan = ridgeAxis === 'Z' ? Math.max(...masses.map((m) => m.z1)) - Math.min(...masses.map((m) => m.z0)) : Math.max(...masses.map((m) => m.x1)) - Math.min(...masses.map((m) => m.x0))
+    const walledSpan = Math.max(ridgeAxis === 'Z' ? world.walled.z1 - world.walled.z0 : world.walled.x1 - world.walled.x0, bodiesSpan)
     const coversZones = zoneVotes.length > 0 && zoneVotes.every((s) => s > walledSpan + 0.2)
     const footprint = ridgeAxis === 'Z' ? { x0: main.x0, x1: main.x1, z0: coversZones ? world.envelope.z0 : main.z0, z1: coversZones ? world.envelope.z1 : main.z1 } : { x0: coversZones ? world.envelope.x0 : main.x0, x1: coversZones ? world.envelope.x1 : main.x1, z0: main.z0, z1: main.z1 }
     const sids = sideViews.map((v) => sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'roof silhouette spanning the zones', 0.8))
@@ -350,7 +404,18 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       if (reaching.length === 0) continue
       const from = Math.min(...reaching.map((m) => (side === 'FRONT' || side === 'REAR' ? m.x0 : m.z0)))
       const to = Math.max(...reaching.map((m) => (side === 'FRONT' || side === 'REAR' ? m.x1 : m.z1)))
-      const topology = scanZoneForReturns(entry.raster, entry.frame, world, { side, from, to, backAt, mouthAt }, index)
+      // Another body standing in the zone (a wing projecting through it) owns
+      // its stretch: the zone is only a zone beside it.
+      const zoneBox = { x0: Math.min(zoneV2.x0, zoneV2.x1), x1: Math.max(zoneV2.x0, zoneV2.x1), z0: Math.min(zoneV2.z0, zoneV2.z1), z1: Math.max(zoneV2.z0, zoneV2.z1) }
+      const occupied = masses
+        .filter((m) => !onFace.includes(m) && m.storeys.includes(index))
+        .filter((m) => {
+          const w = Math.max(0, Math.min(m.x1, zoneBox.x1) - Math.max(m.x0, zoneBox.x0))
+          const d = Math.max(0, Math.min(m.z1, zoneBox.z1) - Math.max(m.z0, zoneBox.z0))
+          return w * d >= 0.5 * (m.x1 - m.x0) * (m.z1 - m.z0)
+        })
+        .map((m) => (side === 'FRONT' || side === 'REAR' ? ([m.x0, m.x1] as const) : ([m.z0, m.z1] as const)))
+      const topology = scanZoneForReturns(entry.raster, entry.frame, world, { side, from, to, backAt, mouthAt, ...(occupied.length > 0 ? { occupied } : {}) }, index)
       recesses.push(topology)
       const sid = sighting(entry.plan.frame, `${side.toLowerCase()} zone on the storey ${index} plan`, topology.confidence, [], undefined)
       const recessFeature = feature('RECESS', `recess-${side.toLowerCase()}-${index}`, { depth: { value: topology.depthM, low: topology.depthM - 0.05, high: topology.depthM + 0.05 }, mouthAt: { value: mouthAt, low: mouthAt - 0.05, high: mouthAt + 0.05 } }, [sid], topology.returns.length > 0 ? 'SOURCE_CORROBORATED' : 'SOURCE_DERIVED', topology.why, { storeyIndex: index, printed: true, uncertaintyM: 0.04, hostId: reaching[0].featureId })
@@ -482,6 +547,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
   step({ stage: 'interior', what: 'partitions, doors and rooms', method: 'DISCRETE_SELECTION', detail: interior.map((i) => `storey ${i.storeyIndex}: ${i.walls.length} walls, ${i.doors.length} doors, ${i.rooms.length} rooms, ${i.blocks.length} blocks`).join('; '), inputs: planByStorey.size, outputs: interior.reduce((a, i) => a + i.rooms.length, 0) })
 
+  trace({ phase: 'TOPOLOGY', substage: 'TOPOLOGY', status: mainRoof ? 'PASSED' : 'DEGRADED', counts: { masses: masses.length, mainRoof: !!mainRoof, recesses: recesses.length, returns: returns.length, partitions: interior.reduce((a, i) => a + i.walls.length, 0), rooms: interior.reduce((a, i) => a + i.rooms.length, 0), stair: stair ? stair.emit : 'none' }, ...(mainRoof ? {} : { detail: 'no pitched main roof was inferred' }) })
   options.onPhase?.('METRICS')
   // ---------------------------------------------------------------------------
   // G5/H. openings on every exterior wall, cross-view
@@ -893,6 +959,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const facadeGraph = buildFacadeGraph({ returns, verges, balconies, railings, portalHeads, terraces, recesses, levels: levelsV2, ends: new Map(balconies.filter((b) => b.ends).map((b) => [b.id, (b.ends as [EndCondition, EndCondition]).map((e) => ({ ...e, railStopAt: e.at, turns: false })) as [BalconyEnd, BalconyEnd]])), roofEaveY: mainRoof?.eaveY })
   step({ stage: 'facade', what: 'assembly closure: how the members meet', method: 'DISCRETE_SELECTION', detail: `${closureNotes.length} decisions; ${terraces.length} terrace${terraces.length === 1 ? '' : 's'}${terraces.some((t) => t.extension) ? ` (${terraces.filter((t) => t.extension).length} with a platform beyond the mouth)` : ''}; ${railings.filter((r) => (r.path?.length ?? 2) > 2).length} railing${railings.filter((r) => (r.path?.length ?? 2) > 2).length === 1 ? '' : 's'} turning; facade graph ${facadeGraph.nodes.length} nodes, ${facadeGraph.edges.length} edges`, inputs: balconies.length + railings.length + verges.length + portalHeads.length + returns.length, outputs: facadeGraph.edges.length })
 
+  trace({ phase: 'METRICS', substage: 'METRICS', status: 'PASSED', counts: { openings: openings.length, sharedDoors: sharedDoors.length, balconies: balconies.length, terraces: terraces.length, railings: railings.length, chimneys: chimneys.length, rooflights: rooflights.length } })
   options.onPhase?.('MODEL')
   // ---------------------------------------------------------------------------
   // J. emit, K. seal, L. verify, M. repair, N. quality
@@ -904,7 +971,28 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   step({ stage: 'verification', what: 'the model projected into the registered views', method: 'DIRECT', detail: `${residuals.length} residuals, ${residuals.filter((r) => !r.withinTolerance).length} outside tolerance after ${repair.iterations.length} repair round${repair.iterations.length === 1 ? '' : 's'} (${repair.iterations.reduce((a, i) => a + i.applied.length, 0)} applied, ${repair.iterations.reduce((a, i) => a + i.refused.length, 0)} refused)`, inputs: residualsBefore.length, outputs: residuals.length })
   for (const it of repair.iterations) for (const op of it.applied) ctx.traces.push({ objectId: op.featureId, kind: 'repair', hypothesisId: `hyp-${op.featureId}`, evidenceIds: [], observationIds: [], rejected: [], why: op.why })
 
-  const { program, bindings, dropped } = emitBuilding(building, options.label)
+  const emitted = emitBuilding(building, options.label)
+  const { dropped } = emitted
+  const modelId = (options.modelId ?? `m-auto-v2-${options.slug}`).replace(/[^A-Za-z0-9_.:-]+/g, '-')
+  // The model's own validator decides what fits; only openings it refuses as
+  // not fitting their host are shrunk or dropped, and each one is named.
+  const fit = fitOpeningsToHosts(emitted.program, options.label, modelId)
+  if (!fit.ok) {
+    throw new ReconstructionFailure('MODEL_EMISSION_FAILED', 'MODEL', `the model refused command ${fit.failedAt} (${fit.command.type}): ${fit.errors.map((e) => e.code).join(', ')}`, {
+      command: fit.command.type,
+      codes: [...new Set(fit.errors.map((e) => e.code))].join(','),
+      commandIndex: fit.failedAt,
+    })
+  }
+  const program = fit.program
+  const bindings = emitted.bindings.filter((b) => fit.indexMap[b.commandIndex] >= 0).map((b) => ({ ...b, commandIndex: fit.indexMap[b.commandIndex] }))
+  for (const f of fit.fits) {
+    gap({ what: `the opening ${f.openingId} as the drawings print it`, reason: f.why, status: f.action === 'DROPPED' ? 'REFUSED' : 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
+    const solved = ctx.solved.find((s) => s.id === `feat-${f.openingId}` || s.id === f.openingId)
+    if (solved) solved.unresolvedProperties = [...solved.unresolvedProperties, f.action === 'DROPPED' ? f.why : `fitted to its host: ${f.why}`]
+  }
+  if (fit.fits.length > 0) step({ stage: 'emission', what: 'openings fitted to the walls that host them', method: 'DIRECT', detail: fit.fits.map((f) => `${f.openingId} ${f.action.toLowerCase()} (${f.code})`).join('; '), inputs: emitted.program.length, outputs: program.length })
+  trace({ phase: 'MODEL', substage: 'EMISSION', status: fit.fits.length > 0 ? 'DEGRADED' : 'PASSED', counts: { commands: program.length, openingsFitted: fit.fits.filter((f) => f.action !== 'DROPPED').length, openingsDropped: fit.fits.filter((f) => f.action === 'DROPPED').length } })
   for (const d of dropped) {
     const solved = ctx.solved.find((s) => s.id === `feat-${d.featureId}`)
     if (!solved) continue
@@ -912,7 +1000,6 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     solved.provenance = 'UNRESOLVED'
     solved.unresolvedProperties = [...solved.unresolvedProperties, `not built: ${d.why}`]
   }
-  const modelId = (options.modelId ?? `m-auto-v2-${options.slug}`).replace(/[^A-Za-z0-9_.:-]+/g, '-')
   const hypothesisSet: PrimitiveHypothesisSet = {
     schema: HYPOTHESIS_SET_SCHEMA,
     schemaVersion: HYPOTHESIS_SET_SCHEMA_VERSION,
@@ -1021,7 +1108,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

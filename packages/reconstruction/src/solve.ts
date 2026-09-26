@@ -255,13 +255,23 @@ export function levelsFrom(metrics: MetricEvidenceSet, frameId?: string): LevelF
     .filter((e) => e.association.kind !== 'UNATTACHED')
     .sort((a, b) => a.value - b.value)
   if (datums.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false }
-  const values: number[] = []
+  const read: number[] = []
   for (const d of datums) {
     // Two datums a few centimetres apart are a finished floor and a structural
     // one, not two storeys.
-    if (values.length > 0 && Math.abs(d.value - values[values.length - 1]) < 0.4) continue
-    values.push(round6(d.value))
+    if (read.length > 0 && Math.abs(d.value - read[read.length - 1]) < 0.4) continue
+    read.push(round6(d.value))
   }
+  // A small negative height is the ground outside, not a floor: a section
+  // marks the terrain a step below the ground floor's ±0.00. And every
+  // height on a section is measured FROM ±0.00, so the ground floor is at
+  // zero whether or not the reader managed to read the ±0.00 mark itself —
+  // without this, a missed ±0.00 makes the terrain the ground floor and the
+  // eaves the first-floor level.
+  const terrain = (v: number): boolean => v < -0.05 && v > -1.5
+  const values = read.filter((v) => !terrain(v))
+  if (values.length > 0 && !values.some((v) => Math.abs(v) < 0.05) && values[0] > 0) values.unshift(0)
+  if (values.length < 2) return { floors: [0], heights: [CONVENTIONS.storeyHeight], evidenceIds: datums.map((d) => d.id), measured: false }
   const topDatum = values[values.length - 1]
   // A section of a pitched house marks its heights in a fixed order: the floor
   // of each storey, then the EAVES where the walls stop, then the ridge. So

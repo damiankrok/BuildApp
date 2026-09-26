@@ -34,6 +34,7 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
+import { dominantBandThickness } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
 
@@ -148,6 +149,80 @@ export type WalledEnvelope = {
   why: string
 }
 
+/** A printed opening callout on the plan: where it sits and every width it might be saying. */
+export type PlanCallout = {
+  id: string
+  at: { x: number; y: number }
+  /** Width readings, best first, in centimetres. */
+  widthsCm: Array<{ value: number; confidence: number }>
+}
+
+/**
+ * What the drawing says about one wide gap: is it a hole in a wall that goes
+ * on, or the place where the wall stops?
+ *
+ * A width alone cannot say. A double garage door is 5 m, a sliding glass wall
+ * 6 m, and the open side of a carport is 5 m too; what tells them apart is
+ * what is drawn AROUND the gap, and each of these is one independent thing
+ * the draughtsman drew or did not draw.
+ */
+export type OpeningEvidence = {
+  /** The wall on either side of the gap is real wall material. */
+  jambs: boolean
+  /** For a bay: both of its side walls reach the line the gap is on. */
+  corners?: boolean
+  /** Fraction of the gap spanned by ONE continuous thin line inside the wall's own thickness: a door leaf, a glazing line, a sill. */
+  infill: number
+  /** A printed opening callout at the gap whose width agrees with it. */
+  callout?: { id: string; widthCm: number; confidence: number }
+}
+
+/** One wide gap weighed, and what was decided about it. */
+export type WideOpeningDecision = {
+  /** A gap between two pieces of one wall line, or the mouth of a bay two walls reach out to enclose. */
+  kind: 'COLLINEAR_GAP' | 'BAY_MOUTH'
+  /** The grid line the gap lies on. */
+  axis: 'X' | 'Y'
+  linePx: number
+  /** The gap, along the line, in pixels. */
+  fromPx: number
+  toPx: number
+  widthM: number
+  evidence: OpeningEvidence
+  decision: 'OPENING_IN_WALL' | 'OPEN_SIDE'
+  /** 0..1: how much independent evidence the decision rests on. */
+  score: number
+  why: string
+}
+
+/**
+ * A bay: two walls leaving the walled envelope side by side and running out
+ * from it — a garage wing, a porch, a carport. Whether its far side is shut is
+ * a separate question, answered by its mouth.
+ */
+export type PlanBay = {
+  /** The envelope side it leaves from. */
+  side: 'MIN_X' | 'MAX_X' | 'MIN_Z' | 'MAX_Z'
+  /** Outer faces of its side walls, from the envelope edge to its far line. */
+  rect: PixelRect
+  /** The axes of its two side walls. */
+  wallAxesPx: [number, number]
+  mouth: WideOpeningDecision
+}
+
+/** One reading of the plan's enclosure, with what it concluded. */
+export type EnclosureHypothesis = {
+  id: 'H0_STRICT_ENCLOSURE' | 'H1_WIDE_OPENING_CONTINUITY'
+  /** What the hypothesis allows to shut an edge. */
+  rule: string
+  builtCells: number
+  builtAreaPx: number
+  /** The evidenced wide openings this hypothesis closes; none for H0. */
+  closedOpenings: number
+  score: number
+  why: string
+}
+
 export type PlanDecomposition = {
   frameId: string
   /** The wall thickness the plan's own bands imply, in pixels and in metres. */
@@ -162,6 +237,13 @@ export type PlanDecomposition = {
   extent: PixelRect
   /** Named things the decomposition could not settle. */
   unresolved: Array<{ what: string; reason: string }>
+  /** Every gap wider than a lintel conventionally spans, with the evidence weighed and the decision. */
+  wideOpenings: WideOpeningDecision[]
+  /** Bays reaching out of the envelope. */
+  bays: PlanBay[]
+  /** The enclosure readings that were considered, and which one the cells follow. */
+  hypotheses: EnclosureHypothesis[]
+  chosenHypothesis: EnclosureHypothesis['id'] | null
 }
 
 export type PlanDecompositionOptions = {
@@ -179,8 +261,14 @@ export type PlanDecompositionOptions = {
   fallbackWallPx?: number
   /** Shortest unbroken stretch of line work worth believing, in pixels. */
   minLinePx?: number
-  /** The widest hole a wall may have and still count as a wall, in metres. */
+  /** The widest hole a wall may have and still count as a wall, in metres, on the gap's width alone. */
   maxOpeningM?: number
+  /** The widest hole that can still be a hole in a wall when the drawing says so, in metres. */
+  maxWideOpeningM?: number
+  /** Continuous thin line needed across a wide gap, as a fraction of it, to count as drawn infill. */
+  minInfill?: number
+  /** The plan's printed opening callouts. */
+  callouts?: readonly PlanCallout[]
 }
 
 const DEFAULTS: Required<PlanDecompositionOptions> = {
@@ -196,6 +284,13 @@ const DEFAULTS: Required<PlanDecompositionOptions> = {
   // mouth of a loggia and the open side of a carport are. The number is a
   // convention, and it is the only thing separating the two.
   maxOpeningM: 3.2,
+  // Past the convention above a gap needs the drawing's word that it is an
+  // opening: a door or glazing drawn across it, or a callout printing its
+  // width. A 6 m sliding wall and a 5 m double garage door are real; past 8 m
+  // even that is not enough on a house.
+  maxWideOpeningM: 8,
+  minInfill: 0.7,
+  callouts: [],
 }
 
 const at = (m: Mask, x: number, y: number): number => (x < 0 || y < 0 || x >= m.width || y >= m.height ? 0 : m.data[y * m.width + x])
@@ -206,19 +301,11 @@ const at = (m: Mask, x: number, y: number): number => (x < 0 || y < 0 || x >= m.
  * Length-weighted, because the longest bands are the ones most likely to be
  * walls rather than a heavy piece of furniture, and a median rather than a
  * mean because one very thick band — a hatched section cut, a filled column —
- * should not move it.
+ * should not move it. The measure itself lives in `@buildapp/source-cv`, where
+ * the metric layer uses the same one to check a plan's scale.
  */
 export function bandWallThickness(bands: readonly Band[], fallbackPx: number): number {
-  const weighted: Array<{ t: number; w: number }> = bands.filter((b) => b.length > 0).map((b) => ({ t: b.thickness, w: b.length }))
-  if (weighted.length === 0) return fallbackPx
-  weighted.sort((a, b) => a.t - b.t)
-  const half = weighted.reduce((a, b) => a + b.w, 0) / 2
-  let run = 0
-  for (const entry of weighted) {
-    run += entry.w
-    if (run >= half) return entry.t
-  }
-  return weighted[weighted.length - 1].t
+  return dominantBandThickness(bands, fallbackPx)
 }
 
 type RawLine = { px: number; support: GridLineSupport; probes: number[] }
@@ -551,7 +638,15 @@ function interiorInk(mask: Mask, bands: readonly Band[], rect: PixelRect): numbe
  * The width cap keeps the rule honest: the open side of a carport and the
  * mouth of a loggia are wider than any lintel spans, and stay open.
  */
-function closureOf(walls: ReadonlyArray<readonly [number, number]>, lines: ReadonlyArray<readonly [number, number]>, from: number, to: number, maxOpeningPx: number, minJambPx: number): EdgeClosure {
+function closureOf(
+  walls: ReadonlyArray<readonly [number, number]>,
+  lines: ReadonlyArray<readonly [number, number]>,
+  from: number,
+  to: number,
+  maxOpeningPx: number,
+  minJambPx: number,
+  evidenced: ReadonlyArray<readonly [number, number]> = [],
+): EdgeClosure {
   const span = Math.max(1, to - from)
   const clip = (intervals: ReadonlyArray<readonly [number, number]>): Array<[number, number]> => {
     const out: Array<[number, number]> = []
@@ -578,6 +673,9 @@ function closureOf(walls: ReadonlyArray<readonly [number, number]>, lines: Reado
     const jambs = Math.min(pieces[i][1] - pieces[i][0], pieces[i + 1][1] - pieces[i + 1][0])
     if (start - end <= maxOpeningPx && jambs >= minJambPx) holes.push([end, start])
   }
+  // Wider holes the drawing itself says are openings, found over the whole
+  // line rather than inside this one edge (see `wideOpenings`).
+  holes.push(...clip(evidenced))
   return {
     wall: round6(Math.min(1, unionLength([...w]) / span)),
     line: round6(Math.min(1, unionLength([...l]) / span)),
@@ -770,6 +868,310 @@ function walledEnvelope(
 }
 
 /**
+ * The longest single stroke of ink running along a gap, as a fraction of it.
+ *
+ * Searched across a band of rows (or columns) rather than on one probe line,
+ * because where a drawing puts a door leaf or a glazing line inside a wall's
+ * thickness varies — on the inner face, on the axis, in two lines either side
+ * of it — while its being ONE unbroken stroke from jamb to jamb does not. A
+ * pixel or two of break is forgiven: anti-aliasing thins a hairline, it does
+ * not interrupt it.
+ */
+export function infillAcross(mask: Mask, along: 'X' | 'Y', from: number, to: number, bandLo: number, bandHi: number): number {
+  const a = Math.max(0, Math.round(from))
+  const b = Math.min((along === 'X' ? mask.width : mask.height) - 1, Math.round(to))
+  if (b <= a) return 0
+  let best = 0
+  for (let r = Math.round(bandLo); r <= Math.round(bandHi); r += 1) {
+    let run = 0
+    let gap = 0
+    let longest = 0
+    for (let t = a; t <= b; t += 1) {
+      const ink = along === 'X' ? at(mask, t, r) : at(mask, r, t)
+      if (ink === 1) {
+        run += 1 + gap
+        gap = 0
+      } else if (run > 0 && gap < 2) {
+        gap += 1
+      } else {
+        run = 0
+        gap = 0
+      }
+      if (run > longest) longest = run
+    }
+    best = Math.max(best, longest)
+  }
+  return round6(Math.min(1, best / Math.max(1, b - a)))
+}
+
+/** A callout printed at a gap whose width agrees with the gap's. */
+function calloutAt(
+  callouts: readonly PlanCallout[],
+  along: 'X' | 'Y',
+  linePx: number,
+  fromPx: number,
+  toPx: number,
+  widthsCm: readonly number[],
+  reachPx: number,
+  sidePx: number,
+  nearerThan?: number,
+): OpeningEvidence['callout'] {
+  let best: OpeningEvidence['callout']
+  for (const c of callouts) {
+    const across = along === 'X' ? c.at.y : c.at.x
+    const at1 = along === 'X' ? c.at.x : c.at.y
+    const off = Math.abs(across - linePx)
+    if (off > reachPx) continue
+    if (nearerThan !== undefined && Math.abs(across - nearerThan) < off) continue
+    if (at1 < fromPx - sidePx || at1 > toPx + sidePx) continue
+    for (const w of c.widthsCm) {
+      const ok = widthsCm.some((g) => Math.abs(w.value - g) <= Math.max(35, g * 0.12))
+      if (ok && (!best || w.confidence > best.confidence)) best = { id: c.id, widthCm: w.value, confidence: round6(w.confidence) }
+    }
+  }
+  return best
+}
+
+/**
+ * The stretches of one wall line that are wall ALONG it: its own bands, not
+ * the walls that cross it. A gap between two of these is a gap in one wall;
+ * a gap between two crossing walls is a mouth between two others.
+ */
+function alongWallPieces(bands: readonly Band[], axis: 'X' | 'Y', line: GridLine, tolerance: number): Array<{ from: number; to: number; lo: number; hi: number }> {
+  const pieces: Array<{ from: number; to: number; lo: number; hi: number }> = []
+  for (const band of bands) {
+    const along = (band.axis === 'VERTICAL') === (axis === 'X')
+    if (!along) continue
+    const lo = axis === 'X' ? band.bounds.x0 : band.bounds.y0
+    const hi = axis === 'X' ? band.bounds.x1 : band.bounds.y1
+    if (!line.probesPx.some((p) => p >= lo - tolerance && p <= hi + tolerance)) continue
+    for (const seg of band.segments) pieces.push({ from: seg.from, to: seg.to, lo, hi })
+  }
+  pieces.sort((p, q) => p.from - q.from)
+  const merged: typeof pieces = []
+  for (const piece of pieces) {
+    const last = merged[merged.length - 1]
+    if (last && piece.from <= last.to + 1) {
+      last.to = Math.max(last.to, piece.to)
+      last.lo = Math.min(last.lo, piece.lo)
+      last.hi = Math.max(last.hi, piece.hi)
+    } else merged.push({ ...piece })
+  }
+  return merged
+}
+
+type WideOpeningContext = {
+  mask: Mask
+  bands: readonly Band[]
+  linesX: readonly GridLine[]
+  linesY: readonly GridLine[]
+  envelope: WalledEnvelope | null
+  wallPx: number
+  mppX: number
+  mppY: number
+  callouts: readonly PlanCallout[]
+  maxOpeningPx: number
+  maxWidePx: number
+  minJambPx: number
+  minInfill: number
+  tolerance: number
+}
+
+/**
+ * Gaps in one wall line wider than the width convention, weighed.
+ *
+ * Found over the WHOLE line: continuity belongs to the drawing, and a 5 m
+ * opening that a grid line happens to cross is still one opening between the
+ * same two pieces of wall. Only a gap between two pieces of the SAME wall is
+ * weighed here — a mouth between two walls that cross the line is a
+ * different thing, and is a bay's question if it is anybody's.
+ *
+ * A wide gap is an opening only when a door or glazing is drawn across it:
+ * a callout near it is recorded but does not decide, because the callout by
+ * a recess's mouth very often belongs to the glazing at its back.
+ */
+function collinearWideGaps(ctx: WideOpeningContext): Array<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }> {
+  const out: Array<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }> = []
+  for (const axis of ['X', 'Y'] as const) {
+    const lines = axis === 'X' ? ctx.linesX : ctx.linesY
+    const mpp = axis === 'X' ? ctx.mppY : ctx.mppX
+    for (const line of lines) {
+      const pieces = alongWallPieces(ctx.bands, axis, line, ctx.tolerance)
+      for (let i = 0; i + 1 < pieces.length; i += 1) {
+        const left = pieces[i]
+        const right = pieces[i + 1]
+        const gap = right.from - left.to
+        if (gap <= ctx.maxOpeningPx || gap > ctx.maxWidePx) continue
+        const jambs = left.to - left.from >= ctx.minJambPx && right.to - right.from >= ctx.minJambPx
+        if (!jambs) continue
+        const lo = Math.min(left.lo, right.lo) - 1
+        const hi = Math.max(left.hi, right.hi) + 1
+        // `along` is the direction the wall runs: a vertical grid line (X) is a wall running along y.
+        const infill = infillAcross(ctx.mask, axis === 'X' ? 'Y' : 'X', left.to, right.from, lo, hi)
+        const widthM = round6(gap * mpp)
+        const callout = calloutAt(ctx.callouts, axis === 'X' ? 'Y' : 'X', line.px, left.to, right.from, [widthM * 100], Math.max(ctx.wallPx * 4, 1.5 / mpp), 1 / mpp)
+        const opening = infill >= ctx.minInfill
+        out.push({
+          axis,
+          line,
+          decision: {
+            kind: 'COLLINEAR_GAP',
+            axis,
+            linePx: line.px,
+            fromPx: round6(left.to),
+            toPx: round6(right.from),
+            widthM,
+            evidence: { jambs, infill, ...(callout ? { callout } : {}) },
+            decision: opening ? 'OPENING_IN_WALL' : 'OPEN_SIDE',
+            score: round6(Math.min(1, 0.3 + 0.5 * Math.min(1, infill / ctx.minInfill) + (callout ? 0.2 : 0))),
+            why: opening
+              ? `a ${widthM.toFixed(2)} m gap between two pieces of one wall with ${Math.round(infill * 100)}% of it spanned by one drawn line${callout ? ` and a callout of ${callout.widthCm} cm beside it` : ''}: an opening in a wall that carries on`
+              : `a ${widthM.toFixed(2)} m gap between two pieces of one wall, wider than a lintel conventionally spans, with only ${Math.round(infill * 100)}% of it drawn across: where the wall stops`,
+          },
+        })
+      }
+    }
+  }
+  return out
+}
+
+/**
+ * Bays: two walls leaving the envelope side by side, and what closes them.
+ *
+ * The walled envelope is the box the long walls' axes span, so a wing whose
+ * far side is not itself a long wall — a garage fronted by two piers and a
+ * door — falls outside it and is pre-seeded as ground. What says otherwise is
+ * the bay's own construction: two walls of the building's own thickness
+ * running out from it together, and a mouth between their ends that the
+ * drawing shuts. The mouth is shut when both side walls reach its line AND
+ * either one drawn line spans the gap inside the wall's thickness (the door
+ * leaf, the glazing) or a callout printed at the mouth states the gap's width.
+ * Walls reaching out with nothing drawn between their ends — a carport, a
+ * covered passage, a porch — leave the mouth open, and the bay stays ground.
+ */
+function baysOf(ctx: WideOpeningContext): PlanBay[] {
+  const env = ctx.envelope
+  if (!env) return []
+  const out: PlanBay[] = []
+  const sides = [
+    { side: 'MAX_Z' as const, bandAxis: 'VERTICAL' as const, edge: env.rect.y1, dir: 1, lines: ctx.linesY, mpp: ctx.mppY, acrossMpp: ctx.mppX },
+    { side: 'MIN_Z' as const, bandAxis: 'VERTICAL' as const, edge: env.rect.y0, dir: -1, lines: ctx.linesY, mpp: ctx.mppY, acrossMpp: ctx.mppX },
+    { side: 'MAX_X' as const, bandAxis: 'HORIZONTAL' as const, edge: env.rect.x1, dir: 1, lines: ctx.linesX, mpp: ctx.mppX, acrossMpp: ctx.mppY },
+    { side: 'MIN_X' as const, bandAxis: 'HORIZONTAL' as const, edge: env.rect.x0, dir: -1, lines: ctx.linesX, mpp: ctx.mppX, acrossMpp: ctx.mppY },
+  ]
+  const minOut = Math.max(ctx.wallPx * 4, 1.5 / Math.max(ctx.mppX, ctx.mppY))
+  for (const s of sides) {
+    const vertical = s.bandAxis === 'VERTICAL'
+    const acrossLo = vertical ? env.rect.x0 : env.rect.y0
+    const acrossHi = vertical ? env.rect.x1 : env.rect.y1
+    const runOf = (b: Band): [number, number] => (vertical ? [b.bounds.y0, b.bounds.y1] : [b.bounds.x0, b.bounds.x1])
+    const leaving = ctx.bands
+      .filter((b) => b.axis === s.bandAxis && b.thickness >= ctx.wallPx * 0.6 && b.axisPx >= acrossLo - ctx.wallPx && b.axisPx <= acrossHi + ctx.wallPx)
+      .map((b) => {
+        const [r0, r1] = runOf(b)
+        // where the band starts relative to the envelope edge, and how far out it reaches
+        const start = s.dir > 0 ? r0 : r1
+        const reach = s.dir > 0 ? r1 - s.edge : s.edge - r0
+        return { b, start, reach }
+      })
+      .filter((x) => Math.abs(x.start - s.edge) <= ctx.wallPx * 2.5 && x.reach >= minOut)
+      .sort((p, q) => p.b.axisPx - q.b.axisPx)
+    for (let i = 0; i + 1 < leaving.length; i += 1) {
+      const a = leaving[i]
+      const c = leaving[i + 1]
+      const separationM = (c.b.axisPx - a.b.axisPx) * s.acrossMpp
+      if (separationM < 2) continue
+      // The far line: the grid line at the outer face of the mouth, a wall's
+      // thickness past where the SHORTER side wall's band stops (the corner
+      // block beyond it belongs to the mouth's wall, and the band reader drops
+      // corner pixels).
+      const reach = Math.min(a.reach, c.reach)
+      const target = s.edge + s.dir * (reach + ctx.wallPx)
+      const far = [...s.lines].sort((p, q) => Math.abs(p.px - target) - Math.abs(q.px - target))[0]
+      if (!far || Math.abs(far.px - target) > ctx.wallPx * 1.5) continue
+      if (Math.abs(far.px - s.edge) < minOut) continue
+      const inner0 = vertical ? a.b.bounds.x1 : a.b.bounds.y1
+      const inner1 = vertical ? c.b.bounds.x0 : c.b.bounds.y0
+      const outer0 = vertical ? a.b.bounds.x0 : a.b.bounds.y0
+      const outer1 = vertical ? c.b.bounds.x1 : c.b.bounds.y1
+      // Both side walls reach the far line, within a wall's thickness of it.
+      const corners = [a, c].every((x) => x.reach >= Math.abs(far.px - s.edge) - ctx.wallPx * 1.6)
+      // The mouth's own wall zone: from the outer face line inward by a wall's thickness.
+      const zone0 = s.dir > 0 ? far.px - ctx.wallPx * 1.5 : far.px + ctx.wallPx * 0.25
+      const zone1 = s.dir > 0 ? far.px - ctx.wallPx * 0.25 : far.px + ctx.wallPx * 1.5
+      // Piers: columns of the mouth's wall zone that are solid ink.
+      const solid: boolean[] = []
+      const z0 = Math.round(Math.min(zone0, zone1))
+      const z1 = Math.round(Math.max(zone0, zone1))
+      for (let t = Math.round(inner0); t <= Math.round(inner1); t += 1) {
+        let ink = 0
+        for (let r = z0; r <= z1; r += 1) ink += vertical ? at(ctx.mask, t, r) : at(ctx.mask, r, t)
+        solid.push(ink >= (z1 - z0 + 1) * 0.6)
+      }
+      // A solid run narrower than a jamb is not a pier: it is a leader line
+      // from a callout, a door stop, a hairline drawn across the zone.
+      for (let k = 0; k < solid.length; ) {
+        if (!solid[k]) {
+          k += 1
+          continue
+        }
+        let e = k
+        while (e < solid.length && solid[e]) e += 1
+        if (e - k < ctx.minJambPx) for (let j = k; j < e; j += 1) solid[j] = false
+        k = e
+      }
+      const gaps: Array<[number, number]> = []
+      let runStart = -1
+      for (let k = 0; k <= solid.length; k += 1) {
+        const open = k < solid.length && !solid[k]
+        if (open && runStart < 0) runStart = k
+        if (!open && runStart >= 0) {
+          if (k - runStart >= 3) gaps.push([Math.round(inner0) + runStart, Math.round(inner0) + k])
+          runStart = -1
+        }
+      }
+      const widest = gaps.sort((p, q) => q[1] - q[0] - (p[1] - p[0]))[0] ?? [inner0, inner1]
+      const gapPx = widest[1] - widest[0]
+      const widthM = round6(gapPx * s.acrossMpp)
+      const infill = infillAcross(ctx.mask, vertical ? 'X' : 'Y', widest[0], widest[1], z0, z1)
+      const callout = calloutAt(
+        ctx.callouts,
+        vertical ? 'X' : 'Y',
+        far.px,
+        outer0,
+        outer1,
+        [widthM * 100, (inner1 - inner0) * s.acrossMpp * 100],
+        Math.max(ctx.wallPx * 4, 1.5 / s.mpp),
+        1 / s.acrossMpp,
+        s.edge,
+      )
+      const drawn = infill >= ctx.minInfill
+      const opening = corners && (drawn || !!callout) && (gapPx <= ctx.maxWidePx || (drawn && !!callout))
+      const signals = [corners ? 'both side walls reach it' : 'a side wall stops short of it', drawn ? `${Math.round(infill * 100)}% of the gap is one drawn line` : `only ${Math.round(infill * 100)}% of the gap is drawn across`, callout ? `a callout of ${callout.widthCm} cm is printed at it` : 'no callout states its width']
+      const mouth: WideOpeningDecision = {
+        kind: 'BAY_MOUTH',
+        axis: vertical ? 'Y' : 'X',
+        linePx: far.px,
+        fromPx: round6(widest[0]),
+        toPx: round6(widest[1]),
+        widthM,
+        evidence: { jambs: corners, corners, infill, ...(callout ? { callout } : {}) },
+        decision: opening ? 'OPENING_IN_WALL' : 'OPEN_SIDE',
+        score: round6((corners ? 0.3 : 0) + (drawn ? 0.35 : 0.35 * Math.min(1, infill / ctx.minInfill) * 0.5) + (callout ? 0.35 * Math.min(1, callout.confidence / 0.5) : 0)),
+        why: opening
+          ? `the mouth of a bay two walls enclose, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an opening in the bay's front wall`
+          : `the mouth of a bay two walls reach out to, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an open side`,
+      }
+      const rect: PixelRect = vertical
+        ? { x0: outer0, x1: outer1, y0: Math.min(s.edge, far.px), y1: Math.max(s.edge, far.px) }
+        : { y0: outer0, y1: outer1, x0: Math.min(s.edge, far.px), x1: Math.max(s.edge, far.px) }
+      out.push({ side: s.side, rect, wallAxesPx: [a.b.axisPx, c.b.axisPx], mouth })
+    }
+  }
+  return out
+}
+
+/**
  * Cut the plan into cells and say what each one is.
  *
  * The classification is three-way on purpose. BUILT and OUTSIDE are the
@@ -824,7 +1226,7 @@ export function decomposePlan(
       what: 'a structural grid for this plan',
       reason: `only ${linesX.length} vertical and ${linesY.length} horizontal lines are supported by a dimension chain or a wall band`,
     })
-    return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells: [], regions: [], extent, unresolved }
+    return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells: [], regions: [], extent, unresolved, wideOpenings: [], bays: [], hypotheses: [], chosenHypothesis: null }
   }
 
   const nx = linesX.length - 1
@@ -834,67 +1236,170 @@ export function decomposePlan(
   const maxOpeningPx = opt.maxOpeningM / Math.max(mppX, mppY)
   const minJambPx = Math.max(2, wallPx * 0.5)
 
-  // --- closures of every edge of the grid, computed once ---
+  const maxWidePx = opt.maxWideOpeningM / Math.max(mppX, mppY)
+  const ctx: WideOpeningContext = { mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, minJambPx, minInfill: opt.minInfill, tolerance }
+  // Wide gaps the drawing says are openings (H1's extra closures), per line.
+  const collinear = collinearWideGaps(ctx)
+  const bays = baysOf(ctx)
+  const evidencedOn = new Map<string, Array<[number, number]>>()
+  for (const g of collinear) {
+    if (g.decision.decision !== 'OPENING_IN_WALL') continue
+    const key = `${g.axis}:${g.line.px}`
+    evidencedOn.set(key, [...(evidencedOn.get(key) ?? []), [g.decision.fromPx, g.decision.toPx]])
+  }
+
+  // --- closures of every edge of the grid, computed once per hypothesis ---
   // vEdge[ix][iy] is the vertical edge on line ix beside cell row iy.
   const topY = linesY[0].px
   const bottomY = linesY[ny].px
   const leftX = linesX[0].px
   const rightX = linesX[nx].px
-  const vEdge: EdgeClosure[][] = []
-  for (let ix = 0; ix <= nx; ix += 1) {
-    const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance)
-    const drawn = lineIntervals(mask, 'X', linesX[ix], topY, bottomY, lineTolerance, opt.minLinePx)
-    const column: EdgeClosure[] = []
-    for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px, maxOpeningPx, minJambPx))
-    vEdge.push(column)
-  }
-  const hEdge: EdgeClosure[][] = []
-  for (let iy = 0; iy <= ny; iy += 1) {
-    const walls = wallIntervals(inside, 'Y', linesY[iy], leftX, rightX, tolerance)
-    const drawn = lineIntervals(mask, 'Y', linesY[iy], leftX, rightX, lineTolerance, opt.minLinePx)
-    const row: EdgeClosure[] = []
-    for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px, maxOpeningPx, minJambPx))
-    hEdge.push(row)
+  const edgesFor = (withEvidence: boolean): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
+    const vEdge: EdgeClosure[][] = []
+    for (let ix = 0; ix <= nx; ix += 1) {
+      const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance)
+      const drawn = lineIntervals(mask, 'X', linesX[ix], topY, bottomY, lineTolerance, opt.minLinePx)
+      const extra = withEvidence ? (evidencedOn.get(`X:${linesX[ix].px}`) ?? []) : []
+      const column: EdgeClosure[] = []
+      for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px, maxOpeningPx, minJambPx, extra))
+      vEdge.push(column)
+    }
+    const hEdge: EdgeClosure[][] = []
+    for (let iy = 0; iy <= ny; iy += 1) {
+      const walls = wallIntervals(inside, 'Y', linesY[iy], leftX, rightX, tolerance)
+      const drawn = lineIntervals(mask, 'Y', linesY[iy], leftX, rightX, lineTolerance, opt.minLinePx)
+      const extra = withEvidence ? (evidencedOn.get(`Y:${linesY[iy].px}`) ?? []) : []
+      const row: EdgeClosure[] = []
+      for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px, maxOpeningPx, minJambPx, extra))
+      hEdge.push(row)
+    }
+    if (withEvidence) {
+      // A shut bay mouth shuts every edge of its far line between its two
+      // side walls' axes: the piers, the corner blocks and the opening
+      // between them are one front wall.
+      for (const bay of bays) {
+        if (bay.mouth.decision !== 'OPENING_IN_WALL') continue
+        const [a0, a1] = bay.wallAxesPx
+        if (bay.mouth.axis === 'Y') {
+          const iy = linesY.findIndex((l) => l.px === bay.mouth.linePx)
+          if (iy < 0) continue
+          for (let ix = 0; ix < nx; ix += 1) {
+            const centre = (linesX[ix].px + linesX[ix + 1].px) / 2
+            if (centre < a0 || centre > a1) continue
+            const e = hEdge[iy][ix]
+            hEdge[iy][ix] = { ...e, opening: round6(Math.max(e.opening, 1 - e.wall)), closure: 1 }
+          }
+        } else {
+          const ix = linesX.findIndex((l) => l.px === bay.mouth.linePx)
+          if (ix < 0) continue
+          for (let iy = 0; iy < ny; iy += 1) {
+            const centre = (linesY[iy].px + linesY[iy + 1].px) / 2
+            if (centre < a0 || centre > a1) continue
+            const e = vEdge[ix][iy]
+            vEdge[ix][iy] = { ...e, opening: round6(Math.max(e.opening, 1 - e.wall)), closure: 1 }
+          }
+        }
+      }
+    }
+    return { vEdge, hEdge }
   }
 
   // --- flood fill over the CELLS, from outside the plan inwards ---
-  const reached = new Uint8Array(nx * ny)
   const index = (ix: number, iy: number): number => iy * nx + ix
   const open = (c: EdgeClosure): boolean => c.closure < opt.closureThreshold
-  const queue: Array<[number, number]> = []
-  const push = (ix: number, iy: number): void => {
-    if (ix < 0 || iy < 0 || ix >= nx || iy >= ny) return
-    if (reached[index(ix, iy)] === 1) return
-    reached[index(ix, iy)] = 1
-    queue.push([ix, iy])
-  }
-  // Anything beyond the walls is outside by construction, whatever ring of
-  // paving, planting or plot boundary happens to be drawn around it. This is
-  // what stops a front zone under the eaves from reading as a room.
-  if (envelope) {
-    for (let iy = 0; iy < ny; iy += 1) {
-      for (let ix = 0; ix < nx; ix += 1) {
-        const cx = (linesX[ix].px + linesX[ix + 1].px) / 2
-        const cy = (linesY[iy].px + linesY[iy + 1].px) / 2
-        if (cx < envelope.rect.x0 || cx > envelope.rect.x1 || cy < envelope.rect.y0 || cy > envelope.rect.y1) push(ix, iy)
+  const shutBays = bays.filter((b) => b.mouth.decision === 'OPENING_IN_WALL')
+  const flood = (vEdge: EdgeClosure[][], hEdge: EdgeClosure[][], withBays: boolean): Uint8Array => {
+    const reached = new Uint8Array(nx * ny)
+    const queue: Array<[number, number]> = []
+    const push = (ix: number, iy: number): void => {
+      if (ix < 0 || iy < 0 || ix >= nx || iy >= ny) return
+      if (reached[index(ix, iy)] === 1) return
+      reached[index(ix, iy)] = 1
+      queue.push([ix, iy])
+    }
+    // Anything beyond the walls is outside by construction, whatever ring of
+    // paving, planting or plot boundary happens to be drawn around it. This is
+    // what stops a front zone under the eaves from reading as a room. A bay
+    // whose mouth the drawing shuts is walls too, and is left to the fill.
+    if (envelope) {
+      for (let iy = 0; iy < ny; iy += 1) {
+        for (let ix = 0; ix < nx; ix += 1) {
+          const cx = (linesX[ix].px + linesX[ix + 1].px) / 2
+          const cy = (linesY[iy].px + linesY[iy + 1].px) / 2
+          const inEnvelope = cx >= envelope.rect.x0 && cx <= envelope.rect.x1 && cy >= envelope.rect.y0 && cy <= envelope.rect.y1
+          const inBay = withBays && shutBays.some((b) => cx >= b.rect.x0 && cx <= b.rect.x1 && cy >= b.rect.y0 && cy <= b.rect.y1)
+          if (!inEnvelope && !inBay) push(ix, iy)
+        }
       }
     }
+    for (let iy = 0; iy < ny; iy += 1) {
+      if (open(vEdge[0][iy])) push(0, iy)
+      if (open(vEdge[nx][iy])) push(nx - 1, iy)
+    }
+    for (let ix = 0; ix < nx; ix += 1) {
+      if (open(hEdge[0][ix])) push(ix, 0)
+      if (open(hEdge[ny][ix])) push(ix, ny - 1)
+    }
+    while (queue.length > 0) {
+      const [ix, iy] = queue.pop() as [number, number]
+      if (open(vEdge[ix][iy])) push(ix - 1, iy)
+      if (open(vEdge[ix + 1][iy])) push(ix + 1, iy)
+      if (open(hEdge[iy][ix])) push(ix, iy - 1)
+      if (open(hEdge[iy + 1][ix])) push(ix, iy + 1)
+    }
+    return reached
   }
-  for (let iy = 0; iy < ny; iy += 1) {
-    if (open(vEdge[0][iy])) push(0, iy)
-    if (open(vEdge[nx][iy])) push(nx - 1, iy)
+
+  // Two readings of the enclosure. H0 shuts an edge on its wall, its drawn
+  // line and the doorways the width convention allows. H1 also shuts the wide
+  // gaps the drawing itself says are openings. Where nothing is evidenced they
+  // are the same reading and H0 is taken; where they differ, every edge H1
+  // adds rests on at least two independent signals, and it is taken.
+  const strict = edgesFor(false)
+  const reachedH0 = flood(strict.vEdge, strict.hEdge, false)
+  const evidencedCount = [...evidencedOn.values()].reduce((a, l) => a + l.length, 0) + shutBays.length
+  const continuity = evidencedCount > 0 ? edgesFor(true) : strict
+  const reachedH1 = evidencedCount > 0 ? flood(continuity.vEdge, continuity.hEdge, true) : reachedH0
+  const areaOf = (reached: Uint8Array): { cells: number; areaPx: number } => {
+    let cells = 0
+    let areaPx = 0
+    for (let iy = 0; iy < ny; iy += 1) {
+      for (let ix = 0; ix < nx; ix += 1) {
+        if (reached[index(ix, iy)] === 1) continue
+        cells += 1
+        areaPx += (linesX[ix + 1].px - linesX[ix].px) * (linesY[iy + 1].px - linesY[iy].px)
+      }
+    }
+    return { cells, areaPx: round6(areaPx) }
   }
-  for (let ix = 0; ix < nx; ix += 1) {
-    if (open(hEdge[0][ix])) push(ix, 0)
-    if (open(hEdge[ny][ix])) push(ix, ny - 1)
-  }
-  while (queue.length > 0) {
-    const [ix, iy] = queue.pop() as [number, number]
-    if (open(vEdge[ix][iy])) push(ix - 1, iy)
-    if (open(vEdge[ix + 1][iy])) push(ix + 1, iy)
-    if (open(hEdge[iy][ix])) push(ix, iy - 1)
-    if (open(hEdge[iy + 1][ix])) push(ix, iy + 1)
-  }
+  const h0 = areaOf(reachedH0)
+  const h1 = areaOf(reachedH1)
+  const evidenceScores = [...collinear.filter((g) => g.decision.decision === 'OPENING_IN_WALL').map((g) => g.decision.score), ...shutBays.map((b) => b.mouth.score)]
+  const differs = evidencedCount > 0 && (h0.cells !== h1.cells || h0.areaPx !== h1.areaPx)
+  const hypotheses: EnclosureHypothesis[] = [
+    {
+      id: 'H0_STRICT_ENCLOSURE',
+      rule: `an edge is shut by wall, by drawn line, or by a doorway no wider than ${opt.maxOpeningM} m between two pieces of wall`,
+      builtCells: h0.cells,
+      builtAreaPx: h0.areaPx,
+      closedOpenings: 0,
+      score: differs ? 0.5 : 1,
+      why: differs ? 'it leaves open gaps the drawing itself draws shut' : 'no wider gap is evidenced as an opening, so this is the whole reading',
+    },
+    {
+      id: 'H1_WIDE_OPENING_CONTINUITY',
+      rule: `H0, plus gaps up to ${opt.maxWideOpeningM} m between pieces of one wall that a drawn line spans, and bay mouths both side walls reach that a drawn line or a matching callout shuts`,
+      builtCells: h1.cells,
+      builtAreaPx: h1.areaPx,
+      closedOpenings: evidencedCount,
+      score: differs ? round6(Math.min(...evidenceScores)) : 1,
+      why: differs ? `${evidencedCount} wide opening${evidencedCount === 1 ? '' : 's'} closed, each on its own evidence (the weakest scoring ${Math.min(...evidenceScores).toFixed(2)})` : 'identical to H0 here',
+    },
+  ]
+  const chosenHypothesis: EnclosureHypothesis['id'] = differs ? 'H1_WIDE_OPENING_CONTINUITY' : 'H0_STRICT_ENCLOSURE'
+  const { vEdge, hEdge } = differs ? continuity : strict
+  const reached = differs ? reachedH1 : reachedH0
+  const wideOpenings = [...collinear.map((g) => g.decision), ...bays.map((b) => b.mouth)]
 
   // --- classify ---
   const cells: PlanCell[] = []
@@ -965,7 +1470,7 @@ export function decomposePlan(
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
     unresolved.push({ what: 'any built mass on this plan', reason: 'the flood fill reached every cell of the structural grid: no part of the plan is enclosed' })
   }
-  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved }
+  return { frameId: registration.frameId, wallThickness: { px: round6(wallPx), m: wallM }, envelope, linesX, linesY, cells, regions, extent, unresolved, wideOpenings, bays, hypotheses, chosenHypothesis }
 }
 
 /**

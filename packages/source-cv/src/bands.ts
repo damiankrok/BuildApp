@@ -230,3 +230,35 @@ export function runLengthBands(m: Mask, options: BandOptions = {}): Band[] {
 
   return bands.sort((a, b) => a.axis.localeCompare(b.axis) || a.axisPx - b.axisPx || a.bounds.x0 - b.bounds.x0)
 }
+
+/**
+ * The thickness a set of bands is mostly drawn at: the length-weighted median.
+ *
+ * Length-weighted, because the longest bands are the ones most likely to be
+ * the drawing's structural strokes rather than a heavy piece of detail, and a
+ * median rather than a mean because one very thick band — a hatched cut, a
+ * filled post — should not move it.
+ */
+export function dominantBandThickness(bands: readonly Band[], fallbackPx: number): number {
+  return bandThicknessQuantile(bands, 0.5, fallbackPx)
+}
+
+/**
+ * The thickness below which a fraction `q` of the drawn band LENGTH lies.
+ *
+ * A plan draws its partitions thinner than its outer walls, and a plan with a
+ * lot of interior has more partition than outer wall, so the median can be a
+ * partition. The upper quartile is the heavier construction on the sheet.
+ */
+export function bandThicknessQuantile(bands: readonly Band[], q: number, fallbackPx: number): number {
+  const weighted: Array<{ t: number; w: number }> = bands.filter((b) => b.length > 0).map((b) => ({ t: b.thickness, w: b.length }))
+  if (weighted.length === 0) return fallbackPx
+  weighted.sort((a, b) => a.t - b.t)
+  const target = weighted.reduce((a, b) => a + b.w, 0) * q
+  let run = 0
+  for (const entry of weighted) {
+    run += entry.w
+    if (run >= target) return entry.t
+  }
+  return weighted[weighted.length - 1].t
+}

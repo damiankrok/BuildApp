@@ -16,10 +16,12 @@
     "@buildapp/reconstruction": "*",
     "@buildapp/source-analyzer": "*",
     "@buildapp/source-common": "*",
+    "@buildapp/source-cv": "*",
     "@buildapp/source-metrics": "*",
     "@buildapp/source-observations": "*",
     "@buildapp/source-package": "*",
-    "@buildapp/source-vision": "*"
+    "@buildapp/source-vision": "*",
+    "pngjs": "7.0.0"
   },
   "devDependencies": {
     "@buildapp/synthetic-drawings": "*"

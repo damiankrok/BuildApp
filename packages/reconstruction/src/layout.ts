@@ -41,7 +41,7 @@ import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bandWallThickness, decomposePlan, planBodies, planExtent } from './plan-decomposition.js'
-import type { GridLine, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
+import type { GridLine, PlanCallout, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
   AlternativeGroup,
@@ -135,6 +135,8 @@ export type StructuralLayoutDraft = {
   conflicts: LayoutConflict[]
   unresolved: LayoutGap[]
   traces: LayoutTrace[]
+  /** Plan frames the pass looked at and could not read. */
+  skippedPlans: SkippedPlan[]
 }
 
 const DEFAULT_BANDS: Required<PlanBandOptions> = { minThickness: 6, maxThickness: 40, minLength: 24 }
@@ -169,10 +171,14 @@ const quantity = (value: number, low: number, high: number, unit: LayoutQuantity
  * of the same drawing carries the same lines at more pixels and a dimensioned
  * copy carries the chains that turn them into metres.
  */
-export function readPlans(options: StructuralLayoutOptions): { plans: PlanReading[]; unresolved: LayoutGap[] } {
+/** A plan frame the pass looked at and did not read, and why. */
+export type SkippedPlan = { frameId: string; code: 'NOT_DECODABLE' | 'NO_EXTENT'; longBands?: number; why: string }
+
+export function readPlans(options: StructuralLayoutOptions): { plans: PlanReading[]; unresolved: LayoutGap[]; skipped: SkippedPlan[] } {
   const keep = options.frameFilter
   const bandOptions = { ...DEFAULT_BANDS, ...options.bands }
   const unresolved: LayoutGap[] = []
+  const skipped: SkippedPlan[] = []
   const byStorey = new Map<string, SourceCoordinateFrame[]>()
   for (const frame of options.graph.coordinateFrames) {
     if (frame.roles.projection !== 'ORTHOGRAPHIC_PLAN') continue
@@ -192,7 +198,10 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
     let read = false
     for (const frame of ordered) {
       const raster = options.raster(frame)
-      if (!raster) continue
+      if (!raster) {
+        skipped.push({ frameId: frame.id, code: 'NOT_DECODABLE', why: 'its bytes could not be decoded here' })
+        continue
+      }
       const mask = adaptiveInkMask(inkChannel(raster), {})
       // Two passes. The first is deliberately permissive and exists only to
       // measure the thickness this drawing draws a wall at; the second looks
@@ -209,7 +218,11 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       })
       const chains = options.metrics.chains.filter((c) => c.frameId === frame.id)
       const extent = planExtent(chains, bands, wallPx)
-      if (!extent) continue
+      if (!extent) {
+        const longBands = bands.filter((b) => b.length >= wallPx * 2.5).length
+        skipped.push({ frameId: frame.id, code: 'NO_EXTENT', longBands, why: `no dimension chain on it read a value and its ${longBands} long wall band${longBands === 1 ? '' : 's'} do not run along both axes` })
+        continue
+      }
       const registration =
         options.metrics.coordinateRegistrations.find((r) => r.frameId === frame.id && r.plane === 'PLAN_XZ') ??
         // A plan with no chains of its own has no scale of its own either. It
@@ -227,7 +240,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         extent: extent.rect,
         extentWeak: extent.weak,
         extentWhy: extent.why,
-        decomposition: decomposePlan(mask, chains, bands, registration, extent.rect),
+        decomposition: decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id) }),
       })
       read = true
       break
@@ -242,7 +255,24 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       })
     }
   }
-  return { plans, unresolved }
+  return { plans, unresolved, skipped }
+}
+
+/** The opening callouts printed on one plan, as the decomposition weighs them: where each sits and every width it might say. */
+export function planCallouts(metrics: MetricEvidenceSet, frameId: string): PlanCallout[] {
+  return metrics.evidence
+    .filter((e) => e.kind === 'OPENING_CALLOUT' && e.frameId === frameId && e.textBox !== undefined)
+    .map((e) => {
+      const box = e.textBox as PixelRect
+      const widths = [{ value: e.value, confidence: e.confidence }, ...e.alternatives.filter((a) => a.why.startsWith('width')).map((a) => ({ value: a.value, confidence: a.confidence }))]
+      const seen = new Set<number>()
+      return {
+        id: e.id,
+        at: { x: round6((box.x0 + box.x1) / 2), y: round6((box.y0 + box.y1) / 2) },
+        widthsCm: widths.filter((w) => (seen.has(w.value) ? false : (seen.add(w.value), true))),
+      }
+    })
+    .sort((a, b) => a.id.localeCompare(b.id))
 }
 
 /** A unit-scale registration for a plan that states no scale: enough to decompose with, never enough to measure with. */
@@ -723,7 +753,7 @@ export { SIDE_OF_EDGE }
  * before those have spoken would mean hashing a layout that is not finished.
  */
 export function inferStructuralLayout(options: StructuralLayoutOptions): StructuralLayoutDraft {
-  const { plans, unresolved } = readPlans(options)
+  const { plans, unresolved, skipped: skippedPlans } = readPlans(options)
   const conflicts: LayoutConflict[] = []
   const traces: LayoutTrace[] = []
   const alternatives: AlternativeGroup[] = []
@@ -735,7 +765,7 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   const facadePlanes: FacadePlaneHypothesis[] = []
   const recesses: RecessHypothesis[] = []
 
-  const empty: StructuralLayoutDraft = { plans, base: undefined, frame: undefined, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces }
+  const empty: StructuralLayoutDraft = { plans, base: undefined, frame: undefined, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans }
   const base = chooseBasePlan(plans)
   if (!base) {
     unresolved.push({ id: stableId('gap', 'no-plan', {}), what: 'the building’s composition', reason: 'the package carries no floor plan this pass could decompose', status: 'MISSING', frameIds: [] })
@@ -1023,7 +1053,7 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
     })
   }
 
-  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces }
+  return { plans, base, frame, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans }
 }
 
 // ---------------------------------------------------------------------------

@@ -23,13 +23,16 @@ import { nullVisionReasoner } from '@buildapp/source-vision'
 import type { VisionReasoner } from '@buildapp/source-vision'
 import { extractMetricEvidence } from '@buildapp/source-metrics'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
-import { SOLVER_V2_VERSION, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
-import type { ReconstructionV2Phase, ReconstructionV2Result } from '@buildapp/reconstruction'
+import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
+import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import type { ClosureReport } from '@buildapp/geometry'
 import { buildMobileSceneBundle, loadBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
-import { AnalysisError, throwIfAborted, toAnalysisError } from './errors.js'
+import { AnalysisError, PHASE_STAGE as FAILURE_STAGE, reconstructionError, throwIfAborted, toAnalysisError } from './errors.js'
+import { TraceRecorder } from './trace.js'
+import type { AnalysisTrace } from './trace.js'
+import { diagnosticsBundle } from './diagnostics.js'
 import { identityOf, validateAnalysisUrl } from './identity.js'
 import type { AnalysisIdentity } from './identity.js'
 import { anySignal } from './signals.js'
@@ -97,13 +100,17 @@ export type AnalysisRun = {
   sceneText: string
   closure: ClosureReport
   timings: AnalysisTimings
+  /** What each step established, for this completed run. */
+  trace: AnalysisTrace
+  /** The plan decomposition, for overlays and a diagnostics bundle. */
+  planDiagnostics: PlanDiagnosticsReport
 }
 
 const PHASE_STAGE: Record<ReconstructionV2Phase, AnalysisStage> = {
-  REGISTRATION: 'REGISTERING_VIEWS',
-  TOPOLOGY: 'SOLVING_TOPOLOGY',
-  METRICS: 'SOLVING_METRICS',
-  MODEL: 'BUILDING_MODEL',
+  REGISTRATION: FAILURE_STAGE.REGISTRATION,
+  TOPOLOGY: FAILURE_STAGE.TOPOLOGY,
+  METRICS: FAILURE_STAGE.METRICS,
+  MODEL: FAILURE_STAGE.MODEL,
 }
 
 const DRAWING_DOCUMENTS = new Set(['FLOOR_PLAN', 'ELEVATION', 'SECTION', 'SITE_PLAN', 'PERSPECTIVE_RENDER'])
@@ -133,13 +140,19 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   }
   const { signal } = options
   let last = -1
+  let current: AnalysisStage = 'ACQUIRING_SOURCE'
+  const trace = new TraceRecorder(clock, t0)
   const report = (stage: AnalysisStage, fraction = 0, detail?: string): void => {
+    current = stage
     const event = progressEvent(stage, fraction, detail)
     // monotone by construction; a report that would move the bar back is dropped
     if (event.progress < last) return
     last = event.progress
     options.progress?.(event)
   }
+  // What the run has so far, for a failure's diagnostics bundle.
+  let pkgSoFar: SourcePackage | undefined
+  const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
 
   try {
     // --- ACQUIRING_SOURCE ---------------------------------------------------
@@ -165,8 +178,14 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       pkg = SourcePackageSchema.parse(input.pkg)
       sourceUrl = pkg.canonicalUrl
     }
+    pkgSoFar = pkg
     throwIfAborted(signal)
     const acquisitionMs = lap()
+    {
+      const failureCodes: Record<string, number> = {}
+      for (const f of pkg.failures) failureCodes[`failed_${f.code}`] = (failureCodes[`failed_${f.code}`] ?? 0) + 1
+      trace.record('ACQUIRING_SOURCE', input.kind === 'URL' ? 'FETCH' : 'SEALED_PACKAGE', 'PASSED', { assets: pkg.assets.length, variants: pkg.assets.reduce((a, x) => a + x.variants.length, 0), addressesNotUsed: pkg.failures.length, ...failureCodes })
+    }
 
     // --- CLASSIFYING_SOURCES ------------------------------------------------
     // The roles were claimed during acquisition; this is where they are counted,
@@ -176,8 +195,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     for (const a of pkg.assets) byDocument[a.roles.document] = (byDocument[a.roles.document] ?? 0) + 1
     const drawings = pkg.assets.filter((a) => DRAWING_DOCUMENTS.has(a.roles.document)).length
     if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0) {
-      throw new AnalysisError('NO_DRAWINGS', drawings === 0 ? 'the page exposes no plan, elevation or section this analyzer reads' : 'the page exposes no floor plan and no elevation; a building cannot be reconstructed from the rest')
+      const message = drawings === 0 ? 'the page exposes no plan, elevation or section this analyzer reads' : 'the page exposes no floor plan and no elevation; a building cannot be reconstructed from the rest'
+      trace.record('CLASSIFYING_SOURCES', 'ROLES', 'FAILED', { drawings, ...byDocument }, { reasonCode: 'NO_DRAWINGS', detail: message })
+      throw new AnalysisError('NO_DRAWINGS', message, { reasonCode: (byDocument.FLOOR_PLAN ?? 0) === 0 ? 'PLAN_NOT_FOUND' : 'NO_DRAWINGS', stage: 'CLASSIFYING_SOURCES', substage: 'ROLES', diagnostics: { drawings, ...byDocument } })
     }
+    trace.record('CLASSIFYING_SOURCES', 'ROLES', 'PASSED', { drawings, ...byDocument })
     report('CLASSIFYING_SOURCES', 1, `${drawings} drawing${drawings === 1 ? '' : 's'} of ${pkg.assets.length} assets`)
     throwIfAborted(signal)
 
@@ -214,9 +236,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     throwIfAborted(signal)
     const observationMs = lap()
+    trace.record('EXTRACTING_OBSERVATIONS', 'OBSERVATIONS', 'PASSED', { frames: graph.coordinateFrames.length, observations: graph.observations.length, relations: graph.relations.length, vision: visionMode })
     report('EXTRACTING_OBSERVATIONS', 0.65, 'reading printed dimensions and callouts')
 
-    const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
     for (const asset of pkg.assets) {
       const variant = selectedVariant(asset)
       const fetched = await bytesFor(variant.url)
@@ -232,6 +254,15 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, pageHash: pkg.pageHash })
     throwIfAborted(signal)
     const metricExtractionMs = lap()
+    trace.record('EXTRACTING_OBSERVATIONS', 'METRIC_EVIDENCE', 'PASSED', {
+      evidence: metrics.evidence.length,
+      chains: metrics.chains.length,
+      registrations: metrics.coordinateRegistrations.length,
+      callouts: metrics.evidence.filter((e) => e.kind === 'OPENING_CALLOUT').length,
+      levelDatums: metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM').length,
+      scalesRefused: metrics.unresolved.filter((u) => u.id.startsWith('gap-scale-implausible')).length,
+      undecodable: metrics.unresolved.filter((u) => u.id.startsWith('gap-undecodable')).length,
+    })
 
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
     const reconstruction = reconstructV2({
@@ -247,31 +278,57 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       publishedAreas: pkg.publishedFacts,
       publishedRooms: pkg.publishedRooms,
       onPhase: (phase) => report(PHASE_STAGE[phase], 0),
+      trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
     })
     throwIfAborted(signal)
     const model = reconstruction.model
     const modelText = serializeModel(model)
     const reconstructionMs = lap()
+    trace.record('BUILDING_MODEL', 'SEAL', 'PASSED', { commands: reconstruction.candidate.program.length, masses: reconstruction.building.masses.length, unresolved: reconstruction.unresolved.length })
     report('BUILDING_MODEL', 1)
 
     // --- COMPILING_SCENE ----------------------------------------------------
     report('COMPILING_SCENE', 0)
-    const scene = compileBuilding(model)
+    let scene: ReturnType<typeof compileBuilding>
+    try {
+      scene = compileBuilding(model)
+    } catch {
+      trace.record('COMPILING_SCENE', 'COMPILE', 'FAILED', {}, { reasonCode: 'SCENE_COMPILE_FAILED' })
+      throw reconstructionError('SCENE_COMPILE_FAILED', 'COMPILING_SCENE', 'COMPILE', 'the geometry compiler could not compile the model the analyzer built')
+    }
     report('COMPILING_SCENE', 0.6, `${scene.meshes.length} meshes`)
     const bundle = buildMobileSceneBundle(model, { scene })
     const sceneText = serializeBundle(bundle)
     throwIfAborted(signal)
     const compileMs = lap()
+    trace.record('COMPILING_SCENE', 'COMPILE', 'PASSED', { meshes: scene.meshes.length, sceneBytes: Buffer.byteLength(sceneText, 'utf8') })
 
     // --- VERIFYING ----------------------------------------------------------
     report('VERIFYING', 0)
     const replay = verifyReplay(reconstruction.candidate)
-    if (!replay.ok) throw new AnalysisError('ANALYSIS_FAILED', 'the sealed candidate does not replay to the model it describes')
+    if (!replay.ok) {
+      trace.record('VERIFYING', 'REPLAY', 'FAILED', {}, { reasonCode: 'VERIFY_REPLAY_FAILED' })
+      throw reconstructionError('VERIFY_REPLAY_FAILED', 'VERIFYING', 'REPLAY', 'the sealed candidate does not replay to the model it describes')
+    }
     const reloaded = loadBundle(sceneText)
-    if (!reloaded.ok || reloaded.bundle.contentHash !== bundle.contentHash) throw new AnalysisError('ANALYSIS_FAILED', 'the scene bundle does not survive its own round trip')
+    if (!reloaded.ok || reloaded.bundle.contentHash !== bundle.contentHash) {
+      trace.record('VERIFYING', 'ROUND_TRIP', 'FAILED', {}, { reasonCode: 'VERIFY_REPLAY_FAILED' })
+      throw reconstructionError('VERIFY_REPLAY_FAILED', 'VERIFYING', 'ROUND_TRIP', 'the scene bundle does not survive its own round trip')
+    }
+    trace.record('VERIFYING', 'REPLAY', 'PASSED', { commands: reconstruction.candidate.program.length })
     report('VERIFYING', 0.3, 'replay byte-identical; checking joints')
-    const closure = geometryClosureAudit(model, scene)
+    let closure: ClosureReport
+    try {
+      closure = geometryClosureAudit(model, scene)
+    } catch {
+      trace.record('VERIFYING', 'CLOSURE', 'FAILED', {}, { reasonCode: 'VERIFY_CLOSURE_FAILED' })
+      throw reconstructionError('VERIFY_CLOSURE_FAILED', 'VERIFYING', 'CLOSURE', 'the joint audit could not be run over the compiled scene')
+    }
     const verificationMs = lap()
+    {
+      const exteriorErrorsNow = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
+      trace.record('VERIFYING', 'CLOSURE', exteriorErrorsNow === 0 ? 'PASSED' : 'DEGRADED', { exteriorErrors: exteriorErrorsNow, exteriorFindings: closure.metrics.exteriorFindingCount, interiorFindings: closure.metrics.interiorFindingCount })
+    }
     report('VERIFYING', 1)
 
     const b = reconstruction.building
@@ -347,9 +404,23 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       scene: bundle,
     }
     const timings: AnalysisTimings = { acquisitionMs, observationMs, metricExtractionMs, reconstructionMs, compileMs, verificationMs, totalMs: Math.round(clock() - t0) }
-    return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings }
+    return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings, trace: trace.finish('COMPLETED'), planDiagnostics: reconstruction.planDiagnostics }
   } catch (error) {
-    throw toAnalysisError(error, signal)
+    const e = toAnalysisError(error, signal, { stage: current })
+    const cancelled = e.code === 'CANCELLED' || e.code === 'TIMEOUT'
+    // The step that stopped the run is in the trace whoever threw: the
+    // solver records its own; anything else is recorded here.
+    if (!trace.hasFailure()) trace.record(e.detail.stage ?? current, e.detail.substage ?? (cancelled ? 'CANCELLED' : 'UNEXPECTED'), cancelled ? 'CANCELLED' : 'FAILED', {}, { ...(e.detail.reasonCode ? { reasonCode: e.detail.reasonCode } : { reasonCode: e.code }), detail: e.message })
+    const finished = trace.finish(cancelled ? 'CANCELLED' : 'FAILED')
+    const plans = isReconstructionFailure(error) ? error.plans : undefined
+    let bundle
+    try {
+      bundle = diagnosticsBundle({ outcome: finished.outcome, failure: e.failure(), pkg: pkgSoFar, plans, trace: finished, rasterOf: (hash) => rasterCache.get(hash) })
+    } catch {
+      bundle = undefined
+    }
+    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}) }
+    throw e
   }
 }
 

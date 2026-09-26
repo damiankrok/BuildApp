@@ -23,11 +23,12 @@
  */
 import { round6, stableId } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
-import { adaptiveInkMask, inkChannel } from '@buildapp/source-cv'
+import { adaptiveInkMask, bandThicknessQuantile, inkChannel, runLengthBands } from '@buildapp/source-cv'
+import type { Mask } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import { chainsFromLines, chainId, solveFrameChains } from './chains.js'
-import type { RawChain, SolvedChain } from './chains.js'
+import type { RawChain, ScalePlausibility, SolvedChain } from './chains.js'
 import { findDimensionLines, findStraightRuns } from './dimension-lines.js'
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
@@ -81,6 +82,41 @@ const planeOf = (frame: SourceCoordinateFrame): RegistrationPlane | undefined =>
 }
 
 const rectCentre = (r: PixelRect): PixelPoint => ({ x: (r.x0 + r.x1) / 2, y: (r.y0 + r.y1) / 2 })
+
+/**
+ * The one drawing convention this layer leans on to CHECK a plan's scale.
+ *
+ * A floor plan draws its walls as the heaviest continuous strokes on the
+ * sheet, and its outer walls as the heaviest of those. An outer wall has a
+ * thickness a person can build: 15 cm of timber frame, 50 of insulated
+ * masonry, 75 of rubble — not a metre and a half, and not 4 cm. So a scale is
+ * plausible for a plan only if it makes the thickness its heavier walls are
+ * drawn at (the upper quartile of the drawn wall length, so that a plan full
+ * of partitions is still judged by its outer walls) a thickness an outer wall
+ * can have. Nothing is measured or derived from this: it only tells the chain
+ * vote which of the scales the printed numbers support this drawing can be at.
+ *
+ * Where the sheet draws no heavy bands to judge by, nothing is ruled out.
+ */
+export const PLAN_OUTER_WALL_M = { min: 0.15, max: 0.8 } as const
+
+export function planScalePlausibility(mask: Mask): ScalePlausibility | undefined {
+  const survey = runLengthBands(mask, { minThickness: 6, maxThickness: 40, minLength: 24 })
+  if (survey.length === 0) return undefined
+  const outerPx = bandThicknessQuantile(survey, 0.75, 0)
+  if (outerPx < 3) return undefined
+  return (cmPerPixel: number) => {
+    const m = round6((outerPx * cmPerPixel) / 100)
+    const plausible = m >= PLAN_OUTER_WALL_M.min && m <= PLAN_OUTER_WALL_M.max
+    return {
+      plausible,
+      why: plausible
+        ? `the plan's heavier walls, drawn ${outerPx} px thick, come out ${m} m`
+        : `it would make the plan's heavier walls, drawn ${outerPx} px thick, ${m} m thick, outside the ${PLAN_OUTER_WALL_M.min}–${PLAN_OUTER_WALL_M.max} m an outer wall can be`,
+    }
+  }
+}
+
 const distance = (a: PixelPoint, b: PixelPoint): number => Math.hypot(a.x - b.x, a.y - b.y)
 
 /** Every point an observation is made of, for judging what a number sits beside. */
@@ -151,6 +187,73 @@ function nearestRule(runs: readonly DimensionLine[], box: PixelRect): { line: Di
   return best
 }
 
+/**
+ * The apex of a level symbol printed under a height: the small triangle
+ * pointing down at the level (▽), usually drawn in a thin, light line with a
+ * rule along its top.
+ *
+ * Searched on the raster itself rather than the ink mask, because the symbol
+ * is drawn lighter than anything else on the sheet and anti-aliasing breaks
+ * its edges into dots the mask drops. Found as a POINT: the apex is the place
+ * below the text from which two edges run up and outwards at the symbol's
+ * angle to the row of its top, each edge seen on most rows between. A digit
+ * does not have two symmetric edges converging on a point below it; a rule
+ * has no edges at all.
+ */
+export function markerApexBelow(raster: Raster, box: PixelRect): { row: number; x: number; distance: number } | undefined {
+  const h = Math.max(1, box.y1 - box.y0)
+  const dark = (x: number, y: number): boolean => {
+    if (x < 0 || y < 0 || x >= raster.width || y >= raster.height) return false
+    const i = (y * raster.width + x) * 4
+    return 0.299 * raster.data[i] + 0.587 * raster.data[i + 1] + 0.114 * raster.data[i + 2] < 225
+  }
+  const near = (x: number, y: number): boolean => dark(Math.round(x) - 1, y) || dark(Math.round(x), y) || dark(Math.round(x) + 1, y)
+  const x0 = Math.round(box.x0 - h * 0.6)
+  const x1 = Math.round(box.x1 + h * 0.6)
+  // The symbol's top: the first row under the text with a stroke at least a
+  // third of a character long, breaks of two pixels forgiven.
+  let top = -1
+  for (let y = Math.round(box.y1) + 1; y <= Math.round(box.y1 + h * 0.8) && top < 0; y += 1) {
+    let run = 0
+    let gap = 0
+    for (let x = x0; x <= x1; x += 1) {
+      if (dark(x, y)) {
+        run += 1 + gap
+        gap = 0
+      } else if (run > 0 && gap < 2) gap += 1
+      else {
+        run = 0
+        gap = 0
+      }
+      if (run >= h * 0.35) {
+        top = y
+        break
+      }
+    }
+  }
+  if (top < 0) return undefined
+  let best: { row: number; x: number; score: number } | undefined
+  for (let ya = top + Math.max(3, Math.round(h * 0.2)); ya <= top + Math.round(h * 0.9); ya += 1) {
+    for (let xa = x0; xa <= x1; xa += 1) {
+      if (!near(xa, ya)) continue
+      for (const t of [0.45, 0.577, 0.72]) {
+        let seen = 0
+        let rows = 0
+        for (let y = top + 1; y < ya; y += 1) {
+          rows += 1
+          const d = (ya - y) * t
+          if (near(xa - d, y) && near(xa + d, y)) seen += 1
+        }
+        if (rows < 3) continue
+        const score = seen / rows
+        // The deeper apex wins a tie: the symbol's point, not a crossing halfway down its edges.
+        if (score >= 0.6 && (!best || score > best.score + 1e-9 || (Math.abs(score - best.score) <= 1e-9 && ya > best.row))) best = { row: ya, x: xa, score }
+      }
+    }
+  }
+  return best ? { row: best.row, x: best.x, distance: round6(best.row - box.y1) } : undefined
+}
+
 const UNATTACHED: Association = { kind: 'UNATTACHED', score: 0, why: 'read on the sheet but not attached to any measurable feature', observationIds: [] }
 
 /**
@@ -198,7 +301,20 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     const runs = findStraightRuns(mask)
     const lines = findDimensionLines(mask)
     const rawChains = chainsFromLines(lines, observations)
-    const solution = solveFrameChains(rawChains, read.tokens, { tolerancePx })
+    const plausibility = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ' ? planScalePlausibility(mask) : undefined
+    const solution = solveFrameChains(rawChains, read.tokens, { tolerancePx, plausibility })
+    if (solution.scaleDecision) {
+      const d = solution.scaleDecision
+      unresolved.push({
+        id: stableId('gap', 'scale-implausible', { frameId: frame.id }),
+        what: `the sheet scale of ${frame.assetId}`,
+        frameId: frame.id,
+        reason: d.chosen
+          ? `the chains' strongest vote, ${d.rejected.cmPerPixel} cm/px (${d.rejected.support} numbers on ${d.rejected.chains} chains), is ruled out: ${d.rejected.why}; ${d.chosen.cmPerPixel} cm/px was taken instead — ${d.chosen.why}`
+          : `the chains' strongest vote, ${d.rejected.cmPerPixel} cm/px, is ruled out (${d.rejected.why}) and no other scale is stated by three numbers on two chains, so this plan carries no scale`,
+        status: 'AMBIGUOUS',
+      })
+    }
     const usedTokens = new Set<TextToken>()
     const anchors: ScaleAnchorInput[] = []
 
@@ -238,12 +354,17 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
         // is not a guess: it is the line the number is printed against, and
         // without it the height is a number with no row, which anchors nothing.
         const rule = attached ? undefined : nearestRule(runs, token.box)
+        // No line to mark: a ridge, an eaves corner, a level on a slope. The
+        // symbol printed under the height still points at it.
+        const apex = attached || rule ? undefined : markerApexBelow(raster, token.box)
         const geometry =
           attached && near.observation.pixelGeometry.type === 'SEGMENT'
             ? near.observation.pixelGeometry
             : rule
               ? ({ type: 'SEGMENT', a: { x: rule.line.fromPx, y: rule.line.baselinePx }, b: { x: rule.line.toPx, y: rule.line.baselinePx } } as const)
-              : undefined
+              : apex
+                ? ({ type: 'SEGMENT', a: { x: apex.x - 1, y: apex.row }, b: { x: apex.x + 1, y: apex.row } } as const)
+                : undefined
         datumCandidates.push({
           token,
           record,
@@ -251,12 +372,14 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
           alternatives,
           geometry,
           observationId: attached ? near.observation.id : undefined,
-          associationScore: attached ? round6(Math.max(0.1, 1 - near.distance / Math.max(1, token.height * 1.6))) : rule ? round6(Math.max(0.1, 0.8 - rule.distance / Math.max(1, token.height * 2))) : 0,
+          associationScore: attached ? round6(Math.max(0.1, 1 - near.distance / Math.max(1, token.height * 1.6))) : rule ? round6(Math.max(0.1, 0.8 - rule.distance / Math.max(1, token.height * 2))) : apex ? 0.5 : 0,
           why: attached
             ? `${near.distance} px from a level line on the same sheet`
             : rule
               ? `printed ${rule.distance} px above a ${round6(rule.line.toPx - rule.line.fromPx)} px horizontal rule read from the same bytes`
-              : UNATTACHED.why,
+              : apex
+                ? `printed above a level symbol whose apex, ${apex.distance} px below the text, marks the row`
+                : UNATTACHED.why,
         })
         usedTokens.add(token)
         continue
