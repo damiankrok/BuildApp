@@ -1,0 +1,42 @@
+{
+    "test": "cancel-download",
+    "device": "unknown Android SDK built for x86_64",
+    "sdk": 34,
+    "supportedAbis": "x86_64",
+    "final": "Cancelled",
+    "wallMs": 1032,
+    "states": 14,
+    "report": {
+        "jobId": "a2634c8ff9f57e009a728008812e65d7",
+        "sourceUrl": "https://drawings.synthetic-publisher.test/projects/hangs",
+        "outcome": "CANCELLED",
+        "code": null,
+        "abi": "x86_64",
+        "runtime": {
+            "node": "v18.20.4",
+            "v8": "10.2.154.26-node.37",
+            "icu": null,
+            "text": "embedded-tables",
+            "platform": "android",
+            "arch": "x64",
+            "cpus": 0,
+            "totalMemoryBytes": 6220115968,
+            "collatorLocale": "none (no Intl)"
+        },
+        "analyzerService": "1.0.0",
+        "analyzerSolver": "2.0.0",
+        "elapsedMs": 511,
+        "rssBytes": 215162880,
+        "peakRssBytes": 225067008,
+        "peakSource": "VmHWM",
+        "timings": null,
+        "sceneBytes": null,
+        "sceneSha256": null,
+        "modelHash": null,
+        "candidateHash": null,
+        "startedAtMs": 1790441825437,
+        "cancelRequested": true,
+        "forcedStop": false,
+        "sources": null
+    }
+}

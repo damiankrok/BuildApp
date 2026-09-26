@@ -24,7 +24,13 @@ const keys = ['sourcePackageHash', 'observationGraphHash', 'metricEvidenceHash',
 /** { hashes, sources } from a device report or a run-host line; exits when the run did not complete. */
 function load(file, name) {
   const text = readFileSync(file, 'utf8').trim()
-  const json = JSON.parse(text.split('\n').pop())
+  // a device report is one pretty-printed object; run-host prints one line (after any others)
+  let json
+  try {
+    json = JSON.parse(text)
+  } catch {
+    json = JSON.parse(text.split('\n').pop())
+  }
   if ('terminal' in json) {
     const t = json.terminal
     if (!t || t.type !== 'done') {

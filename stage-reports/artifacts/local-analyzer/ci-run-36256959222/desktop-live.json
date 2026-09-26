@@ -1,0 +1,306 @@
+{
+ "exit": 0,
+ "outDir": "/tmp/local-analyzer-ZPAJnK/out",
+ "workDir": "/tmp/local-analyzer-ZPAJnK/work",
+ "terminal": {
+  "type": "done",
+  "summary": {
+   "schema": "buildapp.link-analysis-result",
+   "schemaVersion": "1.0.0",
+   "jobId": "8009a5c84cf5cb9f503716fa60082578",
+   "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "title": "Dom w marcówkach (GE)",
+   "label": "Dom w marcówkach (GE) (analysis)",
+   "modelId": "m-analysis-m2fa281446a8ca",
+   "publisher": "archon.pl",
+   "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+   },
+   "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+   "sourcePackageHash": "07374b3253ef393cc656d83357a8d84bed8f1b2c351084ad4bb742373ed3667c",
+   "observationGraphHash": "387af62482a6e703be5e81ec0ee0b303231e56a83d99718213df91eeb80271bf",
+   "metricEvidenceHash": "41ba3d5f65f444c723a968827e8413f837924124d6b1fb84b341b638fd3c5269",
+   "candidateHash": "77ddca7779c20c321f8729e11e580b63cc3918e1dd8d0b94e58b76fd4b09241f",
+   "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+   "modelSha256": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+   "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+   "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13",
+   "sceneBytes": 578344,
+   "counts": {
+    "assets": 20,
+    "assetsByDocument": {
+     "ELEVATION": 4,
+     "SECTION": 1,
+     "FLOOR_PLAN": 8,
+     "SITE_PLAN": 1,
+     "PERSPECTIVE_RENDER": 4,
+     "UNKNOWN": 2
+    },
+    "observations": 888,
+    "frames": 18,
+    "metricEvidence": 142,
+    "callouts": 56,
+    "commands": 205,
+    "masses": 2,
+    "openings": 12,
+    "rooms": 12,
+    "balconies": 2,
+    "terraces": 2,
+    "railings": 2,
+    "chimneys": 2,
+    "rooflights": 3,
+    "meshes": 162,
+    "triangles": 5110
+   },
+   "quality": {
+    "levels": {
+     "L0": 5,
+     "L1": 69,
+     "L2": 31
+    },
+    "byFamily": {
+     "FACADE_ASSEMBLY": {
+      "L1": 2
+     },
+     "MASS": {
+      "L2": 2
+     },
+     "INTERIOR_WALL": {
+      "L1": 29,
+      "L0": 2
+     },
+     "ROOM": {
+      "L1": 10,
+      "L2": 2
+     },
+     "BALCONY": {
+      "L2": 2
+     },
+     "CAMERA": {
+      "L1": 3
+     },
+     "CHIMNEY": {
+      "L2": 2
+     },
+     "SURFACE_REGION": {
+      "L0": 3
+     },
+     "LEVEL": {
+      "L2": 2
+     },
+     "INTERIOR_DOOR": {
+      "L1": 9
+     },
+     "OPENING": {
+      "L2": 11,
+      "L1": 1
+     },
+     "FACADE_MEMBER": {
+      "L2": 1
+     },
+     "RAILING": {
+      "L2": 2
+     },
+     "RECESS": {
+      "L2": 4
+     },
+     "RETURN_WALL": {
+      "L1": 8
+     },
+     "ATTACHED_ROOF": {
+      "L2": 1
+     },
+     "ROOF": {
+      "L2": 1
+     },
+     "ROOFLIGHT": {
+      "L1": 3
+     },
+     "STAIR": {
+      "L2": 1
+     },
+     "TERRACE": {
+      "L1": 2
+     },
+     "ROOF_MEMBER": {
+      "L1": 2
+     }
+    }
+   },
+   "unresolved": [
+    {
+     "what": "the kind of roof over mass-1",
+     "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+     "status": "MISSING"
+    },
+    {
+     "what": "the label of room-0-2 (read as 9)",
+     "reason": "its 5.555 m² is 77 % off the published Garaż 24.1 m²; by area it would be 8 Kotłownia 5.8",
+     "status": "AMBIGUOUS"
+    }
+   ],
+   "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses not used (byte identical)",
+    "9 source addresses not used (http status)",
+    "12 of 66 source-view checks outside tolerance"
+   ],
+   "vision": {
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null,
+    "attempted": 0,
+    "accepted": 0
+   },
+   "verification": {
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 66,
+    "residualsOutsideTolerance": 12,
+    "closure": {
+     "exteriorErrors": 0,
+     "exteriorFindings": 0,
+     "interiorFindings": 42
+    }
+   },
+   "analyzer": {
+    "service": "1.0.0",
+    "solver": "2.0.0"
+   },
+   "startedAt": "2026-09-26T16:53:44.564Z",
+   "completedAt": "2026-09-26T16:55:52.586Z"
+  },
+  "files": {
+   "summary": "result.json",
+   "scene": "scene.json",
+   "model": "model.json",
+   "candidate": "candidate.json"
+  },
+  "metrics": {
+   "elapsedMs": 128068,
+   "memory": {
+    "rssBytes": 1721081856,
+    "peakRssBytes": 1721081856,
+    "peakSource": "VmHWM",
+    "heapUsedBytes": 187704872,
+    "arrayBuffersBytes": 123716129
+   },
+   "timings": {
+    "acquisitionMs": 16389,
+    "observationMs": 18907,
+    "metricExtractionMs": 87609,
+    "reconstructionMs": 4060,
+    "compileMs": 92,
+    "verificationMs": 961,
+    "totalMs": 128021
+   },
+   "sceneBytes": 578344
+  },
+  "sources": {
+   "packageHash": "07374b3253ef393cc656d83357a8d84bed8f1b2c351084ad4bb742373ed3667c",
+   "pageHash": "0da3d8c75912639aa3180c76934fb75f4b2b5a1d417e5749265da89ea395a1ff",
+   "assets": [
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-10833ce28d",
+     "document": "ELEVATION",
+     "byteHash": "93e150872f599485c653ceba5d54655d6e117780c088cb3aff4b9390625562dd"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62",
+     "document": "ELEVATION",
+     "byteHash": "0015dfde66b5657c771e703e2cfdb3e068f6e30ff2f8e1435ce950e98a3b11c6"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
+     "document": "ELEVATION",
+     "byteHash": "130edece308d06a680c969633cfcd27c9f8ddd6052b3cf7b608b77cd12d00142"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+     "document": "ELEVATION",
+     "byteHash": "84ebf5b30670882bd566c8b9bd0ab1f848f3252fa5fa28cda053ab5d5c9ce26e"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-przekroj-budy-d2e1bb6894",
+     "document": "SECTION",
+     "byteHash": "2201a9c1186d2f0cd4e10a747ce39f1b36d08d48781fca980bcdf22b2d27e188"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+     "document": "FLOOR_PLAN",
+     "byteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+     "document": "FLOOR_PLAN",
+     "byteHash": "daf775db8978912c9131602a710ab1d43881860b189d371d9fd12d7e4b0b116b"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+     "document": "SITE_PLAN",
+     "byteHash": "331087c2c5f258eb55fd99bc462feda6649e8a7e80e843839ca9c58c8bdb0bf2"
+    },
+    {
+     "id": "asset-gotowy-projekt-dom-w-marcowkach-ge-widok-1-f72054e154",
+     "document": "PERSPECTIVE_RENDER",
+     "byteHash": "18fc65eabe52450ad303e5a129521df62a988452bbbeee5ea1de76c489fcb027"
+    },
+    {
+     "id": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+     "document": "FLOOR_PLAN",
+     "byteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece"
+    },
+    {
+     "id": "asset-projekt-dom-w-marcowkach-ge-0b42f7006f",
+     "document": "UNKNOWN",
+     "byteHash": "71241f80e71a4ffb60e78de78d81879bc860c56c9673e28a8843bfb120980f68"
+    },
+    {
+     "id": "asset-projekt-dom-w-marcowkach-ge-485a3aa4e3",
+     "document": "PERSPECTIVE_RENDER",
+     "byteHash": "34a03ffdddd56f4d963eb91cb64ed0136c4361ccd576585b729d4029f682907e"
+    },
+    {
+     "id": "asset-projekt-dom-w-marcowkach-ge-8533a257062bd0260f2a-82b56a7ac5",
+     "document": "UNKNOWN",
+     "byteHash": "685a5d68132e3c53f28763ac61edb4a2ea285cb629b8153bdb4c40182977d5a1"
+    },
+    {
+     "id": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+     "document": "FLOOR_PLAN",
+     "byteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476"
+    },
+    {
+     "id": "asset-rzut-117027f690",
+     "document": "FLOOR_PLAN",
+     "byteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+     "id": "asset-rzut-19a11bc745",
+     "document": "FLOOR_PLAN",
+     "byteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+     "id": "asset-rzut-aa1526220f",
+     "document": "FLOOR_PLAN",
+     "byteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+     "id": "asset-rzut-f028d28aba",
+     "document": "FLOOR_PLAN",
+     "byteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+     "id": "asset-widok-1-projekt-dom-w-marcowkach-ge-89e35336fb",
+     "document": "PERSPECTIVE_RENDER",
+     "byteHash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9"
+    },
+    {
+     "id": "asset-widok-2-projekt-dom-w-marcowkach-ge-67e4040ea7",
+     "document": "PERSPECTIVE_RENDER",
+     "byteHash": "5b9c39379f85723eef64d045cfc995ffec5c35c3c1ab6b4e6d2b696b66f228f1"
+    }
+   ]
+  }
+ }
+}

@@ -3,26 +3,19 @@
   "apks": {
     "local": {
       "file": "app-arm64-v8a-debug.apk",
-      "bytes": 29890567,
-      "MiB": 28.51
+      "bytes": 29911879,
+      "MiB": 28.53
     },
     "withoutLocalAnalyzer": {
       "file": "app-arm64-v8a-debug.apk",
-      "bytes": 11910242,
+      "bytes": 11911438,
       "MiB": 11.36
-    },
-    "prestage": {
-      "file": "app-arm64-v8a-debug.apk",
-      "bytes": 13609795,
-      "MiB": 12.98
     }
   },
   "delta": {
-    "bytes": 17980325,
-    "MiB": 17.15,
-    "MB": 17.98,
-    "versusPrestageBytes": 16280772,
-    "versusPrestageMiB": 15.53
+    "bytes": 18000441,
+    "MiB": 17.17,
+    "MB": 18
   },
   "runtime": {
     "entries": [
@@ -45,8 +38,8 @@
       {
         "name": "assets/local-analyzer/analyzer.mjs",
         "method": "deflated",
-        "compressed": 420511,
-        "uncompressed": 1410977
+        "compressed": 440629,
+        "uncompressed": 1455782
       },
       {
         "name": "assets/local-analyzer/main.mjs",
@@ -55,18 +48,19 @@
         "uncompressed": 372
       }
     ],
-    "bytes": 1411349,
-    "inApkCompressedBytes": 420742,
+    "bytes": 1456154,
+    "inApkCompressedBytes": 440860,
     "byPackage": {
-      "packages/reconstruction": 446544,
+      "packages/reconstruction": 446555,
       "packages/source-metrics": 137569,
-      "node_modules/zod": 120920,
+      "node_modules/zod": 120940,
       "packages/geometry": 110175,
       "packages/model": 79592,
       "packages/source-analyzer": 78489,
       "node_modules/pngjs": 67555,
-      "node_modules/jpeg-js": 65496,
+      "node_modules/jpeg-js": 65497,
       "packages/source-package": 55305,
+      "apps/local-analyzer": 52464,
       "packages/commands": 42631,
       "packages/source-observations": 35654,
       "packages/image-metrology": 34018,
@@ -75,7 +69,6 @@
       "node_modules/omggif": 19457,
       "packages/analysis-service": 18382,
       "packages/source-vision": 13264,
-      "apps/local-analyzer": 7833,
       "packages/source-common": 6389
     }
   },
@@ -84,7 +77,7 @@
       {
         "name": "lib/arm64-v8a/libbuildapp_node_bridge.so",
         "method": "deflated",
-        "compressed": 29814,
+        "compressed": 29812,
         "uncompressed": 73704
       },
       {
@@ -96,12 +89,12 @@
       {
         "name": "assets/local-analyzer/manifest.json",
         "method": "deflated",
-        "compressed": 269,
+        "compressed": 265,
         "uncompressed": 466
       }
     ],
     "bytes": 1367074,
-    "inApkCompressedBytes": 481022
+    "inApkCompressedBytes": 481016
   },
-  "addedEntriesCompressedTotal": 17979486
+  "addedEntriesCompressedTotal": 17999598
 }

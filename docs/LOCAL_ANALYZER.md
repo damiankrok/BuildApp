@@ -85,11 +85,38 @@ private, link-local, CGNAT, documentation or metadata; redirects followed
 manually (≤ 5) and re-validated; 24 MB per body, 120 assets, 20 s per fetch,
 media types allow-listed. The Node APIs it relies on (`dns.lookup` via the
 platform resolver, `net.isIP`, undici `fetch`) are present in nodejs-mobile
-18.20.4, so no adapter was needed and nothing was relaxed. The one API that was
-missing — `AbortSignal.any` (Node ≥ 20.3), used to combine a fetch's timeout
-with the job's cancel — is shimmed in `packages/analysis-service/src/signals.ts`
-with identical semantics. The remaining gap is the one BUILDAPP-02 documented:
-a DNS rebind between the check and the connect.
+18.20.4 and were exercised on the emulator against the real publisher, so no
+network adapter was needed and nothing was relaxed. The remaining gap is the
+one BUILDAPP-02 documented: a DNS rebind between the check and the connect.
+
+## Compatibility: what Node 18 on Android lacks, and what stands in for it
+
+Two things, and only two, differ from the desktop runtime:
+
+1. **`AbortSignal.any`** (Node ≥ 20.3), which combines a fetch's timeout with
+   the job's cancel: `packages/analysis-service/src/signals.ts` uses the native
+   one where it exists and an identical combination where it does not.
+2. **ICU.** nodejs-mobile builds Node for Android with `--with-intl=none`
+   (`android_configure.py`: *"nodejs-mobile patch: added --with-intl=none"*):
+   there is no `Intl`, V8's `localeCompare` compares UTF-16 code units and
+   `normalize()` returns its input. The analyzer sorts with `localeCompare`
+   (ids, URLs, OCR tokens, published labels) and deaccents with
+   `normalize('NFD')`; on the real Marcówki inputs a runtime without ICU gets
+   5 357 of 50 412 comparisons wrong and seals different metric evidence and a
+   different candidate. `apps/local-analyzer/src/text.ts` — installed only
+   where the runtime's ICU is missing, probed by behaviour — reproduces
+   `normalize('NFD')` exactly for every code point and `localeCompare` (CLDR
+   root, the collation ICU uses for en-US) for a repertoire verified against
+   ICU: ASCII, Latin letters through NFD (every Polish letter; `ł` collates as
+   `l` + U+0335, exactly as ICU does), common punctuation and symbols,
+   combining marks. The tables (`src/text-tables.ts`) are generated from the
+   desktop's ICU by `scripts/generate-text-tables.mjs`, which drops every
+   character the model cannot reproduce; CI checks they are current. Text
+   outside the repertoire (curly quotes, `…`, `ß`, Greek, CJK) makes the phone
+   refuse the job as `TEXT_NOT_SUPPORTED_ON_DEVICE` rather than order it
+   differently from the service; a refused comparison anywhere in a run means
+   no result is delivered. The general fix — a nodejs-mobile build with ICU —
+   would remove the repertoire limit at a size cost not measured here.
 
 ## Secrets
 

@@ -1,0 +1,104 @@
+{
+    "test": "fixture-larchfield",
+    "device": "unknown Android SDK built for x86_64",
+    "sdk": 34,
+    "supportedAbis": "x86_64",
+    "final": "Completed",
+    "wallMs": 5441,
+    "states": 36,
+    "title": "Larchfield",
+    "label": "Larchfield (analysis)",
+    "sourcePackageHash": "66ef293001041ad4c2215d8d225f5d3e5d1f8a85134c9b847806541e5e4fa3d8",
+    "observationGraphHash": "969c810eec9ef47f90e480a3df3e9f4b70cee8276ecd5868b13b3ddab7dc5c08",
+    "metricEvidenceHash": "4b6bb7039c4d3b919909d30751e972a864aee026afdd792a615305f4bd2d64ce",
+    "candidateHash": "186f40f115185800e3054165796e886df8cc3114fd702a755bf1e2b35efb2dc4",
+    "modelHash": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+    "modelSha256": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+    "sceneContentHash": "ce1a5fc67d7c26f173a12c1d295bc23f5104a9b33ad2f70e006deff85b568115",
+    "sceneSha256": "6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63",
+    "sceneBytes": 101457,
+    "observations": 149,
+    "meshes": 46,
+    "triangles": 916,
+    "report": {
+        "jobId": "86e4f2bbb6fb4b48bc3c40938014c467",
+        "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+        "outcome": "COMPLETED",
+        "code": null,
+        "abi": "x86_64",
+        "runtime": {
+            "node": "v18.20.4",
+            "v8": "10.2.154.26-node.37",
+            "icu": null,
+            "text": "embedded-tables",
+            "platform": "android",
+            "arch": "x64",
+            "cpus": 0,
+            "totalMemoryBytes": 6220115968,
+            "collatorLocale": "none (no Intl)"
+        },
+        "analyzerService": "1.0.0",
+        "analyzerSolver": "2.0.0",
+        "elapsedMs": 4702,
+        "rssBytes": 268025856,
+        "peakRssBytes": 283873280,
+        "peakSource": "VmHWM",
+        "timings": {
+            "acquisitionMs": 753,
+            "observationMs": 1754,
+            "metricExtractionMs": 951,
+            "reconstructionMs": 1066,
+            "compileMs": 42,
+            "verificationMs": 111,
+            "totalMs": 4677
+        },
+        "sceneBytes": 101457,
+        "sceneSha256": "6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63",
+        "modelHash": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+        "candidateHash": "186f40f115185800e3054165796e886df8cc3114fd702a755bf1e2b35efb2dc4",
+        "startedAtMs": 1790441819839,
+        "cancelRequested": false,
+        "forcedStop": false,
+        "sources": {
+            "packageHash": "66ef293001041ad4c2215d8d225f5d3e5d1f8a85134c9b847806541e5e4fa3d8",
+            "pageHash": "7f64761316fd1546fd42c26852c68828f604cbe25cc7bba5c5c92d2441d750e7",
+            "assets": [
+                {
+                    "id": "asset-elewacja-frontowa-ce68d57053",
+                    "document": "ELEVATION",
+                    "byteHash": "8c4d42c40efc38278c2196fbce81a4e102dee94256b065d06074e9c4d29aab2c"
+                },
+                {
+                    "id": "asset-elewacja-lewa-edc4129d06",
+                    "document": "ELEVATION",
+                    "byteHash": "fa1c49590334462f5e30893a8ccd8014d282f3ca5801a998c2a61eb7fe24175f"
+                },
+                {
+                    "id": "asset-elewacja-prawa-7bcce1b6da",
+                    "document": "ELEVATION",
+                    "byteHash": "d0a5997704e590d995108e551bffe179020617c24ea8d56aa3c3ece07f5bed9d"
+                },
+                {
+                    "id": "asset-elewacja-tylna-99385ddca6",
+                    "document": "ELEVATION",
+                    "byteHash": "796f59619211393a5119776aec37d4ab4d762cb78ab6f513185e7b1122162a08"
+                },
+                {
+                    "id": "asset-przekroj-944b93a5fb",
+                    "document": "SECTION",
+                    "byteHash": "8bfb40281022aa43bae3ed6b8072ba60abe29d64c459fd6dcc11e819ea27f8bb"
+                },
+                {
+                    "id": "asset-rzut-parteru-4353f1c5bb",
+                    "document": "FLOOR_PLAN",
+                    "byteHash": "ca0e9bb7987f6e1ad8c050c6d0f293c4cd356e9565574f1c16aa0569e88c939b"
+                },
+                {
+                    "id": "asset-rzut-pietra-bef2823d80",
+                    "document": "FLOOR_PLAN",
+                    "byteHash": "b7129f5c0a2a9e9f24b6654729fff223dba9d88cf5d97013d2e1c90c5b9f2dd1"
+                }
+            ]
+        }
+    }
+}

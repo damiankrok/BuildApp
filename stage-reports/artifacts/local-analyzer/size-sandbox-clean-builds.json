@@ -1,0 +1,29 @@
+{
+ "what": "APK sizes measured in the build sandbox from CLEAN builds (AGP incremental packaging keeps removed entries, so only clean builds are measured). prestage = the commit before this stage (743bb26, fresh worktree, AGP default packaging: native libraries stored uncompressed). storedLibs = this stage at ec25e4f built with useLegacyPackaging=false (native libraries stored uncompressed and page-aligned), for comparison with the compressed packaging the stage ships. CI clean-build numbers for the final code are in ci-run-36256959222/size-*.json.",
+ "prestage743bb26": {
+  "arm64-v8a": 13609795,
+  "armeabi-v7a": 12834343,
+  "x86_64": 13904005,
+  "universal": 19491285
+ },
+ "storedLibsAtEc25e4f": {
+  "arm64-v8a": 65038423,
+  "armeabi-v7a": 13354227,
+  "x86_64": 69943920,
+  "universal": 126436520
+ },
+ "compressedLibsAtEc25e4f": {
+  "withLocalAnalyzer": {
+   "arm64-v8a": 29890567,
+   "armeabi-v7a": 12179611,
+   "x86_64": 31800740,
+   "universal": 51963388
+  },
+  "without": {
+   "arm64-v8a": 11910242,
+   "armeabi-v7a": 11758174,
+   "x86_64": 12031268,
+   "universal": 14635024
+  }
+ }
+}
