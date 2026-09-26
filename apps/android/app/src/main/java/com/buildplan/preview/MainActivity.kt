@@ -22,10 +22,12 @@ import com.buildplan.preview.ui.PreviewViewModel
  * Two screens: the viewer, and the Analyzer that feeds it.
  *
  * The viewer opens the scene bundles that ship inside the APK — offline, as
- * before — and any analysis downloaded on this phone. The Analyzer sends a
- * project link to the analyzer service, follows the job, and downloads and
- * verifies the scene it produced. The phone never analyses anything itself
- * and holds no key: it has no account, and the service needs none.
+ * before — and any analysis kept on this phone. The Analyzer runs the
+ * production analyzer ON the phone (BUILDAPP-03Y2: its bundle in an embedded
+ * Node runtime, in a process of its own), or sends the link to the analyzer
+ * service and downloads the scene it made; either way the scene is verified
+ * before it is kept, and a local result opens in the viewer by itself. The
+ * app holds no key: it has no account, and neither path needs one.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,15 @@ class MainActivity : ComponentActivity() {
 
                 // A job that finishes (or a download deleted) while the viewer is up joins its Model menu at once.
                 LaunchedEffect(analyzer.downloads) { model.refreshScenes() }
+
+                // An analysis finished on this phone opens in the viewer by itself, once.
+                LaunchedEffect(analyzer.autoOpen) {
+                    val key = analyzer.autoOpen ?: return@LaunchedEffect
+                    analyzer.consumeAutoOpen()
+                    model.refreshScenes()
+                    model.openKey(key)
+                    analyzing = false
+                }
 
                 val backToViewer = {
                     analyzing = false

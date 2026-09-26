@@ -61,24 +61,31 @@ import com.buildplan.preview.analyzer.AnalyzerAddress
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.AnalyzerMessages
 import com.buildplan.preview.analyzer.JobStatus
+import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.StageChecklist
 import com.buildplan.preview.analyzer.StageRow
 import com.buildplan.preview.analyzer.StageState
+import com.buildplan.preview.analyzer.local.LocalAnalysis
+import com.buildplan.preview.analyzer.local.NodeRuntime
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.math.roundToInt
 
 /**
  * The Analyzer: paste a project link, watch the service analyse it, open the
  * model it made.
  *
- * Everything on this screen is what the service reported. The progress bar
- * is the server's `progress` and moves only when a status record arrives; the
- * checklist is the server's stages in the server's words. There is no
- * reference model, benchmark or "expected" value anywhere here — the service
- * has none, and a result says only what the analyzer made of the sources and
- * how sure it is.
+ * Everything on this screen is what the analyzer reported — the analyzer on
+ * this phone (BUILDAPP-03Y2, "Analyzer: Local") or the service. The progress
+ * bar is the analyzer's own `progress` and moves only when it reports; the
+ * checklist is its stages. For a local run the elapsed time and memory are
+ * the analyzer process's own numbers. There is no reference model, benchmark
+ * or "expected" value anywhere here — the analyzer has none, and a result says
+ * only what it made of the sources and how sure it is.
  */
 @Composable
 fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit) {
@@ -104,18 +111,53 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
+                ModeRow(model)
                 if (!model.isConfigured) {
                     NotConfigured(model)
                 } else {
-                    ServiceRow(model)
+                    if (model.mode == AnalyzerMode.SERVICE) ServiceRow(model)
                     LinkForm(model)
                     model.notice?.let { StatusText(it, color = MaterialTheme.colorScheme.onSurface) }
                     JobSection(model, onOpenScene)
                 }
                 HorizontalDivider()
                 Downloads(model, onOpenScene)
+                if (model.localRuns.isNotEmpty()) {
+                    HorizontalDivider()
+                    LocalRuns(model.localRuns)
+                }
             }
         }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Where the analysis runs
+// ---------------------------------------------------------------------------
+
+@Composable
+private fun ModeRow(model: AnalyzerViewModel) {
+    val local = model.mode == AnalyzerMode.LOCAL
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(
+            if (local) "Analyzer: Local" else "Analyzer: Service",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.semantics { heading(); contentDescription = if (local) "Analyzer: Local, on this phone" else "Analyzer: Service" },
+        )
+        if (local) {
+            Body(
+                "The analysis runs on this phone, with the embedded ${NodeRuntime.RUNTIME} ${NodeRuntime.NODE_VERSION} runtime " +
+                    "(${model.localAvailability.abi}). No service, no account; the phone fetches the project page itself.",
+            )
+        } else if (!model.localAvailability.available) {
+            Body("The local analyzer is not available: ${model.localAvailability.reason ?: "unknown reason"}.")
+        }
+        TextButton(
+            onClick = { model.selectMode(if (local) AnalyzerMode.SERVICE else AnalyzerMode.LOCAL) },
+            enabled = !model.isRunning && (local || model.localAvailability.available),
+            modifier = Modifier.defaultMinSize(minHeight = 48.dp),
+        ) { Text(if (local) "Use the analyzer service instead" else "Analyze on this phone instead") }
     }
 }
 
@@ -229,7 +271,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         is AnalysisState.Submitting -> Row(verticalAlignment = Alignment.CenterVertically) {
             CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
             Box(Modifier.width(10.dp))
-            Body("Sending the link to the analyzer…")
+            Body(if (model.mode == AnalyzerMode.LOCAL) "Preparing the analyzer on this phone…" else "Sending the link to the analyzer…")
         }
         is AnalysisState.Polling -> JobProgress(
             status = state.status,
@@ -238,22 +280,26 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
             lastFailure = state.lastFailure,
             cancelling = model.cancelling,
             onCancel = { model.cancel() },
+            local = state.local,
         )
         is AnalysisState.Finishing -> JobProgress(
             status = state.status,
-            headline = "Analysis finished. Downloading and checking the model…",
+            headline = if (state.local != null) "Analysis finished. Checking and storing the model…" else "Analysis finished. Downloading and checking the model…",
             connectionLost = state.connectionLost,
             lastFailure = state.lastFailure,
             cancelling = false,
             onCancel = null,
+            local = state.local,
         )
-        is AnalysisState.Completed -> ResultCard(state.summary, state.entry, onOpen = { onOpenScene(state.entry.key) })
+        is AnalysisState.Completed -> ResultCard(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) })
         is AnalysisState.Failed -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             FailureCard(state.failure, state.retry, onRetry = { model.retry() }, onDismiss = { model.dismiss() })
+            state.local?.let { LocalCost(it) }
             state.status?.let { Checklist(StageChecklist.rows(it)) }
         }
         is AnalysisState.Cancelled -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("The analysis was cancelled.", style = MaterialTheme.typography.titleSmall)
+            state.local?.let { LocalCost(it) }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = { model.analyze() }, enabled = model.link.isNotBlank()) { Text("Analyze again") }
                 TextButton(onClick = { model.dismiss() }) { Text("Dismiss") }
@@ -270,14 +316,16 @@ private fun JobProgress(
     lastFailure: AnalyzerFailure?,
     cancelling: Boolean,
     onCancel: (() -> Unit)?,
+    local: LocalRunReport? = null,
 ) {
-    // Exactly the server's value. It is never animated or advanced here.
+    // Exactly the analyzer's value. It is never animated or advanced here.
     val progress = (status?.progress ?: 0.0).coerceIn(0.0, 1.0).toFloat()
     val stage = status?.stage
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
             headline ?: when {
                 status == null -> "Asking the analyzer how the job is going…"
+                status.status == LocalAnalysis.STARTING -> "Starting the analyzer on this phone…"
                 status.status == AnalysisStages.QUEUED -> "Waiting in the analyzer's queue"
                 stage != null -> stage.label.ifBlank { AnalysisStages.DEFAULT_LABELS[stage.id] ?: stage.id }
                 else -> status.status
@@ -293,6 +341,10 @@ private fun JobProgress(
         val position = if (stage != null && stage.count > 0) " · stage ${stage.index + 1} of ${stage.count}" else ""
         StatusText("${(progress * 100).roundToInt()} %$position")
         stage?.detail?.takeIf { it.isNotBlank() }?.let { Body(it) }
+        local?.let { report ->
+            val runtime = report.runtime?.let { "${it.node} · ${it.arch}" } ?: "${NodeRuntime.RUNTIME} ${NodeRuntime.NODE_VERSION}"
+            StatusText("On this phone ($runtime) · elapsed ${duration(report.elapsedMs)} · memory ${megabytes(report.rssBytes)}")
+        }
         if (connectionLost) {
             Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
                 Column(Modifier.padding(10.dp)) {
@@ -378,12 +430,13 @@ private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: (
 // ---------------------------------------------------------------------------
 
 @Composable
-private fun ResultCard(summary: AnalysisSummary, entry: DownloadedSceneEntry, onOpen: () -> Unit) {
+private fun ResultCard(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
     var diagnostics by rememberSaveable { mutableStateOf(false) }
     Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 2.dp) {
         Column(Modifier.padding(14.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(summary.title.ifBlank { entry.title }, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Mono("candidate ${summary.candidateHash.take(12)}")
+            local?.let { LocalCost(it) }
             Text("Solved features by level", style = MaterialTheme.typography.labelLarge)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
                 LevelCell("L0", "topology only", summary.quality.levels.l0, Modifier.weight(1f))
@@ -404,7 +457,10 @@ private fun ResultCard(summary: AnalysisSummary, entry: DownloadedSceneEntry, on
                 Text("Diagnostics")
                 Icon(if (diagnostics) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown, contentDescription = null)
             }
-            if (diagnostics) Diagnostics(summary)
+            if (diagnostics) {
+                local?.let { LocalDiagnostics(it) }
+                Diagnostics(summary)
+            }
         }
     }
 }
@@ -497,6 +553,95 @@ private fun Diagnostics(summary: AnalysisSummary) {
 }
 
 // ---------------------------------------------------------------------------
+// What a local run cost
+// ---------------------------------------------------------------------------
+
+/** The numbers the owner reads off the phone: status, total time, peak memory, scene size. */
+@Composable
+private fun LocalCost(report: LocalRunReport) {
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
+        Column(Modifier.padding(10.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text("Analysed on this phone", style = MaterialTheme.typography.labelLarge)
+            DataRow("Status", outcomeText(report))
+            DataRow("Total time", duration(report.timings?.totalMs ?: report.elapsedMs))
+            DataRow("Peak memory (analyzer process)", report.peakRssBytes?.let { megabytes(it) } ?: "not reported")
+            report.sceneBytes?.let { DataRow("Scene size", megabytes(it, decimals = 2)) }
+            DataRow("Runtime", runtimeText(report))
+        }
+    }
+}
+
+@Composable
+private fun LocalDiagnostics(report: LocalRunReport) {
+    Section("Local run") {
+        DataRow("Job", report.jobId.take(12))
+        DataRow("Runtime", runtimeText(report))
+        report.runtime?.let {
+            DataRow("V8 / ICU", "${it.v8} / ${it.icu ?: "none"}")
+            DataRow("Processor cores", "${it.cpus}")
+            DataRow("Phone memory", megabytes(it.totalMemoryBytes))
+        }
+        DataRow("Analyzer", "service ${report.analyzerService} · solver ${report.analyzerSolver}")
+        report.timings?.let { t ->
+            DataRow("Fetching sources", duration(t.acquisitionMs))
+            DataRow("Reading the drawings", duration(t.observationMs))
+            DataRow("Reading printed dimensions", duration(t.metricExtractionMs))
+            DataRow("Solving the building", duration(t.reconstructionMs))
+            DataRow("Compiling the scene", duration(t.compileMs))
+            DataRow("Verifying", duration(t.verificationMs))
+            DataRow("Total", duration(t.totalMs))
+        }
+        DataRow("Peak memory", report.peakRssBytes?.let { "${megabytes(it)} (${report.peakSource ?: "?"})" } ?: "not reported")
+        report.sceneBytes?.let { DataRow("Scene size", "$it bytes") }
+    }
+}
+
+@Composable
+private fun LocalRuns(runs: List<LocalRunReport>) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Local runs on this phone", style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
+        for (run in runs) {
+            Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 1.dp) {
+                Column(Modifier.padding(12.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Text("${outcomeText(run)} · ${hostOf(run.sourceUrl)}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                    StatusText(
+                        listOfNotNull(
+                            RUN_DATE.format(Date(run.startedAtMs)),
+                            "total ${duration(run.timings?.totalMs ?: run.elapsedMs)}",
+                            run.peakRssBytes?.let { "peak ${megabytes(it)}" },
+                            run.sceneBytes?.let { "scene ${megabytes(it, decimals = 2)}" },
+                            run.abi.ifBlank { null },
+                        ).joinToString(" · "),
+                    )
+                }
+            }
+        }
+    }
+}
+
+private val RUN_DATE = SimpleDateFormat("d MMM yyyy HH:mm", Locale.ENGLISH)
+
+private fun outcomeText(report: LocalRunReport): String = when (report.outcome) {
+    LocalRunReport.OUTCOME_COMPLETED -> "Completed"
+    LocalRunReport.OUTCOME_CANCELLED -> if (report.forcedStop) "Cancelled (process ended)" else "Cancelled"
+    LocalRunReport.OUTCOME_FAILED -> "Failed (${report.code ?: "?"})"
+    LocalRunReport.OUTCOME_INTERRUPTED -> "Interrupted (app closed)"
+    else -> "Running"
+}
+
+private fun runtimeText(report: LocalRunReport): String {
+    val node = report.runtime?.node ?: "v${NodeRuntime.NODE_VERSION}"
+    return "${NodeRuntime.RUNTIME} $node · ${report.abi.ifBlank { report.runtime?.arch ?: "?" }}"
+}
+
+private fun duration(ms: Long): String {
+    val seconds = ms / 1000.0
+    return if (seconds < 60) "%.1f s".format(Locale.ENGLISH, seconds) else "%d min %02d s".format(Locale.ENGLISH, (ms / 60_000), (ms / 1000) % 60)
+}
+
+private fun megabytes(bytes: Long, decimals: Int = 0): String = "%.${decimals}f MB".format(Locale.ENGLISH, bytes / (1024.0 * 1024.0))
+
+// ---------------------------------------------------------------------------
 // Downloaded analyses
 // ---------------------------------------------------------------------------
 
@@ -504,10 +649,10 @@ private fun Diagnostics(summary: AnalysisSummary) {
 private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     var confirmDelete by remember { mutableStateOf<DownloadedSceneEntry?>(null) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text("Downloaded analyses", style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
+        Text("Analyses on this phone", style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
         val entries = model.downloads
         if (entries.isEmpty()) {
-            Body("None yet. A finished analysis is kept on this phone and listed here and in the Model menu.")
+            Body("None yet. A finished analysis — made on this phone or downloaded — is kept here and in the Model menu.")
         }
         for (entry in entries) {
             Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 1.dp) {

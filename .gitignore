@@ -14,6 +14,7 @@ stage-reports/artifacts/*.bad.json
 apps/android/.gradle/
 apps/android/build/
 apps/android/app/build/
+apps/android/app/.cxx/
 apps/android/local.properties
 
 # Fetched source bytes and scratch output from the reconstruction scripts.
@@ -21,3 +22,7 @@ apps/android/local.properties
 
 # Agent worktrees created by Claude Code sessions
 .claude/worktrees/
+
+# The embedded Node runtime (nodejs-mobile libnode.so, 60+ MB per ABI), fetched and
+# verified by apps/android/tools/fetch-nodejs-mobile.mjs; never committed.
+apps/android/third_party/

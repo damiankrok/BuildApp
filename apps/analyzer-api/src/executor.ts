@@ -12,10 +12,8 @@
  */
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
-import { AnalysisError, runAnalysis, summaryOf, toAnalysisError } from '@buildapp/analysis-service'
+import { AnalysisError, analysisFilesOf, runAnalysis, toAnalysisError } from '@buildapp/analysis-service'
 import type { AnalysisProgress, LinkAnalysisSummary } from '@buildapp/analysis-service'
-import { stableJson } from '@buildapp/source-common'
-import { serializeModel } from '@buildapp/model'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import type { VisionReasoner } from '@buildapp/source-vision'
@@ -48,14 +46,7 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
       progress: control.onProgress,
     },
   )
-  const summary = summaryOf(run.result)
-  return {
-    parsed: summary,
-    summary: `${JSON.stringify(summary)}\n`,
-    scene: run.sceneText,
-    model: serializeModel(run.result.model),
-    candidate: `${stableJson(run.result.candidate)}\n`,
-  }
+  return analysisFilesOf(run)
 }
 
 export class InProcessExecutor implements JobExecutor {

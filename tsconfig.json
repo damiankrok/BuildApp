@@ -12,6 +12,10 @@
     "apps/analyzer-api/scripts/**/*.ts",
     "apps/analyzer-api/test/**/*.ts",
     "apps/analyzer-api/src/**/*.ts",
+    "apps/local-analyzer/src/**/*.ts",
+    "apps/local-analyzer/fixture/**/*.ts",
+    "apps/local-analyzer/test/**/*.ts",
+    "apps/local-analyzer/scripts/**/*.ts",
     "tests/architecture/**/*.ts",
     "tests/setup/**/*.ts",
     "vitest.config.ts"

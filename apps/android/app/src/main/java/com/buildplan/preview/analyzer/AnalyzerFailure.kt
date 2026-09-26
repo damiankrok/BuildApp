@@ -48,6 +48,14 @@ sealed interface AnalyzerFailure {
     data object NotConfigured : AnalyzerFailure
 
     /**
+     * The analyzer on this phone could not run or did not finish, for a
+     * reason outside the pipeline: the runtime is missing for this device,
+     * its process stopped (e.g. ended by Android for memory), the app was
+     * closed while it ran, or it spoke a protocol this build does not.
+     */
+    data class LocalRuntime(val code: String, val message: String) : AnalyzerFailure
+
+    /**
      * Whether trying the same request again later can succeed without anyone
      * changing anything: a lost connection, a busy or restarting service.
      */
@@ -96,6 +104,8 @@ object AnalyzerMessages {
             "The model was verified but could not be saved on this phone: ${failure.message}"
         is AnalyzerFailure.NotConfigured ->
             "No analyzer service is configured in this build."
+        is AnalyzerFailure.LocalRuntime ->
+            "The analysis on this phone stopped (${failure.code}): ${failure.message}"
         is AnalyzerFailure.Http -> when {
             failure.status == 404 -> "The analyzer no longer has this analysis (it may have expired). Analyze the link again."
             failure.message != null -> "The analyzer refused the request (${failure.code ?: failure.status}): ${failure.message}"

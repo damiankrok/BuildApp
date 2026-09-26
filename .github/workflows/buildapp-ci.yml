@@ -235,8 +235,9 @@ jobs:
         uses: android-actions/setup-android@v3
         with:
           packages: ""
-      - name: Ensure Android 35 SDK
-        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - name: Ensure Android 35 SDK, the NDK and CMake
+        # NDK + CMake build the JNI bridge to the embedded Node runtime (BUILDAPP-03Y2)
+        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
       - name: Install JS dependencies
         run: npm ci
       - name: Regenerate mobile scene bundles
@@ -289,6 +290,179 @@ jobs:
           path: |
             apps/android/app/build/preview-apks/*.apk
             apps/android/app/build/preview-apks/VERSION.txt
+
+  local-analyzer-host:
+    # BUILDAPP-03Y2. The analyzer bundle the APK embeds, run on this machine
+    # exactly as the phone runs it, under Node 18.20.4 — the version of the
+    # runtime inside the APK (nodejs-mobile) — and under Node 22, against the
+    # desktop pipeline (runAnalysis from the TypeScript sources).
+    name: Local analyzer / Node 18 parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MARCOWKI_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Node 18.20.4 (the runtime version inside the APK)
+        run: |
+          curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
+          echo "LOCAL_ANALYZER_NODE18=$RUNNER_TEMP/node-v18.20.4-linux-x64/bin/node" >> "$GITHUB_ENV"
+          "$RUNNER_TEMP/node-v18.20.4-linux-x64/bin/node" --version
+      - name: Parity, cancel and cleanup under Node 22 and Node 18; architecture gates
+        run: npx vitest run apps/local-analyzer tests/architecture/local-analyzer.test.ts
+      - name: Fixture parity record (desktop pipeline vs the bundle on Node 18 and 22)
+        run: |
+          mkdir -p local-analyzer-host
+          node apps/local-analyzer/build.mjs --fixture
+          npx vite-node apps/local-analyzer/scripts/desktop-hashes.ts -- --out local-analyzer-host/desktop-fixture.json
+          node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --fixture --node "$LOCAL_ANALYZER_NODE18" --url https://drawings.synthetic-publisher.test/projects/larchfield-lf01 > local-analyzer-host/bundle-node18-fixture.json
+          node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --fixture --url https://drawings.synthetic-publisher.test/projects/larchfield-lf01 > local-analyzer-host/bundle-node22-fixture.json
+          node -e "
+            const d = require('./local-analyzer-host/desktop-fixture.json')
+            const keys = ['candidateHash','modelHash','sceneContentHash','sceneSha256']
+            for (const f of ['bundle-node18-fixture.json','bundle-node22-fixture.json']) {
+              const s = JSON.parse(require('fs').readFileSync('local-analyzer-host/' + f, 'utf8')).terminal.summary
+              for (const k of keys) if (s[k] !== d[k]) { console.error(f, k, s[k], '!=', d[k]); process.exit(1) }
+            }
+            console.log('fixture parity: desktop = bundle on Node 18 = bundle on Node 22', keys.map(k => k + ' ' + d[k].slice(0, 12)).join(', '))
+          "
+      - name: The real Marcówki URL through the bundle on Node 18 (advisory — depends on a third-party site)
+        continue-on-error: true
+        run: node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --node "$LOCAL_ANALYZER_NODE18" --url "$MARCOWKI_URL" --events local-analyzer-host/marcowki-node18-events.ndjson > local-analyzer-host/marcowki-node18.json
+      - name: Upload the host parity record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-analyzer-host
+          if-no-files-found: ignore
+          retention-days: 30
+          path: local-analyzer-host/**
+
+  local-analyzer-device:
+    # BUILDAPP-03Y2. The APK with the embedded analyzer: its exact size against
+    # the same commit built without it, and the analyzer running ON Android —
+    # an x86_64 emulator with KVM, the real nodejs-mobile runtime, the
+    # production analyzer.mjs from the app's assets — held to the desktop
+    # pipeline's hashes, cancelled while downloading and while computing, and
+    # (advisory) run on the real Marcówki URL and compared with the desktop.
+    name: Local analyzer / APK size + emulator
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      MARCOWKI_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: ""
+      - name: Android 35 SDK, the NDK and CMake
+        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
+      - name: Install JS dependencies
+        run: npm ci
+      - name: APKs WITHOUT the local analyzer (the size baseline; clean build)
+        working-directory: apps/android
+        run: |
+          ./gradlew --no-daemon assembleDebug -PlocalAnalyzer=false
+          mkdir -p "$RUNNER_TEMP/apk-without"
+          cp app/build/outputs/apk/debug/*.apk "$RUNNER_TEMP/apk-without/"
+      - name: APKs WITH the local analyzer, and the instrumentation test APK (clean build)
+        working-directory: apps/android
+        run: ./gradlew --no-daemon clean assembleDebug assembleDebugAndroidTest
+      - name: APK size report (measured from the files)
+        run: |
+          mkdir -p local-analyzer-device
+          for abi in arm64-v8a x86_64; do
+            node apps/android/tools/apk-size-report.mjs \
+              --local "apps/android/app/build/outputs/apk/debug/app-$abi-debug.apk" \
+              --without "$RUNNER_TEMP/apk-without/app-$abi-debug.apk" \
+              --runtime-json apps/android/third_party/nodejs-mobile/runtime.json \
+              --meta apps/android/app/build/local-analyzer/meta.json \
+              --out "local-analyzer-device/size-$abi.json" --md "local-analyzer-device/size-$abi.md"
+          done
+          {
+            echo "### Local analyzer — APK size, arm64-v8a"; echo; cat local-analyzer-device/size-arm64-v8a.md; echo
+            echo "### Local analyzer — APK size, x86_64 (the emulator's)"; echo; cat local-analyzer-device/size-x86_64.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: The desktop pipeline's hashes for the device fixture
+        run: npx vite-node apps/local-analyzer/scripts/desktop-hashes.ts -- --out local-analyzer-device/desktop-fixture.json
+      - name: The real Marcówki URL on the desktop, through the exact bundle the APK ships (advisory)
+        continue-on-error: true
+        run: >-
+          node apps/local-analyzer/scripts/run-host.mjs
+          --dir apps/android/app/build/generated/local-analyzer/assets/local-analyzer
+          --url "$MARCOWKI_URL" --events local-analyzer-device/desktop-live-events.ndjson
+          > local-analyzer-device/desktop-live.json
+      - name: Enable KVM for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: The local analyzer on Android (emulator x86_64, API 34)
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          DESKTOP_FIXTURE: local-analyzer-device/desktop-fixture.json
+          LIVE_URL: ${{ env.MARCOWKI_URL }}
+          LIVE_TIMEOUT_MINUTES: "40"
+          OUT: local-analyzer-device/device
+        with:
+          api-level: 34
+          target: default
+          arch: x86_64
+          cores: 4
+          ram-size: 6144M
+          disk-size: 6G
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot
+          disable-animations: true
+          script: bash apps/android/tools/run-device-tests.sh
+      - name: What the runs on the emulator cost
+        if: always()
+        run: |
+          node apps/local-analyzer/scripts/device-summary.mjs local-analyzer-device/device/local-analyzer-reports --md local-analyzer-device/device-summary.md || true
+          {
+            echo "### Local analyzer on the emulator (CI/emulator measured — not a phone)"; echo
+            cat local-analyzer-device/device/device.txt 2>/dev/null | sed 's/^/    /'; echo
+            cat local-analyzer-device/device-summary.md 2>/dev/null
+            echo; echo "Live URL on the device: $(cat local-analyzer-device/device/live-status.txt 2>/dev/null || echo LIVE_ANDROID_ANALYSIS_NOT_RUN)"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Device vs desktop on the real URL (advisory)
+        if: always()
+        continue-on-error: true
+        run: |
+          node apps/local-analyzer/scripts/compare-runs.mjs \
+            --device local-analyzer-device/device/local-analyzer-reports/live.json \
+            --desktop local-analyzer-device/desktop-live.json \
+            --md local-analyzer-device/live-comparison.md
+          { echo "### Marcówki: device vs desktop"; echo; cat local-analyzer-device/live-comparison.md; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the device and size record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-analyzer-device
+          if-no-files-found: ignore
+          retention-days: 30
+          path: local-analyzer-device/**
 
   dependency-security:
     name: Dependency security (advisory)

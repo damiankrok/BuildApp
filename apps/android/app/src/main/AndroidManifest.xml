@@ -4,9 +4,11 @@
 
   One permission, INTERNET, and nothing else. The bundled scenes ship inside
   the APK and still open with no network, in flight mode. The Analyzer screen
-  needs the network: it sends a project link to the analyzer service over
-  https and downloads the scene the service made, which is verified and kept
-  in the app's private storage (no storage permission is involved). No
+  needs the network: the analyzer on this phone fetches the project page and
+  its drawings itself (BUILDAPP-03Y2), or the app sends the link to the
+  analyzer service over https and downloads the scene it made. Either way the
+  scene is verified and kept in the app's private storage (no storage
+  permission is involved). No
   location, camera, microphone, storage or network-state permission, no
   network security config, and cleartext traffic stays disabled (the
   targetSdk default).
@@ -38,5 +40,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+          The analyzer on this phone (BUILDAPP-03Y2): the production analyzer
+          bundle in the embedded Node runtime, in a process of its own so it
+          can never stall the viewer and can always be stopped by ending that
+          process. Not exported: only this app can bind it. It needs no
+          permission beyond INTERNET, which the app already has.
+        -->
+        <service
+            android:name=".analyzer.local.LocalAnalyzerService"
+            android:exported="false"
+            android:process=":analyzer" />
     </application>
 </manifest>

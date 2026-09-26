@@ -1,5 +1,6 @@
 package com.buildplan.preview.analyzer
 
+import com.buildplan.preview.scene.AnalysisOrigin
 import com.buildplan.preview.scene.AnalysisRecord
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import com.buildplan.preview.scene.DownloadedScenes
@@ -37,6 +38,8 @@ sealed interface AnalysisState {
         val status: JobStatus? = null,
         val consecutiveFailures: Int = 0,
         val lastFailure: AnalyzerFailure? = null,
+        /** Set when the job runs on this phone: the runtime and what the run has cost so far. */
+        val local: LocalRunReport? = null,
     ) : AnalysisState {
         val connectionLost: Boolean get() = consecutiveFailures > 0
     }
@@ -48,6 +51,7 @@ sealed interface AnalysisState {
         val status: JobStatus,
         val consecutiveFailures: Int = 0,
         val lastFailure: AnalyzerFailure? = null,
+        val local: LocalRunReport? = null,
     ) : AnalysisState {
         val connectionLost: Boolean get() = consecutiveFailures > 0
     }
@@ -59,6 +63,7 @@ sealed interface AnalysisState {
         val summary: AnalysisSummary,
         val entry: DownloadedSceneEntry,
         val status: JobStatus?,
+        val local: LocalRunReport? = null,
     ) : AnalysisState
 
     data class Failed(
@@ -67,10 +72,34 @@ sealed interface AnalysisState {
         val sourceUrl: String?,
         val jobId: String? = null,
         val status: JobStatus? = null,
+        val local: LocalRunReport? = null,
     ) : AnalysisState
 
-    data class Cancelled(val jobId: String, val sourceUrl: String, val status: JobStatus?) : AnalysisState
+    data class Cancelled(val jobId: String, val sourceUrl: String, val status: JobStatus?, val local: LocalRunReport? = null) : AnalysisState
 }
+
+/**
+ * What the store records for a finished analysis, from its summary: the same
+ * for a scene downloaded from the service and one made on this phone.
+ */
+fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallbackCompletedAt: String, origin: String): AnalysisRecord = AnalysisRecord(
+    title = summary.title,
+    label = summary.label,
+    sceneSha256 = summary.sceneSha256,
+    sceneContentHash = summary.sceneContentHash,
+    candidateHash = summary.candidateHash,
+    modelHash = summary.modelHash,
+    sourceUrl = summary.sourceUrl.ifBlank { fallbackUrl },
+    jobId = jobId,
+    analyzedAt = summary.completedAt.ifBlank { fallbackCompletedAt },
+    qualityL0 = summary.quality.levels.l0,
+    qualityL1 = summary.quality.levels.l1,
+    qualityL2 = summary.quality.levels.l2,
+    unresolvedCount = summary.unresolved.size,
+    warningsCount = summary.warnings.size,
+    visionMode = summary.vision.mode,
+    origin = origin,
+)
 
 /** The next state, and how long to wait before the next [AnalysisTracker.step]; null once nothing is left to do. */
 data class Step(val state: AnalysisState, val delayMs: Long?)
@@ -160,23 +189,7 @@ class AnalysisTracker(
             is Outcome.Ok -> r.value
             is Outcome.Err -> return finishFailure(state, r.failure)
         }
-        val record = AnalysisRecord(
-            title = summary.title,
-            label = summary.label,
-            sceneSha256 = summary.sceneSha256,
-            sceneContentHash = summary.sceneContentHash,
-            candidateHash = summary.candidateHash,
-            modelHash = summary.modelHash,
-            sourceUrl = summary.sourceUrl.ifBlank { state.sourceUrl },
-            jobId = state.jobId,
-            analyzedAt = summary.completedAt.ifBlank { state.status.completedAt.orEmpty() },
-            qualityL0 = summary.quality.levels.l0,
-            qualityL1 = summary.quality.levels.l1,
-            qualityL2 = summary.quality.levels.l2,
-            unresolvedCount = summary.unresolved.size,
-            warningsCount = summary.warnings.size,
-            visionMode = summary.vision.mode,
-        )
+        val record = recordOf(summary, state.jobId, state.sourceUrl, state.status.completedAt.orEmpty(), AnalysisOrigin.SERVICE)
         return when (val saved = store.save(download.bytes, download.headerSha256, record)) {
             is SaveResult.Saved -> Step(AnalysisState.Completed(state.jobId, state.sourceUrl, summary, saved.entry, state.status), null)
             is SaveResult.Rejected -> {

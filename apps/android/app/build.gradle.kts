@@ -1,6 +1,7 @@
 import java.io.File
 import java.security.KeyStore
 import java.security.MessageDigest
+import javax.inject.Inject
 
 plugins {
     alias(libs.plugins.android.application)
@@ -154,15 +155,131 @@ fun javaStringLiteral(value: String): String = buildString {
     append('"')
 }
 
+// ---------------------------------------------------------------------------
+// The analyzer on this phone (BUILDAPP-03Y2)
+// ---------------------------------------------------------------------------
+
+/**
+ * The APK embeds the PRODUCTION analyzer and a Node runtime to run it:
+ *
+ *   assets/local-analyzer/   analyzer.mjs (the pipeline, bundled from the same
+ *                            TypeScript the analyzer API runs), main.mjs,
+ *                            manifest.json — written at build time by
+ *                            apps/local-analyzer/build.mjs, never committed
+ *   lib/<abi>/libnode.so     nodejs-mobile 18.20.4, fetched and verified by
+ *                            tools/fetch-nodejs-mobile.mjs (arm64-v8a for
+ *                            phones, x86_64 for the emulator test)
+ *   lib/<abi>/libbuildapp_node_bridge.so   src/main/cpp: node::Start over JNI
+ *   lib/<abi>/libc++_shared.so             libnode's C++ runtime, from the NDK
+ *
+ * `-PlocalAnalyzer=false` builds the same app without any of it — the size
+ * baseline the stage report measures against; the app then offers only the
+ * analyzer service. Building the bundle needs Node and `npm ci` at the
+ * repository root, as the scene export already does.
+ */
+val localAnalyzerEmbedded: Boolean = providers.gradleProperty("localAnalyzer").orNull?.trim()?.lowercase() != "false"
+val repositoryRoot: File = rootProject.projectDir.parentFile.parentFile
+val nodeExecutable: String = previewEnv("NODE") ?: "node"
+val nodejsMobileDir: File = rootProject.file("third_party/nodejs-mobile")
+
+/** Runs apps/local-analyzer/build.mjs into a generated source folder AGP adds to the variant's assets. */
+abstract class BundleLocalAnalyzerTask : DefaultTask() {
+    @get:Inject abstract val exec: ExecOperations
+
+    @get:Input abstract val node: Property<String>
+
+    @get:Input abstract val script: Property<String>
+
+    /** false: the production bundle (app assets); true: the TEST-ONLY fixture launcher (androidTest assets). */
+    @get:Input abstract val fixture: Property<Boolean>
+
+    @get:OutputDirectory abstract val outputDir: DirectoryProperty
+
+    @get:OutputFile abstract val metaFile: RegularFileProperty
+
+    init {
+        // The bundle is made from the whole TypeScript workspace; esbuild takes a second, so it is simply rebuilt.
+        outputs.upToDateWhen { false }
+    }
+
+    @TaskAction
+    fun bundle() {
+        val out = outputDir.get().asFile
+        out.deleteRecursively()
+        val args = mutableListOf(script.get())
+        if (fixture.get()) {
+            // the fixture files alone, into the test APK's assets; the production bundle goes to a throwaway folder
+            args += listOf("--out", File(temporaryDir, "unused").path, "--fixture-out", File(out, "local-analyzer-fixture").path)
+        } else {
+            args += listOf("--out", File(out, "local-analyzer").path)
+        }
+        args += listOf("--meta-out", metaFile.get().asFile.path)
+        exec.exec { commandLine(listOf(node.get()) + args) }
+    }
+}
+
+/** Fetches nodejs-mobile's libnode.so (integrity-checked) into third_party/, once. */
+abstract class FetchNodeRuntimeTask : DefaultTask() {
+    @get:Inject abstract val exec: ExecOperations
+
+    @get:Input abstract val node: Property<String>
+
+    @get:Input abstract val script: Property<String>
+
+    @get:Internal abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun fetch() {
+        exec.exec { commandLine(node.get(), script.get(), "--out", outputDir.get().asFile.path) }
+    }
+}
+
+val bundleLocalAnalyzer = tasks.register<BundleLocalAnalyzerTask>("bundleLocalAnalyzer") {
+    group = "build"
+    description = "Bundle the production analyzer (apps/local-analyzer) into the app's assets."
+    node.set(nodeExecutable)
+    script.set(File(repositoryRoot, "apps/local-analyzer/build.mjs").path)
+    fixture.set(false)
+    outputDir.set(layout.buildDirectory.dir("generated/local-analyzer/assets"))
+    metaFile.set(layout.buildDirectory.file("local-analyzer/meta.json"))
+}
+
+val bundleLocalAnalyzerFixture = tasks.register<BundleLocalAnalyzerTask>("bundleLocalAnalyzerFixture") {
+    group = "build"
+    description = "Bundle the TEST-ONLY synthetic publisher launcher into the instrumentation test APK's assets."
+    node.set(nodeExecutable)
+    script.set(File(repositoryRoot, "apps/local-analyzer/build.mjs").path)
+    fixture.set(true)
+    outputDir.set(layout.buildDirectory.dir("generated/local-analyzer/test-assets"))
+    metaFile.set(layout.buildDirectory.file("local-analyzer/fixture-meta.json"))
+}
+
+val fetchNodeRuntime = tasks.register<FetchNodeRuntimeTask>("fetchNodeRuntime") {
+    group = "build"
+    description = "Fetch and verify the embedded Node runtime (nodejs-mobile 18.20.4 libnode.so)."
+    node.set(nodeExecutable)
+    script.set(rootProject.file("tools/fetch-nodejs-mobile.mjs").path)
+    outputDir.set(nodejsMobileDir)
+}
+
+if (localAnalyzerEmbedded) {
+    // CMake links the bridge against libnode.so, so the runtime must be there before any native configure step.
+    tasks.matching { it.name.startsWith("configureCMake") || it.name.startsWith("buildCMake") || it.name == "preBuild" }
+        .configureEach { dependsOn(fetchNodeRuntime) }
+}
+
 logger.lifecycle(
     "BuildPlan Model Preview: versionCode ${previewVersion.code}, versionName ${previewVersion.name} " +
         "(from ${previewVersion.source}); signing with ${previewKeystoreFile.path} alias '$previewKeyAlias' " +
-        "(signer SHA-256 $previewSignerSha256); analyzer service: ${analyzerApiBaseUrl.ifEmpty { "not configured" }}",
+        "(signer SHA-256 $previewSignerSha256); analyzer service: ${analyzerApiBaseUrl.ifEmpty { "not configured" }}; " +
+        "local analyzer: ${if (localAnalyzerEmbedded) "embedded (nodejs-mobile 18.20.4)" else "not embedded (-PlocalAnalyzer=false)"}",
 )
 
 android {
     namespace = "com.buildplan.preview"
     compileSdk = 35
+    // The NDK builds the JNI bridge to the embedded Node runtime and strips libnode.so when packaging it.
+    ndkVersion = "27.3.13750724"
 
     defaultConfig {
         // Deliberately NOT com.buildplan.app: the owner keeps the older
@@ -177,6 +294,24 @@ android {
         // One permission, INTERNET, for the Analyzer screen; the bundled scenes need none.
         buildConfigField("String", "ANALYZER_API_BASE_URL", javaStringLiteral(analyzerApiBaseUrl))
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        if (localAnalyzerEmbedded) {
+            externalNativeBuild {
+                cmake {
+                    // libnode.so needs the shared C++ runtime; the bridge links against the fetched libnode.so.
+                    arguments += listOf("-DANDROID_STL=c++_shared", "-DLIBNODE_DIR=${nodejsMobileDir.path}")
+                }
+            }
+        }
+    }
+
+    if (localAnalyzerEmbedded) {
+        externalNativeBuild {
+            cmake {
+                path = file("src/main/cpp/CMakeLists.txt")
+                version = "3.22.1"
+            }
+        }
     }
 
     splits {
@@ -233,6 +368,21 @@ android {
 
     packaging {
         resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" }
+        // Native libraries are stored COMPRESSED in the APK and extracted at
+        // install (the pre-AGP-3.6 default): the embedded runtime is ~50 MB
+        // stripped and ~15 MB compressed, and the owner downloads the APK
+        // itself. Both variants of the build use it, so the size report's
+        // with/without difference is the runtime alone.
+        jniLibs { useLegacyPackaging = true }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        if (localAnalyzerEmbedded) {
+            variant.sources.assets?.addGeneratedSourceDirectory(bundleLocalAnalyzer, BundleLocalAnalyzerTask::outputDir)
+            variant.androidTest?.sources?.assets?.addGeneratedSourceDirectory(bundleLocalAnalyzerFixture, BundleLocalAnalyzerTask::outputDir)
+        }
     }
 }
 
@@ -258,6 +408,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit)
+
+    // The on-device test of the local analyzer (src/androidTest): runs on an emulator in CI.
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.ext.junit)
 }
 
 // ---------------------------------------------------------------------------

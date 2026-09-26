@@ -44,7 +44,18 @@ data class DownloadedSceneEntry(
     val unresolvedCount: Int = 0,
     val warningsCount: Int = 0,
     val visionMode: String = "",
+    /** Where the analysis ran: [AnalysisOrigin.SERVICE] (downloaded) or [AnalysisOrigin.LOCAL] (on this phone). */
+    val origin: String = AnalysisOrigin.SERVICE,
 )
+
+/** Where an analysis was made. Stored as text so an index written by an older build still reads. */
+object AnalysisOrigin {
+    /** Made by the analyzer service and downloaded (BUILDAPP-03Y1). */
+    const val SERVICE = "SERVICE"
+
+    /** Made on this phone by the embedded local analyzer (BUILDAPP-03Y2). */
+    const val LOCAL = "LOCAL"
+}
 
 /**
  * The facts about one finished analysis that the store records next to its
@@ -67,6 +78,7 @@ data class AnalysisRecord(
     val unresolvedCount: Int,
     val warningsCount: Int,
     val visionMode: String,
+    val origin: String = AnalysisOrigin.SERVICE,
 )
 
 /** Why a downloaded scene was not kept. Nothing was written in any of these cases. */
@@ -163,7 +175,7 @@ class DownloadedScenes(
                         key = key,
                         title = displayText(record.title),
                         label = displayText(record.label.ifBlank { "${record.title} (analysis)" }),
-                        subtitle = subtitleFor(record.analyzedAt, record.candidateHash),
+                        subtitle = subtitleFor(record.analyzedAt, record.candidateHash, record.origin),
                         sceneSha256 = actual,
                         sceneContentHash = bundle.contentHash,
                         candidateHash = record.candidateHash,
@@ -179,6 +191,7 @@ class DownloadedScenes(
                         unresolvedCount = record.unresolvedCount,
                         warningsCount = record.warningsCount,
                         visionMode = record.visionMode,
+                        origin = record.origin,
                     )
                     entries.removeAll { it.sceneSha256 == actual }
                     entries.add(entry)
@@ -349,14 +362,18 @@ class DownloadedScenes(
 
         fun isDownloadedKey(key: String): Boolean = key.startsWith(KEY_PREFIX)
 
-        /** "Analysed <date> · candidate <first 12 of the candidate hash>". */
-        fun subtitleFor(analyzedAt: String, candidateHash: String): String {
+        /**
+         * "Analysed <date> · candidate <first 12 of the candidate hash>", or
+         * "Analysed on this phone <date> · …" for a local analysis.
+         */
+        fun subtitleFor(analyzedAt: String, candidateHash: String, origin: String = AnalysisOrigin.SERVICE): String {
             val date = try {
                 DATE.format(Instant.parse(analyzedAt).atZone(ZoneId.systemDefault()))
             } catch (e: Exception) {
                 analyzedAt.take(10).ifBlank { "on an unknown date" }
             }
-            return "Analysed $date · candidate ${candidateHash.take(KEY_HASH_CHARS)}"
+            val where = if (origin == AnalysisOrigin.LOCAL) "Analysed on this phone" else "Analysed"
+            return "$where $date · candidate ${candidateHash.take(KEY_HASH_CHARS)}"
         }
 
         fun sha256Hex(bytes: ByteArray): String = hex(MessageDigest.getInstance("SHA-256").digest(bytes))

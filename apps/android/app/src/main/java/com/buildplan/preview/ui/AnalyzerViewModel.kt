@@ -18,9 +18,21 @@ import com.buildplan.preview.analyzer.CancelOutcome
 import com.buildplan.preview.analyzer.HttpTransport
 import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
 import com.buildplan.preview.analyzer.ProjectLinks
+import com.buildplan.preview.analyzer.AnalyzerFailure
+import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
+import com.buildplan.preview.analyzer.local.LocalAnalysis
+import com.buildplan.preview.analyzer.local.LocalAvailability
+import com.buildplan.preview.analyzer.local.LocalJobs
+import com.buildplan.preview.analyzer.local.LocalRuntimeFiles
+import com.buildplan.preview.analyzer.local.MainScheduler
+import com.buildplan.preview.analyzer.local.ServiceRuntimeHost
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import com.buildplan.preview.scene.DownloadedScenes
+import android.util.Log
+import java.util.concurrent.Executors
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -28,9 +40,21 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/** Where an analysis runs: on this phone (preferred when the build carries the runtime), or on the analyzer service. */
+enum class AnalyzerMode { LOCAL, SERVICE }
+
 /**
  * The Analyzer screen's state: which service, which link, where the job is,
  * and what has been downloaded.
+ *
+ * BUILDAPP-03Y2: in [AnalyzerMode.LOCAL] the job runs on this phone
+ * ([LocalAnalysis]: the production analyzer bundle in the embedded Node
+ * runtime, in a process of its own) and its states are the same
+ * [AnalysisState]s a service job goes through. The job belongs to this
+ * ViewModel: it survives rotation with it, and it is ended — process and
+ * scratch — when the ViewModel is cleared, so no analysis runs without an
+ * owner. A job the app was running when it last stopped is reported as
+ * interrupted at the next start, never as finished.
  *
  * The loop that polls a job lives here and nowhere else. It waits the delay
  * the [AnalysisTracker] asks for between rounds — the progress bar moves only
@@ -73,6 +97,52 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     private var loop: Job? = null
     private var jobBaseUrl: String? = null
 
+    // --- the analyzer on this phone -------------------------------------------
+
+    private val localFiles = LocalRuntimeFiles(java.io.File(application.filesDir, LOCAL_DIR)) { name ->
+        try {
+            application.assets.open(name)
+        } catch (e: java.io.IOException) {
+            null
+        }
+    }
+    private val localJobs = LocalJobs(java.io.File(application.filesDir, LOCAL_DIR))
+    private val localIo = Executors.newSingleThreadExecutor { r -> Thread(r, "local-analyzer-io") }
+
+    /** Whether this phone can analyse locally, and why not when it cannot. */
+    val localAvailability: LocalAvailability = LocalAvailability.of(application, localFiles)
+
+    var mode by mutableStateOf(if (localAvailability.available) AnalyzerMode.LOCAL else AnalyzerMode.SERVICE)
+        private set
+
+    /**
+     * The key of a scene a local analysis just stored, for the viewer to open
+     * once (then [consumeAutoOpen]). Survives rotation with the ViewModel, so a
+     * finished analysis is opened exactly once.
+     */
+    var autoOpen by mutableStateOf<String?>(null)
+        private set
+
+    fun consumeAutoOpen() {
+        autoOpen = null
+    }
+
+    /** The last local runs, newest first, whatever their outcome: time, memory, scene size. */
+    var localRuns by mutableStateOf<List<LocalRunReport>>(emptyList())
+        private set
+
+    private val local = LocalAnalysis(
+        jobs = localJobs,
+        scenes = store,
+        host = ServiceRuntimeHost(application),
+        install = { localFiles.install() },
+        abi = localAvailability.abi,
+        io = { work -> localIo.execute(work) },
+        scheduler = MainScheduler(),
+        publish = { next -> publishLocal(next) },
+        onFinished = { report -> onLocalRunFinished(report) },
+    )
+
     /**
      * The address requests go to: the one typed on the phone when there is a
      * valid one, else the build's own. Null when neither is a valid https URL.
@@ -80,15 +150,69 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     val effectiveBaseUrl: String?
         get() = AnalyzerAddress.normalize(serviceAddress) ?: AnalyzerAddress.normalize(builtInAddress)
 
-    val isConfigured: Boolean get() = effectiveBaseUrl != null
+    /** Local mode needs no service; service mode needs an address. */
+    val isConfigured: Boolean get() = mode == AnalyzerMode.LOCAL || effectiveBaseUrl != null
 
     /** Whether a job is being submitted, polled or finished right now. */
     val isRunning: Boolean
-        get() = state is AnalysisState.Submitting || state is AnalysisState.Polling || state is AnalysisState.Finishing
+        get() = local.isBusy || state is AnalysisState.Submitting || state is AnalysisState.Polling || state is AnalysisState.Finishing
 
     init {
         refreshDownloads()
+        localJobs.recoverInterrupted()?.let { left ->
+            val report = LocalRunReport(
+                jobId = left.jobId,
+                sourceUrl = left.sourceUrl,
+                outcome = LocalRunReport.OUTCOME_INTERRUPTED,
+                code = "INTERRUPTED",
+                abi = localAvailability.abi,
+                startedAtMs = left.startedAtMs,
+            )
+            localJobs.record(report)
+            if (link.isBlank()) link = left.sourceUrl
+            state = AnalysisState.Failed(
+                AnalyzerFailure.LocalRuntime("INTERRUPTED", "the app was closed or stopped while the analysis ran. Nothing of it was kept; analyze the link again."),
+                RetryAction.RESUBMIT,
+                left.sourceUrl,
+                left.jobId,
+                local = report,
+            )
+        }
+        localRuns = localJobs.runs()
         settings.activeJob?.let { resume(it) }
+    }
+
+    /** Switch between the analyzer on this phone and the service. Not while a job runs. */
+    fun selectMode(next: AnalyzerMode) {
+        if (isRunning || next == mode) return
+        if (next == AnalyzerMode.LOCAL && !localAvailability.available) return
+        mode = next
+        state = AnalysisState.Idle
+        notice = null
+    }
+
+    override fun onCleared() {
+        // The owner of a local job is going away: the job goes with it (process and scratch).
+        local.shutdown()
+        localIo.shutdown()
+        super.onCleared()
+    }
+
+    private fun publishLocal(next: AnalysisState) {
+        state = next
+        cancelling = local.isCancelling
+        if (next is AnalysisState.Completed) {
+            refreshDownloads()
+            // The analysis was made on this phone for this person: show it.
+            autoOpen = next.entry.key
+        }
+    }
+
+    private fun onLocalRunFinished(report: LocalRunReport) {
+        localJobs.record(report)
+        localRuns = localJobs.runs()
+        // One line a developer (or CI) can read with `adb logcat -s BuildAppLocalAnalyzer`.
+        Log.i(LOG_TAG, "local run ${REPORT_JSON.encodeToString(report)}")
     }
 
     fun onLinkChange(value: String) {
@@ -117,6 +241,15 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     fun analyze() {
         if (isRunning) return
+        if (mode == AnalyzerMode.LOCAL) {
+            val url = link.trim()
+            ProjectLinks.problem(url)?.let { linkProblem = it; return }
+            linkProblem = null
+            notice = null
+            settings.lastLink = url
+            local.start(url)
+            return
+        }
         val base = effectiveBaseUrl ?: run {
             state = AnalysisState.Idle
             return
@@ -132,6 +265,13 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     fun retry() {
         val failed = state as? AnalysisState.Failed ?: return
         notice = null
+        if (failed.local != null) {
+            if (failed.retry == RetryAction.RESUBMIT && mode == AnalyzerMode.LOCAL) {
+                val url = failed.sourceUrl ?: link.trim()
+                if (ProjectLinks.problem(url) == null) local.start(url)
+            }
+            return
+        }
         when (failed.retry) {
             RetryAction.NONE -> Unit
             RetryAction.RESUBMIT -> {
@@ -160,6 +300,11 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun cancel() {
+        if (local.isBusy) {
+            local.cancel()
+            cancelling = local.isCancelling
+            return
+        }
         val current = state
         val (jobId, sourceUrl, status) = when (current) {
             is AnalysisState.Polling -> Triple(current.jobId, current.sourceUrl, current.status)
@@ -257,5 +402,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     private companion object {
         const val ANALYSES_DIR = "analyses"
+        const val LOCAL_DIR = "local-analyzer"
+        const val LOG_TAG = "BuildAppLocalAnalyzer"
+        val REPORT_JSON = Json { encodeDefaults = true }
     }
 }

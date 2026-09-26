@@ -253,9 +253,12 @@ describe('the Android viewer is a viewer, not a second compiler', () => {
     expect(existsSync(TRANSPORT), 'the analyzer transport exists').toBe(true)
   })
 
-  it('does not analyse anything itself: the Analyzer is a client of the one analyzer service', () => {
-    // No drawing is decoded, no observation read and no building solved on the
-    // phone. The analyzer package handles status records, hashes and bytes.
+  it('its Kotlin analyses nothing: the analysis is the one production analyzer, on the service or in the embedded runtime', () => {
+    // No drawing is decoded, no observation read and no building solved by the
+    // app's own code. The analyzer package handles status records, hashes and
+    // bytes. BUILDAPP-03Y2 runs the production analyzer bundle ON the phone in
+    // an embedded Node runtime; tests/architecture/local-analyzer.test.ts holds
+    // that bundle to the production pipeline.
     for (const file of kotlinMain.filter((f) => f.includes('/analyzer/'))) {
       const code = codeOf(file)
       for (const forbidden of ['BitmapFactory', 'ImageDecoder', 'Bitmap', 'reconstruct', 'Observation', 'SourcePackage', 'MetricEvidence']) {

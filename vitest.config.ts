@@ -13,6 +13,7 @@ export default defineConfig({
       'packages/*/test/**/*.test.ts',
       'apps/web/src/**/*.test.ts',
       'apps/analyzer-api/test/**/*.test.ts',
+      'apps/local-analyzer/test/**/*.test.ts',
       'tests/architecture/**/*.test.ts',
       'tests/benchmark/**/*.test.ts',
     ],

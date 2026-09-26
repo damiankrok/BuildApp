@@ -1,0 +1,24 @@
+{
+  "name": "@buildapp/local-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The production link analyzer (@buildapp/analysis-service), packaged to run ON the phone inside the app's embedded Node runtime (nodejs-mobile 18.20.4): a thin entry over runAnalysis, the process protocol the Android app speaks to it, and the bundle the APK ships. No pipeline of its own, no project knowledge, no vision provider, no secret.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@buildapp/analysis-service": "*",
+    "@buildapp/reconstruction": "*",
+    "@buildapp/source-package": "*"
+  },
+  "devDependencies": {
+    "@buildapp/synthetic-drawings": "*",
+    "esbuild": "^0.28.2"
+  }
+}

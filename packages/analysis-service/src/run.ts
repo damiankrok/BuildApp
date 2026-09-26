@@ -32,6 +32,7 @@ import { buildMobileSceneBundle, loadBundle, serializeBundle, sha256 } from '@bu
 import { AnalysisError, throwIfAborted, toAnalysisError } from './errors.js'
 import { identityOf, validateAnalysisUrl } from './identity.js'
 import type { AnalysisIdentity } from './identity.js'
+import { anySignal } from './signals.js'
 import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, VisionMode } from './result.js'
@@ -61,7 +62,28 @@ export type AnalysisOptions = {
   debug?: (message: string) => void
   /** The clock, for the result's timestamps only; never reaches a hash. */
   now?: () => Date
+  /** A monotonic clock in milliseconds, for `AnalysisRun.timings` only; never reaches a hash. */
+  clock?: () => number
   jobId?: string
+}
+
+/**
+ * Where the time of one run went, in milliseconds of a monotonic clock. The
+ * phases partition the run: acquisition (fetching or reading the package),
+ * observation (classification and reading the drawings, or replaying a
+ * graph), metric extraction (decoding the rasters and reading the printed
+ * numbers), reconstruction (the v2 solver up to the serialized model),
+ * compile (scene compile and bundle export) and verification (replay, round
+ * trip, closure audit). Diagnostics only: never part of a result or a hash.
+ */
+export type AnalysisTimings = {
+  acquisitionMs: number
+  observationMs: number
+  metricExtractionMs: number
+  reconstructionMs: number
+  compileMs: number
+  verificationMs: number
+  totalMs: number
 }
 
 /** Everything one run produced: the result a client sees, and the internals a CLI writes as artifacts. */
@@ -74,6 +96,7 @@ export type AnalysisRun = {
   /** The exact bytes of the scene bundle a client downloads. */
   sceneText: string
   closure: ClosureReport
+  timings: AnalysisTimings
 }
 
 const PHASE_STAGE: Record<ReconstructionV2Phase, AnalysisStage> = {
@@ -91,14 +114,23 @@ function cancellableDeps(deps: FetchDeps | undefined, signal: AbortSignal | unde
   const fetchImpl = ((input: Parameters<typeof fetch>[0], init?: RequestInit) => {
     onFetch()
     const signals = [init?.signal, signal].filter((s): s is AbortSignal => !!s)
-    return inner(input, { ...init, signal: signals.length > 1 ? AbortSignal.any(signals) : signals[0] })
+    return inner(input, { ...init, signal: signals.length > 0 ? anySignal(signals) : undefined })
   }) as typeof fetch
   return { ...deps, fetchImpl }
 }
 
 export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions): Promise<AnalysisRun> {
   const now = options.now ?? (() => new Date())
+  const clock = options.clock ?? (() => performance.now())
   const startedAt = now().toISOString()
+  const t0 = clock()
+  let mark = t0
+  const lap = (): number => {
+    const t = clock()
+    const ms = t - mark
+    mark = t
+    return Math.round(ms)
+  }
   const { signal } = options
   let last = -1
   const report = (stage: AnalysisStage, fraction = 0, detail?: string): void => {
@@ -134,6 +166,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       sourceUrl = pkg.canonicalUrl
     }
     throwIfAborted(signal)
+    const acquisitionMs = lap()
 
     // --- CLASSIFYING_SOURCES ------------------------------------------------
     // The roles were claimed during acquisition; this is where they are counted,
@@ -180,6 +213,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       visionProvider = live ? `${vision.provider.id}/${vision.provider.model}` : null
     }
     throwIfAborted(signal)
+    const observationMs = lap()
     report('EXTRACTING_OBSERVATIONS', 0.65, 'reading printed dimensions and callouts')
 
     const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
@@ -197,6 +231,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const raster = (frame: { variantByteHash: string }): ReturnType<typeof decodeImage> | undefined => rasterCache.get(frame.variantByteHash)
     const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, pageHash: pkg.pageHash })
     throwIfAborted(signal)
+    const metricExtractionMs = lap()
 
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
     const reconstruction = reconstructV2({
@@ -216,6 +251,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     throwIfAborted(signal)
     const model = reconstruction.model
     const modelText = serializeModel(model)
+    const reconstructionMs = lap()
     report('BUILDING_MODEL', 1)
 
     // --- COMPILING_SCENE ----------------------------------------------------
@@ -225,6 +261,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const bundle = buildMobileSceneBundle(model, { scene })
     const sceneText = serializeBundle(bundle)
     throwIfAborted(signal)
+    const compileMs = lap()
 
     // --- VERIFYING ----------------------------------------------------------
     report('VERIFYING', 0)
@@ -234,6 +271,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     if (!reloaded.ok || reloaded.bundle.contentHash !== bundle.contentHash) throw new AnalysisError('ANALYSIS_FAILED', 'the scene bundle does not survive its own round trip')
     report('VERIFYING', 0.3, 'replay byte-identical; checking joints')
     const closure = geometryClosureAudit(model, scene)
+    const verificationMs = lap()
     report('VERIFYING', 1)
 
     const b = reconstruction.building
@@ -308,7 +346,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       model,
       scene: bundle,
     }
-    return { result, pkg, graph, metrics, reconstruction, sceneText, closure }
+    const timings: AnalysisTimings = { acquisitionMs, observationMs, metricExtractionMs, reconstructionMs, compileMs, verificationMs, totalMs: Math.round(clock() - t0) }
+    return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings }
   } catch (error) {
     throw toAnalysisError(error, signal)
   }
