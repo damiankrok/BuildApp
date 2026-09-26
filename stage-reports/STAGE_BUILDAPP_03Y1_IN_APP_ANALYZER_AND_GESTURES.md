@@ -194,6 +194,16 @@ provider ran; 5 byte-identical and 9 unanswered convention probes; 12 of 66
 source-view checks outside tolerance). Replay byte-identical; exterior closure
 0 errors; vision `DETERMINISTIC_ONLY`.
 
+**Repeated in CI, on another machine, inside the production container** (run
+36247724960, job "Analyzer API / container", step "A real project URL through
+the container", artifact `analyzer-live-run` 10907852402): COMPLETED in 131 s
+(14:12:58 → 14:15:09 UTC), container health `healthy`, scene bytes matching
+`sceneSha256` (578 344 bytes) and the bundle's `contentHash`; **model
+`4a8e8ddca8beec99…` — the same model hash as the local run**, L0/L1/L2
+5/69/31, 2 unresolved, 4 warnings, `DETERMINISTIC_ONLY`. Its candidate hash
+(`80602911d2b04469…`) differs from the local run's for the page-level reason
+explained below.
+
 ## LIVE RESULT VS SEALED AUTO V3
 
 Artefact: `stage-reports/artifacts/analyzer-api/marcowki-live-vs-sealed-v3.json`.

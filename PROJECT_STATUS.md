@@ -18,7 +18,8 @@
 | STAGE BUILDAPP-03M-FIX — ANDROID AUTO CANDIDATE RENDERING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `f3766237840514fc60178ca6c9bf4f3c9e13ebbd`; CI micro-task `781d6d6`, `13108e5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03M_FIX.md` and this row | PASS |
 | STAGE BUILDAPP-03R1 — IMAGE METROLOGY + PROPORTIONAL FACADE FITTING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4505e148cf03197b899d49c5335ed893e013ab1d`; implementation `c4c8816`, `ed83d0d`, `c315a35`, `0ec3291`, `067fd41`, `3ee3277`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` and this row | PASS |
 | STAGE BUILDAPP-03X — ANALYZER REFOUNDATION AUDIT + MARCÓWKI AUTO V2 | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d5d6375d8675143730307d71f45c0d940fcd134b`; research `9363d6b`; audit and v2 schemas `13896a1`; pipeline `59d5676`; callouts, gates, apps and CI `7e01828`; fixtures, ridge axis and docs `606c829`; test runner `9f67eb9` (CI run 36057369183 green); docs: the commit that carries this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
-| STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`, `1437954`, `74d4646`, `603eb2e` (CI run 36240702093 green; APK artifact 10905870947, versionCode 1029); docs: the commit that carries this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
+| STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`, `1437954`, `74d4646`, `603eb2e` (CI run 36240702093 green; APK artifact 10905870947, versionCode 1029); docs `9de7979` | **PASS — owner-accepted** (Auto v3 reviewed and accepted on the owner's phone) |
+| STAGE BUILDAPP-03Y1 — IN-APP LINK ANALYZER + STABLE MOBILE CAMERA | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `9de7979c78468e91ce2ba29438258b527de5ffac`; see `stage-reports/STAGE_BUILDAPP_03Y1_IN_APP_ANALYZER_AND_GESTURES.md` for the commits and CI runs | __03Y1_RESULT__ |
 
 ## Current capabilities
 
@@ -426,6 +427,42 @@ MATERIAL_READABILITY PARTIAL, none FAIL
 The interior findings (the stair against its walls, partitions trimmed short
 of undeclared junctions) are left for BUILDAPP-03Z.
 
+## Where the in-app analyzer stands (STAGE BUILDAPP-03Y1)
+
+There is ONE analyzer, and it now runs as a service a phone can call:
+
+- **`@buildapp/analysis-service`** — `runAnalysis` / `runLinkAnalysis`: URL →
+  SourcePackage → analyzer v2 → model → compiled scene → MobileSceneBundle,
+  verified (replay, bundle round trip, closure audit) and hashed, with real
+  stage progress and cancellation. The `reconstruct:v2` CLI is a thin adapter
+  over it and still reproduces sealed Auto v3 byte for byte.
+- **`apps/analyzer-api`** — the HTTP API of `docs/ANALYZER_API.md`: submit a
+  URL, poll nine stages and a real progress value, download the result, the
+  scene bytes (sha256-checked), the model and the candidate; cancel. A worker
+  thread per job, a bounded queue, a time limit, a filesystem job store that
+  survives restarts, rate limits, CORS, HTTPS behind a proxy, no secrets and no
+  paths in any response. One container (`apps/analyzer-api/Dockerfile`), a
+  Fly.io config and a CI deploy job that runs when the repository has a
+  `FLY_API_TOKEN` secret.
+- **Web** — the Analyze panel in BuildWorld (same contract).
+- **Android** — the Analyzer screen and a verified, persistent cache of
+  downloaded scenes beside the bundled ones; `INTERNET` is the one permission
+  added (see the 03Y1 report).
+- **Camera** — a pure gesture reducer with a pointer-set rebase: a finger
+  landing or lifting moves nothing; orbit gain per viewport, not per pixel;
+  clamped pinch; 1:1 pan.
+
+The real Marcówki URL completes through the API (177 s locally, 131 s in the
+CI container) and yields the sealed Auto v3 building: under the sealed label
+and model id the live sources give model `894e50ba…` and the APK's exact
+scene. Candidate hashes differ from the sealed one because the publisher's
+page HTML changes between fetches (the drawings are byte-identical).
+
+**Deployment is the open item**: no hosting credential exists in this
+environment, so no public HTTPS analyzer service is running, and the phone
+flow cannot be exercised end to end until one is (steps in
+`docs/ANALYZER_API.md` → Deployment).
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -547,7 +584,9 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**After BUILDAPP-03Y**, in the orchestrator's sequence:
+**Now: BUILDAPP-03Y1 — deploy the analyzer service** (owner action: a
+hosting account; then the phone gate of §28 of its brief). **Then**, in the
+orchestrator's sequence:
 **BUILDAPP-03Z — Interior Topology + Semantic Completion** — declared
 interior junctions instead of partitions trimmed 15 mm short (the 35
 INTERIOR gaps the closure audit reports), the stair against its walls and
