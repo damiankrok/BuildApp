@@ -55,12 +55,27 @@ object TestScenes {
     /** The analyzer-v2 candidate: the same drawings through the second pipeline, and a THIRD building. */
     val autoCandidateV2: ModelScene by lazy { scene("marcowki-auto-v2") }
 
+    /** The exterior-closure candidate (BUILDAPP-03Y): analyzer v2 again, with the assemblies closed. */
+    val autoCandidateV3: ModelScene by lazy { scene("marcowki-auto-v3") }
+
     /** Every reconstructed candidate the build ships, by scene key, for tests that hold each one to the same bar. */
-    val candidateKeys: List<String> = listOf("marcowki-auto", "marcowki-auto-v2")
+    val candidateKeys: List<String> = listOf("marcowki-auto", "marcowki-auto-v2", "marcowki-auto-v3")
 
     private val candidates: Map<String, ModelScene> by lazy {
-        mapOf("marcowki-auto" to autoCandidate, "marcowki-auto-v2" to autoCandidateV2)
+        mapOf("marcowki-auto" to autoCandidate, "marcowki-auto-v2" to autoCandidateV2, "marcowki-auto-v3" to autoCandidateV3)
     }
+
+    /**
+     * Candidates written by one analyzer: successive runs of the same pipeline
+     * name their members from the same features on purpose, so their ids
+     * coincide where their members do. Resolving one's viewer state against
+     * the other would LOOK right by coincidence — which is why the renderer
+     * resolves against the scene it draws (ViewerState), not why ids may be
+     * shared across different producers.
+     */
+    private val analyzerLineages: List<Set<String>> = listOf(setOf("marcowki-auto-v2", "marcowki-auto-v3"))
+
+    fun sameAnalyzer(a: String, b: String): Boolean = analyzerLineages.any { a in it && b in it }
 
     fun candidate(key: String): ModelScene = candidates.getValue(key)
 

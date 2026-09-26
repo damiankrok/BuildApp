@@ -32,7 +32,8 @@ import org.junit.runners.Parameterized
  * These tests run against the committed bundles the APK ships, so they describe
  * the real candidates rather than a fixture that could agree with a bug. They
  * run once per sealed candidate: the first solver's and analyzer v2's are
- * different buildings, and each has to reach the GPU whole.
+ * different buildings, the exterior-closure candidate is analyzer v2 again,
+ * and each has to reach the GPU whole.
  */
 @RunWith(Parameterized::class)
 class AutoCandidateRenderingTest(private val key: String) {
@@ -231,6 +232,12 @@ class AutoCandidateRenderingTest(private val key: String) {
 
         for (other in TestScenes.all) {
             if (other.key == auto.key) continue
+            // Two runs of one analyzer share an id vocabulary by design; they
+            // must still differ as sets (checked below for every pair).
+            if (TestScenes.sameAnalyzer(auto.key, other.key)) {
+                assertNotEquals("\"${other.key}\" and \"${auto.key}\" must not be interchangeable", auto.renderableObjectIds, other.renderableObjectIds)
+                continue
+            }
             val foreign = Visibility.visibleObjectIds(other, VisibilityMode.ALL) intersect auto.renderableObjectIds
             val foreignWalls = auto.objects.count { it.id in foreign && it.kind == "wall" }
             assertEquals(
