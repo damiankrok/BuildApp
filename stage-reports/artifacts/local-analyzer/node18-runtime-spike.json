@@ -1,0 +1,518 @@
+{
+  "what": "BUILDAPP-03Y2 runtime spike, measured in the build sandbox (x86_64 Linux, 4 cores, 15 GB): the production pipeline bundled with esbuild target node18 and run under Node 18.20.4 (the version of the runtime in the APK) and Node 22.22.2, on the committed Marcowki source package and its cached source bytes. Four processes ran side by side, so wall times are comparable only within this table. heap384/heap768 = Node 18 with --max-old-space-size 384/768.",
+  "modes": {
+    "marcowki-bytes": "PACKAGE input, drawings re-read from the cached bytes (full CV, OCR, solver)",
+    "marcowki-replay": "PACKAGE input with the sealed observation graph, under the sealed Auto v3 label and model id"
+  },
+  "runs": {
+    "marcowki-bytes-18": {
+      "node": "v18.20.4",
+      "mode": "marcowki-bytes",
+      "ms": 249700,
+      "maxRssMB": 1585,
+      "heapMB": 63,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+        "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+        "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+        "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+        "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+        "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578344
+    },
+    "marcowki-bytes-22": {
+      "node": "v22.22.2",
+      "mode": "marcowki-bytes",
+      "ms": 165957,
+      "maxRssMB": 1681,
+      "heapMB": 52,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+        "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+        "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+        "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+        "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+        "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578344
+    },
+    "marcowki-replay-18": {
+      "node": "v18.20.4",
+      "mode": "marcowki-replay",
+      "ms": 229131,
+      "maxRssMB": 1515,
+      "heapMB": 71,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+        "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+        "candidateHash": "6203439c4e5bfcddb81c3da94ae874c24a9a3bf824f0cf6d0806c00ca6ed329d",
+        "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1",
+        "sceneContentHash": "ad689af6731dd51b7b876c768a1a6ba0c551ece2de2fbaf79578375e2285ee80",
+        "sceneSha256": "ad6b1a7a3a3769c218e2da239d1ba315cc15bfb76819ca46e19509821492f18f"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578316
+    },
+    "marcowki-replay-22": {
+      "node": "v22.22.2",
+      "mode": "marcowki-replay",
+      "ms": 142131,
+      "maxRssMB": 1482,
+      "heapMB": 100,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+        "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+        "candidateHash": "6203439c4e5bfcddb81c3da94ae874c24a9a3bf824f0cf6d0806c00ca6ed329d",
+        "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1",
+        "sceneContentHash": "ad689af6731dd51b7b876c768a1a6ba0c551ece2de2fbaf79578375e2285ee80",
+        "sceneSha256": "ad6b1a7a3a3769c218e2da239d1ba315cc15bfb76819ca46e19509821492f18f"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578316
+    },
+    "heap384": {
+      "node": "v18.20.4",
+      "mode": "marcowki-bytes",
+      "ms": 235174,
+      "maxRssMB": 1567,
+      "heapMB": 44,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+        "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+        "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+        "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+        "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+        "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578344
+    },
+    "heap768": {
+      "node": "v18.20.4",
+      "mode": "marcowki-bytes",
+      "ms": 231596,
+      "maxRssMB": 1576,
+      "heapMB": 55,
+      "hashes": {
+        "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+        "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+        "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+        "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+        "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+        "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+        "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13"
+      },
+      "counts": {
+        "obs": 888,
+        "meshes": 162,
+        "tri": 5110
+      },
+      "sceneBytes": 578344
+    }
+  },
+  "memoryTraceNode22": {
+    "what": "RSS / ArrayBuffers / V8 heap (MiB) at each progress event, full-bytes mode, Node 22",
+    "events": [
+      {
+        "t": 2,
+        "s": "ACQUIRING_SOURCE",
+        "d": "reading a sealed source package",
+        "rss": 76,
+        "ab": 0,
+        "heap": 13,
+        "max": 76
+      },
+      {
+        "t": 9,
+        "s": "CLASSIFYING_SOURCES",
+        "rss": 78,
+        "ab": 0,
+        "heap": 12,
+        "max": 78
+      },
+      {
+        "t": 9,
+        "s": "CLASSIFYING_SOURCES",
+        "d": "18 drawings of 20 assets",
+        "rss": 78,
+        "ab": 0,
+        "heap": 12,
+        "max": 78
+      },
+      {
+        "t": 9,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "rss": 78,
+        "ab": 0,
+        "heap": 12,
+        "max": 78
+      },
+      {
+        "t": 17,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 1 of 20",
+        "rss": 81,
+        "ab": 0,
+        "heap": 13,
+        "max": 81
+      },
+      {
+        "t": 2767,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 2 of 20",
+        "rss": 167,
+        "ab": 18,
+        "heap": 51,
+        "max": 169
+      },
+      {
+        "t": 4978,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 3 of 20",
+        "rss": 197,
+        "ab": 26,
+        "heap": 50,
+        "max": 197
+      },
+      {
+        "t": 7473,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 4 of 20",
+        "rss": 203,
+        "ab": 21,
+        "heap": 39,
+        "max": 208
+      },
+      {
+        "t": 9516,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 5 of 20",
+        "rss": 206,
+        "ab": 25,
+        "heap": 34,
+        "max": 213
+      },
+      {
+        "t": 10364,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 6 of 20",
+        "rss": 198,
+        "ab": 37,
+        "heap": 33,
+        "max": 213
+      },
+      {
+        "t": 10857,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 7 of 20",
+        "rss": 200,
+        "ab": 34,
+        "heap": 29,
+        "max": 213
+      },
+      {
+        "t": 11200,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 8 of 20",
+        "rss": 201,
+        "ab": 37,
+        "heap": 37,
+        "max": 213
+      },
+      {
+        "t": 12780,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 9 of 20",
+        "rss": 216,
+        "ab": 41,
+        "heap": 38,
+        "max": 222
+      },
+      {
+        "t": 12975,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 10 of 20",
+        "rss": 217,
+        "ab": 41,
+        "heap": 34,
+        "max": 222
+      },
+      {
+        "t": 13270,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 11 of 20",
+        "rss": 217,
+        "ab": 42,
+        "heap": 45,
+        "max": 222
+      },
+      {
+        "t": 13270,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 12 of 20",
+        "rss": 217,
+        "ab": 42,
+        "heap": 45,
+        "max": 222
+      },
+      {
+        "t": 13777,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 13 of 20",
+        "rss": 219,
+        "ab": 44,
+        "heap": 45,
+        "max": 222
+      },
+      {
+        "t": 13777,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 14 of 20",
+        "rss": 219,
+        "ab": 44,
+        "heap": 45,
+        "max": 222
+      },
+      {
+        "t": 14123,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 15 of 20",
+        "rss": 207,
+        "ab": 47,
+        "heap": 22,
+        "max": 222
+      },
+      {
+        "t": 14743,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 16 of 20",
+        "rss": 215,
+        "ab": 52,
+        "heap": 40,
+        "max": 222
+      },
+      {
+        "t": 15544,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 17 of 20",
+        "rss": 230,
+        "ab": 58,
+        "heap": 46,
+        "max": 230
+      },
+      {
+        "t": 16408,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 18 of 20",
+        "rss": 230,
+        "ab": 61,
+        "heap": 41,
+        "max": 233
+      },
+      {
+        "t": 17062,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 19 of 20",
+        "rss": 236,
+        "ab": 74,
+        "heap": 30,
+        "max": 237
+      },
+      {
+        "t": 18295,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "drawing 20 of 20",
+        "rss": 253,
+        "ab": 71,
+        "heap": 42,
+        "max": 260
+      },
+      {
+        "t": 19696,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "rss": 264,
+        "ab": 75,
+        "heap": 48,
+        "max": 270
+      },
+      {
+        "t": 19843,
+        "s": "EXTRACTING_OBSERVATIONS",
+        "d": "reading printed dimensions and callouts",
+        "rss": 265,
+        "ab": 75,
+        "heap": 56,
+        "max": 270
+      },
+      {
+        "t": 133323,
+        "s": "REGISTERING_VIEWS",
+        "rss": 1565,
+        "ab": 777,
+        "heap": 61,
+        "max": 1583
+      },
+      {
+        "t": 134168,
+        "s": "SOLVING_TOPOLOGY",
+        "rss": 1563,
+        "ab": 144,
+        "heap": 31,
+        "max": 1583
+      },
+      {
+        "t": 134913,
+        "s": "SOLVING_METRICS",
+        "rss": 1568,
+        "ab": 143,
+        "heap": 35,
+        "max": 1583
+      },
+      {
+        "t": 138180,
+        "s": "BUILDING_MODEL",
+        "rss": 1594,
+        "ab": 118,
+        "heap": 54,
+        "max": 1651
+      },
+      {
+        "t": 138630,
+        "s": "BUILDING_MODEL",
+        "rss": 1595,
+        "ab": 118,
+        "heap": 62,
+        "max": 1651
+      },
+      {
+        "t": 138630,
+        "s": "COMPILING_SCENE",
+        "rss": 1595,
+        "ab": 118,
+        "heap": 62,
+        "max": 1651
+      },
+      {
+        "t": 138672,
+        "s": "COMPILING_SCENE",
+        "d": "162 meshes",
+        "rss": 1595,
+        "ab": 118,
+        "heap": 63,
+        "max": 1651
+      },
+      {
+        "t": 138724,
+        "s": "VERIFYING",
+        "rss": 1598,
+        "ab": 118,
+        "heap": 66,
+        "max": 1651
+      },
+      {
+        "t": 138812,
+        "s": "VERIFYING",
+        "d": "replay byte-identical; checking joints",
+        "rss": 1600,
+        "ab": 118,
+        "heap": 72,
+        "max": 1651
+      },
+      {
+        "t": 139830,
+        "s": "VERIFYING",
+        "rss": 1598,
+        "ab": 118,
+        "heap": 71,
+        "max": 1651
+      }
+    ]
+  },
+  "calloutRenderCache": {
+    "what": "packages/source-metrics/src/callouts.ts: entries and MiB held by the per-page RenderCache of prototype renders at the end of each page read (instrumented copy, reverted; not committed)",
+    "pages": [
+      {
+        "spikeCalloutCache": 72576,
+        "MB": 599,
+        "ab": 720,
+        "rss": 980
+      },
+      {
+        "spikeCalloutCache": 62208,
+        "MB": 384,
+        "ab": 507,
+        "rss": 992
+      },
+      {
+        "spikeCalloutCache": 53136,
+        "MB": 355,
+        "ab": 478,
+        "rss": 963
+      },
+      {
+        "spikeCalloutCache": 69984,
+        "MB": 460,
+        "ab": 580,
+        "rss": 936
+      },
+      {
+        "spikeCalloutCache": 60912,
+        "MB": 358,
+        "ab": 481,
+        "rss": 934
+      },
+      {
+        "spikeCalloutCache": 99792,
+        "MB": 1071,
+        "ab": 1200,
+        "rss": 1545
+      },
+      {
+        "spikeCalloutCache": 101088,
+        "MB": 1077,
+        "ab": 1197,
+        "rss": 1573
+      },
+      {
+        "spikeCalloutCache": 92016,
+        "MB": 907,
+        "ab": 1034,
+        "rss": 1574
+      },
+      {
+        "spikeCalloutCache": 85536,
+        "MB": 650,
+        "ab": 776,
+        "rss": 1574
+      }
+    ]
+  }
+}

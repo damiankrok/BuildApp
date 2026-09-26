@@ -334,9 +334,17 @@ jobs:
             }
             console.log('fixture parity: desktop = bundle on Node 18 = bundle on Node 22', keys.map(k => k + ' ' + d[k].slice(0, 12)).join(', '))
           "
-      - name: The real Marcówki URL through the bundle on Node 18 (advisory — depends on a third-party site)
+      - name: The text adapter's tables are what this ICU generates
+        # Android's runtime has no ICU (nodejs-mobile builds --with-intl=none); src/text-tables.ts
+        # stands in for it and must be exactly what the desktop's ICU says (about three minutes)
+        run: node apps/local-analyzer/scripts/generate-text-tables.mjs --check
+      - name: The real Marcówki URL through the bundle on Node 18, with ICU and as on Android without it (advisory — depends on a third-party site)
         continue-on-error: true
-        run: node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --node "$LOCAL_ANALYZER_NODE18" --url "$MARCOWKI_URL" --events local-analyzer-host/marcowki-node18-events.ndjson > local-analyzer-host/marcowki-node18.json
+        run: |
+          node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --node "$LOCAL_ANALYZER_NODE18" --url "$MARCOWKI_URL" --events local-analyzer-host/marcowki-node18-events.ndjson > local-analyzer-host/marcowki-node18.json
+          node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --node "$LOCAL_ANALYZER_NODE18" --no-icu --url "$MARCOWKI_URL" --events local-analyzer-host/marcowki-node18-no-icu-events.ndjson > local-analyzer-host/marcowki-node18-no-icu.json
+          node apps/local-analyzer/scripts/compare-runs.mjs --device local-analyzer-host/marcowki-node18-no-icu.json --desktop local-analyzer-host/marcowki-node18.json --md local-analyzer-host/marcowki-no-icu-vs-icu.md
+          { echo "### Marcówki on Node 18: without ICU (text adapter) vs with ICU"; echo; cat local-analyzer-host/marcowki-no-icu-vs-icu.md; } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload the host parity record
         if: always()
         uses: actions/upload-artifact@v4
@@ -408,11 +416,11 @@ jobs:
         run: npx vite-node apps/local-analyzer/scripts/desktop-hashes.ts -- --out local-analyzer-device/desktop-fixture.json
       - name: The real Marcówki URL on the desktop, through the exact bundle the APK ships (advisory)
         continue-on-error: true
-        run: >-
-          node apps/local-analyzer/scripts/run-host.mjs
-          --dir apps/android/app/build/generated/local-analyzer/assets/local-analyzer
-          --url "$MARCOWKI_URL" --events local-analyzer-device/desktop-live-events.ndjson
-          > local-analyzer-device/desktop-live.json
+        run: |
+          # the bundle is taken out of the built APK itself: these are the bytes the phone runs
+          unzip -o -q apps/android/app/build/outputs/apk/debug/app-x86_64-debug.apk 'assets/local-analyzer/*' -d "$RUNNER_TEMP/apk-bundle"
+          node apps/local-analyzer/scripts/run-host.mjs --dir "$RUNNER_TEMP/apk-bundle/assets/local-analyzer" \
+            --url "$MARCOWKI_URL" --events local-analyzer-device/desktop-live-events.ndjson > local-analyzer-device/desktop-live.json
       - name: Enable KVM for the emulator
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules

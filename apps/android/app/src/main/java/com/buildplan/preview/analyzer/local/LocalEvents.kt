@@ -32,6 +32,11 @@ data class LocalRuntimeFacts(
     val node: String = "",
     val v8: String = "",
     val icu: String? = null,
+    /**
+     * `icu` where the runtime's own ICU sorts and normalises text; `embedded-tables`
+     * where the analyzer's text adapter stands in for it — Android's runtime has no ICU.
+     */
+    val text: String = "",
     val platform: String = "",
     val arch: String = "",
     val cpus: Int = 0,

@@ -213,6 +213,10 @@ class LocalAnalysisTest {
         assertTrue(completed.entry.subtitle, completed.entry.subtitle.startsWith("Analysed on this phone"))
         assertEquals("Larchfield (analysis)", completed.entry.label)
         assertNotNull(w.scenes.find(completed.entry.key))
+        // after a restart (a new store on the same folder) the model is still there, and still opens
+        val restarted = DownloadedScenes(File(w.root, "analyses"))
+        assertEquals(completed.entry.key, restarted.find(completed.entry.key)?.key)
+        assertTrue(restarted.load(completed.entry.key) is com.buildplan.preview.scene.SceneLoadResult.Ok)
         val report = completed.local!!
         assertEquals(LocalRunReport.OUTCOME_COMPLETED, report.outcome)
         assertEquals(1650000000L, report.peakRssBytes)

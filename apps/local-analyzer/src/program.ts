@@ -39,6 +39,8 @@ import { runLocalAnalysis } from './local.js'
 import type { LocalWiring } from './local.js'
 import { memorySample } from './memory.js'
 import type { MemorySample } from './memory.js'
+import { installTextAdapter, textRefusal } from './text.js'
+import type { TextSupport } from './text.js'
 
 /** Bumped when the event or argument shape changes; the app refuses a runtime that speaks another. */
 export const LOCAL_ANALYZER_PROTOCOL = 1 as const
@@ -51,6 +53,8 @@ export type RuntimeFacts = {
   node: string
   v8: string
   icu: string | null
+  /** 'icu' where the runtime's own ICU is used; 'embedded-tables' where src/text.ts stands in for it (Android). */
+  text: TextSupport
   platform: string
   arch: string
   cpus: number
@@ -82,7 +86,7 @@ export type LocalAnalyzerEvent =
   | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string } }
   | { type: 'progress'; event: AnalysisProgress; elapsedMs: number; rssBytes: number }
   | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes }
-  | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED'; message: string; metrics: RunMetrics }
+  | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics }
   | { type: 'cancelled'; metrics: RunMetrics }
 
 export const EXIT = { DONE: 0, FAILED: 1, CANCELLED: 2, BAD_ARGUMENTS: 3 } as const
@@ -123,16 +127,26 @@ export function parseProgramArgs(argv: readonly string[]): ProgramArgs {
   return { jobId, url: required('url'), workDir, outDir, eventsFd: fd('events-fd'), controlFd: fd('control-fd') }
 }
 
-export function runtimeFacts(): RuntimeFacts {
+/** Facts about the runtime, for the record. A probe that fails reports a blank; it never fails the run. */
+export function runtimeFacts(text: TextSupport): RuntimeFacts {
+  const probe = <T>(read: () => T, fallback: T): T => {
+    try {
+      return read()
+    } catch {
+      return fallback
+    }
+  }
   return {
     node: process.version,
     v8: process.versions.v8,
     icu: process.versions.icu ?? null,
-    platform: platform(),
-    arch: arch(),
-    cpus: cpus().length,
-    totalMemoryBytes: totalmem(),
-    collatorLocale: new Intl.Collator().resolvedOptions().locale,
+    text,
+    platform: probe(() => platform(), ''),
+    arch: probe(() => arch(), ''),
+    cpus: probe(() => cpus().length, 0),
+    totalMemoryBytes: probe(() => totalmem(), 0),
+    // Android's nodejs-mobile has no Intl at all
+    collatorLocale: probe(() => (typeof Intl === 'undefined' ? 'none (no Intl)' : new Intl.Collator().resolvedOptions().locale), ''),
   }
 }
 
@@ -207,7 +221,9 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   const metrics = (extra: Partial<RunMetrics> = {}): RunMetrics => ({ elapsedMs: elapsed(), memory: memorySample(), ...extra })
 
   try {
-    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION } })
+    // before any analyzer code runs: ICU's text behaviour where the runtime lacks ICU (src/text.ts)
+    const text = installTextAdapter()
+    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(text), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION } })
     const output = await runLocalAnalysis({
       url: args.url,
       workDir: args.workDir,
@@ -217,6 +233,9 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       now: options.now,
       progress: (event) => sink.emit({ type: 'progress', event, elapsedMs: elapsed(), rssBytes: process.memoryUsage().rss }),
     })
+    // A refused comparison that something in the pipeline caught and survived still means this run
+    // may not be the desktop's: it is not delivered.
+    if (textRefusal()) throw textRefusal()
     try {
       await mkdir(args.outDir, { recursive: true })
       // the scene first and the summary last: a result.json on disk means every file it names is complete
@@ -232,6 +251,12 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
     return EXIT.DONE
   } catch (error) {
     const e = toAnalysisError(error, controller.signal)
+    const refusal = textRefusal()
+    if (refusal && e.code !== 'CANCELLED') {
+      const message = `the project's text contains a character (${refusal.message.split(' ')[0]}) this phone's runtime cannot sort or normalise exactly as the analyzer service does; analyse this project with the service`
+      sink.emit({ type: 'failed', code: 'TEXT_NOT_SUPPORTED_ON_DEVICE', message, metrics: metrics() })
+      return EXIT.FAILED
+    }
     if (e.code === 'CANCELLED') {
       sink.emit({ type: 'cancelled', metrics: metrics() })
       return EXIT.CANCELLED

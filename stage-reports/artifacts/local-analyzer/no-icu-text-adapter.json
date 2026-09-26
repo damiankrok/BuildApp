@@ -1,0 +1,139 @@
+{
+ "what": "BUILDAPP-03Y2: the Android runtime (nodejs-mobile, --with-intl=none) has no ICU. How a runtime without ICU would diverge from the desktop on the analyzer inputs, and the effect of the text adapter (apps/local-analyzer/src/text.ts). Measured in the build sandbox on Node 22 (ICU 78.2); no-ICU = V8 without-ICU behaviour simulated (test/support/no-icu.cjs semantics).",
+ "comparisonsWhoseSignDiffersWithoutIcu": {
+  "fixtures": {
+   "compares": 9514,
+   "differing": 1520,
+   "charactersCompared": "+,-./0123456789:ACEHILNORTVZabcdefghijklmnoprstuvwxyz°±"
+  },
+  "marcowkiFullBytes": {
+   "compares": 50412,
+   "differing": 5357,
+   "charactersCompared": "+,-./0123456789:ACDEFGHIKLNORSTUVWZ_abcdefghijklmnoprstuvwxyz°±",
+   "normalizeNfdCalls": 4494,
+   "normalizeNfdChangedStrings": 5
+  },
+  "examples": [
+   [
+    "[\"±\",\"0\"]",
+    301
+   ],
+   [
+    "[\"±\",\"1\"]",
+    296
+   ],
+   [
+    "[\"°\",\"1\"]",
+    148
+   ],
+   [
+    "[\"°\",\"0\"]",
+    176
+   ],
+   [
+    "[\",\",\"-\"]",
+    1171
+   ],
+   [
+    "[\"°\",\"3\"]",
+    30
+   ],
+   [
+    "[\"°\",\"2\"]",
+    87
+   ],
+   [
+    "[\"-\",\"+\"]",
+    644
+   ],
+   [
+    "[\",\",\"+\"]",
+    624
+   ],
+   [
+    "[\".\",\"+\"]",
+    644
+   ],
+   [
+    "[\"/\",\"+\"]",
+    447
+   ],
+   [
+    "[\"°\",\"+\"]",
+    428
+   ],
+   [
+    "[\"°\",\"7\"]",
+    4
+   ],
+   [
+    "[\"°\",\"6\"]",
+    8
+   ],
+   [
+    "[\"±\",\"5\"]",
+    35
+   ],
+   [
+    "[\"±\",\"2\"]",
+    106
+   ],
+   [
+    "[\"°\",\"5\"]",
+    18
+   ],
+   [
+    "[\"±\",\"6\"]",
+    26
+   ],
+   [
+    "[\"±\",\"3\"]",
+    43
+   ],
+   [
+    "[\"±\",\"4\"]",
+    72
+   ]
+  ]
+ },
+ "marcowkiFullBytes": {
+  "desktopIcu": {
+   "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+   "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+   "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+   "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339"
+  },
+  "noIcuWithAdapter": {
+   "text": "embedded-tables",
+   "intl": "undefined",
+   "ms": 156090,
+   "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+   "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+   "metricEvidenceHash": "494ae734450751effa966a162dfae2cddfe0a92269de3422125d585e32f558cb",
+   "candidateHash": "089abf005323e4632a66d95b90d27a4bb190167e77fc314b8f190b991e07a492",
+   "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+   "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+   "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13",
+   "counts": {
+    "observations": 888,
+    "meshes": 162
+   }
+  },
+  "noIcuWithoutAdapter": {
+   "text": "none",
+   "intl": "undefined",
+   "ms": 152285,
+   "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+   "observationGraphHash": "7b78f8996d9cc96e73cb39658f5cb06bb461eb4c6359e8af4d2b57baba82f4aa",
+   "metricEvidenceHash": "47df71207c3c58f6b44f760fd1591be46d3ec6185d5bcd3e447c5b694802d3d9",
+   "candidateHash": "da914928cd0853f4e26a275e9c35fdecb0fdb3eaa0a1df5ca8456829eff3f422",
+   "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+   "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+   "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13",
+   "counts": {
+    "observations": 888,
+    "meshes": 162
+   }
+  }
+ }
+}

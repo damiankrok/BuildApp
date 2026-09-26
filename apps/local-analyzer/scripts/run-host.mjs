@@ -4,7 +4,7 @@
  * control pipe on 4. Used by the parity tests and by CI to run the SAME bytes
  * under Node 18.20.4 (the runtime in the APK) and under Node 22.
  *
- *   node run-host.mjs --dir <bundle dir> --url <url> [--fixture] [--node <node binary>]
+ *   node run-host.mjs --dir <bundle dir> --url <url> [--fixture] [--node <node binary>] [--no-icu]
  *                     [--work <dir>] [--out <dir>] [--cancel-after-ms <n>] [--events <file>]
  *
  * Prints the terminal event as one JSON line on stdout and exits with the
@@ -16,12 +16,12 @@ import { mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 
-export function runHost({ dir, url, fixture = false, node = process.execPath, work, out, cancelAfterMs, jobId = randomBytes(16).toString('hex'), onEvent }) {
+export function runHost({ dir, url, fixture = false, node = process.execPath, nodeArgs = [], work, out, cancelAfterMs, jobId = randomBytes(16).toString('hex'), onEvent }) {
   const scratch = mkdtempSync(join(tmpdir(), 'local-analyzer-'))
   const workDir = resolve(work ?? join(scratch, 'work'))
   const outDir = resolve(out ?? join(scratch, 'out'))
   const entry = join(resolve(dir), fixture ? 'fixture-main.mjs' : 'main.mjs')
-  const args = [entry, '--job', jobId, '--url', url, '--work', workDir, '--out', outDir, '--events-fd', '3', '--control-fd', '4']
+  const args = [...nodeArgs, entry, '--job', jobId, '--url', url, '--work', workDir, '--out', outDir, '--events-fd', '3', '--control-fd', '4']
   const child = spawn(node, args, { stdio: ['ignore', 'inherit', 'inherit', 'pipe', 'pipe'] })
   const events = []
   let buffer = ''
@@ -64,12 +64,14 @@ if (isMain) {
     url: value('url'),
     fixture: argv.includes('--fixture'),
     node: value('node') ?? process.execPath,
+    // --no-icu: run as the Android runtime does, with V8's no-ICU text behaviour (test/support/no-icu.cjs)
+    nodeArgs: argv.includes('--no-icu') ? ['--require', new URL('../test/support/no-icu.cjs', import.meta.url).pathname] : [],
     work: value('work'),
     out: value('out'),
     cancelAfterMs: value('cancel-after-ms') === undefined ? undefined : Number(value('cancel-after-ms')),
     onEvent: (event) => {
       if (event.type === 'progress') process.stderr.write(`[${(event.elapsedMs / 1000).toFixed(1)} s] ${event.event.stage} ${Math.round(event.event.progress * 100)}% ${event.event.detail ?? ''}\n`)
-      else if (event.type === 'hello') process.stderr.write(`runtime ${event.runtime.node} ${event.runtime.platform}/${event.runtime.arch} icu ${event.runtime.icu} collator ${event.runtime.collatorLocale}\n`)
+      else if (event.type === 'hello') process.stderr.write(`runtime ${event.runtime.node} ${event.runtime.platform}/${event.runtime.arch} icu ${event.runtime.icu} text ${event.runtime.text} collator ${event.runtime.collatorLocale}\n`)
     },
   })
   const result = await run.done

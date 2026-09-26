@@ -577,7 +577,15 @@ private fun LocalDiagnostics(report: LocalRunReport) {
         DataRow("Job", report.jobId.take(12))
         DataRow("Runtime", runtimeText(report))
         report.runtime?.let {
-            DataRow("V8 / ICU", "${it.v8} / ${it.icu ?: "none"}")
+            DataRow("V8", it.v8)
+            DataRow(
+                "Text sorting",
+                when (it.text) {
+                    "embedded-tables" -> "ICU tables in the analyzer (this runtime has no ICU)"
+                    "icu" -> "the runtime's ICU ${it.icu ?: ""}".trim()
+                    else -> it.text.ifBlank { "not reported" }
+                },
+            )
             DataRow("Processor cores", "${it.cpus}")
             DataRow("Phone memory", megabytes(it.totalMemoryBytes))
         }

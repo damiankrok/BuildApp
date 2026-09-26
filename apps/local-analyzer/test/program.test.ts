@@ -45,8 +45,11 @@ const dirs = (): { work: string; out: string } => {
 }
 const sha256 = (bytes: Buffer | string): string => createHash('sha256').update(bytes).digest('hex')
 
-function host(url: string, options: { node?: string; onEvent?: (e: Event, child: unknown) => void } = {}): HostRun {
-  return runHost({ dir: bundleDir, url, fixture: true, node: options.node ?? process.execPath, ...dirs(), onEvent: options.onEvent }) as HostRun
+/** `noIcu`: run as Android's runtime does — V8's behaviour without ICU (test/support/no-icu.cjs). */
+const NO_ICU = ['--require', join(import.meta.dirname, 'support/no-icu.cjs')]
+
+function host(url: string, options: { node?: string; noIcu?: boolean; onEvent?: (e: Event, child: unknown) => void } = {}): HostRun {
+  return runHost({ dir: bundleDir, url, fixture: true, node: options.node ?? process.execPath, nodeArgs: options.noIcu ? NO_ICU : [], ...dirs(), onEvent: options.onEvent }) as HostRun
 }
 
 const desktopHashes = async (code: string): Promise<Record<string, string>> => {
@@ -65,8 +68,8 @@ const summaryHashes = (s: LinkAnalysisSummary): Record<string, string> => ({
   sceneSha256: s.sceneSha256,
 })
 
-async function expectParity(code: string, node?: string): Promise<HostResult> {
-  const [desktop, result] = await Promise.all([desktopHashes(code), host(fixturePageUrl(code), { node }).done])
+async function expectParity(code: string, node?: string, noIcu = false): Promise<HostResult> {
+  const [desktop, result] = await Promise.all([desktopHashes(code), host(fixturePageUrl(code), { node, noIcu }).done])
   expect(result.code, JSON.stringify(result.terminal)).toBe(0)
   expect(result.terminal?.type).toBe('done')
   const summary = JSON.parse(readFileSync(join(result.outDir, 'result.json'), 'utf8')) as LinkAnalysisSummary
@@ -108,6 +111,24 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
     const hello = result.events[0] as unknown as { protocol: number; runtime: { node: string } }
     expect(hello.protocol).toBe(1)
     expect(hello.runtime.node).toBe(process.version)
+  })
+})
+
+describe('as on Android: V8 without ICU, the text adapter standing in for it', () => {
+  it('Larchfield: every hash equal to the desktop runAnalysis', async () => {
+    const result = await expectParity(FIXTURE_PROJECTS.larchfield, undefined, true)
+    const hello = result.events[0] as unknown as { runtime: { text: string; collatorLocale: string } }
+    expect(hello.runtime.text).toBe('embedded-tables')
+    expect(hello.runtime.collatorLocale).toBe('none (no Intl)')
+  })
+
+  it('Holloway: every hash equal to the desktop runAnalysis', async () => {
+    await expectParity(FIXTURE_PROJECTS.holloway, undefined, true)
+  })
+
+  it('with ICU present, the adapter stays out of the way', async () => {
+    const result = await host(fixturePageUrl(FIXTURE_PROJECTS.larchfield)).done
+    expect((result.events[0] as unknown as { runtime: { text: string } }).runtime.text).toBe('icu')
   })
 })
 
@@ -173,6 +194,11 @@ describe.skipIf(!NODE18)('under Node 18 — the runtime version in the APK (LOCA
 
   it('Holloway: every hash equal to the desktop runAnalysis under Node 22', async () => {
     await expectParity(FIXTURE_PROJECTS.holloway, NODE18)
+  })
+
+  it('Node 18 WITHOUT ICU (exactly the phone’s runtime, but on x86-64 Linux): both buildings equal to the desktop', async () => {
+    await expectParity(FIXTURE_PROJECTS.larchfield, NODE18, true)
+    await expectParity(FIXTURE_PROJECTS.holloway, NODE18, true)
   })
 
   it('cancel works without AbortSignal.any (added in Node 20.3)', async () => {

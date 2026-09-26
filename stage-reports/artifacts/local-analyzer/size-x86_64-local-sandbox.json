@@ -1,0 +1,82 @@
+{
+  "schema": "buildapp.local-analyzer-size-report",
+  "apks": {
+    "local": {
+      "file": "app-x86_64-debug.apk",
+      "bytes": 31800740,
+      "MiB": 30.33
+    },
+    "withoutLocalAnalyzer": {
+      "file": "app-x86_64-debug.apk",
+      "bytes": 12031268,
+      "MiB": 11.47
+    },
+    "prestage": {
+      "file": "app-x86_64-debug.apk",
+      "bytes": 13904005,
+      "MiB": 13.26
+    }
+  },
+  "delta": {
+    "bytes": 19769472,
+    "MiB": 18.85,
+    "MB": 19.77,
+    "versusPrestageBytes": 17896735,
+    "versusPrestageMiB": 17.07
+  },
+  "runtime": {
+    "entries": [
+      {
+        "name": "lib/x86_64/libnode.so",
+        "method": "deflated",
+        "compressed": 18858140,
+        "uncompressed": 54165616
+      }
+    ],
+    "inApkCompressedBytes": 18858140,
+    "strippedBytes": 54165616
+  },
+  "analyzerJs": {
+    "entries": [
+      {
+        "name": "assets/local-analyzer/analyzer.mjs",
+        "method": "deflated",
+        "compressed": 420511,
+        "uncompressed": 1410977
+      },
+      {
+        "name": "assets/local-analyzer/main.mjs",
+        "method": "deflated",
+        "compressed": 231,
+        "uncompressed": 372
+      }
+    ],
+    "bytes": 1411349,
+    "inApkCompressedBytes": 420742
+  },
+  "otherNew": {
+    "entries": [
+      {
+        "name": "lib/x86_64/libbuildapp_node_bridge.so",
+        "method": "deflated",
+        "compressed": 29799,
+        "uncompressed": 72088
+      },
+      {
+        "name": "lib/x86_64/libc++_shared.so",
+        "method": "deflated",
+        "compressed": 459698,
+        "uncompressed": 1252080
+      },
+      {
+        "name": "assets/local-analyzer/manifest.json",
+        "method": "deflated",
+        "compressed": 269,
+        "uncompressed": 466
+      }
+    ],
+    "bytes": 1324634,
+    "inApkCompressedBytes": 489766
+  },
+  "addedEntriesCompressedTotal": 19768648
+}

@@ -96,11 +96,19 @@ describe('1. the analyzer the APK ships is the production pipeline', () => {
     }
   })
 
-  it('carries no module of its own beyond the thin entry, program and wiring', () => {
+  it('carries no module of its own beyond the thin entry, program, wiring and the text adapter', () => {
     const own = inputs.filter((p) => p.startsWith('apps/local-analyzer/')).sort()
-    expect(own).toEqual(['apps/local-analyzer/src/analyzer.ts', 'apps/local-analyzer/src/local.ts', 'apps/local-analyzer/src/memory.ts', 'apps/local-analyzer/src/program.ts', 'apps/local-analyzer/src/wiring.ts'])
-    // and those are small: the analyzer is everything else
-    const ownBytes = own.reduce((a, p) => a + (bytesByInput[p] ?? 0), 0)
+    expect(own).toEqual([
+      'apps/local-analyzer/src/analyzer.ts',
+      'apps/local-analyzer/src/local.ts',
+      'apps/local-analyzer/src/memory.ts',
+      'apps/local-analyzer/src/program.ts',
+      'apps/local-analyzer/src/text-tables.ts',
+      'apps/local-analyzer/src/text.ts',
+      'apps/local-analyzer/src/wiring.ts',
+    ])
+    // and that code is small: the analyzer is everything else (text-tables.ts is generated data, held to ICU by test/text.test.ts)
+    const ownBytes = own.filter((p) => !p.endsWith('text-tables.ts')).reduce((a, p) => a + (bytesByInput[p] ?? 0), 0)
     const total = Object.values(bytesByInput).reduce((a, b) => a + b, 0)
     expect(ownBytes / total).toBeLessThan(0.02)
   })
@@ -198,6 +206,37 @@ describe('the Android build ships exactly this bundle, and the fixture only in t
   it('runs the analyzer in a separate, non-exported process', () => {
     const manifest = readFileSync(join(ANDROID, 'app/src/main/AndroidManifest.xml'), 'utf8')
     expect(manifest).toMatch(/android:name="\.analyzer\.local\.LocalAnalyzerService"\s+android:exported="false"\s+android:process=":analyzer"/)
+  })
+})
+
+describe('the phone’s runtime has no ICU: the analyzer uses nothing of ICU the adapter does not reproduce', () => {
+  // nodejs-mobile builds Android Node with --with-intl=none; src/text.ts reproduces exactly
+  // localeCompare(other) under CLDR root and normalize('NFD'), and nothing else
+  const packagesCode = ['analysis-service', 'source-common', 'source-cv', 'source-package', 'source-observations', 'source-analyzer', 'source-vision', 'source-metrics', 'image-metrology', 'reconstruction', 'commands', 'model', 'geometry', 'mobile-scene']
+    .flatMap((p) => filesUnder(join(ROOT, 'packages', p, 'src'), /\.ts$/))
+    .filter((f) => !/\.test\.ts$/.test(f))
+
+  it('no Intl, no toLocale*, no localeCompare with a locale or options, no normalisation form but NFD', () => {
+    const offenders: string[] = []
+    for (const file of packagesCode) {
+      const code = readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' ')
+      for (const [what, re] of [
+        ['Intl', /\bIntl\./],
+        ['toLocale*', /\.toLocale[A-Za-z]*\(/],
+        ['localeCompare with a locale or options', /\.localeCompare\([^()]*(\([^()]*\))?[^()]*,/],
+        ['normalize to a form other than NFD', /\.normalize\(\s*['"](NFC|NFKC|NFKD)['"]/],
+        ['a Unicode property escape', /\\p\{/],
+      ] as const) {
+        if (re.test(code)) offenders.push(`${relative(ROOT, file)}: ${what}`)
+      }
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the program installs the adapter before any analyzer code runs', () => {
+    const program = readFileSync(join(LOCAL, 'src/program.ts'), 'utf8')
+    expect(program.indexOf('installTextAdapter()')).toBeGreaterThan(0)
+    expect(program.indexOf('installTextAdapter()')).toBeLessThan(program.indexOf('runLocalAnalysis({'))
   })
 })
 
