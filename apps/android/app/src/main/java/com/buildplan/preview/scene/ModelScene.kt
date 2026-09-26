@@ -106,6 +106,7 @@ enum class SemanticGroup {
     WALL_MAIN,
     WALL_SECONDARY,
     WALL_INTERIOR,
+    WALL_CLADDING,
     ROOF_MAIN,
     FLAT_ROOF,
     ROOF_TRIM,
@@ -129,6 +130,7 @@ enum class SemanticGroup {
         private val INTERIOR_MATERIAL = Regex("PARTITION|INTERIOR")
         private val FLAT_MATERIAL = Regex("MEMBRANE|FLAT")
         private val GLASS_MATERIAL = Regex("GLASS|GLAZ")
+        private val CLADDING_MATERIAL = Regex("TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR")
 
         /** The group a bundle names, or null for none or a name this build does not know. */
         fun of(raw: String?): SemanticGroup? = raw?.let { byName[it] }
@@ -171,8 +173,8 @@ enum class SemanticGroup {
                 GeometryPart.ROOFLIGHT_FRAME -> ROOFLIGHT
                 GeometryPart.STAIR_STEP, GeometryPart.STAIR_PLACEHOLDER -> STAIR
                 GeometryPart.ROOM_FLOOR -> ROOM
-                // A finish region is a secondary surface of its wall: it reads as a band.
-                GeometryPart.SURFACE_REGION -> WALL_SECONDARY
+                // A finish region is a secondary surface of its wall: it reads as a band; in timber, as cladding.
+                GeometryPart.SURFACE_REGION -> if (CLADDING_MATERIAL.containsMatchIn(material)) WALL_CLADDING else WALL_SECONDARY
                 // Free members — portal heads, boards not compiled with a roof — frame the facade.
                 GeometryPart.LINEAR_SOLID -> FACADE_FRAME
                 GeometryPart.OTHER -> OTHER

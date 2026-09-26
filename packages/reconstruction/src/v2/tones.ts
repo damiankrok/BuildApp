@@ -174,3 +174,93 @@ export function readFrameTones(returns: readonly ReturnWallV2[], views: Readonly
   }
   return out
 }
+
+export type FinishRun = { from: number; to: number; tone: 'LIGHT' | 'MID' | 'DARK' | 'WARM'; share: number; samples: number }
+
+/**
+ * The finishes along one face, as runs: a recessed wall in timber for part of
+ * its length and in dark render for the rest reads as two runs, not one
+ * averaged tone. Each column of the face (between `y`) is classed on its own —
+ * WARM when most of its samples are warm-hued (timber), otherwise the family
+ * of its median brightness relative to the render's white — and neighbouring
+ * columns of one class join into a run. Columns inside `skip` (the openings in
+ * the face: glass is not the wall) are not read, and a run continues across
+ * them when the same class stands on both sides. Runs shorter than `minRunM`
+ * are absorbed by the longer neighbour: a drainpipe is not a finish.
+ */
+export function readFinishRuns(view: ElevationFrameV2, raster: Raster, along: [number, number], y: [number, number], skip: ReadonlyArray<[number, number]> = [], minRunM = 0.3): FinishRun[] {
+  const white = whitePointOf(raster)
+  const mpp = view.registration.metresPerPixelU
+  const step = Math.max(mpp * 2, 0.02)
+  type Col = { a: number; tone: FinishRun['tone']; share: number; n: number }
+  const cols: Col[] = []
+  for (let a = along[0] + step / 2; a < along[1]; a += step) {
+    if (skip.some(([s0, s1]) => a > s0 - 0.05 && a < s1 + 0.05)) continue
+    const px = Math.round(view.pxOf(a))
+    const rels: number[] = []
+    let warm = 0
+    for (let yy = y[0]; yy <= y[1]; yy += mpp * 2) {
+      const rgb = rgbAt(raster, px, Math.round(view.pyOf(yy)))
+      const t = toneClass(rgb)
+      if (t === 'GREEN' || t === 'COOL') continue
+      if (t === 'WARM') warm += 1
+      rels.push(Math.min(1, (rgb[0] + rgb[1] + rgb[2]) / 3 / white))
+    }
+    if (rels.length < 4) continue
+    if (warm / rels.length > 0.5) {
+      cols.push({ a, tone: 'WARM', share: warm / rels.length, n: rels.length })
+      continue
+    }
+    const f = familyOf(rels)
+    cols.push({ a, tone: f.tone, share: f.share, n: rels.length })
+  }
+  if (cols.length === 0) return []
+  // A finish is what most columns within 0.2 m read: the joints of a boarded
+  // wall, a downpipe or a shadow line are single columns and do not split it.
+  const smoothed = cols.map((c) => {
+    const votes = new Map<FinishRun['tone'], number>()
+    for (const o of cols) if (Math.abs(o.a - c.a) <= 0.2) votes.set(o.tone, (votes.get(o.tone) ?? 0) + 1)
+    const [tone] = [...votes].sort((p, q) => q[1] - p[1] || (p[0] === c.tone ? -1 : q[0] === c.tone ? 1 : 0))[0]
+    return { ...c, tone }
+  })
+  cols.splice(0, cols.length, ...smoothed)
+  // Join neighbouring columns of one class; a skipped stretch joins when both sides agree.
+  let runs: FinishRun[] = []
+  for (const c of cols) {
+    const last = runs[runs.length - 1]
+    if (last && last.tone === c.tone) {
+      last.to = c.a + step / 2
+      last.share = (last.share * last.samples + c.share * c.n) / (last.samples + c.n)
+      last.samples += c.n
+    } else {
+      // Across a skipped stretch (an opening) between two finishes, the boundary is its middle.
+      const from = last ? (c.a - step / 2 - last.to > step ? (last.to + c.a - step / 2) / 2 : last.to) : along[0]
+      if (last) last.to = from
+      runs.push({ from, to: c.a + step / 2, tone: c.tone, share: c.share, samples: c.n })
+    }
+  }
+  // Absorb short runs into the longer neighbour, shortest first, until none is left.
+  for (;;) {
+    const i = runs.findIndex((r) => r.to - r.from < minRunM)
+    if (i < 0 || runs.length === 1) break
+    const prev = runs[i - 1]
+    const next = runs[i + 1]
+    const into = !prev ? next : !next ? prev : prev.to - prev.from >= next.to - next.from ? prev : next
+    into.from = Math.min(into.from, runs[i].from)
+    into.to = Math.max(into.to, runs[i].to)
+    runs.splice(i, 1)
+    // Neighbours that now agree become one run.
+    const merged: FinishRun[] = []
+    for (const r of runs) {
+      const last = merged[merged.length - 1]
+      if (last && last.tone === r.tone) {
+        last.to = r.to
+        last.samples += r.samples
+      } else merged.push({ ...r })
+    }
+    runs = merged
+  }
+  runs[0].from = along[0]
+  runs[runs.length - 1].to = along[1]
+  return runs.map((r) => ({ ...r, from: round6(r.from), to: round6(r.to), share: round6(r.share) }))
+}

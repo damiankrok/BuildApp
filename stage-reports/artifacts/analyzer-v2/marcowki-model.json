@@ -20,13 +20,13 @@
     },
     {
       "evidence": {
-        "interpretation": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m); ends: wall at 0.66, wall at 7.27",
+        "interpretation": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m); ends: wall at 0.65, wall at 7.25",
         "status": "VISUAL_INFERRED"
       },
       "footprint": {
-        "maxX": 7.265776,
+        "maxX": 7.254815,
         "maxZ": 14.601283,
-        "minX": 0.66065,
+        "minX": 0.645275,
         "minZ": 13.601283
       },
       "id": "balcony-rear-1",
@@ -785,7 +785,7 @@
     {
       "baseOffset": 0,
       "end": {
-        "x": 7.240776,
+        "x": 7.229815,
         "z": 14.551283
       },
       "evidence": {
@@ -800,7 +800,7 @@
       "materialId": "mat-glass",
       "postSpacing": 1,
       "start": {
-        "x": 0.68565,
+        "x": 0.670275,
         "z": 14.551283
       }
     }
@@ -1966,16 +1966,48 @@
   "surfaceRegions": [
     {
       "evidence": {
-        "interpretation": "a mid finish region read on the render: colour, not geometry",
+        "interpretation": "a dark finish region read on the render: colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w0",
+      "id": "finish-front-319",
+      "materialId": "mat-render-dark",
+      "rect": {
+        "a0": 3.1886,
+        "a1": 7.9,
+        "b0": 0,
+        "b1": 3.06
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a warm finish region read on the render: colour, not geometry",
         "status": "VISUAL_INFERRED"
       },
       "face": "OUTER",
       "hostId": "ring-main-0-w0",
       "id": "finish-front-66",
-      "materialId": "mat-wall",
+      "materialId": "mat-timber",
       "rect": {
-        "a0": 0.66065,
-        "a1": 7.9,
+        "a0": 0.645275,
+        "a1": 3.1886,
+        "b0": 0,
+        "b1": 3.06
+      }
+    },
+    {
+      "evidence": {
+        "interpretation": "a warm finish region read on the render: colour, not geometry",
+        "status": "VISUAL_INFERRED"
+      },
+      "face": "OUTER",
+      "hostId": "ring-main-0-w2",
+      "id": "finish-rear-66",
+      "materialId": "mat-timber",
+      "rect": {
+        "a0": 0.645185,
+        "a1": 7.254725,
         "b0": 0,
         "b1": 3.06
       }
@@ -2000,19 +2032,19 @@
       "materialId": "mat-terrace",
       "polygon": [
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 0
         },
         {
-          "x": 11.416032,
+          "x": 11.415776,
           "z": 0
         },
         {
-          "x": 11.416032,
+          "x": 11.415776,
           "z": 0.991283
         },
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 0.991283
         }
       ],
@@ -2037,35 +2069,35 @@
       "materialId": "mat-terrace",
       "polygon": [
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 13.601283
         },
         {
-          "x": 7.26715,
+          "x": 7.254815,
           "z": 13.601283
         },
         {
-          "x": 7.26715,
+          "x": 7.254815,
           "z": 14.601283
         },
         {
-          "x": 7.890603,
+          "x": 7.9,
           "z": 14.601283
         },
         {
-          "x": 7.890603,
+          "x": 7.9,
           "z": 16.708361
         },
         {
-          "x": 0.009397,
+          "x": 0,
           "z": 16.708361
         },
         {
-          "x": 0.009397,
+          "x": 0,
           "z": 14.601283
         },
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 14.601283
         }
       ],
@@ -2842,7 +2874,7 @@
         "x": 0,
         "z": 0.991283
       },
-      "thickness": 0.66065
+      "thickness": 0.645275
     },
     {
       "baseOffset": 0,
@@ -2888,7 +2920,7 @@
         "x": 0,
         "z": 0.991283
       },
-      "thickness": 0.6299,
+      "thickness": 0.645275,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-main"
@@ -2938,7 +2970,7 @@
         "x": 0,
         "z": 14.601283
       },
-      "thickness": 0.66065
+      "thickness": 0.645275
     },
     {
       "baseOffset": 0,
@@ -2959,7 +2991,7 @@
         "x": 7.9,
         "z": 13.601283
       },
-      "thickness": 0.634224
+      "thickness": 0.645185
     },
     {
       "baseOffset": 0,
@@ -2980,7 +3012,7 @@
         "x": 0,
         "z": 14.601283
       },
-      "thickness": 0.6299,
+      "thickness": 0.645275,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-main"
@@ -3005,7 +3037,7 @@
         "x": 7.9,
         "z": 13.601283
       },
-      "thickness": 0.656146,
+      "thickness": 0.645185,
       "topProfile": {
         "kind": "FOLLOW_ROOF",
         "roofId": "roof-main"

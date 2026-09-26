@@ -237,6 +237,7 @@ object ArchitecturalPalette {
         SemanticGroup.WALL_MAIN to BundleGroupAppearance(color = "#e3ddd3", opacity = null, roughness = 0.95, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.WALL_SECONDARY to BundleGroupAppearance(color = "#8f8b85", opacity = null, roughness = 0.95, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.WALL_INTERIOR to BundleGroupAppearance(color = "#d3cec3", opacity = null, roughness = 0.95, metalness = 0.0, edge = "SOFT"),
+        SemanticGroup.WALL_CLADDING to BundleGroupAppearance(color = "#e2c7a2", opacity = null, roughness = 0.8, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.ROOF_MAIN to BundleGroupAppearance(color = "#423e3b", opacity = null, roughness = 0.85, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.FLAT_ROOF to BundleGroupAppearance(color = "#69645f", opacity = null, roughness = 0.85, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.ROOF_TRIM to BundleGroupAppearance(color = "#f3eee6", opacity = null, roughness = 0.85, metalness = 0.0, edge = "SOFT"),

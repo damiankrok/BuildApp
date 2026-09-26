@@ -52,6 +52,21 @@ jobs:
         run: npm run reconstruct:no-benchmark
       - name: Evaluate the v2 candidate against source truth v2
         run: npm run evaluate:v2
+      - name: Exterior closure audit (candidate under review against the one it replaces)
+        # Fails on any EXTERIOR closure error of the candidate under review:
+        # shared volume, a face drawn twice, a crack between members that
+        # meet, a free railing end, a terrace off its datum.
+        run: npm run audit:exterior
+      - name: Upload exterior closure reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exterior-closure
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            stage-reports/artifacts/exterior-closure/**
+            stage-reports/artifacts/analyzer-v2/marcowki-exterior-closure-evaluation.*
       - name: Upload analyzer-v2 artifacts
         if: always()
         uses: actions/upload-artifact@v4

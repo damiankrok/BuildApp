@@ -854,9 +854,23 @@
       "objectId": "finish-front-66",
       "objectKind": "surfaceRegions",
       "solvedFeatureId": "feat-finish-front-66"
+    },
+    {
+      "commandIndex": 201,
+      "id": "bind-finish-front-319",
+      "objectId": "finish-front-319",
+      "objectKind": "surfaceRegions",
+      "solvedFeatureId": "feat-finish-front-319"
+    },
+    {
+      "commandIndex": 203,
+      "id": "bind-finish-rear-66",
+      "objectId": "finish-rear-66",
+      "objectKind": "surfaceRegions",
+      "solvedFeatureId": "feat-finish-rear-66"
     }
   ],
-  "contentHash": "d098761242dc9e231abfb6d8c4cd9da9ff6a59a49a7f9726f1365b79a2184de8",
+  "contentHash": "efdd3652a8f765c52c4761eea98000aaab3fafc54e33ec79ff8f99b2b398622e",
   "hypotheses": [
     {
       "confidence": 0.7,
@@ -3987,7 +4001,31 @@
         "sight-finish-tone-of-the-reces-462d58b4-31fc6696d6"
       ],
       "storeyIndex": 0,
-      "why": "the recessed wall reads mid on 45 % of its area"
+      "why": "the recessed wall reads warm from 0.66 to 3.19 (99 % of the columns' samples agree)"
+    },
+    {
+      "confidence": 0.7,
+      "family": "SURFACE_REGION",
+      "id": "hyp-finish-front-319",
+      "measurementIds": [],
+      "parameters": {},
+      "sightingIds": [
+        "sight-finish-tone-of-the-reces-462d58b4-31fc6696d6"
+      ],
+      "storeyIndex": 0,
+      "why": "the recessed wall reads dark from 3.19 to 7.90 (100 % of the columns' samples agree)"
+    },
+    {
+      "confidence": 0.7,
+      "family": "SURFACE_REGION",
+      "id": "hyp-finish-rear-66",
+      "measurementIds": [],
+      "parameters": {},
+      "sightingIds": [
+        "sight-finish-tone-of-the-reces-a4552876-f79db86bd2"
+      ],
+      "storeyIndex": 0,
+      "why": "the recessed wall reads warm from 0.66 to 7.27 (95 % of the columns' samples agree)"
     }
   ],
   "id": "feature-graph-marcowki",
@@ -5091,9 +5129,18 @@
     },
     {
       "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-fron-ee81d52db6",
-      "confidence": 0.45,
+      "confidence": 0.988021,
       "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
       "id": "sight-finish-tone-of-the-reces-462d58b4-31fc6696d6",
+      "observationIds": [],
+      "viewFamily": "ELEVATION",
+      "what": "finish tone of the recessed wall"
+    },
+    {
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e",
+      "confidence": 0.951676,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+      "id": "sight-finish-tone-of-the-reces-a4552876-f79db86bd2",
       "observationIds": [],
       "viewFamily": "ELEVATION",
       "what": "finish tone of the recessed wall"
@@ -9525,7 +9572,49 @@
       "storeyIndex": 0,
       "uncertainty": {},
       "unresolvedProperties": [],
-      "why": "the recessed wall reads mid on 45 % of its area"
+      "why": "the recessed wall reads warm from 0.66 to 3.19 (99 % of the columns' samples agree)"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "hypothesisId": "hyp-finish-front-319",
+      "id": "feat-finish-front-319",
+      "parameterProvenance": {},
+      "parameters": {},
+      "provenance": "VISUAL_SEMANTIC",
+      "quality": "L0",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "storeyIndex": 0,
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the recessed wall reads dark from 3.19 to 7.90 (100 % of the columns' samples agree)"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "hypothesisId": "hyp-finish-rear-66",
+      "id": "feat-finish-rear-66",
+      "parameterProvenance": {},
+      "parameters": {},
+      "provenance": "VISUAL_SEMANTIC",
+      "quality": "L0",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "storeyIndex": 0,
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the recessed wall reads warm from 0.66 to 7.27 (95 % of the columns' samples agree)"
     }
   ],
   "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b"

@@ -113,6 +113,7 @@ type SemanticGroup =
   | 'WALL_MAIN'
   | 'WALL_SECONDARY'
   | 'WALL_INTERIOR'
+  | 'WALL_CLADDING'
   | 'ROOF_MAIN'
   | 'FLAT_ROOF'
   | 'ROOF_TRIM'
@@ -138,6 +139,7 @@ const ARCHITECTURAL: Record<SemanticGroup, GroupAppearance> = {
   WALL_MAIN: { color: '#e3ddd3', roughness: 0.95, metalness: 0, edge: 'SOFT' },
   WALL_SECONDARY: { color: '#8f8b85', roughness: 0.95, metalness: 0, edge: 'SOFT' },
   WALL_INTERIOR: { color: '#d3cec3', roughness: 0.95, metalness: 0, edge: 'SOFT' },
+  WALL_CLADDING: { color: '#e2c7a2', roughness: 0.8, metalness: 0, edge: 'SOFT' },
   ROOF_MAIN: { color: '#423e3b', roughness: 0.85, metalness: 0, edge: 'SOFT' },
   FLAT_ROOF: { color: '#69645f', roughness: 0.85, metalness: 0, edge: 'SOFT' },
   ROOF_TRIM: { color: '#f3eee6', roughness: 0.85, metalness: 0, edge: 'SOFT' },
@@ -228,7 +230,7 @@ function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, obj
     case 'ROOM_FLOOR':
       return 'ROOM'
     case 'SURFACE_REGION':
-      return 'WALL_SECONDARY'
+      return /TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR/.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
     case 'LINEAR_SOLID':
       return 'FACADE_FRAME'
     default:
@@ -256,21 +258,13 @@ export function sceneFactsOf(model: CanonicalBuildingModel): SceneFacts {
   for (const r of model.roofs) facts.roofKind.set(r.id, r.kind)
   for (const b of model.balconies) facts.balconyKind.set(b.id, b.kind)
   for (const r of model.railings) facts.railingInfill.set(r.id, r.infill)
-  const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR' && w.materialId)
+  const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
+  const hasRings = inRing.size > 0
+  const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR')
   const area = new Map<string, number>()
-  for (const w of exterior) area.set(w.materialId as string, (area.get(w.materialId as string) ?? 0) + Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z) * w.height)
-  if (area.size === 0) return facts
-  const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0]
-  const members = new Set<string>()
-  for (const r of model.roofs) {
-    if (r.edgeMembers?.verge?.materialId) members.add(r.edgeMembers.verge.materialId)
-    if (r.edgeMembers?.fascia?.materialId) members.add(r.edgeMembers.fascia.materialId)
-  }
-  for (const l of model.linearSolids) if (l.materialId) members.add(l.materialId)
-  for (const w of exterior) {
-    const m = w.materialId as string
-    facts.finish.set(w.id, m === dominant ? 'PRIMARY' : members.has(m) ? 'MEMBER' : 'SECONDARY')
-  }
+  for (const w of exterior) if (w.materialId && (!hasRings || inRing.has(w.id))) area.set(w.materialId, (area.get(w.materialId) ?? 0) + Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z) * w.height)
+  const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]?.[0]
+  for (const w of exterior) facts.finish.set(w.id, hasRings && !inRing.has(w.id) ? 'MEMBER' : w.materialId === undefined || w.materialId === dominant ? 'PRIMARY' : 'SECONDARY')
   return facts
 }
 
@@ -312,6 +306,14 @@ const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGroup]> = 
   ['WALL_SECONDARY', 'BALCONY_SLAB'],
   ['WALL_SECONDARY', 'WINDOW_FRAME'],
   ['WALL_SECONDARY', 'GARAGE_DOOR'],
+  ['WALL_MAIN', 'WALL_CLADDING'],
+  ['WALL_SECONDARY', 'WALL_CLADDING'],
+  ['WALL_CLADDING', 'SLAB'],
+  ['WALL_CLADDING', 'TERRACE_SURFACE'],
+  ['WALL_CLADDING', 'BALCONY_SLAB'],
+  ['WALL_CLADDING', 'DOOR'],
+  ['WALL_CLADDING', 'WINDOW_FRAME'],
+  ['WALL_CLADDING', 'FACADE_FRAME'],
   ['WALL_INTERIOR', 'SLAB'],
   ['WALL_INTERIOR', 'DOOR'],
   ['WALL_INTERIOR', 'STAIR'],

@@ -151,6 +151,7 @@
         {
           "at": 3.310378,
           "kind": "FREE",
+          "turns": true,
           "why": "a free end; the plan draws a line across the zone at 3.31 (100 % of its depth): the balustrade turning to the wall"
         },
         {
@@ -199,13 +200,13 @@
       "ends": [
         {
           "againstId": "return-rear-0-0",
-          "at": 0.66065,
+          "at": 0.645275,
           "kind": "WALL",
           "why": "against the face of return-rear-0-0, which stands beside the slab"
         },
         {
           "againstId": "return-rear-0-1",
-          "at": 7.265776,
+          "at": 7.254815,
           "kind": "WALL",
           "why": "against the face of return-rear-0-1, which stands beside the slab"
         }
@@ -240,8 +241,8 @@
       "thicknessM": 0.538403,
       "topY": 3.06,
       "why": "a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)",
-      "x0": 0.66065,
-      "x1": 7.265776,
+      "x0": 0.645275,
+      "x1": 7.254815,
       "z0": 13.601283,
       "z1": 14.601283
     }
@@ -647,7 +648,7 @@
       {
         "depthM": 1,
         "end": {
-          "x": 7.265776,
+          "x": 7.254815,
           "y": 3.06,
           "z": 14.601283
         },
@@ -656,7 +657,7 @@
         "id": "balcony-rear-1",
         "kind": "BALCONY_SLAB",
         "start": {
-          "x": 0.66065,
+          "x": 0.645275,
           "y": 3.06,
           "z": 14.601283
         },
@@ -710,7 +711,7 @@
       },
       {
         "end": {
-          "x": 7.240776,
+          "x": 7.229815,
           "y": 3.06,
           "z": 14.551283
         },
@@ -720,7 +721,7 @@
         "id": "railing-rear-1",
         "kind": "RAILING",
         "start": {
-          "x": 0.68565,
+          "x": 0.670275,
           "y": 3.06,
           "z": 14.551283
         },
@@ -731,7 +732,7 @@
       },
       {
         "end": {
-          "x": 11.416032,
+          "x": 11.415776,
           "y": 0,
           "z": 0
         },
@@ -740,7 +741,7 @@
         "id": "terrace-front-66",
         "kind": "TERRACE",
         "start": {
-          "x": 0.66065,
+          "x": 0.645275,
           "y": 0,
           "z": 0
         },
@@ -751,7 +752,7 @@
       },
       {
         "end": {
-          "x": 7.26715,
+          "x": 7.254815,
           "y": 0,
           "z": 13.601283
         },
@@ -760,7 +761,7 @@
         "id": "terrace-rear-66",
         "kind": "TERRACE",
         "start": {
-          "x": 0.66065,
+          "x": 0.645275,
           "y": 0,
           "z": 13.601283
         },
@@ -773,16 +774,16 @@
   },
   "frameTones": [
     {
-      "share": 0.671431,
+      "share": 0.670229,
       "side": "FRONT",
       "tone": "LIGHT",
-      "why": "the median of 6367 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
+      "why": "the median of 6362 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
     },
     {
-      "share": 0.939044,
+      "share": 0.938596,
       "side": "REAR",
       "tone": "LIGHT",
-      "why": "the median of 6316 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
+      "why": "the median of 6270 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
     }
   ],
   "interior": [
@@ -3613,7 +3614,7 @@
     {
       "baseY": 3.06,
       "end": {
-        "x": 7.240776,
+        "x": 7.229815,
         "z": 14.551283
       },
       "featureId": "feat-railing-rear-1",
@@ -3622,7 +3623,7 @@
       "id": "railing-rear-1",
       "provenance": "IMAGE_METRIC_REGISTERED",
       "start": {
-        "x": 0.68565,
+        "x": 0.670275,
         "z": 14.551283
       },
       "storeyIndex": 1,
@@ -3823,7 +3824,7 @@
     {
       "alongInterval": [
         0,
-        0.66065
+        0.645275
       ],
       "end": {
         "x": 0,
@@ -3839,7 +3840,7 @@
         "z": 0.991283
       },
       "storeyIndex": 0,
-      "thicknessM": 0.66065,
+      "thicknessM": 0.645275,
       "why": "a 0.66 m return standing in the 0.99 m front zone on the storey 0 plan"
     },
     {
@@ -3867,7 +3868,7 @@
     {
       "alongInterval": [
         0,
-        0.6299
+        0.645275
       ],
       "end": {
         "x": 0,
@@ -3883,7 +3884,7 @@
         "z": 0.991283
       },
       "storeyIndex": 1,
-      "thicknessM": 0.6299,
+      "thicknessM": 0.645275,
       "why": "a 0.63 m return standing in the 0.99 m front zone on the storey 1 plan"
     },
     {
@@ -3911,7 +3912,7 @@
     {
       "alongInterval": [
         0,
-        0.66065
+        0.645275
       ],
       "end": {
         "x": 0,
@@ -3927,12 +3928,12 @@
         "z": 14.601283
       },
       "storeyIndex": 0,
-      "thicknessM": 0.66065,
+      "thicknessM": 0.645275,
       "why": "a 0.66 m return standing in the 1.00 m rear zone on the storey 0 plan"
     },
     {
       "alongInterval": [
-        7.265776,
+        7.254815,
         7.9
       ],
       "end": {
@@ -3949,13 +3950,13 @@
         "z": 13.601283
       },
       "storeyIndex": 0,
-      "thicknessM": 0.634224,
+      "thicknessM": 0.645185,
       "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 0 plan"
     },
     {
       "alongInterval": [
         0,
-        0.6299
+        0.645275
       ],
       "end": {
         "x": 0,
@@ -3971,12 +3972,12 @@
         "z": 14.601283
       },
       "storeyIndex": 1,
-      "thicknessM": 0.6299,
+      "thicknessM": 0.645275,
       "why": "a 0.63 m return standing in the 1.00 m rear zone on the storey 1 plan"
     },
     {
       "alongInterval": [
-        7.243854,
+        7.254815,
         7.9
       ],
       "end": {
@@ -3993,7 +3994,7 @@
         "z": 13.601283
       },
       "storeyIndex": 1,
-      "thicknessM": 0.656146,
+      "thicknessM": 0.645185,
       "why": "a 0.66 m return standing in the 1.00 m rear zone on the storey 1 plan"
     }
   ],
@@ -4222,15 +4223,51 @@
   "surfaceRegions": [
     {
       "along": [
-        0.66065,
-        7.9
+        0.645275,
+        3.1886
       ],
       "featureId": "feat-finish-front-66",
       "id": "finish-front-66",
-      "tone": "MID",
+      "tone": "WARM",
       "wallRef": {
         "massId": "main",
         "side": "FRONT",
+        "storeyIndex": 0
+      },
+      "y": [
+        0,
+        3.06
+      ]
+    },
+    {
+      "along": [
+        3.1886,
+        7.9
+      ],
+      "featureId": "feat-finish-front-319",
+      "id": "finish-front-319",
+      "tone": "DARK",
+      "wallRef": {
+        "massId": "main",
+        "side": "FRONT",
+        "storeyIndex": 0
+      },
+      "y": [
+        0,
+        3.06
+      ]
+    },
+    {
+      "along": [
+        0.645275,
+        7.254815
+      ],
+      "featureId": "feat-finish-rear-66",
+      "id": "finish-rear-66",
+      "tone": "WARM",
+      "wallRef": {
+        "massId": "main",
+        "side": "REAR",
         "storeyIndex": 0
       },
       "y": [
@@ -4250,19 +4287,19 @@
       ],
       "polygon": [
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 0
         },
         {
-          "x": 11.416032,
+          "x": 11.415776,
           "z": 0
         },
         {
-          "x": 11.416032,
+          "x": 11.415776,
           "z": 0.991283
         },
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 0.991283
         }
       ],
@@ -4290,35 +4327,35 @@
       ],
       "polygon": [
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 13.601283
         },
         {
-          "x": 7.26715,
+          "x": 7.254815,
           "z": 13.601283
         },
         {
-          "x": 7.26715,
+          "x": 7.254815,
           "z": 14.601283
         },
         {
-          "x": 7.890603,
+          "x": 7.9,
           "z": 14.601283
         },
         {
-          "x": 7.890603,
+          "x": 7.9,
           "z": 16.708361
         },
         {
-          "x": 0.009397,
+          "x": 0,
           "z": 16.708361
         },
         {
-          "x": 0.009397,
+          "x": 0,
           "z": 14.601283
         },
         {
-          "x": 0.66065,
+          "x": 0.645275,
           "z": 14.601283
         }
       ],

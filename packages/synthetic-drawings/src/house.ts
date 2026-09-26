@@ -131,8 +131,12 @@ export type SyntheticRooflight = { slope: 'LOW' | 'HIGH'; along: number; width: 
 /** A return wall standing in the front zone, MODEL frame: wall-thick ink from the front wall face to the zone's mouth, with its west face at `x`. */
 export type SyntheticReturn = { storey: number; x: number; width?: number }
 
-/** A balcony slab's fascia on the front elevation, MODEL frame: a dark band under the storey's floor level across `x0`..`x1`, and a handrail line above it when `railingHeight` is given. */
-export type SyntheticBalcony = { storey: number; x0: number; x1: number; fasciaDepth: number; railingHeight?: number }
+/**
+ * A balcony slab's fascia on the front elevation, MODEL frame: a dark band under the storey's floor level across `x0`..`x1`, and a handrail line above it when `railingHeight` is given.
+ *
+ * `balustradeTurns` names the ends (LOW is `x0`, HIGH is `x1`) where the balustrade turns off the mouth and runs back to the wall. The plan of the slab's storey draws each one as a thin line across the front zone at that end, from the slab's front edge to the wall face; without it the plan draws nothing of the slab.
+ */
+export type SyntheticBalcony = { storey: number; x0: number; x1: number; fasciaDepth: number; railingHeight?: number; balustradeTurns?: Array<'LOW' | 'HIGH'> }
 
 export type SyntheticHouse = {
   name: string
@@ -623,6 +627,16 @@ function renderModelPlan(house: SyntheticHouse, options: SheetOptions & { storey
   for (const r of house.returns ?? []) {
     if (r.storey !== storeyIndex) continue
     fillM(r.x, 0, r.x + (r.width ?? T), za)
+  }
+
+  // Balustrades turning back to the wall: a thin line across the zone at each
+  // end a balcony names, from the slab's front edge to the wall face.
+  for (const b of house.balconies ?? []) {
+    if (b.storey !== storeyIndex) continue
+    for (const end of b.balustradeTurns ?? []) {
+      const x = end === 'LOW' ? b.x0 : b.x1
+      lineM(x, 0, x, za, o.lineWeight)
+    }
   }
 
   // Openings: a white gap with its reveal lines; a window also draws its glazing lines across the gap.

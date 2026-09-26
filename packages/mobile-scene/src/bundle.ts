@@ -59,34 +59,38 @@ export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): M
 }
 
 /**
- * Each exterior wall's finish relative to the others (see `ObjectFacts.finish`).
+ * Each exterior wall's role in the facade (see `ObjectFacts.finish`).
  *
- * The dominant exterior finish is the material covering the largest exterior
- * wall area (length × height, openings not subtracted: a finish is chosen
- * for a wall, not for what is left of it). Frame-member finishes are the
- * materials the model gives its frame members — roof verge and fascia
- * boards, free linear members. Nothing here reads a colour or a name.
+ * - MEMBER: an exterior wall that belongs to no wall ring, in a model that
+ *   has rings — a return, a fin, a jamb standing out of a body's envelope
+ *   to frame a recess. A body's envelope is its ring; what stands outside it
+ *   frames it.
+ * - PRIMARY: a ring wall carrying the building's dominant exterior finish,
+ *   the material covering the largest ring-wall area (length × height,
+ *   openings not subtracted: a finish is chosen for a wall, not for what is
+ *   left of it).
+ * - SECONDARY: a ring wall in any other finish — a garage in dark render
+ *   beside a white house.
+ * Nothing here reads a colour or a name. A model without rings has no
+ * members; its walls are PRIMARY or SECONDARY by finish alone.
  */
 export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNullable<ObjectFacts['finish']>> {
+  const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
+  const hasRings = inRing.size > 0
+  const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR')
+  const body = exterior.filter((w) => !hasRings || inRing.has(w.id))
   const area = new Map<string, number>()
-  const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR' && w.materialId)
-  for (const w of exterior) {
+  for (const w of body) {
+    if (!w.materialId) continue
     const length = Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z)
-    area.set(w.materialId as string, (area.get(w.materialId as string) ?? 0) + length * w.height)
+    area.set(w.materialId, (area.get(w.materialId) ?? 0) + length * w.height)
   }
+  const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]?.[0]
   const out = new Map<string, NonNullable<ObjectFacts['finish']>>()
-  if (area.size === 0) return out
-  const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0]
-  const members = new Set<string>()
-  for (const r of model.roofs) {
-    const e = r.edgeMembers
-    if (e?.verge?.materialId) members.add(e.verge.materialId)
-    if (e?.fascia?.materialId) members.add(e.fascia.materialId)
-  }
-  for (const l of model.linearSolids) if (l.materialId) members.add(l.materialId)
   for (const w of exterior) {
-    const m = w.materialId as string
-    out.set(w.id, m === dominant ? 'PRIMARY' : members.has(m) ? 'MEMBER' : 'SECONDARY')
+    if (hasRings && !inRing.has(w.id)) out.set(w.id, 'MEMBER')
+    else if (w.materialId === undefined || w.materialId === dominant) out.set(w.id, 'PRIMARY')
+    else out.set(w.id, 'SECONDARY')
   }
   return out
 }

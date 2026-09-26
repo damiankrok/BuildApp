@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { decodeImage } from '@buildapp/source-package'
-import { ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, ELMBRIDGE_ROOMS, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL, V2_FIXTURES } from '@buildapp/synthetic-drawings'
+import { ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, ELMBRIDGE_ROOMS, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL, LINDALE, V2_FIXTURES } from '@buildapp/synthetic-drawings'
 import type { SyntheticHouse } from '@buildapp/synthetic-drawings'
 import { reconstructV2, verifyReplay } from '../src/index.js'
 import type { ReconstructionV2Result } from '../src/index.js'
 import { buildFixture } from './pipeline.js'
 
 /**
- * §25: ten houses that exist only in `packages/synthetic-drawings`, one
+ * §25: eleven houses that exist only in `packages/synthetic-drawings`, one
  * theme each, through the v2 analyzer exactly as a published project goes
  * through it: PNG sheets in a source package, observed, measured, read.
  *
@@ -223,5 +223,64 @@ describe('§25 synthetic fixtures through the v2 analyzer', () => {
     expect(Math.abs(r.building.railings[0].heightM - (spec?.railingHeight ?? 0))).toBeLessThan(0.1)
     expect(r.building.mainRoof?.coversZones).toBe(true)
     expectOpenings(KELSALL, r)
+  }, 60_000)
+
+  it('11 Lindale: a free slab end turns its balustrade back to the wall where the plan draws the turn', async () => {
+    const r = await run(LINDALE)
+    const spec = LINDALE.balconies?.[0]
+    // One return on the upper storey, at the high end; nothing on the ground storey to stop the slab at the low end.
+    const upper = r.building.recesses.find((x) => x.side === 'FRONT' && x.storeyIndex === 1)
+    expect(upper?.returns).toHaveLength(1)
+    expect(r.building.returns.filter((x) => x.storeyIndex === 0)).toEqual([])
+    const ret = r.building.returns.find((x) => x.side === 'FRONT' && x.storeyIndex === 1)
+    expect(ret).toBeDefined()
+    const balcony = r.building.balconies.find((b) => b.kind === 'BALCONY' && b.side === 'FRONT' && b.storeyIndex === 1)
+    expect(balcony?.ends).toBeDefined()
+    const [low, high] = balcony?.ends ?? []
+    // The low end is free, at the line the upper plan draws across the zone.
+    expect(low?.kind).toBe('FREE')
+    expect(low?.turns).toBe(true)
+    expect(high?.turns).toBeUndefined()
+    expect(Math.abs((low?.at ?? 0) - (spec?.x0 ?? 0))).toBeLessThan(0.1)
+    expect(Math.abs((balcony?.x0 ?? 0) - (spec?.x0 ?? 0))).toBeLessThan(0.1)
+    // The high end stops against the return (or runs on under it).
+    expect(['WALL', 'CARRIES']).toContain(high?.kind)
+    expect(high?.againstId).toBe(ret?.id)
+    if (high?.kind === 'WALL') expect(Math.abs((high?.at ?? 0) - (spec?.x1 ?? 0))).toBeLessThan(0.1)
+    // One railing of two runs: from the wall out to the mouth at the free end, then along the mouth to the return.
+    expect(r.building.railings).toHaveLength(1)
+    const railing = r.building.railings[0]
+    expect(Math.abs(railing.heightM - (spec?.railingHeight ?? 0))).toBeLessThan(0.1)
+    const path = railing.path ?? []
+    expect(path).toHaveLength(3)
+    const [back, corner, far] = path
+    expect(Math.abs(back.x - corner.x)).toBeLessThan(1e-6)
+    expect(Math.abs(corner.x - (spec?.x0 ?? 0))).toBeLessThan(0.1)
+    expect(back.z).toBeGreaterThan(corner.z)
+    expect(Math.abs(back.z - (upper?.backAt ?? 0))).toBeLessThan(0.1)
+    expect(Math.abs(corner.z - (upper?.mouthAt ?? 0))).toBeLessThan(0.1)
+    expect(Math.abs(far.z - corner.z)).toBeLessThan(1e-6)
+    expect(Math.abs(far.x - (spec?.x1 ?? 0))).toBeLessThan(0.1)
+    // The turn is the plan's: `turns` is not carried on the building's end conditions, so it is read where the closure writes it.
+    const node = r.building.facadeGraph.nodes.find((n) => n.id === railing.id)
+    expect(node?.termination.start).toBe('TURNS')
+    expect(r.building.facadeGraph.edges.filter((e) => e.kind === 'TURNS_AT' && e.from === railing.id)).toHaveLength(1)
+    expect(r.closure.some((n) => n.subject === railing.id && /2 runs, 1 turn/.test(n.what))).toBe(true)
+    expect(r.building.mainRoof?.coversZones).toBe(true)
+    expectOpenings(LINDALE, r)
+  }, 60_000)
+
+  it('11 Lindale, control: the same house with no turn drawn on the plan stops its railing straight at the free end', async () => {
+    const plain: SyntheticHouse = { ...LINDALE, name: 'Lindale-plain', balconies: (LINDALE.balconies ?? []).map(({ balustradeTurns: _drawn, ...b }) => b) }
+    expect(plain.balconies?.every((b) => b.balustradeTurns === undefined)).toBe(true)
+    const r = await run(plain)
+    const balcony = r.building.balconies.find((b) => b.kind === 'BALCONY' && b.side === 'FRONT' && b.storeyIndex === 1)
+    expect(balcony?.ends?.[0].kind).toBe('FREE')
+    expect(Math.abs((balcony?.ends?.[0].at ?? 0) - (LINDALE.balconies?.[0].x0 ?? 0))).toBeLessThan(0.1)
+    expect(r.building.railings).toHaveLength(1)
+    const railing = r.building.railings[0]
+    expect(railing.path === undefined || railing.path.length === 2).toBe(true)
+    expect(r.building.facadeGraph.edges.filter((e) => e.kind === 'TURNS_AT')).toEqual([])
+    expect(r.closure.some((n) => n.subject === railing.id && /1 run, 0 turns/.test(n.what))).toBe(true)
   }, 60_000)
 })

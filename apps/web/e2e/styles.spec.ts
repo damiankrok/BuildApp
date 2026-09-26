@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 
 /**
- * Render styles on the analyzer-v2 candidate.
+ * Render styles on the candidate under review (and on the one it replaces).
  *
  * A style is how the viewer draws, never what it draws: each one must leave
  * the compiled geometry as it is (the diagnostics stay "geometry ok", the
@@ -13,12 +13,13 @@ import { expect, test, type Page } from '@playwright/test'
  * on structural groups only.
  */
 
-const MODEL = 'marcowki-auto-v2'
+const MODEL = 'marcowki-auto-v3'
+const BASELINE = 'marcowki-auto-v2'
 const OTHER_MODEL = 'demo-house'
 const STYLES = ['construction', 'clay', 'architectural'] as const
 
 /** The palette groups that ask for a soft feature edge (`edge: 'SOFT'` in the shared palette). */
-const STRUCTURAL = new Set(['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'FACADE_FRAME', 'TERRACE_SURFACE', 'CHIMNEY'])
+const STRUCTURAL = new Set(['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'WALL_CLADDING', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'FACADE_FRAME', 'TERRACE_SURFACE', 'CHIMNEY'])
 
 type GroupProbe = { meshes: number; transparent: number; minOpacity: number; maxOpacity: number; colors: string[]; edges: number }
 type Probe = { style: string; edgeOverlays: number; groups: Record<string, GroupProbe> }
@@ -154,4 +155,46 @@ test('switching style and model gives back every edge overlay it built', async (
   await settle(page)
   expect(await memory(page)).toEqual(before)
   expect((page as unknown as { __errors: string[] }).__errors).toEqual([])
+})
+
+test('the candidate under review reads as a white body, a dark garage, timber cladding and terraces in Architectural', async ({ page }) => {
+  test.setTimeout(120_000)
+  await chooseModel(page, MODEL)
+  await chooseStyle(page, 'architectural')
+  const p = await probe(page)
+  for (const group of ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_CLADDING', 'TERRACE_SURFACE', 'ROOF_TRIM', 'FLAT_ROOF', 'BALCONY_SLAB', 'RAILING', 'FACADE_FRAME']) {
+    expect(p.groups[group], `${MODEL} draws ${group}`).toBeDefined()
+  }
+  // The garage body is darker than the main body, and both are one colour each.
+  const lum = (hex: string): number => {
+    const n = parseInt(hex.replace('#', ''), 16)
+    const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
+      const x = v / 255
+      return x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4
+    })
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+  }
+  expect(lum(p.groups.WALL_SECONDARY.colors[0])).toBeLessThan(lum(p.groups.WALL_MAIN.colors[0]) - 0.3)
+  await expectDrawn(page, `${MODEL} in architectural`)
+  // The baseline still loads beside it for comparison.
+  await chooseModel(page, BASELINE)
+  await expectStyleRules(page, 'architectural')
+  expect((page as unknown as { __errors: string[] }).__errors).toEqual([])
+})
+
+test('the toolbar fits the window: nothing is pushed off-screen, the page never scrolls sideways', async ({ page }) => {
+  const overflow = await page.evaluate(() => ({ page: document.documentElement.scrollWidth - window.innerWidth, toolbar: (() => {
+    const t = document.querySelector('[data-testid="toolbar"]') as HTMLElement
+    return t.scrollWidth - t.clientWidth
+  })() }))
+  expect(overflow.page).toBeLessThanOrEqual(0)
+  expect(overflow.toolbar).toBeLessThanOrEqual(0)
+  for (const id of ['style-select', 'show-all', 'toggle-grid', 'toggle-axes', 'model-select']) {
+    const box = await page.getByTestId(id).boundingBox()
+    expect(box, id).not.toBeNull()
+    expect((box?.x ?? 0) + (box?.width ?? 0), `${id} is inside the window`).toBeLessThanOrEqual(1400)
+  }
+  // And the canvas below it is still what it was: a real viewport.
+  const canvas = await page.getByTestId('viewport-canvas').boundingBox()
+  expect(canvas?.height ?? 0).toBeGreaterThan(600)
 })

@@ -66,7 +66,14 @@ export type AttachedRoofV2 = {
  * slab runs under a wall standing on it), MEETS (end to end with the next
  * member of its assembly).
  */
-export type EndCondition = { kind: 'FREE' | 'WALL' | 'CARRIES' | 'MEETS'; at: number; againstId?: string; why: string }
+export type EndCondition = {
+  kind: 'FREE' | 'WALL' | 'CARRIES' | 'MEETS'
+  at: number
+  againstId?: string
+  why: string
+  /** The balustrade along the slab turns here, back to the wall: a free end at which the plan draws it turning. */
+  turns?: boolean
+}
 
 export type BalconyV2 = {
   id: string

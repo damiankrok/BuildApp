@@ -28,6 +28,7 @@ export type SemanticGroup =
   | 'WALL_MAIN'
   | 'WALL_SECONDARY'
   | 'WALL_INTERIOR'
+  | 'WALL_CLADDING'
   | 'ROOF_MAIN'
   | 'FLAT_ROOF'
   | 'ROOF_TRIM'
@@ -51,6 +52,7 @@ export const SEMANTIC_GROUPS: readonly SemanticGroup[] = [
   'WALL_MAIN',
   'WALL_SECONDARY',
   'WALL_INTERIOR',
+  'WALL_CLADDING',
   'ROOF_MAIN',
   'FLAT_ROOF',
   'ROOF_TRIM',
@@ -84,14 +86,12 @@ export const SEMANTIC_GROUPS: readonly SemanticGroup[] = [
  * - `massRole` — MAIN / ATTACHED, when the producer knows which body of the
  *   building a wall belongs to. The CanonicalBuildingModel does not record
  *   masses, so no producer supplies it today.
- * - `finish` — an exterior wall's finish relative to the building's other
- *   exterior walls, read off the model's own material assignments:
- *   PRIMARY when it carries the building's dominant exterior finish (the one
- *   covering the largest wall area); MEMBER when it carries a different
- *   finish that the building's frame members (roof verge and fascia boards,
- *   free linear members) also carry — a return framing a gable; SECONDARY for
- *   any other different finish — a garage in grey render beside a white
- *   house. See `wallFinishes` in the bundle.
+ * - `finish` — an exterior wall's role in the facade, read off the model's
+ *   own wall rings and material assignments: MEMBER when it stands outside
+ *   every body's ring (a return or fin framing a recess); PRIMARY when it is
+ *   a ring wall carrying the building's dominant exterior finish; SECONDARY
+ *   when it is a ring wall in another finish — a garage in dark render
+ *   beside a white house. See `wallFinishes` in the bundle.
  */
 export type ObjectFacts = {
   kind?: string
@@ -110,6 +110,9 @@ export type SemanticGroupInput = {
 }
 
 const upper = (s: string | undefined): string => (s ?? '').toUpperCase()
+
+/** A finish stated as timber boarding. */
+const CLADDING_MATERIAL = /TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR/
 
 /**
  * The group of one compiled mesh.
@@ -181,8 +184,9 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
       return 'ROOM'
     case 'SURFACE_REGION':
       // A finish region is a secondary surface of the wall it sits on: it must
-      // read as a band, not vanish into the wall's own colour.
-      return 'WALL_SECONDARY'
+      // read as a band, not vanish into the wall's own colour. A region the
+      // producer finished in timber is cladding, and reads as timber.
+      return CLADDING_MATERIAL.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
     case 'LINEAR_SOLID':
       // Free members — portal heads, verge and fascia boards not yet compiled
       // with a roof — frame the facade.
@@ -215,7 +219,8 @@ export const ARCHITECTURAL_PALETTE_ID = 'architectural-v1' as const
 
 /**
  * A restrained architectural palette: a warm off-white render on the main
- * body, a mid grey on a secondary body, a deep warm grey roof, near-black
+ * body, a mid grey on a secondary body, a pale honey on timber cladding, a
+ * deep warm grey roof, near-black
  * frames, cool translucent glass, warm timber doors, light concrete for slabs
  * and balconies, a darker warm stone for the terrace, a muted brick-grey
  * chimney, trims one step lighter than the walls.
@@ -229,6 +234,7 @@ export const ARCHITECTURAL_PALETTE: ArchitecturalPalette = {
   WALL_MAIN: { color: '#e3ddd3', roughness: 0.95, metalness: 0, edge: 'SOFT' },
   WALL_SECONDARY: { color: '#8f8b85', roughness: 0.95, metalness: 0, edge: 'SOFT' },
   WALL_INTERIOR: { color: '#d3cec3', roughness: 0.95, metalness: 0, edge: 'SOFT' },
+  WALL_CLADDING: { color: '#e2c7a2', roughness: 0.8, metalness: 0, edge: 'SOFT' },
   ROOF_MAIN: { color: '#423e3b', roughness: 0.85, metalness: 0, edge: 'SOFT' },
   FLAT_ROOF: { color: '#69645f', roughness: 0.85, metalness: 0, edge: 'SOFT' },
   ROOF_TRIM: { color: '#f3eee6', roughness: 0.85, metalness: 0, edge: 'SOFT' },
@@ -274,6 +280,14 @@ export const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGro
   ['WALL_SECONDARY', 'BALCONY_SLAB'],
   ['WALL_SECONDARY', 'WINDOW_FRAME'],
   ['WALL_SECONDARY', 'GARAGE_DOOR'],
+  ['WALL_MAIN', 'WALL_CLADDING'],
+  ['WALL_SECONDARY', 'WALL_CLADDING'],
+  ['WALL_CLADDING', 'SLAB'],
+  ['WALL_CLADDING', 'TERRACE_SURFACE'],
+  ['WALL_CLADDING', 'BALCONY_SLAB'],
+  ['WALL_CLADDING', 'DOOR'],
+  ['WALL_CLADDING', 'WINDOW_FRAME'],
+  ['WALL_CLADDING', 'FACADE_FRAME'],
   ['WALL_INTERIOR', 'SLAB'],
   ['WALL_INTERIOR', 'DOOR'],
   ['WALL_INTERIOR', 'STAIR'],

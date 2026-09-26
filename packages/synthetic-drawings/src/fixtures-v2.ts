@@ -1,5 +1,5 @@
 /**
- * Ten small houses for the v2 analyzer, one theme each.
+ * Eleven small houses for the v2 analyzer, one theme each.
  *
  * Every one of them exists only in this file. Their footprints, storey
  * heights, pitches and openings are made up here and share nothing with any
@@ -18,6 +18,7 @@
  *  8  HATHERLEIGH  a rooflight: a light patch in the roof plane of a side elevation
  *  9  IVYBANK      an attic window on the gable end with its head raked along the roof
  * 10  KELSALL      an upper-storey loggia with a balcony slab and its fascia band
+ * 11  LINDALE      an upper loggia with one return; the slab's other end is free, and the plan draws its balustrade turning back to the wall there
  */
 import type { SyntheticHouse } from './house.js'
 
@@ -299,4 +300,35 @@ export const KELSALL: SyntheticHouse = {
   upperChainsZ: [6.2, 1.5],
 }
 
-export const V2_FIXTURES: readonly SyntheticHouse[] = [ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL]
+export const LINDALE: SyntheticHouse = {
+  name: 'Lindale',
+  frame: 'MODEL',
+  width: 9.2,
+  depth: 6.0,
+  wallThickness: THICK,
+  frontZone: 1.3,
+  storeys: [
+    { name: 'ground', height: 2.8 },
+    { name: 'upper', height: 2.7 },
+  ],
+  roof: { pitchDeg: 37, overhang: 0, ridgeAxis: 'Z', coversFrontZone: true },
+  // One return, at the high end of the upper loggia; the low end has none, on either storey.
+  returns: [{ storey: 1, x: 8.8 }],
+  // The slab stops short of the west end, free; only the line the upper plan draws there turns its balustrade back to the wall.
+  balconies: [{ storey: 1, x0: 2.4, x1: 8.8, fasciaDepth: 0.35, railingHeight: 1.05, balustradeTurns: ['LOW'] }],
+  openings: [
+    { side: 'FRONT', kind: 'DOOR', at: 1.3, width: 1.1, height: 2.1, sill: 0, storey: 0 },
+    { side: 'FRONT', kind: 'WINDOW', at: 5.2, width: 1.7, height: 1.4, sill: 0.9, storey: 0 },
+    { side: 'REAR', kind: 'WINDOW', at: 3.1, width: 1.5, height: 1.3, sill: 0.9, storey: 0 },
+    { side: 'FRONT', kind: 'DOOR', at: 4.1, width: 1.0, height: 2.1, sill: 0, storey: 1 },
+    { side: 'FRONT', kind: 'WINDOW', at: 6.6, width: 1.3, height: 1.3, sill: 0.9, storey: 1 },
+    { side: 'REAR', kind: 'WINDOW', at: 5.6, width: 1.2, height: 1.2, sill: 0.95, storey: 1 },
+  ],
+  members: [],
+  chainsX: [9.2],
+  chainsZ: [6.0, 1.3],
+  upperChainsX: [9.2],
+  upperChainsZ: [6.0, 1.3],
+}
+
+export const V2_FIXTURES: readonly SyntheticHouse[] = [ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL, LINDALE]

@@ -1,0 +1,2105 @@
+{
+  "contacts": [
+    {
+      "a": "chimney-0",
+      "b": "main-iwall-0-x-0",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->WALL",
+      "volumeM3": 0.5415
+    },
+    {
+      "a": "chimney-0",
+      "b": "main-iwall-1-x-1",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->WALL",
+      "volumeM3": 0.2496
+    },
+    {
+      "a": "chimney-0",
+      "b": "slab-main-1",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->SLAB",
+      "volumeM3": 0.1473
+    },
+    {
+      "a": "chimney-0",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "SEPARATION",
+      "relation": "OTHER",
+      "volumeM3": 0.0315
+    },
+    {
+      "a": "chimney-1",
+      "b": "main-iwall-0-x-5",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->WALL",
+      "volumeM3": 0.3965
+    },
+    {
+      "a": "chimney-1",
+      "b": "main-iwall-0-z-5",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->WALL",
+      "volumeM3": 0.0492
+    },
+    {
+      "a": "chimney-1",
+      "b": "main-iwall-1-x-3",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->WALL",
+      "volumeM3": 0.1978
+    },
+    {
+      "a": "chimney-1",
+      "b": "slab-main-1",
+      "coplanarM2": 0,
+      "intended": "PENETRATION",
+      "relation": "CHIMNEY<->SLAB",
+      "volumeM3": 0.1233
+    },
+    {
+      "a": "chimney-1",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "SEPARATION",
+      "relation": "OTHER",
+      "volumeM3": 0.015
+    },
+    {
+      "a": "main-iwall-0-x-0",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "CONTACT",
+      "relation": "OTHER",
+      "volumeM3": 0.1167
+    },
+    {
+      "a": "main-iwall-0-x-2",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "CONTACT",
+      "relation": "OTHER",
+      "volumeM3": 0.0267
+    },
+    {
+      "a": "main-iwall-0-x-5",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "CONTACT",
+      "relation": "OTHER",
+      "volumeM3": 0.0461
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "roof-attached-0",
+      "coplanarM2": 0,
+      "intended": "BEARING",
+      "relation": "PARAPET<->FLAT_ROOF",
+      "volumeM3": 0.1707
+    },
+    {
+      "a": "ring-attached-0-0-w1",
+      "b": "roof-attached-0",
+      "coplanarM2": 0,
+      "intended": "BEARING",
+      "relation": "PARAPET<->FLAT_ROOF",
+      "volumeM3": 0.5732
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "roof-attached-0",
+      "coplanarM2": 0,
+      "intended": "BEARING",
+      "relation": "PARAPET<->FLAT_ROOF",
+      "volumeM3": 0.3212
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "roof-attached-0",
+      "coplanarM2": 0,
+      "intended": "BEARING",
+      "relation": "PARAPET<->FLAT_ROOF",
+      "volumeM3": 0.5732
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "CONTACT",
+      "relation": "OTHER",
+      "volumeM3": 0.4356
+    },
+    {
+      "a": "slab-main-1",
+      "b": "stair-main",
+      "coplanarM2": 0,
+      "intended": "CONTACT",
+      "relation": "STAIR<->SLAB",
+      "volumeM3": 0.006
+    }
+  ],
+  "findings": [
+    {
+      "code": "INTERSECTION",
+      "intended": "CONTACT",
+      "measure": 0.4356,
+      "message": "ring-main-0-w1 and stair-main share 0.436 m³; the model intends contact (a flight runs against a wall)",
+      "objects": [
+        "ring-main-0-w1",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "CONTACT",
+      "measure": 0.1167,
+      "message": "main-iwall-0-x-0 and stair-main share 0.117 m³; the model intends contact (a flight runs against a wall)",
+      "objects": [
+        "main-iwall-0-x-0",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "CONTACT",
+      "measure": 0.0461,
+      "message": "main-iwall-0-x-5 and stair-main share 0.046 m³; the model intends contact (a flight runs against a wall)",
+      "objects": [
+        "main-iwall-0-x-5",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "SEPARATION",
+      "measure": 0.0315,
+      "message": "chimney-0 and stair-main share 0.032 m³; the model intends separation (a stair stands clear of a stack)",
+      "objects": [
+        "chimney-0",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "CONTACT",
+      "measure": 0.0267,
+      "message": "main-iwall-0-x-2 and stair-main share 0.027 m³; the model intends contact (a flight runs against a wall)",
+      "objects": [
+        "main-iwall-0-x-2",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "attached-0-iwall-0-x-0 and ring-attached-0-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "attached-0-iwall-0-x-0",
+        "ring-attached-0-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "SEPARATION",
+      "measure": 0.015,
+      "message": "chimney-1 and stair-main share 0.015 m³; the model intends separation (a stair stands clear of a stack)",
+      "objects": [
+        "chimney-1",
+        "stair-main"
+      ],
+      "relation": "OTHER",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-0 and main-iwall-0-z-3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-0",
+        "main-iwall-0-z-3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-0 and ring-main-0-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-0",
+        "ring-main-0-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-1 and main-iwall-0-z-3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-1",
+        "main-iwall-0-z-3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-1 and main-iwall-0-z-8 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-1",
+        "main-iwall-0-z-8"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-2 and main-iwall-0-z-8 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-2",
+        "main-iwall-0-z-8"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-3 and main-iwall-0-z-0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-3",
+        "main-iwall-0-z-0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-3 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-3",
+        "ring-main-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-4 and main-iwall-0-z-0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-4",
+        "main-iwall-0-z-0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-4 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-4",
+        "ring-main-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-5 and main-iwall-0-z-5 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-5",
+        "main-iwall-0-z-5"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-5 and ring-main-0-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-5",
+        "ring-main-0-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-6 and main-iwall-0-z-0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-6",
+        "main-iwall-0-z-0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-x-6 and main-iwall-0-z-5 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-x-6",
+        "main-iwall-0-z-5"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-z-0 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-z-0",
+        "ring-main-0-w0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-0-z-5 and ring-main-0-w0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-0-z-5",
+        "ring-main-0-w0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-0 and main-iwall-1-z-2 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-0",
+        "main-iwall-1-z-2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-0 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-0",
+        "ring-main-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-0 and ring-main-1-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-0",
+        "ring-main-1-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-1 and main-iwall-1-z-6 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-1",
+        "main-iwall-1-z-6"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-1 and ring-main-0-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-1",
+        "ring-main-0-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-1 and ring-main-1-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-1",
+        "ring-main-1-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-2 and main-iwall-1-z-2 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-2",
+        "main-iwall-1-z-2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-2 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-2",
+        "ring-main-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-2 and ring-main-1-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-2",
+        "ring-main-1-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-3 and main-iwall-1-z-0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-3",
+        "main-iwall-1-z-0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-3 and main-iwall-1-z-2 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-3",
+        "main-iwall-1-z-2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-3 and ring-main-0-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-3",
+        "ring-main-0-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-3 and ring-main-1-w1 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-3",
+        "ring-main-1-w1"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-5 and main-iwall-1-z-0 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-5",
+        "main-iwall-1-z-0"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-5 and ring-main-0-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-5",
+        "ring-main-0-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-x-5 and ring-main-1-w3 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-x-5",
+        "ring-main-1-w3"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-z-2 and ring-main-0-w2 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-z-2",
+        "ring-main-0-w2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.015,
+      "message": "main-iwall-1-z-2 and ring-main-1-w2 stand 0.015 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "main-iwall-1-z-2",
+        "ring-main-1-w2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "GAP",
+      "intended": "CONTACT",
+      "measure": 0.0084,
+      "message": "attached-0-iwall-0-x-0 and ring-attached-0-0-w2 stand 0.008 m apart where the model says they meet (walls meet only at their ends): a visible crack",
+      "objects": [
+        "attached-0-iwall-0-x-0",
+        "ring-attached-0-0-w2"
+      ],
+      "relation": "WALL<->WALL",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m"
+    },
+    {
+      "code": "INTERSECTION",
+      "intended": "CONTACT",
+      "measure": 0.006,
+      "message": "slab-main-1 and stair-main share 0.006 m³; the model intends contact (a stair lands on the slab through its hole)",
+      "objects": [
+        "slab-main-1",
+        "stair-main"
+      ],
+      "relation": "STAIR<->SLAB",
+      "scope": "INTERIOR",
+      "severity": "ERROR",
+      "unit": "m3"
+    }
+  ],
+  "metrics": {
+    "coplanarDuplicateAreaM2": 0,
+    "coplanarDuplicateCount": 0,
+    "disconnectedMemberCount": 0,
+    "enclosedCoplanarAreaM2": 0.447,
+    "exteriorFindingCount": 0,
+    "gapCount": 35,
+    "interiorFindingCount": 42,
+    "intersectionCount": 7,
+    "intersectionVolumeM3": 0.6776,
+    "nonManifoldSolidCount": 0,
+    "pairsChecked": 190,
+    "railingEndDistanceMaxM": 0.025,
+    "railingFreeEndCount": 0,
+    "sliverTriangleCount": 0,
+    "terraceAlignmentResidualM": 0
+  },
+  "modelId": "m-auto-v3-marcowki",
+  "relations": [
+    {
+      "a": "attached-0-iwall-0-x-0",
+      "b": "roof-attached-0",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "attached-0-iwall-0-x-0",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "balcony-front-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "balcony-front-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "balcony-front-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "balcony-front-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "roof-attached-0:fascia-min-z",
+      "b": "balcony-front-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->FASCIA",
+      "why": "a roof edge meets a balcony slab end to end"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "return-rear-1-0",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "return-rear-1-1",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "ring-main-1-w2",
+      "b": "balcony-rear-1",
+      "kind": "CONTACT",
+      "label": "BALCONY_SLAB<->WALL",
+      "why": "a slab meets the wall it is fixed to and the returns that bound it"
+    },
+    {
+      "a": "main-iwall-0-x-0",
+      "b": "chimney-0",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->WALL",
+      "why": "a stack is built into the partition it stands on"
+    },
+    {
+      "a": "main-iwall-1-x-1",
+      "b": "chimney-0",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->WALL",
+      "why": "a stack is built into the partition it stands on"
+    },
+    {
+      "a": "roof-main",
+      "b": "chimney-0",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->ROOF",
+      "why": "a stack pierces the roof"
+    },
+    {
+      "a": "slab-main-0",
+      "b": "chimney-0",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->SLAB",
+      "why": "a stack passes through every floor"
+    },
+    {
+      "a": "slab-main-1",
+      "b": "chimney-0",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->SLAB",
+      "why": "a stack passes through every floor"
+    },
+    {
+      "a": "stair-main",
+      "b": "chimney-0",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "a stair stands clear of a stack"
+    },
+    {
+      "a": "main-iwall-0-x-5",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->WALL",
+      "why": "a stack is built into the partition it stands on"
+    },
+    {
+      "a": "main-iwall-0-z-5",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->WALL",
+      "why": "a stack is built into the partition it stands on"
+    },
+    {
+      "a": "main-iwall-1-x-3",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->WALL",
+      "why": "a stack is built into the partition it stands on"
+    },
+    {
+      "a": "roof-main",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->ROOF",
+      "why": "a stack pierces the roof"
+    },
+    {
+      "a": "slab-main-0",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->SLAB",
+      "why": "a stack passes through every floor"
+    },
+    {
+      "a": "slab-main-1",
+      "b": "chimney-1",
+      "kind": "PENETRATION",
+      "label": "CHIMNEY<->SLAB",
+      "why": "a stack passes through every floor"
+    },
+    {
+      "a": "stair-main",
+      "b": "chimney-1",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "a stair stands clear of a stack"
+    },
+    {
+      "a": "main-iwall-0-x-0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-0",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-0-x-1",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-1",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-1",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-0-x-2",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-2",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-2",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-0-x-3",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-3",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-4",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-4",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-5",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-5",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-5",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-0-x-6",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-x-6",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-3",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-3",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-3",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-0-z-5",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-5",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-8",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-8",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-0-z-8",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-1-x-0",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-x-0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-x-1",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-x-1",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-x-1",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-1-x-2",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-x-2",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-x-3",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-x-3",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-x-3",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "main-iwall-1-x-5",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-x-5",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-z-0",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-z-0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-z-2",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-z-2",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "main-iwall-1-z-6",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "main-iwall-1-z-6",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-front-0-0",
+      "b": "return-front-1-0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "return-front-0-0",
+      "b": "ring-main-0-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-0-0",
+      "b": "ring-main-1-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-0-0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-front-0-0",
+      "b": "terrace-front-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "return-front-0-1",
+      "b": "ring-attached-0-0-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-0-1",
+      "b": "roof-attached-0:fascia-min-z",
+      "kind": "CONTACT",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "return-front-0-1",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-front-0-1",
+      "b": "terrace-front-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "return-front-1-0",
+      "b": "ring-main-0-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-1-0",
+      "b": "ring-main-1-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-1-0",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "return-front-1-0",
+      "b": "roof-main:verge-min-z",
+      "kind": "CONTACT",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "ring-attached-0-0-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "ring-main-0-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "ring-main-1-w0",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "roof-attached-0:fascia-min-z",
+      "kind": "SEPARATION",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall does not follow this roof"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "return-front-1-1",
+      "b": "roof-main:verge-min-z",
+      "kind": "CONTACT",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "return-rear-1-0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "ring-main-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "ring-main-1-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-rear-0-0",
+      "b": "terrace-rear-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "return-rear-1-1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "ring-main-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "ring-main-1-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "return-rear-0-1",
+      "b": "terrace-rear-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "return-rear-1-0",
+      "b": "ring-main-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-1-0",
+      "b": "ring-main-1-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-1-0",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "return-rear-1-0",
+      "b": "roof-main:verge-max-z",
+      "kind": "CONTACT",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "return-rear-1-1",
+      "b": "ring-main-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-1-1",
+      "b": "ring-main-1-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->RETURN_WALL",
+      "why": "a return stands against the ring wall it springs from"
+    },
+    {
+      "a": "return-rear-1-1",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "return-rear-1-1",
+      "b": "roof-main:verge-max-z",
+      "kind": "CONTACT",
+      "label": "FACADE_FRAME<->HOST_FACADE",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-attached-0-0-w1",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-attached-0-0-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-main-0-w0",
+      "kind": "CONTACT",
+      "label": "MAIN_MASS<->ATTACHED_MASS",
+      "why": "the rings of two bodies share a party face"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-main-0-w1",
+      "kind": "CONTACT",
+      "label": "MAIN_MASS<->ATTACHED_MASS",
+      "why": "the rings of two bodies share a party face"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-main-1-w0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "roof-attached-0",
+      "kind": "BEARING",
+      "label": "PARAPET<->FLAT_ROOF",
+      "why": "a flat roof plate bears into the walls that carry it; a parapet rises past it"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "roof-attached-0:fascia-min-z",
+      "kind": "SEPARATION",
+      "label": "TRIM<->ROOF",
+      "why": "the wall does not follow this roof"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w0",
+      "b": "terrace-front-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "ring-attached-0-0-w1",
+      "b": "ring-attached-0-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-attached-0-0-w1",
+      "b": "roof-attached-0",
+      "kind": "BEARING",
+      "label": "PARAPET<->FLAT_ROOF",
+      "why": "a flat roof plate bears into the walls that carry it; a parapet rises past it"
+    },
+    {
+      "a": "ring-attached-0-0-w1",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "ring-attached-0-0-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "ring-main-0-w1",
+      "kind": "CONTACT",
+      "label": "MAIN_MASS<->ATTACHED_MASS",
+      "why": "the rings of two bodies share a party face"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "roof-attached-0",
+      "kind": "BEARING",
+      "label": "PARAPET<->FLAT_ROOF",
+      "why": "a flat roof plate bears into the walls that carry it; a parapet rises past it"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w2",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "ring-main-0-w0",
+      "kind": "CONTACT",
+      "label": "MAIN_MASS<->ATTACHED_MASS",
+      "why": "the rings of two bodies share a party face"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "ring-main-0-w1",
+      "kind": "CONTACT",
+      "label": "MAIN_MASS<->ATTACHED_MASS",
+      "why": "the rings of two bodies share a party face"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "ring-main-1-w0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "roof-attached-0",
+      "kind": "BEARING",
+      "label": "PARAPET<->FLAT_ROOF",
+      "why": "a flat roof plate bears into the walls that carry it; a parapet rises past it"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-attached-0-0-w3",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "ring-main-0-w1",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "ring-main-0-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "ring-main-1-w0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "ring-main-1-w3",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "roof-attached-0:fascia-min-z",
+      "kind": "SEPARATION",
+      "label": "TRIM<->ROOF",
+      "why": "the wall does not follow this roof"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w0",
+      "b": "terrace-front-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "ring-main-0-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "ring-main-1-w0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "ring-main-1-w2",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "slab-attached-0-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w1",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "ring-main-0-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "ring-main-1-w1",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "ring-main-1-w2",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "ring-main-1-w3",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w2",
+      "b": "terrace-rear-66",
+      "kind": "CONTACT",
+      "label": "TERRACE<->WALL",
+      "why": "a terrace meets the facade it lies against"
+    },
+    {
+      "a": "ring-main-0-w3",
+      "b": "ring-main-1-w0",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w3",
+      "b": "ring-main-1-w2",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w3",
+      "b": "ring-main-1-w3",
+      "kind": "SEPARATION",
+      "label": "WALL<->WALL",
+      "why": "walls meet only at their ends"
+    },
+    {
+      "a": "ring-main-0-w3",
+      "b": "slab-main-0",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-0-w3",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "ring-main-1-w1",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "ring-main-1-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "roof-attached-0:fascia-min-z",
+      "kind": "SEPARATION",
+      "label": "TRIM<->ROOF",
+      "why": "the wall does not follow this roof"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "roof-main:verge-min-z",
+      "kind": "CONTACT",
+      "label": "TRIM<->ROOF",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "ring-main-1-w0",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-1-w1",
+      "b": "ring-main-1-w2",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-1-w1",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "ring-main-1-w1",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-1-w1",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "OTHER",
+      "why": "a flight runs against a wall"
+    },
+    {
+      "a": "ring-main-1-w2",
+      "b": "ring-main-1-w3",
+      "kind": "CONTACT",
+      "label": "WALL<->WALL",
+      "why": "a declared junction"
+    },
+    {
+      "a": "ring-main-1-w2",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "ring-main-1-w2",
+      "b": "roof-main:verge-max-z",
+      "kind": "CONTACT",
+      "label": "TRIM<->ROOF",
+      "why": "the wall top dies into the member’s underside"
+    },
+    {
+      "a": "ring-main-1-w2",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "ring-main-1-w3",
+      "b": "roof-main",
+      "kind": "CONTACT",
+      "label": "WALL<->ROOF",
+      "why": "the wall top follows the roof underside"
+    },
+    {
+      "a": "ring-main-1-w3",
+      "b": "slab-main-1",
+      "kind": "BEARING",
+      "label": "WALL<->SLAB",
+      "why": "a slab bears into the walls under it and the walls above stand on it"
+    },
+    {
+      "a": "roof-main",
+      "b": "roof-main:verge-max-z",
+      "kind": "FLUSH",
+      "label": "TRIM<->ROOF",
+      "why": "an edge member of this roof, compiled with it"
+    },
+    {
+      "a": "roof-main",
+      "b": "roof-main:verge-min-z",
+      "kind": "FLUSH",
+      "label": "TRIM<->ROOF",
+      "why": "an edge member of this roof, compiled with it"
+    },
+    {
+      "a": "slab-attached-0-0",
+      "b": "slab-main-0",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "one slab per storey and body"
+    },
+    {
+      "a": "slab-attached-0-0",
+      "b": "terrace-front-66",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "no relation the model states"
+    },
+    {
+      "a": "slab-main-0",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "STAIR<->SLAB",
+      "why": "a stair lands on the slab through its hole"
+    },
+    {
+      "a": "slab-main-0",
+      "b": "terrace-front-66",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "no relation the model states"
+    },
+    {
+      "a": "slab-main-0",
+      "b": "terrace-rear-66",
+      "kind": "SEPARATION",
+      "label": "OTHER",
+      "why": "no relation the model states"
+    },
+    {
+      "a": "slab-main-1",
+      "b": "stair-main",
+      "kind": "CONTACT",
+      "label": "STAIR<->SLAB",
+      "why": "a stair lands on the slab through its hole"
+    },
+    {
+      "a": "railing-front-1",
+      "b": "balcony-front-1",
+      "kind": "GUARDS",
+      "label": "RAILING<->BALCONY",
+      "why": "a railing guards the slab it names"
+    },
+    {
+      "a": "railing-rear-1",
+      "b": "balcony-rear-1",
+      "kind": "GUARDS",
+      "label": "RAILING<->BALCONY",
+      "why": "a railing guards the slab it names"
+    }
+  ],
+  "schema": "buildapp.geometry-closure-report",
+  "schemaVersion": "1.0.0"
+}
+

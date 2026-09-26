@@ -478,7 +478,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const a0 = Math.max(0, offset)
     const a1 = round6(a0 + (r.along[1] - r.along[0]))
     void reversed
-    const material = r.tone === 'WARM' ? MATERIALS_V2.timber : r.tone === 'DARK' ? MATERIALS_V2.dark : MATERIALS_V2.wall
+    const material = r.tone === 'WARM' ? MATERIALS_V2.timber : materialForTone(r.tone, MATERIALS_V2.wall)
     push({ type: 'createSurfaceRegion', id: r.id, hostId: wallId, face: 'OUTER', rect: { a0, a1, b0: round6(r.y[0] - l.elevation), b1: round6(r.y[1] - l.elevation) }, materialId: material }, r.featureId, 'surfaceRegions')
     evidence(r.id, 'VISUAL_SEMANTIC', `a ${r.tone.toLowerCase()} finish region read on the render: colour, not geometry`)
   }

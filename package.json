@@ -41,6 +41,7 @@
     "reconstruct:no-benchmark": "vite-node packages/reconstruction/scripts/no-benchmark.ts --",
     "audit:analyzer-v2": "vite-node packages/reconstruction/scripts/audit-v2.ts --",
     "evaluate:v2": "vite-node packages/reconstruction/scripts/evaluate-v2.ts --",
+    "audit:exterior": "vite-node packages/candidates/scripts/exterior-closure.ts --",
     "review:shots": "vite-node apps/web/tools/review-shots.ts --"
   },
   "devDependencies": {

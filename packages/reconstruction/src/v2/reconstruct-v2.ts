@@ -42,10 +42,10 @@ import { solvePerspectiveCamera } from './camera.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
 import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
-import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeVerges, snapReturnsToBodyFaces } from './assembly-closure.js'
+import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
-import { readFrameTones, readMassTones } from './tones.js'
+import { readFinishRuns, readFrameTones, readMassTones } from './tones.js'
 import { featureGraphViolations, sealFeatureGraph } from './graph.js'
 import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, ProvenanceStatus, SolvedFeature, SourceSighting, ViewFamily } from './graph.js'
 import { ledgerViolations, sealLedger } from './ledger.js'
@@ -777,27 +777,29 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // Finish regions (colour, never geometry): the dominant tones of the recessed walls and the side bands.
   // ---------------------------------------------------------------------------
+  // Broad tone of each body's walls, where they stand in the open on a registered render.
+  const massTones: MassToneV2[] = readMassTones(masses, views, openings, recesses, levelsV2)
   const surfaceRegions: BuildingV2['surfaceRegions'] = []
   for (const recess of recesses.filter((r) => r.storeyIndex === 0)) {
     for (const v of viewsOf(recess.side)) {
       for (const open of recess.open) {
         const l = levelOf(0)
         if (!l) continue
-        const along: [number, number] = [open.from, open.to]
-        const y: [number, number] = [l.elevation + 0.4, l.elevation + 2.0]
-        const x0 = v.view.pxOf(along[0])
-        const x1 = v.view.pxOf(along[1])
-        const y0 = v.view.pyOf(y[1])
-        const y1 = v.view.pyOf(y[0])
-        const tone = dominantTone(v.raster, Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1), 2)
-        if (tone.share < 0.35) continue
-        const massOn = masses.find((m) => m.storeys.includes(0) && (recess.side === 'FRONT' ? Math.abs(m.z0 - recess.backAt) < 0.1 : recess.side === 'REAR' ? Math.abs(m.z1 - recess.backAt) < 0.1 : true) && open.from < (recess.side === 'FRONT' || recess.side === 'REAR' ? m.x1 : m.z1) && open.to > (recess.side === 'FRONT' || recess.side === 'REAR' ? m.x0 : m.z0))
+        const alongX = recess.side === 'FRONT' || recess.side === 'REAR'
+        const massOn = masses.find((m) => m.storeys.includes(0) && (recess.side === 'FRONT' ? Math.abs(m.z0 - recess.backAt) < 0.1 : recess.side === 'REAR' ? Math.abs(m.z1 - recess.backAt) < 0.1 : true) && open.from < (alongX ? m.x1 : m.z1) && open.to > (alongX ? m.x0 : m.z0))
         if (!massOn) continue
-        const clipped: [number, number] = [Math.max(open.from, recess.side === 'FRONT' || recess.side === 'REAR' ? massOn.x0 : massOn.z0), Math.min(open.to, recess.side === 'FRONT' || recess.side === 'REAR' ? massOn.x1 : massOn.z1)]
+        const clipped: [number, number] = [Math.max(open.from, alongX ? massOn.x0 : massOn.z0), Math.min(open.to, alongX ? massOn.x1 : massOn.z1)]
         if (clipped[1] - clipped[0] < 0.5) continue
-        const id = `finish-${recess.side.toLowerCase()}-${Math.round(clipped[0] * 100)}`
-        const featureId = feature('SURFACE_REGION', id, {}, [sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'finish tone of the recessed wall', tone.share)], 'VISUAL_SEMANTIC', `the recessed wall reads ${tone.tone.toLowerCase()} on ${Math.round(tone.share * 100)} % of its area`, { storeyIndex: 0 })
-        surfaceRegions.push({ id, wallRef: { massId: massOn.id, storeyIndex: 0, side: recess.side }, along: clipped, y: [l.elevation, l.elevation + l.height], tone: tone.tone, featureId })
+        // The recessed wall's finishes, run by run along it; its openings are glass, not wall.
+        const skip = openings.filter((o) => o.facade === recess.side && o.storeyIndex === 0).map((o) => o.interval)
+        const runs = readFinishRuns(v.view, v.raster, clipped, [l.elevation + 0.4, l.elevation + 2.0], skip)
+        const bodyTone = massTones.find((t) => t.massId === massOn.id)?.tone
+        for (const run of runs) {
+          if (run.to - run.from < 0.5 || run.tone === 'LIGHT' || run.tone === bodyTone) continue
+          const id = `finish-${recess.side.toLowerCase()}-${Math.round(run.from * 100)}`
+          const featureId = feature('SURFACE_REGION', id, {}, [sighting(frameById.get(v.view.registration.frameId) as SourceCoordinateFrame, 'finish tone of the recessed wall', run.share)], 'VISUAL_SEMANTIC', `the recessed wall reads ${run.tone.toLowerCase()} from ${run.from.toFixed(2)} to ${run.to.toFixed(2)} (${Math.round(run.share * 100)} % of the columns' samples agree)`, { storeyIndex: 0 })
+          surfaceRegions.push({ id, wallRef: { massId: massOn.id, storeyIndex: 0, side: recess.side }, along: [run.from, run.to], y: [l.elevation, l.elevation + l.height], tone: run.tone, featureId })
+        }
       }
       break
     }
@@ -809,8 +811,17 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const closureNotes: ClosureNote[] = []
   {
     const snapped = snapReturnsToBodyFaces(returns, masses)
-    returns.splice(0, returns.length, ...snapped.returns)
-    closureNotes.push(...snapped.notes)
+    const stacked = alignStackedReturns(snapped.returns)
+    returns.splice(0, returns.length, ...stacked.returns)
+    const floors = closeTerraces(terraces, returns, recesses, masses)
+    terraces.splice(0, terraces.length, ...floors.terraces)
+    // A finish region on a recessed wall runs to the returns that bound the recess, wherever they now stand.
+    for (const region of surfaceRegions) {
+      const faces = returns.filter((r) => r.side === region.wallRef.side && r.storeyIndex === region.wallRef.storeyIndex).flatMap((r) => r.alongInterval)
+      const snap = (a: number): number => faces.find((f) => Math.abs(f - a) <= 0.06) ?? a
+      region.along = [round6(snap(region.along[0])), round6(snap(region.along[1]))]
+    }
+    closureNotes.push(...snapped.notes, ...stacked.notes, ...floors.notes)
     const plansForClosure = new Map([...planByStorey].map(([i, e]) => [i, { frame: e.frame, raster: e.raster, frameId: e.plan.frame.id }]))
     const bal = closeBalconies({ balconies, returns, recesses, levels: levelsV2, portalHeads, plans: plansForClosure, elevations: views })
     balconies.splice(0, balconies.length, ...bal.balconies)
@@ -861,7 +872,6 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     closureNotes.push(...ph.notes)
   }
   // Broad tone of each body's walls, where they stand in the open on a registered render.
-  const massTones: MassToneV2[] = readMassTones(masses, views, openings, recesses, levelsV2)
   const frameTones = readFrameTones(returns, views, levelsV2)
   for (const t of frameTones) closureNotes.push({ subject: `${t.side.toLowerCase()} frame`, what: `returns read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
   for (const t of massTones) {

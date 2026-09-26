@@ -1,6 +1,6 @@
 {
-  "contentHash": "26c5e1531f7a6995d5d94e3c5d432a20045a4e837766c76ce26462090955587a",
-  "featureGraphHash": "d098761242dc9e231abfb6d8c4cd9da9ff6a59a49a7f9726f1365b79a2184de8",
+  "contentHash": "fa231f81e47dee27129da75162efb4e40c1de11afb40cb8f945bae6bc432294d",
+  "featureGraphHash": "efdd3652a8f765c52c4761eea98000aaab3fafc54e33ec79ff8f99b2b398622e",
   "id": "quality-marcowki",
   "records": [
     {
@@ -260,6 +260,26 @@
     },
     {
       "family": "SURFACE_REGION",
+      "featureId": "feat-finish-front-319",
+      "level": "L0",
+      "objectIds": [
+        "finish-front-319"
+      ],
+      "provenance": "VISUAL_SEMANTIC",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the recessed wall reads dark from 3.19 to 7.90 (100 % of the columns' samples agree)"
+    },
+    {
+      "family": "SURFACE_REGION",
       "featureId": "feat-finish-front-66",
       "level": "L0",
       "objectIds": [
@@ -276,7 +296,27 @@
       },
       "uncertainty": {},
       "unresolvedProperties": [],
-      "why": "the recessed wall reads mid on 45 % of its area"
+      "why": "the recessed wall reads warm from 0.66 to 3.19 (99 % of the columns' samples agree)"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "featureId": "feat-finish-rear-66",
+      "level": "L0",
+      "objectIds": [
+        "finish-rear-66"
+      ],
+      "provenance": "VISUAL_SEMANTIC",
+      "sourceCoverage": {
+        "independentAssets": 1,
+        "printed": false,
+        "sightings": 1,
+        "viewFamilies": [
+          "ELEVATION"
+        ]
+      },
+      "uncertainty": {},
+      "unresolvedProperties": [],
+      "why": "the recessed wall reads warm from 0.66 to 7.27 (95 % of the columns' samples agree)"
     },
     {
       "family": "LEVEL",
@@ -2399,7 +2439,7 @@
       "L2": 1
     },
     "SURFACE_REGION": {
-      "L0": 1
+      "L0": 3
     },
     "TERRACE": {
       "L1": 2

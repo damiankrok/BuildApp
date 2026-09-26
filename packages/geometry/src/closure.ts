@@ -665,10 +665,10 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
       const rx = p.x - w.start.x
       const rz = p.z - w.start.z
       const along = rx * ux + rz * uz
+      // Inward from the outer face, as the model defines it: (-u.z, u.x). The material is across ∈ [0, thickness].
       const across = rx * -uz + rz * ux
       const dAlong = along < 0 ? -along : along > L ? along - L : 0
-      // The wall occupies across ∈ [0, thickness] on one side (which side depends on winding); take the nearer of both.
-      const dAcross = Math.min(Math.abs(across) <= w.thickness ? 0 : Math.abs(across) - w.thickness, Math.abs(across))
+      const dAcross = across < 0 ? -across : across > w.thickness ? across - w.thickness : 0
       best = Math.min(best, Math.hypot(dAlong, dAcross))
     }
     return best

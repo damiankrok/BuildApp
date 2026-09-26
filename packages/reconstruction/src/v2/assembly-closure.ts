@@ -84,6 +84,81 @@ export function snapReturnsToBodyFaces(returns: readonly ReturnWallV2[], masses:
   return { returns: out, notes }
 }
 
+/**
+ * Returns stacked one over the other at the same end of a facade are one
+ * frame member, read twice — once on each storey's plan. Anchored on the same
+ * body face, their free faces should coincide; two readings within
+ * `toleranceM` of each other are one face, placed at their mean, so the
+ * frame shows no step between storeys and a slab stopping against the lower
+ * one meets the upper one too. Readings further apart are two members and
+ * are left alone.
+ */
+export function alignStackedReturns(returns: readonly ReturnWallV2[], toleranceM = 0.06): { returns: ReturnWallV2[]; notes: ClosureNote[] } {
+  const notes: ClosureNote[] = []
+  const out = returns.map((r) => ({ ...r, alongInterval: [...r.alongInterval] as [number, number] }))
+  for (const lower of out) {
+    const upper = out.find((u) => u.side === lower.side && u.storeyIndex === lower.storeyIndex + 1 && u.alongInterval[0] < lower.alongInterval[1] && u.alongInterval[1] > lower.alongInterval[0])
+    if (!upper) continue
+    // The shared anchor: both start at the same body face (low end) or both end at it (high end).
+    const lowAnchored = Math.abs(lower.alongInterval[0] - upper.alongInterval[0]) <= 1e-6
+    const highAnchored = Math.abs(lower.alongInterval[1] - upper.alongInterval[1]) <= 1e-6
+    if (lowAnchored === highAnchored) continue
+    const k = lowAnchored ? 1 : 0
+    const a = lower.alongInterval[k]
+    const b = upper.alongInterval[k]
+    if (Math.abs(a - b) <= 1e-6 || Math.abs(a - b) > toleranceM) continue
+    const mean = round6((a + b) / 2)
+    lower.alongInterval[k] = mean
+    upper.alongInterval[k] = mean
+    for (const r of [lower, upper]) r.thicknessM = round6(r.alongInterval[1] - r.alongInterval[0])
+    notes.push({ subject: `${lower.id} + ${upper.id}`, what: `free face ${a.toFixed(3)} / ${b.toFixed(3)} → ${mean.toFixed(3)}`, why: `one frame member read on two plans ${(Math.abs(a - b) * 100).toFixed(1)} cm apart: one face, at the mean of its readings` })
+  }
+  return { returns: out, notes }
+}
+
+/**
+ * A terrace lying in a recess meets the returns that bound it, and the
+ * platform the plan outlines beyond the mouth meets the building's corners.
+ *
+ * - A FLOOR edge — an edge across the zone, from the mouth to the back wall —
+ *   standing within `toleranceM` of a ground-storey return's free face on the
+ *   same side is that face.
+ * - A PLATFORM side — an edge beyond the mouth — standing within `toleranceM`
+ *   of the face of a body the terrace lies against is that face: an outline
+ *   drawn flush with the building's corner, read a centimetre off.
+ * Nothing else moves.
+ */
+export function closeTerraces(terraces: readonly TerraceV2[], returns: readonly ReturnWallV2[], recesses: readonly RecessTopology[], masses: readonly MassV2[] = [], toleranceM = 0.06): { terraces: TerraceV2[]; notes: ClosureNote[] } {
+  const notes: ClosureNote[] = []
+  const out = terraces.map((t) => {
+    const recess = recesses.find((r) => r.side === t.side && r.storeyIndex === t.storeyIndex)
+    if (!recess) return t
+    const ax = alongIsX(t.side)
+    const c0 = Math.min(recess.mouthAt, recess.backAt) - 1e-6
+    const c1 = Math.max(recess.mouthAt, recess.backAt) + 1e-6
+    const alongOf = (p: { x: number; z: number }): number => (ax ? p.x : p.z)
+    const acrossOf = (p: { x: number; z: number }): number => (ax ? p.z : p.x)
+    const inZone = (p: { x: number; z: number }): boolean => acrossOf(p) >= c0 && acrossOf(p) <= c1
+    const returnFaces = returns.filter((r) => r.side === t.side && r.storeyIndex === t.storeyIndex).flatMap((r) => [r.alongInterval[0], r.alongInterval[1]])
+    const bodyFaces = masses.filter((m) => t.massIds.includes(m.id)).flatMap((m) => (ax ? [m.x0, m.x1] : [m.z0, m.z1]))
+    const near = (faces: readonly number[], a: number): number | undefined => faces.find((f) => Math.abs(f - a) <= toleranceM && Math.abs(f - a) > 1e-6)
+    let moved = 0
+    const polygon = t.polygon.map((p) => {
+      const a = alongOf(p)
+      // A floor vertex has its partner across the zone at the same position along the facade.
+      const floor = inZone(p) && t.polygon.some((q) => q !== p && Math.abs(alongOf(q) - a) < 1e-6 && inZone(q))
+      const face = floor ? near(returnFaces, a) : inZone(p) && !t.polygon.some((q) => Math.abs(alongOf(q) - a) < 1e-6 && !inZone(q)) ? undefined : near(bodyFaces, a)
+      if (face === undefined) return p
+      moved = Math.max(moved, Math.abs(face - a))
+      return ax ? { x: round6(face), z: p.z } : { x: p.x, z: round6(face) }
+    })
+    if (moved === 0) return t
+    notes.push({ subject: t.id, what: `edges moved up to ${(moved * 100).toFixed(1)} cm onto the returns' and the building's faces`, why: 'a terrace in a recess meets the returns that bound it; its platform meets the corners it is drawn flush with' })
+    return { ...t, polygon }
+  })
+  return { terraces: out, notes }
+}
+
 // ---------------------------------------------------------------------------
 // the drawn end of a slab
 // ---------------------------------------------------------------------------
@@ -282,8 +357,8 @@ export function closeBalconies(input: BalconyClosureInput): { balconies: Balcony
     const lo = round6(endLow.at)
     const hi = round6(endHigh.at)
     const ends: [EndCondition, EndCondition] = [
-      { kind: endLow.kind, at: lo, againstId: endLow.againstId, why: endLow.why },
-      { kind: endHigh.kind, at: hi, againstId: endHigh.againstId, why: endHigh.why },
+      { kind: endLow.kind, at: lo, againstId: endLow.againstId, why: endLow.why, ...(endLow.turns ? { turns: true } : {}) },
+      { kind: endHigh.kind, at: hi, againstId: endHigh.againstId, why: endHigh.why, ...(endHigh.turns ? { turns: true } : {}) },
     ]
     return { ...b, topY: round6(topY), thicknessM: thickness, ...(ax ? { x0: lo, x1: hi } : { z0: lo, z1: hi }), ends }
   })

@@ -14,7 +14,8 @@ import { describe, expect, it } from 'vitest'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
 import { compileBuilding, type GeometryPart } from '@buildapp/geometry'
-import type { CanonicalBuildingModel } from '@buildapp/model'
+import { createEmptyModel, type CanonicalBuildingModel, type SemanticKind } from '@buildapp/model'
+import { runCommands } from '@buildapp/commands'
 import {
   ADJACENT_GROUPS,
   ARCHITECTURAL_PALETTE,
@@ -187,7 +188,7 @@ describe('the architectural palette', () => {
 
   it('asks for a soft edge on the structural groups only', () => {
     expect(edgeGroups().sort()).toEqual(
-      ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'TERRACE_SURFACE', 'CHIMNEY', 'FACADE_FRAME'].sort(),
+      ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'WALL_CLADDING', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'TERRACE_SURFACE', 'CHIMNEY', 'FACADE_FRAME'].sort(),
     )
     for (const g of ['WINDOW_GLASS', 'WINDOW_FRAME', 'RAILING', 'ROOM', 'DOOR', 'OTHER'] as const) expect(ARCHITECTURAL_PALETTE[g].edge).toBe('NONE')
   })
@@ -219,9 +220,11 @@ describe('applyToneHints', () => {
     // only the colour moves, and only the hinted group
     expect({ ...shifted.WALL_SECONDARY, color: undefined }).toEqual({ ...ARCHITECTURAL_PALETTE.WALL_SECONDARY, color: undefined })
     for (const g of SEMANTIC_GROUPS) if (g !== 'WALL_SECONDARY') expect(shifted[g], g).toEqual(ARCHITECTURAL_PALETTE[g])
-    const lightened = applyToneHints(ARCHITECTURAL_PALETTE, { WALL_SECONDARY: 'LIGHT' })
-    expect(TONE_FAMILIES.LIGHT.map((g) => ARCHITECTURAL_PALETTE[g].color)).toContain(lightened.WALL_SECONDARY.color)
-    expect(relativeLuminance(lightened.WALL_SECONDARY.color)).toBeGreaterThan(relativeLuminance(ARCHITECTURAL_PALETTE.WALL_SECONDARY.color))
+    const lightened = applyToneHints(ARCHITECTURAL_PALETTE, { FLAT_ROOF: 'MID' })
+    expect(TONE_FAMILIES.MID.map((g) => ARCHITECTURAL_PALETTE[g].color)).toContain(lightened.FLAT_ROOF.color)
+    expect(relativeLuminance(lightened.FLAT_ROOF.color)).toBeGreaterThan(relativeLuminance(ARCHITECTURAL_PALETTE.FLAT_ROOF.color))
+    // the nearest mid rung is the secondary walls' own, which a flat roof meets: the next one is taken
+    expect(lightened.FLAT_ROOF.color).not.toBe(ARCHITECTURAL_PALETTE.WALL_SECONDARY.color)
   })
 
   it('never moves a group into a neighbour: a hint no rung can honour is dropped', () => {
@@ -239,6 +242,13 @@ describe('applyToneHints', () => {
         if (moved) expect(Math.abs(relativeLuminance(p[a].color) - relativeLuminance(p[b].color)), `${tone}: ${a} / ${b}`).toBeGreaterThanOrEqual(MIN_ADJACENT_LUMINANCE_GAP)
       }
     }
+  })
+
+  it('draws a timber finish region as cladding and any other finish region as a secondary surface', () => {
+    const base = { objectKind: 'surfaceRegion' as SemanticKind, part: 'SURFACE_REGION' as GeometryPart }
+    expect(semanticGroupOf({ ...base, materialId: 'mat-timber', materialName: 'Timber cladding' })).toBe('WALL_CLADDING')
+    expect(semanticGroupOf({ ...base, materialId: 'mat-render-dark', materialName: 'Dark render' })).toBe('WALL_SECONDARY')
+    expect(semanticGroupOf(base)).toBe('WALL_SECONDARY')
   })
 
   it('reads a finish colour as a tone family by luminance', () => {
@@ -332,20 +342,26 @@ describe('in a bundle', () => {
     expect([...secondaryWalls].sort()).toEqual(model.walls.filter((w) => finishes.get(w.id) === 'SECONDARY').map((w) => w.id).sort())
   })
 
-  it('reads the finishes off the model: dominant finish PRIMARY, frame-member finish MEMBER, any other SECONDARY', () => {
+  it('reads the facade roles off the model: walls outside every ring are MEMBERS, ring walls PRIMARY or SECONDARY by finish', () => {
     const model = createMarcowkiReferenceBuilding()
     const finishes = wallFinishes(model)
+    const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
     const area = new Map<string, number>()
-    for (const w of model.walls.filter((x) => x.kind === 'EXTERIOR' && x.materialId)) area.set(w.materialId as string, (area.get(w.materialId as string) ?? 0) + Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z) * w.height)
+    for (const w of model.walls.filter((x) => x.kind === 'EXTERIOR' && x.materialId && inRing.has(x.id))) area.set(w.materialId as string, (area.get(w.materialId as string) ?? 0) + Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z) * w.height)
     const dominant = [...area].sort((a, b) => b[1] - a[1])[0][0]
     for (const w of model.walls) {
       if (w.kind !== 'EXTERIOR') expect(finishes.has(w.id), w.id).toBe(false)
-      else expect(finishes.get(w.id) === 'PRIMARY', w.id).toBe(w.materialId === dominant)
+      else if (!inRing.has(w.id)) expect(finishes.get(w.id), w.id).toBe('MEMBER')
+      else expect(finishes.get(w.id), w.id).toBe(w.materialId === dominant ? 'PRIMARY' : 'SECONDARY')
     }
-    // a model with one finish has no secondary walls at all
+    // a model with one finish and every wall in a ring has neither secondary walls nor members
     const one = createDemoBuilding()
     const oneFinish = { ...one, walls: one.walls.map((w) => ({ ...w, materialId: one.walls[0].materialId })) }
-    expect([...wallFinishes(oneFinish).values()].every((f) => f === 'PRIMARY')).toBe(true)
+    const inDemoRing = new Set(one.wallRings.flatMap((r) => r.wallIds))
+    for (const [id, f] of wallFinishes(oneFinish)) expect(f, id).toBe(inDemoRing.has(id) ? 'PRIMARY' : 'MEMBER')
+    // and a model without rings has no members at all
+    const noRings = { ...one, wallRings: [] }
+    expect([...wallFinishes(noRings).values()].includes('MEMBER')).toBe(false)
   })
 
   it('derives tone hints from the model’s own finishes and applies them', () => {
@@ -371,6 +387,37 @@ describe('in a bundle', () => {
     expect(buildMobileSceneBundle(model, { toneHints: derived.styling.toneHints }).contentHash).toBe(derived.contentHash)
     // no hints at all: the palette as it stands
     expect(buildMobileSceneBundle(model, { toneHints: {} }).styling.groups).toEqual(ARCHITECTURAL_PALETTE)
+  })
+})
+
+describe('§21 fixture 10: adjacent finishes in the architectural style', () => {
+  // A white house with a garage in dark render under a flat roof, and a sectional door in the garage.
+  const model = runCommands(createEmptyModel('adj', 'adjacent finishes'), [
+    { type: 'createBuilding', id: 'b' },
+    { type: 'createLevel', id: 'l0', index: 0, elevation: 0, height: 3 },
+    { type: 'defineMaterial', id: 'm-white', name: 'white render', color: '#e8e4dc' },
+    { type: 'defineMaterial', id: 'm-dark', name: 'dark render', color: '#3a3a3c' },
+    { type: 'createWallRing', id: 'house', levelId: 'l0', polygon: [{ x: 0, z: 0 }, { x: 8, z: 0 }, { x: 8, z: 8 }, { x: 0, z: 8 }], thickness: 0.3, height: 3, materialId: 'm-white' },
+    { type: 'createWallRing', id: 'gar', levelId: 'l0', polygon: [{ x: 8, z: 0 }, { x: 12, z: 0 }, { x: 12, z: 6 }, { x: 8, z: 6 }], thickness: 0.3, height: 2.9, materialId: 'm-dark' },
+    { type: 'createRoof', id: 'flat', levelId: 'l0', kind: 'FLAT', footprint: { minX: 8, maxX: 12, minZ: 0, maxZ: 6 }, eaveOffset: 2.7, thickness: 0.2, plateInset: { minX: 0.15, maxX: 0.15, minZ: 0.15, maxZ: 0.15 } },
+    { type: 'createRoof', id: 'gable', levelId: 'l0', kind: 'GABLE', footprint: { minX: 0, maxX: 8, minZ: 0, maxZ: 8 }, eaveOffset: 3, pitchDeg: 40, ridgeAxis: 'Z', thickness: 0.25, capWallIds: ['house-w0', 'house-w1', 'house-w2', 'house-w3'] },
+  ])
+  const bundle = buildMobileSceneBundle(model)
+  const groupsOf = (prefix: string): Set<SemanticGroup> => new Set(bundle.scene.meshes.filter((m) => m.objectId.startsWith(prefix) && m.part === 'WALL').map((m) => m.semanticGroup))
+
+  it('reads the two bodies apart from their finishes alone', () => {
+    expect(groupsOf('house-')).toEqual(new Set(['WALL_MAIN']))
+    expect(groupsOf('gar-')).toEqual(new Set(['WALL_SECONDARY']))
+    expect(bundle.styling.toneHints?.WALL_SECONDARY).toBe('DARK')
+    expect(bundle.styling.toneHints?.WALL_MAIN).toBe('LIGHT')
+  })
+
+  it('darkens the secondary body onto a palette rung that still stands apart from everything it meets', () => {
+    const g = bundle.styling.groups
+    expect(relativeLuminance(g.WALL_SECONDARY.color)).toBeLessThan(relativeLuminance(ARCHITECTURAL_PALETTE.WALL_SECONDARY.color))
+    for (const [a, b] of ADJACENT_GROUPS) expect(Math.abs(relativeLuminance(g[a].color) - relativeLuminance(g[b].color)), `${a} / ${b}`).toBeGreaterThanOrEqual(MIN_ADJACENT_LUMINANCE_GAP)
+    // a colour the palette already has, never one read off a render
+    expect(Object.values(ARCHITECTURAL_PALETTE).map((x) => x.color)).toContain(g.WALL_SECONDARY.color)
   })
 })
 

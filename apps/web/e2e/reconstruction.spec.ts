@@ -21,6 +21,8 @@ mkdirSync(ART, { recursive: true })
 const SEALED_V2 = resolve(HERE, '../../../packages/candidates/src')
 const sealedV2 = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v2.json'), 'utf8')) as { modelId: string; contentHash: string }
 const sealedV2Residuals = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v2-residuals.json'), 'utf8')) as { candidateHash: string; residuals: Array<{ withinTolerance: boolean }> }
+const sealedV3 = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v3.json'), 'utf8')) as { modelId: string; contentHash: string }
+const sealedV3Residuals = JSON.parse(readFileSync(resolve(SEALED_V2, 'marcowki-auto-v3-residuals.json'), 'utf8')) as { candidateHash: string; residuals: Array<{ withinTolerance: boolean }> }
 
 type Handle = { store: { model: { id: string; name: string; walls: Array<{ id: string }>; linearSolids: Array<{ id: string }>; stairs: unknown[] } }; meshCount: number; objectIds: string[] }
 
@@ -155,13 +157,36 @@ test('§23 recognizability: the five source views of the automatic candidate', a
  * the source views: the verifier's residuals ship with the candidate, and the
  * panel shows them as a table a reviewer can read row by row.
  */
-test('both sealed candidates are offered in the model selector', async ({ page }) => {
+test('every sealed candidate is offered in the model selector', async ({ page }) => {
   const labels = await page.getByTestId('model-select').locator('option').allTextContents()
   expect(labels).toContain('Marcówki (auto)')
   expect(labels).toContain('Marcówki (auto v2)')
+  expect(labels).toContain('Marcówki (auto v3)')
   const values = await page.getByTestId('model-select').locator('option').evaluateAll((os) => os.map((o) => (o as HTMLOptionElement).value))
   expect(values).toContain('marcowki-auto')
   expect(values).toContain('marcowki-auto-v2')
+  expect(values).toContain('marcowki-auto-v3')
+})
+
+test('the exterior-closure candidate loads with its terraces, turning railing and roof edge members', async ({ page }) => {
+  await page.getByTestId('model-select').selectOption('marcowki-auto-v3')
+  await expect(page.getByTestId('status-model')).toHaveText('Marcówki (auto v3)')
+  await expect(page.getByTestId('model-select')).toHaveValue('marcowki-auto-v3')
+  await expect(page.getByTestId('status-diagnostics')).toHaveText('geometry ok')
+  const m = await handle(page)
+  expect(m.id).toBe(sealedV3.modelId)
+  const extra = await page.evaluate(() => {
+    const model = (window as unknown as { __buildworld: { store: { model: { terraces: unknown[]; railings: Array<{ path?: unknown[] }>; roofs: Array<{ edgeMembers?: unknown }> } } } }).__buildworld.store.model
+    return { terraces: model.terraces.length, turning: model.railings.filter((r) => (r.path?.length ?? 0) > 2).length, edged: model.roofs.filter((r) => r.edgeMembers).length }
+  })
+  expect(extra.terraces).toBeGreaterThanOrEqual(2)
+  expect(extra.turning).toBeGreaterThanOrEqual(1)
+  expect(extra.edged).toBeGreaterThanOrEqual(1)
+  await page.getByTestId('panel-sources').click()
+  await expect(page.getByTestId('recon-candidate-hash')).toHaveText(sealedV3.contentHash.slice(0, 16))
+  expect(sealedV3Residuals.candidateHash).toBe(sealedV3.contentHash)
+  await page.waitForTimeout(300)
+  await page.screenshot({ path: resolve(ART, 'buildworld-marcowki-auto-v3.png'), fullPage: false })
 })
 
 test('the analyzer-v2 candidate loads from its sealed program and compiles like any other model', async ({ page }) => {
