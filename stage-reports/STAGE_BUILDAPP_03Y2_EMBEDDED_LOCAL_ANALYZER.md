@@ -267,7 +267,12 @@ green** — Core / Analyzer / Reconstruction, Browser / Playwright, Android /
 APK, Analyzer API / container, Analyzer API / deploy (skipped steps: no
 deployment configured), Dependency security, **Local analyzer / Node 18
 parity**, **Local analyzer / APK size + emulator**. The run for the final
-commit is named in the final message. Jobs: Core; Browser; **Android / APK** (the owner's APKs
+commit is named in the final message. The earlier run 36256959222 (`1b3e17e`,
+the first emulator pass, cited above for its measurements) ended red in one
+step only: the Node 18 job's table check, because the generated header named
+the Node patch version (sandbox v22.22.2, CI v22.23.2) while the table data
+were identical; `55c50cc` records only ICU and Unicode versions in the header.
+Its emulator job was green. Jobs: Core; Browser; **Android / APK** (the owner's APKs
 now embed the analyzer; NDK + CMake added); Analyzer API container + deploy
 (03Y1, unchanged); **Local analyzer / Node 18 parity**; **Local analyzer /
 APK size + emulator** (clean builds with and without, size report, desktop
