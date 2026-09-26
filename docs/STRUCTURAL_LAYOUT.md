@@ -82,9 +82,49 @@ third term is what makes a garage a garage. A wall with a 2.4 m door in it is
 36% covered and 100% a wall, and a reader that treats it as a missing face
 floods straight through the door and reports the garage as open ground. A hole
 BETWEEN two pieces of one wall counts as shut; a hole at the END of one does
-not, because that is where the wall stops. The cap — 3.2 m, the widest hole a
-domestic lintel spans — is the only thing separating a garage door from the
-mouth of a loggia, and it is a named convention.
+not, because that is where the wall stops. Up to 3.2 m, the widest hole a
+domestic lintel spans, the width alone shuts it: that is a named convention.
+
+**Wider holes are weighed on evidence, not by width (BUILDAPP-03Y2G).** A 5 m
+double garage door and the open side of a carport are the same width, and so
+are a 6 m glazed wall and the mouth of a loggia. Raising the cap would only
+move the error, so a gap between 3.2 m and `maxWideOpeningM` (8 m) is recorded
+as a `WideOpeningDecision`, with its evidence:
+
+- `infill`: how much of the gap has line work drawn across it, such as a door
+  leaf, glazing or a sill.
+- `callout`: a printed width that matches the gap.
+- `corners`: whether the wall carries on at both ends.
+- `pocketM2`: the area of what lies behind the gap.
+
+The gap is `OPENING_IN_WALL` when the wall carries on and either drawn infill
+covers at least 70% of the gap or, in a gap with nothing drawn across it, the
+enclosed area behind it is a room, not a pocket: more than max(6 m², 2.5 ×
+width²). A loggia about as deep as its mouth stays `OPEN_SIDE`. A callout alone
+never shuts a gap in a wall.
+
+**Bays.** Two walls can leave the walled envelope side by side and run out,
+like a projecting garage or a carport. That is a `PlanBay`, and its mouth is
+decided the same way:
+
+- Both side walls must reach the mouth.
+- Piers must stand at both corners, measured over the mouth wall's own
+  thickness.
+- Drawn infill across the mouth, or a callout that prints the mouth's width,
+  shuts it.
+- Piers alone do not shut a mouth.
+
+A shut bay is a built body, and an open one is ground.
+
+**Hypotheses.** Two enclosures are computed and both are recorded:
+
+- `H0_STRICT_ENCLOSURE`: only walls and short holes shut an edge.
+- `H1_WIDE_OPENING_CONTINUITY`: the evidenced wide openings shut it too.
+
+H1 is chosen when the two differ. `hypotheses` lists what each one built, so
+a reviewer sees what the continuity bought. Nothing falls back to a rectangle
+from the outermost dimensions: when no enclosure survives, the run fails with
+`PLAN_NO_ENCLOSED_CELLS` or `PLAN_NO_BUILT_REGIONS`.
 
 The fill then floods CELLS rather than pixels, from outside the plan inwards.
 A cell nothing reaches is built; a cell shut on three sides inside the walled

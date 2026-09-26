@@ -8,7 +8,7 @@
         "failed_HTTP_STATUS": 7,
         "variants": 43
       },
-      "durationMs": 17471,
+      "durationMs": 2255,
       "stage": "ACQUIRING_SOURCE",
       "startedAtMs": 0,
       "status": "PASSED",
@@ -26,7 +26,7 @@
       },
       "durationMs": 0,
       "stage": "CLASSIFYING_SOURCES",
-      "startedAtMs": 17471,
+      "startedAtMs": 2255,
       "status": "PASSED",
       "substage": "ROLES"
     },
@@ -37,9 +37,9 @@
         "relations": 726,
         "vision": "DETERMINISTIC_ONLY"
       },
-      "durationMs": 86397,
+      "durationMs": 83386,
       "stage": "EXTRACTING_OBSERVATIONS",
-      "startedAtMs": 17471,
+      "startedAtMs": 2255,
       "status": "PASSED",
       "substage": "OBSERVATIONS"
     },
@@ -53,9 +53,9 @@
         "scalesRefused": 4,
         "undecodable": 0
       },
-      "durationMs": 112418,
+      "durationMs": 101430,
       "stage": "EXTRACTING_OBSERVATIONS",
-      "startedAtMs": 103868,
+      "startedAtMs": 85641,
       "status": "PASSED",
       "substage": "METRIC_EVIDENCE"
     },
@@ -66,9 +66,9 @@
         "plansSkipped": 0,
         "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738"
       },
-      "durationMs": 357,
+      "durationMs": 477,
       "stage": "REGISTERING_VIEWS",
-      "startedAtMs": 216286,
+      "startedAtMs": 187071,
       "status": "PASSED",
       "substage": "PLAN_READ"
     },
@@ -96,7 +96,7 @@
       },
       "durationMs": 0,
       "stage": "REGISTERING_VIEWS",
-      "startedAtMs": 216643,
+      "startedAtMs": 187549,
       "status": "PASSED",
       "substage": "PLAN_DECOMPOSITION"
     },
@@ -110,7 +110,7 @@
       },
       "durationMs": 0,
       "stage": "REGISTERING_VIEWS",
-      "startedAtMs": 216644,
+      "startedAtMs": 187549,
       "status": "PASSED",
       "substage": "STRUCTURAL_LAYOUT"
     },
@@ -119,9 +119,9 @@
         "plans": 1,
         "registered": 1
       },
-      "durationMs": 2,
+      "durationMs": 1,
       "stage": "REGISTERING_VIEWS",
-      "startedAtMs": 216644,
+      "startedAtMs": 187549,
       "status": "PASSED",
       "substage": "PLAN_REGISTRATION"
     },
@@ -131,9 +131,9 @@
         "registered": 4,
         "ridgeDatum": true
       },
-      "durationMs": 169,
+      "durationMs": 173,
       "stage": "REGISTERING_VIEWS",
-      "startedAtMs": 216645,
+      "startedAtMs": 187550,
       "status": "PASSED",
       "substage": "ELEVATION_REGISTRATION"
     },
@@ -147,9 +147,9 @@
         "rooms": 9,
         "stair": "none"
       },
-      "durationMs": 597,
+      "durationMs": 555,
       "stage": "SOLVING_TOPOLOGY",
-      "startedAtMs": 216814,
+      "startedAtMs": 187723,
       "status": "PASSED",
       "substage": "TOPOLOGY"
     },
@@ -163,9 +163,9 @@
         "sharedDoors": 0,
         "terraces": 2
       },
-      "durationMs": 7544,
+      "durationMs": 6766,
       "stage": "SOLVING_METRICS",
-      "startedAtMs": 217411,
+      "startedAtMs": 188278,
       "status": "PASSED",
       "substage": "METRICS"
     },
@@ -175,9 +175,9 @@
         "openingsDropped": 1,
         "openingsFitted": 1
       },
-      "durationMs": 452,
+      "durationMs": 495,
       "stage": "BUILDING_MODEL",
-      "startedAtMs": 224955,
+      "startedAtMs": 195044,
       "status": "DEGRADED",
       "substage": "EMISSION"
     },
@@ -187,20 +187,20 @@
         "masses": 2,
         "unresolved": 10
       },
-      "durationMs": 114,
+      "durationMs": 139,
       "stage": "BUILDING_MODEL",
-      "startedAtMs": 225407,
+      "startedAtMs": 195539,
       "status": "PASSED",
       "substage": "SEAL"
     },
     {
       "counts": {
         "meshes": 110,
-        "sceneBytes": 316196
+        "sceneBytes": 316230
       },
-      "durationMs": 66,
+      "durationMs": 83,
       "stage": "COMPILING_SCENE",
-      "startedAtMs": 225521,
+      "startedAtMs": 195678,
       "status": "PASSED",
       "substage": "COMPILE"
     },
@@ -208,9 +208,9 @@
       "counts": {
         "commands": 135
       },
-      "durationMs": 45,
+      "durationMs": 53,
       "stage": "VERIFYING",
-      "startedAtMs": 225587,
+      "startedAtMs": 195761,
       "status": "PASSED",
       "substage": "REPLAY"
     },
@@ -220,9 +220,9 @@
         "exteriorFindings": 5,
         "interiorFindings": 19
       },
-      "durationMs": 229,
+      "durationMs": 198,
       "stage": "VERIFYING",
-      "startedAtMs": 225632,
+      "startedAtMs": 195814,
       "status": "DEGRADED",
       "substage": "CLOSURE"
     }

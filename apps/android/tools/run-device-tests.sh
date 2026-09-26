@@ -2,7 +2,7 @@
 # The local analyzer's device gate, run inside a booted emulator (CI) or
 # against any device adb sees.
 #
-#   DESKTOP_FIXTURE=<desktop-hashes.json> [LIVE_URL=<url>] [OUT=<dir>] apps/android/tools/run-device-tests.sh
+#   DESKTOP_FIXTURE=<desktop-hashes.json> [LIVE_URL=<url>] [SECOND_LIVE_URL=<url>] [OUT=<dir>] apps/android/tools/run-device-tests.sh
 #
 # 1. installs the x86_64 (or arm64) app APK and the instrumentation test APK;
 # 2. runs LocalAnalyzerDeviceTest — the runtime installed, the synthetic
@@ -10,6 +10,8 @@
 #    hashes required, cancel during a download, cancel during compute;
 # 3. if LIVE_URL is set, runs the live test (the production launcher on a real
 #    URL) — reported separately, because it depends on a third-party site;
+#    SECOND_LIVE_URL does the same for a second project, under its own report
+#    name (`live-second-house`) and status file (BUILDAPP-03Y2G);
 # 4. pulls the per-test JSON reports and the relevant logcat into OUT.
 #
 # Exits non-zero if step 2 fails. The live result is written to OUT/live-status.txt.
@@ -67,6 +69,14 @@ if [ -n "${LIVE_URL:-}" ]; then
 fi
 echo "$LIVE" > "$OUT/live-status.txt"
 echo "live: $LIVE"
+
+SECOND="LIVE_ANDROID_ANALYSIS_NOT_RUN"
+if [ -n "${SECOND_LIVE_URL:-}" ]; then
+  adb shell am instrument -w -e class "$CLASS#liveUrlThroughTheProductionLauncher" -e liveUrl "$SECOND_LIVE_URL" -e liveReportName live-second-house -e liveTimeoutMinutes "${LIVE_TIMEOUT_MINUTES:-40}" "$RUNNER" | tee "$OUT/instrument-live-second-house.txt"
+  if grep -q "^OK (1 test)" "$OUT/instrument-live-second-house.txt"; then SECOND="LIVE_ANDROID_ANALYSIS_PASS"; else SECOND="LIVE_ANDROID_ANALYSIS_FAILED"; fi
+fi
+echo "$SECOND" > "$OUT/live-second-house-status.txt"
+echo "live (second house): $SECOND"
 
 adb pull "/sdcard/Android/data/$PKG/files/local-analyzer-reports" "$OUT/" || echo "no reports to pull"
 adb logcat -d -v time -s BuildAppLocalAnalyzer:V BuildAppNode:V AndroidRuntime:E lowmemorykiller:V ActivityManager:I > "$OUT/logcat.txt" 2>&1 || true

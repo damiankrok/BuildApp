@@ -54,7 +54,7 @@ the other mode of the Analyzer screen.
   `done`, its files exist, the summary file agrees with the event, and the
   scene store verified sha256, schema and `contentHash`.
 
-## Protocol (version 1)
+## Protocol (version 2)
 
 ```
 node main.mjs --job <32 hex> --url <https://…> --work <dir> --out <dir> --events-fd <n> --control-fd <n>
@@ -66,6 +66,30 @@ one of `done` (summary, metrics with timings and peak RSS, source byte hashes),
 `failed` (code, message, metrics) or `cancelled` (metrics). Exit codes 0 done,
 1 failed, 2 cancelled, 3 bad arguments. The app owns the events descriptor and
 closes it when Node returns; the program owns the control descriptor.
+
+Version 2 (BUILDAPP-03Y2G) adds two things:
+
+- `failed` carries `failure`, the structured failure the analyzer service
+  returns (`code`, `reasonCode`, `stage`, `substage`, `title`, `message`,
+  `diagnostics` counts).
+- Every terminal event names its `diagnostics` files, `{dir: "diagnostics", files, bytes}`,
+  in `<out>/diagnostics`:
+  - `trace.json` on every run: each pipeline step with its status, duration,
+    counts and, on a failure, its reason code.
+  - `diagnostics.json` and `plan-overlay.png` on a failure: the source by hash,
+    the runtime, the plan-decomposition digest, and the plan with its wall bands,
+    grid, cells, flood classes and masses drawn over it.
+  - Each file is at most 1.5 MB. The digest is trimmed first, and an overlay over
+    the limit is left out.
+
+`hello` must carry the protocol the app speaks. An architecture test holds the
+program, the bundle and the app to the same number.
+
+The app copies a failed job's three diagnostics files and nothing else into
+`files/analyzer-diagnostics/<job>` before it removes the job folder. It keeps
+at most five bundles, and no file over 2 MB. They carry no source image. The
+failure card's **Share diagnostics** zips one bundle into the cache and hands
+it to the share sheet through a FileProvider that is not exported.
 
 ## Storage
 

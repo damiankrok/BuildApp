@@ -91,7 +91,26 @@ Refusals, before anything is fetched or queued:
 - `status` ∈ `QUEUED`, `ACQUIRING_SOURCE`, `CLASSIFYING_SOURCES`, `EXTRACTING_OBSERVATIONS`, `REGISTERING_VIEWS`, `SOLVING_TOPOLOGY`, `SOLVING_METRICS`, `BUILDING_MODEL`, `COMPILING_SCENE`, `VERIFYING`, `COMPLETED`, `FAILED`, `CANCELLED`.
 - `stages[].state` ∈ `PENDING`, `RUNNING`, `DONE`, `FAILED`, `CANCELLED`. The list always has all nine stages in pipeline order.
 - `progress` (0..1) is the position in the pipeline: it moves when a stage starts or finishes and, while reading drawings, per drawing. It never moves on a timer and never decreases. `stage` is `null` while `QUEUED` and after a terminal status.
-- On `FAILED` / `CANCELLED`: `error` is `{code, message}` with `code` ∈ `SOURCE_REFUSED`, `SOURCE_UNREACHABLE`, `UNSUPPORTED_PUBLISHER`, `NO_DRAWINGS`, `ANALYSIS_FAILED`, `TIMEOUT`, `CANCELLED`, `SERVICE_RESTARTED`, `INTERNAL`.
+- On `FAILED` / `CANCELLED`: `error` is `{code, message}` with `code` ∈ `SOURCE_REFUSED`, `SOURCE_UNREACHABLE`, `UNSUPPORTED_PUBLISHER`, `NO_DRAWINGS`, `RECONSTRUCTION_FAILED`, `ANALYSIS_FAILED`, `TIMEOUT`, `CANCELLED`, `SERVICE_RESTARTED`, `INTERNAL`.
+  Since BUILDAPP-03Y2G `error` may also carry, all optional:
+  - `reasonCode`: the solver's own code, e.g. `PLAN_NO_ENCLOSED_CELLS`, `PLAN_LAYOUT_REJECTED`, `MODEL_EMISSION_FAILED`, `VERIFY_REPLAY_FAILED`, or `INTERNAL_ERROR`.
+  - `stage`: the stage that was running.
+  - `substage`: the step inside it, e.g. `PLAN_DECOMPOSITION`.
+  - `title`: a heading for a person.
+  - `diagnostics`: flat counts of how far the reading got, such as plan frames, dimension chains read, wall bands, grid lines, cells, enclosed cells, built regions and masses.
+  - `RECONSTRUCTION_FAILED`: the analyzer read the drawings and knows why no building followed. `reasonCode` says why.
+  - `ANALYSIS_FAILED`: only an unexpected error. It keeps the `stage` it happened in, with `reasonCode: INTERNAL_ERROR`.
+  - No field carries a path, a stack trace or source bytes.
+
+  The reason codes (`packages/reconstruction/src/failure.ts`, with a title for each):
+
+  | Family | Codes |
+  |---|---|
+  | Plan | `PLAN_NOT_FOUND`, `PLAN_NOT_DECODABLE`, `PLAN_NO_DIMENSION_FRAME`, `PLAN_NO_WALL_BANDS`, `PLAN_NO_WALLED_ENVELOPE`, `PLAN_GRID_EMPTY`, `PLAN_NO_ENCLOSED_CELLS`, `PLAN_NO_BUILT_REGIONS`, `PLAN_NO_MASSES`, `PLAN_LAYOUT_REJECTED`, `PLAN_STOREY_ALIGNMENT_FAILED`, `PLAN_STOREY_ALIGNMENT_AMBIGUOUS` |
+  | Views | `VIEW_REGISTRATION_NO_ANCHORS`, `VIEW_REGISTRATION_AMBIGUOUS`, `ELEVATION_REGISTRATION_FAILED`, `SECTION_REGISTRATION_FAILED` |
+  | Solving and emission | `TOPOLOGY_NO_VALID_HYPOTHESIS`, `METRIC_SOLVE_FAILED`, `MODEL_EMISSION_FAILED` |
+  | Scene and verification | `SCENE_COMPILE_FAILED`, `VERIFY_REPLAY_FAILED`, `VERIFY_CLOSURE_FAILED` |
+  | Unexpected | `INTERNAL_ERROR` |
 - On `COMPLETED`: `result` is a short summary (below) and `links` gains `result`, `scene`, `model`, `candidate`.
 
 ```json

@@ -7,9 +7,9 @@
     "service": "1.0.0",
     "solver": "2.0.0"
   },
-  "candidateHash": "6ae8afee8c8724ae5e58b98b33ce57318e692d224c112adb6b1e361465f71ca1",
+  "candidateHash": "a3a220f43c7cbfec99df70b94583f0a165abd79b3718f006244134627612d14a",
   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
-  "completedAt": "2026-09-26T21:30:21.121Z",
+  "completedAt": "2026-09-26T21:53:14.078Z",
   "counts": {
     "assets": 37,
     "assetsByDocument": {
@@ -37,11 +37,11 @@
     "triangles": 2672
   },
   "jobId": null,
-  "label": "Second house (analysis)",
+  "label": "Dom w rarytasach 5 (G2E) (analysis)",
   "metricEvidenceHash": "271e77c45f4197e12b81352503b1f1e7b69bc6e092b1b27c6443ecf639de6d3d",
-  "modelHash": "3b397be11094f22e5869583965cc17fa227dce0ae97d8726630ece7a5ae22b07",
-  "modelId": "m-second-house",
-  "modelSha256": "3b397be11094f22e5869583965cc17fa227dce0ae97d8726630ece7a5ae22b07",
+  "modelHash": "b1d6d7b7d0b7dfcd0ea57ff241b3db3289b9b1096a6200ef5848e0c291828eb3",
+  "modelId": "m-analysis-m84f2903cb8e14",
+  "modelSha256": "b1d6d7b7d0b7dfcd0ea57ff241b3db3289b9b1096a6200ef5848e0c291828eb3",
   "observationGraphHash": "35d038fc7a4b3ea494276f1d82d7901b397b0fe4deab7047d80ae50550c19742",
   "publisher": "archon.pl",
   "quality": {
@@ -95,23 +95,23 @@
       "L2": 25
     }
   },
-  "sceneBytes": 316196,
-  "sceneContentHash": "75208faf44b386f41b472c21ac077a677353eabfa6ae284e75de054bc7d88e2b",
-  "sceneSha256": "a6838b70f02c6d8a986363baaa75c2febd26f3edb3a0d4873cd46e9aa7ae9636",
+  "sceneBytes": 316230,
+  "sceneContentHash": "454af53f563de5ce3342e6ad55f242df99d10e04d71b1ce4b9aa940259dd08a3",
+  "sceneSha256": "6fe9c09631eaf71e716976588f956c8c1654ea1434f12475050feef184e7fc4b",
   "schema": "buildapp.link-analysis-result",
   "schemaVersion": "1.0.0",
   "sourcePackageHash": "82a5490b763ee05244ffcf019db40276451f0a44f896a7d7ae6d365b605f19eb",
   "sourcePackageId": "src-m84f2903cb8e14-bd72938d69",
   "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
-  "startedAt": "2026-09-26T21:26:35.258Z",
+  "startedAt": "2026-09-26T21:49:58.064Z",
   "timings": {
-    "acquisitionMs": 17471,
-    "compileMs": 62,
-    "metricExtractionMs": 112418,
-    "observationMs": 86397,
-    "reconstructionMs": 9235,
-    "totalMs": 225863,
-    "verificationMs": 278
+    "acquisitionMs": 2255,
+    "compileMs": 82,
+    "metricExtractionMs": 101430,
+    "observationMs": 83386,
+    "reconstructionMs": 8607,
+    "totalMs": 196014,
+    "verificationMs": 252
   },
   "title": "Dom w rarytasach 5 (G2E)",
   "unresolved": [

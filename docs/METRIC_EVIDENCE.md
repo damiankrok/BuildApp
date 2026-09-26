@@ -113,6 +113,21 @@ Solving a chain is a discrete choice, not a fixed partition:
 
 What it never does is invent a value to make a chain close.
 
+**A plan's scale must be physically plausible (BUILDAPP-03Y2G).** OCR can
+misread an italic face the same wrong way on several chains, and a pixel
+tolerance vote then agrees on a wrong scale. That happened on a second test
+project: 8.51 cm/px against a true ~2.75. So on a floor plan the vote's winner
+must make the heavier drawn walls a thickness an outer wall can have. The upper
+quartile of the wall-band thicknesses must fall between 0.15 and 0.8 m
+(`PLAN_OUTER_WALL_M`).
+
+A winner that fails this is replaced only by another candidate of the same
+vote that passes it, is supported by at least three numbers on at least two
+chains, and differs from the winner by at least 3%. Otherwise the plan carries
+**no** scale, and its chains are solved with no values. The decision, including
+every scale considered and why, is recorded as `scaleDecision`. An unresolved
+`gap-scale-implausible-*` names what was refused.
+
 ## The ladder of level datums
 
 The same redundancy, in the vertical. Every printed level states a height above
@@ -124,6 +139,18 @@ with the other three heights on the same sheet.
 
 A plus-or-minus sign means "this is the zero", and is written on nothing else.
 `±0,08` is not a height eight centimetres up.
+
+Two rules added in BUILDAPP-03Y2G:
+
+- **A level symbol with no rule beside it.** A ridge level is often printed
+  above a ▽ whose apex touches the ridge, with no horizontal rule. The reader
+  then looks for the apex on the raster itself: a downward-pointing triangle of
+  dark ink below the number, tried at three slopes. The association is recorded
+  with score 0.5, lower than a rule's.
+- **When ±0.00 is missed.** The solver's `levelsFrom` does not take the terrain
+  datum, a small negative level such as −0.45, as the floor. When positive
+  datums were read and 0 was not, the implicit zero is added back, because every
+  positive level on the sheet is measured from it.
 
 ## Registration
 

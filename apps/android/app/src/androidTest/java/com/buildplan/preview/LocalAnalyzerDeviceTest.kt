@@ -49,6 +49,8 @@ import org.junit.runner.RunWith
  *   expectedSceneSha256   the desktop pipeline's hashes for the fixture
  *   liveUrl               a real project URL for the production launcher
  *   liveTimeoutMinutes    default 40
+ *   liveReportName        the live run's report name, default `live` (a second
+ *                         project is run under its own name, BUILDAPP-03Y2G)
  *
  * Every run writes a JSON report to the app's external files folder
  * (`local-analyzer-reports/`), which CI pulls with adb.
@@ -141,8 +143,9 @@ class LocalAnalyzerDeviceTest {
         val url = args.getString("liveUrl")
         assumeTrue("no liveUrl argument: LIVE_ANDROID_ANALYSIS_NOT_RUN", !url.isNullOrBlank())
         val minutes = args.getString("liveTimeoutMinutes")?.toLongOrNull() ?: 40L
+        val name = args.getString("liveReportName")?.takeIf { Regex("^[a-z0-9-]{1,40}$").matches(it) } ?: "live"
         val run = analyse(url!!, fixture = false, timeoutMs = minutes * 60_000L)
-        writeReport("live", run)
+        writeReport(name, run)
         val completed = run.final as? AnalysisState.Completed
         assertNotNull("expected Completed, got ${run.final}", completed)
         args.getString("expectedLiveModelHash")?.let { assertEquals("model hash vs desktop", it, completed!!.summary.modelHash) }

@@ -363,9 +363,10 @@ jobs:
     # (advisory) run on the real Marcówki URL and compared with the desktop.
     name: Local analyzer / APK size + emulator
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     env:
       MARCOWKI_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca
+      SECOND_HOUSE_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -431,6 +432,8 @@ jobs:
         env:
           DESKTOP_FIXTURE: local-analyzer-device/desktop-fixture.json
           LIVE_URL: ${{ env.MARCOWKI_URL }}
+          # BUILDAPP-03Y2G: the second regression project, on the device too (advisory, like the first)
+          SECOND_LIVE_URL: ${{ env.SECOND_HOUSE_URL }}
           LIVE_TIMEOUT_MINUTES: "40"
           OUT: local-analyzer-device/device
         with:
@@ -453,6 +456,7 @@ jobs:
             cat local-analyzer-device/device/device.txt 2>/dev/null | sed 's/^/    /'; echo
             cat local-analyzer-device/device-summary.md 2>/dev/null
             echo; echo "Live URL on the device: $(cat local-analyzer-device/device/live-status.txt 2>/dev/null || echo LIVE_ANDROID_ANALYSIS_NOT_RUN)"
+            echo; echo "Second house on the device: $(cat local-analyzer-device/device/live-second-house-status.txt 2>/dev/null || echo LIVE_ANDROID_ANALYSIS_NOT_RUN)"
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Device vs desktop on the real URL (advisory)
         if: always()
@@ -471,6 +475,148 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
           path: local-analyzer-device/**
+
+  second-house-generalization:
+    # BUILDAPP-03Y2G. A second real project beside Marcówki, kept as a
+    # regression project. The analyzer is gated here, not the publisher: the
+    # live URL must complete through the production pipeline, its own sealed
+    # evidence must replay offline to the same hashes, the evidence the
+    # analyzer read before this stage must still be refused, by name, and the
+    # bundle the APK embeds must reach the same model on Node 18 without ICU,
+    # as on Android. When the publisher cannot be reached, the run is recorded
+    # and warned about instead of failing: that is not an analyzer failure.
+    name: Second house / generalization
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SECOND_HOUSE_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14
+      SEALED: stage-reports/artifacts/rarytasy-generalization
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Node 18.20.4 (the runtime version inside the APK)
+        run: |
+          curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
+          echo "LOCAL_ANALYZER_NODE18=$RUNNER_TEMP/node-v18.20.4-linux-x64/bin/node" >> "$GITHUB_ENV"
+      - name: The live URL through the production pipeline (must complete)
+        run: |
+          mkdir -p second-house
+          npm run -s analysis:second-house -- --url "$SECOND_HOUSE_URL" --out second-house/live --cache .cache/second-house-bytes --expect COMPLETED --tolerate-source-outage | tee second-house/live.log
+      - name: Its sealed evidence, replayed offline, gives the same candidate, model and scene
+        run: |
+          if [ ! -f second-house/live/result-summary.json ]; then echo "::warning::no completed live run to replay"; exit 0; fi
+          OFFLINE=1 npm run -s analysis:second-house -- --package second-house/live/source-package.json --graph second-house/live/observation-graph.json \
+            --out second-house/replay --cache .cache/second-house-bytes --expect COMPLETED --same-as second-house/live/result-summary.json
+      - name: The pre-fix evidence through today's solver is refused by name, not by ANALYSIS_FAILED
+        run: |
+          if [ ! -d .cache/second-house-bytes ]; then echo "::warning::no plan images fetched; nothing to replay"; exit 0; fi
+          npm run -s analysis:second-house -- --package "$SEALED/pre-fix/source-package.json" --graph "$SEALED/pre-fix/observation-graph.json" \
+            --metrics "$SEALED/pre-fix/metric-evidence.json" --out second-house/pre-fix --cache .cache/second-house-bytes --expect FAILED
+          node -e "
+            const f = require('./second-house/pre-fix/failure.json')
+            if (f.code !== 'RECONSTRUCTION_FAILED' || f.reasonCode !== 'PLAN_LAYOUT_REJECTED') { console.error('expected RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED, got', f.code, f.reasonCode); process.exit(1) }
+            console.log('pre-fix evidence:', f.code, '/', f.reasonCode, 'in', f.stage, '/', f.substage)
+          "
+      - name: The committed post-fix evidence replays to the committed hashes (advisory — needs the publisher's images, which are not committed)
+        continue-on-error: true
+        run: |
+          OFFLINE=1 npm run -s analysis:second-house -- --package "$SEALED/post-fix/source-package.json" --graph "$SEALED/post-fix/observation-graph.json" \
+            --out second-house/committed-replay --cache .cache/second-house-bytes --expect COMPLETED --same-as "$SEALED/post-fix/result-summary.json"
+      - name: The bundle the APK embeds, on Node 18 without ICU as on Android, reaches the same model and scene
+        run: |
+          node apps/local-analyzer/build.mjs
+          node apps/local-analyzer/scripts/run-host.mjs --dir apps/local-analyzer/dist --node "$LOCAL_ANALYZER_NODE18" --no-icu --url "$SECOND_HOUSE_URL" \
+            --events second-house/node18-no-icu-events.ndjson > second-house/node18-no-icu.json || true
+          node -e "
+            const fs = require('fs')
+            const run = JSON.parse(fs.readFileSync('second-house/node18-no-icu.json', 'utf8')).terminal ?? {}
+            if (run.type === 'failed' && run.code === 'SOURCE_UNREACHABLE') { console.log('::warning::the publisher could not be reached from the Node 18 run'); process.exit(0) }
+            if (run.type !== 'done') { console.error('the bundle on Node 18 did not complete:', JSON.stringify(run).slice(0, 600)); process.exit(1) }
+            if (!fs.existsSync('second-house/live/result-summary.json')) { console.log('::warning::no desktop run to compare with'); process.exit(0) }
+            const desktop = require('./second-house/live/result-summary.json')
+            // two fetches of one page seal different packages (the page itself changes), so the
+            // candidate, which cites its package, differs; the model and scene must not
+            const keys = ['modelHash', 'sceneContentHash', 'sceneSha256']
+            const differ = keys.filter((k) => run.summary[k] !== desktop[k])
+            if (differ.length) { for (const k of differ) console.error(k, run.summary[k], '!=', desktop[k]); process.exit(1) }
+            console.log('desktop = bundle on Node 18 (no ICU):', keys.map((k) => k + ' ' + desktop[k].slice(0, 12)).join(', '), '; peak RSS', run.metrics?.memory?.peakRssBytes, 'bytes,', run.metrics?.elapsedMs, 'ms')
+          "
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Second house (BUILDAPP-03Y2G)"; echo
+            echo '```'; tail -n 12 second-house/live.log 2>/dev/null; echo '```'
+            for f in second-house/live/failure.json second-house/pre-fix/failure.json; do
+              [ -f "$f" ] && { echo "$f:"; echo '```'; node -e "const f=require('./$f'); console.log(f.code, '/', f.reasonCode, '—', f.stage, '/', f.substage, '—', f.message)"; echo '```'; }
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the second-house record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: second-house-generalization
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            second-house/**
+            !second-house/**/observation-graph.json
+
+  preview-release:
+    # BUILDAPP-03Y2G: one direct, stable download link for the owner's phone —
+    # a GitHub prerelease `preview-latest` whose asset is the arm64 APK itself,
+    # BuildPlan-Preview-arm64.apk, not a zip. Re-created on every push to the
+    # development branch or main, from the APK the Android job built and
+    # verified (same preview signing key, versionCode 1000 + run number, so a
+    # phone installs each as an update of the last).
+    name: Android / direct APK (preview-latest)
+    needs: android
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/claude/buildapp-buildworld-v1-7y6yqh')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: The APKs the Android job built
+        uses: actions/download-artifact@v4
+        with:
+          name: buildplan-model-preview-apks
+          path: apks
+      - name: Publish BuildPlan-Preview-arm64.apk to the preview-latest prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          src="apks/BuildPlan-Model-Preview-arm64-v8a-debug.apk"
+          [ -f "$src" ] || { echo "::error::no arm64 APK in the Android job's artifact"; ls -la apks; exit 1; }
+          cp "$src" BuildPlan-Preview-arm64.apk
+          sha=$(sha256sum BuildPlan-Preview-arm64.apk | cut -d' ' -f1)
+          {
+            echo "BuildPlan Model Preview — arm64 (the owner's phone)."
+            echo
+            echo "Direct download: https://github.com/${GH_REPO}/releases/download/preview-latest/BuildPlan-Preview-arm64.apk"
+            echo
+            echo "Built by run ${GITHUB_RUN_NUMBER} from ${GITHUB_REF_NAME} @ ${GITHUB_SHA}."
+            echo "SHA-256 ${sha}"
+            echo
+            echo '```'; cat apks/VERSION.txt; echo '```'
+            echo
+            echo "Signed with the preview key: it installs over any earlier preview build."
+          } > notes.md
+          gh release delete preview-latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create preview-latest BuildPlan-Preview-arm64.apk apks/VERSION.txt \
+            --prerelease --target "$GITHUB_SHA" --title "BuildPlan Preview (latest, arm64)" --notes-file notes.md
+          url="https://github.com/${GH_REPO}/releases/download/preview-latest/BuildPlan-Preview-arm64.apk"
+          echo "### Direct APK" >> "$GITHUB_STEP_SUMMARY"
+          echo "$url (SHA-256 $sha)" >> "$GITHUB_STEP_SUMMARY"
 
   dependency-security:
     name: Dependency security (advisory)
