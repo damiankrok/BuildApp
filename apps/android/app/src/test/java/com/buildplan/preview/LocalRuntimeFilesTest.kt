@@ -25,7 +25,7 @@ class LocalRuntimeFilesTest {
 
     private fun sha(bytes: ByteArray) = MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it.toInt() and 0xff) }
 
-    private fun manifest(protocol: Int = 1, analyzerSha: String = sha(analyzer)) = """
+    private fun manifest(protocol: Int = com.buildplan.preview.analyzer.local.LocalProtocol.PROTOCOL, analyzerSha: String = sha(analyzer)) = """
         {"schema":"buildapp.local-analyzer-runtime","protocol":$protocol,"runtime":{"name":"nodejs-mobile","node":"18.20.4","target":"node18"},"entry":"main.mjs",
          "files":{"analyzer.mjs":{"sha256":"$analyzerSha","bytes":${analyzer.size}},"main.mjs":{"sha256":"${sha(main)}","bytes":${main.size}}}}
     """.trimIndent().encodeToByteArray()
@@ -75,7 +75,7 @@ class LocalRuntimeFilesTest {
     @Test
     fun `a bundle that speaks another protocol is refused`() {
         val root = AnalyzerFixtures.tempDir("runtime-files-protocol")
-        val files = LocalRuntimeFiles(root, assets("local-analyzer/manifest.json" to manifest(protocol = 2), "local-analyzer/analyzer.mjs" to analyzer, "local-analyzer/main.mjs" to main))
+        val files = LocalRuntimeFiles(root, assets("local-analyzer/manifest.json" to manifest(protocol = com.buildplan.preview.analyzer.local.LocalProtocol.PROTOCOL + 1), "local-analyzer/analyzer.mjs" to analyzer, "local-analyzer/main.mjs" to main))
         try {
             files.install()
             fail("installed a bundle of another protocol")

@@ -25,7 +25,20 @@ internal val AnalyzerJson = Json {
 data class ErrorEnvelope(val error: ApiError? = null)
 
 @Serializable
-data class ApiError(val code: String = "", val message: String = "")
+data class ApiError(
+    val code: String = "",
+    val message: String = "",
+    /** BUILDAPP-03Y2G: the solver's own reason, where it knew one; absent from an older service. */
+    val reasonCode: String? = null,
+    val stage: String? = null,
+    val substage: String? = null,
+    val title: String? = null,
+    val diagnostics: Map<String, kotlinx.serialization.json.JsonElement> = emptyMap(),
+) {
+    /** The structured part, when there is any. */
+    val details: FailureDetails?
+        get() = if (reasonCode == null && stage == null && title == null && diagnostics.isEmpty()) null else FailureDetails(reasonCode, stage, substage, title, diagnostics)
+}
 
 /** `202 Accepted` from `POST /v1/analyses`. */
 @Serializable

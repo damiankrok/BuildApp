@@ -6,7 +6,9 @@ import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.local.InstalledRuntime
 import com.buildplan.preview.analyzer.local.LocalAnalysis
+import com.buildplan.preview.analyzer.local.DiagnosticsStore
 import com.buildplan.preview.analyzer.local.LocalEvent
+import com.buildplan.preview.analyzer.local.LocalProtocol
 import com.buildplan.preview.analyzer.local.LocalJobs
 import com.buildplan.preview.analyzer.local.LocalProgress
 import com.buildplan.preview.analyzer.local.LocalRunHandle
@@ -105,6 +107,7 @@ class LocalAnalysisTest {
         val installFails: Boolean = false,
     ) {
         val root = AnalyzerFixtures.tempDir("local-analysis")
+        val kept = DiagnosticsStore(File(root, "analyzer-diagnostics"))
         val jobs = LocalJobs(File(root, "local-analyzer"))
         val scenes = DownloadedScenes(File(root, "analyses"))
         val host = FakeHost()
@@ -125,6 +128,7 @@ class LocalAnalysisTest {
             scheduler = scheduler,
             publish = { states.add(it) },
             onFinished = { finished.add(it) },
+            diagnostics = kept,
         )
 
         val run: FakeRun get() = host.runs.single()
@@ -141,7 +145,7 @@ class LocalAnalysisTest {
             scheduler.drain()
         }
 
-        fun hello(protocol: Int = 1) = line(
+        fun hello(protocol: Int = LocalProtocol.PROTOCOL) = line(
             """{"type":"hello","protocol":$protocol,"jobId":"${run.arg("job")}","pid":4242,""" +
                 """"runtime":{"node":"v18.20.4","v8":"10.2.154.26-node.36","icu":"74.1","platform":"android","arch":"arm64","cpus":8,"totalMemoryBytes":8000000000,"collatorLocale":"en-US"},""" +
                 """"analyzer":{"service":"1.0.0","solver":"2.3.0"}}""",
@@ -308,7 +312,7 @@ class LocalAnalysisTest {
     fun `a runtime that speaks another protocol is refused before it runs anything`() {
         val w = World()
         w.start()
-        w.hello(protocol = 2)
+        w.hello(protocol = LocalProtocol.PROTOCOL + 1)
         assertTrue(w.run.terminated)
         w.processGone()
         assertEquals("RUNTIME_PROTOCOL", ((w.last as AnalysisState.Failed).failure as AnalyzerFailure.LocalRuntime).code)
@@ -478,5 +482,81 @@ class LocalAnalysisTest {
         val done = LocalEvent.parse("""{"type":"done","summary":$summaryJson,"metrics":{},"sources":{"assets":[]}}""") as LocalEvent.Done
         assertEquals("6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63", done.summary.sceneSha256)
         assertTrue(done.isTerminal)
+    }
+
+    // --- BUILDAPP-03Y2G: a failure says why, and its diagnostics outlive the job ---------------
+
+    private val structuredFailure =
+        """{"type":"failed","code":"RECONSTRUCTION_FAILED","message":"the analyzer read the 853×853 px floor plan — 41 wall bands, a 12 × 15 structural grid — but could reach every one of its 165 cells from outside: no closed building footprint",""" +
+            """"metrics":{"elapsedMs":20100,"memory":{"rssBytes":1,"peakRssBytes":248000000,"peakSource":"VmHWM"}},""" +
+            """"failure":{"code":"RECONSTRUCTION_FAILED","reasonCode":"PLAN_NO_ENCLOSED_CELLS","stage":"REGISTERING_VIEWS","substage":"PLAN_DECOMPOSITION","title":"Could not reconstruct the floor-plan body","message":"…",""" +
+            """"diagnostics":{"planFrames":1,"planSizePx":"853x853","wallBands":41,"gridLinesX":12,"gridLinesY":15,"cells":165,"enclosedCells":0,"builtRegions":0,"masses":0,"walledEnvelope":true}},""" +
+            """"diagnostics":{"dir":"diagnostics","files":["trace.json","diagnostics.json","plan-overlay.png"],"bytes":1234}}"""
+
+    @Test
+    fun `a structured failure carries its reason code, stage and counts, and its diagnostics are kept after the folder goes`() {
+        val w = World()
+        val run = w.start()
+        w.hello()
+        w.progress("REGISTERING_VIEWS", 0.91)
+        val diag = File(run.arg("out"), "diagnostics").apply { mkdirs() }
+        File(diag, "trace.json").writeText("{\"schema\":\"buildapp.analysis-trace\"}")
+        File(diag, "diagnostics.json").writeText("{\"schema\":\"buildapp.analysis-diagnostics\"}")
+        File(diag, "plan-overlay.png").writeBytes(byteArrayOf(0x89.toByte(), 0x50, 0x4e, 0x47))
+        File(diag, "something-else.bin").writeBytes(ByteArray(10))
+        w.line(structuredFailure)
+        w.processGone()
+        val failed = (w.last as AnalysisState.Failed).failure as AnalyzerFailure.JobFailed
+        assertEquals("RECONSTRUCTION_FAILED", failed.code)
+        assertEquals("PLAN_NO_ENCLOSED_CELLS", failed.diagnosticCode)
+        assertEquals("Structural layout", failed.details?.stoppedAt())
+        assertEquals(
+            listOf("1 floor plan found", "plan read at 853x853 px", "41 wall bands found", "12 × 15 structural grid lines", "0 of 165 grid cells enclosed", "0 enclosed building regions", "0 building bodies"),
+            failed.details?.countLines(),
+        )
+        // the run log records the specific code, not the family
+        assertEquals("PLAN_NO_ENCLOSED_CELLS", (w.last as AnalysisState.Failed).local?.code)
+        // the job folder is gone, the three allowed files are kept, and nothing else is
+        w.assertNothingLeft()
+        val bundle = File(requireNotNull(failed.diagnosticsBundle))
+        assertEquals(setOf("trace.json", "diagnostics.json", "plan-overlay.png", DiagnosticsStore.META_FILE), bundle.list()?.toSet())
+        assertTrue(File(bundle, DiagnosticsStore.META_FILE).readText().contains(url))
+        // and it zips for the share sheet
+        val zip = requireNotNull(w.kept.zip(bundle, File(w.root, "share/d.zip")))
+        java.util.zip.ZipFile(zip).use { z -> assertEquals(4, z.size()) }
+    }
+
+    @Test
+    fun `an older program's failure without the structured part still reads, with no bundle`() {
+        val w = World()
+        w.start()
+        w.hello()
+        w.line("""{"type":"failed","code":"ANALYSIS_FAILED","message":"the analyzer could not reconstruct a building from this page","metrics":{"elapsedMs":1}}""")
+        w.processGone()
+        val failed = (w.last as AnalysisState.Failed).failure as AnalyzerFailure.JobFailed
+        assertNull(failed.details)
+        assertNull(failed.diagnosticsBundle)
+        assertEquals("ANALYSIS_FAILED", failed.diagnosticCode)
+        w.assertNothingLeft()
+    }
+
+    @Test
+    fun `the diagnostics store keeps only the newest bundles, only allowed files, and only small ones`() {
+        val root = AnalyzerFixtures.tempDir("diagnostics-store")
+        var now = 1_000L
+        val store = DiagnosticsStore(File(root, "kept"), maxBundles = 2, maxFileBytes = 100, clock = { now })
+        val source = File(root, "src").apply { mkdirs() }
+        File(source, "trace.json").writeText("{}")
+        File(source, "plan-overlay.png").writeBytes(ByteArray(500))
+        val ids = listOf("a", "b", "c").map { it.repeat(32) }
+        for (id in ids) {
+            now += 10
+            assertNotNull(store.keep(id, "https://example.test/$id", source, listOf("trace.json", "plan-overlay.png", "../escape")))
+        }
+        assertEquals(listOf(ids[2], ids[1]), store.bundles().map { it.name })
+        // the oversized overlay was not kept
+        assertEquals(setOf("trace.json", DiagnosticsStore.META_FILE), store.bundles().first().list()?.toSet())
+        // not a job id: nothing kept
+        assertNull(store.keep("../../x", "u", source, listOf("trace.json")))
     }
 }

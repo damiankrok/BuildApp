@@ -21,6 +21,7 @@ import com.buildplan.preview.analyzer.ProjectLinks
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
+import com.buildplan.preview.analyzer.local.DiagnosticsStore
 import com.buildplan.preview.analyzer.local.LocalAnalysis
 import com.buildplan.preview.analyzer.local.LocalAvailability
 import com.buildplan.preview.analyzer.local.LocalJobs
@@ -107,6 +108,9 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         }
     }
     private val localJobs = LocalJobs(java.io.File(application.filesDir, LOCAL_DIR))
+
+    /** Failed local runs' diagnostics, kept for sharing after their job folder is removed (BUILDAPP-03Y2G). */
+    private val diagnosticsStore = DiagnosticsStore(java.io.File(application.filesDir, DIAGNOSTICS_DIR))
     private val localIo = Executors.newSingleThreadExecutor { r -> Thread(r, "local-analyzer-io") }
 
     /** Whether this phone can analyse locally, and why not when it cannot. */
@@ -141,7 +145,28 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         scheduler = MainScheduler(),
         publish = { next -> publishLocal(next) },
         onFinished = { report -> onLocalRunFinished(report) },
+        diagnostics = diagnosticsStore,
     )
+
+    /**
+     * A share-sheet intent for a failure's kept diagnostics: the bundle zipped
+     * into the app's cache and handed out through the FileProvider, read-only.
+     * Null when the failure kept none.
+     */
+    fun diagnosticsShareIntent(failure: AnalyzerFailure): android.content.Intent? {
+        val bundle = (failure as? AnalyzerFailure.JobFailed)?.diagnosticsBundle?.let { java.io.File(it) } ?: return null
+        val app = getApplication<Application>()
+        val zip = diagnosticsStore.zip(bundle, java.io.File(java.io.File(app.cacheDir, SHARED_DIR), "buildplan-diagnostics-${bundle.name.take(12)}.zip")) ?: return null
+        val uri = androidx.core.content.FileProvider.getUriForFile(app, "${app.packageName}.diagnostics", zip)
+        val code = (failure as AnalyzerFailure.JobFailed).diagnosticCode
+        return android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+            type = "application/zip"
+            putExtra(android.content.Intent.EXTRA_STREAM, uri)
+            putExtra(android.content.Intent.EXTRA_SUBJECT, "BuildPlan analyzer diagnostics ($code)")
+            putExtra(android.content.Intent.EXTRA_TEXT, "Analyzer failure $code for ${link.ifBlank { "a project link" }}")
+            addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+    }
 
     /**
      * The address requests go to: the one typed on the phone when there is a
@@ -402,6 +427,9 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     private companion object {
         const val ANALYSES_DIR = "analyses"
+        const val DIAGNOSTICS_DIR = "analyzer-diagnostics"
+        /** Under the cache dir; the one folder the FileProvider shares (res/xml/diagnostics_paths.xml). */
+        const val SHARED_DIR = "shared-diagnostics"
         const val LOCAL_DIR = "local-analyzer"
         const val LOG_TAG = "BuildAppLocalAnalyzer"
         val REPORT_JSON = Json { encodeDefaults = true }

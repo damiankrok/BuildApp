@@ -124,13 +124,14 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
     })
   }
   if (error instanceof SourceAcquisitionError) {
-    if (/^no adapter understands/.test(error.message)) return new AnalysisError('UNSUPPORTED_PUBLISHER', 'the page, after redirects, is not on a publisher this analyzer reads')
+    const where = { stage: context.stage ?? ('ACQUIRING_SOURCE' as const), ...(error.failures.length > 0 ? { reasonCode: error.failures[error.failures.length - 1].code } : {}) }
+    if (/^no adapter understands/.test(error.message)) return new AnalysisError('UNSUPPORTED_PUBLISHER', 'the page, after redirects, is not on a publisher this analyzer reads', where)
     const last = error.failures[error.failures.length - 1]
-    if (last && REFUSAL_CODES.has(last.code)) return new AnalysisError('SOURCE_REFUSED', `the page was not fetched: ${REFUSAL_WORDS[last.code] ?? 'the fetch policy refused it'}`)
-    if (last?.code === 'HTTP_STATUS') return new AnalysisError('SOURCE_UNREACHABLE', `the page could not be fetched (${last.message.replace(/[^A-Za-z0-9 ]/g, '').slice(0, 40)})`)
-    if (last?.code === 'TIMEOUT') return new AnalysisError('SOURCE_UNREACHABLE', 'the page did not answer in time')
-    if (last?.code === 'DNS_FAILED') return new AnalysisError('SOURCE_UNREACHABLE', 'the page’s host name does not resolve')
-    return new AnalysisError('SOURCE_UNREACHABLE', 'the page could not be fetched')
+    if (last && REFUSAL_CODES.has(last.code)) return new AnalysisError('SOURCE_REFUSED', `the page was not fetched: ${REFUSAL_WORDS[last.code] ?? 'the fetch policy refused it'}`, where)
+    if (last?.code === 'HTTP_STATUS') return new AnalysisError('SOURCE_UNREACHABLE', `the page could not be fetched (${last.message.replace(/[^A-Za-z0-9 ]/g, '').slice(0, 40)})`, where)
+    if (last?.code === 'TIMEOUT') return new AnalysisError('SOURCE_UNREACHABLE', 'the page did not answer in time', where)
+    if (last?.code === 'DNS_FAILED') return new AnalysisError('SOURCE_UNREACHABLE', 'the page’s host name does not resolve', where)
+    return new AnalysisError('SOURCE_UNREACHABLE', 'the page could not be fetched', where)
   }
   return new AnalysisError('ANALYSIS_FAILED', context.stage ? `the analyzer hit an unexpected internal error while ${STAGE_WORDS[context.stage]}` : 'the analyzer could not reconstruct a building from this page', {
     reasonCode: 'INTERNAL_ERROR',

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The only files the diagnostics FileProvider can share: zips made on request in the cache. -->
+<paths>
+    <cache-path name="shared_diagnostics" path="shared-diagnostics/" />
+</paths>

@@ -32,7 +32,7 @@ import { fileURLToPath } from 'node:url'
 const here = dirname(fileURLToPath(import.meta.url))
 
 export const RUNTIME = { name: 'nodejs-mobile', node: '18.20.4', target: 'node18' }
-export const PROTOCOL = 1
+export const PROTOCOL = 2
 
 const BANNER = "import { createRequire as __createRequire } from 'node:module'; const require = __createRequire(import.meta.url);"
 

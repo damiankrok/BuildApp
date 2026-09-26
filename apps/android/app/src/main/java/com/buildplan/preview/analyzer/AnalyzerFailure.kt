@@ -26,8 +26,16 @@ sealed interface AnalyzerFailure {
     /** No publisher the service registers understands this site. */
     data class UnsupportedPublisher(val message: String) : AnalyzerFailure
 
-    /** The job ran and ended `FAILED`, with the service's code and sentence. */
-    data class JobFailed(val code: String, val message: String) : AnalyzerFailure
+    /**
+     * The job ran and ended `FAILED`, with the analyzer's code and sentence, and
+     * (BUILDAPP-03Y2G) its reason code, stage and counts when it sent them.
+     * `diagnosticsBundle` is the folder this phone kept the run's diagnostics
+     * in, for sharing, when there is one.
+     */
+    data class JobFailed(val code: String, val message: String, val details: FailureDetails? = null, val diagnosticsBundle: String? = null) : AnalyzerFailure {
+        /** The most specific code there is: the solver's reason, else the analyzer's family. */
+        val diagnosticCode: String get() = details?.reasonCode ?: code
+    }
 
     /** The downloaded scene is not the one the summary names. `what` says which check failed. */
     data class HashMismatch(val what: String, val expected: String, val actual: String) : AnalyzerFailure
@@ -91,7 +99,8 @@ object AnalyzerMessages {
         is AnalyzerFailure.UnsupportedPublisher ->
             "The analyzer doesn't read projects from this site yet. ${failure.message}".trim()
         is AnalyzerFailure.JobFailed ->
-            "The analysis stopped (${failure.code}): ${failure.message}"
+            if (failure.details?.reasonCode != null) "The analysis stopped (${failure.details.reasonCode}): ${failure.message}"
+            else "The analysis stopped (${failure.code}): ${failure.message}"
         is AnalyzerFailure.HashMismatch ->
             "The downloaded model is not the one the analyzer described (${failure.what} differs), so it was not kept."
         is AnalyzerFailure.TooLarge ->

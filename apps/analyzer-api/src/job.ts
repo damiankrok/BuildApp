@@ -14,7 +14,20 @@ export type StageState = 'PENDING' | 'RUNNING' | 'DONE' | 'FAILED' | 'CANCELLED'
 
 export type StageRecord = { id: AnalysisStage; label: string; state: StageState; startedAt?: string; completedAt?: string }
 
-export type JobError = { code: string; message: string }
+/**
+ * Why a job failed, as the client sees it: the service's code and sentence and,
+ * since BUILDAPP-03Y2G, the solver's own reason code, the stage and step it
+ * stopped in, a heading and flat counts — never a path or a stack.
+ */
+export type JobError = {
+  code: string
+  message: string
+  reasonCode?: string
+  stage?: string
+  substage?: string
+  title?: string
+  diagnostics?: Record<string, number | string | boolean>
+}
 
 /** What the status record says about a finished analysis; the full summary is `/result`. */
 export type JobResultBrief = {

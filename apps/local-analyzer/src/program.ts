@@ -30,8 +30,9 @@ import { mkdir, rename, writeFile } from 'node:fs/promises'
 import { arch, cpus, platform, totalmem } from 'node:os'
 import { isAbsolute, join } from 'node:path'
 import { Socket } from 'node:net'
-import { ANALYSIS_SERVICE_VERSION, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisErrorCode, AnalysisProgress, AnalysisTimings, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import { ANALYSIS_SERVICE_VERSION, AnalysisError, toAnalysisError } from '@buildapp/analysis-service'
+import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import { stableJson } from '@buildapp/source-common'
 import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import { selectedVariant } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
@@ -42,10 +43,28 @@ import type { MemorySample } from './memory.js'
 import { installTextAdapter, textRefusal } from './text.js'
 import type { TextSupport } from './text.js'
 
-/** Bumped when the event or argument shape changes; the app refuses a runtime that speaks another. */
-export const LOCAL_ANALYZER_PROTOCOL = 1 as const
+/**
+ * Bumped when the event or argument shape changes; the app refuses a runtime that speaks another.
+ * 2 (BUILDAPP-03Y2G): `failed` carries the structured failure and names its diagnostics files; every
+ * terminal event names the run's `trace.json`.
+ */
+export const LOCAL_ANALYZER_PROTOCOL = 2 as const
 
 export const OUTPUT_FILES = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json' } as const
+
+/**
+ * What a run leaves in `--out/diagnostics` besides its delivery files: the
+ * trace always, and on a failure the diagnostics and the plan overlay. The app
+ * keeps these after it removes the job's folder, so a phone failure can be
+ * shared without a cable.
+ */
+export const DIAGNOSTICS_DIR = 'diagnostics' as const
+export const DIAGNOSTICS_FILES = { trace: 'trace.json', diagnostics: 'diagnostics.json', overlay: 'plan-overlay.png' } as const
+
+/** Bounds on what a failure leaves behind, so a bundle is always small enough to keep and to share. */
+export const DIAGNOSTICS_LIMITS = { jsonBytes: 1_500_000, overlayBytes: 1_500_000 } as const
+
+export type DiagnosticsFiles = { dir: typeof DIAGNOSTICS_DIR; files: string[]; bytes: number }
 
 export type ProgramArgs = { jobId: string; url: string; workDir: string; outDir: string; eventsFd: number | null; controlFd: number | null }
 
@@ -85,9 +104,9 @@ export type RunMetrics = {
 export type LocalAnalyzerEvent =
   | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string } }
   | { type: 'progress'; event: AnalysisProgress; elapsedMs: number; rssBytes: number }
-  | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes }
-  | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics }
-  | { type: 'cancelled'; metrics: RunMetrics }
+  | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes; diagnostics?: DiagnosticsFiles }
+  | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics; failure?: AnalysisFailure; diagnostics?: DiagnosticsFiles }
+  | { type: 'cancelled'; metrics: RunMetrics; diagnostics?: DiagnosticsFiles }
 
 export const EXIT = { DONE: 0, FAILED: 1, CANCELLED: 2, BAD_ARGUMENTS: 3 } as const
 
@@ -200,6 +219,51 @@ function listenForCancel(fd: number | null, controller: AbortController): () => 
   return () => socket.destroy()
 }
 
+/** The diagnostics as written: the plan digest is dropped before the bundle is allowed to grow past its bound. */
+function boundedJson(value: unknown, limit: number, trim: () => unknown): string {
+  const text = `${stableJson(value)}\n`
+  if (Buffer.byteLength(text, 'utf8') <= limit) return text
+  return `${stableJson(trim())}\n`
+}
+
+/**
+ * Write the run's trace and, when there is one, its diagnostics bundle into
+ * `--out/diagnostics`. Never throws: a diagnostics file that cannot be written
+ * is a diagnostics file the app does not get, and the run's outcome stands.
+ */
+async function writeDiagnostics(outDir: string, trace: AnalysisTrace | undefined, bundle: DiagnosticsBundle | undefined, extra: Record<string, unknown>): Promise<DiagnosticsFiles | undefined> {
+  if (!trace && !bundle) return undefined
+  const dir = join(outDir, DIAGNOSTICS_DIR)
+  const files: string[] = []
+  let bytes = 0
+  try {
+    await mkdir(dir, { recursive: true })
+    if (trace) {
+      const text = `${stableJson(trace)}\n`
+      await writeAtomically(dir, DIAGNOSTICS_FILES.trace, text)
+      files.push(DIAGNOSTICS_FILES.trace)
+      bytes += Buffer.byteLength(text, 'utf8')
+    }
+    if (bundle) {
+      const full = { ...bundle.diagnostics, ...extra }
+      const text = boundedJson(full, DIAGNOSTICS_LIMITS.jsonBytes, () => ({ ...full, plans: full.plans ? { ...full.plans, plans: full.plans.plans.map((p) => ({ ...p, cells: [], bands: [], chains: [] })), trimmed: true } : null }))
+      await writeAtomically(dir, DIAGNOSTICS_FILES.diagnostics, text)
+      files.push(DIAGNOSTICS_FILES.diagnostics)
+      bytes += Buffer.byteLength(text, 'utf8')
+      if (bundle.overlay && bundle.overlay.png.byteLength <= DIAGNOSTICS_LIMITS.overlayBytes) {
+        const target = join(dir, DIAGNOSTICS_FILES.overlay)
+        await writeFile(`${target}.partial`, bundle.overlay.png)
+        await rename(`${target}.partial`, target)
+        files.push(DIAGNOSTICS_FILES.overlay)
+        bytes += bundle.overlay.png.byteLength
+      }
+    }
+    return { dir: DIAGNOSTICS_DIR, files, bytes }
+  } catch {
+    return files.length > 0 ? { dir: DIAGNOSTICS_DIR, files, bytes } : undefined
+  }
+}
+
 /**
  * Run one job and report it. Resolves to the exit code; never throws, and
  * always writes exactly one terminal event (unless the arguments are unusable,
@@ -247,21 +311,28 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       sink.emit({ type: 'failed', code: 'OUTPUT_FAILED', message: 'the result could not be written to the app storage', metrics: metrics({ timings: output.timings }) })
       return EXIT.FAILED
     }
-    sink.emit({ type: 'done', summary: output.files.parsed, files: OUTPUT_FILES, metrics: { elapsedMs: elapsed(), memory: output.memory, timings: output.timings, sceneBytes: output.files.parsed.sceneBytes }, sources: sourceHashesOf(output.run.pkg) })
+    const diagnostics = await writeDiagnostics(args.outDir, output.run.trace, undefined, {})
+    sink.emit({ type: 'done', summary: output.files.parsed, files: OUTPUT_FILES, metrics: { elapsedMs: elapsed(), memory: output.memory, timings: output.timings, sceneBytes: output.files.parsed.sceneBytes }, sources: sourceHashesOf(output.run.pkg), ...(diagnostics ? { diagnostics } : {}) })
     return EXIT.DONE
   } catch (error) {
-    const e = toAnalysisError(error, controller.signal)
+    const e = error instanceof AnalysisError ? error : toAnalysisError(error, controller.signal)
     const refusal = textRefusal()
+    const runMetrics = metrics()
+    // What the phone knows about itself, and nothing about where anything lives on it.
+    const extra = { runtime: { node: process.version, arch: arch(), platform: platform() }, metrics: runMetrics }
     if (refusal && e.code !== 'CANCELLED') {
       const message = `the project's text contains a character (${refusal.message.split(' ')[0]}) this phone's runtime cannot sort or normalise exactly as the analyzer service does; analyse this project with the service`
-      sink.emit({ type: 'failed', code: 'TEXT_NOT_SUPPORTED_ON_DEVICE', message, metrics: metrics() })
+      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra)
+      sink.emit({ type: 'failed', code: 'TEXT_NOT_SUPPORTED_ON_DEVICE', message, metrics: runMetrics, ...(diagnostics ? { diagnostics } : {}) })
       return EXIT.FAILED
     }
     if (e.code === 'CANCELLED') {
-      sink.emit({ type: 'cancelled', metrics: metrics() })
+      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, undefined, {})
+      sink.emit({ type: 'cancelled', metrics: runMetrics, ...(diagnostics ? { diagnostics } : {}) })
       return EXIT.CANCELLED
     }
-    sink.emit({ type: 'failed', code: e.code, message: e.message, metrics: metrics() })
+    const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra)
+    sink.emit({ type: 'failed', code: e.code, message: e.message, metrics: runMetrics, failure: e.failure(), ...(diagnostics ? { diagnostics } : {}) })
     return EXIT.FAILED
   } finally {
     stopListening()

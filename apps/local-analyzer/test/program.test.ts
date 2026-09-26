@@ -19,6 +19,7 @@ import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { hashesOf, runAnalysis } from '@buildapp/analysis-service'
+import { LOCAL_ANALYZER_PROTOCOL } from '../src/program.js'
 import type { LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { memoryByteCache } from '@buildapp/source-package'
 import { FIXTURE_PROJECTS, fixturePageUrl, fixtureWiring } from '../fixture/fixture.js'
@@ -109,7 +110,7 @@ describe('the bundle, run as the phone runs it, gives the desktop pipeline’s b
     const progress = result.events.filter((e) => e.type === 'progress').map((e) => (e.event as { progress: number }).progress)
     for (let i = 1; i < progress.length; i++) expect(progress[i]).toBeGreaterThanOrEqual(progress[i - 1])
     const hello = result.events[0] as unknown as { protocol: number; runtime: { node: string } }
-    expect(hello.protocol).toBe(1)
+    expect(hello.protocol).toBe(LOCAL_ANALYZER_PROTOCOL)
     expect(hello.runtime.node).toBe(process.version)
   })
 })
@@ -148,7 +149,13 @@ describe('the program stops when it is told to, and leaves nothing', () => {
     expect(result.code).toBe(2)
     expect(result.terminal?.type).toBe('cancelled')
     expect(existsSync(join(result.workDir, 'bytes'))).toBe(false)
-    expect(existsSync(result.outDir) ? readdirSync(result.outDir) : []).toEqual([])
+    // no delivery file; only the run's trace, which ends CANCELLED in the stage it was cancelled in
+    expect(existsSync(result.outDir) ? readdirSync(result.outDir) : []).toEqual(['diagnostics'])
+    expect(readdirSync(join(result.outDir, 'diagnostics'))).toEqual(['trace.json'])
+    const trace = JSON.parse(readFileSync(join(result.outDir, 'diagnostics', 'trace.json'), 'utf8')) as { outcome: string; entries: Array<{ stage: string; status: string }> }
+    expect(trace.outcome).toBe('CANCELLED')
+    expect(trace.entries.at(-1)).toMatchObject({ stage: 'ACQUIRING_SOURCE', status: 'CANCELLED' })
+    expect((result.terminal as { diagnostics?: { files: string[] } }).diagnostics?.files).toEqual(['trace.json'])
   })
 
   it('the control pipe closing (the app went away) counts as a cancel', async () => {
@@ -177,7 +184,13 @@ describe('the program stops when it is told to, and leaves nothing', () => {
   it('reports a source it cannot fetch as a named failure: exit 1, SOURCE_UNREACHABLE', async () => {
     const result = await host(fixturePageUrl('no-such-project')).done
     expect(result.code).toBe(1)
-    expect(result.terminal).toMatchObject({ type: 'failed', code: 'SOURCE_UNREACHABLE' })
+    expect(result.terminal).toMatchObject({ type: 'failed', code: 'SOURCE_UNREACHABLE', failure: { code: 'SOURCE_UNREACHABLE', stage: 'ACQUIRING_SOURCE' } })
+    // the diagnostics bundle names what failed and where, and carries the trace
+    const diagnostics = JSON.parse(readFileSync(join(result.outDir, 'diagnostics', 'diagnostics.json'), 'utf8')) as { failure: { code: string }; trace: { outcome: string }; runtime: { node: string } }
+    expect(diagnostics.failure.code).toBe('SOURCE_UNREACHABLE')
+    expect(diagnostics.trace.outcome).toBe('FAILED')
+    expect(diagnostics.runtime.node).toBe(process.version)
+    expect(JSON.stringify(diagnostics)).not.toContain(result.workDir)
   })
 })
 

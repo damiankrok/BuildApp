@@ -168,6 +168,7 @@ class AnalysisTracker(
                     val failure = AnalyzerFailure.JobFailed(
                         code = error?.code?.ifBlank { null } ?: "FAILED",
                         message = error?.message?.ifBlank { null } ?: "the service did not say why",
+                        details = error?.details,
                     )
                     Step(AnalysisState.Failed(failure, RetryAction.RESUBMIT, sourceUrl, state.jobId, status), null)
                 }

@@ -19,7 +19,8 @@ export function serveAnalysisWorker(wiring: () => AnalysisWiring): void {
     (output) => post({ type: 'done', output }),
     (error: unknown) => {
       const e = toAnalysisError(error)
-      post({ type: 'error', code: e.code, message: e.message })
+      // The failure's client-safe part only: reason code, stage, counts. Never the trace's timings or a stack.
+      post({ type: 'error', code: e.code, message: e.message, detail: e.detail })
     },
   )
 }

@@ -46,6 +46,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -293,7 +296,15 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         )
         is AnalysisState.Completed -> ResultCard(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) })
         is AnalysisState.Failed -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            FailureCard(state.failure, state.retry, onRetry = { model.retry() }, onDismiss = { model.dismiss() })
+            val context = LocalContext.current
+            val share = model.diagnosticsShareIntent(state.failure)
+            FailureCard(
+                state.failure,
+                state.retry,
+                onRetry = { model.retry() },
+                onDismiss = { model.dismiss() },
+                onShare = share?.let { intent -> { context.startActivity(android.content.Intent.createChooser(intent, "Share analyzer diagnostics")) } },
+            )
             state.local?.let { LocalCost(it) }
             state.status?.let { Checklist(StageChecklist.rows(it)) }
         }
@@ -404,15 +415,37 @@ private fun Checklist(rows: List<StageRow>) {
 }
 
 @Composable
-private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: () -> Unit, onDismiss: () -> Unit) {
+private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: () -> Unit, onDismiss: () -> Unit, onShare: (() -> Unit)? = null) {
+    val failed = failure as? AnalyzerFailure.JobFailed
+    val details = failed?.details
+    var showDetails by rememberSaveable { mutableStateOf(false) }
+    val clipboard = LocalClipboardManager.current
     Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 2.dp) {
         Column(Modifier.padding(14.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Filled.Warning, null, tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
                 Box(Modifier.width(8.dp))
-                Text("No model this time", style = MaterialTheme.typography.titleSmall)
+                Text(details?.title ?: "No model this time", style = MaterialTheme.typography.titleSmall)
             }
-            Body(AnalyzerMessages.describe(failure))
+            // BUILDAPP-03Y2G: where it stopped and the analyzer's own reason, not only "it failed".
+            if (details != null && failed != null) {
+                details.stoppedAt()?.let { DataRow("Stopped at", it) }
+                DataRow("Code", failed.diagnosticCode)
+                val counts = details.countLines()
+                if (counts.isNotEmpty()) {
+                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) { for (line in counts) Body(line) }
+                }
+                Body(failed.message.replaceFirstChar { it.uppercaseChar() }.trimEnd('.') + ".")
+            } else {
+                Body(AnalyzerMessages.describe(failure))
+            }
+            if (showDetails && details != null) {
+                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
+                    Column(Modifier.padding(10.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                        for (line in details.detailLines()) Mono(line)
+                    }
+                }
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (retry != RetryAction.NONE) {
                     Button(onClick = onRetry, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
@@ -420,6 +453,20 @@ private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: (
                     }
                 }
                 TextButton(onClick = onDismiss, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text("Dismiss") }
+            }
+            if (failed != null) {
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    TextButton(
+                        onClick = { clipboard.setText(AnnotatedString(failed.diagnosticCode)) },
+                        modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Copy diagnostic code ${failed.diagnosticCode}" },
+                    ) { Text("Copy code") }
+                    if (details != null) {
+                        TextButton(onClick = { showDetails = !showDetails }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(if (showDetails) "Hide details" else "Show details") }
+                    }
+                    if (onShare != null) {
+                        TextButton(onClick = onShare, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text("Share diagnostics") }
+                    }
+                }
             }
         }
     }

@@ -203,6 +203,22 @@ describe('the Android build ships exactly this bundle, and the fixture only in t
     expect(readFileSync(join(ROOT, '.gitignore'), 'utf8')).toMatch(/^apps\/android\/third_party\/$/m)
   })
 
+  it('the program, the bundle manifest and the app speak one protocol', async () => {
+    const program = readFileSync(join(ROOT, 'apps/local-analyzer/src/program.ts'), 'utf8').match(/LOCAL_ANALYZER_PROTOCOL = (\d+)/)?.[1]
+    const bundle = readFileSync(join(ROOT, 'apps/local-analyzer/build.mjs'), 'utf8').match(/export const PROTOCOL = (\d+)/)?.[1]
+    const app = readFileSync(join(ANDROID, 'app/src/main/java/com/buildplan/preview/analyzer/local/LocalEvents.kt'), 'utf8').match(/const val PROTOCOL = (\d+)/)?.[1]
+    expect(program).toBeDefined()
+    expect([bundle, app]).toEqual([program, program])
+  })
+
+  it('shares diagnostics through a non-exported FileProvider limited to the cache folder it zips into', () => {
+    const manifest = readFileSync(join(ANDROID, 'app/src/main/AndroidManifest.xml'), 'utf8')
+    expect(manifest).toMatch(/androidx\.core\.content\.FileProvider"\s+android:authorities="\$\{applicationId\}\.diagnostics"\s+android:exported="false"/)
+    const paths = readFileSync(join(ANDROID, 'app/src/main/res/xml/diagnostics_paths.xml'), 'utf8')
+    expect(paths.match(/<(cache|files|external|root)[-a-z]*-path|<(files|cache|external|root)-path/g)).toEqual(['<cache-path'])
+    expect(paths).toMatch(/path="shared-diagnostics\/"/)
+  })
+
   it('runs the analyzer in a separate, non-exported process', () => {
     const manifest = readFileSync(join(ANDROID, 'app/src/main/AndroidManifest.xml'), 'utf8')
     expect(manifest).toMatch(/android:name="\.analyzer\.local\.LocalAnalyzerService"\s+android:exported="false"\s+android:process=":analyzer"/)

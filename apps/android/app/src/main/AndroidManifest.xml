@@ -52,5 +52,22 @@
             android:name=".analyzer.local.LocalAnalyzerService"
             android:exported="false"
             android:process=":analyzer" />
+
+        <!--
+          BUILDAPP-03Y2G: "Share diagnostics" after a failed local analysis. The
+          one folder it can hand out is the cache's shared-diagnostics/, where
+          the app zips a kept bundle (trace, diagnostics, plan overlay — no
+          source image) at the moment the person asks to share it. Not
+          exported; access is granted per share, read-only.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.diagnostics"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/diagnostics_paths" />
+        </provider>
     </application>
 </manifest>

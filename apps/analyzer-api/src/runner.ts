@@ -125,7 +125,7 @@ export class JobRunner {
       failure = error
       const e = error instanceof AnalysisError ? error : toAnalysisError(error, controller.signal)
       await pending.catch(() => undefined)
-      await this.store.update(jobId, (j) => failJob(j, { code: e.code, message: e.message }, stamp()))
+      await this.store.update(jobId, (j) => failJob(j, e.failure(), stamp()))
     } finally {
       clearTimeout(timer)
       await this.store.clearWorkspace(jobId).catch(() => undefined)

@@ -73,6 +73,8 @@ class LocalAnalysis(
     private val maxSceneBytes: Long = DownloadedScenes.MAX_SCENE_BYTES,
     /** Which installed program to start. Production: the bundle's own entry, `main.mjs`. */
     private val program: (InstalledRuntime) -> File = { it.entry },
+    /** Where a failed job's diagnostics are kept after its folder is removed (BUILDAPP-03Y2G); null keeps none. */
+    private val diagnostics: DiagnosticsStore? = null,
 ) {
     private var active: Run? = null
     private var starting = false
@@ -150,7 +152,7 @@ class LocalAnalysis(
 
     private sealed interface Ending {
         data class Done(val event: LocalEvent.Done) : Ending
-        data class Failed(val failure: AnalyzerFailure, val code: String) : Ending
+        data class Failed(val failure: AnalyzerFailure, val code: String, val files: LocalDiagnosticsFiles? = null) : Ending
         data object Cancelled : Ending
     }
 
@@ -202,7 +204,8 @@ class LocalAnalysis(
                 }
                 is LocalEvent.Failed -> {
                     report = report.withMetrics(event.metrics)
-                    finish(Ending.Failed(AnalyzerFailure.JobFailed(event.code, event.message), event.code))
+                    val failure = AnalyzerFailure.JobFailed(event.code, event.message, event.failure)
+                    finish(Ending.Failed(failure, failure.diagnosticCode, event.diagnostics))
                 }
                 is LocalEvent.Cancelled -> {
                     report = report.withMetrics(event.metrics)
@@ -251,7 +254,7 @@ class LocalAnalysis(
             io {
                 val outcome: AnalysisState = when (how) {
                     is Ending.Done -> importScene(how.event)
-                    is Ending.Failed -> AnalysisState.Failed(how.failure, RetryAction.RESUBMIT, job.sourceUrl, job.jobId, statusOf(progress, AnalysisStages.FAILED))
+                    is Ending.Failed -> AnalysisState.Failed(keepDiagnostics(how), RetryAction.RESUBMIT, job.sourceUrl, job.jobId, statusOf(progress, AnalysisStages.FAILED))
                     Ending.Cancelled -> AnalysisState.Cancelled(job.jobId, job.sourceUrl, statusOf(progress, AnalysisStages.CANCELLED))
                 }
                 val removed = jobs.finish(job)
@@ -272,6 +275,19 @@ class LocalAnalysis(
                     if (!closed) publish(withReport(outcome, report))
                 }
             }
+        }
+
+        /**
+         * Before the job's folder goes: keep what the program left in
+         * `<out>/diagnostics`, and point the failure at it so it can be shared.
+         */
+        private fun keepDiagnostics(how: Ending.Failed): AnalyzerFailure {
+            val files = how.files ?: return how.failure
+            val store = diagnostics ?: return how.failure
+            // Only the one folder name the protocol defines is ever read from.
+            if (files.dir != LocalProtocol.DIAGNOSTICS_DIR) return how.failure
+            val kept = store.keep(job.jobId, job.sourceUrl, File(job.outDir, LocalProtocol.DIAGNOSTICS_DIR), files.files) ?: return how.failure
+            return (how.failure as? AnalyzerFailure.JobFailed)?.copy(diagnosticsBundle = kept.absolutePath) ?: how.failure
         }
 
         private fun importScene(done: LocalEvent.Done): AnalysisState {
@@ -327,7 +343,7 @@ class LocalAnalysis(
         const val PROCESS_GONE_WAIT_MS = 3_000L
 
         fun codeOf(failure: AnalyzerFailure): String = when (failure) {
-            is AnalyzerFailure.JobFailed -> failure.code
+            is AnalyzerFailure.JobFailed -> failure.diagnosticCode
             is AnalyzerFailure.LocalRuntime -> failure.code
             is AnalyzerFailure.HashMismatch -> "HASH_MISMATCH"
             is AnalyzerFailure.TooLarge -> "TOO_LARGE"

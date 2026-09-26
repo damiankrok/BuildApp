@@ -406,7 +406,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const timings: AnalysisTimings = { acquisitionMs, observationMs, metricExtractionMs, reconstructionMs, compileMs, verificationMs, totalMs: Math.round(clock() - t0) }
     return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings, trace: trace.finish('COMPLETED'), planDiagnostics: reconstruction.planDiagnostics }
   } catch (error) {
-    const e = toAnalysisError(error, signal, { stage: current })
+    const mapped = toAnalysisError(error, signal, { stage: current })
+    // Every failure says which stage it happened in, whoever raised it.
+    const e = mapped.detail.stage ? mapped : new AnalysisError(mapped.code, mapped.message, { ...mapped.detail, stage: current })
     const cancelled = e.code === 'CANCELLED' || e.code === 'TIMEOUT'
     // The step that stopped the run is in the trace whoever threw: the
     // solver records its own; anything else is recorded here.

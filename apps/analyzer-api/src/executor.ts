@@ -71,7 +71,7 @@ export class InProcessExecutor implements JobExecutor {
 }
 
 /** Messages a job's worker sends back. */
-export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string }
+export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string; detail?: AnalysisError['detail'] }
 
 export class WorkerExecutor implements JobExecutor {
   constructor(
@@ -110,7 +110,7 @@ export class WorkerExecutor implements JobExecutor {
         } else if (message.type === 'done') {
           settle(() => resolve(message.output))
         } else {
-          settle(() => reject(new AnalysisError(message.code, message.message)))
+          settle(() => reject(new AnalysisError(message.code, message.message, message.detail ?? {})))
         }
       })
       worker.on('error', (error: Error & { code?: string }) => {
