@@ -34,7 +34,7 @@ function attempt(options: { frames?: SourceCoordinateFrame[]; raster?: Raster; r
       graph: graphOf(frames),
       metrics,
       raster: () => options.raster,
-      publishedAreas: options.publishedFootprintM2 === undefined ? undefined : [{ key: 'footprint_area', label: 'footprint', raw: '', unit: 'm2', value: options.publishedFootprintM2 }],
+      publishedAreas: options.publishedFootprintM2 === undefined ? undefined : [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: options.publishedFootprintM2 }],
       trace: (e) => trace.push(e),
     })
   } catch (error) {

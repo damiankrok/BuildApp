@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 0,
+        "cells": 18,
+        "dimensionChains": 38,
+        "dimensionChainsRead": 6,
+        "enclosedCells": 0,
+        "gridLinesX": 7,
+        "gridLinesY": 4,
+        "masses": 0,
+        "planFrames": 4,
+        "planSizePx": "550x550",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 3.7166,
+        "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519",
+        "wallBands": 30,
+        "wallThicknessPx": 10,
+        "walledEnvelope": false,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "30 wall bands were found on the 550×550 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+      "durationMs": 0,
+      "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "FAILED",
+      "substage": "PLAN_DECOMPOSITION"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

@@ -42,7 +42,8 @@
     "audit:analyzer-v2": "vite-node packages/reconstruction/scripts/audit-v2.ts --",
     "evaluate:v2": "vite-node packages/reconstruction/scripts/evaluate-v2.ts --",
     "audit:exterior": "vite-node packages/candidates/scripts/exterior-closure.ts --",
-    "review:shots": "vite-node apps/web/tools/review-shots.ts --"
+    "review:shots": "vite-node apps/web/tools/review-shots.ts --",
+    "analysis:second-house": "vite-node packages/analysis-service/scripts/second-house.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

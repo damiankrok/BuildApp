@@ -1,0 +1,30 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "builtRegions": 0,
+    "cells": 18,
+    "dimensionChains": 38,
+    "dimensionChainsRead": 6,
+    "enclosedCells": 0,
+    "gridLinesX": 7,
+    "gridLinesY": 4,
+    "masses": 0,
+    "planFrames": 4,
+    "planSizePx": "550x550",
+    "plansRead": 1,
+    "recessRegions": 0,
+    "scaleCmPerPx": 3.7166,
+    "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-7d0192a519",
+    "wallBands": 30,
+    "wallThicknessPx": 10,
+    "walledEnvelope": false,
+    "wideOpenings": 0,
+    "wideOpeningsClosed": 0
+  },
+  "message": "30 wall bands were found on the 550×550 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+  "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+  "stage": "REGISTERING_VIEWS",
+  "substage": "PLAN_DECOMPOSITION",
+  "title": "The floor-plan walls do not enclose a building"
+}
+

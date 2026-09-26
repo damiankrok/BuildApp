@@ -85,7 +85,7 @@ export function planFailureOf(draft: StructuralLayoutDraft, layout: StructuralLa
   const sheet = `the ${plan.sizePx.width}×${plan.sizePx.height} px floor plan`
   if (!base.registration) return fail('PLAN_NO_DIMENSION_FRAME', 'PLAN_READ', `${sheet} states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have`)
   if (base.bands.length === 0) return fail('PLAN_NO_WALL_BANDS', 'PLAN_DECOMPOSITION', `no wall-thick ink was found on ${sheet}`)
-  if (!base.decomposition.envelope) return fail('PLAN_NO_WALLED_ENVELOPE', 'PLAN_DECOMPOSITION', `${plan.bands.length} wall bands were found on ${sheet}, but not along both axes, so they enclose nothing`)
+  if (!base.decomposition.envelope) return fail('PLAN_NO_WALLED_ENVELOPE', 'PLAN_DECOMPOSITION', `${plan.bands.length} wall bands were found on ${sheet}, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing`)
   if (plan.linesX.length < 2 || plan.linesY.length < 2) return fail('PLAN_GRID_EMPTY', 'PLAN_DECOMPOSITION', `neither the chains nor the walls of ${sheet} support two grid lines on each axis (${plan.linesX.length} × ${plan.linesY.length})`)
   const enclosed = plan.cells.filter((c) => c.enclosed).length
   if (enclosed === 0) return fail('PLAN_NO_ENCLOSED_CELLS', 'PLAN_DECOMPOSITION', `the analyzer read ${sheet} — ${plan.bands.length} wall bands, a ${plan.linesX.length} × ${plan.linesY.length} structural grid — but could reach every one of its ${plan.cells.length} cells from outside: no closed building footprint`)
