@@ -19,8 +19,16 @@
 | STAGE BUILDAPP-03R1 — IMAGE METROLOGY + PROPORTIONAL FACADE FITTING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4505e148cf03197b899d49c5335ed893e013ab1d`; implementation `c4c8816`, `ed83d0d`, `c315a35`, `0ec3291`, `067fd41`, `3ee3277`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` and this row | PASS |
 | STAGE BUILDAPP-03X — ANALYZER REFOUNDATION AUDIT + MARCÓWKI AUTO V2 | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d5d6375d8675143730307d71f45c0d940fcd134b`; research `9363d6b`; audit and v2 schemas `13896a1`; pipeline `59d5676`; callouts, gates, apps and CI `7e01828`; fixtures, ridge axis and docs `606c829`; test runner `9f67eb9` (CI run 36057369183 green); docs: the commit that carries this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
 | STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`, `1437954`, `74d4646`, `603eb2e` (CI run 36240702093 green; APK artifact 10905870947, versionCode 1029); docs `9de7979` | **PASS — owner-accepted** (Auto v3 reviewed and accepted on the owner's phone) |
-| STAGE BUILDAPP-03Y1 — IN-APP LINK ANALYZER + STABLE MOBILE CAMERA | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `9de7979c78468e91ce2ba29438258b527de5ffac`; implementation `aaa7f69`, `a1e1b13`, `950d401`, `7d9c85f`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y1_IN_APP_ANALYZER_AND_GESTURES.md`) | **BLOCKED_STAGE_BUILDAPP_03Y1_ANALYZER_SERVICE_NOT_DEPLOYED** — all code, tests and CI green (run 36248477257; APK artifact 10908651204, versionCode 1034); the analyzer API is not deployed (no hosting credential); the phone gate and the owner's camera check remain |
-| STAGE BUILDAPP-03Y2 — EMBEDDED LOCAL ANALYZER RUNTIME PROOF | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `743bb26dfec85658f643ac71797153832ebd20da`; implementation `ec25e4f`, `1b3e17e`, `55c50cc`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`) | **LOCAL_ANALYZER_PROOF_PARTIAL** — the production analyzer runs inside the APK (nodejs-mobile 18.20.4); on an Android 14 x86_64 emulator in CI it analysed the live Marcówki URL in two CI runs (215.5 s and 142.1 s, peak 1 788 / 1 791 MiB, model `4a8e8ddc…` = desktop) and matched every desktop hash on the fixture; arm64 APK 29 911 875 B (+18 000 437 B); the arm64 runtime was never executed (`PHYSICAL_DEVICE_NOT_RUN`) — the owner's phone gate decides PASS |
+| STAGE BUILDAPP-03Y1 — IN-APP LINK ANALYZER + STABLE MOBILE CAMERA | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `9de7979c78468e91ce2ba29438258b527de5ffac`; implementation `aaa7f69`, `a1e1b13`, `950d401`, `7d9c85f`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y1_IN_APP_ANALYZER_AND_GESTURES.md`) | **INFRASTRUCTURE BUILT — backend not mandatory** — all code, tests and CI green (run 36248477257; APK artifact 10908651204, versionCode 1034). The analyzer API is built but not deployed (no hosting credential). Since 03Y2 the phone analyses a link itself, so the service is an optional fallback, not a gate. Recorded at 03Y1: `BLOCKED_STAGE_BUILDAPP_03Y1_ANALYZER_SERVICE_NOT_DEPLOYED` |
+| STAGE BUILDAPP-03Y2 — EMBEDDED LOCAL ANALYZER RUNTIME PROOF | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `743bb26dfec85658f643ac71797153832ebd20da`; implementation `ec25e4f`, `1b3e17e`, `55c50cc`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`) | **PASS — proof succeeded; Marcówki confirmed on the owner's phone.** The production analyzer runs inside the APK (nodejs-mobile 18.20.4). On an Android 14 x86_64 emulator in CI it analysed the live Marcówki URL (215.5 s and 142.1 s, peak 1 788 / 1 791 MiB, model `4a8e8ddc…` = desktop) and matched every desktop hash on the fixture. arm64 APK 29 911 875 B (+18 000 437 B). The owner then ran Marcówki locally on the arm64 phone. Recorded at 03Y2: `LOCAL_ANALYZER_PROOF_PARTIAL` (the phone had not been run yet) |
+| STAGE BUILDAPP-03Y2G — GENERIC PLAN DECOMPOSITION + FAILURE DIAGNOSTICS + RARYTASY GENERALIZATION GATE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `87c05889ade457fc3e6c5055ccff4589bff5c1e5`; implementation `a69af63`, `55f2c1c`, `7cfc534`, `4bc8178`, and the CI/docs commits after them; report `stage-reports/STAGE_BUILDAPP_03Y2G_GENERIC_PLAN_GENERALIZATION.md` | **CURRENT GATE**: **PARTIAL_STAGE_BUILDAPP_03Y2G_OWNER_PHONE_RECHECK_PENDING**. CI run 45 is green on all 10 jobs.
+
+- The second house completes with one model (`b1d6d7b7…`) on desktop, on a
+  fresh CI runner, on the APK's bundle on Node 18 without ICU, and on the
+  Android 14 emulator (186.1 s, 2 096 MiB).
+- Marcówki is unchanged.
+- The direct APK asset is published.
+- The owner's arm64 phone recheck decides PASS. |
 
 ## Current capabilities
 
@@ -505,6 +513,41 @@ Verdict **LOCAL_ANALYZER_PROOF_PARTIAL**: proven on Android x86_64; the arm64
 phone run is the owner's gate (`stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`,
 `docs/LOCAL_ANALYZER.md`).
 
+## Where the generalization stands (STAGE BUILDAPP-03Y2G)
+
+The owner's second project, *Dom w rarytasach 5 (G2E)*, failed on the phone as
+a bare `ANALYSIS_FAILED`. This stage made failures say why, and made the plan
+reader generic enough for a second house:
+
+- **First bad inference:** the plan's sheet scale. Consistent OCR misreadings
+  voted 8.51 cm/px, against a true 2.75. A plan scale must now make its walls a
+  thickness a wall can have (0.15–0.8 m). Otherwise it is replaced by one that
+  three numbers on two chains state, or the plan carries no scale.
+- **Wide openings** (3.2–8 m) are weighed on drawn infill, callouts, corners and
+  what lies behind them, not on width. **Bays** (a projecting garage, a carport)
+  are shut only by what is drawn across their mouth. Strict and
+  continuity enclosure hypotheses are both recorded. There is no rectangle
+  fallback. The layout gate's verdicts now stop a run (`PLAN_LAYOUT_REJECTED`).
+- **Failures are typed.** The public code is `RECONSTRUCTION_FAILED`, and each
+  failure carries a `reasonCode` (PLAN_* / VIEW_* / MODEL_EMISSION_FAILED /
+  VERIFY_* / INTERNAL_ERROR), a stage, a substage, a title and counts. An
+  `AnalysisTrace` is written for every outcome. On a failure, a diagnostics
+  bundle with a plan overlay is written.
+- **The Android failure card** shows the title, Stopped at, Code and counts,
+  with Copy code, Show details, Share diagnostics and Retry. It keeps at most 5
+  bundles, with no source images. Local protocol 2.
+- **Rarytasy on desktop:** completes with a house (17.21 × 8.48 m, gable,
+  chimney) and an attached flat-roofed double garage, 14 openings. The sealed
+  replay gives the same hashes. Marcówki's model is unchanged.
+- **CI:**
+  - `second-house-generalization` runs the live URL, replays it and the
+    pre-fix evidence, and checks Node 18 parity.
+  - The emulator runs both projects live.
+  - `preview-latest` publishes `BuildPlan-Preview-arm64.apk` as a direct asset.
+
+The owner's arm64 phone decides the gate (the report's OWNER PHONE CHECKLIST).
+Two houses from one publisher are not a claim of general support.
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -632,21 +675,28 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**Now: the BUILDAPP-03Y2 owner phone gate** — install the arm64 APK, analyse
-the Marcówki link with "Analyzer: Local", send back time, peak memory and the
-model/scene hashes (steps in the 03Y2 report). If the phone runs short of
-memory, the one lever is the callout reader's render cache
-(`packages/source-metrics/src/callouts.ts`), to be bounded in an analyzer
-stage held to 03Y2's parity gates. Deploying the 03Y1 service is no longer
-required for the phone to analyse a link; it remains the optional fallback.
-**Then**, in the orchestrator's sequence:
+**Now: the BUILDAPP-03Y2G owner phone gate.**
+
+1. Install `BuildPlan-Preview-arm64.apk` from the `preview-latest`
+   prerelease.
+2. Analyse the Rarytasy link with "Analyzer: Local".
+3. Send back the hashes. If it fails, send the diagnostics bundle.
+4. Re-run Marcówki (steps in the 03Y2G report).
+
+If the phone confirms the missing-plans hypothesis, what the phone downloads
+and a small-rendering plan reader come next, held to both houses' gates. If
+the phone runs short of memory, the one lever is the callout reader's render
+cache (`packages/source-metrics/src/callouts.ts`). Deploying the 03Y1 service
+is not required.
+
+**Deferred** until that gate closes, in the orchestrator's sequence:
 **BUILDAPP-03Z — Interior Topology + Semantic Completion** — declared
 interior junctions instead of partitions trimmed 15 mm short (the 35
 INTERIOR gaps the closure audit reports), the stair against its walls and
 its void (0.44 m³ shared with the ground ring wall today), guarding along
 the stair and the void, and the finish regions the analyzer does not read
 yet (the ground-storey side bands, the rear gable panel, the attic timber
-panel). Then **BUILDAPP-04**. The five 03X reader items (door symbols,
+panel). **BUILDAPP-04** comes after 03Z. The five 03X reader items (door symbols,
 rooflight callouts, terrain datum and roof build-up from the section, room
 numbers, elevation extents on more than one view) remain open and feed the
 same ledger.
