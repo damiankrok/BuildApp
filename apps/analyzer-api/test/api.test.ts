@@ -325,6 +325,8 @@ describe('the service bounds what one client, or all of them, can cost', () => {
       expect((await call(local, 'POST', '/v1/analyses', { url: A }, { 'x-forwarded-for': '198.51.100.1' })).status).toBe(202)
       expect((await call(local, 'POST', '/v1/analyses', { url: A }, { 'x-forwarded-for': '198.51.100.1' })).status).toBe(429)
       expect((await call(local, 'POST', '/v1/analyses', { url: A }, { 'x-forwarded-for': '198.51.100.2' })).status).toBe(202)
+      // a client cannot escape its limit by prepending an address of its choosing: the proxy's entry is the last one
+      expect((await call(local, 'POST', '/v1/analyses', { url: A }, { 'x-forwarded-for': '203.0.113.99, 198.51.100.1' })).status).toBe(429)
       for (const j of await local.store.list()) await local.runner.cancel(j.jobId)
     } finally {
       await local.close()

@@ -145,7 +145,7 @@ Cancel. `202 {"jobId", "status": "CANCELLED"}` for a queued or running job (a ru
 | `ANALYZER_MAX_STORED_JOBS` | 200 | oldest finished jobs are evicted beyond this |
 | `ANALYZER_RATE_LIMIT_MAX` / `_WINDOW_MS` | 6 / 600000 | analyses a client may submit per window |
 | `ANALYZER_POLL_LIMIT_MAX` / `_WINDOW_MS` | 1200 / 600000 | reads a client may make per window |
-| `ANALYZER_TRUST_PROXY` | 0 | take the client address from the first `X-Forwarded-For` hop |
+| `ANALYZER_TRUST_PROXY` | 0 | take the client address from the last `X-Forwarded-For` entry (the one the proxy appended) |
 | `ANALYZER_REQUIRE_HTTPS` | 0 | refuse non-https forwarded requests |
 | `ANALYZER_CORS_ORIGINS` | `*` | comma-separated allowed origins |
 | `ANALYZER_WORKER_MEMORY_MB` | 2048 | heap limit of a job's worker thread |
@@ -160,3 +160,27 @@ Per job, under `ANALYZER_DATA_DIR/jobs/<jobId>/`: `job.json` (the status record)
 
 - **Android** — `BuildConfig.ANALYZER_API_BASE_URL` is set at build time from `ANALYZER_API_BASE_URL` (a CI repository variable, never a secret; empty in builds with no deployed service). The Analyzer screen polls the status, downloads `/scene`, verifies both hashes and the bundle schema, writes it atomically into the app's private storage and lists it beside the bundled scenes as "<title> (analysis)". Permission: `android.permission.INTERNET`, nothing else.
 - **Web** — the Analyze panel takes the base URL from `VITE_ANALYZER_API_BASE_URL` (or the page's own origin at `/api` when served together), polls the same status and opens `/model` in BuildWorld.
+
+## Progress weights
+
+`progress` is `Σ weight(finished stages) + weight(current stage) × fraction`. The weights (`packages/analysis-service/src/stages.ts`) were read off a real run of a 20-asset project through this API (BUILDAPP-03Y1): fetching ≈ 11 % of the wall time, reading the drawings ≈ 85 % (about two thirds of that reading the drawings one by one, the rest reading printed dimensions and callouts), everything from registration to verification ≈ 4 %. Inside "reading the drawings" the bar advances per drawing; everywhere else it moves only when a stage starts or ends.
+
+## Deployment
+
+The service is one container (`apps/analyzer-api/Dockerfile`, built from the repository root). It needs no secret. It needs persistent disk only for results to outlive a restart (a volume at `/data`), and roughly 1.5–2 GB of memory per concurrent job.
+
+**Fly.io** (`apps/analyzer-api/fly.toml`, region `waw`):
+
+```sh
+fly apps create buildapp-analyzer
+fly volumes create analyzer_data --app buildapp-analyzer --region waw --size 3
+fly deploy . --config apps/analyzer-api/fly.toml --dockerfile apps/analyzer-api/Dockerfile
+```
+
+The service is then at `https://buildapp-analyzer.fly.dev` (TLS by the platform; `ANALYZER_REQUIRE_HTTPS=1` and `ANALYZER_TRUST_PROXY=1` are set in `fly.toml`).
+
+**From CI.** Add the repository secret `FLY_API_TOKEN` (`fly tokens create deploy --app buildapp-analyzer`) and the repository VARIABLE `ANALYZER_API_BASE_URL` (e.g. `https://buildapp-analyzer.fly.dev`). The `analyzer-deploy` job then deploys every push and smoke-tests the deployment, and the `android` job compiles the variable into `BuildConfig.ANALYZER_API_BASE_URL` of the APKs it builds. Without the secret the job only reports that nothing was deployed.
+
+**Any other container host** (Cloud Run, Render, a VM): run the image with a volume at `/data`, put TLS in front, set `ANALYZER_TRUST_PROXY=1` and `ANALYZER_REQUIRE_HTTPS=1`, and give the phone the https address — in the build variable, or in the app's Analyzer screen under "Service address".
+
+**Optional vision.** `ANALYZER_VISION=live` plus the server-side `ANTHROPIC_API_KEY` lets the analyzer ask a vision provider; results then say `vision.mode = LIVE_PROVIDER`. The key stays in the server's environment: no endpoint returns it, and no client ever needs it.

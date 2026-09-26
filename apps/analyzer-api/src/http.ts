@@ -59,9 +59,12 @@ export function createApiServer(deps: ApiDeps): Server {
 
   const clientOf = (req: IncomingMessage): string => {
     if (config.trustProxy) {
+      // One trusted proxy in front: the LAST entry is the address it saw and
+      // appended. Everything before it came from the client and can be forged.
       const forwarded = req.headers['x-forwarded-for']
-      const first = (Array.isArray(forwarded) ? forwarded[0] : forwarded)?.split(',')[0]?.trim()
-      if (first) return first
+      const hops = (Array.isArray(forwarded) ? forwarded.join(',') : forwarded ?? '').split(',').map((h) => h.trim()).filter(Boolean)
+      const last = hops[hops.length - 1]
+      if (last) return last
     }
     return req.socket.remoteAddress ?? 'unknown'
   }

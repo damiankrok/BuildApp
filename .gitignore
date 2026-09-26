@@ -18,3 +18,6 @@ apps/android/local.properties
 
 # Fetched source bytes and scratch output from the reconstruction scripts.
 .cache/
+
+# Agent worktrees created by Claude Code sessions
+.claude/worktrees/

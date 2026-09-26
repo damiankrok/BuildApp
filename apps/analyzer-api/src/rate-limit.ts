@@ -3,7 +3,7 @@
  *
  * Abuse control for a public preview that holds no secret: a client may
  * submit so many analyses per window, and read so many times. The key is the
- * client's address (the first `X-Forwarded-For` hop behind a trusted proxy).
+ * client's address (behind a trusted proxy, the last `X-Forwarded-For` entry — the one the proxy appended).
  * It is not identity and is not meant to be; it bounds what one address can
  * cost the service, which is the point.
  */
