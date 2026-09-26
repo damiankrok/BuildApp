@@ -12,13 +12,15 @@ to it.
 
 ## FINAL HEAD
 
-The commit that carries this report (see `git log`). Implementation commits of
-the stage: `1a9f514` (schema 1.5.0, closure audit, assembly closure, tones,
-styling, Auto v3), `ba71193` (gaps, stacked returns, terraces to returns,
-finish runs, cladding, evaluation, CI step), and the commit that carries this
-report (secondary-finish styling, per-return tones, the §17 source-view
-audit, subtle AO on Android, docs). The CI run and APK are recorded under
-**CI RUN** and **APK ARTIFACT**.
+The commit that carries this report and its CI record (see `git log`); it
+changes documents only. Stage commits: `1a9f514` (schema 1.5.0, closure
+audit, assembly closure, tones, styling, Auto v3), `ba71193` (gaps, stacked
+returns, terraces to returns, finish runs, cladding, the exterior evaluation
+and its CI step), `1437954` (secondary-finish styling, per-return tones, the
+§17 source-view audit, subtle AO on Android, docs, screenshots), `74d4646`
+(Android JVM tests hold Auto v3 to every per-candidate check), `603eb2e`
+(the CI signer check reads the build's own apksigner) — the head CI proved
+green (run 36240702093).
 
 ## BASELINE OWNER REVIEW
 
@@ -313,19 +315,51 @@ beside it; the toolbar fits a 1400 px window.
 
 Five scene bundles exported (`npm run mobile:export-scenes`): reference,
 Auto v3, Auto, Auto v2, demo — each with semantic groups and the palette
-with its tone hints. JVM tests cover parsing, groups, the palette against the
-shared constant, the tone-hinted bundle palettes, the cladding group and the
-subtle AO. The All / Roof off / Ground / Attic / Cutaway / orbit / model
-switch / Architectural checks of §23 are an owner device check: no GPU or
-emulator runs in this environment (see the checklist).
+with its tone hints; CI re-exports them and fails on any difference. The JVM
+tests (140, run locally against an Android SDK and in CI) hold every sealed
+candidate — Auto v3 included — to the same bar: All, Roof off, Ground, Attic
+and Cutaway each draw the building and not only its roof; every object with
+geometry becomes an entity; wall coordinates survive to Kotlin; bounds
+agree; hidden objects are not pickable; ids resolve against their own scene
+(Auto v2 and Auto v3 share an id vocabulary by design, and still differ as
+sets). They also hold the palette against the shared constant, the
+tone-hinted bundle palettes, the cladding group and the subtle AO. What a
+GPU does with it — orbit, model switch and the look of Architectural on a
+phone — is an owner device check: no GPU or emulator runs in this
+environment (see the checklist).
 
 ## CI RUN
 
-Recorded after the push, below the checklist.
+Run **36240702093** (BuildApp CI #29) on `603eb2e`, all four jobs green:
+<https://github.com/damiankrok/BuildApp/actions/runs/36240702093>
+
+- **Core / Analyzer / Reconstruction**: typecheck, the vitest suite, the
+  production web build, both Marcówki audits, `reconstruct:no-reference`,
+  the analyzer-v2 gates, `reconstruct:no-benchmark`, `evaluate:v2`, and the
+  new **exterior closure audit** (`audit:exterior`, which fails on any
+  EXTERIOR closure error of the candidate under review); closure reports,
+  analyzer-v2 artifacts and diagnostics uploaded.
+- **Browser / Playwright**: the 31 browser tests.
+- **Android / APK**: bundles re-exported and asserted current, the JVM tests,
+  the preview APKs assembled, the signer verified, `VERSION.txt` recorded.
+- **Dependency security** (advisory).
+
+The two runs before it failed and were fixed, not re-run: #27 on the Android
+ids test (Auto v2 and Auto v3 legitimately share ids, `74d4646`) and #28 on
+the signer check reading the runner's newest apksigner (`603eb2e`).
+
+Locally, before the push: 1182 vitest tests, 31 browser tests, 140 Android JVM
+tests, the APKs assembled and their signer verified (and a foreign key
+refused).
 
 ## APK ARTIFACT
 
-Recorded after the push, below the checklist.
+`buildplan-model-preview-apks` (artifact 10905870947, 47.4 MB, kept until
+2026-10-26) from run 36240702093: `BuildPlan-Model-Preview-arm64-v8a-debug.apk`
+(install this on a phone), `-armeabi-v7a-`, `-x86_64-` and `-universal-debug.apk`,
+and `VERSION.txt` — **versionCode 1029, versionName 0.29.0-preview**,
+application id `com.buildplan.preview`, signed with the preview key (SHA-256
+`6e48fac4…1ca0da`). Download it from the run page's *Artifacts* section.
 
 ## KNOWN LIMITATIONS
 
@@ -369,7 +403,9 @@ On the phone, with the new APK installed over the previous preview:
 6. Orbit a full turn; switch to *Marcówki (auto v2)* and back — the style
    stays Architectural; then Construction and Clay.
 7. Settings → Apps → BuildPlan Model Preview shows versionName
-   `0.<run>.0-preview`.
+   `0.29.0-preview` (versionCode 1029). If Android refuses the update, the
+   installed preview was signed with an older throwaway key: uninstall it
+   once and install again; later builds then update in place.
 
 ## NEXT TECHNICAL STEP
 
@@ -387,4 +423,22 @@ agent from creating one; the sequence (03Z, then 04) is recorded in
 
 ## VERDICT
 
-Recorded below with the CI run.
+The §28 criteria, each against its evidence:
+
+| criterion | evidence |
+|---|---|
+| visibly better than Auto v2 | the side-by-side screenshots in both styles |
+| no major exterior penetration, gap or duplicate face | closure audit: 0 exterior findings (Auto v2: 43) |
+| balcony terminates at the building | every end WALL / CARRIES / FREE-at-the-drawn-line / MEETS; BALCONY PASS |
+| railing turns and returns | 2 runs 1 turn, 0 free ends; Lindale and its control |
+| terrace first-class | schema object, compiled, on web and Android; TERRACE PASS |
+| coherent facade assemblies | one band, frames continuous, facade graph without gaps; FACADE_ASSEMBLY PASS |
+| no stripe forest | 100-stripe tests for members and finish runs |
+| styling reads without hiding defects | palette with adjacency gaps, no outlines, the audit gates the joints |
+| web and Android show the candidate | browser tests; bundles and JVM tests; device check listed |
+| stable signing and rising versions | committed preview key, versionCode 1000 + run, signer verified in CI |
+| CI green, APK published | run 36240702093, artifact 10905870947 |
+| honest PARTIAL list | OPENINGS and MATERIAL_READABILITY PARTIAL, the known limitations above |
+
+**PASS_STAGE_BUILDAPP_03Y_EXTERIOR_CLOSURE_AND_SEMANTIC_STYLING** — with the
+owner's device review of the APK as the final gate, as for 03X.
