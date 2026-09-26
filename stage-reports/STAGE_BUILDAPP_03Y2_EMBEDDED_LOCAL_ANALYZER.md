@@ -274,7 +274,7 @@ the Node patch version (sandbox v22.22.2, CI v22.23.2) while the table data
 were identical; `55c50cc` records only ICU and Unicode versions in the header.
 Its emulator job was green. Jobs: Core; Browser; **Android / APK** (the owner's APKs
 now embed the analyzer; NDK + CMake added); Analyzer API container + deploy
-(03Y1, unchanged); **Local analyzer / Node 18 parity**; **Local analyzer /
+(03Y1; changed only by the executor's shared delivery files and the 413 fix above); **Local analyzer / Node 18 parity**; **Local analyzer /
 APK size + emulator** (clean builds with and without, size report, desktop
 hashes, desktop live run on the bundle extracted from the APK, emulator:
 device tests + live URL, device-vs-desktop comparison).
