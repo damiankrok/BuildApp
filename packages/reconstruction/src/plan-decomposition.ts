@@ -175,6 +175,8 @@ export type OpeningEvidence = {
   infill: number
   /** A printed opening callout at the gap whose width agrees with it. */
   callout?: { id: string; widthCm: number; confidence: number }
+  /** The area the gap alone would let the outside into: a pocket, or a building's interior. */
+  pocketM2?: number
 }
 
 /** One wide gap weighed, and what was decided about it. */
@@ -1096,13 +1098,19 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const outer1 = vertical ? c.b.bounds.x1 : c.b.bounds.y1
       // Both side walls reach the far line, within a wall's thickness of it.
       const corners = [a, c].every((x) => x.reach >= Math.abs(far.px - s.edge) - ctx.wallPx * 1.6)
-      // The mouth's own wall zone: from the outer face line inward by a wall's thickness.
-      const zone0 = s.dir > 0 ? far.px - ctx.wallPx * 1.5 : far.px + ctx.wallPx * 0.25
-      const zone1 = s.dir > 0 ? far.px - ctx.wallPx * 0.25 : far.px + ctx.wallPx * 1.5
-      // Piers: columns of the mouth's wall zone that are solid ink.
+      // The mouth's own wall: from the outer face line inward by one wall's
+      // thickness. Piers are solid across all of it; a door leaf or a glazing
+      // line is drawn somewhere inside it, or on its inner face, so the
+      // infill is searched a little deeper — but never on the outer face line
+      // itself, where a paving edge or a kerb can run straight past a carport.
+      const pier0 = s.dir > 0 ? far.px - ctx.wallPx * 1.05 : far.px + 1
+      const pier1 = s.dir > 0 ? far.px - 1 : far.px + ctx.wallPx * 1.05
+      const fill0 = s.dir > 0 ? far.px - ctx.wallPx * 1.6 : far.px + ctx.wallPx * 0.25
+      const fill1 = s.dir > 0 ? far.px - ctx.wallPx * 0.25 : far.px + ctx.wallPx * 1.6
+      // Piers: columns of the mouth's wall that are solid ink.
       const solid: boolean[] = []
-      const z0 = Math.round(Math.min(zone0, zone1))
-      const z1 = Math.round(Math.max(zone0, zone1))
+      const z0 = Math.round(Math.min(pier0, pier1))
+      const z1 = Math.round(Math.max(pier0, pier1))
       for (let t = Math.round(inner0); t <= Math.round(inner1); t += 1) {
         let ink = 0
         for (let r = z0; r <= z1; r += 1) ink += vertical ? at(ctx.mask, t, r) : at(ctx.mask, r, t)
@@ -1133,7 +1141,7 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const widest = gaps.sort((p, q) => q[1] - q[0] - (p[1] - p[0]))[0] ?? [inner0, inner1]
       const gapPx = widest[1] - widest[0]
       const widthM = round6(gapPx * s.acrossMpp)
-      const infill = infillAcross(ctx.mask, vertical ? 'X' : 'Y', widest[0], widest[1], z0, z1)
+      const infill = infillAcross(ctx.mask, vertical ? 'X' : 'Y', widest[0], widest[1], Math.round(Math.min(fill0, fill1)), Math.round(Math.max(fill0, fill1)))
       const callout = calloutAt(
         ctx.callouts,
         vertical ? 'X' : 'Y',
@@ -1241,12 +1249,15 @@ export function decomposePlan(
   // Wide gaps the drawing says are openings (H1's extra closures), per line.
   const collinear = collinearWideGaps(ctx)
   const bays = baysOf(ctx)
-  const evidencedOn = new Map<string, Array<[number, number]>>()
-  for (const g of collinear) {
-    if (g.decision.decision !== 'OPENING_IN_WALL') continue
-    const key = `${g.axis}:${g.line.px}`
-    evidencedOn.set(key, [...(evidencedOn.get(key) ?? []), [g.decision.fromPx, g.decision.toPx]])
+  const evidenceMap = (gaps: ReadonlyArray<{ axis: 'X' | 'Y'; line: GridLine; decision: WideOpeningDecision }>): Map<string, Array<[number, number]>> => {
+    const map = new Map<string, Array<[number, number]>>()
+    for (const g of gaps) {
+      const key = `${g.axis}:${g.line.px}`
+      map.set(key, [...(map.get(key) ?? []), [g.decision.fromPx, g.decision.toPx]])
+    }
+    return map
   }
+  let evidencedOn = evidenceMap(collinear.filter((g) => g.decision.decision === 'OPENING_IN_WALL'))
 
   // --- closures of every edge of the grid, computed once per hypothesis ---
   // vEdge[ix][iy] is the vertical edge on line ix beside cell row iy.
@@ -1254,12 +1265,12 @@ export function decomposePlan(
   const bottomY = linesY[ny].px
   const leftX = linesX[0].px
   const rightX = linesX[nx].px
-  const edgesFor = (withEvidence: boolean): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
+  const edgesFor = (withEvidence: boolean, evidence: Map<string, Array<[number, number]>> = evidencedOn): { vEdge: EdgeClosure[][]; hEdge: EdgeClosure[][] } => {
     const vEdge: EdgeClosure[][] = []
     for (let ix = 0; ix <= nx; ix += 1) {
       const walls = wallIntervals(inside, 'X', linesX[ix], topY, bottomY, tolerance)
       const drawn = lineIntervals(mask, 'X', linesX[ix], topY, bottomY, lineTolerance, opt.minLinePx)
-      const extra = withEvidence ? (evidencedOn.get(`X:${linesX[ix].px}`) ?? []) : []
+      const extra = withEvidence ? (evidence.get(`X:${linesX[ix].px}`) ?? []) : []
       const column: EdgeClosure[] = []
       for (let iy = 0; iy < ny; iy += 1) column.push(closureOf(walls, drawn, linesY[iy].px, linesY[iy + 1].px, maxOpeningPx, minJambPx, extra))
       vEdge.push(column)
@@ -1268,7 +1279,7 @@ export function decomposePlan(
     for (let iy = 0; iy <= ny; iy += 1) {
       const walls = wallIntervals(inside, 'Y', linesY[iy], leftX, rightX, tolerance)
       const drawn = lineIntervals(mask, 'Y', linesY[iy], leftX, rightX, lineTolerance, opt.minLinePx)
-      const extra = withEvidence ? (evidencedOn.get(`Y:${linesY[iy].px}`) ?? []) : []
+      const extra = withEvidence ? (evidence.get(`Y:${linesY[iy].px}`) ?? []) : []
       const row: EdgeClosure[] = []
       for (let ix = 0; ix < nx; ix += 1) row.push(closureOf(walls, drawn, linesX[ix].px, linesX[ix + 1].px, maxOpeningPx, minJambPx, extra))
       hEdge.push(row)
@@ -1350,6 +1361,51 @@ export function decomposePlan(
     return reached
   }
 
+  // A gap with nothing drawn across it can still be a hole in a wall: what
+  // decides is what lies BEHIND it. Flood the plan with the gap open and with
+  // it shut; the difference is the pocket the gap alone lets the outside into.
+  // A porch, a loggia, a recessed entrance is a pocket about as deep as its
+  // mouth is wide. The whole interior of a building, rooms and partitions
+  // and all, is not a pocket — and a gap that would let the outside into it
+  // is an opening in the wall, however wide, as long as the wall carries on
+  // either side of it.
+  {
+    const undecided = collinear.filter((g) => g.decision.decision === 'OPEN_SIDE')
+    if (undecided.length > 0) {
+      const base = edgesFor(true)
+      const reachedOpen = flood(base.vEdge, base.hEdge, true)
+      const mppArea = mppX * mppY
+      for (const g of undecided) {
+        const shut = edgesFor(true, evidenceMap([...collinear.filter((c) => c.decision.decision === 'OPENING_IN_WALL'), g]))
+        const reachedShut = flood(shut.vEdge, shut.hEdge, true)
+        let pocketPx = 0
+        let pocketCells = 0
+        for (let iy = 0; iy < ny; iy += 1) {
+          for (let ix = 0; ix < nx; ix += 1) {
+            if (reachedOpen[index(ix, iy)] === 1 && reachedShut[index(ix, iy)] === 0) {
+              pocketCells += 1
+              pocketPx += (linesX[ix + 1].px - linesX[ix].px) * (linesY[iy + 1].px - linesY[iy].px)
+            }
+          }
+        }
+        const pocketM2 = round6(pocketPx * mppArea)
+        const limitM2 = round6(Math.max(6, 2.5 * g.decision.widthM * g.decision.widthM))
+        if (pocketCells > 0 && pocketM2 > limitM2) {
+          g.decision = {
+            ...g.decision,
+            evidence: { ...g.decision.evidence, pocketM2 },
+            decision: 'OPENING_IN_WALL',
+            score: round6(Math.min(1, g.decision.score + 0.35)),
+            why: `a ${g.decision.widthM.toFixed(2)} m gap between two pieces of one wall with nothing drawn across it, but behind it lies ${pocketM2.toFixed(1)} m² that is shut on every other side — the building's interior, not a ${limitM2.toFixed(1)} m² pocket — so the wall carries on across it`,
+          }
+        } else if (pocketCells > 0) {
+          g.decision = { ...g.decision, evidence: { ...g.decision.evidence, pocketM2 }, why: `${g.decision.why}; behind it lies only a ${pocketM2.toFixed(1)} m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to` }
+        }
+      }
+      evidencedOn = evidenceMap(collinear.filter((c) => c.decision.decision === 'OPENING_IN_WALL'))
+    }
+  }
+
   // Two readings of the enclosure. H0 shuts an edge on its wall, its drawn
   // line and the doorways the width convention allows. H1 also shuts the wide
   // gaps the drawing itself says are openings. Where nothing is evidenced they
@@ -1388,7 +1444,7 @@ export function decomposePlan(
     },
     {
       id: 'H1_WIDE_OPENING_CONTINUITY',
-      rule: `H0, plus gaps up to ${opt.maxWideOpeningM} m between pieces of one wall that a drawn line spans, and bay mouths both side walls reach that a drawn line or a matching callout shuts`,
+      rule: `H0, plus gaps up to ${opt.maxWideOpeningM} m between pieces of one wall that a drawn line spans or that would otherwise open the building's interior, and bay mouths both side walls reach that a drawn line or a matching callout shuts`,
       builtCells: h1.cells,
       builtAreaPx: h1.areaPx,
       closedOpenings: evidencedCount,

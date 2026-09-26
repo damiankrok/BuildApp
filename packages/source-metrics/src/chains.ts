@@ -567,7 +567,7 @@ export type FrameChainSolution = {
  * for its plausibility alone — which is guessing. When nothing qualifies the
  * frame is left without a scale, and says why.
  */
-function decideScale(
+export function decideScale(
   proposals: readonly ScaleProposal[],
   winner: { cmPerPixel: number; votes: ScaleVote[] },
   tolerancePx: number,
