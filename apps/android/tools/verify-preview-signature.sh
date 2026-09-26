@@ -25,7 +25,13 @@ sdk="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
 if [[ -z "$sdk" && -f "$android_dir/local.properties" ]]; then
   sdk="$(sed -n 's/^sdk\.dir=//p' "$android_dir/local.properties" | tr -d '\r')"
 fi
-apksigner="$(ls -d "$sdk"/build-tools/*/apksigner 2>/dev/null | sort -V | tail -n 1 || true)"
+# Prefer the build-tools the build itself installs (the CI workflow's sdkmanager
+# line); a runner image carries several, and the newest may label signers
+# differently or want a newer JDK.
+apksigner="$sdk/build-tools/${BUILDPLAN_BUILD_TOOLS:-35.0.0}/apksigner"
+if [[ ! -x "$apksigner" ]]; then
+  apksigner="$(ls -d "$sdk"/build-tools/*/apksigner 2>/dev/null | sort -V | tail -n 1 || true)"
+fi
 if [[ -z "$apksigner" || ! -x "$apksigner" ]]; then
   echo "apksigner not found under '${sdk:-<no SDK>}/build-tools'. Set ANDROID_HOME or sdk.dir in local.properties." >&2
   exit 2
@@ -56,11 +62,16 @@ fi
 echo "expected signer (from $keystore, alias '$alias'): $expected"
 status=0
 for apk in "${apks[@]}"; do
-  actual="$("$apksigner" verify --print-certs "$apk" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
-  if [[ "$actual" == "$expected" ]]; then
+  # "Signer #1 certificate SHA-256 digest: <hex>" — or, from apksigner versions
+  # that report per-SDK-range signers, "Signer (minSdkVersion=…) certificate
+  # SHA-256 digest: <hex>". Every signer line must name the preview key.
+  report="$("$apksigner" verify --print-certs "$apk" 2>&1 || true)"
+  digests="$(printf '%s\n' "$report" | sed -n 's/^Signer.*certificate SHA-256 digest: *\([0-9a-fA-F:]*\).*$/\1/p' | tr -d ':' | tr 'A-F' 'a-f' | sort -u)"
+  if [[ "$digests" == "$expected" ]]; then
     printf 'ok    %s\n' "$(basename "$apk")"
   else
-    printf 'FAIL  %s  signed by %s\n' "$(basename "$apk")" "${actual:-<unreadable>}"
+    printf 'FAIL  %s  signed by %s\n' "$(basename "$apk")" "${digests:-<unreadable>}"
+    printf '%s\n' "$report" | sed 's/^/      /' | head -n 20
     status=1
   fi
 done
