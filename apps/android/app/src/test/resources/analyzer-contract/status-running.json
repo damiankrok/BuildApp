@@ -1,0 +1,75 @@
+{
+  "jobId": "0123456789abcdef0123456789abcdef",
+  "status": "EXTRACTING_OBSERVATIONS",
+  "progress": 0.1843,
+  "stage": {
+    "id": "EXTRACTING_OBSERVATIONS",
+    "label": "Reading the drawings",
+    "index": 2,
+    "count": 9,
+    "fraction": 0.09285714285714286,
+    "detail": "drawing 2 of 7"
+  },
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "DONE",
+      "startedAt": "2026-01-01T00:00:00.000Z",
+      "completedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "RUNNING",
+      "startedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "PENDING"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "PENDING"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "PENDING"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "PENDING"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "PENDING"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "PENDING"
+    }
+  ],
+  "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": null,
+  "error": null,
+  "result": null,
+  "links": {
+    "self": "/v1/analyses/0123456789abcdef0123456789abcdef"
+  }
+}

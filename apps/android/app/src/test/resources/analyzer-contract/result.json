@@ -1,0 +1,140 @@
+{
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "jobId": "0123456789abcdef0123456789abcdef",
+  "sourceUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "canonicalUrl": "https://drawings.synthetic-publisher.test/projects/larchfield-lf01",
+  "title": "Larchfield",
+  "label": "Larchfield (analysis)",
+  "modelId": "m-analysis-larchfield-lf01",
+  "publisher": "synthetic-publisher",
+  "adapter": {
+    "id": "synthetic-publisher",
+    "version": "1"
+  },
+  "sourcePackageId": "src-larchfield-lf01-26525596d2",
+  "sourcePackageHash": "66ef293001041ad4c2215d8d225f5d3e5d1f8a85134c9b847806541e5e4fa3d8",
+  "observationGraphHash": "969c810eec9ef47f90e480a3df3e9f4b70cee8276ecd5868b13b3ddab7dc5c08",
+  "metricEvidenceHash": "4b6bb7039c4d3b919909d30751e972a864aee026afdd792a615305f4bd2d64ce",
+  "candidateHash": "186f40f115185800e3054165796e886df8cc3114fd702a755bf1e2b35efb2dc4",
+  "modelHash": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+  "modelSha256": "c44c8e48ba37816895dcdbd228e5bb66d81c541353f5075013803262aad5c99c",
+  "sceneContentHash": "ce1a5fc67d7c26f173a12c1d295bc23f5104a9b33ad2f70e006deff85b568115",
+  "sceneSha256": "6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63",
+  "sceneBytes": 101457,
+  "counts": {
+    "assets": 7,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "SECTION": 1,
+      "FLOOR_PLAN": 2
+    },
+    "observations": 149,
+    "frames": 7,
+    "metricEvidence": 20,
+    "callouts": 0,
+    "commands": 53,
+    "masses": 1,
+    "openings": 7,
+    "rooms": 2,
+    "balconies": 0,
+    "terraces": 0,
+    "railings": 0,
+    "chimneys": 0,
+    "rooflights": 0,
+    "meshes": 46,
+    "triangles": 916
+  },
+  "quality": {
+    "levels": {
+      "L0": 0,
+      "L1": 12,
+      "L2": 4
+    },
+    "byFamily": {
+      "LEVEL": {
+        "L2": 2
+      },
+      "MASS": {
+        "L2": 1
+      },
+      "INTERIOR_WALL": {
+        "L1": 3
+      },
+      "ROOM": {
+        "L1": 2
+      },
+      "OPENING": {
+        "L1": 7
+      },
+      "ROOF": {
+        "L2": 1
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "what": "the pitch of the roof over mass-0",
+      "reason": "no angle is printed on any drawing and no specification states one",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "which way the ridge runs over mass-0",
+      "reason": "neither span reproduces the measured rise at the stated pitch",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "a v2 registration for the left elevation",
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "a v2 registration for the right elevation",
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "what": "the stair between the storeys",
+      "reason": "no run of evenly spaced tread lines was found on any plan",
+      "status": "MISSING"
+    },
+    {
+      "what": "a 2.71 m thin band at z 0.35",
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "10 of 12 source-view checks outside tolerance"
+  ],
+  "vision": {
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null,
+    "attempted": 0,
+    "accepted": 0
+  },
+  "verification": {
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 12,
+    "residualsOutsideTolerance": 10,
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 15
+    }
+  },
+  "analyzer": {
+    "service": "1.0.0",
+    "solver": "2.0.0"
+  },
+  "startedAt": "2026-01-01T00:00:00.000Z",
+  "completedAt": "2026-01-01T00:00:00.000Z",
+  "links": {
+    "self": "/v1/analyses/0123456789abcdef0123456789abcdef",
+    "result": "/v1/analyses/0123456789abcdef0123456789abcdef/result",
+    "scene": "/v1/analyses/0123456789abcdef0123456789abcdef/scene",
+    "model": "/v1/analyses/0123456789abcdef0123456789abcdef/model",
+    "candidate": "/v1/analyses/0123456789abcdef0123456789abcdef/candidate"
+  }
+}

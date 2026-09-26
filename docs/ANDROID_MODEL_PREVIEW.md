@@ -5,7 +5,10 @@ let the owner look at the current BuildApp model on a phone: orbit it, take the
 roof off, tap a window and read what it is.
 
 It is a **viewer**, not a second BuildApp. It contains no geometry kernel, no
-analyzer, no editing and no network access.
+analyzer and no editing. Since BUILDAPP-03Y1 it can ask the analyzer SERVICE to
+analyse a project link and then show the scene the service made (the
+**Analyzer** screen, below); that is its only use of the network, and the
+bundled scenes still open offline.
 
 ```
 Building DSL                       packages/commands
@@ -281,6 +284,53 @@ Every gesture has a button alternative in the tool row, touch targets are at
 least 48 dp, and the active view, style and layer are named in the button
 label rather than signalled by colour.
 
+## Analyzer (BUILDAPP-03Y1)
+
+The **Analyze link** button opens the Analyzer screen. It is a client of the
+analyzer HTTP API (`docs/ANALYZER_API.md`); the phone runs no analysis.
+
+- **Service address.** `BuildConfig.ANALYZER_API_BASE_URL`, compiled in from the
+  Gradle property `analyzerApiBaseUrl` or the environment variable
+  `ANALYZER_API_BASE_URL` (CI: the repository variable of that name). It is a
+  public https URL, not a credential; the APK holds no key of any kind. When it
+  is empty the screen says "No analyzer service is configured in this build"
+  and offers a **Service address** field (https only, remembered).
+- **A job.** Paste a project page, **Analyze project**: the nine stages as a
+  checklist in the service's own words, the service's progress value (never a
+  client-side animation of it), the current detail ("drawing 9 of 20"),
+  **Cancel**. Polling every 1.5 s; on a lost connection it keeps the job and
+  retries (3, 6, 12, 24, then 30 s, or the server's `Retry-After`). The job id
+  is remembered, so reopening the app resumes it.
+- **The result.** Title, candidate hash prefix, quality L0/L1/L2, unresolved and
+  warning counts, vision mode, **Open model**, and a Diagnostics section of rows
+  (warnings, unresolved items with reasons, every hash, counts) — never raw
+  JSON, and never a reference, a benchmark or a score.
+- **Verification before anything is kept.** The scene is downloaded with a
+  64 MiB cap; its sha256 must equal the summary's `sceneSha256` (and the
+  `X-Content-SHA256` header); it must parse as a `buildapp.mobile-scene-bundle`;
+  its `contentHash` must equal the summary's `sceneContentHash`. Only then is it
+  written — to a temporary file renamed into place — as
+  `files/analyses/<sha256>.json`, with an `index.json` entry (label, source URL,
+  analysis time, candidate/model/scene hashes, quality, last used). No file name
+  ever comes from the server. Loading re-checks the sha256.
+- **In the viewer.** Downloaded analyses follow the bundled scenes in the Model
+  menu under their label ("Dom w marcówkach (GE) (analysis)"), keyed
+  `analysis-<sha256 prefix>` so they can never shadow a bundled scene. They
+  survive restarts and rotation, and can be deleted from the Analyzer screen.
+- **Errors** are sentences: no connection, service unreachable, unsupported
+  site, invalid link, rate limited or busy (with the wait), the job's own
+  failure code and reason, a scene that does not match its hashes, too large,
+  not a scene. Nothing is left loading forever.
+
+Code: `analyzer/` (DTOs, stages, transport, client, polling state machine,
+settings), `scene/DownloadedScenes.kt`, `scene/SceneRepository.kt` (bundled +
+downloaded sources), `ui/AnalyzerScreen.kt`, `ui/AnalyzerViewModel.kt`. Tests:
+`AnalyzerContractTest`, `AnalyzerClientTest`, `AnalysisTrackerTest`,
+`DownloadedScenesTest`, `ManifestPermissionTest`, and `RealServerContractTest`,
+which runs the whole flow on responses captured from the real API
+(`app/src/test/resources/analyzer-contract/`, kept current by
+`apps/analyzer-api/test/android-contract.test.ts`).
+
 ## Visibility
 
 Visibility is renderer state: entities are added to and removed from the
@@ -383,12 +433,16 @@ different signing key on the same id would be a signature conflict rather than
 a second app. The two appear as separate apps, `BuildPlan Model Preview` being
 the new one.
 
-The manifest declares **no permissions**: no network, no storage, no location,
-no camera. The merged manifest in the built APK carries exactly one entry,
+The manifest declares **one permission, `android.permission.INTERNET`**
+(BUILDAPP-03Y1, for the Analyzer): no storage, no location, no camera, no
+microphone, no network state, no network security config, no cleartext. The
+merged manifest in the built APK carries one more entry,
 `com.buildplan.preview.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`, which AndroidX
 adds automatically for targetSdk 33+; it is signature-level, scoped to the app's
-own id, grants nothing external and is never shown to the user. There is
-nothing to grant on first launch and the app works in flight mode.
+own id, grants nothing external and is never shown to the user. INTERNET is a
+normal permission: nothing is asked on first launch, and everything but the
+Analyzer works in flight mode. CI checks the permissions of every APK it builds
+(`aapt dump permissions`).
 
 minSdk is 26 (Android 8.0) and targetSdk 35; the app requires OpenGL ES 3.0. It
 supports portrait and landscape, and an ordinary rotation keeps the camera,

@@ -234,12 +234,43 @@ describe('the Android viewer is a viewer, not a second compiler', () => {
     for (const forbidden of ['okhttp', 'retrofit', 'jsoup', 'tesseract', 'opencv', 'mlkit', 'ml-kit', 'volley', 'ktor', 'room', 'firebase', 'analytics', 'crashlytics', 'webkit']) {
       expect(gradle.toLowerCase().includes(forbidden), `Android build depends on "${forbidden}"`).toBe(false)
     }
+    // BUILDAPP-03Y1: the Analyzer talks to the analyzer SERVICE over https, and
+    // exactly one file opens a connection: the transport of the analyzer
+    // client. Nothing anywhere opens a socket, embeds a browser or pulls in a
+    // networking library.
+    const TRANSPORT = resolve(KOTLIN_MAIN, 'analyzer/HttpTransport.kt')
     for (const file of kotlinMain) {
       const code = codeOf(file)
-      for (const forbidden of ['HttpURLConnection', 'URLConnection', 'OkHttpClient', 'WebView', 'Socket']) {
+      for (const forbidden of ['OkHttpClient', 'WebView', 'Socket', 'ServerSocket', 'DatagramSocket']) {
         expect(new RegExp(`\\b${forbidden}\\b`).test(code), `${file.replace(ROOT, '')} uses ${forbidden}`).toBe(false)
       }
+      if (file !== TRANSPORT) {
+        for (const forbidden of ['HttpURLConnection', 'URLConnection', 'HttpsURLConnection', 'openConnection']) {
+          expect(new RegExp(`\\b${forbidden}\\b`).test(code), `${file.replace(ROOT, '')} opens a connection (${forbidden}); only analyzer/HttpTransport.kt may`).toBe(false)
+        }
+      }
     }
+    expect(existsSync(TRANSPORT), 'the analyzer transport exists').toBe(true)
+  })
+
+  it('does not analyse anything itself: the Analyzer is a client of the one analyzer service', () => {
+    // No drawing is decoded, no observation read and no building solved on the
+    // phone. The analyzer package handles status records, hashes and bytes.
+    for (const file of kotlinMain.filter((f) => f.includes('/analyzer/'))) {
+      const code = codeOf(file)
+      for (const forbidden of ['BitmapFactory', 'ImageDecoder', 'Bitmap', 'reconstruct', 'Observation', 'SourcePackage', 'MetricEvidence']) {
+        expect(new RegExp(`\\b${forbidden}\\b`).test(code), `${file.replace(ROOT, '')} mentions ${forbidden}`).toBe(false)
+      }
+    }
+    for (const file of kotlinMain) expect(/reconstruct|observation|solver|analyzer-v2/i.test(file.replace(KOTLIN_MAIN, '')), `${file.replace(ROOT, '')} looks like analysis code`).toBe(false)
+  })
+
+  it('carries no credential: the only build-time value is the service’s public address', () => {
+    const gradle = readFileSync(resolve(ANDROID, 'app/build.gradle.kts'), 'utf8')
+    const fields = [...gradle.matchAll(/buildConfigField\(\s*"[^"]+"\s*,\s*"([^"]+)"/g)].map((m) => m[1])
+    expect(fields).toEqual(['ANALYZER_API_BASE_URL'])
+    expect(gradle).not.toMatch(/ANTHROPIC|API_KEY|apiKey|SECRET|TOKEN|Authorization|Bearer/)
+    for (const file of kotlinMain) expect(/Authorization|Bearer|x-api-key|ANTHROPIC/i.test(readFileSync(file, 'utf8')), `${file.replace(ROOT, '')} handles a credential`).toBe(false)
   })
 
   it('is not a WebView wrapper around the React app', () => {
@@ -248,11 +279,16 @@ describe('the Android viewer is a viewer, not a second compiler', () => {
     expect(filesUnder(APP_MAIN, /\.(html|jsx?|tsx?)$/), 'no web bundle may ship inside the APK').toEqual([])
   })
 
-  it('requests no permissions at all, so the preview works offline', () => {
+  it('requests exactly one permission, INTERNET, and allows no cleartext', () => {
+    // BUILDAPP-03Y1 adds the network for the Analyzer and nothing else: no
+    // storage (downloads live in the app's private files), no location, camera,
+    // microphone or network state. The bundled scenes still open offline.
     const manifest = readFileSync(resolve(APP_MAIN, 'AndroidManifest.xml'), 'utf8')
-    expect(manifest).not.toMatch(/<uses-permission/)
-    expect(manifest).not.toMatch(/android\.permission\.INTERNET/)
+    const permissions = [...manifest.matchAll(/<uses-permission[^>]*android:name="([^"]+)"/g)].map((m) => m[1])
+    expect(permissions).toEqual(['android.permission.INTERNET'])
+    expect(manifest).not.toMatch(/<uses-permission-sdk-23|<permission\b/)
     expect(manifest).not.toMatch(/usesCleartextTraffic/)
+    expect(manifest).not.toMatch(/networkSecurityConfig/)
   })
 
   it('uses an application id that can coexist with the owner’s older APK', () => {

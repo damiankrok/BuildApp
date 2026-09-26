@@ -44,6 +44,12 @@ const URL_STATUS: Record<string, number> = { INVALID_URL: 400, UNSUPPORTED_PUBLI
 
 const ROUTE = /^\/v1\/analyses\/([^/]+)(?:\/(result|scene|model|candidate))?\/?$/
 
+/** `GET /v1/analyses/:id` for a record: the record without its schema tag, plus links. */
+export const statusBodyOf = (job: JobRecord): Record<string, unknown> => {
+  const { schema: _schema, schemaVersion: _version, ...rest } = job
+  return { ...rest, links: linksOf(job) }
+}
+
 const linksOf = (job: JobRecord): Record<string, string> => {
   const base = `/v1/analyses/${job.jobId}`
   return job.status === 'COMPLETED' ? { self: base, result: `${base}/result`, scene: `${base}/scene`, model: `${base}/model`, candidate: `${base}/candidate` } : { self: base }
@@ -118,8 +124,6 @@ export function createApiServer(deps: ApiDeps): Server {
       req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
       req.on('error', () => reject(new HttpError(400, 'BAD_REQUEST', 'the request body could not be read')))
     })
-
-  const statusBody = (job: JobRecord): Record<string, unknown> => ({ ...job, schema: undefined, schemaVersion: undefined, links: linksOf(job) })
 
   const serveFile = async (req: IncomingMessage, res: ServerResponse, job: JobRecord, part: ResultPart): Promise<void> => {
     if (job.status !== 'COMPLETED') throw job.status === 'FAILED' || job.status === 'CANCELLED' ? new HttpError(410, 'GONE', 'this analysis did not complete, so it has no result') : new HttpError(409, 'NOT_READY', 'the analysis has not finished yet')
@@ -225,7 +229,7 @@ export function createApiServer(deps: ApiDeps): Server {
         return
       }
       if (method !== 'GET' && method !== 'HEAD') throw new HttpError(405, 'METHOD_NOT_ALLOWED', 'use GET or DELETE', { allow: 'GET, DELETE' })
-      json(req, res, 200, statusBody(job))
+      json(req, res, 200, statusBodyOf(job))
       return
     }
     if (method !== 'GET' && method !== 'HEAD') throw new HttpError(405, 'METHOD_NOT_ALLOWED', 'use GET', { allow: 'GET' })

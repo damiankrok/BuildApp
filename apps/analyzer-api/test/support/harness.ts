@@ -29,10 +29,10 @@ export type Api = {
   close: (options?: { keepData?: boolean }) => Promise<void>
 }
 
-export async function startApi(publisher: SyntheticPublisher, overrides: Partial<ApiConfig> = {}, options: { dataDir?: string; executor?: JobExecutor } = {}): Promise<Api> {
+export async function startApi(publisher: SyntheticPublisher, overrides: Partial<ApiConfig> = {}, options: { dataDir?: string; executor?: JobExecutor; store?: (dataDir: string) => FileJobStore } = {}): Promise<Api> {
   const dataDir = options.dataDir ?? mkdtempSync(join(tmpdir(), 'analyzer-api-'))
   const config: ApiConfig = { ...loadConfig({}), dataDir, executor: 'inprocess', log: false, ...overrides }
-  const store = new FileJobStore(dataDir)
+  const store = options.store ? options.store(dataDir) : new FileJobStore(dataDir)
   await store.init()
   const executor = options.executor ?? new InProcessExecutor(() => ({ adapters: [publisher.adapter], deps: publisher.deps }))
   const runner = new JobRunner(store, executor, config)
