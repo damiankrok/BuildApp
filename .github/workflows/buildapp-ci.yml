@@ -37,7 +37,16 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
       - name: Unit / integration / architecture tests
+        # includes the analysis service, the analyzer HTTP API (lifecycle,
+        # cancel, timeout, isolation, SSRF, limits, worker threads) and the
+        # architecture test that bundles the API and checks what went in
         run: npm test
+      - name: Analyzer API bundle
+        run: npm run build --workspace apps/analyzer-api
+      - name: Analyzer API smoke (the bundle, over HTTP)
+        run: node apps/analyzer-api/scripts/smoke.mjs
+        env:
+          ANALYZER_LOG: "0"
       - name: Production web build
         run: npm run build
       - name: Marcówki semantic audit
@@ -86,6 +95,80 @@ jobs:
             stage-reports/artifacts/reconstruction/**
             .cache/no-reference/**
 
+  analyzer-image:
+    name: Analyzer API / container
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22 (runs the smoke script only)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build the image
+        run: docker build -f apps/analyzer-api/Dockerfile -t buildapp-analyzer:ci .
+      - name: Start the container
+        run: docker run -d --name analyzer -p 8080:8080 buildapp-analyzer:ci
+      - name: Smoke the container over HTTP
+        run: node apps/analyzer-api/scripts/smoke.mjs --base http://127.0.0.1:8080
+      - name: A real project URL through the container (advisory — depends on a third-party site)
+        continue-on-error: true
+        run: >-
+          node apps/analyzer-api/scripts/smoke.mjs --base http://127.0.0.1:8080
+          --analyze "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca"
+          --timeout-s 900 --out analyzer-live
+      - name: Container health and log
+        if: always()
+        run: |
+          docker inspect --format 'health: {{.State.Health.Status}}' analyzer || true
+          docker logs analyzer 2>&1 | tail -n 60 || true
+      - name: Upload the live run record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analyzer-live-run
+          if-no-files-found: ignore
+          retention-days: 14
+          path: analyzer-live/**
+
+  analyzer-deploy:
+    # Deploys the analyzer API to Fly.io when, and only when, the repository
+    # has a FLY_API_TOKEN secret (docs/ANALYZER_API.md → Deployment). Without
+    # it this job only says so: nothing pretends a service exists.
+    name: Analyzer API / deploy
+    needs: [core, analyzer-image]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      ANALYZER_API_BASE_URL: ${{ vars.ANALYZER_API_BASE_URL }}
+    steps:
+      - name: Is a deployment configured?
+        run: |
+          if [ -z "$FLY_API_TOKEN" ]; then
+            echo "### Analyzer API not deployed" >> "$GITHUB_STEP_SUMMARY"
+            echo "The repository has no FLY_API_TOKEN secret, so CI does not deploy the analyzer service. APKs from this run have ANALYZER_API_BASE_URL='${ANALYZER_API_BASE_URL}'." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Checkout
+        if: env.FLY_API_TOKEN != ''
+        uses: actions/checkout@v4
+      - name: Node 22
+        if: env.FLY_API_TOKEN != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: flyctl
+        if: env.FLY_API_TOKEN != ''
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy
+        if: env.FLY_API_TOKEN != ''
+        run: flyctl deploy . --config apps/analyzer-api/fly.toml --dockerfile apps/analyzer-api/Dockerfile --remote-only
+      - name: Smoke the deployment
+        if: env.FLY_API_TOKEN != '' && env.ANALYZER_API_BASE_URL != ''
+        run: node apps/analyzer-api/scripts/smoke.mjs --base "$ANALYZER_API_BASE_URL"
+
   browser:
     name: Browser / Playwright
     runs-on: ubuntu-latest
@@ -129,6 +212,11 @@ jobs:
       BUILDPLAN_PREVIEW_KEYSTORE_PASSWORD: ${{ secrets.BUILDPLAN_PREVIEW_KEYSTORE_PASSWORD }}
       BUILDPLAN_PREVIEW_KEY_ALIAS: ${{ secrets.BUILDPLAN_PREVIEW_KEY_ALIAS }}
       BUILDPLAN_PREVIEW_KEY_PASSWORD: ${{ secrets.BUILDPLAN_PREVIEW_KEY_PASSWORD }}
+      # The analyzer service's public address, compiled into BuildConfig. A
+      # repository VARIABLE, not a secret: it is a URL, and the APK carries no
+      # credential for it. Empty when no service is deployed; the app then
+      # says so and lets the owner enter an address.
+      ANALYZER_API_BASE_URL: ${{ vars.ANALYZER_API_BASE_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -179,6 +267,19 @@ jobs:
             cat apps/android/app/build/preview-apks/VERSION.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: The APK asks for the network and nothing else
+        # INTERNET is the one permission the Analyzer adds. The other line
+        # AndroidX's core library adds by itself: a signature permission the
+        # app defines for its own not-exported broadcast receivers, which
+        # grants no access to anything on the phone.
+        run: |
+          AAPT="$ANDROID_HOME/build-tools/35.0.0/aapt"
+          for apk in apps/android/app/build/preview-apks/*.apk; do
+            perms=$("$AAPT" dump permissions "$apk" | sed -nE "s/^uses-permission: name='([^']+)'.*/\1/p" | sort -u | tr '\n' ' ')
+            echo "$(basename "$apk"): $perms"
+            [ "$perms" = "android.permission.INTERNET com.buildplan.preview.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION " ] || { echo "::error::unexpected permissions in $apk: $perms"; exit 1; }
+          done
+          echo "Analyzer service compiled in: '${ANALYZER_API_BASE_URL}'" >> "$GITHUB_STEP_SUMMARY"
       - name: Upload installable APKs
         uses: actions/upload-artifact@v4
         with:

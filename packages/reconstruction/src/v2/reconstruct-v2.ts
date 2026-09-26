@@ -73,7 +73,16 @@ export type ReconstructionV2Options = {
   debug?: (message: string) => void
   /** The model's id; defaults to `m-auto-v2-<slug>`. Two sealed candidates of one project side by side need two. */
   modelId?: string
+  /**
+   * Told when the solver enters each of its phases, for a caller reporting
+   * progress. The solver is synchronous; this is a notification, and nothing
+   * it does can reach the result.
+   */
+  onPhase?: (phase: ReconstructionV2Phase) => void
 }
+
+/** The solver's phases, in the order it runs them. */
+export type ReconstructionV2Phase = 'REGISTRATION' | 'TOPOLOGY' | 'METRICS' | 'MODEL'
 
 export type ReconstructionV2Result = {
   layout: StructuralLayoutHypothesisSet
@@ -113,6 +122,7 @@ const viewFamilyOf = (frame: SourceCoordinateFrame): ViewFamily => (frame.roles.
 
 export function reconstructV2(options: ReconstructionV2Options): ReconstructionV2Result {
   const { graph, metrics } = options
+  options.onPhase?.('REGISTRATION')
   const keep = options.frameFilter
   const ctx: Ctx = { sightings: [], measurements: [], hypotheses: [], alternatives: [], solved: [], relations: [], ledger: [], steps: [], unresolved: [], traces: [], consumed: new Map() }
   const step = (s: Omit<SolverStep, 'index'>): void => {
@@ -257,6 +267,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   step({ stage: 'registration', what: 'renders registered on the ridge datum', method: 'DIRECT', detail: elevations.map((e) => `${e.side}: ${e.mpp} m/px, ground at ${e.bottomY} (${e.spanWhy})`).join('; ') || 'none', inputs: legacy.length, outputs: elevations.length })
   const viewsOf = (facade: 'FRONT' | 'REAR' | 'WEST' | 'EAST'): Array<{ view: ElevationFrameV2; raster: Raster }> => views.filter((v) => v.view.side === (facade === 'WEST' ? 'LEFT' : facade === 'EAST' ? 'RIGHT' : facade))
 
+  options.onPhase?.('TOPOLOGY')
   // ---------------------------------------------------------------------------
   // G1. the main roof and whether it covers the zones
   // ---------------------------------------------------------------------------
@@ -471,6 +482,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
   step({ stage: 'interior', what: 'partitions, doors and rooms', method: 'DISCRETE_SELECTION', detail: interior.map((i) => `storey ${i.storeyIndex}: ${i.walls.length} walls, ${i.doors.length} doors, ${i.rooms.length} rooms, ${i.blocks.length} blocks`).join('; '), inputs: planByStorey.size, outputs: interior.reduce((a, i) => a + i.rooms.length, 0) })
 
+  options.onPhase?.('METRICS')
   // ---------------------------------------------------------------------------
   // G5/H. openings on every exterior wall, cross-view
   // ---------------------------------------------------------------------------
@@ -881,6 +893,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const facadeGraph = buildFacadeGraph({ returns, verges, balconies, railings, portalHeads, terraces, recesses, levels: levelsV2, ends: new Map(balconies.filter((b) => b.ends).map((b) => [b.id, (b.ends as [EndCondition, EndCondition]).map((e) => ({ ...e, railStopAt: e.at, turns: false })) as [BalconyEnd, BalconyEnd]])), roofEaveY: mainRoof?.eaveY })
   step({ stage: 'facade', what: 'assembly closure: how the members meet', method: 'DISCRETE_SELECTION', detail: `${closureNotes.length} decisions; ${terraces.length} terrace${terraces.length === 1 ? '' : 's'}${terraces.some((t) => t.extension) ? ` (${terraces.filter((t) => t.extension).length} with a platform beyond the mouth)` : ''}; ${railings.filter((r) => (r.path?.length ?? 2) > 2).length} railing${railings.filter((r) => (r.path?.length ?? 2) > 2).length === 1 ? '' : 's'} turning; facade graph ${facadeGraph.nodes.length} nodes, ${facadeGraph.edges.length} edges`, inputs: balconies.length + railings.length + verges.length + portalHeads.length + returns.length, outputs: facadeGraph.edges.length })
 
+  options.onPhase?.('MODEL')
   // ---------------------------------------------------------------------------
   // J. emit, K. seal, L. verify, M. repair, N. quality
   // ---------------------------------------------------------------------------

@@ -1,0 +1,23 @@
+{
+  "name": "@buildapp/analyzer-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The analyzer HTTP API: accepts a project URL, runs the one link-analysis pipeline (@buildapp/analysis-service) in a worker thread per job, and serves status, progress, the result summary and the mobile scene bundle. No project knowledge, no truth, no secrets in any client.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node dist/server.mjs",
+    "dev": "ANALYZER_EXECUTOR=inprocess vite-node src/main.ts"
+  },
+  "dependencies": {
+    "@buildapp/analysis-service": "*",
+    "@buildapp/model": "*",
+    "@buildapp/source-common": "*",
+    "@buildapp/source-package": "*",
+    "@buildapp/source-vision": "*"
+  },
+  "devDependencies": {
+    "@buildapp/synthetic-drawings": "*",
+    "esbuild": "^0.28.2"
+  }
+}

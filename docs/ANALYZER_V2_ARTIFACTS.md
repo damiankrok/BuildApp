@@ -9,7 +9,7 @@ files chain by hash (candidate → layout, metrics, observation graph; graph →
 package, observation graph, metrics; ledger and quality → graph; residuals →
 candidate), and the audit checks every link.
 
-## Written by `packages/reconstruction/scripts/reconstruct-v2.ts`
+## Written by `packages/analysis-service/scripts/reconstruct-v2.ts`
 
 | file | schema | contents |
 | --- | --- | --- |

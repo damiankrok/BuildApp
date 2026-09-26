@@ -209,21 +209,73 @@ not drawn here because this renderer builds no feature-edge geometry.
 
 | Input | Effect |
 | --- | --- |
-| one finger, drag | orbit around the current focus |
-| pinch | zoom about the focus |
-| two fingers, drag together | pan |
+| one finger, drag | orbit around the current target |
+| pinch | zoom toward the target |
+| two fingers, drag together | pan: the building follows the fingers |
 | tap | select the semantic object under the finger |
 | double tap on the selected object | isolate it and frame it |
 
+The touch model is a pure state machine, `CameraGestureTracker` in
+`camera/CameraGesture.kt`, with JVM tests in `CameraGestureTest`. `Viewport`
+only translates each Compose pointer event into a sample (pointer ids,
+positions, pressed state, uptime and viewport size) and hands the resulting
+actions (`Orbit`, `Pan`, `Zoom`, `Tap`, `DoubleTap`) to the view model and the
+picker.
+
+**Changing the fingers never moves the camera.** Whenever the set of pressed
+pointer ids changes (a finger lands or lifts, one pointer replaces another, or
+the event lists the ids in a different order), the tracker rebases. It re-reads
+the orbit anchor, the pair centroid and the pair distance from the new set, and
+it emits no orbit, pan or zoom for that frame. Movement is always measured per
+pointer id, never by list position, so only fingers that actually move after
+the rebase turn, pan or zoom the camera. Before this rule, a second finger
+landing compared the new pair's centroid and spread with the single finger's
+position. That produced a sudden pan plus a bogus pinch, and the building
+jumped.
+
+- **One finger: orbit.** The gain is 300° per short side of the viewport
+  (the width, in portrait), for yaw and pitch alike. A drag across 3/5 of the
+  width is a half turn. The gain is relative to the viewport rather than per
+  pixel, so the same physical drag turns the model equally at any pixel density
+  and in either orientation. The orbit starts only once the finger is 8 dp from
+  where it landed, measured as displacement rather than path length, and only
+  the travel beyond those 8 dp turns the camera. Jitter therefore never orbits,
+  and a drag does not lurch as it starts. Every one-finger phase starts behind
+  the slop again, including the finger left behind when a pinch ends.
+- **Two fingers: pan and pinch together.** The pan is the movement of the
+  pair's centroid, in viewport heights. The camera turns that into world units
+  from its distance and field of view, so the point at the target stays under
+  the fingers 1:1 at any zoom. The zoom is the ratio of the pair's current
+  distance to its previous distance. It is clamped to 0.8–1.25 per frame, and
+  no zoom is read while the pair is closer than 16 dp, so crossing fingers or
+  one malformed sample can move the camera by one ordinary step at most. A pure
+  pinch does not pan, and a pure drag does not zoom. Panning moves the target
+  deliberately, and nothing else does: orbit changes only yaw and pitch, and
+  zoom changes only distance.
+- **Three or more fingers:** the first two fingers to land steer. A third
+  finger landing or lifting is a pointer-set change like any other.
+- **Tap:** one finger, pressed and released within 500 ms, never more than
+  8 dp from where it landed, and with no orbit, pan or pinch in between. It
+  selects at the landing point. A second finger at any time rules out a tap.
+- **Double tap:** a second tap released within 300 ms of the first one's
+  release and within 48 dp of it. A third tap starts a new pair. A drag between
+  two taps breaks the pair.
+- **Cancel:** when the system takes the touch stream away, all gesture state is
+  cleared, including a pending double tap, and nothing is emitted. A cancelled
+  touch never ends in a tap.
+
 Selection is applied on the **first** tap; it never waits for a double-tap
-timeout. A second tap on the same object within 300 ms is then read as
-"isolate and frame this", on top of a selection the user already saw happen.
+timeout. Both taps of a double tap go through the same pick. The view model
+reads a second pick of the same object within 300 ms as "isolate and frame
+this", on top of a selection the user already saw happen.
 
 Pitch is clamped to −85°…89°, so a plan view is reachable but the house can
 never turn over. Distance is clamped between roughly 8 % and 14× the scene
 radius, so the camera can neither end up inside the walls nor lose the building
-in the distance. Panning scales with distance, so it feels the same at every
-zoom. Any touch immediately interrupts an in-flight preset transition.
+in the distance. Any touch immediately interrupts an in-flight preset
+transition. The viewport consumes a touch's pointer events once it has become
+a camera move (a drag past the slop, or a second finger). A touch that may
+still be a tap is left unconsumed.
 
 Every gesture has a button alternative in the tool row, touch targets are at
 least 48 dp, and the active view, style and layer are named in the button

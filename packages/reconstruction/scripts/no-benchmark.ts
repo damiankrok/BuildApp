@@ -77,7 +77,7 @@ function main(): void {
       'npx',
       [
         'vite-node',
-        'packages/reconstruction/scripts/reconstruct-v2.ts',
+        'packages/analysis-service/scripts/reconstruct-v2.ts',
         '--',
         ...(args.length > 0
           ? args

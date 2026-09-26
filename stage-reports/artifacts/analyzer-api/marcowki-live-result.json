@@ -1,0 +1,173 @@
+{
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "jobId": "2bc9a479bf70903d3e1a541cfd49b42d",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "title": "Dom w marcówkach (GE)",
+  "label": "Dom w marcówkach (GE) (analysis)",
+  "modelId": "m-analysis-m2fa281446a8ca",
+  "publisher": "archon.pl",
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "sourcePackageHash": "d6c4f1659ac4f320faa55cb23971c968ead1627d48c65f5aa0d45cb4297e4aca",
+  "observationGraphHash": "85fbcfd8722775f506d570936c251f0f54080d47d44246a6bdba5c5dada6661c",
+  "metricEvidenceHash": "32dae510600d26fb084bf9551ab4f1bee43b9ae6753737d8caeae7f9b4105d4d",
+  "candidateHash": "5bfbccbba9fb60da95ca3cd07bcfd0809d42f823e35883f4358d8a4092805a1a",
+  "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+  "modelSha256": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+  "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+  "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13",
+  "sceneBytes": 578344,
+  "counts": {
+    "assets": 20,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "SECTION": 1,
+      "FLOOR_PLAN": 8,
+      "SITE_PLAN": 1,
+      "PERSPECTIVE_RENDER": 4,
+      "UNKNOWN": 2
+    },
+    "observations": 888,
+    "frames": 18,
+    "metricEvidence": 142,
+    "callouts": 56,
+    "commands": 205,
+    "masses": 2,
+    "openings": 12,
+    "rooms": 12,
+    "balconies": 2,
+    "terraces": 2,
+    "railings": 2,
+    "chimneys": 2,
+    "rooflights": 3,
+    "meshes": 162,
+    "triangles": 5110
+  },
+  "quality": {
+    "levels": {
+      "L0": 5,
+      "L1": 69,
+      "L2": 31
+    },
+    "byFamily": {
+      "FACADE_ASSEMBLY": {
+        "L1": 2
+      },
+      "MASS": {
+        "L2": 2
+      },
+      "INTERIOR_WALL": {
+        "L1": 29,
+        "L0": 2
+      },
+      "ROOM": {
+        "L1": 10,
+        "L2": 2
+      },
+      "BALCONY": {
+        "L2": 2
+      },
+      "CAMERA": {
+        "L1": 3
+      },
+      "CHIMNEY": {
+        "L2": 2
+      },
+      "SURFACE_REGION": {
+        "L0": 3
+      },
+      "LEVEL": {
+        "L2": 2
+      },
+      "INTERIOR_DOOR": {
+        "L1": 9
+      },
+      "OPENING": {
+        "L2": 11,
+        "L1": 1
+      },
+      "FACADE_MEMBER": {
+        "L2": 1
+      },
+      "RAILING": {
+        "L2": 2
+      },
+      "RECESS": {
+        "L2": 4
+      },
+      "RETURN_WALL": {
+        "L1": 8
+      },
+      "ATTACHED_ROOF": {
+        "L2": 1
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOFLIGHT": {
+        "L1": 3
+      },
+      "STAIR": {
+        "L2": 1
+      },
+      "TERRACE": {
+        "L1": 2
+      },
+      "ROOF_MEMBER": {
+        "L1": 2
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "what": "the kind of roof over mass-1",
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING"
+    },
+    {
+      "what": "the label of room-0-2 (read as 9)",
+      "reason": "its 5.555 m² is 77 % off the published Garaż 24.1 m²; by area it would be 8 Kotłownia 5.8",
+      "status": "AMBIGUOUS"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses not used (byte identical)",
+    "9 source addresses not used (http status)",
+    "12 of 66 source-view checks outside tolerance"
+  ],
+  "vision": {
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null,
+    "attempted": 17,
+    "accepted": 0
+  },
+  "verification": {
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 66,
+    "residualsOutsideTolerance": 12,
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 42
+    }
+  },
+  "analyzer": {
+    "service": "1.0.0",
+    "solver": "2.0.0"
+  },
+  "startedAt": "2026-09-26T14:00:01.292Z",
+  "completedAt": "2026-09-26T14:02:58.117Z",
+  "links": {
+    "self": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d",
+    "result": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/result",
+    "scene": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/scene",
+    "model": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/model",
+    "candidate": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/candidate"
+  }
+}

@@ -1,15 +1,23 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "packages/*/src/**/*.ts",
     "packages/*/test/**/*.ts",
     "packages/*/scripts/**/*.ts",
+    "apps/analyzer-api/scripts/**/*.ts",
+    "apps/analyzer-api/test/**/*.ts",
+    "apps/analyzer-api/src/**/*.ts",
     "tests/architecture/**/*.ts",
     "tests/setup/**/*.ts",
     "vitest.config.ts"
   ],
-  "exclude": ["**/node_modules/**", "**/dist/**"]
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**"
+  ]
 }

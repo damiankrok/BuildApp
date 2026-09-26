@@ -1,0 +1,53 @@
+{
+  "schema": "buildapp.live-vs-sealed",
+  "schemaVersion": "1.0.0",
+  "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "apiRun": {
+    "jobId": "2bc9a479bf70903d3e1a541cfd49b42d",
+    "startedAt": "2026-09-26T14:00:01.292Z",
+    "completedAt": "2026-09-26T14:02:58.117Z",
+    "hashes": {
+      "sourcePackageHash": "d6c4f1659ac4f320faa55cb23971c968ead1627d48c65f5aa0d45cb4297e4aca",
+      "observationGraphHash": "85fbcfd8722775f506d570936c251f0f54080d47d44246a6bdba5c5dada6661c",
+      "metricEvidenceHash": "32dae510600d26fb084bf9551ab4f1bee43b9ae6753737d8caeae7f9b4105d4d",
+      "candidateHash": "5bfbccbba9fb60da95ca3cd07bcfd0809d42f823e35883f4358d8a4092805a1a",
+      "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+      "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+      "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13"
+    },
+    "label": "Dom w marcówkach (GE) (analysis)",
+    "modelId": "m-analysis-m2fa281446a8ca"
+  },
+  "sealedAutoV3": {
+    "candidateHash": "b73596d2bf01a51038e18a1aa592308ed9578abff80eb2b6d784ce4ed6a58796",
+    "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1",
+    "sourcePackageHash": "4b8b0fb7924f535f8feed22c67851e96df7d48566474c1ee39df1d3517e2d01b",
+    "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
+    "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+    "label": "Marcówki (auto v3)",
+    "modelId": "m-auto-v3-marcowki",
+    "committedPackagePageHash": "e7e31ea44227590e68bef637e40e81672a71dbcd03fe67c927efc91cefa7c063"
+  },
+  "secondLiveAcquisition": {
+    "sourcePackageHash": "303f924e8fdd6b2271dcf7ced52b7edc9febe39810154b6b85030c9cfebb062b",
+    "pageHash": "350d44fba4e9160108610fcecef53e363c2c51a5f3f96bc5d035f66d9cdc5dd0"
+  },
+  "liveSourcesUnderSealedIdentity": {
+    "note": "the second live acquisition analysed by the same pipeline (runAnalysis via the CLI adapter) with the sealed label and model id",
+    "sourcePackageHash": "303f924e8fdd6b2271dcf7ced52b7edc9febe39810154b6b85030c9cfebb062b",
+    "observationGraphHash": "abac7bf380a4c1b971a8c946ccca05e8c2ebccd2017d4b138836a7d9013d95c3",
+    "metricEvidenceHash": "532ff2cb47c80fa18d8b3cc1fca67a903c10ed91890e00fba9300e12a18a0521",
+    "candidateHash": "4e14b91c1d6e73235b7f7d1a742f584a08b650260d4dbbe5309cb0796730083c",
+    "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1",
+    "sceneContentHash": "ad689af6731dd51b7b876c768a1a6ba0c551ece2de2fbaf79578375e2285ee80"
+  },
+  "findings": {
+    "drawingsByteIdentical": true,
+    "assetsCommitted": 20,
+    "assetsLive": 20,
+    "pageHashChangesBetweenFetches": true,
+    "modelUnderSealedIdentityEqualsSealedV3": true,
+    "apiModelEqualsSealedV3AfterRenamingIdAndLabel": true,
+    "sceneUnderSealedIdentityEqualsShippedV3Bundle": true
+  }
+}

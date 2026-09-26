@@ -44,6 +44,12 @@ export type AnalyzeOptions = {
   onTrace?: (trace: VisionTrace) => void
   /** Cap on assets analysed, for a quick run. */
   maxAssets?: number
+  /**
+   * Told which asset is about to be read, as `index` of `total`, and once more
+   * with `index === total` when every asset has been. Progress reporting only:
+   * nothing it returns or throws reaches the graph.
+   */
+  onAsset?: (index: number, total: number, assetId: string | null) => void
 }
 
 export type AssetAnalysis = {
@@ -100,7 +106,8 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   // graph must not depend on which drawing happened to be analysed first.
   const ordered = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).slice(0, options.maxAssets ?? pkg.assets.length)
 
-  for (const asset of ordered) {
+  for (const [index, asset] of ordered.entries()) {
+    options.onAsset?.(index, ordered.length, asset.id)
     const variant = selectedVariant(asset)
     const document = asset.roles.document
     if (document === 'CHROME' || document === 'UNKNOWN') {
@@ -202,6 +209,7 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
     }
     assets.push(analysis)
   }
+  options.onAsset?.(ordered.length, ordered.length, null)
 
   // ---- what two views say about one another -------------------------------
   if (assets.length > 1) {

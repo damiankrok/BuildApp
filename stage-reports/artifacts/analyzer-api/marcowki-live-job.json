@@ -1,0 +1,101 @@
+{
+  "jobId": "2bc9a479bf70903d3e1a541cfd49b42d",
+  "status": "COMPLETED",
+  "progress": 1,
+  "stage": null,
+  "stages": [
+    {
+      "id": "ACQUIRING_SOURCE",
+      "label": "Fetching the project page and its drawings",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:00:01.292Z",
+      "completedAt": "2026-09-26T14:00:20.003Z"
+    },
+    {
+      "id": "CLASSIFYING_SOURCES",
+      "label": "Sorting plans, elevations, sections and renders",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:00:20.003Z",
+      "completedAt": "2026-09-26T14:00:20.004Z"
+    },
+    {
+      "id": "EXTRACTING_OBSERVATIONS",
+      "label": "Reading the drawings",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:00:20.004Z",
+      "completedAt": "2026-09-26T14:02:51.496Z"
+    },
+    {
+      "id": "REGISTERING_VIEWS",
+      "label": "Registering the views to one frame",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:51.496Z",
+      "completedAt": "2026-09-26T14:02:52.542Z"
+    },
+    {
+      "id": "SOLVING_TOPOLOGY",
+      "label": "Solving bodies, roof, recesses, stair and rooms",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:52.542Z",
+      "completedAt": "2026-09-26T14:02:53.320Z"
+    },
+    {
+      "id": "SOLVING_METRICS",
+      "label": "Sizing openings, roof details and facade assemblies",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:53.320Z",
+      "completedAt": "2026-09-26T14:02:56.367Z"
+    },
+    {
+      "id": "BUILDING_MODEL",
+      "label": "Building and verifying the model",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:56.367Z",
+      "completedAt": "2026-09-26T14:02:56.868Z"
+    },
+    {
+      "id": "COMPILING_SCENE",
+      "label": "Compiling the 3D scene",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:56.868Z",
+      "completedAt": "2026-09-26T14:02:56.986Z"
+    },
+    {
+      "id": "VERIFYING",
+      "label": "Checking replay, hashes and joints",
+      "state": "DONE",
+      "startedAt": "2026-09-26T14:02:56.986Z",
+      "completedAt": "2026-09-26T14:02:58.131Z"
+    }
+  ],
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "createdAt": "2026-09-26T14:00:01.080Z",
+  "updatedAt": "2026-09-26T14:02:58.131Z",
+  "startedAt": "2026-09-26T14:00:01.292Z",
+  "completedAt": "2026-09-26T14:02:58.131Z",
+  "error": null,
+  "result": {
+    "title": "Dom w marcówkach (GE)",
+    "label": "Dom w marcówkach (GE) (analysis)",
+    "candidateHash": "5bfbccbba9fb60da95ca3cd07bcfd0809d42f823e35883f4358d8a4092805a1a",
+    "modelHash": "4a8e8ddca8beec996743bc0d3101a58c30335c9cbf2f86919379a0159475e82d",
+    "sceneSha256": "348273e19157295106803641e60149b5a8d0965fea085b280c905e8f16667e13",
+    "sceneContentHash": "44cc19be80abeb23eadeffc59b9058345a735c47733d0c1af8cf43f3421b0339",
+    "sceneBytes": 578344,
+    "quality": {
+      "L0": 5,
+      "L1": 69,
+      "L2": 31
+    },
+    "unresolved": 2,
+    "warnings": 4,
+    "vision": "DETERMINISTIC_ONLY"
+  },
+  "links": {
+    "self": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d",
+    "result": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/result",
+    "scene": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/scene",
+    "model": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/model",
+    "candidate": "/v1/analyses/2bc9a479bf70903d3e1a541cfd49b42d/candidate"
+  }
+}

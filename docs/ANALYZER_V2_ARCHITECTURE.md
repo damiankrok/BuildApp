@@ -1,6 +1,6 @@
 # Analyzer v2 architecture
 
-> `packages/reconstruction/src/v2` · solver `reconstruction.solver.v2` **2.0.0** · production entry `packages/reconstruction/scripts/reconstruct-v2.ts`
+> `packages/reconstruction/src/v2` · solver `reconstruction.solver.v2` **2.0.0** · production entry `packages/analysis-service/scripts/reconstruct-v2.ts` (a thin adapter over `runAnalysis`, the same function the analyzer API calls)
 > Introduced in STAGE BUILDAPP-03X. Companions: `docs/EVIDENCE_CONSUMPTION.md`, `docs/FEATURE_IDENTITY_GRAPH.md`, `docs/ANALYZER_V2_ARTIFACTS.md`. The failures it was built to answer are itemised, family by family, in `docs/ANALYZER_FORENSIC_AUDIT.md`.
 
 The v2 analyzer is the refounded path from a sealed SourcePackage, its

@@ -1,0 +1,42 @@
+# Fly.io deployment of the analyzer API. Once:
+#   fly apps create buildapp-analyzer
+#   fly volumes create analyzer_data --app buildapp-analyzer --region waw --size 3
+# then, from the REPOSITORY ROOT (the image builds from there):
+#   fly deploy . --config apps/analyzer-api/fly.toml --dockerfile apps/analyzer-api/Dockerfile
+# The CI job `analyzer-deploy` runs that deploy when the repository has a
+# FLY_API_TOKEN secret. Nothing in this file is a secret.
+app = "buildapp-analyzer"
+primary_region = "waw"
+
+[env]
+  PORT = "8080"
+  ANALYZER_DATA_DIR = "/data"
+  ANALYZER_TRUST_PROXY = "1"
+  ANALYZER_REQUIRE_HTTPS = "1"
+  ANALYZER_CONCURRENCY = "1"
+  ANALYZER_MAX_QUEUED = "8"
+  ANALYZER_JOB_TIMEOUT_MS = "900000"
+  ANALYZER_WORKER_MEMORY_MB = "1536"
+
+[[mounts]]
+  source = "analyzer_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    grace_period = "15s"
+    interval = "30s"
+    method = "GET"
+    path = "/health"
+    timeout = "5s"
+
+[[vm]]
+  memory = "2gb"
+  cpus = 2
+  cpu_kind = "shared"

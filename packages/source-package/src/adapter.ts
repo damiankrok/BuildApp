@@ -44,6 +44,12 @@ export type SourceAdapter = {
   /** A key that forces candidates into the same logical asset regardless of naming, or undefined. */
   groupKey?: (candidate: DiscoveredCandidate) => string | undefined
   parsePublished: (ctx: AdapterContext) => { facts: PublishedFact[]; specifications: PublishedSpecification[]; rooms: PublishedRoom[] }
+  /**
+   * The project's name as a person would say it, from the name the page gives
+   * it, when a publisher wraps that name in boilerplate. Display only: it is
+   * not part of the package and changes no hash.
+   */
+  displayTitle?: (identity: ProjectIdentity) => string | undefined
 }
 
 /** Claims derived purely from the channel, common to every publisher. */

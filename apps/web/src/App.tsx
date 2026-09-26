@@ -10,6 +10,7 @@ import { Viewport } from './components/Viewport.js'
 import { Inspector } from './components/Inspector.js'
 import { StatusBar } from './components/StatusBar.js'
 import { Sources } from './components/Sources.js'
+import { Analyzer } from './components/Analyzer.js'
 
 /**
  * BuildWorld. The store is created once with the demo building — which is a
@@ -18,9 +19,10 @@ import { Sources } from './components/Sources.js'
  */
 export function App(): JSX.Element {
   const store = useMemo(() => new EditorStore(createDemoBuilding()), [])
-  // The right-hand column shows either the model or the sources it came from.
-  // The two are deliberately separate surfaces: the model can be edited and
-  // the observations cannot.
+  // The right-hand column shows the model, the sources it came from, or the
+  // analyzer service. They are deliberately separate surfaces: the model can
+  // be edited, the observations cannot, and the analyzer only ever hands the
+  // store a whole model it made.
   const [panel, setPanel] = useState<RightPanel>('inspector')
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export function App(): JSX.Element {
         <Toolbar panel={panel} onPanel={setPanel} />
         <Outliner />
         <Viewport />
-        {panel === 'inspector' ? <Inspector /> : <Sources />}
+        {panel === 'inspector' ? <Inspector /> : panel === 'sources' ? <Sources /> : <Analyzer />}
         <StatusBar />
       </div>
     </StoreContext.Provider>

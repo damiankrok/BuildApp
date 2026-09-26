@@ -19,10 +19,21 @@ export default defineConfig({
     launchOptions: { args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
     screenshot: 'only-on-failure',
   },
-  webServer: {
-    command: 'npx vite preview --host 127.0.0.1 --port 4173 --strictPort',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: false,
-    timeout: 60_000,
-  },
+  webServer: [
+    {
+      command: 'npx vite preview --host 127.0.0.1 --port 4173 --strictPort',
+      url: 'http://127.0.0.1:4173',
+      reuseExistingServer: false,
+      timeout: 60_000,
+    },
+    {
+      // The analyzer API with the in-memory publisher (test wiring only), for
+      // e2e/analyzer.spec.ts: the same server, runner and pipeline as
+      // production, on loopback.
+      command: 'npx vite-node ../analyzer-api/scripts/serve-fixture.ts',
+      url: 'http://127.0.0.1:4180/health',
+      reuseExistingServer: false,
+      timeout: 60_000,
+    },
+  ],
 })

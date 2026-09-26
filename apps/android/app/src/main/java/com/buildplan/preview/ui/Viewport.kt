@@ -1,7 +1,5 @@
 package com.buildplan.preview.ui
 
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -9,8 +7,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.PointerInputChange
+import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -20,11 +17,13 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.LifecycleEventObserver
+import com.buildplan.preview.camera.CameraGestureAction
+import com.buildplan.preview.camera.CameraGestureTracker
+import com.buildplan.preview.camera.GestureSample
+import com.buildplan.preview.camera.TouchPointer
 import com.buildplan.preview.render.FilamentCanvas
 import com.buildplan.preview.render.PickOutcome
 import com.buildplan.preview.scene.ModelScene
-import kotlin.math.abs
-import kotlin.math.hypot
 
 /**
  * The 3D viewport: a Filament SurfaceView with the touch model on top of it.
@@ -32,7 +31,11 @@ import kotlin.math.hypot
  * The gesture loop is written out rather than assembled from the stock
  * detectors because the difference that matters — one finger orbits, two
  * fingers pan and pinch — is exactly the distinction the stock transform
- * detector throws away.
+ * detector throws away. The interpretation itself lives in
+ * [CameraGestureTracker], a pure state machine, so that its rules can be unit
+ * tested, the rebase when a finger lands or lifts above all. This composable
+ * only turns pointer events into samples and hands each resulting action to
+ * the view model or the picker.
  */
 @Composable
 fun Viewport(
@@ -58,8 +61,13 @@ fun Viewport(
     // callback holding on to the previously opened building would resolve
     // object ids against the wrong model.
     LaunchedEffect(canvas, model) {
-        canvas.onFrame = { frameTimeNanos ->
-            val nowMs = frameTimeNanos / 1_000_000
+        canvas.onFrame = { _ ->
+            // Every caller stamps a transition with System.currentTimeMillis():
+            // the presets, reset, "frame this", the double tap and the gesture
+            // start. The Choreographer's frame time runs on the System.nanoTime()
+            // clock instead. Mixing the two froze a transition at its first
+            // pose, and the next touch then snapped the camera to the end.
+            val nowMs = System.currentTimeMillis()
             canvas.modelRenderer.setState(model.viewer)
             canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs))
         }
@@ -87,63 +95,31 @@ fun Viewport(
             .onSizeChanged { model.viewportHeightPx = it.height }
             .semantics { contentDescription = "3D model viewport. Drag with one finger to orbit, pinch to zoom, drag with two fingers to pan, tap an element to select it." }
             .pointerInput(scene.key) {
-                val slop = viewConfiguration.touchSlop
-                awaitEachGesture {
-                    val first = awaitFirstDown(requireUnconsumed = false)
-                    val startMs = System.currentTimeMillis()
-                    model.onGestureStart(startMs)
-
-                    var maxPointers = 1
-                    var travelled = 0f
-                    var previousCentroid = first.position
-                    var previousSpread = 0f
-                    var dragging = false
-
+                // One tracker per pointer-input session: opening another model
+                // restarts this block, so no half-finished gesture carries over.
+                val tracker = CameraGestureTracker()
+                awaitPointerEventScope {
                     while (true) {
                         val event = awaitPointerEvent()
-                        val active = event.changes.filter { it.pressed }
-                        if (active.isEmpty()) break
-                        maxPointers = maxOf(maxPointers, active.size)
-
-                        val centroid = centroidOf(active)
-                        val spread = spreadOf(active, centroid)
-                        val delta = centroid - previousCentroid
-
-                        if (active.size == 1) {
-                            travelled += delta.getDistance()
-                            if (dragging || travelled > slop) {
-                                dragging = true
-                                // Half a screen width is a half turn: enough
-                                // control to line up a facade, quick enough to
-                                // get round the house in one drag.
-                                model.orbit(
-                                    deltaYawDeg = -delta.x.toDouble() * ORBIT_DEGREES_PER_PX,
-                                    deltaPitchDeg = delta.y.toDouble() * ORBIT_DEGREES_PER_PX,
-                                )
-                                active.forEach { it.consume() }
-                            }
-                        } else {
-                            dragging = true
-                            travelled += delta.getDistance() + abs(spread - previousSpread)
-                            if (previousSpread > MIN_SPREAD_PX && spread > MIN_SPREAD_PX) {
-                                model.zoom((previousSpread / spread).toDouble())
-                            }
-                            model.pan(delta.x.toDouble(), delta.y.toDouble())
-                            active.forEach { it.consume() }
-                        }
-
-                        previousCentroid = centroid
-                        previousSpread = spread
-                    }
-
-                    // A tap: one finger, never dragged.
-                    if (maxPointers == 1 && travelled <= slop) {
-                        val p = first.position
-                        canvas.pick(p.x.toInt(), p.y.toInt()) { outcome ->
-                            when (outcome) {
-                                is PickOutcome.Hit -> model.onPicked(outcome.objectId, System.currentTimeMillis())
-                                PickOutcome.Empty -> model.onPicked(null, System.currentTimeMillis())
-                                PickOutcome.Unchanged -> Unit
+                        val actions = tracker.onSample(event.toGestureSample(size.width, size.height, density))
+                        // Consume exactly when the old hand-written loop did:
+                        // once the touch is a camera move (a drag past the slop
+                        // or a second finger), so nothing around the viewport
+                        // claims it. A touch that may be a tap stays unconsumed.
+                        if (tracker.isCameraGesture) event.changes.forEach { if (it.pressed) it.consume() }
+                        for (action in actions) {
+                            when (action) {
+                                CameraGestureAction.Began -> model.onGestureStart(System.currentTimeMillis())
+                                is CameraGestureAction.Orbit -> model.orbit(action.dYawDeg, action.dPitchDeg)
+                                // The view model pans in pixels of this same
+                                // viewport and divides by its height again.
+                                is CameraGestureAction.Pan -> model.pan(action.dxPx(size.height), action.dyPx(size.height))
+                                is CameraGestureAction.Zoom -> model.zoom(action.distanceFactor)
+                                // Both go through the same pick. The view model
+                                // decides "isolate and frame" when two picks
+                                // land on the same object within its window.
+                                is CameraGestureAction.Tap -> pickAt(canvas, model, action.x, action.y)
+                                is CameraGestureAction.DoubleTap -> pickAt(canvas, model, action.x, action.y)
                             }
                         }
                     }
@@ -154,23 +130,40 @@ fun Viewport(
     }
 }
 
-private fun centroidOf(changes: List<PointerInputChange>): Offset {
-    var x = 0f
-    var y = 0f
-    for (c in changes) {
-        x += c.position.x
-        y += c.position.y
+private fun pickAt(canvas: FilamentCanvas, model: PreviewViewModel, x: Float, y: Float) {
+    canvas.pick(x.toInt(), y.toInt()) { outcome ->
+        when (outcome) {
+            is PickOutcome.Hit -> model.onPicked(outcome.objectId, System.currentTimeMillis())
+            PickOutcome.Empty -> model.onPicked(null, System.currentTimeMillis())
+            PickOutcome.Unchanged -> Unit
+        }
     }
-    return Offset(x / changes.size, y / changes.size)
 }
 
-/** Mean distance of the pointers from their centroid: the pinch scalar. */
-private fun spreadOf(changes: List<PointerInputChange>, centroid: Offset): Float {
-    if (changes.size < 2) return 0f
-    var total = 0f
-    for (c in changes) total += hypot(c.position.x - centroid.x, c.position.y - centroid.y)
-    return total / changes.size
+/**
+ * Compose only translates here. Pointer ids, positions and pressed state go in
+ * as they are, and the tracker does all the interpretation.
+ */
+private fun PointerEvent.toGestureSample(widthPx: Int, heightPx: Int, density: Float): GestureSample {
+    if (isSystemCancel()) return GestureSample.Cancel
+    return GestureSample.Frame(
+        pointers = changes.map { TouchPointer(it.id.value, it.position.x, it.position.y, it.pressed) },
+        timeMs = changes.firstOrNull()?.uptimeMillis ?: 0L,
+        widthPx = widthPx,
+        heightPx = heightPx,
+        density = density,
+    )
 }
 
-private const val ORBIT_DEGREES_PER_PX = 0.32
-private const val MIN_SPREAD_PX = 12f
+/**
+ * Compose has no cancel event type. When the system cancels the touch stream,
+ * it releases every pointer at once and marks those releases as already
+ * consumed. A real lift of the last finger is a single release that nobody
+ * consumed. Treating the cancel as a release would let it end in a tap and
+ * select whatever was under the finger.
+ */
+private fun PointerEvent.isSystemCancel(): Boolean {
+    if (changes.any { it.pressed }) return false
+    val released = changes.filter { it.previousPressed }
+    return released.isNotEmpty() && released.all { it.isConsumed }
+}

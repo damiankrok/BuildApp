@@ -337,6 +337,9 @@ export const archonAdapter: SourceAdapter = {
 
   identify: (ctx) => ({ externalId: projectCode(ctx), name: projectName(ctx.html), publisher: ARCHON_ADAPTER_ID }),
 
+  // The page titles a project "Projekt domu <name> Dane projektu"; a person calls it "<name>".
+  displayTitle: (identity) => identity.name?.replace(/^projekt\s+domu\s+/i, '').replace(/\s+dane\s+projektu$/i, '').trim() || undefined,
+
   resolutionCandidates: archonResolutionCandidates,
 
   roleClaims: archonRoleClaims,

@@ -598,3 +598,77 @@ select:focus {
   color: #8a5b5b;
   font-weight: 600;
 }
+
+/* Analyze panel: the analyzer service's stages, as it reports them. */
+.analyzer input {
+  width: 100%;
+  box-sizing: border-box;
+}
+.analyzer .analyzer-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+.analyzer .analyzer-label {
+  display: block;
+  color: var(--text-dim);
+  margin: 6px 0 3px;
+}
+.analyzer .analyzer-note {
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.analyzer .analyzer-status {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.analyzer progress {
+  width: 100%;
+  height: 8px;
+}
+.analyzer .analyzer-detail {
+  color: var(--text-dim);
+  font-size: 11px;
+  margin-top: 2px;
+}
+.analyzer .analyzer-stages {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 11.5px;
+}
+.analyzer .analyzer-stages li {
+  padding: 1px 0;
+  color: var(--text-dim);
+}
+.analyzer .analyzer-stages li .mark {
+  display: inline-block;
+  width: 14px;
+  font-family: var(--mono);
+}
+.analyzer .analyzer-stages li.stage-DONE,
+.analyzer .analyzer-stages li.stage-RUNNING {
+  color: inherit;
+}
+.analyzer .analyzer-stages li.stage-DONE .mark {
+  color: var(--ok);
+}
+.analyzer .analyzer-stages li.stage-FAILED .mark {
+  color: var(--error);
+}
+.analyzer .analyzer-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.analyzer details summary {
+  cursor: pointer;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+.analyzer details ul {
+  margin: 2px 0 4px;
+  padding-left: 16px;
+  font-size: 11px;
+}

@@ -1,0 +1,17 @@
+# Only the analyzer image is built from this context; keep it small and free of
+# anything that is not source.
+**/node_modules
+**/dist
+**/build
+.git
+.cache
+.claude
+research
+stage-reports
+apps/android
+apps/web
+!apps/web/package.json
+!apps/android/package.json
+**/test-results
+**/playwright-report
+*.log

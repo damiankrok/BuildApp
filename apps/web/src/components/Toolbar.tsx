@@ -35,13 +35,15 @@ const VIEWS: Array<{ id: ViewPreset; label: string }> = [
   { id: 'top', label: 'Top' },
 ]
 
-export type RightPanel = 'inspector' | 'sources'
+export type RightPanel = 'inspector' | 'sources' | 'analyze'
 
 export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: RightPanel) => void }): JSX.Element {
   const store = useStore()
   const snap = useSnapshot()
   const renderStyle = useRenderStyle()
   const fileRef = useRef<HTMLInputElement>(null)
+  // A model the analyzer service made is named by its label ("<project> (analysis)"), not "(file)".
+  const isAnalysis = snap.model.id.startsWith('m-analysis-')
 
   const save = (): void => {
     const json = store.saveJson()
@@ -77,6 +79,9 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
         <button data-testid="panel-sources" className={panel === 'sources' ? 'active' : ''} onClick={() => onPanel('sources')} title="What was observed in the published sources — read-only evidence, never edits">
           Sources
         </button>
+        <button data-testid="panel-analyze" className={panel === 'analyze' ? 'active' : ''} onClick={() => onPanel('analyze')} title="Send a project link to the analyzer service and open the building it makes">
+          Analyze
+        </button>
       </div>
       <div className="group">
         <label>view</label>
@@ -110,7 +115,7 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
         <label>model</label>
         <select
           data-testid="model-select"
-          value={BUILTIN_MODELS.find((m) => m.modelId === snap.model.id)?.id ?? '__file'}
+          value={BUILTIN_MODELS.find((m) => m.modelId === snap.model.id)?.id ?? (isAnalysis ? '__analysis' : '__file')}
           onChange={(e) => {
             const entry = BUILTIN_MODELS.find((m) => m.id === e.target.value)
             if (entry) store.replaceModel(entry.create())
@@ -122,6 +127,11 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
               {m.label}
             </option>
           ))}
+          {isAnalysis ? (
+            <option value="__analysis" disabled>
+              {snap.model.name}
+            </option>
+          ) : null}
           <option value="__file" disabled>
             (file)
           </option>
