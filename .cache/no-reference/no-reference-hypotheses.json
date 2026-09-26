@@ -1,5 +1,5 @@
 {
-  "contentHash": "cf87d0741234f244bd25feb45be0f5deed1593e34d04669ec339b790dace68c6",
+  "contentHash": "4606f1ec652371c5e68b1b5bdc0ef3a813340e6717a4f7235a65572a160d7d17",
   "fusion": {
     "accepted": 103,
     "afterClustering": 123,
@@ -130,8 +130,10 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.7,
-      "evidenceIds": [],
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-bd21082add"
+      ],
       "id": "hyp-opening-0",
       "kind": "DOOR",
       "observationIds": [
@@ -142,27 +144,31 @@
       ],
       "parameters": [
         {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 4.728354,
-          "low": 4.608354,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-bd21082add"
+          ],
+          "high": 4.76,
+          "low": 4.64,
           "name": "width",
           "unit": "m",
-          "value": 4.668354,
-          "why": "a 4.668354 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them"
+          "value": 4.7,
+          "why": "a 4.668354 m gap in the wall with \"470/230\" printed 0.543661 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-bd21082add"
+          ],
+          "high": 2.484,
+          "low": 2.116,
           "name": "height",
           "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
+          "value": 2.3,
+          "why": "the callout \"470/230\" printed against it"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "MEASURED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -174,7 +180,7 @@
       ],
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
-        "detail": "a 4.668354 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
+        "detail": "a 4.668354 m gap in the wall with \"470/230\" printed 0.543661 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.395251 px and -12.868944 px from where the band reader left them; the callout \"470/230\" printed against it",
         "merged": 3,
         "rule": "opening-from-plan-gap"
       },
@@ -350,338 +356,43 @@
       "viewSupport": 2
     },
     {
-      "confidence": 0.55,
-      "evidenceIds": [],
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-af8cd95252"
+      ],
       "id": "hyp-opening-10",
       "kind": "DOOR",
-      "observationIds": [],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 0.957632,
-          "low": 0.837632,
-          "name": "width",
-          "unit": "m",
-          "value": 0.897632,
-          "why": "a 0.897632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
-          "name": "height",
-          "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
-          "name": "sill",
-          "unit": "m",
-          "value": 0,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-0",
-      "provenance": {
-        "detail": "a 0.897632 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 0,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [],
-      "viewSupport": 1
-    },
-    {
-      "confidence": 0.7,
-      "evidenceIds": [],
-      "id": "hyp-opening-11",
-      "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-f6109117ba",
-        "obs-opening-reveal-ff08485326"
+        "obs-opening-reveal-0257884b05",
+        "obs-opening-reveal-b51b54ea40"
       ],
       "parameters": [
         {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 0.879861,
-          "low": 0.759861,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-af8cd95252"
+          ],
+          "high": 1.06,
+          "low": 0.94,
           "name": "width",
           "unit": "m",
-          "value": 0.819861,
-          "why": "a 0.819861 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them"
+          "value": 1,
+          "why": "a 0.946161 m gap in the wall with \"100/210\" printed 0.555763 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-af8cd95252"
+          ],
+          "high": 2.268,
+          "low": 1.932,
           "name": "height",
           "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
+          "value": 2.1,
+          "why": "the callout \"100/210\" printed against it"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
-          "name": "sill",
-          "unit": "m",
-          "value": 0,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-0",
-      "provenance": {
-        "detail": "a 0.819861 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 1,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [
-        {
-          "box": {
-            "x0": 415,
-            "x1": 487,
-            "y0": 481,
-            "y1": 555
-          },
-          "confidence": 0.846575,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-ff08485326"
-          ]
-        },
-        {
-          "box": {
-            "x0": 487,
-            "x1": 538,
-            "y0": 481,
-            "y1": 555
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
-          "observationIds": [
-            "obs-opening-reveal-f6109117ba"
-          ]
-        }
-      ],
-      "viewSupport": 2
-    },
-    {
-      "confidence": 0.55,
-      "evidenceIds": [],
-      "id": "hyp-opening-12",
-      "kind": "WINDOW",
-      "observationIds": [],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 0.561317,
-          "low": 0.441317,
-          "name": "width",
-          "unit": "m",
-          "value": 0.501317,
-          "why": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.758569,
-          "low": 0.646189,
-          "name": "height",
-          "unit": "m",
-          "value": 0.702379,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 1.02,
-          "low": 0.78,
-          "name": "sill",
-          "unit": "m",
-          "value": 0.9,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-1",
-      "provenance": {
-        "detail": "a 0.70224 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the usual 0.9 m; cut down to the 1.662379 m of wall standing over it",
-        "merged": 0,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [],
-      "viewSupport": 1
-    },
-    {
-      "confidence": 0.55,
-      "evidenceIds": [],
-      "id": "hyp-opening-2",
-      "kind": "DOOR",
-      "observationIds": [],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 3.039949,
-          "low": 2.919949,
-          "name": "width",
-          "unit": "m",
-          "value": 2.979949,
-          "why": "a 2.979949 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
-          "name": "height",
-          "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
-          "name": "sill",
-          "unit": "m",
-          "value": 0,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-0",
-      "provenance": {
-        "detail": "a 2.979949 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 0,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [],
-      "viewSupport": 1
-    },
-    {
-      "confidence": 0.7,
-      "evidenceIds": [],
-      "id": "hyp-opening-3",
-      "kind": "WINDOW",
-      "observationIds": [
-        "obs-opening-reveal-6b516b8104",
-        "obs-opening-reveal-b1afd81ec7"
-      ],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 2.907454,
-          "low": 2.787454,
-          "name": "width",
-          "unit": "m",
-          "value": 2.847454,
-          "why": "a 2.847454 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 1.815931,
-          "low": 1.546905,
-          "name": "height",
-          "unit": "m",
-          "value": 1.681418,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.741418 m of wall standing over it"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
-          "name": "sill",
-          "unit": "m",
-          "value": 0,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-0-1",
-      "provenance": {
-        "detail": "a 2.847454 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.741418 m of wall standing over it",
-        "merged": 1,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [
-        {
-          "box": {
-            "x0": 745,
-            "x1": 830,
-            "y0": 342,
-            "y1": 397
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-b1afd81ec7"
-          ]
-        },
-        {
-          "box": {
-            "x0": 845,
-            "x1": 932,
-            "y0": 341,
-            "y1": 397
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-6b516b8104"
-          ]
-        }
-      ],
-      "viewSupport": 2
-    },
-    {
-      "confidence": 0.55,
-      "evidenceIds": [],
-      "id": "hyp-opening-4",
-      "kind": "DOOR",
-      "observationIds": [],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 2.857663,
-          "low": 2.737663,
-          "name": "width",
-          "unit": "m",
-          "value": 2.797663,
-          "why": "a 2.797663 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
-          "name": "height",
-          "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
-        },
-        {
-          "basis": "ASSUMED",
+          "basis": "MEASURED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -693,7 +404,90 @@
       ],
       "parentId": "hyp-ring-mass-1-0",
       "provenance": {
-        "detail": "a 2.797663 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
+        "detail": "a 0.946161 m gap in the wall with \"100/210\" printed 0.555763 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them; the callout \"100/210\" printed against it",
+        "merged": 2,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [
+        {
+          "box": {
+            "x0": 351,
+            "x1": 379,
+            "y0": 489,
+            "y1": 570
+          },
+          "confidence": 0.840826,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-0257884b05"
+          ]
+        },
+        {
+          "box": {
+            "x0": 335,
+            "x1": 367,
+            "y0": 457,
+            "y1": 495
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-b51b54ea40"
+          ]
+        }
+      ],
+      "viewSupport": 2
+    },
+    {
+      "confidence": 0.824297,
+      "evidenceIds": [
+        "metric-callout-ring-ad248f8f2b"
+      ],
+      "id": "hyp-opening-11",
+      "kind": "DOOR",
+      "observationIds": [],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ad248f8f2b"
+          ],
+          "high": 0.96,
+          "low": 0.84,
+          "name": "width",
+          "unit": "m",
+          "value": 0.9,
+          "why": "a 0.897632 m gap in the wall with \"90/230\" printed 0.555157 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ad248f8f2b"
+          ],
+          "high": 2.484,
+          "low": 2.116,
+          "name": "height",
+          "unit": "m",
+          "value": 2.3,
+          "why": "the callout \"90/230\" printed against it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.12,
+          "low": 0,
+          "name": "sill",
+          "unit": "m",
+          "value": 0,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
+      "parentId": "hyp-ring-mass-0-0",
+      "provenance": {
+        "detail": "a 0.897632 m gap in the wall with \"90/230\" printed 0.555157 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 1.436815 px and -1.593971 px from where the band reader left them; the callout \"90/230\" printed against it",
         "merged": 0,
         "rule": "opening-from-plan-gap"
       },
@@ -702,9 +496,173 @@
       "viewSupport": 1
     },
     {
-      "confidence": 0.7,
-      "evidenceIds": [],
-      "id": "hyp-opening-5",
+      "confidence": 0.761353,
+      "evidenceIds": [
+        "metric-callout-ring-0bc9f910ef"
+      ],
+      "id": "hyp-opening-12",
+      "kind": "WINDOW",
+      "observationIds": [],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-0bc9f910ef"
+          ],
+          "high": 0.561317,
+          "low": 0.441317,
+          "name": "width",
+          "unit": "m",
+          "value": 0.501317,
+          "why": "a 0.70224 m gap in the wall with \"80/160\" printed 1.016745 m from it: the plan and the callout agree on the width"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-0bc9f910ef"
+          ],
+          "high": 1.082569,
+          "low": 0.922189,
+          "name": "height",
+          "unit": "m",
+          "value": 1.002379,
+          "why": "the callout \"80/160\" printed against it; cut down to the 1.662379 m of wall standing over it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.72,
+          "low": 0.48,
+          "name": "sill",
+          "unit": "m",
+          "value": 0.6,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
+      "parentId": "hyp-ring-mass-0-1",
+      "provenance": {
+        "detail": "a 0.70224 m gap in the wall with \"80/160\" printed 1.016745 m from it: the plan and the callout agree on the width; the callout \"80/160\" printed against it; cut down to the 1.662379 m of wall standing over it",
+        "merged": 0,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [],
+      "viewSupport": 1
+    },
+    {
+      "confidence": 0.813395,
+      "evidenceIds": [
+        "metric-callout-ring-ee40483e37"
+      ],
+      "id": "hyp-opening-2",
+      "kind": "DOOR",
+      "observationIds": [],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ee40483e37"
+          ],
+          "high": 3.06,
+          "low": 2.94,
+          "name": "width",
+          "unit": "m",
+          "value": 3,
+          "why": "a 2.979949 m gap in the wall with \"300/290\" printed 0.635105 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ee40483e37"
+          ],
+          "high": 3.132,
+          "low": 2.668,
+          "name": "height",
+          "unit": "m",
+          "value": 2.9,
+          "why": "the callout \"300/290\" printed against it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.12,
+          "low": 0,
+          "name": "sill",
+          "unit": "m",
+          "value": 0,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
+      "parentId": "hyp-ring-mass-0-0",
+      "provenance": {
+        "detail": "a 2.979949 m gap in the wall with \"300/290\" printed 0.635105 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 16.828115 px and -0.276236 px from where the band reader left them; the callout \"300/290\" printed against it",
+        "merged": 0,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [],
+      "viewSupport": 1
+    },
+    {
+      "confidence": 0.850699,
+      "evidenceIds": [
+        "metric-callout-ring-6d3a713075"
+      ],
+      "id": "hyp-opening-3",
+      "kind": "DOOR",
+      "observationIds": [],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-6d3a713075"
+          ],
+          "high": 2.81,
+          "low": 2.69,
+          "name": "width",
+          "unit": "m",
+          "value": 2.75,
+          "why": "a 2.797663 m gap in the wall with \"275/275\" printed 0.361538 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-6d3a713075"
+          ],
+          "high": 2.97,
+          "low": 2.53,
+          "name": "height",
+          "unit": "m",
+          "value": 2.75,
+          "why": "the callout \"275/275\" printed against it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.12,
+          "low": 0,
+          "name": "sill",
+          "unit": "m",
+          "value": 0,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
+      "parentId": "hyp-ring-mass-1-0",
+      "provenance": {
+        "detail": "a 2.797663 m gap in the wall with \"275/275\" printed 0.361538 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 6.815305 px and 0.823228 px from where the band reader left them; the callout \"275/275\" printed against it",
+        "merged": 0,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [],
+      "viewSupport": 1
+    },
+    {
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-e90f122d42"
+      ],
+      "id": "hyp-opening-4",
       "kind": "WINDOW",
       "observationIds": [
         "obs-opening-reveal-6b516b8104",
@@ -713,27 +671,31 @@
       ],
       "parameters": [
         {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 2.72026,
-          "low": 2.60026,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-e90f122d42"
+          ],
+          "high": 2.4,
+          "low": 2.28,
           "name": "width",
           "unit": "m",
-          "value": 2.66026,
-          "why": "a 2.66026 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them"
+          "value": 2.34,
+          "why": "a 2.66026 m gap in the wall with \"234/304\" printed 0.495681 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-e90f122d42"
+          ],
           "high": 1.793199,
           "low": 1.527539,
           "name": "height",
           "unit": "m",
           "value": 1.660369,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.720369 m of wall standing over it"
+          "why": "the callout \"234/304\" printed against it; cut down to the 1.720369 m of wall standing over it"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "MEASURED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -745,7 +707,7 @@
       ],
       "parentId": "hyp-ring-mass-0-1",
       "provenance": {
-        "detail": "a 2.66026 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor; cut down to the 1.720369 m of wall standing over it",
+        "detail": "a 2.66026 m gap in the wall with \"234/304\" printed 0.495681 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 9.997738 px and 0.173396 px from where the band reader left them; the callout \"234/304\" printed against it; cut down to the 1.720369 m of wall standing over it",
         "merged": 2,
         "rule": "opening-from-plan-gap"
       },
@@ -797,36 +759,43 @@
       "viewSupport": 2
     },
     {
-      "confidence": 0.7,
-      "evidenceIds": [],
-      "id": "hyp-opening-6",
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-ce328e2939"
+      ],
+      "id": "hyp-opening-5",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-914c75f37c"
+        "obs-opening-reveal-6b516b8104",
+        "obs-opening-reveal-b1afd81ec7"
       ],
       "parameters": [
         {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 1.458812,
-          "low": 1.338812,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ce328e2939"
+          ],
+          "high": 2.4,
+          "low": 2.28,
           "name": "width",
           "unit": "m",
-          "value": 1.398812,
-          "why": "a 1.398812 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them"
+          "value": 2.34,
+          "why": "a 2.847454 m gap in the wall with \"234/303\" printed 0.496235 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-ce328e2939"
+          ],
+          "high": 2.275801,
+          "low": 1.938645,
           "name": "height",
           "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
+          "value": 2.107223,
+          "why": "the callout \"234/303\" printed against it; cut down to the 2.167223 m of wall standing over it"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "MEASURED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -836,9 +805,94 @@
           "why": "measured from the floor of the storey the opening sits in"
         }
       ],
+      "parentId": "hyp-ring-mass-0-1",
+      "provenance": {
+        "detail": "a 2.847454 m gap in the wall with \"234/303\" printed 0.496235 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 1.158668 px and -4.217984 px from where the band reader left them; the callout \"234/303\" printed against it; cut down to the 2.167223 m of wall standing over it",
+        "merged": 1,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [
+        {
+          "box": {
+            "x0": 745,
+            "x1": 830,
+            "y0": 342,
+            "y1": 397
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-b1afd81ec7"
+          ]
+        },
+        {
+          "box": {
+            "x0": 845,
+            "x1": 932,
+            "y0": 341,
+            "y1": 397
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+          "observationIds": [
+            "obs-opening-reveal-6b516b8104"
+          ]
+        }
+      ],
+      "viewSupport": 2
+    },
+    {
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-f5c321c11a"
+      ],
+      "id": "hyp-opening-6",
+      "kind": "WINDOW",
+      "observationIds": [
+        "obs-opening-reveal-914c75f37c"
+      ],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-f5c321c11a"
+          ],
+          "high": 1.46,
+          "low": 1.34,
+          "name": "width",
+          "unit": "m",
+          "value": 1.4,
+          "why": "a 1.398812 m gap in the wall with \"140/140\" printed 0.55506 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-f5c321c11a"
+          ],
+          "high": 1.512,
+          "low": 1.288,
+          "name": "height",
+          "unit": "m",
+          "value": 1.4,
+          "why": "the callout \"140/140\" printed against it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.92,
+          "low": 0.68,
+          "name": "sill",
+          "unit": "m",
+          "value": 0.8,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
-        "detail": "a 1.398812 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
+        "detail": "a 1.398812 m gap in the wall with \"140/140\" printed 0.55506 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 10.021515 px and -0.173782 px from where the band reader left them; the callout \"140/140\" printed against it",
         "merged": 1,
         "rule": "opening-from-plan-gap"
       },
@@ -927,36 +981,45 @@
       "viewSupport": 2
     },
     {
-      "confidence": 0.7,
-      "evidenceIds": [],
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-9903866a53"
+      ],
       "id": "hyp-opening-8",
       "kind": "DOOR",
       "observationIds": [
-        "obs-opening-reveal-59831ad1d4"
+        "obs-opening-reveal-9f4a163104",
+        "obs-opening-reveal-bfbf9aa87c",
+        "obs-opening-reveal-f6109117ba",
+        "obs-opening-reveal-ff08485326"
       ],
       "parameters": [
         {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 1.176257,
-          "low": 1.056257,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-9903866a53"
+          ],
+          "high": 1.16,
+          "low": 1.04,
           "name": "width",
           "unit": "m",
-          "value": 1.116257,
-          "why": "a 1.116257 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them"
+          "value": 1.1,
+          "why": "a 0.819861 m gap in the wall with \"110/290\" printed 0.583486 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them"
         },
         {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-9903866a53"
+          ],
+          "high": 3.132,
+          "low": 2.668,
           "name": "height",
           "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
+          "value": 2.9,
+          "why": "the callout \"110/290\" printed against it"
         },
         {
-          "basis": "ASSUMED",
+          "basis": "MEASURED",
           "evidenceIds": [],
           "high": 0.12,
           "low": 0,
@@ -968,7 +1031,120 @@
       ],
       "parentId": "hyp-ring-mass-0-0",
       "provenance": {
-        "detail": "a 1.116257 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
+        "detail": "a 0.819861 m gap in the wall with \"110/290\" printed 0.583486 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 0.487864 px and -0.486027 px from where the band reader left them; the callout \"110/290\" printed against it",
+        "merged": 2,
+        "rule": "opening-from-plan-gap"
+      },
+      "rivalIds": [],
+      "sightings": [
+        {
+          "box": {
+            "x0": 446,
+            "x1": 466,
+            "y0": 289,
+            "y1": 440
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-9f4a163104"
+          ]
+        },
+        {
+          "box": {
+            "x0": 452,
+            "x1": 502,
+            "y0": 286,
+            "y1": 575
+          },
+          "confidence": 0.848525,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-bfbf9aa87c"
+          ]
+        },
+        {
+          "box": {
+            "x0": 415,
+            "x1": 487,
+            "y0": 481,
+            "y1": 555
+          },
+          "confidence": 0.846575,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-ff08485326"
+          ]
+        },
+        {
+          "box": {
+            "x0": 487,
+            "x1": 538,
+            "y0": 481,
+            "y1": 555
+          },
+          "confidence": 0.85,
+          "depthLayer": "UNKNOWN",
+          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+          "observationIds": [
+            "obs-opening-reveal-f6109117ba"
+          ]
+        }
+      ],
+      "viewSupport": 2
+    },
+    {
+      "confidence": 0.92,
+      "evidenceIds": [
+        "metric-callout-ring-b3de3b099a"
+      ],
+      "id": "hyp-opening-9",
+      "kind": "DOOR",
+      "observationIds": [
+        "obs-opening-reveal-59831ad1d4"
+      ],
+      "parameters": [
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-b3de3b099a"
+          ],
+          "high": 1.11,
+          "low": 0.99,
+          "name": "width",
+          "unit": "m",
+          "value": 1.05,
+          "why": "a 1.116257 m gap in the wall with \"105/210\" printed 0.568433 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [
+            "metric-callout-ring-b3de3b099a"
+          ],
+          "high": 2.268,
+          "low": 1.932,
+          "name": "height",
+          "unit": "m",
+          "value": 2.1,
+          "why": "the callout \"105/210\" printed against it"
+        },
+        {
+          "basis": "MEASURED",
+          "evidenceIds": [],
+          "high": 0.12,
+          "low": 0,
+          "name": "sill",
+          "unit": "m",
+          "value": 0,
+          "why": "measured from the floor of the storey the opening sits in"
+        }
+      ],
+      "parentId": "hyp-ring-mass-0-0",
+      "provenance": {
+        "detail": "a 1.116257 m gap in the wall with \"105/210\" printed 0.568433 m from it: the plan and the callout agree on the width; its reveals were found in the drawing itself, 4.881956 px and -10.626821 px from where the band reader left them; the callout \"105/210\" printed against it",
         "merged": 1,
         "rule": "opening-from-plan-gap"
       },
@@ -986,86 +1162,6 @@
           "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
           "observationIds": [
             "obs-opening-reveal-59831ad1d4"
-          ]
-        }
-      ],
-      "viewSupport": 2
-    },
-    {
-      "confidence": 0.7,
-      "evidenceIds": [],
-      "id": "hyp-opening-9",
-      "kind": "DOOR",
-      "observationIds": [
-        "obs-opening-reveal-0257884b05",
-        "obs-opening-reveal-b51b54ea40"
-      ],
-      "parameters": [
-        {
-          "basis": "SCALED",
-          "evidenceIds": [],
-          "high": 1.006161,
-          "low": 0.886161,
-          "name": "width",
-          "unit": "m",
-          "value": 0.946161,
-          "why": "a 0.946161 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 2.376,
-          "low": 2.024,
-          "name": "height",
-          "unit": "m",
-          "value": 2.2,
-          "why": "no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor"
-        },
-        {
-          "basis": "ASSUMED",
-          "evidenceIds": [],
-          "high": 0.12,
-          "low": 0,
-          "name": "sill",
-          "unit": "m",
-          "value": 0,
-          "why": "measured from the floor of the storey the opening sits in"
-        }
-      ],
-      "parentId": "hyp-ring-mass-1-0",
-      "provenance": {
-        "detail": "a 0.946161 m gap in a wall the plan draws as continuous either side of it, with no callout near enough to name it; its reveals were found in the drawing itself, 0.47885 px and -1.544979 px from where the band reader left them; no elevation shows this gap and no callout names it, so its head is taken at the usual 2.2 m and its sill at the floor",
-        "merged": 2,
-        "rule": "opening-from-plan-gap"
-      },
-      "rivalIds": [],
-      "sightings": [
-        {
-          "box": {
-            "x0": 351,
-            "x1": 379,
-            "y0": 489,
-            "y1": 570
-          },
-          "confidence": 0.840826,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-0257884b05"
-          ]
-        },
-        {
-          "box": {
-            "x0": 335,
-            "x1": 367,
-            "y0": 457,
-            "y1": 495
-          },
-          "confidence": 0.85,
-          "depthLayer": "UNKNOWN",
-          "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
-          "observationIds": [
-            "obs-opening-reveal-b51b54ea40"
           ]
         }
       ],
@@ -1437,9 +1533,9 @@
       "viewSupport": 2
     }
   ],
-  "id": "hypotheses-no-reference-cf87d0741234f244",
-  "metricEvidenceHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
-  "metricEvidenceId": "metrics-no-reference-3737dc29d37cee61",
+  "id": "hypotheses-no-reference-4606f1ec652371c5",
+  "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
+  "metricEvidenceId": "metrics-no-reference-5f12247b7585701f",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
   "proposers": [

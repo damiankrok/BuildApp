@@ -152,7 +152,7 @@ const ARCHITECTURAL: Record<SemanticGroup, GroupAppearance> = {
   RAILING: { color: '#3a3c3f', roughness: 0.5, metalness: 0.5, edge: 'NONE' },
   FACADE_FRAME: { color: '#a7a197', roughness: 0.8, metalness: 0, edge: 'SOFT' },
   TERRACE_SURFACE: { color: '#a49c92', roughness: 0.9, metalness: 0, edge: 'SOFT' },
-  CHIMNEY: { color: '#837671', roughness: 0.9, metalness: 0, edge: 'SOFT' },
+  CHIMNEY: { color: '#7c7874', roughness: 0.9, metalness: 0, edge: 'SOFT' },
   ROOFLIGHT: { color: '#5e6166', roughness: 0.5, metalness: 0.2, edge: 'NONE' },
   STAIR: { color: '#b2aca4', roughness: 0.9, metalness: 0, edge: 'NONE' },
   ROOM: { color: '#8db1a8', opacity: 0.25, roughness: 1, metalness: 0, edge: 'NONE' },
@@ -175,13 +175,14 @@ const ARCHITECTURAL: Record<SemanticGroup, GroupAppearance> = {
  */
 function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, objectParts: ReadonlySet<GeometryPart>, facts?: SceneFacts): SemanticGroup {
   const material = `${cm.materialId ?? ''} ${materialName ?? ''}`.toUpperCase()
+  const secondaryFinish = cm.materialId !== undefined && facts?.secondaryMaterials.has(cm.materialId) === true
   switch (cm.part) {
     case 'WALL':
     case 'WALL_REVEAL': {
       const wallKind = facts?.wallKind.get(cm.objectId)
       if (wallKind === 'INTERIOR') return 'WALL_INTERIOR'
       const finish = facts?.finish.get(cm.objectId)
-      if (finish === 'MEMBER') return 'FACADE_FRAME'
+      if (finish === 'MEMBER') return secondaryFinish ? 'WALL_SECONDARY' : 'FACADE_FRAME'
       if (finish === 'SECONDARY') return 'WALL_SECONDARY'
       if (!wallKind && /PARTITION|INTERIOR/.test(material)) return 'WALL_INTERIOR'
       return 'WALL_MAIN'
@@ -193,7 +194,7 @@ function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, obj
       return !roofKind && /MEMBRANE|FLAT/.test(material) ? 'FLAT_ROOF' : 'ROOF_MAIN'
     }
     case 'ROOF_TRIM':
-      return 'ROOF_TRIM'
+      return secondaryFinish ? 'WALL_SECONDARY' : 'ROOF_TRIM'
     case 'WINDOW_GLASS':
     case 'DOOR_GLASS':
     case 'ROOFLIGHT_GLASS':
@@ -209,7 +210,7 @@ function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, obj
     case 'SLAB':
       return 'SLAB'
     case 'BALCONY':
-      return facts?.balconyKind.get(cm.objectId) === 'TERRACE' ? 'TERRACE_SURFACE' : 'BALCONY_SLAB'
+      return facts?.balconyKind.get(cm.objectId) === 'TERRACE' ? 'TERRACE_SURFACE' : secondaryFinish ? 'WALL_SECONDARY' : 'BALCONY_SLAB'
     case 'TERRACE':
       return 'TERRACE_SURFACE'
     case 'RAILING_POST':
@@ -232,7 +233,7 @@ function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, obj
     case 'SURFACE_REGION':
       return /TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR/.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
     case 'LINEAR_SOLID':
-      return 'FACADE_FRAME'
+      return secondaryFinish ? 'WALL_SECONDARY' : 'FACADE_FRAME'
     default:
       return 'OTHER'
   }
@@ -250,10 +251,12 @@ export type SceneFacts = {
   roofKind: Map<string, string>
   balconyKind: Map<string, string>
   railingInfill: Map<string, string>
+  /** Materials of the ring walls in a SECONDARY role: a mesh in one is drawn as the secondary body. */
+  secondaryMaterials: Set<string>
 }
 
 export function sceneFactsOf(model: CanonicalBuildingModel): SceneFacts {
-  const facts: SceneFacts = { wallKind: new Map(), finish: new Map(), roofKind: new Map(), balconyKind: new Map(), railingInfill: new Map() }
+  const facts: SceneFacts = { wallKind: new Map(), finish: new Map(), roofKind: new Map(), balconyKind: new Map(), railingInfill: new Map(), secondaryMaterials: new Set() }
   for (const w of model.walls) facts.wallKind.set(w.id, w.kind)
   for (const r of model.roofs) facts.roofKind.set(r.id, r.kind)
   for (const b of model.balconies) facts.balconyKind.set(b.id, b.kind)
@@ -265,6 +268,7 @@ export function sceneFactsOf(model: CanonicalBuildingModel): SceneFacts {
   for (const w of exterior) if (w.materialId && (!hasRings || inRing.has(w.id))) area.set(w.materialId, (area.get(w.materialId) ?? 0) + Math.hypot(w.end.x - w.start.x, w.end.z - w.start.z) * w.height)
   const dominant = [...area].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]?.[0]
   for (const w of exterior) facts.finish.set(w.id, hasRings && !inRing.has(w.id) ? 'MEMBER' : w.materialId === undefined || w.materialId === dominant ? 'PRIMARY' : 'SECONDARY')
+  for (const w of exterior) if (facts.finish.get(w.id) === 'SECONDARY' && w.materialId) facts.secondaryMaterials.add(w.materialId)
   return facts
 }
 
@@ -306,6 +310,7 @@ const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGroup]> = 
   ['WALL_SECONDARY', 'BALCONY_SLAB'],
   ['WALL_SECONDARY', 'WINDOW_FRAME'],
   ['WALL_SECONDARY', 'GARAGE_DOOR'],
+  ['WALL_SECONDARY', 'RAILING'],
   ['WALL_MAIN', 'WALL_CLADDING'],
   ['WALL_SECONDARY', 'WALL_CLADDING'],
   ['WALL_CLADDING', 'SLAB'],

@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ART = resolve(HERE, '../../../stage-reports/artifacts')
-const FIXTURE = resolve(HERE, '../../../packages/model/test/fixtures/marcowki-ge-1.4.0.json')
+const FIXTURE = resolve(HERE, '../../../packages/model/test/fixtures/marcowki-ge-1.5.0.json')
 mkdirSync(ART, { recursive: true })
 
 type Handle = {

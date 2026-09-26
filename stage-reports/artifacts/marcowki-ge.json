@@ -2510,7 +2510,7 @@
     }
   ],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.4.0",
+  "schemaVersion": "1.5.0",
   "slabs": [
     {
       "evidence": {
@@ -2903,6 +2903,7 @@
       ]
     }
   ],
+  "terraces": [],
   "units": {
     "angle": "deg",
     "length": "m"

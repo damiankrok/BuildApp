@@ -100,15 +100,26 @@ recompiled, and styling never changes geometry.
 - **Architectural**, for owner review: every mesh is placed in a semantic
   group and coloured from the shared `architectural-v1` palette. The adapter
   holds a copy of `packages/mobile-scene/src/semantics.ts`, and
-  `semantics.test.ts` proves the two equal. The groups are main, secondary
-  and interior wall; roof, flat roof and roof trim; window glass and frame;
-  door and garage door; slab, balcony slab and terrace surface; railing;
-  facade frame; chimney; rooflight; stair; room; other. The values are a
+  `semantics.test.ts` proves the two palettes equal while
+  `tests/architecture/styling-parity.test.ts` proves the web and the phone
+  put every mesh of every sealed candidate in the same group with the same
+  colour. The groups are main, secondary, interior wall and timber cladding;
+  roof, flat roof and roof trim; window glass and frame; door and garage door;
+  slab, balcony slab and terrace surface; railing; facade frame; chimney;
+  rooflight; stair; room; other. The adapter reads the model's facts when it
+  has the model (wall rings and finishes: a wall outside every ring is a
+  frame member, a ring wall in another finish a secondary body, a slab, trim
+  or member in that finish reads as that body) and applies the same tone
+  hints the bundle does — the model's finishes move a group to another rung
+  of the palette, never into a neighbour's luminance. The values are a
   luminance ladder, so adjacent elements never blend. Structural groups also
   get a thin, 0.35-opacity feature-edge overlay (`EdgesGeometry`, 20° crease).
   An overlay is built when first shown and released when hidden or rebuilt.
-  The adapter sees meshes and materials, not objects, so it places groups by
-  part and material name; the mobile bundle's derivation reads the model.
+
+The toolbar wraps onto a second row when its groups do not fit the window,
+so nothing is pushed off-screen (`e2e/styles.spec.ts` checks a 1400 px
+window). The model selector offers the reference, the demo and every sealed
+candidate: *Marcówki (auto)*, *(auto v2)* and *(auto v3)*.
 
 No style thickens outlines, colours objects individually or adds a
 screen-space pass. Glazing stays translucent in every style.
@@ -187,5 +198,5 @@ kind, id, thickness 0.61, its level as host, a `SOURCE_*` status, the cited
 drawings and the locator (`marcowki-10-selected-return-evidence`), the
 rooflight → roof opening → roof host links work, and a roof pitch edit on
 the reference goes through the command path and undoes; Save writes bytes
-equal to the frozen fixture `packages/model/test/fixtures/marcowki-ge-1.2.0.json`
+equal to the frozen fixture `packages/model/test/fixtures/marcowki-ge-1.5.0.json`
 and Load restores the model with the same triangle count.

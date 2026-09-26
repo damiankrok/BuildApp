@@ -162,7 +162,7 @@ test('the candidate under review reads as a white body, a dark garage, timber cl
   await chooseModel(page, MODEL)
   await chooseStyle(page, 'architectural')
   const p = await probe(page)
-  for (const group of ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_CLADDING', 'TERRACE_SURFACE', 'ROOF_TRIM', 'FLAT_ROOF', 'BALCONY_SLAB', 'RAILING', 'FACADE_FRAME']) {
+  for (const group of ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_CLADDING', 'TERRACE_SURFACE', 'ROOF_TRIM', 'FLAT_ROOF', 'RAILING', 'FACADE_FRAME']) {
     expect(p.groups[group], `${MODEL} draws ${group}`).toBeDefined()
   }
   // The garage body is darker than the main body, and both are one colour each.

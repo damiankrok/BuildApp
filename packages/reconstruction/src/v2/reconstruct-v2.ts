@@ -45,7 +45,7 @@ import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, Terrac
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
 import { drawnShareOf, readTerraceExtension, terracePolygon } from './terrace.js'
-import { readFinishRuns, readFrameTones, readMassTones } from './tones.js'
+import { readFinishRuns, readMassTones, readReturnTones } from './tones.js'
 import { featureGraphViolations, sealFeatureGraph } from './graph.js'
 import type { ArchitecturalEvidenceGraph, FeatureFamily, FeatureGraphDraft, ProvenanceStatus, SolvedFeature, SourceSighting, ViewFamily } from './graph.js'
 import { ledgerViolations, sealLedger } from './ledger.js'
@@ -872,8 +872,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     closureNotes.push(...ph.notes)
   }
   // Broad tone of each body's walls, where they stand in the open on a registered render.
-  const frameTones = readFrameTones(returns, views, levelsV2)
-  for (const t of frameTones) closureNotes.push({ subject: `${t.side.toLowerCase()} frame`, what: `returns read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
+  const returnTones = readReturnTones(returns, views, levelsV2)
+  for (const t of returnTones) closureNotes.push({ subject: t.returnId, what: `reads ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
   for (const t of massTones) {
     const m = masses.find((x) => x.id === t.massId)
     if (m) closureNotes.push({ subject: m.id, what: `walls read ${t.tone.toLowerCase()} (${Math.round(t.share * 100)} %)`, why: t.why })
@@ -884,7 +884,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // J. emit, K. seal, L. verify, M. repair, N. quality
   // ---------------------------------------------------------------------------
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, frameTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })

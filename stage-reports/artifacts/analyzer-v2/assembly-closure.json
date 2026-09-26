@@ -1,5 +1,5 @@
 {
-  "candidateHash": "b9ac6c03b2a58c2949ffc1e58c1fb15e3072426051cf07b5be709854d0ee3ed3",
+  "candidateHash": "b73596d2bf01a51038e18a1aa592308ed9578abff80eb2b6d784ce4ed6a58796",
   "decisions": [
     {
       "subject": "return-front-0-1",
@@ -112,14 +112,44 @@
       "why": "continues balcony-front-1: one band, one top line and one soffit"
     },
     {
-      "subject": "front frame",
-      "what": "returns read light (67 %)",
-      "why": "the median of 6362 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
+      "subject": "return-front-0-0",
+      "what": "reads light (100 %)",
+      "why": "the median of 1740 samples of its outer face on the front render is 93 % of the render's white: light"
     },
     {
-      "subject": "rear frame",
-      "what": "returns read light (94 %)",
-      "why": "the median of 6270 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
+      "subject": "return-front-0-1",
+      "what": "reads dark (100 %)",
+      "why": "the median of 1740 samples of its outer face on the front render is 34 % of the render's white: dark"
+    },
+    {
+      "subject": "return-front-1-0",
+      "what": "reads light (90 %)",
+      "why": "the median of 1420 samples of its outer face on the front render is 93 % of the render's white: light"
+    },
+    {
+      "subject": "return-front-1-1",
+      "what": "reads light (85 %)",
+      "why": "the median of 1462 samples of its outer face on the front render is 94 % of the render's white: light"
+    },
+    {
+      "subject": "return-rear-0-0",
+      "what": "reads light (100 %)",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "subject": "return-rear-0-1",
+      "what": "reads light (100 %)",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "subject": "return-rear-1-0",
+      "what": "reads light (90 %)",
+      "why": "the median of 1415 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "subject": "return-rear-1-1",
+      "what": "reads light (82 %)",
+      "why": "the median of 1375 samples of its outer face on the rear render is 93 % of the render's white: light"
     },
     {
       "subject": "main",
@@ -615,20 +645,6 @@
       }
     ]
   },
-  "frameTones": [
-    {
-      "share": 0.670229,
-      "side": "FRONT",
-      "tone": "LIGHT",
-      "why": "the median of 6362 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
-    },
-    {
-      "share": 0.938596,
-      "side": "REAR",
-      "tone": "LIGHT",
-      "why": "the median of 6270 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
-    }
-  ],
   "massTones": [
     {
       "massId": "main",
@@ -643,6 +659,72 @@
       "tone": "DARK",
       "views": 3,
       "why": "the median of 19602 samples of its open ground-storey faces on the rear, front, right renders is 34 % of the render's white: dark (98 % of the samples read dark)"
+    }
+  ],
+  "returnTones": [
+    {
+      "returnId": "return-front-0-0",
+      "share": 1,
+      "side": "FRONT",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the front render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-front-0-1",
+      "share": 1,
+      "side": "FRONT",
+      "storeyIndex": 0,
+      "tone": "DARK",
+      "why": "the median of 1740 samples of its outer face on the front render is 34 % of the render's white: dark"
+    },
+    {
+      "returnId": "return-front-1-0",
+      "share": 0.900704,
+      "side": "FRONT",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1420 samples of its outer face on the front render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-front-1-1",
+      "share": 0.851573,
+      "side": "FRONT",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1462 samples of its outer face on the front render is 94 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-0-0",
+      "share": 1,
+      "side": "REAR",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-0-1",
+      "share": 1,
+      "side": "REAR",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-1-0",
+      "share": 0.901767,
+      "side": "REAR",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1415 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-1-1",
+      "share": 0.821091,
+      "side": "REAR",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1375 samples of its outer face on the rear render is 93 % of the render's white: light"
     }
   ],
   "schema": "buildapp.assembly-closure",

@@ -107,6 +107,14 @@ export type SemanticGroupInput = {
   materialId?: string
   materialName?: string
   objectFacts?: ObjectFacts
+  /**
+   * SECONDARY when this mesh's own material is the building's secondary
+   * finish — the finish of its secondary body's ring walls (see
+   * `secondaryFinishes` in the bundle). A slab, a trim or a frame member built
+   * in that render reads as that body: the garage box, the portal band over
+   * its door and the balcony band that continues it are one anthracite.
+   */
+  materialRole?: 'SECONDARY'
 }
 
 const upper = (s: string | undefined): string => (s ?? '').toUpperCase()
@@ -134,7 +142,7 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
     case 'WALL':
     case 'WALL_REVEAL': {
       if (upper(facts.wallKind) === 'INTERIOR') return 'WALL_INTERIOR'
-      if (facts.finish === 'MEMBER') return 'FACADE_FRAME'
+      if (facts.finish === 'MEMBER') return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'FACADE_FRAME'
       if (upper(facts.massRole) === 'ATTACHED' || facts.finish === 'SECONDARY') return 'WALL_SECONDARY'
       if (!facts.wallKind && /PARTITION|INTERIOR/.test(material)) return 'WALL_INTERIOR'
       return 'WALL_MAIN'
@@ -146,7 +154,7 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
       return 'ROOF_MAIN'
     }
     case 'ROOF_TRIM':
-      return 'ROOF_TRIM'
+      return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'ROOF_TRIM'
     case 'WINDOW_GLASS':
     case 'DOOR_GLASS':
     case 'ROOFLIGHT_GLASS':
@@ -162,7 +170,7 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
     case 'SLAB':
       return 'SLAB'
     case 'BALCONY':
-      return kind === 'TERRACE' ? 'TERRACE_SURFACE' : 'BALCONY_SLAB'
+      return kind === 'TERRACE' ? 'TERRACE_SURFACE' : input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'BALCONY_SLAB'
     case 'TERRACE':
       return 'TERRACE_SURFACE'
     case 'RAILING_POST':
@@ -189,8 +197,8 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
       return CLADDING_MATERIAL.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
     case 'LINEAR_SOLID':
       // Free members — portal heads, verge and fascia boards not yet compiled
-      // with a roof — frame the facade.
-      return 'FACADE_FRAME'
+      // with a roof — frame the facade, unless built in the secondary finish.
+      return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'FACADE_FRAME'
     default:
       return 'OTHER'
   }
@@ -222,7 +230,7 @@ export const ARCHITECTURAL_PALETTE_ID = 'architectural-v1' as const
  * body, a mid grey on a secondary body, a pale honey on timber cladding, a
  * deep warm grey roof, near-black
  * frames, cool translucent glass, warm timber doors, light concrete for slabs
- * and balconies, a darker warm stone for the terrace, a muted brick-grey
+ * and balconies, a darker warm stone for the terrace, a warm mid-dark grey
  * chimney, trims one step lighter than the walls.
  *
  * The values are a ladder on purpose. Every pair of groups that commonly
@@ -247,7 +255,7 @@ export const ARCHITECTURAL_PALETTE: ArchitecturalPalette = {
   RAILING: { color: '#3a3c3f', roughness: 0.5, metalness: 0.5, edge: 'NONE' },
   FACADE_FRAME: { color: '#a7a197', roughness: 0.8, metalness: 0, edge: 'SOFT' },
   TERRACE_SURFACE: { color: '#a49c92', roughness: 0.9, metalness: 0, edge: 'SOFT' },
-  CHIMNEY: { color: '#837671', roughness: 0.9, metalness: 0, edge: 'SOFT' },
+  CHIMNEY: { color: '#7c7874', roughness: 0.9, metalness: 0, edge: 'SOFT' },
   ROOFLIGHT: { color: '#5e6166', roughness: 0.5, metalness: 0.2, edge: 'NONE' },
   STAIR: { color: '#b2aca4', roughness: 0.9, metalness: 0, edge: 'NONE' },
   ROOM: { color: '#8db1a8', opacity: 0.25, roughness: 1, metalness: 0, edge: 'NONE' },
@@ -280,6 +288,7 @@ export const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGro
   ['WALL_SECONDARY', 'BALCONY_SLAB'],
   ['WALL_SECONDARY', 'WINDOW_FRAME'],
   ['WALL_SECONDARY', 'GARAGE_DOOR'],
+  ['WALL_SECONDARY', 'RAILING'],
   ['WALL_MAIN', 'WALL_CLADDING'],
   ['WALL_SECONDARY', 'WALL_CLADDING'],
   ['WALL_CLADDING', 'SLAB'],

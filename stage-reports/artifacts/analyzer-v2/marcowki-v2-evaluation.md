@@ -1,6 +1,6 @@
 # Marcówki analyzer-v2 evaluation against source truth v2
 
-Building `stage-reports/artifacts/analyzer-v2/marcowki-building.json` (Marcówki (auto v2)) against `research/marcowki-v2/marcowki-source-truth-v2.json` (sealed 2026-09-24, 138 items). No aggregate score: per-family counts and the worst deltas only.
+Building `stage-reports/artifacts/analyzer-v2/marcowki-building.json` (Marcówki (auto v3)) against `research/marcowki-v2/marcowki-source-truth-v2.json` (sealed 2026-09-24, 138 items). No aggregate score: per-family counts and the worst deltas only.
 
 ## Frame
 
@@ -38,9 +38,9 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 | INTERIOR_WALL | 24 | 14 | 9 | 1 | 0 | 0 |
 | ROOM | 19 | 1 | 18 | 0 | 0 | 0 |
 | STAIR | 1 | 0 | 1 | 0 | 0 | 0 |
-| BALCONY | 2 | 0 | 2 | 0 | 0 | 0 |
+| BALCONY | 2 | 1 | 1 | 0 | 0 | 0 |
 | PORTAL | 1 | 1 | 0 | 0 | 0 | 0 |
-| FACADE_MEMBER | 1 | 0 | 1 | 0 | 0 | 0 |
+| FACADE_MEMBER | 1 | 1 | 0 | 0 | 0 | 0 |
 | RAILING | 2 | 0 | 2 | 0 | 0 | 0 |
 | FACADE_ASSEMBLY | 4 | 1 | 3 | 0 | 0 | 0 |
 | MATERIAL_REGION | 7 | 0 | 0 | 0 | 0 | 7 |
@@ -267,14 +267,14 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 | truth | matched | property | truth value | auto value | Δ | tol | verdict |
 |---|---|---|---:|---:|---:|---:|---|
-| **T2-RETURN-THICKNESS** return wall thickness → **MATCH** | return-front-0-0 (L1) | thicknessM[return-front-0-0] | 0.61 | 0.661 | 0.051 | 0.1 | WITHIN |
+| **T2-RETURN-THICKNESS** return wall thickness → **MATCH** | return-front-0-0 (L1) | thicknessM[return-front-0-0] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
 |  |  | thicknessM[return-front-0-1] | 0.61 | 0.634 | 0.024 | 0.1 | WITHIN |
-|  |  | thicknessM[return-front-1-0] | 0.61 | 0.63 | 0.02 | 0.1 | WITHIN |
+|  |  | thicknessM[return-front-1-0] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
 |  |  | thicknessM[return-front-1-1] | 0.61 | 0.656 | 0.046 | 0.1 | WITHIN |
-|  |  | thicknessM[return-rear-0-0] | 0.61 | 0.661 | 0.051 | 0.1 | WITHIN |
-|  |  | thicknessM[return-rear-0-1] | 0.61 | 0.634 | 0.024 | 0.1 | WITHIN |
-|  |  | thicknessM[return-rear-1-0] | 0.61 | 0.63 | 0.02 | 0.1 | WITHIN |
-|  |  | thicknessM[return-rear-1-1] | 0.61 | 0.656 | 0.046 | 0.1 | WITHIN |
+|  |  | thicknessM[return-rear-0-0] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
+|  |  | thicknessM[return-rear-0-1] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
+|  |  | thicknessM[return-rear-1-0] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
+|  |  | thicknessM[return-rear-1-1] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
 | **T2-RETURN-HEIGHT** return walls die into the roof soffit → **PARTIAL** | return-front-0-0 (L1) | topY — ReturnWallV2 has no top/height field (the emitter runs the return up to the roof); mainRoof.eaveY is the roof plane at the outer plane | the roof underside at the outer plane (4.61..4.76 measured; 4.64 derived) | — | — | — | MISSING |
 |  |  | roofUndersideAtOuterPlaneY (derived) — truth "4.64 derived" vs mainRoof.eaveY | 4.64 | 4.636 | -0.004 | 0.1 | WITHIN |
 
@@ -323,7 +323,7 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 |  |  | continuousWithReturns — assemblies[GABLE_FRAME].continuityRelations CONTINUES_AS → verge | true | true | — | — | WITHIN |
 
 
-- T2-ROOF-VERGE-MEMBER: auto verge depthM 0.3 (the truth leaves the depth unresolved) · feature graph marks unresolved: depth
+- T2-ROOF-VERGE-MEMBER: auto verge depthM 0.991 (the truth leaves the depth unresolved)
 
 ## SHADOW
 
@@ -894,22 +894,22 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 | truth | matched | property | truth value | auto value | Δ | tol | verdict |
 |---|---|---|---:|---:|---:|---:|---|
-| **T2-BALCONY-FRONT** front balcony slab over the portal recess → **PARTIAL** | balcony-front-1 (L2) | x[0] | 3.25 | 3.135 | -0.115 | 0.1 | OUTSIDE |
-|  |  | x[1] | 7.9 | 7.23 | -0.67 | 0.1 | OUTSIDE |
+| **T2-BALCONY-FRONT** front balcony slab over the portal recess → **PARTIAL** | balcony-front-1 (L2) | x[0] | 3.25 | 3.31 | 0.06 | 0.1 | WITHIN |
+|  |  | x[1] | 7.9 | 7.9 | 0 | 0.1 | WITHIN |
 |  |  | z[0] | 0 | 0 | 0 | 0.1 | WITHIN |
 |  |  | z[1] | 1 | 0.991 | -0.009 | 0.1 | WITHIN |
-|  |  | topY | 3.06 | 3.029 | -0.031 | 0.05 | WITHIN |
+|  |  | topY | 3.06 | 3.06 | 0 | 0.05 | WITHIN |
 |  |  | fasciaTopY — balcony.fascia.y[1] | 3.07 | 3.029 | -0.041 | 0.05 | WITHIN |
 |  |  | fasciaSoffitY — balcony.fascia.y[0] | 2.28 | 2.321 | 0.041 | 0.05 | WITHIN |
-|  |  | fasciaThicknessM — balcony.thicknessM (the band) | 0.79 | 0.708 | -0.082 | 0.05 | OUTSIDE |
-| **T2-BALCONY-REAR** rear balcony slab over the loggia → **PARTIAL** | balcony-rear-1 (L2) | x[0] | 0.61 | 0.639 | 0.029 | 0.1 | WITHIN |
-|  |  | x[1] | 7.29 | 7.176 | -0.114 | 0.1 | OUTSIDE |
+|  |  | fasciaThicknessM — balcony.thicknessM (the band) | 0.79 | 0.739 | -0.051 | 0.05 | OUTSIDE |
+| **T2-BALCONY-REAR** rear balcony slab over the loggia → **MATCH** | balcony-rear-1 (L2) | x[0] | 0.61 | 0.645 | 0.035 | 0.1 | WITHIN |
+|  |  | x[1] | 7.29 | 7.255 | -0.035 | 0.1 | WITHIN |
 |  |  | z[0] | 13.6 | 13.601 | 0.001 | 0.1 | WITHIN |
 |  |  | z[1] | 14.6 | 14.601 | 0.001 | 0.1 | WITHIN |
-|  |  | topY | 3.06 | 3.026 | -0.034 | 0.05 | WITHIN |
+|  |  | topY | 3.06 | 3.06 | 0 | 0.05 | WITHIN |
 |  |  | fasciaTopY — balcony.fascia.y[1] | 3.05 | 3.026 | -0.024 | 0.05 | WITHIN |
 |  |  | fasciaSoffitY — balcony.fascia.y[0] | 2.49 | 2.522 | 0.032 | 0.05 | WITHIN |
-|  |  | fasciaThicknessM — balcony.thicknessM (the band) | 0.56 | 0.504 | -0.056 | 0.05 | OUTSIDE |
+|  |  | fasciaThicknessM — balcony.thicknessM (the band) | 0.56 | 0.538 | -0.022 | 0.05 | WITHIN |
 
 
 - T2-BALCONY-FRONT: feature graph marks unresolved: slab section (fascia only)
@@ -923,7 +923,7 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 |  |  | x[1] | 12.05 | 12.05 | 0 | 0.1 | WITHIN |
 |  |  | z[0] | 0 | 0 | 0 | 0.1 | WITHIN |
 |  |  | z[1] | 1 | 0.991 | -0.009 | 0.1 | WITHIN |
-|  |  | fasciaTopY — portalHead.y1 | 3.07 | 3.029 | -0.041 | 0.05 | WITHIN |
+|  |  | fasciaTopY — portalHead.y1 | 3.07 | 3.06 | -0.01 | 0.05 | WITHIN |
 |  |  | fasciaSoffitY — portalHead.y0 | 2.28 | 2.321 | 0.041 | 0.05 | WITHIN |
 
 
@@ -933,10 +933,10 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 | truth | matched | property | truth value | auto value | Δ | tol | verdict |
 |---|---|---|---:|---:|---:|---:|---|
-| **T2-FACADE-FRONT-BAND** continuous dark front band (balcony fascia + portal head) → **PARTIAL** | portal-head-attached-0 (L2) | x[0] — derived: balcony fascia ∪ portal head on x | 3.25 | 3.135 | -0.115 | 0.1 | OUTSIDE |
+| **T2-FACADE-FRONT-BAND** continuous dark front band (balcony fascia + portal head) → **MATCH** | portal-head-attached-0 (L2) | x[0] — derived: balcony fascia ∪ portal head on x | 3.25 | 3.31 | 0.06 | 0.1 | WITHIN |
 |  |  | x[1] — derived: balcony fascia ∪ portal head on x | 12.05 | 12.05 | 0 | 0.1 | WITHIN |
 |  |  | y[0] — derived: balcony fascia ∪ portal head on y | 2.28 | 2.321 | 0.041 | 0.05 | WITHIN |
-|  |  | y[1] — derived: balcony fascia ∪ portal head on y | 3.07 | 3.029 | -0.041 | 0.05 | WITHIN |
+|  |  | y[1] — derived: balcony fascia ∪ portal head on y | 3.07 | 3.06 | -0.01 | 0.05 | WITHIN |
 |  |  | plane.z | 0 | 0 | 0 | 0.1 | WITHIN |
 |  |  | continuousFasciaAndHead — assemblies[PORTAL_FRAME] CONTINUES_AS balcony ↔ portal head | true | true | — | — | WITHIN |
 
@@ -947,18 +947,18 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 | truth | matched | property | truth value | auto value | Δ | tol | verdict |
 |---|---|---|---:|---:|---:|---:|---|
-| **T2-RAILING-FRONT** front glass balustrade → **PARTIAL** | railing-front-1 (L2) | x[0] | 3.3 | 3.185 | -0.115 | 0.1 | OUTSIDE |
-|  |  | x[1] | 7.26 | 7.18 | -0.08 | 0.1 | WITHIN |
-|  |  | z | 0.05 | 0.05 | 0 | 0.1 | WITHIN |
-|  |  | baseY | 3.06 | 3.029 | -0.031 | 0.05 | WITHIN |
-|  |  | topY — baseY + heightM | 3.93 | 3.939 | 0.009 | 0.05 | WITHIN |
+| **T2-RAILING-FRONT** front glass balustrade → **PARTIAL** | railing-front-1 (L2) | x[0] | 3.3 | 3.36 | 0.06 | 0.1 | WITHIN |
+|  |  | x[1] | 7.26 | 7.219 | -0.041 | 0.1 | WITHIN |
+|  |  | z | 0.05 | 0.508 | 0.458 | 0.1 | OUTSIDE |
+|  |  | baseY | 3.06 | 3.06 | 0 | 0.05 | WITHIN |
+|  |  | topY — baseY + heightM | 3.93 | 3.97 | 0.04 | 0.05 | WITHIN |
 |  |  | heightM | 0.87 | 0.91 | 0.04 | 0.05 | WITHIN |
 |  |  | infill — RailingV2 has no infill; taken from model.railings[].infill | GLASS | GLASS | — | — | WITHIN |
-| **T2-RAILING-REAR** rear glass balustrade → **PARTIAL** | railing-rear-1 (L2) | x[0] | 0.64 | 0.689 | 0.049 | 0.1 | WITHIN |
-|  |  | x[1] | 7.26 | 7.126 | -0.134 | 0.1 | OUTSIDE |
+| **T2-RAILING-REAR** rear glass balustrade → **PARTIAL** | railing-rear-1 (L2) | x[0] | 0.64 | 0.67 | 0.03 | 0.1 | WITHIN |
+|  |  | x[1] | 7.26 | 7.23 | -0.03 | 0.1 | WITHIN |
 |  |  | z | 14.55 | 14.551 | 0.001 | 0.1 | WITHIN |
-|  |  | baseY | 3.06 | 3.026 | -0.034 | 0.05 | WITHIN |
-|  |  | topY — baseY + heightM | 3.93 | 3.95 | 0.02 | 0.05 | WITHIN |
+|  |  | baseY | 3.06 | 3.06 | 0 | 0.05 | WITHIN |
+|  |  | topY — baseY + heightM | 3.93 | 3.984 | 0.054 | 0.05 | OUTSIDE |
 |  |  | heightM | 0.87 | 0.924 | 0.054 | 0.05 | OUTSIDE |
 |  |  | infill — RailingV2 has no infill; taken from model.railings[].infill | GLASS | GLASS | — | — | WITHIN |
 
@@ -993,24 +993,24 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 ## MATERIAL_REGION
 
-- **T2-MAT-WHITE-SHELL** white render: returns, verge band, side walls above the dark band, front gable outside the timber panel → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-TIMBER-FRONT** timber cladding: the recessed front wall from the west return to the balcony edge (x 0.61..3.25) full height and the gable panel up to the glazing (x 3.25..3.95 above 3.06; the gable above the balustrade x 3.95..7.26) → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-TIMBER-REAR** timber cladding: the recessed rear wall either side of the 470/230 glazing under the balcony (x 0.61..2.25 and 6.95..7.29, y 0..2.28) → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-DARK-FRONT** anthracite render: the portal walls (x 3.25..11.42, y 0..2.28 at z=1.00), the front band, the garage box → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-DARK-REAR-GABLE** anthracite render: the rear gable wall above the balcony between the returns → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-DARK-SIDE-BANDS** anthracite render bands on the ground floor: west z 3.74..9.92 to y 2.29; east from the garage (z 8.50) to the 300/230 jamb (z 9.70) to y 2.30 → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
-- **T2-MAT-ROOF** grey clay tiles on both slopes; grey plinth 0.32 m at the base → not evaluated: finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)
+- **T2-MAT-WHITE-SHELL** white render: returns, verge band, side walls above the dark band, front gable outside the timber panel → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-TIMBER-FRONT** timber cladding: the recessed front wall from the west return to the balcony edge (x 0.61..3.25) full height and the gable panel up to the glazing (x 3.25..3.95 above 3.06; the gable above the balustrade x 3.95..7.26) → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-TIMBER-REAR** timber cladding: the recessed rear wall either side of the 470/230 glazing under the balcony (x 0.61..2.25 and 6.95..7.29, y 0..2.28) → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-DARK-FRONT** anthracite render: the portal walls (x 3.25..11.42, y 0..2.28 at z=1.00), the front band, the garage box → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-DARK-REAR-GABLE** anthracite render: the rear gable wall above the balcony between the returns → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-DARK-SIDE-BANDS** anthracite render bands on the ground floor: west z 3.74..9.92 to y 2.29; east from the garage (z 8.50) to the 300/230 jamb (z 9.70) to y 2.30 → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
+- **T2-MAT-ROOF** grey clay tiles on both slopes; grey plinth 0.32 m at the base → not evaluated: finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)
 
 ## UNRESOLVED
 
-- **T2-UNRES-140-220** the printed 140 \| 220 pair at the head of the attic plan and its mirror → no verdict (truth unresolved): truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.689..7.126 · truth handling: candidates: balustrade panel divisions, a terrace step, a roof-window layout line
+- **T2-UNRES-140-220** the printed 140 \| 220 pair at the head of the attic plan and its mirror → no verdict (truth unresolved): truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.67..7.23 · truth handling: candidates: balustrade panel divisions, a terrace step, a roof-window layout line
 - **T2-UNRES-ENTRANCE-SPLIT** the leaf / sidelight split of the 105 entrance → no verdict (truth unresolved): truth unresolved; auto says: no front DOOR read · truth handling: render only
-- **T2-UNRES-FRONT-FASCIA-SECTION** what the 0.79 m front fascia is made of (slab + downstand? parapet?) → no verdict (truth unresolved): truth unresolved; auto says: a slab band 0.708 m thick, fascia y [2.321, 3.029] (RENDER_BAND) · truth handling: modelled as a slab whose fascia is the measured band
-- **T2-UNRES-VERGE-DEPTH** the depth (along z) of the white verge member and whether it is solid or a fascia board → no verdict (truth unresolved): truth unresolved; auto says: verge depthM 0.3 / 0.3 (assumed)
+- **T2-UNRES-FRONT-FASCIA-SECTION** what the 0.79 m front fascia is made of (slab + downstand? parapet?) → no verdict (truth unresolved): truth unresolved; auto says: a slab band 0.739 m thick, fascia y [2.321, 3.029] (RENDER_BAND) · truth handling: modelled as a slab whose fascia is the measured band
+- **T2-UNRES-VERGE-DEPTH** the depth (along z) of the white verge member and whether it is solid or a fascia board → no verdict (truth unresolved): truth unresolved; auto says: verge depthM 0.991 / 1 (assumed)
 - **T2-UNRES-EAVE-DATUM** eave datum +4,67 vs the derived 4.636 → no verdict (truth unresolved): truth unresolved; auto says: mainRoof.eaveY 4.636 (derived plane), levels[1].wallTop 4.67 (printed datum) · truth handling: both kept; the model uses the derived plane so that 40°, 7.90 and 7.95 hold together
 - **T2-UNRES-GARAGE-ROOF-FALL** the garage roof slab top: 2.88 at the house rising to ~2.95 at the parapet on the section → no verdict (truth unresolved): truth unresolved; auto says: a level slab top at 2.89 with the parapet at 3.125 · truth handling: modelled level at 2.88 with a parapet to 3.09
 - **T2-UNRES-ROOFLIGHT-SILL** the exact position of each rooflight along its slope → no verdict (truth unresolved): truth unresolved; auto says: rooflight-left-0 at 0.478..1.247 from the eave, y 5.036..5.682
-- **T2-UNRES-RAILING-HEIGHT** balustrade height 0.87 above the slab → no verdict (truth unresolved): truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.029 / 3.026
+- **T2-UNRES-RAILING-HEIGHT** balustrade height 0.87 above the slab → no verdict (truth unresolved): truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.06 / 3.06
 - **T2-UNRES-PANTRY-SHAPE** the pantry: its south wall stops at x 6.42 and the space runs under the upper flight to z 6.82 (the 160 dimension); published 1.44 net / 2.42 gross → no verdict (truth unresolved): truth unresolved; auto says: main-room-0-5 1.7 m² bounded x 5.49..7.39, z 7.481..8.431
 - **T2-UNRES-CORRIDOR-SOUTH-GAP** a 0.29 m break in the attic corridor south wall at x 6.02..6.31 beside chimney 2 → no verdict (truth unresolved): truth unresolved; auto says: corridor south wall pieces 3.333..4.094, 4.987..7.428 (no gap read at x 6.02..6.31) · truth handling: not a door
 - **T2-UNRES-ATTIC-NET-AREAS** the attic table prints NET areas under an unstated headroom rule (e.g. 12.57 net vs 15.13 gross) → no verdict (truth unresolved): truth unresolved; auto says: auto room areas are gross polygons (18.275, 7.45, 20.895, 6.438, 14.813 m²)
@@ -1067,9 +1067,6 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
 
 ## EXTRA auto features (matched by no truth item; ignored in the verdicts)
 
-- **BALCONY** (2)
-  - terrace-front-66 (L0): TERRACE storey 0 x 0.661..11.416, z 0..0.991, top 0 (ASSUMED_FOR_RENDERING)
-  - terrace-rear-66 (L0): TERRACE storey 0 x 0.661..7.267, z 13.601..14.601, top 0 (ASSUMED_FOR_RENDERING)
 - **INTERIOR_WALL** (4)
   - main-iwall-0-z-7 (L0): storey 0 Z at 6.395, 8.414..8.758, 0.132 m (conf 0.8)
   - main-iwall-0-z-9 (L0): storey 0 Z at 6.395, 4.549..4.814, 0.132 m (conf 0.8)
@@ -1079,19 +1076,21 @@ Building: front recess mouth z = 0, main mass z 0.991..13.601, rear recess mouth
   - main-block-0-1: storey 0 x 5.391..5.893, z 4.258..4.814
   - main-block-1-2: storey 1 x 7.008..7.428, z 4.177..4.835
   - main-block-1-3: storey 1 x 3.333..3.806, z 1.465..2.071
-- **SURFACE_REGION** (1)
-  - finish-front-66 (L0): FRONT storey 0 MID along [0.661, 7.9], y [0, 3.06]
+- **SURFACE_REGION** (3)
+  - finish-front-66 (L0): FRONT storey 0 WARM along [0.645, 3.189], y [0, 3.06]
+  - finish-front-319 (L0): FRONT storey 0 DARK along [3.189, 7.9], y [0, 3.06]
+  - finish-rear-66 (L0): REAR storey 0 WARM along [0.645, 7.255], y [0, 3.06]
 
 ## Truth items left unresolved (no verdict)
 
-- **T2-UNRES-140-220** the printed 140 \| 220 pair at the head of the attic plan and its mirror: truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.689..7.126 · truth handling: candidates: balustrade panel divisions, a terrace step, a roof-window layout line
+- **T2-UNRES-140-220** the printed 140 \| 220 pair at the head of the attic plan and its mirror: truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.67..7.23 · truth handling: candidates: balustrade panel divisions, a terrace step, a roof-window layout line
 - **T2-UNRES-ENTRANCE-SPLIT** the leaf / sidelight split of the 105 entrance: truth unresolved; auto says: no front DOOR read · truth handling: render only
-- **T2-UNRES-FRONT-FASCIA-SECTION** what the 0.79 m front fascia is made of (slab + downstand? parapet?): truth unresolved; auto says: a slab band 0.708 m thick, fascia y [2.321, 3.029] (RENDER_BAND) · truth handling: modelled as a slab whose fascia is the measured band
-- **T2-UNRES-VERGE-DEPTH** the depth (along z) of the white verge member and whether it is solid or a fascia board: truth unresolved; auto says: verge depthM 0.3 / 0.3 (assumed)
+- **T2-UNRES-FRONT-FASCIA-SECTION** what the 0.79 m front fascia is made of (slab + downstand? parapet?): truth unresolved; auto says: a slab band 0.739 m thick, fascia y [2.321, 3.029] (RENDER_BAND) · truth handling: modelled as a slab whose fascia is the measured band
+- **T2-UNRES-VERGE-DEPTH** the depth (along z) of the white verge member and whether it is solid or a fascia board: truth unresolved; auto says: verge depthM 0.991 / 1 (assumed)
 - **T2-UNRES-EAVE-DATUM** eave datum +4,67 vs the derived 4.636: truth unresolved; auto says: mainRoof.eaveY 4.636 (derived plane), levels[1].wallTop 4.67 (printed datum) · truth handling: both kept; the model uses the derived plane so that 40°, 7.90 and 7.95 hold together
 - **T2-UNRES-GARAGE-ROOF-FALL** the garage roof slab top: 2.88 at the house rising to ~2.95 at the parapet on the section: truth unresolved; auto says: a level slab top at 2.89 with the parapet at 3.125 · truth handling: modelled level at 2.88 with a parapet to 3.09
 - **T2-UNRES-ROOFLIGHT-SILL** the exact position of each rooflight along its slope: truth unresolved; auto says: rooflight-left-0 at 0.478..1.247 from the eave, y 5.036..5.682
-- **T2-UNRES-RAILING-HEIGHT** balustrade height 0.87 above the slab: truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.029 / 3.026
+- **T2-UNRES-RAILING-HEIGHT** balustrade height 0.87 above the slab: truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.06 / 3.06
 - **T2-UNRES-PANTRY-SHAPE** the pantry: its south wall stops at x 6.42 and the space runs under the upper flight to z 6.82 (the 160 dimension); published 1.44 net / 2.42 gross: truth unresolved; auto says: main-room-0-5 1.7 m² bounded x 5.49..7.39, z 7.481..8.431
 - **T2-UNRES-CORRIDOR-SOUTH-GAP** a 0.29 m break in the attic corridor south wall at x 6.02..6.31 beside chimney 2: truth unresolved; auto says: corridor south wall pieces 3.333..4.094, 4.987..7.428 (no gap read at x 6.02..6.31) · truth handling: not a door
 - **T2-UNRES-ATTIC-NET-AREAS** the attic table prints NET areas under an unstated headroom rule (e.g. 12.57 net vs 15.13 gross): truth unresolved; auto says: auto room areas are gross polygons (18.275, 7.45, 20.895, 6.438, 14.813 m²)

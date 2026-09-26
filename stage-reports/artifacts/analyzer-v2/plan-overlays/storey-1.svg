@@ -15,14 +15,14 @@
 <line x1="71" y1="710.65" x2="321" y2="710.65" stroke="#0d9488" stroke-width="3" stroke-opacity="0.7"><title>recess-front-1 open 0.66..7.22</title></line>
 <rect x="46" y="156.02" width="301" height="37.99" fill="#0d9488" fill-opacity="0.06" stroke="#0d9488" stroke-width="1" stroke-dasharray="5 3"><title>recess-rear-1: 2 return walls of 0.63 / 0.66 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22</title></rect>
 <line x1="71" y1="156.02" x2="321" y2="156.02" stroke="#0d9488" stroke-width="3" stroke-opacity="0.7"><title>recess-rear-1 open 0.66..7.22</title></line>
-<polygon points="47,673 47,710.65 71,710.65 71,673" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-front-1-0: a 0.63 m return standing in the 0.99 m front zone on the storey 1 plan</title></polygon>
-<text x="49" y="670" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret front-1-0</text>
-<polygon points="346,710.65 346,673 321,673 321,710.65" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-front-1-1: a 0.66 m return standing in the 0.99 m front zone on the storey 1 plan</title></polygon>
-<text x="348" y="707.65" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret front-1-1</text>
-<polygon points="47,156.02 47,194.01 71,194.01 71,156.02" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-rear-1-0: a 0.63 m return standing in the 1.00 m rear zone on the storey 1 plan</title></polygon>
-<text x="49" y="153.02" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret rear-1-0</text>
-<polygon points="346,194.01 346,156.02 321,156.02 321,194.01" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-rear-1-1: a 0.66 m return standing in the 1.00 m rear zone on the storey 1 plan</title></polygon>
-<text x="348" y="191.01" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret rear-1-1</text>
+<polygon points="46,673 46,710.65 70.59,710.65 70.59,673" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-front-1-0: a 0.63 m return standing in the 0.99 m front zone on the storey 1 plan</title></polygon>
+<text x="48" y="670" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret front-1-0</text>
+<polygon points="347,710.65 347,673 322,673 322,710.65" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-front-1-1: a 0.66 m return standing in the 0.99 m front zone on the storey 1 plan</title></polygon>
+<text x="349" y="707.65" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret front-1-1</text>
+<polygon points="46,156.02 46,194.01 70.59,194.01 70.59,156.02" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-rear-1-0: a 0.63 m return standing in the 1.00 m rear zone on the storey 1 plan</title></polygon>
+<text x="48" y="153.02" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret rear-1-0</text>
+<polygon points="347,194.01 347,156.02 322.42,156.02 322.42,194.01" fill="#7c3aed" fill-opacity="0.25" stroke="#7c3aed" stroke-width="1.2"><title>return-rear-1-1: a 0.66 m return standing in the 1.00 m rear zone on the storey 1 plan</title></polygon>
+<text x="349" y="191.01" font-size="9" text-anchor="start" fill="#7c3aed" stroke="#ffffff" stroke-width="3" paint-order="stroke">ret rear-1-1</text>
 <rect x="172.5" y="526" width="5.01" height="74" fill="#1d4ed8" fill-opacity="0.35" stroke="#1d4ed8" stroke-width="0.8"><title>main-iwall-1-z-0: 0.13 m of neutral ink running 1.95 m along z at x 3.39 (ends FREE/JUNCTION)</title></rect>
 <rect x="193.5" y="213.01" width="4.01" height="131" fill="#1d4ed8" fill-opacity="0.35" stroke="#1d4ed8" stroke-width="0.8"><title>main-iwall-1-z-2: 0.11 m of neutral ink running 3.45 m along z at x 3.92 (ends FREE/JUNCTION)</title></rect>
 <rect x="193.5" y="378" width="4.01" height="26" fill="#1d4ed8" fill-opacity="0.35" stroke="#1d4ed8" stroke-width="0.8"><title>main-iwall-1-z-3: 0.11 m of neutral ink running 0.68 m along z at x 3.92 (ends FREE/JUNCTION)</title></rect>
@@ -77,12 +77,12 @@
 <rect x="221" y="193.99" width="87" height="18.63" fill="#0f766e" fill-opacity="0.2" stroke="#0f766e" stroke-width="1"><title>opening-1-rear-6-1 plan gap as detected</title></rect>
 <rect x="220.42" y="194.01" width="89.16" height="18.6" fill="none" stroke="#16a34a" stroke-width="1.5"><title>opening-1-rear-6-1: a 2.31 m gap in the rear wall of main on storey 1, printed 234/303, 0.76 m tall on the elevation; on a gable end its head rakes from 6.09 to 4.13</title></rect>
 <text x="265" y="191.01" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">multi_panel_glazing 2.34</text>
-<rect x="165.43" y="673" width="156.03" height="37.65" fill="#a16207" fill-opacity="0.12" stroke="#a16207" stroke-width="1"><title>balcony-front-1: a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)</title></rect>
-<text x="168.43" y="707.65" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony</text>
-<rect x="70.34" y="156.02" width="249.09" height="37.99" fill="#a16207" fill-opacity="0.12" stroke="#a16207" stroke-width="1"><title>balcony-rear-1: a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
-<text x="73.34" y="191.01" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony</text>
-<line x1="167.34" y1="708.76" x2="319.56" y2="708.76" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2 2"><title>railing-front-1: a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth</title></line>
-<line x1="72.24" y1="157.92" x2="317.52" y2="157.92" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2 2"><title>railing-rear-1: a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth</title></line>
+<rect x="172.13" y="673" width="174.87" height="37.65" fill="#a16207" fill-opacity="0.12" stroke="#a16207" stroke-width="1"><title>balcony-front-1: a 0.71 m band of dark tone at 2.32..3.03 across 5 columns of the recess mouth (spread 0.08 m)</title></rect>
+<text x="175.13" y="707.65" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony</text>
+<rect x="70.59" y="156.02" width="251.83" height="37.99" fill="#a16207" fill-opacity="0.12" stroke="#a16207" stroke-width="1"><title>balcony-rear-1: a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
+<text x="73.59" y="191.01" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony</text>
+<line x1="174.03" y1="673.95" x2="321.05" y2="708.76" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2 2"><title>railing-front-1: a 0.91 m tall light band stands on the slab across 5 columns of the recess mouth; along the mouth, turning back to the wall at the low end; low end free, high end carries (return-front-1-1)</title></line>
+<line x1="71.54" y1="157.92" x2="321.46" y2="157.92" stroke="#4f46e5" stroke-width="2" stroke-dasharray="2 2"><title>railing-rear-1: a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth; along the mouth; low end wall (return-rear-0-0), high end wall (return-rear-0-1)</title></line>
 <rect x="8" y="8" width="760" height="122" fill="#ffffff" fill-opacity="0.88" stroke="#0369a1" stroke-width="1.5"/>
 <text x="16" y="25" font-size="11" fill="#0f172a">storey 1 — frame-asset-rzut-117027f690-fed2722c38 (asset-rzut-117027f690)</text>
 <text x="16" y="41" font-size="11" fill="#0f172a">26.246 × 26.326 mm/px; world origin at px (46.0, 710.7); wall 11.0 px (wallPx from the registration)</text>

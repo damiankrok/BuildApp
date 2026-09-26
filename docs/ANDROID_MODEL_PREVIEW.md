@@ -53,24 +53,23 @@ The consequences are deliberate:
   compares them triangle by triangle, for every shipped scene, against the
   compiler itself rather than against a stored table of expectations.
 
-### The three scenes
+### The scenes
 
 | key | what it is |
 | --- | --- |
 | `marcowki` | the hand-built Marcówki reference model |
-| `marcowki-auto` | the **automatic reconstruction candidate**, replayed from its sealed program |
+| `marcowki-auto-v3` | the automatic candidate under review: analyzer v2 after the exterior closure of BUILDAPP-03Y (terraces, a turning railing, roof edge members, one fascia band), replayed from its sealed program |
+| `marcowki-auto` | the first automatic candidate (BUILDAPP-03) |
+| `marcowki-auto-v2` | the analyzer-v2 candidate the owner reviewed (BUILDAPP-03X), kept as the baseline |
 | `demo` | the BuildApp demo house |
 
-The candidate is built by `modelOf('marcowki-auto')`, which replays the sealed
+Each candidate is built by `modelOf(<key>)`, which replays the sealed
 `ReconstructionCandidate` and checks the model comes back byte for byte. The
 exporter does not run a solver, and neither does the phone: what ships in the
 APK is the building that was sealed and evaluated, not whatever a solver
-running on a laptop produced that afternoon.
-
-It is a candidate and looks like one on screen only if you know: it has 80
-meshes to the reference's 178, no staircase at all — the solver refused to
-invent one — and a simpler roof. `stage-reports/STAGE_BUILDAPP_03.md` §9 lists
-what it does not know.
+running on a laptop produced that afternoon. The two earlier candidates were
+restated under model schema 1.5.0 without changing a byte of the building
+(`packages/candidates/src/reseal-log.json`).
 
 ### What is in a bundle
 
@@ -156,8 +155,9 @@ from the **same** Filament version as `gradle/libs.versions.toml`.
 **Lighting needs no asset.** A directional sun plus ambient light expressed as
 spherical-harmonic irradiance — a few coefficients rather than an IBL cubemap —
 so the app ships nothing extra and works offline. Anti-aliasing is 4× MSAA;
-screen-space ambient occlusion is on at low quality, which is what makes the
-depth of a window reveal readable; the sun casts shadows.
+screen-space ambient occlusion runs at low quality in every style (at half
+intensity in Architectural), which is what makes the depth of a window reveal
+readable; the sun casts shadows.
 
 Flat shading is used throughout (no vertex is shared between triangles), which
 gives the technical read the web viewer also has and lets each triangle carry
@@ -176,15 +176,18 @@ switch.
 | --- | --- | --- |
 | Construction (default) | diagnosis | part colours; the model's own material on walls, roof, trim, slab, terrace, chimney, doors; SSAO on |
 | Clay | diagnosis of massing and openings | one neutral on every opaque surface; glazing still translucent; SSAO on |
-| Architectural | owner review | one colour per semantic group from the architectural palette; SSAO off |
+| Architectural | owner review | one colour per semantic group from the architectural palette; subtle SSAO (half intensity) |
 
 **Architectural** looks up each mesh's `semanticGroup` in the bundle's
 `styling.groups` (palette `architectural-v1`). A bundle exported before that
 block existed falls back to `ArchitecturalPalette.BUILT_IN` in
 `render/RenderStyle.kt`, a copy of `packages/mobile-scene/src/semantics.ts`
-that tests on both sides hold equal. A mesh with no group is placed by its
-part and material name. The groups are `WALL_MAIN`, `WALL_SECONDARY`,
-`WALL_INTERIOR`, `ROOF_MAIN`, `FLAT_ROOF`, `ROOF_TRIM`, `WINDOW_GLASS`,
+that tests on both sides hold equal. The bundle's palette may differ from
+the built-in one by tone hints only: a group moved to another rung of the same
+palette because the model's own finishes say so (a garage in dark render). A
+mesh with no group is placed by its part and material name. The groups are
+`WALL_MAIN`, `WALL_SECONDARY`, `WALL_INTERIOR`, `WALL_CLADDING`, `ROOF_MAIN`,
+`FLAT_ROOF`, `ROOF_TRIM`, `WINDOW_GLASS`,
 `WINDOW_FRAME`, `DOOR`, `GARAGE_DOOR`, `SLAB`, `BALCONY_SLAB`, `RAILING`,
 `FACADE_FRAME`, `TERRACE_SURFACE`, `CHIMNEY`, `ROOFLIGHT`, `STAIR`, `ROOM` and
 `OTHER`.
@@ -192,9 +195,11 @@ part and material name. The groups are `WALL_MAIN`, `WALL_SECONDARY`,
 The palette is a luminance ladder: off-white main walls with lighter trims, a
 mid-grey secondary body, a deep warm-grey roof, near-black frames, cool glass,
 timber doors, light concrete slabs and a darker stone terrace. Adjacent groups
-therefore never blend, and edges read from that value contrast plus each
-group's roughness. There are no outlines, no per-object colours and no
-screen-space effects, and screen-space AO is switched off in this style.
+therefore never blend, and edges read from that value contrast, each
+group's roughness and a subtle screen-space AO at half the diagnostic
+styles' intensity. There are no outlines and no per-object colours. The
+joints the AO darkens are ones the geometry closure audit holds clean, so it
+reads a corner rather than painting over a crack.
 Translucency is still chosen per part at upload, so glass stays on the
 existing translucent path at alpha 0.35 in every style and a stair placeholder
 stays a marker. The palette's `SOFT` edge, a thin line in the web viewer, is

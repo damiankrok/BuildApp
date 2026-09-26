@@ -43,9 +43,11 @@ data class SurfaceAppearance(
  * bundle carries them, else `ArchitecturalPalette.BUILT_IN`, a copy of the
  * same palette. The palette is a luminance ladder, so adjacent groups never
  * blend; edges read through that value contrast and the groups' roughness,
- * not through any screen-space pass. So this style draws no outline and runs
- * no ambient occlusion (`ambientOcclusion`), and it assigns no per-object
- * colour: nothing in it can hide a geometry defect or shimmer on a phone.
+ * helped by a SUBTLE contact darkening (`ambientOcclusionIntensity`, half of
+ * the diagnostic styles'), never by an outline. It assigns no per-object
+ * colour. The joints it darkens are the ones the geometry closure audit has
+ * already held clean (BUILDAPP-03Y): the occlusion reads corners, it does not
+ * paint over a crack.
  *
  * The palette's `edge = "SOFT"` asks the web viewer for a thin feature-edge
  * line on structural groups. This renderer builds no feature-edge geometry,
@@ -58,11 +60,15 @@ enum class RenderStyle(val label: String, val description: String) {
     ;
 
     /**
-     * Whether the view runs Filament's screen-space ambient occlusion in this
-     * style. Construction and Clay keep the contact darkening they have always
-     * had; Architectural leaves it off and relies on value contrast alone.
+     * How strongly the view runs Filament's screen-space ambient occlusion in
+     * this style. Construction and Clay keep the contact darkening they have
+     * always had; Architectural keeps a subtle one — enough to read a corner
+     * and a reveal, not enough to read as a shadow.
      */
-    val ambientOcclusion: Boolean get() = this != ARCHITECTURAL
+    val ambientOcclusionIntensity: Float get() = if (this == ARCHITECTURAL) 0.35f else 0.7f
+
+    /** Whether the style runs ambient occlusion at all. */
+    val ambientOcclusion: Boolean get() = ambientOcclusionIntensity > 0f
 
     /**
      * The appearance of one uploaded primitive: its part, its semantic group
@@ -250,7 +256,7 @@ object ArchitecturalPalette {
         SemanticGroup.RAILING to BundleGroupAppearance(color = "#3a3c3f", opacity = null, roughness = 0.5, metalness = 0.5, edge = "NONE"),
         SemanticGroup.FACADE_FRAME to BundleGroupAppearance(color = "#a7a197", opacity = null, roughness = 0.8, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.TERRACE_SURFACE to BundleGroupAppearance(color = "#a49c92", opacity = null, roughness = 0.9, metalness = 0.0, edge = "SOFT"),
-        SemanticGroup.CHIMNEY to BundleGroupAppearance(color = "#837671", opacity = null, roughness = 0.9, metalness = 0.0, edge = "SOFT"),
+        SemanticGroup.CHIMNEY to BundleGroupAppearance(color = "#7c7874", opacity = null, roughness = 0.9, metalness = 0.0, edge = "SOFT"),
         SemanticGroup.ROOFLIGHT to BundleGroupAppearance(color = "#5e6166", opacity = null, roughness = 0.5, metalness = 0.2, edge = "NONE"),
         SemanticGroup.STAIR to BundleGroupAppearance(color = "#b2aca4", opacity = null, roughness = 0.9, metalness = 0.0, edge = "NONE"),
         SemanticGroup.ROOM to BundleGroupAppearance(color = "#8db1a8", opacity = 0.25, roughness = 1.0, metalness = 0.0, edge = "NONE"),

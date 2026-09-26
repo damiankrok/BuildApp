@@ -18,6 +18,7 @@
 | STAGE BUILDAPP-03M-FIX — ANDROID AUTO CANDIDATE RENDERING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `f3766237840514fc60178ca6c9bf4f3c9e13ebbd`; CI micro-task `781d6d6`, `13108e5`; implementation and docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03M_FIX.md` and this row | PASS |
 | STAGE BUILDAPP-03R1 — IMAGE METROLOGY + PROPORTIONAL FACADE FITTING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4505e148cf03197b899d49c5335ed893e013ab1d`; implementation `c4c8816`, `ed83d0d`, `c315a35`, `0ec3291`, `067fd41`, `3ee3277`; docs: the commit that carries `stage-reports/STAGE_BUILDAPP_03R1_IMAGE_METROLOGY.md` and this row | PASS |
 | STAGE BUILDAPP-03X — ANALYZER REFOUNDATION AUDIT + MARCÓWKI AUTO V2 | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `d5d6375d8675143730307d71f45c0d940fcd134b`; research `9363d6b`; audit and v2 schemas `13896a1`; pipeline `59d5676`; callouts, gates, apps and CI `7e01828`; fixtures, ridge axis and docs `606c829`; test runner `9f67eb9` (CI run 36057369183 green); docs: the commit that carries this row (the final HEAD, see `git log`) | PASS (owner review is the final gate) |
+| STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`; docs and the rest of the implementation: the commit that carries `stage-reports/STAGE_BUILDAPP_03Y_EXTERIOR_CLOSURE.md` and this row (the final HEAD, see `git log`) | see the stage report's verdict (owner review is the final gate) |
 
 ## Current capabilities
 
@@ -383,6 +384,48 @@ under `stage-reports/artifacts/analyzer-v2/` and uploaded by CI.
 `docs/ANALYZER_V2_ARCHITECTURE.md`, `docs/EVIDENCE_CONSUMPTION.md` and
 `docs/FEATURE_IDENTITY_GRAPH.md` describe the design.
 
+## Where the exterior stands (STAGE BUILDAPP-03Y)
+
+The owner's review of Auto v2 named unclean joints, a balcony whose short
+side did not end at the building, a railing that should turn, a weak
+terrace, incomplete bands and frames, a jagged roof edge and merging
+elements. 03Y traced each to its first bad stage
+(`docs/MARCOWKI_AUTO_V2_EXTERIOR_FORENSIC_AUDIT.md`) and fixed it in the layer
+that owns it; the result is sealed as **Marcówki (auto v3)** beside the
+Auto v2 baseline, on the web and on Android.
+
+- **Model schema 1.5.0**: `terraces`; roof `edgeMembers` (verge and fascia
+  boards compiled with the roof) and `plateInset` (plates bear into their
+  walls); `Railing.path` (railings that turn). The frozen candidates were
+  restated without a byte of building changing (`candidates:reseal`).
+- **Geometry closure audit** (`packages/geometry/src/closure.ts`): shared
+  volume, faces drawn twice, cracks between members that meet, free railing
+  ends, terraces off their datum — per pair, with the model's intended
+  relation. `npm run audit:exterior` gates Core CI.
+- **Assembly closure** in the analyzer (`packages/reconstruction/src/v2/assembly-closure.ts`):
+  return snapping and stacking, balcony end conditions (WALL / CARRIES only
+  where the elevation draws the band on / FREE at the plan's line / MEETS),
+  turning railings, verge depth from the frame, one portal band, terraces
+  with the plan's platform, and a facade graph (CONTINUES_TO, TERMINATES_AT,
+  TURNS_AT, MEETS_HOST).
+- **Semantic styling**: semantic groups and one controlled palette on web and
+  Android, tone families read against each render's white point and carried
+  through the model's materials, finish runs along the recessed walls,
+  Architectural style beside Construction and Clay.
+
+| exterior, closure audit | Auto v2 | Auto v3 |
+| --- | --- | --- |
+| intersections | 13 (4.30 m³) | 0 |
+| exposed gaps | 7 | 0 |
+| faces drawn twice | 21 (29.5 m²) | 0 |
+| free railing ends | 2 (0.94 m) | 0 |
+
+Per category against the truth set: twelve PASS, OPENINGS and
+MATERIAL_READABILITY PARTIAL, none FAIL
+(`stage-reports/artifacts/analyzer-v2/marcowki-exterior-closure-evaluation.md`).
+The interior findings (the stair against its walls, partitions trimmed short
+of undeclared junctions) are left for BUILDAPP-03Z.
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -504,13 +547,17 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**After BUILDAPP-03X**: the five items at the end of
-`stage-reports/STAGE_BUILDAPP_03X_ANALYZER_REFOUNDATION.md`, in that order —
-a door-symbol reader for the opening families and the all-door wall, rooflight
-callouts matched to the rooflight symbols, the terrain datum and roof build-up
-from the section, a room-number reader, and elevation extents taken on more
-than one view. Each is a reader feeding the same ledger and graph; none
-changes the pipeline's shape.
+**After BUILDAPP-03Y**, in the orchestrator's sequence:
+**BUILDAPP-03Z — Interior Topology + Semantic Completion** — declared
+interior junctions instead of partitions trimmed 15 mm short (the 35
+INTERIOR gaps the closure audit reports), the stair against its walls and
+its void (0.44 m³ shared with the ground ring wall today), guarding along
+the stair and the void, and the finish regions the analyzer does not read
+yet (the ground-storey side bands, the rear gable panel, the attic timber
+panel). Then **BUILDAPP-04**. The five 03X reader items (door symbols,
+rooflight callouts, terrain datum and roof build-up from the section, room
+numbers, elevation extents on more than one view) remain open and feed the
+same ledger.
 
 The earlier recommendation stands behind those, now largely built:
 

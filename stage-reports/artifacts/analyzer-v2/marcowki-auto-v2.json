@@ -1,13 +1,13 @@
 {
-  "contentHash": "b9ac6c03b2a58c2949ffc1e58c1fb15e3072426051cf07b5be709854d0ee3ed3",
+  "contentHash": "b73596d2bf01a51038e18a1aa592308ed9578abff80eb2b6d784ce4ed6a58796",
   "contradictions": [],
   "hypothesisSetHash": "a72ff72b1aec0f9b3671845c9ac29d05e14590d4e40a9d8cfcb6216d6415538f",
   "hypothesisSetId": "hypotheses-v2-a72ff72b1aec0f9b",
-  "id": "candidate-marcowki-b9ac6c03b2a58c29",
+  "id": "candidate-marcowki-b73596d2bf01a510",
   "label": "Marcówki (auto v3)",
   "metricEvidenceHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
   "metricEvidenceId": "metrics-marcowki-5f12247b7585701f",
-  "modelHash": "01a1a911533a438942da8427d91b35e8922ef97f2b5f60ea369d415315cde61a",
+  "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1",
   "modelId": "m-auto-v3-marcowki",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
@@ -341,7 +341,7 @@
       "id": "return-front-0-1",
       "kind": "EXTERIOR",
       "levelId": "lvl-0",
-      "materialId": "mat-member",
+      "materialId": "mat-render-dark",
       "start": {
         "x": 12.05,
         "z": 0
@@ -3252,7 +3252,7 @@
   "residuals": {
     "hard": 15,
     "metricMaxM": 1.755273,
-    "metricRmsM": 0.586296,
+    "metricRmsM": 0.386794,
     "soft": 88,
     "unresolved": 32
   },
@@ -3383,7 +3383,7 @@
       "what": "perspective cameras"
     },
     {
-      "detail": "26 decisions; 2 terraces (1 with a platform beyond the mouth); 1 railing turning; facade graph 17 nodes, 17 edges",
+      "detail": "32 decisions; 2 terraces (1 with a platform beyond the mouth); 1 railing turning; facade graph 17 nodes, 17 edges",
       "index": 13,
       "inputs": 15,
       "method": "DISCRETE_SELECTION",
@@ -3392,11 +3392,11 @@
       "what": "assembly closure: how the members meet"
     },
     {
-      "detail": "28 residuals, 9 outside tolerance after 1 repair round (0 applied, 9 refused)",
+      "detail": "66 residuals, 12 outside tolerance after 1 repair round (0 applied, 9 refused)",
       "index": 14,
-      "inputs": 28,
+      "inputs": 66,
       "method": "DIRECT",
-      "outputs": 28,
+      "outputs": 66,
       "stage": "verification",
       "what": "the model projected into the registered views"
     },

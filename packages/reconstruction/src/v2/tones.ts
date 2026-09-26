@@ -32,7 +32,7 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { Raster } from '@buildapp/source-cv'
-import type { FrameToneV2, LevelV2, MassToneV2, MassV2, ReturnWallV2 } from './building.js'
+import type { LevelV2, MassToneV2, MassV2, ReturnToneV2, ReturnWallV2 } from './building.js'
 import type { ElevationFrameV2 } from './frame.js'
 import type { OpeningV2 } from './openings-v2.js'
 import type { RecessTopology } from './recesses.js'
@@ -140,37 +140,33 @@ export function readMassTones(masses: readonly MassV2[], views: ReadonlyArray<{ 
 }
 
 /**
- * The tone of each gable frame's returns: their outer faces stand in the
- * facade's outer plane, in the open, so the render shows their finish
- * directly. The frame is one member family — returns and the verge that
- * continues them — and takes one tone.
+ * The tone of each return's outer face. A return stands in the facade's outer
+ * plane, in the open, so the render shows its finish directly; returns of one
+ * frame usually share it, but not always — the return that closes a garage
+ * box is that box's render, not the gable frame's — so each is read on its
+ * own, over its storey's band, clear of the storey's top and bottom.
  */
-export function readFrameTones(returns: readonly ReturnWallV2[], views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, levels: readonly LevelV2[]): FrameToneV2[] {
-  const out: FrameToneV2[] = []
-  for (const side of ['FRONT', 'REAR', 'WEST', 'EAST'] as const) {
-    const frame = returns.filter((r) => r.side === side)
-    if (frame.length === 0) continue
-    const view = views.find((v) => (v.view.side === 'LEFT' ? 'WEST' : v.view.side === 'RIGHT' ? 'EAST' : v.view.side) === side)
-    if (!view) continue
-    const rels: number[] = []
+export function readReturnTones(returns: readonly ReturnWallV2[], views: ReadonlyArray<{ view: ElevationFrameV2; raster: Raster }>, levels: readonly LevelV2[]): ReturnToneV2[] {
+  const out: ReturnToneV2[] = []
+  for (const r of returns) {
+    const view = views.find((v) => (v.view.side === 'LEFT' ? 'WEST' : v.view.side === 'RIGHT' ? 'EAST' : v.view.side) === r.side)
+    const l = levels.find((x) => x.index === r.storeyIndex)
+    if (!view || !l) continue
+    const [a0, a1] = r.alongInterval
+    if (a1 - a0 < 0.2) continue
     const white = whitePointOf(view.raster)
     const mpp = view.view.registration.metresPerPixelU
-    for (const r of frame) {
-      const l = levels.find((x) => x.index === r.storeyIndex)
-      if (!l) continue
-      const [a0, a1] = r.alongInterval
-      if (a1 - a0 < 0.2) continue
-      for (let a = a0 + 0.08; a <= a1 - 0.08; a += mpp) {
-        const px = Math.round(view.view.pxOf(a))
-        for (let y = l.elevation + 0.3; y <= l.elevation + Math.min(l.height, 2.6) - 0.3; y += mpp * 2) {
-          const rel = relativeSample(view.raster, px, Math.round(view.view.pyOf(y)), white)
-          if (rel !== undefined) rels.push(rel)
-        }
+    const rels: number[] = []
+    for (let a = a0 + 0.08; a <= a1 - 0.08; a += mpp) {
+      const px = Math.round(view.view.pxOf(a))
+      for (let y = l.elevation + 0.3; y <= l.elevation + Math.min(l.height, 2.6) - 0.3; y += mpp * 2) {
+        const rel = relativeSample(view.raster, px, Math.round(view.view.pyOf(y)), white)
+        if (rel !== undefined) rels.push(rel)
       }
     }
-    if (rels.length < 60) continue
+    if (rels.length < 30) continue
     const { tone, share, median: med } = familyOf(rels)
-    out.push({ side, tone, share, why: `the median of ${rels.length} samples of the ${side.toLowerCase()} returns' outer faces on the ${view.view.side.toLowerCase()} render is ${Math.round(med * 100)} % of the render's white: ${tone.toLowerCase()}` })
+    out.push({ returnId: r.id, side: r.side, storeyIndex: r.storeyIndex, tone, share, why: `the median of ${rels.length} samples of its outer face on the ${view.view.side.toLowerCase()} render is ${Math.round(med * 100)} % of the render's white: ${tone.toLowerCase()}` })
   }
   return out
 }

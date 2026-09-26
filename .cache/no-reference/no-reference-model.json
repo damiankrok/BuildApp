@@ -60,11 +60,11 @@
       "frameInset": 0.1,
       "frameWidth": 0.06,
       "hingeSide": "LEFT",
-      "id": "opening-4-d",
+      "id": "opening-3-d",
       "leafThickness": 0.045,
       "materialId": "mat-wall",
       "openAngle": 0,
-      "openingId": "opening-4",
+      "openingId": "opening-3",
       "swing": "IN"
     },
     {
@@ -72,11 +72,11 @@
       "frameInset": 0.1,
       "frameWidth": 0.06,
       "hingeSide": "LEFT",
-      "id": "opening-6-d",
+      "id": "opening-5-d",
       "leafThickness": 0.045,
       "materialId": "mat-wall",
       "openAngle": 0,
-      "openingId": "opening-6",
+      "openingId": "opening-5",
       "swing": "IN"
     },
     {
@@ -200,13 +200,13 @@
   "name": "Candidate built with no reference package present",
   "openings": [
     {
-      "height": 2.2,
+      "height": 2.3,
       "id": "opening-0",
       "kind": "DOOR",
       "offset": 2.256599,
       "sill": 0,
       "wallId": "ring-mass-0-0-w0",
-      "width": 4.668354
+      "width": 4.7
     },
     {
       "height": 1.683699,
@@ -218,76 +218,76 @@
       "width": 4.33412
     },
     {
-      "height": 2.2,
+      "height": 2.1,
       "id": "opening-10",
+      "kind": "DOOR",
+      "offset": 2.041562,
+      "sill": 0,
+      "wallId": "ring-mass-1-0-w0",
+      "width": 1
+    },
+    {
+      "height": 2.3,
+      "id": "opening-11",
       "kind": "DOOR",
       "offset": 8.054193,
       "sill": 0,
       "wallId": "ring-mass-0-0-w3",
-      "width": 0.897632
+      "width": 0.9
     },
     {
-      "height": 2.2,
-      "id": "opening-11",
-      "kind": "DOOR",
-      "offset": 5.666688,
-      "sill": 0,
-      "wallId": "ring-mass-0-0-w2",
-      "width": 0.819861
-    },
-    {
-      "height": 0.702379,
+      "height": 1.002379,
       "id": "opening-12",
       "kind": "WINDOW",
       "offset": 6.900657,
-      "sill": 0.9,
+      "sill": 0.6,
       "wallId": "ring-mass-0-1-w2",
       "width": 0.501317
     },
     {
-      "height": 2.2,
+      "height": 2.9,
       "id": "opening-2",
       "kind": "DOOR",
       "offset": 0.897207,
       "sill": 0,
       "wallId": "ring-mass-0-0-w1",
-      "width": 2.979949
+      "width": 3
     },
     {
-      "height": 1.681418,
+      "height": 2.75,
       "id": "opening-3",
-      "kind": "WINDOW",
-      "offset": 4.460325,
-      "sill": 0,
-      "wallId": "ring-mass-0-1-w0",
-      "width": 2.847454
-    },
-    {
-      "height": 2.2,
-      "id": "opening-4",
       "kind": "DOOR",
       "offset": 0.719052,
       "sill": 0,
       "wallId": "ring-mass-1-0-w2",
-      "width": 2.797663
+      "width": 2.75
     },
     {
       "height": 1.660369,
-      "id": "opening-5",
+      "id": "opening-4",
       "kind": "WINDOW",
       "offset": 0.567135,
       "sill": 0,
       "wallId": "ring-mass-0-1-w0",
-      "width": 2.66026
+      "width": 2.34
     },
     {
-      "height": 2.2,
-      "id": "opening-6",
+      "height": 2.107223,
+      "id": "opening-5",
       "kind": "DOOR",
-      "offset": 5.819225,
+      "offset": 4.460325,
       "sill": 0,
+      "wallId": "ring-mass-0-1-w0",
+      "width": 2.34
+    },
+    {
+      "height": 1.4,
+      "id": "opening-6",
+      "kind": "WINDOW",
+      "offset": 5.819225,
+      "sill": 0.8,
       "wallId": "ring-mass-0-0-w3",
-      "width": 1.398812
+      "width": 1.4
     },
     {
       "height": 2.2,
@@ -299,22 +299,22 @@
       "width": 1.139083
     },
     {
-      "height": 2.2,
+      "height": 2.9,
       "id": "opening-8",
+      "kind": "DOOR",
+      "offset": 5.666688,
+      "sill": 0,
+      "wallId": "ring-mass-0-0-w2",
+      "width": 1.1
+    },
+    {
+      "height": 2.1,
+      "id": "opening-9",
       "kind": "DOOR",
       "offset": 2.805491,
       "sill": 0,
       "wallId": "ring-mass-0-0-w2",
-      "width": 1.116257
-    },
-    {
-      "height": 2.2,
-      "id": "opening-9",
-      "kind": "DOOR",
-      "offset": 2.041562,
-      "sill": 0,
-      "wallId": "ring-mass-1-0-w0",
-      "width": 0.946161
+      "width": 1.05
     }
   ],
   "railings": [],
@@ -358,7 +358,7 @@
   ],
   "rooms": [],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.4.0",
+  "schemaVersion": "1.5.0",
   "slabs": [
     {
       "id": "slab-mass-0-0",
@@ -438,6 +438,7 @@
   ],
   "stairs": [],
   "surfaceRegions": [],
+  "terraces": [],
   "units": {
     "angle": "deg",
     "length": "m"
@@ -927,9 +928,9 @@
       "frameInset": 0.12,
       "frameWidth": 0.07,
       "glassThickness": 0.024,
-      "id": "opening-3-w",
+      "id": "opening-4-w",
       "materialId": "mat-glass",
-      "openingId": "opening-3"
+      "openingId": "opening-4"
     },
     {
       "divisions": 1,
@@ -937,9 +938,9 @@
       "frameInset": 0.12,
       "frameWidth": 0.07,
       "glassThickness": 0.024,
-      "id": "opening-5-w",
+      "id": "opening-6-w",
       "materialId": "mat-glass",
-      "openingId": "opening-5"
+      "openingId": "opening-6"
     }
   ]
 }

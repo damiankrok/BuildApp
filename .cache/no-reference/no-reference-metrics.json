@@ -11078,7 +11078,7 @@
     }
   ],
   "conflicts": [],
-  "contentHash": "3737dc29d37cee61889281edc701386e982370358443716aeb507bdc313395fb",
+  "contentHash": "5f12247b7585701f2b9552d2e13b53d379965f1d6af24a21c7bf9d779f438d1f",
   "coordinateRegistrations": [
     {
       "anchors": [
@@ -12055,6 +12055,5857 @@
       "unit": "deg",
       "value": 1,
       "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.429556,
+          "rawText": "48",
+          "unit": "cm",
+          "value": 48,
+          "why": "width candidate: the upper half read as 48 (match 0.429556)"
+        },
+        {
+          "confidence": 0.398119,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "width candidate: the upper half read as 80 (match 0.398119)"
+        },
+        {
+          "confidence": 0.388495,
+          "rawText": "70",
+          "unit": "cm",
+          "value": 70,
+          "why": "width candidate: the upper half read as 70 (match 0.388495)"
+        },
+        {
+          "confidence": 0.385709,
+          "rawText": "86",
+          "unit": "cm",
+          "value": 86,
+          "why": "width candidate: the upper half read as 86 (match 0.385709)"
+        },
+        {
+          "confidence": 0.382217,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.382217)"
+        },
+        {
+          "confidence": 0.37733,
+          "rawText": "180",
+          "unit": "cm",
+          "value": 180,
+          "why": "width candidate: the upper half read as 180 (match 0.37733)"
+        },
+        {
+          "confidence": 0.370255,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.370255)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.222153,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-06c77cf6b8",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 48 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (83.333333 per cent of its circumference inked, interior 11.675127 per cent), split by a bar at row 543; read \"48\" (match 0.439372, 4 px tall) over \"400\" (match 0.370255, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "48/400",
+      "textBox": {
+        "x0": 298,
+        "x1": 320,
+        "y0": 532,
+        "y1": 554
+      },
+      "unit": "cm",
+      "value": 48,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.347777,
+          "rawText": "440",
+          "unit": "cm",
+          "value": 440,
+          "why": "width candidate: the upper half read as 440 (match 0.347777)"
+        },
+        {
+          "confidence": 0.34149,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "width candidate: the upper half read as 40 (match 0.34149)"
+        },
+        {
+          "confidence": 0.340349,
+          "rawText": "340",
+          "unit": "cm",
+          "value": 340,
+          "why": "width candidate: the upper half read as 340 (match 0.340349)"
+        },
+        {
+          "confidence": 0.33551,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.33551)"
+        },
+        {
+          "confidence": 0.318964,
+          "rawText": "445",
+          "unit": "cm",
+          "value": 445,
+          "why": "width candidate: the upper half read as 445 (match 0.318964)"
+        },
+        {
+          "confidence": 0.318149,
+          "rawText": "448",
+          "unit": "cm",
+          "value": 448,
+          "why": "width candidate: the upper half read as 448 (match 0.318149)"
+        },
+        {
+          "confidence": 0.373866,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "height candidate: the lower half read as 146 (match 0.373866)"
+        },
+        {
+          "confidence": 0.37046,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.37046)"
+        },
+        {
+          "confidence": 0.370446,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "height candidate: the lower half read as 46 (match 0.370446)"
+        },
+        {
+          "confidence": 0.327626,
+          "rawText": "145",
+          "unit": "cm",
+          "value": 145,
+          "why": "height candidate: the lower half read as 145 (match 0.327626)"
+        },
+        {
+          "confidence": 0.294665,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.294665)"
+        },
+        {
+          "confidence": 0.292405,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.292405)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.208666,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-079087d3e2",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 440 cm over height 146 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (93.75 per cent of its circumference inked, interior 46.979866 per cent), split by a bar at row 366; read \"440\" (match 0.347777, 3.666667 px tall) over \"146\" (match 0.373866, 5.666667 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "440/146",
+      "textBox": {
+        "x0": 304,
+        "x1": 324,
+        "y0": 357,
+        "y1": 377
+      },
+      "unit": "cm",
+      "value": 440,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.36645,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "width candidate: the upper half read as 80 (match 0.36645)"
+        },
+        {
+          "confidence": 0.350488,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.350488)"
+        },
+        {
+          "confidence": 0.340676,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "width candidate: the upper half read as 60 (match 0.340676)"
+        },
+        {
+          "confidence": 0.38499,
+          "rawText": "160",
+          "unit": "cm",
+          "value": 160,
+          "why": "height candidate: the lower half read as 160 (match 0.38499)"
+        },
+        {
+          "confidence": 0.377524,
+          "rawText": "164",
+          "unit": "cm",
+          "value": 164,
+          "why": "height candidate: the lower half read as 164 (match 0.377524)"
+        },
+        {
+          "confidence": 0.376845,
+          "rawText": "161",
+          "unit": "cm",
+          "value": 161,
+          "why": "height candidate: the lower half read as 161 (match 0.376845)"
+        },
+        {
+          "confidence": 0.373052,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.373052)"
+        },
+        {
+          "confidence": 0.348217,
+          "rawText": "166",
+          "unit": "cm",
+          "value": 166,
+          "why": "height candidate: the lower half read as 166 (match 0.348217)"
+        },
+        {
+          "confidence": 0.345121,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "height candidate: the lower half read as 60 (match 0.345121)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.21987,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-0bc9f910ef",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 80 cm over height 160 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (87.5 per cent of its circumference inked, interior 39.597315 per cent), split by a bar at row 633; read \"080\" (match 0.381894, 3 px tall) over \"160\" (match 0.38499, 4.666667 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "80/160",
+      "textBox": {
+        "x0": 66,
+        "x1": 86,
+        "y0": 624,
+        "y1": 644
+      },
+      "unit": "cm",
+      "value": 80,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.263554,
+          "rawText": "626",
+          "unit": "cm",
+          "value": 626,
+          "why": "width candidate: the upper half read as 626 (match 0.263554)"
+        },
+        {
+          "confidence": 0.254546,
+          "rawText": "226",
+          "unit": "cm",
+          "value": 226,
+          "why": "width candidate: the upper half read as 226 (match 0.254546)"
+        },
+        {
+          "confidence": 0.253064,
+          "rawText": "526",
+          "unit": "cm",
+          "value": 526,
+          "why": "width candidate: the upper half read as 526 (match 0.253064)"
+        },
+        {
+          "confidence": 0.250098,
+          "rawText": "666",
+          "unit": "cm",
+          "value": 666,
+          "why": "width candidate: the upper half read as 666 (match 0.250098)"
+        },
+        {
+          "confidence": 0.247512,
+          "rawText": "620",
+          "unit": "cm",
+          "value": 620,
+          "why": "width candidate: the upper half read as 620 (match 0.247512)"
+        },
+        {
+          "confidence": 0.242729,
+          "rawText": "622",
+          "unit": "cm",
+          "value": 622,
+          "why": "width candidate: the upper half read as 622 (match 0.242729)"
+        },
+        {
+          "confidence": 0.464551,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.464551)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.158132,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-0ccc286015",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 626 cm over height 400 cm, from a 46 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 46 px ring on the ink (66.666667 per cent of its circumference inked, interior 58.313445 per cent), split by a bar at row 750; read \"626\" (match 0.263554, 15 px tall) over \"400\" (match 0.464551, 17 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "626/400",
+      "textBox": {
+        "x0": 76,
+        "x1": 122,
+        "y0": 728,
+        "y1": 774
+      },
+      "unit": "cm",
+      "value": 626,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.536097,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "width candidate: the upper half read as 90 (match 0.536097)"
+        },
+        {
+          "confidence": 0.533982,
+          "rawText": "647",
+          "unit": "cm",
+          "value": 647,
+          "why": "width candidate: the upper half read as 647 (match 0.533982)"
+        },
+        {
+          "confidence": 0.52688,
+          "rawText": "547",
+          "unit": "cm",
+          "value": 547,
+          "why": "width candidate: the upper half read as 547 (match 0.52688)"
+        },
+        {
+          "confidence": 0.514173,
+          "rawText": "641",
+          "unit": "cm",
+          "value": 641,
+          "why": "width candidate: the upper half read as 641 (match 0.514173)"
+        },
+        {
+          "confidence": 0.506112,
+          "rawText": "649",
+          "unit": "cm",
+          "value": 649,
+          "why": "width candidate: the upper half read as 649 (match 0.506112)"
+        },
+        {
+          "confidence": 0.504733,
+          "rawText": "47",
+          "unit": "cm",
+          "value": 47,
+          "why": "width candidate: the upper half read as 47 (match 0.504733)"
+        },
+        {
+          "confidence": 0.538743,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.538743)"
+        },
+        {
+          "confidence": 0.537438,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.537438)"
+        },
+        {
+          "confidence": 0.529586,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.529586)"
+        },
+        {
+          "confidence": 0.48422,
+          "rawText": "299",
+          "unit": "cm",
+          "value": 299,
+          "why": "height candidate: the lower half read as 299 (match 0.48422)"
+        },
+        {
+          "confidence": 0.484044,
+          "rawText": "296",
+          "unit": "cm",
+          "value": 296,
+          "why": "height candidate: the lower half read as 296 (match 0.484044)"
+        },
+        {
+          "confidence": 0.477548,
+          "rawText": "237",
+          "unit": "cm",
+          "value": 237,
+          "why": "height candidate: the lower half read as 237 (match 0.477548)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.321658,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-0f0f35cacc",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 90 cm over height 290 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (95.833333 per cent of its circumference inked, interior 40.378549 per cent), split by a bar at row 414; read \"90\" (match 0.548538, 6.666667 px tall) over \"290\" (match 0.538743, 6.333333 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "90/290",
+      "textBox": {
+        "x0": 24,
+        "x1": 50,
+        "y0": 402,
+        "y1": 428
+      },
+      "unit": "cm",
+      "value": 90,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.44423,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.44423)"
+        },
+        {
+          "confidence": 0.441182,
+          "rawText": "408",
+          "unit": "cm",
+          "value": 408,
+          "why": "width candidate: the upper half read as 408 (match 0.441182)"
+        },
+        {
+          "confidence": 0.434955,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.434955)"
+        },
+        {
+          "confidence": 0.42473,
+          "rawText": "470",
+          "unit": "cm",
+          "value": 470,
+          "why": "width candidate: the upper half read as 470 (match 0.42473)"
+        },
+        {
+          "confidence": 0.420115,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.420115)"
+        },
+        {
+          "confidence": 0.378719,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.378719)"
+        },
+        {
+          "confidence": 0.453747,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.453747)"
+        },
+        {
+          "confidence": 0.331236,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "height candidate: the lower half read as 46 (match 0.331236)"
+        },
+        {
+          "confidence": 0.222252,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.222252)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.266538,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-146cd2d9d5",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 400 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (91.666667 per cent of its circumference inked, interior 10.152284 per cent), split by a bar at row 458; read \"400\" (match 0.44423, 4 px tall) over \"400\" (match 0.453747, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "400/400",
+      "textBox": {
+        "x0": 288,
+        "x1": 310,
+        "y0": 447,
+        "y1": 469
+      },
+      "unit": "cm",
+      "value": 400,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.189078,
+          "rawText": "101",
+          "unit": "cm",
+          "value": 101,
+          "why": "width candidate: the upper half read as 101 (match 0.189078)"
+        },
+        {
+          "confidence": 0.187452,
+          "rawText": "201",
+          "unit": "cm",
+          "value": 201,
+          "why": "width candidate: the upper half read as 201 (match 0.187452)"
+        },
+        {
+          "confidence": 0.175887,
+          "rawText": "700",
+          "unit": "cm",
+          "value": 700,
+          "why": "width candidate: the upper half read as 700 (match 0.175887)"
+        },
+        {
+          "confidence": 0.117006,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.117006)"
+        },
+        {
+          "confidence": 0.084751,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "height candidate: the lower half read as 300 (match 0.084751)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.070204,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+      "id": "metric-callout-ring-1c06b29d90",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 101 cm over height 400 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (70.833333 per cent of its circumference inked, interior 30.201342 per cent), split by a bar at row 242; read \"101\" (match 0.189506, 4.666667 px tall) over \"400\" (match 0.117006, 3 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "101/400",
+      "textBox": {
+        "x0": 140,
+        "x1": 160,
+        "y0": 230,
+        "y1": 250
+      },
+      "unit": "cm",
+      "value": 101,
+      "variantByteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.346088,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.346088)"
+        },
+        {
+          "confidence": 0.328967,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.328967)"
+        },
+        {
+          "confidence": 0.325653,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.325653)"
+        },
+        {
+          "confidence": 0.323544,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.323544)"
+        },
+        {
+          "confidence": 0.318333,
+          "rawText": "405",
+          "unit": "cm",
+          "value": 405,
+          "why": "width candidate: the upper half read as 405 (match 0.318333)"
+        },
+        {
+          "confidence": 0.315647,
+          "rawText": "460",
+          "unit": "cm",
+          "value": 460,
+          "why": "width candidate: the upper half read as 460 (match 0.315647)"
+        },
+        {
+          "confidence": 0.362234,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.362234)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.207653,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-1e0d9c07eb",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 400 cm over height 400 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (68.75 per cent of its circumference inked, interior 16.976127 per cent), split by a bar at row 257; read \"400\" (match 0.346088, 7 px tall) over \"400\" (match 0.362234, 7 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "400/400",
+      "textBox": {
+        "x0": 170,
+        "x1": 198,
+        "y0": 243,
+        "y1": 271
+      },
+      "unit": "cm",
+      "value": 400,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.757424,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "width candidate: the upper half read as 110 (match 0.757424)"
+        },
+        {
+          "confidence": 0.702118,
+          "rawText": "119",
+          "unit": "cm",
+          "value": 119,
+          "why": "width candidate: the upper half read as 119 (match 0.702118)"
+        },
+        {
+          "confidence": 0.696443,
+          "rawText": "116",
+          "unit": "cm",
+          "value": 116,
+          "why": "width candidate: the upper half read as 116 (match 0.696443)"
+        },
+        {
+          "confidence": 0.633093,
+          "rawText": "410",
+          "unit": "cm",
+          "value": 410,
+          "why": "width candidate: the upper half read as 410 (match 0.633093)"
+        },
+        {
+          "confidence": 0.630104,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.630104)"
+        },
+        {
+          "confidence": 0.622877,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "width candidate: the upper half read as 107 (match 0.622877)"
+        },
+        {
+          "confidence": 0.64119,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.64119)"
+        },
+        {
+          "confidence": 0.631884,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.631884)"
+        },
+        {
+          "confidence": 0.610088,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.610088)"
+        },
+        {
+          "confidence": 0.579317,
+          "rawText": "296",
+          "unit": "cm",
+          "value": 296,
+          "why": "height candidate: the lower half read as 296 (match 0.579317)"
+        },
+        {
+          "confidence": 0.573862,
+          "rawText": "299",
+          "unit": "cm",
+          "value": 299,
+          "why": "height candidate: the lower half read as 299 (match 0.573862)"
+        },
+        {
+          "confidence": 0.550492,
+          "rawText": "390",
+          "unit": "cm",
+          "value": 390,
+          "why": "height candidate: the lower half read as 390 (match 0.550492)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.64119,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-1e165965dd",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 110 cm over height 290 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (89.583333 per cent of its circumference inked, interior 30.914826 per cent), split by a bar at row 757; read \"110\" (match 0.757424, 6 px tall) over \"290\" (match 0.64119, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "110/290",
+      "textBox": {
+        "x0": 119,
+        "x1": 145,
+        "y0": 744,
+        "y1": 770
+      },
+      "unit": "cm",
+      "value": 110,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.263753,
+          "rawText": "626",
+          "unit": "cm",
+          "value": 626,
+          "why": "width candidate: the upper half read as 626 (match 0.263753)"
+        },
+        {
+          "confidence": 0.255264,
+          "rawText": "226",
+          "unit": "cm",
+          "value": 226,
+          "why": "width candidate: the upper half read as 226 (match 0.255264)"
+        },
+        {
+          "confidence": 0.253102,
+          "rawText": "526",
+          "unit": "cm",
+          "value": 526,
+          "why": "width candidate: the upper half read as 526 (match 0.253102)"
+        },
+        {
+          "confidence": 0.248719,
+          "rawText": "620",
+          "unit": "cm",
+          "value": 620,
+          "why": "width candidate: the upper half read as 620 (match 0.248719)"
+        },
+        {
+          "confidence": 0.245384,
+          "rawText": "666",
+          "unit": "cm",
+          "value": 666,
+          "why": "width candidate: the upper half read as 666 (match 0.245384)"
+        },
+        {
+          "confidence": 0.242882,
+          "rawText": "625",
+          "unit": "cm",
+          "value": 625,
+          "why": "width candidate: the upper half read as 625 (match 0.242882)"
+        },
+        {
+          "confidence": 0.464268,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.464268)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.158252,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-2ee8447f6a",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 626 cm over height 400 cm, from a 46 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 46 px ring on the ink (66.666667 per cent of its circumference inked, interior 58.392999 per cent), split by a bar at row 750; read \"626\" (match 0.263753, 15 px tall) over \"400\" (match 0.464268, 17 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "626/400",
+      "textBox": {
+        "x0": 76,
+        "x1": 122,
+        "y0": 728,
+        "y1": 774
+      },
+      "unit": "cm",
+      "value": 626,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.614913,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "width candidate: the upper half read as 110 (match 0.614913)"
+        },
+        {
+          "confidence": 0.599615,
+          "rawText": "115",
+          "unit": "cm",
+          "value": 115,
+          "why": "width candidate: the upper half read as 115 (match 0.599615)"
+        },
+        {
+          "confidence": 0.59645,
+          "rawText": "114",
+          "unit": "cm",
+          "value": 114,
+          "why": "width candidate: the upper half read as 114 (match 0.59645)"
+        },
+        {
+          "confidence": 0.54356,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.54356)"
+        },
+        {
+          "confidence": 0.519042,
+          "rawText": "170",
+          "unit": "cm",
+          "value": 170,
+          "why": "width candidate: the upper half read as 170 (match 0.519042)"
+        },
+        {
+          "confidence": 0.496679,
+          "rawText": "310",
+          "unit": "cm",
+          "value": 310,
+          "why": "width candidate: the upper half read as 310 (match 0.496679)"
+        },
+        {
+          "confidence": 0.463556,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.463556)"
+        }
+      ],
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-1e5d42ba07"
+        ],
+        "score": 0.103519,
+        "why": "86.062166 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.231778,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+      "id": "metric-callout-ring-3453db5d6e",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 209.904949,
+          "y": 299
+        },
+        "b": {
+          "x": 209.904949,
+          "y": 310
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 110 cm over height 40 cm, from a 32 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-1e5d42ba07"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 32 px ring on the ink (87.5 per cent of its circumference inked, interior 18.714556 per cent), with no bar found, split at its centre; read \"110\" (match 0.614913, 9 px tall) over \"40\" (match 0.697989, 9 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "110/40",
+      "textBox": {
+        "x0": 266,
+        "x1": 298,
+        "y0": 341,
+        "y1": 373
+      },
+      "unit": "cm",
+      "value": 110,
+      "variantByteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.444107,
+          "rawText": "91",
+          "unit": "cm",
+          "value": 91,
+          "why": "width candidate: the upper half read as 91 (match 0.444107)"
+        },
+        {
+          "confidence": 0.376841,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "width candidate: the upper half read as 111 (match 0.376841)"
+        },
+        {
+          "confidence": 0.365261,
+          "rawText": "511",
+          "unit": "cm",
+          "value": 511,
+          "why": "width candidate: the upper half read as 511 (match 0.365261)"
+        },
+        {
+          "confidence": 0.312528,
+          "rawText": "94",
+          "unit": "cm",
+          "value": 94,
+          "why": "width candidate: the upper half read as 94 (match 0.312528)"
+        },
+        {
+          "confidence": 0.302072,
+          "rawText": "141",
+          "unit": "cm",
+          "value": 141,
+          "why": "width candidate: the upper half read as 141 (match 0.302072)"
+        },
+        {
+          "confidence": 0.298515,
+          "rawText": "151",
+          "unit": "cm",
+          "value": 151,
+          "why": "width candidate: the upper half read as 151 (match 0.298515)"
+        },
+        {
+          "confidence": 0.328757,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "height candidate: the lower half read as 110 (match 0.328757)"
+        },
+        {
+          "confidence": 0.326393,
+          "rawText": "310",
+          "unit": "cm",
+          "value": 310,
+          "why": "height candidate: the lower half read as 310 (match 0.326393)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.197254,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+      "id": "metric-callout-ring-39437bd98a",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 91 cm over height 110 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (66.666667 per cent of its circumference inked, interior 22.811671 per cent), split by a bar at row 313; read \"91\" (match 0.444107, 13 px tall) over \"110\" (match 0.356954, 5 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "91/110",
+      "textBox": {
+        "x0": 161,
+        "x1": 189,
+        "y0": 295,
+        "y1": 323
+      },
+      "unit": "cm",
+      "value": 91,
+      "variantByteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.599886,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "width candidate: the upper half read as 111 (match 0.599886)"
+        },
+        {
+          "confidence": 0.543949,
+          "rawText": "141",
+          "unit": "cm",
+          "value": 141,
+          "why": "width candidate: the upper half read as 141 (match 0.543949)"
+        },
+        {
+          "confidence": 0.537675,
+          "rawText": "101",
+          "unit": "cm",
+          "value": 101,
+          "why": "width candidate: the upper half read as 101 (match 0.537675)"
+        },
+        {
+          "confidence": 0.46131,
+          "rawText": "411",
+          "unit": "cm",
+          "value": 411,
+          "why": "width candidate: the upper half read as 411 (match 0.46131)"
+        },
+        {
+          "confidence": 0.448988,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "width candidate: the upper half read as 40 (match 0.448988)"
+        },
+        {
+          "confidence": 0.447001,
+          "rawText": "118",
+          "unit": "cm",
+          "value": 118,
+          "why": "width candidate: the upper half read as 118 (match 0.447001)"
+        },
+        {
+          "confidence": 0.686173,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "height candidate: the lower half read as 111 (match 0.686173)"
+        },
+        {
+          "confidence": 0.572834,
+          "rawText": "114",
+          "unit": "cm",
+          "value": 114,
+          "why": "height candidate: the lower half read as 114 (match 0.572834)"
+        },
+        {
+          "confidence": 0.569893,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "height candidate: the lower half read as 110 (match 0.569893)"
+        },
+        {
+          "confidence": 0.547589,
+          "rawText": "141",
+          "unit": "cm",
+          "value": 141,
+          "why": "height candidate: the lower half read as 141 (match 0.547589)"
+        },
+        {
+          "confidence": 0.543404,
+          "rawText": "101",
+          "unit": "cm",
+          "value": 101,
+          "why": "height candidate: the lower half read as 101 (match 0.543404)"
+        },
+        {
+          "confidence": 0.269755,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "height candidate: the lower half read as 41 (match 0.269755)"
+        }
+      ],
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-1e5d42ba07"
+        ],
+        "score": 0.185351,
+        "why": "68.430517 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.599886,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+      "id": "metric-callout-ring-43b168a2d1",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 209.904949,
+          "y": 299
+        },
+        "b": {
+          "x": 209.904949,
+          "y": 310
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 111 cm over height 111 cm, from a 28 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-1e5d42ba07"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (70.833333 per cent of its circumference inked, interior 16.710875 per cent), split by a bar at row 371; read \"40\" (match 0.656851, 10 px tall) over \"111\" (match 0.686173, 8 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "111/111",
+      "textBox": {
+        "x0": 163,
+        "x1": 191,
+        "y0": 356,
+        "y1": 384
+      },
+      "unit": "cm",
+      "value": 111,
+      "variantByteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.418885,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.418885)"
+        },
+        {
+          "confidence": 0.416373,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.416373)"
+        },
+        {
+          "confidence": 0.405606,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "width candidate: the upper half read as 80 (match 0.405606)"
+        },
+        {
+          "confidence": 0.397629,
+          "rawText": "86",
+          "unit": "cm",
+          "value": 86,
+          "why": "width candidate: the upper half read as 86 (match 0.397629)"
+        },
+        {
+          "confidence": 0.396741,
+          "rawText": "106",
+          "unit": "cm",
+          "value": 106,
+          "why": "width candidate: the upper half read as 106 (match 0.396741)"
+        },
+        {
+          "confidence": 0.393432,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.393432)"
+        },
+        {
+          "confidence": 0.263617,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.263617)"
+        },
+        {
+          "confidence": 0.231496,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "height candidate: the lower half read as 107 (match 0.231496)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.15817,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-4e7bbde720",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 406 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (68.75 per cent of its circumference inked, interior 7.614213 per cent), split by a bar at row 681; read \"406\" (match 0.425183, 9 px tall) over \"400\" (match 0.264986, 7 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "406/400",
+      "textBox": {
+        "x0": 190,
+        "x1": 212,
+        "y0": 669,
+        "y1": 691
+      },
+      "unit": "cm",
+      "value": 406,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.632651,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "width candidate: the upper half read as 270 (match 0.632651)"
+        },
+        {
+          "confidence": 0.581439,
+          "rawText": "220",
+          "unit": "cm",
+          "value": 220,
+          "why": "width candidate: the upper half read as 220 (match 0.581439)"
+        },
+        {
+          "confidence": 0.556525,
+          "rawText": "279",
+          "unit": "cm",
+          "value": 279,
+          "why": "width candidate: the upper half read as 279 (match 0.556525)"
+        },
+        {
+          "confidence": 0.546115,
+          "rawText": "276",
+          "unit": "cm",
+          "value": 276,
+          "why": "width candidate: the upper half read as 276 (match 0.546115)"
+        },
+        {
+          "confidence": 0.537511,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "width candidate: the upper half read as 240 (match 0.537511)"
+        },
+        {
+          "confidence": 0.504777,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "width candidate: the upper half read as 210 (match 0.504777)"
+        },
+        {
+          "confidence": 0.538972,
+          "rawText": "320",
+          "unit": "cm",
+          "value": 320,
+          "why": "height candidate: the lower half read as 320 (match 0.538972)"
+        },
+        {
+          "confidence": 0.522912,
+          "rawText": "370",
+          "unit": "cm",
+          "value": 370,
+          "why": "height candidate: the lower half read as 370 (match 0.522912)"
+        },
+        {
+          "confidence": 0.491512,
+          "rawText": "329",
+          "unit": "cm",
+          "value": 329,
+          "why": "height candidate: the lower half read as 329 (match 0.491512)"
+        },
+        {
+          "confidence": 0.483516,
+          "rawText": "120",
+          "unit": "cm",
+          "value": 120,
+          "why": "height candidate: the lower half read as 120 (match 0.483516)"
+        },
+        {
+          "confidence": 0.474428,
+          "rawText": "326",
+          "unit": "cm",
+          "value": 326,
+          "why": "height candidate: the lower half read as 326 (match 0.474428)"
+        },
+        {
+          "confidence": 0.444819,
+          "rawText": "330",
+          "unit": "cm",
+          "value": 330,
+          "why": "height candidate: the lower half read as 330 (match 0.444819)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.323383,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-4f0b0b862c",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 270 cm over height 320 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 41.324921 per cent), split by a bar at row 693; read \"270\" (match 0.632651, 6.666667 px tall) over \"320\" (match 0.538972, 6 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "270/320",
+      "textBox": {
+        "x0": 233,
+        "x1": 259,
+        "y0": 680,
+        "y1": 706
+      },
+      "unit": "cm",
+      "value": 270,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.560794,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.560794)"
+        },
+        {
+          "confidence": 0.557642,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.557642)"
+        },
+        {
+          "confidence": 0.551267,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "width candidate: the upper half read as 60 (match 0.551267)"
+        },
+        {
+          "confidence": 0.545337,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "width candidate: the upper half read as 80 (match 0.545337)"
+        },
+        {
+          "confidence": 0.560995,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.560995)"
+        },
+        {
+          "confidence": 0.55872,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.55872)"
+        },
+        {
+          "confidence": 0.545625,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "height candidate: the lower half read as 80 (match 0.545625)"
+        },
+        {
+          "confidence": 0.530303,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.530303)"
+        },
+        {
+          "confidence": 0.517177,
+          "rawText": "70",
+          "unit": "cm",
+          "value": 70,
+          "why": "height candidate: the lower half read as 70 (match 0.517177)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.280397,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-5161c192d5",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 100 cm over height 100 cm, from a 24 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 24 px ring on the ink (66.666667 per cent of its circumference inked, interior 57.312253 per cent), with no bar found, split at its centre; read \"100\" (match 0.592685, 4 px tall) over \"100\" (match 0.592685, 4 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "100/100",
+      "textBox": {
+        "x0": 328,
+        "x1": 352,
+        "y0": 270,
+        "y1": 294
+      },
+      "unit": "cm",
+      "value": 100,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.332695,
+          "rawText": "51",
+          "unit": "cm",
+          "value": 51,
+          "why": "width candidate: the upper half read as 51 (match 0.332695)"
+        },
+        {
+          "confidence": 0.307529,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "width candidate: the upper half read as 41 (match 0.307529)"
+        },
+        {
+          "confidence": 0.09312,
+          "rawText": "47",
+          "unit": "cm",
+          "value": 47,
+          "why": "height candidate: the lower half read as 47 (match 0.09312)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.055872,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-5230e20136",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 51 cm over height 47 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (70.833333 per cent of its circumference inked, interior 22.015915 per cent), split by a bar at row 553; read \"11\" (match 0.371035, 8 px tall) over \"047\" (match 0.134274, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "51/47",
+      "textBox": {
+        "x0": 162,
+        "x1": 190,
+        "y0": 536,
+        "y1": 564
+      },
+      "unit": "cm",
+      "value": 51,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.134214,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.134214)"
+        },
+        {
+          "confidence": 0.130533,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.130533)"
+        },
+        {
+          "confidence": 0.118292,
+          "rawText": "306",
+          "unit": "cm",
+          "value": 306,
+          "why": "width candidate: the upper half read as 306 (match 0.118292)"
+        },
+        {
+          "confidence": 0.112745,
+          "rawText": "408",
+          "unit": "cm",
+          "value": 408,
+          "why": "width candidate: the upper half read as 408 (match 0.112745)"
+        },
+        {
+          "confidence": 0.100863,
+          "rawText": "446",
+          "unit": "cm",
+          "value": 446,
+          "why": "width candidate: the upper half read as 446 (match 0.100863)"
+        },
+        {
+          "confidence": 0.088737,
+          "rawText": "486",
+          "unit": "cm",
+          "value": 486,
+          "why": "width candidate: the upper half read as 486 (match 0.088737)"
+        },
+        {
+          "confidence": 0.342616,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.342616)"
+        },
+        {
+          "confidence": 0.302225,
+          "rawText": "47",
+          "unit": "cm",
+          "value": 47,
+          "why": "height candidate: the lower half read as 47 (match 0.302225)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.080528,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-588ac60df8",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 406 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (93.75 per cent of its circumference inked, interior 14.720812 per cent), split by a bar at row 437.5; read \"406\" (match 0.134214, 3 px tall) over \"400\" (match 0.354268, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "406/400",
+      "textBox": {
+        "x0": 288,
+        "x1": 310,
+        "y0": 427,
+        "y1": 449
+      },
+      "unit": "cm",
+      "value": 406,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.401142,
+          "rawText": "122",
+          "unit": "cm",
+          "value": 122,
+          "why": "width candidate: the upper half read as 122 (match 0.401142)"
+        },
+        {
+          "confidence": 0.400113,
+          "rawText": "126",
+          "unit": "cm",
+          "value": 126,
+          "why": "width candidate: the upper half read as 126 (match 0.400113)"
+        },
+        {
+          "confidence": 0.385841,
+          "rawText": "125",
+          "unit": "cm",
+          "value": 125,
+          "why": "width candidate: the upper half read as 125 (match 0.385841)"
+        },
+        {
+          "confidence": 0.360595,
+          "rawText": "152",
+          "unit": "cm",
+          "value": 152,
+          "why": "width candidate: the upper half read as 152 (match 0.360595)"
+        },
+        {
+          "confidence": 0.36016,
+          "rawText": "172",
+          "unit": "cm",
+          "value": 172,
+          "why": "width candidate: the upper half read as 172 (match 0.36016)"
+        },
+        {
+          "confidence": 0.351454,
+          "rawText": "422",
+          "unit": "cm",
+          "value": 422,
+          "why": "width candidate: the upper half read as 422 (match 0.351454)"
+        },
+        {
+          "confidence": 0.313686,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "height candidate: the lower half read as 60 (match 0.313686)"
+        },
+        {
+          "confidence": 0.306235,
+          "rawText": "68",
+          "unit": "cm",
+          "value": 68,
+          "why": "height candidate: the lower half read as 68 (match 0.306235)"
+        },
+        {
+          "confidence": 0.30605,
+          "rawText": "61",
+          "unit": "cm",
+          "value": 61,
+          "why": "height candidate: the lower half read as 61 (match 0.30605)"
+        },
+        {
+          "confidence": 0.27559,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.27559)"
+        },
+        {
+          "confidence": 0.27481,
+          "rawText": "160",
+          "unit": "cm",
+          "value": 160,
+          "why": "height candidate: the lower half read as 160 (match 0.27481)"
+        },
+        {
+          "confidence": 0.205187,
+          "rawText": "50",
+          "unit": "cm",
+          "value": 50,
+          "why": "height candidate: the lower half read as 50 (match 0.205187)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.188212,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-64cb5b2505",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 122 cm over height 60 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (83.333333 per cent of its circumference inked, interior 40.268456 per cent), split by a bar at row 344; read \"122\" (match 0.401142, 4 px tall) over \"060\" (match 0.313686, 3.666667 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "122/60",
+      "textBox": {
+        "x0": 298,
+        "x1": 318,
+        "y0": 334,
+        "y1": 354
+      },
+      "unit": "cm",
+      "value": 122,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.131502,
+          "rawText": "226",
+          "unit": "cm",
+          "value": 226,
+          "why": "width candidate: the upper half read as 226 (match 0.131502)"
+        },
+        {
+          "confidence": 0.124101,
+          "rawText": "220",
+          "unit": "cm",
+          "value": 220,
+          "why": "width candidate: the upper half read as 220 (match 0.124101)"
+        },
+        {
+          "confidence": 0.123266,
+          "rawText": "276",
+          "unit": "cm",
+          "value": 276,
+          "why": "width candidate: the upper half read as 276 (match 0.123266)"
+        },
+        {
+          "confidence": 0.122954,
+          "rawText": "326",
+          "unit": "cm",
+          "value": 326,
+          "why": "width candidate: the upper half read as 326 (match 0.122954)"
+        },
+        {
+          "confidence": 0.109877,
+          "rawText": "426",
+          "unit": "cm",
+          "value": 426,
+          "why": "width candidate: the upper half read as 426 (match 0.109877)"
+        },
+        {
+          "confidence": 0.105508,
+          "rawText": "222",
+          "unit": "cm",
+          "value": 222,
+          "why": "width candidate: the upper half read as 222 (match 0.105508)"
+        },
+        {
+          "confidence": 0.234186,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.234186)"
+        },
+        {
+          "confidence": 0.197584,
+          "rawText": "307",
+          "unit": "cm",
+          "value": 307,
+          "why": "height candidate: the lower half read as 307 (match 0.197584)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-7014f1a619"
+        ],
+        "score": 0.584718,
+        "why": "29.900321 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.078901,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-69f0fe8c44",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 69.099679,
+          "y": 387
+        },
+        "b": {
+          "x": 69.099679,
+          "y": 406
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 226 cm over height 400 cm, from a 24 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-7014f1a619"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 24 px ring on the ink (66.666667 per cent of its circumference inked, interior 34.387352 per cent), split by a bar at row 400.5; read \"226\" (match 0.131502, 4.333333 px tall) over \"400\" (match 0.237913, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "226/400",
+      "textBox": {
+        "x0": 87,
+        "x1": 111,
+        "y0": 388,
+        "y1": 412
+      },
+      "unit": "cm",
+      "value": 226,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.575838,
+          "rawText": "275",
+          "unit": "cm",
+          "value": 275,
+          "why": "width candidate: the upper half read as 275 (match 0.575838)"
+        },
+        {
+          "confidence": 0.510489,
+          "rawText": "273",
+          "unit": "cm",
+          "value": 273,
+          "why": "width candidate: the upper half read as 273 (match 0.510489)"
+        },
+        {
+          "confidence": 0.502378,
+          "rawText": "375",
+          "unit": "cm",
+          "value": 375,
+          "why": "width candidate: the upper half read as 375 (match 0.502378)"
+        },
+        {
+          "confidence": 0.125052,
+          "rawText": "59",
+          "unit": "cm",
+          "value": 59,
+          "why": "width candidate: the upper half read as 59 (match 0.125052)"
+        },
+        {
+          "confidence": 0.59978,
+          "rawText": "275",
+          "unit": "cm",
+          "value": 275,
+          "why": "height candidate: the lower half read as 275 (match 0.59978)"
+        },
+        {
+          "confidence": 0.595987,
+          "rawText": "225",
+          "unit": "cm",
+          "value": 225,
+          "why": "height candidate: the lower half read as 225 (match 0.595987)"
+        },
+        {
+          "confidence": 0.572874,
+          "rawText": "224",
+          "unit": "cm",
+          "value": 224,
+          "why": "height candidate: the lower half read as 224 (match 0.572874)"
+        },
+        {
+          "confidence": 0.571737,
+          "rawText": "276",
+          "unit": "cm",
+          "value": 276,
+          "why": "height candidate: the lower half read as 276 (match 0.571737)"
+        },
+        {
+          "confidence": 0.557662,
+          "rawText": "229",
+          "unit": "cm",
+          "value": 229,
+          "why": "height candidate: the lower half read as 229 (match 0.557662)"
+        },
+        {
+          "confidence": 0.549354,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.549354)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-f958c6fe53"
+        ],
+        "score": 0.1,
+        "why": "70.491134 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.575838,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-6bfb65d95b",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 491,
+          "y": 606
+        },
+        "b": {
+          "x": 491,
+          "y": 712
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 275 cm over height 275 cm, from a 26 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-f958c6fe53"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 45.425868 per cent), split by a bar at row 749; read \"275\" (match 0.578251, 6.333333 px tall) over \"275\" (match 0.59978, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "275/275",
+      "textBox": {
+        "x0": 418,
+        "x1": 444,
+        "y0": 736,
+        "y1": 762
+      },
+      "unit": "cm",
+      "value": 275,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.579784,
+          "rawText": "275",
+          "unit": "cm",
+          "value": 275,
+          "why": "width candidate: the upper half read as 275 (match 0.579784)"
+        },
+        {
+          "confidence": 0.567045,
+          "rawText": "273",
+          "unit": "cm",
+          "value": 273,
+          "why": "width candidate: the upper half read as 273 (match 0.567045)"
+        },
+        {
+          "confidence": 0.545434,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "width candidate: the upper half read as 270 (match 0.545434)"
+        },
+        {
+          "confidence": 0.50629,
+          "rawText": "375",
+          "unit": "cm",
+          "value": 375,
+          "why": "width candidate: the upper half read as 375 (match 0.50629)"
+        },
+        {
+          "confidence": 0.497266,
+          "rawText": "225",
+          "unit": "cm",
+          "value": 225,
+          "why": "width candidate: the upper half read as 225 (match 0.497266)"
+        },
+        {
+          "confidence": 0.475107,
+          "rawText": "215",
+          "unit": "cm",
+          "value": 215,
+          "why": "width candidate: the upper half read as 215 (match 0.475107)"
+        },
+        {
+          "confidence": 0.598784,
+          "rawText": "275",
+          "unit": "cm",
+          "value": 275,
+          "why": "height candidate: the lower half read as 275 (match 0.598784)"
+        },
+        {
+          "confidence": 0.597893,
+          "rawText": "225",
+          "unit": "cm",
+          "value": 225,
+          "why": "height candidate: the lower half read as 225 (match 0.597893)"
+        },
+        {
+          "confidence": 0.57552,
+          "rawText": "224",
+          "unit": "cm",
+          "value": 224,
+          "why": "height candidate: the lower half read as 224 (match 0.57552)"
+        },
+        {
+          "confidence": 0.572125,
+          "rawText": "276",
+          "unit": "cm",
+          "value": 276,
+          "why": "height candidate: the lower half read as 276 (match 0.572125)"
+        },
+        {
+          "confidence": 0.559308,
+          "rawText": "229",
+          "unit": "cm",
+          "value": 229,
+          "why": "height candidate: the lower half read as 229 (match 0.559308)"
+        },
+        {
+          "confidence": 0.553878,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.553878)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-e6dbc03155"
+        ],
+        "score": 0.1,
+        "why": "71.021124 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.579784,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-6d3a713075",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 491,
+          "y": 668
+        },
+        "b": {
+          "x": 491,
+          "y": 711
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 275 cm over height 275 cm, from a 26 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-e6dbc03155"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 45.741325 per cent), split by a bar at row 749; read \"275\" (match 0.579784, 6.333333 px tall) over \"275\" (match 0.598784, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "275/275",
+      "textBox": {
+        "x0": 418,
+        "x1": 444,
+        "y0": 736,
+        "y1": 762
+      },
+      "unit": "cm",
+      "value": 275,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.16522,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "width candidate: the upper half read as 60 (match 0.16522)"
+        },
+        {
+          "confidence": 0.164037,
+          "rawText": "620",
+          "unit": "cm",
+          "value": 620,
+          "why": "width candidate: the upper half read as 620 (match 0.164037)"
+        },
+        {
+          "confidence": 0.136497,
+          "rawText": "520",
+          "unit": "cm",
+          "value": 520,
+          "why": "width candidate: the upper half read as 520 (match 0.136497)"
+        },
+        {
+          "confidence": 0.122129,
+          "rawText": "660",
+          "unit": "cm",
+          "value": 660,
+          "why": "width candidate: the upper half read as 660 (match 0.122129)"
+        },
+        {
+          "confidence": 0.483027,
+          "rawText": "81",
+          "unit": "cm",
+          "value": 81,
+          "why": "height candidate: the lower half read as 81 (match 0.483027)"
+        },
+        {
+          "confidence": 0.451563,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "height candidate: the lower half read as 41 (match 0.451563)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-371b8d98bf"
+        ],
+        "score": 0.694728,
+        "why": "29.306146 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.099132,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+      "id": "metric-callout-ring-6ea9241c20",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 36.873171,
+          "y": 261
+        },
+        "b": {
+          "x": 36.873171,
+          "y": 270
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 60 cm over height 81 cm, from a 32 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-371b8d98bf"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 32 px ring on the ink (68.75 per cent of its circumference inked, interior 18.336484 per cent), split by a bar at row 239; read \"060\" (match 0.165271, 4 px tall) over \"81\" (match 0.523645, 6 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "60/81",
+      "textBox": {
+        "x0": 44,
+        "x1": 76,
+        "y0": 227,
+        "y1": 259
+      },
+      "unit": "cm",
+      "value": 60,
+      "variantByteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.4149,
+          "rawText": "76",
+          "unit": "cm",
+          "value": 76,
+          "why": "width candidate: the upper half read as 76 (match 0.4149)"
+        },
+        {
+          "confidence": 0.409479,
+          "rawText": "676",
+          "unit": "cm",
+          "value": 676,
+          "why": "width candidate: the upper half read as 676 (match 0.409479)"
+        },
+        {
+          "confidence": 0.406704,
+          "rawText": "70",
+          "unit": "cm",
+          "value": 70,
+          "why": "width candidate: the upper half read as 70 (match 0.406704)"
+        },
+        {
+          "confidence": 0.399527,
+          "rawText": "71",
+          "unit": "cm",
+          "value": 71,
+          "why": "width candidate: the upper half read as 71 (match 0.399527)"
+        },
+        {
+          "confidence": 0.387098,
+          "rawText": "576",
+          "unit": "cm",
+          "value": 576,
+          "why": "width candidate: the upper half read as 576 (match 0.387098)"
+        },
+        {
+          "confidence": 0.326958,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "width candidate: the upper half read as 46 (match 0.326958)"
+        },
+        {
+          "confidence": 0.137673,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.137673)"
+        },
+        {
+          "confidence": 0.102364,
+          "rawText": "308",
+          "unit": "cm",
+          "value": 308,
+          "why": "height candidate: the lower half read as 308 (match 0.102364)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.082604,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-768b25eb8d",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 76 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (85.416667 per cent of its circumference inked, interior 30.964467 per cent), split by a bar at row 666; read \"076\" (match 0.4149, 5 px tall) over \"400\" (match 0.138703, 3 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "76/400",
+      "textBox": {
+        "x0": 212,
+        "x1": 234,
+        "y0": 653,
+        "y1": 675
+      },
+      "unit": "cm",
+      "value": 76,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.602373,
+          "rawText": "470",
+          "unit": "cm",
+          "value": 470,
+          "why": "width candidate: the upper half read as 470 (match 0.602373)"
+        },
+        {
+          "confidence": 0.563625,
+          "rawText": "479",
+          "unit": "cm",
+          "value": 479,
+          "why": "width candidate: the upper half read as 479 (match 0.563625)"
+        },
+        {
+          "confidence": 0.558,
+          "rawText": "170",
+          "unit": "cm",
+          "value": 170,
+          "why": "width candidate: the upper half read as 170 (match 0.558)"
+        },
+        {
+          "confidence": 0.554837,
+          "rawText": "420",
+          "unit": "cm",
+          "value": 420,
+          "why": "width candidate: the upper half read as 420 (match 0.554837)"
+        },
+        {
+          "confidence": 0.551487,
+          "rawText": "478",
+          "unit": "cm",
+          "value": 478,
+          "why": "width candidate: the upper half read as 478 (match 0.551487)"
+        },
+        {
+          "confidence": 0.542348,
+          "rawText": "430",
+          "unit": "cm",
+          "value": 430,
+          "why": "width candidate: the upper half read as 430 (match 0.542348)"
+        },
+        {
+          "confidence": 0.56239,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.56239)"
+        },
+        {
+          "confidence": 0.552837,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.552837)"
+        },
+        {
+          "confidence": 0.544692,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.544692)"
+        },
+        {
+          "confidence": 0.542215,
+          "rawText": "239",
+          "unit": "cm",
+          "value": 239,
+          "why": "height candidate: the lower half read as 239 (match 0.542215)"
+        },
+        {
+          "confidence": 0.512655,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "height candidate: the lower half read as 210 (match 0.512655)"
+        },
+        {
+          "confidence": 0.509205,
+          "rawText": "235",
+          "unit": "cm",
+          "value": 235,
+          "why": "height candidate: the lower half read as 235 (match 0.509205)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.56239,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-79c253f876",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 470 cm over height 230 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (97.916667 per cent of its circumference inked, interior 41.324921 per cent), split by a bar at row 240; read \"470\" (match 0.602373, 6.333333 px tall) over \"230\" (match 0.56239, 6 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "470/230",
+      "textBox": {
+        "x0": 217,
+        "x1": 243,
+        "y0": 227,
+        "y1": 253
+      },
+      "unit": "cm",
+      "value": 470,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.600065,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.600065)"
+        },
+        {
+          "confidence": 0.564915,
+          "rawText": "700",
+          "unit": "cm",
+          "value": 700,
+          "why": "width candidate: the upper half read as 700 (match 0.564915)"
+        },
+        {
+          "confidence": 0.562075,
+          "rawText": "600",
+          "unit": "cm",
+          "value": 600,
+          "why": "width candidate: the upper half read as 600 (match 0.562075)"
+        },
+        {
+          "confidence": 0.544464,
+          "rawText": "160",
+          "unit": "cm",
+          "value": 160,
+          "why": "width candidate: the upper half read as 160 (match 0.544464)"
+        },
+        {
+          "confidence": 0.537928,
+          "rawText": "109",
+          "unit": "cm",
+          "value": 109,
+          "why": "width candidate: the upper half read as 109 (match 0.537928)"
+        },
+        {
+          "confidence": 0.537077,
+          "rawText": "190",
+          "unit": "cm",
+          "value": 190,
+          "why": "width candidate: the upper half read as 190 (match 0.537077)"
+        },
+        {
+          "confidence": 0.65364,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "height candidate: the lower half read as 210 (match 0.65364)"
+        },
+        {
+          "confidence": 0.616886,
+          "rawText": "216",
+          "unit": "cm",
+          "value": 216,
+          "why": "height candidate: the lower half read as 216 (match 0.616886)"
+        },
+        {
+          "confidence": 0.611715,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.611715)"
+        },
+        {
+          "confidence": 0.608563,
+          "rawText": "219",
+          "unit": "cm",
+          "value": 219,
+          "why": "height candidate: the lower half read as 219 (match 0.608563)"
+        },
+        {
+          "confidence": 0.563936,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.563936)"
+        },
+        {
+          "confidence": 0.107304,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.107304)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.600065,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-7bdd5d8540",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 100 cm over height 210 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 41.640379 per cent), split by a bar at row 431; read \"100\" (match 0.600065, 6.333333 px tall) over \"210\" (match 0.65364, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "100/210",
+      "textBox": {
+        "x0": 439,
+        "x1": 465,
+        "y0": 418,
+        "y1": 444
+      },
+      "unit": "cm",
+      "value": 100,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.757428,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "width candidate: the upper half read as 110 (match 0.757428)"
+        },
+        {
+          "confidence": 0.703765,
+          "rawText": "119",
+          "unit": "cm",
+          "value": 119,
+          "why": "width candidate: the upper half read as 119 (match 0.703765)"
+        },
+        {
+          "confidence": 0.696699,
+          "rawText": "116",
+          "unit": "cm",
+          "value": 116,
+          "why": "width candidate: the upper half read as 116 (match 0.696699)"
+        },
+        {
+          "confidence": 0.631168,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.631168)"
+        },
+        {
+          "confidence": 0.630447,
+          "rawText": "410",
+          "unit": "cm",
+          "value": 410,
+          "why": "width candidate: the upper half read as 410 (match 0.630447)"
+        },
+        {
+          "confidence": 0.625398,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "width candidate: the upper half read as 107 (match 0.625398)"
+        },
+        {
+          "confidence": 0.609084,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.609084)"
+        },
+        {
+          "confidence": 0.598392,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.598392)"
+        },
+        {
+          "confidence": 0.592363,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.592363)"
+        },
+        {
+          "confidence": 0.563369,
+          "rawText": "390",
+          "unit": "cm",
+          "value": 390,
+          "why": "height candidate: the lower half read as 390 (match 0.563369)"
+        },
+        {
+          "confidence": 0.545986,
+          "rawText": "296",
+          "unit": "cm",
+          "value": 296,
+          "why": "height candidate: the lower half read as 296 (match 0.545986)"
+        },
+        {
+          "confidence": 0.542055,
+          "rawText": "299",
+          "unit": "cm",
+          "value": 299,
+          "why": "height candidate: the lower half read as 299 (match 0.542055)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.609084,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-9903866a53",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 110 cm over height 290 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (89.583333 per cent of its circumference inked, interior 31.230284 per cent), split by a bar at row 757; read \"110\" (match 0.757428, 6 px tall) over \"290\" (match 0.609084, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "110/290",
+      "textBox": {
+        "x0": 119,
+        "x1": 145,
+        "y0": 744,
+        "y1": 770
+      },
+      "unit": "cm",
+      "value": 110,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.435404,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.435404)"
+        },
+        {
+          "confidence": 0.429716,
+          "rawText": "470",
+          "unit": "cm",
+          "value": 470,
+          "why": "width candidate: the upper half read as 470 (match 0.429716)"
+        },
+        {
+          "confidence": 0.429282,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.429282)"
+        },
+        {
+          "confidence": 0.423972,
+          "rawText": "408",
+          "unit": "cm",
+          "value": 408,
+          "why": "width candidate: the upper half read as 408 (match 0.423972)"
+        },
+        {
+          "confidence": 0.420531,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.420531)"
+        },
+        {
+          "confidence": 0.377215,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.377215)"
+        },
+        {
+          "confidence": 0.487559,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.487559)"
+        },
+        {
+          "confidence": 0.316178,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "height candidate: the lower half read as 46 (match 0.316178)"
+        },
+        {
+          "confidence": 0.21105,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.21105)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.261242,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-9a52f774ea",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 400 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (91.666667 per cent of its circumference inked, interior 9.64467 per cent), split by a bar at row 458; read \"400\" (match 0.435404, 4 px tall) over \"400\" (match 0.487559, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "400/400",
+      "textBox": {
+        "x0": 288,
+        "x1": 310,
+        "y0": 447,
+        "y1": 469
+      },
+      "unit": "cm",
+      "value": 400,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.420279,
+          "rawText": "62",
+          "unit": "cm",
+          "value": 62,
+          "why": "width candidate: the upper half read as 62 (match 0.420279)"
+        },
+        {
+          "confidence": 0.407472,
+          "rawText": "52",
+          "unit": "cm",
+          "value": 52,
+          "why": "width candidate: the upper half read as 52 (match 0.407472)"
+        },
+        {
+          "confidence": 0.402017,
+          "rawText": "462",
+          "unit": "cm",
+          "value": 462,
+          "why": "width candidate: the upper half read as 462 (match 0.402017)"
+        },
+        {
+          "confidence": 0.393912,
+          "rawText": "92",
+          "unit": "cm",
+          "value": 92,
+          "why": "width candidate: the upper half read as 92 (match 0.393912)"
+        },
+        {
+          "confidence": 0.388147,
+          "rawText": "452",
+          "unit": "cm",
+          "value": 452,
+          "why": "width candidate: the upper half read as 452 (match 0.388147)"
+        },
+        {
+          "confidence": 0.382351,
+          "rawText": "262",
+          "unit": "cm",
+          "value": 262,
+          "why": "width candidate: the upper half read as 262 (match 0.382351)"
+        },
+        {
+          "confidence": 0.081513,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.081513)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.048908,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-a2fb64a4a4",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 62 cm over height 400 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (75 per cent of its circumference inked, interior 23.872679 per cent), split by a bar at row 362; read \"062\" (match 0.420279, 10.666667 px tall) over \"400\" (match 0.081513, 3 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "62/400",
+      "textBox": {
+        "x0": 277,
+        "x1": 305,
+        "y0": 344,
+        "y1": 372
+      },
+      "unit": "cm",
+      "value": 62,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.425296,
+          "rawText": "77",
+          "unit": "cm",
+          "value": 77,
+          "why": "width candidate: the upper half read as 77 (match 0.425296)"
+        },
+        {
+          "confidence": 0.404494,
+          "rawText": "71",
+          "unit": "cm",
+          "value": 71,
+          "why": "width candidate: the upper half read as 71 (match 0.404494)"
+        },
+        {
+          "confidence": 0.364247,
+          "rawText": "72",
+          "unit": "cm",
+          "value": 72,
+          "why": "width candidate: the upper half read as 72 (match 0.364247)"
+        },
+        {
+          "confidence": 0.363409,
+          "rawText": "70",
+          "unit": "cm",
+          "value": 70,
+          "why": "width candidate: the upper half read as 70 (match 0.363409)"
+        },
+        {
+          "confidence": 0.223628,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.223628)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.134177,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-a810e408e0",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 77 cm over height 400 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (79.166667 per cent of its circumference inked, interior 20.189274 per cent), split by a bar at row 681; read \"77\" (match 0.425296, 5 px tall) over \"400\" (match 0.223628, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "77/400",
+      "textBox": {
+        "x0": 184,
+        "x1": 210,
+        "y0": 666,
+        "y1": 692
+      },
+      "unit": "cm",
+      "value": 77,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.645329,
+          "rawText": "105",
+          "unit": "cm",
+          "value": 105,
+          "why": "width candidate: the upper half read as 105 (match 0.645329)"
+        },
+        {
+          "confidence": 0.61349,
+          "rawText": "109",
+          "unit": "cm",
+          "value": 109,
+          "why": "width candidate: the upper half read as 109 (match 0.61349)"
+        },
+        {
+          "confidence": 0.605634,
+          "rawText": "106",
+          "unit": "cm",
+          "value": 106,
+          "why": "width candidate: the upper half read as 106 (match 0.605634)"
+        },
+        {
+          "confidence": 0.60089,
+          "rawText": "165",
+          "unit": "cm",
+          "value": 165,
+          "why": "width candidate: the upper half read as 165 (match 0.60089)"
+        },
+        {
+          "confidence": 0.597382,
+          "rawText": "195",
+          "unit": "cm",
+          "value": 195,
+          "why": "width candidate: the upper half read as 195 (match 0.597382)"
+        },
+        {
+          "confidence": 0.595856,
+          "rawText": "405",
+          "unit": "cm",
+          "value": 405,
+          "why": "width candidate: the upper half read as 405 (match 0.595856)"
+        },
+        {
+          "confidence": 0.677793,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "height candidate: the lower half read as 210 (match 0.677793)"
+        },
+        {
+          "confidence": 0.641383,
+          "rawText": "216",
+          "unit": "cm",
+          "value": 216,
+          "why": "height candidate: the lower half read as 216 (match 0.641383)"
+        },
+        {
+          "confidence": 0.631298,
+          "rawText": "219",
+          "unit": "cm",
+          "value": 219,
+          "why": "height candidate: the lower half read as 219 (match 0.631298)"
+        },
+        {
+          "confidence": 0.578283,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.578283)"
+        },
+        {
+          "confidence": 0.558546,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.558546)"
+        },
+        {
+          "confidence": 0.114002,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.114002)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.645329,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-ab145c97ec",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 105 cm over height 210 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 40.378549 per cent), split by a bar at row 757; read \"105\" (match 0.645329, 6 px tall) over \"210\" (match 0.677793, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "105/210",
+      "textBox": {
+        "x0": 223,
+        "x1": 249,
+        "y0": 744,
+        "y1": 770
+      },
+      "unit": "cm",
+      "value": 105,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.632274,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "width candidate: the upper half read as 270 (match 0.632274)"
+        },
+        {
+          "confidence": 0.580399,
+          "rawText": "220",
+          "unit": "cm",
+          "value": 220,
+          "why": "width candidate: the upper half read as 220 (match 0.580399)"
+        },
+        {
+          "confidence": 0.556214,
+          "rawText": "279",
+          "unit": "cm",
+          "value": 279,
+          "why": "width candidate: the upper half read as 279 (match 0.556214)"
+        },
+        {
+          "confidence": 0.545418,
+          "rawText": "276",
+          "unit": "cm",
+          "value": 276,
+          "why": "width candidate: the upper half read as 276 (match 0.545418)"
+        },
+        {
+          "confidence": 0.535836,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "width candidate: the upper half read as 240 (match 0.535836)"
+        },
+        {
+          "confidence": 0.504181,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "width candidate: the upper half read as 210 (match 0.504181)"
+        },
+        {
+          "confidence": 0.539387,
+          "rawText": "320",
+          "unit": "cm",
+          "value": 320,
+          "why": "height candidate: the lower half read as 320 (match 0.539387)"
+        },
+        {
+          "confidence": 0.522935,
+          "rawText": "370",
+          "unit": "cm",
+          "value": 370,
+          "why": "height candidate: the lower half read as 370 (match 0.522935)"
+        },
+        {
+          "confidence": 0.491932,
+          "rawText": "329",
+          "unit": "cm",
+          "value": 329,
+          "why": "height candidate: the lower half read as 329 (match 0.491932)"
+        },
+        {
+          "confidence": 0.484325,
+          "rawText": "120",
+          "unit": "cm",
+          "value": 120,
+          "why": "height candidate: the lower half read as 120 (match 0.484325)"
+        },
+        {
+          "confidence": 0.475653,
+          "rawText": "326",
+          "unit": "cm",
+          "value": 326,
+          "why": "height candidate: the lower half read as 326 (match 0.475653)"
+        },
+        {
+          "confidence": 0.445265,
+          "rawText": "330",
+          "unit": "cm",
+          "value": 330,
+          "why": "height candidate: the lower half read as 330 (match 0.445265)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.323632,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-aba66e11a5",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 270 cm over height 320 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 41.324921 per cent), split by a bar at row 693; read \"270\" (match 0.632274, 6.666667 px tall) over \"320\" (match 0.539387, 6 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "270/320",
+      "textBox": {
+        "x0": 233,
+        "x1": 259,
+        "y0": 680,
+        "y1": 706
+      },
+      "unit": "cm",
+      "value": 270,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.571577,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.571577)"
+        },
+        {
+          "confidence": 0.567214,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.567214)"
+        },
+        {
+          "confidence": 0.546545,
+          "rawText": "390",
+          "unit": "cm",
+          "value": 390,
+          "why": "width candidate: the upper half read as 390 (match 0.546545)"
+        },
+        {
+          "confidence": 0.535874,
+          "rawText": "360",
+          "unit": "cm",
+          "value": 360,
+          "why": "width candidate: the upper half read as 360 (match 0.535874)"
+        },
+        {
+          "confidence": 0.517915,
+          "rawText": "309",
+          "unit": "cm",
+          "value": 309,
+          "why": "width candidate: the upper half read as 309 (match 0.517915)"
+        },
+        {
+          "confidence": 0.510311,
+          "rawText": "306",
+          "unit": "cm",
+          "value": 306,
+          "why": "width candidate: the upper half read as 306 (match 0.510311)"
+        },
+        {
+          "confidence": 0.592461,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.592461)"
+        },
+        {
+          "confidence": 0.584672,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.584672)"
+        },
+        {
+          "confidence": 0.557636,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.557636)"
+        },
+        {
+          "confidence": 0.553125,
+          "rawText": "200",
+          "unit": "cm",
+          "value": 200,
+          "why": "height candidate: the lower half read as 200 (match 0.553125)"
+        },
+        {
+          "confidence": 0.551993,
+          "rawText": "296",
+          "unit": "cm",
+          "value": 296,
+          "why": "height candidate: the lower half read as 296 (match 0.551993)"
+        },
+        {
+          "confidence": 0.543516,
+          "rawText": "299",
+          "unit": "cm",
+          "value": 299,
+          "why": "height candidate: the lower half read as 299 (match 0.543516)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.571577,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-aba8418210",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 300 cm over height 290 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (87.5 per cent of its circumference inked, interior 51.104101 per cent), split by a bar at row 349.5; read \"300\" (match 0.571577, 6.666667 px tall) over \"290\" (match 0.592461, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "300/290",
+      "textBox": {
+        "x0": 368,
+        "x1": 394,
+        "y0": 337,
+        "y1": 363
+      },
+      "unit": "cm",
+      "value": 300,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.53566,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "width candidate: the upper half read as 90 (match 0.53566)"
+        },
+        {
+          "confidence": 0.533608,
+          "rawText": "647",
+          "unit": "cm",
+          "value": 647,
+          "why": "width candidate: the upper half read as 647 (match 0.533608)"
+        },
+        {
+          "confidence": 0.526751,
+          "rawText": "547",
+          "unit": "cm",
+          "value": 547,
+          "why": "width candidate: the upper half read as 547 (match 0.526751)"
+        },
+        {
+          "confidence": 0.513369,
+          "rawText": "641",
+          "unit": "cm",
+          "value": 641,
+          "why": "width candidate: the upper half read as 641 (match 0.513369)"
+        },
+        {
+          "confidence": 0.508592,
+          "rawText": "47",
+          "unit": "cm",
+          "value": 47,
+          "why": "width candidate: the upper half read as 47 (match 0.508592)"
+        },
+        {
+          "confidence": 0.507822,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "width candidate: the upper half read as 40 (match 0.507822)"
+        },
+        {
+          "confidence": 0.536622,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.536622)"
+        },
+        {
+          "confidence": 0.535082,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.535082)"
+        },
+        {
+          "confidence": 0.526557,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.526557)"
+        },
+        {
+          "confidence": 0.483153,
+          "rawText": "236",
+          "unit": "cm",
+          "value": 236,
+          "why": "height candidate: the lower half read as 236 (match 0.483153)"
+        },
+        {
+          "confidence": 0.48145,
+          "rawText": "239",
+          "unit": "cm",
+          "value": 239,
+          "why": "height candidate: the lower half read as 239 (match 0.48145)"
+        },
+        {
+          "confidence": 0.469392,
+          "rawText": "237",
+          "unit": "cm",
+          "value": 237,
+          "why": "height candidate: the lower half read as 237 (match 0.469392)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.321396,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-ad248f8f2b",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 90 cm over height 230 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (95.833333 per cent of its circumference inked, interior 41.009464 per cent), split by a bar at row 414; read \"90\" (match 0.549429, 6.666667 px tall) over \"230\" (match 0.536622, 6.333333 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "90/230",
+      "textBox": {
+        "x0": 24,
+        "x1": 50,
+        "y0": 402,
+        "y1": 428
+      },
+      "unit": "cm",
+      "value": 90,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.606117,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "width candidate: the upper half read as 41 (match 0.606117)"
+        },
+        {
+          "confidence": 0.497136,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "width candidate: the upper half read as 111 (match 0.497136)"
+        },
+        {
+          "confidence": 0.693525,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "height candidate: the lower half read as 41 (match 0.693525)"
+        },
+        {
+          "confidence": 0.604517,
+          "rawText": "91",
+          "unit": "cm",
+          "value": 91,
+          "why": "height candidate: the lower half read as 91 (match 0.604517)"
+        },
+        {
+          "confidence": 0.534608,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.534608)"
+        },
+        {
+          "confidence": 0.512498,
+          "rawText": "44",
+          "unit": "cm",
+          "value": 44,
+          "why": "height candidate: the lower half read as 44 (match 0.512498)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.303059,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-e1f7fc10fc-2ffc3c0fba",
+      "id": "metric-callout-ring-aebacf6659",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 41 cm over height 41 cm, from a 22 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (91.666667 per cent of its circumference inked, interior 19.796954 per cent), with no bar found, split at its centre; read \"41\" (match 0.668073, 7 px tall) over \"41\" (match 0.693525, 7 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "41/41",
+      "textBox": {
+        "x0": 183,
+        "x1": 205,
+        "y0": 248,
+        "y1": 270
+      },
+      "unit": "cm",
+      "value": 41,
+      "variantByteHash": "9c4e991c1b6fb6a2557e06b76ebc8bce50822f39130563e628b6d021f9f16476"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.596987,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.596987)"
+        },
+        {
+          "confidence": 0.561843,
+          "rawText": "700",
+          "unit": "cm",
+          "value": 700,
+          "why": "width candidate: the upper half read as 700 (match 0.561843)"
+        },
+        {
+          "confidence": 0.558108,
+          "rawText": "600",
+          "unit": "cm",
+          "value": 600,
+          "why": "width candidate: the upper half read as 600 (match 0.558108)"
+        },
+        {
+          "confidence": 0.542952,
+          "rawText": "160",
+          "unit": "cm",
+          "value": 160,
+          "why": "width candidate: the upper half read as 160 (match 0.542952)"
+        },
+        {
+          "confidence": 0.536355,
+          "rawText": "109",
+          "unit": "cm",
+          "value": 109,
+          "why": "width candidate: the upper half read as 109 (match 0.536355)"
+        },
+        {
+          "confidence": 0.534642,
+          "rawText": "500",
+          "unit": "cm",
+          "value": 500,
+          "why": "width candidate: the upper half read as 500 (match 0.534642)"
+        },
+        {
+          "confidence": 0.653905,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "height candidate: the lower half read as 210 (match 0.653905)"
+        },
+        {
+          "confidence": 0.617025,
+          "rawText": "216",
+          "unit": "cm",
+          "value": 216,
+          "why": "height candidate: the lower half read as 216 (match 0.617025)"
+        },
+        {
+          "confidence": 0.611877,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.611877)"
+        },
+        {
+          "confidence": 0.608024,
+          "rawText": "219",
+          "unit": "cm",
+          "value": 219,
+          "why": "height candidate: the lower half read as 219 (match 0.608024)"
+        },
+        {
+          "confidence": 0.561191,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.561191)"
+        },
+        {
+          "confidence": 0.107305,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.107305)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.596987,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-af8cd95252",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 100 cm over height 210 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 41.955836 per cent), split by a bar at row 431; read \"100\" (match 0.596987, 6.333333 px tall) over \"210\" (match 0.653905, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "100/210",
+      "textBox": {
+        "x0": 439,
+        "x1": 465,
+        "y0": 418,
+        "y1": 444
+      },
+      "unit": "cm",
+      "value": 100,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.275341,
+          "rawText": "61",
+          "unit": "cm",
+          "value": 61,
+          "why": "width candidate: the upper half read as 61 (match 0.275341)"
+        },
+        {
+          "confidence": 0.258395,
+          "rawText": "64",
+          "unit": "cm",
+          "value": 64,
+          "why": "width candidate: the upper half read as 64 (match 0.258395)"
+        },
+        {
+          "confidence": 0.256481,
+          "rawText": "461",
+          "unit": "cm",
+          "value": 461,
+          "why": "width candidate: the upper half read as 461 (match 0.256481)"
+        },
+        {
+          "confidence": 0.25565,
+          "rawText": "65",
+          "unit": "cm",
+          "value": 65,
+          "why": "width candidate: the upper half read as 65 (match 0.25565)"
+        },
+        {
+          "confidence": 0.24798,
+          "rawText": "81",
+          "unit": "cm",
+          "value": 81,
+          "why": "width candidate: the upper half read as 81 (match 0.24798)"
+        },
+        {
+          "confidence": 0.239759,
+          "rawText": "161",
+          "unit": "cm",
+          "value": 161,
+          "why": "width candidate: the upper half read as 161 (match 0.239759)"
+        },
+        {
+          "confidence": 0.262354,
+          "rawText": "77",
+          "unit": "cm",
+          "value": 77,
+          "why": "height candidate: the lower half read as 77 (match 0.262354)"
+        },
+        {
+          "confidence": 0.246011,
+          "rawText": "127",
+          "unit": "cm",
+          "value": 127,
+          "why": "height candidate: the lower half read as 127 (match 0.246011)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-75b4c9af9f"
+        ],
+        "score": 0.284482,
+        "why": "55.810379 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.157412,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+      "id": "metric-callout-ring-b21e934abd",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 137.27521,
+          "y": 196
+        },
+        "b": {
+          "x": 137.27521,
+          "y": 203
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 61 cm over height 77 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-75b4c9af9f"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (66.666667 per cent of its circumference inked, interior 24.290221 per cent), split by a bar at row 218; read \"061\" (match 0.275341, 8.333333 px tall) over \"077\" (match 0.272068, 6 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "61/77",
+      "textBox": {
+        "x0": 70,
+        "x1": 96,
+        "y0": 203,
+        "y1": 229
+      },
+      "unit": "cm",
+      "value": 61,
+      "variantByteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.643731,
+          "rawText": "105",
+          "unit": "cm",
+          "value": 105,
+          "why": "width candidate: the upper half read as 105 (match 0.643731)"
+        },
+        {
+          "confidence": 0.611393,
+          "rawText": "109",
+          "unit": "cm",
+          "value": 109,
+          "why": "width candidate: the upper half read as 109 (match 0.611393)"
+        },
+        {
+          "confidence": 0.605172,
+          "rawText": "106",
+          "unit": "cm",
+          "value": 106,
+          "why": "width candidate: the upper half read as 106 (match 0.605172)"
+        },
+        {
+          "confidence": 0.599909,
+          "rawText": "165",
+          "unit": "cm",
+          "value": 165,
+          "why": "width candidate: the upper half read as 165 (match 0.599909)"
+        },
+        {
+          "confidence": 0.595002,
+          "rawText": "405",
+          "unit": "cm",
+          "value": 405,
+          "why": "width candidate: the upper half read as 405 (match 0.595002)"
+        },
+        {
+          "confidence": 0.593704,
+          "rawText": "195",
+          "unit": "cm",
+          "value": 195,
+          "why": "width candidate: the upper half read as 195 (match 0.593704)"
+        },
+        {
+          "confidence": 0.678919,
+          "rawText": "210",
+          "unit": "cm",
+          "value": 210,
+          "why": "height candidate: the lower half read as 210 (match 0.678919)"
+        },
+        {
+          "confidence": 0.642301,
+          "rawText": "216",
+          "unit": "cm",
+          "value": 216,
+          "why": "height candidate: the lower half read as 216 (match 0.642301)"
+        },
+        {
+          "confidence": 0.631463,
+          "rawText": "219",
+          "unit": "cm",
+          "value": 219,
+          "why": "height candidate: the lower half read as 219 (match 0.631463)"
+        },
+        {
+          "confidence": 0.578073,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.578073)"
+        },
+        {
+          "confidence": 0.561027,
+          "rawText": "270",
+          "unit": "cm",
+          "value": 270,
+          "why": "height candidate: the lower half read as 270 (match 0.561027)"
+        },
+        {
+          "confidence": 0.112096,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.112096)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.643731,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-b3de3b099a",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 105 cm over height 210 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 40.063091 per cent), split by a bar at row 757; read \"105\" (match 0.643731, 6 px tall) over \"210\" (match 0.678919, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "105/210",
+      "textBox": {
+        "x0": 223,
+        "x1": 249,
+        "y0": 744,
+        "y1": 770
+      },
+      "unit": "cm",
+      "value": 105,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.346088,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.346088)"
+        },
+        {
+          "confidence": 0.328967,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.328967)"
+        },
+        {
+          "confidence": 0.325653,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.325653)"
+        },
+        {
+          "confidence": 0.323544,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.323544)"
+        },
+        {
+          "confidence": 0.318333,
+          "rawText": "405",
+          "unit": "cm",
+          "value": 405,
+          "why": "width candidate: the upper half read as 405 (match 0.318333)"
+        },
+        {
+          "confidence": 0.315647,
+          "rawText": "460",
+          "unit": "cm",
+          "value": 460,
+          "why": "width candidate: the upper half read as 460 (match 0.315647)"
+        },
+        {
+          "confidence": 0.362234,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.362234)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-19aa0aa31c"
+        ],
+        "score": 0.1,
+        "why": "83.001019 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.207653,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-b6da4e1e66",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 100.998981,
+          "y": 252
+        },
+        "b": {
+          "x": 100.998981,
+          "y": 304
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 400 cm over height 400 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-19aa0aa31c"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (68.75 per cent of its circumference inked, interior 16.976127 per cent), split by a bar at row 257; read \"400\" (match 0.346088, 7 px tall) over \"400\" (match 0.362234, 7 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "400/400",
+      "textBox": {
+        "x0": 170,
+        "x1": 198,
+        "y0": 243,
+        "y1": 271
+      },
+      "unit": "cm",
+      "value": 400,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.470002,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.470002)"
+        },
+        {
+          "confidence": 0.469718,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.469718)"
+        },
+        {
+          "confidence": 0.461838,
+          "rawText": "408",
+          "unit": "cm",
+          "value": 408,
+          "why": "width candidate: the upper half read as 408 (match 0.461838)"
+        },
+        {
+          "confidence": 0.447803,
+          "rawText": "486",
+          "unit": "cm",
+          "value": 486,
+          "why": "width candidate: the upper half read as 486 (match 0.447803)"
+        },
+        {
+          "confidence": 0.443013,
+          "rawText": "446",
+          "unit": "cm",
+          "value": 446,
+          "why": "width candidate: the upper half read as 446 (match 0.443013)"
+        },
+        {
+          "confidence": 0.431853,
+          "rawText": "476",
+          "unit": "cm",
+          "value": 476,
+          "why": "width candidate: the upper half read as 476 (match 0.431853)"
+        },
+        {
+          "confidence": 0.305981,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.305981)"
+        },
+        {
+          "confidence": 0.264692,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "height candidate: the lower half read as 60 (match 0.264692)"
+        },
+        {
+          "confidence": 0.247337,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.247337)"
+        },
+        {
+          "confidence": 0.243777,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.243777)"
+        },
+        {
+          "confidence": 0.242703,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "height candidate: the lower half read as 46 (match 0.242703)"
+        },
+        {
+          "confidence": 0.179193,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "height candidate: the lower half read as 110 (match 0.179193)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.183589,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-b84ecaf3c0",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 406 cm over height 400 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (87.5 per cent of its circumference inked, interior 43.624161 per cent), split by a bar at row 580; read \"406\" (match 0.470002, 3.666667 px tall) over \"400\" (match 0.328529, 5.666667 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "406/400",
+      "textBox": {
+        "x0": 65,
+        "x1": 85,
+        "y0": 571,
+        "y1": 591
+      },
+      "unit": "cm",
+      "value": 406,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.600155,
+          "rawText": "470",
+          "unit": "cm",
+          "value": 470,
+          "why": "width candidate: the upper half read as 470 (match 0.600155)"
+        },
+        {
+          "confidence": 0.565994,
+          "rawText": "479",
+          "unit": "cm",
+          "value": 479,
+          "why": "width candidate: the upper half read as 479 (match 0.565994)"
+        },
+        {
+          "confidence": 0.557796,
+          "rawText": "170",
+          "unit": "cm",
+          "value": 170,
+          "why": "width candidate: the upper half read as 170 (match 0.557796)"
+        },
+        {
+          "confidence": 0.555292,
+          "rawText": "420",
+          "unit": "cm",
+          "value": 420,
+          "why": "width candidate: the upper half read as 420 (match 0.555292)"
+        },
+        {
+          "confidence": 0.554246,
+          "rawText": "478",
+          "unit": "cm",
+          "value": 478,
+          "why": "width candidate: the upper half read as 478 (match 0.554246)"
+        },
+        {
+          "confidence": 0.542116,
+          "rawText": "474",
+          "unit": "cm",
+          "value": 474,
+          "why": "width candidate: the upper half read as 474 (match 0.542116)"
+        },
+        {
+          "confidence": 0.563008,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.563008)"
+        },
+        {
+          "confidence": 0.55103,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.55103)"
+        },
+        {
+          "confidence": 0.545555,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.545555)"
+        },
+        {
+          "confidence": 0.543166,
+          "rawText": "239",
+          "unit": "cm",
+          "value": 239,
+          "why": "height candidate: the lower half read as 239 (match 0.543166)"
+        },
+        {
+          "confidence": 0.51177,
+          "rawText": "235",
+          "unit": "cm",
+          "value": 235,
+          "why": "height candidate: the lower half read as 235 (match 0.51177)"
+        },
+        {
+          "confidence": 0.476159,
+          "rawText": "330",
+          "unit": "cm",
+          "value": 330,
+          "why": "height candidate: the lower half read as 330 (match 0.476159)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.563008,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-bd21082add",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 470 cm over height 230 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 41.009464 per cent), split by a bar at row 240; read \"470\" (match 0.600155, 6.333333 px tall) over \"230\" (match 0.563008, 6 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "470/230",
+      "textBox": {
+        "x0": 217,
+        "x1": 243,
+        "y0": 227,
+        "y1": 253
+      },
+      "unit": "cm",
+      "value": 470,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.651911,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.651911)"
+        },
+        {
+          "confidence": 0.637713,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.637713)"
+        },
+        {
+          "confidence": 0.602813,
+          "rawText": "130",
+          "unit": "cm",
+          "value": 130,
+          "why": "width candidate: the upper half read as 130 (match 0.602813)"
+        },
+        {
+          "confidence": 0.572555,
+          "rawText": "149",
+          "unit": "cm",
+          "value": 149,
+          "why": "width candidate: the upper half read as 149 (match 0.572555)"
+        },
+        {
+          "confidence": 0.570338,
+          "rawText": "440",
+          "unit": "cm",
+          "value": 440,
+          "why": "width candidate: the upper half read as 440 (match 0.570338)"
+        },
+        {
+          "confidence": 0.570228,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "width candidate: the upper half read as 146 (match 0.570228)"
+        },
+        {
+          "confidence": 0.69179,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.69179)"
+        },
+        {
+          "confidence": 0.670601,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.670601)"
+        },
+        {
+          "confidence": 0.664052,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "height candidate: the lower half read as 110 (match 0.664052)"
+        },
+        {
+          "confidence": 0.63715,
+          "rawText": "149",
+          "unit": "cm",
+          "value": 149,
+          "why": "height candidate: the lower half read as 149 (match 0.63715)"
+        },
+        {
+          "confidence": 0.63021,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "height candidate: the lower half read as 146 (match 0.63021)"
+        },
+        {
+          "confidence": 0.499198,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "height candidate: the lower half read as 107 (match 0.499198)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.651911,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-c7ca9263ac",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 140 cm over height 140 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (97.916667 per cent of its circumference inked, interior 39.116719 per cent), split by a bar at row 489; read \"140\" (match 0.651911, 6.333333 px tall) over \"140\" (match 0.69179, 6 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "140/140",
+      "textBox": {
+        "x0": 24,
+        "x1": 50,
+        "y0": 476,
+        "y1": 502
+      },
+      "unit": "cm",
+      "value": 140,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.358933,
+          "rawText": "50",
+          "unit": "cm",
+          "value": 50,
+          "why": "width candidate: the upper half read as 50 (match 0.358933)"
+        },
+        {
+          "confidence": 0.358138,
+          "rawText": "55",
+          "unit": "cm",
+          "value": 55,
+          "why": "width candidate: the upper half read as 55 (match 0.358138)"
+        },
+        {
+          "confidence": 0.357926,
+          "rawText": "56",
+          "unit": "cm",
+          "value": 56,
+          "why": "width candidate: the upper half read as 56 (match 0.357926)"
+        },
+        {
+          "confidence": 0.301633,
+          "rawText": "60",
+          "unit": "cm",
+          "value": 60,
+          "why": "width candidate: the upper half read as 60 (match 0.301633)"
+        },
+        {
+          "confidence": 0.278119,
+          "rawText": "80",
+          "unit": "cm",
+          "value": 80,
+          "why": "width candidate: the upper half read as 80 (match 0.278119)"
+        },
+        {
+          "confidence": 0.111454,
+          "rawText": "77",
+          "unit": "cm",
+          "value": 77,
+          "why": "height candidate: the lower half read as 77 (match 0.111454)"
+        },
+        {
+          "confidence": 0.107139,
+          "rawText": "307",
+          "unit": "cm",
+          "value": 307,
+          "why": "height candidate: the lower half read as 307 (match 0.107139)"
+        },
+        {
+          "confidence": 0.104061,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "height candidate: the lower half read as 107 (match 0.104061)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-371b8d98bf"
+        ],
+        "score": 0.407833,
+        "why": "53.295005 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.066872,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+      "id": "metric-callout-ring-cd86064f86",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 36.873171,
+          "y": 261
+        },
+        "b": {
+          "x": 36.873171,
+          "y": 270
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 50 cm over height 77 cm, from a 30 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-371b8d98bf"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 30 px ring on the ink (77.083333 per cent of its circumference inked, interior 21.088435 per cent), split by a bar at row 218; read \"50\" (match 0.358933, 7.666667 px tall) over \"077\" (match 0.143608, 6 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "50/77",
+      "textBox": {
+        "x0": 47,
+        "x1": 77,
+        "y0": 199,
+        "y1": 229
+      },
+      "unit": "cm",
+      "value": 50,
+      "variantByteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.257629,
+          "rawText": "446",
+          "unit": "cm",
+          "value": 446,
+          "why": "width candidate: the upper half read as 446 (match 0.257629)"
+        },
+        {
+          "confidence": 0.247421,
+          "rawText": "440",
+          "unit": "cm",
+          "value": 440,
+          "why": "width candidate: the upper half read as 440 (match 0.247421)"
+        },
+        {
+          "confidence": 0.241307,
+          "rawText": "346",
+          "unit": "cm",
+          "value": 346,
+          "why": "width candidate: the upper half read as 346 (match 0.241307)"
+        },
+        {
+          "confidence": 0.237723,
+          "rawText": "246",
+          "unit": "cm",
+          "value": 246,
+          "why": "width candidate: the upper half read as 246 (match 0.237723)"
+        },
+        {
+          "confidence": 0.232301,
+          "rawText": "416",
+          "unit": "cm",
+          "value": 416,
+          "why": "width candidate: the upper half read as 416 (match 0.232301)"
+        },
+        {
+          "confidence": 0.224307,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.224307)"
+        },
+        {
+          "confidence": 0.21348,
+          "rawText": "46",
+          "unit": "cm",
+          "value": 46,
+          "why": "height candidate: the lower half read as 46 (match 0.21348)"
+        },
+        {
+          "confidence": 0.210074,
+          "rawText": "48",
+          "unit": "cm",
+          "value": 48,
+          "why": "height candidate: the lower half read as 48 (match 0.210074)"
+        },
+        {
+          "confidence": 0.206891,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.206891)"
+        },
+        {
+          "confidence": 0.204988,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "height candidate: the lower half read as 146 (match 0.204988)"
+        },
+        {
+          "confidence": 0.178278,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.178278)"
+        },
+        {
+          "confidence": 0.128719,
+          "rawText": "90",
+          "unit": "cm",
+          "value": 90,
+          "why": "height candidate: the lower half read as 90 (match 0.128719)"
+        }
+      ],
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacja-12541df47f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.128088,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-sytuacj-7e88f36a4d",
+      "id": "metric-callout-ring-ce16675d27",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 446 cm over height 46 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (91.666667 per cent of its circumference inked, interior 48.322148 per cent), split by a bar at row 623; read \"446\" (match 0.257629, 3 px tall) over \"046\" (match 0.21348, 3 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "446/46",
+      "textBox": {
+        "x0": 516,
+        "x1": 536,
+        "y0": 613,
+        "y1": 633
+      },
+      "unit": "cm",
+      "value": 446,
+      "variantByteHash": "331087c2c5f258eb55fd99bc462feda6649e8a7e80e843839ca9c58c8bdb0bf2"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.535875,
+          "rawText": "234",
+          "unit": "cm",
+          "value": 234,
+          "why": "width candidate: the upper half read as 234 (match 0.535875)"
+        },
+        {
+          "confidence": 0.532891,
+          "rawText": "294",
+          "unit": "cm",
+          "value": 294,
+          "why": "width candidate: the upper half read as 294 (match 0.532891)"
+        },
+        {
+          "confidence": 0.526637,
+          "rawText": "231",
+          "unit": "cm",
+          "value": 231,
+          "why": "width candidate: the upper half read as 231 (match 0.526637)"
+        },
+        {
+          "confidence": 0.510719,
+          "rawText": "274",
+          "unit": "cm",
+          "value": 274,
+          "why": "width candidate: the upper half read as 274 (match 0.510719)"
+        },
+        {
+          "confidence": 0.490815,
+          "rawText": "291",
+          "unit": "cm",
+          "value": 291,
+          "why": "width candidate: the upper half read as 291 (match 0.490815)"
+        },
+        {
+          "confidence": 0.485161,
+          "rawText": "254",
+          "unit": "cm",
+          "value": 254,
+          "why": "width candidate: the upper half read as 254 (match 0.485161)"
+        },
+        {
+          "confidence": 0.53113,
+          "rawText": "303",
+          "unit": "cm",
+          "value": 303,
+          "why": "height candidate: the lower half read as 303 (match 0.53113)"
+        },
+        {
+          "confidence": 0.530163,
+          "rawText": "309",
+          "unit": "cm",
+          "value": 309,
+          "why": "height candidate: the lower half read as 309 (match 0.530163)"
+        },
+        {
+          "confidence": 0.516249,
+          "rawText": "302",
+          "unit": "cm",
+          "value": 302,
+          "why": "height candidate: the lower half read as 302 (match 0.516249)"
+        },
+        {
+          "confidence": 0.515205,
+          "rawText": "307",
+          "unit": "cm",
+          "value": 307,
+          "why": "height candidate: the lower half read as 307 (match 0.515205)"
+        },
+        {
+          "confidence": 0.486083,
+          "rawText": "363",
+          "unit": "cm",
+          "value": 363,
+          "why": "height candidate: the lower half read as 363 (match 0.486083)"
+        },
+        {
+          "confidence": 0.471637,
+          "rawText": "393",
+          "unit": "cm",
+          "value": 393,
+          "why": "height candidate: the lower half read as 393 (match 0.471637)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.318678,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-ce328e2939",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 234 cm over height 303 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (97.916667 per cent of its circumference inked, interior 43.533123 per cent), split by a bar at row 176; read \"234\" (match 0.535875, 6 px tall) over \"303\" (match 0.53113, 6.333333 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "234/303",
+      "textBox": {
+        "x0": 252,
+        "x1": 278,
+        "y0": 163,
+        "y1": 189
+      },
+      "unit": "cm",
+      "value": 234,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.416872,
+          "rawText": "62",
+          "unit": "cm",
+          "value": 62,
+          "why": "width candidate: the upper half read as 62 (match 0.416872)"
+        },
+        {
+          "confidence": 0.387164,
+          "rawText": "662",
+          "unit": "cm",
+          "value": 662,
+          "why": "width candidate: the upper half read as 662 (match 0.387164)"
+        },
+        {
+          "confidence": 0.336428,
+          "rawText": "65",
+          "unit": "cm",
+          "value": 65,
+          "why": "width candidate: the upper half read as 65 (match 0.336428)"
+        },
+        {
+          "confidence": 0.313958,
+          "rawText": "63",
+          "unit": "cm",
+          "value": 63,
+          "why": "width candidate: the upper half read as 63 (match 0.313958)"
+        },
+        {
+          "confidence": 0.299368,
+          "rawText": "82",
+          "unit": "cm",
+          "value": 82,
+          "why": "width candidate: the upper half read as 82 (match 0.299368)"
+        },
+        {
+          "confidence": 0.297454,
+          "rawText": "66",
+          "unit": "cm",
+          "value": 66,
+          "why": "width candidate: the upper half read as 66 (match 0.297454)"
+        },
+        {
+          "confidence": 0.318969,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.318969)"
+        },
+        {
+          "confidence": 0.272053,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "height candidate: the lower half read as 300 (match 0.272053)"
+        },
+        {
+          "confidence": 0.264453,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.264453)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.191381,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-ce703d9234",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 62 cm over height 400 cm, from a 28 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 28 px ring on the ink (66.666667 per cent of its circumference inked, interior 51.724138 per cent), split by a bar at row 508; read \"062\" (match 0.416872, 10.666667 px tall) over \"400\" (match 0.318969, 7 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "62/400",
+      "textBox": {
+        "x0": 271,
+        "x1": 299,
+        "y0": 492,
+        "y1": 520
+      },
+      "unit": "cm",
+      "value": 62,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.619949,
+          "rawText": "234",
+          "unit": "cm",
+          "value": 234,
+          "why": "width candidate: the upper half read as 234 (match 0.619949)"
+        },
+        {
+          "confidence": 0.59705,
+          "rawText": "294",
+          "unit": "cm",
+          "value": 294,
+          "why": "width candidate: the upper half read as 294 (match 0.59705)"
+        },
+        {
+          "confidence": 0.594298,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "width candidate: the upper half read as 230 (match 0.594298)"
+        },
+        {
+          "confidence": 0.592339,
+          "rawText": "231",
+          "unit": "cm",
+          "value": 231,
+          "why": "width candidate: the upper half read as 231 (match 0.592339)"
+        },
+        {
+          "confidence": 0.590824,
+          "rawText": "244",
+          "unit": "cm",
+          "value": 244,
+          "why": "width candidate: the upper half read as 244 (match 0.590824)"
+        },
+        {
+          "confidence": 0.453659,
+          "rawText": "194",
+          "unit": "cm",
+          "value": 194,
+          "why": "width candidate: the upper half read as 194 (match 0.453659)"
+        },
+        {
+          "confidence": 0.579142,
+          "rawText": "304",
+          "unit": "cm",
+          "value": 304,
+          "why": "height candidate: the lower half read as 304 (match 0.579142)"
+        },
+        {
+          "confidence": 0.562212,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.562212)"
+        },
+        {
+          "confidence": 0.559127,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "height candidate: the lower half read as 300 (match 0.559127)"
+        },
+        {
+          "confidence": 0.176756,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.176756)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.579142,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-cf0f88ab40",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 234 cm over height 304 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 42.586751 per cent), split by a bar at row 176; read \"234\" (match 0.619949, 6 px tall) over \"304\" (match 0.590684, 7 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "234/304",
+      "textBox": {
+        "x0": 113,
+        "x1": 139,
+        "y0": 163,
+        "y1": 189
+      },
+      "unit": "cm",
+      "value": 234,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.638034,
+          "rawText": "81",
+          "unit": "cm",
+          "value": 81,
+          "why": "width candidate: the upper half read as 81 (match 0.638034)"
+        },
+        {
+          "confidence": 0.622716,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "width candidate: the upper half read as 41 (match 0.622716)"
+        },
+        {
+          "confidence": 0.564665,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "width candidate: the upper half read as 111 (match 0.564665)"
+        },
+        {
+          "confidence": 0.581461,
+          "rawText": "71",
+          "unit": "cm",
+          "value": 71,
+          "why": "height candidate: the lower half read as 71 (match 0.581461)"
+        },
+        {
+          "confidence": 0.541916,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "height candidate: the lower half read as 41 (match 0.541916)"
+        }
+      ],
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-parteru-dc627e21ea",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-1e5d42ba07"
+        ],
+        "score": 0.245639,
+        "why": "72.418676 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.290731,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-pa-6eb2541c24",
+      "id": "metric-callout-ring-db59776072",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 209.904949,
+          "y": 299
+        },
+        "b": {
+          "x": 209.904949,
+          "y": 310
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 81 cm over height 71 cm, from a 32 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-1e5d42ba07"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 32 px ring on the ink (87.5 per cent of its circumference inked, interior 19.470699 per cent), with no bar found, split at its centre; read \"81\" (match 0.651413, 9 px tall) over \"71\" (match 0.688731, 9 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "81/71",
+      "textBox": {
+        "x0": 249,
+        "x1": 281,
+        "y0": 341,
+        "y1": 373
+      },
+      "unit": "cm",
+      "value": 81,
+      "variantByteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.215008,
+          "rawText": "70",
+          "unit": "cm",
+          "value": 70,
+          "why": "width candidate: the upper half read as 70 (match 0.215008)"
+        },
+        {
+          "confidence": 0.214742,
+          "rawText": "76",
+          "unit": "cm",
+          "value": 76,
+          "why": "width candidate: the upper half read as 76 (match 0.214742)"
+        },
+        {
+          "confidence": 0.205452,
+          "rawText": "75",
+          "unit": "cm",
+          "value": 75,
+          "why": "width candidate: the upper half read as 75 (match 0.205452)"
+        },
+        {
+          "confidence": 0.202474,
+          "rawText": "470",
+          "unit": "cm",
+          "value": 470,
+          "why": "width candidate: the upper half read as 470 (match 0.202474)"
+        },
+        {
+          "confidence": 0.19154,
+          "rawText": "456",
+          "unit": "cm",
+          "value": 456,
+          "why": "width candidate: the upper half read as 456 (match 0.19154)"
+        },
+        {
+          "confidence": 0.19024,
+          "rawText": "450",
+          "unit": "cm",
+          "value": 450,
+          "why": "width candidate: the upper half read as 450 (match 0.19024)"
+        },
+        {
+          "confidence": 0.38317,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.38317)"
+        }
+      ],
+      "assetId": "asset-rzut-aa1526220f",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.129005,
+      "frameId": "frame-asset-rzut-aa1526220f-863ec969ff",
+      "id": "metric-callout-ring-e5bd5494bb",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 70 cm over height 400 cm, from a 22 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 22 px ring on the ink (87.5 per cent of its circumference inked, interior 8.629442 per cent), split by a bar at row 543; read \"070\" (match 0.215008, 3.666667 px tall) over \"400\" (match 0.38317, 4 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "70/400",
+      "textBox": {
+        "x0": 300,
+        "x1": 322,
+        "y0": 532,
+        "y1": 554
+      },
+      "unit": "cm",
+      "value": 70,
+      "variantByteHash": "87ab5a71a0a47cbc0c17fcb43d17f524ffb5803430d03f46c71ef2a44c641593"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.620845,
+          "rawText": "234",
+          "unit": "cm",
+          "value": 234,
+          "why": "width candidate: the upper half read as 234 (match 0.620845)"
+        },
+        {
+          "confidence": 0.597406,
+          "rawText": "294",
+          "unit": "cm",
+          "value": 294,
+          "why": "width candidate: the upper half read as 294 (match 0.597406)"
+        },
+        {
+          "confidence": 0.594231,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "width candidate: the upper half read as 230 (match 0.594231)"
+        },
+        {
+          "confidence": 0.593722,
+          "rawText": "244",
+          "unit": "cm",
+          "value": 244,
+          "why": "width candidate: the upper half read as 244 (match 0.593722)"
+        },
+        {
+          "confidence": 0.593179,
+          "rawText": "231",
+          "unit": "cm",
+          "value": 231,
+          "why": "width candidate: the upper half read as 231 (match 0.593179)"
+        },
+        {
+          "confidence": 0.456154,
+          "rawText": "194",
+          "unit": "cm",
+          "value": 194,
+          "why": "width candidate: the upper half read as 194 (match 0.456154)"
+        },
+        {
+          "confidence": 0.580606,
+          "rawText": "304",
+          "unit": "cm",
+          "value": 304,
+          "why": "height candidate: the lower half read as 304 (match 0.580606)"
+        },
+        {
+          "confidence": 0.565022,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.565022)"
+        },
+        {
+          "confidence": 0.558752,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "height candidate: the lower half read as 300 (match 0.558752)"
+        },
+        {
+          "confidence": 0.177504,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.177504)"
+        }
+      ],
+      "assetId": "asset-rzut-117027f690",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-e34e95879c"
+        ],
+        "score": 0.43808,
+        "why": "43.829795 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.580606,
+      "frameId": "frame-asset-rzut-117027f690-fed2722c38",
+      "id": "metric-callout-ring-e90f122d42",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 100.998981,
+          "y": 212
+        },
+        "b": {
+          "x": 100.998981,
+          "y": 233
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 234 cm over height 304 cm, from a 26 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-e34e95879c"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (100 per cent of its circumference inked, interior 42.586751 per cent), split by a bar at row 176; read \"234\" (match 0.620845, 6 px tall) over \"304\" (match 0.592813, 7 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "234/304",
+      "textBox": {
+        "x0": 113,
+        "x1": 139,
+        "y0": 163,
+        "y1": 189
+      },
+      "unit": "cm",
+      "value": 234,
+      "variantByteHash": "06af9e9122737585719ebef85619199ae902d48614e02433bf253dc812438e46"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.58525,
+          "rawText": "300",
+          "unit": "cm",
+          "value": 300,
+          "why": "width candidate: the upper half read as 300 (match 0.58525)"
+        },
+        {
+          "confidence": 0.574916,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.574916)"
+        },
+        {
+          "confidence": 0.561329,
+          "rawText": "390",
+          "unit": "cm",
+          "value": 390,
+          "why": "width candidate: the upper half read as 390 (match 0.561329)"
+        },
+        {
+          "confidence": 0.55046,
+          "rawText": "360",
+          "unit": "cm",
+          "value": 360,
+          "why": "width candidate: the upper half read as 360 (match 0.55046)"
+        },
+        {
+          "confidence": 0.533789,
+          "rawText": "309",
+          "unit": "cm",
+          "value": 309,
+          "why": "width candidate: the upper half read as 309 (match 0.533789)"
+        },
+        {
+          "confidence": 0.526578,
+          "rawText": "306",
+          "unit": "cm",
+          "value": 306,
+          "why": "width candidate: the upper half read as 306 (match 0.526578)"
+        },
+        {
+          "confidence": 0.577426,
+          "rawText": "290",
+          "unit": "cm",
+          "value": 290,
+          "why": "height candidate: the lower half read as 290 (match 0.577426)"
+        },
+        {
+          "confidence": 0.569215,
+          "rawText": "240",
+          "unit": "cm",
+          "value": 240,
+          "why": "height candidate: the lower half read as 240 (match 0.569215)"
+        },
+        {
+          "confidence": 0.542672,
+          "rawText": "230",
+          "unit": "cm",
+          "value": 230,
+          "why": "height candidate: the lower half read as 230 (match 0.542672)"
+        },
+        {
+          "confidence": 0.53555,
+          "rawText": "200",
+          "unit": "cm",
+          "value": 200,
+          "why": "height candidate: the lower half read as 200 (match 0.53555)"
+        },
+        {
+          "confidence": 0.531124,
+          "rawText": "296",
+          "unit": "cm",
+          "value": 296,
+          "why": "height candidate: the lower half read as 296 (match 0.531124)"
+        },
+        {
+          "confidence": 0.519807,
+          "rawText": "299",
+          "unit": "cm",
+          "value": 299,
+          "why": "height candidate: the lower half read as 299 (match 0.519807)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.577426,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-ee40483e37",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 300 cm over height 290 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (93.75 per cent of its circumference inked, interior 52.050473 per cent), split by a bar at row 349.5; read \"300\" (match 0.58525, 6.666667 px tall) over \"290\" (match 0.577426, 6.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "300/290",
+      "textBox": {
+        "x0": 368,
+        "x1": 394,
+        "y0": 337,
+        "y1": 363
+      },
+      "unit": "cm",
+      "value": 300,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.523294,
+          "rawText": "234",
+          "unit": "cm",
+          "value": 234,
+          "why": "width candidate: the upper half read as 234 (match 0.523294)"
+        },
+        {
+          "confidence": 0.520274,
+          "rawText": "294",
+          "unit": "cm",
+          "value": 294,
+          "why": "width candidate: the upper half read as 294 (match 0.520274)"
+        },
+        {
+          "confidence": 0.513641,
+          "rawText": "231",
+          "unit": "cm",
+          "value": 231,
+          "why": "width candidate: the upper half read as 231 (match 0.513641)"
+        },
+        {
+          "confidence": 0.497797,
+          "rawText": "274",
+          "unit": "cm",
+          "value": 274,
+          "why": "width candidate: the upper half read as 274 (match 0.497797)"
+        },
+        {
+          "confidence": 0.466313,
+          "rawText": "237",
+          "unit": "cm",
+          "value": 237,
+          "why": "width candidate: the upper half read as 237 (match 0.466313)"
+        },
+        {
+          "confidence": 0.463381,
+          "rawText": "334",
+          "unit": "cm",
+          "value": 334,
+          "why": "width candidate: the upper half read as 334 (match 0.463381)"
+        },
+        {
+          "confidence": 0.533137,
+          "rawText": "303",
+          "unit": "cm",
+          "value": 303,
+          "why": "height candidate: the lower half read as 303 (match 0.533137)"
+        },
+        {
+          "confidence": 0.532917,
+          "rawText": "309",
+          "unit": "cm",
+          "value": 309,
+          "why": "height candidate: the lower half read as 309 (match 0.532917)"
+        },
+        {
+          "confidence": 0.51399,
+          "rawText": "304",
+          "unit": "cm",
+          "value": 304,
+          "why": "height candidate: the lower half read as 304 (match 0.51399)"
+        },
+        {
+          "confidence": 0.506008,
+          "rawText": "302",
+          "unit": "cm",
+          "value": 302,
+          "why": "height candidate: the lower half read as 302 (match 0.506008)"
+        },
+        {
+          "confidence": 0.487518,
+          "rawText": "363",
+          "unit": "cm",
+          "value": 363,
+          "why": "height candidate: the lower half read as 363 (match 0.487518)"
+        },
+        {
+          "confidence": 0.476553,
+          "rawText": "103",
+          "unit": "cm",
+          "value": 103,
+          "why": "height candidate: the lower half read as 103 (match 0.476553)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.313976,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-f053cd987f",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 234 cm over height 303 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (95.833333 per cent of its circumference inked, interior 43.533123 per cent), split by a bar at row 176; read \"234\" (match 0.523294, 6 px tall) over \"303\" (match 0.533137, 6.333333 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "234/303",
+      "textBox": {
+        "x0": 252,
+        "x1": 278,
+        "y0": 163,
+        "y1": 189
+      },
+      "unit": "cm",
+      "value": 234,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.418483,
+          "rawText": "41",
+          "unit": "cm",
+          "value": 41,
+          "why": "width candidate: the upper half read as 41 (match 0.418483)"
+        },
+        {
+          "confidence": 0.320471,
+          "rawText": "44",
+          "unit": "cm",
+          "value": 44,
+          "why": "width candidate: the upper half read as 44 (match 0.320471)"
+        },
+        {
+          "confidence": 0.301785,
+          "rawText": "401",
+          "unit": "cm",
+          "value": 401,
+          "why": "width candidate: the upper half read as 401 (match 0.301785)"
+        },
+        {
+          "confidence": 0.290993,
+          "rawText": "47",
+          "unit": "cm",
+          "value": 47,
+          "why": "width candidate: the upper half read as 47 (match 0.290993)"
+        },
+        {
+          "confidence": 0.270843,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "width candidate: the upper half read as 40 (match 0.270843)"
+        },
+        {
+          "confidence": 0.213113,
+          "rawText": "441",
+          "unit": "cm",
+          "value": 441,
+          "why": "width candidate: the upper half read as 441 (match 0.213113)"
+        },
+        {
+          "confidence": 0.218867,
+          "rawText": "148",
+          "unit": "cm",
+          "value": 148,
+          "why": "height candidate: the lower half read as 148 (match 0.218867)"
+        },
+        {
+          "confidence": 0.212664,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.212664)"
+        },
+        {
+          "confidence": 0.210379,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "height candidate: the lower half read as 146 (match 0.210379)"
+        },
+        {
+          "confidence": 0.20705,
+          "rawText": "48",
+          "unit": "cm",
+          "value": 48,
+          "why": "height candidate: the lower half read as 48 (match 0.20705)"
+        },
+        {
+          "confidence": 0.196231,
+          "rawText": "40",
+          "unit": "cm",
+          "value": 40,
+          "why": "height candidate: the lower half read as 40 (match 0.196231)"
+        },
+        {
+          "confidence": 0.158578,
+          "rawText": "198",
+          "unit": "cm",
+          "value": 198,
+          "why": "height candidate: the lower half read as 198 (match 0.158578)"
+        }
+      ],
+      "assetId": "asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-poddasza-f4ceeeec23",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-29c29c7c6b"
+        ],
+        "score": 0.73483,
+        "why": "15.910209 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.13132,
+      "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-rzut-po-5926d3fb6c",
+      "id": "metric-callout-ring-f0c4f929c3",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 188.089791,
+          "y": 238
+        },
+        "b": {
+          "x": 188.089791,
+          "y": 248
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 41 cm over height 148 cm, from a 20 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [
+        "obs-opening-interval-reveal-29c29c7c6b"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (72.916667 per cent of its circumference inked, interior 28.187919 per cent), split by a bar at row 247; read \"41\" (match 0.418483, 5.333333 px tall) over \"148\" (match 0.218867, 3.666667 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "41/148",
+      "textBox": {
+        "x0": 194,
+        "x1": 214,
+        "y0": 236,
+        "y1": 256
+      },
+      "unit": "cm",
+      "value": 41,
+      "variantByteHash": "daf775db8978912c9131602a710ab1d43881860b189d371d9fd12d7e4b0b116b"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.651759,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.651759)"
+        },
+        {
+          "confidence": 0.638898,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "width candidate: the upper half read as 100 (match 0.638898)"
+        },
+        {
+          "confidence": 0.60422,
+          "rawText": "130",
+          "unit": "cm",
+          "value": 130,
+          "why": "width candidate: the upper half read as 130 (match 0.60422)"
+        },
+        {
+          "confidence": 0.572496,
+          "rawText": "149",
+          "unit": "cm",
+          "value": 149,
+          "why": "width candidate: the upper half read as 149 (match 0.572496)"
+        },
+        {
+          "confidence": 0.571277,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "width candidate: the upper half read as 146 (match 0.571277)"
+        },
+        {
+          "confidence": 0.569763,
+          "rawText": "440",
+          "unit": "cm",
+          "value": 440,
+          "why": "width candidate: the upper half read as 440 (match 0.569763)"
+        },
+        {
+          "confidence": 0.691699,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.691699)"
+        },
+        {
+          "confidence": 0.669636,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.669636)"
+        },
+        {
+          "confidence": 0.66464,
+          "rawText": "110",
+          "unit": "cm",
+          "value": 110,
+          "why": "height candidate: the lower half read as 110 (match 0.66464)"
+        },
+        {
+          "confidence": 0.637803,
+          "rawText": "149",
+          "unit": "cm",
+          "value": 149,
+          "why": "height candidate: the lower half read as 149 (match 0.637803)"
+        },
+        {
+          "confidence": 0.630079,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "height candidate: the lower half read as 146 (match 0.630079)"
+        },
+        {
+          "confidence": 0.500286,
+          "rawText": "107",
+          "unit": "cm",
+          "value": 107,
+          "why": "height candidate: the lower half read as 107 (match 0.500286)"
+        }
+      ],
+      "assetId": "asset-rzut-19a11bc745",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.651759,
+      "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+      "id": "metric-callout-ring-f5c321c11a",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 140 cm over height 140 cm, from a 26 px ring callout",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (97.916667 per cent of its circumference inked, interior 39.432177 per cent), split by a bar at row 489; read \"140\" (match 0.651759, 6.333333 px tall) over \"140\" (match 0.691699, 6 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "140/140",
+      "textBox": {
+        "x0": 24,
+        "x1": 50,
+        "y0": 476,
+        "y1": 502
+      },
+      "unit": "cm",
+      "value": 140,
+      "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.572957,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "width candidate: the upper half read as 140 (match 0.572957)"
+        },
+        {
+          "confidence": 0.555317,
+          "rawText": "111",
+          "unit": "cm",
+          "value": 111,
+          "why": "width candidate: the upper half read as 111 (match 0.555317)"
+        },
+        {
+          "confidence": 0.55478,
+          "rawText": "146",
+          "unit": "cm",
+          "value": 146,
+          "why": "width candidate: the upper half read as 146 (match 0.55478)"
+        },
+        {
+          "confidence": 0.551833,
+          "rawText": "190",
+          "unit": "cm",
+          "value": 190,
+          "why": "width candidate: the upper half read as 190 (match 0.551833)"
+        },
+        {
+          "confidence": 0.548502,
+          "rawText": "141",
+          "unit": "cm",
+          "value": 141,
+          "why": "width candidate: the upper half read as 141 (match 0.548502)"
+        },
+        {
+          "confidence": 0.543992,
+          "rawText": "114",
+          "unit": "cm",
+          "value": 114,
+          "why": "width candidate: the upper half read as 114 (match 0.543992)"
+        },
+        {
+          "confidence": 0.60565,
+          "rawText": "174",
+          "unit": "cm",
+          "value": 174,
+          "why": "height candidate: the lower half read as 174 (match 0.60565)"
+        },
+        {
+          "confidence": 0.601233,
+          "rawText": "171",
+          "unit": "cm",
+          "value": 171,
+          "why": "height candidate: the lower half read as 171 (match 0.601233)"
+        },
+        {
+          "confidence": 0.600134,
+          "rawText": "175",
+          "unit": "cm",
+          "value": 175,
+          "why": "height candidate: the lower half read as 175 (match 0.600134)"
+        },
+        {
+          "confidence": 0.580879,
+          "rawText": "140",
+          "unit": "cm",
+          "value": 140,
+          "why": "height candidate: the lower half read as 140 (match 0.580879)"
+        },
+        {
+          "confidence": 0.569593,
+          "rawText": "114",
+          "unit": "cm",
+          "value": 114,
+          "why": "height candidate: the lower half read as 114 (match 0.569593)"
+        },
+        {
+          "confidence": 0.543032,
+          "rawText": "124",
+          "unit": "cm",
+          "value": 124,
+          "why": "height candidate: the lower half read as 124 (match 0.543032)"
+        }
+      ],
+      "assetId": "asset-projekt-dom-w-marcowkach-ge-09d7473020",
+      "association": {
+        "kind": "OPENING_SYMBOL",
+        "observationIds": [
+          "obs-opening-interval-reveal-327f102c3c"
+        ],
+        "score": 0.25999,
+        "why": "44.400619 px from an opening symbol on the same sheet"
+      },
+      "confidence": 0.286479,
+      "frameId": "frame-asset-projekt-dom-w-marcowkach-ge-09d7473020-20f3864e88",
+      "id": "metric-callout-ring-fa73feaf9c",
+      "kind": "OPENING_CALLOUT",
+      "measuredGeometry": {
+        "a": {
+          "x": 48.020861,
+          "y": 112
+        },
+        "b": {
+          "x": 48.020861,
+          "y": 120
+        },
+        "type": "SEGMENT"
+      },
+      "note": "width 140 cm over height 174 cm, from a 20 px ring callout",
+      "observationIds": [
+        "obs-opening-interval-reveal-327f102c3c"
+      ],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 20 px ring on the ink (79.166667 per cent of its circumference inked, interior 16.778523 per cent), with no bar found, split at its centre; read \"140\" (match 0.572957, 4.666667 px tall) over \"174\" (match 0.60565, 4.666667 px tall)",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "140/174",
+      "textBox": {
+        "x0": 76,
+        "x1": 96,
+        "y0": 133,
+        "y1": 153
+      },
+      "unit": "cm",
+      "value": 140,
+      "variantByteHash": "a972912b09f2df51b83a9b2d3b7df5dbec83e8d64eb17bf1bfd3e1a6f81d7ece"
+    },
+    {
+      "alternatives": [
+        {
+          "confidence": 0.199305,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "width candidate: the upper half read as 400 (match 0.199305)"
+        },
+        {
+          "confidence": 0.179792,
+          "rawText": "480",
+          "unit": "cm",
+          "value": 480,
+          "why": "width candidate: the upper half read as 480 (match 0.179792)"
+        },
+        {
+          "confidence": 0.17702,
+          "rawText": "440",
+          "unit": "cm",
+          "value": 440,
+          "why": "width candidate: the upper half read as 440 (match 0.17702)"
+        },
+        {
+          "confidence": 0.175224,
+          "rawText": "406",
+          "unit": "cm",
+          "value": 406,
+          "why": "width candidate: the upper half read as 406 (match 0.175224)"
+        },
+        {
+          "confidence": 0.164122,
+          "rawText": "408",
+          "unit": "cm",
+          "value": 408,
+          "why": "width candidate: the upper half read as 408 (match 0.164122)"
+        },
+        {
+          "confidence": 0.222297,
+          "rawText": "400",
+          "unit": "cm",
+          "value": 400,
+          "why": "height candidate: the lower half read as 400 (match 0.222297)"
+        },
+        {
+          "confidence": 0.19347,
+          "rawText": "100",
+          "unit": "cm",
+          "value": 100,
+          "why": "height candidate: the lower half read as 100 (match 0.19347)"
+        }
+      ],
+      "assetId": "asset-rzut-f028d28aba",
+      "association": {
+        "kind": "UNATTACHED",
+        "observationIds": [],
+        "score": 0,
+        "why": "read on the sheet but not attached to any measurable feature"
+      },
+      "confidence": 0.119583,
+      "frameId": "frame-asset-rzut-f028d28aba-d7b403e37e",
+      "id": "metric-callout-ring-fc53a1d139",
+      "kind": "OPENING_CALLOUT",
+      "note": "width 400 cm over height 400 cm, from a 26 px ring callout (halves not read as one coherent pair)",
+      "observationIds": [],
+      "ocrTokenIds": [],
+      "origin": "READ",
+      "provenance": {
+        "detail": "a 26 px ring on the ink (66.666667 per cent of its circumference inked, interior 59.936909 per cent), split by a bar at row 209.5; read \"400\" (match 0.199305, 4 px tall) over \"400\" (match 0.222297, 5 px tall): not a coherent pair of numbers",
+        "extractor": "NUMERIC_OCR",
+        "name": "metrics.callout-ring@1.0.0"
+      },
+      "rawText": "400/400",
+      "textBox": {
+        "x0": 170,
+        "x1": 196,
+        "y0": 197,
+        "y1": 223
+      },
+      "unit": "cm",
+      "value": 400,
+      "variantByteHash": "a1b96ef3af12fc42fe4ec1e68c5cd384c125d2de1231938e2d07b8fbf19b9d7f"
     },
     {
       "alternatives": [
@@ -17163,7 +23014,7 @@
       "version": "1.0.0"
     }
   ],
-  "id": "metrics-no-reference-3737dc29d37cee61",
+  "id": "metrics-no-reference-5f12247b7585701f",
   "observationGraphHash": "dcb79e0a088c80897037a1c2107890cae6de9b512669a6929104cde862fdc89b",
   "observationGraphId": "obsgraph-src-m2fa281446a8ca-c0499d9df3-6534422ca0",
   "ocrTokens": [

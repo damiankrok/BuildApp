@@ -152,8 +152,8 @@ export type TerraceV2 = {
 /** A broad tone read for one body's walls on the registered renders. */
 export type MassToneV2 = { massId: string; tone: string; share: number; views: number; why: string }
 
-/** A broad tone read for one gable frame (its returns, and the verge that continues them). */
-export type FrameToneV2 = { side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; tone: string; share: number; why: string }
+/** A broad tone read for one return's outer face: the frame's finish where it stands in the outer plane. */
+export type ReturnToneV2 = { returnId: string; side: 'FRONT' | 'REAR' | 'WEST' | 'EAST'; storeyIndex: number; tone: string; share: number; why: string }
 
 /**
  * The facade composition as a graph: every member that makes up a frame, a
@@ -191,7 +191,7 @@ export type BuildingV2 = {
   verges: VergeV2[]
   terraces: TerraceV2[]
   massTones: MassToneV2[]
-  frameTones: FrameToneV2[]
+  returnTones: ReturnToneV2[]
   facadeGraph: FacadeGraph
   chimneys: Array<ChimneyReading & { featureId: string; provenance: ProvenanceStatus }>
   rooflights: Array<RooflightReading & { featureId: string; provenance: ProvenanceStatus; widthM: number; lengthM: number }>

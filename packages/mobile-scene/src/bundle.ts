@@ -96,6 +96,18 @@ export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNull
 }
 
 /**
+ * The building's secondary finishes: the materials of its ring walls whose
+ * facade role is SECONDARY (see `wallFinishes`). A mesh in one of them —
+ * a balcony band, a roof fascia, a frame member built in the same render —
+ * is drawn as the secondary body.
+ */
+export function secondaryFinishes(model: CanonicalBuildingModel, finishes: ReadonlyMap<string, NonNullable<ObjectFacts['finish']>> = wallFinishes(model)): Set<string> {
+  const out = new Set<string>()
+  for (const w of model.walls) if (finishes.get(w.id) === 'SECONDARY' && w.materialId) out.add(w.materialId)
+  return out
+}
+
+/**
  * The facts `semanticGroupOf` may read about one object: its own `kind`
  * field where its schema has one, read off the model and nothing else. A
  * door has no kind, so its assembly is read as one word — PANEL when every
@@ -133,6 +145,7 @@ export function flattenScene(scene: CompiledScene, model: CanonicalBuildingModel
   const materialName = new Map(model.materials.map((m) => [m.id, m.name]))
   const facts = new Map<string, ObjectFacts | undefined>()
   const finishes = wallFinishes(model)
+  const secondary = secondaryFinishes(model, finishes)
   const factsOf = (objectId: string): ObjectFacts | undefined => {
     if (!facts.has(objectId)) facts.set(objectId, objectFactsOf(model, objectId, finishes))
     return facts.get(objectId)
@@ -148,6 +161,7 @@ export function flattenScene(scene: CompiledScene, model: CanonicalBuildingModel
           materialId: mesh.materialId,
           materialName: mesh.materialId ? materialName.get(mesh.materialId) : undefined,
           objectFacts: factsOf(mesh.objectId),
+          ...(mesh.materialId && secondary.has(mesh.materialId) ? { materialRole: 'SECONDARY' as const } : {}),
         }),
       ),
     ),

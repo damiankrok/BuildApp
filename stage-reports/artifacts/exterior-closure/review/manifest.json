@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-26T10:05:54.036Z",
-  "commandLine": "npm run review:shots -- --candidates marcowki-auto-v2,marcowki-auto",
+  "generatedAt": "2026-09-26T11:35:13.357Z",
+  "commandLine": "npm run review:shots -- --candidates marcowki-auto-v2,marcowki-auto-v3 --style architectural --out stage-reports/artifacts/exterior-closure/review",
   "source": {
-    "commit": "31dced4",
-    "dirtyFiles": 77,
+    "commit": "ba71193",
+    "dirtyFiles": 105,
     "app": "built by this run from the working tree into .cache/review-shots/dist"
   },
   "window": {
@@ -24,16 +24,16 @@
       "framesWaited": 300
     },
     "ortho": {
-      "dy": -705,
-      "zoom": 1.43565,
+      "dy": -571,
+      "zoom": 1.34029,
       "fits": [
         {
           "id": "marcowki-auto-v2",
           "fit": 1.4357
         },
         {
-          "id": "marcowki-auto",
-          "fit": 1.5044
+          "id": "marcowki-auto-v3",
+          "fit": 1.3407
         }
       ],
       "margin": 1.14,
@@ -128,14 +128,14 @@
           "view": "front",
           "title": "Front elevation (orthographic)",
           "path": "marcowki-auto-v2/01-front.png",
-          "bytes": 33726,
+          "bytes": 32267,
           "width": 840,
-          "height": 838,
+          "height": 813,
           "distinctColours": 228,
-          "coverage": 0.2450676213206046,
+          "coverage": 0.2075982545539741,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset front (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset front (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
@@ -151,8 +151,8 @@
             "distance": 27.016,
             "azimuthDeg": 0,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.323
+            "zoom": 1.3403,
+            "halfHeight": 8.915
           }
         },
         {
@@ -160,14 +160,14 @@
           "view": "rear",
           "title": "Rear elevation (orthographic)",
           "path": "marcowki-auto-v2/02-rear.png",
-          "bytes": 34265,
+          "bytes": 32418,
           "width": 840,
-          "height": 838,
-          "distinctColours": 195,
-          "coverage": 0.23731105807478123,
+          "height": 813,
+          "distinctColours": 214,
+          "coverage": 0.201174368886546,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset rear (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset rear (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
@@ -183,8 +183,8 @@
             "distance": 27.016,
             "azimuthDeg": 180,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.323
+            "zoom": 1.3403,
+            "halfHeight": 8.915
           }
         },
         {
@@ -192,14 +192,14 @@
           "view": "left",
           "title": "Left elevation, from −x (orthographic)",
           "path": "marcowki-auto-v2/03-left.png",
-          "bytes": 20522,
+          "bytes": 20086,
           "width": 840,
-          "height": 838,
-          "distinctColours": 123,
-          "coverage": 0.4353051483123082,
+          "height": 813,
+          "distinctColours": 139,
+          "coverage": 0.3681133954196685,
           "blank": false,
-          "overBriefSize": true,
-          "camera": "preset left (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "overBriefSize": false,
+          "camera": "preset left (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
@@ -215,8 +215,8 @@
             "distance": 27.016,
             "azimuthDeg": 270,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.323
+            "zoom": 1.3403,
+            "halfHeight": 8.915
           }
         },
         {
@@ -224,14 +224,14 @@
           "view": "right",
           "title": "Right elevation, from +x (orthographic)",
           "path": "marcowki-auto-v2/04-right.png",
-          "bytes": 20306,
+          "bytes": 19632,
           "width": 840,
-          "height": 838,
-          "distinctColours": 115,
-          "coverage": 0.43605523354926695,
+          "height": 813,
+          "distinctColours": 126,
+          "coverage": 0.3688191881918819,
           "blank": false,
           "overBriefSize": false,
-          "camera": "preset right (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset right (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
@@ -247,8 +247,8 @@
             "distance": 27.016,
             "azimuthDeg": 90,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.323
+            "zoom": 1.3403,
+            "halfHeight": 8.915
           }
         },
         {
@@ -256,11 +256,11 @@
           "view": "front-34",
           "title": "Front-right three-quarter (perspective)",
           "path": "marcowki-auto-v2/05-front-34.png",
-          "bytes": 201865,
+          "bytes": 199358,
           "width": 840,
-          "height": 838,
-          "distinctColours": 1206,
-          "coverage": 0.2509688600977384,
+          "height": 813,
+          "distinctColours": 1150,
+          "coverage": 0.24351022081649387,
           "blank": false,
           "overBriefSize": true,
           "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028)",
@@ -287,20 +287,20 @@
           "view": "rear-34",
           "title": "Rear-left three-quarter (perspective, 05 orbited 180°)",
           "path": "marcowki-auto-v2/06-rear-34.png",
-          "bytes": 211410,
+          "bytes": 209911,
           "width": 840,
-          "height": 838,
-          "distinctColours": 1205,
-          "coverage": 0.22872201386521196,
+          "height": 813,
+          "distinctColours": 1125,
+          "coverage": 0.22239940256545424,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028), then left-drag Δx=-419 px, Δy=0 px on the 840×838 px canvas (180° azimuth, 0° polar)",
+          "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028), then left-drag Δx=-407 px, Δy=0 px on the 840×813 px canvas (180.22° azimuth, 0° polar)",
           "pose": {
             "projection": "perspective",
             "position": [
-              -14.219,
+              -14.307,
               17.453,
-              -30.047
+              -29.969
             ],
             "target": [
               5.928,
@@ -308,7 +308,7 @@
               -7.301
             ],
             "distance": 33.31,
-            "azimuthDeg": 221.53,
+            "azimuthDeg": 221.75,
             "elevationDeg": 24.19,
             "fovDeg": 42
           }
@@ -318,14 +318,14 @@
           "view": "top",
           "title": "Roof plan (orthographic, from above)",
           "path": "marcowki-auto-v2/07-top.png",
-          "bytes": 24073,
+          "bytes": 24193,
           "width": 840,
-          "height": 838,
-          "distinctColours": 167,
-          "coverage": 0.5452125241504716,
+          "height": 813,
+          "distinctColours": 172,
+          "coverage": 0.4608958589585896,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset top (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset top (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
@@ -341,8 +341,8 @@
             "distance": 27.016,
             "azimuthDeg": 0,
             "elevationDeg": 90,
-            "zoom": 1.4357,
-            "halfHeight": 8.323
+            "zoom": 1.3403,
+            "halfHeight": 8.915
           }
         },
         {
@@ -350,11 +350,11 @@
           "view": "roof-off",
           "title": "Front-right three-quarter, roofs hidden (perspective)",
           "path": "marcowki-auto-v2/08-roof-off.png",
-          "bytes": 206091,
+          "bytes": 203233,
           "width": 840,
-          "height": 838,
-          "distinctColours": 1278,
-          "coverage": 0.2431753608364587,
+          "height": 813,
+          "distinctColours": 1221,
+          "coverage": 0.23595589527323846,
           "blank": false,
           "overBriefSize": true,
           "camera": "\"Hide roofs\", then preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028)",
@@ -380,177 +380,177 @@
       "pageErrors": []
     },
     {
-      "id": "marcowki-auto",
-      "label": "Marcówki (auto)",
-      "modelId": "m-auto-marcowki",
-      "modelName": "Marcówki (auto)",
-      "triangles": 1404,
-      "meshCount": 66,
+      "id": "marcowki-auto-v3",
+      "label": "Marcówki (auto v3)",
+      "modelId": "m-auto-v3-marcowki",
+      "modelName": "Marcówki (auto v3)",
+      "triangles": 5110,
+      "meshCount": 162,
       "style": "architectural",
       "diagnostics": "geometry ok",
       "framing": {
         "center": [
-          6.444,
-          3.852,
-          -6.529
+          6.025,
+          3.805,
+          -8.354
         ],
-        "radius": 10.319
+        "radius": 11.103
       },
       "shots": [
         {
           "file": "01-front.png",
           "view": "front",
           "title": "Front elevation (orthographic)",
-          "path": "marcowki-auto/01-front.png",
-          "bytes": 26216,
+          "path": "marcowki-auto-v3/01-front.png",
+          "bytes": 27184,
           "width": 840,
-          "height": 838,
-          "distinctColours": 101,
-          "coverage": 0.24313416297306512,
+          "height": 813,
+          "distinctColours": 182,
+          "coverage": 0.1813140631406314,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset front (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset front (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
-              6.444,
-              3.852,
-              20.301
+              6.025,
+              3.805,
+              20.513
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 26.829,
+            "distance": 28.867,
             "azimuthDeg": 0,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.266
+            "zoom": 1.3403,
+            "halfHeight": 9.527
           }
         },
         {
           "file": "02-rear.png",
           "view": "rear",
           "title": "Rear elevation (orthographic)",
-          "path": "marcowki-auto/02-rear.png",
-          "bytes": 25738,
+          "path": "marcowki-auto-v3/02-rear.png",
+          "bytes": 28389,
           "width": 840,
-          "height": 838,
-          "distinctColours": 87,
-          "coverage": 0.2402361063757245,
+          "height": 813,
+          "distinctColours": 159,
+          "coverage": 0.17594008082937973,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset rear (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset rear (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
-              6.444,
-              3.852,
-              -33.358
+              6.025,
+              3.805,
+              -37.222
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 26.829,
+            "distance": 28.867,
             "azimuthDeg": 180,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.266
+            "zoom": 1.3403,
+            "halfHeight": 9.527
           }
         },
         {
           "file": "03-left.png",
           "view": "left",
           "title": "Left elevation, from −x (orthographic)",
-          "path": "marcowki-auto/03-left.png",
-          "bytes": 18476,
+          "path": "marcowki-auto-v3/03-left.png",
+          "bytes": 19886,
           "width": 840,
-          "height": 838,
-          "distinctColours": 86,
-          "coverage": 0.3831642800318218,
+          "height": 813,
+          "distinctColours": 134,
+          "coverage": 0.3237187371873719,
           "blank": false,
           "overBriefSize": false,
-          "camera": "preset left (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset left (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
-              -20.385,
-              3.852,
-              -6.529
+              -22.842,
+              3.805,
+              -8.354
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 26.829,
+            "distance": 28.867,
             "azimuthDeg": 270,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.266
+            "zoom": 1.3403,
+            "halfHeight": 9.527
           }
         },
         {
           "file": "04-right.png",
           "view": "right",
           "title": "Right elevation, from +x (orthographic)",
-          "path": "marcowki-auto/04-right.png",
-          "bytes": 18570,
+          "path": "marcowki-auto-v3/04-right.png",
+          "bytes": 20018,
           "width": 840,
-          "height": 838,
-          "distinctColours": 50,
-          "coverage": 0.38314155017615636,
+          "height": 813,
+          "distinctColours": 153,
+          "coverage": 0.32429420722778657,
           "blank": false,
           "overBriefSize": false,
-          "camera": "preset right (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset right (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
-              33.273,
-              3.852,
-              -6.529
+              34.892,
+              3.805,
+              -8.354
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 26.829,
+            "distance": 28.867,
             "azimuthDeg": 90,
             "elevationDeg": 0,
-            "zoom": 1.4357,
-            "halfHeight": 8.266
+            "zoom": 1.3403,
+            "halfHeight": 9.527
           }
         },
         {
           "file": "05-front-34.png",
           "view": "front-34",
           "title": "Front-right three-quarter (perspective)",
-          "path": "marcowki-auto/05-front-34.png",
-          "bytes": 184204,
+          "path": "marcowki-auto-v3/05-front-34.png",
+          "bytes": 191916,
           "width": 840,
-          "height": 838,
-          "distinctColours": 732,
-          "coverage": 0.22851318331628595,
+          "height": 813,
+          "distinctColours": 1081,
+          "coverage": 0.22220318631757746,
           "blank": false,
           "overBriefSize": true,
           "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028)",
           "pose": {
             "projection": "perspective",
             "position": [
-              26.452,
-              17.406,
-              16.061
+              27.553,
+              18.388,
+              15.951
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 33.08,
+            "distance": 35.593,
             "azimuthDeg": 41.53,
             "elevationDeg": 24.19,
             "fovDeg": 42
@@ -560,29 +560,29 @@
           "file": "06-rear-34.png",
           "view": "rear-34",
           "title": "Rear-left three-quarter (perspective, 05 orbited 180°)",
-          "path": "marcowki-auto/06-rear-34.png",
-          "bytes": 196260,
+          "path": "marcowki-auto-v3/06-rear-34.png",
+          "bytes": 207068,
           "width": 840,
-          "height": 838,
-          "distinctColours": 744,
-          "coverage": 0.2302761677463348,
+          "height": 813,
+          "distinctColours": 1106,
+          "coverage": 0.20137790663620922,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028), then left-drag Δx=-419 px, Δy=0 px on the 840×838 px canvas (180° azimuth, 0° polar)",
+          "camera": "preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028), then left-drag Δx=-407 px, Δy=0 px on the 840×813 px canvas (180.22° azimuth, 0° polar)",
           "pose": {
             "projection": "perspective",
             "position": [
-              -13.564,
-              17.406,
-              -29.118
+              -15.596,
+              18.388,
+              -32.576
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 33.08,
-            "azimuthDeg": 221.53,
+            "distance": 35.593,
+            "azimuthDeg": 221.75,
             "elevationDeg": 24.19,
             "fovDeg": 42
           }
@@ -591,60 +591,60 @@
           "file": "07-top.png",
           "view": "top",
           "title": "Roof plan (orthographic, from above)",
-          "path": "marcowki-auto/07-top.png",
-          "bytes": 21173,
+          "path": "marcowki-auto-v3/07-top.png",
+          "bytes": 23764,
           "width": 840,
-          "height": 838,
-          "distinctColours": 63,
-          "coverage": 0.5460961472894648,
+          "height": 813,
+          "distinctColours": 146,
+          "coverage": 0.4459263164060212,
           "blank": false,
           "overBriefSize": true,
-          "camera": "preset top (re-frames on the whole building), then wheel ΔY=-705 at the canvas centre (zoom ×1.4357)",
+          "camera": "preset top (re-frames on the whole building), then wheel ΔY=-571 at the canvas centre (zoom ×1.3403)",
           "pose": {
             "projection": "orthographic",
             "position": [
-              6.444,
-              30.681,
-              -6.529
+              6.025,
+              32.672,
+              -8.354
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 26.829,
+            "distance": 28.867,
             "azimuthDeg": 0,
             "elevationDeg": 90,
-            "zoom": 1.4357,
-            "halfHeight": 8.266
+            "zoom": 1.3403,
+            "halfHeight": 9.527
           }
         },
         {
           "file": "08-roof-off.png",
           "view": "roof-off",
           "title": "Front-right three-quarter, roofs hidden (perspective)",
-          "path": "marcowki-auto/08-roof-off.png",
-          "bytes": 203346,
+          "path": "marcowki-auto-v3/08-roof-off.png",
+          "bytes": 202354,
           "width": 840,
-          "height": 838,
-          "distinctColours": 768,
-          "coverage": 0.20311399022616206,
+          "height": 813,
+          "distinctColours": 1278,
+          "coverage": 0.20547648333626192,
           "blank": false,
           "overBriefSize": true,
           "camera": "\"Hide roofs\", then preset perspective (re-frames on the whole building), then wheel ΔY=+360 at the canvas centre (distance ×1.2028)",
           "pose": {
             "projection": "perspective",
             "position": [
-              26.452,
-              17.406,
-              16.061
+              27.553,
+              18.388,
+              15.951
             ],
             "target": [
-              6.444,
-              3.852,
-              -6.529
+              6.025,
+              3.805,
+              -8.354
             ],
-            "distance": 33.08,
+            "distance": 35.593,
             "azimuthDeg": 41.53,
             "elevationDeg": 24.19,
             "fovDeg": 42
@@ -658,98 +658,98 @@
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "front",
       "title": "Front elevation (orthographic)",
       "path": "compare/front.png",
-      "bytes": 45105,
+      "bytes": 45681,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "rear",
       "title": "Rear elevation (orthographic)",
       "path": "compare/rear.png",
-      "bytes": 41211,
+      "bytes": 43502,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "left",
       "title": "Left elevation, from −x (orthographic)",
       "path": "compare/left.png",
-      "bytes": 12926,
+      "bytes": 14540,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "right",
       "title": "Right elevation, from +x (orthographic)",
       "path": "compare/right.png",
-      "bytes": 12800,
+      "bytes": 14437,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "front-34",
       "title": "Front-right three-quarter (perspective)",
       "path": "compare/front-34.png",
-      "bytes": 478855,
+      "bytes": 492948,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "rear-34",
       "title": "Rear-left three-quarter (perspective, 05 orbited 180°)",
       "path": "compare/rear-34.png",
-      "bytes": 491490,
+      "bytes": 499826,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "top",
       "title": "Roof plan (orthographic, from above)",
       "path": "compare/top.png",
-      "bytes": 21591,
+      "bytes": 26101,
       "width": 1688,
-      "height": 886
+      "height": 861
     },
     {
       "ids": [
         "marcowki-auto-v2",
-        "marcowki-auto"
+        "marcowki-auto-v3"
       ],
       "view": "roof-off",
       "title": "Front-right three-quarter, roofs hidden (perspective)",
       "path": "compare/roof-off.png",
-      "bytes": 523202,
+      "bytes": 517247,
       "width": 1688,
-      "height": 886
+      "height": 861
     }
   ],
   "failed": [],

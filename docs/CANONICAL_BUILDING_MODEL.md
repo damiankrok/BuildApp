@@ -9,7 +9,7 @@ Three.js objects. Implemented in `packages/model`.
 ```json
 {
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.2.0",
+  "schemaVersion": "1.5.0",
   "id": "demo-house",
   "name": "BuildApp demo house",
   "units": { "length": "m", "angle": "deg" },
@@ -94,14 +94,16 @@ level moves what stands on it. Opening `sill` is above the wall base.
 | `Window` | `frameWidth`, `frameDepth`, `frameInset`, `glassThickness`, `divisions`, `mullions` (explicit fractions 0..1 of the width, overriding equal `divisions`) | `openingId` |
 | `Door` | `hingeSide` LEFT/RIGHT, `swing` IN/OUT, `openAngle` 0..180°, `leafThickness`, `frameWidth`, `frameDepth`, `frameInset`; `assembly?` `{ panels, mullionWidth }` — panels side by side across the opening, each a `fraction` of the width: `LEAF` (own `hinge`, `glazing` NONE/FULL), `GLAZED` (a fixed pane), `PANEL` (a fixed solid) | `openingId` |
 | `Slab` | `polygon`, `holes?` (plan polygons removed through the full thickness; a hole may share boundary with the outer polygon), `topOffset`, `thickness` | `levelId` |
-| `Roof` | `kind` GABLE/FLAT, `footprint` (plan rect), `eaveOffset`, `pitchDeg`, `ridgeAxis` X/Z, `overhang`, `thickness` | `levelId` |
+| `Roof` | `kind` GABLE/FLAT, `footprint` (plan rect), `eaveOffset`, `pitchDeg`, `ridgeAxis` X/Z, `overhang`, `thickness`; `edgeMembers?` — `verge` `{ width, depth, ends? [{ side, width, depth }] }` (a board along each rake of a gable end, its top flush with the slope, `width` measured vertically) and `fascia` `{ sides, topOffset, height, depth }` (a board along named eave or flat-roof edges), both compiled **with** the roof; `plateInset?` `{ minX, maxX, minZ, maxZ }` — how far the plate stops short of the footprint where it bears on walls | `levelId`, members' `materialId` |
 | `RoofOpening` | `kind` ROOFLIGHT/PENETRATION, `footprint` (plan rect inside the covered rectangle, on one slope), `cut?` VERTICAL (default) / NORMAL_TO_ROOF, `throughId` (a PENETRATION names the chimney whose footprint it carries) | `roofId`, `throughId` |
 | `Rooflight` | `frameWidth`, `glassThickness`, `materialId` — the unit filling a ROOFLIGHT opening | `roofOpeningId` |
 | `Balcony` | `kind` BALCONY/TERRACE/LOGGIA, `footprint`, `topOffset`, `thickness` | `levelId` |
-| `Railing` | `start`, `end`, `baseOffset`, `height`, `postSpacing`, `infill` GLASS/BARS/NONE | `levelId`, `hostId` |
+| `Railing` | `start`, `end`, `baseOffset`, `height`, `postSpacing`, `infill` GLASS/BARS/NONE; `path?` — a railing that turns: its plan polyline from `start` to `end` (the ends are the railing's extent; one post at every corner) | `levelId`, `hostId` |
+| `Terrace` | `polygon` (plan, simple), `topOffset`, `thickness`, `surface` PAVED/DECK/UNKNOWN, `edge` PLINTH/FLUSH — an exterior floor on the ground against a facade, not carried by the building | `levelId`, `hostWallIds`, `materialId` |
 | `Chimney` | `footprint`, `baseOffset`, `height` | `levelId` |
 | `Stair` | `footprint`; `kind` PLACEHOLDER (a footprint only) or FLIGHTS (`start` — the left end of the first riser line facing `direction` — `direction` PLUS_X/MINUS_X/PLUS_Z/MINUS_Z, `width`, `baseOffset`, `topOffset`, `waist`, `segments`) | `levelId`, `toLevelId` |
 | `StairSegment` | `FLIGHT { risers, going }`, `WINDER { risers, turn LEFT/RIGHT, angleDeg 90/180 }` (riser lines fan from a newel on the turn side), `LANDING { length, turn NONE/LEFT/RIGHT }` | in walking order |
+| `LinearSolid` | `start`, `end` (3-D centreline), `width`, `depth`, `roll?` — a closed member of rectangular section: a portal head, a fascia, a free board | `levelId`, `hostId`, `materialId` |
 | `SurfaceRegion` | `hostId` (a wall), `face` OUTER/INNER, `rect` `{ a0, a1, b0, b1 }` wall-local, `materialId` — a finish band with **no thickness of its own** | `hostId`, `materialId` |
 | `Material` | `name`, `color` `#rrggbb`, `opacity` | referenced by `materialId` |
 | `Constraint` | `kind` FIXED_VALUE/EQUAL/ALIGN/NOTE, `targetIds`, `property`, `value`, `tolerance` | any object |
@@ -191,11 +193,22 @@ break it.
 | `1.1.0` | BUILDAPP-00A | `wallJunctions` and `wallRings` collections; walls on the natural footprint |
 | `1.2.0` | BUILDAPP-01 | `roofOpenings` and `rooflights` collections; optional `Opening.head`, `Opening.leaves`, `Window.mullions` |
 | `1.3.0` | BUILDAPP-01A | `surfaceRegions` collection; `Stair` becomes PLACEHOLDER \| FLIGHTS; optional `Slab.holes`, `RoofOpening.cut`, `Door.assembly` |
+| `1.4.0` | BUILDAPP-03 | `linearSolids` collection |
+| `1.5.0` | BUILDAPP-03Y | `terraces` collection; optional `Roof.edgeMembers`, `Roof.plateInset`, `Railing.path` |
 
 Policy (`packages/model/src/migrate.ts`, run by `validateModel` and therefore
 by `loadModel`, `compileBuilding` and the editor's Load):
 
-- a `1.3.0` file loads as is;
+- a `1.5.0` file loads as is;
+- a `1.4.0` file is migrated explicitly: an empty `terraces` is added,
+  `schemaVersion` becomes `1.5.0`, a note is appended and the load reports
+  `SCHEMA_MIGRATED`. Its roofs carry no edge members or plate insets and its
+  railings no paths, so it compiles to exactly the geometry it compiled to
+  under 1.4.0 (tested: the frozen 1.1.0–1.4.0 demo files compile to the
+  current demo scene). Every older version walks the same chain one step at a
+  time, one warning and one note per step;
+- a `1.3.0` file gains the `linearSolids` collection (1.3.0 → 1.4.0) and then
+  `terraces`;
 - a `1.2.0` file is migrated **explicitly**: an empty `surfaceRegions` is
   added, `schemaVersion` becomes `1.3.0`, a note is appended and the load
   reports `SCHEMA_MIGRATED`. Every new field is optional and every old stair
@@ -231,10 +244,10 @@ validates and canonicalizes; `parseModel` throws with the issues listed.
 Round-trip tests live in `packages/model/test`, `packages/demo/test`,
 `packages/reference-marcowki/test` and `tests/architecture`. Two models are
 frozen as fixtures under `packages/model/test/fixtures`: the demo house at
-every schema version (`demo-house-1.0.0/1.1.0/1.2.0/1.3.0.json`) and the
-Marcówki reference at the current version (`marcowki-ge-1.3.0.json`,
-`docs/MARCOWKI_REFERENCE_MODEL.md`) with its BUILDAPP-01 freeze
-(`marcowki-ge-1.2.0.json`) kept as the migration baseline;
+every schema version (`demo-house-1.0.0/1.1.0/1.2.0/1.3.0/1.4.0/1.5.0.json`) and
+the Marcówki reference at the current version (`marcowki-ge-1.5.0.json`,
+`docs/MARCOWKI_REFERENCE_MODEL.md`) with its earlier freezes
+(`marcowki-ge-1.2.0.json`, `-1.3.0.json`, `-1.4.0.json`) kept as migration baselines;
 the model and geometry packages load and compile the reference from that
 file alone, without the reference package.
 

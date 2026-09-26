@@ -772,20 +772,6 @@
       }
     ]
   },
-  "frameTones": [
-    {
-      "share": 0.670229,
-      "side": "FRONT",
-      "tone": "LIGHT",
-      "why": "the median of 6362 samples of the front returns' outer faces on the front render is 93 % of the render's white: light"
-    },
-    {
-      "share": 0.938596,
-      "side": "REAR",
-      "tone": "LIGHT",
-      "why": "the median of 6270 samples of the rear returns' outer faces on the rear render is 93 % of the render's white: light"
-    }
-  ],
   "interior": [
     {
       "blocks": [
@@ -3818,6 +3804,72 @@
       "spanTo": 7.9,
       "storeyIndex": 1,
       "why": "2 return walls of 0.63 / 0.66 m stand in the 1.00 m zone on 5/5, 5/5 scan lines; the recess opens over 0.66..7.22"
+    }
+  ],
+  "returnTones": [
+    {
+      "returnId": "return-front-0-0",
+      "share": 1,
+      "side": "FRONT",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the front render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-front-0-1",
+      "share": 1,
+      "side": "FRONT",
+      "storeyIndex": 0,
+      "tone": "DARK",
+      "why": "the median of 1740 samples of its outer face on the front render is 34 % of the render's white: dark"
+    },
+    {
+      "returnId": "return-front-1-0",
+      "share": 0.900704,
+      "side": "FRONT",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1420 samples of its outer face on the front render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-front-1-1",
+      "share": 0.851573,
+      "side": "FRONT",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1462 samples of its outer face on the front render is 94 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-0-0",
+      "share": 1,
+      "side": "REAR",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-0-1",
+      "share": 1,
+      "side": "REAR",
+      "storeyIndex": 0,
+      "tone": "LIGHT",
+      "why": "the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-1-0",
+      "share": 0.901767,
+      "side": "REAR",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1415 samples of its outer face on the rear render is 93 % of the render's white: light"
+    },
+    {
+      "returnId": "return-rear-1-1",
+      "share": 0.821091,
+      "side": "REAR",
+      "storeyIndex": 1,
+      "tone": "LIGHT",
+      "why": "the median of 1375 samples of its outer face on the rear render is 93 % of the render's white: light"
     }
   ],
   "returns": [

@@ -31,6 +31,7 @@ import {
   relativeLuminance,
   semanticGroupOf,
   toneOfColor,
+  secondaryFinishes,
   wallFinishes,
   type SemanticGroup,
 } from '../src/index.js'
@@ -251,6 +252,18 @@ describe('applyToneHints', () => {
     expect(semanticGroupOf(base)).toBe('WALL_SECONDARY')
   })
 
+  it('draws a slab, a trim or a member built in the secondary finish as the secondary body', () => {
+    for (const part of ['BALCONY', 'ROOF_TRIM', 'LINEAR_SOLID'] as GeometryPart[]) {
+      const base = { objectKind: 'balcony' as SemanticKind, part }
+      expect(semanticGroupOf({ ...base, materialRole: 'SECONDARY' }), part).toBe('WALL_SECONDARY')
+      expect(semanticGroupOf(base), part).not.toBe('WALL_SECONDARY')
+    }
+    expect(semanticGroupOf({ objectKind: 'wall', part: 'WALL', objectFacts: { wallKind: 'EXTERIOR', finish: 'MEMBER' }, materialRole: 'SECONDARY' })).toBe('WALL_SECONDARY')
+    expect(semanticGroupOf({ objectKind: 'wall', part: 'WALL', objectFacts: { wallKind: 'EXTERIOR', finish: 'MEMBER' } })).toBe('FACADE_FRAME')
+    // a terrace is a terrace whatever it is paved with
+    expect(semanticGroupOf({ objectKind: 'balcony', part: 'BALCONY', objectFacts: { kind: 'TERRACE' }, materialRole: 'SECONDARY' })).toBe('TERRACE_SURFACE')
+  })
+
   it('reads a finish colour as a tone family by luminance', () => {
     expect(toneOfColor('#e8e4dc')).toBe('LIGHT')
     expect(toneOfColor('#8e8983')).toBe('MID')
@@ -293,6 +306,7 @@ describe('in a bundle', () => {
     const bundle = buildMobileSceneBundle(model, { scene })
     const materialName = new Map(model.materials.map((m) => [m.id, m.name]))
     const finishes = wallFinishes(model)
+    const secondary = secondaryFinishes(model, finishes)
     for (let i = 0; i < scene.meshes.length; i++) {
       const m = scene.meshes[i]
       const expected = semanticGroupOf({
@@ -301,6 +315,7 @@ describe('in a bundle', () => {
         materialId: m.materialId,
         materialName: m.materialId ? materialName.get(m.materialId) : undefined,
         objectFacts: objectFactsOf(model, m.objectId, finishes),
+        ...(m.materialId && secondary.has(m.materialId) ? { materialRole: 'SECONDARY' as const } : {}),
       })
       expect(bundle.scene.meshes[i].semanticGroup, `${m.objectId} ${m.part}`).toBe(expected)
       expect(bundle.styling.groups[bundle.scene.meshes[i].semanticGroup], `${m.objectId} ${m.part}`).toBeDefined()
@@ -329,7 +344,9 @@ describe('in a bundle', () => {
     expect(groupsOf(flat.id)).toEqual(new Set(['FLAT_ROOF']))
     expect(groupsOf(gable.id)).toEqual(new Set(['ROOF_MAIN']))
     expect(groupsOf(terrace.id)).toEqual(new Set(['TERRACE_SURFACE']))
-    expect(groupsOf(balcony.id)).toEqual(new Set(['BALCONY_SLAB']))
+    // a balcony slab reads as a balcony slab — unless it is built in the secondary body's render, when it reads as that body
+    const secondaryMaterials = secondaryFinishes(model)
+    expect(groupsOf(balcony.id)).toEqual(new Set([balcony.materialId && secondaryMaterials.has(balcony.materialId) ? 'WALL_SECONDARY' : 'BALCONY_SLAB']))
     expect(groupsOf(interior.id)).toEqual(new Set(['WALL_INTERIOR']))
     expect(groupsOf(exterior.id)).toEqual(new Set(['WALL_MAIN']))
     expect(groupsOf(glassRail.id)).toEqual(new Set(['RAILING', 'WINDOW_GLASS']))
@@ -339,7 +356,8 @@ describe('in a bundle', () => {
     // the garage, in a finish of its own, reads as a secondary body; nothing else does
     expect(groupsOf(secondary.id)).toEqual(new Set(['WALL_SECONDARY']))
     const secondaryWalls = new Set(bundle.scene.meshes.filter((m) => m.part === 'WALL' && m.semanticGroup === 'WALL_SECONDARY').map((m) => m.objectId))
-    expect([...secondaryWalls].sort()).toEqual(model.walls.filter((w) => finishes.get(w.id) === 'SECONDARY').map((w) => w.id).sort())
+    // exactly the ring walls in a secondary finish, and the frame members built in it
+    expect([...secondaryWalls].sort()).toEqual(model.walls.filter((w) => finishes.get(w.id) === 'SECONDARY' || (finishes.get(w.id) === 'MEMBER' && !!w.materialId && secondaryMaterials.has(w.materialId))).map((w) => w.id).sort())
   })
 
   it('reads the facade roles off the model: walls outside every ring are MEMBERS, ring walls PRIMARY or SECONDARY by finish', () => {

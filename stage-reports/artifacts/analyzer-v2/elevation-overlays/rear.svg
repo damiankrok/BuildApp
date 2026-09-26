@@ -42,16 +42,14 @@
 <text x="351.47" y="448.09" font-size="9" text-anchor="middle" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">window 1.00×2.10</text>
 <text x="323.72" y="580.04" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">sill 0.00</text>
 <text x="323.72" y="455.09" font-size="8" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">head 2.10</text>
-<rect x="544" y="397" width="389" height="30" fill="#a16207" fill-opacity="0.15" stroke="#a16207" stroke-width="1.5"><title>balcony-rear-1 (BALCONY): a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
-<text x="547" y="438" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony top 3.03</text>
+<rect x="539.33" y="394.96" width="393.28" height="32.04" fill="#a16207" fill-opacity="0.15" stroke="#a16207" stroke-width="1.5"><title>balcony-rear-1 (BALCONY): a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
+<text x="542.33" y="438" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">balcony top 3.06</text>
 <rect x="541.54" y="397" width="390.42" height="30" fill="none" stroke="#a16207" stroke-width="1" stroke-dasharray="4 2"><title>fascia-rear-66: a 0.50 m band of dark tone at 2.52..3.03 across 6 columns of the recess mouth (spread 0.00 m)</title></rect>
 <text x="928.96" y="394" font-size="8" text-anchor="end" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">fascia 2.52..3.03</text>
-<rect x="538.59" y="577.04" width="393.1" height="11.9" fill="#a16207" fill-opacity="0.15" stroke="#a16207" stroke-width="1.5"><title>terrace-rear-66 (TERRACE): the floor of the recess</title></rect>
-<text x="541.59" y="599.94" font-size="9" text-anchor="start" fill="#a16207" stroke="#ffffff" stroke-width="3" paint-order="stroke">terrace top 0.00</text>
-<rect x="546.98" y="342" width="383.05" height="55" fill="#4f46e5" fill-opacity="0.1" stroke="#4f46e5" stroke-width="1.2" stroke-dasharray="2 2"><title>railing-rear-1: a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth</title></rect>
-<text x="549.98" y="339" font-size="8" text-anchor="start" fill="#4f46e5" stroke="#ffffff" stroke-width="3" paint-order="stroke">railing 0.92</text>
+<rect x="540.81" y="339.96" width="390.31" height="55" fill="#4f46e5" fill-opacity="0.1" stroke="#4f46e5" stroke-width="1.2" stroke-dasharray="2 2"><title>railing-rear-1: a 0.92 m tall light band stands on the slab across 3 columns of the recess mouth; along the mouth; low end wall (return-rear-0-0), high end wall (return-rear-0-1)</title></rect>
+<text x="543.81" y="336.96" font-size="8" text-anchor="start" fill="#4f46e5" stroke="#ffffff" stroke-width="3" paint-order="stroke">railing 0.92</text>
 <polyline points="971.01,301.21 735.97,104 500.94,301.21" fill="none" stroke="#c026d3" stroke-opacity="0.45" stroke-width="36" stroke-linejoin="round"><title>verge-rear: a 0.79 m tall band of light tone runs under the roof edge on 6 columns across the gable (spread 0.20 m), standing in the outer plane 1.00 m in front of the recessed wall</title></polyline>
-<text x="975.01" y="297.21" font-size="9" text-anchor="start" fill="#c026d3" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge 0.61 m face, 0.3 m deep</text>
+<text x="975.01" y="297.21" font-size="9" text-anchor="start" fill="#c026d3" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge 0.61 m face, 1 m deep</text>
 <rect x="610.25" y="109.23" width="37.48" height="100.26" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.5"><title>chimney-0: a 0.63 × 0.74 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders</title></rect>
 <text x="628.99" y="105.23" font-size="9" text-anchor="middle" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">chimney-0 top 7.86</text>
 <rect x="614.94" y="109.27" width="32.8" height="96.29" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.5"><title>chimney-1: a 0.55 × 0.66 m solid block drawn on storeys 0, 1, standing 7.86 m tall on 2 renders</title></rect>
@@ -138,14 +136,106 @@
 <circle cx="571.74" cy="242.05" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="577.74" y="244.02" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof −0.07 m</text>
 </g>
-<rect x="8" y="8" width="760" height="154" fill="#ffffff" fill-opacity="0.88" stroke="#16a34a" stroke-width="1.5"/>
+<g>
+<title>BAND_TOP balcony-rear-1: model 3.060, observed 3.059, residual 0.001 (tol 0.12) — the top of balcony-rear-1 at 2.30 m along the rear view: the nearest tone edge (contrast 45)</title>
+<circle cx="834.15" cy="394.96" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="840.15" y="398.98" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_top +0.00 m</text>
+</g>
+<g>
+<title>BAND_SOFFIT balcony-rear-1: model 2.522, observed 2.522, residual 0.000 (tol 0.12) — the soffit of balcony-rear-1 at 2.30 m along the rear view: the nearest tone edge (contrast 65)</title>
+<circle cx="834.15" cy="427" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="840.15" y="431" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_soffit +0.00 m</text>
+</g>
+<g>
+<title>BAND_TOP balcony-rear-1: model 3.060, observed 3.127, residual -0.067 (tol 0.12) — the top of balcony-rear-1 at 3.95 m along the rear view: the nearest tone edge (contrast 138)</title>
+<line x1="735.97" y1="394.96" x2="735.97" y2="391" stroke="#16a34a" stroke-width="3"></line>
+<line x1="730.97" y1="391" x2="740.97" y2="391" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="735.97" cy="394.96" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="741.97" y="396.98" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_top −0.07 m</text>
+</g>
+<g>
+<title>BAND_SOFFIT balcony-rear-1: model 2.522, observed 2.522, residual 0.000 (tol 0.12) — the soffit of balcony-rear-1 at 3.95 m along the rear view: the nearest tone edge (contrast 59)</title>
+<circle cx="735.97" cy="427" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="741.97" y="431" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_soffit +0.00 m</text>
+</g>
+<g>
+<title>BAND_TOP balcony-rear-1: model 3.060, observed 3.127, residual -0.067 (tol 0.12) — the top of balcony-rear-1 at 5.60 m along the rear view: the nearest tone edge (contrast 160)</title>
+<line x1="637.79" y1="394.96" x2="637.79" y2="391" stroke="#16a34a" stroke-width="3"></line>
+<line x1="632.79" y1="391" x2="642.79" y2="391" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="637.79" cy="394.96" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="643.79" y="396.98" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_top −0.07 m</text>
+</g>
+<g>
+<title>BAND_SOFFIT balcony-rear-1: model 2.522, observed 2.522, residual 0.000 (tol 0.12) — the soffit of balcony-rear-1 at 5.60 m along the rear view: the nearest tone edge (contrast 64)</title>
+<circle cx="637.79" cy="427" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="643.79" y="431" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">band_soffit +0.00 m</text>
+</g>
+<g>
+<title>RETURN_FACE return-rear-0-0: model 0.645, observed 0.639, residual 0.007 (tol 0.08) — the free face of return-rear-0-0 at 1.30 m on the rear view: the nearest tone edge (contrast 180)</title>
+<circle cx="612.5" cy="538.65" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="618.5" y="542.84" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">return_face +0.01 m</text>
+</g>
+<g>
+<title>RETURN_FACE return-rear-0-1: model 7.255, observed 7.193, residual 0.062 (tol 0.08) — the free face of return-rear-0-1 at 1.30 m on the rear view: the nearest tone edge (contrast 107)</title>
+<line x1="612.5" y1="145.36" x2="612.5" y2="149.04" stroke="#16a34a" stroke-width="3"></line>
+<line x1="607.5" y1="149.04" x2="617.5" y2="149.04" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="612.5" cy="145.36" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="618.5" y="151.2" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">return_face +0.06 m</text>
+</g>
+<g>
+<title>RETURN_FACE return-rear-1-0: model 0.645, observed 0.672, residual -0.027 (tol 0.08) — the free face of return-rear-1-0 at 4.36 m on the rear view: the nearest tone edge (contrast 70)</title>
+<circle cx="612.5" cy="538.65" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="618.5" y="541.84" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">return_face −0.03 m</text>
+</g>
+<g>
+<title>RETURN_FACE return-rear-1-1: model 7.255, observed 7.159, residual 0.095 (tol 0.08) — the free face of return-rear-1-1 at 4.36 m on the rear view: the nearest tone edge (contrast 50)</title>
+<line x1="612.5" y1="145.36" x2="612.5" y2="151.04" stroke="#dc2626" stroke-width="3"></line>
+<line x1="607.5" y1="151.04" x2="617.5" y2="151.04" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="612.5" cy="145.36" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="618.5" y="152.2" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">return_face +0.10 m</text>
+</g>
+<g>
+<title>VERGE_UNDERSIDE verge-rear: model 4.840, observed 4.774, residual 0.066 (tol 0.15) — the underside of verge-rear at 1.19 m along the rear view: the nearest tone edge (contrast 78)</title>
+<line x1="900.2" y1="289.05" x2="900.2" y2="293" stroke="#16a34a" stroke-width="3"></line>
+<line x1="895.2" y1="293" x2="905.2" y2="293" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="900.2" cy="289.05" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="906.2" y="295.02" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge_underside +0.07 m</text>
+</g>
+<g>
+<title>VERGE_UNDERSIDE verge-rear: model 4.840, observed 4.706, residual 0.134 (tol 0.15) — the underside of verge-rear at 6.71 m along the rear view: the nearest tone edge (contrast 75)</title>
+<line x1="571.74" y1="289.05" x2="571.74" y2="297" stroke="#16a34a" stroke-width="3"></line>
+<line x1="566.74" y1="297" x2="576.74" y2="297" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="571.74" cy="289.05" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="577.74" y="297.02" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge_underside +0.13 m</text>
+</g>
+<g>
+<title>VERGE_UNDERSIDE verge-rear: model 6.166, observed 6.101, residual 0.065 (tol 0.15) — the underside of verge-rear at 2.77 m along the rear view: the nearest tone edge (contrast 75)</title>
+<line x1="806.18" y1="210.16" x2="806.18" y2="214" stroke="#16a34a" stroke-width="3"></line>
+<line x1="801.18" y1="214" x2="811.18" y2="214" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="806.18" cy="210.16" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="812.18" y="216.08" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge_underside +0.06 m</text>
+</g>
+<g>
+<title>VERGE_UNDERSIDE verge-rear: model 6.166, observed 6.034, residual 0.132 (tol 0.15) — the underside of verge-rear at 5.14 m along the rear view: the nearest tone edge (contrast 56)</title>
+<line x1="665.16" y1="210.16" x2="665.16" y2="218" stroke="#16a34a" stroke-width="3"></line>
+<line x1="660.16" y1="218" x2="670.16" y2="218" stroke="#16a34a" stroke-width="2"></line>
+<circle cx="665.16" cy="210.16" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="671.16" y="218.08" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">verge_underside +0.13 m</text>
+</g>
+<g>
+<title>SILHOUETTE_WIDTH silhouette-rear: model 12.050, observed 12.050, residual 0.000 (tol 0.15) — the building's width at 1.2 m on the rear view: between the outermost tone edges nearest the model's outer faces</title>
+<circle cx="612.5" cy="-139.96" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
+<text x="618.5" y="-135.96" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">silhouette_width +0.00 m</text>
+</g>
+<rect x="8" y="8" width="760" height="170" fill="#ffffff" fill-opacity="0.88" stroke="#16a34a" stroke-width="1.5"/>
 <text x="16" y="25" font-size="11" fill="#0f172a">REAR — frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876</text>
 <text x="16" y="41" font-size="11" fill="#0f172a">  (asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-ogro-77ee09534e); side 0.90: the publisher labels this</text>
 <text x="16" y="57" font-size="11" fill="#0f172a">  drawing the rear elevation</text>
 <text x="16" y="73" font-size="11" fill="#0f172a">16.806 mm/px isotropic; extent 254,104 – 971,586; y = 0 at row 577.0; along = x from 12.05 falling to the</text>
 <text x="16" y="89" font-size="11" fill="#0f172a">  right</text>
 <text x="16" y="105" font-size="11" fill="#0f172a">span 12.05 m (the 12.05 m width of the envelope); bottom lands at -0.15 m; confidence 0.76</text>
-<text x="16" y="121" font-size="11" fill="#0f172a">grid 0.5 m; 12 residuals (5 within tolerance, green; 7 out, red)</text>
-<text x="16" y="137" font-size="11" fill="#0f172a">why: 717 px across is the 12.05 m width of the envelope, so 0.016806 m/px; the apex at row 104 is the ridge</text>
-<text x="16" y="153" font-size="11" fill="#0f172a">  datum 7.95 and the silhouette's bottom then lands at -0.15 m</text>
+<text x="16" y="121" font-size="11" fill="#0f172a">grid 0.5 m; 27 residuals (19 within tolerance, green; 8 out, red); 5 placed at the centre for want of an</text>
+<text x="16" y="137" font-size="11" fill="#0f172a">  along position</text>
+<text x="16" y="153" font-size="11" fill="#0f172a">why: 717 px across is the 12.05 m width of the envelope, so 0.016806 m/px; the apex at row 104 is the ridge</text>
+<text x="16" y="169" font-size="11" fill="#0f172a">  datum 7.95 and the silhouette's bottom then lands at -0.15 m</text>
 </svg>

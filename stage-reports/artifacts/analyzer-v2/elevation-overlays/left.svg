@@ -59,7 +59,14 @@
 <circle cx="375.46" cy="100.01" r="3.5" fill="#16a34a" stroke="#ffffff" stroke-width="1"/>
 <text x="381.46" y="104.5" font-size="9" text-anchor="start" fill="#16a34a" stroke="#ffffff" stroke-width="3" paint-order="stroke">roof +0.02 m</text>
 </g>
-<rect x="8" y="8" width="760" height="186" fill="#ffffff" fill-opacity="0.88" stroke="#a16207" stroke-width="1.5"/>
+<g>
+<title>SILHOUETTE_WIDTH silhouette-left: model 14.601, observed 14.287, residual 0.314 (tol 0.15) — the building's width at 1.2 m on the left view: between the outermost tone edges nearest the model's outer faces</title>
+<line x1="640" y1="-301.76" x2="640" y2="-282.78" stroke="#dc2626" stroke-width="3"></line>
+<line x1="635" y1="-282.78" x2="645" y2="-282.78" stroke="#dc2626" stroke-width="2"></line>
+<circle cx="640" cy="-301.76" r="3.5" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="646" y="-288.27" font-size="9" text-anchor="start" fill="#dc2626" stroke="#ffffff" stroke-width="3" paint-order="stroke">silhouette_width +0.31 m</text>
+</g>
+<rect x="8" y="8" width="760" height="202" fill="#ffffff" fill-opacity="0.88" stroke="#a16207" stroke-width="1.5"/>
 <text x="16" y="25" font-size="11" fill="#0f172a">LEFT — frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c</text>
 <text x="16" y="41" font-size="11" fill="#0f172a">  (asset-gotowy-projekt-dom-w-marcowkach-ge-elewacja-bocz-2d2de51c62); side 0.40: the silhouette is 14.517391</text>
 <text x="16" y="57" font-size="11" fill="#0f172a">  m across, which is 1.907391 m more than the footprint depth — the overhang of a roof, on the only axis it</text>
@@ -68,7 +75,8 @@
 <text x="16" y="105" font-size="11" fill="#0f172a">  right</text>
 <text x="16" y="121" font-size="11" fill="#0f172a">span 14.60 m (the 14.60 m characteristic depth (the roof over the zones) (beats 12.61 m, which would put the</text>
 <text x="16" y="137" font-size="11" fill="#0f172a">  ground 1.04 m)); bottom lands at -0.05 m; confidence 0.38</text>
-<text x="16" y="153" font-size="11" fill="#0f172a">grid 0.5 m; 3 residuals (3 within tolerance, green; 0 out, red)</text>
-<text x="16" y="169" font-size="11" fill="#0f172a">why: 882 px across is the 14.60 m characteristic depth (the roof over the zones), so 0.016555 m/px; the apex</text>
-<text x="16" y="185" font-size="11" fill="#0f172a">  at row 100 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.05 m</text>
+<text x="16" y="153" font-size="11" fill="#0f172a">grid 0.5 m; 4 residuals (3 within tolerance, green; 1 out, red); 1 placed at the centre for want of an along</text>
+<text x="16" y="169" font-size="11" fill="#0f172a">  position</text>
+<text x="16" y="185" font-size="11" fill="#0f172a">why: 882 px across is the 14.60 m characteristic depth (the roof over the zones), so 0.016555 m/px; the apex</text>
+<text x="16" y="201" font-size="11" fill="#0f172a">  at row 100 is the ridge datum 7.95 and the silhouette's bottom then lands at -0.05 m</text>
 </svg>

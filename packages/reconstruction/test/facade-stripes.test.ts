@@ -225,3 +225,52 @@ describe('positive control: one dark band at the slab level of a plain wall', ()
     }
   })
 })
+
+/** A hundred alternating 6-px VERTICAL stripes of two tones: boards standing up, or a render's noise. */
+function verticalStripes(): Raster {
+  const r = blank(LIGHT)
+  const stripePx = 6
+  for (let x = 0; x < r.width; x += 1) {
+    const rgb = Math.floor(x / stripePx) % 2 === 0 ? DARK : MID
+    for (let y = 0; y < r.height; y += 1) {
+      const o = (y * r.width + x) * 4
+      r.data[o] = rgb[0]
+      r.data[o + 1] = rgb[1]
+      r.data[o + 2] = rgb[2]
+    }
+  }
+  return r
+}
+
+describe('a hundred stripes are not a hundred finish regions (§10)', () => {
+  it('readFinishRuns reads vertical board stripes along a wall as at most two runs, none shorter than its minimum', async () => {
+    const { readFinishRuns } = await import('../src/v2/tones.js')
+    const v = view()
+    const runs = readFinishRuns(v, verticalStripes(), [0, 12], [0.4, 2.0])
+    expect(runs.length).toBeLessThanOrEqual(2)
+    for (const r of runs) expect(r.to - r.from).toBeGreaterThanOrEqual(0.3)
+    // Horizontal stripes are the same finish at every column: one run.
+    const across = readFinishRuns(v, stripedFacade(), [0, 12], [0.4, 2.0])
+    expect(across).toHaveLength(1)
+  })
+
+  it('and the positive control: a wall half timber-coloured, half dark, is two runs split where the finish changes', async () => {
+    const { readFinishRuns } = await import('../src/v2/tones.js')
+    const r = blank(LIGHT)
+    const TIMBER: Rgb = [230, 180, 130]
+    const v = view()
+    const split = Math.round(v.pxOf(5))
+    for (let x = 0; x < r.width; x += 1) {
+      const rgb = x < split ? TIMBER : DARK
+      for (let y = 0; y < r.height; y += 1) {
+        const o = (y * r.width + x) * 4
+        r.data[o] = rgb[0]
+        r.data[o + 1] = rgb[1]
+        r.data[o + 2] = rgb[2]
+      }
+    }
+    const runs = readFinishRuns(v, r, [1, 11], [0.4, 2.0])
+    expect(runs.map((x) => x.tone)).toEqual(['WARM', 'DARK'])
+    expect(Math.abs(runs[0].to - 5)).toBeLessThan(0.1)
+  })
+})

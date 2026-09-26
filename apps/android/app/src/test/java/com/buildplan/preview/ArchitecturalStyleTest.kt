@@ -344,10 +344,13 @@ class ArchitecturalStyleTest {
     }
 
     @Test
-    fun `Architectural leaves ambient occlusion off, Construction and Clay keep theirs`() {
-        assertFalse(RenderStyle.ARCHITECTURAL.ambientOcclusion)
+    fun `Architectural keeps a subtle ambient occlusion, Construction and Clay their full one`() {
+        assertTrue(RenderStyle.ARCHITECTURAL.ambientOcclusion)
         assertTrue(RenderStyle.CONSTRUCTION.ambientOcclusion)
         assertTrue(RenderStyle.CLAY.ambientOcclusion)
+        assertTrue(RenderStyle.ARCHITECTURAL.ambientOcclusionIntensity < RenderStyle.CONSTRUCTION.ambientOcclusionIntensity)
+        assertTrue(RenderStyle.ARCHITECTURAL.ambientOcclusionIntensity > 0f)
+        assertEquals(RenderStyle.CONSTRUCTION.ambientOcclusionIntensity, RenderStyle.CLAY.ambientOcclusionIntensity, 0f)
     }
 
     @Test

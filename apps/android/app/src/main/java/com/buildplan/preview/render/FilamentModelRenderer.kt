@@ -121,7 +121,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             enabled = true
             sampleCount = 4
         }
-        setAmbientOcclusion(RenderStyle.CONSTRUCTION.ambientOcclusion)
+        setAmbientOcclusion(RenderStyle.CONSTRUCTION)
         view.setShadowingEnabled(true)
         view.dynamicResolutionOptions = View.DynamicResolutionOptions().apply {
             enabled = true
@@ -131,18 +131,17 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     }
 
     /**
-     * Screen-space ambient occlusion, per style. Construction and Clay keep it:
-     * contact darkening at reveals and under eaves is what makes the depth of
-     * an opening readable there. Architectural turns it off and reads by the
-     * palette's value contrast alone — no screen-space pass to shimmer on a
-     * phone or to darken a gap that is really a geometry defect.
+     * Screen-space ambient occlusion, per style. Construction and Clay keep
+     * it: contact darkening at reveals and under eaves is what makes the depth
+     * of an opening readable there. Architectural keeps a subtle pass at half
+     * the intensity: corners and reveals read, nothing reads as a shadow.
      */
-    private fun setAmbientOcclusion(enabled: Boolean) {
+    private fun setAmbientOcclusion(style: RenderStyle) {
         view.ambientOcclusionOptions = View.AmbientOcclusionOptions().apply {
-            this.enabled = enabled
+            enabled = style.ambientOcclusion
             quality = View.QualityLevel.LOW
             // More than light contact darkening is noise.
-            intensity = 0.7f
+            intensity = style.ambientOcclusionIntensity
             radius = 0.35f
         }
     }
@@ -209,7 +208,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
 
         if (previous == null || previous.style != state.style) {
             entities.applyStyle(engine, scene, state.style)
-            setAmbientOcclusion(state.style.ambientOcclusion)
+            setAmbientOcclusion(state.style)
         }
 
         // Restricted to what was actually uploaded, so the scene can only

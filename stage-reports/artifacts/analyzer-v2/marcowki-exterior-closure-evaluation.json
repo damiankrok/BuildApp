@@ -4,9 +4,9 @@
     "id": "marcowki-auto-v2"
   },
   "candidate": {
-    "contentHash": "b9ac6c03b2a58c2949ffc1e58c1fb15e3072426051cf07b5be709854d0ee3ed3",
+    "contentHash": "b73596d2bf01a51038e18a1aa592308ed9578abff80eb2b6d784ce4ed6a58796",
     "id": "marcowki-auto-v3",
-    "modelHash": "01a1a911533a438942da8427d91b35e8922ef97f2b5f60ea369d415315cde61a"
+    "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1"
   },
   "categories": [
     {
@@ -416,7 +416,15 @@
         "return-rear-1-1: outer face moved 2.6 cm into the plane of main — within 6 cm of the body's face: a plan registration residual, not a step",
         "return-front-0-0 + return-front-1-0: free face 0.661 / 0.630 → 0.645 — one frame member read on two plans 3.1 cm apart: one face, at the mean of its readings",
         "return-rear-0-0 + return-rear-1-0: free face 0.661 / 0.630 → 0.645 — one frame member read on two plans 3.1 cm apart: one face, at the mean of its readings",
-        "return-rear-0-1 + return-rear-1-1: free face 7.266 / 7.244 → 7.255 — one frame member read on two plans 2.2 cm apart: one face, at the mean of its readings"
+        "return-rear-0-1 + return-rear-1-1: free face 7.266 / 7.244 → 7.255 — one frame member read on two plans 2.2 cm apart: one face, at the mean of its readings",
+        "return-front-0-0: reads light (100 %) — the median of 1740 samples of its outer face on the front render is 93 % of the render's white: light",
+        "return-front-0-1: reads dark (100 %) — the median of 1740 samples of its outer face on the front render is 34 % of the render's white: dark",
+        "return-front-1-0: reads light (90 %) — the median of 1420 samples of its outer face on the front render is 93 % of the render's white: light",
+        "return-front-1-1: reads light (85 %) — the median of 1462 samples of its outer face on the front render is 94 % of the render's white: light",
+        "return-rear-0-0: reads light (100 %) — the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light",
+        "return-rear-0-1: reads light (100 %) — the median of 1740 samples of its outer face on the rear render is 93 % of the render's white: light",
+        "return-rear-1-0: reads light (90 %) — the median of 1415 samples of its outer face on the rear render is 93 % of the render's white: light",
+        "return-rear-1-1: reads light (82 %) — the median of 1375 samples of its outer face on the rear render is 93 % of the render's white: light"
       ],
       "status": "PASS",
       "uncertainty": []
@@ -982,13 +990,27 @@
         },
         {
           "emitted": [
-            "LIGHT",
-            "LIGHT"
+            "return-front-0-0 LIGHT",
+            "return-front-1-0 LIGHT",
+            "return-front-1-1 LIGHT",
+            "return-rear-0-0 LIGHT",
+            "return-rear-0-1 LIGHT",
+            "return-rear-1-0 LIGHT",
+            "return-rear-1-1 LIGHT"
           ],
           "expected": "LIGHT",
-          "name": "frames light",
+          "name": "gable-frame returns light",
           "ok": true,
           "source": "T2-MAT-WHITE-SHELL"
+        },
+        {
+          "emitted": [
+            "return-front-0-1 DARK"
+          ],
+          "expected": "DARK",
+          "name": "garage-box return dark",
+          "ok": true,
+          "source": "T2-ASSEMBLY-GARAGE-BOX (dark render on all faces)"
         },
         {
           "critical": true,
@@ -1061,9 +1083,9 @@
       ],
       "closureViolations": [],
       "emitted": [
-        "main body reads LIGHT, attached-0 reads DARK; frames front LIGHT, rear LIGHT",
+        "main body reads LIGHT, attached-0 reads DARK; returns return-front-0-0 LIGHT, return-front-0-1 DARK, return-front-1-0 LIGHT, return-front-1-1 LIGHT, return-rear-0-0 LIGHT, return-rear-0-1 LIGHT, return-rear-1-0 LIGHT, return-rear-1-1 LIGHT",
         "garage walls drawn as WALL_SECONDARY; tone hints {\"WALL_MAIN\":\"LIGHT\",\"WALL_SECONDARY\":\"DARK\",\"FACADE_FRAME\":\"LIGHT\",\"ROOF_MAIN\":\"DARK\",\"FLAT_ROOF\":\"DARK\"}",
-        "20 semantic groups in use; 0 adjacent pairs closer than the palette's luminance gap",
+        "19 semantic groups in use; 0 adjacent pairs closer than the palette's luminance gap",
         "finish-front-66: Timber cladding on the front recessed wall, x 0.65..3.19",
         "finish-front-319: Dark render on the front recessed wall, x 3.19..7.90",
         "finish-rear-66: Timber cladding on the rear recessed wall, x 0.65..7.25"
@@ -1130,6 +1152,215 @@
   "method": "closure audit of both candidates compiled on the production path; per-category comparison with the sealed truth v2 exterior items; no aggregate score",
   "schema": "buildapp.exterior-closure-evaluation",
   "schemaVersion": "1.0.0",
+  "sourceViewAudit": {
+    "baseline": {
+      "OPENING_HEAD": {
+        "measured": 7,
+        "notObserved": 0,
+        "within": 2,
+        "worstM": 0.992
+      },
+      "OPENING_SILL": {
+        "measured": 7,
+        "notObserved": 0,
+        "within": 3,
+        "worstM": 1.755
+      },
+      "ROOF_EDGE": {
+        "measured": 14,
+        "notObserved": 0,
+        "within": 14,
+        "worstM": 0.135
+      }
+    },
+    "candidate": {
+      "BAND_SOFFIT": {
+        "measured": 9,
+        "notObserved": 0,
+        "within": 9,
+        "worstM": 0
+      },
+      "BAND_TOP": {
+        "measured": 9,
+        "notObserved": 0,
+        "within": 9,
+        "worstM": 0.07
+      },
+      "OPENING_HEAD": {
+        "measured": 7,
+        "notObserved": 0,
+        "within": 2,
+        "worstM": 0.992
+      },
+      "OPENING_SILL": {
+        "measured": 7,
+        "notObserved": 0,
+        "within": 3,
+        "worstM": 1.755
+      },
+      "RETURN_FACE": {
+        "measured": 8,
+        "notObserved": 0,
+        "within": 6,
+        "worstM": 0.095
+      },
+      "ROOF_EDGE": {
+        "measured": 14,
+        "notObserved": 0,
+        "within": 14,
+        "worstM": 0.135
+      },
+      "SILHOUETTE_WIDTH": {
+        "measured": 4,
+        "notObserved": 0,
+        "within": 3,
+        "worstM": 0.314
+      },
+      "VERGE_UNDERSIDE": {
+        "measured": 8,
+        "notObserved": 0,
+        "within": 8,
+        "worstM": 0.134
+      }
+    },
+    "measures": {
+      "BAND_SOFFIT": "balcony / portal fascia soffit",
+      "BAND_TOP": "balcony / portal fascia top",
+      "OPENING_HEAD": "opening head",
+      "OPENING_SILL": "opening sill",
+      "RETURN_FACE": "recess return free face",
+      "ROOF_EDGE": "roof outline",
+      "SILHOUETTE_WIDTH": "ground-storey silhouette width (mass split and returns)",
+      "VERGE_UNDERSIDE": "verge board underside"
+    },
+    "method": "the model projected into each registered elevation; each model edge compared with the nearest tone edge within reach; a model edge with none is \"not observed\", never agreement",
+    "notMeasured": [
+      "terraces: they lie at the ground line, under the elevations’ plinth band; their outline is read on the plan and meets the returns and the building’s corners by construction",
+      "the perspective renders: registered for depth order only (analyzer v2); no metric residuals are taken on them"
+    ],
+    "outOfTolerance": [
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_HEAD",
+        "modelM": 2.3,
+        "object": "opening-0-rear-2-0",
+        "observedM": 1.615926,
+        "residualM": 0.684074,
+        "toleranceM": 0.13,
+        "why": "over 195 px of band against 28 px of wall 11 px either side, rows 471 to 573 differ from the wall by 143/255 where the wall differs from itself by 13 ± 18.5; the head refines to 480.89 and the sill to 574.04"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+        "kind": "OPENING_SILL",
+        "modelM": 3.06,
+        "object": "opening-1-front-4-0",
+        "observedM": 4.815273,
+        "residualM": -1.755273,
+        "toleranceM": 0.13,
+        "why": "over 112 px of band against 16 px of wall 6 px either side, rows 258 to 290 differ from the wall by 102/255 where the wall differs from itself by 11 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+        "kind": "OPENING_HEAD",
+        "modelM": 6.26,
+        "object": "opening-1-front-4-0",
+        "observedM": 5.354569,
+        "residualM": 0.905431,
+        "toleranceM": 0.13,
+        "why": "over 112 px of band against 16 px of wall 6 px either side, rows 258 to 290 differ from the wall by 102/255 where the wall differs from itself by 11 ± 14.8; no drawn head was found, so the profile row stands and no drawn sill was found, so the profile row stands"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_SILL",
+        "modelM": 3.06,
+        "object": "opening-1-rear-6-0",
+        "observedM": 3.944814,
+        "residualM": -0.884814,
+        "toleranceM": 0.13,
+        "why": "over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_HEAD",
+        "modelM": 6.1,
+        "object": "opening-1-rear-6-0",
+        "observedM": 5.108357,
+        "residualM": 0.991643,
+        "toleranceM": 0.13,
+        "why": "over 97 px of band against 14 px of wall 6 px either side, rows 274 to 341 differ from the wall by 73/255 where the wall differs from itself by 9 ± 6.7; the head refines to 273.08 and the sill to 342.31"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_SILL",
+        "modelM": 3.06,
+        "object": "opening-1-rear-6-1",
+        "observedM": 4.353451,
+        "residualM": -1.293451,
+        "toleranceM": 0.13,
+        "why": "over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_HEAD",
+        "modelM": 6.09,
+        "object": "opening-1-rear-6-1",
+        "observedM": 5.110733,
+        "residualM": 0.979267,
+        "toleranceM": 0.13,
+        "why": "over 98 px of band against 14 px of wall 6 px either side, rows 274 to 318 differ from the wall by 66/255 where the wall differs from itself by 3 ± 3.0; the head refines to 272.94 and no drawn sill was found, so the profile row stands"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_SILL",
+        "modelM": 0,
+        "object": "opening-0-rear-10-0",
+        "observedM": 0.272268,
+        "residualM": -0.272268,
+        "toleranceM": 0.13,
+        "why": "over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "OPENING_HEAD",
+        "modelM": 2.1,
+        "object": "opening-0-rear-10-0",
+        "observedM": 1.261065,
+        "residualM": 0.838935,
+        "toleranceM": 0.13,
+        "why": "over 41 px of band against 6 px of wall 2 px either side, rows 502 to 560 differ from the wall by 42/255 where the wall differs from itself by 1 ± 1.5; the head refines to 502.00 and the sill to 560.84"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f3a4552876",
+        "kind": "RETURN_FACE",
+        "modelM": 7.254815,
+        "object": "return-rear-1-1",
+        "observedM": 7.159454,
+        "residualM": 0.095361,
+        "toleranceM": 0.08,
+        "why": "the free face of return-rear-1-1 at 4.36 m on the rear view: the nearest tone edge (contrast 50)"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-f8462d58b4",
+        "kind": "RETURN_FACE",
+        "modelM": 11.415776,
+        "object": "return-front-0-1",
+        "observedM": 11.325216,
+        "residualM": 0.09056,
+        "toleranceM": 0.08,
+        "why": "the free face of return-front-0-1 at 1.30 m on the front view: the nearest tone edge (contrast 82)"
+      },
+      {
+        "frameId": "frame-asset-gotowy-projekt-dom-w-marcowkach-ge-elewacj-9a66c9827c",
+        "kind": "SILHOUETTE_WIDTH",
+        "modelM": 14.601283,
+        "object": "silhouette-left",
+        "observedM": 14.286965,
+        "residualM": 0.314318,
+        "toleranceM": 0.15,
+        "why": "the building's width at 1.2 m on the left view: between the outermost tone edges nearest the model's outer faces"
+      }
+    ]
+  },
   "summary": {
     "BALCONY": "PASS",
     "CHIMNEYS": "PASS",

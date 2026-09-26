@@ -82,7 +82,7 @@ type Building = {
   chimneys: Array<{ id: string; x0: number; x1: number; z0: number; z1: number; topY: number }>
   rooflights: Array<{ id: string; slope: string } & Dict>
   massTones: Array<{ massId: string; tone: string; share: number }>
-  frameTones: Array<{ side: string; tone: string; share: number }>
+  returnTones: Array<{ returnId: string; side: string; storeyIndex: number; tone: string; share: number }>
   facadeGraph: { nodes: Array<{ id: string; kind: string }>; edges: Array<{ from: string; to: string; kind: string; gapM?: number }> }
 }
 
@@ -543,7 +543,7 @@ function main(): void {
       ownerObservation: 'elements merge visually; the style should be a clean, minimal architectural graphic',
       expected: ['white render on the main body and the frame (T2-MAT-WHITE-SHELL)', 'anthracite render on the garage box and the portal band (T2-MAT-DARK-FRONT, T2-ASSEMBLY-GARAGE-BOX)', 'grey roof (T2-MAT-ROOF)', 'timber cladding on the recessed front and rear walls (T2-MAT-TIMBER-*)'],
       emitted: [
-        `main body reads ${tone(main?.id ?? '')?.tone ?? '—'}, ${attached?.id ?? 'attached'} reads ${tone(attached?.id ?? '')?.tone ?? '—'}; frames ${building.frameTones.map((t) => `${t.side.toLowerCase()} ${t.tone}`).join(', ')}`,
+        `main body reads ${tone(main?.id ?? '')?.tone ?? '—'}, ${attached?.id ?? 'attached'} reads ${tone(attached?.id ?? '')?.tone ?? '—'}; returns ${building.returnTones.map((t) => `${t.returnId} ${t.tone}`).join(', ')}`,
         `garage walls drawn as ${[...garageWalls].join(', ')}; tone hints ${JSON.stringify(bundle.styling.toneHints ?? {})}`,
         `${used.size} semantic groups in use; ${tooClose.length} adjacent pairs closer than the palette's luminance gap`,
         ...regions.map((r) => `${r.id}: ${r.material} on the ${r.side.toLowerCase()} recessed wall, x ${r.x0.toFixed(2)}..${r.x1.toFixed(2)}`),
@@ -551,7 +551,19 @@ function main(): void {
       checks: [
         flag('main body light', 'T2-MAT-WHITE-SHELL', 'LIGHT', tone(main?.id ?? '')?.tone, tone(main?.id ?? '')?.tone === 'LIGHT'),
         flag('garage dark', 'T2-MAT-DARK-FRONT', 'DARK', tone(attached?.id ?? '')?.tone, tone(attached?.id ?? '')?.tone === 'DARK', true),
-        flag('frames light', 'T2-MAT-WHITE-SHELL', 'LIGHT', building.frameTones.map((t) => t.tone), building.frameTones.length > 0 && building.frameTones.every((t) => t.tone === 'LIGHT')),
+        // The gable frames' returns are white; the return that closes the garage box is the box's anthracite.
+        ...(() => {
+          const onGarage = (id: string): boolean => {
+            const r = building.returns.find((x) => x.id === id)
+            return !!r && !!attached && r.storeyIndex === 0 && r.alongInterval[0] >= attached.x0 - 0.05
+          }
+          const frame = building.returnTones.filter((t) => !onGarage(t.returnId))
+          const box = building.returnTones.filter((t) => onGarage(t.returnId))
+          return [
+            flag('gable-frame returns light', 'T2-MAT-WHITE-SHELL', 'LIGHT', frame.map((t) => `${t.returnId} ${t.tone}`), frame.length > 0 && frame.every((t) => t.tone === 'LIGHT')),
+            flag('garage-box return dark', 'T2-ASSEMBLY-GARAGE-BOX (dark render on all faces)', 'DARK', box.map((t) => `${t.returnId} ${t.tone}`), box.length > 0 && box.every((t) => t.tone === 'DARK')),
+          ]
+        })(),
         flag('garage a distinct secondary body', 'styling', 'WALL_SECONDARY', [...garageWalls], garageWalls.size === 1 && garageWalls.has('WALL_SECONDARY'), true),
         flag('adjacent groups apart', 'styling', 0, tooClose.length, tooClose.length === 0, true),
         ...regionChecks,
@@ -580,6 +592,31 @@ function main(): void {
     exteriorFindingCount: r.metrics.exteriorFindingCount,
     interiorFindingCount: r.metrics.interiorFindingCount,
   })
+  // §17: the exterior against the source views — every residual the verifier
+  // measured on the registered elevations, by view and by what was measured.
+  const svr = sourceViewResidualsOf(candidateId)?.residuals ?? []
+  const baseSvr = sourceViewResidualsOf(baselineId)?.residuals ?? []
+  const byKind = (rs: typeof svr) => {
+    const out: Record<string, { measured: number; within: number; notObserved: number; worstM: number }> = {}
+    for (const r of rs) {
+      const k = (out[r.kind] ??= { measured: 0, within: 0, notObserved: 0, worstM: 0 })
+      k.measured += 1
+      if (r.withinTolerance) k.within += 1
+      if (/not observed/.test(r.why)) k.notObserved += 1
+      else k.worstM = Math.max(k.worstM, Math.abs(r.residualM))
+    }
+    for (const k of Object.values(out)) k.worstM = round(k.worstM)
+    return out
+  }
+  const sourceViewAudit = {
+    method: 'the model projected into each registered elevation; each model edge compared with the nearest tone edge within reach; a model edge with none is "not observed", never agreement',
+    measures: { OPENING_SILL: 'opening sill', OPENING_HEAD: 'opening head', ROOF_EDGE: 'roof outline', BAND_TOP: 'balcony / portal fascia top', BAND_SOFFIT: 'balcony / portal fascia soffit', RETURN_FACE: 'recess return free face', VERGE_UNDERSIDE: 'verge board underside', SILHOUETTE_WIDTH: 'ground-storey silhouette width (mass split and returns)' },
+    candidate: byKind(svr),
+    baseline: byKind(baseSvr),
+    outOfTolerance: svr.filter((r) => !r.withinTolerance).map((r) => ({ kind: r.kind, object: r.objectId ?? r.featureId, frameId: r.frameId, modelM: r.modelM, observedM: r.observedM, residualM: r.residualM, toleranceM: r.toleranceM, why: r.why })),
+    notMeasured: ['terraces: they lie at the ground line, under the elevations’ plinth band; their outline is read on the plan and meets the returns and the building’s corners by construction', 'the perspective renders: registered for depth order only (analyzer v2); no metric residuals are taken on them'],
+  }
+
   const out = {
     schema: 'buildapp.exterior-closure-evaluation',
     schemaVersion: '1.0.0',
@@ -588,6 +625,7 @@ function main(): void {
     method: 'closure audit of both candidates compiled on the production path; per-category comparison with the sealed truth v2 exterior items; no aggregate score',
     summary,
     counts,
+    sourceViewAudit,
     cleanliness: { [candidateId]: metricRow(report), [baselineId]: metricRow(baseReport), definitions: { scope: 'EXTERIOR findings only unless named interior', exposedGap: 'two solids the model says meet, 3 mm to 10 cm apart', coplanarDuplicate: 'face area drawn twice in one plane facing the same way and not enclosed by a third solid', intersection: 'volume shared beyond what the relation allows (a bearing may share its wall thickness × plate thickness × run)' } },
     categories,
   }
@@ -603,6 +641,12 @@ function main(): void {
     '| Category | Status | Closure violations (baseline) | Failed checks |',
     '|---|---|---|---|',
     ...categories.map((c) => `| ${c.category} | ${c.status} | ${c.closureViolations.length} (${c.baselineClosureViolations}) | ${c.checks.filter((k) => !k.ok).map((k) => k.name).join('; ') || '—'} |`),
+    '',
+    '## Source-view exterior audit (§17)',
+    '',
+    '| Measured | candidate: within / measured (not observed) | baseline |',
+    '|---|---|---|',
+    ...Object.entries(sourceViewAudit.candidate).map(([k, v]) => `| ${(sourceViewAudit.measures as Record<string, string>)[k] ?? k} | ${v.within} / ${v.measured} (${v.notObserved}) | ${sourceViewAudit.baseline[k] ? `${sourceViewAudit.baseline[k].within} / ${sourceViewAudit.baseline[k].measured}` : '—'} |`),
     '',
     '## Cleanliness (exterior)',
     '',

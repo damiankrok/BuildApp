@@ -15,7 +15,7 @@ import type { ElevationFrameV2 } from './frame.js'
 import { elevationExtent } from './openings-v2.js'
 import { lumaAt } from './scan.js'
 
-export type ResidualKind = 'OPENING_SILL' | 'OPENING_HEAD' | 'ROOF_EDGE' | 'RECESS_PLANE' | 'MEMBER_EDGE' | 'SILHOUETTE_WIDTH'
+export type ResidualKind = 'OPENING_SILL' | 'OPENING_HEAD' | 'ROOF_EDGE' | 'RECESS_PLANE' | 'MEMBER_EDGE' | 'SILHOUETTE_WIDTH' | 'BAND_TOP' | 'BAND_SOFFIT' | 'RETURN_FACE' | 'VERGE_UNDERSIDE'
 
 export type SourceViewResidual = {
   featureId: string
@@ -107,6 +107,149 @@ export function verifyAgainstViews(input: VerificationInput): SourceViewResidual
         const observed = view.yOf(bestRow)
         out.push({ featureId: roof.featureId, objectId: 'roof-main', frameId: view.registration.frameId, kind: 'ROOF_EDGE', modelM: round6(model), observedM: round6(observed), residualM: round6(model - observed), toleranceM: 0.25, withinTolerance: Math.abs(model - observed) <= 0.25, why: `the strongest horizontal edge (contrast ${bestContrast.toFixed(0)}) within ${reachM} m of the model's roof line at ${along.toFixed(2)} m along the ${view.side.toLowerCase()} view` })
       }
+    }
+  }
+  out.push(...verifyExteriorAssemblies(b, views))
+  return out
+}
+
+// ---------------------------------------------------------------------------
+// The exterior assemblies against the views (§17): the edges a person checks
+// when they hold the model against the drawing — the top and the soffit of a
+// fascia band, the free face of a return, the underside of a verge board, and
+// the building's width. Each is the tone edge NEAREST the model within reach
+// (not the strongest: a band's own shading, the tile courses above a verge
+// and the glazing behind a return are all sharper than the edge that
+// matters), and a model edge with no image edge within reach is recorded as
+// not observed rather than as agreement.
+// ---------------------------------------------------------------------------
+
+const EDGE_MIN_CONTRAST = 18
+
+/** The horizontal tone edge nearest `modelY` at one column, within `reachM`. */
+export function horizontalEdgeNear(raster: Raster, view: ElevationFrameV2, along: number, modelY: number, reachM: number): { y: number; contrast: number } | undefined {
+  const px = Math.round(view.pxOf(along))
+  if (px < 3 || px > raster.width - 4) return undefined
+  const rowModel = view.pyOf(modelY)
+  const reachPx = reachM / view.registration.metresPerPixelV
+  const y0 = Math.max(3, Math.round(rowModel - reachPx))
+  const y1 = Math.min(raster.height - 3, Math.round(rowModel + reachPx))
+  const contrastAt = (y: number): number => {
+    let above = 0
+    let below = 0
+    for (let dx = -2; dx <= 2; dx += 1) {
+      above += lumaAt(raster, px + dx, y - 2) + lumaAt(raster, px + dx, y - 1)
+      below += lumaAt(raster, px + dx, y) + lumaAt(raster, px + dx, y + 1)
+    }
+    return Math.abs(above - below) / 10
+  }
+  let best = 0
+  for (let y = y0; y <= y1; y += 1) best = Math.max(best, contrastAt(y))
+  if (best < EDGE_MIN_CONTRAST) return undefined
+  let row = -1
+  for (let y = y0; y <= y1; y += 1) if (contrastAt(y) >= Math.max(EDGE_MIN_CONTRAST, best * 0.5) && (row < 0 || Math.abs(y - rowModel) < Math.abs(row - rowModel))) row = y
+  return row < 0 ? undefined : { y: view.yOf(row), contrast: contrastAt(row) }
+}
+
+/** The vertical tone edge nearest `modelAlong` at one height, within `reachM`. */
+export function verticalEdgeNear(raster: Raster, view: ElevationFrameV2, modelAlong: number, y: number, reachM: number): { along: number; contrast: number } | undefined {
+  const py = Math.round(view.pyOf(y))
+  if (py < 3 || py > raster.height - 4) return undefined
+  const colModel = view.pxOf(modelAlong)
+  const reachPx = reachM / view.registration.metresPerPixelU
+  const x0 = Math.max(3, Math.round(colModel - reachPx))
+  const x1 = Math.min(raster.width - 3, Math.round(colModel + reachPx))
+  const contrastAt = (x: number): number => {
+    let left = 0
+    let right = 0
+    for (let dy = -2; dy <= 2; dy += 1) {
+      left += lumaAt(raster, x - 2, py + dy) + lumaAt(raster, x - 1, py + dy)
+      right += lumaAt(raster, x, py + dy) + lumaAt(raster, x + 1, py + dy)
+    }
+    return Math.abs(left - right) / 10
+  }
+  let best = 0
+  for (let x = x0; x <= x1; x += 1) best = Math.max(best, contrastAt(x))
+  if (best < EDGE_MIN_CONTRAST) return undefined
+  let col = -1
+  for (let x = x0; x <= x1; x += 1) if (contrastAt(x) >= Math.max(EDGE_MIN_CONTRAST, best * 0.5) && (col < 0 || Math.abs(x - colModel) < Math.abs(col - colModel))) col = x
+  return col < 0 ? undefined : { along: view.alongOf(col), contrast: contrastAt(col) }
+}
+
+function verifyExteriorAssemblies(b: BuildingV2, views: VerificationInput['views']): SourceViewResidual[] {
+  const out: SourceViewResidual[] = []
+  const facadeOf = (side: ElevationFrameV2['side']): 'FRONT' | 'REAR' | 'WEST' | 'EAST' => (side === 'LEFT' ? 'WEST' : side === 'RIGHT' ? 'EAST' : side)
+  const push = (r: Omit<SourceViewResidual, 'residualM' | 'withinTolerance'>): void => {
+    out.push({ ...r, modelM: round6(r.modelM), observedM: round6(r.observedM), residualM: round6(r.modelM - r.observedM), withinTolerance: Math.abs(r.modelM - r.observedM) <= r.toleranceM })
+  }
+  const notObserved = (r: Omit<SourceViewResidual, 'residualM' | 'withinTolerance' | 'observedM'>): void => {
+    out.push({ ...r, modelM: round6(r.modelM), observedM: round6(r.modelM), residualM: 0, withinTolerance: false, why: `${r.why}: no image edge within reach — not observed` })
+  }
+  for (const { view, raster } of views) {
+    const facade = facadeOf(view.side)
+    const frameId = view.registration.frameId
+    // Fascia bands: every balcony slab and portal head on this facade, top and soffit, at three columns.
+    const bands: Array<{ id: string; featureId: string; from: number; to: number; top: number; soffit: number }> = [
+      ...b.balconies.filter((x) => x.kind === 'BALCONY' && x.side === facade && (facade === 'FRONT' || facade === 'REAR')).map((x) => ({ id: x.id, featureId: x.featureId, from: x.x0, to: x.x1, top: x.topY, soffit: x.topY - x.thicknessM })),
+      ...(facade === 'FRONT' ? b.portalHeads.map((p) => ({ id: p.id, featureId: p.featureId, from: p.x0, to: p.x1, top: p.y1, soffit: p.y0 })) : []),
+    ]
+    for (const band of bands) {
+      if (band.to - band.from < 0.6) continue
+      for (const f of [0.25, 0.5, 0.75]) {
+        const along = band.from + (band.to - band.from) * f
+        for (const [kind, modelY] of [['BAND_TOP', band.top], ['BAND_SOFFIT', band.soffit]] as const) {
+          const why = `the ${kind === 'BAND_TOP' ? 'top' : 'soffit'} of ${band.id} at ${along.toFixed(2)} m along the ${view.side.toLowerCase()} view`
+          const e = horizontalEdgeNear(raster, view, along, modelY, 0.3)
+          if (!e) notObserved({ featureId: band.featureId, objectId: band.id, frameId, kind, modelM: modelY, toleranceM: 0.12, why })
+          else push({ featureId: band.featureId, objectId: band.id, frameId, kind, modelM: modelY, observedM: e.y, toleranceM: 0.12, why: `${why}: the nearest tone edge (contrast ${e.contrast.toFixed(0)})` })
+        }
+      }
+    }
+    // Returns: the free face of each return on this facade, at mid-height of its storey.
+    for (const r of b.returns.filter((x) => x.side === facade)) {
+      const level = b.levels.find((l) => l.index === r.storeyIndex)
+      if (!level) continue
+      const bodyFace = Math.abs(r.alongInterval[0] - Math.min(...b.masses.map((m) => (facade === 'FRONT' || facade === 'REAR' ? m.x0 : m.z0)))) < 0.05 ? 0 : 1
+      const free = bodyFace === 0 ? r.alongInterval[1] : r.alongInterval[0]
+      const y = level.elevation + Math.min(level.height, 2.6) * 0.5
+      const why = `the free face of ${r.id} at ${y.toFixed(2)} m on the ${view.side.toLowerCase()} view`
+      const e = verticalEdgeNear(raster, view, free, y, 0.25)
+      if (!e) notObserved({ featureId: r.featureId, objectId: r.id, frameId, kind: 'RETURN_FACE', modelM: free, toleranceM: 0.08, why })
+      else push({ featureId: r.featureId, objectId: r.id, frameId, kind: 'RETURN_FACE', modelM: free, observedM: e.along, toleranceM: 0.08, why: `${why}: the nearest tone edge (contrast ${e.contrast.toFixed(0)})` })
+    }
+    // Verge boards: the underside at two columns of each rake of this gable.
+    if (b.mainRoof && (facade === 'FRONT' || facade === 'REAR')) {
+      const roof = b.mainRoof
+      for (const v of b.verges.filter((x) => x.side === facade)) {
+        // The board's face width runs across the rake; its vertical extent is that over cos(pitch).
+        const height = (v.member.widthM ?? 0) / Math.cos((roof.pitchDeg * Math.PI) / 180)
+        if (height <= 0) continue
+        for (const f of [0.3, 0.7]) {
+          for (const half of [0, 1]) {
+            const x = half === 0 ? roof.footprint.x0 + (roof.ridgeAt - roof.footprint.x0) * f : roof.ridgeAt + (roof.footprint.x1 - roof.ridgeAt) * (1 - f)
+            const modelY = roofTopAt(roof, x) - height
+            const why = `the underside of ${v.id} at ${x.toFixed(2)} m along the ${view.side.toLowerCase()} view`
+            const e = horizontalEdgeNear(raster, view, x, modelY, 0.3)
+            if (!e) notObserved({ featureId: v.featureId, objectId: v.id, frameId, kind: 'VERGE_UNDERSIDE', modelM: modelY, toleranceM: 0.15, why })
+            else push({ featureId: v.featureId, objectId: v.id, frameId, kind: 'VERGE_UNDERSIDE', modelM: modelY, observedM: e.y, toleranceM: 0.15, why: `${why}: the nearest tone edge (contrast ${e.contrast.toFixed(0)})` })
+          }
+        }
+      }
+    }
+    // The building's width on this view: its two outermost walls' outer faces, at 1.2 m.
+    const alongX = facade === 'FRONT' || facade === 'REAR'
+    const ground = b.masses.filter((m) => m.storeys.includes(0))
+    if (ground.length > 0) {
+      // The ground storey's outline as the view sees it: its bodies, and the returns that stand out of them to the outer planes.
+      const groundReturns = b.returns.filter((r) => r.storeyIndex === 0).flatMap((r) => [r.start, r.end]).map((p) => (alongX ? p.x : p.z))
+      const lo = Math.min(...ground.map((m) => (alongX ? m.x0 : m.z0)), ...groundReturns)
+      const hi = Math.max(...ground.map((m) => (alongX ? m.x1 : m.z1)), ...groundReturns)
+      const y = 1.2
+      const eLo = verticalEdgeNear(raster, view, lo, y, 0.3)
+      const eHi = verticalEdgeNear(raster, view, hi, y, 0.3)
+      const why = `the building's width at ${y} m on the ${view.side.toLowerCase()} view`
+      if (!eLo || !eHi) notObserved({ featureId: `silhouette-${view.side.toLowerCase()}`, frameId, kind: 'SILHOUETTE_WIDTH', modelM: hi - lo, toleranceM: 0.15, why })
+      else push({ featureId: `silhouette-${view.side.toLowerCase()}`, frameId, kind: 'SILHOUETTE_WIDTH', modelM: hi - lo, observedM: Math.abs(eHi.along - eLo.along), toleranceM: 0.15, why: `${why}: between the outermost tone edges nearest the model's outer faces` })
     }
   }
   return out

@@ -139,6 +139,49 @@ Unlike the reference (which built from eave and ridge datums and ignored
 the declared pitch), BuildApp's semantic parameter is the pitch, because it is
 what an editor edits; the ridge height is derived.
 
+**Edge members and plate insets (schema 1.5.0).** A roof's `edgeMembers` are
+compiled *with* the roof, as the roof's own edge rather than bars laid over
+it. A `verge` board runs along each rake of a gable end (per `ends` when the
+two gables differ): its top is flush with the slope, it hangs `width` below it
+measured vertically, and it is `depth` deep along the ridge axis. The plate is
+shortened by the board's strip (`RoofGeometry.memberStrips`), the two halves
+of each gable's board meet in one chevron at the ridge (no crossing bars), and
+a FOLLOW_ROOF wall under a strip follows the board's underside, with a crease
+line at the strip's inner edge. A `fascia` board runs along the named eave or
+flat-roof edges, `topOffset` above the plate top and `height` tall, and the
+plate stops at its inner face. Each board is emitted as `part = ROOF_TRIM`,
+`objectId = roof`, `solidId = <trim id>`, `structural`, in its own material.
+`plateInset` stops the plate short of the footprint on each side where it
+bears on walls — conventionally at their centreline — so the plate's edge is
+never a face in the plane of a wall's outer face; the footprint still says
+what the roof covers.
+
+## Closure audit (`closure.ts`)
+
+`geometryClosureAudit(model, scene)` measures how the compiled solids MEET.
+For every pair of structural solids whose boxes come within the plane
+tolerance it measures the volume they share (ray-parity sampling), the
+area they draw in one plane facing the same way (polygon clipping; a piece
+lying under a third solid's face is enclosed and not counted), and — for
+pairs within 10 cm that the model says meet (a junction, a ring, a wall that
+follows a roof, a slab against its wall, a member on its host, a terrace on
+its facade) — the gap between them. The model's semantics decide the
+intended relation (CONTACT, BEARING, FLUSH, PENETRATION, GUARDS,
+SEPARATION): a chimney through its roof is a penetration; a plate may share
+at most wall thickness × plate thickness × run with a wall it bears into.
+It also checks every railing end (at a wall, on the wall's real inward side,
+or at another railing), every terrace against its floor datum, sliver
+triangles, non-manifold edges and members that touch nothing. Findings name
+the pair, the relation and a measure in m, m² or m³, and are scoped EXTERIOR
+or INTERIOR. Nothing is repaired and no tolerance is widened to make a
+finding go away: the audit exists so that a joint defect lands in the layer
+that owns it. `npm run audit:exterior` runs it on the sealed candidates.
+
+## Terraces
+
+`compileTerrace`: the terrace polygon extruded from `top − thickness` to
+`top` as one closed platform (`part = TERRACE`, objectKind `terrace`).
+
 ## Fills (`fills.ts`)
 
 - **Window**: a frame **ring** (one closed manifold, not four boxes), glass
@@ -217,8 +260,11 @@ volume, and is hidden with its host wall.
 
 Slabs and balconies: polygon extrusion (ear clipping) between `top −
 thickness` and `top`; a slab with `holes` goes through the region
-tessellator instead. Chimney: a box. Railing: posts at every `postSpacing`,
-a top rail, and BARS / GLASS / NONE infill, all as separate parts. Room: a thin
+tessellator instead. Chimney: a box. Railing: a polyline (its `path`, or
+`start`–`end`): one square post centred on every corner, end posts inside the
+run so a railing drawn to a wall face meets it without entering it, posts at
+every `postSpacing` along each run, a top rail per run stopping at the corner
+posts' faces, and BARS / GLASS / NONE infill per bay, all as separate parts. Room: a thin
 translucent floor plate so a room is selectable (non-structural). A
 PLACEHOLDER stair: a thin plate; a FLIGHTS stair goes to the stair compiler.
 

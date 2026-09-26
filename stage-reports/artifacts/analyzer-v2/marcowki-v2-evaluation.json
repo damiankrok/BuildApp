@@ -11,16 +11,18 @@
     "truth": "research/marcowki-v2/marcowki-source-truth-v2.json"
   },
   "building": {
-    "label": "Marcówki (auto v2)",
+    "label": "Marcówki (auto v3)",
     "wallThicknessM": 0.489658,
     "slabThicknessM": 0.34,
     "counts": {
       "assemblies": 3,
       "attachedRoofs": 1,
-      "balconies": 4,
+      "balconies": 2,
       "chimneys": 2,
+      "frameTones": 2,
       "interior": 3,
       "levels": 2,
+      "massTones": 2,
       "masses": 2,
       "openings": 11,
       "portalHeads": 1,
@@ -29,7 +31,8 @@
       "returns": 8,
       "rooflights": 3,
       "sharedDoors": 1,
-      "surfaceRegions": 1,
+      "surfaceRegions": 3,
+      "terraces": 2,
       "verges": 2,
       "interiorWalls": 31,
       "interiorDoors": 9,
@@ -43,9 +46,9 @@
     "itemCount": 138
   },
   "sidecars": {
-    "featureQualityHash": "0e94cf0d50a711f073ffbca3f6ef93299a904d0153fc0637633810a65b6aa411",
-    "featureLineageHash": "96baa85a5147cc40314b1419ad7c8e119902c776c7618eb8864246d2730071ec",
-    "residualCandidateHash": "3530eef866c2ab531308552c1fdc8868a36f9aa7d66025513f5e10f11daa2010"
+    "featureQualityHash": "fa231f81e47dee27129da75162efb4e40c1de11afb40cb8f945bae6bc432294d",
+    "featureLineageHash": "efdd3652a8f765c52c4761eea98000aaab3fafc54e33ec79ff8f99b2b398622e",
+    "residualCandidateHash": "35f74248d8cbddadc861944f8816a9470282df1c2fbfcc15c6dc42b5afcd828c"
   },
   "frame": {
     "truth": {
@@ -222,8 +225,8 @@
       },
       "BALCONY": {
         "truthItems": 2,
-        "MATCH": 0,
-        "PARTIAL": 2,
+        "MATCH": 1,
+        "PARTIAL": 1,
         "MISSING": 0,
         "unresolved": 0,
         "notEvaluated": 0
@@ -238,8 +241,8 @@
       },
       "FACADE_MEMBER": {
         "truthItems": 1,
-        "MATCH": 0,
-        "PARTIAL": 1,
+        "MATCH": 1,
+        "PARTIAL": 0,
         "MISSING": 0,
         "unresolved": 0,
         "notEvaluated": 0
@@ -687,18 +690,6 @@
         "ratio": 8.81
       },
       {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "x[1]",
-        "truth": 7.9,
-        "auto": 7.23,
-        "delta": -0.67,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 6.7
-      },
-      {
         "truthId": "T2-ROOM-U-6",
         "kind": "ROOM",
         "name": "room 6 Pokój (north-west)",
@@ -757,6 +748,18 @@
         "tolerance": 0.1,
         "unit": "m",
         "ratio": 4.9
+      },
+      {
+        "truthId": "T2-RAILING-FRONT",
+        "kind": "RAILING",
+        "name": "front glass balustrade",
+        "property": "z",
+        "truth": 0.05,
+        "auto": 0.508,
+        "delta": 0.458,
+        "tolerance": 0.1,
+        "unit": "m",
+        "ratio": 4.58
       },
       {
         "truthId": "T2-PAGE-KNEEWALL",
@@ -951,18 +954,6 @@
         "ratio": 1.35
       },
       {
-        "truthId": "T2-RAILING-REAR",
-        "kind": "RAILING",
-        "name": "rear glass balustrade",
-        "property": "x[1]",
-        "truth": 7.26,
-        "auto": 7.126,
-        "delta": -0.134,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.34
-      },
-      {
         "truthId": "T2-ROOFLIGHT-W1",
         "kind": "ROOFLIGHT",
         "name": "rooflight, west slope, over the laundry",
@@ -1021,54 +1012,6 @@
         "tolerance": 0.1,
         "unit": "m",
         "ratio": 1.21
-      },
-      {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "x[0]",
-        "truth": 3.25,
-        "auto": 3.135,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-FACADE-FRONT-BAND",
-        "kind": "FACADE_MEMBER",
-        "name": "continuous dark front band (balcony fascia + portal head)",
-        "property": "x[0]",
-        "truth": 3.25,
-        "auto": 3.135,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-RAILING-FRONT",
-        "kind": "RAILING",
-        "name": "front glass balustrade",
-        "property": "x[0]",
-        "truth": 3.3,
-        "auto": 3.185,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-BALCONY-REAR",
-        "kind": "BALCONY",
-        "name": "rear balcony slab over the loggia",
-        "property": "x[1]",
-        "truth": 7.29,
-        "auto": 7.176,
-        "delta": -0.114,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.14
       },
       {
         "truthId": "T2-ROOFLIGHT-W2",
@@ -1131,28 +1074,16 @@
         "ratio": 1.92
       },
       {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "fasciaThicknessM",
-        "truth": 0.79,
-        "auto": 0.708,
-        "delta": -0.082,
+        "truthId": "T2-RAILING-REAR",
+        "kind": "RAILING",
+        "name": "rear glass balustrade",
+        "property": "topY",
+        "truth": 3.93,
+        "auto": 3.984,
+        "delta": 0.054,
         "tolerance": 0.05,
         "unit": "m",
-        "ratio": 1.64
-      },
-      {
-        "truthId": "T2-BALCONY-REAR",
-        "kind": "BALCONY",
-        "name": "rear balcony slab over the loggia",
-        "property": "fasciaThicknessM",
-        "truth": 0.56,
-        "auto": 0.504,
-        "delta": -0.056,
-        "tolerance": 0.05,
-        "unit": "m",
-        "ratio": 1.12
+        "ratio": 1.08
       },
       {
         "truthId": "T2-RAILING-REAR",
@@ -1165,6 +1096,18 @@
         "tolerance": 0.05,
         "unit": "m",
         "ratio": 1.08
+      },
+      {
+        "truthId": "T2-BALCONY-FRONT",
+        "kind": "BALCONY",
+        "name": "front balcony slab over the portal recess",
+        "property": "fasciaThicknessM",
+        "truth": 0.79,
+        "auto": 0.739,
+        "delta": -0.051,
+        "tolerance": 0.05,
+        "unit": "m",
+        "ratio": 1.02
       }
     ],
     "worstDeltasM": [
@@ -1433,18 +1376,6 @@
         "ratio": 8.81
       },
       {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "x[1]",
-        "truth": 7.9,
-        "auto": 7.23,
-        "delta": -0.67,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 6.7
-      },
-      {
         "truthId": "T2-IWALL-G-KITCHEN_SOUTH",
         "kind": "INTERIOR_WALL",
         "name": "kitchen south wall (kitchen / bathroom)",
@@ -1479,6 +1410,18 @@
         "tolerance": 0.1,
         "unit": "m",
         "ratio": 4.9
+      },
+      {
+        "truthId": "T2-RAILING-FRONT",
+        "kind": "RAILING",
+        "name": "front glass balustrade",
+        "property": "z",
+        "truth": 0.05,
+        "auto": 0.508,
+        "delta": 0.458,
+        "tolerance": 0.1,
+        "unit": "m",
+        "ratio": 4.58
       },
       {
         "truthId": "T2-PAGE-KNEEWALL",
@@ -1673,18 +1616,6 @@
         "ratio": 1.35
       },
       {
-        "truthId": "T2-RAILING-REAR",
-        "kind": "RAILING",
-        "name": "rear glass balustrade",
-        "property": "x[1]",
-        "truth": 7.26,
-        "auto": 7.126,
-        "delta": -0.134,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.34
-      },
-      {
         "truthId": "T2-ROOFLIGHT-W1",
         "kind": "ROOFLIGHT",
         "name": "rooflight, west slope, over the laundry",
@@ -1743,54 +1674,6 @@
         "tolerance": 0.1,
         "unit": "m",
         "ratio": 1.21
-      },
-      {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "x[0]",
-        "truth": 3.25,
-        "auto": 3.135,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-FACADE-FRONT-BAND",
-        "kind": "FACADE_MEMBER",
-        "name": "continuous dark front band (balcony fascia + portal head)",
-        "property": "x[0]",
-        "truth": 3.25,
-        "auto": 3.135,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-RAILING-FRONT",
-        "kind": "RAILING",
-        "name": "front glass balustrade",
-        "property": "x[0]",
-        "truth": 3.3,
-        "auto": 3.185,
-        "delta": -0.115,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.15
-      },
-      {
-        "truthId": "T2-BALCONY-REAR",
-        "kind": "BALCONY",
-        "name": "rear balcony slab over the loggia",
-        "property": "x[1]",
-        "truth": 7.29,
-        "auto": 7.176,
-        "delta": -0.114,
-        "tolerance": 0.1,
-        "unit": "m",
-        "ratio": 1.14
       },
       {
         "truthId": "T2-ROOFLIGHT-W2",
@@ -1853,28 +1736,16 @@
         "ratio": 1.92
       },
       {
-        "truthId": "T2-BALCONY-FRONT",
-        "kind": "BALCONY",
-        "name": "front balcony slab over the portal recess",
-        "property": "fasciaThicknessM",
-        "truth": 0.79,
-        "auto": 0.708,
-        "delta": -0.082,
+        "truthId": "T2-RAILING-REAR",
+        "kind": "RAILING",
+        "name": "rear glass balustrade",
+        "property": "topY",
+        "truth": 3.93,
+        "auto": 3.984,
+        "delta": 0.054,
         "tolerance": 0.05,
         "unit": "m",
-        "ratio": 1.64
-      },
-      {
-        "truthId": "T2-BALCONY-REAR",
-        "kind": "BALCONY",
-        "name": "rear balcony slab over the loggia",
-        "property": "fasciaThicknessM",
-        "truth": 0.56,
-        "auto": 0.504,
-        "delta": -0.056,
-        "tolerance": 0.05,
-        "unit": "m",
-        "ratio": 1.12
+        "ratio": 1.08
       },
       {
         "truthId": "T2-RAILING-REAR",
@@ -1887,13 +1758,24 @@
         "tolerance": 0.05,
         "unit": "m",
         "ratio": 1.08
+      },
+      {
+        "truthId": "T2-BALCONY-FRONT",
+        "kind": "BALCONY",
+        "name": "front balcony slab over the portal recess",
+        "property": "fasciaThicknessM",
+        "truth": 0.79,
+        "auto": 0.739,
+        "delta": -0.051,
+        "tolerance": 0.05,
+        "unit": "m",
+        "ratio": 1.02
       }
     ],
     "extrasPerFamily": {
-      "BALCONY": 2,
       "INTERIOR_WALL": 4,
       "BLOCK": 3,
-      "SURFACE_REGION": 1
+      "SURFACE_REGION": 3
     }
   },
   "items": [
@@ -3626,11 +3508,11 @@
         {
           "name": "thicknessM[return-front-0-0]",
           "truth": 0.61,
-          "auto": 0.661,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.051,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
@@ -3646,11 +3528,11 @@
         {
           "name": "thicknessM[return-front-1-0]",
           "truth": 0.61,
-          "auto": 0.63,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.02,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
@@ -3666,41 +3548,41 @@
         {
           "name": "thicknessM[return-rear-0-0]",
           "truth": 0.61,
-          "auto": 0.661,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.051,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
           "name": "thicknessM[return-rear-0-1]",
           "truth": 0.61,
-          "auto": 0.634,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.024,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
           "name": "thicknessM[return-rear-1-0]",
           "truth": 0.61,
-          "auto": 0.63,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.02,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
           "name": "thicknessM[return-rear-1-1]",
           "truth": 0.61,
-          "auto": 0.656,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.046,
+          "delta": 0.035,
           "verdict": "WITHIN"
         }
       ],
@@ -3997,8 +3879,7 @@
       "autoQuality": "L1",
       "autoProvenance": "SOURCE_CORROBORATED",
       "notes": [
-        "auto verge depthM 0.3 (the truth leaves the depth unresolved)",
-        "feature graph marks unresolved: depth"
+        "auto verge depthM 0.991 (the truth leaves the depth unresolved)"
       ]
     },
     {
@@ -10146,22 +10027,22 @@
         {
           "name": "x[0]",
           "truth": 3.25,
-          "auto": 3.135,
+          "auto": 3.31,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.115,
-          "verdict": "OUTSIDE"
+          "delta": 0.06,
+          "verdict": "WITHIN"
         },
         {
           "name": "x[1]",
           "truth": 7.9,
-          "auto": 7.23,
+          "auto": 7.9,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.67,
-          "verdict": "OUTSIDE"
+          "delta": 0,
+          "verdict": "WITHIN"
         },
         {
           "name": "z[0]",
@@ -10186,11 +10067,11 @@
         {
           "name": "topY",
           "truth": 3.06,
-          "auto": 3.029,
+          "auto": 3.06,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.031,
+          "delta": 0,
           "verdict": "WITHIN"
         },
         {
@@ -10218,11 +10099,11 @@
         {
           "name": "fasciaThicknessM",
           "truth": 0.79,
-          "auto": 0.708,
+          "auto": 0.739,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.082,
+          "delta": -0.051,
           "verdict": "OUTSIDE",
           "note": "balcony.thicknessM (the band)"
         }
@@ -10246,22 +10127,22 @@
         {
           "name": "x[0]",
           "truth": 0.61,
-          "auto": 0.639,
+          "auto": 0.645,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.029,
+          "delta": 0.035,
           "verdict": "WITHIN"
         },
         {
           "name": "x[1]",
           "truth": 7.29,
-          "auto": 7.176,
+          "auto": 7.255,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.114,
-          "verdict": "OUTSIDE"
+          "delta": -0.035,
+          "verdict": "WITHIN"
         },
         {
           "name": "z[0]",
@@ -10286,11 +10167,11 @@
         {
           "name": "topY",
           "truth": 3.06,
-          "auto": 3.026,
+          "auto": 3.06,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.034,
+          "delta": 0,
           "verdict": "WITHIN"
         },
         {
@@ -10318,16 +10199,16 @@
         {
           "name": "fasciaThicknessM",
           "truth": 0.56,
-          "auto": 0.504,
+          "auto": 0.538,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.056,
-          "verdict": "OUTSIDE",
+          "delta": -0.022,
+          "verdict": "WITHIN",
           "note": "balcony.thicknessM (the band)"
         }
       ],
-      "verdict": "PARTIAL",
+      "verdict": "MATCH",
       "autoQuality": "L2",
       "autoProvenance": "IMAGE_METRIC_REGISTERED",
       "notes": [
@@ -10386,11 +10267,11 @@
         {
           "name": "fasciaTopY",
           "truth": 3.07,
-          "auto": 3.029,
+          "auto": 3.06,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.041,
+          "delta": -0.01,
           "verdict": "WITHIN",
           "note": "portalHead.y1"
         },
@@ -10425,12 +10306,12 @@
         {
           "name": "x[0]",
           "truth": 3.25,
-          "auto": 3.135,
+          "auto": 3.31,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.115,
-          "verdict": "OUTSIDE",
+          "delta": 0.06,
+          "verdict": "WITHIN",
           "note": "derived: balcony fascia ∪ portal head on x"
         },
         {
@@ -10458,11 +10339,11 @@
         {
           "name": "y[1]",
           "truth": 3.07,
-          "auto": 3.029,
+          "auto": 3.06,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.041,
+          "delta": -0.01,
           "verdict": "WITHIN",
           "note": "derived: balcony fascia ∪ portal head on y"
         },
@@ -10488,7 +10369,7 @@
           "note": "assemblies[PORTAL_FRAME] CONTINUES_AS balcony ↔ portal head"
         }
       ],
-      "verdict": "PARTIAL",
+      "verdict": "MATCH",
       "autoQuality": "L2",
       "autoProvenance": "SOURCE_CORROBORATED",
       "notes": [
@@ -10507,51 +10388,51 @@
         {
           "name": "x[0]",
           "truth": 3.3,
-          "auto": 3.185,
+          "auto": 3.36,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.115,
-          "verdict": "OUTSIDE"
+          "delta": 0.06,
+          "verdict": "WITHIN"
         },
         {
           "name": "x[1]",
           "truth": 7.26,
-          "auto": 7.18,
+          "auto": 7.219,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.08,
+          "delta": -0.041,
           "verdict": "WITHIN"
         },
         {
           "name": "z",
           "truth": 0.05,
-          "auto": 0.05,
+          "auto": 0.508,
           "tolerance": 0.1,
           "rule": "plan",
+          "unit": "m",
+          "delta": 0.458,
+          "verdict": "OUTSIDE"
+        },
+        {
+          "name": "baseY",
+          "truth": 3.06,
+          "auto": 3.06,
+          "tolerance": 0.05,
+          "rule": "general",
           "unit": "m",
           "delta": 0,
           "verdict": "WITHIN"
         },
         {
-          "name": "baseY",
-          "truth": 3.06,
-          "auto": 3.029,
-          "tolerance": 0.05,
-          "rule": "general",
-          "unit": "m",
-          "delta": -0.031,
-          "verdict": "WITHIN"
-        },
-        {
           "name": "topY",
           "truth": 3.93,
-          "auto": 3.939,
+          "auto": 3.97,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": 0.009,
+          "delta": 0.04,
           "verdict": "WITHIN",
           "note": "baseY + heightM"
         },
@@ -10596,22 +10477,22 @@
         {
           "name": "x[0]",
           "truth": 0.64,
-          "auto": 0.689,
+          "auto": 0.67,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": 0.049,
+          "delta": 0.03,
           "verdict": "WITHIN"
         },
         {
           "name": "x[1]",
           "truth": 7.26,
-          "auto": 7.126,
+          "auto": 7.23,
           "tolerance": 0.1,
           "rule": "plan",
           "unit": "m",
-          "delta": -0.134,
-          "verdict": "OUTSIDE"
+          "delta": -0.03,
+          "verdict": "WITHIN"
         },
         {
           "name": "z",
@@ -10626,22 +10507,22 @@
         {
           "name": "baseY",
           "truth": 3.06,
-          "auto": 3.026,
+          "auto": 3.06,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": -0.034,
+          "delta": 0,
           "verdict": "WITHIN"
         },
         {
           "name": "topY",
           "truth": 3.93,
-          "auto": 3.95,
+          "auto": 3.984,
           "tolerance": 0.05,
           "rule": "general",
           "unit": "m",
-          "delta": 0.02,
-          "verdict": "WITHIN",
+          "delta": 0.054,
+          "verdict": "OUTSIDE",
           "note": "baseY + heightM"
         },
         {
@@ -10932,7 +10813,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -10948,7 +10829,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -10964,7 +10845,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -10980,7 +10861,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -10996,7 +10877,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -11012,7 +10893,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -11028,7 +10909,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "finish region without geometry; the auto has 1 surfaceRegions (finish-front-66 FRONT s0 MID)"
+        "finish region without geometry; the auto has 3 surfaceRegions (finish-front-66 FRONT s0 WARM, finish-front-319 FRONT s0 DARK, finish-rear-66 REAR s0 WARM)"
       ]
     },
     {
@@ -11044,7 +10925,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.689..7.126",
+        "truth unresolved; auto says: no feature at x 1.40 / 2.47 on the rear outer plane; the rear railing runs 0.67..7.23",
         "truth handling: candidates: balustrade panel divisions, a terrace step, a roof-window layout line"
       ]
     },
@@ -11078,7 +10959,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "truth unresolved; auto says: a slab band 0.708 m thick, fascia y [2.321, 3.029] (RENDER_BAND)",
+        "truth unresolved; auto says: a slab band 0.739 m thick, fascia y [2.321, 3.029] (RENDER_BAND)",
         "truth handling: modelled as a slab whose fascia is the measured band"
       ]
     },
@@ -11095,7 +10976,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "truth unresolved; auto says: verge depthM 0.3 / 0.3 (assumed)"
+        "truth unresolved; auto says: verge depthM 0.991 / 1 (assumed)"
       ]
     },
     {
@@ -11161,7 +11042,7 @@
       "autoQuality": null,
       "autoProvenance": null,
       "notes": [
-        "truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.029 / 3.026"
+        "truth unresolved; auto says: railing heights 0.91 / 0.924 m on a base at 3.06 / 3.06"
       ]
     },
     {
@@ -11232,20 +11113,6 @@
   ],
   "extras": [
     {
-      "family": "BALCONY",
-      "id": "terrace-front-66",
-      "featureId": "feat-terrace-front-66",
-      "quality": "L0",
-      "summary": "TERRACE storey 0 x 0.661..11.416, z 0..0.991, top 0 (ASSUMED_FOR_RENDERING)"
-    },
-    {
-      "family": "BALCONY",
-      "id": "terrace-rear-66",
-      "featureId": "feat-terrace-rear-66",
-      "quality": "L0",
-      "summary": "TERRACE storey 0 x 0.661..7.267, z 13.601..14.601, top 0 (ASSUMED_FOR_RENDERING)"
-    },
-    {
       "family": "INTERIOR_WALL",
       "id": "main-iwall-0-z-7",
       "featureId": "feat-main-iwall-0-z-7",
@@ -11299,7 +11166,21 @@
       "id": "finish-front-66",
       "featureId": "feat-finish-front-66",
       "quality": "L0",
-      "summary": "FRONT storey 0 MID along [0.661, 7.9], y [0, 3.06]"
+      "summary": "FRONT storey 0 WARM along [0.645, 3.189], y [0, 3.06]"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "id": "finish-front-319",
+      "featureId": "feat-finish-front-319",
+      "quality": "L0",
+      "summary": "FRONT storey 0 DARK along [3.189, 7.9], y [0, 3.06]"
+    },
+    {
+      "family": "SURFACE_REGION",
+      "id": "finish-rear-66",
+      "featureId": "feat-finish-rear-66",
+      "quality": "L0",
+      "summary": "REAR storey 0 WARM along [0.645, 7.255], y [0, 3.06]"
     }
   ]
 }

@@ -102,7 +102,7 @@ async function main(): Promise<void> {
   await write('feature-quality.json', result.quality)
   await write('source-view-residuals.json', { candidateHash: result.candidate.contentHash, residuals: result.residuals })
   await write('repair-trace.json', result.repair)
-  await write('assembly-closure.json', { schema: 'buildapp.assembly-closure', schemaVersion: '1.0.0', candidateHash: result.candidate.contentHash, decisions: result.closure, facadeGraph: result.building.facadeGraph, terraces: result.building.terraces, massTones: result.building.massTones, frameTones: result.building.frameTones })
+  await write('assembly-closure.json', { schema: 'buildapp.assembly-closure', schemaVersion: '1.0.0', candidateHash: result.candidate.contentHash, decisions: result.closure, facadeGraph: result.building.facadeGraph, terraces: result.building.terraces, massTones: result.building.massTones, returnTones: result.building.returnTones })
   await write('registrations.json', { ...result.registrations, plans: result.registrations.plans.map((p) => ({ frameId: p.frameId, assetId: p.assetId, storeyIndex: p.storeyIndex, mppX: p.mppX, mppY: p.mppY, originPx: p.originPx, wallPx: p.wallPx, why: p.why })), world: result.world })
   await write(`${slug}-hypotheses-v2.json`, result.hypotheses)
   await writeFile(join(outDir, `${slug}-model.json`), serializeModel(result.model), 'utf8')

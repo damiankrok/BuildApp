@@ -317,6 +317,38 @@ head whose provenance is `ASSUMED_FOR_RENDERING` or `UNRESOLVED`, only towards
 the view's reading, never by more than 1.2 m, for at most two rounds, and it
 writes down every operation applied and every one refused with its reason.
 
+### Assembly closure (BUILDAPP-03Y, `assembly-closure.ts`, `terrace.ts`, `tones.ts`)
+
+After the members are read one by one, one pass decides how they MEET,
+recording every decision with its reason (`assembly-closure.json`):
+
+- `snapReturnsToBodyFaces` — a return's outer face within 6 cm of its body's
+  face is in it (a plan registration residual, not a step);
+  `alignStackedReturns` — returns stacked at one end of a facade, read on two
+  plans within 6 cm of each other, are one member: one face at the mean.
+- `closeBalconies` — each slab end is WALL (a lower-storey return beside it),
+  CARRIES (a same-storey return standing on it over an open recess below,
+  and only where the elevation draws the fascia running on under it —
+  `bandContinues`), FREE (the plan read for the balustrade line across the
+  zone, `drawnLineAcrossZone`) or MEETS (a portal head continuing the band);
+  the top snaps to the storey floor within 0.1 m.
+- `closeRailings` / `railingPath` — along the mouth, turning back to the wall
+  at a FREE end where the plan draws the turn, stopping at WALL ends.
+- `closeVerges` — a verge that continues the returns of a gable frame is as
+  deep as the zone those returns stand in; `closePortalHeads` — a portal head
+  continuing a balcony band shares its top and soffit.
+- Terraces — the recess floor at ground level becomes a `TerraceV2`, with the
+  platform the plan outlines beyond the mouth (`readTerraceExtension`);
+  `closeTerraces` puts floor edges on the returns and platform sides on the
+  building's corners.
+- `buildFacadeGraph` — the members as a graph: CONTINUES_TO, TERMINATES_AT,
+  TURNS_AT, MEETS_HOST, with the measured gap.
+- Tones (`tones.ts`) — each body's open ground-storey faces, each return's
+  outer face and each recessed wall column by column, read relative to the
+  render's white point by robust median into LIGHT / MID / DARK / WARM
+  (`readMassTones`, `readReturnTones`, `readFinishRuns`); the emitter turns a
+  tone into a material, never a colour.
+
 ## 5. Provenance and `why`
 
 `ProvenanceStatus` (`graph.ts`) is the vocabulary the source truth, the

@@ -156,8 +156,8 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     if (!l) continue
     const mainMass = b.masses.find((m) => m.role === 'MAIN')
     const isTop = r.storeyIndex === Math.max(...(mainMass?.storeys ?? [0]))
-    const frameTone = b.frameTones.find((t) => t.side === r.side)
-    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: frameTone && frameTone.share >= 0.5 ? materialForTone(frameTone.tone, MATERIALS_V2.member) : MATERIALS_V2.member }, r.featureId, 'walls')
+    const ownTone = b.returnTones.find((t) => t.returnId === r.id)
+    push({ type: 'createWall', id: r.id, levelId: l.id, start: r.start, end: r.end, thickness: r.thicknessM, height: round6(l.height), baseOffset: 0, kind: 'EXTERIOR', materialId: ownTone && ownTone.share >= 0.5 ? materialForTone(ownTone.tone, MATERIALS_V2.member) : MATERIALS_V2.member }, r.featureId, 'walls')
     const x0 = Math.min(r.start.x, r.end.x)
     const x1 = Math.max(r.start.x, r.end.x)
     const z0 = Math.min(r.start.z, r.end.z)
