@@ -1,6 +1,6 @@
 # Analyzer v2 architecture
 
-> `packages/reconstruction/src/v2` · solver `reconstruction.solver.v2` **2.0.0** · production entry `packages/analysis-service/scripts/reconstruct-v2.ts` (a thin adapter over `runAnalysis`, the same function the analyzer API calls)
+> `packages/reconstruction/src/v2` · solver `reconstruction.solver.v2` **2.1.0** · production entry `packages/analysis-service/scripts/reconstruct-v2.ts` (a thin adapter over `runAnalysis`, the same function the analyzer API calls)
 > Introduced in STAGE BUILDAPP-03X. Companions: `docs/EVIDENCE_CONSUMPTION.md`, `docs/FEATURE_IDENTITY_GRAPH.md`, `docs/ANALYZER_V2_ARTIFACTS.md`. The failures it was built to answer are itemised, family by family, in `docs/ANALYZER_FORENSIC_AUDIT.md`.
 
 The v2 analyzer is the refounded path from a sealed SourcePackage, its
@@ -59,7 +59,8 @@ consumes and produces, and where it lives:
 | G3 | stair | `stair-topology.ts` | plan rasters, storey rise | `StairTopologyHypothesis`, a slab hole |
 | G4 | interior | `interior.ts` | plan rasters, OCR tokens, published rooms, the stair as a barrier | partitions, door gaps, blocks, room polygons |
 | G5 / H | openings | `openings-v2.ts` | plan gaps, ring callouts, registered renders | `OpeningV2` with per-property provenance; doorways between bodies |
-| G6 | roof details | `roof-details.ts` | the section, interior blocks, side renders | attached roofs with parapets, chimneys, rooflights |
+| G1b | side-view orientation | `side-orientation.ts` | unlabelled side renders, `MainRoofV2` | the two side views kept or swapped by the main body's profile |
+| G6 | roof details | `roof-details.ts`, `attached-roof-form.ts` | the section, interior blocks, registered renders | each attached roof's form (flat or gable) read on the renders, flat roofs with parapets, gabled attached roofs as planes, chimneys, rooflights |
 | I | assemblies | `facade.ts` | registered renders, recesses, returns | verge members, balconies, railings, portal heads, assemblies |
 | §17 | cameras | `camera.ts` | perspective rasters, the envelope | a solved camera per render, or a stated refusal |
 | — | finish regions | `dominantTone` in `scan.ts` | the recessed walls on the renders | `SurfaceRegionV2` (colour, never geometry) |
@@ -348,6 +349,40 @@ recording every decision with its reason (`assembly-closure.json`):
   render's white point by robust median into LIGHT / MID / DARK / WARM
   (`readMassTones`, `readReturnTones`, `readFinishRuns`); the emitter turns a
   tone into a material, never a colour.
+
+### Attached roof form and side-view orientation (INTEGRATION-003B, `attached-roof-form.ts`, `side-orientation.ts`)
+
+The layout (`inferRoofSystems`) knows an attached body only from the plans,
+which cannot tell a flat slab from a pitched roof: it takes the body's roof as
+FLAT by convention and says so. At G6 the registered renders are asked.
+
+- **Reading the body's top.** On every view that sees the body against the
+  sky — no other body and no other roof footprint in the same columns — each
+  column is walked up from inside the wall to the first run of sky
+  (`skyMask`) or vegetation. Heights are re-anchored on the main roof's own
+  measured top in the same picture (`topOffset`), so a registration whose
+  outline clipped a narrow apex does not lift every height. The profile is
+  LOW (a slab or a parapet), LEVEL (a ridge seen side on), PEAKED (a gable end
+  facing the view) or IRREGULAR.
+- **Deciding.** All readable views LOW → FLAT, read rather than assumed. A
+  LEVEL top is a gable only when its height matches a gable at the stated
+  pitch over the body's own half-span (a wall standing taller than the plans
+  say looks the same); a PEAKED top carries its own pitch. A flat reading in
+  one view and a pitched one in another, or two ridge directions, stay UNREAD
+  and the convention stands with the conflict in the solver step.
+- **Building.** A gable is two `createRoofPlane`s, a `RIDGE`, eaves (an
+  `ABUTMENT` where an eave runs along the main body's wall) and verges at its
+  free gable ends. When its ridge runs into the main roof's slope at the same
+  eave height, the planes run on over that slope to the line where the two
+  top surfaces meet and stop there — two valleys, declared as `INTERSECTS`
+  relationships with `roof-main`, which itself is unchanged. The body's walls
+  take `FOLLOW_ROOF_PLANES`, so its gable ends rise to the ridge.
+- **Orienting unlabelled side views (G1b).** A publisher that labels both side
+  elevations identically leaves the side assignment a coin toss. Once the main
+  roof is solved, each unlabelled side view's silhouette top is compared with
+  the main body's side profile as assigned and mirrored; the views are swapped
+  only when every readable view prefers the mirrored reading by at least
+  0.25 m (median). A symmetric profile gives no margin and never swaps.
 
 ## 5. Provenance and `why`
 

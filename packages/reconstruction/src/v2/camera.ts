@@ -375,7 +375,7 @@ const luma = (r: number, g: number, b: number): number => 0.299 * r + 0.587 * g 
  * to be a gradient. A white wall is as bright and as neutral as a pale sky,
  * and the only thing that separates them is the hard edge between them.
  */
-function skyMask(raster: Raster): Mask {
+export function skyMask(raster: Raster): Mask {
   const { width: w, height: h, data } = raster
   const like = new Uint8Array(w * h)
   for (let i = 0; i < w * h; i += 1) {

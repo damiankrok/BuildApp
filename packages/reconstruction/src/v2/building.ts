@@ -12,6 +12,7 @@ import type { OpeningV2 } from './openings-v2.js'
 import type { AttachedRoofReading, ChimneyReading, RooflightReading } from './roof-details.js'
 import type { FacadeMember, FacadeAssemblyHypothesis } from './facade.js'
 import type { ProvenanceStatus } from './graph.js'
+import type { AttachedGableLayout, AttachedRoofForm } from './attached-roof-form.js'
 
 export type LevelV2 = { index: number; id: string; elevation: number; height: number; wallTop: number; featureId: string }
 
@@ -56,6 +57,28 @@ export type AttachedRoofV2 = {
   footprint: { x0: number; z0: number; x1: number; z1: number }
   /** True when the roof projects over the zone in front of the body (a portal head). */
   projectsOverZone: boolean
+  featureId: string
+  provenance: ProvenanceStatus
+}
+
+/**
+ * A pitched roof over an attached body, read off the elevations
+ * (`attached-roof-form.ts`): its form, its pitch and the planes it is built
+ * of, including where they die into the main roof.
+ */
+export type PitchedAttachedRoofV2 = {
+  massId: string
+  kind: 'GABLE'
+  ridgeAxis: 'X' | 'Z'
+  pitchDeg: number
+  pitchSource: 'STATED' | 'MEASURED'
+  /** Top surface at the eave line, and at the ridge. */
+  eaveY: number
+  ridgeY: number
+  thicknessM: number
+  footprint: { x0: number; z0: number; x1: number; z1: number }
+  layout: AttachedGableLayout
+  form: Extract<AttachedRoofForm, { kind: 'GABLE' }>
   featureId: string
   provenance: ProvenanceStatus
 }
@@ -183,6 +206,8 @@ export type BuildingV2 = {
   masses: MassV2[]
   mainRoof?: MainRoofV2
   attachedRoofs: AttachedRoofV2[]
+  /** Attached bodies whose own roof the elevations show pitched; never also in `attachedRoofs`. */
+  pitchedAttachedRoofs: PitchedAttachedRoofV2[]
   recesses: RecessTopology[]
   returns: ReturnWallV2[]
   balconies: BalconyV2[]

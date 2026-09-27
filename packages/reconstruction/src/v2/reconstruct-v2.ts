@@ -13,7 +13,7 @@
 import { round6, stableId } from '@buildapp/source-common'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
-import type { Raster } from '@buildapp/source-cv'
+import type { Mask, Raster } from '@buildapp/source-cv'
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import { CONVENTIONS, SOLVER_NAME, levelsFrom, registerElevationFrames } from '../solve.js'
 import { composeStructuralLayout } from '../structural.js'
@@ -39,6 +39,8 @@ import { readAttachedRoof, readChimneys, readRooflights, registerSection } from 
 import { readFasciaBand, readRailing, readVergeMember } from './facade.js'
 import type { FacadeAssemblyHypothesis, FacadeMember } from './facade.js'
 import { solvePerspectiveCamera } from './camera.js'
+import { attachedGableLayout, readAttachedRoofForm } from './attached-roof-form.js'
+import { decideSideOrientation, mainTopProfile } from './side-orientation.js'
 import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
@@ -59,7 +61,7 @@ import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt } from './scan.js'
 
-export const SOLVER_V2_VERSION = '2.0.0' as const
+export const SOLVER_V2_VERSION = '2.1.0' as const
 
 export type ReconstructionV2Options = {
   label: string
@@ -383,6 +385,38 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   }
 
   // ---------------------------------------------------------------------------
+  // G1b. which unlabelled side view is which, now that the main body's profile is known
+  // ---------------------------------------------------------------------------
+  const skyMasks = new Map<Raster, Mask>()
+  if (mainRoof && ridgeY !== undefined) {
+    const roof = mainRoof
+    const labelled = (frameId: string): boolean => {
+      const v = frameById.get(frameId)?.roles.view as string | undefined
+      return v === 'LEFT' || v === 'RIGHT' || v === 'SIDE_LEFT' || v === 'SIDE_RIGHT'
+    }
+    const sides = views.map((v, index) => ({ ...v, index })).filter((v) => (v.view.side === 'LEFT' || v.view.side === 'RIGHT') && !labelled(v.view.registration.frameId))
+    const mirrored = sides.map((v) => {
+      const reg = elevations.find((e) => e.frameId === v.view.registration.frameId)
+      const other = v.view.side === 'LEFT' ? 'RIGHT' : 'LEFT'
+      const again = reg ? registerElevationV2({ id: reg.frameId, assetId: reg.assetId }, reg.extent, other, reg.sideConfidence, `${reg.sideWhy}; mirrored to the ${other.toLowerCase()} wall by the main body's side profile`, world, ridgeY, sideEaves, terrain) : undefined
+      return again ? { v, reg: again, view: elevationFrameFromV2(again, world) } : undefined
+    })
+    const pairs = mirrored.filter((m): m is NonNullable<typeof m> => m !== undefined)
+    if (sides.length > 0 && pairs.length === sides.length) {
+      const profile = mainTopProfile(roof, 'Z')
+      const decision = decideSideOrientation(pairs.map((m) => ({ current: m.v.view, mirrored: m.view, raster: m.v.raster })), profile, skyMasks, options.debug)
+      if (decision.swap) {
+        for (const m of pairs) {
+          views[m.v.index] = { view: m.view, raster: m.v.raster }
+          const at = elevations.findIndex((e) => e.frameId === m.reg.frameId)
+          if (at >= 0) elevations[at] = m.reg
+        }
+      }
+      step({ stage: 'registration', what: 'the unlabelled side views oriented by the main body’s profile', method: 'DISCRETE_SELECTION', detail: decision.why, inputs: sides.length, outputs: decision.swap ? sides.length : 0 })
+    }
+  }
+
+  // ---------------------------------------------------------------------------
   // G2. recesses and returns from the zones, per storey
   // ---------------------------------------------------------------------------
   const zoneRegions = layout.footprintRegions.filter((r) => r.kind === 'ZONE')
@@ -608,11 +642,33 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     if (raster && reg) sectionReg = registerSection(raster, reg.metresPerPixelY, reg.originPx.y, [{ axis: 'X', from: world.envelope.x0, to: world.envelope.x1 }, { axis: 'Z', from: world.walled.z0, to: world.walled.z1 }], sectionFrame.id, ridgeY)
     if (sectionReg) step({ stage: 'registration', what: 'section registered by its wall columns', method: 'DIRECT', detail: `${sectionReg.mpp.toFixed(6)} m/px, a cross-section along ${sectionReg.axis}`, inputs: 1, outputs: 1 })
   }
+  const pitchedAttachedRoofs: BuildingV2['pitchedAttachedRoofs'] = []
   for (const m of masses.filter((x) => x.role === 'ATTACHED')) {
     const sup = layout.roofSupports.find((r) => r.massId === m.sourceMassId)
     if (sup && sup.kind !== 'FLAT' && sup.kind !== 'UNKNOWN') continue
     const l = levelOf(Math.max(...m.storeys))
     if (!l) continue
+    // The layout took this body's roof as flat by convention: the plans cannot
+    // say otherwise. The elevations can, where they see the body against the sky.
+    if (views.length > 0) {
+      const mainWallTop = levelOf(topStorey)?.wallTop
+      const stated = mainRoof && mainRoof.authority !== 'CONVENTION' ? mainRoof.pitchDeg : undefined
+      const buildUp = mainRoof && mainWallTop !== undefined ? round6(Math.max(0, mainRoof.eaveY - mainWallTop)) : 0
+      const occluders = [...masses.filter((x) => x.id !== m.id), ...(mainRoof ? [mainRoof.footprint] : [])]
+      const form = readAttachedRoofForm({ views, body: m, wallTopY: l.wallTop, eaveBuildUpM: buildUp, statedPitchDeg: stated, occluders, ceilingY: (mainRoof?.ridgeY ?? l.wallTop) + 1.5, mainRoof, masks: skyMasks, debug: options.debug })
+      step({ stage: 'roof-details', what: `the form of the roof over ${m.id}, read on the elevations`, method: 'DISCRETE_SELECTION', detail: `${form.kind}: ${form.why}${form.readings.length > 0 ? ` [${form.readings.map((r) => `${r.side.toLowerCase()} ${r.profile.toLowerCase()} ${r.riseM.toFixed(2)} m over ${r.samples} columns`).join('; ')}]` : ''}`, inputs: views.length, outputs: form.readings.length })
+      if (form.kind === 'GABLE') {
+        const eaveY = round6(l.wallTop + buildUp)
+        const layoutOfRoof = attachedGableLayout(m, form.ridgeAxis, form.pitchDeg, eaveY, mainRoof)
+        const sids = form.readings.filter((r) => r.profile !== 'LOW').map((r) => frameById.get(r.frameId)).filter((f): f is SourceCoordinateFrame => !!f).map((f) => sighting(f, `pitched roof over ${m.id}`, form.confidence))
+        const pitchProvenance: ProvenanceStatus = form.pitchSource === 'STATED' ? 'SOURCE_DERIVED' : 'IMAGE_METRIC_REGISTERED'
+        const featureId = feature('ATTACHED_ROOF', `roof-${m.id}`, { pitchDeg: { value: form.pitchDeg, low: form.pitchDeg - 1, high: form.pitchDeg + 1, unit: 'deg' }, eaveY: { value: eaveY, low: eaveY - 0.05, high: eaveY + 0.05 }, ridgeY: { value: layoutOfRoof.ridgeY, low: layoutOfRoof.ridgeY - 0.15, high: layoutOfRoof.ridgeY + 0.15 } }, sids, 'IMAGE_METRIC_REGISTERED', `${form.why}; ${layoutOfRoof.join.why}`, { hostId: m.featureId, uncertaintyM: 0.15, confidence: form.confidence, parameterProvenance: { pitchDeg: pitchProvenance, eaveY: 'SOURCE_DERIVED', ridgeY: 'SOURCE_DERIVED' } })
+        relate('SUPPORTS', m.featureId, featureId, 'the body carries its roof')
+        if (mainRoof && layoutOfRoof.join.kind === 'VALLEY') relate('MEETS_HOST', featureId, mainRoof.featureId, layoutOfRoof.join.why)
+        pitchedAttachedRoofs.push({ massId: m.id, kind: 'GABLE', ridgeAxis: form.ridgeAxis, pitchDeg: form.pitchDeg, pitchSource: form.pitchSource, eaveY, ridgeY: layoutOfRoof.ridgeY, thicknessM: mainRoof?.thicknessM ?? CONVENTIONS.roofThickness, footprint: { x0: m.x0, z0: m.z0, x1: m.x1, z1: m.z1 }, layout: layoutOfRoof, form, featureId, provenance: 'IMAGE_METRIC_REGISTERED' })
+        continue
+      }
+    }
     let reading: ReturnType<typeof readAttachedRoof>
     if (sectionReg && sectionFrame) {
       const raster = options.raster(sectionFrame)
@@ -842,7 +898,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   for (const frame of graph.coordinateFrames.filter((f) => f.roles.projection === 'PERSPECTIVE' && (keep ? keep(f) : true))) {
     const raster = options.raster(frame)
     if (!raster || !mainRoof) continue
-    const cam = solvePerspectiveCamera(raster, frame.id, { x0: world.envelope.x0, x1: world.envelope.x1, z0: world.envelope.z0, z1: world.envelope.z1, eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, groundY: 0, attached: attachedRoofs.map((r) => ({ x0: r.footprint.x0, x1: r.footprint.x1, z0: r.footprint.z0, z1: r.footprint.z1, topY: r.parapetTopY ?? r.slabTopY })) })
+    const cam = solvePerspectiveCamera(raster, frame.id, { x0: world.envelope.x0, x1: world.envelope.x1, z0: world.envelope.z0, z1: world.envelope.z1, eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, groundY: 0, attached: [...attachedRoofs.map((r) => ({ x0: r.footprint.x0, x1: r.footprint.x1, z0: r.footprint.z0, z1: r.footprint.z1, topY: r.parapetTopY ?? r.slabTopY })), ...pitchedAttachedRoofs.map((r) => ({ ...r.footprint, topY: r.eaveY }))] })
     cameras.push({ frameId: frame.id, solved: !!cam, residualPx: cam?.residualPx.rms, why: cam ? cam.why : 'no camera hypothesis aligned enough silhouette corners with a plausible residual', ...(cam ? { camera: cam } : {}) })
     if (cam) {
       solvedCameras.push(cam)
@@ -964,7 +1020,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   // J. emit, K. seal, L. verify, M. repair, N. quality
   // ---------------------------------------------------------------------------
-  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
+  const building: BuildingV2 = { label: options.label, wallThicknessM: T, slabThicknessM: slabT, levels: levelsV2, masses, mainRoof, attachedRoofs, pitchedAttachedRoofs, recesses, returns, balconies, railings, portalHeads, verges, terraces, massTones, returnTones, facadeGraph, chimneys, rooflights, openings, sharedDoors, interior, stair, assemblies, surfaceRegions, terrainY: terrain }
   const residualsBefore = verifyAgainstViews({ building, views })
   const repair = repairFromResiduals(building, residualsBefore, 2)
   const residuals = verifyAgainstViews({ building, views })

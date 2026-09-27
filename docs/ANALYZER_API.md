@@ -29,7 +29,7 @@ There is one analyzer. The API holds no project knowledge, no reference model, n
   "status": "ok",
   "service": "buildapp-analyzer-api",
   "version": "1.0.0",
-  "analyzer": { "service": "1.0.0", "solver": "2.0.0" },
+  "analyzer": { "service": "1.0.0", "solver": "2.1.0" },
   "publishers": ["archon.pl"],
   "vision": "DETERMINISTIC_ONLY",
   "queue": { "running": 0, "queued": 0, "concurrency": 1, "capacity": 8 }
