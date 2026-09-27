@@ -3,7 +3,7 @@ loggia-front [LOGGIA, COMPLETE]
   ring-0-w1 (Wall)
   ring-0-w2 (Wall)
   ring-0-w3 (Wall)
-  ring-0-w2 (host)
+  ring-0-w2 (host: hostIds)
 roof-main [ROOF GABLE, COMPLETE]
   roof-main-plane-front (RoofPlane)
   roof-main-plane-rear (RoofPlane)

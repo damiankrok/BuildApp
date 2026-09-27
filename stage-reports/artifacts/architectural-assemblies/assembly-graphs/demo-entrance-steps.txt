@@ -2,11 +2,11 @@ hyp-h1-entrance [ENTRANCE, COMPLETE]
   door-front (Door)
   hyp-h1-landing (Landing)
   hyp-h1-steps (ExteriorStepRun)
-  ring-0-w0 (host)
+  ring-0-w0 (host: hostIds)
 hyp-h1-exterior-stair [EXTERIOR_STAIR, COMPLETE]
   hyp-h1-steps (ExteriorStepRun)
   hyp-h1-landing (Landing)
-  ring-0-w0 (host)
+  ring-0-w0 (host: hostIds)
 roof-main [ROOF GABLE, COMPLETE]
   roof-main-plane-front (RoofPlane)
   roof-main-plane-rear (RoofPlane)
@@ -24,7 +24,8 @@ roof-main [ROOF GABLE, COMPLETE]
   roof-main-verge-rear-west-board (Fascia)
   roof-main-verge-rear-east-board (Fascia)
 
-(in no assembly: 4 primitives)
+(in no assembly: 5 primitives)
+  ring-0-w0 (Wall)
   ring-0-w1 (Wall)
   ring-0-w2 (Wall)
   ring-0-w3 (Wall)

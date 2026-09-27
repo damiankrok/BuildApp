@@ -7,7 +7,7 @@
  * writes the same as nodes and edges (COMPONENT, HOST and every typed
  * relationship) for a machine to read.
  */
-import { assemblyReferences, findObject, type Assembly, type CanonicalBuildingModel } from '@buildapp/model'
+import { HOST_REFERENCE_FIELDS, assemblyComponents, assemblyReferences, findObject, type Assembly, type CanonicalBuildingModel } from '@buildapp/model'
 import { primitivesOf } from '../registry/primitives.js'
 
 export function assemblyTree(m: CanonicalBuildingModel): string {
@@ -15,7 +15,7 @@ export function assemblyTree(m: CanonicalBuildingModel): string {
   const types = new Map<string, string>()
   for (const p of primitivesOf(m)) if (p.id === p.objectId && !types.has(p.id)) types.set(p.id, p.type)
   const lines: string[] = []
-  const nested = new Set(m.assemblies.flatMap((a) => assemblyReferences(a).filter((r) => r.field !== 'hostIds' && byId.has(r.id)).map((r) => r.id)))
+  const nested = new Set(m.assemblies.flatMap((a) => assemblyComponents(a).filter((r) => byId.has(r.id)).map((r) => r.id)))
   const write = (a: Assembly, depth: number, seen: Set<string>): void => {
     const pad = '  '.repeat(depth)
     lines.push(`${pad}${a.id} [${a.kind}${a.kind === 'ROOF' ? ` ${a.classification}` : ''}, ${a.quality}${a.missing?.length ? `; missing ${a.missing.join(', ')}` : ''}${a.alternatives?.length ? `; or ${a.alternatives.map((x) => `${x.kind} ${x.confidence}`).join(', ')}` : ''}]`)
@@ -23,17 +23,18 @@ export function assemblyTree(m: CanonicalBuildingModel): string {
     seen.add(a.id)
     for (const r of assemblyReferences(a)) {
       const inner = byId.get(r.id)
-      if (inner && r.field !== 'hostIds') {
+      const host = HOST_REFERENCE_FIELDS.has(r.field)
+      if (inner && !host) {
         write(inner, depth + 1, seen)
         continue
       }
       const kind = findObject(m, r.id)?.kind ?? '?'
-      lines.push(`${pad}  ${r.id} (${r.field === 'hostIds' ? 'host' : types.get(r.id) ?? kind})`)
+      lines.push(`${pad}  ${r.id} (${host ? `host: ${r.field}` : types.get(r.id) ?? kind})`)
     }
     if (a.kind === 'UNKNOWN') lines.push(`${pad}  ! ${a.unresolvedReason}`)
   }
   for (const a of [...m.assemblies].sort((x, y) => (x.id < y.id ? -1 : 1))) if (!nested.has(a.id)) write(a, 0, new Set())
-  const inAssembly = new Set(m.assemblies.flatMap((a) => assemblyReferences(a).map((r) => r.id)))
+  const inAssembly = new Set(m.assemblies.flatMap((a) => assemblyComponents(a).map((r) => r.id)))
   const loose = primitivesOf(m).filter((p) => p.id === p.objectId && !inAssembly.has(p.id))
   if (loose.length > 0) {
     lines.push('')
@@ -63,7 +64,7 @@ export function assemblyGraph(m: CanonicalBuildingModel): AssemblyGraph {
     node(a.id)
     for (const r of assemblyReferences(a)) {
       node(r.id)
-      edges.push({ from: a.id, to: r.id, kind: r.field === 'hostIds' ? 'HOST' : 'COMPONENT', field: r.field })
+      edges.push({ from: a.id, to: r.id, kind: HOST_REFERENCE_FIELDS.has(r.field) ? 'HOST' : 'COMPONENT', field: r.field })
     }
   }
   for (const r of m.relationships) {

@@ -15,7 +15,7 @@ roof-main [ROOF GABLE, COMPLETE]
   roof-main-verge-rear-west-board (Fascia)
   roof-main-verge-rear-east-board (Fascia)
 unknown-roof-feature [UNKNOWN, FRAGMENTARY; or DORMER 0.2, ROOF 0.15]
-  roof-main-plane-front (host)
+  roof-main-plane-front (host: hostIds)
   ! seen on two perspective renders only: no plan, section or elevation shows it, no roof interruption or vertical face was observed (so not a dormer), and it covers nothing a canopy would
 
 (in no assembly: 6 primitives)

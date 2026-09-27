@@ -39,13 +39,13 @@
     {
       "field": "hostRoofAssemblyId",
       "from": "dormer-front",
-      "kind": "COMPONENT",
+      "kind": "HOST",
       "to": "roof-main"
     },
     {
       "field": "hostPlaneIds",
       "from": "dormer-front",
-      "kind": "COMPONENT",
+      "kind": "HOST",
       "to": "roof-main-plane-front"
     },
     {

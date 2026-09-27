@@ -51,8 +51,15 @@ export function assemblyReferences(a: Assembly): AssemblyReference[] {
   }
 }
 
+/**
+ * The fields that name what an assembly stands on or in, not what it is made
+ * of: its hosts, and a dormer's host roof and host planes (the dormer cuts
+ * them; they are not part of it).
+ */
+export const HOST_REFERENCE_FIELDS: ReadonlySet<string> = new Set(['hostIds', 'hostRoofAssemblyId', 'hostPlaneIds'])
+
 /** The components of an assembly: its references without its hosts. */
-export const assemblyComponents = (a: Assembly): AssemblyReference[] => assemblyReferences(a).filter((r) => r.field !== 'hostIds')
+export const assemblyComponents = (a: Assembly): AssemblyReference[] => assemblyReferences(a).filter((r) => !HOST_REFERENCE_FIELDS.has(r.field))
 
 /** The assemblies that list `id` as a component (not merely as a host), sorted by id. */
 export function assembliesContaining(m: CanonicalBuildingModel, id: string): Assembly[] {

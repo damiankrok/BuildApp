@@ -21,19 +21,17 @@
 | STAGE BUILDAPP-03Y — EXTERIOR CLOSURE AND SEMANTIC STYLING | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `31dced4a42a92ad18f446d8dfe870e0c59b95a98`; implementation `1a9f514`, `ba71193`, `1437954`, `74d4646`, `603eb2e` (CI run 36240702093 green; APK artifact 10905870947, versionCode 1029); docs `9de7979` | **PASS — owner-accepted** (Auto v3 reviewed and accepted on the owner's phone) |
 | STAGE BUILDAPP-03Y1 — IN-APP LINK ANALYZER + STABLE MOBILE CAMERA | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `9de7979c78468e91ce2ba29438258b527de5ffac`; implementation `aaa7f69`, `a1e1b13`, `950d401`, `7d9c85f`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y1_IN_APP_ANALYZER_AND_GESTURES.md`) | **INFRASTRUCTURE BUILT — backend not mandatory** — all code, tests and CI green (run 36248477257; APK artifact 10908651204, versionCode 1034). The analyzer API is built but not deployed (no hosting credential). Since 03Y2 the phone analyses a link itself, so the service is an optional fallback, not a gate. Recorded at 03Y1: `BLOCKED_STAGE_BUILDAPP_03Y1_ANALYZER_SERVICE_NOT_DEPLOYED` |
 | STAGE BUILDAPP-03Y2 — EMBEDDED LOCAL ANALYZER RUNTIME PROOF | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `743bb26dfec85658f643ac71797153832ebd20da`; implementation `ec25e4f`, `1b3e17e`, `55c50cc`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`) | **PASS — proof succeeded; Marcówki confirmed on the owner's phone.** The production analyzer runs inside the APK (nodejs-mobile 18.20.4). On an Android 14 x86_64 emulator in CI it analysed the live Marcówki URL (215.5 s and 142.1 s, peak 1 788 / 1 791 MiB, model `4a8e8ddc…` = desktop) and matched every desktop hash on the fixture. arm64 APK 29 911 875 B (+18 000 437 B). The owner then ran Marcówki locally on the arm64 phone. Recorded at 03Y2: `LOCAL_ANALYZER_PROOF_PARTIAL` (the phone had not been run yet) |
-| STAGE BUILDAPP-03Y2G — GENERIC PLAN DECOMPOSITION + FAILURE DIAGNOSTICS + RARYTASY GENERALIZATION GATE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `87c05889ade457fc3e6c5055ccff4589bff5c1e5`; implementation `a69af63`, `55f2c1c`, `7cfc534`, `4bc8178`, and the CI/docs commits after them; report `stage-reports/STAGE_BUILDAPP_03Y2G_GENERIC_PLAN_GENERALIZATION.md` | **CURRENT GATE**: **PARTIAL_STAGE_BUILDAPP_03Y2G_OWNER_PHONE_RECHECK_PENDING**. CI run 45 is green on all 10 jobs.
-
-- The second house completes with one model (`b1d6d7b7…`) on desktop, on a
-  fresh CI runner, on the APK's bundle on Node 18 without ICU, and on the
-  Android 14 emulator (186.1 s, 2 096 MiB).
-- Marcówki is unchanged.
-- The direct APK asset is published.
-- The owner's arm64 phone recheck decides PASS. |
+| STAGE BUILDAPP-03Y2G — GENERIC PLAN DECOMPOSITION + FAILURE DIAGNOSTICS + RARYTASY GENERALIZATION GATE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `87c05889ade457fc3e6c5055ccff4589bff5c1e5`; implementation `a69af63`, `55f2c1c`, `7cfc534`, `4bc8178`, and the CI/docs commits after them; report `stage-reports/STAGE_BUILDAPP_03Y2G_GENERIC_PLAN_GENERALIZATION.md` | **CURRENT GATE**: **PARTIAL_STAGE_BUILDAPP_03Y2G_OWNER_PHONE_RECHECK_PENDING**. CI run 45 is green on all 10 jobs. The second house completes with one model (`b1d6d7b7…`) on desktop, on a fresh CI runner, on the APK's bundle on Node 18 without ICU, and on the Android 14 emulator (186.1 s, 2 096 MiB); Marcówki is unchanged; the direct APK asset is published; the owner's arm64 phone recheck decides PASS. |
+| STAGE BUILDAPP-03G — ARCHITECTURAL PRIMITIVES AND ASSEMBLIES | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4d171bd6f85ce172a13bfbe36fff447ffda10c22`; implementation `dd3c72a`, `40b9837`, `2294d5b`; report and this row: the commit that carries `stage-reports/STAGE_BUILDAPP_03G_ARCHITECTURAL_PRIMITIVES_AND_ASSEMBLIES.md` | **PASS_STAGE_BUILDAPP_03G_ARCHITECTURAL_PRIMITIVES_AND_ASSEMBLIES** — schema 1.6.0: primitives, assemblies, typed relationships, UNKNOWN assemblies, capability registry, hypothesis pipeline (synthetic evidence only). 17/17 diversity fixtures and 8/8 pipeline demonstrations pass; Marcówki and the second house build the same buildings (hash changes schema-only, proven byte for byte). Not a claim of automatic recognition: the analyzer emits no 1.6.0 assembly yet. **03Y2G stays the open gate** (owner phone recheck) |
 
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
-  (`buildapp.canonical-building-model` **1.4.0**), explicit units and world
+  (`buildapp.canonical-building-model` **1.6.0**; 1.5.0 added `terraces`
+  and roof edge members, 1.6.0 the architectural language — roof planes and
+  edges, wall panels, platforms, exterior step runs, assemblies, typed
+  relationships, member roles and end cuts, see
+  `docs/ARCHITECTURAL_LANGUAGE.md`), explicit units and world
   frame recorded in every file, stable ids, evidence vocabulary (SOURCE_EXACT …
   UNRESOLVED) per object and per property, referential and geometric
   validation with named codes, deterministic canonical JSON save/load.
@@ -548,6 +546,34 @@ reader generic enough for a second house:
 The owner's arm64 phone decides the gate (the report's OWNER PHONE CHECKLIST).
 Two houses from one publisher are not a claim of general support.
 
+## Where the architectural language stands (STAGE BUILDAPP-03G)
+
+BuildApp describes buildings in a general language rather than one house type
+per project (`docs/ARCHITECTURAL_LANGUAGE.md`,
+`packages/architecture`):
+
+- **Vocabulary:** 34 primitive types, 13 assembly kinds, 15 relationship kinds
+  and an UNKNOWN assembly that keeps its evidence, extent, observed pieces,
+  alternatives and reason. Roofs are plane graphs (ridges, hips, valleys,
+  steps, eaves, verges); dormers, parapets, canopies, carports, pergolas,
+  balconies, loggias, terraces, entrances and exterior steps are assemblies
+  over primitives, validated and checked by the closure audit.
+- **Capability registry:** 21 capabilities, 18 SUPPORTED and 3 PARTIAL as
+  representation; recognition is ANALYZER_V2 for 4 (as legacy objects),
+  SYNTHETIC_PIPELINE for 11, NONE for 6.
+- **Hypothesis pipeline:** SemanticProposals from any detector →
+  hypotheses → fusion by capability requirements and exclusions → topology
+  → metric solve by source authority → Building DSL. Proven on synthetic
+  evidence only; one visual line never becomes a dormer, and ambiguity stays
+  UNKNOWN.
+- **Evidence:** 17 synthetic diversity fixtures (validation, replay, round
+  trip, compile, closure: all clean), roof and assembly graphs for every
+  fixture and for both regression houses, BuildWorld category filters, the
+  Android parser on fixture bundles. CI publishes `architectural-assemblies`.
+
+Next for this line of work: the analyzer emitting proposals for roof planes
+and parapets on the two regression houses (the 03G report's NEXT STEP).
+
 ## Test / build / browser results (STAGE BUILDAPP-03)
 
 Run on the final HEAD of this stage:
@@ -675,7 +701,8 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**Now: the BUILDAPP-03Y2G owner phone gate.**
+**Now: the BUILDAPP-03Y2G owner phone gate** (still open after 03G; the
+`preview-latest` APK carries schema 1.6.0 and the same buildings).
 
 1. Install `BuildPlan-Preview-arm64.apk` from the `preview-latest`
    prerelease.

@@ -8,8 +8,8 @@ hyp-h1-canopy [CANOPY, COMPLETE]
     hyp-h1-cover-boundary-2 (RoofBoundary)
     hyp-h1-cover-abutment-3 (RoofBoundary)
     hyp-h1-cover-boundary-4 (RoofBoundary)
-    ring-0-w0 (host)
-  ring-0-w0 (host)
+    ring-0-w0 (host: hostIds)
+  ring-0-w0 (host: hostIds)
 roof-main [ROOF GABLE, COMPLETE]
   roof-main-plane-front (RoofPlane)
   roof-main-plane-rear (RoofPlane)
@@ -27,7 +27,8 @@ roof-main [ROOF GABLE, COMPLETE]
   roof-main-verge-rear-west-board (Fascia)
   roof-main-verge-rear-east-board (Fascia)
 
-(in no assembly: 6 primitives)
+(in no assembly: 7 primitives)
+  ring-0-w0 (Wall)
   ring-0-w1 (Wall)
   ring-0-w2 (Wall)
   ring-0-w3 (Wall)

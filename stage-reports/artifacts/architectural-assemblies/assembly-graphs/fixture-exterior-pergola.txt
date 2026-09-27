@@ -29,11 +29,12 @@ roof-main [ROOF GABLE, COMPLETE]
   roof-main-verge-rear-east-board (Fascia)
 terrace-rear-assembly [TERRACE, COMPLETE]
   terrace-rear (TerraceSurface)
-  ring-0-w2 (host)
+  ring-0-w2 (host: hostIds)
 
-(in no assembly: 5 primitives)
+(in no assembly: 6 primitives)
   ring-0-w0 (Wall)
   ring-0-w1 (Wall)
+  ring-0-w2 (Wall)
   ring-0-w3 (Wall)
   door-terrace-opening (Opening)
   door-terrace (Door)
