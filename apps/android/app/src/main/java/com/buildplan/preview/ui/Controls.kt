@@ -1,20 +1,24 @@
 package com.buildplan.preview.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -26,11 +30,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.buildplan.preview.R
 import com.buildplan.preview.camera.ViewPreset
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
@@ -39,16 +48,18 @@ import com.buildplan.preview.scene.ViewerState
 import com.buildplan.preview.scene.VisibilityMode
 
 /**
- * The tool row.
+ * The 3D dock: the controls grouped the way an owner thinks of them.
  *
- * Every gesture in the viewport also has a button here, because a gesture is
- * not discoverable and not everyone can perform a two-finger drag. Targets are
- * at least 48 dp and every control carries a description; nothing is signalled
- * by colour alone — the active view, style and layer are named in the button
- * itself.
+ * `Widok` (where the camera stands), `Warstwy` (what is visible), `Wygląd`
+ * (MODEL, CLAY or LINE — Model, Makieta, Kreska — and, for Model, its
+ * lighting), then the three actions that need no menu: fit, reset, details.
+ * Every gesture in the viewport also has a control here, every target is at
+ * least 48 dp, and every current choice is named in the button and ticked in
+ * its menu — never signalled by colour alone. The dock is opaque; when it is
+ * wider than the screen it scrolls, and a fade at the cut edge says so.
  */
 @Composable
-fun ControlBar(
+fun ToolDock(
     scene: ModelScene,
     state: ViewerState,
     onPreset: (ViewPreset) -> Unit,
@@ -62,118 +73,112 @@ fun ControlBar(
     onDetails: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
-        tonalElevation = 3.dp,
-    ) {
-        Row(
-            modifier = Modifier
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            MenuButton(
-                label = "Views",
-                description = "Camera views. Current projection: ${if (state.isIsolating) "isolated" else "whole scene"}.",
-            ) { dismiss ->
-                for (preset in ViewPreset.availableIn(scene)) {
-                    DropdownMenuItem(
-                        text = { Text("${preset.label}   ·   ${preset.description}") },
-                        onClick = { onPreset(preset); dismiss() },
-                        modifier = Modifier.semantics { contentDescription = "${preset.label}. ${preset.description}" },
-                    )
+    val scroll = rememberScrollState()
+    Surface(modifier = modifier, color = MaterialTheme.colorScheme.surface, tonalElevation = 3.dp) {
+        Box {
+            Row(
+                modifier = Modifier
+                    .horizontalScroll(scroll)
+                    .padding(horizontal = 12.dp, vertical = 10.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                MenuButton(label = stringResource(R.string.dock_view), description = stringResource(R.string.dock_view_description)) { dismiss ->
+                    for (preset in ViewPreset.availableIn(scene)) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(preset.labelRes()), maxLines = 2, overflow = TextOverflow.Ellipsis) },
+                            onClick = { onPreset(preset); dismiss() },
+                        )
+                    }
                 }
-            }
 
-            // The owner's comparison gate: the same model in MODEL, CLAY and
-            // LINE. Named in the label, never signalled by colour.
-            MenuButton(
-                label = "Mode: ${state.presentation.label}",
-                description = "Presentation mode, currently ${state.presentation.label}. ${state.presentation.description}",
-            ) { dismiss ->
-                for (mode in PresentationMode.entries) {
-                    val current = mode == state.presentation
-                    DropdownMenuItem(
-                        text = { Text(if (current) "${mode.label}  ✓   ·   ${mode.description}" else "${mode.label}   ·   ${mode.description}") },
-                        onClick = { onPresentation(mode); dismiss() },
-                        modifier = Modifier.semantics {
-                            contentDescription = "${mode.label}. ${mode.description}.${if (current) " Selected." else ""}"
-                        },
-                    )
+                val layer = if (state.isIsolating) stringResource(R.string.layer_isolated) else stringResource(state.visibility.labelRes())
+                MenuButton(label = "${stringResource(R.string.dock_layers)}: $layer", description = stringResource(R.string.dock_layers_description)) { dismiss ->
+                    for (mode in VisibilityMode.entries) {
+                        Choice(stringResource(mode.labelRes()), null, selected = mode == state.visibility && !state.isIsolating) { onVisibility(mode); dismiss() }
+                    }
+                    HorizontalDivider()
+                    Choice(stringResource(R.string.dock_isolate), null, selected = state.isIsolating, enabled = state.selectedObjectId != null) { onIsolate(); dismiss() }
+                    Choice(stringResource(R.string.dock_show_all), null, selected = false) { onShowAll(); dismiss() }
                 }
-            }
 
-            MenuButton(
-                label = if (state.presentation.usesStyle) "Style: ${state.style.label}" else "Style: MODEL only",
-                description = if (state.presentation.usesStyle) {
-                    "Render style, currently ${state.style.label}"
-                } else {
-                    "Render style applies to the MODEL presentation. Switch Mode to MODEL to change it."
-                },
-                enabled = state.presentation.usesStyle,
-            ) { dismiss ->
-                for (style in RenderStyle.entries) {
-                    DropdownMenuItem(
-                        text = { Text(if (style == state.style) "${style.label}  ✓   ·   ${style.description}" else "${style.label}   ·   ${style.description}") },
-                        onClick = { onStyle(style); dismiss() },
-                        modifier = Modifier.semantics {
-                            contentDescription = "${style.label}. ${style.description}.${if (style == state.style) " Selected." else ""}"
-                        },
-                    )
+                // The owner's comparison: the same model as Model, Makieta (CLAY) and Kreska (LINE).
+                MenuButton(
+                    label = "${stringResource(R.string.dock_look)}: ${stringResource(state.presentation.labelRes())}",
+                    description = stringResource(R.string.dock_look_description),
+                ) { dismiss ->
+                    for (mode in PresentationMode.entries) {
+                        Choice(stringResource(mode.labelRes()), stringResource(mode.descriptionRes()), selected = mode == state.presentation) { onPresentation(mode); dismiss() }
+                    }
+                    if (state.presentation.usesStyle) {
+                        HorizontalDivider()
+                        Text(
+                            stringResource(R.string.dock_style_heading),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        )
+                        for (style in RenderStyle.entries) {
+                            Choice(stringResource(style.labelRes()), null, selected = style == state.style) { onStyle(style); dismiss() }
+                        }
+                    }
                 }
-            }
 
-            MenuButton(
-                label = "Layers: ${if (state.isIsolating) "Isolated" else state.visibility.label}",
-                description = "Visibility layers, currently ${if (state.isIsolating) "isolating one element" else state.visibility.label}",
-            ) { dismiss ->
-                for (mode in VisibilityMode.entries) {
-                    DropdownMenuItem(
-                        text = { Text(if (mode == state.visibility && !state.isIsolating) "${mode.label}  ✓" else mode.label) },
-                        onClick = { onVisibility(mode); dismiss() },
-                        modifier = Modifier.semantics {
-                            contentDescription = "${mode.label}. ${mode.description}.${if (mode == state.visibility && !state.isIsolating) " Selected." else ""}"
-                        },
-                    )
+                ToolButton(label = stringResource(R.string.dock_fit), description = stringResource(R.string.dock_fit_description), onClick = { onPreset(ViewPreset.FIT) })
+
+                ToolButton(
+                    label = stringResource(R.string.dock_reset),
+                    description = stringResource(R.string.dock_reset_description),
+                    onClick = onReset,
+                    leading = { Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp)) },
+                )
+
+                if (state.selectedObjectId != null) {
+                    ToolButton(label = stringResource(R.string.dock_frame), description = stringResource(R.string.dock_frame), onClick = onFrameSelection)
                 }
-                DropdownMenuItem(
-                    text = { Text("Isolate selection") },
+
+                ToolButton(
+                    label = stringResource(R.string.dock_details),
+                    description = stringResource(if (state.selectedObjectId == null) R.string.dock_details_unavailable else R.string.dock_details_description),
                     enabled = state.selectedObjectId != null,
-                    onClick = { onIsolate(); dismiss() },
-                    modifier = Modifier.semantics { contentDescription = "Isolate the selected element, hiding everything else" },
-                )
-                DropdownMenuItem(
-                    text = { Text("Show all") },
-                    onClick = { onShowAll(); dismiss() },
-                    modifier = Modifier.semantics { contentDescription = "Show all elements again" },
+                    onClick = onDetails,
+                    leading = { Icon(Icons.Filled.Info, contentDescription = null, modifier = Modifier.size(18.dp)) },
                 )
             }
-
-            ToolButton(
-                label = "Frame",
-                description = if (state.selectedObjectId == null) "Frame selection. Nothing is selected yet." else "Frame the selected element",
-                enabled = state.selectedObjectId != null,
-                onClick = onFrameSelection,
-            )
-
-            ToolButton(
-                label = "Reset",
-                description = "Reset to the whole house and show every element",
-                onClick = onReset,
-                leading = { Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp)) },
-            )
-
-            ToolButton(
-                label = "Details",
-                description = if (state.selectedObjectId == null) "Details. Tap an element in the model first." else "Open details of the selected element",
-                enabled = state.selectedObjectId != null,
-                onClick = onDetails,
-                leading = { Icon(Icons.Filled.Info, contentDescription = null, modifier = Modifier.size(18.dp)) },
-            )
+            // Content cut at the edge: a fade says there is more to scroll to.
+            if (scroll.canScrollForward) {
+                Box(
+                    Modifier
+                        .align(Alignment.CenterEnd)
+                        .width(28.dp)
+                        .fillMaxHeight()
+                        .background(Brush.horizontalGradient(listOf(Color.Transparent, MaterialTheme.colorScheme.surface))),
+                )
+            }
         }
     }
+}
+
+/** A menu row that names its state with a tick and in words, not by colour. */
+@Composable
+private fun Choice(label: String, detail: String?, selected: Boolean, enabled: Boolean = true, onClick: () -> Unit) {
+    val stateText = stringResource(if (selected) R.string.state_selected else R.string.state_not_selected)
+    DropdownMenuItem(
+        text = {
+            if (detail == null) {
+                Text(label, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            } else {
+                androidx.compose.foundation.layout.Column {
+                    Text(label, fontWeight = FontWeight.Medium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text(detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                }
+            }
+        },
+        leadingIcon = { if (selected) Icon(Icons.Filled.Check, contentDescription = null) else Box(Modifier.size(24.dp)) },
+        enabled = enabled,
+        onClick = onClick,
+        modifier = Modifier.semantics { stateDescription = stateText },
+    )
 }
 
 @Composable
@@ -189,13 +194,13 @@ private fun ToolButton(
         enabled = enabled,
         modifier = Modifier
             .defaultMinSize(minHeight = 48.dp)
-            .semantics { contentDescription = description },
+            .semantics { contentDescription = "$label. $description" },
     ) {
         if (leading != null) {
             leading()
             Box(Modifier.width(6.dp))
         }
-        Text(label, fontWeight = FontWeight.Medium)
+        Text(label, fontWeight = FontWeight.Medium, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -216,8 +221,8 @@ private fun MenuButton(
     }
 }
 
-/** A quiet status line: what is loaded and how big it is. */
+/** A quiet status line. */
 @Composable
-fun StatusText(text: String, modifier: Modifier = Modifier, color: Color = MaterialTheme.colorScheme.onSurfaceVariant) {
-    Text(text = text, style = MaterialTheme.typography.labelSmall, color = color, modifier = modifier)
+fun StatusText(text: String, modifier: Modifier = Modifier, color: Color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines: Int = Int.MAX_VALUE) {
+    Text(text = text, style = MaterialTheme.typography.labelSmall, color = color, modifier = modifier, maxLines = maxLines, overflow = TextOverflow.Ellipsis)
 }

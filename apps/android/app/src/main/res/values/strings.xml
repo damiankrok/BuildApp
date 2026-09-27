@@ -1,4 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BuildPlan Model Preview</string>
+
+    <!-- Miejsca aplikacji (dolna nawigacja) -->
+    <string name="place_house">Dom</string>
+    <string name="place_model">3D</string>
+    <string name="place_stages">Etapy</string>
+    <string name="place_costs">Koszty</string>
+    <string name="place_documents">Dokumenty</string>
+    <string name="place_house_description">Twój dom: projekt, analiza z linku i zapisane modele</string>
+    <string name="place_model_description">Model 3D domu na pełnym ekranie</string>
+    <string name="place_stages_description">Etapy budowy</string>
+    <string name="place_costs_description">Koszty budowy</string>
+    <string name="place_documents_description">Dokumenty budowy</string>
+    <string name="state_selected">wybrane</string>
+    <string name="state_not_selected">niewybrane</string>
+
+    <!-- Dom -->
+    <string name="house_title">Dom</string>
+    <string name="house_current_heading">Wybrany dom</string>
+    <string name="house_loading">Wczytuję model…</string>
+    <string name="house_failed">Nie udało się wczytać modelu</string>
+    <string name="house_source_bundled">Przykład wbudowany w aplikację</string>
+    <string name="house_source_downloaded">Analiza z linku, zapisana na tym telefonie</string>
+    <string name="house_candidate_note">Model poglądowy odczytany z rysunków projektu. To kandydat do sprawdzenia, a nie dokumentacja wykonawcza.</string>
+    <string name="house_open_3d">Otwórz w 3D</string>
+    <string name="house_add_heading">Dodaj dom z linku</string>
+    <string name="house_add_body">Wklej link do strony projektu. Aplikacja odczyta rysunki i zbuduje model, który zobaczysz w 3D.</string>
+    <string name="house_add_action">Analizuj link</string>
+    <string name="house_analysis_running">Analiza w toku</string>
+    <string name="house_analysis_running_detail">Postęp: %1$d%%</string>
+    <string name="house_analysis_failed">Ostatnia analiza się nie powiodła</string>
+    <string name="house_analysis_show">Pokaż analizę</string>
+    <string name="house_saved_heading">Domy na tym telefonie</string>
+    <string name="house_saved_open">Wybierz</string>
+    <string name="house_saved_current">Wybrany</string>
+    <string name="house_saved_open_description">Wybierz dom %1$s</string>
+    <string name="house_diagnostics_show">Pokaż szczegóły techniczne</string>
+    <string name="house_diagnostics_hide">Ukryj szczegóły techniczne</string>
+    <string name="house_diagnostics_rows">Schemat modelu %1$s · %2$s · %3$s · pakiet %4$s</string>
+    <string name="house_diagnostics_analyzer">Analizator i jego diagnostyka</string>
+
+    <!-- Puste miejsca: uczciwie, bez danych pozornych -->
+    <string name="empty_stages_title">Etapy budowy</string>
+    <string name="empty_stages_body">Tu pojawi się plan budowy podzielony na etapy. Ta część aplikacji nie jest jeszcze zbudowana: nic tu nie jest planowane, zapisywane ani liczone.</string>
+    <string name="empty_costs_title">Koszty budowy</string>
+    <string name="empty_costs_body">Tu pojawią się wydatki na budowę. Ta część aplikacji nie jest jeszcze zbudowana: aplikacja nie zapisuje kosztów i niczego nie wycenia.</string>
+    <string name="empty_documents_title">Dokumenty</string>
+    <string name="empty_documents_body">Tu pojawią się dokumenty budowy. Ta część aplikacji nie jest jeszcze zbudowana: nie można tu jeszcze dodać ani przechowywać plików.</string>
+    <string name="empty_not_built">Jeszcze niedostępne</string>
+
+    <!-- 3D -->
+    <string name="model_back">Wróć do domu</string>
+    <string name="model_context_bundled">Przykład wbudowany · model poglądowy</string>
+    <string name="model_context_downloaded">Z analizy linku · kandydat do sprawdzenia</string>
+    <string name="model_selected">Zaznaczono: %1$s</string>
+    <string name="dock_view">Widok</string>
+    <string name="dock_view_description">Kamera: gotowe widoki i dopasowanie do ekranu</string>
+    <string name="dock_layers">Warstwy</string>
+    <string name="dock_layers_description">Co jest widoczne</string>
+    <string name="dock_look">Wygląd</string>
+    <string name="dock_look_description">Sposób prezentacji modelu</string>
+    <string name="dock_fit">Dopasuj</string>
+    <string name="dock_fit_description">Dopasuj cały model do ekranu pod obecnym kątem</string>
+    <string name="dock_reset">Resetuj</string>
+    <string name="dock_reset_description">Wróć do widoku całego domu i pokaż wszystkie elementy</string>
+    <string name="dock_details">Szczegóły</string>
+    <string name="dock_details_description">Pokaż szczegóły zaznaczonego elementu</string>
+    <string name="dock_details_unavailable">Najpierw dotknij elementu modelu</string>
+    <string name="dock_frame">Pokaż zaznaczenie</string>
+    <string name="dock_isolate">Tylko zaznaczone</string>
+    <string name="dock_show_all">Pokaż wszystko</string>
+    <string name="dock_style_heading">Oświetlenie i barwy (tylko Model)</string>
+
+    <string name="look_model">Model</string>
+    <string name="look_model_description">Materiały i barwy modelu</string>
+    <string name="look_clay">Makieta</string>
+    <string name="look_clay_description">Jednolita, jasna bryła z cieniem, krawędziami i dachówką</string>
+    <string name="look_line">Kreska</string>
+    <string name="look_line_description">Płaskie powierzchnie i wszystkie krawędzie, bez cieni</string>
+
+    <string name="style_construction">Materiały</string>
+    <string name="style_clay">Neutralny</string>
+    <string name="style_architectural">Grupy elementów</string>
+
+    <string name="layer_all">Cały dom</string>
+    <string name="layer_roof_off">Bez dachu</string>
+    <string name="layer_ground">Tylko parter</string>
+    <string name="layer_upper">Tylko poddasze</string>
+    <string name="layer_cutaway">Przekrój (parter bez dachu)</string>
+    <string name="layer_isolated">Tylko zaznaczone</string>
+
+    <string name="view_whole">Cały dom</string>
+    <string name="view_isometric">Izometria</string>
+    <string name="view_axonometric">Aksonometria</string>
+    <string name="view_front">Front</string>
+    <string name="view_rear">Tył</string>
+    <string name="view_left">Lewy bok</string>
+    <string name="view_right">Prawy bok</string>
+    <string name="view_top">Z góry</string>
+    <string name="view_ground_plan">Rzut parteru</string>
+    <string name="view_attic_plan">Rzut poddasza</string>
+    <string name="view_stairs">Schody</string>
+    <string name="view_entrance">Wejście</string>
+    <string name="view_fit">Dopasuj do ekranu</string>
+
+    <!-- Szczegóły elementu -->
+    <string name="inspector_close">Zamknij szczegóły</string>
+    <string name="inspector_storey">Kondygnacja</string>
+    <string name="inspector_material">Materiał</string>
+    <string name="inspector_extent">Wymiary</string>
+    <string name="inspector_relations">Powiązania</string>
+    <string name="inspector_provenance">Skąd to wiadomo</string>
+    <string name="inspector_status">Status</string>
+    <string name="inspector_source">Źródło</string>
+    <string name="inspector_locator">Miejsce w źródle</string>
+    <string name="inspector_interpretation">Odczyt</string>
+    <string name="inspector_confidence">Pewność</string>
+    <string name="inspector_note">Uwaga</string>
+    <string name="inspector_technical_show">Pokaż dane techniczne</string>
+    <string name="inspector_technical_hide">Ukryj dane techniczne</string>
+    <string name="inspector_id">Identyfikator</string>
+    <string name="inspector_geometry">Geometria</string>
+    <string name="inspector_geometry_value">%1$s · %2$s</string>
+    <string name="inspector_parts">Części</string>
+
+    <!-- Analiza linku (miejsce podrzędne w zakładce Dom) -->
+    <string name="analyzer_title">Analiza linku</string>
+    <string name="analyzer_back">Wróć do domu</string>
+
+    <!-- Liczebniki (polskie formy mnogie) -->
+    <plurals name="count_objects">
+        <item quantity="one">%d obiekt</item>
+        <item quantity="few">%d obiekty</item>
+        <item quantity="many">%d obiektów</item>
+        <item quantity="other">%d obiektu</item>
+    </plurals>
+    <plurals name="count_triangles">
+        <item quantity="one">%d trójkąt</item>
+        <item quantity="few">%d trójkąty</item>
+        <item quantity="many">%d trójkątów</item>
+        <item quantity="other">%d trójkąta</item>
+    </plurals>
+    <plurals name="count_parts">
+        <item quantity="one">%d część</item>
+        <item quantity="few">%d części</item>
+        <item quantity="many">%d części</item>
+        <item quantity="other">%d części</item>
+    </plurals>
 </resources>

@@ -363,6 +363,10 @@ jobs:
     # (advisory) run on the real Marcówki URL and compared with the desktop.
     name: Local analyzer / APK size + emulator
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # the before screenshots read an earlier run's APK artifact
+      actions: read
     timeout-minutes: 120
     env:
       MARCOWKI_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca
@@ -422,6 +426,15 @@ jobs:
           unzip -o -q apps/android/app/build/outputs/apk/debug/app-x86_64-debug.apk 'assets/local-analyzer/*' -d "$RUNNER_TEMP/apk-bundle"
           node apps/local-analyzer/scripts/run-host.mjs --dir "$RUNNER_TEMP/apk-bundle/assets/local-analyzer" \
             --url "$MARCOWKI_URL" --events local-analyzer-device/desktop-live-events.ndjson > local-analyzer-device/desktop-live.json
+      - name: The previous preview APK, for the before screenshots (INTEGRATION-003B; advisory)
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          # CI run 51 of integration/unified-buildplan-presentation-v1 (INTEGRATION-003A), the build before the product shell
+          name: buildplan-model-preview-apks
+          run-id: 36314929333
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/apk-before
       - name: Enable KVM for the emulator
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -446,7 +459,8 @@ jobs:
           emulator-boot-timeout: 900
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot
           disable-animations: true
-          script: bash apps/android/tools/run-device-tests.sh
+          # the device gate decides the job; the product-shell screenshots after it are evidence only
+          script: bash apps/android/tools/run-device-tests.sh; status=$?; OUT=local-analyzer-device/shell-screens BEFORE_APK_DIR="$RUNNER_TEMP/apk-before" bash apps/android/tools/capture-shell-screens.sh; exit $status
       - name: What the runs on the emulator cost
         if: always()
         run: |
