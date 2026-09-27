@@ -694,6 +694,9 @@ export type SurfaceRegion = z.infer<typeof SurfaceRegionSchema>
  * So for a facade beam 0.40 m tall standing 0.30 m out of the wall:
  * `width = 0.40`, `depth = 0.30`.
  */
+/** A plane a member's end is cut in: through `point`, square to `normal` (any length, not zero). */
+export const MemberCutSchema = z.object({ point: Vec3Schema, normal: Vec3Schema }).strict()
+
 export const LinearSolidSchema = z
   .object({
     ...base,
@@ -722,10 +725,18 @@ export const LinearSolidSchema = z
     role: z
       .enum(['COLUMN', 'POST', 'BEAM', 'LINTEL', 'RAFTER', 'PERGOLA_POST', 'PERGOLA_BEAM', 'FASCIA', 'VERGE_BOARD', 'FACADE_MEMBER', 'DECORATIVE', 'UNKNOWN_MEMBER'])
       .optional(),
+    /**
+     * A stated end cut (1.6.0): the member ends in this plane instead of
+     * square to its path — the plumb cut where two verge boards meet at a
+     * gable apex. A joint the model states, not a rule the compiler applies.
+     */
+    startCut: MemberCutSchema.optional(),
+    endCut: MemberCutSchema.optional(),
     materialId: IdSchema,
   })
   .strict()
 export type LinearSolid = z.infer<typeof LinearSolidSchema>
+export type MemberCut = z.infer<typeof MemberCutSchema>
 export type MemberRole = NonNullable<LinearSolid['role']>
 
 /** Roles whose member stands vertically: a column, a post. */

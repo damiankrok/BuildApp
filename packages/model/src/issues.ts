@@ -55,6 +55,7 @@ export type ValidationCode =
   // --- schema 1.4.0: linear solids ---
   | 'LINEAR_SOLID_DEGENERATE'
   | 'LINEAR_SOLID_HOST_INVALID'
+  | 'LINEAR_SOLID_CUT_INVALID'
   // --- schema 1.6.0: architectural primitives, assemblies, relationships ---
   | 'UNKNOWN_ROOF_PLANE'
   | 'ROOF_PLANE_INVALID'

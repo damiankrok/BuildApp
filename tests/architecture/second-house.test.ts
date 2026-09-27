@@ -16,7 +16,7 @@ const ROOT = resolve(import.meta.dirname, '../..')
 
 /** Every production source: the packages the analyzer, the service and the apps run, and the Android app. */
 const PRODUCTION = [
-  ...['analysis-service', 'commands', 'geometry', 'image-metrology', 'mobile-scene', 'model', 'reconstruction', 'source-analyzer', 'source-common', 'source-cv', 'source-metrics', 'source-observations', 'source-package', 'source-vision', 'verification'].map((p) => `packages/${p}/src`),
+  ...['analysis-service', 'architecture', 'commands', 'geometry', 'image-metrology', 'mobile-scene', 'model', 'reconstruction', 'source-analyzer', 'source-common', 'source-cv', 'source-metrics', 'source-observations', 'source-package', 'source-vision', 'verification'].map((p) => `packages/${p}/src`),
   'apps/local-analyzer/src',
   'apps/analyzer-api/src',
   'apps/android/app/src/main',

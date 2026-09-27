@@ -20,7 +20,7 @@ import {
   type Wall,
 } from './schema.js'
 import { layoutStair } from './stair-layout.js'
-import { linearSolidIsDegenerate } from './linear-solid.js'
+import { linearSolidCutIssue, linearSolidIsDegenerate } from './linear-solid.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
 import { architectureIssues } from './validate-architecture.js'
 
@@ -488,6 +488,9 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     if (!materialIds.has(s.materialId)) err('UNKNOWN_MATERIAL', `${s.id} refers to material "${s.materialId}", which does not exist`, s.id, 'materialId')
     if (linearSolidIsDegenerate(s)) {
       err('LINEAR_SOLID_DEGENERATE', `linear solid ${s.id}: its start and end coincide at (${fmt(s.start.x)}, ${fmt(s.start.y)}, ${fmt(s.start.z)}), so there is nothing to extrude along`, s.id, 'end')
+    } else {
+      const cut = linearSolidCutIssue(s)
+      if (cut) err('LINEAR_SOLID_CUT_INVALID', `linear solid ${s.id}: ${cut}`, s.id, s.endCut ? 'endCut' : 'startCut')
     }
     if (s.hostId !== undefined) {
       // A host is a statement of relation, not a parent: the member's geometry

@@ -9,6 +9,7 @@
  *   source-hashes.json                                                  what was read, by hash
  *   analysis-trace.json                                                 every step and what it established
  *   result-summary.json | failure.json                                  the outcome
+ *   model.json                                                          the model, canonical (on completion)
  *   plan-diagnostics/digest.json, <frame>-<layer>.png                   the decomposition over the plan,
  *                                                                        one picture per question
  *   scene-views.png                                                     the building, from four cameras
@@ -30,6 +31,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { stableJson } from '@buildapp/source-common'
+import { serializeModel } from '@buildapp/model'
 import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
@@ -144,6 +146,8 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     write('source-hashes.json', sourceSummaryOf(run.pkg))
     write('analysis-trace.json', run.trace)
     write('result-summary.json', { ...summaryOf(run.result), timings: run.timings })
+    // the model itself, canonical, for the architecture exports (roof graph, assembly graph) of stage 03G
+    writeFileSync(join(out, 'model.json'), serializeModel(run.result.model))
     writeOverlays(out, run.planDiagnostics, rasterOf)
     writeFileSync(join(out, 'scene-views.png'), PNG.sync.write(renderSceneSheet(run.result.scene)))
     for (const [k, h] of Object.entries(hashesOf(run.result))) log(`  ${k.padEnd(22)} ${h}`)

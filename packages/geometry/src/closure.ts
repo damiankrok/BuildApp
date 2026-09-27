@@ -25,7 +25,7 @@
  * semantic model, the DSL command, or the compiler — rather than in an
  * epsilon.
  */
-import type { CanonicalBuildingModel } from '@buildapp/model'
+import { MEETING_RELATIONSHIP_KINDS, OVERLAP_RELATIONSHIP_KINDS, ROOF_JOIN_KINDS, type CanonicalBuildingModel, type RelationshipKind } from '@buildapp/model'
 import type { CompiledMesh, CompiledScene, Triangle, Vec3 } from './types.js'
 
 // ---------------------------------------------------------------------------
@@ -69,6 +69,10 @@ export type ClosureRelationLabel =
   | 'CHIMNEY<->SLAB'
   | 'CHIMNEY<->WALL'
   | 'STAIR<->SLAB'
+  /** Two roof planes joined by a roof edge: a ridge, a hip, a valley, a step (schema 1.6.0). */
+  | 'ROOF_PLANE<->ROOF_PLANE'
+  /** Two objects the model relates by a typed relationship (SUPPORTED_BY, MEETS, OVERLAPS_INTENTIONALLY, …). */
+  | 'DECLARED_RELATIONSHIP'
   | 'OTHER'
 
 export type ClosureRelation = {
@@ -90,6 +94,12 @@ export type ClosureFindingCode =
   | 'RAILING_OFF_BASE'
   | 'MEMBER_DISCONNECTED'
   | 'TERRACE_MISALIGNED'
+  /** A meeting relationship (SUPPORTED_BY, MEETS, HOSTED_BY, …) whose two objects do not touch. */
+  | 'RELATIONSHIP_UNSATISFIED'
+  /** An ABOVE / BELOW / COVERS relationship the geometry contradicts. */
+  | 'RELATIONSHIP_CONTRADICTED'
+  /** Two roof planes a ridge, hip or valley joins, standing apart. */
+  | 'ROOF_JOIN_OPEN'
 
 export type ClosureFinding = {
   code: ClosureFindingCode
@@ -136,6 +146,17 @@ export type ClosureReport = {
   metrics: ClosureMetrics
   /** Every pair that shares volume or a same-facing plane, whatever the relation said, for the record. */
   contacts: Array<{ a: string; b: string; relation: ClosureRelationLabel; intended: ClosureRelationKind; volumeM3: number; coplanarM2: number }>
+  /**
+   * Schema 1.6.0: the typed relationships and the roof graph, held against the
+   * geometry. Present only when the model states relationships or roof edges,
+   * so a model without them reports exactly what it reported before.
+   */
+  architecture?: {
+    relationshipsChecked: number
+    relationshipsSatisfied: number
+    roofJoinsChecked: number
+    roofJoinsClosed: number
+  }
 }
 
 export type ClosureOptions = {
@@ -165,7 +186,7 @@ const DEFAULTS: Required<ClosureOptions> = {
   planeToleranceM: 0.003,
   railingEndToleranceM: 0.06,
   gapSearchM: 0.1,
-  parts: ['WALL', 'SLAB', 'ROOF', 'BALCONY', 'TERRACE', 'CHIMNEY', 'LINEAR_SOLID', 'ROOF_TRIM', 'STAIR_STEP'],
+  parts: ['WALL', 'SLAB', 'ROOF', 'BALCONY', 'TERRACE', 'CHIMNEY', 'LINEAR_SOLID', 'ROOF_TRIM', 'STAIR_STEP', 'ROOF_PLANE', 'WALL_PANEL', 'PLATFORM', 'STEP_RUN'],
   sampleStepM: 0.05,
 }
 
@@ -480,13 +501,33 @@ function semanticsOf(model: CanonicalBuildingModel) {
   const ringOf = new Map<string, string>()
   for (const ring of model.wallRings) for (const id of ring.wallIds) ringOf.set(id, ring.id)
   const isReturn = (id: string): boolean => /return/i.test(id)
-  return { walls, slabs, roofs, balconies, railings, solids, chimneys, levels, stairs, terraces, junctions, ringOf, isReturn }
+  // 1.6.0: typed relationships (either direction), roof joins, walls under planes, boards on edges
+  const declared = new Map<string, RelationshipKind[]>()
+  for (const r of model.relationships) {
+    for (const key of [`${r.from}|${r.to}`, `${r.to}|${r.from}`]) declared.set(key, [...(declared.get(key) ?? []), r.kind])
+  }
+  const roofJoins = new Set<string>()
+  for (const e of model.roofEdges) {
+    if (!ROOF_JOIN_KINDS.includes(e.kind) || e.planeIds.length !== 2) continue
+    roofJoins.add(`${e.planeIds[0]}|${e.planeIds[1]}`)
+    roofJoins.add(`${e.planeIds[1]}|${e.planeIds[0]}`)
+  }
+  const edgePlanes = new Map(model.roofEdges.map((e) => [e.id, e.planeIds]))
+  return { walls, slabs, roofs, balconies, railings, solids, chimneys, levels, stairs, terraces, junctions, ringOf, isReturn, declared, roofJoins, edgePlanes }
 }
 
 /** The relation the model intends between two solids, and its label. */
 function relationOf(a: Solid, b: Solid, s: Semantics): ClosureRelation | null {
   const order = (x: Solid, y: Solid, f: (p: Solid, q: Solid) => ClosureRelation | null): ClosureRelation | null => f(x, y) ?? f(y, x)
   const wallOf = (x: Solid) => s.walls.get(x.id)
+  // A typed relationship the model states decides first (schema 1.6.0; a model without relationships is unaffected).
+  const stated = s.declared.get(`${a.objectId}|${b.objectId}`)
+  if (stated) {
+    const overlap = stated.find((k) => OVERLAP_RELATIONSHIP_KINDS.includes(k))
+    if (overlap) return { a: a.id, b: b.id, label: 'DECLARED_RELATIONSHIP', kind: 'PENETRATION', why: `the model states ${overlap}` }
+    const meeting = stated.find((k) => MEETING_RELATIONSHIP_KINDS.includes(k))
+    if (meeting) return { a: a.id, b: b.id, label: 'DECLARED_RELATIONSHIP', kind: 'CONTACT', why: `the model states ${meeting}` }
+  }
   return order(a, b, (p, q) => {
     // walls
     if (p.kind === 'wall' && q.kind === 'wall') {
@@ -550,6 +591,21 @@ function relationOf(a: Solid, b: Solid, s: Semantics): ClosureRelation | null {
     if (p.kind === 'linearSolid' && q.kind === 'linearSolid') return { a: p.id, b: q.id, label: 'FACADE_FRAME<->HOST_FACADE', kind: 'CONTACT', why: 'members of one frame meet end to end' }
     if (p.kind === 'chimney' && q.kind === 'chimney') return { a: p.id, b: q.id, label: 'OTHER', kind: 'SEPARATION', why: 'two stacks' }
     if (p.kind === 'stair' && q.kind === 'chimney') return { a: p.id, b: q.id, label: 'OTHER', kind: 'SEPARATION', why: 'a stair stands clear of a stack' }
+    // schema 1.6.0: roof planes, the walls under them, the boards on their edges
+    if (p.kind === 'roofPlane' && q.kind === 'roofPlane') {
+      const joined = s.roofJoins.has(`${p.objectId}|${q.objectId}`)
+      return { a: p.id, b: q.id, label: joined ? 'ROOF_PLANE<->ROOF_PLANE' : 'OTHER', kind: joined ? 'CONTACT' : 'SEPARATION', why: joined ? 'a roof edge joins the two planes' : 'no roof edge joins them' }
+    }
+    if (p.kind === 'wall' && q.kind === 'roofPlane') {
+      const w = wallOf(p)
+      const follows = w?.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds.includes(q.objectId)
+      return { a: p.id, b: q.id, label: 'WALL<->ROOF', kind: follows ? 'CONTACT' : 'SEPARATION', why: follows ? 'the wall top follows the plane underside' : 'the wall does not follow this plane' }
+    }
+    if (p.kind === 'linearSolid' && q.kind === 'roofPlane') {
+      const host = s.solids.get(p.objectId)?.hostId
+      const on = host === q.objectId || (host !== undefined && (s.edgePlanes.get(host) ?? []).includes(q.objectId))
+      return { a: p.id, b: q.id, label: 'TRIM<->ROOF', kind: on ? 'CONTACT' : 'SEPARATION', why: on ? 'a board along the plane’s edge' : 'a member the plane does not host' }
+    }
     return null
   })
 }
@@ -631,12 +687,13 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
   }
 
   // Railings: on their base, ending at something.
-  const railingEnds: Array<{ id: string; p: { x: number; z: number }; y: number }> = []
+  const railingEnds: Array<{ id: string; p: { x: number; z: number }; y: number; mayEndFree?: boolean }> = []
   for (const r of model.railings) {
     const level = sem.levels.get(r.levelId)
     if (!level) continue
     const baseY = level.elevation + r.baseOffset
-    const host = r.hostId ? sem.balconies.get(r.hostId) ?? sem.terraces.get(r.hostId) : undefined
+    // 1.6.0: a railing may also stand on a platform (a landing, a porch)
+    const host = r.hostId ? sem.balconies.get(r.hostId) ?? sem.terraces.get(r.hostId) ?? model.platforms.find((p) => p.id === r.hostId && !p.slope) : undefined
     if (host) {
       const hostLevel = sem.levels.get(host.levelId)
       const top = (hostLevel?.elevation ?? 0) + host.topOffset
@@ -645,7 +702,9 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
       relations.push({ a: r.id, b: r.hostId as string, label: 'RAILING<->BALCONY', kind: 'GUARDS', why: 'a railing guards the slab it names' })
     }
     const path = r.path && r.path.length >= 2 ? r.path : [r.start, r.end]
-    railingEnds.push({ id: r.id, p: path[0], y: baseY }, { id: r.id, p: path[path.length - 1], y: baseY })
+    // a handrail (1.6.0) ends where the hand leaves it: its ends are free by nature
+    const mayEndFree = r.role === 'HANDRAIL'
+    railingEnds.push({ id: r.id, p: path[0], y: baseY, mayEndFree }, { id: r.id, p: path[path.length - 1], y: baseY, mayEndFree })
   }
   const wallFaces = model.walls.filter((w) => w.kind === 'EXTERIOR')
   const distanceToWall = (p: { x: number; z: number }, y: number): number => {
@@ -677,6 +736,7 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
     const toWall = distanceToWall(e.p, e.y + 0.3)
     const toOther = Math.min(Infinity, ...railingEnds.filter((o) => o.id !== e.id && Math.abs(o.y - e.y) < 0.05).map((o) => Math.hypot(o.p.x - e.p.x, o.p.z - e.p.z)))
     const d = Math.min(toWall, toOther)
+    if (e.mayEndFree) continue
     metrics.railingEndDistanceMaxM = Math.max(metrics.railingEndDistanceMaxM, Number.isFinite(d) ? d : 0)
     if (d > opt.railingEndToleranceM) {
       metrics.railingFreeEndCount += 1
@@ -708,6 +768,63 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
     }
   }
 
+  // Schema 1.6.0: typed relationships and roof joins, held against the geometry.
+  let architecture: ClosureReport['architecture']
+  if (model.relationships.length > 0 || model.roofEdges.length > 0) {
+    architecture = { relationshipsChecked: 0, relationshipsSatisfied: 0, roofJoinsChecked: 0, roofJoinsClosed: 0 }
+    const byObject = new Map<string, Solid[]>()
+    for (const s of solids) byObject.set(s.objectId, [...(byObject.get(s.objectId) ?? []), s])
+    const allTris = (list: readonly Solid[]): Triangle[] => list.flatMap((x) => x.tris)
+    const boundsOfAll = (list: readonly Solid[]): Bounds => boundsOf(allTris(list))
+    const distance = (A: readonly Solid[], B: readonly Solid[]): number => {
+      let best = Infinity
+      for (const x of A) for (const y of B) {
+        const pad = Math.min(best, opt.gapSearchM * 10)
+        if (overlap1(x.bounds.min.x - pad, x.bounds.max.x + pad, y.bounds.min.x, y.bounds.max.x) <= 0 && pad < Infinity) continue
+        if (overlap1(x.bounds.min.y - pad, x.bounds.max.y + pad, y.bounds.min.y, y.bounds.max.y) <= 0 && pad < Infinity) continue
+        if (overlap1(x.bounds.min.z - pad, x.bounds.max.z + pad, y.bounds.min.z, y.bounds.max.z) <= 0 && pad < Infinity) continue
+        best = Math.min(best, meshDistance(x.tris, y.tris), meshDistance(y.tris, x.tris))
+        // two members crossing (a rafter across a beam) touch arris on arris, with no vertex on the other's face
+        if (best > opt.planeToleranceM) best = Math.min(best, edgeDistance(x.tris, y.tris))
+      }
+      return best
+    }
+    for (const r of model.relationships) {
+      const A = byObject.get(r.from)
+      const B = byObject.get(r.to)
+      if (!A || !B) continue
+      architecture.relationshipsChecked += 1
+      if (MEETING_RELATIONSHIP_KINDS.includes(r.kind)) {
+        const d = distance(A, B)
+        if (d > opt.planeToleranceM) {
+          findings.push({ code: 'RELATIONSHIP_UNSATISFIED', severity: 'ERROR', scope: 'EXTERIOR', objects: [r.from, r.to], relation: 'DECLARED_RELATIONSHIP', intended: 'CONTACT', measure: round4(Number.isFinite(d) ? d : 999), unit: 'm', message: `${r.from} ${r.kind} ${r.to}, but the two stand ${Number.isFinite(d) ? d.toFixed(3) : 'far'} m apart (${r.id})` })
+          continue
+        }
+      } else if (r.kind === 'ABOVE' || r.kind === 'BELOW' || r.kind === 'COVERS') {
+        const bA = boundsOfAll(A)
+        const bB = boundsOfAll(B)
+        const [upper, lower] = r.kind === 'BELOW' ? [bB, bA] : [bA, bB]
+        const above = upper.min.y >= lower.max.y - opt.planeToleranceM
+        const over = r.kind !== 'COVERS' || (overlap1(upper.min.x, upper.max.x, lower.min.x, lower.max.x) > 0 && overlap1(upper.min.z, upper.max.z, lower.min.z, lower.max.z) > 0)
+        if (!above || !over) {
+          findings.push({ code: 'RELATIONSHIP_CONTRADICTED', severity: 'ERROR', scope: 'EXTERIOR', objects: [r.from, r.to], relation: 'DECLARED_RELATIONSHIP', intended: 'SEPARATION', measure: round4(Math.max(0, lower.max.y - upper.min.y)), unit: 'm', message: `${r.from} ${r.kind} ${r.to}, which the geometry contradicts (${r.id})` })
+          continue
+        }
+      }
+      architecture.relationshipsSatisfied += 1
+    }
+    for (const e of model.roofEdges) {
+      if (e.kind !== 'RIDGE' && e.kind !== 'HIP' && e.kind !== 'VALLEY') continue
+      const A = byObject.get(e.planeIds[0])
+      const B = byObject.get(e.planeIds[1])
+      if (!A || !B) continue
+      architecture.roofJoinsChecked += 1
+      const d = distance(A, B)
+      if (d > opt.planeToleranceM) findings.push({ code: 'ROOF_JOIN_OPEN', severity: 'ERROR', scope: 'EXTERIOR', objects: [e.planeIds[0], e.planeIds[1]], relation: 'ROOF_PLANE<->ROOF_PLANE', intended: 'CONTACT', measure: round4(Number.isFinite(d) ? d : 999), unit: 'm', message: `${e.kind.toLowerCase()} ${e.id} joins ${e.planeIds[0]} and ${e.planeIds[1]}, which stand ${d.toFixed(3)} m apart` })
+      else architecture.roofJoinsClosed += 1
+    }
+  }
+
   metrics.enclosedCoplanarAreaM2 = round4(metrics.enclosedCoplanarAreaM2)
   metrics.exteriorFindingCount = findings.filter((f) => f.scope === 'EXTERIOR' && f.severity !== 'INFO').length
   metrics.interiorFindingCount = findings.filter((f) => f.scope === 'INTERIOR' && f.severity !== 'INFO').length
@@ -716,7 +833,7 @@ export function geometryClosureAudit(model: CanonicalBuildingModel, scene: Compi
   metrics.railingEndDistanceMaxM = round4(metrics.railingEndDistanceMaxM)
   metrics.terraceAlignmentResidualM = round4(metrics.terraceAlignmentResidualM)
   findings.sort((a, b) => severityRank(a.severity) - severityRank(b.severity) || b.measure - a.measure)
-  return { schema: 'buildapp.geometry-closure-report', schemaVersion: '1.0.0', modelId: model.id, relations, findings, metrics, contacts }
+  return { schema: 'buildapp.geometry-closure-report', schemaVersion: '1.0.0', modelId: model.id, relations, findings, metrics, contacts, ...(architecture ? { architecture } : {}) }
 }
 
 /**
@@ -763,7 +880,7 @@ const MEETS = new Set<ClosureRelationKind>(['CONTACT', 'BEARING', 'FLUSH'])
  * follows a roof, a slab fixed to a wall, a member on its host — as opposed
  * to the ones a relation merely permits. Only these can show a gap.
  */
-const DECLARED_MEETINGS = new Set<ClosureRelationLabel>(['WALL<->WALL', 'WALL<->RETURN_WALL', 'WALL<->SLAB', 'WALL<->ROOF', 'MAIN_MASS<->ATTACHED_MASS', 'BALCONY_SLAB<->WALL', 'BALCONY_SLAB<->FASCIA', 'FACADE_FRAME<->HOST_FACADE', 'TERRACE<->WALL', 'PARAPET<->FLAT_ROOF', 'TRIM<->ROOF'])
+const DECLARED_MEETINGS = new Set<ClosureRelationLabel>(['WALL<->WALL', 'WALL<->RETURN_WALL', 'WALL<->SLAB', 'WALL<->ROOF', 'MAIN_MASS<->ATTACHED_MASS', 'BALCONY_SLAB<->WALL', 'BALCONY_SLAB<->FASCIA', 'FACADE_FRAME<->HOST_FACADE', 'TERRACE<->WALL', 'PARAPET<->FLAT_ROOF', 'TRIM<->ROOF', 'ROOF_PLANE<->ROOF_PLANE', 'DECLARED_RELATIONSHIP'])
 
 const sub = (a: Vec3, b: Vec3): Vec3 => ({ x: a.x - b.x, y: a.y - b.y, z: a.z - b.z })
 
@@ -804,6 +921,49 @@ function pointTriangleDistance(p: Vec3, t: Triangle): number {
   const v = vb * denom
   const w = vc * denom
   return at({ x: a.x + ab.x * v + ac.x * w, y: a.y + ab.y * v + ac.y * w, z: a.z + ab.z * v + ac.z * w })
+}
+
+/** The least distance between two segments. */
+function segmentDistance(p1: Vec3, q1: Vec3, p2: Vec3, q2: Vec3): number {
+  const d1 = sub(q1, p1)
+  const d2 = sub(q2, p2)
+  const r = sub(p1, p2)
+  const a = dot(d1, d1)
+  const e = dot(d2, d2)
+  const f = dot(d2, r)
+  let s = 0
+  let t = 0
+  if (a <= 1e-18 && e <= 1e-18) return Math.hypot(r.x, r.y, r.z)
+  if (a <= 1e-18) t = Math.min(1, Math.max(0, f / e))
+  else {
+    const c = dot(d1, r)
+    if (e <= 1e-18) s = Math.min(1, Math.max(0, -c / a))
+    else {
+      const b = dot(d1, d2)
+      const den = a * e - b * b
+      s = den > 1e-18 ? Math.min(1, Math.max(0, (b * f - c * e) / den)) : 0
+      t = (b * s + f) / e
+      if (t < 0) {
+        t = 0
+        s = Math.min(1, Math.max(0, -c / a))
+      } else if (t > 1) {
+        t = 1
+        s = Math.min(1, Math.max(0, (b - c) / a))
+      }
+    }
+  }
+  const c1 = { x: p1.x + d1.x * s, y: p1.y + d1.y * s, z: p1.z + d1.z * s }
+  const c2 = { x: p2.x + d2.x * t, y: p2.y + d2.y * t, z: p2.z + d2.z * t }
+  return Math.hypot(c1.x - c2.x, c1.y - c2.y, c1.z - c2.z)
+}
+
+/** The least distance between any triangle edge of A and any triangle edge of B. */
+function edgeDistance(A: readonly Triangle[], B: readonly Triangle[]): number {
+  let best = Infinity
+  const edges = (T: readonly Triangle[]): Array<[Vec3, Vec3]> => T.flatMap((t): Array<[Vec3, Vec3]> => [[t.a, t.b], [t.b, t.c], [t.c, t.a]])
+  const eb = edges(B)
+  for (const [p, q] of edges(A)) for (const [u, v] of eb) best = Math.min(best, segmentDistance(p, q, u, v))
+  return best
 }
 
 /** The least distance from any vertex of A to any triangle of B. */

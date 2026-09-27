@@ -212,7 +212,7 @@ class LocalAnalysisTest {
         w.processGone()
 
         val completed = w.last as AnalysisState.Completed
-        assertEquals("analysis-6fa5a2b3929c", completed.entry.key)
+        assertEquals("analysis-68b8edfe8b88", completed.entry.key)
         assertEquals(AnalysisOrigin.LOCAL, completed.entry.origin)
         assertTrue(completed.entry.subtitle, completed.entry.subtitle.startsWith("Analysed on this phone"))
         assertEquals("Larchfield (analysis)", completed.entry.label)
@@ -480,7 +480,7 @@ class LocalAnalysisTest {
         val cancelled = LocalEvent.parse("""{"type":"cancelled","metrics":{"elapsedMs":5,"memory":{"peakRssBytes":7}}}""")
         assertEquals(7L, (cancelled as LocalEvent.Cancelled).metrics.memory.peakRssBytes)
         val done = LocalEvent.parse("""{"type":"done","summary":$summaryJson,"metrics":{},"sources":{"assets":[]}}""") as LocalEvent.Done
-        assertEquals("6fa5a2b3929c8a874c9e39f2066d2e89b5fae53ff4b40e189b6800621ad4ae63", done.summary.sceneSha256)
+        assertEquals("68b8edfe8b88b6a3cf9ee96c49608e502d897a7859b4ef787575412e4df8fb73", done.summary.sceneSha256)
         assertTrue(done.isTerminal)
     }
 

@@ -114,8 +114,10 @@ export function executeArchitecture(h: ArchitectureHelpers, c: ArchitectureComma
         const edge = m.roofEdges.find((e) => e.id === edgeId) as RoofEdge
         const board = edgeBoard(m, p, edge, c.board.height, c.board.depth)
         if (!board) return h.fail('ROOF_EDGE_INVALID', `createRoofEdge: plane ${p.id} has material on neither side of edge ${edgeId}`, edgeId)
-        h.add('linearSolids', 'linearSolid', {
+        const boardId = h.add('linearSolids', 'linearSolid', {
           id: c.board.id ?? `${edgeId}-board`,
+          // the board is read with its edge: same provenance
+          ...(c.evidence ? { evidence: c.evidence } : {}),
           levelId: p.levelId,
           hostId: edgeId,
           start: board.start,
@@ -125,6 +127,7 @@ export function executeArchitecture(h: ArchitectureHelpers, c: ArchitectureComma
           role: c.kind === 'VERGE' ? 'VERGE_BOARD' : 'FASCIA',
           materialId: c.board.materialId,
         })
+        if (c.kind === 'VERGE') plumbCutAtApex(h, boardId, edge)
       }
       return
     }
@@ -190,6 +193,52 @@ function intoOuter(a: Vec2, b: Vec2, poly: readonly Vec2[]): Vec2 | null {
   if (inside({ x: mid.x + n.x * step, z: mid.z + n.z * step })) return n
   if (inside({ x: mid.x - n.x * step, z: mid.z - n.z * step })) return { x: -n.x, z: -n.z }
   return null
+}
+
+/**
+ * Two verge boards that meet end to end at a gable apex — the ends of their
+ * edges coincide and they stand proud of the same gable face — are cut
+ * plumb there: each ends in the vertical plane through the apex that bisects
+ * the angle between them, so they meet in one face instead of overlapping.
+ * The cut is stated on both boards (the one already in the model is
+ * restated), so the joint is model data the compiler follows.
+ */
+function plumbCutAtApex(h: ArchitectureHelpers, boardId: string, edge: RoofEdge): void {
+  const m = h.model
+  const board = m.linearSolids.find((s) => s.id === boardId)
+  if (!board) return
+  const near = (a: Vec3, b: Vec3): boolean => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z) <= 1e-6
+  const dirOf = (a: Vec3, b: Vec3): Vec3 => {
+    const l = Math.hypot(b.x - a.x, b.y - a.y, b.z - a.z)
+    return { x: (b.x - a.x) / l, y: (b.y - a.y) / l, z: (b.z - a.z) / l }
+  }
+  const mine = linearSolidBasis(board)
+  for (const other of m.linearSolids) {
+    if (other.id === boardId || other.role !== 'VERGE_BOARD' || !other.hostId) continue
+    const oe = m.roofEdges.find((e) => e.id === other.hostId)
+    if (!oe || oe.kind !== 'VERGE') continue
+    const theirs = linearSolidBasis(other)
+    // the same gable face: both boards stand proud in the same horizontal direction
+    const sameFace = Math.abs(mine.depthAxis.x * theirs.depthAxis.x + mine.depthAxis.z * theirs.depthAxis.z) > 1 - 1e-6 && Math.abs(mine.depthAxis.y) < 1e-6 && Math.abs(theirs.depthAxis.y) < 1e-6
+    if (!sameFace) continue
+    for (const [myEnd, apex] of [['end', edge.end], ['start', edge.start]] as const) {
+      const theirEnd = near(oe.start, apex) ? 'start' : near(oe.end, apex) ? 'end' : null
+      if (!theirEnd) continue
+      // towards the apex along mine, away from it along theirs
+      const into = myEnd === 'end' ? dirOf(edge.start, edge.end) : dirOf(edge.end, edge.start)
+      const away = theirEnd === 'start' ? dirOf(oe.start, oe.end) : dirOf(oe.end, oe.start)
+      const n = { x: into.x + away.x, y: into.y + away.y, z: into.z + away.z }
+      const nl = Math.hypot(n.x, n.y, n.z)
+      // a plumb cut only: the bisecting plane must be vertical (a mirrored pair about it)
+      if (nl < 1e-6 || Math.abs(n.y) > 1e-6 * nl) continue
+      // each board's cut normal points out of the board at that end: along `into` for mine, against `away` for theirs
+      const mineCut = { point: { ...apex }, normal: { x: n.x / nl, y: 0, z: n.z / nl } }
+      const theirCut = { point: { ...apex }, normal: { x: -n.x / nl, y: 0, z: -n.z / nl } }
+      const self = m.linearSolids.find((s) => s.id === boardId)
+      if (self) h.replace('linearSolids', boardId, { ...self, [myEnd === 'end' ? 'endCut' : 'startCut']: mineCut })
+      h.replace('linearSolids', other.id, { ...other, [theirEnd === 'start' ? 'startCut' : 'endCut']: theirCut })
+    }
+  }
 }
 
 /**

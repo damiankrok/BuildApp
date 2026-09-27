@@ -33,7 +33,7 @@ const LOCAL = resolve(ROOT, 'apps/local-analyzer')
 const ANDROID = resolve(ROOT, 'apps/android')
 const KOTLIN_MAIN = resolve(ANDROID, 'app/src/main/java/com/buildplan/preview')
 
-const FORBIDDEN_MODULE = /packages\/(candidates|reference-[^/]+|synthetic-drawings|demo|editor|verification)\/|(^|\/)research\/|stage-reports\/|tests\/(benchmark|architecture)\/|apps\/(analyzer-api|web|android)\/|apps\/local-analyzer\/(test|scripts|fixture)\//
+const FORBIDDEN_MODULE = /packages\/(candidates|reference-[^/]+|synthetic-drawings|demo|editor|verification)\/|packages\/architecture\/src\/(fixtures\/|hypotheses\/demos)|(^|\/)research\/|stage-reports\/|tests\/(benchmark|architecture)\/|apps\/(analyzer-api|web|android)\/|apps\/local-analyzer\/(test|scripts|fixture)\//
 const PROJECT_WORDS = /marc[oó]wk|m2fa281446a8ca/i
 const PIPELINE_STEPS = ['acquireSourcePackage(', 'analyzeSourcePackage(', 'extractMetricEvidence(', 'reconstructV2(', 'compileBuilding(', 'buildMobileSceneBundle(']
 
