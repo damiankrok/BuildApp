@@ -233,7 +233,8 @@ the stage; no GPU, no `/dev/kvm`).
 | Android build | `npm run android:assembleDebug` | **pass** — four APKs + `VERSION.txt` in `apps/android/app/build/preview-apks/`, signed with the preview key (`6e48fac4…`); permissions unchanged (`INTERNET` + AndroidX's own signature-level receiver permission, checked with `aapt dump permissions`); the same three `.filamat` materials; no fixture or evidence file shipped |
 | Analyzer fixtures, Marcówki | the sealed candidates replay inside `npm test` (candidates, mobile-scene parity, styling parity) | pass |
 | Analyzer, second house | `npm run analysis:second-house -- --url <second-house URL> --out <scratch> --expect COMPLETED` | **COMPLETED** in 318 s; model `88c514f5af227d2e11adcd8b41e12281e052ee8b925f6459ee53b1c9447017e0` (= the 03G regression record), scene `029f181e…` |
-| Device / emulator smoke test | — | **not run**: no `/dev/kvm` (an x86_64 emulator needs hardware acceleration) and no arm64 host |
+| Device / emulator smoke test | — | **not run**: no `/dev/kvm` (an x86_64 emulator needs hardware acceleration) and no arm64 host; CI's emulator job exercises the analyzer, not the viewer |
+| CI | BuildApp CI run 51 (`workflow_dispatch`, `b34e144`) | 10 of 11 jobs green, incl. Core (full `npm test`) and Android / APK; the emulator analyzer job was still running (see L) |
 
 New tests by requirement:
 
@@ -386,12 +387,29 @@ On `integration/unified-buildplan-presentation-v1`, pushed to `origin`
 | `99dfd24` | renderer and viewer — Mode control, overlays, non-shadowing glass, Fit model / Isometric |
 | `72fa89e` | tests and generalization guard |
 | `b34e144` | docs, same-model evidence, stage report, project status |
-| the commit carrying this table | report: commits and CI run |
+| `e79abb1` | report: commits and CI run |
+| `d9182a5` | drop an unused list in `FeatureEdges.compute` (no behaviour change; Android suite re-run: 309 / 0 failures) |
+| the commit carrying this table | report: CI run 51 results |
 
 CI: BuildApp CI run **51** was started by `workflow_dispatch` on `b34e144`
 (the branch name is outside the workflow's push filter):
-https://github.com/damiankrok/BuildApp/actions/runs/36314929333 — its
-`buildplan-model-preview-apks` artifact is the owner's APK. Nothing was
+https://github.com/damiankrok/BuildApp/actions/runs/36314929333
+
+| job | result |
+| --- | --- |
+| Core / Analyzer / Reconstruction (typecheck, all unit/integration/architecture tests incl. the new guard and the analyzer-api worker test, web build, audits, analyzer-v2 gates) | success |
+| Android / APK (bundles current, JVM tests, APK assembly, signer, permissions) | success — artifact `buildplan-model-preview-apks` (id 10930785865, expires 2026-10-27) |
+| Browser / Playwright | success |
+| Second house / generalization | success |
+| Local analyzer / Node 18 parity | success |
+| Analyzer API / container, Analyzer API / deploy | success (deploy: nothing configured) |
+| Architecture / assemblies | success |
+| Dependency security (advisory) | success |
+| Android / direct APK (preview-latest) | skipped, as designed for this branch |
+| Local analyzer / APK size + emulator | still running when this report was written; it runs the local analyzer's instrumentation on an x86_64 emulator and never opens the viewer, so it does not exercise this stage's code |
+
+The `buildplan-model-preview-apks` artifact of run 51 is the owner's APK
+(`d9182a5` changes no behaviour). Nothing was
 merged into `claude/buildapp-buildworld-v1-7y6yqh`, and `preview-latest` is
 not republished from this branch.
 
