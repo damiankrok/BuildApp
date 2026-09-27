@@ -50,7 +50,18 @@ import {
   type Wall,
   type ValidationIssue,
   TerraceSchema,
+  RoofPlaneSchema,
+  RoofEdgeSchema,
+  WallPanelSchema,
+  PlatformSchema,
+  StepRunSchema,
+  AssemblySchema,
+  RelationshipSchema,
+  withoutReferences,
+  type Assembly,
+  type WallPanel,
 } from '@buildapp/model'
+import { executeArchitecture, isArchitectureCommand } from './apply-architecture.js'
 import type { ZodTypeAny } from 'zod'
 import { BuildingCommandSchema, type BuildingCommand, type ResolvedCommand } from './commands.js'
 
@@ -97,12 +108,19 @@ const SCHEMA_OF: Record<Exclude<SemanticKind, 'building'>, ZodTypeAny> & { build
   surfaceRegion: SurfaceRegionSchema,
   linearSolid: LinearSolidSchema,
   terrace: TerraceSchema,
+  roofPlane: RoofPlaneSchema,
+  roofEdge: RoofEdgeSchema,
+  wallPanel: WallPanelSchema,
+  platform: PlatformSchema,
+  stepRun: StepRunSchema,
+  assembly: AssemblySchema,
+  relationship: RelationshipSchema,
   material: MaterialSchema,
   constraint: ConstraintSchema,
   evidenceSource: EvidenceSourceSchema,
 }
 
-const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney', 'stair', 'surfaceRegion', 'linearSolid']
+const MATERIAL_TAKERS: readonly SemanticKind[] = ['wall', 'window', 'door', 'slab', 'roof', 'rooflight', 'balcony', 'railing', 'chimney', 'stair', 'surfaceRegion', 'linearSolid', 'terrace', 'roofPlane', 'wallPanel', 'platform', 'stepRun']
 
 const stripUndefined = <T extends object>(o: T): T => {
   const out: Record<string, unknown> = {}
@@ -202,6 +220,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
     tags: c.tags,
   })
 
+  if (isArchitectureCommand(c)) return executeArchitecture({ model: m, add: add as never, replace: replace as never, fail, common }, c)
   switch (c.type) {
     case 'createBuilding': {
       if (m.building) return fail('BUILDING_EXISTS', `the model already has building ${m.building.id}`, m.building.id)
@@ -372,7 +391,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       })
       return
     case 'cutRoofOpening':
-      add('roofOpenings', 'roofOpening', { id: c.id, ...common(c), roofId: c.roofId, kind: c.kind, footprint: c.footprint, cut: c.cut, throughId: c.throughId })
+      add('roofOpenings', 'roofOpening', { id: c.id, ...common(c), roofId: c.roofId, kind: c.kind, footprint: c.footprint, cut: c.cut, throughId: c.throughId, outline: c.outline })
       return
     case 'placeRooflight':
       add('rooflights', 'rooflight', { id: c.id, ...common(c), roofOpeningId: c.roofOpeningId, frameWidth: c.frameWidth, glassThickness: c.glassThickness, materialId: c.materialId })
@@ -390,6 +409,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
         frameDepth: c.frameDepth,
         frameInset: c.frameInset,
         assembly: c.assembly,
+        usage: c.usage,
         materialId: c.materialId,
       })
       return
@@ -412,6 +432,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
         infill: c.infill,
         hostId: c.hostId,
         path: c.path,
+        role: c.role,
         materialId: c.materialId,
       })
       return
@@ -451,7 +472,7 @@ function execute(d: Draft, c: ResolvedCommand): void {
       add('surfaceRegions', 'surfaceRegion', { id: c.id, ...common(c), hostId: c.hostId, face: c.face, rect: c.rect, materialId: c.materialId })
       return
     case 'createLinearSolid':
-      add('linearSolids', 'linearSolid', { id: c.id, ...common(c), levelId: c.levelId, hostId: c.hostId, start: c.start, end: c.end, width: c.width, depth: c.depth, rollDeg: c.rollDeg, materialId: c.materialId })
+      add('linearSolids', 'linearSolid', { id: c.id, ...common(c), levelId: c.levelId, hostId: c.hostId, start: c.start, end: c.end, width: c.width, depth: c.depth, rollDeg: c.rollDeg, role: c.role, materialId: c.materialId })
       return
     case 'defineMaterial':
       add('materials', 'material', { id: c.id, name: c.name, color: c.color, opacity: c.opacity, note: c.note })
@@ -510,10 +531,8 @@ function execute(d: Draft, c: ResolvedCommand): void {
       return resize(d, c)
     case 'removeFeature':
       return remove(d, c.targetId, c.cascade)
-    default: {
-      const never: never = c
-      throw new Error(`unhandled command ${(never as { type: string }).type}`)
-    }
+    default:
+      throw new Error(`unhandled command ${(c as { type: string }).type}`)
   }
 }
 
@@ -584,6 +603,22 @@ function move(d: Draft, c: Extract<ResolvedCommand, { type: 'moveFeature' }>): v
       return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz), topOffset: (o.topOffset as number) + c.dy })
     case 'chimney':
       return put({ ...o, footprint: shiftRect(o.footprint as PlanRect, c.dx, c.dz), baseOffset: (o.baseOffset as number) + c.dy })
+    case 'roofPlane': {
+      const datum = o.datum as { x: number; y: number; z: number }
+      return put({ ...o, boundary: (o.boundary as Vec2[]).map((p) => shift(p, c.dx, c.dz)), datum: { x: datum.x + c.dx, y: datum.y + c.dy, z: datum.z + c.dz } })
+    }
+    case 'platform': {
+      const slope = o.slope as { origin: Vec2 } | undefined
+      return put(stripUndefined({ ...o, polygon: (o.polygon as Vec2[]).map((p) => shift(p, c.dx, c.dz)), topOffset: (o.topOffset as number) + c.dy, slope: slope ? { ...slope, origin: shift(slope.origin, c.dx, c.dz) } : undefined }))
+    }
+    case 'terrace':
+      return put({ ...o, polygon: (o.polygon as Vec2[]).map((p) => shift(p, c.dx, c.dz)), topOffset: (o.topOffset as number) + c.dy })
+    case 'stepRun':
+      return put({ ...o, start: shift(o.start as Vec2, c.dx, c.dz), baseOffset: (o.baseOffset as number) + c.dy })
+    case 'wallPanel': {
+      const wp = o as unknown as WallPanel
+      return put({ ...o, start: shift(wp.start, c.dx, c.dz), end: shift(wp.end, c.dx, c.dz), bottom: wp.bottom.map((q) => ({ u: q.u, y: q.y + c.dy })), top: wp.top.map((q) => ({ u: q.u, y: q.y + c.dy })) })
+    }
     case 'stair': {
       const st = o as unknown as Stair
       if (st.kind === 'FLIGHTS') return put({ ...o, footprint: shiftRect(st.footprint, c.dx, c.dz), start: shift(st.start, c.dx, c.dz), baseOffset: st.baseOffset + c.dy, topOffset: st.topOffset + c.dy })
@@ -655,7 +690,7 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     const k = findObject(m, id)?.kind
     if (k === 'building') for (const l of m.levels) out.push(l.id)
     if (k === 'level') {
-      for (const list of [m.rooms, m.walls, m.slabs, m.roofs, m.balconies, m.railings, m.chimneys, m.stairs]) {
+      for (const list of [m.rooms, m.walls, m.slabs, m.roofs, m.balconies, m.railings, m.chimneys, m.stairs, m.linearSolids, m.terraces, m.roofPlanes, m.wallPanels, m.platforms, m.stepRuns]) {
         for (const o of list as { id: string; levelId: string }[]) if (o.levelId === id) out.push(o.id)
       }
       for (const s of m.stairs) if (s.toLevelId === id) out.push(s.id)
@@ -667,7 +702,8 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
       for (const r of m.surfaceRegions) if (r.hostId === id) out.push(r.id)
     }
     if (k === 'material') for (const r of m.surfaceRegions) if (r.materialId === id) out.push(r.id)
-    if (k === 'roof') for (const o of m.roofOpenings) if (o.roofId === id) out.push(o.id)
+    if (k === 'roof' || k === 'roofPlane') for (const o of m.roofOpenings) if (o.roofId === id) out.push(o.id)
+    if (k === 'roofPlane') for (const e of m.roofEdges) if (e.planeIds.includes(id)) out.push(e.id)
     if (k === 'roofOpening') for (const r of m.rooflights) if (r.roofOpeningId === id) out.push(r.id)
     if (k === 'chimney') for (const o of m.roofOpenings) if (o.throughId === id) out.push(o.id)
     if (k === 'wallJunction') for (const r of m.wallRings) if (r.junctionIds.includes(id)) out.push(r.id)
@@ -717,6 +753,15 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
   m.chimneys = keep(m.chimneys)
   m.stairs = keep(m.stairs)
   m.surfaceRegions = keep(m.surfaceRegions)
+  m.linearSolids = keep(m.linearSolids)
+  m.terraces = keep(m.terraces)
+  m.roofPlanes = keep(m.roofPlanes)
+  m.roofEdges = keep(m.roofEdges)
+  m.wallPanels = keep(m.wallPanels)
+  m.platforms = keep(m.platforms)
+  m.stepRuns = keep(m.stepRuns)
+  m.assemblies = keep(m.assemblies)
+  m.relationships = keep(m.relationships)
   m.materials = keep(m.materials)
   m.constraints = keep(m.constraints)
   m.evidenceSources = keep(m.evidenceSources)
@@ -738,8 +783,49 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
       d.changed.push(w.id)
       return { ...w, topProfile: { kind: 'FLAT' as const } }
     }
+    if (w.topProfile?.kind === 'FOLLOW_ROOF_PLANES' && w.topProfile.planeIds.some((p) => toRemove.has(p))) {
+      d.changed.push(w.id)
+      const planeIds = w.topProfile.planeIds.filter((p) => !toRemove.has(p))
+      return { ...w, topProfile: planeIds.length > 0 ? { kind: 'FOLLOW_ROOF_PLANES' as const, planeIds } : { kind: 'FLAT' as const } }
+    }
     return w
   })
+  // 1.6.0: relations loosen rather than block. A member, a panel, a platform keeps its geometry and
+  // loses the host that went; a relationship naming a removed object goes with it; an assembly keeps
+  // its other components (and goes itself only when a component its kind cannot lack is gone).
+  const loosenHost = <T extends { id: string; hostId?: string }>(list: T[]): T[] =>
+    list.map((o) => {
+      if (o.hostId === undefined || !toRemove.has(o.hostId)) return o
+      d.changed.push(o.id)
+      return stripUndefined({ ...o, hostId: undefined })
+    })
+  m.linearSolids = loosenHost(m.linearSolids)
+  m.wallPanels = loosenHost(fixMaterial(m.wallPanels))
+  m.roofPlanes = fixMaterial(m.roofPlanes)
+  m.stepRuns = fixMaterial(m.stepRuns)
+  m.terraces = fixMaterial(m.terraces).map((t) => (t.hostWallIds?.some((w) => toRemove.has(w)) ? (d.changed.push(t.id), stripUndefined({ ...t, hostWallIds: t.hostWallIds.filter((w) => !toRemove.has(w)) })) : t))
+  m.platforms = fixMaterial(m.platforms).map((p) => (p.hostWallIds?.some((w) => toRemove.has(w)) ? (d.changed.push(p.id), stripUndefined({ ...p, hostWallIds: p.hostWallIds.filter((w) => !toRemove.has(w)) })) : p))
+  for (let pass = 0; pass < 4; pass++) {
+    const before = toRemove.size
+    m.relationships = m.relationships.filter((r) => {
+      if (!toRemove.has(r.from) && !toRemove.has(r.to)) return true
+      toRemove.add(r.id)
+      return false
+    })
+    m.assemblies = m.assemblies
+      .map((a): Assembly => {
+        const next = withoutReferences(a, toRemove)
+        if (JSON.stringify(next) === JSON.stringify(a)) return a
+        d.changed.push(a.id)
+        return next
+      })
+      .filter((a) => {
+        const gone = (a.kind === 'ROOF' && a.planeIds.length === 0) || (a.kind === 'DORMER' && a.hostPlaneIds.length === 0) || (a.kind === 'FACADE' && a.wallIds.length === 0)
+        if (gone) toRemove.add(a.id)
+        return !gone
+      })
+    if (toRemove.size === before) break
+  }
   m.windows = fixMaterial(m.windows)
   m.doors = fixMaterial(m.doors)
   m.slabs = fixMaterial(m.slabs)
@@ -805,6 +891,21 @@ function remove(d: Draft, targetId: string, cascade: boolean): void {
     m.chimneys = scrub(m.chimneys)
     m.stairs = scrub(m.stairs)
     m.surfaceRegions = scrub(m.surfaceRegions)
+    m.linearSolids = scrub(m.linearSolids)
+    m.terraces = scrub(m.terraces)
+    m.roofPlanes = scrub(m.roofPlanes)
+    m.roofEdges = scrub(m.roofEdges)
+    m.wallPanels = scrub(m.wallPanels)
+    m.platforms = scrub(m.platforms)
+    m.stepRuns = scrub(m.stepRuns)
+    m.relationships = scrub(m.relationships)
+    m.assemblies = scrub(m.assemblies).filter((a) => {
+      if (a.kind !== 'UNKNOWN') return true
+      const ids = a.sourceEvidenceIds.filter((s) => !removedSources.includes(s))
+      if (ids.length > 0) return true
+      toRemove.add(a.id)
+      return false
+    }).map((a) => (a.kind === 'UNKNOWN' && a.sourceEvidenceIds.some((s) => removedSources.includes(s)) ? { ...a, sourceEvidenceIds: a.sourceEvidenceIds.filter((s) => !removedSources.includes(s)) } : a))
   }
   d.removed.push(...toRemove)
   d.changed = d.changed.filter((id) => !toRemove.has(id))

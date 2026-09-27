@@ -11,6 +11,8 @@
  * building. Adding a project-specific rule here would be a defect.
  */
 import {
+  assembliesContaining,
+  assemblyComponents,
   findObject,
   polygonArea,
   rectDepth,
@@ -44,12 +46,37 @@ const KIND_LABEL: Record<SemanticKind, string> = {
   surfaceRegion: 'Surface region',
   linearSolid: 'Linear solid',
   terrace: 'Terrace',
+  roofPlane: 'Roof plane',
+  roofEdge: 'Roof edge',
+  wallPanel: 'Wall panel',
+  platform: 'Platform',
+  stepRun: 'Exterior steps',
+  assembly: 'Assembly',
+  relationship: 'Relationship',
   material: 'Material',
   constraint: 'Constraint',
   evidenceSource: 'Evidence source',
 }
 
 export const kindLabel = (kind: SemanticKind): string => KIND_LABEL[kind]
+
+const words = (s: string): string => titleCase(s.replace(/_/g, ' '))
+
+/**
+ * The user-facing kind of one object: its schema kind, refined by the role
+ * or usage the model states (a linear solid that is a COLUMN reads
+ * "Column", a wall panel that is a PARAPET "Parapet", a garage door
+ * "Garage door", an unknown assembly "Unknown assembly"). Without a role the
+ * schema kind is the label, as before.
+ */
+export function kindLabelOf(kind: SemanticKind, object: SemanticObject): string {
+  const o = object as unknown as Record<string, unknown>
+  if ((kind === 'linearSolid' || kind === 'wallPanel' || kind === 'platform') && typeof o.role === 'string') return words(o.role)
+  if (kind === 'door' && o.usage === 'GARAGE') return 'Garage door'
+  if (kind === 'assembly' && typeof o.kind === 'string') return `${words(o.kind)} assembly`
+  if (kind === 'roofEdge' && typeof o.kind === 'string') return words(o.kind)
+  return KIND_LABEL[kind]
+}
 
 /** Metres, trimmed: 2.4 m, 0.365 m, 12 m. */
 export function len(v: number): string {
@@ -61,7 +88,9 @@ const area = (v: number): string => `${v.toFixed(2)} m²`
 const deg = (v: number): string => `${Number(v.toFixed(2))}°`
 const rectSize = (r: PlanRect): string => `${len(rectWidth(r))} × ${len(rectDepth(r))}`
 
-const titleCase = (s: string): string => s.charAt(0) + s.slice(1).toLowerCase()
+function titleCase(s: string): string {
+  return s.charAt(0) + s.slice(1).toLowerCase()
+}
 
 /**
  * A short human label for an object, used both for the object itself and when
@@ -119,6 +148,12 @@ export function describeObject(
   const any = object as unknown as Record<string, unknown>
 
   relate(ctx, 'storey', levelIdOf(object))
+  // 1.6.0: what the object is part of — its assemblies, then the typed relationships it takes part in.
+  for (const a of assembliesContaining(model, (object as { id: string }).id)) relate(ctx, `part of ${a.kind.toLowerCase().replace(/_/g, ' ')}`, a.id)
+  for (const r of model.relationships) {
+    const id = (object as { id: string }).id
+    if (r.from === id) relate(ctx, r.kind.toLowerCase().replace(/_/g, ' '), r.to)
+  }
 
   switch (kind) {
     case 'level': {
@@ -327,6 +362,62 @@ export function describeObject(
       const wallIds = (any.wallIds as string[] | undefined) ?? []
       fact(ctx, 'Walls', String(wallIds.length))
       for (const w of wallIds) relate(ctx, 'wall', w)
+      break
+    }
+    case 'linearSolid': {
+      // Unclassified members keep the facts they always had (none); a classified one says what it is.
+      if (typeof any.role !== 'string') break
+      fact(ctx, 'Role', words(any.role as string))
+      const a = any.start as { x: number; y: number; z: number }
+      const b = any.end as { x: number; y: number; z: number }
+      fact(ctx, 'Length', len(Math.hypot(b.x - a.x, b.y - a.y, b.z - a.z)))
+      fact(ctx, 'Section', `${len(any.width as number)} × ${len(any.depth as number)}`)
+      relate(ctx, 'on', any.hostId as string | undefined)
+      break
+    }
+    case 'roofPlane': {
+      const poly = any.boundary as { x: number; z: number }[]
+      fact(ctx, 'Pitch', deg(any.pitchDeg as number))
+      fact(ctx, 'Area in plan', area(polygonArea(poly)))
+      fact(ctx, 'Thickness', len(any.thickness as number))
+      for (const e of model.roofEdges.filter((x) => x.planeIds.includes(o.id))) relate(ctx, e.kind.toLowerCase().replace(/_/g, ' '), e.id)
+      const holes = model.roofOpenings.filter((x) => x.roofId === o.id)
+      if (holes.length > 0) fact(ctx, 'Openings', String(holes.length))
+      break
+    }
+    case 'wallPanel': {
+      const start = any.start as { x: number; z: number }
+      const end = any.end as { x: number; z: number }
+      fact(ctx, 'Role', words(String(any.role)))
+      fact(ctx, 'Length', len(Math.hypot(end.x - start.x, end.z - start.z)))
+      fact(ctx, 'Thickness', len(any.thickness as number))
+      relate(ctx, 'stands on', any.hostId as string | undefined)
+      break
+    }
+    case 'platform': {
+      const poly = any.polygon as { x: number; z: number }[]
+      fact(ctx, 'Role', words(String(any.role)))
+      fact(ctx, 'Area', area(polygonArea(poly)))
+      fact(ctx, 'Top offset', len(any.topOffset as number))
+      fact(ctx, 'Thickness', len(any.thickness as number))
+      break
+    }
+    case 'stepRun': {
+      fact(ctx, 'Role', words(String(any.role)))
+      fact(ctx, 'Steps', String(any.steps))
+      fact(ctx, 'Rise', len(any.rise as number))
+      fact(ctx, 'Going', len(any.going as number))
+      fact(ctx, 'Total rise', len((any.rise as number) * (any.steps as number)))
+      fact(ctx, 'Width', len(any.width as number))
+      break
+    }
+    case 'assembly': {
+      fact(ctx, 'Type', words(String(any.kind)))
+      fact(ctx, 'Quality', titleCase(String(any.quality)))
+      for (const missing of (any.missing as string[] | undefined) ?? []) fact(ctx, 'Missing', missing)
+      for (const alt of (any.alternatives as { kind: string; confidence: number }[] | undefined) ?? []) fact(ctx, 'Could also be', `${words(alt.kind)} (${alt.confidence.toFixed(2)})`)
+      if (typeof any.unresolvedReason === 'string') fact(ctx, 'Unresolved', any.unresolvedReason as string)
+      for (const r of assemblyComponents(object as never)) relate(ctx, r.field.replace(/Ids?$/, '').replace(/([A-Z])/g, ' $1').toLowerCase(), r.id)
       break
     }
     default:

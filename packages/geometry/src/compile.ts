@@ -21,7 +21,12 @@ import {
   type Level,
   type Opening,
   type Roof,
+  type RoofPlane,
   type Wall,
+  STRUCTURAL_MEMBER_ROLES,
+  roofOpeningOutline,
+  roofPlaneDrop,
+  roofPlaneTopAt,
 } from '@buildapp/model'
 import { compileDoorFill, compileWindowFill } from './fills.js'
 import { compileBalcony, compileChimney, compileRailing, compileRoomFloor, compileSlab, compileStairPlaceholder, compileTerrace } from './features.js'
@@ -30,6 +35,7 @@ import { compileStair } from './stair-compiler.js'
 import { compileSurfaceRegion } from './surface-regions.js'
 import { compileLinearSolid } from './linear-solids.js'
 import { compileWall, type TopFunction } from './wall-compiler.js'
+import { compilePlatform, compileRoofPlane, compileStepRun, compileUnknownAssembly, compileWallPanel, planeSurface, wallTopUnderPlanes, type PlaneSurface } from './architecture-compiler.js'
 import { boundsOfTriangles, type Bounds, type CompileDiagnostic, type CompiledMesh, type CompiledScene } from './types.js'
 
 const byId = <T extends { id: string }>(list: readonly T[]): T[] => [...list].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
@@ -47,9 +53,14 @@ export function wallTopFunction(
   level: Level,
   roofs: ReadonlyMap<string, { roof: Roof; geometry: RoofGeometry }>,
   span: { a0: number; a1: number } = physicalSpan(nominalExtent(wall)),
+  planes?: (planeIds: readonly string[]) => PlaneSurface,
 ): WallTop {
   const profile = wall.topProfile
   if (!profile || profile.kind === 'FLAT') return { top: () => wall.height, breaks: [], diagnostics: [] }
+  if (profile.kind === 'FOLLOW_ROOF_PLANES') {
+    if (!planes) return { top: () => wall.height, breaks: [], diagnostics: [] }
+    return wallTopUnderPlanes(wall, level, planes(profile.planeIds), span)
+  }
   if (profile.kind === 'POLYLINE') {
     const pts = profile.points
     const top: TopFunction = (u) => {
@@ -145,6 +156,11 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     roofs.set(roof.id, { roof, geometry: roofGeometry(roof, level) })
   }
 
+  // Roof planes (1.6.0), for the walls that die into them.
+  const planeById = new Map<string, RoofPlane>(model.roofPlanes.map((p) => [p.id, p]))
+  const holesOfPlane = (planeId: string) => model.roofOpenings.filter((o) => o.roofId === planeId).sort((a, b) => (a.id < b.id ? -1 : 1)).map(roofOpeningOutline)
+  const planesSurface = (ids: readonly string[]): PlaneSurface => planeSurface(ids.map((id) => planeById.get(id)).filter((p): p is RoofPlane => p !== undefined), holesOfPlane)
+
   // Junctions and rings -> physical wall extents. The model validated, so the resolution carries no errors.
   const topology = resolveWallTopology(model)
 
@@ -168,7 +184,7 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     if (!level) continue
     const openings = cutsByWall.get(wall.id) ?? []
     const extent = topology.extents.get(wall.id) ?? nominalExtent(wall)
-    const wt = wallTopFunction(wall, level, roofs, physicalSpan(extent))
+    const wt = wallTopFunction(wall, level, roofs, physicalSpan(extent), planesSurface)
     diagnostics.push(...wt.diagnostics)
     const r = compileWall({ wall, level, openings, top: wt.top, topBreaks: wt.breaks, extent })
     diagnostics.push(...r.diagnostics)
@@ -277,7 +293,8 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
       levelId: solid.levelId,
       solidId: solid.id,
       ...(solid.hostId !== undefined ? { hostWallId: model.walls.some((w) => w.id === solid.hostId) ? solid.hostId : undefined } : {}),
-      structural: false,
+      // A member whose role is a column, a post, a beam, … is structure; an unclassified facade member is not.
+      structural: solid.role !== undefined && STRUCTURAL_MEMBER_ROLES.includes(solid.role),
       materialId: solid.materialId,
       triangles: tris,
     })
@@ -380,6 +397,68 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     meshes.push({ objectId: s.id, objectKind: 'stair', part: 'STAIR_PLACEHOLDER', levelId: s.levelId, solidId: s.id, structural: false, triangles: compileStairPlaceholder(s, level) })
   }
 
+  // --- schema 1.6.0 primitives ---------------------------------------------
+  const rooflightByPlaneOpening = new Map(model.rooflights.map((r) => [r.roofOpeningId, r]))
+  for (const plane of byId(model.roofPlanes)) {
+    const level = levelOf(plane.levelId, plane.id)
+    if (!level) continue
+    const openings = byId(model.roofOpenings.filter((o) => o.roofId === plane.id))
+    const r = compileRoofPlane(plane, openings)
+    if (r.triangles.length === 0) {
+      diagnostics.push({ code: 'ROOF_PLANE_NOT_TRIANGULATED', severity: 'ERROR', message: `roof plane ${plane.id}: its region could not be tessellated`, objectId: plane.id })
+      continue
+    }
+    meshes.push({ objectId: plane.id, objectKind: 'roofPlane', part: 'ROOF_PLANE', levelId: plane.levelId, solidId: plane.id, structural: true, materialId: materialOf(plane), triangles: r.triangles })
+    for (const o of openings) {
+      const reveal = r.reveals.get(o.id)
+      if (!reveal) {
+        diagnostics.push({ code: 'ROOF_OPENING_NOT_CUT', severity: 'ERROR', message: `roof opening ${o.id} was not cut through roof plane ${plane.id}`, objectId: o.id })
+        continue
+      }
+      meshes.push({ objectId: o.id, objectKind: 'roofOpening', part: 'ROOF_REVEAL', levelId: plane.levelId, solidId: plane.id, hostRoofId: plane.id, openingId: o.id, structural: true, materialId: materialOf(plane), triangles: reveal })
+      const rl = rooflightByPlaneOpening.get(o.id)
+      if (rl) {
+        const g = planeAsRoofGeometry(plane)
+        for (const piece of compileRooflightFill(rl, o, g, PLANE_ROOF_STANDIN)) {
+          meshes.push({ objectId: rl.id, objectKind: 'rooflight', part: piece.part, levelId: plane.levelId, solidId: `${rl.id}:${piece.part}`, hostRoofId: plane.id, openingId: o.id, structural: false, materialId: materialOf(rl), triangles: piece.triangles })
+        }
+      }
+    }
+  }
+  for (const panel of byId(model.wallPanels)) {
+    if (!levelOf(panel.levelId, panel.id)) continue
+    meshes.push({ objectId: panel.id, objectKind: 'wallPanel', part: 'WALL_PANEL', levelId: panel.levelId, solidId: panel.id, structural: true, materialId: materialOf(panel), triangles: compileWallPanel(panel) })
+  }
+  for (const p of byId(model.platforms)) {
+    const level = levelOf(p.levelId, p.id)
+    if (!level) continue
+    const tris = compilePlatform(p, level)
+    if (!tris) {
+      diagnostics.push({ code: 'PLATFORM_NOT_TRIANGULATED', severity: 'ERROR', message: `platform ${p.id}: polygon could not be triangulated`, objectId: p.id })
+      continue
+    }
+    meshes.push({ objectId: p.id, objectKind: 'platform', part: 'PLATFORM', levelId: p.levelId, solidId: p.id, structural: true, materialId: materialOf(p), triangles: tris })
+  }
+  for (const s of byId(model.stepRuns)) {
+    const level = levelOf(s.levelId, s.id)
+    if (!level) continue
+    const tris = compileStepRun(s, level)
+    if (tris.length === 0) {
+      diagnostics.push({ code: 'STEP_RUN_NOT_COMPILED', severity: 'ERROR', message: `step run ${s.id}: its profile could not be triangulated`, objectId: s.id })
+      continue
+    }
+    meshes.push({ objectId: s.id, objectKind: 'stepRun', part: 'STEP_RUN', levelId: s.levelId, solidId: s.id, structural: true, materialId: materialOf(s), triangles: tris })
+  }
+  for (const a of byId(model.assemblies)) {
+    if (a.kind !== 'UNKNOWN') continue
+    const tris = compileUnknownAssembly(a)
+    if (tris.length === 0) {
+      diagnostics.push({ code: 'UNKNOWN_ASSEMBLY_NOT_RENDERED', severity: 'WARNING', message: `unknown assembly ${a.id} carries no observed plane or segment; it is recorded, not drawn`, objectId: a.id })
+      continue
+    }
+    meshes.push({ objectId: a.id, objectKind: 'assembly', part: 'UNKNOWN_ASSEMBLY', solidId: a.id, structural: false, triangles: tris })
+  }
+
   let bounds: Bounds | null = null
   let triangleCount = 0
   const objects = new Set<string>()
@@ -389,6 +468,29 @@ export function compileBuilding(model: CanonicalBuildingModel): CompiledScene {
     objects.add(m.objectId)
   }
   return { modelId: model.id, meshes, diagnostics, bounds, stats: { triangleCount, meshCount: meshes.length, objectCount: objects.size } }
+}
+
+/** A legacy roof shape the rooflight compiler can read for a plane: only a VERTICAL cut is taken on planes, for which it reads no roof field. */
+const PLANE_ROOF_STANDIN = { kind: 'FLAT', footprint: { minX: 0, maxX: 1, minZ: 0, maxZ: 1 }, ridgeAxis: 'X', pitchDeg: 0, thickness: 1 } as unknown as Roof
+
+/** A roof plane seen through the RoofGeometry interface the rooflight compiler reads (top, underside, drop). */
+function planeAsRoofGeometry(plane: RoofPlane): RoofGeometry {
+  const drop = roofPlaneDrop(plane)
+  return {
+    kind: plane.pitchDeg === 0 ? 'FLAT' : 'GABLE',
+    eaveY: plane.datum.y,
+    ridgeY: plane.datum.y,
+    slope: Math.tan((plane.pitchDeg * Math.PI) / 180),
+    pitchDeg: plane.pitchDeg,
+    verticalDrop: drop,
+    covered: { minX: -Infinity, maxX: Infinity, minZ: -Infinity, maxZ: Infinity },
+    covers: () => true,
+    topAt: (x, z) => roofPlaneTopAt(plane, x, z),
+    undersideAt: (x, z) => roofPlaneTopAt(plane, x, z) - drop,
+    creaseLines: [],
+    plate: { minX: -Infinity, maxX: Infinity, minZ: -Infinity, maxZ: Infinity },
+    memberStrips: [],
+  }
 }
 
 /** All triangles of one closed solid (e.g. a wall with its reveals). */

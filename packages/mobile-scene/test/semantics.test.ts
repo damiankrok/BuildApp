@@ -20,6 +20,7 @@ import {
   ADJACENT_GROUPS,
   ARCHITECTURAL_PALETTE,
   ARCHITECTURAL_PALETTE_ID,
+  BASE_SEPARATED_GROUPS,
   MIN_ADJACENT_LUMINANCE_GAP,
   SEMANTIC_GROUPS,
   TONE_FAMILIES,
@@ -67,6 +68,11 @@ const ALL_PARTS: GeometryPart[] = [
   'LINEAR_SOLID',
   'TERRACE',
   'ROOF_TRIM',
+  'ROOF_PLANE',
+  'WALL_PANEL',
+  'PLATFORM',
+  'STEP_RUN',
+  'UNKNOWN_ASSEMBLY',
 ]
 
 describe('semanticGroupOf', () => {
@@ -189,9 +195,31 @@ describe('the architectural palette', () => {
 
   it('asks for a soft edge on the structural groups only', () => {
     expect(edgeGroups().sort()).toEqual(
-      ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'WALL_CLADDING', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'TERRACE_SURFACE', 'CHIMNEY', 'FACADE_FRAME'].sort(),
+      ['WALL_MAIN', 'WALL_SECONDARY', 'WALL_INTERIOR', 'WALL_CLADDING', 'ROOF_MAIN', 'FLAT_ROOF', 'ROOF_TRIM', 'SLAB', 'BALCONY_SLAB', 'TERRACE_SURFACE', 'CHIMNEY', 'FACADE_FRAME', 'STRUCTURAL_MEMBER', 'PERGOLA_MEMBER'].sort(),
     )
-    for (const g of ['WINDOW_GLASS', 'WINDOW_FRAME', 'RAILING', 'ROOM', 'DOOR', 'OTHER'] as const) expect(ARCHITECTURAL_PALETTE[g].edge).toBe('NONE')
+    for (const g of ['WINDOW_GLASS', 'WINDOW_FRAME', 'RAILING', 'ROOM', 'DOOR', 'UNKNOWN_ASSEMBLY', 'OTHER'] as const) expect(ARCHITECTURAL_PALETTE[g].edge).toBe('NONE')
+  })
+
+  it('keeps the 03G groups apart from the walls and roofs they meet, at the base palette', () => {
+    for (const [a, b] of BASE_SEPARATED_GROUPS) {
+      const gap = Math.abs(relativeLuminance(ARCHITECTURAL_PALETTE[a].color) - relativeLuminance(ARCHITECTURAL_PALETTE[b].color))
+      expect(gap, `${a} vs ${b}`).toBeGreaterThanOrEqual(MIN_ADJACENT_LUMINANCE_GAP)
+    }
+  })
+
+  it('reads members, pergolas, panels, platforms, steps and unknown assemblies as what the model says they are', () => {
+    const g = (part: Parameters<typeof semanticGroupOf>[0]['part'], facts?: Parameters<typeof semanticGroupOf>[0]['objectFacts']) => semanticGroupOf({ objectKind: 'linearSolid', part, objectFacts: facts })
+    expect(g('LINEAR_SOLID', { role: 'COLUMN' })).toBe('STRUCTURAL_MEMBER')
+    expect(g('LINEAR_SOLID', { role: 'BEAM' })).toBe('STRUCTURAL_MEMBER')
+    expect(g('LINEAR_SOLID', { role: 'PERGOLA_POST' })).toBe('PERGOLA_MEMBER')
+    expect(g('LINEAR_SOLID', { role: 'FASCIA' })).toBe('ROOF_TRIM')
+    expect(g('LINEAR_SOLID')).toBe('FACADE_FRAME')
+    expect(g('ROOF_PLANE', { roofKind: 'FLAT' })).toBe('FLAT_ROOF')
+    expect(g('ROOF_PLANE', { roofKind: 'PITCHED' })).toBe('ROOF_MAIN')
+    expect(g('WALL_PANEL')).toBe('WALL_MAIN')
+    expect(g('PLATFORM')).toBe('TERRACE_SURFACE')
+    expect(g('STEP_RUN')).toBe('STAIR')
+    expect(g('UNKNOWN_ASSEMBLY')).toBe('UNKNOWN_ASSEMBLY')
   })
 })
 

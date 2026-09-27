@@ -190,6 +190,11 @@ enum class RenderStyle(val label: String, val description: String) {
             GeometryPart.LINEAR_SOLID to Entry(hex(0xb0aaa0), roughness = 0.8f, acceptsModelMaterial = true),
             GeometryPart.TERRACE to Entry(hex(0x9d9488), roughness = 0.9f, acceptsModelMaterial = true),
             GeometryPart.ROOF_TRIM to Entry(hex(0xe9e4da), roughness = 0.85f, acceptsModelMaterial = true),
+            GeometryPart.ROOF_PLANE to Entry(hex(0x6f4a3d), roughness = 0.9f, acceptsModelMaterial = true),
+            GeometryPart.WALL_PANEL to Entry(hex(0xcfc8bb), roughness = 0.95f, acceptsModelMaterial = true),
+            GeometryPart.PLATFORM to Entry(hex(0x9d9488), roughness = 0.9f, acceptsModelMaterial = true),
+            GeometryPart.STEP_RUN to Entry(hex(0xb9b3a8), roughness = 0.9f, acceptsModelMaterial = true),
+            GeometryPart.UNKNOWN_ASSEMBLY to Entry(hex(0x7888a0), alpha = 0.6f, roughness = 0.9f),
             GeometryPart.OTHER to DEFAULT_ENTRY,
         )
 
@@ -260,6 +265,9 @@ object ArchitecturalPalette {
         SemanticGroup.ROOFLIGHT to BundleGroupAppearance(color = "#5e6166", opacity = null, roughness = 0.5, metalness = 0.2, edge = "NONE"),
         SemanticGroup.STAIR to BundleGroupAppearance(color = "#b2aca4", opacity = null, roughness = 0.9, metalness = 0.0, edge = "NONE"),
         SemanticGroup.ROOM to BundleGroupAppearance(color = "#8db1a8", opacity = 0.25, roughness = 1.0, metalness = 0.0, edge = "NONE"),
+        SemanticGroup.STRUCTURAL_MEMBER to BundleGroupAppearance(color = "#7f7a73", opacity = null, roughness = 0.8, metalness = 0.0, edge = "SOFT"),
+        SemanticGroup.PERGOLA_MEMBER to BundleGroupAppearance(color = "#caa77a", opacity = null, roughness = 0.8, metalness = 0.0, edge = "SOFT"),
+        SemanticGroup.UNKNOWN_ASSEMBLY to BundleGroupAppearance(color = "#7888a0", opacity = 0.6, roughness = 0.9, metalness = 0.0, edge = "NONE"),
         SemanticGroup.OTHER to BundleGroupAppearance(color = "#b6b2ad", opacity = null, roughness = 0.9, metalness = 0.0, edge = "NONE"),
     )
 

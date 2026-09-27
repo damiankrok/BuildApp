@@ -32,6 +32,15 @@ import {
   RoofEdgeMembersSchema,
   RoofPlateInsetSchema,
   WallTopProfileSchema,
+  AssemblySchema,
+  LinearSolidSchema,
+  PlatformSchema,
+  RailingSchema,
+  DoorSchema,
+  RelationshipKindSchema,
+  StepRunSchema,
+  WallPanelSchema,
+  WallPanelProfilePointSchema,
 } from '@buildapp/model'
 
 const finite = z.number().finite()
@@ -245,6 +254,8 @@ export const CutRoofOpeningSchema = z
     footprint: PlanRectSchema,
     cut: RoofCutModeSchema.optional(),
     throughId: IdSchema.optional(),
+    /** A non-rectangular hole in a roof PLANE (1.6.0); `footprint` must be its bounding rectangle. */
+    outline: PlanPolygonSchema.optional(),
   })
   .strict()
 
@@ -279,6 +290,7 @@ export const PlaceDoorSchema = z
     frameDepth: positive.default(0.12),
     frameInset: nonNegative.default(0.1),
     assembly: DoorAssemblySchema.optional(),
+    usage: DoorSchema.shape.usage,
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -310,6 +322,7 @@ export const CreateRailingSchema = z
     hostId: IdSchema.optional(),
     /** A railing that turns: its plan polyline from `start` to `end`, one post at every vertex. */
     path: z.array(Vec2Schema).min(2).optional(),
+    role: RailingSchema.shape.role,
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -423,8 +436,213 @@ export const CreateLinearSolidSchema = z
     width: positive,
     depth: positive,
     rollDeg: finite.optional(),
+    role: LinearSolidSchema.shape.role,
     materialId: IdSchema,
   })
+  .strict()
+
+// ---------------------------------------------------------------------------
+// Schema 1.6.0 — the architectural language
+// ---------------------------------------------------------------------------
+
+/**
+ * ADD_ROOF_PLANE. One planar roof surface over a plan `boundary` (overhang
+ * included), stated by a point on its top surface (`datum`), a pitch and the
+ * direction it falls (`downslope`, normalised here). A roof is composed of
+ * planes and the edges between them, never defined by a type.
+ */
+export const CreateRoofPlaneSchema = z
+  .object({
+    type: z.literal('createRoofPlane'),
+    ...withId,
+    levelId: IdSchema,
+    boundary: PlanPolygonSchema,
+    datum: Vec3Schema,
+    pitchDeg: z.number().finite().min(0).max(85).default(0),
+    downslope: Vec2Schema.default({ x: 0, z: -1 }),
+    thickness: positive.default(0.25),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * CONNECT_ROOF_PLANES. The edge where two planes meet, found from the planes
+ * themselves: the stretch along which their boundaries (holes included)
+ * coincide. `kind` states what the join is, or AUTO reads it off the two
+ * surfaces (a level convex crease is a RIDGE, a sloping one a HIP, a concave
+ * one a VALLEY, two heights a ROOF_STEP, upper plane first). When the planes
+ * share more than one stretch, `segment` says which.
+ */
+export const ConnectRoofPlanesSchema = z
+  .object({
+    type: z.literal('connectRoofPlanes'),
+    ...withId,
+    kind: z.enum(['RIDGE', 'HIP', 'VALLEY', 'ROOF_STEP', 'AUTO']).default('AUTO'),
+    planeIds: z.tuple([IdSchema, IdSchema]),
+    segment: z.object({ start: Vec2Schema, end: Vec2Schema }).strict().optional(),
+  })
+  .strict()
+
+/**
+ * A free edge of one plane (an EAVE, a VERGE, an ABUTMENT, a BOUNDARY)
+ * between two plan points on its boundary; heights come from the plane. With
+ * `board`, a fascia (on an eave or a boundary) or a verge board (on a verge)
+ * is made with it: a linear solid hosted on the edge, its top flush with the
+ * plane at the edge, standing `depth` outside it and `height` deep.
+ */
+export const CreateRoofEdgeSchema = z
+  .object({
+    type: z.literal('createRoofEdge'),
+    ...withId,
+    kind: z.enum(['VERGE', 'EAVE', 'ABUTMENT', 'BOUNDARY']),
+    planeId: IdSchema,
+    start: Vec2Schema,
+    end: Vec2Schema,
+    board: z.object({ id: IdSchema.optional(), height: positive, depth: positive, materialId: IdSchema }).strict().optional(),
+  })
+  .strict()
+
+/**
+ * ADD_DORMER. A dormer in a host roof plane, from its semantic parameters:
+ * its type, its front face across the slope, its eave (and, for a gable
+ * dormer, its ridge; for a shed, its pitch), and its build-up. The DSL lays
+ * it out (packages/model/src/dormer.ts) and creates every primitive it is
+ * made of — the cut in the host, the dormer roof planes and their edges
+ * (valleys into the host included), the front wall with its window, the
+ * cheeks — plus its local roof assembly, the DORMER assembly and the
+ * relationships that say how they meet. Ids hang off `id`.
+ */
+export const CreateDormerSchema = z
+  .object({
+    type: z.literal('createDormer'),
+    id: IdSchema,
+    name: z.string().optional(),
+    evidence: EvidenceSchema.optional(),
+    tags: z.array(z.string()).optional(),
+    hostPlaneId: IdSchema,
+    /** The host roof assembly this dormer belongs to; it gains the dormer and its cut. */
+    hostRoofAssemblyId: IdSchema.optional(),
+    dormerType: z.enum(['GABLE', 'SHED', 'FLAT']),
+    front: z.object({ start: Vec2Schema, end: Vec2Schema }).strict(),
+    eaveY: finite,
+    ridgeY: finite.optional(),
+    shedPitchDeg: z.number().finite().gt(0).lt(85).optional(),
+    wallThickness: positive.default(0.2),
+    roofThickness: positive.default(0.2),
+    frontOverhang: nonNegative.default(0.3),
+    wallMaterialId: IdSchema.optional(),
+    roofMaterialId: IdSchema.optional(),
+    window: z
+      .object({ width: positive, height: positive, sillAboveRoof: nonNegative.default(0.3), frameWidth: positive.default(0.07), divisions: z.number().int().min(1).default(1), materialId: IdSchema.optional() })
+      .strict()
+      .optional(),
+  })
+  .strict()
+
+/** ADD_COLUMN. A vertical member standing at `base` (plan), `baseOffset` above its level's floor, `height` tall; `width` along x and `depth` along z (before `rollDeg`). */
+export const CreateColumnSchema = z
+  .object({
+    type: z.literal('createColumn'),
+    ...withId,
+    levelId: IdSchema,
+    role: z.enum(['COLUMN', 'POST', 'PERGOLA_POST']).default('COLUMN'),
+    base: Vec2Schema,
+    baseOffset: finite.default(0),
+    height: positive,
+    width: positive,
+    depth: positive,
+    rollDeg: finite.optional(),
+    hostId: IdSchema.optional(),
+    materialId: IdSchema,
+  })
+  .strict()
+
+/** ADD_BEAM. A horizontal (or, for a rafter, sloping) member along its centreline; `width` is its depth seen in elevation, `depth` its breadth. */
+export const CreateBeamSchema = z
+  .object({
+    type: z.literal('createBeam'),
+    ...withId,
+    levelId: IdSchema,
+    role: z.enum(['BEAM', 'LINTEL', 'PERGOLA_BEAM', 'RAFTER']).default('BEAM'),
+    start: Vec3Schema,
+    end: Vec3Schema,
+    width: positive,
+    depth: positive,
+    rollDeg: finite.optional(),
+    hostId: IdSchema.optional(),
+    materialId: IdSchema,
+  })
+  .strict()
+
+/** A vertical wall panel between two world-height polylines: a parapet run, a dormer cheek, a gable infill. */
+export const CreateWallPanelSchema = z
+  .object({
+    type: z.literal('createWallPanel'),
+    ...withId,
+    levelId: IdSchema,
+    role: WallPanelSchema.shape.role,
+    start: Vec2Schema,
+    end: Vec2Schema,
+    thickness: positive,
+    bottom: z.array(WallPanelProfilePointSchema).min(2),
+    top: z.array(WallPanelProfilePointSchema).min(2),
+    hostId: IdSchema.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/** A landing, a porch, a ramp or a plinth: a small exterior floor. */
+export const CreatePlatformSchema = z
+  .object({
+    type: z.literal('createPlatform'),
+    ...withId,
+    levelId: IdSchema,
+    role: PlatformSchema.shape.role.default('LANDING'),
+    polygon: PlanPolygonSchema,
+    topOffset: finite.default(0),
+    thickness: positive.default(0.15),
+    slope: PlatformSchema.shape.slope,
+    hostWallIds: z.array(IdSchema).default([]),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * ADD_EXTERIOR_STEP_RUN. `steps` treads from `baseOffset` along `direction`
+ * (normalised here), each `going` deep and `rise` higher — or, with `topOffset`
+ * instead of `rise`, the rise that puts the last tread there. Never a Stair:
+ * exterior steps are their own primitive.
+ */
+export const CreateStepRunSchema = z
+  .object({
+    type: z.literal('createStepRun'),
+    ...withId,
+    levelId: IdSchema,
+    role: StepRunSchema.shape.role.default('ENTRANCE_STEPS'),
+    start: Vec2Schema,
+    direction: Vec2Schema,
+    width: positive,
+    steps: z.number().int().min(1).max(40),
+    going: positive,
+    rise: positive.optional(),
+    topOffset: finite.optional(),
+    baseOffset: finite.default(0),
+    construction: z.enum(['SOLID', 'OPEN_TREADS']).default('SOLID'),
+    treadThickness: positive.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+
+/**
+ * ADD_CANOPY / ADD_PERGOLA / ADD_TERRACE (assembly) / ADD_UNKNOWN_ASSEMBLY:
+ * one command, the assembly as the model states it. Assemblies reference
+ * primitives that already exist; they add no geometry of their own.
+ */
+export const CreateAssemblySchema = z.object({ type: z.literal('createAssembly'), assembly: AssemblySchema }).strict()
+
+/** A typed relationship: `from` <kind> `to`. */
+export const CreateRelationshipSchema = z
+  .object({ type: z.literal('createRelationship'), ...withId, kind: RelationshipKindSchema, from: IdSchema, to: IdSchema, note: z.string().optional() })
   .strict()
 
 export const DefineMaterialSchema = z
@@ -533,6 +751,17 @@ export const BuildingCommandSchema = z.discriminatedUnion('type', [
   CreateStairSchema,
   CreateSurfaceRegionSchema,
   CreateLinearSolidSchema,
+  CreateRoofPlaneSchema,
+  ConnectRoofPlanesSchema,
+  CreateRoofEdgeSchema,
+  CreateDormerSchema,
+  CreateColumnSchema,
+  CreateBeamSchema,
+  CreateWallPanelSchema,
+  CreatePlatformSchema,
+  CreateStepRunSchema,
+  CreateAssemblySchema,
+  CreateRelationshipSchema,
   DefineMaterialSchema,
   AssignMaterialSchema,
   MoveFeatureSchema,

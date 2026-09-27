@@ -82,6 +82,11 @@ const STYLE: Record<GeometryPart, PartStyle> = {
   LINEAR_SOLID: { color: 0xb0aaa0, roughness: 0.8, edges: true },
   TERRACE: { color: 0x9d9488, roughness: 0.9, edges: true },
   ROOF_TRIM: { color: 0xe9e4da, roughness: 0.85, edges: true },
+  ROOF_PLANE: { color: 0x6f4a3d, roughness: 0.9, edges: true },
+  WALL_PANEL: { color: 0xcfc8bb, roughness: 0.95, edges: true },
+  PLATFORM: { color: 0x9d9488, roughness: 0.9, edges: true },
+  STEP_RUN: { color: 0xb9b3a8, roughness: 0.9, edges: true },
+  UNKNOWN_ASSEMBLY: { color: 0x7888a0, opacity: 0.6, roughness: 0.9 },
 }
 
 /** Parts a model material may colour in the Construction style; fills keep their part colour. */
@@ -100,6 +105,10 @@ const OWN_MATERIAL_PARTS: ReadonlySet<GeometryPart> = new Set<GeometryPart>([
   'STAIR_STEP',
   'SURFACE_REGION',
   'LINEAR_SOLID',
+  'ROOF_PLANE',
+  'WALL_PANEL',
+  'PLATFORM',
+  'STEP_RUN',
 ])
 
 /** Neutral clay, warm enough not to read as plastic. */
@@ -130,6 +139,9 @@ type SemanticGroup =
   | 'ROOFLIGHT'
   | 'STAIR'
   | 'ROOM'
+  | 'STRUCTURAL_MEMBER'
+  | 'PERGOLA_MEMBER'
+  | 'UNKNOWN_ASSEMBLY'
   | 'OTHER'
 
 type GroupAppearance = { color: string; opacity?: number; roughness: number; metalness: number; edge: 'SOFT' | 'NONE' }
@@ -156,6 +168,9 @@ const ARCHITECTURAL: Record<SemanticGroup, GroupAppearance> = {
   ROOFLIGHT: { color: '#5e6166', roughness: 0.5, metalness: 0.2, edge: 'NONE' },
   STAIR: { color: '#b2aca4', roughness: 0.9, metalness: 0, edge: 'NONE' },
   ROOM: { color: '#8db1a8', opacity: 0.25, roughness: 1, metalness: 0, edge: 'NONE' },
+  STRUCTURAL_MEMBER: { color: '#7f7a73', roughness: 0.8, metalness: 0, edge: 'SOFT' },
+  PERGOLA_MEMBER: { color: '#caa77a', roughness: 0.8, metalness: 0, edge: 'SOFT' },
+  UNKNOWN_ASSEMBLY: { color: '#7888a0', opacity: 0.6, roughness: 0.9, metalness: 0, edge: 'NONE' },
   OTHER: { color: '#b6b2ad', roughness: 0.9, metalness: 0, edge: 'NONE' },
 }
 
@@ -232,8 +247,24 @@ function semanticGroupOf(cm: CompiledMesh, materialName: string | undefined, obj
       return 'ROOM'
     case 'SURFACE_REGION':
       return /TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR/.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
-    case 'LINEAR_SOLID':
+    case 'LINEAR_SOLID': {
+      const role = facts?.memberRole.get(cm.objectId)
+      if (role === 'PERGOLA_POST' || role === 'PERGOLA_BEAM') return 'PERGOLA_MEMBER'
+      if (role === 'COLUMN' || role === 'POST' || role === 'BEAM' || role === 'LINTEL' || role === 'RAFTER') return 'STRUCTURAL_MEMBER'
+      if (role === 'FASCIA' || role === 'VERGE_BOARD') return secondaryFinish ? 'WALL_SECONDARY' : 'ROOF_TRIM'
       return secondaryFinish ? 'WALL_SECONDARY' : 'FACADE_FRAME'
+    }
+    case 'ROOF_PLANE':
+      return facts?.roofKind.get(cm.objectId) === 'FLAT' ? 'FLAT_ROOF' : 'ROOF_MAIN'
+    case 'WALL_PANEL':
+      if (/TIMBER|WOOD|CLADDING|BOARD|LARCH|CEDAR/.test(material)) return 'WALL_CLADDING'
+      return secondaryFinish ? 'WALL_SECONDARY' : 'WALL_MAIN'
+    case 'PLATFORM':
+      return 'TERRACE_SURFACE'
+    case 'STEP_RUN':
+      return 'STAIR'
+    case 'UNKNOWN_ASSEMBLY':
+      return 'UNKNOWN_ASSEMBLY'
     default:
       return 'OTHER'
   }
@@ -251,14 +282,18 @@ export type SceneFacts = {
   roofKind: Map<string, string>
   balconyKind: Map<string, string>
   railingInfill: Map<string, string>
+  /** A classified member's role (schema 1.6.0). */
+  memberRole: Map<string, string>
   /** Materials of the ring walls in a SECONDARY role: a mesh in one is drawn as the secondary body. */
   secondaryMaterials: Set<string>
 }
 
 export function sceneFactsOf(model: CanonicalBuildingModel): SceneFacts {
-  const facts: SceneFacts = { wallKind: new Map(), finish: new Map(), roofKind: new Map(), balconyKind: new Map(), railingInfill: new Map(), secondaryMaterials: new Set() }
+  const facts: SceneFacts = { wallKind: new Map(), finish: new Map(), roofKind: new Map(), balconyKind: new Map(), railingInfill: new Map(), memberRole: new Map(), secondaryMaterials: new Set() }
   for (const w of model.walls) facts.wallKind.set(w.id, w.kind)
   for (const r of model.roofs) facts.roofKind.set(r.id, r.kind)
+  for (const p of model.roofPlanes) facts.roofKind.set(p.id, p.pitchDeg === 0 ? 'FLAT' : 'PITCHED')
+  for (const s of model.linearSolids) if (s.role) facts.memberRole.set(s.id, s.role)
   for (const b of model.balconies) facts.balconyKind.set(b.id, b.kind)
   for (const r of model.railings) facts.railingInfill.set(r.id, r.infill)
   const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
@@ -338,6 +373,15 @@ const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGroup]> = 
   ['TERRACE_SURFACE', 'RAILING'],
   ['WINDOW_FRAME', 'WINDOW_GLASS'],
   ['DOOR', 'WINDOW_GLASS'],
+  ['STRUCTURAL_MEMBER', 'TERRACE_SURFACE'],
+  ['STRUCTURAL_MEMBER', 'SLAB'],
+  ['STRUCTURAL_MEMBER', 'BALCONY_SLAB'],
+  ['STRUCTURAL_MEMBER', 'STAIR'],
+  ['STRUCTURAL_MEMBER', 'PERGOLA_MEMBER'],
+  ['PERGOLA_MEMBER', 'TERRACE_SURFACE'],
+  ['PERGOLA_MEMBER', 'SLAB'],
+  ['UNKNOWN_ASSEMBLY', 'TERRACE_SURFACE'],
+  ['UNKNOWN_ASSEMBLY', 'SLAB'],
 ]
 
 const MIN_ADJACENT_LUMINANCE_GAP = 0.06

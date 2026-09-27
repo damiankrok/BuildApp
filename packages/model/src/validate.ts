@@ -22,6 +22,7 @@ import {
 import { layoutStair } from './stair-layout.js'
 import { linearSolidIsDegenerate } from './linear-solid.js'
 import { physicalCore, resolveWallTopology, wallOverlapIssues } from './topology.js'
+import { architectureIssues } from './validate-architecture.js'
 
 export type { ValidationCode, ValidationIssue, ValidationResult } from './issues.js'
 
@@ -335,7 +336,13 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
     needRect(o.id, o.footprint, 'footprint')
     const roof = m.roofs.find((r) => r.id === o.roofId)
     if (!roof) {
+      // A roof opening in a roof PLANE is validated with the roof graph (validate-architecture.ts).
+      if (m.roofPlanes.some((p) => p.id === o.roofId)) continue
       err('UNKNOWN_ROOF', `roof opening ${o.id} refers to roof "${o.roofId}", which does not exist`, o.id, 'roofId')
+      continue
+    }
+    if (o.outline || o.kind === 'DORMER') {
+      err('ROOF_OPENING_OUTLINE_INVALID', `roof opening ${o.id}: ${o.kind === 'DORMER' ? 'a dormer cut' : 'an outline'} is cut in a roof plane; roof ${roof.id} takes rectangular openings`, o.id, o.outline ? 'outline' : 'kind')
       continue
     }
     if (!rectIsValid(o.footprint) || !rectIsValid(roof.footprint)) continue
@@ -486,13 +493,17 @@ export function semanticIssues(m: CanonicalBuildingModel): ValidationIssue[] {
       // A host is a statement of relation, not a parent: the member's geometry
       // is world-space either way. But naming a host that is not a surface a
       // member could run on is a mistake worth reporting.
-      const hosted = m.walls.some((w) => w.id === s.hostId) || m.roofs.some((r) => r.id === s.hostId) || m.slabs.some((x) => x.id === s.hostId)
+      // 1.6.0: a member also runs on a roof plane or a roof edge (a fascia), a terrace, a balcony,
+      // a platform, a wall panel, a step run, or another member (a beam on a post).
+      const hostKinds = [m.walls, m.roofs, m.slabs, m.roofPlanes, m.roofEdges, m.terraces, m.balconies, m.platforms, m.wallPanels, m.stepRuns, m.linearSolids] as ReadonlyArray<ReadonlyArray<{ id: string }>>
+      const hosted = s.hostId !== s.id && hostKinds.some((list) => list.some((x) => x.id === s.hostId))
       if (!hosted) {
-        if (seen.has(s.hostId)) err('LINEAR_SOLID_HOST_INVALID', `linear solid ${s.id} names host "${s.hostId}", which is not a wall, a roof or a slab`, s.id, 'hostId')
+        if (seen.has(s.hostId)) err('LINEAR_SOLID_HOST_INVALID', `linear solid ${s.id} names host "${s.hostId}", which is not a surface or a member it could run on`, s.id, 'hostId')
         else err('UNKNOWN_TARGET', `linear solid ${s.id} names host "${s.hostId}", which does not exist`, s.id, 'hostId')
       }
     }
   }
+  out.push(...architectureIssues(m, seen))
   for (const c of m.constraints) {
     for (const t of c.targetIds) {
       if (!seen.has(t)) err('UNKNOWN_TARGET', `constraint ${c.id} targets "${t}", which does not exist`, c.id, 'targetIds')

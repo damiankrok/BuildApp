@@ -76,12 +76,22 @@ enum class GeometryPart {
     TERRACE,
     /** A roof edge member compiled with its roof: a verge board or a fascia. */
     ROOF_TRIM,
+    /** BUILDAPP-03G: one planar surface of a roof stated as a plane graph. */
+    ROOF_PLANE,
+    /** A vertical wall panel: a dormer cheek, a parapet run, a gable infill. */
+    WALL_PANEL,
+    /** A landing, a porch, a ramp, a plinth. */
+    PLATFORM,
+    /** An exterior step run (never an interior stair). */
+    STEP_RUN,
+    /** The restrained diagnostic surface of an unknown assembly: only what was observed. */
+    UNKNOWN_ASSEMBLY,
     OTHER;
 
     /** Glazing and markers read through; they blend and never cast shadows. */
     val isTranslucent: Boolean
         get() = this == WINDOW_GLASS || this == DOOR_GLASS || this == ROOFLIGHT_GLASS ||
-            this == RAILING_INFILL || this == ROOM_FLOOR || this == STAIR_PLACEHOLDER
+            this == RAILING_INFILL || this == ROOM_FLOOR || this == STAIR_PLACEHOLDER || this == UNKNOWN_ASSEMBLY
 
     companion object {
         private val byName = entries.associateBy { it.name }
@@ -123,6 +133,12 @@ enum class SemanticGroup {
     ROOFLIGHT,
     STAIR,
     ROOM,
+    /** BUILDAPP-03G: a column, a post, a beam, a lintel. */
+    STRUCTURAL_MEMBER,
+    /** The posts and beams of a pergola: an open frame, never a roof. */
+    PERGOLA_MEMBER,
+    /** The restrained diagnostic surface of an unknown assembly. */
+    UNKNOWN_ASSEMBLY,
     OTHER;
 
     companion object {
@@ -176,7 +192,13 @@ enum class SemanticGroup {
                 // A finish region is a secondary surface of its wall: it reads as a band; in timber, as cladding.
                 GeometryPart.SURFACE_REGION -> if (CLADDING_MATERIAL.containsMatchIn(material)) WALL_CLADDING else WALL_SECONDARY
                 // Free members — portal heads, boards not compiled with a roof — frame the facade.
+                // (A member's role is in the bundle's own group; an older bundle has no roles.)
                 GeometryPart.LINEAR_SOLID -> FACADE_FRAME
+                GeometryPart.ROOF_PLANE -> if (FLAT_MATERIAL.containsMatchIn(material)) FLAT_ROOF else ROOF_MAIN
+                GeometryPart.WALL_PANEL -> if (CLADDING_MATERIAL.containsMatchIn(material)) WALL_CLADDING else WALL_MAIN
+                GeometryPart.PLATFORM -> TERRACE_SURFACE
+                GeometryPart.STEP_RUN -> STAIR
+                GeometryPart.UNKNOWN_ASSEMBLY -> UNKNOWN_ASSEMBLY
                 GeometryPart.OTHER -> OTHER
             }
         }

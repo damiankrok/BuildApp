@@ -140,10 +140,15 @@ export function levelIdOf(model: CanonicalBuildingModel, id: string): string | u
     const j = hit.object as WallJunction
     return wallById(model, j.kind === 'CORNER' ? j.a.wallId : j.wall.wallId)?.levelId
   }
-  if (hit.kind === 'roofOpening') return roofById(model, (hit.object as RoofOpening).roofId)?.levelId
+  const hostLevel = (roofId: string): string | undefined => roofById(model, roofId)?.levelId ?? model.roofPlanes.find((p) => p.id === roofId)?.levelId
+  if (hit.kind === 'roofOpening') return hostLevel((hit.object as RoofOpening).roofId)
   if (hit.kind === 'rooflight') {
     const ro = roofOpeningById(model, (hit.object as Rooflight).roofOpeningId)
-    return ro ? roofById(model, ro.roofId)?.levelId : undefined
+    return ro ? hostLevel(ro.roofId) : undefined
+  }
+  if (hit.kind === 'roofEdge') {
+    const e = hit.object as { planeIds: string[] }
+    return model.roofPlanes.find((p) => p.id === e.planeIds[0])?.levelId
   }
   return undefined
 }

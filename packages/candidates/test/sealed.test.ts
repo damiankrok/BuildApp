@@ -108,32 +108,53 @@ describe('marcowki-auto-v2', () => {
 })
 
 describe('the reseal log', () => {
-  // `candidates:reseal` restated the frozen candidates under model schema
-  // 1.5.0. Each entry must be a pure restatement: the candidate as committed
-  // replays to the new model hash, and that model with the collections the
-  // schema step added (empty) taken out and the old version string put back
-  // hashes to the model hash the candidate was first sealed with.
-  const log = JSON.parse(readFileSync(resolve(import.meta.dirname, '../src/reseal-log.json'), 'utf8')) as Array<{ id: string; fromSchema: string; toSchema: string; from: { modelHash: string; contentHash: string }; to: { modelHash: string; contentHash: string } }>
-  const ADDED: Record<string, string[]> = { '1.5.0': ['terraces'] }
+  // `candidates:reseal` restated the frozen candidates under newer model
+  // schemas: 1.5.0 (BUILDAPP-03Y, the first two) and 1.6.0 (BUILDAPP-03G, all
+  // three). Each entry must be a pure restatement, and the entries of one
+  // candidate must form a chain: each starts where the previous one ended, the
+  // last ends at the candidate as committed, and the model the candidate
+  // replays to today, with the collections every step added (all empty) taken
+  // out and the older version string put back, hashes to the model hash the
+  // candidate was first sealed with — step by step.
+  type Entry = { id: string; fromSchema: string; toSchema: string; from: { modelHash: string; contentHash: string }; to: { modelHash: string; contentHash: string } }
+  const log = JSON.parse(readFileSync(resolve(import.meta.dirname, '../src/reseal-log.json'), 'utf8')) as Entry[]
+  const ADDED: Record<string, { previous: string; collections: string[] }> = {
+    '1.5.0': { previous: '1.4.0', collections: ['terraces'] },
+    '1.6.0': { previous: '1.5.0', collections: ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] },
+  }
 
-  it('records every restated candidate once', () => {
-    expect(log.map((e) => e.id).sort()).toEqual(['marcowki-auto', 'marcowki-auto-v2'])
+  it('records the restatements: two under 1.5.0, three under 1.6.0', () => {
+    expect(log.map((e) => `${e.id}@${e.toSchema}`)).toEqual(['marcowki-auto@1.5.0', 'marcowki-auto-v2@1.5.0', 'marcowki-auto@1.6.0', 'marcowki-auto-v2@1.6.0', 'marcowki-auto-v3@1.6.0'])
   })
 
-  it.each(log.map((e) => [e.id, e] as const))('%s: the restated model is the sealed building byte for byte', (id, entry) => {
+  it.each(SEALED_CANDIDATES.map((c) => [c.id] as const))('%s: its restatements chain to the committed candidate, and every step is the sealed building byte for byte', (id) => {
     const sealed = sealedCandidate(id)
     expect(sealed).toBeDefined()
     if (!sealed) return
-    expect(sealed.candidate.contentHash).toBe(entry.to.contentHash)
-    expect(sealed.candidate.modelHash).toBe(entry.to.modelHash)
-    const text = serializeModel(modelOf(id))
-    expect(sha256(text)).toBe(entry.to.modelHash)
-    const older = JSON.parse(text) as Record<string, unknown>
-    for (const c of ADDED[entry.toSchema] ?? []) {
-      expect(older[c], c).toEqual([])
-      delete older[c]
+    const entries = log.filter((e) => e.id === id)
+    expect(entries.length).toBeGreaterThan(0)
+    for (let i = 1; i < entries.length; i++) {
+      expect(entries[i].from.modelHash).toBe(entries[i - 1].to.modelHash)
+      expect(entries[i].from.contentHash).toBe(entries[i - 1].to.contentHash)
+      expect(entries[i].fromSchema).toBe(entries[i - 1].toSchema)
     }
-    older.schemaVersion = entry.fromSchema
-    expect(sha256(JSON.stringify(older, null, 2) + '\n')).toBe(entry.from.modelHash)
+    const last = entries[entries.length - 1]
+    expect(sealed.candidate.contentHash).toBe(last.to.contentHash)
+    expect(sealed.candidate.modelHash).toBe(last.to.modelHash)
+    const text = serializeModel(modelOf(id))
+    expect(sha256(text)).toBe(last.to.modelHash)
+    // walk the current model back one schema step at a time; every step's text is the hash its entry sealed
+    const older = JSON.parse(text) as Record<string, unknown>
+    for (const entry of [...entries].reverse()) {
+      expect(String(older.schemaVersion)).toBe(entry.toSchema)
+      const step = ADDED[entry.toSchema]
+      expect(step.previous).toBe(entry.fromSchema)
+      for (const c of step.collections) {
+        expect(older[c], c).toEqual([])
+        delete older[c]
+      }
+      older.schemaVersion = entry.fromSchema
+      expect(sha256(JSON.stringify(older, null, 2) + '\n')).toBe(entry.from.modelHash)
+    }
   })
 })

@@ -20,9 +20,9 @@ import { EvidenceSchema, EvidenceSourceSchema } from './evidence.js'
 import { PlanPolygonSchema, PlanRectSchema, Vec2Schema, Vec3Schema, finite, nonNegative, positive } from './geometry-types.js'
 
 export const MODEL_SCHEMA_NAME = 'buildapp.canonical-building-model' as const
-export const MODEL_SCHEMA_VERSION = '1.5.0' as const
+export const MODEL_SCHEMA_VERSION = '1.6.0' as const
 /** Versions `validateModel` accepts: the current one, and older ones it migrates explicitly (see migrate.ts). */
-export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0'] as const
+export const SUPPORTED_SCHEMA_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0'] as const
 
 /** Stable identifier: letters, digits, `_`, `-`, `.`, `:`. */
 export const IdSchema = z.string().regex(/^[A-Za-z0-9_.:-]+$/, 'ids use letters, digits, _ - . :')
@@ -113,10 +113,14 @@ export type Room = z.infer<typeof RoomSchema>
  *   wall under a gable roof therefore rises into the gable; an eave wall
  *   under the same roof is capped at the roof's underside.
  * POLYLINE — an explicit height along the wall's own `u` axis.
+ * FOLLOW_ROOF_PLANES (1.6.0) — at min(`height`, underside of whichever of the
+ *   named roof planes covers the point), so a wall under a roof stated as a
+ *   plane graph dies into it exactly as FOLLOW_ROOF does under a legacy roof.
  */
 export const WallTopProfileSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('FLAT') }).strict(),
   z.object({ kind: z.literal('FOLLOW_ROOF'), roofId: IdSchema }).strict(),
+  z.object({ kind: z.literal('FOLLOW_ROOF_PLANES'), planeIds: z.array(IdSchema).min(1) }).strict(),
   z
     .object({
       kind: z.literal('POLYLINE'),
@@ -320,6 +324,13 @@ export const DoorSchema = z
     frameDepth: positive,
     frameInset: nonNegative,
     assembly: DoorAssemblySchema.optional(),
+    /**
+     * What the door is for, when a source says (1.6.0): the ENTRANCE an
+     * entrance assembly is built around, a GARAGE door (a sectional or up-and-over
+     * door is also recognised by an assembly of PANELs alone), a TERRACE door, a
+     * SERVICE door, an INTERIOR door. Absent: not stated.
+     */
+    usage: z.enum(['ENTRANCE', 'GARAGE', 'TERRACE', 'SERVICE', 'INTERIOR']).optional(),
     materialId: IdSchema.optional(),
   })
   .strict()
@@ -420,7 +431,8 @@ export const RoofSchema = z
   .strict()
 export type Roof = z.infer<typeof RoofSchema>
 
-export const RoofOpeningKindSchema = z.enum(['ROOFLIGHT', 'PENETRATION'])
+/** ROOFLIGHT and PENETRATION as since 1.2.0; DORMER (1.6.0): the cut a dormer body makes in the roof plane it stands in. */
+export const RoofOpeningKindSchema = z.enum(['ROOFLIGHT', 'PENETRATION', 'DORMER'])
 export type RoofOpeningKind = z.infer<typeof RoofOpeningKindSchema>
 
 /**
@@ -453,6 +465,13 @@ export const RoofOpeningSchema = z
     footprint: PlanRectSchema,
     cut: RoofCutModeSchema.optional(),
     throughId: IdSchema.optional(),
+    /**
+     * A non-rectangular hole (1.6.0), in plan: a dormer's footprint on the roof
+     * is a pentagon when its own roof dies into the host along two valleys.
+     * Only on a roof PLANE (a legacy roof takes rectangles); `footprint` must
+     * then be the outline's bounding rectangle.
+     */
+    outline: PlanPolygonSchema.optional(),
   })
   .strict()
 export type RoofOpening = z.infer<typeof RoofOpeningSchema>
@@ -499,6 +518,12 @@ export const RailingSchema = z
     infill: z.enum(['GLASS', 'BARS', 'NONE']),
     /** The balcony / terrace this railing guards, when it does. */
     hostId: IdSchema.optional(),
+    /**
+     * What the run is (1.6.0): a GUARD along a drop (a balcony edge, a landing),
+     * a HANDRAIL beside steps, a BALUSTRADE (a guard of repeated balusters).
+     * Absent: a railing, unclassified.
+     */
+    role: z.enum(['GUARD', 'HANDRAIL', 'BALUSTRADE']).optional(),
     /**
      * A railing that turns: the vertices of its plan polyline, `start` first
      * and `end` last. One post stands at every vertex, so two runs that meet
@@ -688,10 +713,409 @@ export const LinearSolidSchema = z
     depth: positive,
     /** Rotation of the cross-section about the path, in degrees. */
     rollDeg: finite.optional(),
+    /**
+     * What the member IS, where the evidence says (1.6.0): a column, a post, a
+     * beam, a lintel, a pergola member, a roof edge board. Absent: the
+     * unclassified facade member of 1.4.0 — which is what most of them are.
+     * The role adds meaning, never geometry: the box is the same box.
+     */
+    role: z
+      .enum(['COLUMN', 'POST', 'BEAM', 'LINTEL', 'RAFTER', 'PERGOLA_POST', 'PERGOLA_BEAM', 'FASCIA', 'VERGE_BOARD', 'FACADE_MEMBER', 'DECORATIVE', 'UNKNOWN_MEMBER'])
+      .optional(),
     materialId: IdSchema,
   })
   .strict()
 export type LinearSolid = z.infer<typeof LinearSolidSchema>
+export type MemberRole = NonNullable<LinearSolid['role']>
+
+/** Roles whose member stands vertically: a column, a post. */
+export const VERTICAL_MEMBER_ROLES: readonly MemberRole[] = ['COLUMN', 'POST', 'PERGOLA_POST']
+/** Roles whose member lies horizontally: a beam, a lintel, a pergola beam, a fascia board along an eave. */
+export const HORIZONTAL_MEMBER_ROLES: readonly MemberRole[] = ['BEAM', 'LINTEL', 'PERGOLA_BEAM', 'FASCIA']
+/** Roles that carry load in the sense a viewer groups as "structural members". */
+export const STRUCTURAL_MEMBER_ROLES: readonly MemberRole[] = ['COLUMN', 'POST', 'BEAM', 'LINTEL', 'RAFTER', 'PERGOLA_POST', 'PERGOLA_BEAM']
+
+// ---------------------------------------------------------------------------
+// Schema 1.6.0 — architectural primitives, assemblies and typed relationships
+// ---------------------------------------------------------------------------
+
+/**
+ * A roof PLANE: one planar roof surface, the unit a roof is composed of.
+ *
+ * A roof is not a type. A gable is two planes meeting at a ridge; a hip is
+ * four meeting at hips and a ridge; two gables that cross are four planes and
+ * two valleys; a dormer is a small roof whose planes die into a host plane.
+ * So the model states planes and the edges between them (`RoofEdge`), and a
+ * `RoofAssembly` groups them; a label such as GABLE or HIP is a description
+ * of the result, never its definition.
+ *
+ * The plane's top surface is `y = datum.y − tan(pitch) · ((p − datum) · downslope)`
+ * over its `boundary` (the plan outline of the top surface, overhang
+ * included — the support polygon). The plate is `thickness` deep measured
+ * perpendicular to the slope, so its underside lies `thickness / cos(pitch)`
+ * below the top surface. Holes are the roof openings hosted on the plane.
+ */
+export const RoofPlaneSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    boundary: PlanPolygonSchema,
+    /** A point on the top surface, world coordinates: the elevation datum the plane is stated from. */
+    datum: Vec3Schema,
+    /** Pitch of the top surface, degrees; 0 is a flat roof. */
+    pitchDeg: z.number().finite().min(0).max(85),
+    /** Unit plan vector pointing down the slope (where water runs). Stated even for a flat plane, where it is not used. */
+    downslope: Vec2Schema,
+    thickness: positive,
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type RoofPlane = z.infer<typeof RoofPlaneSchema>
+
+/**
+ * How two roof planes meet, or how one ends.
+ *
+ * RIDGE — two planes meet at a level convex crease. HIP — a sloping convex
+ * crease. VALLEY — a concave crease (two gables crossing, a dormer roof dying
+ * into its host). ROOF_STEP — two planes meet in plan at different heights
+ * (a stepped roof); the first plane is the upper one. VERGE — a sloping free
+ * edge along which the slope runs (a gable end). EAVE — a level free edge the
+ * slope runs down to. ABUTMENT — where a plane meets a wall rising past it.
+ * BOUNDARY — any other free edge (a flat roof's edge).
+ */
+export const RoofEdgeKindSchema = z.enum(['RIDGE', 'HIP', 'VALLEY', 'ROOF_STEP', 'VERGE', 'EAVE', 'ABUTMENT', 'BOUNDARY'])
+export type RoofEdgeKind = z.infer<typeof RoofEdgeKindSchema>
+/** Edge kinds that join two planes. */
+export const ROOF_JOIN_KINDS: readonly RoofEdgeKind[] = ['RIDGE', 'HIP', 'VALLEY', 'ROOF_STEP']
+
+/**
+ * One edge of the roof graph, in world coordinates, on the (upper) plane's
+ * top surface. It adds no geometry of its own: it states a relation the
+ * validator checks against the planes (the endpoints lie on each plane's
+ * boundary and surface; a ridge is level and convex, a valley concave, an
+ * eave level with the slope running down to it) and the compiler holds (the
+ * two plates meet along it with no gap and no shared volume). Edge boards
+ * (a fascia, a verge board) are linear solids hosted on the edge.
+ */
+export const RoofEdgeSchema = z
+  .object({
+    ...base,
+    kind: RoofEdgeKindSchema,
+    /** Two planes for RIDGE / HIP / VALLEY / ROOF_STEP (the upper one first for a step); one for the free kinds. */
+    planeIds: z.array(IdSchema).min(1).max(2),
+    start: Vec3Schema,
+    end: Vec3Schema,
+  })
+  .strict()
+export type RoofEdge = z.infer<typeof RoofEdgeSchema>
+
+export const WallPanelProfilePointSchema = z.object({ u: finite, y: finite }).strict()
+export type WallPanelProfilePoint = z.infer<typeof WallPanelProfilePointSchema>
+
+/**
+ * A wall PANEL: a vertical plate between two polylines, with no junction
+ * topology and no openings — the wall a dormer cheek, a parapet run, a gable
+ * infill or a knee wall is. Where a wall stands on a level at a flat base, a
+ * panel's bottom and top are free: a dormer cheek's bottom follows the host
+ * roof slope and its top the dormer roof's underside.
+ *
+ * `start → end` is the outer-face line in plan, as for a wall (outward normal
+ * `up × u`, material behind it); `bottom` and `top` are WORLD heights along
+ * the panel's own `u` (0 at `start`, the panel's length at the last point).
+ * A panel that needs an opening is a wall.
+ */
+export const WallPanelSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    role: z.enum(['PARAPET', 'DORMER_CHEEK', 'GABLE_INFILL', 'UPSTAND', 'KNEE_WALL', 'SCREEN', 'UNKNOWN_PANEL']),
+    start: Vec2Schema,
+    end: Vec2Schema,
+    thickness: positive,
+    bottom: z.array(WallPanelProfilePointSchema).min(2),
+    top: z.array(WallPanelProfilePointSchema).min(2),
+    /** What the panel stands on or rises from (a wall, a roof plane, a slab). A statement of relation; its geometry is its own. */
+    hostId: IdSchema.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type WallPanel = z.infer<typeof WallPanelSchema>
+
+/**
+ * A PLATFORM: a small exterior floor that is not a terrace and not the
+ * building's slab — the LANDING in front of an entrance door, a raised
+ * PORCH, a RAMP, a PLINTH. Its top is level at `topOffset`, or, for a ramp,
+ * falls `gradient` metres per metre along `slope.downhill` from `slope.origin`.
+ */
+export const PlatformSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    role: z.enum(['LANDING', 'PORCH', 'RAMP', 'PLINTH', 'UNKNOWN_PLATFORM']),
+    polygon: PlanPolygonSchema,
+    /** Top surface above the level's finished floor (at `slope.origin` for a ramp). */
+    topOffset: finite,
+    thickness: positive,
+    slope: z.object({ origin: Vec2Schema, downhill: Vec2Schema, gradient: z.number().finite().gt(0).lte(0.5) }).strict().optional(),
+    /** The exterior walls the platform lies against. */
+    hostWallIds: z.array(IdSchema).optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type Platform = z.infer<typeof PlatformSchema>
+
+/**
+ * An EXTERIOR STEP RUN: `steps` treads, each `going` deep and `rise` above
+ * the last, climbing from `baseOffset` (the grade it starts from) along
+ * `direction`. `start` is the left-hand end of the first riser line facing up
+ * the run; the run is `width` wide to the right. SOLID steps stand on the
+ * grade (the usual masonry run: one closed stepped solid); OPEN_TREADS are
+ * separate treads `treadThickness` deep.
+ *
+ * Deliberately NOT a `Stair`: a stair joins two storeys inside a building and
+ * owns its risers between two floors; an exterior run joins the ground to a
+ * landing or a threshold and is part of an entrance or a garden. Step `k`
+ * (1-based) is the primitive `${id}:step-${k}`.
+ */
+export const StepRunSchema = z
+  .object({
+    ...base,
+    levelId: IdSchema,
+    role: z.enum(['ENTRANCE_STEPS', 'GARDEN_STEPS', 'ACCESS_STEPS', 'UNKNOWN_STEPS']),
+    start: Vec2Schema,
+    /** Unit plan vector of travel, walking up. */
+    direction: Vec2Schema,
+    width: positive,
+    steps: z.number().int().min(1).max(40),
+    going: positive,
+    rise: positive,
+    baseOffset: finite,
+    construction: z.enum(['SOLID', 'OPEN_TREADS']),
+    treadThickness: positive.optional(),
+    materialId: IdSchema.optional(),
+  })
+  .strict()
+export type StepRun = z.infer<typeof StepRunSchema>
+
+/** The kinds of first-class architectural assembly. */
+export const AssemblyKindSchema = z.enum(['ROOF', 'DORMER', 'BALCONY', 'TERRACE', 'LOGGIA', 'CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE', 'EXTERIOR_STAIR', 'FACADE', 'GARAGE', 'UNKNOWN'])
+export type AssemblyKind = z.infer<typeof AssemblyKindSchema>
+
+/**
+ * How much of an assembly the model holds. COMPLETE: every component its kind
+ * requires is present. PARTIAL: some are, and `missing` names the rest.
+ * FRAGMENTARY: little more than where it is — an unknown assembly, a feature
+ * seen once.
+ */
+export const AssemblyQualitySchema = z.enum(['COMPLETE', 'PARTIAL', 'FRAGMENTARY'])
+export type AssemblyQuality = z.infer<typeof AssemblyQualitySchema>
+
+/** Another reading of the same evidence, kept instead of being forced away (a dormer or a roof projection; a canopy or a pergola). */
+export const AssemblyAlternativeSchema = z
+  .object({ kind: AssemblyKindSchema, confidence: z.number().min(0).max(1), why: z.string().min(1) })
+  .strict()
+export type AssemblyAlternative = z.infer<typeof AssemblyAlternativeSchema>
+
+/** A descriptive label for a roof assembly. It describes the plane graph; it never defines it. */
+export const RoofClassificationSchema = z.enum(['GABLE', 'HIP', 'HALF_HIP', 'SHED', 'FLAT', 'MANSARD', 'INTERSECTING', 'STEPPED', 'COMPOSITE', 'UNKNOWN'])
+export type RoofClassification = z.infer<typeof RoofClassificationSchema>
+
+/** What one edge of a platform-like assembly meets: a wall, a guard, nothing, steps, an open side. */
+export const EdgeConditionSchema = z
+  .object({ edgeIndex: z.number().int().min(0), condition: z.enum(['WALL', 'GUARDED', 'FREE', 'STEPS', 'OPEN']), targetId: IdSchema.optional() })
+  .strict()
+export type EdgeCondition = z.infer<typeof EdgeConditionSchema>
+
+const assemblyBase = {
+  ...base,
+  /** What the assembly is attached to or stands against: a building's walls, a host roof, a terrace. */
+  hostIds: z.array(IdSchema),
+  quality: AssemblyQualitySchema,
+  /** Components the sources imply and the model does not hold, named: why a partial assembly is partial. */
+  missing: z.array(z.string().min(1)).optional(),
+  alternatives: z.array(AssemblyAlternativeSchema).optional(),
+}
+const platformAssembly = {
+  ...assemblyBase,
+  /** The floor of the assembly: a balcony, a terrace, or a platform. */
+  platformId: IdSchema.optional(),
+  railingIds: z.array(IdSchema),
+  /** What carries it: columns, posts, walls, brackets. */
+  supportIds: z.array(IdSchema),
+  edgeConditions: z.array(EdgeConditionSchema).optional(),
+}
+const coverAssembly = {
+  ...assemblyBase,
+  /** Posts and columns (linear members) or walls the cover stands on. */
+  supportIds: z.array(IdSchema),
+  /** Beams carrying the cover. */
+  beamIds: z.array(IdSchema),
+  /** A cover stated as a roof: a roof assembly of roof planes. */
+  roofAssemblyId: IdSchema.optional(),
+  /** A cover stated as a slab (a concrete canopy plate). */
+  slabId: IdSchema.optional(),
+  /** The sides of its plan extent with no wall: what makes it a canopy and not a room. */
+  openSides: z.array(RoofEdgeSideSchema),
+}
+
+/**
+ * An ASSEMBLY: a first-class architectural composition that references its
+ * primitives by stable id. It owns no geometry and no triangles: the
+ * primitives compile, the assembly says what they are together. A partial
+ * assembly is valid and says what it lacks; an ambiguous one keeps its
+ * alternatives. UNKNOWN is the safe home of source-supported geometry that
+ * cannot be classified: it keeps where the thing is and what was seen,
+ * without inventing what it is.
+ */
+export const AssemblySchema = z.discriminatedUnion('kind', [
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('ROOF'),
+      classification: RoofClassificationSchema,
+      planeIds: z.array(IdSchema).min(1),
+      edgeIds: z.array(IdSchema),
+      openingIds: z.array(IdSchema),
+      dormerIds: z.array(IdSchema),
+      chimneyIds: z.array(IdSchema),
+      /** Edge boards (linear solids) and parapet panels belonging to the roof. */
+      trimIds: z.array(IdSchema),
+    })
+    .strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('DORMER'),
+      dormerType: z.enum(['GABLE', 'SHED', 'FLAT', 'UNKNOWN']),
+      hostRoofAssemblyId: IdSchema.optional(),
+      hostPlaneIds: z.array(IdSchema).min(1),
+      /** The dormer body's outline on the host roof, in plan. */
+      footprintOnRoof: PlanPolygonSchema,
+      /** Its front wall and cheeks (walls and wall panels). */
+      wallIds: z.array(IdSchema),
+      localRoofAssemblyId: IdSchema.optional(),
+      /** The DORMER roof opening cut in the host plane. */
+      cutOpeningId: IdSchema.optional(),
+      /** Openings in its front wall. */
+      openingIds: z.array(IdSchema),
+    })
+    .strict(),
+  z.object({ ...platformAssembly, kind: z.literal('BALCONY') }).strict(),
+  z.object({ ...platformAssembly, kind: z.literal('TERRACE') }).strict(),
+  z.object({ ...platformAssembly, kind: z.literal('LOGGIA'), recessWallIds: z.array(IdSchema) }).strict(),
+  z.object({ ...coverAssembly, kind: z.literal('CANOPY'), usage: z.enum(['ENTRANCE', 'TERRACE_COVER', 'SHELTER', 'UNKNOWN']) }).strict(),
+  z.object({ ...coverAssembly, kind: z.literal('CARPORT'), bays: z.number().int().min(1).optional() }).strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('PERGOLA'),
+      postIds: z.array(IdSchema),
+      primaryBeamIds: z.array(IdSchema),
+      secondaryBeamIds: z.array(IdSchema),
+      slabOrTerraceId: IdSchema.optional(),
+      /** A pergola is open: repeated beams are not a roof. */
+      coverage: z.literal('OPEN'),
+    })
+    .strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('ENTRANCE'),
+      doorId: IdSchema.optional(),
+      landingId: IdSchema.optional(),
+      stepRunIds: z.array(IdSchema),
+      canopyId: IdSchema.optional(),
+      supportIds: z.array(IdSchema),
+      railingIds: z.array(IdSchema),
+    })
+    .strict(),
+  z.object({ ...assemblyBase, kind: z.literal('EXTERIOR_STAIR'), stepRunIds: z.array(IdSchema), landingIds: z.array(IdSchema), railingIds: z.array(IdSchema) }).strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('FACADE'),
+      side: z.enum(['FRONT', 'REAR', 'LEFT', 'RIGHT', 'OTHER']),
+      wallIds: z.array(IdSchema).min(1),
+      openingIds: z.array(IdSchema),
+      memberIds: z.array(IdSchema),
+      regionIds: z.array(IdSchema),
+    })
+    .strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('GARAGE'),
+      wallIds: z.array(IdSchema),
+      doorIds: z.array(IdSchema),
+      roofAssemblyId: IdSchema.optional(),
+      /** A garage under a legacy roof. */
+      roofIds: z.array(IdSchema),
+    })
+    .strict(),
+  z
+    .object({
+      ...assemblyBase,
+      kind: z.literal('UNKNOWN'),
+      /** The evidence sources (model.evidenceSources) that show something is there. */
+      sourceEvidenceIds: z.array(IdSchema).min(1),
+      /** World-space box the thing occupies, as far as it is known. */
+      metricExtent: z.object({ min: Vec3Schema, max: Vec3Schema }).strict(),
+      approximateTopology: z.enum(['VOLUME', 'PLANAR', 'LINEAR', 'POINT_CLUSTER', 'UNKNOWN']),
+      /** What was actually measured: planar patches and segments, world coordinates. */
+      observedPlanesOrSegments: z.array(
+        z.discriminatedUnion('kind', [
+          z.object({ kind: z.literal('PLANE'), outline: z.array(Vec3Schema).min(3) }).strict(),
+          z.object({ kind: z.literal('SEGMENT'), start: Vec3Schema, end: Vec3Schema }).strict(),
+        ]),
+      ),
+      unresolvedReason: z.string().min(1),
+    })
+    .strict(),
+])
+export type Assembly = z.infer<typeof AssemblySchema>
+export type AssemblyOf<K extends AssemblyKind> = Extract<Assembly, { kind: K }>
+
+/**
+ * A TYPED RELATIONSHIP between two semantic objects: `from` <kind> `to`.
+ * "post-1 SUPPORTED_BY terrace-1", "canopy-1 COVERS landing-1",
+ * "railing-1 GUARDS balcony-1", "dormer-roof OVERLAPS_INTENTIONALLY host".
+ * Relationships are model data, not a graph database: the validator checks
+ * that they name real objects, and the geometry closure audit holds the
+ * meeting kinds (a SUPPORTED_BY post must touch what carries it).
+ */
+export const RelationshipKindSchema = z.enum([
+  'HOSTED_BY',
+  'SUPPORTED_BY',
+  'CONNECTED_TO',
+  'CONTINUES_TO',
+  'TERMINATES_AT',
+  'MEETS',
+  'INTERSECTS',
+  'OVERLAPS_INTENTIONALLY',
+  'COVERS',
+  'GUARDS',
+  'OPENS_INTO',
+  'ATTACHED_TO',
+  'ALIGNS_WITH',
+  'ABOVE',
+  'BELOW',
+])
+export type RelationshipKind = z.infer<typeof RelationshipKindSchema>
+/** Relationship kinds that say two objects physically meet: the closure audit requires them to touch. */
+export const MEETING_RELATIONSHIP_KINDS: readonly RelationshipKind[] = ['HOSTED_BY', 'SUPPORTED_BY', 'CONNECTED_TO', 'CONTINUES_TO', 'TERMINATES_AT', 'MEETS', 'ATTACHED_TO']
+/** Relationship kinds that allow two objects to share volume on purpose. */
+export const OVERLAP_RELATIONSHIP_KINDS: readonly RelationshipKind[] = ['INTERSECTS', 'OVERLAPS_INTENTIONALLY']
+
+export const RelationshipSchema = z
+  .object({
+    ...base,
+    kind: RelationshipKindSchema,
+    from: IdSchema,
+    to: IdSchema,
+    note: z.string().optional(),
+  })
+  .strict()
+export type Relationship = z.infer<typeof RelationshipSchema>
 
 export const MaterialSchema = z
   .object({
@@ -751,6 +1175,13 @@ export const CanonicalBuildingModelSchema = z
     surfaceRegions: z.array(SurfaceRegionSchema),
     linearSolids: z.array(LinearSolidSchema),
     terraces: z.array(TerraceSchema),
+    roofPlanes: z.array(RoofPlaneSchema),
+    roofEdges: z.array(RoofEdgeSchema),
+    wallPanels: z.array(WallPanelSchema),
+    platforms: z.array(PlatformSchema),
+    stepRuns: z.array(StepRunSchema),
+    assemblies: z.array(AssemblySchema),
+    relationships: z.array(RelationshipSchema),
     materials: z.array(MaterialSchema),
     constraints: z.array(ConstraintSchema),
     evidenceSources: z.array(EvidenceSourceSchema),
@@ -786,6 +1217,13 @@ export const OBJECT_COLLECTIONS = [
   'surfaceRegions',
   'linearSolids',
   'terraces',
+  'roofPlanes',
+  'roofEdges',
+  'wallPanels',
+  'platforms',
+  'stepRuns',
+  'assemblies',
+  'relationships',
   'materials',
   'constraints',
   'evidenceSources',
@@ -814,6 +1252,13 @@ export const SEMANTIC_KINDS = [
   'surfaceRegion',
   'linearSolid',
   'terrace',
+  'roofPlane',
+  'roofEdge',
+  'wallPanel',
+  'platform',
+  'stepRun',
+  'assembly',
+  'relationship',
   'material',
   'constraint',
   'evidenceSource',
@@ -841,6 +1286,13 @@ export const COLLECTION_OF_KIND: Record<Exclude<SemanticKind, 'building'>, Objec
   surfaceRegion: 'surfaceRegions',
   linearSolid: 'linearSolids',
   terrace: 'terraces',
+  roofPlane: 'roofPlanes',
+  roofEdge: 'roofEdges',
+  wallPanel: 'wallPanels',
+  platform: 'platforms',
+  stepRun: 'stepRuns',
+  assembly: 'assemblies',
+  relationship: 'relationships',
   material: 'materials',
   constraint: 'constraints',
   evidenceSource: 'evidenceSources',
@@ -866,6 +1318,13 @@ export const KIND_OF_COLLECTION: Record<ObjectCollection, Exclude<SemanticKind, 
   surfaceRegions: 'surfaceRegion',
   linearSolids: 'linearSolid',
   terraces: 'terrace',
+  roofPlanes: 'roofPlane',
+  roofEdges: 'roofEdge',
+  wallPanels: 'wallPanel',
+  platforms: 'platform',
+  stepRuns: 'stepRun',
+  assemblies: 'assembly',
+  relationships: 'relationship',
   materials: 'material',
   constraints: 'constraint',
   evidenceSources: 'evidenceSource',
@@ -892,6 +1351,13 @@ export type SemanticObject =
   | SurfaceRegion
   | LinearSolid
   | Terrace
+  | RoofPlane
+  | RoofEdge
+  | WallPanel
+  | Platform
+  | StepRun
+  | Assembly
+  | Relationship
   | Material
   | Constraint
 
@@ -924,6 +1390,13 @@ export function createEmptyModel(id: string, name: string, createdWith = 'builda
     surfaceRegions: [],
     linearSolids: [],
     terraces: [],
+    roofPlanes: [],
+    roofEdges: [],
+    wallPanels: [],
+    platforms: [],
+    stepRuns: [],
+    assemblies: [],
+    relationships: [],
     materials: [],
     constraints: [],
     evidenceSources: [],

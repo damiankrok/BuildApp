@@ -45,6 +45,12 @@ export type SemanticGroup =
   | 'ROOFLIGHT'
   | 'STAIR'
   | 'ROOM'
+  /** A column, a post, a beam, a lintel (schema 1.6.0 member roles). */
+  | 'STRUCTURAL_MEMBER'
+  /** The posts and beams of a pergola: an open frame, never a roof. */
+  | 'PERGOLA_MEMBER'
+  /** The restrained diagnostic surface of an unknown assembly: what was observed, not what it is. */
+  | 'UNKNOWN_ASSEMBLY'
   | 'OTHER'
 
 /** Every group, in a fixed order, so tables and tests can be exhaustive. */
@@ -69,6 +75,9 @@ export const SEMANTIC_GROUPS: readonly SemanticGroup[] = [
   'ROOFLIGHT',
   'STAIR',
   'ROOM',
+  'STRUCTURAL_MEMBER',
+  'PERGOLA_MEMBER',
+  'UNKNOWN_ASSEMBLY',
   'OTHER',
 ]
 
@@ -95,6 +104,8 @@ export const SEMANTIC_GROUPS: readonly SemanticGroup[] = [
  */
 export type ObjectFacts = {
   kind?: string
+  /** A member's role (COLUMN, POST, BEAM, PERGOLA_POST, FASCIA, …), a wall panel's (PARAPET, DORMER_CHEEK, …). */
+  role?: string
   roofKind?: string
   wallKind?: string
   massRole?: string
@@ -195,10 +206,30 @@ export function semanticGroupOf(input: SemanticGroupInput): SemanticGroup {
       // read as a band, not vanish into the wall's own colour. A region the
       // producer finished in timber is cladding, and reads as timber.
       return CLADDING_MATERIAL.test(material) ? 'WALL_CLADDING' : 'WALL_SECONDARY'
-    case 'LINEAR_SOLID':
-      // Free members — portal heads, verge and fascia boards not yet compiled
-      // with a roof — frame the facade, unless built in the secondary finish.
+    case 'LINEAR_SOLID': {
+      // A member the model classified reads as what it is: a column or a beam
+      // as structure, a pergola member as the open frame, an edge board as
+      // roof trim. Free members — portal heads, unclassified bands — frame the
+      // facade, unless built in the secondary finish.
+      const role = upper(facts.role)
+      if (role === 'PERGOLA_POST' || role === 'PERGOLA_BEAM') return 'PERGOLA_MEMBER'
+      if (role === 'COLUMN' || role === 'POST' || role === 'BEAM' || role === 'LINTEL' || role === 'RAFTER') return 'STRUCTURAL_MEMBER'
+      if (role === 'FASCIA' || role === 'VERGE_BOARD') return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'ROOF_TRIM'
       return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'FACADE_FRAME'
+    }
+    case 'ROOF_PLANE':
+      return upper(facts.roofKind) === 'FLAT' ? 'FLAT_ROOF' : 'ROOF_MAIN'
+    case 'WALL_PANEL':
+      // A panel is wall: a parapet or a dormer cheek in the building's render,
+      // a gable infill in timber boarding, a garage parapet in the secondary finish.
+      if (CLADDING_MATERIAL.test(material)) return 'WALL_CLADDING'
+      return input.materialRole === 'SECONDARY' ? 'WALL_SECONDARY' : 'WALL_MAIN'
+    case 'PLATFORM':
+      return 'TERRACE_SURFACE'
+    case 'STEP_RUN':
+      return 'STAIR'
+    case 'UNKNOWN_ASSEMBLY':
+      return 'UNKNOWN_ASSEMBLY'
     default:
       return 'OTHER'
   }
@@ -259,6 +290,9 @@ export const ARCHITECTURAL_PALETTE: ArchitecturalPalette = {
   ROOFLIGHT: { color: '#5e6166', roughness: 0.5, metalness: 0.2, edge: 'NONE' },
   STAIR: { color: '#b2aca4', roughness: 0.9, metalness: 0, edge: 'NONE' },
   ROOM: { color: '#8db1a8', opacity: 0.25, roughness: 1, metalness: 0, edge: 'NONE' },
+  STRUCTURAL_MEMBER: { color: '#7f7a73', roughness: 0.8, metalness: 0, edge: 'SOFT' },
+  PERGOLA_MEMBER: { color: '#caa77a', roughness: 0.8, metalness: 0, edge: 'SOFT' },
+  UNKNOWN_ASSEMBLY: { color: '#7888a0', opacity: 0.6, roughness: 0.9, metalness: 0, edge: 'NONE' },
   OTHER: { color: '#b6b2ad', roughness: 0.9, metalness: 0, edge: 'NONE' },
 }
 
@@ -316,6 +350,39 @@ export const ADJACENT_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGro
   ['TERRACE_SURFACE', 'RAILING'],
   ['WINDOW_FRAME', 'WINDOW_GLASS'],
   ['DOOR', 'WINDOW_GLASS'],
+  // BUILDAPP-03G: members, pergola frames and unknown assemblies against the
+  // floors they stand on and each other. They are NOT listed against the
+  // tone-hintable groups (walls, roofs, the facade frame): a hint moves those
+  // along their own ladder, and a new neighbour there would change what an
+  // existing building's hinted palette resolves to. Their separation from
+  // those groups at the base palette is held by `BASE_SEPARATED_GROUPS`.
+  ['STRUCTURAL_MEMBER', 'TERRACE_SURFACE'],
+  ['STRUCTURAL_MEMBER', 'SLAB'],
+  ['STRUCTURAL_MEMBER', 'BALCONY_SLAB'],
+  ['STRUCTURAL_MEMBER', 'STAIR'],
+  ['STRUCTURAL_MEMBER', 'PERGOLA_MEMBER'],
+  ['PERGOLA_MEMBER', 'TERRACE_SURFACE'],
+  ['PERGOLA_MEMBER', 'SLAB'],
+  ['UNKNOWN_ASSEMBLY', 'TERRACE_SURFACE'],
+  ['UNKNOWN_ASSEMBLY', 'SLAB'],
+]
+
+/**
+ * Pairs held apart at the BASE palette only (hints are not asked to respect
+ * them): the 03G groups against the walls and roofs they meet.
+ */
+export const BASE_SEPARATED_GROUPS: ReadonlyArray<readonly [SemanticGroup, SemanticGroup]> = [
+  ['STRUCTURAL_MEMBER', 'WALL_MAIN'],
+  ['STRUCTURAL_MEMBER', 'WALL_SECONDARY'],
+  ['STRUCTURAL_MEMBER', 'ROOF_MAIN'],
+  ['STRUCTURAL_MEMBER', 'FLAT_ROOF'],
+  ['PERGOLA_MEMBER', 'WALL_MAIN'],
+  ['PERGOLA_MEMBER', 'WALL_SECONDARY'],
+  ['PERGOLA_MEMBER', 'ROOF_MAIN'],
+  ['PERGOLA_MEMBER', 'FLAT_ROOF'],
+  ['UNKNOWN_ASSEMBLY', 'WALL_MAIN'],
+  ['UNKNOWN_ASSEMBLY', 'ROOF_MAIN'],
+  ['UNKNOWN_ASSEMBLY', 'FLAT_ROOF'],
 ]
 
 export const MIN_ADJACENT_LUMINANCE_GAP = 0.06

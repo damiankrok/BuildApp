@@ -45,6 +45,16 @@ export type GeometryPart =
   | 'TERRACE'
   /** A roof edge member compiled with its roof: a verge board along a rake or a fascia along an eave. */
   | 'ROOF_TRIM'
+  /** One planar roof surface of a roof stated as a plane graph (1.6.0). */
+  | 'ROOF_PLANE'
+  /** A vertical wall panel: a dormer cheek, a parapet run, a gable infill. */
+  | 'WALL_PANEL'
+  /** A landing, a porch, a ramp, a plinth. */
+  | 'PLATFORM'
+  /** An exterior step run, never an interior stair. */
+  | 'STEP_RUN'
+  /** The restrained generic representation of an unknown architectural assembly: only what was observed. */
+  | 'UNKNOWN_ASSEMBLY'
 
 export type CompiledMesh = {
   /** The semantic object this geometry belongs to; what selection resolves to. */
@@ -84,6 +94,10 @@ export type CompileDiagnosticCode =
   | 'ROOF_OPENING_NOT_CUT'
   | 'STAIR_NOT_LAID_OUT'
   | 'LINEAR_SOLID_DEGENERATE'
+  | 'ROOF_PLANE_NOT_TRIANGULATED'
+  | 'PLATFORM_NOT_TRIANGULATED'
+  | 'STEP_RUN_NOT_COMPILED'
+  | 'UNKNOWN_ASSEMBLY_NOT_RENDERED'
 
 export type CompileDiagnostic = {
   code: CompileDiagnosticCode

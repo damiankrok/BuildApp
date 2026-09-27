@@ -15,8 +15,21 @@
  * No React and no Three.js in here.
  */
 import {
+  STRUCTURAL_MEMBER_ROLES,
+  assemblyComponents,
+  assembliesContaining,
   findObject,
   junctionsOfWall,
+  polygonArea as planArea,
+  roofPlaneDrop,
+  type Assembly,
+  type LinearSolid,
+  type Platform,
+  type Relationship,
+  type RoofEdge,
+  type RoofPlane,
+  type StepRun,
+  type WallPanel,
   layoutStair,
   levelIdOf,
   loadModel,
@@ -44,6 +57,49 @@ import { compileBuilding, type CompiledMesh, type CompiledScene } from '@buildap
 
 export type ViewPreset = 'perspective' | 'front' | 'rear' | 'left' | 'right' | 'top'
 
+/**
+ * The viewer's category filters (BUILDAPP-03G): what a person asks to see or
+ * hide as a whole. ROOF_ASSEMBLIES — roof planes and everything in a roof or
+ * dormer assembly; EXTERIOR_ASSEMBLIES — the components of balconies,
+ * terraces, loggias, canopies, pergolas, carports, entrances and exterior
+ * stairs; STRUCTURAL_MEMBERS — members whose role is a column, a post, a
+ * beam, a lintel or a pergola member; UNKNOWN — unknown assemblies.
+ */
+export type ViewCategory = 'ROOF_ASSEMBLIES' | 'EXTERIOR_ASSEMBLIES' | 'STRUCTURAL_MEMBERS' | 'UNKNOWN'
+export const VIEW_CATEGORIES: readonly ViewCategory[] = ['ROOF_ASSEMBLIES', 'EXTERIOR_ASSEMBLIES', 'STRUCTURAL_MEMBERS', 'UNKNOWN']
+
+const EXTERIOR_KINDS: ReadonlySet<Assembly['kind']> = new Set(['BALCONY', 'TERRACE', 'LOGGIA', 'CANOPY', 'PERGOLA', 'CARPORT', 'ENTRANCE', 'EXTERIOR_STAIR'])
+
+/** Which categories each object id falls in, read off the model (assemblies, member roles, kinds). */
+export function viewCategoriesOf(m: CanonicalBuildingModel): Map<string, Set<ViewCategory>> {
+  const out = new Map<string, Set<ViewCategory>>()
+  const add = (id: string, c: ViewCategory): void => {
+    const set = out.get(id) ?? new Set<ViewCategory>()
+    set.add(c)
+    out.set(id, set)
+  }
+  for (const p of m.roofPlanes) add(p.id, 'ROOF_ASSEMBLIES')
+  for (const s of m.linearSolids) if (s.role && STRUCTURAL_MEMBER_ROLES.includes(s.role)) add(s.id, 'STRUCTURAL_MEMBERS')
+  const byId = new Map(m.assemblies.map((a) => [a.id, a]))
+  // components, recursively through nested assemblies (a dormer's local roof)
+  const walk = (a: Assembly, c: ViewCategory, seen: Set<string>): void => {
+    if (seen.has(a.id)) return
+    seen.add(a.id)
+    for (const r of assemblyComponents(a)) {
+      add(r.id, c)
+      const nested = byId.get(r.id)
+      if (nested) walk(nested, c, seen)
+      for (const o of m.openings) if (o.id === r.id) for (const x of [...m.windows, ...m.doors]) if (x.openingId === o.id) add(x.id, c)
+    }
+  }
+  for (const a of m.assemblies) {
+    if (a.kind === 'UNKNOWN') add(a.id, 'UNKNOWN')
+    else if (a.kind === 'ROOF' || a.kind === 'DORMER') walk(a, 'ROOF_ASSEMBLIES', new Set())
+    else if (EXTERIOR_KINDS.has(a.kind)) walk(a, 'EXTERIOR_ASSEMBLIES', new Set())
+  }
+  return out
+}
+
 export type EditorSnapshot = {
   model: CanonicalBuildingModel
   scene: CompiledScene
@@ -52,6 +108,8 @@ export type EditorSnapshot = {
   isolated: string | null
   isolatedLevelId: string | null
   roofsVisible: boolean
+  /** Categories the viewer hides as a whole. */
+  hiddenCategories: ReadonlySet<ViewCategory>
   showGrid: boolean
   showAxes: boolean
   view: ViewPreset
@@ -82,6 +140,8 @@ export class EditorStore {
   private isolated: string | null = null
   private isolatedLevelId: string | null = null
   private roofsVisible = true
+  private hiddenCategories = new Set<ViewCategory>()
+  private categories: { model: CanonicalBuildingModel; map: Map<string, Set<ViewCategory>> } | null = null
   private showGrid = true
   private showAxes = true
   private view: ViewPreset = 'perspective'
@@ -114,6 +174,7 @@ export class EditorStore {
         hidden: new Set(this.hidden),
         isolated: this.isolated,
         isolatedLevelId: this.isolatedLevelId,
+        hiddenCategories: new Set(this.hiddenCategories),
         roofsVisible: this.roofsVisible,
         showGrid: this.showGrid,
         showAxes: this.showAxes,
@@ -280,6 +341,20 @@ export class EditorStore {
     this.notify()
   }
 
+  /** Show or hide a whole category (roof assemblies, exterior assemblies, structural members, unknown). */
+  setCategoryVisible(category: ViewCategory, visible: boolean): void {
+    if (visible) this.hiddenCategories.delete(category)
+    else this.hiddenCategories.add(category)
+    this.notify()
+  }
+
+  /** The categories an object falls in (cached per model). */
+  categoriesOf(id: string): ReadonlySet<ViewCategory> {
+    const m = this.session.model
+    if (!this.categories || this.categories.model !== m) this.categories = { model: m, map: viewCategoriesOf(m) }
+    return this.categories.map.get(id) ?? new Set()
+  }
+
   setAxes(v: boolean): void {
     this.showAxes = v
     this.notify()
@@ -311,8 +386,26 @@ export class EditorStore {
       for (const o of m.openings) if (o.wallId === id || o.leaves?.some((l) => l.wallId === id)) out.add(o.id)
       for (const r of m.surfaceRegions) if (r.hostId === id) out.add(r.id)
     }
-    if (hit.kind === 'roof') {
+    if (hit.kind === 'roof' || hit.kind === 'roofPlane') {
       for (const o of m.roofOpenings) if (o.roofId === id) out.add(o.id)
+    }
+    if (hit.kind === 'roofPlane') {
+      for (const e of m.roofEdges) if (e.planeIds.includes(id)) for (const s of m.linearSolids) if (s.hostId === e.id) out.add(s.id)
+    }
+    if (hit.kind === 'assembly') {
+      // an assembly isolates as everything it is made of, nested assemblies included
+      const byId = new Map(m.assemblies.map((a) => [a.id, a]))
+      const walk = (a: Assembly, seen: Set<string>): void => {
+        if (seen.has(a.id)) return
+        seen.add(a.id)
+        for (const r of assemblyComponents(a)) {
+          out.add(r.id)
+          for (const o of m.roofOpenings) if (o.roofId === r.id) out.add(o.id)
+          const nested = byId.get(r.id)
+          if (nested) walk(nested, seen)
+        }
+      }
+      walk(hit.object as Assembly, new Set())
     }
     if (hit.kind === 'roofOpening') out.add(id)
     for (const o of [...out]) for (const r of m.rooflights) if (r.roofOpeningId === o) out.add(r.id)
@@ -336,7 +429,8 @@ export class EditorStore {
 
   /** Whether a compiled mesh is currently shown. */
   isMeshVisible(mesh: CompiledMesh): boolean {
-    if (!this.roofsVisible && (mesh.objectKind === 'roof' || mesh.hostRoofId)) return false
+    if (!this.roofsVisible && (mesh.objectKind === 'roof' || mesh.objectKind === 'roofPlane' || mesh.hostRoofId)) return false
+    if (this.hiddenCategories.size > 0) for (const c of this.categoriesOf(mesh.objectId)) if (this.hiddenCategories.has(c)) return false
     if (this.isolatedLevelId && mesh.levelId !== this.isolatedLevelId) return false
     if (this.isolated) {
       const fam = this.familyOf(this.isolated)
@@ -554,6 +648,76 @@ export function describeDetails(m: CanonicalBuildingModel, kind: SemanticKind, o
       rows.push({ label: 'thickness', value: 'none: appearance only, clipped to the wall material' })
       break
     }
+    case 'roofPlane': {
+      const p = object as RoofPlane
+      rows.push({ label: 'pitch', value: `${f3(p.pitchDeg)}°${p.pitchDeg > 0 ? `, falling towards (${f3(p.downslope.x)}, ${f3(p.downslope.z)})` : ' (flat)'}` })
+      rows.push({ label: 'datum', value: `x ${f3(p.datum.x)} y ${f3(p.datum.y)} z ${f3(p.datum.z)}` })
+      rows.push({ label: 'support area', value: `${f3(planArea(p.boundary))} m² in plan, ${p.boundary.length} vertices` })
+      rows.push({ label: 'plate', value: `${f3(p.thickness)} m (${f3(roofPlaneDrop(p))} m vertically)` })
+      for (const e of m.roofEdges.filter((x) => x.planeIds.includes(p.id))) rows.push({ label: e.kind.toLowerCase().replace('_', ' '), value: e.id, ref: e.id })
+      for (const o of m.roofOpenings.filter((x) => x.roofId === p.id)) rows.push({ label: 'opening', value: `${o.id} (${o.kind})`, ref: o.id })
+      for (const a of assembliesContaining(m, p.id)) rows.push({ label: 'in assembly', value: `${a.id} (${a.kind})`, ref: a.id })
+      break
+    }
+    case 'roofEdge': {
+      const e = object as RoofEdge
+      rows.push({ label: 'kind', value: e.kind })
+      for (const pid of e.planeIds) rows.push({ label: 'plane', value: pid, ref: pid })
+      rows.push({ label: 'from', value: `x ${f3(e.start.x)} y ${f3(e.start.y)} z ${f3(e.start.z)}` })
+      rows.push({ label: 'to', value: `x ${f3(e.end.x)} y ${f3(e.end.y)} z ${f3(e.end.z)}` })
+      for (const b of m.linearSolids.filter((x) => x.hostId === e.id)) rows.push({ label: 'board', value: `${b.id} (${b.role ?? 'member'})`, ref: b.id })
+      break
+    }
+    case 'wallPanel': {
+      const p = object as WallPanel
+      rows.push({ label: 'role', value: p.role })
+      rows.push({ label: 'length', value: `${f3(Math.hypot(p.end.x - p.start.x, p.end.z - p.start.z))} m, ${f3(p.thickness)} m thick` })
+      rows.push({ label: 'bottom', value: p.bottom.map((q) => `${f3(q.u)}:${f3(q.y)}`).join(' ') })
+      rows.push({ label: 'top', value: p.top.map((q) => `${f3(q.u)}:${f3(q.y)}`).join(' ') })
+      if (p.hostId) rows.push({ label: 'host', value: p.hostId, ref: p.hostId })
+      break
+    }
+    case 'platform': {
+      const p = object as Platform
+      rows.push({ label: 'role', value: p.role })
+      rows.push({ label: 'area', value: `${f3(planArea(p.polygon))} m²` })
+      rows.push({ label: 'top', value: `${f3(p.topOffset)} m above floor${p.slope ? `, falling ${f3(p.slope.gradient)} m/m` : ''}` })
+      break
+    }
+    case 'stepRun': {
+      const s = object as StepRun
+      rows.push({ label: 'role', value: s.role })
+      rows.push({ label: 'steps', value: `${s.steps} × rise ${f3(s.rise)} m, going ${f3(s.going)} m (${s.construction.toLowerCase().replace('_', ' ')})` })
+      rows.push({ label: 'total rise', value: `${f3(s.steps * s.rise)} m from ${f3(s.baseOffset)} m` })
+      rows.push({ label: 'width', value: `${f3(s.width)} m` })
+      for (let k = 1; k <= s.steps; k++) rows.push({ label: `step ${k}`, value: `${s.id}:step-${k}, tread at ${f3(s.baseOffset + k * s.rise)} m` })
+      break
+    }
+    case 'linearSolid': {
+      const s = object as LinearSolid
+      rows.push({ label: 'role', value: s.role ?? 'unclassified member' })
+      if (s.hostId) rows.push({ label: 'host', value: s.hostId, ref: s.hostId })
+      for (const a of assembliesContaining(m, s.id)) rows.push({ label: 'in assembly', value: `${a.id} (${a.kind})`, ref: a.id })
+      break
+    }
+    case 'assembly': {
+      const a = object as Assembly
+      rows.push({ label: 'kind', value: a.kind })
+      rows.push({ label: 'quality', value: a.quality })
+      for (const x of a.missing ?? []) rows.push({ label: 'missing', value: x })
+      for (const alt of a.alternatives ?? []) rows.push({ label: 'alternative', value: `${alt.kind} (${f3(alt.confidence)}): ${alt.why}` })
+      if (a.kind === 'UNKNOWN') rows.push({ label: 'unresolved', value: a.unresolvedReason })
+      for (const r of assemblyComponents(a)) rows.push({ label: r.field, value: r.id, ref: r.id })
+      for (const h of a.hostIds) rows.push({ label: 'host', value: h, ref: h })
+      break
+    }
+    case 'relationship': {
+      const r = object as Relationship
+      rows.push({ label: 'relation', value: `${r.from} ${r.kind} ${r.to}` })
+      rows.push({ label: 'from', value: r.from, ref: r.from })
+      rows.push({ label: 'to', value: r.to, ref: r.to })
+      break
+    }
     case 'wall': {
       const w = object as { id: string }
       for (const r of m.surfaceRegions.filter((x) => x.hostId === w.id)) rows.push({ label: 'finish region', value: `${r.id} (${r.face}, ${r.materialId})`, ref: r.id })
@@ -598,6 +762,23 @@ export function hostOf(m: CanonicalBuildingModel, kind: SemanticKind, object: un
     }
     case 'level':
       return m.building ? { id: m.building.id, kind: 'building', relation: 'in building' } : undefined
+    case 'roofEdge':
+      return { id: (o.planeIds as string[])[0], kind: 'roofPlane', relation: 'bounds' }
+    case 'wallPanel':
+    case 'linearSolid': {
+      if (typeof o.hostId === 'string') {
+        const k = findObject(m, o.hostId)?.kind
+        if (k) return { id: o.hostId, kind: k, relation: 'on' }
+      }
+      return typeof o.levelId === 'string' ? { id: o.levelId, kind: 'level', relation: 'on level' } : undefined
+    }
+    case 'roofPlane':
+    case 'platform':
+    case 'stepRun':
+    case 'terrace':
+      return typeof o.levelId === 'string' ? { id: o.levelId, kind: 'level', relation: 'on level' } : undefined
+    case 'relationship':
+      return { id: o.from as string, kind: findObject(m, o.from as string)?.kind ?? 'assembly', relation: 'relates' }
     default:
       return undefined
   }
@@ -614,6 +795,20 @@ export function editableProperties(kind: SemanticKind, object?: unknown, model?:
       return [text('name', 'Name'), sel('face', 'Face', ['OUTER', 'INNER']), num('rect.a0', 'From (along)', 'm', 0.05), num('rect.a1', 'To (along)', 'm', 0.05), num('rect.b0', 'Bottom', 'm', 0.05), num('rect.b1', 'Top', 'm', 0.05), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
     case 'linearSolid':
       return [text('name', 'Name'), num('width', 'Width (seen)', 'm', 0.01, 0.001), num('depth', 'Depth (proud)', 'm', 0.01, 0.001), num('rollDeg', 'Roll', '°', 1), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
+    case 'roofPlane':
+      return [text('name', 'Name'), num('pitchDeg', 'Pitch', '°', 1, 0, 85), num('thickness', 'Thickness', 'm', 0.01, 0.01)]
+    case 'roofEdge':
+      return [text('name', 'Name')]
+    case 'wallPanel':
+      return [text('name', 'Name'), num('thickness', 'Thickness', 'm', 0.01, 0.01)]
+    case 'platform':
+      return [text('name', 'Name'), num('topOffset', 'Top (above floor)', 'm', 0.01), num('thickness', 'Thickness', 'm', 0.01, 0.01)]
+    case 'stepRun':
+      return [text('name', 'Name'), num('steps', 'Steps', '', 1, 1, 40), num('going', 'Going', 'm', 0.01, 0.1), num('rise', 'Rise', 'm', 0.005, 0.05), num('width', 'Width', 'm', 0.05, 0.3)]
+    case 'assembly':
+      return [text('name', 'Name'), sel('quality', 'Quality', ['COMPLETE', 'PARTIAL', 'FRAGMENTARY'])]
+    case 'relationship':
+      return [text('note', 'Note')]
     case 'terrace':
       return [text('name', 'Name'), num('topOffset', 'Top (above floor)', 'm', 0.01), num('thickness', 'Thickness', 'm', 0.01, 0.01), sel('surface', 'Surface', ['PAVED', 'DECK', 'UNKNOWN']), sel('edge', 'Edge', ['PLINTH', 'FLUSH']), sel('materialId', 'Material', (model?.materials ?? []).map((x) => x.id))]
     case 'wallJunction': {
@@ -767,8 +962,39 @@ function buildTree(m: CanonicalBuildingModel): TreeNode[] {
     group('railing', 'Railings', m.railings.filter((r) => r.levelId === level.id && !r.hostId).map((r) => ({ id: r.id, kind: 'railing' as const, label: label(r), children: [] })))
     group('chimney', 'Chimneys', m.chimneys.filter((c) => c.levelId === level.id).map((c) => ({ id: c.id, kind: 'chimney' as const, label: label(c), children: [] })))
     group('stair', 'Stairs', m.stairs.filter((s) => s.levelId === level.id).map((s) => ({ id: s.id, kind: 'stair' as const, label: label(s), children: [] })))
+    group(
+      'roofPlane',
+      'Roof planes',
+      m.roofPlanes
+        .filter((p) => p.levelId === level.id)
+        .map((p) => ({
+          id: p.id,
+          kind: 'roofPlane' as const,
+          label: label(p, `plane ${p.pitchDeg}°`),
+          children: [
+            ...m.roofOpenings.filter((o) => o.roofId === p.id).map((o) => ({ id: o.id, kind: 'roofOpening' as const, label: label(o, o.kind.toLowerCase()), children: m.rooflights.filter((x) => x.roofOpeningId === o.id).map((x) => ({ id: x.id, kind: 'rooflight' as const, label: label(x, 'Rooflight'), children: [] })) })),
+            ...m.roofEdges.filter((e) => e.planeIds[0] === p.id).map((e) => ({ id: e.id, kind: 'roofEdge' as const, label: label(e, e.kind.toLowerCase()), children: [] })),
+          ],
+        })),
+    )
+    group('wallPanel', 'Wall panels', m.wallPanels.filter((p) => p.levelId === level.id).map((p) => ({ id: p.id, kind: 'wallPanel' as const, label: label(p, p.role.toLowerCase()), children: [] })))
+    group('linearSolid', 'Members', m.linearSolids.filter((x) => x.levelId === level.id && x.role !== undefined).map((x) => ({ id: x.id, kind: 'linearSolid' as const, label: label(x, (x.role as string).toLowerCase()), children: [] })))
+    group('platform', 'Platforms', m.platforms.filter((p) => p.levelId === level.id).map((p) => ({ id: p.id, kind: 'platform' as const, label: label(p, p.role.toLowerCase()), children: [] })))
+    group('stepRun', 'Step runs', m.stepRuns.filter((x) => x.levelId === level.id).map((x) => ({ id: x.id, kind: 'stepRun' as const, label: label(x, `${x.steps} steps`), children: [] })))
     buildingNode.children.push(node)
   }
+  if (m.assemblies.length > 0) {
+    const kindOf = (id: string): SemanticKind => findObject(m, id)?.kind ?? 'assembly'
+    roots.push({
+      id: '__assemblies',
+      kind: 'assembly',
+      label: `Assemblies (${m.assemblies.length})`,
+      children: [...m.assemblies]
+        .sort((a, b) => (a.id < b.id ? -1 : 1))
+        .map((a) => ({ id: a.id, kind: 'assembly' as const, label: label(a, `${a.kind.toLowerCase()}${a.quality === 'COMPLETE' ? '' : ` (${a.quality.toLowerCase()})`}`), children: assemblyComponents(a).map((r) => ({ id: r.id, kind: kindOf(r.id), label: `${r.field}: ${r.id}`, children: [] })) })),
+    })
+  }
+  if (m.relationships.length > 0) roots.push({ id: '__relationships', kind: 'relationship', label: `Relationships (${m.relationships.length})`, children: m.relationships.map((r) => ({ id: r.id, kind: 'relationship' as const, label: `${r.from} ${r.kind} ${r.to}`, children: [] })) })
   if (m.materials.length > 0) roots.push({ id: '__materials', kind: 'material', label: `Materials (${m.materials.length})`, children: m.materials.map((x) => ({ id: x.id, kind: 'material' as const, label: x.name, children: [] })) })
   if (m.constraints.length > 0) roots.push({ id: '__constraints', kind: 'constraint', label: `Constraints (${m.constraints.length})`, children: m.constraints.map((c) => ({ id: c.id, kind: 'constraint' as const, label: c.name ?? `${c.kind} ${c.property ?? ''}`.trim(), children: [] })) })
   if (m.evidenceSources.length > 0) roots.push({ id: '__sources', kind: 'evidenceSource', label: `Evidence sources (${m.evidenceSources.length})`, children: m.evidenceSources.map((s) => ({ id: s.id, kind: 'evidenceSource' as const, label: s.label, children: [] })) })

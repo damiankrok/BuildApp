@@ -36,6 +36,20 @@
  * 1.3.0 file has none; it loads with an empty collection and compiles to
  * exactly the geometry it compiled to before.
  *
+ * 1.4.0 -> 1.5.0 (STAGE BUILDAPP-03Y): the model gained the `terraces`
+ * collection and three optional extensions — roof `edgeMembers` and
+ * `plateInset`, and `Railing.path`. A 1.4.0 file has none; it loads with an
+ * empty collection and compiles to exactly the geometry it compiled to before.
+ *
+ * 1.5.0 -> 1.6.0 (STAGE BUILDAPP-03G): the model gained the architectural
+ * language — `roofPlanes` and `roofEdges` (a roof as a plane graph),
+ * `wallPanels`, `platforms`, `stepRuns`, first-class `assemblies` and typed
+ * `relationships` — and optional extensions: `LinearSolid.role`,
+ * `Railing.role`, `Door.usage`, the DORMER roof opening with an `outline`, and
+ * the FOLLOW_ROOF_PLANES wall top. A 1.5.0 file has none of them; it loads
+ * with seven empty collections, every member unclassified, and compiles to
+ * exactly the geometry it compiled to before.
+ *
  * A file that states an older version but already carries a newer version's
  * collections is refused: it would be a mislabelled newer file.
  */
@@ -62,6 +76,12 @@ export const MIGRATION_NOTE_1_2_0 =
 export const MIGRATION_NOTE_1_3_0 = 'migrated from schema 1.3.0 to 1.4.0: the file carried no linear solids; every facade member it describes is still a flat region'
 
 export const MIGRATION_NOTE_1_4_0 = 'migrated from schema 1.4.0 to 1.5.0: the file carried no terraces; its roofs carry no edge members or plate insets and its railings no turning paths'
+
+export const MIGRATION_NOTE_1_5_0 =
+  'migrated from schema 1.5.0 to 1.6.0: the file carried no roof planes, roof edges, wall panels, platforms, step runs, assemblies or relationships; its members are unclassified'
+
+/** The collections schema 1.6.0 added, in the order the migration adds them. */
+export const COLLECTIONS_ADDED_IN_1_6_0 = ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] as const
 
 type Step = {
   from: string
@@ -107,6 +127,13 @@ const STEPS: Step[] = [
     newCollections: ['terraces'],
     note: MIGRATION_NOTE_1_4_0,
     message: 'model migrated from schema 1.4.0 to 1.5.0: an empty terraces collection was added; roofs carry no edge members or plate insets, railings no turning paths',
+  },
+  {
+    from: '1.5.0',
+    to: '1.6.0',
+    newCollections: [...COLLECTIONS_ADDED_IN_1_6_0],
+    note: MIGRATION_NOTE_1_5_0,
+    message: 'model migrated from schema 1.5.0 to 1.6.0: empty roofPlanes, roofEdges, wallPanels, platforms, stepRuns, assemblies and relationships were added; the building is unchanged',
   },
 ]
 

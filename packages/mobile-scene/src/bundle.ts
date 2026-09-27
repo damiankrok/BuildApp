@@ -9,7 +9,7 @@
  */
 import { compileBuilding, boundsOfTriangles, type Bounds, type CompiledMesh, type CompiledScene, type GeometryPart } from '@buildapp/geometry'
 import { findObject, serializeModel, type CanonicalBuildingModel, type SemanticKind } from '@buildapp/model'
-import { describeObject, kindLabel, labelOf, levelIdOf, materialIdOf } from './describe.js'
+import { describeObject, kindLabelOf, labelOf, levelIdOf, materialIdOf } from './describe.js'
 import { bundleStyling, semanticGroupOf, TONE_HINTABLE_GROUPS, toneOfColor, type ObjectFacts, type SemanticGroup, type ToneHints } from './semantics.js'
 import { bundleContentHash, sha256 } from './serialize.js'
 import {
@@ -133,8 +133,17 @@ export function objectFactsOf(model: CanonicalBuildingModel, objectId: string, f
       return { kind: String(o.infill) }
     case 'door': {
       const panels = (o.assembly as { panels?: { kind: string }[] } | undefined)?.panels ?? []
-      return panels.length > 0 && panels.every((p) => p.kind === 'PANEL') ? { kind: 'PANEL' } : undefined
+      return (panels.length > 0 && panels.every((p) => p.kind === 'PANEL')) || o.usage === 'GARAGE' ? { kind: 'PANEL' } : undefined
     }
+    case 'linearSolid':
+      return typeof o.role === 'string' ? { role: o.role } : undefined
+    case 'roofPlane':
+      return { roofKind: o.pitchDeg === 0 ? 'FLAT' : 'PITCHED' }
+    case 'wallPanel':
+      return { role: String(o.role), wallKind: 'EXTERIOR' }
+    case 'platform':
+    case 'stepRun':
+      return { role: String(o.role) }
     default:
       return undefined
   }
@@ -208,7 +217,7 @@ function objectMetadata(model: CanonicalBuildingModel, scene: CompiledScene): Mo
       id,
       kind,
       label: labelOf(model, id),
-      kindLabel: kindLabel(kind),
+      kindLabel: kindLabelOf(kind, object),
       name: (object as { name?: string }).name,
       levelId,
       levelLabel: levelId ? levelName.get(levelId) : undefined,

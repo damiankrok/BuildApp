@@ -1,5 +1,5 @@
 /**
- * `npm run candidates:reseal [-- --ids marcowki-auto,marcowki-auto-v2]`
+ * `npm run candidates:reseal [-- --ids marcowki-auto,marcowki-auto-v2,marcowki-auto-v3]`
  *
  * Restate frozen candidates under the current model schema.
  *
@@ -36,6 +36,7 @@ const SRC = join(ROOT, 'packages/candidates/src')
 /** What each schema step added, in the order they were added: the collections a restatement may strip. */
 const ADDED_BY: Record<string, { previous: string; collections: Array<keyof CanonicalBuildingModel> }> = {
   '1.5.0': { previous: '1.4.0', collections: ['terraces'] },
+  '1.6.0': { previous: '1.5.0', collections: ['roofPlanes', 'roofEdges', 'wallPanels', 'platforms', 'stepRuns', 'assemblies', 'relationships'] },
 }
 
 type LogEntry = { id: string; file: string; fromSchema: string; toSchema: string; from: { id: string; contentHash: string; modelHash: string }; to: { id: string; contentHash: string; modelHash: string }; why: string }
@@ -66,7 +67,7 @@ function restate(model: CanonicalBuildingModel, toVersion: string): string | nul
 }
 
 function main(): void {
-  const ids = (argValue('ids') ?? 'marcowki-auto,marcowki-auto-v2').split(',').map((s) => s.trim()).filter(Boolean)
+  const ids = (argValue('ids') ?? 'marcowki-auto,marcowki-auto-v2,marcowki-auto-v3').split(',').map((s) => s.trim()).filter(Boolean)
   const logPath = join(SRC, 'reseal-log.json')
   const log: LogEntry[] = existsSync(logPath) ? (JSON.parse(readFileSync(logPath, 'utf8')) as LogEntry[]) : []
   let failures = 0
