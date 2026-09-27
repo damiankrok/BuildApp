@@ -81,4 +81,21 @@ object TestScenes {
 
     /** Every scene the build ships, which is what a viewer can switch between. */
     val all: List<ModelScene> by lazy { index.map { scene(it.key) } }
+
+    /** The unit-test resources folder (synthetic fixture bundles; the APK ships none of them). */
+    fun testResourceRoot(): File = sequenceOf(
+        File("src/test/resources"),
+        File("app/src/test/resources"),
+        File("apps/android/app/src/test/resources"),
+    ).firstOrNull { it.isDirectory } ?: error("test resources not found from ${File(".").absolutePath}")
+
+    /** A synthetic 03G diversity fixture bundle from the test resources, by name. */
+    fun fixture(name: String): ModelScene {
+        val text = File(testResourceRoot(), "architecture/$name.scene.json").readText()
+        val bundle = when (val r = BundleParser.parse(text)) {
+            is BundleResult.Ok -> r.bundle
+            is BundleResult.Failure -> error("$name did not parse: ${r.message}")
+        }
+        return ModelScene.from(bundle, "fixture-$name", name, "synthetic fixture")
+    }
 }
