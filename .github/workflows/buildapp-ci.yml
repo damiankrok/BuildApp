@@ -688,6 +688,79 @@ jobs:
           echo "### Direct APK" >> "$GITHUB_STEP_SUMMARY"
           echo "$url (SHA-256 $sha)" >> "$GITHUB_STEP_SUMMARY"
 
+  owner-preview-release:
+    # The OWNER's test build of a manually dispatched run, as one direct link:
+    # the prerelease `owner-preview-latest` whose only asset is the arm64-v8a
+    # debug APK itself, BuildPlan-owner-preview.apk, not a zip. It is apart
+    # from `preview-latest` (push builds), which this job never touches, and
+    # it never publishes the x86_64 APK. The release is created on the first
+    # dispatch; every later dispatch replaces the asset in place and rewrites
+    # the notes. The tag is a fixed anchor and is not moved: the notes name
+    # the commit the APK was built from. The Android job's artifacts stay as
+    # they are, for diagnostics.
+    name: Android / OWNER direct APK (owner-preview-latest)
+    needs: android
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: The APKs the Android job built
+        uses: actions/download-artifact@v4
+        with:
+          name: buildplan-model-preview-apks
+          path: apks
+      - name: Publish BuildPlan-owner-preview.apk to the owner-preview-latest prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: owner-preview-latest
+          ASSET: BuildPlan-owner-preview.apk
+        run: |
+          set -euo pipefail
+          # app-arm64-v8a-debug.apk under its delivery name (the previewApks
+          # task in apps/android/app/build.gradle.kts copies and renames it).
+          src="apks/BuildPlan-Model-Preview-arm64-v8a-debug.apk"
+          [ -f "$src" ] || { echo "::error::no arm64 APK in the Android job's artifact"; ls -la apks; exit 1; }
+          cp "$src" "$ASSET"
+          sha=$(sha256sum "$ASSET" | cut -d' ' -f1)
+          url="https://github.com/${GH_REPO}/releases/download/${TAG}/${ASSET}"
+          {
+            echo "## OWNER TEST BUILD"
+            echo
+            echo "A test build for the owner's phone, not a release. BuildPlan Model Preview, arm64-v8a, debug."
+            echo
+            echo "Direct download: ${url}"
+            echo
+            echo "Built by workflow_dispatch run ${GITHUB_RUN_NUMBER} (attempt ${GITHUB_RUN_ATTEMPT}) from ${GITHUB_REF_NAME} @ ${GITHUB_SHA}:"
+            echo "${GITHUB_SERVER_URL}/${GH_REPO}/actions/runs/${GITHUB_RUN_ID}"
+            echo "SHA-256 ${sha}"
+            echo
+            echo '```'; cat apks/VERSION.txt; echo '```'
+            echo
+            echo "Signed with the preview key: it installs as an update over any preview build with a lower run number."
+            echo "Every dispatch replaces this asset in place. The tag \`${TAG}\` is a fixed anchor; the commit above is the one this APK was built from."
+            echo "Separate from \`preview-latest\`, which this build does not touch."
+          } > notes.md
+          title="BuildPlan — OWNER TEST BUILD (arm64)"
+          if out=$(gh release view "$TAG" --json tagName 2>&1); then
+            gh release upload "$TAG" "$ASSET" --clobber
+            gh release edit "$TAG" --prerelease --title "$title" --notes-file notes.md
+            action="replaced the asset of the existing release"
+          elif grep -q "release not found" <<<"$out"; then
+            gh release create "$TAG" "$ASSET" --prerelease --target "$GITHUB_SHA" --title "$title" --notes-file notes.md
+            action="created the release"
+          else
+            echo "$out"; echo "::error::could not read the ${TAG} release"; exit 1
+          fi
+          [ "$(gh release view "$TAG" --json isPrerelease -q .isPrerelease)" = "true" ] || { echo "::error::${TAG} is not a prerelease"; exit 1; }
+          # The link serves this exact APK, not a zip around it.
+          curl -sSfL --retry 3 -o downloaded.apk "$url"
+          cmp downloaded.apk "$ASSET"
+          echo "### OWNER direct APK" >> "$GITHUB_STEP_SUMMARY"
+          echo "${action}: $url (SHA-256 $sha)" >> "$GITHUB_STEP_SUMMARY"
+
   dependency-security:
     name: Dependency security (advisory)
     runs-on: ubuntu-latest
