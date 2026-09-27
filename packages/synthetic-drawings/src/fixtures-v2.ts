@@ -107,6 +107,53 @@ export const COLDHARBOUR: SyntheticHouse = {
   ],
 }
 
+/**
+ * Coldharbour's plan with the attached body under a gable of its own: the
+ * same walls, openings and chains, and a roof the plans cannot tell from a
+ * flat one. Only the front and rear elevations, which draw the wing's gable
+ * end, can — so the pair is the test that the attached roof's form is READ,
+ * and that a flat wing is not turned into a gable by the same reading.
+ */
+export const MARLOW: SyntheticHouse = {
+  name: 'Marlow',
+  frame: 'MODEL',
+  width: 8.2,
+  depth: 6.6,
+  wallThickness: THICK,
+  storeys: [
+    { name: 'ground', height: 2.85 },
+    { name: 'upper', height: 2.55 },
+  ],
+  roof: { pitchDeg: 35, overhang: 0, ridgeAxis: 'Z' },
+  openings: [
+    { side: 'FRONT', kind: 'DOOR', at: 1.0, width: 1.1, height: 2.1, sill: 0, storey: 0 },
+    { side: 'FRONT', kind: 'WINDOW', at: 4.2, width: 1.6, height: 1.4, sill: 0.9, storey: 0 },
+    { side: 'REAR', kind: 'WINDOW', at: 3.0, width: 1.5, height: 1.3, sill: 0.9, storey: 0 },
+    { side: 'LEFT', kind: 'WINDOW', at: 2.0, width: 1.2, height: 1.2, sill: 1.0, storey: 0 },
+    { side: 'FRONT', kind: 'WINDOW', at: 1.5, width: 1.3, height: 1.3, sill: 0.9, storey: 1 },
+    { side: 'FRONT', kind: 'WINDOW', at: 5.2, width: 1.3, height: 1.3, sill: 0.9, storey: 1 },
+  ],
+  members: [],
+  chainsX: [8.2, 3.4],
+  chainsZ: [6.6],
+  upperChainsX: [8.2],
+  upperChainsZ: [6.6],
+  wings: [
+    {
+      name: 'store',
+      width: 3.4,
+      depth: 4.6,
+      offsetZ: 1.0,
+      storeys: 1,
+      roof: 'GABLE',
+      openings: [
+        { side: 'FRONT', kind: 'DOOR', at: 8.9, width: 1.1, height: 2.1, sill: 0, storey: 0 },
+        { side: 'RIGHT', kind: 'WINDOW', at: 2.5, width: 1.0, height: 1.2, sill: 1.0, storey: 0 },
+      ],
+    },
+  ],
+}
+
 export const DUNMORE: SyntheticHouse = {
   name: 'Dunmore',
   frame: 'MODEL',

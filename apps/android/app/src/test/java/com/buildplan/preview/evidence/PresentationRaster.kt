@@ -173,7 +173,8 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
             val w1 = edge(sc, sa, px, py) / area
             val w2 = edge(sa, sb, px, py) / area
             if (w0 < 0 || w1 < 0 || w2 < 0) continue
-            val z = (w0 * sa[2] + w1 * sb[2] + w2 * sc[2]).toFloat() * bias
+            // Depth is linear in screen space only as its reciprocal under a perspective projection.
+            val z = (if (view.perspective) 1.0 / (w0 / sa[2] + w1 / sb[2] + w2 / sc[2]) else w0 * sa[2] + w1 * sb[2] + w2 * sc[2]).toFloat() * bias
             val i = y * w + x
             if (z >= depth[i]) continue
             if (blend) {
@@ -197,7 +198,7 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
             val t = s.toDouble() / steps
             val x = a[0] + (b[0] - a[0]) * t
             val y = a[1] + (b[1] - a[1]) * t
-            val z = (a[2] + (b[2] - a[2]) * t).toFloat()
+            val z = (if (view.perspective) 1.0 / ((1 - t) / a[2] + t / b[2]) else a[2] + (b[2] - a[2]) * t).toFloat()
             for (dy in -half..half) for (dx in -half..half) {
                 val ix = x.toInt() + dx; val iy = y.toInt() + dy
                 if (ix < 0 || iy < 0 || ix >= w || iy >= h) continue
@@ -238,6 +239,8 @@ class PresentationRaster(private val width: Int, private val height: Int, privat
         private val eye = camera.eye(pose)
         private val basis = camera.basis(pose)
         private val halfH = if (pose.projection == Projection.ORTHOGRAPHIC) camera.orthoHalfHeight(pose) else tan(Math.toRadians(camera.fovDeg) / 2.0)
+
+        val perspective = pose.projection != Projection.ORTHOGRAPHIC
 
         fun toEye(p: Vec3): Vec3 = if (pose.projection == Projection.ORTHOGRAPHIC) basis.forward * -1.0 else eye - p
 

@@ -514,6 +514,10 @@ jobs:
           if [ ! -f second-house/live/result-summary.json ]; then echo "::warning::no completed live run to replay"; exit 0; fi
           OFFLINE=1 npm run -s analysis:second-house -- --package second-house/live/source-package.json --graph second-house/live/observation-graph.json \
             --out second-house/replay --cache .cache/second-house-bytes --expect COMPLETED --same-as second-house/live/result-summary.json
+      - name: The garage is a gable, not a flat slab (INTEGRATION-003B regression, evaluation only)
+        run: |
+          if [ ! -f second-house/live/model.json ]; then echo "::warning::no completed live run to judge"; exit 0; fi
+          BUILDAPP_SECOND_HOUSE_DIR=second-house/live npx vitest run tests/benchmark/second-house-roof.test.ts
       - name: The pre-fix evidence through today's solver is refused by name, not by ANALYSIS_FAILED
         run: |
           if [ ! -d .cache/second-house-bytes ]; then echo "::warning::no plan images fetched; nothing to replay"; exit 0; fi
@@ -527,8 +531,10 @@ jobs:
       - name: The committed post-fix evidence replays to the committed hashes (advisory — needs the publisher's images, which are not committed)
         continue-on-error: true
         run: |
+          # INTEGRATION-003B re-read this evidence (attached roof form, side-view orientation): its expected result is sealed beside the stage.
           OFFLINE=1 npm run -s analysis:second-house -- --package "$SEALED/post-fix/source-package.json" --graph "$SEALED/post-fix/observation-graph.json" \
-            --out second-house/committed-replay --cache .cache/second-house-bytes --expect COMPLETED --same-as "$SEALED/post-fix/result-summary.json"
+            --out second-house/committed-replay --cache .cache/second-house-bytes --expect COMPLETED --same-as stage-reports/artifacts/integration-003b/rarytasy/result-summary-after.json
+          BUILDAPP_SECOND_HOUSE_DIR=second-house/committed-replay npx vitest run tests/benchmark/second-house-roof.test.ts
       - name: The bundle the APK embeds, on Node 18 without ICU as on Android, reaches the same model and scene
         run: |
           node apps/local-analyzer/build.mjs

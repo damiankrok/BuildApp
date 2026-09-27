@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { decodeImage } from '@buildapp/source-package'
-import { ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, ELMBRIDGE_ROOMS, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL, LINDALE, V2_FIXTURES } from '@buildapp/synthetic-drawings'
+import { ASHBY, BRACKENHOLT, COLDHARBOUR, DUNMORE, ELMBRIDGE, ELMBRIDGE_ROOMS, FOXLOW, GREYWELL, HATHERLEIGH, IVYBANK, KELSALL, LINDALE, MARLOW, V2_FIXTURES } from '@buildapp/synthetic-drawings'
 import type { SyntheticHouse } from '@buildapp/synthetic-drawings'
 import { reconstructV2, verifyReplay } from '../src/index.js'
 import type { ReconstructionV2Result } from '../src/index.js'
@@ -103,6 +103,41 @@ describe('§25 synthetic fixtures through the v2 analyzer', () => {
     expect(roof).toBeDefined()
     expect(Math.abs((roof?.slabTopY ?? 0) - 2.85)).toBeLessThan(0.1)
     expectOpenings(COLDHARBOUR, r)
+  }, 60_000)
+
+  it('3a Coldharbour: the flat attached roof is READ flat on the views that see it, not only taken by convention', async () => {
+    const r = await run(COLDHARBOUR)
+    expect(r.building.pitchedAttachedRoofs).toEqual([])
+    const form = r.steps.find((s) => s.what.startsWith('the form of the roof over'))
+    expect(form?.detail, form?.detail).toMatch(/^FLAT: /)
+    expect(r.model.roofs.filter((x) => x.kind === 'FLAT')).toHaveLength(1)
+    expect(r.model.roofPlanes).toEqual([])
+  }, 60_000)
+
+  it('3b Marlow: the same plan under a gabled wing is read as a gable from its drawn gable end, ridge along z, abutting the main wall', async () => {
+    const r = await run(MARLOW)
+    expect(verifyReplay(r.candidate).ok).toBe(true)
+    expect(r.violations.graph).toEqual([])
+    expect(r.violations.ledger).toEqual([])
+    const wing = r.building.masses.find((m) => m.role === 'ATTACHED')
+    expect(r.building.attachedRoofs.find((a) => a.massId === wing?.id)).toBeUndefined()
+    const roof = r.building.pitchedAttachedRoofs.find((a) => a.massId === wing?.id)
+    expect(roof, r.steps.find((s) => s.what.startsWith('the form of the roof over'))?.detail).toBeDefined()
+    expect(roof?.ridgeAxis).toBe('Z')
+    expect(Math.abs((roof?.pitchDeg ?? 0) - MARLOW.roof.pitchDeg)).toBeLessThanOrEqual(2)
+    // The drawn apex: the wall head plus half the wing's width at the drawn pitch.
+    const drawnRidge = 2.85 + (3.4 / 2) * Math.tan((MARLOW.roof.pitchDeg * Math.PI) / 180)
+    expect(Math.abs((roof?.ridgeY ?? 0) - drawnRidge)).toBeLessThan(0.25)
+    expect(roof?.layout.join.kind).toBe('FREE')
+    // The low eave runs along the main body's east wall: an abutment, not a free eave.
+    expect(roof?.layout.eaves.map((e) => e.kind).sort()).toEqual(['ABUTMENT', 'EAVE'])
+    expect(r.model.roofs.map((x) => x.kind)).toEqual(['GABLE'])
+    expect(r.model.roofPlanes).toHaveLength(2)
+    expect(r.model.roofEdges.filter((e) => e.kind === 'RIDGE')).toHaveLength(1)
+    // The wing's walls die into its own planes: its gable ends rise to the ridge.
+    const ring = r.model.walls.filter((w) => w.id.startsWith(`ring-${wing?.id}-`))
+    expect(ring.every((w) => w.topProfile?.kind === 'FOLLOW_ROOF_PLANES')).toBe(true)
+    expectOpenings(MARLOW, r)
   }, 60_000)
 
   it('4 Dunmore: a front loggia with a return at each end, the roof running on over it', async () => {

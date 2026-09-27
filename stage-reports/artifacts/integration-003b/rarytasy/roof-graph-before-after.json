@@ -1,0 +1,331 @@
+{
+ "after": {
+  "chimneys": [
+   {
+    "footprint": {
+     "maxX": 10.576547,
+     "maxZ": 10.963472,
+     "minX": 10.024967,
+     "minZ": 10.331432
+    },
+    "height": 6.291208,
+    "id": "chimney-0"
+   }
+  ],
+  "garageWalls": [
+   {
+    "height": 5.534671,
+    "id": "ring-attached-0-0-w0",
+    "topProfile": {
+     "kind": "FOLLOW_ROOF_PLANES",
+     "planeIds": [
+      "roof-attached-0-plane-low",
+      "roof-attached-0-plane-high"
+     ]
+    }
+   },
+   {
+    "height": 5.534671,
+    "id": "ring-attached-0-0-w1",
+    "topProfile": {
+     "kind": "FOLLOW_ROOF_PLANES",
+     "planeIds": [
+      "roof-attached-0-plane-low",
+      "roof-attached-0-plane-high"
+     ]
+    }
+   },
+   {
+    "height": 5.534671,
+    "id": "ring-attached-0-0-w2",
+    "topProfile": {
+     "kind": "FOLLOW_ROOF_PLANES",
+     "planeIds": [
+      "roof-attached-0-plane-low",
+      "roof-attached-0-plane-high"
+     ]
+    }
+   },
+   {
+    "height": 5.534671,
+    "id": "ring-attached-0-0-w3",
+    "topProfile": {
+     "kind": "FOLLOW_ROOF_PLANES",
+     "planeIds": [
+      "roof-attached-0-plane-low",
+      "roof-attached-0-plane-high"
+     ]
+    }
+   }
+  ],
+  "relationships": [
+   {
+    "from": "roof-attached-0-plane-high",
+    "id": "rel-roof-attached-0-plane-high-intersects-roof-main",
+    "kind": "INTERSECTS",
+    "note": "a valley: the ridge runs into the main roof's slope, which rises from the party line at 30\u00b0; the two top surfaces meet 3.09 m up it, and the planes stop on that line: two valleys",
+    "to": "roof-main"
+   },
+   {
+    "from": "roof-attached-0-plane-high",
+    "id": "rel-roof-attached-0-plane-high-supported-by-ring-attached-0-0-w1",
+    "kind": "SUPPORTED_BY",
+    "note": "the plane bears on the wall under its eave",
+    "to": "ring-attached-0-0-w1"
+   },
+   {
+    "from": "roof-attached-0-plane-low",
+    "id": "rel-roof-attached-0-plane-low-intersects-roof-main",
+    "kind": "INTERSECTS",
+    "note": "a valley: the ridge runs into the main roof's slope, which rises from the party line at 30\u00b0; the two top surfaces meet 3.09 m up it, and the planes stop on that line: two valleys",
+    "to": "roof-main"
+   },
+   {
+    "from": "roof-attached-0-plane-low",
+    "id": "rel-roof-attached-0-plane-low-supported-by-ring-attached-0-0-w3",
+    "kind": "SUPPORTED_BY",
+    "note": "the plane bears on the wall under its eave",
+    "to": "ring-attached-0-0-w3"
+   }
+  ],
+  "roofEdges": [
+   {
+    "end": {
+     "x": 8.224049,
+     "y": 3.252897,
+     "z": 6.21
+    },
+    "id": "roof-attached-0-eave-high",
+    "kind": "EAVE",
+    "planeIds": [
+     "roof-attached-0-plane-high"
+    ],
+    "start": {
+     "x": 8.224049,
+     "y": 3.252897,
+     "z": 0
+    }
+   },
+   {
+    "end": {
+     "x": 2.051804,
+     "y": 3.252897,
+     "z": 6.21
+    },
+    "id": "roof-attached-0-eave-low",
+    "kind": "EAVE",
+    "planeIds": [
+     "roof-attached-0-plane-low"
+    ],
+    "start": {
+     "x": 2.051804,
+     "y": 3.252897,
+     "z": 0
+    }
+   },
+   {
+    "end": {
+     "x": 5.137927,
+     "y": 5.034670944802295,
+     "z": 9.296123
+    },
+    "id": "roof-attached-0-ridge",
+    "kind": "RIDGE",
+    "planeIds": [
+     "roof-attached-0-plane-low",
+     "roof-attached-0-plane-high"
+    ],
+    "start": {
+     "x": 5.137927,
+     "y": 5.034670944802295,
+     "z": 0
+    }
+   },
+   {
+    "end": {
+     "x": 8.224049,
+     "y": 3.252897,
+     "z": 0
+    },
+    "id": "roof-attached-0-verge-high-0",
+    "kind": "VERGE",
+    "planeIds": [
+     "roof-attached-0-plane-high"
+    ],
+    "start": {
+     "x": 5.137927,
+     "y": 5.034670367452026,
+     "z": 0
+    }
+   },
+   {
+    "end": {
+     "x": 5.137927,
+     "y": 5.034670944802295,
+     "z": 0
+    },
+    "id": "roof-attached-0-verge-low-0",
+    "kind": "VERGE",
+    "planeIds": [
+     "roof-attached-0-plane-low"
+    ],
+    "start": {
+     "x": 2.051804,
+     "y": 3.252897,
+     "z": 0
+    }
+   }
+  ],
+  "roofPlanes": [
+   {
+    "boundary": [
+     {
+      "x": 5.137927,
+      "z": 0
+     },
+     {
+      "x": 8.224049,
+      "z": 0
+     },
+     {
+      "x": 8.224049,
+      "z": 6.21
+     },
+     {
+      "x": 5.137927,
+      "z": 9.296123
+     }
+    ],
+    "datum": {
+     "x": 8.224049,
+     "y": 3.252897,
+     "z": 0
+    },
+    "downslope": {
+     "x": 1,
+     "z": 0
+    },
+    "id": "roof-attached-0-plane-high",
+    "pitchDeg": 30,
+    "thickness": 0.28
+   },
+   {
+    "boundary": [
+     {
+      "x": 2.051804,
+      "z": 0
+     },
+     {
+      "x": 5.137927,
+      "z": 0
+     },
+     {
+      "x": 5.137927,
+      "z": 9.296123
+     },
+     {
+      "x": 2.051804,
+      "z": 6.21
+     }
+    ],
+    "datum": {
+     "x": 2.051804,
+     "y": 3.252897,
+     "z": 0
+    },
+    "downslope": {
+     "x": -1,
+     "z": 0
+    },
+    "id": "roof-attached-0-plane-low",
+    "pitchDeg": 30,
+    "thickness": 0.28
+   }
+  ],
+  "roofs": [
+   {
+    "eaveOffset": 3.252897,
+    "footprint": {
+     "maxX": 17.21,
+     "maxZ": 14.687012,
+     "minX": 0,
+     "minZ": 6.21
+    },
+    "id": "roof-main",
+    "kind": "GABLE",
+    "overhang": 0,
+    "pitchDeg": 30,
+    "ridgeAxis": "X"
+   }
+  ]
+ },
+ "before": {
+  "chimneys": [
+   {
+    "footprint": {
+     "maxX": 6.660328,
+     "maxZ": 7.061312,
+     "minX": 5.750221,
+     "minZ": 6.649112
+    },
+    "height": 4.772211,
+    "id": "chimney-0"
+   }
+  ],
+  "garageWalls": [
+   {
+    "height": 3.24,
+    "id": "ring-attached-0-0-w0",
+    "topProfile": null
+   },
+   {
+    "height": 3.24,
+    "id": "ring-attached-0-0-w1",
+    "topProfile": null
+   },
+   {
+    "height": 3.24,
+    "id": "ring-attached-0-0-w2",
+    "topProfile": null
+   },
+   {
+    "height": 3.24,
+    "id": "ring-attached-0-0-w3",
+    "topProfile": null
+   }
+  ],
+  "relationships": [],
+  "roofEdges": [],
+  "roofPlanes": [],
+  "roofs": [
+   {
+    "eaveOffset": 3.24,
+    "footprint": {
+     "maxX": 8.224049,
+     "maxZ": 6.21,
+     "minX": 2.051804,
+     "minZ": 0
+    },
+    "id": "roof-attached-0",
+    "kind": "FLAT",
+    "overhang": 0,
+    "pitchDeg": 0,
+    "ridgeAxis": "X"
+   },
+   {
+    "eaveOffset": 3.252897,
+    "footprint": {
+     "maxX": 17.21,
+     "maxZ": 14.687012,
+     "minX": 0,
+     "minZ": 6.21
+    },
+    "id": "roof-main",
+    "kind": "GABLE",
+    "overhang": 0,
+    "pitchDeg": 30,
+    "ridgeAxis": "X"
+   }
+  ]
+ }
+}
