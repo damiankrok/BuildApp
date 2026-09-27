@@ -42,6 +42,14 @@ object Visibility {
             .toSet()
     }
 
+    /**
+     * Everything a mode reads of an object: whether it belongs to the roof,
+     * and its storey. Two objects with the same class are shown or hidden
+     * together by every mode (isolation aside), which is what lets derived
+     * overlays be batched per class instead of per object.
+     */
+    fun classOf(o: SceneObject): String = "${if (o.kind in ROOF_KINDS) "roof" else "body"}@${o.levelId ?: "-"}"
+
     fun isVisible(o: SceneObject, mode: VisibilityMode, groundLevelId: String?): Boolean {
         val isRoof = o.kind in ROOF_KINDS
         return when (mode) {
