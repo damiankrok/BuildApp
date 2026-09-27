@@ -377,7 +377,23 @@ at load).
 
 ## L. Commits pushed
 
-COMMITS_PLACEHOLDER
+On `integration/unified-buildplan-presentation-v1`, pushed to `origin`
+(starting HEAD `c399a299a9a5034eb0242e51292eb3f7326fb17b`):
+
+| commit | what |
+| --- | --- |
+| `d5a4248` | presentation package — feature edges, roof covering, study modes (pure JVM) |
+| `99dfd24` | renderer and viewer — Mode control, overlays, non-shadowing glass, Fit model / Isometric |
+| `72fa89e` | tests and generalization guard |
+| `b34e144` | docs, same-model evidence, stage report, project status |
+| the commit carrying this table | report: commits and CI run |
+
+CI: BuildApp CI run **51** was started by `workflow_dispatch` on `b34e144`
+(the branch name is outside the workflow's push filter):
+https://github.com/damiankrok/BuildApp/actions/runs/36314929333 — its
+`buildplan-model-preview-apks` artifact is the owner's APK. Nothing was
+merged into `claude/buildapp-buildworld-v1-7y6yqh`, and `preview-latest` is
+not republished from this branch.
 
 ## N. Recommended next stage (not implemented)
 
