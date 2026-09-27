@@ -138,6 +138,10 @@ up, and the staircase still rises and turns the same way it does in the model.
 | Engine, view, lights, materials, upload, picking | `render/FilamentModelRenderer.kt` |
 | SurfaceView, swap chain, frame loop, lifecycle | `render/FilamentCanvas.kt` |
 | Part palettes and sRGB → linear | `render/RenderStyle.kt` |
+| Presentation modes, study looks and palette | `presentation/PresentationMode.kt` |
+| Feature-edge classification (pure JVM) | `presentation/FeatureEdges.kt` |
+| Presentation-only roof covering (pure JVM) | `presentation/RoofCover.kt` |
+| The per-model overlay set and its cost | `presentation/ScenePresentation.kt` |
 
 **One entity per semantic object.** A door's frame, leaf, glazing and handle
 are four compiled meshes but one thing a person can tap, so they become one
@@ -168,9 +172,84 @@ its own tangent frame. Filament wants that frame as a quaternion in the
 `TANGENTS` attribute; `TangentFrames.fromNormal` builds it, and a unit test
 checks that rotating +Z by the quaternion returns the normal it was built from.
 
+## Presentation modes (BUILDPLAN-INTEGRATION-003A)
+
+The **Mode** button in the tool row switches between three presentations of
+the same uploaded model. It exists for the owner's comparison gate; it adds no
+navigation.
+
+| Mode | What it draws |
+| --- | --- |
+| **MODEL** (default) | Exactly the presentation this viewer had before: the Style menu below applies, nothing is inked, glazing behaves as before. |
+| **CLAY** | Architectural clay study: a light neutral backdrop, a restrained monochrome value ladder over the bundle's semantic groups, sun shadows and ambient occlusion, **structural** feature edges (the palette's `SOFT` groups), the roof covering, neutral glass that casts no shadow. |
+| **LINE** | Line study: near-uniform surfaces under a soft light on a paper-like ground, no shadows or occlusion, **every** opaque feature edge, no roof covering, neutral glass. |
+
+**Derived once, switched cheaply.** When a model is uploaded,
+`ScenePresentation.of(scene)` derives two overlays from the scene's own
+triangles and nothing else, and they are uploaded with the model:
+
+- **Feature edges** (`FeatureEdges`). Every side of every opaque triangle is
+  classified per object: two faces of the object in one plane on opposite
+  sides of the side are a seam (a triangulation diagonal, the joint between
+  two boxes of one wall) and are never drawn; creases and free boundaries are
+  drawn; a side where a NEIGHBOUR's coplanar face continues the object's face
+  (a butt joint, the storey line on a flush facade) is a *shared seam*, drawn
+  only while no such neighbour is shown — so the facade reads as one surface,
+  and a wall keeps its outline when a layer mode hides its neighbour. Sides
+  are first split at every vertex lying on them (T-junctions), so only the
+  truly shared piece is a seam. Lines are batched per visibility class
+  (`Visibility.classOf`: roof or not, and storey), so a layer mode draws a
+  handful of line renderables rather than one per wall; per-object groups are
+  also uploaded and stand in whenever a class is not shown whole (isolation)
+  or holds the selection (whose lines take the highlight). Tests prove the
+  batched draw equals the per-object rule in every layer state.
+- **Roof covering** (`RoofCover`). The upward faces of an object's `ROOF` /
+  `ROOF_PLANE` parts are grouped by plane; a plane pitched between 12° and 75°
+  is laid with curved tiles in courses on a gauge that divides the slope
+  exactly, trimmed to the plane's real surface (read off its triangles, holes
+  included), so a roof opening the compiler cut is respected because the
+  geometry is. Chimneys and rooflight units are blockers (plan footprint plus
+  a 3 cm flashing gap). A tile that cannot be proved to lie on the surface is
+  left out, never clipped. One batch — one renderable — per roof object,
+  answering a pick with the roof's own id. The module (0.30 × 0.42 m, 0.33 m
+  exposure, camber, lift, step, a short tail skirt so courses read without a
+  high-resolution shadow map) is a display assumption; the roof's planes, area
+  and every quantity are unchanged.
+
+A mode switch rewrites material, light and view parameters (backdrop, sun and
+ambient intensity, shadows, SSAO, FXAA, grid ink, glazing shadow casting,
+surface depth offset) and adds or removes overlay entities. It never
+re-derives or re-uploads anything and never changes visibility, selection or
+the camera; the mode, like the style, survives a model switch.
+
+**Glass.** Each object's translucent parts now sit on a renderable of their
+own over the same buffers, so glazing can stop casting a shadow without the
+frame around it losing its shadow. In CLAY and LINE glazing neither casts nor
+receives shadows and is a neutral sheet, premultiplied as Filament's
+transparent blending expects (alpha 0.40 in CLAY, 0.22 in LINE); MODEL keeps
+the previous behaviour as the comparison baseline. Glazing does not answer a
+pick (blended surfaces are not in Filament's pick pass), so it never steals a
+tap from the frame or the wall behind it; both renderables of an object answer
+with the same id.
+
+| Setting | MODEL (unchanged) | CLAY | LINE |
+| --- | --- | --- | --- |
+| Backdrop (linear) | 0x12151a (sRGB) | 0.58 grey | 0.86 sRGB paper |
+| Sun / ambient | 72 000 lx / 26 000 | 90 000 lx / 48 000 | 30 000 lx / 60 000 |
+| Shadows | on | on | off |
+| SSAO | LOW, r 0.35, per style | LOW, r 0.45, i 0.9, p 1.2 | off |
+| AA | MSAA 4× | MSAA 4× + FXAA | MSAA 4× + FXAA |
+| Edges | none | structural | structural + detail |
+| Roof covering | no | yes | no |
+| Glazing shadows | as before | none | none |
+
+The overlays' cost is measured per model (`ScenePresentation.stats`); see the
+stage report `stage-reports/STAGE_BUILDPLAN_INTEGRATION_003A_UNIFIED_PRESENTATION_FOUNDATION.md`.
+
 ## Styles
 
-The **Style** menu offers three. A style only rewrites material parameters on
+The **Style** menu applies to the MODEL presentation (it is disabled, and says
+so, in CLAY and LINE). It offers three. A style only rewrites material parameters on
 primitives uploaded once: it never changes, hides or re-uploads geometry, so
 no style can hide a geometry defect. The chosen style is kept across a model
 switch.
@@ -206,7 +285,8 @@ reads a corner rather than painting over a crack.
 Translucency is still chosen per part at upload, so glass stays on the
 existing translucent path at alpha 0.35 in every style and a stair placeholder
 stays a marker. The palette's `SOFT` edge, a thin line in the web viewer, is
-not drawn here because this renderer builds no feature-edge geometry.
+not drawn in MODEL; it is what selects the STRUCTURAL feature edges the CLAY
+and LINE modes ink (see Presentation modes).
 
 ## Gestures
 
@@ -354,7 +434,14 @@ any building rather than for one particular house.
 ## Camera presets
 
 Whole house, Axonometric, Front, Rear, Left/West, Right/East, Top, Ground plan,
-Attic plan, Stairs, Entrance — plus **Frame selection** and **Reset**.
+Attic plan, Stairs, Entrance, **Fit model** and **Isometric** — plus **Frame
+selection** and **Reset**.
+
+*Fit model* keeps the current angle and projection and fits the model's
+bounding sphere to the viewport's NARROWER field, so a portrait phone never
+crops the house at the sides. *Isometric* is a true isometric (orthographic,
+yaw 45°, pitch atan(1/√2) ≈ 35.26°), fitted the same way. Both are derived from
+the model's bounds only; every older preset frames exactly as before.
 
 The elevations and plans are **truly orthographic** (`Camera.Projection.ORTHO`),
 not a long-focal-length approximation: an elevation with perspective is not an
@@ -540,9 +627,15 @@ if an APK was not signed by the key in force.
 
 ## Limitations
 
-- **Line-study style is not implemented.** It needs real feature-edge geometry,
-  which this stage did not build. Rather than fake it, the app offers the two
-  required styles — Construction and Clay — and says so.
+- **The presentation modes have not been seen on a GPU in this environment.**
+  The build container has no GPU and no `/dev/kvm`, so CLAY and LINE were
+  verified by JVM tests and by a software raster of the exact uploaded
+  buffers (geometry and ink, not Filament's light); their light, shadow and
+  occlusion values are the owner's to judge on a phone.
+- **Feature edges are classified per scene, not per view.** A crease a
+  neighbour's flush face continues is treated as a shared seam; a crease
+  against an exposed face beside such a continuation (a zero-thickness panel
+  standing on a wall top) is suppressed while the neighbour is shown.
 - **The bundle's `contentHash` is not recomputed on the phone.** Verifying it
   there would mean a second canonical-JSON implementation in Kotlin, which is
   the duplicated authority this architecture avoids. The app checks the

@@ -23,6 +23,7 @@
 | STAGE BUILDAPP-03Y2 — EMBEDDED LOCAL ANALYZER RUNTIME PROOF | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `743bb26dfec85658f643ac71797153832ebd20da`; implementation `ec25e4f`, `1b3e17e`, `55c50cc`; docs: the commit that carries this row (see `stage-reports/STAGE_BUILDAPP_03Y2_EMBEDDED_LOCAL_ANALYZER.md`) | **PASS — proof succeeded; Marcówki confirmed on the owner's phone.** The production analyzer runs inside the APK (nodejs-mobile 18.20.4). On an Android 14 x86_64 emulator in CI it analysed the live Marcówki URL (215.5 s and 142.1 s, peak 1 788 / 1 791 MiB, model `4a8e8ddc…` = desktop) and matched every desktop hash on the fixture. arm64 APK 29 911 875 B (+18 000 437 B). The owner then ran Marcówki locally on the arm64 phone. Recorded at 03Y2: `LOCAL_ANALYZER_PROOF_PARTIAL` (the phone had not been run yet) |
 | STAGE BUILDAPP-03Y2G — GENERIC PLAN DECOMPOSITION + FAILURE DIAGNOSTICS + RARYTASY GENERALIZATION GATE | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `87c05889ade457fc3e6c5055ccff4589bff5c1e5`; implementation `a69af63`, `55f2c1c`, `7cfc534`, `4bc8178`, and the CI/docs commits after them; report `stage-reports/STAGE_BUILDAPP_03Y2G_GENERIC_PLAN_GENERALIZATION.md` | **CURRENT GATE**: **PARTIAL_STAGE_BUILDAPP_03Y2G_OWNER_PHONE_RECHECK_PENDING**. CI run 45 is green on all 10 jobs. The second house completes with one model (`b1d6d7b7…`) on desktop, on a fresh CI runner, on the APK's bundle on Node 18 without ICU, and on the Android 14 emulator (186.1 s, 2 096 MiB); Marcówki is unchanged; the direct APK asset is published; the owner's arm64 phone recheck decides PASS. |
 | STAGE BUILDAPP-03G — ARCHITECTURAL PRIMITIVES AND ASSEMBLIES | `claude/buildapp-buildworld-v1-7y6yqh` | starting HEAD `4d171bd6f85ce172a13bfbe36fff447ffda10c22`; implementation `dd3c72a`, `40b9837`, `2294d5b`; report `281326a` (CI run 49 green on all 11 jobs, `architectural-assemblies` artifact 10921625262); this row's CI note: the commit after it | **PASS_STAGE_BUILDAPP_03G_ARCHITECTURAL_PRIMITIVES_AND_ASSEMBLIES** — schema 1.6.0: primitives, assemblies, typed relationships, UNKNOWN assemblies, capability registry, hypothesis pipeline (synthetic evidence only). 17/17 diversity fixtures and 8/8 pipeline demonstrations pass; Marcówki and the second house build the same buildings (hash changes schema-only, proven byte for byte). Not a claim of automatic recognition: the analyzer emits no 1.6.0 assembly yet. **03Y2G stays the open gate** (owner phone recheck) |
+| STAGE BUILDPLAN-INTEGRATION-003A — UNIFIED PRESENTATION FOUNDATION | `integration/unified-buildplan-presentation-v1` (new branch from `claude/buildapp-buildworld-v1-7y6yqh` @ `c399a299a9a5034eb0242e51292eb3f7326fb17b`; donor BuildPlan-PC-Legacy `main` @ `b0e79675c7ebeacf718cd1392f62272fb400418b`, read only) | the commits listed in `stage-reports/STAGE_BUILDPLAN_INTEGRATION_003A_UNIFIED_PRESENTATION_FOUNDATION.md` | **PASS_BUILDPLAN_INTEGRATION_003A_UNIFIED_PRESENTATION_FOUNDATION** — the Android viewer shows the same BuildApp bundle in MODEL (unchanged), CLAY and LINE, with feature edges, a presentation-only roof covering and non-shadowing glass adapted from the donor viewer; model, compiler, mobile-scene and analyzer untouched, bundles byte-identical. Not seen on a GPU here (no GPU, no KVM): **owner phone visual check pending**; no owner acceptance is claimed. Not merged into the source branch |
 
 ## Current capabilities
 
@@ -598,6 +599,43 @@ the finding-by-finding comparison with the reference model are in
 `ANTHROPIC_API_KEY` in this environment, and `--live` refuses rather than
 pretending.
 
+## Where the unified presentation stands (STAGE BUILDPLAN-INTEGRATION-003A)
+
+First convergence stage of BuildApp and BuildPlan-PC-Legacy: BuildApp's
+analyzer and canonical model, drawn with the donor viewer's generic
+presentation work. On branch `integration/unified-buildplan-presentation-v1`,
+not merged.
+
+- **Modes.** The Android viewer's tool row has **Mode: MODEL / CLAY / LINE**.
+  MODEL is the previous presentation, unchanged, with its Style menu. CLAY is a
+  clay study (monochrome value ladder, shadows, SSAO, structural feature edges,
+  roof tiles, neutral glass); LINE a line study (flat surfaces, every opaque
+  edge, no shadows). A mode switch is parameter writes and entity add/remove
+  only; it never re-derives or re-uploads.
+- **Derived, not canonical.** `presentation/ScenePresentation.of(scene)` builds
+  feature edges (`FeatureEdges`: T-junction splitting, coplanar-seam removal,
+  cross-object shared seams, per-class batching) and the roof covering
+  (`RoofCover`: planes found in the compiled triangles, holes respected,
+  chimney/rooflight blockers, one batch per roof) once per model upload. The
+  bundle, the model and the compiler are untouched; tests hold the assets,
+  the parsed bundle and the uploaded buffers byte-identical across every mode.
+- **Glass** has its own renderable per object, so CLAY and LINE glazing
+  neither casts nor receives shadows; it is a neutral premultiplied sheet.
+- **Presets.** *Fit model* (fits the narrower screen side) and *Isometric*,
+  from the model's bounds only.
+- **Evidence.** `stage-reports/artifacts/integration-003a/`: the BuildApp
+  Marcówki candidate (auto v3) and the second house (live run, model
+  `88c514f5…`) in the three modes, as a JVM raster of the uploaded buffers.
+- **Cost.** Whole-model view of auto v3: 119 renderables before; MODEL 133
+  (glazing split), CLAY 138, LINE 140. The covering adds ≈20–28 k triangles in
+  CLAY only; edges and tiles add about 1 MB of buffers per model.
+- **Guards.** `tests/architecture/presentation.test.ts` fails on a project
+  name, a donor reference coordinate, a benchmark dimension, a donor class or
+  package, or a runtime material compiler in the ported code.
+- **Tests.** Android 309 cases, 0 failures; `npm test` 1 458 passed with one
+  failure that is pre-existing in this container (`apps/analyzer-api` worker,
+  ECONNRESET — identical on the base commit, passes alone).
+
 ## Known limitations
 
 - Each wall end belongs to at most one junction; three walls meeting at a
@@ -636,7 +674,8 @@ pretending.
   tested (89 Kotlin unit tests over the real bundles, plus structural
   verification of the built APK with `aapt2` and `apksigner`). The owner's
   first launch is the first real test of the render path. The preview is also
-  read-only, has no line-study style, and does not recompute the bundle hash
+  read-only (since BUILDPLAN-INTEGRATION-003A it has CLAY and LINE study
+  modes, equally unseen on a GPU here), and does not recompute the bundle hash
   on the phone (that would be a second canonical-JSON implementation in
   Kotlin); it validates structural self-consistency and the shipped index
   instead.
@@ -701,7 +740,13 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 ## Recommended technical next step
 
-**Now: the BUILDAPP-03Y2G owner phone gate** (still open after 03G; the
+**For the integration line: BUILDPLAN-INTEGRATION-003B — the owner's phone
+check of the three presentation modes** (the 003A report's OWNER checklist),
+then a bounded FIX of only what the phone shows. Build the APK from
+`integration/unified-buildplan-presentation-v1` (Actions → BuildApp CI → Run
+workflow on that branch → artifact `buildplan-model-preview-apks`).
+
+**On the source branch: the BUILDAPP-03Y2G owner phone gate** (still open after 03G; the
 `preview-latest` APK carries schema 1.6.0 and the same buildings).
 
 1. Install `BuildPlan-Preview-arm64.apk` from the `preview-latest`
