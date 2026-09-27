@@ -88,6 +88,11 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     var notice by mutableStateOf<String?>(null)
         private set
 
+    /** The notice has been on screen long enough: nothing waits on it. */
+    fun clearNotice() {
+        notice = null
+    }
+
     var downloads by mutableStateOf<List<DownloadedSceneEntry>>(emptyList())
         private set
 

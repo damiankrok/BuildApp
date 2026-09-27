@@ -105,7 +105,7 @@ fun Inspector(
 
                     meta?.evidence?.let { e ->
                         SubHeading(stringResource(R.string.inspector_provenance))
-                        Fact(stringResource(R.string.inspector_status), e.status)
+                        Fact(stringResource(R.string.inspector_status), stringResource(evidenceStatusRes(e.status)))
                         e.source?.let { Fact(stringResource(R.string.inspector_source), it) }
                         e.locator?.let { Fact(stringResource(R.string.inspector_locator), it) }
                         e.interpretation?.let { Fact(stringResource(R.string.inspector_interpretation), it) }
@@ -118,6 +118,7 @@ fun Inspector(
                     }
                     if (technical) {
                         Fact(stringResource(R.string.inspector_id), selected.id)
+                        meta?.evidence?.let { Fact(stringResource(R.string.inspector_status_code), it.status) }
                         Fact(stringResource(R.string.inspector_geometry), stringResource(R.string.inspector_geometry_value, pluralStringResource(R.plurals.count_parts, selected.parts.size, selected.parts.size), pluralStringResource(R.plurals.count_triangles, selected.triangleCount, selected.triangleCount)))
                         Fact(stringResource(R.string.inspector_parts), selected.parts.joinToString(", ") { it.rawPart })
                     }
@@ -162,6 +163,19 @@ private fun Fact(label: String, value: String) {
         )
         Text(text = value, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(0.58f))
     }
+}
+
+/** The model's evidence status in plain words; the code itself stays under "Dane techniczne". */
+@androidx.annotation.StringRes
+fun evidenceStatusRes(status: String): Int = when (status) {
+    "SOURCE_EXACT" -> R.string.evidence_source_exact
+    "SOURCE_CORROBORATED" -> R.string.evidence_source_corroborated
+    "SOURCE_DERIVED" -> R.string.evidence_source_derived
+    "GEOMETRIC_INFERRED" -> R.string.evidence_geometric_inferred
+    "VISUAL_INFERRED" -> R.string.evidence_visual_inferred
+    "ASSUMED" -> R.string.evidence_assumed
+    "UNRESOLVED" -> R.string.evidence_unresolved
+    else -> R.string.evidence_unknown
 }
 
 /** Dimensions read off the converted geometry, to the millimetre. */

@@ -51,6 +51,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
 import com.buildplan.preview.R
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -85,7 +87,7 @@ import kotlin.math.roundToInt
  * model it made.
  *
  * Everything on this screen is what the analyzer reported — the analyzer on
- * this phone (BUILDAPP-03Y2, "Analyzer: Local") or the service. The progress
+ * this phone (BUILDAPP-03Y2, stringResource(R.string.analyzer_mode_local)) or the service. The progress
  * bar is the analyzer's own `progress` and moves only when it reports; the
  * checklist is its stages. For a local run the elapsed time and memory are
  * the analyzer process's own numbers. There is no reference model, benchmark
@@ -123,6 +125,13 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
                     if (model.mode == AnalyzerMode.SERVICE) ServiceRow(model)
                     LinkForm(model)
                     model.notice?.let { StatusText(it, color = MaterialTheme.colorScheme.onSurface) }
+                    // A notice nothing waits on leaves by itself.
+                    LaunchedEffect(model.notice) {
+                        if (model.notice != null) {
+                            delay(NOTICE_MS)
+                            model.clearNotice()
+                        }
+                    }
                     JobSection(model, onOpenScene)
                 }
                 HorizontalDivider()
@@ -145,10 +154,10 @@ private fun ModeRow(model: AnalyzerViewModel) {
     val local = model.mode == AnalyzerMode.LOCAL
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(
-            if (local) "Analyzer: Local" else "Analyzer: Service",
+            if (local) stringResource(R.string.analyzer_mode_local) else stringResource(R.string.analyzer_mode_service),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.semantics { heading(); contentDescription = if (local) "Analyzer: Local, on this phone" else "Analyzer: Service" },
+            modifier = Modifier.semantics { heading() },
         )
         if (local) {
             Body(
@@ -162,7 +171,7 @@ private fun ModeRow(model: AnalyzerViewModel) {
             onClick = { model.selectMode(if (local) AnalyzerMode.SERVICE else AnalyzerMode.LOCAL) },
             enabled = !model.isRunning && (local || model.localAvailability.available),
             modifier = Modifier.defaultMinSize(minHeight = 48.dp),
-        ) { Text(if (local) "Use the analyzer service instead" else "Analyze on this phone instead") }
+        ) { Text(if (local) stringResource(R.string.analyzer_use_service) else stringResource(R.string.analyzer_use_local)) }
     }
 }
 
@@ -202,13 +211,13 @@ private fun ServiceRow(model: AnalyzerViewModel) {
             TextButton(
                 onClick = { editing = !editing },
                 enabled = !model.isRunning,
-                modifier = Modifier.semantics { contentDescription = "Change the analyzer service address" },
-            ) { Text(if (editing) "Close" else "Change") }
+                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
+            ) { Text(if (editing) stringResource(R.string.analyzer_close) else stringResource(R.string.analyzer_change)) }
         }
         if (editing && !model.isRunning) {
             AddressEditor(model, initial = model.serviceAddress.ifEmpty { model.effectiveBaseUrl.orEmpty() }, onDone = { editing = false })
             if (model.serviceAddress.isNotEmpty() && AnalyzerAddress.normalize(model.builtInAddress) != null) {
-                TextButton(onClick = { model.saveServiceAddress(""); editing = false }) { Text("Use the address built into this app") }
+                TextButton(onClick = { model.saveServiceAddress(""); editing = false }) { Text(stringResource(R.string.analyzer_builtin_address)) }
             }
         }
     }
@@ -225,7 +234,7 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
     OutlinedTextField(
         value = text,
         onValueChange = { text = it; problem = null },
-        label = { Text("Service address") },
+        label = { Text(stringResource(R.string.analyzer_address)) },
         placeholder = { Text("https://analyzer.example.com") },
         singleLine = true,
         isError = problem != null,
@@ -234,7 +243,7 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
         keyboardActions = KeyboardActions(onDone = { save() }),
         modifier = Modifier.fillMaxWidth(),
     )
-    Button(onClick = { save() }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text("Save address") }
+    Button(onClick = { save() }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_save_address)) }
 }
 
 // ---------------------------------------------------------------------------
@@ -243,11 +252,12 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
 
 @Composable
 private fun LinkForm(model: AnalyzerViewModel) {
+    val analyzeDescription = stringResource(if (model.isRunning) R.string.analyzer_analyze_disabled else R.string.analyzer_analyze)
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         OutlinedTextField(
             value = model.link,
             onValueChange = model::onLinkChange,
-            label = { Text("Project page link") },
+            label = { Text(stringResource(R.string.analyzer_link)) },
             placeholder = { Text("https://www.archon.pl/projekty-domow/…") },
             singleLine = true,
             enabled = !model.isRunning,
@@ -263,9 +273,9 @@ private fun LinkForm(model: AnalyzerViewModel) {
             modifier = Modifier
                 .defaultMinSize(minHeight = 48.dp)
                 .semantics {
-                    contentDescription = if (model.isRunning) "Analyze project. Disabled while an analysis runs." else "Analyze project"
+                    contentDescription = analyzeDescription
                 },
-        ) { Text("Analyze project") }
+        ) { Text(stringResource(R.string.analyzer_analyze)) }
     }
 }
 
@@ -276,7 +286,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         is AnalysisState.Submitting -> Row(verticalAlignment = Alignment.CenterVertically) {
             CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
             Box(Modifier.width(10.dp))
-            Body(if (model.mode == AnalyzerMode.LOCAL) "Preparing the analyzer on this phone…" else "Sending the link to the analyzer…")
+            Body(if (model.mode == AnalyzerMode.LOCAL) stringResource(R.string.analyzer_preparing_local) else stringResource(R.string.analyzer_sending))
         }
         is AnalysisState.Polling -> JobProgress(
             status = state.status,
@@ -289,7 +299,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         )
         is AnalysisState.Finishing -> JobProgress(
             status = state.status,
-            headline = if (state.local != null) "Analysis finished. Checking and storing the model…" else "Analysis finished. Downloading and checking the model…",
+            headline = if (state.local != null) stringResource(R.string.analyzer_finishing_local) else stringResource(R.string.analyzer_finishing_service),
             connectionLost = state.connectionLost,
             lastFailure = state.lastFailure,
             cancelling = false,
@@ -311,11 +321,11 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
             state.status?.let { Checklist(StageChecklist.rows(it)) }
         }
         is AnalysisState.Cancelled -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("The analysis was cancelled.", style = MaterialTheme.typography.titleSmall)
+            Text(stringResource(R.string.analyzer_cancelled), style = MaterialTheme.typography.titleSmall)
             state.local?.let { LocalCost(it) }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(onClick = { model.analyze() }, enabled = model.link.isNotBlank()) { Text("Analyze again") }
-                TextButton(onClick = { model.dismiss() }) { Text("Dismiss") }
+                Button(onClick = { model.analyze() }, enabled = model.link.isNotBlank()) { Text(stringResource(R.string.analyzer_again)) }
+                TextButton(onClick = { model.dismiss() }) { Text(stringResource(R.string.analyzer_dismiss)) }
             }
         }
     }
@@ -337,9 +347,9 @@ private fun JobProgress(
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(
             headline ?: when {
-                status == null -> "Asking the analyzer how the job is going…"
-                status.status == LocalAnalysis.STARTING -> "Starting the analyzer on this phone…"
-                status.status == AnalysisStages.QUEUED -> "Waiting in the analyzer's queue"
+                status == null -> stringResource(R.string.analyzer_asking)
+                status.status == LocalAnalysis.STARTING -> stringResource(R.string.analyzer_starting_local)
+                status.status == AnalysisStages.QUEUED -> stringResource(R.string.analyzer_queued)
                 stage != null -> stage.label.ifBlank { AnalysisStages.DEFAULT_LABELS[stage.id] ?: stage.id }
                 else -> status.status
             },
@@ -361,9 +371,9 @@ private fun JobProgress(
         if (connectionLost) {
             Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
                 Column(Modifier.padding(10.dp)) {
-                    Text("Connection lost — retrying", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.analyzer_connection_lost), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.error)
                     lastFailure?.let { StatusText(AnalyzerMessages.describe(it)) }
-                    StatusText("The job keeps running on the service; this screen picks it up again when the connection returns.")
+                    StatusText(stringResource(R.string.analyzer_connection_lost_detail))
                 }
             }
         }
@@ -372,8 +382,8 @@ private fun JobProgress(
             OutlinedButton(
                 onClick = onCancel,
                 enabled = !cancelling,
-                modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Cancel the analysis" },
-            ) { Text(if (cancelling) "Cancelling…" else "Cancel") }
+                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
+            ) { Text(if (cancelling) stringResource(R.string.analyzer_cancelling) else stringResource(R.string.analyzer_cancel)) }
         }
     }
 }
@@ -427,7 +437,7 @@ private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: (
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Filled.Warning, null, tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
                 Box(Modifier.width(8.dp))
-                Text(details?.title ?: "No model this time", style = MaterialTheme.typography.titleSmall)
+                Text(details?.title ?: stringResource(R.string.analyzer_no_model), style = MaterialTheme.typography.titleSmall)
             }
             // BUILDAPP-03Y2G: where it stopped and the analyzer's own reason, not only "it failed".
             if (details != null && failed != null) {
@@ -451,22 +461,22 @@ private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: (
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (retry != RetryAction.NONE) {
                     Button(onClick = onRetry, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
-                        Text(if (retry == RetryAction.REFINISH) "Download again" else "Retry")
+                        Text(if (retry == RetryAction.REFINISH) stringResource(R.string.analyzer_download_again) else stringResource(R.string.analyzer_retry))
                     }
                 }
-                TextButton(onClick = onDismiss, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text("Dismiss") }
+                TextButton(onClick = onDismiss, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_dismiss)) }
             }
             if (failed != null) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     TextButton(
                         onClick = { clipboard.setText(AnnotatedString(failed.diagnosticCode)) },
                         modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Copy diagnostic code ${failed.diagnosticCode}" },
-                    ) { Text("Copy code") }
+                    ) { Text(stringResource(R.string.analyzer_copy_code)) }
                     if (details != null) {
-                        TextButton(onClick = { showDetails = !showDetails }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(if (showDetails) "Hide details" else "Show details") }
+                        TextButton(onClick = { showDetails = !showDetails }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(if (showDetails) stringResource(R.string.analyzer_hide_details) else stringResource(R.string.analyzer_show_details)) }
                     }
                     if (onShare != null) {
-                        TextButton(onClick = onShare, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text("Share diagnostics") }
+                        TextButton(onClick = onShare, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_share_diagnostics)) }
                     }
                 }
             }
@@ -498,12 +508,12 @@ private fun ResultCard(summary: AnalysisSummary, entry: DownloadedSceneEntry, lo
             Button(
                 onClick = onOpen,
                 modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Open model ${entry.label} in the viewer" },
-            ) { Text("Open model") }
+            ) { Text(stringResource(R.string.analyzer_open_model)) }
             TextButton(
                 onClick = { diagnostics = !diagnostics },
-                modifier = Modifier.semantics { contentDescription = if (diagnostics) "Hide diagnostics" else "Show diagnostics" },
+                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
             ) {
-                Text("Diagnostics")
+                Text(stringResource(R.string.analyzer_diagnostics))
                 Icon(if (diagnostics) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown, contentDescription = null)
             }
             if (diagnostics) {
@@ -706,7 +716,7 @@ private fun megabytes(bytes: Long, decimals: Int = 0): String = "%.${decimals}f 
 private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     var confirmDelete by remember { mutableStateOf<DownloadedSceneEntry?>(null) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text("Analyses on this phone", style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
+        Text(stringResource(R.string.analyzer_downloads), style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
         val entries = model.downloads
         if (entries.isEmpty()) {
             Body("None yet. A finished analysis — made on this phone or downloaded — is kept here and in the Model menu.")
@@ -724,14 +734,14 @@ private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
                         Button(
                             onClick = { onOpenScene(entry.key) },
                             modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Open ${entry.label}" },
-                        ) { Text("Open") }
+                        ) { Text(stringResource(R.string.analyzer_open)) }
                         TextButton(
                             onClick = { confirmDelete = entry },
                             modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Delete ${entry.label} from this phone" },
                         ) {
                             Icon(Icons.Filled.Delete, contentDescription = null, modifier = Modifier.size(18.dp))
                             Box(Modifier.width(4.dp))
-                            Text("Delete")
+                            Text(stringResource(R.string.analyzer_delete))
                         }
                     }
                 }
@@ -741,12 +751,12 @@ private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     confirmDelete?.let { entry ->
         AlertDialog(
             onDismissRequest = { confirmDelete = null },
-            title = { Text("Delete this analysis?") },
+            title = { Text(stringResource(R.string.analyzer_delete_title)) },
             text = { Text("${entry.label} will be removed from this phone. The link can be analyzed again at any time.") },
             confirmButton = {
-                TextButton(onClick = { model.deleteDownload(entry.key); confirmDelete = null }) { Text("Delete") }
+                TextButton(onClick = { model.deleteDownload(entry.key); confirmDelete = null }) { Text(stringResource(R.string.analyzer_delete)) }
             },
-            dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text("Keep") } },
+            dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text(stringResource(R.string.analyzer_keep)) } },
         )
     }
 }
@@ -794,3 +804,5 @@ private fun hostOf(url: String): String = try {
 } catch (e: Exception) {
     url
 }
+
+private const val NOTICE_MS = 6_000L

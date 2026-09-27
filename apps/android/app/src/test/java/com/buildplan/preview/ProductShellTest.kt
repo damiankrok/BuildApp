@@ -7,6 +7,7 @@ import com.buildplan.preview.scene.VisibilityMode
 import com.buildplan.preview.ui.AppPlace
 import com.buildplan.preview.ui.ShellState
 import com.buildplan.preview.ui.descriptionRes
+import com.buildplan.preview.ui.evidenceStatusRes
 import com.buildplan.preview.ui.labelRes
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -87,6 +88,16 @@ class ProductShellTest {
         // Distinct names: two views called the same would be two buttons nobody can tell apart.
         assertEquals(ViewPreset.entries.size, ViewPreset.entries.map { string(it.labelRes()) }.toSet().size)
         assertEquals(listOf("Model", "Makieta", "Kreska"), PresentationMode.entries.map { string(it.labelRes()) })
+    }
+
+    @Test
+    fun `every evidence status of the model reads in plain Polish, never as its code`() {
+        // The model's EVIDENCE_STATUSES (packages/model/src/evidence.ts).
+        val statuses = listOf("SOURCE_EXACT", "SOURCE_CORROBORATED", "SOURCE_DERIVED", "GEOMETRIC_INFERRED", "VISUAL_INFERRED", "ASSUMED", "UNRESOLVED")
+        val words = statuses.map { string(evidenceStatusRes(it)) }
+        assertEquals(statuses.size, words.toSet().size)
+        for ((code, text) in statuses.zip(words)) assertFalse("$code reads as a code: $text", text.contains('_'))
+        assertEquals(string(evidenceStatusRes("SOMETHING_NEW")), string(evidenceStatusRes("ANOTHER")))
     }
 
     @Test
