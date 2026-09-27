@@ -115,7 +115,6 @@ object FeatureEdges {
      */
     fun compute(sources: List<EdgeSource>): FeatureEdgeSet {
         val vertices = VertexTable()
-        val faces = ArrayList<Face>()
         val sides = LinkedHashMap<Long, MutableList<SideFace>>()
 
         for ((objectIndex, source) in sources.withIndex()) {
@@ -127,7 +126,6 @@ object FeatureEdges {
                 if (a == b || b == c || a == c) continue
                 val normal = vertices.normalOf(a, b, c) ?: continue
                 val face = Face(objectIndex, source.tiers[t], normal)
-                faces.add(face)
                 addSide(sides, vertices, face, a, b, c)
                 addSide(sides, vertices, face, b, c, a)
                 addSide(sides, vertices, face, c, a, b)
