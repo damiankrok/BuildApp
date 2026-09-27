@@ -409,9 +409,14 @@ dependencies {
 
     testImplementation(libs.junit)
 
-    // The on-device test of the local analyzer (src/androidTest): runs on an emulator in CI.
+    // The on-device tests (src/androidTest), run on an emulator in CI: the local
+    // analyzer, and the 3D place reached through the real navigation (INTEGRATION-003C),
+    // which drives Compose by its semantics and presses the system back key.
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
 // ---------------------------------------------------------------------------

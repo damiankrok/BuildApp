@@ -10,7 +10,9 @@ import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.PoseAnimation
 import com.buildplan.preview.camera.ViewPreset
 import com.buildplan.preview.presentation.PresentationMode
+import com.buildplan.preview.render.RenderDiagnostics
 import com.buildplan.preview.render.RenderStyle
+import com.buildplan.preview.render.RenderSurfaceKind
 import com.buildplan.preview.scene.DownloadedScenes
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneEntry
@@ -59,6 +61,15 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     var viewportHeightPx: Int = 1
 
     var viewportWidthPx: Int = 1
+
+    /**
+     * Which Android surface the viewport renders into. A launch extra can pick
+     * the other one for a device comparison ([RenderSurfaceKind.EXTRA]).
+     */
+    var renderSurfaceKind: RenderSurfaceKind = RenderSurfaceKind.DEFAULT
+
+    /** The counters of the viewport on screen now, or null when no viewport is composed. */
+    @Volatile var renderDiagnostics: RenderDiagnostics? = null
 
     /** Width over height of the viewport, for presets that fit the model to the screen. */
     private val viewportAspect: Double get() = if (viewportHeightPx > 0) viewportWidthPx.toDouble() / viewportHeightPx else 1.0

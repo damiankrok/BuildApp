@@ -26,7 +26,8 @@ import com.buildplan.preview.render.PickOutcome
 import com.buildplan.preview.scene.ModelScene
 
 /**
- * The 3D viewport: a Filament SurfaceView with the touch model on top of it.
+ * The 3D viewport: a Filament render surface ([FilamentCanvas]) with the touch
+ * model on top of it.
  *
  * The gesture loop is written out rather than assembled from the stock
  * detectors because the difference that matters — one finger orbits, two
@@ -44,8 +45,15 @@ fun Viewport(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val canvas = remember { FilamentCanvas(context) }
+    val canvas = remember { FilamentCanvas(context, model.renderSurfaceKind) }
     val lifecycleOwner = LocalLifecycleOwner.current
+
+    // The live canvas's counters, readable by a device test through the view
+    // model; cleared again when this viewport leaves the composition.
+    DisposableEffect(canvas) {
+        model.renderDiagnostics = canvas.diagnostics
+        onDispose { if (model.renderDiagnostics === canvas.diagnostics) model.renderDiagnostics = null }
+    }
 
     // Upload geometry once per model, never per frame. Keyed on the scene
     // itself, so opening a different building — or the same one again after a
@@ -129,7 +137,7 @@ fun Viewport(
                 }
             },
     ) {
-        AndroidView(factory = { canvas.surfaceView }, modifier = Modifier.fillMaxSize())
+        AndroidView(factory = { canvas.view }, modifier = Modifier.fillMaxSize())
     }
 }
 

@@ -64,12 +64,16 @@ import kotlin.math.max
  * semantic object whose geometry it was derived from, so selection and
  * picking still resolve to BuildApp object ids and nothing else.
  */
-class FilamentModelRenderer(private val assets: AssetManager) {
+class FilamentModelRenderer(
+    private val assets: AssetManager,
+    /** Counts what this renderer does, for logs and device tests; never changes what is drawn. */
+    private val diagnostics: RenderDiagnostics = RenderDiagnostics(RenderSurfaceKind.DEFAULT),
+) {
 
     val engine: Engine = run {
         // Loads libfilament-jni before any Filament class touches native code.
         com.google.android.filament.Filament.init()
-        Engine.create()
+        Engine.create().also { RenderDiagnostics.liveEngines.incrementAndGet() }
     }
     /** Also handed to `DisplayHelper` so Filament can pace to the display. */
     val renderer: Renderer = engine.createRenderer()
@@ -235,6 +239,9 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         currentState = null
         visibleNow = emptySet()
         overlaysNow = emptySet()
+        diagnostics.modelUploads += 1
+        diagnostics.renderableObjects = model?.all?.size ?: 0
+        diagnostics.visibleObjects = 0
     }
 
     /**
@@ -269,6 +276,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             for (id in visibleNow - visible) entities.byId[id]?.surfaces?.forEach { filamentScene.removeEntity(it) }
             for (id in visible - visibleNow) entities.byId[id]?.surfaces?.forEach { filamentScene.addEntity(it) }
             visibleNow = visible
+            diagnostics.visibleObjects = visible.count { entities.byId[it] != null }
         }
 
         val overlays = entities.overlaysFor(visible, mode, state.selectedObjectId)
@@ -308,6 +316,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         val eye = orbit.eye(pose)
         val target = pose.target
         val up = orbit.basis(pose).up
+        diagnostics.cameraFinite = eye.isFinite() && target.isFinite() && up.isFinite()
         camera.lookAt(eye.x, eye.y, eye.z, target.x, target.y, target.z, up.x, up.y, up.z)
 
         val (near, far) = orbit.clipPlanes(pose)
@@ -334,6 +343,8 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         viewportWidth = max(1, width)
         viewportHeight = max(1, height)
         view.viewport = Viewport(0, 0, viewportWidth, viewportHeight)
+        diagnostics.viewportWidth = width
+        diagnostics.viewportHeight = height
     }
 
     // -----------------------------------------------------------------------
@@ -377,11 +388,13 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     // Frames
     // -----------------------------------------------------------------------
 
-    fun render(swapChain: SwapChain, frameTimeNanos: Long) {
-        if (renderer.beginFrame(swapChain, frameTimeNanos)) {
-            renderer.render(view)
-            renderer.endFrame()
-        }
+    /** Draw one frame; false when Filament skipped it (frame pacing). */
+    fun render(swapChain: SwapChain, frameTimeNanos: Long): Boolean {
+        diagnostics.sceneRenderables = filamentScene.renderableCount
+        if (!renderer.beginFrame(swapChain, frameTimeNanos)) return false
+        renderer.render(view)
+        renderer.endFrame()
+        return true
     }
 
     fun createSwapChain(surface: Any, flags: Long): SwapChain = engine.createSwapChain(surface, flags)
@@ -430,6 +443,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         engine.destroyCameraComponent(cameraEntity)
         EntityManager.get().destroy(cameraEntity)
         engine.destroy()
+        RenderDiagnostics.liveEngines.decrementAndGet()
     }
 
     companion object {

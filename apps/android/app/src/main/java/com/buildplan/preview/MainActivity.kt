@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.buildplan.preview.render.RenderSurfaceKind
 import com.buildplan.preview.ui.AnalyzerViewModel
 import com.buildplan.preview.ui.AppShell
 import com.buildplan.preview.ui.PreviewTheme
@@ -24,16 +25,20 @@ import com.buildplan.preview.ui.ShellState
  *
  * A launch may name the place to open (`ShellState.EXTRA_PLACE`: `HOUSE`,
  * `MODEL`, `STAGES`, `COSTS`, `DOCUMENTS` or `ANALYZER`), which is how the CI
- * screenshots reach every place without tapping coordinates.
+ * screenshots reach every place without tapping coordinates. Another
+ * (`RenderSurfaceKind.EXTRA`) picks the render surface for a device
+ * comparison.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         val initial = ShellState.decode(intent?.getStringExtra(ShellState.EXTRA_PLACE)) ?: ShellState()
+        val surface = RenderSurfaceKind.decode(intent?.getStringExtra(RenderSurfaceKind.EXTRA))
         setContent {
             PreviewTheme {
                 val model: PreviewViewModel = viewModel()
+                surface?.let { model.renderSurfaceKind = it }
                 val analyzer: AnalyzerViewModel = viewModel()
                 AppShell(preview = model, analyzer = analyzer, initial = initial)
             }

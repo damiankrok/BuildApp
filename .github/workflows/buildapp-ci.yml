@@ -8,6 +8,13 @@ on:
       - "orchestrator/**"
   pull_request:
   workflow_dispatch:
+    inputs:
+      owner_apk:
+        # A diagnostic dispatch (evidence only) must not replace the OWNER's
+        # installed test build; the default keeps every other dispatch as it was.
+        description: "Publish the arm64 APK to owner-preview-latest"
+        type: boolean
+        default: true
 
 concurrency:
   group: buildapp-ci-${{ github.workflow }}-${{ github.ref }}
@@ -700,7 +707,7 @@ jobs:
     # they are, for diagnostics.
     name: Android / OWNER direct APK (owner-preview-latest)
     needs: android
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' && inputs.owner_apk
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
