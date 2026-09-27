@@ -8,8 +8,8 @@ it as the `architectural-assemblies` artifact.
 
 ## Verdict
 
-**PASS_STAGE_BUILDAPP_03G_ARCHITECTURAL_PRIMITIVES_AND_ASSEMBLIES** — see
-**CI** for the run it rests on.
+**PASS_STAGE_BUILDAPP_03G_ARCHITECTURAL_PRIMITIVES_AND_ASSEMBLIES** — CI run
+49 is green on all 11 jobs, including the new `architectural-assemblies`.
 
 BuildApp now describes a building in a general language instead of one house
 type per project:
@@ -738,8 +738,31 @@ Its roof graph (GABLE + FLAT, legacy) and assembly tree are in the artifact.
 - Both were fixed in `2294d5b`: the record was restated, and the spec now
   compares with the 1.6.0 freeze.
 
-**Run 48** (`2294d5b`) and the final commit's run are recorded in
-`PROJECT_STATUS.md`. Locally on the final tree:
+**Run 48** (`2294d5b`) was cancelled by the workflow's concurrency rule
+when the next commit was pushed. Before that, Core (every gate), Browser,
+Android, the preview APK, the container and the dependency audit were green
+on it.
+
+**Run 49** ([36286878530](https://github.com/damiankrok/BuildApp/actions/runs/36286878530),
+commit `281326a`, the report commit) is **green on all 11 jobs**:
+
+- Core / Analyzer / Reconstruction, with all seven gates;
+- Browser / Playwright;
+- Android / APK;
+- Local analyzer / Node 18 parity;
+- Local analyzer / APK size + emulator;
+- Second house / generalization;
+- **Architecture / assemblies**, new;
+- Analyzer API / container and deploy (skipped, no credential);
+- Dependency security;
+- Android / direct APK.
+
+The new job logged `fixtures 17/17, demos 8/8, regressions
+marcowki-auto-v3, rarytasy` and uploaded `architectural-assemblies`
+(artifact 10921625262, 134 files). The only later commit records this run
+in the docs.
+
+Locally on the final tree:
 
 | check | result |
 | --- | --- |
@@ -758,7 +781,8 @@ uploads `architectural-assemblies`. It fails if a fixture or a demo fails.
 
 The `preview-release` job is unchanged. It republishes
 `BuildPlan-Preview-arm64.apk` as a direct asset of the `preview-latest`
-prerelease on every push (green in run 47). The APK ships no fixture. Its
+prerelease on every push (green in runs 47 and 49). The APK carries schema
+1.6.0 and the same Marcówki and second-house buildings. The APK ships no fixture. Its
 scene assets are the regenerated 1.6.0 bundles.
 
 ## KNOWN LIMITATIONS
