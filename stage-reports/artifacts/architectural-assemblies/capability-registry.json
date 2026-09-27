@@ -1,0 +1,1545 @@
+{
+  "assemblies": [
+    {
+      "completeWhen": "it has at least one plane (a roof assembly cannot exist without one)",
+      "components": {
+        "chimneyIds": "chimney",
+        "dormerIds": "DormerAssembly",
+        "edgeIds": "Ridge / HipEdge / Valley / RoofStep / Verge / Eave / RoofBoundary",
+        "openingIds": "RoofOpening",
+        "planeIds": "RoofPlane",
+        "trimIds": "Fascia / Parapet"
+      },
+      "description": "A roof composed of planes and the edges between them. Its classification (GABLE, HIP, …) describes the graph; the planes and edges define it.",
+      "kind": "ROOF",
+      "name": "RoofAssembly"
+    },
+    {
+      "completeWhen": "it has its cut in the host, its local roof and at least one wall",
+      "components": {
+        "cutOpeningId": "RoofOpening (DORMER)",
+        "hostPlaneIds": "RoofPlane",
+        "hostRoofAssemblyId": "RoofAssembly",
+        "localRoofAssemblyId": "RoofAssembly",
+        "openingIds": "Opening",
+        "wallIds": "Wall (front wall and cheek panels)"
+      },
+      "description": "A small roof on a front wall and cheeks, standing in a cut in a host roof plane, its planes dying into the host along valleys.",
+      "kind": "DORMER",
+      "name": "DormerAssembly"
+    },
+    {
+      "completeWhen": "it has its slab",
+      "components": {
+        "platformId": "BalconySlab",
+        "railingIds": "Guard / RailingRun",
+        "supportIds": "Column / Post / Wall"
+      },
+      "description": "An elevated exterior platform carried by the building, with its guards and supports.",
+      "kind": "BALCONY",
+      "name": "BalconyAssembly"
+    },
+    {
+      "completeWhen": "it has its surface",
+      "components": {
+        "platformId": "TerraceSurface / Landing",
+        "railingIds": "Guard",
+        "supportIds": "Wall"
+      },
+      "description": "An exterior platform at or near grade, against the facade it serves.",
+      "kind": "TERRACE",
+      "name": "TerraceAssembly"
+    },
+    {
+      "completeWhen": "it has its floor",
+      "components": {
+        "platformId": "BalconySlab / TerraceSurface",
+        "railingIds": "Guard",
+        "recessWallIds": "Wall",
+        "supportIds": "Wall / Column"
+      },
+      "description": "A recessed exterior space within the building envelope: its floor, the walls it is recessed between, its guards.",
+      "kind": "LOGGIA",
+      "name": "LoggiaAssembly"
+    },
+    {
+      "completeWhen": "it has a cover (a roof assembly or a slab) and something that carries it (supports or a host)",
+      "components": {
+        "beamIds": "Beam",
+        "roofAssemblyId": "RoofAssembly",
+        "slabId": "Slab / platform",
+        "supportIds": "Column / Post / Wall"
+      },
+      "description": "A cover over an exterior area, open on its sides: an entrance canopy, a covered terrace, a shelter. No roof evidence, no roof: a canopy without a cover is partial.",
+      "kind": "CANOPY",
+      "name": "CanopyAssembly"
+    },
+    {
+      "completeWhen": "it has a cover and something that carries it",
+      "components": {
+        "beamIds": "Beam",
+        "roofAssemblyId": "RoofAssembly",
+        "slabId": "Slab / platform",
+        "supportIds": "Column / Post / Wall"
+      },
+      "description": "A covered, open-sided parking bay: a canopy for vehicles.",
+      "kind": "CARPORT",
+      "name": "CarportAssembly"
+    },
+    {
+      "completeWhen": "it has posts (or a host it hangs from) and primary beams",
+      "components": {
+        "postIds": "PergolaPost / Post / Column",
+        "primaryBeamIds": "PergolaBeam / Beam",
+        "secondaryBeamIds": "PergolaBeam / Beam",
+        "slabOrTerraceId": "TerraceSurface / Landing / Slab"
+      },
+      "description": "An open frame of posts, primary beams and secondary beams. Repeated beams are not a roof: a pergola has no cover, and a roof covering it makes it a canopy (PERGOLA_HAS_ROOF).",
+      "kind": "PERGOLA",
+      "name": "PergolaAssembly"
+    },
+    {
+      "completeWhen": "it has its door",
+      "components": {
+        "canopyId": "CanopyAssembly",
+        "doorId": "Door",
+        "landingId": "Landing / TerraceSurface",
+        "railingIds": "Guard / Handrail",
+        "stepRunIds": "ExteriorStepRun",
+        "supportIds": "Column / Post"
+      },
+      "description": "An entrance: its door, the landing in front of it, the exterior steps up to it, a canopy over it, their supports and guards.",
+      "kind": "ENTRANCE",
+      "name": "EntranceAssembly"
+    },
+    {
+      "completeWhen": "it has at least one step run",
+      "components": {
+        "landingIds": "Landing",
+        "railingIds": "Handrail / Guard",
+        "stepRunIds": "ExteriorStepRun"
+      },
+      "description": "Exterior steps and their landings, never the interior stair system.",
+      "kind": "EXTERIOR_STAIR",
+      "name": "ExteriorStairAssembly"
+    },
+    {
+      "completeWhen": "it has at least one wall (a facade cannot exist without one)",
+      "components": {
+        "memberIds": "Column / Beam / Lintel / facade member",
+        "openingIds": "Opening",
+        "regionIds": "SurfaceRegion",
+        "wallIds": "Wall"
+      },
+      "description": "One facade of the building: its walls, openings, members and finish regions.",
+      "kind": "FACADE",
+      "name": "FacadeAssembly"
+    },
+    {
+      "completeWhen": "it has walls and a door",
+      "components": {
+        "doorIds": "GarageDoor / Door",
+        "roofAssemblyId": "RoofAssembly",
+        "roofIds": "legacy roof",
+        "wallIds": "Wall"
+      },
+      "description": "A garage: its walls, its garage doors and its roof.",
+      "kind": "GARAGE",
+      "name": "GarageAssembly"
+    },
+    {
+      "completeWhen": "never: an unknown assembly is PARTIAL or FRAGMENTARY by definition",
+      "components": {
+        "hostIds": "what it is attached to",
+        "sourceEvidenceIds": "evidence sources (model.evidenceSources)"
+      },
+      "description": "Source-supported geometry that cannot be classified reliably: where it is, what was measured, what it might be, and why it is unresolved. Never forced into a known kind, never dropped, never anonymous mesh.",
+      "kind": "UNKNOWN",
+      "name": "UnknownArchitecturalAssembly"
+    }
+  ],
+  "capabilities": [
+    {
+      "demos": [
+        "roof-intersecting"
+      ],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "Ridge",
+        "Eave",
+        "Verge",
+        "Fascia",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "roof lines (ridges, hips, valleys) corroborating how the planes join",
+          "id": "roof-lines",
+          "kinds": [
+            "ROOF_LINE"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "a printed pitch or level datum",
+          "id": "roof-pitch",
+          "kinds": [
+            "PRINTED_DIMENSION"
+          ],
+          "minCount": 1,
+          "quantities": [
+            "roof."
+          ],
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-gable"
+      ],
+      "key": "ROOF_GABLE",
+      "knownGaps": [
+        "the analyzer does not yet emit roof planes directly"
+      ],
+      "notes": [
+        "a gable is two planes, a ridge, two eaves and four verges; the GABLE label describes the graph",
+        "the production analyzer emits gables as the legacy rectangular Roof, whose plane graph `legacyRoofGraph` derives exactly"
+      ],
+      "recognition": "ANALYZER_V2",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "roof-hip"
+      ],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "HipEdge",
+        "Ridge",
+        "Eave",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "roof lines (ridges, hips, valleys) corroborating how the planes join",
+          "id": "roof-lines",
+          "kinds": [
+            "ROOF_LINE"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "a printed pitch or level datum",
+          "id": "roof-pitch",
+          "kinds": [
+            "PRINTED_DIMENSION"
+          ],
+          "minCount": 1,
+          "quantities": [
+            "roof."
+          ],
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-hip"
+      ],
+      "key": "ROOF_HIP",
+      "knownGaps": [
+        "half-hips are representable as planes but have no fixture"
+      ],
+      "notes": [
+        "a hip is four planes, four hips and a ridge (or an apex); CONNECT_ROOF_PLANES AUTO reads a sloping convex crease as a hip"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "Eave",
+        "Verge",
+        "RoofBoundary",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "a printed pitch or level datum",
+          "id": "roof-pitch",
+          "kinds": [
+            "PRINTED_DIMENSION"
+          ],
+          "minCount": 1,
+          "quantities": [
+            "roof."
+          ],
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-shed"
+      ],
+      "key": "ROOF_SHED",
+      "knownGaps": [],
+      "notes": [
+        "one plane; its high edge is a BOUNDARY (or an ABUTMENT against a wall rising past it)"
+      ],
+      "recognition": "NONE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "RoofBoundary",
+        "Parapet",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-flat-parapet"
+      ],
+      "key": "ROOF_FLAT",
+      "knownGaps": [
+        "roof falls (a flat roof's drainage slope) are stated as a small pitch; there is no fall-to-outlet model"
+      ],
+      "notes": [
+        "a flat roof is a plane, its boundary edges, the parapet runs standing on it and the walls under it — not a slab with a border",
+        "the analyzer emits flat roofs as the legacy FLAT Roof (derived plane graph)"
+      ],
+      "recognition": "ANALYZER_V2",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "roof-intersecting"
+      ],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "Ridge",
+        "Valley",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "roof lines (ridges, hips, valleys) corroborating how the planes join",
+          "id": "roof-lines",
+          "kinds": [
+            "ROOF_LINE"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "a printed pitch or level datum",
+          "id": "roof-pitch",
+          "kinds": [
+            "PRINTED_DIMENSION"
+          ],
+          "minCount": 1,
+          "quantities": [
+            "roof."
+          ],
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-intersecting-gables"
+      ],
+      "key": "ROOF_INTERSECTION",
+      "knownGaps": [
+        "the analyzer decomposes massing into wings (03Y2G) but still emits one legacy roof per wing"
+      ],
+      "notes": [
+        "intersecting gables are plane groups joined by valleys; the valley lines are where the surfaces meet"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "roof-intersecting",
+        "dormer"
+      ],
+      "emittedSemanticTypes": [
+        "Valley"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "roof lines (ridges, hips, valleys) corroborating how the planes join",
+          "id": "roof-lines",
+          "kinds": [
+            "ROOF_LINE"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-intersecting-gables",
+        "roof-dormer-gable",
+        "roof-dormer-shed"
+      ],
+      "key": "ROOF_VALLEY",
+      "knownGaps": [],
+      "notes": [
+        "a valley is validated concave and closure-checked: its two plates must touch along it"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "RoofPlane",
+        "RoofStep",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "planar roof regions (plan outline, pitch and fall from a section or elevation)",
+          "id": "roof-planes",
+          "kinds": [
+            "ROOF_PLANE_REGION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-stepped-levels"
+      ],
+      "key": "ROOF_STEP",
+      "knownGaps": [
+        "the step face is closed by the wall the lower roof abuts; a step with no wall is not closed automatically"
+      ],
+      "notes": [
+        "two planes meeting in plan at different heights; the upper one is named first"
+      ],
+      "recognition": "NONE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "dormer"
+      ],
+      "emittedSemanticTypes": [
+        "DormerAssembly",
+        "RoofOpening",
+        "RoofPlane",
+        "Ridge",
+        "Valley",
+        "Eave",
+        "Verge",
+        "Wall",
+        "Window",
+        "RoofAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "the host roof surface is interrupted",
+          "id": "host-interruption",
+          "kinds": [
+            "ROOF_INTERRUPTION"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "a vertical facade rises from the roof",
+          "id": "vertical-facade",
+          "kinds": [
+            "VERTICAL_FACADE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "a local roof edge (a dormer ridge or eave)",
+          "id": "local-roof-edge",
+          "kinds": [
+            "ROOF_LINE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "an opening in the dormer front",
+          "id": "opening",
+          "kinds": [
+            "OPENING"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        },
+        {
+          "crossView": true,
+          "description": "the feature seen from two views",
+          "id": "cross-view",
+          "kinds": [
+            "ROOF_INTERRUPTION",
+            "VERTICAL_FACADE",
+            "ROOF_LINE",
+            "OPENING"
+          ],
+          "minCount": 2,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-dormer-gable",
+        "roof-dormer-shed"
+      ],
+      "key": "ROOF_DORMER",
+      "knownGaps": [
+        "the dormer front must be level across the host slope",
+        "no side overhang (the dormer roof ends flush with its cheeks)",
+        "one host plane only (no dormer across a hip or valley)",
+        "hipped and eyebrow dormers are not composed"
+      ],
+      "notes": [
+        "gable, shed and flat dormers compose from primitives; the host is cut exactly where the dormer roof covers it and the dormer planes die into the host along computed valleys",
+        "an unrecognisable dormer stays an UNKNOWN assembly with DORMER as an alternative"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "PARTIAL"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "Parapet"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "an upstand above a flat roof edge seen in elevation",
+          "id": "upstand",
+          "kinds": [
+            "VERTICAL_FACADE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "roof-flat-parapet"
+      ],
+      "key": "PARAPET",
+      "knownGaps": [
+        "the analyzer still represents a parapet as a fascia band raised above a flat roof"
+      ],
+      "notes": [
+        "parapet runs are wall panels on the roof plane, aligned with the walls below"
+      ],
+      "recognition": "NONE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "BalconySlab",
+        "Guard",
+        "BalconyAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "an elevated platform",
+          "id": "platform",
+          "kinds": [
+            "LEVEL_SURFACE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "a guard along its edge",
+          "id": "guard",
+          "kinds": [
+            "HORIZONTAL_MEMBER",
+            "VERTICAL_MEMBER"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-balcony"
+      ],
+      "key": "BALCONY",
+      "knownGaps": [
+        "the analyzer emits balcony slabs and railings, not yet balcony assemblies"
+      ],
+      "notes": [
+        "elevated (top well above the lowest floor, outside the envelope); the validator warns when the elevation or topology contradicts the stated kind"
+      ],
+      "recognition": "ANALYZER_V2",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "TerraceSurface",
+        "BalconySlab",
+        "LoggiaAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a floor recessed into the envelope",
+          "id": "recess",
+          "kinds": [
+            "LEVEL_SURFACE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-loggia"
+      ],
+      "key": "LOGGIA",
+      "knownGaps": [
+        "the envelope test is the plan of the wall rings; an upper-floor loggia under a roof overhang but outside every ring reads as a balcony",
+        "the analyzer detects recesses (03X) but does not yet emit loggia assemblies"
+      ],
+      "notes": [
+        "read by topology: inside the plan of a storey that stands over or around it"
+      ],
+      "recognition": "NONE",
+      "status": "PARTIAL"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "TerraceSurface",
+        "TerraceAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a level platform near grade against a facade",
+          "id": "grade-platform",
+          "kinds": [
+            "LEVEL_SURFACE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-terrace",
+        "exterior-pergola"
+      ],
+      "key": "TERRACE",
+      "knownGaps": [],
+      "notes": [
+        "at or near grade; the analyzer emits terraces (03Y) but not yet terrace assemblies"
+      ],
+      "recognition": "ANALYZER_V2",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "porch-columns-beams"
+      ],
+      "emittedSemanticTypes": [
+        "Column",
+        "Post",
+        "Beam",
+        "RoofPlane",
+        "CanopyAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a continuous cover surface over the area",
+          "id": "cover",
+          "kinds": [
+            "COVER_SURFACE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "supports or a host facade",
+          "id": "supports",
+          "kinds": [
+            "VERTICAL_MEMBER",
+            "VERTICAL_FACADE"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "beams carrying the cover",
+          "id": "beams",
+          "kinds": [
+            "HORIZONTAL_MEMBER"
+          ],
+          "minCount": 1,
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [
+        "NO_COVER_OBSERVED"
+      ],
+      "fixtures": [
+        "exterior-entrance-canopy",
+        "exterior-open-canopy"
+      ],
+      "key": "CANOPY",
+      "knownGaps": [
+        "a cantilevered canopy with no supports is representable (host only) but has no fixture"
+      ],
+      "notes": [
+        "no roof evidence, no roof: without a cover the members survive and the assembly is ambiguous (UNKNOWN with CANOPY / PERGOLA alternatives)"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "Post",
+        "Beam",
+        "RoofPlane",
+        "CarportAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a continuous cover over a parking bay",
+          "id": "cover",
+          "kinds": [
+            "COVER_SURFACE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "posts",
+          "id": "supports",
+          "kinds": [
+            "VERTICAL_MEMBER"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [
+        "NO_COVER_OBSERVED"
+      ],
+      "fixtures": [
+        "exterior-carport"
+      ],
+      "key": "CARPORT",
+      "knownGaps": [
+        "no vehicle-bay semantics beyond a count"
+      ],
+      "notes": [
+        "a canopy for vehicles, attached to the house or freestanding"
+      ],
+      "recognition": "NONE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "pergola",
+        "pergola-ambiguous"
+      ],
+      "emittedSemanticTypes": [
+        "PergolaPost",
+        "PergolaBeam",
+        "PergolaAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "repeated vertical supports",
+          "id": "repeated-supports",
+          "kinds": [
+            "VERTICAL_MEMBER"
+          ],
+          "minCount": 2,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "repeated horizontal members",
+          "id": "repeated-members",
+          "kinds": [
+            "HORIZONTAL_MEMBER"
+          ],
+          "minCount": 3,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "the absence of a continuous roof plane, observed",
+          "id": "open-cover",
+          "kinds": [
+            "NO_COVER_OBSERVED"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [
+        "COVER_SURFACE"
+      ],
+      "fixtures": [
+        "exterior-pergola"
+      ],
+      "key": "PERGOLA",
+      "knownGaps": [
+        "slatted louvre roofs (an adjustable cover) are not distinguished from open pergolas"
+      ],
+      "notes": [
+        "repeated beams are never turned into a roof plane; a roof COVERING a pergola is refused (PERGOLA_HAS_ROOF)"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "porch-columns-beams"
+      ],
+      "emittedSemanticTypes": [
+        "Column",
+        "Post"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": true,
+          "description": "a vertical member seen in plan and elevation",
+          "id": "vertical-member",
+          "kinds": [
+            "VERTICAL_MEMBER"
+          ],
+          "minCount": 2,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-entrance-canopy",
+        "exterior-carport",
+        "exterior-open-canopy"
+      ],
+      "key": "COLUMN",
+      "knownGaps": [
+        "rectangular sections only: a round column is its bounding square",
+        "no structural-engineering claim"
+      ],
+      "notes": [
+        "a member's role adds meaning, never geometry; orientation is validated (a column stands vertically)"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "porch-columns-beams",
+        "pergola"
+      ],
+      "emittedSemanticTypes": [
+        "Beam",
+        "Lintel",
+        "PergolaBeam"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a horizontal member",
+          "id": "horizontal-member",
+          "kinds": [
+            "HORIZONTAL_MEMBER"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-entrance-canopy",
+        "exterior-carport",
+        "exterior-open-canopy",
+        "exterior-pergola"
+      ],
+      "key": "BEAM",
+      "knownGaps": [
+        "prismatic members only; a rafter along a slope is stated explicitly, not derived"
+      ],
+      "notes": [
+        "a beam under a sloping cover touches it along its upper arris; SUPPORTED_BY is closure-checked"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "entrance-steps"
+      ],
+      "emittedSemanticTypes": [
+        "ExteriorStepRun",
+        "Step",
+        "Landing"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "step nosing lines",
+          "id": "nosings",
+          "kinds": [
+            "STEP_EDGE"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 2
+        },
+        {
+          "crossView": false,
+          "description": "a second nosing or the landing the steps arrive at",
+          "id": "arrival",
+          "kinds": [
+            "STEP_EDGE",
+            "LEVEL_SURFACE"
+          ],
+          "minCount": 2,
+          "required": true,
+          "weight": 1
+        },
+        {
+          "crossView": false,
+          "description": "printed level datums",
+          "id": "datums",
+          "kinds": [
+            "PRINTED_DIMENSION"
+          ],
+          "minCount": 1,
+          "quantities": [
+            "steps.",
+            "landing.",
+            "site."
+          ],
+          "required": false,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-entrance-steps",
+        "exterior-entrance-canopy"
+      ],
+      "key": "EXTERIOR_STEPS",
+      "knownGaps": [
+        "straight runs only (no winding or splayed exterior steps)"
+      ],
+      "notes": [
+        "exterior steps are their own primitive, never the interior stair system: 1 step, 2–3 steps, a short flight, a raised porch"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [
+        "entrance-steps"
+      ],
+      "emittedSemanticTypes": [
+        "EntranceAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "an entrance door",
+          "id": "door",
+          "kinds": [
+            "OPENING"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-entrance-steps",
+        "exterior-entrance-canopy"
+      ],
+      "key": "ENTRANCE",
+      "knownGaps": [],
+      "notes": [
+        "door, landing, steps, canopy, supports and guards as one assembly"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    },
+    {
+      "demos": [],
+      "emittedSemanticTypes": [
+        "Handrail"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "a rail beside steps",
+          "id": "rail",
+          "kinds": [
+            "HORIZONTAL_MEMBER"
+          ],
+          "minCount": 1,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "exterior-entrance-steps"
+      ],
+      "key": "HANDRAIL",
+      "knownGaps": [
+        "railings are level: a handrail that follows the slope of a step run is not modelled"
+      ],
+      "notes": [
+        "a railing with role HANDRAIL"
+      ],
+      "recognition": "NONE",
+      "status": "PARTIAL"
+    },
+    {
+      "demos": [
+        "unknown"
+      ],
+      "emittedSemanticTypes": [
+        "UnknownArchitecturalAssembly"
+      ],
+      "evidenceRequirements": [
+        {
+          "crossView": false,
+          "description": "geometry seen from two frames, or from one technical drawing",
+          "id": "seen",
+          "kinds": [
+            "UNCLASSIFIED_GEOMETRY",
+            "ROOF_LINE",
+            "VERTICAL_FACADE",
+            "VERTICAL_MEMBER",
+            "HORIZONTAL_MEMBER",
+            "COVER_SURFACE",
+            "LEVEL_SURFACE"
+          ],
+          "minCount": 2,
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "exclusions": [],
+      "fixtures": [
+        "unknown-feature"
+      ],
+      "key": "UNKNOWN_ASSEMBLY",
+      "knownGaps": [],
+      "notes": [
+        "the safe fallback: extent, observed planes and segments, alternatives, the reason it is unresolved; drawn restrained, only from what was observed"
+      ],
+      "recognition": "SYNTHETIC_PIPELINE",
+      "status": "SUPPORTED"
+    }
+  ],
+  "primitives": [
+    {
+      "geometry": "outer-face line, thickness, height and top profile (a panel: bottom and top polylines)",
+      "host": "levelId; junctions and rings; panel hostId; relationships",
+      "kind": "wall",
+      "selector": "any wall; also a wall panel of role DORMER_CHEEK, GABLE_INFILL, UPSTAND, KNEE_WALL, SCREEN or UNKNOWN_PANEL",
+      "since": "1.0.0",
+      "type": "Wall"
+    },
+    {
+      "geometry": "plan polygon with holes, top offset, thickness",
+      "host": "levelId; relationships",
+      "kind": "slab",
+      "selector": "any slab",
+      "since": "1.0.0",
+      "type": "Slab"
+    },
+    {
+      "geometry": "vertical centreline, rectangular section",
+      "host": "hostId; SUPPORTED_BY relationships",
+      "kind": "linearSolid",
+      "selector": "role COLUMN",
+      "since": "1.6.0",
+      "type": "Column"
+    },
+    {
+      "geometry": "vertical centreline, rectangular section",
+      "host": "hostId; SUPPORTED_BY relationships",
+      "kind": "linearSolid",
+      "selector": "role POST",
+      "since": "1.6.0",
+      "type": "Post"
+    },
+    {
+      "geometry": "centreline, rectangular section",
+      "host": "hostId; SUPPORTED_BY relationships",
+      "kind": "linearSolid",
+      "selector": "role BEAM or RAFTER",
+      "since": "1.6.0",
+      "type": "Beam"
+    },
+    {
+      "geometry": "level centreline over an opening, rectangular section",
+      "host": "hostId (the wall)",
+      "kind": "linearSolid",
+      "selector": "role LINTEL",
+      "since": "1.6.0",
+      "type": "Lintel"
+    },
+    {
+      "geometry": "outer-face line, thickness, bottom and top polylines",
+      "host": "hostId (the wall below); SUPPORTED_BY the roof plane",
+      "kind": "wallPanel",
+      "selector": "role PARAPET",
+      "since": "1.6.0",
+      "type": "Parapet"
+    },
+    {
+      "geometry": "wall-local rectangle on one face (no thickness)",
+      "host": "hostId (the wall)",
+      "kind": "surfaceRegion",
+      "selector": "any surface region",
+      "since": "1.3.0",
+      "type": "SurfaceRegion"
+    },
+    {
+      "geometry": "offset, sill, width, height, head, leaves",
+      "host": "wallId (and leaf walls)",
+      "kind": "opening",
+      "selector": "any wall opening",
+      "since": "1.0.0",
+      "type": "Opening"
+    },
+    {
+      "geometry": "frame and glazing in its opening",
+      "host": "openingId",
+      "kind": "window",
+      "selector": "any window",
+      "since": "1.0.0",
+      "type": "Window"
+    },
+    {
+      "geometry": "frame, leaf or panel assembly in its opening",
+      "host": "openingId; OPENS_INTO relationships",
+      "kind": "door",
+      "selector": "a door that is not a garage door",
+      "since": "1.0.0",
+      "type": "Door"
+    },
+    {
+      "geometry": "frame and panels in its opening",
+      "host": "openingId",
+      "kind": "door",
+      "selector": "usage GARAGE, or an assembly of PANEL panels only",
+      "since": "1.0.0",
+      "type": "GarageDoor"
+    },
+    {
+      "geometry": "plan rectangle or outline, cut mode",
+      "host": "roofId (a roof or a roof plane); throughId",
+      "kind": "roofOpening",
+      "selector": "any roof opening (rooflight, penetration, dormer cut)",
+      "since": "1.2.0",
+      "type": "RoofOpening"
+    },
+    {
+      "geometry": "support polygon, datum, pitch, downslope, thickness",
+      "host": "levelId; roof edges; SUPPORTED_BY relationships",
+      "kind": "roofPlane",
+      "selector": "any roof plane",
+      "since": "1.6.0",
+      "type": "RoofPlane"
+    },
+    {
+      "geometry": "world segment on both planes",
+      "host": "planeIds (two)",
+      "kind": "roofEdge",
+      "selector": "kind RIDGE",
+      "since": "1.6.0",
+      "type": "Ridge"
+    },
+    {
+      "geometry": "world segment on both planes",
+      "host": "planeIds (two)",
+      "kind": "roofEdge",
+      "selector": "kind HIP",
+      "since": "1.6.0",
+      "type": "HipEdge"
+    },
+    {
+      "geometry": "world segment on both planes",
+      "host": "planeIds (two)",
+      "kind": "roofEdge",
+      "selector": "kind VALLEY",
+      "since": "1.6.0",
+      "type": "Valley"
+    },
+    {
+      "geometry": "world segment on its plane",
+      "host": "planeIds (one); a board hosted on it",
+      "kind": "roofEdge",
+      "selector": "kind VERGE",
+      "since": "1.6.0",
+      "type": "Verge"
+    },
+    {
+      "geometry": "world segment on its plane",
+      "host": "planeIds (one); a fascia hosted on it",
+      "kind": "roofEdge",
+      "selector": "kind EAVE",
+      "since": "1.6.0",
+      "type": "Eave"
+    },
+    {
+      "geometry": "board along an edge, rectangular section",
+      "host": "hostId (the roof edge)",
+      "kind": "linearSolid",
+      "selector": "role FASCIA or VERGE_BOARD (and a legacy roof's edge members, as `<roof>:fascia-<side>` / `<roof>:verge-<side>`)",
+      "since": "1.5.0",
+      "type": "Fascia"
+    },
+    {
+      "geometry": "world segment on the upper plane",
+      "host": "planeIds (upper, lower)",
+      "kind": "roofEdge",
+      "selector": "kind ROOF_STEP",
+      "since": "1.6.0",
+      "type": "RoofStep"
+    },
+    {
+      "geometry": "world segment on its plane",
+      "host": "planeIds (one); the wall it abuts",
+      "kind": "roofEdge",
+      "selector": "kind BOUNDARY or ABUTMENT",
+      "since": "1.6.0",
+      "type": "RoofBoundary"
+    },
+    {
+      "geometry": "tread k·going along the run, k·rise above its base",
+      "host": "its step run",
+      "kind": "stepRun",
+      "selector": "step k of an exterior step run: `<run>:step-<k>`",
+      "since": "1.6.0",
+      "type": "Step"
+    },
+    {
+      "geometry": "first riser line, direction, width, steps × going × rise",
+      "host": "levelId; TERMINATES_AT relationships",
+      "kind": "stepRun",
+      "selector": "any step run",
+      "since": "1.6.0",
+      "type": "ExteriorStepRun"
+    },
+    {
+      "geometry": "risers × going, laid out by layoutStair",
+      "host": "its stair (levelId → toLevelId)",
+      "kind": "stair",
+      "selector": "flight i of a FLIGHTS stair: `<stair>:flight-<i>`",
+      "since": "1.3.0",
+      "type": "StairFlight"
+    },
+    {
+      "geometry": "plan polygon, top offset, thickness",
+      "host": "levelId; hostWallIds; relationships",
+      "kind": "platform",
+      "selector": "a platform of role LANDING or PORCH (and a stair LANDING segment, `<stair>:landing-<i>`)",
+      "since": "1.6.0",
+      "type": "Landing"
+    },
+    {
+      "geometry": "plan polygon, top plane falling along its slope",
+      "host": "levelId; hostWallIds",
+      "kind": "platform",
+      "selector": "role RAMP",
+      "since": "1.6.0",
+      "type": "Ramp"
+    },
+    {
+      "geometry": "plan polyline, base, height, infill",
+      "host": "hostId (what it guards)",
+      "kind": "railing",
+      "selector": "a railing without a GUARD or HANDRAIL role",
+      "since": "1.0.0",
+      "type": "RailingRun"
+    },
+    {
+      "geometry": "plan polyline, base, height, infill",
+      "host": "hostId; GUARDS relationships",
+      "kind": "railing",
+      "selector": "role GUARD or BALUSTRADE",
+      "since": "1.6.0",
+      "type": "Guard"
+    },
+    {
+      "geometry": "plan polyline, base, height",
+      "host": "hostId; relationships",
+      "kind": "railing",
+      "selector": "role HANDRAIL",
+      "since": "1.6.0",
+      "type": "Handrail"
+    },
+    {
+      "geometry": "plan polygon, top offset, thickness, surface, edge",
+      "host": "levelId; hostWallIds",
+      "kind": "terrace",
+      "selector": "any terrace (and a balcony record of kind TERRACE)",
+      "since": "1.5.0",
+      "type": "TerraceSurface"
+    },
+    {
+      "geometry": "plan rectangle, top offset, thickness",
+      "host": "levelId; railings guarding it",
+      "kind": "balcony",
+      "selector": "a balcony record of kind BALCONY or LOGGIA",
+      "since": "1.0.0",
+      "type": "BalconySlab"
+    },
+    {
+      "geometry": "level centreline, rectangular section",
+      "host": "SUPPORTED_BY its posts or primary beams",
+      "kind": "linearSolid",
+      "selector": "role PERGOLA_BEAM",
+      "since": "1.6.0",
+      "type": "PergolaBeam"
+    },
+    {
+      "geometry": "vertical centreline, rectangular section",
+      "host": "SUPPORTED_BY the terrace or ground",
+      "kind": "linearSolid",
+      "selector": "role PERGOLA_POST",
+      "since": "1.6.0",
+      "type": "PergolaPost"
+    }
+  ],
+  "relationships": [
+    {
+      "example": "dormer-cheek HOSTED_BY roof-plane-south",
+      "geometric": "MEETS",
+      "kind": "HOSTED_BY",
+      "meaning": "stands on or in its host"
+    },
+    {
+      "example": "beam-1 SUPPORTED_BY post-1",
+      "geometric": "MEETS",
+      "kind": "SUPPORTED_BY",
+      "meaning": "is carried by"
+    },
+    {
+      "example": "beam-1 CONNECTED_TO beam-2",
+      "geometric": "MEETS",
+      "kind": "CONNECTED_TO",
+      "meaning": "is joined to"
+    },
+    {
+      "example": "fascia-a CONTINUES_TO fascia-b",
+      "geometric": "MEETS",
+      "kind": "CONTINUES_TO",
+      "meaning": "continues as"
+    },
+    {
+      "example": "steps TERMINATES_AT landing",
+      "geometric": "MEETS",
+      "kind": "TERMINATES_AT",
+      "meaning": "ends against"
+    },
+    {
+      "example": "dormer-roof MEETS host plane (along the valley)",
+      "geometric": "MEETS",
+      "kind": "MEETS",
+      "meaning": "touches along a face or an edge"
+    },
+    {
+      "example": "chimney INTERSECTS roof",
+      "geometric": "OVERLAPS",
+      "kind": "INTERSECTS",
+      "meaning": "passes through, on purpose"
+    },
+    {
+      "example": "rafter OVERLAPS_INTENTIONALLY wall-plate",
+      "geometric": "OVERLAPS",
+      "kind": "OVERLAPS_INTENTIONALLY",
+      "meaning": "shares volume on purpose (a lap, a bearing)"
+    },
+    {
+      "example": "canopy-roof COVERS landing",
+      "geometric": "ORDER",
+      "kind": "COVERS",
+      "meaning": "is above and over"
+    },
+    {
+      "example": "railing GUARDS balcony",
+      "geometric": "SEMANTIC",
+      "kind": "GUARDS",
+      "meaning": "guards the edge of"
+    },
+    {
+      "example": "door OPENS_INTO landing",
+      "geometric": "SEMANTIC",
+      "kind": "OPENS_INTO",
+      "meaning": "opens onto"
+    },
+    {
+      "example": "balcony ATTACHED_TO front wall",
+      "geometric": "MEETS",
+      "kind": "ATTACHED_TO",
+      "meaning": "is fixed to"
+    },
+    {
+      "example": "parapet ALIGNS_WITH wall below",
+      "geometric": "SEMANTIC",
+      "kind": "ALIGNS_WITH",
+      "meaning": "is aligned with (no contact implied)"
+    },
+    {
+      "example": "upper roof ABOVE lower roof",
+      "geometric": "ORDER",
+      "kind": "ABOVE",
+      "meaning": "lies above"
+    },
+    {
+      "example": "terrace BELOW pergola",
+      "geometric": "ORDER",
+      "kind": "BELOW",
+      "meaning": "lies below"
+    }
+  ],
+  "schema": "buildapp.architecture-registries",
+  "schemaVersion": "1.0.0"
+}
+

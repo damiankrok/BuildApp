@@ -1,0 +1,712 @@
+{
+  "demos": [
+    {
+      "addedAssemblies": {
+        "ROOF": 1
+      },
+      "closureErrors": 0,
+      "commands": 24,
+      "conflicts": [
+        {
+          "kept": "35 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-1.pitchDeg",
+          "lost": "38 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "35 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-2.pitchDeg",
+          "lost": "38 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "35 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-3.pitchDeg",
+          "lost": "38 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "35 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-4.pitchDeg",
+          "lost": "38 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        }
+      ],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.8463,
+          "decision": "ACCEPTED",
+          "family": "ROOF",
+          "id": "h1",
+          "reasons": [
+            "roof: every required requirement met (roof-planes, roof-lines, roof-pitch)",
+            "not dormer: missing the host roof surface is interrupted; a vertical facade rises from the roof; the feature seen from two views (seen in 1 frame, needs two)"
+          ]
+        }
+      ],
+      "id": "roof-intersecting",
+      "log": [
+        {
+          "message": "10 proposals from 3 frames (DETERMINISTIC_CV, OCR, VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-roof: 10 proposals from 3 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED ROOF (0.8463): roof: every required requirement met (roof-planes, roof-lines, roof-pitch); not dormer: missing the host roof surface is interrupted; a vertical facade rises from the roof; the feature seen from two views (seen in 1 frame, needs two)",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "roof.thickness = 0.25 (convention)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-1.pitchDeg = 35 (printed_dimension, corroborated by region-1; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-2.pitchDeg = 35 (printed_dimension, corroborated by region-2; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-3.pitchDeg = 35 (printed_dimension, corroborated by region-3; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-4.pitchDeg = 35 (printed_dimension, corroborated by region-4; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-2 share an edge: a ridge, corroborated by the roof line line-1",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-3 share an edge: a valley, corroborated by the roof line line-3",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-4 share an edge: a valley, corroborated by the roof line line-4",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-3 and hyp-h1-roof-plane-4 share an edge: a ridge, corroborated by the roof line line-2",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "roof hyp-h1-roof: 4 planes, 15 edges, read as INTERSECTING",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 10,
+      "quantities": 5,
+      "roofTruth": {
+        "derived": "INTERSECTING",
+        "fixture": "roof-intersecting-gables",
+        "match": true,
+        "stated": "INTERSECTING"
+      },
+      "title": "Intersecting gables stated from a roof plan, a section and a render"
+    },
+    {
+      "addedAssemblies": {
+        "ROOF": 1
+      },
+      "closureErrors": 0,
+      "commands": 18,
+      "conflicts": [
+        {
+          "kept": "30 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-1.pitchDeg",
+          "lost": "33 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "30 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-2.pitchDeg",
+          "lost": "33 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "30 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-3.pitchDeg",
+          "lost": "33 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "30 (PRINTED_DIMENSION, pitch-printed)",
+          "key": "h1.plane-4.pitchDeg",
+          "lost": "33 (PERSPECTIVE, pitch-render)",
+          "why": "perspective does not override printed_dimension"
+        }
+      ],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.8463,
+          "decision": "ACCEPTED",
+          "family": "ROOF",
+          "id": "h1",
+          "reasons": [
+            "roof: every required requirement met (roof-planes, roof-lines, roof-pitch)",
+            "not dormer: missing the host roof surface is interrupted; a vertical facade rises from the roof; the feature seen from two views (seen in 1 frame, needs two)"
+          ]
+        }
+      ],
+      "id": "roof-hip",
+      "log": [
+        {
+          "message": "11 proposals from 3 frames (DETERMINISTIC_CV, OCR, VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-roof: 11 proposals from 3 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED ROOF (0.8463): roof: every required requirement met (roof-planes, roof-lines, roof-pitch); not dormer: missing the host roof surface is interrupted; a vertical facade rises from the roof; the feature seen from two views (seen in 1 frame, needs two)",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "roof.thickness = 0.25 (convention)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-1.pitchDeg = 30 (printed_dimension, corroborated by region-1; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-2.pitchDeg = 30 (printed_dimension, corroborated by region-2; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-3.pitchDeg = 30 (printed_dimension, corroborated by region-3; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "plane-4.pitchDeg = 30 (printed_dimension, corroborated by region-4; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-2 share an edge: a ridge, corroborated by the roof line line-1",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-3 share an edge: a hip, corroborated by the roof line line-2",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-1 and hyp-h1-roof-plane-4 share an edge: a hip, corroborated by the roof line line-3",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-2 and hyp-h1-roof-plane-3 share an edge: a hip, corroborated by the roof line line-4",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "hyp-h1-roof-plane-2 and hyp-h1-roof-plane-4 share an edge: a hip, corroborated by the roof line line-5",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "roof hyp-h1-roof: 4 planes, 9 edges, read as HIP",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 11,
+      "quantities": 5,
+      "roofTruth": {
+        "derived": "HIP",
+        "fixture": "roof-hip",
+        "match": true,
+        "stated": "HIP"
+      },
+      "title": "Hip roof stated from a roof plan and a section"
+    },
+    {
+      "addedAssemblies": {
+        "DORMER": 1,
+        "ROOF": 1
+      },
+      "closureErrors": 0,
+      "commands": 5,
+      "conflicts": [],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.816,
+          "decision": "ACCEPTED",
+          "family": "DORMER",
+          "id": "h1",
+          "reasons": [
+            "dormer: every required requirement met (host-interruption, vertical-facade, local-roof-edge, opening, cross-view)",
+            "not roof: missing planar roof regions (plan outline, pitch and fall from a section or elevation)",
+            "not canopy: missing a continuous cover surface over the area"
+          ]
+        }
+      ],
+      "id": "dormer",
+      "log": [
+        {
+          "message": "5 proposals from 4 frames (DETERMINISTIC_CV, VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-dormer-1: 5 proposals from 4 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED DORMER (0.816): dormer: every required requirement met (host-interruption, vertical-facade, local-roof-edge, opening, cross-view); not roof: missing planar roof regions (plan outline, pitch and fall from a section or elevation); not canopy: missing a continuous cover surface over the area",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "the interruption lies in roof-main-plane-front (roof roof-main)",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "dormer.eaveY = 5.465451 (technical_geometry, corroborated by dormer-face-render)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "dormer.ridgeY = 6.304551 (technical_geometry)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "dormer type GABLE: a roof line runs back from the front above the eave (dormer-ridge)",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "createDormer hyp-h1-dormer (GABLE) on roof-main-plane-front",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 5,
+      "quantities": 2,
+      "title": "Gable dormer: an interrupted slope, a front face, a ridge and a window, seen in two elevations and a render"
+    },
+    {
+      "addedAssemblies": {
+        "CANOPY": 1,
+        "ROOF": 1
+      },
+      "closureErrors": 0,
+      "commands": 23,
+      "conflicts": [
+        {
+          "kept": "2.33 (PRINTED_DIMENSION, cover-top-printed)",
+          "key": "h1.frame.beamTop",
+          "lost": "2.4 (PERSPECTIVE, post-w-render)",
+          "why": "perspective does not override printed_dimension"
+        }
+      ],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.876,
+          "decision": "ACCEPTED",
+          "family": "CANOPY",
+          "id": "h1",
+          "reasons": [
+            "canopy: every required requirement met (cover, supports, beams)",
+            "not carport: the cover spans 4.8 m², less than a parking bay (12 m²)",
+            "not pergola: missing repeated horizontal members; the absence of a continuous roof plane, observed; ruled out by cover-elev"
+          ]
+        }
+      ],
+      "id": "porch-columns-beams",
+      "log": [
+        {
+          "message": "8 proposals from 4 frames (DETERMINISTIC_CV, OCR, VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-porch: 8 proposals from 4 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED CANOPY (0.876): canopy: every required requirement met (cover, supports, beams); not carport: the cover spans 4.8 m², less than a parking bay (12 m²); not pergola: missing repeated horizontal members; the absence of a continuous roof plane, observed; ruled out by cover-elev",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-1.top = 2.13 (technical_geometry, corroborated by post-w-plan, post-w-render)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-2.top = 2.13 (technical_geometry, corroborated by post-e-plan)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "2 posts; 1 beams on posts (hyp-h1-beam-1 on hyp-h1-post-1+hyp-h1-post-2); 0 members on the beams",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "cover.thickness = 0.12 (convention)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "frame.beamTop = 2.33 (printed_dimension, corroborated by beam-elev, cover-elev, post-e-elev, post-e-plan, post-w-elev, post-w-plan; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "canopy hyp-h1-canopy: 2 posts, 1 beams, a flat cover attached to ring-0-w0",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 8,
+      "quantities": 4,
+      "title": "Entrance canopy on two posts and a beam: plan, elevation, a printed canopy height, a render"
+    },
+    {
+      "addedAssemblies": {
+        "PERGOLA": 1
+      },
+      "closureErrors": 0,
+      "commands": 35,
+      "conflicts": [
+        {
+          "kept": "2.48 (PRINTED_DIMENSION, post-top-printed)",
+          "key": "h1.post-1.top",
+          "lost": "2.8 (PERSPECTIVE, pp-1-render)",
+          "why": "perspective does not override printed_dimension"
+        },
+        {
+          "kept": "2.72 (PRINTED_DIMENSION, post-top-printed)",
+          "key": "h1.frame.beamTop",
+          "lost": "3.04 (PERSPECTIVE, pp-1-render)",
+          "why": "perspective does not override printed_dimension"
+        }
+      ],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.7171,
+          "decision": "ACCEPTED",
+          "family": "PERGOLA",
+          "id": "h1",
+          "reasons": [
+            "pergola: every required requirement met (repeated-supports, repeated-members, open-cover)",
+            "not canopy: missing a continuous cover surface over the area; ruled out by sky-render",
+            "not carport: missing a continuous cover over a parking bay; ruled out by sky-render; the cover spans 0.0 m², less than a parking bay (12 m²)"
+          ]
+        }
+      ],
+      "id": "pergola",
+      "log": [
+        {
+          "message": "16 proposals from 4 frames (DETERMINISTIC_CV, OCR, VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-garden-frame: 16 proposals from 4 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED PERGOLA (0.7171): pergola: every required requirement met (repeated-supports, repeated-members, open-cover); not canopy: missing a continuous cover surface over the area; ruled out by sky-render; not carport: missing a continuous cover over a parking bay; ruled out by sky-render; the cover spans 0.0 m², less than a parking bay (12 m²)",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-1.top = 2.48 (printed_dimension, corroborated by pp-1-elev, pp-1-plan; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-2.top = 2.48 (printed_dimension, corroborated by pp-3-plan)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-3.top = 2.48 (printed_dimension, corroborated by pp-2-elev, pp-2-plan)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "post-4.top = 2.48 (printed_dimension, corroborated by pp-4-plan)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "4 posts; 2 beams on posts (hyp-h1-beam-1 on hyp-h1-post-1+hyp-h1-post-3; hyp-h1-beam-2 on hyp-h1-post-2+hyp-h1-post-4); 5 members on the beams",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "frame.beamTop = 2.72 (printed_dimension, corroborated by pb-1, pb-2, pp-1-elev, pp-1-plan, pp-2-elev, pp-2-plan, pp-3-plan, pp-4-plan, pr-1, pr-2, pr-3, pr-4, pr-5; 1 conflict recorded)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "pergola hyp-h1-pergola: 4 posts, 2 beams, 5 rafters, open (no roof)",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 16,
+      "quantities": 5,
+      "title": "Pergola: repeated posts and members, open sky observed, a printed post height beating a render"
+    },
+    {
+      "addedAssemblies": {
+        "UNKNOWN": 1
+      },
+      "closureErrors": 0,
+      "commands": 3,
+      "conflicts": [],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [
+            {
+              "confidence": 0.6,
+              "kind": "PERGOLA",
+              "why": "missing the absence of a continuous roof plane, observed"
+            },
+            {
+              "confidence": 0.45,
+              "kind": "CANOPY",
+              "why": "missing a continuous cover surface over the area"
+            },
+            {
+              "confidence": 0.3,
+              "kind": "CARPORT",
+              "why": "missing a continuous cover over a parking bay; the cover spans 0.0 m², less than a parking bay (12 m²)"
+            }
+          ],
+          "confidence": 0.5,
+          "decision": "UNKNOWN",
+          "id": "h1",
+          "reasons": [
+            "no family has every required requirement met",
+            "kept as an unknown assembly: 13 observations from 2 frames"
+          ]
+        }
+      ],
+      "id": "pergola-ambiguous",
+      "log": [
+        {
+          "message": "13 proposals from 2 frames (DETERMINISTIC_CV)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-garden-frame: 13 proposals from 2 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "UNKNOWN (0.5): no family has every required requirement met; kept as an unknown assembly: 13 observations from 2 frames",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "unknown assembly hyp-h1-unknown: 13 observed pieces, 3 alternatives",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 13,
+      "quantities": 0,
+      "title": "The same frame with no observation of whether a cover spans it: kept unknown, not guessed"
+    },
+    {
+      "addedAssemblies": {
+        "ENTRANCE": 1,
+        "EXTERIOR_STAIR": 1
+      },
+      "closureErrors": 0,
+      "commands": 10,
+      "conflicts": [],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [],
+          "confidence": 0.9125,
+          "decision": "ACCEPTED",
+          "family": "EXTERIOR_STEPS",
+          "id": "h1",
+          "reasons": [
+            "exterior_steps: every required requirement met (nosings, arrival, datums)"
+          ]
+        }
+      ],
+      "id": "entrance-steps",
+      "log": [
+        {
+          "message": "8 proposals from 2 frames (DETERMINISTIC_CV, OCR)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-entrance: 8 proposals from 2 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "ACCEPTED EXTERIOR_STEPS (0.9125): exterior_steps: every required requirement met (nosings, arrival, datums)",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "landing.top = 0 (printed_dimension, corroborated by landing-plan)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "steps.going = 0.3 (technical_geometry)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "steps.rise = 0.125 (printed_dimension, corroborated by nosing-1-elevation-front)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "steps.base = -0.5 (printed_dimension, corroborated by landing-datum−grade-datum)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "steps.width = 1.8 (technical_geometry)",
+          "stage": "METRIC_SOLVE"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "3 nosings climbing towards landing-plan: 3 steps of 0.125 m over 0.3 m goings",
+          "stage": "TOPOLOGY"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "exterior steps hyp-h1-steps up to hyp-h1-landing, the entrance of door-front",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 8,
+      "quantities": 5,
+      "title": "Entrance steps: three nosings and a landing in plan and elevation, printed datums"
+    },
+    {
+      "addedAssemblies": {
+        "UNKNOWN": 1
+      },
+      "closureErrors": 0,
+      "commands": 3,
+      "conflicts": [],
+      "failures": [],
+      "groups": 1,
+      "hypotheses": [
+        {
+          "alternatives": [
+            {
+              "confidence": 0.06,
+              "kind": "ROOF",
+              "why": "missing planar roof regions (plan outline, pitch and fall from a section or elevation)"
+            },
+            {
+              "confidence": 0.03,
+              "kind": "DORMER",
+              "why": "missing the host roof surface is interrupted; a vertical facade rises from the roof; the feature seen from two views"
+            }
+          ],
+          "confidence": 0.35,
+          "decision": "UNKNOWN",
+          "id": "h1",
+          "reasons": [
+            "no family has every required requirement met",
+            "kept as an unknown assembly: 3 observations from 2 frames"
+          ]
+        }
+      ],
+      "id": "unknown",
+      "log": [
+        {
+          "message": "3 proposals from 2 frames (VLM)",
+          "stage": "OBSERVATION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "g-slope-panel: 3 proposals from 2 frames",
+          "stage": "HYPOTHESIS"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "UNKNOWN (0.35): no family has every required requirement met; kept as an unknown assembly: 3 observations from 2 frames",
+          "stage": "FUSION"
+        },
+        {
+          "hypothesisId": "h1",
+          "message": "unknown assembly hyp-h1-unknown: 3 observed pieces, 2 alternatives",
+          "stage": "DSL"
+        }
+      ],
+      "ok": true,
+      "proposals": 3,
+      "quantities": 0,
+      "title": "A raised panel on the front slope seen in two renders: an unknown assembly with its alternatives"
+    }
+  ],
+  "note": "synthetic evidence only: the plumbing a detector plugs into, not production recognition",
+  "schema": "buildapp.architecture-demos",
+  "schemaVersion": "1.0.0"
+}
+

@@ -1,0 +1,224 @@
+{
+  "edges": [
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-eave-1"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-eave-11"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-eave-2"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-eave-6"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-eave-9"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-join-1"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-join-2"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-join-3"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-join-4"
+    },
+    {
+      "field": "planeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-plane-1"
+    },
+    {
+      "field": "planeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-plane-2"
+    },
+    {
+      "field": "planeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-plane-3"
+    },
+    {
+      "field": "planeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-plane-4"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-10"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-3"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-4"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-5"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-7"
+    },
+    {
+      "field": "edgeIds",
+      "from": "hyp-h1-roof",
+      "kind": "COMPONENT",
+      "to": "hyp-h1-roof-verge-8"
+    }
+  ],
+  "modelId": "demo-context",
+  "nodes": [
+    {
+      "id": "hyp-h1-roof",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "hyp-h1-roof-eave-1",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "hyp-h1-roof-eave-11",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "hyp-h1-roof-eave-2",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "hyp-h1-roof-eave-6",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "hyp-h1-roof-eave-9",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "hyp-h1-roof-join-1",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "hyp-h1-roof-join-2",
+      "kind": "roofEdge",
+      "type": "Valley"
+    },
+    {
+      "id": "hyp-h1-roof-join-3",
+      "kind": "roofEdge",
+      "type": "Valley"
+    },
+    {
+      "id": "hyp-h1-roof-join-4",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "hyp-h1-roof-plane-1",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "hyp-h1-roof-plane-2",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "hyp-h1-roof-plane-3",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "hyp-h1-roof-plane-4",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "hyp-h1-roof-verge-10",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "hyp-h1-roof-verge-3",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "hyp-h1-roof-verge-4",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "hyp-h1-roof-verge-5",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "hyp-h1-roof-verge-7",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "hyp-h1-roof-verge-8",
+      "kind": "roofEdge",
+      "type": "Verge"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

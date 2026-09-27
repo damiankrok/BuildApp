@@ -1,0 +1,428 @@
+{
+  "edges": [
+    {
+      "from": "canopy-beam",
+      "kind": "SUPPORTED_BY",
+      "to": "canopy-post-east"
+    },
+    {
+      "from": "canopy-beam",
+      "kind": "SUPPORTED_BY",
+      "to": "canopy-post-west"
+    },
+    {
+      "field": "beamIds",
+      "from": "canopy-entrance",
+      "kind": "COMPONENT",
+      "to": "canopy-beam"
+    },
+    {
+      "field": "supportIds",
+      "from": "canopy-entrance",
+      "kind": "COMPONENT",
+      "to": "canopy-post-east"
+    },
+    {
+      "field": "supportIds",
+      "from": "canopy-entrance",
+      "kind": "COMPONENT",
+      "to": "canopy-post-west"
+    },
+    {
+      "field": "roofAssemblyId",
+      "from": "canopy-entrance",
+      "kind": "COMPONENT",
+      "to": "canopy-roof"
+    },
+    {
+      "field": "hostIds",
+      "from": "canopy-entrance",
+      "kind": "HOST",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "canopy-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "canopy-beam"
+    },
+    {
+      "from": "canopy-plane",
+      "kind": "COVERS",
+      "to": "landing-front"
+    },
+    {
+      "from": "canopy-plane",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "canopy-post-east",
+      "kind": "SUPPORTED_BY",
+      "to": "landing-front"
+    },
+    {
+      "from": "canopy-post-west",
+      "kind": "SUPPORTED_BY",
+      "to": "landing-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "canopy-roof",
+      "kind": "COMPONENT",
+      "to": "canopy-edge-east"
+    },
+    {
+      "field": "edgeIds",
+      "from": "canopy-roof",
+      "kind": "COMPONENT",
+      "to": "canopy-edge-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "canopy-roof",
+      "kind": "COMPONENT",
+      "to": "canopy-edge-wall"
+    },
+    {
+      "field": "edgeIds",
+      "from": "canopy-roof",
+      "kind": "COMPONENT",
+      "to": "canopy-edge-west"
+    },
+    {
+      "field": "planeIds",
+      "from": "canopy-roof",
+      "kind": "COMPONENT",
+      "to": "canopy-plane"
+    },
+    {
+      "field": "hostIds",
+      "from": "canopy-roof",
+      "kind": "HOST",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "door-front",
+      "kind": "OPENS_INTO",
+      "to": "landing-front"
+    },
+    {
+      "field": "canopyId",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "canopy-entrance"
+    },
+    {
+      "field": "supportIds",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "canopy-post-east"
+    },
+    {
+      "field": "supportIds",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "canopy-post-west"
+    },
+    {
+      "field": "doorId",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "door-front"
+    },
+    {
+      "field": "landingId",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "landing-front"
+    },
+    {
+      "field": "hostIds",
+      "from": "entrance-front",
+      "kind": "HOST",
+      "to": "ring-0-w0"
+    },
+    {
+      "field": "stepRunIds",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "steps-front"
+    },
+    {
+      "from": "landing-front",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w0"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "from": "steps-front",
+      "kind": "TERMINATES_AT",
+      "to": "landing-front"
+    }
+  ],
+  "modelId": "fixture-exterior-entrance-canopy",
+  "nodes": [
+    {
+      "id": "canopy-beam",
+      "kind": "linearSolid",
+      "type": "Beam"
+    },
+    {
+      "id": "canopy-edge-east",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "canopy-edge-front",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "canopy-edge-wall",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "canopy-edge-west",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "canopy-entrance",
+      "kind": "assembly",
+      "type": "CANOPY"
+    },
+    {
+      "id": "canopy-plane",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "canopy-post-east",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "canopy-post-west",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "canopy-roof",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "door-front",
+      "kind": "door",
+      "type": "Door"
+    },
+    {
+      "id": "entrance-front",
+      "kind": "assembly",
+      "type": "ENTRANCE"
+    },
+    {
+      "id": "landing-front",
+      "kind": "platform",
+      "type": "Landing"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "steps-front",
+      "kind": "stepRun",
+      "type": "ExteriorStepRun"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

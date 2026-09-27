@@ -19,7 +19,6 @@
       "attachedRoofs": 1,
       "balconies": 2,
       "chimneys": 2,
-      "frameTones": 2,
       "interior": 3,
       "levels": 2,
       "massTones": 2,
@@ -28,6 +27,7 @@
       "portalHeads": 1,
       "railings": 2,
       "recesses": 4,
+      "returnTones": 8,
       "returns": 8,
       "rooflights": 3,
       "sharedDoors": 1,
@@ -48,7 +48,7 @@
   "sidecars": {
     "featureQualityHash": "fa231f81e47dee27129da75162efb4e40c1de11afb40cb8f945bae6bc432294d",
     "featureLineageHash": "efdd3652a8f765c52c4761eea98000aaab3fafc54e33ec79ff8f99b2b398622e",
-    "residualCandidateHash": "35f74248d8cbddadc861944f8816a9470282df1c2fbfcc15c6dc42b5afcd828c"
+    "residualCandidateHash": "d4ee2121b2650f556e4826696bcd01d069dd08b3b767ea9134c7501a1b15e562"
   },
   "frame": {
     "truth": {

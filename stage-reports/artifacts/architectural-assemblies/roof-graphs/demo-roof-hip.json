@@ -1,0 +1,471 @@
+{
+  "modelId": "demo-context",
+  "modelSchemaVersion": "1.6.0",
+  "roofs": [
+    {
+      "boundaries": [],
+      "chimneys": [],
+      "classification": "HIP",
+      "derivedClassification": "HIP",
+      "dormers": [],
+      "eaves": [
+        {
+          "end": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-eave-1",
+          "kind": "EAVE",
+          "length": 12.2,
+          "planeIds": [
+            "hyp-h1-roof-plane-1"
+          ],
+          "start": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": -0.6
+          }
+        },
+        {
+          "end": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": 8.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-eave-2",
+          "kind": "EAVE",
+          "length": 12.2,
+          "planeIds": [
+            "hyp-h1-roof-plane-2"
+          ],
+          "start": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": 8.6
+          }
+        },
+        {
+          "end": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-eave-3",
+          "kind": "EAVE",
+          "length": 9.2,
+          "planeIds": [
+            "hyp-h1-roof-plane-3"
+          ],
+          "start": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": 8.6
+          }
+        },
+        {
+          "end": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": 8.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-eave-4",
+          "kind": "EAVE",
+          "length": 9.2,
+          "planeIds": [
+            "hyp-h1-roof-plane-4"
+          ],
+          "start": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": -0.6
+          }
+        }
+      ],
+      "evidence": {
+        "confidence": 0.846,
+        "sourceIds": [
+          "src-frame-render-1",
+          "src-frame-roof-plan",
+          "src-frame-section-a"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [],
+      "hips": [
+        {
+          "end": {
+            "x": 4,
+            "y": 5.598076,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "GEOMETRIC_INFERRED"
+          },
+          "id": "hyp-h1-roof-join-2",
+          "kind": "HIP",
+          "length": 7.026616,
+          "planeIds": [
+            "hyp-h1-roof-plane-1",
+            "hyp-h1-roof-plane-3"
+          ],
+          "start": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": -0.6
+          }
+        },
+        {
+          "end": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "GEOMETRIC_INFERRED"
+          },
+          "id": "hyp-h1-roof-join-3",
+          "kind": "HIP",
+          "length": 7.026616,
+          "planeIds": [
+            "hyp-h1-roof-plane-1",
+            "hyp-h1-roof-plane-4"
+          ],
+          "start": {
+            "x": 7,
+            "y": 5.598076,
+            "z": 4
+          }
+        },
+        {
+          "end": {
+            "x": 4,
+            "y": 5.598076,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "GEOMETRIC_INFERRED"
+          },
+          "id": "hyp-h1-roof-join-4",
+          "kind": "HIP",
+          "length": 7.026616,
+          "planeIds": [
+            "hyp-h1-roof-plane-2",
+            "hyp-h1-roof-plane-3"
+          ],
+          "start": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": 8.6
+          }
+        },
+        {
+          "end": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": 8.6
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "GEOMETRIC_INFERRED"
+          },
+          "id": "hyp-h1-roof-join-5",
+          "kind": "HIP",
+          "length": 7.026616,
+          "planeIds": [
+            "hyp-h1-roof-plane-2",
+            "hyp-h1-roof-plane-4"
+          ],
+          "start": {
+            "x": 7,
+            "y": 5.598076,
+            "z": 4
+          }
+        }
+      ],
+      "id": "hyp-h1-roof",
+      "openings": [],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": -0.6,
+              "z": -0.6
+            },
+            {
+              "x": 11.6,
+              "z": -0.6
+            },
+            {
+              "x": 7,
+              "z": 4
+            },
+            {
+              "x": 4,
+              "z": 4
+            }
+          ],
+          "datum": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-plane-1",
+          "normal": {
+            "x": 0,
+            "y": 0.866025,
+            "z": -0.5
+          },
+          "pitchDeg": 30,
+          "planArea": 34.96,
+          "thickness": 0.25
+        },
+        {
+          "boundary": [
+            {
+              "x": 11.6,
+              "z": 8.6
+            },
+            {
+              "x": -0.6,
+              "z": 8.6
+            },
+            {
+              "x": 4,
+              "z": 4
+            },
+            {
+              "x": 7,
+              "z": 4
+            }
+          ],
+          "datum": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": 8.6
+          },
+          "downslope": {
+            "x": 0,
+            "z": 1
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-plane-2",
+          "normal": {
+            "x": 0,
+            "y": 0.866025,
+            "z": 0.5
+          },
+          "pitchDeg": 30,
+          "planArea": 34.96,
+          "thickness": 0.25
+        },
+        {
+          "boundary": [
+            {
+              "x": -0.6,
+              "z": 8.6
+            },
+            {
+              "x": -0.6,
+              "z": -0.6
+            },
+            {
+              "x": 4,
+              "z": 4
+            }
+          ],
+          "datum": {
+            "x": -0.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "downslope": {
+            "x": -1,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-plane-3",
+          "normal": {
+            "x": -0.5,
+            "y": 0.866025,
+            "z": 0
+          },
+          "pitchDeg": 30,
+          "planArea": 21.16,
+          "thickness": 0.25
+        },
+        {
+          "boundary": [
+            {
+              "x": 11.6,
+              "z": -0.6
+            },
+            {
+              "x": 11.6,
+              "z": 8.6
+            },
+            {
+              "x": 7,
+              "z": 4
+            }
+          ],
+          "datum": {
+            "x": 11.6,
+            "y": 2.942265,
+            "z": -0.6
+          },
+          "downslope": {
+            "x": 1,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "hyp-h1-roof-plane-4",
+          "normal": {
+            "x": 0.5,
+            "y": 0.866025,
+            "z": 0
+          },
+          "pitchDeg": 30,
+          "planArea": 21.16,
+          "thickness": 0.25
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [],
+      "ridges": [
+        {
+          "end": {
+            "x": 7,
+            "y": 5.598076,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 0.846,
+            "sourceIds": [
+              "src-frame-render-1",
+              "src-frame-roof-plan",
+              "src-frame-section-a"
+            ],
+            "status": "GEOMETRIC_INFERRED"
+          },
+          "id": "hyp-h1-roof-join-1",
+          "kind": "RIDGE",
+          "length": 3,
+          "planeIds": [
+            "hyp-h1-roof-plane-1",
+            "hyp-h1-roof-plane-2"
+          ],
+          "start": {
+            "x": 4,
+            "y": 5.598076,
+            "z": 4
+          }
+        }
+      ],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": []
+    }
+  ],
+  "schema": "buildapp.roof-graph",
+  "schemaVersion": "1.0.0"
+}
+

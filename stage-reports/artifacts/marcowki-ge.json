@@ -1,4 +1,5 @@
 {
+  "assemblies": [],
   "balconies": [
     {
       "evidence": {
@@ -1493,6 +1494,7 @@
       "width": 0.76
     }
   ],
+  "platforms": [],
   "railings": [
     {
       "baseOffset": -0.1,
@@ -1567,6 +1569,8 @@
       ]
     }
   ],
+  "relationships": [],
+  "roofEdges": [],
   "roofOpenings": [
     {
       "evidence": {
@@ -1706,6 +1710,7 @@
       ]
     }
   ],
+  "roofPlanes": [],
   "rooflights": [
     {
       "evidence": {
@@ -2510,7 +2515,7 @@
     }
   ],
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.5.0",
+  "schemaVersion": "1.6.0",
   "slabs": [
     {
       "evidence": {
@@ -2736,6 +2741,7 @@
       "width": 0.99
     }
   ],
+  "stepRuns": [],
   "surfaceRegions": [
     {
       "evidence": {
@@ -3489,6 +3495,7 @@
       }
     }
   ],
+  "wallPanels": [],
   "wallRings": [
     {
       "evidence": {

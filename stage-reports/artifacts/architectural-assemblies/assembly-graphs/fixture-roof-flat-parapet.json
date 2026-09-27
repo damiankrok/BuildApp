@@ -1,0 +1,214 @@
+{
+  "edges": [
+    {
+      "from": "parapet-east",
+      "kind": "ALIGNS_WITH",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "parapet-east",
+      "kind": "ATTACHED_TO",
+      "to": "roof-main-edge-east"
+    },
+    {
+      "from": "parapet-east",
+      "kind": "SUPPORTED_BY",
+      "to": "roof-main-plane"
+    },
+    {
+      "from": "parapet-front",
+      "kind": "ALIGNS_WITH",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "parapet-front",
+      "kind": "ATTACHED_TO",
+      "to": "roof-main-edge-front"
+    },
+    {
+      "from": "parapet-front",
+      "kind": "SUPPORTED_BY",
+      "to": "roof-main-plane"
+    },
+    {
+      "from": "parapet-rear",
+      "kind": "ALIGNS_WITH",
+      "to": "ring-0-w2"
+    },
+    {
+      "from": "parapet-rear",
+      "kind": "ATTACHED_TO",
+      "to": "roof-main-edge-rear"
+    },
+    {
+      "from": "parapet-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "roof-main-plane"
+    },
+    {
+      "from": "parapet-west",
+      "kind": "ALIGNS_WITH",
+      "to": "ring-0-w3"
+    },
+    {
+      "from": "parapet-west",
+      "kind": "ATTACHED_TO",
+      "to": "roof-main-edge-west"
+    },
+    {
+      "from": "parapet-west",
+      "kind": "SUPPORTED_BY",
+      "to": "roof-main-plane"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "parapet-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "parapet-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "parapet-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "parapet-west"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-edge-east"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-edge-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-edge-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-edge-west"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane"
+    },
+    {
+      "from": "roof-main-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "roof-main-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "from": "roof-main-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w3"
+    }
+  ],
+  "modelId": "fixture-roof-flat-parapet",
+  "nodes": [
+    {
+      "id": "parapet-east",
+      "kind": "wallPanel",
+      "type": "Parapet"
+    },
+    {
+      "id": "parapet-front",
+      "kind": "wallPanel",
+      "type": "Parapet"
+    },
+    {
+      "id": "parapet-rear",
+      "kind": "wallPanel",
+      "type": "Parapet"
+    },
+    {
+      "id": "parapet-west",
+      "kind": "wallPanel",
+      "type": "Parapet"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w1",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w3",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-edge-east",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-main-edge-front",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-main-edge-rear",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-main-edge-west",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-main-plane",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

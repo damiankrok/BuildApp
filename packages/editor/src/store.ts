@@ -333,6 +333,7 @@ export class EditorStore {
     this.isolated = null
     this.isolatedLevelId = null
     this.roofsVisible = true
+    this.hiddenCategories.clear()
     this.notify()
   }
 

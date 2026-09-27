@@ -1,0 +1,242 @@
+{
+  "edges": [
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-hip-ne"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-hip-nw"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-hip-se"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-hip-sw"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-east"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-west"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "from": "roof-main-plane-east",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "from": "roof-main-plane-west",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w3"
+    }
+  ],
+  "modelId": "fixture-roof-hip",
+  "nodes": [
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w1",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w3",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-east",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-west",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-hip-ne",
+      "kind": "roofEdge",
+      "type": "HipEdge"
+    },
+    {
+      "id": "roof-main-hip-nw",
+      "kind": "roofEdge",
+      "type": "HipEdge"
+    },
+    {
+      "id": "roof-main-hip-se",
+      "kind": "roofEdge",
+      "type": "HipEdge"
+    },
+    {
+      "id": "roof-main-hip-sw",
+      "kind": "roofEdge",
+      "type": "HipEdge"
+    },
+    {
+      "id": "roof-main-plane-east",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-west",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

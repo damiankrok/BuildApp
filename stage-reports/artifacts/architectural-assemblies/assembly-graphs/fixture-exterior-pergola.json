@@ -1,0 +1,449 @@
+{
+  "edges": [
+    {
+      "field": "primaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-beam-north"
+    },
+    {
+      "field": "primaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-beam-south"
+    },
+    {
+      "field": "postIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-post-1"
+    },
+    {
+      "field": "postIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-post-2"
+    },
+    {
+      "field": "postIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-post-3"
+    },
+    {
+      "field": "postIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-post-4"
+    },
+    {
+      "field": "secondaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-rafter-1"
+    },
+    {
+      "field": "secondaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-rafter-2"
+    },
+    {
+      "field": "secondaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-rafter-3"
+    },
+    {
+      "field": "secondaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-rafter-4"
+    },
+    {
+      "field": "secondaryBeamIds",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "pergola-rafter-5"
+    },
+    {
+      "field": "slabOrTerraceId",
+      "from": "pergola",
+      "kind": "COMPONENT",
+      "to": "terrace-rear"
+    },
+    {
+      "from": "pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-3"
+    },
+    {
+      "from": "pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-4"
+    },
+    {
+      "from": "pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-1"
+    },
+    {
+      "from": "pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-2"
+    },
+    {
+      "from": "pergola-post-1",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "from": "pergola-post-2",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "from": "pergola-post-3",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "from": "pergola-post-4",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "from": "pergola-rafter-1",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "from": "pergola-rafter-1",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "from": "pergola-rafter-2",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "from": "pergola-rafter-2",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "from": "pergola-rafter-3",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "from": "pergola-rafter-3",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "from": "pergola-rafter-4",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "from": "pergola-rafter-4",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "from": "pergola-rafter-5",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "from": "pergola-rafter-5",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "from": "terrace-rear",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "hostIds",
+      "from": "terrace-rear-assembly",
+      "kind": "HOST",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "platformId",
+      "from": "terrace-rear-assembly",
+      "kind": "COMPONENT",
+      "to": "terrace-rear"
+    }
+  ],
+  "modelId": "fixture-exterior-pergola",
+  "nodes": [
+    {
+      "id": "pergola",
+      "kind": "assembly",
+      "type": "PERGOLA"
+    },
+    {
+      "id": "pergola-beam-north",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-beam-south",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-post-1",
+      "kind": "linearSolid",
+      "type": "PergolaPost"
+    },
+    {
+      "id": "pergola-post-2",
+      "kind": "linearSolid",
+      "type": "PergolaPost"
+    },
+    {
+      "id": "pergola-post-3",
+      "kind": "linearSolid",
+      "type": "PergolaPost"
+    },
+    {
+      "id": "pergola-post-4",
+      "kind": "linearSolid",
+      "type": "PergolaPost"
+    },
+    {
+      "id": "pergola-rafter-1",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-rafter-2",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-rafter-3",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-rafter-4",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "pergola-rafter-5",
+      "kind": "linearSolid",
+      "type": "PergolaBeam"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "terrace-rear",
+      "kind": "terrace",
+      "type": "TerraceSurface"
+    },
+    {
+      "id": "terrace-rear-assembly",
+      "kind": "assembly",
+      "type": "TERRACE"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

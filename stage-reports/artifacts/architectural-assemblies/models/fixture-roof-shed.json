@@ -1,0 +1,802 @@
+{
+  "assemblies": [
+    {
+      "chimneyIds": [],
+      "classification": "SHED",
+      "dormerIds": [],
+      "edgeIds": [
+        "roof-main-eave",
+        "roof-main-high-edge",
+        "roof-main-verge-west",
+        "roof-main-verge-east"
+      ],
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [],
+      "id": "roof-main",
+      "kind": "ROOF",
+      "name": "shed roof",
+      "openingIds": [],
+      "planeIds": [
+        "roof-main-plane"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": [
+        "roof-main-eave-board",
+        "roof-main-verge-west-board",
+        "roof-main-verge-east-board"
+      ]
+    }
+  ],
+  "balconies": [],
+  "building": {
+    "evidence": {
+      "confidence": 1,
+      "locator": "building",
+      "source": "synthetic architectural diversity fixture",
+      "sourceIds": [
+        "src-synthetic-fixture"
+      ],
+      "status": "SOURCE_DERIVED"
+    },
+    "id": "building"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "door-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "door-front",
+      "leafThickness": 0.045,
+      "openAngle": 0,
+      "openingId": "door-front-opening",
+      "swing": "IN",
+      "usage": "ENTRANCE"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-synthetic-fixture",
+      "kind": "DERIVATION",
+      "label": "synthetic architectural diversity fixture (generic parameters, no project)"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "fixture-roof-shed",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "evidence": {
+        "confidence": 1,
+        "locator": "level-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 3,
+      "id": "level-0",
+      "index": 0
+    }
+  ],
+  "linearSolids": [
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 9.4,
+        "y": 3.029892306331991,
+        "z": -0.42000000000000004
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-eave",
+      "id": "roof-main-eave-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": -0.4,
+        "y": 3.029892306331991,
+        "z": -0.42000000000000004
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 9.42,
+        "y": 4.690237251277445,
+        "z": 7.422870285989954
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-east",
+      "id": "roof-main-verge-east-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": 9.42,
+        "y": 3.0322960702512725,
+        "z": -0.3771297140100465
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.42000000000000004,
+        "y": 3.0322960702512725,
+        "z": -0.3771297140100465
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-west",
+      "id": "roof-main-verge-west-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": -0.42000000000000004,
+        "y": 4.690237251277445,
+        "z": 7.422870285989954
+      },
+      "width": 0.22
+    }
+  ],
+  "materials": [
+    {
+      "color": "#b3aea7",
+      "id": "mat-concrete",
+      "name": "fair-faced concrete"
+    },
+    {
+      "color": "#6b6661",
+      "id": "mat-flat-roof-membrane",
+      "name": "flat roof membrane"
+    },
+    {
+      "color": "#9ec0d6",
+      "id": "mat-glass",
+      "name": "glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#a39a8f",
+      "id": "mat-paving",
+      "name": "paving"
+    },
+    {
+      "color": "#4a4541",
+      "id": "mat-roof",
+      "name": "roof tiles"
+    },
+    {
+      "color": "#bdb9b3",
+      "id": "mat-slab",
+      "name": "concrete slab"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-steel",
+      "name": "steel"
+    },
+    {
+      "color": "#b08a5f",
+      "id": "mat-timber",
+      "name": "timber"
+    },
+    {
+      "color": "#f2eee7",
+      "id": "mat-trim",
+      "name": "painted trim"
+    },
+    {
+      "color": "#e8e2d6",
+      "id": "mat-wall",
+      "name": "render"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp-architecture-fixtures",
+    "notes": []
+  },
+  "name": "Shed (mono-pitch) roof falling to the front",
+  "openings": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "door-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "door-front-opening",
+      "kind": "DOOR",
+      "offset": 4,
+      "sill": 0,
+      "wallId": "ring-0-w0",
+      "width": 1
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "window-front-1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 1.3,
+      "id": "window-front-1-opening",
+      "kind": "WINDOW",
+      "offset": 1.2,
+      "sill": 0.9,
+      "wallId": "ring-0-w0",
+      "width": 1.4
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "window-front-2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 1.3,
+      "id": "window-front-2-opening",
+      "kind": "WINDOW",
+      "offset": 6.4,
+      "sill": 0.9,
+      "wallId": "ring-0-w0",
+      "width": 1.4
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane SUPPORTED_BY ring-0-w0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane",
+      "id": "rel-roof-main-plane-supported-by-ring-0-w0",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane SUPPORTED_BY ring-0-w2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane",
+      "id": "rel-roof-main-plane-supported-by-ring-0-w2",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    }
+  ],
+  "roofEdges": [
+    {
+      "end": {
+        "x": 9.4,
+        "y": 3.139892306331991,
+        "z": -0.4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-eave",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-main-plane"
+      ],
+      "start": {
+        "x": -0.4,
+        "y": 3.139892306331991,
+        "z": -0.4
+      }
+    },
+    {
+      "end": {
+        "x": -0.4,
+        "y": 4.797833487358163,
+        "z": 7.4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-high-edge",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-high-edge",
+      "kind": "BOUNDARY",
+      "planeIds": [
+        "roof-main-plane"
+      ],
+      "start": {
+        "x": 9.4,
+        "y": 4.797833487358163,
+        "z": 7.4
+      }
+    },
+    {
+      "end": {
+        "x": 9.4,
+        "y": 4.797833487358163,
+        "z": 7.4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-east",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane"
+      ],
+      "start": {
+        "x": 9.4,
+        "y": 3.139892306331991,
+        "z": -0.4
+      }
+    },
+    {
+      "end": {
+        "x": -0.4,
+        "y": 3.139892306331991,
+        "z": -0.4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-west",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane"
+      ],
+      "start": {
+        "x": -0.4,
+        "y": 4.797833487358163,
+        "z": 7.4
+      }
+    }
+  ],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": -0.4,
+          "z": -0.4
+        },
+        {
+          "x": 9.4,
+          "z": -0.4
+        },
+        {
+          "x": 9.4,
+          "z": 7.4
+        },
+        {
+          "x": -0.4,
+          "z": 7.4
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 3.224914931,
+        "z": 0
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-plane",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "mono-pitch",
+      "pitchDeg": 12,
+      "thickness": 0.22
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.6.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w0"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w1"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w2"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w3"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0",
+      "junctionIds": [
+        "ring-0-j0",
+        "ring-0-j1",
+        "ring-0-j2",
+        "ring-0-j3"
+      ],
+      "levelId": "level-0",
+      "wallIds": [
+        "ring-0-w0",
+        "ring-0-w1",
+        "ring-0-w2",
+        "ring-0-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6,
+      "id": "ring-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9,
+        "z": 7
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6,
+      "id": "ring-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 7
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6,
+      "id": "ring-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 9,
+        "z": 7
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6,
+      "id": "ring-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 7
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane"
+        ]
+      }
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 2,
+      "evidence": {
+        "confidence": 1,
+        "locator": "window-front-1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "window-front-1",
+      "openingId": "window-front-1-opening"
+    },
+    {
+      "divisions": 2,
+      "evidence": {
+        "confidence": 1,
+        "locator": "window-front-2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "window-front-2",
+      "openingId": "window-front-2-opening"
+    }
+  ]
+}

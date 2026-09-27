@@ -1,0 +1,215 @@
+{
+  "modelId": "fixture-roof-shed",
+  "modelSchemaVersion": "1.6.0",
+  "roofs": [
+    {
+      "boundaries": [
+        {
+          "end": {
+            "x": -0.4,
+            "y": 4.797833,
+            "z": 7.4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-high-edge",
+          "kind": "BOUNDARY",
+          "length": 9.8,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 9.4,
+            "y": 4.797833,
+            "z": 7.4
+          }
+        }
+      ],
+      "chimneys": [],
+      "classification": "SHED",
+      "derivedClassification": "SHED",
+      "dormers": [],
+      "eaves": [
+        {
+          "end": {
+            "x": 9.4,
+            "y": 3.139892,
+            "z": -0.4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-eave",
+          "kind": "EAVE",
+          "length": 9.8,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": -0.4,
+            "y": 3.139892,
+            "z": -0.4
+          }
+        }
+      ],
+      "evidence": {
+        "confidence": 1,
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [
+        {
+          "hostEdgeId": "roof-main-eave",
+          "id": "roof-main-eave-board",
+          "role": "FASCIA"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-west",
+          "id": "roof-main-verge-west-board",
+          "role": "VERGE_BOARD"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-east",
+          "id": "roof-main-verge-east-board",
+          "role": "VERGE_BOARD"
+        }
+      ],
+      "hips": [],
+      "id": "roof-main",
+      "openings": [],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": -0.4,
+              "z": -0.4
+            },
+            {
+              "x": 9.4,
+              "z": -0.4
+            },
+            {
+              "x": 9.4,
+              "z": 7.4
+            },
+            {
+              "x": -0.4,
+              "z": 7.4
+            }
+          ],
+          "datum": {
+            "x": 0,
+            "y": 3.224915,
+            "z": 0
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane",
+          "normal": {
+            "x": 0,
+            "y": 0.978148,
+            "z": -0.207912
+          },
+          "pitchDeg": 12,
+          "planArea": 76.44,
+          "thickness": 0.22
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w0",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w0"
+        },
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w2",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w2"
+        }
+      ],
+      "ridges": [],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": [
+        {
+          "end": {
+            "x": -0.4,
+            "y": 3.139892,
+            "z": -0.4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-west",
+          "kind": "VERGE",
+          "length": 7.974257,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": -0.4,
+            "y": 4.797833,
+            "z": 7.4
+          }
+        },
+        {
+          "end": {
+            "x": 9.4,
+            "y": 4.797833,
+            "z": 7.4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-east",
+          "kind": "VERGE",
+          "length": 7.974257,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 9.4,
+            "y": 3.139892,
+            "z": -0.4
+          }
+        }
+      ]
+    }
+  ],
+  "schema": "buildapp.roof-graph",
+  "schemaVersion": "1.0.0"
+}
+

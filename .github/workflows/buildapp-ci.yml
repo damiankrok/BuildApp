@@ -569,6 +569,56 @@ jobs:
             second-house/**
             !second-house/**/observation-graph.json
 
+  architectural-assemblies:
+    # BUILDAPP-03G. The architectural language as a review record: the
+    # capability, primitive, assembly and relationship registries; the
+    # seventeen synthetic diversity fixtures through validation, DSL replay,
+    # round trip, compile and the closure audit; the hypothesis pipeline
+    # demonstrations (synthetic evidence only); the roof graph (JSON + SVG) and
+    # assembly graph of every fixture, of sealed Marcówki auto v3 and of the
+    # second house's live model from the job before. Fails when a fixture or a
+    # demonstration fails. The second house is optional input: a publisher
+    # outage there leaves its graphs out with a warning, not a red job.
+    name: Architecture / assemblies
+    needs: second-house-generalization
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: The second house's live model (from the second-house job)
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: second-house-generalization
+          path: second-house
+      - name: Registries, fixtures, demonstrations, roof and assembly graphs, regressions
+        run: npm run -s architecture:artifacts -- --out architectural-assemblies --rarytasy second-house/live/model.json
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Architectural assemblies (BUILDAPP-03G)"; echo
+            cat architectural-assemblies/README.md 2>/dev/null; echo
+            cat architectural-assemblies/regression-summary.md 2>/dev/null
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the architectural-assemblies record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: architectural-assemblies
+          if-no-files-found: error
+          retention-days: 30
+          path: architectural-assemblies/**
+
   preview-release:
     # BUILDAPP-03Y2G: one direct, stable download link for the owner's phone —
     # a GitHub prerelease `preview-latest` whose asset is the arm64 APK itself,

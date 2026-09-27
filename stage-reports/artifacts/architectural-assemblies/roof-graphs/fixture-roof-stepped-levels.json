@@ -1,0 +1,337 @@
+{
+  "modelId": "fixture-roof-stepped-levels",
+  "modelSchemaVersion": "1.6.0",
+  "roofs": [
+    {
+      "boundaries": [
+        {
+          "end": {
+            "x": 8,
+            "y": 6.05,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-upper-edge-front",
+          "kind": "BOUNDARY",
+          "length": 8,
+          "planeIds": [
+            "roof-main-plane-upper"
+          ],
+          "start": {
+            "x": 0,
+            "y": 6.05,
+            "z": 0
+          }
+        },
+        {
+          "end": {
+            "x": 0,
+            "y": 6.05,
+            "z": 8
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-upper-edge-rear",
+          "kind": "BOUNDARY",
+          "length": 8,
+          "planeIds": [
+            "roof-main-plane-upper"
+          ],
+          "start": {
+            "x": 8,
+            "y": 6.05,
+            "z": 8
+          }
+        },
+        {
+          "end": {
+            "x": 0,
+            "y": 6.05,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-upper-edge-west",
+          "kind": "BOUNDARY",
+          "length": 8,
+          "planeIds": [
+            "roof-main-plane-upper"
+          ],
+          "start": {
+            "x": 0,
+            "y": 6.05,
+            "z": 8
+          }
+        },
+        {
+          "end": {
+            "x": 13,
+            "y": 3.25,
+            "z": 1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-lower-edge-front",
+          "kind": "BOUNDARY",
+          "length": 5,
+          "planeIds": [
+            "roof-main-plane-lower"
+          ],
+          "start": {
+            "x": 8,
+            "y": 3.25,
+            "z": 1
+          }
+        },
+        {
+          "end": {
+            "x": 13,
+            "y": 3.25,
+            "z": 5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-lower-edge-east",
+          "kind": "BOUNDARY",
+          "length": 4,
+          "planeIds": [
+            "roof-main-plane-lower"
+          ],
+          "start": {
+            "x": 13,
+            "y": 3.25,
+            "z": 1
+          }
+        },
+        {
+          "end": {
+            "x": 8,
+            "y": 3.25,
+            "z": 5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-lower-edge-rear",
+          "kind": "BOUNDARY",
+          "length": 5,
+          "planeIds": [
+            "roof-main-plane-lower"
+          ],
+          "start": {
+            "x": 13,
+            "y": 3.25,
+            "z": 5
+          }
+        }
+      ],
+      "chimneys": [],
+      "classification": "STEPPED",
+      "derivedClassification": "STEPPED",
+      "dormers": [],
+      "eaves": [],
+      "evidence": {
+        "confidence": 1,
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [],
+      "hips": [],
+      "id": "roof-main",
+      "openings": [],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": 0,
+              "z": 0
+            },
+            {
+              "x": 8,
+              "z": 0
+            },
+            {
+              "x": 8,
+              "z": 8
+            },
+            {
+              "x": 0,
+              "z": 8
+            }
+          ],
+          "datum": {
+            "x": 0,
+            "y": 6.05,
+            "z": 0
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane-upper",
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "pitchDeg": 0,
+          "planArea": 64,
+          "thickness": 0.25
+        },
+        {
+          "boundary": [
+            {
+              "x": 8,
+              "z": 1
+            },
+            {
+              "x": 13,
+              "z": 1
+            },
+            {
+              "x": 13,
+              "z": 5
+            },
+            {
+              "x": 8,
+              "z": 5
+            }
+          ],
+          "datum": {
+            "x": 8,
+            "y": 3.25,
+            "z": 1
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane-lower",
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "pitchDeg": 0,
+          "planArea": 20,
+          "thickness": 0.25
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [
+        {
+          "from": "roof-main-plane-upper",
+          "id": "rel-roof-main-plane-upper-supported-by-ring-0-w0",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w0"
+        },
+        {
+          "from": "roof-main-plane-lower",
+          "id": "rel-roof-main-plane-lower-supported-by-wing-front",
+          "kind": "SUPPORTED_BY",
+          "to": "wing-front"
+        },
+        {
+          "from": "roof-main-plane-lower",
+          "id": "rel-roof-main-plane-lower-supported-by-wing-east",
+          "kind": "SUPPORTED_BY",
+          "to": "wing-east"
+        },
+        {
+          "from": "roof-main-plane-lower",
+          "id": "rel-roof-main-plane-lower-meets-ring-0-w1",
+          "kind": "MEETS",
+          "to": "ring-0-w1"
+        },
+        {
+          "from": "roof-main-plane-upper",
+          "id": "rel-roof-main-plane-upper-above-roof-main-plane-lower",
+          "kind": "ABOVE",
+          "to": "roof-main-plane-lower"
+        }
+      ],
+      "ridges": [],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [
+        {
+          "end": {
+            "x": 8,
+            "y": 6.05,
+            "z": 5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-step",
+          "kind": "ROOF_STEP",
+          "length": 4,
+          "planeIds": [
+            "roof-main-plane-upper",
+            "roof-main-plane-lower"
+          ],
+          "start": {
+            "x": 8,
+            "y": 6.05,
+            "z": 1
+          }
+        }
+      ],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": []
+    }
+  ],
+  "schema": "buildapp.roof-graph",
+  "schemaVersion": "1.0.0"
+}
+

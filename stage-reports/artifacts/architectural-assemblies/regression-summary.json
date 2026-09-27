@@ -1,0 +1,76 @@
+{
+  "regressions": [
+    {
+      "assemblies": 0,
+      "closure": {
+        "exteriorErrors": 0,
+        "findings": 42
+      },
+      "graphs": {
+        "classifications": [
+          "roof-attached-0: FLAT [LEGACY_ROOF]",
+          "roof-main: GABLE [LEGACY_ROOF]"
+        ],
+        "roofGraphs": 2
+      },
+      "modelHash": "731b045edcb1879013137d619c6de37a27c23a9582ced97ab9f263e5f9c5a17c",
+      "modelId": "m-auto-v3-marcowki",
+      "note": "the production analyzer emits the legacy rectangular Roof; its plane graph is derived (LEGACY_ROOF), the model holds no assemblies yet",
+      "primitives": {
+        "BalconySlab": 2,
+        "Door": 11,
+        "Fascia": 1,
+        "GarageDoor": 1,
+        "Landing": 2,
+        "Opening": 21,
+        "RailingRun": 2,
+        "RoofOpening": 5,
+        "Slab": 3,
+        "StairFlight": 3,
+        "SurfaceRegion": 3,
+        "TerraceSurface": 2,
+        "Wall": 40,
+        "Window": 9
+      },
+      "project": "marcowki-auto-v3",
+      "relationships": 0,
+      "schemaVersion": "1.6.0",
+      "source": "sealed candidate marcowki-auto-v3"
+    },
+    {
+      "assemblies": 0,
+      "closure": {
+        "exteriorErrors": 5,
+        "findings": 24
+      },
+      "graphs": {
+        "classifications": [
+          "roof-attached-0: FLAT [LEGACY_ROOF]",
+          "roof-main: GABLE [LEGACY_ROOF]"
+        ],
+        "roofGraphs": 2
+      },
+      "modelHash": "88c514f5af227d2e11adcd8b41e12281e052ee8b925f6459ee53b1c9447017e0",
+      "modelId": "m-analysis-m84f2903cb8e14",
+      "note": "the second regression house, live through the production pipeline; its exterior findings are the legacy flat garage roof and chimney joints the analyzer emits (see the stage report)",
+      "primitives": {
+        "Door": 10,
+        "GarageDoor": 1,
+        "Opening": 20,
+        "RoofOpening": 1,
+        "Slab": 2,
+        "SurfaceRegion": 1,
+        "TerraceSurface": 2,
+        "Wall": 20,
+        "Window": 9
+      },
+      "project": "rarytasy",
+      "relationships": 0,
+      "schemaVersion": "1.6.0",
+      "source": "live run model (--rarytasy, outside the repository)"
+    }
+  ],
+  "schema": "buildapp.architecture-regressions",
+  "schemaVersion": "1.0.0"
+}
+

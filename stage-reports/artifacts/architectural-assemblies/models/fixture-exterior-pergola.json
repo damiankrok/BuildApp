@@ -1,0 +1,1671 @@
+{
+  "assemblies": [
+    {
+      "coverage": "OPEN",
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [],
+      "id": "pergola",
+      "kind": "PERGOLA",
+      "postIds": [
+        "pergola-post-1",
+        "pergola-post-2",
+        "pergola-post-3",
+        "pergola-post-4"
+      ],
+      "primaryBeamIds": [
+        "pergola-beam-south",
+        "pergola-beam-north"
+      ],
+      "quality": "COMPLETE",
+      "secondaryBeamIds": [
+        "pergola-rafter-1",
+        "pergola-rafter-2",
+        "pergola-rafter-3",
+        "pergola-rafter-4",
+        "pergola-rafter-5"
+      ],
+      "slabOrTerraceId": "terrace-rear"
+    },
+    {
+      "chimneyIds": [],
+      "classification": "GABLE",
+      "dormerIds": [],
+      "edgeIds": [
+        "roof-main-ridge",
+        "roof-main-eave-front",
+        "roof-main-eave-rear",
+        "roof-main-verge-front-west",
+        "roof-main-verge-front-east",
+        "roof-main-verge-rear-west",
+        "roof-main-verge-rear-east"
+      ],
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [],
+      "id": "roof-main",
+      "kind": "ROOF",
+      "name": "gable roof",
+      "openingIds": [],
+      "planeIds": [
+        "roof-main-plane-front",
+        "roof-main-plane-rear"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": [
+        "roof-main-eave-front-board",
+        "roof-main-eave-rear-board",
+        "roof-main-verge-front-west-board",
+        "roof-main-verge-front-east-board",
+        "roof-main-verge-rear-west-board",
+        "roof-main-verge-rear-east-board"
+      ]
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "terrace-rear-assembly",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [
+        "ring-0-w2"
+      ],
+      "id": "terrace-rear-assembly",
+      "kind": "TERRACE",
+      "platformId": "terrace-rear",
+      "quality": "COMPLETE",
+      "railingIds": [],
+      "supportIds": []
+    }
+  ],
+  "balconies": [],
+  "building": {
+    "evidence": {
+      "confidence": 1,
+      "locator": "building",
+      "source": "synthetic architectural diversity fixture",
+      "sourceIds": [
+        "src-synthetic-fixture"
+      ],
+      "status": "SOURCE_DERIVED"
+    },
+    "id": "building"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "door-terrace",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "door-terrace",
+      "leafThickness": 0.045,
+      "openAngle": 0,
+      "openingId": "door-terrace-opening",
+      "swing": "IN",
+      "usage": "TERRACE"
+    }
+  ],
+  "evidenceSources": [
+    {
+      "id": "src-synthetic-fixture",
+      "kind": "DERIVATION",
+      "label": "synthetic architectural diversity fixture (generic parameters, no project)"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "fixture-exterior-pergola",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "evidence": {
+        "confidence": 1,
+        "locator": "level-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 3,
+      "id": "level-0",
+      "index": 0
+    }
+  ],
+  "linearSolids": [
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 8.3,
+        "y": 2.6,
+        "z": 11.8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-beam-north",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 1.7,
+        "y": 2.6,
+        "z": 11.8
+      },
+      "width": 0.24
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 8.3,
+        "y": 2.6,
+        "z": 9.2
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-beam-south",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 1.7,
+        "y": 2.6,
+        "z": 9.2
+      },
+      "width": 0.24
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 2,
+        "y": 2.48,
+        "z": 9.2
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-post-1",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_POST",
+      "start": {
+        "x": 2,
+        "y": 0,
+        "z": 9.2
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 8,
+        "y": 2.48,
+        "z": 9.2
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-post-2",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_POST",
+      "start": {
+        "x": 8,
+        "y": 0,
+        "z": 9.2
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 2,
+        "y": 2.48,
+        "z": 11.8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-3",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-post-3",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_POST",
+      "start": {
+        "x": 2,
+        "y": 0,
+        "z": 11.8
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 8,
+        "y": 2.48,
+        "z": 11.8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-4",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-post-4",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_POST",
+      "start": {
+        "x": 8,
+        "y": 0,
+        "z": 11.8
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.08,
+      "end": {
+        "x": 2,
+        "y": 2.8,
+        "z": 12.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-rafter-1",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 2,
+        "y": 2.8,
+        "z": 8.9
+      },
+      "width": 0.16
+    },
+    {
+      "depth": 0.08,
+      "end": {
+        "x": 3.5,
+        "y": 2.8,
+        "z": 12.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-rafter-2",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 3.5,
+        "y": 2.8,
+        "z": 8.9
+      },
+      "width": 0.16
+    },
+    {
+      "depth": 0.08,
+      "end": {
+        "x": 5,
+        "y": 2.8,
+        "z": 12.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-3",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-rafter-3",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 5,
+        "y": 2.8,
+        "z": 8.9
+      },
+      "width": 0.16
+    },
+    {
+      "depth": 0.08,
+      "end": {
+        "x": 6.5,
+        "y": 2.8,
+        "z": 12.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-4",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-rafter-4",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 6.5,
+        "y": 2.8,
+        "z": 8.9
+      },
+      "width": 0.16
+    },
+    {
+      "depth": 0.08,
+      "end": {
+        "x": 8,
+        "y": 2.8,
+        "z": 12.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-5",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "pergola-rafter-5",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "PERGOLA_BEAM",
+      "start": {
+        "x": 8,
+        "y": 2.8,
+        "z": 8.9
+      },
+      "width": 0.16
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.5,
+        "y": 2.8450898778951452,
+        "z": -0.52
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-eave-front",
+      "id": "roof-main-eave-front-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": -0.5,
+        "y": 2.8450898778951452,
+        "z": -0.52
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.5,
+        "y": 2.8450898778951452,
+        "z": 8.52
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-eave-rear",
+      "id": "roof-main-eave-rear-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": 10.5,
+        "y": 2.8450898778951452,
+        "z": 8.52
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.52,
+        "y": 2.864983153023356,
+        "z": -0.43690659200138493
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-front-east",
+      "id": "roof-main-verge-front-east-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": 10.52,
+        "y": 6.01591707496705,
+        "z": 4.063093407998615
+      },
+      "startCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "point": {
+          "x": 10.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.52,
+        "y": 6.01591707496705,
+        "z": 4.063093407998615
+      },
+      "endCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "point": {
+          "x": -0.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-front-west",
+      "id": "roof-main-verge-front-west-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": -0.52,
+        "y": 2.864983153023356,
+        "z": -0.43690659200138493
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.52,
+        "y": 6.01591707496705,
+        "z": 3.936906592001385
+      },
+      "endCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": -1
+        },
+        "point": {
+          "x": 10.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-rear-east",
+      "id": "roof-main-verge-rear-east-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": 10.52,
+        "y": 2.864983153023356,
+        "z": 8.436906592001385
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.52,
+        "y": 2.864983153023356,
+        "z": 8.436906592001385
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-rear-west",
+      "id": "roof-main-verge-rear-west-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": -0.52,
+        "y": 6.01591707496705,
+        "z": 3.936906592001385
+      },
+      "startCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": -1
+        },
+        "point": {
+          "x": -0.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "width": 0.22
+    }
+  ],
+  "materials": [
+    {
+      "color": "#b3aea7",
+      "id": "mat-concrete",
+      "name": "fair-faced concrete"
+    },
+    {
+      "color": "#6b6661",
+      "id": "mat-flat-roof-membrane",
+      "name": "flat roof membrane"
+    },
+    {
+      "color": "#9ec0d6",
+      "id": "mat-glass",
+      "name": "glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#a39a8f",
+      "id": "mat-paving",
+      "name": "paving"
+    },
+    {
+      "color": "#4a4541",
+      "id": "mat-roof",
+      "name": "roof tiles"
+    },
+    {
+      "color": "#bdb9b3",
+      "id": "mat-slab",
+      "name": "concrete slab"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-steel",
+      "name": "steel"
+    },
+    {
+      "color": "#b08a5f",
+      "id": "mat-timber",
+      "name": "timber"
+    },
+    {
+      "color": "#f2eee7",
+      "id": "mat-trim",
+      "name": "painted trim"
+    },
+    {
+      "color": "#e8e2d6",
+      "id": "mat-wall",
+      "name": "render"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp-architecture-fixtures",
+    "notes": []
+  },
+  "name": "Pergola on a grade terrace: posts, primary and secondary beams, and no roof",
+  "openings": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "door-terrace",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.2,
+      "id": "door-terrace-opening",
+      "kind": "DOOR",
+      "offset": 4.3,
+      "sill": 0,
+      "wallId": "ring-0-w2",
+      "width": 1.4
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-north SUPPORTED_BY pergola-post-3",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-beam-north",
+      "id": "rel-pergola-beam-north-supported-by-pergola-post-3",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-3"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-north SUPPORTED_BY pergola-post-4",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-beam-north",
+      "id": "rel-pergola-beam-north-supported-by-pergola-post-4",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-4"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-south SUPPORTED_BY pergola-post-1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-beam-south",
+      "id": "rel-pergola-beam-south-supported-by-pergola-post-1",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-1"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-beam-south SUPPORTED_BY pergola-post-2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-beam-south",
+      "id": "rel-pergola-beam-south-supported-by-pergola-post-2",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-post-2"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-1 SUPPORTED_BY terrace-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-post-1",
+      "id": "rel-pergola-post-1-supported-by-terrace-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-2 SUPPORTED_BY terrace-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-post-2",
+      "id": "rel-pergola-post-2-supported-by-terrace-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-3 SUPPORTED_BY terrace-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-post-3",
+      "id": "rel-pergola-post-3-supported-by-terrace-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-post-4 SUPPORTED_BY terrace-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-post-4",
+      "id": "rel-pergola-post-4-supported-by-terrace-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "terrace-rear"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-1 SUPPORTED_BY pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-1",
+      "id": "rel-pergola-rafter-1-supported-by-pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-1 SUPPORTED_BY pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-1",
+      "id": "rel-pergola-rafter-1-supported-by-pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-2 SUPPORTED_BY pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-2",
+      "id": "rel-pergola-rafter-2-supported-by-pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-2 SUPPORTED_BY pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-2",
+      "id": "rel-pergola-rafter-2-supported-by-pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-3 SUPPORTED_BY pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-3",
+      "id": "rel-pergola-rafter-3-supported-by-pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-3 SUPPORTED_BY pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-3",
+      "id": "rel-pergola-rafter-3-supported-by-pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-4 SUPPORTED_BY pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-4",
+      "id": "rel-pergola-rafter-4-supported-by-pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-4 SUPPORTED_BY pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-4",
+      "id": "rel-pergola-rafter-4-supported-by-pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-5 SUPPORTED_BY pergola-beam-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-5",
+      "id": "rel-pergola-rafter-5-supported-by-pergola-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "pergola-rafter-5 SUPPORTED_BY pergola-beam-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "pergola-rafter-5",
+      "id": "rel-pergola-rafter-5-supported-by-pergola-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "pergola-beam-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-front SUPPORTED_BY ring-0-w0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane-front",
+      "id": "rel-roof-main-plane-front-supported-by-ring-0-w0",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-rear SUPPORTED_BY ring-0-w2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane-rear",
+      "id": "rel-roof-main-plane-rear-supported-by-ring-0-w2",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "terrace-rear ATTACHED_TO ring-0-w2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "terrace-rear",
+      "id": "rel-terrace-rear-attached-to-ring-0-w2",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w2"
+    }
+  ],
+  "roofEdges": [
+    {
+      "end": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-eave-front",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-eave-rear",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ridge",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-ridge",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-main-plane-front",
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-front-east",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-front-west",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-rear-east",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-rear-west",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    }
+  ],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": -0.5,
+          "z": -0.5
+        },
+        {
+          "x": 10.5,
+          "z": -0.5
+        },
+        {
+          "x": 10.5,
+          "z": 4
+        },
+        {
+          "x": -0.5,
+          "z": 4
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 3.305193647,
+        "z": 0
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-plane-front",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "front slope",
+      "pitchDeg": 35,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.5,
+          "z": 4
+        },
+        {
+          "x": 10.5,
+          "z": 4
+        },
+        {
+          "x": 10.5,
+          "z": 8.5
+        },
+        {
+          "x": -0.5,
+          "z": 8.5
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 3.305193647,
+        "z": 8
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-plane-rear",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "rear slope",
+      "pitchDeg": 35,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.6.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "confidence": 1,
+        "locator": "terrace",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-0-w2"
+      ],
+      "id": "terrace-rear",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "polygon": [
+        {
+          "x": 1,
+          "z": 8
+        },
+        {
+          "x": 9,
+          "z": 8
+        },
+        {
+          "x": 9,
+          "z": 12.4
+        },
+        {
+          "x": 1,
+          "z": 12.4
+        }
+      ],
+      "surface": "DECK",
+      "thickness": 0.3,
+      "topOffset": 0
+    }
+  ],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w0"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w1"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w2"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w3"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0",
+      "junctionIds": [
+        "ring-0-j0",
+        "ring-0-j1",
+        "ring-0-j2",
+        "ring-0-j3"
+      ],
+      "levelId": "level-0",
+      "wallIds": [
+        "ring-0-w0",
+        "ring-0-w1",
+        "ring-0-w2",
+        "ring-0-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10,
+        "z": 8
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    }
+  ],
+  "windows": []
+}

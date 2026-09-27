@@ -1,0 +1,396 @@
+{
+  "edges": [
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "beamIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-beam-north"
+    },
+    {
+      "field": "beamIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-beam-south"
+    },
+    {
+      "field": "supportIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-post-ne"
+    },
+    {
+      "field": "supportIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-post-nw"
+    },
+    {
+      "field": "supportIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-post-se"
+    },
+    {
+      "field": "supportIds",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-post-sw"
+    },
+    {
+      "field": "roofAssemblyId",
+      "from": "shelter",
+      "kind": "COMPONENT",
+      "to": "shelter-roof"
+    },
+    {
+      "from": "shelter-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-post-ne"
+    },
+    {
+      "from": "shelter-beam-north",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-post-nw"
+    },
+    {
+      "from": "shelter-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-post-se"
+    },
+    {
+      "from": "shelter-beam-south",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-post-sw"
+    },
+    {
+      "from": "shelter-plane-north",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-beam-north"
+    },
+    {
+      "from": "shelter-plane-south",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-beam-south"
+    },
+    {
+      "from": "shelter-plane-south",
+      "kind": "COVERS",
+      "to": "shelter-plinth"
+    },
+    {
+      "from": "shelter-post-ne",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-plinth"
+    },
+    {
+      "from": "shelter-post-nw",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-plinth"
+    },
+    {
+      "from": "shelter-post-se",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-plinth"
+    },
+    {
+      "from": "shelter-post-sw",
+      "kind": "SUPPORTED_BY",
+      "to": "shelter-plinth"
+    },
+    {
+      "field": "edgeIds",
+      "from": "shelter-roof",
+      "kind": "COMPONENT",
+      "to": "shelter-eave-north"
+    },
+    {
+      "field": "edgeIds",
+      "from": "shelter-roof",
+      "kind": "COMPONENT",
+      "to": "shelter-eave-south"
+    },
+    {
+      "field": "planeIds",
+      "from": "shelter-roof",
+      "kind": "COMPONENT",
+      "to": "shelter-plane-north"
+    },
+    {
+      "field": "planeIds",
+      "from": "shelter-roof",
+      "kind": "COMPONENT",
+      "to": "shelter-plane-south"
+    },
+    {
+      "field": "edgeIds",
+      "from": "shelter-roof",
+      "kind": "COMPONENT",
+      "to": "shelter-ridge"
+    }
+  ],
+  "modelId": "fixture-exterior-open-canopy",
+  "nodes": [
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "shelter",
+      "kind": "assembly",
+      "type": "CANOPY"
+    },
+    {
+      "id": "shelter-beam-north",
+      "kind": "linearSolid",
+      "type": "Beam"
+    },
+    {
+      "id": "shelter-beam-south",
+      "kind": "linearSolid",
+      "type": "Beam"
+    },
+    {
+      "id": "shelter-eave-north",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "shelter-eave-south",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "shelter-plane-north",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "shelter-plane-south",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "shelter-plinth",
+      "kind": "platform"
+    },
+    {
+      "id": "shelter-post-ne",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "shelter-post-nw",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "shelter-post-se",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "shelter-post-sw",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "shelter-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "shelter-roof",
+      "kind": "assembly",
+      "type": "ROOF"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

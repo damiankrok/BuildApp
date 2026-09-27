@@ -1,0 +1,27 @@
+roof-main [ROOF GABLE, COMPLETE]
+  roof-main-plane-front (RoofPlane)
+  roof-main-plane-rear (RoofPlane)
+  roof-main-ridge (Ridge)
+  roof-main-eave-front (Eave)
+  roof-main-eave-rear (Eave)
+  roof-main-verge-front-west (Verge)
+  roof-main-verge-front-east (Verge)
+  roof-main-verge-rear-west (Verge)
+  roof-main-verge-rear-east (Verge)
+  roof-main-eave-front-board (Fascia)
+  roof-main-eave-rear-board (Fascia)
+  roof-main-verge-front-west-board (Fascia)
+  roof-main-verge-front-east-board (Fascia)
+  roof-main-verge-rear-west-board (Fascia)
+  roof-main-verge-rear-east-board (Fascia)
+unknown-roof-feature [UNKNOWN, FRAGMENTARY; or DORMER 0.2, ROOF 0.15]
+  roof-main-plane-front (host)
+  ! seen on two perspective renders only: no plan, section or elevation shows it, no roof interruption or vertical face was observed (so not a dormer), and it covers nothing a canopy would
+
+(in no assembly: 6 primitives)
+  ring-0-w0 (Wall)
+  ring-0-w1 (Wall)
+  ring-0-w2 (Wall)
+  ring-0-w3 (Wall)
+  window-front-opening (Opening)
+  window-front (Window)

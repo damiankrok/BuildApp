@@ -1,0 +1,1139 @@
+{
+  "fixtures": [
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_GABLE"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 2,
+          "relationshipsSatisfied": 2,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 32,
+      "compile": {
+        "errors": [],
+        "meshes": 24,
+        "triangles": 500,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-gable",
+      "modelHash": "sha256:7b8d011495582171240ed340ac918e887d38fe3f550540240bc29c494d73b578",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 2,
+        "Fascia": 6,
+        "Opening": 3,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "Verge": 4,
+        "Wall": 4,
+        "Window": 2
+      },
+      "relationships": 2,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Simple gable: two planes, a ridge, two eaves, four verges",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_HIP"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 4,
+          "relationshipsSatisfied": 4,
+          "roofJoinsChecked": 5,
+          "roofJoinsClosed": 5
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 38,
+      "compile": {
+        "errors": [],
+        "meshes": 24,
+        "triangles": 540,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "HIP"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: HIP [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-hip",
+      "modelHash": "sha256:9a89c9c971d71fd7894160c973a669d6bf37133d9ad13c44d6d3a2dcd0353965",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 4,
+        "Fascia": 4,
+        "HipEdge": 4,
+        "Opening": 3,
+        "Ridge": 1,
+        "RoofPlane": 4,
+        "Wall": 4,
+        "Window": 2
+      },
+      "relationships": 4,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "HIP"
+      ],
+      "roundTrip": true,
+      "title": "Hip roof: four planes, four hips and a ridge",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_SHED"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 2,
+          "relationshipsSatisfied": 2,
+          "roofJoinsChecked": 0,
+          "roofJoinsClosed": 0
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 28,
+      "compile": {
+        "errors": [],
+        "meshes": 20,
+        "triangles": 436,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "SHED"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: SHED [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-shed",
+      "modelHash": "sha256:c655699b2c1af089b5da373f3039cc6fbe954181f2f3135c4408c3fd5573e6ba",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 1,
+        "Fascia": 3,
+        "Opening": 3,
+        "RoofBoundary": 1,
+        "RoofPlane": 1,
+        "Verge": 2,
+        "Wall": 4,
+        "Window": 2
+      },
+      "relationships": 2,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "SHED"
+      ],
+      "roundTrip": true,
+      "title": "Shed (mono-pitch) roof falling to the front",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_FLAT",
+        "PARAPET"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 12,
+          "relationshipsSatisfied": 12,
+          "roofJoinsChecked": 0,
+          "roofJoinsClosed": 0
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 46,
+      "compile": {
+        "errors": [],
+        "meshes": 21,
+        "triangles": 448,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "FLAT"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: FLAT [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-flat-parapet",
+      "modelHash": "sha256:0475873439c6779ab141a725cd37cefbe6651f2bb0615a84b161be819cc8d417",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Opening": 3,
+        "Parapet": 4,
+        "RoofBoundary": 4,
+        "RoofPlane": 1,
+        "Wall": 4,
+        "Window": 2
+      },
+      "relationships": 16,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "FLAT"
+      ],
+      "roundTrip": true,
+      "title": "Flat roof with parapet runs over its host walls",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_INTERSECTION",
+        "ROOF_VALLEY"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 5,
+          "relationshipsSatisfied": 5,
+          "roofJoinsChecked": 4,
+          "roofJoinsClosed": 4
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 41,
+      "compile": {
+        "errors": [],
+        "meshes": 27,
+        "triangles": 428,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "INTERSECTING"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: INTERSECTING [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-intersecting-gables",
+      "modelHash": "sha256:1a5a3ee3bf3e639fc624fd16b268c0ba3755d65fb4d44419c4338396e1fedc27",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 5,
+        "Fascia": 11,
+        "Opening": 1,
+        "Ridge": 2,
+        "RoofPlane": 4,
+        "Valley": 2,
+        "Verge": 6,
+        "Wall": 8
+      },
+      "relationships": 5,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "INTERSECTING"
+      ],
+      "roundTrip": true,
+      "title": "Intersecting gables joined by two valleys",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1
+      },
+      "capabilities": [
+        "ROOF_STEP",
+        "ROOF_FLAT"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 5,
+          "relationshipsSatisfied": 5,
+          "roofJoinsChecked": 0,
+          "roofJoinsClosed": 0
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 36,
+      "compile": {
+        "errors": [],
+        "meshes": 17,
+        "triangles": 336,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "STEPPED"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: STEPPED [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "roof-stepped-levels",
+      "modelHash": "sha256:7f0a6265d11f48a50d7c24196f153c6688c2e5c5a3823c3f0f0fd2936340353d",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Opening": 2,
+        "RoofBoundary": 6,
+        "RoofPlane": 2,
+        "RoofStep": 1,
+        "Wall": 7,
+        "Window": 1
+      },
+      "relationships": 5,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "STEPPED"
+      ],
+      "roundTrip": true,
+      "title": "Stepped roof levels: an upper and a lower flat roof, one roof step",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "DORMER": 1,
+        "ROOF": 2
+      },
+      "capabilities": [
+        "ROOF_DORMER",
+        "ROOF_VALLEY",
+        "ROOF_GABLE"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 11,
+          "relationshipsSatisfied": 11,
+          "roofJoinsChecked": 4,
+          "roofJoinsClosed": 4
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 33,
+      "compile": {
+        "errors": [],
+        "meshes": 33,
+        "triangles": 744,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE",
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "dormer-front-roof-assembly: GABLE [ROOF_ASSEMBLY]",
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 2
+      },
+      "id": "roof-dormer-gable",
+      "modelHash": "sha256:b6b29a4ce2f1655c586c2de0c294589e2290fb57613fbbd8230c244cd1e52f0d",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 4,
+        "Fascia": 6,
+        "Opening": 4,
+        "Ridge": 2,
+        "RoofOpening": 1,
+        "RoofPlane": 4,
+        "Valley": 2,
+        "Verge": 6,
+        "Wall": 7,
+        "Window": 3
+      },
+      "relationships": 11,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE",
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Gable dormer cut into the front slope",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "DORMER": 1,
+        "ROOF": 2
+      },
+      "capabilities": [
+        "ROOF_DORMER",
+        "ROOF_VALLEY",
+        "ROOF_SHED"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 9,
+          "relationshipsSatisfied": 9,
+          "roofJoinsChecked": 2,
+          "roofJoinsClosed": 2
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 33,
+      "compile": {
+        "errors": [],
+        "meshes": 32,
+        "triangles": 680,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "SHED",
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "dormer-front-roof-assembly: SHED [ROOF_ASSEMBLY]",
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 2
+      },
+      "id": "roof-dormer-shed",
+      "modelHash": "sha256:e221626c5972b2dab40216808b76a73c539f9cac749e77e6524ee40f847f0e4b",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 3,
+        "Fascia": 6,
+        "Opening": 4,
+        "Ridge": 1,
+        "RoofOpening": 1,
+        "RoofPlane": 3,
+        "Valley": 1,
+        "Verge": 6,
+        "Wall": 7,
+        "Window": 3
+      },
+      "relationships": 9,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "SHED",
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Shed dormer cut into the front slope",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "BALCONY": 1,
+        "ROOF": 1
+      },
+      "capabilities": [
+        "BALCONY"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 3,
+          "relationshipsSatisfied": 3,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 39,
+      "compile": {
+        "errors": [],
+        "meshes": 29,
+        "triangles": 640,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "exterior-balcony",
+      "modelHash": "sha256:95cd3fd26bfb13ddb06aea6d117797ae7e461c0d45b41d21d108226abd9430b7",
+      "ok": true,
+      "primitives": {
+        "BalconySlab": 1,
+        "Door": 2,
+        "Eave": 2,
+        "Fascia": 6,
+        "Guard": 1,
+        "Opening": 2,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "Slab": 1,
+        "Verge": 4,
+        "Wall": 8
+      },
+      "relationships": 5,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Balcony: an elevated slab on the upper floor, guarded on three sides",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "LOGGIA": 1,
+        "ROOF": 1
+      },
+      "capabilities": [
+        "LOGGIA"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 4,
+          "relationshipsSatisfied": 4,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 38,
+      "compile": {
+        "errors": [],
+        "meshes": 30,
+        "triangles": 484,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "exterior-loggia",
+      "modelHash": "sha256:884c0b8350486c9d172631c38f04f9f83073f6520f5fca347deee4bd0a09acbf",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 2,
+        "Fascia": 6,
+        "Opening": 2,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "Slab": 1,
+        "TerraceSurface": 1,
+        "Verge": 4,
+        "Wall": 12,
+        "Window": 1
+      },
+      "relationships": 5,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Recessed loggia: a floor inside the envelope, under the upper storey",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1,
+        "TERRACE": 1
+      },
+      "capabilities": [
+        "TERRACE"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 3,
+          "relationshipsSatisfied": 3,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 32,
+      "compile": {
+        "errors": [],
+        "meshes": 17,
+        "triangles": 256,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "exterior-terrace",
+      "modelHash": "sha256:803999eb68776589a810a21d58759bc00cfb1a56806e451c01c807d336becf9c",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 2,
+        "Fascia": 6,
+        "Opening": 1,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "TerraceSurface": 1,
+        "Verge": 4,
+        "Wall": 4
+      },
+      "relationships": 4,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Grade terrace against the rear facade",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "CANOPY": 1,
+        "ENTRANCE": 1,
+        "ROOF": 2
+      },
+      "capabilities": [
+        "CANOPY",
+        "COLUMN",
+        "BEAM",
+        "ENTRANCE",
+        "EXTERIOR_STEPS"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 11,
+          "relationshipsSatisfied": 11,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 51,
+      "compile": {
+        "errors": [],
+        "meshes": 22,
+        "triangles": 324,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "FLAT",
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "canopy-roof: FLAT [ROOF_ASSEMBLY]",
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 2
+      },
+      "id": "exterior-entrance-canopy",
+      "modelHash": "sha256:77706f87a0294e066d580d5b287ef184166f74bb545bedac2088ee9ee4b3587c",
+      "ok": true,
+      "primitives": {
+        "Beam": 1,
+        "Door": 1,
+        "Eave": 2,
+        "ExteriorStepRun": 1,
+        "Fascia": 6,
+        "Landing": 1,
+        "Opening": 1,
+        "Post": 2,
+        "Ridge": 1,
+        "RoofBoundary": 4,
+        "RoofPlane": 3,
+        "Step": 2,
+        "Verge": 4,
+        "Wall": 4
+      },
+      "relationships": 12,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "FLAT",
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Entrance canopy on two posts and a beam, over a landing with two steps",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "CARPORT": 1,
+        "ROOF": 2
+      },
+      "capabilities": [
+        "CARPORT",
+        "COLUMN",
+        "BEAM"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 9,
+          "relationshipsSatisfied": 9,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 44,
+      "compile": {
+        "errors": [],
+        "meshes": 18,
+        "triangles": 232,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "SHED",
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "carport-roof: SHED [ROOF_ASSEMBLY]",
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 2
+      },
+      "id": "exterior-carport",
+      "modelHash": "sha256:f6819bb4805e9279ceb73168236f104a461c35865659529f86e5a27bd887727f",
+      "ok": true,
+      "primitives": {
+        "Beam": 1,
+        "Eave": 3,
+        "Fascia": 7,
+        "Post": 2,
+        "Ridge": 1,
+        "RoofBoundary": 1,
+        "RoofPlane": 3,
+        "Verge": 6,
+        "Wall": 4
+      },
+      "relationships": 9,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "SHED",
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Carport with a shed roof against the house, on two posts and a beam",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "PERGOLA": 1,
+        "ROOF": 1,
+        "TERRACE": 1
+      },
+      "capabilities": [
+        "PERGOLA",
+        "TERRACE",
+        "BEAM"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 21,
+          "relationshipsSatisfied": 21,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 61,
+      "compile": {
+        "errors": [],
+        "meshes": 28,
+        "triangles": 388,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "exterior-pergola",
+      "modelHash": "sha256:4f817b3b5564aaf64a4b1c621eb29644c3ed15d242b3d0630301d6c65ce1eebc",
+      "ok": true,
+      "primitives": {
+        "Door": 1,
+        "Eave": 2,
+        "Fascia": 6,
+        "Opening": 1,
+        "PergolaBeam": 7,
+        "PergolaPost": 4,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "TerraceSurface": 1,
+        "Verge": 4,
+        "Wall": 4
+      },
+      "relationships": 21,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Pergola on a grade terrace: posts, primary and secondary beams, and no roof",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "CANOPY": 1,
+        "ROOF": 2
+      },
+      "capabilities": [
+        "CANOPY",
+        "COLUMN",
+        "BEAM",
+        "ROOF_GABLE"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 13,
+          "relationshipsSatisfied": 13,
+          "roofJoinsChecked": 2,
+          "roofJoinsClosed": 2
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 51,
+      "compile": {
+        "errors": [],
+        "meshes": 21,
+        "triangles": 268,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE",
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]",
+          "shelter-roof: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 2
+      },
+      "id": "exterior-open-canopy",
+      "modelHash": "sha256:9df9daba066ca520242771c297cd1021820fbafc3b38f7e207d453f55fe55b03",
+      "ok": true,
+      "primitives": {
+        "Beam": 2,
+        "Eave": 4,
+        "Fascia": 6,
+        "Post": 4,
+        "Ridge": 2,
+        "RoofPlane": 4,
+        "Verge": 4,
+        "Wall": 4
+      },
+      "relationships": 13,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE",
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Detached open canopy: a gable shelter on four posts, no walls",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ENTRANCE": 2,
+        "EXTERIOR_STAIR": 1,
+        "ROOF": 1
+      },
+      "capabilities": [
+        "EXTERIOR_STEPS",
+        "ENTRANCE",
+        "HANDRAIL"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 6,
+          "relationshipsSatisfied": 6,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 45,
+      "compile": {
+        "errors": [],
+        "meshes": 26,
+        "triangles": 440,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "exterior-entrance-steps",
+      "modelHash": "sha256:36c41b59c8349801f5eead0cc0a1e308e8183f1b5446ab3e1f2c5a63190c7c1e",
+      "ok": true,
+      "primitives": {
+        "Door": 2,
+        "Eave": 2,
+        "ExteriorStepRun": 2,
+        "Fascia": 6,
+        "Handrail": 1,
+        "Landing": 2,
+        "Opening": 2,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "Step": 4,
+        "Verge": 4,
+        "Wall": 4
+      },
+      "relationships": 9,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "Entrance steps: three steps up to a landing at the front, one step onto a porch at the rear",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    },
+    {
+      "assemblies": {
+        "ROOF": 1,
+        "UNKNOWN": 1
+      },
+      "capabilities": [
+        "UNKNOWN_ASSEMBLY"
+      ],
+      "closure": {
+        "architecture": {
+          "relationshipsChecked": 2,
+          "relationshipsSatisfied": 2,
+          "roofJoinsChecked": 1,
+          "roofJoinsClosed": 1
+        },
+        "exteriorErrors": 0,
+        "exteriorWarnings": 0,
+        "findings": [],
+        "interiorFindings": 0
+      },
+      "commandCount": 31,
+      "compile": {
+        "errors": [],
+        "meshes": 17,
+        "triangles": 316,
+        "warnings": []
+      },
+      "derivedRoofClassifications": [
+        "GABLE"
+      ],
+      "failures": [],
+      "graphs": {
+        "classifications": [
+          "roof-main: GABLE [ROOF_ASSEMBLY]"
+        ],
+        "roofGraphs": 1
+      },
+      "id": "unknown-feature",
+      "modelHash": "sha256:6317d2c3b00fe0e750b87a05988b8184b7b11725f4026e2ce43c4fb3a5daca93",
+      "ok": true,
+      "primitives": {
+        "Eave": 2,
+        "Fascia": 6,
+        "Opening": 1,
+        "Ridge": 1,
+        "RoofPlane": 2,
+        "Verge": 4,
+        "Wall": 4,
+        "Window": 1
+      },
+      "relationships": 2,
+      "replayDeterministic": true,
+      "roofClassifications": [
+        "GABLE"
+      ],
+      "roundTrip": true,
+      "title": "A source-supported feature that cannot be classified",
+      "validation": {
+        "errors": 0,
+        "warningCodes": [],
+        "warnings": 0
+      }
+    }
+  ],
+  "schema": "buildapp.architecture-fixture-results",
+  "schemaVersion": "1.0.0"
+}
+

@@ -177,6 +177,40 @@ or INTERIOR. Nothing is repaired and no tolerance is widened to make a
 finding go away: the audit exists so that a joint defect lands in the layer
 that owns it. `npm run audit:exterior` runs it on the sealed candidates.
 
+Schema 1.6.0 adds the typed relationships and the roof graph to what it
+holds against the geometry, reported under `architecture` only when the
+model states either (so an older model reports exactly what it did): every
+meeting relationship (HOSTED_BY, SUPPORTED_BY, CONNECTED_TO, CONTINUES_TO,
+TERMINATES_AT, MEETS, ATTACHED_TO) must have its two objects touch
+(`RELATIONSHIP_UNSATISFIED`; the distance is vertex-to-face and, for two
+members crossing, arris-to-arris), ABOVE / BELOW / COVERS must agree with
+the geometry (`RELATIONSHIP_CONTRADICTED`), and two planes a ridge, hip or
+valley joins must close along it (`ROOF_JOIN_OPEN`). A declared
+INTERSECTS / OVERLAPS_INTENTIONALLY is a penetration, a declared meeting a
+contact. A railing with role HANDRAIL may end free.
+
+## Architectural primitives (`architecture-compiler.ts`, schema 1.6.0)
+
+- **Roof planes**: the boundary polygon tessellated with its openings as
+  holes (a dormer cut, a rooflight, a penetration), the top on the plane
+  equation and the underside `thickness / cos(pitch)` below it, closed by
+  edge faces and by reveals round every cut (`part = ROOF_PLANE`, and
+  `ROOF_REVEAL` / `ROOFLIGHT_*` for the openings). A wall with
+  `FOLLOW_ROOF_PLANES` stops under the lowest named underside, breakpoint by
+  breakpoint, exactly as `FOLLOW_ROOF` does for a legacy roof.
+- **Wall panels**: the outer-face line extruded `thickness` inwards between
+  its bottom and top polylines (`WALL_PANEL`).
+- **Platforms**: the polygon as a slab, a ramp's top on its slope (`PLATFORM`).
+- **Step runs**: a SOLID run is its stepped profile extruded across its width,
+  an OPEN_TREADS run one tread per step (`STEP_RUN`).
+- **Unknown assemblies**: only what was observed, restrained: each observed
+  plane a 2 cm plate, each segment a 3 cm bar (`UNKNOWN_ASSEMBLY`, drawn
+  translucent by every viewer). An unknown assembly is never given a guessed
+  body.
+- **Linear solids** keep compiling as the same box; a stated `startCut` /
+  `endCut` moves that end's corners along their arrises into the cut plane,
+  still a closed solid whose volume is the one `linearSolidVolume` states.
+
 ## Terraces
 
 `compileTerrace`: the terrace polygon extruded from `top − thickness` to

@@ -9,7 +9,7 @@ Three.js objects. Implemented in `packages/model`.
 ```json
 {
   "schema": "buildapp.canonical-building-model",
-  "schemaVersion": "1.5.0",
+  "schemaVersion": "1.6.0",
   "id": "demo-house",
   "name": "BuildApp demo house",
   "units": { "length": "m", "angle": "deg" },
@@ -19,13 +19,16 @@ Three.js objects. Implemented in `packages/model`.
   "openings": [...], "windows": [...], "doors": [...],
   "slabs": [...], "roofs": [...], "roofOpenings": [...], "rooflights": [...],
   "balconies": [...], "railings": [...], "chimneys": [...], "stairs": [...],
+  "surfaceRegions": [...], "linearSolids": [...], "terraces": [...],
+  "roofPlanes": [...], "roofEdges": [...], "wallPanels": [...], "platforms": [...],
+  "stepRuns": [...], "assemblies": [...], "relationships": [...],
   "materials": [...], "constraints": [...], "evidenceSources": [...],
   "meta": { "createdWith": "buildapp-demo", "notes": [] }
 }
 ```
 
 `schema` is a literal in the Zod schema. `schemaVersion` is the current
-version `1.2.0`; older supported versions (`1.0.0`, `1.1.0`) are migrated
+version `1.6.0`; older supported versions (`1.0.0` … `1.5.0`) are migrated
 explicitly (below) and anything else is refused. Every semantic object has a stable `id`
 (`[A-Za-z0-9_.:-]+`), unique across all collections including the building.
 Ids are never renamed (`setProperty` refuses `id`) and survive save/load
@@ -103,7 +106,14 @@ level moves what stands on it. Opening `sill` is above the wall base.
 | `Chimney` | `footprint`, `baseOffset`, `height` | `levelId` |
 | `Stair` | `footprint`; `kind` PLACEHOLDER (a footprint only) or FLIGHTS (`start` — the left end of the first riser line facing `direction` — `direction` PLUS_X/MINUS_X/PLUS_Z/MINUS_Z, `width`, `baseOffset`, `topOffset`, `waist`, `segments`) | `levelId`, `toLevelId` |
 | `StairSegment` | `FLIGHT { risers, going }`, `WINDER { risers, turn LEFT/RIGHT, angleDeg 90/180 }` (riser lines fan from a newel on the turn side), `LANDING { length, turn NONE/LEFT/RIGHT }` | in walking order |
-| `LinearSolid` | `start`, `end` (3-D centreline), `width`, `depth`, `roll?` — a closed member of rectangular section: a portal head, a fascia, a free board | `levelId`, `hostId`, `materialId` |
+| `LinearSolid` | `start`, `end` (3-D centreline), `width`, `depth`, `roll?` — a closed member of rectangular section: a portal head, a fascia, a free board; 1.6.0: `role?` COLUMN/POST/BEAM/LINTEL/RAFTER/PERGOLA_POST/PERGOLA_BEAM/FASCIA/VERGE_BOARD/FACADE_MEMBER/DECORATIVE/UNKNOWN_MEMBER (meaning, never geometry; vertical and horizontal roles are checked against the centreline, `MEMBER_ORIENTATION_INVALID`), `startCut?` / `endCut?` `{ point, normal }` — a stated end cut (the plumb cut of two verge boards at a gable apex) | `levelId`, `hostId`, `materialId` |
+| `RoofPlane` (1.6.0) | `boundary` (plan polygon it covers), `datum` (a point of its TOP surface), `pitchDeg`, `downslope` (plan unit vector it falls along), `thickness` — top `y = datum.y − tan(pitch)·((p − datum)·downslope)`, drawn `thickness / cos(pitch)` deep; roof openings may name a plane as `roofId` and carry an `outline` (a dormer cut) | `levelId`, `materialId` |
+| `RoofEdge` (1.6.0) | `kind` RIDGE/HIP/VALLEY/ROOF_STEP (two planes) or VERGE/EAVE/ABUTMENT/BOUNDARY (one), `start`, `end` (world, on its planes) — validated against the planes: a ridge is level and convex, a valley concave, a step has the upper plane first, an eave is level with the plane falling to it | `planeIds` |
+| `WallPanel` (1.6.0) | `role` PARAPET/DORMER_CHEEK/GABLE_INFILL/UPSTAND/KNEE_WALL/SCREEN/UNKNOWN_PANEL, `start`, `end` (outer-face line), `thickness`, `bottom` / `top` `[{ u, y }]` (world heights along the panel) — a wall whose foot and head are not level | `levelId`, `hostId`, `materialId` |
+| `Platform` (1.6.0) | `role` LANDING/PORCH/RAMP/PLINTH/UNKNOWN_PLATFORM, `polygon`, `topOffset`, `thickness`, `slope?` `{ origin, downhill, gradient ≤ 0.5 }` | `levelId`, `hostWallIds`, `materialId` |
+| `StepRun` (1.6.0) | `role` ENTRANCE_STEPS/GARDEN_STEPS/ACCESS_STEPS/UNKNOWN_STEPS, `start` (an end of the first riser line), `direction`, `width` (to the right of the direction), `steps`, `going`, `rise`, `baseOffset`, `construction` SOLID/OPEN_TREADS — exterior steps, never part of the interior stair system | `levelId`, `materialId` |
+| `Assembly` (1.6.0) | `kind` ROOF/DORMER/BALCONY/TERRACE/LOGGIA/CANOPY/CARPORT/PERGOLA/ENTRANCE/EXTERIOR_STAIR/FACADE/GARAGE/UNKNOWN, `quality` COMPLETE/PARTIAL/FRAGMENTARY, `missing?`, `alternatives?`, and per kind the ids of its components (a ROOF: `classification`, `planeIds`, `edgeIds`, `openingIds`, `dormerIds`, `chimneyIds`, `trimIds`; an UNKNOWN: `sourceEvidenceIds`, `metricExtent`, `approximateTopology`, `observedPlanesOrSegments`, `unresolvedReason`) — a grouping over primitives, never geometry of its own (except an UNKNOWN's restrained observed pieces) | components by id, `hostIds` |
+| `Relationship` (1.6.0) | `kind` HOSTED_BY/SUPPORTED_BY/CONNECTED_TO/CONTINUES_TO/TERMINATES_AT/INTERSECTS/MEETS/COVERS/ATTACHED_TO/GUARDS/OPENS_INTO/SAME_PLANE_AS/OVERLAPS_INTENTIONALLY/ABOVE/BELOW, `from`, `to`, `note?` — typed edges between objects, held against the geometry by the closure audit | any two objects |
 | `SurfaceRegion` | `hostId` (a wall), `face` OUTER/INNER, `rect` `{ a0, a1, b0, b1 }` wall-local, `materialId` — a finish band with **no thickness of its own** | `hostId`, `materialId` |
 | `Material` | `name`, `color` `#rrggbb`, `opacity` | referenced by `materialId` |
 | `Constraint` | `kind` FIXED_VALUE/EQUAL/ALIGN/NOTE, `targetIds`, `property`, `value`, `tolerance` | any object |
@@ -111,7 +121,14 @@ level moves what stands on it. Opening `sill` is above the wall base.
 
 `Wall.topProfile` is `FLAT` (default), `FOLLOW_ROOF { roofId }` (the wall
 stops at `min(height, roof underside)` — gable ends rise into the gable, eave
-walls die into the soffit) or `POLYLINE { points: [{u, height}] }`.
+walls die into the soffit), `POLYLINE { points: [{u, height}] }` or (1.6.0)
+`FOLLOW_ROOF_PLANES { planeIds }` (the wall stops under the lowest of the
+named planes' undersides wherever they cover it).
+
+Schema 1.6.0 is the architectural language: small semantic primitives,
+assemblies that group them, typed relationships between them. See
+`docs/ARCHITECTURAL_LANGUAGE.md` for the vocabulary, the registries, the
+capability status of each feature and the hypothesis pipeline.
 
 A raked head is a property of the hole, not of the fill: the window in it
 gets a trapezoid frame from the compiler. A door refuses a raked opening
@@ -195,11 +212,19 @@ break it.
 | `1.3.0` | BUILDAPP-01A | `surfaceRegions` collection; `Stair` becomes PLACEHOLDER \| FLIGHTS; optional `Slab.holes`, `RoofOpening.cut`, `Door.assembly` |
 | `1.4.0` | BUILDAPP-03 | `linearSolids` collection |
 | `1.5.0` | BUILDAPP-03Y | `terraces` collection; optional `Roof.edgeMembers`, `Roof.plateInset`, `Railing.path` |
+| `1.6.0` | BUILDAPP-03G | `roofPlanes`, `roofEdges`, `wallPanels`, `platforms`, `stepRuns`, `assemblies`, `relationships` collections; `Wall.topProfile` FOLLOW_ROOF_PLANES; optional `LinearSolid.role`, `.startCut`, `.endCut`, `Door.usage`, `Railing.role`, `RoofOpening.outline` and kind DORMER |
 
 Policy (`packages/model/src/migrate.ts`, run by `validateModel` and therefore
 by `loadModel`, `compileBuilding` and the editor's Load):
 
-- a `1.5.0` file loads as is;
+- a `1.6.0` file loads as is;
+- a `1.5.0` file is migrated explicitly: the seven 1.6.0 collections are
+  added empty, `schemaVersion` becomes `1.6.0`, a note is appended and the
+  load reports `SCHEMA_MIGRATED`. Every new field is optional, so it compiles
+  to exactly the geometry it compiled to under 1.5.0; stripping the empty
+  collections and restoring the version restates the 1.5.0 bytes exactly
+  (tested on the frozen demo and Marcówki files and on every sealed
+  candidate, see `packages/candidates/src/reseal-log.json`);
 - a `1.4.0` file is migrated explicitly: an empty `terraces` is added,
   `schemaVersion` becomes `1.5.0`, a note is appended and the load reports
   `SCHEMA_MIGRATED`. Its roofs carry no edge members or plate insets and its
@@ -244,10 +269,10 @@ validates and canonicalizes; `parseModel` throws with the issues listed.
 Round-trip tests live in `packages/model/test`, `packages/demo/test`,
 `packages/reference-marcowki/test` and `tests/architecture`. Two models are
 frozen as fixtures under `packages/model/test/fixtures`: the demo house at
-every schema version (`demo-house-1.0.0/1.1.0/1.2.0/1.3.0/1.4.0/1.5.0.json`) and
-the Marcówki reference at the current version (`marcowki-ge-1.5.0.json`,
+every schema version (`demo-house-1.0.0/…/1.5.0/1.6.0.json`) and
+the Marcówki reference at the current version (`marcowki-ge-1.6.0.json`,
 `docs/MARCOWKI_REFERENCE_MODEL.md`) with its earlier freezes
-(`marcowki-ge-1.2.0.json`, `-1.3.0.json`, `-1.4.0.json`) kept as migration baselines;
+(`marcowki-ge-1.2.0.json`, `-1.3.0.json`, `-1.4.0.json`, `-1.5.0.json`) kept as migration baselines;
 the model and geometry packages load and compile the reference from that
 file alone, without the reference package.
 

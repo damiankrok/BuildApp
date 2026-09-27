@@ -1,0 +1,451 @@
+{
+  "edges": [
+    {
+      "field": "wallIds",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-cheek-l"
+    },
+    {
+      "field": "wallIds",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-cheek-r"
+    },
+    {
+      "field": "cutOpeningId",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-cut"
+    },
+    {
+      "field": "wallIds",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-front"
+    },
+    {
+      "field": "localRoofAssemblyId",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-roof-assembly"
+    },
+    {
+      "field": "openingIds",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "dormer-front-window-opening"
+    },
+    {
+      "field": "hostRoofAssemblyId",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "roof-main"
+    },
+    {
+      "field": "hostPlaneIds",
+      "from": "dormer-front",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "hostIds",
+      "from": "dormer-front",
+      "kind": "HOST",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "from": "dormer-front-cheek-l",
+      "kind": "HOSTED_BY",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "from": "dormer-front-cheek-r",
+      "kind": "HOSTED_BY",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "from": "dormer-front-front",
+      "kind": "HOSTED_BY",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-eave-l"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-eave-r"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-ridge"
+    },
+    {
+      "field": "planeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-roof-l"
+    },
+    {
+      "field": "planeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-roof-r"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-valley-l"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-valley-r"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-verge-l"
+    },
+    {
+      "field": "edgeIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "COMPONENT",
+      "to": "dormer-front-verge-r"
+    },
+    {
+      "field": "hostIds",
+      "from": "dormer-front-roof-assembly",
+      "kind": "HOST",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "from": "dormer-front-roof-l",
+      "kind": "SUPPORTED_BY",
+      "to": "dormer-front-cheek-l"
+    },
+    {
+      "from": "dormer-front-roof-l",
+      "kind": "SUPPORTED_BY",
+      "to": "dormer-front-front"
+    },
+    {
+      "from": "dormer-front-roof-l",
+      "kind": "MEETS",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "from": "dormer-front-roof-r",
+      "kind": "SUPPORTED_BY",
+      "to": "dormer-front-cheek-r"
+    },
+    {
+      "from": "dormer-front-roof-r",
+      "kind": "SUPPORTED_BY",
+      "to": "dormer-front-front"
+    },
+    {
+      "from": "dormer-front-roof-r",
+      "kind": "MEETS",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "dormerIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "dormer-front"
+    },
+    {
+      "field": "openingIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "dormer-front-cut"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    }
+  ],
+  "modelId": "fixture-roof-dormer-gable",
+  "nodes": [
+    {
+      "id": "dormer-front",
+      "kind": "assembly",
+      "type": "DORMER"
+    },
+    {
+      "id": "dormer-front-cheek-l",
+      "kind": "wallPanel",
+      "type": "Wall"
+    },
+    {
+      "id": "dormer-front-cheek-r",
+      "kind": "wallPanel",
+      "type": "Wall"
+    },
+    {
+      "id": "dormer-front-cut",
+      "kind": "roofOpening",
+      "type": "RoofOpening"
+    },
+    {
+      "id": "dormer-front-eave-l",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "dormer-front-eave-r",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "dormer-front-front",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "dormer-front-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "dormer-front-roof-assembly",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "dormer-front-roof-l",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "dormer-front-roof-r",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "dormer-front-valley-l",
+      "kind": "roofEdge",
+      "type": "Valley"
+    },
+    {
+      "id": "dormer-front-valley-r",
+      "kind": "roofEdge",
+      "type": "Valley"
+    },
+    {
+      "id": "dormer-front-verge-l",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "dormer-front-verge-r",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "dormer-front-window-opening",
+      "kind": "opening",
+      "type": "Opening"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

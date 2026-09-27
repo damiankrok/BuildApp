@@ -83,6 +83,23 @@
     },
     "toSchema": "1.6.0",
     "why": "restated under model schema 1.6.0: the program is unchanged, and the model it builds, with the empty collections 1.5.0→1.6.0 added removed, hashes to the sealed 894e50ba340990f4"
+  },
+  {
+    "file": "stage-reports/artifacts/analyzer-v2/marcowki-auto-v2.json",
+    "from": {
+      "contentHash": "b73596d2bf01a51038e18a1aa592308ed9578abff80eb2b6d784ce4ed6a58796",
+      "id": "candidate-marcowki-b73596d2bf01a510",
+      "modelHash": "894e50ba340990f423d0aa09cabb98a886ff1b4f06f4f191c24e98a1712ee2b1"
+    },
+    "fromSchema": "1.5.0",
+    "id": "stage-reports/artifacts/analyzer-v2/marcowki-auto-v2.json",
+    "to": {
+      "contentHash": "d4ee2121b2650f556e4826696bcd01d069dd08b3b767ea9134c7501a1b15e562",
+      "id": "candidate-marcowki-d4ee2121b2650f55",
+      "modelHash": "731b045edcb1879013137d619c6de37a27c23a9582ced97ab9f263e5f9c5a17c"
+    },
+    "toSchema": "1.6.0",
+    "why": "restated under model schema 1.6.0: the program is unchanged, and the model it builds, with the empty collections 1.5.0→1.6.0 added removed, hashes to the sealed 894e50ba340990f4"
   }
 ]
 

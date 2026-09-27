@@ -64,7 +64,8 @@ export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): M
  * - MEMBER: an exterior wall that belongs to no wall ring, in a model that
  *   has rings — a return, a fin, a jamb standing out of a body's envelope
  *   to frame a recess. A body's envelope is its ring; what stands outside it
- *   frames it.
+ *   frames it. (1.6.0: walls that follow roof planes, and the walls a
+ *   dormer, garage or facade assembly names, are envelope too.)
  * - PRIMARY: a ring wall carrying the building's dominant exterior finish,
  *   the material covering the largest ring-wall area (length × height,
  *   openings not subtracted: a finish is chosen for a wall, not for what is
@@ -75,7 +76,14 @@ export function flattenMesh(mesh: CompiledMesh, semanticGroup: SemanticGroup): M
  * members; its walls are PRIMARY or SECONDARY by finish alone.
  */
 export function wallFinishes(model: CanonicalBuildingModel): Map<string, NonNullable<ObjectFacts['finish']>> {
-  const inRing = new Set(model.wallRings.flatMap((r) => r.wallIds))
+  // 1.6.0: a wall that follows roof planes, or that a dormer, garage or facade assembly names as its
+  // wall, is envelope as surely as a ring wall is — a dormer's front, a wing's walls under their roof
+  const envelope = [
+    ...model.wallRings.flatMap((r) => r.wallIds),
+    ...model.walls.filter((w) => w.topProfile?.kind === 'FOLLOW_ROOF_PLANES').map((w) => w.id),
+    ...model.assemblies.flatMap((a) => (a.kind === 'DORMER' || a.kind === 'GARAGE' || a.kind === 'FACADE' ? a.wallIds : [])),
+  ]
+  const inRing = new Set(envelope)
   const hasRings = inRing.size > 0
   const exterior = model.walls.filter((w) => w.kind === 'EXTERIOR')
   const body = exterior.filter((w) => !hasRings || inRing.has(w.id))

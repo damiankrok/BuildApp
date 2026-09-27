@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620.00" height="570.91" viewBox="0 0 620.00 570.91" font-family="sans-serif">
+<rect width="100%" height="100%" fill="#fbfaf8"/>
+<text x="30" y="18" font-size="13" font-weight="bold">Detached open canopy: a gable shelter on four posts, no walls</text>
+<polygon points="30.00,430.91 380.00,430.91 380.00,287.73 30.00,287.73" fill="rgb(179,175,169)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main-plane-front 35°</title></polygon>
+<text x="205.00" y="359.32" font-size="9" text-anchor="middle" fill="#37474f">roof-main-plane-front · 35.00°</text>
+<line x1="205.00" y1="359.32" x2="205.00" y2="378.41" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<polygon points="30.00,287.73 380.00,287.73 380.00,144.55 30.00,144.55" fill="rgb(179,175,169)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main-plane-rear 35°</title></polygon>
+<text x="205.00" y="216.14" font-size="9" text-anchor="middle" fill="#37474f">roof-main-plane-rear · 35.00°</text>
+<line x1="205.00" y1="216.14" x2="205.00" y2="197.05" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<polygon points="456.36,131.82 590.00,131.82 590.00,80.91 456.36,80.91" fill="rgb(195,191,185)" stroke="#9e9e9e" stroke-width="0.8"><title>shelter-plane-south 25°</title></polygon>
+<text x="523.18" y="106.36" font-size="9" text-anchor="middle" fill="#37474f">shelter-plane-south · 25.00°</text>
+<line x1="523.18" y1="106.36" x2="523.18" y2="125.45" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<polygon points="456.36,80.91 590.00,80.91 590.00,30.00 456.36,30.00" fill="rgb(195,191,185)" stroke="#9e9e9e" stroke-width="0.8"><title>shelter-plane-north 25°</title></polygon>
+<text x="523.18" y="55.45" font-size="9" text-anchor="middle" fill="#37474f">shelter-plane-north · 25.00°</text>
+<line x1="523.18" y1="55.45" x2="523.18" y2="36.36" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<line x1="30.00" y1="287.73" x2="380.00" y2="287.73" stroke="#b3261e" stroke-width="3"><title>roof-main-ridge RIDGE roof-main-plane-front/roof-main-plane-rear</title></line>
+<line x1="30.00" y1="430.91" x2="30.00" y2="287.73" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-front-west VERGE roof-main-plane-front</title></line>
+<line x1="380.00" y1="287.73" x2="380.00" y2="430.91" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-front-east VERGE roof-main-plane-front</title></line>
+<line x1="30.00" y1="287.73" x2="30.00" y2="144.55" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-rear-west VERGE roof-main-plane-rear</title></line>
+<line x1="380.00" y1="144.55" x2="380.00" y2="287.73" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-rear-east VERGE roof-main-plane-rear</title></line>
+<line x1="30.00" y1="430.91" x2="380.00" y2="430.91" stroke="#212121" stroke-width="2"><title>roof-main-eave-front EAVE roof-main-plane-front</title></line>
+<line x1="380.00" y1="144.55" x2="30.00" y2="144.55" stroke="#212121" stroke-width="2"><title>roof-main-eave-rear EAVE roof-main-plane-rear</title></line>
+<line x1="456.36" y1="80.91" x2="590.00" y2="80.91" stroke="#b3261e" stroke-width="3"><title>shelter-ridge RIDGE shelter-plane-south/shelter-plane-north</title></line>
+<line x1="456.36" y1="131.82" x2="590.00" y2="131.82" stroke="#212121" stroke-width="2"><title>shelter-eave-south EAVE shelter-plane-south</title></line>
+<line x1="590.00" y1="30.00" x2="456.36" y2="30.00" stroke="#212121" stroke-width="2"><title>shelter-eave-north EAVE shelter-plane-north</title></line>
+<defs><marker id="fall" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#37474f"/></marker></defs>
+<line x1="30" y1="476.9090909090909" x2="58" y2="476.9090909090909" stroke="#b3261e" stroke-width="3"/><text x="64" y="480.9090909090909" font-size="10">ridge</text>
+<line x1="170" y1="476.9090909090909" x2="198" y2="476.9090909090909" stroke="#d9822b" stroke-width="2.5"/><text x="204" y="480.9090909090909" font-size="10">hip</text>
+<line x1="310" y1="476.9090909090909" x2="338" y2="476.9090909090909" stroke="#1f5fbf" stroke-width="3"/><text x="344" y="480.9090909090909" font-size="10">valley</text>
+<line x1="450" y1="476.9090909090909" x2="478" y2="476.9090909090909" stroke="#2e7d32" stroke-width="2"/><text x="484" y="480.9090909090909" font-size="10">verge</text>
+<line x1="30" y1="496.9090909090909" x2="58" y2="496.9090909090909" stroke="#212121" stroke-width="2"/><text x="64" y="500.9090909090909" font-size="10">eave</text>
+<line x1="170" y1="496.9090909090909" x2="198" y2="496.9090909090909" stroke="#6a1b9a" stroke-width="3" stroke-dasharray="6 3"/><text x="204" y="500.9090909090909" font-size="10">roof step</text>
+<line x1="310" y1="496.9090909090909" x2="338" y2="496.9090909090909" stroke="#757575" stroke-width="1.5"/><text x="344" y="500.9090909090909" font-size="10">boundary</text>
+<line x1="450" y1="496.9090909090909" x2="478" y2="496.9090909090909" stroke="#8d6e63" stroke-width="2" stroke-dasharray="4 2"/><text x="484" y="500.9090909090909" font-size="10">abutment</text>
+<text x="30" y="550.91" font-size="10" fill="#37474f">roof-main: GABLE, 2 planes, 1 ridges, 0 hips, 0 valleys, 0 dormers | shelter-roof: GABLE, 2 planes, 1 ridges, 0 hips, 0 valleys, 0 dormers</text>
+</svg>

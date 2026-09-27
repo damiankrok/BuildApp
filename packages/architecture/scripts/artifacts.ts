@@ -13,13 +13,14 @@
  *   roof-graphs/<id>.json / .svg     the roof graph of every fixture, demo and
  *                                    regression project
  *   assembly-graphs/<id>.txt / .json the assembly tree and graph of the same
+ *   models/fixture-<id>.json         every fixture's model, canonical (BuildWorld opens it)
  *   regression-summary.json / .md    Marcówki (the sealed auto v3 candidate) and,
  *                                    with --rarytasy, the second house's live model
  *
  * Exits 1 when a fixture or a demo fails: the gate CI runs.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { stableJson } from '@buildapp/source-common'
 import { loadModel, serializeModel, type CanonicalBuildingModel } from '@buildapp/model'
@@ -35,7 +36,7 @@ const arg = (name: string): string | undefined => {
   return i >= 0 && i + 1 < process.argv.length ? process.argv[i + 1] : undefined
 }
 const out = resolve(ROOT, arg('out') ?? 'stage-reports/artifacts/architectural-assemblies')
-for (const d of ['', 'roof-graphs', 'assembly-graphs']) mkdirSync(join(out, d), { recursive: true })
+for (const d of ['', 'roof-graphs', 'assembly-graphs', 'models']) mkdirSync(join(out, d), { recursive: true })
 const json = (name: string, data: unknown): void => writeFileSync(join(out, name), `${stableJson(data)}\n`)
 const text = (name: string, data: string): void => writeFileSync(join(out, name), data.endsWith('\n') ? data : `${data}\n`)
 const cell = (s: unknown): string => String(s).replace(/\|/g, '\\|').replace(/\n/g, ' ')
@@ -70,6 +71,8 @@ let failed = 0
 const fixtureRuns = ALL_FIXTURES.map((f) => {
   const { run, model } = runFixture(f)
   if (!run.ok) failed += 1
+  // the model itself, canonical: what the viewer e2e loads, and what a reviewer opens in BuildWorld
+  writeFileSync(join(out, `models/fixture-${f.id}.json`), serializeModel(model))
   return { ...run, graphs: graphs(`fixture-${f.id}`, f.title, model) }
 })
 json('fixture-results.json', { schema: 'buildapp.architecture-fixture-results', schemaVersion: '1.0.0', fixtures: fixtureRuns })
@@ -133,7 +136,8 @@ regression('marcowki-auto-v3', 'sealed candidate marcowki-auto-v3', modelOf('mar
 const rarytasy = arg('rarytasy')
 if (rarytasy && existsSync(rarytasy)) {
   const r = loadModel(readFileSync(rarytasy, 'utf8'))
-  if (r.ok) regression('rarytasy', `live run model ${rarytasy}`, r.model, 'the second regression house, live through the production pipeline')
+  const shown = relative(ROOT, resolve(rarytasy))
+  if (r.ok) regression('rarytasy', `live run model ${shown.startsWith('..') ? '(--rarytasy, outside the repository)' : shown}`, r.model, 'the second regression house, live through the production pipeline; its exterior findings are the legacy flat garage roof and chimney joints the analyzer emits (see the stage report)')
   else console.error(`--rarytasy ${rarytasy}: not a valid model`)
 } else if (rarytasy) console.log(`::warning::no Rarytasy model at ${rarytasy}; its regression graphs are not written`)
 json('regression-summary.json', { schema: 'buildapp.architecture-regressions', schemaVersion: '1.0.0', regressions })

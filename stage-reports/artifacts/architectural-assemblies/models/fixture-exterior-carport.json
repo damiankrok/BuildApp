@@ -1,0 +1,1420 @@
+{
+  "assemblies": [
+    {
+      "bays": 1,
+      "beamIds": [
+        "carport-beam"
+      ],
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [
+        "ring-0-w1"
+      ],
+      "id": "carport",
+      "kind": "CARPORT",
+      "openSides": [
+        "MAX_X",
+        "MIN_Z",
+        "MAX_Z"
+      ],
+      "quality": "COMPLETE",
+      "roofAssemblyId": "carport-roof",
+      "slabId": "carport-plinth",
+      "supportIds": [
+        "carport-post-south",
+        "carport-post-north"
+      ]
+    },
+    {
+      "chimneyIds": [],
+      "classification": "SHED",
+      "dormerIds": [],
+      "edgeIds": [
+        "carport-abutment",
+        "carport-eave",
+        "carport-verge-south",
+        "carport-verge-north"
+      ],
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-roof",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [
+        "ring-0-w1"
+      ],
+      "id": "carport-roof",
+      "kind": "ROOF",
+      "openingIds": [],
+      "planeIds": [
+        "carport-plane"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": [
+        "carport-fascia"
+      ]
+    },
+    {
+      "chimneyIds": [],
+      "classification": "GABLE",
+      "dormerIds": [],
+      "edgeIds": [
+        "roof-main-ridge",
+        "roof-main-eave-front",
+        "roof-main-eave-rear",
+        "roof-main-verge-front-west",
+        "roof-main-verge-front-east",
+        "roof-main-verge-rear-west",
+        "roof-main-verge-rear-east"
+      ],
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostIds": [],
+      "id": "roof-main",
+      "kind": "ROOF",
+      "name": "gable roof",
+      "openingIds": [],
+      "planeIds": [
+        "roof-main-plane-front",
+        "roof-main-plane-rear"
+      ],
+      "quality": "COMPLETE",
+      "trimIds": [
+        "roof-main-eave-front-board",
+        "roof-main-eave-rear-board",
+        "roof-main-verge-front-west-board",
+        "roof-main-verge-front-east-board",
+        "roof-main-verge-rear-west-board",
+        "roof-main-verge-rear-east-board"
+      ]
+    }
+  ],
+  "balconies": [],
+  "building": {
+    "evidence": {
+      "confidence": 1,
+      "locator": "building",
+      "source": "synthetic architectural diversity fixture",
+      "sourceIds": [
+        "src-synthetic-fixture"
+      ],
+      "status": "SOURCE_DERIVED"
+    },
+    "id": "building"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [],
+  "evidenceSources": [
+    {
+      "id": "src-synthetic-fixture",
+      "kind": "DERIVATION",
+      "label": "synthetic architectural diversity fixture (generic parameters, no project)"
+    }
+  ],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "fixture-exterior-carport",
+  "levels": [
+    {
+      "buildingId": "building",
+      "elevation": 0,
+      "evidence": {
+        "confidence": 1,
+        "locator": "level-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 3,
+      "id": "level-0",
+      "index": 0
+    }
+  ],
+  "linearSolids": [
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 13.2,
+        "y": 2.189,
+        "z": 6.87
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-beam",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-beam",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "BEAM",
+      "start": {
+        "x": 13.2,
+        "y": 2.189,
+        "z": 1.13
+      },
+      "width": 0.25
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 13.52,
+        "y": 2.3444505833890372,
+        "z": 7.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "carport-eave",
+      "id": "carport-fascia",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": 13.52,
+        "y": 2.3444505833890372,
+        "z": 0.9
+      },
+      "width": 0.2
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 13.2,
+        "y": 2.064,
+        "z": 6.8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-post-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-post-north",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "POST",
+      "start": {
+        "x": 13.2,
+        "y": 0,
+        "z": 6.8
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.14,
+      "end": {
+        "x": 13.2,
+        "y": 2.064,
+        "z": 1.2
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-post-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-post-south",
+      "levelId": "level-0",
+      "materialId": "mat-timber",
+      "role": "POST",
+      "start": {
+        "x": 13.2,
+        "y": 0,
+        "z": 1.2
+      },
+      "width": 0.14
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.5,
+        "y": 2.8450898778951452,
+        "z": -0.52
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-eave-front",
+      "id": "roof-main-eave-front-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": -0.5,
+        "y": 2.8450898778951452,
+        "z": -0.52
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.5,
+        "y": 2.8450898778951452,
+        "z": 8.52
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-eave-rear",
+      "id": "roof-main-eave-rear-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "FASCIA",
+      "start": {
+        "x": 10.5,
+        "y": 2.8450898778951452,
+        "z": 8.52
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.52,
+        "y": 2.864983153023356,
+        "z": -0.43690659200138493
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-front-east",
+      "id": "roof-main-verge-front-east-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": 10.52,
+        "y": 6.01591707496705,
+        "z": 4.063093407998615
+      },
+      "startCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "point": {
+          "x": 10.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.52,
+        "y": 6.01591707496705,
+        "z": 4.063093407998615
+      },
+      "endCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "point": {
+          "x": -0.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-front-west",
+      "id": "roof-main-verge-front-west-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": -0.52,
+        "y": 2.864983153023356,
+        "z": -0.43690659200138493
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": 10.52,
+        "y": 6.01591707496705,
+        "z": 3.936906592001385
+      },
+      "endCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": -1
+        },
+        "point": {
+          "x": 10.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-rear-east",
+      "id": "roof-main-verge-rear-east-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": 10.52,
+        "y": 2.864983153023356,
+        "z": 8.436906592001385
+      },
+      "width": 0.22
+    },
+    {
+      "depth": 0.04,
+      "end": {
+        "x": -0.52,
+        "y": 2.864983153023356,
+        "z": 8.436906592001385
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostId": "roof-main-verge-rear-west",
+      "id": "roof-main-verge-rear-west-board",
+      "levelId": "level-0",
+      "materialId": "mat-trim",
+      "role": "VERGE_BOARD",
+      "start": {
+        "x": -0.52,
+        "y": 6.01591707496705,
+        "z": 3.936906592001385
+      },
+      "startCut": {
+        "normal": {
+          "x": 0,
+          "y": 0,
+          "z": -1
+        },
+        "point": {
+          "x": -0.5,
+          "y": 6.106023799838839,
+          "z": 4
+        }
+      },
+      "width": 0.22
+    }
+  ],
+  "materials": [
+    {
+      "color": "#b3aea7",
+      "id": "mat-concrete",
+      "name": "fair-faced concrete"
+    },
+    {
+      "color": "#6b6661",
+      "id": "mat-flat-roof-membrane",
+      "name": "flat roof membrane"
+    },
+    {
+      "color": "#9ec0d6",
+      "id": "mat-glass",
+      "name": "glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#a39a8f",
+      "id": "mat-paving",
+      "name": "paving"
+    },
+    {
+      "color": "#4a4541",
+      "id": "mat-roof",
+      "name": "roof tiles"
+    },
+    {
+      "color": "#bdb9b3",
+      "id": "mat-slab",
+      "name": "concrete slab"
+    },
+    {
+      "color": "#55585c",
+      "id": "mat-steel",
+      "name": "steel"
+    },
+    {
+      "color": "#b08a5f",
+      "id": "mat-timber",
+      "name": "timber"
+    },
+    {
+      "color": "#f2eee7",
+      "id": "mat-trim",
+      "name": "painted trim"
+    },
+    {
+      "color": "#e8e2d6",
+      "id": "mat-wall",
+      "name": "render"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp-architecture-fixtures",
+    "notes": []
+  },
+  "name": "Carport with a shed roof against the house, on two posts and a beam",
+  "openings": [],
+  "platforms": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-0-w1"
+      ],
+      "id": "carport-plinth",
+      "levelId": "level-0",
+      "materialId": "mat-paving",
+      "polygon": [
+        {
+          "x": 10,
+          "z": 0.9
+        },
+        {
+          "x": 13.5,
+          "z": 0.9
+        },
+        {
+          "x": 13.5,
+          "z": 7.1
+        },
+        {
+          "x": 10,
+          "z": 7.1
+        }
+      ],
+      "role": "PLINTH",
+      "thickness": 0.15,
+      "topOffset": 0
+    }
+  ],
+  "railings": [],
+  "relationships": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-beam SUPPORTED_BY carport-post-north",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-beam",
+      "id": "rel-carport-beam-supported-by-carport-post-north",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-post-north"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-beam SUPPORTED_BY carport-post-south",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-beam",
+      "id": "rel-carport-beam-supported-by-carport-post-south",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-post-south"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-plane ATTACHED_TO ring-0-w1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-plane",
+      "id": "rel-carport-plane-attached-to-ring-0-w1",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w1"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-plane SUPPORTED_BY carport-beam",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-plane",
+      "id": "rel-carport-plane-supported-by-carport-beam",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-beam"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-plinth ATTACHED_TO ring-0-w1",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-plinth",
+      "id": "rel-carport-plinth-attached-to-ring-0-w1",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w1"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-post-north SUPPORTED_BY carport-plinth",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-post-north",
+      "id": "rel-carport-post-north-supported-by-carport-plinth",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-plinth"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-post-south SUPPORTED_BY carport-plinth",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "carport-post-south",
+      "id": "rel-carport-post-south-supported-by-carport-plinth",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-plinth"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-front SUPPORTED_BY ring-0-w0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane-front",
+      "id": "rel-roof-main-plane-front-supported-by-ring-0-w0",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-rear SUPPORTED_BY ring-0-w2",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "from": "roof-main-plane-rear",
+      "id": "rel-roof-main-plane-rear-supported-by-ring-0-w2",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    }
+  ],
+  "roofEdges": [
+    {
+      "end": {
+        "x": 10,
+        "y": 2.7506609057297715,
+        "z": 0.9
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-abutment",
+      "kind": "ABUTMENT",
+      "planeIds": [
+        "carport-plane"
+      ],
+      "start": {
+        "x": 10,
+        "y": 2.7506609057297715,
+        "z": 7.1
+      }
+    },
+    {
+      "end": {
+        "x": 13.5,
+        "y": 2.4444505833890373,
+        "z": 7.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-eave",
+      "kind": "EAVE",
+      "planeIds": [
+        "carport-plane"
+      ],
+      "start": {
+        "x": 13.5,
+        "y": 2.4444505833890373,
+        "z": 0.9
+      }
+    },
+    {
+      "end": {
+        "x": 10,
+        "y": 2.7506609057297715,
+        "z": 7.1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-verge-north",
+      "kind": "VERGE",
+      "planeIds": [
+        "carport-plane"
+      ],
+      "start": {
+        "x": 13.5,
+        "y": 2.4444505833890373,
+        "z": 7.1
+      }
+    },
+    {
+      "end": {
+        "x": 13.5,
+        "y": 2.4444505833890373,
+        "z": 0.9
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-verge-south",
+      "kind": "VERGE",
+      "planeIds": [
+        "carport-plane"
+      ],
+      "start": {
+        "x": 10,
+        "y": 2.7506609057297715,
+        "z": 0.9
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-eave-front",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-eave-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-eave-rear",
+      "kind": "EAVE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ridge",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-ridge",
+      "kind": "RIDGE",
+      "planeIds": [
+        "roof-main-plane-front",
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-front-east",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-front-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-front-west",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-front"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": -0.5
+      }
+    },
+    {
+      "end": {
+        "x": 10.5,
+        "y": 6.106023799838839,
+        "z": 4
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-east",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-rear-east",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": 10.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      }
+    },
+    {
+      "end": {
+        "x": -0.5,
+        "y": 2.955089877895145,
+        "z": 8.5
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-verge-rear-west",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-verge-rear-west",
+      "kind": "VERGE",
+      "planeIds": [
+        "roof-main-plane-rear"
+      ],
+      "start": {
+        "x": -0.5,
+        "y": 6.106023799838839,
+        "z": 4
+      }
+    }
+  ],
+  "roofOpenings": [],
+  "roofPlanes": [
+    {
+      "boundary": [
+        {
+          "x": 10,
+          "z": 0.9
+        },
+        {
+          "x": 13.5,
+          "z": 0.9
+        },
+        {
+          "x": 13.5,
+          "z": 7.1
+        },
+        {
+          "x": 10,
+          "z": 7.1
+        }
+      ],
+      "datum": {
+        "x": 13.27,
+        "y": 2.464572976,
+        "z": 0.9
+      },
+      "downslope": {
+        "x": 1,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "carport-plane",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "carport-plane",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "carport roof",
+      "pitchDeg": 5,
+      "thickness": 0.15
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.5,
+          "z": -0.5
+        },
+        {
+          "x": 10.5,
+          "z": -0.5
+        },
+        {
+          "x": 10.5,
+          "z": 4
+        },
+        {
+          "x": -0.5,
+          "z": 4
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 3.305193647,
+        "z": 0
+      },
+      "downslope": {
+        "x": 0,
+        "z": -1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-front",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-plane-front",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "front slope",
+      "pitchDeg": 35,
+      "thickness": 0.25
+    },
+    {
+      "boundary": [
+        {
+          "x": -0.5,
+          "z": 4
+        },
+        {
+          "x": 10.5,
+          "z": 4
+        },
+        {
+          "x": 10.5,
+          "z": 8.5
+        },
+        {
+          "x": -0.5,
+          "z": 8.5
+        }
+      ],
+      "datum": {
+        "x": 0,
+        "y": 3.305193647,
+        "z": 8
+      },
+      "downslope": {
+        "x": 0,
+        "z": 1
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "roof-main-plane-rear",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "roof-main-plane-rear",
+      "levelId": "level-0",
+      "materialId": "mat-roof",
+      "name": "rear slope",
+      "pitchDeg": 35,
+      "thickness": 0.25
+    }
+  ],
+  "rooflights": [],
+  "roofs": [],
+  "rooms": [],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.6.0",
+  "slabs": [],
+  "stairs": [],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w0"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w1"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w2"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-0-w3"
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-0-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "ring-0",
+      "junctionIds": [
+        "ring-0-j0",
+        "ring-0-j1",
+        "ring-0-j2",
+        "ring-0-j3"
+      ],
+      "levelId": "level-0",
+      "wallIds": [
+        "ring-0-w0",
+        "ring-0-w1",
+        "ring-0-w2",
+        "ring-0-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10,
+        "z": 8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10,
+        "z": 0
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 8
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10,
+        "z": 8
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 0
+      },
+      "evidence": {
+        "confidence": 1,
+        "locator": "ring-0",
+        "source": "synthetic architectural diversity fixture",
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 6.800830153,
+      "id": "ring-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "level-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 8
+      },
+      "thickness": 0.3,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF_PLANES",
+        "planeIds": [
+          "roof-main-plane-front",
+          "roof-main-plane-rear"
+        ]
+      }
+    }
+  ],
+  "windows": []
+}

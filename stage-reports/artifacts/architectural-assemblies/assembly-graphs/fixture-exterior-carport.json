@@ -1,0 +1,377 @@
+{
+  "edges": [
+    {
+      "field": "beamIds",
+      "from": "carport",
+      "kind": "COMPONENT",
+      "to": "carport-beam"
+    },
+    {
+      "field": "slabId",
+      "from": "carport",
+      "kind": "COMPONENT",
+      "to": "carport-plinth"
+    },
+    {
+      "field": "supportIds",
+      "from": "carport",
+      "kind": "COMPONENT",
+      "to": "carport-post-north"
+    },
+    {
+      "field": "supportIds",
+      "from": "carport",
+      "kind": "COMPONENT",
+      "to": "carport-post-south"
+    },
+    {
+      "field": "roofAssemblyId",
+      "from": "carport",
+      "kind": "COMPONENT",
+      "to": "carport-roof"
+    },
+    {
+      "field": "hostIds",
+      "from": "carport",
+      "kind": "HOST",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "carport-beam",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-post-north"
+    },
+    {
+      "from": "carport-beam",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-post-south"
+    },
+    {
+      "from": "carport-plane",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-beam"
+    },
+    {
+      "from": "carport-plane",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "carport-plinth",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "carport-post-north",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-plinth"
+    },
+    {
+      "from": "carport-post-south",
+      "kind": "SUPPORTED_BY",
+      "to": "carport-plinth"
+    },
+    {
+      "field": "edgeIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-abutment"
+    },
+    {
+      "field": "edgeIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-eave"
+    },
+    {
+      "field": "trimIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-fascia"
+    },
+    {
+      "field": "planeIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-plane"
+    },
+    {
+      "field": "edgeIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-verge-north"
+    },
+    {
+      "field": "edgeIds",
+      "from": "carport-roof",
+      "kind": "COMPONENT",
+      "to": "carport-verge-south"
+    },
+    {
+      "field": "hostIds",
+      "from": "carport-roof",
+      "kind": "HOST",
+      "to": "ring-0-w1"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    }
+  ],
+  "modelId": "fixture-exterior-carport",
+  "nodes": [
+    {
+      "id": "carport",
+      "kind": "assembly",
+      "type": "CARPORT"
+    },
+    {
+      "id": "carport-abutment",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "carport-beam",
+      "kind": "linearSolid",
+      "type": "Beam"
+    },
+    {
+      "id": "carport-eave",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "carport-fascia",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "carport-plane",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "carport-plinth",
+      "kind": "platform"
+    },
+    {
+      "id": "carport-post-north",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "carport-post-south",
+      "kind": "linearSolid",
+      "type": "Post"
+    },
+    {
+      "id": "carport-roof",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "carport-verge-north",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "carport-verge-south",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w1",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620.00" height="615.71" viewBox="0 0 620.00 615.71" font-family="sans-serif">
+<rect width="100%" height="100%" fill="#fbfaf8"/>
+<text x="30" y="18" font-size="13" font-weight="bold">Shed (mono-pitch) roof falling to the front</text>
+<polygon points="30.00,475.71 590.00,475.71 590.00,30.00 30.00,30.00" fill="rgb(216,212,206)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main-plane 12°</title></polygon>
+<text x="310.00" y="252.86" font-size="9" text-anchor="middle" fill="#37474f">roof-main-plane · 12.00°</text>
+<line x1="310.00" y1="252.86" x2="310.00" y2="287.14" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<line x1="30.00" y1="30.00" x2="30.00" y2="475.71" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-west VERGE roof-main-plane</title></line>
+<line x1="590.00" y1="475.71" x2="590.00" y2="30.00" stroke="#2e7d32" stroke-width="2"><title>roof-main-verge-east VERGE roof-main-plane</title></line>
+<line x1="30.00" y1="475.71" x2="590.00" y2="475.71" stroke="#212121" stroke-width="2"><title>roof-main-eave EAVE roof-main-plane</title></line>
+<line x1="590.00" y1="30.00" x2="30.00" y2="30.00" stroke="#757575" stroke-width="1.5"><title>roof-main-high-edge BOUNDARY roof-main-plane</title></line>
+<defs><marker id="fall" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#37474f"/></marker></defs>
+<line x1="30" y1="521.7142857142858" x2="58" y2="521.7142857142858" stroke="#b3261e" stroke-width="3"/><text x="64" y="525.7142857142858" font-size="10">ridge</text>
+<line x1="170" y1="521.7142857142858" x2="198" y2="521.7142857142858" stroke="#d9822b" stroke-width="2.5"/><text x="204" y="525.7142857142858" font-size="10">hip</text>
+<line x1="310" y1="521.7142857142858" x2="338" y2="521.7142857142858" stroke="#1f5fbf" stroke-width="3"/><text x="344" y="525.7142857142858" font-size="10">valley</text>
+<line x1="450" y1="521.7142857142858" x2="478" y2="521.7142857142858" stroke="#2e7d32" stroke-width="2"/><text x="484" y="525.7142857142858" font-size="10">verge</text>
+<line x1="30" y1="541.7142857142858" x2="58" y2="541.7142857142858" stroke="#212121" stroke-width="2"/><text x="64" y="545.7142857142858" font-size="10">eave</text>
+<line x1="170" y1="541.7142857142858" x2="198" y2="541.7142857142858" stroke="#6a1b9a" stroke-width="3" stroke-dasharray="6 3"/><text x="204" y="545.7142857142858" font-size="10">roof step</text>
+<line x1="310" y1="541.7142857142858" x2="338" y2="541.7142857142858" stroke="#757575" stroke-width="1.5"/><text x="344" y="545.7142857142858" font-size="10">boundary</text>
+<line x1="450" y1="541.7142857142858" x2="478" y2="541.7142857142858" stroke="#8d6e63" stroke-width="2" stroke-dasharray="4 2"/><text x="484" y="545.7142857142858" font-size="10">abutment</text>
+<text x="30" y="595.71" font-size="10" fill="#37474f">roof-main: SHED, 1 planes, 0 ridges, 0 hips, 0 valleys, 0 dormers</text>
+</svg>

@@ -1,0 +1,589 @@
+{
+  "modelId": "fixture-roof-dormer-shed",
+  "modelSchemaVersion": "1.6.0",
+  "roofs": [
+    {
+      "boundaries": [],
+      "chimneys": [],
+      "classification": "SHED",
+      "derivedClassification": "SHED",
+      "dormers": [],
+      "eaves": [
+        {
+          "end": {
+            "x": 7,
+            "y": 5.351684,
+            "z": 0.7
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "dormer-front-eave",
+          "kind": "EAVE",
+          "length": 4,
+          "planeIds": [
+            "dormer-front-roof"
+          ],
+          "start": {
+            "x": 3,
+            "y": 5.351684,
+            "z": 0.7
+          }
+        }
+      ],
+      "evidence": {
+        "confidence": 1,
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [],
+      "hips": [],
+      "id": "dormer-front-roof-assembly",
+      "localRoofOf": "dormer-front",
+      "openings": [],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": 3,
+              "z": 0.7
+            },
+            {
+              "x": 7,
+              "z": 0.7
+            },
+            {
+              "x": 7,
+              "z": 2.995074
+            },
+            {
+              "x": 3,
+              "z": 2.995074
+            }
+          ],
+          "datum": {
+            "x": 3,
+            "y": 5.415451,
+            "z": 1
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "dormer-front-roof",
+          "normal": {
+            "x": 0,
+            "y": 0.978148,
+            "z": -0.207912
+          },
+          "pitchDeg": 12,
+          "planArea": 9.180297,
+          "thickness": 0.2
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [
+        {
+          "from": "dormer-front-roof",
+          "id": "dormer-front-rel-roof-supported-by-front",
+          "kind": "SUPPORTED_BY",
+          "to": "dormer-front-front"
+        },
+        {
+          "from": "dormer-front-roof",
+          "id": "dormer-front-rel-roof-meets-roof-main-plane-front",
+          "kind": "MEETS",
+          "to": "roof-main-plane-front"
+        },
+        {
+          "from": "dormer-front-roof",
+          "id": "dormer-front-rel-roof-supported-by-cheek-l",
+          "kind": "SUPPORTED_BY",
+          "to": "dormer-front-cheek-l"
+        },
+        {
+          "from": "dormer-front-roof",
+          "id": "dormer-front-rel-roof-supported-by-cheek-r",
+          "kind": "SUPPORTED_BY",
+          "to": "dormer-front-cheek-r"
+        }
+      ],
+      "ridges": [],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": [
+        {
+          "end": {
+            "x": 3,
+            "y": 5.839518,
+            "z": 2.995074
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "dormer-front-verge-l",
+          "kind": "VERGE",
+          "length": 2.346348,
+          "planeIds": [
+            "dormer-front-roof"
+          ],
+          "start": {
+            "x": 3,
+            "y": 5.351684,
+            "z": 0.7
+          }
+        },
+        {
+          "end": {
+            "x": 7,
+            "y": 5.839518,
+            "z": 2.995074
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "dormer-front-verge-r",
+          "kind": "VERGE",
+          "length": 2.346348,
+          "planeIds": [
+            "dormer-front-roof"
+          ],
+          "start": {
+            "x": 7,
+            "y": 5.351684,
+            "z": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "boundaries": [],
+      "chimneys": [],
+      "classification": "GABLE",
+      "derivedClassification": "GABLE",
+      "dormers": [
+        {
+          "dormerType": "SHED",
+          "hostPlaneIds": [
+            "roof-main-plane-front"
+          ],
+          "id": "dormer-front",
+          "localRoofAssemblyId": "dormer-front-roof-assembly",
+          "quality": "COMPLETE",
+          "valleys": [
+            "dormer-front-valley"
+          ]
+        }
+      ],
+      "eaves": [
+        {
+          "end": {
+            "x": 10.5,
+            "y": 2.906802,
+            "z": -0.5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-eave-front",
+          "kind": "EAVE",
+          "length": 11,
+          "planeIds": [
+            "roof-main-plane-front"
+          ],
+          "start": {
+            "x": -0.5,
+            "y": 2.906802,
+            "z": -0.5
+          }
+        },
+        {
+          "end": {
+            "x": -0.5,
+            "y": 2.906802,
+            "z": 8.5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-eave-rear",
+          "kind": "EAVE",
+          "length": 11,
+          "planeIds": [
+            "roof-main-plane-rear"
+          ],
+          "start": {
+            "x": 10.5,
+            "y": 2.906802,
+            "z": 8.5
+          }
+        }
+      ],
+      "evidence": {
+        "confidence": 1,
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [
+        {
+          "hostEdgeId": "roof-main-eave-front",
+          "id": "roof-main-eave-front-board",
+          "role": "FASCIA"
+        },
+        {
+          "hostEdgeId": "roof-main-eave-rear",
+          "id": "roof-main-eave-rear-board",
+          "role": "FASCIA"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-front-west",
+          "id": "roof-main-verge-front-west-board",
+          "role": "VERGE_BOARD"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-front-east",
+          "id": "roof-main-verge-front-east-board",
+          "role": "VERGE_BOARD"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-rear-west",
+          "id": "roof-main-verge-rear-west-board",
+          "role": "VERGE_BOARD"
+        },
+        {
+          "hostEdgeId": "roof-main-verge-rear-east",
+          "id": "roof-main-verge-rear-east-board",
+          "role": "VERGE_BOARD"
+        }
+      ],
+      "hips": [],
+      "id": "roof-main",
+      "openings": [
+        {
+          "id": "dormer-front-cut",
+          "kind": "DORMER",
+          "outline": [
+            {
+              "x": 3,
+              "z": 1
+            },
+            {
+              "x": 7,
+              "z": 1
+            },
+            {
+              "x": 7,
+              "z": 2.995074
+            },
+            {
+              "x": 3,
+              "z": 2.995074
+            }
+          ],
+          "planeId": "roof-main-plane-front"
+        }
+      ],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": -0.5,
+              "z": -0.5
+            },
+            {
+              "x": 10.5,
+              "z": -0.5
+            },
+            {
+              "x": 10.5,
+              "z": 4
+            },
+            {
+              "x": -0.5,
+              "z": 4
+            }
+          ],
+          "datum": {
+            "x": 0,
+            "y": 3.326352,
+            "z": 0
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane-front",
+          "normal": {
+            "x": 0,
+            "y": 0.766044,
+            "z": -0.642788
+          },
+          "pitchDeg": 40,
+          "planArea": 49.5,
+          "thickness": 0.25
+        },
+        {
+          "boundary": [
+            {
+              "x": -0.5,
+              "z": 4
+            },
+            {
+              "x": 10.5,
+              "z": 4
+            },
+            {
+              "x": 10.5,
+              "z": 8.5
+            },
+            {
+              "x": -0.5,
+              "z": 8.5
+            }
+          ],
+          "datum": {
+            "x": 0,
+            "y": 3.326352,
+            "z": 8
+          },
+          "downslope": {
+            "x": 0,
+            "z": 1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane-rear",
+          "normal": {
+            "x": 0,
+            "y": 0.766044,
+            "z": 0.642788
+          },
+          "pitchDeg": 40,
+          "planArea": 49.5,
+          "thickness": 0.25
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [
+        {
+          "from": "roof-main-plane-front",
+          "id": "rel-roof-main-plane-front-supported-by-ring-0-w0",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w0"
+        },
+        {
+          "from": "roof-main-plane-rear",
+          "id": "rel-roof-main-plane-rear-supported-by-ring-0-w2",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w2"
+        },
+        {
+          "from": "dormer-front-front",
+          "id": "dormer-front-rel-front-hosted-by-roof-main-plane-front",
+          "kind": "HOSTED_BY",
+          "to": "roof-main-plane-front"
+        },
+        {
+          "from": "dormer-front-cheek-l",
+          "id": "dormer-front-rel-cheek-l-hosted-by-roof-main-plane-front",
+          "kind": "HOSTED_BY",
+          "to": "roof-main-plane-front"
+        },
+        {
+          "from": "dormer-front-cheek-r",
+          "id": "dormer-front-rel-cheek-r-hosted-by-roof-main-plane-front",
+          "kind": "HOSTED_BY",
+          "to": "roof-main-plane-front"
+        },
+        {
+          "from": "dormer-front-roof",
+          "id": "dormer-front-rel-roof-meets-roof-main-plane-front",
+          "kind": "MEETS",
+          "to": "roof-main-plane-front"
+        }
+      ],
+      "ridges": [
+        {
+          "end": {
+            "x": 10.5,
+            "y": 6.68275,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-ridge",
+          "kind": "RIDGE",
+          "length": 11,
+          "planeIds": [
+            "roof-main-plane-front",
+            "roof-main-plane-rear"
+          ],
+          "start": {
+            "x": -0.5,
+            "y": 6.68275,
+            "z": 4
+          }
+        }
+      ],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": [
+        {
+          "end": {
+            "x": -0.5,
+            "y": 6.68275,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-front-west",
+          "kind": "VERGE",
+          "length": 5.874333,
+          "planeIds": [
+            "roof-main-plane-front"
+          ],
+          "start": {
+            "x": -0.5,
+            "y": 2.906802,
+            "z": -0.5
+          }
+        },
+        {
+          "end": {
+            "x": 10.5,
+            "y": 2.906802,
+            "z": -0.5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-front-east",
+          "kind": "VERGE",
+          "length": 5.874333,
+          "planeIds": [
+            "roof-main-plane-front"
+          ],
+          "start": {
+            "x": 10.5,
+            "y": 6.68275,
+            "z": 4
+          }
+        },
+        {
+          "end": {
+            "x": -0.5,
+            "y": 2.906802,
+            "z": 8.5
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-rear-west",
+          "kind": "VERGE",
+          "length": 5.874333,
+          "planeIds": [
+            "roof-main-plane-rear"
+          ],
+          "start": {
+            "x": -0.5,
+            "y": 6.68275,
+            "z": 4
+          }
+        },
+        {
+          "end": {
+            "x": 10.5,
+            "y": 6.68275,
+            "z": 4
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-verge-rear-east",
+          "kind": "VERGE",
+          "length": 5.874333,
+          "planeIds": [
+            "roof-main-plane-rear"
+          ],
+          "start": {
+            "x": 10.5,
+            "y": 2.906802,
+            "z": 8.5
+          }
+        }
+      ]
+    }
+  ],
+  "schema": "buildapp.roof-graph",
+  "schemaVersion": "1.0.0"
+}
+

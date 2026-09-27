@@ -1,0 +1,363 @@
+{
+  "edges": [
+    {
+      "from": "door-front",
+      "kind": "OPENS_INTO",
+      "to": "landing-front"
+    },
+    {
+      "from": "door-rear",
+      "kind": "OPENS_INTO",
+      "to": "porch-rear"
+    },
+    {
+      "field": "doorId",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "door-front"
+    },
+    {
+      "field": "landingId",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "landing-front"
+    },
+    {
+      "field": "railingIds",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "landing-handrail"
+    },
+    {
+      "field": "hostIds",
+      "from": "entrance-front",
+      "kind": "HOST",
+      "to": "ring-0-w0"
+    },
+    {
+      "field": "stepRunIds",
+      "from": "entrance-front",
+      "kind": "COMPONENT",
+      "to": "steps-front"
+    },
+    {
+      "field": "doorId",
+      "from": "entrance-rear",
+      "kind": "COMPONENT",
+      "to": "door-rear"
+    },
+    {
+      "field": "landingId",
+      "from": "entrance-rear",
+      "kind": "COMPONENT",
+      "to": "porch-rear"
+    },
+    {
+      "field": "hostIds",
+      "from": "entrance-rear",
+      "kind": "HOST",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "stepRunIds",
+      "from": "entrance-rear",
+      "kind": "COMPONENT",
+      "to": "steps-rear"
+    },
+    {
+      "from": "landing-front",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "landing-handrail",
+      "kind": "ATTACHED_TO",
+      "to": "landing-front"
+    },
+    {
+      "from": "porch-rear",
+      "kind": "ATTACHED_TO",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-front-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-eave-rear-board"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-front"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-ridge"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-front-west-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-east-board"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west"
+    },
+    {
+      "field": "trimIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-verge-rear-west-board"
+    },
+    {
+      "from": "roof-main-plane-front",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-rear",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w2"
+    },
+    {
+      "field": "landingIds",
+      "from": "stair-front",
+      "kind": "COMPONENT",
+      "to": "landing-front"
+    },
+    {
+      "field": "railingIds",
+      "from": "stair-front",
+      "kind": "COMPONENT",
+      "to": "landing-handrail"
+    },
+    {
+      "field": "hostIds",
+      "from": "stair-front",
+      "kind": "HOST",
+      "to": "ring-0-w0"
+    },
+    {
+      "field": "stepRunIds",
+      "from": "stair-front",
+      "kind": "COMPONENT",
+      "to": "steps-front"
+    },
+    {
+      "from": "steps-front",
+      "kind": "TERMINATES_AT",
+      "to": "landing-front"
+    },
+    {
+      "from": "steps-rear",
+      "kind": "TERMINATES_AT",
+      "to": "porch-rear"
+    }
+  ],
+  "modelId": "fixture-exterior-entrance-steps",
+  "nodes": [
+    {
+      "id": "door-front",
+      "kind": "door",
+      "type": "Door"
+    },
+    {
+      "id": "door-rear",
+      "kind": "door",
+      "type": "Door"
+    },
+    {
+      "id": "entrance-front",
+      "kind": "assembly",
+      "type": "ENTRANCE"
+    },
+    {
+      "id": "entrance-rear",
+      "kind": "assembly",
+      "type": "ENTRANCE"
+    },
+    {
+      "id": "landing-front",
+      "kind": "platform",
+      "type": "Landing"
+    },
+    {
+      "id": "landing-handrail",
+      "kind": "railing",
+      "type": "Handrail"
+    },
+    {
+      "id": "porch-rear",
+      "kind": "platform",
+      "type": "Landing"
+    },
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w2",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-eave-front",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-front-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-eave-rear",
+      "kind": "roofEdge",
+      "type": "Eave"
+    },
+    {
+      "id": "roof-main-eave-rear-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-plane-front",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-rear",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-ridge",
+      "kind": "roofEdge",
+      "type": "Ridge"
+    },
+    {
+      "id": "roof-main-verge-front-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-front-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-front-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-east",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-east-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "roof-main-verge-rear-west",
+      "kind": "roofEdge",
+      "type": "Verge"
+    },
+    {
+      "id": "roof-main-verge-rear-west-board",
+      "kind": "linearSolid",
+      "type": "Fascia"
+    },
+    {
+      "id": "stair-front",
+      "kind": "assembly",
+      "type": "EXTERIOR_STAIR"
+    },
+    {
+      "id": "steps-front",
+      "kind": "stepRun",
+      "type": "ExteriorStepRun"
+    },
+    {
+      "id": "steps-rear",
+      "kind": "stepRun",
+      "type": "ExteriorStepRun"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

@@ -1,0 +1,159 @@
+{
+  "edges": [
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-lower-edge-east"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-lower-edge-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-lower-edge-rear"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-lower"
+    },
+    {
+      "field": "planeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-plane-upper"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-main-step"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-upper-edge-front"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-upper-edge-rear"
+    },
+    {
+      "field": "edgeIds",
+      "from": "roof-main",
+      "kind": "COMPONENT",
+      "to": "roof-upper-edge-west"
+    },
+    {
+      "from": "roof-main-plane-lower",
+      "kind": "MEETS",
+      "to": "ring-0-w1"
+    },
+    {
+      "from": "roof-main-plane-lower",
+      "kind": "SUPPORTED_BY",
+      "to": "wing-east"
+    },
+    {
+      "from": "roof-main-plane-lower",
+      "kind": "SUPPORTED_BY",
+      "to": "wing-front"
+    },
+    {
+      "from": "roof-main-plane-upper",
+      "kind": "SUPPORTED_BY",
+      "to": "ring-0-w0"
+    },
+    {
+      "from": "roof-main-plane-upper",
+      "kind": "ABOVE",
+      "to": "roof-main-plane-lower"
+    }
+  ],
+  "modelId": "fixture-roof-stepped-levels",
+  "nodes": [
+    {
+      "id": "ring-0-w0",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "ring-0-w1",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "roof-lower-edge-east",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-lower-edge-front",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-lower-edge-rear",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-main",
+      "kind": "assembly",
+      "type": "ROOF"
+    },
+    {
+      "id": "roof-main-plane-lower",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-plane-upper",
+      "kind": "roofPlane",
+      "type": "RoofPlane"
+    },
+    {
+      "id": "roof-main-step",
+      "kind": "roofEdge",
+      "type": "RoofStep"
+    },
+    {
+      "id": "roof-upper-edge-front",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-upper-edge-rear",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "roof-upper-edge-west",
+      "kind": "roofEdge",
+      "type": "RoofBoundary"
+    },
+    {
+      "id": "wing-east",
+      "kind": "wall",
+      "type": "Wall"
+    },
+    {
+      "id": "wing-front",
+      "kind": "wall",
+      "type": "Wall"
+    }
+  ],
+  "schema": "buildapp.assembly-graph",
+  "schemaVersion": "1.0.0"
+}
+

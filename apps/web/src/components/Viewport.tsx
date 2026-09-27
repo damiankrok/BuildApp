@@ -151,6 +151,9 @@ export function Viewport(): JSX.Element {
     }
   }, [store])
 
+  // the category filters (03G), as a stable key: a new snapshot's set is a new object
+  const hiddenCategoriesKey = [...snap.hiddenCategories].sort().join(',')
+
   // --- geometry: rebuild from the compiled scene whenever it or visibility changes ---
   useEffect(() => {
     const st = stateRef.current
@@ -171,7 +174,7 @@ export function Viewport(): JSX.Element {
       // GPU resources three.js holds: what a rebuild must give back.
       memory: () => ({ ...st.renderer.info.memory }),
     }
-  }, [store, snap.scene, snap.hidden, snap.isolated, snap.isolatedLevelId, snap.roofsVisible, snap.selection, snap.model.materials])
+  }, [store, snap.scene, snap.hidden, snap.isolated, snap.isolatedLevelId, snap.roofsVisible, hiddenCategoriesKey, snap.selection, snap.model.materials])
 
   useEffect(() => {
     const st = stateRef.current

@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
-import { useRef } from 'react'
-import type { ViewPreset } from '@buildapp/editor'
+import { useMemo, useRef } from 'react'
+import { VIEW_CATEGORIES, viewCategoriesOf, type ViewCategory, type ViewPreset } from '@buildapp/editor'
 import { createDemoBuilding } from '@buildapp/demo'
 import { createMarcowkiReferenceBuilding } from '@buildapp/reference-marcowki'
 import { SEALED_CANDIDATES, modelOf } from '@buildapp/candidates'
@@ -35,11 +35,23 @@ const VIEWS: Array<{ id: ViewPreset; label: string }> = [
   { id: 'top', label: 'Top' },
 ]
 
+const CATEGORY_LABEL: Record<ViewCategory, string> = {
+  ROOF_ASSEMBLIES: 'Roof assemblies',
+  EXTERIOR_ASSEMBLIES: 'Exterior assemblies',
+  STRUCTURAL_MEMBERS: 'Structural members',
+  UNKNOWN: 'Unknown',
+}
+
 export type RightPanel = 'inspector' | 'sources' | 'analyze'
 
 export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: RightPanel) => void }): JSX.Element {
   const store = useStore()
   const snap = useSnapshot()
+  // the category filters (03G) appear only for a model that holds such objects
+  const presentCategories = useMemo(() => {
+    const found = new Set([...viewCategoriesOf(snap.model).values()].flatMap((s) => [...s]))
+    return VIEW_CATEGORIES.filter((c) => found.has(c))
+  }, [snap.model])
   const renderStyle = useRenderStyle()
   const fileRef = useRef<HTMLInputElement>(null)
   // A model the analyzer service made is named by its label ("<project> (analysis)"), not "(file)".
@@ -159,6 +171,22 @@ export function Toolbar({ panel, onPanel }: { panel: RightPanel; onPanel: (p: Ri
           Show all
         </button>
       </div>
+      {presentCategories.length > 0 ? (
+        <div className="group" data-testid="category-filters">
+          <label>show</label>
+          {presentCategories.map((c) => (
+            <button
+              key={c}
+              data-testid={`toggle-category-${c.toLowerCase().replace(/_/g, '-')}`}
+              className={snap.hiddenCategories.has(c) ? '' : 'active'}
+              onClick={() => store.setCategoryVisible(c, snap.hiddenCategories.has(c))}
+              title={`Show or hide ${CATEGORY_LABEL[c].toLowerCase()} as a whole`}
+            >
+              {CATEGORY_LABEL[c]}
+            </button>
+          ))}
+        </div>
+      ) : null}
       <div className="group">
         <button data-testid="toggle-grid" className={snap.showGrid ? 'active' : ''} onClick={() => store.setGrid(!snap.showGrid)}>
           Grid

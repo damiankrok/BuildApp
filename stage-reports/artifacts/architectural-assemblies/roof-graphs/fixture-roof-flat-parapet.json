@@ -1,0 +1,274 @@
+{
+  "modelId": "fixture-roof-flat-parapet",
+  "modelSchemaVersion": "1.6.0",
+  "roofs": [
+    {
+      "boundaries": [
+        {
+          "end": {
+            "x": 10,
+            "y": 3.25,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-edge-front",
+          "kind": "BOUNDARY",
+          "length": 10,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 0,
+            "y": 3.25,
+            "z": 0
+          }
+        },
+        {
+          "end": {
+            "x": 10,
+            "y": 3.25,
+            "z": 8
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-edge-east",
+          "kind": "BOUNDARY",
+          "length": 8,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 10,
+            "y": 3.25,
+            "z": 0
+          }
+        },
+        {
+          "end": {
+            "x": 0,
+            "y": 3.25,
+            "z": 8
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-edge-rear",
+          "kind": "BOUNDARY",
+          "length": 10,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 10,
+            "y": 3.25,
+            "z": 8
+          }
+        },
+        {
+          "end": {
+            "x": 0,
+            "y": 3.25,
+            "z": 0
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-edge-west",
+          "kind": "BOUNDARY",
+          "length": 8,
+          "planeIds": [
+            "roof-main-plane"
+          ],
+          "start": {
+            "x": 0,
+            "y": 3.25,
+            "z": 8
+          }
+        }
+      ],
+      "chimneys": [],
+      "classification": "FLAT",
+      "derivedClassification": "FLAT",
+      "dormers": [],
+      "eaves": [],
+      "evidence": {
+        "confidence": 1,
+        "sourceIds": [
+          "src-synthetic-fixture"
+        ],
+        "status": "SOURCE_DERIVED"
+      },
+      "fasciae": [
+        {
+          "id": "parapet-front",
+          "role": "PARAPET"
+        },
+        {
+          "id": "parapet-east",
+          "role": "PARAPET"
+        },
+        {
+          "id": "parapet-rear",
+          "role": "PARAPET"
+        },
+        {
+          "id": "parapet-west",
+          "role": "PARAPET"
+        }
+      ],
+      "hips": [],
+      "id": "roof-main",
+      "openings": [],
+      "planes": [
+        {
+          "boundary": [
+            {
+              "x": 0,
+              "z": 0
+            },
+            {
+              "x": 10,
+              "z": 0
+            },
+            {
+              "x": 10,
+              "z": 8
+            },
+            {
+              "x": 0,
+              "z": 8
+            }
+          ],
+          "datum": {
+            "x": 0,
+            "y": 3.25,
+            "z": 0
+          },
+          "downslope": {
+            "x": 0,
+            "z": -1
+          },
+          "evidence": {
+            "confidence": 1,
+            "sourceIds": [
+              "src-synthetic-fixture"
+            ],
+            "status": "SOURCE_DERIVED"
+          },
+          "id": "roof-main-plane",
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          "pitchDeg": 0,
+          "planArea": 80,
+          "thickness": 0.25
+        }
+      ],
+      "quality": "COMPLETE",
+      "relationships": [
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w0",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w0"
+        },
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w1",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w1"
+        },
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w2",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w2"
+        },
+        {
+          "from": "roof-main-plane",
+          "id": "rel-roof-main-plane-supported-by-ring-0-w3",
+          "kind": "SUPPORTED_BY",
+          "to": "ring-0-w3"
+        },
+        {
+          "from": "parapet-front",
+          "id": "rel-parapet-front-supported-by-roof-main-plane",
+          "kind": "SUPPORTED_BY",
+          "to": "roof-main-plane"
+        },
+        {
+          "from": "parapet-east",
+          "id": "rel-parapet-east-supported-by-roof-main-plane",
+          "kind": "SUPPORTED_BY",
+          "to": "roof-main-plane"
+        },
+        {
+          "from": "parapet-rear",
+          "id": "rel-parapet-rear-supported-by-roof-main-plane",
+          "kind": "SUPPORTED_BY",
+          "to": "roof-main-plane"
+        },
+        {
+          "from": "parapet-west",
+          "id": "rel-parapet-west-supported-by-roof-main-plane",
+          "kind": "SUPPORTED_BY",
+          "to": "roof-main-plane"
+        },
+        {
+          "from": "parapet-front",
+          "id": "rel-parapet-front-attached-to-roof-main-edge-front",
+          "kind": "ATTACHED_TO",
+          "to": "roof-main-edge-front"
+        },
+        {
+          "from": "parapet-east",
+          "id": "rel-parapet-east-attached-to-roof-main-edge-east",
+          "kind": "ATTACHED_TO",
+          "to": "roof-main-edge-east"
+        },
+        {
+          "from": "parapet-rear",
+          "id": "rel-parapet-rear-attached-to-roof-main-edge-rear",
+          "kind": "ATTACHED_TO",
+          "to": "roof-main-edge-rear"
+        },
+        {
+          "from": "parapet-west",
+          "id": "rel-parapet-west-attached-to-roof-main-edge-west",
+          "kind": "ATTACHED_TO",
+          "to": "roof-main-edge-west"
+        }
+      ],
+      "ridges": [],
+      "source": "ROOF_ASSEMBLY",
+      "steps": [],
+      "unknownSubassemblies": [],
+      "valleys": [],
+      "verges": []
+    }
+  ],
+  "schema": "buildapp.roof-graph",
+  "schemaVersion": "1.0.0"
+}
+

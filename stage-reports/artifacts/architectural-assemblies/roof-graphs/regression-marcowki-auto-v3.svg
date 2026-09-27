@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="522.15" height="730.00" viewBox="0 0 522.15 730.00" font-family="sans-serif">
+<rect width="100%" height="100%" fill="#fbfaf8"/>
+<text x="30" y="18" font-size="13" font-weight="bold">marcowki-auto-v3 (sealed candidate marcowki-auto-v3)</text>
+<polygon points="332.99,590.00 492.15,590.00 492.15,263.95 332.99,263.95" fill="rgb(235,231,225)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-attached-0:plane 0°</title></polygon>
+<text x="412.57" y="426.98" font-size="9" text-anchor="middle" fill="#37474f">roof-attached-0:plane · 0.00°</text>
+<polygon points="30.00,590.00 30.00,30.00 181.49,30.00 181.49,590.00" fill="rgb(171,167,161)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main:plane-low 40°</title></polygon>
+<text x="105.75" y="310.00" font-size="9" text-anchor="middle" fill="#37474f">roof-main:plane-low · 40.00°</text>
+<line x1="105.75" y1="310.00" x2="82.74" y2="310.00" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<polygon points="181.49,590.00 181.49,30.00 332.99,30.00 332.99,590.00" fill="rgb(171,167,161)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main:plane-high 40°</title></polygon>
+<text x="257.24" y="310.00" font-size="9" text-anchor="middle" fill="#37474f">roof-main:plane-high · 40.00°</text>
+<line x1="257.24" y1="310.00" x2="280.25" y2="310.00" stroke="#37474f" stroke-width="1" marker-end="url(#fall)"/>
+<line x1="332.99" y1="590.00" x2="492.15" y2="590.00" stroke="#757575" stroke-width="1.5"><title>roof-attached-0:edge-0 BOUNDARY roof-attached-0:plane</title></line>
+<line x1="492.15" y1="590.00" x2="492.15" y2="263.95" stroke="#757575" stroke-width="1.5"><title>roof-attached-0:edge-1 BOUNDARY roof-attached-0:plane</title></line>
+<line x1="492.15" y1="263.95" x2="332.99" y2="263.95" stroke="#757575" stroke-width="1.5"><title>roof-attached-0:edge-2 BOUNDARY roof-attached-0:plane</title></line>
+<line x1="332.99" y1="263.95" x2="332.99" y2="590.00" stroke="#757575" stroke-width="1.5"><title>roof-attached-0:edge-3 BOUNDARY roof-attached-0:plane</title></line>
+<polygon points="238.37,266.25 262.52,266.25 262.52,237.98 238.37,237.98" fill="none" stroke="#424242" stroke-width="1.2" stroke-dasharray="4 2"><title>chimney-0-pen PENETRATION</title></polygon>
+<polygon points="238.37,429.81 259.51,429.81 259.51,404.57 238.37,404.57" fill="none" stroke="#424242" stroke-width="1.2" stroke-dasharray="4 2"><title>chimney-1-pen PENETRATION</title></polygon>
+<polygon points="48.32,397.62 77.83,397.62 77.83,374.13 48.32,374.13" fill="none" stroke="#424242" stroke-width="1.2" stroke-dasharray="4 2"><title>rooflight-left-0 ROOFLIGHT</title></polygon>
+<polygon points="47.57,314.45 77.83,314.45 77.83,290.32 47.57,290.32" fill="none" stroke="#424242" stroke-width="1.2" stroke-dasharray="4 2"><title>rooflight-left-1 ROOFLIGHT</title></polygon>
+<polygon points="286.59,391.75 316.51,391.75 316.51,367.93 286.59,367.93" fill="none" stroke="#424242" stroke-width="1.2" stroke-dasharray="4 2"><title>rooflight-right-0 ROOFLIGHT</title></polygon>
+<line x1="181.49" y1="590.00" x2="181.49" y2="30.00" stroke="#b3261e" stroke-width="3"><title>roof-main:ridge RIDGE roof-main:plane-low/roof-main:plane-high</title></line>
+<line x1="30.00" y1="590.00" x2="181.49" y2="590.00" stroke="#2e7d32" stroke-width="2"><title>roof-main:verge-low-start VERGE roof-main:plane-low</title></line>
+<line x1="30.00" y1="30.00" x2="181.49" y2="30.00" stroke="#2e7d32" stroke-width="2"><title>roof-main:verge-low-end VERGE roof-main:plane-low</title></line>
+<line x1="181.49" y1="590.00" x2="332.99" y2="590.00" stroke="#2e7d32" stroke-width="2"><title>roof-main:verge-high-start VERGE roof-main:plane-high</title></line>
+<line x1="181.49" y1="30.00" x2="332.99" y2="30.00" stroke="#2e7d32" stroke-width="2"><title>roof-main:verge-high-end VERGE roof-main:plane-high</title></line>
+<line x1="30.00" y1="590.00" x2="30.00" y2="30.00" stroke="#212121" stroke-width="2"><title>roof-main:eave-low EAVE roof-main:plane-low</title></line>
+<line x1="332.99" y1="590.00" x2="332.99" y2="30.00" stroke="#212121" stroke-width="2"><title>roof-main:eave-high EAVE roof-main:plane-high</title></line>
+<defs><marker id="fall" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#37474f"/></marker></defs>
+<line x1="30" y1="636" x2="58" y2="636" stroke="#b3261e" stroke-width="3"/><text x="64" y="640" font-size="10">ridge</text>
+<line x1="170" y1="636" x2="198" y2="636" stroke="#d9822b" stroke-width="2.5"/><text x="204" y="640" font-size="10">hip</text>
+<line x1="310" y1="636" x2="338" y2="636" stroke="#1f5fbf" stroke-width="3"/><text x="344" y="640" font-size="10">valley</text>
+<line x1="450" y1="636" x2="478" y2="636" stroke="#2e7d32" stroke-width="2"/><text x="484" y="640" font-size="10">verge</text>
+<line x1="30" y1="656" x2="58" y2="656" stroke="#212121" stroke-width="2"/><text x="64" y="660" font-size="10">eave</text>
+<line x1="170" y1="656" x2="198" y2="656" stroke="#6a1b9a" stroke-width="3" stroke-dasharray="6 3"/><text x="204" y="660" font-size="10">roof step</text>
+<line x1="310" y1="656" x2="338" y2="656" stroke="#757575" stroke-width="1.5"/><text x="344" y="660" font-size="10">boundary</text>
+<line x1="450" y1="656" x2="478" y2="656" stroke="#8d6e63" stroke-width="2" stroke-dasharray="4 2"/><text x="484" y="660" font-size="10">abutment</text>
+<text x="30" y="710.00" font-size="10" fill="#37474f">roof-attached-0: FLAT, 1 planes, 0 ridges, 0 hips, 0 valleys, 0 dormers | roof-main: GABLE, 2 planes, 1 ridges, 0 hips, 0 valleys, 0 dormers</text>
+</svg>

@@ -1,5 +1,6 @@
 /**
  * `npm run candidates:reseal [-- --ids marcowki-auto,marcowki-auto-v2,marcowki-auto-v3]`
+ * `npm run candidates:reseal -- --path <candidate.json> [--sidecars <a.json,b.json>] [--model <model.json>]`
  *
  * Restate frozen candidates under the current model schema.
  *
@@ -20,9 +21,15 @@
  * sidecar measured on the old content hash is re-pointed, because the
  * geometry it measured is unchanged; `src/reseal-log.json` records every
  * restatement with both hashes.
+ *
+ * `--path` restates one candidate file outside the registry the same way —
+ * an analyzer artifact that is a copy of a sealed candidate — re-pointing
+ * the `--sidecars` that cite its content hash (residuals, closure decisions)
+ * and rewriting `--model` (the model file written beside it) under the
+ * current schema.
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { sha256Hex, stableJson } from '@buildapp/source-common'
 import { MODEL_SCHEMA_VERSION, serializeModel } from '@buildapp/model'
@@ -67,13 +74,14 @@ function restate(model: CanonicalBuildingModel, toVersion: string): string | nul
 }
 
 function main(): void {
-  const ids = (argValue('ids') ?? 'marcowki-auto,marcowki-auto-v2,marcowki-auto-v3').split(',').map((s) => s.trim()).filter(Boolean)
+  const single = argValue('path')
+  const ids = single ? [single] : (argValue('ids') ?? 'marcowki-auto,marcowki-auto-v2,marcowki-auto-v3').split(',').map((s) => s.trim()).filter(Boolean)
   const logPath = join(SRC, 'reseal-log.json')
   const log: LogEntry[] = existsSync(logPath) ? (JSON.parse(readFileSync(logPath, 'utf8')) as LogEntry[]) : []
   let failures = 0
   for (const id of ids) {
-    const file = `${id}.json`
-    const path = join(SRC, file)
+    const path = single ? resolve(ROOT, single) : join(SRC, `${id}.json`)
+    const file = single ? relative(ROOT, path) : `${id}.json`
     if (!existsSync(path)) {
       process.stderr.write(`${id}: no ${file}\n`)
       failures += 1
@@ -108,12 +116,16 @@ function main(): void {
     const contentHash = candidateContentHash(draft)
     const next: ReconstructionCandidate = { ...withModel, id: `candidate-${slug}-${contentHash.slice(0, 16)}`, contentHash }
     writeFileSync(path, `${stableJson(next)}\n`, 'utf8')
-    const residualsPath = join(SRC, `${id}-residuals.json`)
-    if (existsSync(residualsPath)) {
-      const residuals = JSON.parse(readFileSync(residualsPath, 'utf8')) as { candidateHash: string }
-      if (residuals.candidateHash === candidate.contentHash) {
-        residuals.candidateHash = contentHash
-        writeFileSync(residualsPath, `${stableJson(residuals)}\n`, 'utf8')
+    // sidecars measured on the old content hash (residuals, closure decisions): the geometry they measured is unchanged
+    const sidecars = single ? (argValue('sidecars') ?? '').split(',').filter(Boolean).map((p) => resolve(ROOT, p)) : [join(SRC, `${id}-residuals.json`)]
+    const modelOut = single ? argValue('model') : undefined
+    if (modelOut) writeFileSync(resolve(ROOT, modelOut), serializeModel(model), 'utf8')
+    for (const sidecar of sidecars) {
+      if (!existsSync(sidecar)) continue
+      const data = JSON.parse(readFileSync(sidecar, 'utf8')) as { candidateHash: string }
+      if (data.candidateHash === candidate.contentHash) {
+        data.candidateHash = contentHash
+        writeFileSync(sidecar, `${stableJson(data)}\n`, 'utf8')
       }
     }
     log.push({ id, file, fromSchema: sealedUnder, toSchema: MODEL_SCHEMA_VERSION, from: { id: candidate.id, contentHash: candidate.contentHash, modelHash: candidate.modelHash }, to: { id: next.id, contentHash, modelHash: nowHash }, why: `restated under model schema ${MODEL_SCHEMA_VERSION}: the program is unchanged, and the model it builds, with the empty collections ${sealedUnder}→${MODEL_SCHEMA_VERSION} added removed, hashes to the sealed ${candidate.modelHash.slice(0, 16)}` })

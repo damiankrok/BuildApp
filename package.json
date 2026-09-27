@@ -44,7 +44,8 @@
     "audit:exterior": "vite-node packages/candidates/scripts/exterior-closure.ts --",
     "review:shots": "vite-node apps/web/tools/review-shots.ts --",
     "analysis:second-house": "vite-node packages/analysis-service/scripts/second-house.ts --",
-    "architecture:artifacts": "vite-node packages/architecture/scripts/artifacts.ts --"
+    "architecture:artifacts": "vite-node packages/architecture/scripts/artifacts.ts --",
+    "architecture:android-fixtures": "vite-node packages/architecture/scripts/android-fixtures.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620.00" height="514.62" viewBox="0 0 620.00 514.62" font-family="sans-serif">
+<rect width="100%" height="100%" fill="#fbfaf8"/>
+<text x="30" y="18" font-size="13" font-weight="bold">Stepped roof levels: an upper and a lower flat roof, one roof step</text>
+<polygon points="30.00,374.62 374.62,374.62 374.62,30.00 30.00,30.00" fill="rgb(235,231,225)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main-plane-upper 0°</title></polygon>
+<text x="202.31" y="202.31" font-size="9" text-anchor="middle" fill="#37474f">roof-main-plane-upper · 0.00°</text>
+<polygon points="374.62,331.54 590.00,331.54 590.00,159.23 374.62,159.23" fill="rgb(235,231,225)" stroke="#9e9e9e" stroke-width="0.8"><title>roof-main-plane-lower 0°</title></polygon>
+<text x="482.31" y="245.38" font-size="9" text-anchor="middle" fill="#37474f">roof-main-plane-lower · 0.00°</text>
+<line x1="374.62" y1="331.54" x2="374.62" y2="159.23" stroke="#6a1b9a" stroke-width="3" stroke-dasharray="6 3"><title>roof-main-step ROOF_STEP roof-main-plane-upper/roof-main-plane-lower</title></line>
+<line x1="30.00" y1="374.62" x2="374.62" y2="374.62" stroke="#757575" stroke-width="1.5"><title>roof-upper-edge-front BOUNDARY roof-main-plane-upper</title></line>
+<line x1="374.62" y1="30.00" x2="30.00" y2="30.00" stroke="#757575" stroke-width="1.5"><title>roof-upper-edge-rear BOUNDARY roof-main-plane-upper</title></line>
+<line x1="30.00" y1="30.00" x2="30.00" y2="374.62" stroke="#757575" stroke-width="1.5"><title>roof-upper-edge-west BOUNDARY roof-main-plane-upper</title></line>
+<line x1="374.62" y1="331.54" x2="590.00" y2="331.54" stroke="#757575" stroke-width="1.5"><title>roof-lower-edge-front BOUNDARY roof-main-plane-lower</title></line>
+<line x1="590.00" y1="331.54" x2="590.00" y2="159.23" stroke="#757575" stroke-width="1.5"><title>roof-lower-edge-east BOUNDARY roof-main-plane-lower</title></line>
+<line x1="590.00" y1="159.23" x2="374.62" y2="159.23" stroke="#757575" stroke-width="1.5"><title>roof-lower-edge-rear BOUNDARY roof-main-plane-lower</title></line>
+<defs><marker id="fall" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#37474f"/></marker></defs>
+<line x1="30" y1="420.61538461538464" x2="58" y2="420.61538461538464" stroke="#b3261e" stroke-width="3"/><text x="64" y="424.61538461538464" font-size="10">ridge</text>
+<line x1="170" y1="420.61538461538464" x2="198" y2="420.61538461538464" stroke="#d9822b" stroke-width="2.5"/><text x="204" y="424.61538461538464" font-size="10">hip</text>
+<line x1="310" y1="420.61538461538464" x2="338" y2="420.61538461538464" stroke="#1f5fbf" stroke-width="3"/><text x="344" y="424.61538461538464" font-size="10">valley</text>
+<line x1="450" y1="420.61538461538464" x2="478" y2="420.61538461538464" stroke="#2e7d32" stroke-width="2"/><text x="484" y="424.61538461538464" font-size="10">verge</text>
+<line x1="30" y1="440.61538461538464" x2="58" y2="440.61538461538464" stroke="#212121" stroke-width="2"/><text x="64" y="444.61538461538464" font-size="10">eave</text>
+<line x1="170" y1="440.61538461538464" x2="198" y2="440.61538461538464" stroke="#6a1b9a" stroke-width="3" stroke-dasharray="6 3"/><text x="204" y="444.61538461538464" font-size="10">roof step</text>
+<line x1="310" y1="440.61538461538464" x2="338" y2="440.61538461538464" stroke="#757575" stroke-width="1.5"/><text x="344" y="444.61538461538464" font-size="10">boundary</text>
+<line x1="450" y1="440.61538461538464" x2="478" y2="440.61538461538464" stroke="#8d6e63" stroke-width="2" stroke-dasharray="4 2"/><text x="484" y="444.61538461538464" font-size="10">abutment</text>
+<text x="30" y="494.62" font-size="10" fill="#37474f">roof-main: STEPPED, 2 planes, 0 ridges, 0 hips, 0 valleys, 0 dormers</text>
+</svg>
