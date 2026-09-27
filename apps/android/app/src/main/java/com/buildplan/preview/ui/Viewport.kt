@@ -92,7 +92,10 @@ fun Viewport(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .onSizeChanged { model.viewportHeightPx = it.height }
+            .onSizeChanged {
+                model.viewportHeightPx = it.height
+                model.viewportWidthPx = it.width
+            }
             .semantics { contentDescription = "3D model viewport. Drag with one finger to orbit, pinch to zoom, drag with two fingers to pan, tap an element to select it." }
             .pointerInput(scene.key) {
                 // One tracker per pointer-input session: opening another model

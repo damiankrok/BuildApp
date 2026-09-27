@@ -1,5 +1,6 @@
 package com.buildplan.preview.scene
 
+import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 
 /**
@@ -14,6 +15,11 @@ data class ViewerState(
     val isolatedObjectId: String? = null,
     val style: RenderStyle = RenderStyle.CONSTRUCTION,
     val selectedObjectId: String? = null,
+    /**
+     * MODEL, CLAY or LINE. Like the style, it is how the viewer draws and not
+     * part of the model: it never changes selection, visibility or the camera.
+     */
+    val presentation: PresentationMode = PresentationMode.MODEL,
 ) {
     val isIsolating: Boolean get() = isolatedObjectId != null
 
@@ -52,4 +58,7 @@ data class ViewerState(
 
     /** Style never touches selection, visibility or the camera. */
     fun withStyle(style: RenderStyle): ViewerState = copy(style = style)
+
+    /** Neither does the presentation mode: same objects, same selection, drawn differently. */
+    fun withPresentation(mode: PresentationMode): ViewerState = copy(presentation = mode)
 }

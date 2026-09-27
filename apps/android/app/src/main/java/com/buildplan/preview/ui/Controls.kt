@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.camera.ViewPreset
+import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.ViewerState
@@ -51,6 +52,7 @@ fun ControlBar(
     scene: ModelScene,
     state: ViewerState,
     onPreset: (ViewPreset) -> Unit,
+    onPresentation: (PresentationMode) -> Unit,
     onStyle: (RenderStyle) -> Unit,
     onVisibility: (VisibilityMode) -> Unit,
     onIsolate: () -> Unit,
@@ -85,7 +87,33 @@ fun ControlBar(
                 }
             }
 
-            MenuButton(label = "Style: ${state.style.label}", description = "Render style, currently ${state.style.label}") { dismiss ->
+            // The owner's comparison gate: the same model in MODEL, CLAY and
+            // LINE. Named in the label, never signalled by colour.
+            MenuButton(
+                label = "Mode: ${state.presentation.label}",
+                description = "Presentation mode, currently ${state.presentation.label}. ${state.presentation.description}",
+            ) { dismiss ->
+                for (mode in PresentationMode.entries) {
+                    val current = mode == state.presentation
+                    DropdownMenuItem(
+                        text = { Text(if (current) "${mode.label}  ✓   ·   ${mode.description}" else "${mode.label}   ·   ${mode.description}") },
+                        onClick = { onPresentation(mode); dismiss() },
+                        modifier = Modifier.semantics {
+                            contentDescription = "${mode.label}. ${mode.description}.${if (current) " Selected." else ""}"
+                        },
+                    )
+                }
+            }
+
+            MenuButton(
+                label = if (state.presentation.usesStyle) "Style: ${state.style.label}" else "Style: MODEL only",
+                description = if (state.presentation.usesStyle) {
+                    "Render style, currently ${state.style.label}"
+                } else {
+                    "Render style applies to the MODEL presentation. Switch Mode to MODEL to change it."
+                },
+                enabled = state.presentation.usesStyle,
+            ) { dismiss ->
                 for (style in RenderStyle.entries) {
                     DropdownMenuItem(
                         text = { Text(if (style == state.style) "${style.label}  ✓   ·   ${style.description}" else "${style.label}   ·   ${style.description}") },
@@ -176,11 +204,12 @@ private fun ToolButton(
 private fun MenuButton(
     label: String,
     description: String,
+    enabled: Boolean = true,
     items: @Composable (dismiss: () -> Unit) -> Unit,
 ) {
     var open by remember { mutableStateOf(false) }
     Box {
-        ToolButton(label = label, description = description, onClick = { open = true })
+        ToolButton(label = label, description = description, onClick = { open = true }, enabled = enabled)
         DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
             items { open = false }
         }

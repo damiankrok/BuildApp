@@ -11,6 +11,9 @@ import com.buildplan.preview.scene.VisibilityMode
  */
 const val PLAN_PITCH = 89.0
 
+/** The isometric elevation angle, atan(1/sqrt 2): the three axes foreshortened equally. */
+val ISOMETRIC_PITCH: Double = Math.toDegrees(kotlin.math.atan(1.0 / kotlin.math.sqrt(2.0)))
+
 /**
  * What a preset aims at. Presets resolve against the scene rather than naming
  * a building: `STAIR` is "the staircase this model has", not an id.
@@ -38,6 +41,10 @@ enum class ViewPreset(
     /** A visibility mode the preset also needs to be meaningful, if any. */
     val visibility: VisibilityMode? = null,
     val margin: Double = 1.35,
+    /** Keep the current yaw, pitch and projection; only refit. */
+    val keepsAngles: Boolean = false,
+    /** Fit to the viewport's narrower side, so nothing is cropped in portrait. */
+    val fitsViewport: Boolean = false,
 ) {
     WHOLE("Whole house", "Three-quarter view of the whole model", OrbitCamera.HOME_YAW, OrbitCamera.HOME_PITCH, PresetTarget.WHOLE_MODEL, Projection.PERSPECTIVE),
     AXONOMETRIC("Axonometric", "Orthographic three-quarter view", 45.0, 30.0, PresetTarget.WHOLE_MODEL, Projection.ORTHOGRAPHIC),
@@ -50,6 +57,12 @@ enum class ViewPreset(
     ATTIC_PLAN("Attic plan", "Upper storey from above, roof off", 0.0, PLAN_PITCH, PresetTarget.WHOLE_MODEL, Projection.ORTHOGRAPHIC, VisibilityMode.UPPER_ONLY),
     STAIRS("Stairs", "Frame the staircase, roof off", 40.0, 18.0, PresetTarget.STAIR, Projection.PERSPECTIVE, VisibilityMode.ROOF_OFF, margin = 1.6),
     ENTRANCE("Entrance", "Frame the entrance door", 10.0, 4.0, PresetTarget.ENTRANCE, Projection.PERSPECTIVE, margin = 1.8),
+
+    /** Generic, from the model's bounds only: the whole model at the current angle, never cropped. */
+    FIT("Fit model", "Whole model at the current angle, fitted to the screen", 0.0, 0.0, PresetTarget.WHOLE_MODEL, Projection.PERSPECTIVE, margin = 1.12, keepsAngles = true, fitsViewport = true),
+
+    /** Generic, from the model's bounds only: a true isometric (equal foreshortening of the three axes). */
+    ISOMETRIC("Isometric", "True isometric, orthographic, fitted to the screen", 45.0, ISOMETRIC_PITCH, PresetTarget.WHOLE_MODEL, Projection.ORTHOGRAPHIC, margin = 1.12, fitsViewport = true),
     ;
 
     /** The bounds this preset frames, or null when the model has no such thing. */
@@ -74,9 +87,17 @@ enum class ViewPreset(
         return true
     }
 
-    fun poseIn(camera: OrbitCamera, scene: ModelScene, from: OrbitPose): OrbitPose? {
+    /**
+     * The pose this preset frames. [aspect] is the viewport's width over its
+     * height; only the presets that fit the viewport read it, so every older
+     * preset frames exactly as it always did.
+     */
+    fun poseIn(camera: OrbitCamera, scene: ModelScene, from: OrbitPose, aspect: Double = 1.0): OrbitPose? {
         val bounds = boundsIn(scene) ?: return null
-        return camera.frame(from, bounds, yawDeg, pitchDeg, projection, margin)
+        val yaw = if (keepsAngles) from.yawDeg else yawDeg
+        val pitch = if (keepsAngles) from.pitchDeg else pitchDeg
+        val proj = if (keepsAngles) from.projection else projection
+        return camera.frame(from, bounds, yaw, pitch, proj, margin, if (fitsViewport) aspect else 1.0)
     }
 
     companion object {

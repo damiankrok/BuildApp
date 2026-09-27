@@ -6,6 +6,13 @@ import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.Projection
 import com.buildplan.preview.math.Bounds
 import com.buildplan.preview.math.Vec3
+import com.buildplan.preview.presentation.FeatureEdgeSet
+import com.buildplan.preview.presentation.PresentationLook
+import com.buildplan.preview.presentation.PresentationMode
+import com.buildplan.preview.presentation.PresentationStats
+import com.buildplan.preview.presentation.RoofCoverBatch
+import com.buildplan.preview.presentation.ScenePresentation
+import com.buildplan.preview.presentation.StudyPalette
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneObject
 import com.buildplan.preview.scene.ViewerState
@@ -48,6 +55,14 @@ import kotlin.math.max
  * Hiding is implemented by removing the entity from the scene rather than by
  * a shader trick, which also makes hidden geometry unpickable for free: the
  * pick pass only ever sees what the scene contains.
+ *
+ * Presentation modes (MODEL, CLAY, LINE) follow the same two rules. The study
+ * overlays — feature edges and the roof covering — are derived once per model
+ * by `ScenePresentation` from the uploaded scene alone and uploaded with it;
+ * a mode switch rewrites material, light and view parameters and adds or
+ * removes those overlay entities. Every overlay entity maps back to the
+ * semantic object whose geometry it was derived from, so selection and
+ * picking still resolve to BuildApp object ids and nothing else.
  */
 class FilamentModelRenderer(private val assets: AssetManager) {
 
@@ -88,6 +103,12 @@ class FilamentModelRenderer(private val assets: AssetManager) {
 
     private var currentState: ViewerState? = null
     private var visibleNow: Set<String> = emptySet()
+    /** Overlay entities (edges, covering) currently in the Filament scene. */
+    private var overlaysNow: Set<Int> = emptySet()
+
+    /** What the study overlays of the uploaded model cost; null before a model is uploaded. */
+    var presentationStats: PresentationStats? = null
+        private set
     private var viewportWidth = 1
     private var viewportHeight = 1
 
@@ -121,7 +142,7 @@ class FilamentModelRenderer(private val assets: AssetManager) {
             enabled = true
             sampleCount = 4
         }
-        setAmbientOcclusion(RenderStyle.CONSTRUCTION)
+        setAmbientOcclusion(PresentationLook.model(RenderStyle.CONSTRUCTION))
         view.setShadowingEnabled(true)
         view.dynamicResolutionOptions = View.DynamicResolutionOptions().apply {
             enabled = true
@@ -131,19 +152,38 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     }
 
     /**
-     * Screen-space ambient occlusion, per style. Construction and Clay keep
-     * it: contact darkening at reveals and under eaves is what makes the depth
-     * of an opening readable there. Architectural keeps a subtle pass at half
-     * the intensity: corners and reveals read, nothing reads as a shadow.
+     * Screen-space ambient occlusion, per look. In MODEL, per style:
+     * Construction and Clay keep it — contact darkening at reveals and under
+     * eaves is what makes the depth of an opening readable there —
+     * Architectural keeps a subtle pass at half the intensity. The CLAY study
+     * uses the donor viewer's radius, intensity and power; the LINE study has
+     * none. Quality stays LOW in every mode: the mobile budget.
      */
-    private fun setAmbientOcclusion(style: RenderStyle) {
+    private fun setAmbientOcclusion(look: PresentationLook) {
+        val ao = look.ambientOcclusion
         view.ambientOcclusionOptions = View.AmbientOcclusionOptions().apply {
-            enabled = style.ambientOcclusion
+            enabled = ao != null
             quality = View.QualityLevel.LOW
-            // More than light contact darkening is noise.
-            intensity = style.ambientOcclusionIntensity
-            radius = 0.35f
+            intensity = ao?.intensity ?: 0f
+            radius = ao?.radius ?: 0.35f
+            power = ao?.power ?: 1f
         }
+    }
+
+    /**
+     * Everything a presentation sets outside the materials: backdrop, light,
+     * shadows, occlusion, anti-aliasing and the grid. MODEL restores exactly
+     * the values the viewer was created with.
+     */
+    private fun applyLook(look: PresentationLook) {
+        skybox?.setColor(look.background[0], look.background[1], look.background[2], 1.0f)
+        val lights = engine.lightManager
+        lights.setIntensity(lights.getInstance(sunEntity), look.sunLux)
+        indirectLight?.intensity = look.ambientIntensity
+        view.setShadowingEnabled(look.shadows)
+        setAmbientOcclusion(look)
+        view.setAntiAliasing(if (look.fxaa) View.AntiAliasing.FXAA else View.AntiAliasing.NONE)
+        grid?.setColor(look.grid)
     }
 
     private fun createEnvironment() {
@@ -159,14 +199,14 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         sh[3] = 0.20f; sh[4] = 0.21f; sh[5] = 0.24f          // L1 y: brighter from above
         indirectLight = IndirectLight.Builder()
             .irradiance(3, sh)
-            .intensity(26_000f)
+            .intensity(PresentationLook.MODEL_AMBIENT)
             .build(engine)
             .also { filamentScene.indirectLight = it }
 
         sunEntity = EntityManager.get().create()
         LightManager.Builder(LightManager.Type.SUN)
             .color(1.0f, 0.96f, 0.90f)
-            .intensity(72_000f)
+            .intensity(PresentationLook.MODEL_SUN_LUX)
             // Down, from the front left: a conventional architectural sun that
             // keeps the front facade lit and still gives the sides relief.
             .direction(0.45f, -0.82f, -0.35f)
@@ -184,20 +224,28 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     fun setModel(scene: ModelScene) {
         releaseModel()
         uploadedScene = scene
-        model = ModelEntities.build(engine, scene, opaqueMaterial, translucentMaterial)
+        // Derived once, here, from the scene alone; a mode switch never
+        // derives anything again.
+        val presentation = ScenePresentation.of(scene)
+        presentationStats = presentation.stats(scene)
+        model = ModelEntities.build(engine, scene, presentation, opaqueMaterial, translucentMaterial, lineMaterial)
         grid = LineEntity.grid(engine, lineMaterial, scene.bounds)
         selectionBox = LineEntity.box(engine, lineMaterial, Selection.OUTLINE)
         grid?.let { filamentScene.addEntity(it.entity) }
         currentState = null
         visibleNow = emptySet()
+        overlaysNow = emptySet()
     }
 
     /**
      * Apply viewer state.
      *
-     * Only what actually changed is touched: a style change rewrites material
-     * parameters, a visibility change moves entities in and out of the scene,
-     * a selection change updates two objects' emissive and the outline box.
+     * Only what actually changed is touched: a style or presentation change
+     * rewrites material, light and view parameters, a visibility change moves
+     * entities in and out of the scene, a selection change updates one
+     * object's emissive, its lines' ink and the outline box. Overlays follow
+     * the objects they were derived from: an edge or a tile is in the scene
+     * only while its object is, and only in a mode that draws it.
      */
     fun setState(state: ViewerState) {
         val entities = model ?: return
@@ -206,23 +254,34 @@ class FilamentModelRenderer(private val assets: AssetManager) {
         // Called every frame; nothing below is worth doing when nothing moved.
         if (previous == state) return
 
-        if (previous == null || previous.style != state.style) {
-            entities.applyStyle(engine, scene, state.style)
-            setAmbientOcclusion(state.style)
+        val mode = state.presentation
+        val look = mode.look(state.style)
+        val lookChanged = previous == null || previous.presentation != mode || previous.style != state.style
+        if (lookChanged) {
+            entities.applyAppearance(engine, scene, mode, state.style, look)
+            applyLook(look)
         }
 
         // Restricted to what was actually uploaded, so the scene can only
         // ever be asked to show entities that exist.
         val visible = state.visibleObjectIds(scene) intersect scene.renderableObjectIds
         if (visible != visibleNow) {
-            for (id in visibleNow - visible) entities.byId[id]?.let { filamentScene.removeEntity(it.entity) }
-            for (id in visible - visibleNow) entities.byId[id]?.let { filamentScene.addEntity(it.entity) }
+            for (id in visibleNow - visible) entities.byId[id]?.surfaces?.forEach { filamentScene.removeEntity(it) }
+            for (id in visible - visibleNow) entities.byId[id]?.surfaces?.forEach { filamentScene.addEntity(it) }
             visibleNow = visible
         }
 
-        if (previous?.selectedObjectId != state.selectedObjectId || previous?.style != state.style) {
+        val overlays = entities.overlaysFor(visible, mode, state.selectedObjectId)
+        if (overlays != overlaysNow) {
+            for (e in overlaysNow - overlays) filamentScene.removeEntity(e)
+            for (e in overlays - overlaysNow) filamentScene.addEntity(e)
+            overlaysNow = overlays
+        }
+
+        if (previous?.selectedObjectId != state.selectedObjectId || lookChanged) {
             previous?.selectedObjectId?.let { entities.byId[it]?.setSelected(false) }
             state.selectedObjectId?.let { entities.byId[it]?.setSelected(true) }
+            entities.inkEdges(look, state.selectedObjectId)
             updateSelectionBox(scene, state.selectedObjectId, visible)
         }
 
@@ -338,11 +397,13 @@ class FilamentModelRenderer(private val assets: AssetManager) {
 
     private fun releaseModel() {
         model?.let { entities ->
-            for (o in entities.all) filamentScene.removeEntity(o.entity)
+            for (e in entities.allEntities) filamentScene.removeEntity(e)
             entities.destroy(engine)
         }
         model = null
         uploadedScene = null
+        presentationStats = null
+        overlaysNow = emptySet()
         grid?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
         grid = null
         selectionBox?.let { filamentScene.removeEntity(it.entity); it.destroy(engine) }
@@ -372,12 +433,8 @@ class FilamentModelRenderer(private val assets: AssetManager) {
     }
 
     companion object {
-        /** The technical viewport ground, in linear space. */
-        val BACKGROUND = floatArrayOf(
-            RenderStyle.srgbToLinear(0x12 / 255f),
-            RenderStyle.srgbToLinear(0x15 / 255f),
-            RenderStyle.srgbToLinear(0x1a / 255f),
-        )
+        /** The technical viewport ground of MODEL, in linear space. */
+        val BACKGROUND: FloatArray = PresentationLook.MODEL_BACKGROUND
     }
 }
 
@@ -397,25 +454,45 @@ sealed interface PickOutcome {
 // Uploaded model
 // ---------------------------------------------------------------------------
 
-/** One semantic object on the GPU: one entity, one buffer pair, one material per part. */
+/**
+ * One semantic object on the GPU: one buffer pair, one material instance per
+ * part, and up to two renderables over those buffers — its opaque parts and
+ * its translucent parts (glazing, markers). The split exists only so that a
+ * presentation can stop glazing from casting a shadow without also stopping
+ * the frame around it: shadow casting is a property of a renderable, not of a
+ * primitive. Both renderables answer a pick with the same object id.
+ *
+ * The object's roof covering, when it has one, is a third renderable of its
+ * own buffers, answering with the same id.
+ */
 class ObjectEntity(
     val objectId: String,
-    val entity: Int,
+    /** Opaque parts, or null when the object has none. */
+    val opaque: Int?,
+    /** Translucent parts, or null when the object has none. */
+    val translucent: Int?,
     val vertexBuffer: VertexBuffer,
     val indexBuffer: IndexBuffer,
+    /** One per part, in the object's part order. */
     val instances: List<MaterialInstance>,
+    val cover: CoverEntity?,
 ) {
+    /** The object's own surfaces: what visibility adds and removes. */
+    val surfaces: List<Int> = listOfNotNull(opaque, translucent)
+
     fun setSelected(selected: Boolean) {
         val e = if (selected) Selection.EMISSIVE else ZERO
         for (instance in instances) instance.setParameter("emissive", e[0], e[1], e[2])
+        cover?.instance?.setParameter("emissive", e[0], e[1], e[2])
     }
 
     fun destroy(engine: Engine) {
-        engine.renderableManager.destroy(entity)
+        opaque?.let { engine.renderableManager.destroy(it); EntityManager.get().destroy(it) }
+        translucent?.let { engine.renderableManager.destroy(it); EntityManager.get().destroy(it) }
         engine.destroyVertexBuffer(vertexBuffer)
         engine.destroyIndexBuffer(indexBuffer)
         for (instance in instances) engine.destroyMaterialInstance(instance)
-        EntityManager.get().destroy(entity)
+        cover?.destroy(engine)
     }
 
     private companion object {
@@ -423,76 +500,215 @@ class ObjectEntity(
     }
 }
 
-class ModelEntities(val all: List<ObjectEntity>, private val byEntity: Map<Int, String>) {
+/** A roof covering batch on the GPU: one renderable for every tile of one roof. */
+class CoverEntity(
+    val objectId: String,
+    val entity: Int,
+    private val vertexBuffer: VertexBuffer,
+    private val indexBuffer: IndexBuffer,
+    val instance: MaterialInstance,
+) {
+    fun destroy(engine: Engine) {
+        engine.renderableManager.destroy(entity)
+        engine.destroyVertexBuffer(vertexBuffer)
+        engine.destroyIndexBuffer(indexBuffer)
+        engine.destroyMaterialInstance(instance)
+        EntityManager.get().destroy(entity)
+    }
+}
+
+class ModelEntities(
+    val all: List<ObjectEntity>,
+    private val byEntity: Map<Int, String>,
+    private val edges: FeatureEdgeSet,
+    /** One line renderable per class batch, index for index with `edges.merged`. */
+    private val mergedEdges: List<LineEntity?>,
+    /** One line renderable per object group, index for index with `edges.groups`. */
+    private val objectEdges: List<LineEntity?>,
+) {
     val byId: Map<String, ObjectEntity> = all.associateBy { it.objectId }
+
+    /** Every renderable this model uploaded: surfaces, coverings and lines. */
+    val allEntities: List<Int> =
+        all.flatMap { it.surfaces + listOfNotNull(it.cover?.entity) } +
+            mergedEdges.mapNotNull { it?.entity } + objectEdges.mapNotNull { it?.entity }
 
     /** Filament renderable -> semantic object. The whole picking trace. */
     fun objectIdOf(renderable: Int): String? = byEntity[renderable]
 
-    fun applyStyle(engine: Engine, scene: ModelScene, style: RenderStyle) {
+    /**
+     * The overlay renderables a state shows: the covering of each visible
+     * roof in a mode that draws coverings, and the feature-edge groups the
+     * edge set says are drawn for these objects, tiers and selection.
+     */
+    fun overlaysFor(visible: Set<String>, mode: PresentationMode, selected: String?): Set<Int> {
+        val out = LinkedHashSet<Int>()
+        if (mode.showsRoofCover) {
+            for (id in visible) byId[id]?.cover?.let { out.add(it.entity) }
+        }
+        val tiers = mode.edgeTiers
+        if (tiers.isNotEmpty()) {
+            val drawn = edges.drawn(visible, tiers, selected)
+            for (i in drawn.merged) mergedEdges[i]?.let { out.add(it.entity) }
+            for (i in drawn.perObject) objectEdges[i]?.let { out.add(it.entity) }
+        }
+        return out
+    }
+
+    /** Line ink for a look: the selected object's own groups take the highlight. */
+    fun inkEdges(look: PresentationLook, selected: String?) {
+        for (line in mergedEdges) line?.setColor(look.edgeInk)
+        for ((i, line) in objectEdges.withIndex()) {
+            line?.setColor(if (selected != null && edges.groups[i].objectId == selected) look.selectedEdgeInk else look.edgeInk)
+        }
+    }
+
+    /**
+     * Material parameters for a presentation. MODEL reads the style exactly
+     * as before; the studies read `StudyPalette`. Glazing's shadow casting
+     * and the surfaces' depth offset follow the look.
+     */
+    fun applyAppearance(engine: Engine, scene: ModelScene, mode: PresentationMode, style: RenderStyle, look: PresentationLook) {
+        val rm = engine.renderableManager
         for (entity in all) {
             val obj = scene.objectById(entity.objectId) ?: continue
             for ((i, part) in obj.parts.withIndex()) {
                 val instance = entity.instances.getOrNull(i) ?: continue
-                val material = part.materialId?.let { scene.materials[it] }
-                val a = style.appearanceOf(part, material, scene.styling)
+                val a = if (mode.usesStyle) {
+                    style.appearanceOf(part, part.materialId?.let { scene.materials[it] }, scene.styling)
+                } else {
+                    StudyPalette.appearanceOf(mode, part)
+                }
                 instance.setParameter("baseColor", a.red, a.green, a.blue, a.alpha)
                 instance.setParameter("roughness", a.roughness)
                 instance.setParameter("metallic", a.metallic)
                 instance.setParameter("reflectance", a.reflectance)
+                if (!part.part.isTranslucent) instance.setPolygonOffset(look.surfaceDepthOffset, look.surfaceDepthOffset)
+            }
+            entity.translucent?.let { glass ->
+                val ri = rm.getInstance(glass)
+                rm.setCastShadows(ri, look.glassShadows)
+                rm.setReceiveShadows(ri, look.glassShadows)
+            }
+            entity.cover?.let { cover ->
+                val a = StudyPalette.coverAppearance()
+                cover.instance.setParameter("baseColor", a.red, a.green, a.blue, a.alpha)
+                cover.instance.setParameter("roughness", a.roughness)
+                cover.instance.setParameter("metallic", a.metallic)
+                cover.instance.setParameter("reflectance", a.reflectance)
+                cover.instance.setPolygonOffset(look.surfaceDepthOffset, look.surfaceDepthOffset)
             }
         }
     }
 
     fun destroy(engine: Engine) {
         for (o in all) o.destroy(engine)
+        for (line in mergedEdges) line?.destroy(engine)
+        for (line in objectEdges) line?.destroy(engine)
     }
 
     companion object {
         /**
-         * Upload the whole model.
+         * Upload the whole model and its study overlays.
          *
-         * Runs once per scene load. Each semantic object becomes one entity
-         * with one vertex buffer, one index buffer and one primitive per
-         * geometry part, so a part can carry its own material while the whole
-         * object stays a single pickable thing.
+         * Runs once per scene load. Each semantic object becomes one vertex
+         * buffer, one index buffer and one primitive per geometry part, so a
+         * part can carry its own material while the whole object stays a
+         * single pickable thing; its opaque and translucent primitives go to
+         * two renderables over those same buffers. Coverings and feature
+         * edges are uploaded here too and enter the scene only in a mode that
+         * draws them.
          */
-        fun build(engine: Engine, scene: ModelScene, opaque: Material, translucent: Material): ModelEntities {
+        fun build(
+            engine: Engine,
+            scene: ModelScene,
+            presentation: ScenePresentation,
+            opaque: Material,
+            translucent: Material,
+            line: Material,
+        ): ModelEntities {
             val entities = ArrayList<ObjectEntity>(scene.objects.size)
-            val byEntity = HashMap<Int, String>(scene.objects.size * 2)
+            val byEntity = HashMap<Int, String>(scene.objects.size * 3)
 
             for (obj in scene.objects) {
                 if (!obj.hasGeometry) continue
-                val entity = EntityManager.get().create()
                 val vertexBuffer = buildVertexBuffer(engine, obj)
                 val indexBuffer = buildIndexBuffer(engine, obj.vertexCount)
 
-                val builder = RenderableManager.Builder(obj.parts.size)
-                    .boundingBox(boxOf(obj.bounds))
-                    .culling(true)
-                    .castShadows(true)
-                    .receiveShadows(true)
-
                 val instances = ArrayList<MaterialInstance>(obj.parts.size)
-                for ((i, part) in obj.parts.withIndex()) {
-                    val isGlass = part.part.isTranslucent
-                    val instance = (if (isGlass) translucent else opaque).createInstance()
-                    instances.add(instance)
-                    builder.geometry(i, RenderableManager.PrimitiveType.TRIANGLES, vertexBuffer, indexBuffer, part.first, part.count)
-                    builder.material(i, instance)
-                    // Glazing must not throw a hard shadow or cast a pane
-                    // shaped shadow across the room behind it.
-                    if (isGlass) builder.blendOrder(i, 1)
-                }
-                builder.build(engine, entity)
+                for (part in obj.parts) instances.add((if (part.part.isTranslucent) translucent else opaque).createInstance())
 
-                entities.add(ObjectEntity(obj.id, entity, vertexBuffer, indexBuffer, instances))
-                byEntity[entity] = obj.id
+                fun renderable(translucentParts: Boolean): Int? {
+                    val indices = obj.parts.indices.filter { obj.parts[it].part.isTranslucent == translucentParts }
+                    if (indices.isEmpty()) return null
+                    val entity = EntityManager.get().create()
+                    val builder = RenderableManager.Builder(indices.size)
+                        .boundingBox(boxOf(obj.bounds))
+                        .culling(true)
+                        .castShadows(true)
+                        .receiveShadows(true)
+                    for ((slot, i) in indices.withIndex()) {
+                        val part = obj.parts[i]
+                        builder.geometry(slot, RenderableManager.PrimitiveType.TRIANGLES, vertexBuffer, indexBuffer, part.first, part.count)
+                        builder.material(slot, instances[i])
+                        if (translucentParts) builder.blendOrder(slot, 1)
+                    }
+                    builder.build(engine, entity)
+                    byEntity[entity] = obj.id
+                    return entity
+                }
+
+                val cover = presentation.coverByObject[obj.id]?.let { batch ->
+                    buildCover(engine, batch, opaque).also { byEntity[it.entity] = obj.id }
+                }
+                entities.add(ObjectEntity(obj.id, renderable(false), renderable(true), vertexBuffer, indexBuffer, instances, cover))
             }
 
-            val model = ModelEntities(entities, byEntity)
-            model.applyStyle(engine, scene, RenderStyle.CONSTRUCTION)
+            val edges = presentation.edges
+            // Lines answer a pick with the object they outline, like its surfaces.
+            val merged = edges.merged.map { m ->
+                LineEntity.lines(engine, line, m.positions)?.also { l -> m.members.singleOrNull()?.let { byEntity[l.entity] = it } }
+            }
+            val perObject = edges.groups.map { g ->
+                LineEntity.lines(engine, line, g.positions)?.also { l -> byEntity[l.entity] = g.objectId }
+            }
+
+            val model = ModelEntities(entities, byEntity, edges, merged, perObject)
+            val look = PresentationLook.model(RenderStyle.CONSTRUCTION)
+            model.applyAppearance(engine, scene, PresentationMode.MODEL, RenderStyle.CONSTRUCTION, look)
+            model.inkEdges(look, null)
             return model
+        }
+
+        private fun buildCover(engine: Engine, batch: RoofCoverBatch, material: Material): CoverEntity {
+            val vb = VertexBuffer.Builder()
+                .bufferCount(2)
+                .vertexCount(batch.vertexCount)
+                .attribute(VertexBuffer.VertexAttribute.POSITION, 0, VertexBuffer.AttributeType.FLOAT3, 0, 12)
+                .attribute(VertexBuffer.VertexAttribute.TANGENTS, 1, VertexBuffer.AttributeType.FLOAT4, 0, 16)
+                .build(engine)
+            vb.setBufferAt(engine, 0, directFloats(batch.positions))
+            vb.setBufferAt(engine, 1, directFloats(batch.tangents))
+            val indices = ByteBuffer.allocateDirect(batch.indices.size * 4).order(ByteOrder.nativeOrder())
+            indices.asIntBuffer().put(batch.indices)
+            indices.rewind()
+            val ib = IndexBuffer.Builder()
+                .indexCount(batch.indices.size)
+                .bufferType(IndexBuffer.Builder.IndexType.UINT)
+                .build(engine)
+            ib.setBuffer(engine, indices)
+            val instance = material.createInstance()
+            val entity = EntityManager.get().create()
+            RenderableManager.Builder(1)
+                .boundingBox(boxOf(batch.bounds))
+                .geometry(0, RenderableManager.PrimitiveType.TRIANGLES, vb, ib, 0, batch.indices.size)
+                .material(0, instance)
+                .culling(true)
+                // The relief is the point: each course shades the one below.
+                .castShadows(true)
+                .receiveShadows(true)
+                .build(engine, entity)
+            return CoverEntity(batch.objectId, entity, vb, ib, instance)
         }
 
         private fun buildVertexBuffer(engine: Engine, obj: SceneObject): VertexBuffer {
@@ -561,6 +777,11 @@ class LineEntity(
     private val indexBuffer: IndexBuffer,
     private val instance: MaterialInstance,
 ) {
+    /** Recolour the line (a mode's ink, the selection's). A parameter write, nothing else. */
+    fun setColor(color: FloatArray) {
+        instance.setParameter("baseColor", color[0], color[1], color[2], color[3])
+    }
+
     /** Re-point an existing box at new bounds. No allocation, no rebuild. */
     fun setBox(engine: Engine, b: Bounds) {
         val c = b.corners()
@@ -594,6 +815,23 @@ class LineEntity(
             0, 4, 1, 5, 2, 6, 3, 7,
         )
 
+        /**
+         * A feature-edge line list, or null when there is nothing to draw.
+         * Its colour is set by the presentation (`setColor`), and it is a
+         * separate renderable so that it can be in the scene only in a mode
+         * that inks edges.
+         */
+        fun lines(engine: Engine, material: Material, positions: FloatArray): LineEntity? {
+            if (positions.size < 6) return null
+            var b = Bounds.EMPTY
+            var i = 0
+            while (i + 2 < positions.size) {
+                b = b.union(Bounds.around(Vec3(positions[i].toDouble(), positions[i + 1].toDouble(), positions[i + 2].toDouble())))
+                i += 3
+            }
+            return create(engine, material, positions, floatArrayOf(0f, 0f, 0f, 0f), b.padded(0.01), guide = false)
+        }
+
         fun box(engine: Engine, material: Material, color: FloatArray): LineEntity =
             create(engine, material, FloatArray(BOX_EDGES.size * 3), color, Bounds(Vec3.ZERO, Vec3.ZERO))
 
@@ -623,10 +861,10 @@ class LineEntity(
                 z += 1.0
             }
             val gridBounds = Bounds(Vec3(minX, y - 0.1, minZ), Vec3(maxX, y + 0.1, maxZ))
-            return create(engine, material, points.toFloatArray(), GRID_COLOR, gridBounds)
+            return create(engine, material, points.toFloatArray(), PresentationLook.MODEL_GRID, gridBounds)
         }
 
-        private fun create(engine: Engine, material: Material, data: FloatArray, color: FloatArray, bounds: Bounds): LineEntity {
+        private fun create(engine: Engine, material: Material, data: FloatArray, color: FloatArray, bounds: Bounds, guide: Boolean = true): LineEntity {
             val vertexCount = data.size / 3
             val vb = VertexBuffer.Builder()
                 .bufferCount(1)
@@ -649,24 +887,19 @@ class LineEntity(
             instance.setParameter("baseColor", color[0], color[1], color[2], color[3])
 
             val entity = EntityManager.get().create()
-            RenderableManager.Builder(1)
+            val builder = RenderableManager.Builder(1)
                 .boundingBox(ModelEntities.boxOf(bounds))
                 .geometry(0, RenderableManager.PrimitiveType.LINES, vb, ib, 0, vertexCount)
                 .material(0, instance)
                 .castShadows(false)
                 .receiveShadows(false)
-                // A guide is not the building: it must never answer a pick.
-                .priority(7)
-                .build(engine, entity)
+            // A guide is not the building: it must never answer a pick. A
+            // feature edge is drawn after the surfaces it outlines.
+            builder.priority(if (guide) 7 else 6)
+            builder.build(engine, entity)
 
             return LineEntity(entity, vb, ib, instance)
         }
 
-        private val GRID_COLOR = floatArrayOf(
-            RenderStyle.srgbToLinear(0.29f),
-            RenderStyle.srgbToLinear(0.33f),
-            RenderStyle.srgbToLinear(0.38f),
-            0.55f,
-        )
     }
 }

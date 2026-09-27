@@ -125,9 +125,12 @@ class OrbitCamera(
      * uses the bounding sphere, so it is correct from every angle rather than
      * only from the one the user happens to be at.
      */
-    fun distanceToFit(bounds: Bounds, margin: Double = 1.35): Double {
+    fun distanceToFit(bounds: Bounds, margin: Double = 1.35, aspect: Double = 1.0): Double {
         val radius = max(bounds.radius, 0.25)
-        return clamp(radius / tan(Math.toRadians(fovDeg) / 2.0) * margin, minDistance, maxDistance)
+        // On a portrait viewport the horizontal field is the narrower one;
+        // fitting only the vertical would crop the model at both sides.
+        val narrower = tan(Math.toRadians(fovDeg) / 2.0) * if (aspect.isFinite() && aspect > 0.0) minOf(1.0, aspect) else 1.0
+        return clamp(radius / narrower * margin, minDistance, maxDistance)
     }
 
     /**
@@ -142,6 +145,8 @@ class OrbitCamera(
         pitchDeg: Double = pose.pitchDeg,
         projection: Projection = pose.projection,
         margin: Double = 1.35,
+        /** Viewport width over height; below 1 the fit is made to the narrower, horizontal field. */
+        aspect: Double = 1.0,
     ): OrbitPose {
         if (bounds.isEmpty) return pose
         // A pane or a slab has almost no thickness; give it an extent so
@@ -153,7 +158,7 @@ class OrbitCamera(
                 pan = Vec3.ZERO,
                 yawDeg = yawDeg,
                 pitchDeg = pitchDeg,
-                distance = distanceToFit(padded, margin),
+                distance = distanceToFit(padded, margin, aspect),
                 projection = projection,
             ),
         )

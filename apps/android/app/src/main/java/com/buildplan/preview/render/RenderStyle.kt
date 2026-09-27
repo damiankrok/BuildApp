@@ -50,8 +50,9 @@ data class SurfaceAppearance(
  * paint over a crack.
  *
  * The palette's `edge = "SOFT"` asks the web viewer for a thin feature-edge
- * line on structural groups. This renderer builds no feature-edge geometry,
- * so it reads the field and draws nothing for it.
+ * line on structural groups. The styles draw no line; the CLAY and LINE
+ * presentation modes read the field to choose their STRUCTURAL edge tier
+ * (`presentation/FeatureEdges.kt`).
  */
 enum class RenderStyle(val label: String, val description: String) {
     CONSTRUCTION("Construction", "Model materials and part colours"),

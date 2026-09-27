@@ -90,6 +90,7 @@ private fun ReadyScreen(model: PreviewViewModel, scene: ModelScene, onAnalyze: (
                 scene = scene,
                 state = model.viewer,
                 onPreset = { model.applyPreset(it, System.currentTimeMillis()) },
+                onPresentation = { model.setPresentation(it) },
                 onStyle = { model.setStyle(it) },
                 onVisibility = { model.setVisibility(it) },
                 onIsolate = { model.isolateSelected() },

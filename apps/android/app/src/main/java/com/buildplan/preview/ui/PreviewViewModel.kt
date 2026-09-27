@@ -9,6 +9,7 @@ import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.PoseAnimation
 import com.buildplan.preview.camera.ViewPreset
+import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.DownloadedScenes
 import com.buildplan.preview.scene.ModelScene
@@ -57,6 +58,11 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     var viewportHeightPx: Int = 1
 
+    var viewportWidthPx: Int = 1
+
+    /** Width over height of the viewport, for presets that fit the model to the screen. */
+    private val viewportAspect: Double get() = if (viewportHeightPx > 0) viewportWidthPx.toDouble() / viewportHeightPx else 1.0
+
     private var animation: Animation? = null
     private var lastTapAtMs = 0L
     private var lastTapObjectId: String? = null
@@ -99,9 +105,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
                 camera = OrbitCamera(model.bounds)
                 pose = camera.home()
                 // Selection, isolation and layers name objects of the old
-                // model and start over; the style is how the viewer draws,
-                // not part of the model, so it carries across a model switch.
-                viewer = ViewerState(style = viewer.style)
+                // model and start over; the style and the presentation mode
+                // are how the viewer draws, not part of the model, so they
+                // carry across a model switch.
+                viewer = ViewerState(style = viewer.style, presentation = viewer.presentation)
                 animation = null
                 screen = ScreenState.Ready(model)
             }
@@ -168,7 +175,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     fun applyPreset(preset: ViewPreset, nowMs: Long) {
         val model = scene ?: return
-        val target = preset.poseIn(camera, model, pose) ?: return
+        val target = preset.poseIn(camera, model, poseAt(nowMs), viewportAspect) ?: return
         preset.visibility?.let { viewer = viewer.withVisibility(model, it) }
         // A focus preset is also an answer to "which one?", so it selects the
         // object it framed — otherwise the inspector would still be empty
@@ -230,6 +237,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     fun setStyle(style: RenderStyle) {
         viewer = viewer.withStyle(style)
+    }
+
+    fun setPresentation(mode: PresentationMode) {
+        viewer = viewer.withPresentation(mode)
     }
 
     fun clearSelection() {
