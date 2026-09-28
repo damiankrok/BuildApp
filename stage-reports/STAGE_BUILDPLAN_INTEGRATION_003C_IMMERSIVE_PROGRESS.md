@@ -327,8 +327,16 @@ The full CI evidence stays in each run's `model-entry` artifact (30 days).
 
 **No analyzer, model, compiler, mobile-scene or bundle file changed in this stage** (`git diff 2d8ee75..HEAD --stat`: Android app, its tests, tools, CI and docs only). CI still re-exports the committed bundles and asserts they are byte-identical.
 
-- **Marcówki:** semantic audit and facade audit green in run 58's core job; analyzer-v2 gates and the reconstruction proofs green; the live Marcówki runs (desktop bundle, Node 18, emulator) were still running when this report was committed — result in the follow-up commit.
-- **Rarytasy:** the second-house job (live URL, offline replay, gable regression, Node 18 without ICU) was still running when this report was committed — result in the follow-up commit.
+- **Marcówki:** semantic audit and facade audit green in run 58's core job; analyzer-v2 gates and the reconstruction proofs green; the live Marcówki URL through the APK's analyzer **on the Android emulator: LIVE_ANDROID_ANALYSIS_PASS**; the fixture gate on the device `OK (4 tests)` (desktop hashes matched); the Node 18 parity job green.
+- **Rarytasy** (run 58, job `Second house / generalization`):
+  - the live URL COMPLETED: 2 masses, 14 openings, 151 commands, 113 meshes;
+  - **modelHash `8fa4a25b…`, sceneContentHash `d4e7249b…` = the 003B after-model**;
+  - the offline replay gives the same candidate, model and scene;
+  - the gable regression `second-house-roof.test.ts` passes 4/4 on the live run and on the committed replay;
+  - the pre-fix evidence is still refused by name (`RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED`);
+  - the APK's bundle on Node 18 without ICU reaches the same model and scene (243 s, peak RSS 2.04 GB);
+  - the live Rarytasy URL on the Android emulator: **LIVE_ANDROID_ANALYSIS_PASS**.
+  - Rarytasy stays **PARTIAL** (pergola, entrance canopy, second chimney), unchanged.
 - **Stage projection on both houses:** the same generic rules, nothing unplaced (table in *M*). This includes the 003B Rarytasy after-model (`m-analysis-m84f2903cb8e14`).
 - **Not done:** the product vertical slices of §25S (analyse through the UI → 3D → set progress → rewind → Etapy). They need the redesigned UI, which is blocked. The 3D gate exercises the built-in reference house, the one Dom opens first.
 
@@ -350,7 +358,7 @@ The full CI evidence stays in each run's `model-entry` artifact (30 days).
 | --- | --- | --- |
 | 56 (`36332805405`), diagnostic | `812eeec` | **cancelled at 2 h**: the emulator (swiftshader_indirect) went offline in the first 3D test; every adb call hung. This led to the bounded gate. |
 | 57 (`36460108750`), diagnostic | `662fa9c` | 3D gate × 3 backends: `swiftshader_indirect` DEVICE_LOST, `guest` DEVICE_LOST, `swangle_indirect` green but **falsely** (flat screen over a drawn surface): proved the root cause. |
-| **58 (`36461578128`)** | **`0a3791b`** | green so far: core (typecheck, tests, Marcówki audits, reconstruction proofs), Android APK + JVM tests, **3D gate**, OWNER APK, browser, analyzer container, dependency audit; local-analyzer device, Node 18 parity and second house still running at this commit |
+| **58 (`36461578128`)** | **`0a3791b`** | **green, all 12 jobs**: core (typecheck, tests, Marcówki audits, reconstruction proofs, analyzer-v2 gates), Android APK + JVM tests, **3D gate**, OWNER APK, browser, analyzer container, local analyzer on the emulator (fixture + both live URLs), Node 18 parity, second house, architecture/assemblies, dependency audit (preview-latest skipped by design) |
 
 # S. Performance
 
