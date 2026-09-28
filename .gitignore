@@ -16,6 +16,8 @@ apps/android/build/
 apps/android/app/build/
 apps/android/app/.cxx/
 apps/android/local.properties
+# Kotlin compiler session data
+apps/android/.kotlin/
 
 # Fetched source bytes and scratch output from the reconstruction scripts.
 .cache/
