@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.PoseAnimation
@@ -71,6 +72,17 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     /** The counters of the viewport on screen now, or null when no viewport is composed. */
     @Volatile var renderDiagnostics: RenderDiagnostics? = null
 
+    /**
+     * The viewport's edges the chrome covers at rest, in pixels. The renderer
+     * frames the model inside what is left, every frame; read on the render
+     * thread's callback, so a plain volatile rather than snapshot state.
+     */
+    @Volatile var contentInsets: ContentInsets = ContentInsets.NONE
+
+    /** True while a finger turns, pans or zooms the model: the chrome steps back. */
+    var manipulating by mutableStateOf(false)
+        private set
+
     /** Width over height of the viewport, for presets that fit the model to the screen. */
     private val viewportAspect: Double get() = if (viewportHeightPx > 0) viewportWidthPx.toDouble() / viewportHeightPx else 1.0
 
@@ -86,7 +98,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         scenes.firstOrNull()?.let { open(it) }
-            ?: run { screen = ScreenState.Failed("This build carries no scene bundles. Run `npm run mobile:export-scenes` and rebuild.") }
+            ?: run { screen = ScreenState.Failed(application.getString(com.buildplan.preview.R.string.house_no_bundles)) }
     }
 
     /**
@@ -155,6 +167,11 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun onGestureStart(nowMs: Long) = interrupt(nowMs)
+
+    /** A camera gesture is under way, or has ended (every finger lifted). */
+    fun onManipulating(active: Boolean) {
+        if (manipulating != active) manipulating = active
+    }
 
     fun orbit(deltaYawDeg: Double, deltaPitchDeg: Double) {
         pose = camera.orbit(pose, deltaYawDeg, deltaPitchDeg)
@@ -256,6 +273,16 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     fun clearSelection() {
         viewer = viewer.clearSelection()
+    }
+
+    /**
+     * What the construction timeline shows (`progress.ConstructionTimeline`):
+     * the objects standing at the stage looked at, or null for the whole
+     * design. Only which uploaded objects are in the scene changes — no
+     * geometry is uploaded again and the camera does not move.
+     */
+    fun setConstruction(visible: Set<String>?) {
+        if (viewer.construction != visible) viewer = viewer.withConstruction(visible)
     }
 
     private companion object {

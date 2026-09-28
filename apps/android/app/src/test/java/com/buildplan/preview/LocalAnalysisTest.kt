@@ -509,7 +509,7 @@ class LocalAnalysisTest {
         val failed = (w.last as AnalysisState.Failed).failure as AnalyzerFailure.JobFailed
         assertEquals("RECONSTRUCTION_FAILED", failed.code)
         assertEquals("PLAN_NO_ENCLOSED_CELLS", failed.diagnosticCode)
-        assertEquals("Structural layout", failed.details?.stoppedAt())
+        assertEquals("Układ konstrukcyjny", failed.details?.stoppedAt())
         assertEquals(
             listOf("1 floor plan found", "plan read at 853x853 px", "41 wall bands found", "12 × 15 structural grid lines", "0 of 165 grid cells enclosed", "0 enclosed building regions", "0 building bodies"),
             failed.details?.countLines(),

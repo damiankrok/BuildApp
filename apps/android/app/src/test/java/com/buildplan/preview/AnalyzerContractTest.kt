@@ -158,13 +158,12 @@ class AnalyzerContractTest {
     }
 
     @Test
-    fun `the checklist shows the server's labels, and fills only what the server did not describe`() {
+    fun `the checklist names the stages it knows in the app's own words, and keeps the server's states`() {
         val rows = StageChecklist.rows(status(CONTRACT_STATUS))
-        assertEquals("Fetching the project page and its drawings", rows[0].label)
-        // The contract's example abbreviates this label to "…"; the app shows what it was sent.
-        assertEquals("…", rows[1].label)
-        // SOLVING_TOPOLOGY is not in the abbreviated example at all: the built-in wording fills in.
-        assertEquals(AnalysisStages.DEFAULT_LABELS["SOLVING_TOPOLOGY"], rows[4].label)
+        // The server sent English labels (one abbreviated to "…"); the owner reads Polish.
+        assertEquals(AnalysisStages.PIPELINE.map { AnalysisStages.DEFAULT_LABELS.getValue(it) }, rows.map { it.label })
+        assertEquals("Pobieram stronę projektu i rysunki", rows[0].label)
+        assertEquals(StageState.RUNNING, rows[2].state)
     }
 
     @Test

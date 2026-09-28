@@ -137,6 +137,21 @@ class ProgressSession(
     /** The rail's stops with the cursor's index among them; `Now` sits on no stop. */
     fun stopIndexOf(cursor: TimelineCursor): Int? = ConstructionTimeline.STOPS.indexOf(cursor).takeIf { it >= 0 }
 
+    /** Everything a screen reads, as one immutable snapshot. */
+    fun view(): ProgressView {
+        val stages = stages
+        val frame = frame
+        return ProgressView(
+            stages = stages,
+            summary = summary,
+            cursor = cursor,
+            frame = frame,
+            previewStop = if (frame.isPreview) stopIndexOf(cursor) else null,
+            nowStop = nowStopOf(stages),
+            problem = problem,
+        )
+    }
+
     // -----------------------------------------------------------------------
     // Edits: the only way the saved record changes
     // -----------------------------------------------------------------------
@@ -225,4 +240,29 @@ data class ProgressSummary(
     val availability: ProgressAvailability,
 ) {
     val percentText: String? get() = percent?.let(StageProgressMetric::format)
+}
+
+/**
+ * One reading of a house's progress and of the cursor, for the screens: they
+ * draw this and call the session's methods; they never hold a mutable record.
+ */
+data class ProgressView(
+    val stages: List<ConstructionStageProgress>,
+    val summary: ProgressSummary,
+    val cursor: TimelineCursor,
+    val frame: TimelineFrame,
+    /** The rule's stop the 3D previews; null while it shows now. */
+    val previewStop: Int?,
+    /** The stop NOW stands on: the stage in progress, else the last stage done; null while unset. */
+    val nowStop: Int?,
+    val problem: ProgressProblem?,
+) {
+    val stopCount: Int get() = stages.size + 1
+}
+
+/** The stop NOW stands on: the stage in progress, else the last stage done; null while nothing is started. */
+fun nowStopOf(stages: List<ConstructionStageProgress>): Int? {
+    val inProgress = stages.indexOfFirst { it.status == StageStatus.IN_PROGRESS }
+    if (inProgress >= 0) return inProgress
+    return stages.indexOfLast { it.status == StageStatus.DONE }.takeIf { it >= 0 }
 }

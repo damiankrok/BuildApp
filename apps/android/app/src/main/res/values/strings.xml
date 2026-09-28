@@ -1,77 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">BuildPlan Model Preview</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
+    <string name="app_name">BuildPlan</string>
 
-    <!-- Miejsca aplikacji (dolna nawigacja) -->
+    <!-- Miejsca aplikacji (dolny pasek) -->
     <string name="place_house">Dom</string>
     <string name="place_model">3D</string>
     <string name="place_stages">Etapy</string>
     <string name="place_costs">Koszty</string>
     <string name="place_documents">Dokumenty</string>
-    <string name="place_house_description">Twój dom: projekt, analiza z linku i zapisane modele</string>
-    <string name="place_model_description">Model 3D domu na pełnym ekranie</string>
-    <string name="place_stages_description">Etapy budowy</string>
+    <string name="place_house_description">Twój dom: postęp budowy, model i źródło</string>
+    <string name="place_model_description">Model 3D domu na pełnym ekranie, z osią budowy</string>
+    <string name="place_stages_description">Etapy budowy i postęp</string>
     <string name="place_costs_description">Koszty budowy</string>
     <string name="place_documents_description">Dokumenty budowy</string>
     <string name="state_selected">wybrane</string>
     <string name="state_not_selected">niewybrane</string>
+    <string name="state_expanded">rozwinięte</string>
+    <string name="state_collapsed">zwinięte</string>
 
     <!-- Dom -->
-    <string name="house_title">Dom</string>
-    <string name="house_current_heading">Wybrany dom</string>
     <string name="house_loading">Wczytuję model…</string>
     <string name="house_failed">Nie udało się wczytać modelu</string>
-    <string name="house_source_bundled">Przykład wbudowany w aplikację</string>
-    <string name="house_source_downloaded">Analiza z linku, zapisana na tym telefonie</string>
-    <string name="house_candidate_note">Model poglądowy odczytany z rysunków projektu. To kandydat do sprawdzenia, a nie dokumentacja wykonawcza.</string>
+    <string name="house_no_bundles">Ta wersja aplikacji nie zawiera żadnego modelu. Dodaj dom z linku.</string>
     <string name="house_open_3d">Otwórz w 3D</string>
-    <string name="house_add_heading">Dodaj dom z linku</string>
-    <string name="house_add_body">Wklej link do strony projektu. Aplikacja odczyta rysunki i zbuduje model, który zobaczysz w 3D.</string>
-    <string name="house_add_action">Analizuj link</string>
-    <string name="house_analysis_running">Analiza w toku</string>
-    <string name="house_analysis_running_detail">Postęp: %1$d%%</string>
-    <string name="house_analysis_failed">Ostatnia analiza się nie powiodła</string>
-    <string name="house_analysis_show">Pokaż analizę</string>
+    <string name="house_add_action">Dodaj dom z linku</string>
+    <string name="house_analysis_running_detail">Analiza linku w toku · %1$d%%</string>
+    <string name="house_analysis_failed">Ostatnia analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="house_saved_heading">Domy na tym telefonie</string>
-    <string name="house_saved_open">Wybierz</string>
     <string name="house_saved_current">Wybrany</string>
-    <string name="house_saved_open_description">Wybierz dom %1$s</string>
-    <string name="house_diagnostics_show">Pokaż szczegóły techniczne</string>
-    <string name="house_diagnostics_hide">Ukryj szczegóły techniczne</string>
+    <string name="house_switch_description">Domy na tym telefonie: %1$d</string>
+    <string name="house_status_bundled">Przykład wbudowany w aplikację · model poglądowy</string>
+    <string name="house_status_ready">Z analizy linku · model gotowy</string>
+    <string name="house_status_limited">Z analizy linku · gotowy z ograniczeniami</string>
+    <string name="house_status_limited_detail">%1$s — zobacz, czego analiza nie rozstrzygnęła</string>
+    <string name="house_status_warnings_detail">Analiza zgłosiła ostrzeżenia — zobacz szczegóły</string>
+    <string name="house_drawing_description">Rysunek domu %1$s. Dotknij, aby otworzyć model 3D.</string>
+    <string name="house_diagnostics_show">Dane techniczne</string>
+    <string name="house_diagnostics_hide">Ukryj dane techniczne</string>
     <string name="house_diagnostics_rows">Schemat modelu %1$s · %2$s · %3$s · pakiet %4$s</string>
-    <string name="house_diagnostics_analyzer">Analizator i jego diagnostyka</string>
+    <string name="house_diagnostics_analyzer">Analiza linku i jej diagnostyka</string>
+
+    <!-- Postęp: jeden odczyt dla Domu, 3D i Etapów -->
+    <string name="progress_unset">Postęp nieustawiony</string>
+    <string name="progress_unset_body">Zaznacz w Etapach, na jakim etapie jest budowa. Procent policzy się z etapów; do tego czasu 3D pokazuje cały projekt.</string>
+    <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Oś budowy nadal pokazuje dom na każdym etapie.</string>
+    <string name="progress_set_action">Ustaw postęp</string>
+    <string name="progress_metric_label">Postęp wg etapów</string>
+    <string name="progress_done_of">Zakończone etapy: %1$d z %2$d</string>
+    <string name="progress_explain_show">Co to znaczy?</string>
+    <string name="progress_explain_hide">Ukryj</string>
+    <string name="progress_explain">Procent wynika z postępu ustawionych etapów. Nie oznacza procentu wydanych pieniędzy ani wartości robót.</string>
+    <string name="progress_current_stage">Aktualny etap: %1$s</string>
+    <string name="progress_last_done">Ostatnio zakończony: %1$s</string>
+    <string name="progress_no_current_stage">Żaden etap nie jest w toku</string>
+    <string name="progress_now_doing">Teraz robimy: %1$s</string>
+    <string name="progress_task_unset">Teraz robimy: nie wpisano</string>
+    <string name="progress_now_task">Teraz: %1$s</string>
+    <string name="progress_stage_in_progress">Etap w toku · %1$d%%</string>
+    <string name="progress_actual_short">%1$s · %2$s</string>
+    <string name="progress_actual_prefix">Aktualnie: %1$s</string>
+    <string name="progress_state_spoken">%1$s, aktualny etap %2$s</string>
+    <string name="progress_problem_corrupt">Zapis postępu tego domu był uszkodzony. Odłożono go jako kopię na tym telefonie i zaczynasz od nowa.</string>
+    <string name="progress_problem_newer">Postęp tego domu zapisała nowsza wersja aplikacji (schemat %1$d). Ta wersja go nie nadpisze — zaktualizuj aplikację.</string>
+    <string name="progress_problem_save_failed">Nie udało się zapisać zmiany na tym telefonie. Poprzedni stan został bez zmian.</string>
+
+    <!-- Oś budowy (3D) -->
+    <string name="timeline_return_now">Wróć do teraz</string>
+    <string name="timeline_expand">Pokaż nazwy etapów</string>
+    <string name="timeline_collapse">Ukryj nazwy etapów</string>
+    <string name="timeline_hint_scrub">Przesuń palcem po osi, by zobaczyć dom na każdym etapie</string>
+    <string name="timeline_preview_of">Podgląd: %1$s</string>
+    <string name="timeline_no_geometry">Brak osobnej geometrii 3D dla tego etapu</string>
+    <string name="timeline_stop_position">Stan po etapie %1$d z %2$d</string>
+    <string name="timeline_target">Projekt docelowy</string>
+    <string name="timeline_target_detail">Cały dom z projektu, także elementy bez przypisanego etapu</string>
+    <string name="timeline_target_short">Projekt</string>
+    <string name="timeline_rule_description">Oś budowy</string>
+    <string name="timeline_state_now">%1$s, teraz</string>
+
+    <!-- Etapy -->
+    <string name="stages_title">Etapy budowy</string>
+    <string name="stages_unset_guide">Dotknij etapu, na którym jest budowa, i wybierz „Ustaw jako aktualny”. Wcześniejsze etapy oznacz jako zakończone — aplikacja nie zrobi tego sama.</string>
+    <string name="stages_footer">To lista startowa dla domu jednorodzinnego i dziś każdy etap waży tyle samo. Własne etapy, kolejność i wagi przyjdą później.</string>
+    <string name="stage_plot_purchase">Zakup działki</string>
+    <string name="stage_design">Projekt</string>
+    <string name="stage_permits">Formalności</string>
+    <string name="stage_site_preparation">Przygotowanie terenu</string>
+    <string name="stage_foundations">Fundamenty</string>
+    <string name="stage_walls">Ściany</string>
+    <string name="stage_floor_slab">Strop</string>
+    <string name="stage_roof">Dach</string>
+    <string name="stage_joinery">Stolarka</string>
+    <string name="stage_electrical">Instalacja elektryczna</string>
+    <string name="stage_plumbing">Hydraulika</string>
+    <string name="stage_heating">Ogrzewanie</string>
+    <string name="stage_plastering">Tynki</string>
+    <string name="stage_screed">Wylewki</string>
+    <string name="stage_facade">Elewacja</string>
+    <string name="stage_finishing">Wykończenie</string>
+    <string name="stage_garden">Ogród</string>
+    <string name="stage_status_done">Zakończony</string>
+    <string name="stage_status_in_progress_percent">W toku · %1$d%%</string>
+    <string name="stage_status_not_started">Nierozpoczęty</string>
+    <string name="stage_no_geometry">Ten etap nie ma osobnej geometrii w modelu 3D: oś budowy zatrzyma się na nim, ale dom się nie zmieni.</string>
+    <string name="stage_completion">Ukończenie etapu</string>
+    <string name="stage_completion_hint">100% nie zamyka etapu — zrób to przyciskiem „Oznacz jako zakończony”.</string>
+    <string name="stage_task_label">Teraz robimy</string>
+    <string name="stage_task_placeholder">np. montaż więźby</string>
+    <string name="stage_task_save">Zapisz</string>
+    <string name="stage_make_current">Ustaw jako aktualny</string>
+    <string name="stage_mark_done">Oznacz jako zakończony</string>
+    <string name="stage_reopen">Wróć do tego etapu</string>
+    <string name="stage_reset">Cofnij do nierozpoczętych</string>
+    <string name="stage_reset_title">Cofnąć ten etap?</string>
+    <string name="stage_reset_body">Etap wróci do stanu „nierozpoczęty”, a jego procent i wpis „Teraz robimy” zostaną wyczyszczone. Inne etapy się nie zmienią.</string>
+    <string name="stage_reset_keep">Zostaw</string>
+    <string name="stage_show_in_3d">Pokaż w 3D</string>
+    <string name="stage_show_now">Pokaż stan w 3D</string>
+    <string name="stage_other_current">Aktualny jest etap „%1$s”. Najpierw oznacz go jako zakończony albo cofnij.</string>
+    <string name="refused_not_in_progress">Procent i „Teraz robimy” ustawia się tylko dla etapu w toku.</string>
+    <string name="refused_completion">Ukończenie musi być między 0 a 100%.</string>
+    <string name="refused_no_current">Najpierw ustaw aktualny etap.</string>
+    <string name="refused_unknown_stage">Tego etapu nie ma na liście.</string>
 
     <!-- Puste miejsca: uczciwie, bez danych pozornych -->
-    <string name="empty_stages_title">Etapy budowy</string>
-    <string name="empty_stages_body">Tu pojawi się plan budowy podzielony na etapy. Ta część aplikacji nie jest jeszcze zbudowana: nic tu nie jest planowane, zapisywane ani liczone.</string>
-    <string name="empty_costs_title">Koszty budowy</string>
-    <string name="empty_costs_body">Tu pojawią się wydatki na budowę. Ta część aplikacji nie jest jeszcze zbudowana: aplikacja nie zapisuje kosztów i niczego nie wycenia.</string>
+    <string name="empty_costs_title">Koszty</string>
+    <string name="empty_costs_body">Tu będzie dziennik wydatków i budżet budowy. Ta część aplikacji jeszcze nie powstała: nic tu nie jest zapisywane ani wyceniane.</string>
+    <string name="empty_costs_meanwhile">Postęp budowy prowadzisz już w Etapach.</string>
     <string name="empty_documents_title">Dokumenty</string>
-    <string name="empty_documents_body">Tu pojawią się dokumenty budowy. Ta część aplikacji nie jest jeszcze zbudowana: nie można tu jeszcze dodać ani przechowywać plików.</string>
+    <string name="empty_documents_body">Tu trafią dokumenty, zdjęcia i pliki projektu. Ta część aplikacji jeszcze nie powstała: nie można tu jeszcze niczego dodać ani przechowywać.</string>
+    <string name="empty_documents_meanwhile">Źródło modelu — strona projektu i wynik analizy — znajdziesz przy domu.</string>
+    <string name="empty_go_stages">Przejdź do Etapów</string>
+    <string name="empty_go_house">Przejdź do Domu</string>
     <string name="empty_not_built">Jeszcze niedostępne</string>
 
     <!-- 3D -->
-    <string name="model_back">Wróć do domu</string>
-    <string name="model_context_bundled">Przykład wbudowany · model poglądowy</string>
-    <string name="model_context_downloaded">Z analizy linku · kandydat do sprawdzenia</string>
-    <string name="model_selected">Zaznaczono: %1$s</string>
-    <string name="dock_view">Widok</string>
-    <string name="dock_view_description">Kamera: gotowe widoki i dopasowanie do ekranu</string>
-    <string name="dock_layers">Warstwy</string>
-    <string name="dock_layers_description">Co jest widoczne</string>
-    <string name="dock_look">Wygląd</string>
-    <string name="dock_look_description">Sposób prezentacji modelu</string>
-    <string name="dock_fit">Dopasuj</string>
-    <string name="dock_fit_description">Dopasuj cały model do ekranu pod obecnym kątem</string>
-    <string name="dock_reset">Resetuj</string>
-    <string name="dock_reset_description">Wróć do widoku całego domu i pokaż wszystkie elementy</string>
+    <string name="model_back">Wróć</string>
+    <string name="selection_clear">Odznacz</string>
     <string name="dock_details">Szczegóły</string>
-    <string name="dock_details_description">Pokaż szczegóły zaznaczonego elementu</string>
-    <string name="dock_details_unavailable">Najpierw dotknij elementu modelu</string>
-    <string name="dock_frame">Pokaż zaznaczenie</string>
-    <string name="dock_isolate">Tylko zaznaczone</string>
-    <string name="dock_show_all">Pokaż wszystko</string>
-    <string name="dock_style_heading">Oświetlenie i barwy (tylko Model)</string>
+    <string name="viewport_description">Model 3D domu. Przeciągnij jednym palcem, aby obrócić; dwoma, aby przesunąć; zsuń lub rozsuń palce, aby przybliżyć; dotknij elementu, aby go zaznaczyć.</string>
+    <string name="viewport_hint">Przeciągnij, aby obrócić · dwa palce: przesuń i przybliż · dotknij elementu</string>
+    <string name="tool_look">Wygląd</string>
+    <string name="tool_layers">Warstwy</string>
+    <string name="tool_view">Widok</string>
+    <string name="tool_fit">Dopasuj</string>
+    <string name="tool_state_look">Wygląd: %1$s</string>
+    <string name="tool_state_layers">Widoczne: %1$s</string>
+    <string name="tool_look_light">Oświetlenie i barwy</string>
+    <string name="pane_close">Zamknij panel</string>
 
     <string name="look_model">Model</string>
     <string name="look_model_description">Materiały i barwy modelu</string>
@@ -89,25 +165,46 @@
     <string name="layer_ground">Tylko parter</string>
     <string name="layer_upper">Tylko poddasze</string>
     <string name="layer_cutaway">Przekrój (parter bez dachu)</string>
-    <string name="layer_isolated">Tylko zaznaczone</string>
+    <string name="layer_isolated">Tylko zaznaczony</string>
+    <string name="layer_isolated_needs_selection">Najpierw dotknij elementu modelu</string>
+    <string name="layer_show_all">Pokaż wszystko</string>
 
     <string name="view_whole">Cały dom</string>
     <string name="view_isometric">Izometria</string>
+    <string name="view_isometric_detail">Trzy osie w równym skrócie, bez perspektywy</string>
     <string name="view_axonometric">Aksonometria</string>
-    <string name="view_front">Front</string>
-    <string name="view_rear">Tył</string>
-    <string name="view_left">Lewy bok</string>
-    <string name="view_right">Prawy bok</string>
-    <string name="view_top">Z góry</string>
+    <string name="view_axonometric_detail">Pod kątem 45°, bez perspektywy</string>
+    <string name="view_front">Z przodu</string>
+    <string name="view_rear">Z tyłu</string>
+    <string name="view_left">Z lewej</string>
+    <string name="view_right">Z prawej</string>
+    <string name="view_top">Dach z góry</string>
     <string name="view_ground_plan">Rzut parteru</string>
     <string name="view_attic_plan">Rzut poddasza</string>
     <string name="view_stairs">Schody</string>
     <string name="view_entrance">Wejście</string>
     <string name="view_fit">Dopasuj do ekranu</string>
+    <string name="view_group_whole">Cały dom</string>
+    <string name="view_group_elevations">Elewacje</string>
+    <string name="view_group_above">Z góry</string>
+    <string name="view_group_parallel">Rzut równoległy</string>
+    <string name="view_group_places">Miejsca</string>
+    <string name="view_reset">Przywróć widok</string>
+    <string name="view_reset_detail">Cały dom, wszystkie warstwy, bez zaznaczenia</string>
 
     <!-- Szczegóły elementu -->
     <string name="inspector_close">Zamknij szczegóły</string>
-    <string name="inspector_storey">Kondygnacja</string>
+    <string name="inspector_about">O elemencie</string>
+    <string name="inspector_frame">Pokaż z bliska</string>
+    <string name="inspector_isolate">Tylko ten element</string>
+    <string name="inspector_stage">Etap budowy: %1$s (%2$d)</string>
+    <string name="inspector_stage_done">Według Twojego postępu: zbudowane</string>
+    <string name="inspector_stage_in_progress">Według Twojego postępu: etap w toku</string>
+    <string name="inspector_stage_not_started">Według Twojego postępu: jeszcze nie zbudowane</string>
+    <string name="inspector_stage_progress_unset">Postęp nieustawiony</string>
+    <string name="inspector_stage_unmapped">Bez przypisanego etapu</string>
+    <string name="inspector_stage_unmapped_detail">Reguły etapów nie rozpoznają tego elementu, więc pokazuje się tylko w projekcie docelowym.</string>
+    <string name="inspector_hidden_in_view">Na tym etapie osi budowy element jeszcze nie stoi.</string>
     <string name="inspector_material">Materiał</string>
     <string name="inspector_extent">Wymiary</string>
     <string name="inspector_relations">Powiązania</string>
@@ -116,7 +213,11 @@
     <string name="inspector_source">Źródło</string>
     <string name="inspector_locator">Miejsce w źródle</string>
     <string name="inspector_interpretation">Odczyt</string>
-    <string name="inspector_confidence">Pewność</string>
+    <string name="inspector_confidence">Pewność odczytu</string>
+    <string name="inspector_confidence_value">Pewność (liczbowo)</string>
+    <string name="confidence_high">wysoka</string>
+    <string name="confidence_medium">średnia</string>
+    <string name="confidence_low">niska</string>
     <string name="inspector_note">Uwaga</string>
     <string name="inspector_technical_show">Pokaż dane techniczne</string>
     <string name="inspector_technical_hide">Ukryj dane techniczne</string>
@@ -135,8 +236,8 @@
     <string name="evidence_unknown">Status nieznany tej wersji aplikacji</string>
 
     <!-- Analiza linku (miejsce podrzędne w zakładce Dom) -->
-    <string name="analyzer_title">Analiza linku</string>
-    <string name="analyzer_back">Wróć do domu</string>
+    <string name="analyzer_title">Dodaj dom z linku</string>
+    <string name="analyzer_back">Wróć</string>
     <string name="analyzer_mode_local">Analiza na tym telefonie</string>
     <string name="analyzer_mode_service">Analiza w usłudze</string>
     <string name="analyzer_use_service">Użyj usługi analizy</string>
@@ -147,7 +248,7 @@
     <string name="analyzer_address">Adres usługi</string>
     <string name="analyzer_save_address">Zapisz adres</string>
     <string name="analyzer_link">Link do strony projektu</string>
-    <string name="analyzer_analyze_disabled">Analizuj projekt. Niedostępne, dopóki trwa analiza.</string>
+    <string name="analyzer_analyze_disabled">Trwa analiza — kolejny link możesz dodać po jej zakończeniu.</string>
     <string name="analyzer_analyze">Analizuj projekt</string>
     <string name="analyzer_preparing_local">Przygotowuję analizę na tym telefonie…</string>
     <string name="analyzer_sending">Wysyłam link do analizy…</string>
@@ -163,20 +264,81 @@
     <string name="analyzer_connection_lost_detail">Analiza trwa dalej w usłudze; ten ekran wróci do niej, gdy połączenie wróci.</string>
     <string name="analyzer_cancelling">Przerywam…</string>
     <string name="analyzer_cancel">Przerwij</string>
-    <string name="analyzer_no_model">Tym razem bez modelu</string>
     <string name="analyzer_download_again">Pobierz ponownie</string>
     <string name="analyzer_retry">Spróbuj ponownie</string>
     <string name="analyzer_copy_code">Kopiuj kod</string>
-    <string name="analyzer_hide_details">Ukryj szczegóły</string>
-    <string name="analyzer_show_details">Pokaż szczegóły</string>
     <string name="analyzer_share_diagnostics">Udostępnij diagnostykę</string>
-    <string name="analyzer_open_model">Otwórz model</string>
-    <string name="analyzer_diagnostics">Diagnostyka</string>
     <string name="analyzer_delete">Usuń</string>
     <string name="analyzer_keep">Zostaw</string>
     <string name="analyzer_open">Otwórz</string>
     <string name="analyzer_delete_title">Usunąć tę analizę?</string>
-    <string name="analyzer_downloads">Analizy na tym telefonie</string>
+    <string name="analyzer_downloads">Domy z analizy na tym telefonie</string>
+
+    <string name="analyzer_intro">Wklej link do strony projektu ARCHON. Aplikacja odczyta rysunki i zbuduje model domu, który zobaczysz w 3D. Czego źródło nie podaje, model nie dopowiada.</string>
+    <string name="analyzer_settings">Ustawienia analizy</string>
+    <string name="analyzer_mode_local_body">Analiza działa na tym telefonie: bez konta i bez usługi. Telefon sam pobiera stronę projektu.</string>
+    <string name="analyzer_mode_service_body">Link trafia do usługi analizy, a telefon pobiera gotowy model i go sprawdza.</string>
+    <string name="analyzer_local_unavailable">Analiza na tym telefonie jest niedostępna: %1$s.</string>
+    <string name="analyzer_not_configured_title">Brak usługi analizy</string>
+    <string name="analyzer_not_configured_body">Wbudowane modele otwierają się bez internetu. Aby przeanalizować link, podaj adres https usługi analizy. Zostaje tylko na tym telefonie; nie trzeba żadnego klucza ani hasła.</string>
+    <string name="analyzer_builtin_invalid">Adresu wbudowanego w aplikację nie można użyć: %1$s.</string>
+    <string name="analyzer_service_own">Usługa: %1$s (adres ustawiony na tym telefonie)</string>
+    <string name="analyzer_service_builtin">Usługa: %1$s (adres wbudowany w aplikację)</string>
+    <string name="analyzer_address_empty">Wpisz adres zaczynający się od https://.</string>
+    <string name="analyzer_address_hint">Tylko https, np. https://analyzer.example.com</string>
+    <string name="analyzer_working">Analiza trwa</string>
+    <string name="analyzer_progress">%1$d%%</string>
+    <string name="analyzer_progress_stage">%1$d%% · etap %2$d z %3$d</string>
+    <string name="analyzer_state_pending">czeka</string>
+    <string name="analyzer_state_running">w toku</string>
+    <string name="analyzer_state_done">gotowe</string>
+    <string name="analyzer_state_failed">przerwane błędem</string>
+    <string name="analyzer_state_cancelled">przerwane</string>
+    <string name="analyzer_stopped_at">Zatrzymano na</string>
+    <string name="analyzer_details">Szczegóły analizy</string>
+    <string name="analyzer_code">Kod</string>
+    <string name="analyzer_copy_code_description">Kopiuj kod diagnostyczny %1$s</string>
+    <string name="analyzer_result_ready">Model gotowy</string>
+    <string name="analyzer_result_limited">Model gotowy z ograniczeniami</string>
+    <string name="analyzer_result_found">Odczytano: bryły %1$d · otwory %2$d · pomieszczenia %3$d</string>
+    <string name="analyzer_result_limited_body">Części elementów analiza nie rozstrzygnęła albo zgłosiła ostrzeżenia. Model pokazuje tylko to, co odczytano z rysunków; brakujących elementów nie dopowiada.</string>
+    <string name="analyzer_unresolved">Nierozstrzygnięte (słowami analizatora)</string>
+    <string name="analyzer_warnings">Ostrzeżenia (słowami analizatora)</string>
+    <string name="analyzer_none">Brak</string>
+    <string name="analyzer_levels">Odczytane cechy wg poziomu pewności</string>
+    <string name="analyzer_levels_explained">L0 — tylko układ; L1 — z wymiarem; L2 — z wymiarem potwierdzonym drugim widokiem.</string>
+    <string name="analyzer_counts">Co odczytano</string>
+    <string name="analyzer_count_drawings">Rysunki źródła</string>
+    <string name="analyzer_count_masses">Bryły</string>
+    <string name="analyzer_count_openings">Otwory</string>
+    <string name="analyzer_count_rooms">Pomieszczenia</string>
+    <string name="analyzer_count_balconies">Balkony</string>
+    <string name="analyzer_count_terraces">Tarasy</string>
+    <string name="analyzer_count_railings">Balustrady</string>
+    <string name="analyzer_count_chimneys">Kominy</string>
+    <string name="analyzer_count_rooflights">Okna dachowe</string>
+    <string name="analyzer_checks">Kontrole</string>
+    <string name="analyzer_source">Źródło</string>
+    <string name="analyzer_publisher">Wydawca</string>
+    <string name="analyzer_page">Strona</string>
+    <string name="analyzer_started">Rozpoczęto</string>
+    <string name="analyzer_completed">Zakończono</string>
+    <string name="analyzer_hashes">Sumy kontrolne</string>
+    <string name="analyzer_local_run">Analiza na tym telefonie</string>
+    <string name="analyzer_local_runs">Przebiegi analizy na tym telefonie</string>
+    <string name="analyzer_status">Wynik</string>
+    <string name="analyzer_total_time">Czas</string>
+    <string name="analyzer_peak_memory">Najwyższe zużycie pamięci</string>
+    <string name="analyzer_scene_size">Rozmiar modelu</string>
+    <string name="analyzer_outcome_completed">Zakończona</string>
+    <string name="analyzer_outcome_cancelled">Przerwana</string>
+    <string name="analyzer_outcome_failed">Nieudana (%1$s)</string>
+    <string name="analyzer_outcome_interrupted">Przerwana zamknięciem aplikacji</string>
+    <string name="analyzer_outcome_running">W toku</string>
+    <string name="analyzer_downloads_empty">Jeszcze żadnego. Zakończona analiza zostaje tutaj i na liście domów.</string>
+    <string name="analyzer_open_description">Otwórz %1$s</string>
+    <string name="analyzer_delete_description">Usuń %1$s z tego telefonu</string>
+    <string name="analyzer_delete_body">%1$s zniknie z tego telefonu. Zapisany postęp budowy tego domu zostaje i wróci, gdy przeanalizujesz ten link ponownie.</string>
 
     <!-- Liczebniki (polskie formy mnogie) -->
     <plurals name="count_objects">
@@ -196,5 +358,29 @@
         <item quantity="few">%d części</item>
         <item quantity="many">%d części</item>
         <item quantity="other">%d części</item>
+    </plurals>
+    <plurals name="progress_metric_spoken">
+        <item quantity="one">Postęp wg etapów: %d procent</item>
+        <item quantity="few">Postęp wg etapów: %d procent</item>
+        <item quantity="many">Postęp wg etapów: %d procent</item>
+        <item quantity="other">Postęp wg etapów: %d procent</item>
+    </plurals>
+    <plurals name="refused_text_too_long">
+        <item quantity="one">Wpis może mieć najwyżej %d znak.</item>
+        <item quantity="few">Wpis może mieć najwyżej %d znaki.</item>
+        <item quantity="many">Wpis może mieć najwyżej %d znaków.</item>
+        <item quantity="other">Wpis może mieć najwyżej %d znaku.</item>
+    </plurals>
+    <plurals name="count_warnings">
+        <item quantity="one">%d ostrzeżenie</item>
+        <item quantity="few">%d ostrzeżenia</item>
+        <item quantity="many">%d ostrzeżeń</item>
+        <item quantity="other">%d ostrzeżenia</item>
+    </plurals>
+    <plurals name="count_unresolved">
+        <item quantity="one">%d element nierozstrzygnięty</item>
+        <item quantity="few">%d elementy nierozstrzygnięte</item>
+        <item quantity="many">%d elementów nierozstrzygniętych</item>
+        <item quantity="other">%d elementu nierozstrzygniętego</item>
     </plurals>
 </resources>

@@ -29,17 +29,21 @@ object AnalysisStages {
         "VERIFYING",
     )
 
-    /** Fallback wording for a stage the server has not labelled yet. */
+    /**
+     * The app's own Polish words for the stages it knows. The server's label
+     * (English, from the analyzer) is shown only for a stage this build does
+     * not know; the server stays the authority on each stage's STATE.
+     */
     val DEFAULT_LABELS: Map<String, String> = mapOf(
-        "ACQUIRING_SOURCE" to "Fetching the project page and its drawings",
-        "CLASSIFYING_SOURCES" to "Sorting plans, elevations, sections and renders",
-        "EXTRACTING_OBSERVATIONS" to "Reading the drawings",
-        "REGISTERING_VIEWS" to "Registering the views to one frame",
-        "SOLVING_TOPOLOGY" to "Solving bodies, roof, recesses, stair and rooms",
-        "SOLVING_METRICS" to "Sizing openings, roof details and facade assemblies",
-        "BUILDING_MODEL" to "Building and verifying the model",
-        "COMPILING_SCENE" to "Compiling the 3D scene",
-        "VERIFYING" to "Checking replay, hashes and joints",
+        "ACQUIRING_SOURCE" to "Pobieram stronę projektu i rysunki",
+        "CLASSIFYING_SOURCES" to "Rozpoznaję rzuty, elewacje, przekroje i wizualizacje",
+        "EXTRACTING_OBSERVATIONS" to "Czytam rysunki",
+        "REGISTERING_VIEWS" to "Zestawiam widoki w jednym układzie",
+        "SOLVING_TOPOLOGY" to "Odtwarzam bryłę, dach, schody i pomieszczenia",
+        "SOLVING_METRICS" to "Ustalam wymiary otworów, dachu i elewacji",
+        "BUILDING_MODEL" to "Buduję i sprawdzam model domu",
+        "COMPILING_SCENE" to "Przygotowuję model 3D",
+        "VERIFYING" to "Sprawdzam wynik",
     )
 
     fun isTerminal(status: String): Boolean = status in TERMINAL
@@ -59,9 +63,9 @@ data class StageRow(val id: String, val label: String, val state: StageState)
 object StageChecklist {
     /**
      * The checklist for one status record: the nine known stages in pipeline
-     * order, each with the server's label and state when the server described
-     * it, followed by any stage this build does not know (a newer service), in
-     * the order the server listed them.
+     * order, in the app's own words, each with the state the server gave it,
+     * followed by any stage this build does not know (a newer service), in
+     * the server's words and order.
      */
     fun rows(status: JobStatus?): List<StageRow> {
         val records = status?.stages.orEmpty().filter { it.id.isNotBlank() }
@@ -70,7 +74,7 @@ object StageChecklist {
             val record = byId[id]
             StageRow(
                 id = id,
-                label = record?.label?.takeIf { it.isNotBlank() } ?: AnalysisStages.DEFAULT_LABELS.getValue(id),
+                label = AnalysisStages.DEFAULT_LABELS.getValue(id),
                 state = StageState.of(record?.state),
             )
         }

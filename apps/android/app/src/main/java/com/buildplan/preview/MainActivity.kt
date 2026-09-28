@@ -1,7 +1,9 @@
 package com.buildplan.preview
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -10,6 +12,7 @@ import com.buildplan.preview.ui.AnalyzerViewModel
 import com.buildplan.preview.ui.AppShell
 import com.buildplan.preview.ui.PreviewTheme
 import com.buildplan.preview.ui.PreviewViewModel
+import com.buildplan.preview.ui.ProgressViewModel
 import com.buildplan.preview.ui.ShellState
 
 /**
@@ -22,6 +25,7 @@ import com.buildplan.preview.ui.ShellState
  * link to the analyzer service and downloads the scene it made; either way the
  * scene is verified before it is kept, and a local result opens in 3D by
  * itself. The app holds no key: it has no account, and neither path needs one.
+ * Construction progress is kept per house in the app's private storage.
  *
  * A launch may name the place to open (`ShellState.EXTRA_PLACE`: `HOUSE`,
  * `MODEL`, `STAGES`, `COSTS`, `DOCUMENTS` or `ANALYZER`), which is how the CI
@@ -31,7 +35,11 @@ import com.buildplan.preview.ui.ShellState
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
+        // The app is dark whatever the system theme: light system-bar icons on it, always.
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+        )
         super.onCreate(savedInstanceState)
         val initial = ShellState.decode(intent?.getStringExtra(ShellState.EXTRA_PLACE)) ?: ShellState()
         val surface = RenderSurfaceKind.decode(intent?.getStringExtra(RenderSurfaceKind.EXTRA))
@@ -40,7 +48,8 @@ class MainActivity : ComponentActivity() {
                 val model: PreviewViewModel = viewModel()
                 surface?.let { model.renderSurfaceKind = it }
                 val analyzer: AnalyzerViewModel = viewModel()
-                AppShell(preview = model, analyzer = analyzer, initial = initial)
+                val progress: ProgressViewModel = viewModel()
+                AppShell(preview = model, analyzer = analyzer, progress = progress, initial = initial)
             }
         }
     }

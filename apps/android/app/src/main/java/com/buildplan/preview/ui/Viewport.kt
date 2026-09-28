@@ -11,12 +11,14 @@ import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.LifecycleEventObserver
+import com.buildplan.preview.R
 import com.buildplan.preview.camera.CameraGestureAction
 import com.buildplan.preview.camera.CameraGestureTracker
 import com.buildplan.preview.camera.GestureSample
@@ -46,6 +48,7 @@ fun Viewport(
 ) {
     val context = LocalContext.current
     val canvas = remember { FilamentCanvas(context, model.renderSurfaceKind) }
+    val viewportDescription = stringResource(R.string.viewport_description)
     val lifecycleOwner = LocalLifecycleOwner.current
 
     // The live canvas's counters, readable by a device test through the view
@@ -77,7 +80,7 @@ fun Viewport(
             // pose, and the next touch then snapped the camera to the end.
             val nowMs = System.currentTimeMillis()
             canvas.modelRenderer.setState(model.viewer)
-            canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs))
+            canvas.modelRenderer.setCamera(model.camera, model.poseAt(nowMs), model.contentInsets)
         }
     }
 
@@ -104,7 +107,7 @@ fun Viewport(
                 model.viewportHeightPx = it.height
                 model.viewportWidthPx = it.width
             }
-            .semantics { contentDescription = "3D model viewport. Drag with one finger to orbit, pinch to zoom, drag with two fingers to pan, tap an element to select it." }
+            .semantics { contentDescription = viewportDescription }
             .pointerInput(scene.key) {
                 // One tracker per pointer-input session: opening another model
                 // restarts this block, so no half-finished gesture carries over.
@@ -117,7 +120,11 @@ fun Viewport(
                         // once the touch is a camera move (a drag past the slop
                         // or a second finger), so nothing around the viewport
                         // claims it. A touch that may be a tap stays unconsumed.
-                        if (tracker.isCameraGesture) event.changes.forEach { if (it.pressed) it.consume() }
+                        if (tracker.isCameraGesture) {
+                            event.changes.forEach { if (it.pressed) it.consume() }
+                            model.onManipulating(true)
+                        }
+                        if (event.changes.none { it.pressed }) model.onManipulating(false)
                         for (action in actions) {
                             when (action) {
                                 CameraGestureAction.Began -> model.onGestureStart(System.currentTimeMillis())

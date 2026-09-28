@@ -167,8 +167,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         return android.content.Intent(android.content.Intent.ACTION_SEND).apply {
             type = "application/zip"
             putExtra(android.content.Intent.EXTRA_STREAM, uri)
-            putExtra(android.content.Intent.EXTRA_SUBJECT, "BuildPlan analyzer diagnostics ($code)")
-            putExtra(android.content.Intent.EXTRA_TEXT, "Analyzer failure $code for ${link.ifBlank { "a project link" }}")
+            putExtra(android.content.Intent.EXTRA_SUBJECT, "BuildPlan — diagnostyka analizy ($code)")
+            putExtra(android.content.Intent.EXTRA_TEXT, "Błąd analizy $code dla ${link.ifBlank { "linku projektu" }}")
             addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
     }
@@ -201,7 +201,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
             localJobs.record(report)
             if (link.isBlank()) link = left.sourceUrl
             state = AnalysisState.Failed(
-                AnalyzerFailure.LocalRuntime("INTERRUPTED", "the app was closed or stopped while the analysis ran. Nothing of it was kept; analyze the link again."),
+                AnalyzerFailure.LocalRuntime("INTERRUPTED", "aplikację zamknięto lub zatrzymano w trakcie analizy. Nic z niej nie zapisano; przeanalizuj link ponownie."),
                 RetryAction.RESUBMIT,
                 left.sourceUrl,
                 left.jobId,
@@ -264,7 +264,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
                 serviceAddress = check.baseUrl
                 null
             }
-            is AnalyzerAddress.Check.Invalid -> "That address can't be used: ${check.reason}."
+            is AnalyzerAddress.Check.Invalid -> "Tego adresu nie można użyć: ${check.reason}."
             AnalyzerAddress.Check.Empty -> null
         }
     }
@@ -357,11 +357,11 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
             when (outcome) {
                 is CancelOutcome.Cancelled -> publish(base, outcome.state)
                 CancelOutcome.AlreadyFinished -> {
-                    notice = "The analysis had already finished."
+                    notice = "Analiza zdążyła się już zakończyć."
                     startLoop(base, AnalysisState.Polling(jobId, sourceUrl, status))
                 }
                 is CancelOutcome.Failed -> {
-                    notice = "Could not cancel: ${AnalyzerMessages.describe(outcome.failure)}"
+                    notice = "Nie udało się przerwać: ${AnalyzerMessages.describe(outcome.failure)}"
                     startLoop(base, current)
                 }
             }

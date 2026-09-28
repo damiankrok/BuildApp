@@ -1,6 +1,8 @@
 package com.buildplan.preview.render
 
 import android.content.res.AssetManager
+import com.buildplan.preview.camera.ContentFrame
+import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.camera.OrbitPose
 import com.buildplan.preview.camera.Projection
@@ -312,7 +314,7 @@ class FilamentModelRenderer(
     // Camera
     // -----------------------------------------------------------------------
 
-    fun setCamera(orbit: OrbitCamera, pose: OrbitPose) {
+    fun setCamera(orbit: OrbitCamera, pose: OrbitPose, insets: ContentInsets = ContentInsets.NONE) {
         val eye = orbit.eye(pose)
         val target = pose.target
         val up = orbit.basis(pose).up
@@ -337,6 +339,11 @@ class FilamentModelRenderer(
                 )
             }
         }
+        // Frame inside the rectangle the chrome leaves free (INTEGRATION-003C): the
+        // whole-viewport image, uniformly scaled and moved there. Presentation only.
+        val frame = ContentFrame.of(viewportWidth, viewportHeight, insets)
+        camera.setScaling(frame.scale, frame.scale)
+        camera.setShift(frame.shiftX, frame.shiftY)
     }
 
     fun setViewport(width: Int, height: Int) {

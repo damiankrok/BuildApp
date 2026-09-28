@@ -21,7 +21,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 /**
  * The product shell, held without a screen: the five places, where back goes
  * from each, that the state survives being saved, that every control speaks
- * Polish from `strings.xml`, and that the three places not yet built say so
+ * Polish from `strings.xml`, and that the two places not yet built say so
  * without a single figure.
  */
 class ProductShellTest {
@@ -102,9 +102,11 @@ class ProductShellTest {
 
     @Test
     fun `the places not yet built say so, and show no figure`() {
-        for (name in listOf("stages", "costs", "documents")) {
+        // Etapy is a real place since INTEGRATION-003C; Koszty and Dokumenty are not built yet.
+        assertFalse("Etapy is no longer an empty place", strings.containsKey("empty_stages_body"))
+        for (name in listOf("costs", "documents")) {
             val body = strings.getValue("empty_${name}_body")
-            assertTrue("empty_${name}_body must say the part is not built", body.contains("nie jest jeszcze zbudowana"))
+            assertTrue("empty_${name}_body must say the part is not built", body.contains("jeszcze nie powstała"))
             assertFalse("empty_${name}_body shows a figure: $body", body.any { it.isDigit() })
         }
     }
@@ -116,7 +118,10 @@ class ProductShellTest {
             File("app/src/main/java/com/buildplan/preview/ui"),
             File("apps/android/app/src/main/java/com/buildplan/preview/ui"),
         ).first { it.isDirectory }
-        for (name in listOf("AppShell.kt", "HouseScreen.kt", "EmptyPlace.kt", "ModelWorkspace.kt", "Controls.kt", "Inspector.kt")) {
+        for (name in listOf(
+            "AppShell.kt", "HouseScreen.kt", "EmptyPlace.kt", "ModelWorkspace.kt", "ToolRail.kt", "TimelineRail.kt",
+            "FoldingRule.kt", "Inspector.kt", "StagesScreen.kt", "Chrome.kt", "HouseDrawing.kt",
+        )) {
             val code = File(dir, name).readText()
             assertFalse("$name passes a literal to Text()", Regex("""Text\(\s*"""").containsMatchIn(code))
             assertFalse("$name sets a literal contentDescription", Regex("""contentDescription = "[A-Za-z]""").containsMatchIn(code))

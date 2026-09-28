@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import com.buildplan.preview.R
 import com.buildplan.preview.camera.ViewPreset
 import com.buildplan.preview.presentation.PresentationMode
+import com.buildplan.preview.progress.ConstructionStageKey
 import com.buildplan.preview.render.RenderStyle
 import com.buildplan.preview.scene.VisibilityMode
 
@@ -57,4 +58,25 @@ fun RenderStyle.labelRes(): Int = when (this) {
     RenderStyle.CONSTRUCTION -> R.string.style_construction
     RenderStyle.CLAY -> R.string.style_clay
     RenderStyle.ARCHITECTURAL -> R.string.style_architectural
+}
+
+@StringRes
+fun ConstructionStageKey.labelRes(): Int = when (this) {
+    ConstructionStageKey.PLOT_PURCHASE -> R.string.stage_plot_purchase
+    ConstructionStageKey.DESIGN -> R.string.stage_design
+    ConstructionStageKey.PERMITS -> R.string.stage_permits
+    ConstructionStageKey.SITE_PREPARATION -> R.string.stage_site_preparation
+    ConstructionStageKey.FOUNDATIONS -> R.string.stage_foundations
+    ConstructionStageKey.WALLS -> R.string.stage_walls
+    ConstructionStageKey.FLOOR_SLAB -> R.string.stage_floor_slab
+    ConstructionStageKey.ROOF -> R.string.stage_roof
+    ConstructionStageKey.JOINERY -> R.string.stage_joinery
+    ConstructionStageKey.ELECTRICAL -> R.string.stage_electrical
+    ConstructionStageKey.PLUMBING -> R.string.stage_plumbing
+    ConstructionStageKey.HEATING -> R.string.stage_heating
+    ConstructionStageKey.PLASTERING -> R.string.stage_plastering
+    ConstructionStageKey.SCREED -> R.string.stage_screed
+    ConstructionStageKey.FACADE -> R.string.stage_facade
+    ConstructionStageKey.FINISHING -> R.string.stage_finishing
+    ConstructionStageKey.GARDEN -> R.string.stage_garden
 }

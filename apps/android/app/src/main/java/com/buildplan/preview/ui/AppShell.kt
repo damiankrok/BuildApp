@@ -1,14 +1,24 @@
 package com.buildplan.preview.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,33 +29,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
 
 private val ShellStateSaver = Saver<ShellState, String>(save = { it.encode() }, restore = { ShellState.decode(it) ?: ShellState() })
 
 /**
- * The product shell: five places under one navigation bar, and the model on
- * the whole screen when the owner goes to `3D`.
+ * The product shell: five places under one bottom bar, and the model on the
+ * whole screen when the owner goes to `3D`.
  *
- * The navigation bar is opaque and sits below the content, never over it;
- * the 3D place hides it and carries its own way back. Navigation is the pure
- * [ShellState]; this file only draws it and routes the system back through
- * [ShellState.back], enabled only while back has somewhere to go inside the
- * app, so predictive back still works from `Dom`.
+ * The bar sits below the content, never over it; the 3D place hides it and
+ * carries its own way back. Navigation is the pure [ShellState]; this file
+ * draws it and routes the system back through [ShellState.back], enabled
+ * only while back has somewhere to go inside the app, so predictive back
+ * still works from `Dom`.
+ *
+ * The construction progress follows the open house: whenever another house
+ * opens, [ProgressViewModel.bind] reads its own record. The time machine's
+ * cursor is a way of looking at the 3D only, so leaving 3D puts it back to
+ * now.
  */
 @Composable
-fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, initial: ShellState) {
+fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: ProgressViewModel, initial: ShellState) {
     val motion = rememberSystemMotionPolicy()
     preview.reducedMotion = motion.reduced
     var state by rememberSaveable(stateSaver = ShellStateSaver) { mutableStateOf(initial) }
 
     // A job that finishes (or a download deleted) joins the list of houses at once.
     LaunchedEffect(analyzer.downloads) { preview.refreshScenes() }
+    // The progress, the drawing and the time machine belong to the open house.
+    LaunchedEffect(preview.scene) { progress.bind(preview.scene) }
+    LaunchedEffect(state.place) { if (state.place != AppPlace.MODEL) progress.returnToNow() }
 
     // An analysis finished on this phone opens by itself, once, on the whole screen.
     LaunchedEffect(analyzer.autoOpen) {
@@ -63,11 +85,16 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, initial: Sh
 
     CompositionLocalProvider(LocalMotionPolicy provides motion) {
         if (state.immersive) {
-            ModelWorkspace(preview, onBack = { state.back()?.let { state = it } })
+            ModelWorkspace(
+                preview,
+                progress,
+                onBack = { state.back()?.let { state = it } },
+                onSetProgress = { state = ShellState(AppPlace.STAGES) },
+            )
             return@CompositionLocalProvider
         }
         Scaffold(
-            containerColor = MaterialTheme.colorScheme.background,
+            containerColor = Palette.Ground,
             bottomBar = { PlacesBar(current = state.place, onSelect = { state = state.go(it) }) },
         ) { padding ->
             Box(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding)) {
@@ -86,34 +113,84 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, initial: Sh
                     state.place == AppPlace.HOUSE -> HouseScreen(
                         preview = preview,
                         analyzer = analyzer,
+                        progress = progress,
                         onOpenModel = { state = state.go(AppPlace.MODEL) },
                         onAnalyze = {
                             analyzer.refreshDownloads()
                             state = state.openAnalyzer()
                         },
+                        onOpenStages = { state = state.go(AppPlace.STAGES) },
                     )
-                    else -> EmptyPlace(state.place)
+                    state.place == AppPlace.STAGES -> StagesScreen(
+                        progress = progress,
+                        sceneTitle = preview.scene?.title,
+                        onShowInModel = { stage ->
+                            if (stage != null) progress.preview(stage) else progress.returnToNow()
+                            state = state.go(AppPlace.MODEL)
+                        },
+                    )
+                    else -> EmptyPlace(
+                        state.place,
+                        onGoStages = { state = state.go(AppPlace.STAGES) },
+                        onGoHouse = { state = state.go(AppPlace.HOUSE) },
+                    )
                 }
             }
         }
     }
 }
 
-/** The five places; the selected one says so in words as well as in colour. */
+/**
+ * The five places, as equal cells along the bottom edge. The chosen one is
+ * pressed into the bar and marked by a line on its top edge, and its label
+ * turns full ink — a shape and a word, never colour alone.
+ */
 @Composable
 private fun PlacesBar(current: AppPlace, onSelect: (AppPlace) -> Unit) {
-    NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
-        for (place in AppPlace.entries) {
-            val selected = place == current
-            val stateText = stringResource(if (selected) R.string.state_selected else R.string.state_not_selected)
-            NavigationBarItem(
-                selected = selected,
-                onClick = { onSelect(place) },
-                icon = { Icon(ShellIcons.of(place), contentDescription = null) },
-                label = { Text(stringResource(place.label), maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                // The label is the name; a contentDescription here would replace it on the merged node.
-                modifier = Modifier.semantics { stateDescription = stateText },
-            )
+    Column(Modifier.fillMaxWidth().background(Palette.Raised).navigationBarsPadding()) {
+        Box(Modifier.fillMaxWidth().height(1.dp).background(Palette.Hairline))
+        Row(
+            Modifier.fillMaxWidth().heightIn(min = 64.dp).selectableGroup().padding(horizontal = Space.xs),
+            horizontalArrangement = Arrangement.spacedBy(Space.xxs),
+        ) {
+            for (place in AppPlace.entries) {
+                val selected = place == current
+                val stateText = stringResource(if (selected) R.string.state_selected else R.string.state_not_selected)
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .heightIn(min = 64.dp)
+                        .selectable(selected = selected, onClick = { onSelect(place) }, role = Role.Tab)
+                        // The label is the name; a contentDescription here would replace it on the merged node.
+                        .semantics { stateDescription = stateText },
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Box(
+                        Modifier
+                            .fillMaxWidth(0.5f)
+                            .height(2.dp)
+                            .background(if (selected) Palette.Ink else androidx.compose.ui.graphics.Color.Transparent, RoundedCornerShape(1.dp)),
+                    )
+                    Box(
+                        Modifier
+                            .padding(top = Space.s)
+                            .size(width = 48.dp, height = 28.dp)
+                            .background(if (selected) Palette.Well else androidx.compose.ui.graphics.Color.Transparent, RoundedCornerShape(Radius.control)),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(ShellIcons.of(place), contentDescription = null, tint = if (selected) Palette.Ink else Palette.InkMuted, modifier = Modifier.size(Sizes.icon))
+                    }
+                    Text(
+                        stringResource(place.label),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = if (selected) Palette.Ink else Palette.InkMuted,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = Space.xxs, bottom = Space.s),
+                    )
+                }
+            }
         }
     }
 }

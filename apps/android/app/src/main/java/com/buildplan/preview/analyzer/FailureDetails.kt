@@ -29,9 +29,9 @@ data class FailureDetails(
     private fun flag(key: String): Boolean? = (diagnostics[key] as? JsonPrimitive)?.booleanOrNull
     private fun text(key: String): String? = (diagnostics[key] as? JsonPrimitive)?.contentOrNull
 
-    /** Where the run stopped, in the words of the checklist; the structural steps are one "Structural layout". */
+    /** Where the run stopped, in the words of the checklist; the structural steps are one "Układ konstrukcyjny". */
     fun stoppedAt(): String? {
-        if (substage in STRUCTURAL_STEPS) return "Structural layout"
+        if (substage in STRUCTURAL_STEPS) return "Układ konstrukcyjny"
         val id = stage ?: return null
         return AnalysisStages.DEFAULT_LABELS[id] ?: id
     }

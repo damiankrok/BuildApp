@@ -9,16 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -28,124 +22,174 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
-import com.buildplan.preview.scene.ModelScene
+import com.buildplan.preview.progress.ConstructionStageKey
+import com.buildplan.preview.progress.StageStatus
 import com.buildplan.preview.scene.SceneObject
+import java.util.Locale
 import kotlin.math.abs
 
 /**
- * The details of the selected element.
+ * The details of the selected element, as a sheet rising from the bottom
+ * edge in place of the timeline — never stacked on top of it.
  *
- * Every row was produced by the TypeScript exporter from the canonical model
- * and arrives already formatted; this file chooses layout and nothing else —
- * it has no second reading of the model. The header with its close button
- * stays outside the scroll, so the only way out is always on screen; the
- * panel takes at most [maxHeight], and a fade over the cut edge says there
- * is more below. Identifiers, part lists and triangle counts are folded under
- * "Dane techniczne": they are for checking, not for reading.
+ * Human meaning first: what it is and where, then which construction stage
+ * it belongs to and whether, by the owner's account, it stands yet; then its
+ * sizes (to the centimetre: this is a model to understand, not to build
+ * from), its relations, and how the source knows it — in words. Identifiers,
+ * part lists, triangle counts and the analyzer's confidence figure are folded
+ * under "Dane techniczne". Every row comes from the exporter's metadata or
+ * from the progress record; this file lays them out and reads nothing else.
  */
 @Composable
 fun Inspector(
-    scene: ModelScene,
     selected: SceneObject,
+    stage: ConstructionStageKey?,
+    /** The owner's status of [stage], or null while progress is unset. */
+    stageStatus: StageStatus?,
+    /** Whether the element stands in what the 3D shows now (a preview may hide it). */
+    visibleNow: Boolean,
+    isolating: Boolean,
     maxHeight: Dp,
     onClose: () -> Unit,
     onFrame: () -> Unit,
     onIsolate: () -> Unit,
+    onShowAll: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val meta = selected.metadata
     var technical by rememberSaveable(selected.id) { mutableStateOf(false) }
     val scroll = rememberScrollState()
-    Surface(modifier = modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.surface, tonalElevation = 6.dp) {
-        Column(Modifier.heightIn(max = maxHeight)) {
-            Row(Modifier.padding(start = 16.dp, end = 4.dp, top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        text = meta?.label ?: selected.kindLabel,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.semantics { heading() },
-                    )
-                    StatusText(selected.kindLabel, maxLines = 1)
-                }
-                IconButton(onClick = onClose, modifier = Modifier.size(48.dp)) {
-                    Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.inspector_close))
-                }
-            }
-            HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
-            Box(Modifier.weight(1f, fill = false)) {
-                Column(
-                    modifier = Modifier.verticalScroll(scroll).padding(horizontal = 16.dp, vertical = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    meta?.levelLabel?.let { Fact(stringResource(R.string.inspector_storey), it) }
-                    meta?.materialLabel?.let { Fact(stringResource(R.string.inspector_material), it) }
-                    for (fact in meta?.facts.orEmpty()) Fact(fact.label, fact.value)
-                    val size = selected.bounds.size
-                    if (!selected.bounds.isEmpty) Fact(stringResource(R.string.inspector_extent), "${metres(size.x)} × ${metres(size.y)} × ${metres(size.z)}")
+    Column(
+        modifier
+            .fillMaxWidth()
+            .heightIn(max = maxHeight)
+            .background(Palette.Sheet, RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet)),
+    ) {
+        val where = listOfNotNull(selected.kindLabel.takeIf { meta?.label != null }, meta?.levelLabel).joinToString(" · ")
+        PanelHeader(
+            title = meta?.label ?: selected.kindLabel,
+            supporting = where.ifBlank { null },
+            closeLabel = stringResource(R.string.inspector_close),
+            onClose = onClose,
+        )
+        Box(Modifier.weight(1f, fill = false)) {
+            Column(
+                Modifier
+                    .fadeBelowFold(scroll, Palette.Sheet)
+                    .verticalScroll(scroll)
+                    .padding(horizontal = Space.l, vertical = Space.s),
+                verticalArrangement = Arrangement.spacedBy(Space.xs),
+            ) {
+                ConstructionLine(stage, stageStatus, visibleNow)
 
-                    val relations = meta?.relations.orEmpty()
-                    if (relations.isNotEmpty()) {
-                        SubHeading(stringResource(R.string.inspector_relations))
-                        for (r in relations) Fact(r.role.replaceFirstChar { it.uppercase() }, r.targetLabel)
-                    }
+                Group(stringResource(R.string.inspector_about))
+                meta?.materialLabel?.let { Fact(stringResource(R.string.inspector_material), it) }
+                for (fact in meta?.facts.orEmpty()) Fact(fact.label, fact.value)
+                val size = selected.bounds.size
+                if (!selected.bounds.isEmpty) Fact(stringResource(R.string.inspector_extent), "${metres(size.x)} × ${metres(size.y)} × ${metres(size.z)}")
 
+                val relations = meta?.relations.orEmpty()
+                if (relations.isNotEmpty()) {
+                    Group(stringResource(R.string.inspector_relations))
+                    for (r in relations) Fact(r.role.replaceFirstChar { it.uppercase() }, r.targetLabel)
+                }
+
+                meta?.evidence?.let { e ->
+                    Group(stringResource(R.string.inspector_provenance))
+                    Fact(stringResource(R.string.inspector_status), stringResource(evidenceStatusRes(e.status)))
+                    e.confidence?.let { Fact(stringResource(R.string.inspector_confidence), stringResource(confidenceWordRes(it))) }
+                    e.source?.let { Fact(stringResource(R.string.inspector_source), it) }
+                    e.locator?.let { Fact(stringResource(R.string.inspector_locator), it) }
+                    e.interpretation?.let { Fact(stringResource(R.string.inspector_interpretation), it) }
+                    e.note?.let { Fact(stringResource(R.string.inspector_note), it) }
+                }
+
+                TextButton(onClick = { technical = !technical }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(if (technical) R.string.inspector_technical_hide else R.string.inspector_technical_show), color = Palette.InkMuted)
+                }
+                if (technical) {
+                    Fact(stringResource(R.string.inspector_id), selected.id)
                     meta?.evidence?.let { e ->
-                        SubHeading(stringResource(R.string.inspector_provenance))
-                        Fact(stringResource(R.string.inspector_status), stringResource(evidenceStatusRes(e.status)))
-                        e.source?.let { Fact(stringResource(R.string.inspector_source), it) }
-                        e.locator?.let { Fact(stringResource(R.string.inspector_locator), it) }
-                        e.interpretation?.let { Fact(stringResource(R.string.inspector_interpretation), it) }
-                        e.confidence?.let { Fact(stringResource(R.string.inspector_confidence), "${(it * 100).toInt()}%") }
-                        e.note?.let { Fact(stringResource(R.string.inspector_note), it) }
+                        Fact(stringResource(R.string.inspector_status_code), e.status)
+                        e.confidence?.let { Fact(stringResource(R.string.inspector_confidence_value), "${(it * 100).toInt()}%") }
                     }
-
-                    TextButton(onClick = { technical = !technical }, modifier = Modifier.heightIn(min = 48.dp)) {
-                        Text(stringResource(if (technical) R.string.inspector_technical_hide else R.string.inspector_technical_show))
-                    }
-                    if (technical) {
-                        Fact(stringResource(R.string.inspector_id), selected.id)
-                        meta?.evidence?.let { Fact(stringResource(R.string.inspector_status_code), it.status) }
-                        Fact(stringResource(R.string.inspector_geometry), stringResource(R.string.inspector_geometry_value, pluralStringResource(R.plurals.count_parts, selected.parts.size, selected.parts.size), pluralStringResource(R.plurals.count_triangles, selected.triangleCount, selected.triangleCount)))
-                        Fact(stringResource(R.string.inspector_parts), selected.parts.joinToString(", ") { it.rawPart })
-                    }
-                }
-                if (scroll.canScrollForward) {
-                    Box(
-                        Modifier
-                            .align(Alignment.BottomCenter)
-                            .fillMaxWidth()
-                            .height(20.dp)
-                            .background(Brush.verticalGradient(listOf(Color.Transparent, MaterialTheme.colorScheme.surface))),
+                    Fact(
+                        stringResource(R.string.inspector_geometry),
+                        stringResource(
+                            R.string.inspector_geometry_value,
+                            pluralStringResource(R.plurals.count_parts, selected.parts.size, selected.parts.size),
+                            pluralStringResource(R.plurals.count_triangles, selected.triangleCount, selected.triangleCount),
+                        ),
                     )
+                    Fact(stringResource(R.string.inspector_parts), selected.parts.joinToString(", ") { it.rawPart })
                 }
             }
-            HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
-            Row(Modifier.padding(horizontal = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = onFrame, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.dock_frame)) }
-                TextButton(onClick = onIsolate, modifier = Modifier.heightIn(min = 48.dp)) { Text(stringResource(R.string.dock_isolate)) }
+        }
+        Box(Modifier.fillMaxWidth().height(1.dp).background(Palette.Hairline))
+        Row(Modifier.padding(horizontal = Space.s, vertical = Space.xs), horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+            TextButton(onClick = onFrame, enabled = visibleNow, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                Text(stringResource(R.string.inspector_frame), color = if (visibleNow) Palette.Ink else Palette.InkFaint)
+            }
+            if (isolating) {
+                TextButton(onClick = onShowAll, modifier = Modifier.heightIn(min = Sizes.touch)) { Text(stringResource(R.string.layer_show_all), color = Palette.Ink) }
+            } else {
+                TextButton(onClick = onIsolate, enabled = visibleNow, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.inspector_isolate), color = if (visibleNow) Palette.Ink else Palette.InkFaint)
+                }
+            }
+        }
+    }
+}
+
+/** Which stage the element belongs to, and whether it stands yet by the owner's account. */
+@Composable
+private fun ConstructionLine(stage: ConstructionStageKey?, status: StageStatus?, visibleNow: Boolean) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(Space.m),
+        modifier = Modifier.fillMaxWidth().padding(vertical = Space.xs).semantics(mergeDescendants = true) {},
+    ) {
+        StageMark(status, if (status == StageStatus.IN_PROGRESS) 0.5 else 0.0)
+        Column(Modifier.weight(1f)) {
+            if (stage == null) {
+                Text(stringResource(R.string.inspector_stage_unmapped), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                Text(stringResource(R.string.inspector_stage_unmapped_detail), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+            } else {
+                Text(
+                    stringResource(R.string.inspector_stage, stringResource(stage.labelRes()), stage.ordinal + 1),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Palette.Ink,
+                )
+                val state = when (status) {
+                    null -> R.string.inspector_stage_progress_unset
+                    StageStatus.DONE -> R.string.inspector_stage_done
+                    StageStatus.IN_PROGRESS -> R.string.inspector_stage_in_progress
+                    StageStatus.NOT_STARTED -> R.string.inspector_stage_not_started
+                }
+                Text(stringResource(state), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+            }
+            if (!visibleNow) {
+                Text(stringResource(R.string.inspector_hidden_in_view), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
             }
         }
     }
 }
 
 @Composable
-private fun SubHeading(text: String) {
-    HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
-    Text(text, style = MaterialTheme.typography.labelLarge, modifier = Modifier.semantics { heading() })
+private fun Group(text: String) {
+    Text(
+        text,
+        style = MaterialTheme.typography.labelLarge,
+        color = Palette.InkMuted,
+        modifier = Modifier.padding(top = Space.m, bottom = Space.xxs).semantics { heading() },
+    )
 }
 
 /** A label and its value, read together: no contentDescription, so the merged node keeps both texts. */
@@ -153,15 +197,10 @@ private fun SubHeading(text: String) {
 private fun Fact(label: String, value: String) {
     Row(
         modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) {},
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(Space.m),
     ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.weight(0.42f),
-        )
-        Text(text = value, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(0.58f))
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(0.42f))
+        Text(value, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink, modifier = Modifier.weight(0.58f))
     }
 }
 
@@ -178,8 +217,19 @@ fun evidenceStatusRes(status: String): Int = when (status) {
     else -> R.string.evidence_unknown
 }
 
-/** Dimensions read off the converted geometry, to the millimetre. */
-private fun metres(v: Double): String {
-    val a = abs(v)
-    return "${String.format(java.util.Locale.ROOT, "%.3f", a).trimEnd('0').trimEnd('.').replace('.', ',')} m"
+/**
+ * The analyzer's confidence in words, so the only percentage in the owner's
+ * way is the progress. The bands are presentation, stated here: from 0.85
+ * "high", from 0.6 "medium", below "low". The figure itself is under
+ * "Dane techniczne".
+ */
+@androidx.annotation.StringRes
+fun confidenceWordRes(confidence: Double): Int = when {
+    confidence >= 0.85 -> R.string.confidence_high
+    confidence >= 0.6 -> R.string.confidence_medium
+    else -> R.string.confidence_low
 }
+
+/** Dimensions read off the converted geometry, to the centimetre: "4,25 m". */
+fun metres(v: Double): String =
+    "${String.format(Locale.ROOT, "%.2f", abs(v)).trimEnd('0').trimEnd('.').replace('.', ',')} m"

@@ -1,44 +1,40 @@
 package com.buildplan.preview.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,21 +42,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.runtime.LaunchedEffect
-import kotlinx.coroutines.delay
-import com.buildplan.preview.R
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.buildplan.preview.R
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalysisSummary
@@ -81,121 +79,113 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.math.roundToInt
+import kotlinx.coroutines.delay
 
 /**
- * The Analyzer: paste a project link, watch the service analyse it, open the
- * model it made.
+ * Adding a house from a link: paste the project page, watch the analysis,
+ * open the model it made.
  *
- * Everything on this screen is what the analyzer reported — the analyzer on
- * this phone (BUILDAPP-03Y2, stringResource(R.string.analyzer_mode_local)) or the service. The progress
- * bar is the analyzer's own `progress` and moves only when it reports; the
- * checklist is its stages. For a local run the elapsed time and memory are
- * the analyzer process's own numbers. There is no reference model, benchmark
- * or "expected" value anywhere here — the analyzer has none, and a result says
- * only what it made of the sources and how sure it is.
+ * The link comes first; where the analysis runs (this phone or the service)
+ * and the service's address are settings, folded away. While it runs, the
+ * page shows the analyzer's own progress and its stages in plain Polish. A
+ * finished analysis says "Model gotowy" or, when the analyzer left anything
+ * unresolved or warned, "Model gotowy z ograniczeniami" — a partial result is
+ * never presented as complete. Hashes, counts, timings and the analyzer's own
+ * English sentences are under "Szczegóły analizy": for checking, not reading.
+ *
+ * Everything shown is what the analyzer reported; there is no reference
+ * model, benchmark or expected value anywhere here.
  */
 @Composable
 fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit) {
-    Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize().safeDrawingPadding()) {
-            Surface(color = MaterialTheme.colorScheme.surface, modifier = Modifier.fillMaxWidth()) {
-                Row(Modifier.padding(horizontal = 4.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onBack, modifier = Modifier.size(48.dp)) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.analyzer_back))
-                    }
-                    Text(
-                        stringResource(R.string.analyzer_title),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.semantics { heading() },
-                    )
-                }
+    var settingsOpen by rememberSaveable { mutableStateOf(false) }
+    Column(Modifier.fillMaxSize().background(Palette.Ground).statusBarsPadding()) {
+        Row(Modifier.fillMaxWidth().padding(horizontal = Space.xs, vertical = Space.xs), verticalAlignment = Alignment.CenterVertically) {
+            val back = stringResource(R.string.analyzer_back)
+            IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = back }) {
+                Icon(ShellIcons.back, contentDescription = null, tint = Palette.Ink)
             }
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            Text(
+                stringResource(R.string.analyzer_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = Palette.Ink,
+                modifier = Modifier.semantics { heading() },
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = Space.l)
+                .padding(bottom = Space.xxl),
+            verticalArrangement = Arrangement.spacedBy(Space.m),
+        ) {
+            if (!model.isConfigured) {
+                NotConfigured(model)
+            } else {
+                Text(stringResource(R.string.analyzer_intro), style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
+                LinkForm(model)
+                model.notice?.let { StatusText(it, color = Palette.Ink) }
+                // A notice nothing waits on leaves by itself.
+                LaunchedEffect(model.notice) {
+                    if (model.notice != null) {
+                        delay(NOTICE_MS)
+                        model.clearNotice()
+                    }
+                }
+                JobSection(model, onOpenScene)
+            }
+            Downloads(model, onOpenScene)
+            Foldout(
+                title = stringResource(R.string.analyzer_settings),
+                open = settingsOpen,
+                onToggle = { settingsOpen = !settingsOpen },
             ) {
                 ModeRow(model)
-                if (!model.isConfigured) {
-                    NotConfigured(model)
-                } else {
-                    if (model.mode == AnalyzerMode.SERVICE) ServiceRow(model)
-                    LinkForm(model)
-                    model.notice?.let { StatusText(it, color = MaterialTheme.colorScheme.onSurface) }
-                    // A notice nothing waits on leaves by itself.
-                    LaunchedEffect(model.notice) {
-                        if (model.notice != null) {
-                            delay(NOTICE_MS)
-                            model.clearNotice()
-                        }
-                    }
-                    JobSection(model, onOpenScene)
-                }
-                HorizontalDivider()
-                Downloads(model, onOpenScene)
-                if (model.localRuns.isNotEmpty()) {
-                    HorizontalDivider()
-                    LocalRuns(model.localRuns)
-                }
+                if (model.mode == AnalyzerMode.SERVICE && model.isConfigured) ServiceRow(model)
+                if (model.localRuns.isNotEmpty()) LocalRuns(model.localRuns)
             }
         }
     }
 }
 
 // ---------------------------------------------------------------------------
-// Where the analysis runs
+// Settings: where the analysis runs
 // ---------------------------------------------------------------------------
 
 @Composable
 private fun ModeRow(model: AnalyzerViewModel) {
     val local = model.mode == AnalyzerMode.LOCAL
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
         Text(
-            if (local) stringResource(R.string.analyzer_mode_local) else stringResource(R.string.analyzer_mode_service),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.semantics { heading() },
+            stringResource(if (local) R.string.analyzer_mode_local else R.string.analyzer_mode_service),
+            style = MaterialTheme.typography.titleSmall,
+            color = Palette.Ink,
         )
         if (local) {
-            Body(
-                "The analysis runs on this phone, with the embedded ${NodeRuntime.RUNTIME} ${NodeRuntime.NODE_VERSION} runtime " +
-                    "(${model.localAvailability.abi}). No service, no account; the phone fetches the project page itself.",
-            )
+            Body(stringResource(R.string.analyzer_mode_local_body))
         } else if (!model.localAvailability.available) {
-            Body("The local analyzer is not available: ${model.localAvailability.reason ?: "unknown reason"}.")
+            Body(stringResource(R.string.analyzer_local_unavailable, model.localAvailability.reason ?: "—"))
+        } else {
+            Body(stringResource(R.string.analyzer_mode_service_body))
         }
-        TextButton(
+        LineButton(
+            stringResource(if (local) R.string.analyzer_use_service else R.string.analyzer_use_local),
             onClick = { model.selectMode(if (local) AnalyzerMode.SERVICE else AnalyzerMode.LOCAL) },
             enabled = !model.isRunning && (local || model.localAvailability.available),
-            modifier = Modifier.defaultMinSize(minHeight = 48.dp),
-        ) { Text(if (local) stringResource(R.string.analyzer_use_service) else stringResource(R.string.analyzer_use_local)) }
+        )
     }
 }
 
-// ---------------------------------------------------------------------------
-// Service address
-// ---------------------------------------------------------------------------
-
 @Composable
 private fun NotConfigured(model: AnalyzerViewModel) {
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(
-            "No analyzer service is configured in this build",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.semantics { heading() },
-        )
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+        Text(stringResource(R.string.analyzer_not_configured_title), style = MaterialTheme.typography.titleMedium, color = Palette.Ink, modifier = Modifier.semantics { heading() })
         val builtIn = model.builtInAddress.trim()
         if (builtIn.isNotEmpty()) {
-            val reason = (AnalyzerAddress.check(builtIn) as? AnalyzerAddress.Check.Invalid)?.reason
-            if (reason != null) Body("The address built into this app can't be used: $reason.")
+            (AnalyzerAddress.check(builtIn) as? AnalyzerAddress.Check.Invalid)?.reason?.let { Body(stringResource(R.string.analyzer_builtin_invalid, it)) }
         }
-        Body(
-            "The bundled models still open offline. To analyze a project link, enter the https address of a deployed " +
-                "analyzer service. It is kept on this phone only; no key or password is needed or stored.",
-        )
+        Body(stringResource(R.string.analyzer_not_configured_body))
         AddressEditor(model, initial = model.serviceAddress, onDone = {})
     }
 }
@@ -203,21 +193,19 @@ private fun NotConfigured(model: AnalyzerViewModel) {
 @Composable
 private fun ServiceRow(model: AnalyzerViewModel) {
     var editing by rememberSaveable { mutableStateOf(false) }
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            val base = model.effectiveBaseUrl.orEmpty()
-            val source = if (AnalyzerAddress.normalize(model.serviceAddress) != null) "set on this phone" else "built into this app"
-            StatusText("Service: ${hostOf(base)} ($source)", modifier = Modifier.weight(1f))
-            TextButton(
-                onClick = { editing = !editing },
-                enabled = !model.isRunning,
-                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
-            ) { Text(if (editing) stringResource(R.string.analyzer_close) else stringResource(R.string.analyzer_change)) }
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+        val base = model.effectiveBaseUrl.orEmpty()
+        val own = AnalyzerAddress.normalize(model.serviceAddress) != null
+        Body(stringResource(if (own) R.string.analyzer_service_own else R.string.analyzer_service_builtin, hostOf(base)))
+        TextButton(onClick = { editing = !editing }, enabled = !model.isRunning, modifier = Modifier.heightIn(min = Sizes.touch)) {
+            Text(stringResource(if (editing) R.string.analyzer_close else R.string.analyzer_change), color = Palette.Ink)
         }
         if (editing && !model.isRunning) {
-            AddressEditor(model, initial = model.serviceAddress.ifEmpty { model.effectiveBaseUrl.orEmpty() }, onDone = { editing = false })
+            AddressEditor(model, initial = model.serviceAddress.ifEmpty { base }, onDone = { editing = false })
             if (model.serviceAddress.isNotEmpty() && AnalyzerAddress.normalize(model.builtInAddress) != null) {
-                TextButton(onClick = { model.saveServiceAddress(""); editing = false }) { Text(stringResource(R.string.analyzer_builtin_address)) }
+                TextButton(onClick = { model.saveServiceAddress(""); editing = false }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.analyzer_builtin_address), color = Palette.Ink)
+                }
             }
         }
     }
@@ -227,8 +215,9 @@ private fun ServiceRow(model: AnalyzerViewModel) {
 private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () -> Unit) {
     var text by rememberSaveable { mutableStateOf(initial) }
     var problem by remember { mutableStateOf<String?>(null) }
+    val enter = stringResource(R.string.analyzer_address_empty)
     val save = {
-        problem = if (text.isBlank()) "Enter an https:// address." else model.saveServiceAddress(text)
+        problem = if (text.isBlank()) enter else model.saveServiceAddress(text)
         if (problem == null) onDone()
     }
     OutlinedTextField(
@@ -238,12 +227,13 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
         placeholder = { Text("https://analyzer.example.com") },
         singleLine = true,
         isError = problem != null,
-        supportingText = { Text(problem ?: "https only, e.g. https://analyzer.example.com") },
+        supportingText = { Text(problem ?: stringResource(R.string.analyzer_address_hint)) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Done, autoCorrectEnabled = false),
         keyboardActions = KeyboardActions(onDone = { save() }),
+        colors = fieldColors(),
         modifier = Modifier.fillMaxWidth(),
     )
-    Button(onClick = { save() }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_save_address)) }
+    InkButton(stringResource(R.string.analyzer_save_address), onClick = { save() })
 }
 
 // ---------------------------------------------------------------------------
@@ -252,8 +242,7 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
 
 @Composable
 private fun LinkForm(model: AnalyzerViewModel) {
-    val analyzeDescription = stringResource(if (model.isRunning) R.string.analyzer_analyze_disabled else R.string.analyzer_analyze)
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         OutlinedTextField(
             value = model.link,
             onValueChange = model::onLinkChange,
@@ -265,28 +254,27 @@ private fun LinkForm(model: AnalyzerViewModel) {
             supportingText = model.linkProblem?.let { problem -> { Text(problem) } },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Go, autoCorrectEnabled = false),
             keyboardActions = KeyboardActions(onGo = { model.analyze() }),
+            colors = fieldColors(),
             modifier = Modifier.fillMaxWidth(),
         )
-        Button(
+        InkButton(
+            stringResource(R.string.analyzer_analyze),
             onClick = { model.analyze() },
             enabled = !model.isRunning && model.link.isNotBlank(),
-            modifier = Modifier
-                .defaultMinSize(minHeight = 48.dp)
-                .semantics {
-                    contentDescription = analyzeDescription
-                },
-        ) { Text(stringResource(R.string.analyzer_analyze)) }
+            modifier = Modifier.fillMaxWidth(),
+        )
+        if (model.isRunning) StatusText(stringResource(R.string.analyzer_analyze_disabled))
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     when (val state = model.state) {
         AnalysisState.Idle -> Unit
-        is AnalysisState.Submitting -> Row(verticalAlignment = Alignment.CenterVertically) {
-            CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
-            Box(Modifier.width(10.dp))
-            Body(if (model.mode == AnalyzerMode.LOCAL) stringResource(R.string.analyzer_preparing_local) else stringResource(R.string.analyzer_sending))
+        is AnalysisState.Submitting -> Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.m)) {
+            CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp, color = Palette.InkMuted)
+            Body(stringResource(if (model.mode == AnalyzerMode.LOCAL) R.string.analyzer_preparing_local else R.string.analyzer_sending))
         }
         is AnalysisState.Polling -> JobProgress(
             status = state.status,
@@ -295,37 +283,35 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
             lastFailure = state.lastFailure,
             cancelling = model.cancelling,
             onCancel = { model.cancel() },
-            local = state.local,
         )
         is AnalysisState.Finishing -> JobProgress(
             status = state.status,
-            headline = if (state.local != null) stringResource(R.string.analyzer_finishing_local) else stringResource(R.string.analyzer_finishing_service),
+            headline = stringResource(if (state.local != null) R.string.analyzer_finishing_local else R.string.analyzer_finishing_service),
             connectionLost = state.connectionLost,
             lastFailure = state.lastFailure,
             cancelling = false,
             onCancel = null,
-            local = state.local,
         )
-        is AnalysisState.Completed -> ResultCard(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) })
-        is AnalysisState.Failed -> Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        is AnalysisState.Completed -> Result(state.summary, state.entry, state.local, onOpen = { onOpenScene(state.entry.key) })
+        is AnalysisState.Failed -> {
             val context = LocalContext.current
             val share = model.diagnosticsShareIntent(state.failure)
-            FailureCard(
-                state.failure,
-                state.retry,
+            val chooser = stringResource(R.string.analyzer_share_diagnostics)
+            Failure(
+                failure = state.failure,
+                retry = state.retry,
+                status = state.status,
+                local = state.local,
                 onRetry = { model.retry() },
                 onDismiss = { model.dismiss() },
-                onShare = share?.let { intent -> { context.startActivity(android.content.Intent.createChooser(intent, "Share analyzer diagnostics")) } },
+                onShare = share?.let { intent -> { context.startActivity(android.content.Intent.createChooser(intent, chooser)) } },
             )
-            state.local?.let { LocalCost(it) }
-            state.status?.let { Checklist(StageChecklist.rows(it)) }
         }
-        is AnalysisState.Cancelled -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(stringResource(R.string.analyzer_cancelled), style = MaterialTheme.typography.titleSmall)
-            state.local?.let { LocalCost(it) }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(onClick = { model.analyze() }, enabled = model.link.isNotBlank()) { Text(stringResource(R.string.analyzer_again)) }
-                TextButton(onClick = { model.dismiss() }) { Text(stringResource(R.string.analyzer_dismiss)) }
+        is AnalysisState.Cancelled -> Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+            Text(stringResource(R.string.analyzer_cancelled), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
+                InkButton(stringResource(R.string.analyzer_again), onClick = { model.analyze() }, enabled = model.link.isNotBlank())
+                LineButton(stringResource(R.string.analyzer_dismiss), onClick = { model.dismiss() })
             }
         }
     }
@@ -339,147 +325,138 @@ private fun JobProgress(
     lastFailure: AnalyzerFailure?,
     cancelling: Boolean,
     onCancel: (() -> Unit)?,
-    local: LocalRunReport? = null,
 ) {
     // Exactly the analyzer's value. It is never animated or advanced here.
     val progress = (status?.progress ?: 0.0).coerceIn(0.0, 1.0).toFloat()
+    val percent = (progress * 100).roundToInt()
     val stage = status?.stage
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Text(
             headline ?: when {
                 status == null -> stringResource(R.string.analyzer_asking)
                 status.status == LocalAnalysis.STARTING -> stringResource(R.string.analyzer_starting_local)
                 status.status == AnalysisStages.QUEUED -> stringResource(R.string.analyzer_queued)
-                stage != null -> stage.label.ifBlank { AnalysisStages.DEFAULT_LABELS[stage.id] ?: stage.id }
-                else -> status.status
+                stage != null -> AnalysisStages.DEFAULT_LABELS[stage.id] ?: stage.label.ifBlank { stage.id }
+                else -> stringResource(R.string.analyzer_working)
             },
             style = MaterialTheme.typography.titleSmall,
+            color = Palette.Ink,
         )
         LinearProgressIndicator(
             progress = { progress },
-            modifier = Modifier
-                .fillMaxWidth()
-                .semantics { contentDescription = "Analysis progress ${(progress * 100).roundToInt()} percent" },
+            color = Palette.Ink,
+            trackColor = Palette.Hairline,
+            modifier = Modifier.fillMaxWidth().semantics { stateDescription = "$percent%" },
         )
-        val position = if (stage != null && stage.count > 0) " · stage ${stage.index + 1} of ${stage.count}" else ""
-        StatusText("${(progress * 100).roundToInt()} %$position")
-        stage?.detail?.takeIf { it.isNotBlank() }?.let { Body(it) }
-        local?.let { report ->
-            val runtime = report.runtime?.let { "${it.node} · ${it.arch}" } ?: "${NodeRuntime.RUNTIME} ${NodeRuntime.NODE_VERSION}"
-            StatusText("On this phone ($runtime) · elapsed ${duration(report.elapsedMs)} · memory ${megabytes(report.rssBytes)}")
-        }
+        StatusText(
+            if (stage != null && stage.count > 0) stringResource(R.string.analyzer_progress_stage, percent, stage.index + 1, stage.count)
+            else stringResource(R.string.analyzer_progress, percent),
+        )
         if (connectionLost) {
-            Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
-                Column(Modifier.padding(10.dp)) {
-                    Text(stringResource(R.string.analyzer_connection_lost), fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.error)
-                    lastFailure?.let { StatusText(AnalyzerMessages.describe(it)) }
-                    StatusText(stringResource(R.string.analyzer_connection_lost_detail))
-                }
+            Column(
+                Modifier.fillMaxWidth().background(Palette.Raised, RoundedCornerShape(Radius.panel)).padding(Space.m),
+                verticalArrangement = Arrangement.spacedBy(Space.xxs),
+            ) {
+                Text(stringResource(R.string.analyzer_connection_lost), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+                lastFailure?.let { StatusText(AnalyzerMessages.describe(it)) }
+                StatusText(stringResource(R.string.analyzer_connection_lost_detail))
             }
         }
         Checklist(StageChecklist.rows(status))
         if (onCancel != null) {
-            OutlinedButton(
-                onClick = onCancel,
-                enabled = !cancelling,
-                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
-            ) { Text(if (cancelling) stringResource(R.string.analyzer_cancelling) else stringResource(R.string.analyzer_cancel)) }
+            LineButton(stringResource(if (cancelling) R.string.analyzer_cancelling else R.string.analyzer_cancel), onClick = onCancel, enabled = !cancelling)
         }
     }
 }
 
 @Composable
 private fun Checklist(rows: List<StageRow>) {
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
         for (row in rows) {
-            val stateWord = when (row.state) {
-                StageState.PENDING -> "pending"
-                StageState.RUNNING -> "running"
-                StageState.DONE -> "done"
-                StageState.FAILED -> "failed"
-                StageState.CANCELLED -> "cancelled"
-            }
+            val stateWord = stringResource(
+                when (row.state) {
+                    StageState.PENDING -> R.string.analyzer_state_pending
+                    StageState.RUNNING -> R.string.analyzer_state_running
+                    StageState.DONE -> R.string.analyzer_state_done
+                    StageState.FAILED -> R.string.analyzer_state_failed
+                    StageState.CANCELLED -> R.string.analyzer_state_cancelled
+                },
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.semantics(mergeDescendants = true) { contentDescription = "${row.label}: $stateWord" },
+                horizontalArrangement = Arrangement.spacedBy(Space.m),
+                modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) { stateDescription = stateWord },
             ) {
-                Box(Modifier.size(22.dp), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(20.dp), contentAlignment = Alignment.Center) {
                     when (row.state) {
-                        StageState.DONE -> Icon(Icons.Filled.CheckCircle, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
-                        StageState.RUNNING -> CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp)
-                        StageState.FAILED -> Icon(Icons.Filled.Warning, null, tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
-                        StageState.CANCELLED -> Icon(Icons.Filled.Close, null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(20.dp))
-                        StageState.PENDING -> Box(
-                            Modifier.size(14.dp).border(1.5.dp, MaterialTheme.colorScheme.outline, CircleShape),
-                        )
+                        StageState.DONE -> Icon(ShellIcons.check, null, tint = Palette.Ink, modifier = Modifier.size(18.dp))
+                        StageState.RUNNING -> CircularProgressIndicator(modifier = Modifier.size(14.dp), strokeWidth = 2.dp, color = Palette.Ink)
+                        StageState.FAILED -> Icon(ShellIcons.caution, null, tint = Palette.Error, modifier = Modifier.size(18.dp))
+                        StageState.CANCELLED -> Icon(ShellIcons.close, null, tint = Palette.InkMuted, modifier = Modifier.size(18.dp))
+                        StageState.PENDING -> Box(Modifier.size(10.dp).border(1.2.dp, Palette.RuleEmpty, CircleShape))
                     }
                 }
-                Box(Modifier.width(10.dp))
                 Text(
                     row.label,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = if (row.state == StageState.PENDING) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
-                    fontWeight = if (row.state == StageState.RUNNING) FontWeight.SemiBold else FontWeight.Normal,
+                    color = if (row.state == StageState.PENDING) Palette.InkMuted else Palette.Ink,
                 )
             }
         }
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: () -> Unit, onDismiss: () -> Unit, onShare: (() -> Unit)? = null) {
+private fun Failure(
+    failure: AnalyzerFailure,
+    retry: RetryAction,
+    status: JobStatus?,
+    local: LocalRunReport?,
+    onRetry: () -> Unit,
+    onDismiss: () -> Unit,
+    onShare: (() -> Unit)?,
+) {
     val failed = failure as? AnalyzerFailure.JobFailed
     val details = failed?.details
-    var showDetails by rememberSaveable { mutableStateOf(false) }
+    var open by rememberSaveable { mutableStateOf(false) }
     val clipboard = LocalClipboardManager.current
-    Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 2.dp) {
-        Column(Modifier.padding(14.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Filled.Warning, null, tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
-                Box(Modifier.width(8.dp))
-                Text(details?.title ?: stringResource(R.string.analyzer_no_model), style = MaterialTheme.typography.titleSmall)
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+            Icon(ShellIcons.caution, null, tint = Palette.Error, modifier = Modifier.size(Sizes.iconSmall))
+            Text(AnalyzerMessages.title(failure), style = MaterialTheme.typography.titleMedium, color = Palette.Ink, modifier = Modifier.semantics { heading() })
+        }
+        Text(AnalyzerMessages.describe(failure), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        details?.stoppedAt()?.let { DataRow(stringResource(R.string.analyzer_stopped_at), it) }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
+            if (retry != RetryAction.NONE) {
+                InkButton(stringResource(if (retry == RetryAction.REFINISH) R.string.analyzer_download_again else R.string.analyzer_retry), onClick = onRetry)
             }
-            // BUILDAPP-03Y2G: where it stopped and the analyzer's own reason, not only "it failed".
-            if (details != null && failed != null) {
-                details.stoppedAt()?.let { DataRow("Stopped at", it) }
-                DataRow("Code", failed.diagnosticCode)
-                val counts = details.countLines()
-                if (counts.isNotEmpty()) {
-                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) { for (line in counts) Body(line) }
-                }
-                Body(failed.message.replaceFirstChar { it.uppercaseChar() }.trimEnd('.') + ".")
-            } else {
-                Body(AnalyzerMessages.describe(failure))
-            }
-            if (showDetails && details != null) {
-                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
-                    Column(Modifier.padding(10.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                        for (line in details.detailLines()) Mono(line)
-                    }
-                }
-            }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                if (retry != RetryAction.NONE) {
-                    Button(onClick = onRetry, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
-                        Text(if (retry == RetryAction.REFINISH) stringResource(R.string.analyzer_download_again) else stringResource(R.string.analyzer_retry))
-                    }
-                }
-                TextButton(onClick = onDismiss, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_dismiss)) }
-            }
+            LineButton(stringResource(R.string.analyzer_dismiss), onClick = onDismiss)
+        }
+        Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
             if (failed != null) {
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                DataRow(stringResource(R.string.analyzer_code), failed.diagnosticCode)
+                Body(failed.message)
+                details?.countLines()?.forEach { Body("· $it") }
+                details?.detailLines()?.takeIf { it.isNotEmpty() }?.let { lines ->
+                    Column(Modifier.fillMaxWidth().background(Palette.Raised, RoundedCornerShape(Radius.control)).padding(Space.m)) {
+                        for (line in lines) Mono(line)
+                    }
+                }
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+                    val copyLabel = stringResource(R.string.analyzer_copy_code_description, failed.diagnosticCode)
                     TextButton(
                         onClick = { clipboard.setText(AnnotatedString(failed.diagnosticCode)) },
-                        modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Copy diagnostic code ${failed.diagnosticCode}" },
-                    ) { Text(stringResource(R.string.analyzer_copy_code)) }
-                    if (details != null) {
-                        TextButton(onClick = { showDetails = !showDetails }, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(if (showDetails) stringResource(R.string.analyzer_hide_details) else stringResource(R.string.analyzer_show_details)) }
-                    }
+                        modifier = Modifier.heightIn(min = Sizes.touch).semantics { contentDescription = copyLabel },
+                    ) { Text(stringResource(R.string.analyzer_copy_code), color = Palette.Ink) }
                     if (onShare != null) {
-                        TextButton(onClick = onShare, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) { Text(stringResource(R.string.analyzer_share_diagnostics)) }
+                        TextButton(onClick = onShare, modifier = Modifier.heightIn(min = Sizes.touch)) { Text(stringResource(R.string.analyzer_share_diagnostics), color = Palette.Ink) }
                     }
                 }
             }
+            local?.let { LocalCost(it) }
+            status?.let { Checklist(StageChecklist.rows(it)) }
         }
     }
 }
@@ -489,126 +466,111 @@ private fun FailureCard(failure: AnalyzerFailure, retry: RetryAction, onRetry: (
 // ---------------------------------------------------------------------------
 
 @Composable
-private fun ResultCard(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
-    var diagnostics by rememberSaveable { mutableStateOf(false) }
-    Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 2.dp) {
-        Column(Modifier.padding(14.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(summary.title.ifBlank { entry.title }, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            Mono("candidate ${summary.candidateHash.take(12)}")
+private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
+    var open by rememberSaveable { mutableStateOf(false) }
+    val limited = summary.unresolved.isNotEmpty() || summary.warnings.isNotEmpty()
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+            Icon(if (limited) ShellIcons.caution else ShellIcons.check, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
+            Text(
+                stringResource(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready),
+                style = MaterialTheme.typography.titleMedium,
+                color = Palette.Ink,
+                modifier = Modifier.semantics { heading() },
+            )
+        }
+        Text(summary.title.ifBlank { entry.title }, style = MaterialTheme.typography.bodyLarge, color = Palette.Ink)
+        val c = summary.counts
+        Body(stringResource(R.string.analyzer_result_found, c.masses, c.openings, c.rooms))
+        if (limited) {
+            Body(
+                listOfNotNull(
+                    summary.unresolved.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_unresolved, it, it) },
+                    summary.warnings.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_warnings, it, it) },
+                ).joinToString(" · "),
+            )
+            Body(stringResource(R.string.analyzer_result_limited_body))
+        }
+        InkButton(stringResource(R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
+        Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
+            Diagnostics(summary)
             local?.let { LocalCost(it) }
-            Text("Solved features by level", style = MaterialTheme.typography.labelLarge)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                LevelCell("L0", "topology only", summary.quality.levels.l0, Modifier.weight(1f))
-                LevelCell("L1", "metric", summary.quality.levels.l1, Modifier.weight(1f))
-                LevelCell("L2", "metric, corroborated", summary.quality.levels.l2, Modifier.weight(1f))
-            }
-            DataRow("Unresolved", "${summary.unresolved.size}")
-            DataRow("Warnings", "${summary.warnings.size}")
-            Body(visionText(summary))
-            Button(
-                onClick = onOpen,
-                modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Open model ${entry.label} in the viewer" },
-            ) { Text(stringResource(R.string.analyzer_open_model)) }
-            TextButton(
-                onClick = { diagnostics = !diagnostics },
-                modifier = Modifier.defaultMinSize(minHeight = 48.dp),
-            ) {
-                Text(stringResource(R.string.analyzer_diagnostics))
-                Icon(if (diagnostics) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown, contentDescription = null)
-            }
-            if (diagnostics) {
-                local?.let { LocalDiagnostics(it) }
-                Diagnostics(summary)
-            }
         }
     }
-}
-
-@Composable
-private fun LevelCell(level: String, meaning: String, count: Int, modifier: Modifier) {
-    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small, modifier = modifier) {
-        Column(
-            Modifier.padding(8.dp).semantics(mergeDescendants = true) { contentDescription = "$level, $meaning: $count" },
-        ) {
-            Text("$count", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            StatusText("$level · $meaning")
-        }
-    }
-}
-
-private fun visionText(summary: AnalysisSummary): String = when (summary.vision.mode) {
-    "LIVE_PROVIDER" -> "Vision provider: ${summary.vision.provider ?: "unnamed"}"
-    "REPLAYED_GRAPH" -> "Replayed observation graph — no vision provider ran"
-    else -> "Deterministic analyzer — no vision provider"
 }
 
 /** Every diagnostic as labelled rows. Never raw JSON. */
 @Composable
 private fun Diagnostics(summary: AnalysisSummary) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Section("Warnings") {
-            if (summary.warnings.isEmpty()) Body("None")
-            for (w in summary.warnings) Body("• $w")
-        }
-        Section("Unresolved") {
-            if (summary.unresolved.isEmpty()) Body("Nothing left unresolved")
+    Column(verticalArrangement = Arrangement.spacedBy(Space.m)) {
+        Section(stringResource(R.string.analyzer_unresolved)) {
+            if (summary.unresolved.isEmpty()) Body(stringResource(R.string.analyzer_none))
             for (u in summary.unresolved) {
-                Column(Modifier.padding(bottom = 4.dp)) {
-                    Text(u.what, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Column(Modifier.padding(bottom = Space.xs)) {
+                    Text(u.what, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
                     StatusText(if (u.status.isBlank()) u.reason else "${u.reason} (${u.status.lowercase().replace('_', ' ')})")
                 }
             }
         }
-        Section("Hashes") {
-            HashRow("Source package", summary.sourcePackageHash)
-            HashRow("Observation graph", summary.observationGraphHash)
-            HashRow("Metric evidence", summary.metricEvidenceHash)
-            HashRow("Candidate", summary.candidateHash)
-            HashRow("Model", summary.modelHash)
-            HashRow("Model file (sha256)", summary.modelSha256)
-            HashRow("Scene content", summary.sceneContentHash)
-            HashRow("Scene file (sha256)", summary.sceneSha256)
+        Section(stringResource(R.string.analyzer_warnings)) {
+            if (summary.warnings.isEmpty()) Body(stringResource(R.string.analyzer_none))
+            for (w in summary.warnings) Body("· $w")
         }
-        Section("Counts") {
+        Section(stringResource(R.string.analyzer_levels)) {
+            DataRow("L0", "${summary.quality.levels.l0}")
+            DataRow("L1", "${summary.quality.levels.l1}")
+            DataRow("L2", "${summary.quality.levels.l2}")
+            StatusText(stringResource(R.string.analyzer_levels_explained))
+            StatusText(visionText(summary))
+        }
+        Section(stringResource(R.string.analyzer_counts)) {
             val c = summary.counts
-            DataRow("Source drawings", "${c.assets}")
+            DataRow(stringResource(R.string.analyzer_count_drawings), "${c.assets}")
             for ((document, n) in c.assetsByDocument.toSortedMap()) DataRow("  $document", "$n")
-            DataRow("Observations", "${c.observations}")
-            DataRow("Coordinate frames", "${c.frames}")
-            DataRow("Metric evidence", "${c.metricEvidence}")
-            DataRow("Opening callouts", "${c.callouts}")
-            DataRow("Program commands", "${c.commands}")
-            DataRow("Masses", "${c.masses}")
-            DataRow("Openings", "${c.openings}")
-            DataRow("Rooms", "${c.rooms}")
-            DataRow("Balconies", "${c.balconies}")
-            DataRow("Terraces", "${c.terraces}")
-            DataRow("Railings", "${c.railings}")
-            DataRow("Chimneys", "${c.chimneys}")
-            DataRow("Rooflights", "${c.rooflights}")
-            DataRow("Meshes", "${c.meshes}")
-            DataRow("Triangles", "${c.triangles}")
+            DataRow(stringResource(R.string.analyzer_count_masses), "${c.masses}")
+            DataRow(stringResource(R.string.analyzer_count_openings), "${c.openings}")
+            DataRow(stringResource(R.string.analyzer_count_rooms), "${c.rooms}")
+            DataRow(stringResource(R.string.analyzer_count_balconies), "${c.balconies}")
+            DataRow(stringResource(R.string.analyzer_count_terraces), "${c.terraces}")
+            DataRow(stringResource(R.string.analyzer_count_railings), "${c.railings}")
+            DataRow(stringResource(R.string.analyzer_count_chimneys), "${c.chimneys}")
+            DataRow(stringResource(R.string.analyzer_count_rooflights), "${c.rooflights}")
+            DataRow("observations · frames · metric evidence · callouts", "${c.observations} · ${c.frames} · ${c.metricEvidence} · ${c.callouts}")
+            DataRow("commands · meshes · triangles", "${c.commands} · ${c.meshes} · ${c.triangles}")
         }
-        Section("Checks") {
+        Section(stringResource(R.string.analyzer_checks)) {
             val v = summary.verification
-            DataRow("Replay", if (v.replay == "BYTE_IDENTICAL") "byte-identical" else v.replay.lowercase().replace('_', ' '))
-            DataRow("Source-view checks outside tolerance", "${v.residualsOutsideTolerance} of ${v.residuals}")
-            DataRow("Exterior joint errors", "${v.closure.exteriorErrors}")
-            DataRow("Exterior closure findings", "${v.closure.exteriorFindings}")
-            DataRow("Interior closure findings", "${v.closure.interiorFindings}")
-            if (summary.vision.mode == "LIVE_PROVIDER") {
-                DataRow("Vision readings accepted", "${summary.vision.accepted} of ${summary.vision.attempted}")
-            }
+            DataRow("replay", if (v.replay == "BYTE_IDENTICAL") "byte-identical" else v.replay.lowercase().replace('_', ' '))
+            DataRow("source-view checks outside tolerance", "${v.residualsOutsideTolerance} / ${v.residuals}")
+            DataRow("exterior joint errors · findings", "${v.closure.exteriorErrors} · ${v.closure.exteriorFindings}")
+            DataRow("interior closure findings", "${v.closure.interiorFindings}")
+            if (summary.vision.mode == "LIVE_PROVIDER") DataRow("vision readings accepted", "${summary.vision.accepted} / ${summary.vision.attempted}")
         }
-        Section("Source") {
-            DataRow("Publisher", summary.publisher)
-            DataRow("Adapter", listOf(summary.adapter.id, summary.adapter.version).filter { it.isNotBlank() }.joinToString(" "))
-            DataRow("Page", summary.canonicalUrl.ifBlank { summary.sourceUrl })
-            DataRow("Analyzer", "service ${summary.analyzer.service} · solver ${summary.analyzer.solver}")
-            DataRow("Started", summary.startedAt)
-            DataRow("Completed", summary.completedAt)
+        Section(stringResource(R.string.analyzer_source)) {
+            DataRow(stringResource(R.string.analyzer_publisher), summary.publisher)
+            DataRow(stringResource(R.string.analyzer_page), summary.canonicalUrl.ifBlank { summary.sourceUrl })
+            DataRow("adapter", listOf(summary.adapter.id, summary.adapter.version).filter { it.isNotBlank() }.joinToString(" "))
+            DataRow("analyzer", "service ${summary.analyzer.service} · solver ${summary.analyzer.solver}")
+            DataRow(stringResource(R.string.analyzer_started), summary.startedAt)
+            DataRow(stringResource(R.string.analyzer_completed), summary.completedAt)
+        }
+        Section(stringResource(R.string.analyzer_hashes)) {
+            HashRow("source package", summary.sourcePackageHash)
+            HashRow("observation graph", summary.observationGraphHash)
+            HashRow("metric evidence", summary.metricEvidenceHash)
+            HashRow("candidate", summary.candidateHash)
+            HashRow("model", summary.modelHash)
+            HashRow("model file (sha256)", summary.modelSha256)
+            HashRow("scene content", summary.sceneContentHash)
+            HashRow("scene file (sha256)", summary.sceneSha256)
         }
     }
+}
+
+private fun visionText(summary: AnalysisSummary): String = when (summary.vision.mode) {
+    "LIVE_PROVIDER" -> "vision provider: ${summary.vision.provider ?: "—"}"
+    "REPLAYED_GRAPH" -> "replayed observation graph, no vision provider"
+    else -> "deterministic analyzer, no vision provider"
 }
 
 // ---------------------------------------------------------------------------
@@ -618,82 +580,47 @@ private fun Diagnostics(summary: AnalysisSummary) {
 /** The numbers the owner reads off the phone: status, total time, peak memory, scene size. */
 @Composable
 private fun LocalCost(report: LocalRunReport) {
-    Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.small) {
-        Column(Modifier.padding(10.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text("Analysed on this phone", style = MaterialTheme.typography.labelLarge)
-            DataRow("Status", outcomeText(report))
-            DataRow("Total time", duration(report.timings?.totalMs ?: report.elapsedMs))
-            DataRow("Peak memory (analyzer process)", report.peakRssBytes?.let { megabytes(it) } ?: "not reported")
-            report.sceneBytes?.let { DataRow("Scene size", megabytes(it, decimals = 2)) }
-            DataRow("Runtime", runtimeText(report))
-        }
-    }
-}
-
-@Composable
-private fun LocalDiagnostics(report: LocalRunReport) {
-    Section("Local run") {
-        DataRow("Job", report.jobId.take(12))
-        DataRow("Runtime", runtimeText(report))
-        report.runtime?.let {
-            DataRow("V8", it.v8)
-            DataRow(
-                "Text sorting",
-                when (it.text) {
-                    "embedded-tables" -> "ICU tables in the analyzer (this runtime has no ICU)"
-                    "icu" -> "the runtime's ICU ${it.icu ?: ""}".trim()
-                    else -> it.text.ifBlank { "not reported" }
-                },
-            )
-            DataRow("Processor cores", "${it.cpus}")
-            DataRow("Phone memory", megabytes(it.totalMemoryBytes))
-        }
-        DataRow("Analyzer", "service ${report.analyzerService} · solver ${report.analyzerSolver}")
+    Section(stringResource(R.string.analyzer_local_run)) {
+        DataRow(stringResource(R.string.analyzer_status), outcomeText(report))
+        DataRow(stringResource(R.string.analyzer_total_time), duration(report.timings?.totalMs ?: report.elapsedMs))
+        DataRow(stringResource(R.string.analyzer_peak_memory), report.peakRssBytes?.let { megabytes(it) } ?: "—")
+        report.sceneBytes?.let { DataRow(stringResource(R.string.analyzer_scene_size), megabytes(it, decimals = 2)) }
+        DataRow("runtime", runtimeText(report))
         report.timings?.let { t ->
-            DataRow("Fetching sources", duration(t.acquisitionMs))
-            DataRow("Reading the drawings", duration(t.observationMs))
-            DataRow("Reading printed dimensions", duration(t.metricExtractionMs))
-            DataRow("Solving the building", duration(t.reconstructionMs))
-            DataRow("Compiling the scene", duration(t.compileMs))
-            DataRow("Verifying", duration(t.verificationMs))
-            DataRow("Total", duration(t.totalMs))
+            DataRow("acquisition · observation · metrics", "${duration(t.acquisitionMs)} · ${duration(t.observationMs)} · ${duration(t.metricExtractionMs)}")
+            DataRow("reconstruction · compile · verify", "${duration(t.reconstructionMs)} · ${duration(t.compileMs)} · ${duration(t.verificationMs)}")
         }
-        DataRow("Peak memory", report.peakRssBytes?.let { "${megabytes(it)} (${report.peakSource ?: "?"})" } ?: "not reported")
-        report.sceneBytes?.let { DataRow("Scene size", "$it bytes") }
     }
 }
 
 @Composable
 private fun LocalRuns(runs: List<LocalRunReport>) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Local runs on this phone", style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
+    Section(stringResource(R.string.analyzer_local_runs)) {
         for (run in runs) {
-            Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 1.dp) {
-                Column(Modifier.padding(12.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    Text("${outcomeText(run)} · ${hostOf(run.sourceUrl)}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
-                    StatusText(
-                        listOfNotNull(
-                            RUN_DATE.format(Date(run.startedAtMs)),
-                            "total ${duration(run.timings?.totalMs ?: run.elapsedMs)}",
-                            run.peakRssBytes?.let { "peak ${megabytes(it)}" },
-                            run.sceneBytes?.let { "scene ${megabytes(it, decimals = 2)}" },
-                            run.abi.ifBlank { null },
-                        ).joinToString(" · "),
-                    )
-                }
+            Column(Modifier.padding(bottom = Space.s)) {
+                Text("${outcomeText(run)} · ${hostOf(run.sourceUrl)}", style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+                StatusText(
+                    listOfNotNull(
+                        RUN_DATE.format(Date(run.startedAtMs)),
+                        duration(run.timings?.totalMs ?: run.elapsedMs),
+                        run.peakRssBytes?.let { megabytes(it) },
+                        run.abi.ifBlank { null },
+                    ).joinToString(" · "),
+                )
             }
         }
     }
 }
 
-private val RUN_DATE = SimpleDateFormat("d MMM yyyy HH:mm", Locale.ENGLISH)
+private val RUN_DATE = SimpleDateFormat("d MMM yyyy, HH:mm", Locale.forLanguageTag("pl-PL"))
 
+@Composable
 private fun outcomeText(report: LocalRunReport): String = when (report.outcome) {
-    LocalRunReport.OUTCOME_COMPLETED -> "Completed"
-    LocalRunReport.OUTCOME_CANCELLED -> if (report.forcedStop) "Cancelled (process ended)" else "Cancelled"
-    LocalRunReport.OUTCOME_FAILED -> "Failed (${report.code ?: "?"})"
-    LocalRunReport.OUTCOME_INTERRUPTED -> "Interrupted (app closed)"
-    else -> "Running"
+    LocalRunReport.OUTCOME_COMPLETED -> stringResource(R.string.analyzer_outcome_completed)
+    LocalRunReport.OUTCOME_CANCELLED -> stringResource(R.string.analyzer_outcome_cancelled)
+    LocalRunReport.OUTCOME_FAILED -> stringResource(R.string.analyzer_outcome_failed, report.code ?: "?")
+    LocalRunReport.OUTCOME_INTERRUPTED -> stringResource(R.string.analyzer_outcome_interrupted)
+    else -> stringResource(R.string.analyzer_outcome_running)
 }
 
 private fun runtimeText(report: LocalRunReport): String {
@@ -703,46 +630,41 @@ private fun runtimeText(report: LocalRunReport): String {
 
 private fun duration(ms: Long): String {
     val seconds = ms / 1000.0
-    return if (seconds < 60) "%.1f s".format(Locale.ENGLISH, seconds) else "%d min %02d s".format(Locale.ENGLISH, (ms / 60_000), (ms / 1000) % 60)
+    return if (seconds < 60) String.format(Locale.forLanguageTag("pl-PL"), "%.1f s", seconds) else "${ms / 60_000} min ${(ms / 1000) % 60} s"
 }
 
-private fun megabytes(bytes: Long, decimals: Int = 0): String = "%.${decimals}f MB".format(Locale.ENGLISH, bytes / (1024.0 * 1024.0))
+private fun megabytes(bytes: Long, decimals: Int = 0): String =
+    String.format(Locale.forLanguageTag("pl-PL"), "%.${decimals}f MB", bytes / (1024.0 * 1024.0))
 
 // ---------------------------------------------------------------------------
-// Downloaded analyses
+// Analyses kept on this phone
 // ---------------------------------------------------------------------------
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     var confirmDelete by remember { mutableStateOf<DownloadedSceneEntry?>(null) }
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(stringResource(R.string.analyzer_downloads), style = MaterialTheme.typography.titleSmall, modifier = Modifier.semantics { heading() })
-        val entries = model.downloads
-        if (entries.isEmpty()) {
-            Body("None yet. A finished analysis — made on this phone or downloaded — is kept here and in the Model menu.")
-        }
+    val entries = model.downloads
+    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
+        SectionHeading(stringResource(R.string.analyzer_downloads))
+        if (entries.isEmpty()) Body(stringResource(R.string.analyzer_downloads_empty))
         for (entry in entries) {
-            Surface(color = MaterialTheme.colorScheme.surface, shape = MaterialTheme.shapes.medium, tonalElevation = 1.dp) {
-                Column(Modifier.padding(12.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(entry.label, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
-                    StatusText(entry.subtitle)
-                    StatusText(
-                        "L0 ${entry.qualityL0} · L1 ${entry.qualityL1} · L2 ${entry.qualityL2} · " +
-                            "${entry.unresolvedCount} unresolved · ${entry.warningsCount} warnings · ${hostOf(entry.sourceUrl)}",
-                    )
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Button(
-                            onClick = { onOpenScene(entry.key) },
-                            modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Open ${entry.label}" },
-                        ) { Text(stringResource(R.string.analyzer_open)) }
-                        TextButton(
-                            onClick = { confirmDelete = entry },
-                            modifier = Modifier.defaultMinSize(minHeight = 48.dp).semantics { contentDescription = "Delete ${entry.label} from this phone" },
-                        ) {
-                            Icon(Icons.Filled.Delete, contentDescription = null, modifier = Modifier.size(18.dp))
-                            Box(Modifier.width(4.dp))
-                            Text(stringResource(R.string.analyzer_delete))
-                        }
+            val limited = entry.unresolvedCount > 0 || entry.warningsCount > 0
+            Column(Modifier.fillMaxWidth().padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xxs)) {
+                Text(entry.title.ifBlank { entry.label }, style = MaterialTheme.typography.bodyLarge, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                StatusText(
+                    listOfNotNull(
+                        stringResource(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready),
+                        entry.unresolvedCount.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_unresolved, it, it) },
+                        hostOf(entry.sourceUrl),
+                    ).joinToString(" · "),
+                )
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
+                    val openLabel = stringResource(R.string.analyzer_open_description, entry.title.ifBlank { entry.label })
+                    LineButton(stringResource(R.string.analyzer_open), onClick = { onOpenScene(entry.key) }, modifier = Modifier.semantics { contentDescription = openLabel })
+                    val deleteLabel = stringResource(R.string.analyzer_delete_description, entry.title.ifBlank { entry.label })
+                    TextButton(onClick = { confirmDelete = entry }, modifier = Modifier.heightIn(min = Sizes.touch).semantics { contentDescription = deleteLabel }) {
+                        Text(stringResource(R.string.analyzer_delete), color = Palette.InkMuted)
                     }
                 }
             }
@@ -751,12 +673,19 @@ private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
     confirmDelete?.let { entry ->
         AlertDialog(
             onDismissRequest = { confirmDelete = null },
+            containerColor = Palette.Sheet,
             title = { Text(stringResource(R.string.analyzer_delete_title)) },
-            text = { Text("${entry.label} will be removed from this phone. The link can be analyzed again at any time.") },
+            text = { Text(stringResource(R.string.analyzer_delete_body, entry.title.ifBlank { entry.label })) },
             confirmButton = {
-                TextButton(onClick = { model.deleteDownload(entry.key); confirmDelete = null }) { Text(stringResource(R.string.analyzer_delete)) }
+                TextButton(onClick = { model.deleteDownload(entry.key); confirmDelete = null }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.analyzer_delete), color = Palette.Ink)
+                }
             },
-            dismissButton = { TextButton(onClick = { confirmDelete = null }) { Text(stringResource(R.string.analyzer_keep)) } },
+            dismissButton = {
+                TextButton(onClick = { confirmDelete = null }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                    Text(stringResource(R.string.analyzer_keep), color = Palette.InkMuted)
+                }
+            },
         )
     }
 }
@@ -765,43 +694,75 @@ private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
 // Small pieces
 // ---------------------------------------------------------------------------
 
+/** A folded section: its title is the button, its state is said in words. */
+@Composable
+private fun Foldout(title: String, open: Boolean, onToggle: () -> Unit, content: @Composable () -> Unit) {
+    val state = stringResource(if (open) R.string.state_expanded else R.string.state_collapsed)
+    Column(Modifier.fillMaxWidth()) {
+        Box(Modifier.fillMaxWidth().padding(top = Space.s).height(1.dp).background(Palette.Hairline))
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .heightIn(min = Sizes.touch)
+                .clickable(role = Role.Button, onClick = onToggle)
+                .semantics(mergeDescendants = true) { stateDescription = state },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(title, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, modifier = Modifier.weight(1f))
+            Icon(ShellIcons.chevronRight, null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall).rotate(if (open) 90f else 0f))
+        }
+        AnimatedVisibility(visible = open) {
+            Column(Modifier.fillMaxWidth().padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.m)) { content() }
+        }
+    }
+}
+
 @Composable
 private fun Section(title: String, content: @Composable () -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(title, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+        Text(title, style = MaterialTheme.typography.labelLarge, color = Palette.InkMuted, modifier = Modifier.semantics { heading() })
         content()
     }
 }
 
 @Composable
 private fun DataRow(label: String, value: String) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
-        Text(value, style = MaterialTheme.typography.bodySmall)
+    Row(Modifier.fillMaxWidth().semantics(mergeDescendants = true) {}, horizontalArrangement = Arrangement.spacedBy(Space.m)) {
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))
+        Text(value, style = MaterialTheme.typography.bodySmall, color = Palette.Ink)
     }
 }
 
 @Composable
 private fun HashRow(label: String, value: String) {
     Column(Modifier.fillMaxWidth()) {
-        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
         Mono(value.ifBlank { "—" })
     }
 }
 
+/** Monospace only for what is code: hashes and raw diagnostic lines. */
 @Composable
 private fun Mono(text: String) {
-    Text(text, style = MaterialTheme.typography.bodySmall, fontFamily = FontFamily.Monospace)
+    Text(text, style = MaterialTheme.typography.bodySmall, fontFamily = FontFamily.Monospace, color = Palette.InkMuted)
 }
 
 @Composable
 private fun Body(text: String) {
-    Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Text(text, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
 }
+
+@Composable
+private fun fieldColors() = OutlinedTextFieldDefaults.colors(
+    focusedBorderColor = Palette.Ink,
+    unfocusedBorderColor = Palette.RuleEmpty,
+    focusedLabelColor = Palette.Ink,
+    cursorColor = Palette.Ink,
+)
 
 private fun hostOf(url: String): String = try {
     URI(url).host ?: url
-} catch (e: Exception) {
+} catch (e: java.net.URISyntaxException) {
     url
 }
 

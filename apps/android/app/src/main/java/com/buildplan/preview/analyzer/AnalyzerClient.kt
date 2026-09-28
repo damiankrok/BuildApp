@@ -36,18 +36,18 @@ object AnalyzerAddress {
     fun check(raw: String?): Check {
         val text = raw?.trim().orEmpty()
         if (text.isEmpty()) return Check.Empty
-        if (text.any { it.isWhitespace() || it.isISOControl() }) return Check.Invalid("the address contains spaces or control characters")
+        if (text.any { it.isWhitespace() || it.isISOControl() }) return Check.Invalid("adres zawiera spacje lub znaki sterujące")
         val uri = try {
             URI(text)
         } catch (e: Exception) {
-            return Check.Invalid("the address is not a valid URL")
+            return Check.Invalid("to nie jest poprawny adres")
         }
-        if (!uri.isAbsolute) return Check.Invalid("the address must start with https://")
-        if (!uri.scheme.equals("https", ignoreCase = true)) return Check.Invalid("only https addresses are allowed")
-        if (uri.rawUserInfo != null) return Check.Invalid("an address carrying a user name or password is not allowed")
+        if (!uri.isAbsolute) return Check.Invalid("adres musi zaczynać się od https://")
+        if (!uri.scheme.equals("https", ignoreCase = true)) return Check.Invalid("dozwolone są tylko adresy https")
+        if (uri.rawUserInfo != null) return Check.Invalid("adres nie może zawierać nazwy użytkownika ani hasła")
         val host = uri.host
-        if (host.isNullOrEmpty()) return Check.Invalid("the address has no host")
-        if (uri.rawQuery != null || uri.rawFragment != null) return Check.Invalid("the address must not carry a query or a fragment")
+        if (host.isNullOrEmpty()) return Check.Invalid("w adresie brakuje nazwy serwera")
+        if (uri.rawQuery != null || uri.rawFragment != null) return Check.Invalid("adres nie może mieć parametrów ani kotwicy")
         val path = (uri.rawPath ?: "").trimEnd('/')
         val port = if (uri.port == -1) "" else ":${uri.port}"
         return Check.Valid("https://${host.lowercase()}$port$path")
@@ -76,17 +76,17 @@ object ProjectLinks {
     /** Null when the link may be submitted, else the reason it may not. */
     fun problem(raw: String): String? {
         val text = raw.trim()
-        if (text.isEmpty()) return "Paste the link of a project page."
-        if (text.length > MAX_LENGTH) return "That link is longer than $MAX_LENGTH characters."
-        if (text.any { it.isWhitespace() || it.isISOControl() }) return "That link contains spaces."
+        if (text.isEmpty()) return "Wklej link do strony projektu."
+        if (text.length > MAX_LENGTH) return "Ten link ma więcej niż $MAX_LENGTH znaków."
+        if (text.any { it.isWhitespace() || it.isISOControl() }) return "Ten link zawiera spacje."
         val uri = try {
             URI(text)
         } catch (e: Exception) {
-            return "That is not a valid web address."
+            return "To nie jest poprawny adres strony."
         }
-        if (!uri.scheme.equals("https", ignoreCase = true)) return "Only https:// links can be analyzed."
-        if (uri.rawUserInfo != null) return "A link carrying a user name or password can't be analyzed."
-        if (uri.host.isNullOrEmpty()) return "That link has no host name."
+        if (!uri.scheme.equals("https", ignoreCase = true)) return "Analizować można tylko linki https://."
+        if (uri.rawUserInfo != null) return "Nie można analizować linku z nazwą użytkownika lub hasłem."
+        if (uri.host.isNullOrEmpty()) return "W tym linku brakuje nazwy strony."
         return null
     }
 }

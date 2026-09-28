@@ -84,46 +84,55 @@ sealed interface AnalyzerFailure {
 }
 
 object AnalyzerMessages {
-    /** The sentence the Analyzer screen shows for a failure. */
+    /** The sentence the analyzer page shows for a failure: what happened, and what to do. */
     fun describe(failure: AnalyzerFailure): String = when (failure) {
         is AnalyzerFailure.Offline ->
-            "Can't reach the analyzer service: ${failure.detail}. Check the phone's connection and try again."
+            "Nie mogę połączyć się z usługą analizy. Sprawdź połączenie telefonu i spróbuj ponownie."
         is AnalyzerFailure.RateLimited ->
-            "The analyzer has had too many requests from this phone recently." +
-                (failure.retryAfterSeconds?.let { " Try again in ${waitText(it)}." } ?: " Try again in a few minutes.")
+            "Usługa analizy dostała ostatnio zbyt wiele zapytań z tego telefonu." +
+                (failure.retryAfterSeconds?.let { " Spróbuj ponownie za ${waitText(it)}." } ?: " Spróbuj ponownie za kilka minut.")
         is AnalyzerFailure.QueueFull ->
-            "The analyzer is busy with other projects and its queue is full." +
-                (failure.retryAfterSeconds?.let { " Try again in ${waitText(it)}." } ?: " Try again shortly.")
+            "Usługa analizy jest zajęta innymi projektami, a jej kolejka jest pełna." +
+                (failure.retryAfterSeconds?.let { " Spróbuj ponownie za ${waitText(it)}." } ?: " Spróbuj ponownie za chwilę.")
         is AnalyzerFailure.InvalidUrl ->
-            "That link can't be analyzed: ${failure.message.trimEnd('.')}. Paste the https address of a project page."
+            "Tego linku nie da się przeanalizować: ${failure.message.trimEnd('.')}. Wklej adres https strony projektu."
         is AnalyzerFailure.UnsupportedPublisher ->
-            "The analyzer doesn't read projects from this site yet. ${failure.message}".trim()
+            "Analiza nie czyta jeszcze projektów z tej strony. Obsługiwane są strony projektów ARCHON."
         is AnalyzerFailure.JobFailed ->
-            if (failure.details?.reasonCode != null) "The analysis stopped (${failure.details.reasonCode}): ${failure.message}"
-            else "The analysis stopped (${failure.code}): ${failure.message}"
+            "Analiza zatrzymała się (${failure.diagnosticCode}): z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
         is AnalyzerFailure.HashMismatch ->
-            "The downloaded model is not the one the analyzer described (${failure.what} differs), so it was not kept."
+            "Pobrany model nie jest tym, który opisała analiza (różni się: ${failure.what}), więc go nie zapisano."
         is AnalyzerFailure.TooLarge ->
-            "The model is larger than this app keeps (${failure.limitBytes / (1024 * 1024)} MB), so it was not downloaded."
+            "Model jest większy, niż ta aplikacja przechowuje (${failure.limitBytes / (1024 * 1024)} MB), więc go nie pobrano."
         is AnalyzerFailure.InvalidScene ->
-            "The analyzer sent a model this version of the app can't open: ${failure.message}"
+            "Analiza przysłała model, którego ta wersja aplikacji nie otworzy. Zaktualizuj aplikację."
         is AnalyzerFailure.BadResponse ->
-            "The analyzer answered with something this app can't read (${failure.message})."
+            "Usługa analizy odpowiedziała czymś, czego ta aplikacja nie potrafi odczytać."
         is AnalyzerFailure.StorageFailed ->
-            "The model was verified but could not be saved on this phone: ${failure.message}"
+            "Model sprawdzono, ale nie udało się go zapisać na tym telefonie. Zwolnij miejsce i pobierz go ponownie."
         is AnalyzerFailure.NotConfigured ->
-            "No analyzer service is configured in this build."
+            "Ta wersja aplikacji nie ma skonfigurowanej usługi analizy."
         is AnalyzerFailure.LocalRuntime ->
-            "The analysis on this phone stopped (${failure.code}): ${failure.message}"
-        is AnalyzerFailure.Http -> when {
-            failure.status == 404 -> "The analyzer no longer has this analysis (it may have expired). Analyze the link again."
-            failure.message != null -> "The analyzer refused the request (${failure.code ?: failure.status}): ${failure.message}"
-            else -> "The analyzer answered with an error (HTTP ${failure.status})."
+            "Analiza na tym telefonie zatrzymała się (${failure.code}). Nic z niej nie zapisano; możesz przeanalizować link ponownie."
+        is AnalyzerFailure.Http -> when (failure.status) {
+            404, 410 -> "Usługa nie ma już tej analizy (mogła wygasnąć). Przeanalizuj link ponownie."
+            else -> "Usługa analizy odmówiła (${failure.code ?: "HTTP ${failure.status}"}). Spróbuj ponownie później."
         }
     }
 
+    /** A short Polish heading for a failure. */
+    fun title(failure: AnalyzerFailure): String = when (failure) {
+        is AnalyzerFailure.Offline, is AnalyzerFailure.RateLimited, is AnalyzerFailure.QueueFull, is AnalyzerFailure.Http -> "Usługa analizy jest teraz niedostępna"
+        is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsupportedPublisher -> "Tego linku nie da się przeanalizować"
+        is AnalyzerFailure.JobFailed, is AnalyzerFailure.LocalRuntime -> "Nie udało się zbudować modelu"
+        is AnalyzerFailure.HashMismatch, is AnalyzerFailure.TooLarge, is AnalyzerFailure.InvalidScene,
+        is AnalyzerFailure.BadResponse, is AnalyzerFailure.StorageFailed -> "Modelu nie zapisano"
+        is AnalyzerFailure.NotConfigured -> "Brak usługi analizy"
+    }
+
+    /** "45 s", "2 min": Polish, and never a plural form that needs declension. */
     private fun waitText(seconds: Long): String = when {
-        seconds < 90 -> "$seconds seconds"
-        else -> "${(seconds + 59) / 60} minutes"
+        seconds < 90 -> "$seconds s"
+        else -> "${(seconds + 59) / 60} min"
     }
 }

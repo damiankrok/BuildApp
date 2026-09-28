@@ -312,8 +312,9 @@ class AnalyzerClientTest {
             assertTrue("$f: \"$text\"", text.isNotBlank() && text.first().isUpperCase())
             assertTrue("$f must not dump JSON: $text", '{' !in text)
         }
-        assertTrue(AnalyzerMessages.describe(AnalyzerFailure.RateLimited(90)).contains("2 minutes"))
+        assertTrue(AnalyzerMessages.describe(AnalyzerFailure.RateLimited(90)).contains("2 min"))
         assertTrue(AnalyzerMessages.describe(AnalyzerFailure.JobFailed("NO_DRAWINGS", "none")).contains("NO_DRAWINGS"))
-        assertEquals("No analyzer service is configured in this build.", AnalyzerMessages.describe(AnalyzerFailure.NotConfigured))
+        assertEquals("Ta wersja aplikacji nie ma skonfigurowanej usługi analizy.", AnalyzerMessages.describe(AnalyzerFailure.NotConfigured))
+        for (f in failures) assertTrue("$f has a Polish heading", AnalyzerMessages.title(f).isNotBlank())
     }
 }

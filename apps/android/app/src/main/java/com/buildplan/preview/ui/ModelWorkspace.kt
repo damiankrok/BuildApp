@@ -2,10 +2,8 @@ package com.buildplan.preview.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -13,152 +11,311 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
+import com.buildplan.preview.camera.ContentInsets
+import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.scene.ModelScene
-import com.buildplan.preview.scene.SceneSourceKind
+import kotlin.math.roundToInt
 
 /**
- * `3D`: the model on the whole screen.
+ * `3D`: the house on the whole screen, and the chrome floating over it.
  *
- * One opaque strip at the top says which house this is and where it came
- * from, with the way back; one opaque dock at the bottom holds the controls
- * in the owner's terms — view, layers, look, fit, reset, details. The details
- * panel opens above the dock and takes at most a share of the height the
- * chrome leaves, so it never covers the dock that closes it. Back closes the
- * details, then clears the selection, then leaves the model.
+ * Five layers, each only as large as its job: the model, edge to edge; a
+ * compact context at the top left (back, the house, where the build stands);
+ * the labelled tool rail at the right edge; the construction timeline at the
+ * foot; and, only when an element is chosen, its name above the timeline and
+ * its details in a sheet that takes the timeline's place. While a finger
+ * turns the model, the context and the rail step back.
+ *
+ * The model is framed inside what the chrome leaves free at rest
+ * ([PreviewViewModel.contentInsets]), so "the whole house" is never half
+ * under a panel — and those insets ignore the expanded timeline and the
+ * sheet, so opening either never moves the camera.
+ *
+ * Back closes the pane, then the details, then the selection, then leaves.
  */
 @Composable
-fun ModelWorkspace(model: PreviewViewModel, onBack: () -> Unit) {
-    Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
+fun ModelWorkspace(model: PreviewViewModel, progress: ProgressViewModel, onBack: () -> Unit, onSetProgress: () -> Unit) {
+    Box(Modifier.fillMaxSize().background(Palette.Ground)) {
         when (val screen = model.screen) {
             is ScreenState.Loading -> WorkspaceMessage(stringResource(R.string.house_loading), null, onBack)
             is ScreenState.Failed -> WorkspaceMessage(stringResource(R.string.house_failed), screen.message, onBack)
-            is ScreenState.Ready -> ReadyWorkspace(model, screen.scene, onBack)
+            is ScreenState.Ready -> ReadyWorkspace(model, progress, screen.scene, onBack, onSetProgress)
         }
     }
 }
 
 @Composable
-private fun ReadyWorkspace(model: PreviewViewModel, scene: ModelScene, onBack: () -> Unit) {
+private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel, scene: ModelScene, onBack: () -> Unit, onSetProgress: () -> Unit) {
+    var toolName by rememberSaveable { mutableStateOf<String?>(null) }
+    val tool = toolName?.let { name -> Tool.entries.firstOrNull { it.name == name } }
+    var railExpanded by rememberSaveable { mutableStateOf(false) }
     var detailsOpen by rememberSaveable { mutableStateOf(false) }
+    var hintShown by rememberSaveable { mutableStateOf(true) }
     val selected = model.selected
+    val view = progress.view
     val motion = LocalMotionPolicy.current
+
     LaunchedEffect(selected) { if (selected == null) detailsOpen = false }
+    // The timeline decides which uploaded objects stand; nothing is re-uploaded.
+    LaunchedEffect(scene, view?.frame?.visible) { model.setConstruction(view?.frame?.visible) }
+    // One gesture teaches the gestures: the hint leaves at the first touch, or by itself.
+    LaunchedEffect(model.manipulating) { if (model.manipulating) hintShown = false }
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(HINT_MS)
+        hintShown = false
+    }
 
-    // Only while there is something inside the model to close.
-    BackHandler(enabled = detailsOpen) { detailsOpen = false }
-    BackHandler(enabled = !detailsOpen && selected != null) { model.clearSelection() }
+    BackHandler(enabled = tool != null) { toolName = null }
+    BackHandler(enabled = tool == null && detailsOpen) { detailsOpen = false }
+    BackHandler(enabled = tool == null && !detailsOpen && selected != null) { model.clearSelection() }
 
-    Box(Modifier.fillMaxSize()) {
+    val recede by animateFloatAsState(if (model.manipulating) RECEDED_ALPHA else 1f, motion.recede(), label = "recede")
+    var rootHeight by remember { mutableIntStateOf(0) }
+
+    Box(Modifier.fillMaxSize().onGloballyPositioned { rootHeight = it.size.height }) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
-        BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding()) {
-            // The details panel shares the height with the top strip and the dock; it never takes more than this.
-            val detailsMax = maxHeight * 0.45f
-            Column(Modifier.fillMaxSize()) {
-                val source = model.scenes.firstOrNull { it.key == scene.key }?.source
-                WorkspaceTopBar(
-                    title = scene.title,
-                    context = stringResource(if (source == SceneSourceKind.DOWNLOADED) R.string.model_context_downloaded else R.string.model_context_bundled),
-                    selection = selected?.let { stringResource(R.string.model_selected, it.label) },
-                    onBack = onBack,
-                )
-                Box(Modifier.weight(1f))
-                AnimatedVisibility(
-                    visible = detailsOpen && selected != null,
-                    enter = slideInVertically(motion.enter()) { it / 3 } + fadeIn(motion.enter()),
-                    exit = slideOutVertically(motion.exit()) { it / 3 } + fadeOut(motion.exit()),
-                ) {
+        // A shade under the status bar, so its icons and the context read over a pale roof.
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(112.dp)
+                .background(Brush.verticalGradient(listOf(Palette.Scrim.copy(alpha = 0.55f), Color.Transparent))),
+        )
+
+        BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding().padding(Space.s)) {
+            val paneMax = maxHeight * 0.62f
+            // The top context: back, the house, where the build stands (never the preview: the timeline says that).
+            TopContext(
+                title = scene.title,
+                view = view,
+                onBack = onBack,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .widthIn(max = maxWidth - RailDefaults.ButtonWidth - Space.xl)
+                    .graphicsLayer { alpha = recede }
+                    .onGloballyPositioned { c ->
+                        val bottom = c.boundsInRoot().bottom.roundToInt()
+                        model.contentInsets = model.contentInsets.copy(top = bottom)
+                    },
+            )
+
+            ToolRail(
+                scene = scene,
+                state = model.viewer,
+                open = tool,
+                onOpen = { toolName = it?.name },
+                onPreset = { model.applyPreset(it, System.currentTimeMillis()) },
+                onPresentation = { model.setPresentation(it) },
+                onStyle = { model.setStyle(it) },
+                onVisibility = { model.setVisibility(it) },
+                onIsolate = { model.isolateSelected() },
+                onShowAll = { model.showAll() },
+                onReset = {
+                    model.reset(System.currentTimeMillis())
+                    detailsOpen = false
+                    toolName = null
+                },
+                paneMaxHeight = paneMax,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(top = 60.dp)
+                    .graphicsLayer { alpha = if (tool != null) 1f else recede },
+            )
+
+            Column(
+                Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Space.s),
+            ) {
+                AnimatedVisibility(visible = hintShown && selected == null && tool == null, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
+                    GestureHint(Modifier.align(Alignment.CenterHorizontally))
+                }
+                AnimatedVisibility(visible = selected != null && !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
                     if (selected != null) {
-                        Inspector(
-                            scene = scene,
-                            selected = selected,
-                            maxHeight = detailsMax,
-                            onClose = { detailsOpen = false },
-                            onFrame = { model.frameSelection(System.currentTimeMillis()) },
-                            onIsolate = { model.isolateSelected() },
+                        SelectionBar(
+                            name = selected.metadata?.label ?: selected.kindLabel,
+                            detail = listOfNotNull(selected.kindLabel.takeIf { selected.metadata?.label != null }, selected.metadata?.levelLabel).joinToString(" · "),
+                            onDetails = { detailsOpen = true; toolName = null },
+                            onClear = { model.clearSelection() },
                         )
                     }
                 }
-                ToolDock(
-                    scene = scene,
-                    state = model.viewer,
-                    onPreset = { model.applyPreset(it, System.currentTimeMillis()) },
-                    onPresentation = { model.setPresentation(it) },
-                    onStyle = { model.setStyle(it) },
-                    onVisibility = { model.setVisibility(it) },
+                if (view != null) {
+                    AnimatedVisibility(visible = !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
+                        TimelineRail(
+                            view = view,
+                            expanded = railExpanded,
+                            onToggle = { railExpanded = !railExpanded },
+                            onPreviewStop = { progress.previewStop(it) },
+                            onReturnToNow = { progress.returnToNow() },
+                            onSetProgress = onSetProgress,
+                            modifier = Modifier.onGloballyPositioned { c ->
+                                // Only the rail at rest frames the model: expanding it must not move the camera.
+                                if (!railExpanded && rootHeight > 0) {
+                                    val bottom = rootHeight - c.boundsInRoot().top.roundToInt()
+                                    model.contentInsets = model.contentInsets.copy(bottom = bottom)
+                                }
+                            },
+                        )
+                    }
+                }
+            }
+        }
+
+        AnimatedVisibility(
+            visible = detailsOpen && selected != null,
+            enter = motion.sheetEnter(),
+            exit = motion.sheetExit(),
+            modifier = Modifier.align(Alignment.BottomCenter),
+        ) {
+            if (selected != null) {
+                val stage = progress.session?.stageOf(selected.id)
+                val status = view?.let { v ->
+                    if (v.summary.unset) null else stage?.let { key -> v.stages.firstOrNull { it.stageKey == key }?.status }
+                }
+                Inspector(
+                    selected = selected,
+                    stage = stage,
+                    stageStatus = status,
+                    visibleNow = model.viewer.isVisible(scene, selected.id),
+                    isolating = model.viewer.isIsolating,
+                    maxHeight = 460.dp,
+                    onClose = { detailsOpen = false },
+                    onFrame = { model.frameSelection(System.currentTimeMillis()) },
                     onIsolate = { model.isolateSelected() },
                     onShowAll = { model.showAll() },
-                    onFrameSelection = { model.frameSelection(System.currentTimeMillis()) },
-                    onReset = { model.reset(System.currentTimeMillis()); detailsOpen = false },
-                    onDetails = { detailsOpen = true },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.navigationBarsPadding(),
                 )
             }
         }
     }
 }
 
+/** Back, the house's name, and the ACTUAL state of the build — always the actual one. */
 @Composable
-private fun WorkspaceTopBar(title: String, context: String, selection: String?, onBack: () -> Unit) {
-    Surface(color = MaterialTheme.colorScheme.surface, modifier = Modifier.fillMaxWidth()) {
-        Row(Modifier.padding(horizontal = 4.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+private fun TopContext(title: String, view: ProgressView?, onBack: () -> Unit, modifier: Modifier = Modifier) {
+    GlassSurface(modifier = modifier) {
+        Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {
             val backLabel = stringResource(R.string.model_back)
-            IconButton(onClick = onBack, modifier = Modifier.size(48.dp)) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = backLabel)
+            IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = backLabel }) {
+                Icon(ShellIcons.back, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
             }
-            Column(Modifier.weight(1f).padding(end = 12.dp)) {
+            Column(Modifier.padding(vertical = Space.xs)) {
                 Text(
                     title,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = Palette.Ink,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.semantics { heading() },
                 )
-                StatusText(selection ?: context, maxLines = 1)
+                Text(
+                    actualLine(view),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Palette.InkMuted,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun actualLine(view: ProgressView?): String {
+    val summary = view?.summary ?: return stringResource(R.string.progress_unset)
+    val percent = summary.percentText
+    if (summary.unset || percent == null) return stringResource(R.string.progress_unset)
+    val stage = (summary.currentStage ?: summary.lastDone)?.let { stringResource(it.labelRes()) }
+    val text = if (stage != null) stringResource(R.string.progress_actual_short, percent, stage) else percent
+    return if (view.previewStop != null) stringResource(R.string.progress_actual_prefix, text) else text
+}
+
+/** The chosen element, named above the timeline, with the way to its details and out. */
+@Composable
+private fun SelectionBar(name: String, detail: String, onDetails: () -> Unit, onClear: () -> Unit) {
+    GlassSurface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(Radius.panel)) {
+        Row(Modifier.heightIn(min = 56.dp).padding(start = Space.l, end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f).padding(vertical = Space.s)) {
+                Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                if (detail.isNotBlank()) Text(detail, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            }
+            LineButton(stringResource(R.string.dock_details), onClick = onDetails, borderColor = Palette.RuleEmpty)
+            val clear = stringResource(R.string.selection_clear)
+            IconButton(onClick = onClear, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = clear }) {
+                Icon(ShellIcons.close, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
+            }
+        }
+    }
+}
+
+/** How to move the house, said once where the eye is; it leaves at the first gesture. */
+@Composable
+private fun GestureHint(modifier: Modifier = Modifier) {
+    GlassSurface(modifier = modifier, shape = RoundedCornerShape(Radius.panel)) {
+        Text(
+            stringResource(R.string.viewport_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = Palette.Ink,
+            modifier = Modifier.padding(horizontal = Space.m, vertical = Space.s),
+        )
     }
 }
 
 @Composable
 private fun WorkspaceMessage(title: String, detail: String?, onBack: () -> Unit) {
     Column(Modifier.fillMaxSize().safeDrawingPadding()) {
-        Row(Modifier.padding(4.dp), verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = onBack, modifier = Modifier.size(48.dp)) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.model_back))
+        Row(Modifier.padding(Space.xs), verticalAlignment = Alignment.CenterVertically) {
+            val backLabel = stringResource(R.string.model_back)
+            IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = backLabel }) {
+                Icon(ShellIcons.back, contentDescription = null, tint = Palette.Ink)
             }
         }
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            Column(Modifier.padding(28.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text(title, style = MaterialTheme.typography.titleMedium)
-                if (detail != null) Text(detail, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Column(Modifier.padding(Space.xxl), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Space.s)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
+                if (detail != null) Text(detail, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
             }
         }
     }
 }
+
+/** How far the context and the rail fade while the model is turned: present, not in the way. */
+private const val RECEDED_ALPHA = 0.18f
+
+/** How long the gesture hint stays when nobody touches the model. */
+private const val HINT_MS = 6_000L
