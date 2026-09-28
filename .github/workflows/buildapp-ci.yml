@@ -501,18 +501,17 @@ jobs:
     # INTEGRATION-003C. The 3D place reached the owner's way — cold start on
     # Dom, `3D` in the navigation bar, back, `3D` again — and directly, with
     # the renderer's own counters and the render surface's pixels held
-    # against the screen's (ModelEntryDeviceTest). A job of its own, bounded
-    # by run-3d-gate.sh's timeouts: in run 56 the emulator's gfxstream
-    # SwiftShader GLES translator went away under Filament within a minute and
-    # took the analyzer's device gate down with it. One emulator per GPU
-    # backend, so the evidence says which one can run Filament at all.
-    name: Android / 3D entry gate (${{ matrix.gpu }})
+    # against the screen's (ModelEntryDeviceTest), at font scale 1.0 and 1.3.
+    # A job of its own, bounded by run-3d-gate.sh's timeouts. The emulator runs
+    # ANGLE on SwiftShader Vulkan (swangle_indirect, OpenGL ES 3.1): with the
+    # default gfxstream SwiftShader GLES 3.0 translator (swiftshader_indirect,
+    # and `guest`, which falls back to it on API 34) the emulator itself went
+    # away right after Filament's first frame (runs 56 and 57).
+    name: Android / 3D entry gate
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    strategy:
-      fail-fast: false
-      matrix:
-        gpu: [swangle_indirect, swiftshader_indirect, guest]
+    env:
+      GPU: swangle_indirect
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -536,7 +535,7 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-      - name: The 3D gate on the emulator (x86_64, API 34, ${{ matrix.gpu }})
+      - name: The 3D gate on the emulator (x86_64, API 34, ANGLE on SwiftShader)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
@@ -546,25 +545,25 @@ jobs:
           ram-size: 4096M
           disk-size: 4G
           emulator-boot-timeout: 900
-          emulator-options: -no-window -gpu ${{ matrix.gpu }} -noaudio -no-boot-anim -camera-back none -no-snapshot
+          emulator-options: -no-window -gpu swangle_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot
           disable-animations: true
-          script: OUT=model-entry-${{ matrix.gpu }} bash apps/android/tools/run-3d-gate.sh
+          script: OUT=model-entry bash apps/android/tools/run-3d-gate.sh
       - name: Summary
         if: always()
         run: |
           {
-            echo "### 3D entry gate — emulator GPU ${{ matrix.gpu }}"; echo
-            echo "status: $(cat model-entry-${{ matrix.gpu }}/status.txt 2>/dev/null || echo NOT_RUN)"; echo
-            echo '```'; cat model-entry-${{ matrix.gpu }}/device.txt 2>/dev/null; echo '```'
+            echo "### 3D entry gate — emulator GPU $GPU"; echo
+            echo "status: $(cat model-entry/status.txt 2>/dev/null || echo NOT_RUN)"; echo
+            echo '```'; cat model-entry/device.txt 2>/dev/null; echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload the 3D gate evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: model-entry-${{ matrix.gpu }}
+          name: model-entry
           if-no-files-found: ignore
           retention-days: 30
-          path: model-entry-${{ matrix.gpu }}/**
+          path: model-entry/**
 
   second-house-generalization:
     # BUILDAPP-03Y2G. A second real project beside Marcówki, kept as a
@@ -775,7 +774,9 @@ jobs:
     # the commit the APK was built from. The Android job's artifacts stay as
     # they are, for diagnostics.
     name: Android / OWNER direct APK (owner-preview-latest)
-    needs: android
+    # INTEGRATION-003C: never publish to the owner an APK whose 3D place was
+    # not seen to draw the house on the emulator.
+    needs: [android, android-3d-gate]
     if: github.event_name == 'workflow_dispatch' && inputs.owner_apk
     runs-on: ubuntu-latest
     timeout-minutes: 10

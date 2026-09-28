@@ -226,6 +226,7 @@ class ModelEntryDeviceTest {
             put("liveEngines", RenderDiagnostics.liveEngines.get())
             put("surfacePixels", surfaceStats?.toJson() ?: JsonObject(emptyMap()))
             put("screenPixels", screenStats.toJson())
+            surfaceStats?.let { put("surfaceScreenCorrelation", RegionStats.correlation(it.grid, screenStats.grid)) }
         }
         File(out, "$name.json").writeText(json.encodeToString(JsonObject.serializer(), report))
         return Pixels(surfaceStats, screenStats)
@@ -233,18 +234,23 @@ class ModelEntryDeviceTest {
 
     /**
      * What the screen shows must be what the renderer drew. When the surface
-     * holds a picture (more than a flat background), the screen over the
-     * same region must hold most of it; a flat screen over a drawn surface is
-     * exactly the owner's blank 3D.
+     * holds a picture, the screen over the same region must hold the same
+     * picture: comparable detail (luminance spread, colours) and the same
+     * layout of light and dark (the correlation of a coarse luminance grid).
+     *
+     * "Not the background colour" is not enough: in run 57 an opaque tool
+     * dock covered the viewport with one flat colour that was not the
+     * background, and a check on that alone passed a blank 3D.
      */
     private fun assertDisplayed(pixels: Pixels, step: String) {
-        val surface = pixels.surface ?: return
-        if (surface.nonBackgroundFraction < DRAWN_FRACTION) return
-        assertTrue(
-            "$step: the renderer drew the house (${surface.nonBackgroundFraction} of the surface is not background) " +
-                "but the screen shows ${pixels.screen.nonBackgroundFraction} — the surface is not composited",
-            pixels.screen.nonBackgroundFraction >= surface.nonBackgroundFraction * 0.5,
-        )
+        val surface = pixels.surface ?: throw AssertionError("$step: the render surface's pixels could not be read")
+        assertTrue("$step: the renderer drew no picture (${surface.toJson()})", surface.luminanceStdDev >= PICTURE_STD_DEV)
+        val screen = pixels.screen
+        val correlation = RegionStats.correlation(surface.grid, screen.grid)
+        val facts = "surface ${surface.toJson()}, screen ${screen.toJson()}, correlation $correlation"
+        assertTrue("$step: the screen is flat where the renderer drew the house — $facts", screen.distinctColours >= MIN_SCREEN_COLOURS)
+        assertTrue("$step: the screen has far less detail than the surface — $facts", screen.luminanceStdDev >= surface.luminanceStdDev * 0.4)
+        assertTrue("$step: the screen does not show the surface's picture — $facts", correlation >= MIN_CORRELATION)
     }
 
     private fun surfacePixels(scenario: ActivityScenario<MainActivity>, view: View): Bitmap? = when (view) {
@@ -286,8 +292,14 @@ class ModelEntryDeviceTest {
         const val TIMEOUT_MS = 30_000L
         const val SETTLE_FRAMES = 30L
 
-        /** A surface with more than this share of non-background pixels in its middle has a picture on it. */
-        const val DRAWN_FRACTION = 0.05
+        /** Luminance spread (0–255) above which a region holds a picture rather than a flat fill. */
+        const val PICTURE_STD_DEV = 8.0
+
+        /** Fewest distinct colours (5 bits per channel) the screen's middle may have while showing a model. */
+        const val MIN_SCREEN_COLOURS = 16
+
+        /** Least correlation between the surface's and the screen's coarse luminance grids. */
+        const val MIN_CORRELATION = 0.5
     }
 }
 
@@ -296,12 +308,15 @@ class ModelEntryDeviceTest {
  * background (#12151A, the colour of the window, the Compose surface and
  * Filament's clear alike), and how many distinct colours it holds.
  */
-data class RegionStats(
+class RegionStats(
     val region: String,
     val pixels: Int,
     val nonBackgroundFraction: Double,
     val distinctColours: Int,
     val meanLuminance: Double,
+    val luminanceStdDev: Double,
+    /** Mean luminance of each cell of a GRID × GRID division of the region, row by row. */
+    val grid: DoubleArray,
 ) {
     fun toJson(): JsonObject = buildJsonObject {
         put("region", region)
@@ -309,6 +324,7 @@ data class RegionStats(
         put("nonBackgroundFraction", nonBackgroundFraction)
         put("distinctColours", distinctColours)
         put("meanLuminance", meanLuminance)
+        put("luminanceStdDev", luminanceStdDev)
     }
 
     companion object {
@@ -317,27 +333,57 @@ data class RegionStats(
         private const val BG_B = 0x1a
         private const val TOLERANCE = 12
 
+        private const val GRID = 12
+
         fun of(bitmap: Bitmap, rect: Rect): RegionStats {
             val r = Rect(rect)
-            if (!r.intersect(0, 0, bitmap.width, bitmap.height)) return RegionStats(rect.flattenToString(), 0, 0.0, 0, 0.0)
+            if (!r.intersect(0, 0, bitmap.width, bitmap.height)) return RegionStats(rect.flattenToString(), 0, 0.0, 0, 0.0, 0.0, DoubleArray(GRID * GRID))
             var count = 0
             var differs = 0
-            var luminance = 0.0
+            var sum = 0.0
+            var sumSq = 0.0
+            val cellSum = DoubleArray(GRID * GRID)
+            val cellCount = IntArray(GRID * GRID)
             val colours = HashSet<Int>()
             val row = IntArray(r.width())
             for (y in r.top until r.bottom) {
                 bitmap.getPixels(row, 0, r.width(), r.left, y, r.width(), 1)
-                for (c in row) {
+                val gy = ((y - r.top) * GRID / r.height()).coerceAtMost(GRID - 1)
+                for ((x, c) in row.withIndex()) {
                     val red = (c shr 16) and 0xff
                     val green = (c shr 8) and 0xff
                     val blue = c and 0xff
                     count++
                     if (kotlin.math.abs(red - BG_R) > TOLERANCE || kotlin.math.abs(green - BG_G) > TOLERANCE || kotlin.math.abs(blue - BG_B) > TOLERANCE) differs++
-                    luminance += 0.2126 * red + 0.7152 * green + 0.0722 * blue
+                    val l = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+                    sum += l
+                    sumSq += l * l
+                    val cell = gy * GRID + (x * GRID / r.width()).coerceAtMost(GRID - 1)
+                    cellSum[cell] += l
+                    cellCount[cell]++
                     colours.add(((red shr 3) shl 10) or ((green shr 3) shl 5) or (blue shr 3))
                 }
             }
-            return RegionStats(r.flattenToString(), count, if (count == 0) 0.0 else differs.toDouble() / count, colours.size, if (count == 0) 0.0 else luminance / count)
+            val mean = if (count == 0) 0.0 else sum / count
+            val std = if (count == 0) 0.0 else kotlin.math.sqrt((sumSq / count - mean * mean).coerceAtLeast(0.0))
+            val grid = DoubleArray(GRID * GRID) { if (cellCount[it] == 0) 0.0 else cellSum[it] / cellCount[it] }
+            return RegionStats(r.flattenToString(), count, if (count == 0) 0.0 else differs.toDouble() / count, colours.size, mean, std, grid)
+        }
+
+        /** Pearson correlation of two equal-length grids; 0 when either is flat. */
+        fun correlation(a: DoubleArray, b: DoubleArray): Double {
+            if (a.size != b.size || a.isEmpty()) return 0.0
+            val ma = a.average()
+            val mb = b.average()
+            var num = 0.0
+            var da = 0.0
+            var db = 0.0
+            for (i in a.indices) {
+                num += (a[i] - ma) * (b[i] - mb)
+                da += (a[i] - ma) * (a[i] - ma)
+                db += (b[i] - mb) * (b[i] - mb)
+            }
+            return if (da <= 1e-9 || db <= 1e-9) 0.0 else num / kotlin.math.sqrt(da * db)
         }
     }
 }

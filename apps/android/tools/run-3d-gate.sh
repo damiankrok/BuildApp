@@ -9,7 +9,8 @@
 #    of the app — or of the emulator — leaves its last lines behind;
 # 3. runs ModelEntryDeviceTest with the app's default render surface: cold
 #    start on Dom, `3D` in the navigation bar, back, `3D` again, and a direct
-#    launch into 3D. This run decides the exit status;
+#    launch into 3D — at font scale 1.0 and again at 1.3. These two runs
+#    decide the exit status;
 # 4. if the device is still there, runs it again with each render surface
 #    (SURFACE_VIEW, TEXTURE_VIEW) as comparison evidence;
 # 5. pulls the test's PNGs and JSON (OUT/model-entry) and writes
@@ -72,8 +73,18 @@ instrument() {
   return 0
 }
 
+font() { timeout 15 adb shell settings put system font_scale "$1" >/dev/null 2>&1 || true; }
+
+font 1.0
 instrument default
 GATE=$?
+if [ "$GATE" != 2 ]; then
+  font 1.3
+  instrument font-1.3 -e reportName font-1.3
+  LARGE=$?
+  font 1.0
+  if [ "$LARGE" = 2 ]; then GATE=2; elif [ "$LARGE" != 0 ] && [ "$GATE" = 0 ]; then GATE=1; fi
+fi
 if [ "$GATE" != 2 ]; then
   for surface in SURFACE_VIEW TEXTURE_VIEW; do
     instrument "$surface" -e renderSurface "$surface"
