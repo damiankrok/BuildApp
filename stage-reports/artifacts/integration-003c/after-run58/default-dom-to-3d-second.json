@@ -1,0 +1,33 @@
+{
+    "step": "default-dom-to-3d-second",
+    "surfaceKind": "SURFACE_VIEW",
+    "renderView": "SurfaceView",
+    "renderViewOnScreen": "0 0 320 640",
+    "diagnostics": "surface=SURFACE_VIEW swapChain=alive created=1 destroyed=0 uiHelperReady=true resizes=1 surfaceSize=320x640 viewport=320x640 frames=34/287 skipped=252 uploads=1 renderableObjects=127 visibleObjects=127 sceneRenderables=144 cameraFinite=true resumed=true destroyed=false liveEngines=1 ready=true",
+    "framesRendered": 34,
+    "framesSkipped": 252,
+    "swapChainsCreated": 1,
+    "resizes": 1,
+    "viewport": "320x640",
+    "sceneRenderables": 144,
+    "visibleObjects": 127,
+    "cameraFinite": true,
+    "liveEngines": 1,
+    "surfacePixels": {
+        "region": "48 192 272 416",
+        "pixels": 50176,
+        "nonBackgroundFraction": 0.9569316007653061,
+        "distinctColours": 276,
+        "meanLuminance": 68.34485634963478,
+        "luminanceStdDev": 48.208955933939485
+    },
+    "screenPixels": {
+        "region": "48 192 272 416",
+        "pixels": 50176,
+        "nonBackgroundFraction": 0.957389987244898,
+        "distinctColours": 286,
+        "meanLuminance": 68.34092177533783,
+        "luminanceStdDev": 48.213185719474495
+    },
+    "surfaceScreenCorrelation": 0.9999979593135505
+}
