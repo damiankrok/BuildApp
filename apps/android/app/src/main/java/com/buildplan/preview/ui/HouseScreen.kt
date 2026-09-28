@@ -224,86 +224,96 @@ private fun Identity(
 /** The one big figure, read off the rule, then the current stage and what is being done now. */
 @Composable
 private fun ProgressBlock(view: ProgressView, onOpenStages: () -> Unit) {
+    val percent = view.summary.percent
+    Column(Modifier.fillMaxWidth().padding(top = Space.l)) {
+        if (view.summary.unset || percent == null) UnsetProgress(view, onOpenStages) else RecordedProgress(view, percent, onOpenStages)
+    }
+}
+
+/** Nothing recorded yet: say so, show the empty rule, and offer the one way to start. */
+@Composable
+private fun UnsetProgress(view: ProgressView, onOpenStages: () -> Unit) {
+    val summary = view.summary
+    Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleLarge, color = Palette.Ink, modifier = Modifier.semantics { heading() })
+    Text(
+        stringResource(
+            if (summary.availability == ProgressAvailability.EDITABLE) R.string.progress_unset_body else R.string.progress_preview_only_body,
+        ),
+        style = MaterialTheme.typography.bodyMedium,
+        color = Palette.InkMuted,
+        modifier = Modifier.padding(top = Space.xs, bottom = Space.m),
+    )
+    FoldingRule(view.stages, nowStop = null, previewStop = null, height = RuleDefaults.StaticHeight)
+    if (summary.availability == ProgressAvailability.EDITABLE) {
+        LineButton(stringResource(R.string.progress_set_action), onClick = onOpenStages, borderColor = Palette.Rule, modifier = Modifier.padding(top = Space.m))
+    }
+}
+
+/** The recorded state: the percentage by stages, the rule, and what is being built now. */
+@Composable
+private fun RecordedProgress(view: ProgressView, percent: Int, onOpenStages: () -> Unit) {
     val summary = view.summary
     var explain by rememberSaveable { mutableStateOf(false) }
-    Column(Modifier.fillMaxWidth().padding(top = Space.l)) {
-        if (summary.unset || summary.percent == null) {
-            Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleLarge, color = Palette.Ink, modifier = Modifier.semantics { heading() })
+    val spoken = pluralStringResource(R.plurals.progress_metric_spoken, percent, percent)
+    Row(
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.spacedBy(Space.m),
+        modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) { stateDescription = spoken },
+    ) {
+        Text(StageProgressMetric.format(percent), style = Measure.monumental, color = Palette.Ink)
+        Column(Modifier.weight(1f).padding(bottom = Space.s)) {
+            Text(stringResource(R.string.progress_metric_label), style = MaterialTheme.typography.labelLarge, color = Palette.Ink)
             Text(
-                stringResource(
-                    if (summary.availability == ProgressAvailability.EDITABLE) R.string.progress_unset_body else R.string.progress_preview_only_body,
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = Palette.InkMuted,
-                modifier = Modifier.padding(top = Space.xs, bottom = Space.m),
-            )
-            FoldingRule(view.stages, nowStop = null, previewStop = null, height = RuleDefaults.StaticHeight)
-            if (summary.availability == ProgressAvailability.EDITABLE) {
-                LineButton(stringResource(R.string.progress_set_action), onClick = onOpenStages, borderColor = Palette.Rule, modifier = Modifier.padding(top = Space.m))
-            }
-            return
-        }
-        val spoken = pluralStringResource(R.plurals.progress_metric_spoken, summary.percent, summary.percent)
-        Row(
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(Space.m),
-            modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) { stateDescription = spoken },
-        ) {
-            Text(StageProgressMetric.format(summary.percent), style = Measure.monumental, color = Palette.Ink)
-            Column(Modifier.weight(1f).padding(bottom = Space.s)) {
-                Text(stringResource(R.string.progress_metric_label), style = MaterialTheme.typography.labelLarge, color = Palette.Ink)
-                Text(
-                    stringResource(R.string.progress_done_of, summary.doneCount, summary.stageCount),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Palette.InkMuted,
-                )
-            }
-            TextButton(onClick = { explain = !explain }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-                Text(stringResource(if (explain) R.string.progress_explain_hide else R.string.progress_explain_show), color = Palette.InkMuted)
-            }
-        }
-        AnimatedVisibility(visible = explain) {
-            Text(
-                stringResource(R.string.progress_explain),
+                stringResource(R.string.progress_done_of, summary.doneCount, summary.stageCount),
                 style = MaterialTheme.typography.bodySmall,
                 color = Palette.InkMuted,
-                modifier = Modifier.padding(bottom = Space.s),
             )
         }
-        FoldingRule(view.stages, nowStop = view.nowStop, previewStop = null, height = RuleDefaults.StaticHeight, modifier = Modifier.padding(top = Space.xs))
+        TextButton(onClick = { explain = !explain }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+            Text(stringResource(if (explain) R.string.progress_explain_hide else R.string.progress_explain_show), color = Palette.InkMuted)
+        }
+    }
+    AnimatedVisibility(visible = explain) {
+        Text(
+            stringResource(R.string.progress_explain),
+            style = MaterialTheme.typography.bodySmall,
+            color = Palette.InkMuted,
+            modifier = Modifier.padding(bottom = Space.s),
+        )
+    }
+    FoldingRule(view.stages, nowStop = view.nowStop, previewStop = null, height = RuleDefaults.StaticHeight, modifier = Modifier.padding(top = Space.xs))
 
-        val current = summary.currentStage
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(top = Space.m)
-                .clickable(role = Role.Button, onClick = onOpenStages)
-                .padding(vertical = Space.xs),
-            verticalArrangement = Arrangement.spacedBy(Space.xxs),
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-                val stageNow = view.stages.firstOrNull { it.stageKey == current }
-                StageMark(stageNow?.status, stageNow?.completion ?: 0.0)
-                Text(
-                    when {
-                        current != null -> stringResource(R.string.progress_current_stage, stringResource(current.labelRes()))
-                        summary.lastDone != null -> stringResource(R.string.progress_last_done, stringResource(summary.lastDone.labelRes()))
-                        else -> stringResource(R.string.progress_no_current_stage)
-                    },
-                    style = MaterialTheme.typography.titleMedium,
-                    color = Palette.Ink,
-                    modifier = Modifier.weight(1f),
-                )
-                summary.currentStageCompletionPercent?.let {
-                    Text(StageProgressMetric.format(it), style = Measure.inline, color = Palette.InkMuted)
-                }
-            }
+    val current = summary.currentStage
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = Space.m)
+            .clickable(role = Role.Button, onClick = onOpenStages)
+            .padding(vertical = Space.xs),
+        verticalArrangement = Arrangement.spacedBy(Space.xxs),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+            val stageNow = view.stages.firstOrNull { it.stageKey == current }
+            StageMark(stageNow?.status, stageNow?.completion ?: 0.0)
             Text(
-                summary.currentTask?.let { stringResource(R.string.progress_now_doing, it) } ?: stringResource(R.string.progress_task_unset),
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (summary.currentTask != null) Palette.Ink else Palette.InkMuted,
+                when {
+                    current != null -> stringResource(R.string.progress_current_stage, stringResource(current.labelRes()))
+                    summary.lastDone != null -> stringResource(R.string.progress_last_done, stringResource(summary.lastDone.labelRes()))
+                    else -> stringResource(R.string.progress_no_current_stage)
+                },
+                style = MaterialTheme.typography.titleMedium,
+                color = Palette.Ink,
+                modifier = Modifier.weight(1f),
             )
+            summary.currentStageCompletionPercent?.let {
+                Text(StageProgressMetric.format(it), style = Measure.inline, color = Palette.InkMuted)
+            }
         }
+        Text(
+            summary.currentTask?.let { stringResource(R.string.progress_now_doing, it) } ?: stringResource(R.string.progress_task_unset),
+            style = MaterialTheme.typography.bodyMedium,
+            color = if (summary.currentTask != null) Palette.Ink else Palette.InkMuted,
+        )
     }
 }
 

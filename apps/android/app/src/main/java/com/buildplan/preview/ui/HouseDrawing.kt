@@ -52,18 +52,18 @@ fun HouseDrawing(
             .clickable(role = Role.Button, onClick = onOpen),
         contentAlignment = Alignment.Center,
     ) {
-        // The drawing arrives a moment after the screen (it is computed off the main thread).
-        if (sketch != null) {
-            val layers = remember(sketch, built, current) { Layers.of(sketch, built, current) }
-            Canvas(Modifier.fillMaxWidth().height(height)) {
-                val pad = 12.dp.toPx()
-                val scale = min((size.width - 2 * pad) / sketch.aspect, size.height - 2 * pad)
-                val ox = (size.width - sketch.aspect * scale) / 2
-                val oy = (size.height - scale) / 2
-                drawLines(layers.planned, Palette.InkMuted.copy(alpha = 0.32f), 0.8f, scale, ox, oy)
-                drawLines(layers.built, Palette.Ink, 1.1f, scale, ox, oy)
-                drawLines(layers.current, Palette.Rule, 1.3f, scale, ox, oy)
-            }
+        // The drawing arrives a moment after the screen (it is computed off the main thread);
+        // the canvas is there from the start and draws it when it comes.
+        val layers = remember(sketch, built, current) { sketch?.let { Layers.of(it, built, current) } }
+        Canvas(Modifier.fillMaxWidth().height(height)) {
+            if (sketch == null || layers == null) return@Canvas
+            val pad = 12.dp.toPx()
+            val scale = min((size.width - 2 * pad) / sketch.aspect, size.height - 2 * pad)
+            val ox = (size.width - sketch.aspect * scale) / 2
+            val oy = (size.height - scale) / 2
+            drawLines(layers.planned, Palette.InkMuted.copy(alpha = 0.32f), 0.8f, scale, ox, oy)
+            drawLines(layers.built, Palette.Ink, 1.1f, scale, ox, oy)
+            drawLines(layers.current, Palette.Rule, 1.3f, scale, ox, oy)
         }
     }
 }

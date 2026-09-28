@@ -99,7 +99,7 @@ class ProductFlowDeviceTest {
         // 1. Dom, nothing recorded: "Postęp nieustawiony" and the way to set it; no engine.
         evidence.awaitNode(hasText(evidence.string(R.string.progress_unset)))
         assertNull("Dom composes no viewport", preview.renderDiagnostics)
-        assertDrawingInked(preview, evidence.capture("01-dom-unset"), "01 Dom, progress unset")
+        assertDrawingInked(preview, progress, evidence.capture("01-dom-unset"), "01 Dom, progress unset")
 
         // 2. Dom -> 3D through the bar: the whole design, "Postęp nieustawiony".
         compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
@@ -146,7 +146,7 @@ class ProductFlowDeviceTest {
         compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.progress_current_stage, evidence.string(R.string.stage_roof))))
         evidence.awaitNode(hasText(evidence.string(R.string.progress_now_doing, TASK)))
-        assertDrawingInked(preview, evidence.capture("05-dom-progress"), "05 Dom with progress")
+        assertDrawingInked(preview, progress, evidence.capture("05-dom-progress"), "05 Dom with progress")
 
         // 6. 3D now: the house as it stands by the owner's account — no joinery yet.
         compose.onNode(hasText(evidence.string(R.string.house_open_3d)) and hasClickAction()).performClick()
@@ -279,12 +279,21 @@ class ProductFlowDeviceTest {
     }
 
     /** Dom's drawing of the house is on screen, in ink: a blank hero is a failed Dom. */
-    private fun assertDrawingInked(preview: PreviewViewModel, shot: Bitmap, step: String) {
+    private fun assertDrawingInked(preview: PreviewViewModel, progress: ProgressViewModel, shot: Bitmap, step: String) {
         val title = checkNotNull(preview.scene).title
         val node = compose.onNode(hasContentDescription(evidence.string(R.string.house_drawing_description, title))).fetchSemanticsNode()
         val b = node.boundsInWindow
-        val ink = Evidence.inkPixels(shot, android.graphics.Rect(b.left.toInt(), b.top.toInt(), b.right.toInt(), b.bottom.toInt()))
+        val box = android.graphics.Rect(b.left.toInt(), b.top.toInt(), b.right.toInt(), b.bottom.toInt())
+        val ink = Evidence.inkPixels(shot, box)
+        evidence.fact("$step: drawing box", box.toShortString())
+        evidence.fact("$step: drawing segments", progress.sketch?.segmentCount)
         evidence.fact("$step: drawing ink pixels", ink)
+        if (ink < MIN_DRAWING_INK) {
+            // Tell a late frame from a drawing that never comes: look again after a pause, then fail either way.
+            SystemClock.sleep(3_000)
+            val later = Evidence.inkPixels(evidence.capture("${step.take(2)}-diagnostic-late"), box)
+            evidence.fact("$step: drawing ink pixels 3 s later", later)
+        }
         assertTrue("$step: the house drawing is drawn ($ink ink pixels)", ink >= MIN_DRAWING_INK)
     }
 

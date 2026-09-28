@@ -85,42 +85,47 @@ fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel
                 Text(stringResource(R.string.stages_title), style = MaterialTheme.typography.headlineSmall, color = Palette.Ink)
                 Text(stringResource(R.string.house_loading), style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
             }
-            return
+        } else {
+            StageList(view, progress, sceneTitle, onShowInModel)
         }
-        var openStage by rememberSaveable { mutableStateOf(view.summary.currentStage?.let { "stage-${it.key}" }) }
-        var notice by remember { mutableStateOf<String?>(null) }
-        val editable = view.summary.availability == ProgressAvailability.EDITABLE
+    }
+}
 
-        val outcome = progress.lastOutcome
-        val refusedText = outcome?.let { outcomeMessage(it, view) }
-        LaunchedEffect(outcome) {
-            notice = refusedText
-            if (outcome != null) progress.consumeOutcome()
-        }
+@Composable
+private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit) {
+    var openStage by rememberSaveable { mutableStateOf(view.summary.currentStage?.let { "stage-${it.key}" }) }
+    var notice by remember { mutableStateOf<String?>(null) }
+    val editable = view.summary.availability == ProgressAvailability.EDITABLE
 
-        LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
-            item { Header(view, sceneTitle) }
-            item { Problems(view) }
-            if (notice != null) {
-                item {
-                    Notice(notice.orEmpty(), onDismiss = { notice = null })
-                }
+    val outcome = progress.lastOutcome
+    val refusedText = outcome?.let { outcomeMessage(it, view) }
+    LaunchedEffect(outcome) {
+        notice = refusedText
+        if (outcome != null) progress.consumeOutcome()
+    }
+
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
+        item { Header(view, sceneTitle) }
+        item { Problems(view) }
+        if (notice != null) {
+            item {
+                Notice(notice.orEmpty(), onDismiss = { notice = null })
             }
-            itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
-                StageRow(
-                    index = index,
-                    stage = stage,
-                    open = openStage == stage.stageId,
-                    view = view,
-                    editable = editable,
-                    hasGeometry = stage.stageKey?.let { progress.session?.projection?.hasGeometry(it) } ?: false,
-                    onToggle = { openStage = if (openStage == stage.stageId) null else stage.stageId },
-                    progress = progress,
-                    onShowInModel = onShowInModel,
-                )
-            }
-            item { Footer() }
         }
+        itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
+            StageRow(
+                index = index,
+                stage = stage,
+                open = openStage == stage.stageId,
+                view = view,
+                editable = editable,
+                hasGeometry = stage.stageKey?.let { progress.session?.projection?.hasGeometry(it) } ?: false,
+                onToggle = { openStage = if (openStage == stage.stageId) null else stage.stageId },
+                progress = progress,
+                onShowInModel = onShowInModel,
+            )
+        }
+        item { Footer() }
     }
 }
 
