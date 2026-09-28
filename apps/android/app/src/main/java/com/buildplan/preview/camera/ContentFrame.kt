@@ -30,6 +30,16 @@ data class ContentInsets(val left: Int = 0, val top: Int = 0, val right: Int = 0
  * Filament's `Camera.setShift` and `Camera.setScaling`.
  */
 data class ContentFrame(val shiftX: Double, val shiftY: Double, val scale: Double) {
+    /**
+     * The shift in the units Filament's `Camera.setShift` takes: HALF the NDC
+     * translation. Filament stores `shift * 2` and adds it in clip space
+     * (FCamera: `mShiftCS = shift * 2.0`; projection `[scale | shiftCS] × P`),
+     * so passing the NDC value moved the house twice as far as the free
+     * rectangle's centre — down and left, under the chrome's opposite edge.
+     */
+    val filamentShiftX: Double get() = shiftX / 2.0
+    val filamentShiftY: Double get() = shiftY / 2.0
+
     companion object {
         val IDENTITY = ContentFrame(0.0, 0.0, 1.0)
 

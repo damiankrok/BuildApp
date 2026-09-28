@@ -343,7 +343,7 @@ class FilamentModelRenderer(
         // whole-viewport image, uniformly scaled and moved there. Presentation only.
         val frame = ContentFrame.of(viewportWidth, viewportHeight, insets)
         camera.setScaling(frame.scale, frame.scale)
-        camera.setShift(frame.shiftX, frame.shiftY)
+        camera.setShift(frame.filamentShiftX, frame.filamentShiftY)
     }
 
     fun setViewport(width: Int, height: Int) {

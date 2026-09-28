@@ -37,6 +37,21 @@ class ContentFrameTest {
         assertEquals(0.8, f.scale, 1e-9)
     }
 
+    /**
+     * Filament's Camera.setShift stores twice what it is given (FCamera:
+     * `mShiftCS = shift * 2.0`, added in clip space): the renderer passes half
+     * the NDC shift, or the house lands twice as far as the free area's centre.
+     */
+    @Test
+    fun filamentTakesHalfTheNdcShift() {
+        val f = ContentFrame.of(1080, 2400, ContentInsets(top = 270, right = 210, bottom = 450))
+        assertEquals(f.shiftX / 2.0, f.filamentShiftX, 1e-12)
+        assertEquals(f.shiftY / 2.0, f.filamentShiftY, 1e-12)
+        // The free area's centre is 105 px left of the screen's centre: -105 / 540 = -0.194 NDC, -0.097 for Filament.
+        assertEquals(-105.0 / 540.0, f.shiftX, 1e-9)
+        assertEquals(-105.0 / 1080.0, f.filamentShiftX, 1e-9)
+    }
+
     @Test
     fun withoutChromeTheFitAspectIsTheViewportsNarrowerSide() {
         assertEquals(1080.0 / 2400.0, ContentFrame.fitAspect(1080, 2400, ContentInsets.NONE), 1e-9)

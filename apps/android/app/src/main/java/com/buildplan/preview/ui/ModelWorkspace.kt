@@ -125,7 +125,10 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         label = "frameBottom",
     )
     val rest = ContentInsets(top = topInset, right = railInset, bottom = timelineInset)
-    SideEffect { model.onChromeInsets(rest, rest.copy(bottom = frameBottom)) }
+    // Both read here, in composition, so each change recomposes and reaches the renderer — read
+    // only inside the SideEffect, the eased bottom never did, and the frame kept its first value.
+    val drawn = rest.copy(bottom = frameBottom)
+    SideEffect { model.onChromeInsets(rest, drawn) }
 
     Box(Modifier.fillMaxSize()) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
