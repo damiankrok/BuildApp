@@ -23,8 +23,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,8 +36,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextOverflow
@@ -99,7 +95,8 @@ fun TimelineRail(
                     targetState = previewStop,
                     transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
                     label = "railHeader",
-                    modifier = Modifier.weight(1f).padding(top = Space.xs).semantics { liveRegion = LiveRegionMode.Polite },
+                    // No live region: the rule speaks its own new state as it moves, once.
+                    modifier = Modifier.weight(1f).padding(top = Space.xs),
                 ) { stop ->
                     if (stop != null) {
                         PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, onReturnToNow)
@@ -112,7 +109,7 @@ fun TimelineRail(
                 }
                 val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
                 IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
-                    Icon(Icons.Filled.KeyboardArrowUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.rotate(chevron))
+                    Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.icon).rotate(chevron))
                 }
             }
 
@@ -127,7 +124,8 @@ fun TimelineRail(
                 stateText = previewStop?.let { stringResource(R.string.timeline_preview_of, stopNames[it]) }
                     ?: nowStateText(summary.unset, summary.percentText, summary.currentStage),
                 stopName = { stopNames[it] },
-                modifier = Modifier.padding(horizontal = Space.l),
+                // A gap under the header's action, so a low tap on "Wróć do teraz" never scrubs.
+                modifier = Modifier.padding(horizontal = Space.l).padding(top = Space.s),
             )
 
             AnimatedVisibility(visible = expanded, enter = motion.unfoldEnter(), exit = motion.unfoldExit()) {

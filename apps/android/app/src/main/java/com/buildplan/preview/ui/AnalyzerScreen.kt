@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -101,7 +103,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit) {
     var settingsOpen by rememberSaveable { mutableStateOf(false) }
-    Column(Modifier.fillMaxSize().background(Palette.Ground).statusBarsPadding()) {
+    Column(Modifier.fillMaxSize().background(Palette.Ground).wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax).statusBarsPadding()) {
         Row(Modifier.fillMaxWidth().padding(horizontal = Space.xs, vertical = Space.xs), verticalAlignment = Alignment.CenterVertically) {
             val back = stringResource(R.string.analyzer_back)
             IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = back }) {

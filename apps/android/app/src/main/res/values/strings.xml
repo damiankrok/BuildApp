@@ -22,6 +22,11 @@
     <string name="house_loading">Wczytuję model…</string>
     <string name="house_failed">Nie udało się wczytać modelu</string>
     <string name="house_no_bundles">Ta wersja aplikacji nie zawiera żadnego modelu. Dodaj dom z linku.</string>
+    <string name="load_problem_missing">Tego modelu nie ma już na telefonie. Wybierz inny dom albo przeanalizuj link ponownie.</string>
+    <string name="load_problem_damaged">Plik modelu jest uszkodzony: nie zgadza się z tym, co sprawdzono przy zapisie. Usuń go i przeanalizuj link ponownie.</string>
+    <string name="load_problem_unreadable">Nie da się odczytać pliku modelu. Usuń go i przeanalizuj link ponownie.</string>
+    <string name="load_problem_details_show">Pokaż szczegóły techniczne</string>
+    <string name="load_problem_details_hide">Ukryj szczegóły techniczne</string>
     <string name="house_open_3d">Otwórz w 3D</string>
     <string name="house_add_action">Dodaj dom z linku</string>
     <string name="house_analysis_running_detail">Analiza linku w toku · %1$d%%</string>
@@ -199,6 +204,10 @@
     <string name="material_glazing">szkło</string>
     <string name="material_partition">ścianka działowa</string>
     <string name="material_chimney">obudowa komina</string>
+    <string name="layer_elements_show">Wybierz element z listy (%1$d)</string>
+    <string name="layer_elements_hide">Ukryj listę elementów (%1$d)</string>
+    <string name="view_zoom_in">Przybliż</string>
+    <string name="view_zoom_out">Oddal</string>
     <string name="inspector_dimensions">Wymiary (dł. × szer. × wys.)</string>
     <string name="inspector_model_name">Nazwa w modelu</string>
     <string name="inspector_model_kind">Rodzaj w modelu</string>

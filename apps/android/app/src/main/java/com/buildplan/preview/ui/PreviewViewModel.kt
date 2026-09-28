@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.buildplan.preview.camera.ContentFrame
 import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.camera.OrbitCamera
@@ -18,15 +19,21 @@ import com.buildplan.preview.render.RenderSurfaceKind
 import com.buildplan.preview.scene.DownloadedScenes
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneEntry
+import com.buildplan.preview.scene.SceneLoadProblem
 import com.buildplan.preview.scene.SceneLoadResult
 import com.buildplan.preview.scene.SceneRepository
 import com.buildplan.preview.scene.ViewerState
 import com.buildplan.preview.scene.VisibilityMode
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 sealed interface ScreenState {
     data object Loading : ScreenState
     data class Ready(val scene: ModelScene) : ScreenState
-    data class Failed(val message: String) : ScreenState
+    /** [message] is technical (for diagnostics); [problem], null for "no model at all", is what the owner is told. */
+    data class Failed(val message: String, val problem: SceneLoadProblem?) : ScreenState
 }
 
 /**
@@ -108,7 +115,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         scenes.firstOrNull()?.let { open(it) }
-            ?: run { screen = ScreenState.Failed(application.getString(com.buildplan.preview.R.string.house_no_bundles)) }
+            ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
     }
 
     /**
@@ -129,10 +136,25 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         return true
     }
 
+    /**
+     * Open a scene. Reading, hashing and parsing a bundle takes the main thread
+     * long enough to freeze a frame, so it runs on a background thread while
+     * the screens say "Wczytywanie"; a later open replaces an unfinished one.
+     */
     fun open(entry: SceneEntry) {
+        loading?.cancel()
         screen = ScreenState.Loading
-        when (val result = repository.load(entry)) {
-            is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message)
+        loading = viewModelScope.launch {
+            val result = withContext(Dispatchers.Default) { repository.load(entry) }
+            show(result)
+        }
+    }
+
+    private var loading: Job? = null
+
+    private fun show(result: SceneLoadResult) {
+        when (result) {
+            is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message, result.problem)
             is SceneLoadResult.Ok -> {
                 val model = result.scene
                 camera = OrbitCamera(model.bounds)

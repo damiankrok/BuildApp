@@ -25,10 +25,10 @@ const REQUIRED = {
     '06-3d-now', '07-3d-history-walls', '08-3d-history-pre-joinery', '09-3d-history-joinery',
     '10-3d-clay-history-walls', '11-3d-inspector', '12-3d-again',
   ],
-  adaptive: ['01-dom', '02-3d-now', '03-3d-history-walls', '04-etapy'],
+  adaptive: ['01-dom', '02-3d-now', '03-3d-history-walls', '04-3d-details-panel', '05-etapy'],
   lifecycle: ['01-3d-after-resume', '02-dom-after-restart'],
-  unhappy: ['01-corrupt-recovered', '02-stage-without-geometry', '03-unsupported-link'],
-  collisions: ['01-roof-off-history', '02-ground-only-history', '03-selection-history-inspector', '04-line-history'],
+  unhappy: ['01-corrupt-recovered', '02-refusal-said', '03-stage-without-geometry', '04-unsupported-link'],
+  collisions: ['01-roof-off-history', '02-ground-only-history', '03-selection-history-inspector', '04-line-history', '05-element-from-list'],
 }
 
 const args = process.argv.slice(2)

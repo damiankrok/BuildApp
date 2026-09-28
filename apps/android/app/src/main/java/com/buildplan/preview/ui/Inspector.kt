@@ -61,6 +61,8 @@ fun Inspector(
     visibleNow: Boolean,
     isolating: Boolean,
     maxHeight: Dp,
+    /** A side panel on the end edge (a phone on its side) rather than a sheet from the bottom. */
+    side: Boolean,
     onClose: () -> Unit,
     onFrame: () -> Unit,
     onIsolate: () -> Unit,
@@ -74,7 +76,10 @@ fun Inspector(
         modifier
             .fillMaxWidth()
             .heightIn(max = maxHeight)
-            .background(Palette.Sheet, RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet)),
+            .background(
+                Palette.Sheet,
+                if (side) RoundedCornerShape(topStart = Radius.sheet, bottomStart = Radius.sheet) else RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet),
+            ),
     ) {
         val size = selected.bounds.size
         val plan = if (selected.bounds.isEmpty) null else "${metresValue(maxOf(size.x, size.z))} × ${metres(minOf(size.x, size.z))}"

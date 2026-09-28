@@ -216,7 +216,7 @@ class DownloadedScenes(
      * on disk since it was verified is reported, never rendered.
      */
     override fun load(key: String): SceneLoadResult {
-        val entry = find(key) ?: return SceneLoadResult.Failed("The downloaded analysis $key is no longer on this phone.")
+        val entry = find(key) ?: return SceneLoadResult.Failed("The downloaded analysis $key is no longer on this phone.", SceneLoadProblem.MISSING)
         val file = sceneFile(entry.sceneSha256)
         val bytes = try {
             file.readBytes()
@@ -227,13 +227,14 @@ class DownloadedScenes(
             return SceneLoadResult.Failed(
                 "The downloaded analysis ${entry.label} is damaged: its file no longer matches the hash it was verified with. " +
                     "Delete it and analyze the link again.",
+                SceneLoadProblem.DAMAGED,
             )
         }
         return when (val parsed = BundleParser.parse(bytes.decodeToString())) {
             is BundleResult.Failure -> SceneLoadResult.Failed("The downloaded analysis ${entry.label} can't be opened: ${parsed.message}")
             is BundleResult.Ok ->
                 if (parsed.bundle.contentHash != entry.sceneContentHash) {
-                    SceneLoadResult.Failed("The downloaded analysis ${entry.label} does not match its index entry. Delete it and analyze the link again.")
+                    SceneLoadResult.Failed("The downloaded analysis ${entry.label} does not match its index entry. Delete it and analyze the link again.", SceneLoadProblem.DAMAGED)
                 } else {
                     SceneLoadResult.Ok(ModelScene.from(parsed.bundle, entry.key, entry.title.ifBlank { entry.label }, entry.subtitle))
                 }

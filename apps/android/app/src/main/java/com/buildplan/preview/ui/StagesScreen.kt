@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +31,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -79,7 +85,8 @@ import kotlin.math.roundToInt
 @Composable
 fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit) {
     val view = progress.view
-    Column(Modifier.fillMaxSize().statusBarsPadding()) {
+    // A wide window centres the list at a readable measure instead of stretching its rows.
+    Column(Modifier.fillMaxSize().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax).statusBarsPadding()) {
         if (view == null) {
             Column(Modifier.padding(Space.l)) {
                 Text(stringResource(R.string.stages_title), style = MaterialTheme.typography.headlineSmall, color = Palette.Ink)
@@ -94,38 +101,41 @@ fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel
 @Composable
 private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit) {
     var openStage by rememberSaveable { mutableStateOf(view.summary.currentStage?.let { "stage-${it.key}" }) }
-    var notice by remember { mutableStateOf<String?>(null) }
     val editable = view.summary.availability == ProgressAvailability.EDITABLE
 
+    // A refusal or a failed save is said where the owner is looking — at the foot of the screen,
+    // announced, gone by itself — not as a list item scrolled away from the edit that caused it.
+    val snackbar = remember { SnackbarHostState() }
     val outcome = progress.lastOutcome
     val refusedText = outcome?.let { outcomeMessage(it, view) }
     LaunchedEffect(outcome) {
-        notice = refusedText
-        if (outcome != null) progress.consumeOutcome()
+        if (outcome == null) return@LaunchedEffect
+        progress.consumeOutcome()
+        if (refusedText != null) snackbar.showSnackbar(refusedText, duration = SnackbarDuration.Short)
     }
 
-    LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
-        item { Header(view, sceneTitle) }
-        item { Problems(view) }
-        if (notice != null) {
-            item {
-                Notice(notice.orEmpty(), onDismiss = { notice = null })
+    Box(Modifier.fillMaxSize()) {
+        LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
+            item { Header(view, sceneTitle) }
+            item { Problems(view) }
+            itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
+                StageRow(
+                    index = index,
+                    stage = stage,
+                    open = openStage == stage.stageId,
+                    view = view,
+                    editable = editable,
+                    hasGeometry = stage.stageKey?.let { progress.session?.projection?.hasGeometry(it) } ?: false,
+                    onToggle = { openStage = if (openStage == stage.stageId) null else stage.stageId },
+                    progress = progress,
+                    onShowInModel = onShowInModel,
+                )
             }
+            item { Footer() }
         }
-        itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
-            StageRow(
-                index = index,
-                stage = stage,
-                open = openStage == stage.stageId,
-                view = view,
-                editable = editable,
-                hasGeometry = stage.stageKey?.let { progress.session?.projection?.hasGeometry(it) } ?: false,
-                onToggle = { openStage = if (openStage == stage.stageId) null else stage.stageId },
-                progress = progress,
-                onShowInModel = onShowInModel,
-            )
+        SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter).padding(Space.s)) { data ->
+            Snackbar(data, containerColor = Palette.Sheet, contentColor = Palette.Ink, shape = RoundedCornerShape(Radius.panel))
         }
-        item { Footer() }
     }
 }
 
@@ -177,27 +187,6 @@ private fun Problems(view: ProgressView) {
     }
 }
 
-@Composable
-private fun Notice(text: String, onDismiss: () -> Unit) {
-    // A notice leaves by itself: nothing waits on it.
-    LaunchedEffect(text) {
-        kotlinx.coroutines.delay(NOTICE_MS)
-        onDismiss()
-    }
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Space.l, vertical = Space.xs)
-            .background(Palette.Raised, RoundedCornerShape(Radius.panel))
-            .padding(Space.m),
-        horizontalArrangement = Arrangement.spacedBy(Space.s),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(ShellIcons.caution, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
-        Text(text, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink, modifier = Modifier.weight(1f))
-    }
-}
-
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun StageRow(
@@ -228,7 +217,7 @@ private fun StageRow(
                 .fillMaxWidth()
                 .heightIn(min = 56.dp)
                 .clickable(role = Role.Button, onClick = onToggle)
-                .semantics(mergeDescendants = true) { stateDescription = "$state, $openState" }
+                .semantics(mergeDescendants = true) { stateDescription = openState }
                 .padding(horizontal = Space.l, vertical = Space.s),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Space.m),
@@ -415,5 +404,3 @@ private fun outcomeMessage(outcome: EditOutcome, view: ProgressView): String? = 
         ProgressRejection.UNKNOWN_STAGE -> stringResource(R.string.refused_unknown_stage)
     }
 }
-
-private const val NOTICE_MS = 6_000L

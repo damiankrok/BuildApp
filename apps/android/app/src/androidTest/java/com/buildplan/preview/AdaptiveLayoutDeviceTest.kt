@@ -97,6 +97,23 @@ class AdaptiveLayoutDeviceTest {
         evidence.capture("03-3d-history-walls")
         progress.returnToNow()
 
+        // Cycle 2, C2-02: the details on a phone on its side are a panel at the end edge, beside the
+        // house, not a sheet over the whole short window.
+        val scene = checkNotNull(preview.scene)
+        val wall = checkNotNull(session.projection.introducedAt(ConstructionStageKey.WALLS).firstOrNull { preview.viewer.isVisible(scene, it) })
+        compose.runOnIdle { preview.onPicked(wall, System.currentTimeMillis()) }
+        compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
+        val panel = compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).fetchSemanticsNode().boundsInRoot
+        compose.waitUntil(5_000) { preview.contentInsets.right > dom.width / 4 }
+        evidence.settleFrames(now)
+        val details = evidence.capture("04-3d-details-panel", "selected" to wall)
+        evidence.fact("details panel close button", panel.toString())
+        assertTrue("the panel stands at the end edge: its close button is in the right half", panel.left > details.width / 2f)
+        assertTrue("the frame gives the house the space left of the panel (r=${preview.contentInsets.right})", preview.contentInsets.right > details.width / 4)
+        compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
+        compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
+
         // Turning back recreates the activity: one engine, the same state, drawn again.
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT }
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { evidence.app.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT }
@@ -111,7 +128,7 @@ class AdaptiveLayoutDeviceTest {
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
         compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
-        evidence.capture("04-etapy")
+        evidence.capture("05-etapy")
         evidence.fact("result", "PASS")
     }
 

@@ -56,7 +56,7 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
 
     override fun load(key: String): SceneLoadResult {
         val entry = index().firstOrNull { it.key == key }
-            ?: return SceneLoadResult.Failed("Scene $key is not part of this build.")
+            ?: return SceneLoadResult.Failed("Scene $key is not part of this build.", SceneLoadProblem.MISSING)
         return load(entry)
     }
 
@@ -64,7 +64,7 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
         val text = try {
             read(entry.asset)
         } catch (e: IOException) {
-            return SceneLoadResult.Failed("Scene asset ${entry.asset} is missing from this build.")
+            return SceneLoadResult.Failed("Scene asset ${entry.asset} is missing from this build.", SceneLoadProblem.MISSING)
         }
         return when (val parsed = BundleParser.parse(text)) {
             is BundleResult.Failure -> SceneLoadResult.Failed(parsed.message)
@@ -74,7 +74,7 @@ class BundledScenes(private val read: (name: String) -> String) : SceneSource {
                 // they disagree the build is inconsistent and saying so beats
                 // rendering something that is not what the index promised.
                 if (bundle.contentHash != entry.contentHash) {
-                    SceneLoadResult.Failed("Scene ${entry.key} does not match the index: the build is inconsistent.")
+                    SceneLoadResult.Failed("Scene ${entry.key} does not match the index: the build is inconsistent.", SceneLoadProblem.DAMAGED)
                 } else {
                     SceneLoadResult.Ok(ModelScene.from(bundle, entry.key, entry.title, entry.subtitle))
                 }
@@ -119,7 +119,7 @@ class SceneRepository(
         SceneSourceKind.DOWNLOADED -> {
             val store = downloaded
             if (store == null || !DownloadedScenes.isDownloadedKey(entry.key)) {
-                SceneLoadResult.Failed("Downloaded analyses are not available.")
+                SceneLoadResult.Failed("Downloaded analyses are not available.", SceneLoadProblem.MISSING)
             } else {
                 store.load(entry.key).also { if (it is SceneLoadResult.Ok) store.touch(entry.key) }
             }
@@ -129,5 +129,22 @@ class SceneRepository(
 
 sealed interface SceneLoadResult {
     data class Ok(val scene: ModelScene) : SceneLoadResult
-    data class Failed(val message: String) : SceneLoadResult
+
+    /**
+     * [message] is the technical account (English, for diagnostics); [problem]
+     * is what the owner is told, in Polish, by the screens.
+     */
+    data class Failed(val message: String, val problem: SceneLoadProblem = SceneLoadProblem.UNREADABLE) : SceneLoadResult
+}
+
+/** Why a model could not be opened, as the owner needs to know it. */
+enum class SceneLoadProblem {
+    /** It is not on this phone (any more) or not part of this build. */
+    MISSING,
+
+    /** Its file no longer matches what was verified. */
+    DAMAGED,
+
+    /** It could not be read or parsed. */
+    UNREADABLE,
 }

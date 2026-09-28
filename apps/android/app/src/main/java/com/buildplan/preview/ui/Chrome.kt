@@ -28,6 +28,9 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -36,6 +39,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -43,6 +47,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.buildplan.preview.R
+import com.buildplan.preview.scene.SceneLoadProblem
 
 /*
  * The small pieces every screen shares, in the Folding Rule's grammar: ink
@@ -99,6 +105,34 @@ fun QuietAction(text: String, onClick: () -> Unit, modifier: Modifier = Modifier
     ) {
         if (icon != null) Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(Sizes.iconSmall))
         Text(text, style = MaterialTheme.typography.labelLarge, color = color)
+    }
+}
+
+/**
+ * Why a model could not be opened, in the owner's words, with the technical
+ * account (English, for whoever diagnoses it) folded underneath. A null
+ * [problem] means the build carries no model at all.
+ */
+@Composable
+fun LoadProblem(problem: SceneLoadProblem?, message: String, modifier: Modifier = Modifier) {
+    var details by rememberSaveable { mutableStateOf(false) }
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(Space.xs)) {
+        Text(
+            stringResource(
+                when (problem) {
+                    null -> R.string.house_no_bundles
+                    SceneLoadProblem.MISSING -> R.string.load_problem_missing
+                    SceneLoadProblem.DAMAGED -> R.string.load_problem_damaged
+                    SceneLoadProblem.UNREADABLE -> R.string.load_problem_unreadable
+                },
+            ),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Palette.InkMuted,
+        )
+        if (problem != null) {
+            QuietAction(stringResource(if (details) R.string.load_problem_details_hide else R.string.load_problem_details_show), onClick = { details = !details })
+            if (details) StatusText(message)
+        }
     }
 }
 

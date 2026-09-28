@@ -22,6 +22,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
@@ -70,6 +75,10 @@ fun ToolRail(
     onIsolate: () -> Unit,
     onShowAll: () -> Unit,
     onReset: () -> Unit,
+    /** Choose an element without touching the model: for TalkBack, switch access, a gloved hand. */
+    onSelectElement: (String) -> Unit,
+    /** Closer (below 1) or farther (above 1), without a pinch. */
+    onZoom: (Double) -> Unit,
     paneMaxHeight: Dp,
     modifier: Modifier = Modifier,
 ) {
@@ -114,8 +123,8 @@ fun ToolRail(
                         ) {
                             when (tool) {
                                 Tool.LOOK -> LookPane(state, onPresentation, onStyle)
-                                Tool.LAYERS -> LayersPane(state, onVisibility, onIsolate, onShowAll)
-                                Tool.VIEW -> ViewPane(scene, onPreset, onReset)
+                                Tool.LAYERS -> LayersPane(scene, state, onVisibility, onIsolate, onShowAll, onSelectElement)
+                                Tool.VIEW -> ViewPane(scene, onPreset, onReset, onZoom)
                                 else -> Unit
                             }
                         }
@@ -166,6 +175,9 @@ fun ToolRail(
         }
     }
 }
+
+/** One step of "Przybliż" (and its inverse for "Oddal"): a fifth closer. */
+private const val ZOOM_STEP = 0.8
 
 object RailDefaults {
     val ButtonWidth = 64.dp
@@ -222,7 +234,14 @@ private fun LookPane(state: ViewerState, onPresentation: (PresentationMode) -> U
 }
 
 @Composable
-private fun LayersPane(state: ViewerState, onVisibility: (VisibilityMode) -> Unit, onIsolate: () -> Unit, onShowAll: () -> Unit) {
+private fun LayersPane(
+    scene: ModelScene,
+    state: ViewerState,
+    onVisibility: (VisibilityMode) -> Unit,
+    onIsolate: () -> Unit,
+    onShowAll: () -> Unit,
+    onSelectElement: (String) -> Unit,
+) {
     for (mode in VisibilityMode.entries) {
         PanelOption(stringResource(mode.labelRes()), selected = mode == state.visibility && !state.isIsolating, onClick = { onVisibility(mode) })
     }
@@ -235,10 +254,41 @@ private fun LayersPane(state: ViewerState, onVisibility: (VisibilityMode) -> Uni
         onClick = onIsolate,
     )
     PanelAction(stringResource(R.string.layer_show_all), onClick = onShowAll)
+    ElementList(scene, state, onSelectElement)
+}
+
+/**
+ * Every element drawn now, by name and storey: the way to an element's
+ * details without tapping the model (TalkBack, switch access, a gloved hand
+ * on site). Folded until asked for; choosing one selects and frames it.
+ */
+@Composable
+private fun ElementList(scene: ModelScene, state: ViewerState, onSelectElement: (String) -> Unit) {
+    var open by rememberSaveable { mutableStateOf(false) }
+    val drawn = remember(scene, state) {
+        val visible = state.visibleObjectIds(scene)
+        scene.objects.filter { it.id in visible && it.hasGeometry }
+    }
+    PanelRule()
+    PanelAction(
+        stringResource(if (open) R.string.layer_elements_hide else R.string.layer_elements_show, drawn.size),
+        onClick = { open = !open },
+    )
+    if (open) {
+        for (obj in drawn) {
+            val storey = ElementWords.storey(obj.metadata?.levelLabel ?: scene.levelLabel(obj.levelId), scene.levels.firstOrNull { it.id == obj.levelId }?.index)
+            PanelOption(
+                label = elementTitle(obj),
+                supporting = storey?.let { storeyText(it) },
+                selected = obj.id == state.selectedObjectId,
+                onClick = { onSelectElement(obj.id) },
+            )
+        }
+    }
 }
 
 @Composable
-private fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset: () -> Unit) {
+private fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset: () -> Unit, onZoom: (Double) -> Unit) {
     val available = ViewPreset.availableIn(scene).toSet()
     fun group(label: Int, presets: List<ViewPreset>) = label to presets.filter { it in available }
     val groups = listOf(
@@ -253,6 +303,9 @@ private fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset:
         if (label != R.string.view_group_whole) PanelGroupLabel(stringResource(label))
         for (preset in presets) PanelAction(stringResource(preset.labelRes()), onClick = { onPreset(preset) }, supporting = preset.supportingRes()?.let { stringResource(it) })
     }
+    PanelRule()
+    PanelAction(stringResource(R.string.view_zoom_in), onClick = { onZoom(ZOOM_STEP) })
+    PanelAction(stringResource(R.string.view_zoom_out), onClick = { onZoom(1.0 / ZOOM_STEP) })
     PanelRule()
     PanelAction(stringResource(R.string.view_reset), onClick = onReset, supporting = stringResource(R.string.view_reset_detail))
 }

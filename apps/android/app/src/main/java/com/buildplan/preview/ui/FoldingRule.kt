@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
@@ -131,12 +133,19 @@ fun FoldingRule(
             }
     }
 
-    Box(modifier.fillMaxWidth().height(height).then(interaction)) {
-        Canvas(Modifier.fillMaxWidth().height(height)) {
+    // Tall enough for the numerals at the owner's font scale: a fixed height dropped them.
+    val density = LocalDensity.current
+    val numeralHeight = remember(measurer, density) { with(density) { measurer.measure("15", Measure.numeral).size.height.toDp() } }
+    val ruleHeight = maxOf(height, NUMERAL_TOP + numeralHeight + 2.dp)
+    Box(modifier.fillMaxWidth().height(ruleHeight).then(interaction)) {
+        Canvas(Modifier.fillMaxWidth().height(ruleHeight)) {
             drawRule(stages, nowStop, previewStop?.let { cursorAt }, measurer)
         }
     }
 }
+
+/** Where the numerals start under the segments: tag 7 + gap 5 + segment 10 + tick gap 3 + tick 5. */
+private val NUMERAL_TOP = 30.dp
 
 object RuleDefaults {
     /** The whole control: the tags above, the segments, the numerals below; the touch band is all of it. */

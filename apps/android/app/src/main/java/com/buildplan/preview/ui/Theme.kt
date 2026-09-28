@@ -100,6 +100,9 @@ object Sizes {
     val touch = 48.dp
     val icon = 22.dp
     val iconSmall = 18.dp
+
+    /** The widest a screen's column grows on a wide window: centred at a readable measure, never stretched. */
+    val contentMax = 720.dp
 }
 
 /** The rule's own face: condensed, tabular numerals for measured values. */

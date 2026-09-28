@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,6 +42,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.PRODUCT_LOCALE
 import com.buildplan.preview.R
@@ -47,6 +51,7 @@ import com.buildplan.preview.progress.ProgressAvailability
 import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.progress.StageProgressMetric
 import com.buildplan.preview.scene.DownloadedSceneEntry
+import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneSourceKind
 import kotlin.math.roundToInt
 
@@ -75,52 +80,46 @@ fun HouseScreen(
     onOpenStages: () -> Unit,
 ) {
     var housesOpen by rememberSaveable { mutableStateOf(false) }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = Space.l)
-            .padding(bottom = Space.xl),
-    ) {
-        when (val screen = preview.screen) {
-            is ScreenState.Loading -> Loading()
-            is ScreenState.Failed -> Failed(screen.message, onAnalyze)
-            is ScreenState.Ready -> {
-                val scene = screen.scene
-                val entry = preview.scenes.firstOrNull { it.key == scene.key }
-                val download = analyzer.downloads.firstOrNull { it.key == scene.key }
-                Identity(
-                    title = scene.title,
-                    source = entry?.source ?: SceneSourceKind.BUNDLED,
-                    download = download,
-                    houseCount = preview.scenes.size,
-                    onHouses = { housesOpen = true },
-                    onAnalysis = onAnalyze,
-                )
-                val view = progress.view
-                val session = progress.session
-                val current = view?.summary?.currentStage
-                HouseDrawing(
-                    sketch = progress.sketch,
-                    built = if (view == null || view.summary.unset) null else session?.actualVisible,
-                    current = current?.let { session?.introducedAt(it) }.orEmpty(),
-                    description = stringResource(R.string.house_drawing_description, scene.title),
-                    onOpen = onOpenModel,
-                    modifier = Modifier.padding(top = Space.s),
-                )
-                if (view != null) ProgressBlock(view, onOpenStages)
-                AnalysisLine(analyzer, onAnalyze)
-                InkButton(
-                    text = stringResource(R.string.house_open_3d),
-                    icon = ShellIcons.cube,
-                    onClick = onOpenModel,
-                    modifier = Modifier.fillMaxWidth().padding(top = Space.l),
-                )
-                // Etapy is one tap away already (the tab, the current stage above); adding a house is
-                // a second-order way on — for a new link, not a co-equal button on every visit.
-                QuietAction(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(top = Space.s))
-                Diagnostics(preview, onAnalyze)
+    BoxWithConstraints(Modifier.fillMaxSize().statusBarsPadding(), contentAlignment = Alignment.TopCenter) {
+        // A phone on its side, or a wide window: the drawing on one side, the house's words on the
+        // other — never a portrait column stretched across, with the figure below the fold.
+        val twoPane = maxWidth >= TWO_PANE_WIDTH && maxWidth > maxHeight
+        val screen = preview.screen
+        if (twoPane && screen is ScreenState.Ready) {
+            val drawingHeight = maxHeight - Space.l * 2
+            Row(Modifier.fillMaxSize()) {
+                Box(Modifier.weight(1f).fillMaxHeight().padding(Space.l), contentAlignment = Alignment.Center) {
+                    Drawing(screen.scene, progress, onOpenModel, drawingHeight)
+                }
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState())
+                        .padding(end = Space.l)
+                        .padding(bottom = Space.xl),
+                ) {
+                    Words(screen.scene, preview, analyzer, progress, onOpenModel, onAnalyze, onOpenStages, onHouses = { housesOpen = true })
+                }
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .widthIn(max = Sizes.contentMax)
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = Space.l)
+                    .padding(bottom = Space.xl),
+            ) {
+                when (screen) {
+                    is ScreenState.Loading -> Loading()
+                    is ScreenState.Failed -> Failed(screen, onAnalyze)
+                    is ScreenState.Ready -> {
+                        Words(screen.scene, preview, analyzer, progress, onOpenModel, onAnalyze, onOpenStages, onHouses = { housesOpen = true }) {
+                            Drawing(screen.scene, progress, onOpenModel, DRAWING_HEIGHT, Modifier.padding(top = Space.s))
+                        }
+                    }
+                }
             }
         }
     }
@@ -143,6 +142,70 @@ fun HouseScreen(
     }
 }
 
+/** The house as a line drawing, inked by the owner's progress. */
+@Composable
+private fun Drawing(scene: ModelScene, progress: ProgressViewModel, onOpenModel: () -> Unit, height: Dp, modifier: Modifier = Modifier) {
+    val view = progress.view
+    val session = progress.session
+    val current = view?.summary?.currentStage
+    HouseDrawing(
+        sketch = progress.sketch,
+        built = if (view == null || view.summary.unset) null else session?.actualVisible,
+        current = current?.let { session?.introducedAt(it) }.orEmpty(),
+        description = stringResource(R.string.house_drawing_description, scene.title),
+        onOpen = onOpenModel,
+        modifier = modifier,
+        height = height,
+    )
+}
+
+/**
+ * The house in words: its name and source, then (in one column) the drawing,
+ * the progress, the analysis line and the ways on.
+ */
+@Composable
+private fun Words(
+    scene: ModelScene,
+    preview: PreviewViewModel,
+    analyzer: AnalyzerViewModel,
+    progress: ProgressViewModel,
+    onOpenModel: () -> Unit,
+    onAnalyze: () -> Unit,
+    onOpenStages: () -> Unit,
+    onHouses: () -> Unit,
+    drawing: @Composable () -> Unit = {},
+) {
+    val entry = preview.scenes.firstOrNull { it.key == scene.key }
+    val download = analyzer.downloads.firstOrNull { it.key == scene.key }
+    Identity(
+        title = scene.title,
+        source = entry?.source ?: SceneSourceKind.BUNDLED,
+        download = download,
+        houseCount = preview.scenes.size,
+        onHouses = onHouses,
+        onAnalysis = onAnalyze,
+    )
+    drawing()
+    progress.view?.let { ProgressBlock(it, onOpenStages) }
+    AnalysisLine(analyzer, onAnalyze)
+    InkButton(
+        text = stringResource(R.string.house_open_3d),
+        icon = ShellIcons.cube,
+        onClick = onOpenModel,
+        modifier = Modifier.fillMaxWidth().padding(top = Space.l),
+    )
+    // Etapy is one tap away already (the tab, the current stage above); adding a house is
+    // a second-order way on — for a new link, not a co-equal button on every visit.
+    QuietAction(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(top = Space.s))
+    Diagnostics(preview, onAnalyze)
+}
+
+/** From this width, a window wider than tall shows Dom in two panes. */
+private val TWO_PANE_WIDTH = 600.dp
+
+/** The drawing's height in one column. */
+private val DRAWING_HEIGHT = 232.dp
+
 @Composable
 private fun Loading() {
     Column(Modifier.padding(top = Space.xxl), verticalArrangement = Arrangement.spacedBy(Space.m)) {
@@ -152,10 +215,10 @@ private fun Loading() {
 }
 
 @Composable
-private fun Failed(message: String, onAnalyze: () -> Unit) {
+private fun Failed(failed: ScreenState.Failed, onAnalyze: () -> Unit) {
     Column(Modifier.padding(top = Space.xxl), verticalArrangement = Arrangement.spacedBy(Space.m)) {
         Text(stringResource(R.string.house_failed), style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
-        Text(message, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
+        LoadProblem(failed.problem, failed.message)
         LineButton(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link)
     }
 }
@@ -376,7 +439,8 @@ private fun AnalysisLine(analyzer: AnalyzerViewModel, onAnalyze: () -> Unit) {
 @Composable
 private fun HousesSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, onPick: (com.buildplan.preview.scene.SceneEntry) -> Unit, onAdd: () -> Unit) {
     val openKey = preview.scene?.key
-    Column(Modifier.fillMaxWidth().padding(bottom = Space.xl)) {
+    // Scrolls: seven houses and "Dodaj dom z linku" outgrow a phone on its side.
+    Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(bottom = Space.xl)) {
         Text(
             stringResource(R.string.house_saved_heading),
             style = MaterialTheme.typography.titleMedium,

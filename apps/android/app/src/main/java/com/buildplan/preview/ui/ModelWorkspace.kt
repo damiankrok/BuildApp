@@ -10,15 +10,25 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,11 +47,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -81,7 +93,7 @@ fun ModelWorkspace(model: PreviewViewModel, progress: ProgressViewModel, onBack:
     Box(Modifier.fillMaxSize().background(Palette.Ground)) {
         when (val screen = model.screen) {
             is ScreenState.Loading -> WorkspaceMessage(stringResource(R.string.house_loading), null, onBack)
-            is ScreenState.Failed -> WorkspaceMessage(stringResource(R.string.house_failed), screen.message, onBack)
+            is ScreenState.Failed -> WorkspaceMessage(stringResource(R.string.house_failed), screen, onBack)
             is ScreenState.Ready -> ReadyWorkspace(model, progress, screen.scene, onBack, onSetProgress)
         }
     }
@@ -119,18 +131,21 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     var railInset by remember { mutableIntStateOf(0) }
     var timelineInset by remember { mutableIntStateOf(0) }
     var sheetInset by remember { mutableIntStateOf(0) }
-    val frameBottom by animateIntAsState(
-        if (detailsOpen && selected != null) maxOf(timelineInset, sheetInset) else timelineInset,
-        motion.settle(),
-        label = "frameBottom",
-    )
+    var panelInset by remember { mutableIntStateOf(0) }
+    val details = detailsOpen && selected != null
+    val frameBottom by animateIntAsState(if (details) maxOf(timelineInset, sheetInset) else timelineInset, motion.settle(), label = "frameBottom")
+    val frameRight by animateIntAsState(if (details) maxOf(railInset, panelInset) else railInset, motion.settle(), label = "frameRight")
     val rest = ContentInsets(top = topInset, right = railInset, bottom = timelineInset)
-    // Both read here, in composition, so each change recomposes and reaches the renderer — read
-    // only inside the SideEffect, the eased bottom never did, and the frame kept its first value.
-    val drawn = rest.copy(bottom = frameBottom)
+    // Read here, in composition, so each change recomposes and reaches the renderer — read only
+    // inside the SideEffect, the eased inset never did, and the frame kept its first value.
+    val drawn = rest.copy(right = frameRight, bottom = frameBottom)
     SideEffect { model.onChromeInsets(rest, drawn) }
 
-    Box(Modifier.fillMaxSize()) {
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        // A phone on its side: the details are a panel at the end edge beside the house, not a
+        // sheet that would fill the whole short window and run under the status bar.
+        val sidePanel = maxHeight < COMPACT_HEIGHT
+        val sheetMax = minOf(SHEET_MAX, maxHeight * 0.55f)
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
         // Nothing stands at this point of the build: say so where the house would be, never leave a bare grid.
@@ -158,6 +173,31 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 .height(112.dp)
                 .background(Brush.verticalGradient(listOf(Palette.Scrim.copy(alpha = 0.55f), Color.Transparent))),
         )
+        // And over the navigation bar — at the foot in portrait, at the side on a phone turned over —
+        // so its light buttons read over a pale model (Makieta, Kreska: white on #D0CEC9 was 1.57:1).
+        val nav = WindowInsets.navigationBars.asPaddingValues()
+        val navBottom = nav.calculateBottomPadding()
+        val navEnd = nav.calculateEndPadding(LocalLayoutDirection.current)
+        if (navBottom > 0.dp) {
+            val height = navBottom + SCRIM_FADE
+            Box(
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(height)
+                    .background(Brush.verticalGradient(0f to Color.Transparent, SCRIM_FADE / height to NavScrim, 1f to NavScrim)),
+            )
+        }
+        if (navEnd > 0.dp) {
+            val width = navEnd + SCRIM_FADE
+            Box(
+                Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxHeight()
+                    .width(width)
+                    .background(Brush.horizontalGradient(0f to Color.Transparent, SCRIM_FADE / width to NavScrim, 1f to NavScrim)),
+            )
+        }
 
         BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding().padding(Space.s)) {
             val paneMax = maxHeight * 0.62f
@@ -191,6 +231,13 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     detailsOpen = false
                     toolName = null
                 },
+                onSelectElement = { id ->
+                    val now = System.currentTimeMillis()
+                    model.onPicked(id, now)
+                    model.frameSelection(now)
+                    toolName = null
+                },
+                onZoom = { model.zoom(it) },
                 paneMaxHeight = paneMax,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -238,10 +285,10 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         }
 
         AnimatedVisibility(
-            visible = detailsOpen && selected != null,
-            enter = motion.sheetEnter(),
-            exit = motion.sheetExit(),
-            modifier = Modifier.align(Alignment.BottomCenter),
+            visible = details,
+            enter = if (sidePanel) motion.panelEnter(TransformOrigin(1f, 0.5f)) else motion.sheetEnter(),
+            exit = if (sidePanel) motion.panelExit(TransformOrigin(1f, 0.5f)) else motion.sheetExit(),
+            modifier = Modifier.align(if (sidePanel) Alignment.CenterEnd else Alignment.BottomCenter),
         ) {
             if (selected != null) {
                 val stage = progress.session?.stageOf(selected.id)
@@ -255,14 +302,23 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     stageStatus = status,
                     visibleNow = model.viewer.isVisible(scene, selected.id),
                     isolating = model.viewer.isIsolating,
-                    maxHeight = 460.dp,
+                    maxHeight = if (sidePanel) maxHeight else sheetMax,
+                    side = sidePanel,
                     onClose = { detailsOpen = false },
                     onFrame = { model.frameSelection(System.currentTimeMillis()) },
                     onIsolate = { model.isolateSelected() },
                     onShowAll = { model.showAll() },
-                    modifier = Modifier
-                        .navigationBarsPadding()
-                        .onGloballyPositioned { c -> sheetInset = c.fromBottom() },
+                    modifier = if (sidePanel) {
+                        Modifier
+                            .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.End + WindowInsetsSides.Bottom))
+                            .padding(vertical = Space.s)
+                            .width(SIDE_PANEL_WIDTH)
+                            .onGloballyPositioned { c -> panelInset = c.fromRight() }
+                    } else {
+                        Modifier
+                            .navigationBarsPadding()
+                            .onGloballyPositioned { c -> sheetInset = c.fromBottom() }
+                    },
                 )
             }
         }
@@ -341,7 +397,7 @@ private fun GestureHint(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun WorkspaceMessage(title: String, detail: String?, onBack: () -> Unit) {
+private fun WorkspaceMessage(title: String, failed: ScreenState.Failed?, onBack: () -> Unit) {
     Column(Modifier.fillMaxSize().safeDrawingPadding()) {
         Row(Modifier.padding(Space.xs), verticalAlignment = Alignment.CenterVertically) {
             val backLabel = stringResource(R.string.model_back)
@@ -352,7 +408,7 @@ private fun WorkspaceMessage(title: String, detail: String?, onBack: () -> Unit)
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
             Column(Modifier.padding(Space.xxl), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Space.s)) {
                 Text(title, style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
-                if (detail != null) Text(detail, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
+                if (failed != null) LoadProblem(failed.problem, failed.message)
             }
         }
     }
@@ -373,6 +429,16 @@ private const val RECEDED_ALPHA = 0.18f
 
 /** How long the gesture hint stays when nobody touches the model. */
 private const val HINT_MS = 6_000L
+
+/** How far a navigation-bar shade fades in before the bar; and its density there. */
+private val SCRIM_FADE = 24.dp
+private val NavScrim = Palette.Scrim.copy(alpha = 0.6f)
+
+/** The details sheet's tallest, on a tall screen (and never more than 55 % of it). */
+private val SHEET_MAX = 460.dp
+
+/** The details panel's width on a phone on its side. */
+private val SIDE_PANEL_WIDTH = 360.dp
 
 /** Below this height (a phone on its side) the rail reaches the timeline, and the bottom stack stops beside it. */
 private val COMPACT_HEIGHT = 480.dp

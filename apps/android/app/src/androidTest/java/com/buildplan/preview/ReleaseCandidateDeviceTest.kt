@@ -94,6 +94,12 @@ class ReleaseCandidateDeviceTest {
         assertEquals(EditOutcome.Saved, progress.setCurrentTask("Montaż więźby"))
     }
 
+    /** The headline the app gives an element (ElementWords), as the list shows it. */
+    private fun elementTitleOf(obj: com.buildplan.preview.scene.SceneObject): String = when (val t = com.buildplan.preview.ui.ElementWords.title(obj)) {
+        is com.buildplan.preview.ui.ElementWords.Title.SourceName -> t.name
+        is com.buildplan.preview.ui.ElementWords.Title.Words -> evidence.string(t.res)
+    }
+
     private fun stageId(progress: ProgressViewModel, key: ConstructionStageKey): String =
         checkNotNull(progress.view?.stages?.firstOrNull { it.stageKey == key }).stageId
 
@@ -193,14 +199,19 @@ class ReleaseCandidateDeviceTest {
         assertTrue("the damaged record was kept aside", file.parentFile?.listFiles()?.any { it.name != file.name } == true)
         evidence.capture("01-corrupt-recovered")
 
-        // A stage the model has no geometry for: the timeline says so, the 3D keeps the last shell.
+        // A refused edit is said at the foot of Etapy, announced, and leaves by itself (cycle 2, C2-11).
         record(progress)
+        assertTrue(progress.startStage(stageId(progress, ConstructionStageKey.JOINERY)) is EditOutcome.Refused)
+        evidence.awaitNode(hasText(evidence.string(R.string.stage_other_current, evidence.string(R.string.stage_roof))), unmerged = true)
+        evidence.capture("02-refusal-said")
+
+        // A stage the model has no geometry for: the timeline says so, the 3D keeps the last shell.
         val d = enter3d(preview, "D 3D")
         previewStage(preview, progress, ConstructionStageKey.ELECTRICAL)
         evidence.awaitNode(hasText(evidence.string(R.string.timeline_no_geometry)))
         assertDrawnAsStated(preview, d, "D electrical")
         evidence.settleFrames(d)
-        evidence.capture("02-stage-without-geometry")
+        evidence.capture("03-stage-without-geometry")
         compose.runOnIdle { progress.returnToNow() }
         leave3d(preview)
 
@@ -215,7 +226,7 @@ class ReleaseCandidateDeviceTest {
         val problem = checkNotNull(evidence.analyzer(checkNotNull(scenario)).linkProblem)
         evidence.awaitNode(hasText(problem), unmerged = true)
         assertFalse("nothing started", evidence.analyzer(checkNotNull(scenario)).isRunning)
-        evidence.capture("03-unsupported-link", "problem" to problem)
+        evidence.capture("04-unsupported-link", "problem" to problem)
         evidence.fact("result D", "PASS")
     }
 
@@ -279,6 +290,23 @@ class ReleaseCandidateDeviceTest {
             preview.setPresentation(PresentationMode.MODEL)
             progress.returnToNow()
         }
+
+        // Without touching the model (cycle 2, C2-10): an element chosen from a list, and zoom by a button.
+        compose.onNode(hasText(evidence.string(R.string.tool_layers)) and hasClickAction()).performClick()
+        val drawn = preview.viewer.visibleObjectIds(scene).count { id -> scene.objects.first { it.id == id }.hasGeometry }
+        compose.onNode(hasText(evidence.string(R.string.layer_elements_show, drawn)) and hasClickAction()).performClick()
+        val chosen = scene.objects.first { it.id in preview.viewer.visibleObjectIds(scene) && it.hasGeometry && it.kind == "roof" }
+        compose.onAllNodes(hasText(elementTitleOf(chosen)) and hasClickAction())[0].performClick()
+        compose.waitUntil(5_000) { preview.viewer.selectedObjectId != null }
+        evidence.fact("chosen from the list", preview.viewer.selectedObjectId)
+        evidence.settleFrames(d)
+        evidence.capture("05-element-from-list")
+        val before = preview.pose.distance
+        compose.onNode(hasText(evidence.string(R.string.tool_view)) and hasClickAction()).performClick()
+        compose.onNode(hasText(evidence.string(R.string.view_zoom_in)) and hasClickAction()).performClick()
+        compose.waitUntil(5_000) { preview.pose.distance < before }
+        evidence.fact("zoom by button: distance", "$before -> ${preview.pose.distance}")
+
         assertNotNull(progress.view)
         assertEquals("previews never touched the record", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
         evidence.fact("result E", "PASS")
