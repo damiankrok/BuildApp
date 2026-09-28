@@ -2,6 +2,8 @@ package com.buildplan.preview
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
@@ -17,6 +19,7 @@ import com.buildplan.preview.ui.ProgressViewModel
 import java.io.File
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -77,7 +80,15 @@ class AdaptiveLayoutDeviceTest {
         val session = checkNotNull(progress.session)
         val actual = session.projection.visibleIds(ConstructionView.Actual(checkNotNull(session.state)))
         assertEquals("Teraz in landscape is the saved state", actual, preview.viewer.construction)
-        evidence.capture("02-3d-now", "visibleObjects" to now.visibleObjects)
+        evidence.assertHouseInsideFreeArea(preview, evidence.capture("02-3d-now", "visibleObjects" to now.visibleObjects), "landscape 3D now")
+
+        // Cycle 1, C1-02: on the short screen the timeline stops beside the rail — "Dopasuj" is not under it.
+        val fit = compose.onNode(hasText(evidence.string(R.string.tool_fit)) and hasClickAction()).fetchSemanticsNode().boundsInRoot
+        val rule = compose.onNode(hasContentDescription(evidence.string(R.string.timeline_rule_description))).fetchSemanticsNode().boundsInRoot
+        val toggle = compose.onNode(hasContentDescription(evidence.string(R.string.timeline_expand))).fetchSemanticsNode().boundsInRoot
+        evidence.fact("rail Fit / rule / toggle bounds", "$fit / $rule / $toggle")
+        assertFalse("the timeline's rule overlaps Dopasuj", fit.overlaps(rule))
+        assertFalse("the timeline's toggle overlaps Dopasuj", fit.overlaps(toggle))
 
         progress.preview(ConstructionStageKey.WALLS)
         compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(ConstructionStageKey.WALLS) }

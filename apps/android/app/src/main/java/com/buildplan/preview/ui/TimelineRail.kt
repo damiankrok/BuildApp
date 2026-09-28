@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -29,9 +28,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -89,9 +86,10 @@ fun TimelineRail(
 
     GlassSurface(modifier = modifier, shape = RoundedCornerShape(Radius.sheet)) {
         Column(Modifier.padding(bottom = Space.s)) {
-            // Header: what the 3D shows, and the one action that matters here.
+            // Header: what the 3D shows, full width, and under it the one action that matters here —
+            // never beside the title, where a longer stage name or a larger font would cut it.
             Row(
-                verticalAlignment = Alignment.CenterVertically,
+                verticalAlignment = Alignment.Top,
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 56.dp)
@@ -101,26 +99,16 @@ fun TimelineRail(
                     targetState = previewStop,
                     transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
                     label = "railHeader",
-                    modifier = Modifier.weight(1f).semantics { liveRegion = LiveRegionMode.Polite },
+                    modifier = Modifier.weight(1f).padding(top = Space.xs).semantics { liveRegion = LiveRegionMode.Polite },
                 ) { stop ->
                     if (stop != null) {
-                        PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size)
+                        PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, onReturnToNow)
                     } else {
-                        NowHeader(summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent)
+                        NowHeader(
+                            summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
+                            onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
+                        )
                     }
-                }
-                when {
-                    previewStop != null -> OutlinedButton(
-                        onClick = onReturnToNow,
-                        border = BorderStroke(1.dp, Palette.Rule),
-                        contentPadding = PaddingValues(horizontal = Space.m),
-                        modifier = Modifier.heightIn(min = Sizes.touch).padding(end = Space.xs),
-                    ) { Text(stringResource(R.string.timeline_return_now), color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                    summary.unset && summary.availability == ProgressAvailability.EDITABLE -> TextButton(
-                        onClick = onSetProgress,
-                        modifier = Modifier.heightIn(min = Sizes.touch),
-                    ) { Text(stringResource(R.string.progress_set_action), maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                    else -> Unit
                 }
                 val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
                 IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
@@ -157,16 +145,22 @@ private fun NowHeader(
     lastDone: ConstructionStageKey?,
     task: String?,
     stagePercent: Int?,
+    onSetProgress: (() -> Unit)?,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         if (unset || percent == null) {
-            Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(stringResource(R.string.timeline_hint_scrub), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+                Text(stringResource(R.string.timeline_hint_scrub), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))
+                if (onSetProgress != null) {
+                    LineButton(stringResource(R.string.progress_set_action), onClick = onSetProgress, borderColor = Palette.Ink)
+                }
+            }
         } else {
             Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-                Text(percent, style = Measure.inline, color = Palette.Ink, maxLines = 1)
+                Text(percent, style = Measure.inline, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 val stageName = (current ?: lastDone)?.let { stringResource(it.labelRes()) } ?: ""
-                Text(stageName, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(stageName, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
             }
             val second = when {
                 task != null -> stringResource(R.string.progress_now_task, task)
@@ -174,30 +168,28 @@ private fun NowHeader(
                 lastDone != null -> stringResource(R.string.progress_last_done, stringResource(lastDone.labelRes()))
                 else -> null
             }
-            second?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+            second?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis) }
         }
     }
 }
 
 @Composable
-private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boolean, stageCount: Int) {
+private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boolean, stageCount: Int, onReturnToNow: () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             PreviewMark()
-            Text(
-                stringResource(R.string.timeline_preview_of, names[stop]),
-                style = MaterialTheme.typography.titleSmall,
-                color = Palette.Ink,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+            Text(stringResource(R.string.timeline_preview_of, names[stop]), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
         }
         val second = when {
             stop >= stageCount -> stringResource(R.string.timeline_target_detail)
             withoutGeometry -> stringResource(R.string.timeline_no_geometry)
             else -> stringResource(R.string.timeline_stop_position, stop + 1, stageCount)
         }
-        Text(second, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 2, overflow = TextOverflow.Ellipsis)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+            Text(second, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))
+            // Back to the actual state: an action like any other, so ink — the yellow belongs to measured progress.
+            LineButton(stringResource(R.string.timeline_return_now), onClick = onReturnToNow, borderColor = Palette.Ink)
+        }
     }
 }
 
@@ -245,7 +237,7 @@ private fun StageStrip(
                     .widthIn(min = 96.dp, max = 132.dp)
                     .heightIn(min = 56.dp)
                     .background(if (selected) Palette.Well else Palette.GlassOpaque, RoundedCornerShape(Radius.panel))
-                    .border(1.dp, if (selected) Palette.Rule else Palette.Hairline, RoundedCornerShape(Radius.panel))
+                    .border(1.dp, if (selected) Palette.Ink else Palette.Hairline, RoundedCornerShape(Radius.panel))
                     .selectable(selected = selected, onClick = { onPreviewStop(stop) }, role = Role.Tab)
                     .semantics { stateDescription = if (isNow) nowWord.format(stateWord) else stateWord }
                     .padding(horizontal = Space.m, vertical = Space.s),

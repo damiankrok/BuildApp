@@ -23,7 +23,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +40,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.buildplan.preview.PRODUCT_LOCALE
 import com.buildplan.preview.R
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.progress.ProgressAvailability
@@ -117,10 +117,9 @@ fun HouseScreen(
                     onClick = onOpenModel,
                     modifier = Modifier.fillMaxWidth().padding(top = Space.l),
                 )
-                Row(Modifier.fillMaxWidth().padding(top = Space.s), horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-                    LineButton(stringResource(R.string.place_stages), onClick = onOpenStages, icon = ShellIcons.rule, modifier = Modifier.weight(1f))
-                    LineButton(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.weight(1f))
-                }
+                // Etapy is one tap away already (the tab, the current stage above); adding a house is
+                // a second-order way on — for a new link, not a co-equal button on every visit.
+                QuietAction(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(top = Space.s))
                 Diagnostics(preview, onAnalyze)
             }
         }
@@ -245,7 +244,7 @@ private fun UnsetProgress(view: ProgressView, onOpenStages: () -> Unit) {
     )
     FoldingRule(view.stages, nowStop = null, previewStop = null, height = RuleDefaults.StaticHeight)
     if (summary.availability == ProgressAvailability.EDITABLE) {
-        LineButton(stringResource(R.string.progress_set_action), onClick = onOpenStages, borderColor = Palette.Rule, modifier = Modifier.padding(top = Space.m))
+        LineButton(stringResource(R.string.progress_set_action), onClick = onOpenStages, borderColor = Palette.Ink, modifier = Modifier.padding(top = Space.m))
     }
 }
 
@@ -269,10 +268,9 @@ private fun RecordedProgress(view: ProgressView, percent: Int, onOpenStages: () 
                 color = Palette.InkMuted,
             )
         }
-        TextButton(onClick = { explain = !explain }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-            Text(stringResource(if (explain) R.string.progress_explain_hide else R.string.progress_explain_show), color = Palette.InkMuted)
-        }
     }
+    FoldingRule(view.stages, nowStop = view.nowStop, previewStop = null, height = RuleDefaults.StaticHeight, modifier = Modifier.padding(top = Space.xs))
+    QuietAction(stringResource(if (explain) R.string.progress_explain_hide else R.string.progress_explain_show), onClick = { explain = !explain })
     AnimatedVisibility(visible = explain) {
         Text(
             stringResource(R.string.progress_explain),
@@ -281,41 +279,53 @@ private fun RecordedProgress(view: ProgressView, percent: Int, onOpenStages: () 
             modifier = Modifier.padding(bottom = Space.s),
         )
     }
-    FoldingRule(view.stages, nowStop = view.nowStop, previewStop = null, height = RuleDefaults.StaticHeight, modifier = Modifier.padding(top = Space.xs))
 
+    // The current stage and what is being done: the way into Etapy, so it says so with a chevron.
     val current = summary.currentStage
-    Column(
-        Modifier
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(Space.s),
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(top = Space.m)
+            .padding(top = Space.xs)
             .clickable(role = Role.Button, onClick = onOpenStages)
             .padding(vertical = Space.xs),
-        verticalArrangement = Arrangement.spacedBy(Space.xxs),
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
-            val stageNow = view.stages.firstOrNull { it.stageKey == current }
-            StageMark(stageNow?.status, stageNow?.completion ?: 0.0)
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Space.xxs)) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
+                val stageNow = view.stages.firstOrNull { it.stageKey == current }
+                StageMark(stageNow?.status, stageNow?.completion ?: 0.0)
+                Text(
+                    when {
+                        current != null -> stringResource(R.string.progress_current_stage, stringResource(current.labelRes()))
+                        summary.lastDone != null -> stringResource(R.string.progress_last_done, stringResource(summary.lastDone.labelRes()))
+                        else -> stringResource(R.string.progress_no_current_stage)
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Palette.Ink,
+                    modifier = Modifier.weight(1f, fill = false),
+                )
+                summary.currentStageCompletionPercent?.let {
+                    Text(stringResource(R.string.progress_stage_share, StageProgressMetric.format(it)), style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
+                }
+            }
             Text(
-                when {
-                    current != null -> stringResource(R.string.progress_current_stage, stringResource(current.labelRes()))
-                    summary.lastDone != null -> stringResource(R.string.progress_last_done, stringResource(summary.lastDone.labelRes()))
-                    else -> stringResource(R.string.progress_no_current_stage)
-                },
-                style = MaterialTheme.typography.titleMedium,
-                color = Palette.Ink,
-                modifier = Modifier.weight(1f),
+                summary.currentTask?.let { stringResource(R.string.progress_now_doing, it) } ?: stringResource(R.string.progress_task_unset),
+                style = MaterialTheme.typography.bodyMedium,
+                color = if (summary.currentTask != null) Palette.Ink else Palette.InkMuted,
             )
-            summary.currentStageCompletionPercent?.let {
-                Text(StageProgressMetric.format(it), style = Measure.inline, color = Palette.InkMuted)
+            summary.savedAtEpochMs?.let {
+                Text(stringResource(R.string.progress_saved_on, savedDate(it)), style = MaterialTheme.typography.bodySmall, color = Palette.InkFaint)
             }
         }
-        Text(
-            summary.currentTask?.let { stringResource(R.string.progress_now_doing, it) } ?: stringResource(R.string.progress_task_unset),
-            style = MaterialTheme.typography.bodyMedium,
-            color = if (summary.currentTask != null) Palette.Ink else Palette.InkMuted,
-        )
+        Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
     }
 }
+
+/** "28 września 2026": the day the record was last changed, in Polish whatever the phone's language. */
+private fun savedDate(epochMs: Long): String =
+    java.time.format.DateTimeFormatter.ofPattern("d MMMM yyyy", PRODUCT_LOCALE)
+        .format(java.time.Instant.ofEpochMilli(epochMs).atZone(java.time.ZoneId.systemDefault()))
 
 /** A running or failed analysis, said here so the owner never has to open the analyzer to know. */
 @Composable
@@ -417,10 +427,8 @@ private fun HousesSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, 
 @Composable
 private fun Diagnostics(preview: PreviewViewModel, onAnalyze: () -> Unit) {
     var open by rememberSaveable { mutableStateOf(false) }
-    Column(Modifier.padding(top = Space.xl)) {
-        TextButton(onClick = { open = !open }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-            Text(stringResource(if (open) R.string.house_diagnostics_hide else R.string.house_diagnostics_show), color = Palette.InkMuted)
-        }
+    Column(Modifier.padding(top = Space.l)) {
+        QuietAction(stringResource(if (open) R.string.house_diagnostics_hide else R.string.house_diagnostics_show), onClick = { open = !open })
         if (open) {
             preview.scene?.let { scene ->
                 StatusText(
@@ -431,10 +439,9 @@ private fun Diagnostics(preview: PreviewViewModel, onAnalyze: () -> Unit) {
                         pluralStringResource(R.plurals.count_triangles, scene.triangleCount, scene.triangleCount),
                         scene.bundle.contentHash.take(8),
                     ),
-                    modifier = Modifier.padding(horizontal = Space.m),
                 )
             }
-            TextButton(onClick = onAnalyze, modifier = Modifier.heightIn(min = Sizes.touch)) { Text(stringResource(R.string.house_diagnostics_analyzer), color = Palette.InkMuted) }
+            QuietAction(stringResource(R.string.house_diagnostics_analyzer), onClick = onAnalyze)
         }
     }
 }

@@ -104,6 +104,7 @@ class ProgressSession(
                 stageCount = stages.size,
                 lastDone = s?.stages?.lastOrNull { it.status == StageStatus.DONE }?.stageKey,
                 availability = availability,
+                savedAtEpochMs = if (unset) null else s?.updatedAtEpochMs,
             )
         }
 
@@ -163,6 +164,13 @@ class ProgressSession(
     fun markDone(stageId: String): EditOutcome = edit { it.markDone(stageId, clock()) }
 
     fun resetStage(stageId: String): EditOutcome = edit { it.resetStage(stageId, clock()) }
+
+    /** Every stage before [stageId] done, as one saved edit. */
+    fun markDoneBefore(stageId: String): EditOutcome = edit { it.markDoneBefore(stageId, clock()) }
+
+    /** How many stages before [stageId] are not done yet (what [markDoneBefore] would change). */
+    fun unfinishedBefore(stageId: String): Int =
+        (state ?: houseId?.let { ConstructionProgressState.starter(it, clock()) })?.unfinishedBefore(stageId)?.size ?: 0
 
     fun setCurrentTask(label: String?): EditOutcome = edit { it.setCurrentTask(label, clock()) }
 
@@ -238,6 +246,8 @@ data class ProgressSummary(
     /** The last stage in order marked done, for "Ostatnio zakończony". */
     val lastDone: ConstructionStageKey?,
     val availability: ProgressAvailability,
+    /** When the owner last changed the record, so an old "Teraz robimy" never reads as today's; null while unset. */
+    val savedAtEpochMs: Long? = null,
 ) {
     val percentText: String? get() = percent?.let(StageProgressMetric::format)
 }

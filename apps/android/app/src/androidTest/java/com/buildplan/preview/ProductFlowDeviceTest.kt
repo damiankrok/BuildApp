@@ -105,7 +105,7 @@ class ProductFlowDeviceTest {
         compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
         val first = evidence.awaitRenderer(preview, "first 3D entry")
         assertNull("unset progress shows the whole design", preview.viewer.construction)
-        evidence.capture("02-dom-to-3d-unset", "visibleObjects" to first.visibleObjects)
+        evidence.assertHouseInsideFreeArea(preview, evidence.capture("02-dom-to-3d-unset", "visibleObjects" to first.visibleObjects), "02 3D, whole design")
 
         // 3. Back to Dom, then Etapy by the bar.
         Espresso.pressBack()
@@ -115,19 +115,21 @@ class ProductFlowDeviceTest {
         evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
         evidence.capture("03-etapy-unset")
 
-        // 4. Record progress through Etapy's own controls: stages 1-7 done, Dach current at 40 %, a task.
-        for (key in listOf(
-            ConstructionStageKey.PLOT_PURCHASE, ConstructionStageKey.DESIGN, ConstructionStageKey.PERMITS,
-            ConstructionStageKey.SITE_PREPARATION, ConstructionStageKey.FOUNDATIONS, ConstructionStageKey.WALLS,
-            ConstructionStageKey.FLOOR_SLAB,
-        )) {
-            openStage(key)
-            compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
-            compose.waitUntil(5_000) { progress.view?.stages?.firstOrNull { it.stageKey == key }?.status == StageStatus.DONE }
-        }
+        // 4. Record progress through Etapy's own controls: stage 1 done by itself, Dach made current,
+        //    then "Oznacz 6 wcześniejszych etapów jako zakończone" (it says the count before it acts),
+        //    Dach at 40 %, a task.
+        openStage(ConstructionStageKey.PLOT_PURCHASE)
+        compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
+        compose.waitUntil(5_000) { progress.view?.stages?.firstOrNull { it.stageKey == ConstructionStageKey.PLOT_PURCHASE }?.status == StageStatus.DONE }
         openStage(ConstructionStageKey.ROOF)
         compose.onNode(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.summary?.currentStage == ConstructionStageKey.ROOF }
+        val earlier = evidence.plural(R.plurals.stage_mark_earlier_done, 6, 6)
+        compose.onNode(hasScrollAction()).performScrollToNode(hasText(earlier))
+        compose.onNode(hasText(earlier) and hasClickAction()).performClick()
+        compose.waitUntil(5_000) { progress.view?.stages?.take(7)?.all { it.status == StageStatus.DONE } == true }
+        assertEquals("the current stage stays current", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
+        evidence.fact("bulk action label", earlier)
         compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress)).performSemanticsAction(SemanticsActions.SetProgress) { it(0.4f) }
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 40 }
         compose.onNode(hasSetTextAction()).performTextReplacement(TASK)
@@ -160,6 +162,7 @@ class ProductFlowDeviceTest {
         assertTrue("the model has joinery to hide", joinery.isNotEmpty())
         assertTrue("no window stands yet", joinery.none { it in actual })
         val nowShot = evidence.capture("06-3d-now", "visibleObjects" to now.visibleObjects, "construction" to actual.size)
+        evidence.assertHouseInsideFreeArea(preview, nowShot, "06 3D now")
 
         // 7-10. The time machine: drag along the rule to the foundations, then tap walls, roof, joinery.
         val shots = linkedMapOf<ConstructionStageKey, Bitmap>()
@@ -234,6 +237,15 @@ class ProductFlowDeviceTest {
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         evidence.settleFrames(now)
         evidence.capture("12-3d-inspector", "selected" to preview.selected?.id)
+        // Cycle 1, C1-03: the owner reads Polish; the export's English is folded under "Dane techniczne".
+        val sel = checkNotNull(preview.selected)
+        val exportName = sel.metadata?.label
+        if (sel.kind != "room" && !exportName.isNullOrBlank()) {
+            assertTrue("the export's name '$exportName' is not the headline", compose.onAllNodes(hasText(exportName), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+        }
+        for (english in listOf("Ridge axis", "Eave offset", "Footprint", "Type", "Length", "Thickness", "Height")) {
+            assertTrue("'$english' is shown unfolded", compose.onAllNodes(hasText(english), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+        }
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
 
@@ -251,7 +263,7 @@ class ProductFlowDeviceTest {
         compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
         val second = evidence.awaitRenderer(preview, "second 3D entry")
         assertEquals("re-entering shows the saved state", actual, preview.viewer.construction)
-        evidence.capture("14-3d-second-entry", "visibleObjects" to second.visibleObjects)
+        evidence.assertHouseInsideFreeArea(preview, evidence.capture("14-3d-second-entry", "visibleObjects" to second.visibleObjects), "14 3D again")
         Espresso.pressBack()
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
 

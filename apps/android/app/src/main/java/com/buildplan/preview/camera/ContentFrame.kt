@@ -33,8 +33,15 @@ data class ContentFrame(val shiftX: Double, val shiftY: Double, val scale: Doubl
     companion object {
         val IDENTITY = ContentFrame(0.0, 0.0, 1.0)
 
-        /** The free rectangle may not shrink the model below this share of the viewport. */
-        const val MIN_SCALE = 0.55
+        /**
+         * The free rectangle may not shrink the model below this share of the
+         * viewport: an open inspector leaves under half the height, and the
+         * element asked about must still fit above it.
+         */
+        const val MIN_SCALE = 0.35
+
+        /** A free rectangle squeezed to nothing still frames the house at a finite distance. */
+        private const val MIN_FIT_ASPECT = 0.1
 
         fun of(width: Int, height: Int, insets: ContentInsets): ContentFrame {
             if (width <= 0 || height <= 0 || insets == ContentInsets.NONE) return IDENTITY
@@ -49,6 +56,20 @@ data class ContentFrame(val shiftX: Double, val shiftY: Double, val scale: Doubl
             val shiftX = (left - right).toDouble() / width
             val shiftY = (bottom - top).toDouble() / height
             return ContentFrame(shiftX, shiftY, scale)
+        }
+
+        /**
+         * The aspect a fit must use so that, after [of]'s uniform scale, a
+         * framed sphere fills the free rectangle's narrower side — not the
+         * whole viewport's. Passed to [OrbitCamera.distanceToFit]; with no
+         * insets it is simply the viewport's own width over height.
+         */
+        fun fitAspect(width: Int, height: Int, insets: ContentInsets): Double {
+            if (width <= 0 || height <= 0) return 1.0
+            val frame = of(width, height, insets)
+            val freeW = (width - insets.left.coerceIn(0, width / 2) - insets.right.coerceIn(0, width / 2)).toDouble()
+            val freeH = (height - insets.top.coerceIn(0, height / 2) - insets.bottom.coerceIn(0, height / 2)).toDouble()
+            return (min(freeW, freeH) / (frame.scale * height)).coerceAtLeast(MIN_FIT_ASPECT)
         }
     }
 }

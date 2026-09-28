@@ -164,13 +164,19 @@ class OrbitCamera(
         )
     }
 
-    /** Whole house: the pose Reset returns to. */
-    fun home(): OrbitPose = frame(
+    /**
+     * Whole house: the pose Reset returns to. [aspect] is the fit aspect of
+     * the space the house must fit in ([com.buildplan.preview.camera.ContentFrame.fitAspect]);
+     * on a portrait phone the horizontal field is the narrower one, and
+     * fitting only the vertical cut the gables off at both sides.
+     */
+    fun home(aspect: Double = 1.0): OrbitPose = frame(
         OrbitPose(sceneBounds.center, Vec3.ZERO, HOME_YAW, HOME_PITCH, sceneRadius * 3, Projection.PERSPECTIVE),
         sceneBounds,
         HOME_YAW,
         HOME_PITCH,
         Projection.PERSPECTIVE,
+        aspect = aspect,
     )
 
     /** Near/far planes that hold the whole scene however far the camera is. */

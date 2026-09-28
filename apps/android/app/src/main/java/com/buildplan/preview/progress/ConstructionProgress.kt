@@ -203,6 +203,32 @@ data class ConstructionProgressState(
         return replace(stage.copy(status = StageStatus.DONE, completion = 1.0), nowMs, clearTask = wasCurrent)
     }
 
+    /** The stages ordered before [stageId] that are not done: what [markDoneBefore] would change. */
+    fun unfinishedBefore(stageId: String): List<ConstructionStageProgress> {
+        val stage = stage(stageId) ?: return emptyList()
+        return stages.filter { it.order < stage.order && it.status != StageStatus.DONE }
+    }
+
+    /**
+     * Mark every stage ordered before [stageId] done, in one edit — the
+     * owner's explicit answer to "everything before this is finished",
+     * offered with its count and never inferred from anything. A stage in
+     * progress among them is refused rather than finished behind the
+     * owner's back.
+     */
+    fun markDoneBefore(stageId: String, nowMs: Long): ProgressEdit {
+        if (stage(stageId) == null) return rejected(ProgressRejection.UNKNOWN_STAGE)
+        val earlier = unfinishedBefore(stageId)
+        if (earlier.any { it.status == StageStatus.IN_PROGRESS }) return rejected(ProgressRejection.ANOTHER_STAGE_IN_PROGRESS)
+        val ids = earlier.mapTo(HashSet()) { it.stageId }
+        return ProgressEdit.Applied(
+            copy(
+                stages = stages.map { if (it.stageId in ids) it.copy(status = StageStatus.DONE, completion = 1.0) else it },
+                updatedAtEpochMs = nowMs,
+            ),
+        )
+    }
+
     /** Put one stage back to not started. */
     fun resetStage(stageId: String, nowMs: Long): ProgressEdit {
         val stage = stage(stageId) ?: return rejected(ProgressRejection.UNKNOWN_STAGE)

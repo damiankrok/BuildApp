@@ -107,6 +107,8 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
 
     fun resetStage(stageId: String) = apply { it.resetStage(stageId) }
 
+    fun markDoneBefore(stageId: String) = apply { it.markDoneBefore(stageId) }
+
     fun setCurrentTask(label: String?) = apply { it.setCurrentTask(label) }
 
     fun consumeOutcome() {

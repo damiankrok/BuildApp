@@ -3,6 +3,7 @@ package com.buildplan.preview.ui
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +50,7 @@ import com.buildplan.preview.R
 import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.scene.ModelScene
+import com.buildplan.preview.scene.SceneObject
 import kotlin.math.roundToInt
 
 /**
@@ -60,10 +63,14 @@ import kotlin.math.roundToInt
  * its details in a sheet that takes the timeline's place. While a finger
  * turns the model, the context and the rail step back.
  *
- * The model is framed inside what the chrome leaves free at rest
- * ([PreviewViewModel.contentInsets]), so "the whole house" is never half
- * under a panel — and those insets ignore the expanded timeline and the
- * sheet, so opening either never moves the camera.
+ * The model is framed inside what the chrome leaves free at rest — below
+ * the top context, left of the tool rail, above the timeline — so "the whole
+ * house" is never half under a panel; the expanded timeline is ignored, so
+ * scrubbing or expanding it never moves the camera. An element's details
+ * are the one exception: the sheet's height is added at the bottom, eased
+ * in, so the element asked about stays in view above its own details. On a
+ * short (landscape) screen the bottom stack ends before the rail instead of
+ * running under it.
  *
  * Back closes the pane, then the details, then the selection, then leaves.
  */
@@ -104,9 +111,26 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     BackHandler(enabled = tool == null && !detailsOpen && selected != null) { model.clearSelection() }
 
     val recede by animateFloatAsState(if (model.manipulating) RECEDED_ALPHA else 1f, motion.recede(), label = "recede")
+    var rootWidth by remember { mutableIntStateOf(0) }
     var rootHeight by remember { mutableIntStateOf(0) }
+    var topInset by remember { mutableIntStateOf(0) }
+    var railInset by remember { mutableIntStateOf(0) }
+    var timelineInset by remember { mutableIntStateOf(0) }
+    var sheetInset by remember { mutableIntStateOf(0) }
+    val frameBottom by animateIntAsState(
+        if (detailsOpen && selected != null) maxOf(timelineInset, sheetInset) else timelineInset,
+        motion.settle(),
+        label = "frameBottom",
+    )
+    val rest = ContentInsets(top = topInset, right = railInset, bottom = timelineInset)
+    SideEffect { model.onChromeInsets(rest, rest.copy(bottom = frameBottom)) }
 
-    Box(Modifier.fillMaxSize().onGloballyPositioned { rootHeight = it.size.height }) {
+    Box(
+        Modifier.fillMaxSize().onGloballyPositioned {
+            rootWidth = it.size.width
+            rootHeight = it.size.height
+        },
+    ) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
         // Nothing stands at this point of the build: say so where the house would be, never leave a bare grid.
@@ -137,6 +161,8 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
 
         BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding().padding(Space.s)) {
             val paneMax = maxHeight * 0.62f
+            // Short screen: the rail reaches down to the timeline, so the bottom stack stops beside it.
+            val besideRail = if (maxHeight < COMPACT_HEIGHT) RailDefaults.ButtonWidth + RailDefaults.Padding * 2 + Space.s else 0.dp
             // The top context: back, the house, where the build stands (never the preview: the timeline says that).
             TopContext(
                 title = scene.title,
@@ -146,10 +172,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     .align(Alignment.TopStart)
                     .widthIn(max = maxWidth - RailDefaults.ButtonWidth - Space.xl)
                     .graphicsLayer { alpha = recede }
-                    .onGloballyPositioned { c ->
-                        val bottom = c.boundsInRoot().bottom.roundToInt()
-                        model.contentInsets = model.contentInsets.copy(top = bottom)
-                    },
+                    .onGloballyPositioned { c -> topInset = c.boundsInRoot().bottom.roundToInt() },
             )
 
             ToolRail(
@@ -172,11 +195,13 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 60.dp)
-                    .graphicsLayer { alpha = if (tool != null) 1f else recede },
+                    .graphicsLayer { alpha = if (tool != null) 1f else recede }
+                    // The rail at rest frames the model; an open pane (to its left) must not move the camera.
+                    .onGloballyPositioned { c -> if (tool == null && rootWidth > 0) railInset = rootWidth - c.boundsInRoot().left.roundToInt() },
             )
 
             Column(
-                Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
+                Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(end = besideRail),
                 verticalArrangement = Arrangement.spacedBy(Space.s),
             ) {
                 AnimatedVisibility(visible = hintShown && selected == null && tool == null, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
@@ -185,8 +210,8 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 AnimatedVisibility(visible = selected != null && !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
                     if (selected != null) {
                         SelectionBar(
-                            name = selected.metadata?.label ?: selected.kindLabel,
-                            detail = listOfNotNull(selected.kindLabel.takeIf { selected.metadata?.label != null }, selected.metadata?.levelLabel).joinToString(" · "),
+                            name = elementTitle(selected),
+                            detail = storeyOf(scene, selected)?.let { storeyText(it) }.orEmpty(),
                             onDetails = { detailsOpen = true; toolName = null },
                             onClear = { model.clearSelection() },
                         )
@@ -202,11 +227,9 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                             onReturnToNow = { progress.returnToNow() },
                             onSetProgress = onSetProgress,
                             modifier = Modifier.onGloballyPositioned { c ->
-                                // Only the rail at rest frames the model: expanding it must not move the camera.
-                                if (!railExpanded && rootHeight > 0) {
-                                    val bottom = rootHeight - c.boundsInRoot().top.roundToInt()
-                                    model.contentInsets = model.contentInsets.copy(bottom = bottom)
-                                }
+                                // Only the rail at rest, showing now, frames the model: expanding it or a
+                                // taller preview header must not move the camera while scrubbing.
+                                if (!railExpanded && view.previewStop == null && rootHeight > 0) timelineInset = rootHeight - c.boundsInRoot().top.roundToInt()
                             },
                         )
                     }
@@ -227,6 +250,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 }
                 Inspector(
                     selected = selected,
+                    storey = storeyOf(scene, selected),
                     stage = stage,
                     stageStatus = status,
                     visibleNow = model.viewer.isVisible(scene, selected.id),
@@ -236,7 +260,9 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     onFrame = { model.frameSelection(System.currentTimeMillis()) },
                     onIsolate = { model.isolateSelected() },
                     onShowAll = { model.showAll() },
-                    modifier = Modifier.navigationBarsPadding(),
+                    modifier = Modifier
+                        .navigationBarsPadding()
+                        .onGloballyPositioned { c -> if (rootHeight > 0) sheetInset = rootHeight - c.boundsInRoot().top.roundToInt() },
                 )
             }
         }
@@ -332,8 +358,15 @@ private fun WorkspaceMessage(title: String, detail: String?, onBack: () -> Unit)
     }
 }
 
+/** The storey an element stands on, in the owner's words: the export's label, or the level's position. */
+private fun storeyOf(scene: ModelScene, obj: SceneObject): ElementWords.Storey? =
+    ElementWords.storey(obj.metadata?.levelLabel ?: scene.levelLabel(obj.levelId), scene.levels.firstOrNull { it.id == obj.levelId }?.index)
+
 /** How far the context and the rail fade while the model is turned: present, not in the way. */
 private const val RECEDED_ALPHA = 0.18f
 
 /** How long the gesture hint stays when nobody touches the model. */
 private const val HINT_MS = 6_000L
+
+/** Below this height (a phone on its side) the rail reaches the timeline, and the bottom stack stops beside it. */
+private val COMPACT_HEIGHT = 480.dp

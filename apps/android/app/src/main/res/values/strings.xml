@@ -46,7 +46,9 @@
     <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Oś budowy nadal pokazuje dom na każdym etapie.</string>
     <string name="progress_set_action">Ustaw postęp</string>
     <string name="progress_metric_label">Postęp wg etapów</string>
-    <string name="progress_done_of">Zakończone etapy: %1$d z %2$d</string>
+    <string name="progress_done_of">Zakończone etapy: %1$d\u00A0z\u00A0%2$d</string>
+    <string name="progress_stage_share">%1$s etapu</string>
+    <string name="progress_saved_on">Zapisano %1$s</string>
     <string name="progress_explain_show">Co to znaczy?</string>
     <string name="progress_explain_hide">Ukryj</string>
     <string name="progress_explain">Procent wynika z postępu ustawionych etapów. Nie oznacza procentu wydanych pieniędzy ani wartości robót.</string>
@@ -80,7 +82,7 @@
 
     <!-- Etapy -->
     <string name="stages_title">Etapy budowy</string>
-    <string name="stages_unset_guide">Dotknij etapu, na którym jest budowa, i wybierz „Ustaw jako aktualny”. Wcześniejsze etapy oznacz jako zakończone — aplikacja nie zrobi tego sama.</string>
+    <string name="stages_unset_guide">Dotknij etapu, na którym jest budowa, i wybierz „Ustaw jako aktualny”. Potem jednym przyciskiem oznaczysz wcześniejsze etapy jako zakończone — aplikacja sama tego nie zakłada.</string>
     <string name="stages_footer">To lista startowa dla domu jednorodzinnego i dziś każdy etap waży tyle samo. Własne etapy, kolejność i wagi przyjdą później.</string>
     <string name="stage_plot_purchase">Zakup działki</string>
     <string name="stage_design">Projekt</string>
@@ -133,6 +135,77 @@
     <string name="empty_go_stages">Przejdź do Etapów</string>
     <string name="empty_go_house">Przejdź do Domu</string>
     <string name="empty_not_built">Jeszcze niedostępne</string>
+
+    <!-- The owner's words for a scene element (ElementWords) -->
+    <string name="el_wall">Ściana</string>
+    <string name="el_wall_exterior">Ściana zewnętrzna</string>
+    <string name="el_wall_interior">Ściana wewnętrzna</string>
+    <string name="el_opening">Otwór w ścianie</string>
+    <string name="el_room">Pomieszczenie</string>
+    <string name="el_door">Drzwi</string>
+    <string name="el_window">Okno</string>
+    <string name="el_surface">Powierzchnia ściany</string>
+    <string name="el_roof_opening">Otwór w dachu</string>
+    <string name="el_balcony">Balkon</string>
+    <string name="el_terrace">Taras</string>
+    <string name="el_slab">Płyta</string>
+    <string name="el_rooflight">Okno dachowe</string>
+    <string name="el_chimney">Komin</string>
+    <string name="el_railing">Balustrada</string>
+    <string name="el_roof">Dach</string>
+    <string name="el_roof_flat">Dach płaski</string>
+    <string name="el_roof_gable">Dach dwuspadowy</string>
+    <string name="el_stair">Schody</string>
+    <string name="el_other">Element</string>
+    <string name="storey_ground">Parter</string>
+    <string name="storey_numbered">Kondygnacja %1$d</string>
+    <string name="fact_usage">Przeznaczenie</string>
+    <string name="fact_floor_area">Powierzchnia podłogi</string>
+    <string name="fact_area">Powierzchnia</string>
+    <string name="fact_length">Długość</string>
+    <string name="fact_width">Szerokość</string>
+    <string name="fact_height">Wysokość</string>
+    <string name="fact_thickness">Grubość</string>
+    <string name="fact_footprint">Wymiary w rzucie</string>
+    <string name="fact_pitch">Kąt nachylenia</string>
+    <string name="fact_sill">Wysokość parapetu</string>
+    <string name="fact_opening_size">Wymiary otworu</string>
+    <string name="fact_openings">Liczba otworów</string>
+    <string name="fact_overhang">Wysunięcie okapu</string>
+    <string name="fact_risers">Liczba stopni</string>
+    <string name="usage_bathroom">łazienka</string>
+    <string name="usage_bedroom">sypialnia</string>
+    <string name="usage_boiler">kotłownia</string>
+    <string name="usage_corridor">korytarz</string>
+    <string name="usage_entry">wiatrołap</string>
+    <string name="usage_garage">garaż</string>
+    <string name="usage_hall">hol</string>
+    <string name="usage_kitchen">kuchnia</string>
+    <string name="usage_laundry">pralnia</string>
+    <string name="usage_living">pokój dzienny</string>
+    <string name="usage_pantry">spiżarnia</string>
+    <string name="usage_room">pokój</string>
+    <string name="usage_stair">klatka schodowa</string>
+    <string name="usage_wardrobe">garderoba</string>
+    <string name="material_dark_render">tynk ciemny</string>
+    <string name="material_light_render">tynk jasny</string>
+    <string name="material_render">tynk</string>
+    <string name="material_timber">drewno</string>
+    <string name="material_timber_cladding">okładzina drewniana</string>
+    <string name="material_dark_joinery">stolarka ciemna</string>
+    <string name="material_roof_membrane">membrana dachowa</string>
+    <string name="material_roof_covering">pokrycie dachowe</string>
+    <string name="material_concrete">beton</string>
+    <string name="material_glazing">szkło</string>
+    <string name="material_partition">ścianka działowa</string>
+    <string name="material_chimney">obudowa komina</string>
+    <string name="inspector_dimensions">Wymiary (dł. × szer. × wys.)</string>
+    <string name="inspector_model_name">Nazwa w modelu</string>
+    <string name="inspector_model_kind">Rodzaj w modelu</string>
+    <string name="inspector_model_storey">Kondygnacja w modelu</string>
+    <string name="inspector_model_material">Materiał w modelu</string>
+    <string name="inspector_export_facts">Dane z eksportu modelu (nazwy angielskie)</string>
+    <string name="inspector_relations_export">Powiązania w modelu</string>
 
     <!-- 3D -->
     <string name="model_back">Wróć</string>
@@ -208,8 +281,6 @@
     <string name="inspector_stage_unmapped_detail">Reguły etapów nie rozpoznają tego elementu, więc pokazuje się tylko w projekcie docelowym.</string>
     <string name="inspector_hidden_in_view">Na tym etapie osi budowy element jeszcze nie stoi.</string>
     <string name="inspector_material">Materiał</string>
-    <string name="inspector_extent">Wymiary</string>
-    <string name="inspector_relations">Powiązania</string>
     <string name="inspector_provenance">Skąd to wiadomo</string>
     <string name="inspector_status">Status</string>
     <string name="inspector_source">Źródło</string>
@@ -343,6 +414,12 @@
     <string name="analyzer_delete_body">%1$s zniknie z tego telefonu. Zapisany postęp budowy tego domu zostaje i wróci, gdy przeanalizujesz ten link ponownie.</string>
 
     <!-- Liczebniki (polskie formy mnogie) -->
+    <plurals name="stage_mark_earlier_done">
+        <item quantity="one">Oznacz %1$d wcześniejszy etap jako zakończony</item>
+        <item quantity="few">Oznacz %1$d wcześniejsze etapy jako zakończone</item>
+        <item quantity="many">Oznacz %1$d wcześniejszych etapów jako zakończone</item>
+        <item quantity="other">Oznacz %1$d wcześniejszego etapu jako zakończone</item>
+    </plurals>
     <plurals name="count_objects">
         <item quantity="one">%d obiekt</item>
         <item quantity="few">%d obiekty</item>

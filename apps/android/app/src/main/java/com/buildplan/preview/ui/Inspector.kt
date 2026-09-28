@@ -39,17 +39,21 @@ import kotlin.math.abs
  * The details of the selected element, as a sheet rising from the bottom
  * edge in place of the timeline — never stacked on top of it.
  *
- * Human meaning first: what it is and where, then which construction stage
- * it belongs to and whether, by the owner's account, it stands yet; then its
- * sizes (to the centimetre: this is a model to understand, not to build
- * from), its relations, and how the source knows it — in words. Identifiers,
- * part lists, triangle counts and the analyzer's confidence figure are folded
- * under "Dane techniczne". Every row comes from the exporter's metadata or
- * from the progress record; this file lays them out and reads nothing else.
+ * Human meaning first, in the owner's Polish ([ElementWords]): what it is and
+ * on which storey, with its size in plan; then which construction stage it
+ * belongs to and whether, by the owner's account, it stands yet; then the
+ * facts an owner asks about (sizes to the centimetre, area, use, material)
+ * and how the source knows it, in words. Everything the export says in its
+ * own engineering English — its name for the element, every fact, the
+ * relations, the source locators — plus identifiers, parts, triangle counts
+ * and the confidence figure is folded under "Dane techniczne". Every row
+ * comes from the exporter's metadata or from the progress record.
  */
 @Composable
 fun Inspector(
     selected: SceneObject,
+    /** The element's storey in the owner's words, when the model places it on one. */
+    storey: ElementWords.Storey?,
     stage: ConstructionStageKey?,
     /** The owner's status of [stage], or null while progress is unset. */
     stageStatus: StageStatus?,
@@ -72,10 +76,11 @@ fun Inspector(
             .heightIn(max = maxHeight)
             .background(Palette.Sheet, RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet)),
     ) {
-        val where = listOfNotNull(selected.kindLabel.takeIf { meta?.label != null }, meta?.levelLabel).joinToString(" · ")
+        val size = selected.bounds.size
+        val plan = if (selected.bounds.isEmpty) null else "${metresValue(maxOf(size.x, size.z))} × ${metres(minOf(size.x, size.z))}"
         PanelHeader(
-            title = meta?.label ?: selected.kindLabel,
-            supporting = where.ifBlank { null },
+            title = elementTitle(selected),
+            supporting = listOfNotNull(storey?.let { storeyText(it) }, plan).joinToString(" · ").ifBlank { null },
             closeLabel = stringResource(R.string.inspector_close),
             onClose = onClose,
         )
@@ -90,35 +95,51 @@ fun Inspector(
                 ConstructionLine(stage, stageStatus, visibleNow)
 
                 Group(stringResource(R.string.inspector_about))
-                meta?.materialLabel?.let { Fact(stringResource(R.string.inspector_material), it) }
-                for (fact in meta?.facts.orEmpty()) Fact(fact.label, fact.value)
-                val size = selected.bounds.size
-                if (!selected.bounds.isEmpty) Fact(stringResource(R.string.inspector_extent), "${metres(size.x)} × ${metres(size.y)} × ${metres(size.z)}")
-
-                val relations = meta?.relations.orEmpty()
-                if (relations.isNotEmpty()) {
-                    Group(stringResource(R.string.inspector_relations))
-                    for (r in relations) Fact(r.role.replaceFirstChar { it.uppercase() }, r.targetLabel)
+                ElementWords.material(meta?.materialLabel)?.let { Fact(stringResource(R.string.inspector_material), stringResource(it)) }
+                for (fact in meta?.facts.orEmpty()) {
+                    val owner = ElementWords.ownerFact(fact) ?: continue
+                    Fact(stringResource(owner.label), owner.valueRes?.let { stringResource(it) } ?: owner.value.orEmpty())
+                }
+                if (!selected.bounds.isEmpty) {
+                    Fact(
+                        stringResource(R.string.inspector_dimensions),
+                        "${metresValue(maxOf(size.x, size.z))} × ${metresValue(minOf(size.x, size.z))} × ${metres(size.y)}",
+                    )
                 }
 
                 meta?.evidence?.let { e ->
                     Group(stringResource(R.string.inspector_provenance))
                     Fact(stringResource(R.string.inspector_status), stringResource(evidenceStatusRes(e.status)))
                     e.confidence?.let { Fact(stringResource(R.string.inspector_confidence), stringResource(confidenceWordRes(it))) }
-                    e.source?.let { Fact(stringResource(R.string.inspector_source), it) }
-                    e.locator?.let { Fact(stringResource(R.string.inspector_locator), it) }
-                    e.interpretation?.let { Fact(stringResource(R.string.inspector_interpretation), it) }
-                    e.note?.let { Fact(stringResource(R.string.inspector_note), it) }
                 }
 
                 TextButton(onClick = { technical = !technical }, modifier = Modifier.heightIn(min = Sizes.touch)) {
                     Text(stringResource(if (technical) R.string.inspector_technical_hide else R.string.inspector_technical_show), color = Palette.InkMuted)
                 }
                 if (technical) {
+                    meta?.label?.takeIf { it.isNotBlank() }?.let { Fact(stringResource(R.string.inspector_model_name), it) }
+                    Fact(stringResource(R.string.inspector_model_kind), selected.kindLabel)
+                    meta?.levelLabel?.let { Fact(stringResource(R.string.inspector_model_storey), it) }
+                    meta?.materialLabel?.let { Fact(stringResource(R.string.inspector_model_material), it) }
                     Fact(stringResource(R.string.inspector_id), selected.id)
+                    val facts = meta?.facts.orEmpty()
+                    if (facts.isNotEmpty()) {
+                        Group(stringResource(R.string.inspector_export_facts))
+                        for (fact in facts) Fact(fact.label, fact.value)
+                    }
+                    val relations = meta?.relations.orEmpty()
+                    if (relations.isNotEmpty()) {
+                        Group(stringResource(R.string.inspector_relations_export))
+                        for (r in relations) Fact(r.role, r.targetLabel)
+                    }
                     meta?.evidence?.let { e ->
+                        Group(stringResource(R.string.inspector_provenance))
                         Fact(stringResource(R.string.inspector_status_code), e.status)
                         e.confidence?.let { Fact(stringResource(R.string.inspector_confidence_value), "${(it * 100).toInt()}%") }
+                        e.source?.let { Fact(stringResource(R.string.inspector_source), it) }
+                        e.locator?.let { Fact(stringResource(R.string.inspector_locator), it) }
+                        e.interpretation?.let { Fact(stringResource(R.string.inspector_interpretation), it) }
+                        e.note?.let { Fact(stringResource(R.string.inspector_note), it) }
                     }
                     Fact(
                         stringResource(R.string.inspector_geometry),
@@ -231,5 +252,22 @@ fun confidenceWordRes(confidence: Double): Int = when {
 }
 
 /** Dimensions read off the converted geometry, to the centimetre: "4,25 m". */
-fun metres(v: Double): String =
-    "${String.format(Locale.ROOT, "%.2f", abs(v)).trimEnd('0').trimEnd('.').replace('.', ',')} m"
+fun metres(v: Double): String = "${metresValue(v)} m"
+
+/** The number of [metres] without its unit, for "4,25 × 7,5 m". */
+fun metresValue(v: Double): String =
+    String.format(Locale.ROOT, "%.2f", abs(v)).trimEnd('0').trimEnd('.').replace('.', ',')
+
+/** The element's headline in the owner's words. */
+@Composable
+fun elementTitle(obj: SceneObject): String = when (val t = ElementWords.title(obj)) {
+    is ElementWords.Title.SourceName -> t.name
+    is ElementWords.Title.Words -> stringResource(t.res)
+}
+
+@Composable
+fun storeyText(storey: ElementWords.Storey): String = when (storey) {
+    is ElementWords.Storey.SourceName -> storey.name
+    ElementWords.Storey.Ground -> stringResource(R.string.storey_ground)
+    is ElementWords.Storey.Numbered -> stringResource(R.string.storey_numbered, storey.number + 1)
+}

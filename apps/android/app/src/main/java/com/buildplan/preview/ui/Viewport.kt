@@ -104,8 +104,7 @@ fun Viewport(
         modifier = modifier
             .fillMaxSize()
             .onSizeChanged {
-                model.viewportHeightPx = it.height
-                model.viewportWidthPx = it.width
+                model.onViewportSize(it.width, it.height)
             }
             .semantics { contentDescription = viewportDescription }
             .pointerInput(scene.key) {

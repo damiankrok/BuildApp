@@ -2,7 +2,12 @@ package com.buildplan.preview
 
 import com.buildplan.preview.camera.ContentFrame
 import com.buildplan.preview.camera.ContentInsets
+import com.buildplan.preview.camera.OrbitCamera
+import com.buildplan.preview.math.Bounds
+import com.buildplan.preview.math.Vec3
+import kotlin.math.tan
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
@@ -30,6 +35,38 @@ class ContentFrameTest {
         val f = ContentFrame.of(1000, 2000, ContentInsets(right = 200))
         assertEquals(-0.2, f.shiftX, 1e-9)
         assertEquals(0.8, f.scale, 1e-9)
+    }
+
+    @Test
+    fun withoutChromeTheFitAspectIsTheViewportsNarrowerSide() {
+        assertEquals(1080.0 / 2400.0, ContentFrame.fitAspect(1080, 2400, ContentInsets.NONE), 1e-9)
+        assertEquals(1.0, ContentFrame.fitAspect(2400, 1080, ContentInsets.NONE), 1e-9)
+    }
+
+    /**
+     * Cycle 1, C1-01: the home view cut the gables off a portrait phone
+     * (fitted to the vertical field, then scaled). Fitted with the free
+     * rectangle's aspect, the house's bounding sphere — margin included —
+     * lies inside the free rectangle on every side.
+     */
+    @Test
+    fun theHomeViewFitsTheWholeHouseInsideTheFreeRectangleOnAPortraitPhone() {
+        val w = 1080
+        val h = 2400
+        val insets = ContentInsets(top = 270, right = 210, bottom = 450)
+        val house = Bounds(Vec3(0.0, 0.0, 0.0), Vec3(12.6, 8.0, 10.0))
+        val camera = OrbitCamera(house)
+        val pose = camera.home(ContentFrame.fitAspect(w, h, insets))
+        val frame = ContentFrame.of(w, h, insets)
+        // Sphere radius on screen, in pixels, after the frame's uniform scale.
+        val tanHalf = tan(Math.toRadians(camera.fovDeg) / 2.0)
+        val radiusPx = frame.scale * (h / 2.0) * house.radius / (pose.distance * tanHalf)
+        val freeW = w - insets.left - insets.right
+        val freeH = h - insets.top - insets.bottom
+        assertTrue("fits the free width: 2 × $radiusPx ≤ $freeW", 2 * radiusPx <= freeW + 1e-6)
+        assertTrue("fits the free height: 2 × $radiusPx ≤ $freeH", 2 * radiusPx <= freeH + 1e-6)
+        // …and uses it: the narrower free side is filled up to the framing margin.
+        assertEquals(freeW / 1.35, 2 * radiusPx, 1.0)
     }
 
     @Test

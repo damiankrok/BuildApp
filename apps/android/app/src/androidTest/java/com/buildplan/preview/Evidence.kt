@@ -63,6 +63,12 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
 
     fun string(id: Int, vararg args: Any): String = app.getString(id, *args)
 
+    /** A plural as the app shows it: by Polish rules, whatever the device's language (MainActivity pins them). */
+    fun plural(id: Int, count: Int, vararg args: Any): String {
+        val config = android.content.res.Configuration(app.resources.configuration).apply { setLocale(PRODUCT_LOCALE) }
+        return app.createConfigurationContext(config).resources.getQuantityString(id, count, *args)
+    }
+
     /** Wait until a node matching [matcher] is on screen: screens settle over a few frames. */
     fun awaitNode(matcher: SemanticsMatcher, unmerged: Boolean = false, timeoutMs: Long = NODE_TIMEOUT_MS) {
         compose.waitUntil(timeoutMs) { compose.onAllNodes(matcher, useUnmergedTree = unmerged).fetchSemanticsNodes().isNotEmpty() }
@@ -154,6 +160,26 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         return bitmap to "screencap"
     }
 
+    /**
+     * Cycle 1, C1-01: the whole house stands inside the space the chrome
+     * leaves free. The strips along the free rectangle's left and right
+     * edges (3 % of the width each, between the top context and the
+     * timeline) must hold almost no bright pixels — a wall reaching the edge
+     * of the screen, or running under the tool rail, fills them.
+     */
+    fun assertHouseInsideFreeArea(model: PreviewViewModel, shot: Bitmap, step: String) {
+        val i = model.contentInsets
+        val strip = (shot.width * 0.03).toInt()
+        val top = i.top
+        val bottom = shot.height - i.bottom
+        val left = inkPixels(shot, Rect(i.left, top, i.left + strip, bottom), HOUSE_LUMINANCE)
+        val right = inkPixels(shot, Rect(shot.width - i.right - strip, top, shot.width - i.right, bottom), HOUSE_LUMINANCE)
+        fact("$step: free area", "l=${i.left} t=${i.top} r=${i.right} b=${i.bottom}")
+        fact("$step: house pixels at the free area's left / right edge", "$left / $right")
+        assertTrue("$step: the house reaches the left edge of the free area ($left bright pixels)", left <= EDGE_TOLERANCE)
+        assertTrue("$step: the house runs under the tool rail ($right bright pixels)", right <= EDGE_TOLERANCE)
+    }
+
     fun fact(key: String, value: Any?) {
         facts[key] = JsonPrimitive(value?.toString())
     }
@@ -180,6 +206,12 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         private const val SCREENSHOT_RETRY_MS = 400L
         private const val PRESENT_TIMEOUT_MS = 10_000L
         private const val COMPOSITOR_MS = 250L
+
+        /** Luminance above which a pixel is a lit wall, not the ground (#101419) or the grid's thin lines. */
+        private const val HOUSE_LUMINANCE = 110.0
+
+        /** Bright pixels an edge strip may hold without the house touching it: antialiasing, a stray grid crossing. */
+        private const val EDGE_TOLERANCE = 60
 
         /** Mean absolute luminance difference (0–255) of two screenshots over a region. */
         fun difference(a: Bitmap, b: Bitmap, region: Rect): Double {

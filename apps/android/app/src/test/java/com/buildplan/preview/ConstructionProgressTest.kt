@@ -50,6 +50,33 @@ class ConstructionProgressTest {
         assertNull(s.currentTaskLabel)
     }
 
+    // -- "everything before this is finished" ----------------------------------
+
+    @Test
+    fun markDoneBeforeFinishesExactlyTheEarlierUnfinishedStagesInOneEdit() {
+        var s = starter().markDone(id(ConstructionStageKey.DESIGN), t0).applied()
+        s = s.startStage(id(ConstructionStageKey.ROOF), 0.4, t0).applied()
+        assertEquals(
+            "the count the button shows: stages 1-7 minus the one already done",
+            6,
+            s.unfinishedBefore(id(ConstructionStageKey.ROOF)).size,
+        )
+        val after = s.markDoneBefore(id(ConstructionStageKey.ROOF), t0 + 5).applied()
+        assertTrue(after.stages.take(7).all { it.status == StageStatus.DONE && it.completion == 1.0 })
+        assertEquals("the current stage is untouched", StageStatus.IN_PROGRESS, after.stage(id(ConstructionStageKey.ROOF))?.status)
+        assertEquals(0.4, after.stage(id(ConstructionStageKey.ROOF))?.completion ?: -1.0, 0.0)
+        assertTrue("later stages are untouched", after.stages.drop(8).all { it.status == StageStatus.NOT_STARTED })
+        assertEquals(t0 + 5, after.updatedAtEpochMs)
+        assertEquals(0, after.unfinishedBefore(id(ConstructionStageKey.ROOF)).size)
+    }
+
+    @Test
+    fun markDoneBeforeNeverFinishesAStageInProgressBehindTheOwnersBack() {
+        val s = starter().startStage(id(ConstructionStageKey.WALLS), 0.5, t0).applied()
+        assertEquals(ProgressRejection.ANOTHER_STAGE_IN_PROGRESS, s.markDoneBefore(id(ConstructionStageKey.ROOF), t0).rejection())
+        assertEquals(ProgressRejection.UNKNOWN_STAGE, s.markDoneBefore("stage-nope", t0).rejection())
+    }
+
     // -- percentage ------------------------------------------------------------
 
     @Test

@@ -1,5 +1,7 @@
 package com.buildplan.preview
 
+import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,6 +16,7 @@ import com.buildplan.preview.ui.PreviewTheme
 import com.buildplan.preview.ui.PreviewViewModel
 import com.buildplan.preview.ui.ProgressViewModel
 import com.buildplan.preview.ui.ShellState
+import java.util.Locale
 
 /**
  * The product shell (`ui/AppShell`): Dom, 3D, Etapy, Koszty, Dokumenty.
@@ -34,6 +37,18 @@ import com.buildplan.preview.ui.ShellState
  * comparison.
  */
 class MainActivity : ComponentActivity() {
+    /**
+     * Polish is the product's language whatever the phone's: every string is
+     * Polish, and plural forms ("3 etapy", "6 etapów") follow the rules of
+     * the configuration's locale — on an English phone "6" took the "other"
+     * form and read "6 wcześniejszego etapu". The phone's font scale and the
+     * rest of its configuration are kept.
+     */
+    override fun attachBaseContext(newBase: Context) {
+        val config = Configuration(newBase.resources.configuration).apply { setLocale(PRODUCT_LOCALE) }
+        super.attachBaseContext(newBase.createConfigurationContext(config))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // The app is dark whatever the system theme: light system-bar icons on it, always.
         enableEdgeToEdge(
@@ -54,3 +69,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+/** The one language of the product's words, for their plural and number rules. */
+val PRODUCT_LOCALE: Locale = Locale.forLanguageTag("pl-PL")

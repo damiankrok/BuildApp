@@ -58,6 +58,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.buildplan.preview.PRODUCT_LOCALE
 import com.buildplan.preview.R
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisState
@@ -77,7 +78,6 @@ import com.buildplan.preview.scene.DownloadedSceneEntry
 import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 
@@ -612,7 +612,7 @@ private fun LocalRuns(runs: List<LocalRunReport>) {
     }
 }
 
-private val RUN_DATE = SimpleDateFormat("d MMM yyyy, HH:mm", Locale.forLanguageTag("pl-PL"))
+private val RUN_DATE = SimpleDateFormat("d MMM yyyy, HH:mm", PRODUCT_LOCALE)
 
 @Composable
 private fun outcomeText(report: LocalRunReport): String = when (report.outcome) {
@@ -630,11 +630,11 @@ private fun runtimeText(report: LocalRunReport): String {
 
 private fun duration(ms: Long): String {
     val seconds = ms / 1000.0
-    return if (seconds < 60) String.format(Locale.forLanguageTag("pl-PL"), "%.1f s", seconds) else "${ms / 60_000} min ${(ms / 1000) % 60} s"
+    return if (seconds < 60) String.format(PRODUCT_LOCALE, "%.1f s", seconds) else "${ms / 60_000} min ${(ms / 1000) % 60} s"
 }
 
 private fun megabytes(bytes: Long, decimals: Int = 0): String =
-    String.format(Locale.forLanguageTag("pl-PL"), "%.${decimals}f MB", bytes / (1024.0 * 1024.0))
+    String.format(PRODUCT_LOCALE, "%.${decimals}f MB", bytes / (1024.0 * 1024.0))
 
 // ---------------------------------------------------------------------------
 // Analyses kept on this phone

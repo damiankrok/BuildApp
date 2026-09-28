@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import com.buildplan.preview.camera.ContentFrame
 import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.camera.OrbitPose
@@ -60,8 +61,10 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     var reducedMotion: Boolean = false
 
     var viewportHeightPx: Int = 1
+        private set
 
     var viewportWidthPx: Int = 1
+        private set
 
     /**
      * Which Android surface the viewport renders into. A launch extra can pick
@@ -78,13 +81,20 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
      * thread's callback, so a plain volatile rather than snapshot state.
      */
     @Volatile var contentInsets: ContentInsets = ContentInsets.NONE
+        private set
+
+    /** The chrome at rest (no sheet open): what "the whole house" is fitted to. */
+    private var restInsets: ContentInsets = ContentInsets.NONE
+
+    /** The home pose last computed; while the camera is still there, a new size or new chrome re-fits it. */
+    private var home: OrbitPose? = null
 
     /** True while a finger turns, pans or zooms the model: the chrome steps back. */
     var manipulating by mutableStateOf(false)
         private set
 
-    /** Width over height of the viewport, for presets that fit the model to the screen. */
-    private val viewportAspect: Double get() = if (viewportHeightPx > 0) viewportWidthPx.toDouble() / viewportHeightPx else 1.0
+    /** The aspect fits use: the free rectangle's, so the fitted house lands between the chrome whole. */
+    private val fitAspect: Double get() = ContentFrame.fitAspect(viewportWidthPx, viewportHeightPx, restInsets)
 
     private var animation: Animation? = null
     private var lastTapAtMs = 0L
@@ -126,7 +136,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
             is SceneLoadResult.Ok -> {
                 val model = result.scene
                 camera = OrbitCamera(model.bounds)
-                pose = camera.home()
+                pose = camera.home(fitAspect).also { home = it }
                 // Selection, isolation and layers name objects of the old
                 // model and start over; the style and the presentation mode
                 // are how the viewer draws, not part of the model, so they
@@ -198,12 +208,40 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     fun reset(nowMs: Long) {
         val model = scene ?: return
         viewer = viewer.showAll().clearSelection()
-        moveTo(camera.home(), nowMs)
+        moveTo(camera.home(fitAspect).also { home = it }, nowMs)
+    }
+
+    /** The viewport's size in pixels, from its layout. */
+    fun onViewportSize(width: Int, height: Int) {
+        if (width == viewportWidthPx && height == viewportHeightPx) return
+        viewportWidthPx = width
+        viewportHeightPx = height
+        refitHome()
+    }
+
+    /**
+     * The chrome's footprint on the viewport: [rest] is the chrome at rest,
+     * which "the whole house" is fitted to; [drawn] is what the renderer
+     * frames into now — the same, or with an open sheet's height at the
+     * bottom so the element asked about stays in view above it.
+     */
+    fun onChromeInsets(rest: ContentInsets, drawn: ContentInsets = rest) {
+        contentInsets = drawn
+        if (rest == restInsets) return
+        restInsets = rest
+        refitHome()
+    }
+
+    /** Still at home (never turned, zoomed or framed since): fit home again to the space there is now. */
+    private fun refitHome() {
+        val at = home ?: return
+        if (animation != null || pose != at) return
+        pose = camera.home(fitAspect).also { home = it }
     }
 
     fun applyPreset(preset: ViewPreset, nowMs: Long) {
         val model = scene ?: return
-        val target = preset.poseIn(camera, model, poseAt(nowMs), viewportAspect) ?: return
+        val target = preset.poseIn(camera, model, poseAt(nowMs), fitAspect) ?: return
         preset.visibility?.let { viewer = viewer.withVisibility(model, it) }
         // A focus preset is also an answer to "which one?", so it selects the
         // object it framed — otherwise the inspector would still be empty
@@ -215,7 +253,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     fun frameSelection(nowMs: Long) {
         val model = scene ?: return
         val target = model.objectById(viewer.selectedObjectId) ?: return
-        moveTo(camera.frame(pose, target.bounds, margin = 1.7), nowMs)
+        moveTo(camera.frame(pose, target.bounds, margin = 1.7, aspect = fitAspect), nowMs)
     }
 
     // -----------------------------------------------------------------------
@@ -243,7 +281,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         lastTapObjectId = objectId
         if (isDoubleTap) {
             viewer = viewer.isolateSelected(model)
-            model.objectById(objectId)?.let { moveTo(camera.frame(pose, it.bounds, margin = 1.7), nowMs) }
+            model.objectById(objectId)?.let { moveTo(camera.frame(pose, it.bounds, margin = 1.7, aspect = fitAspect), nowMs) }
             lastTapObjectId = null
         }
         return isDoubleTap

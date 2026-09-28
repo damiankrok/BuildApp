@@ -341,6 +341,11 @@ private fun StageActions(
                 }
                 StageStatus.IN_PROGRESS -> {
                     InkButton(stringResource(R.string.stage_mark_done), onClick = { progress.markDone(stage.stageId) })
+                    // Everything before the current stage finished, in one deliberate edit that says how many it touches.
+                    val earlier = view.stages.count { it.order < stage.order && it.status != StageStatus.DONE }
+                    if (earlier > 0) {
+                        LineButton(pluralStringResource(R.plurals.stage_mark_earlier_done, earlier, earlier), onClick = { progress.markDoneBefore(stage.stageId) })
+                    }
                     LineButton(stringResource(R.string.stage_reset), onClick = { confirmReset = true })
                 }
                 StageStatus.DONE -> {

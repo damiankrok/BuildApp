@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -78,6 +79,26 @@ fun InkButton(
             Box(Modifier.size(Space.s))
         }
         Text(text, style = MaterialTheme.typography.labelLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+/**
+ * A quiet action at the text margin — no outline, no indent: the
+ * second-order ways on from a screen ("Co to znaczy?", "Dodaj dom z linku",
+ * "Dane techniczne"). The whole row is a 48 dp target.
+ */
+@Composable
+fun QuietAction(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null, color: Color = Palette.InkMuted) {
+    Row(
+        modifier = modifier
+            .heightIn(min = Sizes.touch)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(vertical = Space.xs),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(Space.s),
+    ) {
+        if (icon != null) Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(Sizes.iconSmall))
+        Text(text, style = MaterialTheme.typography.labelLarge, color = color)
     }
 }
 
