@@ -15,11 +15,15 @@ import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
 import com.buildplan.preview.render.RenderDiagnostics
 import com.buildplan.preview.ui.AnalyzerViewModel
 import com.buildplan.preview.ui.PreviewViewModel
 import com.buildplan.preview.ui.ProgressViewModel
 import java.io.File
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
@@ -89,6 +93,7 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
     fun capture(name: String, vararg notes: Pair<String, Any?>): Bitmap {
         compose.waitForIdle()
         instrumentation.waitForIdleSync()
+        awaitPresented()
         val (bitmap, via) = screen()
         val file = File(out, "$prefix-$name.png")
         file.outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
@@ -101,6 +106,32 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
             ) + notes.associate { (k, v) -> k to JsonPrimitive(v?.toString()) },
         )
         return bitmap
+    }
+
+    /**
+     * Compose being idle means the frame is recorded, not that it is on the
+     * display: an emulator drawing in software hands frames to the compositor
+     * a second or more later, and a screenshot then shows the previous screen.
+     * Redraw the window and wait until that frame has been submitted to its
+     * swap chain — twice, so the one showing the latest state is through — and
+     * give the compositor a moment to put it on the display.
+     */
+    private fun awaitPresented() {
+        repeat(2) {
+            val committed = CountDownLatch(1)
+            instrumentation.runOnMainSync {
+                val activity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED).firstOrNull()
+                val decor = activity?.window?.decorView
+                if (decor == null) {
+                    committed.countDown()
+                } else {
+                    decor.viewTreeObserver.registerFrameCommitCallback { committed.countDown() }
+                    decor.invalidate()
+                }
+            }
+            check(committed.await(PRESENT_TIMEOUT_MS, TimeUnit.MILLISECONDS)) { "the window never committed a frame" }
+        }
+        SystemClock.sleep(COMPOSITOR_MS)
     }
 
     /**
@@ -143,6 +174,8 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         const val NODE_TIMEOUT_MS = 10_000L
         private const val SCREENSHOT_ATTEMPTS = 3
         private const val SCREENSHOT_RETRY_MS = 400L
+        private const val PRESENT_TIMEOUT_MS = 10_000L
+        private const val COMPOSITOR_MS = 250L
 
         /** Mean absolute luminance difference (0–255) of two screenshots over a region. */
         fun difference(a: Bitmap, b: Bitmap, region: Rect): Double {

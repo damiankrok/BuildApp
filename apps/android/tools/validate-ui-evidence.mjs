@@ -3,7 +3,7 @@
 // missing or is not a real picture of the screen.
 //
 //   node validate-ui-evidence.mjs --dir <ui-evidence> --size 1080x2400 \
-//        --require default:journey font-1.3:journey slice-marcowki:slice --out validation.json
+//        --require default:journey font-1.3:journey landscape:adaptive slice-marcowki:slice --out validation.json
 //
 // For every required capture (and every capture a manifest lists) the PNG
 // must exist, be non-empty, decode (signature, chunk CRCs, IHDR, the inflated
@@ -24,6 +24,7 @@ const REQUIRED = {
     '01-analyzing', '02-3d-after-analysis', '03-dom-result', '04-analyzer-result', '05-etapy-current',
     '06-3d-now', '07-3d-history-roof', '08-3d-history-joinery', '09-3d-again',
   ],
+  adaptive: ['01-dom', '02-3d-now', '03-3d-history-walls', '04-etapy'],
 }
 
 const args = process.argv.slice(2)

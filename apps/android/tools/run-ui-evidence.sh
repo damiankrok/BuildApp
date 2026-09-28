@@ -7,7 +7,8 @@
 # 1. installs the app (with the embedded analyzer) and the instrumentation APK;
 # 2. runs ProductFlowDeviceTest — the owner's journey through Dom, 3D, Etapy,
 #    the time machine, the inspector, the analyzer page, Koszty and
-#    Dokumenty, by the screens' own semantics — at font scale 1.0 and 1.3;
+#    Dokumenty, by the screens' own semantics — at font scale 1.0 and 1.3 —
+#    and AdaptiveLayoutDeviceTest, the same places in landscape;
 # 3. with SLICES=1, runs VerticalSliceDeviceTest on the Marcówki and Rarytasy
 #    links: analysed on the phone through the analyzer page, then 3D, progress
 #    and history for that house;
@@ -86,12 +87,17 @@ if [ "$GATE" != 2 ]; then
   r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
   font 1.0
 fi
+# 2b. The same product turned to landscape: Dom, 3D with the time machine, Etapy; the rotation keeps one engine.
+if [ "$GATE" != 2 ]; then
+  instrument landscape "$PKG.AdaptiveLayoutDeviceTest" "$STALL"
+  r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
+fi
 
 pull() {
   online && timeout "$STALL" adb pull "/sdcard/Android/data/$PKG/files/ui-evidence" "$OUT/" >/dev/null 2>&1 || echo "no ui-evidence to pull yet"
 }
 
-REQUIRED="default:journey font-1.3:journey"
+REQUIRED="default:journey font-1.3:journey landscape:adaptive"
 slice() {
   local name="$1" url="$2"
   if [ "$SLICES" != 1 ] || [ -z "$url" ] || [ "$GATE" = 2 ]; then echo "NOT_RUN" > "$OUT/slice-$name-status.txt"; return; fi
