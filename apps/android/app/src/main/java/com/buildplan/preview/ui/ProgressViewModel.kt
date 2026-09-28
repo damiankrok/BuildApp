@@ -111,8 +111,9 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
 
     fun setCurrentTask(label: String?) = apply { it.setCurrentTask(label) }
 
-    fun consumeOutcome() {
-        lastOutcome = null
+    /** The screen has said [outcome]; a newer one that arrived meanwhile is kept, never wiped. */
+    fun consumeOutcome(outcome: EditOutcome) {
+        if (lastOutcome === outcome) lastOutcome = null
     }
 
     private fun refresh() {

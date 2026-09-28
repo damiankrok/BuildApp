@@ -87,6 +87,8 @@ class VerticalSliceDeviceTest {
         val progress = evidence.progress(scenario)
         val analyzer = evidence.analyzer(scenario)
         evidence.fact("url", link)
+        // Dom reads the built-in house in the background: wait until it is on screen.
+        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.scene != null && progress.view != null }
 
         // Dom -> "Dodaj dom z linku" -> paste -> "Analizuj projekt".
         compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))

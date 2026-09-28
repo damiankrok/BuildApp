@@ -245,7 +245,10 @@ class ReleaseCandidateDeviceTest {
         // Roof off + history: at the end of Dach the roof stands, and the layer still takes it off.
         compose.runOnIdle { preview.setVisibility(VisibilityMode.ROOF_OFF) }
         previewStage(preview, progress, ConstructionStageKey.ROOF)
-        assertTrue("roof off wins over the stage", roof.none { preview.viewer.isVisible(scene, it) })
+        // The roof planes stand at the end of Dach, and "Bez dachu" still takes them off (chimneys stay: they are not roof).
+        val planes = roof.filter { id -> scene.objects.first { it.id == id }.kind == "roof" }
+        assertTrue("the roof stage has roof planes", planes.isNotEmpty())
+        assertTrue("roof off wins over the stage", planes.none { preview.viewer.isVisible(scene, it) })
         assertTrue("the walls still stand", walls.any { preview.viewer.isVisible(scene, it) })
         assertDrawnAsStated(preview, d, "E roof off at Dach")
         evidence.settleFrames(d)

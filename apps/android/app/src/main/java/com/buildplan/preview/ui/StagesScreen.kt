@@ -48,6 +48,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -110,7 +112,7 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitl
     val refusedText = outcome?.let { outcomeMessage(it, view) }
     LaunchedEffect(outcome) {
         if (outcome == null) return@LaunchedEffect
-        progress.consumeOutcome()
+        progress.consumeOutcome(outcome)
         if (refusedText != null) snackbar.showSnackbar(refusedText, duration = SnackbarDuration.Short)
     }
 
@@ -287,6 +289,14 @@ private fun CompletionEditor(stage: ConstructionStageProgress, progress: Progres
 private fun TaskEditor(current: String?, progress: ProgressViewModel) {
     var text by rememberSaveable(current) { mutableStateOf(current.orEmpty()) }
     val changed = text.trim() != current.orEmpty()
+    // Saved means done typing: the keyboard goes, and with it the places come back.
+    val keyboard = LocalSoftwareKeyboardController.current
+    val focus = LocalFocusManager.current
+    val save: () -> Unit = {
+        progress.setCurrentTask(text)
+        focus.clearFocus()
+        keyboard?.hide()
+    }
     Column(verticalArrangement = Arrangement.spacedBy(Space.xs)) {
         OutlinedTextField(
             value = text,
@@ -295,7 +305,7 @@ private fun TaskEditor(current: String?, progress: ProgressViewModel) {
             placeholder = { Text(stringResource(R.string.stage_task_placeholder)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { if (changed) progress.setCurrentTask(text) }),
+            keyboardActions = KeyboardActions(onDone = { if (changed) save() }),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Palette.Ink,
                 unfocusedBorderColor = Palette.RuleEmpty,
@@ -305,7 +315,7 @@ private fun TaskEditor(current: String?, progress: ProgressViewModel) {
             modifier = Modifier.fillMaxWidth(),
         )
         if (changed) {
-            LineButton(stringResource(R.string.stage_task_save), onClick = { progress.setCurrentTask(text) })
+            LineButton(stringResource(R.string.stage_task_save), onClick = save)
         }
     }
 }
