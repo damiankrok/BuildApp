@@ -131,7 +131,9 @@ class DownloadedScenes(
     fun find(key: String): DownloadedSceneEntry? = list().firstOrNull { it.key == key }
 
     override fun catalog(): List<SceneEntry> = list().map {
-        SceneEntry(key = it.key, title = it.label.ifBlank { it.title }, subtitle = it.subtitle, source = SceneSourceKind.DOWNLOADED)
+        // The house's own title: the analyzer's selector label adds an English "(analysis)", and where
+        // the model came from is said by the source line, in Polish.
+        SceneEntry(key = it.key, title = it.title.ifBlank { it.label }, subtitle = it.subtitle, source = SceneSourceKind.DOWNLOADED)
     }
 
     /**
@@ -233,7 +235,7 @@ class DownloadedScenes(
                 if (parsed.bundle.contentHash != entry.sceneContentHash) {
                     SceneLoadResult.Failed("The downloaded analysis ${entry.label} does not match its index entry. Delete it and analyze the link again.")
                 } else {
-                    SceneLoadResult.Ok(ModelScene.from(parsed.bundle, entry.key, entry.label, entry.subtitle))
+                    SceneLoadResult.Ok(ModelScene.from(parsed.bundle, entry.key, entry.title.ifBlank { entry.label }, entry.subtitle))
                 }
         }
     }

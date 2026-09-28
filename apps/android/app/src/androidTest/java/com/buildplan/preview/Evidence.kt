@@ -175,6 +175,9 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         val left = inkPixels(shot, Rect(i.left, top, i.left + strip, bottom), HOUSE_LUMINANCE)
         val right = inkPixels(shot, Rect(shot.width - i.right - strip, top, shot.width - i.right, bottom), HOUSE_LUMINANCE)
         fact("$step: free area", "l=${i.left} t=${i.top} r=${i.right} b=${i.bottom}")
+        // The chrome is reported: the top context, the rail and the timeline each take their edge —
+        // a house framed as if the timeline were not there stands under its glass.
+        assertTrue("$step: the chrome's footprint is reported (t=${i.top} r=${i.right} b=${i.bottom})", i.top > 0 && i.right > 0 && i.bottom > 0)
         fact("$step: house pixels at the free area's left / right edge", "$left / $right")
         assertTrue("$step: the house reaches the left edge of the free area ($left bright pixels)", left <= EDGE_TOLERANCE)
         assertTrue("$step: the house runs under the tool rail ($right bright pixels)", right <= EDGE_TOLERANCE)

@@ -45,6 +45,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -242,6 +244,14 @@ private fun AddressEditor(model: AnalyzerViewModel, initial: String, onDone: () 
 
 @Composable
 private fun LinkForm(model: AnalyzerViewModel) {
+    // Starting the analysis puts the keyboard away: what follows is progress to watch, not text to type.
+    val keyboard = LocalSoftwareKeyboardController.current
+    val focus = LocalFocusManager.current
+    val start = {
+        focus.clearFocus()
+        keyboard?.hide()
+        model.analyze()
+    }
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         OutlinedTextField(
             value = model.link,
@@ -253,13 +263,13 @@ private fun LinkForm(model: AnalyzerViewModel) {
             isError = model.linkProblem != null,
             supportingText = model.linkProblem?.let { problem -> { Text(problem) } },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Go, autoCorrectEnabled = false),
-            keyboardActions = KeyboardActions(onGo = { model.analyze() }),
+            keyboardActions = KeyboardActions(onGo = { start() }),
             colors = fieldColors(),
             modifier = Modifier.fillMaxWidth(),
         )
         InkButton(
             stringResource(R.string.analyzer_analyze),
-            onClick = { model.analyze() },
+            onClick = start,
             enabled = !model.isRunning && model.link.isNotBlank(),
             modifier = Modifier.fillMaxWidth(),
         )

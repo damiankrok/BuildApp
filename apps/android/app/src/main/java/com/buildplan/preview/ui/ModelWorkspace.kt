@@ -38,7 +38,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -111,8 +113,8 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     BackHandler(enabled = tool == null && !detailsOpen && selected != null) { model.clearSelection() }
 
     val recede by animateFloatAsState(if (model.manipulating) RECEDED_ALPHA else 1f, motion.recede(), label = "recede")
-    var rootWidth by remember { mutableIntStateOf(0) }
-    var rootHeight by remember { mutableIntStateOf(0) }
+    // Each piece of chrome reports its own footprint against the root it is laid out in — never
+    // against another callback's state, whose order of arrival is not guaranteed.
     var topInset by remember { mutableIntStateOf(0) }
     var railInset by remember { mutableIntStateOf(0) }
     var timelineInset by remember { mutableIntStateOf(0) }
@@ -125,12 +127,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     val rest = ContentInsets(top = topInset, right = railInset, bottom = timelineInset)
     SideEffect { model.onChromeInsets(rest, rest.copy(bottom = frameBottom)) }
 
-    Box(
-        Modifier.fillMaxSize().onGloballyPositioned {
-            rootWidth = it.size.width
-            rootHeight = it.size.height
-        },
-    ) {
+    Box(Modifier.fillMaxSize()) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
         // Nothing stands at this point of the build: say so where the house would be, never leave a bare grid.
@@ -197,7 +194,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     .padding(top = 60.dp)
                     .graphicsLayer { alpha = if (tool != null) 1f else recede }
                     // The rail at rest frames the model; an open pane (to its left) must not move the camera.
-                    .onGloballyPositioned { c -> if (tool == null && rootWidth > 0) railInset = rootWidth - c.boundsInRoot().left.roundToInt() },
+                    .onGloballyPositioned { c -> if (tool == null) railInset = c.fromRight() },
             )
 
             Column(
@@ -229,7 +226,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                             modifier = Modifier.onGloballyPositioned { c ->
                                 // Only the rail at rest, showing now, frames the model: expanding it or a
                                 // taller preview header must not move the camera while scrubbing.
-                                if (!railExpanded && view.previewStop == null && rootHeight > 0) timelineInset = rootHeight - c.boundsInRoot().top.roundToInt()
+                                if (!railExpanded && view.previewStop == null) timelineInset = c.fromBottom()
                             },
                         )
                     }
@@ -262,7 +259,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     onShowAll = { model.showAll() },
                     modifier = Modifier
                         .navigationBarsPadding()
-                        .onGloballyPositioned { c -> if (rootHeight > 0) sheetInset = rootHeight - c.boundsInRoot().top.roundToInt() },
+                        .onGloballyPositioned { c -> sheetInset = c.fromBottom() },
                 )
             }
         }
@@ -357,6 +354,12 @@ private fun WorkspaceMessage(title: String, detail: String?, onBack: () -> Unit)
         }
     }
 }
+
+/** How far this layout's left edge stands from the right of the screen: the width it covers there. */
+private fun LayoutCoordinates.fromRight(): Int = findRootCoordinates().size.width - boundsInRoot().left.roundToInt()
+
+/** How far this layout's top edge stands from the bottom of the screen: the height it covers there. */
+private fun LayoutCoordinates.fromBottom(): Int = findRootCoordinates().size.height - boundsInRoot().top.roundToInt()
 
 /** The storey an element stands on, in the owner's words: the export's label, or the level's position. */
 private fun storeyOf(scene: ModelScene, obj: SceneObject): ElementWords.Storey? =

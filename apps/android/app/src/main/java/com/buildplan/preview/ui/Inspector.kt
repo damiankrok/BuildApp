@@ -113,9 +113,7 @@ fun Inspector(
                     e.confidence?.let { Fact(stringResource(R.string.inspector_confidence), stringResource(confidenceWordRes(it))) }
                 }
 
-                TextButton(onClick = { technical = !technical }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-                    Text(stringResource(if (technical) R.string.inspector_technical_hide else R.string.inspector_technical_show), color = Palette.InkMuted)
-                }
+                QuietAction(stringResource(if (technical) R.string.inspector_technical_hide else R.string.inspector_technical_show), onClick = { technical = !technical })
                 if (technical) {
                     meta?.label?.takeIf { it.isNotBlank() }?.let { Fact(stringResource(R.string.inspector_model_name), it) }
                     Fact(stringResource(R.string.inspector_model_kind), selected.kindLabel)

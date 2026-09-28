@@ -75,7 +75,7 @@ class DownloadedScenesTest {
         assertEquals(listOf(entry), store.list())
         val loaded = store.load(entry.key) as SceneLoadResult.Ok
         assertEquals(entry.key, loaded.scene.key)
-        assertEquals("Dom w marcówkach (GE) (analysis)", loaded.scene.title)
+        assertEquals("the house's own title, not the analyzer's English selector label", "Dom w marcówkach (GE)", loaded.scene.title)
     }
 
     @Test
@@ -286,7 +286,7 @@ class DownloadedScenesTest {
         assertEquals(before, after.take(5))
         assertEquals(listOf(b.key, a.key), after.drop(5).map { it.key })
         assertTrue(after.drop(5).all { it.source == SceneSourceKind.DOWNLOADED })
-        assertEquals("Dom w marcówkach (GE) (analysis)", after.last().title)
+        assertEquals("Dom w marcówkach (GE)", after.last().title)
 
         // Loading dispatches to the right source.
         val repository = SceneRepository(bundled, store)

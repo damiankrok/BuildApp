@@ -74,6 +74,9 @@ class ElementWordsTest {
         assertEquals(ElementWords.OwnerFact(R.string.fact_length, "12,6 m"), ElementWords.ownerFact(BundleFact("Length", "12.6 m")))
         assertEquals(ElementWords.OwnerFact(R.string.fact_footprint, "4,15 × 7,5 m"), ElementWords.ownerFact(BundleFact("Footprint", "4.15 × 7.5 m")))
         assertEquals(ElementWords.OwnerFact(R.string.fact_pitch, "40°"), ElementWords.ownerFact(BundleFact("Pitch", "40°")))
+        assertEquals("to the centimetre, like every size", ElementWords.OwnerFact(R.string.fact_length, "0,45 m"), ElementWords.ownerFact(BundleFact("Length", "0.448 m")))
+        assertEquals(ElementWords.OwnerFact(R.string.fact_thickness, "0,1 m"), ElementWords.ownerFact(BundleFact("Thickness", "0.100 m")))
+        assertEquals("areas keep their figure", ElementWords.OwnerFact(R.string.fact_floor_area, "12,345 m²"), ElementWords.ownerFact(BundleFact("Floor area", "12.345 m²")))
         assertEquals(ElementWords.OwnerFact(R.string.fact_usage, null, R.string.usage_bathroom), ElementWords.ownerFact(BundleFact("Usage", "bathroom")))
         for (engineering in listOf("Ridge axis" to "X", "Eave offset" to "2.88 m", "Top offset" to "0.2 m", "Swing" to "In 0°", "Type" to "Gable")) {
             assertNull("${engineering.first} belongs under Dane techniczne", ElementWords.ownerFact(BundleFact(engineering.first, engineering.second)))

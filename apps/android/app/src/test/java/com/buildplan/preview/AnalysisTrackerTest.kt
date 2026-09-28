@@ -123,10 +123,10 @@ class AnalysisTrackerTest {
         val listed = repository.entries().last()
         assertEquals(entry.key, listed.key)
         assertEquals(SceneSourceKind.DOWNLOADED, listed.source)
-        assertEquals("Dom w marcówkach (GE) (analysis)", listed.title)
+        assertEquals("the house's own title", "Dom w marcówkach (GE)", listed.title)
         val loaded = repository.load(listed) as SceneLoadResult.Ok
         assertEquals(entry.key, loaded.scene.key)
-        assertEquals("Dom w marcówkach (GE) (analysis)", loaded.scene.title)
+        assertEquals("Dom w marcówkach (GE)", loaded.scene.title)
         assertEquals(AnalyzerFixtures.sceneContentHash, loaded.scene.bundle.contentHash)
     }
 

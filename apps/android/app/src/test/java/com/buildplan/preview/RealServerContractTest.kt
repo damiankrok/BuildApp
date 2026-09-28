@@ -86,7 +86,7 @@ class RealServerContractTest {
         val listed = repository.entries().last()
         assertEquals(SceneSourceKind.DOWNLOADED, listed.source)
         val loaded = repository.load(listed) as SceneLoadResult.Ok
-        assertEquals("Larchfield (analysis)", loaded.scene.title)
+        assertEquals("Larchfield", loaded.scene.title)
         assertTrue(loaded.scene.bundle.scene.meshes.isNotEmpty())
 
         // a new store on the same directory — the app after a restart — still has it

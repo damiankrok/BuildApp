@@ -103,13 +103,26 @@ object ElementWords {
         val label = OWNER_FACTS[fact.label] ?: return null
         return when (fact.label) {
             "Usage" -> USAGE[fact.value.lowercase()]?.let { OwnerFact(label, null, it) }
-            else -> if (MEASURE.matches(fact.value)) OwnerFact(label, decimalComma(fact.value)) else null
+            else -> if (MEASURE.matches(fact.value)) OwnerFact(label, decimalComma(toCentimetres(fact.value))) else null
         }
     }
 
     /** The material in Polish, or null when the export's word is not one this file knows. */
     @StringRes
     fun material(label: String?): Int? = label?.let { MATERIAL[it.trim().lowercase()] }
+
+    /**
+     * Lengths in metres to the centimetre, as every size in the app ("0.448 m" → "0.45 m"): the export
+     * keeps millimetres, which read as a precision this model does not have. Areas and angles stay.
+     */
+    fun toCentimetres(value: String): String {
+        if (!value.trimEnd().endsWith(" m")) return value
+        return LONG_DECIMAL.replace(value) { m ->
+            java.math.BigDecimal(m.value).setScale(2, java.math.RoundingMode.HALF_UP).stripTrailingZeros().toPlainString()
+        }
+    }
+
+    private val LONG_DECIMAL = Regex("""\d+\.\d{3,}""")
 
     /** "4.15 m" → "4,15 m": the decimal point of a number, never of anything else. */
     fun decimalComma(value: String): String = DECIMAL.replace(value) { "${it.groupValues[1]},${it.groupValues[2]}" }
