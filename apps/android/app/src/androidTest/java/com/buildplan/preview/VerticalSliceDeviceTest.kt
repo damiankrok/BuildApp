@@ -166,13 +166,16 @@ class VerticalSliceDeviceTest {
         for ((key, shot) in listOf(ConstructionStageKey.ROOF to "07-3d-history-roof", ConstructionStageKey.JOINERY to "08-3d-history-joinery")) {
             compose.onNode(hasContentDescription(evidence.string(R.string.timeline_rule_description)))
                 .performSemanticsAction(SemanticsActions.SetProgress) { it(key.ordinal.toFloat()) }
-            compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) }
-            assertEquals(projection.visibleIds(ConstructionView.AtStage(key)), preview.viewer.construction)
+            val expected = projection.visibleIds(ConstructionView.AtStage(key))
+            // The workspace hands the cursor's frame to the viewer on its next composition.
+            runCatching { compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) && preview.viewer.construction == expected } }
+            assertEquals(TimelineCursor.Stage(key), progress.session?.cursor)
+            assertEquals(expected, preview.viewer.construction)
             evidence.settleFrames(now)
             evidence.capture(shot, "objects" to preview.viewer.construction?.size)
         }
         compose.onNode(hasText(evidence.string(R.string.timeline_return_now)) and hasClickAction()).performClick()
-        compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Now }
+        runCatching { compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Now && preview.viewer.construction == actual } }
         assertEquals("Teraz is the saved state", actual, preview.viewer.construction)
 
         // Leave 3D, enter again: drawn again, same state, one engine.

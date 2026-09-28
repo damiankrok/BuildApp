@@ -131,6 +131,8 @@ class ProductFlowDeviceTest {
         compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress)).performSemanticsAction(SemanticsActions.SetProgress) { it(0.4f) }
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 40 }
         compose.onNode(hasSetTextAction()).performTextReplacement(TASK)
+        // A tap lands where the button is drawn: bring it above the bottom bar first.
+        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.stage_task_save)))
         compose.onNode(hasText(evidence.string(R.string.stage_task_save)) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.summary?.currentTask == TASK }
         val summary = checkNotNull(progress.view).summary
@@ -183,7 +185,8 @@ class ProductFlowDeviceTest {
                 val g = RuleGeometry(width.toFloat(), STOPS, density)
                 click(Offset(g.center(stopOf(key)), height / 2f))
             }
-            compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) && preview.viewer.construction != null }
+            val expected = checkNotNull(progress.session).projection.visibleIds(ConstructionView.AtStage(key))
+            compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) && preview.viewer.construction == expected }
             val applied = SystemClock.elapsedRealtime()
             compose.waitUntil(5_000) { now.framesRendered.get() > framesBefore + 1 }
             evidence.fact("scrub $key: tap to filter ms", applied - started)
@@ -207,7 +210,8 @@ class ProductFlowDeviceTest {
 
         // 11. "Wróć do teraz" restores exactly the saved state.
         compose.onNode(hasText(evidence.string(R.string.timeline_return_now)) and hasClickAction()).performClick()
-        compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Now }
+        runCatching { compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Now && preview.viewer.construction == actual } }
+        assertEquals(TimelineCursor.Now, progress.session?.cursor)
         assertEquals(actual, preview.viewer.construction)
         evidence.settleFrames(now)
         val back = evidence.capture("11-3d-back-to-now")
@@ -298,8 +302,10 @@ class ProductFlowDeviceTest {
     }
 
     private fun previewShot(preview: PreviewViewModel, progress: ProgressViewModel, d: RenderDiagnostics, key: ConstructionStageKey, name: String): Bitmap {
-        compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) }
         val expected = checkNotNull(progress.session).projection.visibleIds(ConstructionView.AtStage(key))
+        // The workspace hands the cursor's frame to the viewer on its next composition.
+        runCatching { compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) && preview.viewer.construction == expected } }
+        assertEquals("$key: the cursor is on $key", TimelineCursor.Stage(key), progress.session?.cursor)
         assertEquals("$key: the 3D shows exactly the objects standing at the end of $key", expected, preview.viewer.construction)
         evidence.awaitNode(hasText(evidence.string(R.string.timeline_preview_of, evidence.string(stageLabel(key)))))
         evidence.settleFrames(d)

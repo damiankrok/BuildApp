@@ -68,9 +68,13 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         compose.waitUntil(timeoutMs) { compose.onAllNodes(matcher, useUnmergedTree = unmerged).fetchSemanticsNodes().isNotEmpty() }
     }
 
-    /** Wait until the 3D viewport draws the model, then let it draw a little more. */
-    fun awaitRenderer(model: PreviewViewModel, step: String, frames: Long = SETTLE_FRAMES): RenderDiagnostics {
-        compose.waitUntil(RENDER_TIMEOUT_MS) { model.renderDiagnostics?.ready == true }
+    /**
+     * Wait until the 3D viewport draws the model, then let it draw a little
+     * more. After the activity is recreated, pass the old canvas's diagnostics
+     * as [replacing]: until the old canvas is torn down it still reads ready.
+     */
+    fun awaitRenderer(model: PreviewViewModel, step: String, frames: Long = SETTLE_FRAMES, replacing: RenderDiagnostics? = null): RenderDiagnostics {
+        compose.waitUntil(RENDER_TIMEOUT_MS) { model.renderDiagnostics.let { it != null && it !== replacing && it.ready } }
         val d = checkNotNull(model.renderDiagnostics) { "$step: no viewport is composed" }
         settleFrames(d, frames)
         assertTrue("$step: swap chain alive (${d.summary()})", d.swapChainAlive)

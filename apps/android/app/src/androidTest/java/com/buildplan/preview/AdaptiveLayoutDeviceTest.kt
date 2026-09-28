@@ -89,11 +89,12 @@ class AdaptiveLayoutDeviceTest {
         // Turning back recreates the activity: one engine, the same state, drawn again.
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT }
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { evidence.app.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT }
-        evidence.awaitRenderer(preview, "3D after turning back")
+        val portrait = evidence.awaitRenderer(preview, "3D after turning back", replacing = now)
         assertEquals("the state survives the rotation", actual, preview.viewer.construction)
+        assertEquals("one engine after turning back", 1, RenderDiagnostics.liveEngines.get())
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE }
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { evidence.app.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE }
-        evidence.awaitRenderer(preview, "3D after turning again")
+        evidence.awaitRenderer(preview, "3D after turning again", replacing = portrait)
 
         Espresso.pressBack()
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
