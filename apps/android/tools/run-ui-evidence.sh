@@ -71,7 +71,7 @@ instrument() {
     return 2
   fi
   if grep -q "FAILURES!!!\|INSTRUMENTATION_FAILED\|Process crashed" "$OUT/instrument-$name.txt"; then return 1; fi
-  grep -q "^OK (1 test)" "$OUT/instrument-$name.txt" || return 1
+  grep -q "^OK ([0-9]* tests\{0,1\})" "$OUT/instrument-$name.txt" || return 1
   return 0
 }
 
@@ -92,12 +92,17 @@ if [ "$GATE" != 2 ]; then
   instrument landscape "$PKG.AdaptiveLayoutDeviceTest" "$STALL"
   r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
 fi
+# 2c. The release-candidate journeys: lifecycle, unhappy paths, interaction collisions (3 tests).
+if [ "$GATE" != 2 ]; then
+  instrument release-candidate "$PKG.ReleaseCandidateDeviceTest" "$STALL"
+  r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
+fi
 
 pull() {
   online && timeout "$STALL" adb pull "/sdcard/Android/data/$PKG/files/ui-evidence" "$OUT/" >/dev/null 2>&1 || echo "no ui-evidence to pull yet"
 }
 
-REQUIRED="default:journey font-1.3:journey landscape:adaptive"
+REQUIRED="default:journey font-1.3:journey landscape:adaptive rc-c:lifecycle rc-d:unhappy rc-e:collisions"
 slice() {
   local name="$1" url="$2"
   if [ "$SLICES" != 1 ] || [ -z "$url" ] || [ "$GATE" = 2 ]; then echo "NOT_RUN" > "$OUT/slice-$name-status.txt"; return; fi
