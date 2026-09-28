@@ -1,12 +1,10 @@
 package com.buildplan.preview.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,6 +28,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -74,8 +75,25 @@ fun ToolDock(
     modifier: Modifier = Modifier,
 ) {
     val scroll = rememberScrollState()
+    val fadeColor = MaterialTheme.colorScheme.surface
     Surface(modifier = modifier, color = MaterialTheme.colorScheme.surface, tonalElevation = 3.dp) {
-        Box {
+        // Content cut at the edge: a fade says there is more to scroll to. It is DRAWN over
+        // the row, never laid out: a fade that measured itself (fillMaxHeight in this
+        // unbounded Box) once made the dock as tall as the free space, and the opaque dock
+        // then covered the whole model (INTEGRATION-003C, the blank 3D).
+        Box(
+            Modifier.drawWithContent {
+                drawContent()
+                if (scroll.canScrollForward) {
+                    val w = FADE_WIDTH.toPx()
+                    drawRect(
+                        brush = Brush.horizontalGradient(listOf(Color.Transparent, fadeColor), startX = size.width - w, endX = size.width),
+                        topLeft = Offset(size.width - w, 0f),
+                        size = Size(w, size.height),
+                    )
+                }
+            },
+        ) {
             Row(
                 modifier = Modifier
                     .horizontalScroll(scroll)
@@ -145,19 +163,12 @@ fun ToolDock(
                     leading = { Icon(Icons.Filled.Info, contentDescription = null, modifier = Modifier.size(18.dp)) },
                 )
             }
-            // Content cut at the edge: a fade says there is more to scroll to.
-            if (scroll.canScrollForward) {
-                Box(
-                    Modifier
-                        .align(Alignment.CenterEnd)
-                        .width(28.dp)
-                        .fillMaxHeight()
-                        .background(Brush.horizontalGradient(listOf(Color.Transparent, MaterialTheme.colorScheme.surface))),
-                )
-            }
         }
     }
 }
+
+/** Width of the dock's scroll-edge fade. */
+private val FADE_WIDTH = 28.dp
 
 /** A menu row that names its state with a tick and in words, not by colour. */
 @Composable
