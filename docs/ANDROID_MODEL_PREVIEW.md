@@ -136,7 +136,8 @@ up, and the staircase still rises and turns the same way it does in the model.
 | Piece | File |
 | --- | --- |
 | Engine, view, lights, materials, upload, picking | `render/FilamentModelRenderer.kt` |
-| SurfaceView, swap chain, frame loop, lifecycle | `render/FilamentCanvas.kt` |
+| Render surface (SurfaceView or TextureView), swap chain, frame loop, lifecycle | `render/FilamentCanvas.kt` |
+| What the renderer actually did (counters, logcat `BuildPlanRender`) | `render/RenderDiagnostics.kt` |
 | Part palettes and sRGB → linear | `render/RenderStyle.kt` |
 | Presentation modes, study looks and palette | `presentation/PresentationMode.kt` |
 | Feature-edge classification (pure JVM) | `presentation/FeatureEdges.kt` |
@@ -171,6 +172,82 @@ gives the technical read the web viewer also has and lets each triangle carry
 its own tangent frame. Filament wants that frame as a quaternion in the
 `TANGENTS` attribute; `TangentFrames.fromNormal` builds it, and a unit test
 checks that rotating +Z by the quaternion returns the normal it was built from.
+
+## The 3D place on a device (BUILDPLAN-INTEGRATION-003C)
+
+**The blank 3D, and why.** On the owner's phone, `3D` showed one flat colour
+and no house. The renderer was not at fault: on the emulator its own surface
+held the house while the screen over it was flat. The opaque tool dock had
+grown over the model. Its scroll-edge fade was laid out with `fillMaxHeight()`
+inside a box with no height of its own, and `ModelWorkspace` measures the dock
+before the weighted spacer, so whenever the buttons overflowed the width (always,
+on a phone) the dock took all the free height. The fade is now drawn over the
+row (`drawWithContent`) and takes no part in layout. Any overlay on the model's
+chrome must be drawn or bounded, never `fillMax*` inside an unbounded parent.
+
+**Counters, not guesses.** `RenderDiagnostics` records, per viewport:
+- swap chains created and destroyed, resizes and the surface size;
+- the Filament viewport, frame callbacks vs frames drawn vs skipped;
+- UiHelper readiness, model uploads, renderables in the scene, visible objects;
+- a finite camera, and the live Filament engines in the process.
+
+Lifecycle lines go to logcat under `BuildPlanRender`. The view model exposes
+the live viewport's counters to device tests; nothing in it changes what is drawn.
+
+**Render surface.** `FilamentCanvas` renders into a `SurfaceView` (the
+default) or a `TextureView`, picked by the launch extra
+`com.buildplan.preview.RENDER_SURFACE` for device comparisons. Both go
+through the same `UiHelper` callbacks. A SurfaceView is its own layer below
+the window, shown through a hole the window punches; a TextureView is drawn
+inside the window. Keep that in mind before putting translucent or animated
+layers over the model.
+
+**The 3D gate** (`app/src/androidTest/.../ModelEntryDeviceTest.kt`,
+`tools/run-3d-gate.sh`, CI job `android-3d-gate`) opens 3D the owner's way.
+It starts cold on Dom, taps `3D` in the navigation bar, presses the system
+back key and taps `3D` again. It also launches straight into 3D. For each
+entry it:
+- asserts the counters and exactly one Filament engine (none on Dom);
+- compares the render surface's own pixels (PixelCopy, or the TextureView
+  bitmap) with the composited screen over the viewport's middle. The screen
+  must carry the surface's picture: colours, luminance spread, and the
+  correlation of a coarse luminance grid.
+
+It runs at font scale 1.0 and 1.3 and gates the owner's direct APK.
+
+The CI emulator uses `-gpu swangle_indirect` (ANGLE on SwiftShader Vulkan,
+OpenGL ES 3.1). With the default `swiftshader_indirect` (gfxstream's GLES
+3.0 translator), and with `guest`, which falls back to it on API 34, the
+emulator itself goes away right after Filament's first frame. That is also
+why no earlier emulator screenshot ever showed the house.
+
+## Construction progress (BUILDPLAN-INTEGRATION-003C; no screen yet)
+
+`progress/` holds the owner's account of the build, beside the house and
+never in it. It is pure Kotlin with no Android or Filament import.
+
+- **`ConstructionProgressState`**: the seventeen starter stages, each
+  NOT_STARTED / IN_PROGRESS / DONE with a completion that follows its status.
+  At most one stage is in progress, and that stage is the current stage.
+  Edits change only the stage they name.
+- **`HouseId`**: the canonical model id, which the analyzer derives from the
+  project it read, so re-analysis keeps it. Never a content hash, a file name,
+  a download key or a run id.
+- **`StageProgressMetric`**: "Postęp wg etapów" = Σ weight × completion / Σ weight,
+  rounded down. It is not money and not the value of the work.
+- **`ProgressStore`**: one versioned JSON file per house. The write is atomic
+  (temp file, fsync, rename). A damaged record is moved aside, and a newer
+  schema is never overwritten.
+- **`StageProjection`**: a rule table from object kind, the exporter's
+  semantic group and the storey to the stage an object first stands at.
+  Anything it cannot place is shown only in the finished design.
+  `ViewerState.construction` intersects it with the layers and the isolation,
+  and scrubbing moves entities in and out of the Filament scene without any upload.
+- **`ConstructionTimeline`**: the cursor (now, a stage, the design) and what
+  the screen must say about it. It cannot write progress.
+
+The Dom, 3D rail and Etapy screens that use them are not built. The redesign
+was blocked in 003C: the brief requires a real Impeccable audit first.
 
 ## Presentation modes (BUILDPLAN-INTEGRATION-003A)
 
