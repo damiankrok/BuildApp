@@ -22,7 +22,8 @@ const REQUIRED = {
   ],
   slice: [
     '01-analyzing', '02-3d-after-analysis', '03-dom-result', '04-analyzer-result', '05-etapy-current',
-    '06-3d-now', '07-3d-history-roof', '08-3d-history-joinery', '09-3d-again',
+    '06-3d-now', '07-3d-history-walls', '08-3d-history-pre-joinery', '09-3d-history-joinery',
+    '10-3d-clay-history-walls', '11-3d-inspector', '12-3d-again',
   ],
   adaptive: ['01-dom', '02-3d-now', '03-3d-history-walls', '04-etapy'],
 }
