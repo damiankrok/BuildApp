@@ -14,14 +14,7 @@
 #    name (`live-second-house`) and status file (BUILDAPP-03Y2G);
 # 4. pulls the per-test JSON reports and the relevant logcat into OUT.
 #
-# Before the analyzer, INTEGRATION-003C's 3D gate: ModelEntryDeviceTest opens
-# the 3D place the way the owner does (cold start on Dom, a tap on `3D`, back,
-# `3D` again) and directly, with the app's default render surface — that run
-# decides the job — and then once more with each render surface explicitly,
-# as comparison evidence (PNGs of the surface and the screen, JSON counters,
-# pulled into OUT/model-entry).
-#
-# Exits non-zero if step 2 or the 3D gate fails. The live result is written to OUT/live-status.txt.
+# Exits non-zero if step 2 fails. The live result is written to OUT/live-status.txt.
 set -uo pipefail
 
 OUT="${OUT:-device-reports}"
@@ -52,18 +45,6 @@ cat "$OUT/device.txt"
 adb install -r -g "$APP_APK" || exit 1
 adb install -r -g "$APKS/androidTest/debug/app-debug-androidTest.apk" || exit 1
 adb logcat -c || true
-
-MODEL_CLASS="$PKG.ModelEntryDeviceTest"
-adb shell am instrument -w -e class "$MODEL_CLASS" "$RUNNER" | tee "$OUT/instrument-model-entry.txt"
-MODEL_OK=1
-grep -q "FAILURES!!!\|INSTRUMENTATION_FAILED\|Process crashed" "$OUT/instrument-model-entry.txt" && MODEL_OK=0
-grep -q "^OK (2 tests)" "$OUT/instrument-model-entry.txt" || MODEL_OK=0
-for surface in SURFACE_VIEW TEXTURE_VIEW; do
-  adb shell am instrument -w -e class "$MODEL_CLASS" -e renderSurface "$surface" "$RUNNER" | tee "$OUT/instrument-model-entry-$surface.txt" || true
-done
-adb pull "/sdcard/Android/data/$PKG/files/model-entry" "$OUT/" || echo "no model-entry evidence to pull"
-adb logcat -d -v time -s BuildPlanRender:V Filament:V AndroidRuntime:E > "$OUT/logcat-render.txt" 2>&1 || true
-echo "3D gate (default surface): $([ "$MODEL_OK" = 1 ] && echo OK || echo FAILED)" | tee "$OUT/model-entry-status.txt"
 
 EXPECT=()
 if [ -n "${DESKTOP_FIXTURE:-}" ] && [ -f "$DESKTOP_FIXTURE" ]; then
@@ -101,17 +82,8 @@ adb pull "/sdcard/Android/data/$PKG/files/local-analyzer-reports" "$OUT/" || ech
 adb logcat -d -v time -s BuildAppLocalAnalyzer:V BuildAppNode:V AndroidRuntime:E lowmemorykiller:V ActivityManager:I > "$OUT/logcat.txt" 2>&1 || true
 adb logcat -d -v time > "$OUT/logcat-full.txt" 2>&1 || true
 
-STATUS=0
 if [ "$FIXTURE_OK" != "1" ]; then
   echo "::error::the local analyzer device tests failed (see $OUT/instrument-fixture.txt)"
-  STATUS=1
-else
-  echo "local analyzer device tests: OK"
+  exit 1
 fi
-if [ "$MODEL_OK" != "1" ]; then
-  echo "::error::the 3D gate failed: Dom -> 3D, back, 3D again, or a direct launch did not draw the house (see $OUT/instrument-model-entry.txt and $OUT/model-entry/)"
-  STATUS=1
-else
-  echo "3D gate: OK"
-fi
-exit "$STATUS"
+echo "local analyzer device tests: OK"

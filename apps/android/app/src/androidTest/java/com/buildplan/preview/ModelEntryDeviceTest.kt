@@ -151,7 +151,15 @@ class ModelEntryDeviceTest {
 
     /** Wait until the viewport says it is drawing the model, then let it draw a little longer. */
     private fun awaitRenderer(model: PreviewViewModel, step: String): RenderDiagnostics {
-        compose.waitUntil(TIMEOUT_MS) { model.renderDiagnostics?.ready == true }
+        try {
+            compose.waitUntil(TIMEOUT_MS) { model.renderDiagnostics?.ready == true }
+        } catch (e: androidx.compose.ui.test.ComposeTimeoutException) {
+            // Not ready in time: keep what the counters did say, and what the screen showed.
+            val summary = model.renderDiagnostics?.summary() ?: "no viewport composed"
+            File(out, "$reportName-${step.replace(' ', '-')}-not-ready.txt").writeText(summary + "\n")
+            captureScreen("$reportName-${step.replace(' ', '-')}-not-ready")
+            throw AssertionError("$step: the renderer was not ready after $TIMEOUT_MS ms: $summary", e)
+        }
         val diagnostics = checkNotNull(model.renderDiagnostics) { "$step: no viewport is composed" }
         val target = diagnostics.framesRendered.get() + SETTLE_FRAMES
         compose.waitUntil(TIMEOUT_MS) { diagnostics.framesRendered.get() >= target }
