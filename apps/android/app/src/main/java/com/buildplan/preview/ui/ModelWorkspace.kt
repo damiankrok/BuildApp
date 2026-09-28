@@ -109,6 +109,24 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     Box(Modifier.fillMaxSize().onGloballyPositioned { rootHeight = it.size.height }) {
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
+        // Nothing stands at this point of the build: say so where the house would be, never leave a bare grid.
+        val empty = view?.frame?.visible?.isEmpty() == true
+        AnimatedVisibility(
+            visible = empty,
+            enter = motion.sheetEnter(),
+            exit = motion.sheetExit(),
+            modifier = Modifier.align(Alignment.Center).padding(horizontal = Space.xxl),
+        ) {
+            GlassSurface(shape = RoundedCornerShape(Radius.panel)) {
+                Text(
+                    stringResource(if (view?.frame?.isPreview == true) R.string.model_nothing_stands_preview else R.string.model_nothing_stands_now),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Palette.Ink,
+                    modifier = Modifier.padding(horizontal = Space.l, vertical = Space.m),
+                )
+            }
+        }
+
         // A shade under the status bar, so its icons and the context read over a pale roof.
         Box(
             Modifier

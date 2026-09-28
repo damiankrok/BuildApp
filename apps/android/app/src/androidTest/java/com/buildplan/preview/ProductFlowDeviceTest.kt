@@ -2,6 +2,7 @@ package com.buildplan.preview
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.SystemClock
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.ComposeTimeoutException
@@ -98,7 +99,7 @@ class ProductFlowDeviceTest {
         // 1. Dom, nothing recorded: "Postęp nieustawiony" and the way to set it; no engine.
         evidence.awaitNode(hasText(evidence.string(R.string.progress_unset)))
         assertNull("Dom composes no viewport", preview.renderDiagnostics)
-        evidence.capture("01-dom-unset")
+        assertDrawingInked(preview, evidence.capture("01-dom-unset"), "01 Dom, progress unset")
 
         // 2. Dom -> 3D through the bar: the whole design, "Postęp nieustawiony".
         compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
@@ -145,7 +146,7 @@ class ProductFlowDeviceTest {
         compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.progress_current_stage, evidence.string(R.string.stage_roof))))
         evidence.awaitNode(hasText(evidence.string(R.string.progress_now_doing, TASK)))
-        evidence.capture("05-dom-progress")
+        assertDrawingInked(preview, evidence.capture("05-dom-progress"), "05 Dom with progress")
 
         // 6. 3D now: the house as it stands by the owner's account — no joinery yet.
         compose.onNode(hasText(evidence.string(R.string.house_open_3d)) and hasClickAction()).performClick()
@@ -168,17 +169,32 @@ class ProductFlowDeviceTest {
             up()
         }
         shots[ConstructionStageKey.FOUNDATIONS] = previewShot(preview, progress, now, ConstructionStageKey.FOUNDATIONS, "07-3d-history-foundations")
+        // Scrubbing changes which uploaded objects stand, nothing else: no upload, no camera move.
+        val uploadsBefore = now.modelUploads
+        val poseBefore = preview.pose
         for ((key, name) in listOf(
             ConstructionStageKey.WALLS to "08-3d-history-walls",
             ConstructionStageKey.ROOF to "09-3d-history-roof",
             ConstructionStageKey.JOINERY to "10-3d-history-joinery",
         )) {
+            val framesBefore = now.framesRendered.get()
+            val started = SystemClock.elapsedRealtime()
             rule.performTouchInput {
                 val g = RuleGeometry(width.toFloat(), STOPS, density)
                 click(Offset(g.center(stopOf(key)), height / 2f))
             }
+            compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) && preview.viewer.construction != null }
+            val applied = SystemClock.elapsedRealtime()
+            compose.waitUntil(5_000) { now.framesRendered.get() > framesBefore + 1 }
+            evidence.fact("scrub $key: tap to filter ms", applied - started)
+            evidence.fact("scrub $key: tap to drawn frame ms", SystemClock.elapsedRealtime() - started)
             shots[key] = previewShot(preview, progress, now, key, name)
         }
+        assertEquals("scrubbing uploads no geometry", uploadsBefore, now.modelUploads)
+        assertEquals("scrubbing does not move the camera", poseBefore, preview.pose)
+        evidence.fact("modelUploads during scrub", now.modelUploads - uploadsBefore)
+        evidence.fact("camera moved during scrub", poseBefore != preview.pose)
+        evidence.fact("first entry: frames", first.framesRendered.get())
         assertTrue("the preview never wrote the record", savedBytes.contentEquals(store.fileFor(HouseId(houseId.value)).readBytes()))
         assertEquals("the saved stage is still Dach", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
         // Stages that differ must look different.
@@ -262,6 +278,16 @@ class ProductFlowDeviceTest {
         compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
     }
 
+    /** Dom's drawing of the house is on screen, in ink: a blank hero is a failed Dom. */
+    private fun assertDrawingInked(preview: PreviewViewModel, shot: Bitmap, step: String) {
+        val title = checkNotNull(preview.scene).title
+        val node = compose.onNode(hasContentDescription(evidence.string(R.string.house_drawing_description, title))).fetchSemanticsNode()
+        val b = node.boundsInWindow
+        val ink = Evidence.inkPixels(shot, android.graphics.Rect(b.left.toInt(), b.top.toInt(), b.right.toInt(), b.bottom.toInt()))
+        evidence.fact("$step: drawing ink pixels", ink)
+        assertTrue("$step: the house drawing is drawn ($ink ink pixels)", ink >= MIN_DRAWING_INK)
+    }
+
     private fun previewShot(preview: PreviewViewModel, progress: ProgressViewModel, d: RenderDiagnostics, key: ConstructionStageKey, name: String): Bitmap {
         compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(key) }
         val expected = checkNotNull(progress.session).projection.visibleIds(ConstructionView.AtStage(key))
@@ -294,5 +320,8 @@ class ProductFlowDeviceTest {
 
         /** Mean luminance difference (0–255) below which two stage previews count as the same picture. */
         const val MIN_STAGE_DIFFERENCE = 1.0
+
+        /** Bright pixels in the Dom drawing's box below which it counts as blank (a drawn house has about ten thousand). */
+        const val MIN_DRAWING_INK = 1_500
     }
 }

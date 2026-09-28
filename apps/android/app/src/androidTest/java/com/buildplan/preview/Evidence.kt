@@ -1,7 +1,10 @@
 package com.buildplan.preview
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Rect
+import android.os.ParcelFileDescriptor
+import android.os.SystemClock
 import android.provider.Settings
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -86,7 +89,7 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
     fun capture(name: String, vararg notes: Pair<String, Any?>): Bitmap {
         compose.waitForIdle()
         instrumentation.waitForIdleSync()
-        val bitmap = instrumentation.uiAutomation.takeScreenshot()
+        val (bitmap, via) = screen()
         val file = File(out, "$prefix-$name.png")
         file.outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
         captures += JsonObject(
@@ -94,9 +97,26 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
                 "file" to JsonPrimitive(file.name),
                 "width" to JsonPrimitive(bitmap.width),
                 "height" to JsonPrimitive(bitmap.height),
+                "via" to JsonPrimitive(via),
             ) + notes.associate { (k, v) -> k to JsonPrimitive(v?.toString()) },
         )
         return bitmap
+    }
+
+    /**
+     * The display as composed. UiAutomation gives the compositor one second to
+     * hand over a frame; an emulator drawing the 3D view in software can take
+     * longer, and then it returns null. Try it a few times, then ask the shell's
+     * `screencap`, which waits as long as the frame takes.
+     */
+    private fun screen(): Pair<Bitmap, String> {
+        repeat(SCREENSHOT_ATTEMPTS) { attempt ->
+            instrumentation.uiAutomation.takeScreenshot()?.let { return it to "uiautomation#${attempt + 1}" }
+            SystemClock.sleep(SCREENSHOT_RETRY_MS)
+        }
+        val bytes = ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand("screencap -p")).use { it.readBytes() }
+        val bitmap = checkNotNull(BitmapFactory.decodeByteArray(bytes, 0, bytes.size)) { "neither UiAutomation nor screencap produced a screenshot (${bytes.size} B)" }
+        return bitmap to "screencap"
     }
 
     fun fact(key: String, value: Any?) {
@@ -121,6 +141,8 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         const val RENDER_TIMEOUT_MS = 45_000L
         const val SETTLE_FRAMES = 20L
         const val NODE_TIMEOUT_MS = 10_000L
+        private const val SCREENSHOT_ATTEMPTS = 3
+        private const val SCREENSHOT_RETRY_MS = 400L
 
         /** Mean absolute luminance difference (0–255) of two screenshots over a region. */
         fun difference(a: Bitmap, b: Bitmap, region: Rect): Double {
@@ -147,6 +169,19 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
 
         private fun luminance(c: Int): Double =
             0.2126 * ((c shr 16) and 0xff) + 0.7152 * ((c shr 8) and 0xff) + 0.0722 * (c and 0xff)
+
+        /** How many pixels in [region] stand out from the ground (luminance above [threshold]): lines drawn, text set. */
+        fun inkPixels(b: Bitmap, region: Rect, threshold: Double = 90.0): Int {
+            val r = Rect(region)
+            if (!r.intersect(0, 0, b.width, b.height)) return 0
+            val row = IntArray(r.width())
+            var n = 0
+            for (y in r.top until r.bottom) {
+                b.getPixels(row, 0, r.width(), r.left, y, r.width(), 1)
+                for (c in row) if (luminance(c) > threshold) n++
+            }
+            return n
+        }
 
         /** The part of the screen between the chrome where the house stands. */
         fun modelRegion(b: Bitmap): Rect = Rect((b.width * 0.08).toInt(), (b.height * 0.22).toInt(), (b.width * 0.78).toInt(), (b.height * 0.62).toInt())
