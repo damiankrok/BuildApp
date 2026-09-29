@@ -65,9 +65,12 @@ describe('WorkerExecutor', () => {
     expect(latencies.length).toBeGreaterThan(10)
     expect(Math.max(...latencies)).toBeLessThan(750)
     const result = (await call(api, 'GET', `/v1/analyses/${jobId}/result`)).json
+    const job = (await call(api, 'GET', `/v1/analyses/${jobId}`)).json
+    // Every request is made before the direct run. That run holds this thread for seconds (longer
+    // under load); a pooled keep-alive socket the server closes meanwhile (keepAliveTimeout, 5 s)
+    // cannot be seen closing, and the next request on it is reset.
     const direct = await runAnalysis({ kind: 'URL', url: publisher.pageUrl('larchfield-lf01') }, { adapters: [publisher.adapter], deps: publisher.deps, cache: memoryByteCache() })
     expect(hashesOf(result as never)).toEqual(hashesOf(direct.result))
-    const job = (await call(api, 'GET', `/v1/analyses/${jobId}`)).json
     // progress arrived from the thread stage by stage
     expect(job.stages.every((s: { state: string; startedAt?: string }) => s.state === 'DONE' && s.startedAt)).toBe(true)
   })
