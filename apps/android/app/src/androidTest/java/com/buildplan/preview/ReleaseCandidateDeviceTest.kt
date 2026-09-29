@@ -153,6 +153,8 @@ class ReleaseCandidateDeviceTest {
 
         // The house → the analyzer task → back to the house, at the same camera.
         val first = enter3d(preview, "C first entry")
+        // A camera the owner has set (a nudge is enough to leave home) is what the task must give back.
+        compose.runOnIdle { preview.pan(6.0, 0.0) }
         val pose = preview.pose
         leave3d(preview)
         val second = returnToHouse(preview, "C second entry", replacing = first)

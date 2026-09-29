@@ -206,7 +206,9 @@ class VerticalSliceDeviceTest {
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
 
-        // Leave the house for the analyzer task and come back: drawn again, same state, one engine.
+        // Leave the house for the analyzer task and come back: drawn again, same state, one engine, and the
+        // camera the owner set (a nudge is enough to leave home) given back untouched.
+        compose.runOnIdle { preview.pan(6.0, 0.0) }
         val pose = preview.pose
         evidence.openAnalyzerTask(compose, preview)
         Espresso.pressBack()

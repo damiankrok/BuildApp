@@ -106,6 +106,9 @@ class ProductFlowDeviceTest {
         assertNull("unset progress shows the whole design", preview.viewer.construction)
         assertEquals("the workspace is the root", 1, RenderDiagnostics.liveEngines.get())
         evidence.assertHouseInsideFreeArea(preview, evidence.capture("01-house-unset", "visibleObjects" to first.visibleObjects), "01 house, progress unset")
+        // The camera at home follows the chrome as the rail's header grows; a camera the owner has set is
+        // never re-fitted. The owner nudges the house by a few pixels, and from here on the pose is theirs.
+        compose.runOnIdle { preview.pan(NUDGE_PX, 0.0) }
         val poseAtRest = preview.pose
 
         // 2. "Ustaw postęp" on the rail opens the stage sheet over the house, headed by the house drawn in ink.
@@ -365,5 +368,8 @@ class ProductFlowDeviceTest {
 
         /** Bright pixels in the drawing's box below which it counts as blank (a drawn house has about ten thousand). */
         const val MIN_DRAWING_INK = 1_500
+
+        /** The owner's smallest gesture: enough to leave the camera's home, invisible in a capture. */
+        const val NUDGE_PX = 6.0
     }
 }

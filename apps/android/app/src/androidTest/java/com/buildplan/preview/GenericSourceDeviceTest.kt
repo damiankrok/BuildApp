@@ -73,6 +73,8 @@ class GenericSourceDeviceTest {
         evidence.fact("url", link)
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.scene != null }
         val house = evidence.awaitRenderer(preview, "the house")
+        // A camera the owner has set (a nudge is enough to leave home) is what the task must give back.
+        compose.runOnIdle { preview.pan(6.0, 0.0) }
         val pose = preview.pose
         val housesBefore = preview.scenes.size
 
