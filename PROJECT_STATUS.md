@@ -26,7 +26,7 @@
 | STAGE BUILDPLAN-INTEGRATION-003A — UNIFIED PRESENTATION FOUNDATION | `integration/unified-buildplan-presentation-v1` (new branch from `claude/buildapp-buildworld-v1-7y6yqh` @ `c399a299a9a5034eb0242e51292eb3f7326fb17b`; donor BuildPlan-PC-Legacy `main` @ `b0e79675c7ebeacf718cd1392f62272fb400418b`, read only) | the commits listed in `stage-reports/STAGE_BUILDPLAN_INTEGRATION_003A_UNIFIED_PRESENTATION_FOUNDATION.md` | **PASS_BUILDPLAN_INTEGRATION_003A_UNIFIED_PRESENTATION_FOUNDATION** — the Android viewer shows the same BuildApp bundle in MODEL (unchanged), CLAY and LINE, with feature edges, a presentation-only roof covering and non-shadowing glass adapted from the donor viewer; model, compiler, mobile-scene and analyzer untouched, bundles byte-identical. Not seen on a GPU here (no GPU, no KVM): **owner phone visual check pending**; no owner acceptance is claimed. Not merged into the source branch |
 | STAGE BUILDPLAN-INTEGRATION-003B — PRODUCT SHELL + RARYTASY FIDELITY | `integration/product-shell-rarytasy-v1` (from `integration/unified-buildplan-presentation-v1` @ `fb415e4`) | `8e8deb8`, `03922eb`, `76b6bde`, `a8d321e`, `17b58f4`, report `d2395b8`, owner APK CI `2d8ee75` (CI runs 53–55 green; owner APK run 55) | Product shell (Dom, 3D, Etapy, Koszty, Dokumenty) and the Rarytasy gabled garage (solver 2.1.0; Marcówki model hash unchanged). **Owner phone review: 3D showed a flat colour instead of the house** → fixed in 003C. Rarytasy stays PARTIAL (pergola, entrance canopy, second chimney) |
 | STAGE BUILDPLAN-INTEGRATION-003C — IMMERSIVE WORKSPACE + CONSTRUCTION PROGRESS + 3D HOTFIX | `integration/immersive-progress-v1` (from `integration/product-shell-rarytasy-v1` @ `2d8ee75`; resumed at `30135c6`; donor Legacy `main` @ `b0e7967`, read only) | P0 fix `6e1dcf8`; progress `b247752`, `97541fe`, `4bf3757`; workspace `80b9887`; UI gate `70e4385`; Cycle 1 `de48ed7`, `cd60077`, `507d5c7`; Cycle 2 `83bb3dc`, `8f645b0`, `941cdb9`, `b25ccae`, `0ad5ef3`; Cycle 3 `af49ee7`; finish `89c8ad6`, `1169321`, `40cf940`; final build `6f9da1b` (CI run 73, green on every job); report: the commit that carries this row | **PASS_BUILDPLAN_INTEGRATION_003C_IMMERSIVE_PROGRESS_VERTICAL_SLICE_READY_FOR_OWNER** — the immersive product workspace ("The Folding Rule": Dom with the inked house and one figure, model-first 3D with the construction timeline / time machine, functional Etapy, honest Koszty / Dokumenty, Polish analyzer entry with "Model gotowy z ograniczeniami") built with Impeccable and taken through three audit → fix → verify cycles (critique 21 → 26/40; audit.native 13 → 15/20) and the finish review; no P0 / P1 left. Device gate on every run: the owner's journey at font 1.0 and 1.3, landscape, lifecycle / unhappy paths / collisions, and Marcówki + Rarytasy analysed through the app (model hashes unchanged; Rarytasy PARTIAL). OWNER APK versionCode 1073 (run 73, `6f9da1b`). Owner visual review pending |
-| STAGE BUILDPLAN-INTEGRATION-004A — HOUSE-FIRST WORKSPACE + ADAPTIVE ANALYZER + KOSAĆCE TOPOLOGY | `integration/house-first-adaptive-analyzer-v1` (from `integration/immersive-progress-v1` @ `d199a0e`; donor Legacy `main` @ `b0e7967`, read only) | source `48034bc`, `e4e191d`, `a160561`; reconstruction `c3d47ff`, `b3dced2`; UI `7213834`; gates `b62a096`, `c42437e`, `43f052b`; __004A_LATER__ | Three verdicts, recorded separately (§ "Where the house-first product stands"): **HOUSE-FIRST PRODUCT: __HF__**; **ADAPTIVE SOURCE: __AS__**; **KOSAĆCE: __KO__**. __004A_SUMMARY__ |
+| STAGE BUILDPLAN-INTEGRATION-004A — HOUSE-FIRST WORKSPACE + ADAPTIVE ANALYZER + KOSAĆCE TOPOLOGY | `integration/house-first-adaptive-analyzer-v1` (from `integration/immersive-progress-v1` @ `d199a0e`; donor Legacy `main` @ `b0e7967`, read only) | source `48034bc`, `e4e191d`, `a160561`; reconstruction `c3d47ff`, `b3dced2`; UI `7213834`; gates `b62a096`, `c42437e`, `43f052b`; cycles `fa31064`, `a9cca3e`, `93a72b6`, `0feddb4`, `1b80ba8`; report `1be45a7`, `54f0c1a`, `c3261a1` and the commit that carries this row; final build `1b80ba8` (CI run 77, `workflow_dispatch` with the OWNER APK) | Three verdicts, recorded separately (§ "Where the house-first product stands"): **HOUSE-FIRST PRODUCT: TECHNICAL_PASS / OWNER_VISUAL_ACCEPTANCE_PENDING**; **ADAPTIVE SOURCE: PASS (router, generic reader, security) — the alternate Marcówki page is read and refused at reconstruction on evidence (PARTIAL for that one page, as the brief allows)**; **KOSAĆCE: PASS**. The house is the root (the 3D house full screen, one contextual sheet at a time, the analyzer as a task returning to the same house and camera, Koszty a named boundary); an unknown publisher is inspected, never rejected by hostname, and refused only with a typed reason; Kosaćce reconstructs without special-casing through the generic wall topology planner (`WALLS_OVERLAP` unchanged, Marcówki and Rarytasy byte-identical). Three Impeccable audit cycles closed every P1/P2; the OWNER checklist is in the report §AB. The terminal line is in the report |
 
 ## Current capabilities
 
@@ -759,7 +759,7 @@ architecture test fails if the per-frame scene argument ever comes back.
 
 Report: `stage-reports/STAGE_BUILDPLAN_INTEGRATION_004A_HOUSE_FIRST_ADAPTIVE_ANALYZER.md`.
 
-- **HOUSE-FIRST PRODUCT — __HF__.** The house workspace is the root
+- **HOUSE-FIRST PRODUCT — TECHNICAL_PASS / OWNER_VISUAL_ACCEPTANCE_PENDING.** The house workspace is the root
   whenever a house exists (`ui/AppShell.kt`, `ui/HouseWorkspace.kt`,
   `ui/HouseSheets.kt`, `ui/ShellState.kt`): the 3D house full screen, a
   compact top context with the house menu and a status row only when
@@ -772,8 +772,8 @@ Report: `stage-reports/STAGE_BUILDPLAN_INTEGRATION_004A_HOUSE_FIRST_ADAPTIVE_ANA
   analysis opens by itself only with no house open. No-house state:
   "Dodaj dom z linku". Device gates rewritten (ProductFlow, Adaptive,
   ReleaseCandidate, VerticalSlice, ModelEntry, NoHouse, GenericSource).
-  __HF_DETAIL__
-- **ADAPTIVE SOURCE — __AS__.** URL safety (`security.ts`, `net.ts`) is
+  Three audit cycles (baseline critique 24/40 → cycle 1 29/40 → cycle 2 → cycle 3 release candidate: the inspector solid to the finger, the landscape pane clear of the timeline, the open house remembered). Technical PASS on the final build's device evidence (report §V); what the OWNER has to see for themselves is the checklist in §AB.
+- **ADAPTIVE SOURCE — PASS (router, generic reader, security) — the alternate Marcówki page is read and refused at reconstruction on evidence (PARTIAL for that one page, as the brief allows).** URL safety (`security.ts`, `net.ts`) is
   split from publisher recognition (`router.ts`); the specialist ARCHON
   reader stays preferred; the generic project-page reader
   (`adapters/generic/`) reads any publisher deterministically and answers
@@ -782,13 +782,13 @@ Report: `stage-reports/STAGE_BUILDPLAN_INTEGRATION_004A_HOUSE_FIRST_ADAPTIVE_ANA
   (14 assets, 9 facts, 18 rooms) and refused at reconstruction on its
   550×550 plans (PLAN_LAYOUT_REJECTED), never by hostname; cross-source
   comparison with ARCHON: SOURCE_PARTIAL_EQUIVALENT. SSRF protections
-  unchanged plus a per-hop port check. __AS_DETAIL__
-- **KOSAĆCE — __KO__.** The generic wall topology planner
+  unchanged plus a per-hop port check. Kept honest: the generic reader is precision before reach (a page that lacks readable drawings ends in a typed refusal with the reason under "Szczegóły analizy", never a guessed house); no LLM, no browser, no API key.
+- **KOSAĆCE — PASS.** The generic wall topology planner
   (`reconstruction/src/v2/wall-topology.ts`) runs before DSL emission;
   Kosaćce completes (3 masses, 13 openings, 169 commands, model
   `5b5ffcf1…`, scene `50217b85…`, the same on Node 18 without ICU);
   `WALLS_OVERLAP` stays strict; Marcówki and Rarytasy models byte-identical;
-  sealed evidence and a third-house CI job. __KO_DETAIL__
+  sealed evidence and a third-house CI job. Kosaćce's printed values stay evaluation-only (in tests, never in production code); the planner is a generic decision between observed partition runs and the DSL, verified on 17 synthetic cases including genuine-overlap negatives that still fail.
 - **Open for the OWNER:** visual acceptance of the house-first workspace on
   the phone; the questions in the 004A report's OWNER checklist.
 

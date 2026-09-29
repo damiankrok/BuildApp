@@ -401,6 +401,35 @@ Exactly three, after the main implementation, each sealed under
 | UI evidence: house-first journey at font 1.0 and 1.3, landscape, lifecycle / unhappy / collisions, no-house, Marcówki + Rarytasy + Kosaćce slices, alternate publisher | `android-ui-evidence` (+ `NoHouseDeviceTest`, `GenericSourceDeviceTest`, Kosaćce slice) | run 74: every journey but the camera assertion (fixed, `0feddb4`); run 75: see V |
 | OWNER direct APK (waits for the third house too) | `owner-preview-release` | Z |
 
+## Y. Commits
+
+All on `integration/house-first-adaptive-analyzer-v1` from `d199a0e`
+(mirrored unchanged on the session branch `claude/new-session-3kzcgh`,
+whose pushes run CI); each workstream reverts on its own.
+
+| # | commit | workstream | what |
+| --- | --- | --- | --- |
+| 1 | `48034bc` refactor(source): separate url safety from publisher recognition | A | `validatePublicSourceUrlSecurity` (security.ts), `safeFetch` port check (net.ts), `routeSourceAcquisition` (router.ts): specialist → generic → typed refusal |
+| 2 | `e4e191d` feat(source): add generic public project-page adapter | A | `adapters/generic/` (markup, vocabulary, classify, assets, published); publisher-neutral `SourcePackage`; `compareCodeUnits`; the error taxonomy; cross-source comparison |
+| 3 | `a160561` test(source): add generic extraction and security holdouts | A | 10 synthetic publisher fixtures, determinism replay, SSRF fence rows, router and purity guards |
+| 4 | `c3d47ff` fix(reconstruction): normalize wall topology before model emission | B | `v2/wall-topology.ts` planner between observed partition runs and the DSL; `WALLS_OVERLAP` untouched |
+| 5 | `b3dced2` test(reconstruction): add Kosaccach topology gate | B | 17 synthetic topology cases incl. genuine-overlap negatives; sealed Kosaćce evidence; Marcówki / Rarytasy byte-identity |
+| 6 | `7213834` refactor(ui): make HouseWorkspace the product root | C | `ShellState` (root + one sheet + one task), `AppShell`, `HouseWorkspace`, `HouseSheets`, the analyzer as a task, `NoHouseScreen` |
+| 7 | `b62a096` test(android): add house-first and multi-source gates | C | ProductFlow, Adaptive, ReleaseCandidate, VerticalSlice, ModelEntry, NoHouse, GenericSource device tests; `validate-ui-evidence.mjs`; `third-house-kosacce` job |
+| 8 | `c42437e` test(android): recapture the analyzer contract fixtures | A/C | service 1.1.0 fixtures |
+| 9 | `43f052b` test(api): smoke the 004A refusal codes and the inspected unknown publisher | A | SOURCE_UNSAFE before a fetch; an unknown publisher inspected then typed |
+| 10 | `1be45a7` docs: 004A report draft | — | sections A–T |
+| 11 | `fa31064` fix(source): order page text by code units and anchor the generic reader's labels (cycle 2) | A | no `localeCompare` on page text (the phone's Node 18 has no ICU); anchored fact labels; site plan before floor plan |
+| 12 | `a9cca3e` fix(android): type the page's refusals on the service path too (cycle 2) | C | `AnalyzerFailure.typed()` on both paths |
+| 13 | `93a72b6` fix(ui): apply Impeccable house-first critique (cycle 1) | C | the top context, the status row, the stage sheet with the drawing, the source sheet, the no-house screen |
+| 14 | `0feddb4` test(android): the camera the owner set is what a sheet or the task gives back | C | a nudge before the pose is recorded (home re-fits by design) |
+| 15 | `54f0c1a`, `c3261a1` docs: 004A report — cycles, CI matrix, residual debt, OWNER checklist | — | U, W, AA, AB |
+| 16 | `1b80ba8` fix(ui): solid chrome, clear landscape panes, remembered house (cycle 3) | C | H-01…H-08, P-01…P-03 and three device assertions (U) |
+| 17 | docs: 004A — device evidence, commits, APK, PROJECT_STATUS | — | V, Y, Z and the three verdicts; the commit that carries this row |
+
+Every commit carries the session's attribution trailer; none carries a
+model identifier. Legacy is untouched (`b0e79675`, read only).
+
 ## AA. Residual debt
 
 - **Alternate Marcówki does not reconstruct**: the site publishes only
