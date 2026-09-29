@@ -22,7 +22,7 @@
     <string name="state_expanded">rozwinięte</string>
     <string name="state_collapsed">zwinięte</string>
 
-    <!-- Dom -->
+    <!-- Dom: stan modelu i jego źródła (przestrzeń domu, menu i arkusz źródła) -->
     <string name="house_loading">Wczytuję model…</string>
     <string name="house_failed">Nie udało się wczytać modelu</string>
     <string name="house_no_bundles">Na tym telefonie nie ma jeszcze żadnego modelu domu.</string>
@@ -235,6 +235,12 @@
     <string name="layer_ground">Tylko parter</string>
     <string name="layer_upper">Tylko poddasze</string>
     <string name="layer_cutaway">Przekrój (parter bez dachu)</string>
+    <!-- Te same warstwy w jednym–dwóch słowach, które mieszczą się na przycisku listwy narzędzi przy skali czcionki 1,3 -->
+    <string name="layer_rail_roof_off">Bez dachu</string>
+    <string name="layer_rail_ground">Parter</string>
+    <string name="layer_rail_upper">Poddasze</string>
+    <string name="layer_rail_cutaway">Przekrój</string>
+    <string name="layer_rail_isolated">Zaznaczony</string>
     <string name="layer_isolated">Tylko zaznaczony</string>
     <string name="layer_isolated_needs_selection">Najpierw dotknij elementu modelu</string>
     <string name="layer_show_all">Pokaż wszystko</string>
@@ -340,7 +346,7 @@
     <string name="analyzer_share_diagnostics">Udostępnij diagnostykę</string>
     <string name="analyzer_delete">Usuń</string>
     <string name="analyzer_keep">Zostaw</string>
-    <string name="analyzer_delete_title">Usunąć tę analizę?</string>
+    <string name="analyzer_delete_title">Usunąć ten dom z telefonu?</string>
 
     <string name="analyzer_intro">Wklej link do publicznej strony projektu domu (na przykład z ARCHON). Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model domu, który zobaczysz w 3D. Czego źródło nie podaje, model nie dopowiada.</string>
     <string name="analyzer_settings">Ustawienia analizy</string>
@@ -403,7 +409,6 @@
     <string name="analyzer_outcome_failed">Nieudana (%1$s)</string>
     <string name="analyzer_outcome_interrupted">Przerwana zamknięciem aplikacji</string>
     <string name="analyzer_outcome_running">W toku</string>
-    <string name="analyzer_delete_description">Usuń %1$s z tego telefonu</string>
     <string name="analyzer_delete_body">%1$s zniknie z tego telefonu. Zapisany postęp budowy tego domu zostaje i wróci, gdy przeanalizujesz ten link ponownie.</string>
 
     <!-- Liczebniki (polskie formy mnogie) -->

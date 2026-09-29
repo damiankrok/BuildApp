@@ -42,14 +42,7 @@ fun GlassSurface(
 ) {
     Box(
         modifier = modifier
-            .pointerInput(Unit) {
-                awaitEachGesture {
-                    // In the hit path, silent in every pass: watched to its end, nothing consumed.
-                    do {
-                        val event = awaitPointerEvent()
-                    } while (event.changes.any { it.pressed })
-                }
-            }
+            .solidToFinger()
             .clip(shape)
             .background(tint)
             .then(
@@ -61,4 +54,20 @@ fun GlassSurface(
             ),
         content = content,
     )
+}
+
+/**
+ * A surface that takes part in hit testing over its whole area without
+ * consuming anything: its own buttons still work, and the model behind it is
+ * left alone. Every pane, sheet and panel over the house takes this first in
+ * its modifier chain (cycle 3, H-01) — a Column with only a background lets a
+ * touch on its title fall through to the viewport.
+ */
+fun Modifier.solidToFinger(): Modifier = pointerInput(Unit) {
+    awaitEachGesture {
+        // In the hit path, silent in every pass: watched to its end, nothing consumed.
+        do {
+            val event = awaitPointerEvent()
+        } while (event.changes.any { it.pressed })
+    }
 }

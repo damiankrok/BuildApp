@@ -206,24 +206,6 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         val sheetMax = minOf(SHEET_MAX, maxHeight * 0.55f)
         Viewport(scene = scene, model = model, modifier = Modifier.fillMaxSize())
 
-        // Nothing stands at this point of the build: say so where the house would be, never leave a bare grid.
-        val empty = view?.frame?.visible?.isEmpty() == true
-        AnimatedVisibility(
-            visible = empty,
-            enter = motion.sheetEnter(),
-            exit = motion.sheetExit(),
-            modifier = Modifier.align(Alignment.Center).padding(horizontal = Space.xxl),
-        ) {
-            GlassSurface(shape = RoundedCornerShape(Radius.panel)) {
-                Text(
-                    stringResource(if (view?.frame?.isPreview == true) R.string.model_nothing_stands_preview else R.string.model_nothing_stands_now),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Palette.Ink,
-                    modifier = Modifier.padding(horizontal = Space.l, vertical = Space.m),
-                )
-            }
-        }
-
         // A shade under the status bar, so its icons and the context read over a pale roof.
         Box(
             Modifier
@@ -271,6 +253,28 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
             // side, at the top, beside the bottom stack. Its pane never reaches the other chrome.
             val railAtFoot = !sidePanel
             val paneMax = (if (railAtFoot) maxHeight - topDp - bottomDp - Space.s * 2 else maxHeight - topDp - Space.s * 2).coerceAtLeast(PANE_MIN)
+            val railColumn = RailDefaults.ButtonWidth + RailDefaults.Padding * 2 + Space.s
+
+            // Nothing stands at this point of the build: say so where the house would be — inside the
+            // rectangle the chrome leaves free, never under the rail's glass (cycle 3, H-04).
+            val empty = view?.frame?.visible?.isEmpty() == true
+            AnimatedVisibility(
+                visible = empty,
+                enter = motion.sheetEnter(),
+                exit = motion.sheetExit(),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(start = Space.xl, end = if (railAtFoot) Space.xl else railColumn + Space.l, top = topDp + Space.s, bottom = bottomDp + Space.s),
+            ) {
+                GlassSurface(shape = RoundedCornerShape(Radius.panel)) {
+                    Text(
+                        stringResource(if (view?.frame?.isPreview == true) R.string.model_nothing_stands_preview else R.string.model_nothing_stands_now),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Palette.Ink,
+                        modifier = Modifier.padding(horizontal = Space.l, vertical = Space.m),
+                    )
+                }
+            }
             // The top context: back, the house, where the build stands (never the preview: the timeline says that).
             TopContext(
                 title = scene.title,
@@ -285,6 +289,14 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     .onGloballyPositioned { c -> topInset = c.boundsInRoot().bottom.roundToInt() },
             )
 
+            // One contextual surface at a time (cycle 3, H-08): while the details stand in the timeline's place
+            // the rail leaves too; its resting inset is kept, so the frame does not move.
+            AnimatedVisibility(
+                visible = !details,
+                enter = motion.sheetEnter(),
+                exit = motion.sheetExit(),
+                modifier = Modifier.align(if (railAtFoot) Alignment.BottomEnd else Alignment.TopEnd),
+            ) {
             ToolRail(
                 scene = scene,
                 state = model.viewer,
@@ -308,16 +320,21 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 onZoom = { model.zoom(it) },
                 paneMaxHeight = paneMax,
                 paneFromFoot = railAtFoot,
+                // On its side the rail never runs off the bottom of the safe area (cycle 3, H-05): it scrolls.
+                railMaxHeight = if (railAtFoot) null else maxHeight - topDp - Space.s * 2,
                 modifier = Modifier
-                    .align(if (railAtFoot) Alignment.BottomEnd else Alignment.TopEnd)
                     .padding(top = if (railAtFoot) 0.dp else topDp + Space.s, bottom = if (railAtFoot) bottomDp + Space.s else 0.dp)
                     .graphicsLayer { alpha = if (tool != null) 1f else recede }
                     // The rail at rest frames the model; an open pane (to its left) must not move the camera.
                     .onGloballyPositioned { c -> if (tool == null) railInset = c.fromRight() },
             )
+            }
 
+            // On its side the bottom stack stops beside the rail — and, while a pane is open, beside the pane
+            // (cycle 3, H-02): the timeline's glass never lies over the pane's rows.
+            val besidePane = if (!railAtFoot && tool != null && tool != Tool.FIT) RailDefaults.PaneWidth + Space.s else 0.dp
             Column(
-                Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(end = besideRail).onSizeChanged { bottomHeight = it.height },
+                Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(end = besideRail + besidePane).onSizeChanged { bottomHeight = it.height },
                 verticalArrangement = Arrangement.spacedBy(Space.s),
             ) {
                 AnimatedVisibility(visible = hintShown && selected == null && tool == null, enter = motion.sheetEnter(), exit = motion.sheetExit()) {

@@ -186,7 +186,8 @@ fun StageSheet(progress: ProgressViewModel, sceneTitle: String?, onDismiss: () -
 fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: ProgressViewModel, onDismiss: () -> Unit, onAnalyze: () -> Unit) {
     HouseSheet(onDismiss) {
         val scene = preview.scene
-        val download = scene?.let { s -> analyzer.downloads.firstOrNull { it.key == s.key } }
+        val failed = preview.screen as? ScreenState.Failed
+        val download = (scene?.key ?: failed?.entry?.key)?.let { key -> analyzer.downloads.firstOrNull { it.key == key } }
         var technical by rememberSaveable { mutableStateOf(false) }
         var confirmDelete by rememberSaveable { mutableStateOf(false) }
         Column(
@@ -198,7 +199,17 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 .widthIn(max = Sizes.contentMax),
         ) {
             if (scene == null) {
-                Text(stringResource(R.string.house_loading), style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
+                // A house that did not load is named and can be removed (cycle 3, H-07); one still loading says so.
+                if (failed != null) {
+                    Text(failed.entry?.title ?: stringResource(R.string.house_failed), style = MaterialTheme.typography.titleLarge, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(top = Space.s).semantics { heading() })
+                    LoadProblem(failed.problem, failed.message, modifier = Modifier.padding(top = Space.m))
+                    if (download != null) {
+                        PanelRule(inset = 0.dp)
+                        QuietAction(stringResource(R.string.source_delete_action), onClick = { confirmDelete = true })
+                    }
+                } else {
+                    Text(stringResource(R.string.house_loading), style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
+                }
                 return@Column
             }
             val entry = preview.scenes.firstOrNull { it.key == scene.key }
@@ -242,7 +253,7 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 onDismissRequest = { confirmDelete = false },
                 containerColor = Palette.Sheet,
                 title = { Text(stringResource(R.string.analyzer_delete_title)) },
-                text = { Text(stringResource(R.string.analyzer_delete_body, scene?.title ?: download.title)) },
+                text = { Text(stringResource(R.string.analyzer_delete_body, scene?.title ?: failed?.entry?.title ?: download.title)) },
                 confirmButton = {
                     TextButton(
                         onClick = {

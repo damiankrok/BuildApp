@@ -48,6 +48,7 @@ class AdaptiveLayoutDeviceTest {
     @Before
     fun setUp() {
         File(evidence.app.filesDir, "progress").deleteRecursively()
+        evidence.forgetOpenHouse()
         assertEquals(0, RenderDiagnostics.liveEngines.get())
     }
 
@@ -89,6 +90,19 @@ class AdaptiveLayoutDeviceTest {
         evidence.fact("rail Fit / rule / toggle bounds", "$fit / $rule / $toggle")
         assertFalse("the timeline's rule overlaps Dopasuj", fit.overlaps(rule))
         assertFalse("the timeline's toggle overlaps Dopasuj", fit.overlaps(toggle))
+
+        // A pane open on the short screen never lies under the timeline (cycle 3, H-02): the bottom stack
+        // ends before it, and every row of the pane can be tapped.
+        compose.onNode(hasText(evidence.string(R.string.tool_layers)) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.layer_roof_off)) and hasClickAction())
+        val option = compose.onNode(hasText(evidence.string(R.string.layer_roof_off)) and hasClickAction()).fetchSemanticsNode().boundsInRoot
+        val ruleUnderPane = compose.onNode(hasContentDescription(evidence.string(R.string.timeline_rule_description))).fetchSemanticsNode().boundsInRoot
+        evidence.fact("layers pane option / rule bounds", "$option / $ruleUnderPane")
+        assertFalse("the timeline's rule overlaps the open pane", option.overlaps(ruleUnderPane))
+        evidence.settleFrames(now)
+        evidence.capture("06-layers-pane")
+        Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.layer_roof_off)) and hasClickAction()).fetchSemanticsNodes().isEmpty() }
 
         progress.preview(ConstructionStageKey.WALLS)
         compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(ConstructionStageKey.WALLS) }

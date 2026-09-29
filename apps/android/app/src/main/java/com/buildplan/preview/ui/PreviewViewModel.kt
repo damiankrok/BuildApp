@@ -33,7 +33,8 @@ sealed interface ScreenState {
     data object Loading : ScreenState
     data class Ready(val scene: ModelScene) : ScreenState
     /** [message] is technical (for diagnostics); [problem], null for "no model at all", is what the owner is told. */
-    data class Failed(val message: String, val problem: SceneLoadProblem?) : ScreenState
+    /** [entry] is the house that failed to load, when one was asked for: the way to remove it. */
+    data class Failed(val message: String, val problem: SceneLoadProblem?, val entry: SceneEntry? = null) : ScreenState
 }
 
 /**
@@ -127,8 +128,12 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
 
     val selected get() = scene?.objectById(viewer.selectedObjectId)
 
+    /** The house the owner had open, kept across process death and cold starts (cycle 3, H-03). */
+    private val prefs = application.getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
+
     init {
-        scenes.firstOrNull()?.let { open(it) }
+        val last = prefs.getString(KEY_LAST_OPEN, null)
+        (scenes.firstOrNull { it.key == last } ?: scenes.firstOrNull())?.let { open(it) }
             ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
     }
 
@@ -160,7 +165,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         screen = ScreenState.Loading
         loading = viewModelScope.launch {
             val result = withContext(Dispatchers.Default) { repository.load(entry) }
-            show(result)
+            show(result, entry)
         }
     }
 
@@ -169,11 +174,12 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     private fun entries(): List<SceneEntry> =
         repository.entries().let { all -> if (hidingBundled) all.filter { it.source == com.buildplan.preview.scene.SceneSourceKind.DOWNLOADED } else all }
 
-    private fun show(result: SceneLoadResult) {
+    private fun show(result: SceneLoadResult, entry: SceneEntry) {
         when (result) {
-            is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message, result.problem)
+            is SceneLoadResult.Failed -> screen = ScreenState.Failed(result.message, result.problem, entry)
             is SceneLoadResult.Ok -> {
                 val model = result.scene
+                prefs.edit().putString(KEY_LAST_OPEN, entry.key).apply()
                 camera = OrbitCamera(model.bounds)
                 pose = camera.home(fitSpan).also { home = it }
                 // Selection, isolation and layers name objects of the old
@@ -377,5 +383,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     private companion object {
         /** The platform's own double-tap window. */
         const val DOUBLE_TAP_MS = 300L
+
+        /** Where the house last open is remembered (cycle 3, H-03). */
+        const val PREFS = "preview"
+        const val KEY_LAST_OPEN = "lastOpenKey"
     }
 }

@@ -75,6 +75,13 @@ class MotionPolicy(val reduced: Boolean) {
     fun unfoldExit(): ExitTransition =
         if (reduced) ExitTransition.None else fadeOut(exit()) + shrinkVertically(exit(), Alignment.Bottom)
 
+    /** Content unfolding below a row that stays put (a stage's editor, a folded section). */
+    fun foldEnter(): EnterTransition =
+        if (reduced) EnterTransition.None else fadeIn(enter()) + expandVertically(enter(), Alignment.Top)
+
+    fun foldExit(): ExitTransition =
+        if (reduced) ExitTransition.None else fadeOut(exit()) + shrinkVertically(exit(), Alignment.Top)
+
     /** A sheet rising from the bottom edge. */
     fun sheetEnter(): EnterTransition =
         if (reduced) EnterTransition.None else slideInVertically(enter()) { it / 3 } + fadeIn(enter())

@@ -76,6 +76,7 @@ class ReleaseCandidateDeviceTest {
     @Before
     fun setUp() {
         File(evidence.app.filesDir, "progress").deleteRecursively()
+        evidence.forgetOpenHouse()
         assertEquals(0, RenderDiagnostics.liveEngines.get())
     }
 
@@ -184,13 +185,33 @@ class ReleaseCandidateDeviceTest {
         s.close()
         scenario = null
         assertEquals(0, RenderDiagnostics.liveEngines.get())
-        val (_, _, reopened) = launch()
+        val (reopenedScenario, reopenedPreview, reopened) = launch()
         val back = checkNotNull(reopened.view).summary
         assertEquals("percent after restart", saved.percent, back.percent)
         assertEquals("current stage after restart", saved.currentStage, back.currentStage)
         assertEquals("task after restart", saved.currentTask, back.currentTask)
         evidence.awaitNode(hasText(evidence.string(R.string.progress_now_task, "Montaż więźby")))
         evidence.capture("02-house-after-restart", "percent" to back.percent)
+
+        // The house the owner had open is the one that opens again (cycle 3, H-03): open another house,
+        // close the app, open it — and put the first house back for the tests that follow.
+        val home = checkNotNull(reopenedPreview.scene).key
+        val other = reopenedPreview.scenes.firstOrNull { it.key != home }
+        if (other != null) {
+            compose.runOnIdle { assertTrue(reopenedPreview.openKey(other.key)) }
+            compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { reopenedPreview.scene?.key == other.key }
+            reopenedScenario.close()
+            scenario = null
+            val (thirdScenario, third, _) = launch()
+            assertEquals("the house last open opens again", other.key, checkNotNull(third.scene).key)
+            evidence.fact("C last-open house restored", other.key)
+            compose.runOnIdle { assertTrue(third.openKey(home)) }
+            compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { third.scene?.key == home }
+            thirdScenario.close()
+            scenario = null
+        } else {
+            evidence.fact("C last-open house restored", "single house in this build; not exercised")
+        }
         evidence.fact("result C", "PASS")
     }
 

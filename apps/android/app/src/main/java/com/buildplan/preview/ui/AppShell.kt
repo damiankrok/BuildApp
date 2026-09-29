@@ -74,7 +74,8 @@ fun AppShell(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: P
 
     val openHouse: (String) -> Unit = { key ->
         preview.refreshScenes()
-        if (preview.openKey(key)) {
+        // The house already open is not reloaded (cycle 3, H-06): the tick in the menu means "no change".
+        if (preview.scene?.key == key || preview.openKey(key)) {
             readyKey = null
             state = ShellState()
         }

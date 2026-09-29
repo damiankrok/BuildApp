@@ -39,6 +39,16 @@ fun VisibilityMode.labelRes(): Int = when (this) {
     VisibilityMode.CUTAWAY -> R.string.layer_cutaway
 }
 
+/** The same choice in the one or two words that fit the rail's 64 dp button at font scale 1.3. */
+@StringRes
+fun VisibilityMode.railLabelRes(): Int = when (this) {
+    VisibilityMode.ALL -> R.string.layer_all
+    VisibilityMode.ROOF_OFF -> R.string.layer_rail_roof_off
+    VisibilityMode.GROUND_ONLY -> R.string.layer_rail_ground
+    VisibilityMode.UPPER_ONLY -> R.string.layer_rail_upper
+    VisibilityMode.CUTAWAY -> R.string.layer_rail_cutaway
+}
+
 @StringRes
 fun PresentationMode.labelRes(): Int = when (this) {
     PresentationMode.MODEL -> R.string.look_model

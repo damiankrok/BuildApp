@@ -83,6 +83,8 @@ fun ToolRail(
     modifier: Modifier = Modifier,
     /** The rail stands at the foot of the screen: the pane shares its bottom edge and grows upwards. */
     paneFromFoot: Boolean = false,
+    /** On a short window the rail may not run off the safe area: past this height its buttons scroll. */
+    railMaxHeight: Dp? = null,
 ) {
     val motion = LocalMotionPolicy.current
     Row(
@@ -136,9 +138,9 @@ fun ToolRail(
             }
         }
 
-        GlassSurface(shape = RoundedCornerShape(Radius.panel)) {
+        GlassSurface(shape = RoundedCornerShape(Radius.panel), modifier = if (railMaxHeight != null) Modifier.heightIn(max = railMaxHeight) else Modifier) {
             Column(
-                modifier = Modifier.padding(RailDefaults.Padding),
+                modifier = Modifier.padding(RailDefaults.Padding).then(if (railMaxHeight != null) Modifier.verticalScroll(rememberScrollState()) else Modifier),
                 verticalArrangement = Arrangement.spacedBy(RailDefaults.Gap),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -150,9 +152,12 @@ fun ToolRail(
                     onClick = { onOpen(if (open == Tool.LOOK) null else Tool.LOOK) },
                 )
                 val layer = if (state.isIsolating) stringResource(R.string.layer_isolated) else stringResource(state.visibility.labelRes())
+                // The rail's label is one or two short words that fit a 64 dp button at font scale 1.3 (cycle 3, P-01);
+                // the full name is read in the pane and spoken in the state.
+                val layerShort = if (state.isIsolating) stringResource(R.string.layer_rail_isolated) else stringResource(state.visibility.railLabelRes())
                 RailButton(
                     icon = ShellIcons.layers,
-                    label = if (state.visibility == VisibilityMode.ALL && !state.isIsolating) stringResource(R.string.tool_layers) else layer,
+                    label = if (state.visibility == VisibilityMode.ALL && !state.isIsolating) stringResource(R.string.tool_layers) else layerShort,
                     state = stringResource(R.string.tool_state_layers, layer),
                     pressed = open == Tool.LAYERS,
                     onClick = { onOpen(if (open == Tool.LAYERS) null else Tool.LAYERS) },

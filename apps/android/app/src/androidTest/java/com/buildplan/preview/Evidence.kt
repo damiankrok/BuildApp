@@ -43,6 +43,11 @@ import org.junit.Assert.assertTrue
 class Evidence(private val compose: ComposeTestRule, folder: String, private val prefix: String) {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     val app = instrumentation.targetContext
+
+    /** Starts the app from no remembered house (cycle 3, H-03): the bundled first house opens. */
+    fun forgetOpenHouse() {
+        app.deleteSharedPreferences("preview")
+    }
     val out = File(app.getExternalFilesDir(null), folder).apply { mkdirs() }
     private val captures = mutableListOf<JsonObject>()
     private val facts = linkedMapOf<String, JsonPrimitive>()

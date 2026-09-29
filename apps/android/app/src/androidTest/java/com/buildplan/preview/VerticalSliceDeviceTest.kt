@@ -74,6 +74,7 @@ class VerticalSliceDeviceTest {
     fun setUp() {
         assumeTrue("no sliceUrl given", !url.isNullOrBlank())
         File(evidence.app.filesDir, "progress").deleteRecursively()
+        evidence.forgetOpenHouse()
         assertEquals(0, RenderDiagnostics.liveEngines.get())
     }
 

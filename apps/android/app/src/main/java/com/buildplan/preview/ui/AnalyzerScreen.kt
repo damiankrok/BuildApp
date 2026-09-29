@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
@@ -107,7 +107,8 @@ import kotlinx.coroutines.delay
 @Composable
 fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (key: String) -> Unit) {
     var settingsOpen by rememberSaveable { mutableStateOf(false) }
-    Column(Modifier.fillMaxSize().background(Palette.Ground).wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax).statusBarsPadding()) {
+    // The task keeps clear of the status bar, the navigation bar, the cutout and the keyboard (cycle 3, P-03).
+    Column(Modifier.fillMaxSize().background(Palette.Ground).safeDrawingPadding().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax)) {
         Row(Modifier.fillMaxWidth().padding(horizontal = Space.xs, vertical = Space.xs), verticalAlignment = Alignment.CenterVertically) {
             val back = stringResource(R.string.analyzer_back)
             IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = back }) {
@@ -710,7 +711,8 @@ private fun Foldout(title: String, open: Boolean, onToggle: () -> Unit, content:
             Text(title, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, modifier = Modifier.weight(1f))
             Icon(ShellIcons.chevronRight, null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall).rotate(if (open) 90f else 0f))
         }
-        AnimatedVisibility(visible = open) {
+        val motion = LocalMotionPolicy.current
+        AnimatedVisibility(visible = open, enter = motion.foldEnter(), exit = motion.foldExit()) {
             Column(Modifier.fillMaxWidth().padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.m)) { content() }
         }
     }

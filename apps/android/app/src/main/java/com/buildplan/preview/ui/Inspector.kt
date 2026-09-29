@@ -78,6 +78,8 @@ fun Inspector(
     val scroll = rememberScrollState()
     Column(
         modifier
+            // Solid to the finger (cycle 3, H-01): a tap on the sheet's own title never picks the model behind it.
+            .solidToFinger()
             .fillMaxWidth()
             .heightIn(max = maxHeight)
             .background(

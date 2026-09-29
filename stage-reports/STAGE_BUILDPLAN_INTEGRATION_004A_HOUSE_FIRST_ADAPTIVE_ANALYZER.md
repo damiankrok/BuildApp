@@ -366,8 +366,24 @@ Exactly three, after the main implementation, each sealed under
    byte-identity this stage gates on; noted for the next stage that changes
    those outputs).
 3. **Cycle 3 — release candidate** (`cycle3-polish-harden.md`, Impeccable
-   polish + harden with adversarial journeys reasoned from the code, then
-   the device journeys of the final build): see AA for what was left.
+   polish + harden: tokens, type at 1.3, targets, glass over glass, state
+   by colour, motion under the policy, strings; then sixteen adversarial
+   journeys reasoned from the code). Verdict before the fixes: not yet a
+   release candidate — three P1s (the inspector let taps through to the
+   model and the rail; in landscape the tool pane lay under the timeline;
+   the open house was not remembered across a cold start) and eight P2s.
+   Fixed in `fix(ui): … (cycle 3)`: `Modifier.solidToFinger()` on every
+   surface over the model, the bottom stack ending before an open pane on
+   its side, `lastOpenKey` in the preview preferences, the "nothing stands"
+   message inside the chrome rectangle, a scrolling side rail capped at the
+   safe height, no reload of the house already open, a failed house named
+   and deletable from its source sheet, the rail leaving with the timeline
+   while the details are open, rail-length layer words, folds under
+   `MotionPolicy`, `safeDrawingPadding()` on the task. Three device
+   assertions guard the P1s (a tap on the inspector's title keeps the
+   selection; the pane and the rule do not overlap on a phone on its side,
+   capture `06-layers-pane`; a second house opened, the app closed and
+   opened, the same house). Carried finish debt: AA.
 
 ## W. CI / test matrix
 
@@ -407,6 +423,12 @@ Exactly three, after the main implementation, each sealed under
   menu row (cycle 1 P2-2, P2-8, P3).
 - The two 6 s timers (gesture hint, notice) and the 11–13 sp rail labels
   and numerals in glare are unchanged from 003C.
+- Cycle 3 P3 finish debt: the 56/64/560 dp rows and measure and the 1.5 dp
+  mark radius as tokens, `AlertDialog` corners and `TextButton` stadium
+  state layers, the progress bar's stop dot, three scrim alphas, the stage
+  list re-scrolling on recreation, `refreshScenes()` on every back press,
+  four merge-able duplicate strings, the gesture hint and "limited" notice
+  reset after a task round trip.
 - The five-minute analyses and ~2 GB peak RSS are measured, not reduced
   (§40 of the brief).
 

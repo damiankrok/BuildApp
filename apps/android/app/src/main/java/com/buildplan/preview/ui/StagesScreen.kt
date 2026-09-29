@@ -295,7 +295,8 @@ private fun StageRow(
                 modifier = Modifier.size(Sizes.iconSmall).rotate(if (open) 90f else 0f),
             )
         }
-        AnimatedVisibility(visible = open) {
+        val motion = LocalMotionPolicy.current
+        AnimatedVisibility(visible = open, enter = motion.foldEnter(), exit = motion.foldExit()) {
             Column(Modifier.fillMaxWidth().padding(start = Space.l, end = Space.l, bottom = Space.l), verticalArrangement = Arrangement.spacedBy(Space.m)) {
                 if (!hasGeometry) {
                     Text(stringResource(R.string.stage_no_geometry), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)

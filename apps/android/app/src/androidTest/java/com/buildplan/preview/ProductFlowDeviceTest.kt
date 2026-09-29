@@ -81,6 +81,7 @@ class ProductFlowDeviceTest {
     fun setUp() {
         // The journey starts from nothing recorded: the store is the app's own folder.
         File(evidence.app.filesDir, "progress").deleteRecursively()
+        evidence.forgetOpenHouse()
         assertEquals("live Filament engines before the test", 0, RenderDiagnostics.liveEngines.get())
     }
 
@@ -253,6 +254,12 @@ class ProductFlowDeviceTest {
         for (english in listOf("Ridge axis", "Eave offset", "Footprint", "Type", "Length", "Thickness", "Height")) {
             assertTrue("'$english' is shown unfolded", compose.onAllNodes(hasText(english), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
         }
+        // The sheet is solid to the finger (cycle 3, H-01): a tap on its own title neither picks the model nor
+        // closes the details.
+        compose.onNode(hasText(evidence.string(R.string.inspector_about))).performTouchInput { click(center) }
+        compose.waitForIdle()
+        assertEquals("a tap on the inspector kept the selection", sel.id, preview.selected?.id)
+        compose.onNode(hasText(evidence.string(R.string.inspector_about))).assertExists()
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
 

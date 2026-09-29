@@ -25,7 +25,7 @@ const REQUIRED = {
     '10-clay-history-walls', '11-inspector', '12-house-again',
   ],
   generic: ['01-checking-page', '02-outcome'],
-  adaptive: ['01-house', '02-history-walls', '03-details-panel', '04-stages-sheet', '05-house-again'],
+  adaptive: ['01-house', '06-layers-pane', '02-history-walls', '03-details-panel', '04-stages-sheet', '05-house-again'],
   lifecycle: ['01-3d-after-resume', '02-house-after-restart'],
   unhappy: ['01-corrupt-recovered', '02-refusal-said', '03-stage-without-geometry', '04-unsafe-link'],
   collisions: ['01-roof-off-history', '02-ground-only-history', '03-selection-history-inspector', '04-line-history', '05-element-from-list'],
