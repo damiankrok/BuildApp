@@ -6,6 +6,7 @@ import com.buildplan.preview.analyzer.AnalysisSummary
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.AnalyzerJson
 import com.buildplan.preview.analyzer.CurrentStage
+import com.buildplan.preview.analyzer.JobActivity
 import com.buildplan.preview.analyzer.JobStatus
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.RetryAction
@@ -159,6 +160,7 @@ class LocalAnalysis(
     private inner class Run(val job: LocalJob, var report: LocalRunReport) : LocalRunListener {
         var handle: LocalRunHandle? = null
         var progress: LocalProgress? = null
+        var activity: JobActivity? = null
         var terminal = false
         var cancelRequested = false
         var cancelTimer: (() -> Unit)? = null
@@ -171,7 +173,7 @@ class LocalAnalysis(
 
         fun publishProgress() {
             if (!current || terminal) return
-            publish(AnalysisState.Polling(job.jobId, job.sourceUrl, statusOf(progress, null), local = report))
+            publish(AnalysisState.Polling(job.jobId, job.sourceUrl, statusOf(progress, null).copy(activity = activity), local = report))
         }
 
         override fun onStarted(pid: Int) = Unit
@@ -190,6 +192,11 @@ class LocalAnalysis(
                 is LocalEvent.Progress -> {
                     progress = event.event
                     report = report.copy(elapsedMs = event.elapsedMs, rssBytes = event.rssBytes)
+                    publishProgress()
+                }
+                is LocalEvent.Telemetry -> {
+                    activity = event.activity
+                    report = report.copy(elapsedMs = event.activity.elapsedMs, rssBytes = event.rssBytes)
                     publishProgress()
                 }
                 is LocalEvent.Done -> {
@@ -336,6 +343,7 @@ class LocalAnalysis(
         peakSource = metrics.memory.peakSource.ifBlank { null },
         timings = metrics.timings ?: timings,
         sceneBytes = metrics.sceneBytes ?: sceneBytes,
+        phases = metrics.phases.ifEmpty { phases },
     )
 
     companion object {

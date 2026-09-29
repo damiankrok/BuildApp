@@ -90,7 +90,7 @@ class DiagnosticsStore(
 
     companion object {
         /** What the program may leave in `<out>/diagnostics` that is worth keeping. */
-        val ALLOWED = setOf("diagnostics.json", "trace.json", "plan-overlay.png")
+        val ALLOWED = setOf("diagnostics.json", "trace.json", "plan-overlay.png", "performance.json")
         const val META_FILE = "kept.json"
         private val JOB_ID = Regex("^[0-9a-f]{32}$")
     }

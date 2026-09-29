@@ -49,6 +49,7 @@ import { layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } fr
 import { resolutionRecord, resolvePlan } from '../plan-resolution.js'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { StructuralPassOptions } from '../structural.js'
 import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
@@ -98,6 +99,8 @@ export type ReconstructionV2Options = {
   trace?: (event: SolverTraceEvent) => void
   /** Told as the plan resolver weighs each reading, when it runs. Nothing it does reaches the result. */
   resolverProgress?: ResolverProgress
+  /** Told inside the solver's longer loops (plan copies, perspective cameras), for progress and cancellation. Write-only. */
+  checkpoint?: Checkpoint
 }
 
 /** One step of the solver, as the service's trace records it. */
@@ -212,7 +215,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   const levels = levelsFrom(metrics, sectionFrame?.id)
-  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>() }
+  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>(), ...(options.checkpoint ? { checkpoint: options.checkpoint } : {}) }
   const incumbent = composeStructuralLayout(structuralOptions)
   let { draft, layout } = incumbent
   let planDiagnostics: PlanDiagnosticsReport = planDiagnosticsOf(draft, graph, metrics, layout)
@@ -938,7 +941,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const cameras: ReconstructionV2Result['registrations']['cameras'] = []
   const solvedCameras: PerspectiveCameraV2[] = []
-  for (const frame of graph.coordinateFrames.filter((f) => f.roles.projection === 'PERSPECTIVE' && (keep ? keep(f) : true))) {
+  const perspectives = graph.coordinateFrames.filter((f) => f.roles.projection === 'PERSPECTIVE' && (keep ? keep(f) : true))
+  for (const [cameraIndex, frame] of perspectives.entries()) {
+    options.checkpoint?.tick({ subphase: { id: 'CAMERAS', label: 'registering the renders' }, counters: { cameras: cameraIndex + 1, camerasTotal: perspectives.length } })
     const raster = options.raster(frame)
     if (!raster || !mainRoof) continue
     const cam = solvePerspectiveCamera(raster, frame.id, { x0: world.envelope.x0, x1: world.envelope.x1, z0: world.envelope.z0, z1: world.envelope.z1, eaveY: mainRoof.eaveY, ridgeY: mainRoof.ridgeY, ridgeAxis: mainRoof.ridgeAxis, ridgeAt: mainRoof.ridgeAt, groundY: 0, attached: [...attachedRoofs.map((r) => ({ x0: r.footprint.x0, x1: r.footprint.x1, z0: r.footprint.z0, z1: r.footprint.z1, topY: r.parapetTopY ?? r.slabTopY })), ...pitchedAttachedRoofs.map((r) => ({ ...r.footprint, topY: r.eaveY }))] })

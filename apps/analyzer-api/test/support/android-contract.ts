@@ -50,9 +50,17 @@ export async function captureAndroidContract(): Promise<ContractFiles> {
     const mid = (watching as Watching | null)?.running
     if (!mid) throw new Error('no mid-run status was captured')
     const normalise = (text: string): string => `${JSON.stringify(JSON.parse(text.replaceAll(jobId, CONTRACT_JOB_ID).replace(ISO, CONTRACT_TIME)), null, 2)}\n`
+    // A running record's activity is whichever heartbeat was last written, so its timing fields
+    // (and the count the heartbeat happened to carry) are normalised like the clock: the fixture
+    // pins the SHAPE the phone parses, and the ids and totals that do not depend on timing.
+    const running = statusBodyOf(mid) as { activity?: Record<string, unknown> }
+    if (running.activity) {
+      const a = running.activity
+      running.activity = { phaseId: a.phaseId, phaseLabel: a.phaseLabel, activity: a.activity, workDone: 0, workTotal: a.workTotal, unit: a.unit, heartbeatSeq: 1, elapsedMs: 1000, phaseElapsedMs: 0, heartbeatAgeMs: 0 }
+    }
     return {
       'submitted.json': normalise(submitted.text),
-      'status-running.json': normalise(JSON.stringify(statusBodyOf(mid))),
+      'status-running.json': normalise(JSON.stringify(running)),
       'status-completed.json': normalise(JSON.stringify(final)),
       'result.json': normalise(result.text),
       // the scene is served as exact bytes and hashed as such: never re-serialised

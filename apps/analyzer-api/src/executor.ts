@@ -13,7 +13,7 @@
 import { Worker } from 'node:worker_threads'
 import { join } from 'node:path'
 import { AnalysisError, analysisFilesOf, runAnalysis, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisProgress, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import type { AnalysisProgress, AnalysisTelemetry, LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import type { VisionReasoner } from '@buildapp/source-vision'
@@ -24,14 +24,14 @@ export type JobInput = { jobId: string; url: string; workDir: string }
 export type JobOutput = ResultFiles & { parsed: LinkAnalysisSummary }
 
 export interface JobExecutor {
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void }): Promise<JobOutput>
+  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput>
 }
 
 /** What a runtime registers: the publishers it trusts, and optionally a network seam and a vision provider. */
 export type AnalysisWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; vision?: VisionReasoner }
 
 /** Run one job to its stored files. Shared by both executors and by the worker. */
-export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: { signal?: AbortSignal; onProgress?: (event: AnalysisProgress) => void }): Promise<JobOutput> {
+export async function executeJob(input: JobInput, wiring: AnalysisWiring, control: { signal?: AbortSignal; onProgress?: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
   const run = await runAnalysis(
     { kind: 'URL', url: input.url },
     {
@@ -44,6 +44,7 @@ export async function executeJob(input: JobInput, wiring: AnalysisWiring, contro
       jobId: input.jobId,
       signal: control.signal,
       progress: control.onProgress,
+      telemetry: control.onTelemetry,
     },
   )
   return analysisFilesOf(run)
@@ -57,8 +58,12 @@ export class InProcessExecutor implements JobExecutor {
    * or timed-out job is released at once and the run behind it stops at its
    * next checkpoint. Production uses the worker, which is terminated instead.
    */
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void }): Promise<JobOutput> {
-    const run = executeJob(input, this.wiring(), { signal: control.signal, onProgress: (e) => (control.signal.aborted ? undefined : control.onProgress(e)) })
+  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
+    const run = executeJob(input, this.wiring(), {
+      signal: control.signal,
+      onProgress: (e) => (control.signal.aborted ? undefined : control.onProgress(e)),
+      onTelemetry: (e) => (control.signal.aborted ? undefined : control.onTelemetry?.(e)),
+    })
     const stopped = new Promise<never>((_, reject) => {
       const fail = (): void => reject(toAnalysisError(control.signal.reason, control.signal))
       if (control.signal.aborted) fail()
@@ -71,7 +76,7 @@ export class InProcessExecutor implements JobExecutor {
 }
 
 /** Messages a job's worker sends back. */
-export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string; detail?: AnalysisError['detail'] }
+export type WorkerMessage = { type: 'progress'; event: AnalysisProgress } | { type: 'telemetry'; event: AnalysisTelemetry } | { type: 'done'; output: JobOutput } | { type: 'error'; code: AnalysisError['code']; message: string; detail?: AnalysisError['detail'] }
 
 export class WorkerExecutor implements JobExecutor {
   constructor(
@@ -79,7 +84,7 @@ export class WorkerExecutor implements JobExecutor {
     private readonly options: { memoryMb: number; env?: Record<string, string | undefined> },
   ) {}
 
-  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void }): Promise<JobOutput> {
+  execute(input: JobInput, control: { signal: AbortSignal; onProgress: (event: AnalysisProgress) => void; onTelemetry?: (event: AnalysisTelemetry) => void }): Promise<JobOutput> {
     return new Promise<JobOutput>((resolve, reject) => {
       if (control.signal.aborted) {
         reject(toAnalysisError(control.signal.reason, control.signal))
@@ -107,6 +112,8 @@ export class WorkerExecutor implements JobExecutor {
       worker.on('message', (message: WorkerMessage) => {
         if (message.type === 'progress') {
           if (!settled) control.onProgress(message.event)
+        } else if (message.type === 'telemetry') {
+          if (!settled) control.onTelemetry?.(message.event)
         } else if (message.type === 'done') {
           settle(() => resolve(message.output))
         } else {

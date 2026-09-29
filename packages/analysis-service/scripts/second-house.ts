@@ -40,7 +40,7 @@ import { PLAN_OVERLAY_LAYERS, isReconstructionFailure, levelsFrom, reconstructV2
 import type { PlanDiagnosticsReport, SolverTraceEvent } from '@buildapp/reconstruction'
 import type { Raster } from '@buildapp/source-cv'
 import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, identityOf, runAnalysis, sourceSummaryOf, summaryOf, toAnalysisError } from '../src/index.js'
-import type { AnalysisTrace } from '../src/index.js'
+import type { AnalysisTelemetry, AnalysisTrace, PhaseStats } from '../src/index.js'
 import { renderSceneSheet } from '../../mobile-scene/scripts/scene-sheet.js'
 import { PNG } from 'pngjs'
 
@@ -132,11 +132,33 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     pkgIn = SourcePackageSchema.parse(JSON.parse(readFileSync(packagePath, 'utf8')))
     graphIn = graphPath && existsSync(graphPath) ? (JSON.parse(readFileSync(graphPath, 'utf8')) as SourceObservationGraph) : undefined
   } else if (!url) throw new Error('give --url, or --package [--graph]')
+  // The performance record (005A): what each phase cost and how long it went silent. Never hashed.
+  const telemetry: AnalysisTelemetry[] = []
+  let phases: PhaseStats[] = []
+  const t0 = performance.now()
+  const writePerformance = (): void => {
+    write('performance.json', {
+      node: process.version,
+      arch: process.arch,
+      totalMs: Math.round(performance.now() - t0),
+      peakRssMB: Math.round(process.resourceUsage().maxRSS / 1024),
+      maxTickGapMs: Math.max(0, ...phases.map((p) => p.maxTickGapMs)),
+      telemetryEvents: telemetry.length,
+      maxTelemetryGapMs: telemetry.reduce((m, e, i) => (i === 0 ? 0 : Math.max(m, e.elapsedMs - telemetry[i - 1].elapsedMs)), 0),
+      phases,
+    })
+    if (process.env.TELEMETRY) writeFileSync(join(out, 'telemetry.ndjson'), telemetry.map((e) => JSON.stringify(e)).join('\n') + '\n')
+  }
   try {
     const run = await runAnalysis(pkgIn ? { kind: 'PACKAGE', pkg: pkgIn, graph: graphIn } : { kind: 'URL', url: url as string }, {
       adapters: [archonAdapter, genericProjectPageAdapter],
       cache,
       offline: process.env.OFFLINE === '1',
+      telemetry: (e) => telemetry.push(e),
+      rss: () => process.memoryUsage.rss(),
+      onPhaseStats: (s) => {
+        phases = s
+      },
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these
       progress: process.env.PROGRESS ? (e) => process.stderr.write(`  ${(e.progress * 100).toFixed(0).padStart(3)}% ${e.stage}${e.detail ? ` — ${e.detail}` : ''}\n`) : undefined,
@@ -152,6 +174,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     writeFileSync(join(out, 'model.json'), serializeModel(run.result.model))
     writeOverlays(out, run.planDiagnostics, rasterOf)
     writeFileSync(join(out, 'scene-views.png'), PNG.sync.write(renderSceneSheet(run.result.scene)))
+    writePerformance()
     for (const [k, h] of Object.entries(hashesOf(run.result))) log(`  ${k.padEnd(22)} ${h}`)
     log(`completed: ${run.result.counts.masses} masses, ${run.result.counts.openings} openings, ${run.result.counts.commands} commands, ${run.result.counts.meshes} meshes, ${run.timings.totalMs} ms`)
     const sameAs = value(argv, 'same-as')
@@ -166,6 +189,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     return 'COMPLETED'
   } catch (error) {
     const e = error instanceof AnalysisError ? error : toAnalysisError(error)
+    writePerformance()
     write('failure.json', e.failure())
     if (e.attachments?.trace) write('analysis-trace.json', e.attachments.trace)
     // The sealed inputs a failed run had reached, so the solver can be replayed on them alone.

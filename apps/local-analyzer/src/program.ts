@@ -10,14 +10,17 @@
  * no socket, no port, no HTTP between the app and the analyzer:
  *
  *  - **events** (`--events-fd`, else stdout): one JSON object per line —
- *    `hello` (runtime facts), `progress` (the pipeline's own event plus the
- *    elapsed time and resident memory), then exactly one of `done`, `failed`
- *    or `cancelled`. Written synchronously, so a report made in the middle of
- *    a long synchronous stage reaches the app when it is made.
+ *    `hello` (runtime facts), `progress` (the pipeline's own stage event plus
+ *    the elapsed time and resident memory), `telemetry` (protocol 3: the phase,
+ *    its counts and a heartbeat from inside the long loops, at most once a
+ *    second), then exactly one of `done`, `failed` or `cancelled`. Written
+ *    synchronously, so a report made in the middle of a long synchronous stage
+ *    reaches the app when it is made; a telemetry line the app is too slow to
+ *    take is dropped rather than waited for.
  *  - **control** (`--control-fd`): a line `cancel` aborts the run; the pipe
- *    closing does too (the app went away). The pipeline checks between stages
- *    and inside every fetch; a stage that is computing is not interrupted by
- *    this — the app ends the process for that, and deletes the job directory.
+ *    closing does too (the app went away). Since protocol 3 the pipe is also
+ *    polled from inside the long loops, so a cancel is honoured within a
+ *    fraction of a second even while the analyzer computes.
  *
  * On `done`, the four delivery files are in `--out`, each written to a
  * temporary name and renamed into place: `result.json` (the summary, whose
@@ -25,13 +28,13 @@
  * `candidate.json`. The source bytes never leave `--work/bytes`, which is
  * removed before any terminal event is written.
  */
-import { writeSync } from 'node:fs'
+import { readSync, writeSync } from 'node:fs'
 import { mkdir, rename, writeFile } from 'node:fs/promises'
 import { arch, cpus, platform, totalmem } from 'node:os'
 import { isAbsolute, join } from 'node:path'
 import { Socket } from 'node:net'
 import { ANALYSIS_SERVICE_VERSION, AnalysisError, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTelemetry, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary, PhaseStats } from '@buildapp/analysis-service'
 import { stableJson } from '@buildapp/source-common'
 import { SOLVER_V2_VERSION } from '@buildapp/reconstruction'
 import { selectedVariant } from '@buildapp/source-package'
@@ -47,8 +50,14 @@ import type { TextSupport } from './text.js'
  * Bumped when the event or argument shape changes; the app refuses a runtime that speaks another.
  * 2 (BUILDAPP-03Y2G): `failed` carries the structured failure and names its diagnostics files; every
  * terminal event names the run's `trace.json`.
+ * 3 (BUILDPLAN-ANALYZER-005A): `telemetry` events from inside the long loops, so silence now means
+ * something (the app may call it a stall); cancel polled during computation; every terminal event
+ * carries what each phase cost.
  */
-export const LOCAL_ANALYZER_PROTOCOL = 2 as const
+export const LOCAL_ANALYZER_PROTOCOL = 3 as const
+
+/** What this runtime can do beyond its protocol, for additive changes that need no protocol bump. */
+export const LOCAL_ANALYZER_CAPABILITIES = ['telemetry.v1', 'control.poll'] as const
 
 export const OUTPUT_FILES = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json' } as const
 
@@ -59,7 +68,7 @@ export const OUTPUT_FILES = { summary: 'result.json', scene: 'scene.json', model
  * shared without a cable.
  */
 export const DIAGNOSTICS_DIR = 'diagnostics' as const
-export const DIAGNOSTICS_FILES = { trace: 'trace.json', diagnostics: 'diagnostics.json', overlay: 'plan-overlay.png' } as const
+export const DIAGNOSTICS_FILES = { trace: 'trace.json', diagnostics: 'diagnostics.json', overlay: 'plan-overlay.png', performance: 'performance.json' } as const
 
 /** Bounds on what a failure leaves behind, so a bundle is always small enough to keep and to share. */
 export const DIAGNOSTICS_LIMITS = { jsonBytes: 1_500_000, overlayBytes: 1_500_000 } as const
@@ -99,11 +108,14 @@ export type RunMetrics = {
   memory: MemorySample
   timings?: AnalysisTimings
   sceneBytes?: number
+  /** What each phase cost and its longest silence (protocol 3); on failures too, so a failing phone run carries its timings. */
+  phases?: Array<{ phaseId: string; durationMs: number; maxTickGapMs: number; workDone: number; workTotal: number | null }>
 }
 
 export type LocalAnalyzerEvent =
-  | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string } }
+  | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; capabilities: readonly string[]; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string } }
   | { type: 'progress'; event: AnalysisProgress; elapsedMs: number; rssBytes: number }
+  | { type: 'telemetry'; event: AnalysisTelemetry; rssBytes: number }
   | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes; diagnostics?: DiagnosticsFiles }
   | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics; failure?: AnalysisFailure; diagnostics?: DiagnosticsFiles }
   | { type: 'cancelled'; metrics: RunMetrics; diagnostics?: DiagnosticsFiles }
@@ -182,22 +194,70 @@ async function writeAtomically(dir: string, name: string, text: string): Promise
  * app closes it itself once the runtime has returned, and that close is what
  * tells its reader the program is over.
  */
-function eventSink(fd: number | null): { emit: (event: LocalAnalyzerEvent) => void } {
-  if (fd === null) return { emit: (event) => void process.stdout.write(`${JSON.stringify(event)}\n`) }
-  return {
-    emit: (event) => {
-      const line = Buffer.from(`${JSON.stringify(event)}\n`, 'utf8')
-      let at = 0
-      while (at < line.length) {
-        try {
-          at += writeSync(fd, line, at, line.length - at)
-        } catch (error) {
-          // a non-blocking descriptor whose buffer is full: wait a moment and write the rest
-          if ((error as NodeJS.ErrnoException).code !== 'EAGAIN') throw error
-          Atomics.wait(PAUSE, 0, 0, 2)
-        }
+function eventSink(fd: number | null): { emit: (event: LocalAnalyzerEvent) => void; emitBestEffort: (event: LocalAnalyzerEvent) => void } {
+  if (fd === null) {
+    const write = (event: LocalAnalyzerEvent): void => void process.stdout.write(`${JSON.stringify(event)}\n`)
+    return { emit: write, emitBestEffort: write }
+  }
+  const writeFrom = (line: Buffer, from: number): void => {
+    let at = from
+    while (at < line.length) {
+      try {
+        at += writeSync(fd, line, at, line.length - at)
+      } catch (error) {
+        // a non-blocking descriptor whose buffer is full: wait a moment and write the rest
+        if ((error as NodeJS.ErrnoException).code !== 'EAGAIN') throw error
+        Atomics.wait(PAUSE, 0, 0, 2)
       }
+    }
+  }
+  return {
+    emit: (event) => writeFrom(Buffer.from(`${JSON.stringify(event)}\n`, 'utf8'), 0),
+    // A heartbeat the app is too slow to take is dropped, never waited for: a stalled reader must
+    // not stall the analysis. A line once started is finished, so the app never sees half of one.
+    emitBestEffort: (event) => {
+      const line = Buffer.from(`${JSON.stringify(event)}\n`, 'utf8')
+      let first: number
+      try {
+        first = writeSync(fd, line, 0, line.length)
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code === 'EAGAIN') return
+        throw error
+      }
+      if (first < line.length) writeFrom(line, first)
     },
+  }
+}
+
+/**
+ * The control pipe, read from inside the analysis's own loops. A computing
+ * stage never yields to the event loop, so the socket below never sees a
+ * `cancel` written while the analyzer computes; this reads the same pipe
+ * without waiting (it is non-blocking since the socket opened it) and aborts
+ * the run itself. Whichever reader takes the bytes, the run is cancelled.
+ */
+function controlPoller(fd: number | null, controller: AbortController): () => boolean {
+  if (fd === null) return () => controller.signal.aborted
+  const buffer = Buffer.alloc(64)
+  let text = ''
+  const cancel = (): true => {
+    if (!controller.signal.aborted) controller.abort(new DOMException('the analysis was cancelled', 'AbortError'))
+    return true
+  }
+  return () => {
+    if (controller.signal.aborted) return true
+    let n: number
+    try {
+      n = readSync(fd, buffer, 0, buffer.length, null)
+    } catch (error) {
+      // nothing written yet: carry on
+      if ((error as NodeJS.ErrnoException).code === 'EAGAIN') return false
+      return cancel()
+    }
+    // the app closed its end: it went away
+    if (n === 0) return cancel()
+    text = (text + buffer.toString('utf8', 0, n)).slice(-64)
+    return text.split('\n').some((line) => line.trim() === 'cancel') ? cancel() : false
   }
 }
 
@@ -231,8 +291,8 @@ function boundedJson(value: unknown, limit: number, trim: () => unknown): string
  * `--out/diagnostics`. Never throws: a diagnostics file that cannot be written
  * is a diagnostics file the app does not get, and the run's outcome stands.
  */
-async function writeDiagnostics(outDir: string, trace: AnalysisTrace | undefined, bundle: DiagnosticsBundle | undefined, extra: Record<string, unknown>): Promise<DiagnosticsFiles | undefined> {
-  if (!trace && !bundle) return undefined
+async function writeDiagnostics(outDir: string, trace: AnalysisTrace | undefined, bundle: DiagnosticsBundle | undefined, extra: Record<string, unknown>, performance?: Record<string, unknown>): Promise<DiagnosticsFiles | undefined> {
+  if (!trace && !bundle && !performance) return undefined
   const dir = join(outDir, DIAGNOSTICS_DIR)
   const files: string[] = []
   let bytes = 0
@@ -242,6 +302,12 @@ async function writeDiagnostics(outDir: string, trace: AnalysisTrace | undefined
       const text = `${stableJson(trace)}\n`
       await writeAtomically(dir, DIAGNOSTICS_FILES.trace, text)
       files.push(DIAGNOSTICS_FILES.trace)
+      bytes += Buffer.byteLength(text, 'utf8')
+    }
+    if (performance) {
+      const text = boundedJson(performance, DIAGNOSTICS_LIMITS.jsonBytes, () => ({ ...performance, phases: [], trimmed: true }))
+      await writeAtomically(dir, DIAGNOSTICS_FILES.performance, text)
+      files.push(DIAGNOSTICS_FILES.performance)
       bytes += Buffer.byteLength(text, 'utf8')
     }
     if (bundle) {
@@ -282,12 +348,17 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   const sink = eventSink(args.eventsFd)
   const controller = new AbortController()
   const stopListening = listenForCancel(args.controlFd, controller)
-  const metrics = (extra: Partial<RunMetrics> = {}): RunMetrics => ({ elapsedMs: elapsed(), memory: memorySample(), ...extra })
+  const pollCancel = controlPoller(args.controlFd, controller)
+  let phaseStats: PhaseStats[] = []
+  const phases = (): RunMetrics['phases'] => phaseStats.map((p) => ({ phaseId: p.phaseId, durationMs: p.durationMs, maxTickGapMs: p.maxTickGapMs, workDone: p.workDone, workTotal: p.workTotal }))
+  const metrics = (extra: Partial<RunMetrics> = {}): RunMetrics => ({ elapsedMs: elapsed(), memory: memorySample(), phases: phases(), ...extra })
+  // What each phase cost, beside the trace: never hashed, kept on failures and cancels too.
+  const performanceRecord = (): Record<string, unknown> => ({ node: process.version, arch: arch(), elapsedMs: elapsed(), memory: memorySample(), phases: phaseStats })
 
   try {
     // before any analyzer code runs: ICU's text behaviour where the runtime lacks ICU (src/text.ts)
     const text = installTextAdapter()
-    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(text), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION } })
+    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, capabilities: LOCAL_ANALYZER_CAPABILITIES, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(text), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION } })
     const output = await runLocalAnalysis({
       url: args.url,
       workDir: args.workDir,
@@ -296,6 +367,11 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       signal: controller.signal,
       now: options.now,
       progress: (event) => sink.emit({ type: 'progress', event, elapsedMs: elapsed(), rssBytes: process.memoryUsage().rss }),
+      telemetry: (event) => sink.emitBestEffort({ type: 'telemetry', event, rssBytes: process.memoryUsage.rss() }),
+      pollCancel,
+      onPhaseStats: (stats) => {
+        phaseStats = stats
+      },
     })
     // A refused comparison that something in the pipeline caught and survived still means this run
     // may not be the desktop's: it is not delivered.
@@ -311,8 +387,8 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
       sink.emit({ type: 'failed', code: 'OUTPUT_FAILED', message: 'the result could not be written to the app storage', metrics: metrics({ timings: output.timings }) })
       return EXIT.FAILED
     }
-    const diagnostics = await writeDiagnostics(args.outDir, output.run.trace, undefined, {})
-    sink.emit({ type: 'done', summary: output.files.parsed, files: OUTPUT_FILES, metrics: { elapsedMs: elapsed(), memory: output.memory, timings: output.timings, sceneBytes: output.files.parsed.sceneBytes }, sources: sourceHashesOf(output.run.pkg), ...(diagnostics ? { diagnostics } : {}) })
+    const diagnostics = await writeDiagnostics(args.outDir, output.run.trace, undefined, {}, performanceRecord())
+    sink.emit({ type: 'done', summary: output.files.parsed, files: OUTPUT_FILES, metrics: { elapsedMs: elapsed(), memory: output.memory, timings: output.timings, sceneBytes: output.files.parsed.sceneBytes, phases: phases() }, sources: sourceHashesOf(output.run.pkg), ...(diagnostics ? { diagnostics } : {}) })
     return EXIT.DONE
   } catch (error) {
     const e = error instanceof AnalysisError ? error : toAnalysisError(error, controller.signal)
@@ -322,16 +398,16 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
     const extra = { runtime: { node: process.version, arch: arch(), platform: platform() }, metrics: runMetrics }
     if (refusal && e.code !== 'CANCELLED') {
       const message = `the project's text contains a character (${refusal.message.split(' ')[0]}) this phone's runtime cannot sort or normalise exactly as the analyzer service does; analyse this project with the service`
-      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra)
+      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra, performanceRecord())
       sink.emit({ type: 'failed', code: 'TEXT_NOT_SUPPORTED_ON_DEVICE', message, metrics: runMetrics, ...(diagnostics ? { diagnostics } : {}) })
       return EXIT.FAILED
     }
     if (e.code === 'CANCELLED') {
-      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, undefined, {})
+      const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, undefined, {}, performanceRecord())
       sink.emit({ type: 'cancelled', metrics: runMetrics, ...(diagnostics ? { diagnostics } : {}) })
       return EXIT.CANCELLED
     }
-    const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra)
+    const diagnostics = await writeDiagnostics(args.outDir, e.attachments?.trace, e.attachments?.bundle, extra, performanceRecord())
     sink.emit({ type: 'failed', code: e.code, message: e.message, metrics: runMetrics, failure: e.failure(), ...(diagnostics ? { diagnostics } : {}) })
     return EXIT.FAILED
   } finally {

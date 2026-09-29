@@ -35,6 +35,7 @@
  * dimension of any real building.
  */
 import { round6, stableId } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv'
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
@@ -126,6 +127,8 @@ export type StructuralLayoutOptions = {
   plan?: PlanReadingChoice
   /** Per-frame pixel work the resolver shares between its readings; never changes an answer. */
   sheetCache?: Map<string, PlanSheet>
+  /** Told at each plan copy read, for progress and cancellation. Write-only. */
+  checkpoint?: Checkpoint
 }
 
 /** The ink, wall bands and wall thickness of one plan copy: a function of its pixels alone. */
@@ -233,6 +236,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         })
     let read = false
     for (const frame of ordered) {
+      options.checkpoint?.tick({ subphase: { id: 'PLAN_READ', label: `reading the ${storey.toLowerCase()} plan` } })
       const sheet = planSheet(frame, options, bandOptions)
       if (!sheet) {
         skipped.push({ frameId: frame.id, code: 'NOT_DECODABLE', why: 'its bytes could not be decoded here' })

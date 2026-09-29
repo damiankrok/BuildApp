@@ -18,6 +18,7 @@
  * a mismatch there is the acquisition bug moved one layer up.
  */
 import { round6 } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, axisAlignedSegments, downscaleGray, gradientMask, houghSegments, inkChannel, inkMask, toGray } from '@buildapp/source-cv'
 import type { Gray, Mask, Raster, Segment } from '@buildapp/source-cv'
@@ -71,6 +72,8 @@ export type PrepareOptions = {
   inkDelta?: number
   /** How large a tone step counts as an edge. */
   edgeThreshold?: number
+  /** Told between the preparation steps, for progress and cancellation; nothing it does reaches the result. */
+  checkpoint?: Checkpoint
 }
 
 export function prepareRaster(bytes: Uint8Array, options: PrepareOptions = {}): Prepared {
@@ -84,6 +87,8 @@ export function prepareRaster(bytes: Uint8Array, options: PrepareOptions = {}): 
  */
 export function prepareFromRaster(raster: Raster, options: PrepareOptions = {}): Prepared {
   const size = { width: raster.width, height: raster.height }
+  const step = (id: string, label: string): void => options.checkpoint?.tick({ subphase: { id, label } })
+  step('INK', 'separating ink from paper')
   const fullInk = inkChannel(raster)
   const fullLuma = toGray(raster)
   const maxEdge = options.maxWorkingEdge ?? MAX_WORKING_EDGE
@@ -96,9 +101,11 @@ export function prepareFromRaster(raster: Raster, options: PrepareOptions = {}):
   // swallows the publisher's page-wide watermark along with them.
   const mask = options.inkThreshold !== undefined ? inkMask(ink, { threshold: options.inkThreshold }) : adaptiveInkMask(ink, { delta: options.inkDelta })
 
+  step('EDGES', 'finding edges')
   const edges = gradientMask(luma, { threshold: options.edgeThreshold })
   const larger = Math.max(workingSize.width, workingSize.height)
   const axis = axisAlignedSegments(edges, { minLength: Math.max(6, Math.round(larger * 0.012)), maxThickness: 4, maxGap: 2 })
+  step('LINES', 'finding lines')
   const hough = houghSegments(edges, { minLength: Math.max(8, Math.round(larger * 0.015)), minSupport: Math.max(10, Math.round(larger * 0.012)), maxGap: 3, maxSegments: 400 })
   // Axis-aligned detection is exact where it applies and Hough covers
   // everything else; merging them and letting the caller filter by angle is
@@ -109,12 +116,19 @@ export function prepareFromRaster(raster: Raster, options: PrepareOptions = {}):
   // Thin strokes come from the INK mask, not the edge mask: on an edge mask a
   // single drawn line is two parallel edges two pixels apart, and a reader
   // looking for evenly spaced strokes would find a flight in every line.
-  const thin = [
-    ...thinStrokes(mask, { minLength: Math.max(6, Math.round(larger * 0.012)), maxLength: larger * 0.3, maxThickness: 4, maxGap: 2 }),
-    // Hough on the INK mask as well, so a winder's fanning treads — which are
-    // neither horizontal nor vertical — are candidates too.
-    ...houghSegments(mask, { minLength: Math.max(8, Math.round(larger * 0.015)), minSupport: Math.max(8, Math.round(larger * 0.01)), maxGap: 3, maxSegments: 300 }).filter((s) => s.length <= larger * 0.3),
-  ]
+  //
+  // Computed on first use (005A): only the stair reader on a floor plan asks,
+  // and the second Hough pass was half the Hough time on every render and
+  // elevation that never did. A pure function of the mask, so when it runs
+  // changes nothing it returns.
+  let thin: Segment[] | undefined
+  const thinSegments = (): Segment[] =>
+    (thin ??= [
+      ...thinStrokes(mask, { minLength: Math.max(6, Math.round(larger * 0.012)), maxLength: larger * 0.3, maxThickness: 4, maxGap: 2 }),
+      // Hough on the INK mask as well, so a winder's fanning treads — which are
+      // neither horizontal nor vertical — are candidates too.
+      ...houghSegments(mask, { minLength: Math.max(8, Math.round(larger * 0.015)), minSupport: Math.max(8, Math.round(larger * 0.01)), maxGap: 3, maxSegments: 300 }).filter((s) => s.length <= larger * 0.3),
+    ].map((s) => scaleSegment(s, scale)))
 
   return {
     size,
@@ -127,12 +141,21 @@ export function prepareFromRaster(raster: Raster, options: PrepareOptions = {}):
     edges,
     axisSegments: axis.map((s) => scaleSegment(s, scale)),
     allSegments: merged.map((s) => scaleSegment(s, scale)),
-    thinSegments: thin.map((s) => scaleSegment(s, scale)),
+    get thinSegments() {
+      return thinSegments()
+    },
   }
 }
 
 /** The working-resolution twins of `axisSegments` / `allSegments`, for code that must index back into the mask. */
 export function workingSegments(prepared: Prepared): { axis: Segment[]; all: Segment[]; thin: Segment[] } {
   const k = 1 / prepared.scale
-  return { axis: prepared.axisSegments.map((s) => scaleSegment(s, k)), all: prepared.allSegments.map((s) => scaleSegment(s, k)), thin: prepared.thinSegments.map((s) => scaleSegment(s, k)) }
+  // `thin` only when asked for: it is the one expensive member, and most readers never ask.
+  return {
+    axis: prepared.axisSegments.map((s) => scaleSegment(s, k)),
+    all: prepared.allSegments.map((s) => scaleSegment(s, k)),
+    get thin() {
+      return prepared.thinSegments.map((s) => scaleSegment(s, k))
+    },
+  }
 }

@@ -1,5 +1,6 @@
 package com.buildplan.preview.analyzer
 
+import com.buildplan.preview.analyzer.local.LocalPhaseCost
 import com.buildplan.preview.analyzer.local.LocalRuntimeFacts
 import com.buildplan.preview.analyzer.local.LocalTimings
 import kotlinx.serialization.Serializable
@@ -46,6 +47,8 @@ data class LocalRunReport(
     val forcedStop: Boolean = false,
     /** The hashes (never the bytes) of the page and drawings the run read, as the analyzer listed them. */
     val sources: JsonElement? = null,
+    /** What each phase cost and its longest silence, as the program reported at its end (protocol 3). */
+    val phases: List<LocalPhaseCost> = emptyList(),
 ) {
     companion object {
         const val OUTCOME_RUNNING = "RUNNING"

@@ -15,6 +15,9 @@
  * each job an empty cache of its own, so no job ever reads another's bytes.
  */
 import { stableJson } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
+import { createCheckpoint } from './checkpoint.js'
+import type { AnalysisPhaseId, AnalysisTelemetry, PhaseStats } from './checkpoint.js'
 import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePackage } from '@buildapp/source-package'
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
@@ -68,6 +71,17 @@ export type AnalysisOptions = {
   /** A monotonic clock in milliseconds, for `AnalysisRun.timings` only; never reaches a hash. */
   clock?: () => number
   jobId?: string
+  /**
+   * Telemetry (005A): the phase, its counts and a heartbeat, from inside the
+   * long loops, at most once a second. Never reaches a result or a hash.
+   */
+  telemetry?: (event: AnalysisTelemetry) => void
+  /** Asked from inside the long loops, at most every 200 ms: true cancels the run at the next loop boundary. */
+  pollCancel?: () => boolean
+  /** Resident memory, sampled with the telemetry for the performance record. */
+  rss?: () => number
+  /** What each phase cost, told once the run ends however it ends: the performance record. */
+  onPhaseStats?: (stats: PhaseStats[]) => void
 }
 
 /**
@@ -104,6 +118,16 @@ export type AnalysisRun = {
   trace: AnalysisTrace
   /** The plan decomposition, for overlays and a diagnostics bundle. */
   planDiagnostics: PlanDiagnosticsReport
+  /** What each phase cost. Diagnostics only: never part of a result or a hash. */
+  phases: PhaseStats[]
+}
+
+/** The solver's phases, as telemetry phases. */
+const SOLVER_PHASE: Record<ReconstructionV2Phase, AnalysisPhaseId> = {
+  REGISTRATION: 'REGISTER_VIEWS',
+  TOPOLOGY: 'SOLVE_TOPOLOGY',
+  METRICS: 'SOLVE_METRICS',
+  MODEL: 'BUILD_MODEL',
 }
 
 const PHASE_STAGE: Record<ReconstructionV2Phase, AnalysisStage> = {
@@ -152,6 +176,11 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     last = event.progress
     options.progress?.(event)
   }
+  // The loops' ticks become telemetry here; nothing recorded is read back by the computation.
+  const checkpoint = createCheckpoint({ clock, now, signal, pollCancel: options.pollCancel, emit: options.telemetry, overall: () => Math.max(0, last), rss: options.rss })
+  // While the run awaits the network or the disk the loops are not ticking; a timer says so.
+  const heartbeat = options.telemetry ? setInterval(() => checkpoint.idle(), 1000) : undefined
+  heartbeat?.unref?.()
   // What the run has so far, for a failure's diagnostics bundle.
   let pkgSoFar: SourcePackage | undefined
   let routeKind: 'SPECIALIST' | 'GENERIC' | 'SEALED' = 'SEALED'
@@ -162,6 +191,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   try {
     // --- ACQUIRING_SOURCE ---------------------------------------------------
     report('ACQUIRING_SOURCE', 0, input.kind === 'URL' ? 'fetching the project page' : 'reading a sealed source package')
+    checkpoint.phase('ACQUIRE_PAGE')
     throwIfAborted(signal)
     let pkg: SourcePackage
     let sourceUrl: string
@@ -174,7 +204,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         policy: options.policy,
         offline: options.offline,
         probeResolutionCandidates: options.probeResolutionCandidates,
+        checkpoint,
         onRoute: (route) => {
+          checkpoint.phase('ACQUIRE_ASSETS')
           routeKind = route.kind
           report('ACQUIRING_SOURCE', 0.1, route.kind === 'SPECIALIST' ? `read by the ${route.adapter.id} reader` : `inspected as a project page (confidence ${route.classification.confidence})`)
         },
@@ -200,6 +232,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     // The roles were claimed during acquisition; this is where they are counted,
     // and where a page with nothing to read stops before any drawing is read.
     report('CLASSIFYING_SOURCES', 0)
+    checkpoint.phase('CLASSIFY', { total: pkg.assets.length })
     const byDocument: Record<string, number> = {}
     for (const a of pkg.assets) byDocument[a.roles.document] = (byDocument[a.roles.document] ?? 0) + 1
     const drawings = pkg.assets.filter((a) => DRAWING_DOCUMENTS.has(a.roles.document)).length
@@ -235,10 +268,14 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       report('EXTRACTING_OBSERVATIONS', 0.65, 'observation graph replayed')
     } else {
       report('EXTRACTING_OBSERVATIONS', 0)
+      checkpoint.phase('OBSERVE_ASSETS', { total: pkg.assets.length })
       const vision = options.vision ?? nullVisionReasoner()
       const analysis = await analyzeSourcePackage(pkg, {
         bytes: bytesFor,
         vision,
+        checkpoint,
+        // only the graph is used from here on: release each drawing's masks as soon as it is read
+        retainPrepared: false,
         // reading the drawings is about two thirds of this stage, the printed dimensions the rest
         onAsset: (index, total) => report('EXTRACTING_OBSERVATIONS', total === 0 ? 0.65 : (0.65 * index) / total, index < total ? `drawing ${index + 1} of ${total}` : undefined),
       })
@@ -256,7 +293,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     trace.record('EXTRACTING_OBSERVATIONS', 'OBSERVATIONS', 'PASSED', { frames: graph.coordinateFrames.length, observations: graph.observations.length, relations: graph.relations.length, vision: visionMode })
     report('EXTRACTING_OBSERVATIONS', 0.65, 'reading printed dimensions and callouts')
 
-    for (const asset of pkg.assets) {
+    checkpoint.phase('DECODE_RASTERS', { total: pkg.assets.length })
+    for (const [index, asset] of pkg.assets.entries()) {
+      checkpoint.tick({ done: index, assetIndex: index + 1, assetTotal: pkg.assets.length })
       const variant = selectedVariant(asset)
       const fetched = await bytesFor(variant.url)
       if (!fetched) continue
@@ -268,7 +307,18 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     const identity: AnalysisIdentity = { ...identityOf(pkg, options.adapters), ...options.identity }
     const raster = (frame: { variantByteHash: string }): ReturnType<typeof decodeImage> | undefined => rasterCache.get(frame.variantByteHash)
-    const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications) })
+    // The metric pass is most of a run and reads one frame at a time: the stage's bar moves
+    // with the frames (from where the drawings left it to the end of the stage), and the
+    // telemetry says which frame and what inside it.
+    checkpoint.phase('METRIC_FRAMES')
+    const metricCheckpoint: Checkpoint = {
+      phase: (id, o) => checkpoint.phase(id, o),
+      tick: (w) => {
+        if (w?.done !== undefined && w.total) report('EXTRACTING_OBSERVATIONS', 0.65 + 0.35 * (w.done / w.total), `frame ${w.done + 1} of ${w.total}`)
+        checkpoint.tick(w)
+      },
+    }
+    const metrics = extractMetricEvidence({ checkpoint: metricCheckpoint, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications) })
     metricsSoFar = metrics
     throwIfAborted(signal)
     const metricExtractionMs = lap()
@@ -283,6 +333,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     })
 
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
+    let resolving = false
     const reconstruction = reconstructV2({
       debug: options.debug,
       modelId: identity.modelId,
@@ -295,7 +346,18 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       raster,
       publishedAreas: pkg.publishedFacts,
       publishedRooms: pkg.publishedRooms,
-      onPhase: (phase) => report(PHASE_STAGE[phase], 0),
+      onPhase: (phase) => {
+        report(PHASE_STAGE[phase], 0)
+        checkpoint.phase(SOLVER_PHASE[phase])
+      },
+      checkpoint,
+      resolverProgress: (e) => {
+        if (!resolving) {
+          resolving = true
+          checkpoint.phase('PLAN_RESOLUTION')
+        }
+        checkpoint.tick({ done: e.index, total: e.total, candidateIndex: e.index, candidateTotal: e.total, subphase: e.stage === 1 ? { id: 'READINGS', label: 'weighing a reading of the plan' } : { id: 'COMPOSITIONS', label: 'composing a reading in full' } })
+      },
       trace: (e) => trace.record(PHASE_STAGE[e.phase], e.substage, e.status, e.counts, { reasonCode: e.reasonCode, detail: e.detail }),
     })
     throwIfAborted(signal)
@@ -307,6 +369,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
 
     // --- COMPILING_SCENE ----------------------------------------------------
     report('COMPILING_SCENE', 0)
+    checkpoint.phase('COMPILE_SCENE')
     let scene: ReturnType<typeof compileBuilding>
     try {
       scene = compileBuilding(model)
@@ -323,6 +386,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
 
     // --- VERIFYING ----------------------------------------------------------
     report('VERIFYING', 0)
+    checkpoint.phase('VERIFY')
     const replay = verifyReplay(reconstruction.candidate)
     if (!replay.ok) {
       trace.record('VERIFYING', 'REPLAY', 'FAILED', {}, { reasonCode: 'VERIFY_REPLAY_FAILED' })
@@ -342,7 +406,6 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       trace.record('VERIFYING', 'CLOSURE', 'FAILED', {}, { reasonCode: 'VERIFY_CLOSURE_FAILED' })
       throw reconstructionError('VERIFY_CLOSURE_FAILED', 'VERIFYING', 'CLOSURE', 'the joint audit could not be run over the compiled scene')
     }
-    const verificationMs = lap()
     {
       const exteriorErrorsNow = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
       trace.record('VERIFYING', 'CLOSURE', exteriorErrorsNow === 0 ? 'PASSED' : 'DEGRADED', { exteriorErrors: exteriorErrorsNow, exteriorFindings: closure.metrics.exteriorFindingCount, interiorFindings: closure.metrics.interiorFindingCount })
@@ -421,9 +484,14 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       model,
       scene: bundle,
     }
-    const timings: AnalysisTimings = { acquisitionMs, observationMs, metricExtractionMs, reconstructionMs, compileMs, verificationMs, totalMs: Math.round(clock() - t0) }
-    return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings, trace: trace.finish('COMPLETED'), planDiagnostics: reconstruction.planDiagnostics }
+    // The last lap closes at the same instant as the total, so the six phases partition it: the
+    // summary is verification's last step, not time no phase owns.
+    const verificationMs = lap()
+    const timings: AnalysisTimings = { acquisitionMs, observationMs, metricExtractionMs, reconstructionMs, compileMs, verificationMs, totalMs: Math.round(mark - t0) }
+    checkpoint.end()
+    return { result, pkg, graph, metrics, reconstruction, sceneText, closure, timings, trace: trace.finish('COMPLETED'), planDiagnostics: reconstruction.planDiagnostics, phases: checkpoint.stats() }
   } catch (error) {
+    checkpoint.end()
     const mapped = toAnalysisError(error, signal, { stage: current })
     // Every failure says which stage it happened in, whoever raised it.
     const e = mapped.detail.stage ? mapped : new AnalysisError(mapped.code, mapped.message, { ...mapped.detail, stage: current })
@@ -443,6 +511,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     // on them alone (`second-house.ts --metrics`) without reading the drawings again.
     e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
     throw e
+  } finally {
+    if (heartbeat) clearInterval(heartbeat)
+    options.onPhaseStats?.(checkpoint.stats())
   }
 }
 

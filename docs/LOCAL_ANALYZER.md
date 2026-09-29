@@ -54,7 +54,7 @@ the other mode of the Analyzer screen.
   `done`, its files exist, the summary file agrees with the event, and the
   scene store verified sha256, schema and `contentHash`.
 
-## Protocol (version 2)
+## Protocol (version 3)
 
 ```
 node main.mjs --job <32 hex> --url <https://…> --work <dir> --out <dir> --events-fd <n> --control-fd <n>
@@ -82,10 +82,41 @@ Version 2 (BUILDAPP-03Y2G) adds two things:
   - Each file is at most 1.5 MB. The digest is trimmed first, and an overlay over
     the limit is left out.
 
+Version 3 (BUILDPLAN-ANALYZER-005A) makes a long run legible:
+
+- **`telemetry` events.** Each is `{type: "telemetry", rssBytes, event}`,
+  where `event` is an `AnalysisTelemetry` (`packages/analysis-service/src/checkpoint.ts`).
+  - It carries the phase from a closed list, the step inside it, the counts
+    (`workDone` of `workTotal` in a unit, the asset of how many, and diagnostic
+    counters such as callout rings searched), `COMPUTE` or `IO_WAIT`, and a
+    heartbeat sequence.
+  - The loops themselves emit it when they cross a boundary, at most once a
+    second, so a heartbeat means "the thread is working".
+  - It is written best-effort: a full pipe drops a telemetry line, never a
+    terminal event.
+- **Cancellation between ticks.** The program reads the control descriptor
+  without blocking whenever a tick asks (at most every 200 ms). A cancel
+  therefore lands inside a long computation at the next loop boundary, not
+  only between stages.
+- **`hello.capabilities`** lists what this runtime can do beyond its protocol, so
+  an additive change needs no protocol bump: `telemetry.v1` (the events above)
+  and `control.poll` (cancel honoured at loop boundaries).
+- **Phase costs.** The terminal events' `metrics.phases` give each phase's
+  duration, tick count, longest silence between ticks and peak RSS.
+  `diagnostics/performance.json` keeps the same record on every run.
+- **The app's liveness verdict.** It judges liveness on its own monotonic
+  clock (`LivenessTracker`):
+  - no heartbeat for 45 s is "no response from the analyzer";
+  - heartbeats with frozen counts for 30 s are "still analysing — this step is
+    computationally heavy";
+  - waiting on the network with nothing new for 15 s says so.
+  - Nothing is cancelled for the person.
+
 `hello` must carry the protocol the app speaks. An architecture test holds the
 program, the bundle and the app to the same number.
 
-The app copies a failed job's three diagnostics files and nothing else into
+The app copies a failed job's diagnostics files (the three above plus
+`performance.json`) and nothing else into
 `files/analyzer-diagnostics/<job>` before it removes the job folder. It keeps
 at most five bundles, and no file over 2 MB. They carry no source image. The
 failure card's **Share diagnostics** zips one bundle into the cache and hands

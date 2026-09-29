@@ -134,6 +134,8 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
       ? new AnalysisError('TIMEOUT', 'the analysis took longer than the service allows', context.stage ? { stage: context.stage } : {})
       : new AnalysisError('CANCELLED', 'the analysis was cancelled', context.stage ? { stage: context.stage } : {})
   }
+  // A cancellation polled from inside a loop, when no signal was there to abort.
+  if ((error as { name?: unknown } | null)?.name === 'AbortError') return new AnalysisError('CANCELLED', 'the analysis was cancelled', context.stage ? { stage: context.stage } : {})
   if (isReconstructionFailure(error)) {
     return new AnalysisError('RECONSTRUCTION_FAILED', error.message, {
       reasonCode: error.code,

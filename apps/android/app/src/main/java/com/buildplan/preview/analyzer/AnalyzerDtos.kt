@@ -63,6 +63,38 @@ data class CurrentStage(
     val detail: String? = null,
 )
 
+/**
+ * What the analyzer is doing inside its stage, by counts (005A): the phase,
+ * the unit of work and how many of them, and a heartbeat sequence that moves
+ * whenever the analyzer crosses a loop boundary. From the embedded program's
+ * `telemetry` events, or from a service job record's `activity`.
+ */
+@Serializable
+data class JobActivity(
+    val phaseId: String = "",
+    val phaseLabel: String = "",
+    val subphaseId: String? = null,
+    val subphaseLabel: String? = null,
+    /** `COMPUTE` while a loop is working, `IO_WAIT` while the run waits on the network or the disk. */
+    val activity: String = "COMPUTE",
+    val workDone: Long = 0,
+    val workTotal: Long? = null,
+    val unit: String = "",
+    val assetIndex: Int? = null,
+    val assetTotal: Int? = null,
+    val candidateIndex: Int? = null,
+    val candidateTotal: Int? = null,
+    val heartbeatSeq: Long = 0,
+    val elapsedMs: Long = 0,
+    val phaseElapsedMs: Long = 0,
+    val diagnosticCounters: Map<String, Long> = emptyMap(),
+    /** Service only: how long ago, by the server's clock, the last heartbeat arrived. */
+    val heartbeatAgeMs: Long? = null,
+) {
+    /** What changes only when the work does: a new phase, step or count. A heartbeat alone does not change it. */
+    val signature: String get() = "$phaseId|$subphaseId|$workDone|$workTotal|$assetIndex|$candidateIndex|${diagnosticCounters.toSortedMap()}"
+}
+
 /** One row of `stages[]`: all nine stages, in pipeline order, with their state. */
 @Serializable
 data class StageRecord(
@@ -113,6 +145,8 @@ data class JobStatus(
     val error: ApiError? = null,
     val result: ShortResult? = null,
     val links: Map<String, String> = emptyMap(),
+    /** What the analyzer is doing inside the stage (005A); absent from an older service. */
+    val activity: JobActivity? = null,
 ) {
     val isTerminal: Boolean get() = status in AnalysisStages.TERMINAL
 }

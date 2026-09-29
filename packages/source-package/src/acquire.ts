@@ -24,6 +24,7 @@
  * published.
  */
 import { round6, stableId } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import { CHANNEL_TRUST, type DiscoveredCandidate } from './discovery.js'
 import { DecodeFailed, probeImage } from './image.js'
 import { DEFAULT_FETCH_POLICY, FetchRefused, isTransientFetchFailure, safeFetch, type FetchDeps, type FetchPolicy } from './net.js'
@@ -48,6 +49,8 @@ export type AcquireOptions = {
   offline?: boolean
   /** Told which strategy read the page, for a log or a trace. Never part of the package. */
   onRoute?: (route: Extract<SourceRoute, { kind: 'SPECIALIST' | 'GENERIC' }>) => void
+  /** Told at each address fetched, with how many there are; may throw the run's cancellation. Write-only. */
+  checkpoint?: Checkpoint
 }
 
 /** Somewhere fetched bytes live, addressed by URL. */
@@ -132,7 +135,8 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   // --- fetch and decode ---------------------------------------------------
   const measured: Measured[] = []
   const byUrl = new Map<string, SourceVariant>()
-  for (const candidate of budget) {
+  for (const [index, candidate] of budget.entries()) {
+    options.checkpoint?.tick({ done: index, total: budget.length, counters: { fetched: byUrl.size, notFetched: failures.length } })
     const existing = byUrl.get(candidate.url)
     if (existing) {
       measured.push({ candidate, variant: existing })

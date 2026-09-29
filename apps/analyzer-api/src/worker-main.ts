@@ -15,7 +15,7 @@ export function serveAnalysisWorker(wiring: () => AnalysisWiring): void {
   if (!port) throw new Error('serveAnalysisWorker must run in a worker thread')
   const input = workerData as JobInput
   const post = (message: WorkerMessage): void => port.postMessage(message)
-  executeJob(input, wiring(), { onProgress: (event) => post({ type: 'progress', event }) }).then(
+  executeJob(input, wiring(), { onProgress: (event) => post({ type: 'progress', event }), onTelemetry: (event) => post({ type: 'telemetry', event }) }).then(
     (output) => post({ type: 'done', output }),
     (error: unknown) => {
       const e = toAnalysisError(error)

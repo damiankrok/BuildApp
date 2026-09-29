@@ -149,13 +149,13 @@ describe('the program stops when it is told to, and leaves nothing', () => {
     expect(result.code).toBe(2)
     expect(result.terminal?.type).toBe('cancelled')
     expect(existsSync(join(result.workDir, 'bytes'))).toBe(false)
-    // no delivery file; only the run's trace, which ends CANCELLED in the stage it was cancelled in
+    // no delivery file; only the run's trace, which ends CANCELLED in the stage it was cancelled in, and what its phases cost
     expect(existsSync(result.outDir) ? readdirSync(result.outDir) : []).toEqual(['diagnostics'])
-    expect(readdirSync(join(result.outDir, 'diagnostics'))).toEqual(['trace.json'])
+    expect(readdirSync(join(result.outDir, 'diagnostics'))).toEqual(['performance.json', 'trace.json'])
     const trace = JSON.parse(readFileSync(join(result.outDir, 'diagnostics', 'trace.json'), 'utf8')) as { outcome: string; entries: Array<{ stage: string; status: string }> }
     expect(trace.outcome).toBe('CANCELLED')
     expect(trace.entries.at(-1)).toMatchObject({ stage: 'ACQUIRING_SOURCE', status: 'CANCELLED' })
-    expect((result.terminal as { diagnostics?: { files: string[] } }).diagnostics?.files).toEqual(['trace.json'])
+    expect((result.terminal as { diagnostics?: { files: string[] } }).diagnostics?.files).toEqual(['trace.json', 'performance.json'])
   })
 
   it('the control pipe closing (the app went away) counts as a cancel', async () => {
@@ -171,6 +171,39 @@ describe('the program stops when it is told to, and leaves nothing', () => {
     const result = await run.done
     expect(result.code).toBe(2)
     expect(result.terminal?.type).toBe('cancelled')
+  })
+
+  it('a cancel while the analyzer computes lands at the next loop boundary, not when the computation ends', async () => {
+    // From the metric pass on, the run is one long synchronous computation: the event loop does
+    // not turn, so only the poll the loops make at their boundaries can see the cancel.
+    let sent = false
+    const events: Event[] = []
+    const run = host(fixturePageUrl(FIXTURE_PROJECTS.larchfield), {
+      onEvent: (e) => {
+        events.push(e)
+        const t = e.event as { phaseId?: string } | undefined
+        if (!sent && e.type === 'telemetry' && t?.phaseId === 'METRIC_FRAMES') {
+          sent = true
+          run.cancel()
+        }
+      },
+    })
+    const result = await run.done
+    expect(sent).toBe(true)
+    expect(result.code).toBe(2)
+    expect(result.terminal?.type).toBe('cancelled')
+    const trace = JSON.parse(readFileSync(join(result.outDir, 'diagnostics', 'trace.json'), 'utf8')) as { outcome: string; entries: Array<{ stage: string; status: string }> }
+    expect(trace.outcome).toBe('CANCELLED')
+    expect(trace.entries.at(-1)?.status).toBe('CANCELLED')
+    expect(['EXTRACTING_OBSERVATIONS', 'REGISTERING_VIEWS', 'SOLVING_TOPOLOGY', 'SOLVING_METRICS', 'BUILDING_MODEL']).toContain(trace.entries.at(-1)?.stage)
+    // the runtime said it could, and every telemetry line before the end has a heartbeat one past the last
+    const hello = events.find((e) => e.type === 'hello') as { capabilities?: string[] } | undefined
+    expect(hello?.capabilities).toContain('control.poll')
+    const seqs = events.filter((e) => e.type === 'telemetry').map((e) => (e.event as { heartbeatSeq: number }).heartbeatSeq)
+    expect(seqs).toEqual(seqs.map((_, i) => i + 1))
+    // what each phase cost is on the cancelled event too
+    const phases = ((result.terminal as { metrics?: { phases?: Array<{ phaseId: string }> } }).metrics?.phases ?? []).map((p) => p.phaseId)
+    expect(phases).toContain('METRIC_FRAMES')
   })
 
   it('refuses unusable arguments before it does anything', () => {

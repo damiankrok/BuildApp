@@ -21,7 +21,8 @@
  * driven by synthetic drawings in a test, which is the only way to know that
  * what comes out is a reading of the page rather than a memory of one project.
  */
-import { round6, stableId } from '@buildapp/source-common'
+import { NO_CHECKPOINT, round6, stableId } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, bandThicknessQuantile, inkChannel, runLengthBands } from '@buildapp/source-cv'
 import type { Mask } from '@buildapp/source-cv'
@@ -50,6 +51,8 @@ export const METRIC_READER_VERSION = '1.0.0' as const
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
 
 export type ExtractOptions = {
+  /** Told at each frame and inside the long readers, for progress and cancellation; nothing it does reaches the evidence. */
+  checkpoint?: Checkpoint
   sourcePackageId: string
   sourcePackageHash: string
   graph: SourceObservationGraph
@@ -278,8 +281,10 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
   const conflicts: MetricConflict[] = []
   const unresolved: UnresolvedMetric[] = []
 
-  for (const frame of [...graph.coordinateFrames].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (!keep(frame)) continue
+  const checkpoint = options.checkpoint ?? NO_CHECKPOINT
+  const frames = [...graph.coordinateFrames].sort((a, b) => a.id.localeCompare(b.id)).filter((f) => keep(f))
+  for (const [frameIndex, frame] of frames.entries()) {
+    checkpoint.tick({ done: frameIndex, total: frames.length, assetIndex: frameIndex + 1, assetTotal: frames.length, subphase: { id: 'FRAME', label: `${frame.roles.document.toLowerCase().replace(/_/g, ' ')}` }, counters: { tokens: ocrTokens.length, chains: chains.length, evidence: evidence.length } })
     const plane = planeOf(frame)
     const raster = options.raster(frame)
     if (!raster) {
@@ -288,7 +293,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     }
     const observations = graph.observations.filter((o) => o.frameId === frame.id)
     let ladderOrigin: PixelPoint | undefined
-    const read = readNumbers(raster)
+    const read = readNumbers(raster, { checkpoint })
     const tokensById = new Map<TextToken, OcrToken>()
     for (const token of read.tokens) {
       const record = toOcrToken(frame, token)
@@ -450,7 +455,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     // reconstruction can pick the one its own evidence — the plan gap, the
     // elevation — agrees with.
     if (plane === 'PLAN_XZ') {
-      for (const ring of readOpeningCallouts(raster, { frameId: frame.id })) {
+      for (const ring of readOpeningCallouts(raster, { frameId: frame.id, checkpoint })) {
         if (ring.widthCandidates.length === 0 || ring.heightCandidates.length === 0) continue
         const centre: PixelPoint = { x: ring.circle.cx, y: ring.circle.cy }
         const near = nearest(observations, ['OPENING', 'WINDOW', 'DOOR', 'OPENING_INTERVAL'], centre)

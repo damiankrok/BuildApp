@@ -13,8 +13,8 @@
  *   are evicted beyond `maxStoredJobs`.
  */
 import { AnalysisError, isTerminal, toAnalysisError } from '@buildapp/analysis-service'
-import type { AnalysisProgress } from '@buildapp/analysis-service'
-import { applyProgress, completeJob, failJob, newJob, newJobId } from './job.js'
+import type { AnalysisProgress, AnalysisTelemetry } from '@buildapp/analysis-service'
+import { applyProgress, applyTelemetry, completeJob, failJob, newJob, newJobId } from './job.js'
 import type { JobRecord } from './job.js'
 import type { AnalysisJobStore } from './store.js'
 import type { JobExecutor } from './executor.js'
@@ -113,10 +113,18 @@ export class JobRunner {
     const onProgress = (event: AnalysisProgress): void => {
       pending = this.store.update(jobId, (j) => applyProgress(j, event, stamp()))
     }
+    // Heartbeats arrive up to once a second; the record is written at most every two.
+    let lastActivityWrite = -Infinity
+    const onTelemetry = (event: AnalysisTelemetry): void => {
+      const at = this.now().getTime()
+      if (event.kind !== 'PHASE_START' && at - lastActivityWrite < 2000) return
+      lastActivityWrite = at
+      pending = this.store.update(jobId, (j) => applyTelemetry(j, event, stamp()))
+    }
     let failure: unknown
     try {
       const workDir = await this.store.workspace(jobId)
-      const output = await this.executor.execute({ jobId, url, workDir }, { signal: controller.signal, onProgress })
+      const output = await this.executor.execute({ jobId, url, workDir }, { signal: controller.signal, onProgress, onTelemetry })
       if (controller.signal.aborted) throw toAnalysisError(controller.signal.reason, controller.signal)
       await pending
       await this.store.saveResult(jobId, output)

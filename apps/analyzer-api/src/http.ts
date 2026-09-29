@@ -45,9 +45,11 @@ const URL_STATUS: Record<string, number> = { INVALID_URL: 400, SOURCE_UNSAFE: 40
 const ROUTE = /^\/v1\/analyses\/([^/]+)(?:\/(result|scene|model|candidate))?\/?$/
 
 /** `GET /v1/analyses/:id` for a record: the record without its schema tag, plus links. */
-export const statusBodyOf = (job: JobRecord): Record<string, unknown> => {
-  const { schema: _schema, schemaVersion: _version, ...rest } = job
-  return { ...rest, links: linksOf(job) }
+export const statusBodyOf = (job: JobRecord, nowMs: number = Date.now()): Record<string, unknown> => {
+  const { schema: _schema, schemaVersion: _version, activity, ...rest } = job
+  // The heartbeat's age by this server's clock, at the moment of the answer: a client needs no clock of its own.
+  const live = activity ? (({ heartbeatAt, ...a }) => ({ ...a, heartbeatAgeMs: Math.max(0, nowMs - Date.parse(heartbeatAt)) }))(activity) : undefined
+  return { ...rest, ...(live ? { activity: live } : {}), links: linksOf(job) }
 }
 
 const linksOf = (job: JobRecord): Record<string, string> => {
@@ -229,7 +231,7 @@ export function createApiServer(deps: ApiDeps): Server {
         return
       }
       if (method !== 'GET' && method !== 'HEAD') throw new HttpError(405, 'METHOD_NOT_ALLOWED', 'use GET or DELETE', { allow: 'GET, DELETE' })
-      json(req, res, 200, statusBodyOf(job))
+      json(req, res, 200, statusBodyOf(job, now()))
       return
     }
     if (method !== 'GET' && method !== 'HEAD') throw new HttpError(405, 'METHOD_NOT_ALLOWED', 'use GET', { allow: 'GET' })

@@ -44,6 +44,7 @@
  * the callout convention itself allows.
  */
 import { round6, stableId } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import { adaptiveInkMask, connectedComponents, inkChannel, saturationField } from '@buildapp/source-cv'
 import type { Gray, Mask, Raster } from '@buildapp/source-cv'
@@ -83,6 +84,10 @@ export type CalloutOptions = {
   useColour?: boolean
   /** The frame the readings are made on; part of every reading's id. */
   frameId?: string
+  /** Told at each ring read, for progress and cancellation; nothing it does reaches the reading. */
+  checkpoint?: Checkpoint
+  /** How many bytes of prototype renders to keep; a bound on memory that changes no reading. */
+  renderCacheBytes?: number
 }
 
 /** The range the `width/height` convention allows, in centimetres. Anything outside it is not a callout however well it matched. */
@@ -900,6 +905,77 @@ function coherent(upper: HalfReading, lower: HalfReading, circle: Circle): boole
  * colour mask and the ink mask is reported once, from whichever mask fitted
  * it better.
  */
+const CALLOUT_SUBPHASE = { id: 'CALLOUT_RINGS', label: 'reading opening callouts' }
+
+/**
+ * How much memory of prototype renders one reading keeps. A render is a pure
+ * function of its key, so dropping one costs a re-render and changes no
+ * reading; keeping all of them cost ~600 MB on one plan sheet (Council E,
+ * 005A), which is what ran a phone out of memory.
+ */
+export const RENDER_CACHE_BYTES = 192 * 1024 * 1024
+
+/**
+ * A render cache bounded by bytes. Renders are grouped by cell size, because a
+ * digit is classified by rendering every prototype at ITS cell's size: a sheet
+ * reads a handful of sizes over and over and a long tail of sizes once. When
+ * the budget is exceeded the least used SIZE is dropped whole — least
+ * recently used would drop the common sizes whenever the tail cycles past.
+ * Same answers as an unbounded cache, by construction.
+ */
+export function boundedRenderCache(bytes = RENDER_CACHE_BYTES, onRender?: () => void): RenderCache {
+  return new SizeGroupedRenderCache(bytes, onRender)
+}
+
+class SizeGroupedRenderCache extends Map<string, Float64Array> {
+  private readonly groups = new Map<string, { keys: string[]; bytes: number; uses: number }>()
+  private held = 0
+  /** `onRender` is told of every render the cache has to store: where a callout search spends its time, so where it ticks. */
+  constructor(
+    private readonly budget: number,
+    private readonly onRender?: () => void,
+  ) {
+    super()
+  }
+  private static sizeOf(key: string): string {
+    const first = key.indexOf('|')
+    const third = key.indexOf('|', key.indexOf('|', first + 1) + 1)
+    return key.slice(first + 1, third)
+  }
+  override get(key: string): Float64Array | undefined {
+    const group = this.groups.get(SizeGroupedRenderCache.sizeOf(key))
+    if (group) group.uses += 1
+    return super.get(key)
+  }
+  override set(key: string, value: Float64Array): this {
+    if (super.has(key)) return this
+    this.onRender?.()
+    const size = SizeGroupedRenderCache.sizeOf(key)
+    const group = this.groups.get(size) ?? { keys: [], bytes: 0, uses: 0 }
+    this.groups.set(size, group)
+    super.set(key, value)
+    group.keys.push(key)
+    group.bytes += value.byteLength
+    this.held += value.byteLength
+    while (this.held > this.budget) {
+      // the least used size other than the one being filled; ties by size key, so eviction is deterministic
+      let victim: string | undefined
+      for (const [other, g] of this.groups) {
+        if (other === size) continue
+        const current = victim === undefined ? undefined : this.groups.get(victim)
+        if (!current || g.uses < current.uses || (g.uses === current.uses && other < (victim as string))) victim = other
+      }
+      if (victim === undefined) break
+      const dropped = this.groups.get(victim)
+      if (!dropped) break
+      for (const k of dropped.keys) super.delete(k)
+      this.held -= dropped.bytes
+      this.groups.delete(victim)
+    }
+    return this
+  }
+}
+
 export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}): CalloutReading[] {
   const opt = { ...DEFAULTS, ...options }
   const minR = Math.max(3, Math.round(opt.minRadiusPx))
@@ -941,9 +1017,10 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
     kept.push(f)
   }
 
-  const cache: RenderCache = new Map()
+  const cache = boundedRenderCache(options.renderCacheBytes, options.checkpoint ? () => options.checkpoint?.tick() : undefined)
   const readings: CalloutReading[] = []
-  for (const { ring, source } of kept) {
+  for (const [index, { ring, source }] of kept.entries()) {
+    options.checkpoint?.tick({ subphase: CALLOUT_SUBPHASE, counters: { rings: index + 1, ringsTotal: kept.length, readings: readings.length } })
     const { bar } = ring
     const inner = innerEdge(source.grey, ring)
     const box: PixelRect = { x0: ring.cx - ring.r, y0: ring.cy - ring.r, x1: ring.cx + ring.r, y1: ring.cy + ring.r }

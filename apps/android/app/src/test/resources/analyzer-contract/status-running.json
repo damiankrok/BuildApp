@@ -69,6 +69,18 @@
   "completedAt": null,
   "error": null,
   "result": null,
+  "activity": {
+    "phaseId": "OBSERVE_ASSETS",
+    "phaseLabel": "reading the drawings",
+    "activity": "COMPUTE",
+    "workDone": 0,
+    "workTotal": 7,
+    "unit": "ASSET",
+    "heartbeatSeq": 1,
+    "elapsedMs": 1000,
+    "phaseElapsedMs": 0,
+    "heartbeatAgeMs": 0
+  },
   "links": {
     "self": "/v1/analyses/0123456789abcdef0123456789abcdef"
   }

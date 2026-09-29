@@ -8,7 +8,7 @@
  */
 import { randomBytes } from 'node:crypto'
 import { ANALYSIS_STAGES, STAGE_LABELS, isTerminal } from '@buildapp/analysis-service'
-import type { AnalysisProgress, AnalysisStage, AnalysisStatus, LinkAnalysisSummary } from '@buildapp/analysis-service'
+import type { AnalysisProgress, AnalysisStage, AnalysisStatus, AnalysisTelemetry, LinkAnalysisSummary } from '@buildapp/analysis-service'
 
 export type StageState = 'PENDING' | 'RUNNING' | 'DONE' | 'FAILED' | 'CANCELLED'
 
@@ -59,7 +59,15 @@ export type JobRecord = {
   completedAt: string | null
   error: JobError | null
   result: JobResultBrief | null
+  /**
+   * What the analyzer is doing inside its stage, by counts (005A), with when
+   * its last heartbeat arrived. Present while a job runs and telemetry has
+   * arrived; dropped when the job ends.
+   */
+  activity?: JobActivityRecord
 }
+
+export type JobActivityRecord = Omit<AnalysisTelemetry, 'kind' | 'stage' | 'stageIndex' | 'stageCount' | 'timestamp' | 'overall'> & { heartbeatAt: string }
 
 export const JOB_ID_PATTERN = /^[0-9a-f]{32}$/
 
@@ -103,10 +111,22 @@ export function applyProgress(job: JobRecord, event: AnalysisProgress, now: stri
   }
 }
 
+/** Record a telemetry event: where the analyzer is inside its stage, and that it is alive. A finished job never changes. */
+export function applyTelemetry(job: JobRecord, event: AnalysisTelemetry, now: string): JobRecord {
+  if (isTerminal(job.status)) return job
+  const { kind: _kind, stage: _stage, stageIndex: _index, stageCount: _count, timestamp: _timestamp, overall: _overall, ...activity } = event
+  return { ...job, activity: { ...activity, heartbeatAt: now }, updatedAt: now }
+}
+
+const withoutActivity = (job: JobRecord): JobRecord => {
+  const { activity: _activity, ...rest } = job
+  return rest
+}
+
 export function completeJob(job: JobRecord, summary: LinkAnalysisSummary, now: string): JobRecord {
   if (isTerminal(job.status)) return job
   return {
-    ...job,
+    ...withoutActivity(job),
     status: 'COMPLETED',
     progress: 1,
     stage: null,
@@ -134,7 +154,7 @@ export function failJob(job: JobRecord, error: JobError, now: string): JobRecord
   if (isTerminal(job.status)) return job
   const cancelled = error.code === 'CANCELLED'
   return {
-    ...job,
+    ...withoutActivity(job),
     status: cancelled ? 'CANCELLED' : 'FAILED',
     stage: null,
     stages: job.stages.map((s) => (s.state === 'RUNNING' ? { ...s, state: cancelled ? 'CANCELLED' : 'FAILED', completedAt: now } : s)),

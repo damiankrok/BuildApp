@@ -15,6 +15,8 @@
  * more than either. That is what §13's "do not rely only on a VLM" means in
  * code: the CV path runs first and runs unconditionally.
  */
+import { NO_CHECKPOINT } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import { ObservationGraphBuilder } from '@buildapp/source-observations'
 import type { ExtractorHandle, SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import { selectedVariant } from '@buildapp/source-package'
@@ -50,12 +52,21 @@ export type AnalyzeOptions = {
    * nothing it returns or throws reaches the graph.
    */
   onAsset?: (index: number, total: number, assetId: string | null) => void
+  /** Told at each asset and between the steps inside one, for progress and cancellation; nothing it does reaches the graph. */
+  checkpoint?: Checkpoint
+  /**
+   * Keep each asset's prepared pixels on the result. Default true; a caller
+   * that uses only the graph passes false, and every asset's masks and
+   * segments are released as soon as its extractors are done with them.
+   */
+  retainPrepared?: boolean
 }
 
 export type AssetAnalysis = {
   asset: SourceAsset
   frame: SourceCoordinateFrame
-  prepared: Prepared
+  /** Absent when the caller asked for the pixels to be released (`retainPrepared: false`). */
+  prepared?: Prepared
   elevation?: ElevationResult
   plan?: PlanResult
   section?: SectionResult
@@ -106,8 +117,10 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
   // graph must not depend on which drawing happened to be analysed first.
   const ordered = [...pkg.assets].sort((a, b) => a.id.localeCompare(b.id)).slice(0, options.maxAssets ?? pkg.assets.length)
 
+  const checkpoint = options.checkpoint ?? NO_CHECKPOINT
   for (const [index, asset] of ordered.entries()) {
     options.onAsset?.(index, ordered.length, asset.id)
+    checkpoint.tick({ done: index, total: ordered.length, assetIndex: index + 1, assetTotal: ordered.length, subphase: { id: asset.roles.document, label: asset.roles.document.toLowerCase().replace(/_/g, ' ') } })
     const variant = selectedVariant(asset)
     const document = asset.roles.document
     if (document === 'CHROME' || document === 'UNKNOWN') {
@@ -123,8 +136,10 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
 
     let prepared: Prepared
     try {
-      prepared = prepareRaster(fetched.bytes)
+      prepared = prepareRaster(fetched.bytes, { checkpoint })
     } catch (err) {
+      // a cancellation is not an undecodable drawing
+      if ((err as { name?: unknown }).name === 'AbortError') throw err
       builder.unresolved(`the raster of asset ${asset.id}`, `the bytes could not be decoded: ${(err as Error).message}`, 'MISSING', asset.id)
       skipped.push({ assetId: asset.id, reason: `decode failed: ${(err as Error).message}` })
       continue
@@ -203,6 +218,8 @@ export async function analyzeSourcePackage(pkg: SourcePackage, options: AnalyzeO
       }
     }
 
+    checkpoint.tick()
+    if (options.retainPrepared === false) delete analysis.prepared
     analysis.observations = builder.snapshot().filter((o) => o.frameId === frame.id)
     if (builder.observationCount === before && !analysis.visionAttempted) {
       builder.unresolved(`any observation at all on asset ${asset.id}`, 'the extractors for this document role found nothing in the image', 'MISSING', asset.id)

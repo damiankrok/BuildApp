@@ -25,7 +25,7 @@
 import { rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { analysisFilesOf, runAnalysis } from '@buildapp/analysis-service'
-import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTimings } from '@buildapp/analysis-service'
+import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTelemetry, AnalysisTimings, PhaseStats } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
 import { memorySample } from './memory.js'
@@ -41,6 +41,12 @@ export type LocalAnalysisRequest = {
   wiring: LocalWiring
   signal?: AbortSignal
   progress?: (event: AnalysisProgress) => void
+  /** Phase, counts and heartbeat from inside the long loops (protocol 3). */
+  telemetry?: (event: AnalysisTelemetry) => void
+  /** Asked from inside the long loops: true cancels at the next loop boundary. */
+  pollCancel?: () => boolean
+  /** What each phase cost, told when the run ends however it ends. */
+  onPhaseStats?: (stats: PhaseStats[]) => void
   jobId?: string
   now?: () => Date
 }
@@ -70,6 +76,10 @@ export async function runLocalAnalysis(request: LocalAnalysisRequest): Promise<L
         signal: request.signal,
         progress: request.progress,
         now: request.now,
+        telemetry: request.telemetry,
+        pollCancel: request.pollCancel,
+        onPhaseStats: request.onPhaseStats,
+        rss: () => process.memoryUsage.rss(),
       },
     )
     return { run, files: analysisFilesOf(run), timings: run.timings, memory: memorySample() }

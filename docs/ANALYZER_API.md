@@ -112,6 +112,26 @@ Refusals, before anything is fetched or queued:
   | Solving and emission | `TOPOLOGY_NO_VALID_HYPOTHESIS`, `METRIC_SOLVE_FAILED`, `MODEL_EMISSION_FAILED` |
   | Scene and verification | `SCENE_COMPILE_FAILED`, `VERIFY_REPLAY_FAILED`, `VERIFY_CLOSURE_FAILED` |
   | Unexpected | `INTERNAL_ERROR` |
+- `activity` (BUILDPLAN-ANALYZER-005A, optional; present only while a stage runs) says what the run is doing, by counts, and whether it is alive:
+
+  ```json
+  "activity": {
+    "phaseId": "METRIC_FRAMES", "phaseLabel": "reading printed dimensions and callouts",
+    "subphaseId": "CALLOUT_RINGS", "subphaseLabel": "searching callout rings",
+    "activity": "COMPUTE", "workDone": 3, "workTotal": 10, "unit": "FRAME",
+    "assetIndex": 4, "assetTotal": 10,
+    "heartbeatSeq": 41, "elapsedMs": 90000, "phaseElapsedMs": 12000,
+    "diagnosticCounters": { "rings": 37, "ringsTotal": 150, "readings": 5 },
+    "heartbeatAgeMs": 800
+  }
+  ```
+
+  - `phaseId` comes from a closed list (`ANALYSIS_PHASES`, `packages/analysis-service/src/checkpoint.ts`), so a client can key its own words by id.
+  - `workTotal` is `null` while the total is unknown. A client then shows no fraction rather than a guess.
+  - `activity` is `COMPUTE` when a loop just crossed a boundary, and `IO_WAIT` while the run waits on the publisher.
+  - `heartbeatSeq` moves every time the analyzer's own loops cross a boundary (at most one record a second; the store is written at most every 2 s, phase changes always).
+  - `heartbeatAgeMs` is computed by the server at read time: how long ago that heartbeat was.
+  - A client tells a heavy step (heartbeats, frozen counts) from a stalled analyzer (no heartbeat) from these two alone. `progress` stays the secondary summary.
 - On `COMPLETED`: `result` is a short summary (below) and `links` gains `result`, `scene`, `model`, `candidate`.
 
 ```json

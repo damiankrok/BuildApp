@@ -33,6 +33,7 @@
  * score, and the caller decides whether a reading that weak is worth having.
  */
 import { round6 } from '@buildapp/source-common'
+import type { Checkpoint } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import { rectIoU } from '@buildapp/source-common'
 import { adaptiveInkMask, connectedComponents, inkChannel } from '@buildapp/source-cv'
@@ -109,9 +110,11 @@ export type OcrOptions = {
   region?: PixelRect
   /** Which way up to read. Defaults to all three. */
   orientations?: readonly TextOrientation[]
+  /** Told at each token group read, for progress and cancellation; nothing it does reaches the reading. */
+  checkpoint?: Checkpoint
 }
 
-const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
+const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations' | 'checkpoint'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
 
 // ---------------------------------------------------------------------------
 // prototypes
@@ -923,6 +926,8 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
   return { tokens: dedupeOrientations(tokens), blobCount }
 }
 
+const OCR_SUBPHASE = { id: 'OCR', label: 'reading printed numbers' }
+
 /** The horizontal pass, for a caller that already has an ink field (so a page is converted once). */
 export function readNumbersFromInk(ink: Gray, options: OcrOptions = {}): OcrResult {
   const opt = { ...DEFAULTS, ...options }
@@ -961,7 +966,9 @@ export function readNumbersFromInk(ink: Gray, options: OcrOptions = {}): OcrResu
     .map((c) => ({ box: c.bounds, pixels: c.pixels }))
 
   const tokens: TextToken[] = []
-  for (const group of groupTokens(blobs, marks)) {
+  const groups = groupTokens(blobs, marks)
+  for (const [index, group] of groups.entries()) {
+    options.checkpoint?.tick({ subphase: OCR_SUBPHASE, counters: { tokenGroups: index + 1, tokenGroupsTotal: groups.length } })
     const box = group.map((g) => g.box).reduce(merge)
     const height = boxHeight(box)
     const crop = cropToken(mask, box)

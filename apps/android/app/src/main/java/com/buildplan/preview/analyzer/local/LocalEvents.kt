@@ -3,6 +3,7 @@ package com.buildplan.preview.analyzer.local
 import com.buildplan.preview.analyzer.AnalysisSummary
 import com.buildplan.preview.analyzer.AnalyzerJson
 import com.buildplan.preview.analyzer.FailureDetails
+import com.buildplan.preview.analyzer.JobActivity
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -24,8 +25,10 @@ object LocalProtocol {
     /**
      * The protocol this build speaks; `hello` must carry the same.
      * 2 (BUILDAPP-03Y2G): `failed` carries the structured failure; terminal events name the diagnostics files.
+     * 3 (BUILDPLAN-ANALYZER-005A): `telemetry` events from inside the long loops, so silence means
+     * something; cancel honoured during computation; every terminal event carries what each phase cost.
      */
-    const val PROTOCOL = 2
+    const val PROTOCOL = 3
 
     const val SUMMARY_FILE = "result.json"
     const val SCENE_FILE = "scene.json"
@@ -77,12 +80,18 @@ data class LocalTimings(
     val totalMs: Long = 0,
 )
 
+/** What one phase of a run cost, and the longest it went without crossing a loop boundary. */
+@Serializable
+data class LocalPhaseCost(val phaseId: String = "", val durationMs: Long = 0, val maxTickGapMs: Long = 0, val workDone: Long = 0, val workTotal: Long? = null)
+
 @Serializable
 data class LocalMetrics(
     val elapsedMs: Long = 0,
     val memory: LocalMemory = LocalMemory(),
     val timings: LocalTimings? = null,
     val sceneBytes: Long? = null,
+    /** Protocol 3: on every terminal event, failures included. */
+    val phases: List<LocalPhaseCost> = emptyList(),
 )
 
 /** One report of the pipeline's position (`AnalysisProgress`). */
@@ -103,6 +112,9 @@ sealed interface LocalEvent {
     data class Hello(val protocol: Int, val jobId: String, val pid: Int, val runtime: LocalRuntimeFacts, val analyzer: LocalAnalyzerVersions) : LocalEvent
 
     data class Progress(val event: LocalProgress, val elapsedMs: Long, val rssBytes: Long) : LocalEvent
+
+    /** Protocol 3: what the analyzer is doing inside its stage, and that it is alive. */
+    data class Telemetry(val activity: JobActivity, val rssBytes: Long) : LocalEvent
 
     /** The run finished; its four files are in the job's output folder. `sources` lists the hashes of what it read. */
     data class Done(val summary: AnalysisSummary, val metrics: LocalMetrics, val sources: JsonElement?, val diagnostics: LocalDiagnosticsFiles? = null) : LocalEvent
@@ -143,6 +155,10 @@ sealed interface LocalEvent {
                     "progress" -> Progress(
                         event = AnalyzerJson.decodeFromJsonElement(obj.getValue("event")),
                         elapsedMs = (obj["elapsedMs"] as? JsonPrimitive)?.contentOrNull?.toLongOrNull() ?: 0,
+                        rssBytes = (obj["rssBytes"] as? JsonPrimitive)?.contentOrNull?.toLongOrNull() ?: 0,
+                    )
+                    "telemetry" -> Telemetry(
+                        activity = AnalyzerJson.decodeFromJsonElement(obj.getValue("event")),
                         rssBytes = (obj["rssBytes"] as? JsonPrimitive)?.contentOrNull?.toLongOrNull() ?: 0,
                     )
                     "done" -> Done(
