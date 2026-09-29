@@ -409,3 +409,47 @@ Exactly three, after the main implementation, each sealed under
   and numerals in glare are unchanged from 003C.
 - The five-minute analyses and ~2 GB peak RSS are measured, not reduced
   (§40 of the brief).
+
+## AB. OWNER checklist (visual acceptance on the phone)
+
+Install `BuildPlan-owner-preview.apk` (Z) and, with the sample house open:
+
+1. **The house is the first thing.** The app opens on the 3D house, no
+   dashboard, no tab bar. Is that right for you on a cold start, every time?
+2. **The rail at the foot (upright).** Wygląd / Warstwy / Widok / Dopasuj
+   stand above the timeline where a thumb reaches; on a phone on its side
+   they are at the top right. Do the labelled buttons earn their place, or
+   would you rather one handle that unfolds them (direction C)?
+3. **The rule's header is the way into the stages.** Tap "43% · Dach ›"
+   (or "Ustaw postęp") — the stage sheet opens over the house with the
+   inked drawing and the one big figure; the ridge stays visible above it.
+   Is 82 % of the screen the right height, or should the sheet be shorter
+   and open on the current stage only?
+4. **The status row.** Under the house's name a line appears only when there
+   is something to say (a new house ready · Otwórz; an analysis running or
+   failed; a model with limitations, once; the sample's "dodaj swój dom").
+   Does any of these deserve to stay permanently, or to be a toast?
+5. **The house menu.** Houses on this phone, "Dodaj dom z linku", Etapy
+   budowy, Źródło modelu i analiza, and Koszty as a disabled row that says
+   it is not built. Is that the right place for Koszty until the cost
+   workspace exists?
+6. **The source sheet.** Where the model came from, its limitations, the
+   latest analysis of this house, the technical rows folded, and "Usuń ten
+   dom z telefonu" for a downloaded house.
+7. **A link from another publisher.** Paste
+   `https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge`:
+   the app says "Sprawdzam stronę projektu i pobieram rysunki", reads the
+   page, and ends with "Nie udało się zbudować modelu" — the page's plans
+   are 550 px thumbnails — rather than refusing the address. Is that honest
+   enough, or do you want the sentence to say the plans are too small?
+8. **Kosaćce.** Paste the Kosaćce link: the analysis completes (about
+   three to seven minutes) and the house draws; "Model gotowy z
+   ograniczeniami" (13 unresolved) is said on the status row and the source
+   sheet.
+9. **Back.** From the bare house, back leaves the app; a sheet closes; the
+   analyzer task returns to the same house at the camera you left.
+10. **Font 1.3 and landscape.** Everything above at the larger font and on
+    the phone's side (the details as a side panel, the stage sheet).
+
+Anything you would change is a bounded fix for the next stage; nothing here
+is merged to `main` until you decide.
