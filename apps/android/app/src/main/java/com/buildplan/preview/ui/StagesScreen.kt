@@ -1,6 +1,7 @@
 package com.buildplan.preview.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,12 +26,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -49,6 +51,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
@@ -274,6 +279,7 @@ private fun StageRow(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CompletionEditor(stage: ConstructionStageProgress, progress: ProgressViewModel) {
     var value by remember(stage.stageId, stage.completion) { mutableFloatStateOf(stage.completion.toFloat()) }
@@ -288,16 +294,41 @@ private fun CompletionEditor(stage: ConstructionStageProgress, progress: Progres
             onValueChange = { value = it },
             onValueChangeFinished = { progress.setCompletion(stage.stageId, (value * 20).roundToInt() / 20.0) },
             steps = 19,
-            colors = SliderDefaults.colors(
-                thumbColor = Palette.Rule,
-                activeTrackColor = Palette.Rule,
-                inactiveTrackColor = Palette.Hairline,
-                activeTickColor = Palette.OnRule,
-                inactiveTickColor = Palette.RuleEmpty,
-            ),
+            // The rule's grammar, not a stock pill: a square-cornered bar graduated every 5 %,
+            // filled in the progress yellow to the stage's share, and a marker for a thumb.
+            thumb = { Box(Modifier.size(width = 6.dp, height = 28.dp).background(Palette.Rule, RoundedCornerShape(Radius.tick))) },
+            track = { state -> CompletionTrack(state.coercedFraction(), state.steps) },
             modifier = Modifier.semantics { stateDescription = "$percent%" },
         )
         Text(stringResource(R.string.stage_completion_hint), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+    }
+}
+
+/** Where [SliderState.value] sits in its range, 0..1. */
+@OptIn(ExperimentalMaterial3Api::class)
+private fun SliderState.coercedFraction(): Float {
+    val span = valueRange.endInclusive - valueRange.start
+    return if (span <= 0f) 0f else ((value - valueRange.start) / span).coerceIn(0f, 1f)
+}
+
+/** The completion as a short rule: graduations at every step, the done share in yellow. */
+@Composable
+private fun CompletionTrack(fraction: Float, steps: Int) {
+    Canvas(Modifier.fillMaxWidth().height(8.dp)) {
+        val corner = CornerRadius(Radius.tick.toPx())
+        drawRoundRect(Palette.Hairline, cornerRadius = corner)
+        drawRoundRect(Palette.Rule, size = Size(size.width * fraction, size.height), cornerRadius = corner)
+        val segments = steps + 1
+        val stroke = 1.dp.toPx()
+        for (i in 1 until segments) {
+            val x = size.width * i / segments
+            drawLine(
+                if (x <= size.width * fraction) Palette.OnRule else Palette.RuleEmpty,
+                Offset(x, size.height * 0.25f),
+                Offset(x, size.height * 0.75f),
+                strokeWidth = stroke,
+            )
+        }
     }
 }
 

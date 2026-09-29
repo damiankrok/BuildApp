@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T02:08:05+00:00",
+  "title": "Design System: BuildPlan",
+  "extensions": {
+    "colorMeta": {
+      "Ground": {
+        "role": "neutral",
+        "displayName": "Graphite Ground",
+        "canonical": "#101419",
+        "tonalRamp": [
+          "#080B10",
+          "#21252B",
+          "#3E4248",
+          "#5D6268",
+          "#7E838A",
+          "#A0A6AD",
+          "#C4CAD1",
+          "#E9EFF7"
+        ]
+      },
+      "Raised": {
+        "role": "neutral",
+        "displayName": "Raised Graphite",
+        "canonical": "#161B21",
+        "tonalRamp": [
+          "#070C11",
+          "#20262C",
+          "#3D4349",
+          "#5C6269",
+          "#7D838B",
+          "#9FA6AE",
+          "#C3CAD2",
+          "#E8EFF8"
+        ]
+      },
+      "Sheet": {
+        "role": "neutral",
+        "displayName": "Sheet Graphite",
+        "canonical": "#1B2128",
+        "tonalRamp": [
+          "#070C12",
+          "#20262D",
+          "#3C434B",
+          "#5B626A",
+          "#7C838C",
+          "#9EA6AF",
+          "#C2CAD4",
+          "#E7EFF9"
+        ]
+      },
+      "Well": {
+        "role": "neutral",
+        "displayName": "Well",
+        "canonical": "#0A0D11",
+        "tonalRamp": [
+          "#080B0F",
+          "#22252A",
+          "#3F4247",
+          "#5E6267",
+          "#7E8388",
+          "#A1A5AB",
+          "#C5C9D0",
+          "#EAEFF5"
+        ]
+      },
+      "Hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#2A313A",
+        "tonalRamp": [
+          "#060C13",
+          "#1F262E",
+          "#3B434C",
+          "#5A626C",
+          "#7B838E",
+          "#9DA6B1",
+          "#C1CAD6",
+          "#E6EFFB"
+        ]
+      },
+      "Ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#E8EBEF",
+        "tonalRamp": [
+          "#090B0E",
+          "#232528",
+          "#404245",
+          "#5F6165",
+          "#808286",
+          "#A2A5A9",
+          "#C6C9CD",
+          "#ECEFF3"
+        ]
+      },
+      "InkMuted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#A7B0BC",
+        "tonalRamp": [
+          "#060B13",
+          "#1F262F",
+          "#3B434D",
+          "#5A626D",
+          "#7B838E",
+          "#9DA6B2",
+          "#C1CAD6",
+          "#E6EFFC"
+        ]
+      },
+      "InkFaint": {
+        "role": "neutral",
+        "displayName": "Faint Ink",
+        "canonical": "#8A94A0",
+        "tonalRamp": [
+          "#050C14",
+          "#1E262F",
+          "#3A434D",
+          "#59626D",
+          "#7A838F",
+          "#9CA6B2",
+          "#C0CAD7",
+          "#E5F0FD"
+        ]
+      },
+      "RuleEmpty": {
+        "role": "neutral",
+        "displayName": "Rule Grey",
+        "canonical": "#6B7581",
+        "tonalRamp": [
+          "#050C14",
+          "#1D2630",
+          "#3A434E",
+          "#59626E",
+          "#798390",
+          "#9CA6B3",
+          "#BFCAD8",
+          "#E4F0FE"
+        ]
+      },
+      "Rule": {
+        "role": "primary",
+        "displayName": "Rule Yellow",
+        "canonical": "#F2C230",
+        "tonalRamp": [
+          "#1E0200",
+          "#3C1D00",
+          "#5B3C00",
+          "#7D5C00",
+          "#9F7E10",
+          "#C3A141",
+          "#E9C567",
+          "#FFEB8D"
+        ]
+      },
+      "OnRule": {
+        "role": "primary",
+        "displayName": "Ink on Rule",
+        "canonical": "#15120A",
+        "tonalRamp": [
+          "#0E0B04",
+          "#28251C",
+          "#454238",
+          "#656157",
+          "#868278",
+          "#A9A59A",
+          "#CDC9BE",
+          "#F3EEE3"
+        ]
+      },
+      "Error": {
+        "role": "error",
+        "displayName": "Error Coral",
+        "canonical": "#EF8A7E",
+        "tonalRamp": [
+          "#2D0000",
+          "#510000",
+          "#751F1A",
+          "#9A4239",
+          "#C06359",
+          "#E7867B",
+          "#FFAA9E",
+          "#FFCFC2"
+        ]
+      },
+      "Glass": {
+        "role": "neutral",
+        "displayName": "Glass",
+        "canonical": "#101419E6",
+        "tonalRamp": [
+          "#080B10",
+          "#21252B",
+          "#3E4248",
+          "#5D6268",
+          "#7E838A",
+          "#A0A6AD",
+          "#C4CAD1",
+          "#E9EFF7"
+        ],
+        "note": "Compose ARGB 0xE6101419 written as #RRGGBBAA; ramp ignores alpha."
+      },
+      "GlassOpaque": {
+        "role": "neutral",
+        "displayName": "Glass Opaque",
+        "canonical": "#14181E",
+        "tonalRamp": [
+          "#080B11",
+          "#21252C",
+          "#3E4249",
+          "#5D6269",
+          "#7D838B",
+          "#A0A5AE",
+          "#C4CAD2",
+          "#E9EFF8"
+        ]
+      },
+      "GlassRimHigh": {
+        "role": "neutral",
+        "displayName": "Glass Rim (high)",
+        "canonical": "#FFFFFF24",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ],
+        "note": "Compose ARGB 0x24FFFFFF written as #RRGGBBAA; ramp ignores alpha."
+      },
+      "GlassRimLow": {
+        "role": "neutral",
+        "displayName": "Glass Rim (low)",
+        "canonical": "#FFFFFF08",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ],
+        "note": "Compose ARGB 0x08FFFFFF written as #RRGGBBAA; ramp ignores alpha."
+      },
+      "Scrim": {
+        "role": "neutral",
+        "displayName": "Scrim",
+        "canonical": "#05060A",
+        "tonalRamp": [
+          "#090B10",
+          "#23252A",
+          "#404248",
+          "#5F6168",
+          "#808289",
+          "#A2A5AC",
+          "#C6C9D0",
+          "#ECEEF6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "measureMonumental": {
+        "displayName": "measureMonumental",
+        "purpose": "The one monumental figure: \"Postęp wg etapów\" on Dom."
+      },
+      "measureInline": {
+        "displayName": "measureInline",
+        "purpose": "A measured value inside a line of chrome (\"43%\")."
+      },
+      "measureNumeral": {
+        "displayName": "measureNumeral",
+        "purpose": "Stage numbers and graduation numerals on the rule."
+      },
+      "headlineSmall": {
+        "displayName": "headlineSmall",
+        "purpose": "Screen titles."
+      },
+      "titleLarge": {
+        "displayName": "titleLarge",
+        "purpose": "\"Postęp nieustawiony\" on Dom."
+      },
+      "titleMedium": {
+        "displayName": "titleMedium",
+        "purpose": "Section headings, the current stage."
+      },
+      "titleSmall": {
+        "displayName": "titleSmall",
+        "purpose": "Pane titles, 3D context title, timeline header."
+      },
+      "bodyLarge": {
+        "displayName": "bodyLarge",
+        "purpose": "Stage names, empty-place paragraph, switcher rows."
+      },
+      "bodyMedium": {
+        "displayName": "bodyMedium",
+        "purpose": "Rows, values, status sentences."
+      },
+      "bodySmall": {
+        "displayName": "bodySmall",
+        "purpose": "Second lines, hints, metadata."
+      },
+      "labelLarge": {
+        "displayName": "labelLarge",
+        "purpose": "Button text, strip stop names."
+      },
+      "labelMedium": {
+        "displayName": "labelMedium",
+        "purpose": "Group labels, status text."
+      },
+      "labelSmall": {
+        "displayName": "labelSmall",
+        "purpose": "Places bar/rail and tool rail labels, state words."
+      }
+    },
+    "shadows": [
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "The build has no shadows; depth is tonal (Well < Ground < Raised < Sheet) plus translucent Glass."
+      },
+      {
+        "name": "glass-rim",
+        "value": "1dp border, vertical gradient #FFFFFF24 -> #FFFFFF08",
+        "purpose": "The light-catching rim of every GlassSurface; not a shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "enter",
+        "value": "220ms cubic-bezier(0.05, 0.7, 0.1, 1)",
+        "purpose": "Something arriving (emphasized decelerate)."
+      },
+      {
+        "name": "exit",
+        "value": "150ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Something leaving, quicker than it came."
+      },
+      {
+        "name": "settle",
+        "value": "180ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "A state changing in place: the rule cursor, a mark filling, a chevron."
+      },
+      {
+        "name": "enterDelayed",
+        "value": "220ms after 150ms, cubic-bezier(0.05, 0.7, 0.1, 1)",
+        "purpose": "A dense panel arriving only after the one it replaces has left."
+      },
+      {
+        "name": "recede",
+        "value": "160ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Chrome stepping back while a finger turns the model."
+      },
+      {
+        "name": "panel-rest-scale",
+        "value": "0.92",
+        "purpose": "A pane grows from its rail button from 92 % scale."
+      },
+      {
+        "name": "reduced",
+        "value": "ANIMATOR_DURATION_SCALE = 0 -> snap / no transition",
+        "purpose": "Observed live; every spec becomes a cut."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "short-window",
+        "value": "height < 480dp"
+      },
+      {
+        "name": "wide-window",
+        "value": "width >= 600dp"
+      },
+      {
+        "name": "two-pane-dom",
+        "value": "width >= 600dp and wider than tall"
+      },
+      {
+        "name": "compact-height-3d",
+        "value": "height < 480dp"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "touch",
+        "value": "48dp"
+      },
+      {
+        "name": "icon",
+        "value": "22dp"
+      },
+      {
+        "name": "iconSmall",
+        "value": "18dp"
+      },
+      {
+        "name": "contentMax",
+        "value": "720dp"
+      },
+      {
+        "name": "toolPaneWidth",
+        "value": "236dp"
+      },
+      {
+        "name": "sidePanelWidth",
+        "value": "360dp"
+      },
+      {
+        "name": "sheetMax",
+        "value": "460dp (and at most 55 % of the screen)"
+      },
+      {
+        "name": "placesRailWidth",
+        "value": "80dp"
+      },
+      {
+        "name": "houseDrawingHeight",
+        "value": "232dp"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "InkButton",
+      "kind": "button",
+      "refersTo": "ink-button",
+      "description": "The one primary action of a screen: filled ink, graphite text.",
+      "html": "<button class=\"ds-ink-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9\"/></svg>Otwórz w 3D</button>",
+      "css": ".ds-ink-btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:8px 16px;background:#E8EBEF;color:#101419;border:none;border-radius:6px;font:500 14px/20px Roboto,sans-serif;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.ds-ink-btn:hover{background:#FFFFFF}.ds-ink-btn:focus-visible{outline:2px solid #E8EBEF;outline-offset:2px}.ds-ink-btn:active{background:#A7B0BC}"
+    },
+    {
+      "name": "LineButton",
+      "kind": "button",
+      "refersTo": "line-button",
+      "description": "Secondary action: hairline outline, ink text; Ink border when it is the panel's key action.",
+      "html": "<button class=\"ds-line-btn\">Wróć do teraz</button> <button class=\"ds-line-btn ds-line-btn--quiet\">Szczegóły</button>",
+      "css": ".ds-line-btn{min-height:48px;padding:8px 16px;background:transparent;color:#E8EBEF;border:1px solid #E8EBEF;border-radius:6px;font:500 14px/20px Roboto,sans-serif;letter-spacing:.01em;cursor:pointer}.ds-line-btn--quiet{border-color:#6B7581}.ds-line-btn:hover{background:rgba(232,235,239,.08)}.ds-line-btn:focus-visible{outline:2px solid #E8EBEF;outline-offset:2px}.ds-line-btn:active{background:rgba(232,235,239,.12)}"
+    },
+    {
+      "name": "QuietAction",
+      "kind": "button",
+      "refersTo": "quiet-action",
+      "description": "A tertiary way on at the text margin; the whole row is a 48 dp target.",
+      "html": "<button class=\"ds-quiet\">Co to znaczy?</button>",
+      "css": ".ds-quiet{min-height:48px;padding:4px 0;background:none;border:none;color:#A7B0BC;font:500 14px/20px Roboto,sans-serif;letter-spacing:.01em;cursor:pointer}.ds-quiet:hover{color:#E8EBEF}.ds-quiet:focus-visible{outline:2px solid #E8EBEF;outline-offset:2px}"
+    },
+    {
+      "name": "Folding Rule",
+      "kind": "custom",
+      "refersTo": "folding-rule",
+      "description": "Stages as hinged segments: solid done, part-filled current, grey outline not started, solid NOW tag, hollow PREVIEW tag.",
+      "html": "<div class=\"ds-rule\"><svg viewBox=\"0 0 340 52\" width=\"340\" height=\"52\"><path d=\"M98.5 0h11v3.2L104 7l-5.5-3.8z\" fill=\"#F2C230\"/><path d=\"M71.5 0h11v3.2L77 7l-5.5-3.8z\" fill=\"#101419\" stroke=\"#F2C230\" stroke-width=\"1.4\"/><line x1=\"77\" y1=\"7\" x2=\"77\" y2=\"24\" stroke=\"#F2C230\" stroke-width=\"1.2\"/><rect x=\"0\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"27\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"54\" y=\"12\" width=\"25\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"81\" y=\"12\" width=\"10\" height=\"10\" rx=\"1.5\" fill=\"#F2C230\"/><rect x=\"81.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#F2C230\" stroke-width=\"1.2\"/><rect x=\"108.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#6B7581\" stroke-width=\"1.2\"/><rect x=\"135.6\" y=\"12.6\" width=\"23.8\" height=\"8.8\" rx=\"1.5\" fill=\"none\" stroke=\"#6B7581\" stroke-width=\"1.2\"/><path d=\"M167 22v-6.5l6-6 6 6V22z\" fill=\"none\" stroke=\"#A7B0BC\" stroke-width=\"1.2\"/><line x1=\"12.5\" y1=\"25\" x2=\"12.5\" y2=\"29\" stroke=\"#6B7581\"/><text x=\"12.5\" y=\"42\" fill=\"#8A94A0\" font-family=\"Barlow Condensed,sans-serif\" font-weight=\"600\" font-size=\"13\" text-anchor=\"middle\">1</text></svg><p class=\"ds-rule-cap\">Podgląd: Ściany · Aktualnie: 43% · Dach</p></div>",
+      "css": ".ds-rule{background:#101419;padding:16px;display:inline-block}.ds-rule-cap{margin:8px 0 0;color:#A7B0BC;font:400 12px/16px Roboto,sans-serif}"
+    },
+    {
+      "name": "GlassSurface (timeline header)",
+      "kind": "card",
+      "refersTo": "timeline-rail",
+      "description": "Tinted graphite pane over the model with a 1 dp rim gradient; no blur, no shadow.",
+      "html": "<div class=\"ds-glass\"><div class=\"ds-glass-row\"><span class=\"ds-measure\">43%%</span><span class=\"ds-title\">Dach</span></div><div class=\"ds-sub\">Teraz: montaż więźby</div></div>",
+      "css": ".ds-glass{position:relative;padding:12px 16px;border-radius:12px;background:rgba(16,20,25,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.05);max-width:340px}.ds-glass-row{display:flex;align-items:baseline;gap:8px}.ds-measure{font:600 20px/22px \"Barlow Condensed\",sans-serif;font-variant-numeric:tabular-nums;color:#E8EBEF}.ds-title{font:600 14px/20px Roboto,sans-serif;color:#E8EBEF}.ds-sub{font:400 12px/16px Roboto,sans-serif;color:#A7B0BC;letter-spacing:.4px}"
+    },
+    {
+      "name": "Tool rail button",
+      "kind": "nav",
+      "refersTo": "tool-rail-button",
+      "description": "Labelled tool; pressed, it sinks into a well rather than lighting up.",
+      "html": "<div class=\"ds-rail\"><button class=\"ds-rail-btn\" aria-pressed=\"true\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4l8 4-8 4-8-4z M4 12l8 4 8-4 M4 16l8 4 8-4\"/></svg><span>Bez dachu</span></button><button class=\"ds-rail-btn\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9V4h5 M15 4h5v5 M20 15v5h-5 M9 20H4v-5\"/></svg><span>Dopasuj</span></button></div>",
+      "css": ".ds-rail{display:inline-flex;flex-direction:column;gap:2px;padding:4px;border-radius:8px;background:rgba(16,20,25,.9);border:1px solid rgba(255,255,255,.08)}.ds-rail-btn{width:64px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:none;border-radius:6px;color:#A7B0BC;font:500 11px/16px Roboto,sans-serif;letter-spacing:.02em;cursor:pointer}.ds-rail-btn[aria-pressed=true]{background:#0A0D11;color:#E8EBEF}.ds-rail-btn:hover{color:#E8EBEF}.ds-rail-btn:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
+    },
+    {
+      "name": "PanelOption",
+      "kind": "input",
+      "refersTo": "panel-option",
+      "description": "A choice in a pane: a ring that fills when chosen, the label weightier; every label stays full ink.",
+      "html": "<div class=\"ds-pane\"><div class=\"ds-opt\" aria-checked=\"true\"><i></i><span>Wszystko</span></div><div class=\"ds-opt\"><i></i><span>Bez dachu</span></div></div>",
+      "css": ".ds-pane{background:#14181E;border-radius:8px;width:236px;padding:4px 0}.ds-opt{display:flex;align-items:center;gap:12px;min-height:48px;padding:4px 16px;color:#E8EBEF;font:400 14px/20px Roboto,sans-serif;cursor:pointer}.ds-opt i{width:10px;height:10px;border-radius:50%;box-sizing:border-box;border:1.2px solid #6B7581}.ds-opt[aria-checked=true] i{background:#E8EBEF;border-color:#E8EBEF}.ds-opt[aria-checked=true] span{font-weight:600}.ds-opt:hover{background:rgba(232,235,239,.06)}.ds-opt:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
+    },
+    {
+      "name": "PlacesBar",
+      "kind": "nav",
+      "refersTo": "places-bar",
+      "description": "Five places in equal cells; the chosen one is pressed into a well with a line on its top edge and a full-ink label.",
+      "html": "<nav class=\"ds-bar\"><a class=\"ds-cell\" aria-current=\"page\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11l8-7 8 7 M6 9.5V20h12V9.5 M10 20v-6h4v6\"/></svg></span>Dom</a><a class=\"ds-cell\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9\"/></svg></span>3D</a><a class=\"ds-cell\"><b></b><span class=\"ds-well\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\"><path d=\"M6 3h12v18H6z M9 8h6 M9 12h6\"/></svg></span>Koszty</a></nav>",
+      "css": ".ds-bar{display:flex;gap:2px;padding:0 4px;background:#161B21;border-top:1px solid #2A313A;width:340px}.ds-cell{flex:1;display:flex;flex-direction:column;align-items:center;min-height:64px;color:#A7B0BC;font:500 11px/16px Roboto,sans-serif;letter-spacing:.02em;cursor:pointer;padding-bottom:8px}.ds-cell b{width:50%;height:2px;border-radius:1px;background:transparent}.ds-well{margin-top:8px;width:48px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px}.ds-cell[aria-current=page]{color:#E8EBEF}.ds-cell[aria-current=page] b{background:#E8EBEF}.ds-cell[aria-current=page] .ds-well{background:#0A0D11}.ds-cell:hover{color:#E8EBEF}.ds-cell:focus-visible{outline:2px solid #E8EBEF;outline-offset:-2px}"
+    },
+    {
+      "name": "Stage strip item",
+      "kind": "stop",
+      "refersTo": "stage-strip-item",
+      "description": "One stop in the expanded timeline: mark, numeral, name, state word, directly on the timeline glass; only the chosen stop is a Well with an Ink border.",
+      "html": "<div class=\"ds-stop\" aria-selected=\"true\"><div class=\"ds-stop-head\"><span class=\"ds-mark\"><span style=\"width:40%%\"></span></span><span class=\"ds-num\">8</span></div><div class=\"ds-stop-name\">Dach</div><div class=\"ds-stop-state\">W toku · 40%%</div></div>",
+      "css": ".ds-stop{display:inline-flex;flex-direction:column;gap:2px;min-width:96px;max-width:132px;min-height:56px;padding:8px 12px;border-radius:6px;background:transparent;border:1px solid transparent}.ds-stop[aria-selected=true]{background:#0A0D11;border-color:#E8EBEF}.ds-stop-head{display:flex;align-items:center;gap:4px}.ds-mark{position:relative;width:18px;height:8px;box-sizing:border-box;border:1.2px solid #F2C230;border-radius:1.5px}.ds-mark span{position:absolute;left:0;top:0;bottom:0;background:#F2C230}.ds-num{font:600 13px/14px \"Barlow Condensed\",sans-serif;font-variant-numeric:tabular-nums;color:#8A94A0}.ds-stop-name{font:500 14px/20px Roboto,sans-serif;color:#E8EBEF}.ds-stop-state{font:500 11px/16px Roboto,sans-serif;color:#A7B0BC}.ds-stop:hover{border-color:#A7B0BC}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Folding Rule",
+    "overview": "Construction progress is a measure, and the app reads it the way a builder does: on a carpenter's folding rule (miarka składana). The build's stages are its hinged segments, unfolded as far as the build has got, lying under the house. A graphite night ground carries the house; the chrome over the model is a translucent graphite tint rather than an opaque slab; every word is achromatic ink; and a single accent, rule yellow, means measured construction progress and nothing else. A look back in time wears the same yellow as an outline, never a fill, so a preview can never pass for the state of the build.\n\nThe system is dark-first, model-first and technical but calm. Hierarchy is carried by type size, weight and ink level rather than by enclosing cards: Dom leads with an inked line drawing of the house and one monumental figure; 3D is the model edge to edge with four compact layers of chrome; Etapy is a ruled list. Density is modest and every control is a 48 dp target, because the owner checks the build one-handed on the plot as often as at home in the evening. Motion explains continuity (a pane growing from the rail button that opened it, the rule's cursor settling on a stop) and disappears entirely when the system animator scale is zero.\n\nConfirmed rejections, from the owner's brief: card-heavy dashboards, a giant rounded model card, stacked rectangular panels around the 3D, a debug-tool feel, and large dead cards for unfinished places.",
+    "keyCharacteristics": [
+      "One accent (rule yellow) with one meaning: measured progress.",
+      "Actions are ink; a filled button is near-white on graphite, never yellow.",
+      "State is always a shape and a word as well as a colour.",
+      "Glass is a one-layer material; chrome over chrome is opaque.",
+      "Rectilinear corners from a four-step scale (2 / 6 / 8 / 12 dp); no pills.",
+      "A condensed tabular face for measured figures only; Roboto for everything read.",
+      "Every colour, space, corner and type role comes from `Theme.kt`."
+    ],
+    "rules": [
+      {
+        "name": "The One Meaning Rule",
+        "body": "Rule yellow means measured construction progress. It is never an action, a selection, a focus ring, a link or a decoration. \"Wróć do teraz\" and \"Ustaw postęp\" are ink outlines because they are actions.",
+        "section": "colors"
+      },
+      {
+        "name": "The Outline Is a Look Back Rule",
+        "body": "The actual state is solid; a preview is the same yellow hollow. A preview may never be drawn filled, and the actual state is repeated at the top of the screen while previewing, never replaced.",
+        "section": "colors"
+      },
+      {
+        "name": "The Achromatic Text Rule",
+        "body": "Text is Ink, InkMuted or InkFaint. Colour never carries a sentence.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Face Rule",
+        "body": "Barlow Condensed is for measured figures only (percentages, stage numbers, graduations). A word set in it is a mistake.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Monument Rule",
+        "body": "There is one 64sp figure in the app, and it is progress by stages. No other number competes with it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Labels are sentence case and in Polish from `strings.xml`. Group names are muted headings for the rows below them, not uppercase eyebrows above a title.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Layer Rule",
+        "body": "Glass is a one-layer material. Two tints stacked never reach cover and let the text beneath show through, so a pane over another pane (the tool pane, a stage strip item on the timeline) takes `GlassOpaque`.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Solid to the Finger Rule",
+        "body": "A glass pane takes part in hit testing over its whole area without consuming anything, so a touch on chrome never orbits the camera or picks a wall behind a label.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Pressed Not Coloured Rule",
+        "body": "An active control sinks into its rail (a Well behind it), plus a line and full-ink label. It does not light up.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** take every colour, space, corner, size and type role from `Theme.kt` (`Palette`, `Space`, `Radius`, `Sizes`, `Measure`, `MaterialTheme.typography`).",
+      "**Do** reserve `Rule` for measured progress: segments, the now tag, the preview outline, StageMarks, the current stage's lines in the drawing, the completion slider.",
+      "**Do** make actions ink: one `InkButton` per screen, `LineButton` for secondary actions, `QuietAction` for the ways on.",
+      "**Do** say every state as a shape and a word: a mark or well plus text, announced through `stateDescription` so a merged node keeps its label.",
+      "**Do** give every touch target at least 48 dp (`Sizes.touch`).",
+      "**Do** pair every `maxLines` limit with `overflow = TextOverflow.Ellipsis`, and check at font scale 1.3 and with `ANIMATOR_DURATION_SCALE = 0`.",
+      "**Do** take `GlassOpaque` for any pane over another pane, and keep headers and the one way out outside the scroll, with `fadeBelowFold` over a cut list.",
+      "**Do** read motion from `LocalMotionPolicy` (enter 220 ms, exit 150 ms, settle 180 ms, recede 160 ms) and use `enterDelayed` when one dense panel replaces another.",
+      "**Do** put every UI label in Polish, in the owner's words, in `strings.xml`; keep code names and routes in English.",
+      "**Do** keep the model's semantic truth where it lives: what is visible comes from the domain's selection rules and one `primitivesOf(elements)` bridge; the UI and renderer only ask."
+    ],
+    "donts": [
+      "**Don't** write a hex colour, `Color(0x…)` or a new radius outside `Theme.kt`.",
+      "**Don't** put yellow on a button, border, selection, focus or link; don't fill the preview tag.",
+      "**Don't** tell a state by colour alone, and don't set `contentDescription` on a merged node that would erase its text.",
+      "**Don't** stack two translucent panes, or let one pane overlap another's touch area.",
+      "**Don't** add shadows, blur, pills or enclosing cards; hierarchy is type, weight and ink.",
+      "**Don't** set a word in Barlow Condensed, or add a second monumental figure.",
+      "**Don't** use uppercase eyebrows or kickers above titles.",
+      "**Don't** let the renderer or the UI own semantic truth: no second decision path for roof, storey or room, no `if` about a frame in the renderer.",
+      "**Don't** use `!!` where types can express it, and don't hide problems with `@Suppress`, empty `catch` or a lint baseline.",
+      "**Don't** show invented progress, costs, dates or sample rows; an unset state says \"Postęp nieustawiony\" and offers to set it."
+    ]
+  }
+}

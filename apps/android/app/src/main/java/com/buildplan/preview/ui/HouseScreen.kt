@@ -86,6 +86,8 @@ fun HouseScreen(
         // other — never a portrait column stretched across, with the figure below the fold.
         val twoPane = maxWidth >= TWO_PANE_WIDTH && maxWidth > maxHeight
         val screen = preview.screen
+        // A column that continues below the places bar fades out at its edge, so it never looks complete.
+        val scroll = rememberScrollState()
         if (twoPane && screen is ScreenState.Ready) {
             val drawingHeight = maxHeight - Space.l * 2
             Row(Modifier.fillMaxSize()) {
@@ -96,7 +98,8 @@ fun HouseScreen(
                     Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .verticalScroll(rememberScrollState())
+                        .fadeBelowFold(scroll, Palette.Ground)
+                        .verticalScroll(scroll)
                         .padding(end = Space.l)
                         .padding(bottom = Space.xl),
                 ) {
@@ -108,7 +111,8 @@ fun HouseScreen(
                 modifier = Modifier
                     .widthIn(max = Sizes.contentMax)
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
+                    .fadeBelowFold(scroll, Palette.Ground)
+                    .verticalScroll(scroll)
                     .padding(horizontal = Space.l)
                     .padding(bottom = Space.xl),
             ) {

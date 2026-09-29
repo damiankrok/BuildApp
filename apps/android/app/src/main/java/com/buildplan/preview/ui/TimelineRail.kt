@@ -238,8 +238,14 @@ private fun StageStrip(
                 modifier = Modifier
                     .widthIn(min = 96.dp, max = 132.dp)
                     .heightIn(min = 56.dp)
-                    .background(if (selected) Palette.Well else Palette.GlassOpaque, RoundedCornerShape(Radius.panel))
-                    .border(1.dp, if (selected) Palette.Ink else Palette.Hairline, RoundedCornerShape(Radius.panel))
+                    // Stops on the rule's own glass, not cards: only the previewed one is marked out.
+                    .then(
+                        if (selected) {
+                            Modifier.background(Palette.Well, RoundedCornerShape(Radius.control)).border(1.dp, Palette.Ink, RoundedCornerShape(Radius.control))
+                        } else {
+                            Modifier
+                        },
+                    )
                     .selectable(selected = selected, onClick = { onPreviewStop(stop) }, role = Role.Tab)
                     .semantics { stateDescription = if (isNow) nowWord.format(stateWord) else stateWord }
                     .padding(horizontal = Space.m, vertical = Space.s),
