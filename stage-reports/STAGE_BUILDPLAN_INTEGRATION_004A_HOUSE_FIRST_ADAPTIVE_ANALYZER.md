@@ -385,21 +385,50 @@ Exactly three, after the main implementation, each sealed under
    capture `06-layers-pane`; a second house opened, the app closed and
    opened, the same house). Carried finish debt: AA.
 
+## V. Device evidence (the FINAL build, CI run 80)
+
+`workflow_dispatch` run 80 on `integration/house-first-adaptive-analyzer-v1`
+@ `f6b8a92` (the build the OWNER APK was cut from): every job green, the
+UI evidence gate `PASS` on all 89 screenshots, 57 of them required by
+`validate-ui-evidence.mjs`. Emulator: Pixel 6 profile, x86_64, API 34,
+1080×2400 @ 420 dpi, ANGLE on SwiftShader, `animator_duration_scale = 0`
+(so `reducedMotion = true` in every journey). Artifact `ui-evidence`
+(run 80). Run 77, the first device run of the cycle 1 workspace, failed on
+three test assumptions (the "Szczegóły" caption looked for as text, the
+stage sheet's heading awaited after it opened scrolled to the stage in
+progress, a back press reaching the still-closing keyboard at font 1.3 —
+`HIDE_SOFT_INPUT_BY_BACK_KEY` in the device log); fixed in `f6b8a92`
+without a product change.
+
+| journey | captures | what the run measured |
+| --- | --- | --- |
+| ProductFlow, font 1.0 (`default-01…16`) | 16 | cold start on the house, progress unset: the house inside the free area (insets t=426 r=211 b=530 px; 0 / 0 bright pixels at its edges; walls span 0.69 × 0.35 of it); the stage sheet with the inked drawing (501 segments, 19 982 ink px); "Oznacz 6 wcześniejszych etapów jako zakończone"; 43 % and the task saved; house now re-framed (b=474; 0 / 0); scrubbing FOUNDATIONS → WALLS → ROOF → JOINERY with 0 model uploads and the camera unmoved (tap to drawn frame 1.1–1.7 s); differences 30.2 / 14.6 / 2.1, now vs back-to-now 0.43; selection by tap; a tap on the inspector's title keeps the selection (H-01); the expanded timeline; the menu with the Koszty boundary; the source sheet; the analyzer task with no engine; back to the same house at the same camera (16: b=474, 0 / 0) |
+| ProductFlow, font 1.3 (`font-1.3-01…16`) | 16 | the same journey at 1.3: insets t=448 r=211 b=588 → b=481 once set; 0 / 0 at every measured step; walls 0.74 × 0.36; differences 31.4 / 15.7 / 2.2 |
+| AdaptiveLayout, landscape (`landscape-01…06`) | 6 | 2400×1080: insets t=361 r=337 b=348, 0 / 0; the layers pane (x 1422–2042, y 645–771) and the rule (x 191–1360, y 901–1038) do not overlap (H-02); the details panel at the end edge (close button x 2137–2263); the stage sheet from the header; portrait and back: one engine |
+| ReleaseCandidate C (`rc-c-01, 02`) | 2 | pause/resume, recreate (frames 26 / 49 / 22, one engine), close/reopen with the record read back; a second house opened, the app closed and reopened: the same house (`marcowki-auto-v3`) — H-03 |
+| ReleaseCandidate D (`rc-d-01…04`) | 4 | a corrupt record set aside and said; a refused edit said at the foot of the stage sheet; a stage without geometry (117 drawn = state); `https://localhost/dom` refused as `UnsafeUrl` ("a local or private address is never fetched") before any fetch, no retry, nothing added |
+| ReleaseCandidate E (`rc-e-01…05`) | 5 | roof off at Dach 84 = 84; ground only at Ściany 45 = 45; a selection kept through a rewind to Fundamenty (1 = 1) and named by the inspector; LINE at Ściany 77 = 77; `roof-garage` chosen from the list; zoom by button 30.4 → 24.3 |
+| NoHouse (`no-house-01, 02`) | 2 | with the APK's houses hidden: "Dodaj dom z linku" and the task |
+| Slice Marcówki (`slice-marcowki-01…12`) | 12 | live analysis on the phone in 217 s: model `6152770f…`, scene `8c7d4395…` (= desktop, = 003C), 119 objects, 2 unresolved, the house drawn, the source sheet, the stage sheet, history walls / pre-joinery / joinery (73 / 9 / 24 introduced), clay, inspector, the task and back |
+| Slice Rarytasy (`slice-rarytasy-01…12`) | 12 | 264 s: model `8fa4a25b…`, scene `d4e7249b…` (= desktop), 81 objects, 11 unresolved |
+| Slice Kosaćce (`slice-kosacce-01…12`) | 12 | 287 s on the phone: model `5b5ffcf1…`, scene `50217b85…` (= desktop, = sealed, = the `third-house-kosacce` job's live run of 139 s), 99 objects, 13 unresolved, 0 unplaced, the house drawn and rewound |
+| Generic alternate (`generic-alternate-01, 02`) | 2 | the alternate Marcówki address through the phone's app: "Sprawdzam stronę projektu i pobieram rysunki", then after 87 s the honest `RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED` (19.56 m² against the printed 131.16 m²) with the reason under "Szczegóły analizy" — inspected, never refused by hostname |
+
 ## W. CI / test matrix
 
 | gate | where | status |
 | --- | --- | --- |
-| typecheck, unit / integration / architecture (vitest, 1 094 tests incl. generic 33, router, security, service 47, generic-source 7, topology 17, purity guards) | `core` | green (run 74/75) |
+| typecheck, unit / integration / architecture (vitest, 1 094 tests incl. generic 33, router, security, service 47, generic-source 7, topology 17, purity guards) | `core` | green (runs 74–80) |
 | API bundle + HTTP smoke (SOURCE_UNSAFE before fetch; an unknown publisher inspected, typed failure) | `core` | green after `43f052b` |
 | analyzer container smoke | `analyzer-image` | green after `43f052b` |
 | Marcówki (sealed candidate, exterior closure, facade audit) | `core` | green |
-| Rarytasy: live URL, sealed replay, garage gable, pre-fix refusal, Node 18 without ICU = desktop | `second-house-generalization` | green (run 74: model `8fa4a25b…`) |
-| Kosaćce: sealed evidence through today's solver = sealed hashes (hard gate when the plans fetch), live URL advisory, live = sealed | `third-house-kosacce` (new) | green (run 74: live 164 s, `5b5ffcf1…` = sealed) |
+| Rarytasy: live URL, sealed replay, garage gable, pre-fix refusal, Node 18 without ICU = desktop | `second-house-generalization` | green (run 80: model `8fa4a25b…`) |
+| Kosaćce: sealed evidence through today's solver = sealed hashes (hard gate when the plans fetch), live URL advisory, live = sealed | `third-house-kosacce` (new) | green (run 80: live 139 s, `5b5ffcf1…` = sealed) |
 | Android JVM tests (401) + lint + APK | `android` | green |
 | 3D entry gate on the workspace root (cold start, after the analyzer task, direct launch) | `android-3d-gate` | green |
 | Local analyzer host parity (Node 18/22) and device (emulator fixture) | `local-analyzer-*` | green |
-| UI evidence: house-first journey at font 1.0 and 1.3, landscape, lifecycle / unhappy / collisions, no-house, Marcówki + Rarytasy + Kosaćce slices, alternate publisher | `android-ui-evidence` (+ `NoHouseDeviceTest`, `GenericSourceDeviceTest`, Kosaćce slice) | run 74: every journey but the camera assertion (fixed, `0feddb4`); run 75: see V |
-| OWNER direct APK (waits for the third house too) | `owner-preview-release` | Z |
+| UI evidence: house-first journey at font 1.0 and 1.3, landscape, lifecycle / unhappy / collisions, no-house, Marcówki + Rarytasy + Kosaćce slices, alternate publisher | `android-ui-evidence` (+ `NoHouseDeviceTest`, `GenericSourceDeviceTest`, Kosaćce slice) | run 77: three test assumptions (fixed, `f6b8a92`); run 80: PASS, 89 screenshots — V |
+| OWNER direct APK (waits for the third house too) | `owner-preview-release` | published by run 80 — Z |
 
 ## Y. Commits
 
@@ -431,6 +460,26 @@ whose pushes run CI); each workstream reverts on its own.
 
 Every commit carries the session's attribution trailer; none carries a
 model identifier. Legacy is untouched (`b0e79675`, read only).
+
+## Z. OWNER direct APK
+
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`
+— verified after run 80 published it (asset updated 2026-09-29 17:20 UTC):
+
+- Downloaded as `application/vnd.android.package-archive`, 30 611 035
+  bytes, an Android package; `lib/` holds **arm64-v8a only** (five `.so`).
+- SHA-256 `3390aafd51fd11550529a2fac84fa0b4b110532c44bec5c4dfbb2d9f112d5dc7`
+  — equal to the release notes.
+- The notes name `workflow_dispatch` run 80 (attempt 1) from
+  `integration/house-first-adaptive-analyzer-v1` @
+  `f6b8a92ce74f9b27c6f75029c4c42e2b921bc04e`, `versionCode 1080`,
+  `versionName 0.80.0-preview`, `applicationId com.buildplan.preview`,
+  the preview signer `6e48fac4…` (it installs as an update over every
+  earlier test build), and that the release is a prerelease with this one
+  asset, apart from `preview-latest`.
+- The two docs commits after `f6b8a92` (`96df343` and the one carrying
+  this section) change no source; the APK is the final code.
+- No APK binary is committed.
 
 ## AA. Residual debt
 
