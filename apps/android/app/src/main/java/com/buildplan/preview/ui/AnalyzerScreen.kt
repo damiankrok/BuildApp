@@ -39,6 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -78,9 +79,12 @@ import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.StageChecklist
 import com.buildplan.preview.analyzer.StageRow
 import com.buildplan.preview.analyzer.StageState
+import com.buildplan.preview.analyzer.LivenessTracker
+import com.buildplan.preview.analyzer.Liveness
 import com.buildplan.preview.analyzer.local.LocalAnalysis
 import com.buildplan.preview.analyzer.local.NodeRuntime
 import com.buildplan.preview.scene.DownloadedSceneEntry
+import android.os.SystemClock
 import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -387,6 +391,7 @@ private fun JobProgress(
             if (stage != null && stage.count > 0) stringResource(R.string.analyzer_progress_stage, percent, stage.index + 1, stage.count)
             else stringResource(R.string.analyzer_progress, percent),
         )
+        AnalyzerActivity(status)
         note?.let { StatusText(it) }
         if (connectionLost) {
             Column(
@@ -403,6 +408,89 @@ private fun JobProgress(
             LineButton(stringResource(if (cancelling) R.string.analyzer_cancelling else R.string.analyzer_cancel), onClick = onCancel, enabled = !cancelling)
         }
     }
+}
+
+/** Telemetry phase id → what the person reads. An id this build does not know shows nothing rather than a code. */
+private val PHASE_NAMES: Map<String, Int> = mapOf(
+    "ACQUIRE_PAGE" to R.string.analyzer_phase_acquire_page,
+    "ACQUIRE_ASSETS" to R.string.analyzer_phase_acquire_assets,
+    "CLASSIFY" to R.string.analyzer_phase_classify,
+    "OBSERVE_ASSETS" to R.string.analyzer_phase_observe_assets,
+    "DECODE_RASTERS" to R.string.analyzer_phase_decode_rasters,
+    "METRIC_FRAMES" to R.string.analyzer_phase_metric_frames,
+    "REGISTER_VIEWS" to R.string.analyzer_phase_register_views,
+    "PLAN_RESOLUTION" to R.string.analyzer_phase_plan_resolution,
+    "SOLVE_TOPOLOGY" to R.string.analyzer_phase_solve_topology,
+    "SOLVE_METRICS" to R.string.analyzer_phase_solve_metrics,
+    "BUILD_MODEL" to R.string.analyzer_phase_build_model,
+    "COMPILE_SCENE" to R.string.analyzer_phase_compile_scene,
+    "VERIFY" to R.string.analyzer_phase_verify,
+)
+
+/**
+ * What the analyzer is doing inside its stage (005A): the phase in words, the
+ * real count ("arkusz 3 z 10"), the step inside it, how long this step has
+ * run, and — when the counts stop moving or the analyzer stops answering —
+ * which of those it is. Nothing here is estimated: every number is one the
+ * analyzer sent, and every duration is measured on this phone.
+ */
+@Composable
+private fun AnalyzerActivity(status: JobStatus?) {
+    val activity = status?.activity ?: return
+    val phase = PHASE_NAMES[activity.phaseId] ?: return
+    val tracker = remember(status.jobId) { LivenessTracker() }
+    LaunchedEffect(status) { tracker.observe(status, SystemClock.elapsedRealtime()) }
+    // A clock for the "N s" lines: they move each second even when no event arrives.
+    val now by produceState(SystemClock.elapsedRealtime()) {
+        while (true) {
+            value = SystemClock.elapsedRealtime()
+            delay(1_000)
+        }
+    }
+    val resources = LocalContext.current.resources
+    fun count(done: Int?, total: Int?, res: Int): String? = if (done != null && total != null && total > 0) resources.getString(res, done.coerceIn(1, total), total) else null
+    val counted = when (activity.unit) {
+        "FRAME" -> count(activity.assetIndex, activity.assetTotal, R.string.analyzer_count_frame)
+        "ASSET" -> count(activity.assetIndex ?: (activity.workDone + 1).toInt(), activity.assetTotal ?: activity.workTotal?.toInt(), R.string.analyzer_count_asset)
+        "ADDRESS" -> count((activity.workDone + 1).toInt(), activity.workTotal?.toInt(), R.string.analyzer_count_address)
+        "CANDIDATE" -> count(activity.candidateIndex, activity.candidateTotal, R.string.analyzer_count_candidate)
+        else -> null
+    }
+    val counters = activity.diagnosticCounters
+    val step = when (activity.subphaseId) {
+        "OCR" -> count(counters["tokenGroups"]?.toInt(), counters["tokenGroupsTotal"]?.toInt(), R.string.analyzer_step_ocr)
+        "CALLOUT_RINGS" -> count(counters["rings"]?.toInt(), counters["ringsTotal"]?.toInt(), R.string.analyzer_step_callouts)
+        "CAMERAS" -> count(counters["cameras"]?.toInt(), counters["camerasTotal"]?.toInt(), R.string.analyzer_step_cameras)
+        else -> null
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(Space.xxs)) {
+        Text(
+            listOfNotNull(stringResource(phase), counted).joinToString(" · "),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Palette.Ink,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+        )
+        step?.let { StatusText(it, maxLines = 1) }
+        tracker.stepElapsedMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_step_elapsed, minutesSeconds(ms)), maxLines = 1) }
+        when (val verdict = tracker.verdict(now)) {
+            is Liveness.HeavyStep -> StatusText(stringResource(R.string.analyzer_liveness_heavy), modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, color = Palette.Ink)
+            is Liveness.Waiting -> StatusText(stringResource(R.string.analyzer_liveness_waiting, (verdict.forMs / 1000).toInt()), modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, color = Palette.Ink)
+            is Liveness.NoResponse -> Column(
+                Modifier.fillMaxWidth().background(Palette.Raised, RoundedCornerShape(Radius.panel)).padding(Space.m).semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite },
+                verticalArrangement = Arrangement.spacedBy(Space.xxs),
+            ) {
+                Text(stringResource(R.string.analyzer_liveness_silent, (verdict.silentForMs / 1000).toInt()), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+                StatusText(stringResource(R.string.analyzer_liveness_silent_hint))
+            }
+            Liveness.Healthy -> Unit
+        }
+    }
+}
+
+private fun minutesSeconds(ms: Long): String {
+    val seconds = (ms / 1000).coerceAtLeast(0)
+    return String.format(PRODUCT_LOCALE, "%d:%02d", seconds / 60, seconds % 60)
 }
 
 @Composable

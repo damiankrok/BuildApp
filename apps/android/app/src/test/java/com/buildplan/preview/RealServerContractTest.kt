@@ -72,6 +72,10 @@ class RealServerContractTest {
         assertEquals("drawing 2 of 7", running.stage!!.detail)
         assertEquals(9, running.stages.size)
         assertTrue(running.progress > 0.0 && running.progress < 1.0)
+        // 005A: what the analyzer is doing inside the stage, by counts, with a heartbeat
+        assertEquals("OBSERVE_ASSETS", running.activity?.phaseId)
+        assertEquals("ASSET", running.activity?.unit)
+        assertEquals(7L, running.activity?.workTotal)
 
         val completed = steps.last().state as AnalysisState.Completed
         assertNull(steps.last().delayMs)
