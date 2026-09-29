@@ -345,27 +345,12 @@ class LocalAnalysis(
         /** How long to wait for an ended process to be reported gone before cleaning up anyway. */
         const val PROCESS_GONE_WAIT_MS = 3_000L
 
-        /**
-         * The analyzer's refusals of the link itself, as the service path types them
-         * (AnalyzerClient): the owner is told what is wrong with the link, and is not
-         * offered a retry that cannot succeed.
-         */
-        fun typed(failure: AnalyzerFailure): AnalyzerFailure = when {
-            failure !is AnalyzerFailure.JobFailed -> failure
-            failure.code == "UNSUPPORTED_PUBLISHER" -> AnalyzerFailure.UnsupportedPublisher(failure.message)
-            failure.code == "INVALID_URL" -> AnalyzerFailure.InvalidUrl(failure.message)
-            failure.code == "SOURCE_UNSAFE" -> AnalyzerFailure.UnsafeUrl(failure.message)
-            failure.code in SOURCE_CONTENT_CODES -> AnalyzerFailure.SourceContent(failure.code, failure.message, failure.details, failure.diagnosticsBundle)
-            else -> failure
-        }
+        /** The typed refusals are one rule for both paths (AnalyzerFailure.typed, 004A). */
+        fun typed(failure: AnalyzerFailure): AnalyzerFailure = AnalyzerFailure.typed(failure)
 
-        /** What the page holds, once fetched and inspected (004A): retrying the same link cannot change it. */
-        val SOURCE_CONTENT_CODES: Set<String> = setOf("SOURCE_NOT_PROJECT", "SOURCE_REQUIRES_RENDERING", "NO_DRAWINGS", "SOURCE_INCOMPLETE")
+        val SOURCE_CONTENT_CODES: Set<String> get() = AnalyzerFailure.SOURCE_CONTENT_CODES
 
-        fun retryFor(failure: AnalyzerFailure): RetryAction = when (failure) {
-            is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsafeUrl, is AnalyzerFailure.SourceContent -> RetryAction.NONE
-            else -> RetryAction.RESUBMIT
-        }
+        fun retryFor(failure: AnalyzerFailure): RetryAction = AnalyzerFailure.retryFor(failure)
 
         fun codeOf(failure: AnalyzerFailure): String = when (failure) {
             is AnalyzerFailure.UnsupportedPublisher -> "UNSUPPORTED_PUBLISHER"

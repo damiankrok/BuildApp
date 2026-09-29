@@ -59,6 +59,32 @@ sealed interface AnalyzerFailure {
     /** The scene's bytes are the right ones but not a bundle this build can show. */
     data class InvalidScene(val message: String) : AnalyzerFailure
 
+    companion object {
+        /** What the page holds, once fetched and inspected (004A): retrying the same link cannot change it. */
+        val SOURCE_CONTENT_CODES: Set<String> = setOf("SOURCE_NOT_PROJECT", "SOURCE_REQUIRES_RENDERING", "NO_DRAWINGS", "SOURCE_INCOMPLETE")
+
+        /**
+         * The analyzer's refusals of the link itself and of the page's content, as
+         * typed failures — on BOTH paths, the phone's and the service's: the owner is
+         * told what is wrong with the link or the page, and is not offered a retry
+         * that cannot succeed.
+         */
+        fun typed(failure: AnalyzerFailure): AnalyzerFailure = when {
+            failure !is JobFailed -> failure
+            failure.code == "UNSUPPORTED_PUBLISHER" -> UnsupportedPublisher(failure.message)
+            failure.code == "INVALID_URL" -> InvalidUrl(failure.message)
+            failure.code == "SOURCE_UNSAFE" -> UnsafeUrl(failure.message)
+            failure.code in SOURCE_CONTENT_CODES -> SourceContent(failure.code, failure.message, failure.details, failure.diagnosticsBundle)
+            else -> failure
+        }
+
+        /** Whether trying again can help: never for a link or a page that was refused for what it is. */
+        fun retryFor(failure: AnalyzerFailure): RetryAction = when (failure) {
+            is UnsupportedPublisher, is InvalidUrl, is UnsafeUrl, is SourceContent -> RetryAction.NONE
+            else -> RetryAction.RESUBMIT
+        }
+    }
+
     /** The service answered with something that is not the contract (malformed JSON, a bad job id). */
     data class BadResponse(val message: String) : AnalyzerFailure
 

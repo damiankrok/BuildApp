@@ -165,12 +165,16 @@ class AnalysisTracker(
                 AnalysisStages.COMPLETED -> Step(AnalysisState.Finishing(state.jobId, sourceUrl, status), 0)
                 AnalysisStages.FAILED -> {
                     val error = status.error
-                    val failure = AnalyzerFailure.JobFailed(
-                        code = error?.code?.ifBlank { null } ?: "FAILED",
-                        message = error?.message?.ifBlank { null } ?: "the service did not say why",
-                        details = error?.details,
+                    // The link's and the page's own refusals are typed here too (004A): the same words and no
+                    // retry that cannot succeed, whether the analyzer ran on the service or on this phone.
+                    val failure = AnalyzerFailure.typed(
+                        AnalyzerFailure.JobFailed(
+                            code = error?.code?.ifBlank { null } ?: "FAILED",
+                            message = error?.message?.ifBlank { null } ?: "the service did not say why",
+                            details = error?.details,
+                        ),
                     )
-                    Step(AnalysisState.Failed(failure, RetryAction.RESUBMIT, sourceUrl, state.jobId, status), null)
+                    Step(AnalysisState.Failed(failure, AnalyzerFailure.retryFor(failure), sourceUrl, state.jobId, status), null)
                 }
                 AnalysisStages.CANCELLED -> Step(AnalysisState.Cancelled(state.jobId, sourceUrl, status), null)
                 else -> Step(AnalysisState.Polling(state.jobId, sourceUrl, status), POLL_INTERVAL_MS)

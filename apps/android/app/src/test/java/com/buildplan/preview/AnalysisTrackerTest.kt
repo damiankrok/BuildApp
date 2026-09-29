@@ -145,14 +145,36 @@ class AnalysisTrackerTest {
         )
         val steps = runToEnd(AnalysisState.Polling(JOB, LINK))
         val failed = steps.last().state as AnalysisState.Failed
-        assertEquals(AnalyzerFailure.JobFailed("NO_DRAWINGS", "the page exposes no drawing this analyzer reads"), failed.failure)
-        assertEquals(RetryAction.RESUBMIT, failed.retry)
+        // What the page holds is typed on the service path too (004A): the same words as on the phone, no retry.
+        assertEquals(AnalyzerFailure.SourceContent("NO_DRAWINGS", "the page exposes no drawing this analyzer reads"), failed.failure)
+        assertEquals(RetryAction.NONE, failed.retry)
         assertEquals(LINK, failed.sourceUrl)
         assertEquals(StageState.FAILED, StageChecklist.rows(failed.status)[1].state)
         assertEquals(0, transport.count("GET", "$statusUrl/result"))
         assertEquals(0, transport.count("GET", "$statusUrl/scene"))
         assertTrue(store.list().isEmpty())
         assertTrue(filesIn(dir).isEmpty())
+    }
+
+    @Test
+    fun `every refusal of the page's content is typed on both paths with no retry, while a solver failure keeps its retry`() {
+        for (code in listOf("SOURCE_NOT_PROJECT", "SOURCE_REQUIRES_RENDERING", "NO_DRAWINGS", "SOURCE_INCOMPLETE")) {
+            val typed = AnalyzerFailure.typed(AnalyzerFailure.JobFailed(code, "said so"))
+            assertEquals(code, AnalyzerFailure.SourceContent(code, "said so"), typed)
+            assertEquals(code, RetryAction.NONE, AnalyzerFailure.retryFor(typed))
+            assertEquals(code, RetryAction.NONE, com.buildplan.preview.analyzer.local.LocalAnalysis.retryFor(com.buildplan.preview.analyzer.local.LocalAnalysis.typed(AnalyzerFailure.JobFailed(code, "said so"))))
+        }
+        for ((code, typed) in listOf(
+            "SOURCE_UNSAFE" to AnalyzerFailure.UnsafeUrl("said so"),
+            "INVALID_URL" to AnalyzerFailure.InvalidUrl("said so"),
+            "UNSUPPORTED_PUBLISHER" to AnalyzerFailure.UnsupportedPublisher("said so"),
+        )) {
+            assertEquals(code, typed, AnalyzerFailure.typed(AnalyzerFailure.JobFailed(code, "said so")))
+            assertEquals(code, RetryAction.NONE, AnalyzerFailure.retryFor(typed))
+        }
+        val solver = AnalyzerFailure.typed(AnalyzerFailure.JobFailed("RECONSTRUCTION_FAILED", "walls"))
+        assertEquals(AnalyzerFailure.JobFailed("RECONSTRUCTION_FAILED", "walls"), solver)
+        assertEquals(RetryAction.RESUBMIT, AnalyzerFailure.retryFor(solver))
     }
 
     @Test
