@@ -7,12 +7,14 @@
 # an earlier CI run), it is installed and its one screen is captured at font
 # scale 1.0 and 1.3. That build has no places to open, so only its launch
 # screen is captured.
-# AFTER: this commit's APK, every place but 3D opened by its launch extra
-# (com.buildplan.preview.PLACE: HOUSE, STAGES, COSTS, DOCUMENTS, ANALYZER), at
-# font scale 1.0 and 1.3, with the emulator's animations off. 3D is not
-# opened here: this job's emulator (gfxstream's SwiftShader GLES translator)
-# goes away under Filament (INTEGRATION-003C, runs 56-57); the 3D screens
-# come from the android-3d-gate job, on ANGLE, through the real navigation.
+# AFTER: this commit's APK, the surfaces that compose no 3D opened by their
+# launch extras — the analyzer task (com.buildplan.preview.PLACE=ANALYZER) and
+# the no-house state (com.buildplan.preview.WITHOUT_BUNDLED=true) — at font
+# scale 1.0 and 1.3, with the emulator's animations off. The house workspace
+# (the root since INTEGRATION-004A) is not opened here: this job's emulator
+# (gfxstream's SwiftShader GLES translator) goes away under Filament
+# (INTEGRATION-003C, runs 56-57); the house comes from the android-3d-gate
+# and UI evidence jobs, on ANGLE, through the real workspace.
 #
 # It uninstalls the app between builds (the two are signed differently),
 # so run it after any test that needs the app's data. Never fails the job:
@@ -63,10 +65,10 @@ adb uninstall "$PKG" >/dev/null 2>&1 || true
 adb install -r -g "$APP_APK" || { echo "could not install $APP_APK"; font 1.0; exit 0; }
 for scale in 1.0 1.3; do
   font "$scale"
-  for place in HOUSE STAGES COSTS DOCUMENTS ANALYZER; do
-    launch --es "$PKG.PLACE" "$place"
-    shot "after-$(echo "$place" | tr '[:upper:]' '[:lower:]')-font-$scale" 10
-  done
+  launch --es "$PKG.PLACE" ANALYZER
+  shot "after-analyzer-font-$scale" 10
+  launch --ez "$PKG.WITHOUT_BUNDLED" true
+  shot "after-no-house-font-$scale" 10
 done
 font 1.0
 ls -la "$OUT"

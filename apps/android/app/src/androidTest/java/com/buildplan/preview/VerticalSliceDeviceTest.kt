@@ -2,11 +2,13 @@ package com.buildplan.preview
 
 import android.content.Intent
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
@@ -41,13 +43,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * A real project through the whole product (INTEGRATION-003C §25S): paste
- * its link on the analyzer page, let the analyzer on this phone read it, and
- * go on as the owner would — the model opens in 3D by itself, Dom names the
- * result and its limitations, Etapy records progress for THIS house, the time
- * machine rewinds it to the walls without a roof, the closed shell before the
- * joinery and the joinery (also drawn as CLAY), an element's details open,
- * and 3D opens again after leaving it.
+ * A real project through the whole product (INTEGRATION-003C §25S, under the
+ * house-first shell of 004A): from the open house, take the analyzer task
+ * from the menu, paste the link, let the analyzer on this phone read it, and
+ * go on as the owner would — open the result (a finished analysis never
+ * replaces the house on screen by itself), read its limitations on the
+ * source sheet, record progress for THIS house in the stage sheet, rewind
+ * the time machine to the walls without a roof, the closed shell before the
+ * joinery and the joinery (also drawn as CLAY), open an element's details,
+ * and come back to the house after the analyzer task.
  *
  * Nothing here knows which house it is: the same steps and the same
  * assertions run for every link (`sliceUrl`, `sliceName` instrumentation
@@ -87,13 +91,10 @@ class VerticalSliceDeviceTest {
         val progress = evidence.progress(scenario)
         val analyzer = evidence.analyzer(scenario)
         evidence.fact("url", link)
-        // Dom reads the built-in house in the background: wait until it is on screen.
+        // The built-in house is the root: wait until it is drawn, then take the analyzer task from its menu.
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.scene != null && progress.view != null }
-
-        // Dom -> "Dodaj dom z linku" -> paste -> "Analizuj projekt".
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))
-        compose.onAllNodes(hasText(evidence.string(R.string.house_add_action)) and hasClickAction())[0].performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.analyzer_title)))
+        val bundled = evidence.awaitRenderer(preview, "the built-in house")
+        evidence.openAnalyzerTask(compose, preview)
         compose.onNode(hasSetTextAction()).performTextReplacement(link)
         compose.onNode(hasText(evidence.string(R.string.analyzer_analyze)) and hasClickAction()).performClick()
         compose.waitUntil(30_000) { analyzer.isRunning || analyzer.state is AnalysisState.Failed }
@@ -118,32 +119,30 @@ class VerticalSliceDeviceTest {
         evidence.fact("warnings", summary.warnings.size)
         evidence.fact("limited", limited)
 
-        // The finished analysis opens in 3D by itself: the house is drawn.
-        val first = evidence.awaitRenderer(preview, "3D after the analysis")
+        // The finished analysis is opened by the owner ("Otwórz w 3D" on the result): the house is drawn.
+        evidence.capture("02-analyzer-result")
+        compose.onNode(hasText(evidence.string(R.string.house_open_3d)) and hasClickAction()).performClick()
+        val first = evidence.awaitRenderer(preview, "3D after the analysis", replacing = bundled)
         val scene = checkNotNull(preview.scene)
         assertEquals("the analysed scene is open", completed.entry.key, scene.key)
         val houseId = checkNotNull(progress.session?.houseId) { "an analysed house has a durable id" }
         assertTrue("the id is the model's, not the download's: $houseId", !houseId.value.startsWith("analysis-"))
         evidence.fact("houseId", houseId)
         evidence.fact("objects", scene.objectCount)
-        evidence.capture("02-3d-after-analysis", "visibleObjects" to first.visibleObjects)
-
-        // Back to Dom: the model's status says what the analysis left open.
-        Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
+        evidence.capture("03-house-after-analysis", "visibleObjects" to first.visibleObjects)
         assertEquals(SceneSourceKind.DOWNLOADED, preview.scenes.first { it.key == scene.key }.source)
+
+        // The source sheet says what the analysis left open, in the same words as the result.
+        evidence.openMenu(compose, evidence.string(R.string.menu_source))
         evidence.awaitNode(hasText(evidence.string(if (limited) R.string.house_status_limited else R.string.house_status_ready)))
-        evidence.capture("03-dom-result")
-
-        // The analyzer page keeps the result, in the same words.
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))
-        compose.onAllNodes(hasText(evidence.string(R.string.house_add_action)) and hasClickAction())[0].performClick()
-        evidence.awaitNode(hasText(evidence.string(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready)))
-        evidence.capture("04-analyzer-result")
+        if (limited) evidence.awaitNode(hasText(evidence.string(R.string.analyzer_details)))
+        evidence.capture("04-source-sheet")
         Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.house_status_bundled))).fetchSemanticsNodes().isEmpty() }
 
-        // Etapy for THIS house: stages 1-7 done, Dach current at 50 %.
-        compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
+        // The stage sheet for THIS house: stages 1-7 done, Dach current at 50 %.
+        compose.onNode(hasText(evidence.string(R.string.progress_set_action)) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
         for (key in DONE) {
             openStage(stageName(key))
             compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
@@ -152,15 +151,16 @@ class VerticalSliceDeviceTest {
         openStage(stageName(ConstructionStageKey.ROOF))
         compose.onNode(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.summary?.currentStage == ConstructionStageKey.ROOF }
-        compose.onNode(androidx.compose.ui.test.SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress))
+        compose.onNode(androidx.compose.ui.test.SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress) and notTheRule())
             .performSemanticsAction(SemanticsActions.SetProgress) { it(0.5f) }
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 50 }
         evidence.fact("percent", progress.view?.summary?.percent)
-        evidence.capture("05-etapy-current")
+        evidence.capture("05-stages-sheet")
+        Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
 
-        // 3D now: the shell and the roof being built, no joinery yet.
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        val now = evidence.awaitRenderer(preview, "3D now")
+        // 3D now: the shell and the roof being built, no joinery yet — the same house, the sheet is gone.
+        val now = first
         val projection = checkNotNull(progress.session).projection
         val actual = checkNotNull(projection.visibleIds(ConstructionView.Actual(checkNotNull(progress.session?.state))))
         runCatching { compose.waitUntil(5_000) { preview.viewer.construction == actual } }
@@ -173,21 +173,22 @@ class VerticalSliceDeviceTest {
         assertTrue("this house has walls to show", walls.isNotEmpty())
         assertTrue("walls stand now", walls.all { it in actual })
         assertTrue("no joinery yet", joinery.none { it in actual })
-        evidence.capture("06-3d-now", "objects" to actual.size)
+        evidence.settleFrames(now)
+        evidence.capture("06-house-now", "objects" to actual.size)
 
         // The time machine: walls without a roof, the closed shell before joinery, then the joinery.
-        val walled = history(preview, progress, now, ConstructionStageKey.WALLS, "07-3d-history-walls")
+        val walled = history(preview, progress, now, ConstructionStageKey.WALLS, "07-history-walls")
         assertTrue("walls stand at the end of Ściany", walls.all { it in walled })
         assertTrue("no roof at the end of Ściany", roof.none { it in walled })
-        val preJoinery = history(preview, progress, now, ConstructionStageKey.ROOF, "08-3d-history-pre-joinery")
+        val preJoinery = history(preview, progress, now, ConstructionStageKey.ROOF, "08-history-pre-joinery")
         assertTrue("the roof stands at the end of Dach", roof.all { it in preJoinery })
         assertTrue("no joinery before Stolarka", joinery.none { it in preJoinery })
-        val joined = history(preview, progress, now, ConstructionStageKey.JOINERY, "09-3d-history-joinery")
+        val joined = history(preview, progress, now, ConstructionStageKey.JOINERY, "09-history-joinery")
         assertTrue("windows and doors stand at the end of Stolarka", joinery.all { it in joined })
 
         // History composes with the way the house is drawn: CLAY, rewound to Ściany.
         compose.runOnIdle { preview.setPresentation(PresentationMode.CLAY) }
-        history(preview, progress, now, ConstructionStageKey.WALLS, "10-3d-clay-history-walls")
+        history(preview, progress, now, ConstructionStageKey.WALLS, "10-clay-history-walls")
         assertEquals(PresentationMode.CLAY, preview.viewer.presentation)
         compose.runOnIdle { preview.setPresentation(PresentationMode.MODEL) }
 
@@ -201,17 +202,19 @@ class VerticalSliceDeviceTest {
         compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         evidence.settleFrames(now)
-        evidence.capture("11-3d-inspector", "selected" to wall)
+        evidence.capture("11-inspector", "selected" to wall)
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
 
-        // Leave 3D, enter again: drawn again, same state, one engine.
+        // Leave the house for the analyzer task and come back: drawn again, same state, one engine.
+        val pose = preview.pose
+        evidence.openAnalyzerTask(compose, preview)
         Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        evidence.awaitRenderer(preview, "3D again")
+        evidence.awaitRenderer(preview, "the house again", replacing = now)
+        runCatching { compose.waitUntil(5_000) { preview.viewer.construction == actual } }
         assertEquals(actual, preview.viewer.construction)
-        evidence.capture("12-3d-again")
+        assertEquals("the task did not move the camera", pose, preview.pose)
+        evidence.capture("12-house-again")
         assertEquals("the previews never saved", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
         assertNotNull(progress.view)
         evidence.fact("result", "PASS")
@@ -232,11 +235,20 @@ class VerticalSliceDeviceTest {
         return expected
     }
 
+    /** The stage sheet's list (the only scrolling node while the sheet is open). */
+    private fun list() = compose.onAllNodes(hasScrollAction()).onFirst()
+
+    /** The completion slider, not the timeline's rule behind the sheet. */
+    private fun notTheRule(): androidx.compose.ui.test.SemanticsMatcher =
+        androidx.compose.ui.test.SemanticsMatcher("not the timeline's rule") { node ->
+            node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.ContentDescription)?.contains(evidence.string(R.string.timeline_rule_description)) != true
+        }
+
     private fun openStage(label: String) {
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(label))
+        list().performScrollToNode(hasText(label))
         compose.onNode(hasText(label) and hasClickAction()).performClick()
         compose.waitForIdle()
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
+        list().performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
     }
 
     private fun stageName(key: ConstructionStageKey): String = evidence.string(

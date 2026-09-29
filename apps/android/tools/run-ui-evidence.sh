@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
-# INTEGRATION-003C's UI evidence gate, run inside a booted emulator (CI) or
-# against any device adb sees.
+# The UI evidence gate (INTEGRATION-003C, house-first since 004A), run inside
+# a booted emulator (CI) or against any device adb sees.
 #
-#   [OUT=<dir>] [SLICES=1] [MARCOWKI_URL=…] [SECOND_HOUSE_URL=…] apps/android/tools/run-ui-evidence.sh
+#   [OUT=<dir>] [SLICES=1] [MARCOWKI_URL=…] [SECOND_HOUSE_URL=…] [THIRD_HOUSE_URL=…] [GENERIC_URL=…] apps/android/tools/run-ui-evidence.sh
 #
 # 1. installs the app (with the embedded analyzer) and the instrumentation APK;
-# 2. runs ProductFlowDeviceTest — the owner's journey through Dom, 3D, Etapy,
-#    the time machine, the inspector, the analyzer page, Koszty and
-#    Dokumenty, by the screens' own semantics — at font scale 1.0 and 1.3 —
-#    and AdaptiveLayoutDeviceTest, the same places in landscape;
-# 3. with SLICES=1, runs VerticalSliceDeviceTest on the Marcówki and Rarytasy
-#    links: analysed on the phone through the analyzer page, then 3D, progress
-#    and history for that house;
+# 2. runs ProductFlowDeviceTest — the owner's journey on the house: the stage
+#    sheet, the time machine, the layers pane, the inspector, the menu, the
+#    source sheet, the analyzer task and the return to the same house, by the
+#    workspace's own semantics — at font scale 1.0 and 1.3 — then
+#    AdaptiveLayoutDeviceTest (the same product in landscape),
+#    ReleaseCandidateDeviceTest (lifecycle, unhappy paths, collisions) and
+#    NoHouseDeviceTest (a phone with no house);
+# 3. with SLICES=1, runs VerticalSliceDeviceTest on the Marcówki, Rarytasy
+#    and (THIRD_HOUSE_URL) Kosaćce links: analysed on the phone through the
+#    analyzer task, then the house, progress and history for that house; and
+#    GenericSourceDeviceTest on GENERIC_URL, a publisher without a specialist
+#    reader, recording the honest outcome it reaches;
 # 4. pulls every screenshot and manifest, and validates them: each required
 #    PNG exists, is not empty, decodes, and has the screen's size;
 # 5. writes OUT/status.txt: PASS, FAILED or DEVICE_LOST, and one status per
@@ -87,7 +92,7 @@ if [ "$GATE" != 2 ]; then
   r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
   font 1.0
 fi
-# 2b. The same product turned to landscape: Dom, 3D with the time machine, Etapy; the rotation keeps one engine.
+# 2b. The same product turned to landscape: the house with the time machine, the details panel, the stage sheet; the rotation keeps one engine.
 if [ "$GATE" != 2 ]; then
   instrument landscape "$PKG.AdaptiveLayoutDeviceTest" "$STALL"
   r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
@@ -97,12 +102,17 @@ if [ "$GATE" != 2 ]; then
   instrument release-candidate "$PKG.ReleaseCandidateDeviceTest" "$STALL"
   r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
 fi
+# 2d. A phone with no house: the minimal add-house state and the analyzer task (004A §24).
+if [ "$GATE" != 2 ]; then
+  instrument no-house "$PKG.NoHouseDeviceTest" "$STALL"
+  r=$?; [ "$r" = 2 ] && GATE=2; { [ "$r" = 1 ] && [ "$GATE" = 0 ]; } && GATE=1
+fi
 
 pull() {
   online && timeout "$STALL" adb pull "/sdcard/Android/data/$PKG/files/ui-evidence" "$OUT/" >/dev/null 2>&1 || echo "no ui-evidence to pull yet"
 }
 
-REQUIRED="default:journey font-1.3:journey landscape:adaptive rc-c:lifecycle rc-d:unhappy rc-e:collisions"
+REQUIRED="default:journey font-1.3:journey landscape:adaptive rc-c:lifecycle rc-d:unhappy rc-e:collisions no-house:nohouse"
 slice() {
   local name="$1" url="$2"
   if [ "$SLICES" != 1 ] || [ -z "$url" ] || [ "$GATE" = 2 ]; then echo "NOT_RUN" > "$OUT/slice-$name-status.txt"; return; fi
@@ -118,6 +128,24 @@ slice() {
 }
 slice marcowki "${MARCOWKI_URL:-}"
 slice rarytasy "${SECOND_HOUSE_URL:-}"
+slice kosacce "${THIRD_HOUSE_URL:-}"
+
+# A publisher without a specialist reader (004A §36): the page is inspected on its evidence, and the
+# honest outcome it reaches is recorded; the test passes on the path, not on the page.
+generic() {
+  local name="$1" url="$2"
+  if [ "$SLICES" != 1 ] || [ -z "$url" ] || [ "$GATE" = 2 ]; then echo "NOT_RUN" > "$OUT/generic-$name-status.txt"; return; fi
+  instrument "generic-$name" "$PKG.GenericSourceDeviceTest" "$SLICE_STALL" -e genericName "$name" -e genericUrl "$url" -e genericTimeoutMinutes 40
+  local r=$?
+  pull
+  local manifest="$OUT/ui-evidence/generic-$name-manifest.json"
+  if [ "$r" = 2 ]; then GATE=2; echo "DEVICE_LOST" > "$OUT/generic-$name-status.txt"
+  elif [ "$r" = 0 ] && grep -q '"result": "PASS"' "$manifest" 2>/dev/null; then echo "PASS" > "$OUT/generic-$name-status.txt"; REQUIRED="$REQUIRED generic-$name:generic"; grep -o '"outcome": "[^"]*"' "$manifest" || true
+  elif grep -q 'SOURCE_UNREACHABLE\|Offline' "$manifest" 2>/dev/null; then echo "SOURCE_UNREACHABLE" > "$OUT/generic-$name-status.txt"; echo "::warning::$name: the publisher could not be reached"
+  else echo "FAILED" > "$OUT/generic-$name-status.txt"; [ "$GATE" = 0 ] && GATE=1
+  fi
+}
+generic alternate "${GENERIC_URL:-}"
 
 pull
 kill "$LOGCAT_PID" 2>/dev/null || true

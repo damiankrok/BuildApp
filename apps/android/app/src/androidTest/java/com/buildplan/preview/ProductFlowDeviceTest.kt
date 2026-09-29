@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.SystemClock
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.click
@@ -14,6 +15,7 @@ import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
@@ -36,7 +38,6 @@ import com.buildplan.preview.ui.RuleGeometry
 import java.io.File
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -46,19 +47,22 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * INTEGRATION-003C's product journey on a device, the owner's way — by the
- * Compose semantics of the real screens, never by launching a place
- * directly: Dom with nothing recorded, Dom → 3D, Etapy (recording progress
- * through its own controls), Dom again, 3D now, the time machine back to the
- * foundations, walls, roof and joinery and "Wróć do teraz", an element's
- * details, the expanded timeline, leaving and entering 3D again, the
- * analyzer page, Koszty and Dokumenty.
+ * INTEGRATION-004A's house-first journey on a device, the owner's way — by
+ * the Compose semantics of the real workspace, never by launching a surface
+ * directly: a cold start lands on the house with nothing recorded; the
+ * stage sheet opens from the rail and the progress is recorded through its
+ * own controls; the sheet closes onto the same house at the same camera;
+ * the time machine rewinds to the foundations, walls, roof and joinery and
+ * "Wróć do teraz"; the layers pane; an element's details; the expanded
+ * timeline; the house menu, the source sheet; the analyzer task, and the
+ * return to the same house.
  *
  * Every step asserts what the product promises — the preview never changes
  * what was saved, each stage shows exactly its semantic objects, one
- * Filament engine, the house drawn — and saves a screenshot to
- * `ui-evidence/` with a manifest CI validates. The progress entered here is
- * TEST data on the emulator's copy of the built-in reference house.
+ * Filament engine, the camera untouched by any sheet or task — and saves a
+ * screenshot to `ui-evidence/` with a manifest CI validates. The progress
+ * entered here is TEST data on the emulator's copy of the built-in
+ * reference house.
  *
  * Instrumentation argument `reportName` prefixes the files (`default`,
  * `font-1.3`).
@@ -87,7 +91,7 @@ class ProductFlowDeviceTest {
     }
 
     @Test
-    fun theOwnersJourneyThroughDom3dAndEtapy() {
+    fun theOwnersJourneyOnTheHouse() {
         val scenario = ActivityScenario.launch<MainActivity>(Intent(evidence.app, MainActivity::class.java)).also { this.scenario = it }
         val preview = evidence.preview(scenario)
         val progress = evidence.progress(scenario)
@@ -96,26 +100,20 @@ class ProductFlowDeviceTest {
         evidence.fact("houseId", houseId)
         evidence.fact("reducedMotion", preview.reducedMotion)
 
-        // 1. Dom, nothing recorded: "Postęp nieustawiony" and the way to set it; no engine.
+        // 1. A cold start lands on the house: the whole design, "Postęp nieustawiony", one engine, no tabs.
+        val first = evidence.awaitRenderer(preview, "cold start")
         evidence.awaitNode(hasText(evidence.string(R.string.progress_unset)))
-        assertNull("Dom composes no viewport", preview.renderDiagnostics)
-        assertDrawingInked(preview, progress, evidence.capture("01-dom-unset"), "01 Dom, progress unset")
-
-        // 2. Dom -> 3D through the bar: the whole design, "Postęp nieustawiony".
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        val first = evidence.awaitRenderer(preview, "first 3D entry")
         assertNull("unset progress shows the whole design", preview.viewer.construction)
-        evidence.assertHouseInsideFreeArea(preview, evidence.capture("02-dom-to-3d-unset", "visibleObjects" to first.visibleObjects), "02 3D, whole design")
+        assertEquals("the workspace is the root", 1, RenderDiagnostics.liveEngines.get())
+        evidence.assertHouseInsideFreeArea(preview, evidence.capture("01-house-unset", "visibleObjects" to first.visibleObjects), "01 house, progress unset")
+        val poseAtRest = preview.pose
 
-        // 3. Back to Dom, then Etapy by the bar.
-        Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
-        assertEquals("no engine after leaving 3D", 0, RenderDiagnostics.liveEngines.get())
-        compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
+        // 2. "Ustaw postęp" on the rail opens the stage sheet over the house.
+        compose.onNode(hasText(evidence.string(R.string.progress_set_action)) and hasClickAction()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
-        evidence.capture("03-etapy-unset")
+        evidence.capture("02-stages-sheet-unset")
 
-        // 4. Record progress through Etapy's own controls: stage 1 done by itself, Dach made current,
+        // 3. Record progress through the sheet's own controls: stage 1 done by itself, Dach made current,
         //    then "Oznacz 6 wcześniejszych etapów jako zakończone" (it says the count before it acts),
         //    Dach at 40 %, a task.
         openStage(ConstructionStageKey.PLOT_PURCHASE)
@@ -125,46 +123,44 @@ class ProductFlowDeviceTest {
         compose.onNode(hasText(evidence.string(R.string.stage_make_current)) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.summary?.currentStage == ConstructionStageKey.ROOF }
         val earlier = evidence.plural(R.plurals.stage_mark_earlier_done, 6, 6)
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(earlier))
+        list().performScrollToNode(hasText(earlier))
         compose.onNode(hasText(earlier) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.stages?.take(7)?.all { it.status == StageStatus.DONE } == true }
         assertEquals("the current stage stays current", ConstructionStageKey.ROOF, progress.view?.summary?.currentStage)
         evidence.fact("bulk action label", earlier)
-        compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress)).performSemanticsAction(SemanticsActions.SetProgress) { it(0.4f) }
+        compose.onNode(SemanticsMatcher.keyIsDefined(SemanticsActions.SetProgress) and hasSetProgressOnly()).performSemanticsAction(SemanticsActions.SetProgress) { it(0.4f) }
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 40 }
         compose.onNode(hasSetTextAction()).performTextReplacement(TASK)
-        // A tap lands where the button is drawn: bring it above the bottom bar first.
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.stage_task_save)))
+        list().performScrollToNode(hasText(evidence.string(R.string.stage_task_save)))
         compose.onNode(hasText(evidence.string(R.string.stage_task_save)) and hasClickAction()).performClick()
         compose.waitUntil(5_000) { progress.view?.summary?.currentTask == TASK }
         val summary = checkNotNull(progress.view).summary
         assertEquals("(7 + 0.4) / 17 stages, rounded down", 43, summary.percent)
-        evidence.capture("04-etapy-current-editing", "percent" to summary.percent, "task" to summary.currentTask)
+        evidence.capture("03-stages-sheet-editing", "percent" to summary.percent, "task" to summary.currentTask)
 
         // The record is on disk, where an app restart reads it.
         val store = ProgressStore(File(evidence.app.filesDir, "progress"))
         val savedBytes = store.fileFor(HouseId(houseId.value)).readBytes()
         assertTrue("the progress was saved", savedBytes.isNotEmpty())
 
-        // 5. Dom reflects the same progress.
-        compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_current_stage, evidence.string(R.string.stage_roof))))
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_now_doing, TASK)))
-        assertDrawingInked(preview, progress, evidence.capture("05-dom-progress"), "05 Dom with progress")
-
-        // 6. 3D now: the house as it stands by the owner's account — no joinery yet.
-        compose.onNode(hasText(evidence.string(R.string.house_open_3d)) and hasClickAction()).performClick()
-        val now = evidence.awaitRenderer(preview, "3D now")
+        // 4. The sheet closes onto the same house: 3D now shows exactly what is recorded, the camera has not moved.
+        Espresso.pressBack()
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_now_task, TASK)))
+        assertEquals("one engine: the house never left", 1, RenderDiagnostics.liveEngines.get())
+        assertEquals("the stage sheet did not move the camera", poseAtRest, preview.pose)
         val projection = checkNotNull(progress.session).projection
         val actual = checkNotNull(projection.visibleIds(ConstructionView.Actual(checkNotNull(progress.session?.state))))
+        compose.waitUntil(5_000) { preview.viewer.construction == actual }
         assertEquals("3D now shows exactly what is recorded", actual, preview.viewer.construction)
         val joinery = projection.introducedAt(ConstructionStageKey.JOINERY)
         assertTrue("the model has joinery to hide", joinery.isNotEmpty())
         assertTrue("no window stands yet", joinery.none { it in actual })
-        val nowShot = evidence.capture("06-3d-now", "visibleObjects" to now.visibleObjects, "construction" to actual.size)
-        evidence.assertHouseInsideFreeArea(preview, nowShot, "06 3D now")
+        val now = first
+        evidence.settleFrames(now)
+        val nowShot = evidence.capture("04-house-now", "visibleObjects" to now.visibleObjects, "construction" to actual.size)
+        evidence.assertHouseInsideFreeArea(preview, nowShot, "04 house now")
 
-        // 7-10. The time machine: drag along the rule to the foundations, then tap walls, roof, joinery.
+        // 5-8. The time machine: drag along the rule to the foundations, then tap walls, roof, joinery.
         val shots = linkedMapOf<ConstructionStageKey, Bitmap>()
         val rule = compose.onNode(hasContentDescription(evidence.string(R.string.timeline_rule_description)))
         rule.performTouchInput {
@@ -173,14 +169,14 @@ class ProductFlowDeviceTest {
             for (i in 1..stopOf(ConstructionStageKey.FOUNDATIONS)) moveTo(Offset(g.center(i), height / 2f))
             up()
         }
-        shots[ConstructionStageKey.FOUNDATIONS] = previewShot(preview, progress, now, ConstructionStageKey.FOUNDATIONS, "07-3d-history-foundations")
+        shots[ConstructionStageKey.FOUNDATIONS] = previewShot(preview, progress, now, ConstructionStageKey.FOUNDATIONS, "05-history-foundations")
         // Scrubbing changes which uploaded objects stand, nothing else: no upload, no camera move.
         val uploadsBefore = now.modelUploads
         val poseBefore = preview.pose
         for ((key, name) in listOf(
-            ConstructionStageKey.WALLS to "08-3d-history-walls",
-            ConstructionStageKey.ROOF to "09-3d-history-roof",
-            ConstructionStageKey.JOINERY to "10-3d-history-joinery",
+            ConstructionStageKey.WALLS to "06-history-walls",
+            ConstructionStageKey.ROOF to "07-history-roof",
+            ConstructionStageKey.JOINERY to "08-history-joinery",
         )) {
             val framesBefore = now.framesRendered.get()
             val started = SystemClock.elapsedRealtime()
@@ -211,16 +207,24 @@ class ProductFlowDeviceTest {
             assertTrue("${stages[i - 1].key} and ${stages[i].key} look the same (difference $d)", d >= MIN_STAGE_DIFFERENCE)
         }
 
-        // 11. "Wróć do teraz" restores exactly the saved state.
+        // 9. "Wróć do teraz" restores exactly the saved state.
         compose.onNode(hasText(evidence.string(R.string.timeline_return_now)) and hasClickAction()).performClick()
         runCatching { compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Now && preview.viewer.construction == actual } }
         assertEquals(TimelineCursor.Now, progress.session?.cursor)
         assertEquals(actual, preview.viewer.construction)
         evidence.settleFrames(now)
-        val back = evidence.capture("11-3d-back-to-now")
+        val back = evidence.capture("09-back-to-now")
         evidence.fact("difference now vs back-to-now", Evidence.difference(nowShot, back, Evidence.modelRegion(back)))
 
-        // 12. An element's details: tap the house; if the tap finds nothing, choose a standing wall.
+        // 10. The layers pane from the rail: progressive disclosure, the house behind it.
+        compose.onNode(hasText(evidence.string(R.string.tool_layers)) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.layer_roof_off)) and hasClickAction())
+        evidence.settleFrames(now)
+        evidence.capture("10-layers-pane")
+        Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.layer_roof_off)) and hasClickAction()).fetchSemanticsNodes().isEmpty() }
+
+        // 11. An element's details: tap the house; if the tap finds nothing, choose a standing wall.
         compose.onNode(hasContentDescription(evidence.string(R.string.viewport_description))).performTouchInput { click(center) }
         val picked = try {
             compose.waitUntil(5_000) { preview.selected != null }
@@ -236,7 +240,7 @@ class ProductFlowDeviceTest {
         compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         evidence.settleFrames(now)
-        evidence.capture("12-3d-inspector", "selected" to preview.selected?.id)
+        evidence.capture("11-inspector", "selected" to preview.selected?.id)
         // Cycle 1, C1-03: the owner reads Polish; the export's English is folded under "Dane techniczne".
         val sel = checkNotNull(preview.selected)
         val exportName = sel.metadata?.label
@@ -249,52 +253,62 @@ class ProductFlowDeviceTest {
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
 
-        // 13. The timeline expanded: every stage named with its state.
+        // 12. The timeline expanded: every stage named with its state.
         compose.onNode(hasContentDescription(evidence.string(R.string.timeline_expand))).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.stage_status_done)), unmerged = true)
         evidence.settleFrames(now)
-        evidence.capture("13-3d-timeline-expanded")
+        evidence.capture("12-timeline-expanded")
         compose.onNode(hasContentDescription(evidence.string(R.string.timeline_collapse))).performClick()
 
-        // 14. Leave 3D and come back: one engine again, the house again, the same state.
-        Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
-        assertEquals(0, RenderDiagnostics.liveEngines.get())
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        val second = evidence.awaitRenderer(preview, "second 3D entry")
-        assertEquals("re-entering shows the saved state", actual, preview.viewer.construction)
-        evidence.assertHouseInsideFreeArea(preview, evidence.capture("14-3d-second-entry", "visibleObjects" to second.visibleObjects), "14 3D again")
-        Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
+        // 13. The house menu: the houses on this phone, the open one marked, and the matters of this house.
+        compose.onNode(evidence.menuButton()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.house_saved_heading)))
+        evidence.awaitNode(hasText(evidence.string(R.string.menu_costs)))
+        compose.onNode(hasText(evidence.string(R.string.menu_costs_not_built))).assertExists()
+        evidence.capture("13-menu")
 
-        // 15-17. The analyzer entry, Koszty, Dokumenty; 18. back to Dom.
-        compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))
-        compose.onAllNodes(hasText(evidence.string(R.string.house_add_action)) and hasClickAction())[0].performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.analyzer_title)))
-        evidence.capture("15-analyzer")
+        // 14. The source sheet from the menu: the house drawn in ink by the progress, where it came from.
+        compose.onAllNodes(hasText(evidence.string(R.string.menu_source)) and hasClickAction())[0].performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.house_status_bundled)))
+        assertDrawingInked(preview, progress, evidence.capture("14-source"), "14 source")
         Espresso.pressBack()
-        compose.onNode(evidence.tab(evidence.string(R.string.place_costs))).performClick()
-        evidence.capture("16-koszty")
-        compose.onNode(evidence.tab(evidence.string(R.string.place_documents))).performClick()
-        evidence.capture("17-dokumenty")
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.house_status_bundled))).fetchSemanticsNodes().isEmpty() }
+        assertEquals("sheets never move the camera", poseAtRest, preview.pose)
+
+        // 15. The analyzer task from the menu: it takes the screen, and the engine goes with it.
+        evidence.openAnalyzerTask(compose, preview)
+        assertEquals("no engine on the analyzer task", 0, RenderDiagnostics.liveEngines.get())
+        evidence.capture("15-analyzer-task")
+
+        // 16. Back returns to the same house, at the same camera, with the same state.
         Espresso.pressBack()
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_metric_label)))
-        evidence.capture("18-back-to-dom")
+        val second = evidence.awaitRenderer(preview, "back from the task")
+        assertEquals("re-entering shows the saved state", actual, preview.viewer.construction)
+        assertEquals("the task did not move the camera", poseAtRest, preview.pose)
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_now_task, TASK)))
+        evidence.assertHouseInsideFreeArea(preview, evidence.capture("16-house-after-task", "visibleObjects" to second.visibleObjects), "16 house after the task")
+        assertNotNull(progress.view)
         evidence.fact("result", "PASS")
     }
 
     // -----------------------------------------------------------------------
 
+    /** The stage sheet's list (the only scrolling node while the sheet is open). */
+    private fun list() = compose.onAllNodes(hasScrollAction()).onFirst()
+
+    /** The completion slider, not the rule: the rule is not on the sheet, but on a tall window both may be composed. */
+    private fun hasSetProgressOnly(): SemanticsMatcher =
+        SemanticsMatcher("not the timeline's rule") { node -> node.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.ContentDescription)?.contains(evidence.string(R.string.timeline_rule_description)) != true }
+
     private fun openStage(key: ConstructionStageKey) {
         val name = evidence.string(stageLabel(key))
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(name))
+        list().performScrollToNode(hasText(name))
         compose.onNode(hasText(name) and hasClickAction()).performClick()
         compose.waitForIdle()
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
+        list().performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
     }
 
-    /** Dom's drawing of the house is on screen, in ink: a blank hero is a failed Dom. */
+    /** The source sheet's drawing of the house is on screen, in ink: a blank drawing is a failed sheet. */
     private fun assertDrawingInked(preview: PreviewViewModel, progress: ProgressViewModel, shot: Bitmap, step: String) {
         val title = checkNotNull(preview.scene).title
         val node = compose.onNode(hasContentDescription(evidence.string(R.string.house_drawing_description, title))).fetchSemanticsNode()
@@ -348,7 +362,7 @@ class ProductFlowDeviceTest {
         /** Mean luminance difference (0–255) below which two stage previews count as the same picture. */
         const val MIN_STAGE_DIFFERENCE = 1.0
 
-        /** Bright pixels in the Dom drawing's box below which it counts as blank (a drawn house has about ten thousand). */
+        /** Bright pixels in the drawing's box below which it counts as blank (a drawn house has about ten thousand). */
         const val MIN_DRAWING_INK = 1_500
     }
 }

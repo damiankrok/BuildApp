@@ -4,13 +4,11 @@ import android.content.Intent
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
-import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
-import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -44,13 +42,16 @@ import org.junit.rules.TestName
 import org.junit.runner.RunWith
 
 /**
- * The release-candidate journeys of audit cycle 3 (INTEGRATION-003C §25X),
- * on the built-in house, through the app's own screens and state:
+ * The release-candidate journeys (INTEGRATION-003C §25X, kept under the
+ * house-first shell of INTEGRATION-004A), on the built-in house, through the
+ * app's own screens and state:
  *
- * - C, lifecycle: Dom → 3D → back → 3D; pause and resume; the activity
- *   recreated; the app closed and opened again with the saved progress.
+ * - C, lifecycle: the house → the analyzer task → back to the house; pause
+ *   and resume; the activity recreated; the app closed and opened again with
+ *   the saved progress.
  * - D, unhappy paths: a stage with no geometry of its own; a corrupt progress
- *   file recovered and said so; a link the app does not support.
+ *   file recovered and said so, on the house; an unsafe link refused before a
+ *   byte is fetched.
  * - E, interaction collisions: the construction history combined with the
  *   roof off, with one storey, with a selection and with the LINE drawing;
  *   the inspector in the timeline's place.
@@ -109,15 +110,20 @@ class ReleaseCandidateDeviceTest {
     private fun stageId(progress: ProgressViewModel, key: ConstructionStageKey): String =
         checkNotNull(progress.view?.stages?.firstOrNull { it.stageKey == key }).stageId
 
-    private fun enter3d(preview: PreviewViewModel, step: String, replacing: RenderDiagnostics? = null): RenderDiagnostics {
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        return evidence.awaitRenderer(preview, step, replacing = replacing)
+    /** The house is the root: it is drawn as soon as the app is up, or again when a task returns. */
+    private fun enter3d(preview: PreviewViewModel, step: String, replacing: RenderDiagnostics? = null): RenderDiagnostics =
+        evidence.awaitRenderer(preview, step, replacing = replacing)
+
+    /** Leave the house for the analyzer task: the viewport and its engine are gone. */
+    private fun leave3d(preview: PreviewViewModel) {
+        evidence.openAnalyzerTask(compose, preview)
+        assertEquals("no engine after leaving the house", 0, RenderDiagnostics.liveEngines.get())
     }
 
-    private fun leave3d(preview: PreviewViewModel) {
+    /** Back from the task returns to the same house. */
+    private fun returnToHouse(preview: PreviewViewModel, step: String, replacing: RenderDiagnostics? = null): RenderDiagnostics {
         Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
-        assertEquals("no engine after leaving 3D", 0, RenderDiagnostics.liveEngines.get())
+        return evidence.awaitRenderer(preview, step, replacing = replacing)
     }
 
     /** The renderer draws exactly what the viewer state says: stage ∩ layers ∩ isolation. */
@@ -145,12 +151,15 @@ class ReleaseCandidateDeviceTest {
         record(progress)
         val saved = checkNotNull(progress.view).summary
 
-        // Dom → 3D → back → 3D.
+        // The house → the analyzer task → back to the house, at the same camera.
         val first = enter3d(preview, "C first entry")
+        val pose = preview.pose
         leave3d(preview)
-        val second = enter3d(preview, "C second entry")
+        val second = returnToHouse(preview, "C second entry", replacing = first)
         val actual = checkNotNull(progress.session).actualVisible
+        runCatching { compose.waitUntil(5_000) { preview.viewer.construction == actual } }
         assertEquals(actual, preview.viewer.construction)
+        assertEquals("the task did not move the camera", pose, preview.pose)
 
         // Pause and resume (the app behind another one and back): drawing again, one engine.
         val before = second.framesRendered.get()
@@ -167,7 +176,6 @@ class ReleaseCandidateDeviceTest {
         val recreated = evidence.awaitRenderer(preview, "C recreated", replacing = second)
         assertEquals(1, RenderDiagnostics.liveEngines.get())
         assertEquals("the construction state survives recreation", actual, preview.viewer.construction)
-        leave3d(preview)
         evidence.fact("C first/second/recreated frames", "${first.framesRendered.get()} / ${second.framesRendered.get()} / ${recreated.framesRendered.get()}")
 
         // The app closed and opened again: the saved progress is read back from disk.
@@ -179,8 +187,8 @@ class ReleaseCandidateDeviceTest {
         assertEquals("percent after restart", saved.percent, back.percent)
         assertEquals("current stage after restart", saved.currentStage, back.currentStage)
         assertEquals("task after restart", saved.currentTask, back.currentTask)
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_now_doing, "Montaż więźby")))
-        evidence.capture("02-dom-after-restart", "percent" to back.percent)
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_now_task, "Montaż więźby")))
+        evidence.capture("02-house-after-restart", "percent" to back.percent)
         evidence.fact("result C", "PASS")
     }
 
@@ -200,55 +208,56 @@ class ReleaseCandidateDeviceTest {
         file.parentFile?.mkdirs()
         file.writeText("{ this is not a progress record")
         val (_, preview, progress) = launch()
-        // Said on Dom too, where the owner lands, not only in Etapy (cycle 3, C3-04).
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_problem_corrupt)))
-        compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_problem_corrupt)))
+        val d = enter3d(preview, "D 3D")
+        // Said on the house, where the owner lands, in the rail's header (cycle 3, C3-04), and in the stage sheet.
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_problem_corrupt)), unmerged = true)
         assertTrue("the damaged record was kept aside", file.parentFile?.listFiles()?.any { it.name != file.name } == true)
+        evidence.settleFrames(d)
         evidence.capture("01-corrupt-recovered")
 
-        // A refused edit is said at the foot of Etapy, announced, and leaves by itself (cycle 2, C2-11).
+        // A refused edit is said at the foot of the stage sheet, announced, and leaves by itself (cycle 2, C2-11).
         record(progress)
+        compose.onNode(hasText(evidence.string(R.string.progress_now_task, "Montaż więźby")) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
         assertTrue(progress.startStage(stageId(progress, ConstructionStageKey.JOINERY)) is EditOutcome.Refused)
         evidence.awaitNode(hasText(evidence.string(R.string.stage_other_current, evidence.string(R.string.stage_roof))), unmerged = true)
         evidence.capture("02-refusal-said")
+        Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
 
         // A stage the model has no geometry for: the timeline says so, the 3D keeps the last shell.
-        val d = enter3d(preview, "D 3D")
         previewStage(preview, progress, ConstructionStageKey.ELECTRICAL)
         evidence.awaitNode(hasText(evidence.string(R.string.timeline_no_geometry)))
         assertDrawnAsStated(preview, d, "D electrical")
         evidence.settleFrames(d)
         evidence.capture("03-stage-without-geometry")
         compose.runOnIdle { progress.returnToNow() }
-        leave3d(preview)
 
-        // A link the app does not support: the analyzer on the phone refuses the publisher at once,
-        // says so, and nothing is added to the phone.
-        compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
-        compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))
-        compose.onAllNodes(hasText(evidence.string(R.string.house_add_action)) and hasClickAction())[0].performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.analyzer_title)))
+        // An unsafe link: refused before a byte is fetched (004A: safety is checked before recognition;
+        // an unknown publisher is no longer refused by its hostname), said so, nothing added to the phone.
+        leave3d(preview)
         val analyzer = evidence.analyzer(checkNotNull(scenario))
         val housesBefore = preview.scenes.size
-        compose.onNode(hasSetTextAction()).performTextReplacement("https://example.com/dom")
+        compose.onNode(hasSetTextAction()).performTextReplacement("https://localhost/dom")
         compose.onNode(hasText(evidence.string(R.string.analyzer_analyze)) and hasClickAction()).performClick()
         compose.waitUntil(30_000) { analyzer.linkProblem != null || analyzer.state is AnalysisState.Failed }
         val failure = (analyzer.state as? AnalysisState.Failed)?.failure
         val problem = analyzer.linkProblem ?: failure?.let { AnalyzerMessages.title(it) }
-        evidence.fact("unsupported link", "problem=${analyzer.linkProblem} failure=$failure")
+        evidence.fact("unsafe link", "problem=${analyzer.linkProblem} failure=$failure")
         assertFalse("nothing keeps running", analyzer.isRunning)
         assertEquals("no house was added", housesBefore, preview.scenes.size)
         if (failure != null) {
             // The link's problem, in words, with no retry that cannot succeed (cycle 3, C3-02).
-            assertTrue("the publisher is refused as the link's problem: $failure", failure is AnalyzerFailure.UnsupportedPublisher)
+            assertTrue("the address is refused as unsafe: $failure", failure is AnalyzerFailure.UnsafeUrl || failure is AnalyzerFailure.InvalidUrl)
             assertEquals("no retry is offered for a link that cannot succeed", RetryAction.NONE, (analyzer.state as AnalysisState.Failed).retry)
             evidence.awaitNode(hasText(AnalyzerMessages.describe(failure)))
         }
         // The form is open again for another link (cycle 3, C3-01): the job has ended, and the screen knows it.
         compose.onNode(hasSetTextAction()).assertIsEnabled()
         compose.onNode(hasText(evidence.string(R.string.analyzer_analyze)) and hasClickAction()).assertIsEnabled()
-        evidence.capture("04-unsupported-link", "problem" to problem)
+        evidence.capture("04-unsafe-link", "problem" to problem)
+        // Back returns to the house.
+        returnToHouse(preview, "D back on the house", replacing = d)
         evidence.fact("result D", "PASS")
     }
 

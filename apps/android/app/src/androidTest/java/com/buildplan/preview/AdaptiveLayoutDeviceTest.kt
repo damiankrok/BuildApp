@@ -27,11 +27,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * The same product on its side (INTEGRATION-003C, audit cycle 2): the phone
- * turned to landscape, where the screen is wide and short. Dom, 3D with the
- * time machine and Etapy are captured as the owner would see them, and the
- * rotation itself must not cost the house: after the activity is recreated
- * the 3D draws again with exactly one engine and the same construction state.
+ * The same product on its side (INTEGRATION-004A): the phone turned to
+ * landscape, where the screen is wide and short. The house with the time
+ * machine, an element's details as a side panel, and the stage sheet are
+ * captured as the owner would see them, and the rotation itself must not
+ * cost the house: after the activity is recreated the 3D draws again with
+ * exactly one engine and the same construction state.
  *
  * Progress here is test-only: recorded through the app's own edit calls on a
  * clean store, never shipped.
@@ -63,6 +64,7 @@ class AdaptiveLayoutDeviceTest {
         val preview = evidence.preview(scenario)
         val progress = evidence.progress(scenario)
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { progress.view != null && progress.sketch != null }
+        val upright = evidence.awaitRenderer(preview, "cold start")
 
         // Test-only progress through the app's own edits: stages 1-7 done, Dach current at 40 %.
         for (key in DONE) assertEquals(EditOutcome.Saved, progress.markDone(stageId(progress, key)))
@@ -70,17 +72,15 @@ class AdaptiveLayoutDeviceTest {
 
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE }
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { evidence.app.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE }
-        evidence.awaitNode(hasText(evidence.string(R.string.progress_metric_label)))
-        val dom = evidence.capture("01-dom")
-        evidence.fact("screen", "${dom.width}x${dom.height}")
-        assertTrue("the capture is landscape", dom.width > dom.height)
-
-        compose.onNode(evidence.tab(evidence.string(R.string.place_model))).performClick()
-        val now = evidence.awaitRenderer(preview, "3D in landscape")
+        val now = evidence.awaitRenderer(preview, "3D in landscape", replacing = upright)
         val session = checkNotNull(progress.session)
         val actual = session.projection.visibleIds(ConstructionView.Actual(checkNotNull(session.state)))
+        runCatching { compose.waitUntil(5_000) { preview.viewer.construction == actual } }
         assertEquals("Teraz in landscape is the saved state", actual, preview.viewer.construction)
-        evidence.assertHouseInsideFreeArea(preview, evidence.capture("02-3d-now", "visibleObjects" to now.visibleObjects), "landscape 3D now")
+        val shot = evidence.capture("01-house", "visibleObjects" to now.visibleObjects)
+        evidence.fact("screen", "${shot.width}x${shot.height}")
+        assertTrue("the capture is landscape", shot.width > shot.height)
+        evidence.assertHouseInsideFreeArea(preview, shot, "landscape house now")
 
         // Cycle 1, C1-02: on the short screen the timeline stops beside the rail — "Dopasuj" is not under it.
         val fit = compose.onNode(hasText(evidence.string(R.string.tool_fit)) and hasClickAction()).fetchSemanticsNode().boundsInRoot
@@ -94,7 +94,7 @@ class AdaptiveLayoutDeviceTest {
         compose.waitUntil(5_000) { progress.session?.cursor == TimelineCursor.Stage(ConstructionStageKey.WALLS) }
         evidence.awaitNode(hasText(evidence.string(R.string.timeline_preview_of, evidence.string(R.string.stage_walls))))
         evidence.settleFrames(now)
-        evidence.capture("03-3d-history-walls")
+        evidence.capture("02-history-walls")
         progress.returnToNow()
 
         // Cycle 2, C2-02: the details on a phone on its side are a panel at the end edge, beside the
@@ -105,14 +105,22 @@ class AdaptiveLayoutDeviceTest {
         compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         val panel = compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).fetchSemanticsNode().boundsInRoot
-        compose.waitUntil(5_000) { preview.contentInsets.right > dom.width / 4 }
+        compose.waitUntil(5_000) { preview.contentInsets.right > shot.width / 4 }
         evidence.settleFrames(now)
-        val details = evidence.capture("04-3d-details-panel", "selected" to wall)
+        val details = evidence.capture("03-details-panel", "selected" to wall)
         evidence.fact("details panel close button", panel.toString())
         assertTrue("the panel stands at the end edge: its close button is in the right half", panel.left > details.width / 2f)
         assertTrue("the frame gives the house the space left of the panel (r=${preview.contentInsets.right})", preview.contentInsets.right > details.width / 4)
         compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).performClick()
         compose.onNode(hasContentDescription(evidence.string(R.string.selection_clear))).performClick()
+
+        // The stage sheet on the short screen: the header and the list, scrolling, the house behind.
+        // The rail's header names the stage in progress and is the way to the stage sheet.
+        compose.onNode(hasText(evidence.string(R.string.stage_roof)) and hasClickAction()).performClick()
+        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
+        evidence.capture("04-stages-sheet")
+        Espresso.pressBack()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
 
         // Turning back recreates the activity: one engine, the same state, drawn again.
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT }
@@ -123,12 +131,7 @@ class AdaptiveLayoutDeviceTest {
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE }
         compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { evidence.app.resources.configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE }
         evidence.awaitRenderer(preview, "3D after turning again", replacing = portrait)
-
-        Espresso.pressBack()
-        compose.waitUntil(Evidence.RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
-        compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
-        evidence.capture("05-etapy")
+        evidence.capture("05-house-again")
         evidence.fact("result", "PASS")
     }
 

@@ -6,11 +6,11 @@ import android.graphics.Rect
 import android.os.ParcelFileDescriptor
 import android.os.SystemClock
 import android.provider.Settings
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ActivityScenario
@@ -57,9 +57,22 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         return checkNotNull(model)
     }
 
-    /** A place in the bottom bar: a tab with this label (a button on Dom may carry the same word). */
-    fun tab(label: String): SemanticsMatcher =
-        hasText(label) and hasClickAction() and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
+    /** The house menu button in the workspace's top context. */
+    fun menuButton(): SemanticsMatcher = hasContentDescription(string(R.string.workspace_menu))
+
+    /** Open the house menu and choose a row by its label. */
+    fun openMenu(compose: androidx.compose.ui.test.junit4.ComposeTestRule, label: String) {
+        compose.onNode(menuButton()).performClick()
+        awaitNode(hasText(label) and hasClickAction())
+        compose.onAllNodes(hasText(label) and hasClickAction())[0].performClick()
+    }
+
+    /** Leave the house for the analyzer task through the menu: the viewport and its engine go away. */
+    fun openAnalyzerTask(compose: androidx.compose.ui.test.junit4.ComposeTestRule, preview: PreviewViewModel) {
+        openMenu(compose, string(R.string.house_add_action))
+        awaitNode(hasText(string(R.string.analyzer_title)))
+        compose.waitUntil(RENDER_TIMEOUT_MS) { preview.renderDiagnostics == null }
+    }
 
     fun string(id: Int, vararg args: Any): String = app.getString(id, *args)
 

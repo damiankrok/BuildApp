@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// INTEGRATION-003C: the UI evidence gate fails when a required screenshot is
-// missing or is not a real picture of the screen.
+// INTEGRATION-003C / 004A: the UI evidence gate fails when a required screenshot
+// is missing or is not a real picture of the screen.
 //
 //   node validate-ui-evidence.mjs --dir <ui-evidence> --size 1080x2400 \
-//        --require default:journey font-1.3:journey landscape:adaptive slice-marcowki:slice --out validation.json
+//        --require default:journey font-1.3:journey landscape:adaptive no-house:nohouse slice-marcowki:slice --out validation.json
 //
 // For every required capture (and every capture a manifest lists) the PNG
 // must exist, be non-empty, decode (signature, chunk CRCs, IHDR, the inflated
@@ -15,20 +15,21 @@ import { inflateSync } from 'node:zlib'
 
 const REQUIRED = {
   journey: [
-    '01-dom-unset', '02-dom-to-3d-unset', '03-etapy-unset', '04-etapy-current-editing', '05-dom-progress',
-    '06-3d-now', '07-3d-history-foundations', '08-3d-history-walls', '09-3d-history-roof', '10-3d-history-joinery',
-    '11-3d-back-to-now', '12-3d-inspector', '13-3d-timeline-expanded', '14-3d-second-entry', '15-analyzer',
-    '16-koszty', '17-dokumenty', '18-back-to-dom',
+    '01-house-unset', '02-stages-sheet-unset', '03-stages-sheet-editing', '04-house-now', '05-history-foundations',
+    '06-history-walls', '07-history-roof', '08-history-joinery', '09-back-to-now', '10-layers-pane', '11-inspector',
+    '12-timeline-expanded', '13-menu', '14-source', '15-analyzer-task', '16-house-after-task',
   ],
   slice: [
-    '01-analyzing', '02-3d-after-analysis', '03-dom-result', '04-analyzer-result', '05-etapy-current',
-    '06-3d-now', '07-3d-history-walls', '08-3d-history-pre-joinery', '09-3d-history-joinery',
-    '10-3d-clay-history-walls', '11-3d-inspector', '12-3d-again',
+    '01-analyzing', '02-analyzer-result', '03-house-after-analysis', '04-source-sheet', '05-stages-sheet',
+    '06-house-now', '07-history-walls', '08-history-pre-joinery', '09-history-joinery',
+    '10-clay-history-walls', '11-inspector', '12-house-again',
   ],
-  adaptive: ['01-dom', '02-3d-now', '03-3d-history-walls', '04-3d-details-panel', '05-etapy'],
-  lifecycle: ['01-3d-after-resume', '02-dom-after-restart'],
-  unhappy: ['01-corrupt-recovered', '02-refusal-said', '03-stage-without-geometry', '04-unsupported-link'],
+  generic: ['01-checking-page', '02-outcome'],
+  adaptive: ['01-house', '02-history-walls', '03-details-panel', '04-stages-sheet', '05-house-again'],
+  lifecycle: ['01-3d-after-resume', '02-house-after-restart'],
+  unhappy: ['01-corrupt-recovered', '02-refusal-said', '03-stage-without-geometry', '04-unsafe-link'],
   collisions: ['01-roof-off-history', '02-ground-only-history', '03-selection-history-inspector', '04-line-history', '05-element-from-list'],
+  nohouse: ['01-add-link', '02-analyzer-task'],
 }
 
 const args = process.argv.slice(2)

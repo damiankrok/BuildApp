@@ -1,12 +1,16 @@
 name: UI evidence
 
-# INTEGRATION-003C. The product's screens on an emulator the owner's way:
-# the journey through Dom, 3D, Etapy, the construction time machine, the
-# inspector, the analyzer page, Koszty and Dokumenty at font scale 1.0 and
-# 1.3 (ProductFlowDeviceTest), and the Marcówki and Rarytasy links analysed
-# on the phone and carried through 3D, progress and history
-# (VerticalSliceDeviceTest). Every required screenshot must exist, decode and
-# have the screen's size, or the gate fails (tools/validate-ui-evidence.mjs).
+# INTEGRATION-003C, house-first since 004A. The product's screens on an
+# emulator the owner's way: the journey on the house — the stage sheet, the
+# construction time machine, the layers pane, the inspector, the menu, the
+# source sheet, the analyzer task and the return to the same house — at font
+# scale 1.0 and 1.3 (ProductFlowDeviceTest), landscape, lifecycle, unhappy
+# paths, collisions, a phone with no house (NoHouseDeviceTest), the Marcówki,
+# Rarytasy and Kosaćce links analysed on the phone and carried through the
+# house, progress and history (VerticalSliceDeviceTest), and the alternate
+# Marcówki publisher read on its evidence (GenericSourceDeviceTest). Every
+# required screenshot must exist, decode and have the screen's size, or the
+# gate fails (tools/validate-ui-evidence.mjs).
 #
 # Dispatched alone for a quick look at the screens, and called by BuildApp CI,
 # where it gates the owner's APK.
@@ -14,7 +18,7 @@ on:
   workflow_dispatch:
     inputs:
       slices:
-        description: "Also analyse the Marcówki and Rarytasy links through the app"
+        description: "Also analyse the Marcówki, Rarytasy, Kosaćce and alternate-publisher links through the app"
         type: boolean
         default: true
   workflow_call:
@@ -34,6 +38,8 @@ jobs:
     env:
       MARCOWKI_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca
       SECOND_HOUSE_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14
+      THIRD_HOUSE_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f
+      GENERIC_URL: https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge
       SLICES: ${{ inputs.slices && '1' || '0' }}
     steps:
       - name: Checkout
@@ -85,7 +91,9 @@ jobs:
           {
             echo "### UI evidence gate — $(cat ui-evidence/status.txt 2>/dev/null || echo NOT_RUN)"; echo
             echo "Marcówki slice: $(cat ui-evidence/slice-marcowki-status.txt 2>/dev/null || echo NOT_RUN)"
-            echo "Rarytasy slice: $(cat ui-evidence/slice-rarytasy-status.txt 2>/dev/null || echo NOT_RUN)"; echo
+            echo "Rarytasy slice: $(cat ui-evidence/slice-rarytasy-status.txt 2>/dev/null || echo NOT_RUN)"
+            echo "Kosaćce slice: $(cat ui-evidence/slice-kosacce-status.txt 2>/dev/null || echo NOT_RUN)"
+            echo "Alternate Marcówki (generic reader): $(cat ui-evidence/generic-alternate-status.txt 2>/dev/null || echo NOT_RUN) $(grep -o '"outcome": "[^"]*"' ui-evidence/ui-evidence/generic-alternate-manifest.json 2>/dev/null || true)"; echo
             echo '```'; cat ui-evidence/device.txt 2>/dev/null; echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload the UI evidence

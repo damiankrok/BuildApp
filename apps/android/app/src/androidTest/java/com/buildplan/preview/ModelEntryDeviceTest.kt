@@ -11,6 +11,7 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
@@ -32,7 +33,6 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -40,11 +40,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * The P0 gate of INTEGRATION-003C: the 3D place must draw the house when it
- * is reached the way the owner reaches it — cold start on Dom, then a tap on
- * `3D` in the navigation bar — and again after leaving it and coming back.
- * A direct launch into 3D (the path every earlier screenshot took) is checked
- * beside it.
+ * The P0 gate of INTEGRATION-003C, kept under the house-first shell of
+ * INTEGRATION-004A: the house must be drawn when it is reached the way the
+ * owner reaches it — a cold start lands on the house workspace — and again
+ * after leaving it for the analyzer task and coming back. A launch that
+ * names the workspace by its extra (the path every earlier screenshot took)
+ * is checked beside it.
  *
  * Two questions are asked separately, because a blank viewport has two very
  * different causes:
@@ -94,32 +95,29 @@ class ModelEntryDeviceTest {
     }
 
     @Test
-    fun domThen3dThroughTheNavigationBarDrawsTheHouseAndAgainAfterBack() {
+    fun coldStartDrawsTheHouseAndAgainAfterTheAnalyzerTask() {
         val scenario = launch(extraPlace = null).also { this.scenario = it }
         val model = viewModelOf(scenario)
 
-        // Cold start lands on Dom: no viewport, no engine.
-        compose.onNode(hasText(app.getString(R.string.place_house)) and hasClickAction()).assertExists()
-        assertNull("Dom composes no viewport", model.renderDiagnostics)
-        assertEquals("no engine on Dom", 0, RenderDiagnostics.liveEngines.get())
-        captureScreen("$reportName-dom-before")
-
-        // Dom -> 3D, through the navigation bar as the owner does it.
-        compose.onNode(hasText(app.getString(R.string.place_model)) and hasClickAction()).performClick()
+        // Cold start lands on the house: the workspace is the root (INTEGRATION-004A).
         val first = awaitRenderer(model, "first entry")
-        val firstPixels = evidence(scenario, first, "$reportName-dom-to-3d-first")
+        compose.onNode(hasContentDescription(app.getString(R.string.workspace_menu))).assertExists()
+        val firstPixels = evidence(scenario, first, "$reportName-house-first")
 
-        // Back to Dom: the viewport and its engine are gone.
-        Espresso.pressBack()
+        // The analyzer task takes the screen: the viewport and its engine are gone.
+        compose.onNode(hasContentDescription(app.getString(R.string.workspace_menu))).performClick()
+        compose.waitUntil(TIMEOUT_MS) { compose.onAllNodes(hasText(app.getString(R.string.house_add_action)) and hasClickAction()).fetchSemanticsNodes().isNotEmpty() }
+        compose.onAllNodes(hasText(app.getString(R.string.house_add_action)) and hasClickAction())[0].performClick()
         compose.waitUntil(TIMEOUT_MS) { model.renderDiagnostics == null }
-        compose.onNode(hasText(app.getString(R.string.place_house)) and hasClickAction()).assertExists()
-        assertTrue("the first viewport was destroyed on back", first.destroyed)
-        assertEquals("no engine after leaving 3D", 0, RenderDiagnostics.liveEngines.get())
+        compose.onNode(hasText(app.getString(R.string.analyzer_title))).assertExists()
+        assertTrue("the first viewport was destroyed on leaving the house", first.destroyed)
+        assertEquals("no engine on the analyzer task", 0, RenderDiagnostics.liveEngines.get())
+        captureScreen("$reportName-analyzer-task")
 
-        // Dom -> 3D again.
-        compose.onNode(hasText(app.getString(R.string.place_model)) and hasClickAction()).performClick()
+        // Back returns to the same house.
+        Espresso.pressBack()
         val second = awaitRenderer(model, "second entry")
-        val secondPixels = evidence(scenario, second, "$reportName-dom-to-3d-second")
+        val secondPixels = evidence(scenario, second, "$reportName-house-again")
 
         assertDisplayed(firstPixels, "first entry")
         assertDisplayed(secondPixels, "second entry")
