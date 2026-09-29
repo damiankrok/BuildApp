@@ -75,9 +75,24 @@ try {
   const r1 = await post(JSON.stringify({ url: 'http://www.archon.pl/x' }))
   check(r1.status === 400 && r1.json.error?.code === 'INVALID_URL', 'http:// is refused (400 INVALID_URL)')
   const r2 = await post(JSON.stringify({ url: 'https://169.254.169.254/latest/meta-data' }))
-  check(r2.status === 400 && r2.json.error?.code === 'INVALID_URL', 'an address literal is refused (400 INVALID_URL)')
+  check(r2.status === 400 && r2.json.error?.code === 'SOURCE_UNSAFE', 'an address literal is refused before any fetch (400 SOURCE_UNSAFE)')
+  const r2b = await post(JSON.stringify({ url: 'https://localhost/house' }))
+  check(r2b.status === 400 && r2b.json.error?.code === 'SOURCE_UNSAFE', 'localhost is refused before any fetch (400 SOURCE_UNSAFE)')
+  // INTEGRATION-004A: an unknown publisher is not refused by its hostname; the page is fetched and inspected,
+  // and a page that is not a house project ends as SOURCE_NOT_PROJECT (or SOURCE_UNREACHABLE without a network).
   const r3 = await post(JSON.stringify({ url: 'https://example.com/house' }))
-  check(r3.status === 422 && r3.json.error?.code === 'UNSUPPORTED_PUBLISHER', 'an unknown publisher is refused (422)')
+  check(r3.status === 202 && /^[0-9a-f]{32}$/.test(r3.json.jobId ?? ''), 'an unknown publisher is accepted for inspection (202)')
+  if (r3.status === 202) {
+    let job
+    const until = Date.now() + 30_000
+    while (Date.now() < until) {
+      job = (await get(`/v1/analyses/${r3.json.jobId}`)).json
+      if (['COMPLETED', 'FAILED', 'CANCELLED'].includes(job.status)) break
+      await new Promise((r) => setTimeout(r, 500))
+    }
+    const code = job?.error?.code
+    check(job?.status === 'FAILED' && ['SOURCE_NOT_PROJECT', 'SOURCE_UNREACHABLE', 'SOURCE_REFUSED'].includes(code), `the unknown page ends as a typed source failure (${job?.status} ${code ?? ''})`)
+  }
   const r4 = await post('{"url": "x"}', { 'content-type': 'text/plain' })
   check(r4.status === 415, 'a non-JSON body is refused (415)')
   const r5 = await get('/v1/analyses/0123456789abcdef0123456789abcdef')
