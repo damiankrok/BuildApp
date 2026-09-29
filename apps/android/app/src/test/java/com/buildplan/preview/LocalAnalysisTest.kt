@@ -3,6 +3,7 @@ package com.buildplan.preview
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalyzerFailure
+import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.analyzer.LocalRunReport
 import com.buildplan.preview.analyzer.local.InstalledRuntime
 import com.buildplan.preview.analyzer.local.LocalAnalysis
@@ -263,6 +264,21 @@ class LocalAnalysisTest {
         assertEquals(LocalRunReport.OUTCOME_FAILED, failed.local?.outcome)
         assertEquals("SOURCE_UNREACHABLE", failed.local?.code)
         assertEquals("FAILED", failed.status?.stages?.first()?.state)
+        assertTrue(w.scenes.list().isEmpty())
+        w.assertNothingLeft()
+    }
+
+    @Test
+    fun `a link the analyzer refuses is said as the link's problem, with no retry that cannot succeed`() {
+        val w = World()
+        w.start()
+        w.hello()
+        w.line("""{"type":"failed","code":"UNSUPPORTED_PUBLISHER","message":"no registered publisher understands this host","metrics":{"elapsedMs":40}}""")
+        w.processGone()
+        val failed = w.last as AnalysisState.Failed
+        assertEquals(AnalyzerFailure.UnsupportedPublisher("no registered publisher understands this host"), failed.failure)
+        assertEquals(RetryAction.NONE, failed.retry)
+        assertEquals("UNSUPPORTED_PUBLISHER", failed.local?.code)
         assertTrue(w.scenes.list().isEmpty())
         w.assertNothingLeft()
     }

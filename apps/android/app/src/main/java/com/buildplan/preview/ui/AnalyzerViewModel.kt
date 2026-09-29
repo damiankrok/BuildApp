@@ -185,7 +185,14 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     /** Whether a job is being submitted, polled or finished right now. */
     val isRunning: Boolean
-        get() = local.isBusy || state is AnalysisState.Submitting || state is AnalysisState.Polling || state is AnalysisState.Finishing
+        get() {
+            // `state` is read first, always: it is snapshot state, so every screen that asks is
+            // recomposed when a job ends. Read after the phone's runner (plain fields), it was skipped
+            // while a job ran, and the link form stayed locked after the job had ended (cycle 3, C3-01).
+            // The runner clears its job before it publishes the final state.
+            val s = state
+            return s is AnalysisState.Submitting || s is AnalysisState.Polling || s is AnalysisState.Finishing || local.isBusy
+        }
 
     init {
         refreshDownloads()
@@ -242,7 +249,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         localJobs.record(report)
         localRuns = localJobs.runs()
         // One line a developer (or CI) can read with `adb logcat -s BuildAppLocalAnalyzer`.
-        Log.i(LOG_TAG, "local run ${REPORT_JSON.encodeToString(report)}")
+        Log.i(LOG_TAG, "local run ${REPORT_JSON.encodeToString(if (BuildConfig.DEBUG) report else report.copy(sourceUrl = ""))}")
     }
 
     fun onLinkChange(value: String) {

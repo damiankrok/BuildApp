@@ -254,7 +254,10 @@ class LocalAnalysis(
             io {
                 val outcome: AnalysisState = when (how) {
                     is Ending.Done -> importScene(how.event)
-                    is Ending.Failed -> AnalysisState.Failed(keepDiagnostics(how), RetryAction.RESUBMIT, job.sourceUrl, job.jobId, statusOf(progress, AnalysisStages.FAILED))
+                    is Ending.Failed -> {
+                        val failure = typed(keepDiagnostics(how))
+                        AnalysisState.Failed(failure, retryFor(failure), job.sourceUrl, job.jobId, statusOf(progress, AnalysisStages.FAILED))
+                    }
                     Ending.Cancelled -> AnalysisState.Cancelled(job.jobId, job.sourceUrl, statusOf(progress, AnalysisStages.CANCELLED))
                 }
                 val removed = jobs.finish(job)
@@ -342,7 +345,26 @@ class LocalAnalysis(
         /** How long to wait for an ended process to be reported gone before cleaning up anyway. */
         const val PROCESS_GONE_WAIT_MS = 3_000L
 
+        /**
+         * The analyzer's refusals of the link itself, as the service path types them
+         * (AnalyzerClient): the owner is told what is wrong with the link, and is not
+         * offered a retry that cannot succeed.
+         */
+        fun typed(failure: AnalyzerFailure): AnalyzerFailure = when {
+            failure !is AnalyzerFailure.JobFailed -> failure
+            failure.code == "UNSUPPORTED_PUBLISHER" -> AnalyzerFailure.UnsupportedPublisher(failure.message)
+            failure.code == "INVALID_URL" -> AnalyzerFailure.InvalidUrl(failure.message)
+            else -> failure
+        }
+
+        fun retryFor(failure: AnalyzerFailure): RetryAction = when (failure) {
+            is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.InvalidUrl -> RetryAction.NONE
+            else -> RetryAction.RESUBMIT
+        }
+
         fun codeOf(failure: AnalyzerFailure): String = when (failure) {
+            is AnalyzerFailure.UnsupportedPublisher -> "UNSUPPORTED_PUBLISHER"
+            is AnalyzerFailure.InvalidUrl -> "INVALID_URL"
             is AnalyzerFailure.JobFailed -> failure.diagnosticCode
             is AnalyzerFailure.LocalRuntime -> failure.code
             is AnalyzerFailure.HashMismatch -> "HASH_MISMATCH"

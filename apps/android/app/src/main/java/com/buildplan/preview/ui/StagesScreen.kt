@@ -57,6 +57,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -176,21 +177,31 @@ private fun Header(view: ProgressView, sceneTitle: String?) {
 /** A problem with the saved record, said once, in words, where the edits are. */
 @Composable
 private fun Problems(view: ProgressView) {
-    val text = when {
-        view.summary.availability == ProgressAvailability.PREVIEW_ONLY -> stringResource(R.string.progress_preview_only_body)
-        else -> when (val p = view.problem) {
-            is ProgressProblem.RecoveredFromCorruption -> stringResource(R.string.progress_problem_corrupt)
-            is ProgressProblem.NewerSchema -> stringResource(R.string.progress_problem_newer, p.schemaVersion)
-            is ProgressProblem.SaveFailed -> stringResource(R.string.progress_problem_save_failed)
-            null -> null
-        }
-    } ?: return
-    Row(
-        Modifier.fillMaxWidth().padding(horizontal = Space.l, vertical = Space.s),
-        horizontalArrangement = Arrangement.spacedBy(Space.s),
-    ) {
+    val text = progressProblemText(view.problem)
+        ?: stringResource(R.string.progress_preview_only_body).takeIf { view.summary.availability == ProgressAvailability.PREVIEW_ONLY }
+        ?: return
+    ProblemLine(text, Modifier.padding(horizontal = Space.l, vertical = Space.s))
+}
+
+/**
+ * What is wrong with this house's saved record, in words, or null. Dom, the
+ * 3D header and Etapy say the same sentence (cycle 3, C3-04): a record that
+ * was set aside or written by a newer app is never shown as a plain "unset".
+ */
+@Composable
+internal fun progressProblemText(problem: ProgressProblem?): String? = when (problem) {
+    is ProgressProblem.RecoveredFromCorruption -> stringResource(R.string.progress_problem_corrupt)
+    is ProgressProblem.NewerSchema -> stringResource(R.string.progress_problem_newer, problem.schemaVersion)
+    is ProgressProblem.SaveFailed -> stringResource(R.string.progress_problem_save_failed)
+    null -> null
+}
+
+/** The problem sentence with its mark: never said by colour alone. */
+@Composable
+internal fun ProblemLine(text: String, modifier: Modifier = Modifier, style: TextStyle = MaterialTheme.typography.bodyMedium, maxLines: Int = Int.MAX_VALUE) {
+    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(Space.s)) {
         Icon(ShellIcons.caution, contentDescription = null, tint = Palette.Error, modifier = Modifier.size(Sizes.iconSmall))
-        Text(text, style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
+        Text(text, style = style, color = Palette.Ink, maxLines = maxLines, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -308,6 +319,12 @@ private fun TaskEditor(current: String?, progress: ProgressViewModel) {
             onValueChange = { if (it.length <= ConstructionProgressState.MAX_TEXT) text = it },
             label = { Text(stringResource(R.string.stage_task_label)) },
             placeholder = { Text(stringResource(R.string.stage_task_placeholder)) },
+            // The limit is said before it is met, not discovered by a keystroke that does nothing (C3-11).
+            supportingText = if (text.length >= ConstructionProgressState.MAX_TEXT - TASK_COUNTER_FROM) {
+                { Text(stringResource(R.string.stage_task_counter, text.length, ConstructionProgressState.MAX_TEXT)) }
+            } else {
+                null
+            },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = { if (changed) save() }),
@@ -419,3 +436,6 @@ private fun outcomeMessage(outcome: EditOutcome, view: ProgressView): String? = 
         ProgressRejection.UNKNOWN_STAGE -> stringResource(R.string.refused_unknown_stage)
     }
 }
+
+/** How many characters before the limit the task field starts counting them. */
+private const val TASK_COUNTER_FROM = 40

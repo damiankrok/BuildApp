@@ -57,8 +57,12 @@ fun Inspector(
     stage: ConstructionStageKey?,
     /** The owner's status of [stage], or null while progress is unset. */
     stageStatus: StageStatus?,
+    /** How much of [stage] the owner has recorded done, 0..1: the mark's fill. */
+    stageCompletion: Double,
     /** Whether the element stands in what the 3D shows now (a preview may hide it). */
     visibleNow: Boolean,
+    /** The previewed stage the element does not stand at yet, when that is why it is not drawn. */
+    notYetAt: String?,
     isolating: Boolean,
     maxHeight: Dp,
     /** A side panel on the end edge (a phone on its side) rather than a sheet from the bottom. */
@@ -82,10 +86,13 @@ fun Inspector(
             ),
     ) {
         val size = selected.bounds.size
-        val plan = if (selected.bounds.isEmpty) null else "${metresValue(maxOf(size.x, size.z))} × ${metres(minOf(size.x, size.z))}"
+        // Sizes are said once (cycle 3, C3-05): the source's own figures when the export gives them,
+        // else the model's extent, named as such — never both, where 2,72 m beside 2,53 m reads as a contradiction.
+        val ownerFacts = meta?.facts.orEmpty().mapNotNull { ElementWords.ownerFact(it) }
+        val sourceSizes = ownerFacts.any { it.label in ElementWords.SIZE_FACTS }
         PanelHeader(
             title = elementTitle(selected),
-            supporting = listOfNotNull(storey?.let { storeyText(it) }, plan).joinToString(" · ").ifBlank { null },
+            supporting = storey?.let { storeyText(it) },
             closeLabel = stringResource(R.string.inspector_close),
             onClose = onClose,
         )
@@ -97,15 +104,14 @@ fun Inspector(
                     .padding(horizontal = Space.l, vertical = Space.s),
                 verticalArrangement = Arrangement.spacedBy(Space.xs),
             ) {
-                ConstructionLine(stage, stageStatus, visibleNow)
+                ConstructionLine(stage, stageStatus, stageCompletion, visibleNow, notYetAt)
 
                 Group(stringResource(R.string.inspector_about))
                 ElementWords.material(meta?.materialLabel)?.let { Fact(stringResource(R.string.inspector_material), stringResource(it)) }
-                for (fact in meta?.facts.orEmpty()) {
-                    val owner = ElementWords.ownerFact(fact) ?: continue
+                for (owner in ownerFacts) {
                     Fact(stringResource(owner.label), owner.valueRes?.let { stringResource(it) } ?: owner.value.orEmpty())
                 }
-                if (!selected.bounds.isEmpty) {
+                if (!sourceSizes && !selected.bounds.isEmpty) {
                     Fact(
                         stringResource(R.string.inspector_dimensions),
                         "${metresValue(maxOf(size.x, size.z))} × ${metresValue(minOf(size.x, size.z))} × ${metres(size.y)}",
@@ -174,13 +180,14 @@ fun Inspector(
 
 /** Which stage the element belongs to, and whether it stands yet by the owner's account. */
 @Composable
-private fun ConstructionLine(stage: ConstructionStageKey?, status: StageStatus?, visibleNow: Boolean) {
+private fun ConstructionLine(stage: ConstructionStageKey?, status: StageStatus?, completion: Double, visibleNow: Boolean, notYetAt: String?) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Space.m),
         modifier = Modifier.fillMaxWidth().padding(vertical = Space.xs).semantics(mergeDescendants = true) {},
     ) {
-        StageMark(status, if (status == StageStatus.IN_PROGRESS) 0.5 else 0.0)
+        // The owner's recorded share of the stage, as on the rule and in Etapy — never a stand-in half (C3-11).
+        StageMark(status, completion)
         Column(Modifier.weight(1f)) {
             if (stage == null) {
                 Text(stringResource(R.string.inspector_stage_unmapped), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
@@ -200,7 +207,12 @@ private fun ConstructionLine(stage: ConstructionStageKey?, status: StageStatus?,
                 Text(stringResource(state), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
             }
             if (!visibleNow) {
-                Text(stringResource(R.string.inspector_hidden_in_view), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+                // Why it is not drawn, by its actual cause: the previewed stage, or the view's own layers (C3-10).
+                Text(
+                    notYetAt?.let { stringResource(R.string.inspector_not_yet_at, it) } ?: stringResource(R.string.inspector_hidden_by_view),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Palette.InkMuted,
+                )
             }
         }
     }

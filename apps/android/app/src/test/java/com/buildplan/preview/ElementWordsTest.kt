@@ -88,7 +88,16 @@ class ElementWordsTest {
     @Test
     fun everyMaterialOfTheBuiltInHouseHasAPolishWord() {
         val materials = (TestScenes.marcowki.objects + analysed.objects).mapNotNull { it.metadata?.materialLabel }.toSet()
-        for (m in materials) assertTrue("material '$m'", ElementWords.material(m) != null)
+        for (m in materials) assertTrue("material '$m'", ElementWords.material(m) != null || ElementWords.isNotAMaterial(m))
+        assertNull("an element type is never shown as a material", ElementWords.material("partition"))
+    }
+
+    @Test
+    fun aFlatRoofsZeroPitchAndOverhangAreNotFacts() {
+        assertNull(ElementWords.ownerFact(BundleFact("Pitch", "0°")))
+        assertNull(ElementWords.ownerFact(BundleFact("Overhang", "0 m")))
+        assertNull(ElementWords.ownerFact(BundleFact("Overhang", "0.00 m")))
+        assertEquals(ElementWords.OwnerFact(R.string.fact_overhang, "0,6 m"), ElementWords.ownerFact(BundleFact("Overhang", "0.6 m")))
     }
 
     @Test

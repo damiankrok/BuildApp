@@ -1,6 +1,7 @@
 package com.buildplan.preview
 
 import android.content.Intent
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollAction
@@ -18,6 +19,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.AnalyzerMessages
+import com.buildplan.preview.analyzer.RetryAction
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.progress.ConstructionStageKey
 import com.buildplan.preview.progress.ConstructionView
@@ -198,6 +200,8 @@ class ReleaseCandidateDeviceTest {
         file.parentFile?.mkdirs()
         file.writeText("{ this is not a progress record")
         val (_, preview, progress) = launch()
+        // Said on Dom too, where the owner lands, not only in Etapy (cycle 3, C3-04).
+        evidence.awaitNode(hasText(evidence.string(R.string.progress_problem_corrupt)))
         compose.onNode(evidence.tab(evidence.string(R.string.place_stages))).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.progress_problem_corrupt)))
         assertTrue("the damaged record was kept aside", file.parentFile?.listFiles()?.any { it.name != file.name } == true)
@@ -236,9 +240,14 @@ class ReleaseCandidateDeviceTest {
         assertFalse("nothing keeps running", analyzer.isRunning)
         assertEquals("no house was added", housesBefore, preview.scenes.size)
         if (failure != null) {
-            val code = (failure as? AnalyzerFailure.LocalRuntime)?.code ?: (failure as? AnalyzerFailure.JobFailed)?.code
-            assertEquals("the publisher is refused, not guessed at", "UNSUPPORTED_PUBLISHER", code)
+            // The link's problem, in words, with no retry that cannot succeed (cycle 3, C3-02).
+            assertTrue("the publisher is refused as the link's problem: $failure", failure is AnalyzerFailure.UnsupportedPublisher)
+            assertEquals("no retry is offered for a link that cannot succeed", RetryAction.NONE, (analyzer.state as AnalysisState.Failed).retry)
+            evidence.awaitNode(hasText(AnalyzerMessages.describe(failure)))
         }
+        // The form is open again for another link (cycle 3, C3-01): the job has ended, and the screen knows it.
+        compose.onNode(hasSetTextAction()).assertIsEnabled()
+        compose.onNode(hasText(evidence.string(R.string.analyzer_analyze)) and hasClickAction()).assertIsEnabled()
         evidence.capture("04-unsupported-link", "problem" to problem)
         evidence.fact("result D", "PASS")
     }
@@ -284,7 +293,8 @@ class ReleaseCandidateDeviceTest {
         assertFalse("…and it is not drawn", preview.viewer.isVisible(scene, wall))
         assertDrawnAsStated(preview, d, "E selection at Fundamenty")
         compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.inspector_hidden_in_view)), unmerged = true)
+        // The inspector names the stage the wall does not stand at yet (cycle 3, C3-10).
+        evidence.awaitNode(hasText(evidence.string(R.string.inspector_not_yet_at, evidence.string(R.string.stage_foundations))), unmerged = true)
         // The inspector takes the timeline's place: never stacked on it.
         assertTrue(
             "the timeline is away while the details are open",

@@ -290,15 +290,21 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         ) {
             if (selected != null) {
                 val stage = progress.session?.stageOf(selected.id)
-                val status = view?.let { v ->
-                    if (v.summary.unset) null else stage?.let { key -> v.stages.firstOrNull { it.stageKey == key }?.status }
+                val recorded = view?.let { v ->
+                    if (v.summary.unset) null else stage?.let { key -> v.stages.firstOrNull { it.stageKey == key } }
                 }
+                // Not drawn because the previewed stage comes before it (not because of a layer): say which stage.
+                val notYetAt = view?.previewStop
+                    ?.takeIf { model.viewer.construction?.contains(selected.id) == false }
+                    ?.let { stopNames(view.stages).getOrNull(it) }
                 Inspector(
                     selected = selected,
                     storey = storeyOf(scene, selected),
                     stage = stage,
-                    stageStatus = status,
+                    stageStatus = recorded?.status,
+                    stageCompletion = recorded?.completion ?: 0.0,
                     visibleNow = model.viewer.isVisible(scene, selected.id),
+                    notYetAt = notYetAt,
                     isolating = model.viewer.isIsolating,
                     maxHeight = if (sidePanel) maxHeight else sheetMax,
                     side = sidePanel,

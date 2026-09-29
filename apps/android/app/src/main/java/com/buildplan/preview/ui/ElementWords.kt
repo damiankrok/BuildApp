@@ -103,13 +103,29 @@ object ElementWords {
         val label = OWNER_FACTS[fact.label] ?: return null
         return when (fact.label) {
             "Usage" -> USAGE[fact.value.lowercase()]?.let { OwnerFact(label, null, it) }
+            // A flat roof's "pitch 0°" and "overhang 0 m" say nothing its name does not (cycle 3, C3-10).
+            in ZERO_IS_NOTHING -> if (MEASURE.matches(fact.value) && !isZero(fact.value)) OwnerFact(label, decimalComma(toCentimetres(fact.value))) else null
             else -> if (MEASURE.matches(fact.value)) OwnerFact(label, decimalComma(toCentimetres(fact.value))) else null
         }
     }
 
+    /** The owner facts that are sizes of the element: when the export gives them, the model's extent is not repeated. */
+    val SIZE_FACTS: Set<Int> = setOf(
+        R.string.fact_length, R.string.fact_width, R.string.fact_height, R.string.fact_thickness, R.string.fact_footprint, R.string.fact_opening_size,
+    )
+
+    private val ZERO_IS_NOTHING = setOf("Pitch", "Overhang")
+
+    private fun isZero(value: String): Boolean = Regex("""[\d.]+""").findAll(value).all { it.value.toDoubleOrNull() == 0.0 }
+
     /** The material in Polish, or null when the export's word is not one this file knows. */
     @StringRes
     fun material(label: String?): Int? = label?.let { MATERIAL[it.trim().lowercase()] }
+
+    /** Whether the export's "material" names an element, not what it is made of: never shown as a material (C3-10). */
+    fun isNotAMaterial(label: String): Boolean = label.trim().lowercase() in NOT_A_MATERIAL
+
+    private val NOT_A_MATERIAL = setOf("partition")
 
     /**
      * Lengths in metres to the centimetre, as every size in the app ("0.448 m" → "0.45 m"): the export
@@ -177,7 +193,6 @@ object ElementWords {
         "roof covering" to R.string.material_roof_covering,
         "concrete slab" to R.string.material_concrete,
         "glazing" to R.string.material_glazing,
-        "partition" to R.string.material_partition,
         "chimney" to R.string.material_chimney,
     )
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -177,13 +178,16 @@ private fun Words(
 ) {
     val entry = preview.scenes.firstOrNull { it.key == scene.key }
     val download = analyzer.downloads.firstOrNull { it.key == scene.key }
+    // The list of what the analysis left open lives only in the analyzer's latest result (the phone keeps
+    // the counts): Dom links to it only while that result is this house's (cycle 3, C3-03).
+    val resultShown = (analyzer.state as? AnalysisState.Completed)?.entry?.key == scene.key
     Identity(
         title = scene.title,
         source = entry?.source ?: SceneSourceKind.BUNDLED,
         download = download,
         houseCount = preview.scenes.size,
         onHouses = onHouses,
-        onAnalysis = onAnalyze,
+        onAnalysis = onAnalyze.takeIf { resultShown },
     )
     drawing()
     progress.view?.let { ProgressBlock(it, onOpenStages) }
@@ -231,7 +235,7 @@ private fun Identity(
     download: DownloadedSceneEntry?,
     houseCount: Int,
     onHouses: () -> Unit,
-    onAnalysis: () -> Unit,
+    onAnalysis: (() -> Unit)?,
 ) {
     Row(Modifier.fillMaxWidth().padding(top = Space.l), verticalAlignment = Alignment.CenterVertically) {
         Text(
@@ -248,6 +252,7 @@ private fun Identity(
         }
     }
     val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0)
+    val linked = limited && onAnalysis != null
     val status = when {
         source != SceneSourceKind.DOWNLOADED -> stringResource(R.string.house_status_bundled)
         limited -> stringResource(R.string.house_status_limited)
@@ -258,28 +263,27 @@ private fun Identity(
         horizontalArrangement = Arrangement.spacedBy(Space.s),
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = if (limited) Sizes.touch else 0.dp)
-            .then(if (limited) Modifier.clickable(role = Role.Button, onClick = onAnalysis) else Modifier),
+            .heightIn(min = if (linked) Sizes.touch else 0.dp)
+            .then(if (linked && onAnalysis != null) Modifier.clickable(role = Role.Button, onClick = onAnalysis) else Modifier),
     ) {
         if (limited) Icon(ShellIcons.caution, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         Column(Modifier.weight(1f)) {
             Text(status, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
             if (limited && download != null) {
+                val unresolved = pluralStringResource(R.plurals.count_unresolved, download.unresolvedCount, download.unresolvedCount)
                 Text(
-                    if (download.unresolvedCount > 0) {
-                        stringResource(
-                            R.string.house_status_limited_detail,
-                            pluralStringResource(R.plurals.count_unresolved, download.unresolvedCount, download.unresolvedCount),
-                        )
-                    } else {
-                        stringResource(R.string.house_status_warnings_detail)
+                    when {
+                        download.unresolvedCount > 0 && linked -> stringResource(R.string.house_status_limited_detail, unresolved)
+                        download.unresolvedCount > 0 -> stringResource(R.string.house_status_limited_kept, unresolved)
+                        linked -> stringResource(R.string.house_status_warnings_detail)
+                        else -> stringResource(R.string.house_status_warnings_kept)
                     },
                     style = MaterialTheme.typography.bodySmall,
                     color = Palette.InkMuted,
                 )
             }
         }
-        if (limited) Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
+        if (linked) Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
     }
 }
 
@@ -288,6 +292,8 @@ private fun Identity(
 private fun ProgressBlock(view: ProgressView, onOpenStages: () -> Unit) {
     val percent = view.summary.percent
     Column(Modifier.fillMaxWidth().padding(top = Space.l)) {
+        // A record set aside or written by a newer app is said here too, not only in Etapy (cycle 3, C3-04).
+        progressProblemText(view.problem)?.let { ProblemLine(it, Modifier.padding(bottom = Space.s)) }
         if (view.summary.unset || percent == null) UnsetProgress(view, onOpenStages) else RecordedProgress(view, percent, onOpenStages)
     }
 }
@@ -297,14 +303,20 @@ private fun ProgressBlock(view: ProgressView, onOpenStages: () -> Unit) {
 private fun UnsetProgress(view: ProgressView, onOpenStages: () -> Unit) {
     val summary = view.summary
     Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleLarge, color = Palette.Ink, modifier = Modifier.semantics { heading() })
-    Text(
-        stringResource(
-            if (summary.availability == ProgressAvailability.EDITABLE) R.string.progress_unset_body else R.string.progress_preview_only_body,
-        ),
-        style = MaterialTheme.typography.bodyMedium,
-        color = Palette.InkMuted,
-        modifier = Modifier.padding(top = Space.xs, bottom = Space.m),
-    )
+    // A newer app's record is explained by the problem line above; "no stable id" would be the wrong reason.
+    when (summary.availability) {
+        ProgressAvailability.EDITABLE -> R.string.progress_unset_body
+        ProgressAvailability.PREVIEW_ONLY -> R.string.progress_preview_only_body
+        ProgressAvailability.READ_ONLY_NEWER_SCHEMA -> null
+    }?.let {
+        Text(
+            stringResource(it),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Palette.InkMuted,
+            modifier = Modifier.padding(top = Space.xs),
+        )
+    }
+    Spacer(Modifier.height(Space.m))
     FoldingRule(view.stages, nowStop = null, previewStop = null, height = RuleDefaults.StaticHeight)
     if (summary.availability == ProgressAvailability.EDITABLE) {
         LineButton(stringResource(R.string.progress_set_action), onClick = onOpenStages, borderColor = Palette.Ink, modifier = Modifier.padding(top = Space.m))
@@ -406,6 +418,7 @@ private fun AnalysisLine(analyzer: AnalyzerViewModel, onAnalyze: () -> Unit) {
                 Modifier
                     .fillMaxWidth()
                     .padding(top = Space.l)
+                    .heightIn(min = Sizes.touch)
                     .clickable(role = Role.Button, onClick = onAnalyze)
                     .padding(vertical = Space.xs),
                 verticalArrangement = Arrangement.spacedBy(Space.xs),

@@ -313,7 +313,11 @@ class AnalyzerClientTest {
             assertTrue("$f must not dump JSON: $text", '{' !in text)
         }
         assertTrue(AnalyzerMessages.describe(AnalyzerFailure.RateLimited(90)).contains("2 min"))
-        assertTrue(AnalyzerMessages.describe(AnalyzerFailure.JobFailed("NO_DRAWINGS", "none")).contains("NO_DRAWINGS"))
+        // The cause in words; the analyzer's code is shown under "Szczegóły analizy", never in the sentence (C3-02).
+        val noDrawings = AnalyzerMessages.describe(AnalyzerFailure.JobFailed("NO_DRAWINGS", "none"))
+        assertTrue(noDrawings, noDrawings.contains("rysunków") && "NO_DRAWINGS" !in noDrawings)
+        val unreachable = AnalyzerMessages.describe(AnalyzerFailure.JobFailed("SOURCE_UNREACHABLE", "fetch failed"))
+        assertTrue("a network failure is not blamed on the drawings: $unreachable", "rysunk" !in unreachable && "połączenie" in unreachable)
         assertEquals("Ta wersja aplikacji nie ma skonfigurowanej usługi analizy.", AnalyzerMessages.describe(AnalyzerFailure.NotConfigured))
         for (f in failures) assertTrue("$f has a Polish heading", AnalyzerMessages.title(f).isNotBlank())
     }

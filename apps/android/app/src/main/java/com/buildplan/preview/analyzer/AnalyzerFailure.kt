@@ -98,8 +98,14 @@ object AnalyzerMessages {
             "Tego linku nie da się przeanalizować: ${failure.message.trimEnd('.')}. Wklej adres https strony projektu."
         is AnalyzerFailure.UnsupportedPublisher ->
             "Analiza nie czyta jeszcze projektów z tej strony. Obsługiwane są strony projektów ARCHON."
-        is AnalyzerFailure.JobFailed ->
-            "Analiza zatrzymała się (${failure.diagnosticCode}): z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
+        // The cause in words, by the analyzer's own code; the code itself stays in the details.
+        is AnalyzerFailure.JobFailed -> when (failure.code) {
+            "SOURCE_UNREACHABLE" -> "Nie udało się pobrać strony projektu. Sprawdź połączenie telefonu i spróbuj ponownie."
+            "SOURCE_REFUSED" -> "Strony projektu nie dało się bezpiecznie pobrać (na przykład prowadzi poza stronę projektu). Sprawdź link."
+            "NO_DRAWINGS" -> "Na tej stronie nie ma rysunków, które analiza potrafi odczytać."
+            "TIMEOUT" -> "Analiza trwała zbyt długo i została przerwana. Możesz spróbować ponownie."
+            else -> "Analiza zatrzymała się: z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
+        }
         is AnalyzerFailure.HashMismatch ->
             "Pobrany model nie jest tym, który opisała analiza (różni się: ${failure.what}), więc go nie zapisano."
         is AnalyzerFailure.TooLarge ->
@@ -113,7 +119,7 @@ object AnalyzerMessages {
         is AnalyzerFailure.NotConfigured ->
             "Ta wersja aplikacji nie ma skonfigurowanej usługi analizy."
         is AnalyzerFailure.LocalRuntime ->
-            "Analiza na tym telefonie zatrzymała się (${failure.code}). Nic z niej nie zapisano; możesz przeanalizować link ponownie."
+            "Analiza na tym telefonie zatrzymała się. Nic z niej nie zapisano; możesz przeanalizować link ponownie. Szczegóły są poniżej."
         is AnalyzerFailure.Http -> when (failure.status) {
             404, 410 -> "Usługa nie ma już tej analizy (mogła wygasnąć). Przeanalizuj link ponownie."
             else -> "Usługa analizy odmówiła (${failure.code ?: "HTTP ${failure.status}"}). Spróbuj ponownie później."
@@ -124,7 +130,12 @@ object AnalyzerMessages {
     fun title(failure: AnalyzerFailure): String = when (failure) {
         is AnalyzerFailure.Offline, is AnalyzerFailure.RateLimited, is AnalyzerFailure.QueueFull, is AnalyzerFailure.Http -> "Usługa analizy jest teraz niedostępna"
         is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsupportedPublisher -> "Tego linku nie da się przeanalizować"
-        is AnalyzerFailure.JobFailed, is AnalyzerFailure.LocalRuntime -> "Nie udało się zbudować modelu"
+        is AnalyzerFailure.JobFailed -> when (failure.code) {
+            "SOURCE_UNREACHABLE", "SOURCE_REFUSED" -> "Nie udało się pobrać strony projektu"
+            "NO_DRAWINGS" -> "Brak rysunków do odczytania"
+            else -> "Nie udało się zbudować modelu"
+        }
+        is AnalyzerFailure.LocalRuntime -> "Nie udało się zbudować modelu"
         is AnalyzerFailure.HashMismatch, is AnalyzerFailure.TooLarge, is AnalyzerFailure.InvalidScene,
         is AnalyzerFailure.BadResponse, is AnalyzerFailure.StorageFailed -> "Modelu nie zapisano"
         is AnalyzerFailure.NotConfigured -> "Brak usługi analizy"

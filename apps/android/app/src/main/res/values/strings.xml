@@ -9,7 +9,7 @@
     <string name="place_costs">Koszty</string>
     <string name="place_documents">Dokumenty</string>
     <string name="place_house_description">Twój dom: postęp budowy, model i źródło</string>
-    <string name="place_model_description">Model 3D domu na pełnym ekranie, z osią budowy</string>
+    <string name="place_model_description">Model 3D domu na pełnym ekranie, z historią budowy</string>
     <string name="place_stages_description">Etapy budowy i postęp</string>
     <string name="place_costs_description">Koszty budowy</string>
     <string name="place_documents_description">Dokumenty budowy</string>
@@ -39,6 +39,8 @@
     <string name="house_status_limited">Z analizy linku · gotowy z ograniczeniami</string>
     <string name="house_status_limited_detail">%1$s — zobacz, czego analiza nie rozstrzygnęła</string>
     <string name="house_status_warnings_detail">Analiza zgłosiła ostrzeżenia — zobacz szczegóły</string>
+    <string name="house_status_limited_kept">%1$s. Telefon zachowuje ich liczbę, nie listę: pełną listę pokazuje wynik analizy tuż po jej zakończeniu.</string>
+    <string name="house_status_warnings_kept">Analiza zgłosiła ostrzeżenia. Telefon zachowuje ich liczbę, nie treść.</string>
     <string name="house_drawing_description">Rysunek domu %1$s. Dotknij, aby otworzyć model 3D.</string>
     <string name="house_diagnostics_show">Dane techniczne</string>
     <string name="house_diagnostics_hide">Ukryj dane techniczne</string>
@@ -48,7 +50,7 @@
     <!-- Postęp: jeden odczyt dla Domu, 3D i Etapów -->
     <string name="progress_unset">Postęp nieustawiony</string>
     <string name="progress_unset_body">Zaznacz w Etapach, na jakim etapie jest budowa. Procent policzy się z etapów; do tego czasu 3D pokazuje cały projekt.</string>
-    <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Oś budowy nadal pokazuje dom na każdym etapie.</string>
+    <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Historia budowy nadal pokazuje dom na każdym etapie.</string>
     <string name="progress_set_action">Ustaw postęp</string>
     <string name="progress_metric_label">Postęp wg etapów</string>
     <string name="progress_done_of">Zakończone etapy: %1$d\u00A0z\u00A0%2$d</string>
@@ -77,12 +79,12 @@
     <string name="timeline_collapse">Ukryj nazwy etapów</string>
     <string name="timeline_hint_scrub">Przesuń palcem po osi, by zobaczyć dom na każdym etapie</string>
     <string name="timeline_preview_of">Podgląd: %1$s</string>
-    <string name="timeline_no_geometry">Brak osobnej geometrii 3D dla tego etapu</string>
+    <string name="timeline_no_geometry">Na tym etapie model 3D się nie zmienia</string>
     <string name="timeline_stop_position">Stan po etapie %1$d z %2$d</string>
     <string name="timeline_target">Projekt docelowy</string>
     <string name="timeline_target_detail">Cały dom z projektu, także elementy bez przypisanego etapu</string>
     <string name="timeline_target_short">Projekt</string>
-    <string name="timeline_rule_description">Oś budowy</string>
+    <string name="timeline_rule_description">Historia budowy</string>
     <string name="timeline_state_now">%1$s, teraz</string>
 
     <!-- Etapy -->
@@ -109,9 +111,10 @@
     <string name="stage_status_done">Zakończony</string>
     <string name="stage_status_in_progress_percent">W toku · %1$d%%</string>
     <string name="stage_status_not_started">Nierozpoczęty</string>
-    <string name="stage_no_geometry">Ten etap nie ma osobnej geometrii w modelu 3D: oś budowy zatrzyma się na nim, ale dom się nie zmieni.</string>
+    <string name="stage_no_geometry">Ten etap nie zmienia bryły w modelu 3D: historia budowy zatrzyma się na nim, ale dom będzie wyglądał tak samo.</string>
     <string name="stage_completion">Ukończenie etapu</string>
     <string name="stage_completion_hint">100% nie zamyka etapu — zrób to przyciskiem „Oznacz jako zakończony”.</string>
+    <string name="stage_task_counter">%1$d / %2$d znaków</string>
     <string name="stage_task_label">Teraz robimy</string>
     <string name="stage_task_placeholder">np. montaż więźby</string>
     <string name="stage_task_save">Zapisz</string>
@@ -202,7 +205,6 @@
     <string name="material_roof_covering">pokrycie dachowe</string>
     <string name="material_concrete">beton</string>
     <string name="material_glazing">szkło</string>
-    <string name="material_partition">ścianka działowa</string>
     <string name="material_chimney">obudowa komina</string>
     <string name="layer_elements_show">Wybierz element z listy (%1$d)</string>
     <string name="layer_elements_hide">Ukryj listę elementów (%1$d)</string>
@@ -288,7 +290,8 @@
     <string name="inspector_stage_progress_unset">Postęp nieustawiony</string>
     <string name="inspector_stage_unmapped">Bez przypisanego etapu</string>
     <string name="inspector_stage_unmapped_detail">Reguły etapów nie rozpoznają tego elementu, więc pokazuje się tylko w projekcie docelowym.</string>
-    <string name="inspector_hidden_in_view">Na tym etapie osi budowy element jeszcze nie stoi.</string>
+    <string name="inspector_not_yet_at">W podglądzie „%1$s” ten element jeszcze nie stoi.</string>
+    <string name="inspector_hidden_by_view">Ten element ukrywa teraz ustawienie widoku (warstwy albo pokazanie jednego elementu).</string>
     <string name="inspector_material">Materiał</string>
     <string name="inspector_provenance">Skąd to wiadomo</string>
     <string name="inspector_status">Status</string>
@@ -340,6 +343,7 @@
     <string name="analyzer_again">Analizuj ponownie</string>
     <string name="analyzer_dismiss">Zamknij</string>
     <string name="analyzer_asking">Sprawdzam postęp analizy…</string>
+    <string name="analyzer_running_note_local">Analiza na telefonie trwa kilka minut. Nie zamykaj aplikacji — ekran pozostanie włączony do jej końca.</string>
     <string name="analyzer_starting_local">Uruchamiam analizę na tym telefonie…</string>
     <string name="analyzer_queued">Czekam w kolejce do analizy</string>
     <string name="analyzer_connection_lost">Utracono połączenie — ponawiam</string>
@@ -382,7 +386,7 @@
     <string name="analyzer_copy_code_description">Kopiuj kod diagnostyczny %1$s</string>
     <string name="analyzer_result_ready">Model gotowy</string>
     <string name="analyzer_result_limited">Model gotowy z ograniczeniami</string>
-    <string name="analyzer_result_found">Odczytano: bryły %1$d · otwory %2$d · pomieszczenia %3$d</string>
+    <string name="analyzer_result_found">Odczytano: %1$s · %2$s · %3$s</string>
     <string name="analyzer_result_limited_body">Części elementów analiza nie rozstrzygnęła albo zgłosiła ostrzeżenia. Model pokazuje tylko to, co odczytano z rysunków; brakujących elementów nie dopowiada.</string>
     <string name="analyzer_unresolved">Nierozstrzygnięte (słowami analizatora)</string>
     <string name="analyzer_warnings">Ostrzeżenia (słowami analizatora)</string>
@@ -464,6 +468,24 @@
         <item quantity="few">%d ostrzeżenia</item>
         <item quantity="many">%d ostrzeżeń</item>
         <item quantity="other">%d ostrzeżenia</item>
+    </plurals>
+    <plurals name="count_masses">
+        <item quantity="one">%d bryłę</item>
+        <item quantity="few">%d bryły</item>
+        <item quantity="many">%d brył</item>
+        <item quantity="other">%d bryły</item>
+    </plurals>
+    <plurals name="count_openings">
+        <item quantity="one">%d otwór</item>
+        <item quantity="few">%d otwory</item>
+        <item quantity="many">%d otworów</item>
+        <item quantity="other">%d otworu</item>
+    </plurals>
+    <plurals name="count_rooms">
+        <item quantity="one">%d pomieszczenie</item>
+        <item quantity="few">%d pomieszczenia</item>
+        <item quantity="many">%d pomieszczeń</item>
+        <item quantity="other">%d pomieszczenia</item>
     </plurals>
     <plurals name="count_unresolved">
         <item quantity="one">%d element nierozstrzygnięty</item>

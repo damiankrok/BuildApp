@@ -51,9 +51,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.AnnotatedString
@@ -269,12 +271,23 @@ private fun LinkForm(model: AnalyzerViewModel) {
             colors = fieldColors(),
             modifier = Modifier.fillMaxWidth(),
         )
-        InkButton(
-            stringResource(R.string.analyzer_analyze),
-            onClick = start,
-            enabled = !model.isRunning && model.link.isNotBlank(),
-            modifier = Modifier.fillMaxWidth(),
-        )
+        // With a result on the screen, opening it is the one filled action; a new link is second (cycle 3, C3-09).
+        if (model.state is AnalysisState.Completed) {
+            LineButton(
+                stringResource(R.string.analyzer_analyze),
+                onClick = start,
+                enabled = !model.isRunning && model.link.isNotBlank(),
+                borderColor = Palette.Ink,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        } else {
+            InkButton(
+                stringResource(R.string.analyzer_analyze),
+                onClick = start,
+                enabled = !model.isRunning && model.link.isNotBlank(),
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
         if (model.isRunning) StatusText(stringResource(R.string.analyzer_analyze_disabled))
     }
 }
@@ -291,6 +304,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         is AnalysisState.Polling -> JobProgress(
             status = state.status,
             headline = null,
+            note = if (model.mode == AnalyzerMode.LOCAL) stringResource(R.string.analyzer_running_note_local) else null,
             connectionLost = state.connectionLost,
             lastFailure = state.lastFailure,
             cancelling = model.cancelling,
@@ -299,6 +313,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
         is AnalysisState.Finishing -> JobProgress(
             status = state.status,
             headline = stringResource(if (state.local != null) R.string.analyzer_finishing_local else R.string.analyzer_finishing_service),
+            note = null,
             connectionLost = state.connectionLost,
             lastFailure = state.lastFailure,
             cancelling = false,
@@ -320,7 +335,12 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
             )
         }
         is AnalysisState.Cancelled -> Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
-            Text(stringResource(R.string.analyzer_cancelled), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
+            Text(
+                stringResource(R.string.analyzer_cancelled),
+                style = MaterialTheme.typography.titleSmall,
+                color = Palette.Ink,
+                modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite },
+            )
             FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
                 InkButton(stringResource(R.string.analyzer_again), onClick = { model.analyze() }, enabled = model.link.isNotBlank())
                 LineButton(stringResource(R.string.analyzer_dismiss), onClick = { model.dismiss() })
@@ -333,6 +353,7 @@ private fun JobSection(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) 
 private fun JobProgress(
     status: JobStatus?,
     headline: String?,
+    note: String?,
     connectionLost: Boolean,
     lastFailure: AnalyzerFailure?,
     cancelling: Boolean,
@@ -364,6 +385,7 @@ private fun JobProgress(
             if (stage != null && stage.count > 0) stringResource(R.string.analyzer_progress_stage, percent, stage.index + 1, stage.count)
             else stringResource(R.string.analyzer_progress, percent),
         )
+        note?.let { StatusText(it) }
         if (connectionLost) {
             Column(
                 Modifier.fillMaxWidth().background(Palette.Raised, RoundedCornerShape(Radius.panel)).padding(Space.m),
@@ -436,7 +458,12 @@ private fun Failure(
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Icon(ShellIcons.caution, null, tint = Palette.Error, modifier = Modifier.size(Sizes.iconSmall))
-            Text(AnalyzerMessages.title(failure), style = MaterialTheme.typography.titleMedium, color = Palette.Ink, modifier = Modifier.semantics { heading() })
+            Text(
+                AnalyzerMessages.title(failure),
+                style = MaterialTheme.typography.titleMedium,
+                color = Palette.Ink,
+                modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite },
+            )
         }
         Text(AnalyzerMessages.describe(failure), style = MaterialTheme.typography.bodyMedium, color = Palette.Ink)
         details?.stoppedAt()?.let { DataRow(stringResource(R.string.analyzer_stopped_at), it) }
@@ -488,12 +515,20 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
                 stringResource(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready),
                 style = MaterialTheme.typography.titleMedium,
                 color = Palette.Ink,
-                modifier = Modifier.semantics { heading() },
+                // The end of a job minutes long is said as it happens, not found later (cycle 3, C3-06).
+                modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite },
             )
         }
         Text(summary.title.ifBlank { entry.title }, style = MaterialTheme.typography.bodyLarge, color = Palette.Ink)
         val c = summary.counts
-        Body(stringResource(R.string.analyzer_result_found, c.masses, c.openings, c.rooms))
+        Body(
+            stringResource(
+                R.string.analyzer_result_found,
+                pluralStringResource(R.plurals.count_masses, c.masses, c.masses),
+                pluralStringResource(R.plurals.count_openings, c.openings, c.openings),
+                pluralStringResource(R.plurals.count_rooms, c.rooms, c.rooms),
+            ),
+        )
         if (limited) {
             Body(
                 listOfNotNull(

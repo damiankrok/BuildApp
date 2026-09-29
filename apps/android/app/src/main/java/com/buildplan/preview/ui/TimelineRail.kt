@@ -103,6 +103,7 @@ fun TimelineRail(
                     } else {
                         NowHeader(
                             summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
+                            problem = progressProblemText(view.problem),
                             onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
                         )
                     }
@@ -143,9 +144,12 @@ private fun NowHeader(
     lastDone: ConstructionStageKey?,
     task: String?,
     stagePercent: Int?,
+    problem: String?,
     onSetProgress: (() -> Unit)?,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
+        // Why the record is not what the owner left, when it is not (cycle 3, C3-04); the full sentence is in Etapy.
+        problem?.let { ProblemLine(it, style = MaterialTheme.typography.bodySmall, maxLines = 3) }
         if (unset || percent == null) {
             Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleSmall, color = Palette.Ink)
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
