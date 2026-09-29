@@ -21,7 +21,7 @@ the other mode of the Analyzer screen.
 | --- | --- | --- |
 | `runLocalAnalysis` | `apps/local-analyzer/src/local.ts` | `runAnalysis` with a scratch byte cache in the job's `work/bytes`, removed when the run ends; returns the run, the four delivery files (`analysisFilesOf`, shared with the API), phase timings and memory |
 | the program | `apps/local-analyzer/src/program.ts` | one job per process: arguments, events on a pipe, cancel on a pipe, result files written atomically |
-| `main.mjs` | `apps/local-analyzer/runtime/main.mjs` | the launcher the app starts: the program with the production publishers (`localWiring` = the API's publishers, no vision provider) |
+| `main.mjs` | `apps/local-analyzer/runtime/main.mjs` | the launcher the app starts: the program with the production readers (`localWiring` = the API's: the ARCHON specialist first, the generic project-page reader last, no vision provider; INTEGRATION-004A) |
 | the bundle | `apps/local-analyzer/build.mjs` | `analyzer.mjs` (target node18), `main.mjs`, `manifest.json` (sha256 of each); written into the APK's assets at build time, never committed |
 | the runtime | `apps/android/tools/fetch-nodejs-mobile.mjs` | nodejs-mobile **18.20.4** `libnode.so` (arm64-v8a, x86_64), from the npm package that carries the official prebuilt binaries; tarball sha512 and per-file sha256 pinned; gitignored |
 | the bridge | `apps/android/app/src/main/cpp/node_bridge.cpp` | JNI → `node::Start(argc, argv)`; sets the environment, keeps argv contiguous, forwards stdout/stderr to logcat |

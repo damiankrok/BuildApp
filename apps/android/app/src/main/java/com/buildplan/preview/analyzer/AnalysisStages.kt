@@ -35,7 +35,7 @@ object AnalysisStages {
      * not know; the server stays the authority on each stage's STATE.
      */
     val DEFAULT_LABELS: Map<String, String> = mapOf(
-        "ACQUIRING_SOURCE" to "Pobieram stronę projektu i rysunki",
+        "ACQUIRING_SOURCE" to "Sprawdzam stronę projektu i pobieram rysunki",
         "CLASSIFYING_SOURCES" to "Rozpoznaję rzuty, elewacje, przekroje i wizualizacje",
         "EXTRACTING_OBSERVATIONS" to "Czytam rysunki",
         "REGISTERING_VIEWS" to "Zestawiam widoki w jednym układzie",

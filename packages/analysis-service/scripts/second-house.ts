@@ -32,7 +32,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { stableJson } from '@buildapp/source-common'
 import { serializeModel } from '@buildapp/model'
-import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache } from '@buildapp/source-package'
+import { SourcePackageSchema, archonAdapter, decodeImage, fileByteCache, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
@@ -103,11 +103,13 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const events: SolverTraceEvent[] = []
     const entries: AnalysisTrace['entries'] = []
     try {
-      const identity = identityOf(pkg, [archonAdapter])
+      const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
       const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
       write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id) })
+      writeFileSync(join(out, 'model.json'), serializeModel(r.model))
+      write('program.json', r.candidate.program)
       writeOverlays(out, r.planDiagnostics, rasterOf)
       log(`solver on the given evidence: completed, model ${r.candidate.modelHash.slice(0, 16)}`)
       return 'COMPLETED'
@@ -132,7 +134,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
   } else if (!url) throw new Error('give --url, or --package [--graph]')
   try {
     const run = await runAnalysis(pkgIn ? { kind: 'PACKAGE', pkg: pkgIn, graph: graphIn } : { kind: 'URL', url: url as string }, {
-      adapters: [archonAdapter],
+      adapters: [archonAdapter, genericProjectPageAdapter],
       cache,
       offline: process.env.OFFLINE === '1',
       // no identity override: the model is named from its package exactly as the
@@ -166,6 +168,10 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const e = error instanceof AnalysisError ? error : toAnalysisError(error)
     write('failure.json', e.failure())
     if (e.attachments?.trace) write('analysis-trace.json', e.attachments.trace)
+    // The sealed inputs a failed run had reached, so the solver can be replayed on them alone.
+    if (e.attachments?.pkg) write('source-package.json', e.attachments.pkg)
+    if (e.attachments?.graph) write('observation-graph.json', e.attachments.graph)
+    if (e.attachments?.metrics) write('metric-evidence.json', e.attachments.metrics)
     const bundle = e.attachments?.bundle ?? diagnosticsBundle({ outcome: 'FAILED', failure: e.failure(), trace: e.attachments?.trace ?? { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'FAILED', entries: [] } })
     write('diagnostics.json', bundle.diagnostics)
     if (bundle.overlay) writeFileSync(join(out, bundle.overlay.name), bundle.overlay.png)
@@ -174,6 +180,8 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       writeOverlays(out, e.attachments.plans, rasterOf)
     }
     log(`failed: ${e.code} / ${e.failure().reasonCode ?? '-'} in ${e.failure().stage ?? '?'}: ${e.message}`)
+    // The raw cause of an unexpected failure, for the developer running this script; never part of any artifact.
+    if (process.env.ANALYSIS_DEBUG && e.attachments?.cause) process.stderr.write(`cause: ${e.attachments.cause instanceof Error ? e.attachments.cause.stack : String(e.attachments.cause)}\n`)
     if (e.code === 'SOURCE_UNREACHABLE' && argv.includes('--tolerate-source-outage')) {
       log(`::warning::the publisher could not be reached (${e.message}); the analyzer was not exercised`)
       return 'SOURCE_OUTAGE'

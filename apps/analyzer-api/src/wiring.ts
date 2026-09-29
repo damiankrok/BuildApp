@@ -2,12 +2,13 @@
  * What the production service registers. The only place that names a
  * publisher; it names no project.
  */
-import { archonAdapter } from '@buildapp/source-package'
+import { archonAdapter, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { SourceAdapter } from '@buildapp/source-package'
 import { anthropicVisionReasoner } from '@buildapp/source-vision'
 import type { AnalysisWiring } from './executor.js'
 
-export const productionAdapters = (): SourceAdapter[] => [archonAdapter]
+/** Specialists first; the generic project-page reader last, so an unknown public page is inspected, not refused. */
+export const productionAdapters = (): SourceAdapter[] => [archonAdapter, genericProjectPageAdapter]
 
 /**
  * `ANALYZER_VISION=live` gives the analyzer a server-side vision provider; its

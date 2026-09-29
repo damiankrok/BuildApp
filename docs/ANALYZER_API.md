@@ -57,10 +57,11 @@ Refusals, before anything is fetched or queued:
 | status | code | when |
 |---|---|---|
 | 400 | `BAD_REQUEST` | body is not a JSON object |
-| 400 | `INVALID_URL` | not `https`, carries credentials, non-443 port, IP literal, `localhost`/`.local`/`.internal`, > 2048 chars |
+| 400 | `INVALID_URL` | not a URL, not `https`, > 2048 chars |
+| 400 | `SOURCE_UNSAFE` | not safe to fetch on a user's behalf: credentials, non-443 port, IP literal, `localhost`/`.local`/`.internal` (INTEGRATION-004A: the security fence, separate from publisher recognition) |
 | 413 | `BODY_TOO_LARGE` | body > 4 KiB |
 | 415 | `UNSUPPORTED_MEDIA_TYPE` | not `application/json` |
-| 422 | `UNSUPPORTED_PUBLISHER` | no registered publisher adapter understands the host |
+| 422 | `UNSUPPORTED_PUBLISHER` | no specialist adapter understands the host AND no generic reader is registered. Production registers the generic project-page reader (004A), so an unknown host is fetched and inspected instead: see `SOURCE_NOT_PROJECT` / `SOURCE_REQUIRES_RENDERING` below |
 | 429 | `RATE_LIMITED` | this client submitted too many analyses recently; `Retry-After` seconds |
 | 503 | `QUEUE_FULL` | the bounded queue is full; `Retry-After` seconds |
 
@@ -91,7 +92,7 @@ Refusals, before anything is fetched or queued:
 - `status` ∈ `QUEUED`, `ACQUIRING_SOURCE`, `CLASSIFYING_SOURCES`, `EXTRACTING_OBSERVATIONS`, `REGISTERING_VIEWS`, `SOLVING_TOPOLOGY`, `SOLVING_METRICS`, `BUILDING_MODEL`, `COMPILING_SCENE`, `VERIFYING`, `COMPLETED`, `FAILED`, `CANCELLED`.
 - `stages[].state` ∈ `PENDING`, `RUNNING`, `DONE`, `FAILED`, `CANCELLED`. The list always has all nine stages in pipeline order.
 - `progress` (0..1) is the position in the pipeline: it moves when a stage starts or finishes and, while reading drawings, per drawing. It never moves on a timer and never decreases. `stage` is `null` while `QUEUED` and after a terminal status.
-- On `FAILED` / `CANCELLED`: `error` is `{code, message}` with `code` ∈ `SOURCE_REFUSED`, `SOURCE_UNREACHABLE`, `UNSUPPORTED_PUBLISHER`, `NO_DRAWINGS`, `RECONSTRUCTION_FAILED`, `ANALYSIS_FAILED`, `TIMEOUT`, `CANCELLED`, `SERVICE_RESTARTED`, `INTERNAL`.
+- On `FAILED` / `CANCELLED`: `error` is `{code, message}` with `code` ∈ `SOURCE_REFUSED`, `SOURCE_UNREACHABLE`, `UNSUPPORTED_PUBLISHER`, `SOURCE_NOT_PROJECT` (the page was fetched and inspected and no house project was recognised on it), `SOURCE_REQUIRES_RENDERING` (the page's content exists only after a browser runs its scripts), `NO_DRAWINGS` (a project with no technical drawing), `SOURCE_INCOMPLETE` (a project with drawings but no floor plan or elevation), `RECONSTRUCTION_FAILED`, `ANALYSIS_FAILED`, `TIMEOUT`, `CANCELLED`, `SERVICE_RESTARTED`, `INTERNAL`.
   Since BUILDAPP-03Y2G `error` may also carry, all optional:
   - `reasonCode`: the solver's own code, e.g. `PLAN_NO_ENCLOSED_CELLS`, `PLAN_LAYOUT_REJECTED`, `MODEL_EMISSION_FAILED`, `VERIFY_REPLAY_FAILED`, or `INTERNAL_ERROR`.
   - `stage`: the stage that was running.

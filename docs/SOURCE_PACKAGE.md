@@ -91,6 +91,42 @@ naming the address that was dropped.
 Selection is **on measured pixels**: discover generously, fetch, DECODE, group,
 then choose. Choosing before measuring is choosing on a filename.
 
+## Security first, recognition second (INTEGRATION-004A)
+
+Two questions used to be answered by one function: whether an address was
+SAFE to fetch and whether a publisher adapter RECOGNISED it. A page on an
+unknown host was refused before a byte of it had been looked at, which turned
+the list of specialist adapters into an allowlist. They are answered
+separately now:
+
+- `validatePublicSourceUrlSecurity` (`security.ts`) is the no-network fence
+  — https, no credentials, the default port, a named public host — and needs
+  no publisher. `safeFetch` applies the same policy to every hop and every
+  discovered asset, with DNS resolution (`net.ts`).
+- `routeSourceAcquisition` (`router.ts`) runs AFTER the page is fetched, on
+  the page: a **specialist** that recognises the address reads it (it knows
+  the publisher's conventions and is the strongest reader of its pages); else
+  the **generic** project-page reader inspects the markup and classifies it —
+  `PROJECT_PAGE` (read it), `NOT_PROJECT` (say so), `REQUIRES_RENDERING` (the
+  content exists only after a browser runs the scripts). Specialists are
+  optimisers, not an allowlist.
+
+The generic reader (`adapters/generic/`) knows no publisher: it reads the
+title, canonical address, OpenGraph, description, JSON-LD (parsed as data),
+headings, tables, definition lists, `img` alt/title/caption, `srcset` and
+`<picture>`, the nearest heading above each picture, and links to images and
+PDFs; classifies the page from combined signal families (a house named, a
+published area, roof words, dimensions, a room schedule, a project code, plan
+/ elevation / section imagery, technical downloads, structured data — one
+weak keyword is never enough); classifies each picture by the Polish and
+English drawing vocabulary around it; drops site chrome by name and
+navigation thumbnails by structure (a picture that is a link to another page
+with no drawing word on it); follows at most four same-site links whose words
+promise drawings, one level deep, under the same policy; and reads figures,
+rooms and specification lines by the vocabulary of their labels. No script is
+executed, no browser, no remote model. Ten holdout fixtures and the security
+suite live in `test/generic.test.ts`; sealed replay is byte-identical.
+
 ## Adapters
 
 An adapter knows one publisher: which URLs are its project pages, where its

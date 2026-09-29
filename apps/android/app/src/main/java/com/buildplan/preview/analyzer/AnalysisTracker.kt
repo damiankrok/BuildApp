@@ -222,7 +222,7 @@ class AnalysisTracker(
         AnalysisState.Failed(failure, retry, state.sourceUrl, state.jobId, state.status)
 
     private fun retryAfterSubmit(failure: AnalyzerFailure): RetryAction = when (failure) {
-        is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.NotConfigured -> RetryAction.NONE
+        is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsafeUrl, is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.SourceContent, is AnalyzerFailure.NotConfigured -> RetryAction.NONE
         else -> RetryAction.RESUBMIT
     }
 

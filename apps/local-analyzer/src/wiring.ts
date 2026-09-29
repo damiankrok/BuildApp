@@ -7,7 +7,12 @@
  * APK. The deterministic analyzer runs alone and every result says
  * `DETERMINISTIC_ONLY`, with the named warning that no vision provider ran.
  */
-import { archonAdapter } from '@buildapp/source-package'
+import { archonAdapter, genericProjectPageAdapter } from '@buildapp/source-package'
 import type { LocalWiring } from './local.js'
 
-export const localWiring = (): LocalWiring => ({ adapters: [archonAdapter] })
+/**
+ * Specialists first, the generic project-page reader last (BUILDPLAN-
+ * INTEGRATION-004A): a known publisher is read by its own adapter, and an
+ * unknown public page is inspected rather than refused by its host name.
+ */
+export const localWiring = (): LocalWiring => ({ adapters: [archonAdapter, genericProjectPageAdapter] })

@@ -114,6 +114,8 @@ const PHASE_STAGE: Record<ReconstructionV2Phase, AnalysisStage> = {
 }
 
 const DRAWING_DOCUMENTS = new Set(['FLOOR_PLAN', 'ELEVATION', 'SECTION', 'SITE_PLAN', 'PERSPECTIVE_RENDER'])
+/** The documents a building is reconstructed from. A render is a picture of the house, not a drawing of it. */
+const TECHNICAL_DOCUMENTS = new Set(['FLOOR_PLAN', 'ELEVATION', 'SECTION', 'SITE_PLAN'])
 
 /** A fetch that also stops when the run is cancelled. */
 function cancellableDeps(deps: FetchDeps | undefined, signal: AbortSignal | undefined, onFetch: () => void): FetchDeps {
@@ -152,6 +154,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   }
   // What the run has so far, for a failure's diagnostics bundle.
   let pkgSoFar: SourcePackage | undefined
+  let routeKind: 'SPECIALIST' | 'GENERIC' | 'SEALED' = 'SEALED'
+  let graphSoFar: SourceObservationGraph | undefined
+  let metricsSoFar: MetricEvidenceSet | undefined
   const rasterCache = new Map<string, ReturnType<typeof decodeImage> | undefined>()
 
   try {
@@ -169,6 +174,10 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         policy: options.policy,
         offline: options.offline,
         probeResolutionCandidates: options.probeResolutionCandidates,
+        onRoute: (route) => {
+          routeKind = route.kind
+          report('ACQUIRING_SOURCE', 0.1, route.kind === 'SPECIALIST' ? `read by the ${route.adapter.id} reader` : `inspected as a project page (confidence ${route.classification.confidence})`)
+        },
         deps: cancellableDeps(options.deps, signal, () => {
           fetched += 1
           report('ACQUIRING_SOURCE', 0, `${fetched} address${fetched === 1 ? '' : 'es'} fetched`)
@@ -184,7 +193,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     {
       const failureCodes: Record<string, number> = {}
       for (const f of pkg.failures) failureCodes[`failed_${f.code}`] = (failureCodes[`failed_${f.code}`] ?? 0) + 1
-      trace.record('ACQUIRING_SOURCE', input.kind === 'URL' ? 'FETCH' : 'SEALED_PACKAGE', 'PASSED', { assets: pkg.assets.length, variants: pkg.assets.reduce((a, x) => a + x.variants.length, 0), addressesNotUsed: pkg.failures.length, ...failureCodes })
+      trace.record('ACQUIRING_SOURCE', input.kind === 'URL' ? 'FETCH' : 'SEALED_PACKAGE', 'PASSED', { route: routeKind, adapter: pkg.adapter.id, assets: pkg.assets.length, variants: pkg.assets.reduce((a, x) => a + x.variants.length, 0), addressesNotUsed: pkg.failures.length, ...failureCodes })
     }
 
     // --- CLASSIFYING_SOURCES ------------------------------------------------
@@ -195,9 +204,16 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     for (const a of pkg.assets) byDocument[a.roles.document] = (byDocument[a.roles.document] ?? 0) + 1
     const drawings = pkg.assets.filter((a) => DRAWING_DOCUMENTS.has(a.roles.document)).length
     if ((byDocument.FLOOR_PLAN ?? 0) === 0 && (byDocument.ELEVATION ?? 0) === 0) {
-      const message = drawings === 0 ? 'the page exposes no plan, elevation or section this analyzer reads' : 'the page exposes no floor plan and no elevation; a building cannot be reconstructed from the rest'
-      trace.record('CLASSIFYING_SOURCES', 'ROLES', 'FAILED', { drawings, ...byDocument }, { reasonCode: 'NO_DRAWINGS', detail: message })
-      throw new AnalysisError('NO_DRAWINGS', message, { reasonCode: (byDocument.FLOOR_PLAN ?? 0) === 0 ? 'PLAN_NOT_FOUND' : 'NO_DRAWINGS', stage: 'CLASSIFYING_SOURCES', substage: 'ROLES', diagnostics: { drawings, ...byDocument } })
+      // No technical drawing at all (renders are pictures, not drawings), or drawings but
+      // neither of the two a building is reconstructed from. The first is a page without
+      // drawings; the second is a project whose page is incomplete for this purpose, and
+      // it is said as that, not as "no drawings".
+      const technical = pkg.assets.filter((a) => TECHNICAL_DOCUMENTS.has(a.roles.document)).length
+      const incomplete = technical > 0
+      const message = incomplete ? 'the page exposes no floor plan and no elevation; a building cannot be reconstructed from the rest' : 'the page exposes no plan, elevation or section this analyzer reads'
+      const code = incomplete ? 'SOURCE_INCOMPLETE' : 'NO_DRAWINGS'
+      trace.record('CLASSIFYING_SOURCES', 'ROLES', 'FAILED', { drawings, ...byDocument }, { reasonCode: code, detail: message })
+      throw new AnalysisError(code, message, { reasonCode: 'PLAN_NOT_FOUND', stage: 'CLASSIFYING_SOURCES', substage: 'ROLES', title: incomplete ? 'The project page has no floor plan' : 'No drawings to read', diagnostics: { drawings, ...byDocument } })
     }
     trace.record('CLASSIFYING_SOURCES', 'ROLES', 'PASSED', { drawings, ...byDocument })
     report('CLASSIFYING_SOURCES', 1, `${drawings} drawing${drawings === 1 ? '' : 's'} of ${pkg.assets.length} assets`)
@@ -234,6 +250,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       visionMode = live ? 'LIVE_PROVIDER' : 'DETERMINISTIC_ONLY'
       visionProvider = live ? `${vision.provider.id}/${vision.provider.model}` : null
     }
+    graphSoFar = graph
     throwIfAborted(signal)
     const observationMs = lap()
     trace.record('EXTRACTING_OBSERVATIONS', 'OBSERVATIONS', 'PASSED', { frames: graph.coordinateFrames.length, observations: graph.observations.length, relations: graph.relations.length, vision: visionMode })
@@ -252,6 +269,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     const identity: AnalysisIdentity = { ...identityOf(pkg, options.adapters), ...options.identity }
     const raster = (frame: { variantByteHash: string }): ReturnType<typeof decodeImage> | undefined => rasterCache.get(frame.variantByteHash)
     const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, pageHash: pkg.pageHash })
+    metricsSoFar = metrics
     throwIfAborted(signal)
     const metricExtractionMs = lap()
     trace.record('EXTRACTING_OBSERVATIONS', 'METRIC_EVIDENCE', 'PASSED', {
@@ -421,7 +439,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     } catch {
       bundle = undefined
     }
-    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}) }
+    // The sealed inputs the run had reached, so a failure in the solver can be replayed
+    // on them alone (`second-house.ts --metrics`) without reading the drawings again.
+    e.attachments = { trace: finished, ...(bundle ? { bundle } : {}), ...(plans ? { plans } : {}), ...(pkgSoFar ? { pkg: pkgSoFar } : {}), ...(graphSoFar ? { graph: graphSoFar } : {}), ...(metricsSoFar ? { metrics: metricsSoFar } : {}), ...(e.code === 'ANALYSIS_FAILED' ? { cause: error } : {}) }
     throw e
   }
 }

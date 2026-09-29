@@ -208,6 +208,7 @@ class AnalyzerClient(baseUrl: String, private val transport: HttpTransport) {
             val retryAfter = response.header("Retry-After")?.trim()?.toLongOrNull()?.takeIf { it >= 0 }
             return when {
                 code == "INVALID_URL" -> AnalyzerFailure.InvalidUrl(message ?: "the service refused the address")
+                code == "SOURCE_UNSAFE" -> AnalyzerFailure.UnsafeUrl(message ?: "the service refused the address as unsafe")
                 code == "UNSUPPORTED_PUBLISHER" -> AnalyzerFailure.UnsupportedPublisher(message ?: "")
                 code == "RATE_LIMITED" || (code == null && response.status == 429) -> AnalyzerFailure.RateLimited(retryAfter)
                 code == "QUEUE_FULL" -> AnalyzerFailure.QueueFull(retryAfter)

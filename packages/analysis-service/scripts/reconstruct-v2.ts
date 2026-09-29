@@ -13,7 +13,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { stableJson } from '@buildapp/source-common'
-import { archonAdapter, fileByteCache } from '@buildapp/source-package'
+import { archonAdapter, fileByteCache, genericProjectPageAdapter } from '@buildapp/source-package'
 import { serializeModel } from '@buildapp/model'
 import { hashesOf, runAnalysis } from '@buildapp/analysis-service'
 import type { AnalysisInput, AnalysisRun } from '@buildapp/analysis-service'
@@ -53,7 +53,7 @@ export async function cli(argv: readonly string[], log: (line: string) => void =
   }
 
   const run = await runAnalysis(input, {
-    adapters: [archonAdapter],
+    adapters: [archonAdapter, genericProjectPageAdapter],
     cache: fileByteCache(cacheDir),
     identity: { slug, label, ...(modelId ? { modelId } : { modelId: `m-auto-v2-${slug}` }) },
     debug: process.env.V2_DEBUG ? (message) => process.stderr.write(`  · ${message}\n`) : undefined,

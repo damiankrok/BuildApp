@@ -2,7 +2,7 @@
   "name": "buildapp",
   "version": "0.1.0",
   "private": true,
-  "description": "BuildApp — BuildWorld semantic building editor, Building DSL and geometry compiler",
+  "description": "BuildApp \u2014 BuildWorld semantic building editor, Building DSL and geometry compiler",
   "type": "module",
   "workspaces": [
     "tests/architecture",
@@ -37,7 +37,7 @@
     "overlays": "vite-node packages/reconstruction/scripts/overlays.ts --",
     "overlays:v2": "vite-node packages/reconstruction/scripts/overlays-v2.ts --",
     "reconstruct:v2": "vite-node packages/analysis-service/scripts/reconstruct-v2.ts --",
-    "reconstruct:v2:marcowki": "vite-node packages/analysis-service/scripts/reconstruct-v2.ts -- --package stage-reports/artifacts/source-observations/marcowki-source-package.json --graph stage-reports/artifacts/source-observations/marcowki-observation-graph.json --slug marcowki --label \"Marcówki (auto v3)\" --model-id m-auto-v3-marcowki",
+    "reconstruct:v2:marcowki": "vite-node packages/analysis-service/scripts/reconstruct-v2.ts -- --package stage-reports/artifacts/source-observations/marcowki-source-package.json --graph stage-reports/artifacts/source-observations/marcowki-observation-graph.json --slug marcowki --label \"Marc\u00f3wki (auto v3)\" --model-id m-auto-v3-marcowki",
     "reconstruct:no-benchmark": "vite-node packages/reconstruction/scripts/no-benchmark.ts --",
     "audit:analyzer-v2": "vite-node packages/reconstruction/scripts/audit-v2.ts --",
     "evaluate:v2": "vite-node packages/reconstruction/scripts/evaluate-v2.ts --",
@@ -45,7 +45,8 @@
     "review:shots": "vite-node apps/web/tools/review-shots.ts --",
     "analysis:second-house": "vite-node packages/analysis-service/scripts/second-house.ts --",
     "architecture:artifacts": "vite-node packages/architecture/scripts/artifacts.ts --",
-    "architecture:android-fixtures": "vite-node packages/architecture/scripts/android-fixtures.ts"
+    "architecture:android-fixtures": "vite-node packages/architecture/scripts/android-fixtures.ts",
+    "analysis:cross-source": "vite-node packages/analysis-service/scripts/cross-source.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

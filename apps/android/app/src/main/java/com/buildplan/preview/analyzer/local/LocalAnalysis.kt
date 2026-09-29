@@ -354,17 +354,24 @@ class LocalAnalysis(
             failure !is AnalyzerFailure.JobFailed -> failure
             failure.code == "UNSUPPORTED_PUBLISHER" -> AnalyzerFailure.UnsupportedPublisher(failure.message)
             failure.code == "INVALID_URL" -> AnalyzerFailure.InvalidUrl(failure.message)
+            failure.code == "SOURCE_UNSAFE" -> AnalyzerFailure.UnsafeUrl(failure.message)
+            failure.code in SOURCE_CONTENT_CODES -> AnalyzerFailure.SourceContent(failure.code, failure.message, failure.details, failure.diagnosticsBundle)
             else -> failure
         }
 
+        /** What the page holds, once fetched and inspected (004A): retrying the same link cannot change it. */
+        val SOURCE_CONTENT_CODES: Set<String> = setOf("SOURCE_NOT_PROJECT", "SOURCE_REQUIRES_RENDERING", "NO_DRAWINGS", "SOURCE_INCOMPLETE")
+
         fun retryFor(failure: AnalyzerFailure): RetryAction = when (failure) {
-            is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.InvalidUrl -> RetryAction.NONE
+            is AnalyzerFailure.UnsupportedPublisher, is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsafeUrl, is AnalyzerFailure.SourceContent -> RetryAction.NONE
             else -> RetryAction.RESUBMIT
         }
 
         fun codeOf(failure: AnalyzerFailure): String = when (failure) {
             is AnalyzerFailure.UnsupportedPublisher -> "UNSUPPORTED_PUBLISHER"
             is AnalyzerFailure.InvalidUrl -> "INVALID_URL"
+            is AnalyzerFailure.UnsafeUrl -> "SOURCE_UNSAFE"
+            is AnalyzerFailure.SourceContent -> failure.code
             is AnalyzerFailure.JobFailed -> failure.diagnosticCode
             is AnalyzerFailure.LocalRuntime -> failure.code
             is AnalyzerFailure.HashMismatch -> "HASH_MISMATCH"

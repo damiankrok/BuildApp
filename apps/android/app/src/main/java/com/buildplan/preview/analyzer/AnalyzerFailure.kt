@@ -23,8 +23,21 @@ sealed interface AnalyzerFailure {
     /** The link was refused as an address (not https, credentials, a local host, ...). */
     data class InvalidUrl(val message: String) : AnalyzerFailure
 
-    /** No publisher the service registers understands this site. */
+    /** The link was refused as unsafe to fetch: credentials, a non-standard port, an address literal, a local or private name. */
+    data class UnsafeUrl(val message: String) : AnalyzerFailure
+
+    /** No publisher the service registers understands this site, and it registers no generic reader (never the production answer since 004A). */
     data class UnsupportedPublisher(val message: String) : AnalyzerFailure
+
+    /**
+     * The page was fetched and inspected, and what it holds is not enough for a
+     * model (INTEGRATION-004A): `SOURCE_NOT_PROJECT` (no house project on it),
+     * `SOURCE_REQUIRES_RENDERING` (its content exists only after a browser runs
+     * its scripts), `NO_DRAWINGS` (a project with no drawings), or
+     * `SOURCE_INCOMPLETE` (a project without the floor plan a model needs). Trying
+     * the same link again cannot change any of these.
+     */
+    data class SourceContent(val code: String, val message: String, val details: FailureDetails? = null, val diagnosticsBundle: String? = null) : AnalyzerFailure
 
     /**
      * The job ran and ended `FAILED`, with the analyzer's code and sentence, and
@@ -96,15 +109,25 @@ object AnalyzerMessages {
                 (failure.retryAfterSeconds?.let { " Spróbuj ponownie za ${waitText(it)}." } ?: " Spróbuj ponownie za chwilę.")
         is AnalyzerFailure.InvalidUrl ->
             "Tego linku nie da się przeanalizować: ${failure.message.trimEnd('.')}. Wklej adres https strony projektu."
+        is AnalyzerFailure.UnsafeUrl ->
+            "Tego adresu nie pobiorę: ${failure.message.trimEnd('.')}. Wklej publiczny adres https strony projektu."
         is AnalyzerFailure.UnsupportedPublisher ->
-            "Analiza nie czyta jeszcze projektów z tej strony. Obsługiwane są strony projektów ARCHON."
+            "Ta wersja analizy nie ma czytnika dla tej strony."
+        is AnalyzerFailure.SourceContent -> when (failure.code) {
+            "SOURCE_NOT_PROJECT" -> "Nie rozpoznałem na tej stronie projektu domu. Wklej link do strony jednego projektu, z rzutami i elewacjami."
+            "SOURCE_REQUIRES_RENDERING" -> "Ta strona wymaga renderowania w przeglądarce, którego analiza na telefonie jeszcze nie obsługuje."
+            "SOURCE_INCOMPLETE" -> "Znalazłem projekt, ale brakuje rzutu potrzebnego do modelu."
+            else -> "Znalazłem projekt, ale ta strona nie zawiera rysunków potrzebnych do zbudowania modelu."
+        }
         // The cause in words, by the analyzer's own code; the code itself stays in the details.
         is AnalyzerFailure.JobFailed -> when (failure.code) {
             "SOURCE_UNREACHABLE" -> "Nie udało się pobrać strony projektu. Sprawdź połączenie telefonu i spróbuj ponownie."
             "SOURCE_REFUSED" -> "Strony projektu nie dało się bezpiecznie pobrać (na przykład prowadzi poza stronę projektu). Sprawdź link."
-            "NO_DRAWINGS" -> "Na tej stronie nie ma rysunków, które analiza potrafi odczytać."
             "TIMEOUT" -> "Analiza trwała zbyt długo i została przerwana. Możesz spróbować ponownie."
-            else -> "Analiza zatrzymała się: z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
+            else -> when (failure.details?.reasonCode) {
+                "MODEL_EMISSION_FAILED" -> "Nie udało się poprawnie połączyć części ścian. Szczegóły są poniżej."
+                else -> "Analiza zatrzymała się: z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
+            }
         }
         is AnalyzerFailure.HashMismatch ->
             "Pobrany model nie jest tym, który opisała analiza (różni się: ${failure.what}), więc go nie zapisano."
@@ -129,10 +152,15 @@ object AnalyzerMessages {
     /** A short Polish heading for a failure. */
     fun title(failure: AnalyzerFailure): String = when (failure) {
         is AnalyzerFailure.Offline, is AnalyzerFailure.RateLimited, is AnalyzerFailure.QueueFull, is AnalyzerFailure.Http -> "Usługa analizy jest teraz niedostępna"
-        is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsupportedPublisher -> "Tego linku nie da się przeanalizować"
+        is AnalyzerFailure.InvalidUrl, is AnalyzerFailure.UnsafeUrl, is AnalyzerFailure.UnsupportedPublisher -> "Tego linku nie da się przeanalizować"
+        is AnalyzerFailure.SourceContent -> when (failure.code) {
+            "SOURCE_NOT_PROJECT" -> "To nie jest strona projektu domu"
+            "SOURCE_REQUIRES_RENDERING" -> "Strona wymaga przeglądarki"
+            "SOURCE_INCOMPLETE" -> "Brakuje rzutu"
+            else -> "Brak rysunków do odczytania"
+        }
         is AnalyzerFailure.JobFailed -> when (failure.code) {
             "SOURCE_UNREACHABLE", "SOURCE_REFUSED" -> "Nie udało się pobrać strony projektu"
-            "NO_DRAWINGS" -> "Brak rysunków do odczytania"
             else -> "Nie udało się zbudować modelu"
         }
         is AnalyzerFailure.LocalRuntime -> "Nie udało się zbudować modelu"
