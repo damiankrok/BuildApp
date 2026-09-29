@@ -1,13 +1,13 @@
 package com.buildplan.preview
 
 import com.buildplan.preview.presentation.FeatureEdges
-import com.buildplan.preview.presentation.HouseSketch
 import com.buildplan.preview.scene.BundleLevel
 import com.buildplan.preview.scene.BundleMesh
 import com.buildplan.preview.scene.BundleOrigin
 import com.buildplan.preview.scene.BundleScene
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneBundle
+import com.buildplan.preview.ui.HouseSketch
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

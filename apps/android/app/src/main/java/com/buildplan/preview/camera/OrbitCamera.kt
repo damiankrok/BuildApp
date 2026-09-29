@@ -242,7 +242,7 @@ class OrbitCamera(
         const val HOME_YAW = 35.0
         const val HOME_PITCH = 22.0
 
-        /** The box's corners stop at 1 / 1.1 of the free half-field: a clear gap to the chrome, and the house large. */
-        const val BOX_MARGIN = 1.1
+        /** The box's corners stop short of the free half-field's edge: a clear gap to the chrome, and the house large. */
+        const val BOX_MARGIN = 1.12
     }
 }

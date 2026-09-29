@@ -1,7 +1,9 @@
-package com.buildplan.preview.presentation
+package com.buildplan.preview.ui
 
 import com.buildplan.preview.camera.OrbitCamera
 import com.buildplan.preview.math.Vec3
+import com.buildplan.preview.presentation.FeatureEdgeSet
+import com.buildplan.preview.presentation.FeatureEdges
 import com.buildplan.preview.scene.ModelScene
 import kotlin.math.abs
 import kotlin.math.ceil

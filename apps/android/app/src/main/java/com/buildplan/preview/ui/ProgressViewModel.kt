@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.buildplan.preview.presentation.HouseSketch
 import com.buildplan.preview.progress.ConstructionStageKey
 import com.buildplan.preview.progress.ConstructionTimeline
 import com.buildplan.preview.progress.EditOutcome
