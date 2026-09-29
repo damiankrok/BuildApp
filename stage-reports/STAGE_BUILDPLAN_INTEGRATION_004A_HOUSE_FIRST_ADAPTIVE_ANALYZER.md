@@ -425,7 +425,9 @@ whose pushes run CI); each workstream reverts on its own.
 | 14 | `0feddb4` test(android): the camera the owner set is what a sheet or the task gives back | C | a nudge before the pose is recorded (home re-fits by design) |
 | 15 | `54f0c1a`, `c3261a1` docs: 004A report — cycles, CI matrix, residual debt, OWNER checklist | — | U, W, AA, AB |
 | 16 | `1b80ba8` fix(ui): solid chrome, clear landscape panes, remembered house (cycle 3) | C | H-01…H-08, P-01…P-03 and three device assertions (U) |
-| 17 | docs: 004A — device evidence, commits, APK, PROJECT_STATUS | — | V, Y, Z and the three verdicts; the commit that carries this row |
+| 17 | `a14427c` docs: 004A report — the commits; PROJECT_STATUS verdicts | — | Y and the three verdicts |
+| 18 | `f6b8a92` test(android): find the details handle by its action, wait on the stage sheet in both its states | C | run 77's three test assumptions (the "Szczegóły" caption, the sheet's heading scrolled away, back reaching the keyboard) — see V |
+| 19 | docs: 004A — device evidence and the OWNER APK | — | V, Z; the commit that carries this row |
 
 Every commit carries the session's attribution trailer; none carries a
 model identifier. Legacy is untouched (`b0e79675`, read only).
