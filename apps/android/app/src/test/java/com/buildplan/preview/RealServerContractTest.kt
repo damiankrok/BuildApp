@@ -84,6 +84,10 @@ class RealServerContractTest {
         assertEquals(sceneHeader, completed.entry.sceneSha256)
         assertEquals("Larchfield (analysis)", completed.entry.label)
         assertEquals(project, completed.entry.sourceUrl)
+        // 005A: each warning carries a severity, and only the limiting ones mark the stored result
+        assertEquals(completed.summary.warnings, completed.summary.warningDetails.map { it.message })
+        assertEquals(listOf("INFO", "LIMITING"), completed.summary.warningDetails.map { it.severity })
+        assertEquals(1, completed.entry.warningsCount)
 
         // the stored bundle is the server's scene, and the viewer opens it beside the bundled ones
         val repository = SceneRepository(BundledScenes { TestScenes.text(it) }, store)

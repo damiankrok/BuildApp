@@ -4,6 +4,7 @@ import com.buildplan.preview.AnalyzerFixtures.CONTRACT_SHORT_RESULT
 import com.buildplan.preview.AnalyzerFixtures.CONTRACT_STATUS
 import com.buildplan.preview.analyzer.AnalysisStages
 import com.buildplan.preview.analyzer.AnalysisSummary
+import com.buildplan.preview.analyzer.AnalysisWarning
 import com.buildplan.preview.analyzer.AnalyzerJson
 import com.buildplan.preview.analyzer.ErrorEnvelope
 import com.buildplan.preview.analyzer.JobStatus
@@ -198,5 +199,18 @@ class AnalyzerContractTest {
     fun `a completed job shows every stage done`() {
         val s = status(AnalyzerFixtures.status(AnalysisStages.COMPLETED, 1.0))
         assertTrue(StageChecklist.rows(s).all { it.state == StageState.DONE })
+    }
+
+    @Test
+    fun `only limiting warnings limit a result, and an older analyzer's warnings all do`() {
+        val info = AnalysisWarning("DETERMINISTIC_ONLY", "INFO", "no vision provider ran")
+        val guess = AnalysisWarning("GUESSED_ADDRESS_HTTP_404", "INFO", "2 guessed larger copies not available")
+        val lost = AnalysisWarning("SOURCE_ADDRESS_HTTP_404", "LIMITING", "1 source address not used")
+        val severe = AnalysisSummary(warnings = listOf(info, guess, lost).map { it.message }, warningDetails = listOf(info, guess, lost))
+        assertEquals(listOf("1 source address not used"), severe.limitingWarnings)
+        val calm = AnalysisSummary(warnings = listOf(info, guess).map { it.message }, warningDetails = listOf(info, guess))
+        assertTrue(calm.limitingWarnings.isEmpty())
+        val older = AnalysisSummary(warnings = listOf("no vision provider ran"))
+        assertEquals(listOf("no vision provider ran"), older.limitingWarnings)
     }
 }

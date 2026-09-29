@@ -42,6 +42,7 @@ data class DownloadedSceneEntry(
     val qualityL1: Int = 0,
     val qualityL2: Int = 0,
     val unresolvedCount: Int = 0,
+    /** The warnings that limit the result (005A: severity-aware); an entry stored earlier counted every warning. */
     val warningsCount: Int = 0,
     val visionMode: String = "",
     /** Where the analysis ran: [AnalysisOrigin.SERVICE] (downloaded) or [AnalysisOrigin.LOCAL] (on this phone). */

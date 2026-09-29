@@ -96,7 +96,7 @@ fun recordOf(summary: AnalysisSummary, jobId: String, fallbackUrl: String, fallb
     qualityL1 = summary.quality.levels.l1,
     qualityL2 = summary.quality.levels.l2,
     unresolvedCount = summary.unresolved.size,
-    warningsCount = summary.warnings.size,
+    warningsCount = summary.limitingWarnings.size,
     visionMode = summary.vision.mode,
     origin = origin,
 )

@@ -13,6 +13,7 @@
 import type { CanonicalBuildingModel } from '@buildapp/model'
 import type { MobileSceneBundle } from '@buildapp/mobile-scene'
 import type { ReconstructionCandidate } from '@buildapp/reconstruction'
+import type { AnalysisWarning } from './warnings.js'
 
 /** Whether a vision provider contributed, stated rather than implied. */
 export type VisionMode = 'DETERMINISTIC_ONLY' | 'LIVE_PROVIDER' | 'REPLAYED_GRAPH'
@@ -66,7 +67,10 @@ export type LinkAnalysisSummary = {
   }
   /** What the analyzer could not settle, named. */
   unresolved: Array<{ what: string; reason: string; status: string }>
+  /** Every warning's sentence, in `warningDetails` order: what an older client reads. */
   warnings: string[]
+  /** BUILDPLAN-ANALYZER-005A: each warning with its code and whether it limits the result (`warnings.ts`). */
+  warningDetails: AnalysisWarning[]
   vision: { mode: VisionMode; provider: string | null; attempted: number; accepted: number }
   verification: {
     replay: 'BYTE_IDENTICAL'

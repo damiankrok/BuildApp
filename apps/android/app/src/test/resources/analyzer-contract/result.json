@@ -108,6 +108,18 @@
     "no vision provider ran; every observation is from the deterministic analyzer",
     "10 of 12 source-view checks outside tolerance"
   ],
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "severity": "INFO",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer"
+    },
+    {
+      "code": "RESIDUALS_OUTSIDE_TOLERANCE",
+      "severity": "LIMITING",
+      "message": "10 of 12 source-view checks outside tolerance"
+    }
+  ],
   "vision": {
     "mode": "DETERMINISTIC_ONLY",
     "provider": null,

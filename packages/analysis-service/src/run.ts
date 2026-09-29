@@ -42,6 +42,7 @@ import { anySignal } from './signals.js'
 import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, VisionMode } from './result.js'
+import { warningsOf } from './warnings.js'
 
 export const ANALYSIS_SERVICE_VERSION = '1.1.0' as const
 
@@ -417,15 +418,15 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     for (const r of reconstruction.quality.records) levels[r.level] = (levels[r.level] ?? 0) + 1
     const outside = reconstruction.residuals.filter((r) => !r.withinTolerance).length
     const exteriorErrors = closure.findings.filter((f) => f.scope === 'EXTERIOR' && f.severity === 'ERROR').length
-    const failuresByCode = new Map<string, number>()
-    for (const f of pkg.failures) failuresByCode.set(f.code, (failuresByCode.get(f.code) ?? 0) + 1)
-
-    const warnings: string[] = []
-    if (visionMode !== 'LIVE_PROVIDER') warnings.push(visionMode === 'REPLAYED_GRAPH' ? 'the observation graph was replayed from a sealed run' : 'no vision provider ran; every observation is from the deterministic analyzer')
-    for (const [code, n] of [...failuresByCode].sort()) warnings.push(`${n} source address${n === 1 ? '' : 'es'} not used (${code.toLowerCase().replace(/_/g, ' ')})`)
-    if (outside > 0) warnings.push(`${outside} of ${reconstruction.residuals.length} source-view checks outside tolerance`)
-    if (exteriorErrors > 0) warnings.push(`${exteriorErrors} exterior joint finding${exteriorErrors === 1 ? '' : 's'} in the closure audit`)
-    if (reconstruction.violations.graph.length + reconstruction.violations.ledger.length > 0) warnings.push(`${reconstruction.violations.graph.length} feature-graph and ${reconstruction.violations.ledger.length} ledger invariant violations`)
+    const warningDetails = warningsOf({
+      visionMode,
+      failures: pkg.failures,
+      residuals: reconstruction.residuals.length,
+      residualsOutside: outside,
+      exteriorJointErrors: exteriorErrors,
+      graphViolations: reconstruction.violations.graph.length,
+      ledgerViolations: reconstruction.violations.ledger.length,
+    })
 
     const result: LinkAnalysisResult = {
       schema: 'buildapp.link-analysis-result',
@@ -469,7 +470,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       },
       quality: { levels: levels as LinkAnalysisResult['quality']['levels'], byFamily: reconstruction.quality.summary },
       unresolved: reconstruction.unresolved.map((u) => ({ what: u.what, reason: u.reason, status: u.status })),
-      warnings,
+      warnings: warningDetails.map((w) => w.message),
+      warningDetails,
       vision: { mode: visionMode, provider: visionProvider, attempted: visionAttempted, accepted: visionAccepted },
       verification: {
         replay: 'BYTE_IDENTICAL',

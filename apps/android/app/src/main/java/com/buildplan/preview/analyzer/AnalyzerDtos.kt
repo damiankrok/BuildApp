@@ -240,6 +240,8 @@ data class AnalysisSummary(
     val quality: AnalysisQuality = AnalysisQuality(),
     val unresolved: List<UnresolvedItem> = emptyList(),
     val warnings: List<String> = emptyList(),
+    /** 005A: each warning with its severity; absent from an older analyzer. */
+    val warningDetails: List<AnalysisWarning> = emptyList(),
     val vision: VisionInfo = VisionInfo(),
     val verification: VerificationInfo = VerificationInfo(),
     val analyzer: AnalyzerVersions = AnalyzerVersions(),
@@ -247,7 +249,23 @@ data class AnalysisSummary(
     val completedAt: String = "",
     val links: Map<String, String> = emptyMap(),
 ) {
+    /**
+     * The warnings that limit the result. "No vision provider ran" or "a guessed
+     * larger copy does not exist" say how the run worked, not what the house
+     * lacks. An older analyzer sent no severities, so every warning of it counts.
+     */
+    val limitingWarnings: List<String>
+        get() = if (warningDetails.isEmpty()) warnings else warningDetails.filter { it.severity != AnalysisWarning.INFO }.map { it.message }
+
     companion object {
         const val SCHEMA = "buildapp.link-analysis-result"
+    }
+}
+
+/** One warning of a finished run (005A): a code, `INFO` or `LIMITING`, and its sentence. */
+@Serializable
+data class AnalysisWarning(val code: String = "", val severity: String = "", val message: String = "") {
+    companion object {
+        const val INFO = "INFO"
     }
 }

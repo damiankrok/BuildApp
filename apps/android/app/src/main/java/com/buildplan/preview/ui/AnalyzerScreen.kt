@@ -597,7 +597,7 @@ private fun Failure(
 @Composable
 private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local: LocalRunReport?, onOpen: () -> Unit) {
     var open by rememberSaveable { mutableStateOf(false) }
-    val limited = summary.unresolved.isNotEmpty() || summary.warnings.isNotEmpty()
+    val limited = summary.unresolved.isNotEmpty() || summary.limitingWarnings.isNotEmpty()
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Icon(if (limited) ShellIcons.caution else ShellIcons.check, null, tint = Palette.Ink, modifier = Modifier.size(Sizes.iconSmall))
@@ -623,7 +623,7 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
             Body(
                 listOfNotNull(
                     summary.unresolved.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_unresolved, it, it) },
-                    summary.warnings.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_warnings, it, it) },
+                    summary.limitingWarnings.size.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_warnings, it, it) },
                 ).joinToString(" · "),
             )
             Body(stringResource(R.string.analyzer_result_limited_body))
