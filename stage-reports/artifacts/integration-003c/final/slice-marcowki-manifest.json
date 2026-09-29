@@ -1,0 +1,105 @@
+{
+    "prefix": "slice-marcowki",
+    "captures": [
+        {
+            "file": "slice-marcowki-01-analyzing.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-marcowki-02-3d-after-analysis.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "visibleObjects": "119"
+        },
+        {
+            "file": "slice-marcowki-03-dom-result.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-marcowki-04-analyzer-result.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-marcowki-05-etapy-current.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-marcowki-06-3d-now.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "objects": "88"
+        },
+        {
+            "file": "slice-marcowki-07-3d-history-walls.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#2",
+            "stage": "WALLS",
+            "objects": "75"
+        },
+        {
+            "file": "slice-marcowki-08-3d-history-pre-joinery.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "ROOF",
+            "objects": "88"
+        },
+        {
+            "file": "slice-marcowki-09-3d-history-joinery.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "JOINERY",
+            "objects": "112"
+        },
+        {
+            "file": "slice-marcowki-10-3d-clay-history-walls.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "WALLS",
+            "objects": "75"
+        },
+        {
+            "file": "slice-marcowki-11-3d-inspector.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "selected": "attached-0-iwall-0-x-0"
+        },
+        {
+            "file": "slice-marcowki-12-3d-again.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        }
+    ],
+    "facts": {
+        "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+        "analysisMs": "193796",
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "sceneContentHash": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+        "unresolved": "2",
+        "warnings": "4",
+        "limited": "true",
+        "houseId": "m-analysis-m2fa281446a8ca",
+        "objects": "119",
+        "percent": "44",
+        "objects introduced at walls / roof / joinery": "73 / 9 / 24",
+        "unplacedObjects": "0",
+        "result": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "prefix": "rc-e",
+    "captures": [
+        {
+            "file": "rc-e-01-roof-off-history.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-e-02-ground-only-history.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-e-03-selection-history-inspector.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-e-04-line-history.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-e-05-element-from-list.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        }
+    ],
+    "facts": {
+        "E roof off at Dach: drawn objects": "84 (state says 84)",
+        "E ground only at Ściany: drawn objects": "45 (state says 45)",
+        "E selection at Fundamenty: drawn objects": "1 (state says 1)",
+        "E LINE at Ściany: drawn objects": "77 (state says 77)",
+        "chosen from the list": "roof-garage",
+        "zoom by button: distance": "33.464834007581615 -> 26.771867206065295",
+        "result E": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

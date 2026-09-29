@@ -1,0 +1,48 @@
+{
+    "prefix": "landscape",
+    "captures": [
+        {
+            "file": "landscape-01-dom.png",
+            "width": 2400,
+            "height": 1080,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "landscape-02-3d-now.png",
+            "width": 2400,
+            "height": 1080,
+            "via": "uiautomation#1",
+            "visibleObjects": "91"
+        },
+        {
+            "file": "landscape-03-3d-history-walls.png",
+            "width": 2400,
+            "height": 1080,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "landscape-04-3d-details-panel.png",
+            "width": 2400,
+            "height": 1080,
+            "via": "uiautomation#1",
+            "selected": "g-front"
+        },
+        {
+            "file": "landscape-05-etapy.png",
+            "width": 2400,
+            "height": 1080,
+            "via": "uiautomation#1"
+        }
+    ],
+    "facts": {
+        "screen": "2400x1080",
+        "landscape 3D now: free area": "l=0 t=210 r=337 b=347",
+        "landscape 3D now: house pixels at the free area's left / right edge": "0 / 0",
+        "landscape 3D now: house walls' extent in the free area (width / height)": "0.18 / 0.60",
+        "rail Fit / rule / toggle bounds": "Rect.fromLTRB(2074.0, 742.0, 2242.0, 900.0) / Rect.fromLTRB(191.0, 901.0, 2001.0, 1038.0) / Rect.fromLTRB(1906.0, 744.0, 2032.0, 870.0)",
+        "details panel close button": "Rect.fromLTRB(2137.0, 95.0, 2263.0, 221.0)",
+        "result": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

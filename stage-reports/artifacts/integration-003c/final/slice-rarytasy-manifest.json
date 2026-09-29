@@ -1,0 +1,105 @@
+{
+    "prefix": "slice-rarytasy",
+    "captures": [
+        {
+            "file": "slice-rarytasy-01-analyzing.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-rarytasy-02-3d-after-analysis.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "visibleObjects": "81"
+        },
+        {
+            "file": "slice-rarytasy-03-dom-result.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-rarytasy-04-analyzer-result.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-rarytasy-05-etapy-current.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "slice-rarytasy-06-3d-now.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "objects": "55"
+        },
+        {
+            "file": "slice-rarytasy-07-3d-history-walls.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#2",
+            "stage": "WALLS",
+            "objects": "51"
+        },
+        {
+            "file": "slice-rarytasy-08-3d-history-pre-joinery.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "ROOF",
+            "objects": "55"
+        },
+        {
+            "file": "slice-rarytasy-09-3d-history-joinery.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "JOINERY",
+            "objects": "75"
+        },
+        {
+            "file": "slice-rarytasy-10-3d-clay-history-walls.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "WALLS",
+            "objects": "51"
+        },
+        {
+            "file": "slice-rarytasy-11-3d-inspector.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "selected": "main-iwall-0-x-0"
+        },
+        {
+            "file": "slice-rarytasy-12-3d-again.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        }
+    ],
+    "facts": {
+        "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+        "analysisMs": "226750",
+        "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+        "sceneContentHash": "d4e7249bb1bda4b8b5464d699e8a3000c8203995a1f17e318bf3d9280b4899b1",
+        "unresolved": "10",
+        "warnings": "5",
+        "limited": "true",
+        "houseId": "m-analysis-m84f2903cb8e14",
+        "objects": "81",
+        "percent": "44",
+        "objects introduced at walls / roof / joinery": "49 / 4 / 20",
+        "unplacedObjects": "0",
+        "result": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

@@ -1,0 +1,165 @@
+{
+    "prefix": "default",
+    "captures": [
+        {
+            "file": "default-01-dom-unset.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-02-dom-to-3d-unset.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "visibleObjects": "127"
+        },
+        {
+            "file": "default-03-etapy-unset.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-04-etapy-current-editing.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "percent": "43",
+            "task": "Montaż więźby"
+        },
+        {
+            "file": "default-05-dom-progress.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-06-3d-now.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "visibleObjects": "91",
+            "construction": "91"
+        },
+        {
+            "file": "default-07-3d-history-foundations.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "FOUNDATIONS",
+            "objects": "1"
+        },
+        {
+            "file": "default-08-3d-history-walls.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "WALLS",
+            "objects": "77"
+        },
+        {
+            "file": "default-09-3d-history-roof.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "ROOF",
+            "objects": "91"
+        },
+        {
+            "file": "default-10-3d-history-joinery.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "stage": "JOINERY",
+            "objects": "117"
+        },
+        {
+            "file": "default-11-3d-back-to-now.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-12-3d-inspector.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "selected": "roof-garage"
+        },
+        {
+            "file": "default-13-3d-timeline-expanded.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-14-3d-second-entry.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "visibleObjects": "91"
+        },
+        {
+            "file": "default-15-analyzer.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-16-koszty.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-17-dokumenty.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "default-18-back-to-dom.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        }
+    ],
+    "facts": {
+        "houseId": "marcowki-ge",
+        "reducedMotion": "true",
+        "01 Dom, progress unset: drawing box": "[42,370][1038,979]",
+        "01 Dom, progress unset: drawing segments": "501",
+        "01 Dom, progress unset: drawing ink pixels": "30635",
+        "02 3D, whole design: free area": "l=0 t=275 r=211 b=530",
+        "02 3D, whole design: house pixels at the free area's left / right edge": "0 / 0",
+        "02 3D, whole design: house walls' extent in the free area (width / height)": "0.69 / 0.31",
+        "bulk action label": "Oznacz 6 wcześniejszych etapów jako zakończone",
+        "05 Dom with progress: drawing box": "[42,370][1038,979]",
+        "05 Dom with progress: drawing segments": "501",
+        "05 Dom with progress: drawing ink pixels": "24425",
+        "06 3D now: free area": "l=0 t=275 r=211 b=473",
+        "06 3D now: house pixels at the free area's left / right edge": "0 / 0",
+        "06 3D now: house walls' extent in the free area (width / height)": "0.69 / 0.30",
+        "scrub WALLS: tap to filter ms": "108",
+        "scrub WALLS: tap to drawn frame ms": "1154",
+        "scrub ROOF: tap to filter ms": "158",
+        "scrub ROOF: tap to drawn frame ms": "936",
+        "scrub JOINERY: tap to filter ms": "92",
+        "scrub JOINERY: tap to drawn frame ms": "1481",
+        "modelUploads during scrub": "0",
+        "camera moved during scrub": "false",
+        "first entry: frames": "24",
+        "difference FOUNDATIONS -> WALLS": "28.940952373235557",
+        "difference WALLS -> ROOF": "13.69974705577894",
+        "difference ROOF -> JOINERY": "2.0174521384482973",
+        "difference now vs back-to-now": "0.43117891644616496",
+        "inspectorSelectionByTap": "true",
+        "14 3D again: free area": "l=0 t=275 r=211 b=473",
+        "14 3D again: house pixels at the free area's left / right edge": "0 / 0",
+        "14 3D again: house walls' extent in the free area (width / height)": "0.69 / 0.30",
+        "result": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

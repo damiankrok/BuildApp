@@ -1,0 +1,24 @@
+{
+    "prefix": "rc-c",
+    "captures": [
+        {
+            "file": "rc-c-01-3d-after-resume.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#2"
+        },
+        {
+            "file": "rc-c-02-dom-after-restart.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "percent": "43"
+        }
+    ],
+    "facts": {
+        "C first/second/recreated frames": "21 / 50 / 22",
+        "result C": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}

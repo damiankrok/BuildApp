@@ -1,0 +1,550 @@
+{
+  "dir": "ui-evidence/ui-evidence",
+  "size": "1080x2400",
+  "requires": [
+    "default:journey",
+    "font-1.3:journey",
+    "landscape:adaptive",
+    "rc-c:lifecycle",
+    "rc-d:unhappy",
+    "rc-e:collisions",
+    "slice-marcowki:slice",
+    "slice-rarytasy:slice"
+  ],
+  "checked": 76,
+  "failed": 0,
+  "results": [
+    {
+      "file": "default-01-dom-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 170800
+    },
+    {
+      "file": "default-02-dom-to-3d-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 937853
+    },
+    {
+      "file": "default-03-etapy-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 217712
+    },
+    {
+      "file": "default-04-etapy-current-editing.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 176658
+    },
+    {
+      "file": "default-05-dom-progress.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 184570
+    },
+    {
+      "file": "default-06-3d-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 932748
+    },
+    {
+      "file": "default-07-3d-history-foundations.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 870142
+    },
+    {
+      "file": "default-08-3d-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 937428
+    },
+    {
+      "file": "default-09-3d-history-roof.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 923713
+    },
+    {
+      "file": "default-10-3d-history-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 924936
+    },
+    {
+      "file": "default-11-3d-back-to-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 930734
+    },
+    {
+      "file": "default-12-3d-inspector.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 677395
+    },
+    {
+      "file": "default-13-3d-timeline-expanded.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 903922
+    },
+    {
+      "file": "default-14-3d-second-entry.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 931577
+    },
+    {
+      "file": "default-15-analyzer.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 129751
+    },
+    {
+      "file": "default-16-koszty.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 106155
+    },
+    {
+      "file": "default-17-dokumenty.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 118513
+    },
+    {
+      "file": "default-18-back-to-dom.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 183625
+    },
+    {
+      "file": "font-1.3-01-dom-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 194027
+    },
+    {
+      "file": "font-1.3-02-dom-to-3d-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 939413
+    },
+    {
+      "file": "font-1.3-03-etapy-unset.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 236545
+    },
+    {
+      "file": "font-1.3-04-etapy-current-editing.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 181039
+    },
+    {
+      "file": "font-1.3-05-dom-progress.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 206552
+    },
+    {
+      "file": "font-1.3-06-3d-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 941095
+    },
+    {
+      "file": "font-1.3-07-3d-history-foundations.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 875929
+    },
+    {
+      "file": "font-1.3-08-3d-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 942428
+    },
+    {
+      "file": "font-1.3-09-3d-history-roof.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 932307
+    },
+    {
+      "file": "font-1.3-10-3d-history-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 931228
+    },
+    {
+      "file": "font-1.3-11-3d-back-to-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 941369
+    },
+    {
+      "file": "font-1.3-12-3d-inspector.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 634918
+    },
+    {
+      "file": "font-1.3-13-3d-timeline-expanded.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 898349
+    },
+    {
+      "file": "font-1.3-14-3d-second-entry.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 941560
+    },
+    {
+      "file": "font-1.3-15-analyzer.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 164167
+    },
+    {
+      "file": "font-1.3-16-koszty.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 130953
+    },
+    {
+      "file": "font-1.3-17-dokumenty.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 142962
+    },
+    {
+      "file": "font-1.3-18-back-to-dom.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 206317
+    },
+    {
+      "file": "landscape-01-dom.png",
+      "required": true,
+      "width": 2400,
+      "height": 1080,
+      "bytes": 156238
+    },
+    {
+      "file": "landscape-02-3d-now.png",
+      "required": true,
+      "width": 2400,
+      "height": 1080,
+      "bytes": 812991
+    },
+    {
+      "file": "landscape-03-3d-history-walls.png",
+      "required": true,
+      "width": 2400,
+      "height": 1080,
+      "bytes": 786752
+    },
+    {
+      "file": "landscape-04-3d-details-panel.png",
+      "required": true,
+      "width": 2400,
+      "height": 1080,
+      "bytes": 791618
+    },
+    {
+      "file": "landscape-05-etapy.png",
+      "required": true,
+      "width": 2400,
+      "height": 1080,
+      "bytes": 118421
+    },
+    {
+      "file": "rc-c-01-3d-after-resume.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 930210
+    },
+    {
+      "file": "rc-c-02-dom-after-restart.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 183899
+    },
+    {
+      "file": "rc-d-01-corrupt-recovered.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 236579
+    },
+    {
+      "file": "rc-d-02-refusal-said.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 198443
+    },
+    {
+      "file": "rc-d-03-stage-without-geometry.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 933676
+    },
+    {
+      "file": "rc-d-04-unsupported-link.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 190590
+    },
+    {
+      "file": "rc-e-01-roof-off-history.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 935835
+    },
+    {
+      "file": "rc-e-02-ground-only-history.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 921396
+    },
+    {
+      "file": "rc-e-03-selection-history-inspector.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 597257
+    },
+    {
+      "file": "rc-e-04-line-history.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 857645
+    },
+    {
+      "file": "rc-e-05-element-from-list.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 998487
+    },
+    {
+      "file": "slice-marcowki-01-analyzing.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 268601
+    },
+    {
+      "file": "slice-marcowki-02-3d-after-analysis.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 941647
+    },
+    {
+      "file": "slice-marcowki-03-dom-result.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 194039
+    },
+    {
+      "file": "slice-marcowki-04-analyzer-result.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 250820
+    },
+    {
+      "file": "slice-marcowki-05-etapy-current.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 192372
+    },
+    {
+      "file": "slice-marcowki-06-3d-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 929014
+    },
+    {
+      "file": "slice-marcowki-07-3d-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 924450
+    },
+    {
+      "file": "slice-marcowki-08-3d-history-pre-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 926175
+    },
+    {
+      "file": "slice-marcowki-09-3d-history-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 929553
+    },
+    {
+      "file": "slice-marcowki-10-3d-clay-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 984637
+    },
+    {
+      "file": "slice-marcowki-11-3d-inspector.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 645677
+    },
+    {
+      "file": "slice-marcowki-12-3d-again.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 928936
+    },
+    {
+      "file": "slice-rarytasy-01-analyzing.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 263690
+    },
+    {
+      "file": "slice-rarytasy-02-3d-after-analysis.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 897742
+    },
+    {
+      "file": "slice-rarytasy-03-dom-result.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 196122
+    },
+    {
+      "file": "slice-rarytasy-04-analyzer-result.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 256598
+    },
+    {
+      "file": "slice-rarytasy-05-etapy-current.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 176340
+    },
+    {
+      "file": "slice-rarytasy-06-3d-now.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 905269
+    },
+    {
+      "file": "slice-rarytasy-07-3d-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 930802
+    },
+    {
+      "file": "slice-rarytasy-08-3d-history-pre-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 904779
+    },
+    {
+      "file": "slice-rarytasy-09-3d-history-joinery.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 907662
+    },
+    {
+      "file": "slice-rarytasy-10-3d-clay-history-walls.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 957469
+    },
+    {
+      "file": "slice-rarytasy-11-3d-inspector.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 623837
+    },
+    {
+      "file": "slice-rarytasy-12-3d-again.png",
+      "required": true,
+      "width": 1080,
+      "height": 2400,
+      "bytes": 906361
+    }
+  ]
+}

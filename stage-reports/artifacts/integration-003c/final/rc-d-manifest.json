@@ -1,0 +1,37 @@
+{
+    "prefix": "rc-d",
+    "captures": [
+        {
+            "file": "rc-d-01-corrupt-recovered.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-d-02-refusal-said.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-d-03-stage-without-geometry.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1"
+        },
+        {
+            "file": "rc-d-04-unsupported-link.png",
+            "width": 1080,
+            "height": 2400,
+            "via": "uiautomation#1",
+            "problem": "Tego linku nie da się przeanalizować"
+        }
+    ],
+    "facts": {
+        "D electrical: drawn objects": "117 (state says 117)",
+        "unsupported link": "problem=null failure=UnsupportedPublisher(message=example.com is not a publisher this analyzer reads)",
+        "result D": "PASS",
+        "animatorDurationScale": "0.0",
+        "fontScale": "1.0"
+    }
+}
