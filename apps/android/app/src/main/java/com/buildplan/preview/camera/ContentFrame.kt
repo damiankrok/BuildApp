@@ -69,6 +69,22 @@ data class ContentFrame(val shiftX: Double, val shiftY: Double, val scale: Doubl
         }
 
         /**
+         * The spans a box fit may fill ([OrbitCamera.distanceToFitBox]): the free
+         * rectangle's width and height, after [of]'s uniform scale, in units of
+         * the camera's vertical tan(fov / 2). Without chrome: (width / height, 1).
+         */
+        fun fitSpan(width: Int, height: Int, insets: ContentInsets): OrbitCamera.FitSpan {
+            if (width <= 0 || height <= 0) return OrbitCamera.FitSpan.SQUARE
+            val frame = of(width, height, insets)
+            val freeW = (width - insets.left.coerceIn(0, width / 2) - insets.right.coerceIn(0, width / 2)).toDouble()
+            val freeH = (height - insets.top.coerceIn(0, height / 2) - insets.bottom.coerceIn(0, height / 2)).toDouble()
+            return OrbitCamera.FitSpan(
+                (freeW / (frame.scale * height)).coerceAtLeast(MIN_FIT_ASPECT),
+                (freeH / (frame.scale * height)).coerceAtLeast(MIN_FIT_ASPECT),
+            )
+        }
+
+        /**
          * The aspect a fit must use so that, after [of]'s uniform scale, a
          * framed sphere fills the free rectangle's narrower side — not the
          * whole viewport's. Passed to [OrbitCamera.distanceToFit]; with no

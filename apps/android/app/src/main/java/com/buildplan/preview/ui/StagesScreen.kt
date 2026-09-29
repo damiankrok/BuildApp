@@ -54,6 +54,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
@@ -317,6 +318,8 @@ private fun CompletionTrack(fraction: Float, steps: Int) {
     Canvas(Modifier.fillMaxWidth().height(8.dp)) {
         val corner = CornerRadius(Radius.tick.toPx())
         drawRoundRect(Palette.Hairline, cornerRadius = corner)
+        // The range reads as the rule's "not started": an outline, not a faint fill alone (finish review, F-06).
+        drawRoundRect(Palette.RuleEmpty, cornerRadius = corner, style = Stroke(width = 1.2.dp.toPx()))
         drawRoundRect(Palette.Rule, size = Size(size.width * fraction, size.height), cornerRadius = corner)
         val segments = steps + 1
         val stroke = 1.dp.toPx()

@@ -165,18 +165,65 @@ class OrbitCamera(
     }
 
     /**
-     * Whole house: the pose Reset returns to. [aspect] is the fit aspect of
-     * the space the house must fit in ([com.buildplan.preview.camera.ContentFrame.fitAspect]);
-     * on a portrait phone the horizontal field is the narrower one, and
-     * fitting only the vertical cut the gables off at both sides.
+     * The half-extents a fit may fill, as multiples of tan(fov / 2): the
+     * horizontal and the vertical span of the space the image lands in
+     * ([ContentFrame.fitSpan]). A square viewport with no chrome is (1, 1).
      */
-    fun home(aspect: Double = 1.0): OrbitPose = frame(
+    data class FitSpan(val horizontal: Double, val vertical: Double) {
+        companion object {
+            val SQUARE = FitSpan(1.0, 1.0)
+        }
+    }
+
+    /**
+     * The perspective distance at which the eight corners of `bounds`, seen at
+     * [yawDeg] / [pitchDeg], lie inside [span] with [margin] to spare. Tighter
+     * than [distanceToFit]: a bounding sphere over-covers a house's box by a
+     * third or more at a three-quarter view, and with a margin on top the
+     * whole house was framed at half the free space (finish review, F-01).
+     */
+    fun distanceToFitBox(bounds: Bounds, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double): Double {
+        val tanHalf = tan(Math.toRadians(fovDeg) / 2.0)
+        val th = tanHalf * max(span.horizontal, 0.05) / margin
+        val tv = tanHalf * max(span.vertical, 0.05) / margin
+        val b = basis(OrbitPose(bounds.center, Vec3.ZERO, yawDeg, pitchDeg, 1.0, Projection.PERSPECTIVE))
+        var distance = 0.0
+        for (corner in bounds.corners()) {
+            val q = corner - bounds.center
+            // Depth in front of the eye is distance + q·forward; the corner must sit inside both half-fields there.
+            val needed = max(kotlin.math.abs(q dot b.right) / th, kotlin.math.abs(q dot b.up) / tv) - (q dot b.forward)
+            distance = max(distance, needed)
+        }
+        return clamp(distance, minDistance, maxDistance)
+    }
+
+    /** Frame the whole of `bounds` by its box, in perspective, at the given angles (home, "Cały dom", "Dopasuj"). */
+    fun frameBox(pose: OrbitPose, bounds: Bounds, yawDeg: Double, pitchDeg: Double, span: FitSpan, margin: Double = BOX_MARGIN): OrbitPose {
+        if (bounds.isEmpty) return pose
+        return clamp(
+            pose.copy(
+                focus = bounds.center,
+                pan = Vec3.ZERO,
+                yawDeg = yawDeg,
+                pitchDeg = pitchDeg,
+                distance = distanceToFitBox(bounds, yawDeg, pitchDeg, span, margin),
+                projection = Projection.PERSPECTIVE,
+            ),
+        )
+    }
+
+    /**
+     * Whole house: the pose Reset returns to, fitted by the house's box to the
+     * [span] the chrome leaves free ([ContentFrame.fitSpan]) — on a portrait
+     * phone the horizontal field is the narrower one, and the house fills it
+     * up to [BOX_MARGIN], not a bounding sphere's worth less.
+     */
+    fun home(span: FitSpan = FitSpan.SQUARE): OrbitPose = frameBox(
         OrbitPose(sceneBounds.center, Vec3.ZERO, HOME_YAW, HOME_PITCH, sceneRadius * 3, Projection.PERSPECTIVE),
         sceneBounds,
         HOME_YAW,
         HOME_PITCH,
-        Projection.PERSPECTIVE,
-        aspect = aspect,
+        span,
     )
 
     /** Near/far planes that hold the whole scene however far the camera is. */
@@ -194,5 +241,8 @@ class OrbitCamera(
         /** A three-quarter view that reads as a building rather than a facade. */
         const val HOME_YAW = 35.0
         const val HOME_PITCH = 22.0
+
+        /** The box's corners stop at 1 / 1.1 of the free half-field: a clear gap to the chrome, and the house large. */
+        const val BOX_MARGIN = 1.1
     }
 }

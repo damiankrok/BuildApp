@@ -94,16 +94,18 @@ fun HouseScreen(
                 Box(Modifier.weight(1f).fillMaxHeight().padding(Space.l), contentAlignment = Alignment.Center) {
                     Drawing(screen.scene, progress, onOpenModel, drawingHeight)
                 }
-                Column(
-                    Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .fadeBelowFold(scroll, Palette.Ground)
-                        .verticalScroll(scroll)
-                        .padding(end = Space.l)
-                        .padding(bottom = Space.xl),
-                ) {
-                    Words(screen.scene, preview, analyzer, progress, onOpenModel, onAnalyze, onOpenStages, onHouses = { housesOpen = true })
+                // The words scroll; the one filled action stays in view under them (finish review, F-05).
+                Column(Modifier.weight(1f).fillMaxHeight().padding(end = Space.l)) {
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .fadeBelowFold(scroll, Palette.Ground)
+                            .verticalScroll(scroll)
+                            .padding(bottom = Space.l),
+                    ) {
+                        Words(screen.scene, preview, analyzer, progress, onOpenModel, onAnalyze, onOpenStages, onHouses = { housesOpen = true }, openInline = false)
+                    }
+                    OpenInThreeD(onOpenModel, Modifier.padding(top = Space.s, bottom = Space.m))
                 }
             }
         } else {
@@ -178,6 +180,8 @@ private fun Words(
     onAnalyze: () -> Unit,
     onOpenStages: () -> Unit,
     onHouses: () -> Unit,
+    /** Whether "Otwórz w 3D" follows the words; a two-pane layout keeps it outside the scroll instead. */
+    openInline: Boolean = true,
     drawing: @Composable () -> Unit = {},
 ) {
     val entry = preview.scenes.firstOrNull { it.key == scene.key }
@@ -196,16 +200,22 @@ private fun Words(
     drawing()
     progress.view?.let { ProgressBlock(it, onOpenStages) }
     AnalysisLine(analyzer, onAnalyze)
-    InkButton(
-        text = stringResource(R.string.house_open_3d),
-        icon = ShellIcons.cube,
-        onClick = onOpenModel,
-        modifier = Modifier.fillMaxWidth().padding(top = Space.l),
-    )
+    if (openInline) OpenInThreeD(onOpenModel, Modifier.padding(top = Space.l))
     // Etapy is one tap away already (the tab, the current stage above); adding a house is
     // a second-order way on — for a new link, not a co-equal button on every visit.
     QuietAction(stringResource(R.string.house_add_action), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(top = Space.s))
     Diagnostics(preview, onAnalyze)
+}
+
+/** The one filled action of Dom. */
+@Composable
+private fun OpenInThreeD(onOpenModel: () -> Unit, modifier: Modifier = Modifier) {
+    InkButton(
+        text = stringResource(R.string.house_open_3d),
+        icon = ShellIcons.cube,
+        onClick = onOpenModel,
+        modifier = modifier.fillMaxWidth(),
+    )
 }
 
 /** From this width, a window wider than tall shows Dom in two panes. */

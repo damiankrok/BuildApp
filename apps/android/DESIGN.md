@@ -321,6 +321,7 @@ Ink, not colour; rectangular, 48 dp tall at least.
 - **Shape:** gently squared corners (`control`, 6 dp).
 - **InkButton (primary):** filled Ink with Ground text, labelLarge, 16 dp by 8 dp padding, optional 18 dp icon; one per screen ("Otwórz w 3D"). Single line with ellipsis.
 - **LineButton (secondary):** transparent with a 1 dp outline, Ink text; the border is RuleEmpty by default and Ink when the action is the one that matters on that panel ("Wróć do teraz", "Ustaw postęp"). Up to two lines with ellipsis.
+- **Disabled:** InkButton sinks to Raised with an InkFaint label; LineButton keeps an InkFaint label on a Hairline outline — readable (above 4.5:1), never Material's faded default.
 - **QuietAction (tertiary):** no outline, no indent, InkMuted labelLarge at the text margin with an optional icon; the whole row is a 48 dp target ("Co to znaczy?", "Dodaj dom z linku").
 - **Pressed / disabled:** Material's state layer; disabled labels drop to InkFaint. No yellow state anywhere.
 
@@ -335,7 +336,7 @@ Not used. Choices are `PanelOption` rows.
 ### Inputs / Fields
 - **Style:** Material outlined field, RuleEmpty outline at rest, label in Polish ("Teraz robimy").
 - **Focus:** outline, label and cursor turn Ink.
-- **Completion slider (Etapy):** the one editable measure, so the only interactive control in yellow, drawn in the rule's grammar rather than as a stock pill: an 8 dp Hairline bar with `tick` corners, filled in Rule to the stage's share, graduated every 5 % (OnRule ticks on the fill, RuleEmpty beyond it), and a 6 × 28 dp Rule marker with `tick` corners for a thumb.
+- **Completion slider (Etapy):** the one editable measure, so the only interactive control in yellow, drawn in the rule's grammar rather than as a stock pill: an 8 dp Hairline bar with `tick` corners, filled in Rule to the stage's share, graduated every 5 % (OnRule ticks on the fill, RuleEmpty beyond it), and a 6 × 28 dp Rule marker with `tick` corners for a thumb; the range carries a 1.2 dp RuleEmpty outline, the rule's "not started".
 
 ### Navigation
 - **PlacesBar:** Raised, 1 dp Hairline top edge, five equal 64 dp cells; 22 dp outline icon over a labelSmall label. The chosen place gets a 2 dp Ink line on its top edge, a 48 by 28 dp Well behind its icon, and a full-ink label; the others are InkMuted. Selection is announced through `stateDescription`, never a `contentDescription` that would erase the label.
@@ -349,7 +350,7 @@ The build's stages as hinged segments with the design's house outline as an end 
 The rule's grammar in 18 by 8 dp (`StageMark`: filled, part-filled, grey outline, InkMuted outline for the finished design) and an 11 dp hollow Rule box (`PreviewMark`) beside "Podgląd: …". The same marks are used on Dom, in the 3D timeline, the stage strip, Etapy and the inspector.
 
 ### TimelineRail
-A `sheet`-cornered GlassSurface at the foot of the 3D. The header (at least 56 dp) states now ("43% · Dach", "Teraz: …") or, while previewing, "Podgląd: …" with "Wróć do teraz" on the line under the title, never beside it. Expanded, a horizontal strip of stops (96 to 132 dp wide, 56 dp tall, directly on the timeline's glass with no box of their own; the chosen stop is a Well with a 1 dp Ink border and `control` corners) names each stop with its mark, numeral, name and state word.
+A `sheet`-cornered GlassSurface at the foot of the 3D. The header (at least 56 dp) states now ("43% · Dach", "Teraz: …") or, while previewing, "Podgląd: …" with "Wróć do teraz" on the line under the title, never beside it. Expanded, a horizontal strip of stops (96 to 132 dp wide, 56 dp tall, directly on the timeline's glass with no box of their own; the chosen stop is a Well with a 1 dp Ink border and `control` corners). A chosen element is named in a row at the top of the same glass (name, storey, "Szczegóły", ×), above a hairline: the foot of the 3D is always one panel. names each stop with its mark, numeral, name and state word.
 
 ### ToolRail
 Four labelled buttons (Wygląd, Warstwy, Widok, Dopasuj), 64 by 60 dp in a glass rail; a button's label names the current choice once it is not the default ("Makieta", "Bez dachu"). Pressed, it sinks into a Well. Its pane (236 dp, GlassOpaque) grows out of it and swaps contents when the tool changes; lists fade below the fold with a 32 dp gradient.

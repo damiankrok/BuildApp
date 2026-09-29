@@ -70,6 +70,10 @@ fun TimelineRail(
     onReturnToNow: () -> Unit,
     onSetProgress: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Measures the header and the rule only: a row set above them never moves the camera's frame. */
+    ruleModifier: Modifier = Modifier,
+    /** A row inside the same glass, above the header (the chosen element): one panel, never two stacked. */
+    top: (@Composable () -> Unit)? = null,
 ) {
     val motion = LocalMotionPolicy.current
     val stages = view.stages
@@ -82,52 +86,60 @@ fun TimelineRail(
 
     GlassSurface(modifier = modifier, shape = RoundedCornerShape(Radius.sheet)) {
         Column(Modifier.padding(bottom = Space.s)) {
-            // Header: what the 3D shows, full width, and under it the one action that matters here —
-            // never beside the title, where a longer stage name or a larger font would cut it.
-            Row(
-                verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 56.dp)
-                    .padding(start = Space.l, end = Space.xs, top = Space.xs),
-            ) {
-                AnimatedContent(
-                    targetState = previewStop,
-                    transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
-                    label = "railHeader",
-                    // No live region: the rule speaks its own new state as it moves, once.
-                    modifier = Modifier.weight(1f).padding(top = Space.xs),
-                ) { stop ->
-                    if (stop != null) {
-                        PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, onReturnToNow)
-                    } else {
-                        NowHeader(
-                            summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
-                            problem = progressProblemText(view.problem),
-                            onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
-                        )
-                    }
-                }
-                val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
-                IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
-                    Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.icon).rotate(chevron))
+            AnimatedVisibility(visible = top != null, enter = motion.unfoldEnter(), exit = motion.unfoldExit()) {
+                Column {
+                    top?.invoke()
+                    PanelRule()
                 }
             }
+            Column(ruleModifier) {
+                // Header: what the 3D shows, full width, and under it the one action that matters here —
+                // never beside the title, where a longer stage name or a larger font would cut it.
+                Row(
+                    verticalAlignment = Alignment.Top,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 56.dp)
+                        .padding(start = Space.l, end = Space.xs, top = Space.xs),
+                ) {
+                    AnimatedContent(
+                        targetState = previewStop,
+                        transitionSpec = { fadeIn(motion.enterDelayed()) togetherWith fadeOut(motion.exit()) },
+                        label = "railHeader",
+                        // No live region: the rule speaks its own new state as it moves, once.
+                        modifier = Modifier.weight(1f).padding(top = Space.xs),
+                    ) { stop ->
+                        if (stop != null) {
+                            PreviewHeader(stop, stopNames, frame.stageWithoutGeometry, stages.size, onReturnToNow)
+                        } else {
+                            NowHeader(
+                                summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
+                                problem = progressProblemText(view.problem),
+                                onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
+                            )
+                        }
+                    }
+                    val toggle = stringResource(if (expanded) R.string.timeline_collapse else R.string.timeline_expand)
+                    IconButton(onClick = onToggle, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = toggle }) {
+                        Icon(ShellIcons.chevronUp, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.icon).rotate(chevron))
+                    }
+                }
 
-            FoldingRule(
-                stages = stages,
-                nowStop = nowStop,
-                previewStop = previewStop,
-                onScrub = onPreviewStop,
-                onReturnToNow = if (previewStop != null) onReturnToNow else null,
-                returnToNowLabel = stringResource(R.string.timeline_return_now),
-                description = stringResource(R.string.timeline_rule_description),
-                stateText = previewStop?.let { stringResource(R.string.timeline_preview_of, stopNames[it]) }
-                    ?: nowStateText(summary.unset, summary.percentText, summary.currentStage),
-                stopName = { stopNames[it] },
-                // A gap under the header's action, so a low tap on "Wróć do teraz" never scrubs.
-                modifier = Modifier.padding(horizontal = Space.l).padding(top = Space.s),
-            )
+                FoldingRule(
+                    stages = stages,
+                    nowStop = nowStop,
+                    previewStop = previewStop,
+                    onScrub = onPreviewStop,
+                    onReturnToNow = if (previewStop != null) onReturnToNow else null,
+                    returnToNowLabel = stringResource(R.string.timeline_return_now),
+                    description = stringResource(R.string.timeline_rule_description),
+                    stateText = previewStop?.let { stringResource(R.string.timeline_preview_of, stopNames[it]) }
+                        ?: nowStateText(summary.unset, summary.percentText, summary.currentStage),
+                    stopName = { stopNames[it] },
+                    // A gap under the header's action, so a low tap on "Wróć do teraz" never scrubs.
+                    modifier = Modifier.padding(horizontal = Space.l).padding(top = Space.s),
+                )
+            }
 
             AnimatedVisibility(visible = expanded, enter = motion.unfoldEnter(), exit = motion.unfoldExit()) {
                 StageStrip(stages, nowStop, previewStop, stopNames, onPreviewStop)

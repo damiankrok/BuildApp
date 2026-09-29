@@ -92,11 +92,16 @@ enum class ViewPreset(
      * height; only the presets that fit the viewport read it, so every older
      * preset frames exactly as it always did.
      */
-    fun poseIn(camera: OrbitCamera, scene: ModelScene, from: OrbitPose, aspect: Double = 1.0): OrbitPose? {
+    fun poseIn(camera: OrbitCamera, scene: ModelScene, from: OrbitPose, aspect: Double = 1.0, span: OrbitCamera.FitSpan? = null): OrbitPose? {
         val bounds = boundsIn(scene) ?: return null
         val yaw = if (keepsAngles) from.yawDeg else yawDeg
         val pitch = if (keepsAngles) from.pitchDeg else pitchDeg
         val proj = if (keepsAngles) from.projection else projection
+        // "Cały dom" and "Dopasuj" in perspective frame the house by its box, as home does,
+        // so the three agree on how large the whole house is.
+        if (span != null && (this == WHOLE || this == FIT) && proj == Projection.PERSPECTIVE) {
+            return camera.frameBox(from, bounds, yaw, pitch, span)
+        }
         return camera.frame(from, bounds, yaw, pitch, proj, margin, if (fitsViewport) aspect else 1.0)
     }
 

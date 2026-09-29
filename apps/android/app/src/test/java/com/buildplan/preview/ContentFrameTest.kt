@@ -59,29 +59,44 @@ class ContentFrameTest {
     }
 
     /**
-     * Cycle 1, C1-01: the home view cut the gables off a portrait phone
-     * (fitted to the vertical field, then scaled). Fitted with the free
-     * rectangle's aspect, the house's bounding sphere — margin included —
-     * lies inside the free rectangle on every side.
+     * Cycle 1, C1-01: the home view cut the gables off a portrait phone.
+     * Finish review, F-01: fitted by its bounding sphere with a margin, the
+     * house then filled only half the free space. Fitted by its box, every
+     * corner lies inside the free rectangle, and the narrower free side is
+     * filled up to the box margin — on a portrait phone and on its side.
      */
     @Test
-    fun theHomeViewFitsTheWholeHouseInsideTheFreeRectangleOnAPortraitPhone() {
-        val w = 1080
-        val h = 2400
-        val insets = ContentInsets(top = 270, right = 210, bottom = 450)
+    fun theHomeViewFillsTheFreeRectangleWithTheWholeHouse() {
         val house = Bounds(Vec3(0.0, 0.0, 0.0), Vec3(12.6, 8.0, 10.0))
-        val camera = OrbitCamera(house)
-        val pose = camera.home(ContentFrame.fitAspect(w, h, insets))
-        val frame = ContentFrame.of(w, h, insets)
-        // Sphere radius on screen, in pixels, after the frame's uniform scale.
-        val tanHalf = tan(Math.toRadians(camera.fovDeg) / 2.0)
-        val radiusPx = frame.scale * (h / 2.0) * house.radius / (pose.distance * tanHalf)
-        val freeW = w - insets.left - insets.right
-        val freeH = h - insets.top - insets.bottom
-        assertTrue("fits the free width: 2 × $radiusPx ≤ $freeW", 2 * radiusPx <= freeW + 1e-6)
-        assertTrue("fits the free height: 2 × $radiusPx ≤ $freeH", 2 * radiusPx <= freeH + 1e-6)
-        // …and uses it: the narrower free side is filled up to the framing margin.
-        assertEquals(freeW / 1.35, 2 * radiusPx, 1.0)
+        for ((w, h, insets) in listOf(
+            Triple(1080, 2400, ContentInsets(top = 270, right = 210, bottom = 450)),
+            Triple(2400, 1080, ContentInsets(top = 210, right = 340, bottom = 350)),
+        )) {
+            val camera = OrbitCamera(house)
+            val pose = camera.home(ContentFrame.fitSpan(w, h, insets))
+            val frame = ContentFrame.of(w, h, insets)
+            val tanHalf = tan(Math.toRadians(camera.fovDeg) / 2.0)
+            val b = camera.basis(pose)
+            var fill = 0.0
+            for (corner in house.corners()) {
+                val q = corner - house.center
+                val z = pose.distance + (q dot b.forward)
+                val x = frame.scale * (q dot b.right) / (z * tanHalf * w / h) + frame.shiftX
+                val y = frame.scale * (q dot b.up) / (z * tanHalf) + frame.shiftY
+                val px = (x + 1) / 2 * w
+                val py = (1 - y) / 2 * h
+                assertTrue("$w×$h: corner x $px inside ${insets.left}..${w - insets.right}", px >= insets.left - 1e-6 && px <= w - insets.right + 1e-6)
+                assertTrue("$w×$h: corner y $py inside ${insets.top}..${h - insets.bottom}", py >= insets.top - 1e-6 && py <= h - insets.bottom + 1e-6)
+                val freeCx = (insets.left + w - insets.right) / 2.0
+                val freeCy = (insets.top + h - insets.bottom) / 2.0
+                fill = maxOf(
+                    fill,
+                    kotlin.math.abs(px - freeCx) / ((w - insets.left - insets.right) / 2.0),
+                    kotlin.math.abs(py - freeCy) / ((h - insets.top - insets.bottom) / 2.0),
+                )
+            }
+            assertEquals("$w×$h: the house fills the free space up to the margin", 1 / OrbitCamera.BOX_MARGIN, fill, 1e-6)
+        }
     }
 
     @Test

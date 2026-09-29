@@ -252,17 +252,23 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 AnimatedVisibility(visible = hintShown && selected == null && tool == null, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
                     GestureHint(Modifier.align(Alignment.CenterHorizontally))
                 }
-                AnimatedVisibility(visible = selected != null && !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
-                    if (selected != null) {
-                        SelectionBar(
-                            name = elementTitle(selected),
-                            detail = storeyOf(scene, selected)?.let { storeyText(it) }.orEmpty(),
+                // The chosen element, named with the way to its details and out. With a timeline it is the
+                // top row of the timeline's own glass: the foot of the 3D stays one panel (finish review, F-04).
+                val selectionRow: (@Composable () -> Unit)? = selected?.let { chosen ->
+                    {
+                        SelectionRow(
+                            name = elementTitle(chosen),
+                            detail = storeyOf(scene, chosen)?.let { storeyText(it) }.orEmpty(),
                             onDetails = { detailsOpen = true; toolName = null },
                             onClear = { model.clearSelection() },
                         )
                     }
                 }
-                if (view != null) {
+                if (view == null) {
+                    AnimatedVisibility(visible = selectionRow != null && !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
+                        GlassSurface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(Radius.panel)) { selectionRow?.invoke() }
+                    }
+                } else {
                     AnimatedVisibility(visible = !detailsOpen, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
                         TimelineRail(
                             view = view,
@@ -271,9 +277,10 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                             onPreviewStop = { progress.previewStop(it) },
                             onReturnToNow = { progress.returnToNow() },
                             onSetProgress = onSetProgress,
-                            modifier = Modifier.onGloballyPositioned { c ->
-                                // Only the rail at rest, showing now, frames the model: expanding it or a
-                                // taller preview header must not move the camera while scrubbing.
+                            top = selectionRow,
+                            ruleModifier = Modifier.onGloballyPositioned { c ->
+                                // Only the rail at rest, showing now, frames the model: expanding it, a taller
+                                // preview header or the chosen element's row must not move the camera.
                                 if (!railExpanded && view.previewStop == null) timelineInset = c.fromBottom()
                             },
                         )
@@ -369,20 +376,18 @@ private fun actualLine(view: ProgressView?): String {
     return if (view.previewStop != null) stringResource(R.string.progress_actual_prefix, text) else text
 }
 
-/** The chosen element, named above the timeline, with the way to its details and out. */
+/** The chosen element, named, with the way to its details and out: a row, set on the timeline's glass. */
 @Composable
-private fun SelectionBar(name: String, detail: String, onDetails: () -> Unit, onClear: () -> Unit) {
-    GlassSurface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(Radius.panel)) {
-        Row(Modifier.heightIn(min = 56.dp).padding(start = Space.l, end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f).padding(vertical = Space.s)) {
-                Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                if (detail.isNotBlank()) Text(detail, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            }
-            LineButton(stringResource(R.string.dock_details), onClick = onDetails, borderColor = Palette.RuleEmpty)
-            val clear = stringResource(R.string.selection_clear)
-            IconButton(onClick = onClear, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = clear }) {
-                Icon(ShellIcons.close, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
-            }
+private fun SelectionRow(name: String, detail: String, onDetails: () -> Unit, onClear: () -> Unit) {
+    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(start = Space.l, end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f).padding(vertical = Space.s)) {
+            Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            if (detail.isNotBlank()) Text(detail, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        }
+        LineButton(stringResource(R.string.dock_details), onClick = onDetails, borderColor = Palette.RuleEmpty)
+        val clear = stringResource(R.string.selection_clear)
+        IconButton(onClick = onClear, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = clear }) {
+            Icon(ShellIcons.close, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         }
     }
 }

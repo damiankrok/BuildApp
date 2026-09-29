@@ -181,6 +181,13 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
         fact("$step: house pixels at the free area's left / right edge", "$left / $right")
         assertTrue("$step: the house reaches the left edge of the free area ($left bright pixels)", left <= EDGE_TOLERANCE)
         assertTrue("$step: the house runs under the tool rail ($right bright pixels)", right <= EDGE_TOLERANCE)
+        // …and it uses the room it has (finish review, F-01): framed by a bounding sphere with a margin,
+        // the house's walls spanned 54 % of the free width on a phone and 47 % of the free height on its side.
+        val free = Rect(i.left, top, shot.width - i.right, bottom)
+        val (spanW, spanH) = brightExtent(shot, free, HOUSE_LUMINANCE)
+        val fill = maxOf(spanW.toDouble() / free.width(), spanH.toDouble() / free.height())
+        fact("$step: house walls' extent in the free area (width / height)", "%.2f / %.2f".format(java.util.Locale.ROOT, spanW.toDouble() / free.width(), spanH.toDouble() / free.height()))
+        assertTrue("$step: the house fills its free area ($fill of its longer side)", fill >= MIN_HOUSE_FILL)
     }
 
     fun fact(key: String, value: Any?) {
@@ -215,6 +222,9 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
 
         /** Bright pixels an edge strip may hold without the house touching it: antialiasing, a stray grid crossing. */
         private const val EDGE_TOLERANCE = 60
+
+        /** The walls' extent over the free area's limiting side at home: under it, the house is framed small. */
+        private const val MIN_HOUSE_FILL = 0.55
 
         /** Mean absolute luminance difference (0–255) of two screenshots over a region. */
         fun difference(a: Bitmap, b: Bitmap, region: Rect): Double {
@@ -253,6 +263,26 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
                 for (c in row) if (luminance(c) > threshold) n++
             }
             return n
+        }
+
+        /** The width and height of the box around every pixel brighter than [threshold] in [region]. */
+        fun brightExtent(b: Bitmap, region: Rect, threshold: Double): Pair<Int, Int> {
+            val r = Rect(region)
+            if (!r.intersect(0, 0, b.width, b.height)) return 0 to 0
+            val row = IntArray(r.width())
+            var minX = Int.MAX_VALUE
+            var maxX = Int.MIN_VALUE
+            var minY = Int.MAX_VALUE
+            var maxY = Int.MIN_VALUE
+            for (y in r.top until r.bottom) {
+                b.getPixels(row, 0, r.width(), r.left, y, r.width(), 1)
+                for ((k, c) in row.withIndex()) {
+                    if (luminance(c) <= threshold) continue
+                    minX = minOf(minX, k); maxX = maxOf(maxX, k)
+                    minY = minOf(minY, y); maxY = maxOf(maxY, y)
+                }
+            }
+            return if (maxX < minX) 0 to 0 else (maxX - minX) to (maxY - minY)
         }
 
         /** The part of the screen between the chrome where the house stands. */

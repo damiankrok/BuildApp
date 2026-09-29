@@ -76,7 +76,13 @@ fun InkButton(
         onClick = onClick,
         enabled = enabled,
         shape = RoundedCornerShape(Radius.control),
-        colors = ButtonDefaults.buttonColors(containerColor = Palette.Ink, contentColor = Palette.Ground),
+        // Disabled keeps a readable label (InkFaint on Raised, above 4.5:1), never Material's faded default.
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Palette.Ink,
+            contentColor = Palette.Ground,
+            disabledContainerColor = Palette.Raised,
+            disabledContentColor = Palette.InkFaint,
+        ),
         contentPadding = PaddingValues(horizontal = Space.l, vertical = Space.s),
         modifier = modifier.heightIn(min = Sizes.touch),
     ) {
@@ -150,8 +156,8 @@ fun LineButton(
         onClick = onClick,
         enabled = enabled,
         shape = RoundedCornerShape(Radius.control),
-        border = androidx.compose.foundation.BorderStroke(1.dp, borderColor),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Palette.Ink),
+        border = androidx.compose.foundation.BorderStroke(1.dp, if (enabled) borderColor else Palette.Hairline),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Palette.Ink, disabledContentColor = Palette.InkFaint),
         contentPadding = PaddingValues(horizontal = Space.l, vertical = Space.s),
         modifier = modifier.heightIn(min = Sizes.touch),
     ) {

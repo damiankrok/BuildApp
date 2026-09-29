@@ -103,6 +103,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     /** The aspect fits use: the free rectangle's, so the fitted house lands between the chrome whole. */
     private val fitAspect: Double get() = ContentFrame.fitAspect(viewportWidthPx, viewportHeightPx, restInsets)
 
+    /** The free rectangle's spans, for the box fits of the whole house. */
+    private val fitSpan: OrbitCamera.FitSpan get() = ContentFrame.fitSpan(viewportWidthPx, viewportHeightPx, restInsets)
+
     private var animation: Animation? = null
     private var lastTapAtMs = 0L
     private var lastTapObjectId: String? = null
@@ -158,7 +161,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
             is SceneLoadResult.Ok -> {
                 val model = result.scene
                 camera = OrbitCamera(model.bounds)
-                pose = camera.home(fitAspect).also { home = it }
+                pose = camera.home(fitSpan).also { home = it }
                 // Selection, isolation and layers name objects of the old
                 // model and start over; the style and the presentation mode
                 // are how the viewer draws, not part of the model, so they
@@ -230,7 +233,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     fun reset(nowMs: Long) {
         val model = scene ?: return
         viewer = viewer.showAll().clearSelection()
-        moveTo(camera.home(fitAspect).also { home = it }, nowMs)
+        moveTo(camera.home(fitSpan).also { home = it }, nowMs)
     }
 
     /** The viewport's size in pixels, from its layout. */
@@ -258,12 +261,12 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     private fun refitHome() {
         val at = home ?: return
         if (animation != null || pose != at) return
-        pose = camera.home(fitAspect).also { home = it }
+        pose = camera.home(fitSpan).also { home = it }
     }
 
     fun applyPreset(preset: ViewPreset, nowMs: Long) {
         val model = scene ?: return
-        val target = preset.poseIn(camera, model, poseAt(nowMs), fitAspect) ?: return
+        val target = preset.poseIn(camera, model, poseAt(nowMs), fitAspect, fitSpan) ?: return
         preset.visibility?.let { viewer = viewer.withVisibility(model, it) }
         // A focus preset is also an answer to "which one?", so it selects the
         // object it framed — otherwise the inspector would still be empty
