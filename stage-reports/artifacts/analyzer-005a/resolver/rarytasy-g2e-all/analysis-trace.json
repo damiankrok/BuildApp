@@ -1,0 +1,144 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 2,
+        "cells": 152,
+        "dimensionChains": 80,
+        "dimensionChainsRead": 9,
+        "enclosedCells": 126,
+        "gridLinesX": 20,
+        "gridLinesY": 9,
+        "masses": 2,
+        "planFrames": 4,
+        "planSizePx": "853x853",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 2.7579,
+        "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+        "wallBands": 41,
+        "wallThicknessPx": 14,
+        "walledEnvelope": true,
+        "wideOpenings": 2,
+        "wideOpeningsClosed": 2
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_DECOMPOSITION"
+    },
+    {
+      "counts": {
+        "gate": "STRUCTURAL_LAYOUT_ACCEPTED",
+        "gateReasons": "",
+        "masses": 2,
+        "recesses": 0,
+        "roofs": 2
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "STRUCTURAL_LAYOUT"
+    },
+    {
+      "counts": {
+        "plans": 1,
+        "registered": 1
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_REGISTRATION"
+    },
+    {
+      "counts": {
+        "elevationFrames": 4,
+        "registered": 4,
+        "ridgeDatum": true
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "ELEVATION_REGISTRATION"
+    },
+    {
+      "counts": {
+        "mainRoof": true,
+        "masses": 2,
+        "partitions": 20,
+        "recesses": 1,
+        "returns": 0,
+        "rooms": 9,
+        "stair": "none"
+      },
+      "durationMs": 0,
+      "stage": "SOLVING_TOPOLOGY",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "TOPOLOGY"
+    },
+    {
+      "counts": {
+        "balconies": 0,
+        "chimneys": 1,
+        "openings": 14,
+        "railings": 0,
+        "rooflights": 0,
+        "sharedDoors": 0,
+        "terraces": 2
+      },
+      "durationMs": 0,
+      "stage": "SOLVING_METRICS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "METRICS"
+    },
+    {
+      "counts": {
+        "decisions": 20,
+        "dropped_unresolved_overlap": 1,
+        "trimmed_to_host": 9,
+        "trimmed_to_partition": 10,
+        "unresolvedJoints": 1
+      },
+      "durationMs": 0,
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 0,
+      "status": "DEGRADED",
+      "substage": "WALL_TOPOLOGY"
+    },
+    {
+      "counts": {
+        "commands": 151,
+        "openingsDropped": 1,
+        "openingsFitted": 1
+      },
+      "durationMs": 0,
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 0,
+      "status": "DEGRADED",
+      "substage": "EMISSION"
+    }
+  ],
+  "outcome": "COMPLETED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

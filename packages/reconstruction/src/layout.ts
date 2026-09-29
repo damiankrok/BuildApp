@@ -40,7 +40,7 @@ import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
-import { bandWallThickness, decomposePlan, planBodies, planExtent } from './plan-decomposition.js'
+import { bandWallThickness, decomposePlan, planBodies, planExtent, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
 import type { GridLine, PlanCallout, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
@@ -63,7 +63,10 @@ export const LAYOUT_INFERENCE_NAME = 'structural-layout'
 export const LAYOUT_INFERENCE_VERSION = '1.0.0'
 
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
-const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
+export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
+
+/** The storey a plan frame is read as: an unlabelled plan is the ground floor's. */
+export const planStoreyOf = (frame: SourceCoordinateFrame): string => (frame.roles.storey === 'UNKNOWN' || frame.roles.storey === 'NOT_APPLICABLE' ? 'GROUND' : frame.roles.storey)
 
 export type PlanBandOptions = { minThickness?: number; maxThickness?: number; minLength?: number }
 
@@ -116,6 +119,35 @@ export type StructuralLayoutOptions = {
   /** Restrict to these frames: a mutation test removes a drawing this way. */
   frameFilter?: (frame: SourceCoordinateFrame) => boolean
   bands?: PlanBandOptions
+  /**
+   * One named reading of the base plan, chosen by the plan resolver (005A)
+   * when today's reading stops. Absent, the pass is exactly what it was.
+   */
+  plan?: PlanReadingChoice
+  /** Per-frame pixel work the resolver shares between its readings; never changes an answer. */
+  sheetCache?: Map<string, PlanSheet>
+}
+
+/** The ink, wall bands and wall thickness of one plan copy: a function of its pixels alone. */
+export type PlanSheet = { mask: Mask; bands: Band[]; wallPx: number; decompositions: Map<string, PlanDecomposition> }
+
+/**
+ * How the resolver asks for the base plan to be read. Each field is one axis
+ * of the search; its first value is today's behaviour.
+ */
+export type PlanReadingChoice = {
+  /** The copy of its storey's plan to read; the storey's other copies are not tried. */
+  frameId: string
+  /** Where the building is on the sheet: the widest read chains (today), or the largest cluster of wall ink. */
+  extent: 'CHAIN_RECT' | 'WALL_MASS_CLUSTER'
+  /** How built cells become bodies: largest rectangle first (today), or walled rectangle first. */
+  merge: 'LARGEST_FIRST' | 'WALLED_FIRST'
+  /** Where a body's side sits when only a wall band, no chain, marks it: on the band's axis (today), or on its outer face. */
+  faces: 'AS_GRIDDED' | 'OUTER_FACE'
+  /** Chain statements this reading re-read at another scale: a span resting on one is DERIVED, never MEASURED. */
+  rereadEvidenceIds: ReadonlySet<string>
+  /** The base plan's printed scale was replaced, so the other storeys are aligned by fit, not by the ratio of printed scales. */
+  alignByFitOnly: boolean
 }
 
 /** What `inferStructuralLayout` works out before any of it is sealed into a set. */
@@ -184,40 +216,32 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
     if (frame.roles.projection !== 'ORTHOGRAPHIC_PLAN') continue
     if (frame.roles.document !== 'FLOOR_PLAN') continue
     if (keep && !keep(frame)) continue
-    const storey = frame.roles.storey === 'UNKNOWN' || frame.roles.storey === 'NOT_APPLICABLE' ? 'GROUND' : frame.roles.storey
+    const storey = planStoreyOf(frame)
     if (!(storey in STOREY_RANK)) continue
     byStorey.set(storey, [...(byStorey.get(storey) ?? []), frame])
   }
 
   const plans: PlanReading[] = []
+  const choice = options.plan
   for (const [storey, frames] of [...byStorey].sort((a, b) => STOREY_RANK[a[0]] - STOREY_RANK[b[0]])) {
-    const ordered = [...frames].sort((a, b) => {
-      const dimensioned = (f: SourceCoordinateFrame): number => (f.roles.annotation === 'DIMENSIONED' ? 1 : 0)
-      return dimensioned(b) - dimensioned(a) || b.size.width * b.size.height - a.size.width * a.size.height || a.id.localeCompare(b.id)
-    })
+    const chosen = choice ? frames.find((f) => f.id === choice.frameId) : undefined
+    const ordered = chosen
+      ? [chosen]
+      : [...frames].sort((a, b) => {
+          const dimensioned = (f: SourceCoordinateFrame): number => (f.roles.annotation === 'DIMENSIONED' ? 1 : 0)
+          return dimensioned(b) - dimensioned(a) || b.size.width * b.size.height - a.size.width * a.size.height || a.id.localeCompare(b.id)
+        })
     let read = false
     for (const frame of ordered) {
-      const raster = options.raster(frame)
-      if (!raster) {
+      const sheet = planSheet(frame, options, bandOptions)
+      if (!sheet) {
         skipped.push({ frameId: frame.id, code: 'NOT_DECODABLE', why: 'its bytes could not be decoded here' })
         continue
       }
-      const mask = adaptiveInkMask(inkChannel(raster), {})
-      // Two passes. The first is deliberately permissive and exists only to
-      // measure the thickness this drawing draws a wall at; the second looks
-      // for walls AT that thickness. A fixed window cannot do both jobs — it
-      // is either wide enough to find a wall on a small raster, in which case
-      // it also finds every hatch and leader line on a large one, or narrow
-      // enough to reject those and blind to half the walls on the small one.
-      const survey = runLengthBands(mask, bandOptions)
-      const wallPx = bandWallThickness(survey, DEFAULT_BANDS.minThickness * 2)
-      const bands = runLengthBands(mask, {
-        minThickness: Math.max(3, Math.round(wallPx * 0.45)),
-        maxThickness: Math.max(6, Math.round(wallPx * 1.9)),
-        minLength: Math.max(8, Math.round(wallPx * 1.6)),
-      })
+      const { mask, bands, wallPx } = sheet
       const chains = options.metrics.chains.filter((c) => c.frameId === frame.id)
-      const extent = planExtent(chains, bands, wallPx)
+      const cluster = chosen === frame && choice?.extent === 'WALL_MASS_CLUSTER' ? wallClusterExtent(mask, wallPx) : undefined
+      const extent = cluster ? { rect: cluster.rect, weak: false, why: cluster.why } : planExtent(chains, bands, wallPx)
       if (!extent) {
         const longBands = bands.filter((b) => b.length >= wallPx * 2.5).length
         skipped.push({ frameId: frame.id, code: 'NO_EXTENT', longBands, why: `no dimension chain on it read a value and its ${longBands} long wall band${longBands === 1 ? '' : 's'} do not run along both axes` })
@@ -230,6 +254,11 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         // storey registration matches on — so it borrows a unit scale and is
         // never allowed to state a metre.
         placeholderRegistration(frame)
+      // The decomposition is a function of the pixels, the extent and the scale; the
+      // resolver asks for the same one under several merges and faces.
+      const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}`
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id) })
+      sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
         storey,
@@ -240,7 +269,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         extent: extent.rect,
         extentWeak: extent.weak,
         extentWhy: extent.why,
-        decomposition: decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id) }),
+        decomposition,
       })
       read = true
       break
@@ -256,6 +285,35 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
     }
   }
   return { plans, unresolved, skipped }
+}
+
+/**
+ * The ink mask, wall bands and wall thickness of one plan copy, from its
+ * pixels alone — computed once per frame when a cache is supplied.
+ *
+ * Two band passes. The first is deliberately permissive and exists only to
+ * measure the thickness this drawing draws a wall at; the second looks for
+ * walls AT that thickness. A fixed window cannot do both jobs — it is either
+ * wide enough to find a wall on a small raster, in which case it also finds
+ * every hatch and leader line on a large one, or narrow enough to reject those
+ * and blind to half the walls on the small one.
+ */
+export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayoutOptions, bandOptions: Required<PlanBandOptions> = { ...DEFAULT_BANDS, ...options.bands }): PlanSheet | undefined {
+  const cached = options.sheetCache?.get(frame.id)
+  if (cached) return cached
+  const raster = options.raster(frame)
+  if (!raster) return undefined
+  const mask = adaptiveInkMask(inkChannel(raster), {})
+  const survey = runLengthBands(mask, bandOptions)
+  const wallPx = bandWallThickness(survey, DEFAULT_BANDS.minThickness * 2)
+  const bands = runLengthBands(mask, {
+    minThickness: Math.max(3, Math.round(wallPx * 0.45)),
+    maxThickness: Math.max(6, Math.round(wallPx * 1.9)),
+    minLength: Math.max(8, Math.round(wallPx * 1.6)),
+  })
+  const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map() }
+  options.sheetCache?.set(frame.id, sheet)
+  return sheet
 }
 
 /** The opening callouts printed on one plan, as the decomposition weighs them: where each sits and every width it might say. */
@@ -343,7 +401,7 @@ export function alignmentTargets(base: PlanReading): Array<{ id: string; rect: P
  * decide between them will happily return the average of the two, which is a
  * building that exists nowhere.
  */
-export function alignPlans(base: PlanReading, other: PlanReading, options: { maxAnisotropy?: number; coverageWeight?: number; statedBonus?: number } = {}): { best: PlanAlignment | undefined; considered: PlanAlignment[] } {
+export function alignPlans(base: PlanReading, other: PlanReading, options: { maxAnisotropy?: number; coverageWeight?: number; statedBonus?: number; useStated?: boolean } = {}): { best: PlanAlignment | undefined; considered: PlanAlignment[] } {
   const maxAnisotropy = options.maxAnisotropy ?? 1.15
   const coverageWeight = options.coverageWeight ?? 0.15
   const statedBonus = options.statedBonus ?? 0.03
@@ -377,7 +435,7 @@ export function alignPlans(base: PlanReading, other: PlanReading, options: { max
   // none and the only way in is to assume it covers some part of the plan
   // below exactly.
   const stated =
-    base.registration && other.registration
+    options.useStated !== false && base.registration && other.registration
       ? {
           k: (other.registration.metresPerPixelX / base.registration.metresPerPixelX + other.registration.metresPerPixelY / base.registration.metresPerPixelY) / 2,
           anisotropy:
@@ -740,6 +798,58 @@ export function perimeterWallEvidence(region: PlanRegion, decomposition: PlanDec
   return { perimeterM: round6(perimeter), walledM: round6(walled), fraction: round6(perimeter === 0 ? 0 : Math.min(1, walled / perimeter)) }
 }
 
+/**
+ * A body with each OUTSIDE side that only a wall band marks moved from the
+ * band's axis to its outer face.
+ *
+ * A grid line a chain breaks at sits on the chain's tick, which a plan's
+ * overall chains put on the outer face; a line only a wall band supports sits
+ * on the band's axis, half a wall inside the face. A body bounded by band
+ * lines is half a wall short on those sides, which on a whole house is several
+ * per cent of its footprint. Only sides no other body shares move: between two
+ * bodies the axis is the boundary.
+ */
+function toOuterFaces(region: PlanRegion, bodies: readonly PlanRegion[], plan: PlanReading): PlanRegion {
+  const half = plan.wallPx / 2
+  const lineAt = (lines: readonly GridLine[], px: number): GridLine | undefined => lines.find((l) => Math.abs(l.px - px) < 0.5)
+  const bandOnly = (line: GridLine | undefined): boolean => line !== undefined && line.support.chainIds.length === 0 && line.support.bandLength > 0
+  const shared = (side: 'x0' | 'x1' | 'y0' | 'y1'): boolean =>
+    bodies.some((other) => {
+      if (other === region) return false
+      const r = region.rect
+      const o = other.rect
+      if (side === 'x0' || side === 'x1') {
+        const at = side === 'x0' ? r.x0 : r.x1
+        const touches = Math.abs((side === 'x0' ? o.x1 : o.x0) - at) < 0.5
+        return touches && Math.min(r.y1, o.y1) - Math.max(r.y0, o.y0) > 0
+      }
+      const at = side === 'y0' ? r.y0 : r.y1
+      const touches = Math.abs((side === 'y0' ? o.y1 : o.y0) - at) < 0.5
+      return touches && Math.min(r.x1, o.x1) - Math.max(r.x0, o.x0) > 0
+    })
+  const { linesX, linesY } = plan.decomposition
+  const rect = { ...region.rect }
+  const moved: string[] = []
+  if (bandOnly(lineAt(linesX, rect.x0)) && !shared('x0')) {
+    rect.x0 -= half
+    moved.push('min x')
+  }
+  if (bandOnly(lineAt(linesX, rect.x1)) && !shared('x1')) {
+    rect.x1 += half
+    moved.push('max x')
+  }
+  if (bandOnly(lineAt(linesY, rect.y0)) && !shared('y0')) {
+    rect.y0 -= half
+    moved.push('min z')
+  }
+  if (bandOnly(lineAt(linesY, rect.y1)) && !shared('y1')) {
+    rect.y1 += half
+    moved.push('max z')
+  }
+  if (moved.length === 0) return region
+  return { ...region, rect, why: `${region.why}; its ${moved.join(', ')} side${moved.length === 1 ? '' : 's'}, marked by a wall band alone, taken to the band's outer face` }
+}
+
 /** Which side of a region a given cell edge is, as a plan side. */
 const SIDE_OF_EDGE: PlanSide[] = ['MIN_Z', 'MAX_X', 'MAX_Z', 'MIN_X']
 export const oppositeSide = (side: PlanSide): PlanSide => (side === 'MIN_X' ? 'MAX_X' : side === 'MAX_X' ? 'MIN_X' : side === 'MIN_Z' ? 'MAX_Z' : 'MIN_Z')
@@ -766,7 +876,8 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   const recesses: RecessHypothesis[] = []
 
   const empty: StructuralLayoutDraft = { plans, base: undefined, frame: undefined, alignments, storeys, footprintRegions, masses, attachments, facadePlanes, recesses, alternatives, conflicts, unresolved, traces, skippedPlans }
-  const base = chooseBasePlan(plans)
+  // A reading the resolver chose is read AS the base: that is the question it asked.
+  const base = (options.plan ? plans.find((p) => p.frame.id === options.plan?.frameId) : undefined) ?? chooseBasePlan(plans)
   if (!base) {
     unresolved.push({ id: stableId('gap', 'no-plan', {}), what: 'the building’s composition', reason: 'the package carries no floor plan this pass could decompose', status: 'MISSING', frameIds: [] })
     return empty
@@ -798,7 +909,24 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
 
   // The bodies of the base plan, wanted twice: once to say which of them each
   // upper storey stands on, and once to build the masses from.
-  const built = planBodies(base.decomposition)
+  const walledFirst = options.plan?.merge === 'WALLED_FIRST' && options.plan.frameId === base.frame.id ? walledFirstRegions(base.decomposition, base.registration, MIN_MASS_WALL_FRACTION) : undefined
+  const built = walledFirst
+    ? planBodies({ ...base.decomposition, regions: [...walledFirst.regions, ...base.decomposition.regions.filter((r) => r.classification !== 'BUILT')] })
+    : planBodies(base.decomposition)
+  if (walledFirst && walledFirst.demoted.length > 0) {
+    const cellsAt = new Map(base.decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+    const areaM2 = walledFirst.demoted.reduce((a, d) => {
+      const cell = cellsAt.get(`${d.ix}:${d.iy}`)
+      return a + (cell ? (cell.rect.x1 - cell.rect.x0) * (cell.rect.y1 - cell.rect.y0) * frame.metresPerPixelX * frame.metresPerPixelY : 0)
+    }, 0)
+    unresolved.push({
+      id: stableId('gap', 'walled-first-demoted', { frameId: base.frame.id, cells: walledFirst.demoted.map((d) => `${d.ix}:${d.iy}`) }),
+      what: `whether ${areaM2.toFixed(1)} m² of enclosed plan outside the walled bodies is built`,
+      reason: `${walledFirst.demoted.length} enclosed cell${walledFirst.demoted.length === 1 ? ' belongs' : 's belong'} to no rectangle drawn at least ${Math.round(MIN_MASS_WALL_FRACTION * 100)}% in wall, so what closes them is line work — a terrace, a canopy or paving — and they are left out of the building`,
+      status: 'AMBIGUOUS',
+      frameIds: [base.frame.id],
+    })
+  }
   const standsOn = (rect: PixelRect): string =>
     built
       .filter((region) => {
@@ -818,7 +946,7 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
     let registeredFrom: string | undefined
     let confidence = isBase ? 0.9 : 0.4
     if (!isBase) {
-      const { best, considered } = alignPlans(base, plan)
+      const { best, considered } = alignPlans(base, plan, options.plan?.alignByFitOnly ? { useStated: false } : {})
       if (best) {
         alignments.set(plan.frame.id, best)
         registeredFrom = base.frame.id
@@ -885,7 +1013,8 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   if (!baseStorey) return { ...empty, base, frame }
 
   // --- the base storey's regions -------------------------------------------
-  for (const region of built) {
+  for (const found of built) {
+    const region = options.plan?.faces === 'OUTER_FACE' && options.plan.frameId === base.frame.id ? toOuterFaces(found, built, base) : found
     const ring = ringOfRect(region.rect, frame)
     const wallEvidence = perimeterWallEvidence(region, base.decomposition, frame)
     // A body is enclosed by WALL. A region the flood fill could not reach but
@@ -942,6 +1071,9 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
     const spanX = ladderX.span(region.pixelRect.x0, region.pixelRect.x1)
     const spanZ = ladderZ.span(region.pixelRect.y0, region.pixelRect.y1)
     const spread = (sp: AxisSpan): number => (sp.stated ? (sp.agreed > 1 ? 0.01 : 0.02) : wallM / 2)
+    // A span stated by a chain the resolver re-read at another scale was not printed as used: DERIVED, not MEASURED.
+    const reread = (sp: AxisSpan): boolean => sp.evidenceIds.some((e) => options.plan?.rereadEvidenceIds.has(e) === true)
+    const basisOf = (sp: AxisSpan): LayoutQuantity['basis'] => (sp.stated ? (reread(sp) ? 'DERIVED' : 'MEASURED') : 'SCALED')
     masses.push({
       id: `mass-${masses.length}`,
       role: 'UNKNOWN',
@@ -949,8 +1081,8 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
       footprintRegionIds: [region.id],
       storeySpan: { fromIndex: baseStorey.index, toIndex: baseStorey.index, storeyIds: [baseStorey.id] },
       facadePlaneIds: [],
-      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', spanX.stated ? 'MEASURED' : 'SCALED', spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}`),
-      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', spanZ.stated ? 'MEASURED' : 'SCALED', spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}`),
+      widthM: quantity(bounds.x1 - bounds.x0, bounds.x1 - bounds.x0 - spread(spanX), bounds.x1 - bounds.x0 + spread(spanX), 'm', basisOf(spanX), spanX.evidenceIds.length > 0 ? spanX.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanX.why}`),
+      depthM: quantity(bounds.z1 - bounds.z0, bounds.z1 - bounds.z0 - spread(spanZ), bounds.z1 - bounds.z0 + spread(spanZ), 'm', basisOf(spanZ), spanZ.evidenceIds.length > 0 ? spanZ.evidenceIds : region.evidenceIds, `the distance between the outer faces of this body’s own walls: ${spanZ.why}`),
       observationIds: [],
       evidenceIds: region.evidenceIds,
       confidence: region.confidence,

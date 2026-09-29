@@ -1,0 +1,342 @@
+[
+ {
+  "project": "kosacce-clean",
+  "case": "all",
+  "line": "solver on the given evidence: completed, model 5b5ffcf1afcd2511"
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "only-550D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE: 82 wall bands were found on the 550×550 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing; 15 other readings of the plan were weighed and none survived to a full composition",
+  "resolution": {
+   "outcome": "INCONCLUSIVE",
+   "chosen": null,
+   "readings": 15,
+   "distinctOutlines": 5,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "without-550D",
+  "line": "solver on the given evidence: completed, model 5b5ffcf1afcd2511"
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "only-400D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE: 49 wall bands were found on the 400×400 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing; 15 other readings of the plan were weighed and none survived to a full composition",
+  "resolution": {
+   "outcome": "INCONCLUSIVE",
+   "chosen": null,
+   "readings": 15,
+   "distinctOutlines": 7,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "without-400D",
+  "line": "solver on the given evidence: completed, model 5b5ffcf1afcd2511"
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "only-853A",
+  "line": "solver on the given evidence: completed, model e4c7306f32e6059a",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), AGREES",
+   "readings": 15,
+   "distinctOutlines": 15,
+   "compositions": 2,
+   "firstReading": "PLAN_LAYOUT_REJECTED"
+  }
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "without-853A",
+  "line": "solver on the given evidence: completed, model 5b5ffcf1afcd2511"
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "only-853D",
+  "line": "solver on the given evidence: completed, model 5b5ffcf1afcd2511"
+ },
+ {
+  "project": "kosacce-clean",
+  "case": "without-853D",
+  "line": "solver on the given evidence: completed, model e4c7306f32e6059a",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), AGREES",
+   "readings": 47,
+   "distinctOutlines": 27,
+   "compositions": 2,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "all",
+  "line": "solver on the given evidence: completed, model b50b6e5992e9ac01",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 55,
+   "distinctOutlines": 12,
+   "compositions": 3,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "only-550D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED: the lowest storey covers 50.48 m² against the 122.07 m² the publisher prints — 58.6% apart: the decomposition is not of this building; 7 other readings of the plan were weighed and none survived to a full composition",
+  "resolution": {
+   "outcome": "INCONCLUSIVE",
+   "chosen": null,
+   "readings": 7,
+   "distinctOutlines": 2,
+   "compositions": 0,
+   "firstReading": "PLAN_LAYOUT_REJECTED"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "without-550D",
+  "line": "solver on the given evidence: completed, model b50b6e5992e9ac01",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 47,
+   "distinctOutlines": 10,
+   "compositions": 3,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "only-400D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE: 17 wall bands were found on the 400×400 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing; 7 other readings of the plan were weighed and none survived to a full composition",
+  "resolution": {
+   "outcome": "INCONCLUSIVE",
+   "chosen": null,
+   "readings": 7,
+   "distinctOutlines": 2,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "without-400D",
+  "line": "solver on the given evidence: completed, model b50b6e5992e9ac01",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 47,
+   "distinctOutlines": 11,
+   "compositions": 3,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "only-853A",
+  "line": "solver on the given evidence: completed, model b50b6e5992e9ac01",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 15,
+   "distinctOutlines": 5,
+   "compositions": 2,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "without-853A",
+  "line": "solver on the given evidence: completed, model 8376226bc07fb5d4",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy dimensioned e3a3d0015d, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.9 m² (-4.2% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 39,
+   "distinctOutlines": 9,
+   "compositions": 2,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "only-853D",
+  "line": "solver on the given evidence: completed, model 8376226bc07fb5d4",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy dimensioned e3a3d0015d, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.9 m² (-4.2% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 23,
+   "distinctOutlines": 6,
+   "compositions": 2,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-eoze",
+  "case": "without-853D",
+  "line": "solver on the given evidence: completed, model b50b6e5992e9ac01",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+   "readings": 31,
+   "distinctOutlines": 8,
+   "compositions": 2,
+   "firstReading": "PLAN_LAYOUT_REJECTED"
+  }
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "all",
+  "line": "solver on the given evidence: completed, model 8fa4a25bcd587248"
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "only-550D",
+  "line": "solver on the given evidence: completed, model 8b57681af5e7a5d0",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy dimensioned 7d0192a519, wall-ink extent, registered scale, largest-first tiling, outer faces: 3 bodies, 156.3 m² (-17.6% of 189.77), NEAR, corroborated by WALL_COVERAGE",
+   "readings": 7,
+   "distinctOutlines": 5,
+   "compositions": 1,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "without-550D",
+  "line": "solver on the given evidence: completed, model 8fa4a25bcd587248"
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "only-400D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_DIMENSION_FRAME: the 400×400 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have",
+  "resolution": {
+   "outcome": "NO_ALTERNATIVE",
+   "chosen": null,
+   "readings": 0,
+   "distinctOutlines": 0,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_DIMENSION_FRAME"
+  }
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "without-400D",
+  "line": "solver on the given evidence: completed, model 8fa4a25bcd587248"
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "only-853D",
+  "line": "solver on the given evidence: completed, model 8fa4a25bcd587248"
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "without-853D",
+  "line": "solver on the given evidence: completed, model 8b57681af5e7a5d0",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy dimensioned 7d0192a519, wall-ink extent, registered scale, largest-first tiling, outer faces: 3 bodies, 156.3 m² (-17.6% of 189.77), NEAR, corroborated by WALL_COVERAGE",
+   "readings": 7,
+   "distinctOutlines": 5,
+   "compositions": 1,
+   "firstReading": "PLAN_NO_WALLED_ENVELOPE"
+  }
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "only-853A",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_DIMENSION_FRAME: the 853×853 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have",
+  "resolution": {
+   "outcome": "NO_ALTERNATIVE",
+   "chosen": null,
+   "readings": 0,
+   "distinctOutlines": 0,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_DIMENSION_FRAME"
+  }
+ },
+ {
+  "project": "rarytasy-g2e",
+  "case": "without-853A",
+  "line": "solver on the given evidence: completed, model 8fa4a25bcd587248"
+ },
+ {
+  "project": "marcowki",
+  "case": "all",
+  "line": "solver on the given evidence: completed, model 6152770f43f4970a"
+ },
+ {
+  "project": "marcowki",
+  "case": "only-550D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_MASSES: 1 walled region of the 853×853 px floor plan was found, but no building mass could be made from it that places the front of the building; 16 other readings of the plan were weighed and none survived to a full composition",
+  "resolution": {
+   "outcome": "INCONCLUSIVE",
+   "chosen": null,
+   "readings": 16,
+   "distinctOutlines": 4,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_MASSES"
+  }
+ },
+ {
+  "project": "marcowki",
+  "case": "without-550D",
+  "line": "solver on the given evidence: completed, model 6152770f43f4970a"
+ },
+ {
+  "project": "marcowki",
+  "case": "only-400D",
+  "line": "solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_MASSES: 1 walled region of the 853×853 px floor plan was found, but no building mass could be made from it that places the front of the building",
+  "resolution": {
+   "outcome": "NO_ALTERNATIVE",
+   "chosen": null,
+   "readings": 0,
+   "distinctOutlines": 0,
+   "compositions": 0,
+   "firstReading": "PLAN_NO_MASSES"
+  }
+ },
+ {
+  "project": "marcowki",
+  "case": "without-400D",
+  "line": "solver on the given evidence: completed, model 6152770f43f4970a"
+ },
+ {
+  "project": "marcowki",
+  "case": "only-853D",
+  "line": "solver on the given evidence: completed, model 6152770f43f4970a"
+ },
+ {
+  "project": "marcowki",
+  "case": "without-853D",
+  "line": "solver on the given evidence: completed, model 67c0bbeb98c8fd36",
+  "resolution": {
+   "outcome": "RESOLVED",
+   "chosen": "copy area_table 863ec969ff, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 130.8 m² (-0.3% of 131.16), AGREES, corroborated by ISOTROPY",
+   "readings": 24,
+   "distinctOutlines": 6,
+   "compositions": 2,
+   "firstReading": "PLAN_NO_MASSES"
+  }
+ },
+ {
+  "project": "marcowki",
+  "case": "only-853A",
+  "line": "solver on the given evidence: completed, model 67c0bbeb98c8fd36"
+ },
+ {
+  "project": "marcowki",
+  "case": "without-853A",
+  "line": "solver on the given evidence: completed, model 6152770f43f4970a"
+ }
+]

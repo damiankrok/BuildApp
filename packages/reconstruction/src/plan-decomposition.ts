@@ -34,7 +34,7 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
-import { dominantBandThickness } from '@buildapp/source-cv'
+import { connectedComponents, dilate, dominantBandThickness, erode } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
 
@@ -1735,4 +1735,179 @@ export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): P
     })
   }
   return out.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || a.id.localeCompare(b.id))
+}
+
+// ---------------------------------------------------------------------------
+// Alternative readings (005A): generators the plan resolver asks for when the
+// reading above stops. Nothing here runs on a plan today's pipeline accepts.
+// ---------------------------------------------------------------------------
+
+/**
+ * The box the drawing's WALL INK occupies, independent of any dimension chain.
+ *
+ * The chain extent above trusts the widest chain that read a value; when the
+ * only chain read on an axis is a detail chain across one room, the extent is
+ * a strip of that room and every wall outside it is cut away. This reads the
+ * other witness: open the ink mask by a third of a wall (hairlines, text and
+ * hatching vanish, walls stay), keep the solid pieces at least two walls
+ * square, join pieces closer than eight walls to each other, and take the
+ * largest joined cluster by ink. A title block or a legend is a separate
+ * cluster and loses on ink; a site plan drawn on the same sheet would win, and
+ * that is why this is a candidate the resolver scores, never the answer.
+ */
+export function wallClusterExtent(mask: Mask, wallPx: number): { rect: PixelRect; parts: number; why: string } | null {
+  const r = Math.max(1, Math.round(wallPx * 0.3))
+  const opened = dilate(erode(mask, r), r)
+  const pieces = connectedComponents(opened, { minPixels: Math.round(wallPx * wallPx * 2), connectivity: 8 })
+  if (pieces.length === 0) return null
+  const gap = wallPx * 8
+  const parent = pieces.map((_, i) => i)
+  const find = (i: number): number => {
+    let root = i
+    while (parent[root] !== root) root = parent[root]
+    return root
+  }
+  for (let i = 0; i < pieces.length; i += 1) {
+    for (let j = i + 1; j < pieces.length; j += 1) {
+      const a = pieces[i].bounds
+      const b = pieces[j].bounds
+      if (a.x0 - gap <= b.x1 && b.x0 - gap <= a.x1 && a.y0 - gap <= b.y1 && b.y0 - gap <= a.y1) {
+        const ra = find(i)
+        const rb = find(j)
+        if (ra !== rb) parent[Math.max(ra, rb)] = Math.min(ra, rb)
+      }
+    }
+  }
+  const clusters = new Map<number, number[]>()
+  pieces.forEach((_, i) => clusters.set(find(i), [...(clusters.get(find(i)) ?? []), i]))
+  const ranked = [...clusters.entries()]
+    .map(([root, members]) => ({ root, members, ink: members.reduce((a, i) => a + pieces[i].pixels, 0) }))
+    .sort((a, b) => b.ink - a.ink || a.root - b.root)
+  const best = ranked[0].members.map((i) => pieces[i].bounds)
+  const rect = { x0: Math.min(...best.map((b) => b.x0)), y0: Math.min(...best.map((b) => b.y0)), x1: Math.max(...best.map((b) => b.x1)), y1: Math.max(...best.map((b) => b.y1)) }
+  if (rect.x1 - rect.x0 < wallPx * 4 || rect.y1 - rect.y0 < wallPx * 4) return null
+  return { rect, parts: best.length, why: `the largest cluster of solid wall ink: ${best.length} piece${best.length === 1 ? '' : 's'} within eight walls of each other, ${Math.round(rect.x1 - rect.x0)} × ${Math.round(rect.y1 - rect.y0)} px` }
+}
+
+/**
+ * BUILT cells tiled WALLED-FIRST: the largest rectangle whose own perimeter is
+ * drawn as wall at least `minWallFraction` of its length, then the next among
+ * the cells left, until none qualifies. Cells no walled rectangle takes are
+ * returned as `demoted`: enclosed by line work, not by construction.
+ *
+ * The incumbent tiling (`mergeRegions`) takes the largest rectangle first and
+ * asks about walls afterwards, so a covered terrace closed by a kerb line and
+ * merged into the house's rectangle drags the whole house under the wall
+ * threshold, and the house is dropped with the terrace. Asking first keeps the
+ * house and leaves the terrace out. The threshold is the layout's own
+ * `MIN_MASS_WALL_FRACTION`, passed in, not a new constant.
+ *
+ * And every OUTSIDE side must carry some wall. A rectangle can clear the
+ * threshold on its walled sides while one side runs along a kerb line with no
+ * wall band on it at all: that side is the edge of a terrace, not of a
+ * building, and the rectangle has grown past the walls. A fully glazed side
+ * still has its jamb walls on it; a side drawn only as line work has none. A
+ * side facing other built cells is inside the building, and an open-plan
+ * connection there is no evidence of anything.
+ */
+export function walledFirstRegions(
+  decomposition: PlanDecomposition,
+  registration: Pick<CoordinateRegistration, 'metresPerPixelX' | 'metresPerPixelY' | 'originPx'>,
+  minWallFraction: number,
+  closureThreshold = DEFAULTS.closureThreshold,
+): { regions: PlanRegion[]; demoted: Array<{ ix: number; iy: number }> } {
+  const { linesX, linesY } = decomposition
+  const nx = linesX.length - 1
+  const ny = linesY.length - 1
+  const byIndex = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  const claimed = new Set<string>()
+  const open = (ix: number, iy: number): boolean => byIndex.get(`${ix}:${iy}`)?.classification === 'BUILT' && !claimed.has(`${ix}:${iy}`)
+  const mppX = registration.metresPerPixelX
+  const mppY = registration.metresPerPixelY
+  /** The rectangle's walled share of perimeter, or -1 when one of its sides carries no wall band at all. */
+  const wallFraction = (ix0: number, iy0: number, ix1: number, iy1: number): number => {
+    let perimeter = 0
+    let walled = 0
+    const outsideLength = [0, 0, 0, 0]
+    const outsideWall = [0, 0, 0, 0]
+    const across: Array<[number, number]> = [
+      [0, -1],
+      [1, 0],
+      [0, 1],
+      [-1, 0],
+    ]
+    const side = (ix: number, iy: number, s: 0 | 1 | 2 | 3): void => {
+      const cell = byIndex.get(`${ix}:${iy}`)
+      if (!cell) return
+      const lengthM = s % 2 === 0 ? (cell.rect.x1 - cell.rect.x0) * mppX : (cell.rect.y1 - cell.rect.y0) * mppY
+      perimeter += lengthM
+      if (byIndex.get(`${ix + across[s][0]}:${iy + across[s][1]}`)?.classification !== 'BUILT') {
+        outsideLength[s] += lengthM
+        outsideWall[s] += lengthM * cell.edges[s].wall
+      }
+      if (cell.edges[s].closure >= closureThreshold) walled += lengthM * cell.edges[s].wall
+    }
+    for (let ix = ix0; ix <= ix1; ix += 1) {
+      side(ix, iy0, 0)
+      side(ix, iy1, 2)
+    }
+    for (let iy = iy0; iy <= iy1; iy += 1) {
+      side(ix1, iy, 1)
+      side(ix0, iy, 3)
+    }
+    if (outsideLength.some((length, s) => length > 0 && outsideWall[s] <= 0)) return -1
+    return perimeter === 0 ? 0 : walled / perimeter
+  }
+  const regions: PlanRegion[] = []
+  for (;;) {
+    let best: { ix: number; iy: number; w: number; h: number; area: number; fraction: number } | null = null
+    for (let iy = 0; iy < ny; iy += 1) {
+      for (let ix = 0; ix < nx; ix += 1) {
+        if (!open(ix, iy)) continue
+        let reach = nx - ix
+        let spanY = 0
+        for (let h = 1; iy + h <= ny; h += 1) {
+          let run = 0
+          while (run < reach && open(ix + run, iy + h - 1)) run += 1
+          reach = Math.min(reach, run)
+          if (reach === 0) break
+          spanY += linesY[iy + h].px - linesY[iy + h - 1].px
+          let spanX = 0
+          for (let w = 1; w <= reach; w += 1) {
+            spanX += linesX[ix + w].px - linesX[ix + w - 1].px
+            const area = spanX * spanY
+            if (best && area <= best.area + 1e-9) continue
+            const fraction = wallFraction(ix, iy, ix + w - 1, iy + h - 1)
+            if (fraction < minWallFraction) continue
+            best = { ix, iy, w, h, area, fraction }
+          }
+        }
+      }
+    }
+    if (!best) break
+    const members: Array<{ ix: number; iy: number }> = []
+    for (let dy = 0; dy < best.h; dy += 1) {
+      for (let dx = 0; dx < best.w; dx += 1) {
+        claimed.add(`${best.ix + dx}:${best.iy + dy}`)
+        members.push({ ix: best.ix + dx, iy: best.iy + dy })
+      }
+    }
+    const rect: PixelRect = { x0: linesX[best.ix].px, y0: linesY[best.iy].px, x1: linesX[best.ix + best.w].px, y1: linesY[best.iy + best.h].px }
+    const u0 = (rect.x0 - registration.originPx.x) * mppX
+    const u1 = (rect.x1 - registration.originPx.x) * mppX
+    const v0 = (rect.y0 - registration.originPx.y) * mppY
+    const v1 = (rect.y1 - registration.originPx.y) * mppY
+    regions.push({
+      id: `region-built-${best.ix}-${best.iy}`,
+      classification: 'BUILT',
+      rect,
+      metric: { x0: round6(Math.min(u0, u1)), z0: round6(Math.min(v0, v1)), x1: round6(Math.max(u0, u1)), z1: round6(Math.max(v0, v1)) },
+      cells: members,
+      confidence: round6(Math.min(...members.map((m) => byIndex.get(`${m.ix}:${m.iy}`)?.confidence ?? 0))),
+      why: `${members.length} built cell${members.length === 1 ? '' : 's'} taken walled-first: the largest rectangle whose own perimeter is ${Math.round(best.fraction * 100)}% wall`,
+    })
+  }
+  const demoted = decomposition.cells.filter((c) => c.classification === 'BUILT' && !claimed.has(`${c.ix}:${c.iy}`)).map((c) => ({ ix: c.ix, iy: c.iy }))
+  regions.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+  return { regions, demoted }
 }

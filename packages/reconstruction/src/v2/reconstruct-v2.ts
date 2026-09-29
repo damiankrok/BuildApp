@@ -46,6 +46,10 @@ import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
 import { layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
+import { resolutionRecord, resolvePlan } from '../plan-resolution.js'
+import type { ResolverProgress } from '../plan-resolution.js'
+import type { PlanSheet } from '../layout.js'
+import type { StructuralPassOptions } from '../structural.js'
 import type { BuildingV2, EndCondition, MassToneV2, MassV2, ReturnWallV2, TerraceV2 } from './building.js'
 import { buildFacadeGraph, closeBalconies, closePortalHeads, closeRailings, closeTerraces, closeVerges, alignStackedReturns, snapReturnsToBodyFaces } from './assembly-closure.js'
 import type { BalconyEnd, ClosureNote } from './assembly-closure.js'
@@ -61,7 +65,9 @@ import { repairFromResiduals, verifyAgainstViews } from './verify.js'
 import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt } from './scan.js'
 
-export const SOLVER_V2_VERSION = '2.1.0' as const
+// 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
+// resolver before the run stops. Accepted houses are read exactly as before.
+export const SOLVER_V2_VERSION = '2.2.0' as const
 
 export type ReconstructionV2Options = {
   label: string
@@ -90,6 +96,8 @@ export type ReconstructionV2Options = {
    * nothing it receives can reach the result.
    */
   trace?: (event: SolverTraceEvent) => void
+  /** Told as the plan resolver weighs each reading, when it runs. Nothing it does reaches the result. */
+  resolverProgress?: ResolverProgress
 }
 
 /** One step of the solver, as the service's trace records it. */
@@ -144,7 +152,9 @@ type Ctx = {
 const viewFamilyOf = (frame: SourceCoordinateFrame): ViewFamily => (frame.roles.projection === 'ORTHOGRAPHIC_PLAN' ? (frame.roles.document === 'SITE_PLAN' ? 'SITE' : 'PLAN') : frame.roles.projection === 'ORTHOGRAPHIC_ELEVATION' ? 'ELEVATION' : frame.roles.projection === 'ORTHOGRAPHIC_SECTION' ? 'SECTION' : frame.roles.projection === 'PERSPECTIVE' ? 'PERSPECTIVE' : 'PAGE')
 
 export function reconstructV2(options: ReconstructionV2Options): ReconstructionV2Result {
-  const { graph, metrics } = options
+  const { graph } = options
+  // Replaced only when the plan resolver re-read the base plan at another scale (005A).
+  let metrics = options.metrics
   options.onPhase?.('REGISTRATION')
   const keep = options.frameFilter
   const ctx: Ctx = { sightings: [], measurements: [], hypotheses: [], alternatives: [], solved: [], relations: [], ledger: [], steps: [], unresolved: [], traces: [], consumed: new Map() }
@@ -202,11 +212,44 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // ---------------------------------------------------------------------------
   const sectionFrame = graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION' && (keep ? keep(f) : true))
   const levels = levelsFrom(metrics, sectionFrame?.id)
-  const { draft, layout } = composeStructuralLayout({ slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas })
-  const planDiagnostics = planDiagnosticsOf(draft, graph, metrics, layout)
-  const planCountsNow = planCounts(planDiagnostics)
+  const structuralOptions: StructuralPassOptions = { slug: options.slug, sourcePackageId: options.sourcePackageId, sourcePackageHash: options.sourcePackageHash, graph, metrics, raster: options.raster, frameFilter: keep, levels, publishedAreas: options.publishedAreas, sheetCache: new Map<string, PlanSheet>() }
+  const incumbent = composeStructuralLayout(structuralOptions)
+  let { draft, layout } = incumbent
+  let planDiagnostics: PlanDiagnosticsReport = planDiagnosticsOf(draft, graph, metrics, layout)
   const trace = (event: SolverTraceEvent): void => options.trace?.(event)
   trace({ phase: 'REGISTRATION', substage: 'PLAN_READ', status: draft.plans.length > 0 ? 'PASSED' : 'FAILED', counts: { planFrames: planDiagnostics.planFrames, plansRead: draft.plans.length, plansSkipped: draft.skippedPlans.length, ...(planDiagnostics.selectedPlanFrameId ? { selectedPlanFrameId: planDiagnostics.selectedPlanFrameId } : {}) } })
+  // --- 005A: when the first reading of the plan stops, weigh the others -------
+  // Only here: a first reading that holds is never second-guessed, so every house
+  // it reads today is read the same way, byte for byte.
+  if (!worldFrameFrom(draft) || layout.masses.length === 0 || layoutRefused(layout)) {
+    const first = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
+    const resolution = resolvePlan(structuralOptions, incumbent, options.resolverProgress)
+    const record: Record<string, number | string | boolean> = { ...resolutionRecord(resolution), firstReading: first.code }
+    if (resolution.kind === 'RESOLVED') {
+      draft = resolution.result.draft
+      layout = resolution.result.layout
+      metrics = resolution.metrics
+      planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), resolution: record }
+      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'DEGRADED', counts: record, detail: `the first reading stopped with ${first.code}; ${String(record.chosen)}` })
+    } else if (resolution.kind === 'INCONCLUSIVE' && resolution.why === 'NONE_HOLDS' && resolution.counts.compositions === 0) {
+      // No other reading got as far as a whole composition: the first reading's own
+      // missing link is still the best account of what stopped the run.
+      const report = { ...planDiagnostics, resolution: record }
+      const failure = new ReconstructionFailure(first.code, first.phase, `${first.message}; ${resolution.message}`, { ...first.diagnostics, readingsWeighed: resolution.counts.readings, distinctOutlines: resolution.counts.distinctOutlines, ...(resolution.diagnostics.bestReading !== undefined ? { bestReading: resolution.diagnostics.bestReading } : {}) }, first.substage, report)
+      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
+      throw failure
+    } else if (resolution.kind === 'INCONCLUSIVE') {
+      const report = { ...planDiagnostics, resolution: record }
+      const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `${first.message} ${resolution.message}`, { ...planCounts(report), firstReading: first.code, ...resolution.diagnostics }, 'PLAN_RESOLUTION', report)
+      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
+      throw failure
+    } else {
+      // Nothing but the first reading could be generated: its own failure stands.
+      planDiagnostics = { ...planDiagnostics, resolution: record }
+      trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: first.code, detail: 'no other reading of the plan could be generated' })
+    }
+  }
+  const planCountsNow = planCounts(planDiagnostics)
   const world = worldFrameFrom(draft)
   if (!world || layout.masses.length === 0) {
     const failure = planFailureOf(draft, layout, planDiagnostics)

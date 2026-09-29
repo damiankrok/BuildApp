@@ -23,13 +23,19 @@ import { evaluateLayoutGate, sealStructuralLayout } from './layout-gate.js'
 import { auditStructuralProjection } from './structural-audit.js'
 import type { StructuralProjectionAudit } from './structural-audit.js'
 import type { PublishedArea } from './layout-gate.js'
-import type { LayoutQuantity, StructuralLayoutHypothesisSet } from './structural-layout.js'
+import type { AlternativeGroup, LayoutConflict, LayoutGateReason, LayoutQuantity, StructuralLayoutHypothesisSet } from './structural-layout.js'
 
 export type StructuralPassOptions = StructuralLayoutOptions & {
   /** Where the floors and the roof are, from the section's ladder of level datums. */
   levels: RoofLevels
   /** Figures the publisher printed. Used to CHECK the layout and never to derive it. */
   publishedAreas?: readonly PublishedArea[]
+  /**
+   * What the plan resolver says about the reading it chose (005A): a gate
+   * reason, the readings it weighed and the disagreement it resolved. Sealed
+   * with the layout, so a resolved layout never looks like a first reading.
+   */
+  resolution?: { reasons: LayoutGateReason[]; alternatives: AlternativeGroup[]; conflicts: LayoutConflict[] }
 }
 
 export type StructuralPassResult = {
@@ -124,8 +130,9 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
     const roof = roofing.roofs.find((r) => r.massId === mass.id)
     if (roof) mass.roofSupportId = roof.id
   }
-  const conflicts = [...draft.conflicts, ...roofing.conflicts]
+  const conflicts = [...draft.conflicts, ...roofing.conflicts, ...(options.resolution?.conflicts ?? [])]
   const unresolved = [...draft.unresolved, ...roofing.unresolved]
+  if (options.resolution) draft.alternatives.push(...options.resolution.alternatives)
 
   // --- §21: draw the massing against the elevations, before anything is built
   //
@@ -146,7 +153,7 @@ export function composeStructuralLayout(options: StructuralPassOptions): Structu
     metrics,
     baseFrameId: draft.base?.frame.id ?? '',
     publishedAreas: options.publishedAreas,
-    extraReasons: projection.reasons,
+    extraReasons: [...projection.reasons, ...(options.resolution?.reasons ?? [])],
   })
 
   const layout = sealStructuralLayout(

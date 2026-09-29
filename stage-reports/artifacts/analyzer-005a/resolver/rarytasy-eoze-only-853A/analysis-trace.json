@@ -1,0 +1,169 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+        "chosenDepartures": "EXTENT,SCALE",
+        "compositions": 2,
+        "copies": 1,
+        "decompositions": 4,
+        "distinctOutlines": 5,
+        "firstReading": "PLAN_NO_WALLED_ENVELOPE",
+        "outcome": "RESOLVED",
+        "reading1": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+        "reading2": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, outer faces: 1 body, 122.1 m² (+0.0% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+        "reading3": "copy area_table e842a14c7f, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 147.0 m² (+20.4% of 122.07), WRONG, corroborated by WALL_COVERAGE",
+        "reading4": "copy area_table e842a14c7f, wall-ink extent, registered scale, largest-first tiling, outer faces: 1 body, 153.8 m² (+26.0% of 122.07), WRONG, corroborated by WALL_COVERAGE",
+        "readings": 15,
+        "resolverVersion": "1.0.0"
+      },
+      "detail": "the first reading stopped with PLAN_NO_WALLED_ENVELOPE; copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "DEGRADED",
+      "substage": "PLAN_RESOLUTION"
+    },
+    {
+      "counts": {
+        "builtRegions": 1,
+        "cells": 15,
+        "dimensionChains": 62,
+        "dimensionChainsRead": 3,
+        "enclosedCells": 15,
+        "gridLinesX": 4,
+        "gridLinesY": 6,
+        "masses": 1,
+        "planFrames": 4,
+        "planSizePx": "853x853",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 2.2236,
+        "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+        "wallBands": 51,
+        "wallThicknessPx": 15,
+        "walledEnvelope": true,
+        "wideOpenings": 1,
+        "wideOpeningsClosed": 1
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_DECOMPOSITION"
+    },
+    {
+      "counts": {
+        "gate": "STRUCTURAL_LAYOUT_PARTIAL",
+        "gateReasons": "DEGRADING:PLAN_RESOLVED_BY_HYPOTHESIS,DEGRADING:SCALE_DISAGREEMENT",
+        "masses": 1,
+        "recesses": 0,
+        "roofs": 1
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "DEGRADED",
+      "substage": "STRUCTURAL_LAYOUT"
+    },
+    {
+      "counts": {
+        "plans": 1,
+        "registered": 1
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_REGISTRATION"
+    },
+    {
+      "counts": {
+        "elevationFrames": 3,
+        "registered": 2,
+        "ridgeDatum": true
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "ELEVATION_REGISTRATION"
+    },
+    {
+      "counts": {
+        "mainRoof": true,
+        "masses": 1,
+        "partitions": 20,
+        "recesses": 1,
+        "returns": 2,
+        "rooms": 8,
+        "stair": "none"
+      },
+      "durationMs": 0,
+      "stage": "SOLVING_TOPOLOGY",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "TOPOLOGY"
+    },
+    {
+      "counts": {
+        "balconies": 0,
+        "chimneys": 0,
+        "openings": 11,
+        "railings": 0,
+        "rooflights": 0,
+        "sharedDoors": 0,
+        "terraces": 3
+      },
+      "durationMs": 0,
+      "stage": "SOLVING_METRICS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "METRICS"
+    },
+    {
+      "counts": {
+        "decisions": 22,
+        "dropped_short": 2,
+        "split_at_crossing": 1,
+        "trimmed_to_host": 9,
+        "trimmed_to_partition": 10,
+        "unresolvedJoints": 0
+      },
+      "durationMs": 0,
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "WALL_TOPOLOGY"
+    },
+    {
+      "counts": {
+        "commands": 127,
+        "openingsDropped": 0,
+        "openingsFitted": 0
+      },
+      "durationMs": 0,
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "EMISSION"
+    }
+  ],
+  "outcome": "COMPLETED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

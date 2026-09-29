@@ -36,6 +36,13 @@ export const RECONSTRUCTION_FAILURE_CODES = [
   'PLAN_NO_MASSES',
   /** A body was built, and the layout gate found it contradicts the sources (its footprint against the published one, two bodies in one place). */
   'PLAN_LAYOUT_REJECTED',
+  /**
+   * The first reading of the plan stopped, and the other readings the plan
+   * resolver weighed (other copies, extents, scales, tilings) either break the
+   * layout too or are equally supported and describe different buildings.
+   * The diagnostics list the readings; none was picked for the person.
+   */
+  'PLAN_RESOLUTION_INCONCLUSIVE',
   /** An upper plan could not be registered onto the one below. */
   'PLAN_STOREY_ALIGNMENT_FAILED',
   /** An upper plan fits two places on the one below almost equally well. */
@@ -77,6 +84,7 @@ export const FAILURE_TITLES: Record<ReconstructionFailureCode, string> = {
   PLAN_NO_BUILT_REGIONS: 'Could not reconstruct the floor-plan body',
   PLAN_NO_MASSES: 'Could not reconstruct the floor-plan body',
   PLAN_LAYOUT_REJECTED: 'The floor-plan reading contradicts the project data',
+  PLAN_RESOLUTION_INCONCLUSIVE: 'No reading of the floor plan holds up',
   PLAN_STOREY_ALIGNMENT_FAILED: 'The storeys could not be aligned',
   PLAN_STOREY_ALIGNMENT_AMBIGUOUS: 'The storeys align two ways',
   VIEW_REGISTRATION_NO_ANCHORS: 'The views could not be registered',
@@ -154,6 +162,8 @@ export type PlanDiagnosticsReport = {
   plans: PlanDiagnostics[]
   /** Frames the pass looked at and could not read, and why. */
   skipped: Array<{ frameId: string; why: string }>
+  /** When the first reading stopped and the plan resolver weighed others (005A): what it weighed and decided. Absent otherwise. */
+  resolution?: Record<string, number | string | boolean>
 }
 
 /** The counts a failure screen shows, from the digest. */
