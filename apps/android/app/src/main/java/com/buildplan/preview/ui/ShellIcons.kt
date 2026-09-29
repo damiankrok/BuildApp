@@ -16,14 +16,6 @@ import androidx.compose.ui.unit.dp
  * Every icon is tinted by its caller; the black here is only a placeholder.
  */
 object ShellIcons {
-    fun of(place: AppPlace): ImageVector = when (place) {
-        AppPlace.HOUSE -> house
-        AppPlace.MODEL -> cube
-        AppPlace.STAGES -> rule
-        AppPlace.COSTS -> receipt
-        AppPlace.DOCUMENTS -> page
-    }
-
     private fun outline(name: String, block: PathBuilder.() -> Unit): ImageVector =
         ImageVector.Builder(name = name, defaultWidth = 24.dp, defaultHeight = 24.dp, viewportWidth = 24f, viewportHeight = 24f)
             .path(stroke = SolidColor(Color.Black), strokeLineWidth = 1.75f, strokeLineCap = StrokeCap.Round, strokeLineJoin = StrokeJoin.Round, pathBuilder = block)

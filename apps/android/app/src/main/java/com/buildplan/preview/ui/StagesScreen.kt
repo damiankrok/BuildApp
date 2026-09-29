@@ -82,7 +82,8 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 
 /**
- * `Etapy`: the owner's account of the build, and the only place it is edited.
+ * The stages: the owner's account of the build, and the only place it is
+ * edited — a sheet over the house since INTEGRATION-004A, not a page.
  *
  * The seventeen starter stages in order, each with its state as a mark and
  * in words. Tapping a stage opens it in place: the current stage takes its
@@ -94,10 +95,10 @@ import kotlinx.coroutines.launch
  * show, and it says what it is: progress by stages, not money.
  */
 @Composable
-fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit) {
+fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit, modifier: Modifier = Modifier) {
     val view = progress.view
     // A wide window centres the list at a readable measure instead of stretching its rows.
-    Column(Modifier.fillMaxSize().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax).statusBarsPadding()) {
+    Column(modifier.fillMaxSize().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax)) {
         if (view == null) {
             Column(Modifier.padding(Space.l)) {
                 Text(stringResource(R.string.stages_title), style = MaterialTheme.typography.headlineSmall, color = Palette.Ink)

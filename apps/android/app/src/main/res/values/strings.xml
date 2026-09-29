@@ -2,17 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="app_name">BuildPlan</string>
 
-    <!-- Miejsca aplikacji (dolny pasek) -->
-    <string name="place_house">Dom</string>
-    <string name="place_model">3D</string>
-    <string name="place_stages">Etapy</string>
-    <string name="place_costs">Koszty</string>
-    <string name="place_documents">Dokumenty</string>
-    <string name="place_house_description">Twój dom: postęp budowy, model i źródło</string>
-    <string name="place_model_description">Model 3D domu na pełnym ekranie, z historią budowy</string>
-    <string name="place_stages_description">Etapy budowy i postęp</string>
-    <string name="place_costs_description">Koszty budowy</string>
-    <string name="place_documents_description">Dokumenty budowy</string>
+    <!-- Przestrzeń domu: menu, wiersz stanu, brak domu (INTEGRATION-004A) -->
+    <string name="workspace_menu">Menu domu</string>
+    <string name="workspace_new_house_ready">Nowy dom gotowy: %1$s</string>
+    <string name="workspace_open_new_house">Otwórz</string>
+    <string name="house_status_limited_short">Model gotowy z ograniczeniami — zobacz, czego brakuje</string>
+    <string name="house_analysis_failed_short">Analiza linku się nie powiodła — zobacz dlaczego</string>
+    <string name="menu_this_house">Ten dom</string>
+    <string name="menu_source">Źródło modelu i analiza</string>
+    <string name="menu_costs">Koszty</string>
+    <string name="menu_costs_not_built">Osobna przestrzeń kosztów jeszcze nie powstała: nic nie jest tu zapisywane ani wyceniane.</string>
+    <string name="no_house_title">Na tym telefonie nie ma jeszcze żadnego domu</string>
+    <string name="no_house_body">Wklej link do publicznej strony projektu domu. Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model, który zobaczysz w 3D — a Twój postęp budowy zapiszesz przy nim.</string>
+    <string name="timeline_edit_progress">Otwórz etapy budowy</string>
     <string name="state_selected">wybrane</string>
     <string name="state_not_selected">niewybrane</string>
     <string name="state_expanded">rozwinięte</string>
@@ -21,7 +23,7 @@
     <!-- Dom -->
     <string name="house_loading">Wczytuję model…</string>
     <string name="house_failed">Nie udało się wczytać modelu</string>
-    <string name="house_no_bundles">Ta wersja aplikacji nie zawiera żadnego modelu. Dodaj dom z linku.</string>
+    <string name="house_no_bundles">Na tym telefonie nie ma jeszcze żadnego modelu domu.</string>
     <string name="load_problem_missing">Tego modelu nie ma już na telefonie. Wybierz inny dom albo przeanalizuj link ponownie.</string>
     <string name="load_problem_damaged">Plik modelu jest uszkodzony: nie zgadza się z tym, co sprawdzono przy zapisie. Usuń go i przeanalizuj link ponownie.</string>
     <string name="load_problem_unreadable">Nie da się odczytać pliku modelu. Usuń go i przeanalizuj link ponownie.</string>
@@ -133,16 +135,6 @@
     <string name="refused_no_current">Najpierw ustaw aktualny etap.</string>
     <string name="refused_unknown_stage">Tego etapu nie ma na liście.</string>
 
-    <!-- Puste miejsca: uczciwie, bez danych pozornych -->
-    <string name="empty_costs_title">Koszty</string>
-    <string name="empty_costs_body">Tu będzie dziennik wydatków i budżet budowy. Ta część aplikacji jeszcze nie powstała: nic tu nie jest zapisywane ani wyceniane.</string>
-    <string name="empty_costs_meanwhile">Postęp budowy prowadzisz już w Etapach.</string>
-    <string name="empty_documents_title">Dokumenty</string>
-    <string name="empty_documents_body">Tu trafią dokumenty, zdjęcia i pliki projektu. Ta część aplikacji jeszcze nie powstała: nie można tu jeszcze niczego dodać ani przechowywać.</string>
-    <string name="empty_documents_meanwhile">Źródło modelu — strona projektu i wynik analizy — znajdziesz przy domu.</string>
-    <string name="empty_go_stages">Przejdź do Etapów</string>
-    <string name="empty_go_house">Przejdź do Domu</string>
-    <string name="empty_not_built">Jeszcze niedostępne</string>
 
     <!-- The owner's words for a scene element (ElementWords) -->
     <string name="el_wall">Ściana</string>

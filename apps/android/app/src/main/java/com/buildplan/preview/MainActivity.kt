@@ -19,22 +19,27 @@ import com.buildplan.preview.ui.ShellState
 import java.util.Locale
 
 /**
- * The product shell (`ui/AppShell`): Dom, 3D, Etapy, Koszty, Dokumenty.
+ * The product shell (`ui/AppShell`, INTEGRATION-004A): the house workspace
+ * is the root whenever a house exists; the stages, the source and the house
+ * menu are sheets over it; adding a house from a link is a task that returns
+ * to the same house.
  *
  * The viewer opens the scene bundles that ship inside the APK — offline, as
- * before — and any analysis kept on this phone. The link analysis, reached
- * from Dom, runs the production analyzer ON the phone (BUILDAPP-03Y2: its
- * bundle in an embedded Node runtime, in a process of its own), or sends the
- * link to the analyzer service and downloads the scene it made; either way the
- * scene is verified before it is kept, and a local result opens in 3D by
- * itself. The app holds no key: it has no account, and neither path needs one.
- * Construction progress is kept per house in the app's private storage.
+ * before — and any analysis kept on this phone. The link analysis runs the
+ * production analyzer ON the phone (BUILDAPP-03Y2: its bundle in an embedded
+ * Node runtime, in a process of its own), or sends the link to the analyzer
+ * service and downloads the scene it made; either way the scene is verified
+ * before it is kept. With no house open a finished analysis opens by itself;
+ * with one open the workspace offers it. The app holds no key: it has no
+ * account, and neither path needs one. Construction progress is kept per
+ * house in the app's private storage.
  *
- * A launch may name the place to open (`ShellState.EXTRA_PLACE`: `HOUSE`,
- * `MODEL`, `STAGES`, `COSTS`, `DOCUMENTS` or `ANALYZER`), which is how the CI
- * screenshots reach every place without tapping coordinates. Another
- * (`RenderSurfaceKind.EXTRA`) picks the render surface for a device
- * comparison.
+ * A launch may name the surface to open (`ShellState.EXTRA_PLACE`: `HOUSE`,
+ * `STAGES`, `SOURCE`, `MENU` or `ANALYZER`), and may hide the scenes shipped
+ * in the APK (`ShellState.EXTRA_WITHOUT_BUNDLED`) so the no-house state can
+ * be seen; that is how the CI screenshots reach every surface without
+ * tapping coordinates. Another extra (`RenderSurfaceKind.EXTRA`) picks the
+ * render surface for a device comparison.
  */
 class MainActivity : ComponentActivity() {
     /**
@@ -58,10 +63,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val initial = ShellState.decode(intent?.getStringExtra(ShellState.EXTRA_PLACE)) ?: ShellState()
         val surface = RenderSurfaceKind.decode(intent?.getStringExtra(RenderSurfaceKind.EXTRA))
+        val withoutBundled = intent?.getBooleanExtra(ShellState.EXTRA_WITHOUT_BUNDLED, false) == true
         setContent {
             PreviewTheme {
                 val model: PreviewViewModel = viewModel()
                 surface?.let { model.renderSurfaceKind = it }
+                if (withoutBundled) model.hideBundled()
                 val analyzer: AnalyzerViewModel = viewModel()
                 val progress: ProgressViewModel = viewModel()
                 AppShell(preview = model, analyzer = analyzer, progress = progress, initial = initial)

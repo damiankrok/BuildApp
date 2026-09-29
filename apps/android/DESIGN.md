@@ -203,17 +203,20 @@ components:
     backgroundColor: "{colors.Sheet}"
     textColor: "{colors.Ink}"
     rounded: "{rounded.sheet}"
-  places-bar:
-    backgroundColor: "{colors.Raised}"
-    textColor: "{colors.InkMuted}"
-    typography: "{typography.labelSmall}"
-    height: "64dp"
-  places-bar-selected:
-    backgroundColor: "{colors.Well}"
+  house-menu-row:
+    backgroundColor: "transparent"
     textColor: "{colors.Ink}"
-  places-rail:
-    backgroundColor: "{colors.Raised}"
-    width: "80dp"
+    typography: "{typography.bodyLarge}"
+    padding: "8dp 16dp"
+    height: "56dp"
+  house-menu-row-current:
+    backgroundColor: "{colors.Well}"
+  status-row:
+    backgroundColor: "transparent"
+    textColor: "{colors.Ink}"
+    typography: "{typography.bodySmall}"
+    padding: "0dp 8dp 0dp 12dp"
+    height: "48dp"
 ---
 
 # Design System: BuildPlan
@@ -224,7 +227,7 @@ components:
 
 Construction progress is a measure, and the app reads it the way a builder does: on a carpenter's folding rule (miarka składana). The build's stages are its hinged segments, unfolded as far as the build has got, lying under the house. A graphite night ground carries the house; the chrome over the model is a translucent graphite tint rather than an opaque slab; every word is achromatic ink; and a single accent, rule yellow, means measured construction progress and nothing else. A look back in time wears the same yellow as an outline, never a fill, so a preview can never pass for the state of the build.
 
-The system is dark-first, model-first and technical but calm. Hierarchy is carried by type size, weight and ink level rather than by enclosing cards: Dom leads with an inked line drawing of the house and one monumental figure; 3D is the model edge to edge with four compact layers of chrome; Etapy is a ruled list. Density is modest and every control is a 48 dp target, because the owner checks the build one-handed on the plot as often as at home in the evening. Motion explains continuity (a pane growing from the rail button that opened it, the rule's cursor settling on a stop) and disappears entirely when the system animator scale is zero.
+The system is dark-first, model-first and technical but calm. Since INTEGRATION-004A the house is the root: the model edge to edge with four compact layers of chrome and one contextual sheet at a time; the stages are a ruled list in a sheet over it; the inked line drawing of the house and the monumental figure live on the source sheet and the stage sheet. Hierarchy is carried by type size, weight and ink level rather than by enclosing cards. Density is modest and every control is a 48 dp target, because the owner checks the build one-handed on the plot as often as at home in the evening. Motion explains continuity (a pane growing from the rail button that opened it, the rule's cursor settling on a stop) and disappears entirely when the system animator scale is zero.
 
 Confirmed rejections, from the owner's brief: card-heavy dashboards, a giant rounded model card, stacked rectangular panels around the 3D, a debug-tool feel, and large dead cards for unfinished places.
 
@@ -242,12 +245,12 @@ Confirmed rejections, from the owner's brief: card-heavy dashboards, a giant rou
 Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one saturated yellow reserved for the measure.
 
 ### Primary
-- **Rule Yellow** (`Rule`): measured progress and nothing else. The done segments of the folding rule, the filled part of the stage in progress, the solid "now" tag, the hollow preview tag and its hairline, the done/in-progress `StageMark`, the part of the Dom line drawing the current stage adds, and the completion slider in Etapy (which edits that measure). Material's `tertiary` is mapped to it, so no stock component may be left on a tertiary default.
+- **Rule Yellow** (`Rule`): measured progress and nothing else. The done segments of the folding rule, the filled part of the stage in progress, the solid "now" tag, the hollow preview tag and its hairline, the done/in-progress `StageMark`, the part of the house line drawing the current stage adds, and the completion slider in the stage sheet (which edits that measure). Material's `tertiary` is mapped to it, so no stock component may be left on a tertiary default.
 - **Ink on Rule** (`OnRule`): text or ticks placed on the yellow (11:1).
 
 ### Neutral
-- **Graphite Ground** (`Ground`): the app's ground on Dom, Etapy, the analyzer and the empty places. The 3D backdrop is the renderer's own, deliberately darker, so the model's ground is the darkest thing on screen.
-- **Raised Graphite** (`Raised`): one step up; the places bar and rail, text fields, the open stage row in Etapy.
+- **Graphite Ground** (`Ground`): the app's ground on the sheets, the analyzer task and the no-house state. The 3D backdrop is the renderer's own, deliberately darker, so the model's ground is the darkest thing on screen.
+- **Raised Graphite** (`Raised`): one step up; text fields, the open stage row in the stage sheet.
 - **Sheet Graphite** (`Sheet`): opaque sheets that carry dense text: the element inspector, the house switcher, dialogs, the snackbar.
 - **Well** (`Well`): the darkest step, a control pressed into its rail (active tool, selected place, selected strip stop, current house in the switcher).
 - **Hairline** (`Hairline`): 1 dp dividers, the rail and bar edges, the completion and progress tracks.
@@ -276,10 +279,10 @@ Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one 
 **Character:** The rule's own face, narrow and engineered, speaks only in measured figures; Roboto carries every word the owner reads, set at Material's scale with semibold titles and calmer tracking on the small roles.
 
 ### Hierarchy
-- **Measure / monumental** (600, 64sp, line 64sp, -0.01em, tnum): the one monumental figure in the app, "Postęp wg etapów" on Dom.
-- **Measure / inline** (600, 20sp, line 22sp, tnum): a measured value inside a line of chrome ("43%" in the 3D timeline, stage completion in Etapy; Etapy's header scales it by 1.4).
+- **Measure / monumental** (600, 64sp, line 64sp, -0.01em, tnum): the one monumental figure in the app, "Postęp wg etapów" (the stage sheet's header, scaled).
+- **Measure / inline** (600, 20sp, line 22sp, tnum): a measured value inside a line of chrome ("43%" in the timeline, stage completion in the stage sheet; the sheet's header scales it by 1.4).
 - **Measure / numeral** (600, 13sp, line 14sp, tnum): stage numbers and the rule's graduation numerals.
-- **Headline** (headlineSmall, 600, 24sp): a screen's title (house name on Dom, "Etapy", empty places).
+- **Headline** (headlineSmall, 600, 24sp): a screen's title ("Etapy budowy" on the stage sheet, the no-house state).
 - **Title** (titleLarge / titleMedium / titleSmall, 600, 22 / 16 / 14sp, 0 tracking): section headings, the current stage, pane titles and the 3D context title.
 - **Body** (bodyLarge / bodyMedium / bodySmall, 400, 16 / 14 / 12sp): stage names, rows and values; bodySmall is the workhorse for second lines. Content columns stop at 720 dp (`Sizes.contentMax`, 560 dp on empty places).
 - **Label** (labelLarge / labelMedium / labelSmall, 500, 14 / 12 / 11sp, +0.01 to +0.02em, sentence case): button text, group labels, navigation and rail labels.
@@ -295,9 +298,9 @@ Graphite neutrals in tight tonal steps, achromatic ink in three levels, and one 
 
 A single column on the phone, centred at a readable measure (max 720 dp) on wide windows, never stretched. Spacing comes from one scale (2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 dp) with more space above a heading than below it (`SectionHeading`: 24 dp above, 8 dp below). Screen gutters and pane insets are 16 dp.
 
-The shell has five places (Dom, 3D, Etapy, Koszty, Dokumenty). In portrait they sit in a bottom bar of equal 64 dp cells that steps aside while the keyboard is up; when the window is short (height below 480 dp, a phone on its side) or wide (600 dp and over) they move to an 80 dp rail on the start edge so the content keeps its height. From 600 dp wide and wider than tall, Dom splits into two panes. Content respects the safe drawing area (status bar, navigation bar, cutout, keyboard).
+The shell is the house workspace (INTEGRATION-004A, the OWNER's house-first override): no navigation bar, no page beside the house. Its chrome has four layers, each only as large as its job: a compact context top-left (the house menu button, the house name, the actual state, and a status row only when there is something to say), the labelled tool rail on the right edge with its 236 dp pane growing to its left, the timeline at the foot whose header opens the stage sheet, and, one at a time, a contextual surface: with a selection, the element's name above the timeline and its details in a sheet that replaces the timeline (max 460 dp and 55 % of the screen; a 360 dp side panel in landscape); or a modal sheet on a scrim (the house menu, the stages, the source). The camera frames the house inside what the resting chrome leaves free; sheets and the analyzer task never move it. In landscape the bottom stack ends before the rail instead of running under it. Panels share a budget, not a layer: none may overlap another. Content respects the safe drawing area (status bar, navigation bar, cutout, keyboard).
 
-3D is immersive and hides the places bar. Its chrome has four layers, each only as large as its job: a compact context top-left (back, house name, the actual state), the labelled tool rail on the right edge with its 236 dp pane growing to its left, the timeline at the foot, and, only with a selection, the element's name above the timeline and its details in a sheet that replaces the timeline (max 460 dp and 55 % of the screen; a 360 dp side panel in landscape). The camera frames the house inside what the resting chrome leaves free. In landscape the bottom stack ends before the rail instead of running under it. Panels share a budget, not a layer: none may overlap another.
+Adding a house from a link is a task surface that takes the screen and returns to the same house; with no house on the phone the root is `NoHouseScreen`, one paragraph and one filled action.
 
 ## Elevation & Depth
 
@@ -336,18 +339,18 @@ Not used. Choices are `PanelOption` rows.
 ### Inputs / Fields
 - **Style:** Material outlined field, RuleEmpty outline at rest, label in Polish ("Teraz robimy").
 - **Focus:** outline, label and cursor turn Ink.
-- **Completion slider (Etapy):** the one editable measure, so the only interactive control in yellow, drawn in the rule's grammar rather than as a stock pill: an 8 dp Hairline bar with `tick` corners, filled in Rule to the stage's share, graduated every 5 % (OnRule ticks on the fill, RuleEmpty beyond it), and a 6 × 28 dp Rule marker with `tick` corners for a thumb; the range carries a 1.2 dp RuleEmpty outline, the rule's "not started".
+- **Completion slider (stage sheet):** the one editable measure, so the only interactive control in yellow, drawn in the rule's grammar rather than as a stock pill: an 8 dp Hairline bar with `tick` corners, filled in Rule to the stage's share, graduated every 5 % (OnRule ticks on the fill, RuleEmpty beyond it), and a 6 × 28 dp Rule marker with `tick` corners for a thumb; the range carries a 1.2 dp RuleEmpty outline, the rule's "not started".
 
 ### Navigation
-- **PlacesBar:** Raised, 1 dp Hairline top edge, five equal 64 dp cells; 22 dp outline icon over a labelSmall label. The chosen place gets a 2 dp Ink line on its top edge, a 48 by 28 dp Well behind its icon, and a full-ink label; the others are InkMuted. Selection is announced through `stateDescription`, never a `contentDescription` that would erase the label.
-- **PlacesRail:** the same grammar on an 80 dp Raised rail with a 1 dp Hairline edge, the line on the start edge.
+- **House menu (`HouseMenuSheet`):** a modal Sheet from the top context's menu button: the houses on this phone as 64 dp radio rows (the open one on a Well with a check), "Dodaj dom z linku" as a LineButton, then the matters of this house as 56 dp rows with an icon and a chevron (Etapy budowy, Źródło modelu i analiza) and the named cost boundary (Koszty, disabled, InkFaint, with the sentence that it is not built yet). Selection is announced through `stateDescription`, never a `contentDescription` that would erase the label.
+- **Status row:** one 48 dp row under the top context, only when the house has something to say: a new house ready ("Nowy dom gotowy: … · Otwórz"), a link analysis running or failed, or a model kept with limitations; a mark and a sentence, the way to its matter.
 - **PanelHeader:** titleSmall title (and an optional bodySmall line) with a 48 dp close button; it sits outside the pane's scroll.
 
 ### The Folding Rule (signature)
 The build's stages as hinged segments with the design's house outline as an end cap. Done: solid Rule. In progress: Rule outline filled to its completion. Not started: RuleEmpty outline. The solid tag above marks NOW; a hollow tag with a hairline through the rule marks the PREVIEW cursor. Graduation ticks under every hinge, a longer tick and a numeral at 1, 5, 10 and 15. Interactive height 52 dp (the whole height is the touch band), static 40 dp, grown to fit numerals at large font scales. Scrubbing snaps stop by stop with a haptic tick, moves only the preview and never changes saved progress; TalkBack reads it as an adjustable control with previous, next and "Wróć do teraz" actions.
 
 ### StageMark and PreviewMark
-The rule's grammar in 18 by 8 dp (`StageMark`: filled, part-filled, grey outline, InkMuted outline for the finished design) and an 11 dp hollow Rule box (`PreviewMark`) beside "Podgląd: …". The same marks are used on Dom, in the 3D timeline, the stage strip, Etapy and the inspector.
+The rule's grammar in 18 by 8 dp (`StageMark`: filled, part-filled, grey outline, InkMuted outline for the finished design) and an 11 dp hollow Rule box (`PreviewMark`) beside "Podgląd: …". The same marks are used in the timeline, the stage strip, the stage sheet and the inspector.
 
 ### TimelineRail
 A `sheet`-cornered GlassSurface at the foot of the 3D. The header (at least 56 dp) states now ("43% · Dach", "Teraz: …") or, while previewing, "Podgląd: …" with "Wróć do teraz" on the line under the title, never beside it. Expanded, a horizontal strip of stops (96 to 132 dp wide, 56 dp tall, directly on the timeline's glass with no box of their own; the chosen stop is a Well with a 1 dp Ink border and `control` corners). names each stop with its mark, numeral, name and state word. A chosen element is named in a row at the top of the same glass (name, storey, "Szczegóły", ×), above a hairline: the foot of the 3D is always one panel.
@@ -365,10 +368,10 @@ The chosen element's details in a Sheet rising from the bottom edge in place of 
 `StatusText` (labelMedium, InkMuted), `ProblemLine` (an 18 dp Error caution icon plus Ink text), and `LoadProblem` (the reason in Polish, the English technical account folded under a QuietAction).
 
 ### HouseDrawing
-Dom's picture of the house: a derived axonometric line drawing (232 dp tall in one column). Built by the owner's account in Ink (1.1 stroke), the current stage's additions in Rule (1.3), the remaining design as InkMuted at 32 % (0.8). With progress unset the whole design is Ink. Tapping it opens 3D.
+The source sheet's picture of the house: a derived axonometric line drawing (200 dp tall). Built by the owner's account in Ink (1.1 stroke), the current stage's additions in Rule (1.3), the remaining design as InkMuted at 32 % (0.8). With progress unset the whole design is Ink. Tapping it closes the sheet onto the house.
 
-### EmptyPlace
-Koszty and Dokumenty: top-left headline, a muted "not built yet" line with the place's icon, one paragraph, and one real LineButton onward. No sample rows, zero totals or pretend actions.
+### Sheets over the house
+`StageSheet` (the 003C stage editor in a modal Sheet capped at the window's height, the house's ridge in view above it), `SourceSheet` (the house's name, the inked `HouseDrawing`, where the model came from with its limitations named and counted, a link analysis running or failed, what the latest analysis of this house left open, the technical rows folded at the end) and `NoHouseScreen` (top-left headline, one paragraph, one InkButton "Dodaj dom z linku"). No sample rows, zero totals or pretend actions anywhere.
 
 ## Do's and Don'ts
 
@@ -382,6 +385,7 @@ Koszty and Dokumenty: top-left headline, a muted "not built yet" line with the p
 - **Do** take `GlassOpaque` for any pane over another pane, and keep headers and the one way out outside the scroll, with `fadeBelowFold` over a cut list.
 - **Do** read motion from `LocalMotionPolicy` (enter 220 ms, exit 150 ms, settle 180 ms, recede 160 ms) and use `enterDelayed` when one dense panel replaces another.
 - **Do** put every UI label in Polish, in the owner's words, in `strings.xml`; keep code names and routes in English.
+- **Do** keep the house as the root: every matter is a sheet over it or a task that returns to it, and a new permanent surface needs the OWNER's decision.
 - **Do** keep the model's semantic truth where it lives: what is visible comes from the domain's selection rules and one `primitivesOf(elements)` bridge; the UI and renderer only ask.
 
 ### Don't:
@@ -395,3 +399,4 @@ Koszty and Dokumenty: top-left headline, a muted "not built yet" line with the p
 - **Don't** let the renderer or the UI own semantic truth: no second decision path for roof, storey or room, no `if` about a frame in the renderer.
 - **Don't** use `!!` where types can express it, and don't hide problems with `@Suppress`, empty `catch` or a lint baseline.
 - **Don't** show invented progress, costs, dates or sample rows; an unset state says "Postęp nieustawiony" and offers to set it.
+- **Don't** add a navigation bar, a tab, or a page that says only that it is not built; the cost boundary is a named row, and nothing else.

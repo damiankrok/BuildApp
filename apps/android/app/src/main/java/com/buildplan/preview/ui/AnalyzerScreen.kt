@@ -540,15 +540,15 @@ private fun Result(summary: AnalysisSummary, entry: DownloadedSceneEntry, local:
         }
         InkButton(stringResource(R.string.house_open_3d), onClick = onOpen, icon = ShellIcons.cube, modifier = Modifier.fillMaxWidth())
         Foldout(stringResource(R.string.analyzer_details), open, onToggle = { open = !open }) {
-            Diagnostics(summary)
+            AnalysisDiagnostics(summary)
             local?.let { LocalCost(it) }
         }
     }
 }
 
-/** Every diagnostic as labelled rows. Never raw JSON. */
+/** Every diagnostic as labelled rows. Never raw JSON. Shared with the source sheet. */
 @Composable
-private fun Diagnostics(summary: AnalysisSummary) {
+internal fun AnalysisDiagnostics(summary: AnalysisSummary) {
     Column(verticalArrangement = Arrangement.spacedBy(Space.m)) {
         Section(stringResource(R.string.analyzer_unresolved)) {
             if (summary.unresolved.isEmpty()) Body(stringResource(R.string.analyzer_none))

@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -30,6 +31,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -55,12 +57,14 @@ import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.buildplan.preview.R
+import com.buildplan.preview.analyzer.AnalysisState
 import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.scene.ModelScene
@@ -68,14 +72,17 @@ import com.buildplan.preview.scene.SceneObject
 import kotlin.math.roundToInt
 
 /**
- * `3D`: the house on the whole screen, and the chrome floating over it.
+ * The house workspace: the product root (INTEGRATION-004A, house-first).
  *
  * Five layers, each only as large as its job: the model, edge to edge; a
- * compact context at the top left (back, the house, where the build stands);
- * the labelled tool rail at the right edge; the construction timeline at the
- * foot; and, only when an element is chosen, its name above the timeline and
- * its details in a sheet that takes the timeline's place. While a finger
- * turns the model, the context and the rail step back.
+ * compact context at the top left (the house menu, the house, where the
+ * build stands, and a status row only when there is something to say); the
+ * labelled tool rail at the right edge; the construction timeline at the
+ * foot, whose header opens the stage sheet; and, one at a time, a
+ * contextual surface — an element's name above the timeline and its details
+ * in a sheet that takes the timeline's place, or a modal sheet over a scrim
+ * (the house menu, the stages, the source). While a finger turns the model,
+ * the context and the rail step back.
  *
  * The model is framed inside what the chrome leaves free at rest — below
  * the top context, left of the tool rail, above the timeline — so "the whole
@@ -86,21 +93,59 @@ import kotlin.math.roundToInt
  * short (landscape) screen the bottom stack ends before the rail instead of
  * running under it.
  *
- * Back closes the pane, then the details, then the selection, then leaves.
+ * Back closes the pane, then the details, then the selection; a modal sheet
+ * closes itself; then back leaves the app — the workspace is the root.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ModelWorkspace(model: PreviewViewModel, progress: ProgressViewModel, onBack: () -> Unit, onSetProgress: () -> Unit) {
+fun HouseWorkspace(
+    model: PreviewViewModel,
+    progress: ProgressViewModel,
+    analyzer: AnalyzerViewModel,
+    sheet: Sheet?,
+    /** A house analysed on this phone while this one was open, offered by its key; null when there is none. */
+    readyKey: String?,
+    onOpenSheet: (Sheet) -> Unit,
+    onCloseSheet: () -> Unit,
+    onOpenHouse: (String) -> Unit,
+    onAnalyze: () -> Unit,
+) {
+    val context = Context(model, progress, analyzer, readyKey, onOpenSheet, onOpenHouse)
     Box(Modifier.fillMaxSize().background(Palette.Ground)) {
         when (val screen = model.screen) {
-            is ScreenState.Loading -> WorkspaceMessage(stringResource(R.string.house_loading), null, onBack)
-            is ScreenState.Failed -> WorkspaceMessage(stringResource(R.string.house_failed), screen, onBack)
-            is ScreenState.Ready -> ReadyWorkspace(model, progress, screen.scene, onBack, onSetProgress)
+            is ScreenState.Loading -> WorkspaceMessage(stringResource(R.string.house_loading), null, context)
+            is ScreenState.Failed -> WorkspaceMessage(stringResource(R.string.house_failed), screen, context)
+            is ScreenState.Ready -> ReadyWorkspace(model, progress, screen.scene, context, onOpenStages = { onOpenSheet(Sheet.STAGES) })
         }
+    }
+    when (sheet) {
+        null -> Unit
+        Sheet.MENU -> HouseMenuSheet(model, analyzer, onDismiss = onCloseSheet, onPick = { onOpenHouse(it.key) }, onAnalyze = onAnalyze, onOpenSheet = onOpenSheet)
+        Sheet.STAGES -> StageSheet(
+            progress = progress,
+            sceneTitle = model.scene?.title,
+            onDismiss = onCloseSheet,
+            onShowInModel = { stage ->
+                if (stage != null) progress.preview(stage) else progress.returnToNow()
+                onCloseSheet()
+            },
+        )
+        Sheet.SOURCE -> SourceSheet(model, analyzer, progress, onDismiss = onCloseSheet, onAnalyze = onAnalyze)
     }
 }
 
+/** What the top context and the loading message need to know about the house and the ways off it. */
+private class Context(
+    val model: PreviewViewModel,
+    val progress: ProgressViewModel,
+    val analyzer: AnalyzerViewModel,
+    val readyKey: String?,
+    val onOpenSheet: (Sheet) -> Unit,
+    val onOpenHouse: (String) -> Unit,
+)
+
 @Composable
-private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel, scene: ModelScene, onBack: () -> Unit, onSetProgress: () -> Unit) {
+private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel, scene: ModelScene, context: Context, onOpenStages: () -> Unit) {
     var toolName by rememberSaveable { mutableStateOf<String?>(null) }
     val tool = toolName?.let { name -> Tool.entries.firstOrNull { it.name == name } }
     var railExpanded by rememberSaveable { mutableStateOf(false) }
@@ -207,7 +252,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
             TopContext(
                 title = scene.title,
                 view = view,
-                onBack = onBack,
+                context = context,
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .widthIn(max = maxWidth - RailDefaults.ButtonWidth - Space.xl)
@@ -276,7 +321,8 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                             onToggle = { railExpanded = !railExpanded },
                             onPreviewStop = { progress.previewStop(it) },
                             onReturnToNow = { progress.returnToNow() },
-                            onSetProgress = onSetProgress,
+                            onSetProgress = onOpenStages,
+                            onEditProgress = onOpenStages,
                             top = selectionRow,
                             ruleModifier = Modifier.onGloballyPositioned { c ->
                                 // Only the rail at rest, showing now, frames the model: expanding it, a taller
@@ -336,34 +382,110 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
     }
 }
 
-/** Back, the house's name, and the ACTUAL state of the build — always the actual one. */
+/**
+ * The house menu, the house's name, the ACTUAL state of the build — always
+ * the actual one — and, only when there is something to say, one status row:
+ * the model's limitations, a link analysis running or failed, or a new house
+ * ready to open. Each status row is the way to its matter.
+ */
 @Composable
-private fun TopContext(title: String, view: ProgressView?, onBack: () -> Unit, modifier: Modifier = Modifier) {
+private fun TopContext(title: String, view: ProgressView?, context: Context, modifier: Modifier = Modifier) {
     GlassSurface(modifier = modifier) {
-        Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {
-            val backLabel = stringResource(R.string.model_back)
-            IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = backLabel }) {
-                Icon(ShellIcons.back, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+        Column {
+            Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {
+                val menuLabel = stringResource(R.string.workspace_menu)
+                IconButton(onClick = { context.onOpenSheet(Sheet.MENU) }, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = menuLabel }) {
+                    Icon(ShellIcons.houses, contentDescription = null, tint = Palette.Ink, modifier = Modifier.size(Sizes.icon))
+                }
+                Column(Modifier.padding(vertical = Space.xs)) {
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = Palette.Ink,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.semantics { heading() },
+                    )
+                    Text(
+                        actualLine(view),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Palette.InkMuted,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
-            Column(Modifier.padding(vertical = Space.xs)) {
-                Text(
-                    title,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = Palette.Ink,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.semantics { heading() },
-                )
-                Text(
-                    actualLine(view),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Palette.InkMuted,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
+            StatusRow(context)
         }
     }
+}
+
+/**
+ * One line under the context, only when the house has something to say:
+ * a new house ready (with the one action that opens it), a link analysis
+ * running or failed (the way to the task), or a model kept with
+ * limitations (the way to the source sheet). Said as a word and a mark.
+ */
+@Composable
+private fun StatusRow(context: Context) {
+    val ready = context.readyKey?.let { key -> context.model.scenes.firstOrNull { it.key == key } }
+    val analyzer = context.analyzer
+    val download = context.model.scene?.let { scene -> analyzer.downloads.firstOrNull { it.key == scene.key } }
+    val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0)
+    val running = analyzer.isRunning
+    val failed = analyzer.state is AnalysisState.Failed
+    if (ready == null && !running && !failed && !limited) return
+    PanelRule(inset = Space.m)
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(Space.s),
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = Sizes.touch)
+            .clickable(role = Role.Button) {
+                when {
+                    ready != null -> context.onOpenHouse(ready.key)
+                    else -> context.onOpenSheet(Sheet.SOURCE)
+                }
+            }
+            .padding(start = Space.m, end = Space.s),
+    ) {
+        val (icon, tint) = when {
+            ready != null -> ShellIcons.check to Palette.Ink
+            failed -> ShellIcons.caution to Palette.Error
+            running -> ShellIcons.link to Palette.InkMuted
+            else -> ShellIcons.caution to Palette.InkMuted
+        }
+        Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.size(Sizes.iconSmall))
+        Text(
+            when {
+                ready != null -> stringResource(R.string.workspace_new_house_ready, ready.title)
+                running -> stringResource(R.string.house_analysis_running_detail, analysisPercent(analyzer))
+                failed -> stringResource(R.string.house_analysis_failed_short)
+                else -> stringResource(R.string.house_status_limited_short)
+            },
+            style = MaterialTheme.typography.bodySmall,
+            color = Palette.Ink,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1f),
+        )
+        if (ready != null) {
+            Text(stringResource(R.string.workspace_open_new_house), style = MaterialTheme.typography.labelLarge, color = Palette.Ink)
+        } else {
+            Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
+        }
+    }
+}
+
+/** The analyzer's own progress, 0..100, for the running line. */
+internal fun analysisPercent(analyzer: AnalyzerViewModel): Int {
+    val fraction = when (val state = analyzer.state) {
+        is AnalysisState.Polling -> state.status?.progress ?: 0.0
+        is AnalysisState.Finishing -> state.status.progress
+        else -> 0.0
+    }
+    return (fraction.coerceIn(0.0, 1.0) * 100).roundToInt()
 }
 
 @Composable
@@ -406,12 +528,12 @@ private fun GestureHint(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun WorkspaceMessage(title: String, failed: ScreenState.Failed?, onBack: () -> Unit) {
+private fun WorkspaceMessage(title: String, failed: ScreenState.Failed?, context: Context) {
     Column(Modifier.fillMaxSize().safeDrawingPadding()) {
         Row(Modifier.padding(Space.xs), verticalAlignment = Alignment.CenterVertically) {
-            val backLabel = stringResource(R.string.model_back)
-            IconButton(onClick = onBack, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = backLabel }) {
-                Icon(ShellIcons.back, contentDescription = null, tint = Palette.Ink)
+            val menuLabel = stringResource(R.string.workspace_menu)
+            IconButton(onClick = { context.onOpenSheet(Sheet.MENU) }, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = menuLabel }) {
+                Icon(ShellIcons.houses, contentDescription = null, tint = Palette.Ink)
             }
         }
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {

@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,6 +70,8 @@ fun TimelineRail(
     onPreviewStop: (Int) -> Unit,
     onReturnToNow: () -> Unit,
     onSetProgress: () -> Unit,
+    /** Opens the stage sheet from the header that shows the recorded state: the record is read here and edited there. */
+    onEditProgress: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     /** Measures the header and the rule only: a row set above them never moves the camera's frame. */
     ruleModifier: Modifier = Modifier,
@@ -116,6 +119,7 @@ fun TimelineRail(
                                 summary.unset, summary.percentText, summary.currentStage, summary.lastDone, summary.currentTask, summary.currentStageCompletionPercent,
                                 problem = progressProblemText(view.problem),
                                 onSetProgress = onSetProgress.takeIf { summary.unset && summary.availability == ProgressAvailability.EDITABLE },
+                                onEdit = onEditProgress.takeIf { !summary.unset },
                             )
                         }
                     }
@@ -158,8 +162,21 @@ private fun NowHeader(
     stagePercent: Int?,
     problem: String?,
     onSetProgress: (() -> Unit)?,
+    /** The recorded state is the way to the stage sheet: the whole header is the handle, with a chevron. */
+    onEdit: (() -> Unit)? = null,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
+    val editLabel = stringResource(R.string.timeline_edit_progress)
+    Column(
+        verticalArrangement = Arrangement.spacedBy(1.dp),
+        modifier = if (onEdit != null) {
+            Modifier
+                .fillMaxWidth()
+                .heightIn(min = Sizes.touch)
+                .clickable(role = Role.Button, onClickLabel = editLabel, onClick = onEdit)
+        } else {
+            Modifier
+        },
+    ) {
         // Why the record is not what the owner left, when it is not (cycle 3, C3-04); the full sentence is in Etapy.
         problem?.let { ProblemLine(it, style = MaterialTheme.typography.bodySmall, maxLines = 3) }
         if (unset || percent == null) {
@@ -174,7 +191,10 @@ private fun NowHeader(
             Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
                 Text(percent, style = Measure.inline, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 val stageName = (current ?: lastDone)?.let { stringResource(it.labelRes()) } ?: ""
-                Text(stageName, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(stageName, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                if (onEdit != null) {
+                    Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall).padding(bottom = 2.dp))
+                }
             }
             val second = when {
                 task != null -> stringResource(R.string.progress_now_task, task)

@@ -52,6 +52,17 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     var scenes: List<SceneEntry> by mutableStateOf(repository.entries())
         private set
 
+    /** Hide the scenes shipped in the APK (a launch extra for evidence of the no-house state), and show what is left. */
+    fun hideBundled() {
+        if (hidingBundled) return
+        hidingBundled = true
+        scenes = entries()
+        loading?.cancel()
+        scenes.firstOrNull()?.let { open(it) } ?: run { screen = ScreenState.Failed("no scene bundles in this build", null) }
+    }
+
+    private var hidingBundled = false
+
     var screen by mutableStateOf<ScreenState>(ScreenState.Loading)
         private set
 
@@ -127,7 +138,7 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
      * first scene rather than keep showing something the list no longer has.
      */
     fun refreshScenes() {
-        scenes = repository.entries()
+        scenes = entries()
         val openKey = scene?.key ?: return
         if (scenes.none { it.key == openKey }) scenes.firstOrNull()?.let { open(it) }
     }
@@ -154,6 +165,9 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private var loading: Job? = null
+
+    private fun entries(): List<SceneEntry> =
+        repository.entries().let { all -> if (hidingBundled) all.filter { it.source == com.buildplan.preview.scene.SceneSourceKind.DOWNLOADED } else all }
 
     private fun show(result: SceneLoadResult) {
         when (result) {

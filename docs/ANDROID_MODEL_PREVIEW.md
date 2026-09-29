@@ -204,10 +204,11 @@ layers over the model.
 
 **The 3D gate** (`app/src/androidTest/.../ModelEntryDeviceTest.kt`,
 `tools/run-3d-gate.sh`, CI job `android-3d-gate`) opens 3D the owner's way.
-It starts cold on Dom, taps `3D` in the navigation bar, presses the system
-back key and taps `3D` again. It also launches straight into 3D. For each
-entry it:
-- asserts the counters and exactly one Filament engine (none on Dom);
+It starts cold on the house workspace (the root since INTEGRATION-004A),
+leaves it for the analyzer task through the house menu, presses the system
+back key and is on the house again. It also launches the workspace by its
+extra. For each entry it:
+- asserts the counters and exactly one Filament engine (none on the task);
 - compares the render surface's own pixels (PixelCopy, or the TextureView
   bitmap) with the composited screen over the viewport's middle. The screen
   must carry the surface's picture: colours, luminance spread, and the
@@ -221,7 +222,7 @@ OpenGL ES 3.1). With the default `swiftshader_indirect` (gfxstream's GLES
 emulator itself goes away right after Filament's first frame. That is also
 why no earlier emulator screenshot ever showed the house.
 
-## Construction progress (BUILDPLAN-INTEGRATION-003C; no screen yet)
+## Construction progress (BUILDPLAN-INTEGRATION-003C, house-first since 004A)
 
 `progress/` holds the owner's account of the build, beside the house and
 never in it. It is pure Kotlin with no Android or Filament import.
@@ -246,8 +247,11 @@ never in it. It is pure Kotlin with no Android or Filament import.
 - **`ConstructionTimeline`**: the cursor (now, a stage, the design) and what
   the screen must say about it. It cannot write progress.
 
-The Dom, 3D rail and Etapy screens that use them are not built. The redesign
-was blocked in 003C: the brief requires a real Impeccable audit first.
+The screens that use them are the house workspace's construction rail, the
+stage sheet and the source sheet (`ui/HouseWorkspace.kt`, `ui/HouseSheets.kt`,
+`ui/TimelineRail.kt`, `ui/StagesScreen.kt`; INTEGRATION-003C built them as
+places, INTEGRATION-004A made the house the root and the rest sheets over
+it — see `apps/android/PRODUCT.md` and `DESIGN.md`).
 
 ## Presentation modes (BUILDPLAN-INTEGRATION-003A)
 

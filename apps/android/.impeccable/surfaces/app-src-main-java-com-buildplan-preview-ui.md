@@ -7,10 +7,12 @@ related_targets: []
 
 # Surface brief — BuildPlan product workspace (Android)
 
-Scope: the whole product shell of `apps/android` — Dom, 3D (immersive workspace
-with the construction timeline), Etapy (progress editor), Koszty and
-Dokumenty (honest empty places), and the analyzer entry. Visitor mode:
-**Operate** (the owner checks and records where the build stands).
+Scope: the whole product shell of `apps/android` — since INTEGRATION-004A the
+house workspace as the root (the 3D house with the construction timeline,
+the stage sheet, the source sheet, the house menu), the no-house state and
+the analyzer task. The OWNER's house-first override revokes the five places
+of 003C. Visitor mode: **Operate** (the owner checks and records where the
+build stands).
 
 Audience and job: the homeowner-investor of PRODUCT.md, at home or on the
 plot, answering "which stage, what now, what did it look like before X".
@@ -32,21 +34,23 @@ solid "now" tag) — a preview is a hollow yellow outline, never solid. Hairline
 graduations, hinge notches between segments, tabular numerals, rectilinear
 corners (2–8 dp). No enclosing cards: hierarchy by type size, weight and ink.
 
-STORY: The owner sees their house, reads "43% · Dach · Teraz: montaż więźby"
-in one glance, drags along the rule to watch the house lose its windows,
-roof and walls, and taps "Wróć do teraz"; editing the real state happens only
-in Etapy, deliberately.
+STORY: The owner opens the app and is on their house, reads "43% · Dach ·
+Teraz: montaż więźby" in one glance, drags along the rule to watch the house
+lose its windows, roof and walls, and taps "Wróć do teraz"; editing the real
+state happens only in the stage sheet, opened from the rail's header,
+deliberately, and closes onto the same house at the same camera.
 
-FIRST VIEWPORT: 3D — the house full-bleed on graphite; top-left a compact
-identity (back, house name, "43% · Dach" or "Postęp nieustawiony"); right
-edge a labelled tool rail in meaning groups (Wygląd, Warstwy, Widok,
-Dopasuj); bottom, the folding-rule timeline: stage + task line, the
-17-segment rule plus the design end-cap, "Wróć do teraz" when previewing.
-Dom — a derived axonometric line drawing of the house (built part in ink,
-remainder as faint hairline), the monumental percentage, the current stage
-and task, one filled "Otwórz w 3D". Signature interaction: scrubbing the rule
-snaps segment by segment while the house assembles in place and the camera
-holds still.
+FIRST VIEWPORT: the house full-bleed on graphite; top-left a compact
+identity (the house menu, house name, "43% · Dach" or "Postęp nieustawiony",
+and a status row only when there is something to say); right edge a
+labelled tool rail in meaning groups (Wygląd, Warstwy, Widok, Dopasuj);
+bottom, the folding-rule timeline: stage + task line (the way to the stage
+sheet), the 17-segment rule plus the design end-cap, "Wróć do teraz" when
+previewing. The derived axonometric line drawing of the house (built part in
+ink, remainder as faint hairline) lives on the source sheet. Signature
+interaction: scrubbing the rule snaps segment by segment while the house
+assembles in place and the camera holds still. Composition: direction A
+"Spatial instrument" of `stage-reports/artifacts/integration-004a/impeccable/house-first-directions.md`.
 
 FORM: The Folding Rule (miarka składana), position 5 of the grounded list;
 seed key 2d368ac2. Raises kept from declined challengers: no enclosing

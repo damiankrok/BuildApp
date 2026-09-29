@@ -35,17 +35,29 @@ maintenance.
 - Mixed use: calm review sessions at home in the evening, and short checks on
   the plot in daylight, often one-handed. Status must be glanceable and
   targets large.
-- The source today is a public project page (ARCHON) given by the owner as a
-  link; the analyzer runs on the phone (or on the analyzer service) and
+- The source is a public project page given by the owner as a link — an
+  ARCHON page through its specialist reader, or any other publisher through
+  the generic project-page reader, which recognises a house project on the
+  page's own evidence and says exactly what is missing when it cannot go
+  on; the analyzer runs on the phone (or on the analyzer service) and
   produces a candidate model, which may be complete or partial.
 - Offline-first: viewing the model and progress needs no network and no
   account. Only fetching a new source needs the internet.
 
 ## Capabilities and Constraints
 
-- Five places, and only five: Dom, 3D, Etapy, Koszty, Dokumenty. Budget
-  belongs under Koszty, photos under Dokumenty, settings under the current
-  house.
+- The house is the root (OWNER override, INTEGRATION-004A). Whenever a
+  house exists the app launches into the house workspace: the 3D house full
+  screen, a compact top context, restrained edge controls, the construction
+  rail at the foot, and one contextual sheet at a time. There is no
+  dashboard before the house and no five-place navigation. The former
+  places live around the house: Dom is the workspace itself; 3D is its base
+  layer; Etapy is the rail and the stage sheet; Dokumenty is the source
+  sheet for now; Koszty is a named future boundary (a dedicated cost
+  workspace that keeps the house's context and returns to it), never an
+  empty tab. Adding a house from a link is a task flow that returns to the
+  same house and camera; with no house on the phone, the root is the minimal
+  "Dodaj dom z linku" state.
 - The canonical building model is owned by BuildApp and is never changed by
   the app's UI, progress or history. Construction progress is a separate
   record keyed by the house's stable model id; a historical stage view is a
@@ -63,8 +75,9 @@ maintenance.
 - 3D interactions that must survive: orbit, zoom, pan, select, storey and
   roof visibility, isolation, Fit/reset, MODEL / CLAY (Makieta) / LINE
   (Kreska).
-- Undecided: cost ledger, documents/photos, multi-house management, LINK →
-  PROJECT merge into one logical house, AS-BUILT history, accounts, sync.
+- Undecided: cost ledger (inside the future cost workspace), documents and
+  photos, multi-house management beyond the house menu, LINK → PROJECT merge
+  into one logical house, AS-BUILT history, accounts, sync.
 
 ## Brand Commitments
 
@@ -79,9 +92,12 @@ maintenance.
 
 ## Evidence on Hand
 
-- Two reference houses travel through the real product: Marcówki (bundled
-  reference and candidate, and a live link analysis) and Rarytasy (live link
-  analysis, PARTIAL: pergola, entrance canopy and second chimney are missing).
+- Three reference houses travel through the real product: Marcówki (bundled
+  reference and candidate, and a live link analysis), Rarytasy (live link
+  analysis, PARTIAL: pergola, entrance canopy and second chimney are missing)
+  and Kosaćce (live link analysis through the generic wall topology
+  planner); the alternate Marcówki publisher is read by the generic reader
+  and compared to ARCHON's page, evidence first.
 - No real owner progress data exists. The app must never ship invented
   progress, costs, documents or dates; an unset state says "Postęp
   nieustawiony" and offers to set it.
@@ -95,7 +111,8 @@ maintenance.
 3. Looking is not editing: scrubbing, previewing and exploring never change
    what the owner has recorded; changing it is always a deliberate act.
 4. The model leads, the chrome recedes: controls exist to serve the view of
-   the house and get out of its way.
+   the house and get out of its way. The house, not the rule, is the primary
+   product visual; the rule is the timeline under it.
 5. One logical house: progress and history belong to the house, not to an
    analyzer run, a file or a hash.
 

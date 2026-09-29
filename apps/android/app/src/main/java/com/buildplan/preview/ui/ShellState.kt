@@ -1,81 +1,88 @@
 package com.buildplan.preview.ui
 
-import androidx.annotation.StringRes
-import com.buildplan.preview.R
-
 /**
- * The five places of the app, in the order the navigation bar shows them.
+ * A sheet over the house: one at a time, each a matter of the open house.
  *
- * `Dom` is where a house is chosen, added from a link and analysed; `3D` is
- * the model on the whole screen. `Etapy`, `Koszty` and `Dokumenty` exist as
- * places so the shape of the product is visible, and each says plainly that
- * it is not built yet — none of them shows a number, a date or a file.
+ * `MENU` is the house menu (the houses on this phone, adding one from a
+ * link, the ways to the other sheets and the named place of the future cost
+ * workspace); `STAGES` is the owner's account of the build, the only place
+ * it is edited; `SOURCE` is where the model came from, what the analysis
+ * left open, and the technical figures.
  */
-enum class AppPlace(@StringRes val label: Int, @StringRes val description: Int) {
-    HOUSE(R.string.place_house, R.string.place_house_description),
-    MODEL(R.string.place_model, R.string.place_model_description),
-    STAGES(R.string.place_stages, R.string.place_stages_description),
-    COSTS(R.string.place_costs, R.string.place_costs_description),
-    DOCUMENTS(R.string.place_documents, R.string.place_documents_description),
-}
+enum class Sheet { MENU, STAGES, SOURCE }
 
 /**
- * Where the owner is, as plain data: the place, and whether the house place
- * has its link analysis open. Every transition, back included, is a pure
- * function here, so the navigation can be tested without a screen.
+ * A task the owner leaves the house for, and comes back from to the same
+ * house and the same camera. Today there is one: adding a house from a link.
+ */
+enum class Task { ANALYZER }
+
+/**
+ * Where the owner is, as plain data (INTEGRATION-004A, house-first).
  *
- * Back retraces one step and never leaves the app from anywhere but `Dom`:
- * the analysis page returns to `Dom`; `3D` returns to the place it was opened
- * from; the other places return to `Dom`; and from `Dom` back belongs to the
- * system. Surfaces inside a place (the details panel, a selection) handle
- * back themselves first, and only while they are open.
+ * The house workspace is the root whenever a house exists: there is no place
+ * to go "to" it and none to go back to from it. Over it stands at most one
+ * [Sheet]; a [Task] takes the whole screen and closes the sheet. Every
+ * transition, back included, is a pure function here, so the navigation can
+ * be tested without a screen.
+ *
+ * Back retraces one step and leaves the app only from the bare workspace:
+ * a task returns to the workspace; a sheet closes. Surfaces inside the
+ * workspace (a tool pane, the details, a selection) handle back themselves
+ * first, and only while they are open.
  */
 data class ShellState(
-    val place: AppPlace = AppPlace.HOUSE,
-    val analyzerOpen: Boolean = false,
-    /** The place `3D` was opened from, so back returns there. */
-    val cameFrom: AppPlace? = null,
+    val task: Task? = null,
+    val sheet: Sheet? = null,
 ) {
-    /** The model takes the whole screen: no navigation bar. */
-    val immersive: Boolean get() = place == AppPlace.MODEL
+    val analyzerOpen: Boolean get() = task == Task.ANALYZER
 
-    fun go(to: AppPlace): ShellState = when {
-        to == place && !analyzerOpen -> this
-        to == AppPlace.MODEL -> ShellState(AppPlace.MODEL, cameFrom = place)
-        else -> ShellState(to)
-    }
+    /** One sheet at a time: opening one replaces another, and closes no task (a task has no sheets). */
+    fun open(sheet: Sheet): ShellState = if (task != null) this else copy(sheet = sheet)
 
-    fun openAnalyzer(): ShellState = ShellState(AppPlace.HOUSE, analyzerOpen = true)
+    fun closeSheet(): ShellState = copy(sheet = null)
+
+    fun openAnalyzer(): ShellState = ShellState(task = Task.ANALYZER)
 
     /** What back does here, or null when it leaves the app. */
     fun back(): ShellState? = when {
-        analyzerOpen -> copy(analyzerOpen = false)
-        place == AppPlace.HOUSE -> null
-        place == AppPlace.MODEL -> ShellState(cameFrom?.takeIf { it != AppPlace.MODEL } ?: AppPlace.HOUSE)
-        else -> ShellState(AppPlace.HOUSE)
+        task != null -> ShellState()
+        sheet != null -> copy(sheet = null)
+        else -> null
     }
 
-    /** One line, for `rememberSaveable`: `PLACE`, `PLACE:analyzer` or `MODEL<FROM`. */
+    /** One line, for `rememberSaveable`: `HOUSE`, `HOUSE:STAGES` or `ANALYZER`. */
     fun encode(): String = when {
-        analyzerOpen -> "${place.name}:$ANALYZER"
-        cameFrom != null -> "${place.name}<${cameFrom.name}"
-        else -> place.name
+        task != null -> task.name
+        sheet != null -> "$HOUSE:${sheet.name}"
+        else -> HOUSE
     }
 
     companion object {
-        private const val ANALYZER = "analyzer"
+        private const val HOUSE = "HOUSE"
 
-        /** The launch extra that opens a place directly (`HOUSE`, `MODEL`, …, or `ANALYZER`), used for screenshots and shortcuts. */
+        /**
+         * The launch extra that opens a surface directly, used for screenshots
+         * and shortcuts: `HOUSE` (or the older `MODEL`) for the workspace,
+         * `STAGES`, `SOURCE` or `MENU` for the workspace with that sheet, and
+         * `ANALYZER` for the task.
+         */
         const val EXTRA_PLACE = "com.buildplan.preview.PLACE"
+
+        /** The launch extra (`true`) that hides the scenes shipped in the APK, so the no-house state can be seen and captured. */
+        const val EXTRA_WITHOUT_BUNDLED = "com.buildplan.preview.WITHOUT_BUNDLED"
 
         fun decode(text: String?): ShellState? {
             if (text.isNullOrBlank()) return null
-            if (text.equals(ANALYZER, ignoreCase = true)) return ShellState().openAnalyzer()
-            val (head, analyzer) = text.split(':', limit = 2).let { it[0] to (it.getOrNull(1) == ANALYZER) }
-            val (placeName, fromName) = head.split('<', limit = 2).let { it[0] to it.getOrNull(1) }
-            val place = AppPlace.entries.firstOrNull { it.name.equals(placeName, ignoreCase = true) } ?: return null
-            val from = fromName?.let { name -> AppPlace.entries.firstOrNull { it.name.equals(name, ignoreCase = true) } }
-            return if (analyzer) ShellState(AppPlace.HOUSE, analyzerOpen = true) else ShellState(place, cameFrom = from)
+            val (head, tail) = text.split(':', limit = 2).let { it[0].uppercase() to it.getOrNull(1)?.uppercase() }
+            if (head == Task.ANALYZER.name) return ShellState().openAnalyzer()
+            val sheetName = when (head) {
+                HOUSE, "MODEL" -> tail
+                else -> head
+            }
+            if (sheetName == null) return ShellState()
+            val sheet = Sheet.entries.firstOrNull { it.name == sheetName } ?: return null
+            return ShellState().open(sheet)
         }
     }
 }
