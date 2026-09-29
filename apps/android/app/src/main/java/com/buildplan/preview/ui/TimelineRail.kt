@@ -217,7 +217,7 @@ private fun PreviewHeader(stop: Int, names: List<String>, withoutGeometry: Boole
         val second = when {
             stop >= stageCount -> stringResource(R.string.timeline_target_detail)
             withoutGeometry -> stringResource(R.string.timeline_no_geometry)
-            else -> stringResource(R.string.timeline_stop_position, stop + 1, stageCount)
+            else -> stringResource(R.string.timeline_stop_position, names[stop])
         }
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.s)) {
             Text(second, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, modifier = Modifier.weight(1f))

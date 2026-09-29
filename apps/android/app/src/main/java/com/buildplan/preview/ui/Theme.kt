@@ -110,7 +110,7 @@ val MeasureFamily = FontFamily(Font(R.font.barlow_condensed_semibold, FontWeight
 
 /** Type roles beyond Material's scale: the measured figures. */
 object Measure {
-    /** The one monumental figure in the app: "Postęp wg etapów" on Dom. */
+    /** The one monumental figure in the app: "Postęp wg etapów" at the head of the stage sheet. */
     val monumental = TextStyle(
         fontFamily = MeasureFamily,
         fontWeight = FontWeight.SemiBold,

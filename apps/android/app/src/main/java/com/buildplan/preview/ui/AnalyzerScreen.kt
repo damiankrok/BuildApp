@@ -98,6 +98,8 @@ import kotlinx.coroutines.delay
  * unresolved or warned, "Model gotowy z ograniczeniami" — a partial result is
  * never presented as complete. Hashes, counts, timings and the analyzer's own
  * English sentences are under "Szczegóły analizy": for checking, not reading.
+ * The houses on this phone are the house menu's; removing one is the source
+ * sheet's (INTEGRATION-004A) — this task only adds.
  *
  * Everything shown is what the analyzer reported; there is no reference
  * model, benchmark or expected value anywhere here.
@@ -141,7 +143,6 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
                 }
                 JobSection(model, onOpenScene)
             }
-            Downloads(model, onOpenScene)
             Foldout(
                 title = stringResource(R.string.analyzer_settings),
                 open = settingsOpen,
@@ -688,55 +689,6 @@ private fun megabytes(bytes: Long, decimals: Int = 0): String =
 // ---------------------------------------------------------------------------
 
 @OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun Downloads(model: AnalyzerViewModel, onOpenScene: (String) -> Unit) {
-    var confirmDelete by remember { mutableStateOf<DownloadedSceneEntry?>(null) }
-    val entries = model.downloads
-    Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
-        SectionHeading(stringResource(R.string.analyzer_downloads))
-        if (entries.isEmpty()) Body(stringResource(R.string.analyzer_downloads_empty))
-        for (entry in entries) {
-            val limited = entry.unresolvedCount > 0 || entry.warningsCount > 0
-            Column(Modifier.fillMaxWidth().padding(bottom = Space.s), verticalArrangement = Arrangement.spacedBy(Space.xxs)) {
-                Text(entry.title.ifBlank { entry.label }, style = MaterialTheme.typography.bodyLarge, color = Palette.Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                StatusText(
-                    listOfNotNull(
-                        stringResource(if (limited) R.string.analyzer_result_limited else R.string.analyzer_result_ready),
-                        entry.unresolvedCount.takeIf { it > 0 }?.let { pluralStringResource(R.plurals.count_unresolved, it, it) },
-                        hostOf(entry.sourceUrl),
-                    ).joinToString(" · "),
-                )
-                FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.s), verticalArrangement = Arrangement.spacedBy(Space.s)) {
-                    val openLabel = stringResource(R.string.analyzer_open_description, entry.title.ifBlank { entry.label })
-                    LineButton(stringResource(R.string.analyzer_open), onClick = { onOpenScene(entry.key) }, modifier = Modifier.semantics { contentDescription = openLabel })
-                    val deleteLabel = stringResource(R.string.analyzer_delete_description, entry.title.ifBlank { entry.label })
-                    TextButton(onClick = { confirmDelete = entry }, modifier = Modifier.heightIn(min = Sizes.touch).semantics { contentDescription = deleteLabel }) {
-                        Text(stringResource(R.string.analyzer_delete), color = Palette.InkMuted)
-                    }
-                }
-            }
-        }
-    }
-    confirmDelete?.let { entry ->
-        AlertDialog(
-            onDismissRequest = { confirmDelete = null },
-            containerColor = Palette.Sheet,
-            title = { Text(stringResource(R.string.analyzer_delete_title)) },
-            text = { Text(stringResource(R.string.analyzer_delete_body, entry.title.ifBlank { entry.label })) },
-            confirmButton = {
-                TextButton(onClick = { model.deleteDownload(entry.key); confirmDelete = null }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-                    Text(stringResource(R.string.analyzer_delete), color = Palette.Ink)
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { confirmDelete = null }, modifier = Modifier.heightIn(min = Sizes.touch)) {
-                    Text(stringResource(R.string.analyzer_keep), color = Palette.InkMuted)
-                }
-            },
-        )
-    }
-}
-
 // ---------------------------------------------------------------------------
 // Small pieces
 // ---------------------------------------------------------------------------

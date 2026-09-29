@@ -7,6 +7,9 @@
     <string name="workspace_new_house_ready">Nowy dom gotowy: %1$s</string>
     <string name="workspace_open_new_house">Otwórz</string>
     <string name="house_status_limited_short">Model gotowy z ograniczeniami — zobacz, czego brakuje</string>
+    <string name="house_analysis_running_short">Analiza linku w toku — zobacz postęp</string>
+    <string name="house_status_sample_add">Przykład wbudowany w aplikację — dodaj swój dom z linku</string>
+    <string name="source_delete_action">Usuń ten dom z telefonu</string>
     <string name="house_analysis_failed_short">Analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="menu_this_house">Ten dom</string>
     <string name="menu_source">Źródło modelu i analiza</string>
@@ -15,7 +18,6 @@
     <string name="no_house_title">Na tym telefonie nie ma jeszcze żadnego domu</string>
     <string name="no_house_body">Wklej link do publicznej strony projektu domu. Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model, który zobaczysz w 3D — a Twój postęp budowy zapiszesz przy nim.</string>
     <string name="timeline_edit_progress">Otwórz etapy budowy</string>
-    <string name="state_selected">wybrane</string>
     <string name="state_not_selected">niewybrane</string>
     <string name="state_expanded">rozwinięte</string>
     <string name="state_collapsed">zwinięte</string>
@@ -35,7 +37,6 @@
     <string name="house_analysis_failed">Ostatnia analiza linku się nie powiodła — zobacz dlaczego</string>
     <string name="house_saved_heading">Domy na tym telefonie</string>
     <string name="house_saved_current">Wybrany</string>
-    <string name="house_switch_description">Domy na tym telefonie: %1$d</string>
     <string name="house_status_bundled">Przykład wbudowany w aplikację · model poglądowy</string>
     <string name="house_status_ready">Z analizy linku · model gotowy</string>
     <string name="house_status_limited">Z analizy linku · gotowy z ograniczeniami</string>
@@ -49,23 +50,15 @@
     <string name="house_diagnostics_rows">Schemat modelu %1$s · %2$s · %3$s · pakiet %4$s</string>
     <string name="house_diagnostics_analyzer">Analiza linku i jej diagnostyka</string>
 
-    <!-- Postęp: jeden odczyt dla Domu, 3D i Etapów -->
+    <!-- Postęp: jeden odczyt w przestrzeni domu i w arkuszu etapów -->
     <string name="progress_unset">Postęp nieustawiony</string>
-    <string name="progress_unset_body">Zaznacz w Etapach, na jakim etapie jest budowa. Procent policzy się z etapów; do tego czasu 3D pokazuje cały projekt.</string>
     <string name="progress_preview_only_body">Ten model nie ma stałego identyfikatora domu, więc postępu nie da się dla niego zapisać. Historia budowy nadal pokazuje dom na każdym etapie.</string>
     <string name="progress_set_action">Ustaw postęp</string>
     <string name="progress_metric_label">Postęp wg etapów</string>
     <string name="progress_done_of">Zakończone etapy: %1$d\u00A0z\u00A0%2$d</string>
-    <string name="progress_stage_share">%1$s etapu</string>
     <string name="progress_saved_on">Zapisano %1$s</string>
-    <string name="progress_explain_show">Co to znaczy?</string>
-    <string name="progress_explain_hide">Ukryj</string>
     <string name="progress_explain">Procent wynika z postępu ustawionych etapów. Nie oznacza procentu wydanych pieniędzy ani wartości robót.</string>
-    <string name="progress_current_stage">Aktualny etap: %1$s</string>
     <string name="progress_last_done">Ostatnio zakończony: %1$s</string>
-    <string name="progress_no_current_stage">Żaden etap nie jest w toku</string>
-    <string name="progress_now_doing">Teraz robimy: %1$s</string>
-    <string name="progress_task_unset">Teraz robimy: nie wpisano</string>
     <string name="progress_now_task">Teraz: %1$s</string>
     <string name="progress_stage_in_progress">Etap w toku · %1$d%%</string>
     <string name="progress_actual_short">%1$s · %2$s</string>
@@ -82,7 +75,7 @@
     <string name="timeline_hint_scrub">Przesuń palcem po osi, by zobaczyć dom na każdym etapie</string>
     <string name="timeline_preview_of">Podgląd: %1$s</string>
     <string name="timeline_no_geometry">Na tym etapie model 3D się nie zmienia</string>
-    <string name="timeline_stop_position">Stan po etapie %1$d z %2$d</string>
+    <string name="timeline_stop_position">Stan po etapie: %1$s</string>
     <string name="timeline_target">Projekt docelowy</string>
     <string name="timeline_target_detail">Cały dom z projektu, także elementy bez przypisanego etapu</string>
     <string name="timeline_target_short">Projekt</string>
@@ -211,7 +204,6 @@
     <string name="inspector_relations_export">Powiązania w modelu</string>
 
     <!-- 3D -->
-    <string name="model_back">Wróć</string>
     <string name="selection_clear">Odznacz</string>
     <string name="model_nothing_stands_preview">Na tym etapie dom jeszcze nie stoi — tylko działka. Wybierz dalszy etap w historii budowy, by zobaczyć, jak rośnie dom.</string>
     <string name="model_nothing_stands_now">Według Twojego postępu nic z domu jeszcze nie stoi.</string>
@@ -312,7 +304,7 @@
     <string name="evidence_unresolved">Nierozstrzygnięte</string>
     <string name="evidence_unknown">Status nieznany tej wersji aplikacji</string>
 
-    <!-- Analiza linku (miejsce podrzędne w zakładce Dom) -->
+    <!-- Analiza linku (zadanie nad przestrzenią domu) -->
     <string name="analyzer_title">Dodaj dom z linku</string>
     <string name="analyzer_back">Wróć</string>
     <string name="analyzer_mode_local">Analiza na tym telefonie</string>
@@ -348,9 +340,7 @@
     <string name="analyzer_share_diagnostics">Udostępnij diagnostykę</string>
     <string name="analyzer_delete">Usuń</string>
     <string name="analyzer_keep">Zostaw</string>
-    <string name="analyzer_open">Otwórz</string>
     <string name="analyzer_delete_title">Usunąć tę analizę?</string>
-    <string name="analyzer_downloads">Domy z analizy na tym telefonie</string>
 
     <string name="analyzer_intro">Wklej link do publicznej strony projektu domu (na przykład z ARCHON). Aplikacja sprawdzi stronę, odczyta rysunki i zbuduje model domu, który zobaczysz w 3D. Czego źródło nie podaje, model nie dopowiada.</string>
     <string name="analyzer_settings">Ustawienia analizy</string>
@@ -413,8 +403,6 @@
     <string name="analyzer_outcome_failed">Nieudana (%1$s)</string>
     <string name="analyzer_outcome_interrupted">Przerwana zamknięciem aplikacji</string>
     <string name="analyzer_outcome_running">W toku</string>
-    <string name="analyzer_downloads_empty">Jeszcze żadnego. Zakończona analiza zostaje tutaj i na liście domów.</string>
-    <string name="analyzer_open_description">Otwórz %1$s</string>
     <string name="analyzer_delete_description">Usuń %1$s z tego telefonu</string>
     <string name="analyzer_delete_body">%1$s zniknie z tego telefonu. Zapisany postęp budowy tego domu zostaje i wróci, gdy przeanalizujesz ten link ponownie.</string>
 

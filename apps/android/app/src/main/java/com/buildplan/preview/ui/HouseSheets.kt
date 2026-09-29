@@ -17,12 +17,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -148,7 +151,24 @@ private fun MenuRow(icon: androidx.compose.ui.graphics.vector.ImageVector, label
 fun StageSheet(progress: ProgressViewModel, sceneTitle: String?, onDismiss: () -> Unit, onShowInModel: (ConstructionStageKey?) -> Unit) {
     HouseSheet(onDismiss) {
         BoxWithConstraints(Modifier.fillMaxWidth()) {
-            StagesScreen(progress, sceneTitle, onShowInModel, modifier = Modifier.heightIn(max = maxHeight))
+            // The house's ridge stays in view above the sheet: the sheet takes at most this much of the window.
+            StagesScreen(
+                progress,
+                onShowInModel,
+                modifier = Modifier.heightIn(max = maxHeight * STAGE_SHEET_SHARE),
+                drawing = {
+                    val view = progress.view
+                    val session = progress.session
+                    HouseDrawing(
+                        sketch = progress.sketch,
+                        built = if (view == null || view.summary.unset) null else session?.actualVisible,
+                        current = view?.summary?.currentStage?.let { session?.introducedAt(it) }.orEmpty(),
+                        description = stringResource(R.string.house_drawing_description, sceneTitle.orEmpty()),
+                        onOpen = onDismiss,
+                        height = DRAWING_HEIGHT,
+                    )
+                },
+            )
         }
     }
 }
@@ -166,6 +186,9 @@ fun StageSheet(progress: ProgressViewModel, sceneTitle: String?, onDismiss: () -
 fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress: ProgressViewModel, onDismiss: () -> Unit, onAnalyze: () -> Unit) {
     HouseSheet(onDismiss) {
         val scene = preview.scene
+        val download = scene?.let { s -> analyzer.downloads.firstOrNull { it.key == s.key } }
+        var technical by rememberSaveable { mutableStateOf(false) }
+        var confirmDelete by rememberSaveable { mutableStateOf(false) }
         Column(
             Modifier
                 .fillMaxWidth()
@@ -179,7 +202,6 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 return@Column
             }
             val entry = preview.scenes.firstOrNull { it.key == scene.key }
-            val download = analyzer.downloads.firstOrNull { it.key == scene.key }
             val completed = analyzer.state as? AnalysisState.Completed
             val resultShown = completed?.entry?.key == scene.key
             Text(
@@ -190,34 +212,53 @@ fun SourceSheet(preview: PreviewViewModel, analyzer: AnalyzerViewModel, progress
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(top = Space.s).semantics { heading() },
             )
-            val view = progress.view
-            val session = progress.session
-            HouseDrawing(
-                sketch = progress.sketch,
-                built = if (view == null || view.summary.unset) null else session?.actualVisible,
-                current = view?.summary?.currentStage?.let { session?.introducedAt(it) }.orEmpty(),
-                description = stringResource(R.string.house_drawing_description, scene.title),
-                onOpen = onDismiss,
-                modifier = Modifier.padding(top = Space.s),
-                height = DRAWING_HEIGHT,
-            )
             SourceStatus(entry?.source ?: SceneSourceKind.BUNDLED, download, resultShown)
             AnalysisLine(analyzer, onAnalyze)
             if (resultShown && completed != null) {
                 SectionHeading(stringResource(R.string.analyzer_details))
                 AnalysisDiagnostics(completed.summary)
             }
-            SectionHeading(stringResource(R.string.house_diagnostics_show))
-            StatusText(
-                stringResource(
-                    R.string.house_diagnostics_rows,
-                    scene.bundle.generatedFrom.modelSchemaVersion,
-                    pluralStringResource(R.plurals.count_objects, scene.objectCount, scene.objectCount),
-                    pluralStringResource(R.plurals.count_triangles, scene.triangleCount, scene.triangleCount),
-                    scene.bundle.contentHash.take(8),
-                ),
+            // The technical figures, folded: for checking, not for reading.
+            QuietAction(stringResource(if (technical) R.string.house_diagnostics_hide else R.string.house_diagnostics_show), onClick = { technical = !technical }, modifier = Modifier.padding(top = Space.m))
+            if (technical) {
+                StatusText(
+                    stringResource(
+                        R.string.house_diagnostics_rows,
+                        scene.bundle.generatedFrom.modelSchemaVersion,
+                        pluralStringResource(R.plurals.count_objects, scene.objectCount, scene.objectCount),
+                        pluralStringResource(R.plurals.count_triangles, scene.triangleCount, scene.triangleCount),
+                        scene.bundle.contentHash.take(8),
+                    ),
+                )
+                QuietAction(stringResource(R.string.house_diagnostics_analyzer), onClick = onAnalyze, icon = ShellIcons.link)
+            }
+            if (download != null) {
+                PanelRule(inset = 0.dp)
+                QuietAction(stringResource(R.string.source_delete_action), onClick = { confirmDelete = true })
+            }
+        }
+        if (confirmDelete && download != null) {
+            AlertDialog(
+                onDismissRequest = { confirmDelete = false },
+                containerColor = Palette.Sheet,
+                title = { Text(stringResource(R.string.analyzer_delete_title)) },
+                text = { Text(stringResource(R.string.analyzer_delete_body, scene?.title ?: download.title)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            confirmDelete = false
+                            analyzer.deleteDownload(download.key)
+                            onDismiss()
+                        },
+                        modifier = Modifier.heightIn(min = Sizes.touch),
+                    ) { Text(stringResource(R.string.analyzer_delete), color = Palette.Ink) }
+                },
+                dismissButton = {
+                    TextButton(onClick = { confirmDelete = false }, modifier = Modifier.heightIn(min = Sizes.touch)) {
+                        Text(stringResource(R.string.analyzer_keep), color = Palette.InkMuted)
+                    }
+                },
             )
-            QuietAction(stringResource(R.string.house_diagnostics_analyzer), onClick = onAnalyze, icon = ShellIcons.link, modifier = Modifier.padding(top = Space.s))
         }
     }
 }
@@ -310,6 +351,9 @@ private fun HouseSheet(onDismiss: () -> Unit, content: @Composable () -> Unit) {
         containerColor = Palette.Sheet,
         contentColor = Palette.Ink,
         scrimColor = Palette.Scrim.copy(alpha = 0.6f),
+        shape = RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet),
+        // No pill: the sheet is told by its edge and its scrim, and the system's four radii hold.
+        dragHandle = null,
     ) {
         content()
     }
@@ -350,5 +394,8 @@ internal fun savedDate(epochMs: Long): String =
     java.time.format.DateTimeFormatter.ofPattern("d MMMM yyyy", PRODUCT_LOCALE)
         .format(java.time.Instant.ofEpochMilli(epochMs).atZone(java.time.ZoneId.systemDefault()))
 
-/** The drawing's height in the source sheet. */
-private val DRAWING_HEIGHT = 200.dp
+/** The drawing's height at the head of the stage sheet. */
+private val DRAWING_HEIGHT = 168.dp
+
+/** How much of the window the stage sheet may take: the house's ridge stays in view above it. */
+private const val STAGE_SHEET_SHARE = 0.82f

@@ -431,6 +431,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
             is AnalysisState.Completed -> {
                 settings.clearActiveJob()
                 refreshDownloads()
+                // The same event in both modes: with no house open it opens, otherwise the workspace offers it.
+                autoOpen = next.entry.key
             }
             is AnalysisState.Failed, is AnalysisState.Cancelled -> settings.clearActiveJob()
             else -> Unit

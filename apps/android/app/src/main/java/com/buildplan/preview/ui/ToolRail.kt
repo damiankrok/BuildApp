@@ -81,18 +81,21 @@ fun ToolRail(
     onZoom: (Double) -> Unit,
     paneMaxHeight: Dp,
     modifier: Modifier = Modifier,
+    /** The rail stands at the foot of the screen: the pane shares its bottom edge and grows upwards. */
+    paneFromFoot: Boolean = false,
 ) {
     val motion = LocalMotionPolicy.current
     Row(
         modifier = modifier.semantics { isTraversalGroup = true },
         horizontalArrangement = Arrangement.spacedBy(Space.s),
-        verticalAlignment = Alignment.Top,
+        verticalAlignment = if (paneFromFoot) Alignment.Bottom else Alignment.Top,
     ) {
-        // The pane grows from the rail's side: rail and pane share their top edge.
+        // The pane grows from the rail's side: rail and pane share the edge the rail stands on.
+        val origin = TransformOrigin(1f, if (paneFromFoot) 0.9f else 0.1f)
         AnimatedVisibility(
             visible = open != null && open != Tool.FIT,
-            enter = motion.panelEnter(TransformOrigin(1f, 0.1f)),
-            exit = motion.panelExit(TransformOrigin(1f, 0.1f)),
+            enter = motion.panelEnter(origin),
+            exit = motion.panelExit(origin),
         ) {
             GlassSurface(
                 tint = Palette.GlassOpaque,

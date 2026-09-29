@@ -55,6 +55,8 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -69,6 +71,7 @@ import com.buildplan.preview.camera.ContentInsets
 import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.scene.ModelScene
 import com.buildplan.preview.scene.SceneObject
+import com.buildplan.preview.scene.SceneSourceKind
 import kotlin.math.roundToInt
 
 /**
@@ -110,7 +113,14 @@ fun HouseWorkspace(
     onOpenHouse: (String) -> Unit,
     onAnalyze: () -> Unit,
 ) {
-    val context = Context(model, progress, analyzer, readyKey, onOpenSheet, onOpenHouse)
+    // A model kept with limitations is said once per house per process, on the status row; after that the
+    // fact stays in the menu and on the source sheet (cycle 1, P1-2).
+    var limitedSeen by rememberSaveable { mutableStateOf("") }
+    val context = Context(
+        model, progress, analyzer, readyKey, onOpenSheet, onOpenHouse, onAnalyze,
+        limitedSeen = limitedSeen.split('\n').filter { it.isNotEmpty() }.toSet(),
+        onLimitedSeen = { key -> limitedSeen = (limitedSeen.split('\n').filter { it.isNotEmpty() } + key).distinct().joinToString("\n") },
+    )
     Box(Modifier.fillMaxSize().background(Palette.Ground)) {
         when (val screen = model.screen) {
             is ScreenState.Loading -> WorkspaceMessage(stringResource(R.string.house_loading), null, context)
@@ -142,6 +152,9 @@ private class Context(
     val readyKey: String?,
     val onOpenSheet: (Sheet) -> Unit,
     val onOpenHouse: (String) -> Unit,
+    val onAnalyze: () -> Unit,
+    val limitedSeen: Set<String>,
+    val onLimitedSeen: (String) -> Unit,
 )
 
 @Composable
@@ -245,18 +258,30 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
         }
 
         BoxWithConstraints(Modifier.fillMaxSize().safeDrawingPadding().padding(Space.s)) {
-            val paneMax = maxHeight * 0.62f
+            val density = LocalDensity.current
+            // The top context's and the bottom stack's own heights, in this box: the rail and its pane are
+            // laid out between them, never over them (cycle 1, P1-3).
+            var topHeight by remember { mutableIntStateOf(0) }
+            var bottomHeight by remember { mutableIntStateOf(0) }
+            val topDp = with(density) { topHeight.toDp() }
+            val bottomDp = with(density) { bottomHeight.toDp() }
             // Short screen: the rail reaches down to the timeline, so the bottom stack stops beside it.
             val besideRail = if (maxHeight < COMPACT_HEIGHT) RailDefaults.ButtonWidth + RailDefaults.Padding * 2 + Space.s else 0.dp
+            // Upright, the rail stands above the timeline where a thumb reaches it (cycle 1, P1-4); on its
+            // side, at the top, beside the bottom stack. Its pane never reaches the other chrome.
+            val railAtFoot = !sidePanel
+            val paneMax = (if (railAtFoot) maxHeight - topDp - bottomDp - Space.s * 2 else maxHeight - topDp - Space.s * 2).coerceAtLeast(PANE_MIN)
             // The top context: back, the house, where the build stands (never the preview: the timeline says that).
             TopContext(
                 title = scene.title,
                 view = view,
+                timelineShown = view != null && !details,
                 context = context,
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .widthIn(max = maxWidth - RailDefaults.ButtonWidth - Space.xl)
                     .graphicsLayer { alpha = recede }
+                    .onSizeChanged { topHeight = it.height }
                     .onGloballyPositioned { c -> topInset = c.boundsInRoot().bottom.roundToInt() },
             )
 
@@ -282,16 +307,17 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                 },
                 onZoom = { model.zoom(it) },
                 paneMaxHeight = paneMax,
+                paneFromFoot = railAtFoot,
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(top = 60.dp)
+                    .align(if (railAtFoot) Alignment.BottomEnd else Alignment.TopEnd)
+                    .padding(top = if (railAtFoot) 0.dp else topDp + Space.s, bottom = if (railAtFoot) bottomDp + Space.s else 0.dp)
                     .graphicsLayer { alpha = if (tool != null) 1f else recede }
                     // The rail at rest frames the model; an open pane (to its left) must not move the camera.
                     .onGloballyPositioned { c -> if (tool == null) railInset = c.fromRight() },
             )
 
             Column(
-                Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(end = besideRail),
+                Modifier.align(Alignment.BottomStart).fillMaxWidth().padding(end = besideRail).onSizeChanged { bottomHeight = it.height },
                 verticalArrangement = Arrangement.spacedBy(Space.s),
             ) {
                 AnimatedVisibility(visible = hintShown && selected == null && tool == null, enter = motion.sheetEnter(), exit = motion.sheetExit()) {
@@ -389,7 +415,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
  * ready to open. Each status row is the way to its matter.
  */
 @Composable
-private fun TopContext(title: String, view: ProgressView?, context: Context, modifier: Modifier = Modifier) {
+private fun TopContext(title: String, view: ProgressView?, timelineShown: Boolean, context: Context, modifier: Modifier = Modifier) {
     GlassSurface(modifier = modifier) {
         Column {
             Row(Modifier.padding(end = Space.m), verticalAlignment = Alignment.CenterVertically) {
@@ -407,7 +433,7 @@ private fun TopContext(title: String, view: ProgressView?, context: Context, mod
                         modifier = Modifier.semantics { heading() },
                     )
                     Text(
-                        actualLine(view),
+                        contextLine(view, timelineShown),
                         style = MaterialTheme.typography.bodySmall,
                         color = Palette.InkMuted,
                         maxLines = 1,
@@ -430,11 +456,21 @@ private fun TopContext(title: String, view: ProgressView?, context: Context, mod
 private fun StatusRow(context: Context) {
     val ready = context.readyKey?.let { key -> context.model.scenes.firstOrNull { it.key == key } }
     val analyzer = context.analyzer
-    val download = context.model.scene?.let { scene -> analyzer.downloads.firstOrNull { it.key == scene.key } }
-    val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0)
+    val scene = context.model.scene
+    val entry = scene?.let { s -> context.model.scenes.firstOrNull { it.key == s.key } }
+    val download = scene?.let { s -> analyzer.downloads.firstOrNull { it.key == s.key } }
+    val limited = download != null && (download.unresolvedCount > 0 || download.warningsCount > 0) && scene.key !in context.limitedSeen
+    val sample = entry != null && entry.source != SceneSourceKind.DOWNLOADED
     val running = analyzer.isRunning
     val failed = analyzer.state is AnalysisState.Failed
-    if (ready == null && !running && !failed && !limited) return
+    val kind = when {
+        ready != null -> Status.READY
+        failed -> Status.FAILED
+        running -> Status.RUNNING
+        limited -> Status.LIMITED
+        sample -> Status.SAMPLE
+        else -> return
+    }
     PanelRule(inset = Space.m)
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -443,26 +479,33 @@ private fun StatusRow(context: Context) {
             .fillMaxWidth()
             .heightIn(min = Sizes.touch)
             .clickable(role = Role.Button) {
-                when {
-                    ready != null -> context.onOpenHouse(ready.key)
-                    else -> context.onOpenSheet(Sheet.SOURCE)
+                when (kind) {
+                    Status.READY -> context.onOpenHouse(checkNotNull(ready).key)
+                    Status.FAILED, Status.RUNNING, Status.SAMPLE -> context.onAnalyze()
+                    Status.LIMITED -> {
+                        scene?.let { context.onLimitedSeen(it.key) }
+                        context.onOpenSheet(Sheet.SOURCE)
+                    }
                 }
             }
             .padding(start = Space.m, end = Space.s),
     ) {
-        val (icon, tint) = when {
-            ready != null -> ShellIcons.check to Palette.Ink
-            failed -> ShellIcons.caution to Palette.Error
-            running -> ShellIcons.link to Palette.InkMuted
-            else -> ShellIcons.caution to Palette.InkMuted
+        val (icon, tint) = when (kind) {
+            Status.READY -> ShellIcons.check to Palette.Ink
+            Status.FAILED -> ShellIcons.caution to Palette.Error
+            Status.RUNNING -> ShellIcons.link to Palette.InkMuted
+            Status.LIMITED -> ShellIcons.caution to Palette.InkMuted
+            Status.SAMPLE -> ShellIcons.link to Palette.InkMuted
         }
         Icon(icon, contentDescription = null, tint = tint, modifier = Modifier.size(Sizes.iconSmall))
         Text(
-            when {
-                ready != null -> stringResource(R.string.workspace_new_house_ready, ready.title)
-                running -> stringResource(R.string.house_analysis_running_detail, analysisPercent(analyzer))
-                failed -> stringResource(R.string.house_analysis_failed_short)
-                else -> stringResource(R.string.house_status_limited_short)
+            when (kind) {
+                Status.READY -> stringResource(R.string.workspace_new_house_ready, checkNotNull(ready).title)
+                // No second figure beside the progress: the analyzer's own percentage waits on the task.
+                Status.RUNNING -> stringResource(R.string.house_analysis_running_short)
+                Status.FAILED -> stringResource(R.string.house_analysis_failed_short)
+                Status.LIMITED -> stringResource(R.string.house_status_limited_short)
+                Status.SAMPLE -> stringResource(R.string.house_status_sample_add)
             },
             style = MaterialTheme.typography.bodySmall,
             color = Palette.Ink,
@@ -470,13 +513,16 @@ private fun StatusRow(context: Context) {
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),
         )
-        if (ready != null) {
+        if (kind == Status.READY) {
             Text(stringResource(R.string.workspace_open_new_house), style = MaterialTheme.typography.labelLarge, color = Palette.Ink)
         } else {
             Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         }
     }
 }
+
+/** What the status row can say, one at a time, by priority. */
+private enum class Status { READY, FAILED, RUNNING, LIMITED, SAMPLE }
 
 /** The analyzer's own progress, 0..100, for the running line. */
 internal fun analysisPercent(analyzer: AnalyzerViewModel): Int {
@@ -488,11 +534,19 @@ internal fun analysisPercent(analyzer: AnalyzerViewModel): Int {
     return (fraction.coerceIn(0.0, 1.0) * 100).roundToInt()
 }
 
+/**
+ * The line under the house's name. While the timeline shows now, it already says the state, so the
+ * top says when the record was last changed; while previewing, or while the details have taken the
+ * timeline's place, the ACTUAL state is said here — always the actual one, never the preview.
+ */
 @Composable
-private fun actualLine(view: ProgressView?): String {
+private fun contextLine(view: ProgressView?, timelineShown: Boolean): String {
     val summary = view?.summary ?: return stringResource(R.string.progress_unset)
     val percent = summary.percentText
     if (summary.unset || percent == null) return stringResource(R.string.progress_unset)
+    if (view.previewStop == null && timelineShown) {
+        return summary.savedAtEpochMs?.let { stringResource(R.string.progress_saved_on, savedDate(it)) } ?: percent
+    }
     val stage = (summary.currentStage ?: summary.lastDone)?.let { stringResource(it.labelRes()) }
     val text = if (stage != null) stringResource(R.string.progress_actual_short, percent, stage) else percent
     return if (view.previewStop != null) stringResource(R.string.progress_actual_prefix, text) else text
@@ -501,12 +555,24 @@ private fun actualLine(view: ProgressView?): String {
 /** The chosen element, named, with the way to its details and out: a row, set on the timeline's glass. */
 @Composable
 private fun SelectionRow(name: String, detail: String, onDetails: () -> Unit, onClear: () -> Unit) {
-    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(start = Space.l, end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(1f).padding(vertical = Space.s)) {
-            Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            if (detail.isNotBlank()) Text(detail, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    val detailsLabel = stringResource(R.string.dock_details)
+    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(end = Space.xs), verticalAlignment = Alignment.CenterVertically) {
+        // The row is the handle into the details, like the timeline's header under it: one grammar on one glass.
+        Row(
+            Modifier
+                .weight(1f)
+                .heightIn(min = 56.dp)
+                .clickable(role = Role.Button, onClickLabel = detailsLabel, onClick = onDetails)
+                .padding(start = Space.l, end = Space.s, top = Space.s, bottom = Space.s),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Space.s),
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(name, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(if (detail.isNotBlank()) detail else detailsLabel, style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            }
+            Icon(ShellIcons.chevronRight, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
         }
-        LineButton(stringResource(R.string.dock_details), onClick = onDetails, borderColor = Palette.RuleEmpty)
         val clear = stringResource(R.string.selection_clear)
         IconButton(onClick = onClear, modifier = Modifier.size(Sizes.touch).semantics { contentDescription = clear }) {
             Icon(ShellIcons.close, contentDescription = null, tint = Palette.InkMuted, modifier = Modifier.size(Sizes.iconSmall))
@@ -564,6 +630,9 @@ private const val HINT_MS = 6_000L
 /** How far a navigation-bar shade fades in before the bar; and its density there. */
 private val SCRIM_FADE = 24.dp
 private val NavScrim = Palette.Scrim.copy(alpha = 0.6f)
+
+/** The tool pane never shrinks below this, whatever the chrome around it measures. */
+private val PANE_MIN = 200.dp
 
 /** The details sheet's tallest, on a tall screen (and never more than 55 % of it). */
 private val SHEET_MAX = 460.dp

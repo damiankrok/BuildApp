@@ -108,10 +108,10 @@ class ProductFlowDeviceTest {
         evidence.assertHouseInsideFreeArea(preview, evidence.capture("01-house-unset", "visibleObjects" to first.visibleObjects), "01 house, progress unset")
         val poseAtRest = preview.pose
 
-        // 2. "Ustaw postęp" on the rail opens the stage sheet over the house.
+        // 2. "Ustaw postęp" on the rail opens the stage sheet over the house, headed by the house drawn in ink.
         compose.onNode(hasText(evidence.string(R.string.progress_set_action)) and hasClickAction()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
-        evidence.capture("02-stages-sheet-unset")
+        assertDrawingInked(preview, progress, evidence.capture("02-stages-sheet-unset"), "02 stage sheet")
 
         // 3. Record progress through the sheet's own controls: stage 1 done by itself, Dach made current,
         //    then "Oznacz 6 wcześniejszych etapów jako zakończone" (it says the count before it acts),
@@ -267,10 +267,11 @@ class ProductFlowDeviceTest {
         compose.onNode(hasText(evidence.string(R.string.menu_costs_not_built))).assertExists()
         evidence.capture("13-menu")
 
-        // 14. The source sheet from the menu: the house drawn in ink by the progress, where it came from.
+        // 14. The source sheet from the menu: where the model came from, the technical figures folded.
         compose.onAllNodes(hasText(evidence.string(R.string.menu_source)) and hasClickAction())[0].performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.house_status_bundled)))
-        assertDrawingInked(preview, progress, evidence.capture("14-source"), "14 source")
+        compose.onNode(hasText(evidence.string(R.string.house_diagnostics_show)) and hasClickAction()).assertExists()
+        evidence.capture("14-source")
         Espresso.pressBack()
         compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.house_status_bundled))).fetchSemanticsNodes().isEmpty() }
         assertEquals("sheets never move the camera", poseAtRest, preview.pose)
@@ -308,7 +309,7 @@ class ProductFlowDeviceTest {
         list().performScrollToNode(hasText(evidence.string(R.string.stage_show_in_3d)) or hasText(evidence.string(R.string.stage_show_now)))
     }
 
-    /** The source sheet's drawing of the house is on screen, in ink: a blank drawing is a failed sheet. */
+    /** The stage sheet's drawing of the house is on screen, in ink: a blank drawing is a failed sheet. */
     private fun assertDrawingInked(preview: PreviewViewModel, progress: ProgressViewModel, shot: Bitmap, step: String) {
         val title = checkNotNull(preview.scene).title
         val node = compose.onNode(hasContentDescription(evidence.string(R.string.house_drawing_description, title))).fetchSemanticsNode()

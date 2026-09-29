@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -95,25 +96,37 @@ import kotlinx.coroutines.launch
  * show, and it says what it is: progress by stages, not money.
  */
 @Composable
-fun StagesScreen(progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit, modifier: Modifier = Modifier) {
+fun StagesScreen(
+    progress: ProgressViewModel,
+    onShowInModel: (ConstructionStageKey?) -> Unit,
+    modifier: Modifier = Modifier,
+    /** The house as a line drawing, inked by the progress, at the head of the list. */
+    drawing: (@Composable () -> Unit)? = null,
+) {
     val view = progress.view
     // A wide window centres the list at a readable measure instead of stretching its rows.
-    Column(modifier.fillMaxSize().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax)) {
+    Column(modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).widthIn(max = Sizes.contentMax)) {
         if (view == null) {
             Column(Modifier.padding(Space.l)) {
                 Text(stringResource(R.string.stages_title), style = MaterialTheme.typography.headlineSmall, color = Palette.Ink)
                 Text(stringResource(R.string.house_loading), style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted)
             }
         } else {
-            StageList(view, progress, sceneTitle, onShowInModel)
+            StageList(view, progress, onShowInModel, drawing)
         }
     }
 }
 
 @Composable
-private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitle: String?, onShowInModel: (ConstructionStageKey?) -> Unit) {
+private fun StageList(view: ProgressView, progress: ProgressViewModel, onShowInModel: (ConstructionStageKey?) -> Unit, drawing: (@Composable () -> Unit)?) {
     var openStage by rememberSaveable { mutableStateOf(view.summary.currentStage?.let { "stage-${it.key}" }) }
     val editable = view.summary.availability == ProgressAvailability.EDITABLE
+    // The sheet opens on the stage the owner tapped the header for: the current one, brought into view once.
+    val list = rememberLazyListState()
+    LaunchedEffect(Unit) {
+        val current = view.stages.indexOfFirst { it.stageId == openStage }
+        if (current > 0) list.scrollToItem(HEADER_ITEMS + current)
+    }
 
     // A refusal or a failed save is said where the owner is looking — at the foot of the screen,
     // announced, gone by itself — not as a list item scrolled away from the edit that caused it.
@@ -130,8 +143,8 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitl
     }
 
     Box(Modifier.fillMaxSize()) {
-        LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
-            item { Header(view, sceneTitle) }
+        LazyColumn(Modifier.fillMaxSize(), state = list, contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = Space.xxl)) {
+            item { Header(view, drawing) }
             item { Problems(view) }
             itemsIndexed(view.stages, key = { _, s -> s.stageId }) { index, stage ->
                 StageRow(
@@ -154,8 +167,14 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitl
     }
 }
 
+/**
+ * The head of the stage sheet: the title, the house drawn in ink by this
+ * record, the one monumental figure of the app with what it is and when it
+ * was last changed, the static rule, and the guide while nothing is set.
+ * The house's name is not repeated: the top context above the sheet says it.
+ */
 @Composable
-private fun Header(view: ProgressView, sceneTitle: String?) {
+private fun Header(view: ProgressView, drawing: (@Composable () -> Unit)?) {
     val summary = view.summary
     Column(Modifier.fillMaxWidth().padding(horizontal = Space.l).padding(top = Space.l, bottom = Space.s)) {
         Text(
@@ -164,11 +183,22 @@ private fun Header(view: ProgressView, sceneTitle: String?) {
             color = Palette.Ink,
             modifier = Modifier.semantics { heading() },
         )
-        sceneTitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Palette.InkMuted, maxLines = 1, overflow = TextOverflow.Ellipsis) }
-        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(Space.s), modifier = Modifier.padding(top = Space.m)) {
+        drawing?.invoke()
+        val spoken = summary.percent?.let { pluralStringResource(R.plurals.progress_metric_spoken, it, it) }
+        Row(
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.spacedBy(Space.m),
+            modifier = Modifier.fillMaxWidth().padding(top = Space.m).then(if (spoken != null) Modifier.semantics(mergeDescendants = true) { stateDescription = spoken } else Modifier),
+        ) {
             if (summary.percent != null) {
-                Text(StageProgressMetric.format(summary.percent), style = Measure.inline.copy(fontSize = Measure.inline.fontSize * 1.4f), color = Palette.Ink)
-                Text(stringResource(R.string.progress_metric_label), style = MaterialTheme.typography.labelLarge, color = Palette.Ink, modifier = Modifier.padding(bottom = 3.dp))
+                Text(StageProgressMetric.format(summary.percent), style = Measure.monumental, color = Palette.Ink)
+                Column(Modifier.weight(1f).padding(bottom = Space.s)) {
+                    Text(stringResource(R.string.progress_metric_label), style = MaterialTheme.typography.labelLarge, color = Palette.Ink)
+                    Text(stringResource(R.string.progress_done_of, summary.doneCount, summary.stageCount), style = MaterialTheme.typography.bodySmall, color = Palette.InkMuted)
+                    summary.savedAtEpochMs?.let {
+                        Text(stringResource(R.string.progress_saved_on, savedDate(it)), style = MaterialTheme.typography.bodySmall, color = Palette.InkFaint)
+                    }
+                }
             } else {
                 Text(stringResource(R.string.progress_unset), style = MaterialTheme.typography.titleMedium, color = Palette.Ink)
             }
@@ -471,6 +501,9 @@ private fun outcomeMessage(outcome: EditOutcome, view: ProgressView): String? = 
         ProgressRejection.UNKNOWN_STAGE -> stringResource(R.string.refused_unknown_stage)
     }
 }
+
+/** The list items before the first stage row: the header and the problem line. */
+private const val HEADER_ITEMS = 2
 
 /** How many characters before the limit the task field starts counting them. */
 private const val TASK_COUNTER_FROM = 40
