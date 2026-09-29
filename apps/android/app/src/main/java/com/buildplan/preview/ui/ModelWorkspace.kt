@@ -232,9 +232,7 @@ private fun ReadyWorkspace(model: PreviewViewModel, progress: ProgressViewModel,
                     toolName = null
                 },
                 onSelectElement = { id ->
-                    val now = System.currentTimeMillis()
-                    model.onPicked(id, now)
-                    model.frameSelection(now)
+                    model.choose(id, System.currentTimeMillis())
                     toolName = null
                 },
                 onZoom = { model.zoom(it) },

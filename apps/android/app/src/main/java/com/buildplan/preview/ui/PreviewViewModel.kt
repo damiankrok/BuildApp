@@ -309,6 +309,18 @@ class PreviewViewModel(application: Application) : AndroidViewModel(application)
         return isDoubleTap
     }
 
+    /**
+     * An element chosen from the list (not tapped on the model): selected and
+     * framed, with none of a tap's double-tap meaning.
+     */
+    fun choose(objectId: String, nowMs: Long) {
+        val model = scene ?: return
+        if (model.objectById(objectId) == null) return
+        viewer = viewer.select(objectId)
+        lastTapObjectId = null
+        frameSelection(nowMs)
+    }
+
     fun setVisibility(mode: VisibilityMode) {
         val model = scene ?: return
         viewer = viewer.withVisibility(model, mode)

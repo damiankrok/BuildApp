@@ -8,6 +8,7 @@ import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
 import androidx.lifecycle.Lifecycle
@@ -299,7 +300,8 @@ class ReleaseCandidateDeviceTest {
         val drawn = preview.viewer.visibleObjectIds(scene).count { id -> scene.objects.first { it.id == id }.hasGeometry }
         compose.onNode(hasText(evidence.string(R.string.layer_elements_show, drawn)) and hasClickAction()).performClick()
         val chosen = scene.objects.first { it.id in preview.viewer.visibleObjectIds(scene) && it.hasGeometry && it.kind == "roof" }
-        compose.onAllNodes(hasText(elementTitleOf(chosen)) and hasClickAction())[0].performClick()
+        // The list scrolls inside the pane: bring the item into view before tapping it.
+        compose.onAllNodes(hasText(elementTitleOf(chosen)) and hasClickAction())[0].performScrollTo().performClick()
         compose.waitUntil(5_000) { preview.viewer.selectedObjectId != null }
         evidence.fact("chosen from the list", preview.viewer.selectedObjectId)
         evidence.settleFrames(d)

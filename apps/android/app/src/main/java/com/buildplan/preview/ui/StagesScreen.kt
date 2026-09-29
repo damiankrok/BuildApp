@@ -43,6 +43,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -71,6 +72,7 @@ import com.buildplan.preview.progress.ProgressView
 import com.buildplan.preview.progress.StageProgressMetric
 import com.buildplan.preview.progress.StageStatus
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
 
 /**
  * `Etapy`: the owner's account of the build, and the only place it is edited.
@@ -108,12 +110,15 @@ private fun StageList(view: ProgressView, progress: ProgressViewModel, sceneTitl
     // A refusal or a failed save is said where the owner is looking — at the foot of the screen,
     // announced, gone by itself — not as a list item scrolled away from the edit that caused it.
     val snackbar = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     val outcome = progress.lastOutcome
     val refusedText = outcome?.let { outcomeMessage(it, view) }
     LaunchedEffect(outcome) {
         if (outcome == null) return@LaunchedEffect
         progress.consumeOutcome(outcome)
-        if (refusedText != null) snackbar.showSnackbar(refusedText, duration = SnackbarDuration.Short)
+        // Shown from the screen's scope: consuming the outcome changes this effect's key, and a
+        // snackbar shown from inside the effect was cancelled the instant it appeared.
+        if (refusedText != null) scope.launch { snackbar.showSnackbar(refusedText, duration = SnackbarDuration.Short) }
     }
 
     Box(Modifier.fillMaxSize()) {
