@@ -13,21 +13,30 @@
  * what nobody expected, and even then says in which stage it happened.
  */
 import { SourceAcquisitionError } from '@buildapp/source-package'
+import type { SourceClassification } from '@buildapp/source-package'
 import { FAILURE_TITLES, isReconstructionFailure } from '@buildapp/reconstruction'
 import type { FailureDiagnostics, PlanDiagnosticsReport, ReconstructionFailureCode, ReconstructionFailurePhase } from '@buildapp/reconstruction'
 import type { AnalysisStage } from './stages.js'
 
 export type AnalysisErrorCode =
-  /** Not an https URL, or one carrying credentials, a port, an address literal. */
+  /** Not a URL, or not https. */
   | 'INVALID_URL'
-  /** A well-formed URL no registered publisher adapter understands. */
+  /** A URL that is not safe to fetch on a user's behalf: credentials, a non-default port, an address literal, a local or private name. */
+  | 'SOURCE_UNSAFE'
+  /** A well-formed URL no registered publisher adapter understands, on a registry with no generic reader. Never the answer for an unknown host in production. */
   | 'UNSUPPORTED_PUBLISHER'
   /** The acquisition refused a target: private address, bad redirect, too large, wrong media type. */
   | 'SOURCE_REFUSED'
   /** The page could not be fetched. */
   | 'SOURCE_UNREACHABLE'
+  /** The page was fetched and inspected, and no house project was recognised on it. */
+  | 'SOURCE_NOT_PROJECT'
+  /** The page's project content exists only after a browser runs its scripts; this analyzer does not. */
+  | 'SOURCE_REQUIRES_RENDERING'
   /** The page was fetched but exposes no drawing this analyzer reads. */
   | 'NO_DRAWINGS'
+  /** A project was recognised and some drawings found, but not the floor plan a building is reconstructed from. */
+  | 'SOURCE_INCOMPLETE'
   /** The solver stopped for a reason it names: see `reasonCode`. */
   | 'RECONSTRUCTION_FAILED'
   /** The pipeline failed in a way nobody expected; `stage` still says where. */
@@ -53,7 +62,17 @@ export type AnalysisFailure = {
 
 export class AnalysisError extends Error {
   /** Set by `runAnalysis` on the way out: the run's trace and diagnostics bundle. Server-side objects, not part of `failure()`. */
-  attachments?: { trace?: import('./trace.js').AnalysisTrace; bundle?: import('./diagnostics.js').DiagnosticsBundle; plans?: PlanDiagnosticsReport }
+  attachments?: {
+    trace?: import('./trace.js').AnalysisTrace
+    bundle?: import('./diagnostics.js').DiagnosticsBundle
+    plans?: PlanDiagnosticsReport
+    /** The sealed inputs the run had produced before it failed, for a replay of the solver alone. */
+    pkg?: import('@buildapp/source-package').SourcePackage
+    graph?: import('@buildapp/source-observations').SourceObservationGraph
+    metrics?: import('@buildapp/source-metrics').MetricEvidenceSet
+    /** The raw error an unexpected failure mapped from. Server-side only: it may carry a path or a line of source and never crosses to a client. */
+    cause?: unknown
+  }
 
   constructor(
     readonly code: AnalysisErrorCode,
@@ -70,12 +89,13 @@ export class AnalysisError extends Error {
   }
 }
 
-const REFUSAL_CODES = new Set(['SCHEME_NOT_ALLOWED', 'URL_INVALID', 'URL_HAS_CREDENTIALS', 'HOST_BLOCKED', 'TOO_MANY_REDIRECTS', 'REDIRECT_INVALID', 'MEDIA_TYPE_NOT_ALLOWED', 'TOO_LARGE'])
+const REFUSAL_CODES = new Set(['SCHEME_NOT_ALLOWED', 'URL_INVALID', 'URL_HAS_CREDENTIALS', 'PORT_NOT_ALLOWED', 'HOST_BLOCKED', 'TOO_MANY_REDIRECTS', 'REDIRECT_INVALID', 'MEDIA_TYPE_NOT_ALLOWED', 'TOO_LARGE'])
 
 const REFUSAL_WORDS: Record<string, string> = {
   SCHEME_NOT_ALLOWED: 'only https addresses are fetched',
   URL_INVALID: 'the address is not a valid URL',
   URL_HAS_CREDENTIALS: 'an address carrying credentials is never fetched',
+  PORT_NOT_ALLOWED: 'the address, or a redirect from it, uses a non-standard port',
   HOST_BLOCKED: 'the address, or a redirect from it, points at a private or local network',
   TOO_MANY_REDIRECTS: 'the page redirects too many times',
   REDIRECT_INVALID: 'the page answered with an invalid redirect',
@@ -125,7 +145,13 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
   }
   if (error instanceof SourceAcquisitionError) {
     const where = { stage: context.stage ?? ('ACQUIRING_SOURCE' as const), ...(error.failures.length > 0 ? { reasonCode: error.failures[error.failures.length - 1].code } : {}) }
-    if (/^no adapter understands/.test(error.message)) return new AnalysisError('UNSUPPORTED_PUBLISHER', 'the page, after redirects, is not on a publisher this analyzer reads', where)
+    if (error.code === 'NO_ADAPTER') return new AnalysisError('UNSUPPORTED_PUBLISHER', 'the page, after redirects, is not on a publisher this analyzer reads, and no generic reader is registered', where)
+    if (error.code === 'SOURCE_NOT_PROJECT') {
+      return new AnalysisError('SOURCE_NOT_PROJECT', 'the page was fetched and inspected, and no house project was recognised on it', { stage: 'ACQUIRING_SOURCE', substage: 'ROUTE', reasonCode: 'SOURCE_NOT_PROJECT', title: 'Not a house project page', diagnostics: classificationDiagnostics(error.classification) })
+    }
+    if (error.code === 'SOURCE_REQUIRES_RENDERING') {
+      return new AnalysisError('SOURCE_REQUIRES_RENDERING', 'the page builds its content in the browser; the analyzer reads only what the server sends', { stage: 'ACQUIRING_SOURCE', substage: 'ROUTE', reasonCode: 'SOURCE_REQUIRES_RENDERING', title: 'The page needs a browser to render', diagnostics: classificationDiagnostics(error.classification) })
+    }
     const last = error.failures[error.failures.length - 1]
     if (last && REFUSAL_CODES.has(last.code)) return new AnalysisError('SOURCE_REFUSED', `the page was not fetched: ${REFUSAL_WORDS[last.code] ?? 'the fetch policy refused it'}`, where)
     if (last?.code === 'HTTP_STATUS') return new AnalysisError('SOURCE_UNREACHABLE', `the page could not be fetched (${last.message.replace(/[^A-Za-z0-9 ]/g, '').slice(0, 40)})`, where)
@@ -139,6 +165,14 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
     ...(context.substage ? { substage: context.substage } : {}),
     title: FAILURE_TITLES.INTERNAL_ERROR,
   })
+}
+
+/** Flat counts of what the generic reader saw, for a diagnostics bundle. Never the page's text. */
+function classificationDiagnostics(c: SourceClassification | undefined): FailureDiagnostics {
+  if (!c) return {}
+  const out: FailureDiagnostics = { verdict: c.verdict, confidence: c.confidence, signals: c.evidence.filter((e) => e.weight > 0).length }
+  for (const e of c.evidence) if (e.weight > 0) out[`signal_${e.signal.replace(/[^a-z0-9]+/gi, '_')}`] = e.weight
+  return out
 }
 
 const STAGE_WORDS: Record<AnalysisStage, string> = {

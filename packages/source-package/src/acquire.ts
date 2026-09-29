@@ -31,7 +31,9 @@ import { mergeRoleClaims, normalizeRoles, type RoleClaim } from './roles.js'
 import { SOURCE_PACKAGE_SCHEMA, SOURCE_PACKAGE_SCHEMA_VERSION, SourcePackageSchema, type AcquisitionFailure, type SourceAsset, type SourcePackage, type SourceVariant } from './schema.js'
 import { aspectOf, pixelArea, sameShape, selectionOrder, selectionReason } from './variants.js'
 import { sourcePackageContentHash } from './hash.js'
-import type { SourceAdapter } from './adapter.js'
+import type { SourceAdapter, SourceClassification } from './adapter.js'
+import { routeSourceAcquisition } from './router.js'
+import type { SourceRoute } from './router.js'
 import { sha256Bytes } from '@buildapp/source-common'
 
 export type AcquireOptions = {
@@ -43,6 +45,8 @@ export type AcquireOptions = {
   cache?: SourceByteCache
   /** Refuse to touch the network; every byte must come from the cache. */
   offline?: boolean
+  /** Told which strategy read the page, for a log or a trace. Never part of the package. */
+  onRoute?: (route: Extract<SourceRoute, { kind: 'SPECIALIST' | 'GENERIC' }>) => void
 }
 
 /** Somewhere fetched bytes live, addressed by URL. */
@@ -62,12 +66,9 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
 
   // --- the page -----------------------------------------------------------
   const page = await fetchBytes(requestedUrl, policy, options, 'PAGE', failures)
-  if (!page) throw new SourceAcquisitionError(`the page could not be fetched: ${failures[failures.length - 1]?.message ?? 'unknown'}`, failures)
+  if (!page) throw new SourceAcquisitionError(`the page could not be fetched: ${failures[failures.length - 1]?.message ?? 'unknown'}`, failures, 'PAGE_NOT_FETCHED')
   const html = new TextDecoder('utf-8').decode(page.bytes)
   const pageUrl = page.url
-
-  const adapter = adapters.find((a) => a.matches(new URL(pageUrl)))
-  if (!adapter) throw new SourceAcquisitionError(`no adapter understands ${pageUrl}`, failures)
 
   const ctx = {
     url: pageUrl,
@@ -77,6 +78,21 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
       return r ? new TextDecoder('utf-8').decode(r.bytes) : null
     },
   }
+
+  // --- the route: a specialist by address, else a generic reading of the page, else a typed answer ---
+  const route = routeSourceAcquisition(ctx, adapters)
+  if (route.kind === 'NO_ADAPTER') throw new SourceAcquisitionError(`no adapter understands ${pageUrl}`, failures, 'NO_ADAPTER')
+  if (route.kind === 'UNSUPPORTED_CONTENT') {
+    const why = route.classification.evidence.map((e) => e.detail).join('; ')
+    throw new SourceAcquisitionError(
+      route.code === 'SOURCE_NOT_PROJECT' ? `the page at ${pageUrl} was not recognised as a house project page${why ? ` (${why})` : ''}` : `the page at ${pageUrl} needs a browser to render before its project content exists${why ? ` (${why})` : ''}`,
+      failures,
+      route.code,
+      route.classification,
+    )
+  }
+  const adapter = route.adapter
+  options.onRoute?.(route)
 
   const identity = adapter.identify(ctx)
   const published = safely(() => adapter.parsePublished(ctx), { facts: [], specifications: [], rooms: [] }, failures, 'FACTS', pageUrl)
@@ -310,10 +326,24 @@ const captionSlugOf = (caption: string | undefined, url: string): string => capt
 
 // ---------------------------------------------------------------------------
 
+/** Why an acquisition produced no package at all. Everything else is a package with failures in it. */
+export type SourceAcquisitionErrorCode =
+  /** The page itself could not be fetched; `failures` carries the fetch refusal or status. */
+  | 'PAGE_NOT_FETCHED'
+  /** No specialist recognises the address and no generic adapter is registered. */
+  | 'NO_ADAPTER'
+  /** The generic adapter inspected the page and found no house project on it. */
+  | 'SOURCE_NOT_PROJECT'
+  /** The page's content is built by scripts in a browser; the fetched markup carries no project. */
+  | 'SOURCE_REQUIRES_RENDERING'
+
 export class SourceAcquisitionError extends Error {
   constructor(
     message: string,
     readonly failures: readonly AcquisitionFailure[],
+    readonly code: SourceAcquisitionErrorCode = 'PAGE_NOT_FETCHED',
+    /** The generic adapter's verdict, when one was reached. */
+    readonly classification?: SourceClassification,
   ) {
     super(message)
     this.name = 'SourceAcquisitionError'

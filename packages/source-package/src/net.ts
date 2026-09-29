@@ -36,6 +36,8 @@ export type FetchPolicy = {
   maxAssets: number
   /** Acceptable media types, as prefixes (`image/` matches `image/png`). */
   allowedMediaTypes: readonly string[]
+  /** Ports a hop may use, as `URL.port` spells them: `''` is the scheme's default. Every redirect and every asset is held to this too. */
+  allowedPorts: readonly string[]
   /** Permit private / loopback targets. Only a test or an explicit local run sets this. */
   allowPrivateHosts: boolean
   userAgent: string
@@ -48,6 +50,7 @@ export const DEFAULT_FETCH_POLICY: FetchPolicy = {
   maxBytes: 24 * 1024 * 1024,
   maxAssets: 120,
   allowedMediaTypes: ['image/', 'text/html', 'application/xhtml+xml', 'text/plain', 'application/json'],
+  allowedPorts: ['', '443'],
   allowPrivateHosts: false,
   userAgent: 'BuildApp-SourceAcquisition/1.0 (+https://github.com/damiankrok/BuildApp)',
 }
@@ -56,6 +59,7 @@ export type FetchFailureCode =
   | 'SCHEME_NOT_ALLOWED'
   | 'URL_INVALID'
   | 'URL_HAS_CREDENTIALS'
+  | 'PORT_NOT_ALLOWED'
   | 'HOST_BLOCKED'
   | 'DNS_FAILED'
   | 'TOO_MANY_REDIRECTS'
@@ -225,6 +229,11 @@ export async function assertFetchable(rawUrl: string, policy: FetchPolicy, resol
   }
   if (url.username !== '' || url.password !== '') {
     throw new FetchRefused('URL_HAS_CREDENTIALS', rawUrl, 'a URL carrying credentials is never fetched')
+  }
+  // A redirect or a discovered asset on another port is another service: it
+  // is held to the same rule as the address the user gave.
+  if (!policy.allowedPorts.includes(url.port)) {
+    throw new FetchRefused('PORT_NOT_ALLOWED', rawUrl, `port ${url.port} is not allowed (allowed: the scheme's default)`)
   }
   if (policy.allowPrivateHosts) return url
   if (isBlockedHostLiteral(url.hostname)) {

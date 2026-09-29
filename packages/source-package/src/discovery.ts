@@ -48,6 +48,12 @@ export type DiscoveredCandidate = {
   /** Where in that markup, e.g. `img[src]`, `a[href]`, `img[data-floor-pom-img]`. */
   locator: string
   caption?: string
+  /**
+   * The words around the element in the markup — the nearest heading above
+   * it, a figure caption, a `title` — as a generic adapter reads them. Never
+   * used by the acquisition itself; an adapter's role rules may.
+   */
+  context?: string
   declaredWidth?: number
   declaredHeight?: number
   /**

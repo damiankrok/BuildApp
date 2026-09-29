@@ -40,7 +40,7 @@ class HttpError extends Error {
   }
 }
 
-const URL_STATUS: Record<string, number> = { INVALID_URL: 400, UNSUPPORTED_PUBLISHER: 422 }
+const URL_STATUS: Record<string, number> = { INVALID_URL: 400, SOURCE_UNSAFE: 400, UNSUPPORTED_PUBLISHER: 422 }
 
 const ROUTE = /^\/v1\/analyses\/([^/]+)(?:\/(result|scene|model|candidate))?\/?$/
 

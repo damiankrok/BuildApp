@@ -25,11 +25,35 @@ export type AdapterContext = {
   fetchText: (url: string) => Promise<string | null>
 }
 
+/**
+ * How the router treats an adapter.
+ *
+ * A SPECIALIST knows one publisher and is asked first, by URL: it is an
+ * optimiser — it knows where that publisher hides its originals and what its
+ * filenames mean — never an allowlist. A GENERIC adapter is asked only when
+ * no specialist recognises the address, and is asked about the PAGE: its
+ * `classify` decides, from the markup, whether there is a house project here
+ * at all. Absent, an adapter is a specialist.
+ */
+export type AdapterStrategy = 'SPECIALIST' | 'GENERIC'
+
+/** What a generic adapter concluded about a fetched page before anything was discovered on it. */
+export type SourceClassification = {
+  verdict: 'PROJECT_PAGE' | 'NOT_PROJECT' | 'REQUIRES_RENDERING'
+  /** 0..1, how sure. A PROJECT_PAGE verdict needs several independent signals; one weak keyword is not enough. */
+  confidence: number
+  /** The signals that were found, each with what matched. Deterministic order. */
+  evidence: Array<{ signal: string; detail: string; weight: number }>
+}
+
 export type SourceAdapter = {
   id: string
   version: string
-  /** True when this adapter understands the URL. */
+  strategy?: AdapterStrategy
+  /** True when this adapter understands the URL. A generic adapter answers true for any public https address. */
   matches: (url: URL) => boolean
+  /** A generic adapter's verdict on the fetched page. A specialist needs none: recognising the URL is its verdict. */
+  classify?: (ctx: AdapterContext) => SourceClassification
   identify: (ctx: AdapterContext) => ProjectIdentity
   /** Every candidate address the page and its endpoints expose. */
   discover: (ctx: AdapterContext) => Promise<DiscoveredCandidate[]>
