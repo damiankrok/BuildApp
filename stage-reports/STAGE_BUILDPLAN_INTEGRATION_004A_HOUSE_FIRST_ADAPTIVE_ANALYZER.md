@@ -336,3 +336,76 @@ with `RetryAction.NONE`.
 Desktop runs on Node 22 through the proxied sandbox network. The Kosaćce
 bundle run stays inside the ~2.1 GB / multi-minute envelope the brief
 names; no regression flagged; no runtime optimization attempted.
+
+## U. Three audit → fix → verify cycles
+
+Exactly three, after the main implementation, each sealed under
+`stage-reports/artifacts/integration-004a/impeccable/`:
+
+1. **Cycle 1 — house-first IA** (`cycle1-critique.md`, Impeccable
+   dual-agent critique of the new workspace code): **29/40** against the
+   24/40 baseline, no P0, five P1 (the stage sheet was the Etapy page in a
+   sheet; the status row was permanent for a limited house and misrouted a
+   failed link; two panel overlaps; the rail out of one-handed reach; the
+   bundled sample unlabelled). All five P1 and eight P2 fixed in
+   `fix(ui): apply Impeccable house-first critique`; verified on the
+   emulator by CI run 75 (V).
+2. **Cycle 2 — analyzer genericity / security** (`cycle2-audit.md`, an
+   independent technical reviewer over the diff with the tests run):
+   verdict PARTIAL before fixes — no P0, two P1 (the service path never
+   typed the four "page not enough" refusals; the generic reader ordered
+   page text with `localeCompare`, which the phone's ICU replica refuses
+   for common punctuation) — plus P2s (fence-level IPv6/IPv4-spelling
+   tests, a classifier-less generic adapter, fact-label anchoring, site
+   plan before floor plan, a purity guard over the generic reader). Fixed
+   in `fix(source): order page text by code units…` and `fix(android):
+   type the page's refusals on the service path too`; the alternate
+   Marcówki package re-acquired offline after the change is byte-identical
+   (same `contentHash`). Declined with reason: the solver version bump
+   (it is part of every model hash, so bumping it would break the very
+   byte-identity this stage gates on; noted for the next stage that changes
+   those outputs).
+3. **Cycle 3 — release candidate** (`cycle3-polish-harden.md`, Impeccable
+   polish + harden with adversarial journeys reasoned from the code, then
+   the device journeys of the final build): see AA for what was left.
+
+## W. CI / test matrix
+
+| gate | where | status |
+| --- | --- | --- |
+| typecheck, unit / integration / architecture (vitest, 1 094 tests incl. generic 33, router, security, service 47, generic-source 7, topology 17, purity guards) | `core` | green (run 74/75) |
+| API bundle + HTTP smoke (SOURCE_UNSAFE before fetch; an unknown publisher inspected, typed failure) | `core` | green after `43f052b` |
+| analyzer container smoke | `analyzer-image` | green after `43f052b` |
+| Marcówki (sealed candidate, exterior closure, facade audit) | `core` | green |
+| Rarytasy: live URL, sealed replay, garage gable, pre-fix refusal, Node 18 without ICU = desktop | `second-house-generalization` | green (run 74: model `8fa4a25b…`) |
+| Kosaćce: sealed evidence through today's solver = sealed hashes (hard gate when the plans fetch), live URL advisory, live = sealed | `third-house-kosacce` (new) | green (run 74: live 164 s, `5b5ffcf1…` = sealed) |
+| Android JVM tests (401) + lint + APK | `android` | green |
+| 3D entry gate on the workspace root (cold start, after the analyzer task, direct launch) | `android-3d-gate` | green |
+| Local analyzer host parity (Node 18/22) and device (emulator fixture) | `local-analyzer-*` | green |
+| UI evidence: house-first journey at font 1.0 and 1.3, landscape, lifecycle / unhappy / collisions, no-house, Marcówki + Rarytasy + Kosaćce slices, alternate publisher | `android-ui-evidence` (+ `NoHouseDeviceTest`, `GenericSourceDeviceTest`, Kosaćce slice) | run 74: every journey but the camera assertion (fixed, `0feddb4`); run 75: see V |
+| OWNER direct APK (waits for the third house too) | `owner-preview-release` | Z |
+
+## AA. Residual debt
+
+- **Alternate Marcówki does not reconstruct**: the site publishes only
+  550×550 plans; the run ends honestly at `PLAN_LAYOUT_REJECTED`. The phone
+  says "Nie udało się zbudować modelu" with the reason folded under
+  "Szczegóły analizy"; a dedicated sentence for "plans too small to read"
+  would need the solver to tell resolution from layout, which it cannot
+  yet. A larger-copy probe for unknown publishers (as the ARCHON convention
+  does) is the next step of the generic reader.
+- **`SOLVER_V2_VERSION` unchanged** although the emitter's rule set grew
+  (cycle 2, declined for the byte-identity gate); the duplicate binding of
+  a split run (cycle 2 P3) is left for the same reason (the sealed
+  Kosaćce candidate hash).
+- Role-aware media types per fetch, return-host unit cases, a multi-tenant
+  registrable-domain list, a page-size cap below the asset cap (cycle 2
+  P2/P3).
+- In-window sheets honouring `MotionPolicy` (the Material sheet still
+  slides under reduced motion), the landscape timeline as a row, a
+  persisted "gesture hint seen", the analysis date on a re-analysed house's
+  menu row (cycle 1 P2-2, P2-8, P3).
+- The two 6 s timers (gesture hint, notice) and the 11–13 sp rail labels
+  and numerals in glare are unchanged from 003C.
+- The five-minute analyses and ~2 GB peak RSS are measured, not reduced
+  (§40 of the brief).
