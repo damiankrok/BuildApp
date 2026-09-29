@@ -1,0 +1,338 @@
+# STAGE BUILDPLAN-INTEGRATION-004A — HOUSE-FIRST WORKSPACE + ADAPTIVE ANALYZER + KOSAĆCE TOPOLOGY
+
+Branch `integration/house-first-adaptive-analyzer-v1`, from
+`integration/immersive-progress-v1` @ `d199a0eba56de53bb72d9aa8607c7edfeee592e0`
+(the 003C report commit; its UI code beneath it `6f9da1b`). Donor
+`damiankrok/BuildPlan-PC-Legacy` `main` @ `b0e79675`, read only, unchanged.
+Three workstreams, each in its own commits and independently revertible:
+A the adaptive source layer (`packages/source-package`,
+`packages/analysis-service`, the API and the phone's copy), B the wall
+topology planner (`packages/reconstruction`), C the house-first product
+(`apps/android`). No histories merged, no reset, no stash, no force push.
+
+## A. Baseline
+
+- BuildApp HEAD at start: `d199a0eb…` — matched the brief; no STOP.
+- 003C's verdict does not carry over: the OWNER's house-first override
+  (§22–§28 of the brief) revokes the five-place shell; a new critique
+  baseline was taken (P below).
+- Baseline analyzer runs before any change (desktop, Node 22, proxied
+  HTTPS): Marcówki completed (model `6152770f43f4970a…`, scene
+  `8c7d43956d74d252…`, 205 commands, 263 s); Rarytasy completed (model
+  `8fa4a25bcd587248…`, scene `d4e7249bb1bda4b8…`, 151 commands, 336 s);
+  Kosaćce failed (B); the alternate Marcówki address was refused before a
+  byte was fetched (B).
+
+## B. OWNER failures reproduced
+
+1. **Kosaćce**
+   (`https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f`):
+   `RECONSTRUCTION_FAILED / MODEL_EMISSION_FAILED` in `BUILDING_MODEL`,
+   "the model refused command 52 (createWall): WALLS_OVERLAP" — exactly the
+   OWNER's failure. Sealed in
+   `stage-reports/artifacts/integration-004a/kosacce/before/`
+   (`failure.json`, `diagnostics.json`, `analysis-trace.json`, `live.txt`).
+2. **Alternate Marcówki**
+   (`https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge`):
+   `UNSUPPORTED_PUBLISHER` from `validateAnalysisUrl` before any fetch —
+   the address never reached the network. The regression test "004A
+   baseline gate" in `packages/analysis-service/test/service.test.ts`
+   reproduces this with a specialist-only registry and shows the reason.
+
+## C. Publisher-gate root cause
+
+`validateAnalysisUrl` (`packages/analysis-service/src/identity.ts`) answered
+two questions with one function: whether the address was safe to fetch and
+whether a registered adapter *recognised* it. `archonAdapter.recognizes`
+was the only adapter, so recognition became an allowlist by hostname, and
+the refusal (`UNSUPPORTED_PUBLISHER`, "… is not a publisher this analyzer
+reads") was returned before a byte of the page had been looked at. The
+security checks themselves (`safeFetch` in `net.ts`) were sound; they were
+simply never reached for an unknown host.
+
+## D. Source router
+
+- `validatePublicSourceUrlSecurity` (`packages/source-package/src/security.ts`)
+  is the no-network fence: https only, no credentials, the default port
+  only (a new `allowedPorts` policy, also enforced per hop in `safeFetch`),
+  a named public host (no literal IP), a length cap. It needs no publisher.
+- `routeSourceAcquisition` (`router.ts`) runs after the page is fetched:
+  a **specialist** that recognises the address (`AdapterStrategy =
+  'SPECIALIST'`) reads it; otherwise a **generic** adapter classifies the
+  page (`SourceClassification`: `PROJECT_PAGE` → read it,
+  `NOT_PROJECT`, `REQUIRES_RENDERING`); otherwise `NO_ADAPTER`.
+  `acquireSourcePackage` throws a typed `SourceAcquisitionError` with the
+  code and the classification's evidence; the service maps it
+  (`SOURCE_NOT_PROJECT`, `SOURCE_REQUIRES_RENDERING`, `NO_ADAPTER` →
+  `UNSUPPORTED_PUBLISHER`), and `routableBeforeFetch` keeps the pre-fetch
+  refusal only for a registry with no generic strategy.
+- Order: specialist → generic → typed insufficient result. ARCHON pages are
+  never routed to the generic reader (`packages/source-package/test/generic.test.ts`,
+  router cases).
+
+## E. Generic adapter
+
+`packages/source-package/src/adapters/generic/` (`generic.project-page`
+1.0.0, strategy `GENERIC`), deterministic, no API key, no remote model, no
+browser, no script execution:
+
+- `markup.ts` reads title, canonical, OpenGraph, description, `lang`,
+  headings with offsets, tables, pairs from tables / definition lists /
+  list items, JSON-LD parsed as data, text length, script count and
+  JS-shell hints, image count; `contextAt` gives the nearest heading above
+  a picture.
+- `vocabulary.ts`: Polish and English drawing words (document, storey,
+  view, annotation), download words, house words, site-chrome names.
+- `classify.ts`: signal families (title, structured data, figures, project
+  code, rooms, drawings); `MIN_SCORE = 4` and `MIN_FAMILIES = 2` — one
+  weak keyword is never enough; `REQUIRES_RENDERING` when the page is a
+  script shell with no drawings.
+- `assets.ts`: `<img>`, `srcset`, `<picture>` grouped by structure, alt /
+  title / caption / nearest heading, role claims (FLOOR_PLAN, ELEVATION,
+  SECTION, PERSPECTIVE_RENDER, SITE_PLAN, …), chrome and navigation
+  thumbnails dropped, bounded one-level same-registrable-domain crawl
+  (`MAX_CRAWL_PAGES = 4`, deterministic order) of links whose words promise
+  drawings, resolution hints from size stems.
+- `published.ts`: figures, rooms and specification lines by the vocabulary
+  of their labels; nothing invented.
+- Identity (`genericIdentity`): an external id from JSON-LD `sku` or an
+  opaque path segment when the page prints one; otherwise the canonical
+  address — a stable identity from the page's own evidence, no
+  publisher-specific field.
+
+No hostname-specific selector exists for the alternate site or any other.
+
+## F. Security
+
+Nothing was weakened: `safeFetch` still resolves every host, classifies
+every address (loopback, private, link-local incl. 169.254.169.254, CGNAT,
+multicast, unspecified, every IPv6 spelling), follows redirects manually
+and revalidates each hop, caps bytes by streaming, limits assets, and
+allow-lists media types. Added: the port check per hop and the pre-fetch
+fence that needs no publisher. The generic crawl uses the same policy for
+every link. Required tests (`generic.test.ts`, `service.test.ts`,
+`api.test.ts`): localhost, private IPv4, link-local and metadata, IPv6
+loopback / private / mapped, credentials, non-https, unsafe redirect
+refused, redirected asset revalidated, oversized HTML and asset cut at the
+cap, wrong media type refused, bounded crawl, no jump to an unrelated
+site, scripts treated as data (never executed).
+
+## G. Alternate Marcówki result
+
+Through the whole pipeline (desktop): routed `GENERIC` (classification
+`PROJECT_PAGE`, confidence 1); 14 assets classified (4 floor plans, 4
+elevations, 1 section, 1 site plan, 4 renders), 9 facts, 18 rooms, 5
+specification lines read; observation extraction and registration ran;
+the run ends honestly at `RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED`
+("the lowest storey covers 19.56 m² against the 131.16 m² the publisher
+prints — 85.1 % apart") because every plan on that site is a 550×550
+thumbnail with no larger copy published. The address is no longer rejected
+for its hostname; the result is evidence-based PARTIAL for this page.
+Sealed: `stage-reports/artifacts/integration-004a/alternate-marcowki/`.
+
+## H. Cross-source equivalence
+
+`packages/analysis-service/src/cross-source.ts` (`npm run
+analysis:cross-source`) compares two acquisitions evidence first: printed
+facts within 1 %, roof pitch and kind (stated and reconstructed), the room
+schedule, drawing coverage (not identity), footprint, counts and the
+compiled geometry fingerprint of the structural meshes (ids and labels
+excluded) when both sides reconstructed; titles are weak evidence and never
+decide. ARCHON Marcówki vs the alternate page:
+**SOURCE_PARTIAL_EQUIVALENT** — 12 aspects agree (project code
+`m2fa281446a8ca`, six printed areas, height, volume, roof 40° gable, 18
+identical rooms), none disagree, and only ARCHON's side has a
+reconstruction, so the geometry fingerprint is one-sided.
+`stage-reports/artifacts/integration-004a/cross-source/cross-source.{json,md}`.
+Not forced to equality.
+
+## I. Kosaćce first bad topology decision
+
+Traced from the evidence, not from the validator: on the main mass's
+ground storey (x 0..14.542 m, ring wall thickness 0.296 m) the partition
+observation `main-iwall-0-z-13` is a 0.53 m stub read 8 mm *inside* the
+east ring wall's band. The emitter (`emit.ts`) turned every partition run
+into a `createWall` as observed, so the stub penetrated the ring wall and
+overlapped it by 0.0043 m²; the validator's `WALLS_OVERLAP` was correct.
+The first wrong inference was the absence of any topology decision between
+the observed partition runs and the DSL.
+
+## J. Topology planner
+
+`planWallTopology(runs, hosts, {gapM = 0.015, reachM = 0.06, minRunM = 0.2})`
+(`packages/reconstruction/src/v2/wall-topology.ts`), generic, over a
+storey's partition runs and its host bands (ring walls and returns), in
+order: fuse duplicates and collinear pieces (`FUSED_DUPLICATE`); a run
+inside a parallel host is dropped (`DROPPED_INSIDE_HOST`), one whose end
+penetrates a host is snapped off it by its measured penetration plus the
+gap (`SNAPPED_OFF_HOST`); perpendicular ends are clamped to the host's
+face (`TRIMMED_TO_HOST`); crossings split, thinner yields (`SPLIT_AT_CROSSING`);
+stubs dropped (`DROPPED_STUB`); T ends trimmed deepest-first with the
+X-owns-corner convention for L corners (`TRIMMED_TO_PARTITION`); shorts
+dropped (`DROPPED_SHORT`); a final overlap audit drops what it cannot
+resolve with a recorded decision (`DROPPED_UNRESOLVED_OVERLAP`) — fail to
+unknown, never emit invalid. Doors on a dropped run are dropped with it
+(`DOOR_DROPPED`). Every decision is in `EmitResult.topology`, the
+reconstruction trace (`WALL_TOPOLOGY`) and the failure diagnostics
+(command id, wall ids, measured overlap, decisions). Commands are ordered
+so every prefix validates. `WALLS_OVERLAP` in `packages/model` is
+untouched.
+
+## K. Kosaćce before / after
+
+| | before | after |
+| --- | --- | --- |
+| outcome | `MODEL_EMISSION_FAILED`, command 52 `createWall`, `WALLS_OVERLAP` | COMPLETED |
+| masses / openings / commands / meshes | — | 3 / 13 / 169 / 136 |
+| model hash | — | `5b5ffcf1afcd2511…` |
+| scene contentHash / sha256 | — | `50217b856dfc3d05…` / `0a9119cdf2b4a6df…` |
+| desktop wall clock | ~4 min 20 s to the failure | 284 s (acquisition 4.8, observations 269, metrics 6.5, reconstruction 0.5+) |
+| Node 18 bundle (no ICU) | — | done, same model and scene hashes, 397 s, peak RSS 2 041 MB |
+
+The sealed evidence (same source package and graph before and after)
+replays offline through today's solver to the same model hash
+(`stage-reports/artifacts/integration-004a/kosacce/`, CI job
+`third-house-kosacce`). Nothing names Kosaćce, command 52, or the
+evaluation figures (128.16 / 164.47 / 216.91 m², 6.49 m, 35°) in
+production code.
+
+## L. Marcówki regression
+
+Model `6152770f43f4970a…` and scene `8c7d43956d74d252…` byte-identical
+before and after the planner; the candidate hash moves (the program's run
+ids and topology notes are part of it), the model and scene do not. The
+specialist adapter's package is unchanged (same `sourcePackageHash`).
+
+## M. Rarytasy regression
+
+Model `8fa4a25bcd587248…` and scene `d4e7249bb1bda4b8…` byte-identical;
+PARTIAL fidelity as before (pergola, entrance canopy, second chimney). The
+committed 003B replay expectation is unchanged.
+
+## N. Synthetic source fixtures
+
+`packages/source-package/test/generic.test.ts` (31 tests): ten holdout
+project pages of different shapes (tables, definition lists, JSON-LD,
+`<picture>` and `srcset` variants, captions, a downloads page one level
+deep, a JS shell, renders only, not a project), sealed replay
+byte-identical, the security suite, the router. `generic-source.test.ts`
+(7): a synthetic house on an unknown publisher reconstructed through the
+generic reader and `SOURCE_EQUIVALENT` to the specialist's reading by
+geometry fingerprint; NO_DRAWINGS; SOURCE_NOT_PROJECT;
+SOURCE_REQUIRES_RENDERING; SOURCE_UNSAFE; specialist preferred.
+
+## O. Synthetic wall topology fixtures
+
+`packages/reconstruction/test/wall-topology.test.ts` (17): L corner,
+exterior T, interior T, cross, duplicate, partial collinear,
+near-collinear noise, genuinely separate close walls, the 8 mm stub, door
+carried with its run; every emitted command prefix replayed through the
+real model (`applyCommand`) so each prefix validates; a genuine overlap
+still fails `WALLS_OVERLAP`.
+
+## P. New house-first critique (§30 baseline)
+
+Impeccable `critique`, dual-agent, on the run-73 UI under the NEW brief:
+`stage-reports/artifacts/integration-004a/impeccable/house-first-critique.md`
+(snapshot `apps/android/.impeccable/critique/2026-09-29T12-16-16Z…`).
+Verdict "authored skin on a stock skeleton", **24/40**, cognitive load 5/8
+failures. The eleven §30 questions answered with measurements: the bottom
+bar existed because PRODUCT.md froze five places; setting progress,
+switching or adding a house and reading source status required leaving
+3D; progress could be looked at around the house but not touched; on Dom
+the bar took 7.1 % and the drawing 25 % of the height, on 3D the chrome
+18.6 % and the house ≈ 13 % of the area under a 25 % void; the analyzer
+was a page whose result evicted the open house; 2 of 5 destinations were
+empty; one-handed use was right at the foot and wrong at the top; chrome
+text was strong outdoors but the model silhouette weak; ≈ 70 % of the
+screen accepted orbit at rest; the %·stage·task triple was clean on one
+of six states; the house was 1 tap away on every launch, a recorded stage
+5 taps, a house switch 4. P0: the house was not the root. P1: progress not
+editable around the house; two empty destinations; the analyzer a place
+whose result evicted the house. P2: the house did not occupy the screen.
+
+## Q. Three UI directions
+
+`stage-reports/artifacts/integration-004a/impeccable/house-first-directions.md`:
+A Spatial instrument, B Construction cockpit, C Quiet canvas, each
+critiqued on house dominance, homeowner clarity, touch ergonomics, clutter,
+extensibility, accessibility and Compose/Filament feasibility. B rejected
+(icon-only handles trade words for glyphs and both edges cost gesture
+area); C rejected as the default (hiding the rail hides the state words
+"Bez dachu" / "Makieta" that the 003C evidence showed owners needing) and
+kept as a behaviour (the rail already recedes while the model is turned).
+**A chosen.** The OWNER was not asked: the brief's §22–§28 decide the root,
+the task flow and the Koszty boundary; the rest is structural and recorded
+with its evidence.
+
+## R. Chosen HouseWorkspace
+
+`apps/android/app/src/main/java/com/buildplan/preview/ui/`:
+
+- `ShellState` = root + at most one `Sheet` (MENU, STAGES, SOURCE) + at most
+  one `Task` (ANALYZER); pure `back()`; `EXTRA_PLACE` still names a surface
+  (`HOUSE`/`MODEL`, `STAGES`, `SOURCE`, `MENU`, `ANALYZER`);
+  `EXTRA_WITHOUT_BUNDLED` hides the APK's scenes for the no-house state.
+- `AppShell`: the analyzer task, else `NoHouseScreen` when no house exists,
+  else `HouseWorkspace`. A finished analysis opens by itself only with no
+  house open; otherwise the workspace offers it in its status row.
+- `HouseWorkspace` (the former `ModelWorkspace`): Layer 0 the model edge to
+  edge; Layer 1 the top context (house menu button, house name, the actual
+  state, and a status row only when there is something to say); Layer 2
+  the labelled tool rail (receding while the model is turned); Layer 3 the
+  construction rail whose header opens the stage sheet; Layer 4 one
+  contextual surface at a time (the inspector in-window, or a modal sheet
+  on a scrim). Camera framing measured from the resting chrome as in 003C;
+  sheets and the task never move the camera.
+- `HouseSheets`: `HouseMenuSheet` (houses on this phone, add from link,
+  Etapy budowy, Źródło modelu i analiza, the Koszty boundary as a disabled
+  row that says it is not built), `StageSheet` (the 003C editor),
+  `SourceSheet` (name, the inked `HouseDrawing`, source status with
+  limitation counts, a running or failed analysis, the latest analysis of
+  this house with `AnalysisDiagnostics`, technical rows), `NoHouseScreen`.
+- Deleted: `AppPlace`, `PlacesBar`, `PlacesRail`, `EmptyPlace`,
+  `HouseScreen` (Dom), the `place_*` and `empty_*` strings.
+- PRODUCT.md, DESIGN.md and the surface brief record the override.
+
+## S. Progress / history integration
+
+Unchanged domain and persistence (`progress/`). Around the house: the rail
+header reads "43% Dach / Teraz: Montaż więźby" (or "Postęp nieustawiony"
+with "Ustaw postęp") and is the handle into the stage sheet
+(`TimelineRail.NowHeader.onEdit`, chevron, 48 dp, `onClickLabel`); the
+top context repeats the actual state while previewing; scrubbing and
+tapping the rule preview without saving; "Wróć do teraz"; the stage sheet
+is the one place the record is edited and "Pokaż w 3D" closes it onto the
+house with the cursor moved. Save/restore: the house, camera,
+presentation, layers and selection live in the ViewModels (they survive
+rotation); the preview cursor resets on a house switch and with the
+process, never on a sheet or the task — defined in `AppShell`'s comment.
+
+## T. Source / analyzer contextual UX
+
+Entry points: the no-house state ("Dodaj dom z linku"), the house menu,
+the source sheet, and the status row of the workspace when a run is going
+or failed ("Analiza linku w toku · 37 %", "Analiza linku się nie powiodła
+— zobacz dlaczego"). The task returns to the same house at the same
+camera; a result is opened by the owner ("Otwórz w 3D") or offered ("Nowy
+dom gotowy: … · Otwórz"). Generic-source copy on the phone: "Sprawdzam
+stronę projektu i pobieram rysunki" (first stage), "Nie rozpoznałem na tej
+stronie projektu domu.", "Znalazłem projekt, ale brakuje rzutu potrzebnego
+do modelu.", "Ta strona wymaga renderowania w przeglądarce, którego
+analiza na telefonie jeszcze nie obsługuje.", "Nie udało się poprawnie
+połączyć części ścian. Szczegóły są poniżej." — never "Obsługiwane są
+tylko strony ARCHON". Typed failures: `UnsafeUrl`, `SourceContent(code)`
+with `RetryAction.NONE`.
+
+## X. Performance (measured, not refounded)
+
+| source | outcome | wall clock | acquisition / observations / metrics | assets, source bytes | model / scene |
+| --- | --- | --- | --- | --- | --- |
+| Marcówki (ARCHON) | COMPLETED | 263 s | 16.4 / 236.3 / 5.1 s | 20, 4.2 MB | `6152770f…` / `8c7d4395…` |
+| Rarytasy (ARCHON) | COMPLETED | 336 s | 18.6 / 305.3 / 9.3 s | 37, 14.0 MB | `8fa4a25b…` / `d4e7249b…` |
+| Kosaćce (ARCHON) | COMPLETED | 284 s desktop; 397 s Node 18 bundle, peak RSS 2 041 MB | 4.8 / 269.4 / 6.5 s | 31, 19.9 MB | `5b5ffcf1…` / `50217b85…` |
+| alternate Marcówki (generic) | PLAN_LAYOUT_REJECTED | 102 s | 0.4 / 101.0 / — | 14, 3.7 MB | — |
+
+Desktop runs on Node 22 through the proxied sandbox network. The Kosaćce
+bundle run stays inside the ~2.1 GB / multi-minute envelope the brief
+names; no regression flagged; no runtime optimization attempted.
