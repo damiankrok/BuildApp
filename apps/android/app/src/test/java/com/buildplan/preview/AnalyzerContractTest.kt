@@ -162,7 +162,7 @@ class AnalyzerContractTest {
         val rows = StageChecklist.rows(status(CONTRACT_STATUS))
         // The server sent English labels (one abbreviated to "…"); the owner reads Polish.
         assertEquals(AnalysisStages.PIPELINE.map { AnalysisStages.DEFAULT_LABELS.getValue(it) }, rows.map { it.label })
-        assertEquals("Pobieram stronę projektu i rysunki", rows[0].label)
+        assertEquals("Sprawdzam stronę projektu i pobieram rysunki", rows[0].label)
         assertEquals(StageState.RUNNING, rows[2].state)
     }
 

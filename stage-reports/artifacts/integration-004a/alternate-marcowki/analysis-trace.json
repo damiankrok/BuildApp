@@ -1,0 +1,138 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "adapter": "generic.project-page",
+        "addressesNotUsed": 0,
+        "assets": 14,
+        "route": "GENERIC",
+        "variants": 14
+      },
+      "durationMs": 428,
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "FETCH"
+    },
+    {
+      "counts": {
+        "ELEVATION": 4,
+        "FLOOR_PLAN": 4,
+        "PERSPECTIVE_RENDER": 4,
+        "SECTION": 1,
+        "SITE_PLAN": 1,
+        "drawings": 14
+      },
+      "durationMs": 0,
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 428,
+      "status": "PASSED",
+      "substage": "ROLES"
+    },
+    {
+      "counts": {
+        "frames": 14,
+        "observations": 662,
+        "relations": 376,
+        "vision": "DETERMINISTIC_ONLY"
+      },
+      "durationMs": 26544,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 428,
+      "status": "PASSED",
+      "substage": "OBSERVATIONS"
+    },
+    {
+      "counts": {
+        "callouts": 9,
+        "chains": 53,
+        "evidence": 28,
+        "levelDatums": 0,
+        "registrations": 3,
+        "scalesRefused": 2,
+        "undecodable": 0
+      },
+      "durationMs": 74480,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 26973,
+      "status": "PASSED",
+      "substage": "METRIC_EVIDENCE"
+    },
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 2,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+      },
+      "durationMs": 454,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 101453,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 2,
+        "cells": 10,
+        "dimensionChains": 23,
+        "dimensionChainsRead": 4,
+        "enclosedCells": 8,
+        "gridLinesX": 3,
+        "gridLinesY": 6,
+        "masses": 2,
+        "planFrames": 4,
+        "planSizePx": "550x550",
+        "plansRead": 2,
+        "recessRegions": 0,
+        "scaleCmPerPx": 1.5915,
+        "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+        "wallBands": 38,
+        "wallThicknessPx": 11,
+        "walledEnvelope": true,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "durationMs": 6,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 101907,
+      "status": "PASSED",
+      "substage": "PLAN_DECOMPOSITION"
+    },
+    {
+      "counts": {
+        "builtRegions": 2,
+        "cells": 10,
+        "dimensionChains": 23,
+        "dimensionChainsRead": 4,
+        "enclosedCells": 8,
+        "gate": "STRUCTURAL_LAYOUT_REJECTED",
+        "gridLinesX": 3,
+        "gridLinesY": 6,
+        "masses": 2,
+        "planFrames": 4,
+        "planSizePx": "550x550",
+        "plansRead": 2,
+        "recessRegions": 0,
+        "scaleCmPerPx": 1.5915,
+        "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+        "wallBands": 38,
+        "wallThicknessPx": 11,
+        "walledEnvelope": true,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "the lowest storey covers 19.56 m² against the 131.16 m² the publisher prints — 85.1% apart: the decomposition is not of this building",
+      "durationMs": 6,
+      "reasonCode": "PLAN_LAYOUT_REJECTED",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 101912,
+      "status": "FAILED",
+      "substage": "STRUCTURAL_LAYOUT"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

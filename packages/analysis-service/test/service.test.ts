@@ -10,6 +10,7 @@ import { afterAll, describe, expect, it } from 'vitest'
 import { fileByteCache, memoryByteCache } from '@buildapp/source-package'
 import { LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
 import { loadBundle, sha256 } from '@buildapp/mobile-scene'
+import { genericProjectPageAdapter } from '@buildapp/source-package'
 import { serializeModel } from '@buildapp/model'
 import { verifyReplay } from '@buildapp/reconstruction'
 import { ANALYSIS_STAGES, AnalysisError, hashesOf, progressAt, runAnalysis, runLinkAnalysis, summaryOf, validateAnalysisUrl } from '../src/index.js'
@@ -146,20 +147,43 @@ describe('what is refused, and how it is said', () => {
   }
   const run = (url: string, extra: Partial<Parameters<typeof runAnalysis>[1]> = {}): Promise<unknown> => runAnalysis({ kind: 'URL', url }, optionsFor(extra))
 
+  // The security fence and the publisher gate are two answers (004A): an address
+  // that is not safe is SOURCE_UNSAFE whatever the host; an address that is not a
+  // URL, or not https, is INVALID_URL; and only a registry with NO generic reader
+  // refuses an unknown host before the fetch.
   it.each([
     ['http://drawings.synthetic-publisher.test/projects/larchfield-lf01', 'INVALID_URL'],
     ['file:///etc/passwd', 'INVALID_URL'],
-    ['https://user:pw@drawings.synthetic-publisher.test/projects/x', 'INVALID_URL'],
-    ['https://drawings.synthetic-publisher.test:8443/projects/x', 'INVALID_URL'],
-    ['https://127.0.0.1/projects/x', 'INVALID_URL'],
-    ['https://[::1]/projects/x', 'INVALID_URL'],
-    ['https://localhost/projects/x', 'INVALID_URL'],
+    ['https://user:pw@drawings.synthetic-publisher.test/projects/x', 'SOURCE_UNSAFE'],
+    ['https://drawings.synthetic-publisher.test:8443/projects/x', 'SOURCE_UNSAFE'],
+    ['https://127.0.0.1/projects/x', 'SOURCE_UNSAFE'],
+    ['https://[::1]/projects/x', 'SOURCE_UNSAFE'],
+    ['https://localhost/projects/x', 'SOURCE_UNSAFE'],
+    ['https://169.254.169.254/latest/meta-data/', 'SOURCE_UNSAFE'],
     ['not a url', 'INVALID_URL'],
     ['https://example.com/projects/x', 'UNSUPPORTED_PUBLISHER'],
-  ])('%s → %s, before anything is fetched', async (url, code) => {
+  ])('%s → %s, before anything is fetched (specialist-only registry)', async (url, code) => {
     const before = publisher.requests.length
     expect(await codeOf(run(url))).toBe(code)
     expect(publisher.requests.length).toBe(before)
+  })
+
+  it('004A baseline gate: the alternate Marcówki address is refused BEFORE any fetch when only specialists are registered', async () => {
+    // This is the behaviour the OWNER saw: UNSUPPORTED_PUBLISHER, without a byte of the page having been looked at.
+    const before = publisher.requests.length
+    expect(await codeOf(run('https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge'))).toBe('UNSUPPORTED_PUBLISHER')
+    expect(publisher.requests.length).toBe(before)
+  })
+
+  it('with a generic reader registered, an unknown safe host is FETCHED and inspected, never refused by name', async () => {
+    const before = publisher.requests.length
+    const url = 'https://www.projektydomownowoczesnych.test/p,m2fa281446a8ca,dom-w-marcowkach-ge'
+    // The in-memory internet has no such host: the fetch is attempted (DNS fails), so the answer is about the fetch, not the name.
+    expect(await codeOf(run(url, { adapters: [publisher.adapter, genericProjectPageAdapter] }))).toBe('SOURCE_UNREACHABLE')
+    expect(publisher.requests.length).toBe(before)
+    // the unsafe ones stay refused with the generic reader present
+    expect(await codeOf(run('https://user:pw@example.test/x', { adapters: [publisher.adapter, genericProjectPageAdapter] }))).toBe('SOURCE_UNSAFE')
+    expect(await codeOf(run('https://10.0.0.5/x', { adapters: [publisher.adapter, genericProjectPageAdapter] }))).toBe('SOURCE_UNSAFE')
   })
 
   it('a redirect to a private address is refused on the hop, not followed', async () => {
@@ -171,9 +195,9 @@ describe('what is refused, and how it is said', () => {
     expect(await codeOf(run(publisher.pageUrl('no-such-project')))).toBe('SOURCE_UNREACHABLE')
   })
 
-  it('a page with no plan and no elevation stops at classification', async () => {
+  it('a page with a section but no plan and no elevation stops at classification as an incomplete source', async () => {
     const seen: string[] = []
-    expect(await codeOf(run(publisher.pageUrl('sections-only'), { progress: (e) => seen.push(e.stage) }))).toBe('NO_DRAWINGS')
+    expect(await codeOf(run(publisher.pageUrl('sections-only'), { progress: (e) => seen.push(e.stage) }))).toBe('SOURCE_INCOMPLETE')
     expect(seen).not.toContain('EXTRACTING_OBSERVATIONS')
   })
 

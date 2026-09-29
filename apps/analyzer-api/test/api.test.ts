@@ -69,10 +69,14 @@ describe('POST /v1/analyses refuses before it queues', () => {
     ['no url', {}, '{}', 400, 'INVALID_URL'],
     ['http', {}, JSON.stringify({ url: A.replace('https:', 'http:') }), 400, 'INVALID_URL'],
     ['file', {}, JSON.stringify({ url: 'file:///etc/passwd' }), 400, 'INVALID_URL'],
-    ['localhost', {}, JSON.stringify({ url: 'https://localhost/projects/x' }), 400, 'INVALID_URL'],
-    ['private IP', {}, JSON.stringify({ url: 'https://10.0.0.1/projects/x' }), 400, 'INVALID_URL'],
-    ['metadata IP', {}, JSON.stringify({ url: 'https://169.254.169.254/latest/meta-data' }), 400, 'INVALID_URL'],
-    ['credentials', {}, JSON.stringify({ url: A.replace('https://', 'https://u:p@') }), 400, 'INVALID_URL'],
+    // Since 004A an address that is not safe to fetch is SOURCE_UNSAFE, whatever its host;
+    // INVALID_URL is for what is not a URL or not https.
+    ['localhost', {}, JSON.stringify({ url: 'https://localhost/projects/x' }), 400, 'SOURCE_UNSAFE'],
+    ['private IP', {}, JSON.stringify({ url: 'https://10.0.0.1/projects/x' }), 400, 'SOURCE_UNSAFE'],
+    ['metadata IP', {}, JSON.stringify({ url: 'https://169.254.169.254/latest/meta-data' }), 400, 'SOURCE_UNSAFE'],
+    ['credentials', {}, JSON.stringify({ url: A.replace('https://', 'https://u:p@') }), 400, 'SOURCE_UNSAFE'],
+    // The test harness registers the synthetic specialist alone (no generic reader), so an
+    // unknown host is still refused before the fetch; production registers the generic reader.
     ['other publisher', {}, JSON.stringify({ url: 'https://example.com/house' }), 422, 'UNSUPPORTED_PUBLISHER'],
     ['too large', {}, JSON.stringify({ url: A, pad: 'x'.repeat(5000) }), 413, 'BODY_TOO_LARGE'],
   ])('%s → %i %s', async (_name, headers, body, status, code) => {

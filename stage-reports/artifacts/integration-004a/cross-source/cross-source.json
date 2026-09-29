@@ -1,0 +1,191 @@
+{
+  "comparable": 12,
+  "conflicts": 0,
+  "equivalence": "SOURCE_PARTIAL_EQUIVALENT",
+  "matches": 12,
+  "rows": [
+    {
+      "a": "dom w marcowkach ge",
+      "aspect": "title (normalized)",
+      "b": "dom w marcowkach ge",
+      "note": "weak evidence",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "m2fa281446a8ca",
+      "aspect": "project code",
+      "b": "m2fa281446a8ca",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "5.8 m2",
+      "aspect": "fact boiler_room_area",
+      "b": "5.8 m2",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "8.27 m",
+      "aspect": "fact building_height",
+      "b": "8.27 m",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "170.62 m2",
+      "aspect": "fact floor_area",
+      "b": "170.62 m2",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "131.16 m2",
+      "aspect": "fact footprint_area",
+      "b": "131.16 m2",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "24.1 m2",
+      "aspect": "fact garage_area",
+      "b": "24.1 m2",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "129.04 m2",
+      "aspect": "fact house_net_area",
+      "b": "129.04 m2",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "—",
+      "aspect": "fact plot_min_depth",
+      "b": "20.6 m",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "—",
+      "aspect": "fact plot_min_width",
+      "b": "19.05 m",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "150.57 m2",
+      "aspect": "fact roof_area",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "231.11 m2",
+      "aspect": "fact total_area",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "153.31 m2",
+      "aspect": "fact usable_area_without_stairs",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "779.94 none",
+      "aspect": "fact volume",
+      "b": "779.94 none",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "40°",
+      "aspect": "roof pitch (stated)",
+      "b": "40°",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "40°",
+      "aspect": "roof pitch (reconstructed)",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "GABLE",
+      "aspect": "roof kind (stated)",
+      "b": "GABLE",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "18 rooms",
+      "aspect": "room schedule",
+      "b": "18 rooms",
+      "note": "18 identical (storey, label, area)",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "8",
+      "aspect": "drawings floor plan",
+      "b": "4",
+      "note": "coverage, not identity",
+      "verdict": "DIFFER"
+    },
+    {
+      "a": "4",
+      "aspect": "drawings elevation",
+      "b": "4",
+      "note": "coverage, not identity",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "1",
+      "aspect": "drawings section",
+      "b": "1",
+      "note": "coverage, not identity",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "1",
+      "aspect": "drawings site plan",
+      "b": "1",
+      "note": "coverage, not identity",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "4",
+      "aspect": "drawings perspective render",
+      "b": "4",
+      "note": "coverage, not identity",
+      "verdict": "MATCH"
+    },
+    {
+      "a": "12.05 × 16.71 × 8.29 m",
+      "aspect": "footprint (reconstructed)",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "40 walls",
+      "aspect": "wall topology (count)",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "21",
+      "aspect": "openings (count)",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "2",
+      "aspect": "roofs (count)",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    },
+    {
+      "a": "7ee12c37066900b8",
+      "aspect": "geometry fingerprint",
+      "b": "—",
+      "verdict": "ONE_SIDED"
+    }
+  ],
+  "schema": "buildapp.cross-source-comparison",
+  "schemaVersion": "1.0.0",
+  "sources": {
+    "archon.pl": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/marcowki-baseline",
+    "projektydomownowoczesnych.pl": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/alt-marcowki"
+  },
+  "why": "12 aspects agree and none disagrees, but the geometry is not identical (one side has no reconstruction)"
+}
+
