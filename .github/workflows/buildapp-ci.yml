@@ -22,7 +22,7 @@ on:
         type: boolean
         default: false
       ui_slices:
-        description: "UI evidence: also analyse the Marcówki and Rarytasy links through the app"
+        description: "UI evidence: also analyse the Marcówki, Rarytasy, Kosaćce and alternate-publisher links through the app"
         type: boolean
         default: true
 
@@ -583,9 +583,10 @@ jobs:
           path: model-entry/**
 
   android-ui-evidence:
-    # INTEGRATION-003C. The product's screens the owner's way, and the two
-    # reference projects analysed on the phone and carried through 3D,
-    # progress and history (.github/workflows/ui-evidence.yml).
+    # INTEGRATION-003C / 004A. The house-first product on the emulator the
+    # owner's way, and the reference projects (Marcówki, Rarytasy, Kosaćce,
+    # the alternate Marcówki publisher) analysed on the phone and carried
+    # through the house, progress and history (.github/workflows/ui-evidence.yml).
     uses: ./.github/workflows/ui-evidence.yml
     with:
       # Every push and full dispatch runs the slices; a UI-only dispatch may leave them out.
@@ -690,6 +691,74 @@ jobs:
           path: |
             second-house/**
             !second-house/**/observation-graph.json
+
+  third-house-kosacce:
+    # INTEGRATION-004A. A third real project, Kosaćce, whose partition walls
+    # used to reach the model as WALLS_OVERLAP at command 52. The gate is the
+    # generic wall-topology planner, not the house: the sealed evidence
+    # (source package, observation graph, metric evidence read before this
+    # stage) must go through today's solver to the sealed model and scene
+    # hashes — a hard gate whenever the publisher's plan images can be fetched
+    # (they are not committed) — and the live URL is advisory, recorded and
+    # compared, never a red job for a publisher outage. The validator stays
+    # strict: the negative topology tests run in `npm test`.
+    name: Third house / Kosaćce topology
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      THIRD_HOUSE_URL: https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f
+      SEALED: stage-reports/artifacts/integration-004a/kosacce
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: The publisher's drawings (fetched into the cache; a live run is advisory)
+        continue-on-error: true
+        run: |
+          mkdir -p third-house
+          npm run -s analysis:second-house -- --url "$THIRD_HOUSE_URL" --out third-house/live --cache .cache/third-house-bytes --expect COMPLETED --tolerate-source-outage | tee third-house/live.log
+      - name: The sealed evidence through today's solver reaches the sealed model and scene (no WALLS_OVERLAP)
+        run: |
+          if [ ! -d .cache/third-house-bytes ]; then echo "::warning::no plan images fetched; the sealed replay needs them and is skipped"; exit 0; fi
+          OFFLINE=1 npm run -s analysis:second-house -- --package "$SEALED/source-package.json" --graph "$SEALED/observation-graph.json" \
+            --metrics "$SEALED/metric-evidence.json" --out third-house/sealed-replay --cache .cache/third-house-bytes --expect COMPLETED --same-as "$SEALED/result-summary.json"
+      - name: The live run, when it completed, agrees with the sealed model and scene (advisory — the page may change)
+        continue-on-error: true
+        run: |
+          if [ ! -f third-house/live/result-summary.json ]; then echo "::warning::no completed live run to compare"; exit 0; fi
+          node -e "
+            const live = require('./third-house/live/result-summary.json'), sealed = require('./$SEALED/result-summary.json')
+            const keys = ['modelHash', 'sceneContentHash', 'sceneSha256']
+            const differ = keys.filter((k) => live[k] !== sealed[k])
+            if (differ.length) { for (const k of differ) console.error('::warning::' + k, live[k], '!=', sealed[k]); process.exit(1) }
+            console.log('live = sealed:', keys.map((k) => k + ' ' + sealed[k].slice(0, 12)).join(', '))
+          "
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Third house — Kosaćce (INTEGRATION-004A)"; echo
+            echo '```'; tail -n 8 third-house/live.log 2>/dev/null; echo '```'
+            [ -f third-house/sealed-replay/result-summary.json ] && echo "sealed replay: $(node -e "const r=require('./third-house/sealed-replay/result-summary.json'); console.log(r.outcome, r.modelHash.slice(0,16))")"
+            [ -f third-house/sealed-replay/failure.json ] && { echo "sealed replay:"; echo '```'; node -e "const f=require('./third-house/sealed-replay/failure.json'); console.log(f.code, '/', f.reasonCode, '—', f.message)"; echo '```'; }
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the third-house record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: third-house-kosacce
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            third-house/**
+            !third-house/**/observation-graph.json
 
   architectural-assemblies:
     # BUILDAPP-03G. The architectural language as a review record: the
@@ -804,7 +873,7 @@ jobs:
     # INTEGRATION-003C: never publish to the owner an APK whose 3D place was
     # not seen to draw the house on the emulator, or whose product journey
     # and screenshots did not pass the UI evidence gate.
-    needs: [android, android-3d-gate, android-ui-evidence]
+    needs: [android, android-3d-gate, android-ui-evidence, third-house-kosacce]
     if: github.event_name == 'workflow_dispatch' && inputs.owner_apk && !inputs.only_ui_evidence
     runs-on: ubuntu-latest
     timeout-minutes: 10

@@ -1,0 +1,13 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "codes": "WALLS_OVERLAP",
+    "command": "createWall",
+    "commandIndex": 52
+  },
+  "message": "the model refused command 52 (createWall): WALLS_OVERLAP",
+  "reasonCode": "MODEL_EMISSION_FAILED",
+  "stage": "BUILDING_MODEL",
+  "title": "The model could not be built"
+}
+

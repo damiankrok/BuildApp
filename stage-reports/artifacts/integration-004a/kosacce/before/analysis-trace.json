@@ -1,0 +1,187 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "addressesNotUsed": 12,
+        "assets": 31,
+        "failed_BYTE_IDENTICAL": 5,
+        "failed_HTTP_STATUS": 7,
+        "variants": 37
+      },
+      "durationMs": 16874,
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "FETCH"
+    },
+    {
+      "counts": {
+        "ELEVATION": 4,
+        "FLOOR_PLAN": 4,
+        "PERSPECTIVE_RENDER": 19,
+        "SECTION": 1,
+        "SITE_PLAN": 1,
+        "UNKNOWN": 2,
+        "drawings": 29
+      },
+      "durationMs": 0,
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 16874,
+      "status": "PASSED",
+      "substage": "ROLES"
+    },
+    {
+      "counts": {
+        "frames": 29,
+        "observations": 1292,
+        "relations": 646,
+        "vision": "DETERMINISTIC_ONLY"
+      },
+      "durationMs": 104653,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 16874,
+      "status": "PASSED",
+      "substage": "OBSERVATIONS"
+    },
+    {
+      "counts": {
+        "callouts": 53,
+        "chains": 230,
+        "evidence": 123,
+        "levelDatums": 4,
+        "registrations": 5,
+        "scalesRefused": 1,
+        "undecodable": 0
+      },
+      "durationMs": 163640,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 121527,
+      "status": "PASSED",
+      "substage": "METRIC_EVIDENCE"
+    },
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9"
+      },
+      "durationMs": 620,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 285167,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 4,
+        "cells": 204,
+        "dimensionChains": 80,
+        "dimensionChainsRead": 11,
+        "enclosedCells": 184,
+        "gridLinesX": 18,
+        "gridLinesY": 13,
+        "masses": 3,
+        "planFrames": 4,
+        "planSizePx": "853x853",
+        "plansRead": 1,
+        "recessRegions": 3,
+        "scaleCmPerPx": 2.4058,
+        "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+        "wallBands": 84,
+        "wallThicknessPx": 14,
+        "walledEnvelope": true,
+        "wideOpenings": 6,
+        "wideOpeningsClosed": 0
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 285786,
+      "status": "PASSED",
+      "substage": "PLAN_DECOMPOSITION"
+    },
+    {
+      "counts": {
+        "gate": "STRUCTURAL_LAYOUT_ACCEPTED",
+        "gateReasons": "",
+        "masses": 3,
+        "recesses": 3,
+        "roofs": 3
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 285787,
+      "status": "PASSED",
+      "substage": "STRUCTURAL_LAYOUT"
+    },
+    {
+      "counts": {
+        "plans": 1,
+        "registered": 1
+      },
+      "durationMs": 2,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 285787,
+      "status": "PASSED",
+      "substage": "PLAN_REGISTRATION"
+    },
+    {
+      "counts": {
+        "elevationFrames": 3,
+        "registered": 1,
+        "ridgeDatum": true
+      },
+      "durationMs": 317,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 285789,
+      "status": "PASSED",
+      "substage": "ELEVATION_REGISTRATION"
+    },
+    {
+      "counts": {
+        "mainRoof": true,
+        "masses": 3,
+        "partitions": 34,
+        "recesses": 0,
+        "returns": 0,
+        "rooms": 10,
+        "stair": "none"
+      },
+      "durationMs": 952,
+      "stage": "SOLVING_TOPOLOGY",
+      "startedAtMs": 286106,
+      "status": "PASSED",
+      "substage": "TOPOLOGY"
+    },
+    {
+      "counts": {
+        "balconies": 0,
+        "chimneys": 2,
+        "openings": 11,
+        "railings": 0,
+        "rooflights": 0,
+        "sharedDoors": 2,
+        "terraces": 0
+      },
+      "durationMs": 5329,
+      "stage": "SOLVING_METRICS",
+      "startedAtMs": 287058,
+      "status": "PASSED",
+      "substage": "METRICS"
+    },
+    {
+      "counts": {},
+      "detail": "the model refused command 52 (createWall): WALLS_OVERLAP",
+      "durationMs": 116,
+      "reasonCode": "MODEL_EMISSION_FAILED",
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 292387,
+      "status": "FAILED",
+      "substage": "UNEXPECTED"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+
