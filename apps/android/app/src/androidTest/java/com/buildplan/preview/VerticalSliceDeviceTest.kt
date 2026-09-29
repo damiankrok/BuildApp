@@ -138,12 +138,11 @@ class VerticalSliceDeviceTest {
         evidence.awaitNode(hasText(evidence.string(if (limited) R.string.house_status_limited else R.string.house_status_ready)))
         if (limited) evidence.awaitNode(hasText(evidence.string(R.string.analyzer_details)))
         evidence.capture("04-source-sheet")
-        Espresso.pressBack()
-        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.house_status_bundled))).fetchSemanticsNodes().isEmpty() }
+        evidence.closeSheet(hasText(evidence.string(if (limited) R.string.house_status_limited else R.string.house_status_ready)))
 
         // The stage sheet for THIS house: stages 1-7 done, Dach current at 50 %.
         compose.onNode(hasText(evidence.string(R.string.progress_set_action)) and hasClickAction()).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
+        evidence.awaitStageSheet()
         for (key in DONE) {
             openStage(stageName(key))
             compose.onNode(hasText(evidence.string(R.string.stage_mark_done)) and hasClickAction()).performClick()
@@ -157,8 +156,7 @@ class VerticalSliceDeviceTest {
         compose.waitUntil(5_000) { progress.view?.summary?.currentStageCompletionPercent == 50 }
         evidence.fact("percent", progress.view?.summary?.percent)
         evidence.capture("05-stages-sheet")
-        Espresso.pressBack()
-        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
+        evidence.closeSheet(evidence.stageSheet())
 
         // 3D now: the shell and the roof being built, no joinery yet — the same house, the sheet is gone.
         val now = first
@@ -200,7 +198,7 @@ class VerticalSliceDeviceTest {
         // An element's details: a standing wall of this house.
         val wall = walls.first { it in actual }
         compose.runOnIdle { preview.onPicked(wall, System.currentTimeMillis()) }
-        compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
+        compose.onNode(evidence.detailsHandle()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         evidence.settleFrames(now)
         evidence.capture("11-inspector", "selected" to wall)

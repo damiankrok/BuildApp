@@ -7,6 +7,9 @@ import android.os.ParcelFileDescriptor
 import android.os.SystemClock
 import android.provider.Settings
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.test.espresso.Espresso
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.performClick
@@ -64,6 +67,37 @@ class Evidence(private val compose: ComposeTestRule, folder: String, private val
 
     /** The house menu button in the workspace's top context. */
     fun menuButton(): SemanticsMatcher = hasContentDescription(string(R.string.workspace_menu))
+
+    /** A clickable whose action is labelled [label] (its `onClickLabel`), whatever text it prints. */
+    fun hasClickLabel(label: String): SemanticsMatcher =
+        SemanticsMatcher("click label '$label'") { it.config.getOrNull(SemanticsActions.OnClick)?.label == label }
+
+    /** The selection row's way into the details: the row prints the element's storey, its action says "Szczegóły". */
+    fun detailsHandle(): SemanticsMatcher = hasClickLabel(string(R.string.dock_details))
+
+    /**
+     * The stage sheet is open: its heading is composed when the sheet opens at the top (progress unset),
+     * and the current stage's editor when it opens scrolled to the stage in progress (progress set).
+     */
+    fun stageSheet(): SemanticsMatcher = hasText(string(R.string.stages_title)) or hasText(string(R.string.stage_completion))
+
+    fun awaitStageSheet() = awaitNode(stageSheet())
+
+    /**
+     * Close a sheet by the system back: the keyboard first (a back that reaches a still-open keyboard
+     * closes the keyboard, not the sheet), then back, until nothing matching [open] is left.
+     */
+    fun closeSheet(open: SemanticsMatcher) {
+        Espresso.closeSoftKeyboard()
+        Espresso.pressBack()
+        val gone = { compose.onAllNodes(open).fetchSemanticsNodes().isEmpty() }
+        try {
+            compose.waitUntil(5_000) { gone() }
+        } catch (e: androidx.compose.ui.test.ComposeTimeoutException) {
+            Espresso.pressBack()
+            compose.waitUntil(5_000) { gone() }
+        }
+    }
 
     /** Open the house menu and choose a row by its label. */
     fun openMenu(compose: androidx.compose.ui.test.junit4.ComposeTestRule, label: String) {

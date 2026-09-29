@@ -148,7 +148,7 @@ class ProductFlowDeviceTest {
         assertTrue("the progress was saved", savedBytes.isNotEmpty())
 
         // 4. The sheet closes onto the same house: 3D now shows exactly what is recorded, the camera has not moved.
-        Espresso.pressBack()
+        evidence.closeSheet(evidence.stageSheet())
         evidence.awaitNode(hasText(evidence.string(R.string.progress_now_task, TASK)))
         assertEquals("one engine: the house never left", 1, RenderDiagnostics.liveEngines.get())
         assertEquals("the stage sheet did not move the camera", poseAtRest, preview.pose)
@@ -241,7 +241,7 @@ class ProductFlowDeviceTest {
             compose.runOnIdle { preview.onPicked(wall, System.currentTimeMillis()) }
         }
         evidence.fact("inspectorSelectionByTap", picked)
-        compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
+        compose.onNode(evidence.detailsHandle()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         evidence.settleFrames(now)
         evidence.capture("11-inspector", "selected" to preview.selected?.id)

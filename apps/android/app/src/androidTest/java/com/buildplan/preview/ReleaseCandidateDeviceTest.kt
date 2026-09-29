@@ -241,12 +241,12 @@ class ReleaseCandidateDeviceTest {
         // A refused edit is said at the foot of the stage sheet, announced, and leaves by itself (cycle 2, C2-11).
         record(progress)
         compose.onNode(hasText(evidence.string(R.string.progress_now_task, "Montaż więźby")) and hasClickAction()).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
+        // Opened from the stage in progress, the sheet stands at that stage's editor, its heading scrolled away.
+        evidence.awaitStageSheet()
         assertTrue(progress.startStage(stageId(progress, ConstructionStageKey.JOINERY)) is EditOutcome.Refused)
         evidence.awaitNode(hasText(evidence.string(R.string.stage_other_current, evidence.string(R.string.stage_roof))), unmerged = true)
         evidence.capture("02-refusal-said")
-        Espresso.pressBack()
-        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
+        evidence.closeSheet(evidence.stageSheet())
 
         // A stage the model has no geometry for: the timeline says so, the 3D keeps the last shell.
         previewStage(preview, progress, ConstructionStageKey.ELECTRICAL)
@@ -324,7 +324,7 @@ class ReleaseCandidateDeviceTest {
         assertEquals("the selection is kept while the wall is not built yet", wall, preview.viewer.selectedObjectId)
         assertFalse("…and it is not drawn", preview.viewer.isVisible(scene, wall))
         assertDrawnAsStated(preview, d, "E selection at Fundamenty")
-        compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
+        compose.onNode(evidence.detailsHandle()).performClick()
         // The inspector names the stage the wall does not stand at yet (cycle 3, C3-10).
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_not_yet_at, evidence.string(R.string.stage_foundations))), unmerged = true)
         // The inspector takes the timeline's place: never stacked on it.

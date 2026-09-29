@@ -116,7 +116,7 @@ class AdaptiveLayoutDeviceTest {
         val scene = checkNotNull(preview.scene)
         val wall = checkNotNull(session.projection.introducedAt(ConstructionStageKey.WALLS).firstOrNull { preview.viewer.isVisible(scene, it) })
         compose.runOnIdle { preview.onPicked(wall, System.currentTimeMillis()) }
-        compose.onNode(hasText(evidence.string(R.string.dock_details)) and hasClickAction()).performClick()
+        compose.onNode(evidence.detailsHandle()).performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.inspector_about)))
         val panel = compose.onNode(hasContentDescription(evidence.string(R.string.inspector_close))).fetchSemanticsNode().boundsInRoot
         compose.waitUntil(5_000) { preview.contentInsets.right > shot.width / 4 }
@@ -131,10 +131,9 @@ class AdaptiveLayoutDeviceTest {
         // The stage sheet on the short screen: the header and the list, scrolling, the house behind.
         // The rail's header names the stage in progress and is the way to the stage sheet.
         compose.onNode(hasText(evidence.string(R.string.stage_roof)) and hasClickAction()).performClick()
-        evidence.awaitNode(hasText(evidence.string(R.string.stages_title)))
+        evidence.awaitStageSheet()
         evidence.capture("04-stages-sheet")
-        Espresso.pressBack()
-        compose.waitUntil(5_000) { compose.onAllNodes(hasText(evidence.string(R.string.stages_title))).fetchSemanticsNodes().isEmpty() }
+        evidence.closeSheet(evidence.stageSheet())
 
         // Turning back recreates the activity: one engine, the same state, drawn again.
         scenario.onActivity { it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT }
