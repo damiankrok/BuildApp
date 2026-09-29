@@ -331,7 +331,16 @@ describe('fixture 10 — an unsafe redirect', () => {
     const net = stubFetch(routes)
     const pkg = await acquire(net)
     expect(documents(pkg)).toEqual(['ELEVATION'])
-    expect(pkg.failures).toEqual([{ stage: 'ASSET_FETCH', target: `${SITE}/i/rzut-parteru.png`, code: 'HOST_BLOCKED', message: expect.stringMatching(/not publicly routable/) }])
+    expect(pkg.failures).toEqual([
+      {
+        stage: 'ASSET_FETCH',
+        target: `${SITE}/i/rzut-parteru.png`,
+        code: 'HOST_BLOCKED',
+        message: expect.stringMatching(/not publicly routable/),
+        // the loss says what was lost: an exposed floor plan, not a guessed copy
+        claim: expect.objectContaining({ document: 'FLOOR_PLAN' }),
+      },
+    ])
     expect(net.calls.map((c) => c.url)).not.toContain('https://intranet.przyklad-wydawcy.test/rzut-parteru.png')
   })
 

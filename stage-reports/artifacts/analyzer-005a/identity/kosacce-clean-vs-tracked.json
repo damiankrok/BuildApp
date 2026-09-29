@@ -1,0 +1,39 @@
+{
+    "what": "Kosa\u0107ce clean vs tracked link, re-acquired OFFLINE from the byte caches captured at baseline, before and after the logical identity",
+    "before": {
+        "kosacce-clean": {
+            "id": "src-mf6628752fa61f-56408a0bd9",
+            "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+            "contentHash": "39820e75f62340bf3224e6af9c7e5dac9f489f437847c5d6cb64736182f16079",
+            "pageHash": "4c6c7924fb16aa16b1839b549a3c6395950dbdf6ba03806542ad0e9ae0371379"
+        },
+        "kosacce-tracked": {
+            "id": "src-mf6628752fa61f-36a0b37a56",
+            "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f?_gl=1*2x916*_up*MQ..*_gs*MQ..&gclid=CjwKCAjww-3VBhAcEiwAwUUIu9rpT7iboA7Udhp-isxTiJpuaqDn_kNs5lec-wDmpWmHTTwk5VO_GxoCEDsQAvD_BwE",
+            "contentHash": "538455ffa25746eda3f088f50a7dbca6f5ddd95ff7c22f3d9fa6eff0caf1583c",
+            "pageHash": "0ea89bb08732280dd494698eb766fcd765ebdb615c6ac28b78833a9b6b34922c"
+        }
+    },
+    "after": {
+        "kosacce-clean": {
+            "id": "src-mf6628752fa61f-56408a0bd9",
+            "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+            "contentHash": "9cb4f5207c0e0461f72e06c3dad1604dd4f61fc783a0bc81d745298f1ad6153c",
+            "pageHash": "4c6c7924fb16aa16",
+            "assets": 31,
+            "failures": 12,
+            "offlineMisses": 7
+        },
+        "kosacce-tracked": {
+            "id": "src-mf6628752fa61f-56408a0bd9",
+            "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+            "requestedUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f?_gl=1*2x916*_up*MQ..*_gs*MQ..&gclid=CjwKCAjww-3VBhAcEiwAwUUIu9rpT7iboA7Udhp-isxTiJpuaqDn_kNs5lec-wDmpWmHTTwk5VO_GxoCEDsQAvD_BwE",
+            "fetchedUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f?_gl=1*2x916*_up*MQ..*_gs*MQ..&gclid=CjwKCAjww-3VBhAcEiwAwUUIu9rpT7iboA7Udhp-isxTiJpuaqDn_kNs5lec-wDmpWmHTTwk5VO_GxoCEDsQAvD_BwE",
+            "contentHash": "9cb4f5207c0e0461f72e06c3dad1604dd4f61fc783a0bc81d745298f1ad6153c",
+            "pageHash": "0ea89bb08732280d",
+            "assets": 31,
+            "failures": 12,
+            "offlineMisses": 7
+        }
+    }
+}

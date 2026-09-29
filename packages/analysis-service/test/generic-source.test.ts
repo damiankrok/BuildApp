@@ -18,7 +18,7 @@ import { LARCHFIELD, renderSheets, syntheticPublisher } from '@buildapp/syntheti
 import { genericProjectPageAdapter, memoryByteCache } from '@buildapp/source-package'
 import type { FetchDeps } from '@buildapp/source-package'
 import { compileBuilding } from '@buildapp/geometry'
-import { AnalysisError, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, runAnalysis } from '../src/index.js'
+import { AnalysisError, compareSources, comparableOf, comparisonMarkdown, geometryFingerprint, hashesOf, runAnalysis } from '../src/index.js'
 
 const HOST = 'domy.nieznany-wydawca.test'
 const PAGE = `https://${HOST}/oferta/dom-larchfield`
@@ -112,6 +112,19 @@ describe('the same house on an unknown site', () => {
     expect(comparison.equivalence).toBe('SOURCE_EQUIVALENT')
     expect(comparisonMarkdown(comparison, ['specialist', 'generic'])).toContain('SOURCE_EQUIVALENT')
     expect(geometryFingerprint(compileBuilding(known.result.model))).toBe(geometryFingerprint(compileBuilding(generic.result.model)))
+  }, 240_000)
+
+  it('a tracked link to a page with no publisher id is the same analysis, down to the model id (005A)', async () => {
+    // Without a publisher id the model id is derived from the page's address; before 005A a
+    // newsletter's `utm_*` or an advertisement's `gclid` gave the same house another id,
+    // another label hash and another model hash.
+    const run = (url: string) => runAnalysis({ kind: 'URL', url }, { adapters: [genericProjectPageAdapter], deps: unknownPublisher().deps, cache: memoryByteCache(), now: () => new Date('2026-01-01T00:00:00Z') })
+    const clean = await run(PAGE)
+    const tracked = await run(`${PAGE}?utm_source=newsletter&utm_medium=email&gclid=Cj0KCQjw#rzuty`)
+    expect(tracked.pkg.project.externalId).toBeUndefined()
+    expect(tracked.pkg.canonicalUrl).toBe(PAGE)
+    expect(tracked.result.modelId).toBe(clean.result.modelId)
+    expect(hashesOf(tracked.result)).toEqual(hashesOf(clean.result))
   }, 240_000)
 
   it('compares symmetrically and never by title alone', () => {

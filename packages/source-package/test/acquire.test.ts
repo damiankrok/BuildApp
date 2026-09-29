@@ -237,6 +237,15 @@ describe('determinism and the content hash', () => {
     expect(hashWith(pkg, (d) => void (d.assets[0].variants[0].discoveredVia = 'OG_IMAGE:meta[og:image]@somewhere-else'))).toBe(base)
     // the assets are a SET: two runs that found the same things in a different order agree
     expect(hashWith(pkg, (d) => void d.assets.reverse())).toBe(base)
+    // 005A: the page is where the evidence was found, not the evidence. A publisher serves
+    // new page bytes on every request, and an advertisement's link spells the same page
+    // another way; neither is different material.
+    expect(hashWith(pkg, (d) => void (d.pageHash = sha256Hex('the same page, fetched a minute later')))).toBe(base)
+    expect(hashWith(pkg, (d) => void (d.requestedUrl = `${d.canonicalUrl}?gclid=abc&utm_source=ads`))).toBe(base)
+    expect(hashWith(pkg, (d) => void (d.fetchedUrl = `${d.canonicalUrl}/`))).toBe(base)
+    // how hard a fetch was tried, and what the lost address was exposed as, say nothing new about the material
+    const lost = { stage: 'ASSET_FETCH' as const, target: 'https://assets.archon.pl/y.jpg', code: 'TIMEOUT', message: 'no data' }
+    expect(hashWith(pkg, (d) => void d.failures.push({ ...lost, attempts: 2, claim: { channel: 'IMG_SRC', document: 'FLOOR_PLAN' } }))).toBe(hashWith(pkg, (d) => void d.failures.push(lost)))
 
     // a failure's wording is prose too, while its code is content
     const withFailure = hashWith(pkg, (d) => void d.failures.push({ stage: 'ASSET_FETCH', target: 'https://assets.archon.pl/x.jpg', code: 'HTTP_STATUS', message: 'HTTP 404' }))
@@ -259,7 +268,8 @@ describe('determinism and the content hash', () => {
     expect(hashWith(pkg, (d) => void (d.assets[0].roles.storey = 'ATTIC'))).not.toBe(base)
     // and a changed adapter means the same bytes were read by different rules
     expect(hashWith(pkg, (d) => void (d.adapter.version = '2.0.0'))).not.toBe(base)
-    expect(hashWith(pkg, (d) => void (d.pageHash = sha256Hex('a different page')))).not.toBe(base)
+    // and a different publisher project is a different source, whatever its pages look like
+    expect(hashWith(pkg, (d) => void (d.project.externalId = 'm0000000000000'))).not.toBe(base)
 
     // a published figure that moved is a different description of the building
     const published = hashWith(pkg, (d) => void d.publishedFacts.push(fact(131.16)))

@@ -27,8 +27,11 @@ import { z } from 'zod'
 import { PixelSizeSchema } from '@buildapp/source-common'
 
 export const SOURCE_PACKAGE_SCHEMA = 'buildapp.source-package' as const
-export const SOURCE_PACKAGE_SCHEMA_VERSION = '1.1.0' as const
-export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0', '1.1.0'] as const
+// 1.2.0 (005A): `canonicalUrl` is the LOGICAL address (tracking-invariant), the
+// content hash covers evidence only (no page bytes hash, no address), and a
+// failure may say which role the lost address claimed.
+export const SOURCE_PACKAGE_SCHEMA_VERSION = '1.2.0' as const
+export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0'] as const
 
 // ---------------------------------------------------------------------------
 // Roles — multi-dimensional, independently UNKNOWN-able
@@ -207,6 +210,23 @@ export const AcquisitionFailureSchema = z
     target: z.string(),
     code: z.string().min(1),
     message: z.string(),
+    /** How many requests were made for this address (a transient failure is tried twice). */
+    attempts: z.number().int().positive().optional(),
+    /**
+     * What the lost address was exposed as, before a byte of it arrived: the
+     * channel and the roles its name claimed. "An exposed floor plan was not
+     * fetched" and "a guessed larger copy does not exist" are different
+     * losses, and only this tells them apart.
+     */
+    claim: z
+      .object({
+        channel: z.string().min(1),
+        document: DocumentRoleSchema.optional(),
+        storey: StoreyRoleSchema.optional(),
+        annotation: AnnotationRoleSchema.optional(),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
 export type AcquisitionFailure = z.infer<typeof AcquisitionFailureSchema>
@@ -219,12 +239,18 @@ export const SourcePackageSchema = z
   .object({
     schema: z.literal(SOURCE_PACKAGE_SCHEMA),
     schemaVersion: z.enum(SUPPORTED_SOURCE_PACKAGE_VERSIONS),
-    /** Deterministic id, derived from the canonical URL. */
+    /** Deterministic id, derived from the publisher's project id and the logical address. */
     id: z.string().min(1),
-    /** The URL after redirects, normalized. */
+    /**
+     * The page's LOGICAL address: its own same-site canonical link, else the
+     * fetched address without attribution parameters, fragment or trailing
+     * slash (`logical-url.ts`). Two spellings of one project share it.
+     */
     canonicalUrl: z.string().url(),
-    /** The URL originally requested, when it differed. */
+    /** The URL originally requested, when it differed from the logical one. */
     requestedUrl: z.string().url().optional(),
+    /** The address the page was actually served from after redirects, when it differed from the logical one. */
+    fetchedUrl: z.string().url().optional(),
     /** SHA-256 of the page bytes the assets were discovered from. */
     pageHash: z.string().regex(/^[0-9a-f]{64}$/),
     /** What the publisher calls this project. */

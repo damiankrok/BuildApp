@@ -110,6 +110,17 @@ describe('one pipeline: the CLI, the service and a sealed replay agree', () => {
     expect(replay.result.vision.mode).toBe('REPLAYED_GRAPH')
   })
 
+  it('the same page reached through an advertisement link gives every hash of the clean run (005A)', async () => {
+    // The OWNER's tracked link: identity, evidence, candidate, model and scene must not
+    // depend on how the page was reached. The request still goes out as given.
+    const { result } = await first
+    const tracked = `${publisher.pageUrl('larchfield-lf01')}?_gl=1*2x916*_up*MQ..&gclid=Cj0KCQjw&utm_source=google`
+    const run = await runAnalysis({ kind: 'URL', url: tracked }, optionsFor())
+    expect(run.pkg.canonicalUrl).toBe(publisher.pageUrl('larchfield-lf01'))
+    expect(run.pkg.requestedUrl).toBe(tracked)
+    expect(hashesOf(run.result)).toEqual(hashesOf(result))
+  }, 240_000)
+
   it('the CLI is a thin adapter: same sealed input, byte-identical hashes', async () => {
     const { result, pkg, graph } = await first
     // the CLI reads a package, a graph and a byte cache from disk, as it does for Marcówki

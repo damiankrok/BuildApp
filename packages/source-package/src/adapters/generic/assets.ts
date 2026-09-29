@@ -20,6 +20,7 @@
  * followed from a followed page: this is not a spider.
  */
 import { absolutize, decodeEntities, discoverImages, looksLikeDocument, looksLikeImage, type DiscoveredCandidate } from '../../discovery.js'
+import { registrableDomain } from '../../logical-url.js'
 import { compareCodeUnits, deaccent, stripTags } from '../../text.js'
 import { contextAt, type PageFacts } from './markup.js'
 import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS } from './vocabulary.js'
@@ -39,21 +40,6 @@ export type GenericDiscovery = {
 const ATTR = (tag: string, name: string): string | undefined => {
   const m = new RegExp(`\\b${name}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i').exec(tag)
   return m ? decodeEntities(m[2] ?? m[3] ?? m[4] ?? '') : undefined
-}
-
-/**
- * The registrable part of a host name: `www.example.co.uk` → `example.co.uk`,
- * `assets.example.pl` → `example.pl`. An approximation of the public suffix
- * list, on the side of caution: a two-letter country code under a short
- * second level (`co`, `com`, `org`, `net`, `edu`, `gov`, `ac`) takes three
- * labels, everything else two.
- */
-export function registrableDomain(hostname: string): string {
-  const labels = hostname.toLowerCase().replace(/\.$/, '').split('.')
-  if (labels.length <= 2) return labels.join('.')
-  const [tld, second] = [labels[labels.length - 1], labels[labels.length - 2]]
-  const three = tld.length === 2 && ['co', 'com', 'org', 'net', 'edu', 'gov', 'ac'].includes(second)
-  return labels.slice(three ? -3 : -2).join('.')
 }
 
 const sameSite = (a: string, b: string): boolean => registrableDomain(new URL(a).hostname) === registrableDomain(new URL(b).hostname)

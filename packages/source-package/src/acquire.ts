@@ -26,13 +26,14 @@
 import { round6, stableId } from '@buildapp/source-common'
 import { CHANNEL_TRUST, type DiscoveredCandidate } from './discovery.js'
 import { DecodeFailed, probeImage } from './image.js'
-import { DEFAULT_FETCH_POLICY, FetchRefused, safeFetch, type FetchDeps, type FetchPolicy } from './net.js'
+import { DEFAULT_FETCH_POLICY, FetchRefused, isTransientFetchFailure, safeFetch, type FetchDeps, type FetchPolicy } from './net.js'
 import { mergeRoleClaims, normalizeRoles, type RoleClaim } from './roles.js'
 import { SOURCE_PACKAGE_SCHEMA, SOURCE_PACKAGE_SCHEMA_VERSION, SourcePackageSchema, type AcquisitionFailure, type SourceAsset, type SourcePackage, type SourceVariant } from './schema.js'
 import { aspectOf, pixelArea, sameShape, selectionOrder, selectionReason } from './variants.js'
 import { sourcePackageContentHash } from './hash.js'
 import type { SourceAdapter, SourceClassification } from './adapter.js'
 import { routeSourceAcquisition } from './router.js'
+import { logicalSourceUrl } from './logical-url.js'
 import type { SourceRoute } from './router.js'
 import { sha256Bytes } from '@buildapp/source-common'
 
@@ -51,8 +52,9 @@ export type AcquireOptions = {
 
 /** Somewhere fetched bytes live, addressed by URL. */
 export type SourceByteCache = {
-  get: (url: string) => Promise<{ bytes: Uint8Array; mediaType: string } | null>
-  put: (url: string, bytes: Uint8Array, mediaType: string) => Promise<void>
+  /** `url` is where the bytes were finally served from, when a redirect moved them and the cache recorded it. */
+  get: (url: string) => Promise<{ bytes: Uint8Array; mediaType: string; url?: string } | null>
+  put: (url: string, bytes: Uint8Array, mediaType: string, finalUrl?: string) => Promise<void>
 }
 
 type Measured = {
@@ -69,6 +71,8 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   if (!page) throw new SourceAcquisitionError(`the page could not be fetched: ${failures[failures.length - 1]?.message ?? 'unknown'}`, failures, 'PAGE_NOT_FETCHED')
   const html = new TextDecoder('utf-8').decode(page.bytes)
   const pageUrl = page.url
+  // What the page IS, whichever spelling reached it: the name every hash and id below uses.
+  const logical = logicalSourceUrl(pageUrl, html)
 
   const ctx = {
     url: pageUrl,
@@ -98,7 +102,10 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   const published = safely(() => adapter.parsePublished(ctx), { facts: [], specifications: [], rooms: [] }, failures, 'FACTS', pageUrl)
 
   // --- discovery ----------------------------------------------------------
-  let candidates = await adapter.discover(ctx)
+  // The adapter resolves links against the address it was served from; what the
+  // package RECORDS as the exposing document is the page's logical name, so a
+  // tracking parameter does not reappear in every asset's provenance.
+  let candidates = (await adapter.discover(ctx)).map((c) => (c.exposedBy === pageUrl ? { ...c, exposedBy: logical.url } : c))
   if (options.probeResolutionCandidates !== false) {
     const known = new Set(candidates.map((c) => c.url))
     const guesses: DiscoveredCandidate[] = []
@@ -131,7 +138,7 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
       measured.push({ candidate, variant: existing })
       continue
     }
-    const fetched = await fetchBytes(candidate.url, policy, options, 'ASSET_FETCH', failures)
+    const fetched = await fetchBytes(candidate.url, policy, options, 'ASSET_FETCH', failures, claimOf(adapter, candidate))
     if (!fetched) continue
     const probe = probeImage(fetched.bytes)
     if (!probe) {
@@ -167,9 +174,10 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   const draft: Omit<SourcePackage, 'contentHash'> = {
     schema: SOURCE_PACKAGE_SCHEMA,
     schemaVersion: SOURCE_PACKAGE_SCHEMA_VERSION,
-    id: stableId('src', identity.externalId ?? new URL(pageUrl).hostname, { canonicalUrl: pageUrl }),
-    canonicalUrl: pageUrl,
-    requestedUrl: pageUrl === requestedUrl ? undefined : requestedUrl,
+    id: stableId('src', identity.externalId ?? new URL(logical.url).hostname, { canonicalUrl: logical.url }),
+    canonicalUrl: logical.url,
+    requestedUrl: requestedUrl === logical.url ? undefined : requestedUrl,
+    fetchedUrl: pageUrl === logical.url ? undefined : pageUrl,
     pageHash: sha256Bytes(page.bytes),
     project: identity,
     adapter: { id: adapter.id, version: adapter.version },
@@ -350,28 +358,66 @@ export class SourceAcquisitionError extends Error {
   }
 }
 
+/** What a candidate address claimed to be before it was fetched: recorded on its failure. */
+function claimOf(adapter: SourceAdapter, candidate: DiscoveredCandidate): NonNullable<AcquisitionFailure['claim']> {
+  const { roles } = mergeRoleClaims(adapter.roleClaims(candidate))
+  return {
+    channel: candidate.channel,
+    ...(roles.document !== 'UNKNOWN' ? { document: roles.document } : {}),
+    ...(roles.storey !== 'UNKNOWN' ? { storey: roles.storey } : {}),
+    ...(roles.annotation !== 'UNKNOWN' ? { annotation: roles.annotation } : {}),
+  }
+}
+
+const pause = (ms: number): Promise<void> => (ms > 0 ? new Promise((resolve) => setTimeout(resolve, ms)) : Promise.resolve())
+
+/**
+ * Fetch one address, or record why not.
+ *
+ * A transient failure (a timeout, a dropped connection, 408/425/429/5xx) is
+ * tried once more after a short pause: on a phone a single stalled response
+ * used to remove a plan copy for the rest of the run. A definite answer (a
+ * 404 on a guessed address) is evidence and is not retried. A cancelled run
+ * is not a failure of this address: the abort propagates.
+ */
 async function fetchBytes(
   url: string,
   policy: FetchPolicy,
   options: AcquireOptions,
   stage: AcquisitionFailure['stage'],
   failures: AcquisitionFailure[],
+  claim?: AcquisitionFailure['claim'],
 ): Promise<{ url: string; bytes: Uint8Array; mediaType: string } | null> {
   const cached = options.cache ? await options.cache.get(url) : null
-  if (cached) return { url, bytes: cached.bytes, mediaType: cached.mediaType }
-  if (options.offline) {
-    failures.push({ stage, target: url, code: 'OFFLINE_CACHE_MISS', message: 'offline acquisition and this address is not in the cache' })
+  // the cache remembers where a redirect led, so a replay names the page as the live run did
+  if (cached) return { url: cached.url ?? url, bytes: cached.bytes, mediaType: cached.mediaType }
+  const fail = (code: string, message: string, attempts?: number): null => {
+    failures.push({ stage, target: url, code, message, ...(attempts !== undefined && attempts > 1 ? { attempts } : {}), ...(claim ? { claim } : {}) })
     return null
   }
-  try {
-    const r = await safeFetch(url, policy, options.deps)
-    if (options.cache) await options.cache.put(url, r.bytes, r.mediaType)
-    return { url: r.url, bytes: r.bytes, mediaType: r.mediaType }
-  } catch (e) {
-    const err = e as FetchRefused
-    failures.push({ stage, target: url, code: err.code ?? 'NETWORK', message: err.message })
-    return null
+  if (options.offline) return fail('OFFLINE_CACHE_MISS', 'offline acquisition and this address is not in the cache')
+  let fetched: Awaited<ReturnType<typeof safeFetch>> | undefined
+  for (let attempt = 1; ; attempt++) {
+    try {
+      fetched = await safeFetch(url, policy, options.deps)
+      break
+    } catch (e) {
+      if (!(e instanceof FetchRefused)) return fail('NETWORK', (e as Error).message, attempt)
+      if (e.code === 'ABORTED') throw e
+      if (attempt >= 2 || !isTransientFetchFailure(e)) return fail(e.code, e.message, attempt)
+      await pause(policy.retryDelayMs)
+    }
   }
+  if (options.cache) {
+    try {
+      await options.cache.put(url, fetched.bytes, fetched.mediaType, fetched.url === url ? undefined : fetched.url)
+    } catch (e) {
+      // The bytes arrived but cannot be kept, and every later stage reads them from the
+      // cache: the address is lost, and the reason is the disk, not the network.
+      return fail('CACHE_WRITE_FAILED', (e as Error).message)
+    }
+  }
+  return { url: fetched.url, bytes: fetched.bytes, mediaType: fetched.mediaType }
 }
 
 function safely<T>(fn: () => T, fallback: T, failures: AcquisitionFailure[], stage: AcquisitionFailure['stage'], target: string): T {

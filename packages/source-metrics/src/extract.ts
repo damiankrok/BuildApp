@@ -66,8 +66,8 @@ export type ExtractOptions = {
    * printed angle is worth more than one measured off a raster.
    */
   specifications?: readonly PublishedSpecificationInput[]
-  /** Sha-256 of the page the specification was printed on. Required to read one. */
-  pageHash?: string
+  /** Sha-256 of the specification text as published (`publishedSpecificationsHash`). Required to read one. */
+  specificationHash?: string
 }
 
 /** Orthographic sheets carry printed measurements; renders and site plans do not, and reading numbers off them invents scale. */
@@ -626,7 +626,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
   }
 
   // --- what the publisher wrote down, as against what it drew ---
-  const spec = options.specifications && options.specifications.length > 0 && options.pageHash ? readSpecifications(options.specifications, options.pageHash) : undefined
+  const spec = options.specifications && options.specifications.length > 0 && options.specificationHash ? readSpecifications(options.specifications, options.specificationHash) : undefined
   if (spec) {
     evidence.push(...spec.evidence)
     for (const line of spec.unread) {

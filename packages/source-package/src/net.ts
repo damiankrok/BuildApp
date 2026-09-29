@@ -29,7 +29,10 @@ export type FetchPolicy = {
   /** Schemes that may be fetched at all. */
   allowedSchemes: readonly string[]
   maxRedirects: number
+  /** How long a hop may go without receiving anything: before the headers, and between body chunks. */
   timeoutMs: number
+  /** The pause before the one retry a transient failure gets. */
+  retryDelayMs: number
   /** Hard cap on one response body. */
   maxBytes: number
   /** Hard cap on how many assets one acquisition may fetch. */
@@ -47,6 +50,7 @@ export const DEFAULT_FETCH_POLICY: FetchPolicy = {
   allowedSchemes: ['https:'],
   maxRedirects: 5,
   timeoutMs: 20_000,
+  retryDelayMs: 750,
   maxBytes: 24 * 1024 * 1024,
   maxAssets: 120,
   allowedMediaTypes: ['image/', 'text/html', 'application/xhtml+xml', 'text/plain', 'application/json'],
@@ -69,12 +73,16 @@ export type FetchFailureCode =
   | 'MEDIA_TYPE_NOT_ALLOWED'
   | 'TOO_LARGE'
   | 'NETWORK'
+  /** The caller cancelled the fetch (the run was cancelled). Never a timeout, never retried. */
+  | 'ABORTED'
 
 export class FetchRefused extends Error {
   constructor(
     readonly code: FetchFailureCode,
     readonly target: string,
     message: string,
+    /** The HTTP status, for `HTTP_STATUS`. */
+    readonly status?: number,
   ) {
     super(message)
     this.name = 'FetchRefused'
@@ -276,51 +284,91 @@ export async function safeFetch(rawUrl: string, policy: FetchPolicy = DEFAULT_FE
 
   for (let hop = 0; hop <= policy.maxRedirects; hop++) {
     const url = await assertFetchable(current, policy, deps.resolve)
-    const controller = new AbortController()
-    const timer = setTimeout(() => controller.abort(), policy.timeoutMs)
-    let response: Response
+    // One deadline per hop, re-armed on every body chunk: a slow download that
+    // keeps arriving is fine, a connection that stops sending is not. Before
+    // 005A the timer was cleared when the headers arrived, and a stalled body
+    // hung the acquisition for good.
+    const deadline = idleDeadline(policy.timeoutMs)
     try {
-      response = await doFetch(url.toString(), {
+      const response = await doFetch(url.toString(), {
         redirect: 'manual',
-        signal: controller.signal,
+        signal: deadline.signal,
         // no cookies, no credentials, no auth: this is an anonymous read of a public page
         credentials: 'omit',
         referrerPolicy: 'no-referrer',
         headers: { 'user-agent': policy.userAgent, accept: '*/*' },
       })
+
+      if (response.status >= 300 && response.status < 400) {
+        const location = response.headers.get('location')
+        if (!location) throw new FetchRefused('REDIRECT_INVALID', current, `${response.status} without a Location header`)
+        const next = new URL(location, url).toString()
+        redirects.push(next)
+        current = next
+        continue
+      }
+      if (!response.ok) throw new FetchRefused('HTTP_STATUS', current, `HTTP ${response.status}`, response.status)
+
+      const mediaType = mediaTypeOf(response.headers.get('content-type'))
+      if (!policy.allowedMediaTypes.some((p) => mediaType.startsWith(p))) {
+        throw new FetchRefused('MEDIA_TYPE_NOT_ALLOWED', current, `media type ${mediaType} is not allowed`)
+      }
+      const declaredLength = Number(response.headers.get('content-length') ?? NaN)
+      if (Number.isFinite(declaredLength) && declaredLength > policy.maxBytes) {
+        throw new FetchRefused('TOO_LARGE', current, `declared ${declaredLength} bytes, cap is ${policy.maxBytes}`)
+      }
+      const bytes = await readCapped(response, policy.maxBytes, current, deadline.rearm)
+      return { url: url.toString(), requestedUrl: rawUrl, status: response.status, mediaType, bytes, redirects }
     } catch (e) {
-      clearTimeout(timer)
+      if (e instanceof FetchRefused) throw e
       const err = e as Error
-      if (err.name === 'AbortError') throw new FetchRefused('TIMEOUT', current, `timed out after ${policy.timeoutMs} ms`)
+      if (deadline.expired()) throw new FetchRefused('TIMEOUT', current, `no data for ${policy.timeoutMs} ms`)
+      // An abort this fetch did not start is the caller's: the run was
+      // cancelled. It is not a timeout, and it is never retried.
+      if (err.name === 'AbortError') throw new FetchRefused('ABORTED', current, 'the fetch was cancelled')
       throw new FetchRefused('NETWORK', current, err.message)
+    } finally {
+      deadline.clear()
     }
-    clearTimeout(timer)
-
-    if (response.status >= 300 && response.status < 400) {
-      const location = response.headers.get('location')
-      if (!location) throw new FetchRefused('REDIRECT_INVALID', current, `${response.status} without a Location header`)
-      const next = new URL(location, url).toString()
-      redirects.push(next)
-      current = next
-      continue
-    }
-    if (!response.ok) throw new FetchRefused('HTTP_STATUS', current, `HTTP ${response.status}`)
-
-    const mediaType = mediaTypeOf(response.headers.get('content-type'))
-    if (!policy.allowedMediaTypes.some((p) => mediaType.startsWith(p))) {
-      throw new FetchRefused('MEDIA_TYPE_NOT_ALLOWED', current, `media type ${mediaType} is not allowed`)
-    }
-    const declaredLength = Number(response.headers.get('content-length') ?? NaN)
-    if (Number.isFinite(declaredLength) && declaredLength > policy.maxBytes) {
-      throw new FetchRefused('TOO_LARGE', current, `declared ${declaredLength} bytes, cap is ${policy.maxBytes}`)
-    }
-    const bytes = await readCapped(response, policy.maxBytes, current)
-    return { url: url.toString(), requestedUrl: rawUrl, status: response.status, mediaType, bytes, redirects }
   }
   throw new FetchRefused('TOO_MANY_REDIRECTS', rawUrl, `more than ${policy.maxRedirects} redirects`)
 }
 
-async function readCapped(response: Response, maxBytes: number, target: string): Promise<Uint8Array> {
+/** An abort signal that fires after `ms` of silence; `rearm` restarts the wait. */
+function idleDeadline(ms: number): { signal: AbortSignal; rearm: () => void; clear: () => void; expired: () => boolean } {
+  const controller = new AbortController()
+  let fired = false
+  let timer = setTimeout(() => {
+    fired = true
+    controller.abort()
+  }, ms)
+  return {
+    signal: controller.signal,
+    rearm: () => {
+      if (fired) return
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        fired = true
+        controller.abort()
+      }, ms)
+    },
+    clear: () => clearTimeout(timer),
+    expired: () => fired,
+  }
+}
+
+/**
+ * True when a failed fetch is worth one more attempt: the network or the
+ * server said "not now" (a timeout, a dropped connection, 408, 425, 429, a
+ * 5xx), not "no" (a 404 on a guessed address is evidence, not bad luck).
+ */
+export function isTransientFetchFailure(e: FetchRefused): boolean {
+  if (e.code === 'TIMEOUT' || e.code === 'NETWORK') return true
+  if (e.code !== 'HTTP_STATUS' || e.status === undefined) return false
+  return e.status === 408 || e.status === 425 || e.status === 429 || e.status >= 500
+}
+
+async function readCapped(response: Response, maxBytes: number, target: string, onChunk: () => void): Promise<Uint8Array> {
   const body = response.body
   if (!body) return new Uint8Array(await response.arrayBuffer())
   const reader = body.getReader()
@@ -329,6 +377,7 @@ async function readCapped(response: Response, maxBytes: number, target: string):
   for (;;) {
     const { done, value } = await reader.read()
     if (done) break
+    onChunk()
     if (value) {
       total += value.byteLength
       if (total > maxBytes) {

@@ -163,5 +163,5 @@ export const genericProjectPageAdapter: SourceAdapter = {
 export { classifyProjectPage } from './classify.js'
 export { readPageFacts } from './markup.js'
 export type { PageFacts } from './markup.js'
-export { MAX_CRAWL_PAGES, registrableDomain, sizeStem } from './assets.js'
+export { MAX_CRAWL_PAGES, sizeStem } from './assets.js'
 export type { DroppedCandidate } from './assets.js'

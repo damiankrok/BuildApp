@@ -83,11 +83,14 @@ const number = (text: string): number | null => {
 /**
  * Turn a publisher's specification list into evidence and findings.
  *
- * `pageHash` is the sha-256 of the page the specification was printed on, and
- * it goes on every piece of evidence this produces: a reading is only valid
- * for the bytes it was read from, here as everywhere else in the pipeline.
+ * `sourceHash` is the sha-256 of the specification text as published
+ * (`publishedSpecificationsHash`), and it goes on every piece of evidence this
+ * produces: a reading is only valid for the text it was read from, here as
+ * everywhere else in the pipeline. Before 005A it was the hash of the whole
+ * page's bytes, which a publisher changes on every request, so the same
+ * printed pitch had a new provenance on every fetch.
  */
-export function readSpecifications(specifications: readonly PublishedSpecificationInput[], pageHash: string): SpecificationReading {
+export function readSpecifications(specifications: readonly PublishedSpecificationInput[], sourceHash: string): SpecificationReading {
   const evidence: MetricEvidence[] = []
   const findings: SpecificationFinding[] = []
   const unread: SpecificationReading['unread'] = []
@@ -107,7 +110,7 @@ export function readSpecifications(specifications: readonly PublishedSpecificati
       kind,
       frameId: PUBLISHED_PAGE_FRAME,
       assetId: PUBLISHED_PAGE_ASSET,
-      variantByteHash: pageHash,
+      variantByteHash: sourceHash,
       value: round6(value),
       unit,
       origin,

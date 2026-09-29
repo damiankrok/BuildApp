@@ -33,6 +33,13 @@ export type AnalysisDiagnostics = {
     assets: Array<{ id: string; document: string; storey: string; annotation: string; sizePx: string; byteHash: string }>
     /** Addresses not used, by code: a phone's partial download shows up here. */
     failures: Record<string, number>
+    /**
+     * Addresses the page EXPOSED as floor plans that never arrived (a guessed
+     * larger copy that does not exist is not one of them). A plan read from
+     * the one copy that survived is read from less than the page offered, and
+     * this is where that shows.
+     */
+    planAddressesLost: Array<{ code: string; storey?: string; annotation?: string }>
   } | null
   plans: PlanDiagnosticsReport | null
   trace: AnalysisTrace
@@ -42,6 +49,16 @@ export type DiagnosticsBundle = {
   diagnostics: AnalysisDiagnostics
   /** The chosen plan's decomposition over the plan, PNG, when a plan was read. */
   overlay: { name: string; png: Uint8Array } | null
+}
+
+const units = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0)
+
+/** The exposed floor-plan addresses acquisition lost, by the roles their names claimed. Deterministic order. */
+export function lostPlanAddresses(pkg: SourcePackage): Array<{ code: string; storey?: string; annotation?: string }> {
+  return pkg.failures
+    .filter((f) => f.claim?.document === 'FLOOR_PLAN' && f.claim.channel !== 'VARIANT_CONVENTION')
+    .map((f) => ({ code: f.code, ...(f.claim?.storey ? { storey: f.claim.storey } : {}), ...(f.claim?.annotation ? { annotation: f.claim.annotation } : {}) }))
+    .sort((a, b) => units(a.storey ?? '', b.storey ?? '') || units(a.annotation ?? '', b.annotation ?? '') || units(a.code, b.code))
 }
 
 export function sourceSummaryOf(pkg: SourcePackage): NonNullable<AnalysisDiagnostics['source']> {
@@ -58,6 +75,7 @@ export function sourceSummaryOf(pkg: SourcePackage): NonNullable<AnalysisDiagnos
       })
       .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
     failures,
+    planAddressesLost: lostPlanAddresses(pkg),
   }
 }
 

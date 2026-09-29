@@ -18,7 +18,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { stableJson } from '@buildapp/source-common'
-import { archonAdapter, SourcePackageSchema, acquireSourcePackage, decodeImage, fileByteCache, selectedVariant } from '@buildapp/source-package'
+import { archonAdapter, SourcePackageSchema, acquireSourcePackage, decodeImage, fileByteCache, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
 import type { SourcePackage } from '@buildapp/source-package'
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
 import { nullVisionReasoner } from '@buildapp/source-vision'
@@ -80,7 +80,7 @@ async function main(): Promise<void> {
     slug,
     raster: (frame) => rasterCache.get(frame.variantByteHash),
     specifications: pkg.publishedSpecifications,
-    pageHash: pkg.pageHash,
+    specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications),
   })
   process.stdout.write(`metric evidence: ${metrics.evidence.length} readings, ${metrics.chains.length} chains, ${metrics.coordinateRegistrations.length} registrations (${metrics.contentHash.slice(0, 16)})\n`)
 

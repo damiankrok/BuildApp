@@ -15,7 +15,7 @@
  * each job an empty cache of its own, so no job ever reads another's bytes.
  */
 import { stableJson } from '@buildapp/source-common'
-import { SourcePackageSchema, acquireSourcePackage, decodeImage, selectedVariant } from '@buildapp/source-package'
+import { SourcePackageSchema, acquireSourcePackage, decodeImage, publishedSpecificationsHash, selectedVariant } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter, SourceByteCache, SourcePackage } from '@buildapp/source-package'
 import { analyzeSourcePackage } from '@buildapp/source-analyzer'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
@@ -32,7 +32,7 @@ import { buildMobileSceneBundle, loadBundle, serializeBundle, sha256 } from '@bu
 import { AnalysisError, PHASE_STAGE as FAILURE_STAGE, reconstructionError, throwIfAborted, toAnalysisError } from './errors.js'
 import { TraceRecorder } from './trace.js'
 import type { AnalysisTrace } from './trace.js'
-import { diagnosticsBundle } from './diagnostics.js'
+import { diagnosticsBundle, lostPlanAddresses } from './diagnostics.js'
 import { identityOf, validateAnalysisUrl } from './identity.js'
 import type { AnalysisIdentity } from './identity.js'
 import { anySignal } from './signals.js'
@@ -193,7 +193,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     {
       const failureCodes: Record<string, number> = {}
       for (const f of pkg.failures) failureCodes[`failed_${f.code}`] = (failureCodes[`failed_${f.code}`] ?? 0) + 1
-      trace.record('ACQUIRING_SOURCE', input.kind === 'URL' ? 'FETCH' : 'SEALED_PACKAGE', 'PASSED', { route: routeKind, adapter: pkg.adapter.id, assets: pkg.assets.length, variants: pkg.assets.reduce((a, x) => a + x.variants.length, 0), addressesNotUsed: pkg.failures.length, ...failureCodes })
+      trace.record('ACQUIRING_SOURCE', input.kind === 'URL' ? 'FETCH' : 'SEALED_PACKAGE', 'PASSED', { route: routeKind, adapter: pkg.adapter.id, assets: pkg.assets.length, variants: pkg.assets.reduce((a, x) => a + x.variants.length, 0), addressesNotUsed: pkg.failures.length, planAddressesLost: lostPlanAddresses(pkg).length, ...failureCodes })
     }
 
     // --- CLASSIFYING_SOURCES ------------------------------------------------
@@ -268,7 +268,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     }
     const identity: AnalysisIdentity = { ...identityOf(pkg, options.adapters), ...options.identity }
     const raster = (frame: { variantByteHash: string }): ReturnType<typeof decodeImage> | undefined => rasterCache.get(frame.variantByteHash)
-    const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, pageHash: pkg.pageHash })
+    const metrics = extractMetricEvidence({ sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications) })
     metricsSoFar = metrics
     throwIfAborted(signal)
     const metricExtractionMs = lap()
