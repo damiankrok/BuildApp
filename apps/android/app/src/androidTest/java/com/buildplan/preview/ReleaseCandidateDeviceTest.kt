@@ -15,6 +15,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.buildplan.preview.analyzer.AnalysisState
+import com.buildplan.preview.analyzer.AnalyzerFailure
+import com.buildplan.preview.analyzer.AnalyzerMessages
 import com.buildplan.preview.presentation.PresentationMode
 import com.buildplan.preview.progress.ConstructionStageKey
 import com.buildplan.preview.progress.ConstructionView
@@ -216,17 +219,26 @@ class ReleaseCandidateDeviceTest {
         compose.runOnIdle { progress.returnToNow() }
         leave3d(preview)
 
-        // A link the app does not support: refused before anything is fetched, in words.
+        // A link the app does not support: the analyzer on the phone refuses the publisher at once,
+        // says so, and nothing is added to the phone.
         compose.onNode(evidence.tab(evidence.string(R.string.place_house))).performClick()
         compose.onNode(hasScrollAction()).performScrollToNode(hasText(evidence.string(R.string.house_add_action)))
         compose.onAllNodes(hasText(evidence.string(R.string.house_add_action)) and hasClickAction())[0].performClick()
         evidence.awaitNode(hasText(evidence.string(R.string.analyzer_title)))
+        val analyzer = evidence.analyzer(checkNotNull(scenario))
+        val housesBefore = preview.scenes.size
         compose.onNode(hasSetTextAction()).performTextReplacement("https://example.com/dom")
         compose.onNode(hasText(evidence.string(R.string.analyzer_analyze)) and hasClickAction()).performClick()
-        compose.waitUntil(5_000) { evidence.analyzer(checkNotNull(scenario)).linkProblem != null }
-        val problem = checkNotNull(evidence.analyzer(checkNotNull(scenario)).linkProblem)
-        evidence.awaitNode(hasText(problem), unmerged = true)
-        assertFalse("nothing started", evidence.analyzer(checkNotNull(scenario)).isRunning)
+        compose.waitUntil(30_000) { analyzer.linkProblem != null || analyzer.state is AnalysisState.Failed }
+        val failure = (analyzer.state as? AnalysisState.Failed)?.failure
+        val problem = analyzer.linkProblem ?: failure?.let { AnalyzerMessages.title(it) }
+        evidence.fact("unsupported link", "problem=${analyzer.linkProblem} failure=$failure")
+        assertFalse("nothing keeps running", analyzer.isRunning)
+        assertEquals("no house was added", housesBefore, preview.scenes.size)
+        if (failure != null) {
+            val code = (failure as? AnalyzerFailure.LocalRuntime)?.code ?: (failure as? AnalyzerFailure.JobFailed)?.code
+            assertEquals("the publisher is refused, not guessed at", "UNSUPPORTED_PUBLISHER", code)
+        }
         evidence.capture("04-unsupported-link", "problem" to problem)
         evidence.fact("result D", "PASS")
     }
@@ -308,7 +320,7 @@ class ReleaseCandidateDeviceTest {
         evidence.capture("05-element-from-list")
         val before = preview.pose.distance
         compose.onNode(hasText(evidence.string(R.string.tool_view)) and hasClickAction()).performClick()
-        compose.onNode(hasText(evidence.string(R.string.view_zoom_in)) and hasClickAction()).performClick()
+        compose.onNode(hasText(evidence.string(R.string.view_zoom_in)) and hasClickAction()).performScrollTo().performClick()
         compose.waitUntil(5_000) { preview.pose.distance < before }
         evidence.fact("zoom by button: distance", "$before -> ${preview.pose.distance}")
 

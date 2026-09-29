@@ -302,10 +302,12 @@ private fun ViewPane(scene: ModelScene, onPreset: (ViewPreset) -> Unit, onReset:
         if (presets.isEmpty()) continue
         if (label != R.string.view_group_whole) PanelGroupLabel(stringResource(label))
         for (preset in presets) PanelAction(stringResource(preset.labelRes()), onClick = { onPreset(preset) }, supporting = preset.supportingRes()?.let { stringResource(it) })
+        // Zoom without a pinch, first in the pane where TalkBack and a gloved hand find it.
+        if (label == R.string.view_group_whole) {
+            PanelAction(stringResource(R.string.view_zoom_in), onClick = { onZoom(ZOOM_STEP) })
+            PanelAction(stringResource(R.string.view_zoom_out), onClick = { onZoom(1.0 / ZOOM_STEP) })
+        }
     }
-    PanelRule()
-    PanelAction(stringResource(R.string.view_zoom_in), onClick = { onZoom(ZOOM_STEP) })
-    PanelAction(stringResource(R.string.view_zoom_out), onClick = { onZoom(1.0 / ZOOM_STEP) })
     PanelRule()
     PanelAction(stringResource(R.string.view_reset), onClick = onReset, supporting = stringResource(R.string.view_reset_detail))
 }
