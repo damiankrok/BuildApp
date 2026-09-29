@@ -160,6 +160,16 @@ describe('what is refused, and how it is said', () => {
     ['https://[::1]/projects/x', 'SOURCE_UNSAFE'],
     ['https://localhost/projects/x', 'SOURCE_UNSAFE'],
     ['https://169.254.169.254/latest/meta-data/', 'SOURCE_UNSAFE'],
+    // Every spelling of a private address is an address literal to the fence, and the blocked names too.
+    ['https://[fd00::1]/projects/x', 'SOURCE_UNSAFE'],
+    ['https://[fe80::1]/projects/x', 'SOURCE_UNSAFE'],
+    ['https://[::ffff:10.0.0.1]/projects/x', 'SOURCE_UNSAFE'],
+    ['https://0x7f000001/projects/x', 'SOURCE_UNSAFE'],
+    ['https://2130706433/projects/x', 'SOURCE_UNSAFE'],
+    ['https://127.1/projects/x', 'SOURCE_UNSAFE'],
+    ['https://analyzer.internal/projects/x', 'SOURCE_UNSAFE'],
+    ['https://printer.home.arpa/projects/x', 'SOURCE_UNSAFE'],
+    ['https://metadata.google.internal/computeMetadata/v1/', 'SOURCE_UNSAFE'],
     ['not a url', 'INVALID_URL'],
     ['https://example.com/projects/x', 'UNSUPPORTED_PUBLISHER'],
   ])('%s → %s, before anything is fetched (specialist-only registry)', async (url, code) => {

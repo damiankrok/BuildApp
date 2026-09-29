@@ -46,3 +46,11 @@ export function parseLocaleNumber(text: string): number | null {
   const n = Number(token.replace(',', '.'))
   return Number.isFinite(n) ? n : null
 }
+
+/**
+ * Ordering by UTF-16 code units: the same on every runtime, including the
+ * phone's Node without ICU, whose `localeCompare` replica refuses characters
+ * outside its verified repertoire. Free-form page text (labels, descriptions,
+ * captions) is ordered with this, never with `localeCompare`.
+ */
+export const compareCodeUnits = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0)

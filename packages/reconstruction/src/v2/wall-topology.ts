@@ -5,8 +5,8 @@
  * along it, a thickness, read off ink that is a few pixels wide. Emitted as
  * they are read, two runs that meet, cross, duplicate or hug an exterior wall
  * share plan area, and the model — rightly — refuses the second of them as
- * `WALLS_OVERLAP`. The third house (Kosaćce) failed exactly there: a 0.53 m
- * partition stub read 8 mm inside the east ring wall's band.
+ * `WALLS_OVERLAP`. A real project failed exactly there: a half-metre
+ * partition stub read a few millimetres inside a ring wall's band.
  *
  * This module turns the raw runs into a set of runs that no longer overlap
  * anything, by named, generic, evidence-bounded decisions, in a fixed order:

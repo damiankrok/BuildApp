@@ -40,7 +40,7 @@ import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
 import type { LinkAnalysisResult, VisionMode } from './result.js'
 
-export const ANALYSIS_SERVICE_VERSION = '1.0.0' as const
+export const ANALYSIS_SERVICE_VERSION = '1.1.0' as const
 
 /** What to analyse: a live URL, or a package (and optionally its graph) sealed earlier. */
 export type AnalysisInput = { kind: 'URL'; url: string } | { kind: 'PACKAGE'; pkg: SourcePackage; graph?: SourceObservationGraph }

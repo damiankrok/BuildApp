@@ -361,6 +361,83 @@ describe('a page that needs a browser', () => {
 
 // ---------------------------------------------------------------------------
 
+describe('ordering without ICU (INTEGRATION-004A, cycle 2)', () => {
+  const PAGE_W = `${SITE}/projekty/wrzosowa-3`
+  const routesW = (): Record<string, StubRoute> => ({
+    [PAGE_W]: {
+      mediaType: 'text/html; charset=utf-8',
+      bytes: utf8(`<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Projekt domu „Wrzosowa 3” – dane projektu</title>
+      <meta name="description" content="Dom parterowy z poddaszem… „przytulny” i ‘jasny’, projekt nr WRZ-3"><meta property="og:title" content="Projekt domu „Wrzosowa 3”"></head><body>
+      <h1>Projekt domu „Wrzosowa 3”</h1>
+      <table><tr><td>Powierzchnia użytkowa</td><td>118,40 m²</td></tr><tr><td>Powierzchnia zabudowy</td><td>132,10 m²</td></tr>
+      <tr><td>Wysokość budynku</td><td>8,10 m</td></tr><tr><td>Kąt nachylenia dachu</td><td>35°</td></tr></table>
+      <ul><li>Dach: dwuspadowy… „prosty”</li><li>Ściany: pustak 25 cm</li></ul>
+      <h2>Rzuty</h2><figure>${img(`${SITE}/media/rzut-parteru.png`, 'Rzut parteru… „skala 1:100”')}<figcaption>Rzut parteru — „strefa dzienna”</figcaption></figure>
+      <figure>${img(`${SITE}/media/rzut-poddasza.png`, 'Rzut poddasza')}<figcaption>Rzut poddasza ‘sypialnie’</figcaption></figure>
+      <h2>Elewacje</h2>${img(`${SITE}/media/elewacja-frontowa.png`, 'Elewacja frontowa…')}${img(`${SITE}/media/przekroj-a-a.png`, 'Przekrój A–A')}
+      <h3>Zestawienie pomieszczeń</h3><table><tr><th></th><th>PARTER</th><th>Pow.</th></tr><tr><td>1.</td><td>Wiatrołap…</td><td>4,20</td></tr><tr><td>2.</td><td>Salon „duży”</td><td>28,50</td></tr></table>
+      </body></html>`),
+    },
+    [`${SITE}/media/rzut-parteru.png`]: { bytes: pngBytes(900, 700, 11), mediaType: 'image/png' },
+    [`${SITE}/media/rzut-poddasza.png`]: { bytes: pngBytes(900, 700, 12), mediaType: 'image/png' },
+    [`${SITE}/media/elewacja-frontowa.png`]: { bytes: pngBytes(800, 400, 13), mediaType: 'image/png' },
+    [`${SITE}/media/przekroj-a-a.png`]: { bytes: pngBytes(700, 500, 14), mediaType: 'image/png' },
+  })
+
+  it('reads a page whose text carries an ellipsis, low-9 quotes and curly quotes with localeCompare forbidden — as the phone must', async () => {
+    const original = String.prototype.localeCompare
+    // The phone's runtime has no ICU; its replacement (apps/local-analyzer/src/text.ts) orders Latin text
+    // and ASCII punctuation as ICU does and REFUSES anything outside that repertoire — an ellipsis, curly
+    // or low-9 quotes. Model that: addresses and ids may still be ordered, page prose may not.
+    const outside = /[\u2018-\u201F\u2026]|[^\u0000-\u02FF]/
+    // eslint-disable-next-line no-extend-native
+    String.prototype.localeCompare = function (this: string, other: string) {
+      if (outside.test(this) || outside.test(other)) throw new Error(`localeCompare refused on this runtime: ${JSON.stringify(this)} vs ${JSON.stringify(other)}`)
+      return original.call(this, other)
+    }
+    try {
+      const pkg = await acquire(stubFetch(routesW()), PAGE_W)
+      expect(pkg.adapter.id).toBe('generic.project-page')
+      expect(documents(pkg)).toEqual(['ELEVATION', 'FLOOR_PLAN', 'FLOOR_PLAN', 'SECTION'])
+      expect(pkg.publishedFacts.find((f) => f.key === 'usable_area')?.value).toBe(118.4)
+      expect(pkg.publishedFacts.find((f) => f.key === 'building_height')?.value).toBe(8.1)
+      expect(pkg.publishedRooms.map((r) => r.label)).toEqual(['Wiatrołap…', 'Salon „duży”'])
+      expect(pkg.failures.filter((f) => f.code === 'ADAPTER_ERROR')).toEqual([])
+    } finally {
+      String.prototype.localeCompare = original
+    }
+  })
+
+  const PAGE_M = `${SITE}/projekty/modrzewiowy-2`
+  const routesM = (): Record<string, StubRoute> => ({
+    [PAGE_M]: {
+      mediaType: 'text/html; charset=utf-8',
+      bytes: utf8(`<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Projekt domu Modrzewiowy 2</title></head><body><h1>Projekt domu Modrzewiowy 2</h1>
+      <table><tr><td>Powierzchnia użytkowa</td><td>101,20 m²</td></tr><tr><td>Powierzchnia zabudowy</td><td>120,00 m²</td></tr>
+      <tr><td>Wysokość ścianki kolankowej</td><td>0,90 m</td></tr><tr><td>Wysokość pomieszczeń</td><td>2,70 m</td></tr>
+      <tr><td>Wysokość całkowita</td><td>8,27 m</td></tr><tr><td>Powierzchnia całkowita</td><td>171,00 m²</td></tr><tr><td>Kąt nachylenia dachu</td><td>40°</td></tr></table>
+      <h2>Rysunki</h2>${img(`${SITE}/media/plan-zagospodarowania.png`, 'Plan zagospodarowania działki')}${img(`${SITE}/media/rzut-parteru-m.png`, 'Rzut parteru')}
+      ${img(`${SITE}/media/elewacja-prawa.png`, 'Elewacja prawa, prawie gotowa')}${img(`${SITE}/media/przekroj-m.png`, 'Przekrój')}</body></html>`),
+    },
+    [`${SITE}/media/plan-zagospodarowania.png`]: { bytes: pngBytes(800, 800, 21), mediaType: 'image/png' },
+    [`${SITE}/media/rzut-parteru-m.png`]: { bytes: pngBytes(900, 700, 22), mediaType: 'image/png' },
+    [`${SITE}/media/elewacja-prawa.png`]: { bytes: pngBytes(800, 400, 23), mediaType: 'image/png' },
+    [`${SITE}/media/przekroj-m.png`]: { bytes: pngBytes(700, 500, 24), mediaType: 'image/png' },
+  })
+
+  it('does not key a knee wall or a room height as the building height, nor a site plan as a floor plan', async () => {
+    const pkg = await acquire(stubFetch(routesM()), PAGE_M)
+    const fact = (key: string) => pkg.publishedFacts.find((f) => f.key === key)?.value
+    expect(fact('building_height')).toBe(8.27)
+    expect(fact('total_area')).toBe(171)
+    expect(pkg.publishedFacts.filter((f) => f.value === 0.9 || f.value === 2.7)).toEqual([])
+    const byName = (stem: string) => pkg.assets.find((a) => a.variants.some((v) => v.url.includes(stem)))
+    expect(byName('plan-zagospodarowania')?.roles.document).toBe('SITE_PLAN')
+    expect(byName('rzut-parteru-m')?.roles.document).toBe('FLOOR_PLAN')
+    expect(byName('elewacja-prawa')?.roles.view).toBe('SIDE_RIGHT')
+  })
+})
+
 describe('determinism', () => {
   const routes = (): Record<string, StubRoute> => ({
     [PAGE]: { mediaType: 'text/html', bytes: utf8(html(`<h1>Dom pod Lipą</h1>${FACTS_TABLE}${ROOMS_TABLE}${SPEC_LIST}${img(`${SITE}/i/rzut-parteru.png`, 'Rzut parteru')}${img(`${SITE}/i/elewacja-frontowa.png`, 'Elewacja frontowa')}${img(`${SITE}/i/przekroj.png`, 'Przekrój')}`)) },

@@ -11,7 +11,7 @@
  * layers downstream need not know which adapter read the page.
  */
 import type { PublishedFact, PublishedRoom, PublishedSpecification, StoreyRole } from '../../schema.js'
-import { deaccent, parseLocaleNumber } from '../../text.js'
+import { compareCodeUnits, deaccent, parseLocaleNumber } from '../../text.js'
 import type { PageFacts } from './markup.js'
 
 const FACT_KEYS: Array<{ test: RegExp; key: string; unit: PublishedFact['unit'] }> = [
@@ -22,10 +22,11 @@ const FACT_KEYS: Array<{ test: RegExp; key: string; unit: PublishedFact['unit'] 
   { test: /kotlown|\bboiler\b|\butility\b/, key: 'boiler_room_area', unit: 'm2' },
   { test: /zabudowy|\bfootprint\b|\bbuilt[- ]?up\b|\bbuilding area\b/, key: 'footprint_area', unit: 'm2' },
   { test: /powierzchnia podlog|\bfloor area\b/, key: 'floor_area', unit: 'm2' },
-  { test: /calkowita|\btotal area\b|\bgross area\b/, key: 'total_area', unit: 'm2' },
   { test: /powierzchnia dachu|\broof area\b/, key: 'roof_area', unit: 'm2' },
   { test: /kubatur|\bvolume\b/, key: 'volume', unit: 'none' },
-  { test: /wysokosc|\bheight\b/, key: 'building_height', unit: 'm' },
+  // The building's height, not a knee wall's or a room's: the label is anchored and the parts excluded.
+  { test: /^(wysokosc|height)( (budynku|domu|calkowita|calosci|building|total|overall))?$|^(building|overall|total) height$/, key: 'building_height', unit: 'm' },
+  { test: /^powierzchnia calkowita|\btotal area\b|\bgross area\b/, key: 'total_area', unit: 'm2' },
   { test: /kat (nachylenia|dachu)|nachylenie|\bpitch\b/, key: 'roof_pitch', unit: 'deg' },
   { test: /szerokosc (budynku|domu)|\bbuilding width\b/, key: 'building_width', unit: 'm' },
   { test: /dlugosc (budynku|domu)|\bbuilding length\b/, key: 'building_length', unit: 'm' },
@@ -93,7 +94,7 @@ export function genericFacts(facts: PageFacts): PublishedFact[] {
     seen.add(mapped.key)
     out.push({ key: mapped.key, label: p.label, value, unit: unitOf(p.label, raw, mapped.unit), raw })
   }
-  return out.sort((a, b) => a.key.localeCompare(b.key))
+  return out.sort((a, b) => compareCodeUnits(a.key, b.key))
 }
 
 /**
@@ -129,7 +130,7 @@ export function genericRooms(facts: PageFacts): PublishedRoom[] {
       rooms.push({ storey, index, label, area, raw: cells.slice(0, 4).join(' | ') })
     }
   }
-  return rooms.sort((a, b) => a.storey.localeCompare(b.storey) || a.index - b.index)
+  return rooms.sort((a, b) => compareCodeUnits(a.storey, b.storey) || a.index - b.index)
 }
 
 /** Specification lines by the vocabulary of their labels, plus the page's own descriptions. */
@@ -158,5 +159,5 @@ export function genericSpecifications(facts: PageFacts): PublishedSpecification[
     if (text.length >= 120 && /dach|dom|projekt|roof|house|storey|kondygnac|garaz|garage/i.test(deaccent(text)) && (!best || text.length > best.length)) best = text
   }
   if (best) push('description', 'description', best)
-  return out.sort((a, b) => a.key.localeCompare(b.key) || a.label.localeCompare(b.label) || a.text.localeCompare(b.text))
+  return out.sort((a, b) => compareCodeUnits(a.key, b.key) || compareCodeUnits(a.label, b.label) || compareCodeUnits(a.text, b.text))
 }

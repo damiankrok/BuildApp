@@ -14,7 +14,7 @@
  * reported as one.
  */
 import type { SourceClassification } from '../../adapter.js'
-import { deaccent } from '../../text.js'
+import { compareCodeUnits, deaccent } from '../../text.js'
 import { ANY_DRAWING_WORD, DOCUMENT_WORDS, HOUSE_WORDS } from './vocabulary.js'
 import { jsonLdStrings, jsonLdTypes, type PageFacts } from './markup.js'
 
@@ -103,7 +103,7 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
 
   const score = signals.reduce((a, s) => a + s.weight, 0)
   const families = new Set(signals.map((s) => s.family))
-  const evidence = [...signals].sort((a, b) => b.weight - a.weight || a.signal.localeCompare(b.signal)).map((s) => ({ signal: s.signal, detail: s.detail, weight: s.weight }))
+  const evidence = [...signals].sort((a, b) => b.weight - a.weight || compareCodeUnits(a.signal, b.signal)).map((s) => ({ signal: s.signal, detail: s.detail, weight: s.weight }))
   const confidence = Math.min(1, Math.round((score / 8) * 100) / 100)
 
   if (score >= MIN_SCORE && families.size >= MIN_FAMILIES) return { verdict: 'PROJECT_PAGE', confidence, evidence }

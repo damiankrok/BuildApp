@@ -746,8 +746,8 @@ jobs:
           {
             echo "### Third house — Kosaćce (INTEGRATION-004A)"; echo
             echo '```'; tail -n 8 third-house/live.log 2>/dev/null; echo '```'
-            [ -f third-house/sealed-replay/result-summary.json ] && echo "sealed replay: $(node -e "const r=require('./third-house/sealed-replay/result-summary.json'); console.log(r.outcome, r.modelHash.slice(0,16))")"
-            [ -f third-house/sealed-replay/failure.json ] && { echo "sealed replay:"; echo '```'; node -e "const f=require('./third-house/sealed-replay/failure.json'); console.log(f.code, '/', f.reasonCode, '—', f.message)"; echo '```'; }
+            if [ -f third-house/sealed-replay/result-summary.json ]; then echo "sealed replay: $(node -e "const r=require('./third-house/sealed-replay/result-summary.json'); console.log(r.outcome, r.modelHash.slice(0,16))")"; fi
+            if [ -f third-house/sealed-replay/failure.json ]; then echo "sealed replay:"; echo '```'; node -e "const f=require('./third-house/sealed-replay/failure.json'); console.log(f.code, '/', f.reasonCode, '—', f.message)"; echo '```'; fi
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload the third-house record
         if: always()

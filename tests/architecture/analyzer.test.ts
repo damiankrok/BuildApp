@@ -244,4 +244,15 @@ describe('acquisition has one authoritative path', () => {
       for (const term of ['archon', 'fancybox']) expect(code.includes(term), `${file} knows about ${term}`).toBe(false)
     }
   })
+
+  it('the generic project-page reader knows no publisher and no house (INTEGRATION-004A)', () => {
+    const files = packageSrc('source-package').filter((f) => f.includes(join('src', 'adapters', 'generic')))
+    expect(files.length).toBeGreaterThan(0)
+    for (const file of files) {
+      const code = codeOf(file).toLowerCase()
+      for (const term of ['archon', 'fancybox', 'projektydomow', 'marcow', 'kosac', 'rarytas', 'larchfield', '.pl/', '.pl\'', '.pl"']) {
+        expect(code.includes(term), `${file} names ${term}`).toBe(false)
+      }
+    }
+  })
 })

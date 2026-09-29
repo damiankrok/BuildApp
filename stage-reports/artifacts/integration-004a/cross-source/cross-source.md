@@ -1,7 +1,7 @@
 # Cross-source comparison
 
-archon.pl: `/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/marcowki-baseline`
-projektydomownowoczesnych.pl: `/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/alt-marcowki`
+archon.pl: `marcowki-baseline` (ARCHON, desktop run)
+projektydomownowoczesnych.pl: `alternate-marcowki` (generic reader, sealed beside this stage)
 
 | aspect | archon.pl | projektydomownowoczesnych.pl | verdict |
 | --- | --- | --- | --- |

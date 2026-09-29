@@ -82,7 +82,7 @@ export function geometryFingerprint(scene: Pick<CompiledScene, 'meshes'>): strin
 const normalizeTitle = (title: string | undefined): string | undefined => {
   if (!title) return undefined
   const t = deaccent(title)
-    .replace(/^(nowoczesny\s+)?projekt(u)?\s+(domu\s+)?/, '')
+    .replace(/^projekt(u)?\s+(domu\s+)?/, '')
     .replace(/\s+dane\s+projektu$/, '')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim()

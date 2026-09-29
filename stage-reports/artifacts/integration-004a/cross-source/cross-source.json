@@ -183,9 +183,8 @@
   "schema": "buildapp.cross-source-comparison",
   "schemaVersion": "1.0.0",
   "sources": {
-    "archon.pl": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/marcowki-baseline",
-    "projektydomownowoczesnych.pl": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/runs/alt-marcowki"
+    "archon.pl": "marcowki-baseline",
+    "projektydomownowoczesnych.pl": "alt-marcowki"
   },
   "why": "12 aspects agree and none disagrees, but the geometry is not identical (one side has no reconstruction)"
 }
-

@@ -15,10 +15,10 @@ export type WordRule = { test: RegExp; claim: Omit<RoleClaim, 'signal' | 'detail
 
 /** Ordered: the first matching document rule wins the document dimension. */
 export const DOCUMENT_WORDS: WordRule[] = [
-  { test: /\brzut\w*|\bfloor[- ]?plans?\b|\bfloorplans?\b|\bgrundriss|\bplan\b|\bplany\b/, claim: { document: 'FLOOR_PLAN' }, confidence: 0.92, why: '"rzut" / "floor plan" names a floor plan' },
   { test: /\bprzekr\w*|\bsections?\b|\bschnitt/, claim: { document: 'SECTION' }, confidence: 0.92, why: '"przekrój" / "section" names a section' },
   { test: /\belewacj\w*|\belevations?\b|\bfa[cç]ades?\b|\bfasad\w*|\bansicht/, claim: { document: 'ELEVATION' }, confidence: 0.92, why: '"elewacja" / "elevation" names an elevation' },
   { test: /\bsytuacj\w*|\bobrys\w*|\bsite[- ]?plan|\bplan zagospodarowania|\bdzialk\w*|\bplot\b/, claim: { document: 'SITE_PLAN' }, confidence: 0.88, why: '"sytuacja" / "obrys" / "site plan" names a site plan' },
+  { test: /\brzut\w*|\bfloor[- ]?plans?\b|\bfloorplans?\b|\bgrundriss|\bplan\b|\bplany\b/, claim: { document: 'FLOOR_PLAN' }, confidence: 0.92, why: '"rzut" / "floor plan" names a floor plan' },
   { test: /\bwizualizacj\w*|\bwizualka|\brender\w*|\bwidok\w*|\bperspekt\w*|\bvisuali[sz]\w*|\bstylizacj\w*|\b3d\b/, claim: { document: 'PERSPECTIVE_RENDER' }, confidence: 0.86, why: '"wizualizacja" / "render" / "widok" names a visualisation' },
 ]
 
@@ -32,8 +32,8 @@ export const STOREY_WORDS: WordRule[] = [
 export const VIEW_WORDS: WordRule[] = [
   { test: /\bfrontow\w*|\bprzedni\w*|\bfront\b/, claim: { view: 'FRONT' }, confidence: 0.9, why: '"frontowa" / "front" is the front' },
   { test: /\bogrodow\w*|\btyln\w*|\brear\b|\bback\b|\bgarden\b/, claim: { view: 'REAR' }, confidence: 0.9, why: '"ogrodowa" / "rear" is the rear' },
-  { test: /\blew\w*|\bleft\b/, claim: { view: 'SIDE_LEFT' }, confidence: 0.85, why: '"lewa" / "left" is the left side' },
-  { test: /\bpraw\w*|\bright\b/, claim: { view: 'SIDE_RIGHT' }, confidence: 0.85, why: '"prawa" / "right" is the right side' },
+  { test: /\blew(a|y|ej|ym|o|e)\b|\bleft\b/, claim: { view: 'SIDE_LEFT' }, confidence: 0.85, why: '"lewa" / "left" is the left side' },
+  { test: /\bpraw(a|y|ej|ym|o|e)\b|\bright\b/, claim: { view: 'SIDE_RIGHT' }, confidence: 0.85, why: '"prawa" / "right" is the right side' },
   { test: /\bboczn\w*|\bside\b/, claim: { view: 'SIDE_UNSPECIFIED' }, confidence: 0.88, why: '"boczna" / "side" names a side without saying which' },
 ]
 

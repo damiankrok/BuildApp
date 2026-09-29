@@ -20,7 +20,7 @@
  * followed from a followed page: this is not a spider.
  */
 import { absolutize, decodeEntities, discoverImages, looksLikeDocument, looksLikeImage, type DiscoveredCandidate } from '../../discovery.js'
-import { deaccent, stripTags } from '../../text.js'
+import { compareCodeUnits, deaccent, stripTags } from '../../text.js'
 import { contextAt, type PageFacts } from './markup.js'
 import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS } from './vocabulary.js'
 
@@ -155,7 +155,7 @@ export function drawingLinks(facts: PageFacts, pageUrl: string): string[] {
     const key = target.toString()
     if (!out.has(key)) out.set(key, under)
   }
-  return [...out.entries()].sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])).map(([url]) => url).slice(0, MAX_CRAWL_PAGES)
+  return [...out.entries()].sort((a, b) => a[1] - b[1] || compareCodeUnits(a[0], b[0])).map(([url]) => url).slice(0, MAX_CRAWL_PAGES)
 }
 
 /**
@@ -202,7 +202,7 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
     }
     out.push({ ...c, caption: c.caption ?? (info?.words || undefined), context: info?.context, groupKey: c.groupKey ?? pictures.groups.get(c.url) })
   }
-  return out.sort((a, b) => a.url.localeCompare(b.url) || a.channel.localeCompare(b.channel) || a.locator.localeCompare(b.locator))
+  return out.sort((a, b) => compareCodeUnits(a.url, b.url) || compareCodeUnits(a.channel, b.channel) || compareCodeUnits(a.locator, b.locator))
 }
 
 /**

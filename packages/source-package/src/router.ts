@@ -60,9 +60,9 @@ export function routeSourceAcquisition(ctx: AdapterContext, adapters: readonly S
   if (specialist) return { kind: 'SPECIALIST', adapter: specialist }
   const generic = adapters.find((a) => isGeneric(a) && a.matches(url))
   if (!generic) return { kind: 'NO_ADAPTER' }
-  const classification = generic.classify
-    ? generic.classify(ctx)
-    : { verdict: 'PROJECT_PAGE' as const, confidence: 0, evidence: [{ signal: 'no-classifier', detail: `${generic.id} classifies nothing; every page is read`, weight: 0 }] }
+  // A generic reader must classify: without a classifier it would read every page, so it reads none.
+  if (!generic.classify) return { kind: 'NO_ADAPTER' }
+  const classification = generic.classify(ctx)
   if (classification.verdict === 'PROJECT_PAGE') return { kind: 'GENERIC', adapter: generic, classification }
   return { kind: 'UNSUPPORTED_CONTENT', code: classification.verdict === 'NOT_PROJECT' ? 'SOURCE_NOT_PROJECT' : 'SOURCE_REQUIRES_RENDERING', classification, adapter: generic }
 }

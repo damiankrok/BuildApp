@@ -16,7 +16,7 @@ import { channelClaims } from '../../adapter.js'
 import type { AdapterContext, ProjectIdentity, SourceAdapter, SourceClassification } from '../../adapter.js'
 import type { DiscoveredCandidate } from '../../discovery.js'
 import type { RoleClaim } from '../../roles.js'
-import { deaccent } from '../../text.js'
+import { compareCodeUnits, deaccent } from '../../text.js'
 import { discoverOnDocument, drawingLinks, sizeStem, type DroppedCandidate } from './assets.js'
 import { classifyProjectPage } from './classify.js'
 import { jsonLdStrings, readPageFacts, type PageFacts } from './markup.js'
@@ -139,7 +139,7 @@ export async function genericDiscover(ctx: AdapterContext, report?: GenericDisco
       out.push(c)
     }
   }
-  return out.sort((a, b) => a.url.localeCompare(b.url) || a.channel.localeCompare(b.channel) || a.locator.localeCompare(b.locator))
+  return out.sort((a, b) => compareCodeUnits(a.url, b.url) || compareCodeUnits(a.channel, b.channel) || compareCodeUnits(a.locator, b.locator))
 }
 
 export const genericProjectPageAdapter: SourceAdapter = {
@@ -149,7 +149,7 @@ export const genericProjectPageAdapter: SourceAdapter = {
   matches: (url) => url.protocol === 'https:' && url.hostname !== '',
   classify: genericClassify,
   identify: genericIdentity,
-  displayTitle: (identity) => identity.name?.replace(/^(nowoczesny\s+)?projekt(u)?\s+(domu\s+)?/i, '').replace(/\s+dane\s+projektu$/i, '').trim() || undefined,
+  displayTitle: (identity) => identity.name?.replace(/^projekt(u)?\s+(domu\s+)?/i, '').replace(/\s+dane\s+projektu$/i, '').trim() || undefined,
   discover: (ctx) => genericDiscover(ctx),
   resolutionCandidates: () => [],
   roleClaims: genericRoleClaims,
