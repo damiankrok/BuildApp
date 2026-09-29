@@ -239,3 +239,42 @@ new topology demo (bounds and volumes to 1e-9, identical triangle count).
   wall). Oblique corners are exact with owner-through cuts.
 - Overlap detection uses each wall's nominal height range; walls that overlap
   in plan but not in height are fine (stacked storeys).
+
+## Partitions from the analyzer: planned before they are emitted (INTEGRATION-004A)
+
+The plan reader hands the emitter partition RUNS read off ink a few pixels
+wide. Emitted as read, runs that meet, cross, duplicate or hug an exterior
+wall share plan area and the model refuses the second of them as
+`WALLS_OVERLAP` — which is right, and which is exactly where the third house
+(Kosaćce 46) failed: a 0.53 m stub read 8 mm inside the east ring wall's
+band. `packages/reconstruction/src/v2/wall-topology.ts` plans the runs first,
+by named, generic, evidence-bounded decisions in a fixed order:
+
+1. **duplicates fused** — same axis, overlapping bands, shared length: one
+   wall observed twice, the longer keeps its identity;
+2. **hosts respected** — a run more than half inside a parallel exterior wall
+   is that wall seen from inside (dropped); a run grazing it by less is
+   measurement noise and is snapped clear of the face;
+3. **ends against exterior walls** clamped to the inner face on the side the
+   run lies (a partition never passes through an exterior wall);
+4. **crossings split** — two partitions that each continue past the other:
+   the thinner one, or the Z run when alike, becomes two runs;
+5. **stubs dropped** — a run lying wholly within a perpendicular partition's
+   band is that junction's ink;
+6. **ends against partitions** trimmed one at a time; at an L corner the
+   convention is the rings' (`ALTERNATE`: the front and rear own their
+   corners): the X wall owns the corner block and the Z wall arrives at its
+   face; a lone end (a T) is resolved by depth;
+7. **shorts dropped**, then **the audit**: anything still sharing area is left
+   out and named as an unresolved joint (a gap in the record), never emitted
+   invalid.
+
+The validator's tolerance is untouched, and the model still refuses the raw
+runs. Every decision is recorded with its metres (`EmitResult.topology`,
+the `WALL_TOPOLOGY` trace step, `MODEL_EMISSION_FAILED` diagnostics carry the
+command id, both wall ids and the measured overlap). Marcówki and Rarytasy
+replay byte-identical through the planner; the matrix in
+`packages/reconstruction/test/wall-topology.test.ts` covers L, T (exterior
+and interior), cross, duplicate, partial overlap, noise, separate walls, and
+an overlap that must still fail — and replays every emitted prefix through
+the real DSL.

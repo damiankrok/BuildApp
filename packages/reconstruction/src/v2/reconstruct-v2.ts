@@ -1027,17 +1027,39 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   step({ stage: 'verification', what: 'the model projected into the registered views', method: 'DIRECT', detail: `${residuals.length} residuals, ${residuals.filter((r) => !r.withinTolerance).length} outside tolerance after ${repair.iterations.length} repair round${repair.iterations.length === 1 ? '' : 's'} (${repair.iterations.reduce((a, i) => a + i.applied.length, 0)} applied, ${repair.iterations.reduce((a, i) => a + i.refused.length, 0)} refused)`, inputs: residualsBefore.length, outputs: residuals.length })
   for (const it of repair.iterations) for (const op of it.applied) ctx.traces.push({ objectId: op.featureId, kind: 'repair', hypothesisId: `hyp-${op.featureId}`, evidenceIds: [], observationIds: [], rejected: [], why: op.why })
 
-  const emitted = emitBuilding(building, options.label)
+  const emitted = emitBuilding(building, options.label, options.debug)
   const { dropped } = emitted
+  // The wall topology plan (004A): what was fused, snapped, trimmed or split before
+  // the partitions were emitted, and the joints that could not be resolved — each
+  // of those a named hole, never an invalid wall.
+  if (emitted.topology.decisions.length > 0) {
+    const byKind: Record<string, number> = {}
+    for (const d of emitted.topology.decisions) byKind[d.kind] = (byKind[d.kind] ?? 0) + 1
+    step({ stage: 'emission', what: 'partition topology planned before emission', method: 'DIRECT', detail: Object.entries(byKind).sort().map(([k, n]) => `${n} ${k.toLowerCase().replace(/_/g, ' ')}`).join('; '), inputs: emitted.topology.decisions.length, outputs: emitted.topology.unresolved.length })
+    trace({ phase: 'MODEL', substage: 'WALL_TOPOLOGY', status: emitted.topology.unresolved.length > 0 ? 'DEGRADED' : 'PASSED', counts: { decisions: emitted.topology.decisions.length, unresolvedJoints: emitted.topology.unresolved.length, ...Object.fromEntries(Object.entries(byKind).map(([k, n]) => [k.toLowerCase(), n])) } })
+  }
+  for (const u of emitted.topology.unresolved) gap({ what: u.what, reason: u.reason, status: 'AMBIGUOUS', observationIds: [], evidenceIds: [] })
   const modelId = (options.modelId ?? `m-auto-v2-${options.slug}`).replace(/[^A-Za-z0-9_.:-]+/g, '-')
   // The model's own validator decides what fits; only openings it refuses as
   // not fitting their host are shrunk or dropped, and each one is named.
   const fit = fitOpeningsToHosts(emitted.program, options.label, modelId)
   if (!fit.ok) {
+    // What the model refused, in enough detail to find the first wrong inference
+    // (004A): the command's own id, the objects the validator named, the largest
+    // measured violation, and the validator's sentence — which names walls and
+    // metres and nothing about the machine.
+    const objectIds = [...new Set(fit.errors.map((e) => e.objectId).filter((id): id is string => typeof id === 'string'))]
+    const measured = fit.errors.map((e) => (e as { measured?: number }).measured).filter((m): m is number => typeof m === 'number')
+    const otherWall = fit.errors.map((e) => /walls? (\S+) and (\S+) share/.exec(e.message ?? '')).find((m) => m)
     throw new ReconstructionFailure('MODEL_EMISSION_FAILED', 'MODEL', `the model refused command ${fit.failedAt} (${fit.command.type}): ${fit.errors.map((e) => e.code).join(', ')}`, {
       command: fit.command.type,
       codes: [...new Set(fit.errors.map((e) => e.code))].join(','),
       commandIndex: fit.failedAt,
+      ...('id' in fit.command && typeof fit.command.id === 'string' ? { commandId: fit.command.id } : {}),
+      ...(objectIds.length > 0 ? { objectIds: objectIds.join(',') } : {}),
+      ...(otherWall ? { walls: `${otherWall[1]},${otherWall[2]}` } : {}),
+      ...(measured.length > 0 ? { measured: Math.max(...measured) } : {}),
+      ...(fit.errors[0]?.message ? { detail: fit.errors[0].message.slice(0, 200) } : {}),
     })
   }
   const program = fit.program

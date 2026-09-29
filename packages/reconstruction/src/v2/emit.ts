@@ -15,10 +15,22 @@ import type { BuildingV2, MassV2 } from './building.js'
 import type { ProvenanceStatus } from './graph.js'
 import type { OpeningV2 } from './openings-v2.js'
 import { CONVENTIONS } from '../solve.js'
+import { planWallTopology } from './wall-topology.js'
+import type { HostBand, PlanDecision, WallTopologyPlan } from './wall-topology.js'
 
 export type Binding = { featureId: string; objectId: string; objectKind: string; commandIndex: number }
 
-export type EmitResult = { program: BuildingCommand[]; bindings: Binding[]; notes: string[]; dropped: Array<{ featureId: string; why: string }> }
+export type TopologyDecision = PlanDecision & { storeyIndex: number }
+export type UnresolvedJoint = WallTopologyPlan['unresolved'][number] & { storeyIndex: number }
+
+export type EmitResult = {
+  program: BuildingCommand[]
+  bindings: Binding[]
+  notes: string[]
+  dropped: Array<{ featureId: string; why: string }>
+  /** What the wall topology planner decided on the partitions, and which joints it could not resolve (004A). */
+  topology: { decisions: TopologyDecision[]; unresolved: UnresolvedJoint[] }
+}
 
 export const MATERIALS_V2 = {
   wall: 'mat-wall',
@@ -80,6 +92,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   const bindings: Binding[] = []
   const notes: string[] = []
   const dropped: Array<{ featureId: string; why: string }> = []
+  const topology: EmitResult['topology'] = { decisions: [], unresolved: [] }
   const push = (command: BuildingCommand, featureId?: string, objectKind?: string): void => {
     program.push(command)
     if (featureId && objectKind && 'id' in command && typeof command.id === 'string') bindings.push({ featureId, objectId: command.id, objectKind, commandIndex: program.length - 1 })
@@ -102,6 +115,7 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
   push({ type: 'defineMaterial', id: MATERIALS_V2.terrace, name: 'Terrace paving', color: '#a49c92' })
   push({ type: 'defineMaterial', id: MATERIALS_V2.mid, name: 'Grey render', color: '#8e8983' })
 
+  for (const m of b.masses) onDebug?.(`mass ${m.id} (${m.role}) x ${m.x0}..${m.x1} z ${m.z0}..${m.z1} storeys ${m.storeys.join(',')} wall ${b.wallThicknessM}`)
   const levelId = (index: number): string => b.levels.find((l) => l.index === index)?.id ?? 'lvl-0'
   const levelOf = (index: number) => b.levels.find((l) => l.index === index)
   for (const l of b.levels) {
@@ -227,67 +241,62 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
       runs.push(run)
     }
     const height = isTop ? round6(l.height) : round6(l.height - b.slabThicknessM)
-    // Ends are trimmed short of whatever they meet — the exterior ring's inner
-    // face, a perpendicular partition — so no two walls share plan area; the
-    // model's wall compiler wants a declared junction for that, and a 15 mm
-    // gap at a partition end is below anything the plan states.
+    // The topology plan (004A): the raw runs against the exterior walls of every
+    // body on this storey and against each other — duplicates fused, a run inside
+    // an exterior wall dropped, a grazing run snapped clear, ends trimmed to the
+    // face they meet, crossings split, and anything still sharing area left out
+    // and named. No two emitted walls share plan area, so no junction record is
+    // needed for the model to accept them, and every command prefix is valid.
     const gapM = 0.015
-    const massOf = (run: Run): MassV2 | undefined => b.masses.find((m) => m.storeys.includes(storey.storeyIndex) && (run.axis === 'X' ? run.at >= m.z0 && run.at <= m.z1 && run.from >= m.x0 - 0.5 && run.to <= m.x1 + 0.5 : run.at >= m.x0 && run.at <= m.x1 && run.from >= m.z0 - 0.5 && run.to <= m.z1 + 0.5))
-    for (const run of runs) {
-      const m = massOf(run)
-      if (m) {
-        const inner = run.axis === 'X' ? [m.x0 + b.wallThicknessM, m.x1 - b.wallThicknessM] : [m.z0 + b.wallThicknessM, m.z1 - b.wallThicknessM]
-        run.from = Math.max(run.from, inner[0] + gapM)
-        run.to = Math.min(run.to, inner[1] - gapM)
-      }
-      for (const other of runs) {
-        if (other === run || other.axis === run.axis) continue
-        const otherHalf = other.thicknessM / 2
-        const crossesRun = other.from - 0.05 <= run.at && other.to + 0.05 >= run.at
-        if (!crossesRun) continue
-        if (Math.abs(run.from - other.at) <= otherHalf + 0.06) run.from = round6(other.at + otherHalf + gapM)
-        if (Math.abs(run.to - other.at) <= otherHalf + 0.06) run.to = round6(other.at - otherHalf - gapM)
-      }
+    const hosts: HostBand[] = []
+    for (const m of b.masses.filter((x) => x.storeys.includes(storey.storeyIndex))) {
+      const T = b.wallThicknessM
+      const ring = `ring-${m.id}-${storey.storeyIndex}`
+      hosts.push({ id: `${ring}-w0`, axis: 'X', at: round6(m.z0 + T / 2), thicknessM: T, from: m.x0, to: m.x1 })
+      hosts.push({ id: `${ring}-w1`, axis: 'Z', at: round6(m.x1 - T / 2), thicknessM: T, from: m.z0, to: m.z1 })
+      hosts.push({ id: `${ring}-w2`, axis: 'X', at: round6(m.z1 - T / 2), thicknessM: T, from: m.x0, to: m.x1 })
+      hosts.push({ id: `${ring}-w3`, axis: 'Z', at: round6(m.x0 + T / 2), thicknessM: T, from: m.z0, to: m.z1 })
     }
-    // A second pass on the rectangles themselves: any end that still lies
-    // inside a perpendicular partition is pulled back to its face.
-    const rectOf = (r: Run): { x0: number; z0: number; x1: number; z1: number } => (r.axis === 'X' ? { x0: r.from, x1: r.to, z0: r.at - r.thicknessM / 2, z1: r.at + r.thicknessM / 2 } : { x0: r.at - r.thicknessM / 2, x1: r.at + r.thicknessM / 2, z0: r.from, z1: r.to })
-    for (let pass = 0; pass < 2; pass += 1) {
-      for (const run of runs) {
-        for (const other of runs) {
-          if (other === run || other.axis === run.axis) continue
-          const o = rectOf(other)
-          const acrossInside = run.axis === 'X' ? run.at > o.z0 - 0.02 && run.at < o.z1 + 0.02 : run.at > o.x0 - 0.02 && run.at < o.x1 + 0.02
-          if (!acrossInside) continue
-          const lo = run.axis === 'X' ? o.x0 : o.z0
-          const hi = run.axis === 'X' ? o.x1 : o.z1
-          if (run.from >= lo - 0.02 && run.from <= hi + 0.02) run.from = round6(hi + gapM)
-          if (run.to >= lo - 0.02 && run.to <= hi + 0.02) run.to = round6(lo - gapM)
-        }
-      }
+    for (const r of b.returns.filter((x) => x.storeyIndex === storey.storeyIndex)) {
+      const alongX = Math.abs(r.end.x - r.start.x) >= Math.abs(r.end.z - r.start.z)
+      // a return is stated on its outer face line; its material lies on the side of the mass it belongs to
+      const half = r.thicknessM / 2
+      const inward = r.side === 'FRONT' ? 1 : r.side === 'REAR' ? -1 : r.side === 'WEST' ? 1 : -1
+      hosts.push(alongX ? { id: r.id, axis: 'X', at: round6(r.start.z + inward * half), thicknessM: r.thicknessM, from: Math.min(r.start.x, r.end.x), to: Math.max(r.start.x, r.end.x) } : { id: r.id, axis: 'Z', at: round6(r.start.x + inward * half), thicknessM: r.thicknessM, from: Math.min(r.start.z, r.end.z), to: Math.max(r.start.z, r.end.z) })
     }
-    for (const run of runs) onDebug?.(`storey ${storey.storeyIndex} run ${run.featureId} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM} doors ${run.doors.map((d) => `${d.from}..${d.to}`).join(',')}`)
-    for (const run of runs) {
-      if (run.to - run.from < 0.2) {
-        for (const piece of run.pieces) dropped.push({ featureId: piece, why: `the partition is ${(run.to - run.from).toFixed(2)} m long once trimmed to the walls it meets` })
-        continue
-      }
+    const doorById = new Map(storey.doors.map((d) => [d.id, d]))
+    for (const run of runs) onDebug?.(`storey ${storey.storeyIndex} raw ${run.featureId} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM}`)
+    const plan = planWallTopology(
+      runs.map((run) => ({ id: run.featureId, axis: run.axis, at: run.at, from: run.from, to: run.to, thicknessM: run.thicknessM, pieces: run.pieces, doors: run.doors.map((d) => ({ id: d.id, from: Math.min(d.from, d.to), to: Math.max(d.from, d.to), widthM: d.widthM })), featureId: run.featureId })),
+      hosts,
+      { gapM },
+    )
+    for (const d of plan.decisions) {
+      notes.push(`storey ${storey.storeyIndex}: ${d.kind.toLowerCase().replace(/_/g, ' ')} — ${d.detail}`)
+      onDebug?.(`storey ${storey.storeyIndex} topology ${d.kind} ${d.detail}`)
+    }
+    for (const u of plan.unresolved) topology.unresolved.push({ storeyIndex: storey.storeyIndex, ...u })
+    topology.decisions.push(...plan.decisions.map((d) => ({ storeyIndex: storey.storeyIndex, ...d })))
+    for (const d of plan.dropped) dropped.push({ featureId: d.pieceId, why: d.why })
+    for (const run of plan.runs) onDebug?.(`storey ${storey.storeyIndex} run ${run.id} ${run.axis} at ${run.at} ${run.from}..${run.to} t ${run.thicknessM} doors ${run.doors.map((d) => `${d.from}..${d.to}`).join(',')}`)
+    for (const run of plan.runs) {
       const half = run.thicknessM / 2
       const start = run.axis === 'X' ? { x: round6(run.from), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.from) }
       const end = run.axis === 'X' ? { x: round6(run.to), z: round6(run.at - half) } : { x: round6(run.at + half), z: round6(run.to) }
-      push({ type: 'createWall', id: run.featureId, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
-      emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), run.featureId])
-      for (const piece of run.pieces) if (piece !== run.featureId) bindings.push({ featureId: piece, objectId: run.featureId, objectKind: 'walls', commandIndex: program.length - 1 })
-      evidence(run.featureId, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: 'SOURCE_DERIVED' })
+      push({ type: 'createWall', id: run.id, levelId: l.id, start, end, thickness: round6(run.thicknessM), height, baseOffset: 0, kind: 'INTERIOR', materialId: MATERIALS_V2.partition }, run.featureId, 'walls')
+      emittedInteriorByStorey.set(storey.storeyIndex, [...(emittedInteriorByStorey.get(storey.storeyIndex) ?? []), run.id])
+      for (const piece of run.pieces) if (piece !== run.id) bindings.push({ featureId: piece, objectId: run.id, objectKind: 'walls', commandIndex: program.length - 1 })
+      evidence(run.id, 'SOURCE_DERIVED', `${run.pieces.length} piece${run.pieces.length === 1 ? '' : 's'} of partition ink on the plan${run.doors.length > 0 ? ` with ${run.doors.length} door gap${run.doors.length === 1 ? '' : 's'}` : ''}`, { height: 'SOURCE_DERIVED' })
       for (const d of run.doors) {
         // A door needs wall on both sides of it: a gap at a trimmed end (a block jamb) is narrowed to leave a stub.
         const runLength = round6(run.to - run.from)
-        const offset = round6(Math.max(0.06, Math.min(d.from, d.to) - run.from))
+        const offset = round6(Math.max(0.06, d.from - run.from))
         const width = round6(Math.min(d.widthM, runLength - 0.06 - offset))
         if (width < 0.5 || offset + width > runLength - 0.05) continue
-        push({ type: 'cutOpening', id: d.id, wallId: run.featureId, kind: 'DOOR', offset, sill: 0, width, height: Math.min(CONVENTIONS.doorHeight, round6(height - 0.1)) }, d.id, 'openings')
+        const source = doorById.get(d.id)
+        push({ type: 'cutOpening', id: d.id, wallId: run.id, kind: 'DOOR', offset, sill: 0, width, height: Math.min(CONVENTIONS.doorHeight, round6(height - 0.1)) }, d.id, 'openings')
         push({ type: 'placeDoor', id: `${d.id}-leaf`, openingId: d.id, frameDepth: round6(Math.min(0.1, run.thicknessM * 0.6)), frameInset: 0.01, leafThickness: round6(Math.min(0.045, run.thicknessM * 0.3)), materialId: MATERIALS_V2.timber }, d.id, 'doors')
-        evidence(d.id, 'SOURCE_DERIVED', d.why, { height: 'ASSUMED_FOR_RENDERING' })
+        evidence(d.id, 'SOURCE_DERIVED', source?.why ?? 'a door gap in the partition ink', { height: 'ASSUMED_FOR_RENDERING' })
       }
     }
     for (const room of storey.rooms) {
@@ -522,5 +531,5 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     evidence(r.id, 'VISUAL_SEMANTIC', `a ${r.tone.toLowerCase()} finish region read on the render: colour, not geometry`)
   }
 
-  return { program, bindings, notes, dropped }
+  return { program, bindings, notes, dropped, topology }
 }
