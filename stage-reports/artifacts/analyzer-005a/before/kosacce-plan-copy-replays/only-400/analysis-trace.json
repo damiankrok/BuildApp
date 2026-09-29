@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 0,
+        "cells": 10,
+        "dimensionChains": 30,
+        "dimensionChainsRead": 3,
+        "enclosedCells": 0,
+        "gridLinesX": 6,
+        "gridLinesY": 3,
+        "masses": 0,
+        "planFrames": 4,
+        "planSizePx": "400x400",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 1.6766,
+        "selectedPlanFrameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+        "wallBands": 49,
+        "wallThicknessPx": 9,
+        "walledEnvelope": false,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "49 wall bands were found on the 400×400 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+      "durationMs": 0,
+      "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "FAILED",
+      "substage": "PLAN_DECOMPOSITION"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

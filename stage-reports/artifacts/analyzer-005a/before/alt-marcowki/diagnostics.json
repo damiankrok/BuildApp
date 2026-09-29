@@ -1,0 +1,1425 @@
+{
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "diagnostics": {
+      "builtRegions": 2,
+      "cells": 10,
+      "dimensionChains": 23,
+      "dimensionChainsRead": 4,
+      "enclosedCells": 8,
+      "gateBlocking": "FOOTPRINT_AREA_WRONG",
+      "gridLinesX": 3,
+      "gridLinesY": 6,
+      "masses": 2,
+      "planFrames": 4,
+      "planSizePx": "550x550",
+      "plansRead": 2,
+      "recessRegions": 0,
+      "scaleCmPerPx": 1.5915,
+      "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "wallBands": 38,
+      "wallThicknessPx": 11,
+      "walledEnvelope": true,
+      "wideOpenings": 0,
+      "wideOpeningsClosed": 0
+    },
+    "message": "the lowest storey covers 19.56 m² against the 131.16 m² the publisher prints — 85.1% apart: the decomposition is not of this building",
+    "reasonCode": "PLAN_LAYOUT_REJECTED",
+    "stage": "REGISTERING_VIEWS",
+    "substage": "STRUCTURAL_LAYOUT",
+    "title": "The floor-plan reading contradicts the project data"
+  },
+  "outcome": "FAILED",
+  "plans": {
+    "planFrames": 4,
+    "plans": [
+      {
+        "annotation": "UNKNOWN",
+        "assetId": "asset-dom-w-marcowkach-ge-rzut-parteru-d06c513afe",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 458,
+              "x1": 477,
+              "y0": 84,
+              "y1": 86
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 462,
+              "x1": 500,
+              "y0": 169,
+              "y1": 180
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 335,
+              "x1": 385,
+              "y0": 274,
+              "y1": 294
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 234,
+              "x1": 323,
+              "y0": 293,
+              "y1": 308
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 366,
+              "x1": 384,
+              "y0": 328,
+              "y1": 331
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 335,
+              "x1": 382,
+              "y0": 383,
+              "y1": 389
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 435,
+              "x1": 500,
+              "y0": 465,
+              "y1": 475
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 308,
+              "x1": 431,
+              "y0": 462,
+              "y1": 476
+            },
+            "thickness": 12.75
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 451,
+              "x1": 498,
+              "y0": 483,
+              "y1": 493
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 436,
+              "x1": 482,
+              "y0": 483,
+              "y1": 494
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 332,
+              "x1": 360,
+              "y0": 504,
+              "y1": 505
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 316,
+              "x1": 360,
+              "y0": 504,
+              "y1": 515
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 109,
+              "x1": 127,
+              "y0": 509,
+              "y1": 514
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 331,
+              "x1": 360,
+              "y0": 511,
+              "y1": 514
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 156,
+              "x1": 173,
+              "y0": 516,
+              "y1": 521
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 184,
+              "x1": 204,
+              "y0": 517,
+              "y1": 537
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 156,
+              "x1": 173,
+              "y0": 531,
+              "y1": 535
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 109,
+              "x1": 127,
+              "y0": 531,
+              "y1": 536
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 21,
+              "x1": 27,
+              "y0": 515,
+              "y1": 536
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 39,
+              "x1": 45,
+              "y0": 515,
+              "y1": 536
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 49,
+              "x1": 54,
+              "y0": 514,
+              "y1": 531
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 71,
+              "x1": 76,
+              "y0": 514,
+              "y1": 531
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 80,
+              "x1": 86,
+              "y0": 514,
+              "y1": 536
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 98,
+              "x1": 104,
+              "y0": 514,
+              "y1": 536
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 141,
+              "x1": 146,
+              "y0": 509,
+              "y1": 536
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 184,
+              "x1": 204,
+              "y0": 517,
+              "y1": 537
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 225,
+              "x1": 235,
+              "y0": 503,
+              "y1": 534
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 223,
+              "x1": 238,
+              "y0": 305,
+              "y1": 500
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 253,
+              "x1": 256,
+              "y0": 181,
+              "y1": 199
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 324,
+              "x1": 334,
+              "y0": 264,
+              "y1": 461
+            },
+            "thickness": 10.125
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 324,
+              "x1": 339,
+              "y0": 145,
+              "y1": 168
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 327,
+              "x1": 337,
+              "y0": 111,
+              "y1": 143
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 383,
+              "x1": 387,
+              "y0": 328,
+              "y1": 347
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 468,
+              "x1": 472,
+              "y0": 55,
+              "y1": 72
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 504,
+              "x1": 509,
+              "y0": 46,
+              "y1": 64
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 501,
+              "x1": 516,
+              "y0": 476,
+              "y1": 500
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 504,
+              "x1": 514,
+              "y0": 95,
+              "y1": 143
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 501,
+              "x1": 516,
+              "y0": 145,
+              "y1": 464
+            },
+            "thickness": 12.25
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 230.5,
+              "x1": 329.4375,
+              "y0": 193.5,
+              "y1": 232
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 193.5,
+              "y1": 232
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 1,
+            "rect": {
+              "x0": 230.5,
+              "x1": 329.4375,
+              "y0": 232,
+              "y1": 293
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 1,
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 232,
+              "y1": 293
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 2,
+            "rect": {
+              "x0": 230.5,
+              "x1": 329.4375,
+              "y0": 293,
+              "y1": 341.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 2,
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 293,
+              "y1": 341.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 3,
+            "rect": {
+              "x0": 230.5,
+              "x1": 329.4375,
+              "y0": 341.5,
+              "y1": 476
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 3,
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 341.5,
+              "y1": 476
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 4,
+            "rect": {
+              "x0": 230.5,
+              "x1": 329.4375,
+              "y0": 476,
+              "y1": 507.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 4,
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 476,
+              "y1": 507.5
+            }
+          }
+        ],
+        "chains": [
+          {
+            "axis": "H",
+            "baselinePx": 177,
+            "read": 0,
+            "ticksPx": [
+              336.5,
+              428,
+              487.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 19,
+            "read": 0,
+            "ticksPx": [
+              222,
+              516
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 202,
+            "read": 0,
+            "ticksPx": [
+              343,
+              418.5,
+              439,
+              471,
+              492
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 255,
+            "read": 0,
+            "ticksPx": [
+              265,
+              286.5,
+              321.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 32,
+            "read": 0,
+            "ticksPx": [
+              222,
+              324,
+              421,
+              515
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 331,
+            "read": 0,
+            "ticksPx": [
+              471,
+              490
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 358,
+            "read": 0,
+            "ticksPx": [
+              347,
+              372,
+              380.875
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 37,
+            "read": 0,
+            "ticksPx": [
+              325,
+              462
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 431,
+            "read": 0,
+            "ticksPx": [
+              341,
+              367
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 187,
+            "read": 1,
+            "ticksPx": [
+              170,
+              193.5,
+              476
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 201,
+            "read": 1,
+            "ticksPx": [
+              145.5,
+              169,
+              183,
+              293,
+              477,
+              500,
+              507.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 234.5,
+            "read": 0,
+            "ticksPx": [
+              484,
+              510.5,
+              529.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 298.5,
+            "read": 0,
+            "ticksPx": [
+              388.5,
+              431
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 322,
+            "read": 0,
+            "ticksPx": [
+              224.5,
+              252
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 353,
+            "read": 0,
+            "ticksPx": [
+              207,
+              250
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 378,
+            "read": 0,
+            "ticksPx": [
+              207,
+              249
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 417,
+            "read": 0,
+            "ticksPx": [
+              417,
+              437.652174,
+              455
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 421,
+            "read": 0,
+            "ticksPx": [
+              188,
+              205,
+              229.5,
+              250
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 455.5,
+            "read": 0,
+            "ticksPx": [
+              38,
+              92
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 471,
+            "read": 0,
+            "ticksPx": [
+              420,
+              432.5,
+              446,
+              460
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 471,
+            "read": 1,
+            "ticksPx": [
+              204,
+              232,
+              301.5,
+              341.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 491,
+            "read": 1,
+            "ticksPx": [
+              104.5,
+              122.5,
+              142.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 496,
+            "read": 0,
+            "ticksPx": [
+              106.5,
+              130.594595,
+              158.5
+            ]
+          }
+        ],
+        "envelope": {
+          "x0": 230.5,
+          "x1": 508.5,
+          "y0": 168.375,
+          "y1": 507.5
+        },
+        "extent": {
+          "x0": 138,
+          "x1": 515.875,
+          "y0": 169,
+          "y1": 518
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+        "hypotheses": [
+          {
+            "builtCells": 8,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 8,
+            "chosen": false,
+            "closedOpenings": 0,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          230.5,
+          329.4375,
+          508.5
+        ],
+        "linesY": [
+          193.5,
+          232,
+          293,
+          341.5,
+          476,
+          507.5
+        ],
+        "masses": [
+          {
+            "id": "mass-0",
+            "rect": {
+              "x0": 230.5,
+              "x1": 508.5,
+              "y0": 293,
+              "y1": 507.5
+            }
+          },
+          {
+            "id": "mass-1",
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 193.5,
+              "y1": 293
+            }
+          }
+        ],
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-2",
+            "rect": {
+              "x0": 230.5,
+              "x1": 508.5,
+              "y0": 293,
+              "y1": 507.5
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-1-0",
+            "rect": {
+              "x0": 329.4375,
+              "x1": 508.5,
+              "y0": 193.5,
+              "y1": 293
+            }
+          }
+        ],
+        "scale": {
+          "anchors": 4,
+          "mppX": 0.015915,
+          "mppY": 0.015915,
+          "rmsM": 0.007817
+        },
+        "sizePx": {
+          "height": 550,
+          "width": 550
+        },
+        "storey": "GROUND",
+        "variantByteHash": "3b5c41b4836c0b58cb9378237df3d47eef3a9d3d24b4636f837bbfb7b8acfbf8",
+        "wallPx": 11,
+        "wideOpenings": []
+      },
+      {
+        "annotation": "UNKNOWN",
+        "assetId": "asset-dom-w-marcowkach-ge-rzut-poddasza-613dc72877",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 405,
+              "x1": 437,
+              "y0": 134,
+              "y1": 144
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 369,
+              "x1": 388,
+              "y0": 242,
+              "y1": 259
+            },
+            "thickness": 19
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 367,
+              "x1": 385,
+              "y0": 292,
+              "y1": 295
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 371,
+              "x1": 388,
+              "y0": 348,
+              "y1": 364
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 436,
+              "x1": 498,
+              "y0": 430,
+              "y1": 441
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 111,
+              "x1": 129,
+              "y0": 474,
+              "y1": 478
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 158,
+              "x1": 175,
+              "y0": 481,
+              "y1": 486
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 186,
+              "x1": 206,
+              "y0": 482,
+              "y1": 502
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 110,
+              "x1": 129,
+              "y0": 496,
+              "y1": 501
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 22,
+              "x1": 29,
+              "y0": 479,
+              "y1": 501
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 41,
+              "x1": 46,
+              "y0": 479,
+              "y1": 501
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 82,
+              "x1": 88,
+              "y0": 479,
+              "y1": 501
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 100,
+              "x1": 106,
+              "y0": 479,
+              "y1": 501
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 143,
+              "x1": 148,
+              "y0": 474,
+              "y1": 501
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 186,
+              "x1": 206,
+              "y0": 482,
+              "y1": 502
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 253,
+              "x1": 257,
+              "y0": 181,
+              "y1": 199
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 325,
+              "x1": 335,
+              "y0": 260,
+              "y1": 347
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 325,
+              "x1": 336,
+              "y0": 145,
+              "y1": 256
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 325,
+              "x1": 340,
+              "y0": 113,
+              "y1": 133
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 325,
+              "x1": 340,
+              "y0": 441,
+              "y1": 463
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 325,
+              "x1": 345,
+              "y0": 351,
+              "y1": 429
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 506,
+              "x1": 506,
+              "y0": 192,
+              "y1": 240
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 502,
+              "x1": 517,
+              "y0": 441,
+              "y1": 465
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 502,
+              "x1": 517,
+              "y0": 113,
+              "y1": 429
+            },
+            "thickness": 11.5
+          }
+        ],
+        "bays": [],
+        "cells": [],
+        "chains": [],
+        "envelope": {
+          "x0": 330,
+          "x1": 517.5,
+          "y0": 133.25,
+          "y1": 435.5
+        },
+        "extent": {
+          "x0": 140,
+          "x1": 517.25,
+          "y0": 133.5,
+          "y1": 441
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-poddasza-613dc728-2183d6fd56",
+        "hypotheses": [],
+        "linesX": [
+          330,
+          506
+        ],
+        "linesY": [
+          435.5
+        ],
+        "masses": [],
+        "regions": [],
+        "scale": null,
+        "sizePx": {
+          "height": 550,
+          "width": 550
+        },
+        "storey": "ATTIC",
+        "variantByteHash": "49850bbd03190b7153f72d9291d92dc7c7d87478dd6148cc709db3cd828cee14",
+        "wallPx": 11,
+        "wideOpenings": []
+      }
+    ],
+    "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+    "skipped": []
+  },
+  "schema": "buildapp.analysis-diagnostics",
+  "schemaVersion": "1.0.0",
+  "source": {
+    "assets": [
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "fecf3358dc06bd19a774003f68f9ae388bfde0c8e44e1eba1b1b9df0365908c0",
+        "document": "ELEVATION",
+        "id": "asset-dom-w-marcowkach-ge-264-cfcb2cccbd",
+        "sizePx": "550x256",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "149d9116dff22b309fad7f8820a15b9760456f3ac872b7b283192293d776764e",
+        "document": "ELEVATION",
+        "id": "asset-dom-w-marcowkach-ge-265-eadf6c04fa",
+        "sizePx": "550x256",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a5cc1beb64b8558475390a9c1b20a2a8feb451d458736f0705fd6485b6a8c972",
+        "document": "ELEVATION",
+        "id": "asset-dom-w-marcowkach-ge-266-751fa9c36d",
+        "sizePx": "550x255",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f156ae82210a277f04aeaec210724204b78a4153da9393820ab3b6980debb13b",
+        "document": "ELEVATION",
+        "id": "asset-dom-w-marcowkach-ge-267-897c081a4e",
+        "sizePx": "550x255",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "8c77e06e421fdf324b63d715f3064e0e2e8a9dd7e309a1de8c5ac8943839e523",
+        "document": "SITE_PLAN",
+        "id": "asset-dom-w-marcowkach-ge-dom-w-marcowkach-ge-255-273e94abc2",
+        "sizePx": "344x400",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "d05811554a2132cec06d95185cb9ccae73c3563da88472609c5651bdfc6a1718",
+        "document": "SECTION",
+        "id": "asset-dom-w-marcowkach-ge-dom-w-marcowkach-ge-256-ccaf06ae9e",
+        "sizePx": "400x300",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "3b5c41b4836c0b58cb9378237df3d47eef3a9d3d24b4636f837bbfb7b8acfbf8",
+        "document": "FLOOR_PLAN",
+        "id": "asset-dom-w-marcowkach-ge-rzut-parteru-d06c513afe",
+        "sizePx": "550x550",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "3498311c7b3ebfdcbeb2b45c7b5c38dd9227fe1fdbfba95f94e3b51048846309",
+        "document": "FLOOR_PLAN",
+        "id": "asset-dom-w-marcowkach-ge-rzut-parteru-e3e35d1f7b",
+        "sizePx": "550x550",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "49850bbd03190b7153f72d9291d92dc7c7d87478dd6148cc709db3cd828cee14",
+        "document": "FLOOR_PLAN",
+        "id": "asset-dom-w-marcowkach-ge-rzut-poddasza-613dc72877",
+        "sizePx": "550x550",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "daf775db8978912c9131602a710ab1d43881860b189d371d9fd12d7e4b0b116b",
+        "document": "FLOOR_PLAN",
+        "id": "asset-dom-w-marcowkach-ge-rzut-poddasza-9d93d74cb6",
+        "sizePx": "550x550",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "336011d70f7ab6e0e4f005e8845d394cbee272015120ce42df2a47b4f62db27c",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-dom-w-marcowkach-ge-stylizacja-1-b6495f7ecf",
+        "sizePx": "1600x900",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "1a43f9ee0b60e0a1762484a4c71780a5f20f38869da0561a64186dda7e9a781d",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-dom-w-marcowkach-ge-stylizacja-2-708a395702",
+        "sizePx": "1600x900",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "d32a9a415739bd07cf8cf3800f46dfa0cf0dae7b044be64535429dee2b8da0b9",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-dom-w-marcowkach-ge-wizualizacja-1-2dcd9e398d",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "5b9c39379f85723eef64d045cfc995ffec5c35c3c1ab6b4e6d2b696b66f228f1",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-dom-w-marcowkach-ge-wizualizacja-2-1dee3e644d",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      }
+    ],
+    "canonicalUrl": "https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge",
+    "failures": {},
+    "packageHash": "5ae45481dde02c686ee13bc8b8ed1b2cd86a24262851d92f3e3c06420d6f6871",
+    "pageHash": "9a7c164ee68285da843f0ccbc460a13885d2379cd71fa461f9cfbe8b93c1bf86"
+  },
+  "trace": {
+    "entries": [
+      {
+        "counts": {
+          "adapter": "generic.project-page",
+          "addressesNotUsed": 0,
+          "assets": 14,
+          "route": "GENERIC",
+          "variants": 14
+        },
+        "durationMs": 5289,
+        "stage": "ACQUIRING_SOURCE",
+        "startedAtMs": 0,
+        "status": "PASSED",
+        "substage": "FETCH"
+      },
+      {
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 4,
+          "PERSPECTIVE_RENDER": 4,
+          "SECTION": 1,
+          "SITE_PLAN": 1,
+          "drawings": 14
+        },
+        "durationMs": 0,
+        "stage": "CLASSIFYING_SOURCES",
+        "startedAtMs": 5289,
+        "status": "PASSED",
+        "substage": "ROLES"
+      },
+      {
+        "counts": {
+          "frames": 14,
+          "observations": 662,
+          "relations": 376,
+          "vision": "DETERMINISTIC_ONLY"
+        },
+        "durationMs": 25149,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 5289,
+        "status": "PASSED",
+        "substage": "OBSERVATIONS"
+      },
+      {
+        "counts": {
+          "callouts": 9,
+          "chains": 53,
+          "evidence": 28,
+          "levelDatums": 0,
+          "registrations": 3,
+          "scalesRefused": 2,
+          "undecodable": 0
+        },
+        "durationMs": 76705,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 30438,
+        "status": "PASSED",
+        "substage": "METRIC_EVIDENCE"
+      },
+      {
+        "counts": {
+          "planFrames": 4,
+          "plansRead": 2,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+        },
+        "durationMs": 311,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 107143,
+        "status": "PASSED",
+        "substage": "PLAN_READ"
+      },
+      {
+        "counts": {
+          "builtRegions": 2,
+          "cells": 10,
+          "dimensionChains": 23,
+          "dimensionChainsRead": 4,
+          "enclosedCells": 8,
+          "gridLinesX": 3,
+          "gridLinesY": 6,
+          "masses": 2,
+          "planFrames": 4,
+          "planSizePx": "550x550",
+          "plansRead": 2,
+          "recessRegions": 0,
+          "scaleCmPerPx": 1.5915,
+          "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+          "wallBands": 38,
+          "wallThicknessPx": 11,
+          "walledEnvelope": true,
+          "wideOpenings": 0,
+          "wideOpeningsClosed": 0
+        },
+        "durationMs": 0,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 107454,
+        "status": "PASSED",
+        "substage": "PLAN_DECOMPOSITION"
+      },
+      {
+        "counts": {
+          "builtRegions": 2,
+          "cells": 10,
+          "dimensionChains": 23,
+          "dimensionChainsRead": 4,
+          "enclosedCells": 8,
+          "gate": "STRUCTURAL_LAYOUT_REJECTED",
+          "gridLinesX": 3,
+          "gridLinesY": 6,
+          "masses": 2,
+          "planFrames": 4,
+          "planSizePx": "550x550",
+          "plansRead": 2,
+          "recessRegions": 0,
+          "scaleCmPerPx": 1.5915,
+          "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+          "wallBands": 38,
+          "wallThicknessPx": 11,
+          "walledEnvelope": true,
+          "wideOpenings": 0,
+          "wideOpeningsClosed": 0
+        },
+        "detail": "the lowest storey covers 19.56 m² against the 131.16 m² the publisher prints — 85.1% apart: the decomposition is not of this building",
+        "durationMs": 0,
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 107454,
+        "status": "FAILED",
+        "substage": "STRUCTURAL_LAYOUT"
+      }
+    ],
+    "outcome": "FAILED",
+    "schema": "buildapp.analysis-trace",
+    "schemaVersion": "1.0.0"
+  }
+}
+

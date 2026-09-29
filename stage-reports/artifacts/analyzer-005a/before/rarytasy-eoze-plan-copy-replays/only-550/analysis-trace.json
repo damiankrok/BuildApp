@@ -1,0 +1,80 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 1,
+        "cells": 12,
+        "dimensionChains": 37,
+        "dimensionChainsRead": 4,
+        "enclosedCells": 12,
+        "gridLinesX": 5,
+        "gridLinesY": 4,
+        "masses": 1,
+        "planFrames": 4,
+        "planSizePx": "550x550",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 2.222,
+        "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71",
+        "wallBands": 35,
+        "wallThicknessPx": 12.75,
+        "walledEnvelope": true,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_DECOMPOSITION"
+    },
+    {
+      "counts": {
+        "builtRegions": 1,
+        "cells": 12,
+        "dimensionChains": 37,
+        "dimensionChainsRead": 4,
+        "enclosedCells": 12,
+        "gate": "STRUCTURAL_LAYOUT_REJECTED",
+        "gridLinesX": 5,
+        "gridLinesY": 4,
+        "masses": 1,
+        "planFrames": 4,
+        "planSizePx": "550x550",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 2.222,
+        "selectedPlanFrameId": "frame-asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-1dede27c71",
+        "wallBands": 35,
+        "wallThicknessPx": 12.75,
+        "walledEnvelope": true,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "the lowest storey covers 50.48 m² against the 122.07 m² the publisher prints — 58.6% apart: the decomposition is not of this building",
+      "durationMs": 0,
+      "reasonCode": "PLAN_LAYOUT_REJECTED",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "FAILED",
+      "substage": "STRUCTURAL_LAYOUT"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

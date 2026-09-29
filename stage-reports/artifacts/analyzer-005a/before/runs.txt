@@ -1,0 +1,28 @@
+start 19:16:49
+{"name":"kosacce-clean","exit":0,"wallSeconds":314.966885796,"peakRssMB":2159}
+{"name":"kosacce-tracked","exit":0,"wallSeconds":317.157996656,"peakRssMB":2120}
+pair1 done 19:22:06
+{"name":"marcowki","exit":0,"wallSeconds":248.516893130,"peakRssMB":1890}
+{"name":"rarytasy-eoze","exit":0,"wallSeconds":307.074306640,"peakRssMB":2034}
+BEFORE ALL DONE 19:27:13
+--- kosacce-clean
+  modelHash              5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
+  sceneContentHash       50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9
+  sceneSha256            0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef
+completed: 3 masses, 13 openings, 169 commands, 136 meshes, 298750 ms
+{"name":"kosacce-clean","exit":0,"wallSeconds":314.966885796,"peakRssMB":2159}
+--- kosacce-tracked
+  modelHash              5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
+  sceneContentHash       50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9
+  sceneSha256            0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef
+completed: 3 masses, 13 openings, 169 commands, 136 meshes, 300643 ms
+{"name":"kosacce-tracked","exit":0,"wallSeconds":317.157996656,"peakRssMB":2120}
+--- rarytasy-eoze
+failed: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE in REGISTERING_VIEWS: 45 wall bands were found on the 853×853 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing
+{"name":"rarytasy-eoze","exit":0,"wallSeconds":307.074306640,"peakRssMB":2034}
+--- marcowki
+  modelHash              6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f
+  sceneContentHash       8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33
+  sceneSha256            6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799
+completed: 2 masses, 12 openings, 205 commands, 162 meshes, 239121 ms
+{"name":"marcowki","exit":0,"wallSeconds":248.516893130,"peakRssMB":1890}

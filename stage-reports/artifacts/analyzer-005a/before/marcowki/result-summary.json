@@ -1,0 +1,176 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.1.0"
+  },
+  "candidateHash": "300eebbe22ebc46100af02d5358cf0106735628147c5e9b57eaa0f3143628d5b",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "completedAt": "2026-09-29T19:26:09.565Z",
+  "counts": {
+    "assets": 20,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 8,
+      "PERSPECTIVE_RENDER": 4,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 2,
+    "callouts": 56,
+    "chimneys": 2,
+    "commands": 205,
+    "frames": 18,
+    "masses": 2,
+    "meshes": 162,
+    "metricEvidence": 138,
+    "observations": 888,
+    "openings": 12,
+    "railings": 2,
+    "rooflights": 3,
+    "rooms": 12,
+    "terraces": 2,
+    "triangles": 5110
+  },
+  "jobId": null,
+  "label": "Dom w marcówkach (GE) (analysis)",
+  "metricEvidenceHash": "a22a6a318e492e7906b0312c31389e9a608f7785c7792f0aa36da59fa862afd2",
+  "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+  "modelId": "m-analysis-m2fa281446a8ca",
+  "modelSha256": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+  "observationGraphHash": "42233c26a3634a71aab9e431402f88c1409e2e361b7ed17d806321f976956acb",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "ATTACHED_ROOF": {
+        "L2": 1
+      },
+      "BALCONY": {
+        "L2": 2
+      },
+      "CAMERA": {
+        "L1": 3
+      },
+      "CHIMNEY": {
+        "L2": 2
+      },
+      "FACADE_ASSEMBLY": {
+        "L1": 2
+      },
+      "FACADE_MEMBER": {
+        "L2": 1
+      },
+      "INTERIOR_DOOR": {
+        "L1": 9
+      },
+      "INTERIOR_WALL": {
+        "L0": 2,
+        "L1": 29
+      },
+      "LEVEL": {
+        "L2": 2
+      },
+      "MASS": {
+        "L2": 2
+      },
+      "OPENING": {
+        "L1": 1,
+        "L2": 11
+      },
+      "RAILING": {
+        "L2": 2
+      },
+      "RECESS": {
+        "L2": 4
+      },
+      "RETURN_WALL": {
+        "L1": 8
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOFLIGHT": {
+        "L1": 3
+      },
+      "ROOF_MEMBER": {
+        "L1": 2
+      },
+      "ROOM": {
+        "L1": 10,
+        "L2": 2
+      },
+      "STAIR": {
+        "L2": 1
+      },
+      "SURFACE_REGION": {
+        "L0": 3
+      },
+      "TERRACE": {
+        "L1": 2
+      }
+    },
+    "levels": {
+      "L0": 5,
+      "L1": 69,
+      "L2": 31
+    }
+  },
+  "sceneBytes": 578606,
+  "sceneContentHash": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+  "sceneSha256": "6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "deb6ab931011506696da7d44bf522a14e994e3a68d80f4710db152aef41d986f",
+  "sourcePackageId": "src-m2fa281446a8ca-c0499d9df3",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "startedAt": "2026-09-29T19:22:10.443Z",
+  "timings": {
+    "acquisitionMs": 2381,
+    "compileMs": 179,
+    "metricExtractionMs": 193080,
+    "observationMs": 33353,
+    "reconstructionMs": 8286,
+    "totalMs": 239121,
+    "verificationMs": 1833
+  },
+  "title": "Dom w marcówkach (GE)",
+  "unresolved": [
+    {
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-1"
+    },
+    {
+      "reason": "its 5.555 m² is 77 % off the published Garaż 24.1 m²; by area it would be 8 Kotłownia 5.8",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-2 (read as 9)"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 42
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 66,
+    "residualsOutsideTolerance": 12
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses not used (byte identical)",
+    "9 source addresses not used (http status)",
+    "12 of 66 source-view checks outside tolerance"
+  ]
+}
+

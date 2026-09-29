@@ -1,0 +1,12 @@
+=== only-area
+solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_LAYOUT_REJECTED: the lowest storey covers 33.15 m² against the 164.47 m² the publisher prints — 79.8% apart: the decomposition is not of this building
+PLAN_LAYOUT_REJECTED {"builtRegions":3,"cells":35,"dimensionChains":70,"dimensionChainsRead":4,"enclosedCells":31,"gateBlocking":"FOOTPRINT_AREA_WRONG","gridLinesX":8,"gridLinesY":6,"masses":2,"planFrames":4,"planSizePx":"853x853","plansRead":1,"recessRegions":0,"scaleCmPerPx":2.4057,"selectedPlanFrameId":"frame-asset-rzut-94f54ada01-bdf7aa09e8","wallBands":88,"wallThicknessPx":14,"walledEnvelope":true,"wideOpenings":7,"wideOpeningsClosed":0}
+=== only-dim853
+solver on the given evidence: completed, model 5b5ffcf1afcd2511
+COMPLETED model 5b5ffcf1afcd masses 3
+=== only-550
+solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE: 82 wall bands were found on the 550×550 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing
+PLAN_NO_WALLED_ENVELOPE {"builtRegions":1,"cells":8,"dimensionChains":45,"dimensionChainsRead":2,"enclosedCells":1,"gridLinesX":5,"gridLinesY":3,"masses":0,"planFrames":4,"planSizePx":"550x550","plansRead":1,"recessRegions":0,"scaleCmPerPx":2.5271,"selectedPlanFrameId":"frame-asset-gotowy-projekt-dom-w-kosaccach-46-rzut-par-803d3d68d8","wallBands":82,"wallThicknessPx":9.25,"walledEnvelope":false,"wideOpenings":0,"wideOpeningsClosed":0}
+=== only-400
+solver on the given evidence: RECONSTRUCTION_FAILED / PLAN_NO_WALLED_ENVELOPE: 49 wall bands were found on the 400×400 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing
+PLAN_NO_WALLED_ENVELOPE {"builtRegions":0,"cells":10,"dimensionChains":30,"dimensionChainsRead":3,"enclosedCells":0,"gridLinesX":6,"gridLinesY":3,"masses":0,"planFrames":4,"planSizePx":"400x400","plansRead":1,"recessRegions":0,"scaleCmPerPx":1.6766,"selectedPlanFrameId":"frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246","wallBands":49,"wallThicknessPx":9,"walledEnvelope":false,"wideOpenings":0,"wideOpeningsClosed":0}

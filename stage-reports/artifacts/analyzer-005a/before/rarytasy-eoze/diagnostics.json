@@ -1,0 +1,2024 @@
+{
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "diagnostics": {
+      "builtRegions": 2,
+      "cells": 14,
+      "dimensionChains": 81,
+      "dimensionChainsRead": 9,
+      "enclosedCells": 2,
+      "gridLinesX": 15,
+      "gridLinesY": 2,
+      "masses": 0,
+      "planFrames": 4,
+      "planSizePx": "853x853",
+      "plansRead": 1,
+      "recessRegions": 0,
+      "scaleCmPerPx": 2.5016,
+      "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "wallBands": 45,
+      "wallThicknessPx": 15.5,
+      "walledEnvelope": false,
+      "wideOpenings": 0,
+      "wideOpeningsClosed": 0
+    },
+    "message": "45 wall bands were found on the 853×853 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+    "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+    "stage": "REGISTERING_VIEWS",
+    "substage": "PLAN_DECOMPOSITION",
+    "title": "The floor-plan walls do not enclose a building"
+  },
+  "outcome": "FAILED",
+  "plans": {
+    "planFrames": 4,
+    "plans": [
+      {
+        "annotation": "DIMENSIONED",
+        "assetId": "asset-rzut-b747b42ad2",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 348,
+              "x1": 393,
+              "y0": 54,
+              "y1": 65
+            },
+            "thickness": 17.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 796,
+              "x1": 824,
+              "y0": 55,
+              "y1": 66
+            },
+            "thickness": 15
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 328,
+              "x1": 378,
+              "y0": 77,
+              "y1": 90
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 796,
+              "x1": 824,
+              "y0": 88,
+              "y1": 94
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 803,
+              "x1": 830,
+              "y0": 102,
+              "y1": 111
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 422,
+              "x1": 446,
+              "y0": 101,
+              "y1": 115
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 284,
+              "x1": 359,
+              "y0": 125,
+              "y1": 138
+            },
+            "thickness": 19.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 796,
+              "x1": 824,
+              "y0": 148,
+              "y1": 159
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 343,
+              "x1": 395,
+              "y0": 150,
+              "y1": 159
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 803,
+              "x1": 830,
+              "y0": 195,
+              "y1": 204
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 222,
+              "x1": 549,
+              "y0": 237,
+              "y1": 256
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 749,
+              "x1": 774,
+              "y0": 237,
+              "y1": 256
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 95,
+              "x1": 599,
+              "y0": 559,
+              "y1": 578
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 708,
+              "x1": 774,
+              "y0": 559,
+              "y1": 578
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 607,
+              "x1": 688,
+              "y0": 612,
+              "y1": 622
+            },
+            "thickness": 17.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 348,
+              "x1": 427,
+              "y0": 616,
+              "y1": 628
+            },
+            "thickness": 17.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 353,
+              "x1": 401,
+              "y0": 637,
+              "y1": 653
+            },
+            "thickness": 20.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 600,
+              "x1": 627,
+              "y0": 644,
+              "y1": 659
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 587,
+              "x1": 685,
+              "y0": 769,
+              "y1": 780
+            },
+            "thickness": 9.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 744,
+              "x1": 811,
+              "y0": 769,
+              "y1": 778
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 655,
+              "x1": 685,
+              "y0": 803,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 744,
+              "x1": 768,
+              "y0": 805,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 57,
+              "x1": 75,
+              "y0": 130,
+              "y1": 155
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 64,
+              "x1": 83,
+              "y0": 89,
+              "y1": 114
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 64,
+              "x1": 83,
+              "y0": 172,
+              "y1": 201
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 75,
+              "x1": 94,
+              "y0": 257,
+              "y1": 558
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 188,
+              "x1": 194,
+              "y0": 406,
+              "y1": 468
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 241,
+              "x1": 247,
+              "y0": 525,
+              "y1": 554
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 316,
+              "x1": 329,
+              "y0": 103,
+              "y1": 147
+            },
+            "thickness": 20.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 368,
+              "x1": 374,
+              "y0": 263,
+              "y1": 412
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 425,
+              "x1": 440,
+              "y0": 592,
+              "y1": 617
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 430,
+              "x1": 447,
+              "y0": 92,
+              "y1": 160
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 503,
+              "x1": 509,
+              "y0": 479,
+              "y1": 514
+            },
+            "thickness": 9.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 584,
+              "x1": 599,
+              "y0": 623,
+              "y1": 650
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 626,
+              "x1": 636,
+              "y0": 770,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 646,
+              "x1": 654,
+              "y0": 779,
+              "y1": 804
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 672,
+              "x1": 685,
+              "y0": 602,
+              "y1": 627
+            },
+            "thickness": 25
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 692,
+              "x1": 702,
+              "y0": 756,
+              "y1": 813
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 720,
+              "x1": 729,
+              "y0": 779,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 735,
+              "x1": 743,
+              "y0": 779,
+              "y1": 804
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 769,
+              "x1": 778,
+              "y0": 779,
+              "y1": 804
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 775,
+              "x1": 795,
+              "y0": 257,
+              "y1": 558
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 784,
+              "x1": 794,
+              "y0": 779,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 811,
+              "x1": 821,
+              "y0": 779,
+              "y1": 813
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 828,
+              "x1": 834,
+              "y0": 109,
+              "y1": 136
+            },
+            "thickness": 11.5
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 75,
+              "x1": 114.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 114.5,
+              "x1": 158,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 158,
+              "x1": 220,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 220,
+              "x1": 289,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 289,
+              "x1": 341,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 341,
+              "x1": 369.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 369.5,
+              "x1": 401,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 0,
+            "rect": {
+              "x0": 401,
+              "x1": 454,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 0,
+            "rect": {
+              "x0": 454,
+              "x1": 484,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 9,
+            "iy": 0,
+            "rect": {
+              "x0": 484,
+              "x1": 507.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 0,
+            "rect": {
+              "x0": 507.5,
+              "x1": 556.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 0,
+            "rect": {
+              "x0": 556.5,
+              "x1": 747.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 12,
+            "iy": 0,
+            "rect": {
+              "x0": 747.5,
+              "x1": 765,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 13,
+            "iy": 0,
+            "rect": {
+              "x0": 765,
+              "x1": 795,
+              "y0": 316.5,
+              "y1": 355
+            }
+          }
+        ],
+        "chains": [
+          {
+            "axis": "H",
+            "baselinePx": 146,
+            "read": 0,
+            "ticksPx": [
+              611.5,
+              649.5,
+              686.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 164,
+            "read": 0,
+            "ticksPx": [
+              177.5,
+              213.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 164,
+            "read": 0,
+            "ticksPx": [
+              108.5,
+              145.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 164.5,
+            "read": 0,
+            "ticksPx": [
+              341,
+              404
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 191,
+            "read": 0,
+            "ticksPx": [
+              177.5,
+              213.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 191,
+            "read": 0,
+            "ticksPx": [
+              108.5,
+              145.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 193.5,
+            "read": 0,
+            "ticksPx": [
+              611.5,
+              649.5,
+              686.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 242,
+            "read": 0,
+            "ticksPx": [
+              96,
+              167,
+              255,
+              316,
+              371,
+              426,
+              573,
+              766
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 245.5,
+            "read": 0,
+            "ticksPx": [
+              96,
+              169
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 251,
+            "read": 0,
+            "ticksPx": [
+              506,
+              586.5,
+              649,
+              766
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 265,
+            "read": 0,
+            "ticksPx": [
+              242.5,
+              288
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 265,
+            "read": 0,
+            "ticksPx": [
+              454,
+              484.5,
+              499.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 294,
+            "read": 0,
+            "ticksPx": [
+              115,
+              158
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 316.5,
+            "read": 1,
+            "ticksPx": [
+              241.5,
+              289,
+              329,
+              341
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 316.5,
+            "read": 1,
+            "ticksPx": [
+              116,
+              158,
+              185,
+              220
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 316.5,
+            "read": 0,
+            "ticksPx": [
+              522.5,
+              530,
+              544,
+              554,
+              582,
+              608.5,
+              630,
+              642.5,
+              663.916667,
+              687.5,
+              698.5,
+              728,
+              741,
+              753
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 317,
+            "read": 1,
+            "ticksPx": [
+              401,
+              413,
+              454
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 355,
+            "read": 0,
+            "ticksPx": [
+              453,
+              476.5,
+              485,
+              499.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 363,
+            "read": 0,
+            "ticksPx": [
+              699.5,
+              728,
+              740
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 366,
+            "read": 0,
+            "ticksPx": [
+              115,
+              158
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 384.5,
+            "read": 0,
+            "ticksPx": [
+              573,
+              608.5,
+              631
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 395,
+            "read": 0,
+            "ticksPx": [
+              573,
+              608.5,
+              635.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 451.5,
+            "read": 1,
+            "ticksPx": [
+              114.5,
+              122,
+              140,
+              159.5,
+              168.5,
+              181,
+              190
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 469,
+            "read": 0,
+            "ticksPx": [
+              787.5,
+              797
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 492,
+            "read": 0,
+            "ticksPx": [
+              505.5,
+              523,
+              552.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 494,
+            "read": 0,
+            "ticksPx": [
+              127,
+              195
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 52,
+            "read": 0,
+            "ticksPx": [
+              331.5,
+              352.5,
+              378,
+              413.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 531,
+            "read": 1,
+            "ticksPx": [
+              442,
+              450,
+              467,
+              484
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 531,
+            "read": 1,
+            "ticksPx": [
+              507.5,
+              521.5,
+              541,
+              556.5,
+              586,
+              661,
+              728,
+              747.5,
+              757,
+              765
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 530.5,
+            "read": 0,
+            "ticksPx": [
+              242.5,
+              268.5,
+              301,
+              333
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 531,
+            "read": 0,
+            "ticksPx": [
+              126,
+              142.5,
+              156.5,
+              170.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 559,
+            "read": 0,
+            "ticksPx": [
+              512.5,
+              551,
+              586,
+              653.5,
+              730,
+              784
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 573,
+            "read": 0,
+            "ticksPx": [
+              549.5,
+              653.5,
+              750.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 582,
+            "read": 0,
+            "ticksPx": [
+              599.5,
+              653.5,
+              706
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 582,
+            "read": 1,
+            "ticksPx": [
+              369.5,
+              392,
+              417.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 601,
+            "read": 0,
+            "ticksPx": [
+              667.509434,
+              713
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 641.5,
+            "read": 0,
+            "ticksPx": [
+              426,
+              578
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 657,
+            "read": 0,
+            "ticksPx": [
+              424.5,
+              606.5,
+              708
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 698.5,
+            "read": 1,
+            "ticksPx": [
+              75,
+              795
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 77,
+            "read": 0,
+            "ticksPx": [
+              50,
+              72,
+              269.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 92.5,
+            "read": 0,
+            "ticksPx": [
+              76.5,
+              270.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 100,
+            "read": 0,
+            "ticksPx": [
+              493,
+              530.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 117,
+            "read": 0,
+            "ticksPx": [
+              296.4,
+              313,
+              365
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 122,
+            "read": 0,
+            "ticksPx": [
+              404,
+              417,
+              453,
+              468.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 123,
+            "read": 0,
+            "ticksPx": [
+              493,
+              530.5,
+              537
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 128.5,
+            "read": 0,
+            "ticksPx": [
+              492.5,
+              530.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 158,
+            "read": 0,
+            "ticksPx": [
+              294,
+              316.5,
+              366,
+              423.347826,
+              453,
+              468
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 161,
+            "read": 0,
+            "ticksPx": [
+              413,
+              462
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 178,
+            "read": 0,
+            "ticksPx": [
+              164,
+              183
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 185,
+            "read": 0,
+            "ticksPx": [
+              296,
+              316.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 213,
+            "read": 0,
+            "ticksPx": [
+              164,
+              183
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 24,
+            "read": 0,
+            "ticksPx": [
+              230,
+              236.5,
+              578.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 269,
+            "read": 0,
+            "ticksPx": [
+              530,
+              561.818182
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 289,
+            "read": 0,
+            "ticksPx": [
+              247.5,
+              276,
+              300,
+              316.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 297,
+            "read": 0,
+            "ticksPx": [
+              243,
+              286.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 326,
+            "read": 0,
+            "ticksPx": [
+              440.5,
+              469.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 333,
+            "read": 0,
+            "ticksPx": [
+              472.5,
+              497,
+              530.5,
+              567.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 341,
+            "read": 0,
+            "ticksPx": [
+              249,
+              316.5,
+              405.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 39,
+            "read": 0,
+            "ticksPx": [
+              121.5,
+              151.5,
+              204.5,
+              234.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 401,
+            "read": 0,
+            "ticksPx": [
+              249,
+              316.5,
+              352,
+              384,
+              406
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 435,
+            "read": 0,
+            "ticksPx": [
+              606.5,
+              645.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 445,
+            "read": 0,
+            "ticksPx": [
+              243,
+              286.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 450,
+            "read": 0,
+            "ticksPx": [
+              472.5,
+              530.5,
+              567.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 451,
+            "read": 0,
+            "ticksPx": [
+              53,
+              66.5,
+              92.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 453,
+            "read": 0,
+            "ticksPx": [
+              247.5,
+              276.5,
+              300,
+              314.5,
+              331.5,
+              355
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 485,
+            "read": 1,
+            "ticksPx": [
+              286.5,
+              316.5,
+              355
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 485,
+            "read": 0,
+            "ticksPx": [
+              415.5,
+              466
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 508,
+            "read": 0,
+            "ticksPx": [
+              316.5,
+              332
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 523,
+            "read": 0,
+            "ticksPx": [
+              493,
+              529.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 530,
+            "read": 0,
+            "ticksPx": [
+              316.5,
+              399
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 579,
+            "read": 0,
+            "ticksPx": [
+              641.5,
+              656
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 586,
+            "read": 0,
+            "ticksPx": [
+              529.5,
+              567.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 608.5,
+            "read": 0,
+            "ticksPx": [
+              302.5,
+              316.5,
+              354.5,
+              363.5,
+              384.5,
+              397
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 630,
+            "read": 0,
+            "ticksPx": [
+              283,
+              315.5,
+              342,
+              363.5,
+              384.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 640,
+            "read": 0,
+            "ticksPx": [
+              283,
+              316.5,
+              338.5,
+              363.5,
+              390
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 644.5,
+            "read": 0,
+            "ticksPx": [
+              307.5,
+              328.5,
+              400
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 698.5,
+            "read": 0,
+            "ticksPx": [
+              299.5,
+              316.5,
+              356.5,
+              365,
+              392
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 722,
+            "read": 0,
+            "ticksPx": [
+              532,
+              543,
+              565.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 728,
+            "read": 0,
+            "ticksPx": [
+              284,
+              295.5,
+              316.5,
+              363,
+              373,
+              397.454545,
+              553
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 741,
+            "read": 0,
+            "ticksPx": [
+              298,
+              316.5,
+              365,
+              380,
+              392
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 831,
+            "read": 0,
+            "ticksPx": [
+              123.5,
+              216
+            ]
+          }
+        ],
+        "envelope": null,
+        "extent": {
+          "x0": 75,
+          "x1": 795,
+          "y0": 286.5,
+          "y1": 355
+        },
+        "extentWeak": false,
+        "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+        "hypotheses": [
+          {
+            "builtCells": 2,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 2,
+            "chosen": false,
+            "closedOpenings": 0,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          75,
+          114.5,
+          158,
+          220,
+          289,
+          341,
+          369.5,
+          401,
+          454,
+          484,
+          507.5,
+          556.5,
+          747.5,
+          765,
+          795
+        ],
+        "linesY": [
+          316.5,
+          355
+        ],
+        "masses": [],
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-3-0",
+            "rect": {
+              "x0": 220,
+              "x1": 289,
+              "y0": 316.5,
+              "y1": 355
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-9-0",
+            "rect": {
+              "x0": 484,
+              "x1": 507.5,
+              "y0": 316.5,
+              "y1": 355
+            }
+          }
+        ],
+        "scale": {
+          "anchors": 9,
+          "mppX": 0.025016,
+          "mppY": 0.025974,
+          "rmsM": 0.03423
+        },
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "storey": "GROUND",
+        "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+        "wallPx": 15.5,
+        "wideOpenings": []
+      }
+    ],
+    "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "skipped": []
+  },
+  "schema": "buildapp.analysis-diagnostics",
+  "schemaVersion": "1.0.0",
+  "source": {
+    "assets": [
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "b419724d95e5185886ac050edcfd5e1324e9a77af7dacc2b5bc48df208c3870b",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-dodatkowa-1eea73bc06",
+        "sizePx": "1600x900",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a868606f7584c33e5b65b24b1ce932aa1a3335d07cacde45882ac40fe076de47",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-dodatkowa-92362653ea",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "5014f4a3a087b5540eee21aa0050f6ce64dd9e72500c387cfebb27e254da2004",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-b-4cf526f6a3",
+        "sizePx": "1280x631",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "509e7d76c9b3cec9757bdaf6ac669483975c740bc765b873fd017e610a238f34",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-b-513ff88815",
+        "sizePx": "1280x631",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f29763f35bbbc351312dabe12c49be3d96aca46b2c48e02fc117604e9febba1c",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-f-74c55683f0",
+        "sizePx": "1280x631",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "62b10df03e47c511b84504f430b3872e62251eb2ce33aa9f74adcdff876737e7",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-o-06fb62b53f",
+        "sizePx": "1280x631",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "abe3c48c7f402ab6a676a5f54670de0c6f4d7605841bb96e56d141b9793c7026",
+        "document": "SECTION",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-przekroj-b-5d3a62f41c",
+        "sizePx": "1142x854",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "5fc2db4c7eaee3cf0d6e444c713480329fe81d00686dc01e37a9119b641a0927",
+        "document": "FLOOR_PLAN",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-parte-d4aaf53656",
+        "sizePx": "550x550",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "21d5232c1b01ca85bd0924e5d7d9bae00c56427b86112fb191b53e5f288593bc",
+        "document": "SITE_PLAN",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-sytuacja-81b5cdc086",
+        "sizePx": "734x854",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "6a76df06ca2d37fdaaf51d779db1bbcb72cd3e7fb362eb8e6104de60a3af8ad3",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-widok-1-47c9e635bc",
+        "sizePx": "200x150",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "6312dad5ceb7c65f340d2d9f3a4213a2cf288e8b8493e8160253c0eb3817df35",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-0343ce9d23",
+        "sizePx": "1600x1600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "d56592ce3c25f19d8f3573f4904bf5492f3121dbc937598c66e892fd1206f302",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-07a2dac6b1",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "48c31f828171d971e9c78284ed00d1850588c300b5bc56fb75e50c291a249478",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-291aab9ec4",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "7861bd540d99cc229216a300d14f6d00b9aeb4febebd291a3c3d9a9a12273306",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-3db04f6bfa",
+        "sizePx": "1600x1600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "609eddfb4e6ec2ecd39305a14756b4e32e6910eaf26a75fec14acaae3934e5a3",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-4306c4915f47ad9b9-40aeeb38d2",
+        "sizePx": "1600x900",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "27a8bb3e7f0c9a120497442c925ee0843fab89d8a3d3871fed3e2b33ce568be4",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-48d451fb0f",
+        "sizePx": "400x300",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f89ca02efa52e07e466f6f60d78fa8809e66c4fe24197018784e4462009b98fe",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-51dad8e2f0",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "891ba53840df5a0d51a2e1269b3932f29daa4c679ad6572268f854297a5b8901",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-558b52d446",
+        "sizePx": "1600x900",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0e766332f86293cc634dceab9132715140fd3d2f065189ddabbfe8625c0c153a",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-7009ed99bf",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "42bf314be6b2e82cb1635f35539ca159f4c1b86273b04a33fa4d08ffe10c19de",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-766941b258",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "d95c8ff9ed79d6e083fb6dc77103e0c247f3c1eafb0c540cb4a1aaa6218d3021",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-77195fbd3e",
+        "sizePx": "1600x1600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "ab242d5dbe565fc164557f09061a8e213291afe1a844f0a829039525a730c51b",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-7761f2b5bb",
+        "sizePx": "1600x900",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "9aee5f7f4da4ec7120744e01fd339a9ad3784630a90f5317ac0876d436ec4d7e",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-7a69141c46",
+        "sizePx": "400x300",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "3985476910563dd7ef4d161313ce4a49ff786ad04cc6c8d8855b87f5b8aa7f31",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-952ba48a96",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "71e82b635da957d14c3449e7eb800c2c76bc21683eb908a54ea6b406c08766ae",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-9b725f6e28",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a16243991e5a4151ded4565cdacbd910ca12ce6d2482ac576fc54ca76556a099",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-a4cbafcbcd",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "649571ac681c803e606867d7b4525bd1b75aaffbaa0e7ef1cc614f039e0c250f",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-b8380dc935",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "c16def7c32158e02cd18affe5b90bde77abb30da87ea8c4d9623ff8db3fb687d",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-ba095a04df",
+        "sizePx": "1600x1600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "951ffcc8200b222627a0dfbec1add2017ac385dce8ec2ed1328198150b55fbf6",
+        "document": "FLOOR_PLAN",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-be1be080d9",
+        "sizePx": "400x400",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f0a0e825e289115f4761d8d5b1c0eb2273e5bc3e8b4572d394a1ea6ff637f848",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-e9b6e35814",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "e73e256f2d9cab51ca87c8761d9c16aa878b05c3198809c736dee41d7258d80f",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-eadaccb67c",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a200c68717c0de73f7dc0432a4ae68fba833d020650e22fa8de7653cd52a99aa",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-ed8749c85e",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "c4026f989b25382eb6f1351997d5cf8a042cce7062fa1e67f00ac9d9b8e29b03",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-fe57bf7806",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "342f39f70da7109755958330aa9e27d9ecbd4c25ec014902cac8ea76bab27ccc",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-rarytasach-e-oze-fe995e9210",
+        "sizePx": "1600x1600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "AREA_TABLE",
+        "byteHash": "34dffb0e1b20d43267b456cb4c973ccda06e1f4c6b939a38149b1f97825960b0",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-2abfc5825d",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-b747b42ad2",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "21b4331b77f317ab5d96e58c3b1ce0814ce3f83dfbe07abef0b8c708a41cff72",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-1-projekt-dom-w-rarytasach-e-oze-e805a1ba72",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0af087748ff0637bfa17d878ac8ac9405a286096856b1b2bf105f8db564327ed",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-2-projekt-dom-w-rarytasach-e-oze-8a156efc7a",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      }
+    ],
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+    "failures": {
+      "BYTE_IDENTICAL": 5,
+      "HTTP_STATUS": 7
+    },
+    "packageHash": "7362c7f33087c946a117e6afadd08c72361361095d454b596dab2b537ee83000",
+    "pageHash": "e327c807a2c862a4faf1d7f9511316e6452dc82e1c4d8abc067ee3f657ba4605"
+  },
+  "trace": {
+    "entries": [
+      {
+        "counts": {
+          "adapter": "archon.pl",
+          "addressesNotUsed": 12,
+          "assets": 38,
+          "failed_BYTE_IDENTICAL": 5,
+          "failed_HTTP_STATUS": 7,
+          "route": "SPECIALIST",
+          "variants": 44
+        },
+        "durationMs": 2613,
+        "stage": "ACQUIRING_SOURCE",
+        "startedAtMs": 0,
+        "status": "PASSED",
+        "substage": "FETCH"
+      },
+      {
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 4,
+          "PERSPECTIVE_RENDER": 24,
+          "SECTION": 1,
+          "SITE_PLAN": 1,
+          "UNKNOWN": 4,
+          "drawings": 34
+        },
+        "durationMs": 0,
+        "stage": "CLASSIFYING_SOURCES",
+        "startedAtMs": 2613,
+        "status": "PASSED",
+        "substage": "ROLES"
+      },
+      {
+        "counts": {
+          "frames": 34,
+          "observations": 1166,
+          "relations": 692,
+          "vision": "DETERMINISTIC_ONLY"
+        },
+        "durationMs": 132699,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 2613,
+        "status": "PASSED",
+        "substage": "OBSERVATIONS"
+      },
+      {
+        "counts": {
+          "callouts": 61,
+          "chains": 260,
+          "evidence": 110,
+          "levelDatums": 4,
+          "registrations": 6,
+          "scalesRefused": 0,
+          "undecodable": 0
+        },
+        "durationMs": 165325,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 135312,
+        "status": "PASSED",
+        "substage": "METRIC_EVIDENCE"
+      },
+      {
+        "counts": {
+          "planFrames": 4,
+          "plansRead": 1,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d"
+        },
+        "durationMs": 269,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 300637,
+        "status": "PASSED",
+        "substage": "PLAN_READ"
+      },
+      {
+        "counts": {
+          "builtRegions": 2,
+          "cells": 14,
+          "dimensionChains": 81,
+          "dimensionChainsRead": 9,
+          "enclosedCells": 2,
+          "gridLinesX": 15,
+          "gridLinesY": 2,
+          "masses": 0,
+          "planFrames": 4,
+          "planSizePx": "853x853",
+          "plansRead": 1,
+          "recessRegions": 0,
+          "scaleCmPerPx": 2.5016,
+          "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+          "wallBands": 45,
+          "wallThicknessPx": 15.5,
+          "walledEnvelope": false,
+          "wideOpenings": 0,
+          "wideOpeningsClosed": 0
+        },
+        "detail": "45 wall bands were found on the 853×853 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+        "durationMs": 1,
+        "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 300906,
+        "status": "FAILED",
+        "substage": "PLAN_DECOMPOSITION"
+      }
+    ],
+    "outcome": "FAILED",
+    "schema": "buildapp.analysis-trace",
+    "schemaVersion": "1.0.0"
+  }
+}
+

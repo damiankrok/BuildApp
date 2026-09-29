@@ -1,0 +1,30 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "builtRegions": 0,
+    "cells": 10,
+    "dimensionChains": 30,
+    "dimensionChainsRead": 3,
+    "enclosedCells": 0,
+    "gridLinesX": 6,
+    "gridLinesY": 3,
+    "masses": 0,
+    "planFrames": 4,
+    "planSizePx": "400x400",
+    "plansRead": 1,
+    "recessRegions": 0,
+    "scaleCmPerPx": 1.6766,
+    "selectedPlanFrameId": "frame-asset-projekt-dom-w-kosaccach-46-bdb822242d-a00d047246",
+    "wallBands": 49,
+    "wallThicknessPx": 9,
+    "walledEnvelope": false,
+    "wideOpenings": 0,
+    "wideOpeningsClosed": 0
+  },
+  "message": "49 wall bands were found on the 400×400 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+  "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+  "stage": "REGISTERING_VIEWS",
+  "substage": "PLAN_DECOMPOSITION",
+  "title": "The floor-plan walls do not enclose a building"
+}
+

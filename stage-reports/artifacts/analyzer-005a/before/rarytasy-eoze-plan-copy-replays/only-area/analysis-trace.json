@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "planFrames": 4,
+        "plansRead": 1,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f"
+      },
+      "durationMs": 0,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "builtRegions": 0,
+        "cells": 2,
+        "dimensionChains": 62,
+        "dimensionChainsRead": 3,
+        "enclosedCells": 0,
+        "gridLinesX": 3,
+        "gridLinesY": 2,
+        "masses": 0,
+        "planFrames": 4,
+        "planSizePx": "853x853",
+        "plansRead": 1,
+        "recessRegions": 0,
+        "scaleCmPerPx": 2.5014,
+        "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+        "wallBands": 51,
+        "wallThicknessPx": 15,
+        "walledEnvelope": false,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "51 wall bands were found on the 853×853 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+      "durationMs": 0,
+      "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 0,
+      "status": "FAILED",
+      "substage": "PLAN_DECOMPOSITION"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

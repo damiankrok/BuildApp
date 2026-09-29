@@ -1,0 +1,21 @@
+# Marcówki — every unresolved item and warning behind "Model gotowy z ograniczeniami" (§18)
+
+Source: the 005A baseline run `before/marcowki` (desktop, model `6152770f43f4…`, the same
+model as 003C/004A and the OWNER's phone slice). The phone shows the limited verdict when
+`summary.unresolved.isNotEmpty() || summary.warnings.isNotEmpty()`
+(`apps/android/.../ui/AnalyzerScreen.kt:512`, `HouseSheets.kt:84,280`).
+
+| ID | item (analyzer's words) | semantic category | source evidence | why unresolved | genuine source absence? | algorithmic debt? | generic fix possible? | fixed in 005A? |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| MRC-U1 | `[MISSING] the kind of roof over mass-1 — no printed angle, specification line or technical view describes a roof over this body separately from the main one` | roof / attached body | the section draws the garage roof (the reference model reads its top at 2.88 m and a ~0.2 m parapet from the section and the elevations, `packages/reference-marcowki/src/facts.ts:60`) | `roof-systems.ts` assigns a roof to an attached mass only from a printed angle, a specification line or a section registered to THAT mass; the v2 pass later reads the flat garage slab from the section (`readAttachedRoof`) but the layout-level gap is never closed | no — the section shows it | yes: the layout gap and the v2 reading do not talk to each other | yes (close the gap when the v2 attached-roof reading succeeds, or read the section at layout time) | **LOW_CONFIDENCE_BUT_RESOLVABLE**; not fixed in 005A (outside the resolver scope; recorded as debt) |
+| MRC-U2 | `[AMBIGUOUS] the label of room-0-2 (read as 9) — its 5.555 m² is 77 % off the published Garaż 24.1 m²; by area it would be 8 Kotłownia 5.8` | room identity (OCR of a room number) | the plan prints the number; the published schedule prints the areas | a single-glyph OCR reading (9 vs 8) is kept as read and cross-checked by area, which contradicts it; the analyzer refuses to overrule the drawing with the table (correct: an ambiguity is named, not resolved) | no | partly: the room-number reader could offer both readings with confidences | yes, generically (name both candidates) — already does | **ALGORITHM_UNCERTAIN**, honest; stays |
+| MRC-W1 | `no vision provider ran; every observation is from the deterministic analyzer` | informational | — | not a limitation of THIS model; every phone run has it (the APK carries no key) | n/a | yes: the phone counts it as a limitation | yes: classify warnings by severity; informational warnings must not make a model "limited" | **UNIMPLEMENTED_SEMANTIC (warning severity)** — fixed in 005A on the product side: a warning class that is informational is not a limitation |
+| MRC-W2 | `5 source addresses not used (byte identical)` | informational | — | one copy published at two addresses is counted once; this is bookkeeping, not a loss | n/a | yes, same as W1 | yes | fixed with W1 |
+| MRC-W3 | `9 source addresses not used (http status)` | source (publisher) | the publisher's `__11xxx` convention answers 404 for assets that have no larger copy (the hero render, chrome) | positive evidence that no larger copy exists; not a loss of drawing | genuinely absent — and irrelevant | yes: reported as if it were a loss | yes: report only failures of assets that would have been READ (plan/elevation/section) | fixed with W1 (severity by role) |
+| MRC-W4 | `12 of 66 source-view checks outside tolerance` | verification residuals | the elevations and the section | the projected model disagrees with 12 of 66 measured checks (opening positions/sizes against the render registrations) | no | yes — algorithmic residuals the repair pass could not close | partially (out of 005A scope) | **ALGORITHM_UNCERTAIN**; stays, correctly reported as a limitation |
+
+Verdict for §18: of the six items, two are genuine analyzer uncertainties that must stay
+visible (U2, W4), one is a resolvable algorithmic gap left as recorded debt (U1), and three
+are informational warnings that the product wrongly presented as limitations (W1–W3). 005A
+fixes the presentation generically (warnings carry a severity; only `LIMITATION` warnings
+count) and does not remove any warning to improve a score.

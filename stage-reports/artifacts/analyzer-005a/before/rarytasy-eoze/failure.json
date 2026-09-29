@@ -1,0 +1,30 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "builtRegions": 2,
+    "cells": 14,
+    "dimensionChains": 81,
+    "dimensionChainsRead": 9,
+    "enclosedCells": 2,
+    "gridLinesX": 15,
+    "gridLinesY": 2,
+    "masses": 0,
+    "planFrames": 4,
+    "planSizePx": "853x853",
+    "plansRead": 1,
+    "recessRegions": 0,
+    "scaleCmPerPx": 2.5016,
+    "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+    "wallBands": 45,
+    "wallThicknessPx": 15.5,
+    "walledEnvelope": false,
+    "wideOpenings": 0,
+    "wideOpeningsClosed": 0
+  },
+  "message": "45 wall bands were found on the 853×853 px floor plan, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing",
+  "reasonCode": "PLAN_NO_WALLED_ENVELOPE",
+  "stage": "REGISTERING_VIEWS",
+  "substage": "PLAN_DECOMPOSITION",
+  "title": "The floor-plan walls do not enclose a building"
+}
+

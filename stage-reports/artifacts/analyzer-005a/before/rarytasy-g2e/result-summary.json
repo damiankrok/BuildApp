@@ -1,0 +1,198 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.1.0"
+  },
+  "candidateHash": "0bc408c4b682a1399bb0d9f85942bf592f1af4fa0384708ebdec5efa810a032f",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+  "completedAt": "2026-09-29T20:27:21.549Z",
+  "counts": {
+    "assets": 37,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 4,
+      "PERSPECTIVE_RENDER": 25,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 0,
+    "callouts": 83,
+    "chimneys": 1,
+    "commands": 151,
+    "frames": 35,
+    "masses": 2,
+    "meshes": 113,
+    "metricEvidence": 147,
+    "observations": 1183,
+    "openings": 14,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 9,
+    "terraces": 2,
+    "triangles": 2736
+  },
+  "jobId": null,
+  "label": "Dom w rarytasach 5 (G2E) (analysis)",
+  "metricEvidenceHash": "27ef30a044b9e7823b32059efe990dc073dc8e57ffbbe386b5c0f2d907c78cc2",
+  "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+  "modelId": "m-analysis-m84f2903cb8e14",
+  "modelSha256": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+  "observationGraphHash": "073707ae7ca2cbd7dfad59e5e36abb13a3221e4d7e86b55eb7251a76d25b2313",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "ATTACHED_ROOF": {
+        "L2": 1
+      },
+      "CAMERA": {
+        "L1": 12
+      },
+      "CHIMNEY": {
+        "L2": 1
+      },
+      "INTERIOR_DOOR": {
+        "L1": 7
+      },
+      "INTERIOR_WALL": {
+        "L0": 1,
+        "L1": 19
+      },
+      "LEVEL": {
+        "L2": 1
+      },
+      "MASS": {
+        "L2": 2
+      },
+      "OPENING": {
+        "L1": 1,
+        "L2": 13
+      },
+      "RECESS": {
+        "L2": 1
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOM": {
+        "L1": 5,
+        "L2": 4
+      },
+      "SURFACE_REGION": {
+        "L0": 4
+      },
+      "TERRACE": {
+        "L2": 2
+      }
+    },
+    "levels": {
+      "L0": 5,
+      "L1": 44,
+      "L2": 26
+    }
+  },
+  "sceneBytes": 328014,
+  "sceneContentHash": "d4e7249bb1bda4b8b5464d699e8a3000c8203995a1f17e318bf3d9280b4899b1",
+  "sceneSha256": "8bf67c1ae45a6a188ed3cd33695b5b2452d5a634c33187f80d116c4c11298f05",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "187b134a333a79d91da0054e725517dca0a17cabc092bf5767efc4481b7a89f0",
+  "sourcePackageId": "src-m84f2903cb8e14-bd72938d69",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+  "startedAt": "2026-09-29T20:21:57.622Z",
+  "timings": {
+    "acquisitionMs": 18751,
+    "compileMs": 84,
+    "metricExtractionMs": 166896,
+    "observationMs": 126144,
+    "reconstructionMs": 11603,
+    "totalMs": 323927,
+    "verificationMs": 446
+  },
+  "title": "Dom w rarytasach 5 (G2E)",
+  "unresolved": [
+    {
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-1"
+    },
+    {
+      "reason": "its 11.405 m² is 68 % off the published Garaż 35.52 m²; by area it would be 4 Kuchnia 11.51 or 6 Pokój 11.52 or 7 Pokój 11.71 or 8 Pokój 12.63",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-7 (read as 13)"
+    },
+    {
+      "reason": "its 11.395 m² is 68 % off the published Garaż 35.52 m²; by area it would be 4 Kuchnia 11.51 or 6 Pokój 11.52 or 7 Pokój 11.71 or 8 Pokój 12.63",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-6 (read as 13)"
+    },
+    {
+      "reason": "two numbers (10, 5) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-0"
+    },
+    {
+      "reason": "two numbers (13, 7) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-6"
+    },
+    {
+      "reason": "its 28.355 m² is 501 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-0 (read as 1)"
+    },
+    {
+      "reason": "its 28.355 m² is 501 % off the published Wiatrołap 4.72 m²; by area it would be 5 Salon + Jadalnia 31.96",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-0 (read as 1)"
+    },
+    {
+      "reason": "two numbers (1, 13) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-0"
+    },
+    {
+      "reason": "they share 0.0171 m² of plan area and no junction the plan states explains it; the partition was left out",
+      "status": "AMBIGUOUS",
+      "what": "the joint between main-iwall-0-x-4 and main-iwall-0-z-0"
+    },
+    {
+      "reason": "narrowed from 4.10 to 3.86 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-0-east-5-0 as the drawings print it"
+    },
+    {
+      "reason": "not built: even fitted, the model refuses it (OPENINGS_OVERLAP)",
+      "status": "REFUSED",
+      "what": "the opening opening-0-east-5-1 as the drawings print it"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 19
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 28,
+    "residualsOutsideTolerance": 17
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses not used (byte identical)",
+    "7 source addresses not used (http status)",
+    "17 of 28 source-view checks outside tolerance",
+    "1 feature-graph and 0 ledger invariant violations"
+  ]
+}
+

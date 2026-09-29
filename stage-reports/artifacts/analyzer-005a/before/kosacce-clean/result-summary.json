@@ -1,0 +1,199 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.1.0"
+  },
+  "candidateHash": "43301e0bfba3ed24bb8ac976a6cfb8bbc54ef63eb7e59e862ab7cec03b12246b",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+  "completedAt": "2026-09-29T19:21:53.576Z",
+  "counts": {
+    "assets": 31,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 4,
+      "PERSPECTIVE_RENDER": 19,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 0,
+    "callouts": 53,
+    "chimneys": 2,
+    "commands": 169,
+    "frames": 29,
+    "masses": 3,
+    "meshes": 136,
+    "metricEvidence": 123,
+    "observations": 1292,
+    "openings": 13,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 10,
+    "terraces": 0,
+    "triangles": 3148
+  },
+  "jobId": null,
+  "label": "Dom w kosaćcach 46 (analysis)",
+  "metricEvidenceHash": "b309767db31749bcaa9dcf27161e26780af0cf0dca1c21e77f607c142f783a82",
+  "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+  "modelId": "m-analysis-mf6628752fa61f",
+  "modelSha256": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+  "observationGraphHash": "d48eb691d3faef4cf53376d4a3b3b7b24f87fb5f254d08858dfc0e5c563c8380",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "ATTACHED_ROOF": {
+        "L0": 2
+      },
+      "CAMERA": {
+        "L1": 5
+      },
+      "CHIMNEY": {
+        "L2": 2
+      },
+      "INTERIOR_DOOR": {
+        "L1": 7
+      },
+      "INTERIOR_WALL": {
+        "L0": 1,
+        "L1": 33
+      },
+      "LEVEL": {
+        "L2": 1
+      },
+      "MASS": {
+        "L2": 3
+      },
+      "OPENING": {
+        "L1": 8,
+        "L2": 5
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOM": {
+        "L1": 9,
+        "L2": 1
+      }
+    },
+    "levels": {
+      "L0": 3,
+      "L1": 62,
+      "L2": 13
+    }
+  },
+  "sceneBytes": 366284,
+  "sceneContentHash": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+  "sceneSha256": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "39820e75f62340bf3224e6af9c7e5dac9f489f437847c5d6cb64736182f16079",
+  "sourcePackageId": "src-mf6628752fa61f-56408a0bd9",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+  "startedAt": "2026-09-29T19:16:54.826Z",
+  "timings": {
+    "acquisitionMs": 3227,
+    "compileMs": 150,
+    "metricExtractionMs": 164394,
+    "observationMs": 121981,
+    "reconstructionMs": 8337,
+    "totalMs": 298750,
+    "verificationMs": 657
+  },
+  "title": "Dom w kosaćcach 46",
+  "unresolved": [
+    {
+      "reason": "no section states an eaves level and a ridge level, so there is no rise to test a span against",
+      "status": "AMBIGUOUS",
+      "what": "which way the ridge runs over mass-0"
+    },
+    {
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-1"
+    },
+    {
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-2"
+    },
+    {
+      "reason": "only 26% of its perimeter is drawn as wall, so what encloses it is line work rather than construction",
+      "status": "AMBIGUOUS",
+      "what": "whether the 3.2 m² region at 11.52, 0.00 is part of the building"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the rear elevation"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the front elevation"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.46 m thin band at x 14.17"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 1.95 m thin band at z 8.51"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 2.29 m thin band at z 8.53"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 1.47 m thin band at z 0.37"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 2.09 m thin band at z 0.37"
+    },
+    {
+      "reason": "its 5.9225 m² is 183 % off the published Toaleta 2.09 m²; by area it would be 1 Wiatrołap 5.68 or 2 Korytarz 5.38 or 10 Garderoba 6.09",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-2 (read as 8)"
+    },
+    {
+      "reason": "narrowed from 4.07 to 3.65 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening shared-opening-0-east-1-1 as the drawings print it"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 8,
+      "exteriorFindings": 8,
+      "interiorFindings": 48
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 5,
+    "residualsOutsideTolerance": 2
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses not used (byte identical)",
+    "7 source addresses not used (http status)",
+    "2 of 5 source-view checks outside tolerance",
+    "8 exterior joint findings in the closure audit"
+  ]
+}
+
