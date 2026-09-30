@@ -473,7 +473,7 @@ private fun AnalyzerActivity(status: JobStatus?) {
             overflow = TextOverflow.Ellipsis,
         )
         step?.let { StatusText(it, maxLines = 1) }
-        tracker.stepElapsedMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_step_elapsed, duration(ms)), maxLines = 1) }
+        tracker.stepElapsedMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_step_elapsed, stepDuration(ms)), maxLines = 1) }
         val verdict = tracker.verdict(now)
         // The last sign of life, counted on this phone; a silence long enough to matter has its own card below.
         if (verdict !is Liveness.NoResponse) tracker.sinceHeartbeatMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_last_activity, (ms / 1000).toInt()), maxLines = 1) }
@@ -494,7 +494,7 @@ private fun AnalyzerActivity(status: JobStatus?) {
 
 /** "42 s", "1 min 42 s": how long, in the words the progress lines use. */
 @Composable
-private fun duration(ms: Long): String {
+private fun stepDuration(ms: Long): String {
     val seconds = (ms / 1000).coerceAtLeast(0).toInt()
     return if (seconds < 60) stringResource(R.string.analyzer_duration_seconds, seconds)
     else stringResource(R.string.analyzer_duration_minutes, seconds / 60, seconds % 60)
