@@ -28,6 +28,7 @@
 | STAGE BUILDPLAN-INTEGRATION-003C — IMMERSIVE WORKSPACE + CONSTRUCTION PROGRESS + 3D HOTFIX | `integration/immersive-progress-v1` (from `integration/product-shell-rarytasy-v1` @ `2d8ee75`; resumed at `30135c6`; donor Legacy `main` @ `b0e7967`, read only) | P0 fix `6e1dcf8`; progress `b247752`, `97541fe`, `4bf3757`; workspace `80b9887`; UI gate `70e4385`; Cycle 1 `de48ed7`, `cd60077`, `507d5c7`; Cycle 2 `83bb3dc`, `8f645b0`, `941cdb9`, `b25ccae`, `0ad5ef3`; Cycle 3 `af49ee7`; finish `89c8ad6`, `1169321`, `40cf940`; final build `6f9da1b` (CI run 73, green on every job); report: the commit that carries this row | **PASS_BUILDPLAN_INTEGRATION_003C_IMMERSIVE_PROGRESS_VERTICAL_SLICE_READY_FOR_OWNER** — the immersive product workspace ("The Folding Rule": Dom with the inked house and one figure, model-first 3D with the construction timeline / time machine, functional Etapy, honest Koszty / Dokumenty, Polish analyzer entry with "Model gotowy z ograniczeniami") built with Impeccable and taken through three audit → fix → verify cycles (critique 21 → 26/40; audit.native 13 → 15/20) and the finish review; no P0 / P1 left. Device gate on every run: the owner's journey at font 1.0 and 1.3, landscape, lifecycle / unhappy paths / collisions, and Marcówki + Rarytasy analysed through the app (model hashes unchanged; Rarytasy PARTIAL). OWNER APK versionCode 1073 (run 73, `6f9da1b`). Owner visual review pending |
 | STAGE BUILDPLAN-INTEGRATION-004A — HOUSE-FIRST WORKSPACE + ADAPTIVE ANALYZER + KOSAĆCE TOPOLOGY | `integration/house-first-adaptive-analyzer-v1` (from `integration/immersive-progress-v1` @ `d199a0e`; donor Legacy `main` @ `b0e7967`, read only) | source `48034bc`, `e4e191d`, `a160561`; reconstruction `c3d47ff`, `b3dced2`; UI `7213834`; gates `b62a096`, `c42437e`, `43f052b`; cycles `fa31064`, `a9cca3e`, `93a72b6`, `0feddb4`, `1b80ba8`; device gates `f6b8a92`; report `1be45a7`, `54f0c1a`, `c3261a1`, `a14427c` and the commit that carries this row; final build `f6b8a92` (CI run 80, `workflow_dispatch` with the OWNER APK) | Three verdicts, recorded separately (§ "Where the house-first product stands"): **HOUSE-FIRST PRODUCT: TECHNICAL_PASS / OWNER_VISUAL_ACCEPTANCE_PENDING**; **ADAPTIVE SOURCE: PASS (router, generic reader, security) — the alternate Marcówki page is read and refused at reconstruction on evidence (PARTIAL for that one page, as the brief allows)**; **KOSAĆCE: PASS**. The house is the root (the 3D house full screen, one contextual sheet at a time, the analyzer as a task returning to the same house and camera, Koszty a named boundary); an unknown publisher is inspected, never rejected by hostname, and refused only with a typed reason; Kosaćce reconstructs without special-casing through the generic wall topology planner (`WALLS_OVERLAP` unchanged, Marcówki and Rarytasy byte-identical). Three Impeccable audit cycles closed every P1/P2; the OWNER checklist is in the report §AB. The terminal line is in the report |
 
+| STAGE BUILDPLAN-ANALYZER-005A — GENERALIZATION COUNCIL + MULTI-HYPOTHESIS RESOLVER + TRUE PROGRESS TELEMETRY | `analyzer/generalization-council-v1` (from `integration/house-first-adaptive-analyzer-v1` @ `7cd8e0c`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | Council `ccdbd36`, `09fe527`; source `dbfe607`; resolver `f845d21`, `a3723ec`, `f1901e9`, `daf8b8c`; progress `69b0f93`, `5671e6f`, `5dbd0fb`, `968344a`, `a815ce5`, `1094d7c`; warnings `5c3fd22`, `dd664b6`; gates `18adefa`, `f466a64`, `f773a32`, `bdd7cb0`, `b7d7198`, `a3ace7a`; holdout `2bd2593`, `c77e5a8`, `883cb46`; post-Council `616c96e`; performance `56ca1e3` = **PRE_HOLDOUT_SHA** (CI run 96 green); holdout evidence `70636bc`; report: the commit that carries this row | Five verdicts, recorded separately (§ "Where the analyzer's generalization stands"): **ANALYZER GENERALIZATION ARCHITECTURE: PARTIAL**; **OWNER DEVELOPMENT CASES: PARTIAL**; **TRUE PROGRESS TELEMETRY: PASS**; **BLIND ARCHON HOLDOUT 1 (`dom-w-jablonkach`): ALGORITHMIC_FAIL**; **BLIND ARCHON HOLDOUT 2 (`willa-miranda`): ALGORITHMIC_FAIL**. Both blind houses stop on adequate drawings, on one shared defect below the resolver: rotated overall-dimension labels read upside down, which a circular chain correction or an interior extent turns into the wrong house. Not patched; next-stage input. The terminal line is PARTIAL |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -792,7 +793,79 @@ Report: `stage-reports/STAGE_BUILDPLAN_INTEGRATION_004A_HOUSE_FIRST_ADAPTIVE_ANA
 - **Open for the OWNER:** visual acceptance of the house-first workspace on
   the phone; the questions in the 004A report's OWNER checklist.
 
+## Where the analyzer's generalization stands (STAGE BUILDPLAN-ANALYZER-005A)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005A_GENERALIZATION_COUNCIL.md`. Evidence:
+`stage-reports/artifacts/analyzer-005a/`. `PRE_HOLDOUT_SHA = 56ca1e3a5bd68c72f3dc1fab6ebade426bcc8ac8`.
+
+- **ANALYZER GENERALIZATION ARCHITECTURE — PARTIAL.**
+  - **Built.**
+    - A seven-reviewer Council audited production before any code, with ten deliverables and a binding
+      decision.
+    - A post-implementation Council reviewed the result.
+    - **Logical source identity** (`source-package`) is invariant to tracking queries, order, fragment,
+      trailing slash, host case, canonical link and redirect.
+    - A **bounded plan resolver** (`reconstruction/src/plan-resolution.ts`, 1.2.0) weighs copy, extent, scale,
+      merge, face and mouth readings. It completes only on AGREES, NEAR+1 or UNKNOWN+2, and the only honest
+      corroborations are isotropy and cross-copy agreement. A published figure that refused the first reading
+      may veto but not also choose, and anything else is `PLAN_RESOLUTION_INCONCLUSIVE`, by name.
+    - **Severity-typed warnings.**
+    - A **derived no-development-house guard**, which the two sealed blind houses extend.
+  - **Why PARTIAL.** The resolver weighs readings of one set of metric evidence. The scale vote, the text
+    orientation and the plan extent below it are still single winners, and both blind houses failed there.
+  - **Residual debt.** Ten named items are in report §AD. One of them is that after a structural stop the
+    figure still chooses: 8 of 216 decoy cells.
+- **OWNER DEVELOPMENT CASES — PARTIAL.**
+  - **Achieved.**
+    - Tracked Kosaćce equals clean Kosaćce (package id, content hash, candidate, model `5b5ffcf1…`, scene
+      `50217b85…`).
+    - Rarytasy e-OZE completes: resolved at 116.7 m² (−4.4 %), model `b50b6e59…`.
+    - Marcówki (`6152770f…`) and G2E (`8fa4a25b…`) are unchanged.
+  - **Open.**
+    - The phone's single-copy Kosaćce case is refused as `PLAN_RESOLUTION_INCONCLUSIVE`, and why the phone
+      received one copy of four is still unexplained. The acquisition now names every lost address.
+    - e-OZE is resolved on the figure alone, with no witness, so it is LIMITING and would not pass the holdout
+      predicate.
+- **TRUE PROGRESS TELEMETRY — PASS.**
+  - **What exists.**
+    - A write-only checkpoint that ticks at every long loop.
+    - A heartbeat and IO_WAIT.
+    - Per-phase performance records.
+    - The phone's program, protocol 3, cancels mid-computation.
+    - The phone's card shows the phase, the real count, the substep, the step's duration and the last
+      activity, and tells slow ("Nadal analizuję…") from unresponsive ("Brak odpowiedzi…").
+  - **The numbers.** The longest silence went from 144–175 s to 2.1–3.7 s on the known set, and was 2.1–2.2 s on
+    the blind runs. Peak memory is halved (1.8–2.2 GB → 0.75–0.92 GB); the metric pass is 17–29 % slower, for the
+    bounded render cache, measured by an A/B.
+  - **Still to confirm:** seeing it on the OWNER's phone.
+- **BLIND ARCHON HOLDOUT 1 — ALGORITHMIC_FAIL.** `projekt-dom-w-jablonkach-22-mb0e2566e7cb18`:
+  `PLAN_LAYOUT_REJECTED`, 46.49 of 99.4 m². 71 readings were weighed, all `WRONG`, and the resolver was
+  `INCONCLUSIVE`.
+  - **The drawing is adequate:** walls 20 px, glyphs 59 px, no plan lost.
+  - **The first bad decision:** the rotated "900" was read as "006", then rewritten by the chain solver as
+    "806" to fit the interior spans' scale, which it then anchored. The result was 1.88 cm/px, against the
+    2.11 cm/px of the printed 1100 and 900.
+- **BLIND ARCHON HOLDOUT 2 — ALGORITHMIC_FAIL.** `projekt-willa-miranda-11-g2-m49324d69ef143`:
+  `PLAN_LAYOUT_REJECTED`, 0.55 of 169.9 m². 11 readings were weighed, all `WRONG`, the best at 101–104 m².
+  - **The drawing is adequate:** walls 12 px, glyphs 48 px, no plan lost.
+  - **The scale is right.** The first bad decision is the depth: the overall vertical chain 245 / 920 / 245 =
+    1410 was read upside down ("0111", "036", "502", "535"), so an interior 2.5 m chain became the plan's
+    extent, unmarked as weak.
+- **Both holdouts ran once, on the frozen code, and nothing was patched.** Each verdict is its own, never
+  averaged. Both families are now development cases.
+- **Open for the OWNER.** The progress card and the result warnings on the phone, and the checklist in the
+  report.
+
 ## Recommended technical next step
+
+**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005A holdout defect as the next stage's input.**
+- **The defect.** Rotated overall-dimension labels are read upside down, and two decisions turn that misreading
+  into a wrong house:
+  - the chain solver's digit correction, which anchors its own scale;
+  - an interior chain accepted as the plan's extent without being marked weak.
+- **How a fix is judged.** It is held to the six known runs and to both drawn houses, which are now
+  development cases.
+- **Generality.** A further claim of generality needs a new blind draw on a new frozen SHA.
 
 **For the integration line: the OWNER's visual review of BUILDPLAN-INTEGRATION-004A on the phone** (`owner-preview-latest`, run 80 / `f6b8a92`, `versionCode 1080`, `0.80.0-preview`, arm64-v8a, SHA-256 `3390aafd…`; the checklist and questions in the 004A report), then a bounded fix of only what the phone and the answers show. Costs stay a named boundary, documents are not started, and nothing is merged to `main`, until the coordinator decides.
 
