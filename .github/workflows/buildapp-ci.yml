@@ -902,6 +902,130 @@ jobs:
       - name: Telemetry, progress, cancellation and severities
         run: npx vitest run packages/analysis-service/test/telemetry.test.ts packages/analysis-service/test/warnings.test.ts packages/analysis-service/test/service.test.ts apps/local-analyzer/test/program.test.ts apps/analyzer-api/test/android-contract.test.ts
 
+  analyzer-dimension-evidence:
+    # BUILDPLAN-ANALYZER-005B. Metric truth from the drawing's own dimensions.
+    # - dimension-orientation: every label read every way up (0, 90, 180 and
+    #   270 degrees, page rotations), the raw readings kept beside the page
+    #   vote's and never instead of it, leading-zero shadows of upside-down
+    #   labels, mirrored patterns.
+    # - scale-independence: a correction made under a scale never witnesses
+    #   that scale; independent witness groups; one ink, one witness;
+    #   determinism.
+    # - dimension-chain: totals and segments, nesting, missing and
+    #   conflicting labels recorded rather than forced.
+    # - extent: the longest interior chain is never the building; the wall
+    #   witness; an outer chain's ticks; no outer chain at all.
+    # - source parity: the desktop and the phone's runtime make the same
+    #   SourcePackage from the same bytes.
+    # - the production hard-code guard, with the development houses' printed
+    #   overall dimensions.
+    name: Analyzer / dimension evidence
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Dimension orientation
+        run: npx vitest run packages/source-metrics/test/orientation-metamorphic.test.ts packages/source-metrics/test/ocr.test.ts
+      - name: Scale independence
+        run: npx vitest run packages/source-metrics/test/metric-solution.test.ts packages/source-metrics/test/registration.test.ts packages/source-metrics/test/scale-plausibility.test.ts
+      - name: Dimension chains
+        run: npx vitest run packages/source-metrics/test/chains.test.ts packages/source-metrics/test/extract.test.ts
+      - name: Plan extent
+        run: npx vitest run packages/reconstruction/test/plan-extent.test.ts packages/reconstruction/test/plan-decomposition.test.ts packages/reconstruction/test/plan-resolution.test.ts
+      - name: Source parity (desktop and the phone's runtime, same bytes)
+        run: npx vitest run apps/local-analyzer/test/source-parity.test.ts apps/local-analyzer/test/text.test.ts
+      - name: Production hard-code guard
+        run: npx vitest run tests/architecture/generalization.test.ts
+
+  analyzer-development-houses:
+    # BUILDPLAN-ANALYZER-005B. All eight development houses through today's
+    # analyzer. Only the source package is sealed (stage-reports/artifacts/
+    # analyzer-005b/dev); observations, metric evidence and the model are
+    # re-extracted from the publisher's drawings, which are fetched here and
+    # never committed. Each row is judged by the rule it must meet
+    # (scripts/dev-row.mjs); Marcówki and Kosaćce, whose models may not move,
+    # are pinned, and the tracked Kosaćce link to the clean one's model. Only a
+    # publisher that cannot be reached at all is a warning.
+    name: Analyzer / development house (${{ matrix.house }})
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - house: marcowki
+            expect: pass
+            model: 6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f
+          - house: kosacce-clean
+            expect: pass
+            model: 5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
+          - house: kosacce-tracked
+            expect: pass
+            model: 5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
+          - house: rarytasy-g2e
+            expect: "footprint:2"
+          - house: rarytasy-eoze
+            expect: pass
+          - house: alt-marcowki
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE|PLAN_LAYOUT_REJECTED|PLAN_RESOLUTION_INCONCLUSIVE"
+          - house: dom-w-jablonkach
+            expect: "footprint:1"
+          - house: willa-miranda
+            expect: "refuse:PLAN_LAYOUT_REJECTED|PLAN_RESOLUTION_INCONCLUSIVE|METRIC_RESOLUTION_INCONCLUSIVE"
+    env:
+      DEV: stage-reports/artifacts/analyzer-005b/dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: The publisher's drawings (fetched, never committed)
+        id: fetch
+        run: |
+          url=$(node -e "console.log(require('./$DEV/${{ matrix.house }}/source-package.json').canonicalUrl)")
+          if out=$(npm run -s source:acquire -- "$url" --cache .cache/dev --quiet 2>&1); then
+            echo "status=ok" >> "$GITHUB_OUTPUT"
+          elif echo "$out" | grep -q "the page could not be fetched"; then
+            echo "status=unreachable" >> "$GITHUB_OUTPUT"
+            echo "::warning::${{ matrix.house }}: the publisher's page could not be reached; this row is not judged"
+          else
+            echo "$out" | tail -n 5
+            exit 1
+          fi
+      - name: Today's analyzer on the sealed package, judged by its row
+        if: steps.fetch.outputs.status == 'ok'
+        run: |
+          mkdir -p dev
+          OFFLINE=1 npm run -s analysis:second-house -- --package "$DEV/${{ matrix.house }}/source-package.json" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
+          tail -n 4 "dev/${{ matrix.house }}.log"
+          node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }}
+      - name: Upload the development-house record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: development-house-${{ matrix.house }}
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            dev/**
+            !dev/**/observation-graph.json
+            !dev/**/plan-diagnostics/*.png
+
   architectural-assemblies:
     # BUILDAPP-03G. The architectural language as a review record: the
     # capability, primitive, assembly and relationship registries; the

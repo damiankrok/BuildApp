@@ -1,0 +1,374 @@
+{
+  "schema": "buildapp.development-matrix",
+  "schemaVersion": "1.0.0",
+  "what": "The eight development houses before (bdacd42, 005A) and after 005B, replayed offline from the same sealed source packages with every stage after acquisition re-run. Text facts only.",
+  "rows": [
+    {
+      "house": "marcowki",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.29,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "sceneContentHash": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+        "metricEvidenceHash": "ec25632647f2daf5debca2d411a0a9fdae0cf98788a81e83a511ac7eb2648b37",
+        "basePlanFrame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "scaleCmPerPx": 2.6426,
+        "extentProvenance": null,
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ]
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.29,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "sceneContentHash": "8c7d43956d74d2522d4edb35e6bf3cfb1cc1455cd6772b0e257b808e5a965a33",
+        "metricEvidenceHash": "7fe785e7e028c17c5017ba2921461919538434c26314dcfb26a5f9a6eba9c1f8",
+        "basePlanFrame": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+        "scaleCmPerPx": 2.6426,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "isotropy": "MEASURED",
+          "cmPerPixelX": 2.642489,
+          "cmPerPixelY": 2.64342,
+          "legacyCmPerPixel": 2.64342,
+          "independentWitnesses": 3,
+          "rereadChains": 1
+        },
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ]
+      }
+    },
+    {
+      "house": "kosacce-clean",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneContentHash": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+        "metricEvidenceHash": "b94faba9ac0b8e01e5c0347c7d8b4b30630505c766bef957afd400a80b120e46",
+        "basePlanFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+        "scaleCmPerPx": 2.4058,
+        "extentProvenance": null,
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ]
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneContentHash": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+        "metricEvidenceHash": "5ff21ae44c6a2a5e385e78345853cd4e48f62197c2e60e5d0f3cfe449b2879c1",
+        "basePlanFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+        "scaleCmPerPx": 2.4058,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "isotropy": "MEASURED",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "legacyCmPerPixel": 2.406097,
+          "independentWitnesses": 3,
+          "rereadChains": 0
+        },
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ]
+      }
+    },
+    {
+      "house": "kosacce-tracked",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneContentHash": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+        "metricEvidenceHash": "b94faba9ac0b8e01e5c0347c7d8b4b30630505c766bef957afd400a80b120e46",
+        "basePlanFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+        "scaleCmPerPx": 2.4058,
+        "extentProvenance": null,
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ]
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneContentHash": "50217b856dfc3d05e97baeb69cdbf681844a6e0eb78acb03a28adc91b2d34be9",
+        "metricEvidenceHash": "5ff21ae44c6a2a5e385e78345853cd4e48f62197c2e60e5d0f3cfe449b2879c1",
+        "basePlanFrame": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+        "scaleCmPerPx": 2.4058,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "isotropy": "MEASURED",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "legacyCmPerPixel": 2.406097,
+          "independentWitnesses": 3,
+          "rereadChains": 0
+        },
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ]
+      }
+    },
+    {
+      "house": "rarytasy-g2e",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "footprintM2": 184.22,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.93,
+        "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+        "sceneContentHash": "d4e7249bb1bda4b8b5464d699e8a3000c8203995a1f17e318bf3d9280b4899b1",
+        "metricEvidenceHash": "adbb22a0b2aae10d3215f2f16de7e8de745d28a229cefa2f0a69c50fa4383c2e",
+        "basePlanFrame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+        "scaleCmPerPx": 2.7579,
+        "extentProvenance": null,
+        "limiting": [
+          "OPENINGS_NOT_BUILT",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "INVARIANT_VIOLATIONS"
+        ]
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "footprintM2": 184.61,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.72,
+        "modelHash": "c287868c833bd812721ab6bcc64f6d664b9681a370f095ff7b45cd75b00a11fe",
+        "sceneContentHash": "99f50cc0db9e8205798b00c08ff7aa393090d8780f4110b808bef01987ae6e21",
+        "metricEvidenceHash": "70e6a38f23a85dde51920d3ac4b05344966e15f0550b4d1d6d24dcd01706fc3a",
+        "basePlanFrame": "frame-asset-rzut-e8520c3ad3-59a406b738",
+        "scaleCmPerPx": 2.7579,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "LEGACY_UNCONFIRMED",
+          "confidence": "WEAK",
+          "isotropy": "ASSUMED",
+          "cmPerPixelX": 2.749693,
+          "cmPerPixelY": 2.747816,
+          "legacyCmPerPixel": 2.747825,
+          "independentWitnesses": 2,
+          "rereadChains": 1
+        },
+        "challenge": "KEPT",
+        "limiting": [
+          "OPENINGS_NOT_BUILT",
+          "METRIC_SCALE_WEAK",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "INVARIANT_VIOLATIONS"
+        ]
+      }
+    },
+    {
+      "house": "rarytasy-eoze",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 1,
+        "footprintM2": 116.74,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": -4.37,
+        "modelHash": "b50b6e5992e9ac01b1151f534854ddf0076e2d8a989e2e66b087fde1b95c6773",
+        "sceneContentHash": "ffdf58003d25b61d417acce7223502a55f3a0e5ace15e54161be50ff2ec526e2",
+        "metricEvidenceHash": "fb7c2008265f6bf3e67839f80bfe10b036bbe1aa1c01e8a02622c6eb81c60152",
+        "basePlanFrame": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+        "scaleCmPerPx": 2.2236,
+        "extentProvenance": null,
+        "limiting": [
+          "LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS",
+          "LAYOUT_SCALE_DISAGREEMENT",
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ]
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "footprintM2": 123.99,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": 1.57,
+        "modelHash": "b4e76f04f47c5a26d46213a35122a4c0fe279907630fa5cddb3269f86e30142a",
+        "sceneContentHash": "d9cb0ea7babe0ac8749f009db23cf1987330306a0dd20d1b1a543d56effae579",
+        "metricEvidenceHash": "0ade79c0b3d691df87e1b8eede5212f38c4fd9816d799a06e6b8f89e840ebc84",
+        "basePlanFrame": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+        "scaleCmPerPx": 2.2236,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "isotropy": "MEASURED",
+          "cmPerPixelX": 2.223611,
+          "cmPerPixelY": 2.222222,
+          "legacyCmPerPixel": 2.501411,
+          "independentWitnesses": 2,
+          "rereadChains": 0
+        },
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ]
+      }
+    },
+    {
+      "house": "alt-marcowki",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "PLAN_LAYOUT_REJECTED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneContentHash": null,
+        "metricEvidenceHash": null,
+        "basePlanFrame": null,
+        "scaleCmPerPx": null,
+        "extentProvenance": null,
+        "limiting": []
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneContentHash": null,
+        "metricEvidenceHash": null,
+        "basePlanFrame": null,
+        "scaleCmPerPx": null,
+        "extentProvenance": null,
+        "limiting": []
+      }
+    },
+    {
+      "house": "dom-w-jablonkach",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "PLAN_LAYOUT_REJECTED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneContentHash": null,
+        "metricEvidenceHash": null,
+        "basePlanFrame": null,
+        "scaleCmPerPx": null,
+        "extentProvenance": null,
+        "limiting": []
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 1,
+        "footprintM2": 94.18,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": -5.25,
+        "modelHash": "0f3ea2bbd62342a5e9ed1ef3b32c47048b4a9496284c4f103c42c1bda008e94e",
+        "sceneContentHash": "0d2f0fee548fb80faf5ce4e0b4db239c53c150361e9e40996bbab163c104629f",
+        "metricEvidenceHash": "8f1bfdb5465b92ed7f9e9e377cae382825e129664e64b3302e8ccbc10540c4b8",
+        "basePlanFrame": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+        "scaleCmPerPx": 2.1194,
+        "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+        "metric": {
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "isotropy": "ASSUMED",
+          "cmPerPixelX": 2.119461,
+          "cmPerPixelY": 2.119461,
+          "legacyCmPerPixel": 1.892003,
+          "independentWitnesses": 1,
+          "rereadChains": 0
+        },
+        "challenge": "KEPT",
+        "limiting": [
+          "OPENINGS_NOT_BUILT",
+          "METRIC_SCALE_WEAK",
+          "EXTERIOR_JOINTS",
+          "INVARIANT_VIOLATIONS"
+        ]
+      }
+    },
+    {
+      "house": "willa-miranda",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "PLAN_LAYOUT_REJECTED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 169.9,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneContentHash": null,
+        "metricEvidenceHash": null,
+        "basePlanFrame": null,
+        "scaleCmPerPx": null,
+        "extentProvenance": null,
+        "limiting": []
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "PLAN_LAYOUT_REJECTED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 169.9,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneContentHash": null,
+        "metricEvidenceHash": null,
+        "basePlanFrame": null,
+        "scaleCmPerPx": null,
+        "extentProvenance": null,
+        "limiting": []
+      }
+    }
+  ]
+}

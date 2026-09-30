@@ -1,0 +1,1995 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-dodatkowa-wizu-a071ea4458",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-3ee75d84d1cf4e85fd09f-76583e134d",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "959ad12f7160c95adac4b8fb07c2018288cf0fdceea1d3402a9a6a5ed691edfa",
+          "byteLength": 414828,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/carousel_images",
+          "id": "var-projekt-dom-w-kosaccach-46-3ee75d84d1cf4e85fd09f-76583e134d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/fm/projekt-dom-w-kosaccach-46-3ee75d84d1cf4e85fd09f94621feb0f8__54429.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-dodatkowa-wizu-b93d542739",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-cf75a86cad3280ec88e7c-819bbc3c54",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "d87da0193cfeb28e4b8f526bd217bdf111e53f80dd83fde63a99169f6332cd11",
+          "byteLength": 312430,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/carousel_images",
+          "id": "var-projekt-dom-w-kosaccach-46-cf75a86cad3280ec88e7c-819bbc3c54",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/fm/projekt-dom-w-kosaccach-46-cf75a86cad3280ec88e7c4a0ff02ae07__54135.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-elewacja-boczn-8264f016d0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-kosaccach-46\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-0859b6528ed6f40337704-7f5a4f25bb",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "22ffe3d57151b3e5c9e0f63debd74afedb9035c18770726e8aad460cf928e5af",
+          "byteLength": 386898,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-0859b6528ed6f40337704-7f5a4f25bb",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-0859b6528ed6f403377042a8815253e9__11266.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "bba912da4a17b269fb06e7d7a4f87edc9955bdd1c22dc3bea5964fc4fed77ef3",
+          "byteLength": 89078,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-elewacja-boczna-projekt-dom-w-kosaccach-46-729f1-10074041b4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-boczna-projekt-dom-w-kosaccach-46-729f1c75c317575c0ed9a9ddc5843d8f__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-elewacja-boczn-951019e9cc",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-kosaccach-46\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w kosaccach 46 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-59cee3b1d7efbeb588da6-36edb1ba94",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "e9c93d88d65f62279072ff2827a3ae4550c4d0039ba31952203b2815f7048f3f",
+          "byteLength": 458896,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-59cee3b1d7efbeb588da6-36edb1ba94",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-59cee3b1d7efbeb588da6d6760dbc0bd__11265.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "8598a2728273938e7a23675fe0cf79d75f36964851432c0c9f9fe73954a1f903",
+          "byteLength": 106659,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-elewacja-boczna-projekt-dom-w-kosaccach-46-174b9-cf35710e12",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-boczna-projekt-dom-w-kosaccach-46-174b9803f800465ea3934ed6ba299333__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-elewacja-front-1333e5ed16",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-kosaccach-46\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w kosaccach 46 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w kosaccach 46 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-e4888a33b41381ebd07ae-2a1671ba98",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "428cf97139dc54356fa382399fb370b40ab051bc2fdb82622be1393f239bb97a",
+          "byteLength": 400409,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-e4888a33b41381ebd07ae-2a1671ba98",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-e4888a33b41381ebd07ae4786b093107__11264.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "92929eee8b612220de1f82b56842ba2f8434146cfe8be61e3935d0dc010ae999",
+          "byteLength": 92379,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-elewacja-frontowa-projekt-dom-w-kosaccach-46-a0e-42102722b7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-frontowa-projekt-dom-w-kosaccach-46-a0e003a134052e5f1b9d50359df21f41__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-elewacja-ogrod-8ff3c31c23",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w kosaccach 46 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-kosaccach-46\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w kosaccach 46 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w kosaccach 46 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-45bfde80100a7aa497423-9cf5e78d9a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "ae3d462736aef01e69c5a154a910168bd959d82bc5e8b1e8f009579099535336",
+          "byteLength": 431523,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-45bfde80100a7aa497423-9cf5e78d9a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-45bfde80100a7aa4974235fa8e362b80__11267.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "9060d6e80983cbddd2360b720ba8410c68ef640bfda16c5bed9fa47026e4e0b8",
+          "byteLength": 98982,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-kosaccach-46-3ac-76181a90d5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-ogrodowa-projekt-dom-w-kosaccach-46-3ac4e33b49de956b84b9cf7600057f92__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-przekroj-budyn-aba0eb5f98",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w kosaccach 46 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w kosaccach 46 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w kosaccach 46 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-kosaccach-46-f6b7-326935237c",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "49c0ec434e887c9834d57910b0cd84936488990375e2c7b152245374158cdb0f",
+          "byteLength": 61117,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mf6628752fa61f/przekroj-budynku-projekt-dom-w-kosaccach-46-f6b79793156983578c46561b304ee8dd__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-kosaccach-46-f6b7-326935237c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/przekroj-budynku-projekt-dom-w-kosaccach-46-f6b79793156983578c46561b304ee8dd__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "7dc7e366452e8d596c10eff005df459f1bac2f9a66ce90c45d152cb15aaa5ed5",
+          "byteLength": 15610,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-przekroj-budynku-projekt-dom-w-kosaccach-46-f6b7-d4c58c4916",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/przekroj-budynku-projekt-dom-w-kosaccach-46-f6b79793156983578c46561b304ee8dd__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-rzut-parteru-427ce11c3b",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-kosaccach-46-ae448ce2-0f75e573ef",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "35121fca8188175bb9a242d8b4060e64531edfece918974e0394e12f8871fa3a",
+          "byteLength": 59457,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-kosaccach-46-ae448ce2-0f75e573ef",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/rzut-parteru-projekt-dom-w-kosaccach-46-ae448ce226cf7dc14b60ae57dda37406__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-sytuacja-fecba639ad",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w kosaccach 46 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w kosaccach 46 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-f14203bd1740c1b688429-ed8ec06b17",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "d7abb57134a13664c5254c56188d1307c4ce4c9409ddb07dd83bc09e7d4e7c69",
+          "byteLength": 177106,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-f14203bd1740c1b688429-ed8ec06b17",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-f14203bd1740c1b688429cbe64362b79__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "43070543a7303eaa7344f5fbab573b5c95415775202b7ddb0df6fa83bb463a04",
+          "byteLength": 38659,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-sytuacja-projekt-dom-w-kosaccach-46-f0ed6b5c2b87-cba2644aa6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/sytuacja-projekt-dom-w-kosaccach-46-f0ed6b5c2b8789c190fcf7ec73c8d260__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w kosaćcach 46 widok 1",
+      "id": "asset-gotowy-projekt-dom-w-kosaccach-46-widok-1-0d7d199a7d",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-kosaccach-46-3c48a52768fbb-f338d81cfb",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "539e8d6448a785879fc1012ce8dac568392c996f41984518440050d222db81de",
+          "byteLength": 9654,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-widok-1-projekt-dom-w-kosaccach-46-3c48a52768fbb-f338d81cfb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-1-projekt-dom-w-kosaccach-46-3c48a52768fbb3a51e05567e1eaf29ec__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w kosaccach 46 08c9c285b19e7caebcedd2c0924a76ed  51270",
+      "id": "asset-projekt-dom-w-kosaccach-46-08c9c285b19e7caebcedd-f5efa5da1d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-08c9c285b19e7caebcedd-0ee196cf4a",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c028988d40006751f8b4cc1e2481afc8924878a947d3dc82b6e9a9f7e4c0fbcc",
+          "byteLength": 551016,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/mf6628752fa61f/image/51270?showHotspots=false",
+          "id": "var-projekt-dom-w-kosaccach-46-08c9c285b19e7caebcedd-0ee196cf4a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/mf6628752fa61f/i/projekt-dom-w-kosaccach-46-08c9c285b19e7caebcedd2c0924a76ed__51270.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-11877a046b",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 7)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-659723cb240f6d577ff82-062bb12718",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "d67a41596de8a98a6d476cc829270c9391cc415e3a3a97eae34fb5f800ccebee",
+          "byteLength": 1649927,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-659723cb240f6d577ff82-062bb12718",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-659723cb240f6d577ff82a958691eacc__52392.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-1d4215c7fd",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 8)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-65efccd6f5c1eb10cddc1-8aeab1125d",
+      "selectionReason": "only variant (710x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666041,
+          "byteHash": "9d7d681415222ad3d14e32e0763ef6491217d29600a007876821ceb3bb2df043",
+          "byteLength": 692787,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 710
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-65efccd6f5c1eb10cddc1-8aeab1125d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-65efccd6f5c1eb10cddc12b89d03e4fe__52393.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w kosaćcach 46",
+      "id": "asset-projekt-dom-w-kosaccach-46-1dbf235625",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-kosaccach-46-b65993c5fdb71-ab6d65b03c",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2f9782e1b78b61f0dc3c116091b54e4e521073939183503565e63ca1f20eeb44",
+          "byteLength": 28000,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-kosaccach-46-b65993c5fdb71-ab6d65b03c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-2-projekt-dom-w-kosaccach-46-b65993c5fdb71e91d1c2a1e40cd5d8c7__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-1e591fd038",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 wizualizacja kuchni 1 widok 3\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-8c0eec9ca1f0af05d6a91-a6070164ba",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "886251dda10374cf53942fb532fb548872828ae5ff53324fab1153c5a843b719",
+          "byteLength": 1194468,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-8c0eec9ca1f0af05d6a91-a6070164ba",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/k3/projekt-dom-w-kosaccach-46-8c0eec9ca1f0af05d6a9129ab7e6b80a__52396.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-1e87657866",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-2407530d615ca72795f95-43b3cd2ddc",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "9d0c9ba67a842da5efc39c1452c04ccd30f4534f2bbd36c81b9973df98df6c35",
+          "byteLength": 1342733,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-2407530d615ca72795f95-43b3cd2ddc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-2407530d615ca72795f9598e89dc4877__52386.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-3d1df274f0",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 9)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-dc2a6198c8a6729927680-7e300ad129",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "d81a8cb0cf748e25d0b6916d434ba41a3ed206654afef3bdc52e594dac645dde",
+          "byteLength": 1629332,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-dc2a6198c8a6729927680-7e300ad129",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-dc2a6198c8a67299276802539ca7765b__52398.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-428fc4ca6f",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 wizualizacja kuchni 1 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-48ed4ebd886d93640d65e-b493019543",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "a995308dde0fd80c65a1d61ba6dd97db2165b571fb5b9d293b1231571edd257f",
+          "byteLength": 1230790,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-48ed4ebd886d93640d65e-b493019543",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/k3/projekt-dom-w-kosaccach-46-48ed4ebd886d93640d65e08e86102c73__52394.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-4eed868f30",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-5bd4989c7050569ceb18e-bcf97f62b5",
+      "selectionReason": "only variant (710x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666041,
+          "byteHash": "2b7216860fd3cdc0cfda48964e4fb47052b17a241d4f9476b7551314a9d66c9e",
+          "byteLength": 660056,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 710
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-5bd4989c7050569ceb18e-bcf97f62b5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-5bd4989c7050569ceb18e2c98848735f__52387.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-5a418e708d",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-867180861ae6f4a3a97bd-b2acfab980",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "d7d04473ff543854b52b512a7138625827568ef94688ba225ac5f0024bc4225a",
+          "byteLength": 1434532,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-867180861ae6f4a3a97bd-b2acfab980",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-867180861ae6f4a3a97bde1a7611262b__52388.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-86689b1281",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-f094386a47a1a250b04fe-4a8e979453",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "a93b34b65d5f7530e3c49c4ea4117f3a6f034c8c5da2bf1ad785e458fa76dc3b",
+          "byteLength": 1411772,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-f094386a47a1a250b04fe-4a8e979453",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-f094386a47a1a250b04fe172409e7a8e__52390.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-9593c15338",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 wizualizacja kuchni 1 widok 4\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-59b4b8c15b6f932f560fb-bddd42fde5",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "459cda5e299121a9409229c85a87dab038e2cf6cf047c62a49067805235625dc",
+          "byteLength": 1196344,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-59b4b8c15b6f932f560fb-bddd42fde5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/k3/projekt-dom-w-kosaccach-46-59b4b8c15b6f932f560fba65f0f3df64__52397.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-a0eb262a48",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 wizualizacja kuchni 1 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-53de9e89b02dfe3852b92-ec690f4b98",
+      "selectionReason": "only variant (710x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666041,
+          "byteHash": "d9adc76cf3cbbdfbee361728abb7c38cf1c3103e090cfd22e19c6b023a08f379",
+          "byteLength": 641428,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 710
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-53de9e89b02dfe3852b92-ec690f4b98",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/k3/projekt-dom-w-kosaccach-46-53de9e89b02dfe3852b9228299871998__52395.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w kosaćcach 46",
+      "id": "asset-projekt-dom-w-kosaccach-46-bc7bb72b40",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-f00e55f34b38e845662f9-6b235f20f4",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "8af4d291915d614261226cd569b76945480d76044542445fce8ad36f312a9234",
+          "byteLength": 32111,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/related?scope=family",
+          "id": "var-projekt-dom-w-kosaccach-46-f00e55f34b38e845662f9-6b235f20f4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-f00e55f34b38e845662f93b5622dfd9b__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w kosaćcach 46",
+      "id": "asset-projekt-dom-w-kosaccach-46-bdb822242d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-kosaccach-46-d0458995-e63aff935f",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2645e405abca626dfbc2a0542334cfef4e33d59a02fe4fc8e1431178c45eaf89",
+          "byteLength": 37130,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mf6628752fa61f/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-kosaccach-46-d0458995-e63aff935f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/rzut-parteru-projekt-dom-w-kosaccach-46-d0458995065de766c4f371c50ef70e3b__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-c3cd45f625",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 6)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-f8f6eb5c9be444f203b16-04dee4b6fc",
+      "selectionReason": "only variant (1600x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "b4fd5f92ac8275ba1600fcd83e1488c93d3bf023ea729d316cb9effc823c2cd0",
+          "byteLength": 1539124,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-f8f6eb5c9be444f203b16-04dee4b6fc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-f8f6eb5c9be444f203b160a26d383bed__52391.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-kosaccach-46-c8822c0666",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-21cf698b25a3d0ec05be1-e70c03e947",
+      "selectionReason": "only variant (710x1066, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.666041,
+          "byteHash": "7c7217ec78c39eb1b907f213517664691b44b21ea29fea28e6e3fa1c139cf413",
+          "byteLength": 430555,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1066,
+            "width": 710
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-21cf698b25a3d0ec05be1-e70c03e947",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/w1/projekt-dom-w-kosaccach-46-21cf698b25a3d0ec05be1e621362fddf__52389.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-94f54ada01",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf6628752fa61f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf6628752fa61f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-kosa-6e575e854f",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "0b29cbaba7c4bdb05a591a3a84edd6a2fe99230f6d663f43d8d2abaa01b9261a",
+          "byteLength": 122014,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-kosa-6e575e854f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/rzut-parteru-z-powierzchniami-projekt-dom-w-kosaccach-46-c5047f1965be0b842354f0cbfbdb9fb4__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-f530d6ebf2",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf6628752fa61f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mf6628752fa61f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w kosaccach 46 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-kosaccach-46-704d0098eeacb57fddc67-60022d15a5",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+          "byteLength": 125381,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-projekt-dom-w-kosaccach-46-704d0098eeacb57fddc67-60022d15a5",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-704d0098eeacb57fddc67c5f08823f38__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-kosaccach-46-35ebaad6b6",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-kosaccach-46-3223b2de3b7a1-fc94ff343a",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "218d04ff381f318453bbe3c27593f9c90b4c03ea232d7be46b8e61966fdb7aee",
+          "byteLength": 387394,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-widok-1-projekt-dom-w-kosaccach-46-3223b2de3b7a1-fc94ff343a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-1-projekt-dom-w-kosaccach-46-3223b2de3b7a17fa4acc5507311a33ab__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-kosaccach-46-d1c8528bcb",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-kosaccach-46\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w kosaccach 46 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-kosaccach-46-22c6479b879ae-33e5102ec0",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "4e4381b8a0d2cfbac200a91d30133a305bb20e3fcf0ce2c733d0af23c48135bf",
+          "byteLength": 382107,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+          "id": "var-widok-2-projekt-dom-w-kosaccach-46-22c6479b879ae-33e5102ec0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-2-projekt-dom-w-kosaccach-46-22c6479b879ae4662407d38cadd4e466__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+  "contentHash": "bdef070a4d52fd52e145f0d1102152c346089dc41df03977642acd3ef5214ca3",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-f00e55f34b38e845662f93b5622dfd9b__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/rzut-parteru-projekt-dom-w-kosaccach-46-ae448ce226cf7dc14b60ae57dda37406__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/rzut-parteru-projekt-dom-w-kosaccach-46-d0458995065de766c4f371c50ef70e3b__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-1-projekt-dom-w-kosaccach-46-3223b2de3b7a17fa4acc5507311a33ab__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-1-projekt-dom-w-kosaccach-46-3c48a52768fbb3a51e05567e1eaf29ec__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-2-projekt-dom-w-kosaccach-46-22c6479b879ae4662407d38cadd4e466__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/widok-2-projekt-dom-w-kosaccach-46-b65993c5fdb71e91d1c2a1e40cd5d8c7__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-59cee3b1d7efbeb588da6d6760dbc0bd__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-boczna-projekt-dom-w-kosaccach-46-174b9803f800465ea3934ed6ba299333__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-0859b6528ed6f403377042a8815253e9__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-boczna-projekt-dom-w-kosaccach-46-729f1c75c317575c0ed9a9ddc5843d8f__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-e4888a33b41381ebd07ae4786b093107__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-frontowa-projekt-dom-w-kosaccach-46-a0e003a134052e5f1b9d50359df21f41__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-45bfde80100a7aa4974235fa8e362b80__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/elewacja-ogrodowa-projekt-dom-w-kosaccach-46-3ac4e33b49de956b84b9cf7600057f92__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mf6628752fa61f/projekt-dom-w-kosaccach-46-f14203bd1740c1b688429cbe64362b79__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mf6628752fa61f/sytuacja-projekt-dom-w-kosaccach-46-f0ed6b5c2b8789c190fcf7ec73c8d260__11255.jpg"
+    }
+  ],
+  "fetchedUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f?_gl=1*2x916*_up*MQ..*_gs*MQ..&gclid=CjwKCAjww-3VBhAcEiwAwUUIu9rpT7iboA7Udhp-isxTiJpuaqDn_kNs5lec-wDmpWmHTTwk5VO_GxoCEDsQAvD_BwE",
+  "id": "src-mf6628752fa61f-56408a0bd9",
+  "pageHash": "9ca841f1d5d7d6c171b5af9b01ebc2649e4da1c46661b21f59c688f3301c2ff2",
+  "project": {
+    "externalId": "mf6628752fa61f",
+    "name": "Projekt domu Dom w kosaćcach 46 Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "4,02 m&sup2;",
+      "unit": "m2",
+      "value": 4.02
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,49 m",
+      "unit": "m",
+      "value": 6.49
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "128,16 m&sup2;",
+      "unit": "m2",
+      "value": 128.16
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "164,47 m&sup2;",
+      "unit": "m2",
+      "value": 164.47
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "124,14 m&sup2;",
+      "unit": "m2",
+      "value": 124.14
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "216,91 m&sup2;",
+      "unit": "m2",
+      "value": 216.91
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "164,47 m&sup2;",
+      "unit": "m2",
+      "value": 164.47
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "128,16 m&sup2;",
+      "unit": "m2",
+      "value": 128.16
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "807,96 m&sup3;",
+      "unit": "none",
+      "value": 807.96
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 5.68,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,68 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.38,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 5,38 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.04,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 11,04 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.04,
+      "index": 4,
+      "label": "Pokój",
+      "raw": "4. Pokój | 11,04 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.02,
+      "index": 5,
+      "label": "Kotłownia z pralnią",
+      "raw": "5. Kotłownia z pralnią | 4,02 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.05,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 11,05 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.28,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 5,28 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.09,
+      "index": 8,
+      "label": "Toaleta",
+      "raw": "8. Toaleta | 2,09 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.68,
+      "index": 9,
+      "label": "Łazienka",
+      "raw": "9. Łazienka | 4,68 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.09,
+      "index": 10,
+      "label": "Garderoba",
+      "raw": "10. Garderoba | 6,09 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 13.71,
+      "index": 11,
+      "label": "Pokój",
+      "raw": "11. Pokój | 13,71 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 33.85,
+      "index": 12,
+      "label": "Salon",
+      "raw": "12. Salon | 33,85 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.4,
+      "index": 13,
+      "label": "Kuchnia",
+      "raw": "13. Kuchnia | 12,40 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.85,
+      "index": 14,
+      "label": "Spiżarnia",
+      "raw": "14. Spiżarnia | 1,85 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu Dom w kosaćcach 46 to nowoczesna propozycja dla osób poszukujących przestronnego, parterowego domu jednorodzinnego o wyrazistej i eleganckiej architekturze. Charakterystyczna bryła z dwuspadowym dachem pozbawionym okapów oraz efektowne przeszklenia w strefie dziennej podkreślają współczesny styl tego projektu domu. Centralnym punktem wnętrza jest reprezentacyjny salon z kominkiem oraz imponującą, dwukondygnacyjną przestrzenią dzienną, która harmonijnie łączy się z dużą kuchnią wyposażoną w funkcjonalną wyspę i bezpośrednio połączoną spiżarnią. Taras z pergolą stanowi naturalne przedłużenie części dziennej, idealne do relaksu i spotkań z bliskimi. W programie użytkowym zaplanowano cztery komfortowe pokoje, w tym wyraźnie oddzielony apartament z prywatną łazienką i garderobą, który zapewnia domownikom pełną intymność i jest bezpośrednio dostępny ze strefy dziennej. Trzy pozostałe pokoje tworzą osobną strefę nocną, sprzyjającą wyciszeniu. Projekt zawiera również łazienkę, osobną toaletę oraz praktyczne zaplecze gospodarcze z pralnią. Projekty domów takie jak Dom w kosaćcach 46 łączą funkcjonalność z nowoczesną estetyką, oferując przemyślane rozwiązania dla rodzin ceniących przestrzeń, wygodę i design."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "drewniany"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 35 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop drewniany , 124.14 m² + 4.02 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, toaleta, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "requestedUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f?_gl=1*2x916*_up*MQ..*_gs*MQ..&gclid=CjwKCAjww-3VBhAcEiwAwUUIu9rpT7iboA7Udhp-isxTiJpuaqDn_kNs5lec-wDmpWmHTTwk5VO_GxoCEDsQAvD_BwE",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

@@ -1,0 +1,2214 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-dodatkowa-3a94c664dc",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-a5b8ba348540b8665-22aa69ecc4",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b8540b63cca47a840fe49d28ddb09fd361812e4de0929e293affc870e9e08e9a",
+          "byteLength": 360925,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/carousel_images",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-a5b8ba348540b8665-22aa69ecc4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/fm/projekt-dom-w-rarytasach-5-g2e-a5b8ba348540b86652f2a8166a8983a2__53485.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-dodatkowa-3a9f197522",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-328d5fc4ef4453dd8-1dfb6f9b53",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b21413433c5fcd552827cc63e849e7e6eb6673c85f5b4df33eefa15c452b9678",
+          "byteLength": 359533,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/carousel_images",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-328d5fc4ef4453dd8-1dfb6f9b53",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/fm/projekt-dom-w-rarytasach-5-g2e-328d5fc4ef4453dd8edb5f39d526df63__53484.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elewacja-b-5dba308953",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-82f6a5d738028d7d4-247ddbc32d",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "f06218bb2b5c5c75f2b34f561ccbec775d022325131c0f0458a9a3e13e2e9e69",
+          "byteLength": 358223,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-82f6a5d738028d7d4-247ddbc32d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-82f6a5d738028d7d4d564dd716f9befa__11266.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "419ba89ad21e25d990e71bb7e40e7b5d294911a3e0b0945b1f5b1a0dcd5dcc85",
+          "byteLength": 78929,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-b-bf1909ef5c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-bcc83900fe8b90cc044cb891b9d1d482__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elewacja-b-83f720c3a3",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-4a9ac24d2e25b525c-87e314567c",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "521a4f1c5e3fd6dd77c5491144978aaeb0d0ea762cea28e5523deef59aaf4298",
+          "byteLength": 380809,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-4a9ac24d2e25b525c-87e314567c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-4a9ac24d2e25b525c1601a672328f7e3__11265.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "2789278275afc0bdf3199af748589b8bd85aa8dda839ec6c9c6ab78126ca5516",
+          "byteLength": 86224,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-b-ffd24b8aab",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-bd10959ef58b8ba61059d97c2ad4b8b6__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elewacja-f-31df380d43",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-ecc684d82f2c2fe05-b39efe3f6d",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "9565c98b89eb86b75c4ec4af2caa3bf85e7e6fa7550f1c0e017711ecde852d1d",
+          "byteLength": 316502,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-ecc684d82f2c2fe05-b39efe3f6d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-ecc684d82f2c2fe05f2a56868576b17a__11264.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "a194c2e1d1914ae92dc90691513870f44a218d6c5317b9ea4e9929c872b359a2",
+          "byteLength": 71068,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-elewacja-frontowa-projekt-dom-w-rarytasach-5-g2e-1b061c506e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-frontowa-projekt-dom-w-rarytasach-5-g2e-0da82100ce03292a50fea9c99c6d1aea__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-elewacja-o-8e80bad9d2",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w rarytasach 5 (g2e) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-b28deb527e66e2fe8-ffaed75229",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x513 over 550x220",
+      "variants": [
+        {
+          "aspect": 2.495127,
+          "byteHash": "123a6287cb96716b9287488340e2c3dd2a966c776faa74a8d86f253cb757ef1c",
+          "byteLength": 369250,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 513,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-b28deb527e66e2fe8-ffaed75229",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-b28deb527e66e2fe8cd3f85a072d333c__11267.jpg"
+        },
+        {
+          "aspect": 2.5,
+          "byteHash": "a027682bddae61b1cc2facfa4f256e09e6adeacccf3bce5cbc59bbe4545c1b91",
+          "byteLength": 82152,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 220,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-rarytasach-5-g2e-303431ebee",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-ogrodowa-projekt-dom-w-rarytasach-5-g2e-e7f01894640e279cd96446f43c2f79bd__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-przekroj-b-78e021b018",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach 5 (g2e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach 5 (g2e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach 5 (g2e) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-d2256484c5",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "a9b0fa0340ada9fa112471c7314ca3be51d347cda33d3d49687a4c77b51198f6",
+          "byteLength": 66077,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m84f2903cb8e14/przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-99f4c12d481158d9ff6c8e51cedaf2a3__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-d2256484c5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-99f4c12d481158d9ff6c8e51cedaf2a3__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "f862f05c6d3ca843b219c1661258d472a07eee5781b223b69a01f35004779c1c",
+          "byteLength": 17313,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-1d9724bf2a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/przekroj-budynku-projekt-dom-w-rarytasach-5-g2e-99f4c12d481158d9ff6c8e51cedaf2a3__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-rzut-parte-d10abe8789",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-rarytasach-5-g2e-fd89-cbf553c534",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "77f345bde7ce3f4fdc65deb1ccb69c7b06cf0123b9b98c151b46ba8310756193",
+          "byteLength": 62152,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-rarytasach-5-g2e-fd89-cbf553c534",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/rzut-parteru-projekt-dom-w-rarytasach-5-g2e-fd8975356dd455e959232c81a8215bb8__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-sytuacja-edb642891a",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w rarytasach 5 (g2e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w rarytasach 5 (g2e) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-91c9bd22a615a6f5b-b01a201596",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "94a9dbb5d64a3a7727f8d64d932cf29e28b383c05e9f11cf69d2490b46d929ab",
+          "byteLength": 173368,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-91c9bd22a615a6f5b-b01a201596",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-91c9bd22a615a6f5b644fe511ce9b5e5__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "c8cc37c4599b0d6d1f2fd8173b1e20f3db5e1ce7847d27b0e3ab7c396d11c828",
+          "byteLength": 43411,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-sytuacja-projekt-dom-w-rarytasach-5-g2e-fb258092-3bf71636e0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/sytuacja-projekt-dom-w-rarytasach-5-g2e-fb2580922dfdbf67c9882546bdec2989__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach 5 (G2E) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-5-g2e-widok-1-9e0d403860",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-rarytasach-5-g2e-fc48492c7-b5794978c4",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2a491bb9e88737738d4a1bca754488e34ee95564d88fe7c7cd75ddf14eb9385d",
+          "byteLength": 7545,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-widok-1-projekt-dom-w-rarytasach-5-g2e-fc48492c7-b5794978c4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-1-projekt-dom-w-rarytasach-5-g2e-fc48492c76b22cf006bca077c1bb539a__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w rarytasach 5 g2e 186e257ccf5ee38e0284f63384fc0b94  53482",
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-186e257ccf5ee38e0-c6228196ac",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-186e257ccf5ee38e0-09dcbbfaae",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "0ec5494a5b155539dab48f0861e9c93c717518b9f56820fe79e893f318026f90",
+          "byteLength": 486799,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m84f2903cb8e14/image/53482?showHotspots=false",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-186e257ccf5ee38e0-09dcbbfaae",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/m84f2903cb8e14/i/projekt-dom-w-rarytasach-5-g2e-186e257ccf5ee38e0284f63384fc0b94__53482.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-1a9d527e2f",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 6)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-342bf2c813e6ccaa1-dbd61c0f58",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "465d2b11c22ad1a0fc662ea6059703b5c25f650294603e699733cdbb0917f2f5",
+          "byteLength": 857289,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-342bf2c813e6ccaa1-dbd61c0f58",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-342bf2c813e6ccaa178504ea07501402__60529.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-2f92ef67e4",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-8883aabc83b46e90e-5454422f9e",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "37f64057fcf2da0f6cbc4d2be6276a92b3039074876d53a8d8d25aa4a7c6beee",
+          "byteLength": 688780,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-8883aabc83b46e90e-5454422f9e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/l3/projekt-dom-w-rarytasach-5-g2e-8883aabc83b46e90e328e9da93d23df5__59349.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-33629afaa5",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-cf2dddc47d1928fa8-2715fd26ac",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "053b2a6f23a53dc5d78241306921a743f432022fce4a4aef789e477f128a5f11",
+          "byteLength": 280165,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-cf2dddc47d1928fa8-2715fd26ac",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-cf2dddc47d1928fa807051408f192ee0__59144.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-3672af1cff",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja kuchni 1 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-c99dc293c9a06558a-ab8752cb3f",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "667394b4259b91eaa10c8ce293e81042adc8796ce931e0a51ed1351d006d218d",
+          "byteLength": 156513,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-c99dc293c9a06558a-ab8752cb3f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/k3/projekt-dom-w-rarytasach-5-g2e-c99dc293c9a06558a8782aee8ecc8ca3__59150.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-415e0cdd54",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 2 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-d462240dc46d62deb-b2889835ae",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "342f39f70da7109755958330aa9e27d9ecbd4c25ec014902cac8ea76bab27ccc",
+          "byteLength": 337414,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-d462240dc46d62deb-b2889835ae",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w2/projekt-dom-w-rarytasach-5-g2e-d462240dc46d62debc924e11bbb6a203__60824.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach 5 (G2E)",
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-463bb48357",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-rarytasach-5-g2e-d3c0-f5b08d44e6",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "fd5c67a7828e8a8ceb1162c2500589560e2f2c029381d2e98d8e6d92389b115b",
+          "byteLength": 40319,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-rarytasach-5-g2e-d3c0-f5b08d44e6",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/rzut-parteru-projekt-dom-w-rarytasach-5-g2e-d3c097e278ebbfcb0d2e963ca9733713__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-4f7cbdeb18",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 8)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-b35cc611a734ce029-5a250f3f5f",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "c4df8395c3ff954a2068d15ee9869d48895da54047f9468f7339145d65240888",
+          "byteLength": 1003627,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-b35cc611a734ce029-5a250f3f5f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-b35cc611a734ce029a7738a7656381b8__60530.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach 5 (G2E)",
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-60b9a315a2",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-rarytasach-5-g2e-f6d4a55c6-e0b9c862b0",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "8a98336397c4762dda9ddec6731bd52c886953905e9b39454beba5300c611dda",
+          "byteLength": 28638,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-rarytasach-5-g2e-f6d4a55c6-e0b9c862b0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-2-projekt-dom-w-rarytasach-5-g2e-f6d4a55c6a15ea511d118f1d86ce4674__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-6566de3cd6",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-3c6cf1df0868321c3-4d42f346a1",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "83ad8ee320dd8608a19319913b5130acc550d7afcee3ee535f281d5d9e7138bc",
+          "byteLength": 797397,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-3c6cf1df0868321c3-4d42f346a1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-3c6cf1df0868321c30711faec02d121d__60528.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-6a6e5df10f",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-436363c083c25ddd3-36caac4f1e",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "4205a263bdf33dd0984c8ac28aade4e40d58ed8ca7b29f7c7be6779bbe03fa73",
+          "byteLength": 723140,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-436363c083c25ddd3-36caac4f1e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/l3/projekt-dom-w-rarytasach-5-g2e-436363c083c25ddd39391e84e92202ef__59347.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-724e2ee0eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-15bc9057fa5a571cc-150069c601",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "1c4e4765a5bb64281fdfe458f4fcc233ec9bb05b3794d2965d005ffe23bfe36a",
+          "byteLength": 883587,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-15bc9057fa5a571cc-150069c601",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-15bc9057fa5a571cc4ed0a2d2f0d422e__60527.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-862367e641",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 2 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-e67f12c262418d9c5-030eb55342",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "6312dad5ceb7c65f340d2d9f3a4213a2cf288e8b8493e8160253c0eb3817df35",
+          "byteLength": 287747,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-e67f12c262418d9c5-030eb55342",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w2/projekt-dom-w-rarytasach-5-g2e-e67f12c262418d9c59a0cb487651cf5d__60827.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-9235ffdaaf",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-a617f5d2259ce9530-1b34ff98a3",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "5f1681d383d1a9606ccf22ffeb21569b553c58e9dfb1ae2f3cabca910c151b2a",
+          "byteLength": 339272,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-a617f5d2259ce9530-1b34ff98a3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-a617f5d2259ce9530b9527479a306922__59145.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-a5dabd1195",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-79b26dec2d1de62c7-8424cbe961",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "9245104bbfc036830f300feef378ed10d012f4d3921c4079c3a3dd394eb6697e",
+          "byteLength": 835399,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-79b26dec2d1de62c7-8424cbe961",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/l3/projekt-dom-w-rarytasach-5-g2e-79b26dec2d1de62c719e16d19f9dd977__59348.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-aab6c2f7ac",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja kuchni 1 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-2171f0681c09ca758-cd1944d7a4",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "e773910c48bdb916773d8bb00b282b3b0bf33a3974b5b83b1611dc7f8d7cc6a6",
+          "byteLength": 323090,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-2171f0681c09ca758-cd1944d7a4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/k3/projekt-dom-w-rarytasach-5-g2e-2171f0681c09ca758009dc606a56cd49__59151.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-ae35b1f8bb",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-8ac016ef1e515213e-4d61cc144b",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "0be43d629e7d8b2361d629b7b65c0e7f7c9d98ee8065113cb2c40243384e8ff8",
+          "byteLength": 346077,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-8ac016ef1e515213e-4d61cc144b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-8ac016ef1e515213ed79785421384923__59146.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-aff6760d89",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 2 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-161d64ec5e99a6669-b02dfd18f9",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7861bd540d99cc229216a300d14f6d00b9aeb4febebd291a3c3d9a9a12273306",
+          "byteLength": 314770,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-161d64ec5e99a6669-b02dfd18f9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w2/projekt-dom-w-rarytasach-5-g2e-161d64ec5e99a66695313546568f6360__60825.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-b8a59fecd3",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 2 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-3c5150266b443b186-bb637bc946",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c16def7c32158e02cd18affe5b90bde77abb30da87ea8c4d9623ff8db3fb687d",
+          "byteLength": 309067,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-3c5150266b443b186-bb637bc946",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w2/projekt-dom-w-rarytasach-5-g2e-3c5150266b443b186f230d4e2b11f0e1__60826.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-ba42a7ec29",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 1 widok 7)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-23329f80a5d7d2f6b-14bd26df91",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "536fe746cfb44b14bc0b73f42ad438f61ea4d38f1dfb3150d7b6dfb952900698",
+          "byteLength": 167657,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-23329f80a5d7d2f6b-14bd26df91",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w1/projekt-dom-w-rarytasach-5-g2e-23329f80a5d7d2f6bbc8fe0784f6e3cc__59148.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach 5 (G2E)",
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-e31e95b5f7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-1023ae3fee0ccce1a-21a3f39271",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "a3dbe23704316fb16c340682448a265d523f4c389514d3711e46e17c6fdcdf86",
+          "byteLength": 25626,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m84f2903cb8e14/related?scope=family",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-1023ae3fee0ccce1a-21a3f39271",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-1023ae3fee0ccce1a765ba5d48ca93d8__252.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-edd3db23d3",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) strefa dzienna (wizualizacja 2 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-acaa5605b28a71321-366ce53001",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "d95c8ff9ed79d6e083fb6dc77103e0c247f3c1eafb0c540cb4a1aaa6218d3021",
+          "byteLength": 292856,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-acaa5605b28a71321-366ce53001",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/w2/projekt-dom-w-rarytasach-5-g2e-acaa5605b28a713216a8bcf0bd965818__60828.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-5-g2e-ef246c3318",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-09eab5f0cf6281ba0-db60da716b",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "7100113adcf272b00d6bfbcd33c6a87d3917234db6f3311ea0dc8f8371883e93",
+          "byteLength": 700042,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-09eab5f0cf6281ba0-db60da716b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/l3/projekt-dom-w-rarytasach-5-g2e-09eab5f0cf6281ba0346b557687e7fc2__59350.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-e8520c3ad3",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m84f2903cb8e14/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m84f2903cb8e14/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-5-g2e-e8097b39b92eabc25-5933278da3",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+          "byteLength": 128734,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-projekt-dom-w-rarytasach-5-g2e-e8097b39b92eabc25-5933278da3",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-e8097b39b92eabc25c73db7eaaa97aaa__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-e85d3de75a",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m84f2903cb8e14/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m84f2903cb8e14/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach 5 (g2e) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-rary-8bd7a333eb",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "1d06a0c9b3425ded6fa7385e2f6182a2cbbc274cb2305feed605c4f0293982f6",
+          "byteLength": 126501,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-rary-8bd7a333eb",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-5-g2e-1b0ef9281de9b40e0eccc9de8528c6a1__11915.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-rarytasach-5-g2e-d272c15e0d",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-rarytasach-5-g2e-345926f7e-d41490710d",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2a0a137d5297d66aab210dc3872fc19b90b622289a3c1df30d2745622df841c6",
+          "byteLength": 344133,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-widok-1-projekt-dom-w-rarytasach-5-g2e-345926f7e-d41490710d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-1-projekt-dom-w-rarytasach-5-g2e-345926f7e8a988e04483d0fde940f83c__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-rarytasach-5-g2e-698f543968",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-5-g2e\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach 5 (g2e) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-rarytasach-5-g2e-2d1ccf7e3-aa74d1704f",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "ac22c85182b93af87d37a870cbbd8e7b6f5b010e301b40d5243791b41113a465",
+          "byteLength": 362436,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+          "id": "var-widok-2-projekt-dom-w-rarytasach-5-g2e-2d1ccf7e3-aa74d1704f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-2-projekt-dom-w-rarytasach-5-g2e-2d1ccf7e374d6fc6aba70248402d37b2__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+  "contentHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-1023ae3fee0ccce1a765ba5d48ca93d8__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/rzut-parteru-projekt-dom-w-rarytasach-5-g2e-d3c097e278ebbfcb0d2e963ca9733713__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/rzut-parteru-projekt-dom-w-rarytasach-5-g2e-fd8975356dd455e959232c81a8215bb8__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-1-projekt-dom-w-rarytasach-5-g2e-345926f7e8a988e04483d0fde940f83c__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-1-projekt-dom-w-rarytasach-5-g2e-fc48492c76b22cf006bca077c1bb539a__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-2-projekt-dom-w-rarytasach-5-g2e-2d1ccf7e374d6fc6aba70248402d37b2__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/widok-2-projekt-dom-w-rarytasach-5-g2e-f6d4a55c6a15ea511d118f1d86ce4674__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-82f6a5d738028d7d4d564dd716f9befa__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-bcc83900fe8b90cc044cb891b9d1d482__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-4a9ac24d2e25b525c1601a672328f7e3__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-boczna-projekt-dom-w-rarytasach-5-g2e-bd10959ef58b8ba61059d97c2ad4b8b6__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-ecc684d82f2c2fe05f2a56868576b17a__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-frontowa-projekt-dom-w-rarytasach-5-g2e-0da82100ce03292a50fea9c99c6d1aea__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-b28deb527e66e2fe8cd3f85a072d333c__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/elewacja-ogrodowa-projekt-dom-w-rarytasach-5-g2e-e7f01894640e279cd96446f43c2f79bd__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m84f2903cb8e14/projekt-dom-w-rarytasach-5-g2e-91c9bd22a615a6f5b644fe511ce9b5e5__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m84f2903cb8e14/sytuacja-projekt-dom-w-rarytasach-5-g2e-fb2580922dfdbf67c9882546bdec2989__11255.jpg"
+    }
+  ],
+  "id": "src-m84f2903cb8e14-bd72938d69",
+  "pageHash": "38ef2e783895c1e8c65508577a2bcbd7b4e45b6d78d30528c4b02ee9a7b6f8a4",
+  "project": {
+    "externalId": "m84f2903cb8e14",
+    "name": "Projekt domu Dom w rarytasach 5 (G2E) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "5,19 m&sup2;",
+      "unit": "m2",
+      "value": 5.19
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,02 m",
+      "unit": "m",
+      "value": 6.02
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "151,39 m&sup2;",
+      "unit": "m2",
+      "value": 151.39
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "189,77 m&sup2;",
+      "unit": "m2",
+      "value": 189.77
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "35,52 m&sup2;",
+      "unit": "m2",
+      "value": 35.52
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "110,68 m&sup2;",
+      "unit": "m2",
+      "value": 110.68
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "219,77 m&sup2;",
+      "unit": "m2",
+      "value": 219.77
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "189,77 m&sup2;",
+      "unit": "m2",
+      "value": 189.77
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "151,39 m&sup2;",
+      "unit": "m2",
+      "value": 151.39
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "903,57 m&sup3;",
+      "unit": "none",
+      "value": 903.57
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.72,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 4,72 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.25,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 9,25 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.75,
+      "index": 3,
+      "label": "Spiżarnia",
+      "raw": "3. Spiżarnia | 2,75 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.51,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 11,51 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 31.96,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 31,96 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.52,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 11,52 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.71,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 11,71 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.63,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 12,63 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.58,
+      "index": 9,
+      "label": "Garderoba",
+      "raw": "9. Garderoba | 3,58 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.02,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 7,02 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.03,
+      "index": 11,
+      "label": "Łazienka",
+      "raw": "11. Łazienka | 4,03 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.19,
+      "index": 12,
+      "label": "Kotłownia z pralnią",
+      "raw": "12. Kotłownia z pralnią | 5,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 35.52,
+      "index": 13,
+      "label": "Garaż",
+      "raw": "13. Garaż | 35,52 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "„Dom w rarytasach 5 (G2E)” to nowoczesny projekt domu jednorodzinnego parterowego, który wyróżnia się wyrazistą, bezokapową bryłą oraz odważnymi rozwiązaniami architektonicznymi. Dwuspadowy dach pozbawiony okapów podkreśla minimalistyczny charakter budynku, a efektownie zadaszone wejście stanowi mocny akcent elewacji frontowej. Kompozycja elewacji oparta na zestawieniu ciemnego tynku z naturalnymi okładzinami drewnianymi nadaje bryle elegancji i nowoczesnej dynamiki. Od strony frontu uwagę przyciąga dwustanowiskowy garaż wysunięty przed lico elewacji, który porządkuje strefę wjazdową i wzmacnia geometryczny charakter całego założenia. Wnętrze domu zaprojektowano z myślą o przestrzeni i świetle – strefa dzienna obejmuje salon i jadalnię z efektownym otwarciem do połaci dachu, co tworzy wrażenie dwukondygnacyjnej przestrzeni i nadaje wnętrzu reprezentacyjny charakter. Salon o powierzchni przekraczającej 30 m² połączono z nowoczesną kuchnią z wyspą oraz praktyczną spiżarnią, tworząc wygodną i spójną przestrzeń codziennego funkcjonowania. Z części dziennej oraz ze wszystkich sypialni zaplanowano bezpośrednie wyjścia na taras osłonięty pergolą, co pozwala na pełne wykorzystanie strefy ogrodowej i podkreśla otwarty charakter domu. Program użytkowy obejmuje cztery pokoje, w tym komfortowe sypialnie, dwie łazienki oraz kotłownię z wydzieloną pralnią. W salonie przewidziano miejsce na kominek, który wprowadza przytulny akcent do nowoczesnej przestrzeni. Projekt domu uwzględnia zastosowanie wentylacji mechanicznej z odzyskiem ciepła, co podnosi standard energetyczny budynku. „Dom w rarytasach 5 (G2E)” to projekt domu, który w kolekcji projekty domów wyróżnia się nowoczesną formą, spektakularną strefą dzienną i przemyślanym układem funkcjonalnym, idealnym dla wymagających inwestorów."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "drewniany"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 30 st. , więźba drewniana, blachodachówka / dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop drewniany , 110.68 m² + 35.52 m² + 5.19 m² , 4 pokoje, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

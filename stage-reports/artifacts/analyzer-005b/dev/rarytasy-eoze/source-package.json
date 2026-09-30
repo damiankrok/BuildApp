@@ -1,0 +1,2217 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-dodatkowa-1eea73bc06",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-5e8cc0561d575d32e-2859129fa5",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "b419724d95e5185886ac050edcfd5e1324e9a77af7dacc2b5bc48df208c3870b",
+          "byteLength": 1369943,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/carousel_images",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-5e8cc0561d575d32e-2859129fa5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/f/projekt-dom-w-rarytasach-e-oze-5e8cc0561d575d32e7d4a337755084f4__46199.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-dodatkowa-92362653ea",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-52247fd3e90b1548f-3406f56282",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "a868606f7584c33e5b65b24b1ce932aa1a3335d07cacde45882ac40fe076de47",
+          "byteLength": 412535,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/carousel_images",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-52247fd3e90b1548f-3406f56282",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/fm/projekt-dom-w-rarytasach-e-oze-52247fd3e90b1548fe2228e323cd6746__54141.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-b-4cf526f6a3",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-5e1152f84cb90fb66-0d49608592",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "5014f4a3a087b5540eee21aa0050f6ce64dd9e72500c387cfebb27e254da2004",
+          "byteLength": 410583,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-5e1152f84cb90fb66-0d49608592",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-5e1152f84cb90fb662ae8a322159e1a5__11266.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "7814a9cde0a85ab031390a5594b437564dac30665a4b4eb3224a937911c83b14",
+          "byteLength": 96026,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-elewacja-boczna-projekt-dom-w-rarytasach-e-oze-3-96c0d62a76",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-boczna-projekt-dom-w-rarytasach-e-oze-33e33ea87c5d076cf9becde8a143bbd8__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-b-513ff88815",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w rarytasach (e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-7d95f6d23eb4a0b0c-652929acf3",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "509e7d76c9b3cec9757bdaf6ac669483975c740bc765b873fd017e610a238f34",
+          "byteLength": 436613,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-7d95f6d23eb4a0b0c-652929acf3",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-7d95f6d23eb4a0b0c472f8ccd7706d12__11265.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "940db2bb9b3ea66d7c52008307fca2bae1dec16c37e97d7bbafa6001e7ccf110",
+          "byteLength": 101521,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-elewacja-boczna-projekt-dom-w-rarytasach-e-oze-0-82a04be63d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-boczna-projekt-dom-w-rarytasach-e-oze-0583b562a67d28d2a321823d867136db__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-f-74c55683f0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w rarytasach (e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w rarytasach (e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-6c3447e1f11b5b8b4-7f4b57d414",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "f29763f35bbbc351312dabe12c49be3d96aca46b2c48e02fc117604e9febba1c",
+          "byteLength": 428608,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-6c3447e1f11b5b8b4-7f4b57d414",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-6c3447e1f11b5b8b4bb590cb47f24d35__11264.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "9266c150113d5cff7183303314930e80b1d2aad860b21d603dc82a69a3f45e4e",
+          "byteLength": 95109,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-elewacja-frontowa-projekt-dom-w-rarytasach-e-oze-0b162d2250",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-frontowa-projekt-dom-w-rarytasach-e-oze-54e3b81b1acfd2c2f133bdde8995127e__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-elewacja-o-06fb62b53f",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w rarytasach (e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w rarytasach (e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w rarytasach (e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-4176611e8f0e2ff1c-d86e27951c",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x631 over 550x271",
+      "variants": [
+        {
+          "aspect": 2.028526,
+          "byteHash": "62b10df03e47c511b84504f430b3872e62251eb2ce33aa9f74adcdff876737e7",
+          "byteLength": 437750,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 631,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-4176611e8f0e2ff1c-d86e27951c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-4176611e8f0e2ff1c692283a4fa290e1__11267.jpg"
+        },
+        {
+          "aspect": 2.02952,
+          "byteHash": "4195ee13869e6c4c882c167b7928ba7fd291ff6fc95d65455268a1b23aedc4ab",
+          "byteLength": 97919,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 271,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-rarytasach-e-oze-dec35f027c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-ogrodowa-projekt-dom-w-rarytasach-e-oze-2fe549189bfb0737091bb19af5eab3b4__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-przekroj-b-5d3a62f41c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w rarytasach (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-rarytasach-e-oze-28f25799e4",
+      "selectionReason": "largest decoded raster of 2 variants: 1142x854 over 402x300",
+      "variants": [
+        {
+          "aspect": 1.337237,
+          "byteHash": "abe3c48c7f402ab6a676a5f54670de0c6f4d7605841bb96e56d141b9793c7026",
+          "byteLength": 57573,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1142
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m738275b7537b0/przekroj-budynku-projekt-dom-w-rarytasach-e-oze-be8943583323053c042d918a969a80f8__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-rarytasach-e-oze-28f25799e4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/przekroj-budynku-projekt-dom-w-rarytasach-e-oze-be8943583323053c042d918a969a80f8__11256.jpg"
+        },
+        {
+          "aspect": 1.34,
+          "byteHash": "d8ae70c409a447f927addb7d3640da03275283c4406e0210817e509204842f84",
+          "byteLength": 15123,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 300,
+            "width": 402
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-przekroj-budynku-projekt-dom-w-rarytasach-e-oze-ca0b7373f0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/przekroj-budynku-projekt-dom-w-rarytasach-e-oze-be8943583323053c042d918a969a80f8__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-rzut-parte-d4aaf53656",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-rarytasach-e-oze-8d19-744690a0af",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "5fc2db4c7eaee3cf0d6e444c713480329fe81d00686dc01e37a9119b641a0927",
+          "byteLength": 62099,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-rarytasach-e-oze-8d19-744690a0af",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/rzut-parteru-projekt-dom-w-rarytasach-e-oze-8d1991069c64bb6550a4e6aac4eca147__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-sytuacja-81b5cdc086",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w rarytasach (e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w rarytasach (e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-2abe6c624d21b46f7-fa9a281d6b",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "21d5232c1b01ca85bd0924e5d7d9bae00c56427b86112fb191b53e5f288593bc",
+          "byteLength": 156999,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-2abe6c624d21b46f7-fa9a281d6b",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-2abe6c624d21b46f75889a50970c8fbe__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "02c63911713b256b6028d2927dcf5ab7261e3a21e387a6e6199d28f032c0f674",
+          "byteLength": 36625,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-sytuacja-projekt-dom-w-rarytasach-e-oze-07df3893-0dd60e79b4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/sytuacja-projekt-dom-w-rarytasach-e-oze-07df3893a1b42831eaa14cac4b7a4bf3__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w rarytasach (E) OZE widok 1",
+      "id": "asset-gotowy-projekt-dom-w-rarytasach-e-oze-widok-1-47c9e635bc",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-rarytasach-e-oze-509251333-f96d478e43",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "6a76df06ca2d37fdaaf51d779db1bbcb72cd3e7fb362eb8e6104de60a3af8ad3",
+          "byteLength": 9076,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-widok-1-projekt-dom-w-rarytasach-e-oze-509251333-f96d478e43",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/widok-1-projekt-dom-w-rarytasach-e-oze-50925133339da11dde6f3dc0df54ce11__259.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-0343ce9d23",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 2 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-e67f12c262418d9c5-030eb55342",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "6312dad5ceb7c65f340d2d9f3a4213a2cf288e8b8493e8160253c0eb3817df35",
+          "byteLength": 287747,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-e67f12c262418d9c5-030eb55342",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w2/projekt-dom-w-rarytasach-e-oze-e67f12c262418d9c59a0cb487651cf5d__60747.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-07a2dac6b1",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja kuchni 1 widok 4\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-76d2f05bf5cddfef0-b5a1dd5e17",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "d56592ce3c25f19d8f3573f4904bf5492f3121dbc937598c66e892fd1206f302",
+          "byteLength": 191542,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-76d2f05bf5cddfef0-b5a1dd5e17",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/k3/projekt-dom-w-rarytasach-e-oze-76d2f05bf5cddfef064a8c31426dcc68__48244.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-291aab9ec4",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-3a587574572e39e78-3402ededc4",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "48c31f828171d971e9c78284ed00d1850588c300b5bc56fb75e50c291a249478",
+          "byteLength": 184114,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-3a587574572e39e78-3402ededc4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/l3/projekt-dom-w-rarytasach-e-oze-3a587574572e39e7889cb2d7d6c701b0__48247.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-3db04f6bfa",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 2 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-161d64ec5e99a6669-b02dfd18f9",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7861bd540d99cc229216a300d14f6d00b9aeb4febebd291a3c3d9a9a12273306",
+          "byteLength": 314770,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-161d64ec5e99a6669-b02dfd18f9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w2/projekt-dom-w-rarytasach-e-oze-161d64ec5e99a66695313546568f6360__60745.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w rarytasach e oze 4306c4915f47ad9b987c5a3e3332b632  46197",
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-4306c4915f47ad9b9-40aeeb38d2",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-4306c4915f47ad9b9-d318bf6c50",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "609eddfb4e6ec2ecd39305a14756b4e32e6910eaf26a75fec14acaae3934e5a3",
+          "byteLength": 598107,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m738275b7537b0/image/46197?showHotspots=false",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-4306c4915f47ad9b9-d318bf6c50",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/m738275b7537b0/i/projekt-dom-w-rarytasach-e-oze-4306c4915f47ad9b987c5a3e3332b632__46197.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach (E) OZE",
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-48d451fb0f",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-d585deaa7bf082578-7f63f12443",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "27a8bb3e7f0c9a120497442c925ee0843fab89d8a3d3871fed3e2b33ce568be4",
+          "byteLength": 31088,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/related?scope=family",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-d585deaa7bf082578-7f63f12443",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-d585deaa7bf082578c31f5c8db640553__252.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-51dad8e2f0",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 6)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-d2a8017b39c059d48-a9a5a8b1ed",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "f89ca02efa52e07e466f6f60d78fa8809e66c4fe24197018784e4462009b98fe",
+          "byteLength": 772329,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-d2a8017b39c059d48-a9a5a8b1ed",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-d2a8017b39c059d48629aac304eba520__60464.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-558b52d446",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-50194eba975250739-518958de00",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "891ba53840df5a0d51a2e1269b3932f29daa4c679ad6572268f854297a5b8901",
+          "byteLength": 561662,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-50194eba975250739-518958de00",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/s/projekt-dom-w-rarytasach-e-oze-50194eba975250739cd5902f26a3332d__46182.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-7009ed99bf",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-d6e107d7516cccbbc-fee999f8c8",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "0e766332f86293cc634dceab9132715140fd3d2f065189ddabbfe8625c0c153a",
+          "byteLength": 203894,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-d6e107d7516cccbbc-fee999f8c8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/l3/projekt-dom-w-rarytasach-e-oze-d6e107d7516cccbbc024c90b785b924a__48246.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-766941b258",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-6053787770ad63e33-180d84918f",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "42bf314be6b2e82cb1635f35539ca159f4c1b86273b04a33fa4d08ffe10c19de",
+          "byteLength": 215783,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-6053787770ad63e33-180d84918f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-6053787770ad63e33ac0573bca3cf457__48237.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-77195fbd3e",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 2 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-acaa5605b28a71321-366ce53001",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "d95c8ff9ed79d6e083fb6dc77103e0c247f3c1eafb0c540cb4a1aaa6218d3021",
+          "byteLength": 292856,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-acaa5605b28a71321-366ce53001",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w2/projekt-dom-w-rarytasach-e-oze-acaa5605b28a713216a8bcf0bd965818__60748.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-7761f2b5bb",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-b394f1f80b93b2976-216301b2e7",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "ab242d5dbe565fc164557f09061a8e213291afe1a844f0a829039525a730c51b",
+          "byteLength": 519822,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-b394f1f80b93b2976-216301b2e7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/s/projekt-dom-w-rarytasach-e-oze-b394f1f80b93b29767293203d9c239de__46183.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach (E) OZE",
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-7a69141c46",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-rarytasach-e-oze-f8ecd8cbf-47e0fed8fe",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "9aee5f7f4da4ec7120744e01fd339a9ad3784630a90f5317ac0876d436ec4d7e",
+          "byteLength": 29187,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-rarytasach-e-oze-f8ecd8cbf-47e0fed8fe",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/widok-2-projekt-dom-w-rarytasach-e-oze-f8ecd8cbf0b30aef9c8696f3ffd6b26d__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-952ba48a96",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja kuchni 1 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-3fb9d28a45725f17d-e3359ec032",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "3985476910563dd7ef4d161313ce4a49ff786ad04cc6c8d8855b87f5b8aa7f31",
+          "byteLength": 206473,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-3fb9d28a45725f17d-e3359ec032",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/k3/projekt-dom-w-rarytasach-e-oze-3fb9d28a45725f17d6038f6a26fb9e73__48242.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-9b725f6e28",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-6124f25db2b2a2abe-84343d1e9f",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "71e82b635da957d14c3449e7eb800c2c76bc21683eb908a54ea6b406c08766ae",
+          "byteLength": 814310,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-6124f25db2b2a2abe-84343d1e9f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-6124f25db2b2a2abe44ea2333a619321__60438.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-a4cbafcbcd",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-5fe3a7144e98d3e1e-1399662b16",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "a16243991e5a4151ded4565cdacbd910ca12ce6d2482ac576fc54ca76556a099",
+          "byteLength": 164060,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-5fe3a7144e98d3e1e-1399662b16",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/l3/projekt-dom-w-rarytasach-e-oze-5fe3a7144e98d3e1ee6c4f330a9a546e__48248.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-b8380dc935",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-412583d6c53831e90-1e8f9425c6",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "649571ac681c803e606867d7b4525bd1b75aaffbaa0e7ef1cc614f039e0c250f",
+          "byteLength": 231114,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-412583d6c53831e90-1e8f9425c6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-412583d6c53831e90e4d121aa1ba276d__48236.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-ba095a04df",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 2 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-3c5150266b443b186-bb637bc946",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c16def7c32158e02cd18affe5b90bde77abb30da87ea8c4d9623ff8db3fb687d",
+          "byteLength": 309067,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-3c5150266b443b186-bb637bc946",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w2/projekt-dom-w-rarytasach-e-oze-3c5150266b443b186f230d4e2b11f0e1__60746.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w rarytasach (E) OZE",
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-be1be080d9",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-rarytasach-e-oze-45a8-28ed86328b",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "951ffcc8200b222627a0dfbec1add2017ac385dce8ec2ed1328198150b55fbf6",
+          "byteLength": 36029,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m738275b7537b0/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-rarytasach-e-oze-45a8-28ed86328b",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/rzut-parteru-projekt-dom-w-rarytasach-e-oze-45a83377685c1d80eef28112f67d66a5__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-e9b6e35814",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja kuchni 1 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-1f8fb99fa9c126ae8-21b26e7ab0",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "f0a0e825e289115f4761d8d5b1c0eb2273e5bc3e8b4572d394a1ea6ff637f848",
+          "byteLength": 196930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-1f8fb99fa9c126ae8-21b26e7ab0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/k3/projekt-dom-w-rarytasach-e-oze-1f8fb99fa9c126ae82ebae60fbf40f38__48241.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-eadaccb67c",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-94431f112b4f879f1-0af3ba5f62",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "e73e256f2d9cab51ca87c8761d9c16aa878b05c3198809c736dee41d7258d80f",
+          "byteLength": 725462,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-94431f112b4f879f1-0af3ba5f62",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-94431f112b4f879f1560e32c26bf5081__60437.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-ed8749c85e",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 1 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-c6ffdf39368e282d2-d32ea59410",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "a200c68717c0de73f7dc0432a4ae68fba833d020650e22fa8de7653cd52a99aa",
+          "byteLength": 252624,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-c6ffdf39368e282d2-d32ea59410",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w1/projekt-dom-w-rarytasach-e-oze-c6ffdf39368e282d25c92a34bd7e7408__48239.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-fe57bf7806",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze wizualizacja łazienki (wizualizacja 3 wi\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-4bdfb3245e18d434a-628a978ce4",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "c4026f989b25382eb6f1351997d5cf8a042cce7062fa1e67f00ac9d9b8e29b03",
+          "byteLength": 190245,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-4bdfb3245e18d434a-628a978ce4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/l3/projekt-dom-w-rarytasach-e-oze-4bdfb3245e18d434ab25c101dea1edf2__48245.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-rarytasach-e-oze-fe995e9210",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze strefa dzienna (wizualizacja 2 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-d462240dc46d62deb-b2889835ae",
+      "selectionReason": "only variant (1600x1600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "342f39f70da7109755958330aa9e27d9ecbd4c25ec014902cac8ea76bab27ccc",
+          "byteLength": 337414,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1600,
+            "width": 1600
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-d462240dc46d62deb-b2889835ae",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/w2/projekt-dom-w-rarytasach-e-oze-d462240dc46d62debc924e11bbb6a203__60744.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2abfc5825d",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m738275b7537b0/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m738275b7537b0/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-rary-e73b4d0368",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "34dffb0e1b20d43267b456cb4c973ccda06e1f4c6b939a38149b1f97825960b0",
+          "byteLength": 113988,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-rary-e73b4d0368",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/rzut-parteru-z-powierzchniami-projekt-dom-w-rarytasach-e-oze-309416df7a456de8c6a8963cb5c47c9d__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-b747b42ad2",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m738275b7537b0/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m738275b7537b0/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w rarytasach (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-rarytasach-e-oze-041a7ed42e24dd78b-b88ff51df9",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+          "byteLength": 106580,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-projekt-dom-w-rarytasach-e-oze-041a7ed42e24dd78b-b88ff51df9",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-041a7ed42e24dd78b4028bfef5ea755e__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-rarytasach-e-oze-e805a1ba72",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-rarytasach-e-oze-6a87d2257-5993374db9",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "21b4331b77f317ab5d96e58c3b1ce0814ce3f83dfbe07abef0b8c708a41cff72",
+          "byteLength": 388162,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-widok-1-projekt-dom-w-rarytasach-e-oze-6a87d2257-5993374db9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/widok-1-projekt-dom-w-rarytasach-e-oze-6a87d2257207c36d3de3b16009a349e5__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-rarytasach-e-oze-8a156efc7a",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-rarytasach-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w rarytasach (e) oze widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-rarytasach-e-oze-7d42d5b36-6c758c76f5",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "0af087748ff0637bfa17d878ac8ac9405a286096856b1b2bf105f8db564327ed",
+          "byteLength": 386658,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+          "id": "var-widok-2-projekt-dom-w-rarytasach-e-oze-7d42d5b36-6c758c76f5",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m738275b7537b0/widok-2-projekt-dom-w-rarytasach-e-oze-7d42d5b3602fa39604d6249ce9b1fa5d__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+  "contentHash": "95b42a613df30dd1b95d1f566f004872d93eb1be0dcd8fde99e6df4d00004aad",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-d585deaa7bf082578c31f5c8db640553__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/rzut-parteru-projekt-dom-w-rarytasach-e-oze-45a83377685c1d80eef28112f67d66a5__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/rzut-parteru-projekt-dom-w-rarytasach-e-oze-8d1991069c64bb6550a4e6aac4eca147__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/widok-1-projekt-dom-w-rarytasach-e-oze-50925133339da11dde6f3dc0df54ce11__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/widok-1-projekt-dom-w-rarytasach-e-oze-6a87d2257207c36d3de3b16009a349e5__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/widok-2-projekt-dom-w-rarytasach-e-oze-7d42d5b3602fa39604d6249ce9b1fa5d__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/widok-2-projekt-dom-w-rarytasach-e-oze-f8ecd8cbf0b30aef9c8696f3ffd6b26d__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-7d95f6d23eb4a0b0c472f8ccd7706d12__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-boczna-projekt-dom-w-rarytasach-e-oze-0583b562a67d28d2a321823d867136db__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-5e1152f84cb90fb662ae8a322159e1a5__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-boczna-projekt-dom-w-rarytasach-e-oze-33e33ea87c5d076cf9becde8a143bbd8__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-6c3447e1f11b5b8b4bb590cb47f24d35__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-frontowa-projekt-dom-w-rarytasach-e-oze-54e3b81b1acfd2c2f133bdde8995127e__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-4176611e8f0e2ff1c692283a4fa290e1__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/elewacja-ogrodowa-projekt-dom-w-rarytasach-e-oze-2fe549189bfb0737091bb19af5eab3b4__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m738275b7537b0/projekt-dom-w-rarytasach-e-oze-2abe6c624d21b46f75889a50970c8fbe__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m738275b7537b0/sytuacja-projekt-dom-w-rarytasach-e-oze-07df3893a1b42831eaa14cac4b7a4bf3__11255.jpg"
+    }
+  ],
+  "id": "src-m738275b7537b0-f54b4db7f3",
+  "pageHash": "08ce76607d419d4e381fde883c7be0e32ea4d3ca3f366487f02b97fd2e78fe63",
+  "project": {
+    "externalId": "m738275b7537b0",
+    "name": "Projekt domu Dom w rarytasach (E) OZE Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "4,56 m&sup2;",
+      "unit": "m2",
+      "value": 4.56
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "5,71 m",
+      "unit": "m",
+      "value": 5.71
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "94,41 m&sup2;",
+      "unit": "m2",
+      "value": 94.41
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "122,07 m&sup2;",
+      "unit": "m2",
+      "value": 122.07
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "89,85 m&sup2;",
+      "unit": "m2",
+      "value": 89.85
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "140,41 m&sup2;",
+      "unit": "m2",
+      "value": 140.41
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "122,07 m&sup2;",
+      "unit": "m2",
+      "value": 122.07
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "94,41 m&sup2;",
+      "unit": "m2",
+      "value": 94.41
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "560,88 m&sup3;",
+      "unit": "none",
+      "value": 560.88
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 3.24,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 3,24 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.43,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 7,43 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.73,
+      "index": 3,
+      "label": "Spiżarnia",
+      "raw": "3. Spiżarnia | 1,73 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.52,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 9,52 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 28.08,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 28,08 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.2,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 9,20 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.3,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 9,30 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.34,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 10,34 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.02,
+      "index": 9,
+      "label": "Garderoba",
+      "raw": "9. Garderoba | 3,02 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.91,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 5,91 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.56,
+      "index": 11,
+      "label": "Kotłownia z pralnią",
+      "raw": "11. Kotłownia z pralnią | 4,56 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.08,
+      "index": 12,
+      "label": "Toaleta",
+      "raw": "12. Toaleta | 2,08 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt domu \"Dom w rarytasach (E) OZE\" to nowoczesny, parterowy dom jednorodzinny, który łączy w sobie elegancję i funkcjonalność. Styl budynku nawiązuje do nowoczesnej stodoły, a ciemne barwy tynku pięknie eksponują okładzinę drewnianą. Dom z pewnością zadowoli amatorów ciekawych i przytulnych wnętrz. Zadaszenie tarasu w formie pergoli dodaje uroku i pozwala na spędzanie czasu na świeżym powietrzu niezależnie od pogody. Wszystkie sypialnie mają dostęp do tarasu ogrodowego. Dwuspadowy dach bez okapów, podkreśla nowoczesny charakter budynku. Ogrzewanie domu zapewnia pompa ciepła, a dodatkowym atutem jest kominek, który sprawi, że zimowe wieczory będą jeszcze bardziej przytulne. W projekcie przewidziano wentylację mechaniczną z odzyskiem ciepła (rekuperacja), co zapewnia komfort i oszczędność energii. Dom składa się z czterech pokoi, w tym dwukondygnacyjnej strefy dziennej z salonem otwartym do dachu, co zapewnia przestrzeni przestronność i nowoczesność. Kuchnia z wyspą i przyległa spiżarnia spełnią marzenia wielu inwestorów. Sypialnia główna posiada własną garderobę, a bliskość łazienki to dodatkowy atut. Pralnia zlokalizowana w pobliżu strefy nocnej ułatwi prace domowe. Dom został zaprojektowany z myślą o optymalizacji kosztów budowy. W atrakcyjnej cenie możemy uzyskać nowoczesną przestrzeń, która zadowoli najbardziej wymagających. Projekty domów takie jak ten to doskonała propozycja dla osób ceniących nowoczesne rozwiązania przestrzenne korespondujące z ekonomiką realizacji. Projekt należy do kategorii: projekty domów bez garażu , projekty w stylu nowoczesnej stodoły, projekty domów z dachem dwuspadowym oraz projekty domów parterowych ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "drewniany"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "pompa ciepła Dodatkowo do projektu dołączamy GRATIS projekt instalacji fotowoltaicznej jako alternatywne opracowanie!"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 30 st. , więźba drewniana, blachodachówka / dachówka ceramiczna"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop drewniany , 89.85 m² + 4.56 m² , 4 pokoje, kuchnia, łazienka, spiżarka, toaleta, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+
