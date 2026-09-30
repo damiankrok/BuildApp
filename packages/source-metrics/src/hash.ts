@@ -33,7 +33,7 @@
  */
 import { hashArtifact } from '@buildapp/source-common'
 import { METRIC_EVIDENCE_SCHEMA, METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
-import type { CoordinateRegistration, DimensionChain, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, UnresolvedMetric } from './schema.js'
+import type { ChainRelation, CoordinateRegistration, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, UnresolvedMetric } from './schema.js'
 
 /** A set before it is sealed: everything but the derived id and hash. */
 export type MetricEvidenceDraft = Omit<MetricEvidenceSet, 'id' | 'contentHash'>
@@ -47,6 +47,8 @@ const tokenMember = (t: OcrToken): unknown => ({
   heightPx: t.heightPx,
   shearDeg: t.shearDeg,
   glyphs: t.glyphs.map((g) => ({ char: g.char, score: g.score, confidence: g.confidence, box: g.box, alternatives: g.alternatives })),
+  orientation: t.orientation ?? null,
+  pageVote: t.pageVote ?? null,
 })
 
 const evidenceMember = (e: MetricEvidence): unknown => ({
@@ -63,6 +65,7 @@ const evidenceMember = (e: MetricEvidence): unknown => ({
   alternatives: e.alternatives.map((a) => ({ value: a.value, unit: a.unit, rawText: a.rawText, confidence: a.confidence })),
   confidence: e.confidence,
   extractor: { extractor: e.provenance.extractor, name: e.provenance.name },
+  derivation: e.derivation ? { rawText: e.derivation.rawText, orientation: e.derivation.orientation ?? null, valueText: e.derivation.valueText, substitutions: e.derivation.substitutions, dependsOnScale: e.derivation.dependsOnScale } : null,
 })
 
 const chainMember = (c: DimensionChain): unknown => ({
@@ -96,6 +99,30 @@ const conflictMember = (c: MetricConflict): unknown => ({ kind: c.kind, what: c.
 
 const gapMember = (u: UnresolvedMetric): unknown => ({ what: u.what, frameId: u.frameId ?? null, status: u.status })
 
+// 1.2.0: the dimension evidence. Hashed by content, prose (`why`) excluded, like everything else here.
+const observationMember = (o: DimensionObservation): unknown => ({ ...o, id: undefined })
+
+const solutionMember = (m: FrameMetricSolution): unknown => ({
+  frame: m.frameId,
+  relation: m.relation,
+  confidence: m.confidence,
+  cmPerPixelX: m.cmPerPixelX ?? null,
+  cmPerPixelY: m.cmPerPixelY ?? null,
+  anisotropy: m.anisotropy ?? null,
+  isotropy: m.isotropy,
+  selected: m.selectedHypothesisId ?? null,
+  hypotheses: m.hypotheses.map((h) => ({ ...h, why: undefined })),
+  legacy: m.legacy,
+  independentWitnesses: m.independentWitnesses,
+  supporting: [...m.supportingObservationIds].sort(),
+  conflicting: [...m.conflictingObservationIds].sort(),
+  orientation: m.orientationDecisions.map((d) => ({ ...d, why: undefined })),
+  reread: [...m.rereadChainIds].sort(),
+  counts: m.counts,
+})
+
+const relationMember = (r: ChainRelation): unknown => r
+
 export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
   return hashArtifact(METRIC_EVIDENCE_SCHEMA, METRIC_EVIDENCE_SCHEMA_VERSION, [
     { label: 'package', ordered: { id: draft.sourcePackageId, hash: draft.sourcePackageHash } },
@@ -108,6 +135,9 @@ export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
     { label: 'specificationFindings', unordered: draft.specificationFindings.map((f) => ({ key: f.key, subject: f.subject, value: f.value })) },
     { label: 'conflicts', unordered: draft.conflicts.map(conflictMember) },
     { label: 'unresolved', unordered: draft.unresolved.map(gapMember) },
+    { label: 'dimensionObservations', unordered: (draft.dimensionObservations ?? []).map(observationMember) },
+    { label: 'metricSolutions', unordered: (draft.metricSolutions ?? []).map(solutionMember) },
+    { label: 'chainRelations', unordered: (draft.chainRelations ?? []).map(relationMember) },
   ])
 }
 

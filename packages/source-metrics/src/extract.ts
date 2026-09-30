@@ -33,6 +33,7 @@ import type { RawChain, ScalePlausibility, SolvedChain } from './chains.js'
 import { findDimensionLines, findStraightRuns } from './dimension-lines.js'
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
+import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
 import { readOpeningCallouts } from './callouts.js'
 import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
@@ -43,9 +44,9 @@ import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
-import type { Association, DimensionChain, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
+import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
-export const METRIC_READER_VERSION = '1.0.0' as const
+export const METRIC_READER_VERSION = '1.1.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -153,7 +154,7 @@ function nearest(observations: readonly SourceObservation[], kinds: readonly str
 
 const tokenId = (frameId: string, token: TextToken): string => stableId('ocr', token.text.replace(/[^0-9a-z]/gi, '') || 'token', { frameId, box: token.box, text: token.text, orientation: token.orientation })
 
-const toOcrToken = (frame: SourceCoordinateFrame, token: TextToken): OcrToken => ({
+const toOcrToken = (frame: SourceCoordinateFrame, token: TextToken, pageVote?: OcrToken['pageVote']): OcrToken => ({
   id: tokenId(frame.id, token),
   frameId: frame.id,
   assetId: frame.assetId,
@@ -165,6 +166,8 @@ const toOcrToken = (frame: SourceCoordinateFrame, token: TextToken): OcrToken =>
   heightPx: Math.max(1, token.height),
   shearDeg: token.shearDeg,
   glyphs: token.glyphs.map((g) => ({ char: g.char, score: g.score, confidence: g.confidence, box: g.box, alternatives: g.alternatives })),
+  orientation: token.orientation,
+  ...(pageVote ? { pageVote } : {}),
 })
 
 
@@ -280,6 +283,9 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
   const registrations: MetricEvidenceSet['coordinateRegistrations'] = []
   const conflicts: MetricConflict[] = []
   const unresolved: UnresolvedMetric[] = []
+  const dimensionObservations: DimensionObservation[] = []
+  const metricSolutions: FrameMetricSolution[] = []
+  const chainRelations: ChainRelation[] = []
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT
   const frames = [...graph.coordinateFrames].sort((a, b) => a.id.localeCompare(b.id)).filter((f) => keep(f))
@@ -293,10 +299,14 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     }
     const observations = graph.observations.filter((o) => o.frameId === frame.id)
     let ladderOrigin: PixelPoint | undefined
-    const read = readNumbers(raster, { checkpoint })
+    // A floor plan's dimensions are read every way up and kept every way up (005B): which way
+    // up a label is printed is decided on the chain, from evidence, not by a page-wide vote.
+    const isPlan = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ'
+    const read = readNumbers(raster, { checkpoint, hypotheses: isPlan })
     const tokensById = new Map<TextToken, OcrToken>()
-    for (const token of read.tokens) {
-      const record = toOcrToken(frame, token)
+    const keptByVote = new Set(read.tokens)
+    for (const token of read.raw ?? read.tokens) {
+      const record = toOcrToken(frame, token, read.raw ? (keptByVote.has(token) ? 'KEPT' : 'DISCARDED') : undefined)
       tokensById.set(token, record)
       ocrTokens.push(record)
     }
@@ -328,12 +338,47 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     const usedTokens = new Set<TextToken>()
     const anchors: ScaleAnchorInput[] = []
 
+    // --- the independent metric solution (005B) ---
+    // The legacy vote's solution is the incumbent. The frame's own readings, as read and bound to
+    // their ticks, confirm it, replace it or leave it unconfirmed, and each chain is read in the
+    // orientation its own evidence chose. Where nothing changes, the chains are the legacy ones.
+    let solvedChains = solution.solved
+    let orientationOf: Array<{ orientation: TextToken['orientation'] | null; dependsOnScale: boolean }> | undefined
+    let reread = new Set<number>()
+    let scaleStands = true
+    if (isPlan && read.raw) {
+      const ids = rawChains.map((c) => chainId(frame.id, c.axis, c.baselinePx, c.ticks.map((t) => t.atPx)))
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint })
+      solvedChains = metric.solved
+      orientationOf = metric.chainOrientation
+      scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
+      reread = new Set(ids.map((id, i) => (metric.solution.rereadChainIds.includes(id) || !scaleStands ? i : -1)).filter((i) => i >= 0))
+      metricSolutions.push(metric.solution)
+      dimensionObservations.push(...metric.observations)
+      chainRelations.push(...metric.relations)
+    }
+
     rawChains.forEach((chain, index) => {
-      const solved = solution.solved[index]
+      const solved = solvedChains[index]
       if (solved.segments.length === 0) return
-      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens)
+      // Where the page vote's scale stands, a chain read again the right way up adds its readings
+      // as evidence but anchors the registration only with the segments the vote's own reading
+      // anchored: a confirmed scale is not re-fitted, so confirming it never moves a model.
+      const legacySolved = solution.solved[index]
+      const anchorable =
+        scaleStands && reread.has(index)
+          ? (g: SolvedChain['segments'][number]): boolean => legacySolved.segments.some((l) => l.fromPx === g.fromPx && l.toPx === g.toPx && l.origin === g.origin && l.valueCm === g.valueCm && l.confidence === g.confidence)
+          : undefined
+      const record = buildChain(frame, chain, solved, tokensById, evidence, anchors, usedTokens, orientationOf?.[index], anchorable)
       if (record) chains.push(record)
     })
+    // A label a re-read chain took in another orientation is the same ink as the page vote's token
+    // for it: that token is used too, and must not be read again as a datum, an angle or a gap.
+    if (reread.size > 0 && read.raw) {
+      const { regionOf } = textRegions(frame.id, read.raw)
+      const usedRegions = new Set([...usedTokens].map((t) => regionOf.get(t)?.id).filter((id): id is string => id !== undefined))
+      for (const t of read.tokens) if (usedRegions.has(regionOf.get(t)?.id ?? '')) usedTokens.add(t)
+    }
 
     // --- level datums, angles and callouts ---
     type DatumDraft = {
@@ -672,6 +717,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       { name: 'metrics.chain-solver', version: METRIC_READER_VERSION },
       { name: 'metrics.axis-aligned-affine', version: '1' },
       { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
+      { name: METRIC_SOLVER_NAME, version: METRIC_SOLVER_VERSION },
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -680,6 +726,9 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     specificationFindings: (spec?.findings ?? []).slice(),
     conflicts: conflicts.sort((a, b) => a.id.localeCompare(b.id)),
     unresolved: unresolved.sort((a, b) => a.id.localeCompare(b.id)),
+    dimensionObservations: dimensionObservations.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+    metricSolutions: metricSolutions.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
+    chainRelations,
   }
   return sealMetricEvidence(draft, options.slug)
 }
@@ -710,6 +759,8 @@ function buildChain(
   evidence: MetricEvidence[],
   anchors: ScaleAnchorInput[],
   usedTokens: Set<TextToken>,
+  orientation?: { orientation: TextToken['orientation'] | null; dependsOnScale: boolean },
+  anchorable?: (segment: SolvedChain['segments'][number]) => boolean,
 ): DimensionChain | undefined {
   const id = chainId(frame.id, chain.axis, chain.baselinePx, chain.ticks.map((t) => t.atPx))
   const axis = chain.axis === 'HORIZONTAL' ? 'X' : 'Y'
@@ -741,7 +792,8 @@ function buildChain(
         value: segment.valueCm,
         unit: 'cm',
         origin: segment.origin,
-        rawText: segment.text ?? '',
+        // What the reader saw, never the value it was turned into (005B; the schema always said so).
+        rawText: segment.token?.text ?? segment.text ?? '',
         textBox: segment.token?.box,
         measuredGeometry: { type: 'SEGMENT', a: along(segment.fromPx), b: along(segment.toPx) },
         pixelLength: segment.pixelLength,
@@ -754,8 +806,23 @@ function buildChain(
         provenance: {
           extractor: segment.origin === 'DERIVED' ? 'DERIVED' : 'CHAIN_SOLVER',
           name: `metrics.chain-solver@${METRIC_READER_VERSION}`,
-          detail: segment.origin === 'CHAIN_CORRECTED' ? `the reader first read "${segment.token?.text ?? ''}"; the chain's scale endorses "${segment.text}"` : association.why,
+          detail: segment.origin === 'CHAIN_CORRECTED' ? `the reader read "${segment.token?.text ?? ''}"; at the frame's scale "${segment.text}" fits the span` : association.why,
         },
+        ...(segment.token && segment.text !== undefined && (segment.origin === 'CHAIN_CORRECTED' || orientation?.dependsOnScale)
+          ? {
+              derivation: {
+                rawText: segment.token.text,
+                orientation: segment.token.orientation,
+                valueText: segment.text,
+                substitutions: [...segment.text].filter((ch, i) => ch !== segment.token?.text[i]).length + Math.abs(segment.text.length - segment.token.text.length),
+                dependsOnScale: true,
+                why:
+                  segment.origin === 'CHAIN_CORRECTED'
+                    ? 'a substitution chosen because it fits the scale the frame was solved at: a value downstream of that scale, never a witness for it'
+                    : 'read the way up the other axis’s scale chose: not a witness of the two axes agreeing',
+              },
+            }
+          : {}),
       })
       segments.push({
         index: segment.index,
@@ -772,8 +839,8 @@ function buildChain(
       // A derived segment is the scale restated, and fitting a scale to its own
       // output is how a registration comes to report a residual of zero while
       // being wrong.
-      if (segment.origin !== 'DERIVED' && segment.confidence > 0) {
-        fittedCount += 1
+      if (segment.origin !== 'DERIVED' && segment.confidence > 0) fittedCount += 1
+      if (segment.origin !== 'DERIVED' && segment.confidence > 0 && (anchorable?.(segment) ?? true)) {
         anchors.push({
           id: stableId('anchor', 'chain-segment', { frameId: frame.id, chain: id, from: segment.fromPx, to: segment.toPx }),
           kind: 'CHAIN_SEGMENT',

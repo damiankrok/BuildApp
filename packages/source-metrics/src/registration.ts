@@ -99,7 +99,11 @@ function fitAxis(anchors: readonly ScaleAnchorInput[], tolerancePx: number): { s
     const scale = seed.metricSpan / seed.pixelSpan
     const kept = inliers(scale)
     const weight = kept.reduce((a, x) => a + x.weight * x.pixelSpan, 0)
-    if (!best || kept.length > best.kept.length || (kept.length === best.kept.length && weight > best.weight)) best = { scale, kept, weight }
+    // Weight first (005B): an anchor's weight grows with its span, so one 550 px overall dimension
+    // outweighs five 60 px room spans that agree with each other at another scale. Counting first
+    // let the short ones reject the long one. When every anchor agrees, as on every sealed frame,
+    // the order makes no difference.
+    if (!best || weight > best.weight + 1e-9 || (Math.abs(weight - best.weight) <= 1e-9 && kept.length > best.kept.length)) best = { scale, kept, weight }
   }
   if (!best) return { kept: [], rejected: [] }
   let scale = best.scale
