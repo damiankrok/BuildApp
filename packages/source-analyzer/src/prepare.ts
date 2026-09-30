@@ -151,11 +151,14 @@ export function prepareFromRaster(raster: Raster, options: PrepareOptions = {}):
 export function workingSegments(prepared: Prepared): { axis: Segment[]; all: Segment[]; thin: Segment[] } {
   const k = 1 / prepared.scale
   // `thin` only when asked for: it is the one expensive member, and most readers never ask.
+  // Mapped once and then kept: readers tell treads apart by identity, and on a
+  // downscaled sheet (k ≠ 1) a second mapping would hand them new objects.
+  let thin: Segment[] | undefined
   return {
     axis: prepared.axisSegments.map((s) => scaleSegment(s, k)),
     all: prepared.allSegments.map((s) => scaleSegment(s, k)),
     get thin() {
-      return prepared.thinSegments.map((s) => scaleSegment(s, k))
+      return (thin ??= prepared.thinSegments.map((s) => scaleSegment(s, k)))
     },
   }
 }
