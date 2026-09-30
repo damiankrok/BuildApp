@@ -463,7 +463,12 @@ export function emitBuilding(b: BuildingV2, modelName: string, onDebug?: (line: 
     const heightNear = round6(Math.max(0.3, (nearIsTall || o.headFarY === undefined ? o.headY : o.headFarY) - o.sillY))
     const heightFar = o.headFarY === undefined ? undefined : round6(Math.max(0.3, (nearIsTall ? o.headFarY : o.headY) - o.sillY))
     const kind = o.family === 'WINDOW' || o.family === 'MULTI_PANEL_GLAZING' ? 'WINDOW' : 'DOOR'
-    push({ type: 'cutOpening', id: o.id, wallId, kind, offset: Math.max(0, offset), sill, width: o.widthM, height: heightNear, ...(heightFar !== undefined && o.profile === 'RAKED_SINGLE' ? { head: { kind: 'RAKED', heightFar } } : {}) }, o.id, 'openings')
+    // A door leaf hangs from a level head: on a gable end a door is cut level at the low end of the rake, where a
+    // window follows the roof.
+    const raked = heightFar !== undefined && o.profile === 'RAKED_SINGLE'
+    const levelDoor = raked && kind === 'DOOR'
+    const height = levelDoor && heightFar !== undefined ? Math.min(heightNear, heightFar) : heightNear
+    push({ type: 'cutOpening', id: o.id, wallId, kind, offset: Math.max(0, offset), sill, width: o.widthM, height, ...(raked && !levelDoor ? { head: { kind: 'RAKED', heightFar } } : {}) }, o.id, 'openings')
     if (kind === 'WINDOW') {
       push({ type: 'placeWindow', id: `${o.id}-unit`, openingId: o.id, ...(o.mullions.length > 0 ? { mullions: o.mullions } : {}), materialId: MATERIALS_V2.glass }, o.id, 'windows')
     } else if (o.family === 'GARAGE_DOOR') {
