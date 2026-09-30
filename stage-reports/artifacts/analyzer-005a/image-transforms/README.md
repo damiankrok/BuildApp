@@ -28,3 +28,18 @@ ends in a named `ReconstructionFailure`.
 
   The resolver does not run on these, because the first reading holds, and nothing in the drawing refutes the
   smaller building. These rows are not claimed as fixed.
+
+## Re-measured after the post-implementation Council
+
+Every change up to resolver 1.2.0 is in, including the opening drop and the acceptance rules. The harness is
+unchanged. The results are in `after-post-council.jsonl`. **All 60 cells are identical to `after.jsonl`**: the
+same model hash, or the same failure code. `after.jsonl` predates the opening drop (`f1901e9`) but not its effect.
+
+"Equivalent" means the same body count and a footprint within 6 %. It says nothing about the roof, the levels
+or the openings, which is a limit of the definition (Council G). Among the 46 equivalent cells:
+- **One lost its roof entirely:** Ashby under JPEG q40 reads no roof kind (`GABLE/X/38.0` → none).
+- **Six read the pitch 0.2–2.2° off:** Holloway at 1.25× and q40, Larchfield at 0.5× and 1.5×, Marlow at
+  0.75×, and Redmire at 0.75×.
+- **One found an extra opening:** Marlow at 1.5×, 8 → 9.
+
+These rows are not claimed as equivalent in any wider sense.

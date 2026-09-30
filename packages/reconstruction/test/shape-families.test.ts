@@ -59,6 +59,7 @@ const CORRECT_TODAY = new Set([
   'l-rear',
   't-wing',
   'narrow-wing',
+  'wing-4m2',
 ].flatMap((id) => [`${id}|published`, `${id}|none`]))
 
 /**
@@ -69,6 +70,15 @@ const CORRECT_TODAY = new Set([
 const KNOWN_SILENT: Record<string, string> = {
   'wide-door-wing|none':
     'a 3.2 m door leaves a 0.2 m stub, too short to read as a piece of wall, so no gap is found and the wing floods as outside; with no published footprint nothing contradicts the smaller building. With one, it is refused by name.',
+}
+
+/**
+ * Rows the model's own validator stops. That is not a refusal the analyzer decided on: the reading was
+ * wrong, and emission caught it. Listed like a silent row, so a new one fails the gate (post-Council G).
+ */
+const KNOWN_EMISSION_DEFECTS: Record<string, string> = {
+  'small-copy|published': 'at 20 px/m the plan reads walls that overlap, and the model refuses the wall ring (WALLS_OVERLAP): the validator holds, the reading is wrong.',
+  'small-copy|none': 'as with a published footprint: the wall ring is refused (WALLS_OVERLAP).',
 }
 
 describe('plan shape families (005A)', () => {
@@ -83,6 +93,10 @@ describe('plan shape families (005A)', () => {
         }
         if (outcome.kind === 'WRONG') {
           expect(KNOWN_SILENT[row], `${row} completed with ${outcome.bodies} bodies and ${outcome.areaM2.toFixed(1)} m² against ${f.bodies} and ${f.footprintM2}, without a word`).toBeDefined()
+          return
+        }
+        if (outcome.kind === 'REFUSED' && outcome.code === 'MODEL_EMISSION_FAILED') {
+          expect(KNOWN_EMISSION_DEFECTS[row], `${row}: the model's validator stopped a wrong reading`).toBeDefined()
           return
         }
         // A named refusal or a correct building: both are allowed here.

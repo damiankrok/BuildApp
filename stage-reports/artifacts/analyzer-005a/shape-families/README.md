@@ -1,9 +1,9 @@
 # Plan shape families — measured (005A)
 
-Ten made-up houses (`packages/synthetic-drawings/src/shape-families.ts`), one per plan shape. Each is drawn as
+Eleven made-up houses (`packages/synthetic-drawings/src/shape-families.ts`), one per plan shape. Each is drawn as
 PNG sheets and run through the whole pipeline: package, observations, metric evidence, `reconstructV2` and the
 plan resolver. Each runs twice, with the footprint a publisher would print and without one. `matrix.json` holds
-the 20 rows. The gate is `packages/reconstruction/test/shape-families.test.ts`.
+the 22 rows (re-measured after the post-implementation Council, resolver 1.2.0). The gate is `packages/reconstruction/test/shape-families.test.ts`.
 
 | family | with published footprint | without |
 | --- | --- | --- |
@@ -13,15 +13,24 @@ the 20 rows. The gate is `packages/reconstruction/test/shape-families.test.ts`.
 | L, wing flush with the rear | correct (2 bodies, −1.1 %) | correct |
 | T-like, wing centred | correct (2 bodies, −1.9 %) | correct |
 | narrow wing (2.4 m) | correct (2 bodies, −1.3 %) | correct |
+| the same wing at 4.2 m (post-Council) | correct (2 bodies, −2.1 %) | correct |
 | garage beside two storeys (2.6 m door) | refused: `PLAN_NO_MASSES` | refused: `PLAN_NO_MASSES` |
-| wide door across a wing (3.2 of 3.6 m) | refused: `PLAN_LAYOUT_REJECTED`, 3 other readings weighed | **completes 27.7 % smaller, silently** |
+| wide door across a wing (3.2 of 3.6 m) | refused: `PLAN_LAYOUT_REJECTED`; the resolver weighs other readings, and the figure that refused the first is spent | **completes 27.7 % smaller, silently** |
 | wide glazing (4.8 m of 9.6 m) | refused: `PLAN_NO_DIMENSION_FRAME` | refused: `PLAN_NO_DIMENSION_FRAME` |
-| small copy (20 px/m, ~420 px wide) | refused: `MODEL_EMISSION_FAILED` (`WALLS_OVERLAP`) | refused: same |
+| small copy (20 px/m, ~420 px wide) | stopped by the model's validator: `MODEL_EMISSION_FAILED` (`WALLS_OVERLAP`), a listed defect | the same |
 
 The rule is the Council's lattice: a row may move up and never down.
 - Correct rows must stay correct.
 - A refusal must be named (a `ReconstructionFailure` code).
 - A silently smaller building is allowed only where listed, with its reason.
+- **(post-Council)** A run the model's own validator stops (`MODEL_EMISSION_FAILED`) is not a refusal the analyzer
+  decided on: it is allowed only where listed (`KNOWN_EMISSION_DEFECTS`), like a silent row.
+- **(post-Council)** No row reaches the resolver's acceptance: the resolver runs on two rows and resolves neither.
+  The families test the first reading and the refusals, not the resolver's choice. The resolver's choice is
+  tested on the copy matrix and the decoy-footprint control.
+- The families are drawn at 38 px/m, one copy each (the small copy at 20 px/m). They do not reproduce Council
+  G's silent −14.4 % wing variant, or the 4.0–4.4 m wing variants that failed in the chain reading. Those differ
+  in more than the wing's width, and have no row.
 
 The single listed row: the 3.2 m door leaves a 0.2 m stub of wall. That is too short to read as a piece of wall,
 so no gap is found and the wing floods as outside. With no published footprint, nothing contradicts the smaller

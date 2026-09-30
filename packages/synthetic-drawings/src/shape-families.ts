@@ -3,9 +3,14 @@
  *
  * One house per plan shape the resolver must not assume away: a footprint is
  * not always a single enclosing rectangle. Every dimension is made up here and
- * shares nothing with any project the pipeline has been run against. Two of
- * them are drawn to the silent failures measured on the generator before this
- * stage: a wide door that takes up most of a wing's front, and a narrow wing.
+ * shares nothing with any project the pipeline has been run against. Two are
+ * drawn toward failures measured on the generator before this stage: a wide
+ * door that takes up most of a wing's front, and a wing beside the body. The
+ * wing reads correctly at 2.4 m and at 4.2 m (`wing-4m2`, added after the
+ * post-implementation Council). Neither reproduces the failures measured on
+ * the generator before this stage — Council G's silent −14.4 % variant, and
+ * the 4.0–4.4 m variants that failed in the chain reading — which differed in
+ * more than the width. Those have no row, and the report says so.
  *
  * A family states what the drawing IS: how many bodies, and the footprint area
  * the publisher would print. The gate holds the analyzer to "that, or a named
@@ -156,6 +161,20 @@ export const SHAPE_FAMILIES: readonly ShapeFamily[] = [
     chainsX: [8.6, 2.4],
     chainsZ: [7.0],
     wings: [{ name: 'store', width: 2.4, depth: 4.4, offsetZ: 1.2, storeys: 1, roof: 'FLAT', openings: [window_(1.4, 1.0, 0, 'RIGHT')] }],
+  }),
+  family('wing-4m2', 'the wing beside the body at 4.2 m', {
+    name: 'Family wing 4.2',
+    frame: 'MODEL',
+    width: 8.6,
+    depth: 7.0,
+    wallThickness: THICK,
+    storeys: oneStorey,
+    roof: { pitchDeg: 36, overhang: 0, ridgeAxis: 'X' },
+    openings: [door(1.2), window_(4.6, 1.5)],
+    members: [],
+    chainsX: [8.6, 4.2],
+    chainsZ: [7.0],
+    wings: [{ name: 'store', width: 4.2, depth: 4.4, offsetZ: 1.2, storeys: 1, roof: 'FLAT', openings: [window_(1.4, 1.0, 0, 'RIGHT')] }],
   }),
   family('wide-glazing', 'a front mostly glazed: one opening across half the wall', {
     name: 'Family wide glazing',

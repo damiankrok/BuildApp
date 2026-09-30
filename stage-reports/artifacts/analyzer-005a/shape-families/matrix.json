@@ -123,19 +123,25 @@
   "id": "garage-side",
   "published": true,
   "outcome": "PLAN_NO_MASSES",
-  "msg": "1 walled region of the 688\u00d7498 px floor plan was found, but no building mass could be made from it that places the front of the building"
+  "msg": "1 walled region of the 688×498 px floor plan was found, but no building mass could be made from it that places the front of the building",
+  "resolution": "NO_ALTERNATIVE",
+  "publishedFigure": "SCORED"
  },
  {
   "id": "garage-side",
   "published": false,
   "outcome": "PLAN_NO_MASSES",
-  "msg": "1 walled region of the 688\u00d7498 px floor plan was found, but no building mass could be made from it that places the front of the building"
+  "msg": "1 walled region of the 688×498 px floor plan was found, but no building mass could be made from it that places the front of the building",
+  "resolution": "NO_ALTERNATIVE",
+  "publishedFigure": "NONE"
  },
  {
   "id": "wide-door-wing",
   "published": true,
   "outcome": "PLAN_LAYOUT_REJECTED",
-  "msg": "the lowest storey covers 54.40 m\u00b2 against the 75.28 m\u00b2 the publisher prints \u2014 27.7% apart: the decomposition is not of this building; 3 other readings of the pl"
+  "msg": "the lowest storey covers 54.40 m² against the 75.28 m² the publisher prints — 27.7% apart: the decomposition is not of this building; 3 other readings of the plan were weighed and none survived to a f",
+  "resolution": "INCONCLUSIVE",
+  "publishedFigure": "SPENT"
  },
  {
   "id": "wide-door-wing",
@@ -174,16 +180,44 @@
   "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
  },
  {
+  "id": "wing-4m2",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 77.06,
+  "expect": 78.68,
+  "dev": -2.1,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "wing-4m2",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 77.06,
+  "expect": 78.68,
+  "dev": -2.1,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
   "id": "wide-glazing",
   "published": true,
   "outcome": "PLAN_NO_DIMENSION_FRAME",
-  "msg": "the 605\u00d7491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have"
+  "msg": "the 605×491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have",
+  "resolution": "NO_ALTERNATIVE",
+  "publishedFigure": "SCORED"
  },
  {
   "id": "wide-glazing",
   "published": false,
   "outcome": "PLAN_NO_DIMENSION_FRAME",
-  "msg": "the 605\u00d7491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have"
+  "msg": "the 605×491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have",
+  "resolution": "NO_ALTERNATIVE",
+  "publishedFigure": "NONE"
  },
  {
   "id": "small-copy",
