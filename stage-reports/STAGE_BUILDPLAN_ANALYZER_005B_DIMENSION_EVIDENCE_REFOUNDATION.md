@@ -634,8 +634,14 @@ dom-w-jablonkach. Per the protocol it is **not patched in 005B**; both families 
   `Analyzer / progress`, `Analyzer / plan resolver`, `Analyzer / generalization`, second and third house, Node 18
   parity, APK size + emulator, `Android / APK`, `Android / 3D entry gate`, the UI evidence gate (54 min on the
   emulator), Playwright, the API container, architecture/assemblies.
-- **The final CI on this report and the OWNER APK dispatch** are recorded in §AI (a docs-only follow-up commit,
-  as in 005A).
+- **Runs 102 and 103** (pushes of `fb5b4af` and `2e5a5bb`) — **cancelled by the workflow's own concurrency group**
+  (`buildapp-ci-<workflow>-<ref>`, `cancel-in-progress: true`), each superseded within minutes by the next run on the
+  same branch; neither reported a failure.
+- **Run 104** (`workflow_dispatch`, `owner_apk: true`, on `2e5a5bb`, which contains `fb5b4af`) — **the final CI, green**:
+  26 jobs succeeded, 1 skipped by design (the `preview-latest` publish, which an OWNER dispatch leaves alone); the
+  same job set as run 101, including the eight development-house rows and the UI evidence gate, plus
+  `Android / OWNER direct APK (owner-preview-latest)`, which published the APK in §AI. The analyzer code at
+  `2e5a5bb` is the frozen code: `git diff 27274ab 2e5a5bb -- packages apps .github holdout/*.mjs` is empty.
 
 ## AH. Commits
 
@@ -658,14 +664,50 @@ Bounded commits on `analyzer/dimension-evidence-refoundation-v1` (also on `claud
 | `f57b2ad` | feat(analysis-service): a plan framed by its walls limits the result |
 | `27274ab` | ci: development rows require their limiting warnings; guard sees lists and metres — **PRE_HOLDOUT_2_SHA** |
 | `fb5b4af` | docs(analyzer): blind holdout round 2 — draw, runs and verdicts (ledger line + sealed text evidence) |
-| this commit | docs: stage 005B final report and project status |
+| `2e5a5bb` | docs: stage 005B final report and project status — the final build (run 104, OWNER APK) |
+| the next commit | docs: record the 005B final CI and the OWNER APK (this section and §AI) |
 
 No commit touches `BuildPlan-PC-Legacy`, no history was rewritten, no APK binary and no third-party drawing is
 committed.
 
 ## AI. OWNER APK
 
-Recorded from the `workflow_dispatch` run on this report's commit, in the follow-up commit.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`,
+from `workflow_dispatch` run 104 (`36740115586`).
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 30 697 367 bytes, `application/vnd.android.package-archive`; the release is a prerelease |
+| SHA-256 | `9997ee732f6de1c0b57ec99e9dbee61e7faa1196c7c71c561f423e36f49f18dc`, equal to the release notes and to GitHub's asset digest |
+| ABI | `aapt dump badging`: `native-code: 'arm64-v8a'`; 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1104**, versionName `0.104.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes: run 104 from `claude/new-session-3kzcgh` @ `2e5a5bb2da3eee500aae926aae2f5635903de428`; its analyzer code is the frozen code (`27274ab`) |
+| analyzer / resolver | the embedded bundle (`assets/local-analyzer/analyzer.mjs`, sha256 `d02b03ec…3386`, equal to its manifest; Node 18.20.4) declares `METRIC_EVIDENCE_SCHEMA_VERSION = "1.2.0"`, `PLAN_RESOLVER_VERSION = "1.3.0"`, `SOLVER_V2_VERSION = "2.3.0"`, and carries `metrics.independent-scale` and `ORIENTATION_BY_SCALE` |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes; it installs over any preview build with a lower run number |
+
+No APK binary is committed.
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over the previous build (1098), then check each item.
+
+1. **Progress still never looks frozen.** Analyse any link and watch "Odczytuję wymiary i opisy otworów": besides
+   the 005A steps, "orientacja etykiet: łańcuch N z M" and "porównuję skale: wariant N z M" may flash by (they take
+   milliseconds, §X); "Ostatnia aktywność N s temu" keeps moving. "Przerwij" still stops within seconds.
+2. **Marcówki and Kosaćce** (clean and tracked). Expected: the same houses as build 1098, byte for byte on the
+   desktop. If the phone again keeps one Kosaćce plan copy of four, "Szczegóły analizy" now name each dropped copy,
+   its stage and its error: send them.
+3. **Rarytasy e-OZE.** Expected: it now completes on its first reading, 123.99 m² against 122.07, without "resolved
+   by hypothesis". Question for the OWNER: does the house look like the page?
+4. **Rarytasy G2E and dom-w-jablonkach.** Expected: models, each with a LIMITING warning that the plan's scale rests
+   on printed dimensions nothing independent confirms (`METRIC_SCALE_WEAK`); dom-w-jablonkach at 94.18 m² (−5.3 %),
+   one front opening missing.
+5. **The alternate Marcówki page.** Expected: no model, and "Nie udało się ustalić skali rzutu: wymiary odczytane
+   z rysunku nie potwierdzają jednej skali, więc modelu nie zbudowano." — not a wrong house.
+6. **Optional: a round-2 blind house** (`dom-w-zurawkach`, `dom-w-modrzykach`). Expected: a typed stop and no wrong
+   house. This is the next stage's defect.
 
 ## AJ. Residual debt
 
