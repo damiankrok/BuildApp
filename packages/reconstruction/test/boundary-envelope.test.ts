@@ -334,14 +334,18 @@ describe('§37 the same architecture drawn differently keeps its envelope', () =
   ])('%s: the same envelope', (_what, drawing) => {
     expect(near(areaOf(drawing), reference, 0.05)).toBe(true)
   })
-  it('window symbols removed, jambs kept: the wing is named, and the reading that shuts its mouth recovers the envelope', () => {
+  it('window symbols removed, jambs kept: a space 3 m deep behind a blank 5 m mouth is named, not built — in either reading', () => {
     // With nothing drawn across it the wing's 5 m front is a blank gap: the first reading cannot tell it from a
-    // loggia's mouth, and the house behind its open junction goes with it. That is a question, not a building: the
-    // wing is named an open-mouthed garage, and the resolver's reading that shuts pocket mouths reads it whole.
+    // loggia's mouth, and the house behind its open junction goes with it. That is a question, not a building. It was
+    // named an open-mouthed garage, and the reading that shuts pocket mouths built it (005C); a space 3 m deep is no
+    // garage (a car is longer), so after the post-review it is named for what is known of it and neither reading
+    // builds it — the run stops and says why, rather than guess a wing from a gap.
     const first = readingOf({ noGlazing: true })
-    expect((first.d.boundary?.bodies ?? []).map((b) => b.relation)).toContain('OPEN_MOUTH_GARAGE')
-    const shut = readingOf({ noGlazing: true }, true)
-    expect(near(shut.builtM2, reference, 0.05)).toBe(true)
+    const relations = (first.d.boundary?.bodies ?? []).map((b) => b.relation)
+    expect(relations).not.toContain('OPEN_MOUTH_GARAGE')
+    expect(relations).toContain('UNKNOWN')
+    expect(first.builtM2).toBeLessThan(reference / 2)
+    expect(readingOf({ noGlazing: true }, true).builtM2).toBeLessThan(reference / 2)
   })
 })
 

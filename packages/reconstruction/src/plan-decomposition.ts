@@ -1311,9 +1311,10 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const c = leaving[i + 1]
       const separationM = (c.b.axisPx - a.b.axisPx) * s.acrossMpp
       if (separationM < 2) continue
-      // A bay is narrower than the side it leaves from: two walls spanning most of that side are the building's own
-      // sides running on, and a "bay" between them is the whole front (005C).
-      if (c.b.axisPx - a.b.axisPx > (acrossHi - acrossLo) * 0.8) continue
+      // Two walls standing at the side's own ends are the building's own sides running on, and a "bay" between them
+      // is the whole front (005C). Only those: a bay inset from them is a bay however much of the side it spans
+      // (005C post-review; it used to be any pair spanning more than 0.8 of the side).
+      if (Math.abs(a.b.axisPx - acrossLo) <= ctx.wallPx * 1.5 && Math.abs(c.b.axisPx - acrossHi) <= ctx.wallPx * 1.5) continue
       // The far line: the grid line at the outer face of the mouth, a wall's
       // thickness past where the SHORTER side wall's band stops (the corner
       // block beyond it belongs to the mouth's wall, and the band reader drops
@@ -1921,11 +1922,11 @@ function mergeRegions(
  * wall's thickness the largest rectangle runs across the step and leaves a
  * strip beside it: 0.4 m of wall-thick face, 0.9 m of a room's end. A strip
  * narrower than a body can be is not a body, and dropping it drops a room's
- * floor with it. So a strip lying along a neighbour is joined to the part of
- * the neighbour it spans, and the neighbour keeps the rest, when every piece
- * that makes is at least `minSpanM` across on both axes and is one the caller
- * accepts (the layout's wall gate). The cells, and so the area, are exactly
- * the ones they were; only where the cut runs moves.
+ * floor with it. So a strip that runs a neighbour's whole side is joined to
+ * it, when the rectangle that makes is at least `minSpanM` across on both
+ * axes and is one the caller accepts (the layout's wall gate). The cells, and
+ * so the area, are exactly the ones they were. A strip along part of a side
+ * is not joined: that would cut the neighbour where nothing is drawn.
  */
 export function recutSlivers(regions: readonly PlanRegion[], decomposition: PlanDecomposition, registration: CoordinateRegistration, minSpanM: number, accept: (region: PlanRegion) => boolean = () => true): PlanRegion[] {
   const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
@@ -1975,12 +1976,13 @@ export function recutSlivers(regions: readonly PlanRegion[], decomposition: Plan
         // the strip lies along the neighbour: they share a whole side of the strip
         const above = s.iy1 + 1 === n.iy0 || n.iy1 + 1 === s.iy0
         const beside = s.ix1 + 1 === n.ix0 || n.ix1 + 1 === s.ix0
+        // Only a strip that runs the neighbour's whole side is joined to it: the two are then one rectangle, and no cut
+        // moves. Joining a strip to PART of a side cuts the neighbour where nothing is drawn — a party wall through
+        // the house, a porch carried up two storeys (005C post-review) — and a strip that cannot join is left to the
+        // layout's own rules.
         let pieces: Box[] | undefined
-        if (above && s.ix0 >= n.ix0 && s.ix1 <= n.ix1) {
-          pieces = [{ ix0: s.ix0, ix1: s.ix1, iy0: Math.min(s.iy0, n.iy0), iy1: Math.max(s.iy1, n.iy1) }, { ...n, ix1: s.ix0 - 1 }, { ...n, ix0: s.ix1 + 1 }]
-        } else if (beside && s.iy0 >= n.iy0 && s.iy1 <= n.iy1) {
-          pieces = [{ iy0: s.iy0, iy1: s.iy1, ix0: Math.min(s.ix0, n.ix0), ix1: Math.max(s.ix1, n.ix1) }, { ...n, iy1: s.iy0 - 1 }, { ...n, iy0: s.iy1 + 1 }]
-        }
+        if (above && s.ix0 === n.ix0 && s.ix1 === n.ix1) pieces = [{ ix0: s.ix0, ix1: s.ix1, iy0: Math.min(s.iy0, n.iy0), iy1: Math.max(s.iy1, n.iy1) }]
+        else if (beside && s.iy0 === n.iy0 && s.iy1 === n.iy1) pieces = [{ iy0: s.iy0, iy1: s.iy1, ix0: Math.min(s.ix0, n.ix0), ix1: Math.max(s.ix1, n.ix1) }]
         if (!pieces) continue
         const kept = pieces.filter((b) => b.ix1 >= b.ix0 && b.iy1 >= b.iy0)
         const made = kept.map((b) => regionOf(b, [strip, next]))
@@ -2069,11 +2071,15 @@ export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): P
     const cells = parts.flatMap((p) => p.cells)
     const own = new Set(cells.map((c) => `${c.ix}:${c.iy}`))
     // Everything inside the bounding box has to be either this body or a
-    // pocket in it, or the box is not the body's shape.
+    // pocket in it, or the box is not the body's shape. On a plan cut on its
+    // outline (005C post-review), a cell outside the outline is no pocket of a
+    // body: it is the ground a U or an L wraps, and inflating across it builds
+    // a courtyard.
+    const outlined = decomposition.envelope?.outline ? new Set(decomposition.envelope.outline.map((c) => `${c.ix}:${c.iy}`)) : undefined
     const rectangular = decomposition.cells.every((c) => {
       const inside = c.rect.x0 >= rect.x0 && c.rect.x1 <= rect.x1 && c.rect.y0 >= rect.y0 && c.rect.y1 <= rect.y1
       if (!inside) return true
-      return own.has(`${c.ix}:${c.iy}`) || c.classification === 'RECESS'
+      return own.has(`${c.ix}:${c.iy}`) || (c.classification === 'RECESS' && (!outlined || outlined.has(`${c.ix}:${c.iy}`)))
     })
     if (!rectangular) {
       for (const part of parts) out.push(part)
@@ -2307,7 +2313,7 @@ export type BoundaryRecord = {
   floods: number
   /**
    * The outline under the two jamb policies: STRONG bridges only, and STRONG plus WEAK bridged by what lies behind
-   * them (the reading). `disagree` when both adopt an outline and their areas differ by more than 6 %.
+   * them (the reading). `disagree` when either adopts an outline and what the two build differs by more than 6 %.
    */
   policies: { strict: { accepted: boolean; areaM2: number; support: OutlineSupport }; exclusion: { accepted: boolean; areaM2: number; support: OutlineSupport }; disagree: boolean }
   /** Every part of the plan beyond the house, and its relation to it (`boundary-bodies.ts`). */
@@ -2319,6 +2325,15 @@ export type BoundaryRecord = {
 
 /** Two outlines this close in area are one reading (the AGREES band of the layout gate). */
 const POLICY_AGREES = 0.06
+
+/**
+ * Do the two jamb policies read two buildings? Both building what the box builds is agreement; either adopting an
+ * outline and the two then building more than 6 % apart is not — one adopting and the other not included (005C
+ * post-review: it used to take both adopting, so a reading that only the WEAK bridges made could never be doubted).
+ */
+export function policiesDisagree(strict: { adopted: boolean; areaM2: number }, exclusion: { adopted: boolean; areaM2: number }): boolean {
+  return (strict.adopted || exclusion.adopted) && Math.abs(strict.areaM2 - exclusion.areaM2) > Math.max(strict.areaM2, exclusion.areaM2) * POLICY_AGREES
+}
 /** How many components beyond the box one plan may weigh. */
 const MAX_EXTENSIONS = 16
 
@@ -2463,29 +2478,45 @@ export function boundaryExtension(
     return total
   }
   const incumbentBuiltM2 = incumbent.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + (c.rect.x1 - c.rect.x0) * mppX * (c.rect.y1 - c.rect.y0) * mppY, 0)
+  // The cells the box's own reading built, on the shadow grid: an adopted outline keeps every one of them (005C
+  // post-review). Where the outline leaks past a wall the box's reading held, the box's reading stands.
+  const builtA = new Uint8Array(nx * ny)
+  const builtCells = incumbent.cells.filter((c) => c.classification === 'BUILT')
+  for (let iy = 0; iy < ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (builtCells.some((c) => centreIn(ix, iy, c.rect))) builtA[index(ix, iy)] = 1
+  // A doorway: a door-sized opening bridged in a wall line, a leaf or nothing drawn across it (a window is not one).
+  const doorwayOn = (line: WallLine, a: number, b: number): boolean =>
+    line.gaps.some((g) => g.boundary !== 'NONE' && g.widthM <= opt.maxOpeningM && (g.signature === 'LEAF_AXIS' || g.signature === 'BLANK') && Math.min(g.toPx, b) - Math.max(g.fromPx, a) > 0)
 
   /**
-   * Weigh one outline against the box: its components beyond the box, which of them continue the box's interior
-   * across an edge with no wall and no opening (or are named in `forced`: a garage whose mouth the reading shut),
-   * and the outline adopted — the box's interior it confirms and the accepted extensions only. A pocket walled off
-   * from the box on every shared edge is rejected, and touching the box does not bring it back: a planter or a pier
-   * against the front wall encloses ground, not a room of this building.
+   * Weigh one outline against the box: its parts beyond the box, which of them continue the box's interior across an
+   * edge with no wall and no opening (or are named in `forced`: a garage whose mouth the reading shut), and the
+   * outline adopted — the box's cells the outline confirms, every cell the box's reading built (where the outline
+   * leaks past a wall the box held, the box stands), and the accepted parts. A part is grown only through edges
+   * with no wall on them or through a doorway (005C post-review): a room behind its door belongs with the room in
+   * front of it, a yard behind a solid wall does not ride in with the wing beside it. A part walled off from the box
+   * on every shared edge is rejected, and touching the box does not bring it back: a planter or a pier against the
+   * front wall encloses ground, not a room of this building.
    */
   const adopt = (outline: OutlineResult, forced?: Uint8Array): { extensions: BoundaryExtension[]; accepted: Uint8Array; final: Uint8Array; any: boolean } => {
     const extensions: BoundaryExtension[] = []
     const seen = new Uint8Array(nx * ny)
     const accepted = new Uint8Array(nx * ny)
-    const neighbours = (ix: number, iy: number): Array<{ jx: number; jy: number; edge: OutlineEdge; lengthM: number }> => [
-      { jx: ix, jy: iy - 1, edge: outline.hEdge[iy][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
-      { jx: ix + 1, jy: iy, edge: outline.vEdge[ix + 1][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
-      { jx: ix, jy: iy + 1, edge: outline.hEdge[iy + 1][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
-      { jx: ix - 1, jy: iy, edge: outline.vEdge[ix][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
+    const neighbours = (ix: number, iy: number): Array<{ jx: number; jy: number; edge: OutlineEdge; lengthM: number; door: boolean }> => [
+      { jx: ix, jy: iy - 1, edge: outline.hEdge[iy][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX, door: doorwayOn(wallsY[iy], linesX[ix].px, linesX[ix + 1].px) },
+      { jx: ix + 1, jy: iy, edge: outline.vEdge[ix + 1][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY, door: doorwayOn(wallsX[ix + 1], linesY[iy].px, linesY[iy + 1].px) },
+      { jx: ix, jy: iy + 1, edge: outline.hEdge[iy + 1][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX, door: doorwayOn(wallsY[iy + 1], linesX[ix].px, linesX[ix + 1].px) },
+      { jx: ix - 1, jy: iy, edge: outline.vEdge[ix][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY, door: doorwayOn(wallsX[ix], linesY[iy].px, linesY[iy + 1].px) },
     ]
+    const capped: number[] = []
     if (env) {
       for (let iy = 0; iy < ny; iy += 1) {
         for (let ix = 0; ix < nx; ix += 1) {
           const i0 = index(ix, iy)
-          if (seen[i0] === 1 || outline.inside[i0] !== 1 || inA[i0] === 1 || extensions.length >= MAX_EXTENSIONS) continue
+          if (seen[i0] === 1 || outline.inside[i0] !== 1 || inA[i0] === 1) continue
+          if (extensions.length >= MAX_EXTENSIONS) {
+            capped.push(i0)
+            continue
+          }
           const members: Array<{ ix: number; iy: number }> = []
           const stack: Array<[number, number]> = [[ix, iy]]
           seen[i0] = 1
@@ -2496,6 +2527,7 @@ export function boundaryExtension(
               if (!valid(n.jx, n.jy)) continue
               const j = index(n.jx, n.jy)
               if (seen[j] === 1 || outline.inside[j] !== 1 || inA[j] === 1) continue
+              if (n.edge.closed && !n.door) continue
               seen[j] = 1
               stack.push([n.jx, n.jy])
             }
@@ -2522,18 +2554,22 @@ export function boundaryExtension(
               ? `${areaM2.toFixed(1)} m² enclosed by wall and openings beyond the box, continuing its interior across ${across.toFixed(2)} m of the box's edge that carries no wall and no opening: the building goes on where the box stops`
               : shut
                 ? `${areaM2.toFixed(1)} m² beyond the box behind a garage mouth this reading shuts: two wall sides and the house behind it`
-                : `${areaM2.toFixed(1)} m² enclosed beyond the box, but separated from it by wall or openings on every shared edge: not a continuation of this building's interior`,
+                : `${areaM2.toFixed(1)} m² enclosed beyond the box, but separated from its interior by wall or openings on every shared edge: not a continuation of this building's interior`,
           })
         }
       }
     }
-    const widens = areaOf(outline.inside) > incumbentBuiltM2 + 1e-9
-    if (!widens) for (const e of extensions) if (e.accepted) Object.assign(e, { accepted: false, why: `${e.why}; but the whole outline encloses ${areaOf(outline.inside).toFixed(1)} m², no more than the ${incumbentBuiltM2.toFixed(1)} m² the box builds: it has leaked where the box held, and the box stands` })
+    if (capped.length > 0) extensions.push({ cells: capped.map((i) => ({ ix: i % nx, iy: Math.floor(i / nx) })), areaM2: round6(capped.reduce((a, i) => a + (linesX[(i % nx) + 1].px - linesX[i % nx].px) * mppX * (linesY[Math.floor(i / nx) + 1].px - linesY[Math.floor(i / nx)].px) * mppY, 0)), continuesAcrossM: 0, accepted: false, why: `more than ${MAX_EXTENSIONS} parts beyond the box: the rest are not weighed, and not built` })
     for (const e of extensions) if (e.accepted) for (const m of e.cells) accepted[index(m.ix, m.iy)] = 1
-    const any = extensions.some((e) => e.accepted)
+    // the box's cells the outline confirms, every cell the box's reading built, and the accepted parts
     const final = new Uint8Array(nx * ny)
-    if (any) for (let i = 0; i < nx * ny; i += 1) if (outline.inside[i] === 1 && (inA[i] === 1 || accepted[i] === 1)) final[i] = 1
-    return { extensions, accepted, final, any }
+    for (let i = 0; i < nx * ny; i += 1) if ((outline.inside[i] === 1 && inA[i] === 1) || builtA[i] === 1 || accepted[i] === 1) final[i] = 1
+    // The outline may only widen the building: adopted, it must build more than the box's reading did.
+    const widens = areaOf(final) > incumbentBuiltM2 + 1e-9
+    if (!widens) for (const e of extensions) if (e.accepted) Object.assign(e, { accepted: false, why: `${e.why}; but it builds no more than the ${incumbentBuiltM2.toFixed(1)} m² the box builds, and the box stands` })
+    const any = extensions.some((e) => e.accepted)
+    if (!any) accepted.fill(0)
+    return { extensions, accepted, final: any ? final : builtA, any }
   }
 
   // Two policies (the contract's §2.2): STRONG bridges only, and STRONG plus WEAK bridged by what lies behind them.
@@ -2542,8 +2578,11 @@ export function boundaryExtension(
   const strict = solveOutline(grid, { policy: 'STRICT' })
   const strictAdopted = adopt(strict)
   const reading = adopt(exclusion)
-  // The house the parts are named against: the box's cells the outline confirms (every box cell, when it adopts none).
-  const house = reading.any ? reading.final.map((v, i) => (v === 1 && inA[i] === 1 ? 1 : 0)) : inA
+  // The house the parts are named against: the building as this reading cuts it, less the parts it accepts — those
+  // are named too. Their cells still count as the house on a neighbour's junction (005C post-review: a terrace
+  // beside an accepted wing borrowed the wing's walls as its own sides).
+  // When the reading adopts nothing, the house is the box, every cell of it (the parts are named against the box).
+  const house = reading.any ? reading.final.map((v, i) => (v === 1 && reading.accepted[i] !== 1 ? 1 : 0)) : inA
   const bodies = classifyBodies(grid, exclusion, inA, house, reading.accepted, opt.maxWideOpeningM)
 
   // The reading that shuts pocket mouths (005A's resolver) shuts an open-mouthed garage's mouth too: its mouth gap
@@ -2565,7 +2604,7 @@ export function boundaryExtension(
   const supportOf = (inside: Uint8Array, result: OutlineResult = outline): OutlineSupport => outlineSupport(grid, { ...result, inside })
   const strictM2 = round6(areaOf(strictAdopted.final))
   const exclusionM2 = round6(areaOf(reading.final))
-  const disagree = strictAdopted.any && reading.any && Math.abs(strictM2 - exclusionM2) > Math.max(strictM2, exclusionM2) * POLICY_AGREES
+  const disagree = policiesDisagree({ adopted: strictAdopted.any, areaM2: strictM2 }, { adopted: reading.any, areaM2: exclusionM2 })
   const record: BoundaryRecord = {
     version: BOUNDARY_EVIDENCE_VERSION,
     wallPx: round6(wallPx),

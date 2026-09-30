@@ -441,10 +441,23 @@ const centre = (r: PixelRect): { x: number; y: number } => ({ x: (r.x0 + r.x1) /
 const width = (r: PixelRect): number => r.x1 - r.x0
 const height = (r: PixelRect): number => r.y1 - r.y0
 
-/** Candidate targets on the base plan: each of its masses, and the whole building. */
+/**
+ * A strip of an outline frame: a body whose narrow side is under a quarter of the widest body's (005C
+ * post-review). The largest-first cut of a stepped outline leaves them along a face; an upper storey registered
+ * onto one, or a strip taken for the main body, puts the house on its porch.
+ */
+const STRIP_SHARE = 0.25
+function stripsOf<T>(items: readonly T[], rectOf: (item: T) => { w: number; h: number }): Set<T> {
+  const widest = Math.max(0, ...items.map((i) => Math.min(rectOf(i).w, rectOf(i).h)))
+  return new Set(items.filter((i) => Math.min(rectOf(i).w, rectOf(i).h) < widest * STRIP_SHARE))
+}
+
+/** Candidate targets on the base plan: each of its masses (on an outline frame, none of its strips), and the whole building. */
 export function alignmentTargets(base: PlanReading): Array<{ id: string; rect: PixelRect }> {
   const out: Array<{ id: string; rect: PixelRect }> = []
-  for (const region of base.decomposition.regions) if (region.classification === 'BUILT') out.push({ id: region.id, rect: region.rect })
+  const built = base.decomposition.regions.filter((r) => r.classification === 'BUILT')
+  const strips = base.decomposition.envelope?.outline ? stripsOf(built, (r) => ({ w: (r.rect.x1 - r.rect.x0) * (base.registration?.metresPerPixelX ?? 1), h: (r.rect.y1 - r.rect.y0) * (base.registration?.metresPerPixelY ?? 1) })) : new Set<PlanRegion>()
+  for (const region of built) if (!strips.has(region)) out.push({ id: region.id, rect: region.rect })
   if (base.decomposition.envelope) out.push({ id: 'envelope', rect: base.decomposition.envelope.rect })
   return out
 }
@@ -1103,7 +1116,8 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
     }
     const span = ringBoundsOf(ring)
     const narrow = Math.min(span.x1 - span.x0, span.z1 - span.z0)
-    if (narrow < minBodySpanM(wallM)) {
+    // on a plan cut on its outline only: the long-band box's plans are massed as they always were (005C post-review)
+    if (base.decomposition.envelope?.outline && narrow < minBodySpanM(wallM)) {
       unresolved.push({
         id: stableId('gap', `sliver-${region.id}`, { frameId: base.frame.id, region: region.id }),
         what: `whether the ${ringArea(ring).toFixed(2)} m² strip at ${span.x0.toFixed(2)}, ${span.z0.toFixed(2)} is part of the building`,
@@ -1244,7 +1258,7 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   }
 
   // --- roles, attachments and facades --------------------------------------
-  assignRoles(masses)
+  assignRoles(masses, !!base.decomposition.envelope?.outline)
   attachments.push(...attachmentsBetween(masses, wallM))
   facadePlanes.push(...facadesOf(masses, storeys, wallM))
   for (const plane of facadePlanes) {
@@ -1355,9 +1369,11 @@ function zonesOutsideEnvelope(base: PlanReading, envelope: PixelRect, frame: Wor
  * because the house is the thing with two storeys, and a rule that went by
  * area alone would say otherwise on exactly the buildings where it matters.
  */
-function assignRoles(masses: MassHypothesis[]): void {
+function assignRoles(masses: MassHypothesis[], outlineFrame = false): void {
   if (masses.length === 0) return
-  const rank = (m: MassHypothesis): number => (m.storeySpan.toIndex - m.storeySpan.fromIndex) * 1000 + ringArea(m.ring)
+  // On an outline frame a strip is never the main body (005C post-review): it is what the cut left along a face.
+  const strips = outlineFrame ? stripsOf(masses, (m) => ({ w: ringBoundsOf(m.ring).x1 - ringBoundsOf(m.ring).x0, h: ringBoundsOf(m.ring).z1 - ringBoundsOf(m.ring).z0 })) : new Set<MassHypothesis>()
+  const rank = (m: MassHypothesis): number => (strips.has(m) ? 0 : 1e9) + (m.storeySpan.toIndex - m.storeySpan.fromIndex) * 1000 + ringArea(m.ring)
   const main = [...masses].sort((a, b) => rank(b) - rank(a) || a.id.localeCompare(b.id))[0]
   main.role = 'MAIN'
   main.why = `${main.why}; the body that reaches highest, and the largest of those that do`

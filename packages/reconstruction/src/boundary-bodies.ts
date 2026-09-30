@@ -24,8 +24,11 @@
  *   RECESSED_ATTACHED  inside the box but left open by the outline: an
  *                      entrance, a loggia or a porch the house wraps. Not built.
  *   OPEN_MOUTH_GARAGE  two wall sides and a blank mouth between wall jambs as
- *                      wide as a vehicle: open in the first reading; the
- *                      reading that shuts pocket mouths may shut it.
+ *                      wide as a vehicle, a vehicle's length deep, and the
+ *                      only way in from outside: open in the first reading;
+ *                      the reading that shuts pocket mouths may shut it. A
+ *                      walled terrace with a second opening, or as shallow as
+ *                      a terrace, is no garage.
  *   COVERED_TERRACE    carried on posts, not walls: never built.
  *   SEPARATE_BODY      shares no edge with the house.
  *   UNKNOWN            none of these holds.
@@ -60,6 +63,13 @@ export type AttachedBody = {
 
 /** A vehicle door is at least this wide; a person's door is narrower. */
 const VEHICLE_MOUTH_M = 2.2
+/** A garage is at least a car's length deep behind its door (005C post-review); a terrace between returns is not. */
+const VEHICLE_DEPTH_M = 4.5
+/**
+ * A garage is walled on more than its mouth's worth of its own perimeter: more than half of it wall (005C
+ * post-review). A terrace between one garden wall and the house, as deep as its mouth is wide, is exactly half.
+ */
+const GARAGE_WALL_SHARE = 0.6
 /** How many parts one plan may classify. */
 export const MAX_BODIES = 16
 
@@ -190,7 +200,8 @@ export function classifyBodies(grid: OutlineGrid, outline: OutlineResult, box: U
         const span = Math.max(1e-9, s.b - s.a)
         const wallInk = cover(s.line.pieces.filter((p) => p.kind === 'WALL').map((p) => [p.from, p.to] as Interval), s.a, s.b) / span
         const postInk = cover(s.line.pieces.filter((p) => p.kind === 'POST').map((p) => [p.from, p.to] as Interval), s.a, s.b) / span
-        if (s.other >= 0 && house[s.other] === 1) {
+        // the house, and the parts this reading builds: a neighbour's walls are its junction, never its own sides
+        if (s.other >= 0 && (house[s.other] === 1 || (accepted[s.other] === 1 && !mine.has(s.other)))) {
           junctionM += s.lengthM
           junctionInk += s.lengthM * Math.min(1, wallInk + postInk)
           continue
@@ -205,6 +216,7 @@ export function classifyBodies(grid: OutlineGrid, outline: OutlineResult, box: U
     const sides = { lengthM: round6(sideM), wallShare: round6(sideM > 0 ? sideWall / sideM : 0), postShare: round6(sideM > 0 ? sidePost / sideM : 0) }
     const widest = [...openGaps.values()].sort((p, q) => q.widthM - p.widthM || (p.id < q.id ? -1 : p.id > q.id ? 1 : 0))[0]
     const mouth = widest ? { widthM: round6(widest.widthM), signature: widest.signature, jambs: widest.jambs, gapId: widest.id } : undefined
+    const depthM = widest ? (widest.axis === 'Y' ? (rect.y1 - rect.y0) * mppY : (rect.x1 - rect.x0) * mppX) : 0
     const enclosed = kind === 1
     const built = members.some((k) => accepted[k] === 1)
     let relation: BodyRelation
@@ -221,9 +233,9 @@ export function classifyBodies(grid: OutlineGrid, outline: OutlineResult, box: U
     } else if (enclosed) {
       relation = junction.wallShare >= 0.5 && sides.wallShare >= 0.35 ? 'FLUSH_ATTACHED' : 'UNKNOWN'
       why = `enclosed, but walled off from the house on every shared edge (${Math.round(junction.wallShare * 100)}% of the junction is wall): not a continuation of its interior, and not built in this reading`
-    } else if (mouth && mouth.jambs[0] === 'WALL' && mouth.jambs[1] === 'WALL' && mouth.widthM >= VEHICLE_MOUTH_M && mouth.widthM <= maxWideOpeningM && (mouth.signature === 'BLANK' || mouth.signature === 'DASHED') && sides.wallShare >= 0.5 && sides.postShare < 0.1) {
+    } else if (mouth && openGaps.size === 1 && depthM >= VEHICLE_DEPTH_M && mouth.jambs[0] === 'WALL' && mouth.jambs[1] === 'WALL' && mouth.widthM >= VEHICLE_MOUTH_M && mouth.widthM <= maxWideOpeningM && (mouth.signature === 'BLANK' || mouth.signature === 'DASHED') && sides.wallShare >= GARAGE_WALL_SHARE && sides.postShare < 0.1) {
       relation = 'OPEN_MOUTH_GARAGE'
-      why = `two wall sides (${Math.round(sides.wallShare * 100)}% of its perimeter is wall) and a ${mouth.widthM.toFixed(2)} m mouth between wall jambs with nothing drawn across it: open in this reading; the reading that shuts pocket mouths may shut it`
+      why = `walls on ${Math.round(sides.wallShare * 100)}% of its own perimeter and a ${mouth.widthM.toFixed(2)} m mouth between wall jambs with nothing drawn across it: open in this reading; the reading that shuts pocket mouths may shut it`
     } else if (sides.postShare > 0 && sides.wallShare < 0.35) {
       relation = 'COVERED_TERRACE'
       why = `carried on free-standing posts (${Math.round(sides.postShare * 100)}% of its perimeter) with ${Math.round(sides.wallShare * 100)}% wall: a terrace or a canopy, never built`

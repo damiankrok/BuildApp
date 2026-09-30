@@ -146,6 +146,13 @@ export type GapStroke = {
   /** Separate runs of ink along it: one or two is a line, more is a dashed (overhead) line. */
   runs: number
   continuous: boolean
+  /** Inside the wall's thickness (within half a wall of the jambs' axis, and a pixel): where infill is drawn. */
+  inWall: boolean
+  /**
+   * The line runs on past a jamb (005C post-review): along the outside of a wall stretch, or on beyond a
+   * wall's cross-section. Infill stops at its jambs; a paving edge, a kerb, a step or a slab outline does not.
+   */
+  runsPast: boolean
 }
 
 /** What a printed callout says about a gap: an opening of this width, read here. */
@@ -283,29 +290,52 @@ export function readWallLine(mask: Mask, solid: SolidLayer, axis: 'X' | 'Y', px:
     pieces.push({ from: r.from, to: r.to, axisPx: round6(axisPx), kind, partId, along: r.to - r.from >= t * 1.25 })
   }
   const gaps: BoundaryGap[] = []
-  for (let i = 0; i + 1 < pieces.length; i += 1) gaps.push(classifyGap(mask, axis, px, pieces[i], pieces[i + 1], options))
+  for (let i = 0; i + 1 < pieces.length; i += 1) gaps.push(classifyGap(mask, axis, px, pieces[i], pieces[i + 1], options, { left: i === 0, right: i + 2 === pieces.length }))
   return { axis, px: round6(px), from: a, to: b, pieces, gaps, drawingBreaks }
 }
 
 /** The thin lines drawn across a gap inside the wall's thickness, one per distinct line. */
-export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: number, to: number, wallPx: number): GapStroke[] {
+export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: number, to: number, wallPx: number, jambs?: { left?: LinePiece; right?: LinePiece; leftEnds?: boolean; rightEnds?: boolean }): GapStroke[] {
   const g0 = Math.round(from)
   const g1 = Math.round(to)
   const width = Math.max(1, g1 - g0)
   const band = Math.round(wallPx * 0.75)
   const centre = Math.round(axisPx)
+  const ink = (c: number, s: number): number => (axis === 'X' ? inkAt(mask, c, s) : inkAt(mask, s, c))
   const rows: Array<{ c: number; coverage: number; runs: number }> = []
   for (let c = centre - band; c <= centre + band; c += 1) {
-    let ink = 0
+    let inked = 0
     let runs = 0
     let inRun = false
     for (let s = g0; s < g1; s += 1) {
-      const v = axis === 'X' ? inkAt(mask, c, s) : inkAt(mask, s, c)
-      ink += v
+      const v = ink(c, s)
+      inked += v
       if (v === 1 && !inRun) runs += 1
       inRun = v === 1
     }
-    rows.push({ c, coverage: ink / width, runs })
+    rows.push({ c, coverage: inked / width, runs })
+  }
+  const share = (c: number, a: number, b: number): number => {
+    const lo = Math.round(Math.min(a, b))
+    const hi = Math.round(Math.max(a, b))
+    if (hi <= lo) return 0
+    let n = 0
+    for (let s = lo; s < hi; s += 1) n += ink(c, s)
+    return n / (hi - lo)
+  }
+  // Does row `c` run on past a jamb? Along a stretch of wall it shows only where the row lies outside the wall's own
+  // ink; past the jamb's far end it shows beyond a wall's cross-section, beyond the last stretch of the line (where the
+  // wall ends and the building with it), and on a face row anywhere (infill is drawn inside the wall, and glazing
+  // between piers carries on into the next window only on its inner rows).
+  const t = Math.max(3, wallPx)
+  const past = (c: number, piece: LinePiece | undefined, side: 'left' | 'right', ends: boolean): boolean => {
+    if (!piece) return false
+    const off = Math.abs(c - piece.axisPx)
+    const near = side === 'left' ? piece.to : piece.from
+    if (off > t / 2 + 1 && share(c, near, side === 'left' ? Math.max(piece.from, near - 2 * t) : Math.min(piece.to, near + 2 * t)) >= 0.7) return true
+    if (piece.along && !ends && off < t / 2 - 1.5) return false
+    const far = side === 'left' ? piece.from : piece.to
+    return share(c, side === 'left' ? far - t : far, side === 'left' ? far : far + t) >= 0.7
   }
   // adjacent qualifying rows are one drawn line; its best row speaks for it
   const strokes: GapStroke[] = []
@@ -313,7 +343,14 @@ export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: nu
   const flush = (): void => {
     if (group.length === 0) return
     const best = [...group].sort((p, q) => q.coverage - p.coverage || p.runs - q.runs || Math.abs(p.c - centre) - Math.abs(q.c - centre))[0]
-    strokes.push({ offsetPx: best.c - centre, coverage: round6(best.coverage), runs: best.runs, continuous: best.runs <= 2 })
+    strokes.push({
+      offsetPx: best.c - centre,
+      coverage: round6(best.coverage),
+      runs: best.runs,
+      continuous: best.runs <= 2,
+      inWall: Math.abs(best.c - axisPx) <= t / 2 + 1,
+      runsPast: past(best.c, jambs?.left, 'left', jambs?.leftEnds ?? false) || past(best.c, jambs?.right, 'right', jambs?.rightEnds ?? false),
+    })
     group = []
   }
   for (const row of rows) {
@@ -324,15 +361,61 @@ export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: nu
   return strokes
 }
 
-function classifyGap(mask: Mask, axis: 'X' | 'Y', linePx: number, left: LinePiece, right: LinePiece, options: WallLineOptions): BoundaryGap {
+/**
+ * Parallel lines across a gap on BOTH sides of the wall, beyond its thickness: tiles, treads, a hatch of lines — a
+ * pattern the gap sits in, not infill drawn in it. Glazing is confined to the wall; a sill or a step may stand on one
+ * side of it.
+ */
+export function patternAcross(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: number, to: number, wallPx: number): boolean {
+  const g0 = Math.round(from)
+  const g1 = Math.round(to)
+  if (g1 <= g0) return false
+  const t = Math.max(3, wallPx)
+  const lineAt = (c: number): boolean => {
+    let inked = 0
+    let runs = 0
+    let inRun = false
+    for (let s = g0; s < g1; s += 1) {
+      const v = axis === 'X' ? inkAt(mask, c, s) : inkAt(mask, s, c)
+      inked += v
+      if (v === 1 && !inRun) runs += 1
+      inRun = v === 1
+    }
+    return inked / (g1 - g0) >= 0.7 && runs <= 2
+  }
+  const side = (dir: 1 | -1): boolean => {
+    for (let k = Math.ceil(t / 2) + 2; k <= Math.round(t * 1.5); k += 1) if (lineAt(Math.round(axisPx) + dir * k)) return true
+    return false
+  }
+  return side(1) && side(-1)
+}
+
+/**
+ * What is drawn across a gap, from the lines that can be its infill: continuous, inside the wall's thickness, and
+ * stopping at the jambs. Two or three is glazing (four or more is hatching or treads); one on the axis a leaf; one at a
+ * face a vehicle door; a line that runs on past a jamb or lies outside the wall is line work, and counts for nothing.
+ */
+export function gapSignature(strokes: readonly GapStroke[], wallPx: number): { signature: BoundaryGap['signature']; infill: GapStroke[] } {
+  const infill = strokes.filter((s) => s.continuous && s.inWall && !s.runsPast)
+  const signature: BoundaryGap['signature'] =
+    infill.length >= 2 && infill.length <= 3 ? 'GLAZING' : infill.length === 1 ? (Math.abs(infill[0].offsetPx) <= wallPx * 0.25 ? 'LEAF_AXIS' : 'LEAF_FACE') : strokes.length > 0 ? 'DASHED' : 'BLANK'
+  return { signature, infill }
+}
+
+function classifyGap(mask: Mask, axis: 'X' | 'Y', linePx: number, left: LinePiece, right: LinePiece, options: WallLineOptions, ends?: { left: boolean; right: boolean }): BoundaryGap {
   const t = options.wallPx
-  const axisPx = (left.axisPx + right.axisPx) / 2
+  // The gap's axis is the wall's: taken from the jambs that run along the line. A cross-section of a wall crossing
+  // the line has no axis of this wall (005C post-review: it used to pull the axis to the line itself).
+  const along = [left, right].filter((p) => p.along)
+  const axisPx = along.length > 0 ? along.reduce((a, p) => a + p.axisPx, 0) / along.length : linePx
   const widthPx = right.from - left.to
   const widthM = round6(widthPx * options.mppAlong)
-  const strokes = gapStrokes(mask, axis, axisPx, left.to, right.from, t)
-  const continuous = strokes.filter((s) => s.continuous)
-  const signature: BoundaryGap['signature'] =
-    continuous.length >= 2 ? 'GLAZING' : continuous.length === 1 ? (Math.abs(continuous[0].offsetPx) <= t * 0.25 ? 'LEAF_AXIS' : 'LEAF_FACE') : strokes.length > 0 ? 'DASHED' : 'BLANK'
+  const strokes = gapStrokes(mask, axis, axisPx, left.to, right.from, t, { left, right, leftEnds: ends?.left, rightEnds: ends?.right })
+  const read = gapSignature(strokes, t)
+  // a pattern the gap sits in (tiles, treads) is line work, whatever its rows inside the wall look like
+  const pattern = read.signature === 'GLAZING' && patternAcross(mask, axis, axisPx, left.to, right.from, t)
+  const signature: BoundaryGap['signature'] = pattern ? 'DASHED' : read.signature
+  const continuous = pattern ? [] : read.infill
   const jambs: BoundaryGap['jambs'] = [left.kind, right.kind]
   const walls = left.kind === 'WALL' && right.kind === 'WALL'
   const posts = jambs.filter((j) => j === 'POST').length
@@ -341,10 +424,17 @@ function classifyGap(mask: Mask, axis: 'X' | 'Y', linePx: number, left: LinePiec
   const decide = (cls: GapClass, boundary: BoundaryStrength, why: string): BoundaryGap => ({ ...base, cls, boundary, occupancy: boundary === 'NONE' ? 'EXTERIOR' : 'OPENING', why })
   const w = `${widthM.toFixed(2)} m`
   if (widthM > options.maxWideOpeningM) return decide('TRUE_EXTERIOR_GAP', 'NONE', `a ${w} gap: wider than any opening a house wall carries`)
+  // Lines that would be infill but run on past a jamb: glazing or a door drawn on the same row as a paving edge, or a
+  // paving edge alone. The drawing cannot say which, so the gap is a question (WEAK), decided by what lies behind it,
+  // never a drawn opening and never a wall's end (005C post-review).
+  const loose = pattern ? signature : gapSignature(strokes.map((k) => ({ ...k, runsPast: false })), t).signature
+  const drawnIf = (sig: BoundaryGap['signature']): boolean => sig === 'GLAZING' || (sig === 'LEAF_AXIS' && widthM <= options.maxOpeningM) || (sig === 'LEAF_FACE' && widthM >= 2.2 && left.along && right.along)
+  if (walls && left.along && right.along && !drawnIf(signature) && drawnIf(loose)) return decide('UNKNOWN_GAP', 'WEAK', `a ${w} gap between two stretches of wall whose lines across it run on past a jamb: infill or a paving edge, decided by what lies behind it`)
   if (walls) {
     if (signature === 'GLAZING') return decide('OPENING_SUPPORTED', 'STRONG', `a ${w} gap between two walls with ${continuous.length} lines drawn across it inside the wall: glazing`)
     if (signature === 'LEAF_AXIS' && widthM <= options.maxOpeningM) return decide('OPENING_SUPPORTED', 'STRONG', `a ${w} gap between two walls with one line on the wall's axis: a door`)
-    if (signature === 'LEAF_FACE' && widthM >= 2.2) return decide('OPENING_SUPPORTED', 'STRONG', `a ${w} gap between two walls with one continuous line at a face of the wall: a vehicle door`)
+    // a vehicle door is a leaf in THIS wall: both jambs are stretches of it, not walls crossing the line
+    if (signature === 'LEAF_FACE' && widthM >= 2.2 && left.along && right.along) return decide('OPENING_SUPPORTED', 'STRONG', `a ${w} gap between two stretches of wall with one continuous line at a face of the wall, stopping at the jambs: a vehicle door`)
     // Nothing drawn: a hole in THIS wall only between two stretches of it. Between the cross-sections of two walls
     // crossing the line (a line through a room) there is no wall to have a hole in. A line drawn across it (a leaf
     // at a face, a dashed one) needs one stretch of this wall beside it.
@@ -352,8 +442,9 @@ function classifyGap(mask: Mask, axis: 'X' | 'Y', linePx: number, left: LinePiec
     if (widthM <= options.maxOpeningM) return decide('TRUE_EXTERIOR_GAP', 'NONE', `a ${w} stretch between the cross-sections of walls crossing the line, with nothing drawn across it: a room or a passage, not a hole in a wall`)
     return decide('TRUE_EXTERIOR_GAP', 'NONE', `a ${w} gap between two walls, wider than a lintel spans, with ${signature === 'DASHED' ? 'only a dashed (overhead) line' : signature === 'BLANK' ? 'nothing' : 'only one line'} across it: where the wall stops`)
   }
-  // a post is never a jamb — except between windows, where the glazing itself says the wall goes on
-  if (signature === 'GLAZING' && widthM <= options.maxOpeningM) {
+  // a post is never a jamb — except between windows, where the glazing itself says the wall goes on; and a wall must
+  // stand at one end at least: glazing drawn between two free posts is a pergola's or a balustrade's, not a facade's
+  if (signature === 'GLAZING' && widthM <= options.maxOpeningM && posts < 2) {
     return decide('OPENING_SUPPORTED', 'STRONG', `a ${w} gap with ${continuous.length} continuous lines drawn across it inside the wall, beside ${posts === 2 ? 'two short piers' : 'a short pier'}: glazing between piers`)
   }
   // one continuous line from a short pier: a door beside a corner frame, or a railing from a column — decided by what is behind it
@@ -367,7 +458,8 @@ function classifyGap(mask: Mask, axis: 'X' | 'Y', linePx: number, left: LinePiec
  * The callouts that agree with a gap, each given to the one gap it agrees
  * with and lies nearest: within max(10 cm, 3 %) of its width (measured gaps
  * sit within 4 cm of their printed widths), within four walls or 1.5 m across
- * the line, and beside the gap along it.
+ * the line, and printed over the gap along it. A callout two gaps agree with
+ * about equally goes to neither.
  */
 export function assignCallouts(
   lines: readonly WallLine[],
@@ -377,34 +469,47 @@ export function assignCallouts(
   wallPx: number,
 ): Map<string, GapCallout> {
   const out = new Map<string, GapCallout>()
+  void mppAlong
   for (const c of [...callouts].sort((p, q) => (p.id < q.id ? -1 : p.id > q.id ? 1 : 0))) {
-    let best: { gapId: string; distance: number; callout: GapCallout } | undefined
+    const agreeing: Array<{ gapId: string; distance: number; callout: GapCallout }> = []
     for (const line of lines) {
       const across = line.axis === 'X' ? c.at.x : c.at.y
       const along = line.axis === 'X' ? c.at.y : c.at.x
       const off = Math.abs(across - line.px)
       if (off > Math.max(wallPx * 4, 1.5 / mppAcross(line.axis))) continue
       for (const g of line.gaps) {
-        const slack = 1 / mppAlong(line.axis)
-        if (along < g.fromPx - slack || along > g.toPx + slack) continue
+        // printed over the gap itself, never beside it (005C post-review: a neighbouring window's callout is not this gap's)
+        if (along < g.fromPx || along > g.toPx) continue
         const widthCm = g.widthM * 100
         const agree = c.widthsCm.filter((w) => Math.abs(w.value - widthCm) <= Math.max(10, widthCm * 0.03)).sort((p, q) => q.confidence - p.confidence)[0]
         if (!agree) continue
         const mid = (g.fromPx + g.toPx) / 2
-        const distance = Math.hypot(off, Math.abs(along - mid))
-        if (!best || distance < best.distance) best = { gapId: g.id, distance, callout: { id: c.id, widthCm: agree.value, confidence: round6(agree.confidence) } }
+        // a callout read with alternatives states a width it is not sure of: it corroborates, it does not decide
+        const sure = c.widthsCm.length === 1
+        agreeing.push({ gapId: g.id, distance: Math.hypot(off, Math.abs(along - mid)), callout: { id: c.id, widthCm: agree.value, confidence: round6(sure ? agree.confidence : Math.min(agree.confidence, 0.5)) } })
       }
     }
-    if (best && !out.has(best.gapId)) out.set(best.gapId, best.callout)
+    agreeing.sort((p, q) => p.distance - q.distance)
+    // two gaps the callout agrees with equally: it belongs to neither
+    if (agreeing.length === 0 || (agreeing.length > 1 && agreeing[1].distance - agreeing[0].distance <= wallPx)) continue
+    if (!out.has(agreeing[0].gapId)) out.set(agreeing[0].gapId, agreeing[0].callout)
   }
   return out
 }
 
-/** Upgrade a gap a printed callout agrees with: its width is stated, so it is an opening wherever its jambs are walls. */
+/**
+ * Upgrade a gap a printed callout agrees with. A callout states the gap's WIDTH, not what fills it: with a leaf, a
+ * vehicle door or glazing drawn across (whatever else kept it from being an opening) it is an opening; with nothing
+ * or only a dashed line across it, it is a door-sized question like any blank gap (WEAK), decided by what lies
+ * behind it. So is a callout read with alternatives.
+ */
 export function withCallout(gap: BoundaryGap, callout: GapCallout, maxWideOpeningM: number): BoundaryGap {
   const walls = gap.jambs[0] === 'WALL' && gap.jambs[1] === 'WALL'
   if (!walls || gap.widthM > maxWideOpeningM || gap.cls === 'OPENING_SUPPORTED') return { ...gap, callout }
-  return { ...gap, callout, cls: 'OPENING_SUPPORTED', boundary: 'STRONG', occupancy: 'OPENING', why: `${gap.why}; a callout of ${callout.widthCm} cm printed beside it states its width: an opening` }
+  const drawn = gap.signature === 'GLAZING' || gap.signature === 'LEAF_AXIS' || gap.signature === 'LEAF_FACE'
+  if (drawn && callout.confidence > 0.5) return { ...gap, callout, cls: 'OPENING_SUPPORTED', boundary: 'STRONG', occupancy: 'OPENING', why: `${gap.why}; a callout of ${callout.widthCm} cm printed over it states its width: an opening` }
+  if (gap.cls === 'UNKNOWN_GAP') return { ...gap, callout }
+  return { ...gap, callout, cls: 'UNKNOWN_GAP', boundary: 'WEAK', occupancy: 'OPENING', why: `${gap.why}; a callout of ${callout.widthCm} cm printed over it states its width, not what fills it: decided by what lies behind it` }
 }
 
 /**
@@ -413,11 +518,12 @@ export function withCallout(gap: BoundaryGap, callout: GapCallout, maxWideOpenin
  * its last pier and the corner, and the corner itself is only thin lines.
  *
  * A leg — from a line's end pier to a perpendicular grid line inside that end
- * stretch — is bridged when it is no wider than a lintel spans, a door or
- * glazing is drawn along it inside the wall (the same signature a gap needs),
- * and the other facade reaches the corner: the perpendicular line has wall-thick
- * ink within a wall of it, or a leg of its own ending there. A leg with nothing
- * drawn along it is where the wall stops.
+ * stretch — is bridged when it is no wider than a lintel spans, its pier is a
+ * stretch of WALL, glazing (two or three lines inside the wall, stopping at the
+ * pier) is drawn along it, and the other facade reaches the corner: the
+ * perpendicular line has wall-thick ink within a wall of it, or a leg of its
+ * own ending there. A leg with anything less drawn along it is where the wall
+ * stops.
  */
 export function cornerLegs(mask: Mask, linesX: readonly WallLine[], linesY: readonly WallLine[], optionsX: WallLineOptions, optionsY: WallLineOptions): { x: BoundaryGap[][]; y: BoundaryGap[][] } {
   const t = optionsX.wallPx
@@ -438,10 +544,12 @@ export function cornerLegs(mask: Mask, linesX: readonly WallLine[], linesY: read
           const widthPx = hi - lo
           const widthM = round6(widthPx * options.mppAlong)
           if (widthPx < t * 0.5 || widthM > options.maxOpeningM) continue
-          const strokes = gapStrokes(mask, line.axis, piece.axisPx, lo, hi, t)
-          const continuous = strokes.filter((s) => s.continuous)
-          if (continuous.length === 0) continue
-          const signature: BoundaryGap['signature'] = continuous.length >= 2 ? 'GLAZING' : Math.abs(continuous[0].offsetPx) <= t * 0.25 ? 'LEAF_AXIS' : 'LEAF_FACE'
+          // a leg is glazing from a WALL pier (005C post-review): one outline line per leg is a platform's edge, and
+          // a free-standing post is no jamb of a facade that turns a corner
+          if (piece.kind !== 'WALL' || !piece.along) continue
+          const strokes = gapStrokes(mask, line.axis, piece.axisPx, lo, hi, t, end === 'start' ? { right: piece, rightEnds: line.pieces.length === 1 } : { left: piece, leftEnds: line.pieces.length === 1 })
+          const { signature, infill: continuous } = gapSignature(strokes, t)
+          if (signature !== 'GLAZING') continue
           const jambs: BoundaryGap['jambs'] = end === 'start' ? ['CORNER', piece.kind] : [piece.kind, 'CORNER']
           out.push({
             line,

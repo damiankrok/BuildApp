@@ -30,7 +30,7 @@
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Band, Mask } from '@buildapp/source-cv'
-import { gapStrokes } from './boundary-evidence.js'
+import { gapSignature, gapStrokes, patternAcross } from './boundary-evidence.js'
 import type { DimensionChain } from '@buildapp/source-metrics'
 
 export type WallWitness = {
@@ -87,9 +87,9 @@ export function wallWitness(bands: readonly Band[], wallPx: number, mask?: Mask)
     }
   }
   // 005C: one wall, broken by an opening, is one wall. Two collinear bands of one thickness whose facing ends are
-  // separated by a gap with a door leaf on the wall's axis or glazing (two or more lines) drawn across it inside the
-  // wall are joined, however far apart their groups otherwise are. A paving or kerb line at a face joins nothing, so
-  // a planter lined up with a facade stays a separate group.
+  // separated by a gap with a door leaf on the wall's axis or glazing drawn across it inside the wall are joined,
+  // however far apart their groups otherwise are. A paving or kerb line at a face joins nothing, so a planter lined
+  // up with a facade stays a separate group.
   if (mask) {
     for (let i = 0; i < walls.length; i += 1) {
       for (let j = 0; j < walls.length; j += 1) {
@@ -103,8 +103,12 @@ export function wallWitness(bands: readonly Band[], wallPx: number, mask?: Mask)
         const bStart = vertical ? b.bounds.y0 : b.bounds.x0
         const width = bStart - aEnd
         if (width <= gap || width > wallPx * 20) continue
-        const strokes = gapStrokes(mask, vertical ? 'X' : 'Y', (a.axisPx + b.axisPx) / 2, aEnd, bStart, wallPx).filter((s) => s.continuous)
-        const drawn = strokes.length >= 2 || (strokes.length === 1 && Math.abs(strokes[0].offsetPx) <= wallPx * 0.25)
+        // The same infill rule as a gap in the outline (005C post-review): glazing is two or three lines inside the
+        // wall, a leaf one line on its axis across no more than a door's span; a pattern the gap sits in, or a
+        // single line across a wider one (a path, a kerb), joins nothing.
+        const axisPx = (a.axisPx + b.axisPx) / 2
+        const { signature } = gapSignature(gapStrokes(mask, vertical ? 'X' : 'Y', axisPx, aEnd, bStart, wallPx), wallPx)
+        const drawn = (signature === 'GLAZING' && !patternAcross(mask, vertical ? 'X' : 'Y', axisPx, aEnd, bStart, wallPx)) || (signature === 'LEAF_AXIS' && width <= wallPx * 10)
         if (drawn) join(i, j)
       }
     }

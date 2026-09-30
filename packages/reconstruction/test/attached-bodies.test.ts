@@ -9,7 +9,7 @@
  * walls; not a drawing of any real building.
  */
 import { describe, expect, it } from 'vitest'
-import { FAILURE_TITLES, RECONSTRUCTION_FAILURE_CODES } from '../src/index.js'
+import { FAILURE_TITLES, RECONSTRUCTION_FAILURE_CODES, policiesDisagree } from '../src/index.js'
 import type { PlanDecomposition } from '../src/index.js'
 import { sheet } from './plan.js'
 import { BLACK, drawLine } from '../../source-cv/test/draw.js'
@@ -99,18 +99,19 @@ describe('BOUNDARY_RESOLUTION_INCONCLUSIVE', () => {
     expect(FAILURE_TITLES.BOUNDARY_RESOLUTION_INCONCLUSIVE).toMatch(/outline/)
   })
 
-  it('the two jamb policies are recorded, and disagree when a blank door-sized gap is all that closes a room', () => {
+  it('the two jamb policies are recorded, and both keep every room the box built', () => {
+    // A wing at the SE corner, its east wall the house's own running on, a glazed front of short piers: adopted under
+    // both policies. A 5 × 5 m corner room behind a wall with a drawn door, whose only way out is a blank 1.2 m gap:
+    // the strict policy leaves the gap open, but the box's own reading built the room, and an adopted outline never
+    // drops a cell the box built (005C post-review) — so the two policies build the same house.
     const r = sheet(420, 460)
     ring(r, 40, 40, 359, 279)
-    // a wing at the SE corner, its east wall the house's own running on (so no bay), a glazed front of short piers:
-    // adopted under both policies, its rooms running on into the house
     clear(r, 200, 268, 347, 279)
     wall(r, 188, 268, 199, 399)
     wall(r, 348, 268, 359, 399)
     wall(r, 188, 388, 215, 399)
     wall(r, 332, 388, 359, 399)
     glazeH(r, 388, 216, 331)
-    // a 5 × 5 m corner room behind a wall with a drawn door, whose only way out is a blank 1.2 m gap
     wall(r, 128, 40, 139, 139)
     wall(r, 40, 128, 139, 139)
     clear(r, 80, 128, 97, 139)
@@ -121,8 +122,15 @@ describe('BOUNDARY_RESOLUTION_INCONCLUSIVE', () => {
     expect(p?.exclusion.accepted).toBe(true)
     expect(p?.strict.accepted).toBe(true)
     expect(near(p?.exclusion.areaM2 ?? 0, HOUSE_M2 + 8.6 * 6)).toBe(true)
-    expect(near(p?.strict.areaM2 ?? 0, HOUSE_M2 + 8.6 * 6 - 5 * 5, 0.06)).toBe(true)
-    expect(p?.disagree).toBe(true)
+    expect(p?.strict.areaM2).toBe(p?.exclusion.areaM2)
+    expect(p?.disagree).toBe(false)
     expect(relations(d)).toContain('PROJECTING_WING')
+  })
+
+  it('the policies disagree when either adopts and what they build differs by more than 6 %, one adopting and the other not included', () => {
+    expect(policiesDisagree({ adopted: false, areaM2: 0 }, { adopted: true, areaM2: 215 })).toBe(true)
+    expect(policiesDisagree({ adopted: true, areaM2: 215 }, { adopted: true, areaM2: 240 })).toBe(true)
+    expect(policiesDisagree({ adopted: true, areaM2: 215 }, { adopted: true, areaM2: 220 })).toBe(false)
+    expect(policiesDisagree({ adopted: false, areaM2: 192 }, { adopted: false, areaM2: 192 })).toBe(false)
   })
 })
