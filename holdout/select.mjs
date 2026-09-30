@@ -7,6 +7,14 @@
 // Round 2 (BUILDPLAN-005B) draws with its own label from the same committed pool, less
 // holdout/excluded-families-round-2.txt: every round-1 exclusion, the two round-1 draws, and every family the
 // development pages (round-1 draws included) link to.
+// Round 3 (BUILDPLAN-005C) draws ONE unseen ARCHON project from the same pool, less
+// holdout/excluded-families-round-3.txt, and ONE unseen DobreDomy project from holdout/pool-dobredomy.txt, less
+// holdout/excluded-families-dobredomy.txt, each with its own label:
+//   node holdout/select.mjs enumerate-dobredomy --out holdout/          (robots.txt + sitemap.xml only; before the freeze)
+//   node holdout/select.mjs select --round 3 --pool holdout/pool.txt --pool-sha256 <hex> \
+//        --dd-pool holdout/pool-dobredomy.txt --dd-pool-sha256 <hex> --pre-holdout-sha <40hex>
+// The DobreDomy draw is checked for technical material (README, round 3) by reading the drawn page's markup and
+// nothing else; an ineligible draw is recorded and the next one is `SHA256(seed + ":next:" + k)`.
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -19,6 +27,19 @@ const LABEL = 'BUILDPLAN-005A-BLIND-HOLDOUT'
 const ROUNDS = {
   1: { label: LABEL, excluded: 'excluded-families.txt' },
   2: { label: 'BUILDPLAN-005B-BLIND-HOLDOUT-ROUND-2', excluded: 'excluded-families-round-2.txt' },
+  3: { label: 'BUILDPLAN-005C-ARCHON-HOLDOUT', excluded: 'excluded-families-round-3.txt', picks: 1 },
+}
+const DOBREDOMY = {
+  host: 'https://www.dobredomy.pl',
+  label: 'BUILDPLAN-005C-DOBREDOMY-HOLDOUT',
+  pool: 'pool-dobredomy.txt',
+  meta: 'pool-dobredomy.meta.json',
+  excluded: 'excluded-families-dobredomy.txt',
+  // canonical sitemap form: one path segment under /projekt/, trailing slash, no query or fragment
+  urlRe: /^https:\/\/www\.dobredomy\.pl\/projekt\/([A-Za-z][A-Za-z0-9]*)\/$/,
+  // a garage or an outbuilding, decided from the slug alone (`G1`, `G2` …)
+  notAHouse: /^G\d+$/,
+  maxRedraws: 10,
 }
 const HOST = 'https://www.archon.pl'
 const URL_RE = /^https:\/\/www\.archon\.pl\/projekty-domow\/(projekt-[a-z0-9-]+)-(m[0-9a-f]{13})$/   // canonical form, no query/fragment/slash
@@ -38,6 +59,64 @@ export function developmentFamilies(root) {
   const out = new Set(); const walk = (d) => { for (const e of readdirSync(d)) { const p = join(d, e); if (statSync(p).isDirectory()) walk(p); else if (e === 'source-package.json' || e.endsWith('.pkg.json')) { const m = URL_RE.exec(String(JSON.parse(readFileSync(p, 'utf8')).canonicalUrl ?? '').split('?')[0]); if (m) out.add(family(m[1])) } } }
   for (const d of ['stage-reports', 'holdout']) if (existsSync(join(root, d))) walk(join(root, d))
   return out
+}
+
+/**
+ * A DobreDomy family: the name stem before the first capital or digit (`asterVIII2g` → `aster`,
+ * `justynianMalyIIp` → `justynian`). Over-merging is the safe direction for an exclusion.
+ */
+export function ddFamily(slug) {
+  const m = /^[a-z]+/.exec(slug)
+  return (m ? m[0] : slug).toLowerCase()
+}
+
+/**
+ * Round 3's DobreDomy eligibility, fixed before the freeze and applied to the drawn page's markup only: the page
+ * publishes technical material when a section headed as floor plans ("rzut") and a section headed as elevations
+ * ("elewacj") each carry at least one image. Nothing else about the page is read.
+ */
+export function ddEligible(html) {
+  const body = html.replace(/<script\b[\s\S]*?<\/script>/gi, ' ').replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+  const heads = [...body.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi)].map((m) => ({ at: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: m[2].replace(/<[^>]*>/g, ' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() }))
+  const imagesUnder = (test) => heads.some((h, i) => test.test(h.text) && /<img\b/i.test(body.slice(h.end, heads[i + 1]?.at ?? body.length)))
+  const plans = imagesUnder(/\brzut/)
+  const elevations = imagesUnder(/\belewacj/)
+  return { eligible: plans && elevations, plans, elevations }
+}
+
+/** One draw from a pool less its excluded families: `seed mod n` over the drawable list, in pool order. */
+export function selectOne(poolText, preHoldoutSha, label, familyOf, excludedFamilies = new Set()) {
+  if (!/^[0-9a-f]{40}$/.test(preHoldoutSha)) throw new Error('PRE_HOLDOUT_SHA must be 40 lowercase hex')
+  const pool = poolText.split('\n').filter(Boolean)
+  const sorted = [...pool].sort()
+  if (sorted.join('\n') !== pool.join('\n')) throw new Error('pool is not in canonical order')
+  const drawable = pool.filter((u) => !excludedFamilies.has(familyOf(u)))
+  if (drawable.length === 0) throw new Error('nothing drawable')
+  const seed = sha256(preHoldoutSha + label)
+  const i1 = Number(BigInt(`0x${seed}`) % BigInt(drawable.length))
+  return { seed, n: drawable.length, excluded: pool.length - drawable.length, i1, url: drawable[i1], family: familyOf(drawable[i1]), drawable }
+}
+
+/** The k-th re-draw after an ineligible DobreDomy draw: uniform over the drawable list, never the burned ones. */
+export function redraw(seed, drawable, burned, k) {
+  const left = drawable.filter((u) => !burned.has(u))
+  if (left.length === 0) throw new Error('nothing left to draw')
+  const i = Number(BigInt(`0x${sha256(`${seed}:next:${k}`)}`) % BigInt(left.length))
+  return { k, index: i, url: left[i] }
+}
+
+async function enumerateDobreDomy(outDir) {
+  const robots = await (await fetch(`${DOBREDOMY.host}/robots.txt`)).text()
+  if (/^Disallow:\s*\/projekt\/?\s*$/m.test(robots)) throw new Error('robots.txt disallows /projekt/')
+  const xmlBytes = Buffer.from(await (await fetch(`${DOBREDOMY.host}/sitemap.xml`)).arrayBuffer())
+  const locs = [...xmlBytes.toString('utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+  const all = [...new Set(locs.filter((u) => DOBREDOMY.urlRe.test(u)))]
+  const pool = all.filter((u) => !DOBREDOMY.notAHouse.test(DOBREDOMY.urlRe.exec(u)[1])).sort()
+  const text = pool.map((u) => `${u}\n`).join('')
+  mkdirSync(outDir, { recursive: true })
+  writeFileSync(join(outDir, DOBREDOMY.pool), text)
+  writeFileSync(join(outDir, DOBREDOMY.meta), JSON.stringify({ fetchedAt: new Date().toISOString(), sitemapSha256: sha256(xmlBytes), robotsSha256: sha256(robots), sitemapUrls: locs.length, projectUrls: all.length, notAHouse: all.length - pool.length, poolSize: pool.length, poolFamilies: new Set(pool.map((u) => ddFamily(DOBREDOMY.urlRe.exec(u)[1]))).size, poolSha256: sha256(text) }, null, 2))
+  console.log(`dobredomy pool ${pool.length} urls, sha256 ${sha256(text)}`)
 }
 
 async function enumerate(outDir, root) {
@@ -79,6 +158,7 @@ export function select(poolText, preHoldoutSha, excludedFamilies = new Set(), la
 if (import.meta.url === `file://${process.argv[1]}`) {
   const mode = process.argv[2]
   if (mode === 'enumerate') await enumerate(arg('out') ?? 'holdout', process.cwd())
+  else if (mode === 'enumerate-dobredomy') await enumerateDobreDomy(arg('out') ?? 'holdout')
   else if (mode === 'select') {
     const sha = arg('pre-holdout-sha')
     const git = (...a) => execFileSync('git', a).toString().trim()
@@ -88,12 +168,45 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (git('status', '--porcelain')) throw new Error('working tree is not clean')
     if (resolve(arg('pool') ?? '') !== join(root, 'holdout', 'pool.txt')) throw new Error('the pool is the tracked holdout/pool.txt, nothing else')
     const round = ROUNDS[arg('round') ?? '1']
-    if (!round) throw new Error('--round is 1 or 2')
+    if (!round) throw new Error('--round is 1, 2 or 3')
     git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', `holdout/${round.excluded}`)
     const text = readFileSync(join(root, 'holdout', 'pool.txt'), 'utf8')
     const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256
     if (sha256(text) !== arg('pool-sha256') || sha256(text) !== declared) throw new Error('pool hash does not match the declared and committed POOL_SHA256')
     const exclusions = readFileSync(join(root, 'holdout', round.excluded), 'utf8')
+    if (round.picks === 1) {
+      // Round 3: one ARCHON draw, one DobreDomy draw, each with its own label and pool.
+      git('ls-files', '--error-unmatch', `holdout/${DOBREDOMY.pool}`, `holdout/${DOBREDOMY.meta}`, `holdout/${DOBREDOMY.excluded}`)
+      if (resolve(arg('dd-pool') ?? '') !== join(root, 'holdout', DOBREDOMY.pool)) throw new Error(`the DobreDomy pool is the tracked holdout/${DOBREDOMY.pool}, nothing else`)
+      const ddText = readFileSync(join(root, 'holdout', DOBREDOMY.pool), 'utf8')
+      const ddDeclared = JSON.parse(readFileSync(join(root, 'holdout', DOBREDOMY.meta), 'utf8')).poolSha256
+      if (sha256(ddText) !== arg('dd-pool-sha256') || sha256(ddText) !== ddDeclared) throw new Error('DobreDomy pool hash does not match the declared and committed hash')
+      const ddExclusions = readFileSync(join(root, 'holdout', DOBREDOMY.excluded), 'utf8')
+      const archonFamily = (u) => family(URL_RE.exec(u)[1])
+      const a = selectOne(text, sha, round.label, archonFamily, new Set(exclusions.split('\n').filter(Boolean)))
+      const ddFamilyOf = (u) => ddFamily(DOBREDOMY.urlRe.exec(u)[1])
+      const d = selectOne(ddText, sha, DOBREDOMY.label, ddFamilyOf, new Set(ddExclusions.split('\n').filter(Boolean)))
+      const checks = []
+      const burned = new Set()
+      let pick = { k: 0, index: d.i1, url: d.url }
+      for (let k = 1; ; k += 1) {
+        const html = await (await fetch(pick.url)).text()
+        const e = ddEligible(html)
+        checks.push({ ...pick, ...e })
+        if (e.eligible) break
+        burned.add(pick.url)
+        if (k > DOBREDOMY.maxRedraws) throw new Error('no eligible DobreDomy draw within the re-draw budget')
+        pick = redraw(d.seed, d.drawable, burned, k)
+      }
+      const line = {
+        at: new Date().toISOString(), label: 'BUILDPLAN-005C-BLIND-HOLDOUT-ROUND-3', preHoldoutSha: sha,
+        archon: { label: round.label, excludedFamiliesFile: round.excluded, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), seed: a.seed, n: a.n, excluded: a.excluded, i1: a.i1, url: a.url, family: a.family },
+        dobredomy: { label: DOBREDOMY.label, excludedFamiliesFile: DOBREDOMY.excluded, poolSha256: ddDeclared, excludedFamiliesSha256: sha256(ddExclusions), seed: d.seed, n: d.n, excluded: d.excluded, i1: d.i1, eligibility: checks, url: pick.url, family: ddFamilyOf(pick.url) },
+      }
+      appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify(line) + '\n')
+      console.log(JSON.stringify(line, null, 2))
+      process.exit(0)
+    }
     const r = select(text, sha, new Set(exclusions.split('\n').filter(Boolean)), round.label)
     appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify({ at: new Date().toISOString(), ...(round.label !== LABEL ? { label: round.label, excludedFamiliesFile: round.excluded } : {}), preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), ...r }) + '\n')   // append-only: a draw is burned once written, and committed after the runs
     console.log(JSON.stringify(r, null, 2))
