@@ -43,6 +43,13 @@ export const RECONSTRUCTION_FAILURE_CODES = [
    * The diagnostics list the readings; none was picked for the person.
    */
   'PLAN_RESOLUTION_INCONCLUSIVE',
+  /**
+   * 005B: the run stopped, and the base plan's scale is not supported by one
+   * printed dimension read as printed — every reading that agrees with it was
+   * fitted to it. The diagnostics name the scales weighed, what contradicts
+   * them and the evidence that is missing; no house is built on it.
+   */
+  'METRIC_RESOLUTION_INCONCLUSIVE',
   /** An upper plan could not be registered onto the one below. */
   'PLAN_STOREY_ALIGNMENT_FAILED',
   /** An upper plan fits two places on the one below almost equally well. */
@@ -85,6 +92,7 @@ export const FAILURE_TITLES: Record<ReconstructionFailureCode, string> = {
   PLAN_NO_MASSES: 'Could not reconstruct the floor-plan body',
   PLAN_LAYOUT_REJECTED: 'The floor-plan reading contradicts the project data',
   PLAN_RESOLUTION_INCONCLUSIVE: 'No reading of the floor plan holds up',
+  METRIC_RESOLUTION_INCONCLUSIVE: 'The floor plan’s scale cannot be established',
   PLAN_STOREY_ALIGNMENT_FAILED: 'The storeys could not be aligned',
   PLAN_STOREY_ALIGNMENT_AMBIGUOUS: 'The storeys align two ways',
   VIEW_REGISTRATION_NO_ANCHORS: 'The views could not be registered',
@@ -143,6 +151,11 @@ export type PlanDiagnostics = {
   wallPx: number
   extent: Rect
   extentWeak: boolean
+  /** 005B: where each axis of the frame came from, and the chains refused as the building's extent. */
+  extentProvenance?: { x: string; y: string }
+  extentRefused?: string[]
+  /** 005B: the frame's independent metric solution, when the metric evidence carries one. */
+  metric?: { relation: string; confidence: string; isotropy: string; independentWitnesses: number; cmPerPixelX?: number; cmPerPixelY?: number; legacyCmPerPixel?: number }
   envelope: Rect | null
   bands: Array<{ axis: 'H' | 'V'; bounds: Rect; thickness: number }>
   chains: Array<{ axis: 'H' | 'V'; baselinePx: number; ticksPx: number[]; read: number }>
@@ -164,6 +177,8 @@ export type PlanDiagnosticsReport = {
   skipped: Array<{ frameId: string; why: string }>
   /** When the first reading stopped and the plan resolver weighed others (005A): what it weighed and decided. Absent otherwise. */
   resolution?: Record<string, number | string | boolean>
+  /** 005B: when a first reading that completed on weak metric evidence was weighed against its metric alternatives. */
+  challenge?: Record<string, number | string | boolean>
 }
 
 /** The counts a failure screen shows, from the digest. */
@@ -177,6 +192,14 @@ export function planCounts(report: PlanDiagnosticsReport | undefined): FailureDi
   out.dimensionChains = base.chains.length
   out.dimensionChainsRead = base.chains.filter((c) => c.read > 0).length
   out.scaleCmPerPx = base.scale ? Math.round(base.scale.mppX * 1e6) / 1e4 : 0
+  if (base.metric) {
+    out.metricRelation = base.metric.relation
+    out.metricConfidence = base.metric.confidence
+    out.metricIsotropy = base.metric.isotropy
+    out.independentWitnesses = base.metric.independentWitnesses
+  }
+  if (base.extentProvenance) out.extentProvenance = `${base.extentProvenance.x}/${base.extentProvenance.y}`
+  if (base.extentRefused && base.extentRefused.length > 0) out.extentChainsRefused = base.extentRefused.length
   out.wallBands = base.bands.length
   out.wallThicknessPx = base.wallPx
   out.walledEnvelope = base.envelope !== null

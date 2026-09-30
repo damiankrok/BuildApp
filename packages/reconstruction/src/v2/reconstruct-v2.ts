@@ -46,7 +46,8 @@ import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
 import { layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
-import { PLAN_RESOLVER_VERSION, resolutionRecord, resolvePlan } from '../plan-resolution.js'
+import { PLAN_RESOLVER_VERSION, challengeFirstReading, challengeRecord, firstReadingNeedsChallenge, resolutionRecord, resolvePlan } from '../plan-resolution.js'
+import { metricSolutionFor } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
@@ -69,7 +70,7 @@ import { dominantTone, lumaAt } from './scan.js'
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
 // resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
 // Accepted houses are read exactly as before.
-export const SOLVER_V2_VERSION = '2.2.0' as const
+export const SOLVER_V2_VERSION = '2.3.0' as const
 
 export type ReconstructionV2Options = {
   label: string
@@ -224,9 +225,22 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   let planDiagnostics: PlanDiagnosticsReport = planDiagnosticsOf(draft, graph, metrics, layout)
   const trace = (event: SolverTraceEvent): void => options.trace?.(event)
   trace({ phase: 'REGISTRATION', substage: 'PLAN_READ', status: draft.plans.length > 0 ? 'PASSED' : 'FAILED', counts: { planFrames: planDiagnostics.planFrames, plansRead: draft.plans.length, plansSkipped: draft.skippedPlans.length, ...(planDiagnostics.selectedPlanFrameId ? { selectedPlanFrameId: planDiagnostics.selectedPlanFrameId } : {}) } })
+  // --- 005B: a run that stops on a scale nothing independent supports says so -----
+  // When the base plan's scale rests on no printed dimension read as printed, the
+  // plan failure is a consequence and the missing metric truth is the cause.
+  const metricStop = (failure: ReconstructionFailure): ReconstructionFailure => {
+    const frameId = failure.plans?.selectedPlanFrameId ?? planDiagnostics.selectedPlanFrameId ?? draft.base?.frame.id
+    const solution = frameId ? metricSolutionFor(metrics, frameId) : undefined
+    if (!solution || solution.confidence !== 'INCONCLUSIVE') return failure
+    const top = solution.hypotheses.slice(0, 3).map((h) => `${h.cmPerPixel} cm/px (${h.independentGroups} independent, ${h.plausible ? 'plausible' : 'ruled out by the walls'})`)
+    const message = `the floor plan's scale cannot be established: ${solution.why}. ${top.length > 0 ? `The scales its readings state are ${top.join('; ')}` : 'None of its readings states a scale'}; ${solution.conflictingObservationIds.length} printed reading${solution.conflictingObservationIds.length === 1 ? '' : 's'} contradict the one it was read at. What is missing: an overall dimension read the right way up, or two readings on different chains that agree. (${failure.message})`
+    return new ReconstructionFailure('METRIC_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', message, { ...(failure.diagnostics ?? {}), firstFailure: failure.code, metricRelation: solution.relation, metricConfidence: solution.confidence, scaleHypotheses: solution.hypotheses.length, independentWitnesses: solution.independentWitnesses, conflictingReadings: solution.conflictingObservationIds.length, ...(solution.legacy.cmPerPixel !== undefined ? { legacyCmPerPx: solution.legacy.cmPerPixel } : {}), ...(top.length > 0 ? { topScales: top.join(' | ') } : {}) }, 'METRIC_RESOLUTION', failure.plans ?? planDiagnostics)
+  }
+
   // --- 005A: when the first reading of the plan stops, weigh the others -------
-  // Only here: a first reading that holds is never second-guessed, so every house
-  // it reads today is read the same way, byte for byte.
+  // A first reading that holds keeps the fast path only when its metric truth is
+  // independently supported (005B, below): every house read on such evidence is
+  // read the same way, byte for byte.
   if (!worldFrameFrom(draft) || layout.masses.length === 0 || layoutRefused(layout)) {
     const first = !worldFrameFrom(draft) || layout.masses.length === 0 ? planFailureOf(draft, layout, planDiagnostics) : layoutRejectionOf(layout, planDiagnostics)
     const resolution = resolvePlan(structuralOptions, incumbent, options.resolverProgress)
@@ -243,16 +257,30 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const report = { ...planDiagnostics, resolution: record }
       const failure = new ReconstructionFailure(first.code, first.phase, `${first.message}; ${resolution.message}`, { ...first.diagnostics, readingsWeighed: resolution.counts.readings, distinctOutlines: resolution.counts.distinctOutlines, ...(resolution.diagnostics.bestReading !== undefined ? { bestReading: resolution.diagnostics.bestReading } : {}) }, first.substage, report)
       trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw failure
+      throw metricStop(failure)
     } else if (resolution.kind === 'INCONCLUSIVE') {
       const report = { ...planDiagnostics, resolution: record }
       const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `${first.message} ${resolution.message}`, { ...planCounts(report), firstReading: first.code, ...resolution.diagnostics }, 'PLAN_RESOLUTION', report)
       trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw failure
+      throw metricStop(failure)
     } else {
       // Nothing but the first reading could be generated: its own failure stands.
       planDiagnostics = { ...planDiagnostics, resolution: record }
       trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: first.code, detail: 'no other reading of the plan could be generated' })
+    }
+  } else {
+    // --- 005B: a first reading that completed on weak metric evidence is weighed --------
+    const need = firstReadingNeedsChallenge(metrics, incumbent)
+    if (need.challenge) {
+      const outcome = challengeFirstReading(structuralOptions, incumbent, options.resolverProgress)
+      const record = challengeRecord(outcome, need.why)
+      if (outcome.kind === 'REPLACED') {
+        draft = outcome.result.draft
+        layout = outcome.result.layout
+        metrics = outcome.metrics
+      }
+      planDiagnostics = { ...planDiagnosticsOf(draft, graph, metrics, layout), challenge: record }
+      trace({ phase: 'REGISTRATION', substage: 'METRIC_CHALLENGE', status: outcome.kind === 'REPLACED' ? 'DEGRADED' : 'PASSED', counts: record, detail: `${need.why}; ${outcome.why}` })
     }
   }
   const planCountsNow = planCounts(planDiagnostics)
@@ -260,7 +288,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (!world || layout.masses.length === 0) {
     const failure = planFailureOf(draft, layout, planDiagnostics)
     trace({ phase: 'REGISTRATION', substage: failure.substage ?? 'PLAN_DECOMPOSITION', status: 'FAILED', counts: planCountsNow, reasonCode: failure.code, detail: failure.message })
-    throw failure
+    throw metricStop(failure)
   }
   trace({ phase: 'REGISTRATION', substage: 'PLAN_DECOMPOSITION', status: 'PASSED', counts: planCountsNow })
   // The gate's verdict is part of what is sealed, and a BLOCKING one says the
@@ -270,7 +298,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (layoutRefused(layout)) {
     const failure = layoutRejectionOf(layout, planDiagnostics)
     trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: 'FAILED', counts: { ...planCountsNow, gate: layout.gate.status }, reasonCode: failure.code, detail: failure.message })
-    throw failure
+    throw metricStop(failure)
   }
   trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: layout.gate.status === 'STRUCTURAL_LAYOUT_ACCEPTED' ? 'PASSED' : 'DEGRADED', counts: { masses: layout.masses.length, recesses: layout.recesses.length, roofs: layout.roofSupports.length, gate: layout.gate.status, gateReasons: layout.gate.reasons.filter((r) => r.severity !== 'NOTED').map((r) => `${r.severity}:${r.code}`).join(',') } })
   step({ stage: 'massing', what: 'the bodies the plans enclose, in the v2 frame', method: 'DISCRETE_SELECTION', detail: `${layout.masses.length} bodies; front outer plane at z = 0 (${world.why})`, inputs: draft.plans.length, outputs: layout.masses.length })
@@ -592,7 +620,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const interior: InteriorReading[] = []
   const publishedRooms = options.publishedRooms ?? []
   for (const [index, entry] of planByStorey) {
-    const tokens: LabelToken[] = metrics.ocrTokens.filter((t) => t.frameId === entry.plan.frame.id).map((t) => ({ text: t.text, box: t.box, heightPx: t.heightPx, confidence: t.confidence }))
+    // Room labels are read from the page vote's tokens: the other passes' readings are raw evidence for the metric solver (005B).
+    const tokens: LabelToken[] = metrics.ocrTokens.filter((t) => t.frameId === entry.plan.frame.id && t.pageVote !== 'DISCARDED').map((t) => ({ text: t.text, box: t.box, heightPx: t.heightPx, confidence: t.confidence }))
     const storeyLabel = index === 0 ? 'GROUND' : index < 0 ? 'BASEMENT' : 'ATTIC'
     const rooms = publishedRooms.filter((r) => r.storey === storeyLabel || (index > 0 && r.storey === 'UPPER')).map((r) => ({ number: String(r.index), label: r.label, areaM2: r.area }))
     const barriers: Array<{ x0: number; z0: number; x1: number; z1: number }> = []

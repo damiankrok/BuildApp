@@ -43,6 +43,9 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       wallPx: round6(p.wallPx),
       extent: rect(p.extent),
       extentWeak: p.extentWeak,
+      ...(p.extentProvenance ? { extentProvenance: p.extentProvenance } : {}),
+      ...(p.extentRefused ? { extentRefused: p.extentRefused } : {}),
+      ...metricOf(metrics, p.frame.id),
       envelope: d.envelope ? rect(d.envelope.rect) : null,
       bands: p.bands.map((b) => ({ axis: b.axis === 'VERTICAL' ? ('V' as const) : ('H' as const), bounds: rect(b.bounds), thickness: round6(b.thickness) })),
       chains: metrics.chains
@@ -59,6 +62,23 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
     }
   })
   return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })) }
+}
+
+/** The frame's independent metric solution (005B), as the digest carries it. */
+function metricOf(metrics: MetricEvidenceSet, frameId: string): { metric?: PlanDiagnostics['metric'] } {
+  const s = metrics.metricSolutions?.find((m) => m.frameId === frameId)
+  if (!s) return {}
+  return {
+    metric: {
+      relation: s.relation,
+      confidence: s.confidence,
+      isotropy: s.isotropy,
+      independentWitnesses: s.independentWitnesses,
+      ...(s.cmPerPixelX !== undefined ? { cmPerPixelX: s.cmPerPixelX } : {}),
+      ...(s.cmPerPixelY !== undefined ? { cmPerPixelY: s.cmPerPixelY } : {}),
+      ...(s.legacy.cmPerPixel !== undefined ? { legacyCmPerPixel: s.legacy.cmPerPixel } : {}),
+    },
+  }
 }
 
 /**
