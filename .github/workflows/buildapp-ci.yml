@@ -760,6 +760,136 @@ jobs:
             third-house/**
             !third-house/**/observation-graph.json
 
+  analyzer-generalization:
+    # BUILDPLAN-ANALYZER-005A. The analyzer reads source evidence, never a
+    # development house, and gives the same building however the page was
+    # reached or enumerated.
+    # - Purity: a registry derived from every sealed package in stage-reports.
+    # - Metamorphic URLs: tracking keys, order, fragment, trailing slash,
+    #   canonical link and redirect.
+    # - Order and determinism.
+    # - The known set the resolver had to fix. These are the OWNER's phone
+    #   case (Kosaćce with only its area-table plan copy) and Rarytasy e-OZE
+    #   (every copy, and the area copy alone). Their sealed evidence goes
+    #   through today's solver to the committed model hashes.
+    #   It is a hard gate whenever the publisher's images can be fetched;
+    #   they are never committed.
+    # Image-transform robustness is measured and reported, not gated
+    # (Council decision).
+    name: Analyzer / generalization
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      BEFORE: stage-reports/artifacts/analyzer-005a/before
+      RESOLVED: stage-reports/artifacts/analyzer-005a/resolver
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Purity, source invariance, harmless order and determinism
+        run: npx vitest run tests/architecture/generalization.test.ts packages/source-package/test/logical-identity.test.ts packages/analysis-service/test/generic-source.test.ts packages/source-metrics/test/extract.test.ts packages/analysis-service/test/service.test.ts
+      - name: The publisher's drawings for the known set (advisory — fetched, never committed)
+        continue-on-error: true
+        run: |
+          for n in kosacce-clean rarytasy-eoze; do
+            url=$(node -e "console.log(require('./$BEFORE/$n/source-package.json').canonicalUrl)")
+            npm run -s source:acquire -- "$url" --cache ".cache/known-$n" --quiet || echo "::warning::$n: the publisher's drawings could not be fetched"
+          done
+      - name: The known set through today's solver reaches the committed models
+        run: |
+          set -e
+          mkdir -p known
+          # ground-storey plan copies other than the area table: withheld for the "area copy alone" rows
+          dimensioned() { node -e "const g=require('./$BEFORE/$1/observation-graph.json'); console.log(g.coordinateFrames.filter((f)=>f.roles.projection==='ORTHOGRAPHIC_PLAN'&&f.roles.document==='FLOOR_PLAN'&&['GROUND','UNKNOWN'].includes(f.roles.storey)&&f.roles.annotation==='DIMENSIONED').map((f)=>f.id).join(','))"; }
+          row() { # row <name> <sealed> <expected digest dir> [drop]
+            if [ ! -d ".cache/known-$2" ]; then echo "::warning::$1: no drawings fetched; skipped"; return 0; fi
+            OFFLINE=1 npm run -s analysis:second-house -- --package "$BEFORE/$2/source-package.json" --graph "$BEFORE/$2/observation-graph.json" \
+              --metrics "$BEFORE/$2/metric-evidence.json" --cache ".cache/known-$2" --out "known/$1" ${4:+--drop-frames "$4"} --expect COMPLETED | tail -n 3
+            node -e "
+              const got = require('./known/$1/result-summary.json').modelHash, want = require('./$RESOLVED/$3/result-summary.json').modelHash
+              if (got !== want) { console.error('::error::$1 model', got, '!=', want); process.exit(1) }
+              console.log('$1: model', got.slice(0, 16), '= committed')
+            "
+          }
+          row kosacce-area-copy-alone kosacce-clean kosacce-clean-only-853A "$(dimensioned kosacce-clean)"
+          row eoze-every-copy rarytasy-eoze rarytasy-eoze-all
+          row eoze-area-copy-alone rarytasy-eoze rarytasy-eoze-only-853A "$(dimensioned rarytasy-eoze)"
+      - name: Upload the known-set record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analyzer-generalization
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            known/**
+            !known/**/observation-graph.json
+
+  plan-resolver:
+    # BUILDPLAN-ANALYZER-005A. The bounded plan resolver.
+    # - Its decomposition families: walled-first tiling, wall-ink extent,
+    #   lattice scales, outer faces, and pocket mouths shut.
+    # - Lexicographic ranking and strict acceptance, named ties, determinism.
+    # - The plan shape families through the whole pipeline: a row may move
+    #   up and never down, and a silently smaller building is never allowed
+    #   unless listed.
+    # - The canonical model's hard invariants (WALLS_OVERLAP and the rest)
+    #   stay strict.
+    name: Analyzer / plan resolver
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Resolver, decomposition families and shape families
+        run: npx vitest run packages/reconstruction/test/plan-resolution.test.ts packages/reconstruction/test/shape-families.test.ts packages/reconstruction/test/structural-mutations.test.ts
+      - name: Hard invariants stay hard (negative tests)
+        run: npx vitest run packages/model/test/topology.test.ts packages/reconstruction/test/wall-topology.test.ts tests/architecture/topology.test.ts
+
+  analyzer-progress:
+    # BUILDPLAN-ANALYZER-005A. What the run says while it works.
+    # - The overall percent only moves forward, and never reads 100 % before
+    #   the run is done.
+    # - Real counters: which frame of how many, rings, token groups.
+    # - A heartbeat with no holes.
+    # - Telemetry is write-only: the same bytes with and without it.
+    # - A cancel lands at the next loop boundary: inside the metric pass,
+    #   inside registration, and in the phone's program while it computes.
+    # - Warnings carry a severity.
+    # The phone's own liveness verdict (LivenessTrackerTest) runs in the
+    # Android job's JVM tests.
+    name: Analyzer / progress
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Telemetry, progress, cancellation and severities
+        run: npx vitest run packages/analysis-service/test/telemetry.test.ts packages/analysis-service/test/warnings.test.ts packages/analysis-service/test/service.test.ts apps/local-analyzer/test/program.test.ts apps/analyzer-api/test/android-contract.test.ts
+
   architectural-assemblies:
     # BUILDAPP-03G. The architectural language as a review record: the
     # capability, primitive, assembly and relationship registries; the

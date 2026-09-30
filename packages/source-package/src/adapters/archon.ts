@@ -190,7 +190,7 @@ const FACT_KEYS: Array<{ test: RegExp; key: string; unit: PublishedFact['unit'] 
   { test: /^wysokosc-budynku/, key: 'building_height', unit: 'm' },
 ]
 
-/** `129,04` and `1 205,5` are numbers here; the decimal comma and the thin space are this locale's, not noise. */
+/** `118,36` and `1 205,5` are numbers here; the decimal comma and the thin space are this locale's, not noise. */
 export function parsePlNumber(text: string): number | null {
   const cleaned = text.replace(/ /g, ' ')
   const m = /-?\d[\d ]*(?:[.,]\d+)?/.exec(cleaned)

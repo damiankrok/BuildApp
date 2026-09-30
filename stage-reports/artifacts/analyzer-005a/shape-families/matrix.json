@@ -1,0 +1,200 @@
+[
+ {
+  "id": "rectangle-one-storey",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 1,
+  "expectBodies": 1,
+  "area": 58.88,
+  "expect": 58.88,
+  "dev": 0,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "rectangle-one-storey",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 1,
+  "expectBodies": 1,
+  "area": 58.88,
+  "expect": 58.88,
+  "dev": 0,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "rectangle-two-storeys",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 1,
+  "expectBodies": 1,
+  "area": 63.36,
+  "expect": 63.36,
+  "dev": 0,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_REJECTED"
+ },
+ {
+  "id": "rectangle-two-storeys",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 1,
+  "expectBodies": 1,
+  "area": 63.36,
+  "expect": 63.36,
+  "dev": 0,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_REJECTED"
+ },
+ {
+  "id": "l-front",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 72.2,
+  "expect": 73.08,
+  "dev": -1.2,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_PARTIAL"
+ },
+ {
+  "id": "l-front",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 72.2,
+  "expect": 73.08,
+  "dev": -1.2,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_PARTIAL"
+ },
+ {
+  "id": "l-rear",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 72.26,
+  "expect": 73.08,
+  "dev": -1.1,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_PARTIAL"
+ },
+ {
+  "id": "l-rear",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 72.26,
+  "expect": 73.08,
+  "dev": -1.1,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_PARTIAL"
+ },
+ {
+  "id": "t-wing",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 76.72,
+  "expect": 78.24,
+  "dev": -1.9,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_REJECTED"
+ },
+ {
+  "id": "t-wing",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 76.72,
+  "expect": 78.24,
+  "dev": -1.9,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_REJECTED"
+ },
+ {
+  "id": "garage-side",
+  "published": true,
+  "outcome": "PLAN_NO_MASSES",
+  "msg": "1 walled region of the 688\u00d7498 px floor plan was found, but no building mass could be made from it that places the front of the building"
+ },
+ {
+  "id": "garage-side",
+  "published": false,
+  "outcome": "PLAN_NO_MASSES",
+  "msg": "1 walled region of the 688\u00d7498 px floor plan was found, but no building mass could be made from it that places the front of the building"
+ },
+ {
+  "id": "wide-door-wing",
+  "published": true,
+  "outcome": "PLAN_LAYOUT_REJECTED",
+  "msg": "the lowest storey covers 54.40 m\u00b2 against the 75.28 m\u00b2 the publisher prints \u2014 27.7% apart: the decomposition is not of this building; 3 other readings of the pl"
+ },
+ {
+  "id": "wide-door-wing",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 1,
+  "expectBodies": 2,
+  "area": 54.4,
+  "expect": 75.28,
+  "dev": -27.7,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "narrow-wing",
+  "published": true,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 69.84,
+  "expect": 70.76,
+  "dev": -1.3,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "narrow-wing",
+  "published": false,
+  "outcome": "COMPLETED",
+  "bodies": 2,
+  "expectBodies": 2,
+  "area": 69.84,
+  "expect": 70.76,
+  "dev": -1.3,
+  "resolved": null,
+  "gate": "STRUCTURAL_LAYOUT_ACCEPTED"
+ },
+ {
+  "id": "wide-glazing",
+  "published": true,
+  "outcome": "PLAN_NO_DIMENSION_FRAME",
+  "msg": "the 605\u00d7491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have"
+ },
+ {
+  "id": "wide-glazing",
+  "published": false,
+  "outcome": "PLAN_NO_DIMENSION_FRAME",
+  "msg": "the 605\u00d7491 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have"
+ },
+ {
+  "id": "small-copy",
+  "published": true,
+  "outcome": "MODEL_EMISSION_FAILED",
+  "msg": "the model refused command 18 (createWallRing): WALLS_OVERLAP, WALLS_OVERLAP, WALLS_OVERLAP, WALLS_OVERLAP"
+ },
+ {
+  "id": "small-copy",
+  "published": false,
+  "outcome": "MODEL_EMISSION_FAILED",
+  "msg": "the model refused command 18 (createWallRing): WALLS_OVERLAP, WALLS_OVERLAP, WALLS_OVERLAP, WALLS_OVERLAP"
+ }
+]

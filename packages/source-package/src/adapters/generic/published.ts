@@ -70,7 +70,7 @@ export function genericFacts(facts: PageFacts): PublishedFact[] {
   for (const p of facts.pairs) {
     const label = deaccent(p.label)
     const raw = p.value
-    // a plot's two dimensions on one line: "19,05 x 20,6 m"
+    // a plot's two dimensions on one line: "21,40 x 18,5 m"
     if (/wymiary dzialki|\bplot (size|dimensions)\b/.test(label)) {
       const m = /(\d+[.,]?\d*)\s*[x×]\s*(\d+[.,]?\d*)/.exec(raw)
       if (m) {

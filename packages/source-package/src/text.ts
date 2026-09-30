@@ -32,7 +32,7 @@ export const deaccent = (text: string): string =>
 export const stripTags = (html: string): string => decodeEntities(html.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim()
 
 /**
- * `129,04`, `1 205,5` and `1,205.50` are numbers here. The decimal comma, the
+ * `118,36`, `1 205,5` and `1,205.50` are numbers here. The decimal comma, the
  * thin space and the non-breaking space are a locale's, not noise. The first
  * number in the text is returned; null when there is none.
  */
