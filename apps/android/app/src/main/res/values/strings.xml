@@ -385,6 +385,8 @@
     <string name="analyzer_step_orientation">orientacja etykiet: łańcuch %1$d z %2$d</string>
     <string name="analyzer_step_scale">porównuję skale: wariant %1$d z %2$d</string>
     <string name="analyzer_step_extent">sprawdzam obrys: wariant %1$d z %2$d</string>
+    <string name="analyzer_step_boundary">łączę obrys: krawędź %1$d z %2$d</string>
+    <string name="analyzer_step_boundary_gaps">sprawdzam otwory: %1$d z %2$d</string>
     <string name="analyzer_step_elapsed">Ten krok trwa %1$s</string>
     <string name="analyzer_duration_seconds">%1$d s</string>
     <string name="analyzer_duration_minutes">%1$d min %2$d s</string>

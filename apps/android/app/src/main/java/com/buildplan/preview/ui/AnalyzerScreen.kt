@@ -465,6 +465,8 @@ private fun AnalyzerActivity(status: JobStatus?) {
         "ORIENTATION" -> count(counters["chains"]?.toInt(), counters["chainsTotal"]?.toInt(), R.string.analyzer_step_orientation)
         "SCALE" -> count(counters["hypothesis"]?.toInt(), counters["hypothesesTotal"]?.toInt(), R.string.analyzer_step_scale)
         "EXTENT" -> count(counters["extent"]?.toInt(), counters["extentsTotal"]?.toInt(), R.string.analyzer_step_extent)
+        "BOUNDARY" -> count(counters["lines"]?.toInt(), counters["linesTotal"]?.toInt(), R.string.analyzer_step_boundary)
+        "BOUNDARY_GAPS" -> count(counters["gaps"]?.toInt(), counters["gapsTotal"]?.toInt(), R.string.analyzer_step_boundary_gaps)
         else -> null
     }
     Column(verticalArrangement = Arrangement.spacedBy(Space.xxs)) {
