@@ -16,6 +16,8 @@ import type { StructuralLayoutDraft } from './layout.js'
 import type { StructuralLayoutHypothesisSet } from './structural-layout.js'
 import { ReconstructionFailure, planCounts } from './failure.js'
 import type { PlanDiagnostics, PlanDiagnosticsReport } from './failure.js'
+import type { BoundaryRecord } from './plan-decomposition.js'
+import type { OutlineSupport } from './boundary-outline.js'
 
 const rect = (r: { x0: number; y0: number; x1: number; y1: number }): { x0: number; y0: number; x1: number; y1: number } => ({ x0: round6(r.x0), y0: round6(r.y0), x1: round6(r.x1), y1: round6(r.y1) })
 
@@ -58,10 +60,27 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       wideOpenings: d.wideOpenings.map((w) => ({ kind: w.kind, axis: w.axis, linePx: round6(w.linePx), fromPx: round6(w.fromPx), toPx: round6(w.toPx), widthM: w.widthM, decision: w.decision, score: w.score, why: w.why })),
       bays: d.bays.map((b) => ({ side: b.side, rect: rect(b.rect), mouth: b.mouth.decision })),
       hypotheses: d.hypotheses.map((h) => ({ id: h.id, builtCells: h.builtCells, closedOpenings: h.closedOpenings, score: h.score, chosen: d.chosenHypothesis === h.id, why: h.why })),
+      ...(d.boundary ? { boundary: boundaryOf(d.boundary) } : {}),
       masses,
     }
   })
   return { planFrames, selectedPlanFrameId: draft.base?.frame.id ?? null, plans, skipped: draft.skippedPlans.map((s) => ({ frameId: s.frameId, why: s.why })) }
+}
+
+/** The opening-aware boundary (005C), as the digest carries it: what was found, adopted and named. */
+function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']> {
+  const support = (s: OutlineSupport) => ({ areaM2: s.areaM2, perimeterM: s.perimeterM, wallM: s.wallM, strongOpeningM: s.strongOpeningM, weakOpeningM: s.weakOpeningM, unsupportedM: s.unsupportedM, gapsBridged: s.gapsBridged, maxBridgedGapM: s.maxBridgedGapM })
+  return {
+    accepted: b.accepted,
+    gaps: { ...b.gaps },
+    bridged: { ...b.bridged },
+    candidates: b.candidates.map((c) => ({ id: c.id, cells: c.cells, ...support(c.support) })),
+    extensions: b.extensions.map((e) => ({ cells: e.cells.length, areaM2: e.areaM2, continuesAcrossM: e.continuesAcrossM, accepted: e.accepted })),
+    policies: { strictAreaM2: b.policies.strict.areaM2, strictAccepted: b.policies.strict.accepted, exclusionAreaM2: b.policies.exclusion.areaM2, exclusionAccepted: b.policies.exclusion.accepted, disagree: b.policies.disagree },
+    bodies: b.bodies.map((x) => ({ relation: x.relation, built: x.built, enclosed: x.enclosed, areaM2: x.areaM2, rect: rect(x.rect), junctionWallShare: x.junction.wallShare, sideWallShare: x.sides.wallShare, ...(x.mouth ? { mouthM: x.mouth.widthM } : {}) })),
+    shutGarageMouths: b.shutGarageMouths,
+    why: b.why,
+  }
 }
 
 /** The frame's independent metric solution (005B), as the digest carries it. */
@@ -103,7 +122,14 @@ export function planFailureOf(draft: StructuralLayoutDraft, layout: StructuralLa
   const plan = report.plans.find((p) => p.frameId === base?.frame.id)
   if (!base || !plan) return fail('PLAN_NO_MASSES', 'PLAN_READ', 'no plan was chosen to take the building’s coordinates from')
   const sheet = `the ${plan.sizePx.width}×${plan.sizePx.height} px floor plan`
-  if (!base.registration) return fail('PLAN_NO_DIMENSION_FRAME', 'PLAN_READ', `${sheet} states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have`)
+  if (!base.registration)
+    return fail(
+      'PLAN_NO_DIMENSION_FRAME',
+      'PLAN_READ',
+      plan.chains.length === 0
+        ? `${sheet} prints no dimension chain, so nothing on it states a scale`
+        : `${sheet} states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have`,
+    )
   if (base.bands.length === 0) return fail('PLAN_NO_WALL_BANDS', 'PLAN_DECOMPOSITION', `no wall-thick ink was found on ${sheet}`)
   if (!base.decomposition.envelope) return fail('PLAN_NO_WALLED_ENVELOPE', 'PLAN_DECOMPOSITION', `${plan.bands.length} wall bands were found on ${sheet}, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing`)
   if (plan.linesX.length < 2 || plan.linesY.length < 2) return fail('PLAN_GRID_EMPTY', 'PLAN_DECOMPOSITION', `neither the chains nor the walls of ${sheet} support two grid lines on each axis (${plan.linesX.length} × ${plan.linesY.length})`)

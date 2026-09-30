@@ -33,7 +33,7 @@
  * here carries a dimension of any real building.
  */
 import { round6 } from '@buildapp/source-common'
-import type { PixelRect } from '@buildapp/source-common'
+import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import { connectedComponents, dilate, dominantBandThickness, erode } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
@@ -43,6 +43,8 @@ import { BOUNDARY_EVIDENCE_VERSION, assignCallouts, cornerLegs, readWallLine, so
 import type { BoundaryGap, GapCallout, GapClass, SolidLayer, WallLine } from './boundary-evidence.js'
 import { outlineSupport, solveOutline } from './boundary-outline.js'
 import type { OutlineEdge, OutlineGrid, OutlineResult, OutlineSupport } from './boundary-outline.js'
+import { classifyBodies } from './boundary-bodies.js'
+import type { AttachedBody } from './boundary-bodies.js'
 
 /** Where a grid line came from. The two kinds are independent, and a line with both is as certain as a plan gets. */
 export type GridLineSupport = {
@@ -308,9 +310,11 @@ export type PlanDecompositionOptions = {
   exteriorTicks?: { x: readonly number[]; y: readonly number[] }
   /** 005C: read the opening-aware boundary at all (on by default). */
   openingAware?: boolean
+  /** Told at each boundary line read and each opening judged, for progress and cancellation. Write-only. */
+  checkpoint?: Checkpoint
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint'>>
 
 const DEFAULTS: CoreOptions = {
   snapPx: 5,
@@ -1076,8 +1080,10 @@ function sideWallReach(long: readonly Band[], all: readonly Band[], box: PixelRe
     }
     const farEnd = Math.min(endA, endB)
     const nearEnd = Math.max(startA, startB)
-    const far = farEnd - e1 >= wallPx * 2 && Math.abs(endA - endB) <= wallPx * 2 && endsOnPartition(e1 - half) && pierOn(farEnd + half) ? round6(farEnd + half) : e1
-    const near = e0 - nearEnd >= wallPx * 2 && Math.abs(startA - startB) <= wallPx * 2 && endsOnPartition(e0 + half) && pierOn(nearEnd - half) ? round6(nearEnd - half) : e0
+    // The front's OUTER face, a whole wall past the side walls' common end (their end is its inner face): the box's
+    // other sides are outer faces too, and an axis here builds the building half a wall short (005C).
+    const far = farEnd - e1 >= wallPx * 2 && Math.abs(endA - endB) <= wallPx * 2 && endsOnPartition(e1 - half) && pierOn(farEnd + half) ? round6(farEnd + wallPx) : e1
+    const near = e0 - nearEnd >= wallPx * 2 && Math.abs(startA - startB) <= wallPx * 2 && endsOnPartition(e0 + half) && pierOn(nearEnd - half) ? round6(nearEnd - wallPx) : e0
     if (vertical) {
       reach.y0 = near
       reach.y1 = far
@@ -1305,6 +1311,9 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
       const c = leaving[i + 1]
       const separationM = (c.b.axisPx - a.b.axisPx) * s.acrossMpp
       if (separationM < 2) continue
+      // A bay is narrower than the side it leaves from: two walls spanning most of that side are the building's own
+      // sides running on, and a "bay" between them is the whole front (005C).
+      if (c.b.axisPx - a.b.axisPx > (acrossHi - acrossLo) * 0.8) continue
       // The far line: the grid line at the outer face of the mouth, a wall's
       // thickness past where the SHORTER side wall's band stops (the corner
       // block beyond it belongs to the mouth's wall, and the band reader drops
@@ -1905,6 +1914,89 @@ function mergeRegions(
  * reported as two bodies standing against each other, because inflating it to
  * its bounding box would build over ground the plan shows as open.
  */
+/**
+ * Re-cut the rectangles of an outline frame so that no body is a strip (005C).
+ *
+ * The regions are cut largest-first, and on an outline whose faces step by a
+ * wall's thickness the largest rectangle runs across the step and leaves a
+ * strip beside it: 0.4 m of wall-thick face, 0.9 m of a room's end. A strip
+ * narrower than a body can be is not a body, and dropping it drops a room's
+ * floor with it. So a strip lying along a neighbour is joined to the part of
+ * the neighbour it spans, and the neighbour keeps the rest, when every piece
+ * that makes is at least `minSpanM` across on both axes and is one the caller
+ * accepts (the layout's wall gate). The cells, and so the area, are exactly
+ * the ones they were; only where the cut runs moves.
+ */
+export function recutSlivers(regions: readonly PlanRegion[], decomposition: PlanDecomposition, registration: CoordinateRegistration, minSpanM: number, accept: (region: PlanRegion) => boolean = () => true): PlanRegion[] {
+  const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
+  type Box = { ix0: number; iy0: number; ix1: number; iy1: number }
+  const boxOf = (r: PlanRegion): Box | undefined => {
+    if (r.cells.length === 0) return undefined
+    const b = { ix0: Math.min(...r.cells.map((c) => c.ix)), iy0: Math.min(...r.cells.map((c) => c.iy)), ix1: Math.max(...r.cells.map((c) => c.ix)), iy1: Math.max(...r.cells.map((c) => c.iy)) }
+    // only a region that IS its box of cells can be re-cut as one
+    return r.cells.length === (b.ix1 - b.ix0 + 1) * (b.iy1 - b.iy0 + 1) ? b : undefined
+  }
+  const rectOf = (b: Box): PixelRect | undefined => {
+    const a = cellAt.get(`${b.ix0}:${b.iy0}`)
+    const z = cellAt.get(`${b.ix1}:${b.iy1}`)
+    return a && z ? { x0: a.rect.x0, y0: a.rect.y0, x1: z.rect.x1, y1: z.rect.y1 } : undefined
+  }
+  const spanOk = (r: PixelRect | undefined): boolean => r !== undefined && (r.x1 - r.x0) * registration.metresPerPixelX >= minSpanM && (r.y1 - r.y0) * registration.metresPerPixelY >= minSpanM
+  const regionOf = (b: Box, from: readonly PlanRegion[]): PlanRegion | undefined => {
+    const rect = rectOf(b)
+    if (!rect) return undefined
+    const cells: Array<{ ix: number; iy: number }> = []
+    for (let iy = b.iy0; iy <= b.iy1; iy += 1) for (let ix = b.ix0; ix <= b.ix1; ix += 1) cells.push({ ix, iy })
+    const u0 = (rect.x0 - registration.originPx.x) * registration.metresPerPixelX
+    const u1 = (rect.x1 - registration.originPx.x) * registration.metresPerPixelX
+    const v0 = (rect.y0 - registration.originPx.y) * registration.metresPerPixelY
+    const v1 = (rect.y1 - registration.originPx.y) * registration.metresPerPixelY
+    return {
+      id: `region-built-${b.ix0}-${b.iy0}`,
+      classification: 'BUILT',
+      rect,
+      metric: { x0: round6(Math.min(u0, u1)), z0: round6(Math.min(v0, v1)), x1: round6(Math.max(u0, u1)), z1: round6(Math.max(v0, v1)) },
+      cells,
+      confidence: round6(Math.min(...from.map((r) => r.confidence))),
+      why: `re-cut from ${from.map((r) => r.id).join(' and ')} so that no body is a strip narrower than ${minSpanM.toFixed(2)} m`,
+    }
+  }
+  let out = [...regions]
+  for (let guard = 0; guard < regions.length * 2; guard += 1) {
+    let changed = false
+    for (const strip of out) {
+      if (strip.classification !== 'BUILT' || spanOk(strip.rect)) continue
+      const s = boxOf(strip)
+      if (!s) continue
+      for (const next of out) {
+        if (next === strip || next.classification !== 'BUILT') continue
+        const n = boxOf(next)
+        if (!n) continue
+        // the strip lies along the neighbour: they share a whole side of the strip
+        const above = s.iy1 + 1 === n.iy0 || n.iy1 + 1 === s.iy0
+        const beside = s.ix1 + 1 === n.ix0 || n.ix1 + 1 === s.ix0
+        let pieces: Box[] | undefined
+        if (above && s.ix0 >= n.ix0 && s.ix1 <= n.ix1) {
+          pieces = [{ ix0: s.ix0, ix1: s.ix1, iy0: Math.min(s.iy0, n.iy0), iy1: Math.max(s.iy1, n.iy1) }, { ...n, ix1: s.ix0 - 1 }, { ...n, ix0: s.ix1 + 1 }]
+        } else if (beside && s.iy0 >= n.iy0 && s.iy1 <= n.iy1) {
+          pieces = [{ iy0: s.iy0, iy1: s.iy1, ix0: Math.min(s.ix0, n.ix0), ix1: Math.max(s.ix1, n.ix1) }, { ...n, iy1: s.iy0 - 1 }, { ...n, iy0: s.iy1 + 1 }]
+        }
+        if (!pieces) continue
+        const kept = pieces.filter((b) => b.ix1 >= b.ix0 && b.iy1 >= b.iy0)
+        const made = kept.map((b) => regionOf(b, [strip, next]))
+        // every piece must be a body the layout would keep: a re-cut that leaves one it rejects loses its floor
+        if (made.some((r) => r === undefined || !spanOk(r.rect) || !accept(r))) continue
+        out = [...out.filter((r) => r !== strip && r !== next), ...(made as PlanRegion[])]
+        changed = true
+        break
+      }
+      if (changed) break
+    }
+    if (!changed) break
+  }
+  return out.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
+}
+
 export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): PlanRegion[] {
   const built = decomposition.regions.filter((r) => r.classification === 'BUILT')
   if (built.length < 2) return built
@@ -2213,8 +2305,22 @@ export type BoundaryRecord = {
   extensions: BoundaryExtension[]
   accepted: boolean
   floods: number
+  /**
+   * The outline under the two jamb policies: STRONG bridges only, and STRONG plus WEAK bridged by what lies behind
+   * them (the reading). `disagree` when both adopt an outline and their areas differ by more than 6 %.
+   */
+  policies: { strict: { accepted: boolean; areaM2: number; support: OutlineSupport }; exclusion: { accepted: boolean; areaM2: number; support: OutlineSupport }; disagree: boolean }
+  /** Every part of the plan beyond the house, and its relation to it (`boundary-bodies.ts`). */
+  bodies: AttachedBody[]
+  /** Open-mouthed garages this reading shut (only in the reading that shuts pocket mouths). */
+  shutGarageMouths: number
   why: string
 }
+
+/** Two outlines this close in area are one reading (the AGREES band of the layout gate). */
+const POLICY_AGREES = 0.06
+/** How many components beyond the box one plan may weigh. */
+const MAX_EXTENSIONS = 16
 
 const solidCache = new WeakMap<Mask, Map<number, SolidLayer>>()
 const solidOf = (mask: Mask, wallPx: number): SolidLayer => {
@@ -2277,7 +2383,7 @@ function outlineEnvelope(override: OutlineOverride, bands: readonly Band[], wall
 
 /**
  * Read the opening-aware boundary on a plan and weigh it against the incumbent
- * box (reviewer A's acceptance rule, `stage-reports/artifacts/analyzer-005c/pre`).
+ * box (the acceptance rule of the 005C boundary review).
  *
  * The box stands, byte for byte, unless a component of the outline beyond it
  * continues the box's interior across a stretch of the box's own edge that has
@@ -2314,8 +2420,16 @@ export function boundaryExtension(
   const nx = linesX.length - 1
   const ny = linesY.length - 1
   const lineOptions = (mppAlong: number) => ({ wallPx, mppAlong, maxOpeningM: opt.maxOpeningM, maxWideOpeningM: opt.maxWideOpeningM })
-  let wallsX = linesX.map((l) => readWallLine(mask, solid, 'X', l.px, linesY[0].px, linesY[ny].px, lineOptions(mppY)))
-  let wallsY = linesY.map((l) => readWallLine(mask, solid, 'Y', l.px, linesX[0].px, linesX[nx].px, lineOptions(mppX)))
+  // Progress, write-only: one tick per line read and per weak gap judged.
+  const linesTotal = linesX.length + linesY.length
+  let linesRead = 0
+  const read = (axis: 'X' | 'Y', l: GridLine): WallLine => {
+    linesRead += 1
+    options.checkpoint?.tick({ subphase: { id: 'BOUNDARY', label: 'joining the outline' }, counters: { lines: linesRead, linesTotal } })
+    return axis === 'X' ? readWallLine(mask, solid, 'X', l.px, linesY[0].px, linesY[ny].px, lineOptions(mppY)) : readWallLine(mask, solid, 'Y', l.px, linesX[0].px, linesX[nx].px, lineOptions(mppX))
+  }
+  let wallsX = linesX.map((l) => read('X', l))
+  let wallsY = linesY.map((l) => read('Y', l))
   const callouts = assignCallouts([...wallsX, ...wallsY], opt.callouts, (a) => (a === 'X' ? mppX : mppY), (a) => (a === 'X' ? mppY : mppX), wallPx)
   const upgrade = (line: WallLine): WallLine => ({ ...line, gaps: line.gaps.map((g) => (callouts.has(g.id) ? withCallout(g, callouts.get(g.id) as GapCallout, opt.maxWideOpeningM) : g)) })
   wallsX = wallsX.map(upgrade)
@@ -2325,7 +2439,8 @@ export function boundaryExtension(
   wallsX = withLegs(wallsX, corners.x)
   wallsY = withLegs(wallsY, corners.y)
   const grid: OutlineGrid = { linesX: linesX.map((l) => l.px), linesY: linesY.map((l) => l.px), wallsX, wallsY, mppX, mppY, wallPx }
-  const outline = solveOutline(grid)
+  const onJudge = (judged: number, total: number): void => options.checkpoint?.tick({ subphase: { id: 'BOUNDARY_GAPS', label: 'judging the openings' }, counters: { gaps: judged, gapsTotal: total } })
+  const exclusion = solveOutline(grid, { onJudge })
   const index = (ix: number, iy: number): number => iy * nx + ix
   const centreIn = (ix: number, iy: number, r: PixelRect): boolean => {
     const cx = (linesX[ix].px + linesX[ix + 1].px) / 2
@@ -2339,78 +2454,118 @@ export function boundaryExtension(
   const allGaps = [...wallsX, ...wallsY].flatMap((l) => l.gaps)
   const counts = { DRAWING_BREAK_SUPPORTED: [...wallsX, ...wallsY].reduce((a, l) => a + l.drawingBreaks, 0), OPENING_SUPPORTED: 0, UNKNOWN_GAP: 0, TRUE_EXTERIOR_GAP: 0 } as Record<GapClass, number>
   for (const g of allGaps) counts[g.cls] += 1
-  const supportOf = (inside: Uint8Array): OutlineSupport => outlineSupport(grid, { ...outline, inside })
-  // the components of the outline beyond the box, and whether each continues the box's interior
-  const extensions: BoundaryExtension[] = []
-  const seen = new Uint8Array(nx * ny)
-  const neighbours = (ix: number, iy: number): Array<{ jx: number; jy: number; edge: OutlineEdge; lengthM: number }> => [
-    { jx: ix, jy: iy - 1, edge: outline.hEdge[iy][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
-    { jx: ix + 1, jy: iy, edge: outline.vEdge[ix + 1][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
-    { jx: ix, jy: iy + 1, edge: outline.hEdge[iy + 1][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
-    { jx: ix - 1, jy: iy, edge: outline.vEdge[ix][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
-  ]
   const valid = (jx: number, jy: number): boolean => jx >= 0 && jy >= 0 && jx < nx && jy < ny
-  const accepted = new Uint8Array(nx * ny)
-  if (env) {
-    for (let iy = 0; iy < ny; iy += 1) {
-      for (let ix = 0; ix < nx; ix += 1) {
-        const i0 = index(ix, iy)
-        if (seen[i0] === 1 || outline.inside[i0] !== 1 || inA[i0] === 1) continue
-        const members: Array<{ ix: number; iy: number }> = []
-        const stack: Array<[number, number]> = [[ix, iy]]
-        seen[i0] = 1
-        while (stack.length > 0) {
-          const [cx, cy] = stack.pop() as [number, number]
-          members.push({ ix: cx, iy: cy })
-          for (const n of neighbours(cx, cy)) {
-            if (!valid(n.jx, n.jy)) continue
-            const j = index(n.jx, n.jy)
-            if (seen[j] === 1 || outline.inside[j] !== 1 || inA[j] === 1) continue
-            seen[j] = 1
-            stack.push([n.jx, n.jy])
-          }
-        }
-        members.sort((p, q) => p.iy - q.iy || p.ix - q.ix)
-        let across = 0
-        let areaM2 = 0
-        for (const m of members) {
-          areaM2 += (linesX[m.ix + 1].px - linesX[m.ix].px) * mppX * (linesY[m.iy + 1].px - linesY[m.iy].px) * mppY
-          for (const n of neighbours(m.ix, m.iy)) {
-            if (!valid(n.jx, n.jy)) continue
-            const j = index(n.jx, n.jy)
-            if (inA[j] === 1 && outline.inside[j] === 1 && !n.edge.closed) across += n.lengthM
-          }
-        }
-        const ok = across > 0
-        extensions.push({
-          cells: members,
-          areaM2: round6(areaM2),
-          continuesAcrossM: round6(across),
-          accepted: ok,
-          why: ok
-            ? `${areaM2.toFixed(1)} m² enclosed by wall and openings beyond the box, continuing its interior across ${across.toFixed(2)} m of the box's edge that carries no wall and no opening: the building goes on where the box stops`
-            : `${areaM2.toFixed(1)} m² enclosed beyond the box, but separated from it by wall or openings on every shared edge: not a continuation of this building's interior`,
-        })
-      }
-    }
-  }
   // The outline may only widen the building: it replaces the box when it encloses more than the box's own reading
   // built. An outline smaller than that has leaked where the box held, and the box stands.
-  const areaOf = (mask: Uint8Array): number => {
+  const areaOf = (cells: Uint8Array): number => {
     let total = 0
-    for (let iy = 0; iy < ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (mask[index(ix, iy)] === 1) total += (linesX[ix + 1].px - linesX[ix].px) * mppX * (linesY[iy + 1].px - linesY[iy].px) * mppY
+    for (let iy = 0; iy < ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (cells[index(ix, iy)] === 1) total += (linesX[ix + 1].px - linesX[ix].px) * mppX * (linesY[iy + 1].px - linesY[iy].px) * mppY
     return total
   }
   const incumbentBuiltM2 = incumbent.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + (c.rect.x1 - c.rect.x0) * mppX * (c.rect.y1 - c.rect.y0) * mppY, 0)
-  const widens = areaOf(outline.inside) > incumbentBuiltM2 + 1e-9
-  if (!widens) for (const e of extensions) if (e.accepted) Object.assign(e, { accepted: false, why: `${e.why}; but the whole outline encloses ${areaOf(outline.inside).toFixed(1)} m², no more than the ${incumbentBuiltM2.toFixed(1)} m² the box builds: it has leaked where the box held, and the box stands` })
-  for (const e of extensions) if (e.accepted) for (const m of e.cells) accepted[index(m.ix, m.iy)] = 1
-  const anyAccepted = extensions.some((e) => e.accepted)
-  // the outline adopted: the box's interior the outline confirms, and the accepted extensions. A pocket beyond the
-  // box that is walled off from it on every shared edge was rejected above, and touching the box does not bring it
-  // back: a planter or a pier drawn against the front wall encloses ground, not a room of this building.
-  const final = new Uint8Array(nx * ny)
-  if (anyAccepted) for (let i = 0; i < nx * ny; i += 1) if (outline.inside[i] === 1 && (inA[i] === 1 || accepted[i] === 1)) final[i] = 1
+
+  /**
+   * Weigh one outline against the box: its components beyond the box, which of them continue the box's interior
+   * across an edge with no wall and no opening (or are named in `forced`: a garage whose mouth the reading shut),
+   * and the outline adopted — the box's interior it confirms and the accepted extensions only. A pocket walled off
+   * from the box on every shared edge is rejected, and touching the box does not bring it back: a planter or a pier
+   * against the front wall encloses ground, not a room of this building.
+   */
+  const adopt = (outline: OutlineResult, forced?: Uint8Array): { extensions: BoundaryExtension[]; accepted: Uint8Array; final: Uint8Array; any: boolean } => {
+    const extensions: BoundaryExtension[] = []
+    const seen = new Uint8Array(nx * ny)
+    const accepted = new Uint8Array(nx * ny)
+    const neighbours = (ix: number, iy: number): Array<{ jx: number; jy: number; edge: OutlineEdge; lengthM: number }> => [
+      { jx: ix, jy: iy - 1, edge: outline.hEdge[iy][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
+      { jx: ix + 1, jy: iy, edge: outline.vEdge[ix + 1][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
+      { jx: ix, jy: iy + 1, edge: outline.hEdge[iy + 1][ix], lengthM: (linesX[ix + 1].px - linesX[ix].px) * mppX },
+      { jx: ix - 1, jy: iy, edge: outline.vEdge[ix][iy], lengthM: (linesY[iy + 1].px - linesY[iy].px) * mppY },
+    ]
+    if (env) {
+      for (let iy = 0; iy < ny; iy += 1) {
+        for (let ix = 0; ix < nx; ix += 1) {
+          const i0 = index(ix, iy)
+          if (seen[i0] === 1 || outline.inside[i0] !== 1 || inA[i0] === 1 || extensions.length >= MAX_EXTENSIONS) continue
+          const members: Array<{ ix: number; iy: number }> = []
+          const stack: Array<[number, number]> = [[ix, iy]]
+          seen[i0] = 1
+          while (stack.length > 0) {
+            const [cx, cy] = stack.pop() as [number, number]
+            members.push({ ix: cx, iy: cy })
+            for (const n of neighbours(cx, cy)) {
+              if (!valid(n.jx, n.jy)) continue
+              const j = index(n.jx, n.jy)
+              if (seen[j] === 1 || outline.inside[j] !== 1 || inA[j] === 1) continue
+              seen[j] = 1
+              stack.push([n.jx, n.jy])
+            }
+          }
+          members.sort((p, q) => p.iy - q.iy || p.ix - q.ix)
+          let across = 0
+          let areaM2 = 0
+          for (const m of members) {
+            areaM2 += (linesX[m.ix + 1].px - linesX[m.ix].px) * mppX * (linesY[m.iy + 1].px - linesY[m.iy].px) * mppY
+            for (const n of neighbours(m.ix, m.iy)) {
+              if (!valid(n.jx, n.jy)) continue
+              const j = index(n.jx, n.jy)
+              if (inA[j] === 1 && outline.inside[j] === 1 && !n.edge.closed) across += n.lengthM
+            }
+          }
+          const shut = forced !== undefined && members.some((m) => forced[index(m.ix, m.iy)] === 1)
+          const ok = across > 0 || shut
+          extensions.push({
+            cells: members,
+            areaM2: round6(areaM2),
+            continuesAcrossM: round6(across),
+            accepted: ok,
+            why: across > 0
+              ? `${areaM2.toFixed(1)} m² enclosed by wall and openings beyond the box, continuing its interior across ${across.toFixed(2)} m of the box's edge that carries no wall and no opening: the building goes on where the box stops`
+              : shut
+                ? `${areaM2.toFixed(1)} m² beyond the box behind a garage mouth this reading shuts: two wall sides and the house behind it`
+                : `${areaM2.toFixed(1)} m² enclosed beyond the box, but separated from it by wall or openings on every shared edge: not a continuation of this building's interior`,
+          })
+        }
+      }
+    }
+    const widens = areaOf(outline.inside) > incumbentBuiltM2 + 1e-9
+    if (!widens) for (const e of extensions) if (e.accepted) Object.assign(e, { accepted: false, why: `${e.why}; but the whole outline encloses ${areaOf(outline.inside).toFixed(1)} m², no more than the ${incumbentBuiltM2.toFixed(1)} m² the box builds: it has leaked where the box held, and the box stands` })
+    for (const e of extensions) if (e.accepted) for (const m of e.cells) accepted[index(m.ix, m.iy)] = 1
+    const any = extensions.some((e) => e.accepted)
+    const final = new Uint8Array(nx * ny)
+    if (any) for (let i = 0; i < nx * ny; i += 1) if (outline.inside[i] === 1 && (inA[i] === 1 || accepted[i] === 1)) final[i] = 1
+    return { extensions, accepted, final, any }
+  }
+
+  // Two policies (the contract's §2.2): STRONG bridges only, and STRONG plus WEAK bridged by what lies behind them.
+  // The second is the reading; the first is its check. Both adopting outlines more than 6 % apart is a question the
+  // drawing does not settle, recorded here and raised only if the reading then stops.
+  const strict = solveOutline(grid, { policy: 'STRICT' })
+  const strictAdopted = adopt(strict)
+  const reading = adopt(exclusion)
+  // The house the parts are named against: the box's cells the outline confirms (every box cell, when it adopts none).
+  const house = reading.any ? reading.final.map((v, i) => (v === 1 && inA[i] === 1 ? 1 : 0)) : inA
+  const bodies = classifyBodies(grid, exclusion, inA, house, reading.accepted, opt.maxWideOpeningM)
+
+  // The reading that shuts pocket mouths (005A's resolver) shuts an open-mouthed garage's mouth too: its mouth gap
+  // is read as an opening, and the garage is adopted by its relation, not by a continuation it does not have.
+  const garages = options.shutPocketMouths ? bodies.filter((b) => b.relation === 'OPEN_MOUTH_GARAGE' && b.mouth) : []
+  let outline = exclusion
+  let chosen = reading
+  if (garages.length > 0) {
+    const mouths = new Set(garages.map((b) => b.mouth?.gapId))
+    const shut = (line: WallLine): WallLine => ({ ...line, gaps: line.gaps.map((g) => (mouths.has(g.id) ? { ...g, cls: 'OPENING_SUPPORTED' as const, boundary: 'STRONG' as const, occupancy: 'OPENING' as const, why: `${g.why}; shut as a garage mouth in the reading that shuts pocket mouths` } : g)) })
+    const shutGrid: OutlineGrid = { ...grid, wallsX: wallsX.map(shut), wallsY: wallsY.map(shut) }
+    const forced = new Uint8Array(nx * ny)
+    for (let iy = 0; iy < ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (garages.some((b) => centreIn(ix, iy, b.rect))) forced[index(ix, iy)] = 1
+    outline = solveOutline(shutGrid, { onJudge })
+    chosen = adopt(outline, forced)
+  }
+  const { extensions, final } = chosen
+  const anyAccepted = chosen.any
+  const supportOf = (inside: Uint8Array, result: OutlineResult = outline): OutlineSupport => outlineSupport(grid, { ...result, inside })
+  const strictM2 = round6(areaOf(strictAdopted.final))
+  const exclusionM2 = round6(areaOf(reading.final))
+  const disagree = strictAdopted.any && reading.any && Math.abs(strictM2 - exclusionM2) > Math.max(strictM2, exclusionM2) * POLICY_AGREES
   const record: BoundaryRecord = {
     version: BOUNDARY_EVIDENCE_VERSION,
     wallPx: round6(wallPx),
@@ -2424,7 +2579,14 @@ export function boundaryExtension(
     ],
     extensions,
     accepted: anyAccepted,
-    floods: outline.floods,
+    floods: exclusion.floods + strict.floods + (outline === exclusion ? 0 : outline.floods),
+    policies: {
+      strict: { accepted: strictAdopted.any, areaM2: strictM2, support: supportOf(strict.inside, strict) },
+      exclusion: { accepted: reading.any, areaM2: exclusionM2, support: supportOf(exclusion.inside, exclusion) },
+      disagree,
+    },
+    bodies,
+    shutGarageMouths: garages.length,
     why: !env
       ? 'the plan has no long-band box to weigh the outline against'
       : anyAccepted

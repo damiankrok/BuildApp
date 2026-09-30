@@ -233,8 +233,23 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const solution = frameId ? metricSolutionFor(metrics, frameId) : undefined
     if (!solution || solution.confidence !== 'INCONCLUSIVE') return failure
     const top = solution.hypotheses.slice(0, 3).map((h) => `${h.cmPerPixel} cm/px (${h.independentGroups} independent, ${h.plausible ? 'plausible' : 'ruled out by the walls'})`)
-    const message = `the floor plan's scale cannot be established: ${solution.why}. ${top.length > 0 ? `The scales its readings state are ${top.join('; ')}` : 'None of its readings states a scale'}; ${solution.conflictingObservationIds.length} printed reading${solution.conflictingObservationIds.length === 1 ? '' : 's'} contradict the one it was read at. What is missing: an overall dimension read the right way up, or two readings on different chains that agree. (${failure.message})`
+    const chainless = frameId !== undefined && !metrics.chains.some((c) => c.frameId === frameId)
+    const missing = chainless ? 'a dimension printed on the floor plan itself — it prints none' : 'an overall dimension read the right way up, or two readings on different chains that agree'
+    const message = `the floor plan's scale cannot be established: ${solution.why}. ${top.length > 0 ? `The scales its readings state are ${top.join('; ')}` : 'None of its readings states a scale'}; ${solution.conflictingObservationIds.length} printed reading${solution.conflictingObservationIds.length === 1 ? '' : 's'} contradict the one it was read at. What is missing: ${missing}. (${failure.message})`
     return new ReconstructionFailure('METRIC_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', message, { ...(failure.diagnostics ?? {}), firstFailure: failure.code, metricRelation: solution.relation, metricConfidence: solution.confidence, scaleHypotheses: solution.hypotheses.length, independentWitnesses: solution.independentWitnesses, conflictingReadings: solution.conflictingObservationIds.length, ...(solution.legacy.cmPerPixel !== undefined ? { legacyCmPerPx: solution.legacy.cmPerPixel } : {}), ...(top.length > 0 ? { topScales: top.join(' | ') } : {}) }, 'METRIC_RESOLUTION', failure.plans ?? planDiagnostics)
+  }
+
+  // --- 005C: a run that stops where the plan's outline itself is in question says so -----
+  // Both jamb policies adopted an outline and they disagree by more than the AGREES band: the stop
+  // names both and their support rather than the consequence either one led to. A scale nothing
+  // supports is the deeper cause and keeps its own stop.
+  const boundaryRecord = draft.base?.decomposition.boundary
+  const boundaryStop = (failure: ReconstructionFailure): ReconstructionFailure => {
+    const policies = boundaryRecord?.policies
+    if (!policies?.disagree || failure.code === 'METRIC_RESOLUTION_INCONCLUSIVE') return failure
+    const describe = (id: string, p: typeof policies.strict): string => `${id} ${p.areaM2.toFixed(1)} m² (perimeter ${p.support.perimeterM.toFixed(1)} m: ${Math.round((p.support.wallM / Math.max(1e-9, p.support.perimeterM)) * 100)}% wall, ${p.support.strongOpeningM.toFixed(1)} m drawn openings, ${p.support.weakOpeningM.toFixed(1)} m blank gaps bridged, ${p.support.unsupportedM.toFixed(1)} m unsupported)`
+    const message = `the building's outline cannot be established: read with drawn openings only it is ${describe('B_STRICT', policies.strict)}; bridging blank door-sized gaps by what lies behind them it is ${describe('B_EXCLUSION', policies.exclusion)}. The two differ by more than 6 %, and nothing in the drawing prefers one. What is missing: a door or glazing drawn across the blank gaps, or a dimension chain that closes the outline. (${failure.message})`
+    return new ReconstructionFailure('BOUNDARY_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', message, { ...(failure.diagnostics ?? {}), firstFailure: failure.code, strictAreaM2: policies.strict.areaM2, exclusionAreaM2: policies.exclusion.areaM2, strictUnsupportedM: policies.strict.support.unsupportedM, exclusionUnsupportedM: policies.exclusion.support.unsupportedM, candidates: 'B_STRICT|B_EXCLUSION' }, 'BOUNDARY_RESOLUTION', failure.plans ?? planDiagnostics)
   }
 
   // --- 005A: when the first reading of the plan stops, weigh the others -------
@@ -257,12 +272,12 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       const report = { ...planDiagnostics, resolution: record }
       const failure = new ReconstructionFailure(first.code, first.phase, `${first.message}; ${resolution.message}`, { ...first.diagnostics, readingsWeighed: resolution.counts.readings, distinctOutlines: resolution.counts.distinctOutlines, ...(resolution.diagnostics.bestReading !== undefined ? { bestReading: resolution.diagnostics.bestReading } : {}) }, first.substage, report)
       trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw metricStop(failure)
+      throw boundaryStop(metricStop(failure))
     } else if (resolution.kind === 'INCONCLUSIVE') {
       const report = { ...planDiagnostics, resolution: record }
       const failure = new ReconstructionFailure('PLAN_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', `${first.message} ${resolution.message}`, { ...planCounts(report), firstReading: first.code, ...resolution.diagnostics }, 'PLAN_RESOLUTION', report)
       trace({ phase: 'REGISTRATION', substage: 'PLAN_RESOLUTION', status: 'FAILED', counts: record, reasonCode: failure.code, detail: resolution.message })
-      throw metricStop(failure)
+      throw boundaryStop(metricStop(failure))
     } else {
       // Nothing but the first reading could be generated: its own failure stands.
       planDiagnostics = { ...planDiagnostics, resolution: record }
@@ -288,7 +303,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (!world || layout.masses.length === 0) {
     const failure = planFailureOf(draft, layout, planDiagnostics)
     trace({ phase: 'REGISTRATION', substage: failure.substage ?? 'PLAN_DECOMPOSITION', status: 'FAILED', counts: planCountsNow, reasonCode: failure.code, detail: failure.message })
-    throw metricStop(failure)
+    throw boundaryStop(metricStop(failure))
   }
   trace({ phase: 'REGISTRATION', substage: 'PLAN_DECOMPOSITION', status: 'PASSED', counts: planCountsNow })
   // The gate's verdict is part of what is sealed, and a BLOCKING one says the
@@ -298,7 +313,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   if (layoutRefused(layout)) {
     const failure = layoutRejectionOf(layout, planDiagnostics)
     trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: 'FAILED', counts: { ...planCountsNow, gate: layout.gate.status }, reasonCode: failure.code, detail: failure.message })
-    throw metricStop(failure)
+    throw boundaryStop(metricStop(failure))
   }
   trace({ phase: 'REGISTRATION', substage: 'STRUCTURAL_LAYOUT', status: layout.gate.status === 'STRUCTURAL_LAYOUT_ACCEPTED' ? 'PASSED' : 'DEGRADED', counts: { masses: layout.masses.length, recesses: layout.recesses.length, roofs: layout.roofSupports.length, gate: layout.gate.status, gateReasons: layout.gate.reasons.filter((r) => r.severity !== 'NOTED').map((r) => `${r.severity}:${r.code}`).join(',') } })
   step({ stage: 'massing', what: 'the bodies the plans enclose, in the v2 frame', method: 'DISCRETE_SELECTION', detail: `${layout.masses.length} bodies; front outer plane at z = 0 (${world.why})`, inputs: draft.plans.length, outputs: layout.masses.length })

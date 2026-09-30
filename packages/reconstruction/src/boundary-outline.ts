@@ -83,8 +83,15 @@ const coverOf = (intervals: readonly Interval[], a: number, b: number): number =
   return total
 }
 
-/** Solve the outline on a grid whose lines have been read for wall ink. */
-export function solveOutline(grid: OutlineGrid): OutlineResult {
+/**
+ * Solve the outline on a grid whose lines have been read for wall ink.
+ *
+ * `EXCLUSION` (the reading) bridges WEAK gaps by what lies behind them;
+ * `STRICT` bridges STRONG gaps only and judges nothing — the check the reading
+ * is weighed against. `onJudge` is told after each weak gap judged (progress,
+ * write-only).
+ */
+export function solveOutline(grid: OutlineGrid, options: { policy?: 'EXCLUSION' | 'STRICT'; onJudge?: (judged: number, total: number) => void } = {}): OutlineResult {
   const { linesX, linesY, wallsX, wallsY, mppX, mppY, wallPx } = grid
   const nx = linesX.length - 1
   const ny = linesY.length - 1
@@ -175,12 +182,13 @@ export function solveOutline(grid: OutlineGrid): OutlineResult {
     return sides.some((v) => v === 1) && sides.some((v) => v === 0)
   }
 
-  const open = new Set<string>()
+  const strict = options.policy === 'STRICT'
+  const open = new Set<string>(strict ? weak.map((g) => g.id) : [])
   const judged = new Map<string, { exposedM2: number; limitM2: number; bridged: boolean }>()
   let current = edgesUnder(open)
   let reached = flood(current.vEdge, current.hEdge)
-  const budget = weak.slice(0, MAX_WEAK_GAPS)
-  for (let changed = true; changed; ) {
+  const budget = strict ? [] : weak.slice(0, MAX_WEAK_GAPS)
+  for (let changed = budget.length > 0; changed; ) {
     changed = false
     for (const g of budget) {
       if (open.has(g.id) || judged.get(g.id)?.bridged === true) continue
@@ -199,6 +207,7 @@ export function solveOutline(grid: OutlineGrid): OutlineResult {
         reached = next
         changed = true
       } else judged.set(g.id, { exposedM2: round6(exposed), limitM2: round6(limitM2), bridged: true })
+      options.onJudge?.(judged.size, budget.length)
     }
   }
   const inside = new Uint8Array(nx * ny)
@@ -214,7 +223,7 @@ export function solveOutline(grid: OutlineGrid): OutlineResult {
       weak: budget.filter((g) => judged.get(g.id)?.bridged === true).map((g) => ({ gap: g, exposedM2: judged.get(g.id)?.exposedM2 ?? 0, limitM2: judged.get(g.id)?.limitM2 ?? 0 })),
     },
     pocketMouths: budget.filter((g) => open.has(g.id)).map((g) => ({ gap: g, exposedM2: judged.get(g.id)?.exposedM2 ?? 0, limitM2: judged.get(g.id)?.limitM2 ?? 0 })),
-    unjudged: weak.length - judged.size,
+    unjudged: strict ? 0 : weak.length - judged.size,
     floods,
   }
 }

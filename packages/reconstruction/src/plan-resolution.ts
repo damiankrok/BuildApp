@@ -604,7 +604,9 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
   // such a mouth exists, and within the same budget.
   const withShutMouths: Decomposition[] = []
   const mouthsLeftOpen = (draft: StructuralLayoutDraft): boolean =>
-    (draft.base?.decomposition.wideOpenings ?? []).some((w) => w.decision === 'OPEN_SIDE' && (w.kind === 'BAY_MOUTH' ? w.evidence.corners === true : (w.evidence.pocketM2 ?? 0) > 0))
+    (draft.base?.decomposition.wideOpenings ?? []).some((w) => w.decision === 'OPEN_SIDE' && (w.kind === 'BAY_MOUTH' ? w.evidence.corners === true : (w.evidence.pocketM2 ?? 0) > 0)) ||
+    // 005C: a garage the opening-aware boundary names by its relations, open-mouthed in the first reading.
+    (draft.base?.decomposition.boundary?.bodies ?? []).some((b) => b.relation === 'OPEN_MOUTH_GARAGE')
   let total = bounded.length * 4
   let index = 0
   const readAll = (d: Decomposition): void => {

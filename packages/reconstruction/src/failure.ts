@@ -50,6 +50,14 @@ export const RECONSTRUCTION_FAILURE_CODES = [
    * them and the evidence that is missing; no house is built on it.
    */
   'METRIC_RESOLUTION_INCONCLUSIVE',
+  /**
+   * 005C: the run stopped, and the base plan's outline itself is in question:
+   * the strict reading (drawn openings only) and the reading that bridges
+   * blank door-sized gaps by what lies behind them both adopt an outline, and
+   * their areas differ by more than 6 %. The diagnostics name both and their
+   * support; the published figure never chooses between them.
+   */
+  'BOUNDARY_RESOLUTION_INCONCLUSIVE',
   /** An upper plan could not be registered onto the one below. */
   'PLAN_STOREY_ALIGNMENT_FAILED',
   /** An upper plan fits two places on the one below almost equally well. */
@@ -93,6 +101,7 @@ export const FAILURE_TITLES: Record<ReconstructionFailureCode, string> = {
   PLAN_LAYOUT_REJECTED: 'The floor-plan reading contradicts the project data',
   PLAN_RESOLUTION_INCONCLUSIVE: 'No reading of the floor plan holds up',
   METRIC_RESOLUTION_INCONCLUSIVE: 'The floor plan’s scale cannot be established',
+  BOUNDARY_RESOLUTION_INCONCLUSIVE: 'The building’s outline cannot be established',
   PLAN_STOREY_ALIGNMENT_FAILED: 'The storeys could not be aligned',
   PLAN_STOREY_ALIGNMENT_AMBIGUOUS: 'The storeys align two ways',
   VIEW_REGISTRATION_NO_ANCHORS: 'The views could not be registered',
@@ -166,6 +175,18 @@ export type PlanDiagnostics = {
   wideOpenings: Array<{ kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
   bays: Array<{ side: string; rect: Rect; mouth: string }>
   hypotheses: Array<{ id: string; builtCells: number; closedOpenings: number; score: number; chosen: boolean; why: string }>
+  /** 005C: the opening-aware boundary: gap classes, the candidates' support, the policies and every part's relation. */
+  boundary?: {
+    accepted: boolean
+    gaps: Record<string, number>
+    bridged: { strong: number; weak: number; pocketMouths: number; unjudged: number }
+    candidates: Array<{ id: string; cells: number; areaM2: number; perimeterM: number; wallM: number; strongOpeningM: number; weakOpeningM: number; unsupportedM: number; gapsBridged: number; maxBridgedGapM: number }>
+    extensions: Array<{ cells: number; areaM2: number; continuesAcrossM: number; accepted: boolean }>
+    policies: { strictAreaM2: number; strictAccepted: boolean; exclusionAreaM2: number; exclusionAccepted: boolean; disagree: boolean }
+    bodies: Array<{ relation: string; built: boolean; enclosed: boolean; areaM2: number; rect: Rect; junctionWallShare: number; sideWallShare: number; mouthM?: number }>
+    shutGarageMouths: number
+    why: string
+  }
   masses: Array<{ id: string; rect: Rect }>
 }
 

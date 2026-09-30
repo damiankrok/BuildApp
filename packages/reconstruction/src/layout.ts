@@ -41,7 +41,7 @@ import { adaptiveInkMask, inkChannel, runLengthBands } from '@buildapp/source-cv
 import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
-import { bandWallThickness, decomposePlan, planBodies, planExtent, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
+import { bandWallThickness, decomposePlan, planBodies, planExtent, recutSlivers, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
 import type { ExtentProvenance, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
 import type { WallWitness } from './plan-extent.js'
@@ -298,7 +298,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
       const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), ...(shutMouths ? { shutPocketMouths: true } : {}) })
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
@@ -975,9 +975,14 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   // The bodies of the base plan, wanted twice: once to say which of them each
   // upper storey stands on, and once to build the masses from.
   const walledFirst = options.plan?.merge === 'WALLED_FIRST' && options.plan.frameId === base.frame.id ? walledFirstRegions(base.decomposition, base.registration, MIN_MASS_WALL_FRACTION) : undefined
-  const built = walledFirst
+  const bodies = walledFirst
     ? planBodies({ ...base.decomposition, regions: [...walledFirst.regions, ...base.decomposition.regions.filter((r) => r.classification !== 'BUILT')] })
     : planBodies(base.decomposition)
+  // 005C: on a plan cut on its opening-aware outline, a strip the largest-first cut left is joined to the part of the
+  // neighbour it lies along. The long-band box's plans are cut as they always were.
+  const built = base.decomposition.envelope?.outline
+    ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(wallM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION)
+    : bodies
   if (walledFirst && walledFirst.demoted.length > 0) {
     const cellsAt = new Map(base.decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
     const areaM2 = walledFirst.demoted.reduce((a, d) => {
