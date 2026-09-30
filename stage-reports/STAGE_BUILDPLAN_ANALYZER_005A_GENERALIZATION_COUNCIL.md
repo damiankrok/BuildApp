@@ -13,7 +13,7 @@ severity-typed warnings; gated them; and then ran two blind ARCHON holdouts draw
 
 | component | verdict | why |
 | --- | --- | --- |
-| ANALYZER GENERALIZATION ARCHITECTURE | **PARTIAL** | Built and gated:<br>• the Council audit;<br>• logical source identity;<br>• a bounded resolver with honest acceptance;<br>• severity-typed warnings;<br>• the derived no-development-house guard.<br>Short of generality: the resolver weighs readings of one set of metric evidence, and the scale, the text orientation and the plan extent below it are still single winners (AD 3 and AD 10). Both blind houses failed there. |
+| ANALYZER GENERALIZATION ARCHITECTURE | **PARTIAL** | Built and gated:<br>• the Council audit;<br>• logical source identity;<br>• a bounded resolver with honest acceptance;<br>• severity-typed warnings;<br>• the derived no-development-house guard.<br>Short of generality: the resolver weighs readings of one set of metric evidence, and the scale, the text orientation and the plan extent below it are still single winners (AD 3 and AD 10). The Council named two of them before any code (root assumptions 2 and 3, section F). The stage worked around them instead of removing them, and both blind houses failed there. |
 | OWNER DEVELOPMENT CASES | **PARTIAL** | Achieved:<br>• tracked Kosaćce equals clean Kosaćce, byte for byte, on the desktop;<br>• e-OZE completes;<br>• Marcówki and G2E are unchanged.<br>Still open:<br>• the phone's single-copy Kosaćce case is refused as `PLAN_RESOLUTION_INCONCLUSIVE`, and why the phone lost three copies is unexplained;<br>• e-OZE is resolved on the published figure alone, with no witness (LIMITING; `verdict.mjs` fails it). |
 | TRUE PROGRESS TELEMETRY | **PASS** | Built and tested:<br>• real subphase counts, a heartbeat and last activity;<br>• slow told apart from unresponsive;<br>• a cancel that lands mid-computation.<br>The longest silence went from 144–175 s to 2.1–3.7 s, and was 2.1–2.2 s on both blind runs. Seeing it on the OWNER's phone is in the checklist. |
 | BLIND ARCHON HOLDOUT 1 (`dom-w-jablonkach`) | **ALGORITHMIC_FAIL** | Section Z |
@@ -623,8 +623,17 @@ their rotated labels were read upside down.
 - **How it became a wrong house.** Two downstream decisions did that:
   - the chain solver's digit correction, which fits a misreading to a scale the misreading then anchors;
   - an interior chain accepted as the plan's extent without being marked weak.
+- **The Council named both before any code** (section F):
+  - **Root assumption 3**, "one pooled scale, with losing readings rewritten to agree". It rewrote e-OZE's
+    `1601` as `1801` (section J) and holdout 1's `006` as `806`.
+  - **Root assumption 2**, "the extent is the widest read chain". When the overall chain is unread, the widest
+    read chain is an interior one: holdout 2.
 - **What the resolver did.** It ran on both houses (71 and 11 readings) and refused to choose, correctly: every
   reading it had was built on the misread metric evidence.
+  - Its lattice scale comes only from the reader's own **unedited** readings of long spans. On holdout 1 that
+    long span's unedited reading was `006`, and all four best readings used the registered scale.
+  - This stage worked around assumptions 2 and 3 in the resolver, for the readings they spoil. It did not
+    remove them.
 - **What this changes.** The development-set work did not generalize to these two houses, and the stage is
   PARTIAL.
 - **What happens to the families.** Per T5, both now join the development set: sealing their packages extends
@@ -632,19 +641,73 @@ their rotated labels were read upside down.
 
 ## AB. Final CI
 
-- **On `PRE_HOLDOUT_SHA` (`56ca1e3`).** CI run 96 was green on every job, including the three 005A jobs: the
-  known set judged by rule, the resolver, and progress.
-- **After the freeze.** Only evidence and documents changed (`git diff 56ca1e3..HEAD -- packages apps .github` is
-  empty).
-  - Locally, on the holdout evidence commit, the derived guard and the holdout-selector suite pass with the two
-    blind packages sealed.
-  - The run on the head that carries this report, and the dispatch that builds the OWNER APK, are recorded in
-    the commit after this one.
+| commit | run | event | result |
+| --- | --- | --- | --- |
+| `56ca1e3` = `PRE_HOLDOUT_SHA` | 96 | push | **green**, every job |
+| `226f9ce`, the report | 98 | `workflow_dispatch`, `owner_apk=true` | **green**, every job, including the OWNER release |
+| `226f9ce`, the report | 97 | push | **green**, every job |
+
+- **The jobs.** The runs cover:
+  - core tests and typecheck;
+  - the three 005A jobs: `analyzer-generalization` (the known set judged by rule), `plan-resolver` and
+    `analyzer-progress`;
+  - the second and third houses;
+  - Node 18 parity, with no ICU as on Android;
+  - the local analyzer on the emulator;
+  - the Android APK, the 3D entry gate and the UI evidence gate on the emulator;
+  - Playwright;
+  - the API container;
+  - the assemblies.
+
+  The `preview-latest` publisher is skipped on a dispatch by design. The deploy job has no deployment
+  configured.
+- **The code tested is the frozen code.** `git diff 56ca1e3..226f9ce -- packages apps .github` is empty. What the
+  runs on `226f9ce` add over run 96 is the derived guard with both blind houses sealed, and it passes.
+- **After it.** The commit that records this section changes only this report and `PROJECT_STATUS.md`.
 
 ## AC. OWNER APK
 
-Recorded after the dispatch, in the commit after this one. The dispatch runs on the head that carries this
-report, with `owner_apk=true`.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`,
+from `workflow_dispatch` run 98.
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 30 669 923 bytes, `application/vnd.android.package-archive`; the release is a prerelease |
+| SHA-256 | `f27833554c41b5e75a1ff43a8a001b259f5779f9559e46d172057d7c9c86f9af`, equal to the release notes and to GitHub's asset digest |
+| ABI | `aapt dump badging`: `native-code: 'arm64-v8a'`. There are 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1098**, versionName `0.98.0-preview`, minSdk 26, targetSdk 35 |
+| commit | the notes and `VERSION.txt` say `226f9ce070188a2f9ea777fc98b7a4e2e0505b46`. Its analyzer code is the frozen code, and the embedded analyzer bundle declares `PLAN_RESOLVER_VERSION = "1.2.0"` |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes. It installs over any preview build with a lower run number |
+| release notes | name the run, the branch, the commit, the SHA-256 and the version block |
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over the previous build, then check each item.
+
+1. **Progress never looks frozen.**
+   - Analyse any link and watch the card during "Odczytuję wymiary i opisy otworów".
+   - Expected: the count ("arkusz N z M"), the step ("odczyt liczb: grupa …", "opisy otworów: …"),
+     "Ten krok trwa …" and "Ostatnia aktywność N s temu" all keep moving.
+   - The percent never reads 100 % before the end.
+2. **Cancel.** Press "Przerwij" in the middle of that step. Expected: "Przerywam…", then "Analizę przerwano."
+   within seconds, not at the end of the step.
+3. **Kosaćce, the tracked link** (the one with `?_gl=…&gclid=…`).
+   - Expected: the same house as the clean link.
+   - If the phone again receives one plan copy of four, expect a named refusal ("Sprawdzam inne odczyty rzutu",
+     then a typed stop) instead of a 33 m² house.
+   - Either way, send the code and "Szczegóły analizy": they now list every lost address and the drawing it
+     claimed.
+4. **Rarytasy e-OZE.**
+   - Expected: it completes as "Model gotowy z ograniczeniami", and the warnings say the plan was resolved by
+     hypothesis.
+   - Question for the OWNER: does the house look like the page?
+5. **Marcówki.** Expected: the same house as before, still "z ograniczeniami", now counting only the one limiting
+   warning.
+6. **Optional: a blind house.** Open one of the two holdout links.
+   - Expected: a typed stop explaining that the plan reading contradicts the project's data, and no wrong house.
+   - This is the defect the next stage is for.
 
 ## AD. Residual genericity debt
 
