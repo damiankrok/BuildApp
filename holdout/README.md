@@ -91,3 +91,30 @@ the time. The holdout is a smoke alarm and is reported as one.
 commit can have. It named the families `dom-w-nawlociach` and `dom-w-renetach`. If the real draw lands on
 either family, that is reported with the verdict. The families were not excluded afterwards: excluding
 families after seeing a draw would itself be a selection.
+
+## Round 2 (BUILDPLAN-ANALYZER-005B)
+
+The same protocol, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Pool.** The committed round-1 pool (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`, 3085
+   addresses, enumerated 2026-09-30T00:32Z). No project page is opened to build it.
+2. **Excluded families** (`excluded-families-round-2.txt`, 38 families, 551 pool addresses; 2534 drawable):
+   - every round-1 exclusion (the 25 families the development pages link to);
+   - the three development families (`dom-w-kosaccach`, `dom-w-marcowkach`, `dom-w-rarytasach`; already
+     outside the pool);
+   - the two round-1 draws, now development houses: `dom-w-jablonkach` and `willa-miranda`;
+   - every family any development page links to, the two round-1 draws' pages included — taken from those
+     pages' cached HTML, addresses only (13 families not in the round-1 list).
+   - `EXCLUDED_FAMILIES_ROUND_2_SHA256 = 7b36740a85f41b2c766d306eacfb377c471592f7a945f09345efbe45c798ce13`.
+   - **Disclosure.** The round-1 dummy draw named `dom-w-nawlociach` and `dom-w-renetach`; they were never
+     opened and stay in the pool, as in round 1.
+3. **Freeze.** `PRE_HOLDOUT_2_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+4. **Draw.** `seed = SHA256(PRE_HOLDOUT_2_SHA + "BUILDPLAN-005B-BLIND-HOLDOUT-ROUND-2")`; the picks are made as
+   in round 1 (`i1 = seed mod n`; `i2 = SHA256(seed + ":second") mod m` over the other families):
+   `node holdout/select.mjs select --round 2 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   The ledger line records the label and the exclusion file.
+5. **Run once, verdict, burn** as in round 1, with `holdout/verdict.mjs` unchanged. A typed
+   `METRIC_RESOLUTION_INCONCLUSIVE` is algorithmic unless a checklist item is confirmed, exactly like
+   `PLAN_RESOLUTION_INCONCLUSIVE`. An `ALGORITHMIC_FAIL` is not patched in 005B: its first bad evidence
+   decision is recorded and becomes the next stage's input.

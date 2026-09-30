@@ -3,6 +3,10 @@
 // It NEVER fetches a project page. usage:
 //   node holdout/select.mjs enumerate --out holdout/           (needs network; run BEFORE the freeze commit)
 //   node holdout/select.mjs select --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+//   node holdout/select.mjs select --round 2 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 2 (BUILDPLAN-005B) draws with its own label from the same committed pool, less
+// holdout/excluded-families-round-2.txt: every round-1 exclusion, the two round-1 draws, and every family the
+// development pages (round-1 draws included) link to.
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -12,6 +16,10 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSy
 import { join, resolve } from 'node:path'
 
 const LABEL = 'BUILDPLAN-005A-BLIND-HOLDOUT'
+const ROUNDS = {
+  1: { label: LABEL, excluded: 'excluded-families.txt' },
+  2: { label: 'BUILDPLAN-005B-BLIND-HOLDOUT-ROUND-2', excluded: 'excluded-families-round-2.txt' },
+}
 const HOST = 'https://www.archon.pl'
 const URL_RE = /^https:\/\/www\.archon\.pl\/projekty-domow\/(projekt-[a-z0-9-]+)-(m[0-9a-f]{13})$/   // canonical form, no query/fragment/slash
 const PREP = new Set(['w', 'we', 'pod', 'przy', 'na', 'nad', 'u', 'za', 'przed', 'obok', 'ze', 'z', 'do', 'o', 'po'])
@@ -52,14 +60,14 @@ async function enumerate(outDir, root) {
  * every address of ANOTHER family (`SHA256(seed + ":second") mod m`) — not "the next index", which could only
  * ever reach the first address of each family. Indices are into the drawable list, which is in pool order.
  */
-export function select(poolText, preHoldoutSha, excludedFamilies = new Set()) {
+export function select(poolText, preHoldoutSha, excludedFamilies = new Set(), label = LABEL) {
   if (!/^[0-9a-f]{40}$/.test(preHoldoutSha)) throw new Error('PRE_HOLDOUT_SHA must be 40 lowercase hex')
   const pool = poolText.split('\n').filter(Boolean)
   const sorted = [...pool].sort()
   if (sorted.join('\n') !== pool.join('\n')) throw new Error('pool is not in canonical order')
   const familyOf = (u) => family(URL_RE.exec(u)[1])
   const drawable = pool.filter((u) => !excludedFamilies.has(familyOf(u)))
-  const seed = sha256(preHoldoutSha + LABEL)
+  const seed = sha256(preHoldoutSha + label)
   const i1 = Number(BigInt(`0x${seed}`) % BigInt(drawable.length))
   const f1 = familyOf(drawable[i1])
   const others = drawable.map((u, i) => i).filter((i) => familyOf(drawable[i]) !== f1)
@@ -79,13 +87,15 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (head !== sha) throw new Error(`HEAD ${head} is not the declared PRE_HOLDOUT_SHA`)
     if (git('status', '--porcelain')) throw new Error('working tree is not clean')
     if (resolve(arg('pool') ?? '') !== join(root, 'holdout', 'pool.txt')) throw new Error('the pool is the tracked holdout/pool.txt, nothing else')
-    git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', 'holdout/excluded-families.txt')
+    const round = ROUNDS[arg('round') ?? '1']
+    if (!round) throw new Error('--round is 1 or 2')
+    git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', `holdout/${round.excluded}`)
     const text = readFileSync(join(root, 'holdout', 'pool.txt'), 'utf8')
     const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256
     if (sha256(text) !== arg('pool-sha256') || sha256(text) !== declared) throw new Error('pool hash does not match the declared and committed POOL_SHA256')
-    const exclusions = readFileSync(join(root, 'holdout', 'excluded-families.txt'), 'utf8')
-    const r = select(text, sha, new Set(exclusions.split('\n').filter(Boolean)))
-    appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify({ at: new Date().toISOString(), preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), ...r }) + '\n')   // append-only: a draw is burned once written, and committed after the runs
+    const exclusions = readFileSync(join(root, 'holdout', round.excluded), 'utf8')
+    const r = select(text, sha, new Set(exclusions.split('\n').filter(Boolean)), round.label)
+    appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify({ at: new Date().toISOString(), ...(round.label !== LABEL ? { label: round.label, excludedFamiliesFile: round.excluded } : {}), preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), ...r }) + '\n')   // append-only: a draw is burned once written, and committed after the runs
     console.log(JSON.stringify(r, null, 2))
   }
 }
