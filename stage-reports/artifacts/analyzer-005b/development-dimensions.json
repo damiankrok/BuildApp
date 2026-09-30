@@ -1,0 +1,53 @@
+{
+  "schema": "buildapp.development-dimensions",
+  "schemaVersion": "1.0.0",
+  "what": "Overall dimensions printed on each development house's ground-floor plan, in centimetres, as text facts (BUILDPLAN-ANALYZER-005B). Read by the production hard-code guard (tests/architecture/generalization.test.ts): a distinctive one of these appearing in production code or comments is a fingerprint of the benchmark. No drawing is stored.",
+  "houses": [
+    {
+      "key": "marcowki",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+      "overallDimensionsCm": [
+        1205,
+        1260
+      ]
+    },
+    {
+      "key": "rarytasy-g2e",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+      "overallDimensionsCm": [
+        1720,
+        2520
+      ]
+    },
+    {
+      "key": "kosacce-clean",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+      "overallDimensionsCm": [
+        1260,
+        1660
+      ]
+    },
+    {
+      "key": "rarytasy-eoze",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+      "overallDimensionsCm": [
+        1560
+      ]
+    },
+    {
+      "key": "dom-w-jablonkach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+      "overallDimensionsCm": [
+        1100
+      ]
+    },
+    {
+      "key": "willa-miranda",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+      "overallDimensionsCm": [
+        1410,
+        1500
+      ]
+    }
+  ]
+}
