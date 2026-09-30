@@ -2491,11 +2491,11 @@ export function boundaryExtension(
    * Weigh one outline against the box: its parts beyond the box, which of them continue the box's interior across an
    * edge with no wall and no opening (or are named in `forced`: a garage whose mouth the reading shut), and the
    * outline adopted — the box's cells the outline confirms, every cell the box's reading built (where the outline
-   * leaks past a wall the box held, the box stands), and the accepted parts. A part is grown only through edges
-   * with no wall on them or through a doorway (005C post-review): a room behind its door belongs with the room in
-   * front of it, a yard behind a solid wall does not ride in with the wing beside it. A part walled off from the box
-   * on every shared edge is rejected, and touching the box does not bring it back: a planter or a pier against the
-   * front wall encloses ground, not a room of this building.
+   * leaks past a wall the box held, the box stands), and the accepted parts. An accepted part keeps only what its
+   * continuation reaches through open edges and openings, and the wall cells around that (005C post-review): a room
+   * behind its door belongs with the room in front of it, a yard behind a solid wall does not ride in with the wing
+   * beside it. A part walled off from the box on every shared edge is rejected, and touching the box does not bring
+   * it back: a planter or a pier against the front wall encloses ground, not a room of this building.
    */
   const adopt = (outline: OutlineResult, forced?: Uint8Array): { extensions: BoundaryExtension[]; accepted: Uint8Array; final: Uint8Array; any: boolean } => {
     const extensions: BoundaryExtension[] = []
@@ -2527,7 +2527,6 @@ export function boundaryExtension(
               if (!valid(n.jx, n.jy)) continue
               const j = index(n.jx, n.jy)
               if (seen[j] === 1 || outline.inside[j] !== 1 || inA[j] === 1) continue
-              if (n.edge.closed && !n.door) continue
               seen[j] = 1
               stack.push([n.jx, n.jy])
             }
@@ -2545,6 +2544,53 @@ export function boundaryExtension(
           }
           const shut = forced !== undefined && members.some((m) => forced[index(m.ix, m.iy)] === 1)
           const ok = across > 0 || shut
+          // What the continuation carries (005C post-review): from the cells entered from the box's rooms (or a shut
+          // garage's), through edges with no wall or with an opening in them — a room behind its door — and the
+          // wall-thickness cells bordering what that reaches. A yard or a planter behind a solid wall is walled off
+          // from the rooms that continue the box, and does not ride in with them.
+          if (ok) {
+            const inPart = new Set(members.map((m) => index(m.ix, m.iy)))
+            const thin = (k: number): boolean => {
+              const kx = k % nx
+              const ky = (k - kx) / nx
+              return Math.min(linesX[kx + 1].px - linesX[kx].px, linesY[ky + 1].px - linesY[ky].px) <= wallPx * 1.5
+            }
+            const kept = new Set<number>()
+            const stack: number[] = []
+            for (const m of members) {
+              const k = index(m.ix, m.iy)
+              // entered from the box's own rooms: across an open edge, or through a door or an opening in its wall
+              const seed = (forced !== undefined && forced[k] === 1) || neighbours(m.ix, m.iy).some((n) => valid(n.jx, n.jy) && inA[index(n.jx, n.jy)] === 1 && outline.inside[index(n.jx, n.jy)] === 1 && (!n.edge.closed || n.edge.bridged > 0 || n.door))
+              if (seed && !kept.has(k)) {
+                kept.add(k)
+                stack.push(k)
+              }
+            }
+            while (stack.length > 0) {
+              const k = stack.pop() as number
+              const kx = k % nx
+              for (const n of neighbours(kx, (k - kx) / nx)) {
+                if (!valid(n.jx, n.jy)) continue
+                const j = index(n.jx, n.jy)
+                if (!inPart.has(j) || kept.has(j)) continue
+                if (n.edge.closed && n.edge.bridged <= 0 && !n.door) continue
+                kept.add(j)
+                stack.push(j)
+              }
+            }
+            for (const m of members) {
+              const k = index(m.ix, m.iy)
+              if (kept.has(k) || !thin(k)) continue
+              if (neighbours(m.ix, m.iy).some((n) => valid(n.jx, n.jy) && kept.has(index(n.jx, n.jy)) && !thin(index(n.jx, n.jy)))) kept.add(k)
+            }
+            const off = members.filter((m) => !kept.has(index(m.ix, m.iy)))
+            if (off.length > 0 && off.length < members.length) {
+              const offM2 = off.reduce((a, m) => a + (linesX[m.ix + 1].px - linesX[m.ix].px) * mppX * (linesY[m.iy + 1].px - linesY[m.iy].px) * mppY, 0)
+              extensions.push({ cells: off, areaM2: round6(offM2), continuesAcrossM: 0, accepted: false, why: `${offM2.toFixed(1)} m² enclosed beside a part that continues the box, but walled off from it: no opening in the wall between` })
+              members.splice(0, members.length, ...members.filter((m) => kept.has(index(m.ix, m.iy))))
+              areaM2 -= offM2
+            }
+          }
           extensions.push({
             cells: members,
             areaM2: round6(areaM2),

@@ -299,10 +299,36 @@ export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: nu
   const g0 = Math.round(from)
   const g1 = Math.round(to)
   const width = Math.max(1, g1 - g0)
-  const band = Math.round(wallPx * 0.75)
   const centre = Math.round(axisPx)
   const ink = (c: number, s: number): number => (axis === 'X' ? inkAt(mask, c, s) : inkAt(mask, s, c))
+  const t = Math.max(3, wallPx)
+  // A jamb's own half-thickness, measured across its ink next to the gap: an exterior wall is often drawn thicker than
+  // the sheet's typical wall, and its glazing at its own faces is inside it.
+  const halfOf = (piece: LinePiece | undefined, side: 'left' | 'right'): number => {
+    // only a stretch of this wall: a wall crossing the line is as thick across as it is long
+    if (!piece || !piece.along) return t / 2
+    const centre = Math.round(piece.axisPx)
+    // a few positions into the jamb, the thickest: a reveal steps the wall thinner at its very edge
+    let best = t / 2
+    for (const k of [2, Math.round(t / 2), Math.round(t)]) {
+      const at = side === 'left' ? piece.to - k : piece.from + k
+      if (at < piece.from || at > piece.to) continue
+      const inked = (c: number): boolean => (axis === 'X' ? inkAt(mask, c, at) : inkAt(mask, at, c)) === 1
+      if (!inked(centre)) continue
+      let lo = 0
+      let hi = 0
+      // at most twice the sheet's wall: more is a corner or a pier block, not this wall's thickness
+      while (lo < t && inked(centre - lo - 1)) lo += 1
+      while (hi < t && inked(centre + hi + 1)) hi += 1
+      best = Math.max(best, (lo + hi + 1) / 2)
+    }
+    return best
+  }
+  const halfLeft = halfOf(jambs?.left, 'left')
+  const halfRight = halfOf(jambs?.right, 'right')
+  const half = Math.max(halfLeft, halfRight)
   const rows: Array<{ c: number; coverage: number; runs: number }> = []
+  const band = Math.round(Math.max(wallPx * 0.75, half + 2))
   for (let c = centre - band; c <= centre + band; c += 1) {
     let inked = 0
     let runs = 0
@@ -323,17 +349,19 @@ export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: nu
     for (let s = lo; s < hi; s += 1) n += ink(c, s)
     return n / (hi - lo)
   }
-  // Does row `c` run on past a jamb? Along a stretch of wall it shows only where the row lies outside the wall's own
-  // ink; past the jamb's far end it shows beyond a wall's cross-section, beyond the last stretch of the line (where the
-  // wall ends and the building with it), and on a face row anywhere (infill is drawn inside the wall, and glazing
-  // between piers carries on into the next window only on its inner rows).
-  const t = Math.max(3, wallPx)
+  // Does row `c` run on past a jamb? Alongside a stretch of wall it shows as a thin line with open ground between it
+  // and the wall's ink; past the jamb's far end only beyond the last piece of the line, where the wall ends and the
+  // building with it. Past a jamb's far end inside a facade it says nothing: the next window's own lines carry on the
+  // same rows, and a pier between two windows is too short to tell from a wall crossing the line.
   const past = (c: number, piece: LinePiece | undefined, side: 'left' | 'right', ends: boolean): boolean => {
     if (!piece) return false
-    const off = Math.abs(c - piece.axisPx)
     const near = side === 'left' ? piece.to : piece.from
-    if (off > t / 2 + 1 && share(c, near, side === 'left' ? Math.max(piece.from, near - 2 * t) : Math.min(piece.to, near + 2 * t)) >= 0.7) return true
-    if (piece.along && !ends && off < t / 2 - 1.5) return false
+    const span: [number, number] = [near, side === 'left' ? Math.max(piece.from, near - 2 * t) : Math.min(piece.to, near + 2 * t)]
+    const towardWall = c > piece.axisPx ? -1 : 1
+    const own = side === 'left' ? halfLeft : halfRight
+    const separate = Math.abs(c - piece.axisPx) > own + 1 && share(c, ...span) >= 0.7 && share(c + towardWall * 2, ...span) <= 0.3
+    if (separate) return true
+    if (!ends) return false
     const far = side === 'left' ? piece.from : piece.to
     return share(c, side === 'left' ? far - t : far, side === 'left' ? far : far + t) >= 0.7
   }
@@ -348,7 +376,7 @@ export function gapStrokes(mask: Mask, axis: 'X' | 'Y', axisPx: number, from: nu
       coverage: round6(best.coverage),
       runs: best.runs,
       continuous: best.runs <= 2,
-      inWall: Math.abs(best.c - axisPx) <= t / 2 + 1,
+      inWall: Math.abs(best.c - axisPx) <= half + 1,
       runsPast: past(best.c, jambs?.left, 'left', jambs?.leftEnds ?? false) || past(best.c, jambs?.right, 'right', jambs?.rightEnds ?? false),
     })
     group = []
@@ -392,13 +420,13 @@ export function patternAcross(mask: Mask, axis: 'X' | 'Y', axisPx: number, from:
 
 /**
  * What is drawn across a gap, from the lines that can be its infill: continuous, inside the wall's thickness, and
- * stopping at the jambs. Two or three is glazing (four or more is hatching or treads); one on the axis a leaf; one at a
+ * stopping at the jambs. Two to four is glazing (a frame's face lines and the glass; more is a hatch); one on the axis a leaf; one at a
  * face a vehicle door; a line that runs on past a jamb or lies outside the wall is line work, and counts for nothing.
  */
 export function gapSignature(strokes: readonly GapStroke[], wallPx: number): { signature: BoundaryGap['signature']; infill: GapStroke[] } {
   const infill = strokes.filter((s) => s.continuous && s.inWall && !s.runsPast)
   const signature: BoundaryGap['signature'] =
-    infill.length >= 2 && infill.length <= 3 ? 'GLAZING' : infill.length === 1 ? (Math.abs(infill[0].offsetPx) <= wallPx * 0.25 ? 'LEAF_AXIS' : 'LEAF_FACE') : strokes.length > 0 ? 'DASHED' : 'BLANK'
+    infill.length >= 2 && infill.length <= 4 ? 'GLAZING' : infill.length === 1 ? (Math.abs(infill[0].offsetPx) <= wallPx * 0.25 ? 'LEAF_AXIS' : 'LEAF_FACE') : strokes.length > 0 ? 'DASHED' : 'BLANK'
   return { signature, infill }
 }
 
@@ -519,7 +547,7 @@ export function withCallout(gap: BoundaryGap, callout: GapCallout, maxWideOpenin
  *
  * A leg — from a line's end pier to a perpendicular grid line inside that end
  * stretch — is bridged when it is no wider than a lintel spans, its pier is a
- * stretch of WALL, glazing (two or three lines inside the wall, stopping at the
+ * stretch of WALL, glazing (two to four lines inside the wall, stopping at the
  * pier) is drawn along it, and the other facade reaches the corner: the
  * perpendicular line has wall-thick ink within a wall of it, or a leg of its
  * own ending there. A leg with anything less drawn along it is where the wall
