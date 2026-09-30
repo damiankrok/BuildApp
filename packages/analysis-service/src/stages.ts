@@ -81,11 +81,17 @@ export type AnalysisProgress = {
   stageCount: number
   /** How far through this stage, when the stage has countable units; 0 at its start. */
   stageFraction: number
-  /** Overall, 0..1. Never decreases within one run. */
+  /** Overall, 0..1. Never decreases within one run; at most `RUNNING_PROGRESS_CAP` until the run has ended. */
   progress: number
   /** A short fact about where it is, e.g. "asset 4 of 20". Never a path. */
   detail?: string
 }
+
+/**
+ * The most a running report may say (005A). The last stage's last step is not the run's end: the
+ * result is still being written and handed over. 100 % belongs to the terminal record alone.
+ */
+export const RUNNING_PROGRESS_CAP = 0.99
 
 export function progressEvent(stage: AnalysisStage, stageFraction = 0, detail?: string): AnalysisProgress {
   return {
@@ -93,7 +99,7 @@ export function progressEvent(stage: AnalysisStage, stageFraction = 0, detail?: 
     stageIndex: ANALYSIS_STAGES.indexOf(stage),
     stageCount: ANALYSIS_STAGES.length,
     stageFraction: Math.min(1, Math.max(0, stageFraction)),
-    progress: progressAt(stage, stageFraction),
+    progress: Math.min(RUNNING_PROGRESS_CAP, progressAt(stage, stageFraction)),
     ...(detail ? { detail } : {}),
   }
 }

@@ -383,6 +383,9 @@
     <string name="analyzer_step_callouts">opisy otworów: %1$d z %2$d</string>
     <string name="analyzer_step_cameras">wizualizacje: %1$d z %2$d</string>
     <string name="analyzer_step_elapsed">Ten krok trwa %1$s</string>
+    <string name="analyzer_duration_seconds">%1$d s</string>
+    <string name="analyzer_duration_minutes">%1$d min %2$d s</string>
+    <string name="analyzer_last_activity">Ostatnia aktywność %1$d s temu</string>
     <string name="analyzer_liveness_heavy">Nadal analizuję — ten krok jest obliczeniowo ciężki.</string>
     <string name="analyzer_liveness_silent">Brak odpowiedzi analizatora od %1$d s</string>
     <string name="analyzer_liveness_silent_hint">Możesz przerwać analizę albo jeszcze chwilę poczekać.</string>

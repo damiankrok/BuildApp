@@ -365,8 +365,9 @@ private fun JobProgress(
     cancelling: Boolean,
     onCancel: (() -> Unit)?,
 ) {
-    // Exactly the analyzer's value. It is never animated or advanced here.
-    val progress = (status?.progress ?: 0.0).coerceIn(0.0, 1.0).toFloat()
+    // Exactly the analyzer's value. It is never animated or advanced here, and a run that has not
+    // ended never reads 100 %, whatever an older analyzer sent (005A).
+    val progress = (status?.progress ?: 0.0).coerceIn(0.0, RUNNING_PROGRESS_MAX).toFloat()
     val percent = (progress * 100).roundToInt()
     val stage = status?.stage
     Column(verticalArrangement = Arrangement.spacedBy(Space.s)) {
@@ -472,8 +473,11 @@ private fun AnalyzerActivity(status: JobStatus?) {
             overflow = TextOverflow.Ellipsis,
         )
         step?.let { StatusText(it, maxLines = 1) }
-        tracker.stepElapsedMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_step_elapsed, minutesSeconds(ms)), maxLines = 1) }
-        when (val verdict = tracker.verdict(now)) {
+        tracker.stepElapsedMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_step_elapsed, duration(ms)), maxLines = 1) }
+        val verdict = tracker.verdict(now)
+        // The last sign of life, counted on this phone; a silence long enough to matter has its own card below.
+        if (verdict !is Liveness.NoResponse) tracker.sinceHeartbeatMs(now)?.let { ms -> StatusText(stringResource(R.string.analyzer_last_activity, (ms / 1000).toInt()), maxLines = 1) }
+        when (verdict) {
             is Liveness.HeavyStep -> StatusText(stringResource(R.string.analyzer_liveness_heavy), modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, color = Palette.Ink)
             is Liveness.Waiting -> StatusText(stringResource(R.string.analyzer_liveness_waiting, (verdict.forMs / 1000).toInt()), modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }, color = Palette.Ink)
             is Liveness.NoResponse -> Column(
@@ -488,9 +492,12 @@ private fun AnalyzerActivity(status: JobStatus?) {
     }
 }
 
-private fun minutesSeconds(ms: Long): String {
-    val seconds = (ms / 1000).coerceAtLeast(0)
-    return String.format(PRODUCT_LOCALE, "%d:%02d", seconds / 60, seconds % 60)
+/** "42 s", "1 min 42 s": how long, in the words the progress lines use. */
+@Composable
+private fun duration(ms: Long): String {
+    val seconds = (ms / 1000).coerceAtLeast(0).toInt()
+    return if (seconds < 60) stringResource(R.string.analyzer_duration_seconds, seconds)
+    else stringResource(R.string.analyzer_duration_minutes, seconds / 60, seconds % 60)
 }
 
 @Composable
@@ -856,3 +863,6 @@ private fun hostOf(url: String): String = try {
 }
 
 private const val NOTICE_MS = 6_000L
+
+/** A running analysis never reads 100 %: that belongs to the finished record. */
+private const val RUNNING_PROGRESS_MAX = 0.99

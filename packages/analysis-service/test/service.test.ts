@@ -13,7 +13,7 @@ import { loadBundle, sha256 } from '@buildapp/mobile-scene'
 import { genericProjectPageAdapter } from '@buildapp/source-package'
 import { serializeModel } from '@buildapp/model'
 import { verifyReplay } from '@buildapp/reconstruction'
-import { ANALYSIS_STAGES, AnalysisError, hashesOf, progressAt, runAnalysis, runLinkAnalysis, summaryOf, validateAnalysisUrl } from '../src/index.js'
+import { ANALYSIS_STAGES, AnalysisError, RUNNING_PROGRESS_CAP, hashesOf, progressAt, runAnalysis, runLinkAnalysis, summaryOf, validateAnalysisUrl } from '../src/index.js'
 import type { AnalysisProgress } from '../src/index.js'
 import { cli } from '../scripts/reconstruct-v2.js'
 
@@ -74,13 +74,15 @@ describe('runAnalysis on a URL', () => {
     expect(result.warnings.some((w) => /no vision provider ran/.test(w))).toBe(true)
   })
 
-  it('reports every stage, in order, with progress that only moves forward and ends at 1', async () => {
+  it('reports every stage, in order, with progress that only moves forward and never says 100 % before the end', async () => {
     await first
     const stages = [...new Set(events.map((e) => e.stage))]
     expect(stages).toEqual([...ANALYSIS_STAGES])
     for (let i = 1; i < events.length; i++) expect(events[i].progress).toBeGreaterThanOrEqual(events[i - 1].progress)
     expect(events[0].progress).toBe(0)
-    expect(events[events.length - 1].progress).toBe(1)
+    // the last report is the last step of verification: as far as a running report goes, and not 1
+    expect(events[events.length - 1].progress).toBe(RUNNING_PROGRESS_CAP)
+    for (const e of events) expect(e.progress).toBeLessThan(1)
     // reading the drawings reports each one, not a timer
     expect(events.filter((e) => e.stage === 'EXTRACTING_OBSERVATIONS' && /^drawing \d+ of \d+$/.test(e.detail ?? '')).length).toBeGreaterThanOrEqual(3)
     for (const e of events) expect(e.detail ?? '').not.toMatch(/\/(home|tmp|root|usr)\//)

@@ -90,6 +90,16 @@ class LivenessTrackerTest {
     }
 
     @Test
+    fun `the last activity counts from the last heartbeat, not from the last record received`() {
+        val t = LivenessTracker()
+        t.observe(status(seq = 4), now = 1_000)
+        t.observe(status(seq = 4), now = 3_000)
+        assertEquals(5_000L, t.sinceHeartbeatMs(6_000))
+        t.observe(status(seq = 5), now = 6_000)
+        assertEquals(0L, t.sinceHeartbeatMs(6_000))
+    }
+
+    @Test
     fun `a service's step time counts from its heartbeat, not from the poll`() {
         val t = LivenessTracker()
         t.observe(status(seq = 1, ageMs = 3_000), now = 10_000)
