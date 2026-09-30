@@ -268,3 +268,52 @@ describe('determinism', () => {
     expect(JSON.stringify(b.metric.observations)).toBe(JSON.stringify(a.metric.observations))
   })
 })
+
+describe('post-review (005B): a reading turned to fit a scale never witnesses it', () => {
+  // The drawing is at 2.00 cm/px; its vertical labels are printed bottom to top (CW), and the page vote
+  // kept their half-turn shadows. One chain's shadow happens to fit the vote's wrong 1.5 cm/px.
+  const ink = (x: number, from: number, to: number): { x0: number; y0: number; x1: number; y1: number } => {
+    const c = (from + to) / 2
+    return { x0: x - 5 - H, x1: x - 5, y0: c - 18, y1: c + 18 }
+  }
+  const chains = [vChain(700, [100, 400, 700]), vChain(800, [100, 500]), vChain(900, [100, 700])]
+  const d1cw = token('600', ink(700, 100, 400), 'ROTATED_CW')
+  const d1ccw = token('450', ink(700, 100, 400), 'ROTATED_CCW')
+  const d2cw = token('800', ink(700, 400, 700), 'ROTATED_CW')
+  const d2ccw = token('450', ink(700, 400, 700), 'ROTATED_CCW')
+  const eCw = token('300', ink(800, 100, 500), 'ROTATED_CW') // prints 800, misread
+  const eShadow = token('600', ink(800, 100, 500), 'ROTATED_CCW') // the shadow fits 1.5 over 400 px
+  const oCw = token('1200', ink(900, 100, 700), 'ROTATED_CW')
+  const oShadow = token('0021', ink(900, 100, 700), 'ROTATED_CCW')
+  const legacyTokens = [d1ccw, d2ccw, eShadow, oShadow]
+  const raw = [d1cw, d1ccw, d2cw, d2ccw, eCw, eShadow, oCw, oShadow]
+
+  it('a chain that joins a scale stated elsewhere is decided by it, and its joining reading is not counted for it', () => {
+    const { solution, metric } = solve(chains, legacyTokens, raw)
+    const joined = solution.orientationDecisions.find((d) => d.decidedBy === 'AXIS_SELF_CONSISTENCY')
+    expect(joined).toBeDefined()
+    const byScale = metric.observations.filter((o) => o.independence === 'ORIENTATION_BY_SCALE')
+    expect(byScale.map((o) => o.rawText)).toContain('600')
+    // The vote's 1.5 is not confirmed on the strength of a reading turned to fit it.
+    expect(solution.relation).not.toBe('CONFIRMED')
+    expect(['WEAK', 'INCONCLUSIVE']).toContain(solution.confidence)
+  })
+})
+
+describe('post-review (005B): readings that are not counted never erase a counted scale', () => {
+  const small = (t: TextToken): TextToken => ({ ...t, height: 9 })
+  const X = [hChain(900, [100, 700]), hChain(950, [100, 400])]
+  const xT = [hLabel('1200', 900, 100, 700), hLabel('600', 950, 100, 400)]
+  const V = [vChain(1000, [100, 600]), vChain(1050, [100, 600]), vChain(1100, [100, 600])]
+  const vT = V.map((c) => small(vLabel('1020', c.baselinePx, 100, 600)))
+
+  it('two legible horizontal readings state 2.00; three illegible vertical ones at 2.04 do not merge it away', () => {
+    const alone = solve(X, xT).solution
+    expect(alone.relation).toBe('CONFIRMED')
+    const { solution } = solve([...X, ...V], [...xT, ...vT])
+    const counted = solution.hypotheses.find((h) => Math.abs(h.cmPerPixel - 2) < 0.005)
+    expect(counted?.independentGroups).toBe(2)
+    expect(solution.cmPerPixelX).toBeCloseTo(2, 3)
+    expect(solution.confidence).not.toBe('INCONCLUSIVE')
+  })
+})

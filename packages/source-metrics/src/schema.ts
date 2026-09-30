@@ -361,8 +361,10 @@ export const DimensionObservationSchema = z
      * INDEPENDENT: its orientation was settled without the scale it is weighed against.
      * ORIENTATION_BY_OTHER_AXIS: the other axis's scale chose which way up it is, so it is not a witness of isotropy.
      * ORIENTATION_UNDECIDED: nothing settled which way up it is; it witnesses nothing.
+     * ORIENTATION_BY_SCALE: its way up was chosen because, read so, it fits a scale other labels state; it
+     * witnesses nothing about that scale.
      */
-    independence: z.enum(['INDEPENDENT', 'ORIENTATION_BY_OTHER_AXIS', 'ORIENTATION_UNDECIDED']),
+    independence: z.enum(['INDEPENDENT', 'ORIENTATION_BY_OTHER_AXIS', 'ORIENTATION_UNDECIDED', 'ORIENTATION_BY_SCALE']),
     /** RAW until the frame is solved; ACCEPTED when it became a READ segment, REJECTED when the chosen scale contradicts it. */
     status: z.enum(['RAW', 'ACCEPTED', 'REJECTED']),
   })

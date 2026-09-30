@@ -319,7 +319,7 @@ const consistentCluster = (obs: readonly Obs[], tolerancePx: number, plausibilit
 // orientation decisions
 // ---------------------------------------------------------------------------
 
-type ChainChoice = { orientation: TextOrientation | null; decidedBy: OrientationDecision['decidedBy']; why: string }
+type ChainChoice = { orientation: TextOrientation | null; decidedBy: OrientationDecision['decidedBy']; why: string; joinedCm?: number }
 
 const INDEPENDENT_DECISIONS: ReadonlySet<OrientationDecision['decidedBy']> = new Set(['SINGLE_READING', 'CHAIN_SELF_CONSISTENCY', 'AXIS_SELF_CONSISTENCY', 'TYPOGRAPHY', 'AXIS_MAJORITY', 'PAGE_UPRIGHT'])
 
@@ -398,7 +398,11 @@ export function confidenceOf(h: Evidence, rival?: Evidence): MetricConfidence {
     const [a, b] = [evidenceTuple(h), evidenceTuple(rival)]
     const equalStanding = a[0] === b[0] && a[1] === b[1] && a[2] === b[2]
     const ratio = rival.independentWeight / h.independentWeight
-    if (equalStanding && ratio >= 0.8) cls = 'INCONCLUSIVE'
+    // A rival of higher standing (more axes, agreement or an overall reading) contradicts it outright:
+    // it is at most WEAK, never SUPPORTED against better evidence (monotone in the rival's standing).
+    const higherStanding = b[0] > a[0] || (b[0] === a[0] && (b[1] > a[1] || (b[1] === a[1] && b[2] > a[2])))
+    if (higherStanding) cls = RANK[cls] > RANK.WEAK ? 'WEAK' : cls
+    else if (equalStanding && ratio >= 0.8) cls = 'INCONCLUSIVE'
     else if (equalStanding && ratio >= 0.5) cls = (['INCONCLUSIVE', 'INCONCLUSIVE', 'WEAK', 'SUPPORTED'] as const)[RANK[cls]]
   }
   return cls
@@ -466,17 +470,20 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const selfB = consistentCluster(obsOn(c, b), tol, plaus)
     if (selfA && (!selfB || selfA.weight > 2 * selfB.weight)) return { orientation: a, decidedBy: 'CHAIN_SELF_CONSISTENCY', why: `${selfA.members.length} of its labels read bottom to top agree on ${selfA.cm} cm/px` }
     if (selfB && (!selfA || selfB.weight > 2 * selfA.weight)) return { orientation: b, decidedBy: 'CHAIN_SELF_CONSISTENCY', why: `${selfB.members.length} of its labels read top to bottom agree on ${selfB.cm} cm/px` }
-    // (ii) one of its readings joins labels elsewhere on this axis that agree with each other
-    const joins = (o: TextOrientation): boolean => {
-      const cl = axisCluster.get(o)
-      return cl !== undefined && obsOn(c, o).some((x) => Math.abs(x.cm / cl.cm - x.px) <= tol)
-    }
-    const jA = joins(a)
-    const jB = joins(b)
+    // (ii) one of its readings joins labels ELSEWHERE on this axis that agree with each other: the
+    // cluster is built without this chain's own inks, and the reading that joins it is not counted
+    // as a witness of that cluster's scale (it was turned to fit it).
+    const own = new Set([...obsOn(c, a), ...obsOn(c, b)].map((x) => x.region))
+    const elsewhere = (o: TextOrientation): Cluster | undefined => consistentCluster(onAxis(o, verticalChains).filter((x) => x.chain !== c && !own.has(x.region)), tol, plaus)
+    const clA = axisCluster.get(a) ? elsewhere(a) : undefined
+    const clB = axisCluster.get(b) ? elsewhere(b) : undefined
+    const joins = (o: TextOrientation, cl: Cluster | undefined): boolean => cl !== undefined && obsOn(c, o).some((x) => Math.abs(x.cm / cl.cm - x.px) <= tol)
+    const jA = joins(a, clA)
+    const jB = joins(b, clB)
     if (jA !== jB) {
       const o = jA ? a : b
-      const cl = axisCluster.get(o) as Cluster
-      return { orientation: o, decidedBy: 'AXIS_SELF_CONSISTENCY', why: `read ${o === a ? 'bottom to top' : 'top to bottom'}, a label joins ${cl.members.length} vertical labels that agree on ${cl.cm} cm/px` }
+      const cl = (jA ? clA : clB) as Cluster
+      return { orientation: o, decidedBy: 'AXIS_SELF_CONSISTENCY', joinedCm: cl.cm, why: `read ${o === a ? 'bottom to top' : 'top to bottom'}, a label joins ${cl.members.length} vertical labels on other chains that agree on ${cl.cm} cm/px` }
     }
     // (iii) a trailing zero turned half a turn is a leading one, which no dimension is printed with
     const lzA = entriesOn(c, a).filter((e) => hasLeadingZero(e.token.text)).length
@@ -558,8 +565,10 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   chains.forEach((_, c) => {
     const o = choices[c].orientation
     if (!o) return
+    const joined = choices[c].joinedCm
     for (const x of obsOn(c, o)) {
-      x.record = { ...x.record, independence: independenceOf(choices[c].decidedBy) }
+      const byScale = joined !== undefined && Math.abs(x.cm / joined - x.px) <= tol
+      x.record = { ...x.record, independence: byScale ? 'ORIENTATION_BY_SCALE' : independenceOf(choices[c].decidedBy) }
       witnesses.push(x)
     }
   })
@@ -592,7 +601,17 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
         .join(', ')}`,
     }
   }
-  const all = clustersOf(bounded, tol) // plausibility is judged per hypothesis, so a ruled-out scale stays on the record
+  // Hypotheses are the scales the COUNTED witnesses (independent, decisive) support; a reading that is
+  // not counted is attached to the scale it agrees with and can never merge a counted scale away. Scales
+  // only uncounted readings state stay on the record after them. Plausibility is judged per hypothesis,
+  // so a ruled-out scale stays on the record too.
+  const counted = bounded.filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive)
+  const attach = (cl: Cluster): Cluster => {
+    const members = gather(bounded, cl.cm, tol)
+    return { cm: cl.cm, members, weight: round6(members.reduce((a, m) => a + m.weight, 0)) }
+  }
+  const countedClusters = clustersOf(counted, tol).map(attach)
+  const all = [...countedClusters, ...clustersOf(bounded, tol).filter((c) => !countedClusters.some((k) => Math.abs(Math.log(c.cm / k.cm)) < DISTINCT_RATIO))]
   const hypotheses: ScaleHypothesis[] = all
     .map(describe)
     .sort((a, b) => b.independentWeight - a.independentWeight || b.weight - a.weight || a.cmPerPixel - b.cmPerPixel)
@@ -652,6 +671,9 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
 
   // --- 7. the scale each axis is read at, and the chains read at it -----------
   const replaced = relation === 'REPLACED' || relation === 'ADDED'
+  // A chain is read again the right way up at the vote's scale only when independent readings confirmed that
+  // scale: at an unconfirmed one, a re-read that "reads more" only reads more agreement with an unsupported scale.
+  const rereadable = relation === 'CONFIRMED'
   let pooled = L
   let scaleX = legacy.scaleX
   let scaleY = legacy.scaleY
@@ -715,7 +737,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   // different story about the same ink, not more evidence.
   const offers = chains.map((chain, c) => {
     const mine = perChain[c] ?? []
-    if (!replaced && sameEntries(mine, legacy.tokensPerChain[c])) return null
+    if (!replaced && (!rereadable || sameEntries(mine, legacy.tokensPerChain[c]))) return null
     const axisScale = pooled === undefined ? undefined : (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled
     const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale })
     return { solved: s, tokens: [...mine] }
@@ -753,7 +775,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     .map((x) => {
       const choice = choices[x.chain]
       const decidedHere = choice.orientation === x.record.orientation
-      const independence = decidedHere ? independenceOf(choice.decidedBy) : 'ORIENTATION_UNDECIDED'
+      const byScale = choice.joinedCm !== undefined && Math.abs(x.cm / choice.joinedCm - x.px) <= tol
+      const independence: DimensionObservation['independence'] = !decidedHere ? 'ORIENTATION_UNDECIDED' : byScale ? 'ORIENTATION_BY_SCALE' : independenceOf(choice.decidedBy)
       const scale = finalScale(x.record.axis)
       const accepted = acceptedKeys.has(`${x.chain}|${x.entry.token.text}|${x.entry.token.box.x0}|${x.entry.token.box.y0}|${x.record.fromPx}|${x.record.toPx}`)
       const status: DimensionObservation['status'] = accepted && decidedHere ? 'ACCEPTED' : decidedHere && scale !== undefined && Math.abs(x.cm / scale - x.px) > tol ? 'REJECTED' : 'RAW'
@@ -764,7 +787,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   const supporting = selected && relation !== 'LEGACY_UNCONFIRMED' && relation !== 'NO_SCALE' ? selected.witnessIds : [...legacyRegions.values()].map((w) => w.record.id)
   const final = relation === 'LEGACY_UNCONFIRMED' || relation === 'NO_SCALE' ? L : pooled
   const conflicting = final === undefined ? [] : bounded.filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive && Math.abs(w.cm / ((finalScale(w.record.axis) ?? final) as number) - w.px) > tol).map((w) => w.record.id)
-  const measuredAxes = relation === 'LEGACY_UNCONFIRMED' ? legacyStats.independentAxes : (selected?.independentAxes ?? [])
+  // Isotropy is MEASURED only on the same test the ranking uses: substantial readings on both axes and a major one.
+  const measuredBoth = relation === 'LEGACY_UNCONFIRMED' ? legacyStats.axesMeasured : (selected?.axesMeasured ?? false)
   const x = finalScale('X')
   const y = finalScale('Y')
   const solution: FrameMetricSolution = {
@@ -775,7 +799,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     ...(x !== undefined ? { cmPerPixelX: round6(x) } : {}),
     ...(y !== undefined ? { cmPerPixelY: round6(y) } : {}),
     ...(x !== undefined && y !== undefined ? { anisotropy: round6(Math.max(x, y) / Math.min(x, y)) } : {}),
-    isotropy: final === undefined ? 'NONE' : measuredAxes.length === 2 ? 'MEASURED' : 'ASSUMED',
+    isotropy: final === undefined ? 'NONE' : measuredBoth ? 'MEASURED' : 'ASSUMED',
     ...(selected ? { selectedHypothesisId: selected.id } : {}),
     hypotheses,
     legacy: {
