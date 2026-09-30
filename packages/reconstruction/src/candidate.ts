@@ -299,6 +299,15 @@ export type FitResult =
 
 const FIT_CODES = new Set(['OPENING_OUTSIDE_HOST', 'OPENING_TOUCHES_WALL_EDGE', 'OPENING_IN_JUNCTION_ZONE'])
 
+/**
+ * Refusals no fitting can answer (005A, Council F; disagreement 10): an opening
+ * that overlaps one already cut in the same wall, whose host wall is not in the
+ * model, or whose further leaves the model will not pass it through. The model
+ * still refuses it — no validator is softened — and the run no longer dies of
+ * one detail: the opening is not built, and the result says why.
+ */
+const DROP_CODES = new Set(['OPENINGS_OVERLAP', 'UNKNOWN_WALL', 'OPENING_LEAF_INVALID', 'OPENING_LEAF_LEVEL_MISMATCH', 'OPENING_LEAF_NOT_PARALLEL'])
+
 /** Wall material an opening leaves beside it at a corner, and above it under the wall's top. */
 const SIDE_MARGIN_M = 0.05
 const HEAD_MARGIN_M = 0.1
@@ -376,9 +385,21 @@ export function fitOpeningsToHosts(program: readonly BuildingCommand[], label: s
     const describes = command.type === 'setEvidence' && dropped.has(command.targetId)
     if (refers || describes) continue
     const result = applyCommand(model, command)
-    if (!result.ok && command.type === 'cutOpening' && result.errors.every((e) => FIT_CODES.has(e.code))) {
+    if (!result.ok && command.type === 'cutOpening' && result.errors.every((e) => FIT_CODES.has(e.code) || DROP_CODES.has(e.code))) {
       const code = result.errors[0].code
       const openingId = command.id ?? `command-${i}`
+      const unanswerable = result.errors.find((e) => DROP_CODES.has(e.code))
+      if (unanswerable) {
+        dropped.add(openingId)
+        const what =
+          unanswerable.code === 'UNKNOWN_WALL'
+            ? 'a wall it names is not in the model'
+            : unanswerable.code === 'OPENINGS_OVERLAP'
+              ? 'it overlaps an opening already cut in the same wall'
+              : 'the model will not pass it through the further wall it names'
+        fits.push({ openingId, action: 'DROPPED', code: unanswerable.code, why: `not built: ${what} (${unanswerable.message})` })
+        continue
+      }
       const fit = fitted(model, command)
       if ('drop' in fit) {
         dropped.add(openingId)

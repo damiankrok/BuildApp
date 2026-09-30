@@ -4,8 +4,9 @@
  *  - openings the model refuses as not fitting their host are fitted by the
  *    model's own rules — narrowed out of a corner's junction zone, lowered
  *    under the wall's top — and named; one that cannot be kept at a useful
- *    size is dropped with the commands that describe it; any other refusal
- *    is returned as the failure it is;
+ *    size is dropped with the commands that describe it; so is one the model
+ *    has no place for (it overlaps an opening already cut, or its host wall
+ *    is absent: 005A); any other refusal is returned as the failure it is;
  *  - a section's heights are measured from ±0.00, so a missed ±0.00 does not
  *    make the terrain the ground floor.
  */
@@ -69,18 +70,47 @@ describe('openings fitted to the walls that host them', () => {
     expect(fit.indexMap.filter((i) => i < 0)).toHaveLength(3)
   })
 
-  it('a refusal that is not about fitting (two openings overlapping) is returned as the failure it is', () => {
+  it('an opening overlapping one already cut is not built, with its window and evidence, and the run goes on (005A)', () => {
     const program = [
       ...shell(),
       cut('big', 1, 3, 1.4),
       cut('clash', 2, 1, 1.2),
       { type: 'placeWindow', id: 'clash-unit', openingId: 'clash' },
       { type: 'setEvidence', targetId: 'clash', evidence: { status: 'SOURCE_DERIVED', interpretation: 'a test' } },
+      cut('after', 6, 1.2, 1.4),
     ] as BuildingCommand[]
     const fit = fitOpeningsToHosts(program, 'fixture', 'm-fixture')
-    // the overlap is not a fit problem: it is refused as the failure it is
+    expect(fit.ok).toBe(true)
+    expect(fit.fits).toEqual([expect.objectContaining({ openingId: 'clash', action: 'DROPPED', code: 'OPENINGS_OVERLAP' })])
+    expect(fit.fits[0].why).toMatch(/^not built: it overlaps an opening already cut in the same wall/)
+    expect(fit.program.some((c) => JSON.stringify(c).includes('clash'))).toBe(false)
+    // the first reading of the wall is kept, and so is everything after the refused one
+    expect(fit.program.filter((c) => c.type === 'cutOpening').map((c) => (c as { id: string }).id)).toEqual(['big', 'after'])
+  })
+
+  it('an opening whose host wall is not in the model is not built, and says so', () => {
+    const orphan = { type: 'cutOpening', id: 'orphan', wallId: 'no-such-wall', kind: 'WINDOW', offset: 1, sill: 0.9, width: 1, height: 1.2 } as BuildingCommand
+    const fit = fitOpeningsToHosts([...shell(), orphan], 'fixture', 'm-fixture')
+    expect(fit.ok).toBe(true)
+    expect(fit.fits).toEqual([expect.objectContaining({ openingId: 'orphan', action: 'DROPPED', code: 'UNKNOWN_WALL' })])
+    expect(fit.fits[0].why).toMatch(/a wall it names is not in the model/)
+  })
+
+  it('an opening the model will not pass through the further wall it names is not built, and says so', () => {
+    const through = { type: 'cutOpening', id: 'through', wallId: 'ring-w1', kind: 'DOOR', offset: 3, sill: 0, width: 1, height: 2.1, leaves: [{ wallId: 'ring-w1', offset: 3 }] } as BuildingCommand
+    const fit = fitOpeningsToHosts([...shell(), through], 'fixture', 'm-fixture')
+    expect(fit.ok).toBe(true)
+    expect(fit.fits).toEqual([expect.objectContaining({ openingId: 'through', action: 'DROPPED', code: 'OPENING_LEAF_INVALID' })])
+  })
+
+  it('a refusal that is not about an opening (a wall overlapping another) is returned as the failure it is', () => {
+    const program = [
+      ...shell(),
+      { type: 'createWall', id: 'dup', levelId: 'l0', start: { x: 0, z: 0 }, end: { x: 10, z: 0 }, thickness: 0.4, height: 2.8, baseOffset: 0, kind: 'EXTERIOR' },
+    ] as BuildingCommand[]
+    const fit = fitOpeningsToHosts(program, 'fixture', 'm-fixture')
     expect(fit.ok).toBe(false)
-    if (!fit.ok) expect(fit.errors.map((e) => e.code)).toContain('OPENINGS_OVERLAP')
+    if (!fit.ok) expect(fit.errors.map((e) => e.code)).toContain('WALLS_OVERLAP')
   })
 })
 
