@@ -1,0 +1,665 @@
+{
+ "machine": "one machine, both sides at once: for each project the baseline code (7cd8e0c, a worktree) and the final code ran side by side, so machine drift hits both equally",
+ "before": [
+  {
+   "name": "marcowki",
+   "wallS": 225.2,
+   "peakTreeMB": 1840,
+   "outcome": "COMPLETED",
+   "modelHash": "6152770f43f4970a",
+   "sceneContentHash": "8c7d43956d74d252",
+   "unresolved": 2,
+   "warnings": 4,
+   "limitingWarnings": null,
+   "timings": {
+    "acquisitionMs": 564,
+    "observationMs": 30929,
+    "metricExtractionMs": 175448,
+    "reconstructionMs": 7417,
+    "compileMs": 121,
+    "verificationMs": 1661,
+    "totalMs": 216145
+   },
+   "resolver": null
+  },
+  {
+   "name": "rarytasy-g2e",
+   "wallS": 286.8,
+   "peakTreeMB": 2136,
+   "outcome": "COMPLETED",
+   "modelHash": "8fa4a25bcd587248",
+   "sceneContentHash": "d4e7249bb1bda4b8",
+   "unresolved": 11,
+   "warnings": 5,
+   "limitingWarnings": null,
+   "timings": {
+    "acquisitionMs": 971,
+    "observationMs": 114899,
+    "metricExtractionMs": 146663,
+    "reconstructionMs": 10245,
+    "compileMs": 76,
+    "verificationMs": 477,
+    "totalMs": 273334
+   },
+   "resolver": null
+  },
+  {
+   "name": "kosacce-clean",
+   "wallS": 269.0,
+   "peakTreeMB": 2152,
+   "outcome": "COMPLETED",
+   "modelHash": "5b5ffcf1afcd2511",
+   "sceneContentHash": "50217b856dfc3d05",
+   "unresolved": 13,
+   "warnings": 5,
+   "limitingWarnings": null,
+   "timings": {
+    "acquisitionMs": 1328,
+    "observationMs": 100773,
+    "metricExtractionMs": 144272,
+    "reconstructionMs": 7560,
+    "compileMs": 97,
+    "verificationMs": 653,
+    "totalMs": 254686
+   },
+   "resolver": null
+  },
+  {
+   "name": "kosacce-tracked",
+   "wallS": 265.2,
+   "peakTreeMB": 2100,
+   "outcome": "COMPLETED",
+   "modelHash": "5b5ffcf1afcd2511",
+   "sceneContentHash": "50217b856dfc3d05",
+   "unresolved": 13,
+   "warnings": 5,
+   "limitingWarnings": null,
+   "timings": {
+    "acquisitionMs": 1247,
+    "observationMs": 97815,
+    "metricExtractionMs": 144347,
+    "reconstructionMs": 7074,
+    "compileMs": 85,
+    "verificationMs": 618,
+    "totalMs": 251188
+   },
+   "resolver": null
+  },
+  {
+   "name": "rarytasy-eoze",
+   "wallS": 283.5,
+   "peakTreeMB": 2063,
+   "outcome": "RECONSTRUCTION_FAILED/PLAN_NO_WALLED_ENVELOPE",
+   "resolver": null
+  },
+  {
+   "name": "alt-marcowki",
+   "wallS": 90.1,
+   "peakTreeMB": 1170,
+   "outcome": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED",
+   "resolver": null
+  }
+ ],
+ "after": [
+  {
+   "name": "marcowki",
+   "wallS": 264.3,
+   "peakTreeMB": 846,
+   "outcome": "COMPLETED",
+   "modelHash": "6152770f43f4970a",
+   "sceneContentHash": "8c7d43956d74d252",
+   "unresolved": 2,
+   "warnings": 4,
+   "limitingWarnings": 1,
+   "timings": {
+    "acquisitionMs": 536,
+    "observationMs": 18764,
+    "metricExtractionMs": 226654,
+    "reconstructionMs": 7269,
+    "compileMs": 120,
+    "verificationMs": 1512,
+    "totalMs": 254855
+   },
+   "resolver": null,
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 10,
+     "ticks": 0,
+     "maxTickGapMs": 10
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 526,
+     "ticks": 55,
+     "maxTickGapMs": 56
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 18763,
+     "ticks": 92,
+     "maxTickGapMs": 1718
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 1628,
+     "ticks": 20,
+     "maxTickGapMs": 255
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 225033,
+     "ticks": 1337196,
+     "maxTickGapMs": 1476
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 1023,
+     "ticks": 2,
+     "maxTickGapMs": 851
+    },
+    {
+     "phaseId": "SOLVE_TOPOLOGY",
+     "durationMs": 1161,
+     "ticks": 0,
+     "maxTickGapMs": 1161
+    },
+    {
+     "phaseId": "SOLVE_METRICS",
+     "durationMs": 4301,
+     "ticks": 4,
+     "maxTickGapMs": 3203
+    },
+    {
+     "phaseId": "BUILD_MODEL",
+     "durationMs": 778,
+     "ticks": 0,
+     "maxTickGapMs": 778
+    },
+    {
+     "phaseId": "COMPILE_SCENE",
+     "durationMs": 122,
+     "ticks": 0,
+     "maxTickGapMs": 122
+    },
+    {
+     "phaseId": "VERIFY",
+     "durationMs": 1510,
+     "ticks": 0,
+     "maxTickGapMs": 1510
+    }
+   ],
+   "maxTickGapMs": 3203,
+   "peakProcessMB": 707
+  },
+  {
+   "name": "rarytasy-g2e",
+   "wallS": 251.0,
+   "peakTreeMB": 911,
+   "outcome": "COMPLETED",
+   "modelHash": "8fa4a25bcd587248",
+   "sceneContentHash": "d4e7249bb1bda4b8",
+   "unresolved": 11,
+   "warnings": 6,
+   "limitingWarnings": 3,
+   "timings": {
+    "acquisitionMs": 930,
+    "observationMs": 53691,
+    "metricExtractionMs": 171331,
+    "reconstructionMs": 10452,
+    "compileMs": 90,
+    "verificationMs": 464,
+    "totalMs": 236958
+   },
+   "resolver": null,
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 8,
+     "ticks": 0,
+     "maxTickGapMs": 8
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 921,
+     "ticks": 85,
+     "maxTickGapMs": 53
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 53690,
+     "ticks": 177,
+     "maxTickGapMs": 2052
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 7191,
+     "ticks": 37,
+     "maxTickGapMs": 471
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 164147,
+     "ticks": 769403,
+     "maxTickGapMs": 1400
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 742,
+     "ticks": 1,
+     "maxTickGapMs": 739
+    },
+    {
+     "phaseId": "SOLVE_TOPOLOGY",
+     "durationMs": 888,
+     "ticks": 0,
+     "maxTickGapMs": 888
+    },
+    {
+     "phaseId": "SOLVE_METRICS",
+     "durationMs": 8063,
+     "ticks": 25,
+     "maxTickGapMs": 1313
+    },
+    {
+     "phaseId": "BUILD_MODEL",
+     "durationMs": 754,
+     "ticks": 0,
+     "maxTickGapMs": 754
+    },
+    {
+     "phaseId": "COMPILE_SCENE",
+     "durationMs": 94,
+     "ticks": 0,
+     "maxTickGapMs": 94
+    },
+    {
+     "phaseId": "VERIFY",
+     "durationMs": 459,
+     "ticks": 0,
+     "maxTickGapMs": 459
+    }
+   ],
+   "maxTickGapMs": 2052,
+   "peakProcessMB": 818
+  },
+  {
+   "name": "kosacce-clean",
+   "wallS": 250.6,
+   "peakTreeMB": 871,
+   "outcome": "COMPLETED",
+   "modelHash": "5b5ffcf1afcd2511",
+   "sceneContentHash": "50217b856dfc3d05",
+   "unresolved": 13,
+   "warnings": 5,
+   "limitingWarnings": 2,
+   "timings": {
+    "acquisitionMs": 1238,
+    "observationMs": 47767,
+    "metricExtractionMs": 179244,
+    "reconstructionMs": 7511,
+    "compileMs": 100,
+    "verificationMs": 715,
+    "totalMs": 236575
+   },
+   "resolver": null,
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 9,
+     "ticks": 0,
+     "maxTickGapMs": 9
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 1229,
+     "ticks": 73,
+     "maxTickGapMs": 84
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 47766,
+     "ticks": 147,
+     "maxTickGapMs": 2340
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 6790,
+     "ticks": 31,
+     "maxTickGapMs": 638
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 172460,
+     "ticks": 830433,
+     "maxTickGapMs": 1734
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 973,
+     "ticks": 1,
+     "maxTickGapMs": 970
+    },
+    {
+     "phaseId": "SOLVE_TOPOLOGY",
+     "durationMs": 936,
+     "ticks": 0,
+     "maxTickGapMs": 936
+    },
+    {
+     "phaseId": "SOLVE_METRICS",
+     "durationMs": 5187,
+     "ticks": 19,
+     "maxTickGapMs": 581
+    },
+    {
+     "phaseId": "BUILD_MODEL",
+     "durationMs": 409,
+     "ticks": 0,
+     "maxTickGapMs": 409
+    },
+    {
+     "phaseId": "COMPILE_SCENE",
+     "durationMs": 102,
+     "ticks": 0,
+     "maxTickGapMs": 102
+    },
+    {
+     "phaseId": "VERIFY",
+     "durationMs": 714,
+     "ticks": 0,
+     "maxTickGapMs": 714
+    }
+   ],
+   "maxTickGapMs": 2340,
+   "peakProcessMB": 776
+  },
+  {
+   "name": "kosacce-tracked",
+   "wallS": 247.7,
+   "peakTreeMB": 912,
+   "outcome": "COMPLETED",
+   "modelHash": "5b5ffcf1afcd2511",
+   "sceneContentHash": "50217b856dfc3d05",
+   "unresolved": 13,
+   "warnings": 5,
+   "limitingWarnings": 2,
+   "timings": {
+    "acquisitionMs": 1271,
+    "observationMs": 46761,
+    "metricExtractionMs": 177361,
+    "reconstructionMs": 7317,
+    "compileMs": 92,
+    "verificationMs": 669,
+    "totalMs": 233472
+   },
+   "resolver": null,
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 8,
+     "ticks": 0,
+     "maxTickGapMs": 8
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 1263,
+     "ticks": 73,
+     "maxTickGapMs": 89
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 46761,
+     "ticks": 147,
+     "maxTickGapMs": 2274
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 6417,
+     "ticks": 31,
+     "maxTickGapMs": 545
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 170950,
+     "ticks": 830433,
+     "maxTickGapMs": 1928
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 938,
+     "ticks": 1,
+     "maxTickGapMs": 935
+    },
+    {
+     "phaseId": "SOLVE_TOPOLOGY",
+     "durationMs": 909,
+     "ticks": 0,
+     "maxTickGapMs": 909
+    },
+    {
+     "phaseId": "SOLVE_METRICS",
+     "durationMs": 5094,
+     "ticks": 19,
+     "maxTickGapMs": 590
+    },
+    {
+     "phaseId": "BUILD_MODEL",
+     "durationMs": 370,
+     "ticks": 0,
+     "maxTickGapMs": 370
+    },
+    {
+     "phaseId": "COMPILE_SCENE",
+     "durationMs": 94,
+     "ticks": 0,
+     "maxTickGapMs": 94
+    },
+    {
+     "phaseId": "VERIFY",
+     "durationMs": 668,
+     "ticks": 0,
+     "maxTickGapMs": 668
+    }
+   ],
+   "maxTickGapMs": 2274,
+   "peakProcessMB": 809
+  },
+  {
+   "name": "rarytasy-eoze",
+   "wallS": 257.8,
+   "peakTreeMB": 917,
+   "outcome": "COMPLETED",
+   "modelHash": "b50b6e5992e9ac01",
+   "sceneContentHash": "ffdf58003d25b61d",
+   "unresolved": 9,
+   "warnings": 6,
+   "limitingWarnings": 3,
+   "timings": {
+    "acquisitionMs": 876,
+    "observationMs": 51941,
+    "metricExtractionMs": 176451,
+    "reconstructionMs": 14384,
+    "compileMs": 75,
+    "verificationMs": 333,
+    "totalMs": 244060
+   },
+   "resolver": {
+    "outcome": "RESOLVED",
+    "readings": 55,
+    "distinctOutlines": 12,
+    "compositions": 3
+   },
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 8,
+     "ticks": 0,
+     "maxTickGapMs": 8
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 868,
+     "ticks": 87,
+     "maxTickGapMs": 72
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 51941,
+     "ticks": 174,
+     "maxTickGapMs": 3740
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 7487,
+     "ticks": 38,
+     "maxTickGapMs": 472
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 168971,
+     "ticks": 749122,
+     "maxTickGapMs": 820
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 932,
+     "ticks": 1,
+     "maxTickGapMs": 929
+    },
+    {
+     "phaseId": "PLAN_RESOLUTION",
+     "durationMs": 4659,
+     "ticks": 117,
+     "maxTickGapMs": 703
+    },
+    {
+     "phaseId": "SOLVE_TOPOLOGY",
+     "durationMs": 816,
+     "ticks": 0,
+     "maxTickGapMs": 816
+    },
+    {
+     "phaseId": "SOLVE_METRICS",
+     "durationMs": 7289,
+     "ticks": 24,
+     "maxTickGapMs": 721
+    },
+    {
+     "phaseId": "BUILD_MODEL",
+     "durationMs": 682,
+     "ticks": 0,
+     "maxTickGapMs": 682
+    },
+    {
+     "phaseId": "COMPILE_SCENE",
+     "durationMs": 76,
+     "ticks": 0,
+     "maxTickGapMs": 76
+    },
+    {
+     "phaseId": "VERIFY",
+     "durationMs": 332,
+     "ticks": 0,
+     "maxTickGapMs": 332
+    }
+   ],
+   "maxTickGapMs": 3740,
+   "peakProcessMB": 824
+  },
+  {
+   "name": "alt-marcowki",
+   "wallS": 94.3,
+   "peakTreeMB": 748,
+   "outcome": "RECONSTRUCTION_FAILED/PLAN_LAYOUT_REJECTED",
+   "resolver": {
+    "outcome": "INCONCLUSIVE",
+    "readings": 39,
+    "distinctOutlines": 15,
+    "compositions": 0
+   },
+   "phases": [
+    {
+     "phaseId": "ACQUIRE_PAGE",
+     "durationMs": 15,
+     "ticks": 0,
+     "maxTickGapMs": 15
+    },
+    {
+     "phaseId": "ACQUIRE_ASSETS",
+     "durationMs": 265,
+     "ticks": 14,
+     "maxTickGapMs": 73
+    },
+    {
+     "phaseId": "CLASSIFY",
+     "durationMs": 0,
+     "ticks": 0,
+     "maxTickGapMs": 0
+    },
+    {
+     "phaseId": "OBSERVE_ASSETS",
+     "durationMs": 13323,
+     "ticks": 70,
+     "maxTickGapMs": 2438
+    },
+    {
+     "phaseId": "DECODE_RASTERS",
+     "durationMs": 1058,
+     "ticks": 14,
+     "maxTickGapMs": 320
+    },
+    {
+     "phaseId": "METRIC_FRAMES",
+     "durationMs": 73783,
+     "ticks": 486347,
+     "maxTickGapMs": 786
+    },
+    {
+     "phaseId": "REGISTER_VIEWS",
+     "durationMs": 393,
+     "ticks": 2,
+     "maxTickGapMs": 304
+    },
+    {
+     "phaseId": "PLAN_RESOLUTION",
+     "durationMs": 1143,
+     "ticks": 117,
+     "maxTickGapMs": 114
+    }
+   ],
+   "maxTickGapMs": 2438,
+   "peakProcessMB": 652
+  }
+ ]
+}
