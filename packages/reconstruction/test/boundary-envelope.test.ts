@@ -12,54 +12,12 @@
  * paving line and a decorative outline stay open.
  */
 import { describe, expect, it } from 'vitest'
-import { runLengthBands } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
-import { bandWallThickness, decomposePlan, exteriorTicksOf, planExtent, readWallLine, solidLayer, wallWitness } from '../src/index.js'
-import type { PlanCallout, PlanDecomposition } from '../src/index.js'
-import { CM_PER_PX, WALL, chain, mask, registration, sheet } from './plan.js'
+import { readWallLine, solidLayer } from '../src/index.js'
+import { CM_PER_PX, WALL, mask, sheet } from './plan.js'
 import { BLACK, drawLine, fillRect } from '../../source-cv/test/draw.js'
-
-const BANDS = { minThickness: 6, maxThickness: 30, minLength: 24 }
-const WHITE: [number, number, number] = [255, 255, 255]
-const M2_PER_PX2 = (CM_PER_PX / 100) ** 2
-
-/** A wall between outer faces, inclusive, as a plan draws it: solid ink. */
-const wall = (r: Raster, x0: number, y0: number, x1: number, y1: number): void => fillRect(r, x0, y0, x1, y1, BLACK)
-const clear = (r: Raster, x0: number, y0: number, x1: number, y1: number): void => fillRect(r, x0, y0, x1, y1, WHITE)
-/** A closed ring of walls whose OUTER faces are the rectangle given. */
-function ring(r: Raster, x0: number, y0: number, x1: number, y1: number): void {
-  wall(r, x0, y0, x1, y0 + WALL - 1)
-  wall(r, x0, y1 - WALL + 1, x1, y1)
-  wall(r, x0, y0, x0 + WALL - 1, y1)
-  wall(r, x1 - WALL + 1, y0, x1, y1)
-}
-/** Glazing across a gap in a horizontal wall whose outer face row is `face` (the wall runs face..face±WALL). */
-const glazeH = (r: Raster, top: number, from: number, to: number): void => {
-  drawLine(r, from, top + 3, to, top + 3, BLACK)
-  drawLine(r, from, top + WALL - 4, to, top + WALL - 4, BLACK)
-}
-const glazeV = (r: Raster, left: number, from: number, to: number): void => {
-  drawLine(r, left + 3, from, left + 3, to, BLACK)
-  drawLine(r, left + WALL - 4, from, left + WALL - 4, to, BLACK)
-}
-/** A free-standing post, about one and a half walls square. */
-const post = (r: Raster, cx: number, cy: number): void => fillRect(r, cx - 8, cy - 8, cx + 8, cy + 8, BLACK)
-
-type Run = { d: PlanDecomposition; builtM2: number }
-/** The plan as the layout pass reads it: sheet wall, witness-checked extent, exterior ticks. */
-function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean } = {}): Run {
-  const m = mask(r)
-  const bands = runLengthBands(m, BANDS)
-  const wallPx = bandWallThickness(bands, WALL)
-  const chains = [chain('cx', 'HORIZONTAL', [...xs].sort((a, b) => a - b), { baselinePx: 12 }), chain('cy', 'VERTICAL', [...ys].sort((a, b) => a - b), { baselinePx: 12 })]
-  const extent = planExtent(chains, bands, wallPx, wallWitness(bands, wallPx, m))
-  if (!extent) throw new Error('the fixture has no frame')
-  const d = decomposePlan(m, chains, bands, registration(), extent.rect, { callouts, sheetWallPx: WALL, exteriorTicks: exteriorTicksOf(chains, extent.roles), ...options })
-  const builtM2 = d.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + (c.rect.x1 - c.rect.x0) * (c.rect.y1 - c.rect.y0), 0) * M2_PER_PX2
-  return { d, builtM2 }
-}
-const near = (value: number, expected: number, share = 0.04): boolean => Math.abs(value - expected) <= expected * share
-const builtAt = (d: PlanDecomposition, x: number, y: number): boolean => d.cells.some((c) => c.classification === 'BUILT' && x >= c.rect.x0 && x < c.rect.x1 && y >= c.rect.y0 && y < c.rect.y1)
+import { builtAt, clear, glazeH, glazeV, near, post, ring, run, wall } from './boundary-plan.js'
+import type { Run } from './boundary-plan.js'
 
 /** The reference house: 16 × 12 m between outer faces x 40..359, y 40..279 (192 m²). */
 const X = [40, 360]
@@ -316,3 +274,74 @@ describe('§40 a wing is built by its relations, not by its reach', () => {
     expect(near(builtM2, HOUSE_M2)).toBe(true)
   })
 })
+
+describe('§37 the same architecture drawn differently keeps its envelope', () => {
+  /** How a sheet is drawn: scale, offset, ink, walls thinned, a wall stroke broken, windows left undrawn. */
+  type Drawing = { s?: number; dx?: number; dy?: number; ink?: [number, number, number]; erode?: number; split?: number; noGlazing?: boolean }
+  /** The wing house (§36 no. 7) under a drawing: its front piers and glazing, the wing's glazed front. */
+  function wingHouse(t: Drawing): { r: Raster; xs: number[]; ys: number[]; cmPerPx: number; wallPx: number } {
+    const s = t.s ?? 1
+    const dx = t.dx ?? 0
+    const dy = t.dy ?? 0
+    const e = t.erode ?? 0
+    const ink = t.ink ?? BLACK
+    const X = (x: number): number => Math.round(dx + x * s)
+    const Y = (y: number): number => Math.round(dy + y * s)
+    const r = sheet(Math.round(460 * s + dx + 20), Math.round(420 * s + dy + 20))
+    const box = (x0: number, y0: number, x1: number, y1: number): void => fillRect(r, X(x0) + e, Y(y0) + e, X(x1) - e, Y(y1) - e, ink)
+    const white = (x0: number, y0: number, x1: number, y1: number): void => fillRect(r, X(x0), Y(y0), X(x1), Y(y1), [255, 255, 255])
+    const glaze = (top: number, from: number, to: number): void => {
+      if (t.noGlazing) return
+      drawLine(r, X(from), Y(top + 3), X(to), Y(top + 3), ink)
+      drawLine(r, X(from), Y(top + WALL - 4), X(to), Y(top + WALL - 4), ink)
+    }
+    box(40, 40, 359, 51)
+    box(40, 40, 51, 279)
+    box(348, 40, 359, 279)
+    box(40, 268, 211, 279)
+    box(200, 200, 211, 339)
+    box(348, 268, 359, 339)
+    box(200, 328, 229, 339)
+    box(330, 328, 359, 339)
+    glaze(328, 230, 329)
+    // a front window of the main body, glazed
+    white(90, 268, 150, 279)
+    glaze(268, 90, 150)
+    // one exterior stroke (the west wall) broken into `split` pieces by 2 px of white
+    for (let k = 1; k < (t.split ?? 1); k += 1) {
+      const y = 40 + Math.round((240 * k) / (t.split ?? 1))
+      fillRect(r, X(40), Y(y), X(51), Y(y) + 1, [255, 255, 255])
+    }
+    return { r, xs: [40, 200, 360].map(X), ys: [40, 280, 340].map(Y), cmPerPx: CM_PER_PX / s, wallPx: Math.max(4, Math.round(WALL * s) - 2 * e) }
+  }
+  const readingOf = (t: Drawing, shutPocketMouths = false): Run => {
+    const w = wingHouse(t)
+    return run(w.r, w.xs, w.ys, [], { cmPerPx: w.cmPerPx, sheetWallPx: w.wallPx, shutPocketMouths })
+  }
+  const areaOf = (t: Drawing): number => readingOf(t).builtM2
+  const reference = HOUSE_M2 + 8 * 3
+
+  it('reads the reference drawing', () => {
+    expect(near(areaOf({}), reference)).toBe(true)
+  })
+  it.each<[string, Drawing]>([
+    ['one exterior stroke split into 2 pieces', { split: 2 }],
+    ['one exterior stroke split into 5 pieces', { split: 5 }],
+    ['a mild downscale (0.85)', { s: 0.85 }],
+    ['walls eroded by 1 px on each face', { erode: 1 }],
+    ['grey ink instead of black', { ink: [90, 90, 90] }],
+    ['cropped and padded differently', { dx: 17, dy: 9 }],
+  ])('%s: the same envelope', (_what, drawing) => {
+    expect(near(areaOf(drawing), reference, 0.05)).toBe(true)
+  })
+  it('window symbols removed, jambs kept: the wing is named, and the reading that shuts its mouth recovers the envelope', () => {
+    // With nothing drawn across it the wing's 5 m front is a blank gap: the first reading cannot tell it from a
+    // loggia's mouth, and the house behind its open junction goes with it. That is a question, not a building: the
+    // wing is named an open-mouthed garage, and the resolver's reading that shuts pocket mouths reads it whole.
+    const first = readingOf({ noGlazing: true })
+    expect((first.d.boundary?.bodies ?? []).map((b) => b.relation)).toContain('OPEN_MOUTH_GARAGE')
+    const shut = readingOf({ noGlazing: true }, true)
+    expect(near(shut.builtM2, reference, 0.05)).toBe(true)
+  })
+})
+
