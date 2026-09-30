@@ -144,3 +144,60 @@ describe('a front wall that is all openings', () => {
     expect(d.envelope?.rect.y1).toBeLessThanOrEqual(200)
   })
 })
+
+describe('post-review (005B): a refused axis is framed by the widest statement, never by a short one', () => {
+  const house = () => {
+    const r = sheet(400, 400)
+    walls(r, 40, 40, 299, 319)
+    fillRect(r, 40, 220, 299, 223, BLACK)
+    return r
+  }
+
+  it('a room chain is refused and a short exterior read chain (corner to window) does not undo it: the outer ticks frame the depth', () => {
+    const { bands, wallPx, witness } = surveyOf(house())
+    const chains = [
+      chain('width', 'HORIZONTAL', [40, 300], { baselinePx: 20 }),
+      chain('room', 'VERTICAL', [40, 220], { baselinePx: 150 }),
+      chain('west-partial', 'VERTICAL', [40, 110], { baselinePx: 20 }),
+      chain('depth-unread', 'VERTICAL', [40, 320], { baselinePx: 330, read: false }),
+    ]
+    const e = planExtent(chains, bands, wallPx, witness)
+    expect(Math.abs((e?.rect.y1 ?? NaN) - 320)).toBeLessThanOrEqual(1)
+    expect(e?.refused).toEqual(['room'])
+    expect(e?.provenance?.y).toBe('EXTERIOR_CHAIN_TICKS')
+    expect(e?.weak).toBe(true)
+  })
+
+  it('wall-thick ink attached outside the building (a parapet) does not overrule a read chain that frames the depth', () => {
+    const r = sheet(400, 440)
+    walls(r, 40, 40, 299, 279)
+    // an L-shaped terrace parapet attached at the south-east corner, beyond the east depth chain's line
+    fillRect(r, 288, 279, 299, 399, BLACK)
+    fillRect(r, 180, 388, 299, 399, BLACK)
+    const { bands, wallPx, witness } = surveyOf(r)
+    const chains = [chain('width', 'HORIZONTAL', [40, 300], { baselinePx: 20 }), chain('depth', 'VERTICAL', [40, 280], { baselinePx: 330 }), chain('west-depth', 'VERTICAL', [40, 280], { baselinePx: 20 })]
+    const e = planExtent(chains, bands, wallPx, witness)
+    expect(Math.abs((e?.rect.y1 ?? NaN) - 280)).toBeLessThanOrEqual(1)
+  })
+})
+
+describe('post-review (005B): side walls running on past a facade frame a terrace, not rooms', () => {
+  it('a full-width covered terrace with a pier at its mouth, in front of a wall-thick facade, stays outside', () => {
+    const r = sheet(460, 440)
+    walls(r, 40, 40, 399, 279)
+    fillRect(r, 40, 279, 51, 359, BLACK)
+    fillRect(r, 388, 279, 399, 359, BLACK)
+    fillRect(r, 205, 348, 229, 359, BLACK) // a masonry pier at the mouth
+    const m = mask(r)
+    const bands = runLengthBands(m, BANDS)
+    const wallPx = bandWallThickness(bands, WALL)
+    const witness = wallWitness(bands, wallPx)
+    const chains = [chain('w', 'HORIZONTAL', [40, 400], { baselinePx: 20 }), chain('d', 'VERTICAL', [40, 280, 360], { baselinePx: 420 })]
+    const e = planExtent(chains, bands, wallPx, witness)
+    if (!e) throw new Error('no frame')
+    const d = decomposePlan(m, chains, bands, registration(), e.rect)
+    expect(d.envelope?.rect.y1).toBeLessThanOrEqual(281)
+    const built = d.regions.filter((g) => g.classification === 'BUILT')
+    expect(Math.max(...built.map((g) => g.rect.y1))).toBeLessThanOrEqual(281)
+  })
+})
