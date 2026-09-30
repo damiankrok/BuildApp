@@ -17,6 +17,8 @@
  *
  * `--same-model` pins the model hash where the stage requires the model not to move (a house whose
  * hash may only change with a genuine correction explained in the stage report).
+ * `--limits <CODE,CODE>` requires those LIMITING warnings on a completed result: a house whose metric
+ * truth is weak must say so, and deleting the warning must fail the row.
  */
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
@@ -24,11 +26,12 @@ import { join, resolve } from 'node:path'
 
 const [dir, expectation, ...rest] = process.argv.slice(2)
 if (!dir || !expectation) {
-  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>]\n')
+  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>] [--limits <CODE,CODE>]\n')
   process.exit(2)
 }
-const sameModel = rest[rest.indexOf('--same-model') + 1]
-const pinned = rest.includes('--same-model') ? sameModel : undefined
+const valueOf = (flag) => (rest.includes(flag) ? rest[rest.indexOf(flag) + 1] : undefined)
+const pinned = valueOf('--same-model')
+const limits = (valueOf('--limits') ?? '').split(',').filter(Boolean)
 const fail = (message) => {
   process.stdout.write(`::error::${dir}: ${message}\n`)
   process.exit(1)
@@ -46,7 +49,10 @@ if (existsSync(join(dir, 'result-summary.json'))) {
   if ((kind === 'complete' || kind === 'footprint') && bodies !== Number(arg)) fail(`completed with ${bodies} bodies; the house has ${arg}`)
   if (kind === 'footprint' && !verdict.conditions?.footprint?.holds) fail(`the lowest storey is ${verdict.conditions?.footprint?.residualPct} % from the published footprint`)
   if (pinned && summary.modelHash !== pinned) fail(`the model moved: ${summary.modelHash}, the stage requires ${pinned}`)
-  process.stdout.write(`${dir}: completed, ${bodies} bodies, verdict ${verdict.verdict}, footprint ${verdict.conditions?.footprint?.builtM2 ?? '-'} m²${pinned ? ', model unchanged' : ''}\n`)
+  const limiting = new Set((summary.warningDetails ?? []).filter((w) => w.severity === 'LIMITING').map((w) => w.code))
+  const missing = limits.filter((c) => !limiting.has(c))
+  if (missing.length > 0) fail(`completed without the LIMITING warning${missing.length === 1 ? '' : 's'} it must carry: ${missing.join(', ')}`)
+  process.stdout.write(`${dir}: completed, ${bodies} bodies, verdict ${verdict.verdict}, footprint ${verdict.conditions?.footprint?.builtM2 ?? '-'} m²${pinned ? ', model unchanged' : ''}${limits.length ? `, limited by ${limits.join(', ')}` : ''}\n`)
 } else {
   const failure = read('failure.json')
   const code = failure.reasonCode ?? failure.code

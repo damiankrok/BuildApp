@@ -952,9 +952,11 @@ jobs:
     # analyzer-005b/dev); observations, metric evidence and the model are
     # re-extracted from the publisher's drawings, which are fetched here and
     # never committed. Each row is judged by the rule it must meet
-    # (scripts/dev-row.mjs); Marcówki and Kosaćce, whose models may not move,
-    # are pinned, and the tracked Kosaćce link to the clean one's model. Only a
-    # publisher that cannot be reached at all is a warning.
+    # (scripts/dev-row.mjs); Marcówki, Kosaćce and G2E, whose models did not
+    # move, are pinned, and the tracked Kosaćce link to the clean one's model; a house
+    # whose metric truth is weak must carry its LIMITING warning; the alternate
+    # page must stop with the typed metric reason. Only a publisher that cannot
+    # be reached at all is a warning.
     name: Analyzer / development house (${{ matrix.house }})
     if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
     runs-on: ubuntu-latest
@@ -974,12 +976,15 @@ jobs:
             model: 5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
           - house: rarytasy-g2e
             expect: "footprint:2"
+            model: 8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8
+            limits: METRIC_SCALE_WEAK
           - house: rarytasy-eoze
             expect: pass
           - house: alt-marcowki
-            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE|PLAN_LAYOUT_REJECTED|PLAN_RESOLUTION_INCONCLUSIVE"
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
           - house: dom-w-jablonkach
             expect: "footprint:1"
+            limits: METRIC_SCALE_WEAK
           - house: willa-miranda
             expect: "refuse:PLAN_LAYOUT_REJECTED|PLAN_RESOLUTION_INCONCLUSIVE|METRIC_RESOLUTION_INCONCLUSIVE"
     env:
@@ -1013,7 +1018,7 @@ jobs:
           mkdir -p dev
           OFFLINE=1 npm run -s analysis:second-house -- --package "$DEV/${{ matrix.house }}/source-package.json" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
           tail -n 4 "dev/${{ matrix.house }}.log"
-          node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }}
+          node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }} ${{ matrix.limits && format('--limits {0}', matrix.limits) || '' }}
       - name: Upload the development-house record
         if: always()
         uses: actions/upload-artifact@v4

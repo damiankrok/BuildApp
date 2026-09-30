@@ -116,8 +116,13 @@ export function scan(text: string, reg: Registry): Hit[] {
     }
   }
   for (const d of reg.dimensions) {
-    const m = new RegExp(`(?<![\\d.,])${d}(?![\\d])`).exec(t)
-    if (m) hits.push({ kind: 'DIMENSION', term: d, at: around(m.index, m[0].length) })
+    // In centimetres (a list item `[1260,1205]` included: only a digit or a decimal point before it
+    // makes it part of another number), and in metres, `12.05` or `12,05`.
+    const metres = (Number(d) / 100).toFixed(2).replace('.', '[.,]')
+    for (const rx of [new RegExp(`(?<![\\d.])${d}(?![\\d])`), new RegExp(`(?<![\\d.,])${metres}(?![\\d])`)]) {
+      const m = rx.exec(t)
+      if (m) hits.push({ kind: 'DIMENSION', term: m[0], at: around(m.index, m[0].length) })
+    }
   }
   return hits
 }
@@ -171,6 +176,10 @@ describe('no development house in production (derived registry)', () => {
     expect(scan(`if (overallCm === ${dimension}) scale = 2.64`, registry).map((h) => h.kind)).toContain('DIMENSION')
     expect(scan(`// a chain of ${dimension} cm`, registry).map((h) => h.kind)).toContain('DIMENSION')
     expect(scan(`const x = 1${dimension}9`, registry).filter((h) => h.kind === 'DIMENSION')).toEqual([])
+    expect(scan(`const SPANS = [1000,${dimension}]`, registry).map((h) => h.kind)).toContain('DIMENSION')
+    const metres = (Number(dimension) / 100).toFixed(2)
+    expect(scan(`// the overall is ${metres} m`, registry).map((h) => h.kind)).toContain('DIMENSION')
+    expect(scan(`"${metres.replace('.', ',')} m"`, registry).map((h) => h.kind)).toContain('DIMENSION')
   })
 
   it('no production file — code or comment — carries a development house\'s id, name, published figure or printed overall dimension', () => {
