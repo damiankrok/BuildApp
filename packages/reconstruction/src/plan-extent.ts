@@ -29,7 +29,8 @@
  */
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
-import type { Band } from '@buildapp/source-cv'
+import type { Band, Mask } from '@buildapp/source-cv'
+import { gapStrokes } from './boundary-evidence.js'
 import type { DimensionChain } from '@buildapp/source-metrics'
 
 export type WallWitness = {
@@ -63,7 +64,7 @@ const wallBands = (bands: readonly Band[], wallPx: number): Band[] => bands.filt
  * The building's walls, from pixels only: the largest group of wall bands
  * joined where they come within two walls of each other.
  */
-export function wallWitness(bands: readonly Band[], wallPx: number): WallWitness | null {
+export function wallWitness(bands: readonly Band[], wallPx: number, mask?: Mask): WallWitness | null {
   const walls = [...wallBands(bands, wallPx)].sort((a, b) => a.bounds.y0 - b.bounds.y0 || a.bounds.x0 - b.bounds.x0 || a.length - b.length)
   if (walls.length === 0) return null
   const gap = wallPx * 2
@@ -73,14 +74,38 @@ export function wallWitness(bands: readonly Band[], wallPx: number): WallWitness
     while (parent[r] !== r) r = parent[r]
     return r
   }
+  const join = (i: number, j: number): void => {
+    const ra = find(i)
+    const rb = find(j)
+    if (ra !== rb) parent[Math.max(ra, rb)] = Math.min(ra, rb)
+  }
   for (let i = 0; i < walls.length; i += 1) {
     for (let j = i + 1; j < walls.length; j += 1) {
       const a = walls[i].bounds
       const b = walls[j].bounds
-      if (a.x0 - gap <= b.x1 && b.x0 - gap <= a.x1 && a.y0 - gap <= b.y1 && b.y0 - gap <= a.y1) {
-        const ra = find(i)
-        const rb = find(j)
-        if (ra !== rb) parent[Math.max(ra, rb)] = Math.min(ra, rb)
+      if (a.x0 - gap <= b.x1 && b.x0 - gap <= a.x1 && a.y0 - gap <= b.y1 && b.y0 - gap <= a.y1) join(i, j)
+    }
+  }
+  // 005C: one wall, broken by an opening, is one wall. Two collinear bands of one thickness whose facing ends are
+  // separated by a gap with a door leaf on the wall's axis or glazing (two or more lines) drawn across it inside the
+  // wall are joined, however far apart their groups otherwise are. A paving or kerb line at a face joins nothing, so
+  // a planter lined up with a facade stays a separate group.
+  if (mask) {
+    for (let i = 0; i < walls.length; i += 1) {
+      for (let j = 0; j < walls.length; j += 1) {
+        const a = walls[i]
+        const b = walls[j]
+        if (i === j || a.axis !== b.axis || find(i) === find(j)) continue
+        const t = Math.max(a.thickness, b.thickness)
+        if (Math.abs(a.axisPx - b.axisPx) > t / 2 || Math.min(a.thickness, b.thickness) < t * 0.65) continue
+        const vertical = a.axis === 'VERTICAL'
+        const aEnd = vertical ? a.bounds.y1 : a.bounds.x1
+        const bStart = vertical ? b.bounds.y0 : b.bounds.x0
+        const width = bStart - aEnd
+        if (width <= gap || width > wallPx * 20) continue
+        const strokes = gapStrokes(mask, vertical ? 'X' : 'Y', (a.axisPx + b.axisPx) / 2, aEnd, bStart, wallPx).filter((s) => s.continuous)
+        const drawn = strokes.length >= 2 || (strokes.length === 1 && Math.abs(strokes[0].offsetPx) <= wallPx * 0.25)
+        if (drawn) join(i, j)
       }
     }
   }

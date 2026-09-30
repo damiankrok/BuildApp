@@ -325,9 +325,15 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   // Levels.
   const ridgeY = levels.topDatum
   const levelsV2: BuildingV2['levels'] = []
+  const elevationAt = (i: number): number => levels.floors[i] ?? round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (i - levels.floors.length + 1))
   main.storeys.forEach((index, i) => {
-    const elevation = levels.floors[i] ?? round6((levels.floors[levels.floors.length - 1] ?? 0) + CONVENTIONS.storeyHeight * (i - levels.floors.length + 1))
-    const stated = levels.heights[i] ?? CONVENTIONS.storeyHeight
+    const elevation = elevationAt(i)
+    // A storey's walls stop at the floor of the storey above. A section that prints one floor, the eaves and the
+    // ridge states the TOP storey's wall height; when the plans show a storey over that floor, the eaves are that
+    // storey's, and the one below it rises only to where the storey above begins.
+    const above = i + 1 < main.storeys.length ? elevationAt(i + 1) : undefined
+    const printed = levels.heights[i] ?? CONVENTIONS.storeyHeight
+    const stated = above !== undefined && printed > above - elevation + 1e-6 ? round6(above - elevation) : printed
     const pitched = layout.roofSupports.some((r) => r.massId === main.sourceMassId && r.kind !== 'FLAT' && r.kind !== 'UNKNOWN')
     const height = index === topStorey && pitched && ridgeY !== undefined && ridgeY > elevation + stated ? round6(ridgeY - elevation) : round6(stated)
     const featureId = feature('LEVEL', `level-${index}`, { elevation: { value: elevation, low: elevation - 0.02, high: elevation + 0.02 }, height: { value: stated, low: stated - 0.05, high: stated + 0.05 } }, sectionFrame ? [sighting(sectionFrame, `level datum of storey ${index}`, 0.9, [])] : [], levels.measured ? 'SOURCE_EXACT' : 'ASSUMED_FOR_RENDERING', levels.measured ? 'a printed level datum on the section' : 'a conventional storey height', { printed: levels.measured, unresolvedProperties: levels.measured ? [] : ['elevation', 'height'] })

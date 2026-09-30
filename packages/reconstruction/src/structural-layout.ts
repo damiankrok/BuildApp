@@ -458,6 +458,23 @@ export const facadesOfMass = (set: StructuralLayoutHypothesisSet, massId: string
 export const relationsOf = (set: StructuralLayoutHypothesisSet, id: string): AttachmentRelation[] => set.attachments.filter((a) => a.fromId === id || a.toId === id)
 
 /** The rectangle a ring sits in, which is diagnostic and — §4 — never a mass on its own. */
+/**
+ * The storey the building stands at: the lowest one, unless that is a storey
+ * below the ground floor with no footprint.
+ *
+ * A basement plan that registered onto nothing — a sheet the chains could not
+ * scale — says where nothing is, so it cannot fix the world frame or carry the
+ * footprint the publisher's figure is checked against; the ground floor above
+ * it does. A ground or upper storey with no footprint is not skipped: the
+ * building stands on it, and leaving it out would build the storeys above it
+ * as the whole house.
+ */
+export function groundStoreyOf<S extends { id: string; index: number }>(storeys: readonly S[], regions: readonly { storeyId: string; kind: string }[]): S | undefined {
+  const withBuilt = new Set(regions.filter((r) => r.kind === 'BUILT').map((r) => r.storeyId))
+  const ordered = [...storeys].sort((a, b) => a.index - b.index)
+  return ordered.find((s) => s.index >= 0 || withBuilt.has(s.id)) ?? ordered[0]
+}
+
 export function ringBounds(ring: PlanRing): { x0: number; z0: number; x1: number; z1: number } {
   const xs = ring.points.map((p) => p.x)
   const zs = ring.points.map((p) => p.z)

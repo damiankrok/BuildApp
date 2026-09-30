@@ -81,7 +81,7 @@ import { planExtent, wallClusterExtent } from './plan-decomposition.js'
 import { LAYOUT_REFUSAL_CODES } from './plan-diagnostics.js'
 import { composeStructuralLayout } from './structural.js'
 import type { StructuralPassOptions, StructuralPassResult } from './structural.js'
-import { ringArea, ringBounds } from './structural-layout.js'
+import { groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
 import { worldFrameFrom } from './v2/frame.js'
 
@@ -369,7 +369,7 @@ function scoreReading(
   const base = draft.base
   if (!base || !draft.frame || draft.masses.length === 0) hard.push('NO_BODY')
   if (!worldFrameFrom(draft)) hard.push('NO_WORLD_FRAME')
-  const lowest = draft.storeys.length > 0 ? Math.min(...draft.storeys.map((s) => s.index)) : 0
+  const lowest = groundStoreyOf(draft.storeys, draft.footprintRegions)?.index ?? 0
   const lowestIds = new Set(draft.storeys.filter((s) => s.index === lowest).map((s) => s.id))
   const built = draft.footprintRegions.filter((r) => r.kind === 'BUILT' && lowestIds.has(r.storeyId))
   const area = built.reduce((a, r) => a + ringArea(r.ring), 0)

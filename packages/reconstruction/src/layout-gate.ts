@@ -24,7 +24,7 @@
  */
 import { hashArtifact, round6 } from '@buildapp/source-common'
 import type { MetricEvidenceSet } from '@buildapp/source-metrics'
-import { LAYOUT_SET_SCHEMA, LAYOUT_SET_SCHEMA_VERSION, ringArea, ringBounds } from './structural-layout.js'
+import { LAYOUT_SET_SCHEMA, LAYOUT_SET_SCHEMA_VERSION, groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type {
   LayoutGate,
   LayoutGateReason,
@@ -141,7 +141,8 @@ export function evaluateLayoutGate(options: LayoutGateOptions): LayoutGate {
   }
 
   // --- does it agree with what the publisher printed? -----------------------
-  const builtArea = round6(regions.filter((r) => r.kind === 'BUILT' && storeys.find((s) => s.id === r.storeyId)?.index === Math.min(...storeys.map((s) => s.index))).reduce((a, r) => a + ringArea(r.ring), 0))
+  const groundIndex = groundStoreyOf(storeys, regions)?.index
+  const builtArea = round6(regions.filter((r) => r.kind === 'BUILT' && storeys.find((s) => s.id === r.storeyId)?.index === groundIndex).reduce((a, r) => a + ringArea(r.ring), 0))
   const published = options.publishedAreas?.find((f) => f.key === 'footprint_area' && f.unit === 'm2')
   if (published && builtArea > 0) {
     const error = Math.abs(builtArea - published.value) / published.value

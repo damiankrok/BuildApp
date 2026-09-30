@@ -18,7 +18,7 @@ import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { PlanReading, StructuralLayoutDraft } from '../layout.js'
 import type { FootprintRegionHypothesis, MassHypothesis } from '../structural-layout.js'
-import { ringBounds } from '../structural-layout.js'
+import { groundStoreyOf, ringBounds } from '../structural-layout.js'
 import type { ElevationRegistration } from '../views.js'
 
 export type PlanFrameV2 = {
@@ -53,7 +53,7 @@ export type WorldFrameV2 = {
 export const flipZ = (frame: WorldFrameV2, z: number): number => round6(frame.zFlip - z)
 
 export function worldFrameFrom(draft: StructuralLayoutDraft): WorldFrameV2 | undefined {
-  const base = draft.storeys.find((s) => s.index === Math.min(...draft.storeys.map((x) => x.index)))
+  const base = groundStoreyOf(draft.storeys, draft.footprintRegions)
   if (!base) return undefined
   const regions = draft.footprintRegions.filter((r) => r.storeyId === base.id)
   const built = regions.filter((r) => r.kind === 'BUILT')

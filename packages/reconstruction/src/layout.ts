@@ -203,6 +203,14 @@ const DEFAULT_BANDS: Required<PlanBandOptions> = { minThickness: 6, maxThickness
  */
 const MIN_MASS_WALL_FRACTION = 0.35
 
+/**
+ * The narrowest a walled body can be, in metres: two of its own walls and a
+ * little room between them. A strip narrower than this is the thickness of a
+ * wall, a step between two outer faces, or a pier — ring walls on it would
+ * meet each other before they met anything else.
+ */
+const minBodySpanM = (wallM: number): number => Math.max(1, 2 * wallM + 0.2)
+
 const quantity = (value: number, low: number, high: number, unit: LayoutQuantity['unit'], basis: LayoutQuantity['basis'], evidenceIds: string[], why: string): LayoutQuantity => ({
   value: round6(value),
   low: round6(low),
@@ -290,7 +298,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
       const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), ...(shutMouths ? { shutPocketMouths: true } : {}) })
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), ...(shutMouths ? { shutPocketMouths: true } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
@@ -346,9 +354,24 @@ export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayou
     maxThickness: Math.max(6, Math.round(wallPx * 1.9)),
     minLength: Math.max(8, Math.round(wallPx * 1.6)),
   })
-  const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map(), witness: wallWitness(bands, wallPx) }
+  const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map(), witness: wallWitness(bands, wallPx, mask) }
   options.sheetCache?.set(frame.id, sheet)
   return sheet
+}
+
+/**
+ * The ticks of a plan's exterior dimension chains, read or not (005C): where the drawing says a facade's face is,
+ * whatever its labels read. Horizontal chains tick x positions, vertical ones y positions.
+ */
+export function exteriorTicksOf(chains: readonly DimensionChain[], roles: PlanExtent['roles']): { x: number[]; y: number[] } {
+  const exterior = new Set((roles ?? []).filter((r) => r.role === 'EXTERIOR').map((r) => r.chainId))
+  const x = new Set<number>()
+  const y = new Set<number>()
+  for (const c of chains) {
+    if (!exterior.has(c.id)) continue
+    for (const t of c.ticksPx) (c.axis === 'HORIZONTAL' ? x : y).add(t)
+  }
+  return { x: [...x].sort((a, b) => a - b), y: [...y].sort((a, b) => a - b) }
 }
 
 /** The opening callouts printed on one plan, as the decomposition weighs them: where each sits and every width it might say. */
@@ -805,6 +828,10 @@ export function perimeterWallEvidence(region: PlanRegion, decomposition: PlanDec
   const mppY = frame.metresPerPixelY
   let perimeter = 0
   let walled = 0
+  // 005C: on a plan cut on its opening-aware outline, the building need not be one rectangle, and the tiling cuts
+  // an L or a U into rectangles that meet inside it. A side a region shares with other built cells of the same
+  // outline is inside the building — neither wall nor line work — and is not part of what encloses the region.
+  const builtElsewhere = decomposition.envelope?.outline ? new Set(decomposition.cells.filter((c) => c.classification === 'BUILT').map((c) => `${c.ix}:${c.iy}`)) : undefined
   for (const cell of decomposition.cells) {
     if (!region.cells.some((c) => c.ix === cell.ix && c.iy === cell.iy)) continue
     const sides: Array<[number, number, number]> = [
@@ -825,12 +852,15 @@ export function perimeterWallEvidence(region: PlanRegion, decomposition: PlanDec
       // house look better walled than an undivided one.
       const inside = region.cells.some((c) => c.ix === neighbours[s][0] && c.iy === neighbours[s][1])
       if (inside) continue
+      if (builtElsewhere?.has(`${neighbours[s][0]}:${neighbours[s][1]}`)) continue
       const lengthM = sides[s][0] * (s % 2 === 0 ? mppX : mppY)
       perimeter += lengthM
       if (sides[s][2] >= closureThreshold) walled += lengthM * sides[s][1]
     }
   }
-  return { perimeterM: round6(perimeter), walledM: round6(walled), fraction: round6(perimeter === 0 ? 0 : Math.min(1, walled / perimeter)) }
+  // A region wholly inside the outline's other built cells has no outside of its own to be enclosed by line work.
+  const fraction = perimeter === 0 ? (builtElsewhere ? 1 : 0) : Math.min(1, walled / perimeter)
+  return { perimeterM: round6(perimeter), walledM: round6(walled), fraction: round6(fraction) }
 }
 
 /**
@@ -1061,6 +1091,18 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
         id: stableId('gap', `unwalled-${region.id}`, { frameId: base.frame.id, region: region.id }),
         what: `whether the ${(ringArea(ring)).toFixed(1)} m² region at ${ringBoundsOf(ring).x0.toFixed(2)}, ${ringBoundsOf(ring).z0.toFixed(2)} is part of the building`,
         reason: `only ${Math.round(wallEvidence.fraction * 100)}% of its perimeter is drawn as wall, so what encloses it is line work rather than construction`,
+        status: 'AMBIGUOUS',
+        frameIds: [base.frame.id],
+      })
+      continue
+    }
+    const span = ringBoundsOf(ring)
+    const narrow = Math.min(span.x1 - span.x0, span.z1 - span.z0)
+    if (narrow < minBodySpanM(wallM)) {
+      unresolved.push({
+        id: stableId('gap', `sliver-${region.id}`, { frameId: base.frame.id, region: region.id }),
+        what: `whether the ${ringArea(ring).toFixed(2)} m² strip at ${span.x0.toFixed(2)}, ${span.z0.toFixed(2)} is part of the building`,
+        reason: `it is ${narrow.toFixed(2)} m across, less than the ${minBodySpanM(wallM).toFixed(2)} m two ${wallM.toFixed(2)} m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body`,
         status: 'AMBIGUOUS',
         frameIds: [base.frame.id],
       })
