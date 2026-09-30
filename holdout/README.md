@@ -42,8 +42,11 @@ The post-implementation Council amended it before any draw; each amendment is ma
      **(post)** There is no flag that skips these checks.
    - The draw is appended to `LEDGER.ndjson` with the SHA, the pool hash and the exclusion hash. A draw is
      burned once written. The ledger is committed with the run evidence (T3), never before.
-4. **Run once (T3)** with the frozen code, on the desktop: production `runAnalysis`, with the evidence
-   sealed as text facts. No drawing is committed.
+4. **Run once (T3)** with the frozen code, on the desktop, live, with the cache and output outside the repository.
+   It is production `runAnalysis`, and the evidence is sealed as text facts. No drawing is committed, and no
+   overlay or render of one.
+   - Run: `npm run -s analysis:second-house -- --url <url> --cache <dir> --out <dir>`.
+   - Verdict: `node holdout/verdict.mjs <out dir>`.
 5. **Verdict (T4)**, by predicates fixed before the draw, per project and never averaged.
    - **PASS:** every condition below holds.
      - The run completed.
@@ -67,6 +70,17 @@ The post-implementation Council amended it before any draw; each amendment is ma
    - **ALGORITHMIC_FAIL:** everything else, including a completed model that misses a PASS condition.
    - **Not assessed (post).** The body count has no reference independent of the analyzer, so a body mismatch
      is not a verdict condition. The body count is reported beside the verdict.
+   - **As code (post).** `verdict.mjs` computes all of the above from the run's own files.
+     - The footprint is the model's lowest-level slabs.
+     - The storeys are the model's levels against the package's labelled floor-plan storeys.
+     - Legibility is nominated from the OCR's tokens, and needs a raw measurement before it can count.
+   - **Calibrated on the development set, before any draw.** The final-code runs give 2 PASS of 5:
+     - PASS: Marcówki and Kosaćce.
+     - G2E fails on one opening not built.
+     - e-OZE fails because it was resolved on the figure alone, with no witness.
+     - The alternate Marcówki page fails.
+
+     The predicates are strict enough that the OWNER's own resolved case would not pass them.
 6. **Burn (T5).** No patch after T2. A drawn family joins the development set, every draw is reported, and a
    re-draw never replaces a bad draw.
 
