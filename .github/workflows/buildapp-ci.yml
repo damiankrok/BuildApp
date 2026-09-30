@@ -1005,7 +1005,7 @@ jobs:
           fi
 
   analyzer-development-houses:
-    # BUILDPLAN-ANALYZER-005B. All eight development houses through today's
+    # BUILDPLAN-ANALYZER-005B/005C. All eleven development houses through today's
     # analyzer. Only the source package is sealed (stage-reports/artifacts/
     # analyzer-005b/dev); observations, metric evidence and the model are
     # re-extracted from the publisher's drawings, which are fetched here and
@@ -1041,10 +1041,20 @@ jobs:
           - house: alt-marcowki
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
           - house: dom-w-jablonkach
-            expect: "footprint:1"
+            expect: pass
             limits: METRIC_SCALE_WEAK
+          # 005C: the three envelope failures, now built; the cross-publisher probe stops by name
           - house: willa-miranda
-            expect: "refuse:PLAN_LAYOUT_REJECTED|PLAN_RESOLUTION_INCONCLUSIVE|METRIC_RESOLUTION_INCONCLUSIVE"
+            expect: pass
+          - house: dom-w-zurawkach
+            pkg: stage-reports/artifacts/analyzer-005b/holdout/h1-dom-w-zurawkach/source-package.json
+            expect: "footprint:3"
+          - house: dom-w-modrzykach
+            pkg: stage-reports/artifacts/analyzer-005b/holdout/h2-dom-w-modrzykach/source-package.json
+            expect: pass
+          - house: aster-viii
+            pkg: stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
     env:
       DEV: stage-reports/artifacts/analyzer-005b/dev
     steps:
@@ -1060,7 +1070,7 @@ jobs:
       - name: The publisher's drawings (fetched, never committed)
         id: fetch
         run: |
-          url=$(node -e "console.log(require('./$DEV/${{ matrix.house }}/source-package.json').canonicalUrl)")
+          url=$(node -e "console.log(require('./${{ matrix.pkg || format('{0}/{1}/source-package.json', env.DEV, matrix.house) }}').canonicalUrl)")
           if out=$(npm run -s source:acquire -- "$url" --cache .cache/dev --quiet 2>&1); then
             echo "status=ok" >> "$GITHUB_OUTPUT"
           elif echo "$out" | grep -q "the page could not be fetched"; then
@@ -1074,7 +1084,7 @@ jobs:
         if: steps.fetch.outputs.status == 'ok'
         run: |
           mkdir -p dev
-          OFFLINE=1 npm run -s analysis:second-house -- --package "$DEV/${{ matrix.house }}/source-package.json" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
+          OFFLINE=1 npm run -s analysis:second-house -- --package "${{ matrix.pkg || format('{0}/{1}/source-package.json', env.DEV, matrix.house) }}" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
           tail -n 4 "dev/${{ matrix.house }}.log"
           node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }} ${{ matrix.limits && format('--limits {0}', matrix.limits) || '' }}
       - name: Upload the development-house record

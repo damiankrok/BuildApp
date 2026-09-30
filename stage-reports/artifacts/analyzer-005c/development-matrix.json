@@ -1,0 +1,407 @@
+{
+  "schema": "buildapp.development-matrix",
+  "schemaVersion": "1.0.0",
+  "what": "BUILDPLAN-ANALYZER-005C: the 11 development houses through the frozen 005B code (before) and the 005C code (after), each offline from its sealed source package with the publisher bytes fetched outside the repository. Verdicts by holdout/verdict.mjs.",
+  "rows": [
+    {
+      "house": "marcowki",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.29,
+        "openingsAllBuilt": true,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "wallClockS": 178.9,
+        "peakRssMB": 763
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.29,
+        "openingsAllBuilt": true,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "wallClockS": 196,
+        "peakRssMB": 789
+      }
+    },
+    {
+      "house": "kosacce-clean",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "openingsAllBuilt": true,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "wallClockS": 173.8,
+        "peakRssMB": 776
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "openingsAllBuilt": true,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "wallClockS": 186.5,
+        "peakRssMB": 790
+      }
+    },
+    {
+      "house": "kosacce-tracked",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "openingsAllBuilt": true,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "wallClockS": 173.1,
+        "peakRssMB": 826
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "openingsAllBuilt": true,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "wallClockS": 186.8,
+        "peakRssMB": 769
+      }
+    },
+    {
+      "house": "rarytasy-g2e",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 14,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 184.22,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.93,
+        "openingsAllBuilt": false,
+        "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+        "wallClockS": 187.6,
+        "peakRssMB": 847
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 14,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 184.22,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.93,
+        "openingsAllBuilt": false,
+        "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+        "wallClockS": 197.8,
+        "peakRssMB": 802
+      }
+    },
+    {
+      "house": "rarytasy-eoze",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 11,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 123.99,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": 1.57,
+        "openingsAllBuilt": true,
+        "modelHash": "b4e76f04f47c5a26d46213a35122a4c0fe279907630fa5cddb3269f86e30142a",
+        "wallClockS": 179.2,
+        "peakRssMB": 860
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 11,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 123.99,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": 1.57,
+        "openingsAllBuilt": true,
+        "modelHash": "b4e76f04f47c5a26d46213a35122a4c0fe279907630fa5cddb3269f86e30142a",
+        "wallClockS": 194,
+        "peakRssMB": 836
+      }
+    },
+    {
+      "house": "alt-marcowki",
+      "before": {
+        "outcome": "FAILED",
+        "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 70.8,
+        "peakRssMB": 644
+      },
+      "after": {
+        "outcome": "FAILED",
+        "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 74.5,
+        "peakRssMB": 643
+      }
+    },
+    {
+      "house": "dom-w-jablonkach",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 1,
+        "openings": 17,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 94.18,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": -5.25,
+        "openingsAllBuilt": false,
+        "modelHash": "0f3ea2bbd62342a5e9ed1ef3b32c47048b4a9496284c4f103c42c1bda008e94e",
+        "wallClockS": 261,
+        "peakRssMB": 827
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 99,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": -0.4,
+        "openingsAllBuilt": true,
+        "modelHash": "70b01afd65e284db6aebe02d5f318219e43f50b2ce69adfe2a0efbb73aca0113",
+        "wallClockS": 282,
+        "peakRssMB": 776
+      }
+    },
+    {
+      "house": "willa-miranda",
+      "before": {
+        "outcome": "FAILED",
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 257.7,
+        "peakRssMB": 760
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 6,
+        "openings": 19,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 163.45,
+        "publishedFootprintM2": 169.9,
+        "footprintResidualPct": -3.8,
+        "openingsAllBuilt": true,
+        "modelHash": "6f9eda6373c28fdc32b82279fdbedf9bbce818178b659b51a9ac1c2ee550dfaf",
+        "wallClockS": 272.1,
+        "peakRssMB": 750
+      }
+    },
+    {
+      "house": "dom-w-zurawkach",
+      "before": {
+        "outcome": "FAILED",
+        "reasonCode": "PLAN_NO_MASSES",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 256.7,
+        "peakRssMB": 729
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 3,
+        "openings": 9,
+        "storeys": {
+          "model": 1,
+          "plans": 3
+        },
+        "footprintM2": 98.44,
+        "publishedFootprintM2": 101.7,
+        "footprintResidualPct": -3.2,
+        "openingsAllBuilt": true,
+        "modelHash": "faa2e47e88e1d0a3793b09316d5ca53d4c2ca83a0b568831214e66bc655ae824",
+        "wallClockS": 265.9,
+        "peakRssMB": 771
+      }
+    },
+    {
+      "house": "dom-w-modrzykach",
+      "before": {
+        "outcome": "FAILED",
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 162.6,
+        "peakRssMB": 678
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 6,
+        "openings": 23,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 171.73,
+        "publishedFootprintM2": 181.98,
+        "footprintResidualPct": -5.63,
+        "openingsAllBuilt": true,
+        "modelHash": "791bb130c9c5d52f0263099a406ba85caec88c646acf9d1cf6b1fde10df40e37",
+        "wallClockS": 168.4,
+        "peakRssMB": 671
+      }
+    },
+    {
+      "house": "aster-viii",
+      "before": {
+        "outcome": "FAILED",
+        "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 37.2,
+        "peakRssMB": 726
+      },
+      "after": {
+        "outcome": "FAILED",
+        "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "stage": "REGISTERING_VIEWS",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": null,
+        "footprintResidualPct": null,
+        "openingsAllBuilt": null,
+        "modelHash": null,
+        "wallClockS": 38.5,
+        "peakRssMB": 719
+      }
+    }
+  ]
+}
