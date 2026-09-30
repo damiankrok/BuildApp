@@ -29,6 +29,7 @@
 | STAGE BUILDPLAN-INTEGRATION-004A — HOUSE-FIRST WORKSPACE + ADAPTIVE ANALYZER + KOSAĆCE TOPOLOGY | `integration/house-first-adaptive-analyzer-v1` (from `integration/immersive-progress-v1` @ `d199a0e`; donor Legacy `main` @ `b0e7967`, read only) | source `48034bc`, `e4e191d`, `a160561`; reconstruction `c3d47ff`, `b3dced2`; UI `7213834`; gates `b62a096`, `c42437e`, `43f052b`; cycles `fa31064`, `a9cca3e`, `93a72b6`, `0feddb4`, `1b80ba8`; device gates `f6b8a92`; report `1be45a7`, `54f0c1a`, `c3261a1`, `a14427c` and the commit that carries this row; final build `f6b8a92` (CI run 80, `workflow_dispatch` with the OWNER APK) | Three verdicts, recorded separately (§ "Where the house-first product stands"): **HOUSE-FIRST PRODUCT: TECHNICAL_PASS / OWNER_VISUAL_ACCEPTANCE_PENDING**; **ADAPTIVE SOURCE: PASS (router, generic reader, security) — the alternate Marcówki page is read and refused at reconstruction on evidence (PARTIAL for that one page, as the brief allows)**; **KOSAĆCE: PASS**. The house is the root (the 3D house full screen, one contextual sheet at a time, the analyzer as a task returning to the same house and camera, Koszty a named boundary); an unknown publisher is inspected, never rejected by hostname, and refused only with a typed reason; Kosaćce reconstructs without special-casing through the generic wall topology planner (`WALLS_OVERLAP` unchanged, Marcówki and Rarytasy byte-identical). Three Impeccable audit cycles closed every P1/P2; the OWNER checklist is in the report §AB. The terminal line is in the report |
 
 | STAGE BUILDPLAN-ANALYZER-005A — GENERALIZATION COUNCIL + MULTI-HYPOTHESIS RESOLVER + TRUE PROGRESS TELEMETRY | `analyzer/generalization-council-v1` (from `integration/house-first-adaptive-analyzer-v1` @ `7cd8e0c`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | Council `ccdbd36`, `09fe527`; source `dbfe607`; resolver `f845d21`, `a3723ec`, `f1901e9`, `daf8b8c`; progress `69b0f93`, `5671e6f`, `5dbd0fb`, `968344a`, `a815ce5`, `1094d7c`; warnings `5c3fd22`, `dd664b6`; gates `18adefa`, `f466a64`, `f773a32`, `bdd7cb0`, `b7d7198`, `a3ace7a`; holdout `2bd2593`, `c77e5a8`, `883cb46`; post-Council `616c96e`; performance `56ca1e3` = **PRE_HOLDOUT_SHA** (CI run 96 green); holdout evidence `70636bc`; report `226f9ce` = final build (CI runs 97 and 98 green; run 98 is the `workflow_dispatch` with the OWNER APK, versionCode 1098); the APK record: the commit after it | Five verdicts, recorded separately (§ "Where the analyzer's generalization stands"): **ANALYZER GENERALIZATION ARCHITECTURE: PARTIAL**; **OWNER DEVELOPMENT CASES: PARTIAL**; **TRUE PROGRESS TELEMETRY: PASS**; **BLIND ARCHON HOLDOUT 1 (`dom-w-jablonkach`): ALGORITHMIC_FAIL**; **BLIND ARCHON HOLDOUT 2 (`willa-miranda`): ALGORITHMIC_FAIL**. Both blind houses stop on adequate drawings, on one shared defect below the resolver: rotated overall-dimension labels read upside down, which a circular chain correction or an interior extent turns into the wrong house. Not patched; next-stage input. The terminal line is PARTIAL |
+| STAGE BUILDPLAN-ANALYZER-005B — DIMENSION EVIDENCE REFOUNDATION + SCALE/EXTENT DECOUPLING + BLIND HOLDOUT ROUND 2 | `analyzer/dimension-evidence-refoundation-v1` (from `analyzer/generalization-council-v1` @ `bdacd42`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `c105add`; orientation `8d1204f`; scale `5896eb8`; extent `6401087`; resolver 1.3.0 `5f88060`; warnings/phone `bdbf033`; tests `daab627`; CI `9c9bfc1`; holdout protocol `8da1ee7`; acquisition router `598c1f0`; post-review `625b149`, `4a58bce`, `f57b2ad`; `27274ab` = **PRE_HOLDOUT_2_SHA** (CI run 101 green); holdout evidence `fb5b4af`; report: the commit after it; the APK record: the commit after that | Six verdicts (§ "Where metric truth stands"): **DIMENSION ORIENTATION: PASS**; **SCALE EVIDENCE INDEPENDENCE: PASS**; **PLAN EXTENT CLASSIFICATION: PARTIAL**; **OWNER DEVELOPMENT SET: PARTIAL**; **PROGRESS TELEMETRY: PASS**; **BLIND HOLDOUT ROUND 2: `dom-w-zurawkach` ALGORITHMIC_FAIL, `dom-w-modrzykach` ALGORITHMIC_FAIL** — both with the scale and printed extent right, both failing at the walled outline on a side of openings (willa-miranda's class). Not patched; next-stage input. The terminal line is PARTIAL |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -864,16 +865,62 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005A_GENERALIZATION_COUNCIL.md`.
 - **Open for the OWNER.** The progress card and the result warnings on the phone, following the checklist in
   report §AC.
 
+## Where metric truth stands (STAGE BUILDPLAN-ANALYZER-005B)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005B_DIMENSION_EVIDENCE_REFOUNDATION.md`. Evidence:
+`stage-reports/artifacts/analyzer-005b/`. `PRE_HOLDOUT_2_SHA = 27274ab8c24a17c484158f5e3a0bf091ce85e961` (CI run 101 green).
+
+- **DIMENSION ORIENTATION — PASS.**
+  - Every floor-plan label is read in four orientations and every reading is kept (`OcrToken.orientation`,
+    `pageVote`); the page-wide vote can no longer delete the right reading before a chain sees it.
+  - Each chain decides its own way up from evidence (self-consistency, a scale stated on other chains, leading
+    zeros, the sheet's majority), and a way up chosen by a scale never witnesses that scale.
+  - Metamorphic tests at 0/90/180/270°; the vote's own tokens are unchanged with or without the hypotheses.
+- **SCALE EVIDENCE INDEPENDENCE — PASS** (right and independent on both new blind houses).
+  - An independent metric solution per plan frame (`metrics.independent-scale@1.0.0`): one ink one witness,
+    decisive readings only, a lexicographic evidence tuple, confidence STRONG/SUPPORTED/WEAK/INCONCLUSIVE, and a
+    relation to the vote's scale (CONFIRMED / REPLACED / LEGACY_UNCONFIRMED / ADDED / NO_SCALE).
+  - A correction made under a scale never witnesses it; a confirmed scale is never re-fitted, so confirmation never
+    moves a model; the resolver scores refutation on values as read.
+  - Residual: on REPLACED frames the registration still anchors on corrections made at the new scale.
+- **PLAN EXTENT CLASSIFICATION — PARTIAL.**
+  - Chain roles from geometry (wall witness; EXTERIOR / INTERIOR); an interior chain that does not span the walls
+    never frames the building; a refusal only ever widens; a frame the walls supplied is named and limits the result.
+  - Residual: a partial witness (outer walls split by wide openings) can still let an interior chain read EXTERIOR —
+    willa-miranda's failure.
+- **OWNER DEVELOPMENT SET — PARTIAL.**
+  - Marcówki (`6152770f…`), Kosaćce clean and tracked (`5b5ffcf1…`) and G2E (`8fa4a25b…`) are byte-identical; e-OZE
+    now PASSES on its first reading (123.99 m², +1.6 %, `b4e76f04…`); the alternate Marcówki page stops with the typed
+    `METRIC_RESOLUTION_INCONCLUSIVE`.
+  - dom-w-jablonkach completes at 94.18 m² (−5.3 %) on the scale its right-way `1100` states, and misses one printed
+    opening; willa-miranda still fails (`PLAN_LAYOUT_REJECTED`).
+  - The phone's Kosaćce copy loss is not in text handling (the phone runtime makes the desktop's package, byte for
+    byte, from the same bytes); diagnostics now name each dropped copy.
+- **PROGRESS TELEMETRY — PASS.** Orientation, scale and extent loops tick; longest silence ≤ 2.4 s one house at a time (≤ 4.9 s with eight houses on four cores; 1.9 and 2.1 s on the blind runs);
+  the metric pass costs the same as before, sequentially (121 vs 126 s Marcówki, 152 vs 147 s dom-w-jablonkach).
+- **BLIND HOLDOUT ROUND 2 — both ALGORITHMIC_FAIL, not in the refactored metric layer, not patched.** Drawn from 2534
+  addresses with seed `1216338c…00cfd0`; each run once, live; evidence `stage-reports/artifacts/analyzer-005b/holdout/`.
+  - **Project 1 `dom-w-zurawkach`: ALGORITHMIC_FAIL** (`PLAN_NO_MASSES`, best reading 40–43 m² against 101.7). Scale CONFIRMED/STRONG (5 independent readings as printed, the rotated `800`/`150` the right way up) and the printed extent 11.80 × 9.50 m are right; the garage wing is never proposed as a bay (one side wall runs through the envelope edge, the other reaches 1.04 m < 1.5 m), so the garage floods from its own mouth.
+  - **Project 2 `dom-w-modrzykach`: ALGORITHMIC_FAIL** (`PLAN_LAYOUT_REJECTED`, 14.72 m² against 181.98). Scale REPLACED/STRONG (the vote had 0 independent readings; the rotated `1160` the right way up) and the printed extent 18.50 × 11.59 m are right; the walled envelope is 2.02 m of 11.60 m deep, stopped at the garage's back wall because a front of openings leaves no long band.
+- **OWNER APK.** Recorded in the report's §AI and below, from the `workflow_dispatch` run on the report commit.
+- **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005B_BLIND_WALL_OUTLINE_FAIL`). Both new blind houses fail, in the
+  walled outline (envelope and bays) on a side of openings — willa-miranda's class. CI green is not the verdict.
+
 ## Recommended technical next step
 
-**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005A holdout defect as the next stage's input.**
-- **The defect.** Rotated overall-dimension labels are read upside down, and two decisions turn that misreading
-  into a wrong house:
-  - the chain solver's digit correction, which anchors its own scale;
-  - an interior chain accepted as the plan's extent without being marked weak.
-- **How a fix is judged.** It is held to the six known runs and to both drawn houses, which are now
-  development cases.
-- **Generality.** A further claim of generality needs a new blind draw on a new frozen SHA.
+**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005B holdout defect as the next stage's input.**
+- **The defect.** The plan's walled outline (envelope and bays) is taken from long wall bands, and a side of the
+  building that is mostly openings (a garage door between piers, a glazed front) has none:
+  - on `dom-w-modrzykach` the envelope stops at an interior wall (2.02 m of 11.60 m);
+  - on `dom-w-zurawkach` the garage wing is never proposed as a bay;
+  - on `willa-miranda` (development) the garage floods the same way, behind a partial wall witness that also lets
+    an interior chain frame its depth.
+  On both blind houses the metric layer 005B rebuilt is right: orientation, independent scale and printed extent.
+- **How a fix is judged.** It is held to all ten development rows (005B's eight and the two round-2 families), with
+  no regression; a further claim of generality needs a new blind draw on a new frozen SHA.
+
+The 005A analyzer recommendation (upside-down overall labels, circular chain corrections, interior extents) is done
+in 005B; see "Where metric truth stands".
 
 **For the integration line: the OWNER's visual review of BUILDPLAN-INTEGRATION-004A on the phone** (`owner-preview-latest`, run 80 / `f6b8a92`, `versionCode 1080`, `0.80.0-preview`, arm64-v8a, SHA-256 `3390aafd…`; the checklist and questions in the 004A report), then a bounded fix of only what the phone and the answers show. Costs stay a named boundary, documents are not started, and nothing is merged to `main`, until the coordinator decides.
 
