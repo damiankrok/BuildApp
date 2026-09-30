@@ -137,6 +137,55 @@ to 0.3 %`). A `PlanFrameV2` carries `toWorld`, `toPixel`, its `originPx`
 wall thickness in pixels, which every later threshold on that sheet is stated
 in.
 
+### Plan resolver (BUILDPLAN-ANALYZER-005A, `plan-resolution.ts`)
+
+The structural pass reads the base plan as a chain of single answers:
+- one copy of the drawing;
+- one extent;
+- one scale;
+- one tiling;
+- then a terminal gate.
+
+When that first reading **stops** (no world frame, no mass, or a layout refusal such as a footprint the
+publisher contradicts), `resolvePlan` weighs other readings of the same drawing before the run fails. A first
+reading that holds is never second-guessed, so every house it reads today is read the same way, byte for byte.
+
+Readings are generated from the drawing, never from the answer. Each axis's first value is today's behaviour:
+
+| axis | values |
+| --- | --- |
+| copy | the storey's other copies of the plan (≤ 4; dimensioned first, then pixels) |
+| extent | the widest read chains \| the largest cluster of wall ink, when it differs by more than a wall |
+| scale | the registration \| ≤ 2 scales that the reader's own unedited readings of long spans support more than they support the registration |
+| merge | largest rectangle first \| walled rectangle first (every outside side must carry wall; a side facing built cells may be open) |
+| faces | a band-only side on the band's axis \| on its outer face |
+| mouths | a wide undrawn gap in front of a space walled on its other sides as a pocket's mouth \| as an opening in the wall (only where a reading left such a mouth open) |
+
+- **Bounded by counts, never a clock.** ≤ 24 decompositions, and the best 4 distinct buildings composed in
+  full.
+- **Ranking** is lexicographic on the gate's own buckets:
+  1. hard violations;
+  2. gate refusals;
+  3. footprint (AGREES ≤ 6 % < no figure < NEAR ≤ 20 % < WRONG);
+  4. refuted chain length;
+  5. wall coverage;
+  6. corroborations;
+  7. departures.
+- **Acceptance.** AGREES; or NEAR with an independent corroboration (another copy agrees, the scale holds on
+  both axes, ≥ 80 % of the long walls are explained); or no published figure and two corroborations. Never
+  WRONG.
+- **Ties.** A tie between two different buildings is `PLAN_RESOLUTION_INCONCLUSIVE`, with the readings
+  named.
+- **Seal.** A resolved layout is sealed as PARTIAL with a DEGRADING `PLAN_RESOLVED_BY_HYPOTHESIS`. It also
+  carries:
+  - an `AlternativeGroup` of the readings weighed;
+  - a `SCALE_DISAGREEMENT` conflict when the scale was re-read;
+  - DERIVED provenance on spans resting on a re-read statement.
+
+`PLAN_RESOLVER_VERSION` names the readings. Every resolution is recorded in the plan diagnostics and the
+trace. The gates are `plan-resolution.test.ts` and `shape-families.test.ts`, and the evidence is in
+`stage-reports/artifacts/analyzer-005a/resolver/`.
+
 ### Render registration
 
 `registerElevationV2` registers a rendered elevation with **one** scale. The
