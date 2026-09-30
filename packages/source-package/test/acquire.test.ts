@@ -245,7 +245,7 @@ describe('determinism and the content hash', () => {
     expect(hashWith(pkg, (d) => void (d.fetchedUrl = `${d.canonicalUrl}/`))).toBe(base)
     // how hard a fetch was tried, and what the lost address was exposed as, say nothing new about the material
     const lost = { stage: 'ASSET_FETCH' as const, target: 'https://assets.archon.pl/y.jpg', code: 'TIMEOUT', message: 'no data' }
-    expect(hashWith(pkg, (d) => void d.failures.push({ ...lost, attempts: 2, claim: { channel: 'IMG_SRC', document: 'FLOOR_PLAN' } }))).toBe(hashWith(pkg, (d) => void d.failures.push(lost)))
+    expect(hashWith(pkg, (d) => void d.failures.push({ ...lost, attempts: 2, status: 503, claim: { channel: 'IMG_SRC', document: 'FLOOR_PLAN' } }))).toBe(hashWith(pkg, (d) => void d.failures.push(lost)))
 
     // a failure's wording is prose too, while its code is content
     const withFailure = hashWith(pkg, (d) => void d.failures.push({ stage: 'ASSET_FETCH', target: 'https://assets.archon.pl/x.jpg', code: 'HTTP_STATUS', message: 'HTTP 404' }))

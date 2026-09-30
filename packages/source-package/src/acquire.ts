@@ -395,8 +395,8 @@ async function fetchBytes(
   const cached = options.cache ? await options.cache.get(url) : null
   // the cache remembers where a redirect led, so a replay names the page as the live run did
   if (cached) return { url: cached.url ?? url, bytes: cached.bytes, mediaType: cached.mediaType }
-  const fail = (code: string, message: string, attempts?: number): null => {
-    failures.push({ stage, target: url, code, message, ...(attempts !== undefined && attempts > 1 ? { attempts } : {}), ...(claim ? { claim } : {}) })
+  const fail = (code: string, message: string, attempts?: number, status?: number): null => {
+    failures.push({ stage, target: url, code, message, ...(attempts !== undefined && attempts > 1 ? { attempts } : {}), ...(status !== undefined ? { status } : {}), ...(claim ? { claim } : {}) })
     return null
   }
   if (options.offline) return fail('OFFLINE_CACHE_MISS', 'offline acquisition and this address is not in the cache')
@@ -408,7 +408,7 @@ async function fetchBytes(
     } catch (e) {
       if (!(e instanceof FetchRefused)) return fail('NETWORK', (e as Error).message, attempt)
       if (e.code === 'ABORTED') throw e
-      if (attempt >= 2 || !isTransientFetchFailure(e)) return fail(e.code, e.message, attempt)
+      if (attempt >= 2 || !isTransientFetchFailure(e)) return fail(e.code, e.message, attempt, e.status)
       await pause(policy.retryDelayMs)
     }
   }

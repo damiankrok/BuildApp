@@ -426,6 +426,8 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       exteriorJointErrors: exteriorErrors,
       graphViolations: reconstruction.violations.graph.length,
       ledgerViolations: reconstruction.violations.ledger.length,
+      layoutReasons: reconstruction.layout.gate.reasons,
+      openingFits: reconstruction.openingFits,
     })
 
     const result: LinkAnalysisResult = {

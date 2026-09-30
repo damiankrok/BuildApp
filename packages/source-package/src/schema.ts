@@ -213,6 +213,11 @@ export const AcquisitionFailureSchema = z
     /** How many requests were made for this address (a transient failure is tried twice). */
     attempts: z.number().int().positive().optional(),
     /**
+     * The HTTP status, for `HTTP_STATUS`. A 404 says the address does not
+     * exist; a 503 says nothing about it. Not hashed: it explains the code.
+     */
+    status: z.number().int().min(100).max(599).optional(),
+    /**
      * What the lost address was exposed as, before a byte of it arrived: the
      * channel and the roles its name claimed. "An exposed floor plan was not
      * fetched" and "a guessed larger copy does not exist" are different

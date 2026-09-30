@@ -7,7 +7,10 @@
  *
  *   - no vision provider ran: every run on a phone is deterministic by design;
  *   - a guessed larger copy of a drawing does not exist: a guess (channel
- *     `VARIANT_CONVENTION`) that 404s leaves the copy it was derived from in hand;
+ *     `VARIANT_CONVENTION`) that 404s leaves the copy it was derived from in hand.
+ *     Only a definite absence counts (404, 410, or an offline replay that never
+ *     had the bytes): a guess that timed out or got a 503 may exist, and the
+ *     larger copy it names was not read, so that one limits;
  *   - one image published at two addresses was counted once.
  *
  * Calling a result "limited" for those taught the person to ignore the word.
@@ -15,7 +18,14 @@
  *
  *   - `INFO` — nothing about the house is missing or unchecked;
  *   - `LIMITING` — a drawing the page exposed was not read, a source-view check
- *     failed, a joint is open, or an invariant does not hold.
+ *     failed, a joint is open, an invariant does not hold, the layout gate
+ *     passed the building with a degrading reason (it was taken from another
+ *     reading of the plan, it lands 6–20 % off the published footprint, two
+ *     sources disagree…), or an opening the drawings print was not built.
+ *
+ * The layout gate already sorts its reasons; every DEGRADING one is passed on
+ * as it is, never picked by code, so a new reason cannot be informational by
+ * omission.
  *
  * The rule looks only at the kind of loss (channel, code), never at a project.
  * When the kind is unknown, the warning is LIMITING: calling a real loss
@@ -38,6 +48,9 @@ const NOTHING_LOST = new Set(['BYTE_IDENTICAL', 'DIFFERENT_CROP'])
 /** A guessed address: derived from a copy already in hand by the publisher's naming convention. */
 const GUESS_CHANNEL = 'VARIANT_CONVENTION'
 
+/** The address does not exist, as far as anyone can tell: not a server that was busy or slow. */
+const definitelyAbsent = (f: AcquisitionFailure): boolean => (f.code === 'HTTP_STATUS' && (f.status === 404 || f.status === 410)) || f.code === 'OFFLINE_CACHE_MISS'
+
 export type WarningInputs = {
   visionMode: VisionMode
   failures: readonly AcquisitionFailure[]
@@ -46,6 +59,10 @@ export type WarningInputs = {
   exteriorJointErrors: number
   graphViolations: number
   ledgerViolations: number
+  /** The layout gate's reasons on the building that was sealed. */
+  layoutReasons?: ReadonlyArray<{ code: string; severity: 'NOTED' | 'DEGRADING' | 'BLOCKING'; what: string }>
+  /** Openings the model could not take as printed; only the ones not built at all limit. */
+  openingFits?: ReadonlyArray<{ openingId: string; action: string; why: string }>
 }
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`
@@ -58,9 +75,9 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
   else if (input.visionMode !== 'LIVE_PROVIDER') out.push({ code: 'DETERMINISTIC_ONLY', severity: 'INFO', message: 'no vision provider ran; every observation is from the deterministic analyzer' })
 
   // Grouped by what was lost, so three 404s on guesses are one line and a lost floor plan is another.
-  const groups = new Map<string, { kind: 'GUESS' | 'DUPLICATE' | 'EXPOSED'; code: string; n: number }>()
+  const groups = new Map<string, { kind: 'GUESS' | 'GUESS_UNREAD' | 'DUPLICATE' | 'EXPOSED'; code: string; n: number }>()
   for (const f of input.failures) {
-    const kind = NOTHING_LOST.has(f.code) ? 'DUPLICATE' : f.claim?.channel === GUESS_CHANNEL ? 'GUESS' : 'EXPOSED'
+    const kind = NOTHING_LOST.has(f.code) ? 'DUPLICATE' : f.claim?.channel === GUESS_CHANNEL ? (definitelyAbsent(f) ? 'GUESS' : 'GUESS_UNREAD') : 'EXPOSED'
     const key = `${kind}|${f.code}`
     const g = groups.get(key)
     if (g) g.n += 1
@@ -71,10 +88,18 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
       out.push({ code: `SOURCE_${g.code}`, severity: 'INFO', message: `${plural(g.n, 'source address', 'source addresses')} counted with another copy (${words(g.code)})` })
     } else if (g.kind === 'GUESS') {
       out.push({ code: `GUESSED_ADDRESS_${g.code}`, severity: 'INFO', message: `${plural(g.n, 'guessed larger copy', 'guessed larger copies')} not available (${words(g.code)}); the published copy was used` })
+    } else if (g.kind === 'GUESS_UNREAD') {
+      out.push({ code: `GUESSED_ADDRESS_UNREAD_${g.code}`, severity: 'LIMITING', message: `${plural(g.n, 'guessed larger copy', 'guessed larger copies')} could not be read (${words(g.code)}) and may exist; the published copy was used` })
     } else {
       out.push({ code: `SOURCE_ADDRESS_${g.code}`, severity: 'LIMITING', message: `${plural(g.n, 'source address', 'source addresses')} not used (${words(g.code)})` })
     }
   }
+
+  for (const r of input.layoutReasons ?? []) {
+    if (r.severity !== 'NOTED') out.push({ code: `LAYOUT_${r.code}`, severity: 'LIMITING', message: r.what })
+  }
+  const notBuilt = (input.openingFits ?? []).filter((f) => f.action === 'DROPPED')
+  if (notBuilt.length > 0) out.push({ code: 'OPENINGS_NOT_BUILT', severity: 'LIMITING', message: `${plural(notBuilt.length, 'opening the drawings print was', 'openings the drawings print were')} not built: ${notBuilt.map((f) => f.openingId).join(', ')}` })
 
   if (input.residualsOutside > 0) out.push({ code: 'RESIDUALS_OUTSIDE_TOLERANCE', severity: 'LIMITING', message: `${input.residualsOutside} of ${input.residuals} source-view checks outside tolerance` })
   if (input.exteriorJointErrors > 0) out.push({ code: 'EXTERIOR_JOINTS', severity: 'LIMITING', message: `${plural(input.exteriorJointErrors, 'exterior joint finding', 'exterior joint findings')} in the closure audit` })

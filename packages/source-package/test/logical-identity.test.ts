@@ -220,6 +220,7 @@ describe('a transient failure is tried once more; a definite one is evidence', (
     expect(net.calls.filter((c) => c === PLAN_ORIGINAL)).toHaveLength(1)
     const guess = pkg.failures.find((f) => f.target === PLAN_ORIGINAL)
     expect(guess?.code).toBe('HTTP_STATUS')
+    expect(guess?.status).toBe(404)
     expect(guess?.attempts).toBeUndefined()
     expect(guess?.claim?.channel).toBe('VARIANT_CONVENTION')
   })
@@ -231,7 +232,7 @@ describe('a transient failure is tried once more; a definite one is evidence', (
       String(input) === PLAN ? new Response(null, { status: 503 }) : net.fetchImpl(input, init)) as unknown as typeof fetch
     const pkg = await acquireSourcePackage(PAGE_URL, [archonAdapter], { policy: POLICY, deps: { fetchImpl: failing, resolve: publicResolver } })
     const lost = pkg.failures.find((f) => f.target === PLAN)
-    expect(lost).toMatchObject({ code: 'HTTP_STATUS', attempts: 2, claim: { document: 'FLOOR_PLAN', storey: 'GROUND' } })
+    expect(lost).toMatchObject({ code: 'HTTP_STATUS', status: 503, attempts: 2, claim: { document: 'FLOOR_PLAN', storey: 'GROUND' } })
     expect(lost?.claim?.channel).not.toBe('VARIANT_CONVENTION')
   })
 })
