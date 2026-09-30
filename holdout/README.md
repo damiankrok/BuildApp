@@ -118,3 +118,47 @@ The same protocol, steps 1–6, with these differences only. Everything here is 
    `METRIC_RESOLUTION_INCONCLUSIVE` is algorithmic unless a checklist item is confirmed, exactly like
    `PLAN_RESOLUTION_INCONCLUSIVE`. An `ALGORITHMIC_FAIL` is not patched in 005B: its first bad evidence
    decision is recorded and becomes the next stage's input.
+
+## Round 3 (BUILDPLAN-ANALYZER-005C)
+
+The same protocol, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two publishers, one pick each.** One unseen ARCHON project and one unseen DobreDomy project. Each is run
+   once. A DobreDomy draw is a cross-publisher probe: 005C builds no DobreDomy-specific code, so the page is
+   read by the generic project-page adapter or it stops with a typed reason.
+2. **ARCHON pool.** The committed round-1 pool (`holdout/pool.txt`, `POOL_SHA256 = 800c2a1e…2ed41`).
+   - **Excluded families** (`excluded-families-round-3.txt`, 40 families, 583 pool addresses; 2502 drawable):
+     round 2's 38 families and the two round-2 draws, now development houses (`dom-w-zurawkach`,
+     `dom-w-modrzykach`). Their pages link to no family outside the list.
+   - `EXCLUDED_FAMILIES_ROUND_3_SHA256 = 330e7832a37056a8590cad5783202a25736c22de8b2b069a10683291358140cf`.
+3. **DobreDomy pool** (`holdout/pool-dobredomy.txt`).
+   - **Source.** The publisher's `robots.txt` and `sitemap.xml` only, fetched 2026-09-30T19:07Z. No project page
+     but the development probe (Aster VIII) was opened.
+   - **Kept.** Canonical project addresses (`/projekt/<Slug>/`), sorted by UTF-16 code unit.
+   - **Dropped.** Garages, decided from the slug alone (`G1`, `G2` …): 6 of 906.
+   - **Result.** 900 addresses in 491 families. A family is the lowercase stem before the first capital or digit
+     (`asterVIII2g` → `aster`), which over-merges, the safe direction.
+   - `DD_POOL_SHA256 = 42762070d1b5475d799795d0a381789b16d75c9aeafafdf7902d5717e8f438c5`; the sitemap and robots
+     hashes are in `pool-dobredomy.meta.json`.
+   - **Excluded families** (`excluded-families-dobredomy.txt`, 73 families, 203 pool addresses; 697 drawable):
+     the Aster family and every family the Aster page links to, taken from its cached HTML, addresses only.
+   - `EXCLUDED_FAMILIES_DOBREDOMY_SHA256 = 3122f477250d1ef07a427b97705ff940edb7790474266c41031f49666c494730`.
+4. **Freeze.** `PRE_HOLDOUT_3_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+5. **Draw.** Both picks in one command:
+   `node holdout/select.mjs select --round 3 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --dd-pool holdout/pool-dobredomy.txt --dd-pool-sha256 42762070d1b5475d799795d0a381789b16d75c9aeafafdf7902d5717e8f438c5 --pre-holdout-sha <sha>`.
+   - ARCHON: `seed = SHA256(PRE_HOLDOUT_3_SHA + "BUILDPLAN-005C-ARCHON-HOLDOUT")`, `i1 = seed mod n`.
+   - DobreDomy: `seed = SHA256(PRE_HOLDOUT_3_SHA + "BUILDPLAN-005C-DOBREDOMY-HOLDOUT")`, `i1 = seed mod n`.
+   - **DobreDomy eligibility**, by the drawn page's markup alone: a heading naming floor plans (`rzut`) and a
+     heading naming elevations (`elewacj`), each followed by at least one image before the next heading. An
+     ineligible draw is recorded in the ledger and burned; the k-th re-draw is `SHA256(seed + ":next:" + k)`
+     over the drawable addresses not yet burned, at most 10.
+   - One ledger line (`BUILDPLAN-005C-BLIND-HOLDOUT-ROUND-3`) records both picks, their seeds, the exclusion
+     hashes and every eligibility check.
+6. **Run once, verdict, burn** as in rounds 1 and 2, with `holdout/verdict.mjs` unchanged.
+   - `BOUNDARY_RESOLUTION_INCONCLUSIVE` joins `PLAN_RESOLUTION_INCONCLUSIVE` and `METRIC_RESOLUTION_INCONCLUSIVE`:
+     it is algorithmic unless a checklist item is confirmed on the raw copies.
+   - For the DobreDomy draw, a source-limited verdict also needs its checklist item measured on the raw copies.
+     A publisher whose drawings print no dimension is `SOURCE_LIMITED_PARTIAL` only once that is shown.
+   - An `ALGORITHMIC_FAIL` is not patched in 005C. Its first bad evidence decision is recorded and becomes the
+     next stage's input.
