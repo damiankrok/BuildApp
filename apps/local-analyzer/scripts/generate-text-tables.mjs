@@ -308,11 +308,16 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { text, tables, excluded } = generate({ log: (m) => process.stderr.write(`${m}\n`) })
   if (process.argv.includes('--check')) {
     const committed = readFileSync(OUT, 'utf8')
-    if (committed !== text) {
+    // The recorded ICU version is provenance, not a table: CI runner images cache different Node 22 patch
+    // releases, and two ICU patch versions that generate the same tables for the same Unicode are the same
+    // answer. Every table, and the Unicode version, must still match exactly.
+    const recorded = /"icu": "([^"]+)"/.exec(committed)?.[1]
+    const relabelled = recorded ? committed.replace(`ICU ${recorded} (`, `ICU ${tables.icu} (`).replace(`"icu": "${recorded}"`, `"icu": "${tables.icu}"`) : committed
+    if (relabelled !== text) {
       process.stderr.write('src/text-tables.ts is not what this ICU generates (run the script without --check)\n')
       process.exit(1)
     }
-    process.stdout.write('text tables current\n')
+    process.stdout.write(recorded === tables.icu ? 'text tables current\n' : `text tables current: generated from ICU ${recorded}; this ICU ${tables.icu} generates the same tables\n`)
   } else {
     writeFileSync(OUT, text)
     process.stdout.write(
