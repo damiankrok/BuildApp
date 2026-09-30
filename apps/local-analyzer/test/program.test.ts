@@ -195,7 +195,8 @@ describe('the program stops when it is told to, and leaves nothing', () => {
     const trace = JSON.parse(readFileSync(join(result.outDir, 'diagnostics', 'trace.json'), 'utf8')) as { outcome: string; entries: Array<{ stage: string; status: string }> }
     expect(trace.outcome).toBe('CANCELLED')
     expect(trace.entries.at(-1)?.status).toBe('CANCELLED')
-    expect(['EXTRACTING_OBSERVATIONS', 'REGISTERING_VIEWS', 'SOLVING_TOPOLOGY', 'SOLVING_METRICS', 'BUILDING_MODEL']).toContain(trace.entries.at(-1)?.stage)
+    // in the stage it was sent from: polling only at stage boundaries would land it in the next one
+    expect(trace.entries.at(-1)?.stage).toBe('EXTRACTING_OBSERVATIONS')
     // the runtime said it could, and every telemetry line before the end has a heartbeat one past the last
     const hello = events.find((e) => e.type === 'hello') as { capabilities?: string[] } | undefined
     expect(hello?.capabilities).toContain('control.poll')

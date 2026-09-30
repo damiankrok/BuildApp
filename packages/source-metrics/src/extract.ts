@@ -302,11 +302,16 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     }
 
     // --- dimension chains ---
+    const chainStep = (): void => checkpoint.tick({ subphase: { id: 'CHAINS', label: 'reading dimension chains' } })
     const mask = adaptiveInkMask(inkChannel(raster), {})
+    chainStep()
     const runs = findStraightRuns(mask)
+    chainStep()
     const lines = findDimensionLines(mask)
+    chainStep()
     const rawChains = chainsFromLines(lines, observations)
     const plausibility = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ' ? planScalePlausibility(mask) : undefined
+    chainStep()
     const solution = solveFrameChains(rawChains, read.tokens, { tolerancePx, plausibility })
     if (solution.scaleDecision) {
       const d = solution.scaleDecision

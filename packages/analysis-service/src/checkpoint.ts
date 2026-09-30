@@ -18,6 +18,11 @@
  *     heartbeat means "the thread just crossed a boundary", and its absence
  *     means the thread is inside one step — the phone decides how long that
  *     may take before it says so.
+ *
+ * A listener that fails is the listener's problem, never the run's: a sink or
+ * a memory probe that throws is not asked again, the phase's record counts it
+ * (`telemetrySinkFailed`, `rssProbeFailed`), and the computation goes on to
+ * the same bytes. Only the cancel poll may end a run from here.
  */
 import type { Checkpoint, ProgressUnit, WorkUpdate } from '@buildapp/source-common'
 import { ANALYSIS_STAGES } from './stages.js'
@@ -147,15 +152,36 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
     peakRss?: number
   }
   let current: Current | undefined
+  let sinkFailed = false
+  let rssFailed = false
+
+  const sampleRss = (c: Current): void => {
+    if (!options.rss || rssFailed) return
+    try {
+      const rss = options.rss()
+      c.peakRss = Math.max(c.peakRss ?? 0, rss)
+    } catch {
+      rssFailed = true
+      c.counters.rssProbeFailed = 1
+    }
+  }
 
   const emit = (kind: AnalysisTelemetry['kind'], activity: AnalysisTelemetry['activity'], at: number): void => {
-    if (!current || !options.emit) return
+    if (!current || !options.emit || sinkFailed) return
     lastEmit = at
     seq += 1
-    const rss = options.rss?.()
-    if (rss !== undefined) current.peakRss = Math.max(current.peakRss ?? 0, rss)
     const c = current
-    options.emit({
+    sampleRss(c)
+    try {
+      send(kind, activity, at, c, options.emit)
+    } catch {
+      sinkFailed = true
+      c.counters.telemetrySinkFailed = 1
+    }
+  }
+
+  const send = (kind: AnalysisTelemetry['kind'], activity: AnalysisTelemetry['activity'], at: number, c: Current, sink: (event: AnalysisTelemetry) => void): void => {
+    sink({
       kind,
       stage: c.stage,
       stageIndex: ANALYSIS_STAGES.indexOf(c.stage),

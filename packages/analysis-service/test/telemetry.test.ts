@@ -78,6 +78,36 @@ describe('run telemetry', () => {
     expect(stats.find((s) => s.phaseId === 'METRIC_FRAMES')?.ticks).toBeGreaterThan(0)
   })
 
+  it('a listener that fails does not fail the run: a throwing sink and memory probe leave the same bytes, and the record says so', async () => {
+    let calls = 0
+    let stats: PhaseStats[] = []
+    const [quiet, broken] = await Promise.all([
+      runAnalysis({ kind: 'URL', url }, base({ jobId: 'job-s' })),
+      runAnalysis(
+        { kind: 'URL', url },
+        base({
+          jobId: 'job-s',
+          clock: steppingClock(),
+          telemetry: () => {
+            calls += 1
+            if (calls === 3) throw new Error('the pipe to the phone closed')
+          },
+          rss: () => {
+            throw new Error('no memory probe on this runtime')
+          },
+          onPhaseStats: (s) => (stats = s),
+        }),
+      ),
+    ])
+    expect(hashesOf(broken.result)).toEqual(hashesOf(quiet.result))
+    expect(broken.sceneText).toBe(quiet.sceneText)
+    // a sink that threw is not called again
+    expect(calls).toBe(3)
+    expect(stats.filter((s) => s.counters.telemetrySinkFailed === 1)).toHaveLength(1)
+    expect(stats.filter((s) => s.counters.rssProbeFailed === 1)).toHaveLength(1)
+    expect(stats.every((s) => s.peakRssBytes === undefined)).toBe(true)
+  })
+
   it('a cancel lands inside the metric pass, at the next loop boundary', async () => {
     let asked = false
     let seenAfter = 0
@@ -103,7 +133,7 @@ describe('run telemetry', () => {
     expect(seenAfter).toBeLessThanOrEqual(1)
   })
 
-  it('a cancel while the resolver or solver runs lands in its own stage', async () => {
+  it('a cancel while the plans are read lands in that stage (the resolver cancel itself: plan-resolution.test.ts, on a sheet that reaches it)', async () => {
     let asked = false
     const run = runAnalysis(
       { kind: 'URL', url },

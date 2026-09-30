@@ -93,7 +93,10 @@ Version 3 (BUILDPLAN-ANALYZER-005A) makes a long run legible:
   - The loops themselves emit it when they cross a boundary, at most once a
     second, so a heartbeat means "the thread is working".
   - It is written best-effort: a full pipe drops a telemetry line, never a
-    terminal event.
+    terminal event. A sink or memory probe that throws is not asked again,
+    and the run goes on to the same bytes. The phase's performance record
+    counts it (`telemetrySinkFailed`, `rssProbeFailed`); only the cancel poll
+    may end a run from a checkpoint.
 - **Cancellation between ticks.** The program reads the control descriptor
   without blocking whenever a tick asks (at most every 200 ms). A cancel
   therefore lands inside a long computation at the next loop boundary, not

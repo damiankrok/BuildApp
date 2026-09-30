@@ -326,7 +326,7 @@ function scoreRing(searchable: Mask, original: Mask, cx: number, cy: number, r: 
  * and the survivors are refined to the neighbouring centre and radius that
  * fit best.
  */
-function findRings(searchable: Mask, original: Mask, minR: number, maxR: number): Ring[] {
+function findRings(searchable: Mask, original: Mask, minR: number, maxR: number, tick: () => void = () => undefined): Ring[] {
   const components = connectedComponents(searchable, { minPixels: Math.round(2 * Math.PI * minR * 0.5) })
   const { width, height } = searchable
   // Summed-area table of the searchable ink, so the ink inside any box is
@@ -351,6 +351,7 @@ function findRings(searchable: Mask, original: Mask, minR: number, maxR: number)
   const seen = new Set<number>()
   const found: Ring[] = []
   for (const c of components) {
+    tick()
     const w = c.bounds.x1 - c.bounds.x0 + 1
     const h = c.bounds.y1 - c.bounds.y0 + 1
     if (w < 2 * minR - 2 || h < 2 * minR - 2) continue
@@ -906,6 +907,8 @@ function coherent(upper: HalfReading, lower: HalfReading, circle: Circle): boole
  * it better.
  */
 const CALLOUT_SUBPHASE = { id: 'CALLOUT_RINGS', label: 'reading opening callouts' }
+/** Before the rings are read: the masks, their components and the ring search, which on a large sheet is the longer half. */
+const CALLOUT_SEARCH = { id: 'CALLOUT_SEARCH', label: 'finding opening callouts' }
 
 /**
  * How much memory of prototype renders one reading keeps. A render is a pure
@@ -980,14 +983,17 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
   const opt = { ...DEFAULTS, ...options }
   const minR = Math.max(3, Math.round(opt.minRadiusPx))
   const maxR = Math.max(minR, Math.round(opt.maxRadiusPx))
+  const tick = (): void => options.checkpoint?.tick({ subphase: CALLOUT_SEARCH })
   const ink = inkChannel(raster)
   const inkMask = adaptiveInkMask(ink, {})
+  tick()
 
   const sources: Source[] = []
   if (opt.useColour) {
     const saturation = saturationField(raster)
     const colourMask = maskOf(saturation, (v) => v > SATURATION_INK)
     const coloured = connectedComponents(colourMask, { minPixels: 4 })
+    tick()
     if (coloured.length >= 3) {
       // Grey for reading: the ink where the ink is coloured, paper elsewhere,
       // so a black line crossing a red callout is not read as a stroke.
@@ -1002,7 +1008,8 @@ export function readOpeningCallouts(raster: Raster, options: CalloutOptions = {}
   const found: Found[] = []
   for (const source of sources) {
     const searchable = thinInk(stripLongRuns(source.mask, 3 * maxR))
-    for (const ring of findRings(searchable, source.mask, minR, maxR)) {
+    tick()
+    for (const ring of findRings(searchable, source.mask, minR, maxR, tick)) {
       if (opt.region) {
         const { region } = opt
         if (ring.cx - ring.r < region.x0 || ring.cx + ring.r > region.x1 || ring.cy - ring.r < region.y0 || ring.cy + ring.r > region.y1) continue
