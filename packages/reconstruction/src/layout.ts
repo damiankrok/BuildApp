@@ -66,8 +66,17 @@ export const LAYOUT_INFERENCE_VERSION = '1.0.0'
 /** Where a storey sits relative to the others. Ground is the datum; the rest are counted off it. */
 export const STOREY_RANK: Record<string, number> = { BASEMENT: -1, GROUND: 0, UPPER: 1, ATTIC: 2, ROOF: 3 }
 
-/** The storey a plan frame is read as: an unlabelled plan is the ground floor's. */
-export const planStoreyOf = (frame: SourceCoordinateFrame): string => (frame.roles.storey === 'UNKNOWN' || frame.roles.storey === 'NOT_APPLICABLE' ? 'GROUND' : frame.roles.storey)
+/**
+ * The storey a plan frame is read as. An unlabelled plan is the ground floor's only when no plan in view is
+ * labelled GROUND (post-implementation Council A). An adapter that makes no claim for a fragment it cannot
+ * place (an upper floor at an unseen index) says "I do not know", and reading that plan as the ground floor
+ * beside the real one turned a two-body house into a one-body house without a word.
+ */
+export const planStoreyOf = (frame: SourceCoordinateFrame, groundLabelled = false): string =>
+  frame.roles.storey === 'UNKNOWN' || frame.roles.storey === 'NOT_APPLICABLE' ? (groundLabelled ? 'UNKNOWN' : 'GROUND') : frame.roles.storey
+
+/** Does any of these plan frames say, in so many words, that it is the ground floor? */
+export const groundLabelledAmong = (frames: readonly SourceCoordinateFrame[]): boolean => frames.some((f) => f.roles.storey === 'GROUND')
 
 export type PlanBandOptions = { minThickness?: number; maxThickness?: number; minLength?: number }
 
@@ -209,7 +218,7 @@ const quantity = (value: number, low: number, high: number, unit: LayoutQuantity
  * copy carries the chains that turn them into metres.
  */
 /** A plan frame the pass looked at and did not read, and why. */
-export type SkippedPlan = { frameId: string; code: 'NOT_DECODABLE' | 'NO_EXTENT'; longBands?: number; why: string }
+export type SkippedPlan = { frameId: string; code: 'NOT_DECODABLE' | 'NO_EXTENT' | 'STOREY_UNKNOWN'; longBands?: number; why: string }
 
 export function readPlans(options: StructuralLayoutOptions): { plans: PlanReading[]; unresolved: LayoutGap[]; skipped: SkippedPlan[] } {
   const keep = options.frameFilter
@@ -217,11 +226,16 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
   const unresolved: LayoutGap[] = []
   const skipped: SkippedPlan[] = []
   const byStorey = new Map<string, SourceCoordinateFrame[]>()
-  for (const frame of options.graph.coordinateFrames) {
-    if (frame.roles.projection !== 'ORTHOGRAPHIC_PLAN') continue
-    if (frame.roles.document !== 'FLOOR_PLAN') continue
-    if (keep && !keep(frame)) continue
-    const storey = planStoreyOf(frame)
+  const planFrames = options.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_PLAN' && f.roles.document === 'FLOOR_PLAN' && (!keep || keep(f)))
+  const groundLabelled = groundLabelledAmong(planFrames)
+  for (const frame of planFrames) {
+    const storey = planStoreyOf(frame, groundLabelled)
+    if (storey === 'UNKNOWN') {
+      const why = 'no storey is claimed for it and another plan is labelled the ground floor: which floor it draws cannot be told, so it is not read'
+      skipped.push({ frameId: frame.id, code: 'STOREY_UNKNOWN', why })
+      unresolved.push({ id: stableId('gap', 'plan-storey', { frameId: frame.id }), what: 'which storey an unlabelled floor plan draws', reason: why, status: 'MISSING', frameIds: [frame.id] })
+      continue
+    }
     if (!(storey in STOREY_RANK)) continue
     byStorey.set(storey, [...(byStorey.get(storey) ?? []), frame])
   }

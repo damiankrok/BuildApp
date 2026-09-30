@@ -36,12 +36,29 @@
  * between two different buildings is named, not broken: PLAN_RESOLUTION_
  * INCONCLUSIVE, with every reading weighed. Counts only, never a clock: the
  * same inputs give the same answer on a phone and on a server.
+ *
+ * Two rules keep the published figure from choosing the building on its own
+ * (1.2.0, after the post-implementation Council's decoy-footprint control:
+ * with the figure scaled ×1.25 or ×0.8, the resolver built a different house
+ * to match it on two development projects of three):
+ *
+ *   - A corroboration is a witness the figure is not. The share of wall ink
+ *     the bodies explain ranks readings but corroborates none — it is counted
+ *     in pixels, inside the same box the bodies come from. Agreement on both
+ *     axes counts only for a scale the drawing's own long spans imply; the
+ *     registration was fitted on those statements, so agreeing with them is
+ *     not a second witness. A second copy of the plan that measures the same
+ *     is.
+ *   - The figure may refuse the first reading or choose among the others,
+ *     never both. When the first reading stopped because it missed the
+ *     published footprint, the figure is SPENT: every other reading is scored
+ *     as if nothing were published, and needs two witnesses of its own.
  */
 import { round6, stableId } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { CoordinateRegistration, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import type { SourceCoordinateFrame } from '@buildapp/source-observations'
-import { STOREY_RANK, inferStructuralLayout, planSheet, planStoreyOf } from './layout.js'
+import { STOREY_RANK, groundLabelledAmong, inferStructuralLayout, planSheet, planStoreyOf } from './layout.js'
 import type { PlanReadingChoice, PlanSheet, StructuralLayoutDraft } from './layout.js'
 import { planExtent, wallClusterExtent } from './plan-decomposition.js'
 import { LAYOUT_REFUSAL_CODES } from './plan-diagnostics.js'
@@ -51,7 +68,7 @@ import { ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
 import { worldFrameFrom } from './v2/frame.js'
 
-export const PLAN_RESOLVER_VERSION = '1.1.0' as const
+export const PLAN_RESOLVER_VERSION = '1.2.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -60,7 +77,11 @@ export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 
 export const FOOTPRINT_BUCKETS = ['AGREES', 'UNKNOWN', 'NEAR', 'WRONG'] as const
 export type FootprintBucket = (typeof FOOTPRINT_BUCKETS)[number]
 
-export type Corroboration = 'WALL_COVERAGE' | 'ISOTROPY' | 'CROSS_COPY'
+/** A witness to a reading that is neither the published figure nor the pixels the reading was made from. */
+export type Corroboration = 'ISOTROPY' | 'CROSS_COPY'
+
+/** What the published footprint did in a resolution: scored the readings, was spent refusing the first one, or was not published. */
+export type PublishedFigureUse = 'SCORED' | 'SPENT' | 'NONE'
 
 export type ScaleChoice =
   | { kind: 'REGISTRATION' }
@@ -94,7 +115,7 @@ export type HypothesisScore = {
   footprint: { areaM2: number; publishedM2?: number; residual?: number; bucket: FootprintBucket }
   /** Share of the plan's stated chain length this reading contradicts. */
   refutedShare: number
-  /** Share of the sheet's long wall bands this reading's bodies explain. */
+  /** Share of the sheet's long wall bands this reading's bodies explain: a ranking signal, never a corroboration. */
   wallCoverage: number
   corroborations: Corroboration[]
   /** The bodies, rounded to 0.1 m: two readings with the same key are one building read twice. */
@@ -107,7 +128,7 @@ export type HypothesisScore = {
 
 export type RankedReading = { hypothesis: PlanHypothesis; score: HypothesisScore; stage: 1 | 2 }
 
-export type PlanResolutionCounts = { copies: number; decompositions: number; readings: number; distinctOutlines: number; compositions: number }
+export type PlanResolutionCounts = { copies: number; decompositions: number; readings: number; distinctOutlines: number; compositions: number; publishedFigure: PublishedFigureUse }
 
 export type PlanResolution =
   /** Nothing but today's reading could be generated: today's failure stands. */
@@ -264,11 +285,12 @@ function refutedShareAtRegistration(metrics: MetricEvidenceSet, frameId: string,
 // scoring
 // ---------------------------------------------------------------------------
 
-const bucketOf = (areaM2: number, published: number | undefined): HypothesisScore['footprint'] => {
+/** A SPENT figure still refuses a reading that misses it, but no longer ranks or accepts one that meets it. */
+const bucketOf = (areaM2: number, published: number | undefined, spent = false): HypothesisScore['footprint'] => {
   if (published === undefined || !(published > 0) || !(areaM2 > 0)) return { areaM2: round6(areaM2), ...(published !== undefined ? { publishedM2: published } : {}), bucket: 'UNKNOWN' }
   const residual = round6((areaM2 - published) / published)
   const error = Math.abs(residual)
-  return { areaM2: round6(areaM2), publishedM2: published, residual, bucket: error <= 0.06 ? 'AGREES' : error <= 0.2 ? 'NEAR' : 'WRONG' }
+  return { areaM2: round6(areaM2), publishedM2: published, residual, bucket: error > 0.2 ? 'WRONG' : spent ? 'UNKNOWN' : error <= 0.06 ? 'AGREES' : 'NEAR' }
 }
 
 const overlaps = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) > Math.max(a.x0, b.x0) && Math.min(a.y1, b.y1) > Math.max(a.y0, b.y0)
@@ -276,7 +298,7 @@ const overlaps = (a: PixelRect, b: PixelRect): boolean => Math.min(a.x1, b.x1) >
 /** Everything about one reading that the ranking and the acceptance rule ask. */
 function scoreReading(
   draft: StructuralLayoutDraft,
-  context: { published?: number; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[] },
+  context: { published?: number; spent?: boolean; refutedShare: number; sheet: PlanSheet; cluster: PixelRect | null; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }>; gateRefusals: string[] },
 ): HypothesisScore {
   const hard: string[] = []
   const base = draft.base
@@ -323,7 +345,6 @@ function scoreReading(
   const wallCoverage = total === 0 ? 0 : round6(explained.reduce((a, b) => a + b.length, 0) / total)
 
   const corroborations: Corroboration[] = []
-  if (wallCoverage >= 0.8) corroborations.push('WALL_COVERAGE')
   if (context.supportedOnBothAxes) corroborations.push('ISOTROPY')
   if (draft.masses.length > 0) {
     const all = draft.masses.map((m) => ringBounds(m.ring))
@@ -344,7 +365,7 @@ function scoreReading(
   return {
     hard: [...new Set(hard)].sort(),
     gateRefusals: context.gateRefusals,
-    footprint: bucketOf(area, context.published),
+    footprint: bucketOf(area, context.published, context.spent),
     refutedShare: context.refutedShare,
     wallCoverage,
     corroborations,
@@ -421,7 +442,8 @@ const summaryOf = (r: RankedReading): string => {
   const f = r.score.footprint
   const area = f.publishedM2 !== undefined && f.residual !== undefined ? `${f.areaM2.toFixed(1)} m² (${f.residual >= 0 ? '+' : ''}${(f.residual * 100).toFixed(1)}% of ${f.publishedM2})` : `${f.areaM2.toFixed(1)} m²`
   const problems = [...r.score.hard, ...r.score.gateRefusals]
-  return `${describe(r.hypothesis)}: ${r.score.masses} bod${r.score.masses === 1 ? 'y' : 'ies'}, ${area}, ${f.bucket}${problems.length > 0 ? `, ${problems.join('+')}` : ''}${r.score.corroborations.length > 0 ? `, corroborated by ${r.score.corroborations.join('+')}` : ''}`
+  const bucket = f.bucket === 'UNKNOWN' && f.residual !== undefined ? 'UNKNOWN (the figure is spent)' : f.bucket
+  return `${describe(r.hypothesis)}: ${r.score.masses} bod${r.score.masses === 1 ? 'y' : 'ies'}, ${area}, ${bucket}${problems.length > 0 ? `, ${problems.join('+')}` : ''}${r.score.corroborations.length > 0 ? `, corroborated by ${r.score.corroborations.join('+')}` : ''}`
 }
 
 // ---------------------------------------------------------------------------
@@ -440,14 +462,20 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
   const sheetCache = options.sheetCache ?? new Map<string, PlanSheet>()
   const shared: StructuralPassOptions = { ...options, sheetCache }
   const published = options.publishedAreas?.find((a) => a.key === 'footprint_area' && a.unit === 'm2')?.value
+  // The figure may refuse any reading, and choose among them only when it did not refuse the first one.
+  const spent = published !== undefined && incumbent.layout.gate.reasons.some((r) => r.severity === 'BLOCKING' && r.code === 'FOOTPRINT_AREA_WRONG')
+  const publishedFigure: PublishedFigureUse = published === undefined ? 'NONE' : spent ? 'SPENT' : 'SCORED'
 
   // --- the copies of the base storey's plan --------------------------------
-  const planFrames = options.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_PLAN' && f.roles.document === 'FLOOR_PLAN' && (!options.frameFilter || options.frameFilter(f)) && planStoreyOf(f) in STOREY_RANK)
+  const inView = options.graph.coordinateFrames.filter((f) => f.roles.projection === 'ORTHOGRAPHIC_PLAN' && f.roles.document === 'FLOOR_PLAN' && (!options.frameFilter || options.frameFilter(f)))
+  const groundLabelled = groundLabelledAmong(inView)
+  const storeyOf = (f: SourceCoordinateFrame): string => planStoreyOf(f, groundLabelled)
+  const planFrames = inView.filter((f) => storeyOf(f) in STOREY_RANK)
   // The building stands on its lowest storey, and that is the plan re-read here, whichever plan
   // the first reading fell back on when the lowest one failed it.
-  const baseStorey = [...new Set(planFrames.map(planStoreyOf))].sort((a, b) => STOREY_RANK[a] - STOREY_RANK[b])[0]
+  const baseStorey = [...new Set(planFrames.map(storeyOf))].sort((a, b) => STOREY_RANK[a] - STOREY_RANK[b])[0]
   const copies = planFrames
-    .filter((f) => planStoreyOf(f) === baseStorey)
+    .filter((f) => storeyOf(f) === baseStorey)
     .sort((a, b) => {
       const dimensioned = (f: SourceCoordinateFrame): number => (f.roles.annotation === 'DIMENSIONED' ? 1 : 0)
       return dimensioned(b) - dimensioned(a) || b.size.width * b.size.height - a.size.width * a.size.height || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
@@ -487,7 +515,8 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     const bothAxes = (cmX: number, cmY: number): boolean =>
       (['X', 'Y'] as const).every((axis) => statements.some((s) => s.axis === axis && judge !== null && s.pixelLength >= 0.15 * (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0) && zeroSubstitution(s).some((cm) => agrees(cm, s.pixelLength, axis === 'X' ? cmX : cmY, tolerancePx))))
     for (const extent of extents) {
-      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: bothAxes(registration.metresPerPixelX * 100, registration.metresPerPixelY * 100), otherCopies })
+      // The registration was fitted on these same statements: agreeing with them on both axes is not a second witness.
+      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: false, otherCopies })
       for (const lattice of lattices) {
         const at = metricsAtScale(options.metrics, frame.id, lattice.cmPerPx, tolerancePx)
         decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies })
@@ -547,7 +576,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
         const choice = choiceOf(hypothesis, d)
         const draft = inferStructuralLayout({ ...shared, metrics: d.metrics, plan: choice })
         pocketed ||= mouthsLeftOpen(draft)
-        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [] }) })
+        readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [] }) })
       }
     }
     if (pocketed && d.mouths === 'AS_DECIDED' && bounded.length + withShutMouths.length < RESOLVER_BUDGET.decompositions) {
@@ -559,7 +588,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
   for (const d of withShutMouths) readAll(d)
   const distinct = new Map<string, (typeof readings)[number]>()
   for (const r of [...readings].sort(compareReadings)) if (!distinct.has(r.score.outlineKey)) distinct.set(r.score.outlineKey, r)
-  const counts: PlanResolutionCounts = { copies: copies.length, decompositions: bounded.length + withShutMouths.length, readings: readings.length, distinctOutlines: distinct.size, compositions: 0 }
+  const counts: PlanResolutionCounts = { copies: copies.length, decompositions: bounded.length + withShutMouths.length, readings: readings.length, distinctOutlines: distinct.size, compositions: 0, publishedFigure }
   if (readings.length === 0) return { kind: 'NO_ALTERNATIVE', counts }
 
   // --- stage 2: the best few distinct buildings, through the whole pass -----
@@ -570,7 +599,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     const result = composeStructuralLayout({ ...shared, metrics: r.decomposition.metrics, plan: choiceOf(r.hypothesis, r.decomposition) })
     const refusals = result.layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).map((g) => g.code).sort()
     const d = r.decomposition
-    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals }) })
+    composed.push({ hypothesis: r.hypothesis, stage: 2, decomposition: d, result, score: scoreReading(result.draft, { published, spent, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: refusals }) })
   })
   counts.compositions = composed.length
 
@@ -609,7 +638,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
   if (!best || !acceptable(best)) {
     return refuse(
       best
-        ? `${counts.readings} other readings of the plan were weighed and none holds: the best, ${summaryOf(best)}, ${best.score.hard.length + best.score.gateRefusals.length > 0 ? 'still breaks the layout' : best.score.footprint.bucket === 'NEAR' ? 'lands near the published footprint with nothing independent to confirm it' : best.score.footprint.bucket === 'UNKNOWN' ? 'has no published footprint to check against and too little else to confirm it' : 'does not match the published footprint'}`
+        ? `${counts.readings} other readings of the plan were weighed and none holds: the best, ${summaryOf(best)}, ${best.score.hard.length + best.score.gateRefusals.length > 0 ? 'still breaks the layout' : best.score.footprint.bucket === 'NEAR' ? 'lands near the published footprint with nothing independent to confirm it' : best.score.footprint.bucket === 'UNKNOWN' ? (spent ? 'has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement' : 'has no published footprint to check against and too little else to confirm it') : 'does not match the published footprint'}`
         : `${counts.readings} other readings of the plan were weighed and none survived to a full composition`,
     )
   }
@@ -663,7 +692,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
       code: 'PLAN_RESOLVED_BY_HYPOTHESIS',
       severity: 'DEGRADING',
       what: `the building is taken from another reading of the plan: ${describe(h)}`,
-      why: `the first reading stopped; this one departs from it in ${h.departures.map((x) => x.toLowerCase()).join(', ')}, lands ${best.score.footprint.bucket === 'AGREES' ? 'within 6% of' : best.score.footprint.bucket === 'NEAR' ? 'within 20% of' : 'without'} the published footprint${best.score.corroborations.length > 0 ? ` and is corroborated by ${best.score.corroborations.join(', ').toLowerCase().replace(/_/g, ' ')}` : ''}. A reading chosen among several is a partial result until someone confirms it`,
+      why: `the first reading stopped; this one departs from it in ${h.departures.map((x) => x.toLowerCase()).join(', ')}, lands ${best.score.footprint.bucket === 'AGREES' ? 'within 6% of the published footprint' : best.score.footprint.bucket === 'NEAR' ? 'within 20% of the published footprint' : spent ? 'without the published footprint, which refused the first reading and so does not choose its replacement,' : 'without a published footprint'}${best.score.corroborations.length > 0 ? ` and is corroborated by ${best.score.corroborations.join(', ').toLowerCase().replace(/_/g, ' ')}` : ''}. A reading chosen among several is a partial result until someone confirms it`,
       itemIds: [],
     },
   ]
@@ -680,8 +709,15 @@ export function resolutionRecord(resolution: PlanResolution): Record<string, num
   const out: Record<string, number | string | boolean> = { resolverVersion: PLAN_RESOLVER_VERSION, outcome: resolution.kind, ...resolution.counts }
   if (resolution.kind === 'NO_ALTERNATIVE') return out
   if (resolution.kind === 'RESOLVED') {
+    const c = resolution.chosen.score
     out.chosen = summaryOf(resolution.chosen)
     out.chosenDepartures = resolution.chosen.hypothesis.departures.join(',')
+    // the same facts as numbers, so a gate can hold a rule instead of a hash
+    out.chosenAreaM2 = c.footprint.areaM2
+    out.chosenBucket = c.footprint.bucket
+    if (c.footprint.residual !== undefined) out.chosenResidualPct = round6(c.footprint.residual * 100)
+    out.chosenMasses = c.masses
+    out.chosenCorroborations = c.corroborations.join(',')
   }
   resolution.considered.slice(0, 4).forEach((r, i) => (out[`reading${i + 1}`] = summaryOf(r)))
   return out

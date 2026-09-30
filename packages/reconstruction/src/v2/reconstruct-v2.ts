@@ -22,7 +22,7 @@ import { ringBounds } from '../structural-layout.js'
 import type { StructuralLayoutHypothesisSet } from '../structural-layout.js'
 import type { PlanReading } from '../layout.js'
 import { fitOpeningsToHosts, sealCandidate } from '../candidate.js'
-import type { ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
+import type { OpeningFit, ReconstructionCandidate, UnresolvedCandidate, SolverStep, PrimitiveTrace } from '../candidate.js'
 import { HYPOTHESIS_SET_SCHEMA, HYPOTHESIS_SET_SCHEMA_VERSION } from '../hypotheses.js'
 import type { PrimitiveHypothesisSet } from '../hypotheses.js'
 import { hashArtifact } from '@buildapp/source-common'
@@ -46,7 +46,7 @@ import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
 import { layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
-import { resolutionRecord, resolvePlan } from '../plan-resolution.js'
+import { PLAN_RESOLVER_VERSION, resolutionRecord, resolvePlan } from '../plan-resolution.js'
 import type { ResolverProgress } from '../plan-resolution.js'
 import type { PlanSheet } from '../layout.js'
 import type { Checkpoint } from '@buildapp/source-common'
@@ -137,6 +137,8 @@ export type ReconstructionV2Result = {
   closure: ClosureNote[]
   /** The plan decomposition, in the plans' own pixels: what the overlays and a diagnostics bundle are drawn from. */
   planDiagnostics: PlanDiagnosticsReport
+  /** Every opening the model could not take as the drawings print it: shrunk, lowered, or not built, with why. */
+  openingFits: OpeningFit[]
 }
 
 type Ctx = {
@@ -1171,7 +1173,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
       structuralStatus: layout.gate.status,
       modelId,
       label: options.label,
-      solver: { name: `${SOLVER_NAME}.v2`, version: SOLVER_V2_VERSION },
+      // A resolved building also depends on the resolver's rules, so its version joins the solver's; a first
+      // reading that held never met the resolver, and its candidate stays byte for byte what it was.
+      solver: { name: `${SOLVER_NAME}.v2`, version: planDiagnostics.resolution ? `${SOLVER_V2_VERSION}+resolver.${PLAN_RESOLVER_VERSION}` : SOLVER_V2_VERSION },
       program,
       quantities: [],
       contradictions: [],
@@ -1235,7 +1239,7 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   const violations = { graph: featureGraphViolations(graphDraft), ledger: ledgerViolations(ctx.ledger, [...graph.observations.map((o) => o.id), ...metrics.evidence.map((e) => e.id)]) }
   step({ stage: 'quality', what: 'per-feature quality', method: 'DIRECT', detail: Object.entries(quality.summary).map(([fam, levels]) => `${fam} ${Object.entries(levels).map(([l, n]) => `${l}:${n}`).join('/')}`).join(', '), inputs: ctx.solved.length, outputs: quality.records.length })
 
-  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics }
+  return { layout, building, candidate, model, hypotheses: hypothesisSet, featureGraph, ledger, quality, residuals, repair, registrations: { plans: planFrames, elevations, section: sectionReg ? { frameId: sectionReg.frameId, mpp: sectionReg.mpp, originCol: sectionReg.originCol, zeroRow: sectionReg.zeroRow } : undefined, cameras }, world, steps: ctx.steps, unresolved: ctx.unresolved, violations, closure: closureNotes, planDiagnostics, openingFits: fit.fits }
 }
 
 /** The columns of a render across which a band of the given rows carries dark tone: the band's along extent. */

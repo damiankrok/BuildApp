@@ -171,9 +171,24 @@ Readings are generated from the drawing, never from the answer. Each axis's firs
   5. wall coverage;
   6. corroborations;
   7. departures.
-- **Acceptance.** AGREES; or NEAR with an independent corroboration (another copy agrees, the scale holds on
-  both axes, ≥ 80 % of the long walls are explained); or no published figure and two corroborations. Never
-  WRONG.
+- **Acceptance.** AGREES; or NEAR with one corroboration; or no published figure and two. Never WRONG.
+  A corroboration is a witness that is neither the published figure nor the pixels the reading was made from
+  (1.2.0, after the post-implementation Council's decoy-footprint control):
+  - another copy of the plan measures the same building;
+  - a scale the drawing's own long spans imply holds on both axes. This does not count for the registration,
+    which was fitted on those same statements.
+
+  The share of long walls the bodies explain ranks readings but corroborates none.
+- **The figure is spent once it refuses.** When the first reading stopped because it missed the published
+  footprint, that figure may still refuse other readings (WRONG). It no longer ranks or accepts them: every
+  other reading scores as if nothing were published and needs two witnesses. A figure may veto or choose,
+  never both. Scaled ×1.25 or ×0.8, it had built a house to match itself on two development projects of three.
+  The trace records `publishedFigure: SCORED | SPENT | NONE`.
+- **What remains.** After a first reading that stops on the drawing (no walled envelope, no world frame),
+  the figure still chooses among readings the drawing supports. A figure 10–25 % off can then choose another
+  building: on the copy matrix this happened in 8 of 216 decoy cells. Such a result is LIMITING
+  (`LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS`), and the blind holdout cannot count its footprint agreement as a
+  pass.
 - **Ties.** A tie between two different buildings is `PLAN_RESOLUTION_INCONCLUSIVE`, with the readings
   named.
 - **Seal.** A resolved layout is sealed as PARTIAL with a DEGRADING `PLAN_RESOLVED_BY_HYPOTHESIS`. It also
@@ -182,8 +197,9 @@ Readings are generated from the drawing, never from the answer. Each axis's firs
   - a `SCALE_DISAGREEMENT` conflict when the scale was re-read;
   - DERIVED provenance on spans resting on a re-read statement.
 
-`PLAN_RESOLVER_VERSION` names the readings. Every resolution is recorded in the plan diagnostics and the
-trace. The gates are `plan-resolution.test.ts` and `shape-families.test.ts`, and the evidence is in
+`PLAN_RESOLVER_VERSION` (1.2.0) names the readings and the acceptance rule. Every resolution is recorded in the
+plan diagnostics and the trace. The record gives the chosen reading's area, bucket, residual, bodies and
+corroborations as fields, so a gate can hold a rule instead of a hash. The gates are `plan-resolution.test.ts` and `shape-families.test.ts`, and the evidence is in
 `stage-reports/artifacts/analyzer-005a/resolver/`.
 
 ### Render registration
