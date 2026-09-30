@@ -54,6 +54,10 @@ export function sourcePackageContentHash(draft: Draft): string {
     { label: 'publishedSpecifications', unordered: draft.publishedSpecifications.map((s) => ({ key: s.key, label: s.label, text: s.text })) },
     { label: 'publishedRooms', unordered: draft.publishedRooms.map((r) => ({ storey: r.storey, index: r.index, label: r.label, area: r.area })) },
     { label: 'failures', unordered: draft.failures.map((f) => ({ stage: f.stage, target: f.target, code: f.code })) },
+    // Only when there are any: a package that links no document hashes exactly as it did before 005C.
+    ...(draft.documents && draft.documents.length > 0
+      ? [{ label: 'documents', unordered: draft.documents.map((d) => ({ url: d.url, format: d.format, kind: d.kind, variant: d.variant, statedScale: d.statedScale ?? null, byteHash: d.byteHash ?? null, status: d.status, code: d.code ?? null })) }]
+      : []),
   ])
 }
 

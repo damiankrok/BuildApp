@@ -13,18 +13,18 @@
  * browser, no script execution. JSON-LD is parsed as data.
  */
 import { channelClaims } from '../../adapter.js'
-import type { AdapterContext, ProjectIdentity, SourceAdapter, SourceClassification } from '../../adapter.js'
+import type { AdapterContext, DocumentClaim, ProjectIdentity, SourceAdapter, SourceClassification } from '../../adapter.js'
 import type { DiscoveredCandidate } from '../../discovery.js'
 import type { RoleClaim } from '../../roles.js'
 import { compareCodeUnits, deaccent } from '../../text.js'
-import { discoverOnDocument, drawingLinks, sizeStem, type DroppedCandidate } from './assets.js'
+import { discoverOnDocument, documentLinks, drawingLinks, sizeStem, type DroppedCandidate } from './assets.js'
 import { classifyProjectPage } from './classify.js'
 import { jsonLdStrings, readPageFacts, type PageFacts } from './markup.js'
 import { genericFacts, genericRooms, genericSpecifications } from './published.js'
-import { ANNOTATION_WORDS, DOCUMENT_WORDS, STOREY_WORDS, VIEW_WORDS, firstMatch, type WordRule } from './vocabulary.js'
+import { ANNOTATION_WORDS, BASE_WORDS, DOCUMENT_KIND_WORDS, DOCUMENT_WORDS, MIRROR_WORDS, STATED_SCALE, STOREY_WORDS, VIEW_WORDS, firstMatch, type WordRule } from './vocabulary.js'
 
 export const GENERIC_ADAPTER_ID = 'generic.project-page'
-export const GENERIC_ADAPTER_VERSION = '1.0.0'
+export const GENERIC_ADAPTER_VERSION = '1.1.0'
 
 /** Read once per page: the facts are pure in the markup, so the same markup gives the same facts. */
 const factsCache = new WeakMap<AdapterContext, PageFacts>()
@@ -42,6 +42,9 @@ function projectName(facts: PageFacts): string | undefined {
   const candidates = [facts.ogTitle, facts.h1, facts.title].filter((t): t is string => !!t && t.trim() !== '')
   if (candidates.length === 0) return undefined
   const raw = candidates[0].trim()
+  // The page's own h1, when the title is that h1 plus a separator and a suffix: the suffix is the site.
+  const h1 = facts.h1?.trim()
+  if (h1 && raw !== h1 && raw.startsWith(h1) && /^\s*[|\-–—:·]\s+\S/.test(raw.slice(h1.length))) return h1
   const parts = raw.split(/\s+\|\s+/)
   const name = parts.length > 1 ? parts.slice(0, -1).join(' | ') : raw
   return name.trim() || undefined
@@ -158,6 +161,7 @@ export const genericProjectPageAdapter: SourceAdapter = {
     const facts = factsOf(ctx)
     return { facts: genericFacts(facts), specifications: genericSpecifications(facts), rooms: genericRooms(facts) }
   },
+  documents: (ctx) => genericDocuments(ctx),
 }
 
 export { classifyProjectPage } from './classify.js'
@@ -165,3 +169,15 @@ export { readPageFacts } from './markup.js'
 export type { PageFacts } from './markup.js'
 export { MAX_CRAWL_PAGES, sizeStem } from './assets.js'
 export type { DroppedCandidate } from './assets.js'
+
+/** Every PDF / DWG / DXF the page links, with what its words say it is. Kept or not by kind; never fetched here. */
+export function genericDocuments(ctx: AdapterContext): DocumentClaim[] {
+  const facts = factsOf(ctx)
+  return documentLinks(facts, ctx.url).map((d) => {
+    const words = [...d.listLabels, d.text].join(' · ')
+    const folded = deaccent(`${words} ${fileWords(d.url)}`)
+    const hit = DOCUMENT_KIND_WORDS.find((r) => r.test.test(folded))
+    const scale = STATED_SCALE.exec(words)
+    return { url: d.url, format: d.format, kind: hit?.kind ?? 'UNKNOWN', variant: MIRROR_WORDS.test(folded) ? 'MIRRORED' : BASE_WORDS.test(folded) ? 'BASE' : 'UNKNOWN', ...(scale ? { statedScale: `1:${scale[1]}` } : {}), words, why: hit?.why ?? 'no technical word on it' }
+  })
+}

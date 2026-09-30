@@ -15,7 +15,9 @@ import { deaccent, stripTags } from '../../text.js'
 export type Heading = { level: number; text: string; offset: number }
 export type TableRow = { cells: string[]; offset: number }
 export type Table = { rows: TableRow[]; offset: number; end: number; headingBefore?: string }
-export type LabelValue = { label: string; value: string; source: 'table' | 'dl' | 'li' | 'meta'; offset: number }
+export type LabelValue = { label: string; value: string; source: 'table' | 'dl' | 'li' | 'meta' | 'block' | 'inline'; offset: number }
+/** One run of text between two block-level tags, inline markup gone. */
+export type TextBlock = { text: string; offset: number; tag: string }
 
 export type JsonLdNode = Record<string, unknown>
 
@@ -35,6 +37,12 @@ export type PageFacts = {
   tables: Table[]
   /** Every label → value pair the page prints as such: two-cell table rows, dt/dd pairs, `label: value` list items. */
   pairs: LabelValue[]
+  /** The page's text as block-level runs, in document order: what a div- or flex-built fact list is made of. */
+  blocks: TextBlock[]
+  /** Offsets of every <form>…</form>: prose in a form is consent and contact boilerplate, never a description. */
+  formRanges: Array<[number, number]>
+  /** Elements that say they are tables (ARIA role table / grid), as offsets: read as tables, never as label runs. */
+  gridRanges: Array<[number, number]>
   jsonLd: JsonLdNode[]
   /** Words on the page once the markup is gone. */
   text: string
@@ -139,9 +147,57 @@ function readPairs(body: string, tables: readonly Table[]): LabelValue[] {
   return out.sort((a, b) => a.offset - b.offset)
 }
 
+/** `m<sup>2</sup>` is m²: a superscript digit after a unit is part of the unit. Same length, so every offset holds. */
+export const withUnitGlyphs = (html: string): string =>
+  html.replace(/<sup\b[^>]*>\s*([23])\s*<\/sup>/gi, (whole, d: string) => (d === '2' ? '\u00b2' : '\u00b3').padEnd(whole.length, ' '))
+
+const BLOCK_TAG = /<\/?(?:div|p|li|ul|ol|dl|dt|dd|tr|td|th|table|thead|tbody|tfoot|caption|section|article|aside|header|footer|nav|main|h[1-6]|figure|figcaption|form|fieldset|label|button|select|option|textarea|blockquote|pre|address|details|summary|dialog|br|hr)\b[^>]*>/gi
+
+/** Text between block-level tags, in order. Bounded: one linear scan. */
+export function readBlocks(body: string): TextBlock[] {
+  const out: TextBlock[] = []
+  const src = withUnitGlyphs(body)
+  let last = Math.max(0, src.search(/<body\b/i))
+  BLOCK_TAG.lastIndex = 0
+  let lastTag = 'start'
+  for (const m of src.matchAll(BLOCK_TAG)) {
+    const at = m.index ?? 0
+    if (at < last) continue
+    const text = stripTags(src.slice(last, at))
+    if (text) out.push({ text, offset: last, tag: lastTag })
+    last = at + m[0].length
+    lastTag = (/^<\/?([a-z0-9]+)/i.exec(m[0])?.[1] ?? '').toLowerCase()
+  }
+  const tail = stripTags(src.slice(last))
+  if (tail) out.push({ text: tail, offset: last, tag: lastTag })
+  return out
+}
+
+/** Offsets of elements with role="table" / "grid", closed by balancing their own tag name. Bounded, no DOM. */
+function roleRanges(body: string): Array<[number, number]> {
+  const out: Array<[number, number]> = []
+  for (const m of body.matchAll(/<([a-z0-9]+)\b[^>]*\brole\s*=\s*["']?(table|grid|treegrid)\b[^>]*>/gi)) {
+    const tag = m[1].toLowerCase()
+    const start = m.index ?? 0
+    let depth = 0
+    const rx = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'gi')
+    rx.lastIndex = start
+    let end = body.length
+    for (let t = rx.exec(body); t; t = rx.exec(body)) {
+      depth += t[1] === '/' ? -1 : 1
+      if (depth === 0) {
+        end = t.index + t[0].length
+        break
+      }
+    }
+    out.push([start, end])
+  }
+  return out
+}
+
 /** Read everything a page states about itself. Pure, bounded, deterministic. */
 export function readPageFacts(html: string, url: string): PageFacts {
-  const body = stripScripts(html)
+  const body = withUnitGlyphs(stripScripts(html))
   const headings = readHeadings(body)
   const tables = readTables(body, headings)
   const title = /<title\b[^>]*>([\s\S]*?)<\/title>/i.exec(body)
@@ -169,6 +225,9 @@ export function readPageFacts(html: string, url: string): PageFacts {
     headings,
     tables,
     pairs: readPairs(body, tables),
+    blocks: readBlocks(body),
+    gridRanges: roleRanges(body),
+    formRanges: [...body.matchAll(/<form\b[\s\S]*?<\/form>/gi)].map((m) => [m.index ?? 0, (m.index ?? 0) + m[0].length] as [number, number]),
     jsonLd: readJsonLd(html),
     text,
     textLength: text.length,
@@ -181,9 +240,8 @@ export function readPageFacts(html: string, url: string): PageFacts {
 /** The nearest heading above an offset, and any figure caption just after it. */
 export function contextAt(facts: PageFacts, offset: number): string | undefined {
   const heading = [...facts.headings].reverse().find((h) => h.offset < offset)
-  const after = facts.body.slice(offset, offset + 1500)
-  const figcaption = /<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/i.exec(after)
-  const parts = [heading?.text, figcaption ? stripTags(figcaption[1]) : undefined].filter((p): p is string => !!p)
+  // a figure caption only from the figure the picture is in (read as its caption, in assets.ts); never the next figure's
+  const parts = [heading?.text].filter((p): p is string => !!p)
   return parts.length > 0 ? parts.join(' · ') : undefined
 }
 

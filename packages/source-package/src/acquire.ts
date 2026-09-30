@@ -29,10 +29,10 @@ import { CHANNEL_TRUST, type DiscoveredCandidate } from './discovery.js'
 import { DecodeFailed, probeImage } from './image.js'
 import { DEFAULT_FETCH_POLICY, FetchRefused, isTransientFetchFailure, safeFetch, type FetchDeps, type FetchPolicy } from './net.js'
 import { mergeRoleClaims, normalizeRoles, type RoleClaim } from './roles.js'
-import { SOURCE_PACKAGE_SCHEMA, SOURCE_PACKAGE_SCHEMA_VERSION, SourcePackageSchema, type AcquisitionFailure, type SourceAsset, type SourcePackage, type SourceVariant } from './schema.js'
+import { SOURCE_PACKAGE_SCHEMA, SOURCE_PACKAGE_SCHEMA_VERSION, SOURCE_PACKAGE_SCHEMA_VERSION_WITH_DOCUMENTS, SourcePackageSchema, type AcquisitionFailure, type SourceAsset, type SourceDocument, type SourcePackage, type SourceVariant } from './schema.js'
 import { aspectOf, pixelArea, sameShape, selectionOrder, selectionReason } from './variants.js'
 import { sourcePackageContentHash } from './hash.js'
-import type { SourceAdapter, SourceClassification } from './adapter.js'
+import type { DocumentClaim, SourceAdapter, SourceClassification } from './adapter.js'
 import { routeSourceAcquisition } from './router.js'
 import { logicalSourceUrl } from './logical-url.js'
 import type { SourceRoute } from './router.js'
@@ -175,9 +175,13 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
   // --- group into logical assets -----------------------------------------
   const assets = buildAssets(measured, adapter, failures)
 
+  // --- technical documents (005C): recorded, the drawings among them fetched and hashed, none parsed ---
+  const claims = adapter.documents ? safely(() => (adapter.documents as (c: typeof ctx) => DocumentClaim[])(ctx), [] as DocumentClaim[], failures, 'FACTS', pageUrl) : []
+  const documents = await acquireDocuments(claims, policy, options)
+
   const draft: Omit<SourcePackage, 'contentHash'> = {
     schema: SOURCE_PACKAGE_SCHEMA,
-    schemaVersion: SOURCE_PACKAGE_SCHEMA_VERSION,
+    schemaVersion: documents.length > 0 ? SOURCE_PACKAGE_SCHEMA_VERSION_WITH_DOCUMENTS : SOURCE_PACKAGE_SCHEMA_VERSION,
     id: stableId('src', identity.externalId ?? new URL(logical.url).hostname, { canonicalUrl: logical.url }),
     canonicalUrl: logical.url,
     requestedUrl: requestedUrl === logical.url ? undefined : requestedUrl,
@@ -190,6 +194,7 @@ export async function acquireSourcePackage(requestedUrl: string, adapters: reado
     publishedSpecifications: published.specifications,
     publishedRooms: published.rooms,
     failures: failures.slice().sort((a, b) => a.stage.localeCompare(b.stage) || a.target.localeCompare(b.target) || a.code.localeCompare(b.code)),
+    ...(documents.length > 0 ? { documents } : {}),
   }
   const pkg: SourcePackage = { ...draft, contentHash: sourcePackageContentHash(draft) }
   return SourcePackageSchema.parse(pkg)
@@ -384,6 +389,75 @@ const pause = (ms: number): Promise<void> => (ms > 0 ? new Promise((resolve) => 
  * 404 on a guessed address) is evidence and is not retried. A cancelled run
  * is not a failure of this address: the abort propagates.
  */
+/** How many technical documents one acquisition fetches. */
+export const DOCUMENT_BUDGET = 4
+
+/**
+ * What a technical document may be served as. Only these: a document is fetched
+ * to be hashed, and a page that answers a PDF link with HTML or an image has not
+ * served the document it named.
+ */
+export const DOCUMENT_MEDIA_TYPES: readonly string[] = [
+  'application/pdf',
+  'application/x-pdf',
+  'application/acad',
+  'application/x-acad',
+  'application/autocad_dwg',
+  'application/dwg',
+  'application/x-dwg',
+  'image/vnd.dwg',
+  'image/x-dwg',
+  'application/dxf',
+  'application/x-dxf',
+  'image/vnd.dxf',
+  'image/x-dxf',
+  'application/octet-stream',
+]
+
+/**
+ * The page's technical documents (005C). Each is recorded with what its words
+ * claim; an OUTLINE or a DRAWING_SET is fetched under the acquisition's own
+ * safety policy (the same host checks, redirect limits and size cap) with a
+ * document-only media allowlist, and its bytes are hashed — never decoded,
+ * never parsed, never measured. The rest are recorded as not fetched, with why.
+ * A document fetch that fails is the document's own record, not the package's
+ * failure list: the drawings the package is built from are unaffected by it.
+ */
+async function acquireDocuments(claims: readonly DocumentClaim[], policy: FetchPolicy, options: AcquireOptions): Promise<SourceDocument[]> {
+  const out: SourceDocument[] = []
+  const docPolicy: FetchPolicy = { ...policy, allowedMediaTypes: DOCUMENT_MEDIA_TYPES }
+  let fetchedCount = 0
+  for (const claim of [...claims].sort((a, b) => (a.url < b.url ? -1 : a.url > b.url ? 1 : 0))) {
+    const base: SourceDocument = {
+      url: claim.url,
+      format: claim.format,
+      kind: claim.kind,
+      variant: claim.variant,
+      ...(claim.statedScale ? { statedScale: claim.statedScale } : {}),
+      ...(claim.words ? { caption: claim.words.slice(0, 240) } : {}),
+      status: 'NOT_FETCHED',
+    }
+    if (claim.kind !== 'OUTLINE' && claim.kind !== 'DRAWING_SET') {
+      out.push({ ...base, code: 'NOT_A_DRAWING' })
+      continue
+    }
+    if (fetchedCount >= DOCUMENT_BUDGET) {
+      out.push({ ...base, code: 'BUDGET_EXCEEDED' })
+      continue
+    }
+    fetchedCount += 1
+    options.checkpoint?.tick({ counters: { documents: fetchedCount } })
+    const lost: AcquisitionFailure[] = []
+    const got = await fetchBytes(claim.url, docPolicy, options, 'ASSET_FETCH', lost)
+    if (!got) {
+      out.push({ ...base, code: lost[0]?.code ?? 'NOT_FETCHED' })
+      continue
+    }
+    out.push({ ...base, status: 'FETCHED', mediaType: got.mediaType, byteLength: got.bytes.length, byteHash: sha256Bytes(got.bytes) })
+  }
+  return out
+}
+
 async function fetchBytes(
   url: string,
   policy: FetchPolicy,

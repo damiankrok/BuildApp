@@ -31,7 +31,11 @@ export const SOURCE_PACKAGE_SCHEMA = 'buildapp.source-package' as const
 // content hash covers evidence only (no page bytes hash, no address), and a
 // failure may say which role the lost address claimed.
 export const SOURCE_PACKAGE_SCHEMA_VERSION = '1.2.0' as const
-export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0'] as const
+// 1.3.0 (005C): a package whose page links technical documents records them in
+// `documents`, hashed as provenance and never decoded. It is sealed as 1.3.0
+// only then: a package with no documents is sealed, and hashes, exactly as 1.2.0.
+export const SOURCE_PACKAGE_SCHEMA_VERSION_WITH_DOCUMENTS = '1.3.0' as const
+export const SUPPORTED_SOURCE_PACKAGE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0'] as const
 
 // ---------------------------------------------------------------------------
 // Roles — multi-dimensional, independently UNKNOWN-able
@@ -240,6 +244,27 @@ export type AcquisitionFailure = z.infer<typeof AcquisitionFailureSchema>
 // The package
 // ---------------------------------------------------------------------------
 
+/** A technical document a project page links, with what its words claim it is (005C). */
+export const SourceDocumentSchema = z
+  .object({
+    url: z.string().url(),
+    format: z.enum(['PDF', 'DWG', 'DXF']),
+    kind: z.enum(['OUTLINE', 'DRAWING_SET', 'ENERGY_CERTIFICATE', 'COST_ESTIMATE', 'BROCHURE', 'UNKNOWN']),
+    variant: z.enum(['BASE', 'MIRRORED', 'UNKNOWN']),
+    /** A scale printed with the link ("w skali 1:500"): text, never a transform. */
+    statedScale: z.string().optional(),
+    /** The words the link carries: the list items it is filed under and its own text. */
+    caption: z.string().optional(),
+    mediaType: z.string().optional(),
+    byteLength: z.number().int().nonnegative().optional(),
+    byteHash: z.string().regex(/^[0-9a-f]{64}$/).optional(),
+    status: z.enum(['FETCHED', 'NOT_FETCHED']),
+    /** Why it was not fetched, or how the fetch failed. */
+    code: z.string().optional(),
+  })
+  .strict()
+export type SourceDocument = z.infer<typeof SourceDocumentSchema>
+
 export const SourcePackageSchema = z
   .object({
     schema: z.literal(SOURCE_PACKAGE_SCHEMA),
@@ -277,6 +302,13 @@ export const SourcePackageSchema = z
     publishedSpecifications: z.array(PublishedSpecificationSchema).default([]),
     publishedRooms: z.array(PublishedRoomSchema),
     failures: z.array(AcquisitionFailureSchema),
+    /**
+     * 005C: technical documents the page links (PDF / DWG / DXF). What their words say they are is a
+     * claim; an OUTLINE or a DRAWING_SET is fetched under the same safety policy and hashed as
+     * provenance, and none is ever decoded or parsed. ABSENT on every package sealed before and on
+     * any whose page links none — absent is hashed as absent, so those hashes do not move.
+     */
+    documents: z.array(SourceDocumentSchema).optional(),
     /** Hash of everything above that is content. Excludes fetch timings and any wall-clock value. */
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })

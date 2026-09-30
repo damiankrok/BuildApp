@@ -17,6 +17,7 @@ import type { SourceClassification } from '../../adapter.js'
 import { compareCodeUnits, deaccent } from '../../text.js'
 import { ANY_DRAWING_WORD, DOCUMENT_WORDS, HOUSE_WORDS } from './vocabulary.js'
 import { jsonLdStrings, jsonLdTypes, type PageFacts } from './markup.js'
+import { blockPairs } from './published.js'
 
 type Signal = { family: string; signal: string; detail: string; weight: number }
 
@@ -52,7 +53,7 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
   if (facts.ogType && /product|house|place|article/.test(facts.ogType.toLowerCase())) add('structured', 'og:type', `og:type ${facts.ogType}`, 0.5)
 
   // --- what it states ---
-  const labels = facts.pairs.map((p) => ({ label: deaccent(p.label), value: p.value }))
+  const labels = [...facts.pairs, ...blockPairs(facts)].map((p) => ({ label: deaccent(p.label), value: p.value }))
   const areaPairs = labels.filter((p) => AREA_LABEL.test(p.label) && /\d/.test(p.value))
   if (areaPairs.length > 0) add('figures', 'area', `${areaPairs.length} published area figure${areaPairs.length === 1 ? '' : 's'} (e.g. "${areaPairs[0].label}")`, 2)
   const roofPairs = labels.filter((p) => ROOF_LABEL.test(p.label) || ROOF_LABEL.test(deaccent(p.value)))
@@ -73,6 +74,7 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
 
   // --- what it shows: drawing vocabulary around images, headings and links ---
   const drawingKinds = new Set<string>()
+  const emptyHeadings: string[] = []
   const hits: string[] = []
   for (const m of facts.body.matchAll(/<img\b([^>]*)>/gi)) {
     const attrs = deaccent(m[1])
@@ -89,15 +91,24 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
       }
     }
   }
-  for (const h of facts.headings) {
+  // A heading names drawings only when a picture stands under it before the next heading of its rank or above.
+  const PICTURE = /<img\b|<picture\b|<source\b[^>]*srcset|<a\b[^>]*href\s*=\s*["'][^"']*\.(?:jpe?g|png|gif|webp|pdf)\b/i
+  for (const [i, h] of facts.headings.entries()) {
+    const next = facts.headings.slice(i + 1).find((x) => x.level <= h.level)
+    const pictured = PICTURE.test(facts.body.slice(h.offset, next?.offset ?? h.offset + 20000))
     for (const rule of DOCUMENT_WORDS) {
       const d = rule.claim.document
-      if (d && d !== 'PERSPECTIVE_RENDER' && rule.test.test(deaccent(h.text))) drawingKinds.add(d)
+      if (d && d !== 'PERSPECTIVE_RENDER' && rule.test.test(deaccent(h.text))) {
+        drawingKinds.add(d)
+        // still a sign of a project page; said as what it is, a heading with nothing under it
+        if (!pictured) emptyHeadings.push(`"${h.text.slice(0, 30)}" has no picture under it`)
+      }
     }
   }
   if (drawingKinds.has('FLOOR_PLAN')) add('drawings', 'plan-imagery', `floor-plan imagery or headings (${hits.join('; ') || 'by heading'})`, 2)
   if (drawingKinds.has('ELEVATION')) add('drawings', 'elevation-imagery', 'elevation imagery or headings', 1)
   if (drawingKinds.has('SECTION')) add('drawings', 'section-imagery', 'section imagery or headings', 1)
+  if (emptyHeadings.length > 0) add('drawings', 'empty-drawing-heading', emptyHeadings.join('; '), 0)
   const downloads = [...facts.body.matchAll(/<a\b[^>]*href\s*=\s*("([^"]*)"|'([^']*)')/gi)].map((a) => a[2] ?? a[3] ?? '').filter((h) => DOWNLOAD.test(h) && ANY_DRAWING_WORD.test(deaccent(h)))
   if (downloads.length > 0) add('drawings', 'technical-download', `${downloads.length} technical download link${downloads.length === 1 ? '' : 's'}`, 1)
 

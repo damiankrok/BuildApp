@@ -28,7 +28,60 @@ import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS } from './vocabulary.
 /** How many linked pages of the same site may be read for more drawings. */
 export const MAX_CRAWL_PAGES = 4
 
-export type DroppedCandidate = { url: string; code: 'CHROME_ASSET' | 'NAVIGATION_THUMBNAIL' | 'OFF_SITE'; why: string }
+export type DroppedCandidate = { url: string; code: 'CHROME_ASSET' | 'NAVIGATION_THUMBNAIL' | 'OFF_SITE' | 'DOCUMENT'; why: string }
+
+/**
+ * The labels of the list items an offset sits in, outermost first, each
+ * item's own text up to its nested list: "Obrys budynku w skali 1:500" over
+ * "PDF podstawa". A nested download list names its files on the parent item.
+ */
+export function listLabelsAt(body: string, offset: number): string[] {
+  const stack: Array<{ tag: string; start: number; leadEnd?: number }> = []
+  for (const m of body.slice(0, offset).matchAll(/<(\/?)(li|ul|ol)\b[^>]*>/gi)) {
+    const closing = m[1] === '/'
+    const tag = m[2].toLowerCase()
+    const at = m.index ?? 0
+    if (!closing) {
+      if (tag !== 'li') {
+        const parent = [...stack].reverse().find((x) => x.tag === 'li')
+        if (parent && parent.leadEnd === undefined) parent.leadEnd = at
+      }
+      if (tag === 'li') {
+        // an unclosed <li> before a sibling <li> is closed by it
+        while (stack.length > 0 && stack[stack.length - 1].tag === 'li') stack.pop()
+      }
+      stack.push({ tag, start: at + m[0].length })
+    } else {
+      const i = stack.map((x) => x.tag).lastIndexOf(tag)
+      if (i >= 0) stack.length = i
+    }
+  }
+  const items = stack.filter((x) => x.tag === 'li')
+  // the innermost item is the link's own; its label is the link text, read elsewhere
+  return items.slice(0, -1).map((x) => stripTags(body.slice(x.start, x.leadEnd ?? offset))).filter((t) => t !== '' && t.length <= 120)
+}
+
+/** A technical document the page links: a PDF or a CAD file, with the words around it. Never an image candidate. */
+export type DocumentLink = { url: string; format: 'PDF' | 'DWG' | 'DXF'; text: string; listLabels: string[]; heading?: string }
+
+const DOCUMENT_HREF = /\.(pdf|dwg|dxf)(?:[?#]|$)/i
+
+export function documentLinks(facts: PageFacts, base: string): DocumentLink[] {
+  const out = new Map<string, DocumentLink>()
+  for (const a of facts.body.matchAll(/<a\b([^>]*)>([\s\S]{0,2000}?)<\/a>/gi)) {
+    const href = ATTR(a[1], 'href')
+    if (!href) continue
+    const abs = absolutize(href, base)
+    if (!abs || !abs.startsWith('https:')) continue
+    const ext = DOCUMENT_HREF.exec(new URL(abs).pathname)
+    if (!ext) continue
+    const at = a.index ?? 0
+    const heading = [...facts.headings].reverse().find((h) => h.offset < at)?.text
+    const text = `${ATTR(a[1], 'title') ?? ''} ${ATTR(a[1], 'aria-label') ?? ''} ${stripTags(a[2])}`.replace(/\s+/g, ' ').trim()
+    if (!out.has(abs)) out.set(abs, { url: abs, format: ext[1].toUpperCase() as DocumentLink['format'], text, listLabels: listLabelsAt(facts.body, at), heading })
+  }
+  return [...out.values()].sort((a, b) => compareCodeUnits(a.url, b.url))
+}
 
 export type GenericDiscovery = {
   candidates: DiscoveredCandidate[]
@@ -97,8 +150,8 @@ function pictureSources(html: string, base: string, exposedBy: string): { candid
  * For every `img`, the words on it: alt, title, data-caption, aria-label,
  * and the anchor it sits in. Keyed by absolute URL, first occurrence wins.
  */
-function imageWords(facts: PageFacts, base: string): Map<string, { words: string; context?: string; linkedPage?: string; offset: number }> {
-  const out = new Map<string, { words: string; context?: string; linkedPage?: string; offset: number }>()
+function imageWords(facts: PageFacts, base: string): Map<string, { words: string; figcaption?: string; context?: string; linkedPage?: string; offset: number }> {
+  const out = new Map<string, { words: string; figcaption?: string; context?: string; linkedPage?: string; offset: number }>()
   const anchors: Array<{ start: number; end: number; href?: string; words: string }> = []
   for (const a of facts.body.matchAll(/<a\b([^>]*)>([\s\S]{0,4000}?)<\/a>/gi)) {
     const start = a.index ?? 0
@@ -115,10 +168,20 @@ function imageWords(facts: PageFacts, base: string): Map<string, { words: string
     for (const u of urls) {
       const abs = absolutize(u, base)
       if (!abs || out.has(abs)) continue
-      out.set(abs, { words: `${words} ${anchor?.words ?? ''}`.replace(/\s+/g, ' ').trim(), context: contextAt(facts, offset), linkedPage, offset })
+      out.set(abs, { words: `${words} ${anchor?.words ?? ''}`.replace(/\s+/g, ' ').trim(), figcaption: figcaptionOf(facts.body, offset), context: contextAt(facts, offset), linkedPage, offset })
     }
   }
   return out
+}
+
+/** The caption of the <figure> an offset sits in, and only that figure's: a caption is never borrowed from the next one. */
+function figcaptionOf(body: string, offset: number): string | undefined {
+  const open = body.lastIndexOf('<figure', offset)
+  if (open < 0 || body.lastIndexOf('</figure', offset) > open) return undefined
+  const close = body.indexOf('</figure', offset)
+  const inside = body.slice(open, close < 0 ? offset + 1500 : close)
+  const m = /<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/i.exec(inside)
+  return m ? stripTags(m[1]) || undefined : undefined
 }
 
 /** Same-site links whose words promise drawings, in a deterministic order, at most `MAX_CRAWL_PAGES`. */
@@ -134,10 +197,19 @@ export function drawingLinks(facts: PageFacts, pageUrl: string): string[] {
     const current = new URL(pageUrl)
     current.hash = ''
     if (target.toString() === current.toString() || !sameSite(abs, pageUrl)) continue
+    // The site's root and the listings above this page (`/`, `/katalog/`) are navigation: a project's drawings are
+    // never kept on a page that contains the project (005C).
+    const trimmed = (path: string): string => path.replace(/\/+$/, '')
+    if (trimmed(target.pathname) === '' || (target.search === '' && current.pathname.startsWith(`${trimmed(target.pathname)}/`))) continue
     const words = deaccent(`${ATTR(a[1], 'title') ?? ''} ${stripTags(a[2])} ${decodeURIComponent(target.pathname)}`)
     if (!DRAWING_LINK_WORDS.test(words)) continue
     // A path under the page's own path (`/projekt/x/rzuty`) is the strongest sign the link belongs to this project.
     const under = target.pathname.startsWith(current.pathname.replace(/\/$/, '') + '/') ? 0 : 1
+    // Otherwise the link must name this project — its own slug in the target's path, query or words. A guide about
+    // elevations elsewhere on the site is about elevations, not about this house's (005C).
+    const slug = deaccent(decodeURIComponent(current.pathname.replace(/\/+$/, '').split('/').pop() ?? ''))
+    const names = slug.length >= 4 && deaccent(`${decodeURIComponent(target.pathname)} ${decodeURIComponent(target.search)} ${words}`).includes(slug)
+    if (under === 1 && !names) continue
     const key = target.toString()
     if (!out.has(key)) out.set(key, under)
   }
@@ -173,8 +245,8 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
       drop(c.url, 'CHROME_ASSET', `named as site chrome ("${file.slice(0, 60)}")`)
       continue
     }
-    if (c.channel === 'DOCUMENT_LINK' && !ANY_DRAWING_WORD.test(deaccent(`${c.caption ?? ''} ${file}`))) {
-      drop(c.url, 'CHROME_ASSET', 'a document link with no drawing word on it')
+    if (c.channel === 'DOCUMENT_LINK') {
+      drop(c.url, 'DOCUMENT', 'a linked document: recorded with the documents, never measured as a picture')
       continue
     }
     if (info?.linkedPage && !ANY_DRAWING_WORD.test(text) && !ANY_DRAWING_WORD.test(deaccent(info.context ?? ''))) {
@@ -186,7 +258,8 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
         continue
       }
     }
-    out.push({ ...c, caption: c.caption ?? (info?.words || undefined), context: info?.context, groupKey: c.groupKey ?? pictures.groups.get(c.url) })
+    const caption = [c.caption ?? (info?.words || undefined), info?.figcaption].filter((t): t is string => !!t && t.trim() !== '').join(' · ') || undefined
+    out.push({ ...c, caption, context: info?.context, groupKey: c.groupKey ?? pictures.groups.get(c.url) })
   }
   return out.sort((a, b) => compareCodeUnits(a.url, b.url) || compareCodeUnits(a.channel, b.channel) || compareCodeUnits(a.locator, b.locator))
 }

@@ -74,6 +74,25 @@ export type SourceAdapter = {
    * not part of the package and changes no hash.
    */
   displayTitle?: (identity: ProjectIdentity) => string | undefined
+  /**
+   * The technical documents the page links (PDF, DWG, DXF), with what their
+   * words claim each one is (005C). Never image candidates: the pipeline
+   * fetches the OUTLINE and DRAWING_SET ones under the same safety policy,
+   * hashes them as provenance, and parses none.
+   */
+  documents?: (ctx: AdapterContext) => DocumentClaim[]
+}
+
+/** A technical document a page links, as its words describe it. A claim; the bytes, when fetched, are only hashed. */
+export type DocumentClaim = {
+  url: string
+  format: 'PDF' | 'DWG' | 'DXF'
+  kind: 'OUTLINE' | 'DRAWING_SET' | 'ENERGY_CERTIFICATE' | 'COST_ESTIMATE' | 'BROCHURE' | 'UNKNOWN'
+  variant: 'BASE' | 'MIRRORED' | 'UNKNOWN'
+  statedScale?: string
+  /** The list items it is filed under and its own text, joined. */
+  words: string
+  why: string
 }
 
 /** Claims derived purely from the channel, common to every publisher. */
