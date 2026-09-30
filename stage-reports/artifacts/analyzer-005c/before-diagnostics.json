@@ -1,0 +1,321 @@
+{
+  "schema": "buildplan.005c.plan-diagnostics",
+  "label": "frozen 005B code (d3235bf), offline replay of the sealed packages",
+  "rows": [
+    {
+      "house": "willa-miranda",
+      "outcome": "FAILED PLAN_LAYOUT_REJECTED",
+      "basePlan": {
+        "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+        "storey": "GROUND",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 12
+      },
+      "metric": {
+        "cmPerPixelX": 2.680947,
+        "cmPerPixelY": 2.680947,
+        "confidence": "SUPPORTED",
+        "independentWitnesses": 3,
+        "isotropy": "ASSUMED",
+        "legacyCmPerPixel": 2.680947,
+        "relation": "CONFIRMED"
+      },
+      "extent": {
+        "rectPx": {
+          "x0": 234.5,
+          "x1": 794,
+          "y0": 355,
+          "y1": 449.5
+        },
+        "provenance": {
+          "x": "DIMENSION_CHAIN_EXTENT",
+          "y": "DIMENSION_CHAIN_EXTENT"
+        },
+        "weak": false,
+        "m": [
+          15,
+          2.51
+        ]
+      },
+      "wallBands": 46,
+      "wallBandsForEnvelope": 27,
+      "openings": {
+        "wideGaps": 0,
+        "decisions": []
+      },
+      "callouts": 14,
+      "envelope": {
+        "rectPx": {
+          "x0": 234.5,
+          "x1": 549,
+          "y0": 385,
+          "y1": 429
+        },
+        "m": [
+          8.43,
+          1.17
+        ]
+      },
+      "bays": [],
+      "cells": {
+        "total": 52,
+        "built": 2,
+        "recess": 0,
+        "outside": 50
+      },
+      "builtM2": 0.55,
+      "publishedFootprintM2": 169.9,
+      "residualPct": -99.7,
+      "failure": {
+        "code": "RECONSTRUCTION_FAILED",
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "message": "the lowest storey covers 0.55 m² against the 169.9 m² the publisher prints — 99.7% apart: the decomposition is not of this building; 59 other readings of the plan were weighed and none survived to a full composition"
+      }
+    },
+    {
+      "house": "dom-w-zurawkach",
+      "outcome": "FAILED PLAN_NO_MASSES",
+      "basePlan": {
+        "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+        "storey": "GROUND",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 14
+      },
+      "metric": {
+        "cmPerPixelX": 2.218163,
+        "cmPerPixelY": 2.216603,
+        "confidence": "STRONG",
+        "independentWitnesses": 5,
+        "isotropy": "MEASURED",
+        "legacyCmPerPixel": 2.217601,
+        "relation": "CONFIRMED"
+      },
+      "extent": {
+        "rectPx": {
+          "x0": 257,
+          "x1": 796.5,
+          "y0": 95,
+          "y1": 523.5
+        },
+        "provenance": {
+          "x": "DIMENSION_CHAIN_EXTENT",
+          "y": "DIMENSION_CHAIN_EXTENT"
+        },
+        "weak": false,
+        "m": [
+          11.97,
+          9.5
+        ]
+      },
+      "wallBands": 31,
+      "wallBandsForEnvelope": 22,
+      "openings": {
+        "wideGaps": 0,
+        "decisions": []
+      },
+      "callouts": 5,
+      "envelope": {
+        "rectPx": {
+          "x0": 260,
+          "x1": 792,
+          "y0": 95,
+          "y1": 456
+        },
+        "m": [
+          11.8,
+          8
+        ]
+      },
+      "bays": [],
+      "cells": {
+        "total": 33,
+        "built": 17,
+        "recess": 1,
+        "outside": 15
+      },
+      "builtM2": 69.05,
+      "publishedFootprintM2": 101.7,
+      "residualPct": -32.1,
+      "failure": {
+        "code": "RECONSTRUCTION_FAILED",
+        "reasonCode": "PLAN_NO_MASSES",
+        "message": "2 walled regions of the 853×853 px floor plan were found, but no building mass could be made from them that places the front of the building; 8 other readings of the plan were weighed and none survived to a full composition"
+      }
+    },
+    {
+      "house": "dom-w-modrzykach",
+      "outcome": "FAILED PLAN_LAYOUT_REJECTED",
+      "basePlan": {
+        "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+        "storey": "GROUND",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 16
+      },
+      "metric": {
+        "cmPerPixelX": 2.748392,
+        "cmPerPixelY": 2.745536,
+        "confidence": "STRONG",
+        "independentWitnesses": 4,
+        "isotropy": "MEASURED",
+        "legacyCmPerPixel": 2.689233,
+        "relation": "REPLACED"
+      },
+      "extent": {
+        "rectPx": {
+          "x0": 46,
+          "x1": 719,
+          "y0": 113,
+          "y1": 535
+        },
+        "provenance": {
+          "x": "DIMENSION_CHAIN_EXTENT",
+          "y": "DIMENSION_CHAIN_EXTENT"
+        },
+        "weak": false,
+        "m": [
+          18.5,
+          11.6
+        ]
+      },
+      "wallBands": 33,
+      "wallBandsForEnvelope": 19,
+      "openings": {
+        "wideGaps": 2,
+        "decisions": [
+          "COLLINEAR_GAP Y@186.5 7.51 m OPEN_SIDE",
+          "BAY_MOUTH Y@324 12.76 m OPEN_SIDE"
+        ]
+      },
+      "callouts": 11,
+      "envelope": {
+        "rectPx": {
+          "x0": 46,
+          "x1": 719,
+          "y0": 113,
+          "y1": 186.5
+        },
+        "m": [
+          18.5,
+          2.02
+        ]
+      },
+      "bays": [
+        {
+          "mouth": "OPEN_SIDE",
+          "rect": {
+            "x0": 46,
+            "x1": 719,
+            "y0": 186.5,
+            "y1": 324
+          },
+          "side": "MAX_Z"
+        }
+      ],
+      "cells": {
+        "total": 99,
+        "built": 5,
+        "recess": 0,
+        "outside": 94
+      },
+      "builtM2": 25.97,
+      "publishedFootprintM2": 181.98,
+      "residualPct": -85.7,
+      "failure": {
+        "code": "RECONSTRUCTION_FAILED",
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "message": "the lowest storey covers 14.72 m² against the 181.98 m² the publisher prints — 91.9% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition"
+      }
+    },
+    {
+      "house": "aster-viii",
+      "outcome": "FAILED METRIC_RESOLUTION_INCONCLUSIVE",
+      "basePlan": {
+        "frameId": "frame-asset-aster-viii-7e90859c03-fb7f92629b",
+        "storey": "GROUND",
+        "sizePx": {
+          "height": 1202,
+          "width": 962
+        },
+        "wallPx": 16
+      },
+      "metric": {
+        "confidence": "INCONCLUSIVE",
+        "independentWitnesses": 1,
+        "isotropy": "NONE",
+        "relation": "NO_SCALE"
+      },
+      "extent": {
+        "rectPx": {
+          "x0": 116,
+          "x1": 892.993164,
+          "y0": 325,
+          "y1": 953.75
+        },
+        "provenance": {
+          "x": "WALL_GEOMETRY_EXTENT",
+          "y": "WALL_GEOMETRY_EXTENT"
+        },
+        "weak": true,
+        "m": null
+      },
+      "wallBands": 61,
+      "wallBandsForEnvelope": 48,
+      "openings": {
+        "wideGaps": 17,
+        "decisions": [
+          "COLLINEAR_GAP X@124 7.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@583.5 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@583.5 6.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@583.5 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@669.5 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@733.75 6.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@733.75 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@884.5 4.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@884.5 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP X@884.5 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@333 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@702.5 5.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@721 5.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@767 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@872.25 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@901 8.00 m OPENING_IN_WALL",
+          "COLLINEAR_GAP Y@934.75 8.00 m OPENING_IN_WALL"
+        ]
+      },
+      "callouts": 2,
+      "envelope": {
+        "rectPx": {
+          "x0": 124,
+          "x1": 884.5,
+          "y0": 333,
+          "y1": 954.25
+        },
+        "m": null
+      },
+      "bays": [],
+      "cells": {
+        "total": 36,
+        "built": 27,
+        "recess": 0,
+        "outside": 9
+      },
+      "builtM2": null,
+      "publishedFootprintM2": null,
+      "residualPct": null,
+      "failure": {
+        "code": "RECONSTRUCTION_FAILED",
+        "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (1 independent, plausible); 248.26087 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: an overall dimension read the right way up, or two readings on different chains that "
+      }
+    }
+  ]
+}

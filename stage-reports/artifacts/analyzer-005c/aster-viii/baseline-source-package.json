@@ -1,0 +1,997 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-17488c1a7d",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja tył\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-e4-jpg-7ee01be64e",
+      "selectionReason": "only variant (1200x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294455,
+          "byteHash": "e11e9e0d6e92a9ce1f12a85e8308665db54bd3426956136fcb157394eda9c8ed",
+          "byteLength": 102168,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-e4-jpg-7ee01be64e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_e4.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-788703e68c",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Elewacje · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-asterviii-e3-jpg-d5a9691d3a",
+      "selectionReason": "only variant (1200x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294455,
+          "byteHash": "63cdc41235d5b722d066c717b7867e7ae9c8096c1284ec0f621a866c03444857",
+          "byteLength": 93258,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-e3-jpg-d5a9691d3a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_e3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-7e90859c03",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty · Rzut parter\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Rzuty · Rzut parter\")",
+          "dimension": "storey",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-asterviii-r1-jpg-2bd951ab38",
+      "selectionReason": "only variant (962x1202, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.800333,
+          "byteHash": "2fe7aa54915bea919cd72cbfd3673ab8b2ee6950a5bfaa0f45b0d4f720deadd8",
+          "byteLength": 191663,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1202,
+            "width": 962
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-r1-jpg-2bd951ab38",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_r1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-8d3b51327c",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.62,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Elewacje · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-asterviii-e2-jpg-a79b933289",
+      "selectionReason": "only variant (1200x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294455,
+          "byteHash": "d2f6f1762b08d834e6cdc4e0ba1fa815afa04a50b40835543a357487a5fbf709",
+          "byteLength": 100959,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-e2-jpg-a79b933289",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_e2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-ca7c6281f7",
+      "roleEvidence": [
+        {
+          "confidence": 0.62,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Rzuty · Rzut działki\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-asterviii-s-jpg-0525e2d9ca",
+      "selectionReason": "only variant (1138x1139, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.999122,
+          "byteHash": "b28e3412ed183cce861094632eb9514155acd3e7c5a35b85267f5f4bb7b083ff",
+          "byteLength": 72358,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1139,
+            "width": 1138
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-s-jpg-0525e2d9ca",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_s.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Aster VIII",
+      "id": "asset-aster-viii-f63ad535b2",
+      "roleEvidence": [
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja przód\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-e1-jpg-41638b31b8",
+      "selectionReason": "only variant (1200x523, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294455,
+          "byteHash": "c680f33fc700d30f6cf86313ef0dd28ddfa6cb91158d95c3058f12277bb11e28",
+          "byteLength": 102324,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 523,
+            "width": 1200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-e1-jpg-41638b31b8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_e1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-asterviii-w1-jpg-1f31f67e1f",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w1-jpg-e602c29da6",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "ad51240015619bcc477a4298632408ff9dd52787e5b2c58fd94a8052fa93cec6",
+          "byteLength": 366841,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w1-jpg-e602c29da6",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/asterVIII_w1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-115423e4f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "byteLength": 61287,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "byteLength": 23380,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-2122c17c71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.715818,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "byteLength": 66219,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-jpg-b3083b8576",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg"
+        },
+        {
+          "aspect": 1.715818,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "byteLength": 14602,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-598a2abb68",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "byteLength": 55569,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "byteLength": 18930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Prezentacja",
+      "id": "asset-prezentacja-e019163552",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.738053,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "byteLength": 71506,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 417
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-c7f1f42f7a",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w1-jpg-w-286-b95dfa1400",
+      "selectionReason": "largest decoded raster of 2 variants: 1865x1200 over 784x504",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "2aff94d21161adf8646a6de030ebb794794914d22faca2a311fa0480d5271c83",
+          "byteLength": 575370,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w1-jpg-w-286-b95dfa1400",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w1.jpg?w=286)"
+        },
+        {
+          "aspect": 1.555556,
+          "byteHash": "dd136cf09953637bb567cf054c51a8a90cfcddbf1f6c683919027def7094a59b",
+          "byteLength": 127300,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w1-jpg-p-prslide-f19107eb85",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w1.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-e25becc350",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551724,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "byteLength": 160714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 203,
+            "width": 315
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-1338cbe5eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w4-jpg-p-prslide-9804d8cf72",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "6f609be72ddab639955f09247d61a1163d6af25ba56ded2a3d754ffc94a750de",
+          "byteLength": 128753,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w4-jpg-p-prslide-9804d8cf72",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w4.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-5a006361cf",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w2-jpg-p-prslide-b969cf02ef",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "a1aa92f1cfc378e70dcbf6c63ce19943583aeb768a01571f8604d2e5f84d24f3",
+          "byteLength": 130417,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w2-jpg-p-prslide-b969cf02ef",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w2.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-70173e00e6",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w10-jpg-p-prslide-0276a6538f",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "04260a6e7212d45b90862dcb501d93b7b0cc4d843ed9c0c714bd3742f5056434",
+          "byteLength": 111540,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w10-jpg-p-prslide-0276a6538f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w10.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-76339203c4",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w8-jpg-p-prslide-9277649e7d",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "2f48ff6a1caa523838234071649e8b8f8e12804f30103c0cbf2726598157b8a1",
+          "byteLength": 97460,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w8-jpg-p-prslide-9277649e7d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w8.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-8ae3f66fee",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w6-jpg-p-prslide-13d574c9a5",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "6e92eaa8527c1ccdbd71b3150c622b80b3299677bbf106d41be1c69a0d5050aa",
+          "byteLength": 113886,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w6-jpg-p-prslide-13d574c9a5",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w6.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-a389fcf5ce",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w5-jpg-p-prslide-c20b8f5241",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "33e8a066c71e10c375905923cbf0e617e6f3a943606fea8189b40bbb05b94ec9",
+          "byteLength": 130613,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w5-jpg-p-prslide-c20b8f5241",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w5.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-b8af5877a3",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w9-jpg-p-prslide-4cd53283ce",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "660468e59dca35a42abec6a98a60d73cacfaf98b6d2389fe94670a2926ccf1eb",
+          "byteLength": 129230,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w9-jpg-p-prslide-4cd53283ce",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w9.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-ca9386d0cd",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w12-jpg-p-prslide-f5383e7f80",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "a1a7fc4537609247fe01954c3778b5a695c86e4a6aaa072909183b14bbb21c79",
+          "byteLength": 103885,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w12-jpg-p-prslide-f5383e7f80",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w12.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-d8b758b780",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w3-jpg-p-prslide-1ff0e5726d",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "fc1f0c48059603f9bfde5d5738cd29eace2c32f36f92c045823eff9ab02cfae1",
+          "byteLength": 124238,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w3-jpg-p-prslide-1ff0e5726d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w3.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-f2ebf581a5",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w7-jpg-p-prslide-f56c8f4d6b",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "23b20f8e92c2499ddf088bc1bf361e334a4018f238d23d51b25f34db34fba228",
+          "byteLength": 105107,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w7-jpg-p-prslide-f56c8f4d6b",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w7.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, bez garażu Aster VIII",
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-ff663a29cb",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu nowoczesna stodoła, z wysokim salonem, \")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-asterviii-w11-jpg-p-prslide-08addddb9c",
+      "selectionReason": "only variant (782x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551587,
+          "byteHash": "79b803d567b475e4f858c2f14ef8a9666cb324b2b6e9f32c12365dc852701327",
+          "byteLength": 112285,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 782
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-asterviii-w11-jpg-p-prslide-08addddb9c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/asterVIII/asterVIII_w11.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Wycena",
+      "id": "asset-wycena-fb105e7612",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "byteLength": 53872,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/asterVIII",
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/asterVIII",
+  "contentHash": "96496c830808cb542b0cfa5b49c930370dd8844593ee40ffb7ddb2d650d38624",
+  "failures": [],
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/asterVIII/",
+  "id": "src-www-dobredomy-pl-5e52f50fa8",
+  "pageHash": "afbe4528d956250006a02f2aed82132d5f3abb286729b2c01f5260c5f94f2856",
+  "project": {
+    "name": "Projekt domu Aster VIII - Dobre Domy Flak & Abramowicz",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "1) Administratorem Pani/Pana danych osobowych jest \"Dobre Domy Flak & Abramowicz\" Sp. z o.o. Spółka komandytowa z siedzibą we Wrocławiu przy ul. Strzegomskiej 2-4 2) osobą kontaktową w sprawie danych osobowych z ramienia \"Dobre Domy Flak & Abramowicz\" Sp. z o.o. Spółka komandytowa jest Pełnomocnik ds. Ochrony Danych Osobowych Osobowych - e-mail: odo@dobredomy.pl , nr. tel. 71 352 04 40 3) Pani/Pana dane osobowe przetwarzane będą w celach marketingowych na podstawie art. 6 ust 1 pkt a) RODO. 4) Pani/Pana dane osobowe będą przechowywane i przetwarzane &nbsp; więcej czasu cofnięcia wyrażonej zgody. 5) Pani/Pana dane osobowe mogą zostać przekazane podmiotom przetwarzającym je na zlecenie Administratora, takim jak: agencje marketingowe, dostawcy usług teleinformatycznych, firmy kurierskie, podmioty obsługujące płatności, dostawcy usług księgowych, prawnych i doradczych, podmioty uprawnione do uzyskania danych osobowych na podstawie przepisów prawa 6) posiada Pani/Pan prawo dostępu do treści swoich danych oraz prawo ich sprostowania, usunięcia, ograniczenia przetwarzania, prawo do przenoszenia danych, prawo wniesienia sprzeciwu, prawo do cofnięcia zgody w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania (jeżeli przetwarzanie odbywa się na podstawie zgody), którego dokonano na podstawie zgody przed jej cofnięciem 7) ma Pani/Pan prawo wniesienia skargi do Prezesa Urzędu Ochrony danych Osobowych gdy uzna Pani/Pan, iż przetwarzanie danych osobowych Pani/Pana dotyczących narusza przepisy ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r.; 8) podanie przez Pana/Panią danych osobowych jest dobrowolne, jednak brak ich podania oraz wyrażenia powyższych zgód marketingowych uniemożliwi otrzymywanie Newslettera. Jeśli chce Pani/Pan dowiedzieć się więcej na temat przetwarzanych przez nas danych osobowych – zachęcamy do zapoznania się z naszą Polityką Prywatności (https://www.dobredomy.pl/dd_files/File/polityka-prywatnosci-pracowni.pdf)"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Aster VIII to parterowy dom w nowoczesnym stylu, z fenomenalnymi przeszkleniami, szczególnie od strony ogrodowej. Umiejscowienie całości funkcji na jednej kondygnacji sprawia, że ten parterowy dom będzie bardzo wygodny w użytkowaniu. Cztery duże sypialnie spełnią oczekiwania nawet większej rodziny. Do środka domu prowadzi wiatrołap z osobną garderobą. Takie rozwiązanie pozwala na łatwe utrzymanie porządku, szczególnie w zimowych miesiącach, gdy wierzchnie okrycia zajmują dużo miejsca. Następnie przechodzimy do wnętrza domu, gdzie króluje efektowna jadalnia z wyjściem na ustronne patio. Lewe skrzydło domu to ogromny salon połączony przestrzennie z dużą kuchnią. Sercem tej strefy z pewnością stanie się kominek, usytuowany pomiędzy dwoma oknami, na głównej ścianie salonu. Całość uzupełniona jest spiżarnią oraz niewielką łazienką w hallu. W części prywatnej domownicy będą mieć aż cztery ustawne sypialnie, wspólną łazienkę oraz pomieszczenie gospodarcze, które może pełnić także rolę pralni. Projekt dostępny jest w wersjach: z innym układem funkcjonalnym Aster VIII, z garażem dwustanowiskowym i innym układem Aster IV, Aster III, Aster II i Aster, a także w wersji o mniejszej powierzchni użytkowej Aster V."
+    }
+  ],
+  "requestedUrl": "https://www.dobredomy.pl/projekt/asterVIII/",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

@@ -1,0 +1,927 @@
+{
+  "schema": "buildplan.005c.aster-baseline",
+  "schemaVersion": "1.0.0",
+  "what": "Aster VIII through the frozen 005B analyzer, before any 005C change. A named cross-publisher development probe, not a blind holdout.",
+  "code": {
+    "branchHead": "d3235bfec81159e0b10485f4f362a79fff58f18c",
+    "frozenAnalyzer": "27274ab8c24a17c484158f5e3a0bf091ce85e961"
+  },
+  "run": {
+    "startedUtc": "2026-09-30T18:50:17Z",
+    "command": "TELEMETRY=1 analysis:second-house --url https://www.dobredomy.pl/projekt/asterVIII/ (production runAnalysis, live network)",
+    "node": "v22.22.2",
+    "wallClockS": 47.2,
+    "totalMs": 36001,
+    "peakRssMB": 699,
+    "maxTelemetryGapMs": 2459,
+    "phasesMs": {
+      "ACQUIRE_PAGE": 863,
+      "ACQUIRE_ASSETS": 5041,
+      "CLASSIFY": 0,
+      "OBSERVE_ASSETS": 7818,
+      "DECODE_RASTERS": 1538,
+      "METRIC_FRAMES": 20184,
+      "REGISTER_VIEWS": 482
+    }
+  },
+  "urlSafety": {
+    "url": "https://www.dobredomy.pl/projekt/asterVIII/",
+    "checks": [
+      "parsed",
+      "https",
+      "no-credentials",
+      "default-port",
+      "named-host",
+      "public-name"
+    ]
+  },
+  "route": {
+    "kind": "GENERIC",
+    "adapter": "generic.project-page@1.0.0",
+    "archonSpecialistClaimed": false,
+    "classification": {
+      "verdict": "PROJECT_PAGE",
+      "confidence": 0.69,
+      "evidence": [
+        {
+          "signal": "plan-imagery",
+          "detail": "floor-plan imagery or headings (by heading)",
+          "weight": 2
+        },
+        {
+          "signal": "elevation-imagery",
+          "detail": "elevation imagery or headings",
+          "weight": 1
+        },
+        {
+          "signal": "section-imagery",
+          "detail": "section imagery or headings",
+          "weight": 1
+        },
+        {
+          "signal": "title",
+          "detail": "the page names a house or project (\"Projekt domu Aster VIII - Dobre Domy Flak & Abramowicz\")",
+          "weight": 1
+        },
+        {
+          "signal": "og:type",
+          "detail": "og:type article",
+          "weight": 0.5
+        }
+      ]
+    }
+  },
+  "canonical": {
+    "requested": "https://www.dobredomy.pl/projekt/asterVIII/",
+    "logical": {
+      "url": "https://www.dobredomy.pl/projekt/asterVIII",
+      "basis": "DECLARED_CANONICAL"
+    },
+    "packageCanonicalUrl": "https://www.dobredomy.pl/projekt/asterVIII",
+    "requestedUrlRecorded": "https://www.dobredomy.pl/projekt/asterVIII/"
+  },
+  "identity": {
+    "name": "Projekt domu Aster VIII - Dobre Domy Flak & Abramowicz",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [],
+  "publishedRooms": [],
+  "publishedSpecificationKeys": [
+    "description",
+    "summary",
+    "summary"
+  ],
+  "factsOnPageNotRead": "the page prints its figures in a div-based table (row/cell divs, a tooltip definition between label and value); the generic reader knows <table>, <dl> and `label: value` list items only",
+  "assets": [
+    {
+      "id": "asset-aster-viii-17488c1a7d",
+      "file": "asterVIII_e4.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 523,
+        "width": 1200
+      },
+      "byteHash": "e11e9e0d6e92a9ce1f12a85e8308665db54bd3426956136fcb157394eda9c8ed",
+      "byteLength": 102168,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja tył\")"
+      ]
+    },
+    {
+      "id": "asset-aster-viii-788703e68c",
+      "file": "asterVIII_e3.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "decoded": {
+        "height": 523,
+        "width": 1200
+      },
+      "byteHash": "63cdc41235d5b722d066c717b7867e7ae9c8096c1284ec0f621a866c03444857",
+      "byteLength": 93258,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja boczna\")",
+        "context: \"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Elewacje · Elewacja boczna\")"
+      ]
+    },
+    {
+      "id": "asset-aster-viii-7e90859c03",
+      "file": "asterVIII_r1.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "decoded": {
+        "height": 1202,
+        "width": 962
+      },
+      "byteHash": "2fe7aa54915bea919cd72cbfd3673ab8b2ee6950a5bfaa0f45b0d4f720deadd8",
+      "byteLength": 191663,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty · Rzut parter\")",
+        "context: \"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Rzuty · Rzut parter\")"
+      ]
+    },
+    {
+      "id": "asset-aster-viii-8d3b51327c",
+      "file": "asterVIII_e2.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "decoded": {
+        "height": 523,
+        "width": 1200
+      },
+      "byteHash": "d2f6f1762b08d834e6cdc4e0ba1fa815afa04a50b40835543a357487a5fbf709",
+      "byteLength": 100959,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja boczna\")",
+        "context: \"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Elewacje · Elewacja boczna\")"
+      ]
+    },
+    {
+      "id": "asset-aster-viii-ca7c6281f7",
+      "file": "asterVIII_s.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "decoded": {
+        "height": 1139,
+        "width": 1138
+      },
+      "byteHash": "b28e3412ed183cce861094632eb9514155acd3e7c5a35b85267f5f4bb7b083ff",
+      "byteLength": 72358,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Rzuty · Rzut działki\")"
+      ]
+    },
+    {
+      "id": "asset-aster-viii-f63ad535b2",
+      "file": "asterVIII_e1.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 523,
+        "width": 1200
+      },
+      "byteHash": "c680f33fc700d30f6cf86313ef0dd28ddfa6cb91158d95c3058f12277bb11e28",
+      "byteLength": 102324,
+      "variants": 1,
+      "roleSignals": [
+        "context: \"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje · Elewacja przód\")"
+      ]
+    },
+    {
+      "id": "asset-asterviii-w1-jpg-1f31f67e1f",
+      "file": "asterVIII_w1.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 1200,
+        "width": 1865
+      },
+      "byteHash": "ad51240015619bcc477a4298632408ff9dd52787e5b2c58fd94a8052fa93cec6",
+      "byteLength": 366841,
+      "variants": 1,
+      "roleSignals": [
+        "channel: the page’s share image is its hero picture, a visualisation unless named otherwise"
+      ]
+    },
+    {
+      "id": "asset-newsletter-115423e4f1",
+      "file": "newsletter_entry.png",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 400,
+        "width": 239
+      },
+      "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+      "byteLength": 61287,
+      "variants": 2,
+      "roleSignals": []
+    },
+    {
+      "id": "asset-newsletter-2122c17c71",
+      "file": "newsletter.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 373,
+        "width": 640
+      },
+      "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+      "byteLength": 66219,
+      "variants": 2,
+      "roleSignals": []
+    },
+    {
+      "id": "asset-newsletter-598a2abb68",
+      "file": "newsletter_exit.png",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 400,
+        "width": 239
+      },
+      "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+      "byteLength": 55569,
+      "variants": 2,
+      "roleSignals": []
+    },
+    {
+      "id": "asset-prezentacja-e019163552",
+      "file": "prezentacja-popup_img.jpg",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 565,
+        "width": 417
+      },
+      "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+      "byteLength": 71506,
+      "variants": 1,
+      "roleSignals": []
+    },
+    {
+      "id": "asset-projekt-domu-c7f1f42f7a",
+      "file": "asterVIII_w1.jpg?w=286)",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 1200,
+        "width": 1865
+      },
+      "byteHash": "2aff94d21161adf8646a6de030ebb794794914d22faca2a311fa0480d5271c83",
+      "byteLength": 575370,
+      "variants": 2,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-domu-e25becc350",
+      "file": "konkurs-fotograficzny-2026.png",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 203,
+        "width": 315
+      },
+      "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+      "byteLength": 160714,
+      "variants": 1,
+      "roleSignals": []
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-1338cbe5eb",
+      "file": "asterVIII_w4.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 784
+      },
+      "byteHash": "6f609be72ddab639955f09247d61a1163d6af25ba56ded2a3d754ffc94a750de",
+      "byteLength": 128753,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-5a006361cf",
+      "file": "asterVIII_w2.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 784
+      },
+      "byteHash": "a1aa92f1cfc378e70dcbf6c63ce19943583aeb768a01571f8604d2e5f84d24f3",
+      "byteLength": 130417,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-70173e00e6",
+      "file": "asterVIII_w10.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "04260a6e7212d45b90862dcb501d93b7b0cc4d843ed9c0c714bd3742f5056434",
+      "byteLength": 111540,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-76339203c4",
+      "file": "asterVIII_w8.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "2f48ff6a1caa523838234071649e8b8f8e12804f30103c0cbf2726598157b8a1",
+      "byteLength": 97460,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-8ae3f66fee",
+      "file": "asterVIII_w6.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "6e92eaa8527c1ccdbd71b3150c622b80b3299677bbf106d41be1c69a0d5050aa",
+      "byteLength": 113886,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-a389fcf5ce",
+      "file": "asterVIII_w5.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "33e8a066c71e10c375905923cbf0e617e6f3a943606fea8189b40bbb05b94ec9",
+      "byteLength": 130613,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-b8af5877a3",
+      "file": "asterVIII_w9.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "660468e59dca35a42abec6a98a60d73cacfaf98b6d2389fe94670a2926ccf1eb",
+      "byteLength": 129230,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-ca9386d0cd",
+      "file": "asterVIII_w12.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "a1a7fc4537609247fe01954c3778b5a695c86e4a6aaa072909183b14bbb21c79",
+      "byteLength": 103885,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-d8b758b780",
+      "file": "asterVIII_w3.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 784
+      },
+      "byteHash": "fc1f0c48059603f9bfde5d5738cd29eace2c32f36f92c045823eff9ab02cfae1",
+      "byteLength": 124238,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-f2ebf581a5",
+      "file": "asterVIII_w7.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "23b20f8e92c2499ddf088bc1bf361e334a4018f238d23d51b25f34db34fba228",
+      "byteLength": 105107,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-projekt-duzego-domu-parterowego-w-stylu-nowoczes-ff663a29cb",
+      "file": "asterVIII_w11.jpg?p=prslide",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "GROUND",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 504,
+        "width": 782
+      },
+      "byteHash": "79b803d567b475e4f858c2f14ef8a9666cb324b2b6e9f32c12365dc852701327",
+      "byteLength": 112285,
+      "variants": 1,
+      "roleSignals": [
+        "caption: \"parter\" / \"ground\" is the ground storey (matched \"parterowego\" in \"Projekt dużego domu parterowego, w stylu n"
+      ]
+    },
+    {
+      "id": "asset-wycena-fb105e7612",
+      "file": "wycena-thankyou.png",
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "decoded": {
+        "height": 400,
+        "width": 239
+      },
+      "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+      "byteLength": 53872,
+      "variants": 1,
+      "roleSignals": []
+    }
+  ],
+  "roleCounts": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 1,
+    "SITE_PLAN": 1,
+    "PERSPECTIVE_RENDER": 1,
+    "UNKNOWN": 18
+  },
+  "technicalDocuments": {
+    "linkedOnPage": [
+      "asterVIII_ch.pdf",
+      "asterVIII_pk.pdf",
+      "asterVIII_pkdwg.dwg",
+      "asterVIII_pkl.pdf",
+      "projekt,asterVIII.pdf"
+    ],
+    "discovered": 0,
+    "dropped": [
+      {
+        "file": "asterVIII_ch.pdf",
+        "code": "CHROME_ASSET",
+        "why": "a document link with no drawing word on it"
+      },
+      {
+        "file": "asterVIII_pk.pdf",
+        "code": "CHROME_ASSET",
+        "why": "a document link with no drawing word on it"
+      },
+      {
+        "file": "asterVIII_pkl.pdf",
+        "code": "CHROME_ASSET",
+        "why": "a document link with no drawing word on it"
+      },
+      {
+        "file": "projekt,asterVIII.pdf",
+        "code": "CHROME_ASSET",
+        "why": "a document link with no drawing word on it"
+      }
+    ],
+    "dwg": "linked (\".dwg\" under the 1:500 outline list item) but not discoverable: discovery knows .pdf documents only",
+    "outlinePdf": {
+      "retained": false,
+      "why": "the anchors read \"PDF podstawa\" / \"PDF lustro\"; the drawing word (\"Obrys budynku w skali 1:500\") sits on the parent list item, so the link carried no drawing word and was dropped before any fetch"
+    }
+  },
+  "droppedCandidates": {
+    "CHROME_ASSET": 11,
+    "NAVIGATION_THUMBNAIL": 40
+  },
+  "acquisitionFailures": [],
+  "frames": [
+    {
+      "id": "frame-asset-aster-viii-17488c1a7d-6fc569bb3c",
+      "document": "ELEVATION",
+      "storey": "NOT_APPLICABLE",
+      "size": {
+        "height": 523,
+        "width": 1200
+      },
+      "chains": 0,
+      "registration": null
+    },
+    {
+      "id": "frame-asset-aster-viii-788703e68c-1bda6c97c7",
+      "document": "ELEVATION",
+      "storey": "NOT_APPLICABLE",
+      "size": {
+        "height": 523,
+        "width": 1200
+      },
+      "chains": 0,
+      "registration": null
+    },
+    {
+      "id": "frame-asset-aster-viii-7e90859c03-fb7f92629b",
+      "document": "FLOOR_PLAN",
+      "storey": "GROUND",
+      "size": {
+        "height": 1202,
+        "width": 962
+      },
+      "chains": 0,
+      "registration": null
+    },
+    {
+      "id": "frame-asset-aster-viii-8d3b51327c-8e07832838",
+      "document": "ELEVATION",
+      "storey": "NOT_APPLICABLE",
+      "size": {
+        "height": 523,
+        "width": 1200
+      },
+      "chains": 0,
+      "registration": null
+    },
+    {
+      "id": "frame-asset-aster-viii-ca7c6281f7-7c86699ef6",
+      "document": "SITE_PLAN",
+      "storey": "UNKNOWN",
+      "size": {
+        "height": 1139,
+        "width": 1138
+      },
+      "chains": 9,
+      "registration": 0.032046
+    },
+    {
+      "id": "frame-asset-aster-viii-f63ad535b2-a4036fa64f",
+      "document": "ELEVATION",
+      "storey": "NOT_APPLICABLE",
+      "size": {
+        "height": 523,
+        "width": 1200
+      },
+      "chains": 0,
+      "registration": null
+    },
+    {
+      "id": "frame-asset-asterviii-w1-jpg-1f31f67e1f-69b8675452",
+      "document": "PERSPECTIVE_RENDER",
+      "storey": "NOT_APPLICABLE",
+      "size": {
+        "height": 1200,
+        "width": 1865
+      },
+      "chains": 0,
+      "registration": null
+    }
+  ],
+  "metric": {
+    "floorPlan": [
+      {
+        "frame": "FLOOR_PLAN",
+        "relation": "NO_SCALE",
+        "confidence": "INCONCLUSIVE",
+        "why": "no scale is stated by any reading that owes nothing to a scale"
+      }
+    ],
+    "floorPlanDimensionChains": 0,
+    "note": "the floor plan prints room areas and no dimension chain; the only printed dimensions are on the site plan (roof outline with eaves, plot minimum), which registers at its own scale and is not a floor plan"
+  },
+  "reconstruction": {
+    "stageReached": "REGISTERING_VIEWS/METRIC_RESOLUTION",
+    "failure": {
+      "code": "RECONSTRUCTION_FAILED",
+      "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+      "title": "The floor plan’s scale cannot be established",
+      "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (1 independent, plausible); 248.26087 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: an overall dimension read the right way up, or two readings on different chains that agree. (the 962×1202 px floor plan states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have)"
+    },
+    "diagnostics": {
+      "builtRegions": 1,
+      "cells": 36,
+      "conflictingReadings": 0,
+      "dimensionChains": 0,
+      "dimensionChainsRead": 0,
+      "enclosedCells": 27,
+      "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+      "firstFailure": "PLAN_NO_DIMENSION_FRAME",
+      "gridLinesX": 5,
+      "gridLinesY": 10,
+      "independentWitnesses": 1,
+      "masses": 0,
+      "metricConfidence": "INCONCLUSIVE",
+      "metricIsotropy": "NONE",
+      "metricRelation": "NO_SCALE",
+      "planFrames": 1,
+      "planSizePx": "962x1202",
+      "plansRead": 1,
+      "recessRegions": 0,
+      "scaleCmPerPx": 0,
+      "scaleHypotheses": 2,
+      "selectedPlanFrameId": "frame-asset-aster-viii-7e90859c03-fb7f92629b",
+      "topScales": "2.087379 cm/px (1 independent, plausible) | 248.26087 cm/px (0 independent, ruled out by the walls)",
+      "wallBands": 61,
+      "wallThicknessPx": 16,
+      "walledEnvelope": true,
+      "wideOpenings": 17,
+      "wideOpeningsClosed": 17
+    },
+    "trace": [
+      {
+        "stage": "ACQUIRING_SOURCE",
+        "substage": "FETCH",
+        "status": "PASSED",
+        "counts": {
+          "adapter": "generic.project-page",
+          "addressesNotUsed": 0,
+          "assets": 25,
+          "planAddressesLost": 0,
+          "route": "GENERIC",
+          "variants": 29
+        }
+      },
+      {
+        "stage": "CLASSIFYING_SOURCES",
+        "substage": "ROLES",
+        "status": "PASSED",
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 1,
+          "PERSPECTIVE_RENDER": 1,
+          "SITE_PLAN": 1,
+          "UNKNOWN": 18,
+          "drawings": 7
+        }
+      },
+      {
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "substage": "OBSERVATIONS",
+        "status": "PASSED",
+        "counts": {
+          "frames": 7,
+          "observations": 256,
+          "relations": 243,
+          "vision": "DETERMINISTIC_ONLY"
+        }
+      },
+      {
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "substage": "METRIC_EVIDENCE",
+        "status": "PASSED",
+        "counts": {
+          "callouts": 2,
+          "chains": 9,
+          "evidence": 6,
+          "levelDatums": 0,
+          "registrations": 1,
+          "scalesRefused": 1,
+          "undecodable": 0
+        }
+      },
+      {
+        "stage": "REGISTERING_VIEWS",
+        "substage": "PLAN_READ",
+        "status": "PASSED",
+        "counts": {
+          "planFrames": 1,
+          "plansRead": 1,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-aster-viii-7e90859c03-fb7f92629b"
+        }
+      },
+      {
+        "stage": "REGISTERING_VIEWS",
+        "substage": "PLAN_RESOLUTION",
+        "status": "FAILED",
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "counts": {
+          "compositions": 0,
+          "copies": 1,
+          "decompositions": 0,
+          "distinctOutlines": 0,
+          "firstReading": "PLAN_NO_DIMENSION_FRAME",
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "NONE",
+          "readings": 0,
+          "resolverVersion": "1.3.0"
+        }
+      },
+      {
+        "stage": "REGISTERING_VIEWS",
+        "substage": "PLAN_READ",
+        "status": "FAILED",
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "counts": {
+          "builtRegions": 1,
+          "cells": 36,
+          "dimensionChains": 0,
+          "dimensionChainsRead": 0,
+          "enclosedCells": 27,
+          "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+          "gridLinesX": 5,
+          "gridLinesY": 10,
+          "independentWitnesses": 1,
+          "masses": 0,
+          "metricConfidence": "INCONCLUSIVE",
+          "metricIsotropy": "NONE",
+          "metricRelation": "NO_SCALE",
+          "planFrames": 1,
+          "planSizePx": "962x1202",
+          "plansRead": 1,
+          "recessRegions": 0,
+          "scaleCmPerPx": 0,
+          "selectedPlanFrameId": "frame-asset-aster-viii-7e90859c03-fb7f92629b",
+          "wallBands": 61,
+          "wallThicknessPx": 16,
+          "walledEnvelope": true,
+          "wideOpenings": 17,
+          "wideOpeningsClosed": 17
+        }
+      }
+    ],
+    "model": null,
+    "scene": null
+  },
+  "hashes": {
+    "pageHash": "afbe4528d956250006a02f2aed82132d5f3abb286729b2c01f5260c5f94f2856",
+    "sourcePackage": "96496c830808cb542b0cfa5b49c930370dd8844593ee40ffb7ddb2d650d38624",
+    "observationGraph": "5b9e4261c658df3bbeba54090b21e17750fe7a7ba28437f2a1bf98c03b4fb8d6",
+    "metricEvidence": "c4d5a7aec489512a4997f4189aeb698d57e6ec5c8f48087cdd233893400400ca"
+  },
+  "evaluationFactsFromLivePage": {
+    "note": "read by a person from the page for checking only; never production constants",
+    "usableAreaM2": 172.9,
+    "footprintM2": 278.3,
+    "slopedRoofM2": 269,
+    "flatRoofM2": 30.8,
+    "mainPitchDeg": 30,
+    "heightM": 5.9,
+    "netVolumeM3": 640.2,
+    "rooms": 4,
+    "bathrooms": 2,
+    "storeys": 1,
+    "garage": false
+  }
+}
