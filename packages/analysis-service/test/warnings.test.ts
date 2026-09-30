@@ -98,3 +98,21 @@ describe('warning severity', () => {
     expect(b).toEqual(a)
   })
 })
+
+describe('metric and extent warnings (005B): weak metric truth is never silent', () => {
+  const metric = (confidence: string, relation = 'CONFIRMED', independentWitnesses = 1) => ({ confidence, relation, independentWitnesses, isotropy: 'ASSUMED' })
+  const codes = (input: Parameters<typeof warningsOf>[0]) => warningsOf(input).filter((w) => w.severity === 'LIMITING').map((w) => w.code)
+
+  it('a WEAK base scale limits the result', () => {
+    expect(codes({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, metric: metric('WEAK', 'REPLACED') })).toContain('METRIC_SCALE_WEAK')
+  })
+  it('an INCONCLUSIVE base scale limits it as unsupported', () => {
+    expect(codes({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, metric: metric('INCONCLUSIVE', 'LEGACY_UNCONFIRMED', 0) })).toContain('METRIC_SCALE_UNSUPPORTED')
+  })
+  it('SUPPORTED and STRONG base scales do not', () => {
+    for (const c of ['SUPPORTED', 'STRONG']) expect(codes({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, metric: metric(c) })).toEqual([])
+  })
+  it('a base plan framed by its walls limits the result', () => {
+    expect(codes({ visionMode: 'DETERMINISTIC_ONLY', failures: [], ...clean, metric: metric('STRONG'), extentWeak: true })).toEqual(['PLAN_EXTENT_FROM_WALLS'])
+  })
+})

@@ -65,6 +65,8 @@ export type WarningInputs = {
   openingFits?: ReadonlyArray<{ openingId: string; action: string; why: string }>
   /** 005B: the base plan's independent metric solution. A scale one reading states, or none states, limits. */
   metric?: { confidence: string; relation: string; independentWitnesses: number; isotropy: string }
+  /** 005B: the base plan's frame was supplied by its walls, not by its dimension chains. */
+  extentWeak?: boolean
 }
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`
@@ -107,6 +109,8 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
     out.push({ code: 'METRIC_SCALE_WEAK', severity: 'LIMITING', message: `the plan's scale rests on ${plural(input.metric.independentWitnesses, 'printed dimension', 'printed dimensions')} read as printed and nothing independent confirms it` })
   else if (input.metric?.confidence === 'INCONCLUSIVE')
     out.push({ code: 'METRIC_SCALE_UNSUPPORTED', severity: 'LIMITING', message: 'no printed dimension read as printed supports the plan\u2019s scale: every value that agrees with it was fitted to it' })
+  if (input.extentWeak)
+    out.push({ code: 'PLAN_EXTENT_FROM_WALLS', severity: 'LIMITING', message: 'the plan\u2019s extent was taken from its walls: its dimension chains describe only part of it' })
   if (input.residualsOutside > 0) out.push({ code: 'RESIDUALS_OUTSIDE_TOLERANCE', severity: 'LIMITING', message: `${input.residualsOutside} of ${input.residuals} source-view checks outside tolerance` })
   if (input.exteriorJointErrors > 0) out.push({ code: 'EXTERIOR_JOINTS', severity: 'LIMITING', message: `${plural(input.exteriorJointErrors, 'exterior joint finding', 'exterior joint findings')} in the closure audit` })
   if (input.graphViolations + input.ledgerViolations > 0) {
