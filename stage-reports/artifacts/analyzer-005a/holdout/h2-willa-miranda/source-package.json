@@ -1,0 +1,2353 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) elewacja boczna ",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-bocz-74bb11f0e6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-willa-miranda-11-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-66d46eb14eaeacf7fd2c-b166c6065a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x581 over 550x249",
+      "variants": [
+        {
+          "aspect": 2.203098,
+          "byteHash": "97b73aeeb757086f030a7450c3b1f85259db81e06884f1da7f6244bd8331f7ed",
+          "byteLength": 192901,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 581,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-66d46eb14eaeacf7fd2c-b166c6065a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-66d46eb14eaeacf7fd2c83eb583e4c49__11265.jpg"
+        },
+        {
+          "aspect": 2.208835,
+          "byteHash": "97298e8e5eb27b77317cdff38defcf88abb461ed528003ff48238a74bdc3fc23",
+          "byteLength": 48019,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 249,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-elewacja-boczna-projekt-willa-miranda-11-g2-72f1-29af93822f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-boczna-projekt-willa-miranda-11-g2-72f19af5581a97384e3e68379d1ceb22__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) elewacja boczna",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-bocz-92b371c334",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-willa-miranda-11-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt willa miranda 11 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-85e7209c9cd13320e942-3900dd86a8",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x581 over 550x249",
+      "variants": [
+        {
+          "aspect": 2.203098,
+          "byteHash": "829104617a35df496b9a7bc741e1be4953c6e09dc25d999b84bf3a65a3d29f6b",
+          "byteLength": 197794,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 581,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-85e7209c9cd13320e942-3900dd86a8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-85e7209c9cd13320e942dc78334c5ed5__11266.jpg"
+        },
+        {
+          "aspect": 2.208835,
+          "byteHash": "7d37046c3e2bf937a5f1890533eb4dac2c44891fb640fa2a0644b25fd8fc3b05",
+          "byteLength": 48390,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 249,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-elewacja-boczna-projekt-willa-miranda-11-g2-f408-6ee987bc07",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-boczna-projekt-willa-miranda-11-g2-f408185ba402f0e7f35071c2f1dd0b43__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) elewacja frontowa",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-fron-297718fa21",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-willa-miranda-11-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt willa miranda 11 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt willa miranda 11 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-8665ac2cae6539de325b-080533578e",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x581 over 550x249",
+      "variants": [
+        {
+          "aspect": 2.203098,
+          "byteHash": "a11554d63ee58cf22f4b22ee738645bf72a168d22feb680c647d56f3eb1ed042",
+          "byteLength": 201718,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 581,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-8665ac2cae6539de325b-080533578e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-8665ac2cae6539de325bffa952b55dae__11264.jpg"
+        },
+        {
+          "aspect": 2.208835,
+          "byteHash": "6fa14d811422801da6471d00c0a78fd33bd2bdf41eb55f5afefd9f73cb98ca63",
+          "byteLength": 48950,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 249,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-elewacja-frontowa-projekt-willa-miranda-11-g2-15-ba17534110",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-frontowa-projekt-willa-miranda-11-g2-155d8767a7335c390f98556e4000adfc__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-ogro-42b167d55e",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt willa miranda 11 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-willa-miranda-11-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt willa miranda 11 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt willa miranda 11 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-3750581d8f41d5eac5b4-f67340eace",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x581 over 550x249",
+      "variants": [
+        {
+          "aspect": 2.203098,
+          "byteHash": "a2582979534ec425c0d8151a7426395e3bd4fa7acf5f79362e37a1e5555067d5",
+          "byteLength": 199110,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 581,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-3750581d8f41d5eac5b4-f67340eace",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-3750581d8f41d5eac5b4324ec2fde187__11267.jpg"
+        },
+        {
+          "aspect": 2.208835,
+          "byteHash": "20c02367b8cd18237d0b94352db29dce231061a735d1d74ee1c8c11132d95ce9",
+          "byteLength": 49900,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 249,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-elewacja-ogrodowa-projekt-willa-miranda-11-g2-c4-3156fbb114",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-ogrodowa-projekt-willa-miranda-11-g2-c42a17861bffde644ef6ce7eab4d80b6__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) przekroj budynku",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-przekroj-budy-c129148002",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt willa miranda 11 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt willa miranda 11 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt willa miranda 11 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-willa-miranda-11-g2-f0a-5bf5009826",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "424cd26cca106913f308491523cfeb92051069be33951614ec8136b3bdb13d1b",
+          "byteLength": 86731,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m49324d69ef143/przekroj-budynku-projekt-willa-miranda-11-g2-f0a9533a49055c1157102cff68567ed1__256.jpg",
+          "id": "var-przekroj-budynku-projekt-willa-miranda-11-g2-f0a-5bf5009826",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/przekroj-budynku-projekt-willa-miranda-11-g2-f0a9533a49055c1157102cff68567ed1__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "a9b2b2bbcf622794e12474126b37f57422a829326dd6fd90e7195b1716657049",
+          "byteLength": 22946,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-przekroj-budynku-projekt-willa-miranda-11-g2-f0a-f69c1c3e64",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/przekroj-budynku-projekt-willa-miranda-11-g2-f0a9533a49055c1157102cff68567ed1__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) rzut parteru",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-rzut-parteru-3bce0e8763",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-willa-miranda-11-g2-be115bc-87ec1b971d",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "24006e3dff5e05e952202049ca7310df63b08b1e711d76b02ca2ceccf3a4b6ff",
+          "byteLength": 50271,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/carousel_images",
+          "id": "var-rzut-parteru-projekt-willa-miranda-11-g2-be115bc-87ec1b971d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-parteru-projekt-willa-miranda-11-g2-be115bc9c1498ca9ef8968969161ebe8__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) rzut piętra",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-rzut-pietra-e753cc9a1f",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-projekt-willa-miranda-11-g2-33b7d7ca-1c876b99e6",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "897eeb092c7f31c383ddcda869ebd168c4afd89a280ba943f6fc8ef094d2111a",
+          "byteLength": 33982,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/carousel_images",
+          "id": "var-rzut-pietra-projekt-willa-miranda-11-g2-33b7d7ca-1c876b99e6",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-pietra-projekt-willa-miranda-11-g2-33b7d7ca685b288b5e1ea50c9c3b8500__709.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) sytuacja",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-sytuacja-c494deea9e",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt willa miranda 11 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt willa miranda 11 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-c00589c5522faa88fad4-1055339f0a",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "0a35a89d1418585887b59c4557225f5b3f74f0fc3ad16009f550019159651cc4",
+          "byteLength": 240237,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-c00589c5522faa88fad4-1055339f0a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-c00589c5522faa88fad4f593b9651a06__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "d47b0d0d5c1cff5bd69eb24c7427cf5c5baea30b2abbd6b0b39af9dcdae6eee8",
+          "byteLength": 52282,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-sytuacja-projekt-willa-miranda-11-g2-98c5e2ddadc-e87dde84aa",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/sytuacja-projekt-willa-miranda-11-g2-98c5e2ddadc72303add227888d73b518__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Willa Miranda 11 (G2) widok 1",
+      "id": "asset-gotowy-projekt-willa-miranda-11-g2-widok-1-9ae8500a09",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-willa-miranda-11-g2-bd978230aeba-a8960e9b46",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "01736aa9ddf895a01732b04bded69e3442f8f4b0633482794023d07edf03bd99",
+          "byteLength": 8848,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-widok-1-projekt-willa-miranda-11-g2-bd978230aeba-a8960e9b46",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/widok-1-projekt-willa-miranda-11-g2-bd978230aeba1b31306d55602a5f0bb5__259.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-09a5fa3838",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-47e89843f06216ef1450-30246e6f84",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "eeb08b05e1d37eed753d2dacdd0d6a33c5233e2c1a018cea0162b8b3abdb1abf",
+          "byteLength": 155343,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-47e89843f06216ef1450-30246e6f84",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/l3/projekt-willa-miranda-11-g2-47e89843f06216ef1450eb6c076250b9__39517.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Willa Miranda 11 (G2)",
+      "id": "asset-projekt-willa-miranda-11-g2-4175eeb83e",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-willa-miranda-11-g2-9a145456bb1d-24f8777041",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "56de717965ea6d8d996cab11bdcb7708e26dc8cc15413d488bfc2f7eb8fef98e",
+          "byteLength": 30841,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/related?scope=family",
+          "id": "var-widok-2-projekt-willa-miranda-11-g2-9a145456bb1d-24f8777041",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/widok-2-projekt-willa-miranda-11-g2-9a145456bb1d00e17b8031b4769c8bbc__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-4b631f0977",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja kuchni 1 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-0695e242983c03872389-3532363521",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "be5f87580ec8b1b16069fdf864bb0b1f23158e2ce05d3200e06531afee35662f",
+          "byteLength": 195019,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-0695e242983c03872389-3532363521",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/k3/projekt-willa-miranda-11-g2-0695e242983c03872389d1577b625f5f__39516.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt willa miranda 11 g2 533474dc2fcc762dde0c817e0c4c1243  36698",
+      "id": "asset-projekt-willa-miranda-11-g2-533474dc2fcc762dde0c-c1b3a659d3",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-533474dc2fcc762dde0c-af53c6d195",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "c9a0e676ff72cb7139410cb5925b973750d11b3ba3a768668f8a6808202c0cad",
+          "byteLength": 340486,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m49324d69ef143/image/36698?showHotspots=false",
+          "id": "var-projekt-willa-miranda-11-g2-533474dc2fcc762dde0c-af53c6d195",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/m49324d69ef143/i/projekt-willa-miranda-11-g2-533474dc2fcc762dde0c817e0c4c1243__36698.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-7f56fe5978",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-47095b451bf35f50947e-a9894a74f2",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "e2fd681255e538322245ae1be9e0b1d0c968087a5b756b5f72deda6a9a143cc9",
+          "byteLength": 203165,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-47095b451bf35f50947e-a9894a74f2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-47095b451bf35f50947e615089ab9bbe__39509.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-94bed1c846",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 7)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-ca2199aac6d006ff14dd-587b7eac6a",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "66241433b02f74b121fb6ce34466d7aecdee896b27af089364ecaa729547b128",
+          "byteLength": 218202,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-ca2199aac6d006ff14dd-587b7eac6a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-ca2199aac6d006ff14dd8a7abe188119__39513.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-a83c6745ac",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-33451b1662d212c24806-edf0551a67",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "415d11caa6e590984d2d6a0dec6278263fc25f38ee3cae33f008043423fc73cb",
+          "byteLength": 181410,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-33451b1662d212c24806-edf0551a67",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-33451b1662d212c24806aca616b4bd1a__39511.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-c1625d9017",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-6b7ccea6bdf2a8b60a90-c332aaab19",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "9b5a986e30bcb886f8242c7c2d9446c89c30f9b4e336c628d49a568a63760f4c",
+          "byteLength": 246703,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-6b7ccea6bdf2a8b60a90-c332aaab19",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/l3/projekt-willa-miranda-11-g2-6b7ccea6bdf2a8b60a90e6191a5572cc__39520.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Willa Miranda 11 (G2)",
+      "id": "asset-projekt-willa-miranda-11-g2-c5d1ceb07a",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-projekt-willa-miranda-11-g2-22f1641d-fb5844495c",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2e6b93efe6b78d2c0e18785cd5ba23f7b292a058a1ce9be6321ebf9580ef9868",
+          "byteLength": 22202,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/related?scope=family",
+          "id": "var-rzut-pietra-projekt-willa-miranda-11-g2-22f1641d-fb5844495c",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-pietra-projekt-willa-miranda-11-g2-22f1641de79b194eae8a42322ccdd477__272.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Willa Miranda 11 (G2)",
+      "id": "asset-projekt-willa-miranda-11-g2-c8409d3300",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-willa-miranda-11-g2-757508a-4d0394cb74",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "e91b17b43dbd68a5dfb35f3eb8dcb9cd4a9dea9bad36b112addacef969e2ab81",
+          "byteLength": 33115,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/related?scope=family",
+          "id": "var-rzut-parteru-projekt-willa-miranda-11-g2-757508a-4d0394cb74",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-parteru-projekt-willa-miranda-11-g2-757508a2b61b7dc4c887983e8532d3e6__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Willa Miranda 11 (G2)",
+      "id": "asset-projekt-willa-miranda-11-g2-cf488a2d79",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-20e3451096cdd665b075-e975a4775b",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b2a020495427c90a1c362bc4a0046f5f91b0aa1588b9cda66d7e54f1591e2a39",
+          "byteLength": 28957,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m49324d69ef143/related?scope=family",
+          "id": "var-projekt-willa-miranda-11-g2-20e3451096cdd665b075-e975a4775b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-20e3451096cdd665b075c890cd05563e__252.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-d584486668",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-bc1b14c140f8a11d06eb-f209f07423",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "e2ba29b3ea6c0d23f50712d493ab5eda097ad0e9d7c3d3d088f0c53f71908491",
+          "byteLength": 199558,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-bc1b14c140f8a11d06eb-f209f07423",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-bc1b14c140f8a11d06eb56616331b3e4__39508.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-deeaa8d9b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja kuchni 1 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-33b48cd8cd05fcebca0a-e3e73cd1d7",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "ca828589e59a34b523ca7634c664e7143b06cf341506e8ded4965867a5dcc758",
+          "byteLength": 195895,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-33b48cd8cd05fcebca0a-e3e73cd1d7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/k3/projekt-willa-miranda-11-g2-33b48cd8cd05fcebca0abd90bc4e9182__39515.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-e0596eb1a4",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-cb832b0df25b1fa22e20-23129482a9",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "0b92eba5f796d34fa1cd1a3d3f469c08f4a6ac21ec1227d6bdcb7e5f94234c2e",
+          "byteLength": 223023,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-cb832b0df25b1fa22e20-23129482a9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-cb832b0df25b1fa22e2025ca9bb09acb__39507.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-e6ec3d8ad5",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-c008427d1372eaecd667-5bb75c91aa",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "cb34193d976ecd72362e741d9c4e9d8e4e7e23a2ef3cc2cdd50e8aa0ff071a66",
+          "byteLength": 166405,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-c008427d1372eaecd667-5bb75c91aa",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/l3/projekt-willa-miranda-11-g2-c008427d1372eaecd66776bfe1b67b78__39519.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-ea38d20af2",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-b4683bc43ca38d17620f-bdfc5a8d2c",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "87160d4fe56be21bba184c7b48e501cf1deb0dbf4cdd6d47a06341f70b6d66a7",
+          "byteLength": 189926,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-b4683bc43ca38d17620f-bdfc5a8d2c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/l3/projekt-willa-miranda-11-g2-b4683bc43ca38d17620f6261938be9f4__39518.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-ea3cc0f19e",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 8)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-06be3f84b662941dccbb-df33015e39",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "6fc3da8d0dbc177d988ab74f3bb4572cf600e8552af8af393f7ff73507cbcf51",
+          "byteLength": 210972,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-06be3f84b662941dccbb-df33015e39",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-06be3f84b662941dccbb46f5b0e28b8b__39514.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-ed6c19e100",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 6)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-d79b8db489abfb435c9f-bc1acb91eb",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "e081b22ade7dffac20a6b6fdc19a3f50171e1aadc8e232eb962de1150ece5a95",
+          "byteLength": 203739,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-d79b8db489abfb435c9f-bc1acb91eb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-d79b8db489abfb435c9fc74d9a82a4c6__39512.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-willa-miranda-11-g2-eecf4d7f40",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-bb19369ae9584f189422-80a084a6cc",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "4068ae1807881a1cc782bddf1889a6cbfbc9c988f25ee61a1b6e3b7ef904050e",
+          "byteLength": 189846,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-bb19369ae9584f189422-80a084a6cc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/w1/projekt-willa-miranda-11-g2-bb19369ae9584f189422472cbc504d3a__39510.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-07b69dcbb8",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-6cb4b7d1d8bf5505627c-6395149992",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4e79060c0f7c697d84055b1dd5674d3d3910e1ab1a83f628d2d275136e6b6fcd",
+          "byteLength": 69006,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-6cb4b7d1d8bf5505627c-6395149992",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-6cb4b7d1d8bf5505627c8e46b5dd4588__11816.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-73ee27c4b6",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m49324d69ef143/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m49324d69ef143/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-willa-miranda-11-g2-3de91d494cef4dd191a7-0cbf3fd2ed",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+          "byteLength": 100433,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-projekt-willa-miranda-11-g2-3de91d494cef4dd191a7-0cbf3fd2ed",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-3de91d494cef4dd191a7975e7df0f969__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-891a78d924",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m49324d69ef143/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m49324d69ef143/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt willa miranda 11 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-willa-mira-d499b63322",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7d9686078d1287e5dd74a793aa6f68531d1a51e508afa361d33a94dae128f7a5",
+          "byteLength": 111913,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-willa-mira-d499b63322",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-parteru-z-powierzchniami-projekt-willa-miranda-11-g2-919bdf718c4ad279f0e203b0fb3c337e__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-dac34cc718",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt willa miranda 11 (g2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-z-powierzchniami-projekt-willa-miran-228eefa681",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "a364cc8854b98af0896c48cc2b544d53e1c30c9381fea065ab1cf0dd0ae32f71",
+          "byteLength": 67815,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-rzut-pietra-z-powierzchniami-projekt-willa-miran-228eefa681",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-pietra-z-powierzchniami-projekt-willa-miranda-11-g2-6751bae949eb65ee0c3aec0886f92f7c__11916.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-willa-miranda-11-g2-2339f77315",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-willa-miranda-11-g2-1297bf8a0a23-d50a3fd92b",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1776b9f61378cf5fa25d91262e7c995da6b6d8cc442be4e2a9a69be1040bd361",
+          "byteLength": 350014,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-widok-1-projekt-willa-miranda-11-g2-1297bf8a0a23-d50a3fd92b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/widok-1-projekt-willa-miranda-11-g2-1297bf8a0a2332b2d3aa1b942e627f21__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-willa-miranda-11-g2-7fe78523da",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-willa-miranda-11-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt willa miranda 11 (g2) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-willa-miranda-11-g2-1abbca9dcdd3-4f1db62399",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "a1b1e20442492c0214157baa7870a0f631f4710d96076b7fe18046601d24769d",
+          "byteLength": 355081,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+          "id": "var-widok-2-projekt-willa-miranda-11-g2-1abbca9dcdd3-4f1db62399",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m49324d69ef143/widok-2-projekt-willa-miranda-11-g2-1abbca9dcdd34da894d949022d35446f__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+  "contentHash": "787dca045663163e4bbfc519320f51068c48111a8ed59c16db197a257738cf01",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-20e3451096cdd665b075c890cd05563e__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-parteru-projekt-willa-miranda-11-g2-757508a2b61b7dc4c887983e8532d3e6__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-parteru-projekt-willa-miranda-11-g2-be115bc9c1498ca9ef8968969161ebe8__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-pietra-projekt-willa-miranda-11-g2-22f1641de79b194eae8a42322ccdd477__11272.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/rzut-pietra-projekt-willa-miranda-11-g2-33b7d7ca685b288b5e1ea50c9c3b8500__11709.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/widok-1-projekt-willa-miranda-11-g2-1297bf8a0a2332b2d3aa1b942e627f21__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/widok-1-projekt-willa-miranda-11-g2-bd978230aeba1b31306d55602a5f0bb5__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/widok-2-projekt-willa-miranda-11-g2-1abbca9dcdd34da894d949022d35446f__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/widok-2-projekt-willa-miranda-11-g2-9a145456bb1d00e17b8031b4769c8bbc__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-66d46eb14eaeacf7fd2c83eb583e4c49__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-boczna-projekt-willa-miranda-11-g2-72f19af5581a97384e3e68379d1ceb22__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-85e7209c9cd13320e942dc78334c5ed5__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-boczna-projekt-willa-miranda-11-g2-f408185ba402f0e7f35071c2f1dd0b43__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-8665ac2cae6539de325bffa952b55dae__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-frontowa-projekt-willa-miranda-11-g2-155d8767a7335c390f98556e4000adfc__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-3750581d8f41d5eac5b4324ec2fde187__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/elewacja-ogrodowa-projekt-willa-miranda-11-g2-c42a17861bffde644ef6ce7eab4d80b6__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m49324d69ef143/projekt-willa-miranda-11-g2-c00589c5522faa88fad4f593b9651a06__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m49324d69ef143/sytuacja-projekt-willa-miranda-11-g2-98c5e2ddadc72303add227888d73b518__11255.jpg"
+    }
+  ],
+  "id": "src-m49324d69ef143-0279c8ab42",
+  "pageHash": "d861a00b502eafb647f49afc97a178ccd50eae8e9ecf53830ed6bfd75340b2af",
+  "project": {
+    "externalId": "m49324d69ef143",
+    "name": "Projekt domu Willa Miranda 11 (G2) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "8,88 m&sup2;",
+      "unit": "m2",
+      "value": 8.88
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,75 m",
+      "unit": "m",
+      "value": 8.75
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "233,46 m&sup2;",
+      "unit": "m2",
+      "value": 233.46
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "169,9 m&sup2;",
+      "unit": "m2",
+      "value": 169.9
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "38,02 m&sup2;",
+      "unit": "m2",
+      "value": 38.02
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "184,21 m&sup2;",
+      "unit": "m2",
+      "value": 184.21
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "296,0 m&sup2;",
+      "unit": "m2",
+      "value": 296
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "300,01 m&sup2;",
+      "unit": "m2",
+      "value": 300.01
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "227,03 m&sup2;",
+      "unit": "m2",
+      "value": 227.03
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1145,07 m&sup3;",
+      "unit": "none",
+      "value": 1145.07
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.08,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 4,08 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 15.79,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 15,79 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.78,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 12,78 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.46,
+      "index": 4,
+      "label": "Łazienka",
+      "raw": "4. Łazienka | 9,46 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.18,
+      "index": 5,
+      "label": "Pralnia",
+      "raw": "5. Pralnia | 4,18 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 13.59,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 13,59 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 14.01,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 14,01 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.45,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 12,45 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.56,
+      "index": 9,
+      "label": "Garderoba",
+      "raw": "9. Garderoba | 7,56 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.61,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 5,61 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.47,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,47 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.49,
+      "index": 2,
+      "label": "Łazienka",
+      "raw": "2. Łazienka | 3,49 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.46,
+      "index": 3,
+      "label": "Hol",
+      "raw": "3. Hol | 3,46 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.26,
+      "index": 4,
+      "label": "Spiżarnia",
+      "raw": "4. Spiżarnia | 2,26 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 14.78,
+      "index": 5,
+      "label": "Kuchnia",
+      "raw": "5. Kuchnia | 14,78 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 43.78,
+      "index": 6,
+      "label": "Salon + Jadalnia",
+      "raw": "6. Salon + Jadalnia | 43,78 | (45,86)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.46,
+      "index": 7,
+      "label": "Gabinet",
+      "raw": "7. Gabinet | 11,46 | (11,73)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.88,
+      "index": 8,
+      "label": "Kotłownia",
+      "raw": "8. Kotłownia | 8,88 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 38.02,
+      "index": 9,
+      "label": "Garaż",
+      "raw": "9. Garaż | 38,02 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Nowoczesna willa o rozbudowanym programie użytkowym, zadaszoną strefą tarasową oraz wysuniętym przed linię domu garażem dwustanowiskowym. Efektowny wygląd domu i jego funkcjonalny układ sprawiają, że spełni on oczekiwania wymagających Inwestorów. Biały oraz grafitowy tynk doskonale komponuje się z zastosowaną na elewacji drewnianą okładziną podkreślającą linię okien oraz dobraną pod jej kolor stolarką okienną, drzwiami wejściowymi i bramą garażową. Nowoczesny charakter podkreśla zastosowana w projekcie domu antracytowa dachówka, duże przeszklenia naturalnie doświetlające wnętrza oraz balustrady balkonowe ze stali nierdzewnej połączone ze szkłem. W okazałej strefie dziennej na parterze znajduje się salon z dużą, narożną sofą, kominkiem i bezpośrednim wyjściem na taras, jadalnia usytuowana przy dużym oknie z widokiem na taras i ogród, a także funkcjonalna kuchnia, którą od jadalni i salonu oddziela barek śniadaniowy. Dodatkowy pokój na parterze z zaprojektowanym miejscem do pracy oraz odpoczynku pełni funkcję gabinetu. Program funkcjonalny parteru dopełnia łazienka z kabiną prysznicową, a przez wiatrołap można szybko przejść do garażu i dalej do kotłowni. W nocnej strefie domu na piętrze znajduje się apartament rodziców z prywatną garderobą, łazienką oraz balkonem, trzy sypialnie, w tym dwie z oknami narożnymi, posiadające zaprojektowane miejsce do przechowywania, odpoczynku i nauki. Ponadto mieści się tutaj łazienka z pełnym programem funkcjonalnym: prysznicem, wanną, toaletą i dwiema umywalkami oraz pralnia. „Willa Miranda 11 (G2)” należy do kategorii: projekty domów piętrowych , projekty domów nowoczesnych , projekty willi i rezydencji , a także projekty domów z garażem dwustanowiskowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "rolety",
+      "text": "zewnętrzne podtynkowe"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy, nachylenie 22 st. , więźba drewniana, dachówka ceramiczna swissporTON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny piętrowy , strop płyta żelbetowa , 184.21 m² + 38.02 m² + 8.88 m² , 6 pokoi, kuchnia, 3 łazienki, spiżarka, kotłownia, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

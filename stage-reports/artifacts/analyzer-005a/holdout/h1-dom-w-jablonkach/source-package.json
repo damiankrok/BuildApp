@@ -1,0 +1,2300 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-elewacja-bocz-7d879ca071",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-jablonkach-22\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-bf3cf9781be0133569b9-c8c5b484dd",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x625 over 550x268",
+      "variants": [
+        {
+          "aspect": 2.048,
+          "byteHash": "4afc4f11bd6482157dbbdef7f14319bb3e22c2fde8da987537c20260b2d38dde",
+          "byteLength": 176899,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 625,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-bf3cf9781be0133569b9-c8c5b484dd",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-bf3cf9781be0133569b914ca89d8f4da__11266.jpg"
+        },
+        {
+          "aspect": 2.052239,
+          "byteHash": "6a6adc61e92f2933cb70d05d43d5e1b89aef0851765e169e6a98e798dd241f3b",
+          "byteLength": 45011,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 268,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-elewacja-boczna-projekt-dom-w-jablonkach-22-ab2b-2412f5c535",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-boczna-projekt-dom-w-jablonkach-22-ab2b64fb7ef7c504de5ecf085f2b6f4c__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-elewacja-bocz-b7c35c35d2",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-jablonkach-22\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w jabłonkach 22 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-3cbef4914d3fefcc2394-c9a00c543a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x625 over 550x268",
+      "variants": [
+        {
+          "aspect": 2.048,
+          "byteHash": "2b3e151bc1f158ee3bf8d26685ed7ea659908e75a9ae8ed200a88f288f94ed39",
+          "byteLength": 191717,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 625,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-3cbef4914d3fefcc2394-c9a00c543a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-3cbef4914d3fefcc2394fecec9dc2ab5__11265.jpg"
+        },
+        {
+          "aspect": 2.052239,
+          "byteHash": "65032de6f6b3ca1c030c24644bc6de3e7ce382599607b0db80f87a63bfcd2ac3",
+          "byteLength": 47649,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 268,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-elewacja-boczna-projekt-dom-w-jablonkach-22-04e7-178880f88c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-boczna-projekt-dom-w-jablonkach-22-04e79acbafbc42ad642109042006c67e__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-elewacja-fron-f12c5d0218",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-jablonkach-22\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w jabłonkach 22 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w jabłonkach 22 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-9b47346fdc7b3a14a334-1c1d0fcbb7",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x625 over 550x268",
+      "variants": [
+        {
+          "aspect": 2.048,
+          "byteHash": "73690fc3dac7489444275b21c3ef70f6ed341485e13fffaf9f97c35fecc86a8d",
+          "byteLength": 198142,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 625,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-9b47346fdc7b3a14a334-1c1d0fcbb7",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-9b47346fdc7b3a14a334b12fed2aa3a3__11264.jpg"
+        },
+        {
+          "aspect": 2.052239,
+          "byteHash": "aa4f58aa87460287bd723a5956a74e4f2203c85269f5baa132b5edcfd6801231",
+          "byteLength": 50098,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 268,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-elewacja-frontowa-projekt-dom-w-jablonkach-22-b1-133be9930a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-frontowa-projekt-dom-w-jablonkach-22-b1c78eeb4a2c8f2f95b5ac4c9d635058__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-elewacja-ogro-28b4203ef8",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w jabłonkach 22 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-jablonkach-22\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w jabłonkach 22 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w jabłonkach 22 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-e5ea6f6ba77a0e02b794-7df44ff479",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x625 over 550x268",
+      "variants": [
+        {
+          "aspect": 2.048,
+          "byteHash": "69b52c4a2c3cb06b8f8898ed2238312db7cda77e7da75f3b87bdb3c38f3ed7d1",
+          "byteLength": 212884,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 625,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-e5ea6f6ba77a0e02b794-7df44ff479",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-e5ea6f6ba77a0e02b79485ba0029a830__11267.jpg"
+        },
+        {
+          "aspect": 2.052239,
+          "byteHash": "30cf5816147c59b480a932b115dd4a48f5be7b6416b81a3b2f5efa22f9b1f1f8",
+          "byteLength": 52351,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 268,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-jablonkach-22-68-51cc2f5947",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-ogrodowa-projekt-dom-w-jablonkach-22-68dd8827aa9e9e29e3965ef52f5ea2d8__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-przekroj-budy-40861e063d",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w jabłonkach 22 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w jabłonkach 22 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w jabłonkach 22 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-jablonkach-22-3e8-5ef6727b89",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "bd591fcd9153661bf02c9416b388a2d1b9fbacf1e5dd88fe7b2c86187af3bb95",
+          "byteLength": 59647,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mb0e2566e7cb18/przekroj-budynku-projekt-dom-w-jablonkach-22-3e898c71ddc2fceb25570601ab9089b3__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-jablonkach-22-3e8-5ef6727b89",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/przekroj-budynku-projekt-dom-w-jablonkach-22-3e898c71ddc2fceb25570601ab9089b3__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "31eeca8b3ace0c62d3f47ed8d49b14c04a4b3bb88ef6783932274575c953cbf9",
+          "byteLength": 19185,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-przekroj-budynku-projekt-dom-w-jablonkach-22-3e8-73de9949b9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/przekroj-budynku-projekt-dom-w-jablonkach-22-3e898c71ddc2fceb25570601ab9089b3__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-parteru-ce2c8c302b",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-jablonkach-22-9afd699-9ddd5eb487",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "bd1f30c6ff38595939375ad91ceec4f5afddfd6e84f4801505b217eb8f6ddab8",
+          "byteLength": 60013,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-jablonkach-22-9afd699-9ddd5eb487",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-parteru-projekt-dom-w-jablonkach-22-9afd699ad0f27ee18f8fb6d4ad38d818__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-rzut-poddasza-dc4a126ee7",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-jablonkach-22-48133b-59368aa8a0",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7ea879e607dcb04ebee6dcce766f90be9dcb7af9edb106161b637291e65690b1",
+          "byteLength": 37534,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-jablonkach-22-48133b-59368aa8a0",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-poddasza-projekt-dom-w-jablonkach-22-48133b879eb4c079a9c183302523f077__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-sytuacja-dfc2dc7e30",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w jabłonkach 22 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w jabłonkach 22 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-cb59531250ec29dce8ac-0f913856d3",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "078ee1496610952de27e030f2123282f745120cbca7b1aea3006ef07ff569928",
+          "byteLength": 246842,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-cb59531250ec29dce8ac-0f913856d3",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-cb59531250ec29dce8ac08ee9dd33aac__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "333f79abf2ba9fc26cc87df06d7b8f8edccd0fc026be3c36f118831bb3044bdf",
+          "byteLength": 55127,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-sytuacja-projekt-dom-w-jablonkach-22-b87bb70ed23-ae03c6af8a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/sytuacja-projekt-dom-w-jablonkach-22-b87bb70ed23aec0174c087cd091fe043__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w jabłonkach 22 widok 1",
+      "id": "asset-gotowy-projekt-dom-w-jab-onkach-22-widok-1-14b9e4da40",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-jablonkach-22-e9d6fef28f43-a820c82812",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "bd6bb3a3e97f9b02223cd63bbfd1b2f35e0dd045ee02c3e633949cad00181462",
+          "byteLength": 9200,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-widok-1-projekt-dom-w-jablonkach-22-e9d6fef28f43-a820c82812",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-1-projekt-dom-w-jablonkach-22-e9d6fef28f436d24c84d11ec7f41abc1__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w jabłonkach 22",
+      "id": "asset-projekt-dom-w-jab-onkach-22-09655213e4",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-jablonkach-22-e24f021-d81f9215dd",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b4e2db463f511e0a76801712404c4bd3f9f4eb0cd4a0ea9eb206a2c036f25801",
+          "byteLength": 37133,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-jablonkach-22-e24f021-d81f9215dd",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-parteru-projekt-dom-w-jablonkach-22-e24f021f41a77dc49efdcfc4ea87fa11__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w jabłonkach 22",
+      "id": "asset-projekt-dom-w-jab-onkach-22-2db71d499e",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-jablonkach-22-fbf4c5-ba07f73752",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "930d0cf99448d006ad83049a572eea30128e893a2c20065d8420d71df5a6631b",
+          "byteLength": 24419,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/related?scope=family",
+          "id": "var-rzut-poddasza-projekt-dom-w-jablonkach-22-fbf4c5-ba07f73752",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-poddasza-projekt-dom-w-jablonkach-22-fbf4c5f4914202cfe0774d9f82cae3ee__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w jabłonkach 22",
+      "id": "asset-projekt-dom-w-jab-onkach-22-b741c34e33",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-ca27665ee820eaac7ce1-8796093660",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2d10e30c45201525ec78de8d502e53267ad04d3bb3152385a44634a3b4afb9e0",
+          "byteLength": 31613,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/related?scope=family",
+          "id": "var-projekt-dom-w-jablonkach-22-ca27665ee820eaac7ce1-8796093660",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-ca27665ee820eaac7ce147d0e76d0def__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w jabłonkach 22",
+      "id": "asset-projekt-dom-w-jab-onkach-22-cbdb96fbb5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-jablonkach-22-440e2842a8ec-5e825d2ac3",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "0fbf31c0e9bd65989e6c762a86c7244707fa37679521264efedaf28270f3e05b",
+          "byteLength": 33292,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mb0e2566e7cb18/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-jablonkach-22-440e2842a8ec-5e825d2ac3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-2-projekt-dom-w-jablonkach-22-440e2842a8ecaa73cb8af8760c100e24__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w jablonkach 22 135e7211b5503fc65c5d26e6653c9f72  39369",
+      "id": "asset-projekt-dom-w-jablonkach-22-135e7211b5503fc65c5d-b86bf14d18",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-135e7211b5503fc65c5d-b8a06e2a0a",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "62c34ecc4a93113c39f99d173c636588f17f56f57e44c9ee9241e7f7862c0cd3",
+          "byteLength": 312572,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/mb0e2566e7cb18/image/39369?showHotspots=false",
+          "id": "var-projekt-dom-w-jablonkach-22-135e7211b5503fc65c5d-b8a06e2a0a",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/mb0e2566e7cb18/i/projekt-dom-w-jablonkach-22-135e7211b5503fc65c5d26e6653c9f72__39369.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-1e24515f19",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 7)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-660d4dcdb3f0f981d330-ba25c12243",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "1df4b8a7a811bacbad3058a450187147a7c31b6b8ed4ec835a62e34f4d70ba84",
+          "byteLength": 194147,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-660d4dcdb3f0f981d330-ba25c12243",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-660d4dcdb3f0f981d330bfb8f75f015c__40997.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-2765f64d24",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja kuchni 1 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-a14944a3abe82c160dcf-00c21661c6",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "a02974a370b4046aef2e886b98de438c899695c9356a11f51015185e929bfd1c",
+          "byteLength": 201496,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-a14944a3abe82c160dcf-00c21661c6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/k3/projekt-dom-w-jablonkach-22-a14944a3abe82c160dcfaad8a199cfd9__40998.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-45f9fc16b8",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-47eafd02db289f7a5f6a-93776e32b1",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "cfb87d6ae30ec6468e14c16dacaa69e53bc5cf70a6eba6fc6532dbf9f2b06b3a",
+          "byteLength": 258030,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-47eafd02db289f7a5f6a-93776e32b1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-47eafd02db289f7a5f6a4e351802f069__40992.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-4d250923ae",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-bf87359a8ec16c517461-87b1a99c46",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "694f6e572ebacc7327679e97fe279de399087b1d61ca9cf58d9bbd2baef7aa9e",
+          "byteLength": 368942,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-bf87359a8ec16c517461-87b1a99c46",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-bf87359a8ec16c51746177574425eca1__40991.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-60442d76cc",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja kuchni 1 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-23107699e82b4c1493a1-63e2084780",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "f424a691f85ff67e603abdd0ef55f5c9f0ce6753e9b185029747d3f77713de8d",
+          "byteLength": 159385,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-23107699e82b4c1493a1-63e2084780",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/k3/projekt-dom-w-jablonkach-22-23107699e82b4c1493a10349794dce9a__40999.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-857a400b85",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 5)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-617fa41ed113012e080e-a7c4813fe3",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "41a6db71fc5f90d7b8bc51667d4038e2c9351e762a3e4b4f3264b1817a6b7f59",
+          "byteLength": 239065,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-617fa41ed113012e080e-a7c4813fe3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-617fa41ed113012e080e40c5d85ffff7__40995.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-90c3dada6d",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 6)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-6d28901d3d3e1983b3b7-3c790d4d5b",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "51be65c450d121086e9233d448137ece2dd157cf65f6e2d41a7fdcf7473f64be",
+          "byteLength": 209855,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-6d28901d3d3e1983b3b7-3c790d4d5b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-6d28901d3d3e1983b3b716b8ca68e67c__40996.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-b4b6b02354",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja łazienki (wizualizacja 3 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-7e1cd5e20b2126e31c49-75ee19b796",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "15c78be1dfb9613116e1d489ddde4b4066a4b57349f86eab5481f984ca076de3",
+          "byteLength": 283649,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-7e1cd5e20b2126e31c49-75ee19b796",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/l3/projekt-dom-w-jablonkach-22-7e1cd5e20b2126e31c49deaf654f66dd__41001.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-b4f7a5c099",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja łazienki (wizualizacja 3 widok 3\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-1f76a7ed16ef562d1456-7e418691d4",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "58d6b1072126060f85e2f4156ec0272bbb018476e4e4c71cd19abf9574fcee05",
+          "byteLength": 248185,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-1f76a7ed16ef562d1456-7e418691d4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/l3/projekt-dom-w-jablonkach-22-1f76a7ed16ef562d14565d5960b40a01__41003.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-d06fdc1aee",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja łazienki (wizualizacja 3 widok 4\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-75b6528864865f7f00e0-9c13a05614",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "20e02b72778783ed3ac6c88624060b699103b20809abcb8d02101ef96b82b532",
+          "byteLength": 266390,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-75b6528864865f7f00e0-9c13a05614",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/l3/projekt-dom-w-jablonkach-22-75b6528864865f7f00e0d77d676ed511__41004.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-dca1434ccf",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja kuchni 1 widok 3\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-1635f4b80fb3ad133b07-85e51595df",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "ad6e9621093675bef6a70ee4a4a22654c493923184ee7b9480ac2a7edd12f232",
+          "byteLength": 178927,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-1635f4b80fb3ad133b07-85e51595df",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/k3/projekt-dom-w-jablonkach-22-1635f4b80fb3ad133b0743df8f1b6bb3__41000.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-e2076384a1",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 wizualizacja łazienki (wizualizacja 3 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-6a0f0e78887c5df4fd4d-4f131cc7ab",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "8f53b9db8241d5d7444a1c2ea96ff76be2c923501fa53c12c414ab343db2a5c8",
+          "byteLength": 241028,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-6a0f0e78887c5df4fd4d-4f131cc7ab",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/l3/projekt-dom-w-jablonkach-22-6a0f0e78887c5df4fd4d97957723179c__41002.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-e56165500b",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 3)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-b847e8357db285c58cdb-fa58c012ba",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "1b2362bfafcbd3b2dc4542a0765f99b2e4d6acb52ea2f3237baf0d7e5e40b6bd",
+          "byteLength": 279960,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-b847e8357db285c58cdb-fa58c012ba",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-b847e8357db285c58cdb6500de337af7__40993.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-jablonkach-22-fdbe9a191a",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 strefa dzienna (wizualizacja 1 widok 4)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-ace40b5ddcb8419fa90f-caf2706c2f",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "85303432cee9dc468124b6ab74d6cec3f5d8e3730361001854b3a8a3773fada1",
+          "byteLength": 262814,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-ace40b5ddcb8419fa90f-caf2706c2f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/w1/projekt-dom-w-jablonkach-22-ace40b5ddcb8419fa90fc99161739d05__40994.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-07bdad2581",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-jabl-cc9ded3569",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "01cd9ee1355bb13cdb3e6a88d092c7cde24e1ea61b8cd499ef19cf79f353f543",
+          "byteLength": 124128,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-jabl-cc9ded3569",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-parteru-z-powierzchniami-projekt-dom-w-jablonkach-22-6951540406c98b4a2bd43ac26cdfb8a9__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2389a8baf9",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-jab-6f5cac6176",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "12dba0146a580c8bb6d638224cdd541b5d27c541a845fa5aa9950c378fb89180",
+          "byteLength": 73555,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-jab-6f5cac6176",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-poddasza-z-powierzchniami-projekt-dom-w-jablonkach-22-0b8e5e1aef1e5628320b46213cb1cbdb__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-a8bdd8cd1d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w jabłonkach 22 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-18627aff4f27c2e8ed7e-369f51c273",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+          "byteLength": 123900,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-18627aff4f27c2e8ed7e-369f51c273",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-18627aff4f27c2e8ed7e1d3459582f4d__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-d52f958fd6",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mb0e2566e7cb18/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w jabłonkach 22 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-jablonkach-22-f4a0caffedb930adf804-3cfe9640c3",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "1388bad59bbf7f904d6f1e17d52c9667c45aa999c5d4dd2527910718cde1102c",
+          "byteLength": 75898,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-projekt-dom-w-jablonkach-22-f4a0caffedb930adf804-3cfe9640c3",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-f4a0caffedb930adf8040743bb323426__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-jablonkach-22-a5fe44fbd5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-jablonkach-22-b7a36012822c-baa899edfe",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "ef991421d5be0e90dd294eb76fc8e48030e95cb19faf6c51edf5e1f840bf2ceb",
+          "byteLength": 154843,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-widok-1-projekt-dom-w-jablonkach-22-b7a36012822c-baa899edfe",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-1-projekt-dom-w-jablonkach-22-b7a36012822cf54088be0cd272860531__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-jablonkach-22-07d79b1c5e",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-jablonkach-22\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w jabłonkach 22 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-jablonkach-22-4da7fbfb796c-99f465db8d",
+      "selectionReason": "only variant (800x800, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9ec888eb0db6580b692b2fa8ed760143065a1c04b59d785e70bc593875fe171b",
+          "byteLength": 346565,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 800,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+          "id": "var-widok-2-projekt-dom-w-jablonkach-22-4da7fbfb796c-99f465db8d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-2-projekt-dom-w-jablonkach-22-4da7fbfb796c5fa76af10a0e6bfe7973__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+  "contentHash": "34448966ef604f4547d3e8a902403bfaf3629e6524576d9d4738da01e32987ef",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-ca27665ee820eaac7ce147d0e76d0def__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-parteru-projekt-dom-w-jablonkach-22-9afd699ad0f27ee18f8fb6d4ad38d818__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-parteru-projekt-dom-w-jablonkach-22-e24f021f41a77dc49efdcfc4ea87fa11__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-poddasza-projekt-dom-w-jablonkach-22-48133b879eb4c079a9c183302523f077__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/rzut-poddasza-projekt-dom-w-jablonkach-22-fbf4c5f4914202cfe0774d9f82cae3ee__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-1-projekt-dom-w-jablonkach-22-b7a36012822cf54088be0cd272860531__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-1-projekt-dom-w-jablonkach-22-e9d6fef28f436d24c84d11ec7f41abc1__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-2-projekt-dom-w-jablonkach-22-440e2842a8ecaa73cb8af8760c100e24__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/widok-2-projekt-dom-w-jablonkach-22-4da7fbfb796c5fa76af10a0e6bfe7973__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-3cbef4914d3fefcc2394fecec9dc2ab5__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-boczna-projekt-dom-w-jablonkach-22-04e79acbafbc42ad642109042006c67e__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-bf3cf9781be0133569b914ca89d8f4da__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-boczna-projekt-dom-w-jablonkach-22-ab2b64fb7ef7c504de5ecf085f2b6f4c__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-9b47346fdc7b3a14a334b12fed2aa3a3__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-frontowa-projekt-dom-w-jablonkach-22-b1c78eeb4a2c8f2f95b5ac4c9d635058__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-e5ea6f6ba77a0e02b79485ba0029a830__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/elewacja-ogrodowa-projekt-dom-w-jablonkach-22-68dd8827aa9e9e29e3965ef52f5ea2d8__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mb0e2566e7cb18/projekt-dom-w-jablonkach-22-cb59531250ec29dce8ac08ee9dd33aac__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mb0e2566e7cb18/sytuacja-projekt-dom-w-jablonkach-22-b87bb70ed23aec0174c087cd091fe043__11255.jpg"
+    }
+  ],
+  "id": "src-mb0e2566e7cb18-2352b2a40b",
+  "pageHash": "20affa320c455f759b1ea269fd2efe9d22b42401309156f4240614cdb8a2fd29",
+  "project": {
+    "externalId": "mb0e2566e7cb18",
+    "name": "Projekt domu Dom w jabłonkach 22 Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "4,4 m&sup2;",
+      "unit": "m2",
+      "value": 4.4
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,58 m",
+      "unit": "m",
+      "value": 8.58
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "148,06 m&sup2;",
+      "unit": "m2",
+      "value": 148.06
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "99,4 m&sup2;",
+      "unit": "m2",
+      "value": 99.4
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "17,54 m&sup2;",
+      "unit": "m2",
+      "value": 17.54
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "114,0 m&sup2;",
+      "unit": "m2",
+      "value": 114
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "208,9 m&sup2;",
+      "unit": "m2",
+      "value": 208.9
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "196,27 m&sup2;",
+      "unit": "m2",
+      "value": 196.27
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "135,94 m&sup2;",
+      "unit": "m2",
+      "value": 135.94
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "683,7 m&sup3;",
+      "unit": "none",
+      "value": 683.7
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 11.5,
+      "index": 1,
+      "label": "Hol i schody",
+      "raw": "1. Hol i schody | 11,50 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.53,
+      "index": 2,
+      "label": "Pokój",
+      "raw": "2. Pokój | 11,53 | (14,17)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.36,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 12,36 | (14,33)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.94,
+      "index": 4,
+      "label": "Gabinet",
+      "raw": "4. Gabinet | 9,94 | (10,25)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.12,
+      "index": 5,
+      "label": "Pokój",
+      "raw": "5. Pokój | 11,12 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 2.64,
+      "index": 6,
+      "label": "Garderoba",
+      "raw": "6. Garderoba | 2,64 | (4,64)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.24,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 7,24 | (9,15)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.64,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,64 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 26.45,
+      "index": 2,
+      "label": "Salon + Jadalnia",
+      "raw": "2. Salon + Jadalnia | 26,45 | (29,13)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.54,
+      "index": 3,
+      "label": "Kuchnia",
+      "raw": "3. Kuchnia | 9,54 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.85,
+      "index": 4,
+      "label": "Spiżarnia",
+      "raw": "4. Spiżarnia | 1,85 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.19,
+      "index": 5,
+      "label": "Łazienka",
+      "raw": "5. Łazienka | 4,19 | (4,80)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.4,
+      "index": 6,
+      "label": "Kotłownia z pralnią",
+      "raw": "6. Kotłownia z pralnią | 4,40 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 17.54,
+      "index": 7,
+      "label": "Garaż",
+      "raw": "7. Garaż | 17,54 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt nowoczesnego domu z poddaszem użytkowym i garażem w bryle oraz wspaniale zadaszonym tarasem. To kolejna interesująca propozycja, należąca do znanej rodziny: „Domy w jabłonkach”. Strefa wejściowa została zaprojektowana w podcieniu lukarny oraz podkreślona strukturą betonu i naturalną okładziną. Od strony ogrodu zachwyca atrakcyjna przestrzeń rekreacyjna, nad którą dodatkowy trakt dachu tworzy praktyczne zadaszenie, dzięki czemu można tutaj zaaranżować wygodną letnią jadalnię i korzystać z relaksu na świeżym powietrzu w każdą pogodę. Taras płynnie łączy się ze strefą dzienną, stanowiącą otwartą, funkcjonalnie zaprojektowaną przestrzeń, w ramach której wizualnie wyodrębniono kuchnię, poprzez odpowiednią lokalizację barku śniadaniowego. Komfort pracy w kuchni zwiększa duża ilość naturalnego światła, a wymknięta przesuwnymi drzwiami spiżarnia pomieści większe zapasy spożywcze. Łazienka na parterze została zlokalizowana w pobliżu schodów, a przez wiatrołap można przejść z części mieszkalnej do garażu oraz kotłowni, która dysponuje niezależnym wyjściem do ogrodu. Strefa nocna na poddaszu została w optymalny sposób zagospodarowana i mieści cztery ustawne pokoje, dobrze doświetlone dzięki szerokim portfenetrom. W sypialni rodziców wydzielono garderobę, w pozostałych pokojach uwzględniono miejsce na praktyczne szafy do przechowywania. Pokój znajdujący się na osi schodów może pełnić funkcję gabinetu do pracy. W łazience na poddaszu można zastosować wyposażenie z wanną oraz dużym, nowoczesnym prysznicem. „Dom w jabłonkach 22” to projekt należący do kategorii: projekty domów z poddaszem użytkowym , projekty domów nowoczesnych , projekty domów z garażem jednostanowiskowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "127 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 114.0 m² + 17.54 m² + 4.4 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

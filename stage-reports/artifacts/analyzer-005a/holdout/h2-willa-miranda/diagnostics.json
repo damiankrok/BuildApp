@@ -1,0 +1,4629 @@
+{
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "diagnostics": {
+      "bestReading": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, sides as gridded",
+      "builtRegions": 1,
+      "cells": 52,
+      "dimensionChains": 72,
+      "dimensionChainsRead": 5,
+      "distinctOutlines": 7,
+      "enclosedCells": 2,
+      "gateBlocking": "FOOTPRINT_AREA_WRONG",
+      "gridLinesX": 14,
+      "gridLinesY": 5,
+      "masses": 1,
+      "planFrames": 8,
+      "planSizePx": "853x853",
+      "plansRead": 2,
+      "readingsWeighed": 11,
+      "recessRegions": 0,
+      "scaleCmPerPx": 2.6808,
+      "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "wallBands": 46,
+      "wallThicknessPx": 12,
+      "walledEnvelope": true,
+      "wideOpenings": 0,
+      "wideOpeningsClosed": 0
+    },
+    "message": "the lowest storey covers 0.55 m² against the 169.9 m² the publisher prints — 99.7% apart: the decomposition is not of this building; 11 other readings of the plan were weighed and none survived to a full composition",
+    "reasonCode": "PLAN_LAYOUT_REJECTED",
+    "stage": "REGISTERING_VIEWS",
+    "substage": "STRUCTURAL_LAYOUT",
+    "title": "The floor-plan reading contradicts the project data"
+  },
+  "outcome": "FAILED",
+  "plans": {
+    "planFrames": 8,
+    "plans": [
+      {
+        "annotation": "DIMENSIONED",
+        "assetId": "asset-rzut-73ee27c4b6",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 170,
+              "x1": 199,
+              "y0": 82,
+              "y1": 86
+            },
+            "thickness": 14.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 385,
+              "x1": 410,
+              "y0": 85,
+              "y1": 101
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 584,
+              "x1": 767,
+              "y0": 176,
+              "y1": 193
+            },
+            "thickness": 17.875
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 464,
+              "x1": 506,
+              "y0": 264,
+              "y1": 276
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 413,
+              "x1": 436,
+              "y0": 325,
+              "y1": 331
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 552,
+              "x1": 728,
+              "y0": 348,
+              "y1": 357
+            },
+            "thickness": 10.3125
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 375,
+              "x1": 420,
+              "y0": 348,
+              "y1": 357
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 348,
+              "x1": 366,
+              "y0": 389,
+              "y1": 393
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 473,
+              "x1": 539,
+              "y0": 426,
+              "y1": 432
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 331,
+              "x1": 532,
+              "y0": 502,
+              "y1": 519
+            },
+            "thickness": 17.875
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 289,
+              "x1": 307,
+              "y0": 540,
+              "y1": 542
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 550,
+              "x1": 570,
+              "y0": 594,
+              "y1": 610
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 702,
+              "x1": 810,
+              "y0": 785,
+              "y1": 794
+            },
+            "thickness": 9.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 586,
+              "x1": 686,
+              "y0": 785,
+              "y1": 798
+            },
+            "thickness": 9.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 592,
+              "x1": 611,
+              "y0": 796,
+              "y1": 805
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 654,
+              "x1": 686,
+              "y0": 816,
+              "y1": 829
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 592,
+              "x1": 611,
+              "y0": 820,
+              "y1": 828
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 743,
+              "x1": 767,
+              "y0": 821,
+              "y1": 829
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 151,
+              "x1": 154,
+              "y0": 581,
+              "y1": 599
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 235,
+              "x1": 251,
+              "y0": 193,
+              "y1": 269
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 235,
+              "x1": 251,
+              "y0": 369,
+              "y1": 459
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 261,
+              "x1": 266,
+              "y0": 523,
+              "y1": 546
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 332,
+              "x1": 345,
+              "y0": 395,
+              "y1": 452
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 338,
+              "x1": 340,
+              "y0": 436,
+              "y1": 456
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 368,
+              "x1": 384,
+              "y0": 102,
+              "y1": 175
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 398,
+              "x1": 402,
+              "y0": 358,
+              "y1": 378
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 398,
+              "x1": 402,
+              "y0": 380,
+              "y1": 424
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 424,
+              "x1": 429,
+              "y0": 432,
+              "y1": 501
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 451,
+              "x1": 467,
+              "y0": 272,
+              "y1": 335
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 458,
+              "x1": 460,
+              "y0": 321,
+              "y1": 341
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 467,
+              "x1": 472,
+              "y0": 401,
+              "y1": 425
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 533,
+              "x1": 550,
+              "y0": 520,
+              "y1": 593
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 540,
+              "x1": 551,
+              "y0": 357,
+              "y1": 454
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 567,
+              "x1": 576,
+              "y0": 193,
+              "y1": 213
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 567,
+              "x1": 576,
+              "y0": 301,
+              "y1": 347
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 567,
+              "x1": 583,
+              "y0": 102,
+              "y1": 175
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 625,
+              "x1": 636,
+              "y0": 786,
+              "y1": 829
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 645,
+              "x1": 653,
+              "y0": 795,
+              "y1": 820
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 686,
+              "x1": 695,
+              "y0": 193,
+              "y1": 324
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 691,
+              "x1": 701,
+              "y0": 772,
+              "y1": 829
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 719,
+              "x1": 728,
+              "y0": 794,
+              "y1": 829
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 734,
+              "x1": 743,
+              "y0": 795,
+              "y1": 820
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 768,
+              "x1": 777,
+              "y0": 795,
+              "y1": 820
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 777,
+              "x1": 794,
+              "y0": 193,
+              "y1": 593
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 783,
+              "x1": 792,
+              "y0": 794,
+              "y1": 829
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 810,
+              "x1": 821,
+              "y0": 794,
+              "y1": 829
+            },
+            "thickness": 12
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 252,
+              "x1": 273.5,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 273.5,
+              "x1": 301,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 301,
+              "x1": 336.5,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 336.5,
+              "x1": 357,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 357,
+              "x1": 400.5,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 400.5,
+              "x1": 428,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 0,
+            "rect": {
+              "x0": 428,
+              "x1": 483,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 0,
+            "rect": {
+              "x0": 483,
+              "x1": 508,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 0,
+            "rect": {
+              "x0": 508,
+              "x1": 533,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 0,
+            "rect": {
+              "x0": 533,
+              "x1": 749,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 0,
+            "rect": {
+              "x0": 749,
+              "x1": 768,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 12,
+            "iy": 0,
+            "rect": {
+              "x0": 768,
+              "x1": 794,
+              "y0": 355,
+              "y1": 385
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 1,
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 1,
+            "rect": {
+              "x0": 252,
+              "x1": 273.5,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 1,
+            "rect": {
+              "x0": 273.5,
+              "x1": 301,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 1,
+            "rect": {
+              "x0": 301,
+              "x1": 336.5,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 1,
+            "rect": {
+              "x0": 336.5,
+              "x1": 357,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 1,
+            "rect": {
+              "x0": 357,
+              "x1": 400.5,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 1,
+            "rect": {
+              "x0": 400.5,
+              "x1": 428,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 1,
+            "rect": {
+              "x0": 428,
+              "x1": 483,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 1,
+            "rect": {
+              "x0": 483,
+              "x1": 508,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 1,
+            "rect": {
+              "x0": 508,
+              "x1": 533,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 1,
+            "rect": {
+              "x0": 533,
+              "x1": 749,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 1,
+            "rect": {
+              "x0": 749,
+              "x1": 768,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 12,
+            "iy": 1,
+            "rect": {
+              "x0": 768,
+              "x1": 794,
+              "y0": 385,
+              "y1": 407
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 2,
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 2,
+            "rect": {
+              "x0": 252,
+              "x1": 273.5,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 2,
+            "rect": {
+              "x0": 273.5,
+              "x1": 301,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 2,
+            "rect": {
+              "x0": 301,
+              "x1": 336.5,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 2,
+            "rect": {
+              "x0": 336.5,
+              "x1": 357,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 2,
+            "rect": {
+              "x0": 357,
+              "x1": 400.5,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 2,
+            "rect": {
+              "x0": 400.5,
+              "x1": 428,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 2,
+            "rect": {
+              "x0": 428,
+              "x1": 483,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 2,
+            "rect": {
+              "x0": 483,
+              "x1": 508,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 2,
+            "rect": {
+              "x0": 508,
+              "x1": 533,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 2,
+            "rect": {
+              "x0": 533,
+              "x1": 749,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 2,
+            "rect": {
+              "x0": 749,
+              "x1": 768,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 12,
+            "iy": 2,
+            "rect": {
+              "x0": 768,
+              "x1": 794,
+              "y0": 407,
+              "y1": 429
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 3,
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 3,
+            "rect": {
+              "x0": 252,
+              "x1": 273.5,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 3,
+            "rect": {
+              "x0": 273.5,
+              "x1": 301,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 3,
+            "rect": {
+              "x0": 301,
+              "x1": 336.5,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 3,
+            "rect": {
+              "x0": 336.5,
+              "x1": 357,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 3,
+            "rect": {
+              "x0": 357,
+              "x1": 400.5,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 3,
+            "rect": {
+              "x0": 400.5,
+              "x1": 428,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 3,
+            "rect": {
+              "x0": 428,
+              "x1": 483,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 3,
+            "rect": {
+              "x0": 483,
+              "x1": 508,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 3,
+            "rect": {
+              "x0": 508,
+              "x1": 533,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 3,
+            "rect": {
+              "x0": 533,
+              "x1": 749,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 3,
+            "rect": {
+              "x0": 749,
+              "x1": 768,
+              "y0": 429,
+              "y1": 449.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 12,
+            "iy": 3,
+            "rect": {
+              "x0": 768,
+              "x1": 794,
+              "y0": 429,
+              "y1": 449.5
+            }
+          }
+        ],
+        "chains": [
+          {
+            "axis": "H",
+            "baselinePx": 109,
+            "read": 0,
+            "ticksPx": [
+              130,
+              375
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 133,
+            "read": 0,
+            "ticksPx": [
+              576,
+              699
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 145,
+            "read": 0,
+            "ticksPx": [
+              378.5,
+              395.5,
+              423.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 183,
+            "read": 0,
+            "ticksPx": [
+              249.5,
+              307,
+              368.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 189,
+            "read": 0,
+            "ticksPx": [
+              249.5,
+              307,
+              368.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 232.5,
+            "read": 0,
+            "ticksPx": [
+              604,
+              655
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 233,
+            "read": 0,
+            "ticksPx": [
+              717.5,
+              755
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 232.5,
+            "read": 0,
+            "ticksPx": [
+              269.5,
+              279,
+              320,
+              331,
+              367,
+              387,
+              409.5,
+              447.5,
+              473,
+              498.5,
+              520.538462
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 243,
+            "read": 0,
+            "ticksPx": [
+              120.5,
+              242
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 264,
+            "read": 0,
+            "ticksPx": [
+              768,
+              784.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 273,
+            "read": 0,
+            "ticksPx": [
+              673,
+              689.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 286,
+            "read": 0,
+            "ticksPx": [
+              107.5,
+              120.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 293,
+            "read": 0,
+            "ticksPx": [
+              777,
+              785,
+              809
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 325,
+            "read": 0,
+            "ticksPx": [
+              572.5,
+              584,
+              594,
+              603,
+              613,
+              623,
+              673,
+              689.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 357,
+            "read": 0,
+            "ticksPx": [
+              244,
+              332
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 368,
+            "read": 0,
+            "ticksPx": [
+              244,
+              333
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 372,
+            "read": 0,
+            "ticksPx": [
+              545.5,
+              605.5,
+              644
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 387,
+            "read": 0,
+            "ticksPx": [
+              108.5,
+              120.5,
+              216
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 391,
+            "read": 0,
+            "ticksPx": [
+              509,
+              516,
+              544.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 425,
+            "read": 0,
+            "ticksPx": [
+              244,
+              272.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 427,
+            "read": 0,
+            "ticksPx": [
+              604,
+              638
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 455,
+            "read": 0,
+            "ticksPx": [
+              482,
+              532.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 455,
+            "read": 0,
+            "ticksPx": [
+              777,
+              785,
+              796.5,
+              815.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 460,
+            "read": 1,
+            "ticksPx": [
+              252,
+              273.5,
+              301,
+              336.5,
+              346,
+              357,
+              367,
+              391,
+              400.5,
+              428,
+              483,
+              508,
+              546,
+              621,
+              691,
+              749,
+              768,
+              776
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 480,
+            "read": 0,
+            "ticksPx": [
+              292.5,
+              367,
+              376.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 485.5,
+            "read": 0,
+            "ticksPx": [
+              218.16129,
+              243,
+              251
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 502,
+            "read": 0,
+            "ticksPx": [
+              250.5,
+              295.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 522,
+            "read": 0,
+            "ticksPx": [
+              263.5,
+              287,
+              313.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 629,
+            "read": 0,
+            "ticksPx": [
+              378,
+              782.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 711,
+            "read": 2,
+            "ticksPx": [
+              234.5,
+              533,
+              794
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 745,
+            "read": 1,
+            "ticksPx": [
+              89,
+              234.5,
+              794
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 95,
+            "read": 0,
+            "ticksPx": [
+              390,
+              475.5,
+              505
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 107.5,
+            "read": 0,
+            "ticksPx": [
+              286,
+              395.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 113,
+            "read": 0,
+            "ticksPx": [
+              198,
+              217,
+              236
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 120.5,
+            "read": 0,
+            "ticksPx": [
+              258,
+              286,
+              387
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 127.5,
+            "read": 0,
+            "ticksPx": [
+              198,
+              217.5,
+              231.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 148.5,
+            "read": 0,
+            "ticksPx": [
+              144,
+              167.5,
+              191
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 203.5,
+            "read": 0,
+            "ticksPx": [
+              144,
+              167.5,
+              191
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 242,
+            "read": 0,
+            "ticksPx": [
+              66,
+              84.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 245,
+            "read": 0,
+            "ticksPx": [
+              226,
+              308,
+              401.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 261,
+            "read": 0,
+            "ticksPx": [
+              50,
+              66,
+              74,
+              84.5,
+              98
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 273.5,
+            "read": 1,
+            "ticksPx": [
+              460,
+              480.5,
+              501
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 277,
+            "read": 0,
+            "ticksPx": [
+              49,
+              66,
+              84.5,
+              99
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 279,
+            "read": 0,
+            "ticksPx": [
+              217.5,
+              232.5,
+              307
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 286,
+            "read": 0,
+            "ticksPx": [
+              52,
+              66,
+              84.5,
+              96
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 290.5,
+            "read": 0,
+            "ticksPx": [
+              53,
+              66,
+              84.5,
+              95
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 305.5,
+            "read": 0,
+            "ticksPx": [
+              53,
+              66,
+              84.5,
+              95
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 316,
+            "read": 0,
+            "ticksPx": [
+              50,
+              66,
+              74,
+              84.5,
+              98
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 320,
+            "read": 0,
+            "ticksPx": [
+              217.5,
+              232.5,
+              307
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 35,
+            "read": 0,
+            "ticksPx": [
+              84.5,
+              610.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 375,
+            "read": 1,
+            "ticksPx": [
+              355,
+              385,
+              407,
+              449.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 387,
+            "read": 0,
+            "ticksPx": [
+              145,
+              174,
+              232.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 421,
+            "read": 0,
+            "ticksPx": [
+              368,
+              381,
+              412.5,
+              427.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 477,
+            "read": 0,
+            "ticksPx": [
+              313,
+              330,
+              349
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 487,
+            "read": 0,
+            "ticksPx": [
+              313,
+              330,
+              350
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 497,
+            "read": 0,
+            "ticksPx": [
+              313,
+              330,
+              355
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 506,
+            "read": 0,
+            "ticksPx": [
+              313,
+              330,
+              349
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 507,
+            "read": 0,
+            "ticksPx": [
+              389,
+              425
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 588,
+            "read": 0,
+            "ticksPx": [
+              483.5,
+              491,
+              544
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 598,
+            "read": 0,
+            "ticksPx": [
+              185.5,
+              232.5,
+              265.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 633,
+            "read": 0,
+            "ticksPx": [
+              535,
+              562.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 655,
+            "read": 0,
+            "ticksPx": [
+              483.5,
+              491
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 673,
+            "read": 0,
+            "ticksPx": [
+              274,
+              326.5,
+              350
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 690,
+            "read": 0,
+            "ticksPx": [
+              454.5,
+              460,
+              474,
+              491
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 699,
+            "read": 0,
+            "ticksPx": [
+              492,
+              559
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 699,
+            "read": 0,
+            "ticksPx": [
+              121,
+              133,
+              150
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 69.5,
+            "read": 0,
+            "ticksPx": [
+              84.5,
+              176,
+              519,
+              610.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 742,
+            "read": 0,
+            "ticksPx": [
+              487.5,
+              560
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 751,
+            "read": 0,
+            "ticksPx": [
+              432,
+              460,
+              474,
+              491
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 768,
+            "read": 0,
+            "ticksPx": [
+              264,
+              293,
+              352.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 777,
+            "read": 0,
+            "ticksPx": [
+              232.5,
+              264,
+              293
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 813,
+            "read": 0,
+            "ticksPx": [
+              305.5,
+              444.5
+            ]
+          }
+        ],
+        "envelope": {
+          "x0": 234.5,
+          "x1": 549,
+          "y0": 385,
+          "y1": 429
+        },
+        "extent": {
+          "x0": 234.5,
+          "x1": 794,
+          "y0": 355,
+          "y1": 449.5
+        },
+        "extentWeak": false,
+        "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+        "hypotheses": [
+          {
+            "builtCells": 2,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 2,
+            "chosen": false,
+            "closedOpenings": 0,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          234.5,
+          252,
+          273.5,
+          301,
+          336.5,
+          357,
+          400.5,
+          428,
+          483,
+          508,
+          533,
+          749,
+          768,
+          794
+        ],
+        "linesY": [
+          355,
+          385,
+          407,
+          429,
+          449.5
+        ],
+        "masses": [
+          {
+            "id": "mass-0",
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 385,
+              "y1": 429
+            }
+          }
+        ],
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-1",
+            "rect": {
+              "x0": 234.5,
+              "x1": 252,
+              "y0": 385,
+              "y1": 429
+            }
+          }
+        ],
+        "scale": {
+          "anchors": 6,
+          "mppX": 0.026808,
+          "mppY": 0.02659,
+          "rmsM": 0.019429
+        },
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "storey": "GROUND",
+        "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+        "wallPx": 12,
+        "wideOpenings": []
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "assetId": "asset-rzut-07b69dcbb8",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 565,
+              "x1": 587,
+              "y0": 167,
+              "y1": 184
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 637,
+              "x1": 666,
+              "y0": 167,
+              "y1": 184
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 393,
+              "x1": 476,
+              "y0": 185,
+              "y1": 191
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 366,
+              "x1": 390,
+              "y0": 187,
+              "y1": 191
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 624,
+              "x1": 665,
+              "y0": 253,
+              "y1": 260
+            },
+            "thickness": 6.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 387,
+              "x1": 622,
+              "y0": 254,
+              "y1": 259
+            },
+            "thickness": 5.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 366,
+              "x1": 384,
+              "y0": 255,
+              "y1": 259
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 405,
+              "x1": 428,
+              "y0": 327,
+              "y1": 335
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 233,
+              "x1": 354,
+              "y0": 339,
+              "y1": 343
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 543,
+              "x1": 583,
+              "y0": 339,
+              "y1": 348
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 440,
+              "x1": 525,
+              "y0": 339,
+              "y1": 349
+            },
+            "thickness": 10.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 266,
+              "x1": 290,
+              "y0": 470,
+              "y1": 476
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 317,
+              "x1": 340,
+              "y0": 494,
+              "y1": 510
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 638,
+              "x1": 659,
+              "y0": 513,
+              "y1": 519
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 482,
+              "x1": 503,
+              "y0": 513,
+              "y1": 522
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 294,
+              "x1": 310,
+              "y0": 537,
+              "y1": 542
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 529,
+              "x1": 546,
+              "y0": 774,
+              "y1": 779
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 506,
+              "x1": 522,
+              "y0": 774,
+              "y1": 781
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 682,
+              "x1": 790,
+              "y0": 777,
+              "y1": 785
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 566,
+              "x1": 666,
+              "y0": 776,
+              "y1": 789
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 572,
+              "x1": 590,
+              "y0": 788,
+              "y1": 796
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 635,
+              "x1": 666,
+              "y0": 808,
+              "y1": 821
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 572,
+              "x1": 591,
+              "y0": 811,
+              "y1": 819
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 724,
+              "x1": 748,
+              "y0": 812,
+              "y1": 820
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 151,
+              "x1": 156,
+              "y0": 578,
+              "y1": 599
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 215,
+              "x1": 232,
+              "y0": 344,
+              "y1": 443
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 333,
+              "x1": 339,
+              "y0": 428,
+              "y1": 453
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 337,
+              "x1": 342,
+              "y0": 400,
+              "y1": 418
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 361,
+              "x1": 365,
+              "y0": 201,
+              "y1": 493
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 399,
+              "x1": 408,
+              "y0": 332,
+              "y1": 355
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 440,
+              "x1": 445,
+              "y0": 427,
+              "y1": 493
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 440,
+              "x1": 445,
+              "y0": 384,
+              "y1": 402
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 457,
+              "x1": 462,
+              "y0": 280,
+              "y1": 298
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 535,
+              "x1": 542,
+              "y0": 383,
+              "y1": 474
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 537,
+              "x1": 542,
+              "y0": 349,
+              "y1": 369
+            },
+            "thickness": 6
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 547,
+              "x1": 564,
+              "y0": 93,
+              "y1": 166
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 606,
+              "x1": 615,
+              "y0": 781,
+              "y1": 820
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 615,
+              "x1": 615,
+              "y0": 798,
+              "y1": 820
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 625,
+              "x1": 634,
+              "y0": 786,
+              "y1": 811
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 671,
+              "x1": 681,
+              "y0": 763,
+              "y1": 820
+            },
+            "thickness": 10.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 699,
+              "x1": 709,
+              "y0": 786,
+              "y1": 820
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 714,
+              "x1": 723,
+              "y0": 786,
+              "y1": 811
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 749,
+              "x1": 758,
+              "y0": 786,
+              "y1": 811
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 763,
+              "x1": 773,
+              "y0": 786,
+              "y1": 820
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 791,
+              "x1": 801,
+              "y0": 786,
+              "y1": 820
+            },
+            "thickness": 11
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 0,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 0,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 0,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 0,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 0,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 188.5,
+              "y1": 236
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 1,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 1,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 1,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 1,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 1,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 1,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 1,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 1,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 1,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 1,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 1,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 1,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 236,
+              "y1": 256
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 2,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 2,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 2,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 2,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 2,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 2,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 2,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 2,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 2,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 2,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 2,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 2,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 256,
+              "y1": 325.052632
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 3,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 3,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 3,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 3,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 3,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 3,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 3,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 3,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 3,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 3,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 3,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 3,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 4,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 4,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 4,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 4,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 4,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 4,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 4,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 4,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 4,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 4,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 4,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 4,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 343.5,
+              "y1": 368.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 5,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 5,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 5,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 5,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 5,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 5,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 5,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 5,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 5,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 5,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 5,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 5,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 368.5,
+              "y1": 459
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 6,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 6,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 6,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 6,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 6,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 6,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 6,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 6,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 6,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 6,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 6,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 6,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 459,
+              "y1": 475
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 7,
+            "rect": {
+              "x0": 363,
+              "x1": 379,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 7,
+            "rect": {
+              "x0": 379,
+              "x1": 417.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 7,
+            "rect": {
+              "x0": 417.5,
+              "x1": 442.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 7,
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 7,
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 7,
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 7,
+            "rect": {
+              "x0": 539.5,
+              "x1": 561.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 7,
+            "rect": {
+              "x0": 561.5,
+              "x1": 576,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 7,
+            "rect": {
+              "x0": 576,
+              "x1": 597.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 9,
+            "iy": 7,
+            "rect": {
+              "x0": 597.5,
+              "x1": 624.5,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 10,
+            "iy": 7,
+            "rect": {
+              "x0": 624.5,
+              "x1": 644,
+              "y0": 475,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 11,
+            "iy": 7,
+            "rect": {
+              "x0": 644,
+              "x1": 666,
+              "y0": 475,
+              "y1": 556
+            }
+          }
+        ],
+        "chains": [
+          {
+            "axis": "H",
+            "baselinePx": 141,
+            "read": 0,
+            "ticksPx": [
+              527.5,
+              553
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 168,
+            "read": 0,
+            "ticksPx": [
+              393.5,
+              404.5,
+              450
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 170,
+            "read": 0,
+            "ticksPx": [
+              421.5,
+              449.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 185,
+            "read": 0,
+            "ticksPx": [
+              393.5,
+              421.5,
+              448.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 203,
+            "read": 0,
+            "ticksPx": [
+              386.5,
+              421
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 228,
+            "read": 1,
+            "ticksPx": [
+              254.5,
+              315.5,
+              323.5,
+              363,
+              379,
+              417.5,
+              454.5,
+              520.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 236,
+            "read": 2,
+            "ticksPx": [
+              541.5,
+              561.5,
+              576,
+              597.5,
+              624.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 320,
+            "read": 0,
+            "ticksPx": [
+              457,
+              468,
+              487,
+              497,
+              507,
+              521,
+              536,
+              545.5,
+              555,
+              565,
+              593.090909
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 365.5,
+            "read": 0,
+            "ticksPx": [
+              315.5,
+              349.133333
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 370.5,
+            "read": 0,
+            "ticksPx": [
+              540.5,
+              588
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 381,
+            "read": 0,
+            "ticksPx": [
+              518.5,
+              538.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 419,
+            "read": 0,
+            "ticksPx": [
+              336,
+              362
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 42,
+            "read": 0,
+            "ticksPx": [
+              376.5,
+              458,
+              536
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 444,
+            "read": 0,
+            "ticksPx": [
+              224.5,
+              253.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 458,
+            "read": 0,
+            "ticksPx": [
+              667,
+              674.5,
+              691
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 459,
+            "read": 2,
+            "ticksPx": [
+              364,
+              383,
+              417.5,
+              442.5,
+              452,
+              488.5,
+              518.5,
+              539.5,
+              579,
+              588,
+              628.5,
+              644,
+              666
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 477,
+            "read": 0,
+            "ticksPx": [
+              198.151515,
+              224,
+              232
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 493.5,
+            "read": 0,
+            "ticksPx": [
+              233,
+              261,
+              291,
+              304
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 500.5,
+            "read": 0,
+            "ticksPx": [
+              244.5,
+              272.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 513,
+            "read": 0,
+            "ticksPx": [
+              245.5,
+              270
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 544,
+            "read": 0,
+            "ticksPx": [
+              183.5,
+              196,
+              227,
+              271,
+              412.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 223,
+            "read": 0,
+            "ticksPx": [
+              159.5,
+              299.5,
+              394.5,
+              477
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 225,
+            "read": 0,
+            "ticksPx": [
+              276,
+              500.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 232,
+            "read": 0,
+            "ticksPx": [
+              131.713333,
+              241.5,
+              299.5,
+              316,
+              342.5,
+              364,
+              400,
+              444,
+              477,
+              492
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 315.5,
+            "read": 1,
+            "ticksPx": [
+              202.5,
+              228.5,
+              256,
+              316,
+              341,
+              351.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 375,
+            "read": 0,
+            "ticksPx": [
+              42,
+              83
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 377.5,
+            "read": 0,
+            "ticksPx": [
+              40,
+              83
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 380,
+            "read": 0,
+            "ticksPx": [
+              406,
+              436.5,
+              459
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 385.5,
+            "read": 0,
+            "ticksPx": [
+              246.5,
+              257,
+              342
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 385.5,
+            "read": 0,
+            "ticksPx": [
+              142.5,
+              169
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 391.5,
+            "read": 0,
+            "ticksPx": [
+              113,
+              163,
+              187
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 451,
+            "read": 0,
+            "ticksPx": [
+              170,
+              188
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 468,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 487,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 495.5,
+            "read": 0,
+            "ticksPx": [
+              345.5,
+              380
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 497,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              343
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 507,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              344
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 518,
+            "read": 0,
+            "ticksPx": [
+              380.5,
+              459,
+              493
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 526,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              343
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 534,
+            "read": 0,
+            "ticksPx": [
+              40.5,
+              83
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 536,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 538,
+            "read": 0,
+            "ticksPx": [
+              42,
+              83
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 555,
+            "read": 0,
+            "ticksPx": [
+              301,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 565,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 579,
+            "read": 0,
+            "ticksPx": [
+              459,
+              475
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 584,
+            "read": 0,
+            "ticksPx": [
+              303,
+              320,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 588,
+            "read": 2,
+            "ticksPx": [
+              176.5,
+              228.5,
+              236,
+              256.5,
+              325.052632,
+              368.5,
+              459,
+              475,
+              556
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 594,
+            "read": 0,
+            "ticksPx": [
+              303,
+              319.5,
+              344
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 653,
+            "read": 0,
+            "ticksPx": [
+              254.5,
+              342.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 666,
+            "read": 0,
+            "ticksPx": [
+              258,
+              284.5,
+              327.5
+            ]
+          }
+        ],
+        "envelope": {
+          "x0": 400.5,
+          "x1": 539.5,
+          "y0": 188.5,
+          "y1": 520.5
+        },
+        "extent": {
+          "x0": 364,
+          "x1": 666,
+          "y0": 176.5,
+          "y1": 556
+        },
+        "extentWeak": false,
+        "frameId": "frame-asset-rzut-07b69dcbb8-2088494fef",
+        "hypotheses": [
+          {
+            "builtCells": 13,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 13,
+            "chosen": false,
+            "closedOpenings": 0,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          363,
+          379,
+          417.5,
+          442.5,
+          488.5,
+          520.5,
+          539.5,
+          561.5,
+          576,
+          597.5,
+          624.5,
+          644,
+          666
+        ],
+        "linesY": [
+          188.5,
+          236,
+          256,
+          325.052632,
+          343.5,
+          368.5,
+          459,
+          475,
+          556
+        ],
+        "masses": [],
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-3-4",
+            "rect": {
+              "x0": 442.5,
+              "x1": 539.5,
+              "y0": 343.5,
+              "y1": 556
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-3-3",
+            "rect": {
+              "x0": 442.5,
+              "x1": 488.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-4-3",
+            "rect": {
+              "x0": 488.5,
+              "x1": 520.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-5-3",
+            "rect": {
+              "x0": 520.5,
+              "x1": 539.5,
+              "y0": 325.052632,
+              "y1": 343.5
+            }
+          }
+        ],
+        "scale": {
+          "anchors": 8,
+          "mppX": 0.034537,
+          "mppY": 0.034626,
+          "rmsM": 0.034855
+        },
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "storey": "UPPER",
+        "variantByteHash": "4e79060c0f7c697d84055b1dd5674d3d3910e1ab1a83f628d2d275136e6b6fcd",
+        "wallPx": 10,
+        "wideOpenings": []
+      }
+    ],
+    "resolution": {
+      "compositions": 0,
+      "copies": 4,
+      "decompositions": 3,
+      "distinctOutlines": 7,
+      "firstReading": "PLAN_LAYOUT_REJECTED",
+      "outcome": "INCONCLUSIVE",
+      "publishedFigure": "SPENT",
+      "reading1": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 101.3 m² (-40.4% of 169.9), WRONG",
+      "reading2": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 102.7 m² (-39.6% of 169.9), WRONG",
+      "reading3": "copy area_table c2d04897b9, chain extent, registered scale, walled-first tiling, outer faces: 2 bodies, 103.8 m² (-38.9% of 169.9), WRONG",
+      "reading4": "copy dimensioned 7102a805c6, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 4 bodies, 71.3 m² (-58.1% of 169.9), WRONG, DEGENERATE_GEOMETRY",
+      "readings": 11,
+      "resolverVersion": "1.2.0"
+    },
+    "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "skipped": []
+  },
+  "schema": "buildapp.analysis-diagnostics",
+  "schemaVersion": "1.0.0",
+  "source": {
+    "assets": [
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "97b73aeeb757086f030a7450c3b1f85259db81e06884f1da7f6244bd8331f7ed",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-bocz-74bb11f0e6",
+        "sizePx": "1280x581",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "829104617a35df496b9a7bc741e1be4953c6e09dc25d999b84bf3a65a3d29f6b",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-bocz-92b371c334",
+        "sizePx": "1280x581",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a11554d63ee58cf22f4b22ee738645bf72a168d22feb680c647d56f3eb1ed042",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-fron-297718fa21",
+        "sizePx": "1280x581",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a2582979534ec425c0d8151a7426395e3bd4fa7acf5f79362e37a1e5555067d5",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-elewacja-ogro-42b167d55e",
+        "sizePx": "1280x581",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "424cd26cca106913f308491523cfeb92051069be33951614ec8136b3bdb13d1b",
+        "document": "SECTION",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-przekroj-budy-c129148002",
+        "sizePx": "1138x854",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "24006e3dff5e05e952202049ca7310df63b08b1e711d76b02ca2ceccf3a4b6ff",
+        "document": "FLOOR_PLAN",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-rzut-parteru-3bce0e8763",
+        "sizePx": "550x550",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "897eeb092c7f31c383ddcda869ebd168c4afd89a280ba943f6fc8ef094d2111a",
+        "document": "FLOOR_PLAN",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-rzut-pietra-e753cc9a1f",
+        "sizePx": "550x550",
+        "storey": "UPPER"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0a35a89d1418585887b59c4557225f5b3f74f0fc3ad16009f550019159651cc4",
+        "document": "SITE_PLAN",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-sytuacja-c494deea9e",
+        "sizePx": "734x854",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "01736aa9ddf895a01732b04bded69e3442f8f4b0633482794023d07edf03bd99",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-willa-miranda-11-g2-widok-1-9ae8500a09",
+        "sizePx": "200x150",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "eeb08b05e1d37eed753d2dacdd0d6a33c5233e2c1a018cea0162b8b3abdb1abf",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-09a5fa3838",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "56de717965ea6d8d996cab11bdcb7708e26dc8cc15413d488bfc2f7eb8fef98e",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-4175eeb83e",
+        "sizePx": "400x300",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "be5f87580ec8b1b16069fdf864bb0b1f23158e2ce05d3200e06531afee35662f",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-4b631f0977",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "c9a0e676ff72cb7139410cb5925b973750d11b3ba3a768668f8a6808202c0cad",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-willa-miranda-11-g2-533474dc2fcc762dde0c-c1b3a659d3",
+        "sizePx": "1280x720",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "e2fd681255e538322245ae1be9e0b1d0c968087a5b756b5f72deda6a9a143cc9",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-7f56fe5978",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "66241433b02f74b121fb6ce34466d7aecdee896b27af089364ecaa729547b128",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-94bed1c846",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "415d11caa6e590984d2d6a0dec6278263fc25f38ee3cae33f008043423fc73cb",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-a83c6745ac",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "9b5a986e30bcb886f8242c7c2d9446c89c30f9b4e336c628d49a568a63760f4c",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-c1625d9017",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "2e6b93efe6b78d2c0e18785cd5ba23f7b292a058a1ce9be6321ebf9580ef9868",
+        "document": "FLOOR_PLAN",
+        "id": "asset-projekt-willa-miranda-11-g2-c5d1ceb07a",
+        "sizePx": "400x400",
+        "storey": "UPPER"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "e91b17b43dbd68a5dfb35f3eb8dcb9cd4a9dea9bad36b112addacef969e2ab81",
+        "document": "FLOOR_PLAN",
+        "id": "asset-projekt-willa-miranda-11-g2-c8409d3300",
+        "sizePx": "400x400",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "b2a020495427c90a1c362bc4a0046f5f91b0aa1588b9cda66d7e54f1591e2a39",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-willa-miranda-11-g2-cf488a2d79",
+        "sizePx": "400x300",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "e2ba29b3ea6c0d23f50712d493ab5eda097ad0e9d7c3d3d088f0c53f71908491",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-d584486668",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "ca828589e59a34b523ca7634c664e7143b06cf341506e8ded4965867a5dcc758",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-deeaa8d9b8",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0b92eba5f796d34fa1cd1a3d3f469c08f4a6ac21ec1227d6bdcb7e5f94234c2e",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-e0596eb1a4",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "cb34193d976ecd72362e741d9c4e9d8e4e7e23a2ef3cc2cdd50e8aa0ff071a66",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-e6ec3d8ad5",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "87160d4fe56be21bba184c7b48e501cf1deb0dbf4cdd6d47a06341f70b6d66a7",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-ea38d20af2",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "6fc3da8d0dbc177d988ab74f3bb4572cf600e8552af8af393f7ff73507cbcf51",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-ea3cc0f19e",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "e081b22ade7dffac20a6b6fdc19a3f50171e1aadc8e232eb962de1150ece5a95",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-ed6c19e100",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "4068ae1807881a1cc782bddf1889a6cbfbc9c988f25ee61a1b6e3b7ef904050e",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-willa-miranda-11-g2-eecf4d7f40",
+        "sizePx": "1280x853",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "4e79060c0f7c697d84055b1dd5674d3d3910e1ab1a83f628d2d275136e6b6fcd",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-07b69dcbb8",
+        "sizePx": "853x853",
+        "storey": "UPPER"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-73ee27c4b6",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "AREA_TABLE",
+        "byteHash": "7d9686078d1287e5dd74a793aa6f68531d1a51e508afa361d33a94dae128f7a5",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-891a78d924",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "AREA_TABLE",
+        "byteHash": "a364cc8854b98af0896c48cc2b544d53e1c30c9381fea065ab1cf0dd0ae32f71",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-dac34cc718",
+        "sizePx": "853x853",
+        "storey": "UPPER"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "1776b9f61378cf5fa25d91262e7c995da6b6d8cc442be4e2a9a69be1040bd361",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-1-projekt-willa-miranda-11-g2-2339f77315",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a1b1e20442492c0214157baa7870a0f631f4710d96076b7fe18046601d24769d",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-2-projekt-willa-miranda-11-g2-7fe78523da",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      }
+    ],
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+    "failures": {
+      "BYTE_IDENTICAL": 5,
+      "HTTP_STATUS": 9
+    },
+    "packageHash": "787dca045663163e4bbfc519320f51068c48111a8ed59c16db197a257738cf01",
+    "pageHash": "d861a00b502eafb647f49afc97a178ccd50eae8e9ecf53830ed6bfd75340b2af",
+    "planAddressesLost": []
+  },
+  "trace": {
+    "entries": [
+      {
+        "counts": {
+          "adapter": "archon.pl",
+          "addressesNotUsed": 14,
+          "assets": 34,
+          "failed_BYTE_IDENTICAL": 5,
+          "failed_HTTP_STATUS": 9,
+          "planAddressesLost": 0,
+          "route": "SPECIALIST",
+          "variants": 40
+        },
+        "durationMs": 15841,
+        "stage": "ACQUIRING_SOURCE",
+        "startedAtMs": 0,
+        "status": "PASSED",
+        "substage": "FETCH"
+      },
+      {
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 8,
+          "PERSPECTIVE_RENDER": 18,
+          "SECTION": 1,
+          "SITE_PLAN": 1,
+          "UNKNOWN": 2,
+          "drawings": 32
+        },
+        "durationMs": 0,
+        "stage": "CLASSIFYING_SOURCES",
+        "startedAtMs": 15841,
+        "status": "PASSED",
+        "substage": "ROLES"
+      },
+      {
+        "counts": {
+          "frames": 32,
+          "observations": 1456,
+          "relations": 573,
+          "vision": "DETERMINISTIC_ONLY"
+        },
+        "durationMs": 25137,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 15841,
+        "status": "PASSED",
+        "substage": "OBSERVATIONS"
+      },
+      {
+        "counts": {
+          "callouts": 72,
+          "chains": 258,
+          "evidence": 158,
+          "levelDatums": 2,
+          "registrations": 7,
+          "scalesRefused": 3,
+          "undecodable": 0
+        },
+        "durationMs": 145926,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 40978,
+        "status": "PASSED",
+        "substage": "METRIC_EVIDENCE"
+      },
+      {
+        "counts": {
+          "planFrames": 8,
+          "plansRead": 2,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6"
+        },
+        "durationMs": 273,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 186904,
+        "status": "PASSED",
+        "substage": "PLAN_READ"
+      },
+      {
+        "counts": {
+          "compositions": 0,
+          "copies": 4,
+          "decompositions": 3,
+          "distinctOutlines": 7,
+          "firstReading": "PLAN_LAYOUT_REJECTED",
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT",
+          "reading1": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 101.3 m² (-40.4% of 169.9), WRONG",
+          "reading2": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 102.7 m² (-39.6% of 169.9), WRONG",
+          "reading3": "copy area_table c2d04897b9, chain extent, registered scale, walled-first tiling, outer faces: 2 bodies, 103.8 m² (-38.9% of 169.9), WRONG",
+          "reading4": "copy dimensioned 7102a805c6, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 4 bodies, 71.3 m² (-58.1% of 169.9), WRONG, DEGENERATE_GEOMETRY",
+          "readings": 11,
+          "resolverVersion": "1.2.0"
+        },
+        "detail": "11 other readings of the plan were weighed and none survived to a full composition",
+        "durationMs": 531,
+        "reasonCode": "PLAN_LAYOUT_REJECTED",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 187177,
+        "status": "FAILED",
+        "substage": "PLAN_RESOLUTION"
+      }
+    ],
+    "outcome": "FAILED",
+    "schema": "buildapp.analysis-trace",
+    "schemaVersion": "1.0.0"
+  }
+}
+

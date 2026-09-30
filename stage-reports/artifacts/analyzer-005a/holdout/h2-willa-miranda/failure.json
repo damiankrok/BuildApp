@@ -1,0 +1,34 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "bestReading": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, sides as gridded",
+    "builtRegions": 1,
+    "cells": 52,
+    "dimensionChains": 72,
+    "dimensionChainsRead": 5,
+    "distinctOutlines": 7,
+    "enclosedCells": 2,
+    "gateBlocking": "FOOTPRINT_AREA_WRONG",
+    "gridLinesX": 14,
+    "gridLinesY": 5,
+    "masses": 1,
+    "planFrames": 8,
+    "planSizePx": "853x853",
+    "plansRead": 2,
+    "readingsWeighed": 11,
+    "recessRegions": 0,
+    "scaleCmPerPx": 2.6808,
+    "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+    "wallBands": 46,
+    "wallThicknessPx": 12,
+    "walledEnvelope": true,
+    "wideOpenings": 0,
+    "wideOpeningsClosed": 0
+  },
+  "message": "the lowest storey covers 0.55 m² against the 169.9 m² the publisher prints — 99.7% apart: the decomposition is not of this building; 11 other readings of the plan were weighed and none survived to a full composition",
+  "reasonCode": "PLAN_LAYOUT_REJECTED",
+  "stage": "REGISTERING_VIEWS",
+  "substage": "STRUCTURAL_LAYOUT",
+  "title": "The floor-plan reading contradicts the project data"
+}
+

@@ -1,0 +1,50 @@
+{
+  "run": "stage-reports/artifacts/analyzer-005a/holdout/h2-willa-miranda",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "GROUND",
+    "UPPER"
+  ],
+  "publishedFootprintM2": 169.9,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 69,
+      "tallestPx": 48,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 12
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_LAYOUT_REJECTED",
+    "message": "the lowest storey covers 0.55 m² against the 169.9 m² the publisher prints — 99.7% apart: the decomposition is not of this building; 11 other readings of the plan were weighed and none survived to a full composition"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 3,
+    "distinctOutlines": 7,
+    "firstReading": "PLAN_LAYOUT_REJECTED",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 101.3 m² (-40.4% of 169.9), WRONG",
+    "reading2": "copy area_table c2d04897b9, chain extent, registered scale, largest-first tiling, outer faces: 2 bodies, 102.7 m² (-39.6% of 169.9), WRONG",
+    "reading3": "copy area_table c2d04897b9, chain extent, registered scale, walled-first tiling, outer faces: 2 bodies, 103.8 m² (-38.9% of 169.9), WRONG",
+    "reading4": "copy dimensioned 7102a805c6, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 4 bodies, 71.3 m² (-58.1% of 169.9), WRONG, DEGENERATE_GEOMETRY",
+    "readings": 11,
+    "resolverVersion": "1.2.0"
+  },
+  "verdict": "ALGORITHMIC_FAIL"
+}
