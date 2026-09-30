@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 // BUILDPLAN-005A blind holdout: enumerate + select. Deterministic, network only for robots.txt + sitemap.xml.
 // It NEVER fetches a project page. usage:
-//   node holdout-select.mjs enumerate --out holdout/           (needs network; run BEFORE the freeze commit)
-//   node holdout-select.mjs select --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex> [--no-git-check]
+//   node holdout/select.mjs enumerate --out holdout/           (needs network; run BEFORE the freeze commit)
+//   node holdout/select.mjs select --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
+// families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
+// the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync, appendFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 
 const LABEL = 'BUILDPLAN-005A-BLIND-HOLDOUT'
 const HOST = 'https://www.archon.pl'
@@ -44,19 +47,25 @@ async function enumerate(outDir, root) {
   console.log(`pool ${pool.length} urls, sha256 ${sha256(text)}`)
 }
 
-export function select(poolText, preHoldoutSha) {
+/**
+ * Two draws from the pool less the excluded families. The first is `seed mod n`; the second is uniform over
+ * every address of ANOTHER family (`SHA256(seed + ":second") mod m`) — not "the next index", which could only
+ * ever reach the first address of each family. Indices are into the drawable list, which is in pool order.
+ */
+export function select(poolText, preHoldoutSha, excludedFamilies = new Set()) {
   if (!/^[0-9a-f]{40}$/.test(preHoldoutSha)) throw new Error('PRE_HOLDOUT_SHA must be 40 lowercase hex')
   const pool = poolText.split('\n').filter(Boolean)
   const sorted = [...pool].sort()
   if (sorted.join('\n') !== pool.join('\n')) throw new Error('pool is not in canonical order')
+  const familyOf = (u) => family(URL_RE.exec(u)[1])
+  const drawable = pool.filter((u) => !excludedFamilies.has(familyOf(u)))
   const seed = sha256(preHoldoutSha + LABEL)
-  const n = BigInt(pool.length)
-  const i1 = Number(BigInt(`0x${seed}`) % n)
-  const f1 = family(URL_RE.exec(pool[i1])[1])
-  let i2 = -1
-  for (let k = 1; k < pool.length; k++) { const j = (i1 + k) % pool.length; if (family(URL_RE.exec(pool[j])[1]) !== f1) { i2 = j; break } }
-  if (i2 < 0) throw new Error('pool has a single family')
-  return { seed, n: pool.length, i1, i2, urls: [pool[i1], pool[i2]], families: [f1, family(URL_RE.exec(pool[i2])[1])] }
+  const i1 = Number(BigInt(`0x${seed}`) % BigInt(drawable.length))
+  const f1 = familyOf(drawable[i1])
+  const others = drawable.map((u, i) => i).filter((i) => familyOf(drawable[i]) !== f1)
+  if (others.length === 0) throw new Error('pool has a single family')
+  const i2 = others[Number(BigInt(`0x${sha256(`${seed}:second`)}`) % BigInt(others.length))]
+  return { seed, n: drawable.length, excluded: pool.length - drawable.length, i1, i2, urls: [drawable[i1], drawable[i2]], families: [f1, familyOf(drawable[i2])] }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -64,15 +73,19 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (mode === 'enumerate') await enumerate(arg('out') ?? 'holdout', process.cwd())
   else if (mode === 'select') {
     const sha = arg('pre-holdout-sha')
-    if (!process.argv.includes('--no-git-check')) {
-      const head = execFileSync('git', ['rev-parse', 'HEAD']).toString().trim()
-      if (head !== sha) throw new Error(`HEAD ${head} is not the declared PRE_HOLDOUT_SHA`)
-      if (execFileSync('git', ['status', '--porcelain']).toString().trim()) throw new Error('working tree is not clean')
-    }
-    const text = readFileSync(arg('pool'), 'utf8')
-    if (sha256(text) !== arg('pool-sha256')) throw new Error('pool hash does not match the committed POOL_SHA256')
-    const r = select(text, sha)
-    appendFileSync(join(process.cwd(), 'holdout', 'LEDGER.ndjson'), JSON.stringify({ at: new Date().toISOString(), preHoldoutSha: sha, poolSha256: arg('pool-sha256'), ...r }) + '\n')   // append-only: a draw is burned once written
+    const git = (...a) => execFileSync('git', a).toString().trim()
+    const root = git('rev-parse', '--show-toplevel')
+    const head = git('rev-parse', 'HEAD')
+    if (head !== sha) throw new Error(`HEAD ${head} is not the declared PRE_HOLDOUT_SHA`)
+    if (git('status', '--porcelain')) throw new Error('working tree is not clean')
+    if (resolve(arg('pool') ?? '') !== join(root, 'holdout', 'pool.txt')) throw new Error('the pool is the tracked holdout/pool.txt, nothing else')
+    git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', 'holdout/excluded-families.txt')
+    const text = readFileSync(join(root, 'holdout', 'pool.txt'), 'utf8')
+    const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256
+    if (sha256(text) !== arg('pool-sha256') || sha256(text) !== declared) throw new Error('pool hash does not match the declared and committed POOL_SHA256')
+    const exclusions = readFileSync(join(root, 'holdout', 'excluded-families.txt'), 'utf8')
+    const r = select(text, sha, new Set(exclusions.split('\n').filter(Boolean)))
+    appendFileSync(join(root, 'holdout', 'LEDGER.ndjson'), JSON.stringify({ at: new Date().toISOString(), preHoldoutSha: sha, poolSha256: declared, excludedFamiliesSha256: sha256(exclusions), ...r }) + '\n')   // append-only: a draw is burned once written, and committed after the runs
     console.log(JSON.stringify(r, null, 2))
   }
 }
