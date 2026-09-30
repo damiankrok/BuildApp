@@ -12,7 +12,7 @@
  * Any two of those give the third. That redundancy is worth more than a better
  * classifier: a thirteen-pixel `7` and a thirteen-pixel `1` are genuinely hard
  * to tell apart, but `790` and `140` on a segment 79 px long, next to a segment
- * of 120 px printed `1205`, are not hard to tell apart at all — one of them
+ * of 118 px printed `1185`, are not hard to tell apart at all — one of them
  * implies a scale ten times the other's. So the reader hands this layer its
  * runners-up, and this layer chooses among them by asking which combination
  * makes the chain a chain.
@@ -26,6 +26,7 @@ import { round6, stableId } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
 import type { SourceObservation } from '@buildapp/source-observations'
 import type { DimensionLine } from './dimension-lines.js'
+import { textAxisOf } from './ocr.js'
 import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import type { ParsedNumber } from './parse.js'
@@ -192,9 +193,24 @@ export function chainTokens(chain: RawChain, tokens: readonly TextToken[], optio
  * whose line it sits closest to, measured in its own text heights because that
  * is the unit a draughtsman spaces by.
  */
-export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number } = {}): ChainToken[][] {
+export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean } = {}): ChainToken[][] {
   const maxOffset = options.maxOffsetHeights ?? 2.2
-  type Fit = { chain: number; along: number; offset: number; interval: number }
+  // 005B: a number no span of the chain is centred on (within two skipped ticks) claims an interval
+  // only after every number that is centred on one has claimed its own. A logo glyph near the only
+  // interval of an overall chain was nearer the line, in its own (large) heights, and pushed an
+  // `1100` off it. The legacy assignment never asks this.
+  const centredOn = (chain: RawChain, along: number): boolean => {
+    const t = chain.ticks
+    for (let from = 0; from < t.length; from += 1) {
+      for (let to = from + 1; to < t.length && to - from - 1 <= 2; to += 1) {
+        if (t[from].atPx > along || t[to].atPx < along) continue
+        const length = t[to].atPx - t[from].atPx
+        if (Math.abs(along - (t[from].atPx + t[to].atPx) / 2) <= length * 0.3) return true
+      }
+    }
+    return false
+  }
+  type Fit = { chain: number; along: number; offset: number; interval: number; centred: boolean }
   type Entry = { token: TextToken; readings: ChainToken['readings']; fits: Fit[] }
 
   const entries: Entry[] = []
@@ -203,7 +219,7 @@ export function assignTokens(chains: readonly RawChain[], tokens: readonly TextT
     const height = Math.max(1, token.height)
     const fits: Fit[] = []
     chains.forEach((chain, index) => {
-      if (chain.axis === 'HORIZONTAL' ? token.orientation !== 'HORIZONTAL' : token.orientation === 'HORIZONTAL') return
+      if (textAxisOf(token.orientation) !== chain.axis) return
       const along = chain.axis === 'HORIZONTAL' ? centre.x : centre.y
       const across = chain.axis === 'HORIZONTAL' ? centre.y : centre.x
       const offset = Math.abs(across - chain.baselinePx) / height
@@ -211,7 +227,7 @@ export function assignTokens(chains: readonly RawChain[], tokens: readonly TextT
       if (along < chain.ticks[0].atPx || along > chain.ticks[chain.ticks.length - 1].atPx) return
       let interval = 0
       while (interval + 2 < chain.ticks.length && chain.ticks[interval + 1].atPx < along) interval += 1
-      fits.push({ chain: index, along: round6(along), offset: round6(offset), interval })
+      fits.push({ chain: index, along: round6(along), offset: round6(offset), interval, centred: options.preferCentred ? centredOn(chain, along) : true })
     })
     if (fits.length === 0) continue
     const readings: ChainToken['readings'] = []
@@ -222,7 +238,7 @@ export function assignTokens(chains: readonly RawChain[], tokens: readonly TextT
       }
     }
     if (readings.length === 0) continue
-    fits.sort((a, b) => a.offset - b.offset || a.chain - b.chain)
+    fits.sort((a, b) => Number(b.centred) - Number(a.centred) || a.offset - b.offset || a.chain - b.chain)
     entries.push({ token, readings, fits })
   }
 
@@ -234,7 +250,7 @@ export function assignTokens(chains: readonly RawChain[], tokens: readonly TextT
   // discards the two best-measured dimensions on the sheet. Claiming the
   // interval as well as the chain lets the nearest number take the span it
   // clearly owns and pushes its neighbours down to the chain that has room.
-  entries.sort((a, b) => a.fits[0].offset - b.fits[0].offset || a.token.box.x0 - b.token.box.x0 || a.token.box.y0 - b.token.box.y0)
+  entries.sort((a, b) => Number(b.fits[0].centred) - Number(a.fits[0].centred) || a.fits[0].offset - b.fits[0].offset || a.token.box.x0 - b.token.box.x0 || a.token.box.y0 - b.token.box.y0)
   const out: ChainToken[][] = chains.map(() => [])
   const claimed = new Set<string>()
   for (const entry of entries) {
@@ -350,7 +366,7 @@ function proposalsOf(chainIndex: number, chain: RawChain, tokens: readonly Chain
  * dimension in the middle of what it measures, so a number sitting against one
  * end of a span is not measuring that span, whatever the arithmetic says.
  */
-function spansFor(chain: RawChain, tokens: readonly ChainToken[], tokenIndex: number, minLength: number, maxSkip: number): Array<[number, number]> {
+export function spansFor(chain: RawChain, tokens: readonly ChainToken[], tokenIndex: number, minLength: number, maxSkip: number): Array<[number, number]> {
   const at = tokens[tokenIndex].atPx
   const before = tokens[tokenIndex - 1]?.atPx ?? -Infinity
   const after = tokens[tokenIndex + 1]?.atPx ?? Infinity
@@ -476,7 +492,7 @@ export type ScaleDecision = {
  * tick marks are, and that is about a pixel whether they are forty pixels apart
  * or five hundred — so a percentage tolerance is simultaneously far too tight
  * on a short span and far too loose on a long one, which is exactly how a
- * misread `1280` survives on a span the sheet labels 1260.
+ * misread `1250` survives on a span the sheet labels 1230.
  */
 export function voteScale(proposals: readonly ScaleProposal[], tolerancePx: number): { cmPerPixel: number; votes: ScaleVote[] } | undefined {
   if (proposals.length === 0) return undefined
@@ -603,10 +619,10 @@ export function decideScale(
  * beside a door from inventing a scale of 0.13 centimetres to the pixel and
  * then deriving a building from it.
  *
- * On this plan it is also what settles a question the vertical chains cannot
- * settle alone: `1260` and `1280` each explain their own 476-pixel span to
- * within a third of a pixel, and only the nine horizontal spans that agree on
- * 2.6424 say which of them the sheet actually prints.
+ * It is also what settles a question a plan's vertical chains can fail to
+ * settle alone: two readings such as `1230` and `1250` can each explain their
+ * own span to within a third of a pixel, and only the horizontal spans that
+ * agree on one scale say which of them the sheet actually prints.
  */
 export function solveFrameChains(
   chains: readonly RawChain[],

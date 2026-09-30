@@ -16,7 +16,7 @@
  *  2. **Glyph-sized components.** A digit is a small, dense, isolated blob.
  *     Anything too large, too thin or too sparse is drawing, not text.
  *  3. **Tokens.** Glyphs on a common baseline, within a gap of their own
- *     height, are one number. This is where `1205` becomes one thing.
+ *     height, are one number. This is where `1185` becomes one thing.
  *  4. **De-skew.** Drawing text is usually italic and italic glyphs TOUCH, so
  *     they arrive as one component. The shear that maximises the contrast of
  *     the column ink profile is the one that stands the token upright, and an
@@ -94,8 +94,32 @@ export type TextToken = {
  * depth is written. Reading a page therefore means reading it three times —
  * once as it lies and once each way on its side — and saying, for every token,
  * which pass found it.
+ *
+ * The pass names what was done to the PAGE, and so, read backwards, which way
+ * the text was set (BUILDPLAN-ANALYZER-005B):
+ *
+ *   HORIZONTAL   the page as it lies: text set at 0°
+ *   ROTATED_CW   the page turned clockwise: text set at 90°, reading bottom to top
+ *   INVERTED     the page turned half a turn: text set at 180°, upside down
+ *   ROTATED_CCW  the page turned anticlockwise: text set at 270°, reading top to bottom
+ *
+ * A 90° label read in the 270° pass comes back upside down — `900` as `006` —
+ * and the template scores of the two readings are often within a few per cent
+ * of each other. Which of them the drawing prints is therefore a HYPOTHESIS to
+ * be settled by evidence the glyph matcher does not have (a chain's own
+ * arithmetic, the other axis), never by the matcher's merit alone.
  */
-export type TextOrientation = 'HORIZONTAL' | 'ROTATED_CW' | 'ROTATED_CCW'
+export type TextOrientation = 'HORIZONTAL' | 'ROTATED_CW' | 'ROTATED_CCW' | 'INVERTED'
+
+/** The direction the text's baseline runs on the page: along a horizontal or a vertical chain. */
+export const textAxisOf = (orientation: TextOrientation): 'HORIZONTAL' | 'VERTICAL' => (orientation === 'HORIZONTAL' || orientation === 'INVERTED' ? 'HORIZONTAL' : 'VERTICAL')
+
+/** The angle the text is set at, counter-clockwise, in degrees: the pass that reads it upright undoes exactly this. */
+export const textAngleOf = (orientation: TextOrientation): 0 | 90 | 180 | 270 => (orientation === 'HORIZONTAL' ? 0 : orientation === 'ROTATED_CW' ? 90 : orientation === 'INVERTED' ? 180 : 270)
+
+/** The reading of the same ink set half a turn round: 0° against 180°, 90° against 270°. */
+export const oppositeOrientation = (orientation: TextOrientation): TextOrientation =>
+  orientation === 'HORIZONTAL' ? 'INVERTED' : orientation === 'INVERTED' ? 'HORIZONTAL' : orientation === 'ROTATED_CW' ? 'ROTATED_CCW' : 'ROTATED_CW'
 
 export type OcrOptions = {
   /** Smallest glyph height, in pixels. Below this a component is noise. */
@@ -108,13 +132,19 @@ export type OcrOptions = {
   minGlyphScore?: number
   /** Only read inside this rectangle. */
   region?: PixelRect
-  /** Which way up to read. Defaults to all three. */
+  /** Which way up to read. Defaults to the three passes the legacy reading has always made (not INVERTED). */
   orientations?: readonly TextOrientation[]
+  /**
+   * Also read the page half a turn round, and return every pass's tokens as
+   * read, before any orientation is chosen (`OcrResult.raw`). The legacy
+   * `tokens` are unaffected: the extra pass never enters the page vote.
+   */
+  hypotheses?: boolean
   /** Told at each token group read, for progress and cancellation; nothing it does reaches the reading. */
   checkpoint?: Checkpoint
 }
 
-const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations' | 'checkpoint'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
+const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations' | 'checkpoint' | 'hypotheses'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
 
 // ---------------------------------------------------------------------------
 // prototypes
@@ -792,10 +822,22 @@ export function segment(bmp: Bitmap): Array<{ x0: number; x1: number }> {
 // ---------------------------------------------------------------------------
 
 export type OcrResult = {
+  /** The legacy reading: one orientation per clash, the page-wide vote deciding (`dedupeOrientations`). */
   tokens: TextToken[]
   /** Glyph-sized blobs found, before grouping: the reader's own coverage figure. */
   blobCount: number
+  /**
+   * With `hypotheses`: every token every pass read, INVERTED included, before
+   * any orientation was chosen. Nothing is dropped and nothing is rewritten:
+   * the ink of a vertical label appears here once per pass that read it.
+   */
+  raw?: TextToken[]
+  /** The page-wide vote the legacy `tokens` were deduplicated by, as numbers, so it can be audited. */
+  vote?: OrientationVote
 }
+
+/** The legacy page-wide orientation vote: summed merit of each vertical pass, and the pass it discarded, if any. */
+export type OrientationVote = { cwMerit: number; ccwMerit: number; discarded: 'ROTATED_CW' | 'ROTATED_CCW' | null }
 
 
 /**
@@ -812,8 +854,19 @@ export type OcrResult = {
  * chain sees two numbers where the drawing has one and concludes that nothing
  * explains the span.
  */
+/** How much a token's reading is worth, as the legacy page vote weighs it: match × decidedness × length. */
+export const tokenMerit = (t: TextToken): number => t.score * t.confidence * t.glyphs.length
+
+/** The legacy page vote, as numbers (005B): recorded beside the tokens it chose, never re-decided here. */
+export function orientationVoteOf(tokens: readonly TextToken[]): OrientationVote {
+  const totalFor = (orientation: TextOrientation): number => tokens.filter((t) => t.orientation === orientation).reduce((a, t) => a + tokenMerit(t), 0)
+  const cw = totalFor('ROTATED_CW')
+  const ccw = totalFor('ROTATED_CCW')
+  return { cwMerit: round6(cw), ccwMerit: round6(ccw), discarded: cw > ccw * 1.1 ? 'ROTATED_CCW' : ccw > cw * 1.1 ? 'ROTATED_CW' : null }
+}
+
 function dedupeOrientations(tokens: readonly TextToken[]): TextToken[] {
-  const merit = (t: TextToken): number => t.score * t.confidence * t.glyphs.length
+  const merit = tokenMerit
   const area = (b: PixelRect): number => Math.max(0, b.x1 - b.x0) * Math.max(0, b.y1 - b.y0)
   const covered = (inner: PixelRect, outer: PixelRect): number => {
     const w = Math.min(inner.x1, outer.x1) - Math.max(inner.x0, outer.x0)
@@ -823,7 +876,7 @@ function dedupeOrientations(tokens: readonly TextToken[]): TextToken[] {
   }
   // A SHEET turns its vertical text one way, not both.
   //
-  // Deciding each clash on its own merits is not enough: a mirrored `1260`
+  // Deciding each clash on its own merits is not enough: a mirrored `1230`
   // sometimes matches better than the real one, and a page then comes back
   // with most of its vertical dimensions read correctly and one of them
   // reversed — which is far worse than either all right or all wrong, because
@@ -867,6 +920,19 @@ function rotateGray(ink: Gray, direction: 'ROTATED_CW' | 'ROTATED_CCW'): Gray {
   return { width: height, height: width, data: out }
 }
 
+/** Turn a grey field half a turn, so text set upside down reads the right way up. */
+function invertGray(ink: Gray): Gray {
+  const { width, height, data } = ink
+  const out = new Uint8ClampedArray(width * height)
+  for (let i = 0; i < data.length; i += 1) out[data.length - 1 - i] = data[i]
+  return { width, height, data: out }
+}
+
+/** Put a box read on the half-turned page back where it belongs. */
+function uninvertRect(r: PixelRect, size: { width: number; height: number }): PixelRect {
+  return { x0: round6(size.width - 1 - r.x1), y0: round6(size.height - 1 - r.y1), x1: round6(size.width - 1 - r.x0), y1: round6(size.height - 1 - r.y0) }
+}
+
 /** Put a box read in a rotated frame back where it belongs on the page. */
 function unrotateRect(r: PixelRect, size: { width: number; height: number }, direction: 'ROTATED_CW' | 'ROTATED_CCW'): PixelRect {
   const corners =
@@ -900,6 +966,13 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
   const orientations = options.orientations ?? (['HORIZONTAL', 'ROTATED_CW', 'ROTATED_CCW'] as const)
   const tokens: TextToken[] = []
   let blobCount = 0
+  const inside = (box: PixelRect): boolean => !options.region || !(box.x0 < options.region.x0 || box.x1 > options.region.x1 || box.y0 < options.region.y0 || box.y1 > options.region.y1)
+  const readInverted = (): TextToken[] => {
+    const r = readNumbersFromInk(invertGray(ink), { ...options, region: undefined, orientations: ['HORIZONTAL'] })
+    return r.tokens
+      .map((token) => ({ ...token, orientation: 'INVERTED' as const, box: uninvertRect(token.box, ink), glyphs: token.glyphs.map((g) => ({ ...g, box: uninvertRect(g.box, ink) })) }))
+      .filter((t) => inside(t.box))
+  }
   for (const orientation of orientations) {
     if (orientation === 'HORIZONTAL') {
       const r = readNumbersFromInk(ink, { ...options, orientations: ['HORIZONTAL'] })
@@ -907,6 +980,7 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
       blobCount += r.blobCount
       continue
     }
+    if (orientation === 'INVERTED') continue
     const rotated = rotateGray(ink, orientation)
     // A region is stated in page coordinates; rotating the page rotates it too.
     const r = readNumbersFromInk(rotated, { ...options, region: undefined, orientations: ['HORIZONTAL'] })
@@ -923,8 +997,17 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
     }
   }
   tokens.sort((a, b) => a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || a.orientation.localeCompare(b.orientation))
-  return { tokens: dedupeOrientations(tokens), blobCount }
+  if (!options.hypotheses && !orientations.includes('INVERTED')) return { tokens: dedupeOrientations(tokens), blobCount }
+  // The half-turned pass is a hypothesis only: it never enters the legacy vote,
+  // so the legacy `tokens` are exactly what they were without it.
+  const inverted = orientations.includes('INVERTED') || options.hypotheses ? readInverted() : []
+  const raw = [...tokens, ...inverted].sort(compareTokens)
+  return { tokens: dedupeOrientations(tokens), blobCount, ...(options.hypotheses ? { raw, vote: orientationVoteOf(tokens) } : {}) }
 }
+
+/** Page order, then pass: the one order every consumer of the raw passes sees. */
+export const compareTokens = (a: TextToken, b: TextToken): number =>
+  a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || (a.orientation < b.orientation ? -1 : a.orientation > b.orientation ? 1 : 0) || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0)
 
 const OCR_SUBPHASE = { id: 'OCR', label: 'reading printed numbers' }
 

@@ -16,7 +16,7 @@
  *   typesetting choice, and at thirteen pixels the reader cannot reliably tell
  *   them apart anyway.
  * - A WHOLE number of two to four digits is a length in centimetres. This is
- *   the form dimension chains use, and it is why `1205` and `12,05` are the
+ *   the form dimension chains use, and it is why `1185` and `11,85` are the
  *   same length written two ways.
  * - `a/b` is an opening callout: width over height, in centimetres.
  * - A number followed by a degree sign is an angle.
