@@ -2075,22 +2075,13 @@
           "id": "mass-0",
           "rect": {
             "x0": 46,
-            "x1": 650.5,
+            "x1": 157.5,
             "y0": 333,
             "y1": 703
           }
         },
         {
           "id": "mass-1",
-          "rect": {
-            "x0": 157.5,
-            "x1": 520.5,
-            "y0": 179.5,
-            "y1": 333
-          }
-        },
-        {
-          "id": "mass-2",
           "rect": {
             "x0": 650.5,
             "x1": 736,
@@ -2226,20 +2217,19 @@
     }
   ],
   "resolution": {
-    "chosen": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), AGREES",
-    "chosenDepartures": "MERGE",
     "compositions": 2,
     "copies": 1,
-    "decompositions": 4,
-    "distinctOutlines": 15,
+    "decompositions": 5,
+    "distinctOutlines": 17,
     "firstReading": "PLAN_LAYOUT_REJECTED",
-    "outcome": "RESOLVED",
-    "reading1": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), AGREES",
-    "reading2": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, outer faces: 3 bodies, 172.0 m² (+4.6% of 164.47), AGREES",
-    "reading3": "copy area_table bdf7aa09e8, wall-ink extent, registered scale, largest-first tiling, outer faces: 4 bodies, 246.6 m² (+49.9% of 164.47), WRONG, corroborated by WALL_COVERAGE",
-    "reading4": "copy area_table bdf7aa09e8, wall-ink extent, registered scale, walled-first tiling, outer faces: 4 bodies, 242.7 m² (+47.6% of 164.47), WRONG, corroborated by WALL_COVERAGE",
-    "readings": 15,
-    "resolverVersion": "1.0.0"
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), UNKNOWN (the figure is spent)",
+    "reading2": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, outer faces: 3 bodies, 172.0 m² (+4.6% of 164.47), UNKNOWN (the figure is spent)",
+    "reading3": "copy area_table bdf7aa09e8, wall-ink extent, registered scale, largest-first tiling, outer faces: 4 bodies, 246.6 m² (+49.9% of 164.47), WRONG",
+    "reading4": "copy area_table bdf7aa09e8, wall-ink extent, registered scale, walled-first tiling, outer faces: 4 bodies, 242.7 m² (+47.6% of 164.47), WRONG",
+    "readings": 19,
+    "resolverVersion": "1.2.0"
   },
   "selectedPlanFrameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
   "skipped": []

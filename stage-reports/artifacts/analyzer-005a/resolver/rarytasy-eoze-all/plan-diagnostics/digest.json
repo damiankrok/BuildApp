@@ -1413,20 +1413,26 @@
     }
   ],
   "resolution": {
-    "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
+    "chosen": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES",
+    "chosenAreaM2": 116.738644,
+    "chosenBucket": "AGREES",
+    "chosenCorroborations": "",
     "chosenDepartures": "COPY,EXTENT,SCALE",
+    "chosenMasses": 1,
+    "chosenResidualPct": -4.3675,
     "compositions": 3,
     "copies": 4,
     "decompositions": 14,
     "distinctOutlines": 12,
     "firstReading": "PLAN_NO_WALLED_ENVELOPE",
     "outcome": "RESOLVED",
-    "reading1": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES, corroborated by WALL_COVERAGE",
-    "reading2": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, outer faces: 1 body, 122.1 m² (+0.0% of 122.07), AGREES, corroborated by WALL_COVERAGE",
-    "reading3": "copy dimensioned e3a3d0015d, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, outer faces: 1 body, 122.5 m² (+0.3% of 122.07), AGREES, corroborated by WALL_COVERAGE",
-    "reading4": "copy dimensioned 4d5002ec06, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 12.0 m² (-90.2% of 122.07), WRONG, corroborated by WALL_COVERAGE+ISOTROPY",
+    "publishedFigure": "SCORED",
+    "reading1": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES",
+    "reading2": "copy area_table e842a14c7f, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, outer faces: 1 body, 122.1 m² (+0.0% of 122.07), AGREES",
+    "reading3": "copy dimensioned e3a3d0015d, wall-ink extent, scale 2.223611 cm/px, largest-first tiling, outer faces: 1 body, 122.5 m² (+0.3% of 122.07), AGREES",
+    "reading4": "copy dimensioned 1dede27c71, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 50.5 m² (-58.6% of 122.07), WRONG",
     "readings": 55,
-    "resolverVersion": "1.0.0"
+    "resolverVersion": "1.2.0"
   },
   "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
   "skipped": []
