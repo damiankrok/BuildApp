@@ -144,6 +144,64 @@ function grid(xs: number[], ys: number[], rows: Array<Array<['B' | 'O', number, 
 }
 const REG = { metresPerPixelX: 0.05, metresPerPixelY: 0.05, originPx: { x: 0, y: 0 } }
 
+/**
+ * An 18 × 6 m house with, on its north side, a 6 × 6 m room walled on three sides whose fourth
+ * side is a 4 m gap between two short pieces of wall: nothing drawn across it. A room behind a
+ * wide glazed wall or a garage door, or a loggia — the plan alone does not say, and the pocket
+ * rule takes the loggia. The house and the room are 144 m²; the house alone 108 m².
+ */
+function houseWithWideMouth(): ReturnType<typeof sheet> {
+  const r = sheet(460, 480)
+  walls(r, 40, 160, 400, 280, [{ side: 'S', from: 200, to: 247 }])
+  walls(r, 120, 40, 240, 171, [{ side: 'N', from: 140, to: 220 }])
+  return r
+}
+
+describe('a wide mouth: an opening in the wall, or the mouth of a pocket', () => {
+  const runMouth = (publishedFootprintM2?: number) => {
+    const trace: SolverTraceEvent[] = []
+    const chains = [onPlan(chain('cx', 'HORIZONTAL', [40, 120, 240, 400], { baselinePx: 20 })), onPlan(chain('cy', 'VERTICAL', [40, 160, 280], { baselinePx: 20 }))]
+    try {
+      const result = reconstructV2({
+        label: 'fixture',
+        slug: 'fixture',
+        sourcePackageId: 'src-test',
+        sourcePackageHash: 'd'.repeat(64),
+        graph: graphOf([frame]),
+        metrics: metricsOf(chains, [onPlan(registration())]),
+        raster: () => houseWithWideMouth(),
+        publishedAreas: publishedFootprintM2 === undefined ? undefined : [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: publishedFootprintM2 }],
+        trace: (e) => trace.push(e),
+      })
+      return { result, trace }
+    } catch (error) {
+      if (error instanceof ReconstructionFailure) return { failure: error, trace }
+      throw error
+    }
+  }
+  const area = (r: ReturnType<typeof reconstructV2>): number => r.building.masses.reduce((a, m) => a + (m.x1 - m.x0) * (m.z1 - m.z0), 0)
+
+  it('the first reading takes the pocket; against a published footprint that counts the room, shutting the mouth resolves it', () => {
+    const alone = runMouth()
+    expect(alone.result).toBeDefined()
+    expect(area(alone.result!)).toBeCloseTo(108, 0)
+    const { result, trace } = runMouth(144)
+    expect(result, trace.map((e) => e.detail ?? '').join('\n')).toBeDefined()
+    expect(area(result!)).toBeCloseTo(144, 0)
+    expect(result!.building.masses).toHaveLength(2)
+    const resolution = (result!.planDiagnostics as { resolution?: Record<string, unknown> }).resolution
+    expect(String(resolution?.chosenDepartures)).toContain('MOUTHS')
+    expect(String(resolution?.chosen)).toContain('pocket mouths shut')
+    expect(result!.layout.gate.reasons.some((g) => g.code === 'PLAN_RESOLVED_BY_HYPOTHESIS' && g.severity === 'DEGRADING')).toBe(true)
+  })
+
+  it('a published footprint of the house alone keeps the pocket: the first reading holds and nothing else is weighed', () => {
+    const { result, trace } = runMouth(108)
+    expect(area(result!)).toBeCloseTo(108, 0)
+    expect(trace.some((e) => e.substage === 'PLAN_RESOLUTION')).toBe(false)
+  })
+})
+
 describe('walled-first tiling', () => {
   it('keeps the walled house and demotes the terrace whose outer sides carry no wall', () => {
     // house (2 cells) walled all round; terrace (1 cell) walled only where it meets the house
@@ -248,7 +306,7 @@ const score = (over: Partial<HypothesisScore> = {}): HypothesisScore => ({
   ...over,
 })
 const reading = (id: string, s: HypothesisScore, departures: string[] = ['MERGE'], stage: 1 | 2 = 2): RankedReading => ({
-  hypothesis: { id, frameId: 'f', annotation: 'DIMENSIONED', extent: 'CHAIN_RECT', scale: { kind: 'REGISTRATION' }, merge: 'WALLED_FIRST', faces: 'AS_GRIDDED', departures },
+  hypothesis: { id, frameId: 'f', annotation: 'DIMENSIONED', extent: 'CHAIN_RECT', scale: { kind: 'REGISTRATION' }, merge: 'WALLED_FIRST', faces: 'AS_GRIDDED', mouths: 'AS_DECIDED', departures },
   score: s,
   stage,
 })

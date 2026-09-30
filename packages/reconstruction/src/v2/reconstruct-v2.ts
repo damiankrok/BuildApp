@@ -67,7 +67,8 @@ import type { RepairTrace, SourceViewResidual } from './verify.js'
 import { dominantTone, lumaAt } from './scan.js'
 
 // 2.2.0 (005A): a plan the first reading refuses is re-read by the plan
-// resolver before the run stops. Accepted houses are read exactly as before.
+// resolver before the run stops (PLAN_RESOLVER_VERSION names its readings).
+// Accepted houses are read exactly as before.
 export const SOLVER_V2_VERSION = '2.2.0' as const
 
 export type ReconstructionV2Options = {

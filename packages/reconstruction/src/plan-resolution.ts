@@ -19,6 +19,9 @@
  *           readings of its long chains imply, when they disagree with it
  *   merge   largest rectangle first (today) | walled rectangle first
  *   faces   band-only sides on the band axis (today) | on the outer face
+ *   mouths  a wide undrawn gap in front of a space walled on its other sides as
+ *           the mouth of a pocket (today) | as an opening in the wall — asked
+ *           only where a reading left such a mouth open (1.1.0)
  *
  * Every alternative is generated from the drawing — a reading the OCR made, a
  * wall the ink shows — never from the answer: nothing here solves for the
@@ -48,7 +51,7 @@ import { ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
 import { worldFrameFrom } from './v2/frame.js'
 
-export const PLAN_RESOLVER_VERSION = '1.0.0' as const
+export const PLAN_RESOLVER_VERSION = '1.1.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -78,6 +81,7 @@ export type PlanHypothesis = {
   scale: ScaleChoice
   merge: PlanReadingChoice['merge']
   faces: PlanReadingChoice['faces']
+  mouths: PlanReadingChoice['mouths']
   /** Which of today's choices this reading departs from; empty for today's own reading. */
   departures: string[]
 }
@@ -410,6 +414,7 @@ const describe = (h: PlanHypothesis): string =>
     h.scale.kind === 'REGISTRATION' ? 'registered scale' : `scale ${h.scale.cmPerPx} cm/px`,
     h.merge === 'LARGEST_FIRST' ? 'largest-first tiling' : 'walled-first tiling',
     h.faces === 'AS_GRIDDED' ? 'sides as gridded' : 'outer faces',
+    ...(h.mouths === 'SHUT' ? ['pocket mouths shut'] : []),
   ].join(', ')
 
 const summaryOf = (r: RankedReading): string => {
@@ -449,7 +454,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     })
     .slice(0, RESOLVER_BUDGET.copies)
 
-  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }> }
+  type Decomposition = { frame: SourceCoordinateFrame; sheet: PlanSheet; cluster: PixelRect | null; extent: PlanReadingChoice['extent']; scale: ScaleChoice; mouths: PlanReadingChoice['mouths']; metrics: MetricEvidenceSet; reread: Set<string>; refutedShare: number; supportedOnBothAxes: boolean; otherCopies: Array<{ widthM: number; depthM: number }> }
   const decompositions: Decomposition[] = []
   const sheets = new Map<string, { sheet: PlanSheet; cluster: PixelRect | null }>()
   for (const frame of copies) {
@@ -482,10 +487,10 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     const bothAxes = (cmX: number, cmY: number): boolean =>
       (['X', 'Y'] as const).every((axis) => statements.some((s) => s.axis === axis && judge !== null && s.pixelLength >= 0.15 * (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0) && zeroSubstitution(s).some((cm) => agrees(cm, s.pixelLength, axis === 'X' ? cmX : cmY, tolerancePx))))
     for (const extent of extents) {
-      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: bothAxes(registration.metresPerPixelX * 100, registration.metresPerPixelY * 100), otherCopies })
+      decompositions.push({ frame, sheet, cluster, extent, scale: { kind: 'REGISTRATION' }, mouths: 'AS_DECIDED', metrics: options.metrics, reread: new Set(), refutedShare: refutedShareAtRegistration(options.metrics, frame.id, registration, tolerancePx), supportedOnBothAxes: bothAxes(registration.metresPerPixelX * 100, registration.metresPerPixelY * 100), otherCopies })
       for (const lattice of lattices) {
         const at = metricsAtScale(options.metrics, frame.id, lattice.cmPerPx, tolerancePx)
-        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies })
+        decompositions.push({ frame, sheet, cluster, extent, scale: lattice, mouths: 'AS_DECIDED', metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: bothAxes(lattice.cmPerPx, lattice.cmPerPx), otherCopies })
       }
     }
   }
@@ -494,9 +499,16 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
 
   // --- stage 1: every reading, without roofs, projection or gate ------------
   const readings: Array<RankedReading & { decomposition: Decomposition }> = []
-  const total = bounded.length * 4
+  // A decomposition that left a wide gap open as the mouth of a pocket has another reading:
+  // the gap as an opening in the wall (a garage door, a glazed wall). It is weighed only where
+  // such a mouth exists, and within the same budget.
+  const withShutMouths: Decomposition[] = []
+  const mouthsLeftOpen = (draft: StructuralLayoutDraft): boolean =>
+    (draft.base?.decomposition.wideOpenings ?? []).some((w) => w.decision === 'OPEN_SIDE' && (w.kind === 'BAY_MOUTH' ? w.evidence.corners === true : (w.evidence.pocketM2 ?? 0) > 0))
+  let total = bounded.length * 4
   let index = 0
-  for (const d of bounded) {
+  const readAll = (d: Decomposition): void => {
+    let pocketed = false
     for (const merge of ['LARGEST_FIRST', 'WALLED_FIRST'] as const) {
       for (const faces of ['AS_GRIDDED', 'OUTER_FACE'] as const) {
         index += 1
@@ -506,29 +518,48 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
           ...(d.scale.kind !== 'REGISTRATION' ? ['SCALE'] : []),
           ...(merge !== 'LARGEST_FIRST' ? ['MERGE'] : []),
           ...(faces !== 'AS_GRIDDED' ? ['FACES'] : []),
+          ...(d.mouths !== 'AS_DECIDED' ? ['MOUTHS'] : []),
         ]
         // Today's own reading already ran, and stopped.
-        if (departures.length === 0) continue
+        if (departures.length === 0) {
+          pocketed ||= mouthsLeftOpen(incumbent.draft)
+          continue
+        }
         const hypothesis: PlanHypothesis = {
-          id: stableId('plan-reading', `${d.extent}-${merge}-${faces}`.toLowerCase(), { frameId: d.frame.id, extent: d.extent, scale: d.scale.kind === 'REGISTRATION' ? 'REG' : d.scale.cmPerPx, merge, faces }),
+          id: stableId('plan-reading', `${d.extent}-${merge}-${faces}${d.mouths === 'SHUT' ? '-mouths-shut' : ''}`.toLowerCase(), {
+            frameId: d.frame.id,
+            extent: d.extent,
+            scale: d.scale.kind === 'REGISTRATION' ? 'REG' : d.scale.cmPerPx,
+            merge,
+            faces,
+            ...(d.mouths === 'SHUT' ? { mouths: d.mouths } : {}),
+          }),
           frameId: d.frame.id,
           annotation: d.frame.roles.annotation,
           extent: d.extent,
           scale: d.scale,
           merge,
           faces,
+          mouths: d.mouths,
           departures,
         }
         progress?.({ stage: 1, index, total, label: describe(hypothesis) })
         const choice = choiceOf(hypothesis, d)
         const draft = inferStructuralLayout({ ...shared, metrics: d.metrics, plan: choice })
+        pocketed ||= mouthsLeftOpen(draft)
         readings.push({ hypothesis, stage: 1, decomposition: d, score: scoreReading(draft, { published, refutedShare: d.refutedShare, sheet: d.sheet, cluster: d.cluster, supportedOnBothAxes: d.supportedOnBothAxes, otherCopies: d.otherCopies, gateRefusals: [] }) })
       }
     }
+    if (pocketed && d.mouths === 'AS_DECIDED' && bounded.length + withShutMouths.length < RESOLVER_BUDGET.decompositions) {
+      withShutMouths.push({ ...d, mouths: 'SHUT' })
+      total += 4
+    }
   }
+  for (const d of bounded) readAll(d)
+  for (const d of withShutMouths) readAll(d)
   const distinct = new Map<string, (typeof readings)[number]>()
   for (const r of [...readings].sort(compareReadings)) if (!distinct.has(r.score.outlineKey)) distinct.set(r.score.outlineKey, r)
-  const counts: PlanResolutionCounts = { copies: copies.length, decompositions: bounded.length, readings: readings.length, distinctOutlines: distinct.size, compositions: 0 }
+  const counts: PlanResolutionCounts = { copies: copies.length, decompositions: bounded.length + withShutMouths.length, readings: readings.length, distinctOutlines: distinct.size, compositions: 0 }
   if (readings.length === 0) return { kind: 'NO_ALTERNATIVE', counts }
 
   // --- stage 2: the best few distinct buildings, through the whole pass -----
@@ -641,7 +672,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
 }
 
 function choiceOf(h: PlanHypothesis, d: { reread: Set<string> }): PlanReadingChoice {
-  return { frameId: h.frameId, extent: h.extent, merge: h.merge, faces: h.faces, rereadEvidenceIds: d.reread, alignByFitOnly: h.scale.kind === 'LATTICE' }
+  return { frameId: h.frameId, extent: h.extent, merge: h.merge, faces: h.faces, mouths: h.mouths, rereadEvidenceIds: d.reread, alignByFitOnly: h.scale.kind === 'LATTICE' }
 }
 
 /** What a diagnostics bundle and a trace say about a resolution: counts and one line per reading. */

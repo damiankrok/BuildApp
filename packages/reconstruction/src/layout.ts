@@ -147,6 +147,8 @@ export type PlanReadingChoice = {
   merge: 'LARGEST_FIRST' | 'WALLED_FIRST'
   /** Where a body's side sits when only a wall band, no chain, marks it: on the band's axis (today), or on its outer face. */
   faces: 'AS_GRIDDED' | 'OUTER_FACE'
+  /** A wide gap in front of a space walled on every other side: the mouth of a pocket (today), or an opening in the wall. */
+  mouths: 'AS_DECIDED' | 'SHUT'
   /** Chain statements this reading re-read at another scale: a span resting on one is DERIVED, never MEASURED. */
   rereadEvidenceIds: ReadonlySet<string>
   /** The base plan's printed scale was replaced, so the other storeys are aligned by fit, not by the ratio of printed scales. */
@@ -260,8 +262,9 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         placeholderRegistration(frame)
       // The decomposition is a function of the pixels, the extent and the scale; the
       // resolver asks for the same one under several merges and faces.
-      const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id) })
+      const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
+      const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), ...(shutMouths ? { shutPocketMouths: true } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,

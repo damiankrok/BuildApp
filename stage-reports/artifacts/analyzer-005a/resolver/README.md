@@ -21,3 +21,7 @@ text facts.
   "1801": 1 body, 116.7 m² (−4.4 % of 122.07). The same model with all copies and with the area copy alone.
 - `kosacce-clean-all/`, `marcowki-all/`, `rarytasy-g2e-all/` — the three accepted houses: the first
   reading holds, the resolver never runs, model hashes `5b5ffcf1…`, `6152770f…`, `8fa4a25b…` unchanged.
+
+**Resolver 1.1.0 (the `mouths` axis).** A wide undrawn gap left open as a pocket mouth is also weighed as an
+opening in the wall; see `../shape-families/README.md`. The 36-run matrix, replayed with it, is identical:
+every outcome is unchanged and every completed row keeps its model hash.

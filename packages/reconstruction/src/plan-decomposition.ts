@@ -271,6 +271,13 @@ export type PlanDecompositionOptions = {
   minInfill?: number
   /** The plan's printed opening callouts. */
   callouts?: readonly PlanCallout[]
+  /**
+   * Read every gap left open as the mouth of a pocket as a hole in the wall instead (005A). A wide
+   * gap in front of a space shut on every other side is a carport or a garage behind a wide door,
+   * a loggia or a room behind a glazed wall: the plan alone does not say which. Today's reading
+   * takes the pocket; the resolver asks for this one as another reading, never as the first.
+   */
+  shutPocketMouths?: boolean
 }
 
 const DEFAULTS: Required<PlanDecompositionOptions> = {
@@ -293,6 +300,7 @@ const DEFAULTS: Required<PlanDecompositionOptions> = {
   maxWideOpeningM: 8,
   minInfill: 0.7,
   callouts: [],
+  shutPocketMouths: false,
 }
 
 const at = (m: Mask, x: number, y: number): number => (x < 0 || y < 0 || x >= m.width || y >= m.height ? 0 : m.data[y * m.width + x])
@@ -974,6 +982,8 @@ type WideOpeningContext = {
   callouts: readonly PlanCallout[]
   maxOpeningPx: number
   maxWidePx: number
+  /** The resolver's other reading: a mouth both side walls reach, within the widest a wall's hole can be, is an opening. */
+  shutMouths: boolean
   minJambPx: number
   minInfill: number
   tolerance: number
@@ -1154,7 +1164,11 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
         s.edge,
       )
       const drawn = infill >= ctx.minInfill
-      const opening = corners && (drawn || !!callout) && (gapPx <= ctx.maxWidePx || (drawn && !!callout))
+      const evidenced = corners && (drawn || !!callout) && (gapPx <= ctx.maxWidePx || (drawn && !!callout))
+      // The other reading of an undrawn mouth both side walls reach: a garage door or a glazed
+      // wall rather than a carport or a loggia. Asked for by the resolver only.
+      const byHypothesis = !evidenced && ctx.shutMouths && corners && gapPx <= ctx.maxWidePx
+      const opening = evidenced || byHypothesis
       const signals = [corners ? 'both side walls reach it' : 'a side wall stops short of it', drawn ? `${Math.round(infill * 100)}% of the gap is one drawn line` : `only ${Math.round(infill * 100)}% of the gap is drawn across`, callout ? `a callout of ${callout.widthCm} cm is printed at it` : 'no callout states its width']
       const mouth: WideOpeningDecision = {
         kind: 'BAY_MOUTH',
@@ -1166,9 +1180,11 @@ function baysOf(ctx: WideOpeningContext): PlanBay[] {
         evidence: { jambs: corners, corners, infill, ...(callout ? { callout } : {}) },
         decision: opening ? 'OPENING_IN_WALL' : 'OPEN_SIDE',
         score: round6((corners ? 0.3 : 0) + (drawn ? 0.35 : 0.35 * Math.min(1, infill / ctx.minInfill) * 0.5) + (callout ? 0.35 * Math.min(1, callout.confidence / 0.5) : 0)),
-        why: opening
-          ? `the mouth of a bay two walls enclose, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an opening in the bay's front wall`
-          : `the mouth of a bay two walls reach out to, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an open side`,
+        why: byHypothesis
+          ? `the mouth of a bay two walls reach out to, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — read, as another reading of the plan, as a wide opening in the bay's front wall rather than an open side`
+          : opening
+            ? `the mouth of a bay two walls enclose, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an opening in the bay's front wall`
+            : `the mouth of a bay two walls reach out to, ${widthM.toFixed(2)} m wide: ${signals.join(', ')} — an open side`,
       }
       const rect: PixelRect = vertical
         ? { x0: outer0, x1: outer1, y0: Math.min(s.edge, far.px), y1: Math.max(s.edge, far.px) }
@@ -1245,7 +1261,7 @@ export function decomposePlan(
   const minJambPx = Math.max(2, wallPx * 0.5)
 
   const maxWidePx = opt.maxWideOpeningM / Math.max(mppX, mppY)
-  const ctx: WideOpeningContext = { mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, minJambPx, minInfill: opt.minInfill, tolerance }
+  const ctx: WideOpeningContext = { mask, bands: inside, linesX, linesY, envelope, wallPx, mppX, mppY, callouts: opt.callouts, maxOpeningPx, maxWidePx, shutMouths: opt.shutPocketMouths, minJambPx, minInfill: opt.minInfill, tolerance }
   // Wide gaps the drawing says are openings (H1's extra closures), per line.
   const collinear = collinearWideGaps(ctx)
   const bays = baysOf(ctx)
@@ -1397,6 +1413,13 @@ export function decomposePlan(
             decision: 'OPENING_IN_WALL',
             score: round6(Math.min(1, g.decision.score + 0.35)),
             why: `a ${g.decision.widthM.toFixed(2)} m gap between two pieces of one wall with nothing drawn across it, but behind it lies ${pocketM2.toFixed(1)} m² that is shut on every other side — the building's interior, not a ${limitM2.toFixed(1)} m² pocket — so the wall carries on across it`,
+          }
+        } else if (pocketCells > 0 && opt.shutPocketMouths) {
+          g.decision = {
+            ...g.decision,
+            evidence: { ...g.decision.evidence, pocketM2 },
+            decision: 'OPENING_IN_WALL',
+            why: `a ${g.decision.widthM.toFixed(2)} m gap between two pieces of one wall with nothing drawn across it, in front of ${pocketM2.toFixed(1)} m² shut on every other side: read, as another reading of the plan, as a wide opening in the wall rather than the mouth of a pocket`,
           }
         } else if (pocketCells > 0) {
           g.decision = { ...g.decision, evidence: { ...g.decision.evidence, pocketM2 }, why: `${g.decision.why}; behind it lies only a ${pocketM2.toFixed(1)} m² pocket (a porch, a loggia, a recess), no deeper than such a mouth leads to` }
