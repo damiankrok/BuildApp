@@ -31,8 +31,8 @@ export const STOREY_WORDS: WordRule[] = [
 ]
 
 export const VIEW_WORDS: WordRule[] = [
-  { test: /\bfrontow\w*|\bprzedni\w*|\bfront\b|\bprzod\b|\bod przodu\b/, claim: { view: 'FRONT' }, confidence: 0.9, why: '"frontowa" / "front" is the front' },
-  { test: /\bogrodow\w*|\btyln\w*|\btyl\b|\bod tylu\b|\brear\b|\bback\b|\bgarden\b/, claim: { view: 'REAR' }, confidence: 0.9, why: '"ogrodowa" / "rear" is the rear' },
+  { test: /\bfrontow\w*|\bprzedni\w*|\bfront\b|\bfrontu\b|\bprzod\b|\bprzodu\b|\bwejsciow\w*|\bentrance\b/, claim: { view: 'FRONT' }, confidence: 0.9, why: '"frontowa" / "front" is the front' },
+  { test: /\bogrodow\w*|\bogrodu\b|\btyln\w*|\btyl\b|\btylu\b|\brear\b|\bback\b|\bgarden\b/, claim: { view: 'REAR' }, confidence: 0.9, why: '"ogrodowa" / "rear" is the rear' },
   { test: /\blew(a|y|ej|ym|o|e)\b|\bleft\b/, claim: { view: 'SIDE_LEFT' }, confidence: 0.85, why: '"lewa" / "left" is the left side' },
   { test: /\bpraw(a|y|ej|ym|o|e)\b|\bright\b/, claim: { view: 'SIDE_RIGHT' }, confidence: 0.85, why: '"prawa" / "right" is the right side' },
   { test: /\bboczn\w*|\bside\b/, claim: { view: 'SIDE_UNSPECIFIED' }, confidence: 0.88, why: '"boczna" / "side" names a side without saying which' },
@@ -80,6 +80,8 @@ export const DOCUMENT_KIND_WORDS: Array<{ test: RegExp; kind: DocumentKind; why:
   { test: /\brzut\w*|\belewacj\w*|\bprzekr\w*|\brysun\w*|\bdokumentacj\w*|\bfloor[- ]?plans?\b|\belevations?\b|\bsections?\b|\bdrawings?\b/, kind: 'DRAWING_SET', why: 'drawing words name a drawing set' },
   { test: /\bprezentacj\w*|\bdrukuj\b|\bwydruk\w*|\bkarta projektu\b|\bbroszur\w*|\bbrochure\b|\bprint\b/, kind: 'BROCHURE', why: 'a presentation or print copy of the page' },
 ]
+/** Words that make a linked document someone else's: a guide, a sample, a template, the site's catalogue. */
+export const GUIDE_WORDS = /\bporadnik\w*|\bjak czytac\b|\bprzykladow\w*|\bwzor\w*|\bsample\b|\bexample\b|\bguide\b|\bhow to\b|\bkatalog\w*|\bcatalog(ue)?\b/
 export const MIRROR_WORDS = /\blustr\w*|\bmirror\w*|\bodbici\w* lustrzan\w*|\bgespiegelt/
 export const BASE_WORDS = /\bpodstaw\w*|\boryginal\w*|\bbase\b|\bstandard\w*/
 /** A scale printed with the link ("w skali 1:500"): kept as text, never a transform. */

@@ -92,7 +92,7 @@ describe('fixture 1 — JSON-LD + OpenGraph project page', () => {
     const seen: string[] = []
     const pkg = await acquire(stubFetch(routes()), PAGE, { onRoute: (r) => seen.push(`${r.kind}:${r.adapter.id}${r.kind === 'GENERIC' ? `:${r.classification.verdict}:${r.classification.evidence.map((e) => e.signal).join('+')}` : ''}`) })
     expect(seen).toEqual(['GENERIC:generic.project-page:PROJECT_PAGE:area+plan-imagery+dimensions+elevation-imagery+json-ld+project-code+roof+section-imagery+title+og:type'])
-    expect(pkg.adapter).toEqual({ id: 'generic.project-page', version: '1.1.0' })
+    expect(pkg.adapter).toEqual({ id: 'generic.project-page', version: '1.2.0' })
   })
 
   it('takes the project identity from the structured data and the page, and the publisher from the host', async () => {

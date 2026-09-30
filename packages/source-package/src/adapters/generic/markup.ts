@@ -16,8 +16,10 @@ export type Heading = { level: number; text: string; offset: number }
 export type TableRow = { cells: string[]; offset: number }
 export type Table = { rows: TableRow[]; offset: number; end: number; headingBefore?: string }
 export type LabelValue = { label: string; value: string; source: 'table' | 'dl' | 'li' | 'meta' | 'block' | 'inline'; offset: number }
-/** One run of text between two block-level tags, inline markup gone. */
-export type TextBlock = { text: string; offset: number; tag: string }
+/** One run of text between two block-level tags, inline markup gone; `path` is the block elements it sits in, outermost first. */
+export type TextBlock = { text: string; offset: number; tag: string; path: number[] }
+/** A block-level element of the page (005C): where it opens and closes, and the element it sits in (-1: none). */
+export type BlockElement = { id: number; tag: string; start: number; end: number; parent: number }
 
 export type JsonLdNode = Record<string, unknown>
 
@@ -39,6 +41,8 @@ export type PageFacts = {
   pairs: LabelValue[]
   /** The page's text as block-level runs, in document order: what a div- or flex-built fact list is made of. */
   blocks: TextBlock[]
+  /** The block-level elements the runs sit in, by id: a row, a card, a form, a list — structure without a DOM. */
+  elements: BlockElement[]
   /** Offsets of every <form>…</form>: prose in a form is consent and contact boilerplate, never a description. */
   formRanges: Array<[number, number]>
   /** Elements that say they are tables (ARIA role table / grid), as offsets: read as tables, never as label runs. */
@@ -152,25 +156,81 @@ export const withUnitGlyphs = (html: string): string =>
   html.replace(/<sup\b[^>]*>\s*([23])\s*<\/sup>/gi, (whole, d: string) => (d === '2' ? '\u00b2' : '\u00b3').padEnd(whole.length, ' '))
 
 const BLOCK_TAG = /<\/?(?:div|p|li|ul|ol|dl|dt|dd|tr|td|th|table|thead|tbody|tfoot|caption|section|article|aside|header|footer|nav|main|h[1-6]|figure|figcaption|form|fieldset|label|button|select|option|textarea|blockquote|pre|address|details|summary|dialog|br|hr)\b[^>]*>/gi
+const VOID_BLOCK = new Set(['br', 'hr'])
+/** Tags a paragraph cannot contain: opening one closes an open <p>, as a browser does. */
+const CLOSES_P = new Set(['div', 'p', 'ul', 'ol', 'dl', 'table', 'section', 'article', 'aside', 'header', 'footer', 'nav', 'main', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figure', 'form', 'fieldset', 'blockquote', 'pre', 'address', 'details', 'dialog'])
 
-/** Text between block-level tags, in order. Bounded: one linear scan. */
-export function readBlocks(body: string): TextBlock[] {
-  const out: TextBlock[] = []
+/**
+ * Text between block-level tags, in order, each run with the block elements it
+ * sits in; and those elements, opened and closed the way a browser would for
+ * the tags that close themselves (`li`, `dt`/`dd`, `option`, cells, a `p` a
+ * block opens inside). Bounded: one linear scan, a stack no deeper than the
+ * markup's nesting.
+ */
+export function readStructure(body: string): { blocks: TextBlock[]; elements: BlockElement[] } {
+  const blocks: TextBlock[] = []
+  const elements: BlockElement[] = []
   const src = withUnitGlyphs(body)
+  const stack: number[] = []
+  const top = (): BlockElement | undefined => (stack.length > 0 ? elements[stack[stack.length - 1]] : undefined)
+  const close = (at: number): void => {
+    const id = stack.pop()
+    if (id !== undefined) elements[id].end = at
+  }
   let last = Math.max(0, src.search(/<body\b/i))
-  BLOCK_TAG.lastIndex = 0
   let lastTag = 'start'
   for (const m of src.matchAll(BLOCK_TAG)) {
     const at = m.index ?? 0
     if (at < last) continue
     const text = stripTags(src.slice(last, at))
-    if (text) out.push({ text, offset: last, tag: lastTag })
+    if (text) blocks.push({ text, offset: last, tag: lastTag, path: [...stack] })
     last = at + m[0].length
-    lastTag = (/^<\/?([a-z0-9]+)/i.exec(m[0])?.[1] ?? '').toLowerCase()
+    const closing = m[0][1] === '/'
+    const tag = (/^<\/?([a-z0-9]+)/i.exec(m[0])?.[1] ?? '').toLowerCase()
+    lastTag = tag
+    if (VOID_BLOCK.has(tag) || /\/>$/.test(m[0])) continue
+    if (closing) {
+      const i = stack.map((id) => elements[id].tag).lastIndexOf(tag)
+      if (i < 0) continue
+      while (stack.length > i) close(at + m[0].length)
+      continue
+    }
+    const t = top()?.tag
+    if ((tag === 'li' && t === 'li') || ((tag === 'dt' || tag === 'dd') && (t === 'dt' || t === 'dd')) || (tag === 'option' && t === 'option')) close(at)
+    else if ((tag === 'td' || tag === 'th') && (t === 'td' || t === 'th')) close(at)
+    else if (tag === 'tr') {
+      while (top() && (top()?.tag === 'td' || top()?.tag === 'th')) close(at)
+      if (top()?.tag === 'tr') close(at)
+    } else if (CLOSES_P.has(tag) && t === 'p') close(at)
+    elements.push({ id: elements.length, tag, start: at, end: src.length, parent: stack.length > 0 ? stack[stack.length - 1] : -1 })
+    stack.push(elements.length - 1)
   }
   const tail = stripTags(src.slice(last))
-  if (tail) out.push({ text: tail, offset: last, tag: lastTag })
-  return out
+  if (tail) blocks.push({ text: tail, offset: last, tag: lastTag, path: [...stack] })
+  while (stack.length > 0) close(src.length)
+  return { blocks, elements }
+}
+
+/** Text between block-level tags, in order (the runs of `readStructure`). */
+export function readBlocks(body: string): TextBlock[] {
+  return readStructure(body).blocks
+}
+
+/** The deepest block element holding an offset, and its ancestors, outermost first. Empty: none. */
+export function pathAt(elements: readonly BlockElement[], offset: number): number[] {
+  const path: number[] = []
+  // elements are in document order and properly nested: descend through the ones that hold the offset
+  let scope = -1
+  for (const e of elements) {
+    if (e.start > offset) break
+    if (e.end <= offset) continue
+    if (e.parent === scope || path.includes(e.parent)) {
+      while (path.length > 0 && path[path.length - 1] !== e.parent) path.pop()
+      path.push(e.id)
+      scope = e.id
+    }
+  }
+  return path
 }
 
 /** Offsets of elements with role="table" / "grid", closed by balancing their own tag name. Bounded, no DOM. */
@@ -225,7 +285,7 @@ export function readPageFacts(html: string, url: string): PageFacts {
     headings,
     tables,
     pairs: readPairs(body, tables),
-    blocks: readBlocks(body),
+    ...readStructure(body),
     gridRanges: roleRanges(body),
     formRanges: [...body.matchAll(/<form\b[\s\S]*?<\/form>/gi)].map((m) => [m.index ?? 0, (m.index ?? 0) + m[0].length] as [number, number]),
     jsonLd: readJsonLd(html),

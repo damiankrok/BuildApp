@@ -16,15 +16,15 @@ import { channelClaims } from '../../adapter.js'
 import type { AdapterContext, DocumentClaim, ProjectIdentity, SourceAdapter, SourceClassification } from '../../adapter.js'
 import type { DiscoveredCandidate } from '../../discovery.js'
 import type { RoleClaim } from '../../roles.js'
-import { compareCodeUnits, deaccent } from '../../text.js'
+import { compareCodeUnits, deaccent, safeDecode } from '../../text.js'
 import { discoverOnDocument, documentLinks, drawingLinks, sizeStem, type DroppedCandidate } from './assets.js'
 import { classifyProjectPage } from './classify.js'
 import { jsonLdStrings, readPageFacts, type PageFacts } from './markup.js'
 import { genericFacts, genericRooms, genericSpecifications } from './published.js'
-import { ANNOTATION_WORDS, BASE_WORDS, DOCUMENT_KIND_WORDS, DOCUMENT_WORDS, MIRROR_WORDS, STATED_SCALE, STOREY_WORDS, VIEW_WORDS, firstMatch, type WordRule } from './vocabulary.js'
+import { ANNOTATION_WORDS, BASE_WORDS, DOCUMENT_KIND_WORDS, DOCUMENT_WORDS, GUIDE_WORDS, MIRROR_WORDS, STATED_SCALE, STOREY_WORDS, VIEW_WORDS, firstMatch, type WordRule } from './vocabulary.js'
 
 export const GENERIC_ADAPTER_ID = 'generic.project-page'
-export const GENERIC_ADAPTER_VERSION = '1.1.0'
+export const GENERIC_ADAPTER_VERSION = '1.2.0'
 
 /** Read once per page: the facts are pure in the markup, so the same markup gives the same facts. */
 const factsCache = new WeakMap<AdapterContext, PageFacts>()
@@ -80,7 +80,7 @@ const apply = (claims: RoleClaim[], rules: readonly WordRule[], text: string | u
 
 /** The descriptive part of a filename, folded and with separators as spaces. */
 const fileWords = (url: string): string => {
-  const file = decodeURIComponent(url.split('/').pop() ?? '').replace(/\.[a-z0-9]+$/i, '')
+  const file = safeDecode(url.split('/').pop() ?? '').replace(/\.[a-z0-9]+$/i, '')
   return deaccent(file).replace(/[-_.+]+/g, ' ')
 }
 
@@ -170,14 +170,50 @@ export type { PageFacts } from './markup.js'
 export { MAX_CRAWL_PAGES, sizeStem } from './assets.js'
 export type { DroppedCandidate } from './assets.js'
 
-/** Every PDF / DWG / DXF the page links, with what its words say it is. Kept or not by kind; never fetched here. */
+/**
+ * Every PDF / DWG / DXF the page itself links, with what its words say it is. The words are read nearest first
+ * (005C): the link's own, then the row it is filed in, then its filename; the first that names a kind decides it,
+ * so "Prezentacja projektu" filed under "Dokumentacja" is a brochure and "Charakterystyka energetyczna" is not an
+ * outline because its file is called one. A guide, a sample or a catalogue is nobody's document. A variant is
+ * read the same way, and a row that names both ("podstawowa i lustrzana") names neither. Kept or not by kind;
+ * never fetched here.
+ */
 export function genericDocuments(ctx: AdapterContext): DocumentClaim[] {
   const facts = factsOf(ctx)
   return documentLinks(facts, ctx.url).map((d) => {
-    const words = [...d.listLabels, d.text].join(' · ')
-    const folded = deaccent(`${words} ${fileWords(d.url)}`)
-    const hit = DOCUMENT_KIND_WORDS.find((r) => r.test.test(folded))
-    const scale = STATED_SCALE.exec(words)
-    return { url: d.url, format: d.format, kind: hit?.kind ?? 'UNKNOWN', variant: MIRROR_WORDS.test(folded) ? 'MIRRORED' : BASE_WORDS.test(folded) ? 'BASE' : 'UNKNOWN', ...(scale ? { statedScale: `1:${scale[1]}` } : {}), words, why: hit?.why ?? 'no technical word on it' }
+    const tiers = [d.text, d.rowLabel ?? '', fileWords(d.url)]
+    let kind: DocumentClaim['kind'] = 'UNKNOWN'
+    let why = 'no technical word on it'
+    for (const tier of tiers) {
+      const folded = deaccent(tier)
+      if (GUIDE_WORDS.test(folded)) {
+        why = `"${tier.slice(0, 40)}" is a guide, a sample or a catalogue, not this house's document`
+        break
+      }
+      const hit = DOCUMENT_KIND_WORDS.find((r) => r.test.test(folded))
+      if (hit) {
+        kind = hit.kind
+        why = hit.why
+        break
+      }
+    }
+    const own = variantOf(d.text)
+    const variant = own !== 'UNKNOWN' ? own : variantOf(d.rowLabel ?? '')
+    const scale = STATED_SCALE.exec(d.text) ?? STATED_SCALE.exec(d.rowLabel ?? '')
+    const words = [d.rowLabel, d.text].filter((w): w is string => !!w).join(' · ')
+    return { url: d.url, format: d.format, kind, variant, ...(scale ? { statedScale: `1:${scale[1]}` } : {}), words, why }
   })
+}
+
+/** BASE, MIRRORED, or UNKNOWN when the words name neither or both; "nie lustrzana" is the base. */
+function variantOf(text: string): DocumentClaim['variant'] {
+  let folded = deaccent(text)
+  let base = false
+  folded = folded.replace(/\bnie\s+lustr\w*|\bnot mirror\w*|\bnon[- ]?mirror\w*|\bnicht gespiegelt\w*/g, () => {
+    base = true
+    return ' '
+  })
+  const mirror = MIRROR_WORDS.test(folded)
+  base = base || BASE_WORDS.test(folded)
+  return mirror && base ? 'UNKNOWN' : mirror ? 'MIRRORED' : base ? 'BASE' : 'UNKNOWN'
 }

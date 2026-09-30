@@ -14,10 +14,10 @@
  * reported as one.
  */
 import type { SourceClassification } from '../../adapter.js'
-import { compareCodeUnits, deaccent } from '../../text.js'
+import { compareCodeUnits, deaccent, safeDecode } from '../../text.js'
 import { ANY_DRAWING_WORD, DOCUMENT_WORDS, HOUSE_WORDS } from './vocabulary.js'
 import { jsonLdStrings, jsonLdTypes, type PageFacts } from './markup.js'
-import { blockPairs } from './published.js'
+import { pagePairs } from './published.js'
 
 type Signal = { family: string; signal: string; detail: string; weight: number }
 
@@ -53,7 +53,8 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
   if (facts.ogType && /product|house|place|article/.test(facts.ogType.toLowerCase())) add('structured', 'og:type', `og:type ${facts.ogType}`, 0.5)
 
   // --- what it states ---
-  const labels = [...facts.pairs, ...blockPairs(facts)].map((p) => ({ label: deaccent(p.label), value: p.value }))
+  // the page's own pairs: a listing's tiles and a filter form state no figure of a house (005C)
+  const labels = pagePairs(facts).map((p) => ({ label: deaccent(p.label), value: p.value }))
   const areaPairs = labels.filter((p) => AREA_LABEL.test(p.label) && /\d/.test(p.value))
   if (areaPairs.length > 0) add('figures', 'area', `${areaPairs.length} published area figure${areaPairs.length === 1 ? '' : 's'} (e.g. "${areaPairs[0].label}")`, 2)
   const roofPairs = labels.filter((p) => ROOF_LABEL.test(p.label) || ROOF_LABEL.test(deaccent(p.value)))
@@ -80,7 +81,7 @@ export function classifyProjectPage(facts: PageFacts): SourceClassification {
     const attrs = deaccent(m[1])
     const words = [...attrs.matchAll(/\b(?:alt|title|data-caption|aria-label)\s*=\s*("([^"]*)"|'([^']*)')/gi)].map((a) => a[2] ?? a[3] ?? '').join(' ')
     const src = /\bsrc\s*=\s*("([^"]*)"|'([^']*)')/i.exec(m[1])
-    const file = src ? decodeURIComponent((src[2] ?? src[3] ?? '').split('/').pop() ?? '') : ''
+    const file = src ? safeDecode((src[2] ?? src[3] ?? '').split('/').pop() ?? '') : ''
     const text = `${words} ${deaccent(file).replace(/[-_.]+/g, ' ')}`
     for (const rule of DOCUMENT_WORDS) {
       const d = rule.claim.document

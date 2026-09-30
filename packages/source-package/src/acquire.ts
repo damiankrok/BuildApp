@@ -414,20 +414,38 @@ export const DOCUMENT_MEDIA_TYPES: readonly string[] = [
   'application/octet-stream',
 ]
 
+/** The kinds of document a package records: the house's own technical documents. A brochure, a price list or the site's terms are not. */
+export const RECORDED_DOCUMENT_KINDS: readonly SourceDocument['kind'][] = ['OUTLINE', 'DRAWING_SET', 'ENERGY_CERTIFICATE', 'COST_ESTIMATE']
+/** At most this many document records in one package. */
+export const MAX_DOCUMENT_RECORDS = 16
+
 /**
- * The page's technical documents (005C). Each is recorded with what its words
- * claim; an OUTLINE or a DRAWING_SET is fetched under the acquisition's own
- * safety policy (the same host checks, redirect limits and size cap) with a
- * document-only media allowlist, and its bytes are hashed — never decoded,
- * never parsed, never measured. The rest are recorded as not fetched, with why.
- * A document fetch that fails is the document's own record, not the package's
- * failure list: the drawings the package is built from are unaffected by it.
+ * Do the bytes open the way their format's files open? A PDF says `%PDF-` within its first kilobyte, a DWG starts
+ * with its release code (`AC10…`), a DXF with its first group code and `SECTION` (or the binary DXF sentinel). A
+ * login page served as `application/pdf` does not, and is not the document the link named.
+ */
+export function documentSignatureMatches(format: SourceDocument['format'], bytes: Uint8Array): boolean {
+  const head = String.fromCharCode(...bytes.subarray(0, 1024))
+  if (format === 'PDF') return head.includes('%PDF-')
+  if (format === 'DWG') return /^AC10\d\d/.test(head)
+  return /^AutoCAD Binary DXF/.test(head) || /^\s*0\s*\r?\n\s*SECTION\b/.test(head)
+}
+
+/**
+ * The page's technical documents (005C). The house's own (`RECORDED_DOCUMENT_KINDS`, at most
+ * `MAX_DOCUMENT_RECORDS`) are recorded with what their words claim; an OUTLINE or a DRAWING_SET is fetched under the
+ * acquisition's own safety policy (the same host checks, redirect limits and size cap) with a document-only media
+ * allowlist — checked again on bytes a cache returns — and kept only when its bytes open as its format does. Its
+ * bytes are hashed — never decoded, never parsed, never measured. The rest are recorded as not fetched, with why.
+ * A document fetch that fails is the document's own record, not the package's failure list: the drawings the
+ * package is built from are unaffected by it.
  */
 async function acquireDocuments(claims: readonly DocumentClaim[], policy: FetchPolicy, options: AcquireOptions): Promise<SourceDocument[]> {
   const out: SourceDocument[] = []
   const docPolicy: FetchPolicy = { ...policy, allowedMediaTypes: DOCUMENT_MEDIA_TYPES }
   let fetchedCount = 0
-  for (const claim of [...claims].sort((a, b) => (a.url < b.url ? -1 : a.url > b.url ? 1 : 0))) {
+  const recorded = [...claims].filter((c) => RECORDED_DOCUMENT_KINDS.includes(c.kind)).sort((a, b) => (a.url < b.url ? -1 : a.url > b.url ? 1 : 0))
+  for (const claim of recorded.slice(0, MAX_DOCUMENT_RECORDS)) {
     const base: SourceDocument = {
       url: claim.url,
       format: claim.format,
@@ -451,6 +469,15 @@ async function acquireDocuments(claims: readonly DocumentClaim[], policy: FetchP
     const got = await fetchBytes(claim.url, docPolicy, options, 'ASSET_FETCH', lost)
     if (!got) {
       out.push({ ...base, code: lost[0]?.code ?? 'NOT_FETCHED' })
+      continue
+    }
+    // the allowlist again: a cache holds what any stage fetched, a crawled page included
+    if (!DOCUMENT_MEDIA_TYPES.some((t) => got.mediaType.startsWith(t))) {
+      out.push({ ...base, code: 'MEDIA_TYPE_NOT_ALLOWED' })
+      continue
+    }
+    if (!documentSignatureMatches(claim.format, got.bytes)) {
+      out.push({ ...base, code: 'SIGNATURE_MISMATCH' })
       continue
     }
     out.push({ ...base, status: 'FETCHED', mediaType: got.mediaType, byteLength: got.bytes.length, byteHash: sha256Bytes(got.bytes) })

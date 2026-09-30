@@ -21,8 +21,9 @@
  */
 import { absolutize, decodeEntities, discoverImages, looksLikeDocument, looksLikeImage, type DiscoveredCandidate } from '../../discovery.js'
 import { registrableDomain } from '../../logical-url.js'
-import { compareCodeUnits, deaccent, stripTags } from '../../text.js'
-import { contextAt, type PageFacts } from './markup.js'
+import { compareCodeUnits, deaccent, safeDecode, stripTags } from '../../text.js'
+import { contextAt, pathAt, type PageFacts } from './markup.js'
+import { pageRegions } from './regions.js'
 import { ANY_DRAWING_WORD, CHROME_NAME, DRAWING_LINK_WORDS } from './vocabulary.js'
 
 /** How many linked pages of the same site may be read for more drawings. */
@@ -61,13 +62,60 @@ export function listLabelsAt(body: string, offset: number): string[] {
   return items.slice(0, -1).map((x) => stripTags(body.slice(x.start, x.leadEnd ?? offset))).filter((t) => t !== '' && t.length <= 120)
 }
 
-/** A technical document the page links: a PDF or a CAD file, with the words around it. Never an image candidate. */
-export type DocumentLink = { url: string; format: 'PDF' | 'DWG' | 'DXF'; text: string; listLabels: string[]; heading?: string }
+/**
+ * A technical document the page links: a PDF or a CAD file, with the words around it. Never an image candidate.
+ * `text` is the link's own words; `rowLabel` the label of the row it is filed in (005C): the text before it in its
+ * own item ("Obrys budynku w skali 1:500: PDF"), the item it is nested under, its table row's first cell, its `dt`,
+ * or a heading with nothing but links between it and the link.
+ */
+export type DocumentLink = { url: string; format: 'PDF' | 'DWG' | 'DXF'; text: string; rowLabel?: string; heading?: string }
 
 const DOCUMENT_HREF = /\.(pdf|dwg|dxf)(?:[?#]|$)/i
+/** At most this many documents are read from one page: a download centre is not this house's documentation. */
+export const MAX_DOCUMENT_LINKS = 16
 
+const trimLabel = (text: string): string => text.replace(/^[\s:–—·,;|/()-]+|[\s:–—·,;|/(-]+$/g, '').trim()
+const withoutLinks = (html: string): string => html.replace(/<a\b[\s\S]*?<\/a>/gi, ' ')
+
+/** The label of the row a link is filed in, nearest first; undefined when the link stands alone. */
+function rowLabelAt(facts: PageFacts, at: number): string | undefined {
+  const els = facts.elements
+  const path = pathAt(els, at)
+  const inner = path.length > 0 ? els[path[path.length - 1]] : undefined
+  const own = inner ? trimLabel(stripTags(withoutLinks(facts.body.slice(inner.start, at)))) : ''
+  if (own && own.length <= 120) return own
+  const parentItem = listLabelsAt(facts.body, at).pop()
+  if (parentItem) return parentItem
+  const tr = [...path].reverse().map((id) => els[id]).find((e) => e.tag === 'tr')
+  if (tr) {
+    const first = els.find((e) => e.parent === tr.id && (e.tag === 'td' || e.tag === 'th'))
+    if (first && !(at >= first.start && at < first.end)) {
+      const label = trimLabel(stripTags(withoutLinks(facts.body.slice(first.start, first.end))))
+      if (label && label.length <= 120) return label
+    }
+  }
+  const dd = [...path].reverse().map((id) => els[id]).find((e) => e.tag === 'dd')
+  if (dd) {
+    const dt = els.filter((e) => e.parent === dd.parent && e.tag === 'dt' && e.start < dd.start).pop()
+    if (dt) {
+      const label = trimLabel(stripTags(facts.body.slice(dt.start, dt.end)))
+      if (label && label.length <= 120) return label
+    }
+  }
+  // a section's heading, never the page's own title
+  const heading = [...facts.headings].reverse().find((h) => h.offset < at)
+  if (heading && heading.level >= 2) {
+    const close = facts.body.indexOf('</h', heading.offset)
+    const end = close < 0 ? heading.offset : facts.body.indexOf('>', close) + 1
+    if (end > heading.offset && end <= at && trimLabel(stripTags(withoutLinks(facts.body.slice(end, at)))) === '') return heading.text
+  }
+  return undefined
+}
+
+/** Every PDF / DWG / DXF the page itself links: not in its chrome, a control or a card (`regions.ts`). */
 export function documentLinks(facts: PageFacts, base: string): DocumentLink[] {
   const out = new Map<string, DocumentLink>()
+  const regions = pageRegions(facts)
   for (const a of facts.body.matchAll(/<a\b([^>]*)>([\s\S]{0,2000}?)<\/a>/gi)) {
     const href = ATTR(a[1], 'href')
     if (!href) continue
@@ -76,11 +124,13 @@ export function documentLinks(facts: PageFacts, base: string): DocumentLink[] {
     const ext = DOCUMENT_HREF.exec(new URL(abs).pathname)
     if (!ext) continue
     const at = a.index ?? 0
+    if (regions.excluded(at)) continue
     const heading = [...facts.headings].reverse().find((h) => h.offset < at)?.text
     const text = `${ATTR(a[1], 'title') ?? ''} ${ATTR(a[1], 'aria-label') ?? ''} ${stripTags(a[2])}`.replace(/\s+/g, ' ').trim()
-    if (!out.has(abs)) out.set(abs, { url: abs, format: ext[1].toUpperCase() as DocumentLink['format'], text, listLabels: listLabelsAt(facts.body, at), heading })
+    const rowLabel = rowLabelAt(facts, at)
+    if (!out.has(abs)) out.set(abs, { url: abs, format: ext[1].toUpperCase() as DocumentLink['format'], text, ...(rowLabel ? { rowLabel } : {}), heading })
   }
-  return [...out.values()].sort((a, b) => compareCodeUnits(a.url, b.url))
+  return [...out.values()].sort((a, b) => compareCodeUnits(a.url, b.url)).slice(0, MAX_DOCUMENT_LINKS)
 }
 
 export type GenericDiscovery = {
@@ -184,32 +234,74 @@ function figcaptionOf(body: string, offset: number): string | undefined {
   return m ? stripTags(m[1]) || undefined : undefined
 }
 
+/** Words any project address carries; they name no project. */
+const GENERIC_SLUG = new Set(['projekt', 'projekty', 'projektu', 'projekt-domu', 'dom', 'domu', 'domy', 'domow', 'katalog', 'house', 'home', 'project', 'projects', 'plan', 'plans', 'index', 'html', 'php', 'htm', 'aspx', 'id', 'www'])
+
+/** An address part as tokens: decoded, folded, split on anything that is not a letter or a digit. */
+const tokensOf = (text: string): string[] => deaccent(safeDecode(text).toLowerCase()).split(/[^a-z0-9]+/).filter((t) => t !== '')
+
+/**
+ * What names THIS project in an address (005C): its own last path segment (the extension dropped) as a token
+ * sequence, and its query values that look like identifiers (`?id=4711`). A sequence counts only when it has a
+ * token that is not a generic word ("projekt", "dom").
+ */
+function projectNames(pageUrl: URL): string[][] {
+  const names: string[][] = []
+  const last = pageUrl.pathname.replace(/\/+$/, '').split('/').pop() ?? ''
+  const slug = tokensOf(last.replace(/\.(html?|php|aspx?)$/i, ''))
+  if (slug.some((t) => !GENERIC_SLUG.has(t) && (t.length >= 3 || /\d/.test(t)))) names.push(slug)
+  for (const [, v] of pageUrl.searchParams) {
+    const t = tokensOf(v)
+    if (t.length > 0 && t.some((x) => !GENERIC_SLUG.has(x) && (x.length >= 3 || /\d/.test(x)))) names.push(t)
+  }
+  return names
+}
+
+/**
+ * Does a run of text name this project, and nothing more than its drawings? The name's tokens must appear whole
+ * and in order, and every other token in the same run must be a drawing word or a generic one: "dom-pod-grabem-
+ * rzuty" is this house's plans, "dom-pod-grabem-2" and "dom-pod-grabem-lustro" are two other projects, "filipa"
+ * does not contain "lipa", and "47110" is not "4711".
+ */
+function namesProject(run: string[], name: string[]): boolean {
+  for (let i = 0; i + name.length <= run.length; i++) {
+    if (!name.every((t, k) => run[i + k] === t)) continue
+    const rest = [...run.slice(0, i), ...run.slice(i + name.length)]
+    if (rest.every((t) => GENERIC_SLUG.has(t) || DRAWING_LINK_WORDS.test(t) || /^(i|and|oraz|und|z|w|na|pdf)$/.test(t))) return true
+  }
+  return false
+}
+
 /** Same-site links whose words promise drawings, in a deterministic order, at most `MAX_CRAWL_PAGES`. */
 export function drawingLinks(facts: PageFacts, pageUrl: string): string[] {
   const out = new Map<string, number>()
+  const current = new URL(pageUrl)
+  current.hash = ''
+  const names = projectNames(current)
   for (const a of facts.body.matchAll(/<a\b([^>]*)>([\s\S]{0,2000}?)<\/a>/gi)) {
     const href = ATTR(a[1], 'href')
     if (!href || href.startsWith('#') || href.startsWith('javascript:')) continue
     const abs = absolutize(href, pageUrl)
-    if (!abs || !abs.startsWith('https:') || looksLikeImage(abs) || looksLikeDocument(abs)) continue
+    // a file is never a page: a CAD drawing or an archive is a document, recorded with the documents or not at all
+    if (!abs || !abs.startsWith('https:') || looksLikeImage(abs) || looksLikeDocument(abs) || /\.(dwg|dxf|zip|rar|7z)(\?|#|$)/i.test(abs)) continue
     const target = new URL(abs)
     target.hash = ''
-    const current = new URL(pageUrl)
-    current.hash = ''
     if (target.toString() === current.toString() || !sameSite(abs, pageUrl)) continue
     // The site's root and the listings above this page (`/`, `/katalog/`) are navigation: a project's drawings are
     // never kept on a page that contains the project (005C).
     const trimmed = (path: string): string => path.replace(/\/+$/, '')
     if (trimmed(target.pathname) === '' || (target.search === '' && current.pathname.startsWith(`${trimmed(target.pathname)}/`))) continue
-    const words = deaccent(`${ATTR(a[1], 'title') ?? ''} ${stripTags(a[2])} ${decodeURIComponent(target.pathname)}`)
+    const linkWords = `${ATTR(a[1], 'title') ?? ''} ${stripTags(a[2])}`
+    const words = deaccent(`${linkWords} ${safeDecode(target.pathname)}`)
     if (!DRAWING_LINK_WORDS.test(words)) continue
-    // A path under the page's own path (`/projekt/x/rzuty`) is the strongest sign the link belongs to this project.
-    const under = target.pathname.startsWith(current.pathname.replace(/\/$/, '') + '/') ? 0 : 1
-    // Otherwise the link must name this project — its own slug in the target's path, query or words. A guide about
-    // elevations elsewhere on the site is about elevations, not about this house's (005C).
-    const slug = deaccent(decodeURIComponent(current.pathname.replace(/\/+$/, '').split('/').pop() ?? ''))
-    const names = slug.length >= 4 && deaccent(`${decodeURIComponent(target.pathname)} ${decodeURIComponent(target.search)} ${words}`).includes(slug)
-    if (under === 1 && !names) continue
+    // A path under the page's own path (`/projekt/x/rzuty`), or the same page with a tab (`?id=4711&tab=rzuty`), is
+    // the strongest sign the link belongs to this project.
+    const under = target.pathname.startsWith(current.pathname.replace(/\/$/, '') + '/') || (target.pathname === current.pathname && [...current.searchParams].every(([k, v]) => target.searchParams.get(k) === v)) ? 0 : 1
+    // Otherwise the link must name this project and nothing else: in a path segment, a query value or its own words.
+    if (under === 1) {
+      const runs = [...target.pathname.split('/').map((seg) => tokensOf(seg.replace(/\.(html?|php|aspx?)$/i, ''))), ...[...target.searchParams.values()].map(tokensOf), tokensOf(linkWords)]
+      if (!names.some((name) => runs.some((run) => namesProject(run, name)))) continue
+    }
     const key = target.toString()
     if (!out.has(key)) out.set(key, under)
   }
@@ -238,7 +330,7 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
   const titleFolded = pageTitle ? deaccent(pageTitle).replace(/[^a-z0-9]+/g, ' ').trim() : ''
   for (const c of raw) {
     if (!c.url.startsWith('https:')) continue
-    const file = decodeURIComponent(c.url.split('/').pop() ?? '')
+    const file = safeDecode(c.url.split('/').pop() ?? '')
     const info = words.get(c.url)
     const text = deaccent(`${c.caption ?? ''} ${info?.words ?? ''}`)
     if (CHROME_NAME.test(file) || CHROME_NAME.test(text)) {
@@ -272,7 +364,7 @@ export function discoverOnDocument(facts: PageFacts, exposedBy: string, pageTitl
 export function sizeStem(url: string): string | undefined {
   try {
     const u = new URL(url)
-    const file = decodeURIComponent(u.pathname.split('/').pop() ?? '')
+    const file = safeDecode(u.pathname.split('/').pop() ?? '')
     const dir = u.pathname.slice(0, u.pathname.length - (u.pathname.split('/').pop() ?? '').length)
     const stem = file
       .replace(/\.[a-z0-9]+$/i, '')

@@ -118,7 +118,7 @@ describe('technical documents: recorded, drawings fetched and hashed, none parse
       [`${SITE}/pliki/obrys.dwg`]: { bytes: utf8('AC1027 not a drawing this layer reads'), mediaType: 'application/octet-stream' },
     })
     expect(pkg.schemaVersion).toBe(SOURCE_PACKAGE_SCHEMA_VERSION_WITH_DOCUMENTS)
-    expect(pkg.adapter).toEqual({ id: 'generic.project-page', version: '1.1.0' })
+    expect(pkg.adapter).toEqual({ id: 'generic.project-page', version: '1.2.0' })
     expect(pkg.documents?.map((d) => [d.url.split('/').pop(), d.status, d.code ?? '-'])).toEqual([
       ['energia.pdf', 'NOT_FETCHED', 'NOT_A_DRAWING'],
       ['obrys-l.pdf', 'FETCHED', '-'],

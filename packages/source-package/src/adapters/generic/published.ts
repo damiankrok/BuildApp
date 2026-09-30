@@ -13,6 +13,7 @@
 import type { PublishedFact, PublishedRoom, PublishedSpecification, StoreyRole } from '../../schema.js'
 import { compareCodeUnits, deaccent, parseLocaleNumber } from '../../text.js'
 import type { LabelValue, PageFacts } from './markup.js'
+import { pageRegions, type PageRegions } from './regions.js'
 
 type FactUnit = PublishedFact['unit']
 const FACT_KEYS: Array<{ test: RegExp; key: string; unit: FactUnit }> = [
@@ -26,12 +27,13 @@ const FACT_KEYS: Array<{ test: RegExp; key: string; unit: FactUnit }> = [
   // A qualified roof area is not the roof's area: the sloped and the flat part are two figures, and neither is their sum.
   { test: /powierzchnia dachu (skosn|spadzist|strom)\w*|\bpitched roof area\b|\bsloped roof area\b/, key: 'sloped_roof_area', unit: 'm2' },
   { test: /powierzchnia dachu plask\w*|powierzchnia stropodachu|\bflat roof area\b/, key: 'flat_roof_area', unit: 'm2' },
-  { test: /powierzchnia dachu|\broof area\b/, key: 'roof_area', unit: 'm2' },
+  { test: /powierzchnia dachu|\bpow\.? dachu\b|\broof area\b/, key: 'roof_area', unit: 'm2' },
   { test: /kubatur|\bvolume\b/, key: 'volume', unit: 'none' },
   // The building's height, not a knee wall's or a room's: the label is anchored and the parts excluded.
   { test: /^(wysokosc|height)( (budynku|domu|calkowita|calosci|building|total|overall))?$|^(building|overall|total) height$/, key: 'building_height', unit: 'm' },
   { test: /^powierzchnia calkowita|\btotal area\b|\bgross area\b/, key: 'total_area', unit: 'm2' },
-  { test: /kat (nachylenia|dachu)|nachylenie|\bpitch\b/, key: 'roof_pitch', unit: 'deg' },
+  // the roof's pitch, never the terrain's
+  { test: /kat (nachylenia( dachu| polaci)?|dachu)$|^(glowny )?kat nachylenia (dachu|polaci)|nachylenie (dachu|polaci)|\broof pitch\b|^pitch$/, key: 'roof_pitch', unit: 'deg' },
   { test: /szerokosc (budynku|domu)|\bbuilding width\b/, key: 'building_width', unit: 'm' },
   { test: /dlugosc (budynku|domu)|\bbuilding length\b/, key: 'building_length', unit: 'm' },
   // Counts, as the publisher counts them: "4 rooms" by its own convention, never checked against a plan here.
@@ -61,127 +63,256 @@ const STOREY_WORDS: Array<{ test: RegExp; storey: StoreyRole }> = [
   { test: /\bpiwnic\w*|\bbasement\b|\bcellar\b/, storey: 'BASEMENT' },
 ]
 
-const unitOf = (label: string, value: string, fallback: PublishedFact['unit']): PublishedFact['unit'] => {
-  const v = deaccent(value)
-  if (fallback === 'count') return 'count'
-  if (/m²|\bm2\b|\bmkw\b|\bsq/.test(v) || /m²|\bm2\b/.test(deaccent(label))) return 'm2'
-  if (/m³|\bm3\b/.test(v)) return 'none'
-  if (/°|\bst\.?\b|\bdeg\b|stopni/.test(v)) return 'deg'
-  if (/\bm\b/.test(v) && fallback !== 'none') return 'm'
-  return fallback
+// ---------------------------------------------------------------------------
+// Shapes (005C). A figure is one number and at most its unit; a figure with a
+// bound or an estimate on it ("do 150 m²", "ok. 160 m²", "150–180 m²") or a
+// blank ("—") holds its label's place and states no value.
+// ---------------------------------------------------------------------------
+
+const NUMBER = String.raw`\d{1,6}(?:[   ]\d{3})*(?:[.,]\d+)?`
+const UNIT = String.raw`(?:m\s*²|m\s*³|m2|m3|mkw\.?|m\s*kw\.?|m|cm|mm|°|st\.?|stopni|%|szt\.?)`
+const QUALIFIER = String.raw`(?:ok\.?|ca\.?|~|≈|okolo|do|od|max\.?|maks\.?|min\.?|ponad|powyzej|ponizej|nie wiecej niz|up to|approx\.?|about|around|<|>|≤|≥)`
+/** A whole block that is one number and at most a unit: a figure. Prose with a number in it is not. */
+const VALUE_BLOCK = new RegExp(`^${NUMBER}\\s*${UNIT}?$`)
+/** Two plot dimensions in one: "21,15 x 24,60 m". */
+const PLOT_BLOCK = new RegExp(`^(${NUMBER})\\s*(?:m\\s*)?[x×]\\s*(${NUMBER})\\s*m$`)
+/** A bound, an estimate or a range where a figure would stand: it takes the figure's place and states none. */
+const QUALIFIED_BLOCK = new RegExp(`^${QUALIFIER}\\s*${NUMBER}\\s*${UNIT}?$|^${NUMBER}\\s*${UNIT}?\\s*[-–—]\\s*${NUMBER}\\s*${UNIT}?$`)
+/** A value left blank. */
+const BLANK_BLOCK = /^(?:[-–—−]+|brak|n\/?a|b\/d|nie dotyczy)$/
+/** "Label: figure" in one block; the label part is judged separately. */
+const INLINE = new RegExp(`^(.{2,60}?)\\s*[:–—-]?\\s+(${QUALIFIER}\\s*)?(${NUMBER}\\s*${UNIT}?)$`)
+
+/** A label that bounds or rates a figure instead of stating it: a planning limit, an index, a ratio. */
+const BOUND_WORDS = /\b(max\w*|maks\w*|min|minimaln\w*|minimum|wskaznik\w*|dopuszczaln\w*|przekrocz\w*|limit\w*|ratio|coverage)\b/
+/** A label about one storey is not a figure of the house. */
+const STOREY_QUALIFIER = /\b(parter\w*|poddasz\w*|pietr\w*|piwnic\w*|przyziem\w*|ground floor|first floor|upper floor|attic|basement|loft)\b/
+/** Words of the fact vocabulary: a block of six or seven words carrying one is a label too long to trust, not prose to skip. */
+const LOOSE_VOCABULARY = /\b(wysokosc|powierzchni\w*|pow\.|kubatur\w*|kat|nachyleni\w*|szerokosc|dlugosc|glebokosc|dzialk\w*|garaz\w*|area|height|volume|pitch|width|length|footprint)\b/
+
+type StatedUnit = 'm2' | 'm3' | 'm' | 'deg' | 'other' | undefined
+const statedUnit = (text: string): StatedUnit => {
+  const v = deaccent(text)
+  if (/m\s*²|\bm2\b|\bmkw\b|\bm\s*kw\b/.test(v)) return 'm2'
+  if (/m\s*³|\bm3\b/.test(v)) return 'm3'
+  if (/\bcm\b|\bmm\b|%|\bszt\b|\bzl\b|\bpln\b|\beur\b/.test(v)) return 'other'
+  if (/°|\bst\.?$|\bstopni|\bdeg\b/.test(v)) return 'deg'
+  if (/\bm\b/.test(v)) return 'm'
+  return undefined
 }
 
-const UNIT_STATED = /m²|m³|\bm2\b|\bm3\b|\bmkw\b|\bm\b|°|\bst\.?$|\bstopni|\bdeg\b/
-/** A whole block that is one number and at most a unit: "278,30 m²", "30°", "4". Prose with a number in it is not. */
-const VALUE_BLOCK = /^(?:ok\.?\s*|ca\.?\s*|~\s*)?\d{1,6}(?:[ \u00a0\u202f]\d{3})*(?:[.,]\d+)?\s*(?:m\s*²|m\s*³|m2|m3|mkw\.?|m|cm|°|st\.?|stopni|%|szt\.?)?$/
-const isFactLabel = (text: string): string | undefined => {
-  const t = text.replace(/[:\s]+$/, '').trim()
-  const folded = deaccent(t)
-  if (t.length < 3 || t.length > 60 || /\d/.test(t) || /[?!.]$/.test(folded.replace(/\b(min|max|dl|szer|pow|ok|gl)\.$/, '')) || t.split(/\s+/).length > 6) return undefined
+/**
+ * A label without what is not its words: the unit it states ("(m2)", "[m²]")
+ * and the standard it measures by ("wg PN-ISO 9836:1997"). The unit is kept:
+ * a label that says "m²" lets a bare number be square metres.
+ */
+export function cleanLabel(raw: string): { text: string; unit: StatedUnit } {
+  let unit: StatedUnit
+  let text = raw.replace(/\s*[([]\s*(m\s*²|m\s*³|m2|m3|m|°|stopni|deg)\s*[)\]]/gi, (_m, u: string) => {
+    unit = statedUnit(u) ?? unit
+    return ' '
+  })
+  text = text.replace(/\s+w\s+(m\s*²|m\s*³|m2|m3|stopniach)\s*$/i, (_m, u: string) => {
+    unit = statedUnit(u) ?? unit
+    return ''
+  })
+  text = text.replace(/\s*[([]?\s*(?:wg|według|wedlug|per|according to)?\s*\b(?:PN|EN|ISO|DIN)(?:[- ]?(?:EN|ISO|B))*[- ]?\d[\d:.-]*\s*[)\]]?/gi, ' ')
+  return { text: text.replace(/\s+/g, ' ').replace(/[:*\s]+$/, '').trim(), unit }
+}
+
+const plotKey = (folded: string): string | undefined => {
+  if (/\b(szer\w*|width)\b/.test(folded) && /\bdzialk\w*|\bplot\b/.test(folded)) return 'plot_min_width'
+  if (/\b(dl|dlug\w*|glebok\w*|length|depth)\b/.test(folded) && /\bdzialk\w*|\bplot\b/.test(folded)) return 'plot_min_depth'
   if (/wymiary dzialki|\bplot (size|dimensions)\b/.test(folded)) return 'plot'
+  return undefined
+}
+
+/**
+ * The fact key of a label, or undefined: a short phrase in the fact
+ * vocabulary, with no digit and no sentence end, that neither bounds a figure
+ * nor names one storey. `maxWords` is the reader's own limit: a label printed
+ * inline with its figure is held to four words, because "nie może przekroczyć"
+ * and "około" are words too.
+ */
+export function factKeyOf(label: string, maxWords: number): string | undefined {
+  const folded = deaccent(cleanLabel(label).text)
+  if (folded.length < 3 || folded.length > 60 || folded.split(/\s+/).length > maxWords || /\d/.test(folded)) return undefined
+  if (/[?!]$/.test(folded) || /\.$/.test(folded.replace(/\b(min|max|dl|szer|pow|gl|wym|calk|uzytk|zab|glebok)\.$/, ''))) return undefined
+  const plot = plotKey(folded)
+  if (plot) return plot
+  if (BOUND_WORDS.test(folded) || STOREY_QUALIFIER.test(folded) || new RegExp(`(^|\\s)${QUALIFIER}$`).test(folded)) return undefined
   return FACT_KEYS.find((f) => f.test.test(folded))?.key
 }
-/**
- * Label/value pairs a page builds from blocks rather than a table: a short
- * label in the fact vocabulary, then the first block that is nothing but a
- * number and a unit — skipping what sits between (a tooltip, its heading,
- * its prose, its close button), and stopping at the next label. And the
- * inline form, "Powierzchnia użytkowa 172,90 m²" in one block.
- */
-export function blockPairs(facts: PageFacts): LabelValue[] {
-  const out: LabelValue[] = []
-  // A table is the table reader's: a column header is not a row label, whatever the next cell says.
-  const inTable = (at: number): boolean => facts.tables.some((t) => at >= t.offset && at < t.end) || facts.gridRanges.some(([a, b]) => at >= a && at < b)
-  // A card linking to another page is that page's summary: "165,40 m²" under a related project's name is not this house.
-  const cards = [...facts.body.matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"'#][^"']*)["'][^>]*>[\s\S]{0,6000}?<\/a>/gi)]
-    .filter((a) => !/\.(pdf|dwg|dxf|jpe?g|png|gif|webp)(\?|#|$)/i.test(a[1]) && !/^(javascript|mailto|tel):/i.test(a[1]))
-    .map((a) => [a.index ?? 0, (a.index ?? 0) + a[0].length] as [number, number])
-  const inCard = (at: number): boolean => cards.some(([a, b]) => at >= a && at < b)
-  const blocks = facts.blocks.filter((b) => !inTable(b.offset) && !inCard(b.offset))
-  const claimed = new Set<number>()
-  // What may stand between a label and its value: the label again, prose, a control's caption, a glyph.
-  const passable = (b: { text: string; tag: string }, key: string): boolean =>
-    isFactLabel(b.text) === key || b.text.split(/\s+/).length >= 6 || b.text.length >= 40 || ['button', 'option', 'select', 'textarea'].includes(b.tag) || !/[a-z0-9]/i.test(deaccent(b.text))
-  for (let i = 0; i < blocks.length; i++) {
-    const text = blocks[i].text
-    const inline = /^(.{3,60}?)\s*[:–-]?\s+((?:ok\.?\s*)?\d[\d \u00a0.,]*\s*(?:m\s*²|m\s*³|m2|m3|mkw\.?|m|°|st\.?)?)$/.exec(text)
-    if (inline && isFactLabel(inline[1])) {
-      out.push({ label: inline[1].replace(/[:\s]+$/, ''), value: inline[2], source: 'inline', offset: blocks[i].offset })
-      continue
-    }
-    const key = isFactLabel(text)
-    if (!key) continue
-    for (let j = i + 1; j < Math.min(blocks.length, i + 13); j++) {
-      const next = blocks[j].text
-      if (VALUE_BLOCK.test(deaccent(next))) {
-        if (!claimed.has(j)) {
-          claimed.add(j)
-          out.push({ label: text.replace(/[:\s]+$/, ''), value: next, source: 'block', offset: blocks[i].offset })
-        }
-        break
-      }
-      if (!passable(blocks[j], key)) break
-    }
-  }
-  return out
+
+// ---------------------------------------------------------------------------
+// Label/value pairs from blocks (005C): a value belongs to a label only inside
+// the smallest element holding both, and only when that element holds no
+// other label and exactly one figure. An element holding several facts is
+// read flat only when each of its sections (a heading opens one) alternates
+// strictly label, figure, label, figure from its first block to its last —
+// the one arrangement whose direction is not a guess.
+// ---------------------------------------------------------------------------
+
+type TokenKind = 'K' | 'X' | 'V' | 'S'
+type Token = { block: number; kind: TokenKind; key?: string; inline?: true; heading?: true }
+
+/** "Label: figure" in one block, matched on the folded text (a qualifier is "około" or "okolo" alike), cut from the printed one. */
+function inlineParts(text: string): { label: string; qualified: boolean; value: string } | undefined {
+  const t = text.trim()
+  const folded = deaccent(t)
+  const m = INLINE.exec(folded)
+  if (!m) return undefined
+  const same = folded.length === t.length
+  return { label: same ? t.slice(0, m[1].length) : m[1], qualified: !!m[2], value: same ? t.slice(t.length - m[3].length) : m[3] }
 }
 
-/** The figures a page prints, keyed by the vocabulary of their labels. First occurrence of each key wins. */
-export function genericFacts(facts: PageFacts): PublishedFact[] {
-  const out: PublishedFact[] = []
-  const seen = new Set<string>()
-  // The structured readers first, whole; the block reader only fills keys they did not state.
-  // Two different block readings of one key is a question, not a first-wins: the key is left out.
-  const blockValues = new Map<string, Set<number>>()
-  for (const p of blockPairs(facts)) {
-    const k = FACT_KEYS.find((f) => f.test.test(deaccent(p.label)))?.key
-    const v = parseLocaleNumber(p.value)
-    if (k && v !== null) blockValues.set(k, (blockValues.get(k) ?? new Set()).add(v))
+function tokensOf(text: string, block: number, heading: boolean): Token[] {
+  const t = text.trim()
+  const folded = deaccent(t)
+  const mark = heading ? { heading: true as const } : {}
+  if (VALUE_BLOCK.test(folded) || PLOT_BLOCK.test(folded)) return [{ block, kind: 'V' }]
+  if (QUALIFIED_BLOCK.test(folded) || BLANK_BLOCK.test(folded)) return [{ block, kind: 'S' }]
+  const inline = inlineParts(t)
+  if (inline && /[a-z]{2}/i.test(deaccent(inline.label)) && inline.label.split(/\s+/).length <= 6) {
+    const key = factKeyOf(inline.label, 4)
+    return [key ? { block, kind: 'K', key, inline: true } : { block, kind: 'X', inline: true }, { block, kind: inline.qualified ? 'S' : 'V', inline: true }]
   }
-  const ambiguous = new Set([...blockValues.entries()].filter(([, vs]) => vs.size > 1).map(([k]) => k))
-  for (const p of [...facts.pairs, ...blockPairs(facts).filter((b) => !ambiguous.has(FACT_KEYS.find((f) => f.test.test(deaccent(b.label)))?.key ?? ''))]) {
-    const label = deaccent(p.label)
-    const raw = p.value
-    // a plot's two dimensions on one line: "21,40 x 18,5 m"
-    if (/wymiary dzialki|\bplot (size|dimensions)\b/.test(label)) {
-      // one dimension per line: "Min. wymiary działki dł." | "23,48 m"
-      const single = /\b(szer\w*|width)\b/.test(label) ? 'plot_min_width' : /\b(dl|dlug\w*|glebok\w*|length|depth)\b/.test(label) ? 'plot_min_depth' : undefined
-      if (single && !/[x×]/.test(raw)) {
-        const v = parseLocaleNumber(raw)
-        if (v !== null && v > 0 && !seen.has(single)) {
-          seen.add(single)
-          out.push({ key: single, label: p.label, value: v, unit: 'm', raw })
-        }
+  const key = factKeyOf(t, 6)
+  if (key) return [{ block, kind: 'K', key, ...mark }]
+  if (t.length < 3 || !/[a-z]{2}/i.test(folded)) return []
+  const words = t.split(/\s+/).length
+  // prose — a sentence, or a definition ("Wysokość budynku – liczona jako …") — is passed over, whatever words it uses
+  if (words >= 8 || /[.!?]$/.test(folded.replace(/\b(min|max|dl|szer|pow|gl|nr|ul|ok)\.$/, ''))) return []
+  if ((words >= 6 || t.length >= 40) && !LOOSE_VOCABULARY.test(folded)) return []
+  return [{ block, kind: 'X', ...mark }]
+}
+
+/** Label/value pairs a page builds from blocks rather than a table, each inside its own row. */
+export function blockPairs(facts: PageFacts, regions: PageRegions = pageRegions(facts)): LabelValue[] {
+  const out: LabelValue[] = []
+  const blocks = facts.blocks
+  // A table is the table reader's: a column header is not a row label, whatever the next cell says.
+  const inTable = (at: number): boolean => facts.tables.some((t) => at >= t.offset && at < t.end) || facts.gridRanges.some(([a, b]) => at >= a && at < b)
+  const tokens: Token[] = []
+  blocks.forEach((b, i) => {
+    if (inTable(b.offset) || regions.excluded(b.offset, b.path)) return
+    tokens.push(...tokensOf(b.text, i, /^h[1-6]$/.test(b.tag)))
+  })
+  // the label as printed, less its colon; its unit and standard are read from it later, not dropped here
+  const emit = (k: Token, v: Token, source: LabelValue['source']): void => {
+    const inline = k.inline ? inlineParts(blocks[k.block].text) : undefined
+    const label = (inline ? inline.label : blocks[k.block].text).replace(/[:\s–—-]+$/, '').trim()
+    const value = inline ? inline.value : blocks[v.block].text.trim()
+    out.push({ label, value, source, offset: blocks[k.block].offset })
+  }
+  // inline pairs are complete on their own
+  for (let i = 0; i + 1 < tokens.length; i++) if (tokens[i].inline && tokens[i].kind === 'K' && tokens[i + 1].block === tokens[i].block && tokens[i + 1].kind === 'V') emit(tokens[i], tokens[i + 1], 'inline')
+
+  const within = (lo: number, hi: number): Token[] => tokens.filter((u) => blocks[u.block].offset >= lo && blocks[u.block].offset < hi)
+  const flatMemo = new Map<number, Map<Token, Token>>()
+  const flat = (scope: number, members: Token[]): Map<Token, Token> => {
+    const memo = flatMemo.get(scope)
+    if (memo) return memo
+    // A heading that no figure follows is a section's title: it closes one run and opens the next.
+    const sections: Token[][] = [[]]
+    for (const [i, u] of members.entries()) {
+      const next = members[i + 1]
+      if (u.kind === 'X' && u.heading && !(next && !next.inline && (next.kind === 'V' || next.kind === 'S'))) {
+        sections.push([])
         continue
       }
-      const m = /(\d+[.,]?\d*)\s*[x×]\s*(\d+[.,]?\d*)/.exec(raw)
+      const seq = sections[sections.length - 1]
+      const last = seq[seq.length - 1]
+      // the label again (a tooltip's heading) is one label
+      if (u.kind === 'K' && !u.inline && last?.kind === 'K' && !last.inline && last.key === u.key) continue
+      seq.push(u)
+    }
+    const isLabel = (u: Token): boolean => u.kind === 'K' || u.kind === 'X'
+    const pairs = new Map<Token, Token>()
+    for (const seq of sections) {
+      const alternates = seq.length % 2 === 0 && seq.every((u, i) => isLabel(u) === (i % 2 === 0))
+      if (alternates) for (let i = 0; i < seq.length; i += 2) if (seq[i].kind === 'K' && !seq[i].inline && seq[i + 1].kind === 'V') pairs.set(seq[i], seq[i + 1])
+    }
+    flatMemo.set(scope, pairs)
+    return pairs
+  }
+  for (const t of tokens) {
+    if (t.kind !== 'K' || t.inline) continue
+    const path = blocks[t.block].path
+    for (let d = path.length - 1; d >= -1; d--) {
+      const scope = d >= 0 ? facts.elements[path[d]] : undefined
+      const members = scope ? within(scope.start, scope.end) : tokens
+      const others = members.filter((u, i) => (u.kind === 'X' && !(u.heading && !(members[i + 1] && !members[i + 1].inline && (members[i + 1].kind === 'V' || members[i + 1].kind === 'S')))) || (u.kind === 'K' && (u.inline || u.key !== t.key)))
+      const slots = members.filter((u) => !u.inline && (u.kind === 'V' || u.kind === 'S'))
+      if (others.length === 0 && slots.length === 0) continue
+      if (others.length === 0) {
+        if (slots.length === 1 && slots[0].kind === 'V') emit(t, slots[0], 'block')
+        break
+      }
+      const partner = flat(scope?.id ?? -1, members).get(t)
+      if (partner) emit(t, partner, 'block')
+      break
+    }
+  }
+  return out.sort((a, b) => a.offset - b.offset)
+}
+
+/**
+ * Every label/value pair the page states as its own: the structured readers'
+ * (table rows, `dl`, `label: value` list items) and the block reader's, minus
+ * those in chrome, controls and cards. What classification and the figures
+ * are read from, so a listing's tiles are nobody's figures.
+ */
+export function pagePairs(facts: PageFacts): LabelValue[] {
+  const regions = pageRegions(facts)
+  const structured = facts.pairs.filter((p) => !regions.excluded(p.offset))
+  return [...structured, ...blockPairs(facts, regions)].sort((a, b) => a.offset - b.offset)
+}
+
+/** Physically possible, whatever the label: a pitch under 90°, a building between 1 and 100 m tall, a positive area. */
+const plausible = (key: string, value: number): boolean =>
+  value > 0 && (key !== 'roof_pitch' || value < 90) && (key !== 'building_height' || (value > 1 && value < 100)) && (!key.startsWith('plot_') || value < 1000)
+
+/** The figures a page prints, keyed by the vocabulary of their labels. Two readings of one key that differ leave the key out. */
+export function genericFacts(facts: PageFacts): PublishedFact[] {
+  const readings = new Map<string, Array<{ label: string; raw: string; value: number; unit: FactUnit }>>()
+  const add = (key: string, label: string, raw: string, value: number | null, unit: FactUnit): void => {
+    if (value === null || !plausible(key, value)) return
+    readings.set(key, [...(readings.get(key) ?? []), { label, raw, value, unit }])
+  }
+  for (const p of pagePairs(facts)) {
+    const key = factKeyOf(p.label, 8)
+    if (!key) continue
+    const raw = p.value.trim()
+    const folded = deaccent(raw)
+    const labelUnit = cleanLabel(p.label).unit
+    if (key === 'plot') {
+      // a plot's two dimensions on one line: "21,40 x 18,5 m"
+      const m = PLOT_BLOCK.exec(folded) ?? (labelUnit === 'm' ? new RegExp(`^(${NUMBER})\\s*[x×]\\s*(${NUMBER})$`).exec(folded) : null)
       if (m) {
-        for (const [key, text] of [
-          ['plot_min_width', m[1]],
-          ['plot_min_depth', m[2]],
-        ] as const) {
-          const value = parseLocaleNumber(text)
-          if (value !== null && !seen.has(key)) {
-            seen.add(key)
-            out.push({ key, label: p.label, value, unit: 'm', raw })
-          }
-        }
+        add('plot_min_width', p.label, raw, parseLocaleNumber(m[1]), 'm')
+        add('plot_min_depth', p.label, raw, parseLocaleNumber(m[2]), 'm')
       }
       continue
     }
-    const mapped = FACT_KEYS.find((f) => f.test.test(label))
-    if (!mapped || seen.has(mapped.key)) continue
-    const value = parseLocaleNumber(raw)
-    if (value === null || value <= 0) continue
-    // Precision before reach, for every reader: a figure is a number and its unit, not a sentence with a number in it;
-    // a dimensional figure states its unit (in the value or the label); a count is a whole number; a label with a digit is a feature line.
-    if (/\d/.test(p.label.replace(/^\s*\d{1,2}\.\s+/, ''))) continue
-    if (!VALUE_BLOCK.test(deaccent(raw.trim()))) continue
-    if (p.source === 'block' || p.source === 'inline' || mapped.unit === 'count') {
-      if (mapped.unit === 'count' ? !/^\d{1,3}$/.test(raw.trim()) : !UNIT_STATED.test(deaccent(raw)) && !UNIT_STATED.test(label)) continue
-    }
-    seen.add(mapped.key)
-    out.push({ key: mapped.key, label: p.label, value, unit: unitOf(p.label, raw, mapped.unit), raw })
+    if (!VALUE_BLOCK.test(folded)) continue
+    const stated = statedUnit(raw)
+    const mapped = key === 'plot_min_width' || key === 'plot_min_depth' ? { unit: 'm' as FactUnit } : FACT_KEYS.find((f) => f.key === key)
+    if (!mapped) continue
+    // Precision before reach, for every reader: the figure's unit is the key's, stated in the value or the label.
+    const compatible =
+      mapped.unit === 'count'
+        ? stated === undefined && labelUnit === undefined && /^\d{1,3}$/.test(raw)
+        : mapped.unit === 'none'
+          ? stated === 'm3' || (stated === undefined && labelUnit === 'm3')
+          : stated === mapped.unit || (stated === undefined && labelUnit === mapped.unit)
+    if (!compatible) continue
+    add(key, p.label, raw, parseLocaleNumber(raw), mapped.unit)
+  }
+  const out: PublishedFact[] = []
+  for (const [key, rs] of readings) {
+    if (new Set(rs.map((r) => r.value)).size !== 1) continue
+    out.push({ key, label: rs[0].label, value: rs[0].value, unit: rs[0].unit, raw: rs[0].raw })
   }
   return out.sort((a, b) => compareCodeUnits(a.key, b.key))
 }
@@ -234,7 +365,8 @@ export function genericSpecifications(facts: PageFacts): PublishedSpecification[
     seen.add(dedupe)
     out.push({ key, label, text: trimmed })
   }
-  for (const p of facts.pairs) {
+  const regions = pageRegions(facts)
+  for (const p of facts.pairs.filter((x) => !regions.excluded(x.offset))) {
     const label = deaccent(p.label)
     const spec = SPEC_KEYS.find((k) => k.test.test(label))
     if (spec) push(spec.key, p.label, p.value)

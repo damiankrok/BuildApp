@@ -53,4 +53,16 @@ export function parseLocaleNumber(text: string): number | null {
  * outside its verified repertoire. Free-form page text (labels, descriptions,
  * captions) is ordered with this, never with `localeCompare`.
  */
+/** A percent-escaped address part, decoded; malformed escapes (a Latin-2 byte, a bare "%") are left as printed, never thrown. */
+export function safeDecode(text: string): string {
+  try {
+    return decodeURIComponent(text)
+  } catch {
+    return text.replace(/%([0-9a-f]{2})/gi, (whole, hex: string) => {
+      const code = parseInt(hex, 16)
+      return code < 0x80 ? String.fromCharCode(code) : whole
+    })
+  }
+}
+
 export const compareCodeUnits = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0)

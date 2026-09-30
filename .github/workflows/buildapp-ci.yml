@@ -980,7 +980,7 @@ jobs:
       - name: Attached bodies
         run: npx vitest run packages/reconstruction/test/attached-bodies.test.ts packages/reconstruction/test/shape-families.test.ts packages/reconstruction/test/failure-codes.test.ts
       - name: Generic source
-        run: npx vitest run packages/source-package/test/generic-structures.test.ts packages/source-package/test/generic.test.ts tests/architecture/generalization.test.ts
+        run: npx vitest run packages/source-package/test/generic-structures.test.ts packages/source-package/test/generic-regions.test.ts packages/source-package/test/generic.test.ts tests/architecture/generalization.test.ts
       - name: Metric regression (005B gates, unchanged)
         run: npx vitest run packages/source-metrics/test/orientation-metamorphic.test.ts packages/source-metrics/test/metric-solution.test.ts packages/source-metrics/test/registration.test.ts packages/source-metrics/test/scale-plausibility.test.ts packages/source-metrics/test/chains.test.ts packages/reconstruction/test/plan-extent.test.ts
       - name: Aster VIII, acquired live (cross-publisher probe)

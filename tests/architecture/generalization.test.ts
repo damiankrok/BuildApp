@@ -46,9 +46,9 @@ const fold = (s: string): string => s.normalize('NFD').replace(/\p{M}/gu, '').to
 type Registry = { ids: Set<string>; words: Set<string>; figures: Set<string>; dimensions: Set<string>; hosts: Set<string>; sources: number }
 
 /** Words every project page carries; they name no house. */
-const GENERIC = new Set(['projekt', 'projekty', 'projektu', 'domow', 'dom', 'domu', 'dane', 'www', 'html', 'php'])
+const GENERIC = new Set(['projekt', 'projekty', 'projektu', 'domow', 'dom', 'domu', 'domy', 'dane', 'www', 'html', 'php'])
 
-export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; project: { externalId?: string; name?: string }; publishedFacts?: Array<{ value: number }>; adapter?: { id: string } }>): Registry {
+export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; project: { externalId?: string; name?: string }; publishedFacts?: Array<{ value: number; unit?: string }>; adapter?: { id: string } }>): Registry {
   const r: Registry = { ids: new Set(), words: new Set(), figures: new Set(), dimensions: new Set(), hosts: new Set(), sources: packages.length }
   for (const p of packages) {
     const id = p.project.externalId ? fold(p.project.externalId) : undefined
@@ -66,9 +66,14 @@ export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; pro
       r.words.add(w)
     }
     for (const f of p.publishedFacts ?? []) {
+      // A count and a small whole number are anybody's. Every other figure in its printed two-decimal spelling
+      // ("278.30"), and in the short one a page or a comment would write when that drops only a trailing 0 and
+      // leaves at least three digits ("278.3"; 005C: the guard used to register neither, and missed both).
+      if (f.unit === 'count' || (Number.isInteger(f.value) && f.value < 100)) continue
       const s = f.value.toFixed(2)
-      // a figure ending in 0 is printed with fewer decimals; too short to be a fingerprint
-      if (!s.endsWith('0')) r.figures.add(s)
+      if (!s.endsWith('00')) r.figures.add(s)
+      const short = f.value.toFixed(1)
+      if (s.endsWith('0') && !s.endsWith('00') && f.value >= 10) r.figures.add(short)
     }
   }
   return r
@@ -184,6 +189,11 @@ describe('no development house in production (derived registry)', () => {
     expect(scan(`"${figure.replace('.', ',')} m²"`, registry).map((h) => h.kind)).toContain('FIGURE')
     // and not a longer number that merely contains one
     expect(scan(`const x = 1${figure}9`, registry).filter((h) => h.kind === 'FIGURE')).toEqual([])
+    // 005C: a figure printed with a trailing 0, in both spellings
+    const trailing = [...registry.figures].find((f) => /^\d{2,}\.[1-9]0$/.test(f))
+    expect(trailing).toBeDefined()
+    expect(scan(`const FOOTPRINT = ${trailing}`, registry).map((h) => h.kind)).toContain('FIGURE')
+    expect(scan(`// ${(trailing ?? '').slice(0, -1).replace('.', ',')} m² on the page`, registry).map((h) => h.kind)).toContain('FIGURE')
     const [dimension] = registry.dimensions
     expect(scan(`if (overallCm === ${dimension}) scale = 2.64`, registry).map((h) => h.kind)).toContain('DIMENSION')
     expect(scan(`// a chain of ${dimension} cm`, registry).map((h) => h.kind)).toContain('DIMENSION')
