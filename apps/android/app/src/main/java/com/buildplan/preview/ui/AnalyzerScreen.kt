@@ -462,6 +462,9 @@ private fun AnalyzerActivity(status: JobStatus?) {
         "OCR" -> count(counters["tokenGroups"]?.toInt(), counters["tokenGroupsTotal"]?.toInt(), R.string.analyzer_step_ocr)
         "CALLOUT_RINGS" -> count(counters["rings"]?.toInt(), counters["ringsTotal"]?.toInt(), R.string.analyzer_step_callouts)
         "CAMERAS" -> count(counters["cameras"]?.toInt(), counters["camerasTotal"]?.toInt(), R.string.analyzer_step_cameras)
+        "ORIENTATION" -> count(counters["chains"]?.toInt(), counters["chainsTotal"]?.toInt(), R.string.analyzer_step_orientation)
+        "SCALE" -> count(counters["hypothesis"]?.toInt(), counters["hypothesesTotal"]?.toInt(), R.string.analyzer_step_scale)
+        "EXTENT" -> count(counters["extent"]?.toInt(), counters["extentsTotal"]?.toInt(), R.string.analyzer_step_extent)
         else -> null
     }
     Column(verticalArrangement = Arrangement.spacedBy(Space.xxs)) {

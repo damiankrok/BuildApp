@@ -428,6 +428,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       ledgerViolations: reconstruction.violations.ledger.length,
       layoutReasons: reconstruction.layout.gate.reasons,
       openingFits: reconstruction.openingFits,
+      metric: reconstruction.planDiagnostics.plans.find((p) => p.frameId === reconstruction.planDiagnostics.selectedPlanFrameId)?.metric,
     })
 
     const result: LinkAnalysisResult = {

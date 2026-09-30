@@ -152,6 +152,7 @@ object AnalyzerMessages {
             "TIMEOUT" -> "Analiza trwała zbyt długo i została przerwana. Możesz spróbować ponownie."
             else -> when (failure.details?.reasonCode) {
                 "MODEL_EMISSION_FAILED" -> "Nie udało się poprawnie połączyć części ścian. Szczegóły są poniżej."
+                "METRIC_RESOLUTION_INCONCLUSIVE" -> "Nie udało się ustalić skali rzutu: wymiary odczytane z rysunku nie potwierdzają jednej skali, więc modelu nie zbudowano. Szczegóły są poniżej."
                 else -> "Analiza zatrzymała się: z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
             }
         }

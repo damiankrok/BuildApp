@@ -39,7 +39,7 @@ export type AnalysisDiagnostics = {
      * the one copy that survived is read from less than the page offered, and
      * this is where that shows.
      */
-    planAddressesLost: Array<{ code: string; storey?: string; annotation?: string }>
+    planAddressesLost: LostPlanAddress[]
   } | null
   plans: PlanDiagnosticsReport | null
   trace: AnalysisTrace
@@ -53,12 +53,38 @@ export type DiagnosticsBundle = {
 
 const units = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0)
 
+/**
+ * One exposed floor-plan address acquisition lost: the roles its name claimed,
+ * which copy it was — the file the publisher named, never a path on the device
+ * — at which stage it was lost and what the failure said (005B: so a phone run
+ * that keeps one copy of four says which three it dropped, and why).
+ */
+export type LostPlanAddress = { code: string; storey?: string; annotation?: string; file?: string; stage?: string; detail?: string }
+
+const fileOf = (target: string): string | undefined => {
+  try {
+    return new URL(target).pathname.split('/').filter(Boolean).at(-1)
+  } catch {
+    return undefined
+  }
+}
+
 /** The exposed floor-plan addresses acquisition lost, by the roles their names claimed. Deterministic order. */
-export function lostPlanAddresses(pkg: SourcePackage): Array<{ code: string; storey?: string; annotation?: string }> {
+export function lostPlanAddresses(pkg: SourcePackage): LostPlanAddress[] {
   return pkg.failures
     .filter((f) => f.claim?.document === 'FLOOR_PLAN' && f.claim.channel !== 'VARIANT_CONVENTION')
-    .map((f) => ({ code: f.code, ...(f.claim?.storey ? { storey: f.claim.storey } : {}), ...(f.claim?.annotation ? { annotation: f.claim.annotation } : {}) }))
-    .sort((a, b) => units(a.storey ?? '', b.storey ?? '') || units(a.annotation ?? '', b.annotation ?? '') || units(a.code, b.code))
+    .map((f) => {
+      const file = fileOf(f.target)
+      return {
+        code: f.code,
+        ...(f.claim?.storey ? { storey: f.claim.storey } : {}),
+        ...(f.claim?.annotation ? { annotation: f.claim.annotation } : {}),
+        ...(file ? { file } : {}),
+        stage: f.stage,
+        detail: f.message.slice(0, 160),
+      }
+    })
+    .sort((a, b) => units(a.storey ?? '', b.storey ?? '') || units(a.annotation ?? '', b.annotation ?? '') || units(a.code, b.code) || units(a.file ?? '', b.file ?? ''))
 }
 
 export function sourceSummaryOf(pkg: SourcePackage): NonNullable<AnalysisDiagnostics['source']> {

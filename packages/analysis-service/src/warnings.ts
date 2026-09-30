@@ -63,6 +63,8 @@ export type WarningInputs = {
   layoutReasons?: ReadonlyArray<{ code: string; severity: 'NOTED' | 'DEGRADING' | 'BLOCKING'; what: string }>
   /** Openings the model could not take as printed; only the ones not built at all limit. */
   openingFits?: ReadonlyArray<{ openingId: string; action: string; why: string }>
+  /** 005B: the base plan's independent metric solution. A scale one reading states, or none states, limits. */
+  metric?: { confidence: string; relation: string; independentWitnesses: number; isotropy: string }
 }
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`
@@ -101,6 +103,10 @@ export function warningsOf(input: WarningInputs): AnalysisWarning[] {
   const notBuilt = (input.openingFits ?? []).filter((f) => f.action === 'DROPPED')
   if (notBuilt.length > 0) out.push({ code: 'OPENINGS_NOT_BUILT', severity: 'LIMITING', message: `${plural(notBuilt.length, 'opening the drawings print was', 'openings the drawings print were')} not built: ${notBuilt.map((f) => f.openingId).join(', ')}` })
 
+  if (input.metric?.confidence === 'WEAK')
+    out.push({ code: 'METRIC_SCALE_WEAK', severity: 'LIMITING', message: `the plan's scale rests on ${plural(input.metric.independentWitnesses, 'printed dimension', 'printed dimensions')} read as printed and nothing independent confirms it` })
+  else if (input.metric?.confidence === 'INCONCLUSIVE')
+    out.push({ code: 'METRIC_SCALE_UNSUPPORTED', severity: 'LIMITING', message: 'no printed dimension read as printed supports the plan\u2019s scale: every value that agrees with it was fitted to it' })
   if (input.residualsOutside > 0) out.push({ code: 'RESIDUALS_OUTSIDE_TOLERANCE', severity: 'LIMITING', message: `${input.residualsOutside} of ${input.residuals} source-view checks outside tolerance` })
   if (input.exteriorJointErrors > 0) out.push({ code: 'EXTERIOR_JOINTS', severity: 'LIMITING', message: `${plural(input.exteriorJointErrors, 'exterior joint finding', 'exterior joint findings')} in the closure audit` })
   if (input.graphViolations + input.ledgerViolations > 0) {
