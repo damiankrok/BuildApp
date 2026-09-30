@@ -768,12 +768,16 @@ jobs:
     # - Metamorphic URLs: tracking keys, order, fragment, trailing slash,
     #   canonical link and redirect.
     # - Order and determinism.
-    # - The known set the resolver had to fix. These are the OWNER's phone
+    # - The known set the resolver had to answer. These are the OWNER's phone
     #   case (Kosaćce with only its area-table plan copy) and Rarytasy e-OZE
     #   (every copy, and the area copy alone). Their sealed evidence goes
-    #   through today's solver to the committed model hashes.
+    #   through today's solver and is judged by rule, not by a pinned hash
+    #   (post-Council): the house's own body count, a plan resolved within 6 %
+    #   of a published figure the resolver was free to use, and a refusal only
+    #   where the row allows one, by name (scripts/known-row.mjs).
     #   It is a hard gate whenever the publisher's images can be fetched;
-    #   they are never committed.
+    #   they are never committed. Only a publisher that cannot be reached at
+    #   all is a warning; any other failure to fetch fails the job.
     # Image-transform robustness is measured and reported, not gated
     # (Council decision).
     name: Analyzer / generalization
@@ -782,7 +786,6 @@ jobs:
     timeout-minutes: 45
     env:
       BEFORE: stage-reports/artifacts/analyzer-005a/before
-      RESOLVED: stage-reports/artifacts/analyzer-005a/resolver
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -795,32 +798,41 @@ jobs:
         run: npm ci
       - name: Purity, source invariance, harmless order and determinism
         run: npx vitest run tests/architecture/generalization.test.ts packages/source-package/test/logical-identity.test.ts packages/analysis-service/test/generic-source.test.ts packages/source-metrics/test/extract.test.ts packages/analysis-service/test/service.test.ts
-      - name: The publisher's drawings for the known set (advisory — fetched, never committed)
-        continue-on-error: true
+      - name: The publisher's drawings for the known set (fetched, never committed)
         run: |
+          mkdir -p .cache
           for n in kosacce-clean rarytasy-eoze; do
             url=$(node -e "console.log(require('./$BEFORE/$n/source-package.json').canonicalUrl)")
-            npm run -s source:acquire -- "$url" --cache ".cache/known-$n" --quiet || echo "::warning::$n: the publisher's drawings could not be fetched"
+            if out=$(npm run -s source:acquire -- "$url" --cache ".cache/known-$n" --quiet 2>&1); then
+              echo ok > ".cache/known-$n.status"
+            elif echo "$out" | grep -q "the page could not be fetched"; then
+              echo unreachable > ".cache/known-$n.status"
+              echo "::warning::$n: the publisher's page could not be reached; this row is not judged"
+            else
+              echo failed > ".cache/known-$n.status"
+              echo "$out" | tail -n 5
+            fi
           done
-      - name: The known set through today's solver reaches the committed models
+      - name: The known set through today's solver, judged by rule
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p known
           # ground-storey plan copies other than the area table: withheld for the "area copy alone" rows
           dimensioned() { node -e "const g=require('./$BEFORE/$1/observation-graph.json'); console.log(g.coordinateFrames.filter((f)=>f.roles.projection==='ORTHOGRAPHIC_PLAN'&&f.roles.document==='FLOOR_PLAN'&&['GROUND','UNKNOWN'].includes(f.roles.storey)&&f.roles.annotation==='DIMENSIONED').map((f)=>f.id).join(','))"; }
-          row() { # row <name> <sealed> <expected digest dir> [drop]
-            if [ ! -d ".cache/known-$2" ]; then echo "::warning::$1: no drawings fetched; skipped"; return 0; fi
+          row() { # row <name> <sealed> <bodies> <must-complete|may-refuse> [drop]
+            status=$(cat ".cache/known-$2.status" 2>/dev/null || echo missing)
+            if [ "$status" = unreachable ]; then echo "::warning::$1: not judged, the publisher could not be reached"; return 0; fi
+            if [ "$status" != ok ]; then echo "::error::$1: the publisher's drawings were not fetched ($status)"; return 1; fi
             OFFLINE=1 npm run -s analysis:second-house -- --package "$BEFORE/$2/source-package.json" --graph "$BEFORE/$2/observation-graph.json" \
-              --metrics "$BEFORE/$2/metric-evidence.json" --cache ".cache/known-$2" --out "known/$1" ${4:+--drop-frames "$4"} --expect COMPLETED | tail -n 3
-            node -e "
-              const got = require('./known/$1/result-summary.json').modelHash, want = require('./$RESOLVED/$3/result-summary.json').modelHash
-              if (got !== want) { console.error('::error::$1 model', got, '!=', want); process.exit(1) }
-              console.log('$1: model', got.slice(0, 16), '= committed')
-            "
+              --metrics "$BEFORE/$2/metric-evidence.json" --cache ".cache/known-$2" --out "known/$1" ${5:+--drop-frames "$5"} > "known/$1.log" 2>&1
+            tail -n 3 "known/$1.log"
+            node packages/analysis-service/scripts/known-row.mjs "known/$1" "$3" "$4"
           }
-          row kosacce-area-copy-alone kosacce-clean kosacce-clean-only-853A "$(dimensioned kosacce-clean)"
-          row eoze-every-copy rarytasy-eoze rarytasy-eoze-all
-          row eoze-area-copy-alone rarytasy-eoze rarytasy-eoze-only-853A "$(dimensioned rarytasy-eoze)"
+          # The area copy alone reads Kosaćce two ways and only the published figure tells them apart, after it
+          # refused the first one: named, not built. e-OZE's first reading stops on the drawing: it must complete.
+          row kosacce-area-copy-alone kosacce-clean 3 may-refuse "$(dimensioned kosacce-clean)"
+          row eoze-every-copy rarytasy-eoze 1 must-complete
+          row eoze-area-copy-alone rarytasy-eoze 1 must-complete "$(dimensioned rarytasy-eoze)"
       - name: Upload the known-set record
         if: always()
         uses: actions/upload-artifact@v4
@@ -1003,7 +1015,7 @@ jobs:
     # INTEGRATION-003C: never publish to the owner an APK whose 3D place was
     # not seen to draw the house on the emulator, or whose product journey
     # and screenshots did not pass the UI evidence gate.
-    needs: [android, android-3d-gate, android-ui-evidence, third-house-kosacce]
+    needs: [android, android-3d-gate, android-ui-evidence, third-house-kosacce, analyzer-generalization, plan-resolver, analyzer-progress]
     if: github.event_name == 'workflow_dispatch' && inputs.owner_apk && !inputs.only_ui_evidence
     runs-on: ubuntu-latest
     timeout-minutes: 10
