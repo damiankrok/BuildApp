@@ -1,0 +1,1428 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-dodatkowa-w-d60aa6e7e4",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzykach 3 (g2) dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-9d4f01ddc59d2b2c27-fbf544ce63",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "ce17c41c6f887f847fdad9e9aab6b5d55daa7649a2dc6d6dad8644382cf43685",
+          "byteLength": 399178,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdf423d61e7247/carousel_images",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-9d4f01ddc59d2b2c27-fbf544ce63",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/fm/projekt-dom-w-modrzykach-3-g2-9d4f01ddc59d2b2c27b02a82e55fa7ea__55299.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-elewacja-bo-7bc683ee7b",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-2196f2c1b76e90eed5-3e61f33ff1",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x560 over 550x240",
+      "variants": [
+        {
+          "aspect": 2.285714,
+          "byteHash": "f7fee1d96a225e0a101d9924a49856620b5fe4797a54f8de73a847e1e79a9ee4",
+          "byteLength": 201451,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 560,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-2196f2c1b76e90eed5-3e61f33ff1",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-2196f2c1b76e90eed598c48075e062d6__11265.jpg"
+        },
+        {
+          "aspect": 2.291667,
+          "byteHash": "b64d8acc43d08a5e47e19fae8ca66f7f8c96d3080b561114abc47633a148cfe7",
+          "byteLength": 48451,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 240,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-elewacja-boczna-projekt-dom-w-modrzykach-3-g2-e6-c0cff4050d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-boczna-projekt-dom-w-modrzykach-3-g2-e69010c85d5858d916d1c089170c8dce__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-elewacja-bo-fc99a75b1d",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-fd5482a5fb91e10c2d-02202a27c2",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x560 over 550x240",
+      "variants": [
+        {
+          "aspect": 2.285714,
+          "byteHash": "801d8a76731c9c9fcd3eb50cb66208196f630c65328c3c8415b66e42979856c5",
+          "byteLength": 206979,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 560,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-fd5482a5fb91e10c2d-02202a27c2",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-fd5482a5fb91e10c2d392645a4cc69e9__11266.jpg"
+        },
+        {
+          "aspect": 2.291667,
+          "byteHash": "1c8ce45ba6fa2dd2fc0a1909ec7ebd4f2149bbfb44cc24468af765964ab73b09",
+          "byteLength": 49617,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 240,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-elewacja-boczna-projekt-dom-w-modrzykach-3-g2-58-cb0854c233",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-boczna-projekt-dom-w-modrzykach-3-g2-581fd24d7f680052e2d3cf7e872f4955__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-elewacja-fr-179c554fdf",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-68283d041b38176839-66702d70ad",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x560 over 550x240",
+      "variants": [
+        {
+          "aspect": 2.285714,
+          "byteHash": "2e0db294fdc9d49adc9ca3545b2966bcc678955ba0ddf22345f7c201459586b6",
+          "byteLength": 175460,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 560,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-68283d041b38176839-66702d70ad",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-68283d041b38176839da8c4cc59cd49c__11264.jpg"
+        },
+        {
+          "aspect": 2.291667,
+          "byteHash": "07df43a23321fad21d6a72a18eb90a2d9674eeeaa276682355646375eb3f356c",
+          "byteLength": 43117,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 240,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-elewacja-frontowa-projekt-dom-w-modrzykach-3-g2-790ae3e204",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-frontowa-projekt-dom-w-modrzykach-3-g2-3d2823f7a075a13ae4cb1486be63371c__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-elewacja-og-8819c25c43",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w modrzykach 3 (g2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-36d83f54e1fb2b6a39-09fe193831",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x560 over 550x240",
+      "variants": [
+        {
+          "aspect": 2.285714,
+          "byteHash": "28127a6e7ad6f2bec6dac1719d7166904bc5c9b5ad6c4d4e351cff5c3142ee28",
+          "byteLength": 177511,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 560,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-36d83f54e1fb2b6a39-09fe193831",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-36d83f54e1fb2b6a397a44e2d764f209__11267.jpg"
+        },
+        {
+          "aspect": 2.291667,
+          "byteHash": "0c243682ee64d0120b48eefbc09ec3c5f53828c94fa97aab9d986eb89885d5df",
+          "byteLength": 43284,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 240,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-modrzykach-3-g2-260c72c8a8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-ogrodowa-projekt-dom-w-modrzykach-3-g2-bb172bdd658507acd563334873919779__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-przekroj-bu-6b77b693a1",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzykach 3 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzykach 3 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzykach 3 (g2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1-8f602a530f",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "7ca20affcf2fde7afce6056fd0c344feb1e6cd6733ad243e136fe6edf30921b6",
+          "byteLength": 69927,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mdf423d61e7247/przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1b9162c506a3f10c084b0d4d4ae29eb1__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1-8f602a530f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1b9162c506a3f10c084b0d4d4ae29eb1__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "65e56c29f58c69ea8f3cccf032b9c36b423ee2f3cb08d50c7e23cc6ddb68ad58",
+          "byteLength": 17921,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1-703253a47a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/przekroj-budynku-projekt-dom-w-modrzykach-3-g2-1b9162c506a3f10c084b0d4d4ae29eb1__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-rzut-parter-11acb47252",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-modrzykach-3-g2-438dc-1f4008663a",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "3fb6d13cb0eebea55e2831bd32853b7dc461e3207bdf26e97e41bb7d607cd67e",
+          "byteLength": 59814,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdf423d61e7247/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-modrzykach-3-g2-438dc-1f4008663a",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/rzut-parteru-projekt-dom-w-modrzykach-3-g2-438dc136767d62f24b671d6bccb25dd6__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-sytuacja-634eeba13b",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w modrzykach 3 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w modrzykach 3 (g2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-cf456b8684374acdd6-f8f42f4e2a",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "6e48f2b87e893a1a39dd843ad45875dd77e74c94e223be705cea046d8e6a1a9b",
+          "byteLength": 249329,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-cf456b8684374acdd6-f8f42f4e2a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-cf456b8684374acdd67c69fd7745d3ee__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "8b0dc9dd7386a6fb8133a0a1f6b60516d855539abaa80392af73a640c40b6da5",
+          "byteLength": 49317,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-sytuacja-projekt-dom-w-modrzykach-3-g2-fd3530e21-63ceed6281",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/sytuacja-projekt-dom-w-modrzykach-3-g2-fd3530e21b5c2a385f021f3a793bb496__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzykach 3 (G2) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-modrzykach-3-g2-widok-1-c12dffe99f",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzykach 3 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-modrzykach-3-g2-bf09be0744-6ca2db6380",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "596e023123f679107e7f7a70a4d6d63a92d9fa7883177cbbe4375d6d800e4025",
+          "byteLength": 8995,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-widok-1-projekt-dom-w-modrzykach-3-g2-bf09be0744-6ca2db6380",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-1-projekt-dom-w-modrzykach-3-g2-bf09be074463265338d548eebc2623db__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzykach 3 (G2)",
+      "id": "asset-projekt-dom-w-modrzykach-3-g2-20b94428bc",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-modrzykach-3-g2-5c27ae3f97-22497a3865",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "87f8f1bd88d0a2ab616ab71772d90181c44916182115559795117ac67022d291",
+          "byteLength": 34778,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdf423d61e7247/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-modrzykach-3-g2-5c27ae3f97-22497a3865",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-2-projekt-dom-w-modrzykach-3-g2-5c27ae3f97a02fce0e9d9464b8adfa08__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzykach 3 (G2)",
+      "id": "asset-projekt-dom-w-modrzykach-3-g2-cd6587ddfb",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-modrzykach-3-g2-fbb1a-172319a8d0",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "edb5faf8b42a54e7917ca106289af697748c4f9aca339a1bb51c3c07fbe191d6",
+          "byteLength": 35847,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdf423d61e7247/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-modrzykach-3-g2-fbb1a-172319a8d0",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/rzut-parteru-projekt-dom-w-modrzykach-3-g2-fbb1a188b7f5d41190609b5d6ac31ada__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzykach 3 (G2)",
+      "id": "asset-projekt-dom-w-modrzykach-3-g2-f05fbec6c4",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-5f95b2e142e0555619-30a64a74f9",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "0563eae66f246c198f36590956559cc3c20f103578466f3ee87f5e89cbea2f31",
+          "byteLength": 30665,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdf423d61e7247/related?scope=family",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-5f95b2e142e0555619-30a64a74f9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-5f95b2e142e0555619b5ecbaea4663f7__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-0a0a6be1b9",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdf423d61e7247/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdf423d61e7247/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-modr-34525c5353",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "8b4dcf7a598c0861709321e543e2683bcb887964f0c9f62439b5523b2a92f7c2",
+          "byteLength": 105754,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-modr-34525c5353",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/rzut-parteru-z-powierzchniami-projekt-dom-w-modrzykach-3-g2-5f7d73c74d918fa123cd9761aab9d12b__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-fb7476d8f1",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdf423d61e7247/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdf423d61e7247/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzykach 3 (g2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzykach-3-g2-a34ae83c9728e4ba44-c1cbdac06d",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+          "byteLength": 133323,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-projekt-dom-w-modrzykach-3-g2-a34ae83c9728e4ba44-c1cbdac06d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-a34ae83c9728e4ba44ba5880a1fb022c__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-modrzykach-3-g2-91cefcd7c1",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzykach 3 (g2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-modrzykach-3-g2-526b70bcf5-15c74a6698",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b15504ef6fa0dd5eaac6a960b1f464abad7b55a0a7845cc8ca6496115c2e5e60",
+          "byteLength": 163158,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-widok-1-projekt-dom-w-modrzykach-3-g2-526b70bcf5-15c74a6698",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-1-projekt-dom-w-modrzykach-3-g2-526b70bcf578befea3e670e1b5317ad5__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-modrzykach-3-g2-6d3e9b845f",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzykach-3-g2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzykach 3 (g2) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-modrzykach-3-g2-46fa5927b6-1711d4253d",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "59c8b347d4ed834c3e6a7f4584adbdd72225439162c8901f5b55c618c0f4c792",
+          "byteLength": 194174,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+          "id": "var-widok-2-projekt-dom-w-modrzykach-3-g2-46fa5927b6-1711d4253d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-2-projekt-dom-w-modrzykach-3-g2-46fa5927b6830ade14f549d3814b5dd1__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+  "contentHash": "ef8d5c6e7d5e09ed6c4df154a4c64d7e9115022755eafa97901e419d0132ada2",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-5f95b2e142e0555619b5ecbaea4663f7__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/rzut-parteru-projekt-dom-w-modrzykach-3-g2-438dc136767d62f24b671d6bccb25dd6__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/rzut-parteru-projekt-dom-w-modrzykach-3-g2-fbb1a188b7f5d41190609b5d6ac31ada__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-1-projekt-dom-w-modrzykach-3-g2-526b70bcf578befea3e670e1b5317ad5__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-1-projekt-dom-w-modrzykach-3-g2-bf09be074463265338d548eebc2623db__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-2-projekt-dom-w-modrzykach-3-g2-46fa5927b6830ade14f549d3814b5dd1__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/widok-2-projekt-dom-w-modrzykach-3-g2-5c27ae3f97a02fce0e9d9464b8adfa08__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-fd5482a5fb91e10c2d392645a4cc69e9__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-boczna-projekt-dom-w-modrzykach-3-g2-581fd24d7f680052e2d3cf7e872f4955__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-2196f2c1b76e90eed598c48075e062d6__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-boczna-projekt-dom-w-modrzykach-3-g2-e69010c85d5858d916d1c089170c8dce__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-68283d041b38176839da8c4cc59cd49c__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-frontowa-projekt-dom-w-modrzykach-3-g2-3d2823f7a075a13ae4cb1486be63371c__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-36d83f54e1fb2b6a397a44e2d764f209__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/elewacja-ogrodowa-projekt-dom-w-modrzykach-3-g2-bb172bdd658507acd563334873919779__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdf423d61e7247/projekt-dom-w-modrzykach-3-g2-cf456b8684374acdd67c69fd7745d3ee__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdf423d61e7247/sytuacja-projekt-dom-w-modrzykach-3-g2-fd3530e21b5c2a385f021f3a793bb496__11255.jpg"
+    }
+  ],
+  "id": "src-mdf423d61e7247-5bb6a5a0db",
+  "pageHash": "def0fc941a5ebc5d94e34ac14a2c5063f081e4fe4f7519b5df94a3f537d70646",
+  "project": {
+    "externalId": "mdf423d61e7247",
+    "name": "Projekt domu Dom w modrzykach 3 (G2) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "3,81 m&sup2;",
+      "unit": "m2",
+      "value": 3.81
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "6,57 m",
+      "unit": "m",
+      "value": 6.57
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "135,56 m&sup2;",
+      "unit": "m2",
+      "value": 135.56
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "181,98 m&sup2;",
+      "unit": "m2",
+      "value": 181.98
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "35,64 m&sup2;",
+      "unit": "m2",
+      "value": 35.64
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu",
+      "raw": "96,11 m&sup2;",
+      "unit": "m2",
+      "value": 96.11
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "263,5 m&sup2;",
+      "unit": "m2",
+      "value": 263.5
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "171,93 m&sup2;",
+      "unit": "m2",
+      "value": 171.93
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "135,56 m&sup2;",
+      "unit": "m2",
+      "value": 135.56
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "893,19 m&sup3;",
+      "unit": "none",
+      "value": 893.19
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.14,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 4,14 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.73,
+      "index": 2,
+      "label": "Łazienka",
+      "raw": "2. Łazienka | 3,73 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.19,
+      "index": 3,
+      "label": "Hol",
+      "raw": "3. Hol | 5,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.37,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 12,37 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 27.19,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 27,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.53,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 5,53 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.74,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 12,74 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.2,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 10,20 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.18,
+      "index": 9,
+      "label": "Korytarz",
+      "raw": "9. Korytarz | 5,18 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.84,
+      "index": 10,
+      "label": "Pokój",
+      "raw": "10. Pokój | 9,84 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.81,
+      "index": 11,
+      "label": "Kotłownia z pralnią",
+      "raw": "11. Kotłownia z pralnią | 3,81 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 35.64,
+      "index": 12,
+      "label": "Garaż",
+      "raw": "12. Garaż | 35,64 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Prezentowany projekt to pomniejszona wersja „|Domu w modrzykach (G2)|”. To propozycja, która z pewnością zainteresuje Inwestorów, poszukujących projektu niewielkiej parterówki o nowoczesnym wyglądzie i wygodnym programie użytkowym. Prosta bryła „Domu w modrzykach 3 (G2)” atrakcyjnie prezentuje się w oprawie jasnego tynku i naturalnych okładzin. Funkcjonalnie zorganizowany program wewnętrzny w optymalny sposób wykorzystuje dostępną powierzchnię. Przestrzeń wypoczynkową salonu powiększa częściowo zadaszony taras. Z jadalni, zlokalizowanej w centralnej części strefy dziennej, rozpościera się szeroki widok na ogród. Atutem projektu jest duża, ustawna kuchnia, w której programie przewidziano obszerne blaty, wysoką zabudowę oraz nowoczesną wyspę z miejscem do spożywania posiłków. W zacisznej strefie nocnej mieszczą się trzy sypialnie, dwie z nich mają bezpośredni dostęp do ogrodu. W programie użytkowym domu przewidziano dwie łazienki, a przez kotłownię, w której można zorganizować także pralnię, dostępny jest dwustanowiskowy garaż. „Dom w modrzykach 3 (G2)” to atrakcyjny projekt małej parterówki, który należy także do kolekcji: gotowe projekty małych domów , projekty domów nowoczesnych , projekty domów z dachem czterospadowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy, możliwość zamiany na paliwo stałe po adaptacji"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "czterospadowy, nachylenie 25 st. , więźba drewniana, dachówka ceramiczna CREATON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny parterowy , strop płyta żelbetowa , 96.11 m² + 35.64 m² + 3.81 m² , 4 pokoje, kuchnia, 2 łazienki, kotłownia, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

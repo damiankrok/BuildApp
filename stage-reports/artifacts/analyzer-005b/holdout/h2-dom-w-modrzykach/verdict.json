@@ -1,0 +1,49 @@
+{
+  "run": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/h2/out-h2",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "GROUND"
+  ],
+  "publishedFootprintM2": 181.98,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 172,
+      "tallestPx": 75,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 16
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_LAYOUT_REJECTED",
+    "message": "the lowest storey covers 14.72 m² against the 181.98 m² the publisher prints — 91.9% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 16,
+    "distinctOutlines": 12,
+    "firstReading": "PLAN_LAYOUT_REJECTED",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy dimensioned 6827e718fe, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 14.7 m² (-91.9% of 181.98), WRONG, corroborated by ISOTROPY",
+    "reading2": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 2 bodies, 22.7 m² (-87.5% of 181.98), WRONG",
+    "reading3": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, outer faces, pocket mouths shut: 2 bodies, 23.9 m² (-86.9% of 181.98), WRONG",
+    "reading4": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 15.8 m² (-91.3% of 181.98), WRONG",
+    "readings": 63,
+    "resolverVersion": "1.3.0"
+  },
+  "verdict": "ALGORITHMIC_FAIL"
+}

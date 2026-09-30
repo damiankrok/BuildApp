@@ -1,0 +1,38 @@
+{
+  "code": "RECONSTRUCTION_FAILED",
+  "diagnostics": {
+    "bestReading": "copy dimensioned 1303e6adfb, wall-ink extent, registered scale, largest-first tiling, sides as gridded",
+    "builtRegions": 2,
+    "cells": 33,
+    "dimensionChains": 47,
+    "dimensionChainsRead": 7,
+    "distinctOutlines": 4,
+    "enclosedCells": 17,
+    "extentProvenance": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+    "gridLinesX": 12,
+    "gridLinesY": 4,
+    "independentWitnesses": 5,
+    "masses": 2,
+    "metricConfidence": "STRONG",
+    "metricIsotropy": "MEASURED",
+    "metricRelation": "CONFIRMED",
+    "planFrames": 12,
+    "planSizePx": "853x853",
+    "plansRead": 3,
+    "readingsWeighed": 8,
+    "recessRegions": 1,
+    "scaleCmPerPx": 2.2182,
+    "selectedPlanFrameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+    "wallBands": 31,
+    "wallThicknessPx": 14,
+    "walledEnvelope": true,
+    "wideOpenings": 0,
+    "wideOpeningsClosed": 0
+  },
+  "message": "2 walled regions of the 853×853 px floor plan were found, but no building mass could be made from them that places the front of the building; 8 other readings of the plan were weighed and none survived to a full composition",
+  "reasonCode": "PLAN_NO_MASSES",
+  "stage": "REGISTERING_VIEWS",
+  "substage": "STRUCTURAL_LAYOUT",
+  "title": "Could not reconstruct the floor-plan body"
+}
+

@@ -1,0 +1,51 @@
+{
+  "run": "/tmp/claude-0/-home-user/5eccf0e3-4ef3-5405-aafb-08cd5094f39b/scratchpad/h2/out-h1",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "BASEMENT",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 101.7,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 125,
+      "tallestPx": 48,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 14
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_NO_MASSES",
+    "message": "2 walled regions of the 853×853 px floor plan were found, but no building mass could be made from them that places the front of the building; 8 other readings of the plan were weighed and none survived to a full composition"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 2,
+    "distinctOutlines": 4,
+    "firstReading": "PLAN_NO_MASSES",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SCORED",
+    "reading1": "copy dimensioned 1303e6adfb, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 40.4 m² (-60.3% of 101.7), WRONG",
+    "reading2": "copy dimensioned 1303e6adfb, wall-ink extent, registered scale, largest-first tiling, outer faces: 2 bodies, 42.8 m² (-57.9% of 101.7), WRONG",
+    "reading3": "copy dimensioned 1303e6adfb, chain extent, registered scale, largest-first tiling, sides as gridded: 3 bodies, 40.1 m² (-60.6% of 101.7), WRONG, DEGENERATE_GEOMETRY",
+    "reading4": "copy dimensioned 1303e6adfb, chain extent, registered scale, largest-first tiling, outer faces: 3 bodies, 43.1 m² (-57.6% of 101.7), WRONG, DEGENERATE_GEOMETRY",
+    "readings": 8,
+    "resolverVersion": "1.3.0"
+  },
+  "verdict": "ALGORITHMIC_FAIL"
+}

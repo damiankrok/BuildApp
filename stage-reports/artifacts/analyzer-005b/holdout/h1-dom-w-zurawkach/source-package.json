@@ -1,0 +1,2366 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-elewacja-bocz-9b7e3c5c38",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-dc8988dcfc222f00a656-4b2174e78d",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x721 over 550x310",
+      "variants": [
+        {
+          "aspect": 1.775312,
+          "byteHash": "97806400429a041cff14564c3ef78fb9d4803f2ef172042e047b2fb5a278b372",
+          "byteLength": 322293,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 721,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-dc8988dcfc222f00a656-4b2174e78d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-dc8988dcfc222f00a656d480e973f914__11266.jpg"
+        },
+        {
+          "aspect": 1.774194,
+          "byteHash": "6d0e84aa9827b8b126cdc792b1c6318bf2099420e501414a2da1691e07033dfd",
+          "byteLength": 75701,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 310,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-elewacja-boczna-projekt-dom-w-zurawkach-3-p-21be-497b0c1baf",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-boczna-projekt-dom-w-zurawkach-3-p-21bea15d0c4bb8ae0b6248d4276dfb27__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-elewacja-bocz-d55f0def00",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-94e19e91e210be941c3f-aac0b7cf47",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x721 over 550x310",
+      "variants": [
+        {
+          "aspect": 1.775312,
+          "byteHash": "5871a94e9a30833c7768f563045e868b4c8a3fa3a086cc34352b9958b6feee67",
+          "byteLength": 314652,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 721,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-94e19e91e210be941c3f-aac0b7cf47",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-94e19e91e210be941c3f9dc4ea7f4a6f__11265.jpg"
+        },
+        {
+          "aspect": 1.774194,
+          "byteHash": "1caef51af5e7ae342af9c5d3ed921bbdcfe7229b9fa3726f26d2c1d47f3d7421",
+          "byteLength": 72825,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 310,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-elewacja-boczna-projekt-dom-w-zurawkach-3-p-6e27-6b405c20a1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-boczna-projekt-dom-w-zurawkach-3-p-6e27056c9d53305567908140dbff5335__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-elewacja-fron-90efe79ef9",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-b6d5cd720cf532c16768-a1f0e76e33",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x721 over 550x310",
+      "variants": [
+        {
+          "aspect": 1.775312,
+          "byteHash": "b5dd401870081afdcac60d160bbf8f5ccbad53ce96559b81334ea452888bdae9",
+          "byteLength": 307080,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 721,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-b6d5cd720cf532c16768-a1f0e76e33",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-b6d5cd720cf532c16768c6b5ba2493e4__11264.jpg"
+        },
+        {
+          "aspect": 1.774194,
+          "byteHash": "59b707763ff61b5c789d6921efa021ecad83c0e6c625d0707f99d0712bed089a",
+          "byteLength": 74785,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 310,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-elewacja-frontowa-projekt-dom-w-zurawkach-3-p-f2-a24e0c3ba2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-frontowa-projekt-dom-w-zurawkach-3-p-f28df3b4f21a7fd02f2c6be9a5d80019__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-elewacja-ogro-01a0f93fdb",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w zurawkach 3 (p) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-5e6aaf86be1881c61df1-e3d69d6aca",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x721 over 550x310",
+      "variants": [
+        {
+          "aspect": 1.775312,
+          "byteHash": "3186bfdf401da0bf3ab25705c5e8ddf23ae2f818c21ed51fcd5412786bdfecc4",
+          "byteLength": 288510,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 721,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-5e6aaf86be1881c61df1-e3d69d6aca",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-5e6aaf86be1881c61df1bdd63422e471__11267.jpg"
+        },
+        {
+          "aspect": 1.774194,
+          "byteHash": "ebd0b8f250907fd05ad52088220e4189256ed85fbc7362e811ff5896a90f72c4",
+          "byteLength": 70192,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 310,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-zurawkach-3-p-1f-4fdaa771ef",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-ogrodowa-projekt-dom-w-zurawkach-3-p-1fcf19f38736967c4891b82351afb4d4__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-przekroj-budy-d18d2638c9",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zurawkach 3 (p) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zurawkach 3 (p) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w zurawkach 3 (p) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6-915b9507aa",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "2194dd4fa0a4c94853ef8b00af7478a185219fb29daf16e4ca2eed1f4eada31a",
+          "byteLength": 73581,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/md4e2138a2d1a5/przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6fdfbee7946d8adf46c991f8eb3fe5__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6-915b9507aa",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6fdfbee7946d8adf46c991f8eb3fe5__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "d1458117525083d38dbb2ca4f16efa50c65eee9f875ca307d429464596796f91",
+          "byteLength": 18759,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6-19794f71a8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/przekroj-budynku-projekt-dom-w-zurawkach-3-p-5c6fdfbee7946d8adf46c991f8eb3fe5__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-parteru-f3f4db008f",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-zurawkach-3-p-fec9b23-b4edab1324",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f70accd792c1b5c23bfcd9d70b07ee1b91f46bfc2ccb1c5788943d9390c35319",
+          "byteLength": 47169,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-zurawkach-3-p-fec9b23-b4edab1324",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-parteru-projekt-dom-w-zurawkach-3-p-fec9b23b621349fce6d3a069f1b1909f__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) rzut piwnic",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-piwnic-24f34f5365",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piwnica\" is a basement (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "BASEMENT",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-piwnic-projekt-dom-w-zurawkach-3-p-82dc563a-20bbbd2c2c",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "621d79479111eaac7b726ab7948656962a9447a35633c5c27fafaf564e754efc",
+          "byteLength": 23429,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/carousel_images",
+          "id": "var-rzut-piwnic-projekt-dom-w-zurawkach-3-p-82dc563a-20bbbd2c2c",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-piwnic-projekt-dom-w-zurawkach-3-p-82dc563a590c263504ce0ebf3c5d6768__708.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-rzut-poddasza-610c8dc1b9",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-zurawkach-3-p-9b0e68-c59bbf86d6",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "131a1bb84af1386c0a0c694e6d21eb6303135ebf3bd3c9a3d888bf0be758e541",
+          "byteLength": 34020,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-zurawkach-3-p-9b0e68-c59bbf86d6",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-poddasza-projekt-dom-w-zurawkach-3-p-9b0e682ea0e5742f93784fd05927c274__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-sytuacja-e30fc49d31",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w zurawkach 3 (p) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w zurawkach 3 (p) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-f1ebe4e7c9e46e76cca8-3d0a45fda5",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "20f0bc68e72d94365a125ed0b7d22e26f38d44e20af92213c0e1613623369c53",
+          "byteLength": 240768,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-f1ebe4e7c9e46e76cca8-3d0a45fda5",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-f1ebe4e7c9e46e76cca8c79479af4f7b__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "460845961fd55a709ff41b5a79512e1412097d28d1b3c71b13de7683aefe6fc0",
+          "byteLength": 56205,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-sytuacja-projekt-dom-w-zurawkach-3-p-9aae296b66c-b242659843",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/sytuacja-projekt-dom-w-zurawkach-3-p-9aae296b66c739bcc8cd86caa07445bc__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w żurawkach 3 (P) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-zurawkach-3-p-widok-1-7bbadad239",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-zurawkach-3-p-34290ccfedd4-ce4381710a",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "7eedda6d9cf0bcb5fb74498b386881b34fada5174d90b202c1e372cfb18ddd95",
+          "byteLength": 11270,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-widok-1-projekt-dom-w-zurawkach-3-p-34290ccfedd4-ce4381710a",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-1-projekt-dom-w-zurawkach-3-p-34290ccfedd417f64106f16187ff1068__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w żurawkach 3 (P)",
+      "id": "asset-projekt-dom-w-zurawkach-3-p-02c4fd7f8a",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-zurawkach-3-p-b237b0-757ed123b0",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "32316a68d289df75f06f2bf7463cb4fd050d7a49c7d1107441efca6da383019f",
+          "byteLength": 22333,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/related?scope=family",
+          "id": "var-rzut-poddasza-projekt-dom-w-zurawkach-3-p-b237b0-757ed123b0",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-poddasza-projekt-dom-w-zurawkach-3-p-b237b05017c69cf72a755eaafdcf55e7__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w żurawkach 3 (P)",
+      "id": "asset-projekt-dom-w-zurawkach-3-p-08418388d5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-zurawkach-3-p-b29cc102af6e-df6ffebc12",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2e2a69468656a4c66802827534ffea85ef81c4ac43c1836c8184acfededb3ca2",
+          "byteLength": 40358,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-zurawkach-3-p-b29cc102af6e-df6ffebc12",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-2-projekt-dom-w-zurawkach-3-p-b29cc102af6e98d31fac249addc73fd6__260.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-12f9696819",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-df8f31a8eb9f35920a15-3a5a763b21",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "65c8788450deb7a0ec948c58bee9798d075dd9ee572e98633a9a3998c7b80457",
+          "byteLength": 397710,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-df8f31a8eb9f35920a15-3a5a763b21",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/l3/projekt-dom-w-zurawkach-3-p-df8f31a8eb9f35920a1515a56dec7749__27108.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-19e75cbe89",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) strefa dzienna (wizualizacja 1 widok 1)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-7a0ced0f231bfb5e7e00-63afab1fec",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "ff3d7a2a6d700912d5612756807492cf03550797d40a2e53d0d2196b2a1d771a",
+          "byteLength": 184843,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-7a0ced0f231bfb5e7e00-63afab1fec",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/w1/projekt-dom-w-zurawkach-3-p-7a0ced0f231bfb5e7e00e077120c3884__21154.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-316feb8180",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-22ca4780deb2ad2c0d7d-733f5650d6",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "427aee57c310532a1c0571ec6dc6963de30a88ba4d57063f2c940748060827ed",
+          "byteLength": 289202,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-22ca4780deb2ad2c0d7d-733f5650d6",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/l3/projekt-dom-w-zurawkach-3-p-22ca4780deb2ad2c0d7d39dd0d564dfc__27105.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-399d254e71",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-2c33d5561092ff4cc35a-9b3466de45",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "3709cff43a93a7f579261b8664e89536755878683503f24fe96118ee47c5cb12",
+          "byteLength": 300345,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-2c33d5561092ff4cc35a-9b3466de45",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/l3/projekt-dom-w-zurawkach-3-p-2c33d5561092ff4cc35a54c2e7e00682__27107.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w żurawkach 3 (P)",
+      "id": "asset-projekt-dom-w-zurawkach-3-p-7199f69925",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-zurawkach-3-p-9531aac-5ed0b34667",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f2b1a769dcc662c83d4e7d36c2c2258e34c31718cc78f420c1786f918dabbc88",
+          "byteLength": 29744,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-zurawkach-3-p-9531aac-5ed0b34667",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-parteru-projekt-dom-w-zurawkach-3-p-9531aac7f0c40d6cb45d2a936bad998e__269.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-744d149e75",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) strefa dzienna (wizualizacja 1 widok 2)\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-9cacf542ac83a17fb9a5-61f0b7d99d",
+      "selectionReason": "only variant (800x533, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500938,
+          "byteHash": "15788b3475e02426fd850bc352a038b3f92f269b6b583cac1d16d118ff43e41b",
+          "byteLength": 189973,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 533,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-9cacf542ac83a17fb9a5-61f0b7d99d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/w1/projekt-dom-w-zurawkach-3-p-9cacf542ac83a17fb9a52deaf27f2c7c__21155.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w żurawkach 3 (P)",
+      "id": "asset-projekt-dom-w-zurawkach-3-p-7ec46c158b",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "BASEMENT",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-piwnic-projekt-dom-w-zurawkach-3-p-f057280c-95ab687ca2",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "28a1f5f698ea8c9affa799d12c19de42966578f81c9dbc3b42924425c0414602",
+          "byteLength": 15507,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/related?scope=family",
+          "id": "var-rzut-piwnic-projekt-dom-w-zurawkach-3-p-f057280c-95ab687ca2",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-piwnic-projekt-dom-w-zurawkach-3-p-f057280ccfac06868de6ee5146d2ceca__261.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-w-zurawkach-3-p-8bee735baa",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) wizualizacja łazienki (wizualizacja 3 widok\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-73870d1cae7a731790be-ec56f15b33",
+      "selectionReason": "only variant (1280x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.500586,
+          "byteHash": "6b9231209f842a74f4d0c098b46c692807aa7871b5e2e552c11723ef3a084e2c",
+          "byteLength": 256887,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-73870d1cae7a731790be-ec56f15b33",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/l3/projekt-dom-w-zurawkach-3-p-73870d1cae7a731790be91c3d9b5cca2__27106.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w żurawkach 3 (P)",
+      "id": "asset-projekt-dom-w-zurawkach-3-p-fccb8b8381",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-6ba9add785fb8a7e616b-8e76836d75",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "38a466859848c38a2fda3edbb107f6c7f0db9e345e28c275dae6307018ae7a9e",
+          "byteLength": 41874,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md4e2138a2d1a5/related?scope=family",
+          "id": "var-projekt-dom-w-zurawkach-3-p-6ba9add785fb8a7e616b-8e76836d75",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-6ba9add785fb8a7e616bbb9961814f99__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-007f8fc320",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-zura-776b3f8154",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f77fcb466a74ea3d8cb798e2418336b566d1f78988397504c28df8c3ac5ed28c",
+          "byteLength": 95826,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-zura-776b3f8154",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-parteru-z-powierzchniami-projekt-dom-w-zurawkach-3-p-0f5d71ce9860b29db7143cc8ed3a5c86__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-0dfaf7d6ba",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-e597465785b787516e3d-3927eb0a00",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+          "byteLength": 97746,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-e597465785b787516e3d-3927eb0a00",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-e597465785b787516e3d071d05578e22__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-1c5a322c92",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piwnica\" is a basement (matched \"rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piwnica\" is a basement (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "BASEMENT",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-piwnic-z-powierzchniami-projekt-dom-w-zuraw-4e2767a290",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "08c2400f7992ec320e17d37869af0bc99ab76bfa31cbe6674daa600d0a5d5c8e",
+          "byteLength": 45466,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-rzut-piwnic-z-powierzchniami-projekt-dom-w-zuraw-4e2767a290",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-piwnic-z-powierzchniami-projekt-dom-w-zurawkach-3-p-7027e79ef67fd574be3c868e036b38dd__11914.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-9b943f5354",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-zur-28d37ebe60",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "0e821bbaaa266fc822aaa93ad2967d1955dbe25b066a7c65fd35cb5b4d8716c8",
+          "byteLength": 64167,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-zur-28d37ebe60",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-poddasza-z-powierzchniami-projekt-dom-w-zurawkach-3-p-876aed00cb6bef32b00fe358ebec8e8d__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-b33f1d0952",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piwnica\" is a basement (matched \"gotowy projekt dom w zurawkach 3 (p) rzut piwnic\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "BASEMENT",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-fda9e059ba067f453578-079361682f",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c335699d2700de50617956dd0f8eefb8dbae5ca1416ec4fcdce6f20f158054da",
+          "byteLength": 46352,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-fda9e059ba067f453578-079361682f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-fda9e059ba067f4535788f17afc537a4__11814.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-d59c6b8717",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md4e2138a2d1a5/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w zurawkach 3 (p) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-zurawkach-3-p-07486ecbed879ebe2ebf-baaf09a357",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9d8474a344c3a9da45d2cdcb48504f477c445875156b2a3288211aa79d38b2ee",
+          "byteLength": 65540,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-projekt-dom-w-zurawkach-3-p-07486ecbed879ebe2ebf-baaf09a357",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-07486ecbed879ebe2ebf64063ef1dfc6__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-zurawkach-3-p-a5f46216fd",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-zurawkach-3-p-4846860936f0-fbe1ccea55",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "c6b8a34c95bd80c043ba4537f31a8e2cf1d3eb52e11e7eaea49accedd085d77c",
+          "byteLength": 236194,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-widok-1-projekt-dom-w-zurawkach-3-p-4846860936f0-fbe1ccea55",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-1-projekt-dom-w-zurawkach-3-p-4846860936f015c05b57f7492dc515cd__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-zurawkach-3-p-b0228a38dd",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-zurawkach-3-p\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w zurawkach 3 (p) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-zurawkach-3-p-ab4b4c70fc9a-400e83aea4",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b21fa418317ce99d21c53b59cea3394e7c4ebdf16b7796bac7fb2fe3963808dd",
+          "byteLength": 219254,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+          "id": "var-widok-2-projekt-dom-w-zurawkach-3-p-ab4b4c70fc9a-400e83aea4",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-2-projekt-dom-w-zurawkach-3-p-ab4b4c70fc9a3c75ac739629465ce1f4__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+  "contentHash": "7d7ec810cf94edd4015f6db110bc787662f7fecd08c81168e31c8119ee78e37d",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-6ba9add785fb8a7e616bbb9961814f99__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-parteru-projekt-dom-w-zurawkach-3-p-9531aac7f0c40d6cb45d2a936bad998e__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-parteru-projekt-dom-w-zurawkach-3-p-fec9b23b621349fce6d3a069f1b1909f__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-piwnic-projekt-dom-w-zurawkach-3-p-82dc563a590c263504ce0ebf3c5d6768__11708.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "BASEMENT"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-piwnic-projekt-dom-w-zurawkach-3-p-f057280ccfac06868de6ee5146d2ceca__11261.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-poddasza-projekt-dom-w-zurawkach-3-p-9b0e682ea0e5742f93784fd05927c274__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/rzut-poddasza-projekt-dom-w-zurawkach-3-p-b237b05017c69cf72a755eaafdcf55e7__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-1-projekt-dom-w-zurawkach-3-p-34290ccfedd417f64106f16187ff1068__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-1-projekt-dom-w-zurawkach-3-p-4846860936f015c05b57f7492dc515cd__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-2-projekt-dom-w-zurawkach-3-p-ab4b4c70fc9a3c75ac739629465ce1f4__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/widok-2-projekt-dom-w-zurawkach-3-p-b29cc102af6e98d31fac249addc73fd6__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-dc8988dcfc222f00a656d480e973f914__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-boczna-projekt-dom-w-zurawkach-3-p-21bea15d0c4bb8ae0b6248d4276dfb27__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-94e19e91e210be941c3f9dc4ea7f4a6f__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-boczna-projekt-dom-w-zurawkach-3-p-6e27056c9d53305567908140dbff5335__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-b6d5cd720cf532c16768c6b5ba2493e4__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-frontowa-projekt-dom-w-zurawkach-3-p-f28df3b4f21a7fd02f2c6be9a5d80019__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-5e6aaf86be1881c61df1bdd63422e471__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/elewacja-ogrodowa-projekt-dom-w-zurawkach-3-p-1fcf19f38736967c4891b82351afb4d4__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md4e2138a2d1a5/projekt-dom-w-zurawkach-3-p-f1ebe4e7c9e46e76cca8c79479af4f7b__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md4e2138a2d1a5/sytuacja-projekt-dom-w-zurawkach-3-p-9aae296b66c739bcc8cd86caa07445bc__11255.jpg"
+    }
+  ],
+  "id": "src-md4e2138a2d1a5-a0a419ca24",
+  "pageHash": "584ded221e4960c0b9e4cc6bc495431ef1d72cfc773b1dccc506eb4d7c2bb63e",
+  "project": {
+    "externalId": "md4e2138a2d1a5",
+    "name": "Projekt domu Dom w żurawkach 3 (P) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,39 m",
+      "unit": "m",
+      "value": 8.39
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "228,38 m&sup2;",
+      "unit": "m2",
+      "value": 228.38
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "101,7 m&sup2;",
+      "unit": "m2",
+      "value": 101.7
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "23,82 m&sup2;",
+      "unit": "m2",
+      "value": 23.82
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez garażu, piwnic",
+      "raw": "108,82 m&sup2;",
+      "unit": "m2",
+      "value": 108.82
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "185,2 m&sup2;",
+      "unit": "m2",
+      "value": 185.2
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "304,25 m&sup2;",
+      "unit": "m2",
+      "value": 304.25
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "211,71 m&sup2;",
+      "unit": "m2",
+      "value": 211.71
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "882,92 m&sup3;",
+      "unit": "none",
+      "value": 882.92
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 7.42,
+      "index": 1,
+      "label": "Korytarz",
+      "raw": "1. Korytarz | 7,42 | (7,42)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 13.25,
+      "index": 2,
+      "label": "Pokój",
+      "raw": "2. Pokój | 13,25 | (15,79)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.2,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 11,20 | (13,34)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.53,
+      "index": 4,
+      "label": "Pom. gospodarcze",
+      "raw": "4. Pom. gospodarcze | 4,53 | (5,57)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 12.22,
+      "index": 5,
+      "label": "Pokój",
+      "raw": "5. Pokój | 12,22 | (19,46)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.02,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 8,02 | (9,80)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.2,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,20 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.92,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 3,92 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 22.18,
+      "index": 3,
+      "label": "Salon + Jadalnia",
+      "raw": "3. Salon + Jadalnia | 22,18 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 10.22,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 10,22 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.76,
+      "index": 5,
+      "label": "Spiżarnia",
+      "raw": "5. Spiżarnia | 1,76 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5,
+      "index": 6,
+      "label": "Schody",
+      "raw": "6. Schody | 5,00 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.9,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 3,90 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 23.82,
+      "index": 8,
+      "label": "Garaż",
+      "raw": "8. Garaż | 23,82 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Funkcjonalny projekt domu o współczesnej stylistyce, z atrakcyjnie wykończonymi elewacjami oraz zadaszonym wejściem. Parter został w całości przeznaczony na strefę dzienną. Przestronny salon mieści wygodną, narożną kanapę zapewniającą komfortowy wypoczynek przy kominku lub kinie domowym oraz jadalnię usytuowaną w pobliżu kuchni. Uwagę zwracają liczne przeszklenia otwierające dom na ogród. Otwarta kuchnia posiada dużą ilość blatów roboczych, a jej układ funkcjonalny dopełnia praktyczna spiżarnia. Z wiatrołapu dostępny jest garaż. Wygodne schody prowadzą na poddasze, gdzie mieszczą się trzy duże i dobrze doświetlone sypialnie, komfortowa, jasna łazienka oraz garderoba. Część gospodarcza została zaprojektowana w piwnicach domu. Znajdziemy tutaj kotłownię na paliwo stałe, pralnię z funkcją suszarni oraz obszerne pomieszczenie rekreacyjne z miejscem na stół tenisowy lub bilard. Dom w żurawkach 3 (P) należy do kolekcji: projekty małych domów , projekty domów nowoczesnych oraz projekty domów z wejściem od południa i z piwnicą."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "135 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "na paliwo stałe + alternatywnie gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano w następujących pomieszczeniach: PARTER: Wiatrołap (1), Kuchnia (4), Łazienka (7); PODDASZE: Łazienka (6)"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna CREATON, okno dachowe VELUX"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 108.82 m² + 23.82 m² + 79.07 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, kotłownia, pralnia, pomieszczenie gospodarcze, kominek, garaż, piwnica"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

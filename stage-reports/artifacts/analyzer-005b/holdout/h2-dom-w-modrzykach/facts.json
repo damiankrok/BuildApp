@@ -1,0 +1,170 @@
+{
+  "url": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+  "outcome": "FAILED",
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "PLAN_LAYOUT_REJECTED",
+    "message": "the lowest storey covers 14.72 m² against the 181.98 m² the publisher prints — 91.9% apart: the decomposition is not of this building; 63 other readings of the plan were weighed and none survived to a full composition"
+  },
+  "verdict": "ALGORITHMIC_FAIL",
+  "verdictConditions": null,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 172,
+      "tallestPx": 75,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 16
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "sourceCoverage": {
+    "assets": 16,
+    "byDocument": {
+      "PERSPECTIVE_RENDER": 5,
+      "ELEVATION": 4,
+      "SECTION": 1,
+      "FLOOR_PLAN": 4,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 1
+    },
+    "floorPlanCopies": [
+      {
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "sizePx": "550x550"
+      },
+      {
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "sizePx": "400x400"
+      },
+      {
+        "storey": "GROUND",
+        "annotation": "AREA_TABLE",
+        "sizePx": "853x853"
+      },
+      {
+        "storey": "GROUND",
+        "annotation": "DIMENSIONED",
+        "sizePx": "853x853"
+      }
+    ],
+    "failures": {
+      "HTTP_STATUS": 7,
+      "BYTE_IDENTICAL": 5
+    },
+    "publishedFacts": [
+      "boiler_room_area=3.81m2",
+      "building_height=6.57m",
+      "floor_area=135.56m2",
+      "footprint_area=181.98m2",
+      "garage_area=35.64m2",
+      "house_net_area=96.11m2",
+      "roof_area=263.5m2",
+      "total_area=171.93m2",
+      "usable_area=135.56m2",
+      "volume=893.19none"
+    ]
+  },
+  "basePlan": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+  "basePlanWallPx": 16,
+  "orientationDecisions": {
+    "AXIS_SELF_CONSISTENCY": 8,
+    "UNDECIDED": 3,
+    "SINGLE_READING": 4,
+    "OTHER_AXIS_SCALE": 1,
+    "CHAIN_SELF_CONSISTENCY": 1,
+    "TYPOGRAPHY": 1
+  },
+  "observations": {
+    "total": 91,
+    "byStatus": {
+      "RAW": 44,
+      "REJECTED": 44,
+      "ACCEPTED": 3
+    },
+    "byIndependence": {
+      "ORIENTATION_UNDECIDED": 57,
+      "INDEPENDENT": 33,
+      "ORIENTATION_BY_OTHER_AXIS": 1
+    }
+  },
+  "metric": {
+    "relation": "REPLACED",
+    "confidence": "STRONG",
+    "isotropy": "MEASURED",
+    "cmPerPixelX": 2.748392,
+    "cmPerPixelY": 2.745536,
+    "legacyCmPerPixel": 2.689233,
+    "independentWitnesses": 4,
+    "hypotheses": [
+      "2.74775/ig4/plausible",
+      "0.405904/ig1/ruled out",
+      "2.042105/ig2/plausible",
+      "2.52518/ig1/plausible",
+      "2.235669/ig1/plausible",
+      "7.196361/ig2/ruled out"
+    ],
+    "rereadChains": 0,
+    "why": "the page vote's 2.689233 cm/px rested on 0 independent readings; 2.74775 cm/px, stated by 4 independent readings on 4 chain(s) outweigh it; a rival scale has 10% of its independent support (STRONG)"
+  },
+  "extent": {
+    "rect": {
+      "x0": 46,
+      "x1": 719,
+      "y0": 113,
+      "y1": 535
+    },
+    "weak": false,
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "refused": [],
+    "envelope": {
+      "x0": 46,
+      "x1": 719,
+      "y0": 113,
+      "y1": 186.5
+    }
+  },
+  "decomposition": null,
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 16,
+    "distinctOutlines": 12,
+    "firstReading": "PLAN_LAYOUT_REJECTED",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SPENT",
+    "reading1": "copy dimensioned 6827e718fe, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 14.7 m² (-91.9% of 181.98), WRONG, corroborated by ISOTROPY",
+    "reading2": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, sides as gridded, pocket mouths shut: 2 bodies, 22.7 m² (-87.5% of 181.98), WRONG",
+    "reading3": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, outer faces, pocket mouths shut: 2 bodies, 23.9 m² (-86.9% of 181.98), WRONG",
+    "reading4": "copy dimensioned 0378cbcdae, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 2 bodies, 15.8 m² (-91.3% of 181.98), WRONG",
+    "readings": 63,
+    "resolverVersion": "1.3.0"
+  },
+  "challenge": null,
+  "layoutGate": null,
+  "model": null,
+  "unresolved": null,
+  "warnings": [],
+  "runtime": {
+    "totalMs": 130474,
+    "peakRssMB": 688,
+    "maxTickGapMs": 1264,
+    "maxTelemetryGapMs": 2073,
+    "node": "v22.22.2"
+  }
+}
