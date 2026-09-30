@@ -43,16 +43,23 @@ const fold = (s: string): string => s.normalize('NFD').replace(/\p{M}/gu, '').to
 
 // --- the registry, from the sealed packages ----------------------------------
 
-type Registry = { ids: Set<string>; words: Set<string>; figures: Set<string>; dimensions: Set<string>; sources: number }
+type Registry = { ids: Set<string>; words: Set<string>; figures: Set<string>; dimensions: Set<string>; hosts: Set<string>; sources: number }
 
 /** Words every project page carries; they name no house. */
 const GENERIC = new Set(['projekt', 'projekty', 'projektu', 'domow', 'dom', 'domu', 'dane', 'www', 'html', 'php'])
 
-export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; project: { externalId?: string; name?: string }; publishedFacts?: Array<{ value: number }> }>): Registry {
-  const r: Registry = { ids: new Set(), words: new Set(), figures: new Set(), dimensions: new Set(), sources: packages.length }
+export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; project: { externalId?: string; name?: string }; publishedFacts?: Array<{ value: number }>; adapter?: { id: string } }>): Registry {
+  const r: Registry = { ids: new Set(), words: new Set(), figures: new Set(), dimensions: new Set(), hosts: new Set(), sources: packages.length }
   for (const p of packages) {
     const id = p.project.externalId ? fold(p.project.externalId) : undefined
     if (id) r.ids.add(id)
+    // 005C: a publisher read by the GENERIC adapter has no specialist, so its name has no business in production
+    // (no `if (hostname === …)`). A specialist's publisher is named by its own adapter, by design.
+    if (p.adapter?.id === 'generic.project-page') {
+      const labels = new URL(p.canonicalUrl).hostname.split('.').filter((l) => l !== 'www')
+      const name = labels.length >= 2 ? labels[labels.length - 2] : labels[0]
+      if (name && name.length >= 4 && !GENERIC.has(name)) r.hosts.add(fold(name))
+    }
     const segment = p.canonicalUrl.split(/[?#]/)[0].replace(/\/+$/, '').split('/').pop() ?? ''
     for (const w of fold(`${segment} ${p.project.name ?? ''}`).split(/[^a-z0-9]+/)) {
       if (w.length < 3 || /^\d+$/.test(w) || GENERIC.has(w) || w === id) continue
@@ -93,7 +100,7 @@ for (const d of dimensionsFrom(sealedDimensions)) registry.dimensions.add(d)
 
 // --- the scanner ---------------------------------------------------------------
 
-type Hit = { kind: 'ID' | 'WORD' | 'FIGURE' | 'DIMENSION'; term: string; at: string }
+type Hit = { kind: 'ID' | 'WORD' | 'FIGURE' | 'DIMENSION' | 'HOST'; term: string; at: string }
 
 export function scan(text: string, reg: Registry): Hit[] {
   const t = fold(text)
@@ -108,6 +115,11 @@ export function scan(text: string, reg: Registry): Hit[] {
     const rx = w.length >= 6 ? new RegExp(w.slice(0, 6)) : new RegExp(`\\b${w}\\b`)
     const m = rx.exec(t)
     if (m) hits.push({ kind: 'WORD', term: w, at: around(m.index, m[0].length) })
+  }
+  for (const h of reg.hosts) {
+    // a publisher's name whole: it is one word, and a stem of it is a common word
+    const m = new RegExp(`\\b${h}\\b`).exec(t)
+    if (m) hits.push({ kind: 'HOST', term: h, at: around(m.index, m[0].length) })
   }
   for (const f of reg.figures) {
     for (const spelled of [f, f.replace('.', ',')]) {
@@ -180,6 +192,10 @@ describe('no development house in production (derived registry)', () => {
     const metres = (Number(dimension) / 100).toFixed(2)
     expect(scan(`// the overall is ${metres} m`, registry).map((h) => h.kind)).toContain('DIMENSION')
     expect(scan(`"${metres.replace('.', ',')} m"`, registry).map((h) => h.kind)).toContain('DIMENSION')
+    // 005C: a publisher only the generic reader knows, branched on by name
+    const [host] = registry.hosts
+    expect(host).toBeDefined()
+    expect(scan(`if (new URL(url).hostname.includes('${host}')) return SPECIAL`, registry).map((h) => h.kind)).toContain('HOST')
   })
 
   it('no production file — code or comment — carries a development house\'s id, name, published figure or printed overall dimension', () => {

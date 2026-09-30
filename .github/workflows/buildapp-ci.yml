@@ -946,6 +946,64 @@ jobs:
       - name: Production hard-code guard
         run: npx vitest run tests/architecture/generalization.test.ts
 
+  analyzer-opening-aware-envelope:
+    # BUILDPLAN-ANALYZER-005C. The building's outline from wall-thick ink and
+    # classified gaps, attached bodies by their relations, and the generic
+    # source reader on page structures it had not met.
+    # - boundary-envelope: 15 synthetic shapes, the metamorphic drawings, the
+    #   wide-gap and terrace negatives, the 1.0 m wing and the 2.0 m line.
+    # - attached-bodies: wing, open-mouthed garage (and the reading that shuts
+    #   it), terrace, planter, detached shed; the two jamb policies and
+    #   BOUNDARY_RESOLUTION_INCONCLUSIVE; the shape families unchanged.
+    # - generic source: block facts, tooltips, grids, cards, superscript units,
+    #   linked documents (hashed, never parsed), captions, views; the
+    #   hard-code guard with generic publishers' names.
+    # - metric regression: 005B's dimension gates, unchanged.
+    # - Aster VIII: the cross-publisher probe acquired live; a publisher that
+    #   cannot be reached is a warning, anything else is judged.
+    name: Analyzer / opening-aware envelope
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Boundary envelope
+        run: npx vitest run packages/reconstruction/test/boundary-envelope.test.ts packages/reconstruction/test/wide-openings.test.ts packages/reconstruction/test/plan-decomposition.test.ts
+      - name: Attached bodies
+        run: npx vitest run packages/reconstruction/test/attached-bodies.test.ts packages/reconstruction/test/shape-families.test.ts packages/reconstruction/test/failure-codes.test.ts
+      - name: Generic source
+        run: npx vitest run packages/source-package/test/generic-structures.test.ts packages/source-package/test/generic.test.ts tests/architecture/generalization.test.ts
+      - name: Metric regression (005B gates, unchanged)
+        run: npx vitest run packages/source-metrics/test/orientation-metamorphic.test.ts packages/source-metrics/test/metric-solution.test.ts packages/source-metrics/test/registration.test.ts packages/source-metrics/test/scale-plausibility.test.ts packages/source-metrics/test/chains.test.ts packages/reconstruction/test/plan-extent.test.ts
+      - name: Aster VIII, acquired live (cross-publisher probe)
+        run: |
+          mkdir -p aster
+          if npm run -s source:acquire -- "https://www.dobredomy.pl/projekt/asterVIII/" --out aster/source-package.json --cache .cache/aster > aster/acquire.log 2>&1; then
+            node -e "
+              const p = require('./aster/source-package.json')
+              const keys = new Set(p.publishedFacts.map((f) => f.key))
+              const need = ['usable_area', 'footprint_area', 'roof_pitch', 'building_height']
+              const missing = need.filter((k) => !keys.has(k))
+              if (missing.length) { console.log('::error::Aster: the generic reader missed ' + missing.join(', ')); process.exit(1) }
+              const outline = (p.documents ?? []).filter((d) => d.kind === 'OUTLINE')
+              if (outline.length === 0) { console.log('::error::Aster: the 1:500 outline is not recorded among the documents'); process.exit(1) }
+              if (p.assets.some((a) => a.variants.some((v) => /\\.(pdf|dwg|dxf)(\\?|$)/i.test(v.url)))) { console.log('::error::Aster: a document became an image asset'); process.exit(1) }
+              console.log('Aster: ' + p.publishedFacts.length + ' facts, ' + (p.documents ?? []).length + ' documents (' + outline.length + ' outline), schema ' + p.schemaVersion)
+            "
+          elif grep -q "the page could not be fetched" aster/acquire.log; then
+            echo "::warning::Aster: the publisher could not be reached; the live probe is not judged"
+          else
+            tail -n 5 aster/acquire.log; exit 1
+          fi
+
   analyzer-development-houses:
     # BUILDPLAN-ANALYZER-005B. All eight development houses through today's
     # analyzer. Only the source package is sealed (stage-reports/artifacts/
