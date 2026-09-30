@@ -61,6 +61,24 @@ describe('GET /health', () => {
   })
 })
 
+describe('a client on the thread the in-process executor blocks', () => {
+  // With the in-process executor the analysis runs on this thread, and a synchronous stretch can hold it
+  // past the server's keep-alive timeout. When the loop turns, that expired timer must not close a pooled
+  // socket the client has just written its next request to (the worker executor, the production default,
+  // never holds this thread).
+  it('a poll due while the thread was held past the keep-alive timeout still gets its answer', async () => {
+    expect((await call(api, 'GET', '/health')).status).toBe(200)
+    // pollJob's shape: the next request waits on a short timer, and the thread is held meanwhile, so the
+    // client's timer and the server's expired keep-alive timer fire in the same turn of the loop
+    const next = new Promise((r) => setTimeout(r, 20)).then(() => call(api, 'GET', '/health'))
+    const until = Date.now() + 6_000
+    while (Date.now() < until) {
+      // hold the thread, as a long synchronous step of an in-process analysis does
+    }
+    expect((await next).status).toBe(200)
+  }, 20_000)
+})
+
 describe('POST /v1/analyses refuses before it queues', () => {
   it.each([
     ['wrong media type', { 'content-type': 'text/plain' }, `{"url":"${A}"}`, 415, 'UNSUPPORTED_MEDIA_TYPE'],

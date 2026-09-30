@@ -37,6 +37,12 @@ export async function startApi(publisher: SyntheticPublisher, overrides: Partial
   const executor = options.executor ?? new InProcessExecutor(() => ({ adapters: [publisher.adapter], deps: publisher.deps }))
   const runner = new JobRunner(store, executor, config)
   const server = createApiServer({ config, store, runner, adapters: [publisher.adapter], log: () => undefined })
+  // The in-process executor runs the analysis on this thread, which is also the test client's. A synchronous
+  // stretch longer than the keep-alive timeout lets the server's expired timer close a pooled socket in the
+  // same turn of the loop in which the client writes its next request to it: ECONNRESET, reproduced in
+  // api.test.ts. A loopback test client has no use for the idle timeout, so it is off here. The worker
+  // executor, the production default, never holds the server's thread.
+  server.keepAliveTimeout = 0
   await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve))
   const { port } = server.address() as AddressInfo
   return {
