@@ -15,10 +15,12 @@
  */
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
-import { acquireSourcePackage, archonAdapter, fileByteCache, selectedVariant } from '../src/index.js'
+import { acquireSourcePackage, archonAdapter, fileByteCache, genericProjectPageAdapter, selectedVariant } from '../src/index.js'
 import type { SourcePackage } from '../src/index.js'
 
-const ADAPTERS = [archonAdapter]
+// The publishers the analysis service registers (BUILDPLAN-ANALYZER-005B): a page the service can analyse
+// is a page this path can acquire, so a development house on a second publisher can be fetched for replay.
+const ADAPTERS = [archonAdapter, genericProjectPageAdapter]
 
 const flag = (argv: readonly string[], name: string): boolean => argv.includes(`--${name}`)
 const value = (argv: readonly string[], name: string): string | undefined => {
