@@ -159,7 +159,7 @@ export function choosePlan(graph: SourceObservationGraph, metrics: MetricEvidenc
  *  1. **Corroboration.** Two chains on one axis whose totals agree are stating
  *     the same dimension twice, which is as close to certain as a drawing
  *     gets. That is the case the overall dimension and its own subdivision
- *     make — `1205` above `790 + 415` — and it wins outright.
+ *     make — `1185` above `770 + 415` — and it wins outright.
  *  2. **How much of it was actually READ.** A chain every segment of which
  *     carries a printed number is a statement; one held together by segments
  *     derived from the scale is an inference, and inference loses.

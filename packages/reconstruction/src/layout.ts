@@ -42,6 +42,9 @@ import type { Band, Mask, Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservationGraph } from '@buildapp/source-observations'
 import type { CoordinateRegistration, DimensionChain, MetricEvidence, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { bandWallThickness, decomposePlan, planBodies, planExtent, walledFirstRegions, wallClusterExtent } from './plan-decomposition.js'
+import type { ExtentProvenance, PlanExtent } from './plan-decomposition.js'
+import { wallWitness } from './plan-extent.js'
+import type { WallWitness } from './plan-extent.js'
 import type { GridLine, PlanCallout, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
@@ -91,6 +94,10 @@ export type PlanReading = {
   extent: PixelRect
   extentWeak: boolean
   extentWhy: string
+  /** 005B: chains refused as the building's extent (interior, not spanning the walls), when any were. */
+  extentRefused?: string[]
+  /** 005B: where each axis of the frame came from. */
+  extentProvenance?: { x: ExtentProvenance; y: ExtentProvenance }
   decomposition: PlanDecomposition
 }
 
@@ -141,7 +148,7 @@ export type StructuralLayoutOptions = {
 }
 
 /** The ink, wall bands and wall thickness of one plan copy: a function of its pixels alone. */
-export type PlanSheet = { mask: Mask; bands: Band[]; wallPx: number; decompositions: Map<string, PlanDecomposition> }
+export type PlanSheet = { mask: Mask; bands: Band[]; wallPx: number; decompositions: Map<string, PlanDecomposition>; /** 005B: the building's walls from pixels only, which no chain or extent drew. */ witness: WallWitness | null }
 
 /**
  * How the resolver asks for the base plan to be read. Each field is one axis
@@ -150,8 +157,8 @@ export type PlanSheet = { mask: Mask; bands: Band[]; wallPx: number; decompositi
 export type PlanReadingChoice = {
   /** The copy of its storey's plan to read; the storey's other copies are not tried. */
   frameId: string
-  /** Where the building is on the sheet: the widest read chains (today), or the largest cluster of wall ink. */
-  extent: 'CHAIN_RECT' | 'WALL_MASS_CLUSTER'
+  /** Where the building is on the sheet: the widest read chains (today), the largest cluster of wall ink, or (005B) the wall witness. */
+  extent: 'CHAIN_RECT' | 'WALL_MASS_CLUSTER' | 'WALL_WITNESS'
   /** How built cells become bodies: largest rectangle first (today), or walled rectangle first. */
   merge: 'LARGEST_FIRST' | 'WALLED_FIRST'
   /** Where a body's side sits when only a wall band, no chain, marks it: on the band's axis (today), or on its outer face. */
@@ -261,7 +268,12 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       const { mask, bands, wallPx } = sheet
       const chains = options.metrics.chains.filter((c) => c.frameId === frame.id)
       const cluster = chosen === frame && choice?.extent === 'WALL_MASS_CLUSTER' ? wallClusterExtent(mask, wallPx) : undefined
-      const extent = cluster ? { rect: cluster.rect, weak: false, why: cluster.why } : planExtent(chains, bands, wallPx)
+      const witnessed = chosen === frame && choice?.extent === 'WALL_WITNESS' && sheet.witness ? sheet.witness : undefined
+      const extent: PlanExtent | null = cluster
+        ? { rect: cluster.rect, weak: false, why: cluster.why }
+        : witnessed
+          ? { rect: witnessed.rect, weak: true, why: `the wall witness: ${witnessed.why}`, provenance: { x: 'WALL_GEOMETRY_EXTENT', y: 'WALL_GEOMETRY_EXTENT' } }
+          : planExtent(chains, bands, wallPx, sheet.witness)
       if (!extent) {
         const longBands = bands.filter((b) => b.length >= wallPx * 2.5).length
         skipped.push({ frameId: frame.id, code: 'NO_EXTENT', longBands, why: `no dimension chain on it read a value and its ${longBands} long wall band${longBands === 1 ? '' : 's'} do not run along both axes` })
@@ -290,6 +302,8 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         extent: extent.rect,
         extentWeak: extent.weak,
         extentWhy: extent.why,
+        ...(extent.refused && extent.refused.length > 0 ? { extentRefused: extent.refused } : {}),
+        ...(extent.provenance ? { extentProvenance: extent.provenance } : {}),
         decomposition,
       })
       read = true
@@ -332,7 +346,7 @@ export function planSheet(frame: SourceCoordinateFrame, options: StructuralLayou
     maxThickness: Math.max(6, Math.round(wallPx * 1.9)),
     minLength: Math.max(8, Math.round(wallPx * 1.6)),
   })
-  const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map() }
+  const sheet: PlanSheet = { mask, bands, wallPx, decompositions: new Map(), witness: wallWitness(bands, wallPx) }
   options.sheetCache?.set(frame.id, sheet)
   return sheet
 }
@@ -710,7 +724,7 @@ export function axisLadder(
   // from the sheet's scale where they do not.
   //
   // Not accumulated line by line, which would throw away every statement that
-  // spans more than one gap: a chain saying the building is 1205 cm across is
+  // spans more than one gap: a chain saying the building is 1185 cm across is
   // an exact statement about two lines eleven lines apart, and adding up the
   // eleven scaled gaps between them gets 1204.7 and loses it. So the stated
   // spans are applied LONGEST FIRST — the overall dimension pins the ends, the

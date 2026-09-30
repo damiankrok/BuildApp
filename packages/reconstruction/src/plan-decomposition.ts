@@ -37,6 +37,8 @@ import type { PixelRect } from '@buildapp/source-common'
 import { connectedComponents, dilate, dominantBandThickness, erode } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
 import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
+import { exteriorSpan, framingChains } from './plan-extent.js'
+import type { ChainRoleRecord, WallWitness } from './plan-extent.js'
 
 /** Where a grid line came from. The two kinds are independent, and a line with both is as certain as a plan gets. */
 export type GridLineSupport = {
@@ -704,8 +706,16 @@ function closureOf(
  * anything at all, nothing is returned and the caller has to say so.
  */
 export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect | null {
-  const pick = (axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number } | null => {
-    let best: { lo: number; hi: number } | null = null
+  const x = dimensionedAxis(chains, 'HORIZONTAL')
+  const y = dimensionedAxis(chains, 'VERTICAL')
+  if (!x || !y) return null
+  return { x0: round6(x.lo), y0: round6(y.lo), x1: round6(x.hi), y1: round6(y.hi) }
+}
+
+/** The widest read chain's stretch on one axis, trimmed of unread stubs at its ends (see `dimensionedExtent`). */
+export function dimensionedAxis(chains: readonly DimensionChain[], axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string } | null {
+  const pick = (axis: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; chainId: string } | null => {
+    let best: { lo: number; hi: number; chainId: string } | null = null
     for (const chain of chains) {
       if (chain.axis !== axis) continue
       const read = chain.segments.filter((seg) => seg.origin === 'READ' || seg.origin === 'CHAIN_CORRECTED')
@@ -725,14 +735,11 @@ export function dimensionedExtent(chains: readonly DimensionChain[]): PixelRect 
       if (first > last) continue
       const lo = segments[first].fromPx
       const hi = segments[last].toPx
-      if (!best || hi - lo > best.hi - best.lo) best = { lo, hi }
+      if (!best || hi - lo > best.hi - best.lo) best = { lo, hi, chainId: chain.id }
     }
     return best
   }
-  const x = pick('HORIZONTAL')
-  const y = pick('VERTICAL')
-  if (!x || !y) return null
-  return { x0: round6(x.lo), y0: round6(y.lo), x1: round6(x.hi), y1: round6(y.hi) }
+  return pick(axis)
 }
 
 /**
@@ -779,7 +786,82 @@ function axisBox(bands: readonly Band[], wallPx: number): PixelRect | null {
  * result is marked weak so that nothing downstream mistakes it for a metric
  * statement.
  */
-export function planExtent(chains: readonly DimensionChain[], bands: readonly Band[], wallPx: number): { rect: PixelRect; weak: boolean; why: string } | null {
+export type PlanExtent = {
+  rect: PixelRect
+  weak: boolean
+  why: string
+  /** 005B: each chain's role against the wall witness, and the chains refused as the building's extent. */
+  roles?: ChainRoleRecord[]
+  refused?: string[]
+  /** 005B: where each axis of the frame came from. */
+  provenance?: { x: ExtentProvenance; y: ExtentProvenance }
+}
+
+export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS' | 'WALL_GEOMETRY_EXTENT'
+
+/**
+ * With a wall witness (005B), a chain drawn across the building may not frame
+ * it. The legacy frame stands, byte for byte, unless a chain it was taken from
+ * — the widest read chain on either axis — is an interior chain that does not
+ * span the walls. Then the frame is taken again without the refused chains;
+ * when that leaves an axis with no read chain, the axis is taken from the
+ * widest exterior chain's ticks, else from the witness itself, and the frame
+ * is weak. The new frame replaces the legacy one only where it is wider on a
+ * refused axis: refusing a room's width can only ever widen the building.
+ */
+export function planExtent(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
+  const legacy = planExtentOf(chainsIn, bands, wallPx)
+  if (witness === undefined) return legacy
+  const framing = framingChains(chainsIn, witness, wallPx)
+  const refusedAll = new Set(framing.roles.filter((r) => r.refused).map((r) => r.chainId))
+  const chains = framing.allowed
+  // The refused chains that would have framed an axis: wider than the widest chain allowed there.
+  const displaced = (['HORIZONTAL', 'VERTICAL'] as const).flatMap((a) => {
+    const kept = dimensionedAxis(chains, a)
+    const keptSpan = kept ? kept.hi - kept.lo : -1
+    return chainsIn.filter((c) => c.axis === a && refusedAll.has(c.id)).filter((c) => {
+      const own = dimensionedAxis([c], a)
+      return own !== null && own.hi - own.lo > keptSpan
+    }).map((c) => c.id)
+  }).sort()
+  const annotate = (e: PlanExtent | null, refused: string[], provenance?: PlanExtent['provenance']): PlanExtent | null =>
+    e ? { ...e, roles: framing.roles, refused, provenance: provenance ?? { x: 'DIMENSION_CHAIN_EXTENT', y: 'DIMENSION_CHAIN_EXTENT' } } : e
+  const framedX = dimensionedAxis(chainsIn, 'HORIZONTAL')?.chainId
+  const framedY = dimensionedAxis(chainsIn, 'VERTICAL')?.chainId
+  const refusedX = framedX !== undefined && refusedAll.has(framedX)
+  const refusedY = framedY !== undefined && refusedAll.has(framedY)
+  if (!witness || (!refusedX && !refusedY)) return annotate(legacy, [])
+  // A refusal exists to stop a room's width standing for the building's. It stands only where the
+  // frame taken without the refused chain is wider on a refused axis than the legacy frame was;
+  // a narrower one says the walls, not the chain, were what the legacy frame rested on.
+  const widens = (next: PlanExtent | null): boolean =>
+    next !== null &&
+    (legacy === null ||
+      (refusedX && next.rect.x1 - next.rect.x0 > legacy.rect.x1 - legacy.rect.x0 + wallPx * 2) ||
+      (refusedY && next.rect.y1 - next.rect.y0 > legacy.rect.y1 - legacy.rect.y0 + wallPx * 2))
+  if (dimensionedExtent(chains)) {
+    const next = planExtentOf(chains, bands, wallPx)
+    return widens(next) ? annotate(next, displaced) : annotate(legacy, [])
+  }
+  // A refused chain left an axis without a read chain: frame that axis from the exterior chains' ticks, else from the walls.
+  const axis = (a: 'HORIZONTAL' | 'VERTICAL'): { lo: number; hi: number; provenance: ExtentProvenance } => {
+    const read = dimensionedAxis(chains, a)
+    if (read) return { lo: read.lo, hi: read.hi, provenance: 'DIMENSION_CHAIN_EXTENT' }
+    const ticks = exteriorSpan(chainsIn, framing.roles, a, witness)
+    if (ticks) return { lo: ticks.lo, hi: ticks.hi, provenance: 'EXTERIOR_CHAIN_TICKS' }
+    return a === 'HORIZONTAL' ? { lo: witness.rect.x0, hi: witness.rect.x1, provenance: 'WALL_GEOMETRY_EXTENT' } : { lo: witness.rect.y0, hi: witness.rect.y1, provenance: 'WALL_GEOMETRY_EXTENT' }
+  }
+  const x = axis('HORIZONTAL')
+  const y = axis('VERTICAL')
+  const rect = { x0: round6(x.lo), y0: round6(y.lo), x1: round6(x.hi), y1: round6(y.hi) }
+  const inside = longBands(bands, wallPx).filter((b) => (b.axis === 'VERTICAL' ? b.axisPx >= rect.x0 && b.axisPx <= rect.x1 : b.axisPx >= rect.y0 && b.axisPx <= rect.y1))
+  const widened = ((r: PixelRect, o: PixelRect | null): PixelRect => (o ? { x0: Math.min(r.x0, o.x0), y0: Math.min(r.y0, o.y0), x1: Math.max(r.x1, o.x1), y1: Math.max(r.y1, o.y1) } : r))(rect, axisBox(inside, wallPx))
+  const said = (p: ExtentProvenance): string => (p === 'DIMENSION_CHAIN_EXTENT' ? 'a read chain' : p === 'EXTERIOR_CHAIN_TICKS' ? 'the ticks of an exterior chain' : 'the wall witness')
+  const next: PlanExtent = { rect: widened, weak: true, why: `${displaced.length} interior chain${displaced.length === 1 ? ' was' : 's were'} refused as the building's extent; its width is taken from ${said(x.provenance)} and its depth from ${said(y.provenance)}` }
+  return widens(next) ? annotate(next, displaced, { x: x.provenance, y: y.provenance }) : annotate(legacy, [])
+}
+
+function planExtentOf(chains: readonly DimensionChain[], bands: readonly Band[], wallPx: number): { rect: PixelRect; weak: boolean; why: string } | null {
   const long = longBands(bands, wallPx)
   const chainRect = dimensionedExtent(chains)
   const fromBands = axisBox(long, wallPx)
@@ -844,8 +926,9 @@ function walledEnvelope(
   // taken from every band there is reaches out to whichever of them is drawn
   // furthest away. A wall runs.
   const long = longBands(bands, wallPx)
-  const box = axisBox(long, wallPx)
-  if (!box) return null
+  const axes = axisBox(long, wallPx)
+  if (!axes) return null
+  const box = sideWallReach(long, bands, axes, wallPx)
   const vertical = long.filter((b) => b.axis === 'VERTICAL')
   const horizontal = long.filter((b) => b.axis === 'HORIZONTAL')
   const snap = (px: number, lines: readonly GridLine[]): number => {
@@ -875,6 +958,68 @@ function walledEnvelope(
     bands: { vertical: vertical.length, horizontal: horizontal.length },
     why: `the outermost of ${vertical.length} wall axes across and ${horizontal.length} along, taken to their outer faces and snapped to the dimension grid`,
   }
+}
+
+/**
+ * Where the building's two outermost side walls both run past the last long
+ * wall across them, and stop at the same line, the building goes on to that
+ * line (BUILDPLAN-ANALYZER-005B).
+ *
+ * The box above is taken from the long walls' axes, and a side of the building
+ * whose wall is all openings — a garage door, a recessed entrance and a wide
+ * window in one front — leaves no long band on that side: only piers, each
+ * shorter than a wall is long. The box then stops at the last long wall inside
+ * the building, and every room between it and the real front is outside by
+ * construction. Both side walls of the building still run down to the front,
+ * and two parallel walls that each run on well past the box and stop together
+ * are the building's own sides, not a kerb or a post: one wall running on
+ * alone is a wing, a fence or a pergola, and is left to the bays. Their common
+ * end is the front's inner face; the front's axis is half a wall beyond it,
+ * snapped to the grid like every other side.
+ *
+ * The front must be there to be found: at least one piece of wall-thick ink —
+ * a pier between two openings — lies on that line between the two side walls,
+ * clear of their corners. Side walls running on to a line with nothing across
+ * it are the returns of a loggia or a porch, whose mouth is open and whose
+ * floor is outside; that is a recess, and it stays one.
+ */
+function sideWallReach(long: readonly Band[], all: readonly Band[], box: PixelRect, wallPx: number): PixelRect {
+  const half = wallPx / 2
+  const reach = { ...box }
+  for (const axis of ['VERTICAL', 'HORIZONTAL'] as const) {
+    const vertical = axis === 'VERTICAL'
+    const bands = long.filter((b) => b.axis === axis)
+    const [s0, s1] = vertical ? [box.x0 + half, box.x1 - half] : [box.y0 + half, box.y1 - half]
+    const sideA = bands.filter((b) => Math.abs(b.axisPx - s0) <= wallPx)
+    const sideB = bands.filter((b) => Math.abs(b.axisPx - s1) <= wallPx)
+    if (sideA.length === 0 || sideB.length === 0 || s1 - s0 < wallPx * 4) continue
+    const from = (b: Band): number => (vertical ? b.bounds.y0 : b.bounds.x0)
+    const to = (b: Band): number => (vertical ? b.bounds.y1 : b.bounds.x1)
+    const [e0, e1] = vertical ? [box.y0, box.y1] : [box.x0, box.x1]
+    const endA = Math.max(...sideA.map(to))
+    const endB = Math.max(...sideB.map(to))
+    const startA = Math.min(...sideA.map(from))
+    const startB = Math.min(...sideB.map(from))
+    // A pier on the line: wall-thick ink across the side walls' axis, between them and clear of their corners.
+    const across = all.filter((b) => b.axis !== axis && b.thickness >= wallPx * 0.6)
+    const pierOn = (line: number): boolean =>
+      across.some((b) => {
+        const [a0, a1] = vertical ? [b.bounds.x0, b.bounds.x1] : [b.bounds.y0, b.bounds.y1]
+        return Math.abs(b.axisPx - line) <= wallPx && a0 >= s0 + wallPx && a1 <= s1 - wallPx
+      })
+    const farEnd = Math.min(endA, endB)
+    const nearEnd = Math.max(startA, startB)
+    const far = farEnd - e1 >= wallPx * 2 && Math.abs(endA - endB) <= wallPx * 2 && pierOn(farEnd + half) ? round6(farEnd + half) : e1
+    const near = e0 - nearEnd >= wallPx * 2 && Math.abs(startA - startB) <= wallPx * 2 && pierOn(nearEnd - half) ? round6(nearEnd - half) : e0
+    if (vertical) {
+      reach.y0 = near
+      reach.y1 = far
+    } else {
+      reach.x0 = near
+      reach.x1 = far
+    }
+  }
+  return reach
 }
 
 /**
