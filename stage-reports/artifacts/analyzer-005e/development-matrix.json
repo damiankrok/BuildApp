@@ -1,0 +1,3260 @@
+{
+  "schema": "buildapp.development-matrix",
+  "schemaVersion": "1.2.0",
+  "what": "BUILDPLAN-ANALYZER-005E: the 15 development houses (16 rows with the tracked Kosaćce link) through the frozen 005D code (before; the 005D matrix, and for the two round-4 blind houses their committed blind runs) and the 005E code (after), each offline from its sealed source package with the publisher bytes fetched outside the repository, the Evidence Pack on. Verdicts by holdout/verdict.mjs. after.metric.ocr summarises the numeric lattices (counts and classes only). The known rows replay the sealed 005A evidence through the 005E solver: the legacy e-OZE compatibility lane and its two decoys, and the Kosaćce area copy alone.",
+  "rows": [
+    {
+      "house": "marcowki",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.28,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "sceneSha256": "6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.642489,
+          "cmPerPixelY": 2.64342,
+          "selected": {
+            "cmPerPixel": 2.642539,
+            "independentGroups": 2,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.64342,
+          "topology": {
+            "bindings": {
+              "alternative": 20,
+              "ambiguous": 5,
+              "primary": 17,
+              "uncentred": 5
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 3,
+              "parallelCopies": 2,
+              "totals": 4
+            },
+            "marks": {
+              "questionable": 45,
+              "rejected": 5,
+              "tick": 140
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 532,
+            "questionable": 176,
+            "rejected": 18
+          },
+          "hypotheses": 6,
+          "observations": 216,
+          "metricEvidenceHash": "6b449f7df68fe27d04e4a39c6a1e65fcea1ffb99fd1963cf8a33b1b52afe66b5"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 184.1,
+          "peakRssMB": 832,
+          "metricPhaseMs": 155546,
+          "maxTickGapMs": 1934,
+          "maxTelemetryGapMs": 2733,
+          "evidencePackMs": 174
+        },
+        "evidencePackManifestSha256": "d913c48a0fbfbaa0cd15a5d44cb9e8a2cf07afc3c6a9b593b4aa6f0d430c6de5"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 130.79,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": -0.28,
+        "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
+        "sceneSha256": "6b74b0999e351f74ff71e9dd2df872c9800798cc6a7f54984e10350a0a16d799",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.642489,
+          "cmPerPixelY": 2.64342,
+          "selected": {
+            "cmPerPixel": 2.642481,
+            "independentGroups": 4,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.64342,
+          "topology": {
+            "bindings": {
+              "alternative": 21,
+              "ambiguous": 5,
+              "primary": 18,
+              "uncentred": 5
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 1,
+              "conflictsAsRead": 0,
+              "incomplete": 3,
+              "parallelCopies": 2,
+              "totals": 4
+            },
+            "marks": {
+              "questionable": 45,
+              "rejected": 5,
+              "tick": 140
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 3,
+                "clear": 1,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-115-horizontal-b29d80b7f9",
+                "dim-obs-1205-horizontal-6329301e82",
+                "dim-obs-740-horizontal-d42b043afb"
+              ],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 532,
+            "questionable": 176,
+            "rejected": 18
+          },
+          "hypotheses": 6,
+          "observations": 219,
+          "metricEvidenceHash": "dc349f9828c485780efe93576f0003a612fcd513ed6c0d9a9ad5c180822ad8f1",
+          "ocr": {
+            "latticesAllFrames": 300,
+            "latticesSelectedFrame": 59,
+            "classes": {
+              "CLEAR": 4,
+              "SUPPORTED": 6,
+              "AMBIGUOUS": 26,
+              "LOW_QUALITY": 23
+            },
+            "asReadDiffersFrom005D": 30,
+            "expansionsAllFrames": 24466,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 9
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 3
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 215.7,
+          "peakRssMB": 868,
+          "metricPhaseMs": 185665,
+          "maxTickGapMs": 2346,
+          "maxTelemetryGapMs": 2346,
+          "evidencePackMs": 277
+        },
+        "evidencePackManifestSha256": "4f77cfbe6b238463c6e19fa69da7bdbfc5d52e43b79d0adc7cdce6acbe06d0ac"
+      },
+      "modelUnchanged": true
+    },
+    {
+      "house": "rarytasy-g2e",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 14,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 184.22,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.92,
+        "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
+        "sceneSha256": "8bf67c1ae45a6a188ed3cd33695b5b2452d5a634c33187f80d116c4c11298f05",
+        "limiting": [
+          "OPENINGS_NOT_BUILT",
+          "METRIC_SCALE_UNSUPPORTED",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "INVARIANT_VIOLATIONS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+          "relation": "LEGACY_UNCONFIRMED",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": 2.749693,
+          "cmPerPixelY": 2.747816,
+          "selected": {
+            "cmPerPixel": 2.80609,
+            "independentGroups": 1,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 2.747825,
+          "topology": {
+            "bindings": {
+              "alternative": 41,
+              "ambiguous": 5,
+              "primary": 20,
+              "uncentred": 22
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 7,
+              "parallelCopies": 4,
+              "totals": 7
+            },
+            "marks": {
+              "questionable": 94,
+              "rejected": 4,
+              "tick": 179
+            },
+            "neutralObservationIds": [
+              "dim-obs-1751-horizontal-e05dcb5989"
+            ],
+            "valueAmbiguity": {
+              "alternatives": [
+                "1721",
+                "1731",
+                "1351",
+                "1251"
+              ],
+              "cmPerPixelHigh": 2.80609,
+              "cmPerPixelLow": 2.004808,
+              "observationId": "dim-obs-1751-horizontal-e05dcb5989",
+              "rawText": "1751"
+            }
+          },
+          "marksAllFrames": {
+            "tick": 254,
+            "questionable": 137,
+            "rejected": 8
+          },
+          "hypotheses": 6,
+          "observations": 178,
+          "metricEvidenceHash": "d40b3dc9ff3b1be84cba6899a5c99f5907b2c18f998a7cd91840ab7f90525903"
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 175.7,
+          "peakRssMB": 873,
+          "metricPhaseMs": 112192,
+          "maxTickGapMs": 1610,
+          "maxTelemetryGapMs": 2079,
+          "evidencePackMs": 163
+        },
+        "evidencePackManifestSha256": "0baa7bd18ab8b5b4cf9c9395b5aae607c30736ede132725a9d2088b683e03cc5"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 14,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 184.55,
+        "publishedFootprintM2": 189.77,
+        "footprintResidualPct": -2.75,
+        "modelHash": "9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7",
+        "sceneSha256": "9896cd83b74f406bc58c6fc8ecd67544bd5a0eff0075aa04d32904a3e6ea1b60",
+        "limiting": [
+          "OPENINGS_NOT_BUILT",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "INVARIANT_VIOLATIONS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.749693,
+          "cmPerPixelY": 2.747816,
+          "selected": {
+            "cmPerPixel": 2.755764,
+            "independentGroups": 3,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.747825,
+          "topology": {
+            "bindings": {
+              "alternative": 47,
+              "ambiguous": 6,
+              "primary": 22,
+              "uncentred": 26
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 1,
+              "conflictsAsRead": 0,
+              "incomplete": 6,
+              "parallelCopies": 4,
+              "totals": 7
+            },
+            "marks": {
+              "questionable": 94,
+              "rejected": 4,
+              "tick": 179
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 1,
+                "clear": 1,
+                "supported": 1,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-1751-horizontal-58d60ae53d"
+              ],
+              "lowQuality": 1
+            }
+          },
+          "marksAllFrames": {
+            "tick": 383,
+            "questionable": 216,
+            "rejected": 12
+          },
+          "hypotheses": 6,
+          "observations": 200,
+          "metricEvidenceHash": "aeac6f88228ba0b3b060400321a861c2d6f3fb29478c6b2cdf9c4737ac037300",
+          "ocr": {
+            "latticesAllFrames": 218,
+            "latticesSelectedFrame": 92,
+            "classes": {
+              "CLEAR": 5,
+              "SUPPORTED": 12,
+              "AMBIGUOUS": 38,
+              "LOW_QUALITY": 37
+            },
+            "asReadDiffersFrom005D": 64,
+            "expansionsAllFrames": 21493,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 11
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 1
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 219.4,
+          "peakRssMB": 844,
+          "metricPhaseMs": 149559,
+          "maxTickGapMs": 1618,
+          "maxTelemetryGapMs": 2140,
+          "evidencePackMs": 280
+        },
+        "evidencePackManifestSha256": "72fa972902f2c2943bacde3794e371174fb2aa386cfc7db245352f254030125d"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "kosacce-clean",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneSha256": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "selected": {
+            "cmPerPixel": 2.406872,
+            "independentGroups": 3,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.406097,
+          "topology": {
+            "bindings": {
+              "alternative": 65,
+              "ambiguous": 9,
+              "primary": 34,
+              "uncentred": 21
+            },
+            "hierarchy": {
+              "afterCorrection": 1,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 4,
+              "parallelCopies": 3,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 106,
+              "rejected": 0,
+              "tick": 199
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 518,
+            "questionable": 261,
+            "rejected": 1
+          },
+          "hypotheses": 6,
+          "observations": 216,
+          "metricEvidenceHash": "c2ac1f26ebc562754ffca9147732359caadb36a9e23188b2d9e96a132f2ab909"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 173.3,
+          "peakRssMB": 792,
+          "metricPhaseMs": 116609,
+          "maxTickGapMs": 1660,
+          "maxTelemetryGapMs": 2188,
+          "evidencePackMs": 271
+        },
+        "evidencePackManifestSha256": "497c2c03bd545eb01ed1a4fb1f28f798025b93b164c522cb15f616c7b0b83506"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneSha256": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "selected": {
+            "cmPerPixel": 2.405526,
+            "independentGroups": 5,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.406097,
+          "topology": {
+            "bindings": {
+              "alternative": 69,
+              "ambiguous": 10,
+              "primary": 35,
+              "uncentred": 25
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 2,
+              "incomplete": 4,
+              "parallelCopies": 3,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 106,
+              "rejected": 0,
+              "tick": 199
+            },
+            "neutralObservationIds": [
+              "dim-obs-840-rotated-cw-843604e0a3"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-840-rotated-cw-843604e0a3"
+              ],
+              "counted": {
+                "ambiguous": 2,
+                "clear": 0,
+                "supported": 3,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-005-horizontal-00f0d529be",
+                "dim-obs-370-rotated-cw-b54d8af9a2"
+              ],
+              "lowQuality": 2
+            }
+          },
+          "marksAllFrames": {
+            "tick": 518,
+            "questionable": 261,
+            "rejected": 1
+          },
+          "hypotheses": 6,
+          "observations": 234,
+          "metricEvidenceHash": "3ed8b283b5375eb8d75b60f0731135466154a7028714c2c2db032f6a48b2f051",
+          "ocr": {
+            "latticesAllFrames": 335,
+            "latticesSelectedFrame": 132,
+            "classes": {
+              "CLEAR": 1,
+              "SUPPORTED": 17,
+              "AMBIGUOUS": 54,
+              "LOW_QUALITY": 60
+            },
+            "asReadDiffersFrom005D": 89,
+            "expansionsAllFrames": 34650,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 14,
+              "UNRESOLVED": 1,
+              "SCALE_RANKED": 3
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 1,
+            "demoted": 2
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 209.2,
+          "peakRssMB": 800,
+          "metricPhaseMs": 145493,
+          "maxTickGapMs": 1862,
+          "maxTelemetryGapMs": 2393,
+          "evidencePackMs": 365
+        },
+        "evidencePackManifestSha256": "64dd306d5891d5ac52dc749d59794297b2df3ace2e136ac981fe575657e631f0"
+      },
+      "modelUnchanged": true
+    },
+    {
+      "house": "kosacce-tracked",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneSha256": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "selected": {
+            "cmPerPixel": 2.406872,
+            "independentGroups": 3,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.406097,
+          "topology": {
+            "bindings": {
+              "alternative": 65,
+              "ambiguous": 9,
+              "primary": 34,
+              "uncentred": 21
+            },
+            "hierarchy": {
+              "afterCorrection": 1,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 4,
+              "parallelCopies": 3,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 106,
+              "rejected": 0,
+              "tick": 199
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 518,
+            "questionable": 261,
+            "rejected": 1
+          },
+          "hypotheses": 6,
+          "observations": 216,
+          "metricEvidenceHash": "c2ac1f26ebc562754ffca9147732359caadb36a9e23188b2d9e96a132f2ab909"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 174,
+          "peakRssMB": 843,
+          "metricPhaseMs": 117202,
+          "maxTickGapMs": 1779,
+          "maxTelemetryGapMs": 2037,
+          "evidencePackMs": 215
+        },
+        "evidencePackManifestSha256": "6538a0fca44df6ceae398b3fc4a38db836589fb31a97b3ffbeaa16624337991c"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 13,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 162.28,
+        "publishedFootprintM2": 164.47,
+        "footprintResidualPct": -1.33,
+        "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
+        "sceneSha256": "0a9119cdf2b4a6dfc1aa0a9554176c255f779170379209fb90f6b56df886c5ef",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.405799,
+          "cmPerPixelY": 2.406528,
+          "selected": {
+            "cmPerPixel": 2.405526,
+            "independentGroups": 5,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.406097,
+          "topology": {
+            "bindings": {
+              "alternative": 69,
+              "ambiguous": 10,
+              "primary": 35,
+              "uncentred": 25
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 2,
+              "incomplete": 4,
+              "parallelCopies": 3,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 106,
+              "rejected": 0,
+              "tick": 199
+            },
+            "neutralObservationIds": [
+              "dim-obs-840-rotated-cw-843604e0a3"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-840-rotated-cw-843604e0a3"
+              ],
+              "counted": {
+                "ambiguous": 2,
+                "clear": 0,
+                "supported": 3,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-005-horizontal-00f0d529be",
+                "dim-obs-370-rotated-cw-b54d8af9a2"
+              ],
+              "lowQuality": 2
+            }
+          },
+          "marksAllFrames": {
+            "tick": 518,
+            "questionable": 261,
+            "rejected": 1
+          },
+          "hypotheses": 6,
+          "observations": 234,
+          "metricEvidenceHash": "3ed8b283b5375eb8d75b60f0731135466154a7028714c2c2db032f6a48b2f051",
+          "ocr": {
+            "latticesAllFrames": 335,
+            "latticesSelectedFrame": 132,
+            "classes": {
+              "CLEAR": 1,
+              "SUPPORTED": 17,
+              "AMBIGUOUS": 54,
+              "LOW_QUALITY": 60
+            },
+            "asReadDiffersFrom005D": 89,
+            "expansionsAllFrames": 34650,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 14,
+              "UNRESOLVED": 1,
+              "SCALE_RANKED": 3
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 1,
+            "demoted": 2
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 172.1,
+          "peakRssMB": 868,
+          "metricPhaseMs": 117407,
+          "maxTickGapMs": 1631,
+          "maxTelemetryGapMs": 2022,
+          "evidencePackMs": 344
+        },
+        "evidencePackManifestSha256": "6e0d6f381d9e236765708404c57f70a57a0039fd090b09905ea25d791e9e773d"
+      },
+      "modelUnchanged": true
+    },
+    {
+      "house": "rarytasy-eoze",
+      "gate": "MUST_COMPLETE",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 11,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 123.99,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": 1.57,
+        "modelHash": "b4e76f04f47c5a26d46213a35122a4c0fe279907630fa5cddb3269f86e30142a",
+        "sceneSha256": "92bade3a09a9d434583f92c073d35e9131d2248f4e9c2fd55488c128b7b366d3",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.223611,
+          "cmPerPixelY": 2.222222,
+          "selected": {
+            "cmPerPixel": 2.223483,
+            "independentGroups": 2,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.501411,
+          "topology": {
+            "bindings": {
+              "alternative": 48,
+              "ambiguous": 6,
+              "primary": 23,
+              "uncentred": 19
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 5,
+              "parallelCopies": 5,
+              "totals": 5
+            },
+            "marks": {
+              "questionable": 93,
+              "rejected": 1,
+              "tick": 181
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 675,
+            "questionable": 727,
+            "rejected": 69
+          },
+          "hypotheses": 6,
+          "observations": 196,
+          "metricEvidenceHash": "7bf8733765e8652e1e1f12be665cca9b0b6dea6e642229b3b17a2c506b24c375"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 170.6,
+          "peakRssMB": 905,
+          "metricPhaseMs": 109553,
+          "maxTickGapMs": 2497,
+          "maxTelemetryGapMs": 2994,
+          "evidencePackMs": 187
+        },
+        "evidencePackManifestSha256": "e8f2b73c865b248d562967000d517cb114b8f02e47f7e3a2e45ef943ab128f9d"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 11,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 123.91,
+        "publishedFootprintM2": 122.07,
+        "footprintResidualPct": 1.51,
+        "modelHash": "75c4ea224908e9af59bf9790aacb4135b5809efc31714a9772f163bde3be16c1",
+        "sceneSha256": "f46aca7b5e616fe352d359301c9b3850bc7e0e6f2dccd6b8b2e049189895d4b0",
+        "limiting": [
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.222222,
+          "cmPerPixelY": 2.222222,
+          "selected": {
+            "cmPerPixel": 2.222222,
+            "independentGroups": 2,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.501411,
+          "topology": {
+            "bindings": {
+              "alternative": 47,
+              "ambiguous": 6,
+              "primary": 24,
+              "uncentred": 19
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 5,
+              "parallelCopies": 5,
+              "totals": 5
+            },
+            "marks": {
+              "questionable": 93,
+              "rejected": 1,
+              "tick": 181
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 1,
+                "clear": 0,
+                "supported": 1,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-1601-horizontal-bfb0e146b1"
+              ],
+              "lowQuality": 5
+            }
+          },
+          "marksAllFrames": {
+            "tick": 675,
+            "questionable": 727,
+            "rejected": 69
+          },
+          "hypotheses": 6,
+          "observations": 199,
+          "metricEvidenceHash": "37eceb09da8ad0e24cba95cacefdd1266b6a41557af2f73a98448c671c1683e5",
+          "ocr": {
+            "latticesAllFrames": 296,
+            "latticesSelectedFrame": 116,
+            "classes": {
+              "CLEAR": 2,
+              "SUPPORTED": 9,
+              "AMBIGUOUS": 33,
+              "LOW_QUALITY": 72
+            },
+            "asReadDiffersFrom005D": 85,
+            "expansionsAllFrames": 29187,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 13
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 1
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 175.2,
+          "peakRssMB": 926,
+          "metricPhaseMs": 115274,
+          "maxTickGapMs": 2685,
+          "maxTelemetryGapMs": 3221,
+          "evidencePackMs": 276
+        },
+        "evidencePackManifestSha256": "f5ce54a5e47ead7f2b1cd06fddc844ea6897952aaa8e17155e12835429ac60d6"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "alt-marcowki",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+          "relation": "LEGACY_UNCONFIRMED",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": 1.593003,
+          "cmPerPixelY": 1.593003,
+          "selected": null,
+          "legacyCmPerPixel": 1.593003,
+          "topology": {
+            "bindings": {
+              "alternative": 10,
+              "ambiguous": 2,
+              "primary": 7,
+              "uncentred": 5
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 2,
+              "parallelCopies": 1,
+              "totals": 2
+            },
+            "marks": {
+              "questionable": 18,
+              "rejected": 3,
+              "tick": 49
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 103,
+            "questionable": 52,
+            "rejected": 6
+          },
+          "hypotheses": 6,
+          "observations": 76,
+          "metricEvidenceHash": "99fcf3753cb08e0538c3ec768ca1544df12ff1e61791bbed713dd8af71b92be9"
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "performance": {
+          "wallClockS": 73.5,
+          "peakRssMB": 666,
+          "metricPhaseMs": 55301,
+          "maxTickGapMs": 2104,
+          "maxTelemetryGapMs": 2414,
+          "evidencePackMs": 59
+        },
+        "evidencePackManifestSha256": "0fffd9b08cb0e93d84534470fee258f8c7254c11758aa1e55ebe8e9a049a4495"
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 131.16,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+          "relation": "LEGACY_UNCONFIRMED",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": 1.593003,
+          "cmPerPixelY": 1.593003,
+          "selected": null,
+          "legacyCmPerPixel": 1.593003,
+          "topology": {
+            "bindings": {
+              "alternative": 12,
+              "ambiguous": 2,
+              "primary": 8,
+              "uncentred": 5
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 2,
+              "parallelCopies": 1,
+              "totals": 2
+            },
+            "marks": {
+              "questionable": 18,
+              "rejected": 3,
+              "tick": 49
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 0,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 4
+            }
+          },
+          "marksAllFrames": {
+            "tick": 103,
+            "questionable": 52,
+            "rejected": 6
+          },
+          "hypotheses": 6,
+          "observations": 87,
+          "metricEvidenceHash": "2900b7f1b0f701867eb30e14660f8177de5a8aad03f923d69ec98a5a4be31443",
+          "ocr": {
+            "latticesAllFrames": 135,
+            "latticesSelectedFrame": 41,
+            "classes": {
+              "CLEAR": 0,
+              "SUPPORTED": 1,
+              "AMBIGUOUS": 5,
+              "LOW_QUALITY": 35
+            },
+            "asReadDiffersFrom005D": 30,
+            "expansionsAllFrames": 11225,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 4
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 0
+          }
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "performance": {
+          "wallClockS": 73.4,
+          "peakRssMB": 678,
+          "metricPhaseMs": 55426,
+          "maxTickGapMs": 1842,
+          "maxTelemetryGapMs": 2253,
+          "evidencePackMs": 125
+        },
+        "evidencePackManifestSha256": "b417dc0fc5625ee7f462d11ad81d7b6a45fee12802e868cfe6ea81706299926b"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "dom-w-jablonkach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 99,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": -0.4,
+        "modelHash": "70b01afd65e284db6aebe02d5f318219e43f50b2ce69adfe2a0efbb73aca0113",
+        "sceneSha256": "e8de930d810a9b3735c82d9d66bd60ada7fe30d102f0afd4958943ce460a0d31",
+        "limiting": [
+          "METRIC_SCALE_WEAK",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "cmPerPixelX": 2.119461,
+          "cmPerPixelY": 2.119461,
+          "selected": {
+            "cmPerPixel": 2.119461,
+            "independentGroups": 1,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 1.892003,
+          "topology": {
+            "bindings": {
+              "alternative": 22,
+              "ambiguous": 0,
+              "primary": 22,
+              "uncentred": 29
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 0,
+              "parallelCopies": 11,
+              "totals": 0
+            },
+            "marks": {
+              "questionable": 85,
+              "rejected": 5,
+              "tick": 156
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 690,
+            "questionable": 326,
+            "rejected": 48
+          },
+          "hypotheses": 6,
+          "observations": 309,
+          "metricEvidenceHash": "f9932f2a76fc7d3d28bfcb2a5918fe36d6b3192647a3c550a1e81fcec506ee8a"
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 244.6,
+          "peakRssMB": 813,
+          "metricPhaseMs": 194086,
+          "maxTickGapMs": 1480,
+          "maxTelemetryGapMs": 1991,
+          "evidencePackMs": 185
+        },
+        "evidencePackManifestSha256": "65144bf033b7c5e5d4392418714c1a00e3a81f3c7996567c76b43912a76bc1a0"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 1,
+        "openings": 12,
+        "storeys": {
+          "model": 2,
+          "plans": 2
+        },
+        "footprintM2": 99,
+        "publishedFootprintM2": 99.4,
+        "footprintResidualPct": -0.4,
+        "modelHash": "6c8cf347d809d0f7b41cb70391fbb10e8647fc2e7868f4dc4a91e17df1d28974",
+        "sceneSha256": "fe33e51901a64ee70e91253dba501fbdf534e72fc93442c5c8e8207ca0b202df",
+        "limiting": [
+          "METRIC_SCALE_WEAK",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "cmPerPixelX": 2.119461,
+          "cmPerPixelY": 2.119461,
+          "selected": {
+            "cmPerPixel": 2.119461,
+            "independentGroups": 1,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 1.892003,
+          "topology": {
+            "bindings": {
+              "alternative": 19,
+              "ambiguous": 0,
+              "primary": 21,
+              "uncentred": 29
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 0,
+              "parallelCopies": 11,
+              "totals": 0
+            },
+            "marks": {
+              "questionable": 85,
+              "rejected": 5,
+              "tick": 156
+            },
+            "neutralObservationIds": [
+              "dim-obs-400-rotated-cw-2d1b96647b"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-400-rotated-cw-2d1b96647b"
+              ],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 1,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 3
+            }
+          },
+          "marksAllFrames": {
+            "tick": 690,
+            "questionable": 326,
+            "rejected": 48
+          },
+          "hypotheses": 6,
+          "observations": 305,
+          "metricEvidenceHash": "340af6cc5b633d5a8cdca806ed4d14377c2dbe089b49f9d0c1333f8148c62fb1",
+          "ocr": {
+            "latticesAllFrames": 304,
+            "latticesSelectedFrame": 80,
+            "classes": {
+              "CLEAR": 9,
+              "SUPPORTED": 8,
+              "AMBIGUOUS": 24,
+              "LOW_QUALITY": 39
+            },
+            "asReadDiffersFrom005D": 47,
+            "expansionsAllFrames": 26500,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 11,
+              "SCALE_RANKED": 2
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 1,
+            "demoted": 0
+          }
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 235.2,
+          "peakRssMB": 834,
+          "metricPhaseMs": 186013,
+          "maxTickGapMs": 1379,
+          "maxTelemetryGapMs": 1965,
+          "evidencePackMs": 298
+        },
+        "evidencePackManifestSha256": "2cd37ddecfb36ba32435e87181b5f44fa149d68a0eb852bff8358eccb6cf188b"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "willa-miranda",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 4,
+        "openings": 18,
+        "storeys": {
+          "model": 1,
+          "plans": 2
+        },
+        "footprintM2": 161.29,
+        "publishedFootprintM2": 169.9,
+        "footprintResidualPct": -5.07,
+        "modelHash": "1ce47cfbbdb50393ddc47b2a15bdf76701b9130d82469964634aed72c636821d",
+        "sceneSha256": "d561a6285ccec6d9f2b4f33ad69c5394f9da2574b5e534bc45b40d6db5494cc3",
+        "limiting": [
+          "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "LAYOUT_STOREY_COVERAGE_DISAGREES",
+          "OPENINGS_NOT_BUILT",
+          "PLAN_EXTENT_FROM_WALLS",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS",
+          "INVARIANT_VIOLATIONS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "cmPerPixelX": 2.680947,
+          "cmPerPixelY": 2.680947,
+          "selected": {
+            "cmPerPixel": 2.680947,
+            "independentGroups": 3,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 0.793617,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.680947,
+          "topology": {
+            "bindings": {
+              "alternative": 28,
+              "ambiguous": 3,
+              "primary": 24,
+              "uncentred": 7
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 1,
+              "conflictsAsRead": 0,
+              "incomplete": 9,
+              "parallelCopies": 9,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 69,
+              "rejected": 3,
+              "tick": 162
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 620,
+            "questionable": 192,
+            "rejected": 12
+          },
+          "hypotheses": 6,
+          "observations": 210,
+          "metricEvidenceHash": "c772ffe48ed3f6ec3a713dbf31b09837e291e0fa48a64f3e3ce020bd9d7ca032"
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 241.9,
+          "peakRssMB": 795,
+          "metricPhaseMs": 191142,
+          "maxTickGapMs": 1684,
+          "maxTelemetryGapMs": 2479,
+          "evidencePackMs": 204
+        },
+        "evidencePackManifestSha256": "e586a137de8bd9584550ed646d7731cf706ddba1cec36968d428ba8c25215864"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 4,
+        "openings": 18,
+        "storeys": {
+          "model": 1,
+          "plans": 2
+        },
+        "footprintM2": 161.29,
+        "publishedFootprintM2": 169.9,
+        "footprintResidualPct": -5.07,
+        "modelHash": "1ce47cfbbdb50393ddc47b2a15bdf76701b9130d82469964634aed72c636821d",
+        "sceneSha256": "d561a6285ccec6d9f2b4f33ad69c5394f9da2574b5e534bc45b40d6db5494cc3",
+        "limiting": [
+          "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "LAYOUT_STOREY_COVERAGE_DISAGREES",
+          "OPENINGS_NOT_BUILT",
+          "PLAN_EXTENT_FROM_WALLS",
+          "RESIDUALS_OUTSIDE_TOLERANCE",
+          "EXTERIOR_JOINTS",
+          "INVARIANT_VIOLATIONS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+          "relation": "CONFIRMED",
+          "confidence": "SUPPORTED",
+          "cmPerPixelX": 2.680947,
+          "cmPerPixelY": 2.680947,
+          "selected": {
+            "cmPerPixel": 2.680947,
+            "independentGroups": 3,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 0.793617,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.680947,
+          "topology": {
+            "bindings": {
+              "alternative": 31,
+              "ambiguous": 4,
+              "primary": 26,
+              "uncentred": 7
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 1,
+              "conflictsAsRead": 1,
+              "incomplete": 8,
+              "parallelCopies": 9,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 69,
+              "rejected": 3,
+              "tick": 162
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 0,
+                "supported": 3,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 620,
+            "questionable": 192,
+            "rejected": 12
+          },
+          "hypotheses": 6,
+          "observations": 223,
+          "metricEvidenceHash": "5ba6113b3e54bd58f6d0111fe47b0ccabfd8fc7515e4dd83dac570073b5f35db",
+          "ocr": {
+            "latticesAllFrames": 247,
+            "latticesSelectedFrame": 61,
+            "classes": {
+              "CLEAR": 5,
+              "SUPPORTED": 12,
+              "AMBIGUOUS": 24,
+              "LOW_QUALITY": 20
+            },
+            "asReadDiffersFrom005D": 31,
+            "expansionsAllFrames": 25280,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 10,
+              "SCALE_RANKED": 3
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 0
+          }
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 230.5,
+          "peakRssMB": 826,
+          "metricPhaseMs": 181964,
+          "maxTickGapMs": 1747,
+          "maxTelemetryGapMs": 2580,
+          "evidencePackMs": 277
+        },
+        "evidencePackManifestSha256": "2672991ff7bc978c2e2691e48fc88b54df2bd1bcf4304ed006069ea399dc6256"
+      },
+      "modelUnchanged": true
+    },
+    {
+      "house": "dom-w-zurawkach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 1,
+          "plans": 3
+        },
+        "footprintM2": 100.88,
+        "publishedFootprintM2": 101.7,
+        "footprintResidualPct": -0.81,
+        "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+        "sceneSha256": "20aa16657e5897911ca4ec54886b3731c66db829e433d2ddafb057f22fe0aaa2",
+        "limiting": [
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "LAYOUT_ROOF_EVIDENCE_DISAGREES",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.218163,
+          "cmPerPixelY": 2.216603,
+          "selected": {
+            "cmPerPixel": 2.217794,
+            "independentGroups": 4,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.217601,
+          "topology": {
+            "bindings": {
+              "alternative": 39,
+              "ambiguous": 11,
+              "primary": 10,
+              "uncentred": 10
+            },
+            "hierarchy": {
+              "afterCorrection": 1,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 3,
+              "parallelCopies": 2,
+              "totals": 5
+            },
+            "marks": {
+              "questionable": 44,
+              "rejected": 30,
+              "tick": 115
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 441,
+            "questionable": 214,
+            "rejected": 80
+          },
+          "hypotheses": 6,
+          "observations": 235,
+          "metricEvidenceHash": "4f8ccbc30e134827f36cf1892c4359bdebc453a7acbbb0f9c44b7e52bafa88a2"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 231.7,
+          "peakRssMB": 762,
+          "metricPhaseMs": 190345,
+          "maxTickGapMs": 1829,
+          "maxTelemetryGapMs": 2392,
+          "evidencePackMs": 264
+        },
+        "evidencePackManifestSha256": "5677613845dd641f53b53c4604c4df176e69ee9bd23135ec1b6ba01ed2434b4e"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 2,
+        "openings": 12,
+        "storeys": {
+          "model": 1,
+          "plans": 3
+        },
+        "footprintM2": 100.88,
+        "publishedFootprintM2": 101.7,
+        "footprintResidualPct": -0.81,
+        "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+        "sceneSha256": "20aa16657e5897911ca4ec54886b3731c66db829e433d2ddafb057f22fe0aaa2",
+        "limiting": [
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "LAYOUT_ROOF_EVIDENCE_DISAGREES",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.218163,
+          "cmPerPixelY": 2.216603,
+          "selected": {
+            "cmPerPixel": 2.217794,
+            "independentGroups": 4,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.217601,
+          "topology": {
+            "bindings": {
+              "alternative": 43,
+              "ambiguous": 10,
+              "primary": 15,
+              "uncentred": 10
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 2,
+              "incomplete": 3,
+              "parallelCopies": 2,
+              "totals": 5
+            },
+            "marks": {
+              "questionable": 44,
+              "rejected": 30,
+              "tick": 115
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 4,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 1
+            },
+            "structural": [
+              {
+                "assignment": [
+                  {
+                    "asReadCm": 450,
+                    "chosenCm": 950,
+                    "observationId": "dim-obs-450-rotated-cw-beebbd1019"
+                  },
+                  {
+                    "asReadCm": 800,
+                    "chosenCm": 800,
+                    "observationId": "dim-obs-800-rotated-cw-dacb142ff6"
+                  },
+                  {
+                    "asReadCm": 150,
+                    "chosenCm": 150,
+                    "observationId": "dim-obs-150-rotated-cw-53248563d4"
+                  }
+                ],
+                "partChainId": "chain-vertical-65-e9d33ac352",
+                "refutedObservationIds": [
+                  "dim-obs-450-rotated-cw-beebbd1019"
+                ],
+                "totalChainId": "chain-vertical-36-64598b8d9f"
+              }
+            ]
+          },
+          "marksAllFrames": {
+            "tick": 441,
+            "questionable": 214,
+            "rejected": 80
+          },
+          "hypotheses": 6,
+          "observations": 261,
+          "metricEvidenceHash": "be15e9faa27a5f48d0bb934588b6349c12dbb65854fd51e3b5c95e658601b880",
+          "ocr": {
+            "latticesAllFrames": 291,
+            "latticesSelectedFrame": 57,
+            "classes": {
+              "CLEAR": 9,
+              "SUPPORTED": 5,
+              "AMBIGUOUS": 19,
+              "LOW_QUALITY": 24
+            },
+            "asReadDiffersFrom005D": 33,
+            "expansionsAllFrames": 29899,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 8,
+              "STRUCTURAL": 1
+            },
+            "falseConsensus": null,
+            "structural": 1,
+            "contested": 0,
+            "demoted": 0
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 223.9,
+          "peakRssMB": 802,
+          "metricPhaseMs": 184967,
+          "maxTickGapMs": 1762,
+          "maxTelemetryGapMs": 2527,
+          "evidencePackMs": 282
+        },
+        "evidencePackManifestSha256": "e782b5b8c1c6922fb17dac5b7d28cc233225b123ecb79ea925792750f9c64f31"
+      },
+      "modelUnchanged": true
+    },
+    {
+      "house": "dom-w-modrzykach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 19,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 181.72,
+        "publishedFootprintM2": 181.98,
+        "footprintResidualPct": -0.14,
+        "modelHash": "d4accc9d3e6a0675495c131dd46ef29b8faaaee92656ea2de53cad8894073301",
+        "sceneSha256": "8a1bf41ce899fe0c13d90a37c177c90dc4618058bdd1869996f7fa7138845fda",
+        "limiting": [
+          "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.748392,
+          "cmPerPixelY": 2.745536,
+          "selected": {
+            "cmPerPixel": 2.74775,
+            "independentGroups": 4,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.689233,
+          "topology": {
+            "bindings": {
+              "alternative": 45,
+              "ambiguous": 1,
+              "primary": 32,
+              "uncentred": 12
+            },
+            "hierarchy": {
+              "afterCorrection": 1,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 8,
+              "parallelCopies": 2,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 69,
+              "rejected": 6,
+              "tick": 180
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 551,
+            "questionable": 317,
+            "rejected": 51
+          },
+          "hypotheses": 6,
+          "observations": 202,
+          "metricEvidenceHash": "ff660cbc21c8845b2764fdd283b306e1b28ffece0b2d4755b8f92ea7f942177c"
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 141.9,
+          "peakRssMB": 714,
+          "metricPhaseMs": 119485,
+          "maxTickGapMs": 1209,
+          "maxTelemetryGapMs": 1627,
+          "evidencePackMs": 211
+        },
+        "evidencePackManifestSha256": "b33155f40285722e038487adbc9016ec4e75eb6b5772aec7f29041a1336d4530"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "PASS",
+        "bodies": 3,
+        "openings": 21,
+        "storeys": {
+          "model": 1,
+          "plans": 1
+        },
+        "footprintM2": 181,
+        "publishedFootprintM2": 181.98,
+        "footprintResidualPct": -0.54,
+        "modelHash": "77b4be1bf3eb709fee4488d8667c0763f3a44f311b4d7f2eb92b61f0d690166f",
+        "sceneSha256": "a03794e709ff780795824689938e39f9e154c3ab75f795dfe3935fedb0d4edc1",
+        "limiting": [
+          "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+          "EXTERIOR_JOINTS"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.748886,
+          "cmPerPixelY": 2.745536,
+          "selected": {
+            "cmPerPixel": 2.748133,
+            "independentGroups": 4,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.689233,
+          "topology": {
+            "bindings": {
+              "alternative": 49,
+              "ambiguous": 2,
+              "primary": 34,
+              "uncentred": 15
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 1,
+              "incomplete": 9,
+              "parallelCopies": 2,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 69,
+              "rejected": 6,
+              "tick": 180
+            },
+            "neutralObservationIds": [
+              "dim-obs-110-horizontal-f201488362",
+              "dim-obs-621-horizontal-cb3918b2e5",
+              "dim-obs-684-rotated-cw-d273ca7fb7"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-110-horizontal-f201488362",
+                "dim-obs-621-horizontal-cb3918b2e5",
+                "dim-obs-684-rotated-cw-d273ca7fb7"
+              ],
+              "counted": {
+                "ambiguous": 2,
+                "clear": 2,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-621-horizontal-cb3918b2e5",
+                "dim-obs-684-rotated-cw-d273ca7fb7"
+              ],
+              "lowQuality": 3
+            }
+          },
+          "marksAllFrames": {
+            "tick": 551,
+            "questionable": 317,
+            "rejected": 51
+          },
+          "hypotheses": 6,
+          "observations": 221,
+          "metricEvidenceHash": "e26b8bc38e931db1447cc4f5ae34b4ea52b58616edfb71eb6358bb26aa711f22",
+          "ocr": {
+            "latticesAllFrames": 243,
+            "latticesSelectedFrame": 80,
+            "classes": {
+              "CLEAR": 7,
+              "SUPPORTED": 11,
+              "AMBIGUOUS": 31,
+              "LOW_QUALITY": 31
+            },
+            "asReadDiffersFrom005D": 44,
+            "expansionsAllFrames": 23446,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 15,
+              "SCALE_RANKED": 3
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 3,
+            "demoted": 2
+          }
+        },
+        "challenge": null,
+        "resolution": null,
+        "performance": {
+          "wallClockS": 149.3,
+          "peakRssMB": 704,
+          "metricPhaseMs": 126899,
+          "maxTickGapMs": 1180,
+          "maxTelemetryGapMs": 1805,
+          "evidencePackMs": 288
+        },
+        "evidencePackManifestSha256": "79222b561042947c9a56719137a7012484cc64d6dcabcf846285ccb3bb28dbb4"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "dom-w-azaliach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "PLAN_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 69.69,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "cmPerPixelX": 1.897482,
+          "cmPerPixelY": 1.897482,
+          "selected": {
+            "cmPerPixel": 1.897482,
+            "independentGroups": 1,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 2.462082,
+          "topology": {
+            "bindings": {
+              "alternative": 26,
+              "ambiguous": 1,
+              "primary": 17,
+              "uncentred": 2
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 4,
+              "parallelCopies": 2,
+              "totals": 4
+            },
+            "marks": {
+              "questionable": 32,
+              "rejected": 3,
+              "tick": 166
+            },
+            "neutralObservationIds": [],
+            "valueAmbiguity": {
+              "alternatives": [
+                "1015",
+                "1035",
+                "1053",
+                "1005"
+              ],
+              "cmPerPixelHigh": 1.897482,
+              "cmPerPixelLow": 1.807554,
+              "observationId": "dim-obs-1055-horizontal-b12fe50759",
+              "rawText": "1055"
+            }
+          },
+          "marksAllFrames": {
+            "tick": 456,
+            "questionable": 123,
+            "rejected": 9
+          },
+          "hypotheses": 6,
+          "observations": 194,
+          "metricEvidenceHash": "f67db6fd5943ddd5c1ccfefa5842ad9ebd3656b89604391d1a0b7a1bf268c2ce"
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "performance": {
+          "wallClockS": 167.3,
+          "peakRssMB": 702,
+          "metricPhaseMs": 139368,
+          "maxTickGapMs": 1536,
+          "maxTelemetryGapMs": 1733,
+          "evidencePackMs": 134
+        },
+        "evidencePackManifestSha256": "50eec66f3d0d2770d6a108dcaa4d1bf42e05ab66c55f8f53bcda928ddc55ef83"
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "PLAN_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 69.69,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "cmPerPixelX": 1.861511,
+          "cmPerPixelY": 1.861511,
+          "selected": {
+            "cmPerPixel": 1.861511,
+            "independentGroups": 1,
+            "axes": [
+              "X"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 2.462082,
+          "topology": {
+            "bindings": {
+              "alternative": 34,
+              "ambiguous": 1,
+              "primary": 20,
+              "uncentred": 2
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 4,
+              "parallelCopies": 2,
+              "totals": 4
+            },
+            "marks": {
+              "questionable": 32,
+              "rejected": 3,
+              "tick": 166
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 1,
+                "clear": 0,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-1055-horizontal-0e8e0e0cd9"
+              ],
+              "lowQuality": 0
+            },
+            "valueAmbiguity": {
+              "alternatives": [
+                "1055",
+                "1015",
+                "1075",
+                "1031",
+                "1025",
+                "1045",
+                "1005"
+              ],
+              "cmPerPixelHigh": 1.933453,
+              "cmPerPixelLow": 1.807554,
+              "observationId": "dim-obs-1055-horizontal-0e8e0e0cd9",
+              "rawText": "1035"
+            }
+          },
+          "marksAllFrames": {
+            "tick": 456,
+            "questionable": 123,
+            "rejected": 9
+          },
+          "hypotheses": 6,
+          "observations": 210,
+          "metricEvidenceHash": "52edf2828803dc7a9e33819db60e0f7cecc4ef911cf2feb881a7c5985a54b69b",
+          "ocr": {
+            "latticesAllFrames": 277,
+            "latticesSelectedFrame": 77,
+            "classes": {
+              "CLEAR": 6,
+              "SUPPORTED": 7,
+              "AMBIGUOUS": 20,
+              "LOW_QUALITY": 44
+            },
+            "asReadDiffersFrom005D": 54,
+            "expansionsAllFrames": 28145,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 9
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 1
+          }
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "performance": {
+          "wallClockS": 177.5,
+          "peakRssMB": 723,
+          "metricPhaseMs": 148478,
+          "maxTickGapMs": 1622,
+          "maxTelemetryGapMs": 1824,
+          "evidencePackMs": 179
+        },
+        "evidencePackManifestSha256": "0194f5a325eac605d45a411621b6faf513e27e1a7b960cbeb7840107b408af91"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "dom-w-dabecjach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "BOUNDARY_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 168.76,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+          "relation": "CONFIRMED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.672148,
+          "cmPerPixelY": 2.682222,
+          "selected": {
+            "cmPerPixel": 2.672314,
+            "independentGroups": 2,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.67336,
+          "topology": {
+            "bindings": {
+              "alternative": 24,
+              "ambiguous": 2,
+              "primary": 20,
+              "uncentred": 15
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 2,
+              "incomplete": 10,
+              "parallelCopies": 3,
+              "totals": 12
+            },
+            "marks": {
+              "questionable": 93,
+              "rejected": 6,
+              "tick": 192
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 1220,
+            "questionable": 908,
+            "rejected": 39
+          },
+          "hypotheses": 6,
+          "observations": 200,
+          "metricEvidenceHash": "ae874036939df433bdab44420728f3fb12d0260a8be6dc80f5a9dde4fdda3485",
+          "ocr": null
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "evidencePackManifestSha256": null,
+        "note": "the round-4 blind run at the frozen 005D code (committed)"
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "BOUNDARY_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 168.76,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+          "relation": "REPLACED",
+          "confidence": "STRONG",
+          "cmPerPixelX": 2.811318,
+          "cmPerPixelY": 2.813983,
+          "selected": {
+            "cmPerPixel": 2.811617,
+            "independentGroups": 5,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 2.67336,
+          "topology": {
+            "bindings": {
+              "alternative": 24,
+              "ambiguous": 2,
+              "primary": 22,
+              "uncentred": 15
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 1,
+              "conflictsAsRead": 1,
+              "incomplete": 9,
+              "parallelCopies": 3,
+              "totals": 11
+            },
+            "marks": {
+              "questionable": 93,
+              "rejected": 6,
+              "tick": 192
+            },
+            "neutralObservationIds": [
+              "dim-obs-30-rotated-cw-26a815f5d7"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-30-rotated-cw-26a815f5d7"
+              ],
+              "counted": {
+                "ambiguous": 1,
+                "clear": 0,
+                "supported": 4,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-643-horizontal-0c6b5e00c8"
+              ],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 1220,
+            "questionable": 907,
+            "rejected": 37
+          },
+          "hypotheses": 6,
+          "observations": 211,
+          "metricEvidenceHash": "80e7e53db17246a7e0be2200f032b6fa1bcc06851460844944a48253eca388a7",
+          "ocr": {
+            "latticesAllFrames": 310,
+            "latticesSelectedFrame": 75,
+            "classes": {
+              "CLEAR": 2,
+              "SUPPORTED": 9,
+              "AMBIGUOUS": 31,
+              "LOW_QUALITY": 33
+            },
+            "asReadDiffersFrom005D": 58,
+            "expansionsAllFrames": 32244,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 10
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 1,
+            "demoted": 1
+          }
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "INCONCLUSIVE",
+          "publishedFigure": "SPENT"
+        },
+        "performance": {
+          "wallClockS": 199,
+          "peakRssMB": 761,
+          "metricPhaseMs": 169095,
+          "maxTickGapMs": 1149,
+          "maxTelemetryGapMs": 1862,
+          "evidencePackMs": 252
+        },
+        "evidencePackManifestSha256": "46b63f47a754a78727f2b1289f359460bb7b9f0e9b8d8555b0aa792acd977305"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "dom-w-tunbergiach",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 1,
+        "openings": 8,
+        "storeys": {
+          "model": 1,
+          "plans": 3
+        },
+        "footprintM2": 103.06,
+        "publishedFootprintM2": 117.74,
+        "footprintResidualPct": -12.47,
+        "modelHash": "9d92a2eafc847cd498b61ee120a9166266eea84ffd596c7a1d2a0824f06d7958",
+        "sceneSha256": "d2f6ce4cd8b8621fa1e6282630cca3201b1fdd47c7c649d2f4bb9c06a1650ea4",
+        "limiting": [
+          "LAYOUT_FOOTPRINT_AREA_NEAR",
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "METRIC_SCALE_UNSUPPORTED",
+          "PLAN_EXTENT_FROM_WALLS"
+        ],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+          "relation": "LEGACY_UNCONFIRMED",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": 1.994682,
+          "cmPerPixelY": 1.994682,
+          "selected": {
+            "cmPerPixel": 2.09205,
+            "independentGroups": 1,
+            "axes": [
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": false
+          },
+          "legacyCmPerPixel": 1.994682,
+          "topology": {
+            "bindings": {
+              "alternative": 31,
+              "ambiguous": 6,
+              "primary": 10,
+              "uncentred": 1
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 10,
+              "parallelCopies": 1,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 55,
+              "rejected": 5,
+              "tick": 140
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 453,
+            "questionable": 235,
+            "rejected": 52
+          },
+          "hypotheses": 6,
+          "observations": 188,
+          "metricEvidenceHash": "ccdff0df63380aad36c5a3bd9d7e8bb400bad10e080d2c410a066780f7cf02dd",
+          "ocr": null
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "evidencePackManifestSha256": null,
+        "note": "the round-4 blind run at the frozen 005D code (committed)"
+      },
+      "after": {
+        "outcome": "COMPLETED",
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 1,
+        "openings": 8,
+        "storeys": {
+          "model": 1,
+          "plans": 3
+        },
+        "footprintM2": 117.1,
+        "publishedFootprintM2": 117.74,
+        "footprintResidualPct": -0.54,
+        "modelHash": "86580d74ccbe619e53cc4e623dce059134553ff6f63b17d689a2101c98b84718",
+        "sceneSha256": "1bf9f55f5b0ec48b49a8ca5eb2c72e916d590ba00d32816ef3968c1eb1cdec43",
+        "limiting": [
+          "LAYOUT_NO_MASS_REACHES_UP",
+          "LAYOUT_ROOF_EVIDENCE_DISAGREES",
+          "METRIC_SCALE_WEAK",
+          "RESIDUALS_OUTSIDE_TOLERANCE"
+        ],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+          "relation": "REPLACED",
+          "confidence": "WEAK",
+          "cmPerPixelX": 2.091071,
+          "cmPerPixelY": 2.09205,
+          "selected": {
+            "cmPerPixel": 2.091504,
+            "independentGroups": 2,
+            "axes": [
+              "X",
+              "Y"
+            ],
+            "longestShare": 1,
+            "corroborated": true
+          },
+          "legacyCmPerPixel": 1.994682,
+          "topology": {
+            "bindings": {
+              "alternative": 31,
+              "ambiguous": 6,
+              "primary": 10,
+              "uncentred": 1
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 10,
+              "parallelCopies": 1,
+              "totals": 10
+            },
+            "marks": {
+              "questionable": 55,
+              "rejected": 5,
+              "tick": 140
+            },
+            "neutralObservationIds": [
+              "dim-obs-1117-horizontal-2393904141"
+            ],
+            "ocr": {
+              "contestedObservationIds": [
+                "dim-obs-1117-horizontal-2393904141"
+              ],
+              "counted": {
+                "ambiguous": 1,
+                "clear": 0,
+                "supported": 1,
+                "unrated": 0
+              },
+              "demotedObservationIds": [
+                "dim-obs-1117-horizontal-2393904141"
+              ],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 561,
+            "questionable": 277,
+            "rejected": 55
+          },
+          "hypotheses": 6,
+          "observations": 194,
+          "metricEvidenceHash": "33bb27c57886468771d800fc3ee4133eb3e93ddba4f9fa8bfcef349dfc3ac9ea",
+          "ocr": {
+            "latticesAllFrames": 258,
+            "latticesSelectedFrame": 49,
+            "classes": {
+              "CLEAR": 2,
+              "SUPPORTED": 5,
+              "AMBIGUOUS": 10,
+              "LOW_QUALITY": 32
+            },
+            "asReadDiffersFrom005D": 35,
+            "expansionsAllFrames": 24269,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 5
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 1,
+            "demoted": 1
+          }
+        },
+        "challenge": {
+          "outcome": "KEPT",
+          "publishedFigure": "SCORED",
+          "sourceConflict": null
+        },
+        "resolution": null,
+        "performance": {
+          "wallClockS": 188.2,
+          "peakRssMB": 823,
+          "metricPhaseMs": 155838,
+          "maxTickGapMs": 1689,
+          "maxTelemetryGapMs": 2073,
+          "evidencePackMs": 243
+        },
+        "evidencePackManifestSha256": "6979acc1b9d2b87b48e57a8afc6f3fee9ffaf863cb47e11f3dcbec006767f976"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "aster-viii",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 278.3,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+          "relation": "NO_SCALE",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": null,
+          "cmPerPixelY": null,
+          "selected": null,
+          "legacyCmPerPixel": null,
+          "topology": {
+            "bindings": {
+              "alternative": 0,
+              "ambiguous": 0,
+              "primary": 0,
+              "uncentred": 1
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 0,
+              "parallelCopies": 10,
+              "totals": 0
+            },
+            "marks": {
+              "questionable": 21,
+              "rejected": 3,
+              "tick": 67
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 26,
+            "questionable": 1,
+            "rejected": 0
+          },
+          "hypotheses": 1,
+          "observations": 1,
+          "metricEvidenceHash": "aeb6c14ca753f4bdd732b811c3f19cda1d3bad86ca1bf181c92f0c39f26df05c"
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED"
+        },
+        "performance": {
+          "wallClockS": 35.8,
+          "peakRssMB": 714,
+          "metricPhaseMs": 19117,
+          "maxTickGapMs": 2376,
+          "maxTelemetryGapMs": 2801,
+          "evidencePackMs": 37
+        },
+        "evidencePackManifestSha256": "33c33e22d6e3d52a721a59db61ce085364823c38af67add4d300b495784690c8"
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 278.3,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+          "relation": "NO_SCALE",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": null,
+          "cmPerPixelY": null,
+          "selected": null,
+          "legacyCmPerPixel": null,
+          "topology": {
+            "bindings": {
+              "alternative": 0,
+              "ambiguous": 0,
+              "primary": 0,
+              "uncentred": 1
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 0,
+              "parallelCopies": 10,
+              "totals": 0
+            },
+            "marks": {
+              "questionable": 21,
+              "rejected": 3,
+              "tick": 67
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 0,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 26,
+            "questionable": 1,
+            "rejected": 0
+          },
+          "hypotheses": 1,
+          "observations": 1,
+          "metricEvidenceHash": "294c46b4d863aea497c2728b1660f0c1e86034fb8d2756db7acc33abba32c00c",
+          "ocr": {
+            "latticesAllFrames": 22,
+            "latticesSelectedFrame": 22,
+            "classes": {
+              "CLEAR": 0,
+              "SUPPORTED": 0,
+              "AMBIGUOUS": 4,
+              "LOW_QUALITY": 18
+            },
+            "asReadDiffersFrom005D": 19,
+            "expansionsAllFrames": 2961,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {},
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 0
+          }
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED"
+        },
+        "performance": {
+          "wallClockS": 34.8,
+          "peakRssMB": 717,
+          "metricPhaseMs": 18724,
+          "maxTickGapMs": 2321,
+          "maxTelemetryGapMs": 2684,
+          "evidencePackMs": 80
+        },
+        "evidencePackManifestSha256": "874a4b745509bc9b11daee44d88d0ca65e9d161e64ca9488bde2762c98b30ecb"
+      },
+      "modelUnchanged": false
+    },
+    {
+      "house": "galaktyka",
+      "gate": "DEVELOPMENT",
+      "before": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 145.1,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.3.0",
+          "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+          "relation": "NO_SCALE",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": null,
+          "cmPerPixelY": null,
+          "selected": null,
+          "legacyCmPerPixel": null,
+          "topology": {
+            "bindings": {
+              "alternative": 0,
+              "ambiguous": 0,
+              "primary": 2,
+              "uncentred": 2
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 6,
+              "parallelCopies": 5,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 57,
+              "rejected": 0,
+              "tick": 259
+            },
+            "neutralObservationIds": []
+          },
+          "marksAllFrames": {
+            "tick": 133,
+            "questionable": 27,
+            "rejected": 0
+          },
+          "hypotheses": 2,
+          "observations": 19,
+          "metricEvidenceHash": "fa056870cc6a2913b642fd918179ae313aa5ed1b034dee851b51c45310034f16"
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED"
+        },
+        "performance": {
+          "wallClockS": 88.9,
+          "peakRssMB": 780,
+          "metricPhaseMs": 64492,
+          "maxTickGapMs": 3535,
+          "maxTelemetryGapMs": 4223,
+          "evidencePackMs": 44
+        },
+        "evidencePackManifestSha256": "4c52aae515892ff7c4700ad4d6dd2f87df5e840923c6404187bf8fdf630e9c39"
+      },
+      "after": {
+        "outcome": "FAILED",
+        "failure": "METRIC_RESOLUTION_INCONCLUSIVE",
+        "why": null,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": null,
+        "openings": null,
+        "storeys": null,
+        "footprintM2": null,
+        "publishedFootprintM2": 145.1,
+        "footprintResidualPct": null,
+        "modelHash": null,
+        "sceneSha256": null,
+        "limiting": [],
+        "metric": {
+          "schemaVersion": "1.4.0",
+          "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+          "relation": "NO_SCALE",
+          "confidence": "INCONCLUSIVE",
+          "cmPerPixelX": null,
+          "cmPerPixelY": null,
+          "selected": null,
+          "legacyCmPerPixel": null,
+          "topology": {
+            "bindings": {
+              "alternative": 0,
+              "ambiguous": 0,
+              "primary": 2,
+              "uncentred": 2
+            },
+            "hierarchy": {
+              "afterCorrection": 0,
+              "agreesAsRead": 0,
+              "conflictsAsRead": 0,
+              "incomplete": 6,
+              "parallelCopies": 5,
+              "totals": 6
+            },
+            "marks": {
+              "questionable": 57,
+              "rejected": 0,
+              "tick": 259
+            },
+            "neutralObservationIds": [],
+            "ocr": {
+              "contestedObservationIds": [],
+              "counted": {
+                "ambiguous": 0,
+                "clear": 0,
+                "supported": 0,
+                "unrated": 0
+              },
+              "demotedObservationIds": [],
+              "lowQuality": 0
+            }
+          },
+          "marksAllFrames": {
+            "tick": 133,
+            "questionable": 27,
+            "rejected": 0
+          },
+          "hypotheses": 2,
+          "observations": 19,
+          "metricEvidenceHash": "3ae503d4141b56f9ad636c0f3fee5d6a86da646174a462022d34d8c5d4a0ffbc",
+          "ocr": {
+            "latticesAllFrames": 71,
+            "latticesSelectedFrame": 45,
+            "classes": {
+              "CLEAR": 4,
+              "SUPPORTED": 1,
+              "AMBIGUOUS": 3,
+              "LOW_QUALITY": 37
+            },
+            "asReadDiffersFrom005D": 32,
+            "expansionsAllFrames": 5259,
+            "cacheHitsAllFrames": 0,
+            "selectedBy": {
+              "AS_READ": 1
+            },
+            "falseConsensus": null,
+            "structural": 0,
+            "contested": 0,
+            "demoted": 0
+          }
+        },
+        "challenge": null,
+        "resolution": {
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED"
+        },
+        "performance": {
+          "wallClockS": 85.9,
+          "peakRssMB": 807,
+          "metricPhaseMs": 63197,
+          "maxTickGapMs": 3228,
+          "maxTelemetryGapMs": 3794,
+          "evidencePackMs": 92
+        },
+        "evidencePackManifestSha256": "8ccafcb0be963a81c096e723e178313216079723c5cdba30bcf53473740c45d3"
+      },
+      "modelUnchanged": false
+    }
+  ],
+  "known": [
+    {
+      "row": "eoze-every-copy",
+      "lane": "LEGACY_EVIDENCE_COMPATIBILITY",
+      "outcome": "COMPLETED",
+      "bodies": 1,
+      "openings": null,
+      "storeys": {
+        "model": 1,
+        "plans": 1
+      },
+      "footprintM2": 116.94,
+      "publishedFootprintM2": 122.07,
+      "footprintResidualPct": -4.2,
+      "modelHash": "0a0e019df52a473a95e977cae5e88bfe08a8c417e64cb8866e47bc572a602603",
+      "sceneSha256": null,
+      "limiting": [],
+      "metric": {
+        "schemaVersion": "1.1.0",
+        "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+        "relation": null,
+        "confidence": null,
+        "cmPerPixelX": null,
+        "cmPerPixelY": null,
+        "selected": null,
+        "legacyCmPerPixel": null,
+        "topology": null,
+        "marksAllFrames": {
+          "tick": 0,
+          "questionable": 0,
+          "rejected": 0
+        },
+        "hypotheses": 0,
+        "observations": 0,
+        "metricEvidenceHash": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+        "ocr": null
+      },
+      "challenge": {
+        "outcome": "REPLACED",
+        "publishedFigure": "VERIFIED",
+        "sourceConflict": "AS_READ_REFUTATION"
+      },
+      "resolution": null,
+      "performance": {
+        "wallClockS": null,
+        "peakRssMB": null,
+        "metricPhaseMs": null,
+        "maxTickGapMs": null,
+        "maxTelemetryGapMs": null,
+        "evidencePackMs": 67
+      },
+      "evidencePackManifestSha256": "fad40834fa973869be14a9540fb0fc4aafce322201a2567dd4214ecdc5c063ce"
+    },
+    {
+      "row": "eoze-area-copy-alone",
+      "lane": "LEGACY_EVIDENCE_COMPATIBILITY",
+      "outcome": "COMPLETED",
+      "bodies": 1,
+      "openings": null,
+      "storeys": {
+        "model": 1,
+        "plans": 1
+      },
+      "footprintM2": 116.74,
+      "publishedFootprintM2": 122.07,
+      "footprintResidualPct": -4.37,
+      "modelHash": "a27f3a5e808ee09feae908ba2295f9762087993401a8e111ea9291b16719fc51",
+      "sceneSha256": null,
+      "limiting": [],
+      "metric": {
+        "schemaVersion": "1.1.0",
+        "selectedPlanFrameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+        "relation": null,
+        "confidence": null,
+        "cmPerPixelX": null,
+        "cmPerPixelY": null,
+        "selected": null,
+        "legacyCmPerPixel": null,
+        "topology": null,
+        "marksAllFrames": {
+          "tick": 0,
+          "questionable": 0,
+          "rejected": 0
+        },
+        "hypotheses": 0,
+        "observations": 0,
+        "metricEvidenceHash": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+        "ocr": null
+      },
+      "challenge": {
+        "outcome": "REPLACED",
+        "publishedFigure": "VERIFIED",
+        "sourceConflict": "AS_READ_REFUTATION"
+      },
+      "resolution": null,
+      "performance": {
+        "wallClockS": null,
+        "peakRssMB": null,
+        "metricPhaseMs": null,
+        "maxTickGapMs": null,
+        "maxTelemetryGapMs": null,
+        "evidencePackMs": 73
+      },
+      "evidencePackManifestSha256": "6dc924d5f7944eb2e61fddf4b58086fc7eee11c5b2c4093227fb792e8ec2bfa8"
+    },
+    {
+      "row": "eoze-decoy-high",
+      "lane": "DECOY",
+      "outcome": "FAILED",
+      "failure": "PLAN_RESOLUTION_INCONCLUSIVE",
+      "why": "SOURCE_CONFLICT",
+      "bodies": null,
+      "openings": null,
+      "storeys": null,
+      "footprintM2": null,
+      "publishedFootprintM2": 152.59,
+      "footprintResidualPct": null,
+      "modelHash": null,
+      "sceneSha256": null,
+      "limiting": [],
+      "metric": {
+        "schemaVersion": "1.1.0",
+        "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+        "relation": null,
+        "confidence": null,
+        "cmPerPixelX": null,
+        "cmPerPixelY": null,
+        "selected": null,
+        "legacyCmPerPixel": null,
+        "topology": null,
+        "marksAllFrames": {
+          "tick": 0,
+          "questionable": 0,
+          "rejected": 0
+        },
+        "hypotheses": 0,
+        "observations": 0,
+        "metricEvidenceHash": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+        "ocr": null
+      },
+      "challenge": {
+        "outcome": "REFUSED",
+        "publishedFigure": "VERIFIED",
+        "sourceConflict": "AS_READ_REFUTATION"
+      },
+      "resolution": null,
+      "performance": {
+        "wallClockS": null,
+        "peakRssMB": null,
+        "metricPhaseMs": null,
+        "maxTickGapMs": null,
+        "maxTelemetryGapMs": null,
+        "evidencePackMs": 108
+      },
+      "evidencePackManifestSha256": "59d735e39f91ea4381c9fec35db39d3f49ee97c843b283e9f8eb47d55d9c4018"
+    },
+    {
+      "row": "eoze-decoy-low",
+      "lane": "DECOY",
+      "outcome": "FAILED",
+      "failure": "PLAN_RESOLUTION_INCONCLUSIVE",
+      "why": "SOURCE_CONFLICT",
+      "bodies": null,
+      "openings": null,
+      "storeys": null,
+      "footprintM2": null,
+      "publishedFootprintM2": 97.66,
+      "footprintResidualPct": null,
+      "modelHash": null,
+      "sceneSha256": null,
+      "limiting": [],
+      "metric": {
+        "schemaVersion": "1.1.0",
+        "selectedPlanFrameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+        "relation": null,
+        "confidence": null,
+        "cmPerPixelX": null,
+        "cmPerPixelY": null,
+        "selected": null,
+        "legacyCmPerPixel": null,
+        "topology": null,
+        "marksAllFrames": {
+          "tick": 0,
+          "questionable": 0,
+          "rejected": 0
+        },
+        "hypotheses": 0,
+        "observations": 0,
+        "metricEvidenceHash": "c1aef4811725d4b6e12f4c3e9ff0ed0c9670df093f85bf3a97c5427b602f0f67",
+        "ocr": null
+      },
+      "challenge": {
+        "outcome": "REFUSED",
+        "publishedFigure": "VERIFIED",
+        "sourceConflict": "AS_READ_REFUTATION"
+      },
+      "resolution": null,
+      "performance": {
+        "wallClockS": null,
+        "peakRssMB": null,
+        "metricPhaseMs": null,
+        "maxTickGapMs": null,
+        "maxTelemetryGapMs": null,
+        "evidencePackMs": 62
+      },
+      "evidencePackManifestSha256": "ed5e62701571a20f74ce1ad079b503d1de13de8a7f4c6e69ed3ccefd0e75a753"
+    },
+    {
+      "row": "kosacce-area-copy-alone",
+      "lane": "KNOWN_MAY_REFUSE",
+      "outcome": "FAILED",
+      "failure": "PLAN_RESOLUTION_INCONCLUSIVE",
+      "why": null,
+      "bodies": null,
+      "openings": null,
+      "storeys": null,
+      "footprintM2": null,
+      "publishedFootprintM2": 164.47,
+      "footprintResidualPct": null,
+      "modelHash": null,
+      "sceneSha256": null,
+      "limiting": [],
+      "metric": {
+        "schemaVersion": "1.1.0",
+        "selectedPlanFrameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+        "relation": null,
+        "confidence": null,
+        "cmPerPixelX": null,
+        "cmPerPixelY": null,
+        "selected": null,
+        "legacyCmPerPixel": null,
+        "topology": null,
+        "marksAllFrames": {
+          "tick": 0,
+          "questionable": 0,
+          "rejected": 0
+        },
+        "hypotheses": 0,
+        "observations": 0,
+        "metricEvidenceHash": "b309767db31749bcaa9dcf27161e26780af0cf0dca1c21e77f607c142f783a82",
+        "ocr": null
+      },
+      "challenge": null,
+      "resolution": {
+        "outcome": "INCONCLUSIVE",
+        "publishedFigure": "SPENT"
+      },
+      "performance": {
+        "wallClockS": null,
+        "peakRssMB": null,
+        "metricPhaseMs": null,
+        "maxTickGapMs": null,
+        "maxTelemetryGapMs": null,
+        "evidencePackMs": 71
+      },
+      "evidencePackManifestSha256": "0c1324241137d1777ca806f8d4f18145d96c57c45ef6f3f77c3f48bb520df1dd"
+    }
+  ]
+}

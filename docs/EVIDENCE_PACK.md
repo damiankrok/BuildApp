@@ -78,5 +78,10 @@ after  = REJECTED
 
 A doubt named on the same decision (`ACCEPTED` vs `ACCEPTED_QUESTIONABLE`) is
 not a divergence; every later stage that differs is listed after the first.
+Every crossing mark is classified before any number is read, but the pack
+records only the marks of the chains the run kept, and which chains are kept
+depends on the readings. So the tick stage is compared on the marks both runs
+recorded; a mark one run recorded and the other did not is what a later stage
+kept, and is listed apart (`recordedByOneRunOnly`), not as a divergence (005E).
 Use it on frozen code against new code, a clean link against a tracked one,
 evidence on against off, or an accepted reading against a refused one.

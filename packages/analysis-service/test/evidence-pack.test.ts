@@ -184,6 +184,19 @@ describe('first divergence', () => {
     expect(d).toMatchObject({ firstDivergence: 'OCR_READING', object: 'label:b', before: 'ABSENT', after: 'READ' })
   })
 
+  it('a mark only one run recorded is what a later stage kept, not a classification: the first divergence is that later stage (005E)', () => {
+    // Both runs classified every mark alike; the later run kept one more chain (its label now reads), so the pack records its marks.
+    const before = [ev(1, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:230', 'ACCEPTED'), ev(2, 'OCR_READING', 'label:a', 'READ 1501')]
+    const after = [ev(1, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:230', 'ACCEPTED'), ev(2, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c2:137.5', 'ACCEPTED'), ev(3, 'OCR_READING', 'label:a', 'READ 1580')]
+    const d = firstDivergence(before, after)
+    expect(d).toMatchObject({ firstDivergence: 'OCR_READING', object: 'label:a', before: 'READ 1501', after: 'READ 1580' })
+    expect(d.stagesDiffering).toEqual(['OCR_READING'])
+    expect(d.recordedByOneRunOnly).toEqual([{ stage: 'DIMENSION_TICK_CLASSIFICATION', objects: 1 }])
+    // A mark both runs recorded and classified differently is still the classification's divergence.
+    const flipped = [ev(1, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:230', 'REJECTED'), ev(2, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c2:137.5', 'ACCEPTED'), ev(3, 'OCR_READING', 'label:a', 'READ 1580')]
+    expect(firstDivergence(before, flipped)).toMatchObject({ firstDivergence: 'DIMENSION_TICK_CLASSIFICATION', object: 'tick:c1:230', differing: 1 })
+  })
+
   const pack0 = () => packRunDir(off, join(root, 'pack-div'), 'larchfield', { versions: {} }).pack
 })
 

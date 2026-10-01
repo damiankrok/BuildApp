@@ -1,0 +1,130 @@
+{
+  "boundary": {
+    "accepted": true,
+    "candidates": [
+      {
+        "areaM2": 92.588326,
+        "cells": 702,
+        "gapsBridged": 35,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 4.976001,
+        "perimeterM": 38.785947,
+        "strongOpeningM": 5.440765,
+        "unsupportedM": 15.681007,
+        "wallM": 16.763599,
+        "weakOpeningM": 0.900576
+      },
+      {
+        "areaM2": 96.021967,
+        "cells": 737,
+        "gapsBridged": 35,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 4.976001,
+        "perimeterM": 95.993191,
+        "strongOpeningM": 38.44688,
+        "unsupportedM": 0.97029,
+        "wallM": 55.675445,
+        "weakOpeningM": 0.900576
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 0.412998,
+        "cells": 3,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.270585,
+        "cells": 4,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.163775,
+        "cells": 2,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 2.706839,
+        "cells": 29,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.175643,
+        "cells": 2,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 2.881987,
+        "cells": 32,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 32.30484,
+        "cells": 170,
+        "continuesAcrossM": 5.439865
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.108986,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.086437,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.145578,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.042724,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.120458,
+        "cells": 1,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 1044,
+      "OPENING_SUPPORTED": 33,
+      "TRUE_EXTERIOR_GAP": 372,
+      "UNKNOWN_GAP": 64
+    },
+    "policies": {
+      "disagree": true,
+      "exclusionAccepted": true,
+      "exclusionAreaM2": 90.324946,
+      "strictAccepted": false,
+      "strictAreaM2": 41.26421
+    },
+    "why": "the outline continues the box's interior past its edge (1 component): the plan is cut on the outline"
+  },
+  "cells": {
+    "enclosed": 679,
+    "total": 1680
+  },
+  "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "longBandBox": {
+    "x0": 327.5,
+    "x1": 715,
+    "y0": 159,
+    "y1": 635
+  }
+}

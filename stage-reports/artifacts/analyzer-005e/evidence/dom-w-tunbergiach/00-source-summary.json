@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 24,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 12,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+  "contentHash": "553253462b8d36d2d1c77fb6e37cd1135a295e446b88f7f1482904849c160970",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 11
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-md842941974a5c-69ef8c8020",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.42
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 9.99
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 174.62
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 117.74
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 166.96
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 150.94
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 235.48
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 162.96
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 935.21
+    }
+  ],
+  "runId": "dom-w-tunbergiach"
+}

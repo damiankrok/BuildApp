@@ -1,0 +1,66 @@
+{
+  "firstDivergence": "OCR_SEQUENCE_CANDIDATES",
+  "object": "ink:text-region-54-582-aeb838f20c:ROTATED_CW",
+  "before": "ABSENT",
+  "after": "CANDIDATES:620|024,034,054,120,134,610,624",
+  "reasonAfter": "SUPPORTED (p 0.375); read 021 by the 005D reader; 8 image-only values",
+  "differing": 20,
+  "examples": [
+    {
+      "object": "ink:text-region-54-582-aeb838f20c:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:620|024,034,054,120,134,610,624"
+    },
+    {
+      "object": "ink:text-region-610-193-4cc992eb0a:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:627|027,077,621,623,637,677,827"
+    },
+    {
+      "object": "ink:text-region-148-235-e5d0f70dc3:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:381|011,181,281,311,511,581,781"
+    },
+    {
+      "object": "ink:text-region-33-425-ead767ba42:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:1470|1170,1174,1474,1770"
+    },
+    {
+      "object": "ink:text-region-148-328-6a1830b826:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:160|100,110,164,180"
+    },
+    {
+      "object": "ink:text-region-434-765-580de15d46:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:1720|1310,1320,1710,1721,1730,1731,1751"
+    },
+    {
+      "object": "ink:text-region-441-417-14b47b90cb:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:210|110,310,710"
+    },
+    {
+      "object": "ink:text-region-422-193-5693f3c9d3:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:115|113,213,215,313,315,515,715"
+    }
+  ],
+  "stagesDiffering": [
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FIRST_SUCCESS_CHALLENGE"
+  ],
+  "recordedByOneRunOnly": [
+    {
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "objects": 28
+    }
+  ]
+}

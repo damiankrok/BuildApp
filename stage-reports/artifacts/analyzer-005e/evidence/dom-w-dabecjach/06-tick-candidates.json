@@ -1,0 +1,4101 @@
+{
+  "classified": true,
+  "counts": {
+    "QUESTIONABLE": 93,
+    "REJECTED": 6,
+    "TICK": 192
+  },
+  "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "legend": {
+    "QUESTIONABLE": "#e08a00",
+    "REJECTED": "#d11f1f",
+    "TICK": "#1b8a3a"
+  },
+  "marks": [
+    {
+      "atPx": 182,
+      "chainId": "chain-horizontal-159-990882d3cd",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-horizontal-159-990882d3cd:182",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-159-990882d3cd"
+      ]
+    },
+    {
+      "atPx": 239.5,
+      "chainId": "chain-horizontal-159-990882d3cd",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-159-990882d3cd:239.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-159-990882d3cd"
+      ]
+    },
+    {
+      "atPx": 261.5,
+      "chainId": "chain-horizontal-159-990882d3cd",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-159-990882d3cd:261.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-159-990882d3cd"
+      ]
+    },
+    {
+      "atPx": 328,
+      "chainId": "chain-horizontal-180-4bc579a081",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-180-4bc579a081:328",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-180-4bc579a081"
+      ]
+    },
+    {
+      "atPx": 343,
+      "chainId": "chain-horizontal-180-4bc579a081",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-180-4bc579a081:343",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-180-4bc579a081"
+      ]
+    },
+    {
+      "atPx": 356.235294,
+      "chainId": "chain-horizontal-180-4bc579a081",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-180-4bc579a081:356",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-180-4bc579a081"
+      ]
+    },
+    {
+      "atPx": 581.5,
+      "chainId": "chain-horizontal-209-3eebfb4c7f",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-209-3eebfb4c7f:581.5",
+      "reasons": [
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-209-3eebfb4c7f"
+      ]
+    },
+    {
+      "atPx": 313,
+      "chainId": "chain-horizontal-217-a14d6b9b39",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-217-a14d6b9b39:313",
+      "reasons": [
+        "DUPLICATE",
+        "LIGHTER_THAN_LINE"
+      ],
+      "supportIds": [
+        "chain-horizontal-217-a14d6b9b39"
+      ]
+    },
+    {
+      "atPx": 364.5,
+      "chainId": "chain-horizontal-217-a14d6b9b39",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-217-a14d6b9b39:364.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-217-a14d6b9b39"
+      ]
+    },
+    {
+      "atPx": 472.5,
+      "chainId": "chain-horizontal-258-284fe631c9",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-258-284fe631c9:472.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-258-284fe631c9"
+      ]
+    },
+    {
+      "atPx": 472.5,
+      "chainId": "chain-horizontal-267-f55d5e3871",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-267-f55d5e3871:472.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-267-f55d5e3871"
+      ]
+    },
+    {
+      "atPx": 536,
+      "chainId": "chain-horizontal-267-f55d5e3871",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-horizontal-267-f55d5e3871:536",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-267-f55d5e3871"
+      ]
+    },
+    {
+      "atPx": 515,
+      "chainId": "chain-horizontal-295-8ae25df2d3",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-295-8ae25df2d3:515",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-295-8ae25df2d3"
+      ]
+    },
+    {
+      "atPx": 672.5,
+      "chainId": "chain-horizontal-300-ce4e7da206",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-300-ce4e7da206:672.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-300-ce4e7da206"
+      ]
+    },
+    {
+      "atPx": 136.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:136.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 148,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:148",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 162,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:162",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 173.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:173.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 188,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:188",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 199.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:199.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 213.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:213.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 225,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:225",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 239.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:239.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 250.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:250.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 265,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:265",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 276.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:276.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 290,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:290",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 302,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:302",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 316.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:316.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 327.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:327.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 420.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:420.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 432,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:432",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 446.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:446.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 457.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:457.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 472,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:472",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 483.5,
+      "chainId": "chain-horizontal-31-84d1acc449",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-31-84d1acc449:483.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-31-84d1acc449"
+      ]
+    },
+    {
+      "atPx": 628,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-347-2177d234fe:628",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 643,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-347-2177d234fe:643",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 479,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-364-23a18ca16b:479",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 530,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-364-23a18ca16b:530",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 566.5,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-364-23a18ca16b:566.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 592,
+      "chainId": "chain-horizontal-620-316ef60e2c",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-horizontal-620-316ef60e2c:592",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-horizontal-620-316ef60e2c"
+      ]
+    },
+    {
+      "atPx": 34,
+      "chainId": "chain-vertical-134-4cee0b1bf8",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-134-4cee0b1bf8:34",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-134-4cee0b1bf8"
+      ]
+    },
+    {
+      "atPx": 44,
+      "chainId": "chain-vertical-134-4cee0b1bf8",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-vertical-134-4cee0b1bf8:44",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-134-4cee0b1bf8"
+      ]
+    },
+    {
+      "atPx": 59,
+      "chainId": "chain-vertical-134-4cee0b1bf8",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-134-4cee0b1bf8:59",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-134-4cee0b1bf8"
+      ]
+    },
+    {
+      "atPx": 158.5,
+      "chainId": "chain-vertical-134-4cee0b1bf8",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-vertical-134-4cee0b1bf8:158.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-134-4cee0b1bf8"
+      ]
+    },
+    {
+      "atPx": 90.5,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-153-1a21d37069:90.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 115.5,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-153-1a21d37069:115.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 140,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-153-1a21d37069:140",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 165.5,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-153-1a21d37069:165.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 148,
+      "chainId": "chain-vertical-240-0f5174e936",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-240-0f5174e936:148",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-240-0f5174e936"
+      ]
+    },
+    {
+      "atPx": 70,
+      "chainId": "chain-vertical-251-fcd2fd1dc1",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-vertical-251-fcd2fd1dc1:70",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-251-fcd2fd1dc1"
+      ]
+    },
+    {
+      "atPx": 70,
+      "chainId": "chain-vertical-271-602b94e736",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-271-602b94e736:70",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE"
+      ],
+      "supportIds": [
+        "chain-vertical-271-602b94e736"
+      ]
+    },
+    {
+      "atPx": 431.5,
+      "chainId": "chain-vertical-279-523e62a85c",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-279-523e62a85c:431.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-279-523e62a85c"
+      ]
+    },
+    {
+      "atPx": 181.5,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-312-74ae3acf76:181.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 217,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-312-74ae3acf76:217",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 228,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-312-74ae3acf76:228",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 431.5,
+      "chainId": "chain-vertical-315-ca49e6387c",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-315-ca49e6387c:431.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE"
+      ],
+      "supportIds": [
+        "chain-vertical-315-ca49e6387c"
+      ]
+    },
+    {
+      "atPx": 229,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-320-fc49b5259f:229",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 83,
+      "chainId": "chain-vertical-346-8fd55e5580",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-346-8fd55e5580:83",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-346-8fd55e5580"
+      ]
+    },
+    {
+      "atPx": 97,
+      "chainId": "chain-vertical-346-8fd55e5580",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-346-8fd55e5580:97",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-346-8fd55e5580"
+      ]
+    },
+    {
+      "atPx": 108,
+      "chainId": "chain-vertical-346-8fd55e5580",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-346-8fd55e5580:108",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-346-8fd55e5580"
+      ]
+    },
+    {
+      "atPx": 127.5,
+      "chainId": "chain-vertical-346-8fd55e5580",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-346-8fd55e5580:127.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-346-8fd55e5580"
+      ]
+    },
+    {
+      "atPx": 80,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-368-36ca09e610:80",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 95,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-368-36ca09e610:95",
+      "reasons": [
+        "DUPLICATE",
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 103,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-368-36ca09e610:103",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 120.409091,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-368-36ca09e610:120.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 140,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-368-36ca09e610:140",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 95.5,
+      "chainId": "chain-vertical-389-87c7828d86",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-389-87c7828d86:95.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-389-87c7828d86"
+      ]
+    },
+    {
+      "atPx": 106,
+      "chainId": "chain-vertical-389-87c7828d86",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-389-87c7828d86:106",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-389-87c7828d86"
+      ]
+    },
+    {
+      "atPx": 403,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-405-262f034a43:403",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 94,
+      "chainId": "chain-vertical-410-fbc48d3d9a",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-410-fbc48d3d9a:94",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-410-fbc48d3d9a"
+      ]
+    },
+    {
+      "atPx": 108,
+      "chainId": "chain-vertical-410-fbc48d3d9a",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-410-fbc48d3d9a:108",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-410-fbc48d3d9a"
+      ]
+    },
+    {
+      "atPx": 96,
+      "chainId": "chain-vertical-432-ab5c60cf72",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-432-ab5c60cf72:96",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-432-ab5c60cf72"
+      ]
+    },
+    {
+      "atPx": 103,
+      "chainId": "chain-vertical-432-ab5c60cf72",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-432-ab5c60cf72:103",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-432-ab5c60cf72"
+      ]
+    },
+    {
+      "atPx": 164,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-452-9ab06fcc64:164",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 174,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-452-9ab06fcc64:174",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 331.5,
+      "chainId": "chain-vertical-452-e84cef3c9b",
+      "class": "REJECTED",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "tick:chain-vertical-452-e84cef3c9b:331.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "FAINT_SIDE",
+        "LIGHTER_THAN_LINE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-452-e84cef3c9b"
+      ]
+    },
+    {
+      "atPx": 348.5,
+      "chainId": "chain-vertical-452-e84cef3c9b",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-452-e84cef3c9b:348.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-452-e84cef3c9b"
+      ]
+    },
+    {
+      "atPx": 431.5,
+      "chainId": "chain-vertical-452-e84cef3c9b",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-452-e84cef3c9b:431.5",
+      "reasons": [
+        "LIGHTER_THAN_LINE"
+      ],
+      "supportIds": [
+        "chain-vertical-452-e84cef3c9b"
+      ]
+    },
+    {
+      "atPx": 132,
+      "chainId": "chain-vertical-453-b92c57877c",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-453-b92c57877c:132",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-453-b92c57877c"
+      ]
+    },
+    {
+      "atPx": 181,
+      "chainId": "chain-vertical-458-ec9dc15f97",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-458-ec9dc15f97:181",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-458-ec9dc15f97"
+      ]
+    },
+    {
+      "atPx": 257.827586,
+      "chainId": "chain-vertical-458-ec9dc15f97",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-458-ec9dc15f97:258",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-458-ec9dc15f97"
+      ]
+    },
+    {
+      "atPx": 288.5,
+      "chainId": "chain-vertical-458-ec9dc15f97",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-458-ec9dc15f97:288.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-458-ec9dc15f97"
+      ]
+    },
+    {
+      "atPx": 82.5,
+      "chainId": "chain-vertical-493-18482fb4d6",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-493-18482fb4d6:82.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-493-18482fb4d6"
+      ]
+    },
+    {
+      "atPx": 381,
+      "chainId": "chain-vertical-509-9628f9cbfc",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-509-9628f9cbfc:381",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-509-9628f9cbfc"
+      ]
+    },
+    {
+      "atPx": 566.5,
+      "chainId": "chain-vertical-520-a9bca3a043",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-520-a9bca3a043:566.5",
+      "reasons": [
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-520-a9bca3a043"
+      ]
+    },
+    {
+      "atPx": 583.5,
+      "chainId": "chain-vertical-540-1a8ebb7239",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-540-1a8ebb7239:583.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-540-1a8ebb7239"
+      ]
+    },
+    {
+      "atPx": 584,
+      "chainId": "chain-vertical-563-b846f713fe",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-563-b846f713fe:584",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-563-b846f713fe"
+      ]
+    },
+    {
+      "atPx": 208.5,
+      "chainId": "chain-vertical-682-c54a47d835",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-682-c54a47d835:208.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED",
+        "STYLE_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-682-c54a47d835"
+      ]
+    },
+    {
+      "atPx": 431.5,
+      "chainId": "chain-vertical-686-300e0c7dca",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-300e0c7dca:431.5",
+      "reasons": [
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-686-300e0c7dca"
+      ]
+    },
+    {
+      "atPx": 626.5,
+      "chainId": "chain-vertical-686-300e0c7dca",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-300e0c7dca:626.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-300e0c7dca"
+      ]
+    },
+    {
+      "atPx": 208.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:208.5",
+      "reasons": [
+        "FAINT_SIDE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 227.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:227.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "ONE_SIDED",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 307,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:307",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "DUPLICATE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 314.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:314.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "DUPLICATE",
+        "ONE_SIDED"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 323.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:323.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 340,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:340",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "DUPLICATE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 400.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "QUESTIONABLE",
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "id": "tick:chain-vertical-686-82bf11ccf2:400.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 477,
+      "chainId": "chain-horizontal-113-d8d07cb1e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-113-d8d07cb1e6:477",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-113-d8d07cb1e6"
+      ]
+    },
+    {
+      "atPx": 494,
+      "chainId": "chain-horizontal-113-d8d07cb1e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-113-d8d07cb1e6:494",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-113-d8d07cb1e6"
+      ]
+    },
+    {
+      "atPx": 703,
+      "chainId": "chain-horizontal-113-d8d07cb1e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-113-d8d07cb1e6:703",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-113-d8d07cb1e6"
+      ]
+    },
+    {
+      "atPx": 714,
+      "chainId": "chain-horizontal-113-d8d07cb1e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-113-d8d07cb1e6:714",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-113-d8d07cb1e6"
+      ]
+    },
+    {
+      "atPx": 619,
+      "chainId": "chain-horizontal-164-473ef97d72",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-164-473ef97d72:619",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-164-473ef97d72"
+      ]
+    },
+    {
+      "atPx": 686.5,
+      "chainId": "chain-horizontal-164-473ef97d72",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-164-473ef97d72:686.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-164-473ef97d72"
+      ]
+    },
+    {
+      "atPx": 481.5,
+      "chainId": "chain-horizontal-196-a3b8e174bb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-196-a3b8e174bb:481.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-196-a3b8e174bb"
+      ]
+    },
+    {
+      "atPx": 525,
+      "chainId": "chain-horizontal-196-a3b8e174bb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-196-a3b8e174bb:525",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-196-a3b8e174bb"
+      ]
+    },
+    {
+      "atPx": 684,
+      "chainId": "chain-horizontal-199-ff9c5aa2d8",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-199-ff9c5aa2d8:684",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-199-ff9c5aa2d8"
+      ]
+    },
+    {
+      "atPx": 706.5,
+      "chainId": "chain-horizontal-199-ff9c5aa2d8",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-199-ff9c5aa2d8:706.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-199-ff9c5aa2d8"
+      ]
+    },
+    {
+      "atPx": 565,
+      "chainId": "chain-horizontal-209-3eebfb4c7f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-3eebfb4c7f:565",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-3eebfb4c7f"
+      ]
+    },
+    {
+      "atPx": 628,
+      "chainId": "chain-horizontal-209-3eebfb4c7f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-3eebfb4c7f:628",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-3eebfb4c7f"
+      ]
+    },
+    {
+      "atPx": 683,
+      "chainId": "chain-horizontal-209-3eebfb4c7f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-3eebfb4c7f:683",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-3eebfb4c7f"
+      ]
+    },
+    {
+      "atPx": 311,
+      "chainId": "chain-horizontal-209-84975ede9d",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-84975ede9d:311",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-84975ede9d"
+      ]
+    },
+    {
+      "atPx": 320,
+      "chainId": "chain-horizontal-209-84975ede9d",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-84975ede9d:320",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-84975ede9d"
+      ]
+    },
+    {
+      "atPx": 364.5,
+      "chainId": "chain-horizontal-209-84975ede9d",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-84975ede9d:364.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-84975ede9d"
+      ]
+    },
+    {
+      "atPx": 384.5,
+      "chainId": "chain-horizontal-209-84975ede9d",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-84975ede9d:384.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-84975ede9d"
+      ]
+    },
+    {
+      "atPx": 453.875,
+      "chainId": "chain-horizontal-209-84975ede9d",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-209-84975ede9d:454",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-209-84975ede9d"
+      ]
+    },
+    {
+      "atPx": 320,
+      "chainId": "chain-horizontal-217-a14d6b9b39",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-217-a14d6b9b39:320",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-217-a14d6b9b39"
+      ]
+    },
+    {
+      "atPx": 275,
+      "chainId": "chain-horizontal-228-a7c493d033",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-228-a7c493d033:275",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-228-a7c493d033"
+      ]
+    },
+    {
+      "atPx": 298,
+      "chainId": "chain-horizontal-228-a7c493d033",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-228-a7c493d033:298",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-228-a7c493d033"
+      ]
+    },
+    {
+      "atPx": 310,
+      "chainId": "chain-horizontal-228-a7c493d033",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-228-a7c493d033:310",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-228-a7c493d033"
+      ]
+    },
+    {
+      "atPx": 684,
+      "chainId": "chain-horizontal-256-09da65cfbb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-256-09da65cfbb:684",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-256-09da65cfbb"
+      ]
+    },
+    {
+      "atPx": 706.5,
+      "chainId": "chain-horizontal-256-09da65cfbb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-256-09da65cfbb:706.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-256-09da65cfbb"
+      ]
+    },
+    {
+      "atPx": 504.5,
+      "chainId": "chain-horizontal-258-284fe631c9",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-258-284fe631c9:504.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-258-284fe631c9"
+      ]
+    },
+    {
+      "atPx": 526,
+      "chainId": "chain-horizontal-258-284fe631c9",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-258-284fe631c9:526",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-258-284fe631c9"
+      ]
+    },
+    {
+      "atPx": 543,
+      "chainId": "chain-horizontal-258-284fe631c9",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-258-284fe631c9:543",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-258-284fe631c9"
+      ]
+    },
+    {
+      "atPx": 564,
+      "chainId": "chain-horizontal-258-284fe631c9",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-258-284fe631c9:564",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-258-284fe631c9"
+      ]
+    },
+    {
+      "atPx": 526,
+      "chainId": "chain-horizontal-267-f55d5e3871",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-267-f55d5e3871:526",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-267-f55d5e3871"
+      ]
+    },
+    {
+      "atPx": 564,
+      "chainId": "chain-horizontal-267-f55d5e3871",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-267-f55d5e3871:564",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-267-f55d5e3871"
+      ]
+    },
+    {
+      "atPx": 711.5,
+      "chainId": "chain-horizontal-284-09eb7e3e61",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-284-09eb7e3e61:711.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-284-09eb7e3e61"
+      ]
+    },
+    {
+      "atPx": 732,
+      "chainId": "chain-horizontal-284-09eb7e3e61",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-284-09eb7e3e61:732",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-284-09eb7e3e61"
+      ]
+    },
+    {
+      "atPx": 472.5,
+      "chainId": "chain-horizontal-295-8ae25df2d3",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-295-8ae25df2d3:472.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-295-8ae25df2d3"
+      ]
+    },
+    {
+      "atPx": 503.5,
+      "chainId": "chain-horizontal-295-8ae25df2d3",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-295-8ae25df2d3:503.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-295-8ae25df2d3"
+      ]
+    },
+    {
+      "atPx": 525,
+      "chainId": "chain-horizontal-295-8ae25df2d3",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-295-8ae25df2d3:525",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-295-8ae25df2d3"
+      ]
+    },
+    {
+      "atPx": 604,
+      "chainId": "chain-horizontal-300-ce4e7da206",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-300-ce4e7da206:604",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-300-ce4e7da206"
+      ]
+    },
+    {
+      "atPx": 685.5,
+      "chainId": "chain-horizontal-300-ce4e7da206",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-300-ce4e7da206:685.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-300-ce4e7da206"
+      ]
+    },
+    {
+      "atPx": 710.5,
+      "chainId": "chain-horizontal-300-ce4e7da206",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-300-ce4e7da206:710.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-300-ce4e7da206"
+      ]
+    },
+    {
+      "atPx": 522,
+      "chainId": "chain-horizontal-304-ccbca36881",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-304-ccbca36881:522",
+      "reasons": [
+        "FAINT_SIDE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-304-ccbca36881"
+      ]
+    },
+    {
+      "atPx": 532.5,
+      "chainId": "chain-horizontal-304-ccbca36881",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-304-ccbca36881:532.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-304-ccbca36881"
+      ]
+    },
+    {
+      "atPx": 543,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-347-2177d234fe:543",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 612.5,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-347-2177d234fe:612.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 686,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-347-2177d234fe:686",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "FAINT_SIDE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 706.5,
+      "chainId": "chain-horizontal-347-2177d234fe",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-347-2177d234fe:706.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-347-2177d234fe"
+      ]
+    },
+    {
+      "atPx": 506,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-364-23a18ca16b:506",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 546.5,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-364-23a18ca16b:546.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 592.5,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-364-23a18ca16b:592.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 686,
+      "chainId": "chain-horizontal-364-23a18ca16b",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-364-23a18ca16b:686",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-364-23a18ca16b"
+      ]
+    },
+    {
+      "atPx": 711.5,
+      "chainId": "chain-horizontal-368-533924e7b4",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-368-533924e7b4:711.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-368-533924e7b4"
+      ]
+    },
+    {
+      "atPx": 732,
+      "chainId": "chain-horizontal-368-533924e7b4",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-368-533924e7b4:732",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-368-533924e7b4"
+      ]
+    },
+    {
+      "atPx": 136,
+      "chainId": "chain-horizontal-372-4418f4d887",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-372-4418f4d887:136",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-372-4418f4d887"
+      ]
+    },
+    {
+      "atPx": 157,
+      "chainId": "chain-horizontal-372-4418f4d887",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-372-4418f4d887:157",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-372-4418f4d887"
+      ]
+    },
+    {
+      "atPx": 180,
+      "chainId": "chain-horizontal-372-4418f4d887",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-372-4418f4d887:180",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-372-4418f4d887"
+      ]
+    },
+    {
+      "atPx": 509.5,
+      "chainId": "chain-horizontal-381-c738e128d6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-381-c738e128d6:509.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-381-c738e128d6"
+      ]
+    },
+    {
+      "atPx": 527.5,
+      "chainId": "chain-horizontal-381-c738e128d6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-381-c738e128d6:527.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-381-c738e128d6"
+      ]
+    },
+    {
+      "atPx": 567.5,
+      "chainId": "chain-horizontal-381-c738e128d6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-381-c738e128d6:567.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-381-c738e128d6"
+      ]
+    },
+    {
+      "atPx": 439,
+      "chainId": "chain-horizontal-431-5669940c71",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-431-5669940c71:439",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-431-5669940c71"
+      ]
+    },
+    {
+      "atPx": 452,
+      "chainId": "chain-horizontal-431-5669940c71",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-431-5669940c71:452",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-431-5669940c71"
+      ]
+    },
+    {
+      "atPx": 189.5,
+      "chainId": "chain-horizontal-432-f18f81d76e",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-432-f18f81d76e:189.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-432-f18f81d76e"
+      ]
+    },
+    {
+      "atPx": 278,
+      "chainId": "chain-horizontal-432-f18f81d76e",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-432-f18f81d76e:278",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-432-f18f81d76e"
+      ]
+    },
+    {
+      "atPx": 452,
+      "chainId": "chain-horizontal-507-65499b8c35",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-507-65499b8c35:452",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-507-65499b8c35"
+      ]
+    },
+    {
+      "atPx": 474.5,
+      "chainId": "chain-horizontal-507-65499b8c35",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-507-65499b8c35:474.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-507-65499b8c35"
+      ]
+    },
+    {
+      "atPx": 711.5,
+      "chainId": "chain-horizontal-510-bc10a91006",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-510-bc10a91006:711.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-510-bc10a91006"
+      ]
+    },
+    {
+      "atPx": 732,
+      "chainId": "chain-horizontal-510-bc10a91006",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-510-bc10a91006:732",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-510-bc10a91006"
+      ]
+    },
+    {
+      "atPx": 530.153846,
+      "chainId": "chain-horizontal-522-0fb32e3631",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-522-0fb32e3631:530",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-522-0fb32e3631"
+      ]
+    },
+    {
+      "atPx": 572.846154,
+      "chainId": "chain-horizontal-522-0fb32e3631",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-522-0fb32e3631:573",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-522-0fb32e3631"
+      ]
+    },
+    {
+      "atPx": 607.9375,
+      "chainId": "chain-horizontal-522-0fb32e3631",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-522-0fb32e3631:608",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-522-0fb32e3631"
+      ]
+    },
+    {
+      "atPx": 659.0625,
+      "chainId": "chain-horizontal-522-0fb32e3631",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-522-0fb32e3631:659",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-522-0fb32e3631"
+      ]
+    },
+    {
+      "atPx": 684,
+      "chainId": "chain-horizontal-522-0fb32e3631",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-522-0fb32e3631:684",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-horizontal-522-0fb32e3631"
+      ]
+    },
+    {
+      "atPx": 451.5,
+      "chainId": "chain-horizontal-568-62c3a1c301",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-568-62c3a1c301:451.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-568-62c3a1c301"
+      ]
+    },
+    {
+      "atPx": 474.5,
+      "chainId": "chain-horizontal-568-62c3a1c301",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-568-62c3a1c301:474.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-horizontal-568-62c3a1c301"
+      ]
+    },
+    {
+      "atPx": 614,
+      "chainId": "chain-horizontal-583-c3cc1fef54",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-583-c3cc1fef54:614",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-583-c3cc1fef54"
+      ]
+    },
+    {
+      "atPx": 652.5,
+      "chainId": "chain-horizontal-583-c3cc1fef54",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-583-c3cc1fef54:652.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-583-c3cc1fef54"
+      ]
+    },
+    {
+      "atPx": 611.5,
+      "chainId": "chain-horizontal-600-a0737d16bb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-600-a0737d16bb:611.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-600-a0737d16bb"
+      ]
+    },
+    {
+      "atPx": 655,
+      "chainId": "chain-horizontal-600-a0737d16bb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-600-a0737d16bb:655",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-600-a0737d16bb"
+      ]
+    },
+    {
+      "atPx": 381.125,
+      "chainId": "chain-horizontal-616-675cf9dda7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-616-675cf9dda7:381",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-616-675cf9dda7"
+      ]
+    },
+    {
+      "atPx": 396,
+      "chainId": "chain-horizontal-616-675cf9dda7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-616-675cf9dda7:396",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-616-675cf9dda7"
+      ]
+    },
+    {
+      "atPx": 475.5,
+      "chainId": "chain-horizontal-616-675cf9dda7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-616-675cf9dda7:475.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-616-675cf9dda7"
+      ]
+    },
+    {
+      "atPx": 684,
+      "chainId": "chain-horizontal-620-316ef60e2c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-620-316ef60e2c:684",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-620-316ef60e2c"
+      ]
+    },
+    {
+      "atPx": 706.5,
+      "chainId": "chain-horizontal-620-316ef60e2c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-620-316ef60e2c:706.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-620-316ef60e2c"
+      ]
+    },
+    {
+      "atPx": 469,
+      "chainId": "chain-horizontal-635-82bbf30901",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-635-82bbf30901:469",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-635-82bbf30901"
+      ]
+    },
+    {
+      "atPx": 592,
+      "chainId": "chain-horizontal-635-82bbf30901",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-635-82bbf30901:592",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-635-82bbf30901"
+      ]
+    },
+    {
+      "atPx": 714,
+      "chainId": "chain-horizontal-635-82bbf30901",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-635-82bbf30901:714",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-horizontal-635-82bbf30901"
+      ]
+    },
+    {
+      "atPx": 153,
+      "chainId": "chain-horizontal-713-1a07e193a6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-713-1a07e193a6:153",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-713-1a07e193a6"
+      ]
+    },
+    {
+      "atPx": 469,
+      "chainId": "chain-horizontal-713-1a07e193a6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-713-1a07e193a6:469",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-713-1a07e193a6"
+      ]
+    },
+    {
+      "atPx": 715,
+      "chainId": "chain-horizontal-713-1a07e193a6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-713-1a07e193a6:715",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-713-1a07e193a6"
+      ]
+    },
+    {
+      "atPx": 153,
+      "chainId": "chain-horizontal-738-810fb47ebb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-738-810fb47ebb:153",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-738-810fb47ebb"
+      ]
+    },
+    {
+      "atPx": 715,
+      "chainId": "chain-horizontal-738-810fb47ebb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-horizontal-738-810fb47ebb:715",
+      "reasons": [],
+      "supportIds": [
+        "chain-horizontal-738-810fb47ebb"
+      ]
+    },
+    {
+      "atPx": 51.585366,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-153-1a21d37069:51.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 270,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-153-1a21d37069:270",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 372,
+      "chainId": "chain-vertical-153-1a21d37069",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-153-1a21d37069:372",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-153-1a21d37069"
+      ]
+    },
+    {
+      "atPx": 368.5,
+      "chainId": "chain-vertical-190-b578f443d7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-190-b578f443d7:368.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-190-b578f443d7"
+      ]
+    },
+    {
+      "atPx": 431.5,
+      "chainId": "chain-vertical-190-b578f443d7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-190-b578f443d7:431.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-190-b578f443d7"
+      ]
+    },
+    {
+      "atPx": 183.5,
+      "chainId": "chain-vertical-196-0a1e60b5fb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-196-0a1e60b5fb:183.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-196-0a1e60b5fb"
+      ]
+    },
+    {
+      "atPx": 244,
+      "chainId": "chain-vertical-196-0a1e60b5fb",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-196-0a1e60b5fb:244",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-196-0a1e60b5fb"
+      ]
+    },
+    {
+      "atPx": 63.8125,
+      "chainId": "chain-vertical-201-f90f603afc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-201-f90f603afc:64",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-201-f90f603afc"
+      ]
+    },
+    {
+      "atPx": 92,
+      "chainId": "chain-vertical-201-f90f603afc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-201-f90f603afc:92",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-201-f90f603afc"
+      ]
+    },
+    {
+      "atPx": 123.5,
+      "chainId": "chain-vertical-201-f90f603afc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-201-f90f603afc:123.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-201-f90f603afc"
+      ]
+    },
+    {
+      "atPx": 327,
+      "chainId": "chain-vertical-203-f0207547e7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-203-f0207547e7:327",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-203-f0207547e7"
+      ]
+    },
+    {
+      "atPx": 410,
+      "chainId": "chain-vertical-203-f0207547e7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-203-f0207547e7:410",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-203-f0207547e7"
+      ]
+    },
+    {
+      "atPx": 183.5,
+      "chainId": "chain-vertical-232-c4cf9d08e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-232-c4cf9d08e6:183.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-232-c4cf9d08e6"
+      ]
+    },
+    {
+      "atPx": 241.5,
+      "chainId": "chain-vertical-232-c4cf9d08e6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-232-c4cf9d08e6:241.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-232-c4cf9d08e6"
+      ]
+    },
+    {
+      "atPx": 95.5,
+      "chainId": "chain-vertical-240-0f5174e936",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-240-0f5174e936:95.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-240-0f5174e936"
+      ]
+    },
+    {
+      "atPx": 158,
+      "chainId": "chain-vertical-240-0f5174e936",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-240-0f5174e936:158",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-240-0f5174e936"
+      ]
+    },
+    {
+      "atPx": 327,
+      "chainId": "chain-vertical-242-5c3647b909",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-242-5c3647b909:327",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-242-5c3647b909"
+      ]
+    },
+    {
+      "atPx": 410,
+      "chainId": "chain-vertical-242-5c3647b909",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-242-5c3647b909:410",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-242-5c3647b909"
+      ]
+    },
+    {
+      "atPx": 63.5,
+      "chainId": "chain-vertical-251-fcd2fd1dc1",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-251-fcd2fd1dc1:63.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-251-fcd2fd1dc1"
+      ]
+    },
+    {
+      "atPx": 118,
+      "chainId": "chain-vertical-251-fcd2fd1dc1",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-251-fcd2fd1dc1:118",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-251-fcd2fd1dc1"
+      ]
+    },
+    {
+      "atPx": 63.5,
+      "chainId": "chain-vertical-271-602b94e736",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-271-602b94e736:63.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-271-602b94e736"
+      ]
+    },
+    {
+      "atPx": 118,
+      "chainId": "chain-vertical-271-602b94e736",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-271-602b94e736:118",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-271-602b94e736"
+      ]
+    },
+    {
+      "atPx": 348,
+      "chainId": "chain-vertical-279-523e62a85c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-279-523e62a85c:348",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-279-523e62a85c"
+      ]
+    },
+    {
+      "atPx": 456.5,
+      "chainId": "chain-vertical-279-523e62a85c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-279-523e62a85c:456.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-279-523e62a85c"
+      ]
+    },
+    {
+      "atPx": 208.5,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-312-74ae3acf76:208.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "FAINT_SIDE"
+      ],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 247.5,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-312-74ae3acf76:247.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 279,
+      "chainId": "chain-vertical-312-74ae3acf76",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-312-74ae3acf76:279",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-312-74ae3acf76"
+      ]
+    },
+    {
+      "atPx": 452,
+      "chainId": "chain-vertical-315-ca49e6387c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-315-ca49e6387c:452",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-315-ca49e6387c"
+      ]
+    },
+    {
+      "atPx": 181,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-320-fc49b5259f:181",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 208.5,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-320-fc49b5259f:208.5",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "FAINT_SIDE"
+      ],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 217,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-320-fc49b5259f:217",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 247.454545,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-320-fc49b5259f:247.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 279,
+      "chainId": "chain-vertical-320-fc49b5259f",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-320-fc49b5259f:279",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-320-fc49b5259f"
+      ]
+    },
+    {
+      "atPx": 217.5,
+      "chainId": "chain-vertical-343-4861a0c767",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-343-4861a0c767:217.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-343-4861a0c767"
+      ]
+    },
+    {
+      "atPx": 235,
+      "chainId": "chain-vertical-343-4861a0c767",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-343-4861a0c767:235",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-343-4861a0c767"
+      ]
+    },
+    {
+      "atPx": 251,
+      "chainId": "chain-vertical-343-4861a0c767",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-343-4861a0c767:251",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-343-4861a0c767"
+      ]
+    },
+    {
+      "atPx": 74,
+      "chainId": "chain-vertical-346-8fd55e5580",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-346-8fd55e5580:74",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-346-8fd55e5580"
+      ]
+    },
+    {
+      "atPx": 394.5,
+      "chainId": "chain-vertical-358-188882cb02",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-358-188882cb02:394.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-358-188882cb02"
+      ]
+    },
+    {
+      "atPx": 452,
+      "chainId": "chain-vertical-358-188882cb02",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-358-188882cb02:452",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-358-188882cb02"
+      ]
+    },
+    {
+      "atPx": 71,
+      "chainId": "chain-vertical-368-36ca09e610",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-368-36ca09e610:71",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-368-36ca09e610"
+      ]
+    },
+    {
+      "atPx": 71,
+      "chainId": "chain-vertical-389-87c7828d86",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-389-87c7828d86:71",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-389-87c7828d86"
+      ]
+    },
+    {
+      "atPx": 454,
+      "chainId": "chain-vertical-396-19ec9197ab",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-396-19ec9197ab:454",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-396-19ec9197ab"
+      ]
+    },
+    {
+      "atPx": 616,
+      "chainId": "chain-vertical-396-19ec9197ab",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-396-19ec9197ab:616",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-396-19ec9197ab"
+      ]
+    },
+    {
+      "atPx": 630.333333,
+      "chainId": "chain-vertical-396-19ec9197ab",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-396-19ec9197ab:630.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-396-19ec9197ab"
+      ]
+    },
+    {
+      "atPx": 352,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-405-262f034a43:352",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 375.5,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-405-262f034a43:375.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 393,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-405-262f034a43:393",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 422.26087,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-405-262f034a43:422.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 452,
+      "chainId": "chain-vertical-405-262f034a43",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-405-262f034a43:452",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-405-262f034a43"
+      ]
+    },
+    {
+      "atPx": 146,
+      "chainId": "chain-vertical-409-70edc7c11a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-409-70edc7c11a:146",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-409-70edc7c11a"
+      ]
+    },
+    {
+      "atPx": 164,
+      "chainId": "chain-vertical-409-70edc7c11a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-409-70edc7c11a:164",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-409-70edc7c11a"
+      ]
+    },
+    {
+      "atPx": 174,
+      "chainId": "chain-vertical-409-70edc7c11a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-409-70edc7c11a:174",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-409-70edc7c11a"
+      ]
+    },
+    {
+      "atPx": 74.125,
+      "chainId": "chain-vertical-410-fbc48d3d9a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-410-fbc48d3d9a:74",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-410-fbc48d3d9a"
+      ]
+    },
+    {
+      "atPx": 137.5,
+      "chainId": "chain-vertical-410-fbc48d3d9a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-410-fbc48d3d9a:137.5",
+      "reasons": [
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-410-fbc48d3d9a"
+      ]
+    },
+    {
+      "atPx": 417.5,
+      "chainId": "chain-vertical-413-42773c1ab7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-413-42773c1ab7:417.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-413-42773c1ab7"
+      ]
+    },
+    {
+      "atPx": 453,
+      "chainId": "chain-vertical-413-42773c1ab7",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-413-42773c1ab7:453",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-413-42773c1ab7"
+      ]
+    },
+    {
+      "atPx": 75,
+      "chainId": "chain-vertical-432-ab5c60cf72",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-432-ab5c60cf72:75",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-432-ab5c60cf72"
+      ]
+    },
+    {
+      "atPx": 187.5,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-452-9ab06fcc64:187.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 208.5,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-452-9ab06fcc64:208.5",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 238,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-452-9ab06fcc64:238",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 259.5,
+      "chainId": "chain-vertical-452-9ab06fcc64",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-452-9ab06fcc64:259.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-452-9ab06fcc64"
+      ]
+    },
+    {
+      "atPx": 373,
+      "chainId": "chain-vertical-452-e84cef3c9b",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-452-e84cef3c9b:373",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-452-e84cef3c9b"
+      ]
+    },
+    {
+      "atPx": 71,
+      "chainId": "chain-vertical-453-b92c57877c",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-453-b92c57877c:71",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-453-b92c57877c"
+      ]
+    },
+    {
+      "atPx": 167.5,
+      "chainId": "chain-vertical-458-ec9dc15f97",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-458-ec9dc15f97:167.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-458-ec9dc15f97"
+      ]
+    },
+    {
+      "atPx": 616,
+      "chainId": "chain-vertical-469-e4fae78cb5",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-469-e4fae78cb5:616",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-469-e4fae78cb5"
+      ]
+    },
+    {
+      "atPx": 635,
+      "chainId": "chain-vertical-469-e4fae78cb5",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-469-e4fae78cb5:635",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-469-e4fae78cb5"
+      ]
+    },
+    {
+      "atPx": 103.5,
+      "chainId": "chain-vertical-493-18482fb4d6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-493-18482fb4d6:103.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-493-18482fb4d6"
+      ]
+    },
+    {
+      "atPx": 350,
+      "chainId": "chain-vertical-503-5aa4edbb40",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-503-5aa4edbb40:350",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-503-5aa4edbb40"
+      ]
+    },
+    {
+      "atPx": 364,
+      "chainId": "chain-vertical-503-5aa4edbb40",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-503-5aa4edbb40:364",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-503-5aa4edbb40"
+      ]
+    },
+    {
+      "atPx": 377,
+      "chainId": "chain-vertical-503-5aa4edbb40",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-503-5aa4edbb40:377",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-503-5aa4edbb40"
+      ]
+    },
+    {
+      "atPx": 398,
+      "chainId": "chain-vertical-503-5aa4edbb40",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-503-5aa4edbb40:398",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-503-5aa4edbb40"
+      ]
+    },
+    {
+      "atPx": 350,
+      "chainId": "chain-vertical-509-9628f9cbfc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-509-9628f9cbfc:350",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-509-9628f9cbfc"
+      ]
+    },
+    {
+      "atPx": 364,
+      "chainId": "chain-vertical-509-9628f9cbfc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-509-9628f9cbfc:364",
+      "reasons": [
+        "COLOUR_MISMATCH",
+        "NO_LINE_REFERENCE"
+      ],
+      "supportIds": [
+        "chain-vertical-509-9628f9cbfc"
+      ]
+    },
+    {
+      "atPx": 399.5,
+      "chainId": "chain-vertical-509-9628f9cbfc",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-509-9628f9cbfc:399.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-509-9628f9cbfc"
+      ]
+    },
+    {
+      "atPx": 509,
+      "chainId": "chain-vertical-520-a9bca3a043",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-520-a9bca3a043:509",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-520-a9bca3a043"
+      ]
+    },
+    {
+      "atPx": 522,
+      "chainId": "chain-vertical-520-a9bca3a043",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-520-a9bca3a043:522",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-520-a9bca3a043"
+      ]
+    },
+    {
+      "atPx": 532.5,
+      "chainId": "chain-vertical-531-253bc78bd6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-531-253bc78bd6:532.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-531-253bc78bd6"
+      ]
+    },
+    {
+      "atPx": 557,
+      "chainId": "chain-vertical-531-253bc78bd6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-531-253bc78bd6:557",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-531-253bc78bd6"
+      ]
+    },
+    {
+      "atPx": 558,
+      "chainId": "chain-vertical-540-1a8ebb7239",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-540-1a8ebb7239:558",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-540-1a8ebb7239"
+      ]
+    },
+    {
+      "atPx": 558.5,
+      "chainId": "chain-vertical-563-b846f713fe",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-563-b846f713fe:558.5",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-563-b846f713fe"
+      ]
+    },
+    {
+      "atPx": 509,
+      "chainId": "chain-vertical-584-cbb1697279",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-584-cbb1697279:509",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-584-cbb1697279"
+      ]
+    },
+    {
+      "atPx": 522,
+      "chainId": "chain-vertical-584-cbb1697279",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-584-cbb1697279:522",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-584-cbb1697279"
+      ]
+    },
+    {
+      "atPx": 159,
+      "chainId": "chain-vertical-61-d76ae0ab22",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-61-d76ae0ab22:159",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-61-d76ae0ab22"
+      ]
+    },
+    {
+      "atPx": 635,
+      "chainId": "chain-vertical-61-d76ae0ab22",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-61-d76ae0ab22:635",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-61-d76ae0ab22"
+      ]
+    },
+    {
+      "atPx": 523,
+      "chainId": "chain-vertical-614-9860725ca4",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-614-9860725ca4:523",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-614-9860725ca4"
+      ]
+    },
+    {
+      "atPx": 582.5,
+      "chainId": "chain-vertical-614-9860725ca4",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-614-9860725ca4:582.5",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-614-9860725ca4"
+      ]
+    },
+    {
+      "atPx": 588.5,
+      "chainId": "chain-vertical-614-9860725ca4",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-614-9860725ca4:588.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-614-9860725ca4"
+      ]
+    },
+    {
+      "atPx": 144,
+      "chainId": "chain-vertical-620-f40eb60af6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-620-f40eb60af6:144",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-620-f40eb60af6"
+      ]
+    },
+    {
+      "atPx": 164,
+      "chainId": "chain-vertical-620-f40eb60af6",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-620-f40eb60af6:164",
+      "reasons": [
+        "NO_LINE_REFERENCE",
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-620-f40eb60af6"
+      ]
+    },
+    {
+      "atPx": 509,
+      "chainId": "chain-vertical-665-972c73c29a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-665-972c73c29a:509",
+      "reasons": [
+        "WEDGE_NOT_STROKE"
+      ],
+      "supportIds": [
+        "chain-vertical-665-972c73c29a"
+      ]
+    },
+    {
+      "atPx": 522,
+      "chainId": "chain-vertical-665-972c73c29a",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-665-972c73c29a:522",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-665-972c73c29a"
+      ]
+    },
+    {
+      "atPx": 199,
+      "chainId": "chain-vertical-682-c54a47d835",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-682-c54a47d835:199",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-682-c54a47d835"
+      ]
+    },
+    {
+      "atPx": 249.5,
+      "chainId": "chain-vertical-682-c54a47d835",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-682-c54a47d835:249.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-682-c54a47d835"
+      ]
+    },
+    {
+      "atPx": 199,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:199",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 256,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:256",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 277,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:277",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 300,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:300",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 332,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:332",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 347,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:347",
+      "reasons": [
+        "COLOUR_MISMATCH"
+      ],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 364.5,
+      "chainId": "chain-vertical-686-82bf11ccf2",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-686-82bf11ccf2:364.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-686-82bf11ccf2"
+      ]
+    },
+    {
+      "atPx": 50.5,
+      "chainId": "chain-vertical-88-e7b1fa9c75",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-88-e7b1fa9c75:50.5",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-88-e7b1fa9c75"
+      ]
+    },
+    {
+      "atPx": 159,
+      "chainId": "chain-vertical-88-e7b1fa9c75",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-88-e7b1fa9c75:159",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-88-e7b1fa9c75"
+      ]
+    },
+    {
+      "atPx": 461,
+      "chainId": "chain-vertical-88-e7b1fa9c75",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-88-e7b1fa9c75:461",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-88-e7b1fa9c75"
+      ]
+    },
+    {
+      "atPx": 635,
+      "chainId": "chain-vertical-88-e7b1fa9c75",
+      "class": "TICK",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "tick:chain-vertical-88-e7b1fa9c75:635",
+      "reasons": [],
+      "supportIds": [
+        "chain-vertical-88-e7b1fa9c75"
+      ]
+    }
+  ],
+  "omitted": 0
+}

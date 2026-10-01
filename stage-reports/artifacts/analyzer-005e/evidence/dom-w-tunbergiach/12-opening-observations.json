@@ -1,0 +1,47 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 185,
+        "x1": 205,
+        "y0": 141,
+        "y1": 161
+      },
+      "id": "metric-callout-ring-2604200944",
+      "rawText": "406/41",
+      "value": 406
+    },
+    {
+      "box": {
+        "x0": 439,
+        "x1": 459,
+        "y0": 125,
+        "y1": 145
+      },
+      "id": "metric-callout-ring-39a8fc0d69",
+      "rawText": "111/111",
+      "value": 111
+    }
+  ],
+  "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 254,
+    "OPENING_SUPPORTED": 10,
+    "TRUE_EXTERIOR_GAP": 98,
+    "UNKNOWN_GAP": 17
+  },
+  "wideOpenings": [
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 466,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 175,
+      "score": 0.8,
+      "toPx": 625,
+      "why": "a 3.32 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 3.324849
+    }
+  ]
+}

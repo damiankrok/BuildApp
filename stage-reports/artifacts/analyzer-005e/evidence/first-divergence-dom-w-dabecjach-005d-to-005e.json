@@ -1,0 +1,68 @@
+{
+  "firstDivergence": "OCR_SEQUENCE_CANDIDATES",
+  "object": "ink:text-region-72-542-c6bbf51f75:ROTATED_CW",
+  "before": "ABSENT",
+  "after": "CANDIDATES:420|140,141,440,441,450,470,510",
+  "reasonAfter": "AMBIGUOUS (p 0.17); read 141 by the 005D reader; 8 image-only values",
+  "differing": 45,
+  "examples": [
+    {
+      "object": "ink:text-region-72-542-c6bbf51f75:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:420|140,141,440,441,450,470,510"
+    },
+    {
+      "object": "ink:text-region-672-368-427c4ab4de:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:194|141,144,149,191,199"
+    },
+    {
+      "object": "ink:text-region-419-722-92d6d0a0b9:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:1580|1180,1480,1500,1501,1510,1581,1583"
+    },
+    {
+      "object": "ink:text-region-46-389-90625e734a:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:1300|1200,1301,1340,1341,1700,1740,1741"
+    },
+    {
+      "object": "ink:text-region-72-99-5a7e5b7de1:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:304|100,104,214,300,514,700,704"
+    },
+    {
+      "object": "ink:text-region-596-195-7bcd58742d:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:312|311,313,317,511,512,513,711"
+    },
+    {
+      "object": "ink:text-region-581-697-c88c7af282:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "CANDIDATES:692|612,641,642,643,645,831,841"
+    },
+    {
+      "object": "ink:text-region-72-304-dcab3c0989:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "CANDIDATES:850|050,810,821,830,831,851,871"
+    }
+  ],
+  "stagesDiffering": [
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES"
+  ],
+  "recordedByOneRunOnly": [
+    {
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "objects": 5
+    }
+  ]
+}

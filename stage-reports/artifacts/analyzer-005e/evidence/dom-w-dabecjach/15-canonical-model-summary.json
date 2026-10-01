@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the building's outline cannot be established: read with drawn openings only it is B_STRICT 41.3 m² (perimeter 131.8 m: 64% wall, 45.4 m drawn openings, 0.0 m blank gaps bridged, 1.6 m unsupported); bridging blank door-sized gaps by what lies behind them it is B_EXCLUSION 90.3 m² (perimeter 96.0 m: 58% wall, 38.4 m drawn openings, 0.9 m blank gaps bridged, 1.0 m unsupported). The two differ by more than 6 %, and nothing in the drawing prefers one. What is missing: a door or glazing drawn across the blank gaps, or a dimension chain that closes the outline. (the lowest storey covers 85.91 m² against the 168.76 m² the publisher prints — 49.1% apart: the decomposition is not of this building 63 other readings of the plan were weighed and none holds: the best, copy dimensioned c936d50299, chain extent, registered scale, largest-first tiling, outer faces: 1 body, 137.2 m² (-18.7% of 168.76), UNKNOWN (the figure is spent), has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement)",
+    "reasonCode": "BOUNDARY_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 168.76,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

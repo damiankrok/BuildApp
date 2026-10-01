@@ -23,9 +23,23 @@ export type Divergence = {
   examples: Array<{ object: string; before: string; after: string }>
   /** Every stage that differs, in order: the first is the one that matters, the rest may follow from it. */
   stagesDiffering: TimelineStage[]
+  /**
+   * 005E: objects of a stage whose record a later stage scopes, recorded by one run only — not a decision of that stage
+   * (`RECORD_SCOPED`), so listed apart from the divergence.
+   */
+  recordedByOneRunOnly?: Array<{ stage: TimelineStage; objects: number }>
 }
 
 const ABSENT = 'ABSENT'
+
+/**
+ * Stages whose every object is decided, but recorded only where a later stage keeps it. Every crossing mark on a found
+ * line is classified before any number is read; the pack records the marks of the chains the run kept (a chain with a
+ * solved segment, labelled or long). A mark one run recorded and the other did not is a difference in what the later
+ * stages kept, which they report themselves; only a mark both runs recorded, classified differently, is a divergence
+ * of the classification.
+ */
+const RECORD_SCOPED: ReadonlySet<TimelineStage> = new Set(['DIMENSION_TICK_CLASSIFICATION'])
 
 /** Decisions that differ only in a named doubt (ACCEPTED vs ACCEPTED_QUESTIONABLE) are the same decision. */
 const core = (decision: string): string => decision.replace(/_QUESTIONABLE$/, '')
@@ -33,11 +47,17 @@ const core = (decision: string): string => decision.replace(/_QUESTIONABLE$/, ''
 /** The first stage, in analyzer order, where two timelines decide differently about any object. */
 export function firstDivergence(before: readonly DecisionEvent[], after: readonly DecisionEvent[]): Divergence {
   const stagesDiffering: TimelineStage[] = []
+  const recordedByOneRunOnly: Array<{ stage: TimelineStage; objects: number }> = []
   let first: Divergence | undefined
   for (const stage of TIMELINE_STAGES) {
     const a = new Map(before.filter((e) => e.stage === stage).map((e) => [e.objectId, e]))
     const b = new Map(after.filter((e) => e.stage === stage).map((e) => [e.objectId, e]))
-    const ids = [...new Set([...a.keys(), ...b.keys()])]
+    let ids = [...new Set([...a.keys(), ...b.keys()])]
+    if (RECORD_SCOPED.has(stage)) {
+      const oneSided = ids.filter((id) => !a.has(id) || !b.has(id)).length
+      if (oneSided > 0) recordedByOneRunOnly.push({ stage, objects: oneSided })
+      ids = ids.filter((id) => a.has(id) && b.has(id))
+    }
     // In the order the earlier run met them, then the later run's new objects: the first difference is the first in the pipeline.
     const order = (id: string): number => a.get(id)?.seq ?? (b.get(id)?.seq ?? 0) + 1e9
     ids.sort((x, y) => order(x) - order(y) || (x < y ? -1 : x > y ? 1 : 0))
@@ -59,7 +79,8 @@ export function firstDivergence(before: readonly DecisionEvent[], after: readonl
       }
     }
   }
-  return first ? { ...first, stagesDiffering } : { firstDivergence: 'NONE', differing: 0, examples: [], stagesDiffering }
+  const scoped = recordedByOneRunOnly.length > 0 ? { recordedByOneRunOnly } : {}
+  return first ? { ...first, stagesDiffering, ...scoped } : { firstDivergence: 'NONE', differing: 0, examples: [], stagesDiffering, ...scoped }
 }
 
 /**

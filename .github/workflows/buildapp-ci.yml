@@ -1013,7 +1013,9 @@ jobs:
       - name: Evidence Pack ON/OFF identity, determinism, sidecars, bounds, no publisher raster
         run: npx vitest run packages/analysis-service/test/evidence-pack.test.ts tests/architecture/generalization.test.ts
       - name: Committed packs match their manifests
-        run: npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005d/evidence --max-packs 16
+        run: |
+          npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005d/evidence --max-packs 16
+          npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005e/evidence --max-packs 16
 
   analyzer-opening-aware-envelope:
     # BUILDPLAN-ANALYZER-005C. The building's outline from wall-thick ink and
@@ -1077,7 +1079,7 @@ jobs:
           fi
 
   analyzer-development-houses:
-    # BUILDPLAN-ANALYZER-005B/005C/005D. All thirteen development houses through today's
+    # BUILDPLAN-ANALYZER-005B/005C/005D/005E. All fifteen development houses through today's
     # analyzer. Only the source package is sealed (stage-reports/artifacts/
     # analyzer-005b/dev); observations, metric evidence and the model are
     # re-extracted from the publisher's drawings, which are fetched here and
@@ -1088,7 +1090,9 @@ jobs:
     # page must stop with the typed metric reason. Only a publisher that cannot
     # be reached at all is a warning. 005D: each row also writes its Evidence
     # Pack (uploaded with the record, verified against its manifest), and the
-    # rows whose scale a dimension chain decides carry the metric gate.
+    # rows whose scale a dimension chain decides carry the metric gate. 005E: the two
+    # round-4 blind houses join; their scale is gated against the printed overall
+    # dimensions, which the numeric lattice now reads.
     name: Analyzer / development house (${{ matrix.house }})
     if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
     runs-on: ubuntu-latest
@@ -1106,12 +1110,14 @@ jobs:
           - house: kosacce-tracked
             expect: pass
             model: 5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
-          # 005D: G2E's model is unchanged; its incumbent scale is now named unsupported (its readings that
-          # agree with it are neutral between it and their own alternatives), so its warning moved with its evidence.
+          # 005E: G2E's scale is confirmed by readings the numeric lattice holds apart from their alternatives
+          # (CONFIRMED/STRONG, was LEGACY_UNCONFIRMED); the model moved with it (−2.92 % → −2.75 %) and is
+          # re-pinned. Its openings are still not built, and that warning must stay.
           - house: rarytasy-g2e
             expect: "footprint:2"
-            model: 8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8
-            limits: METRIC_SCALE_UNSUPPORTED
+            model: 9f5fd342a53edf54f203533f18e21d37805574ea8d1038fa4dbb092d584d21e7
+            limits: OPENINGS_NOT_BUILT
+            metric: "--metric CONFIRMED"
           # current e-OZE: MUST_COMPLETE, on a scale an overall reading states
           - house: rarytasy-eoze
             expect: pass
@@ -1148,6 +1154,19 @@ jobs:
           - house: galaktyka
             pkg: stage-reports/artifacts/analyzer-005c/holdout/h2-galaktyka/source-package.json
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+          # 005E: the round-4 blind houses. Their ground plans' overall dimensions were misread into a false
+          # consensus (dabecjach) and a tie (tunbergiach). The scale now matches the printed overall figures;
+          # dabecjach then stops at the boundary layer by name (out of this stage's scope), tunbergiach builds
+          # its ground storey within 1 % and still misses its upper storeys.
+          - house: dom-w-dabecjach
+            pkg: stage-reports/artifacts/analyzer-005d/holdout/h1-dom-w-dabecjach/source-package.json
+            expect: "refuse:BOUNDARY_RESOLUTION_INCONCLUSIVE"
+            metric: "--metric REPLACED --metric-overall --metric-scale 2.81"
+          - house: dom-w-tunbergiach
+            pkg: stage-reports/artifacts/analyzer-005d/holdout/h2-dom-w-tunbergiach/source-package.json
+            expect: "footprint:1"
+            limits: METRIC_SCALE_WEAK
+            metric: "--metric REPLACED --metric-scale 2.092"
     env:
       DEV: stage-reports/artifacts/analyzer-005b/dev
     steps:
