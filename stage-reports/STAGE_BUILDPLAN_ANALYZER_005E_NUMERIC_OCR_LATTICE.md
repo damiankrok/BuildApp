@@ -596,7 +596,7 @@ boundary layer, downstream of a right scale. Boundary refoundation is outside th
 | 129, 130 | `5d1b7bd`, `85b226b` | cancelled by the next push; 130 had 29 green when cancelled and failed only G2E's old pin |
 | **131** | `9f7423d` | **green at the first attempt**: 35 jobs, 34 green and `preview-latest` skipped by design (push). This covers every 005E gate (dimension evidence with the lattice and the adversaries, the Evidence Pack and its committed packs, the 15 development houses with the round-4 houses' scale gates, generalization, plan resolver, envelope, known rows), Android with the UI evidence gate, browser and container. **`PRE_HOLDOUT_5_SHA`** |
 | 132, 133 | `0afd751`, `18295c2` (push) | superseded by the next push and by the dispatch below |
-| final | this report's commit | `workflow_dispatch` with the OWNER APK; recorded in §AF once it completes |
+| **135** | `dab64d6` | **the final CI**: `workflow_dispatch` with the OWNER APK (`36921679603`), **green at the first attempt**, completed 21:10:36Z. Every job is green except `preview-latest`, skipped by design: the 005E gates, Android with the UI evidence gate, browser, container and the OWNER APK publish. No file outside `stage-reports/` and `PROJECT_STATUS.md` differs from run 131's analyzer code |
 
 ## AE. Commits
 
@@ -615,13 +615,45 @@ boundary layer, downstream of a right scale. Boundary refoundation is outside th
 | `9f7423d` | ci, evidence: the 005E development rows, the round-4 before/after packs, the record-scoped tick divergence (**PRE_HOLDOUT_5_SHA**) |
 | `0afd751` | holdout: the round-5 draw (ledger line) |
 | `18295c2` | docs(holdout): the sealed blind round 5 |
-| this report's commit | docs: this report and `PROJECT_STATUS.md` (the final build) |
+| `dab64d6` | docs: this report and `PROJECT_STATUS.md` (the final build, run 135) |
+| the next commit | docs: the OWNER APK record (§AF) |
 
 No model identifier appears in any commit. Git identity is unchanged, and nothing was force-pushed, reset or stashed.
 
 ## AF. OWNER APK
 
-Built by the final `workflow_dispatch` run on this report's commit (arm64, preview signer) and verified from the downloaded file. The record follows in the next commit; the APK itself is not committed.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`, from
+`workflow_dispatch` run 135 attempt 1 (`36921679603`) on `dab64d6`, which is also the final CI. Its analyzer code is
+the frozen code (`PRE_HOLDOUT_5_SHA`; only documents and sealed evidence differ).
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 30 766 475 bytes, `application/vnd.android.package-archive`. The release is a prerelease, updated 21:10:33Z |
+| SHA-256 | `1d611c0b177e65e1e15459e738a435caa653898beca6505be708b99981466417`, equal to the release notes and to GitHub's asset digest. The file at the same link before run 135 published was 005D's (`c6592702…5e30`), so the new file was re-downloaded after the run completed |
+| ABI | `aapt dump badging` shows `native-code: 'arm64-v8a'`. There are 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1135**, versionName `0.135.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes give run 135 (attempt 1) from `claude/new-session-3kzcgh` @ `dab64d6ebd90022bccd6df0bf97f42dd63114637` |
+| analyzer | The embedded bundle is `assets/local-analyzer/analyzer.mjs` (sha256 `ed9ad6df…e4d5`, equal to its manifest; Node 18.20.4). It declares `NUMERIC_LATTICE_VERSION = "1.0.0"`, `METRIC_READER_VERSION = "1.3.0"`, `METRIC_SOLVER_VERSION = "1.2.0"`, `METRIC_EVIDENCE_SCHEMA_VERSION = "1.4.0"`, `DIMENSION_TOPOLOGY_VERSION = "1.0.0"`, `PLAN_RESOLVER_VERSION = "1.4.0"`, `SOLVER_V2_VERSION = "2.3.0"`, `BOUNDARY_EVIDENCE_VERSION = "1.0.0"` and `GENERIC_ADAPTER_VERSION = "1.2.0"`. It carries `labelLattice`, `ocrClassOf`, `STABILITY_BRACKET`, `correctionReadings`, `falseConsensus` and the `OCR_LATTICE` step; nothing of the Evidence Pack is in it |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes. It installs over any preview build with a lower run number (1124 before it) |
+
+No APK binary is committed.
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over build 1124, then check each item:
+
+1. **Known houses unchanged.** Marcówki and Kosaćce (clean and tracked) build the same houses as build 1124: their
+   model hashes are unchanged on the desktop.
+2. **Moved with better evidence.** Rarytasy G2E (−2.75 %), current e-OZE (+1.51 %) and dom-w-modrzykach (−0.54 %)
+   build within their verdicts; small differences from 1124 are expected.
+3. **The round-4 houses.**
+   - `dom-w-tunbergiach` now builds its ground storey at about its published size (−0.54 %). It still builds one
+     storey of three, "Model gotowy z ograniczeniami".
+   - `dom-w-dabecjach` still stops by name, now at the right scale (the outline).
+4. **The progress line** shows "odczyt wymiarów: etykieta n z m" during the metric step, and "Przerwij" still stops
+   an analysis within seconds.
 
 ## AG. Residual debt
 
