@@ -530,7 +530,8 @@ progress residual: `METRIC_FRAMES` on this 1625 × 1700 px plan ticked 4.8 s apa
 | 114 | `b0013ed` | failed: the known-set row e-OZE (§T), the three changed development rows, and the Android UI gate once (`ProductFlowDeviceTest`, a 5 s wait in the stage sheet at the default font scale; it passed at 1.3 in the same job) |
 | 115 | `ca97516` | cancelled by the next push; by then the same three analyzer rows had failed and nothing else |
 | 116 | `e328121` | attempt 1: every analyzer, Android, browser and container job green; the Android UI gate failed — a Compose test-harness race in the Kosaćce slice's stage sheet (`IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver`, thrown inside `performClick`) and, on the next test, a 45 s wait for the renderer at launch. Re-run once (the protocol's one re-run): **green** — the three slices and the alternate-publisher test pass (the alternate Marcówki page stops with its typed `METRIC_RESOLUTION_INCONCLUSIVE`, as designed), all 89 required screenshots valid. `PRE_HOLDOUT_3_SHA` |
-| final | the report commit | `workflow_dispatch` with the OWNER APK: §AE |
+| 117 | `b3ad427` (push) | cancelled by the dispatch below (concurrency group) |
+| **118** | `b3ad427` | **the final CI**: `workflow_dispatch` with the OWNER APK; 30 jobs green, 1 skipped by design, the UI gate green at the first attempt (§AE) |
 
 The three UI-gate failures were in three different test steps, all waits or a test-framework race in the emulator
 (ANGLE on SwiftShader), none in the analyzer; the only Android change in the stage is two progress strings and a stop
@@ -548,7 +549,45 @@ record: the commit after it.
 
 ## AE. OWNER APK
 
-<!-- AE -->
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`,
+from `workflow_dispatch` run 118 (`36808685547`), which is also the final CI: 30 jobs green, 1 skipped by design
+(the `preview-latest` APK), the Android UI gate green at the first attempt.
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 30 732 715 bytes, `application/vnd.android.package-archive`; the release is a prerelease |
+| SHA-256 | `eb530f7c66f6d204460dc1ad37c843ca9519d95f028a4ed337cacfa84efd5bec`, equal to the release notes and to GitHub's asset digest |
+| ABI | `aapt dump badging`: `native-code: 'arm64-v8a'`; 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1118**, versionName `0.118.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes: run 118 from `claude/new-session-3kzcgh` @ `b3ad427681f74d2fc4a0a5966370899a40bba4d3`; its analyzer code is the frozen code (`ca97516`, as at `PRE_HOLDOUT_3_SHA`) |
+| analyzer | the embedded bundle (`assets/local-analyzer/analyzer.mjs`, sha256 `43d3e326…f812`, equal to its manifest; Node 18.20.4) declares `METRIC_EVIDENCE_SCHEMA_VERSION = "1.2.0"`, `PLAN_RESOLVER_VERSION = "1.3.0"`, `SOLVER_V2_VERSION = "2.3.0"`, `BOUNDARY_EVIDENCE_VERSION = "1.0.0"`, `GENERIC_ADAPTER_VERSION = "1.2.0"`, and carries `pageRegions`, `policiesDisagree`, `recutSlivers` and `BOUNDARY_RESOLUTION_INCONCLUSIVE` |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes; it installs over any preview build with a lower run number (1104 before it) |
+
+No APK binary is committed.
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over build 1104, then check each item.
+
+1. **Progress on the outline.** Analyse any ARCHON link and watch "Odczytuję plany i rejestruję widoki": the new
+   steps «sprawdzam otwory: N z M» and «łączę obrys: krawędź N z M» may flash by; "Przerwij" still stops within
+   seconds.
+2. **The three houses that failed in 005B now build** — check that the house looks like the publisher's plan:
+   - dom-w-modrzykach (`https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247`): the
+     whole house with its open front of piers, glazing and the garage door; 3 bodies; about 182 m².
+   - dom-w-zurawkach (`https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5`): the house
+     and its garage 1.5 m forward; about 101 m²; expect "Model gotowy z ograniczeniami" (one storey only).
+   - willa-miranda (`https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143`): the main
+     body, the garage at the front, the living bay at the back; about 161 m²; one storey only.
+3. **Marcówki, Kosaćce (clean and tracked) and Rarytasy (G2E, e-OZE)**: the same houses as build 1104, byte for
+   byte on the desktop.
+4. **Another publisher.** Aster VIII (`https://www.dobredomy.pl/projekt/asterVIII/`): "Źródło" lists its figures
+   (usable 172.9 m², footprint 278.3 m², pitch 30°, height 5.9 m …), then the analysis stops with the Polish message
+   that the plan's scale cannot be established — no house of invented size.
+5. **If an outline cannot be decided**, the stop says so in Polish ("Nie udało się ustalić obrysu budynku: …", the two outlines and why); it
+   should not appear on the houses above.
 
 ## AF. Residual debt
 
