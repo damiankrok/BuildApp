@@ -36,8 +36,8 @@
         "footprintResidualPct": -0.29,
         "openingsAllBuilt": true,
         "modelHash": "6152770f43f4970a704f5c2be75a9a8f04fe9cb60c71a99533323b2b5fafd64f",
-        "wallClockS": 196,
-        "peakRssMB": 789
+        "wallClockS": 283.3,
+        "peakRssMB": 879
       }
     },
     {
@@ -73,8 +73,8 @@
         "footprintResidualPct": -1.33,
         "openingsAllBuilt": true,
         "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
-        "wallClockS": 186.5,
-        "peakRssMB": 790
+        "wallClockS": 266.7,
+        "peakRssMB": 764
       }
     },
     {
@@ -110,8 +110,8 @@
         "footprintResidualPct": -1.33,
         "openingsAllBuilt": true,
         "modelHash": "5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f",
-        "wallClockS": 186.8,
-        "peakRssMB": 769
+        "wallClockS": 266.9,
+        "peakRssMB": 758
       }
     },
     {
@@ -147,8 +147,8 @@
         "footprintResidualPct": -2.93,
         "openingsAllBuilt": false,
         "modelHash": "8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8",
-        "wallClockS": 197.8,
-        "peakRssMB": 802
+        "wallClockS": 274.8,
+        "peakRssMB": 837
       }
     },
     {
@@ -184,8 +184,8 @@
         "footprintResidualPct": 1.57,
         "openingsAllBuilt": true,
         "modelHash": "b4e76f04f47c5a26d46213a35122a4c0fe279907630fa5cddb3269f86e30142a",
-        "wallClockS": 194,
-        "peakRssMB": 836
+        "wallClockS": 263.7,
+        "peakRssMB": 848
       }
     },
     {
@@ -219,8 +219,8 @@
         "footprintResidualPct": null,
         "openingsAllBuilt": null,
         "modelHash": null,
-        "wallClockS": 74.5,
-        "peakRssMB": 643
+        "wallClockS": 108.4,
+        "peakRssMB": 672
       }
     },
     {
@@ -256,8 +256,8 @@
         "footprintResidualPct": -0.4,
         "openingsAllBuilt": true,
         "modelHash": "70b01afd65e284db6aebe02d5f318219e43f50b2ce69adfe2a0efbb73aca0113",
-        "wallClockS": 282,
-        "peakRssMB": 776
+        "wallClockS": 377,
+        "peakRssMB": 793
       }
     },
     {
@@ -280,20 +280,20 @@
       },
       "after": {
         "outcome": "COMPLETED",
-        "verdict": "PASS",
-        "bodies": 6,
-        "openings": 19,
+        "verdict": "ALGORITHMIC_FAIL",
+        "bodies": 4,
+        "openings": 18,
         "storeys": {
-          "model": 2,
+          "model": 1,
           "plans": 2
         },
-        "footprintM2": 163.45,
+        "footprintM2": 161.29,
         "publishedFootprintM2": 169.9,
-        "footprintResidualPct": -3.8,
-        "openingsAllBuilt": true,
-        "modelHash": "6f9eda6373c28fdc32b82279fdbedf9bbce818178b659b51a9ac1c2ee550dfaf",
-        "wallClockS": 272.1,
-        "peakRssMB": 750
+        "footprintResidualPct": -5.07,
+        "openingsAllBuilt": false,
+        "modelHash": "1ce47cfbbdb50393ddc47b2a15bdf76701b9130d82469964634aed72c636821d",
+        "wallClockS": 372.8,
+        "peakRssMB": 780
       }
     },
     {
@@ -317,19 +317,19 @@
       "after": {
         "outcome": "COMPLETED",
         "verdict": "ALGORITHMIC_FAIL",
-        "bodies": 3,
-        "openings": 9,
+        "bodies": 2,
+        "openings": 12,
         "storeys": {
           "model": 1,
           "plans": 3
         },
-        "footprintM2": 98.44,
+        "footprintM2": 100.88,
         "publishedFootprintM2": 101.7,
-        "footprintResidualPct": -3.2,
+        "footprintResidualPct": -0.81,
         "openingsAllBuilt": true,
-        "modelHash": "faa2e47e88e1d0a3793b09316d5ca53d4c2ca83a0b568831214e66bc655ae824",
-        "wallClockS": 265.9,
-        "peakRssMB": 771
+        "modelHash": "31ba5eea2aa67b69579ebd912a35c596010bdb39a3dd70cf2a64e3db16f9463f",
+        "wallClockS": 371.3,
+        "peakRssMB": 746
       }
     },
     {
@@ -353,19 +353,19 @@
       "after": {
         "outcome": "COMPLETED",
         "verdict": "PASS",
-        "bodies": 6,
-        "openings": 23,
+        "bodies": 3,
+        "openings": 19,
         "storeys": {
           "model": 1,
           "plans": 1
         },
-        "footprintM2": 171.73,
+        "footprintM2": 181.72,
         "publishedFootprintM2": 181.98,
-        "footprintResidualPct": -5.63,
+        "footprintResidualPct": -0.14,
         "openingsAllBuilt": true,
-        "modelHash": "791bb130c9c5d52f0263099a406ba85caec88c646acf9d1cf6b1fde10df40e37",
-        "wallClockS": 168.4,
-        "peakRssMB": 671
+        "modelHash": "d4accc9d3e6a0675495c131dd46ef29b8faaaee92656ea2de53cad8894073301",
+        "wallClockS": 236.6,
+        "peakRssMB": 676
       }
     },
     {
@@ -399,8 +399,8 @@
         "footprintResidualPct": null,
         "openingsAllBuilt": null,
         "modelHash": null,
-        "wallClockS": 38.5,
-        "peakRssMB": 719
+        "wallClockS": 55,
+        "peakRssMB": 705
       }
     }
   ]

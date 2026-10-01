@@ -1,7 +1,8 @@
 {
  "schema": "buildapp.boundary-performance",
  "schemaVersion": "1.0.0",
- "what": "BUILDPLAN-ANALYZER-005C \u00a742: the opening-aware boundary per floor plan read, measured by re-running boundaryExtension alone on each house's plans (Node 22, x64, one process per house, offline from the cached publisher bytes). lines = grid lines read (shadow lines included); pieces = wall-ink pieces; gaps = classified gaps (drawing breaks excluded); floods = outline floods (exclusion + strict policies, shut garage mouths when any); extensions = components beyond the long-band box weighed; bodies = parts named by relation (* = built). Caps: 48 weak gaps judged, 16 extensions, 16 bodies per plan.",
+ "what": "BUILDPLAN-ANALYZER-005C §42: the opening-aware boundary per floor plan read, measured by re-running boundaryExtension alone on each house's plans (Node 22, x64, one process per house, offline from the cached publisher bytes). lines = grid lines read (shadow lines included); pieces = wall-ink pieces; gaps = classified gaps (drawing breaks excluded); floods = outline floods (exclusion + strict policies, shut garage mouths when any); extensions = components beyond the long-band box weighed; bodies = parts named by relation (* = built). Caps: 48 weak gaps judged, 16 extensions, 16 bodies per plan.",
+ "code": "ca97516f7f8462385d910de13fe16bc15966066a",
  "houses": [
   {
    "house": "marcowki",
@@ -11,20 +12,20 @@
      "storey": "GROUND",
      "lines": 33,
      "pieces": 125,
-     "gaps": 93,
+     "gaps": 92,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 228,
-      "OPENING_SUPPORTED": 23,
+      "OPENING_SUPPORTED": 15,
       "UNKNOWN_GAP": 14,
-      "TRUE_EXTERIOR_GAP": 56
+      "TRUE_EXTERIOR_GAP": 63
      },
      "bridged": {
-      "strong": 23,
+      "strong": 15,
       "weak": 1,
-      "pocketMouths": 1,
-      "unjudged": 12
+      "pocketMouths": 6,
+      "unjudged": 7
      },
-     "floods": 4,
+     "floods": 9,
      "extensions": 2,
      "accepted": false,
      "bodies": [
@@ -34,43 +35,43 @@
       "COVERED_TERRACE"
      ],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 130.784019,
+      "exclusionM2": 130.784019,
       "disagree": false
      },
-     "boundaryMs": 46
+     "boundaryMs": 50
     },
     {
      "frame": "fed2722c38",
      "storey": "ATTIC",
      "lines": 50,
      "pieces": 219,
-     "gaps": 178,
+     "gaps": 172,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 440,
-      "OPENING_SUPPORTED": 36,
-      "UNKNOWN_GAP": 37,
-      "TRUE_EXTERIOR_GAP": 105
+      "OPENING_SUPPORTED": 11,
+      "UNKNOWN_GAP": 29,
+      "TRUE_EXTERIOR_GAP": 132
      },
      "bridged": {
-      "strong": 36,
-      "weak": 1,
-      "pocketMouths": 28,
-      "unjudged": 8
+      "strong": 11,
+      "weak": 3,
+      "pocketMouths": 22,
+      "unjudged": 4
      },
-     "floods": 31,
+     "floods": 27,
      "extensions": 0,
      "accepted": false,
      "bodies": [],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 153.217612,
+      "exclusionM2": 153.217612,
       "disagree": false
      },
-     "boundaryMs": 75
+     "boundaryMs": 77
     }
    ],
-   "peakRssMB": 271
+   "peakRssMB": 281
   },
   {
    "house": "kosacce-clean",
@@ -80,32 +81,32 @@
      "storey": "GROUND",
      "lines": 70,
      "pieces": 348,
-     "gaps": 329,
+     "gaps": 278,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 731,
-      "OPENING_SUPPORTED": 95,
-      "UNKNOWN_GAP": 58,
-      "TRUE_EXTERIOR_GAP": 176
+      "OPENING_SUPPORTED": 15,
+      "UNKNOWN_GAP": 56,
+      "TRUE_EXTERIOR_GAP": 207
      },
      "bridged": {
-      "strong": 95,
-      "weak": 2,
-      "pocketMouths": 5,
-      "unjudged": 51
+      "strong": 15,
+      "weak": 0,
+      "pocketMouths": 26,
+      "unjudged": 30
      },
-     "floods": 9,
+     "floods": 28,
      "extensions": 0,
      "accepted": false,
      "bodies": [],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 166.16818,
+      "exclusionM2": 166.16818,
       "disagree": false
      },
-     "boundaryMs": 92
+     "boundaryMs": 188
     }
    ],
-   "peakRssMB": 259
+   "peakRssMB": 253
   },
   {
    "house": "rarytasy-g2e",
@@ -115,35 +116,36 @@
      "storey": "GROUND",
      "lines": 54,
      "pieces": 243,
-     "gaps": 201,
+     "gaps": 189,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 525,
-      "OPENING_SUPPORTED": 55,
-      "UNKNOWN_GAP": 19,
-      "TRUE_EXTERIOR_GAP": 127
+      "OPENING_SUPPORTED": 21,
+      "UNKNOWN_GAP": 28,
+      "TRUE_EXTERIOR_GAP": 140
      },
      "bridged": {
-      "strong": 55,
-      "weak": 1,
-      "pocketMouths": 1,
-      "unjudged": 17
+      "strong": 21,
+      "weak": 3,
+      "pocketMouths": 4,
+      "unjudged": 21
      },
-     "floods": 4,
+     "floods": 9,
      "extensions": 1,
      "accepted": false,
      "bodies": [
       "UNKNOWN",
+      "FLUSH_ATTACHED",
       "UNKNOWN"
      ],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 185.742226,
+      "exclusionM2": 185.742226,
       "disagree": false
      },
-     "boundaryMs": 75
+     "boundaryMs": 93
     }
    ],
-   "peakRssMB": 258
+   "peakRssMB": 257
   },
   {
    "house": "rarytasy-eoze",
@@ -151,34 +153,34 @@
     {
      "frame": "e3a3d0015d",
      "storey": "GROUND",
-     "lines": 54,
-     "pieces": 148,
-     "gaps": 97,
+     "lines": 75,
+     "pieces": 263,
+     "gaps": 190,
      "gapClasses": {
-      "DRAWING_BREAK_SUPPORTED": 329,
-      "OPENING_SUPPORTED": 21,
-      "UNKNOWN_GAP": 23,
-      "TRUE_EXTERIOR_GAP": 53
+      "DRAWING_BREAK_SUPPORTED": 589,
+      "OPENING_SUPPORTED": 20,
+      "UNKNOWN_GAP": 39,
+      "TRUE_EXTERIOR_GAP": 131
      },
      "bridged": {
-      "strong": 21,
-      "weak": 2,
-      "pocketMouths": 0,
+      "strong": 20,
+      "weak": 8,
+      "pocketMouths": 10,
       "unjudged": 21
      },
-     "floods": 4,
+     "floods": 20,
      "extensions": 0,
      "accepted": false,
      "bodies": [],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 121.674175,
+      "exclusionM2": 121.674175,
       "disagree": false
      },
-     "boundaryMs": 38
+     "boundaryMs": 136
     }
    ],
-   "peakRssMB": 260
+   "peakRssMB": 259
   },
   {
    "house": "dom-w-jablonkach",
@@ -188,67 +190,70 @@
      "storey": "GROUND",
      "lines": 49,
      "pieces": 198,
-     "gaps": 151,
+     "gaps": 149,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 440,
-      "OPENING_SUPPORTED": 48,
+      "OPENING_SUPPORTED": 24,
       "UNKNOWN_GAP": 21,
-      "TRUE_EXTERIOR_GAP": 82
+      "TRUE_EXTERIOR_GAP": 104
      },
      "bridged": {
-      "strong": 48,
+      "strong": 24,
       "weak": 0,
-      "pocketMouths": 3,
-      "unjudged": 18
+      "pocketMouths": 5,
+      "unjudged": 16
      },
-     "floods": 5,
-     "extensions": 1,
+     "floods": 7,
+     "extensions": 0,
      "accepted": false,
      "bodies": [
-      "UNKNOWN"
+      "COVERED_TERRACE"
      ],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 98.979553,
+      "exclusionM2": 98.979553,
       "disagree": false
      },
-     "boundaryMs": 52
+     "boundaryMs": 58
     },
     {
      "frame": "d2646b4dce",
      "storey": "ATTIC",
      "lines": 30,
      "pieces": 105,
-     "gaps": 78,
+     "gaps": 75,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 179,
-      "OPENING_SUPPORTED": 26,
-      "UNKNOWN_GAP": 5,
-      "TRUE_EXTERIOR_GAP": 47
+      "OPENING_SUPPORTED": 11,
+      "UNKNOWN_GAP": 13,
+      "TRUE_EXTERIOR_GAP": 51
      },
      "bridged": {
-      "strong": 26,
+      "strong": 11,
       "weak": 0,
-      "pocketMouths": 3,
-      "unjudged": 2
+      "pocketMouths": 9,
+      "unjudged": 4
      },
-     "floods": 5,
-     "extensions": 2,
+     "floods": 11,
+     "extensions": 3,
      "accepted": false,
      "bodies": [
       "FLUSH_ATTACHED",
       "UNKNOWN",
-      "FLUSH_ATTACHED"
+      "FLUSH_ATTACHED",
+      "UNKNOWN",
+      "FLUSH_ATTACHED",
+      "UNKNOWN"
      ],
      "policies": {
-      "strictM2": 207.137104,
-      "exclusionM2": 0,
+      "strictM2": 207.473415,
+      "exclusionM2": 207.473415,
       "disagree": false
      },
-     "boundaryMs": 15
+     "boundaryMs": 36
     }
    ],
-   "peakRssMB": 268
+   "peakRssMB": 276
   },
   {
    "house": "willa-miranda",
@@ -258,25 +263,25 @@
      "storey": "GROUND",
      "lines": 68,
      "pieces": 316,
-     "gaps": 267,
+     "gaps": 252,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 637,
-      "OPENING_SUPPORTED": 71,
-      "UNKNOWN_GAP": 40,
-      "TRUE_EXTERIOR_GAP": 156
+      "OPENING_SUPPORTED": 37,
+      "UNKNOWN_GAP": 35,
+      "TRUE_EXTERIOR_GAP": 180
      },
      "bridged": {
-      "strong": 71,
-      "weak": 0,
-      "pocketMouths": 3,
-      "unjudged": 37
+      "strong": 37,
+      "weak": 4,
+      "pocketMouths": 2,
+      "unjudged": 29
      },
-     "floods": 5,
-     "extensions": 3,
+     "floods": 8,
+     "extensions": 5,
      "accepted": true,
      "bodies": [
       "FLUSH_ATTACHED*",
-      "COVERED_TERRACE",
+      "UNKNOWN",
       "FLUSH_ATTACHED",
       "RECESSED_ATTACHED",
       "RECESSED_ATTACHED",
@@ -284,51 +289,52 @@
       "PROJECTING_WING*"
      ],
      "policies": {
-      "strictM2": 169.976017,
-      "exclusionM2": 169.976017,
-      "disagree": false
+      "strictM2": 74.648208,
+      "exclusionM2": 165.343993,
+      "disagree": true
      },
-     "boundaryMs": 50
+     "boundaryMs": 79
     },
     {
      "frame": "2088494fef",
      "storey": "UPPER",
      "lines": 43,
      "pieces": 189,
-     "gaps": 158,
+     "gaps": 146,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 257,
-      "OPENING_SUPPORTED": 35,
-      "UNKNOWN_GAP": 23,
-      "TRUE_EXTERIOR_GAP": 100
+      "OPENING_SUPPORTED": 3,
+      "UNKNOWN_GAP": 19,
+      "TRUE_EXTERIOR_GAP": 124
      },
      "bridged": {
-      "strong": 35,
-      "weak": 1,
-      "pocketMouths": 13,
-      "unjudged": 9
+      "strong": 3,
+      "weak": 0,
+      "pocketMouths": 5,
+      "unjudged": 14
      },
-     "floods": 16,
-     "extensions": 6,
+     "floods": 7,
+     "extensions": 5,
      "accepted": false,
      "bodies": [
       "UNKNOWN",
+      "UNKNOWN",
       "FLUSH_ATTACHED",
       "SEPARATE_BODY",
+      "SEPARATE_BODY",
+      "FLUSH_ATTACHED",
       "UNKNOWN",
-      "SEPARATE_BODY",
-      "SEPARATE_BODY",
-      "UNKNOWN"
+      "FLUSH_ATTACHED"
      ],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 0,
+      "strictM2": 25.355984,
+      "exclusionM2": 25.355984,
       "disagree": false
      },
-     "boundaryMs": 25
+     "boundaryMs": 29
     }
    ],
-   "peakRssMB": 281
+   "peakRssMB": 293
   },
   {
    "house": "dom-w-zurawkach",
@@ -338,38 +344,39 @@
      "storey": "GROUND",
      "lines": 45,
      "pieces": 195,
-     "gaps": 177,
+     "gaps": 155,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 301,
-      "OPENING_SUPPORTED": 49,
-      "UNKNOWN_GAP": 27,
-      "TRUE_EXTERIOR_GAP": 101
+      "OPENING_SUPPORTED": 11,
+      "UNKNOWN_GAP": 35,
+      "TRUE_EXTERIOR_GAP": 109
      },
      "bridged": {
-      "strong": 49,
-      "weak": 3,
-      "pocketMouths": 3,
-      "unjudged": 21
+      "strong": 11,
+      "weak": 8,
+      "pocketMouths": 11,
+      "unjudged": 16
      },
-     "floods": 8,
-     "extensions": 2,
+     "floods": 21,
+     "extensions": 3,
      "accepted": true,
      "bodies": [
       "RECESSED_ATTACHED",
-      "COVERED_TERRACE",
-      "FLUSH_ATTACHED",
+      "RECESSED_ATTACHED",
+      "RECESSED_ATTACHED",
       "UNKNOWN",
-      "PROJECTING_WING*"
+      "PROJECTING_WING*",
+      "SEPARATE_BODY"
      ],
      "policies": {
-      "strictM2": 0,
-      "exclusionM2": 98.380388,
-      "disagree": false
+      "strictM2": 69.045528,
+      "exclusionM2": 98.256155,
+      "disagree": true
      },
-     "boundaryMs": 76
+     "boundaryMs": 88
     }
    ],
-   "peakRssMB": 291
+   "peakRssMB": 304
   },
   {
    "house": "dom-w-modrzykach",
@@ -379,42 +386,40 @@
      "storey": "GROUND",
      "lines": 53,
      "pieces": 229,
-     "gaps": 203,
+     "gaps": 179,
      "gapClasses": {
       "DRAWING_BREAK_SUPPORTED": 585,
-      "OPENING_SUPPORTED": 56,
-      "UNKNOWN_GAP": 24,
-      "TRUE_EXTERIOR_GAP": 123
+      "OPENING_SUPPORTED": 23,
+      "UNKNOWN_GAP": 21,
+      "TRUE_EXTERIOR_GAP": 135
      },
      "bridged": {
-      "strong": 56,
+      "strong": 23,
       "weak": 0,
-      "pocketMouths": 3,
-      "unjudged": 21
+      "pocketMouths": 2,
+      "unjudged": 19
      },
-     "floods": 5,
-     "extensions": 1,
+     "floods": 4,
+     "extensions": 2,
      "accepted": true,
      "bodies": [
-      "RECESSED_ATTACHED",
-      "RECESSED_ATTACHED",
       "PROJECTING_WING*",
-      "SEPARATE_BODY"
+      "UNKNOWN"
      ],
      "policies": {
-      "strictM2": 174.851052,
-      "exclusionM2": 174.851052,
+      "strictM2": 184.340378,
+      "exclusionM2": 184.340378,
       "disagree": false
      },
-     "boundaryMs": 56
+     "boundaryMs": 94
     }
    ],
-   "peakRssMB": 251
+   "peakRssMB": 245
   },
   {
    "house": "aster-viii",
    "plans": [],
-   "peakRssMB": 267
+   "peakRssMB": 270
   }
  ]
 }

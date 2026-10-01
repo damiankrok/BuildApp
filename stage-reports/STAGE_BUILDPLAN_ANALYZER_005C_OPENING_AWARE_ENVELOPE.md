@@ -149,4 +149,302 @@ dashed canopy, paving, pergola beams) closes nothing. A covered terrace is named
 also in the reading that shuts pocket mouths (test: attached-bodies "a covered terrace on posts"). The §39 negative
 (posts, a dashed roof outline and edge lines, no wall) builds exactly the house.
 
-<!-- M.. -->
+## M. willa-miranda
+
+| | 005B (`d3235bf`) | 005C (`ca97516`) |
+|---|---|---|
+| Outcome | `PLAN_LAYOUT_REJECTED` (0.55 m² built of 169.9) | completed, 4 bodies, 18 openings |
+| Ground storey | — | 161.29 m², **−5.07 %** of 169.9 |
+| Storeys | — | 1 of 2 plans (the upper plan carries no body) |
+| Openings | — | 1 printed opening not built (`opening-0-east-13-0`) |
+| Verdict | ALGORITHMIC_FAIL | **ALGORITHMIC_FAIL** (storeys, one opening) |
+
+The first bad decision of 005B is gone: the outline crosses the piers and the glazing of the garden side, and the
+ground storey is the main body (15 × 9.2 m), the garage projecting 2.45 m at the front, the living bay projecting
+2.45 m at the back and the small annex beside it. Two things still fail, both named:
+
+- **The upper storey.** Its plan maps onto about 3.6 × 8.6 m of the ground storey, 24 % of the main body. On an
+  outline frame a body under a quarter of the widest body's width is a strip, never the main body or an alignment
+  target (C P0-3), and no other body passes the 50 % rule, so the upper plan registers onto nothing. Before the
+  review it stood on a 1.7 m strip, which passed the storey count and was wrong (§W).
+- **One east-side opening** (0.40 m wide, on the small attached annex) is refused by the corner-material rule; the
+  rest of the side is built.
+
+The house depends on the rule that a read chain framing an axis over less than half the walls' span, while an
+exterior chain covers all of them, is outspanned (`a1913fc`): without it the plan's depth comes from a 2.1 m interior
+chain and the run stops at `PLAN_NO_BUILT_REGIONS`. The same rule changes one known-set row (§T). Model `1ce47cfb…`.
+The two jamb policies disagree on this plan (one adopts and they build more than 6 % apart); the reading adopted is
+the exclusion policy's, as the contract says, and since the run completes the flag is recorded in the digest, not
+raised as `BOUNDARY_RESOLUTION_INCONCLUSIVE`.
+
+## N. dom-w-zurawkach (round-2 blind house, now a development house)
+
+| | 005B | 005C |
+|---|---|---|
+| Outcome | `PLAN_NO_MASSES` (69.05 of 101.7 m²) | completed, 2 bodies, 12 openings |
+| Ground storey | — | 100.88 m², **−0.81 %** |
+| Openings | — | every printed opening built |
+| Storeys | — | 1 of 3 plans (the basement and attic plans do not register) |
+| Verdict | ALGORITHMIC_FAIL | **ALGORITHMIC_FAIL** (storeys only) |
+
+The ground storey is now right in shape as well as in area: the house 7.50 × 8.00 m and the garage 4.30 × 9.50 m
+projecting 1.50 m at the front (printed: 750 + 430 = 1180, 800 and 950). The first 005C cut (`1b330d3`) built three
+bodies (a 1.7 m strip down the west side and the garage's projection as a separate bay, −3.2 %); the post-review
+re-cut never cuts the neighbour and the strip joins the house (§W). The remaining failure is vertical: three plans
+are read (basement, ground, attic) and no body reaches past the ground storey (`LAYOUT_NO_MASS_REACHES_UP`, named in
+the result). Model `31ba5eea…`; the policies disagree here too (flag recorded).
+
+## O. dom-w-modrzykach (round-2 blind house, now a development house)
+
+| | 005B | 005C |
+|---|---|---|
+| Outcome | `PLAN_LAYOUT_REJECTED` (14.72 of 181.98 m²) | completed, 3 bodies, 19 openings |
+| Ground storey | — | 181.72 m², **−0.14 %** |
+| Openings | — | every printed opening built |
+| Storeys | — | 1 of 1 |
+| Verdict | ALGORITHMIC_FAIL | **PASS** |
+
+The 7.51 m front of piers, glazing and a garage door is now a facade, and the outline is the whole house. The first
+005C cut built it as 6 bodies (the wall-thickness bands between an outline frame's axis and face lines as bodies of
+their own); after the post-review re-cut it is 3 bodies, −0.14 %, with every shared door built once (§W).
+Model `d4accc9d…`.
+
+## P. Aster VIII — acquisition baseline
+
+At the frozen 005B code (§A, `artifacts/analyzer-005c/aster-viii/baseline.json`): routed to the generic reader (no
+specialist claims `dobredomy.pl`), classified `PROJECT_PAGE` (0.69: plan, elevation and section imagery, a title
+naming a house), canonical `https://www.dobredomy.pl/projekt/asterVIII` (declared), 25 assets with their roles, **0
+published figures** (a div-built fact table with a tooltip between label and value), **every PDF and the DWG
+dropped before any fetch** (the drawing words sit on the parent list item, the anchors say "PDF podstawa" / "PDF
+lustro"), and a typed stop, `METRIC_RESOLUTION_INCONCLUSIVE`: the floor plan prints no dimension chain. Total 36 s,
+peak 699 MB, the longest silence 2.46 s.
+
+## Q. Aster VIII — generic source
+
+Two commits change the generic reader, by structure and never by site: `432dbd2` (1.1.0: figures printed as
+blocks, superscript units, technical documents recorded and hashed but never parsed, captions and views, a crawl
+that follows only links about this project) and, after the source-overfit review, `64f7ff6` (1.2.0: a figure only
+inside its own row and only the page's own — §W). Re-sealed from the cached bytes by 1.2.0
+(`artifacts/analyzer-005c/aster-viii/source-package.json`, schema 1.3.0, content hash `2d7c2742…`):
+
+- **11 figures**: usable area 172.9 m², footprint 278.3 m², building height 5.9 m, roof pitch 30°, sloped roof area
+  269 m², flat roof area 30.8 m², volume 640.2 m³ (recorded without a unit, as for every publisher), room count 4, bathroom count 2, minimum plot 26.32 × 23.48 m. Each
+  is the page's own, read from its row; none comes from a card, a form, a tooltip example or prose.
+- **4 documents**: the building outline (PDF base, PDF mirrored, DWG — fetched under the document-only media
+  allowlist, signature-checked and hashed: `14189ed5…`, `6cc483df…`, `9631e137…`) and the energy certificate
+  (recorded, not fetched). The brochure is no longer recorded (P1-9: only the house's own kinds).
+- 25 assets, the same roles as the baseline. No drawing, PDF or DWG is in the repository.
+
+The CI job "Analyzer / opening-aware envelope" acquires Aster live and requires usable area, footprint, roof pitch
+and building height; an unreachable publisher is a warning. The hard-code guard registers every development house's
+printed figures (two-decimal and short spellings) and the generic publishers' names: none is in production code.
+
+## R. Aster VIII — reconstruction
+
+Aster stops, by name, where it stopped before: `METRIC_RESOLUTION_INCONCLUSIVE` in `REGISTERING_VIEWS` — "the floor
+plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale … What is
+missing: a dimension printed on the floor plan itself — it prints none." The 962 × 1202 px ground plan has 61 wall
+bands and a walled envelope, but 0 dimension chains; the two scales its readings state (2.09 cm/px, plausible, and
+248 cm/px, ruled out by the walls) have no independent witness. The scale the 1:500 outline PDF states is a document
+the analyzer records and does not parse (no PDF importer in scope), and the published footprint verifies; it never
+supplies a scale. Total 45 s, peak 705 MB. This is the honest outcome for a publisher whose plans print no
+dimensions: a typed refusal, not a house of invented size.
+
+## S. Existing development regressions
+
+The full 11-house matrix at `ca97516` (offline, sealed source packages, the publisher's bytes from a cache outside the
+repository; `artifacts/analyzer-005c/development-matrix.json` against the 005B code):
+
+| House | 005B | 005C | Model |
+|---|---|---|---|
+| Marcówki | PASS | PASS | `6152770f…` **unchanged** |
+| Kosaćce clean | PASS | PASS | `5b5ffcf1…` **unchanged** |
+| Kosaćce tracked | PASS | PASS | `5b5ffcf1…` **unchanged** |
+| Rarytasy G2E | ALGORITHMIC_FAIL (−2.93 %, METRIC_SCALE_WEAK) | the same | `8fa4a25b…` **unchanged** |
+| Rarytasy e-OZE | PASS (+1.57 %) | PASS | `b4e76f04…` **unchanged** |
+| alt-marcowki | `METRIC_RESOLUTION_INCONCLUSIVE` | the same | — |
+| dom-w-jablonkach | ALGORITHMIC_FAIL (−5.25 %, openings) | **PASS** (−0.40 %, every printed opening) | `70b01afd…` |
+| willa-miranda | `PLAN_LAYOUT_REJECTED` | ALGORITHMIC_FAIL (−5.07 %, storeys) | `1ce47cfb…` |
+| dom-w-zurawkach | `PLAN_NO_MASSES` | ALGORITHMIC_FAIL (−0.81 %, storeys) | `31ba5eea…` |
+| dom-w-modrzykach | `PLAN_LAYOUT_REJECTED` | **PASS** (−0.14 %) | `d4accc9d…` |
+| Aster VIII | `METRIC_RESOLUTION_INCONCLUSIVE` | the same | — |
+
+No house moved down. The CI job "Analyzer / development house" runs all eleven, each judged by its row; the rows
+changed by this stage say what the houses now do: willa-miranda `footprint:4` and dom-w-zurawkach `footprint:2`
+(built within 6 % with their own bodies, the storey failure named in M and N), dom-w-modrzykach and dom-w-jablonkach
+`pass`, the pinned hashes unchanged.
+
+## T. Metric regression
+
+The 005B metric layer is not touched by 005C (no change under `packages/source-metrics`); its gates — dimension
+orientation, scale independence, chains, the plan extent — run unchanged in "Analyzer / dimension evidence" and again
+in "Analyzer / opening-aware envelope", and every 005B metric PASS keeps its model hash (§S).
+
+**One known-set row changes, with its reason.** The 005A known set runs today's solver on evidence sealed in 005A
+(`artifacts/analyzer-005a/before`). Its e-OZE metric evidence registers both rzut copies at 2.50 cm/px: the overall
+dimension is read as 18.01 m where the drawing prints 16.01 m (and 1.26 m where it prints 1.16 m), the misreads the
+005B reader corrected (today's registration of the same copy: 2.22 cm/px). Until 005C that sealed first reading
+stopped on the drawing — its depth framed by a 2.1 m interior chain, so no walled envelope — which left the published
+figure free to choose a reading at another scale. Since `a1913fc` the interior chain is outspanned and the depth
+comes from the exterior chain (230–578.5 px; at the correct scale 7.75 m, the depth today's reading builds), so the
+first reading builds the whole house at the sealed scale: 150.63 m² (every copy) and 146.97 m² (the area copy
+alone) against 122.07. The published figure refuses it, and a figure that refused the first reading cannot also
+choose the replacement: the resolver stops with `PLAN_RESOLUTION_INCONCLUSIVE` — named, not built, as the Kosaćce
+area-copy row has done since 005A. Bisected on scratch worktrees: `d3235bf` completes (model `b50b6e59…`);
+`a1913fc` and `ca97516` refuse; `ca97516` with only the outspan rule disabled completes again (`b50b6e59…`), and
+disabling the witness join or the outline adoption instead changes nothing. Disabling the rule would put willa-miranda
+back to a refusal (§M); restricting it so that it misses this plan and fires on willa-miranda's would be fitted to two
+plans. So both e-OZE known rows are now `may-refuse` (only by the resolver's named code; a smaller building still
+fails the row), with this reason in the workflow. Today's reading of the same house — the development row, fresh
+metric evidence — is unchanged (`b4e76f04…`, +1.57 %). The resolver's inability to recover a misread overall
+dimension once the first reading builds is residual debt (AF).
+
+## U. Metamorphic and negative tests
+
+- `packages/reconstruction/test/boundary-envelope.test.ts` (22): the 15 synthetic shapes of §36 (a door, three large
+  windows, a 70 % open facade, a 5 m garage door, a corner window, an open-mouthed garage, two kinds of projecting
+  wing, a covered terrace, a pergola, a loggia, an L, a pier-and-glazing wall, a missing piece, a courtyard); §37
+  the same architecture drawn differently (one exterior stroke split into 2 and 5 pieces, a 0.85 downscale, walls
+  eroded by 1 px, grey ink, a different crop) keeps its envelope, and with the window symbols erased a 3 m space
+  behind a blank 5 m mouth is named, not built, in either reading; §38 a 4.5 m unsupported gap is exterior and
+  nothing is adopted across it; §39 a terrace on posts with a roof outline is never floor; §40 the 1.0 m wing the
+  reach rule dropped is built, a 2.0 m decorative outline is not.
+- `attached-bodies.test.ts` (8): wing, open-mouthed garage (open first, built when mouths are shut), terrace,
+  planter, detached shed, the failure code, the two policies keeping every room the box built, `policiesDisagree`.
+- `boundary-post-review.test.ts` (11, new): the reviewers' cases — paving and kerb lines on and beside the face row,
+  tile and tread patterns, a dimension line on the axis, a pergola's rails between posts, a terrace fronted by a
+  paving edge, a walled yard with a gate behind a wing, a thin line across a wing's junction with the back rooms
+  kept, a 3 × 3 m walled terrace (no garage, not built by the shutting reading), a U's courtyard, a strip along part
+  of a side.
+- `wide-openings.test.ts` (15), `shape-families.test.ts`, `plan-decomposition.test.ts`, `failure-codes.test.ts`:
+  unchanged expectations, passing.
+- Source: `generic-structures.test.ts` (22) and `generic-regions.test.ts` (23, new: value-before-label, filters and
+  selects, cards by title link, blank values, limits in prose, tooltips, listings, document rows and variants,
+  crawl tokens, signatures, malformed escapes); `tests/architecture/generalization.test.ts` with the planted
+  trailing-zero cheat.
+- Full suite at the freeze: §X.
+
+## V. Progress and performance
+
+- **Telemetry.** The boundary's two steps are reported as their own subphases of "reading the plans and registering
+  the views": `BOUNDARY` "joining the outline" (wall lines read of their total) and `BOUNDARY_GAPS` "judging the openings"
+  (weak gaps judged of their total), each a checkpoint that also honours cancellation;
+  Android names them «sprawdzam otwory: N z M» and «łączę obrys: krawędź N z M», and a
+  `BOUNDARY_RESOLUTION_INCONCLUSIVE` stop says the outline could not be established and why (`26b63e3`). Across the
+  eleven houses the longest silence a phone would see is 2.6–4.6 s (`maxTelemetryGapMs`, heartbeats every second).
+- **The boundary's own cost** (`artifacts/analyzer-005c/boundary-performance.json`, regenerated at `ca97516`:
+  `boundaryExtension` alone, re-run per floor plan, one process per house, sequential): 29–188 ms per plan on 11
+  plans (the largest, Kosaćce's 278 gaps), peak RSS of the measuring process ≤ 304 MB; caps of 48 weak gaps judged,
+  16 extensions and 16 bodies per plan, the remainder reported.
+- **Whole runs** (two houses at a time on one machine, so wall clock is inflated): 45–372 s, peak RSS 676–879 MB,
+  the metric frames dominating as in 005B.
+
+## W. Post-review
+
+Four independent read-only reviewers, each told only its own question, attacked the 005C head (`0575fb5`) with
+synthetic plans and pages, the development houses' own bytes and a frozen copy of `d3235bf`
+(`artifacts/analyzer-005c/post/`): boundary correctness (A), false closure and gap semantics (B), attached bodies and
+how they become masses (C), cross-publisher source overfit (D). Every P0 and P1 was reproduced before it was fixed;
+the reviewers' own scripts were replayed on the fixed code (commits `64f7ff6`, `55a9c65`, `b0013ed`, `ca97516`). What each
+finding became:
+
+**Source (D) — `64f7ff6`, generic reader 1.2.0**
+
+| Finding | Disposition |
+|---|---|
+| P0-1 value before its label shifts every pair | Fixed: the block reader has the page's element tree; a value belongs to a label only inside the smallest element holding both, with no other label and exactly one figure; an element with several facts is read flat only when each section alternates strictly label, figure. Value-first counters and icon boxes pair inside their own box. |
+| P0-2 a filter slider or a `select` read as the house | Fixed: nothing inside a form, a control, a `label`, a `dialog`, `nav` or `footer` is a figure or a document, for every reader. |
+| P0-3 related-project tiles linked on title or image | Fixed: a card is the smallest element linking to another page through its title (a picture, a heading, the link it opens with), to at most two pages, not holding the page's h1. A link in small print (a privacy policy under a form, which Aster's own sidebar has) makes nothing a card. |
+| P0-4 a blank value borrows the next row's | Fixed: a dash, a bound, an estimate or a range holds its label's place and states nothing. |
+| P0-5 a limit in prose read as a figure | Fixed: inline labels four words at most; `ok.`/`ca.`/`~`/`do`/`od`/`max` make a slot, not a figure; bounding and storey labels (`maksymalna`, `wskaźnik`, `parteru`) are no figure of the house. |
+| P1-1 the guard fails and misses trailing-0 figures | Fixed: the development-house figures are out of the comments; the guard now registers the two-decimal spelling and the short one (`278.30`, `278.3`), with a planted-cheat test. `domy` joins the guard's generic words (it is the plural of `dom`). |
+| P1-2 structured readers win outright, no card rule | Fixed: every reader goes through the same exclusions; two readings of one key that differ, from any readers, leave it out. |
+| P1-3 a tooltip's example value | Fixed: two figures in one row make it ambiguous; definition prose (eight words or more, or a sentence) is passed over. |
+| P1-4 a catalogue listing classified as a project | Fixed: classification reads only the page's own pairs; the listing is `NOT_PROJECT`. |
+| P1-5/6 document labels and kinds/variants | Fixed: the nearest words decide (the link's own, then its row — text before it, its parent item, its table row's first cell, its `dt`, a section heading with only links between —, then its filename); guides, samples and catalogues are nobody's; a row naming both variants names neither; `nie lustrzana` is the base. |
+| P1-7 cache hit skips the media check; `.dwg` crawled | Fixed: cached bytes meet the document allowlist again; a CAD file or an archive is never crawled as a page. |
+| P1-8 no signature check | Fixed: a PDF must say `%PDF-` in its first kilobyte, a DWG open with `AC10`, a DXF with its first group and `SECTION`; else `SIGNATURE_MISMATCH`, not hashed. |
+| P1-9 site PDFs move the package to 1.3.0 | Fixed: only the house's own kinds are recorded (outline, drawing set, energy certificate, cost estimate), at most 16. |
+| P1-10 crawl tokens | Fixed: the project is named by whole tokens of its slug or its query id, and a run naming it may carry only drawing words besides (`-rzuty` yes, `-2` and `-lustro` no; `filipa` does not contain `lipa`; `47110` is not `4711`). |
+| P1-11 a malformed escape throws | Fixed: `safeDecode` everywhere in the reader. |
+| P1-12 digits in labels | Fixed: a unit (`(m2)`, `[m²]`) and a standard (`wg PN-ISO 9836:1997`) are cleaned off before the label is read; the unit is kept. |
+| P1-13 units | Fixed: a figure's unit is its key's for every reader; `%`, `cm`, counts and doors are no area, height or pitch. |
+| P1-14 vocabulary | Fixed for the words named (`od frontu`, `z przodu`, `wejściowa`, `od ogrodu`, `z tyłu`, `minimalna szerokość działki`, `plot width`, `21,15 x 24,60 m` in a block, `Pow. dachu`). |
+| P2 | Left: a logo in the h1, gallery captions, ARIA `role=table` fact tables, the longest-paragraph description, failed document fetches spending the budget, `download.php?file=`, `http:` PDFs, documents on crawled subpages. Named in AF. |
+
+The Aster VIII package was re-sealed from its cached bytes by reader 1.2.0: the same 11 figures, assets and
+specifications, four documents (the brochure is no longer recorded), content hash `2d7c2742…`. 23 synthetic tests
+(`packages/source-package/test/generic-regions.test.ts`) carry the reviewer's cases.
+
+**Boundary (A) and openings (B) — `55a9c65`**
+
+| Finding | Disposition |
+|---|---|
+| B P0-1, A P0-2 paving, kerb, slab, step and tile lines read as openings | Fixed: infill is two to four continuous lines inside the wall — the jamb's own measured thickness, not the sheet's typical wall — that stop at the jambs. A line running on past a jamb (alongside the wall with open ground between them, or beyond the last piece of the wall line, where the building ends) is paving, a kerb or a dimension line; parallel lines beyond the wall on both sides are a pattern (tiles, treads), not glazing. When lines that would be infill also run on (a glazing row a paving edge continues), the gap is a question (WEAK) for the pocket rule, never a drawn opening. A vehicle door needs two stretches of wall as jambs. |
+| A P0-1, B P0-2 adoption joins across closed edges (a yard, a walled part) | Fixed: an accepted part keeps only what is entered from the box's rooms (an open edge, a door or an opening in the box's wall) and reached through edges with no wall or with an opening in them, and the wall-thickness cells around that; the rest is recorded as a rejected part. A yard behind the wing's solid side wall is left out. |
+| A P0-3 adoption drops rooms the box built; the widen guard reads the raw outline | Fixed: the adopted outline is the box's cells the outline confirms, every cell the box's reading built, and the accepted parts; the guard weighs that. |
+| A P0-3 note, A P2 strict-nothing vs exclusion-adopts is no disagreement | Fixed: `policiesDisagree` — either adopting and the two building more than 6 % apart. |
+| B P0-3 corner legs on one line each, vouching for each other | Fixed: a leg is glazing from a WALL pier. |
+| B P1-4 glazing between two posts | Fixed: a wall must stand at one end. |
+| B P1-5 loose callouts | Fixed: printed over the gap only, never to either of two equal gaps; a callout on a blank or dashed gap, or read with alternatives, states a width, not an opening (WEAK). |
+| B P1-6, C P1-7 parts named against the house without the accepted wing; walled terraces named garages | Fixed: an accepted part's walls are a neighbour's junction; a garage has one way in, walls on 60 % of its own perimeter and a car's depth (4.5 m). The reviewer's 3 × 3 m terrace is no longer built by the reading that shuts mouths. |
+| A P1-1 the gap axis moves with crossing walls | Fixed: from jambs that run along the line. |
+| A P1-2 the sliver rule changes box frames | Fixed: outline frames only. |
+| A P1-3, C P1-6 the 0.8 bay guard drops real bays | Fixed: it skips only a pair standing at the side's own ends (the reviewer's 84 % conservatory is built). |
+| A P1-4, C P0-2 the re-cut invents a party wall, carries a porch up two storeys | Fixed: the neighbour is never cut. A strip along a neighbour's whole side joins it (one rectangle); a band no deeper than two walls (the outer part of a wall between its axis line and its face line, a face step) along most of a side joins as the one rectangle around both, the notch it leaves no larger than the band, other pieces of the same band inside the notch taken in with it, a body's cell there stopping it. A deeper strip along part of a side — a porch, a bay — stays its own body, or is named as a sliver and not built when narrower than two walls and a room (a 1.2 m bay drawn with 0.6 m walls: −4.6 %, instead of the house cut in three). |
+| B P1-7 a through-passage judged as a pocket from each end | Not fixed: judging the two mouths together needs a rule for when a corridor ends; a wrong one opens halls with a front and a back door. Bounded by the disagreement flag (the strict policy leaves both mouths open). Named in AF. |
+| B P1-8 the wall-witness join | Fixed: the join uses the same infill rule (glazing inside the wall, no pattern; a single leaf line only across a door-sized span). |
+| B P1-9 a corner pier read as a post | Left (the safe direction: the outline is lost, not invented). |
+| A/B P2 | Left and named: the weak-gap budget order, the 3.2 m corner-leg cap, sash joints read as dashed, no corner slack, the silent 16-cap (now reported as one rejected part), a shadow line at an outer face beyond the box's edge (−2.4 % on the reviewer's case), a planter's wall-thick ink within 0.3 m of a face, a two-line balustrade (inherent in the drawing). |
+
+**Bodies (C) — `55a9c65`**
+
+| Finding | Disposition |
+|---|---|
+| P0-1 a U outline inflated into a rectangle over its courtyard | Fixed: on an outline frame a recess outside the outline is a pocket of a body only up to the pocket rule's floor (6 m², an entrance niche); a courtyard stays ground. |
+| P0-2 the re-cut splits the main body; the porch rises | Fixed (above). |
+| P0-3 strips as the main body and as an upper storey's target | Fixed: on an outline frame a body under a quarter of the widest body's width is neither the main body nor an alignment target. On willa-miranda this turns a false pass into an honest failure: its upper plan maps to about 3.6 × 8.6 m, 24 % of the 15 × 8.5 m main body, so under the 50 % rule no body carries it (it stood on the 1.7 m strip before). |
+| Shared doors between attached bodies (found by the matrix, not a reviewer) | Fixed in the model builder: built once, from the first of the two bodies. |
+| P1-4 party-wall garages still decided by reach; drawing the vehicle door removes the garage | Not fixed: `baysOf` is the box reading's, kept byte for byte where the outline adds nothing. Named in AF. |
+| P1-5 a wing joined only through a door-sized opening is refused | Kept by design: the contract accepts a part that continues the box's interior across an edge with no wall and no opening; a part behind a doorway is attached, not continued, and a yard behind a door would otherwise be built. Named in AF. |
+| P1-8 a double garage with a central post | Not fixed. Named in AF. |
+| P1-9 the read window of a shallow projection | Not fixed. Named in AF. |
+| P1-10 a registered partial basement picked as the ground storey | Not fixed (the frozen code does the same). Named in AF. |
+| P1-11 a wing `baysOf` shuts, dropped by the 35 % gate | Not fixed (box frames are cut as they always were). Named in AF. |
+
+**The matrix sent two rounds back.** The first cut of these rules (`55a9c65`) was sound on every synthetic case and
+wrong on the real houses: the development matrix put dom-w-modrzykach back to its 005B box (14.72 m²) and rejected
+willa-miranda (71 of 170 m²). Measured on the plans' own lines (a harness outside the repository), drawn openings fell
+from 56 to 14 on one plan. Three rules did it, each right on a clean fixture: "past a jamb's far end" flagged every
+window whose neighbour's glazing carries on the same rows beyond a short pier; "inside the wall" used the sheet's
+typical wall where exterior walls are drawn thicker; and growing a part only through open edges and doorways split a
+wing into its rooms and its wall-thickness cells. `b0013ed` narrowed the first two to what discriminates (a line
+alongside a wall with ground between, or past the end of the wall line; each jamb's own thickness) and replaced the
+third by the prune above.
+
+The second round was the massing. Never cutting a neighbour dropped the wall-thickness bands an outline frame's grid
+leaves between a wall's axis line and its face line (11 m² on dom-w-modrzykach, −7.1 %); allowing the old three-way
+cut for them brought the area back and cut the house into columns, whose shared doors the model builder then dropped
+(it built a door on a shared face only from the main body's side). `ca97516` joins such a band as one rectangle with a
+bounded notch, takes the band's other pieces in with it, and builds a door between two attached bodies once, from the
+first of them. dom-w-modrzykach is then 3 bodies (6 before the review), −0.14 %, every printed opening built.
+
+The reviewers' scenarios were replayed after each round: all as in the tables.
+
+**CI found one more, older than the review.** The known-set job (005A's sealed evidence through today's solver) had
+not run to completion on this branch since the first 005C commit: runs 108–113 were cancelled by the next push. Run
+114 failed it on e-OZE, and the bisection put the cause in `a1913fc`, not in the review fixes: the outspanned-axis
+rule that willa-miranda needs builds e-OZE's sealed first reading at its misread 2.50 cm/px. §T gives the evidence
+and why the two e-OZE rows now allow the resolver's named refusal. The same run's Android UI gate failed once on a
+5-second wait in the stage sheet (`ProductFlowDeviceTest`, the default configuration; the same test passed at font
+scale 1.3 in the same job); the branch's only Android change is the boundary progress strings and the outline
+stop's title (`26b63e3`), nowhere near the stage sheet. It is judged on the following runs (§AC).
+
+One earlier 005C claim is withdrawn by these fixes: with its window symbols erased, the §37 wing (3 m deep behind a
+blank 5 m mouth) is no longer named a garage and no longer rebuilt by the reading that shuts mouths; both readings
+now stop. A space that shallow cannot be told from a loggia, and the test now says so.
+
+Tests: `packages/reconstruction/test/boundary-post-review.test.ts` (11) and the updated disagreement and §37 tests;
+361 reconstruction tests pass.
+
+<!-- X.. -->

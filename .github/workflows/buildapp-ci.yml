@@ -829,10 +829,15 @@ jobs:
             node packages/analysis-service/scripts/known-row.mjs "known/$1" "$3" "$4"
           }
           # The area copy alone reads Kosaćce two ways and only the published figure tells them apart, after it
-          # refused the first one: named, not built. e-OZE's first reading stops on the drawing: it must complete.
+          # refused the first one: named, not built. e-OZE's sealed metric evidence registers both plan copies at
+          # 2.50 cm/px (18.01 m read where the drawing prints 16.01 m; the 005B reader reads it right). Until 005C
+          # its first reading stopped on the drawing (its depth framed by a 2 m interior chain); since 005C the
+          # exterior chain frames it, the whole house is built at the sealed scale, 20-23 % over the published
+          # figure, and the figure that refused it cannot also choose the replacement: named, not built (005C
+          # report §T). Today's reading of the same house is the development row rarytasy-eoze, unchanged.
           row kosacce-area-copy-alone kosacce-clean 3 may-refuse "$(dimensioned kosacce-clean)"
-          row eoze-every-copy rarytasy-eoze 1 must-complete
-          row eoze-area-copy-alone rarytasy-eoze 1 must-complete "$(dimensioned rarytasy-eoze)"
+          row eoze-every-copy rarytasy-eoze 1 may-refuse
+          row eoze-area-copy-alone rarytasy-eoze 1 may-refuse "$(dimensioned rarytasy-eoze)"
       - name: Upload the known-set record
         if: always()
         uses: actions/upload-artifact@v4
@@ -951,7 +956,10 @@ jobs:
     # classified gaps, attached bodies by their relations, and the generic
     # source reader on page structures it had not met.
     # - boundary-envelope: 15 synthetic shapes, the metamorphic drawings, the
-    #   wide-gap and terrace negatives, the 1.0 m wing and the 2.0 m line.
+    #   wide-gap and terrace negatives, the 1.0 m wing and the 2.0 m line;
+    #   boundary-post-review: the post-implementation reviewers' cases (line
+    #   work across a gap, yards behind walls, dropped rooms, courtyards,
+    #   strips).
     # - attached-bodies: wing, open-mouthed garage (and the reading that shuts
     #   it), terrace, planter, detached shed; the two jamb policies and
     #   BOUNDARY_RESOLUTION_INCONCLUSIVE; the shape families unchanged.
@@ -976,7 +984,7 @@ jobs:
       - name: Install
         run: npm ci
       - name: Boundary envelope
-        run: npx vitest run packages/reconstruction/test/boundary-envelope.test.ts packages/reconstruction/test/wide-openings.test.ts packages/reconstruction/test/plan-decomposition.test.ts
+        run: npx vitest run packages/reconstruction/test/boundary-envelope.test.ts packages/reconstruction/test/boundary-post-review.test.ts packages/reconstruction/test/wide-openings.test.ts packages/reconstruction/test/plan-decomposition.test.ts
       - name: Attached bodies
         run: npx vitest run packages/reconstruction/test/attached-bodies.test.ts packages/reconstruction/test/shape-families.test.ts packages/reconstruction/test/failure-codes.test.ts
       - name: Generic source
@@ -1043,12 +1051,15 @@ jobs:
           - house: dom-w-jablonkach
             expect: pass
             limits: METRIC_SCALE_WEAK
-          # 005C: the three envelope failures, now built; the cross-publisher probe stops by name
+          # 005C: the three envelope failures, now built; the cross-publisher probe stops by name.
+          # willa-miranda (the main body, the garage, the living bay and the back annex) and
+          # dom-w-zurawkach (the house and its garage) are built within 6 % of the published
+          # footprint; both still miss an upper or lower storey plan (005C report §M, §N).
           - house: willa-miranda
-            expect: pass
+            expect: "footprint:4"
           - house: dom-w-zurawkach
             pkg: stage-reports/artifacts/analyzer-005b/holdout/h1-dom-w-zurawkach/source-package.json
-            expect: "footprint:3"
+            expect: "footprint:2"
           - house: dom-w-modrzykach
             pkg: stage-reports/artifacts/analyzer-005b/holdout/h2-dom-w-modrzykach/source-package.json
             expect: pass
