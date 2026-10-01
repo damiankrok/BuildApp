@@ -707,7 +707,9 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
           // A gap on a face another body stands against is a door between the two bodies, not a facade opening.
           const other = masses.find((x) => x.id !== m.id && x.storeys.includes(index) && (facade === 'EAST' ? Math.abs(x.x0 - m.x1) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'WEST' ? Math.abs(x.x1 - m.x0) < 0.05 && o.interval[0] >= x.z0 - 0.05 && o.interval[1] <= x.z1 + 0.05 : facade === 'FRONT' ? Math.abs(x.z1 - m.z0) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05 : Math.abs(x.z0 - m.z1) < 0.05 && o.interval[0] >= x.x0 - 0.05 && o.interval[1] <= x.x1 + 0.05))
           if (other) {
-            if (m.role === 'MAIN') sharedDoors.push({ ...o, id: `shared-${o.id}`, family: 'DOOR', headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: other.id, why: `${o.why}; this face is shared with ${other.id}, so the gap is a doorway between the two bodies` })
+            // built once: from the main body's side, and between two other bodies from the first of them (005C:
+            // an outline frame's attached bodies meet each other, and their doors used to be dropped)
+            if (m.role === 'MAIN' || (other.role !== 'MAIN' && m.id < other.id)) sharedDoors.push({ ...o, id: `shared-${o.id}`, family: 'DOOR', headY: round6(o.sillY + CONVENTIONS.doorHeight), otherMassId: other.id, why: `${o.why}; this face is shared with ${other.id}, so the gap is a doorway between the two bodies` })
             continue
           }
           openings.push(o)

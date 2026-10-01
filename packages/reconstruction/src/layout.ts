@@ -994,7 +994,7 @@ export function inferStructuralLayout(options: StructuralLayoutOptions): Structu
   // 005C: on a plan cut on its opening-aware outline, a strip the largest-first cut left is joined to the part of the
   // neighbour it lies along. The long-band box's plans are cut as they always were.
   const built = base.decomposition.envelope?.outline
-    ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(wallM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION)
+    ? recutSlivers(bodies, base.decomposition, base.registration, minBodySpanM(wallM), (r) => perimeterWallEvidence(r, base.decomposition, frame).fraction >= MIN_MASS_WALL_FRACTION, 2 * wallM)
     : bodies
   if (walledFirst && walledFirst.demoted.length > 0) {
     const cellsAt = new Map(base.decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))

@@ -1923,12 +1923,13 @@ function mergeRegions(
  * strip beside it: 0.4 m of wall-thick face, 0.9 m of a room's end. A strip
  * narrower than a body can be is not a body, and dropping it drops a room's
  * floor with it. So a strip that runs a neighbour's whole side is joined to
- * it, when the rectangle that makes is at least `minSpanM` across on both
- * axes and is one the caller accepts (the layout's wall gate). The cells, and
- * so the area, are exactly the ones they were. A strip along part of a side
- * is not joined: that would cut the neighbour where nothing is drawn.
+ * it (the cells, and so the area, exactly as they were); a band no deeper than
+ * `maxStepM` along most of a side is joined as the rectangle around both, the
+ * notch no larger than the band; the result must be at least `minSpanM`
+ * across and one the caller accepts (the layout's wall gate). The neighbour is
+ * never cut: a strip along part of a side — a porch, a bay — stays its own.
  */
-export function recutSlivers(regions: readonly PlanRegion[], decomposition: PlanDecomposition, registration: CoordinateRegistration, minSpanM: number, accept: (region: PlanRegion) => boolean = () => true): PlanRegion[] {
+export function recutSlivers(regions: readonly PlanRegion[], decomposition: PlanDecomposition, registration: CoordinateRegistration, minSpanM: number, accept: (region: PlanRegion) => boolean = () => true, maxStepM = 0): PlanRegion[] {
   const cellAt = new Map(decomposition.cells.map((c) => [`${c.ix}:${c.iy}`, c]))
   type Box = { ix0: number; iy0: number; ix1: number; iy1: number }
   const boxOf = (r: PlanRegion): Box | undefined => {
@@ -1976,19 +1977,46 @@ export function recutSlivers(regions: readonly PlanRegion[], decomposition: Plan
         // the strip lies along the neighbour: they share a whole side of the strip
         const above = s.iy1 + 1 === n.iy0 || n.iy1 + 1 === s.iy0
         const beside = s.ix1 + 1 === n.ix0 || n.ix1 + 1 === s.ix0
-        // Only a strip that runs the neighbour's whole side is joined to it: the two are then one rectangle, and no cut
-        // moves. Joining a strip to PART of a side cuts the neighbour where nothing is drawn — a party wall through
-        // the house, a porch carried up two storeys (005C post-review) — and a strip that cannot join is left to the
-        // layout's own rules.
+        // A strip that runs the neighbour's whole side is joined to it: the two are then one rectangle, and no cut
+        // moves. A strip along PART of a side is never joined by cutting the neighbour at its ends — that invents a
+        // party wall through the house and carries a porch up the house's storeys (005C post-review). A band no deeper
+        // than `maxStepM` (the outer part of a wall, a face step) that covers most of the side is joined as the one
+        // rectangle around both, the notch it leaves no larger than the band itself; a deeper strip, or a short one,
+        // is left to the layout's own rules.
+        const stripM = Math.min((strip.rect.x1 - strip.rect.x0) * registration.metresPerPixelX, (strip.rect.y1 - strip.rect.y0) * registration.metresPerPixelY)
+        const band = stripM <= maxStepM
         let pieces: Box[] | undefined
+        let absorbed: PlanRegion[] = []
         if (above && s.ix0 === n.ix0 && s.ix1 === n.ix1) pieces = [{ ix0: s.ix0, ix1: s.ix1, iy0: Math.min(s.iy0, n.iy0), iy1: Math.max(s.iy1, n.iy1) }]
         else if (beside && s.iy0 === n.iy0 && s.iy1 === n.iy1) pieces = [{ iy0: s.iy0, iy1: s.iy1, ix0: Math.min(s.ix0, n.ix0), ix1: Math.max(s.ix1, n.ix1) }]
+        else if (band && ((above && s.ix0 >= n.ix0 && s.ix1 <= n.ix1) || (beside && s.iy0 >= n.iy0 && s.iy1 <= n.iy1))) {
+          const union: Box = { ix0: Math.min(s.ix0, n.ix0), iy0: Math.min(s.iy0, n.iy0), ix1: Math.max(s.ix1, n.ix1), iy1: Math.max(s.iy1, n.iy1) }
+          const inBox = (b: Box, ix: number, iy: number): boolean => ix >= b.ix0 && ix <= b.ix1 && iy >= b.iy0 && iy <= b.iy1
+          const areaM2 = (cs: Array<{ ix: number; iy: number }>): number => cs.reduce((a, c) => {
+            const cell = cellAt.get(`${c.ix}:${c.iy}`)
+            return a + (cell ? (cell.rect.x1 - cell.rect.x0) * registration.metresPerPixelX * (cell.rect.y1 - cell.rect.y0) * registration.metresPerPixelY : 0)
+          }, 0)
+          const notch: Array<{ ix: number; iy: number }> = []
+          for (let iy = union.iy0; iy <= union.iy1; iy += 1) for (let ix = union.ix0; ix <= union.ix1; ix += 1) if (!inBox(s, ix, iy) && !inBox(n, ix, iy)) notch.push({ ix, iy })
+          // another strip of the same band inside the notch is taken in with it; a body's cell there stops the join
+          const owner = (c: { ix: number; iy: number }): PlanRegion | undefined => out.find((r) => r !== strip && r !== next && r.cells.some((x) => x.ix === c.ix && x.iy === c.iy))
+          const owners = new Set(notch.map(owner).filter((r): r is PlanRegion => r !== undefined))
+          const bandOnly = [...owners].every((r) => !spanOk(r.rect) && r.cells.every((c) => inBox(union, c.ix, c.iy)))
+          const open = notch.filter((c) => owner(c) === undefined)
+          const bandM2 = areaM2(strip.cells) + [...owners].reduce((a, r) => a + areaM2(r.cells), 0)
+          if (bandOnly && areaM2(open) <= bandM2) {
+            pieces = [union]
+            absorbed = [...owners]
+          }
+        }
         if (!pieces) continue
         const kept = pieces.filter((b) => b.ix1 >= b.ix0 && b.iy1 >= b.iy0)
         const made = kept.map((b) => regionOf(b, [strip, next]))
+        // two strips stacked end to end (one band cut by a grid line) become one longer strip, for the next pass
+        const stacked = !spanOk(next.rect) && made.length === 1 && made[0] !== undefined
         // every piece must be a body the layout would keep: a re-cut that leaves one it rejects loses its floor
-        if (made.some((r) => r === undefined || !spanOk(r.rect) || !accept(r))) continue
-        out = [...out.filter((r) => r !== strip && r !== next), ...(made as PlanRegion[])]
+        if (!stacked && made.some((r) => r === undefined || !spanOk(r.rect) || !accept(r))) continue
+        out = [...out.filter((r) => r !== strip && r !== next && !absorbed.includes(r)), ...(made as PlanRegion[])]
         changed = true
         break
       }
@@ -2072,14 +2100,25 @@ export function planBodies(decomposition: PlanDecomposition, wallShare = 0.5): P
     const own = new Set(cells.map((c) => `${c.ix}:${c.iy}`))
     // Everything inside the bounding box has to be either this body or a
     // pocket in it, or the box is not the body's shape. On a plan cut on its
-    // outline (005C post-review), a cell outside the outline is no pocket of a
-    // body: it is the ground a U or an L wraps, and inflating across it builds
-    // a courtyard.
+    // outline (005C post-review), a recess outside the outline is a pocket only
+    // as small as the pocket rule's floor (6 m², an entrance niche); larger, it
+    // is the ground a U or an L wraps, and inflating across it builds a
+    // courtyard.
     const outlined = decomposition.envelope?.outline ? new Set(decomposition.envelope.outline.map((c) => `${c.ix}:${c.iy}`)) : undefined
+    const scaled = (decomposition.regions.find((r) => r.classification === 'BUILT' && r.rect.x1 > r.rect.x0) ?? parts[0])
+    const pxArea = (r: PixelRect): number => (r.x1 - r.x0) * (r.y1 - r.y0)
+    const m2PerPx = scaled ? ((scaled.metric.x1 - scaled.metric.x0) * (scaled.metric.z1 - scaled.metric.z0)) / Math.max(1e-9, pxArea(scaled.rect)) : 0
+    const recessOf = (c: { ix: number; iy: number }) => decomposition.regions.find((r) => r.classification === 'RECESS' && r.cells.some((x) => x.ix === c.ix && x.iy === c.iy))
+    const pocket = (c: PlanCell): boolean => {
+      if (c.classification !== 'RECESS') return false
+      if (!outlined || outlined.has(`${c.ix}:${c.iy}`)) return true
+      const region = recessOf(c)
+      return region !== undefined && pxArea(region.rect) * m2PerPx <= POCKET_FLOOR_M2
+    }
     const rectangular = decomposition.cells.every((c) => {
       const inside = c.rect.x0 >= rect.x0 && c.rect.x1 <= rect.x1 && c.rect.y0 >= rect.y0 && c.rect.y1 <= rect.y1
       if (!inside) return true
-      return own.has(`${c.ix}:${c.iy}`) || (c.classification === 'RECESS' && (!outlined || outlined.has(`${c.ix}:${c.iy}`)))
+      return own.has(`${c.ix}:${c.iy}`) || pocket(c)
     })
     if (!rectangular) {
       for (const part of parts) out.push(part)
@@ -2323,6 +2362,8 @@ export type BoundaryRecord = {
   why: string
 }
 
+/** The pocket rule's floor (the pipeline's `max(6 m², 2.5 w²)`): a recess no larger is a pocket of the body around it. */
+const POCKET_FLOOR_M2 = 6
 /** Two outlines this close in area are one reading (the AGREES band of the layout gate). */
 const POLICY_AGREES = 0.06
 
