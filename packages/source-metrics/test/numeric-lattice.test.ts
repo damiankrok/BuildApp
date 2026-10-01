@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { CORPUS_SEEDS, Canvas, digitCorpus, renderLabel } from '@buildapp/synthetic-drawings'
 import type { CorpusSpecimen } from '@buildapp/synthetic-drawings'
-import { INK_VARIANTS, LATTICE_BOUNDS, boundedValues, labelLattice, parseNumber, readNumbers, readingLattice } from '../src/index.js'
+import { INK_VARIANTS, LATTICE_BOUNDS, STABILITY_BRACKET, boundedValues, labelLattice, parseNumber, readNumbers, readingLattice } from '../src/index.js'
 import type { Raster } from '@buildapp/source-cv'
 import type { LabelLattice, LatticeCache, TextToken } from '../src/index.js'
 
@@ -81,6 +81,34 @@ describe('the lattice is deterministic, bounded and image-only', () => {
       }
       expect(l.sequences.reduce((a, s) => a + s.p, 0)).toBeLessThanOrEqual(1 + 1e-5)
       expect(l.sequences.filter((s) => s.asRead)).toHaveLength(1)
+      // What the cut left out is on the record; the as-read string is one of the `sequences`, never one more.
+      expect(l.mergedCount).toBeGreaterThanOrEqual(l.sequences.length)
+      expect(l.emittedMass).toBeGreaterThan(0)
+      expect(l.emittedMass).toBeLessThanOrEqual(1)
+    }
+  })
+
+  it('a reading whose value moves under the stability bracket is never CLEAR or SUPPORTED', () => {
+    let unstable = 0
+    for (const sp of digitCorpus(CORPUS_SEEDS.calibration, 6)) {
+      const l = readLabel(renderLabel(sp.text, sp.style).raster)?.lattice
+      if (!l) continue
+      expect(l.asReadStability.bracket).toHaveLength(STABILITY_BRACKET.length)
+      if (l.asReadStability.stable) continue
+      unstable += 1
+      expect(['AMBIGUOUS', 'LOW_QUALITY'], `${sp.id}: ${l.asRead} under the bracket ${l.asReadStability.bracket.join('/')}`).toContain(l.ocrClass)
+    }
+    expect(unstable).toBeGreaterThan(0)
+  })
+
+  it('each value names first the path that decided its score', () => {
+    for (const sp of digitCorpus(CORPUS_SEEDS.calibration, 2)) {
+      const l = readLabel(renderLabel(sp.text, sp.style).raster)?.lattice
+      for (const q of l?.sequences ?? []) {
+        const first = l?.paths.find((p) => p.id === q.pathIds[0])
+        expect(first, `${sp.id} ${q.text}`).toBeDefined()
+        expect(q.variants).toContain(first?.variant)
+      }
     }
   })
 

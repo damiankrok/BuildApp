@@ -1032,6 +1032,9 @@ function latticeRecord(id: string, frameId: string, token: TextToken, l: LabelLa
     paths: l.paths.map((p) => ({ id: p.id, variant: p.variant, kind: p.kind, text: p.glyphs.map((g) => g.candidates[0]?.char ?? '').join('') || '?', slope: p.slope, cuts: p.cuts, changedBoundaries: p.changedBoundaries, segScore: p.segScore, ratioToBest: p.ratioToBest })),
     expansions: l.expansions,
     truncatedBy: l.truncatedBy,
+    mergedCount: l.mergedCount,
+    emittedMass: l.emittedMass,
+    asReadStability: l.asReadStability,
     cache: l.cache,
   }
 }

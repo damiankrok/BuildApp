@@ -90,6 +90,8 @@ export type PhaseStats = {
   workTotal: number | null
   unit: ProgressUnit
   counters: Record<string, number>
+  /** Wall time per subphase, from the tick that names it to the tick that names another (or the phase's end). */
+  subphaseMs?: Record<string, number>
   peakRssBytes?: number
 }
 
@@ -148,6 +150,8 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
     candidateIndex?: number
     candidateTotal?: number
     subphase?: { id: string; label: string }
+    subphaseSince?: number
+    subphaseMs: Record<string, number>
     counters: Record<string, number>
     peakRss?: number
   }
@@ -204,8 +208,14 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
     })
   }
 
+  const lapSubphase = (c: Current, at: number): void => {
+    if (c.subphase && c.subphaseSince !== undefined) c.subphaseMs[c.subphase.id] = (c.subphaseMs[c.subphase.id] ?? 0) + (at - c.subphaseSince)
+    c.subphaseSince = at
+  }
+
   const close = (at: number): void => {
     if (!current) return
+    lapSubphase(current, at)
     done.push({
       phaseId: current.id,
       stage: current.stage,
@@ -217,13 +227,15 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
       workTotal: current.workTotal,
       unit: current.unit,
       counters: { ...current.counters },
+      ...(Object.keys(current.subphaseMs).length > 0 ? { subphaseMs: Object.fromEntries(Object.entries(current.subphaseMs).map(([k, v]) => [k, Math.round(v)])) } : {}),
       ...(current.peakRss !== undefined ? { peakRssBytes: current.peakRss } : {}),
     })
     current = undefined
   }
 
-  const merge = (w: WorkUpdate): void => {
+  const merge = (w: WorkUpdate, at: number): void => {
     if (!current) return
+    if (w.subphase && w.subphase.id !== current.subphase?.id) lapSubphase(current, at)
     if (w.done !== undefined) current.workDone = w.done
     if (w.total !== undefined) current.workTotal = w.total
     if (w.assetIndex !== undefined) {
@@ -261,14 +273,15 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
         workDone: 0,
         workTotal: o.total ?? null,
         counters: {},
-        ...(o.subphase ? { subphase: o.subphase } : {}),
+        subphaseMs: {},
+        ...(o.subphase ? { subphase: o.subphase, subphaseSince: at } : {}),
       }
       emit('PHASE_START', 'COMPUTE', at)
       check(at)
     },
     tick(update) {
-      if (update) merge(update)
       const at = options.clock()
+      if (update) merge(update, at)
       if (current) {
         current.ticks += 1
         const gap = at - current.lastTickAt

@@ -454,14 +454,14 @@ describe('§41 metamorphic: one physical drawing, imaged differently', () => {
   })
 
   /**
-   * The imagings whose scale the reader cannot recover, declared, not hidden: under a 3×3 blur the 005D reader
-   * read the overall `1200` as `1100` with no bounded alternative holding the true digit. The 005E lattice reads it
-   * `1700`, AMBIGUOUS, and names `1200` as its best alternative — but the part labels beside it are lost to the
-   * blur (`300` reads `700`, `450` not at all), so no reading states the true scale and the one overall reading
-   * still decides, at WEAK (which the pipeline's first-success challenge then tests). The topology is right.
-   * `it.fails` turns green the day the scale clause passes, so the limit cannot linger unnoticed.
+   * The imagings whose scale the reader cannot recover, declared, not hidden. None since 005E: under a 3×3 blur the 005D
+   * reader read the overall `1200` as `1100` with no bounded alternative holding the true digit, and a wrong scale was
+   * adopted at WEAK. The lattice reads it `1700`, AMBIGUOUS, and the part label `700` (printed 300), AMBIGUOUS too —
+   * and their own best alternatives, `1200` and `300`, agree on the true scale; a deciding set of coin tosses whose
+   * alternatives state another scale replaces nothing (post-review C P1), so no scale is adopted and the clause holds.
+   * The set stays, so a reader limit found later is declared here and not hidden.
    */
-  const READER_LIMITS = new Set(['anti-aliasing'])
+  const READER_LIMITS = new Set<string>([])
 
   for (const [name, { image, factor }] of Object.entries(IMAGING)) {
     it(`${name}: the same physical topology, or no lines at all`, () => {

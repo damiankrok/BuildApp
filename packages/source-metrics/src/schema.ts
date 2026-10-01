@@ -581,6 +581,10 @@ export const FrameMetricSolutionSchema = z
             selectedHypothesisId: z.string().min(1),
             challengerHypothesisId: z.string().min(1).optional(),
             candidateCmPerPixel: z.number().positive().optional(),
+            /** Every distinct scale two coin tosses' held alternatives agree on (bounded), with the pair behind it. */
+            candidateScales: z.array(z.object({ cmPerPixel: z.number().positive(), observationIds: z.array(z.string().min(1)) }).strict()).optional(),
+            /** The selection's inks a rival contests, and those read too ambiguously to corroborate. */
+            contestedObservationIds: z.array(z.string().min(1)).optional(),
             demotedObservationIds: z.array(z.string().min(1)),
             blindConfidence: z.enum(['STRONG', 'SUPPORTED', 'WEAK', 'INCONCLUSIVE']),
             why: z.string().min(1),
@@ -836,6 +840,11 @@ export const NumericLatticeRecordSchema = z
     ),
     expansions: z.number().int().nonnegative(),
     truncatedBy: z.enum(['MASS', 'COUNT', 'FLOOR', 'NONE']),
+    /** Values merged before the count/mass cut, and the share of their probability the emitted ones carry. */
+    mergedCount: z.number().int().nonnegative(),
+    emittedMass: z.number().min(0).max(1),
+    /** The as-read string under the stability bracket's masks, and whether its value held. */
+    asReadStability: z.object({ stable: z.boolean(), bracket: z.array(z.string()) }).strict(),
     cache: z.enum(['HIT', 'MISS']),
   })
   .strict()

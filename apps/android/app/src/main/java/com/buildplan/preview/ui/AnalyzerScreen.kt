@@ -460,6 +460,7 @@ private fun AnalyzerActivity(status: JobStatus?) {
     val counters = activity.diagnosticCounters
     val step = when (activity.subphaseId) {
         "OCR" -> count(counters["tokenGroups"]?.toInt(), counters["tokenGroupsTotal"]?.toInt(), R.string.analyzer_step_ocr)
+        "OCR_LATTICE" -> count(counters["label"]?.toInt(), counters["labelsTotal"]?.toInt(), R.string.analyzer_step_ocr_lattice)
         "CALLOUT_RINGS" -> count(counters["rings"]?.toInt(), counters["ringsTotal"]?.toInt(), R.string.analyzer_step_callouts)
         "CAMERAS" -> count(counters["cameras"]?.toInt(), counters["camerasTotal"]?.toInt(), R.string.analyzer_step_cameras)
         "ORIENTATION" -> count(counters["chains"]?.toInt(), counters["chainsTotal"]?.toInt(), R.string.analyzer_step_orientation)

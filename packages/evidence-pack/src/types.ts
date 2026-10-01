@@ -119,6 +119,9 @@ export type LatticeJson = {
   paths: Array<{ id: string; variant: string; kind: string; text: string; slope: number; cuts: number[]; changedBoundaries: number; segScore: number; ratioToBest: number }>
   expansions: number
   truncatedBy: string
+  mergedCount?: number
+  emittedMass?: number
+  asReadStability?: { stable: boolean; bracket: string[] }
   cache?: string
 }
 export type MetricsJson = {

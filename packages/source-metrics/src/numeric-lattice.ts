@@ -72,14 +72,34 @@ export const LATTICE_BOUNDS = {
 } as const
 
 /**
- * The reading-quality classes (pre-review D's four, defined on the measure the development labels showed to separate a
- * right reading from a wrong one: the calibrated probability of the as-read string among the ink's emitted values, AUC
- * 0.85 against 0.72 for the worst runner ratio). LOW_QUALITY: a glyph matched under the floor, or text under the
- * legible height. CLEAR: the reading holds at least `clearP` of the ink's mass and no other value is within
- * `clearMargin` of it. SUPPORTED: at least `supportedP`. AMBIGUOUS otherwise. Chosen on the FIT labels and the
- * calibration corpus, checked on the held-back ones (the stage's calibration tables).
+ * The reading-quality classes (pre-review D's four), on the probability of the as-read string among the ink's emitted
+ * values and its margin over the next value. On the FIT labels that probability separates a right reading from a wrong
+ * one at AUC 0.75 against 0.65 for the worst glyph runner ratio (0.73 topology-aware); on the HELD_BACK labels the two
+ * are a near-tie (0.81 against 0.83) — the stage's calibration tables. LOW_QUALITY: a glyph matched under the floor, or
+ * text under the legible height. CLEAR: the reading holds at least `clearP` of the ink's mass (its margin is then at
+ * least a third). SUPPORTED: at least `supportedP`, with no other value within `supportedMargin` of it — a two-value
+ * coin toss is AMBIGUOUS whatever share it holds (005E post-review C P0). AMBIGUOUS otherwise, and whenever the as-read
+ * value moves under the stability bracket (`STABILITY_BRACKET`). Chosen on the FIT labels and the calibration corpus,
+ * checked on the held-back ones.
  */
-export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.3, supportedP: 0.35 } as const
+export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.3, supportedP: 0.35, supportedMargin: 0.3 } as const
+
+/**
+ * The stability bracket (005E post-review D P1): the stricter masks' thresholds — STRICT's delta and SAUVOLA's k — scaled
+ * by each factor, the anchors read again and the as-read rule applied. A reading whose value moves under a tenth of a
+ * threshold was never decided by the image: it cannot be CLEAR or SUPPORTED. The width is fixed a priori, not fitted.
+ */
+export const STABILITY_BRACKET = [0.9, 1.1] as const
+
+/** The class of a reading, from the reader's own evidence only. */
+export function ocrClassOf(m: { minGlyphScore: number; capHeightPx: number; asReadP: number; probabilityMargin: number; stable?: boolean }): OcrClass {
+  const B = OCR_CLASS_BOUNDS
+  if (m.minGlyphScore < B.lowScore || m.capHeightPx < B.legibleCapPx) return 'LOW_QUALITY'
+  if (m.stable === false) return 'AMBIGUOUS'
+  if (m.asReadP >= B.clearP && m.probabilityMargin >= B.clearMargin) return 'CLEAR'
+  if (m.asReadP >= B.supportedP && m.probabilityMargin >= B.supportedMargin) return 'SUPPORTED'
+  return 'AMBIGUOUS'
+}
 
 export type InkVariant = 'DEFAULT' | 'STRICT' | 'SAUVOLA'
 export const INK_VARIANTS: readonly InkVariant[] = ['DEFAULT', 'STRICT', 'SAUVOLA']
@@ -170,6 +190,11 @@ export type LabelLattice = {
   paths: LatticePath[]
   expansions: number
   truncatedBy: 'MASS' | 'COUNT' | 'FLOOR' | 'NONE'
+  /** Values merged before the cut, and the share of their probability the emitted ones carry (a truth may lie past it). */
+  mergedCount: number
+  emittedMass: number
+  /** The as-read string under the stability bracket's masks, and whether its value held (`STABILITY_BRACKET`). */
+  asReadStability: { stable: boolean; bracket: string[] }
   cache: 'HIT' | 'MISS'
 }
 
@@ -201,7 +226,7 @@ function cropGray(ink: Gray, rect: PixelRect, pad: number): Crop {
  * One binarisation of a crop, with the page's window radius: inside the token's box (at least a radius from the crop's
  * edge, or at the page's own edge) the window is the page's, so DEFAULT is the reader's own mask exactly.
  */
-function variantMask(g: Gray, radius: number, variant: InkVariant): Mask {
+function variantMask(g: Gray, radius: number, variant: InkVariant, factor = 1): Mask {
   const w = g.width
   const h = g.height
   const sat = new Float64Array((w + 1) * (h + 1))
@@ -231,12 +256,12 @@ function variantMask(g: Gray, radius: number, variant: InkVariant): Mask {
       if (variant === 'SAUVOLA') {
         const mean = sum / n
         const sd = Math.sqrt(Math.max(0, box(sq) / n - mean * mean))
-        data[y * w + x] = v <= 110 || v < mean * (1 + 0.2 * (sd / 128 - 1)) ? 1 : 0
+        data[y * w + x] = v <= 110 || v < mean * (1 + 0.2 * factor * (sd / 128 - 1)) ? 1 : 0
         continue
       }
       // The reader's own rule (`adaptiveInkMask`): a rounded local mean, an absolute bar and a delta below the mean.
       const mean = Math.round(sum / n)
-      const [delta, absolute] = variant === 'DEFAULT' ? [8, 110] : [48, 60]
+      const [delta, absolute] = variant === 'DEFAULT' ? [8, 110] : [48 * factor, 60]
       data[y * w + x] = v <= absolute || mean - v >= delta ? 1 : 0
     }
   }
@@ -427,7 +452,7 @@ function glyphOf(c: CellCut, touching: boolean): LatticeGlyph {
 type Partial = { chars: string[]; picks: number[]; logP: number; nonTop: number }
 
 /** The bounded beam over one path's cells. */
-function beam(glyphs: readonly LatticeGlyph[], counter: { expansions: number }): Partial[] {
+function beam(glyphs: readonly LatticeGlyph[], counter: { expansions: number; floorDrops: number }): Partial[] {
   let frontier: Partial[] = [{ chars: [], picks: [], logP: 0, nonTop: 0 }]
   for (const g of glyphs) {
     const next: Partial[] = []
@@ -444,7 +469,9 @@ function beam(glyphs: readonly LatticeGlyph[], counter: { expansions: number }):
   }
   if (frontier.length === 0) return frontier
   const floor = frontier[0].logP + Math.log(LATTICE_BOUNDS.floor)
-  return frontier.filter((f) => f.logP >= floor)
+  const kept = frontier.filter((f) => f.logP >= floor)
+  counter.floorDrops += frontier.length - kept.length
+  return kept
 }
 
 const valueOf = (text: string): number | undefined => {
@@ -497,7 +524,7 @@ export function labelLattice(pass: PassField, token: TextToken, cache?: LatticeC
 }
 
 function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<LabelLattice, 'glyphBoxes' | 'cache' | 'orientation' | 'rawTopText'> & { glyphBoxesInPass: PixelRect[] }) | undefined {
-  const counter = { expansions: 0 }
+  const counter = { expansions: 0, floorDrops: 0 }
   const paths: LatticePath[] = []
   const height = local.y1 - local.y0 + 1
   const width = local.x1 - local.x0 + 1
@@ -511,6 +538,8 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     const { slope, sheared } = estimateShear(bmp)
     const anchorCells = segment(sheared)
     if (anchorCells.length === 0) continue
+    // A stricter mask that breaks the ink into more cells than a dimension has is no reading of it: no paths, no beam.
+    if (variant !== 'DEFAULT' && anchorCells.length > LATTICE_BOUNDS.maxCells) continue
     // The glyph height: the tallest cut's ink, the reader's own cap height.
     const capHeight = Math.max(1, ...cellSources(sheared, anchorCells).map((c) => c.y1 - c.y0 + 1))
     const hyps = segmentationHypotheses(sheared, capHeight)
@@ -565,9 +594,10 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     const held = merged.get(text)
     if (!held) merged.set(text, { text, logP, path, picks: s.picks, nonTop: s.nonTop, pathIds: [path.id], variants: new Set([path.variant]) })
     else {
-      held.pathIds.push(path.id)
       held.variants.add(path.variant)
-      if (logP > held.logP) Object.assign(held, { logP, path, picks: s.picks, nonTop: s.nonTop })
+      // The path that decides a value's score is listed first; the others in the order they reached it.
+      if (logP > held.logP) Object.assign(held, { logP, path, picks: s.picks, nonTop: s.nonTop, pathIds: [path.id, ...held.pathIds] })
+      else held.pathIds.push(path.id)
     }
   }
   for (const path of paths.filter((p) => p.kind === 'ANCHOR')) for (const s of beam(path.glyphs, counter)) offer(path, s, s.logP)
@@ -586,21 +616,30 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
   // never a re-cut. On the development labels and both synthetic corpora this reads right where the reader's own mask
   // did not 13 and 76 times for 1 and 14 the other way (the stage's calibration tables).
   const anchors = paths.filter((p) => p.kind === 'ANCHOR')
-  const anchorText = (p: LatticePath): string => p.glyphs.map((g) => g.candidates[0]?.char ?? '').join('')
-  // Among anchors that state a dimension; failing that, among those without a leading zero (no number is printed with one).
-  const valued = anchors.filter((p) => valueOf(anchorText(p)) !== undefined)
-  const plain = anchors.filter((p) => !/^0\d/.test(anchorText(p)))
-  const asReadPath = [...(valued.length > 0 ? valued : plain.length > 0 ? plain : [anchorDefault.path])].sort((a, b) => b.segScore - a.segScore || INK_VARIANTS.indexOf(a.variant) - INK_VARIANTS.indexOf(b.variant))[0]
+  const asReadPath = pickAsRead(anchors.map((p) => ({ text: anchorText(p), segScore: p.segScore, variant: p.variant, path: p })), { text: anchorText(anchorDefault.path), segScore: anchorDefault.path.segScore, variant: 'DEFAULT', path: anchorDefault.path }).path
   const asReadText = anchorText(asReadPath)
+  // The stability bracket: the stricter masks read again a tenth either way (DEFAULT is the reader's own and stays).
+  const bracket = STABILITY_BRACKET.map((factor) => {
+    const reads: AnchorRead[] = [{ text: anchorText(anchorDefault.path), segScore: anchorDefault.path.segScore, variant: 'DEFAULT' }]
+    for (const variant of INK_VARIANTS.slice(1, LATTICE_BOUNDS.variants)) {
+      const r = anchorReading(variantMask(gray, radius, variant, factor), local, variant)
+      if (r) reads.push(r)
+    }
+    return pickAsRead(reads, reads[0]).text
+  })
+  const asReadStable = bracket.every((t) => (valueOf(asReadText) === undefined ? t === asReadText : valueOf(t) === valueOf(asReadText)))
   const asReadCells = asReadPath === anchorDefault.path ? anchorDefault : anchorsByVariant.get(asReadPath.variant)
   const ordered = [...merged.values()].sort((a, b) => b.logP - a.logP || a.nonTop - b.nonTop || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0))
   // Emit best first until the mass or the count bound; the as-read string is always kept.
   const z = ordered.reduce((a, m) => a + Math.exp(m.logP - ordered[0].logP), 0)
+  // At most `sequences` values, the as-read one among them: a slot is kept for it until it is emitted.
+  const asReadEntry = merged.get(asReadText)
   const emitted: Merged[] = []
   let mass = 0
   let truncatedBy: LabelLattice['truncatedBy'] = 'NONE'
   for (const m of ordered) {
-    if (emitted.length >= LATTICE_BOUNDS.sequences) {
+    const reserved = asReadEntry && m !== asReadEntry && !emitted.includes(asReadEntry) ? 1 : 0
+    if (emitted.length + reserved >= LATTICE_BOUNDS.sequences) {
       truncatedBy = 'COUNT'
       break
     }
@@ -611,10 +650,12 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     emitted.push(m)
     mass += Math.exp(m.logP - ordered[0].logP) / z
   }
-  const asReadEntry = merged.get(asReadText)
   if (asReadEntry && !emitted.includes(asReadEntry)) emitted.push(asReadEntry)
-  if (truncatedBy === 'NONE' && ordered.length > emitted.length) truncatedBy = 'FLOOR'
+  if (truncatedBy === 'NONE' && counter.floorDrops > 0) truncatedBy = 'FLOOR'
   const zEmitted = emitted.reduce((a, m) => a + Math.exp(m.logP - ordered[0].logP), 0)
+  // What the cut left out: the values merged, and the share of their probability the emitted ones carry.
+  const mergedCount = ordered.length
+  const emittedMass = round6(Math.min(1, zEmitted / z))
   const sequences: LatticeSequence[] = emitted.map((m) => {
     const chosen = m.picks.map((pick, i) => m.path.glyphs[i].candidates[pick])
     const margins = m.path.glyphs.map((g) => round6(1 - g.runnerRatio))
@@ -668,21 +709,20 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
   const asReadP = asReadSeq?.p ?? 0
   const probabilityMargin = asReadP > 0 && rivals.length > 0 ? round6(1 - Math.max(...rivals.map((s) => s.p)) / asReadP) : 1
   const B = OCR_CLASS_BOUNDS
-  let ocrClass: OcrClass
-  let classWhy: string
-  if (minGlyphScore < B.lowScore || height < B.legibleCapPx) {
-    ocrClass = 'LOW_QUALITY'
-    classWhy = height < B.legibleCapPx ? `set ${height} px tall, under the ${B.legibleCapPx} px a figure is legible at` : `a glyph matched at ${minGlyphScore}, under ${B.lowScore}: an ink or a cut the matcher cannot read`
-  } else if (asReadP >= B.clearP && probabilityMargin >= B.clearMargin) {
-    ocrClass = 'CLEAR'
-    classWhy = `the reading holds ${round6(asReadP)} of the ink's values and no other value comes within ${B.clearMargin} of it`
-  } else if (asReadP >= B.supportedP) {
-    ocrClass = 'SUPPORTED'
-    classWhy = `the reading holds ${round6(asReadP)} of the ink's values; ${rivals.length > 0 ? `the next value ${round6(1 - probabilityMargin)} of it` : 'no other value'}`
-  } else {
-    ocrClass = 'AMBIGUOUS'
-    classWhy = `the reading holds only ${round6(asReadP)} of the ink's values${rivals.length > 0 ? `; the next value is ${round6(1 - probabilityMargin)} of it` : ''}`
-  }
+  const ocrClass = ocrClassOf({ minGlyphScore, capHeightPx: height, asReadP, probabilityMargin, stable: asReadStable })
+  const next = rivals.length > 0 ? `the next value ${round6(1 - probabilityMargin)} of it` : 'no other value'
+  const classWhy =
+    ocrClass === 'LOW_QUALITY'
+      ? height < B.legibleCapPx
+        ? `set ${height} px tall, under the ${B.legibleCapPx} px a figure is legible at`
+        : `a glyph matched at ${minGlyphScore}, under ${B.lowScore}: an ink or a cut the matcher cannot read`
+      : !asReadStable
+        ? `the stricter masks read it ${bracket.join(' / ')} a tenth of a threshold either way: the image does not decide it`
+        : ocrClass === 'CLEAR'
+          ? `the reading holds ${round6(asReadP)} of the ink's values and no other value comes within ${B.clearMargin} of it`
+          : ocrClass === 'SUPPORTED'
+            ? `the reading holds ${round6(asReadP)} of the ink's values; ${next}`
+            : `the reading holds ${round6(asReadP)} of the ink's values; ${next}`
   const ps = sequences.map((s) => s.p).filter((p) => p > 0)
   const entropy = round6(-ps.reduce((a, p) => a + p * Math.log(p), 0))
   // The as-read cells on the page: the cut's columns mapped back through the shear's fraction, as the reader does.
@@ -712,8 +752,43 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     paths,
     expansions: counter.expansions,
     truncatedBy,
+    mergedCount,
+    emittedMass,
+    asReadStability: { stable: asReadStable, bracket },
     glyphBoxesInPass,
   }
+}
+
+type AnchorRead = { text: string; segScore: number; variant: InkVariant }
+
+const anchorText = (p: LatticePath): string => p.glyphs.map((g) => g.candidates[0]?.char ?? '').join('')
+
+/**
+ * The as-read rule: among the anchors that state a dimension the one whose cells match best; failing that, among those
+ * without a leading zero (no number is printed with one); failing that, the reader's own (DEFAULT).
+ */
+function pickAsRead<T extends AnchorRead>(anchors: readonly T[], fallback: T): T {
+  const valued = anchors.filter((a) => valueOf(a.text) !== undefined)
+  const plain = anchors.filter((a) => !/^0\d/.test(a.text))
+  return [...(valued.length > 0 ? valued : plain.length > 0 ? plain : [fallback])].sort((a, b) => b.segScore - a.segScore || INK_VARIANTS.indexOf(a.variant) - INK_VARIANTS.indexOf(b.variant))[0]
+}
+
+/** One mask's anchor — the reader's own cuts of it — read cell by cell, as `computeLattice` reads it; no re-cuts, no beam. */
+function anchorReading(mask: Mask, local: PixelRect, variant: InkVariant): AnchorRead | undefined {
+  const { sheared } = estimateShear(cropToken(mask, local))
+  const cells = segment(sheared)
+  if (cells.length === 0 || (variant !== 'DEFAULT' && cells.length > LATTICE_BOUNDS.maxCells)) return undefined
+  const cuts = cellSources(sheared, cells)
+  if (cuts.length === 0) return undefined
+  const runOf = (c: Cut): number => {
+    let x = c.x0
+    while (x > 0 && columnInk(sheared, x - 1) > 0) x -= 1
+    return x
+  }
+  const runCells = new Map<number, number>()
+  for (const c of cells) runCells.set(runOf(c), (runCells.get(runOf(c)) ?? 0) + 1)
+  const glyphs = cuts.map((c) => glyphOf(c, (runCells.get(runOf(c)) ?? 1) > 1))
+  return { text: glyphs.map((g) => g.candidates[0]?.char ?? '').join(''), segScore: geoMean(glyphs.map((g) => g.top)), variant }
 }
 
 function columnInk(b: Bitmap, x: number): number {
