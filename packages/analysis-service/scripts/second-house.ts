@@ -19,7 +19,10 @@
  * read again, and the solver runs on it directly: that is how an earlier
  * reading (a pre-fix one, say) is put through today's solver to see what it
  * now says about it. `--drop-frames <id,id>` withholds frames from that
- * solver run, to replay a device that never received some drawings. The
+ * solver run, to replay a device that never received some drawings. With
+ * `--decoy-footprint <factor>` the published footprint the solver is given is
+ * multiplied by the factor: a replay that tests the figure never chooses the
+ * drawing's scale (a decoy must be refused by name, never built to). The
  * script names no project and tells the analyzer nothing about what to expect.
  *
  * As a CI gate: `--expect COMPLETED` fails the command unless the run
@@ -43,6 +46,14 @@ import { AnalysisError, PHASE_STAGE, diagnosticsBundle, encodePng, hashesOf, ide
 import type { AnalysisTelemetry, AnalysisTrace, PhaseStats } from '../src/index.js'
 import { renderSceneSheet } from '../../mobile-scene/scripts/scene-sheet.js'
 import { PNG } from 'pngjs'
+import { execFileSync } from 'node:child_process'
+import { basename } from 'node:path'
+import { METRIC_EVIDENCE_SCHEMA_VERSION, METRIC_READER_VERSION, METRIC_SOLVER_VERSION, DIMENSION_TOPOLOGY_VERSION } from '@buildapp/source-metrics'
+import { BOUNDARY_EVIDENCE_VERSION, PLAN_RESOLVER_VERSION, SOLVER_V2_VERSION } from '@buildapp/reconstruction'
+import { GENERIC_ADAPTER_VERSION } from '@buildapp/source-package'
+import { ANALYSIS_SERVICE_VERSION } from '../src/index.js'
+import { EVIDENCE_PACK_VERSION } from '../../evidence-pack/src/index.js'
+import { packRunDir } from '../../evidence-pack/scripts/run-dir.js'
 
 const value = (argv: readonly string[], name: string): string | undefined => {
   const i = argv.indexOf(`--${name}`)
@@ -100,11 +111,19 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
     const metrics = JSON.parse(readFileSync(metricsPath, 'utf8')) as MetricEvidenceSet
     await loadRasters(pkg)
     const dropped = new Set((value(argv, 'drop-frames') ?? '').split(',').filter(Boolean))
+    const decoy = value(argv, 'decoy-footprint')
+    const factor = decoy === undefined ? 1 : Number(decoy)
+    if (!Number.isFinite(factor) || factor <= 0) throw new Error(`--decoy-footprint needs a positive factor, not ${decoy}`)
+    const publishedAreas = factor === 1 ? pkg.publishedFacts : pkg.publishedFacts?.map((f) => (f.key === 'footprint_area' ? { ...f, value: Math.round(f.value * factor * 100) / 100 } : f))
+    if (factor !== 1) log(`decoy: the published footprint is given as ${factor} × the publisher's`)
+    // What the solver was given, beside what it made of it: the package (with any decoy figure as given) and the evidence.
+    write('source-package.json', factor === 1 ? pkg : { ...pkg, publishedFacts: publishedAreas })
+    write('metric-evidence.json', metrics)
     const events: SolverTraceEvent[] = []
     const entries: AnalysisTrace['entries'] = []
     try {
       const identity = identityOf(pkg, [archonAdapter, genericProjectPageAdapter])
-      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas: pkg.publishedFacts, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e) })
+      const r = reconstructV2({ label: identity.label, slug: identity.slug, modelId: identity.modelId, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, metrics, raster: (f) => rasterOf(f.variantByteHash), frameFilter: dropped.size > 0 ? (f) => !dropped.has(f.id) : undefined, publishedAreas, publishedRooms: pkg.publishedRooms, trace: (e) => events.push(e) })
       for (const e of events) entries.push({ stage: PHASE_STAGE[e.phase], substage: e.substage, status: e.status, startedAtMs: 0, durationMs: 0, counts: e.counts, ...(e.reasonCode ? { reasonCode: e.reasonCode } : {}), ...(e.detail ? { detail: e.detail } : {}) })
       write('analysis-trace.json', { schema: 'buildapp.analysis-trace', schemaVersion: '1.0.0', outcome: 'COMPLETED', entries })
       write('result-summary.json', { outcome: 'COMPLETED', modelHash: r.candidate.modelHash, commands: r.candidate.program.length, masses: r.building.masses.length, levels: levelsFrom(metrics, graph.coordinateFrames.find((f) => f.roles.projection === 'ORTHOGRAPHIC_SECTION')?.id) })
@@ -217,10 +236,60 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
 /** What a replay of the same sealed evidence must reproduce. */
 const SAME_AS_KEYS = ['candidateHash', 'modelHash', 'sceneContentHash', 'sceneSha256'] as const
 
+/**
+ * Evidence mode (BUILDPLAN-ANALYZER-005D): `ANALYZER_EVIDENCE=1` or `--evidence <dir>`. OFF by default.
+ *
+ * The pack is built AFTER the run, from the files the run wrote, and the run never learns whether it
+ * will be: nothing here reaches `runAnalysis` or the solver, so candidate ordering, heuristics,
+ * timeouts, seeds and every hash are the same with it and without it (sealed by a test). Its own
+ * cost is recorded apart from the run's (`evidence-performance.json`).
+ */
+export function evidenceDirOf(argv: readonly string[], out: string): string | undefined {
+  const explicit = value(argv, 'evidence')
+  if (explicit) return explicit
+  return process.env.ANALYZER_EVIDENCE === '1' ? join(out, 'evidence-pack') : undefined
+}
+
+export const ANALYZER_VERSIONS: Record<string, string> = {
+  'analysis-service': ANALYSIS_SERVICE_VERSION,
+  'solver-v2': SOLVER_V2_VERSION,
+  'metric-evidence-schema': METRIC_EVIDENCE_SCHEMA_VERSION,
+  'metrics.numeric-ocr': METRIC_READER_VERSION,
+  'metrics.dimension-topology': DIMENSION_TOPOLOGY_VERSION,
+  'metrics.independent-scale': METRIC_SOLVER_VERSION,
+  'plan-resolver': PLAN_RESOLVER_VERSION,
+  'boundary-evidence': BOUNDARY_EVIDENCE_VERSION,
+  'generic-reader': GENERIC_ADAPTER_VERSION,
+  'evidence-pack': EVIDENCE_PACK_VERSION,
+}
+
+const gitShaOf = (): string | undefined => {
+  if (process.env.GITHUB_SHA) return process.env.GITHUB_SHA
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim() || undefined
+  } catch {
+    return undefined
+  }
+}
+
+export function writeEvidencePack(argv: readonly string[], out: string, log: (line: string) => void): void {
+  const dir = evidenceDirOf(argv, out)
+  if (!dir) return
+  const { pack, ms } = packRunDir(out, dir, value(argv, 'evidence-id') ?? basename(out), { gitSha: gitShaOf(), versions: ANALYZER_VERSIONS })
+  writeFileSync(join(out, 'evidence-performance.json'), `${stableJson({ evidencePackMs: ms, files: pack.manifest.files.length, decisions: pack.timeline.length })}\n`)
+  log(`evidence pack: ${pack.manifest.files.length} files, ${pack.timeline.length} decisions, ${ms} ms → ${dir}`)
+}
+
 if (!process.env.VITEST) {
   const argv = process.argv.slice(2)
   secondHouse(argv).then(
     (outcome) => {
+      try {
+        writeEvidencePack(argv, value(argv, 'out') ?? join(process.cwd(), '.cache', 'second-house'), (l) => process.stdout.write(`${l}\n`))
+      } catch (error) {
+        // The pack is observational: failing to write it changes nothing the run decided, and is reported, not hidden.
+        process.stdout.write(`::warning::evidence pack not written: ${error instanceof Error ? error.message : String(error)}\n`)
+      }
       // --expect COMPLETED makes a failure fail the command (a CI gate); without it the outcome is reported, not judged.
       const expected = value(argv, 'expect')
       if (expected && expected !== outcome && outcome !== 'SOURCE_OUTAGE') process.exitCode = 1

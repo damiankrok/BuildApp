@@ -1,0 +1,183 @@
+/**
+ * BUILDPLAN-ANALYZER-005D §8–§20: the Analyzer Evidence Pack is observational.
+ *
+ * A synthetic house is run twice through the very script a developer and CI run
+ * (`analysis:second-house`), once without evidence mode and once with it. The pack is built
+ * after the run from the files the run wrote; this suite seals what that promises:
+ *
+ *   - ON == OFF: every hash and every decision the run made is the same with the pack and
+ *     without it, and writing the pack changes no file of the run;
+ *   - the pack is deterministic: the same run gives the same bytes, the manifest included;
+ *   - it is complete and self-describing: every required file, an SVG with a JSON sidecar
+ *     for each layer, a manifest whose hashes are the files' own;
+ *   - it never carries a publisher's pixels: no raster in any SVG, and the only picture is
+ *     the analyzer's own render of its model, bounded;
+ *   - it is bounded, and the first-divergence helper names the first decision that differs.
+ */
+import { createHash } from 'node:crypto'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join, relative } from 'node:path'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { fileByteCache } from '@buildapp/source-package'
+import { LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
+import { FORBIDDEN_IN_SVG, PACK_BOUNDS, PACK_FILES, buildEvidencePack, firstDivergence } from '@buildapp/evidence-pack'
+import type { DecisionEvent } from '@buildapp/evidence-pack'
+import { packRunDir, readRunDir } from '../../evidence-pack/scripts/run-dir.js'
+import { runAnalysis } from '../src/index.js'
+import { secondHouse, writeEvidencePack } from '../scripts/second-house.js'
+
+const sha = (b: Uint8Array | string): string => createHash('sha256').update(b).digest('hex')
+const filesUnder = (dir: string): string[] =>
+  readdirSync(dir).flatMap((n) => {
+    const p = join(dir, n)
+    return statSync(p).isDirectory() ? filesUnder(p) : [p]
+  })
+const hashesOfDir = (dir: string, skip: (name: string) => boolean): Record<string, string> =>
+  Object.fromEntries(
+    filesUnder(dir)
+      .map((p) => relative(dir, p))
+      .filter((n) => !skip(n))
+      .sort()
+      .map((n) => [n, sha(readFileSync(join(dir, n)))]),
+  )
+/** What carries wall-clock time and nothing the analyzer decided. */
+const TIMED = (n: string): boolean => ['performance.json', 'telemetry.ndjson', 'evidence-performance.json', 'result-summary.json', 'analysis-trace.json'].includes(n) || n.startsWith('evidence-pack/')
+const summaryHashes = (dir: string): Record<string, unknown> => {
+  const s = JSON.parse(readFileSync(join(dir, 'result-summary.json'), 'utf8')) as Record<string, unknown>
+  return Object.fromEntries(Object.entries(s).filter(([k]) => k.endsWith('Hash') || k === 'sceneSha256' || k === 'counts' || k === 'warningDetails'))
+}
+const traceDecisions = (dir: string): unknown =>
+  (JSON.parse(readFileSync(join(dir, 'analysis-trace.json'), 'utf8')) as { entries: Array<Record<string, unknown>> }).entries.map((e) => [e.stage, e.substage, e.status, e.counts, e.reasonCode ?? null])
+
+let root = ''
+let off = ''
+let on = ''
+const previousOffline = process.env.OFFLINE
+
+beforeAll(async () => {
+  root = mkdtempSync(join(tmpdir(), 'evidence-pack-'))
+  const publisher = syntheticPublisher({ projects: [{ code: 'larchfield-lf01', title: 'Larchfield', house: LARCHFIELD }] })
+  // The bytes the publisher serves, on disk where the script reads them; then the script, offline.
+  const cache = fileByteCache(join(root, 'cache'))
+  const first = await runAnalysis({ kind: 'URL', url: publisher.pageUrl('larchfield-lf01') }, { adapters: [publisher.adapter], deps: publisher.deps, cache, now: () => new Date('2026-01-01T00:00:00Z') })
+  writeFileSync(join(root, 'source-package.json'), JSON.stringify(first.pkg))
+  writeFileSync(join(root, 'observation-graph.json'), JSON.stringify(first.graph))
+  process.env.OFFLINE = '1'
+  const args = (out: string): string[] => ['--package', join(root, 'source-package.json'), '--graph', join(root, 'observation-graph.json'), '--cache', join(root, 'cache'), '--out', out]
+  off = join(root, 'off')
+  on = join(root, 'on')
+  const quiet = (): void => undefined
+  expect(await secondHouse(args(off), quiet)).toBe('COMPLETED')
+  expect(await secondHouse([...args(on), '--evidence', join(on, 'evidence-pack')], quiet)).toBe('COMPLETED')
+}, 600_000)
+
+afterAll(() => {
+  if (previousOffline === undefined) delete process.env.OFFLINE
+  else process.env.OFFLINE = previousOffline
+})
+
+describe('Evidence Pack: observational by construction (ON == OFF)', () => {
+  it('a run with evidence mode on decides exactly what a run with it off decides', () => {
+    const before = hashesOfDir(on, TIMED)
+    writeEvidencePack(['--evidence', join(on, 'evidence-pack')], on, () => undefined)
+    // Writing the pack changed no file the run wrote.
+    expect(hashesOfDir(on, TIMED)).toEqual(before)
+    // And the two runs are the same run: every file, every hash, every traced decision.
+    expect(hashesOfDir(on, TIMED)).toEqual(hashesOfDir(off, TIMED))
+    expect(summaryHashes(on)).toEqual(summaryHashes(off))
+    expect(traceDecisions(on)).toEqual(traceDecisions(off))
+    expect(existsSync(join(on, 'evidence-pack', 'manifest.json'))).toBe(true)
+    expect(existsSync(join(off, 'evidence-pack'))).toBe(false)
+  })
+
+  it('evidence mode is off by default', () => {
+    const before = hashesOfDir(off, () => false)
+    writeEvidencePack([], off, () => undefined)
+    expect(hashesOfDir(off, () => false)).toEqual(before)
+  })
+})
+
+describe('Evidence Pack: deterministic, complete, bounded, free of publisher pixels', () => {
+  const pack = (dir: string, out: string) => packRunDir(dir, out, 'larchfield', { gitSha: '0'.repeat(40), versions: { fixture: '1' } }).pack
+
+  it('the same run gives the same bytes, manifest included — whichever of two identical runs it is built from', () => {
+    const a = pack(off, join(root, 'pack-a'))
+    const b = pack(off, join(root, 'pack-b'))
+    const c = pack(on, join(root, 'pack-c'))
+    expect(hashesOfDir(join(root, 'pack-b'), () => false)).toEqual(hashesOfDir(join(root, 'pack-a'), () => false))
+    expect(hashesOfDir(join(root, 'pack-c'), () => false)).toEqual(hashesOfDir(join(root, 'pack-a'), () => false))
+    expect(b.manifest).toEqual(a.manifest)
+    expect(c.timeline).toEqual(a.timeline)
+  })
+
+  it('carries every required file, a JSON sidecar for every layer drawn, and a manifest of their own hashes', () => {
+    const p = pack(off, join(root, 'pack-files'))
+    for (const name of PACK_FILES) expect(p.files.has(name), name).toBe(true)
+    expect(p.files.has('manifest.json')).toBe(true)
+    for (const name of p.files.keys()) if (name.endsWith('.svg') && name !== 'evidence-summary.svg') expect(p.files.has(name.replace(/\.svg$/, '.json')), `${name} sidecar`).toBe(true)
+    for (const f of p.manifest.files) {
+      const content = readFileSync(join(root, 'pack-files', f.name))
+      expect(sha(content), f.name).toBe(f.sha256)
+      expect(content.length).toBe(f.bytes)
+    }
+    expect(p.manifest.result).toBe('COMPLETED')
+    expect(p.manifest.hashes.model).toBe(summaryHashes(off).modelHash)
+    expect(p.manifest.versions.fixture).toBe('1')
+  })
+
+  it('never embeds a raster or a reference in an SVG, and its only picture is the analyzer’s own bounded render', () => {
+    const p = pack(off, join(root, 'pack-pixels'))
+    const sourceBytes = new Set(filesUnder(join(root, 'cache')).filter((f) => f.endsWith('.bin')).map((f) => sha(readFileSync(f))))
+    for (const [name, content] of p.files) {
+      if (typeof content === 'string') {
+        if (name.endsWith('.svg')) for (const re of FORBIDDEN_IN_SVG) expect(re.test(content), `${name} ${re}`).toBe(false)
+        continue
+      }
+      expect(name).toBe('16-final-model-preview.png')
+      expect(sourceBytes.has(sha(content))).toBe(false)
+      // PNG width is big-endian at byte 16.
+      const width = (content[16] << 24) | (content[17] << 16) | (content[18] << 8) | content[19]
+      expect(width).toBeLessThanOrEqual(PACK_BOUNDS.previewWidth)
+    }
+  })
+
+  it('stays within its bounds', () => {
+    const p = pack(off, join(root, 'pack-bounds'))
+    for (const [name, content] of p.files) {
+      if (typeof content !== 'string') continue
+      if (name.endsWith('.json')) expect(content.length, name).toBeLessThanOrEqual(PACK_BOUNDS.jsonBytes)
+      if (name.endsWith('.svg')) expect((content.match(/<(?!\/)[a-z]/g) ?? []).length, name).toBeLessThanOrEqual(PACK_BOUNDS.svgElements + 16)
+    }
+  })
+
+  it('the pack is built from the run files and nothing else: a run record read twice builds the same pack', () => {
+    const r = readRunDir(off, 'larchfield', { gitSha: 'x', versions: {} })
+    expect(buildEvidencePack(r).manifest).toEqual(buildEvidencePack(readRunDir(off, 'larchfield', { gitSha: 'x', versions: {} })).manifest)
+  })
+})
+
+describe('first divergence', () => {
+  const ev = (seq: number, stage: DecisionEvent['stage'], objectId: string, decision: string): DecisionEvent => ({ eventId: `e${seq}`, seq, stage, objectId, decision, reason: '', supportIds: [], conflictIds: [], reversible: true, downstream: [] })
+
+  it('two runs of the same pack do not diverge', () => {
+    const p = pack0()
+    expect(firstDivergence(p.timeline, p.timeline).firstDivergence).toBe('NONE')
+  })
+
+  it('names the first stage, in analyzer order, and the first object in it whose decision differs', () => {
+    const before = [ev(1, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:230', 'ACCEPTED'), ev(2, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:580', 'ACCEPTED'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 3.43'), ev(4, 'FINAL', 'model', 'COMPLETED')]
+    const after = [ev(1, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:230', 'REJECTED'), ev(2, 'DIMENSION_TICK_CLASSIFICATION', 'tick:c1:580', 'ACCEPTED_QUESTIONABLE'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.50'), ev(4, 'FINAL', 'model', 'FAILED')]
+    const d = firstDivergence(before, after)
+    expect(d).toMatchObject({ firstDivergence: 'DIMENSION_TICK_CLASSIFICATION', object: 'tick:c1:230', before: 'ACCEPTED', after: 'REJECTED', differing: 1 })
+    // A named doubt is the same decision; later stages are listed as following from the first.
+    expect(d.stagesDiffering).toEqual(['DIMENSION_TICK_CLASSIFICATION', 'SCALE_HYPOTHESIS', 'FINAL'])
+  })
+
+  it('an object only one run met is a divergence too (ABSENT on the other side)', () => {
+    const d = firstDivergence([ev(1, 'OCR_READING', 'label:a', 'READ')], [ev(1, 'OCR_READING', 'label:a', 'READ'), ev(2, 'OCR_READING', 'label:b', 'READ')])
+    expect(d).toMatchObject({ firstDivergence: 'OCR_READING', object: 'label:b', before: 'ABSENT', after: 'READ' })
+  })
+
+  const pack0 = () => packRunDir(off, join(root, 'pack-div'), 'larchfield', { versions: {} }).pack
+})

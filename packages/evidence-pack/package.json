@@ -1,0 +1,12 @@
+{
+  "name": "@buildapp/evidence-pack",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Analyzer Evidence Pack (BUILDPLAN-ANALYZER-005D): what one analyzer run saw, inferred, weighed, accepted and rejected, as analyzer-owned SVG primitives with JSON sidecars, a decision timeline, a manifest and a first-divergence helper. Built after a run from what the run wrote, so it can change nothing the run decided. Pure and browser-safe; never embeds a publisher's pixels.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@buildapp/source-common": "*" },
+  "devDependencies": { "pngjs": "7.0.0" }
+}

@@ -46,7 +46,10 @@
     "analysis:second-house": "vite-node packages/analysis-service/scripts/second-house.ts --",
     "architecture:artifacts": "vite-node packages/architecture/scripts/artifacts.ts --",
     "architecture:android-fixtures": "vite-node packages/architecture/scripts/android-fixtures.ts",
-    "analysis:cross-source": "vite-node packages/analysis-service/scripts/cross-source.ts --"
+    "analysis:cross-source": "vite-node packages/analysis-service/scripts/cross-source.ts --",
+    "evidence:pack": "vite-node packages/evidence-pack/scripts/pack.ts --",
+    "evidence:diverge": "vite-node packages/evidence-pack/scripts/diverge.ts --",
+    "evidence:verify": "vite-node packages/evidence-pack/scripts/verify.ts --"
   },
   "devDependencies": {
     "@playwright/test": "1.56.0",

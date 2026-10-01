@@ -1,0 +1,180 @@
+/**
+ * What an Evidence Pack is built from: the files one analyzer run already wrote, as loose JSON.
+ *
+ * The pack reads them and nothing else, so it cannot change what the run decided: no analyzer
+ * module imports this package, and the run's ordering, heuristics, timeouts and seeds never see it.
+ * The shapes below name only the fields the pack reads; everything else is carried through
+ * untouched. Older runs (metric evidence before schema 1.3.0) lack the 005D fields, and the pack
+ * says so instead of inventing them.
+ */
+export type Rect = { x0: number; y0: number; x1: number; y1: number }
+
+export type Json = Record<string, unknown>
+
+export type RunRecord = {
+  /** The run's own name in a pack directory: a house, a row, a blind draw. */
+  runId: string
+  /** source-package.json */
+  pkg: Json & { id?: string; canonicalUrl?: string; contentHash?: string; adapter?: { id: string; version: string }; assets?: AssetJson[]; publishedFacts?: Array<{ key: string; value: number; unit: string; label?: string }>; failures?: Json[] }
+  /** metric-evidence.json */
+  metrics?: MetricsJson
+  /** plan-diagnostics/digest.json */
+  digest?: DigestJson
+  /** analysis-trace.json */
+  trace?: { outcome?: string; entries?: TraceEntry[] }
+  /** result-summary.json (a completed run) */
+  summary?: Json & { modelHash?: string; sceneSha256?: string; sceneContentHash?: string; candidateHash?: string; metricEvidenceHash?: string; observationGraphHash?: string; sourcePackageHash?: string; warningDetails?: Array<{ code: string; severity: string; message?: string }>; analyzer?: Record<string, string>; counts?: Json; masses?: number }
+  /** failure.json (a run that stopped) */
+  failure?: Json & { code?: string; reasonCode?: string; message?: string; stage?: string }
+  /** model.json (a completed run) */
+  model?: Json & { levels?: Array<{ id: string; index: number; elevation?: number }>; slabs?: Array<{ levelId: string; polygon: Array<{ x: number; z: number }> }>; walls?: unknown[]; openings?: unknown[] }
+  /** performance.json */
+  performance?: Json
+  /** The analyzer's own model render (PNG bytes), already bounded; never a publisher drawing. */
+  preview?: Uint8Array
+  /** Where the run came from: the commit and every analyzer version, as the run declared them. */
+  provenance: { gitSha?: string; versions: Record<string, string>; evidenceModeVersion?: string }
+}
+
+export type AssetJson = {
+  id: string
+  caption?: string
+  roles?: Record<string, string>
+  selectedVariantId?: string
+  variants?: Array<{ id: string; url: string; byteHash: string; byteLength?: number; mediaType?: string; decoded?: { width: number; height: number }; crop?: unknown }>
+}
+
+export type TraceEntry = { stage?: string; substage?: string; status?: string; counts?: Record<string, number | string | boolean>; reasonCode?: string; detail?: string }
+
+export type MarkJson = { atPx: number; class: 'TICK' | 'QUESTIONABLE' | 'REJECTED'; reasons: string[] }
+export type ChainJson = {
+  id: string
+  frameId: string
+  axis: 'HORIZONTAL' | 'VERTICAL'
+  baselinePx: number
+  ticksPx: number[]
+  marks?: MarkJson[]
+  segments: Array<{ fromPx: number; toPx: number; pixelLength: number; valueCm?: number; origin?: string; evidenceId?: string; confidence?: number }>
+  note?: string
+}
+export type ObservationJson = {
+  id: string
+  frameId: string
+  chainId: string
+  textRegionId: string
+  orientation: string
+  rawText: string
+  valueCm: number
+  axis: 'X' | 'Y'
+  fromPx: number
+  toPx: number
+  spanPx: number
+  impliedCmPerPx: number
+  independence: string
+  status: string
+  binding?: { role: string; offsetShare: number; questionableEnds: number; skipped: { tick: number; questionable: number; rejected: number } }
+  valueAlternatives?: Array<{ text: string; valueCm: number; ratio: number }>
+}
+export type HypothesisJson = { id: string; cmPerPixel: number; witnessIds: string[]; independentGroups: number; independentAxes: string[]; independentWeight: number; longestShare: number; corroborated: boolean; axesMeasured: boolean; plausible: boolean; why: string }
+export type SolutionJson = {
+  frameId: string
+  relation: string
+  confidence: string
+  cmPerPixelX?: number
+  cmPerPixelY?: number
+  isotropy?: string
+  selectedHypothesisId?: string
+  hypotheses: HypothesisJson[]
+  legacy: { cmPerPixel?: number; independentGroups: number }
+  independentWitnesses: number
+  supportingObservationIds: string[]
+  conflictingObservationIds: string[]
+  why: string
+  topology?: { marks: Json; bindings: Json; neutralObservationIds: string[]; hierarchy?: Json; valueAmbiguity?: { observationId: string; rawText: string; alternatives: string[]; cmPerPixelLow: number; cmPerPixelHigh: number } }
+}
+export type OcrTokenJson = { id: string; frameId: string; text: string; box: Rect; orientation?: string; pageVote?: string; confidence?: number; score?: number; heightPx?: number; glyphs?: Array<{ char: string; score: number; alternatives?: Array<{ char: string; score: number }> }> }
+export type MetricsJson = {
+  schemaVersion?: string
+  contentHash?: string
+  extractors?: Array<{ name: string; version: string }>
+  chains?: ChainJson[]
+  dimensionObservations?: ObservationJson[]
+  metricSolutions?: SolutionJson[]
+  chainRelations?: Array<{ kind: string; frameId: string; fromChainId: string; toChainId: string; check?: string; sum?: Json; span?: Json }>
+  ocrTokens?: OcrTokenJson[]
+  coordinateRegistrations?: Array<{ frameId: string; plane: string; metresPerPixelX: number; metresPerPixelY: number; anchors?: unknown[] }>
+  evidence?: Array<{ id: string; kind: string; frameId: string; value: number; unit: string; origin?: string; rawText?: string; textBox?: Rect }>
+}
+export type PlanJson = {
+  frameId: string
+  assetId?: string
+  storey?: string
+  annotation?: string
+  sizePx: { width: number; height: number }
+  scale: { mppX: number; mppY: number; anchors: number; rmsM: number } | null
+  wallPx: number
+  extent: Rect
+  extentWeak?: boolean
+  extentProvenance?: { x: string; y: string }
+  extentRefused?: string[]
+  metric?: Json
+  envelope: Rect | null
+  bands: Array<{ axis: 'H' | 'V'; bounds: Rect; thickness: number }>
+  chains: Array<{ axis: 'H' | 'V'; baselinePx: number; ticksPx: number[]; read: number }>
+  linesX?: number[]
+  linesY?: number[]
+  cells?: Array<{ ix: number; iy: number; rect: Rect; cls: string; enclosed: boolean }>
+  regions?: Array<{ id: string; cls: string; rect: Rect }>
+  wideOpenings?: Array<{ kind: string; axis: 'X' | 'Y'; linePx: number; fromPx: number; toPx: number; widthM: number; decision: string; score: number; why: string }>
+  bays?: Array<{ side: string; rect: Rect; mouth: string }>
+  boundary?: {
+    accepted: boolean
+    gaps?: Record<string, number>
+    candidates?: Array<{ id: string; cells: number; areaM2: number; perimeterM: number; wallM: number; strongOpeningM: number; weakOpeningM: number; unsupportedM: number; gapsBridged: number; maxBridgedGapM: number }>
+    extensions?: Array<{ cells: number; areaM2: number; continuesAcrossM: number; accepted: boolean }>
+    policies?: Json
+    bodies?: Array<{ relation: string; built: boolean; enclosed: boolean; areaM2: number; rect: Rect; junctionWallShare: number; sideWallShare: number; mouthM?: number }>
+    why?: string
+  }
+  masses: Array<{ id: string; rect: Rect }>
+}
+export type DigestJson = { planFrames?: number; selectedPlanFrameId: string | null; plans: PlanJson[]; skipped?: Array<{ frameId: string; why: string }>; resolution?: Record<string, number | string | boolean>; challenge?: Record<string, number | string | boolean> }
+
+/** One decision the analyzer made, as the timeline records it. */
+export type DecisionEvent = {
+  eventId: string
+  seq: number
+  stage: TimelineStage
+  objectId: string
+  decision: string
+  reason: string
+  supportIds: string[]
+  conflictIds: string[]
+  confidenceBefore?: string | number
+  confidenceAfter?: string | number
+  reversible: boolean
+  downstream: TimelineStage[]
+}
+
+/**
+ * The stages, in the order the analyzer takes them: every plan copy's metric evidence is read before a plan is
+ * selected and decomposed. The first divergence is the first stage that differs.
+ */
+export const TIMELINE_STAGES = [
+  'SOURCE',
+  'DIMENSION_TICK_CLASSIFICATION',
+  'OCR_READING',
+  'LABEL_BINDING',
+  'DIMENSION_HIERARCHY',
+  'SCALE_HYPOTHESIS',
+  'METRIC_RELATION',
+  'REGISTRATION',
+  'FRAME_SELECTION',
+  'EXTENT',
+  'ENVELOPE',
+  'BODIES',
+  'FIRST_SUCCESS_CHALLENGE',
+  'PLAN_RESOLUTION',
+  'FINAL',
+] as const
+export type TimelineStage = (typeof TIMELINE_STAGES)[number]
