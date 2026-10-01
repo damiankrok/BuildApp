@@ -20,8 +20,8 @@
  *
  * What it never takes: a scale, a span, a chain, a tick, another label, a published figure. What it never does: count
  * a value twice because two variants or two cuts reached it, or let a re-cut stand in for what the reader read. The
- * AS-READ value is the DEFAULT anchor's best sequence; everything else is an alternative the image supports, for the
- * metric layer to weigh and never to count.
+ * AS-READ value is the top reading of the anchor of the ink variant whose cells match best; everything else is an
+ * alternative the image supports, for the metric layer to weigh and never to count.
  */
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
@@ -167,7 +167,7 @@ export type LabelLattice = {
   orientation: TextOrientation
   /** The 005D reader's text for this ink, unchanged. */
   rawTopText: string
-  /** The as-read string: the DEFAULT anchor's best sequence under the 005E matcher. */
+  /** The as-read string: the top reading of the anchor (the reader's own cuts) of the ink variant whose cells match best. */
   asRead: string
   asReadValueCm?: number
   sequences: LatticeSequence[]

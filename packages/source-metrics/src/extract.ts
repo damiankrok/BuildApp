@@ -290,7 +290,8 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
   const metricSolutions: FrameMetricSolution[] = []
   const chainRelations: ChainRelation[] = []
   const numericLattices: NumericLatticeRecord[] = []
-  // 005E: identical label crops (a plan's twin copies) are read once; a hit is verified byte for byte.
+  // 005E: identical label crops are read once in a run; a hit is verified byte for byte. (Twin copies of a published
+  // plan are seldom byte-identical crops: on the development rows the cache never hit.)
   const latticeCache: LatticeCache = new Map()
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT

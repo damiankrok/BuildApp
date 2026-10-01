@@ -217,44 +217,61 @@ and returns a bounded, **image-only** lattice (`metrics.numeric-lattice`
 - **per-glyph candidates** — from the grammar's alphabet (digits for
   full-height cells, `, . - °` for short ones), within 0.6 of the cell's best,
   at most four per cell;
-- **a beam over them** — at most two non-top glyphs, width 16, eight
-  sequences, a probability floor and mass bound — in place of 005D's
-  one-substitution rule.
+- **a beam over them** — at most two non-top glyphs, width 16, at most eight
+  sequences (the as-read one among them), a probability floor and mass bound —
+  in place of 005D's one-substitution rule. What the cut left out is recorded
+  (`mergedCount`, `emittedMass`).
 
 The **as-read** string is the anchor of the variant whose cells match best; a
 re-cut never becomes the as-read string. Each sequence records its image score,
 its probability among the ink's values, which glyphs left the top choice, and
-which paths reached it.
+which paths reached it (the one that decided its score first).
 
 **OCR classes come from the reader alone.** `LOW_QUALITY` (a glyph matched
 under the floor, or text under the legible height), `CLEAR` (the reading holds
-most of the ink's probability with a margin), `SUPPORTED`, `AMBIGUOUS`. A class
-never changes a value. Calibration and the measured tables:
+most of the ink's probability), `SUPPORTED` (a fair share, leading the next
+value by a margin — a two-value coin toss is not SUPPORTED), `AMBIGUOUS`. A
+reading whose value moves when the stricter masks' thresholds move a tenth
+either way (the stability bracket, `asReadStability`) is AMBIGUOUS: the image
+did not decide it. A class never changes a value. Calibration, the measured
+tables and every constant's sensitivity:
 `stage-reports/artifacts/analyzer-005e/calibration/README.md`.
 
 **The metric uses reading quality, never invents a reading** (solver 1.2.0):
 
 - a `LOW_QUALITY` ink never decides; corroboration needs at least one ink of
   the pair read better than `AMBIGUOUS` — two coin tosses that agree are not
-  two witnesses;
+  two witnesses; an as-read string with a leading zero keeps its ink on the
+  record, never decisive, its lattice values as alternatives;
 - an ink's alternatives contest a scale when the ink holds them at least half
   as strongly as its reading (every one, when `AMBIGUOUS`), or when they are
-  one glyph away at 005D's own runner bound (0.7): a contest withholds a vote,
-  never gives a span a value;
+  one glyph away at 005D's runner bound (0.7, measured on the 005E matcher's
+  glyphs): a contest withholds a vote, never gives a span a value;
 - **false consensus** (`topology.falseConsensus`): when the class-blind verdict
-  would be STRONG but the selected scale's inks are coin tosses and a rival has
-  an ink read better (`BETTER_CLASS_RIVAL`), or the agreement holds only among
-  alternative values (`CANDIDATE_CONSENSUS`), the confidence drops and the
-  first-success challenge is triggered — the rival is never promoted
-  automatically;
+  would be SUPPORTED or better but the selected scale's inks are contested or
+  coin tosses, and a rival has an ink read better that stands on its own on a
+  substantial share of its axis (`BETTER_CLASS_RIVAL`), or two coin tosses'
+  well-held alternatives agree on another scale (`CANDIDATE_CONSENSUS`, every
+  such scale recorded with its pair), the confidence drops and the
+  first-success challenge is triggered. The rival is never promoted, and a
+  doubt never hands the first reading to a page vote with no reading of its
+  own. A WEAK set of coin tosses whose own alternatives state another scale
+  replaces nothing;
 - **structural support**: a total and the children it frames may be reconciled
-  through each ink's own lattice values (children from different inks only);
-  a total refuted by its own children stops witnessing;
-- **non-circular selection**: each observation records which value its span
-  was finally given and why (`ocr.selected.by`: `AS_READ`, `STRUCTURAL`,
-  `SCALE_RANKED`, `UNRESOLVED`), with the image's rank and score and the
-  metric residual recorded separately. A scale may rank values the image
-  produced; a value the image never offered stays missing.
+  through each ink's own plausible lattice values (children from different
+  inks only); a total refuted by its own children stops witnessing;
+- **non-circular selection**: each observation records the metric's preferred
+  value for its span among the image's values and why (`ocr.selected.by`:
+  `AS_READ`, `STRUCTURAL`, `SCALE_RANKED`, `UNRESOLVED`), with the image's rank
+  and score and the metric residual recorded separately. A scale may rank only
+  values the image produced that the ink may plausibly be, on spans long enough
+  to measure; a value the image never offered stays missing. A chain read
+  again from lattices takes its values from them only. **The legacy
+  exemption:** where the page vote's scale is confirmed and its chains are
+  kept as they were (byte for byte, so that a confirmed model does not move),
+  their values come from 005D's substitution list and may lie outside an ink's
+  lattice; they are scale-chosen corrections (`CHAIN_CORRECTED`), never
+  witnesses of the scale.
 
 ## The ladder of level datums
 

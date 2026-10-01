@@ -363,7 +363,8 @@ export function boundedValues(token: TextToken): Array<{ text: string; valueCm: 
  * With a lattice: the alternatives it holds at least `VALUE_BOUNDS.contestRatio` as strongly as its reading (every one
  * when AMBIGUOUS), and every value one glyph from the as-read string whose glyph scores at least
  * `VALUE_BOUNDS.glyphRatio` of the cell's best — 005D's own bound on a substitution, measured on the lattice's glyphs,
- * so that the sharper sequence probabilities never make an ink more decisive than such a runner-up left it. A
+ * so that the sharper sequence probabilities never make an ink more decisive than that bound leaves it on the 005E
+ * matcher's own glyphs (not literally 005D's: the matcher's runner ratios differ). A
  * contest only withholds a vote; it never gives a span a value.
  */
 function contestValues(lattice: LabelLattice | undefined, alternatives: ReadonlyArray<{ valueCm: number; ratio: number }>): number[] {
