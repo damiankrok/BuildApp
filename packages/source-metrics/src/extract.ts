@@ -30,7 +30,7 @@ import type { Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame, SourceObservation, SourceObservationGraph } from '@buildapp/source-observations'
 import { chainsFromLines, chainId, solveFrameChains } from './chains.js'
 import type { RawChain, ScalePlausibility, SolvedChain } from './chains.js'
-import { findDimensionLines, findStraightRuns } from './dimension-lines.js'
+import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines, findStraightRuns } from './dimension-lines.js'
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
 import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
@@ -46,7 +46,7 @@ import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
 import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
-export const METRIC_READER_VERSION = '1.1.0' as const
+export const METRIC_READER_VERSION = '1.2.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -313,11 +313,13 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
 
     // --- dimension chains ---
     const chainStep = (): void => checkpoint.tick({ subphase: { id: 'CHAINS', label: 'reading dimension chains' } })
-    const mask = adaptiveInkMask(inkChannel(raster), {})
+    const grey = inkChannel(raster)
+    const mask = adaptiveInkMask(grey, {})
     chainStep()
     const runs = findStraightRuns(mask)
     chainStep()
-    const lines = findDimensionLines(mask)
+    // 005D: every crossing mark measured against the line it sits on, and classified.
+    const lines = findDimensionLines(mask, { raster, grey })
     chainStep()
     const rawChains = chainsFromLines(lines, observations)
     const plausibility = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ' ? planScalePlausibility(mask) : undefined
@@ -714,6 +716,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     extractors: [
       { name: 'metrics.numeric-ocr', version: METRIC_READER_VERSION },
       { name: 'metrics.dimension-lines', version: METRIC_READER_VERSION },
+      { name: DIMENSION_TOPOLOGY_NAME, version: DIMENSION_TOPOLOGY_VERSION },
       { name: 'metrics.chain-solver', version: METRIC_READER_VERSION },
       { name: 'metrics.axis-aligned-affine', version: '1' },
       { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
@@ -865,6 +868,7 @@ function buildChain(
     axis: chain.axis,
     baselinePx: chain.baselinePx,
     ticksPx: chain.ticks.map((t) => t.atPx),
+    ...(chain.ticks.some((t) => t.class !== undefined) ? { marks: chain.ticks.map((t) => ({ atPx: t.atPx, class: t.class ?? 'TICK', reasons: [...(t.reasons ?? [])].sort() })) } : {}),
     segments,
     derivedTotalCm: solved.derivedTotalCm,
     scale: solved.cmPerPixel === undefined ? undefined : { cmPerPixel: solved.cmPerPixel, residualRatio: round6(solved.residualPx), readSegments: solved.readSegments },

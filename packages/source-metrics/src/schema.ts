@@ -29,8 +29,8 @@ import { PixelPointSchema, PixelRectSchema } from '@buildapp/source-common'
 import { PixelGeometrySchema } from '@buildapp/source-observations'
 
 export const METRIC_EVIDENCE_SCHEMA = 'buildapp.metric-evidence-set' as const
-export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.2.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0'] as const
+export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.3.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0'] as const
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -302,6 +302,13 @@ export const DimensionChainSchema = z
     baselinePx: z.number().finite(),
     /** The witness-line positions, ascending, in pixels along the chain's axis. */
     ticksPx: z.array(z.number().finite()).min(2),
+    /**
+     * 005D (schema 1.3.0): what each crossing mark is, one per `ticksPx` entry — a TICK, QUESTIONABLE
+     * (a span may run across it or stop at it) or REJECTED (not a measurement point) — and why.
+     */
+    marks: z
+      .array(z.object({ atPx: z.number().finite(), class: z.enum(['TICK', 'QUESTIONABLE', 'REJECTED']), reasons: z.array(z.enum(['LIGHTER_THAN_LINE', 'FAINT_SIDE', 'ONE_SIDED', 'WEDGE_NOT_STROKE', 'COLOUR_MISMATCH', 'DUPLICATE', 'STYLE_MISMATCH', 'NO_LINE_REFERENCE'])) }).strict())
+      .optional(),
     segments: z.array(ChainSegmentSchema),
     /**
      * The sum of the segment values. This is the chain's own arithmetic and it
@@ -367,6 +374,23 @@ export const DimensionObservationSchema = z
     independence: z.enum(['INDEPENDENT', 'ORIENTATION_BY_OTHER_AXIS', 'ORIENTATION_UNDECIDED', 'ORIENTATION_BY_SCALE']),
     /** RAW until the frame is solved; ACCEPTED when it became a READ segment, REJECTED when the chosen scale contradicts it. */
     status: z.enum(['RAW', 'ACCEPTED', 'REJECTED']),
+    /**
+     * 005D (schema 1.3.0): how this span stands among the spans the same label could measure.
+     * PRIMARY: the one it measures (centred, the fewest questionable ends); ALTERNATIVE: another
+     * candidate, recorded and never a witness; AMBIGUOUS: the label ties between spans of different
+     * length and measures none decisively; UNCENTRED: no candidate is centred on the label.
+     */
+    binding: z
+      .object({
+        role: z.enum(['PRIMARY', 'ALTERNATIVE', 'AMBIGUOUS', 'UNCENTRED']),
+        offsetShare: z.number().nonnegative(),
+        questionableEnds: z.number().int().nonnegative(),
+        skipped: z.object({ tick: z.number().int().nonnegative(), questionable: z.number().int().nonnegative(), rejected: z.number().int().nonnegative() }).strict(),
+      })
+      .strict()
+      .optional(),
+    /** 005D: the values this ink may be within one character the matcher half-saw (V1). Never witnesses on their own. */
+    valueAlternatives: z.array(z.object({ text: z.string().min(1), valueCm: z.number().positive(), ratio: z.number().min(0).max(1) }).strict()).optional(),
   })
   .strict()
 export type DimensionObservation = z.infer<typeof DimensionObservationSchema>
@@ -470,6 +494,37 @@ export const FrameMetricSolutionSchema = z
     counts: z
       .object({ textRegions: z.number().int().nonnegative(), observations: z.number().int().nonnegative(), hypotheses: z.number().int().nonnegative() })
       .strict(),
+    /**
+     * 005D (schema 1.3.0): the frame's dimension graph as it was bound — marks by class, observations
+     * by binding role, the inks V3 kept from deciding between the selected and the vote's scale, and,
+     * when the selected scale rests on one ink whose own glyph alternatives move it beyond the pixel
+     * tolerance, the interval it could lie in (VALUE_AMBIGUOUS). The published figure never chooses in it.
+     */
+    topology: z
+      .object({
+        marks: z.object({ tick: z.number().int().nonnegative(), questionable: z.number().int().nonnegative(), rejected: z.number().int().nonnegative() }).strict(),
+        bindings: z.object({ primary: z.number().int().nonnegative(), alternative: z.number().int().nonnegative(), ambiguous: z.number().int().nonnegative(), uncentred: z.number().int().nonnegative() }).strict(),
+        neutralObservationIds: z.array(z.string().min(1)),
+        hierarchy: z
+          .object({
+            totals: z.number().int().nonnegative(),
+            agreesAsRead: z.number().int().nonnegative(),
+            conflictsAsRead: z.number().int().nonnegative(),
+            incomplete: z.number().int().nonnegative(),
+            afterCorrection: z.number().int().nonnegative(),
+            parallelCopies: z.number().int().nonnegative(),
+            /** A total and its children disagree as read, the selected scale on one side and a distinct rival on the other, and no counted reading outside the pair decides: the confidence is INCONCLUSIVE (005D §43). */
+            undecidedConflict: z.boolean().optional(),
+          })
+          .strict()
+          .optional(),
+        valueAmbiguity: z
+          .object({ observationId: z.string().min(1), rawText: z.string().min(1), alternatives: z.array(z.string().min(1)), cmPerPixelLow: z.number().positive(), cmPerPixelHigh: z.number().positive() })
+          .strict()
+          .optional(),
+      })
+      .strict()
+      .optional(),
     why: z.string().min(1),
   })
   .strict()
@@ -483,12 +538,21 @@ export type FrameMetricSolution = z.infer<typeof FrameMetricSolutionSchema>
  */
 export const ChainRelationSchema = z
   .object({
-    kind: z.enum(['TOTAL_OF', 'NESTED_IN', 'SHARES_ENDPOINT']),
+    kind: z.enum(['TOTAL_OF', 'NESTED_IN', 'SHARES_ENDPOINT', 'SEGMENT_OF', 'PARALLEL_COPY_OF', 'CONFLICTS_WITH']),
     frameId: z.string().min(1),
     fromChainId: z.string().min(1),
     toChainId: z.string().min(1),
     /** For TOTAL_OF: the total's value against the parts' sum, when both are known. Recorded, never forced. */
     sum: z.object({ totalCm: z.number().positive(), partsCm: z.number().positive(), residualCm: z.number(), agrees: z.boolean() }).strict().optional(),
+    /** 005D: the span of `fromChainId` the relation is about, when it is not the whole chain (a total over part of a line). */
+    span: z.object({ fromPx: z.number().finite(), toPx: z.number().finite() }).strict().optional(),
+    /**
+     * 005D: the hierarchy check, on values AS READ (primary bindings, the decided orientation, no
+     * substitution): AGREES_AS_READ, CONFLICT_AS_READ, INCOMPLETE (a value unread), or
+     * AGREES_AFTER_CORRECTION (the solved chain closes only through a corrected or derived value —
+     * recorded, never evidence). Nothing is re-read to make a check close.
+     */
+    check: z.enum(['AGREES_AS_READ', 'CONFLICT_AS_READ', 'INCOMPLETE', 'AGREES_AFTER_CORRECTION']).optional(),
   })
   .strict()
 export type ChainRelation = z.infer<typeof ChainRelationSchema>

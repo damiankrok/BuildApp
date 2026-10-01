@@ -25,15 +25,18 @@
 import { round6, stableId } from '@buildapp/source-common'
 import type { PixelPoint, PixelRect } from '@buildapp/source-common'
 import type { SourceObservation } from '@buildapp/source-observations'
-import type { DimensionLine } from './dimension-lines.js'
+import type { DimensionLine, DimensionMarkClass, DimensionMarkReason } from './dimension-lines.js'
 import { textAxisOf } from './ocr.js'
 import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import type { ParsedNumber } from './parse.js'
 import { toCentimetres } from './schema.js'
 
-/** A witness line reduced to the one number that matters: where it crosses the chain's axis. */
-export type ChainTick = { atPx: number; baselinePx: number; observationId: string }
+/**
+ * A witness line reduced to the one number that matters: where it crosses the chain's axis. 005D:
+ * and what the mark there is, when the line was read against its own ink (absent: a tick).
+ */
+export type ChainTick = { atPx: number; baselinePx: number; observationId: string; class?: DimensionMarkClass; reasons?: DimensionMarkReason[] }
 
 export type ChainAxis = 'HORIZONTAL' | 'VERTICAL'
 
@@ -60,7 +63,7 @@ export function chainsFromLines(lines: readonly DimensionLine[], observations: r
     .map((line) => ({
       axis: line.axis,
       baselinePx: line.baselinePx,
-      ticks: line.ticksPx.map((atPx) => ({ atPx, baselinePx: line.baselinePx, observationId: '' })),
+      ticks: line.ticksPx.map((atPx, i) => ({ atPx, baselinePx: line.baselinePx, observationId: '', ...(line.marks?.[i] ? { class: line.marks[i].class, reasons: [...line.marks[i].reasons] } : {}) })),
       observationIds: observations
         .filter((o) => observationTouchesLine(o, line))
         .map((o) => o.id)
@@ -675,10 +678,14 @@ export function solveFrameChains(
  * only on a chain that has at least one reading confirming that scale; a span
  * whose number cannot be reconciled with the scale is left UNRESOLVED.
  */
-export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number } = {}): SolvedChain {
+export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean } = {}): SolvedChain {
   const tolerance = options.tolerancePx ?? 2.2
   const minLength = options.minPixelLength ?? 6
   const ticks = chain.ticks
+  // 005D: with `topology`, the marks' classes cut the chain. A REJECTED mark is no cut and costs
+  // nothing to run across; a QUESTIONABLE one may be a cut and costs nothing to run across; only a
+  // TICK run across is a claim the arithmetic must pay for. Without it every mark is a tick.
+  const kind = (i: number): 'TICK' | 'QUESTIONABLE' | 'REJECTED' => (options.topology ? (ticks[i].class ?? 'TICK') : 'TICK')
   const proposals = proposalsOf(0, chain, tokens, minLength, 0)
   let scale = options.fixedScale
   let votes: ScaleVote[] = []
@@ -701,9 +708,16 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
     const toPx = ticks[to].atPx
     const pixelLength = toPx - fromPx
     const inside = tokens.filter((t) => t.atPx >= fromPx && t.atPx <= toPx)
+    let skippedTicks = 0
+    let skippedMarks = 0
+    for (let k = from + 1; k < to; k += 1) {
+      if (kind(k) === 'TICK') skippedTicks += 1
+      if (kind(k) !== 'REJECTED') skippedMarks += 1
+    }
     let span: Span
     if (pixelLength < minLength) span = { merit: -Infinity, impossible: true }
-    else if (to - from - 1 > 3) span = { merit: -Infinity, impossible: true }
+    else if (kind(from) === 'REJECTED' || kind(to) === 'REJECTED') span = { merit: -Infinity, impossible: true }
+    else if (skippedMarks > 3) span = { merit: -Infinity, impossible: true }
     else if (inside.length > 1) span = { merit: -Infinity, impossible: true }
     else if (inside.length === 0) {
       // A span with nothing on it is neither evidence nor an error. It is
@@ -733,7 +747,7 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
       // solver will happily reinterpret `510` as `310` to justify a division
       // the draughtsman never drew — trading a number the sheet prints for one
       // it does not, and calling the result a better explanation.
-      const skipped = to - from - 1
+      const skipped = skippedTicks
       span = best
         ? { merit: (1 + best.merit) * 0.7 ** skipped * 0.45 ** best.reading.substitutions, token: entry, reading: best.reading, missPx: best.missPx, impossible: false }
         : { merit: -0.5, token: entry, impossible: false }
@@ -742,13 +756,18 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
     return span
   }
 
-  // Best partition of ticks[0..n-1], by dynamic programming.
+  // Best partition of ticks[first..last], by dynamic programming: from the first mark that may be a
+  // measurement point to the last (every mark, without topology).
   const n = ticks.length
+  let first = 0
+  while (first < n - 1 && kind(first) === 'REJECTED') first += 1
+  let last = n - 1
+  while (last > first && kind(last) === 'REJECTED') last -= 1
   const best = new Float64Array(n).fill(-Infinity)
   const from = new Int32Array(n).fill(-1)
-  best[0] = 0
-  for (let to = 1; to < n; to += 1) {
-    for (let start = 0; start < to; start += 1) {
+  best[first] = 0
+  for (let to = first + 1; to <= last; to += 1) {
+    for (let start = first; start < to; start += 1) {
       if (best[start] === -Infinity) continue
       const span = spanOf(start, to)
       if (span.merit === -Infinity) continue
@@ -760,11 +779,11 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
     }
   }
   const cuts: number[] = []
-  for (let at = n - 1; at > 0; at = from[at]) {
+  for (let at = last; at > first; at = from[at]) {
     if (from[at] < 0) break
     cuts.push(at)
   }
-  cuts.push(0)
+  cuts.push(first)
   cuts.reverse()
 
   const segments: SolvedSegment[] = []

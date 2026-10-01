@@ -128,6 +128,69 @@ chains, and differs from the winner by at least 3%. Otherwise the plan carries
 every scale considered and why, is recorded as `scaleDecision`. An unresolved
 `gap-scale-implausible-*` names what was refused.
 
+## Dimension-chain integrity (BUILDPLAN-ANALYZER-005D, schema 1.3.0)
+
+A crossing line is not automatically a tick. Since 005D every mark that crosses
+a dimension line is measured against the line it sits on
+(`metrics.dimension-topology` 1.0.0) and recorded in `chains[].marks` beside
+`ticksPx` (which still lists every mark, so nothing that read the old field
+moves):
+
+| class | when | what it may do |
+| --- | --- | --- |
+| `TICK` | as dark as the line, on both sides, a stroke | end a span |
+| `QUESTIONABLE` | lighter than the line, one-sided, a duplicate a reach away, unlike the chain's own clean ends, or a wedge of another colour | end a span only as a doubted end (`binding.questionableEnds`) |
+| `REJECTED` | lighter than the line AND one-sided or a wedge (a leader end, a hatch boundary) | never end a span |
+
+Every mark carries its reasons (`LIGHTER_THAN_LINE`, `FAINT_SIDE`,
+`ONE_SIDED`, `WEDGE_NOT_STROKE`, `COLOUR_MISMATCH`, `DUPLICATE`,
+`STYLE_MISMATCH`, `NO_LINE_REFERENCE`) and the measurements behind them. A
+rejected mark is skipped, not deleted, and real internal ticks are never
+ignored as a class: a chain whose segments are each labelled stays segmented.
+
+**A label measures the span it is centred on.** Each label is bound to every
+candidate span between non-rejected marks of its chain and the binding records
+its role: `PRIMARY` (centred within 10 % of the span), `ALTERNATIVE` (another
+span the same ink could measure, kept, never a witness), `AMBIGUOUS` (two
+centred spans of different length tie) or `UNCENTRED`. A total centred across
+the whole line stays a total candidate with a spurious mark beneath it
+(`binding.skipped.rejected`), and with real ticks beneath it (`skipped.tick`,
+at a cost).
+
+**Value hypotheses are bounded and named, never chosen by a scale.** An ink's
+as-read value is the witness; up to four one-substitution readings whose glyph
+ratio is at least 0.7 are kept beside it (`valueAlternatives`). When the
+selected scale rests on one such ink, `topology.valueAmbiguity` records the
+interval its alternatives imply and the confidence is at most WEAK. An ink one
+of whose alternatives fits another scale decides nothing between the two
+(`topology.neutralObservationIds`): against the page vote's scale (V3) and
+against a rival hypothesis (V3 between rivals, within the pixel tolerance of
+both spans).
+
+**The hierarchy is checked on values as read.** Between parallel lines of the
+same family, `TOTAL_OF`/`SEGMENT_OF` (a span of one line whose ends coincide
+with marks of a finer line — the whole line, or one segment of a middle line),
+`PARALLEL_COPY_OF`, `NESTED_IN` and `CONFLICTS_WITH` are recorded with a check:
+`AGREES_AS_READ`, `CONFLICT_AS_READ`, `INCOMPLETE` or
+`AGREES_AFTER_CORRECTION` (closed only by the solver's own values; recorded,
+never evidence). A total and its children that disagree as read, each stating
+one of two distinct scales, with no reading outside the pair to decide, make
+the solution `INCONCLUSIVE` (`hierarchy.undecidedConflict`): the conflict is
+reported, never forced consistent.
+
+**The first success is challenged by the drawing, before the published
+figure** (resolver 1.4.0). A first reading is challenged when the drawing
+contradicts its scale (`AS_READ_REFUTATION`, `PARTIAL_BINDING`,
+`OUTER_TOTALS`; `sourceConflictOf`, which is not given any published figure).
+A reading the drawing states replaces it; the published footprint may only
+verify that replacement (`publishedFigure: VERIFIED`). When the drawing prefers
+a scale the figure refuses, neither is built: `PLAN_RESOLUTION_INCONCLUSIVE`,
+`why: SOURCE_CONFLICT`.
+
+What every frame's solution records is in `metricSolutions[].topology` (marks
+by class, bindings by role, neutral inks, the hierarchy, any value ambiguity),
+and in full in the run's Evidence Pack (`docs/EVIDENCE_PACK.md`).
+
 ## The ladder of level datums
 
 The same redundancy, in the vertical. Every printed level states a height above
