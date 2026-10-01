@@ -1,0 +1,33 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 43.30977,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-0",
+      "junctionWallShare": 0.28125,
+      "rect": {
+        "x0": 275,
+        "x1": 633,
+        "y0": 171.5,
+        "y1": 507.5
+      },
+      "relation": "PROJECTING_WING",
+      "sideWallShare": 0.511882
+    }
+  ],
+  "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 77,
+        "x1": 633,
+        "y0": 171.5,
+        "y1": 507.5
+      }
+    }
+  ]
+}

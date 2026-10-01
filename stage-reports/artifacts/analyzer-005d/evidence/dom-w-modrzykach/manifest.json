@@ -1,0 +1,208 @@
+{
+  "counts": {
+    "events": 318,
+    "files": 33
+  },
+  "evidenceModeVersion": "1.0.0",
+  "failureCode": null,
+  "files": [
+    {
+      "bytes": 1524,
+      "name": "00-source-summary.json",
+      "sha256": "1c251154c369a2df41cf8504d5ce1f0537959e3cb1f5b042bb31f4f133227eb7"
+    },
+    {
+      "bytes": 5686,
+      "name": "01-page-classification.json",
+      "sha256": "7ddc5e119446dfa1c854d6760b8e29a57ae5c256bec5538ea57a8c0b3f4d0ced"
+    },
+    {
+      "bytes": 21823,
+      "name": "02-asset-inventory.json",
+      "sha256": "ed6edb13c4a8abeb8be80df19eb8cde5d6078d78750dc0ffecf3f8db88696bfe"
+    },
+    {
+      "bytes": 845,
+      "name": "03-plan-frame.json",
+      "sha256": "87da5db29724136edf3d31cd5d330f0c6535214d6e019e5b4c3eee6988f01525"
+    },
+    {
+      "bytes": 5370,
+      "name": "03-plan-frame.svg",
+      "sha256": "0cd6324c15cb4d97b0a601f97d5991f3a2b056ff8c46bcc7eea9afb461054f46"
+    },
+    {
+      "bytes": 8410,
+      "name": "04-wall-bands.json",
+      "sha256": "bd301b9dd26c67aef334f8963de9224bfc8ce3a2a4053e81518b5db067a4a80e"
+    },
+    {
+      "bytes": 4712,
+      "name": "04-wall-bands.svg",
+      "sha256": "47e8f7b649f6490f8824e0dbdd2a5320a6282f3409320ab273a7a183806b09d7"
+    },
+    {
+      "bytes": 48168,
+      "name": "05-dimension-lines.json",
+      "sha256": "1d0aba70099c6f4e03a07306f2bce43a0065f0580261e42d39fa351f398345ba"
+    },
+    {
+      "bytes": 31239,
+      "name": "05-dimension-lines.svg",
+      "sha256": "5109a4b2885ad6969c92ad3ae216b516f8efb14c437e32b6cd1cb0d34da69a7f"
+    },
+    {
+      "bytes": 90459,
+      "name": "06-tick-candidates.json",
+      "sha256": "d5a793c42f2eeaaa85b6833ed9fa0b3488357bb94e418bb8db46d5838ccfd472"
+    },
+    {
+      "bytes": 56700,
+      "name": "06-tick-candidates.svg",
+      "sha256": "36ad5ef3ea446b9d19ba0bdb3b1869f396d3d04addcd1f812003ca14588b6162"
+    },
+    {
+      "bytes": 161035,
+      "name": "07-ocr-labels.json",
+      "sha256": "3edbbfd1593401ef4b036506b7dfac72870558a02eaec4fa0df59b21a2bdf013"
+    },
+    {
+      "bytes": 57699,
+      "name": "07-ocr-labels.svg",
+      "sha256": "cf37da431a6983b44f05ad909d8d6efccd657417a4357b732bd3365f10b3bc66"
+    },
+    {
+      "bytes": 36932,
+      "name": "08-dimension-span-hypotheses.json",
+      "sha256": "b08f03176d3659e82c390c7421e80bf5dd44d1b26a33aff8f00e4ffa594c2ec4"
+    },
+    {
+      "bytes": 7217,
+      "name": "08-dimension-span-hypotheses.svg",
+      "sha256": "60d651b762862e6dabb61d7cb1678afdde50f68a03ca2e39ea2a5a57e793afb5"
+    },
+    {
+      "bytes": 6068,
+      "name": "09-scale-hypotheses.json",
+      "sha256": "a13fe04b82d2c40faf7ee9029f12c54fbf4732bcf80fdeb73c58ce2aab6def14"
+    },
+    {
+      "bytes": 2471,
+      "name": "09-scale-hypotheses.svg",
+      "sha256": "7094cc8596ce36600cf051debfd2308b6e363ab086d709d5741cd9fa5ec62c7d"
+    },
+    {
+      "bytes": 354,
+      "name": "10-extent-hypotheses.json",
+      "sha256": "d229bfbc82a7d5a23836820b08bbb2ddc177e34e3020e0377e91e492466c46ca"
+    },
+    {
+      "bytes": 388,
+      "name": "10-extent-hypotheses.svg",
+      "sha256": "4cef4b27c944584701891d4f6aab1ecf3a1f4bb7af6dbbe98c14fa6dc27ec318"
+    },
+    {
+      "bytes": 1639,
+      "name": "11-envelope-candidates.json",
+      "sha256": "30b65dc9a58386dab411787fcf7ad9b5e2f6b862fd4ccb939ffe454ac7ed35c5"
+    },
+    {
+      "bytes": 111582,
+      "name": "11-envelope-candidates.svg",
+      "sha256": "602aa8318573c813ac36b367e37819b8b5561548ce6090e28b458e2f8b979144"
+    },
+    {
+      "bytes": 2874,
+      "name": "12-opening-observations.json",
+      "sha256": "75c43ce9f22f592d3fdc3f561e69803ebdad12673793fbe473dcf16b8711e313"
+    },
+    {
+      "bytes": 1948,
+      "name": "12-opening-observations.svg",
+      "sha256": "6bc01cf14793eea601d46e36cc032c742a2cd446489ce739e32d0420014b0102"
+    },
+    {
+      "bytes": 1244,
+      "name": "13-body-candidates.json",
+      "sha256": "fbfd1024a2e2e3c3a9f651557b8b4117e34086a9487a4fe8a8d39a4c6a68ae30"
+    },
+    {
+      "bytes": 1122,
+      "name": "13-body-candidates.svg",
+      "sha256": "5afa32dc44534a0084854ce08e63fe0b732c61cf97dee92dd56a9ef83cb0c144"
+    },
+    {
+      "bytes": 5502,
+      "name": "14-selected-layout.json",
+      "sha256": "490036e0b454e3d2c00827aa0f37f1e613eb17339324a67fe5055cb77cc15685"
+    },
+    {
+      "bytes": 4016,
+      "name": "14-selected-layout.svg",
+      "sha256": "45011a1f3268571b0d6209d24c941a1c8deab45bd72063a0ba4eb167f778d028"
+    },
+    {
+      "bytes": 458,
+      "name": "15-canonical-model-summary.json",
+      "sha256": "917c94647ca633ce9ad5dc5bb3e771ddf4fdeed5bbde0db6cc5a8f96449e67d4"
+    },
+    {
+      "bytes": 10707,
+      "name": "16-final-model-preview.png",
+      "sha256": "8a8ca3a832317bd690f15933c04c7cc502fa32f1bbd32df941fbfd030ac1ebe5"
+    },
+    {
+      "bytes": 8549,
+      "name": "17-evidence-trace.json",
+      "sha256": "75aeccba23a2eca3726fb66be15e4ac6c467afc7b89d2258717d2af68b47c2b4"
+    },
+    {
+      "bytes": 156632,
+      "name": "18-decision-timeline.json",
+      "sha256": "6ca25500ac545eeb99d2118a3e86071c880db077ef5dab4dafb55ea12aa34281"
+    },
+    {
+      "bytes": 1449,
+      "name": "README.md",
+      "sha256": "ff203907df4be73599a8a2d6780b80170e5a92093277535defde81ad8f0f70f1"
+    },
+    {
+      "bytes": 4950,
+      "name": "evidence-summary.svg",
+      "sha256": "cdd1a0618ff4d0265a2069409c94efb87bcd88ca81c2119b00801825e2a04115"
+    }
+  ],
+  "firstWarning": "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+  "gitSha": "3e08681d2889b69ced06c22e63f7fa2825bf2ef1",
+  "hashes": {
+    "candidate": "2a7d1a147d03b60b6d75296c53e6e3aa4773b0c1190e5ce95a1f8c93324fa191",
+    "metricEvidence": "ff660cbc21c8845b2764fdd283b306e1b28ffece0b2d4755b8f92ea7f942177c",
+    "model": "d4accc9d3e6a0675495c131dd46ef29b8faaaee92656ea2de53cad8894073301",
+    "scene": "8a1bf41ce899fe0c13d90a37c177c90dc4618058bdd1869996f7fa7138845fda",
+    "sceneContent": "28284568a698665b53ba81acf42710e344f70d30d75b54fcf57c4cecc8c74e90",
+    "sourcePackage": "ef8d5c6e7d5e09ed6c4df154a4c64d7e9115022755eafa97901e419d0132ada2"
+  },
+  "result": "COMPLETED",
+  "runId": "dom-w-modrzykach",
+  "schema": "buildapp.evidence-pack",
+  "selectedPlanFrameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+  "versions": {
+    "adapter:archon.pl": "1.0.0",
+    "analysis-service": "1.1.0",
+    "analyzer-service": "1.1.0",
+    "analyzer-solver": "2.3.0",
+    "boundary-evidence": "1.0.0",
+    "evidence-pack": "1.0.0",
+    "generic-reader": "1.2.0",
+    "metric-evidence-schema": "1.3.0",
+    "metrics.axis-aligned-affine": "1",
+    "metrics.chain-solver": "1.2.0",
+    "metrics.dimension-lines": "1.2.0",
+    "metrics.dimension-topology": "1.0.0",
+    "metrics.independent-scale": "1.1.0",
+    "metrics.numeric-ocr": "1.2.0",
+    "plan-resolver": "1.4.0",
+    "published-specification-reader": "1.0.0",
+    "solver-v2": "2.3.0"
+  }
+}

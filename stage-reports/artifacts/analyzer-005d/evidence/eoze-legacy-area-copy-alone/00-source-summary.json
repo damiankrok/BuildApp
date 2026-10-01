@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 38,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 24,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 4
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+  "contentHash": "7362c7f33087c946a117e6afadd08c72361361095d454b596dab2b537ee83000",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m738275b7537b0-f54b4db7f3",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.56
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 5.71
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 94.41
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 122.07
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 89.85
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 140.41
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 122.07
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 94.41
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 560.88
+    }
+  ],
+  "runId": "eoze-area-copy-alone"
+}

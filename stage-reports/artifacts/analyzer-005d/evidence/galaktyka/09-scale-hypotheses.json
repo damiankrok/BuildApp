@@ -1,0 +1,88 @@
+{
+  "confidence": "INCONCLUSIVE",
+  "conflictingObservationIds": [],
+  "final": {
+    "isotropy": "NONE",
+    "x": null,
+    "y": null
+  },
+  "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+  "hypotheses": [
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 0.005102,
+      "corroborated": false,
+      "decision": "RULED_OUT_BY_WALLS",
+      "groups": 1,
+      "id": "scale-0-005102-339b6219ad",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": false,
+      "residualPx": 0.001568,
+      "substantialWitnesses": 0,
+      "weight": 2.556232,
+      "why": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 01/196 px",
+      "witnessIds": [
+        "dim-obs-01-horizontal-93daa2b6f9"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 0.87747,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 1,
+      "id": "scale-0-87747-3454c4d364",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.000051,
+      "substantialWitnesses": 0,
+      "weight": 1.655083,
+      "why": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 111/126.5 px",
+      "witnessIds": [
+        "dim-obs-111-rotated-cw-5261b91d8f"
+      ]
+    }
+  ],
+  "legacy": {
+    "correctedAnchors": 0,
+    "independentGroups": 0,
+    "independentWeight": 0,
+    "readAnchors": 0
+  },
+  "relation": "NO_SCALE",
+  "selectedHypothesisId": null,
+  "supportingObservationIds": [],
+  "topology": {
+    "bindings": {
+      "alternative": 0,
+      "ambiguous": 0,
+      "primary": 2,
+      "uncentred": 2
+    },
+    "hierarchy": {
+      "afterCorrection": 0,
+      "agreesAsRead": 0,
+      "conflictsAsRead": 0,
+      "incomplete": 6,
+      "parallelCopies": 5,
+      "totals": 6
+    },
+    "marks": {
+      "questionable": 57,
+      "rejected": 0,
+      "tick": 259
+    },
+    "neutralObservationIds": []
+  },
+  "why": "no scale is stated by any reading that owes nothing to a scale"
+}

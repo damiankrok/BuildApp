@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 16,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 5,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+  "contentHash": "ef8d5c6e7d5e09ed6c4df154a4c64d7e9115022755eafa97901e419d0132ada2",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-mdf423d61e7247-5bb6a5a0db",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 3.81
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 6.57
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 135.56
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 181.98
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 35.64
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 96.11
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 263.5
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 171.93
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 135.56
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 893.19
+    }
+  ],
+  "runId": "dom-w-modrzykach"
+}

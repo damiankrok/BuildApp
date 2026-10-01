@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 21,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 5,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+  "contentHash": "349a08e9a6b85332cbdd4644422602e989f9dde172ccd0827e9d12bfde82e6ef",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-ma6726144fab3e-293e6e9c13",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.35
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.02
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 100.97
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 69.69
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 89.82
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 137.98
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 139.38
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 90.08
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 458.94
+    }
+  ],
+  "runId": "dom-w-azaliach"
+}

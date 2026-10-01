@@ -1,0 +1,139 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "OCR_READING"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-mf6628752fa61f-56408a0bd9",
+      "reason": "31 assets (PERSPECTIVE_RENDER 19, ELEVATION 4, SECTION 1, FLOOR_PLAN 4, SITE_PLAN 1, UNKNOWN 2), 9 published figures, 12 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00002",
+      "objectId": "selected-plan",
+      "reason": "GROUND AREA_TABLE 853×853 px",
+      "reversible": true,
+      "seq": 2,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "46,179.5,742.5,703",
+      "downstream": [
+        "ENVELOPE",
+        "BODIES"
+      ],
+      "eventId": "e00003",
+      "objectId": "extent:frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "reason": "DIMENSION_CHAIN_EXTENT/DIMENSION_CHAIN_EXTENT",
+      "reversible": true,
+      "seq": 3,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:46,179.5,736,703",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00004",
+      "objectId": "envelope:frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "reason": "31 of 35 cells enclosed",
+      "reversible": true,
+      "seq": 4,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_ADOPTED",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00005",
+      "objectId": "outline:frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "reason": "the outline adds nothing the box leaves open: the box stands",
+      "reversible": true,
+      "seq": 5,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "2",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00006",
+      "objectId": "masses:frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "reason": "46,333,157.5,703 | 650.5,514,736,703",
+      "reversible": true,
+      "seq": 6,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "SPENT",
+      "conflictIds": [],
+      "decision": "INCONCLUSIVE",
+      "downstream": [
+        "FINAL"
+      ],
+      "eventId": "e00007",
+      "objectId": "resolution",
+      "reason": "copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), UNKNOWN (the figure is spent)",
+      "reversible": true,
+      "seq": 7,
+      "stage": "PLAN_RESOLUTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "FAILED:PLAN_RESOLUTION_INCONCLUSIVE",
+      "downstream": [],
+      "eventId": "e00008",
+      "objectId": "result",
+      "reason": "the lowest storey covers 33.15 m² against the 164.47 m² the publisher prints — 79.8% apart: the decomposition is not of this building 35 other readings of the plan were weighed and none holds: the best, copy area_table bdf7aa09e8, chain extent, registered scale, walled-first tiling, sides as gridded: 3 bodies, 171.0 m² (+4.0% of 164.47), UNKNOWN (the figure is spent), has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement",
+      "reversible": false,
+      "seq": 8,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "kosacce-area-copy-alone",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

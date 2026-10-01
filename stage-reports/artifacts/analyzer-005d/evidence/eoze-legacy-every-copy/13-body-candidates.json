@@ -1,0 +1,116 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 5.873944,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-0",
+      "junctionWallShare": 0.531944,
+      "mouthM": 0.355776,
+      "rect": {
+        "x0": 75,
+        "x1": 795,
+        "y0": 230,
+        "y1": 246.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.521912
+    },
+    {
+      "areaM2": 0.321386,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-1",
+      "junctionWallShare": 1,
+      "rect": {
+        "x0": 75,
+        "x1": 140,
+        "y0": 568.5,
+        "y1": 578.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 0.24722,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-2",
+      "junctionWallShare": 0.1,
+      "mouthM": 1.00062,
+      "rect": {
+        "x0": 140,
+        "x1": 190,
+        "y0": 568.5,
+        "y1": 578.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.357143
+    },
+    {
+      "areaM2": 2.059341,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-3",
+      "junctionWallShare": 0.679472,
+      "rect": {
+        "x0": 190,
+        "x1": 606.5,
+        "y0": 568.5,
+        "y1": 578.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 0.752577
+    },
+    {
+      "areaM2": 0.454885,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-4",
+      "junctionWallShare": 0,
+      "mouthM": 1.134036,
+      "rect": {
+        "x0": 606.5,
+        "x1": 698.5,
+        "y0": 568.5,
+        "y1": 578.5
+      },
+      "relation": "COVERED_TERRACE",
+      "sideWallShare": 0.3125
+    },
+    {
+      "areaM2": 0.477134,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-5",
+      "junctionWallShare": 0.901554,
+      "rect": {
+        "x0": 698.5,
+        "x1": 795,
+        "y0": 568.5,
+        "y1": 578.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    }
+  ],
+  "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 75,
+        "x1": 795,
+        "y0": 246.5,
+        "y1": 568.5
+      }
+    }
+  ]
+}

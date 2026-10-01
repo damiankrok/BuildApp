@@ -1,0 +1,42 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "EXTERIOR_CHAIN_TICKS"
+    },
+    "rect": {
+      "x0": 75,
+      "x1": 795,
+      "y0": 230,
+      "y1": 578.5
+    },
+    "refusedChains": [
+      "chain-vertical-741-668a087292"
+    ],
+    "weak": true
+  },
+  "frameId": "frame-asset-rzut-2abfc5825d-e842a14c7f",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "chosen",
+      "summary": "copy area_table e842a14c7f, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES"
+    },
+    {
+      "key": "reading1",
+      "summary": "copy area_table e842a14c7f, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.7 m² (-4.4% of 122.07), AGREES"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy area_table e842a14c7f, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 147.0 m² (+20.4% of 122.07), WRONG"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy area_table e842a14c7f, wall-ink extent, registered scale, largest-first tiling, sides as gridded: 1 body, 147.0 m² (+20.4% of 122.07), WRONG, FOOTPRINT_AREA_WRONG"
+    },
+    {
+      "key": "reading4",
+      "summary": "copy area_table e842a14c7f, wall-witness extent, registered scale, largest-first tiling, sides as gridded: 0 bodies, 0.0 m², UNKNOWN, NO_BODY+NO_WORLD_FRAME"
+    }
+  ]
+}

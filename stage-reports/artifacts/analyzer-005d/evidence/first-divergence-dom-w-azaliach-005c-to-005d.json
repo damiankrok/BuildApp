@@ -1,0 +1,66 @@
+{
+  "firstDivergence": "DIMENSION_TICK_CLASSIFICATION",
+  "object": "tick:chain-horizontal-646-750b25df33:204.5",
+  "before": "ACCEPTED",
+  "after": "REJECTED",
+  "reasonBefore": "UNCLASSIFIED",
+  "reasonAfter": "FAINT_SIDE,LIGHTER_THAN_LINE,ONE_SIDED,STYLE_MISMATCH,WEDGE_NOT_STROKE",
+  "differing": 28,
+  "examples": [
+    {
+      "object": "tick:chain-horizontal-646-750b25df33:204.5",
+      "before": "ACCEPTED",
+      "after": "REJECTED"
+    },
+    {
+      "object": "tick:chain-horizontal-646-8fa14096d8:205.5",
+      "before": "ACCEPTED",
+      "after": "REJECTED"
+    },
+    {
+      "object": "tick:chain-horizontal-166-d76cc85c23:183.5",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    },
+    {
+      "object": "tick:chain-horizontal-166-d76cc85c23:337",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    },
+    {
+      "object": "tick:chain-horizontal-166-d76cc85c23:430.5",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    },
+    {
+      "object": "tick:chain-horizontal-166-d76cc85c23:518",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    },
+    {
+      "object": "tick:chain-horizontal-166-d76cc85c23:595.5",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    },
+    {
+      "object": "tick:chain-horizontal-170-25347cdeb5:183.5",
+      "before": "ACCEPTED",
+      "after": "ABSENT"
+    }
+  ],
+  "stagesDiffering": [
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

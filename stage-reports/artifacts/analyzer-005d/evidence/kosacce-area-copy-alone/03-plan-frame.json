@@ -1,0 +1,42 @@
+{
+  "frames": [
+    {
+      "annotation": "AREA_TABLE",
+      "envelope": {
+        "x0": 46,
+        "x1": 736,
+        "y0": 179.5,
+        "y1": 703
+      },
+      "extent": {
+        "x0": 46,
+        "x1": 742.5,
+        "y0": 179.5,
+        "y1": 703
+      },
+      "extentProvenance": {
+        "x": "DIMENSION_CHAIN_EXTENT",
+        "y": "DIMENSION_CHAIN_EXTENT"
+      },
+      "extentWeak": false,
+      "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+      "gridLines": {
+        "x": 8,
+        "y": 6
+      },
+      "scale": {
+        "anchors": 7,
+        "mppX": 0.024057,
+        "mppY": 0.024067,
+        "rmsM": 0.007048
+      },
+      "sizePx": {
+        "height": 853,
+        "width": 853
+      },
+      "storey": "GROUND",
+      "wallPx": 14
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8"
+}

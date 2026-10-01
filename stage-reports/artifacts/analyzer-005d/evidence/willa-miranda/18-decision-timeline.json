@@ -1,0 +1,6745 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "OCR_READING"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-m49324d69ef143-0279c8ab42",
+      "reason": "34 assets (ELEVATION 4, SECTION 1, FLOOR_PLAN 8, SITE_PLAN 1, PERSPECTIVE_RENDER 18, UNKNOWN 2), 10 published figures, 14 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00002",
+      "objectId": "tick:chain-horizontal-745-b5c78815d4:89",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 2,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-b5c78815d4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00003",
+      "objectId": "tick:chain-horizontal-745-b5c78815d4:234.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 3,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-b5c78815d4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00004",
+      "objectId": "tick:chain-horizontal-745-b5c78815d4:794",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 4,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-b5c78815d4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00005",
+      "objectId": "tick:chain-horizontal-711-6c4b346357:234.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 5,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-6c4b346357"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00006",
+      "objectId": "tick:chain-horizontal-711-6c4b346357:533",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 6,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-6c4b346357"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00007",
+      "objectId": "tick:chain-horizontal-711-6c4b346357:794",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 7,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-6c4b346357"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00008",
+      "objectId": "tick:chain-vertical-35-8d30b2e5fc:84.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 8,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-35-8d30b2e5fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00009",
+      "objectId": "tick:chain-vertical-35-8d30b2e5fc:610.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 9,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-35-8d30b2e5fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00010",
+      "objectId": "tick:chain-vertical-70-a4a96baec6:84.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 10,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-a4a96baec6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00011",
+      "objectId": "tick:chain-vertical-70-a4a96baec6:176",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 11,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-a4a96baec6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00012",
+      "objectId": "tick:chain-vertical-70-a4a96baec6:519",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 12,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-a4a96baec6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00013",
+      "objectId": "tick:chain-vertical-70-a4a96baec6:610.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 13,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-a4a96baec6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00014",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:252",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 14,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00015",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:273.5",
+      "reason": "COLOUR_MISMATCH,LIGHTER_THAN_LINE",
+      "reversible": true,
+      "seq": 15,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00016",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:301",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 16,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00017",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:336.5",
+      "reason": "COLOUR_MISMATCH,FAINT_SIDE,LIGHTER_THAN_LINE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 17,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00018",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:346",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 18,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00019",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:357",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 19,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00020",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:367",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 20,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00021",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:391",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 21,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00022",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:400.5",
+      "reason": "COLOUR_MISMATCH,FAINT_SIDE",
+      "reversible": false,
+      "seq": 22,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00023",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:428",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 23,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00024",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:483",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 24,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00025",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:508",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 25,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00026",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:546",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 26,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00027",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:621",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 27,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00028",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:691",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 28,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00029",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:749",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 29,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00030",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:768",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 30,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00031",
+      "objectId": "tick:chain-horizontal-460-f626d66d35:776",
+      "reason": "COLOUR_MISMATCH,DUPLICATE",
+      "reversible": true,
+      "seq": 31,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-460-f626d66d35"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00032",
+      "objectId": "tick:chain-horizontal-629-16f384995c:378",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 32,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-629-16f384995c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00033",
+      "objectId": "tick:chain-horizontal-629-16f384995c:782.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 33,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-629-16f384995c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00034",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:269.5",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 34,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00035",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:279",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 35,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00036",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:320",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 36,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00037",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:331",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 37,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00038",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:367",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 38,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00039",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:387",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 39,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00040",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:409.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 40,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00041",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:447.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 41,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00042",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:473",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 42,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00043",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:498.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 43,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00044",
+      "objectId": "tick:chain-horizontal-233-9ad0a5d922:520.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 44,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-9ad0a5d922"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00045",
+      "objectId": "tick:chain-horizontal-109-a62614dafa:130",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 45,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-109-a62614dafa"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00046",
+      "objectId": "tick:chain-horizontal-109-a62614dafa:375",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 46,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-109-a62614dafa"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00047",
+      "objectId": "tick:chain-vertical-375-26285605da:355",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 47,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-26285605da"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00048",
+      "objectId": "tick:chain-vertical-375-26285605da:385",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 48,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-26285605da"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00049",
+      "objectId": "tick:chain-vertical-375-26285605da:407",
+      "reason": "ONE_SIDED",
+      "reversible": true,
+      "seq": 49,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-26285605da"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00050",
+      "objectId": "tick:chain-vertical-375-26285605da:449.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 50,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-26285605da"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00051",
+      "objectId": "tick:chain-vertical-768-65a783e5e5:264",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 51,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-768-65a783e5e5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00052",
+      "objectId": "tick:chain-vertical-768-65a783e5e5:293",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 52,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-768-65a783e5e5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00053",
+      "objectId": "tick:chain-vertical-768-65a783e5e5:352.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 53,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-768-65a783e5e5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00054",
+      "objectId": "tick:chain-vertical-673-728af65fe5:274",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 54,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-728af65fe5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00055",
+      "objectId": "tick:chain-vertical-673-728af65fe5:326.5",
+      "reason": "STYLE_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 55,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-728af65fe5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00056",
+      "objectId": "tick:chain-vertical-673-728af65fe5:350",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 56,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-728af65fe5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00057",
+      "objectId": "tick:chain-vertical-274-40b453f2a7:460",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 57,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-274-40b453f2a7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00058",
+      "objectId": "tick:chain-vertical-274-40b453f2a7:480.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 58,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-274-40b453f2a7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00059",
+      "objectId": "tick:chain-vertical-274-40b453f2a7:501",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 59,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-274-40b453f2a7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00060",
+      "objectId": "tick:chain-horizontal-233-8b71a2e5bd:717.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 60,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-8b71a2e5bd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00061",
+      "objectId": "tick:chain-horizontal-233-8b71a2e5bd:755",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 61,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-233-8b71a2e5bd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00062",
+      "objectId": "tick:chain-horizontal-745-2f7a59e7d5:89",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 62,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-2f7a59e7d5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00063",
+      "objectId": "tick:chain-horizontal-745-2f7a59e7d5:234.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 63,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-2f7a59e7d5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00064",
+      "objectId": "tick:chain-horizontal-745-2f7a59e7d5:794",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 64,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-745-2f7a59e7d5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00065",
+      "objectId": "tick:chain-horizontal-711-47dc157142:234.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 65,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-47dc157142"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00066",
+      "objectId": "tick:chain-horizontal-711-47dc157142:533",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 66,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-47dc157142"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00067",
+      "objectId": "tick:chain-horizontal-711-47dc157142:794",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 67,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-711-47dc157142"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00068",
+      "objectId": "tick:chain-vertical-35-efdecb5f2d:84.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 68,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-35-efdecb5f2d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00069",
+      "objectId": "tick:chain-vertical-35-efdecb5f2d:610.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 69,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-35-efdecb5f2d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00070",
+      "objectId": "tick:chain-vertical-70-d000af4ffc:84.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 70,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-d000af4ffc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00071",
+      "objectId": "tick:chain-vertical-70-d000af4ffc:176",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 71,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-d000af4ffc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00072",
+      "objectId": "tick:chain-vertical-70-d000af4ffc:519",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 72,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-d000af4ffc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00073",
+      "objectId": "tick:chain-vertical-70-d000af4ffc:610.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 73,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-70-d000af4ffc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00074",
+      "objectId": "tick:chain-vertical-375-2f8f214cff:348.5",
+      "reason": "ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 74,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-2f8f214cff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00075",
+      "objectId": "tick:chain-vertical-375-2f8f214cff:357",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 75,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-2f8f214cff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00076",
+      "objectId": "tick:chain-vertical-375-2f8f214cff:385",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 76,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-2f8f214cff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00077",
+      "objectId": "tick:chain-vertical-375-2f8f214cff:407",
+      "reason": "FAINT_SIDE,STYLE_MISMATCH",
+      "reversible": true,
+      "seq": 77,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-2f8f214cff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00078",
+      "objectId": "tick:chain-vertical-375-2f8f214cff:450",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 78,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-375-2f8f214cff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00079",
+      "objectId": "tick:chain-vertical-673-bc6c1c5cb3:274",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 79,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-bc6c1c5cb3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00080",
+      "objectId": "tick:chain-vertical-673-bc6c1c5cb3:326.5",
+      "reason": "STYLE_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 80,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-bc6c1c5cb3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00081",
+      "objectId": "tick:chain-vertical-673-bc6c1c5cb3:350",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 81,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-673-bc6c1c5cb3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00082",
+      "objectId": "tick:chain-vertical-777-f51d8777ec:264",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 82,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-777-f51d8777ec"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00083",
+      "objectId": "tick:chain-vertical-777-f51d8777ec:293",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 83,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-777-f51d8777ec"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00084",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:176.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 84,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00085",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:228.5",
+      "reason": "COLOUR_MISMATCH,DUPLICATE,FAINT_SIDE,LIGHTER_THAN_LINE",
+      "reversible": true,
+      "seq": 85,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00086",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:236",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 86,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00087",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:256.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 87,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00088",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:325",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 88,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00089",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:368.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 89,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00090",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:459",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 90,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00091",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:475",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 91,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00092",
+      "objectId": "tick:chain-vertical-588-bd318f9ba1:556",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 92,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-588-bd318f9ba1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00093",
+      "objectId": "tick:chain-vertical-232-e20df731ad:131.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 93,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00094",
+      "objectId": "tick:chain-vertical-232-e20df731ad:241.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 94,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00095",
+      "objectId": "tick:chain-vertical-232-e20df731ad:299.5",
+      "reason": "FAINT_SIDE",
+      "reversible": false,
+      "seq": 95,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00096",
+      "objectId": "tick:chain-vertical-232-e20df731ad:316",
+      "reason": "LIGHTER_THAN_LINE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 96,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00097",
+      "objectId": "tick:chain-vertical-232-e20df731ad:342.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 97,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00098",
+      "objectId": "tick:chain-vertical-232-e20df731ad:364",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 98,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00099",
+      "objectId": "tick:chain-vertical-232-e20df731ad:400",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 99,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00100",
+      "objectId": "tick:chain-vertical-232-e20df731ad:444",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 100,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00101",
+      "objectId": "tick:chain-vertical-232-e20df731ad:477",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 101,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00102",
+      "objectId": "tick:chain-vertical-232-e20df731ad:492",
+      "reason": "FAINT_SIDE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 102,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-232-e20df731ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00103",
+      "objectId": "tick:chain-vertical-223-7960f644dc:159.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 103,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-223-7960f644dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00104",
+      "objectId": "tick:chain-vertical-223-7960f644dc:299.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 104,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-223-7960f644dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00105",
+      "objectId": "tick:chain-vertical-223-7960f644dc:394.5",
+      "reason": "STYLE_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 105,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-223-7960f644dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00106",
+      "objectId": "tick:chain-vertical-223-7960f644dc:477",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 106,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-223-7960f644dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00107",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:364",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 107,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00108",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:383",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 108,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00109",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:417.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 109,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00110",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:442.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 110,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00111",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:452",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 111,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00112",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:488.5",
+      "reason": "ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 112,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00113",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:518.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 113,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00114",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:539.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 114,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00115",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:579",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 115,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00116",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:588",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 116,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00117",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:628.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 117,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00118",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:644",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 118,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00119",
+      "objectId": "tick:chain-horizontal-459-7952d4250b:666",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 119,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-459-7952d4250b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00120",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:254.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 120,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00121",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:315.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 121,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00122",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:323.5",
+      "reason": "COLOUR_MISMATCH,DUPLICATE",
+      "reversible": true,
+      "seq": 122,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00123",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:363",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 123,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00124",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:379",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 124,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00125",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:417.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 125,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00126",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:454.5",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 126,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00127",
+      "objectId": "tick:chain-horizontal-228-1f1d8e7e61:520.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 127,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-228-1f1d8e7e61"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00128",
+      "objectId": "tick:chain-horizontal-544-8d5e9cd118:183.5",
+      "reason": "FAINT_SIDE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 128,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-544-8d5e9cd118"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00129",
+      "objectId": "tick:chain-horizontal-544-8d5e9cd118:196",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 129,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-544-8d5e9cd118"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00130",
+      "objectId": "tick:chain-horizontal-544-8d5e9cd118:227",
+      "reason": "FAINT_SIDE,LIGHTER_THAN_LINE,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 130,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-544-8d5e9cd118"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00131",
+      "objectId": "tick:chain-horizontal-544-8d5e9cd118:271",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 131,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-544-8d5e9cd118"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00132",
+      "objectId": "tick:chain-horizontal-544-8d5e9cd118:412.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 132,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-544-8d5e9cd118"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00133",
+      "objectId": "tick:chain-vertical-225-840502f46e:276",
+      "reason": "NO_LINE_REFERENCE,WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 133,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-225-840502f46e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00134",
+      "objectId": "tick:chain-vertical-225-840502f46e:500.5",
+      "reason": "NO_LINE_REFERENCE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 134,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-225-840502f46e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00135",
+      "objectId": "tick:chain-vertical-316-985502341f:202.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 135,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00136",
+      "objectId": "tick:chain-vertical-316-985502341f:228.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 136,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00137",
+      "objectId": "tick:chain-vertical-316-985502341f:256",
+      "reason": "COLOUR_MISMATCH,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 137,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00138",
+      "objectId": "tick:chain-vertical-316-985502341f:316",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 138,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00139",
+      "objectId": "tick:chain-vertical-316-985502341f:341",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 139,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00140",
+      "objectId": "tick:chain-vertical-316-985502341f:351.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 140,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-316-985502341f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00141",
+      "objectId": "tick:chain-horizontal-236-b61be372b2:541.5",
+      "reason": "NO_LINE_REFERENCE,WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 141,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-b61be372b2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00142",
+      "objectId": "tick:chain-horizontal-236-b61be372b2:561.5",
+      "reason": "NO_LINE_REFERENCE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 142,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-b61be372b2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00143",
+      "objectId": "tick:chain-horizontal-236-b61be372b2:576",
+      "reason": "NO_LINE_REFERENCE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 143,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-b61be372b2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00144",
+      "objectId": "tick:chain-horizontal-236-b61be372b2:597.5",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 144,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-b61be372b2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00145",
+      "objectId": "tick:chain-horizontal-236-b61be372b2:624.5",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 145,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-b61be372b2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00146",
+      "objectId": "tick:chain-vertical-392-041462304c:113",
+      "reason": "ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 146,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-041462304c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00147",
+      "objectId": "tick:chain-vertical-392-041462304c:163",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 147,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-041462304c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00148",
+      "objectId": "tick:chain-vertical-392-041462304c:187",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 148,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-041462304c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00149",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:291",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 149,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00150",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:318.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 150,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00151",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:338",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 151,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00152",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:351.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 152,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00153",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:380",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 153,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00154",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:413",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 154,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00155",
+      "objectId": "tick:chain-horizontal-297-9ee84bf040:433",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 155,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-297-9ee84bf040"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00156",
+      "objectId": "tick:chain-vertical-383-e8cfb9303c:239.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 156,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-383-e8cfb9303c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00157",
+      "objectId": "tick:chain-vertical-383-e8cfb9303c:292",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 157,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-383-e8cfb9303c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00158",
+      "objectId": "tick:chain-vertical-383-e8cfb9303c:306",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 158,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-383-e8cfb9303c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00159",
+      "objectId": "tick:chain-horizontal-236-bde54cce0a:541.5",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 159,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-bde54cce0a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00160",
+      "objectId": "tick:chain-horizontal-236-bde54cce0a:581",
+      "reason": "LIGHTER_THAN_LINE,ONE_SIDED",
+      "reversible": true,
+      "seq": 160,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-bde54cce0a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00161",
+      "objectId": "tick:chain-horizontal-236-bde54cce0a:594.5",
+      "reason": "ONE_SIDED",
+      "reversible": true,
+      "seq": 161,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-bde54cce0a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00162",
+      "objectId": "tick:chain-horizontal-236-bde54cce0a:607",
+      "reason": "ONE_SIDED",
+      "reversible": true,
+      "seq": 162,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-bde54cce0a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00163",
+      "objectId": "tick:chain-horizontal-236-bde54cce0a:624.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 163,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-236-bde54cce0a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:10",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00164",
+      "objectId": "label:chain-vertical-274-40b453f2a7:ROTATED_CCW:10",
+      "reason": "ROTATED_CCW",
+      "reversible": true,
+      "seq": 164,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-295-473-92ee83d5f5"
+      ]
+    },
+    {
+      "confidenceAfter": 0.243902,
+      "conflictIds": [],
+      "decision": "BOUND:460-501",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00165",
+      "objectId": "label:chain-vertical-274-40b453f2a7:ROTATED_CCW:10",
+      "reason": "PRIMARY; centred 0.098 of the span off; runs across 0 tick(s), 0 questionable, 1 rejected",
+      "reversible": true,
+      "seq": 165,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-10-rotated-ccw-480457a6e9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:110",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00166",
+      "objectId": "label:chain-horizontal-233-8b71a2e5bd:HORIZONTAL:110",
+      "reason": "HORIZONTAL; within one glyph it may be 130 (0.953956), 310 (0.953956), 120 (0.939971), 210 (0.939971)",
+      "reversible": true,
+      "seq": 166,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-724-217-6f75be1f7d"
+      ]
+    },
+    {
+      "confidenceAfter": 2.933333,
+      "conflictIds": [],
+      "decision": "BOUND:717.5-755",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00167",
+      "objectId": "label:chain-horizontal-233-8b71a2e5bd:HORIZONTAL:110",
+      "reason": "PRIMARY; centred 0.06 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 167,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-110-horizontal-d37eee84ec"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1110",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00168",
+      "objectId": "label:chain-vertical-35-8d30b2e5fc:ROTATED_CW:1110",
+      "reason": "ROTATED_CW; within one glyph it may be 1710 (0.995213)",
+      "reversible": true,
+      "seq": 168,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-18-338-c874bc5809"
+      ]
+    },
+    {
+      "confidenceAfter": 2.110266,
+      "conflictIds": [],
+      "decision": "BOUND:84.5-610.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00169",
+      "objectId": "label:chain-vertical-35-8d30b2e5fc:ROTATED_CW:1110",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 169,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1110-rotated-cw-8c15e8d4ad"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:130",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00170",
+      "objectId": "label:chain-horizontal-745-b5c78815d4:HORIZONTAL:130",
+      "reason": "HORIZONTAL; within one glyph it may be 150 (0.978883), 120 (0.843775), 530 (0.776994)",
+      "reversible": true,
+      "seq": 170,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-150-728-223113984c"
+      ]
+    },
+    {
+      "confidenceAfter": 0.893471,
+      "conflictIds": [],
+      "decision": "BOUND:89-234.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00171",
+      "objectId": "label:chain-horizontal-745-b5c78815d4:HORIZONTAL:130",
+      "reason": "PRIMARY; centred 0.012 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 171,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-130-horizontal-513bac1bab"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1500",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00172",
+      "objectId": "label:chain-horizontal-745-b5c78815d4:HORIZONTAL:1500",
+      "reason": "HORIZONTAL; within one glyph it may be 1300 (0.717837), 1100 (0.706489)",
+      "reversible": true,
+      "seq": 172,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-499-728-774446818d"
+      ]
+    },
+    {
+      "confidenceAfter": 2.680965,
+      "conflictIds": [],
+      "decision": "BOUND:234.5-794",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00173",
+      "objectId": "label:chain-horizontal-745-b5c78815d4:HORIZONTAL:1500",
+      "reason": "PRIMARY; centred 0.005 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 173,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1500-horizontal-a3c6af02bc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:205",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00174",
+      "objectId": "label:chain-vertical-70-a4a96baec6:ROTATED_CW:205",
+      "reason": "ROTATED_CW; within one glyph it may be 201 (0.859278), 203 (0.800109), 705 (0.758388), 245 (0.753308)",
+      "reversible": true,
+      "seq": 174,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-53-122-39c2b4ebef"
+      ]
+    },
+    {
+      "confidenceAfter": 2.240437,
+      "conflictIds": [],
+      "decision": "BOUND:84.5-176",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00175",
+      "objectId": "label:chain-vertical-70-a4a96baec6:ROTATED_CW:205",
+      "reason": "PRIMARY; centred 0.03 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 175,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-205-rotated-cw-8bffeabf98"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:420",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00176",
+      "objectId": "label:chain-vertical-70-a4a96baec6:ROTATED_CW:420",
+      "reason": "ROTATED_CW; within one glyph it may be 450 (0.904031), 430 (0.821788), 920 (0.797766), 470 (0.738832)",
+      "reversible": true,
+      "seq": 176,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-53-340-15da471bc3"
+      ]
+    },
+    {
+      "confidenceAfter": 1.22449,
+      "conflictIds": [],
+      "decision": "BOUND:176-519",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00177",
+      "objectId": "label:chain-vertical-70-a4a96baec6:ROTATED_CW:420",
+      "reason": "PRIMARY; centred 0.009 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 177,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-420-rotated-cw-4b35bb0247"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:510",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00178",
+      "objectId": "label:chain-vertical-375-26285605da:ROTATED_CCW:510",
+      "reason": "ROTATED_CCW; within one glyph it may be 514 (0.907822), 310 (0.840508), 210 (0.719429)",
+      "reversible": true,
+      "seq": 178,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-352-408-205145a339"
+      ]
+    },
+    {
+      "confidenceAfter": 7.906977,
+      "conflictIds": [],
+      "decision": "BOUND:385-449.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00179",
+      "objectId": "label:chain-vertical-375-26285605da:ROTATED_CCW:510",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 0 tick(s), 1 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 179,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-510-rotated-ccw-ef6844976b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:605",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00180",
+      "objectId": "label:chain-horizontal-460-f626d66d35:HORIZONTAL:605",
+      "reason": "HORIZONTAL",
+      "reversible": true,
+      "seq": 180,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-664-444-87320fbc48"
+      ]
+    },
+    {
+      "confidenceAfter": 4.726563,
+      "conflictIds": [],
+      "decision": "BOUND:621-749",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00181",
+      "objectId": "label:chain-horizontal-460-f626d66d35:HORIZONTAL:605",
+      "reason": "PRIMARY; centred 0.09 of the span off; runs across 1 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 181,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-605-horizontal-4da16e9a36"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:700",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00182",
+      "objectId": "label:chain-horizontal-711-6c4b346357:HORIZONTAL:700",
+      "reason": "HORIZONTAL; within one glyph it may be 300 (0.889462), 200 (0.708528)",
+      "reversible": true,
+      "seq": 182,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-652-694-45ab1aee99"
+      ]
+    },
+    {
+      "confidenceAfter": 2.681992,
+      "conflictIds": [],
+      "decision": "BOUND:533-794",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00183",
+      "objectId": "label:chain-horizontal-711-6c4b346357:HORIZONTAL:700",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 183,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-700-horizontal-aaeaa93bab"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:800",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00184",
+      "objectId": "label:chain-horizontal-711-6c4b346357:HORIZONTAL:800",
+      "reason": "HORIZONTAL",
+      "reversible": true,
+      "seq": 184,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-372-694-bc7b6c1517"
+      ]
+    },
+    {
+      "confidenceAfter": 2.680067,
+      "conflictIds": [],
+      "decision": "BOUND:234.5-533",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00185",
+      "objectId": "label:chain-horizontal-711-6c4b346357:HORIZONTAL:800",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 185,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-800-horizontal-26780891bc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:805",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00186",
+      "objectId": "label:chain-horizontal-233-9ad0a5d922:HORIZONTAL:805",
+      "reason": "HORIZONTAL; within one glyph it may be 801 (0.981389), 803 (0.859277), 845 (0.737734)",
+      "reversible": true,
+      "seq": 186,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-399-217-433d99d89e"
+      ]
+    },
+    {
+      "confidenceAfter": 10,
+      "conflictIds": [],
+      "decision": "BOUND:367-447.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00187",
+      "objectId": "label:chain-horizontal-233-9ad0a5d922:HORIZONTAL:805",
+      "reason": "PRIMARY; centred 0.022 of the span off; runs across 1 tick(s), 0 questionable, 1 rejected",
+      "reversible": true,
+      "seq": 187,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-805-horizontal-008fc3518b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:100",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00188",
+      "objectId": "label:chain-horizontal-458-ba85b80f95:HORIZONTAL:100",
+      "reason": "HORIZONTAL; within one glyph it may be 104 (0.763217)",
+      "reversible": true,
+      "seq": 188,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-425-447-0c1a9fdba2"
+      ]
+    },
+    {
+      "confidenceAfter": 0.595238,
+      "conflictIds": [],
+      "decision": "BOUND:348-516",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00189",
+      "objectId": "label:chain-horizontal-458-ba85b80f95:HORIZONTAL:100",
+      "reason": "PRIMARY; centred 0.006 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 189,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-100-horizontal-dfd539c5aa"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:210",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00190",
+      "objectId": "label:chain-horizontal-480-2c3b743183:HORIZONTAL:210",
+      "reason": "HORIZONTAL; within one glyph it may be 270 (0.911454), 230 (0.890064), 250 (0.85104)",
+      "reversible": true,
+      "seq": 190,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-326-469-4bcc093d10"
+      ]
+    },
+    {
+      "confidenceAfter": 0.583333,
+      "conflictIds": [],
+      "decision": "BOUND:156-516",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00191",
+      "objectId": "label:chain-horizontal-480-2c3b743183:HORIZONTAL:210",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 191,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-210-horizontal-a4693ba3f9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:713",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00192",
+      "objectId": "label:chain-vertical-50-1e927825a0:ROTATED_CW:713",
+      "reason": "ROTATED_CW; within one glyph it may be 711 (0.969423), 113 (0.844439), 313 (0.82555), 715 (0.738851)",
+      "reversible": true,
+      "seq": 192,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-39-359-245da27009"
+      ]
+    },
+    {
+      "confidenceAfter": 12.084746,
+      "conflictIds": [],
+      "decision": "BOUND:335-394",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00193",
+      "objectId": "label:chain-vertical-50-1e927825a0:ROTATED_CW:713",
+      "reason": "PRIMARY; centred 0.034 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 193,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-713-rotated-cw-508eb0d053"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:761",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00194",
+      "objectId": "label:chain-vertical-50-1e927825a0:ROTATED_CW:761",
+      "reason": "ROTATED_CW; within one glyph it may be 361 (0.945513), 161 (0.797661)",
+      "reversible": true,
+      "seq": 194,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-39-219-4e195cfeb0"
+      ]
+    },
+    {
+      "confidenceAfter": 3.427928,
+      "conflictIds": [],
+      "decision": "BOUND:113-335",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00195",
+      "objectId": "label:chain-vertical-50-1e927825a0:ROTATED_CW:761",
+      "reason": "PRIMARY; centred 0.011 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 195,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-761-rotated-cw-ad68e5eed5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:114",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00196",
+      "objectId": "label:chain-horizontal-349-3df791bbc7:HORIZONTAL:114",
+      "reason": "HORIZONTAL",
+      "reversible": true,
+      "seq": 196,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-238-341-659505ba87"
+      ]
+    },
+    {
+      "confidenceAfter": 0.43346,
+      "conflictIds": [],
+      "decision": "BOUND:113-376",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00197",
+      "objectId": "label:chain-horizontal-349-3df791bbc7:HORIZONTAL:114",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 197,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-114-horizontal-aeadc33278"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:114",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00198",
+      "objectId": "label:chain-horizontal-333-41a9796198:HORIZONTAL:114",
+      "reason": "HORIZONTAL; within one glyph it may be 110 (0.892795)",
+      "reversible": true,
+      "seq": 198,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-309-325-5f1558d594"
+      ]
+    },
+    {
+      "confidenceAfter": 0.926829,
+      "conflictIds": [],
+      "decision": "BOUND:253-376",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00199",
+      "objectId": "label:chain-horizontal-333-41a9796198:HORIZONTAL:114",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 199,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-114-horizontal-b47be86925"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1110",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00200",
+      "objectId": "label:chain-vertical-35-efdecb5f2d:ROTATED_CW:1110",
+      "reason": "ROTATED_CW; within one glyph it may be 1710 (0.995213)",
+      "reversible": true,
+      "seq": 200,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-18-338-953a0085a9"
+      ]
+    },
+    {
+      "confidenceAfter": 2.110266,
+      "conflictIds": [],
+      "decision": "BOUND:84.5-610.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00201",
+      "objectId": "label:chain-vertical-35-efdecb5f2d:ROTATED_CW:1110",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 201,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1110-rotated-cw-2fbe868ac2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:130",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00202",
+      "objectId": "label:chain-horizontal-745-2f7a59e7d5:HORIZONTAL:130",
+      "reason": "HORIZONTAL; within one glyph it may be 150 (0.978883), 120 (0.843775), 530 (0.776994)",
+      "reversible": true,
+      "seq": 202,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-150-728-16f1f3e712"
+      ]
+    },
+    {
+      "confidenceAfter": 0.893471,
+      "conflictIds": [],
+      "decision": "BOUND:89-234.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00203",
+      "objectId": "label:chain-horizontal-745-2f7a59e7d5:HORIZONTAL:130",
+      "reason": "PRIMARY; centred 0.012 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 203,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-130-horizontal-fedadd9509"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1500",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00204",
+      "objectId": "label:chain-horizontal-745-2f7a59e7d5:HORIZONTAL:1500",
+      "reason": "HORIZONTAL; within one glyph it may be 1300 (0.717837), 1100 (0.706489)",
+      "reversible": true,
+      "seq": 204,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-499-728-ae0c6fb2a9"
+      ]
+    },
+    {
+      "confidenceAfter": 2.680965,
+      "conflictIds": [],
+      "decision": "BOUND:234.5-794",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00205",
+      "objectId": "label:chain-horizontal-745-2f7a59e7d5:HORIZONTAL:1500",
+      "reason": "PRIMARY; centred 0.005 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 205,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1500-horizontal-4950e2424b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:205",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00206",
+      "objectId": "label:chain-vertical-70-d000af4ffc:ROTATED_CW:205",
+      "reason": "ROTATED_CW; within one glyph it may be 201 (0.859278), 203 (0.800109), 705 (0.758388), 245 (0.753308)",
+      "reversible": true,
+      "seq": 206,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-53-122-3e22fe3889"
+      ]
+    },
+    {
+      "confidenceAfter": 2.240437,
+      "conflictIds": [],
+      "decision": "BOUND:84.5-176",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00207",
+      "objectId": "label:chain-vertical-70-d000af4ffc:ROTATED_CW:205",
+      "reason": "PRIMARY; centred 0.03 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 207,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-205-rotated-cw-381fc17830"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:33",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00208",
+      "objectId": "label:chain-vertical-777-f51d8777ec:ROTATED_CCW:33",
+      "reason": "ROTATED_CCW; within one glyph it may be 13 (0.989513), 73 (0.937871), 53 (0.897823), 35 (0.859506)",
+      "reversible": true,
+      "seq": 208,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-738-269-9f1358cfda"
+      ]
+    },
+    {
+      "confidenceAfter": 1.137931,
+      "conflictIds": [],
+      "decision": "BOUND:264-293",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00209",
+      "objectId": "label:chain-vertical-777-f51d8777ec:ROTATED_CCW:33",
+      "reason": "PRIMARY; centred 0.052 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 209,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-33-rotated-ccw-ac823ee283"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:420",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00210",
+      "objectId": "label:chain-vertical-70-d000af4ffc:ROTATED_CW:420",
+      "reason": "ROTATED_CW; within one glyph it may be 450 (0.904031), 430 (0.821788), 920 (0.797766), 470 (0.738832)",
+      "reversible": true,
+      "seq": 210,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-53-340-13797cdb4a"
+      ]
+    },
+    {
+      "confidenceAfter": 1.22449,
+      "conflictIds": [],
+      "decision": "BOUND:176-519",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00211",
+      "objectId": "label:chain-vertical-70-d000af4ffc:ROTATED_CW:420",
+      "reason": "PRIMARY; centred 0.009 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 211,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-420-rotated-cw-97196f424f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:700",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00212",
+      "objectId": "label:chain-horizontal-711-47dc157142:HORIZONTAL:700",
+      "reason": "HORIZONTAL; within one glyph it may be 300 (0.889462), 200 (0.708528)",
+      "reversible": true,
+      "seq": 212,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-652-694-d8d13647f5"
+      ]
+    },
+    {
+      "confidenceAfter": 2.681992,
+      "conflictIds": [],
+      "decision": "BOUND:533-794",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00213",
+      "objectId": "label:chain-horizontal-711-47dc157142:HORIZONTAL:700",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 213,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-700-horizontal-9066a577b4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:800",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00214",
+      "objectId": "label:chain-horizontal-711-47dc157142:HORIZONTAL:800",
+      "reason": "HORIZONTAL",
+      "reversible": true,
+      "seq": 214,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-372-694-2fa519dee5"
+      ]
+    },
+    {
+      "confidenceAfter": 2.680067,
+      "conflictIds": [],
+      "decision": "BOUND:234.5-533",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00215",
+      "objectId": "label:chain-horizontal-711-47dc157142:HORIZONTAL:800",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 215,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-800-horizontal-0ff1ba703d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:108",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00216",
+      "objectId": "label:chain-horizontal-236-b61be372b2:HORIZONTAL:108",
+      "reason": "HORIZONTAL; within one glyph it may be 100 (0.933488), 508 (0.796423), 308 (0.778983)",
+      "reversible": true,
+      "seq": 216,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-603-193-c1237e3797"
+      ]
+    },
+    {
+      "confidenceAfter": 4,
+      "conflictIds": [],
+      "decision": "BOUND:597.5-624.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00217",
+      "objectId": "label:chain-horizontal-236-b61be372b2:HORIZONTAL:108",
+      "reason": "PRIMARY; centred 0.056 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 217,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-108-horizontal-fd05f0aa4c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:555",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00218",
+      "objectId": "label:chain-horizontal-459-7952d4250b:HORIZONTAL:555",
+      "reason": "HORIZONTAL; within one glyph it may be 155 (0.996999), 535 (0.96159), 355 (0.928686), 551 (0.757968)",
+      "reversible": true,
+      "seq": 218,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-592-444-02c77f2696"
+      ]
+    },
+    {
+      "confidenceAfter": 11.212121,
+      "conflictIds": [],
+      "decision": "BOUND:579-628.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00219",
+      "objectId": "label:chain-horizontal-459-7952d4250b:HORIZONTAL:555",
+      "reason": "PRIMARY; centred 0.035 of the span off; runs across 1 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 219,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-555-horizontal-b84f9f74cd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:014",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00220",
+      "objectId": "label:chain-horizontal-297-9ee84bf040:HORIZONTAL:014",
+      "reason": "HORIZONTAL; within one glyph it may be 814 (0.901192)",
+      "reversible": true,
+      "seq": 220,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-312-287-346887e687"
+      ]
+    },
+    {
+      "confidenceAfter": 0.231405,
+      "conflictIds": [],
+      "decision": "BOUND:291-351.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00221",
+      "objectId": "label:chain-horizontal-297-9ee84bf040:HORIZONTAL:014",
+      "reason": "PRIMARY; centred 0.037 of the span off; runs across 1 tick(s), 0 questionable, 1 rejected",
+      "reversible": true,
+      "seq": 221,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-014-horizontal-7193542ccd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:116",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00222",
+      "objectId": "label:chain-horizontal-297-9ee84bf040:HORIZONTAL:116",
+      "reason": "HORIZONTAL; within one glyph it may be 316 (0.753436), 136 (0.715257)",
+      "reversible": true,
+      "seq": 222,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-386-287-4a3c4c02bb"
+      ]
+    },
+    {
+      "confidenceAfter": 1.423313,
+      "conflictIds": [],
+      "decision": "BOUND:351.5-433",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00223",
+      "objectId": "label:chain-horizontal-297-9ee84bf040:HORIZONTAL:116",
+      "reason": "PRIMARY; centred 0.003 of the span off; runs across 2 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 223,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-116-horizontal-feb98b45bc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:613",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00224",
+      "objectId": "label:chain-horizontal-109-c8f48ed6a2:HORIZONTAL:613",
+      "reason": "HORIZONTAL; within one glyph it may be 611 (0.988966), 615 (0.89243), 643 (0.768348), 653 (0.750419)",
+      "reversible": true,
+      "seq": 224,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-135-101-049feb2132"
+      ]
+    },
+    {
+      "confidenceAfter": 20.433333,
+      "conflictIds": [],
+      "decision": "BOUND:125-155",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00225",
+      "objectId": "label:chain-horizontal-109-c8f48ed6a2:HORIZONTAL:613",
+      "reason": "PRIMARY; centred 0.017 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 225,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-613-horizontal-32fe19450b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00226",
+      "objectId": "parallel_copy_of:chain-horizontal-183-a4497a4481>chain-horizontal-189-5f9e4b0641",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 226,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-183-a4497a4481",
+        "chain-horizontal-189-5f9e4b0641"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00227",
+      "objectId": "parallel_copy_of:chain-horizontal-357-c73de20dfa>chain-horizontal-368-12d15b3753",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 227,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-357-c73de20dfa",
+        "chain-horizontal-368-12d15b3753"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00228",
+      "objectId": "parallel_copy_of:chain-vertical-279-5390e1a381>chain-vertical-320-2c5914f22d",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 228,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-279-5390e1a381",
+        "chain-vertical-320-2c5914f22d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00229",
+      "objectId": "parallel_copy_of:chain-vertical-286-fcbc1ceed9>chain-vertical-291-a6f52b716c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 229,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-fcbc1ceed9",
+        "chain-vertical-291-a6f52b716c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00230",
+      "objectId": "parallel_copy_of:chain-vertical-286-fcbc1ceed9>chain-vertical-306-5382472606",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 230,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-fcbc1ceed9",
+        "chain-vertical-306-5382472606"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00231",
+      "objectId": "parallel_copy_of:chain-vertical-291-a6f52b716c>chain-vertical-306-5382472606",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 231,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-a6f52b716c",
+        "chain-vertical-306-5382472606"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00232",
+      "objectId": "parallel_copy_of:chain-vertical-477-3cc5d8c65b>chain-vertical-487-72eea13678",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 232,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-3cc5d8c65b",
+        "chain-vertical-487-72eea13678"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00233",
+      "objectId": "parallel_copy_of:chain-vertical-477-3cc5d8c65b>chain-vertical-506-0fe322b6dc",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 233,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-3cc5d8c65b",
+        "chain-vertical-506-0fe322b6dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00234",
+      "objectId": "parallel_copy_of:chain-vertical-487-72eea13678>chain-vertical-506-0fe322b6dc",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 234,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-72eea13678",
+        "chain-vertical-506-0fe322b6dc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "AGREES_AS_READ",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00235",
+      "objectId": "total_of:chain-horizontal-745-b5c78815d4>chain-horizontal-711-6c4b346357",
+      "reason": "total 1500 cm against parts 1500 cm",
+      "reversible": true,
+      "seq": 235,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-745-b5c78815d4",
+        "chain-horizontal-711-6c4b346357"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00236",
+      "objectId": "total_of:chain-vertical-242-0b0a225179>chain-vertical-261-99ae7ffbd5@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 236,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-242-0b0a225179",
+        "chain-vertical-261-99ae7ffbd5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00237",
+      "objectId": "total_of:chain-vertical-277-398d340a49>chain-vertical-261-99ae7ffbd5@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 237,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-277-398d340a49",
+        "chain-vertical-261-99ae7ffbd5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00238",
+      "objectId": "total_of:chain-vertical-277-398d340a49>chain-vertical-316-e1d8d48959@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 238,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-277-398d340a49",
+        "chain-vertical-316-e1d8d48959"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00239",
+      "objectId": "total_of:chain-vertical-286-fcbc1ceed9>chain-vertical-261-99ae7ffbd5@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 239,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-fcbc1ceed9",
+        "chain-vertical-261-99ae7ffbd5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00240",
+      "objectId": "total_of:chain-vertical-286-fcbc1ceed9>chain-vertical-316-e1d8d48959@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 240,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-fcbc1ceed9",
+        "chain-vertical-316-e1d8d48959"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00241",
+      "objectId": "total_of:chain-vertical-291-a6f52b716c>chain-vertical-261-99ae7ffbd5@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 241,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-a6f52b716c",
+        "chain-vertical-261-99ae7ffbd5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00242",
+      "objectId": "total_of:chain-vertical-291-a6f52b716c>chain-vertical-316-e1d8d48959@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 242,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-a6f52b716c",
+        "chain-vertical-316-e1d8d48959"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00243",
+      "objectId": "total_of:chain-vertical-306-5382472606>chain-vertical-316-e1d8d48959@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 243,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-306-5382472606",
+        "chain-vertical-316-e1d8d48959"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00244",
+      "objectId": "total_of:chain-vertical-35-8d30b2e5fc>chain-vertical-70-a4a96baec6",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 244,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-35-8d30b2e5fc",
+        "chain-vertical-70-a4a96baec6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00245",
+      "objectId": "parallel_copy_of:chain-vertical-185-de25e3a6d0>chain-vertical-211-c435030ede",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 245,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-185-de25e3a6d0",
+        "chain-vertical-211-c435030ede"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00246",
+      "objectId": "parallel_copy_of:chain-vertical-455-00237f54db>chain-vertical-483-d4ab77496a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 246,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-455-00237f54db",
+        "chain-vertical-483-d4ab77496a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00247",
+      "objectId": "total_of:chain-horizontal-480-2c3b743183>chain-horizontal-458-ba85b80f95",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 247,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-480-2c3b743183",
+        "chain-horizontal-458-ba85b80f95"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00248",
+      "objectId": "parallel_copy_of:chain-vertical-134-60bd96ffa5>chain-vertical-154-6289e0b18f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 248,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-134-60bd96ffa5",
+        "chain-vertical-154-6289e0b18f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00249",
+      "objectId": "parallel_copy_of:chain-vertical-78-2df78b8ea1>chain-vertical-94-fadfed7eb1",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 249,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-78-2df78b8ea1",
+        "chain-vertical-94-fadfed7eb1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00250",
+      "objectId": "total_of:chain-horizontal-349-3df791bbc7>chain-horizontal-333-41a9796198",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 250,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-349-3df791bbc7",
+        "chain-horizontal-333-41a9796198"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00251",
+      "objectId": "total_of:chain-vertical-134-60bd96ffa5>chain-vertical-130-27c7446e66",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 251,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-134-60bd96ffa5",
+        "chain-vertical-130-27c7446e66"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00252",
+      "objectId": "total_of:chain-vertical-154-6289e0b18f>chain-vertical-130-27c7446e66",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 252,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-154-6289e0b18f",
+        "chain-vertical-130-27c7446e66"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00253",
+      "objectId": "parallel_copy_of:chain-horizontal-183-eb18602f71>chain-horizontal-189-33b4447154",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 253,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-183-eb18602f71",
+        "chain-horizontal-189-33b4447154"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00254",
+      "objectId": "parallel_copy_of:chain-horizontal-357-8579de53db>chain-horizontal-368-b789a7dcba",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 254,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-357-8579de53db",
+        "chain-horizontal-368-b789a7dcba"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00255",
+      "objectId": "parallel_copy_of:chain-vertical-279-8d1834dae4>chain-vertical-320-17102e92d3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 255,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-279-8d1834dae4",
+        "chain-vertical-320-17102e92d3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00256",
+      "objectId": "parallel_copy_of:chain-vertical-286-1d1857f734>chain-vertical-291-f9cda1c6c6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 256,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-1d1857f734",
+        "chain-vertical-291-f9cda1c6c6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00257",
+      "objectId": "parallel_copy_of:chain-vertical-286-1d1857f734>chain-vertical-306-8e8fb5bc3a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 257,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-1d1857f734",
+        "chain-vertical-306-8e8fb5bc3a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00258",
+      "objectId": "parallel_copy_of:chain-vertical-291-f9cda1c6c6>chain-vertical-306-8e8fb5bc3a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 258,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-f9cda1c6c6",
+        "chain-vertical-306-8e8fb5bc3a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00259",
+      "objectId": "parallel_copy_of:chain-vertical-477-75586cd095>chain-vertical-487-65cf15dc4c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 259,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-75586cd095",
+        "chain-vertical-487-65cf15dc4c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00260",
+      "objectId": "parallel_copy_of:chain-vertical-477-75586cd095>chain-vertical-497-113c0c6d01",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 260,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-75586cd095",
+        "chain-vertical-497-113c0c6d01"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00261",
+      "objectId": "parallel_copy_of:chain-vertical-477-75586cd095>chain-vertical-506-a6ce546b02",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 261,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-75586cd095",
+        "chain-vertical-506-a6ce546b02"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00262",
+      "objectId": "parallel_copy_of:chain-vertical-477-75586cd095>chain-vertical-516-b8d9abc4eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 262,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-477-75586cd095",
+        "chain-vertical-516-b8d9abc4eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00263",
+      "objectId": "parallel_copy_of:chain-vertical-487-65cf15dc4c>chain-vertical-497-113c0c6d01",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 263,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-65cf15dc4c",
+        "chain-vertical-497-113c0c6d01"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00264",
+      "objectId": "parallel_copy_of:chain-vertical-487-65cf15dc4c>chain-vertical-506-a6ce546b02",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 264,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-65cf15dc4c",
+        "chain-vertical-506-a6ce546b02"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00265",
+      "objectId": "parallel_copy_of:chain-vertical-487-65cf15dc4c>chain-vertical-516-b8d9abc4eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 265,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-65cf15dc4c",
+        "chain-vertical-516-b8d9abc4eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00266",
+      "objectId": "parallel_copy_of:chain-vertical-497-113c0c6d01>chain-vertical-506-a6ce546b02",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 266,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-497-113c0c6d01",
+        "chain-vertical-506-a6ce546b02"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00267",
+      "objectId": "parallel_copy_of:chain-vertical-497-113c0c6d01>chain-vertical-516-b8d9abc4eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 267,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-497-113c0c6d01",
+        "chain-vertical-516-b8d9abc4eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00268",
+      "objectId": "parallel_copy_of:chain-vertical-506-a6ce546b02>chain-vertical-516-b8d9abc4eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 268,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-506-a6ce546b02",
+        "chain-vertical-516-b8d9abc4eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "AGREES_AS_READ",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00269",
+      "objectId": "total_of:chain-horizontal-745-2f7a59e7d5>chain-horizontal-711-47dc157142",
+      "reason": "total 1500 cm against parts 1500 cm",
+      "reversible": true,
+      "seq": 269,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-745-2f7a59e7d5",
+        "chain-horizontal-711-47dc157142"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00270",
+      "objectId": "total_of:chain-vertical-242-8bc779b0a9>chain-vertical-261-f99f64d80e@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 270,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-242-8bc779b0a9",
+        "chain-vertical-261-f99f64d80e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00271",
+      "objectId": "total_of:chain-vertical-277-5d28aacd69>chain-vertical-261-f99f64d80e@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 271,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-277-5d28aacd69",
+        "chain-vertical-261-f99f64d80e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00272",
+      "objectId": "total_of:chain-vertical-277-5d28aacd69>chain-vertical-316-094763a03c@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 272,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-277-5d28aacd69",
+        "chain-vertical-316-094763a03c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00273",
+      "objectId": "total_of:chain-vertical-286-1d1857f734>chain-vertical-261-f99f64d80e@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 273,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-1d1857f734",
+        "chain-vertical-261-f99f64d80e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00274",
+      "objectId": "total_of:chain-vertical-286-1d1857f734>chain-vertical-316-094763a03c@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 274,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-286-1d1857f734",
+        "chain-vertical-316-094763a03c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00275",
+      "objectId": "total_of:chain-vertical-291-f9cda1c6c6>chain-vertical-261-f99f64d80e@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 275,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-f9cda1c6c6",
+        "chain-vertical-261-f99f64d80e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00276",
+      "objectId": "total_of:chain-vertical-291-f9cda1c6c6>chain-vertical-316-094763a03c@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 276,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-291-f9cda1c6c6",
+        "chain-vertical-316-094763a03c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00277",
+      "objectId": "total_of:chain-vertical-306-8e8fb5bc3a>chain-vertical-261-f99f64d80e@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 277,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-306-8e8fb5bc3a",
+        "chain-vertical-261-f99f64d80e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00278",
+      "objectId": "total_of:chain-vertical-306-8e8fb5bc3a>chain-vertical-316-094763a03c@{\"fromPx\":66,\"toPx\":84.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 278,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-306-8e8fb5bc3a",
+        "chain-vertical-316-094763a03c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00279",
+      "objectId": "total_of:chain-vertical-35-efdecb5f2d>chain-vertical-70-d000af4ffc",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 279,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-35-efdecb5f2d",
+        "chain-vertical-70-d000af4ffc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00280",
+      "objectId": "parallel_copy_of:chain-vertical-375-ccccbb4e34>chain-vertical-378-a42e2d6b2f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 280,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-375-ccccbb4e34",
+        "chain-vertical-378-a42e2d6b2f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00281",
+      "objectId": "parallel_copy_of:chain-vertical-468-09988ef8db>chain-vertical-487-f8d803f239",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 281,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-468-09988ef8db",
+        "chain-vertical-487-f8d803f239"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00282",
+      "objectId": "parallel_copy_of:chain-vertical-468-09988ef8db>chain-vertical-497-f5d60fb666",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 282,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-468-09988ef8db",
+        "chain-vertical-497-f5d60fb666"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00283",
+      "objectId": "parallel_copy_of:chain-vertical-468-09988ef8db>chain-vertical-507-f938ce9e45",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 283,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-468-09988ef8db",
+        "chain-vertical-507-f938ce9e45"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00284",
+      "objectId": "parallel_copy_of:chain-vertical-487-f8d803f239>chain-vertical-497-f5d60fb666",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 284,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-f8d803f239",
+        "chain-vertical-497-f5d60fb666"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00285",
+      "objectId": "parallel_copy_of:chain-vertical-487-f8d803f239>chain-vertical-507-f938ce9e45",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 285,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-f8d803f239",
+        "chain-vertical-507-f938ce9e45"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00286",
+      "objectId": "parallel_copy_of:chain-vertical-487-f8d803f239>chain-vertical-526-e2f781d2d7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 286,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-f8d803f239",
+        "chain-vertical-526-e2f781d2d7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00287",
+      "objectId": "parallel_copy_of:chain-vertical-497-f5d60fb666>chain-vertical-507-f938ce9e45",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 287,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-497-f5d60fb666",
+        "chain-vertical-507-f938ce9e45"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00288",
+      "objectId": "parallel_copy_of:chain-vertical-497-f5d60fb666>chain-vertical-526-e2f781d2d7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 288,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-497-f5d60fb666",
+        "chain-vertical-526-e2f781d2d7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00289",
+      "objectId": "parallel_copy_of:chain-vertical-497-f5d60fb666>chain-vertical-536-394419765c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 289,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-497-f5d60fb666",
+        "chain-vertical-536-394419765c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00290",
+      "objectId": "parallel_copy_of:chain-vertical-507-f938ce9e45>chain-vertical-526-e2f781d2d7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 290,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-507-f938ce9e45",
+        "chain-vertical-526-e2f781d2d7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00291",
+      "objectId": "parallel_copy_of:chain-vertical-507-f938ce9e45>chain-vertical-536-394419765c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 291,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-507-f938ce9e45",
+        "chain-vertical-536-394419765c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00292",
+      "objectId": "parallel_copy_of:chain-vertical-507-f938ce9e45>chain-vertical-555-a16c18bfcd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 292,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-507-f938ce9e45",
+        "chain-vertical-555-a16c18bfcd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00293",
+      "objectId": "parallel_copy_of:chain-vertical-526-e2f781d2d7>chain-vertical-536-394419765c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 293,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-526-e2f781d2d7",
+        "chain-vertical-536-394419765c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00294",
+      "objectId": "parallel_copy_of:chain-vertical-526-e2f781d2d7>chain-vertical-555-a16c18bfcd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 294,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-526-e2f781d2d7",
+        "chain-vertical-555-a16c18bfcd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00295",
+      "objectId": "parallel_copy_of:chain-vertical-526-e2f781d2d7>chain-vertical-565-e230ff3e54",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 295,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-526-e2f781d2d7",
+        "chain-vertical-565-e230ff3e54"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00296",
+      "objectId": "parallel_copy_of:chain-vertical-534-969bb5fc80>chain-vertical-538-9435f8859b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 296,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-534-969bb5fc80",
+        "chain-vertical-538-9435f8859b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00297",
+      "objectId": "parallel_copy_of:chain-vertical-536-394419765c>chain-vertical-555-a16c18bfcd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 297,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-536-394419765c",
+        "chain-vertical-555-a16c18bfcd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00298",
+      "objectId": "parallel_copy_of:chain-vertical-536-394419765c>chain-vertical-565-e230ff3e54",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 298,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-536-394419765c",
+        "chain-vertical-565-e230ff3e54"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00299",
+      "objectId": "parallel_copy_of:chain-vertical-536-394419765c>chain-vertical-584-73c9405431",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 299,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-536-394419765c",
+        "chain-vertical-584-73c9405431"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00300",
+      "objectId": "parallel_copy_of:chain-vertical-555-a16c18bfcd>chain-vertical-565-e230ff3e54",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 300,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-a16c18bfcd",
+        "chain-vertical-565-e230ff3e54"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00301",
+      "objectId": "parallel_copy_of:chain-vertical-555-a16c18bfcd>chain-vertical-584-73c9405431",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 301,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-a16c18bfcd",
+        "chain-vertical-584-73c9405431"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00302",
+      "objectId": "parallel_copy_of:chain-vertical-555-a16c18bfcd>chain-vertical-594-8351a1a51f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 302,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-a16c18bfcd",
+        "chain-vertical-594-8351a1a51f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00303",
+      "objectId": "parallel_copy_of:chain-vertical-565-e230ff3e54>chain-vertical-584-73c9405431",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 303,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-565-e230ff3e54",
+        "chain-vertical-584-73c9405431"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00304",
+      "objectId": "parallel_copy_of:chain-vertical-565-e230ff3e54>chain-vertical-594-8351a1a51f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 304,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-565-e230ff3e54",
+        "chain-vertical-594-8351a1a51f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00305",
+      "objectId": "parallel_copy_of:chain-vertical-584-73c9405431>chain-vertical-594-8351a1a51f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 305,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-584-73c9405431",
+        "chain-vertical-594-8351a1a51f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00306",
+      "objectId": "total_of:chain-horizontal-205-7b84c5edef>chain-horizontal-220-d73525aeea@{\"fromPx\":151,\"toPx\":207.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 306,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-205-7b84c5edef",
+        "chain-horizontal-220-d73525aeea"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00307",
+      "objectId": "total_of:chain-horizontal-150-8a35cccb3a>chain-horizontal-161-0f1b3cb0b8@{\"fromPx\":110.5,\"toPx\":153.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 307,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-150-8a35cccb3a",
+        "chain-horizontal-161-0f1b3cb0b8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00308",
+      "objectId": "total_of:chain-horizontal-150-8a35cccb3a>chain-horizontal-173-9f78a62718",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 308,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-150-8a35cccb3a",
+        "chain-horizontal-173-9f78a62718"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00309",
+      "objectId": "total_of:chain-horizontal-161-0f1b3cb0b8>chain-horizontal-173-9f78a62718",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 309,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-161-0f1b3cb0b8",
+        "chain-horizontal-173-9f78a62718"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00310",
+      "objectId": "parallel_copy_of:chain-vertical-375-b864ecd5ca>chain-vertical-378-2074e09642",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 310,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-375-b864ecd5ca",
+        "chain-vertical-378-2074e09642"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00311",
+      "objectId": "parallel_copy_of:chain-vertical-468-1e4835b609>chain-vertical-487-25e8244519",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 311,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-468-1e4835b609",
+        "chain-vertical-487-25e8244519"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00312",
+      "objectId": "parallel_copy_of:chain-vertical-468-1e4835b609>chain-vertical-497-c1a1c6f592",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 312,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-468-1e4835b609",
+        "chain-vertical-497-c1a1c6f592"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00313",
+      "objectId": "parallel_copy_of:chain-vertical-487-25e8244519>chain-vertical-497-c1a1c6f592",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 313,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-25e8244519",
+        "chain-vertical-497-c1a1c6f592"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00314",
+      "objectId": "parallel_copy_of:chain-vertical-534-41e6239553>chain-vertical-538-275ff801d0",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 314,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-534-41e6239553",
+        "chain-vertical-538-275ff801d0"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00315",
+      "objectId": "parallel_copy_of:chain-vertical-555-6160c522f4>chain-vertical-565-3b0b4c5499",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 315,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-6160c522f4",
+        "chain-vertical-565-3b0b4c5499"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00316",
+      "objectId": "parallel_copy_of:chain-vertical-555-6160c522f4>chain-vertical-584-3a800f0784",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 316,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-6160c522f4",
+        "chain-vertical-584-3a800f0784"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00317",
+      "objectId": "parallel_copy_of:chain-vertical-555-6160c522f4>chain-vertical-594-37521e3d57",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 317,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-555-6160c522f4",
+        "chain-vertical-594-37521e3d57"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00318",
+      "objectId": "parallel_copy_of:chain-vertical-565-3b0b4c5499>chain-vertical-584-3a800f0784",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 318,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-565-3b0b4c5499",
+        "chain-vertical-584-3a800f0784"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00319",
+      "objectId": "parallel_copy_of:chain-vertical-565-3b0b4c5499>chain-vertical-594-37521e3d57",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 319,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-565-3b0b4c5499",
+        "chain-vertical-594-37521e3d57"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00320",
+      "objectId": "parallel_copy_of:chain-vertical-584-3a800f0784>chain-vertical-594-37521e3d57",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 320,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-584-3a800f0784",
+        "chain-vertical-594-37521e3d57"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00321",
+      "objectId": "total_of:chain-horizontal-320-7037279927>chain-horizontal-305-18ee782b68@{\"fromPx\":468,\"toPx\":487}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 321,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-320-7037279927",
+        "chain-horizontal-305-18ee782b68"
+      ]
+    },
+    {
+      "confidenceAfter": 3,
+      "conflictIds": [],
+      "decision": "SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00322",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:2.681",
+      "reason": "3 independent readings on 2 chain(s): 1500/559.5 px, 700/261 px, 800/298.5 px",
+      "reversible": true,
+      "seq": 322,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-1500-horizontal-a3c6af02bc",
+        "dim-obs-700-horizontal-aaeaa93bab",
+        "dim-obs-800-horizontal-26780891bc"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00323",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:2.11",
+      "reason": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 109/52 px, 1110/526 px",
+      "reversible": true,
+      "seq": 323,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-109-rotated-ccw-984f4b4d63",
+        "dim-obs-1110-rotated-cw-8c15e8d4ad"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00324",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:1.224",
+      "reason": "1 independent reading on 1 chain(s): 420/343 px",
+      "reversible": true,
+      "seq": 324,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-420-rotated-cw-4b35bb0247"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00325",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:0.893",
+      "reason": "1 independent reading on 1 chain(s): 130/145.5 px",
+      "reversible": true,
+      "seq": 325,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-130-horizontal-513bac1bab"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00326",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:4.727",
+      "reason": "1 independent reading on 1 chain(s): 605/128 px",
+      "reversible": true,
+      "seq": 326,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-605-horizontal-4da16e9a36"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00327",
+      "objectId": "scale:frame-asset-rzut-73ee27c4b6-7102a805c6:2.24",
+      "reason": "1 independent reading on 1 chain(s): 205/91.5 px",
+      "reversible": true,
+      "seq": 327,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-205-rotated-cw-8bffeabf98"
+      ]
+    },
+    {
+      "confidenceAfter": "SUPPORTED",
+      "confidenceBefore": 3,
+      "conflictIds": [
+        "dim-obs-1110-rotated-cw-8c15e8d4ad",
+        "dim-obs-130-horizontal-513bac1bab",
+        "dim-obs-205-rotated-cw-8bffeabf98",
+        "dim-obs-420-rotated-cw-4b35bb0247",
+        "dim-obs-510-rotated-ccw-ef6844976b",
+        "dim-obs-605-horizontal-4da16e9a36",
+        "dim-obs-805-horizontal-008fc3518b"
+      ],
+      "decision": "CONFIRMED/SUPPORTED",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00328",
+      "objectId": "metric:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "the page vote's 2.680947 cm/px is confirmed by readings that owe nothing to it: 2.680947 cm/px, stated by 3 independent readings on 2 chain(s); a rival scale has 43% of its independent support (SUPPORTED)",
+      "reversible": true,
+      "seq": 328,
+      "stage": "METRIC_RELATION",
+      "supportIds": [
+        "dim-obs-1500-horizontal-a3c6af02bc",
+        "dim-obs-700-horizontal-aaeaa93bab",
+        "dim-obs-800-horizontal-26780891bc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "2.6808x2.659",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00329",
+      "objectId": "registration:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "6 anchors",
+      "reversible": true,
+      "seq": 329,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00330",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c:0.583",
+      "reason": "1 independent reading on 1 chain(s): 210/360 px",
+      "reversible": true,
+      "seq": 330,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-210-horizontal-a4693ba3f9"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00331",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c:0.278",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 100/360 px",
+      "reversible": true,
+      "seq": 331,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-100-horizontal-1df66a34f4"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00332",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c:3.428",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 761/222 px",
+      "reversible": true,
+      "seq": 332,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-761-rotated-cw-ad68e5eed5"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00333",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c:12.186",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 713/59 px, 713/58 px",
+      "reversible": true,
+      "seq": 333,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-713-rotated-cw-508eb0d053",
+        "dim-obs-713-rotated-cw-641aba68d2"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00334",
+      "objectId": "metric:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pa-122944115c",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 334,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00335",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9:0.344",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 114/331 px",
+      "reversible": true,
+      "seq": 335,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-114-horizontal-2b3fb29032"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00336",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9:0.433",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 114/263 px",
+      "reversible": true,
+      "seq": 336,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-114-horizontal-aeadc33278"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00337",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9:0.927",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 114/123 px",
+      "reversible": true,
+      "seq": 337,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-114-horizontal-b47be86925"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00338",
+      "objectId": "metric:frame-asset-projekt-willa-miranda-11-g2-c8409d3300-076f8887d9",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 338,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 3,
+      "conflictIds": [],
+      "decision": "SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00339",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:2.681",
+      "reason": "3 independent readings on 2 chain(s): 1500/559.5 px, 700/261 px, 800/298.5 px",
+      "reversible": true,
+      "seq": 339,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-1500-horizontal-4950e2424b",
+        "dim-obs-700-horizontal-9066a577b4",
+        "dim-obs-800-horizontal-0ff1ba703d"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00340",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:2.11",
+      "reason": "1 independent reading on 1 chain(s): 1110/526 px",
+      "reversible": true,
+      "seq": 340,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-1110-rotated-cw-2fbe868ac2"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00341",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:1.224",
+      "reason": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 33/29 px, 420/343 px",
+      "reversible": true,
+      "seq": 341,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-33-rotated-ccw-ac823ee283",
+        "dim-obs-420-rotated-cw-97196f424f"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00342",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:0.893",
+      "reason": "1 independent reading on 1 chain(s): 130/145.5 px",
+      "reversible": true,
+      "seq": 342,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-130-horizontal-fedadd9509"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00343",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:2.24",
+      "reason": "1 independent reading on 1 chain(s): 205/91.5 px",
+      "reversible": true,
+      "seq": 343,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-205-rotated-cw-381fc17830"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00344",
+      "objectId": "scale:frame-asset-rzut-891a78d924-c2d04897b9:1.974",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 1,5/76 px",
+      "reversible": true,
+      "seq": 344,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-15-rotated-cw-83688abaa4"
+      ]
+    },
+    {
+      "confidenceAfter": "SUPPORTED",
+      "confidenceBefore": 3,
+      "conflictIds": [
+        "dim-obs-1110-rotated-cw-2fbe868ac2",
+        "dim-obs-130-horizontal-fedadd9509",
+        "dim-obs-205-rotated-cw-381fc17830",
+        "dim-obs-420-rotated-cw-97196f424f"
+      ],
+      "decision": "CONFIRMED/SUPPORTED",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00345",
+      "objectId": "metric:frame-asset-rzut-891a78d924-c2d04897b9",
+      "reason": "the page vote's 2.681089 cm/px is confirmed by readings that owe nothing to it: 2.680947 cm/px, stated by 3 independent readings on 2 chain(s); a rival scale has 43% of its independent support (SUPPORTED)",
+      "reversible": true,
+      "seq": 345,
+      "stage": "METRIC_RELATION",
+      "supportIds": [
+        "dim-obs-1500-horizontal-4950e2424b",
+        "dim-obs-700-horizontal-9066a577b4",
+        "dim-obs-800-horizontal-0ff1ba703d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "2.6809x2.6821",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00346",
+      "objectId": "registration:frame-asset-rzut-891a78d924-c2d04897b9",
+      "reason": "6 anchors",
+      "reversible": true,
+      "seq": 346,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00347",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:1.594",
+      "reason": "0 independent readings on 0 chain(s), and 3 not counted (short, or their way up not independent of a scale): 111/69 px, 204/127 px, 210/132.5 px",
+      "reversible": true,
+      "seq": 347,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-0c351c214d",
+        "dim-obs-204-horizontal-a09aeea2f9",
+        "dim-obs-210-rotated-cw-17fc274abc"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00348",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:1.867",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 111/61 px, 210/112 px",
+      "reversible": true,
+      "seq": 348,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-9f522253dd",
+        "dim-obs-210-rotated-cw-c6aa53f176"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00349",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:1.018",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 111/108.5 px, 114/112.5 px",
+      "reversible": true,
+      "seq": 349,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-6c74b4e288",
+        "dim-obs-114-rotated-ccw-bc40afe3ed"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00350",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:2.348",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 204/87.5 px, 210/89.052632 px",
+      "reversible": true,
+      "seq": 350,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-204-horizontal-096d885fde",
+        "dim-obs-210-rotated-cw-33c07fe9b8"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00351",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:3.065",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 204/66.5 px, 210/68.552632 px",
+      "reversible": true,
+      "seq": 351,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-204-horizontal-10ec25b7d1",
+        "dim-obs-210-rotated-cw-42800574cf"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00352",
+      "objectId": "scale:frame-asset-rzut-07b69dcbb8-2088494fef:5.074",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 255/50 px, 540/106.5 px",
+      "reversible": true,
+      "seq": 352,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-255-rotated-cw-23651c579d",
+        "dim-obs-540-rotated-cw-e4e76533a9"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00353",
+      "objectId": "metric:frame-asset-rzut-07b69dcbb8-2088494fef",
+      "reason": "the page vote's 3.433799 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 353,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "3.4537x3.4626",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00354",
+      "objectId": "registration:frame-asset-rzut-07b69dcbb8-2088494fef",
+      "reason": "8 anchors",
+      "reversible": true,
+      "seq": 354,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00355",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:12.21",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 641/52.5 px",
+      "reversible": true,
+      "seq": 355,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-641-rotated-cw-29a92ce666"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00356",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:0.298",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 014/47 px",
+      "reversible": true,
+      "seq": 356,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-014-horizontal-313bacc296"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00357",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:1.886",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 116/61.5 px",
+      "reversible": true,
+      "seq": 357,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-116-horizontal-db028b0672"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00358",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:9.639",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 641/66.5 px",
+      "reversible": true,
+      "seq": 358,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-641-rotated-cw-3524a5aeee"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00359",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:0.157",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 014/89 px",
+      "reversible": true,
+      "seq": 359,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-014-horizontal-fc51070a02"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00360",
+      "objectId": "scale:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2:0.231",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 014/60.5 px",
+      "reversible": true,
+      "seq": 360,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-014-horizontal-7193542ccd"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00361",
+      "objectId": "metric:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2",
+      "reason": "the page vote's 3.505825 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 361,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "3.5259x3.4925",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00362",
+      "objectId": "registration:frame-asset-gotowy-projekt-willa-miranda-11-g2-rzut-pi-e4e00f65e2",
+      "reason": "3 anchors",
+      "reversible": true,
+      "seq": 362,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00363",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:4.442",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 111/23.5 px, 141/32.5 px",
+      "reversible": true,
+      "seq": 363,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-2b41fb526a",
+        "dim-obs-141-horizontal-fa41a1eb88"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00364",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:0.187",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 10/53.5 px",
+      "reversible": true,
+      "seq": 364,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-10-rotated-ccw-672d2852fd"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00365",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:0.146",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 10/68.5 px",
+      "reversible": true,
+      "seq": 365,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-10-rotated-ccw-157c208495"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00366",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:2.707",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 111/41 px",
+      "reversible": true,
+      "seq": 366,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-bd2aa07b98"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00367",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:1.965",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 111/56.5 px",
+      "reversible": true,
+      "seq": 367,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-horizontal-226b3523fd"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00368",
+      "objectId": "scale:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c:12.02",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 613/51 px",
+      "reversible": true,
+      "seq": 368,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-613-horizontal-1785d3b759"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00369",
+      "objectId": "metric:frame-asset-projekt-willa-miranda-11-g2-c5d1ceb07a-ee536bd73c",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 369,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00370",
+      "objectId": "scale:frame-asset-rzut-dac34cc718-1ac18b4545:0.157",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 13/83 px",
+      "reversible": true,
+      "seq": 370,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-13-horizontal-7500c86c27"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00371",
+      "objectId": "metric:frame-asset-rzut-dac34cc718-1ac18b4545",
+      "reason": "the page vote's 1.156729 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 371,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "1.04x1.1617",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00372",
+      "objectId": "registration:frame-asset-rzut-dac34cc718-1ac18b4545",
+      "reason": "3 anchors",
+      "reversible": true,
+      "seq": 372,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00373",
+      "objectId": "selected-plan",
+      "reason": "GROUND DIMENSIONED 853×853 px",
+      "reversible": true,
+      "seq": 373,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [
+        "chain-vertical-375-26285605da"
+      ],
+      "decision": "234.5,84.5,794,610.5",
+      "downstream": [
+        "ENVELOPE",
+        "BODIES"
+      ],
+      "eventId": "e00374",
+      "objectId": "extent:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "DIMENSION_CHAIN_EXTENT/EXTERIOR_CHAIN_TICKS, weak; refused chain-vertical-375-26285605da",
+      "reversible": true,
+      "seq": 374,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:234.5,84.5,794,610.5",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00375",
+      "objectId": "envelope:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "891 of 1088 cells enclosed",
+      "reversible": true,
+      "seq": 375,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "ADOPTED",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00376",
+      "objectId": "outline:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "the outline continues the box's interior past its edge (2 components): the plan is cut on the outline",
+      "reversible": true,
+      "seq": 376,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00377",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:0:FLUSH_ATTACHED",
+      "reason": "21.11 m², junction wall 0.53, side wall 0.53",
+      "reversible": true,
+      "seq": 377,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00378",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:1:UNKNOWN",
+      "reason": "1.31 m², junction wall 0.15, side wall 0.37",
+      "reversible": true,
+      "seq": 378,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00379",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:2:FLUSH_ATTACHED",
+      "reason": "0.13 m², junction wall 0.97, side wall 0.88",
+      "reversible": true,
+      "seq": 379,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00380",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:3:RECESSED_ATTACHED",
+      "reason": "1.31 m², junction wall 0.48, side wall 0.04",
+      "reversible": true,
+      "seq": 380,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00381",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:4:RECESSED_ATTACHED",
+      "reason": "0.9 m², junction wall 0.33, side wall 0.01",
+      "reversible": true,
+      "seq": 381,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00382",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:5:COVERED_TERRACE",
+      "reason": "10.11 m², junction wall 1, side wall 0.12",
+      "reversible": true,
+      "seq": 382,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00383",
+      "objectId": "body:frame-asset-rzut-73ee27c4b6-7102a805c6:6:PROJECTING_WING",
+      "reason": "17.02 m², junction wall 0.48, side wall 0.58",
+      "reversible": true,
+      "seq": 383,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "4",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00384",
+      "objectId": "masses:frame-asset-rzut-73ee27c4b6-7102a805c6",
+      "reason": "234.5,184.4,794,501 | 544.5,501,776,610.5 | 387,84.5,571.5,184.4 | 571.5,121,699,174",
+      "reversible": true,
+      "seq": 384,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "SCORED",
+      "conflictIds": [],
+      "decision": "KEPT",
+      "downstream": [
+        "PLAN_RESOLUTION",
+        "FINAL"
+      ],
+      "eventId": "e00385",
+      "objectId": "challenge",
+      "reason": "its frame was taken from its walls (weak)",
+      "reversible": true,
+      "seq": 385,
+      "stage": "FIRST_SUCCESS_CHALLENGE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "COMPLETED",
+      "downstream": [],
+      "eventId": "e00386",
+      "objectId": "result",
+      "reason": "model 1ce47cfbbdb50393; footprint 161.29 m² against 169.9; first limiting warning LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+      "reversible": false,
+      "seq": 386,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "willa-miranda",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

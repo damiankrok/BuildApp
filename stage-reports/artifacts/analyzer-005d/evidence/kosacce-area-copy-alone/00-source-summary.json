@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 31,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 19,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+  "contentHash": "39820e75f62340bf3224e6af9c7e5dac9f489f437847c5d6cb64736182f16079",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-mf6628752fa61f-56408a0bd9",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 4.02
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 6.49
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 128.16
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 164.47
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 124.14
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 216.91
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 164.47
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 128.16
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 807.96
+    }
+  ],
+  "runId": "kosacce-area-copy-alone"
+}

@@ -1,0 +1,88 @@
+{
+  "boundary": {
+    "accepted": true,
+    "candidates": [
+      {
+        "areaM2": 133.432033,
+        "cells": 768,
+        "gapsBridged": 41,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 4.986288,
+        "perimeterM": 47.790186,
+        "strongOpeningM": 1.481852,
+        "unsupportedM": 12.927118,
+        "wallM": 25.990716,
+        "weakOpeningM": 7.3905
+      },
+      {
+        "areaM2": 166.698026,
+        "cells": 903,
+        "gapsBridged": 41,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 4.986288,
+        "perimeterM": 63.878336,
+        "strongOpeningM": 16.932844,
+        "unsupportedM": 0.439717,
+        "wallM": 39.115275,
+        "weakOpeningM": 7.3905
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 2.511014,
+        "cells": 20,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 18.603879,
+        "cells": 95,
+        "continuesAcrossM": 4.946076
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.130202,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 1.501922,
+        "cells": 11,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 15.521402,
+        "cells": 37,
+        "continuesAcrossM": 5.066712
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 637,
+      "OPENING_SUPPORTED": 37,
+      "TRUE_EXTERIOR_GAP": 180,
+      "UNKNOWN_GAP": 35
+    },
+    "policies": {
+      "disagree": true,
+      "exclusionAccepted": true,
+      "exclusionAreaM2": 165.343993,
+      "strictAccepted": false,
+      "strictAreaM2": 74.648208
+    },
+    "why": "the outline continues the box's interior past its edge (2 components): the plan is cut on the outline"
+  },
+  "cells": {
+    "enclosed": 891,
+    "total": 1088
+  },
+  "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+  "longBandBox": {
+    "x0": 234.5,
+    "x1": 794,
+    "y0": 84.5,
+    "y1": 610.5
+  }
+}

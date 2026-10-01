@@ -1,0 +1,76 @@
+{
+  "boundary": {
+    "accepted": true,
+    "candidates": [
+      {
+        "areaM2": 94.42932,
+        "cells": 414,
+        "gapsBridged": 19,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 3.526938,
+        "perimeterM": 39.6055,
+        "strongOpeningM": 0,
+        "unsupportedM": 9.270796,
+        "wallM": 25.546145,
+        "weakOpeningM": 13.856918
+      },
+      {
+        "areaM2": 89.617843,
+        "cells": 377,
+        "gapsBridged": 19,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 3.526938,
+        "perimeterM": 60.274929,
+        "strongOpeningM": 4.173382,
+        "unsupportedM": 0.524723,
+        "wallM": 41.719906,
+        "weakOpeningM": 13.856918
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 0.71356,
+        "cells": 2,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 5.675288,
+        "cells": 16,
+        "continuesAcrossM": 3.526938
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.718599,
+        "cells": 2,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 301,
+      "OPENING_SUPPORTED": 11,
+      "TRUE_EXTERIOR_GAP": 109,
+      "UNKNOWN_GAP": 35
+    },
+    "policies": {
+      "disagree": true,
+      "exclusionAccepted": true,
+      "exclusionAreaM2": 98.256155,
+      "strictAccepted": false,
+      "strictAreaM2": 69.045528
+    },
+    "why": "the outline continues the box's interior past its edge (1 component): the plan is cut on the outline"
+  },
+  "cells": {
+    "enclosed": 413,
+    "total": 450
+  },
+  "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+  "longBandBox": {
+    "x0": 260,
+    "x1": 792,
+    "y0": 95,
+    "y1": 523.5
+  }
+}

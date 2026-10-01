@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 37,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 25,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+  "contentHash": "02963768a63b99eb20005d533569950aafd52168ffa73e00070662e379553135",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 7
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m84f2903cb8e14-bd72938d69",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.19
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 6.02
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 151.39
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 189.77
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 35.52
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 110.68
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 219.77
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 189.77
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 151.39
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 903.57
+    }
+  ],
+  "runId": "rarytasy-g2e"
+}

@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 34,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 18,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+  "contentHash": "787dca045663163e4bbfc519320f51068c48111a8ed59c16db197a257738cf01",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m49324d69ef143-0279c8ab42",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 8.88
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.75
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 233.46
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 169.9
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 38.02
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 184.21
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 296
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 300.01
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 227.03
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 1145.07
+    }
+  ],
+  "runId": "willa-miranda"
+}

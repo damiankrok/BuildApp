@@ -1,0 +1,76 @@
+{
+  "boundary": {
+    "accepted": false,
+    "candidates": [
+      {
+        "areaM2": 23.835088,
+        "cells": 77,
+        "gapsBridged": 7,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 1.81431,
+        "perimeterM": 19.623195,
+        "strongOpeningM": 5.633912,
+        "unsupportedM": 3.899175,
+        "wallM": 10.090108,
+        "weakOpeningM": 0
+      },
+      {
+        "areaM2": 1.633608,
+        "cells": 19,
+        "gapsBridged": 7,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 1.81431,
+        "perimeterM": 23.424891,
+        "strongOpeningM": 4.710841,
+        "unsupportedM": 0.143235,
+        "wallM": 18.570814,
+        "weakOpeningM": 0
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 0.131709,
+        "cells": 6,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.461806,
+        "cells": 4,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.340798,
+        "cells": 3,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 82,
+      "OPENING_SUPPORTED": 7,
+      "TRUE_EXTERIOR_GAP": 29,
+      "UNKNOWN_GAP": 12
+    },
+    "policies": {
+      "disagree": false,
+      "exclusionAccepted": false,
+      "exclusionAreaM2": 19.616518,
+      "strictAccepted": false,
+      "strictAreaM2": 19.616518
+    },
+    "why": "the outline adds nothing the box leaves open: the box stands"
+  },
+  "cells": {
+    "enclosed": 8,
+    "total": 10
+  },
+  "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+  "longBandBox": {
+    "x0": 230.5,
+    "x1": 508.5,
+    "y0": 168.375,
+    "y1": 507.5
+  }
+}

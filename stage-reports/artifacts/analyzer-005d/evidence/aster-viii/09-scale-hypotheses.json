@@ -1,0 +1,66 @@
+{
+  "confidence": "INCONCLUSIVE",
+  "conflictingObservationIds": [],
+  "final": {
+    "isotropy": "NONE",
+    "x": null,
+    "y": null
+  },
+  "frameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+  "hypotheses": [
+    {
+      "axesMeasured": false,
+      "chains": 0,
+      "cmPerPixel": 2.087379,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 1,
+      "id": "scale-2-087379-db055bbab5",
+      "independentAxes": [],
+      "independentGroups": 0,
+      "independentWeight": 0,
+      "longestShare": 0,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.000018,
+      "substantialWitnesses": 0,
+      "weight": 1.060989,
+      "why": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 215/103 px",
+      "witnessIds": [
+        "dim-obs-215-rotated-cw-7f483fdd4f"
+      ]
+    }
+  ],
+  "legacy": {
+    "correctedAnchors": 0,
+    "independentGroups": 0,
+    "independentWeight": 0,
+    "readAnchors": 0
+  },
+  "relation": "NO_SCALE",
+  "selectedHypothesisId": null,
+  "supportingObservationIds": [],
+  "topology": {
+    "bindings": {
+      "alternative": 0,
+      "ambiguous": 0,
+      "primary": 0,
+      "uncentred": 1
+    },
+    "hierarchy": {
+      "afterCorrection": 0,
+      "agreesAsRead": 0,
+      "conflictsAsRead": 0,
+      "incomplete": 0,
+      "parallelCopies": 10,
+      "totals": 0
+    },
+    "marks": {
+      "questionable": 21,
+      "rejected": 3,
+      "tick": 67
+    },
+    "neutralObservationIds": []
+  },
+  "why": "no scale is stated by any reading that owes nothing to a scale"
+}

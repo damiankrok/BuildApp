@@ -1,0 +1,50 @@
+{
+  "bindingRecorded": true,
+  "frameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+  "legend": {
+    "ALTERNATIVE": "#9a9a9a",
+    "AMBIGUOUS": "#8a2fd1",
+    "PRIMARY": "#1f5fd1",
+    "UNCENTRED": "#c0c0c0"
+  },
+  "observations": [
+    {
+      "alternatives": [
+        {
+          "ratio": 0.766325,
+          "text": "515",
+          "valueCm": 515
+        }
+      ],
+      "chainId": "chain-vertical-426-8007d32447",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-215-rotated-cw-7f483fdd4f",
+      "impliedCmPerPx": 2.087379,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-426-8007d32447:ROTATED_CW:215",
+      "offsetShare": 0.203883,
+      "orientation": "ROTATED_CW",
+      "rawText": "215",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        768,
+        871
+      ],
+      "spanPx": 103,
+      "status": "RAW",
+      "supportIds": [
+        "text-region-438-821-3af08e3a0d"
+      ],
+      "valueCm": 215
+    }
+  ],
+  "omitted": 0,
+  "undecidedOrientationReadings": 0
+}

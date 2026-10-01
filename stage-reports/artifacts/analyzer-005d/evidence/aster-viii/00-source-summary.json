@@ -1,0 +1,77 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.2.0"
+  },
+  "assets": 25,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 1,
+    "PERSPECTIVE_RENDER": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 18
+  },
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/asterVIII",
+  "contentHash": "2d7c2742851a9c7821c97f75b36342fdf4c20b6666224612d5dc172f8689cd54",
+  "failuresByCode": {},
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-www-dobredomy-pl-5e52f50fa8",
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 5.9
+    },
+    {
+      "key": "flat_roof_area",
+      "unit": "m2",
+      "value": 30.8
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 278.3
+    },
+    {
+      "key": "plot_min_depth",
+      "unit": "m",
+      "value": 23.48
+    },
+    {
+      "key": "plot_min_width",
+      "unit": "m",
+      "value": 26.32
+    },
+    {
+      "key": "roof_pitch",
+      "unit": "deg",
+      "value": 30
+    },
+    {
+      "key": "room_count",
+      "unit": "count",
+      "value": 4
+    },
+    {
+      "key": "sloped_roof_area",
+      "unit": "m2",
+      "value": 269
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 172.9
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 640.2
+    }
+  ],
+  "runId": "aster-viii"
+}

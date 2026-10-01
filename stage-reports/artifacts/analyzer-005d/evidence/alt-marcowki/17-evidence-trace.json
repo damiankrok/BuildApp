@@ -1,0 +1,95 @@
+{
+  "frames": [
+    {
+      "chains": [
+        {
+          "chainId": "chain-horizontal-19-c7e859b5b6",
+          "labels": [
+            "label:chain-horizontal-19-c7e859b5b6:INVERTED:101"
+          ],
+          "marks": [
+            "tick:chain-horizontal-19-c7e859b5b6:222",
+            "tick:chain-horizontal-19-c7e859b5b6:516"
+          ],
+          "primary": []
+        },
+        {
+          "chainId": "chain-horizontal-202-35e0e53ef2",
+          "labels": [
+            "label:chain-horizontal-202-35e0e53ef2:INVERTED:101"
+          ],
+          "marks": [
+            "tick:chain-horizontal-202-35e0e53ef2:343",
+            "tick:chain-horizontal-202-35e0e53ef2:418.5",
+            "tick:chain-horizontal-202-35e0e53ef2:439",
+            "tick:chain-horizontal-202-35e0e53ef2:471",
+            "tick:chain-horizontal-202-35e0e53ef2:492"
+          ],
+          "primary": [
+            "dim-obs-101-inverted-17c8586f39"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-32-4b7ca1c610",
+          "labels": [
+            "label:chain-horizontal-32-4b7ca1c610:INVERTED:114"
+          ],
+          "marks": [
+            "tick:chain-horizontal-32-4b7ca1c610:222",
+            "tick:chain-horizontal-32-4b7ca1c610:324",
+            "tick:chain-horizontal-32-4b7ca1c610:421",
+            "tick:chain-horizontal-32-4b7ca1c610:515"
+          ],
+          "primary": [
+            "dim-obs-114-inverted-1db0e760ea"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-187-f46758076d",
+          "labels": [
+            "label:chain-vertical-187-f46758076d:ROTATED_CW:430"
+          ],
+          "marks": [
+            "tick:chain-vertical-187-f46758076d:170",
+            "tick:chain-vertical-187-f46758076d:193.5",
+            "tick:chain-vertical-187-f46758076d:476"
+          ],
+          "primary": [
+            "dim-obs-430-rotated-cw-104e0b58ec"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-201-5a5528727b",
+          "labels": [
+            "label:chain-vertical-201-5a5528727b:ROTATED_CW:140",
+            "label:chain-vertical-201-5a5528727b:ROTATED_CW:40"
+          ],
+          "marks": [
+            "tick:chain-vertical-201-5a5528727b:145.5",
+            "tick:chain-vertical-201-5a5528727b:169",
+            "tick:chain-vertical-201-5a5528727b:183",
+            "tick:chain-vertical-201-5a5528727b:293",
+            "tick:chain-vertical-201-5a5528727b:477",
+            "tick:chain-vertical-201-5a5528727b:500",
+            "tick:chain-vertical-201-5a5528727b:507.5"
+          ],
+          "primary": []
+        }
+      ],
+      "envelope": "envelope:frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "extent": "extent:frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "masses": [
+        "mass-0",
+        "mass-1"
+      ],
+      "registration": "registration:frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "relation": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "selectedHypothesis": null,
+      "witnesses": []
+    }
+  ],
+  "model": null,
+  "runId": "alt-marcowki",
+  "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+}

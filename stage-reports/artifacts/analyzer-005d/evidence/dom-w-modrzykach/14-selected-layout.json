@@ -1,0 +1,330 @@
+{
+  "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 213,
+        "x1": 703,
+        "y0": 113,
+        "y1": 435
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 46,
+        "x1": 213,
+        "y0": 113,
+        "y1": 518
+      }
+    },
+    {
+      "id": "mass-2",
+      "rect": {
+        "x0": 213,
+        "x1": 492,
+        "y0": 435,
+        "y1": 489
+      }
+    }
+  ],
+  "regions": [
+    {
+      "cls": "BUILT",
+      "id": "region-built-6-0",
+      "rect": {
+        "x0": 237.5,
+        "x1": 703,
+        "y0": 113,
+        "y1": 435
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-2-0",
+      "rect": {
+        "x0": 66,
+        "x1": 213,
+        "y0": 113,
+        "y1": 518
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-5-19",
+      "rect": {
+        "x0": 213,
+        "x1": 479,
+        "y0": 435,
+        "y1": 489
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-5-0",
+      "rect": {
+        "x0": 213,
+        "x1": 237.5,
+        "y0": 113,
+        "y1": 324
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-8-22",
+      "rect": {
+        "x0": 337,
+        "x1": 479,
+        "y0": 489,
+        "y1": 506
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-0-10",
+      "rect": {
+        "x0": 46,
+        "x1": 66,
+        "y0": 289,
+        "y1": 409
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-5-14",
+      "rect": {
+        "x0": 213,
+        "x1": 237.5,
+        "y0": 354.5,
+        "y1": 435
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-3-24",
+      "rect": {
+        "x0": 98,
+        "x1": 213,
+        "y0": 518,
+        "y1": 535
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-6-22",
+      "rect": {
+        "x0": 237.5,
+        "x1": 337,
+        "y0": 489,
+        "y1": 506
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-0-0",
+      "rect": {
+        "x0": 46,
+        "x1": 66,
+        "y0": 113,
+        "y1": 186.5
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-25-8",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 264,
+        "y1": 354.5
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-5-12",
+      "rect": {
+        "x0": 213,
+        "x1": 237.5,
+        "y0": 324,
+        "y1": 354.5
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-5-22",
+      "rect": {
+        "x0": 213,
+        "x1": 237.5,
+        "y0": 489,
+        "y1": 518
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-2-24",
+      "rect": {
+        "x0": 66,
+        "x1": 98,
+        "y0": 518,
+        "y1": 535
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-25-4",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 186.5,
+        "y1": 216
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-5-24",
+      "rect": {
+        "x0": 213,
+        "x1": 237.5,
+        "y0": 518,
+        "y1": 535
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-13-19",
+      "rect": {
+        "x0": 479,
+        "x1": 492,
+        "y0": 435,
+        "y1": 462.5
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-25-7",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 243,
+        "y1": 264
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-25-14",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 354.5,
+        "y1": 374.5
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-1-4",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 186.5,
+        "y1": 216
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-1-19",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 435,
+        "y1": 462.5
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-0-4",
+      "rect": {
+        "x0": 46,
+        "x1": 55.5,
+        "y0": 186.5,
+        "y1": 216
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-1-17",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 409,
+        "y1": 435
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-25-3",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 170.5,
+        "y1": 186.5
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-25-5",
+      "rect": {
+        "x0": 703,
+        "x1": 719,
+        "y0": 216,
+        "y1": 232
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-1-5",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 216,
+        "y1": 232
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-13-20",
+      "rect": {
+        "x0": 479,
+        "x1": 492,
+        "y0": 462.5,
+        "y1": 474
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-1-20",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 462.5,
+        "y1": 474
+      }
+    },
+    {
+      "cls": "RECESS",
+      "id": "region-recess-1-9",
+      "rect": {
+        "x0": 55.5,
+        "x1": 66,
+        "y0": 279.5,
+        "y1": 289
+      }
+    }
+  ],
+  "scale": {
+    "anchors": 14,
+    "mppX": 0.027494,
+    "mppY": 0.027486,
+    "rmsM": 0.018618
+  }
+}

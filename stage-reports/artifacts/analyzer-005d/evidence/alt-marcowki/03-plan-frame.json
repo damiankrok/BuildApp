@@ -1,0 +1,42 @@
+{
+  "frames": [
+    {
+      "annotation": "UNKNOWN",
+      "envelope": {
+        "x0": 230.5,
+        "x1": 508.5,
+        "y0": 168.375,
+        "y1": 507.5
+      },
+      "extent": {
+        "x0": 138,
+        "x1": 515.875,
+        "y0": 169,
+        "y1": 518
+      },
+      "extentProvenance": {
+        "x": "WALL_GEOMETRY_EXTENT",
+        "y": "WALL_GEOMETRY_EXTENT"
+      },
+      "extentWeak": true,
+      "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+      "gridLines": {
+        "x": 3,
+        "y": 6
+      },
+      "scale": {
+        "anchors": 4,
+        "mppX": 0.015915,
+        "mppY": 0.015915,
+        "rmsM": 0.007817
+      },
+      "sizePx": {
+        "height": 550,
+        "width": 550
+      },
+      "storey": "GROUND",
+      "wallPx": 11
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02"
+}

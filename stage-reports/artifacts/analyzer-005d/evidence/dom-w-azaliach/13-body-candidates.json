@@ -1,0 +1,66 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 38.855565,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-0",
+      "junctionWallShare": 0.174573,
+      "mouthM": 3.863148,
+      "rect": {
+        "x0": 99.5,
+        "x1": 633,
+        "y0": 172.5,
+        "y1": 485.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.432881
+    },
+    {
+      "areaM2": 0.15523,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-1",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 621,
+        "x1": 633,
+        "y0": 172.5,
+        "y1": 208.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.989589
+    },
+    {
+      "areaM2": 0.163854,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-2",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 621,
+        "x1": 633,
+        "y0": 447.5,
+        "y1": 485.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 1
+    }
+  ],
+  "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 275,
+        "x1": 333.5,
+        "y0": 375,
+        "y1": 420
+      }
+    }
+  ]
+}

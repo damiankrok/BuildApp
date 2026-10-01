@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 20,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+  "contentHash": "753709900c02b84211ee5c6088ef84f9ff2c93a2b4560318ca0fd0e222eef8d0",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m2fa281446a8ca-c0499d9df3",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.8
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.27
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 170.62
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 131.16
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 24.1
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 129.04
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 150.57
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 231.11
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 153.31
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 779.94
+    }
+  ],
+  "runId": "marcowki"
+}

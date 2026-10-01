@@ -1,0 +1,71 @@
+{
+  "frames": [
+    {
+      "chains": [
+        {
+          "chainId": "chain-horizontal-254-8a96a2e1ce",
+          "labels": [
+            "label:chain-horizontal-254-8a96a2e1ce:HORIZONTAL:80"
+          ],
+          "marks": [
+            "tick:chain-horizontal-254-8a96a2e1ce:35",
+            "tick:chain-horizontal-254-8a96a2e1ce:49",
+            "tick:chain-horizontal-254-8a96a2e1ce:65.5",
+            "tick:chain-horizontal-254-8a96a2e1ce:73",
+            "tick:chain-horizontal-254-8a96a2e1ce:85.5",
+            "tick:chain-horizontal-254-8a96a2e1ce:99.5"
+          ],
+          "primary": [
+            "dim-obs-80-horizontal-384f060243"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-340-595d7a453f",
+          "labels": [
+            "label:chain-horizontal-340-595d7a453f:HORIZONTAL:80"
+          ],
+          "marks": [
+            "tick:chain-horizontal-340-595d7a453f:35",
+            "tick:chain-horizontal-340-595d7a453f:50",
+            "tick:chain-horizontal-340-595d7a453f:65.5",
+            "tick:chain-horizontal-340-595d7a453f:73",
+            "tick:chain-horizontal-340-595d7a453f:85.5",
+            "tick:chain-horizontal-340-595d7a453f:99.5"
+          ],
+          "primary": [
+            "dim-obs-80-horizontal-985a1fe93f"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-646-8fa14096d8",
+          "labels": [
+            "label:chain-horizontal-646-8fa14096d8:HORIZONTAL:1055"
+          ],
+          "marks": [
+            "tick:chain-horizontal-646-8fa14096d8:77",
+            "tick:chain-horizontal-646-8fa14096d8:205.5",
+            "tick:chain-horizontal-646-8fa14096d8:633"
+          ],
+          "primary": [
+            "dim-obs-1055-horizontal-c26e77dd9e"
+          ]
+        }
+      ],
+      "envelope": "envelope:frame-asset-rzut-cbf8168d6d-79ba9b7966",
+      "extent": "extent:frame-asset-rzut-cbf8168d6d-79ba9b7966",
+      "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+      "masses": [
+        "mass-0"
+      ],
+      "registration": "registration:frame-asset-rzut-cbf8168d6d-79ba9b7966",
+      "relation": "LEGACY_UNCONFIRMED/WEAK",
+      "selectedHypothesis": "scale-1-897482-88426b9fcc",
+      "witnesses": [
+        "dim-obs-1055-horizontal-c26e77dd9e"
+      ]
+    }
+  ],
+  "model": "2cfcc6e97af3d4b47f18200779fc86923b82297072c0d592dc35b4d7ff67ece0",
+  "runId": "dom-w-azaliach-005c",
+  "selectedPlanFrameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966"
+}

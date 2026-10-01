@@ -1,0 +1,91 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 0.131709,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-0",
+      "junctionWallShare": 1,
+      "rect": {
+        "x0": 508.5,
+        "x1": 515,
+        "y0": 169,
+        "y1": 249
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 1
+    },
+    {
+      "areaM2": 0.07244,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-1",
+      "junctionWallShare": 0.522727,
+      "mouthM": 0.334215,
+      "rect": {
+        "x0": 508.5,
+        "x1": 515,
+        "y0": 249,
+        "y1": 293
+      },
+      "relation": "COVERED_TERRACE",
+      "sideWallShare": 0.289474
+    },
+    {
+      "areaM2": 0.461806,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-2",
+      "junctionWallShare": 1,
+      "rect": {
+        "x0": 222,
+        "x1": 230.5,
+        "y0": 293,
+        "y1": 507.5
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 0.963283
+    },
+    {
+      "areaM2": 0.340798,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-3",
+      "junctionWallShare": 0.835749,
+      "rect": {
+        "x0": 508.5,
+        "x1": 515,
+        "y0": 293,
+        "y1": 500
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 0.779545
+    }
+  ],
+  "frameId": "frame-asset-dom-w-marcowkach-ge-rzut-parteru-d06c513af-7652519f02",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 230.5,
+        "x1": 508.5,
+        "y0": 293,
+        "y1": 507.5
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 329.4375,
+        "x1": 508.5,
+        "y0": 193.5,
+        "y1": 293
+      }
+    }
+  ]
+}

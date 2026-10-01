@@ -1,0 +1,61 @@
+{
+  "frameId": "frame-asset-rzut-94f54ada01-bdf7aa09e8",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 46,
+        "x1": 157.5,
+        "y0": 333,
+        "y1": 703
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 650.5,
+        "x1": 736,
+        "y0": 514,
+        "y1": 703
+      }
+    }
+  ],
+  "regions": [
+    {
+      "cls": "BUILT",
+      "id": "region-built-1-0",
+      "rect": {
+        "x0": 157.5,
+        "x1": 650.5,
+        "y0": 179.5,
+        "y1": 703
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-0-1",
+      "rect": {
+        "x0": 46,
+        "x1": 157.5,
+        "y0": 333,
+        "y1": 703
+      }
+    },
+    {
+      "cls": "BUILT",
+      "id": "region-built-6-3",
+      "rect": {
+        "x0": 650.5,
+        "x1": 736,
+        "y0": 514,
+        "y1": 703
+      }
+    }
+  ],
+  "scale": {
+    "anchors": 7,
+    "mppX": 0.024057,
+    "mppY": 0.024067,
+    "rmsM": 0.007048
+  }
+}

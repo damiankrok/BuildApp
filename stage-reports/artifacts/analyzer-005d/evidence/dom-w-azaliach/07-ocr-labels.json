@@ -1,0 +1,8176 @@
+{
+  "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+  "note": "boxes and readings only; the glyphs themselves are not reproduced",
+  "omitted": 77,
+  "tokens": [
+    {
+      "box": {
+        "x0": 116,
+        "x1": 126,
+        "y0": 219,
+        "y1": 237
+      },
+      "confidence": 0.5859,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2114
+            }
+          ],
+          "char": "0",
+          "score": 0.2991
+        }
+      ],
+      "id": "ocr-0-03414e3723",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "0"
+    },
+    {
+      "box": {
+        "x0": 333,
+        "x1": 346,
+        "y0": 134,
+        "y1": 144
+      },
+      "confidence": 0.516241,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.217
+            },
+            {
+              "char": "4",
+              "score": 0.2164
+            },
+            {
+              "char": "5",
+              "score": 0.2011
+            }
+          ],
+          "char": "/",
+          "score": 0.2315
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2164
+            }
+          ],
+          "char": "0",
+          "score": 0.5226
+        }
+      ],
+      "id": "ocr-0-176fedcfc1",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "/0"
+    },
+    {
+      "box": {
+        "x0": 235,
+        "x1": 263,
+        "y0": 312,
+        "y1": 335
+      },
+      "confidence": 0,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "9",
+              "score": 0.2248
+            },
+            {
+              "char": "5",
+              "score": 0.2233
+            },
+            {
+              "char": "8",
+              "score": 0.22
+            }
+          ],
+          "char": "0",
+          "score": 0.2536
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0
+        }
+      ],
+      "id": "ocr-0-48f234fbcb",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "0-"
+    },
+    {
+      "box": {
+        "x0": 158,
+        "x1": 165,
+        "y0": 194,
+        "y1": 204
+      },
+      "confidence": 0.554833,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "±",
+              "score": 0.224
+            }
+          ],
+          "char": "+",
+          "score": 0.3046
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1431
+        }
+      ],
+      "id": "ocr-0-671e94c95f",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "+0"
+    },
+    {
+      "box": {
+        "x0": 318,
+        "x1": 325,
+        "y0": 440,
+        "y1": 451
+      },
+      "confidence": 0.535421,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1758
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0772
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1371
+        }
+      ],
+      "id": "ocr-0-71c58db5d6",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "/±0"
+    },
+    {
+      "box": {
+        "x0": 141,
+        "x1": 149,
+        "y0": 467,
+        "y1": 483
+      },
+      "confidence": 0.529357,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.165
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1598
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1496
+        }
+      ],
+      "id": "ocr-0-9011bca016",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "0±±"
+    },
+    {
+      "box": {
+        "x0": 44,
+        "x1": 56,
+        "y0": 242,
+        "y1": 251
+      },
+      "confidence": 0.500771,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1379
+        }
+      ],
+      "id": "ocr-0-a91ffb0350",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "0"
+    },
+    {
+      "box": {
+        "x0": 493,
+        "x1": 499,
+        "y0": 550,
+        "y1": 559
+      },
+      "confidence": 0.527868,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1864
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.0555
+        }
+      ],
+      "id": "ocr-0-b55bda0c1f",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "/0"
+    },
+    {
+      "box": {
+        "x0": 44,
+        "x1": 56,
+        "y0": 327,
+        "y1": 337
+      },
+      "confidence": 0.537882,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2581
+            },
+            {
+              "char": "6",
+              "score": 0.2188
+            },
+            {
+              "char": "5",
+              "score": 0.2108
+            }
+          ],
+          "char": "0",
+          "score": 0.5985
+        },
+        {
+          "alternatives": [
+            {
+              "char": "9",
+              "score": 0.2224
+            },
+            {
+              "char": "6",
+              "score": 0.2145
+            }
+          ],
+          "char": "0",
+          "score": 0.2589
+        }
+      ],
+      "id": "ocr-00-54e9c9afd9",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "00"
+    },
+    {
+      "box": {
+        "x0": 43,
+        "x1": 55,
+        "y0": 242,
+        "y1": 251
+      },
+      "confidence": 0.535023,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2633
+            },
+            {
+              "char": "6",
+              "score": 0.2114
+            },
+            {
+              "char": "5",
+              "score": 0.2055
+            }
+          ],
+          "char": "0",
+          "score": 0.4264
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2036
+        }
+      ],
+      "id": "ocr-00-f6fdb33fc0",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "00"
+    },
+    {
+      "box": {
+        "x0": 226,
+        "x1": 261,
+        "y0": 312,
+        "y1": 326
+      },
+      "confidence": 0.630236,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.3235
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.3918
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.0551
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2711
+            },
+            {
+              "char": "6",
+              "score": 0.2698
+            },
+            {
+              "char": "5",
+              "score": 0.224
+            }
+          ],
+          "char": "0",
+          "score": 0.581
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.3086
+        }
+      ],
+      "id": "ocr-000-00902d1647",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "±0.00"
+    },
+    {
+      "box": {
+        "x0": 488,
+        "x1": 505,
+        "y0": 549,
+        "y1": 559
+      },
+      "confidence": 0.569543,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2266
+            }
+          ],
+          "char": "0",
+          "score": 0.5318
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.245
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.231
+            },
+            {
+              "char": "5",
+              "score": 0.2296
+            },
+            {
+              "char": "7",
+              "score": 0.2207
+            }
+          ],
+          "char": "1",
+          "score": 0.3066
+        }
+      ],
+      "id": "ocr-001-3eae83c844",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "001"
+    },
+    {
+      "box": {
+        "x0": 328,
+        "x1": 346,
+        "y0": 120,
+        "y1": 130
+      },
+      "confidence": 0.535967,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.255
+            },
+            {
+              "char": "4",
+              "score": 0.2163
+            },
+            {
+              "char": "6",
+              "score": 0.2104
+            }
+          ],
+          "char": "0",
+          "score": 0.6636
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1784
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.305
+            },
+            {
+              "char": "3",
+              "score": 0.2477
+            }
+          ],
+          "char": "1",
+          "score": 0.4545
+        }
+      ],
+      "id": "ocr-001-4f3e24e196",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "001"
+    },
+    {
+      "box": {
+        "x0": 437,
+        "x1": 461,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.507392,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2445
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2411
+            },
+            {
+              "char": "6",
+              "score": 0.2158
+            }
+          ],
+          "char": "0",
+          "score": 0.6528
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.4534
+            },
+            {
+              "char": "3",
+              "score": 0.4138
+            },
+            {
+              "char": "5",
+              "score": 0.4008
+            }
+          ],
+          "char": "2",
+          "score": 0.467
+        }
+      ],
+      "id": "ocr-002-9f123daa55",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "002"
+    },
+    {
+      "box": {
+        "x0": 117,
+        "x1": 800,
+        "y0": 159,
+        "y1": 507
+      },
+      "confidence": 0.509021,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1302
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2062
+            }
+          ],
+          "char": "0",
+          "score": 0.2256
+        },
+        {
+          "alternatives": [],
+          "char": "8",
+          "score": 0.1991
+        },
+        {
+          "alternatives": [],
+          "char": "9",
+          "score": 0.1918
+        }
+      ],
+      "id": "ocr-0089-ac94b5be91",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "0089"
+    },
+    {
+      "box": {
+        "x0": 284,
+        "x1": 318,
+        "y0": 192,
+        "y1": 279
+      },
+      "confidence": 0.503688,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1781
+        },
+        {
+          "alternatives": [],
+          "char": "°",
+          "score": 0.1464
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1257
+        }
+      ],
+      "id": "ocr-01-4bddc9a327",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "0°1+"
+    },
+    {
+      "box": {
+        "x0": 314,
+        "x1": 339,
+        "y0": 192,
+        "y1": 238
+      },
+      "confidence": 0.604161,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1678
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1479
+        }
+      ],
+      "id": "ocr-01-750b78e3f3",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "01+"
+    },
+    {
+      "box": {
+        "x0": 333,
+        "x1": 346,
+        "y0": 134,
+        "y1": 144
+      },
+      "confidence": 0.501714,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2116
+            }
+          ],
+          "char": "0",
+          "score": 0.5226
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2715
+            },
+            {
+              "char": "7",
+              "score": 0.2617
+            },
+            {
+              "char": "2",
+              "score": 0.2158
+            }
+          ],
+          "char": "1",
+          "score": 0.2733
+        }
+      ],
+      "id": "ocr-01-ca3fd766a8",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "01"
+    },
+    {
+      "box": {
+        "x0": 2,
+        "x1": 18,
+        "y0": 334,
+        "y1": 358
+      },
+      "confidence": 0.566165,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "6",
+              "score": 0.2513
+            },
+            {
+              "char": "8",
+              "score": 0.2105
+            }
+          ],
+          "char": "0",
+          "score": 0.3279
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.3484
+            },
+            {
+              "char": "3",
+              "score": 0.228
+            },
+            {
+              "char": "2",
+              "score": 0.2063
+            }
+          ],
+          "char": "1",
+          "score": 0.5669
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2553
+            },
+            {
+              "char": "8",
+              "score": 0.2235
+            }
+          ],
+          "char": "0",
+          "score": 0.613
+        }
+      ],
+      "id": "ocr-010-867d4167a5",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "010"
+    },
+    {
+      "box": {
+        "x0": 141,
+        "x1": 166,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.517165,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "6",
+              "score": 0.255
+            }
+          ],
+          "char": "0",
+          "score": 0.2973
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2698
+            },
+            {
+              "char": "5",
+              "score": 0.2479
+            },
+            {
+              "char": "7",
+              "score": 0.2283
+            }
+          ],
+          "char": "1",
+          "score": 0.4378
+        },
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.3451
+            },
+            {
+              "char": "5",
+              "score": 0.3423
+            },
+            {
+              "char": "2",
+              "score": 0.2957
+            }
+          ],
+          "char": "3",
+          "score": 0.3697
+        }
+      ],
+      "id": "ocr-013-497d90b39c",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "013"
+    },
+    {
+      "box": {
+        "x0": 3,
+        "x1": 19,
+        "y0": 333,
+        "y1": 357
+      },
+      "confidence": 0.571197,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2698
+            }
+          ],
+          "char": "0",
+          "score": 0.6194
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2192
+            }
+          ],
+          "char": "1",
+          "score": 0.4733
+        },
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.2624
+            },
+            {
+              "char": "9",
+              "score": 0.2141
+            }
+          ],
+          "char": "4",
+          "score": 0.3495
+        }
+      ],
+      "id": "ocr-014-cb4e15c878",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "014"
+    },
+    {
+      "box": {
+        "x0": 329,
+        "x1": 347,
+        "y0": 120,
+        "y1": 144
+      },
+      "confidence": 0.533088,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "9",
+              "score": 0.2367
+            },
+            {
+              "char": "3",
+              "score": 0.2307
+            },
+            {
+              "char": "4",
+              "score": 0.2159
+            }
+          ],
+          "char": "0",
+          "score": 0.2702
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2683
+            },
+            {
+              "char": "3",
+              "score": 0.2403
+            },
+            {
+              "char": "5",
+              "score": 0.2205
+            }
+          ],
+          "char": "9",
+          "score": 0.3322
+        }
+      ],
+      "id": "ocr-019-fcb80c6486",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "019"
+    },
+    {
+      "box": {
+        "x0": 111,
+        "x1": 161,
+        "y0": 391,
+        "y1": 406
+      },
+      "confidence": 0.513522,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.127
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.0744
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2306
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3443
+            },
+            {
+              "char": "5",
+              "score": 0.3261
+            },
+            {
+              "char": "7",
+              "score": 0.2802
+            }
+          ],
+          "char": "2",
+          "score": 0.3634
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3881
+            },
+            {
+              "char": "7",
+              "score": 0.3873
+            },
+            {
+              "char": "5",
+              "score": 0.3652
+            }
+          ],
+          "char": "1",
+          "score": 0.5459
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.0744
+        }
+      ],
+      "id": "ocr-021-69b7b5cf94",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "--021-"
+    },
+    {
+      "box": {
+        "x0": 446,
+        "x1": 453,
+        "y0": 467,
+        "y1": 483
+      },
+      "confidence": 0.506616,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.0946
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1941
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2547
+            },
+            {
+              "char": "7",
+              "score": 0.2197
+            }
+          ],
+          "char": "1",
+          "score": 0.3574
+        },
+        {
+          "alternatives": [],
+          "char": "7",
+          "score": 0.2286
+        }
+      ],
+      "id": "ocr-0217-4c3092a9c7",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "0217"
+    },
+    {
+      "box": {
+        "x0": 378,
+        "x1": 399,
+        "y0": 249,
+        "y1": 260
+      },
+      "confidence": 0.503125,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.0828
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1596
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2849
+            }
+          ],
+          "char": "3",
+          "score": 0.2893
+        }
+      ],
+      "id": "ocr-03-5f1691ac50",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "0±3"
+    },
+    {
+      "box": {
+        "x0": 226,
+        "x1": 261,
+        "y0": 312,
+        "y1": 324
+      },
+      "confidence": 0.506807,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2543
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.5859
+            },
+            {
+              "char": "1",
+              "score": 0.4457
+            },
+            {
+              "char": "7",
+              "score": 0.4195
+            }
+          ],
+          "char": "3",
+          "score": 0.6026
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2327
+            }
+          ],
+          "char": "1",
+          "score": 0.4653
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4848
+            },
+            {
+              "char": "/",
+              "score": 0.4256
+            },
+            {
+              "char": "2",
+              "score": 0.3242
+            }
+          ],
+          "char": "7",
+          "score": 0.5014
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1536
+        }
+      ],
+      "id": "ocr-0317-0bd769aeb2",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "0317+"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 346,
+        "y1": 354
+      },
+      "confidence": 0.500935,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1074
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0379
+        },
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1415
+        }
+      ],
+      "id": "ocr-04-d46a6b41a9",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "04/"
+    },
+    {
+      "box": {
+        "x0": 487,
+        "x1": 506,
+        "y0": 535,
+        "y1": 545
+      },
+      "confidence": 0.506197,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2483
+            },
+            {
+              "char": "4",
+              "score": 0.2385
+            },
+            {
+              "char": "9",
+              "score": 0.2206
+            }
+          ],
+          "char": "0",
+          "score": 0.6035
+        },
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.2924
+            }
+          ],
+          "char": "4",
+          "score": 0.3177
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2793
+            },
+            {
+              "char": "7",
+              "score": 0.229
+            },
+            {
+              "char": "1",
+              "score": 0.2146
+            }
+          ],
+          "char": "2",
+          "score": 0.2863
+        }
+      ],
+      "id": "ocr-042-8deb10dc04",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "042"
+    },
+    {
+      "box": {
+        "x0": 509,
+        "x1": 527,
+        "y0": 134,
+        "y1": 143
+      },
+      "confidence": 0.514514,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2579
+            },
+            {
+              "char": "5",
+              "score": 0.2061
+            }
+          ],
+          "char": "0",
+          "score": 0.4644
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.3431
+            },
+            {
+              "char": "3",
+              "score": 0.3063
+            },
+            {
+              "char": "0",
+              "score": 0.2484
+            }
+          ],
+          "char": "5",
+          "score": 0.3636
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2972
+            },
+            {
+              "char": "3",
+              "score": 0.2714
+            },
+            {
+              "char": "5",
+              "score": 0.2277
+            }
+          ],
+          "char": "2",
+          "score": 0.345
+        }
+      ],
+      "id": "ocr-052-36ce1a4f37",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "052"
+    },
+    {
+      "box": {
+        "x0": 510,
+        "x1": 527,
+        "y0": 121,
+        "y1": 130
+      },
+      "confidence": 0.608845,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2671
+            },
+            {
+              "char": "9",
+              "score": 0.2261
+            }
+          ],
+          "char": "0",
+          "score": 0.4157
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2127
+            },
+            {
+              "char": "8",
+              "score": 0.2119
+            }
+          ],
+          "char": "9",
+          "score": 0.4037
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5825
+        }
+      ],
+      "id": "ocr-091-99eb12edda",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "091"
+    },
+    {
+      "box": {
+        "x0": 283,
+        "x1": 338,
+        "y0": 192,
+        "y1": 211
+      },
+      "confidence": 0.508135,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2775
+            },
+            {
+              "char": "4",
+              "score": 0.2679
+            },
+            {
+              "char": "5",
+              "score": 0.2574
+            }
+          ],
+          "char": "0",
+          "score": 0.4801
+        },
+        {
+          "alternatives": [],
+          "char": "9",
+          "score": 0.134
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1186
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2991
+            },
+            {
+              "char": "2",
+              "score": 0.2742
+            },
+            {
+              "char": "0",
+              "score": 0.2114
+            }
+          ],
+          "char": "1",
+          "score": 0.3268
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2079
+            }
+          ],
+          "char": "3",
+          "score": 0.2676
+        }
+      ],
+      "id": "ocr-09113-8bd271c894",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "09113"
+    },
+    {
+      "box": {
+        "x0": 289,
+        "x1": 314,
+        "y0": 534,
+        "y1": 545
+      },
+      "confidence": 0.519732,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3144
+            },
+            {
+              "char": "3",
+              "score": 0.297
+            },
+            {
+              "char": "/",
+              "score": 0.2951
+            }
+          ],
+          "char": "1",
+          "score": 0.3402
+        }
+      ],
+      "id": "ocr-1-022e68c1dd",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 235,
+        "y1": 240
+      },
+      "confidence": 0.666662,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2517
+            },
+            {
+              "char": "5",
+              "score": 0.2409
+            }
+          ],
+          "char": "1",
+          "score": 0.5034
+        }
+      ],
+      "id": "ocr-1-05c2716ca0",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 592,
+        "x1": 607,
+        "y0": 343,
+        "y1": 352
+      },
+      "confidence": 0.507917,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "°",
+          "score": 0.0355
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.167
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.0343
+        }
+      ],
+      "id": "ocr-1-130bdf1988",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "°1,"
+    },
+    {
+      "box": {
+        "x0": 121,
+        "x1": 133,
+        "y0": 487,
+        "y1": 487
+      },
+      "confidence": 0.604161,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        }
+      ],
+      "id": "ocr-1-1c650eafa9",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 643,
+        "x1": 686,
+        "y0": 733,
+        "y1": 778
+      },
+      "confidence": 0.523066,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.2733
+            },
+            {
+              "char": "5",
+              "score": 0.2596
+            },
+            {
+              "char": "4",
+              "score": 0.2329
+            }
+          ],
+          "char": "1",
+          "score": 0.3067
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2679
+            },
+            {
+              "char": "1",
+              "score": 0.2449
+            },
+            {
+              "char": "3",
+              "score": 0.2349
+            }
+          ],
+          "char": "/",
+          "score": 0.2938
+        }
+      ],
+      "id": "ocr-1-1f14912bf3",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1/"
+    },
+    {
+      "box": {
+        "x0": 637,
+        "x1": 646,
+        "y0": 173,
+        "y1": 184
+      },
+      "confidence": 0.709435,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6251
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2849
+        }
+      ],
+      "id": "ocr-1-23faa90cec",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1+"
+    },
+    {
+      "box": {
+        "x0": 217,
+        "x1": 233,
+        "y0": 447,
+        "y1": 455
+      },
+      "confidence": 0.522379,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.2218
+            }
+          ],
+          "char": "1",
+          "score": 0.2426
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0722
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1241
+        }
+      ],
+      "id": "ocr-1-296ab7ddd5",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1+±"
+    },
+    {
+      "box": {
+        "x0": 117,
+        "x1": 162,
+        "y0": 189,
+        "y1": 200
+      },
+      "confidence": 0.529357,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1643
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.1029
+        }
+      ],
+      "id": "ocr-1-2c423ed030",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1."
+    },
+    {
+      "box": {
+        "x0": 395,
+        "x1": 403,
+        "y0": 486,
+        "y1": 488
+      },
+      "confidence": 0.674061,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2489
+            },
+            {
+              "char": "/",
+              "score": 0.2397
+            },
+            {
+              "char": "5",
+              "score": 0.2004
+            }
+          ],
+          "char": "1",
+          "score": 0.5148
+        }
+      ],
+      "id": "ocr-1-35aae768a6",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 646,
+        "x1": 789,
+        "y0": 311,
+        "y1": 324
+      },
+      "confidence": 0.631818,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5029
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1385
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1134
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1227
+        }
+      ],
+      "id": "ocr-1-3ccf6c5a85",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1±±±±±±±±±±±±±±±±±±±±±±±±±±"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 792,
+        "y0": 425,
+        "y1": 433
+      },
+      "confidence": 0.886207,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5542
+        }
+      ],
+      "id": "ocr-1-3eab8a8b88",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 792,
+        "y0": 385,
+        "y1": 393
+      },
+      "confidence": 0.893615,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6232
+        }
+      ],
+      "id": "ocr-1-4862247b69",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 103,
+        "x1": 110,
+        "y0": 486,
+        "y1": 489
+      },
+      "confidence": 0.585687,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2807
+            },
+            {
+              "char": "5",
+              "score": 0.2421
+            },
+            {
+              "char": "4",
+              "score": 0.2042
+            }
+          ],
+          "char": "1",
+          "score": 0.3968
+        }
+      ],
+      "id": "ocr-1-4bad4ee589",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 646,
+        "x1": 649,
+        "y0": 421,
+        "y1": 429
+      },
+      "confidence": 0.508818,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.4106
+            },
+            {
+              "char": "5",
+              "score": 0.2617
+            }
+          ],
+          "char": "1",
+          "score": 0.4253
+        }
+      ],
+      "id": "ocr-1-535e97d879",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 281,
+        "x1": 289,
+        "y0": 485,
+        "y1": 487
+      },
+      "confidence": 0.689215,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2253
+            },
+            {
+              "char": "7",
+              "score": 0.2096
+            }
+          ],
+          "char": "1",
+          "score": 0.4996
+        }
+      ],
+      "id": "ocr-1-560b5a0209",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 122,
+        "x1": 134,
+        "y0": 486,
+        "y1": 486
+      },
+      "confidence": 0.604161,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        }
+      ],
+      "id": "ocr-1-59f0b98323",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 646,
+        "x1": 649,
+        "y0": 311,
+        "y1": 324
+      },
+      "confidence": 0.781073,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4873
+        }
+      ],
+      "id": "ocr-1-5df2339596",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 786,
+        "x1": 792,
+        "y0": 385,
+        "y1": 393
+      },
+      "confidence": 0.886207,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.2061
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5542
+        }
+      ],
+      "id": "ocr-1-633ebbf4a6",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "±1"
+    },
+    {
+      "box": {
+        "x0": 196,
+        "x1": 202,
+        "y0": 432,
+        "y1": 450
+      },
+      "confidence": 0.5038,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": ".",
+              "score": 0.2524
+            }
+          ],
+          "char": "+",
+          "score": 0.3314
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2873
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.4008
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3623
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1861
+        }
+      ],
+      "id": "ocr-1-633fbe5499",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "++++1"
+    },
+    {
+      "box": {
+        "x0": 637,
+        "x1": 655,
+        "y0": 173,
+        "y1": 185
+      },
+      "confidence": 0.523758,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.08
+        }
+      ],
+      "id": "ocr-1-68ffe71da1",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 788,
+        "x1": 800,
+        "y0": 172,
+        "y1": 225
+      },
+      "confidence": 0.846791,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5574
+        }
+      ],
+      "id": "ocr-1-6d9578289c",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 792,
+        "y0": 425,
+        "y1": 433
+      },
+      "confidence": 0.893615,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6232
+        }
+      ],
+      "id": "ocr-1-7fc2976570",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 437,
+        "x1": 444,
+        "y0": 467,
+        "y1": 483
+      },
+      "confidence": 0.528081,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "-",
+              "score": 0.214
+            }
+          ],
+          "char": ".",
+          "score": 0.2631
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2528
+            },
+            {
+              "char": "5",
+              "score": 0.23
+            },
+            {
+              "char": "/",
+              "score": 0.2278
+            }
+          ],
+          "char": "1",
+          "score": 0.3019
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1202
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0654
+        }
+      ],
+      "id": "ocr-1-86107441d5",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": ".1±+"
+    },
+    {
+      "box": {
+        "x0": 646,
+        "x1": 649,
+        "y0": 421,
+        "y1": 429
+      },
+      "confidence": 0.541559,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2992
+            },
+            {
+              "char": "2",
+              "score": 0.2814
+            },
+            {
+              "char": "6",
+              "score": 0.2071
+            }
+          ],
+          "char": "1",
+          "score": 0.3535
+        }
+      ],
+      "id": "ocr-1-880a6b702e",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 290,
+        "x1": 315,
+        "y0": 533,
+        "y1": 544
+      },
+      "confidence": 0.554429,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.395
+            },
+            {
+              "char": "5",
+              "score": 0.3229
+            },
+            {
+              "char": "7",
+              "score": 0.3012
+            }
+          ],
+          "char": "1",
+          "score": 0.4915
+        }
+      ],
+      "id": "ocr-1-888fa48502",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 550,
+        "x1": 565,
+        "y0": 332,
+        "y1": 340
+      },
+      "confidence": 0.568132,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.244
+            }
+          ],
+          "char": "1",
+          "score": 0.3209
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2177
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1696
+        }
+      ],
+      "id": "ocr-1-89125f9f1a",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1+±"
+    },
+    {
+      "box": {
+        "x0": 357,
+        "x1": 365,
+        "y0": 624,
+        "y1": 639
+      },
+      "confidence": 0.586433,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2084
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.2651
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1718
+        }
+      ],
+      "id": "ocr-1-891ee2b140",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1±±"
+    },
+    {
+      "box": {
+        "x0": 627,
+        "x1": 638,
+        "y0": 122,
+        "y1": 129
+      },
+      "confidence": 0.557269,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2548
+            },
+            {
+              "char": "5",
+              "score": 0.2322
+            }
+          ],
+          "char": "1",
+          "score": 0.3207
+        }
+      ],
+      "id": "ocr-1-969e6729d2",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 817,
+        "x1": 824,
+        "y0": 143,
+        "y1": 152
+      },
+      "confidence": 0.541409,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2033
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2158
+        }
+      ],
+      "id": "ocr-1-ae65d3a856",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1+"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 792,
+        "y0": 275,
+        "y1": 283
+      },
+      "confidence": 0.886207,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5542
+        }
+      ],
+      "id": "ocr-1-bafc2fac09",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 652,
+        "x1": 801,
+        "y0": 216,
+        "y1": 283
+      },
+      "confidence": 0.815728,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.022
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.135
+        }
+      ],
+      "id": "ocr-1-bb43c1ce04",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1-"
+    },
+    {
+      "box": {
+        "x0": 163,
+        "x1": 166,
+        "y0": 296,
+        "y1": 304
+      },
+      "confidence": 0.611588,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3094
+            },
+            {
+              "char": "5",
+              "score": 0.2933
+            },
+            {
+              "char": "7",
+              "score": 0.2399
+            }
+          ],
+          "char": "1",
+          "score": 0.4871
+        }
+      ],
+      "id": "ocr-1-bbc74671b8",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 355,
+        "y1": 363
+      },
+      "confidence": 0.558116,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.3662
+            },
+            {
+              "char": "5",
+              "score": 0.3113
+            },
+            {
+              "char": "3",
+              "score": 0.3033
+            }
+          ],
+          "char": "1",
+          "score": 0.4626
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1313
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1643
+        }
+      ],
+      "id": "ocr-1-c00c25fee6",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1+±"
+    },
+    {
+      "box": {
+        "x0": 146,
+        "x1": 161,
+        "y0": 234,
+        "y1": 239
+      },
+      "confidence": 0.753314,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2066
+            },
+            {
+              "char": "3",
+              "score": 0.2015
+            }
+          ],
+          "char": "1",
+          "score": 0.6308
+        }
+      ],
+      "id": "ocr-1-cbe821f670",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 280,
+        "x1": 288,
+        "y0": 486,
+        "y1": 488
+      },
+      "confidence": 0.674061,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2489
+            },
+            {
+              "char": "/",
+              "score": 0.2397
+            },
+            {
+              "char": "5",
+              "score": 0.2004
+            }
+          ],
+          "char": "1",
+          "score": 0.5148
+        }
+      ],
+      "id": "ocr-1-d20fa8fb3e",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 792,
+        "y0": 275,
+        "y1": 283
+      },
+      "confidence": 0.893615,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6232
+        }
+      ],
+      "id": "ocr-1-d3b5ef9362",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 661,
+        "x1": 667,
+        "y0": 144,
+        "y1": 153
+      },
+      "confidence": 0.528086,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.308
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0821
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.1492
+        }
+      ],
+      "id": "ocr-1-d6ca608ae6",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1±,"
+    },
+    {
+      "box": {
+        "x0": 197,
+        "x1": 203,
+        "y0": 431,
+        "y1": 449
+      },
+      "confidence": 0.605806,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2521
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3596
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2279
+        },
+        {
+          "alternatives": [
+            {
+              "char": "+",
+              "score": 0.2389
+            }
+          ],
+          "char": ".",
+          "score": 0.4238
+        }
+      ],
+      "id": "ocr-1-df75a92b63",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1++."
+    },
+    {
+      "box": {
+        "x0": 572,
+        "x1": 579,
+        "y0": 145,
+        "y1": 151
+      },
+      "confidence": 0.533824,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.2333
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1761
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.5243
+        }
+      ],
+      "id": "ocr-1-ecab6b11b7",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": ".1-"
+    },
+    {
+      "box": {
+        "x0": 377,
+        "x1": 385,
+        "y0": 486,
+        "y1": 488
+      },
+      "confidence": 0.707859,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4445
+        }
+      ],
+      "id": "ocr-1-ecb568f4d8",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 163,
+        "x1": 166,
+        "y0": 296,
+        "y1": 304
+      },
+      "confidence": 0.602355,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3294
+            },
+            {
+              "char": "3",
+              "score": 0.3232
+            },
+            {
+              "char": "7",
+              "score": 0.225
+            }
+          ],
+          "char": "1",
+          "score": 0.499
+        }
+      ],
+      "id": "ocr-1-edb541ccb3",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 378,
+        "x1": 386,
+        "y0": 485,
+        "y1": 487
+      },
+      "confidence": 0.721679,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5134
+        }
+      ],
+      "id": "ocr-1-f0e23c5d1a",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 638,
+        "x1": 660,
+        "y0": 227,
+        "y1": 249
+      },
+      "confidence": 0.561607,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0316
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.3228
+            },
+            {
+              "char": "7",
+              "score": 0.2613
+            },
+            {
+              "char": "5",
+              "score": 0.2328
+            }
+          ],
+          "char": "1",
+          "score": 0.4135
+        }
+      ],
+      "id": "ocr-1-f5649b419e",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "+1"
+    },
+    {
+      "box": {
+        "x0": 396,
+        "x1": 404,
+        "y0": 485,
+        "y1": 487
+      },
+      "confidence": 0.689215,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2253
+            },
+            {
+              "char": "7",
+              "score": 0.2096
+            }
+          ],
+          "char": "1",
+          "score": 0.4996
+        }
+      ],
+      "id": "ocr-1-f9efc86688",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1"
+    },
+    {
+      "box": {
+        "x0": 313,
+        "x1": 338,
+        "y0": 193,
+        "y1": 239
+      },
+      "confidence": 0.514643,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "°",
+          "score": 0.164
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.1678
+        }
+      ],
+      "id": "ocr-10-8636a02f99",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "°10"
+    },
+    {
+      "box": {
+        "x0": 580,
+        "x1": 618,
+        "y0": 734,
+        "y1": 777
+      },
+      "confidence": 0.506531,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.3558
+            },
+            {
+              "char": "5",
+              "score": 0.3233
+            },
+            {
+              "char": "3",
+              "score": 0.2928
+            }
+          ],
+          "char": "1",
+          "score": 0.3652
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2215
+            }
+          ],
+          "char": "0",
+          "score": 0.2368
+        }
+      ],
+      "id": "ocr-10-a3ac0e59f1",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "10"
+    },
+    {
+      "box": {
+        "x0": 488,
+        "x1": 505,
+        "y0": 549,
+        "y1": 559
+      },
+      "confidence": 0.625608,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2033
+            }
+          ],
+          "char": "1",
+          "score": 0.3792
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2802
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2233
+            }
+          ],
+          "char": "0",
+          "score": 0.5541
+        }
+      ],
+      "id": "ocr-100-2d8ca34864",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "100"
+    },
+    {
+      "box": {
+        "x0": 333,
+        "x1": 364,
+        "y0": 623,
+        "y1": 639
+      },
+      "confidence": 0.55738,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6597
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2453
+            },
+            {
+              "char": "8",
+              "score": 0.2438
+            },
+            {
+              "char": "5",
+              "score": 0.2143
+            }
+          ],
+          "char": "0",
+          "score": 0.6798
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3636
+            },
+            {
+              "char": "3",
+              "score": 0.3304
+            },
+            {
+              "char": "0",
+              "score": 0.3235
+            }
+          ],
+          "char": "5",
+          "score": 0.4579
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3966
+            },
+            {
+              "char": "1",
+              "score": 0.3483
+            },
+            {
+              "char": "2",
+              "score": 0.302
+            }
+          ],
+          "char": "5",
+          "score": 0.5552
+        }
+      ],
+      "id": "ocr-1055-f279bbaa63",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1055"
+    },
+    {
+      "box": {
+        "x0": 118,
+        "x1": 150,
+        "y0": 191,
+        "y1": 199
+      },
+      "confidence": 0.638036,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.012
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.3553
+        }
+      ],
+      "id": "ocr-11-28b2d6ca40",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "11"
+    },
+    {
+      "box": {
+        "x0": 192,
+        "x1": 199,
+        "y0": 224,
+        "y1": 240
+      },
+      "confidence": 0.512653,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1335
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2775
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2739
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1733
+        }
+      ],
+      "id": "ocr-11-424f559f2a",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "±11±"
+    },
+    {
+      "box": {
+        "x0": 642,
+        "x1": 685,
+        "y0": 734,
+        "y1": 779
+      },
+      "confidence": 0.529571,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2183
+            }
+          ],
+          "char": "1",
+          "score": 0.3283
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.271
+            },
+            {
+              "char": "3",
+              "score": 0.2021
+            }
+          ],
+          "char": "1",
+          "score": 0.305
+        }
+      ],
+      "id": "ocr-11-46c1c58109",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "11"
+    },
+    {
+      "box": {
+        "x0": 649,
+        "x1": 804,
+        "y0": 120,
+        "y1": 210
+      },
+      "confidence": 0.74876,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5607
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4906
+        }
+      ],
+      "id": "ocr-11-540cf9cd37",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "11"
+    },
+    {
+      "box": {
+        "x0": 353,
+        "x1": 373,
+        "y0": 368,
+        "y1": 388
+      },
+      "confidence": 0.538543,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2353
+            }
+          ],
+          "char": "1",
+          "score": 0.4064
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3192
+            },
+            {
+              "char": "2",
+              "score": 0.2552
+            },
+            {
+              "char": "7",
+              "score": 0.2358
+            }
+          ],
+          "char": "1",
+          "score": 0.3726
+        }
+      ],
+      "id": "ocr-11-775e6b230b",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "11"
+    },
+    {
+      "box": {
+        "x0": 447,
+        "x1": 454,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.545282,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2048
+            }
+          ],
+          "char": "/",
+          "score": 0.255
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.3091
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2508
+            }
+          ],
+          "char": "1",
+          "score": 0.3008
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1911
+        }
+      ],
+      "id": "ocr-11-8320d3f11c",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "/11±"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 367,
+        "y0": 259,
+        "y1": 266
+      },
+      "confidence": 0.509107,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1662
+        },
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1719
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1175
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1546
+        }
+      ],
+      "id": "ocr-11-c0b00c5501",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "1/1±"
+    },
+    {
+      "box": {
+        "x0": 226,
+        "x1": 267,
+        "y0": 278,
+        "y1": 336
+      },
+      "confidence": 0.514321,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.0748
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1905
+        },
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1977
+        }
+      ],
+      "id": "ocr-11-effaf121c2",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "11/"
+    },
+    {
+      "box": {
+        "x0": 673,
+        "x1": 780,
+        "y0": 131,
+        "y1": 182
+      },
+      "confidence": 0.55007,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.0753
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1091
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2282
+            },
+            {
+              "char": "5",
+              "score": 0.2162
+            },
+            {
+              "char": "3",
+              "score": 0.2063
+            }
+          ],
+          "char": "1",
+          "score": 0.4647
+        }
+      ],
+      "id": "ocr-111-55259c28e8",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "111"
+    },
+    {
+      "box": {
+        "x0": 196,
+        "x1": 233,
+        "y0": 430,
+        "y1": 449
+      },
+      "confidence": 0.522806,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4717
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.4067
+            },
+            {
+              "char": "2",
+              "score": 0.357
+            },
+            {
+              "char": "5",
+              "score": 0.352
+            }
+          ],
+          "char": "1",
+          "score": 0.4456
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2404
+            },
+            {
+              "char": "7",
+              "score": 0.202
+            },
+            {
+              "char": "2",
+              "score": 0.2012
+            }
+          ],
+          "char": "1",
+          "score": 0.3742
+        }
+      ],
+      "id": "ocr-111-ad6b95c7bf",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "111"
+    },
+    {
+      "box": {
+        "x0": 112,
+        "x1": 162,
+        "y0": 338,
+        "y1": 406
+      },
+      "confidence": 0.508894,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.3373
+            },
+            {
+              "char": "5",
+              "score": 0.3099
+            },
+            {
+              "char": "3",
+              "score": 0.2447
+            }
+          ],
+          "char": "1",
+          "score": 0.3495
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.151
+        }
+      ],
+      "id": "ocr-1114-c7a69c731b",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "1114"
+    },
+    {
+      "box": {
+        "x0": 690,
+        "x1": 727,
+        "y0": 720,
+        "y1": 777
+      },
+      "confidence": 0.520273,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1928
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2384
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.2193
+        }
+      ],
+      "id": "ocr-113-e2246d68a9",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "113"
+    },
+    {
+      "box": {
+        "x0": 689,
+        "x1": 726,
+        "y0": 721,
+        "y1": 778
+      },
+      "confidence": 0.520537,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2249
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2618
+            },
+            {
+              "char": "5",
+              "score": 0.2416
+            }
+          ],
+          "char": "1",
+          "score": 0.3142
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3082
+            },
+            {
+              "char": "1",
+              "score": 0.279
+            },
+            {
+              "char": "/",
+              "score": 0.266
+            }
+          ],
+          "char": "5",
+          "score": 0.3346
+        }
+      ],
+      "id": "ocr-115-5b7a892a4c",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "115"
+    },
+    {
+      "box": {
+        "x0": 304,
+        "x1": 324,
+        "y0": 441,
+        "y1": 487
+      },
+      "confidence": 0.550137,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.0642
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0861
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4162
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2434
+            },
+            {
+              "char": "3",
+              "score": 0.2315
+            }
+          ],
+          "char": "5",
+          "score": 0.2977
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.263
+            },
+            {
+              "char": "3",
+              "score": 0.2578
+            },
+            {
+              "char": "1",
+              "score": 0.215
+            }
+          ],
+          "char": "5",
+          "score": 0.3441
+        }
+      ],
+      "id": "ocr-1155-b0af06a49e",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "1±155"
+    },
+    {
+      "box": {
+        "x0": 624,
+        "x1": 643,
+        "y0": 733,
+        "y1": 777
+      },
+      "confidence": 0.518998,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2121
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1959
+        },
+        {
+          "alternatives": [],
+          "char": "7",
+          "score": 0.3118
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2813
+        }
+      ],
+      "id": "ocr-117-376ed417d7",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "117+"
+    },
+    {
+      "box": {
+        "x0": 193,
+        "x1": 200,
+        "y0": 223,
+        "y1": 239
+      },
+      "confidence": 0.521542,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2033
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1302
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1906
+        }
+      ],
+      "id": "ocr-12-54e8a8b073",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "12±"
+    },
+    {
+      "box": {
+        "x0": 352,
+        "x1": 367,
+        "y0": 453,
+        "y1": 460
+      },
+      "confidence": 0.538201,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2073
+            },
+            {
+              "char": "/",
+              "score": 0.2025
+            }
+          ],
+          "char": "1",
+          "score": 0.3613
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2981
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1772
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.2204
+        }
+      ],
+      "id": "ocr-12-c0c2470cf3",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1+2±"
+    },
+    {
+      "box": {
+        "x0": 455,
+        "x1": 462,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.512072,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2382
+            }
+          ],
+          "char": "1",
+          "score": 0.25
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1987
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0787
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1814
+        }
+      ],
+      "id": "ocr-1243-2d58b8f52d",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1243"
+    },
+    {
+      "box": {
+        "x0": 2,
+        "x1": 18,
+        "y0": 333,
+        "y1": 340
+      },
+      "confidence": 0.525243,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2752
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1589
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2514
+            },
+            {
+              "char": "1",
+              "score": 0.2506
+            },
+            {
+              "char": "2",
+              "score": 0.2456
+            }
+          ],
+          "char": "7",
+          "score": 0.4335
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1781
+        }
+      ],
+      "id": "ocr-127-08ecaed9cf",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "127±"
+    },
+    {
+      "box": {
+        "x0": 157,
+        "x1": 164,
+        "y0": 199,
+        "y1": 204
+      },
+      "confidence": 0.512347,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.1
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4313
+            },
+            {
+              "char": "/",
+              "score": 0.343
+            },
+            {
+              "char": "5",
+              "score": 0.2984
+            }
+          ],
+          "char": "1",
+          "score": 0.4532
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2697
+            },
+            {
+              "char": "5",
+              "score": 0.264
+            }
+          ],
+          "char": "3",
+          "score": 0.3044
+        }
+      ],
+      "id": "ocr-13-4f69b18f43",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": ".13"
+    },
+    {
+      "box": {
+        "x0": 783,
+        "x1": 800,
+        "y0": 173,
+        "y1": 189
+      },
+      "confidence": 0.508096,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1557
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2714
+            },
+            {
+              "char": "2",
+              "score": 0.2184
+            },
+            {
+              "char": "7",
+              "score": 0.2028
+            }
+          ],
+          "char": "3",
+          "score": 0.2804
+        }
+      ],
+      "id": "ocr-13-730b376f84",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "13"
+    },
+    {
+      "box": {
+        "x0": 550,
+        "x1": 566,
+        "y0": 349,
+        "y1": 357
+      },
+      "confidence": 0.513688,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.106
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1282
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.106
+        }
+      ],
+      "id": "ocr-13-82efc08ca2",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "1±3"
+    },
+    {
+      "box": {
+        "x0": 732,
+        "x1": 777,
+        "y0": 733,
+        "y1": 778
+      },
+      "confidence": 0.52821,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.3419
+            },
+            {
+              "char": "4",
+              "score": 0.2268
+            }
+          ],
+          "char": "1",
+          "score": 0.4177
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3105
+            },
+            {
+              "char": "7",
+              "score": 0.2485
+            },
+            {
+              "char": "5",
+              "score": 0.208
+            }
+          ],
+          "char": "3",
+          "score": 0.3476
+        }
+      ],
+      "id": "ocr-13-9497ca0442",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "13"
+    },
+    {
+      "box": {
+        "x0": 731,
+        "x1": 819,
+        "y0": 733,
+        "y1": 778
+      },
+      "confidence": 0.557269,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.2459
+            },
+            {
+              "char": "4",
+              "score": 0.2231
+            }
+          ],
+          "char": "1",
+          "score": 0.403
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3595
+            },
+            {
+              "char": "7",
+              "score": 0.3349
+            },
+            {
+              "char": "5",
+              "score": 0.2517
+            }
+          ],
+          "char": "3",
+          "score": 0.4525
+        },
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.2331
+            },
+            {
+              "char": "3",
+              "score": 0.2175
+            },
+            {
+              "char": "5",
+              "score": 0.217
+            }
+          ],
+          "char": "1",
+          "score": 0.5026
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2648
+            },
+            {
+              "char": "5",
+              "score": 0.2078
+            }
+          ],
+          "char": "1",
+          "score": 0.3649
+        }
+      ],
+      "id": "ocr-1311-aa66aa3b6a",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "1311"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 338,
+        "y1": 345
+      },
+      "confidence": 0.525505,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1841
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.2198
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2909
+            },
+            {
+              "char": "5",
+              "score": 0.2642
+            },
+            {
+              "char": "7",
+              "score": 0.2208
+            }
+          ],
+          "char": "1",
+          "score": 0.4004
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1936
+        }
+      ],
+      "id": "ocr-1313-517f252a51",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "1313"
+    },
+    {
+      "box": {
+        "x0": 283,
+        "x1": 338,
+        "y0": 192,
+        "y1": 211
+      },
+      "confidence": 0.512553,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.2541
+            },
+            {
+              "char": "5",
+              "score": 0.2399
+            },
+            {
+              "char": "0",
+              "score": 0.2111
+            }
+          ],
+          "char": "1",
+          "score": 0.2815
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.2722
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1186
+        },
+        {
+          "alternatives": [],
+          "char": "9",
+          "score": 0.165
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.3054
+            },
+            {
+              "char": "5",
+              "score": 0.2665
+            },
+            {
+              "char": "3",
+              "score": 0.2448
+            }
+          ],
+          "char": "0",
+          "score": 0.3909
+        }
+      ],
+      "id": "ocr-13190-6d821d945d",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "13190"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 338,
+        "y1": 345
+      },
+      "confidence": 0.52194,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.2218
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2667
+            },
+            {
+              "char": "7",
+              "score": 0.2228
+            }
+          ],
+          "char": "1",
+          "score": 0.5607
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1909
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2128
+            }
+          ],
+          "char": "3",
+          "score": 0.2676
+        }
+      ],
+      "id": "ocr-133-01b22c67a3",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "/133"
+    },
+    {
+      "box": {
+        "x0": 378,
+        "x1": 399,
+        "y0": 249,
+        "y1": 260
+      },
+      "confidence": 0.516352,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2697
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.194
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1566
+        }
+      ],
+      "id": "ocr-133-55db9be40d",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "133"
+    },
+    {
+      "box": {
+        "x0": 2,
+        "x1": 18,
+        "y0": 349,
+        "y1": 357
+      },
+      "confidence": 0.506628,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2347
+        },
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1521
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1498
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1691
+        }
+      ],
+      "id": "ocr-133-82b7f654a4",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "1/33"
+    },
+    {
+      "box": {
+        "x0": 522,
+        "x1": 527,
+        "y0": 135,
+        "y1": 144
+      },
+      "confidence": 0.504211,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2523
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1248
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.212
+            }
+          ],
+          "char": "3",
+          "score": 0.2169
+        }
+      ],
+      "id": "ocr-133-8493a4f912",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "133"
+    },
+    {
+      "box": {
+        "x0": 593,
+        "x1": 608,
+        "y0": 342,
+        "y1": 351
+      },
+      "confidence": 0.508771,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1807
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0033
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.0168
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        }
+      ],
+      "id": "ocr-14-0b41724fb7",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "14.."
+    },
+    {
+      "box": {
+        "x0": 726,
+        "x1": 735,
+        "y0": 130,
+        "y1": 136
+      },
+      "confidence": 0.614637,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5227
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0755
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.1492
+        }
+      ],
+      "id": "ocr-14-1b5163bbad",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "14,"
+    },
+    {
+      "box": {
+        "x0": 806,
+        "x1": 815,
+        "y0": 146,
+        "y1": 155
+      },
+      "confidence": 0.513808,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2143
+            }
+          ],
+          "char": "1",
+          "score": 0.2357
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.154
+        }
+      ],
+      "id": "ocr-14-44ad5b04a2",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 44,
+        "x1": 56,
+        "y0": 328,
+        "y1": 338
+      },
+      "confidence": 0.541023,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5826
+        },
+        {
+          "alternatives": [
+            {
+              "char": "9",
+              "score": 0.2626
+            },
+            {
+              "char": "8",
+              "score": 0.2024
+            }
+          ],
+          "char": "4",
+          "score": 0.3095
+        }
+      ],
+      "id": "ocr-14-4f0cac7a9e",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 650,
+        "x1": 658,
+        "y0": 146,
+        "y1": 155
+      },
+      "confidence": 0.533976,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.2333
+            }
+          ],
+          "char": "1",
+          "score": 0.2673
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.145
+        }
+      ],
+      "id": "ocr-14-668c6fb4fe",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 637,
+        "x1": 646,
+        "y0": 440,
+        "y1": 455
+      },
+      "confidence": 0.53819,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2799
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1157
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.0008
+        }
+      ],
+      "id": "ocr-14-70de093016",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": ".14,"
+    },
+    {
+      "box": {
+        "x0": 570,
+        "x1": 579,
+        "y0": 130,
+        "y1": 136
+      },
+      "confidence": 0.614637,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.5227
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.084
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.1492
+        }
+      ],
+      "id": "ocr-14-7732f7c328",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "14,"
+    },
+    {
+      "box": {
+        "x0": 728,
+        "x1": 736,
+        "y0": 145,
+        "y1": 153
+      },
+      "confidence": 0.562734,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.3289
+            }
+          ],
+          "char": "1",
+          "score": 0.4232
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0476
+        }
+      ],
+      "id": "ocr-14-9f253a9489",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 533,
+        "x1": 565,
+        "y0": 747,
+        "y1": 778
+      },
+      "confidence": 0.725624,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6428
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.156
+        }
+      ],
+      "id": "ocr-14-ab2590eb12",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "14"
+    },
+    {
+      "box": {
+        "x0": 334,
+        "x1": 340,
+        "y0": 134,
+        "y1": 144
+      },
+      "confidence": 0.515799,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.0999
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1419
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.4395
+        }
+      ],
+      "id": "ocr-14-ade3a2e0d1",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "14+"
+    },
+    {
+      "box": {
+        "x0": 454,
+        "x1": 461,
+        "y0": 467,
+        "y1": 483
+      },
+      "confidence": 0.507437,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2591
+            },
+            {
+              "char": "/",
+              "score": 0.2531
+            },
+            {
+              "char": "3",
+              "score": 0.2408
+            }
+          ],
+          "char": "1",
+          "score": 0.4516
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0376
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0867
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1631
+        }
+      ],
+      "id": "ocr-144-1f784509d8",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "144±"
+    },
+    {
+      "box": {
+        "x0": 638,
+        "x1": 647,
+        "y0": 439,
+        "y1": 454
+      },
+      "confidence": 0.53819,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2311
+            },
+            {
+              "char": "3",
+              "score": 0.2155
+            }
+          ],
+          "char": "1",
+          "score": 0.6948
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1223
+        },
+        {
+          "alternatives": [],
+          "char": "7",
+          "score": 0.0858
+        }
+      ],
+      "id": "ocr-147-1d3c3185dd",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": ".147"
+    },
+    {
+      "box": {
+        "x0": 257,
+        "x1": 267,
+        "y0": 277,
+        "y1": 287
+      },
+      "confidence": 0.517617,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2244
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2902
+            },
+            {
+              "char": "7",
+              "score": 0.2864
+            },
+            {
+              "char": "2",
+              "score": 0.2843
+            }
+          ],
+          "char": "5",
+          "score": 0.3114
+        }
+      ],
+      "id": "ocr-15-0ad4c9f0ca",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "15"
+    },
+    {
+      "box": {
+        "x0": 771,
+        "x1": 800,
+        "y0": 217,
+        "y1": 249
+      },
+      "confidence": 0.551203,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2437
+            },
+            {
+              "char": "3",
+              "score": 0.2287
+            },
+            {
+              "char": "5",
+              "score": 0.2264
+            }
+          ],
+          "char": "1",
+          "score": 0.5383
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2869
+            },
+            {
+              "char": "2",
+              "score": 0.2431
+            }
+          ],
+          "char": "5",
+          "score": 0.3524
+        }
+      ],
+      "id": "ocr-15-313db8fea5",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "15"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 367,
+        "y0": 268,
+        "y1": 284
+      },
+      "confidence": 0.50512,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.3446
+            },
+            {
+              "char": "5",
+              "score": 0.3261
+            },
+            {
+              "char": "3",
+              "score": 0.3219
+            }
+          ],
+          "char": "1",
+          "score": 0.3518
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2517
+            },
+            {
+              "char": "3",
+              "score": 0.2503
+            },
+            {
+              "char": "2",
+              "score": 0.2386
+            }
+          ],
+          "char": "5",
+          "score": 0.2995
+        }
+      ],
+      "id": "ocr-15-76f7173883",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "15"
+    },
+    {
+      "box": {
+        "x0": 301,
+        "x1": 326,
+        "y0": 223,
+        "y1": 239
+      },
+      "confidence": 0.506223,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3112
+            },
+            {
+              "char": "7",
+              "score": 0.2916
+            },
+            {
+              "char": "1",
+              "score": 0.2783
+            }
+          ],
+          "char": "/",
+          "score": 0.3191
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.3454
+            },
+            {
+              "char": "3",
+              "score": 0.336
+            },
+            {
+              "char": "5",
+              "score": 0.3307
+            }
+          ],
+          "char": "1",
+          "score": 0.3686
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3185
+            },
+            {
+              "char": "0",
+              "score": 0.2869
+            },
+            {
+              "char": "2",
+              "score": 0.2789
+            }
+          ],
+          "char": "5",
+          "score": 0.3533
+        }
+      ],
+      "id": "ocr-15-a6db621e4a",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "/15"
+    },
+    {
+      "box": {
+        "x0": 339,
+        "x1": 355,
+        "y0": 624,
+        "y1": 640
+      },
+      "confidence": 0.534072,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2902
+            },
+            {
+              "char": "2",
+              "score": 0.2713
+            },
+            {
+              "char": "5",
+              "score": 0.2708
+            }
+          ],
+          "char": "1",
+          "score": 0.4403
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2896
+            },
+            {
+              "char": "2",
+              "score": 0.2547
+            },
+            {
+              "char": "7",
+              "score": 0.2504
+            }
+          ],
+          "char": "5",
+          "score": 0.332
+        }
+      ],
+      "id": "ocr-15-e8a08d45c6",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "15"
+    },
+    {
+      "box": {
+        "x0": 111,
+        "x1": 161,
+        "y0": 391,
+        "y1": 406
+      },
+      "confidence": 0.506059,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.0881
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3793
+            },
+            {
+              "char": "2",
+              "score": 0.3128
+            },
+            {
+              "char": "7",
+              "score": 0.3018
+            }
+          ],
+          "char": "1",
+          "score": 0.5148
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4994
+            },
+            {
+              "char": "2",
+              "score": 0.4905
+            },
+            {
+              "char": "7",
+              "score": 0.425
+            }
+          ],
+          "char": "5",
+          "score": 0.5117
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2555
+            },
+            {
+              "char": "6",
+              "score": 0.2221
+            },
+            {
+              "char": "5",
+              "score": 0.2067
+            }
+          ],
+          "char": "0",
+          "score": 0.596
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.057
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.0463
+        }
+      ],
+      "id": "ocr-150-0535556031",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "-150.-"
+    },
+    {
+      "box": {
+        "x0": 196,
+        "x1": 233,
+        "y0": 430,
+        "y1": 449
+      },
+      "confidence": 0.556628,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2783
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.2648
+            },
+            {
+              "char": "3",
+              "score": 0.2604
+            },
+            {
+              "char": "7",
+              "score": 0.2013
+            }
+          ],
+          "char": "5",
+          "score": 0.3324
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4918
+        }
+      ],
+      "id": "ocr-151-368dea47ad",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "151"
+    },
+    {
+      "box": {
+        "x0": 533,
+        "x1": 685,
+        "y0": 733,
+        "y1": 778
+      },
+      "confidence": 0.508647,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2541
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.1012
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4909
+        },
+        {
+          "alternatives": [],
+          "char": "7",
+          "score": 0.2322
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.1091
+        }
+      ],
+      "id": "ocr-15175-2e26d9a350",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "15175"
+    },
+    {
+      "box": {
+        "x0": 310,
+        "x1": 325,
+        "y0": 458,
+        "y1": 486
+      },
+      "confidence": 0.531404,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "°",
+          "score": 0.1014
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6152
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.3691
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2677
+            },
+            {
+              "char": "3",
+              "score": 0.2443
+            }
+          ],
+          "char": "2",
+          "score": 0.3036
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.3166
+        }
+      ],
+      "id": "ocr-1521-5344225168",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "°1521"
+    },
+    {
+      "box": {
+        "x0": 610,
+        "x1": 801,
+        "y0": 320,
+        "y1": 493
+      },
+      "confidence": 0.511966,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2634
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2845
+            },
+            {
+              "char": "2",
+              "score": 0.2423
+            },
+            {
+              "char": "7",
+              "score": 0.2276
+            }
+          ],
+          "char": "5",
+          "score": 0.2985
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.0065
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.0065
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.0065
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.0065
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.0065
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.1337
+        }
+      ],
+      "id": "ocr-1533333-166d1b420e",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "1533333-"
+    },
+    {
+      "box": {
+        "x0": 45,
+        "x1": 57,
+        "y0": 327,
+        "y1": 337
+      },
+      "confidence": 0.533866,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.578
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2324
+            }
+          ],
+          "char": "6",
+          "score": 0.2661
+        }
+      ],
+      "id": "ocr-16-d38766d73a",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "16"
+    },
+    {
+      "box": {
+        "x0": 510,
+        "x1": 527,
+        "y0": 121,
+        "y1": 130
+      },
+      "confidence": 0.623102,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6035
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2861
+            },
+            {
+              "char": "5",
+              "score": 0.2281
+            }
+          ],
+          "char": "6",
+          "score": 0.4731
+        },
+        {
+          "alternatives": [
+            {
+              "char": "6",
+              "score": 0.2138
+            },
+            {
+              "char": "8",
+              "score": 0.2018
+            }
+          ],
+          "char": "0",
+          "score": 0.3638
+        }
+      ],
+      "id": "ocr-160-46786e7cf1",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "160"
+    },
+    {
+      "box": {
+        "x0": 234,
+        "x1": 262,
+        "y0": 328,
+        "y1": 335
+      },
+      "confidence": 0.588851,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4923
+        },
+        {
+          "alternatives": [],
+          "char": "7",
+          "score": 0.1111
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.2398
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.2939
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.2939
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.2031
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.2031
+        }
+      ],
+      "id": "ocr-17-af8810e68e",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "17-----"
+    },
+    {
+      "box": {
+        "x0": 731,
+        "x1": 776,
+        "y0": 734,
+        "y1": 779
+      },
+      "confidence": 0.549871,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.3068
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2517
+            },
+            {
+              "char": "2",
+              "score": 0.238
+            },
+            {
+              "char": "5",
+              "score": 0.2263
+            }
+          ],
+          "char": "7",
+          "score": 0.3075
+        }
+      ],
+      "id": "ocr-17-e9e409d714",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "17"
+    },
+    {
+      "box": {
+        "x0": 352,
+        "x1": 367,
+        "y0": 436,
+        "y1": 443
+      },
+      "confidence": 0.538221,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.2901
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2515
+            },
+            {
+              "char": "2",
+              "score": 0.2281
+            }
+          ],
+          "char": "7",
+          "score": 0.4167
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2779
+            },
+            {
+              "char": "4",
+              "score": 0.202
+            },
+            {
+              "char": "3",
+              "score": 0.2001
+            }
+          ],
+          "char": "1",
+          "score": 0.3239
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.103
+        }
+      ],
+      "id": "ocr-171-f2b28a6919",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "171±"
+    },
+    {
+      "box": {
+        "x0": 328,
+        "x1": 346,
+        "y0": 120,
+        "y1": 130
+      },
+      "confidence": 0.54258,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "/",
+              "score": 0.28
+            },
+            {
+              "char": "5",
+              "score": 0.2514
+            },
+            {
+              "char": "7",
+              "score": 0.2492
+            }
+          ],
+          "char": "1",
+          "score": 0.52
+        },
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.3158
+            },
+            {
+              "char": "9",
+              "score": 0.2412
+            },
+            {
+              "char": "6",
+              "score": 0.2323
+            }
+          ],
+          "char": "8",
+          "score": 0.3746
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.3324
+        }
+      ],
+      "id": "ocr-180-2da5e6b75f",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "180"
+    },
+    {
+      "box": {
+        "x0": 550,
+        "x1": 565,
+        "y0": 332,
+        "y1": 340
+      },
+      "confidence": 0.602907,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1576
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1633
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1005
+        }
+      ],
+      "id": "ocr-2-034f304d53",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "2+±"
+    },
+    {
+      "box": {
+        "x0": 299,
+        "x1": 311,
+        "y0": 322,
+        "y1": 340
+      },
+      "confidence": 0.568628,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.4265
+            },
+            {
+              "char": "3",
+              "score": 0.4052
+            },
+            {
+              "char": "5",
+              "score": 0.3666
+            }
+          ],
+          "char": "2",
+          "score": 0.5622
+        }
+      ],
+      "id": "ocr-2-1861b47a5b",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "2"
+    },
+    {
+      "box": {
+        "x0": 306,
+        "x1": 323,
+        "y0": 467,
+        "y1": 482
+      },
+      "confidence": 0.500625,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.0911
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0857
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.5215
+            },
+            {
+              "char": "7",
+              "score": 0.4764
+            },
+            {
+              "char": "5",
+              "score": 0.4468
+            }
+          ],
+          "char": "2",
+          "score": 0.616
+        }
+      ],
+      "id": "ocr-2-4ed997a6a5",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": ".±2"
+    },
+    {
+      "box": {
+        "x0": 438,
+        "x1": 445,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.521814,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1787
+        },
+        {
+          "alternatives": [
+            {
+              "char": "±",
+              "score": 0.205
+            }
+          ],
+          "char": "+",
+          "score": 0.2555
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2044
+            }
+          ],
+          "char": "2",
+          "score": 0.2231
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.3689
+        }
+      ],
+      "id": "ocr-2-7a8f497531",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "++2-"
+    },
+    {
+      "box": {
+        "x0": 353,
+        "x1": 363,
+        "y0": 371,
+        "y1": 389
+      },
+      "confidence": 0.504732,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1477
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3778
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0733
+        }
+      ],
+      "id": "ocr-2-9bfd2c1e6e",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "2+±"
+    },
+    {
+      "box": {
+        "x0": 299,
+        "x1": 311,
+        "y0": 322,
+        "y1": 340
+      },
+      "confidence": 0.541814,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3639
+            },
+            {
+              "char": "7",
+              "score": 0.3317
+            },
+            {
+              "char": "5",
+              "score": 0.2639
+            }
+          ],
+          "char": "2",
+          "score": 0.4303
+        }
+      ],
+      "id": "ocr-2-cb646a1012",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "2"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 368,
+        "y0": 444,
+        "y1": 452
+      },
+      "confidence": 0.520153,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1406
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1066
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1281
+        }
+      ],
+      "id": "ocr-2-f452d8bfaf",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "/±2"
+    },
+    {
+      "box": {
+        "x0": 487,
+        "x1": 506,
+        "y0": 535,
+        "y1": 545
+      },
+      "confidence": 0.50824,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4577
+            },
+            {
+              "char": "7",
+              "score": 0.3738
+            },
+            {
+              "char": "1",
+              "score": 0.3669
+            }
+          ],
+          "char": "2",
+          "score": 0.473
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.2586
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2203
+            }
+          ],
+          "char": "0",
+          "score": 0.4818
+        }
+      ],
+      "id": "ocr-200-559e3d1d2f",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": ".200"
+    },
+    {
+      "box": {
+        "x0": 520,
+        "x1": 566,
+        "y0": 731,
+        "y1": 778
+      },
+      "confidence": 0.516257,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.3225
+            },
+            {
+              "char": "0",
+              "score": 0.3191
+            },
+            {
+              "char": "5",
+              "score": 0.316
+            }
+          ],
+          "char": "2",
+          "score": 0.3442
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2099
+            }
+          ],
+          "char": "1",
+          "score": 0.263
+        }
+      ],
+      "id": "ocr-21-bc9baf0ca3",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "21"
+    },
+    {
+      "box": {
+        "x0": 340,
+        "x1": 356,
+        "y0": 623,
+        "y1": 639
+      },
+      "confidence": 0.516029,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3282
+            },
+            {
+              "char": "3",
+              "score": 0.2754
+            },
+            {
+              "char": "7",
+              "score": 0.2292
+            }
+          ],
+          "char": "2",
+          "score": 0.3499
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.406
+            },
+            {
+              "char": "7",
+              "score": 0.3697
+            },
+            {
+              "char": "5",
+              "score": 0.2671
+            }
+          ],
+          "char": "1",
+          "score": 0.4495
+        }
+      ],
+      "id": "ocr-21-e57aaae583",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "21"
+    },
+    {
+      "box": {
+        "x0": 217,
+        "x1": 233,
+        "y0": 431,
+        "y1": 456
+      },
+      "confidence": 0.50294,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4638
+            },
+            {
+              "char": "5",
+              "score": 0.427
+            },
+            {
+              "char": "1",
+              "score": 0.4079
+            }
+          ],
+          "char": "2",
+          "score": 0.5473
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6181
+        },
+        {
+          "alternatives": [
+            {
+              "char": "6",
+              "score": 0.3226
+            },
+            {
+              "char": "8",
+              "score": 0.2462
+            }
+          ],
+          "char": "0",
+          "score": 0.3264
+        }
+      ],
+      "id": "ocr-210-ed92eb8733",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "210"
+    },
+    {
+      "box": {
+        "x0": 2,
+        "x1": 18,
+        "y0": 333,
+        "y1": 340
+      },
+      "confidence": 0.601746,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.3096
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1615
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.0921
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.188
+        }
+      ],
+      "id": "ocr-215-a7c4bc7eae",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "/215"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 367,
+        "y0": 260,
+        "y1": 285
+      },
+      "confidence": 0.543598,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4523
+            },
+            {
+              "char": "1",
+              "score": 0.3977
+            },
+            {
+              "char": "5",
+              "score": 0.3828
+            }
+          ],
+          "char": "2",
+          "score": 0.5387
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4176
+            },
+            {
+              "char": "1",
+              "score": 0.3833
+            },
+            {
+              "char": "5",
+              "score": 0.3748
+            }
+          ],
+          "char": "2",
+          "score": 0.5342
+        },
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.3044
+            },
+            {
+              "char": "8",
+              "score": 0.256
+            }
+          ],
+          "char": "6",
+          "score": 0.3705
+        }
+      ],
+      "id": "ocr-226-8384a958da",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "226"
+    },
+    {
+      "box": {
+        "x0": 160,
+        "x1": 167,
+        "y0": 466,
+        "y1": 482
+      },
+      "confidence": 0.522005,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2816
+            },
+            {
+              "char": "7",
+              "score": 0.2542
+            }
+          ],
+          "char": "/",
+          "score": 0.3692
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1987
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3672
+            },
+            {
+              "char": "7",
+              "score": 0.3237
+            },
+            {
+              "char": "5",
+              "score": 0.2462
+            }
+          ],
+          "char": "3",
+          "score": 0.4166
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1358
+        }
+      ],
+      "id": "ocr-23-5dd8eb5ec3",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "/23±"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 367,
+        "y0": 268,
+        "y1": 284
+      },
+      "confidence": 0.537104,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2239
+            },
+            {
+              "char": "7",
+              "score": 0.217
+            },
+            {
+              "char": "3",
+              "score": 0.214
+            }
+          ],
+          "char": "2",
+          "score": 0.3136
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3232
+            },
+            {
+              "char": "7",
+              "score": 0.2988
+            },
+            {
+              "char": "2",
+              "score": 0.2915
+            }
+          ],
+          "char": "3",
+          "score": 0.3751
+        }
+      ],
+      "id": "ocr-23-9385df2205",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "23"
+    },
+    {
+      "box": {
+        "x0": 550,
+        "x1": 566,
+        "y0": 341,
+        "y1": 348
+      },
+      "confidence": 0.503299,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.254
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.287
+            },
+            {
+              "char": "3",
+              "score": 0.2628
+            },
+            {
+              "char": "1",
+              "score": 0.2348
+            }
+          ],
+          "char": "2",
+          "score": 0.3284
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1844
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.2811
+        }
+      ],
+      "id": "ocr-23-b3a58dc6f4",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "/23±"
+    },
+    {
+      "box": {
+        "x0": 509,
+        "x1": 527,
+        "y0": 134,
+        "y1": 143
+      },
+      "confidence": 0.504801,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.4191
+            },
+            {
+              "char": "3",
+              "score": 0.3891
+            },
+            {
+              "char": "5",
+              "score": 0.3306
+            }
+          ],
+          "char": "2",
+          "score": 0.5928
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.5
+            },
+            {
+              "char": "2",
+              "score": 0.3762
+            },
+            {
+              "char": "7",
+              "score": 0.3592
+            }
+          ],
+          "char": "3",
+          "score": 0.5096
+        },
+        {
+          "alternatives": [
+            {
+              "char": "8",
+              "score": 0.2579
+            },
+            {
+              "char": "5",
+              "score": 0.2061
+            }
+          ],
+          "char": "0",
+          "score": 0.4644
+        }
+      ],
+      "id": "ocr-230-c252dd64dc",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "230"
+    },
+    {
+      "box": {
+        "x0": 304,
+        "x1": 324,
+        "y0": 440,
+        "y1": 453
+      },
+      "confidence": 0.503591,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.389
+            },
+            {
+              "char": "1",
+              "score": 0.3149
+            },
+            {
+              "char": "7",
+              "score": 0.2836
+            }
+          ],
+          "char": "2",
+          "score": 0.3947
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.1601
+        }
+      ],
+      "id": "ocr-25-86d75669f3",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "25"
+    },
+    {
+      "box": {
+        "x0": 781,
+        "x1": 800,
+        "y0": 456,
+        "y1": 508
+      },
+      "confidence": 0.517114,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.2214
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3706
+            },
+            {
+              "char": "3",
+              "score": 0.3265
+            },
+            {
+              "char": "2",
+              "score": 0.3258
+            }
+          ],
+          "char": "5",
+          "score": 0.3969
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0162
+        }
+      ],
+      "id": "ocr-25-9f77124396",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "2±±±±±5±"
+    },
+    {
+      "box": {
+        "x0": 104,
+        "x1": 111,
+        "y0": 485,
+        "y1": 488
+      },
+      "confidence": 0.507615,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3976
+            },
+            {
+              "char": "7",
+              "score": 0.3816
+            },
+            {
+              "char": "5",
+              "score": 0.3739
+            }
+          ],
+          "char": "3",
+          "score": 0.4099
+        }
+      ],
+      "id": "ocr-3-05dd23c907",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "3"
+    },
+    {
+      "box": {
+        "x0": 116,
+        "x1": 126,
+        "y0": 220,
+        "y1": 238
+      },
+      "confidence": 0.513726,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.1743
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1638
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.143
+        }
+      ],
+      "id": "ocr-3-c60e4daafc",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "/3+"
+    },
+    {
+      "box": {
+        "x0": 805,
+        "x1": 814,
+        "y0": 147,
+        "y1": 156
+      },
+      "confidence": 0.500219,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2132
+            }
+          ],
+          "char": "/",
+          "score": 0.2134
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3072
+            },
+            {
+              "char": "/",
+              "score": 0.2636
+            },
+            {
+              "char": "1",
+              "score": 0.2583
+            }
+          ],
+          "char": "3",
+          "score": 0.3095
+        }
+      ],
+      "id": "ocr-3-dbb1047b89",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "/3"
+    },
+    {
+      "box": {
+        "x0": 791,
+        "x1": 800,
+        "y0": 436,
+        "y1": 454
+      },
+      "confidence": 0.500628,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.5475
+            },
+            {
+              "char": "1",
+              "score": 0.4829
+            },
+            {
+              "char": "2",
+              "score": 0.3776
+            }
+          ],
+          "char": "3",
+          "score": 0.5489
+        },
+        {
+          "alternatives": [],
+          "char": "0",
+          "score": 0.0688
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2173
+            }
+          ],
+          "char": "2",
+          "score": 0.221
+        }
+      ],
+      "id": "ocr-302-60ad062303",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "302"
+    },
+    {
+      "box": {
+        "x0": 551,
+        "x1": 567,
+        "y0": 332,
+        "y1": 357
+      },
+      "confidence": 0.513427,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.3635
+            },
+            {
+              "char": "2",
+              "score": 0.3366
+            },
+            {
+              "char": "5",
+              "score": 0.2845
+            }
+          ],
+          "char": "3",
+          "score": 0.4025
+        },
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2223
+            },
+            {
+              "char": "9",
+              "score": 0.2221
+            },
+            {
+              "char": "3",
+              "score": 0.2161
+            }
+          ],
+          "char": "0",
+          "score": 0.3359
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.4112
+            },
+            {
+              "char": "1",
+              "score": 0.3737
+            },
+            {
+              "char": "2",
+              "score": 0.3113
+            }
+          ],
+          "char": "5",
+          "score": 0.4339
+        }
+      ],
+      "id": "ocr-305-f972248658",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "305"
+    },
+    {
+      "box": {
+        "x0": 704,
+        "x1": 744,
+        "y0": 130,
+        "y1": 160
+      },
+      "confidence": 0.506976,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2915
+            },
+            {
+              "char": "2",
+              "score": 0.2719
+            },
+            {
+              "char": "1",
+              "score": 0.206
+            }
+          ],
+          "char": "3",
+          "score": 0.2998
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        }
+      ],
+      "id": "ocr-31-170371a29f",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "31"
+    },
+    {
+      "box": {
+        "x0": 509,
+        "x1": 514,
+        "y0": 135,
+        "y1": 144
+      },
+      "confidence": 0.500595,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.3536
+            },
+            {
+              "char": "7",
+              "score": 0.3515
+            },
+            {
+              "char": "5",
+              "score": 0.3439
+            }
+          ],
+          "char": "3",
+          "score": 0.3544
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0885
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3021
+            }
+          ],
+          "char": "3",
+          "score": 0.3091
+        }
+      ],
+      "id": "ocr-33-17398ec2b2",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "3+3"
+    },
+    {
+      "box": {
+        "x0": 788,
+        "x1": 800,
+        "y0": 172,
+        "y1": 183
+      },
+      "confidence": 0.511855,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.2044
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1699
+        }
+      ],
+      "id": "ocr-33-b3bfee42d5",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "33"
+    },
+    {
+      "box": {
+        "x0": 351,
+        "x1": 367,
+        "y0": 259,
+        "y1": 266
+      },
+      "confidence": 0.507162,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.2036
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2256
+            },
+            {
+              "char": "2",
+              "score": 0.2018
+            }
+          ],
+          "char": "3",
+          "score": 0.2747
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.388
+            },
+            {
+              "char": "5",
+              "score": 0.3285
+            },
+            {
+              "char": "7",
+              "score": 0.2317
+            }
+          ],
+          "char": "3",
+          "score": 0.3992
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1178
+        }
+      ],
+      "id": "ocr-331-249131d340",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "/331"
+    },
+    {
+      "box": {
+        "x0": 352,
+        "x1": 367,
+        "y0": 436,
+        "y1": 443
+      },
+      "confidence": 0.500105,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.2292
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1683
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2366
+            }
+          ],
+          "char": "3",
+          "score": 0.2412
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.2162
+            },
+            {
+              "char": "1",
+              "score": 0.2064
+            }
+          ],
+          "char": "3",
+          "score": 0.2719
+        }
+      ],
+      "id": "ocr-333-8ce6cf9bf9",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "/333"
+    },
+    {
+      "box": {
+        "x0": 2,
+        "x1": 17,
+        "y0": 340,
+        "y1": 348
+      },
+      "confidence": 0.514002,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.2222
+            },
+            {
+              "char": "/",
+              "score": 0.2152
+            },
+            {
+              "char": "5",
+              "score": 0.2122
+            }
+          ],
+          "char": "3",
+          "score": 0.235
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0364
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.115
+        }
+      ],
+      "id": "ocr-343-c3625c6294",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "343"
+    },
+    {
+      "box": {
+        "x0": 306,
+        "x1": 323,
+        "y0": 467,
+        "y1": 482
+      },
+      "confidence": 0.545994,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.388
+            },
+            {
+              "char": "5",
+              "score": 0.37
+            },
+            {
+              "char": "7",
+              "score": 0.3452
+            }
+          ],
+          "char": "3",
+          "score": 0.4667
+        },
+        {
+          "alternatives": [],
+          "char": "5",
+          "score": 0.1194
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.8333
+        }
+      ],
+      "id": "ocr-35-18681712df",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "35."
+    },
+    {
+      "box": {
+        "x0": 781,
+        "x1": 819,
+        "y0": 734,
+        "y1": 778
+      },
+      "confidence": 0.51333,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.261
+            },
+            {
+              "char": "1",
+              "score": 0.2267
+            }
+          ],
+          "char": "3",
+          "score": 0.3411
+        },
+        {
+          "alternatives": [
+            {
+              "char": "3",
+              "score": 0.2457
+            }
+          ],
+          "char": "7",
+          "score": 0.2591
+        }
+      ],
+      "id": "ocr-37-020672d0a9",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "37"
+    },
+    {
+      "box": {
+        "x0": 583,
+        "x1": 591,
+        "y0": 354,
+        "y1": 364
+      },
+      "confidence": 0.63599,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.106
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0586
+        }
+      ],
+      "id": "ocr-4-156447be17",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "+4"
+    },
+    {
+      "box": {
+        "x0": 217,
+        "x1": 233,
+        "y0": 447,
+        "y1": 455
+      },
+      "confidence": 0.503605,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1182
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0722
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1045
+        }
+      ],
+      "id": "ocr-4-1587ebcc86",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "4+±"
+    },
+    {
+      "box": {
+        "x0": 157,
+        "x1": 164,
+        "y0": 195,
+        "y1": 205
+      },
+      "confidence": 0.545796,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.166
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1487
+        }
+      ],
+      "id": "ocr-4-2259ce5724",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "4+"
+    },
+    {
+      "box": {
+        "x0": 445,
+        "x1": 454,
+        "y0": 400,
+        "y1": 409
+      },
+      "confidence": 0.527181,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0708
+        }
+      ],
+      "id": "ocr-4-48dd97f9fe",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": ".4"
+    },
+    {
+      "box": {
+        "x0": 784,
+        "x1": 795,
+        "y0": 120,
+        "y1": 128
+      },
+      "confidence": 0.543775,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.223
+            },
+            {
+              "char": "5",
+              "score": 0.2125
+            }
+          ],
+          "char": "4",
+          "score": 0.2657
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.121
+        }
+      ],
+      "id": "ocr-4-51724523a0",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "4±"
+    },
+    {
+      "box": {
+        "x0": 445,
+        "x1": 454,
+        "y0": 400,
+        "y1": 409
+      },
+      "confidence": 0.622665,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0666
+        }
+      ],
+      "id": "ocr-4-5da2c55c35",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": ".4"
+    },
+    {
+      "box": {
+        "x0": 145,
+        "x1": 160,
+        "y0": 355,
+        "y1": 363
+      },
+      "confidence": 0.515321,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0895
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.2435
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0806
+        }
+      ],
+      "id": "ocr-4-6deaf0fbb4",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "±+4"
+    },
+    {
+      "box": {
+        "x0": 488,
+        "x1": 494,
+        "y0": 535,
+        "y1": 545
+      },
+      "confidence": 0.610928,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.2363
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1191
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0959
+        }
+      ],
+      "id": "ocr-4-7307fc3744",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "4+±"
+    },
+    {
+      "box": {
+        "x0": 816,
+        "x1": 823,
+        "y0": 144,
+        "y1": 153
+      },
+      "confidence": 0.604244,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1449
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0821
+        }
+      ],
+      "id": "ocr-4-74d487ee04",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "±4"
+    },
+    {
+      "box": {
+        "x0": 175,
+        "x1": 183,
+        "y0": 223,
+        "y1": 238
+      },
+      "confidence": 0.515321,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0895
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0916
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0649
+        }
+      ],
+      "id": "ocr-4-8b9336a527",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "±+4"
+    },
+    {
+      "box": {
+        "x0": 174,
+        "x1": 182,
+        "y0": 224,
+        "y1": 239
+      },
+      "confidence": 0.566952,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.058
+        },
+        {
+          "alternatives": [],
+          "char": ",",
+          "score": 0.1607
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1721
+        }
+      ],
+      "id": "ocr-4-905a00063e",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "4,±"
+    },
+    {
+      "box": {
+        "x0": 354,
+        "x1": 364,
+        "y0": 370,
+        "y1": 388
+      },
+      "confidence": 0.53819,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.3114
+            },
+            {
+              "char": "1",
+              "score": 0.2999
+            },
+            {
+              "char": "3",
+              "score": 0.2528
+            }
+          ],
+          "char": "/",
+          "score": 0.3821
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0363
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.1581
+        },
+        {
+          "alternatives": [],
+          "char": ".",
+          "score": 0.05
+        }
+      ],
+      "id": "ocr-4-9e5b325b56",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "/4+."
+    },
+    {
+      "box": {
+        "x0": 638,
+        "x1": 651,
+        "y0": 497,
+        "y1": 507
+      },
+      "confidence": 0.569827,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0293
+        }
+      ],
+      "id": "ocr-4-aea578b0af",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "4"
+    },
+    {
+      "box": {
+        "x0": 784,
+        "x1": 795,
+        "y0": 120,
+        "y1": 128
+      },
+      "confidence": 0.565661,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1375
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0719
+        }
+      ],
+      "id": "ocr-4-cb152997ca",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "±4"
+    },
+    {
+      "box": {
+        "x0": 234,
+        "x1": 262,
+        "y0": 323,
+        "y1": 335
+      },
+      "confidence": 0.533143,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.3329
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.0464
+        },
+        {
+          "alternatives": [],
+          "char": "°",
+          "score": 0.023
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.2224
+        }
+      ],
+      "id": "ocr-4-edf640bd5f",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "-±°4"
+    },
+    {
+      "box": {
+        "x0": 494,
+        "x1": 500,
+        "y0": 549,
+        "y1": 558
+      },
+      "confidence": 0.54986,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1209
+        },
+        {
+          "alternatives": [],
+          "char": "±",
+          "score": 0.1163
+        }
+      ],
+      "id": "ocr-4-ef667ad989",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "4±"
+    },
+    {
+      "box": {
+        "x0": 580,
+        "x1": 592,
+        "y0": 353,
+        "y1": 372
+      },
+      "confidence": 0.559899,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1031
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0134
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0151
+        },
+        {
+          "alternatives": [],
+          "char": "-",
+          "score": 0.0117
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0259
+        }
+      ],
+      "id": "ocr-4-ef84c0ac2e",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "4++-+"
+    },
+    {
+      "box": {
+        "x0": 116,
+        "x1": 126,
+        "y0": 219,
+        "y1": 237
+      },
+      "confidence": 0.507308,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "0",
+              "score": 0.3023
+            }
+          ],
+          "char": "4",
+          "score": 0.3112
+        }
+      ],
+      "id": "ocr-4-f554b164ed",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "4"
+    },
+    {
+      "box": {
+        "x0": 570,
+        "x1": 579,
+        "y0": 130,
+        "y1": 136
+      },
+      "confidence": 0.707892,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3187
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1172
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4458
+        }
+      ],
+      "id": "ocr-41-0bfe538636",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "+41"
+    },
+    {
+      "box": {
+        "x0": 660,
+        "x1": 666,
+        "y0": 145,
+        "y1": 154
+      },
+      "confidence": 0.686457,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3187
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1335
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.3106
+        }
+      ],
+      "id": "ocr-41-130d9b02c6",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "+41"
+    },
+    {
+      "box": {
+        "x0": 726,
+        "x1": 735,
+        "y0": 130,
+        "y1": 136
+      },
+      "confidence": 0.707892,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.3187
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0761
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.4458
+        }
+      ],
+      "id": "ocr-41-780ee28f56",
+      "nearChain": true,
+      "orientation": "INVERTED",
+      "pageVote": "DISCARDED",
+      "text": "+41"
+    },
+    {
+      "box": {
+        "x0": 638,
+        "x1": 647,
+        "y0": 173,
+        "y1": 184
+      },
+      "confidence": 0.573358,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1521
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2223
+            }
+          ],
+          "char": "1",
+          "score": 0.2987
+        }
+      ],
+      "id": "ocr-41-864c3eb837",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "41"
+    },
+    {
+      "box": {
+        "x0": 111,
+        "x1": 161,
+        "y0": 339,
+        "y1": 407
+      },
+      "confidence": 0.503352,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1465
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.1124
+        },
+        {
+          "alternatives": [
+            {
+              "char": "5",
+              "score": 0.3028
+            },
+            {
+              "char": "3",
+              "score": 0.2782
+            },
+            {
+              "char": "2",
+              "score": 0.2264
+            }
+          ],
+          "char": "1",
+          "score": 0.3069
+        }
+      ],
+      "id": "ocr-4111-a7b1672b7b",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "4111"
+    },
+    {
+      "box": {
+        "x0": 218,
+        "x1": 234,
+        "y0": 430,
+        "y1": 455
+      },
+      "confidence": 0.518894,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "9",
+              "score": 0.3321
+            },
+            {
+              "char": "0",
+              "score": 0.3053
+            },
+            {
+              "char": "8",
+              "score": 0.2302
+            }
+          ],
+          "char": "4",
+          "score": 0.476
+        },
+        {
+          "alternatives": [],
+          "char": "1",
+          "score": 0.6541
+        },
+        {
+          "alternatives": [
+            {
+              "char": "2",
+              "score": 0.4015
+            },
+            {
+              "char": "3",
+              "score": 0.37
+            },
+            {
+              "char": "1",
+              "score": 0.3275
+            }
+          ],
+          "char": "7",
+          "score": 0.4331
+        }
+      ],
+      "id": "ocr-417-c52fd17df5",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "KEPT",
+      "text": "417"
+    },
+    {
+      "box": {
+        "x0": 637,
+        "x1": 650,
+        "y0": 497,
+        "y1": 507
+      },
+      "confidence": 0.557405,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1708
+        },
+        {
+          "alternatives": [],
+          "char": "2",
+          "score": 0.1038
+        }
+      ],
+      "id": "ocr-42-774c8a0778",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "KEPT",
+      "text": "42"
+    },
+    {
+      "box": {
+        "x0": 299,
+        "x1": 311,
+        "y0": 323,
+        "y1": 341
+      },
+      "confidence": 0.513056,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0796
+        },
+        {
+          "alternatives": [],
+          "char": "+",
+          "score": 0.0546
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1963
+        }
+      ],
+      "id": "ocr-43-17df9db2ad",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "DISCARDED",
+      "text": "4+3"
+    },
+    {
+      "box": {
+        "x0": 550,
+        "x1": 566,
+        "y0": 341,
+        "y1": 348
+      },
+      "confidence": 0.510884,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.2036
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.0683
+        },
+        {
+          "alternatives": [],
+          "char": "3",
+          "score": 0.1556
+        }
+      ],
+      "id": "ocr-43-a2849b0ab7",
+      "nearChain": true,
+      "orientation": "HORIZONTAL",
+      "pageVote": "DISCARDED",
+      "text": "/43"
+    },
+    {
+      "box": {
+        "x0": 158,
+        "x1": 163,
+        "y0": 562,
+        "y1": 572
+      },
+      "confidence": 0.515798,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1625
+        }
+      ],
+      "id": "ocr-44-8c3474bed1",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "44"
+    },
+    {
+      "box": {
+        "x0": 157,
+        "x1": 162,
+        "y0": 563,
+        "y1": 573
+      },
+      "confidence": 0.515798,
+      "glyphs": [
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1625
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        }
+      ],
+      "id": "ocr-44-d9b85c5f31",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "44"
+    },
+    {
+      "box": {
+        "x0": 158,
+        "x1": 163,
+        "y0": 524,
+        "y1": 556
+      },
+      "confidence": 0.515798,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "4",
+              "score": 0.24
+            }
+          ],
+          "char": "/",
+          "score": 0.2635
+        },
+        {
+          "alternatives": [],
+          "char": "/",
+          "score": 0.2297
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1625
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        }
+      ],
+      "id": "ocr-444-bb768e3aca",
+      "nearChain": true,
+      "orientation": "ROTATED_CCW",
+      "pageVote": "DISCARDED",
+      "text": "//444"
+    },
+    {
+      "box": {
+        "x0": 157,
+        "x1": 162,
+        "y0": 525,
+        "y1": 557
+      },
+      "confidence": 0.515798,
+      "glyphs": [
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1625
+        },
+        {
+          "alternatives": [
+            {
+              "char": "1",
+              "score": 0.2359
+            },
+            {
+              "char": "/",
+              "score": 0.2006
+            }
+          ],
+          "char": "4",
+          "score": 0.2513
+        },
+        {
+          "alternatives": [],
+          "char": "4",
+          "score": 0.1625
+        },
+        {
+          "alternatives": [
+            {
+              "char": "7",
+              "score": 0.2784
+            },
+            {
+              "char": "1",
+              "score": 0.2549
+            },
+            {
+              "char": "3",
+              "score": 0.2432
+            }
+          ],
+          "char": "/",
+          "score": 0.4313
+        }
+      ],
+      "id": "ocr-4444-dcfcfa9667",
+      "nearChain": true,
+      "orientation": "ROTATED_CW",
+      "pageVote": "KEPT",
+      "text": "4444/"
+    }
+  ]
+}

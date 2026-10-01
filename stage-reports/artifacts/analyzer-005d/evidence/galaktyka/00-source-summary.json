@@ -1,0 +1,78 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.2.0"
+  },
+  "assets": 17,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 2,
+    "PERSPECTIVE_RENDER": 1,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 8
+  },
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/galaktykaI",
+  "contentHash": "e08f2565f7de0cc66ff3de435cda9e0e9d9d504377857b62a8889c4d0918c8b0",
+  "failuresByCode": {},
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-www-dobredomy-pl-11925c0102",
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.9
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 145.1
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 23.2
+    },
+    {
+      "key": "plot_min_depth",
+      "unit": "m",
+      "value": 19.68
+    },
+    {
+      "key": "plot_min_width",
+      "unit": "m",
+      "value": 22.38
+    },
+    {
+      "key": "roof_pitch",
+      "unit": "deg",
+      "value": 42
+    },
+    {
+      "key": "room_count",
+      "unit": "count",
+      "value": 4
+    },
+    {
+      "key": "sloped_roof_area",
+      "unit": "m2",
+      "value": 250.9
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 135.1
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 496.9
+    }
+  ],
+  "runId": "galaktyka"
+}

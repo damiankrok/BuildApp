@@ -1,0 +1,126 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 0.321399,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-0",
+      "junctionWallShare": 0.606478,
+      "mouthM": 0.576732,
+      "rect": {
+        "x0": 728.5,
+        "x1": 755,
+        "y0": 95,
+        "y1": 119.666667
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.150943
+    },
+    {
+      "areaM2": 0.998983,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-1",
+      "junctionWallShare": 0.935307,
+      "rect": {
+        "x0": 599.5,
+        "x1": 621,
+        "y0": 233.5,
+        "y1": 328
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 0.528071,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-2",
+      "junctionWallShare": 0.295262,
+      "mouthM": 1.77328,
+      "rect": {
+        "x0": 780,
+        "x1": 792,
+        "y0": 292.5,
+        "y1": 382
+      },
+      "relation": "RECESSED_ATTACHED",
+      "sideWallShare": 0.106145
+    },
+    {
+      "areaM2": 6.742616,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-3",
+      "junctionWallShare": 0.721101,
+      "mouthM": 3.21639,
+      "rect": {
+        "x0": 327,
+        "x1": 599.5,
+        "y0": 456,
+        "y1": 523.5
+      },
+      "relation": "UNKNOWN",
+      "sideWallShare": 0.38641
+    },
+    {
+      "areaM2": 6.388848,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-4",
+      "junctionWallShare": 0.355844,
+      "rect": {
+        "x0": 599.5,
+        "x1": 792,
+        "y0": 456,
+        "y1": 523.5
+      },
+      "relation": "PROJECTING_WING",
+      "sideWallShare": 0.642642
+    },
+    {
+      "areaM2": 0.718599,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-5",
+      "junctionWallShare": 0,
+      "mouthM": 3.21639,
+      "rect": {
+        "x0": 414,
+        "x1": 453.5,
+        "y0": 486.5,
+        "y1": 523.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.996731
+    }
+  ],
+  "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 260,
+        "x1": 599.5,
+        "y0": 95,
+        "y1": 456
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 599.5,
+        "x1": 792,
+        "y0": 95,
+        "y1": 523.5
+      }
+    }
+  ]
+}

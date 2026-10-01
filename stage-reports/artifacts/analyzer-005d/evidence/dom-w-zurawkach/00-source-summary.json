@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 29,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 12,
+    "PERSPECTIVE_RENDER": 10,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+  "contentHash": "7d7ec810cf94edd4015f6db110bc787662f7fecd08c81168e31c8119ee78e37d",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 11
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-md4e2138a2d1a5-a0a419ca24",
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.39
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 228.38
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 101.7
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 23.82
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 108.82
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 185.2
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 304.25
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 211.71
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 882.92
+    }
+  ],
+  "runId": "dom-w-zurawkach"
+}

@@ -1,0 +1,197 @@
+{
+  "counts": {
+    "events": 194,
+    "files": 32
+  },
+  "evidenceModeVersion": "1.0.0",
+  "failureCode": null,
+  "files": [
+    {
+      "bytes": 1454,
+      "name": "00-source-summary.json",
+      "sha256": "0c1e552fbb8fbfbee446923b2bd1eb35ac3c238b8cd81653886ae4f400d66240"
+    },
+    {
+      "bytes": 7335,
+      "name": "01-page-classification.json",
+      "sha256": "b7fa73e1ca5b4359db01c69e441a7ddef9f9c64ab3248bb824c7d60ba5bacbe8"
+    },
+    {
+      "bytes": 26973,
+      "name": "02-asset-inventory.json",
+      "sha256": "50c48347f04b38511b78efecaa1d4191a0882a16733a12cb118cae68b4274f6a"
+    },
+    {
+      "bytes": 763,
+      "name": "03-plan-frame.json",
+      "sha256": "67d1b1379954c8356c85a6fb09eb4950e6ae68f680b0990982b02739cc9de055"
+    },
+    {
+      "bytes": 1357,
+      "name": "03-plan-frame.svg",
+      "sha256": "47af0af49064477ddf3b5997ed6c5552fb7f4d82025ebe5d47dff4a69baf8a1d"
+    },
+    {
+      "bytes": 8907,
+      "name": "04-wall-bands.json",
+      "sha256": "b4732de0a21a28bf14058b8a5e0993cbd4287cf9f669f2b6d1b57030d92cba1e"
+    },
+    {
+      "bytes": 4970,
+      "name": "04-wall-bands.svg",
+      "sha256": "7ec0d0ed26f5f203924b3793400f93d73a93e2785857cf0312084abcc4972637"
+    },
+    {
+      "bytes": 26488,
+      "name": "05-dimension-lines.json",
+      "sha256": "d7fab891856b087985896d40d447d2158a50313595e9a814b116d1d22332c85a"
+    },
+    {
+      "bytes": 16743,
+      "name": "05-dimension-lines.svg",
+      "sha256": "69375132dc820bab0114db2e72694ecfda31f595d673c0c61198fa5f03ed8187"
+    },
+    {
+      "bytes": 44278,
+      "name": "06-tick-candidates.json",
+      "sha256": "2938114b0c5881626329b9a0b17722e33733110303ddbd870f1bd6823bd04a3c"
+    },
+    {
+      "bytes": 28694,
+      "name": "06-tick-candidates.svg",
+      "sha256": "7a46311744eb02cbe9d1fbf9b87115310bc9cb04124d5fdd2f5fbc15bac09498"
+    },
+    {
+      "bytes": 157930,
+      "name": "07-ocr-labels.json",
+      "sha256": "d9188a8b7b28846d2e6bff44cbfa764bc744d3669de203469a4d2992f0f925c4"
+    },
+    {
+      "bytes": 57847,
+      "name": "07-ocr-labels.svg",
+      "sha256": "e6f1e1bfda24ed5222ca56a918e92c86e9dbb8b47355a4ba0f50b410b13cd8f9"
+    },
+    {
+      "bytes": 4854,
+      "name": "08-dimension-span-hypotheses.json",
+      "sha256": "7c7c0fd0537ea39b223ba12a7d47781ffa76884d651d8e96198a7764f74f8b9c"
+    },
+    {
+      "bytes": 1458,
+      "name": "08-dimension-span-hypotheses.svg",
+      "sha256": "00e6d55f813420c8fbbb115bbcd8a882dbc0bd73e0674134023c1ed84bb8fd13"
+    },
+    {
+      "bytes": 5110,
+      "name": "09-scale-hypotheses.json",
+      "sha256": "164d64f5aa377e76890e341158425e75df42458f261270051af7aa2a91e21b5c"
+    },
+    {
+      "bytes": 2450,
+      "name": "09-scale-hypotheses.svg",
+      "sha256": "b074667e75dbf32656c70fdbbfaa4d255883ca84f7fecf34192e1695158bb2f2"
+    },
+    {
+      "bytes": 1295,
+      "name": "10-extent-hypotheses.json",
+      "sha256": "c5e8086390ea7460e3d0a7eb6d037a6b83f95ae94d02908bc07618606b905601"
+    },
+    {
+      "bytes": 352,
+      "name": "10-extent-hypotheses.svg",
+      "sha256": "bf0d8c2f862e00e653ef4e0f85af9b5632bac262966036c23f70f57c5c3ead96"
+    },
+    {
+      "bytes": 1494,
+      "name": "11-envelope-candidates.json",
+      "sha256": "410141b68d515811287e2e3da6a8a209ef39fc535e80907d4da9c46bbe41107b"
+    },
+    {
+      "bytes": 2140,
+      "name": "11-envelope-candidates.svg",
+      "sha256": "b349ed1c00238a6a35db8ed081fa4ae6a4b03666644826bd96a4db76c297222f"
+    },
+    {
+      "bytes": 2066,
+      "name": "12-opening-observations.json",
+      "sha256": "191c6af27adcf0e940b6cf538028738395c6a068043d0fba4427ef71d73da78d"
+    },
+    {
+      "bytes": 1372,
+      "name": "12-opening-observations.svg",
+      "sha256": "e4e62a4bef33a67bb1f2c2b523b796eb607a0478c77a4671341db70bb97d3e37"
+    },
+    {
+      "bytes": 587,
+      "name": "13-body-candidates.json",
+      "sha256": "500272d8cb10df5abadfd3edce9d081988cf02942c2d8d09e89058a9ef3690ea"
+    },
+    {
+      "bytes": 625,
+      "name": "13-body-candidates.svg",
+      "sha256": "d3bdc423ba8c75625d3f699ba5ddc5382637e7918510ad0dae84c4f60c5bcc1c"
+    },
+    {
+      "bytes": 502,
+      "name": "14-selected-layout.json",
+      "sha256": "814abcabf47f050aacf9fb26201fd29a5501d4e924b887cb0e4dd57c75ac3fb7"
+    },
+    {
+      "bytes": 552,
+      "name": "14-selected-layout.svg",
+      "sha256": "0ba7265dd43f9090984cadcd3b1ebf45ee875dcee89cb0ec73da20f04872875f"
+    },
+    {
+      "bytes": 455,
+      "name": "15-canonical-model-summary.json",
+      "sha256": "ba3cb244427bb76aad7e281aa7e93de5f6a8928d8c247c883506251539a209ff"
+    },
+    {
+      "bytes": 2454,
+      "name": "17-evidence-trace.json",
+      "sha256": "59e86e5480f2f051df2dc50ce20e4b872c90dbfc38c44917e8ecdd2559fc96de"
+    },
+    {
+      "bytes": 92250,
+      "name": "18-decision-timeline.json",
+      "sha256": "4f39393ab8b3c0e20630c83d136149c9c51a282d979382171e5e6cd37908d1f3"
+    },
+    {
+      "bytes": 1455,
+      "name": "README.md",
+      "sha256": "2b031bb48d56c6f46b0c91cb7ce9c79cfe44ee2b4ad86b5b92f48c28acf9ae86"
+    },
+    {
+      "bytes": 4679,
+      "name": "evidence-summary.svg",
+      "sha256": "5ec7d8180c632e534ecfa7a49deb644f31faf1434c7dcc965b7115b64f9fce7b"
+    }
+  ],
+  "firstWarning": "LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS",
+  "gitSha": "e328121b3aca2dfcec87db07db6277813eb04f34",
+  "hashes": {
+    "candidate": "5df2913bc12e188f0e854c2465eee81deac3f9d4a2716cafd45cffa6efca926e",
+    "metricEvidence": "ff7593e5f15562e084077a3cdb463243658a62ce66e6315ea942c77c700becbf",
+    "model": "2cfcc6e97af3d4b47f18200779fc86923b82297072c0d592dc35b4d7ff67ece0",
+    "scene": "c47c72d03703768b7c9a01366c884e68c442ae6905396730d61309bea0dc401b",
+    "sceneContent": "52131018026e02016041a870ea332ebfa6f1a1b35a7c247b1ebc3476b3c1ba51",
+    "sourcePackage": "349a08e9a6b85332cbdd4644422602e989f9dde172ccd0827e9d12bfde82e6ef"
+  },
+  "result": "COMPLETED",
+  "runId": "dom-w-azaliach-005c",
+  "schema": "buildapp.evidence-pack",
+  "selectedPlanFrameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+  "versions": {
+    "adapter:archon.pl": "1.0.0",
+    "analyzer-service": "1.1.0",
+    "analyzer-solver": "2.3.0",
+    "metric-evidence-schema": "1.2.0",
+    "metrics.axis-aligned-affine": "1",
+    "metrics.chain-solver": "1.1.0",
+    "metrics.dimension-lines": "1.1.0",
+    "metrics.independent-scale": "1.0.0",
+    "metrics.numeric-ocr": "1.1.0",
+    "plan-resolver": "1.3.0",
+    "published-specification-reader": "1.0.0"
+  }
+}

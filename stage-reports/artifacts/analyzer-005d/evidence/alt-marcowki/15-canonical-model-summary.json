@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the floor plan's scale cannot be established: the page vote's 1.593003 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it. The scales its readings state are 0.343537 cm/px (0 independent, ruled out by the walls); 1.405229 cm/px (0 independent, plausible); 0.76087 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: an overall dimension read the right way up, or two readings on different chains that agree. (the lowest storey covers 19.56 m² against the 131.16 m² the publisher prints — 85.1% apart: the decomposition is not of this building; 23 other readings of the plan were weighed and none survived to a full composition)",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 131.16,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

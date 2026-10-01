@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 1625×1700 px floor plan prints no dimension chain, so nothing on it states a scale)",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 145.1,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

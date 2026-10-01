@@ -1,0 +1,1884 @@
+{
+  "bindingRecorded": true,
+  "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+  "legend": {
+    "ALTERNATIVE": "#9a9a9a",
+    "AMBIGUOUS": "#8a2fd1",
+    "PRIMARY": "#1f5fd1",
+    "UNCENTRED": "#c0c0c0"
+  },
+  "observations": [
+    {
+      "alternatives": [
+        {
+          "ratio": 0.795837,
+          "text": "621",
+          "valueCm": 621
+        }
+      ],
+      "chainId": "chain-vertical-70-7233fc8bd9",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-021-rotated-cw-7a6e0d0105",
+      "impliedCmPerPx": 0.09292,
+      "independence": "ORIENTATION_BY_OTHER_AXIS",
+      "labelId": "label:chain-vertical-70-7233fc8bd9:ROTATED_CW:021",
+      "offsetShare": 0.015487,
+      "orientation": "ROTATED_CW",
+      "rawText": "021",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        476,
+        702
+      ],
+      "spanPx": 226,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-54-582-aeb838f20c"
+      ],
+      "valueCm": 21
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.910427,
+          "text": "627",
+          "valueCm": 627
+        },
+        {
+          "ratio": 0.804382,
+          "text": "827",
+          "valueCm": 827
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-027-horizontal-ef6c34c0dc",
+      "impliedCmPerPx": 0.27,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:027",
+      "offsetShare": 0.005,
+      "orientation": "HORIZONTAL",
+      "rawText": "027",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 2
+      },
+      "span": [
+        570.5,
+        670.5
+      ],
+      "spanPx": 100,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-610-193-4cc992eb0a"
+      ],
+      "valueCm": 27
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.944992,
+          "text": "105",
+          "valueCm": 105
+        },
+        {
+          "ratio": 0.926225,
+          "text": "102",
+          "valueCm": 102
+        },
+        {
+          "ratio": 0.796278,
+          "text": "101",
+          "valueCm": 101
+        }
+      ],
+      "chainId": "chain-vertical-164-d81df082ad",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-103-rotated-ccw-90b94abd5a",
+      "impliedCmPerPx": 1.716667,
+      "independence": "ORIENTATION_BY_OTHER_AXIS",
+      "labelId": "label:chain-vertical-164-d81df082ad:ROTATED_CCW:103",
+      "offsetShare": 0.058333,
+      "orientation": "ROTATED_CCW",
+      "rawText": "103",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        210.5,
+        270.5
+      ],
+      "spanPx": 60,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-148-235-e5d0f70dc3"
+      ],
+      "valueCm": 103
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.950607,
+          "text": "1770",
+          "valueCm": 1770
+        },
+        {
+          "ratio": 0.83083,
+          "text": "1470",
+          "valueCm": 1470
+        },
+        {
+          "ratio": 0.731947,
+          "text": "1130",
+          "valueCm": 1130
+        },
+        {
+          "ratio": 0.710667,
+          "text": "1174",
+          "valueCm": 1174
+        }
+      ],
+      "chainId": "chain-vertical-49-2fc5fc5478",
+      "conflictIds": [
+        "frame-asset-rzut-e8520c3ad3-59a406b738"
+      ],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-1170-rotated-cw-4f467d5183",
+      "impliedCmPerPx": 2.188962,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-49-2fc5fc5478:ROTATED_CW:1170",
+      "offsetShare": 0.007016,
+      "orientation": "ROTATED_CW",
+      "rawText": "1170",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        167.5,
+        702
+      ],
+      "spanPx": 534.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-33-425-ead767ba42"
+      ],
+      "valueCm": 1170
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.842429,
+          "text": "100",
+          "valueCm": 100
+        },
+        {
+          "ratio": 0.737734,
+          "text": "164",
+          "valueCm": 164
+        }
+      ],
+      "chainId": "chain-vertical-144-b55ce7cf5b",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-160-rotated-cw-c4205bc1ac",
+      "impliedCmPerPx": 4,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-144-b55ce7cf5b:ROTATED_CW:160",
+      "offsetShare": 0.0125,
+      "orientation": "ROTATED_CW",
+      "rawText": "160",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        322.5,
+        362.5
+      ],
+      "spanPx": 40,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-148-328-6a1830b826"
+      ],
+      "valueCm": 160
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.967073,
+          "text": "1721",
+          "valueCm": 1721
+        },
+        {
+          "ratio": 0.897316,
+          "text": "1731",
+          "valueCm": 1731
+        },
+        {
+          "ratio": 0.858196,
+          "text": "1351",
+          "valueCm": 1351
+        },
+        {
+          "ratio": 0.782092,
+          "text": "1251",
+          "valueCm": 1251
+        }
+      ],
+      "chainId": "chain-horizontal-781-02b024f369",
+      "conflictIds": [
+        "frame-asset-rzut-e8520c3ad3-59a406b738"
+      ],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-1751-horizontal-e05dcb5989",
+      "impliedCmPerPx": 2.80609,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-781-02b024f369:HORIZONTAL:1751",
+      "offsetShare": 0.044872,
+      "orientation": "HORIZONTAL",
+      "rawText": "1751",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 2,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        106.5,
+        730.5
+      ],
+      "spanPx": 624,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-434-765-580de15d46"
+      ],
+      "valueCm": 1751
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.889725,
+          "text": "310",
+          "valueCm": 310
+        },
+        {
+          "ratio": 0.811508,
+          "text": "110",
+          "valueCm": 110
+        },
+        {
+          "ratio": 0.800552,
+          "text": "710",
+          "valueCm": 710
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-210-horizontal-f0e96711a3",
+      "impliedCmPerPx": 7.368421,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:210",
+      "offsetShare": 0.061404,
+      "orientation": "HORIZONTAL",
+      "rawText": "210",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        438.5,
+        467
+      ],
+      "spanPx": 28.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-441-417-14b47b90cb"
+      ],
+      "valueCm": 210
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.978241,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.91859,
+          "text": "715",
+          "valueCm": 715
+        },
+        {
+          "ratio": 0.849759,
+          "text": "115",
+          "valueCm": 115
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [
+        "frame-asset-rzut-e8520c3ad3-59a406b738"
+      ],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-515-horizontal-6d10174385",
+      "impliedCmPerPx": 8.728814,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:515",
+      "offsetShare": 0.008475,
+      "orientation": "HORIZONTAL",
+      "rawText": "515",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 1
+      },
+      "span": [
+        402,
+        461
+      ],
+      "spanPx": 59,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-422-193-5693f3c9d3"
+      ],
+      "valueCm": 515
+    },
+    {
+      "alternatives": [],
+      "chainId": "chain-horizontal-438-4cf415ff6f",
+      "conflictIds": [],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-541-horizontal-a2e26d52d0",
+      "impliedCmPerPx": 10.712871,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-438-4cf415ff6f:HORIZONTAL:541",
+      "offsetShare": 0.00495,
+      "orientation": "HORIZONTAL",
+      "rawText": "541",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        564,
+        614.5
+      ],
+      "spanPx": 50.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-585-446-1a798c3848"
+      ],
+      "valueCm": 541
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.970796,
+          "text": "154",
+          "valueCm": 154
+        },
+        {
+          "ratio": 0.885545,
+          "text": "254",
+          "valueCm": 254
+        },
+        {
+          "ratio": 0.867798,
+          "text": "354",
+          "valueCm": 354
+        },
+        {
+          "ratio": 0.77815,
+          "text": "724",
+          "valueCm": 724
+        }
+      ],
+      "chainId": "chain-horizontal-454-b5bde134b2",
+      "conflictIds": [
+        "frame-asset-rzut-e8520c3ad3-59a406b738"
+      ],
+      "decision": "REJECTED_BY_SCALE",
+      "id": "dim-obs-754-horizontal-aa0282983b",
+      "impliedCmPerPx": 12.888889,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-454-b5bde134b2:HORIZONTAL:754",
+      "offsetShare": 0.047009,
+      "orientation": "HORIZONTAL",
+      "rawText": "754",
+      "reason": "its span is the label’s, but the chosen scale contradicts the value as read",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        146.5,
+        205
+      ],
+      "spanPx": 58.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-169-417-d7d87d226a"
+      ],
+      "valueCm": 754
+    },
+    {
+      "alternatives": [],
+      "chainId": "chain-vertical-70-7233fc8bd9",
+      "conflictIds": [],
+      "decision": "PRIMARY",
+      "id": "dim-obs-850-rotated-cw-ad18fa0f46",
+      "impliedCmPerPx": 2.755267,
+      "independence": "ORIENTATION_BY_OTHER_AXIS",
+      "labelId": "label:chain-vertical-70-7233fc8bd9:ROTATED_CW:850",
+      "offsetShare": 0.008914,
+      "orientation": "ROTATED_CW",
+      "rawText": "850",
+      "reason": "the span the label is centred on",
+      "role": "PRIMARY",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        167.5,
+        476
+      ],
+      "spanPx": 308.5,
+      "status": "RAW",
+      "supportIds": [
+        "text-region-54-314-3637104bdb"
+      ],
+      "valueCm": 850
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.910427,
+          "text": "627",
+          "valueCm": 627
+        },
+        {
+          "ratio": 0.804382,
+          "text": "827",
+          "valueCm": 827
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-027-horizontal-0f6e4266da",
+      "impliedCmPerPx": 0.406015,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:027",
+      "offsetShare": 0.259398,
+      "orientation": "HORIZONTAL",
+      "rawText": "027",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        604,
+        670.5
+      ],
+      "spanPx": 66.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-610-193-4cc992eb0a"
+      ],
+      "valueCm": 27
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.910427,
+          "text": "627",
+          "valueCm": 627
+        },
+        {
+          "ratio": 0.804382,
+          "text": "827",
+          "valueCm": 827
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-027-horizontal-45f7652dc9",
+      "impliedCmPerPx": 0.253521,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:027",
+      "offsetShare": 0.260563,
+      "orientation": "HORIZONTAL",
+      "rawText": "027",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 2
+      },
+      "span": [
+        594.5,
+        701
+      ],
+      "spanPx": 106.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-610-193-4cc992eb0a"
+      ],
+      "valueCm": 27
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.910427,
+          "text": "627",
+          "valueCm": 627
+        },
+        {
+          "ratio": 0.804382,
+          "text": "827",
+          "valueCm": 827
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-027-horizontal-f5cc42ad4f",
+      "impliedCmPerPx": 0.355263,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:027",
+      "offsetShare": 0.164474,
+      "orientation": "HORIZONTAL",
+      "rawText": "027",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 1
+      },
+      "span": [
+        594.5,
+        670.5
+      ],
+      "spanPx": 76,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-610-193-4cc992eb0a"
+      ],
+      "valueCm": 27
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.944992,
+          "text": "105",
+          "valueCm": 105
+        },
+        {
+          "ratio": 0.926225,
+          "text": "102",
+          "valueCm": 102
+        },
+        {
+          "ratio": 0.796278,
+          "text": "101",
+          "valueCm": 101
+        }
+      ],
+      "chainId": "chain-vertical-164-d81df082ad",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-103-rotated-ccw-92a0008202",
+      "impliedCmPerPx": 0.824,
+      "independence": "ORIENTATION_BY_OTHER_AXIS",
+      "labelId": "label:chain-vertical-164-d81df082ad:ROTATED_CCW:103",
+      "offsetShare": 0.232,
+      "orientation": "ROTATED_CCW",
+      "rawText": "103",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        210.5,
+        335.5
+      ],
+      "spanPx": 125,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-148-235-e5d0f70dc3"
+      ],
+      "valueCm": 103
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.925764,
+          "text": "120",
+          "valueCm": 120
+        },
+        {
+          "ratio": 0.842219,
+          "text": "130",
+          "valueCm": 130
+        },
+        {
+          "ratio": 0.805595,
+          "text": "170",
+          "valueCm": 170
+        },
+        {
+          "ratio": 0.706774,
+          "text": "118",
+          "valueCm": 118
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-110-horizontal-45c3d89b78",
+      "impliedCmPerPx": 0.78853,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:110",
+      "offsetShare": 0.231183,
+      "orientation": "HORIZONTAL",
+      "rawText": "110",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        481,
+        620.5
+      ],
+      "spanPx": 139.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-510-417-9b810b17bf"
+      ],
+      "valueCm": 110
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.925764,
+          "text": "120",
+          "valueCm": 120
+        },
+        {
+          "ratio": 0.842219,
+          "text": "130",
+          "valueCm": 130
+        },
+        {
+          "ratio": 0.805595,
+          "text": "170",
+          "valueCm": 170
+        },
+        {
+          "ratio": 0.706774,
+          "text": "118",
+          "valueCm": 118
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-110-horizontal-72ae01adc5",
+      "impliedCmPerPx": 0.756014,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:110",
+      "offsetShare": 0.201031,
+      "orientation": "HORIZONTAL",
+      "rawText": "110",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        475,
+        620.5
+      ],
+      "spanPx": 145.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-510-417-9b810b17bf"
+      ],
+      "valueCm": 110
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.925764,
+          "text": "120",
+          "valueCm": 120
+        },
+        {
+          "ratio": 0.842219,
+          "text": "130",
+          "valueCm": 130
+        },
+        {
+          "ratio": 0.805595,
+          "text": "170",
+          "valueCm": 170
+        },
+        {
+          "ratio": 0.706774,
+          "text": "118",
+          "valueCm": 118
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-110-horizontal-9a641bfe66",
+      "impliedCmPerPx": 0.849421,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:110",
+      "offsetShare": 0.287645,
+      "orientation": "HORIZONTAL",
+      "rawText": "110",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        491,
+        620.5
+      ],
+      "spanPx": 129.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-510-417-9b810b17bf"
+      ],
+      "valueCm": 110
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.77077,
+          "text": "114",
+          "valueCm": 114
+        },
+        {
+          "ratio": 0.770728,
+          "text": "174",
+          "valueCm": 174
+        },
+        {
+          "ratio": 0.759879,
+          "text": "134",
+          "valueCm": 134
+        },
+        {
+          "ratio": 0.735622,
+          "text": "754",
+          "valueCm": 754
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-154-horizontal-5b43853108",
+      "impliedCmPerPx": 1.065744,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:154",
+      "offsetShare": 0.240484,
+      "orientation": "HORIZONTAL",
+      "rawText": "154",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        141,
+        285.5
+      ],
+      "spanPx": 144.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-169-193-31cf5797d6"
+      ],
+      "valueCm": 154
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.77077,
+          "text": "114",
+          "valueCm": 114
+        },
+        {
+          "ratio": 0.770728,
+          "text": "174",
+          "valueCm": 174
+        },
+        {
+          "ratio": 0.759879,
+          "text": "134",
+          "valueCm": 134
+        },
+        {
+          "ratio": 0.735622,
+          "text": "754",
+          "valueCm": 754
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-154-horizontal-653ba333b7",
+      "impliedCmPerPx": 1.180077,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:154",
+      "offsetShare": 0.212644,
+      "orientation": "HORIZONTAL",
+      "rawText": "154",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        141,
+        271.5
+      ],
+      "spanPx": 130.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-169-193-31cf5797d6"
+      ],
+      "valueCm": 154
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.77077,
+          "text": "114",
+          "valueCm": 114
+        },
+        {
+          "ratio": 0.770728,
+          "text": "174",
+          "valueCm": 174
+        },
+        {
+          "ratio": 0.759879,
+          "text": "134",
+          "valueCm": 134
+        },
+        {
+          "ratio": 0.735622,
+          "text": "754",
+          "valueCm": 754
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-154-horizontal-e97ad971df",
+      "impliedCmPerPx": 1.547739,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:154",
+      "offsetShare": 0.123116,
+      "orientation": "HORIZONTAL",
+      "rawText": "154",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        141,
+        240.5
+      ],
+      "spanPx": 99.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-169-193-31cf5797d6"
+      ],
+      "valueCm": 154
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.842429,
+          "text": "100",
+          "valueCm": 100
+        },
+        {
+          "ratio": 0.737734,
+          "text": "164",
+          "valueCm": 164
+        }
+      ],
+      "chainId": "chain-vertical-144-b55ce7cf5b",
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "id": "dim-obs-160-rotated-cw-954792e7d3",
+      "impliedCmPerPx": 2.758621,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-144-b55ce7cf5b:ROTATED_CW:160",
+      "offsetShare": 0.146552,
+      "orientation": "ROTATED_CW",
+      "rawText": "160",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        322.5,
+        380.5
+      ],
+      "spanPx": 58,
+      "status": "ACCEPTED",
+      "supportIds": [
+        "text-region-148-328-6a1830b826"
+      ],
+      "valueCm": 160
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.917066,
+          "text": "57",
+          "valueCm": 57
+        }
+      ],
+      "chainId": "chain-horizontal-469-0f54676cd1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-17-horizontal-6eaa62f18c",
+      "impliedCmPerPx": 0.204819,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-469-0f54676cd1:HORIZONTAL:17",
+      "offsetShare": 0.228916,
+      "orientation": "HORIZONTAL",
+      "rawText": "17",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        611.5,
+        694.5
+      ],
+      "spanPx": 83,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-669-451-ec6b5a617c"
+      ],
+      "valueCm": 17
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.967073,
+          "text": "1721",
+          "valueCm": 1721
+        },
+        {
+          "ratio": 0.897316,
+          "text": "1731",
+          "valueCm": 1731
+        },
+        {
+          "ratio": 0.858196,
+          "text": "1351",
+          "valueCm": 1351
+        },
+        {
+          "ratio": 0.782092,
+          "text": "1251",
+          "valueCm": 1251
+        }
+      ],
+      "chainId": "chain-horizontal-781-02b024f369",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-1751-horizontal-122607d7e0",
+      "impliedCmPerPx": 3.21875,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-781-02b024f369:HORIZONTAL:1751",
+      "offsetShare": 0.022059,
+      "orientation": "HORIZONTAL",
+      "rawText": "1751",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        186.5,
+        730.5
+      ],
+      "spanPx": 544,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-434-765-580de15d46"
+      ],
+      "valueCm": 1751
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.832731,
+          "text": "705",
+          "valueCm": 705
+        },
+        {
+          "ratio": 0.779986,
+          "text": "305",
+          "valueCm": 305
+        },
+        {
+          "ratio": 0.732865,
+          "text": "201",
+          "valueCm": 201
+        },
+        {
+          "ratio": 0.715386,
+          "text": "105",
+          "valueCm": 105
+        }
+      ],
+      "chainId": "chain-horizontal-433-df3f4ac91e",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-205-horizontal-310da0ffdc",
+      "impliedCmPerPx": 3.504274,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-df3f4ac91e:HORIZONTAL:205",
+      "offsetShare": 0.166667,
+      "orientation": "HORIZONTAL",
+      "rawText": "205",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        343,
+        401.5
+      ],
+      "spanPx": 58.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-353-399-87785867a6"
+      ],
+      "valueCm": 205
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.889725,
+          "text": "310",
+          "valueCm": 310
+        },
+        {
+          "ratio": 0.811508,
+          "text": "110",
+          "valueCm": 110
+        },
+        {
+          "ratio": 0.800552,
+          "text": "710",
+          "valueCm": 710
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-210-horizontal-a02ad97afa",
+      "impliedCmPerPx": 5.753425,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:210",
+      "offsetShare": 0.157534,
+      "orientation": "HORIZONTAL",
+      "rawText": "210",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 1
+      },
+      "span": [
+        438.5,
+        475
+      ],
+      "spanPx": 36.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-441-417-14b47b90cb"
+      ],
+      "valueCm": 210
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.889725,
+          "text": "310",
+          "valueCm": 310
+        },
+        {
+          "ratio": 0.811508,
+          "text": "110",
+          "valueCm": 110
+        },
+        {
+          "ratio": 0.800552,
+          "text": "710",
+          "valueCm": 710
+        }
+      ],
+      "chainId": "chain-horizontal-433-b85b2bb9a1",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-210-horizontal-bb1701d91e",
+      "impliedCmPerPx": 4.941176,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-433-b85b2bb9a1:HORIZONTAL:210",
+      "offsetShare": 0.205882,
+      "orientation": "HORIZONTAL",
+      "rawText": "210",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 0,
+        "tick": 1
+      },
+      "span": [
+        438.5,
+        481
+      ],
+      "spanPx": 42.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-441-417-14b47b90cb"
+      ],
+      "valueCm": 210
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.978241,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.91859,
+          "text": "715",
+          "valueCm": 715
+        },
+        {
+          "ratio": 0.849759,
+          "text": "115",
+          "valueCm": 115
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-515-horizontal-61fc4048f6",
+      "impliedCmPerPx": 6.058824,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:515",
+      "offsetShare": 0.147059,
+      "orientation": "HORIZONTAL",
+      "rawText": "515",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 2
+      },
+      "span": [
+        402,
+        487
+      ],
+      "spanPx": 85,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-422-193-5693f3c9d3"
+      ],
+      "valueCm": 515
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.978241,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.91859,
+          "text": "715",
+          "valueCm": 715
+        },
+        {
+          "ratio": 0.849759,
+          "text": "115",
+          "valueCm": 115
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-515-horizontal-6216a696ca",
+      "impliedCmPerPx": 6.518987,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:515",
+      "offsetShare": 0.132911,
+      "orientation": "HORIZONTAL",
+      "rawText": "515",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 0,
+        "tick": 1
+      },
+      "span": [
+        382,
+        461
+      ],
+      "spanPx": 79,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-422-193-5693f3c9d3"
+      ],
+      "valueCm": 515
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.978241,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.91859,
+          "text": "715",
+          "valueCm": 715
+        },
+        {
+          "ratio": 0.849759,
+          "text": "115",
+          "valueCm": 115
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-515-horizontal-ff482caea8",
+      "impliedCmPerPx": 12.716049,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:515",
+      "offsetShare": 0.240741,
+      "orientation": "HORIZONTAL",
+      "rawText": "515",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        402,
+        442.5
+      ],
+      "spanPx": 40.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-422-193-5693f3c9d3"
+      ],
+      "valueCm": 515
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.914953,
+          "text": "317",
+          "valueCm": 317
+        },
+        {
+          "ratio": 0.753519,
+          "text": "717",
+          "valueCm": 717
+        },
+        {
+          "ratio": 0.717103,
+          "text": "117",
+          "valueCm": 117
+        }
+      ],
+      "chainId": "chain-vertical-671-62d2ce4ff0",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-517-rotated-cw-527197d572",
+      "impliedCmPerPx": 6.395876,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-671-62d2ce4ff0:ROTATED_CW:517",
+      "offsetShare": 0.056701,
+      "orientation": "ROTATED_CW",
+      "rawText": "517",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        208.666667,
+        289.5
+      ],
+      "spanPx": 80.833333,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-655-233-705e06f873"
+      ],
+      "valueCm": 517
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.914953,
+          "text": "317",
+          "valueCm": 317
+        },
+        {
+          "ratio": 0.753519,
+          "text": "717",
+          "valueCm": 717
+        },
+        {
+          "ratio": 0.717103,
+          "text": "117",
+          "valueCm": 117
+        }
+      ],
+      "chainId": "chain-vertical-671-62d2ce4ff0",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-517-rotated-cw-a960145fa3",
+      "impliedCmPerPx": 4.750383,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-671-62d2ce4ff0:ROTATED_CW:517",
+      "offsetShare": 0.17075,
+      "orientation": "ROTATED_CW",
+      "rawText": "517",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        208.666667,
+        317.5
+      ],
+      "spanPx": 108.833333,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-655-233-705e06f873"
+      ],
+      "valueCm": 517
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.914953,
+          "text": "317",
+          "valueCm": 317
+        },
+        {
+          "ratio": 0.753519,
+          "text": "717",
+          "valueCm": 717
+        },
+        {
+          "ratio": 0.717103,
+          "text": "117",
+          "valueCm": 117
+        }
+      ],
+      "chainId": "chain-vertical-671-62d2ce4ff0",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-517-rotated-cw-eb21ce6c1a",
+      "impliedCmPerPx": 6.908686,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-vertical-671-62d2ce4ff0:ROTATED_CW:517",
+      "offsetShare": 0.021158,
+      "orientation": "ROTATED_CW",
+      "rawText": "517",
+      "reason": "AMBIGUOUS_BINDING: the label ties between spans of different length",
+      "role": "AMBIGUOUS",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        208.666667,
+        283.5
+      ],
+      "spanPx": 74.833333,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-655-233-705e06f873"
+      ],
+      "valueCm": 517
+    },
+    {
+      "alternatives": [],
+      "chainId": "chain-horizontal-438-4cf415ff6f",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-541-horizontal-95ea22d1d2",
+      "impliedCmPerPx": 15.239437,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-438-4cf415ff6f:HORIZONTAL:541",
+      "offsetShare": 0.204225,
+      "orientation": "HORIZONTAL",
+      "rawText": "541",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        579,
+        614.5
+      ],
+      "spanPx": 35.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-585-446-1a798c3848"
+      ],
+      "valueCm": 541
+    },
+    {
+      "alternatives": [],
+      "chainId": "chain-horizontal-438-4cf415ff6f",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-541-horizontal-a809100a61",
+      "impliedCmPerPx": 7.310811,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-438-4cf415ff6f:HORIZONTAL:541",
+      "offsetShare": 0.162162,
+      "orientation": "HORIZONTAL",
+      "rawText": "541",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 2,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        540.5,
+        614.5
+      ],
+      "spanPx": 74,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-585-446-1a798c3848"
+      ],
+      "valueCm": 541
+    },
+    {
+      "alternatives": [],
+      "chainId": "chain-horizontal-438-4cf415ff6f",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-541-horizontal-ada9932659",
+      "impliedCmPerPx": 4.784788,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-438-4cf415ff6f:HORIZONTAL:541",
+      "offsetShare": 0.274469,
+      "orientation": "HORIZONTAL",
+      "rawText": "541",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 2,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        564,
+        677.066667
+      ],
+      "spanPx": 113.066667,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-585-446-1a798c3848"
+      ],
+      "valueCm": 541
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.9575,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.898357,
+          "text": "515",
+          "valueCm": 515
+        },
+        {
+          "ratio": 0.889755,
+          "text": "215",
+          "valueCm": 215
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-715-horizontal-2186c5adbe",
+      "impliedCmPerPx": 7.647059,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:715",
+      "offsetShare": 0.040107,
+      "orientation": "HORIZONTAL",
+      "rawText": "715",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        240.5,
+        334
+      ],
+      "spanPx": 93.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-281-193-eba4917f82"
+      ],
+      "valueCm": 715
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.9575,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.898357,
+          "text": "515",
+          "valueCm": 515
+        },
+        {
+          "ratio": 0.889755,
+          "text": "215",
+          "valueCm": 215
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-715-horizontal-42026fc285",
+      "impliedCmPerPx": 6.52968,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:715",
+      "offsetShare": 0.038813,
+      "orientation": "HORIZONTAL",
+      "rawText": "715",
+      "reason": "AMBIGUOUS_BINDING: the label ties between spans of different length",
+      "role": "AMBIGUOUS",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        240.5,
+        350
+      ],
+      "spanPx": 109.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-281-193-eba4917f82"
+      ],
+      "valueCm": 715
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.9575,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.898357,
+          "text": "515",
+          "valueCm": 515
+        },
+        {
+          "ratio": 0.889755,
+          "text": "215",
+          "valueCm": 215
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-715-horizontal-68ca7ac521",
+      "impliedCmPerPx": 7.526316,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:715",
+      "offsetShare": 0.294737,
+      "orientation": "HORIZONTAL",
+      "rawText": "715",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 1
+      },
+      "span": [
+        271.5,
+        366.5
+      ],
+      "spanPx": 95,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-281-193-eba4917f82"
+      ],
+      "valueCm": 715
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.9575,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.898357,
+          "text": "515",
+          "valueCm": 515
+        },
+        {
+          "ratio": 0.889755,
+          "text": "215",
+          "valueCm": 215
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-715-horizontal-69d1e8971b",
+      "impliedCmPerPx": 9.10828,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:715",
+      "offsetShare": 0.251592,
+      "orientation": "HORIZONTAL",
+      "rawText": "715",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 1,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        271.5,
+        350
+      ],
+      "spanPx": 78.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-281-193-eba4917f82"
+      ],
+      "valueCm": 715
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.9575,
+          "text": "315",
+          "valueCm": 315
+        },
+        {
+          "ratio": 0.898357,
+          "text": "515",
+          "valueCm": 515
+        },
+        {
+          "ratio": 0.889755,
+          "text": "215",
+          "valueCm": 215
+        }
+      ],
+      "chainId": "chain-horizontal-208-afad7a6a99",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-715-horizontal-dda5e91f74",
+      "impliedCmPerPx": 11.44,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-208-afad7a6a99:HORIZONTAL:715",
+      "offsetShare": 0.188,
+      "orientation": "HORIZONTAL",
+      "rawText": "715",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        271.5,
+        334
+      ],
+      "spanPx": 62.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-281-193-eba4917f82"
+      ],
+      "valueCm": 715
+    },
+    {
+      "alternatives": [
+        {
+          "ratio": 0.970796,
+          "text": "154",
+          "valueCm": 154
+        },
+        {
+          "ratio": 0.885545,
+          "text": "254",
+          "valueCm": 254
+        },
+        {
+          "ratio": 0.867798,
+          "text": "354",
+          "valueCm": 354
+        },
+        {
+          "ratio": 0.77815,
+          "text": "724",
+          "valueCm": 724
+        }
+      ],
+      "chainId": "chain-horizontal-454-b5bde134b2",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-754-horizontal-a29275ebf1",
+      "impliedCmPerPx": 18.617284,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-454-b5bde134b2:HORIZONTAL:754",
+      "offsetShare": 0.154321,
+      "orientation": "HORIZONTAL",
+      "rawText": "754",
+      "reason": "NOT_PRIMARY_BINDING: another span is better centred on the label or ends on fewer questionable marks",
+      "role": "ALTERNATIVE",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 1,
+        "tick": 0
+      },
+      "span": [
+        164.5,
+        205
+      ],
+      "spanPx": 40.5,
+      "status": "REJECTED",
+      "supportIds": [
+        "text-region-169-417-d7d87d226a"
+      ],
+      "valueCm": 754
+    }
+  ],
+  "omitted": 0,
+  "undecidedOrientationReadings": 46
+}

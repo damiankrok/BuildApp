@@ -1,0 +1,2802 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "OCR_READING"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-www-dobredomy-pl-11925c0102",
+      "reason": "17 assets (ELEVATION 4, SECTION 1, SITE_PLAN 1, FLOOR_PLAN 2, PERSPECTIVE_RENDER 1, UNKNOWN 8), 11 published figures, 0 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:13",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00002",
+      "objectId": "label:chain-horizontal-1253-301612b808:HORIZONTAL:13",
+      "reason": "HORIZONTAL; within one glyph it may be 12 (0.815437)",
+      "reversible": true,
+      "seq": 2,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-1155-1232-b82e4f4daa"
+      ]
+    },
+    {
+      "confidenceAfter": 0.236559,
+      "conflictIds": [],
+      "decision": "BOUND:1132.5-1187.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00003",
+      "objectId": "label:chain-horizontal-1253-301612b808:HORIZONTAL:13",
+      "reason": "PRIMARY; centred 0.036 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 3,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-13-horizontal-4badf7dc5d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:13",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00004",
+      "objectId": "label:chain-horizontal-1122-4d255f1881:HORIZONTAL:13",
+      "reason": "HORIZONTAL; within one glyph it may be 15 (0.833346), 11 (0.768138)",
+      "reversible": true,
+      "seq": 4,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-1009-1127-2ca2331586"
+      ]
+    },
+    {
+      "confidenceAfter": 0.333333,
+      "conflictIds": [],
+      "decision": "BOUND:992.5-1031.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00005",
+      "objectId": "label:chain-horizontal-1122-4d255f1881:HORIZONTAL:13",
+      "reason": "PRIMARY; centred 0 of the span off; runs across 0 tick(s), 0 questionable, 1 rejected",
+      "reversible": true,
+      "seq": 5,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-13-horizontal-d564548b00"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00006",
+      "objectId": "parallel_copy_of:chain-horizontal-1227-7c9971c7b0>chain-horizontal-1249-d71d957b5e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 6,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1227-7c9971c7b0",
+        "chain-horizontal-1249-d71d957b5e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00007",
+      "objectId": "parallel_copy_of:chain-horizontal-1316-6fb4960f2f>chain-horizontal-1328-2dcb29c506",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 7,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1316-6fb4960f2f",
+        "chain-horizontal-1328-2dcb29c506"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00008",
+      "objectId": "parallel_copy_of:chain-horizontal-1389-1896daf5c1>chain-horizontal-1395-5605cbae21",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 8,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1389-1896daf5c1",
+        "chain-horizontal-1395-5605cbae21"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00009",
+      "objectId": "parallel_copy_of:chain-horizontal-716-9d5f22ea5e>chain-horizontal-737-2b8b875bc3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 9,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-716-9d5f22ea5e",
+        "chain-horizontal-737-2b8b875bc3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00010",
+      "objectId": "parallel_copy_of:chain-horizontal-764-dff3679b08>chain-horizontal-802-da7b83455f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 10,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-764-dff3679b08",
+        "chain-horizontal-802-da7b83455f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00011",
+      "objectId": "total_of:chain-horizontal-1266-9e06f09911>chain-horizontal-1258-968bd3e3c3",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 11,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1266-9e06f09911",
+        "chain-horizontal-1258-968bd3e3c3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00012",
+      "objectId": "total_of:chain-horizontal-1340-aaa2a39288>chain-horizontal-1352-ea505ac0a3@{\"fromPx\":554.5,\"toPx\":583}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 12,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1340-aaa2a39288",
+        "chain-horizontal-1352-ea505ac0a3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00013",
+      "objectId": "total_of:chain-horizontal-1340-aaa2a39288>chain-horizontal-1352-ea505ac0a3@{\"fromPx\":583,\"toPx\":623.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 13,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1340-aaa2a39288",
+        "chain-horizontal-1352-ea505ac0a3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00014",
+      "objectId": "total_of:chain-horizontal-1399-ac54234bfe>chain-horizontal-1352-ea505ac0a3@{\"fromPx\":583,\"toPx\":623.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 14,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1399-ac54234bfe",
+        "chain-horizontal-1352-ea505ac0a3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00015",
+      "objectId": "total_of:chain-horizontal-610-887f7f8fcc>chain-horizontal-652-494b01dc52@{\"fromPx\":836,\"toPx\":857}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 15,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-610-887f7f8fcc",
+        "chain-horizontal-652-494b01dc52"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00016",
+      "objectId": "total_of:chain-horizontal-716-9d5f22ea5e>chain-horizontal-652-494b01dc52@{\"fromPx\":836,\"toPx\":857}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 16,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-716-9d5f22ea5e",
+        "chain-horizontal-652-494b01dc52"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00017",
+      "objectId": "parallel_copy_of:chain-horizontal-1011-a47117cebb>chain-horizontal-1025-5cb3a2345b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 17,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1011-a47117cebb",
+        "chain-horizontal-1025-5cb3a2345b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00018",
+      "objectId": "parallel_copy_of:chain-horizontal-1036-9607de0055>chain-horizontal-1062-30d8f20b2c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 18,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1036-9607de0055",
+        "chain-horizontal-1062-30d8f20b2c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00019",
+      "objectId": "parallel_copy_of:chain-horizontal-1036-9607de0055>chain-horizontal-1076-6b00e752ed",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 19,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1036-9607de0055",
+        "chain-horizontal-1076-6b00e752ed"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00020",
+      "objectId": "parallel_copy_of:chain-horizontal-1051-63016b066e>chain-horizontal-1066-6eb93fc320",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 20,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1051-63016b066e",
+        "chain-horizontal-1066-6eb93fc320"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00021",
+      "objectId": "parallel_copy_of:chain-horizontal-1051-63016b066e>chain-horizontal-1091-8033952981",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 21,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1051-63016b066e",
+        "chain-horizontal-1091-8033952981"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00022",
+      "objectId": "parallel_copy_of:chain-horizontal-1061-419a333b1b>chain-horizontal-1082-6121881273",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 22,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1061-419a333b1b",
+        "chain-horizontal-1082-6121881273"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00023",
+      "objectId": "parallel_copy_of:chain-horizontal-1061-419a333b1b>chain-horizontal-1103-6ab185cad3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 23,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1061-419a333b1b",
+        "chain-horizontal-1103-6ab185cad3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00024",
+      "objectId": "parallel_copy_of:chain-horizontal-1062-30d8f20b2c>chain-horizontal-1076-6b00e752ed",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 24,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1062-30d8f20b2c",
+        "chain-horizontal-1076-6b00e752ed"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00025",
+      "objectId": "parallel_copy_of:chain-horizontal-1066-6eb93fc320>chain-horizontal-1091-8033952981",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 25,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1066-6eb93fc320",
+        "chain-horizontal-1091-8033952981"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00026",
+      "objectId": "parallel_copy_of:chain-horizontal-1082-6121881273>chain-horizontal-1103-6ab185cad3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 26,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1082-6121881273",
+        "chain-horizontal-1103-6ab185cad3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00027",
+      "objectId": "parallel_copy_of:chain-horizontal-1102-2cf4231a27>chain-horizontal-1116-909ec99c19",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 27,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1102-2cf4231a27",
+        "chain-horizontal-1116-909ec99c19"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00028",
+      "objectId": "parallel_copy_of:chain-horizontal-1102-2cf4231a27>chain-horizontal-1142-6079d22077",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 28,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1102-2cf4231a27",
+        "chain-horizontal-1142-6079d22077"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00029",
+      "objectId": "parallel_copy_of:chain-horizontal-1116-909ec99c19>chain-horizontal-1142-6079d22077",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 29,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1116-909ec99c19",
+        "chain-horizontal-1142-6079d22077"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00030",
+      "objectId": "parallel_copy_of:chain-horizontal-1116-909ec99c19>chain-horizontal-1156-5606f0ed6b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 30,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1116-909ec99c19",
+        "chain-horizontal-1156-5606f0ed6b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00031",
+      "objectId": "parallel_copy_of:chain-horizontal-1124-e426392f36>chain-horizontal-1145-5d1a063c44",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 31,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1124-e426392f36",
+        "chain-horizontal-1145-5d1a063c44"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00032",
+      "objectId": "parallel_copy_of:chain-horizontal-1181-8c32d74471>chain-horizontal-1225-d1d946826e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 32,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1181-8c32d74471",
+        "chain-horizontal-1225-d1d946826e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00033",
+      "objectId": "parallel_copy_of:chain-horizontal-1183-58b2df3879>chain-horizontal-1197-2ba4c649ec",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 33,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1183-58b2df3879",
+        "chain-horizontal-1197-2ba4c649ec"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00034",
+      "objectId": "parallel_copy_of:chain-horizontal-1183-58b2df3879>chain-horizontal-1223-b65783620b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 34,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1183-58b2df3879",
+        "chain-horizontal-1223-b65783620b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00035",
+      "objectId": "parallel_copy_of:chain-horizontal-1197-2ba4c649ec>chain-horizontal-1223-b65783620b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 35,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1197-2ba4c649ec",
+        "chain-horizontal-1223-b65783620b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00036",
+      "objectId": "parallel_copy_of:chain-horizontal-1197-2ba4c649ec>chain-horizontal-1237-f0743ae9fc",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 36,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1197-2ba4c649ec",
+        "chain-horizontal-1237-f0743ae9fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00037",
+      "objectId": "parallel_copy_of:chain-horizontal-1223-b65783620b>chain-horizontal-1237-f0743ae9fc",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 37,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1223-b65783620b",
+        "chain-horizontal-1237-f0743ae9fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00038",
+      "objectId": "parallel_copy_of:chain-horizontal-1223-b65783620b>chain-horizontal-1264-aa7f31b1b4",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 38,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1223-b65783620b",
+        "chain-horizontal-1264-aa7f31b1b4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00039",
+      "objectId": "parallel_copy_of:chain-horizontal-1225-d1d946826e>chain-horizontal-1247-0554f5b543",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 39,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1225-d1d946826e",
+        "chain-horizontal-1247-0554f5b543"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00040",
+      "objectId": "parallel_copy_of:chain-horizontal-1237-f0743ae9fc>chain-horizontal-1264-aa7f31b1b4",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 40,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1237-f0743ae9fc",
+        "chain-horizontal-1264-aa7f31b1b4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00041",
+      "objectId": "parallel_copy_of:chain-horizontal-1264-aa7f31b1b4>chain-horizontal-1304-143cb349ef",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 41,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1264-aa7f31b1b4",
+        "chain-horizontal-1304-143cb349ef"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00042",
+      "objectId": "parallel_copy_of:chain-horizontal-1304-143cb349ef>chain-horizontal-1318-e6837e4841",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 42,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1304-143cb349ef",
+        "chain-horizontal-1318-e6837e4841"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00043",
+      "objectId": "parallel_copy_of:chain-horizontal-1375-01e41241b8>chain-horizontal-1380-7bf11c31d4",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 43,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1375-01e41241b8",
+        "chain-horizontal-1380-7bf11c31d4"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00044",
+      "objectId": "parallel_copy_of:chain-horizontal-1385-5c179de413>chain-horizontal-1399-67bc6fa4e8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 44,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1385-5c179de413",
+        "chain-horizontal-1399-67bc6fa4e8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00045",
+      "objectId": "parallel_copy_of:chain-horizontal-1385-5c179de413>chain-horizontal-1425-9cc4080b86",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 45,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1385-5c179de413",
+        "chain-horizontal-1425-9cc4080b86"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00046",
+      "objectId": "parallel_copy_of:chain-horizontal-1399-67bc6fa4e8>chain-horizontal-1425-9cc4080b86",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 46,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1399-67bc6fa4e8",
+        "chain-horizontal-1425-9cc4080b86"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00047",
+      "objectId": "parallel_copy_of:chain-horizontal-1506-4a4ddf2b4a>chain-horizontal-1520-07be7ab86f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 47,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1506-4a4ddf2b4a",
+        "chain-horizontal-1520-07be7ab86f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00048",
+      "objectId": "parallel_copy_of:chain-horizontal-1520-07be7ab86f>chain-horizontal-1546-c68c8b5c98",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 48,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-1520-07be7ab86f",
+        "chain-horizontal-1546-c68c8b5c98"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00049",
+      "objectId": "parallel_copy_of:chain-horizontal-486-69b7c242bc>chain-horizontal-500-0153663cd9",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 49,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-486-69b7c242bc",
+        "chain-horizontal-500-0153663cd9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00050",
+      "objectId": "parallel_copy_of:chain-horizontal-526-4427781c78>chain-horizontal-541-b1b9ab80a8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 50,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-526-4427781c78",
+        "chain-horizontal-541-b1b9ab80a8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00051",
+      "objectId": "parallel_copy_of:chain-horizontal-632-a25b6c70e8>chain-horizontal-672-e47f405cec",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 51,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-632-a25b6c70e8",
+        "chain-horizontal-672-e47f405cec"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00052",
+      "objectId": "parallel_copy_of:chain-horizontal-739-f6ce2e5984>chain-horizontal-753-6f115fb84c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 52,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-739-f6ce2e5984",
+        "chain-horizontal-753-6f115fb84c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00053",
+      "objectId": "parallel_copy_of:chain-horizontal-739-f6ce2e5984>chain-horizontal-780-240f38b5e2",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 53,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-739-f6ce2e5984",
+        "chain-horizontal-780-240f38b5e2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00054",
+      "objectId": "parallel_copy_of:chain-horizontal-753-6f115fb84c>chain-horizontal-780-240f38b5e2",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 54,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-753-6f115fb84c",
+        "chain-horizontal-780-240f38b5e2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00055",
+      "objectId": "parallel_copy_of:chain-horizontal-753-6f115fb84c>chain-horizontal-794-a18cd2c4e9",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 55,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-753-6f115fb84c",
+        "chain-horizontal-794-a18cd2c4e9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00056",
+      "objectId": "parallel_copy_of:chain-horizontal-780-240f38b5e2>chain-horizontal-794-a18cd2c4e9",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 56,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-780-240f38b5e2",
+        "chain-horizontal-794-a18cd2c4e9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00057",
+      "objectId": "parallel_copy_of:chain-horizontal-780-240f38b5e2>chain-horizontal-820-de28adcc17",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 57,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-780-240f38b5e2",
+        "chain-horizontal-820-de28adcc17"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00058",
+      "objectId": "parallel_copy_of:chain-horizontal-794-a18cd2c4e9>chain-horizontal-820-de28adcc17",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 58,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-794-a18cd2c4e9",
+        "chain-horizontal-820-de28adcc17"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00059",
+      "objectId": "parallel_copy_of:chain-horizontal-794-a18cd2c4e9>chain-horizontal-834-e5b8128db5",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 59,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-794-a18cd2c4e9",
+        "chain-horizontal-834-e5b8128db5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00060",
+      "objectId": "parallel_copy_of:chain-horizontal-809-dd7a67b6e3>chain-horizontal-824-b938c9fdc5",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 60,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-809-dd7a67b6e3",
+        "chain-horizontal-824-b938c9fdc5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00061",
+      "objectId": "parallel_copy_of:chain-horizontal-809-dd7a67b6e3>chain-horizontal-850-f04075ff00",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 61,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-809-dd7a67b6e3",
+        "chain-horizontal-850-f04075ff00"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00062",
+      "objectId": "parallel_copy_of:chain-horizontal-820-de28adcc17>chain-horizontal-834-e5b8128db5",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 62,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-820-de28adcc17",
+        "chain-horizontal-834-e5b8128db5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00063",
+      "objectId": "parallel_copy_of:chain-horizontal-820-de28adcc17>chain-horizontal-860-ccc6617520",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 63,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-820-de28adcc17",
+        "chain-horizontal-860-ccc6617520"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00064",
+      "objectId": "parallel_copy_of:chain-horizontal-824-b938c9fdc5>chain-horizontal-850-f04075ff00",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 64,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-824-b938c9fdc5",
+        "chain-horizontal-850-f04075ff00"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00065",
+      "objectId": "parallel_copy_of:chain-horizontal-824-b938c9fdc5>chain-horizontal-864-5b6cded68a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 65,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-824-b938c9fdc5",
+        "chain-horizontal-864-5b6cded68a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00066",
+      "objectId": "parallel_copy_of:chain-horizontal-834-e5b8128db5>chain-horizontal-860-ccc6617520",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 66,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-834-e5b8128db5",
+        "chain-horizontal-860-ccc6617520"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00067",
+      "objectId": "parallel_copy_of:chain-horizontal-834-e5b8128db5>chain-horizontal-875-e8ee33adfb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 67,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-834-e5b8128db5",
+        "chain-horizontal-875-e8ee33adfb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00068",
+      "objectId": "parallel_copy_of:chain-horizontal-850-f04075ff00>chain-horizontal-864-5b6cded68a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 68,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-850-f04075ff00",
+        "chain-horizontal-864-5b6cded68a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00069",
+      "objectId": "parallel_copy_of:chain-horizontal-860-ccc6617520>chain-horizontal-875-e8ee33adfb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 69,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-860-ccc6617520",
+        "chain-horizontal-875-e8ee33adfb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00070",
+      "objectId": "parallel_copy_of:chain-horizontal-901-87fc565bc9>chain-horizontal-941-465abb5515",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 70,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-901-87fc565bc9",
+        "chain-horizontal-941-465abb5515"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00071",
+      "objectId": "parallel_copy_of:chain-horizontal-913-29ba427c78>chain-horizontal-934-8a9012a466",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 71,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-913-29ba427c78",
+        "chain-horizontal-934-8a9012a466"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00072",
+      "objectId": "parallel_copy_of:chain-horizontal-941-465abb5515>chain-horizontal-981-b4f0caed51",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 72,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-941-465abb5515",
+        "chain-horizontal-981-b4f0caed51"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00073",
+      "objectId": "parallel_copy_of:chain-horizontal-981-b4f0caed51>chain-horizontal-995-6999ae7178",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 73,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-981-b4f0caed51",
+        "chain-horizontal-995-6999ae7178"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00074",
+      "objectId": "parallel_copy_of:chain-horizontal-995-6999ae7178>chain-horizontal-1036-9607de0055",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 74,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-995-6999ae7178",
+        "chain-horizontal-1036-9607de0055"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00075",
+      "objectId": "parallel_copy_of:chain-vertical-1012-f53763dd56>chain-vertical-1038-a863e3c82f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 75,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1012-f53763dd56",
+        "chain-vertical-1038-a863e3c82f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00076",
+      "objectId": "parallel_copy_of:chain-vertical-1038-a863e3c82f>chain-vertical-1078-420b6cac24",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 76,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1038-a863e3c82f",
+        "chain-vertical-1078-420b6cac24"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00077",
+      "objectId": "parallel_copy_of:chain-vertical-1078-420b6cac24>chain-vertical-1092-3097a67846",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 77,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1078-420b6cac24",
+        "chain-vertical-1092-3097a67846"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00078",
+      "objectId": "parallel_copy_of:chain-vertical-1244-9aac53e733>chain-vertical-1270-7f204dc298",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 78,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1244-9aac53e733",
+        "chain-vertical-1270-7f204dc298"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00079",
+      "objectId": "parallel_copy_of:chain-vertical-1270-15e05c79c0>chain-vertical-1284-fca3d6db11",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 79,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1270-15e05c79c0",
+        "chain-vertical-1284-fca3d6db11"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00080",
+      "objectId": "parallel_copy_of:chain-vertical-1270-15e05c79c0>chain-vertical-1310-6b6b8561f7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 80,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1270-15e05c79c0",
+        "chain-vertical-1310-6b6b8561f7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00081",
+      "objectId": "parallel_copy_of:chain-vertical-1284-96acc7f0f5>chain-vertical-1325-cb444c8c70",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 81,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1284-96acc7f0f5",
+        "chain-vertical-1325-cb444c8c70"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00082",
+      "objectId": "parallel_copy_of:chain-vertical-1284-fca3d6db11>chain-vertical-1310-6b6b8561f7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 82,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1284-fca3d6db11",
+        "chain-vertical-1310-6b6b8561f7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00083",
+      "objectId": "parallel_copy_of:chain-vertical-1284-fca3d6db11>chain-vertical-1325-cf51052917",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 83,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1284-fca3d6db11",
+        "chain-vertical-1325-cf51052917"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00084",
+      "objectId": "parallel_copy_of:chain-vertical-1310-6b6b8561f7>chain-vertical-1325-cf51052917",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 84,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1310-6b6b8561f7",
+        "chain-vertical-1325-cf51052917"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00085",
+      "objectId": "parallel_copy_of:chain-vertical-1310-6b6b8561f7>chain-vertical-1350-a840fd09c8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 85,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1310-6b6b8561f7",
+        "chain-vertical-1350-a840fd09c8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00086",
+      "objectId": "parallel_copy_of:chain-vertical-1325-cb444c8c70>chain-vertical-1365-24a881c10b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 86,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1325-cb444c8c70",
+        "chain-vertical-1365-24a881c10b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00087",
+      "objectId": "parallel_copy_of:chain-vertical-1325-cf51052917>chain-vertical-1350-a840fd09c8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 87,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1325-cf51052917",
+        "chain-vertical-1350-a840fd09c8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00088",
+      "objectId": "parallel_copy_of:chain-vertical-1325-cf51052917>chain-vertical-1365-47466e5390",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 88,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1325-cf51052917",
+        "chain-vertical-1365-47466e5390"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00089",
+      "objectId": "parallel_copy_of:chain-vertical-1350-a840fd09c8>chain-vertical-1365-47466e5390",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 89,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1350-a840fd09c8",
+        "chain-vertical-1365-47466e5390"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00090",
+      "objectId": "parallel_copy_of:chain-vertical-1350-a840fd09c8>chain-vertical-1391-e39a4d159c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 90,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1350-a840fd09c8",
+        "chain-vertical-1391-e39a4d159c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00091",
+      "objectId": "parallel_copy_of:chain-vertical-1365-24a881c10b>chain-vertical-1391-25706b778d",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 91,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1365-24a881c10b",
+        "chain-vertical-1391-25706b778d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00092",
+      "objectId": "parallel_copy_of:chain-vertical-1365-47466e5390>chain-vertical-1391-e39a4d159c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 92,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-1365-47466e5390",
+        "chain-vertical-1391-e39a4d159c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00093",
+      "objectId": "parallel_copy_of:chain-vertical-351-ab0ce683c7>chain-vertical-365-ccde18f359",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 93,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-351-ab0ce683c7",
+        "chain-vertical-365-ccde18f359"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00094",
+      "objectId": "parallel_copy_of:chain-vertical-351-ab0ce683c7>chain-vertical-392-95a384c516",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 94,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-351-ab0ce683c7",
+        "chain-vertical-392-95a384c516"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00095",
+      "objectId": "parallel_copy_of:chain-vertical-365-ccde18f359>chain-vertical-392-95a384c516",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 95,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-365-ccde18f359",
+        "chain-vertical-392-95a384c516"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00096",
+      "objectId": "parallel_copy_of:chain-vertical-365-ccde18f359>chain-vertical-406-56d8743667",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 96,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-365-ccde18f359",
+        "chain-vertical-406-56d8743667"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00097",
+      "objectId": "parallel_copy_of:chain-vertical-392-95a384c516>chain-vertical-406-56d8743667",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 97,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-392-95a384c516",
+        "chain-vertical-406-56d8743667"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00098",
+      "objectId": "parallel_copy_of:chain-vertical-392-95a384c516>chain-vertical-432-aae2ec0cae",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 98,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-392-95a384c516",
+        "chain-vertical-432-aae2ec0cae"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00099",
+      "objectId": "parallel_copy_of:chain-vertical-406-56d8743667>chain-vertical-432-aae2ec0cae",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 99,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-406-56d8743667",
+        "chain-vertical-432-aae2ec0cae"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00100",
+      "objectId": "parallel_copy_of:chain-vertical-406-56d8743667>chain-vertical-446-f17734d31f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 100,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-406-56d8743667",
+        "chain-vertical-446-f17734d31f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00101",
+      "objectId": "parallel_copy_of:chain-vertical-432-aae2ec0cae>chain-vertical-446-f17734d31f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 101,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-432-aae2ec0cae",
+        "chain-vertical-446-f17734d31f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00102",
+      "objectId": "parallel_copy_of:chain-vertical-432-aae2ec0cae>chain-vertical-473-bcf7015f6a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 102,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-432-aae2ec0cae",
+        "chain-vertical-473-bcf7015f6a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00103",
+      "objectId": "parallel_copy_of:chain-vertical-446-f17734d31f>chain-vertical-473-bcf7015f6a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 103,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-446-f17734d31f",
+        "chain-vertical-473-bcf7015f6a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00104",
+      "objectId": "parallel_copy_of:chain-vertical-446-f17734d31f>chain-vertical-487-60ff193b17",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 104,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-446-f17734d31f",
+        "chain-vertical-487-60ff193b17"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00105",
+      "objectId": "parallel_copy_of:chain-vertical-473-bcf7015f6a>chain-vertical-487-60ff193b17",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 105,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-473-bcf7015f6a",
+        "chain-vertical-487-60ff193b17"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00106",
+      "objectId": "parallel_copy_of:chain-vertical-473-bcf7015f6a>chain-vertical-513-0a7a3c69ee",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 106,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-473-bcf7015f6a",
+        "chain-vertical-513-0a7a3c69ee"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00107",
+      "objectId": "parallel_copy_of:chain-vertical-487-60ff193b17>chain-vertical-513-0a7a3c69ee",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 107,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-60ff193b17",
+        "chain-vertical-513-0a7a3c69ee"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00108",
+      "objectId": "parallel_copy_of:chain-vertical-487-60ff193b17>chain-vertical-527-5b52c2a7e7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 108,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-487-60ff193b17",
+        "chain-vertical-527-5b52c2a7e7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00109",
+      "objectId": "parallel_copy_of:chain-vertical-513-0a7a3c69ee>chain-vertical-527-5b52c2a7e7",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 109,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-513-0a7a3c69ee",
+        "chain-vertical-527-5b52c2a7e7"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00110",
+      "objectId": "parallel_copy_of:chain-vertical-513-0a7a3c69ee>chain-vertical-553-1e46591ed2",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 110,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-513-0a7a3c69ee",
+        "chain-vertical-553-1e46591ed2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00111",
+      "objectId": "parallel_copy_of:chain-vertical-527-5b52c2a7e7>chain-vertical-553-1e46591ed2",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 111,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-527-5b52c2a7e7",
+        "chain-vertical-553-1e46591ed2"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00112",
+      "objectId": "parallel_copy_of:chain-vertical-527-5b52c2a7e7>chain-vertical-568-912c70fbcf",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 112,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-527-5b52c2a7e7",
+        "chain-vertical-568-912c70fbcf"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00113",
+      "objectId": "parallel_copy_of:chain-vertical-553-1e46591ed2>chain-vertical-568-912c70fbcf",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 113,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-553-1e46591ed2",
+        "chain-vertical-568-912c70fbcf"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00114",
+      "objectId": "parallel_copy_of:chain-vertical-553-1e46591ed2>chain-vertical-594-5d0fcbf8eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 114,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-553-1e46591ed2",
+        "chain-vertical-594-5d0fcbf8eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00115",
+      "objectId": "parallel_copy_of:chain-vertical-568-912c70fbcf>chain-vertical-594-5d0fcbf8eb",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 115,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-568-912c70fbcf",
+        "chain-vertical-594-5d0fcbf8eb"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00116",
+      "objectId": "parallel_copy_of:chain-vertical-568-912c70fbcf>chain-vertical-608-ac78263f63",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 116,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-568-912c70fbcf",
+        "chain-vertical-608-ac78263f63"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00117",
+      "objectId": "parallel_copy_of:chain-vertical-594-5d0fcbf8eb>chain-vertical-608-ac78263f63",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 117,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-594-5d0fcbf8eb",
+        "chain-vertical-608-ac78263f63"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00118",
+      "objectId": "parallel_copy_of:chain-vertical-594-5d0fcbf8eb>chain-vertical-634-458959549b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 118,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-594-5d0fcbf8eb",
+        "chain-vertical-634-458959549b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00119",
+      "objectId": "parallel_copy_of:chain-vertical-608-ac78263f63>chain-vertical-634-458959549b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 119,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-608-ac78263f63",
+        "chain-vertical-634-458959549b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00120",
+      "objectId": "parallel_copy_of:chain-vertical-608-ac78263f63>chain-vertical-648-18b7183739",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 120,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-608-ac78263f63",
+        "chain-vertical-648-18b7183739"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00121",
+      "objectId": "parallel_copy_of:chain-vertical-634-458959549b>chain-vertical-648-18b7183739",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 121,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-634-458959549b",
+        "chain-vertical-648-18b7183739"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00122",
+      "objectId": "parallel_copy_of:chain-vertical-634-458959549b>chain-vertical-674-2c5313ff8c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 122,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-634-458959549b",
+        "chain-vertical-674-2c5313ff8c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00123",
+      "objectId": "parallel_copy_of:chain-vertical-648-18b7183739>chain-vertical-674-2c5313ff8c",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 123,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-648-18b7183739",
+        "chain-vertical-674-2c5313ff8c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00124",
+      "objectId": "parallel_copy_of:chain-vertical-648-18b7183739>chain-vertical-689-cf142fea1b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 124,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-648-18b7183739",
+        "chain-vertical-689-cf142fea1b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00125",
+      "objectId": "parallel_copy_of:chain-vertical-674-2c5313ff8c>chain-vertical-689-cf142fea1b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 125,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-674-2c5313ff8c",
+        "chain-vertical-689-cf142fea1b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00126",
+      "objectId": "parallel_copy_of:chain-vertical-715-50315c6f14>chain-vertical-729-7cf94c0a43",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 126,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-715-50315c6f14",
+        "chain-vertical-729-7cf94c0a43"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00127",
+      "objectId": "parallel_copy_of:chain-vertical-715-50315c6f14>chain-vertical-755-a827ce9880",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 127,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-715-50315c6f14",
+        "chain-vertical-755-a827ce9880"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00128",
+      "objectId": "parallel_copy_of:chain-vertical-729-7cf94c0a43>chain-vertical-770-3d95e49e90",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 128,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-729-7cf94c0a43",
+        "chain-vertical-770-3d95e49e90"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00129",
+      "objectId": "parallel_copy_of:chain-vertical-755-a827ce9880>chain-vertical-770-3d95e49e90",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 129,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-755-a827ce9880",
+        "chain-vertical-770-3d95e49e90"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00130",
+      "objectId": "parallel_copy_of:chain-vertical-755-a827ce9880>chain-vertical-796-78cbf2d99f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 130,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-755-a827ce9880",
+        "chain-vertical-796-78cbf2d99f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00131",
+      "objectId": "parallel_copy_of:chain-vertical-770-3d95e49e90>chain-vertical-796-78cbf2d99f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 131,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-770-3d95e49e90",
+        "chain-vertical-796-78cbf2d99f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00132",
+      "objectId": "parallel_copy_of:chain-vertical-770-3d95e49e90>chain-vertical-810-fdc0779575",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 132,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-770-3d95e49e90",
+        "chain-vertical-810-fdc0779575"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00133",
+      "objectId": "parallel_copy_of:chain-vertical-796-78cbf2d99f>chain-vertical-810-fdc0779575",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 133,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-796-78cbf2d99f",
+        "chain-vertical-810-fdc0779575"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00134",
+      "objectId": "parallel_copy_of:chain-vertical-796-78cbf2d99f>chain-vertical-836-bac6bf1881",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 134,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-796-78cbf2d99f",
+        "chain-vertical-836-bac6bf1881"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00135",
+      "objectId": "parallel_copy_of:chain-vertical-810-fdc0779575>chain-vertical-836-bac6bf1881",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 135,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-810-fdc0779575",
+        "chain-vertical-836-bac6bf1881"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00136",
+      "objectId": "parallel_copy_of:chain-vertical-836-bac6bf1881>chain-vertical-876-65f82fe66a",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 136,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-836-bac6bf1881",
+        "chain-vertical-876-65f82fe66a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00137",
+      "objectId": "parallel_copy_of:chain-vertical-917-927ac75283>chain-vertical-931-1cc1996f43",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 137,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-917-927ac75283",
+        "chain-vertical-931-1cc1996f43"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00138",
+      "objectId": "parallel_copy_of:chain-vertical-917-927ac75283>chain-vertical-956-6dc08e9c89",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 138,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-917-927ac75283",
+        "chain-vertical-956-6dc08e9c89"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00139",
+      "objectId": "parallel_copy_of:chain-vertical-931-1cc1996f43>chain-vertical-956-6dc08e9c89",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 139,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-931-1cc1996f43",
+        "chain-vertical-956-6dc08e9c89"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00140",
+      "objectId": "parallel_copy_of:chain-vertical-971-53b6bf4ed4>chain-vertical-1012-f53763dd56",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 140,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-971-53b6bf4ed4",
+        "chain-vertical-1012-f53763dd56"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00141",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770:0.005",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 01/196 px",
+      "reversible": true,
+      "seq": 141,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-01-horizontal-93daa2b6f9"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00142",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770:0.877",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 111/126.5 px",
+      "reversible": true,
+      "seq": 142,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-111-rotated-cw-5261b91d8f"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00143",
+      "objectId": "metric:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 143,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00144",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:6.308",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 533/84.5 px",
+      "reversible": true,
+      "seq": 144,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-533-rotated-cw-957fd9f0af"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00145",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:0.165",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 13/79 px",
+      "reversible": true,
+      "seq": 145,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-13-rotated-ccw-14f8d46779"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00146",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:8.46",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 533/63 px",
+      "reversible": true,
+      "seq": 146,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-533-rotated-cw-a4d0b5c825"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00147",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:0.237",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 13/54.954545 px",
+      "reversible": true,
+      "seq": 147,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-13-horizontal-4badf7dc5d"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00148",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:0.181",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 13/72 px",
+      "reversible": true,
+      "seq": 148,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-13-horizontal-eef26e3975"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00149",
+      "objectId": "scale:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5:12.69",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 533/42 px",
+      "reversible": true,
+      "seq": 149,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-533-rotated-cw-c9798e0c73"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00150",
+      "objectId": "metric:frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 150,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00151",
+      "objectId": "selected-plan",
+      "reason": "GROUND UNKNOWN 1625×1700 px",
+      "reversible": true,
+      "seq": 151,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "286,525,1493.4,1502.5",
+      "downstream": [
+        "ENVELOPE",
+        "BODIES"
+      ],
+      "eventId": "e00152",
+      "objectId": "extent:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "reason": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT, weak",
+      "reversible": true,
+      "seq": 152,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:298,613.5,1481.4,1388.5",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00153",
+      "objectId": "envelope:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "reason": "17 of 20 cells enclosed",
+      "reversible": true,
+      "seq": 153,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "0",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00154",
+      "objectId": "masses:frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "reason": "none",
+      "reversible": true,
+      "seq": 154,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "SCORED",
+      "conflictIds": [],
+      "decision": "NO_ALTERNATIVE",
+      "downstream": [
+        "FINAL"
+      ],
+      "eventId": "e00155",
+      "objectId": "resolution",
+      "reason": "",
+      "reversible": true,
+      "seq": 155,
+      "stage": "PLAN_RESOLUTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "FAILED:METRIC_RESOLUTION_INCONCLUSIVE",
+      "downstream": [],
+      "eventId": "e00156",
+      "objectId": "result",
+      "reason": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 1625×1700 px floor plan prints no dimension chain, so nothing on it states a scale)",
+      "reversible": false,
+      "seq": 156,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "galaktyka",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

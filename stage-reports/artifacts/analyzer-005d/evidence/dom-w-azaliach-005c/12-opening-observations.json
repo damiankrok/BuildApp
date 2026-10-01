@@ -1,0 +1,102 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 501,
+        "x1": 523,
+        "y0": 122,
+        "y1": 144
+      },
+      "id": "metric-callout-ring-04b4210895",
+      "rawText": "40/74",
+      "value": 40
+    },
+    {
+      "box": {
+        "x0": 241,
+        "x1": 271,
+        "y0": 423,
+        "y1": 453
+      },
+      "id": "metric-callout-ring-3abd304fbe",
+      "rawText": "400/400",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 278,
+        "x1": 308,
+        "y0": 402,
+        "y1": 432
+      },
+      "id": "metric-callout-ring-436a0e8fe0",
+      "rawText": "400/40",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 642,
+        "x1": 664,
+        "y0": 329,
+        "y1": 351
+      },
+      "id": "metric-callout-ring-6578715b4a",
+      "rawText": "604/74",
+      "value": 604
+    },
+    {
+      "box": {
+        "x0": 673,
+        "x1": 713,
+        "y0": 388,
+        "y1": 428
+      },
+      "id": "metric-callout-ring-77b393e131",
+      "rawText": "80/74",
+      "value": 80
+    },
+    {
+      "box": {
+        "x0": 299,
+        "x1": 329,
+        "y0": 402,
+        "y1": 432
+      },
+      "id": "metric-callout-ring-b914af2ce2",
+      "rawText": "400/40",
+      "value": 400
+    },
+    {
+      "box": {
+        "x0": 132,
+        "x1": 166,
+        "y0": 253,
+        "y1": 287
+      },
+      "id": "metric-callout-ring-bfe89a80d5",
+      "rawText": "400/41",
+      "value": 400
+    }
+  ],
+  "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 30,
+    "OPENING_SUPPORTED": 3,
+    "TRUE_EXTERIOR_GAP": 11,
+    "UNKNOWN_GAP": 6
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 237,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 633,
+      "score": 1,
+      "toPx": 442,
+      "why": "a 3.89 m gap between two pieces of one wall with 100% of it spanned by one drawn line and a callout of 400 cm beside it: an opening in a wall that carries on",
+      "widthM": 3.889875
+    }
+  ]
+}

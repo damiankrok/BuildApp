@@ -1,0 +1,232 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "OCR_READING"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-m738275b7537b0-f54b4db7f3",
+      "reason": "38 assets (PERSPECTIVE_RENDER 24, ELEVATION 4, SECTION 1, FLOOR_PLAN 4, SITE_PLAN 1, UNKNOWN 4), 9 published figures, 12 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00002",
+      "objectId": "selected-plan",
+      "reason": "GROUND DIMENSIONED 853×853 px",
+      "reversible": true,
+      "seq": 2,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [
+        "chain-vertical-485-8eb547bf3f"
+      ],
+      "decision": "75,230,795,578.5",
+      "downstream": [
+        "ENVELOPE",
+        "BODIES"
+      ],
+      "eventId": "e00003",
+      "objectId": "extent:frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "reason": "DIMENSION_CHAIN_EXTENT/EXTERIOR_CHAIN_TICKS, weak; refused chain-vertical-485-8eb547bf3f",
+      "reversible": true,
+      "seq": 3,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:75,246.5,795,568.5",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00004",
+      "objectId": "envelope:frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "reason": "39 of 39 cells enclosed",
+      "reversible": true,
+      "seq": 4,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_ADOPTED",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00005",
+      "objectId": "outline:frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "reason": "the outline adds nothing the box leaves open: the box stands",
+      "reversible": true,
+      "seq": 5,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00006",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:0:UNKNOWN",
+      "reason": "5.87 m², junction wall 0.53, side wall 0.52",
+      "reversible": true,
+      "seq": 6,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00007",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:1:FLUSH_ATTACHED",
+      "reason": "0.32 m², junction wall 1, side wall 1",
+      "reversible": true,
+      "seq": 7,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00008",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:2:UNKNOWN",
+      "reason": "0.25 m², junction wall 0.1, side wall 0.36",
+      "reversible": true,
+      "seq": 8,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00009",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:3:FLUSH_ATTACHED",
+      "reason": "2.06 m², junction wall 0.68, side wall 0.75",
+      "reversible": true,
+      "seq": 9,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00010",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:4:COVERED_TERRACE",
+      "reason": "0.45 m², junction wall 0, side wall 0.31",
+      "reversible": true,
+      "seq": 10,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "NOT_BUILT",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00011",
+      "objectId": "body:frame-asset-rzut-b747b42ad2-e3a3d0015d:5:FLUSH_ATTACHED",
+      "reason": "0.48 m², junction wall 0.9, side wall 1",
+      "reversible": true,
+      "seq": 11,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "1",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00012",
+      "objectId": "masses:frame-asset-rzut-b747b42ad2-e3a3d0015d",
+      "reason": "75,246.5,795,568.5",
+      "reversible": true,
+      "seq": 12,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "VERIFIED",
+      "conflictIds": [],
+      "decision": "REPLACED",
+      "downstream": [
+        "PLAN_RESOLUTION",
+        "FINAL"
+      ],
+      "eventId": "e00013",
+      "objectId": "challenge",
+      "reason": "copy dimensioned e3a3d0015d, chain extent, scale 2.223611 cm/px, largest-first tiling, sides as gridded: 1 body, 116.9 m² (-4.2% of 122.07), AGREES",
+      "reversible": true,
+      "seq": 13,
+      "stage": "FIRST_SUCCESS_CHALLENGE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "COMPLETED",
+      "downstream": [],
+      "eventId": "e00014",
+      "objectId": "result",
+      "reason": "model 0a0e019df52a473a; footprint 116.94 m² against 122.07",
+      "reversible": false,
+      "seq": 14,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "eoze-every-copy",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

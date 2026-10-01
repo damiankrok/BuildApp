@@ -1,0 +1,44 @@
+{
+  "bindingRecorded": true,
+  "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+  "legend": {
+    "ALTERNATIVE": "#9a9a9a",
+    "AMBIGUOUS": "#8a2fd1",
+    "PRIMARY": "#1f5fd1",
+    "UNCENTRED": "#c0c0c0"
+  },
+  "observations": [
+    {
+      "alternatives": [],
+      "chainId": "chain-horizontal-1424-0c18c6c9c0",
+      "conflictIds": [],
+      "decision": "REJECTED",
+      "id": "dim-obs-01-horizontal-93daa2b6f9",
+      "impliedCmPerPx": 0.005102,
+      "independence": "INDEPENDENT",
+      "labelId": "label:chain-horizontal-1424-0c18c6c9c0:HORIZONTAL:01",
+      "offsetShare": 0.260204,
+      "orientation": "HORIZONTAL",
+      "rawText": "01",
+      "reason": "UNCENTRED: no span is centred on the label",
+      "role": "UNCENTRED",
+      "skipped": {
+        "questionable": 0,
+        "rejected": 0,
+        "tick": 0
+      },
+      "span": [
+        421.5,
+        617.5
+      ],
+      "spanPx": 196,
+      "status": "RAW",
+      "supportIds": [
+        "text-region-552-1428-f53c92f21a"
+      ],
+      "valueCm": 1
+    }
+  ],
+  "omitted": 0,
+  "undecidedOrientationReadings": 3
+}

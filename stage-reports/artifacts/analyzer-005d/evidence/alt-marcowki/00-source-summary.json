@@ -1,0 +1,67 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.0.0"
+  },
+  "assets": 14,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 4,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1
+  },
+  "canonicalUrl": "https://www.projektydomownowoczesnych.pl/p,m2fa281446a8ca,dom-w-marcowkach-ge",
+  "contentHash": "01f9a8800b8b92a04ffe27212c948075b1512bfa75b2e07a158f55ca33d44c43",
+  "failuresByCode": {},
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m2fa281446a8ca-1fb1dfaa5a",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.8
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.27
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 170.62
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 131.16
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 24.1
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 129.04
+    },
+    {
+      "key": "plot_min_depth",
+      "unit": "m",
+      "value": 20.6
+    },
+    {
+      "key": "plot_min_width",
+      "unit": "m",
+      "value": 19.05
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 779.94
+    }
+  ],
+  "runId": "alt-marcowki"
+}

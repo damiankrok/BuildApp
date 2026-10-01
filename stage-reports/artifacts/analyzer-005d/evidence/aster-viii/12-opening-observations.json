@@ -1,0 +1,234 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 432,
+        "x1": 452,
+        "y0": 619,
+        "y1": 639
+      },
+      "id": "metric-callout-ring-23eef0237c",
+      "rawText": "41/41",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 531,
+        "x1": 555,
+        "y0": 819,
+        "y1": 843
+      },
+      "id": "metric-callout-ring-c098709402",
+      "rawText": "40/400",
+      "value": 40
+    }
+  ],
+  "frameId": "frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+  "gapClasses": {},
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 458,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 124,
+      "score": 0.8,
+      "toPx": 465,
+      "why": "a 7.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 7
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 501,
+      "id": "opening-1",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 583.5,
+      "score": 0.8,
+      "toPx": 509,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 569,
+      "id": "opening-2",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 583.5,
+      "score": 0.8,
+      "toPx": 575,
+      "why": "a 6.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 6
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 614,
+      "id": "opening-3",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 583.5,
+      "score": 0.8,
+      "toPx": 622,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 614,
+      "id": "opening-4",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 669.5,
+      "score": 0.8,
+      "toPx": 622,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 833,
+      "id": "opening-5",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 733.75,
+      "score": 0.8,
+      "toPx": 839,
+      "why": "a 6.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 6
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 897,
+      "id": "opening-6",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 733.75,
+      "score": 0.8,
+      "toPx": 905,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 421,
+      "id": "opening-7",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 884.5,
+      "score": 0.8,
+      "toPx": 425,
+      "why": "a 4.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 4
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 617,
+      "id": "opening-8",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 884.5,
+      "score": 0.8,
+      "toPx": 625,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 717,
+      "id": "opening-9",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 884.5,
+      "score": 0.8,
+      "toPx": 725,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 730,
+      "id": "opening-10",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 333,
+      "score": 0.8,
+      "toPx": 738,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 798,
+      "id": "opening-11",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 702.5,
+      "score": 0.8,
+      "toPx": 803,
+      "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 5
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 798,
+      "id": "opening-12",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 721,
+      "score": 0.8,
+      "toPx": 803,
+      "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 5
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 513,
+      "id": "opening-13",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 767,
+      "score": 0.8,
+      "toPx": 521,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 394,
+      "id": "opening-14",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 872.25,
+      "score": 0.8,
+      "toPx": 402,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 730,
+      "id": "opening-15",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 901,
+      "score": 0.8,
+      "toPx": 738,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 730,
+      "id": "opening-16",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 934.75,
+      "score": 0.8,
+      "toPx": 738,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    }
+  ]
+}

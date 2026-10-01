@@ -1,0 +1,339 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "OCR_READING"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-www-dobredomy-pl-5e52f50fa8",
+      "reason": "25 assets (ELEVATION 4, SITE_PLAN 1, FLOOR_PLAN 1, PERSPECTIVE_RENDER 1, UNKNOWN 18), 11 published figures, 0 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00002",
+      "objectId": "parallel_copy_of:chain-horizontal-390-e9845ec0c1>chain-horizontal-453-297c7be8ea",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 2,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-390-e9845ec0c1",
+        "chain-horizontal-453-297c7be8ea"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00003",
+      "objectId": "parallel_copy_of:chain-horizontal-800-2c07a83fea>chain-horizontal-829-524d1557a9",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 3,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-800-2c07a83fea",
+        "chain-horizontal-829-524d1557a9"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00004",
+      "objectId": "parallel_copy_of:chain-horizontal-800-2c07a83fea>chain-horizontal-854-70d9ee6722",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 4,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-800-2c07a83fea",
+        "chain-horizontal-854-70d9ee6722"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00005",
+      "objectId": "parallel_copy_of:chain-horizontal-829-524d1557a9>chain-horizontal-854-70d9ee6722",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 5,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-829-524d1557a9",
+        "chain-horizontal-854-70d9ee6722"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00006",
+      "objectId": "parallel_copy_of:chain-horizontal-829-524d1557a9>chain-horizontal-875-caabdcde1e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 6,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-829-524d1557a9",
+        "chain-horizontal-875-caabdcde1e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00007",
+      "objectId": "parallel_copy_of:chain-horizontal-854-70d9ee6722>chain-horizontal-875-caabdcde1e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 7,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-854-70d9ee6722",
+        "chain-horizontal-875-caabdcde1e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00008",
+      "objectId": "parallel_copy_of:chain-horizontal-854-70d9ee6722>chain-horizontal-901-7083a1adb6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 8,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-854-70d9ee6722",
+        "chain-horizontal-901-7083a1adb6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00009",
+      "objectId": "parallel_copy_of:chain-horizontal-875-caabdcde1e>chain-horizontal-901-7083a1adb6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 9,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-875-caabdcde1e",
+        "chain-horizontal-901-7083a1adb6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00010",
+      "objectId": "parallel_copy_of:chain-vertical-213-dabf0743ab>chain-vertical-247-90517269da",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 10,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-213-dabf0743ab",
+        "chain-vertical-247-90517269da"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00011",
+      "objectId": "parallel_copy_of:chain-vertical-706-d24d95120b>chain-vertical-762-df4a7c9e64",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 11,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-706-d24d95120b",
+        "chain-vertical-762-df4a7c9e64"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00012",
+      "objectId": "scale:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2:2.087",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 215/103 px",
+      "reversible": true,
+      "seq": 12,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-215-rotated-cw-7f483fdd4f"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00013",
+      "objectId": "metric:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 13,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00014",
+      "objectId": "selected-plan",
+      "reason": "GROUND UNKNOWN 962×1202 px",
+      "reversible": true,
+      "seq": 14,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "116,325,893,953.8",
+      "downstream": [
+        "ENVELOPE",
+        "BODIES"
+      ],
+      "eventId": "e00015",
+      "objectId": "extent:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+      "reason": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT, weak",
+      "reversible": true,
+      "seq": 15,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:124,333,884.5,954.3",
+      "downstream": [
+        "BODIES",
+        "FIRST_SUCCESS_CHALLENGE"
+      ],
+      "eventId": "e00016",
+      "objectId": "envelope:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+      "reason": "27 of 36 cells enclosed",
+      "reversible": true,
+      "seq": 16,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "0",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00017",
+      "objectId": "masses:frame-asset-aster-viii-rzut-parter-7e90859c03-b39fd620c2",
+      "reason": "none",
+      "reversible": true,
+      "seq": 17,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "SCORED",
+      "conflictIds": [],
+      "decision": "NO_ALTERNATIVE",
+      "downstream": [
+        "FINAL"
+      ],
+      "eventId": "e00018",
+      "objectId": "resolution",
+      "reason": "",
+      "reversible": true,
+      "seq": 18,
+      "stage": "PLAN_RESOLUTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "FAILED:METRIC_RESOLUTION_INCONCLUSIVE",
+      "downstream": [],
+      "eventId": "e00019",
+      "objectId": "result",
+      "reason": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.087379 cm/px (0 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 962×1202 px floor plan prints no dimension chain, so nothing on it states a scale)",
+      "reversible": false,
+      "seq": 19,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "aster-viii",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}
