@@ -63,14 +63,18 @@ state about 4.0 cm/px. They are set in a condensed face: four glyphs in about 20
 
 Then:
 
-1. `e00015`: `1950` (four cells) is read `1410` and classed **SUPPORTED** (p 0.47). The candidates are
-   `1410|1010,1430,1440,1450,1451,1470,1910`: two substitutions (`9`→`4`, `5`→`1`, the corpus's most frequent
-   confusion), and the truth is not among the eight. This is a confident misread, a declared limit of the class
-   (calibration README).
+1. `e00015`: `1950` (four cells) is read `1410` and classed **SUPPORTED** (p 0.47, stable under the bracket). The
+   candidates are `1410|1010,1430,1440,1450,1451,1470,1910`: two substitutions (`9`→`4`, `5`→`1`, the corpus's most
+   frequent confusion).
+   - Both true glyphs are cell candidates: `9` at p 0.04 (score ratio 0.66), `5` at p 0.08 (0.71).
+   - Their joint path is about 0.005 of the best, under the beam's 0.01 floor, and emission ends on the count bound
+     (18 values merged, mass 0.86). The truth is not among the eight.
+   - This is a confident misread, a declared limit of the class (calibration README).
 2. `640` is read `600` (AMBIGUOUS, `640` in its lattice), and `1417` is read `1117` (AMBIGUOUS, `1417` the lattice's
    top value).
-3. The horizontal `1000` is read as printed (SUPPORTED), but no horizontal chain is recorded at its line, so it binds
-   to no span. `730` is read `150` (`730` not in its lattice).
+3. The horizontal `1000` is read as printed (SUPPORTED), but it binds UNCENTRED to a 28 px span of its line (one
+   rejected mark skipped), not to the overall of about 250 px, so it states no usable scale. `730` is read `150`
+   (`730` not in its lattice).
 4. `e00209` `METRIC_RELATION` NO_SCALE/INCONCLUSIVE: the as-read total `1410` (2.895 cm/px) and its as-read child
    `600` (3.75) disagree, and no reading outside them decides.
 

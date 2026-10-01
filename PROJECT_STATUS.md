@@ -32,6 +32,7 @@
 | STAGE BUILDPLAN-ANALYZER-005B — DIMENSION EVIDENCE REFOUNDATION + SCALE/EXTENT DECOUPLING + BLIND HOLDOUT ROUND 2 | `analyzer/dimension-evidence-refoundation-v1` (from `analyzer/generalization-council-v1` @ `bdacd42`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `c105add`; orientation `8d1204f`; scale `5896eb8`; extent `6401087`; resolver 1.3.0 `5f88060`; warnings/phone `bdbf033`; tests `daab627`; CI `9c9bfc1`; holdout protocol `8da1ee7`; acquisition router `598c1f0`; post-review `625b149`, `4a58bce`, `f57b2ad`; `27274ab` = **PRE_HOLDOUT_2_SHA** (CI run 101 green); holdout evidence `fb5b4af`; report `2e5a5bb` = final build (CI run 104 green, the `workflow_dispatch` with the OWNER APK, versionCode 1104; runs 102–103 superseded by the concurrency group); the APK record: the commit after it | Six verdicts (§ "Where metric truth stands"): **DIMENSION ORIENTATION: PASS**; **SCALE EVIDENCE INDEPENDENCE: PASS**; **PLAN EXTENT CLASSIFICATION: PARTIAL**; **OWNER DEVELOPMENT SET: PARTIAL**; **PROGRESS TELEMETRY: PASS**; **BLIND HOLDOUT ROUND 2: `dom-w-zurawkach` ALGORITHMIC_FAIL, `dom-w-modrzykach` ALGORITHMIC_FAIL** — both with the scale and printed extent right, both failing at the walled outline on a side of openings (willa-miranda's class). Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005C — OPENING-AWARE EXTERIOR ENVELOPE + BODY RELATIONS + CROSS-PUBLISHER PROBE | `analyzer/opening-aware-envelope-v1` (from `analyzer/dimension-evidence-refoundation-v1` @ `d3235bf`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | baseline `3e76894`; round-3 protocol `e6220a9`, `cfa8640`; reviews `eef7133`, `2d45254`; boundary `7f3f557`, `a1913fc`; bodies `f62cd56`, `dfbec9f`; tests `1f26636`; source `432dbd2`, `b70aa41`, `64f7ff6`; Android `26b63e3`; matrix `1b330d3`; post-review `55a9c65`, `b0013ed`, `ca97516`; `e328121` = **PRE_HOLDOUT_3_SHA** (CI run 116 green, the UI gate on its re-run); holdout evidence and report `b3ad427` = final build (CI run 118 green, the `workflow_dispatch` with the OWNER APK, versionCode 1118; run 117 superseded by the concurrency group); the APK record: the commit after it | Seven verdicts (§ "Where the opening-aware envelope stands"): **OPENING-AWARE EXTERIOR ENVELOPE: PASS**; **ATTACHED BODY / BAY RECONSTRUCTION: PARTIAL**; **CROSS-PUBLISHER GENERIC SOURCE: PASS**; **005B METRIC LAYER REGRESSION: PASS**; **PROGRESS TELEMETRY: PASS**; **BLIND ARCHON ROUND 3 (`dom-w-azaliach`): ALGORITHMIC_FAIL**; **BLIND DOBREDOMY ROUND 3 (`galaktykaI`): SOURCE_LIMITED_PARTIAL**. The ARCHON house completes at −3.5 % but fails on storeys and on a plan only the published figure chose; its first bad decision is in the 005B metric layer (an overall chain split by a spurious tick, `1035` read `1055`). Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005D — DIMENSION-CHAIN INTEGRITY + SPURIOUS-TICK REJECTION + OVERALL-SPAN CONSENSUS + ANALYZER EVIDENCE PACK | `analyzer/dimension-chain-integrity-v1` (from `analyzer/opening-aware-envelope-v1` @ `1b66eb9`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `7a18d21`; Evidence Pack `cc9f2ea`; metric topology `0a83a0f`; challenge `09c5121`; CI gates `6f3f996`; post-review `3e08681`; matrix and packs `286486e` = **PRE_HOLDOUT_4_SHA** (CI run 120 green); round-4 draw `bbe8172`; sealed blind runs `446207d`; report and status `d7a794f` = final build (CI run 124, the `workflow_dispatch` with the OWNER APK, versionCode 1124, green on its one re-run of two jobs that failed before any test ran; runs 121–123 superseded by the concurrency group); the APK record: the commit after it | Ten verdicts (§ "Where dimension-chain integrity stands"): **DIMENSION CHAIN TOPOLOGY: PASS**; **OCR LABEL-TO-SPAN BINDING: PARTIAL**; **METRIC EVIDENCE INDEPENDENCE: PARTIAL**; **CURRENT e-OZE DEVELOPMENT: PASS**; **LEGACY e-OZE COMPATIBILITY: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **005C BOUNDARY REGRESSION: PASS**; **005C GENERIC SOURCE REGRESSION: PASS**; **BLIND ARCHON ROUND 4 / PROJECT 1 (`dom-w-dabecjach`): ALGORITHMIC_FAIL**; **BLIND ARCHON ROUND 4 / PROJECT 2 (`dom-w-tunbergiach`): ALGORITHMIC_FAIL**. Azalia's spurious tick is rejected and its overall bound across it; both blind houses fail on the overall label's value, misread outside the reader's bounded readings (`1580` → `1501`, `1173` → `1117`). Not patched; next-stage input. The terminal line is PARTIAL |
+| STAGE BUILDPLAN-ANALYZER-005E — NUMERIC OCR CANDIDATE LATTICE + GLYPH CONFIDENCE + NON-CIRCULAR SEQUENCE DECODING | `analyzer/numeric-ocr-lattice-v1` (from `analyzer/dimension-chain-integrity-v1` @ `d8ba4e8`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `39db89c`; lattice `0427773`; metric `af9f2ca`, `d4bf229`, `8b8bd39`; adversaries `a8ba3db`; post-review `ebd64eb`; CI rows and round-4 evidence `9f7423d` = **PRE_HOLDOUT_5_SHA** (CI run 131 green); round-5 draw `0afd751`; sealed blind runs `18295c2`; report and status: the commit after it, the final build and the APK record after that | Ten verdicts (§ "Where the numeric reader stands"): **NUMERIC OCR CANDIDATE RECALL: PARTIAL**; **MULTI-GLYPH SEQUENCE DECODING: PARTIAL**; **OCR CONFIDENCE CALIBRATION: PARTIAL**; **METRIC EVIDENCE INDEPENDENCE: PASS** (legacy-chain exemption declared); **FALSE CONSENSUS PROTECTION: PASS**; **CURRENT e-OZE: PASS**; **005D CHAIN TOPOLOGY REGRESSION: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **BLIND ROUND 5 PROJECT 1 (`dom-w-modrzewnicy`): ALGORITHMIC_FAIL** (numeric reader: a condensed overall cut into three cells; refused, no scale adopted); **BLIND ROUND 5 PROJECT 2 (`dom-w-morelach`): ALGORITHMIC_FAIL** (envelope, on a right scale). The round-4 houses are fixed generically (dabecjach REPLACED/STRONG at the printed scale; tunbergiach −12.47 % → −0.54 %). Not patched; next-stage input. The terminal line is PARTIAL |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -992,9 +993,64 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005D_DIMENSION_CHAIN_INTEGRITY.m
 - **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005D_BLIND_ARCHON_OVERALL_LABEL_MISREAD`). Both blind houses fail in
   the digit reader under the metric layer this stage rebuilt. CI green is not the verdict.
 
+## Where the numeric reader stands (STAGE BUILDPLAN-ANALYZER-005E)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005E_NUMERIC_OCR_LATTICE.md`. Evidence: `stage-reports/artifacts/analyzer-005e/`
+(reviews, calibration, development matrix, 6 Evidence Packs, the sealed blind round).
+`PRE_HOLDOUT_5_SHA = 9f7423d90b84fc7ff3d6bb976332539390d25879` (CI run 131 green).
+
+- **NUMERIC OCR CANDIDATE RECALL — PARTIAL.**
+  - Each dimension label gets an image-only lattice (`metrics.numeric-lattice` 1.0.0): three ink variants of one ink,
+    re-cuts at fixed glyph count, the grammar alphabet, a softmax over glyph scores, and a bounded beam (at most two
+    non-top glyphs, 8 values, as-read included).
+  - The printed figure is in the lattice for 72 of 81 development labels (005D: 47) and for 189 and 187 of 240 corpus
+    labels (005D: 108 and 110).
+  - On the round-4 houses `1580` and `850` are now read as printed, and `1173` is in the lattice.
+  - Blind round 5: every overall of `dom-w-morelach` is in its lattice. `dom-w-modrzewnicy`'s condensed `2590` is cut
+    into three cells and cannot be held.
+- **MULTI-GLYPH SEQUENCE DECODING — PARTIAL.** Two-substitution truths the glyph scores support are kept (§30). A label's
+  glyph count is never varied, and a truth with two weak glyph alternatives falls under the floor (blind 1 `1950` →
+  `1410`).
+- **OCR CONFIDENCE CALIBRATION — PARTIAL.**
+  - Classes LOW_QUALITY, AMBIGUOUS, SUPPORTED (margin required) and CLEAR come from the reader's evidence only. A
+    reading the stability bracket moves is never CLEAR or SUPPORTED.
+  - CLEAR is right on 9 of 9 development labels and 80 of 86 corpus labels.
+  - A confident misread stays SUPPORTED (declared; blind 1 `1410`).
+- **METRIC EVIDENCE INDEPENDENCE — PASS** (one declared exemption).
+  - Only the as-read value witnesses; values are selected from the ink's own lattice; the re-solve reads only the
+    lattice.
+  - Image score, structural support and metric support are recorded apart.
+  - The exemption: the kept 005D chains of a confirmed frame stay 005D's (contract R1, B5E-2).
+- **FALSE CONSENSUS PROTECTION — PASS.**
+  - Two AMBIGUOUS witnesses make at most WEAK. A better-read standing rival or agreeing held alternatives make the
+    result INCONCLUSIVE, and the vote is never handed a REPLACE.
+  - dabecjach's false STRONG is gone, and no wrong scale reaches SUPPORTED or STRONG under a ±20 % threshold sweep.
+  - Neither blind house adopted a wrong scale.
+- **CURRENT e-OZE — PASS** (MUST_COMPLETE: REPLACED/STRONG on an overall reading, +1.51 %; `1600` now read as printed).
+  Legacy e-OZE is unchanged in its own lane.
+- **005D CHAIN TOPOLOGY REGRESSION — PASS.** Mark classes are identical on every shared chain, Azalia's spurious tick
+  is still rejected, and no development PASS was lost (16 rows).
+- **ANALYZER EVIDENCE PACK — PASS.** The OCR layer and the `OCR_SEQUENCE_CANDIDATES` stage hold ON == OFF, determinism
+  and manifests. The first divergence compares the tick stage only on marks both runs recorded, and on both round-4
+  houses it is `OCR_SEQUENCE_CANDIDATES`.
+- **BLIND ROUND 5** (two ARCHON families, each run once, live, Evidence Pack on):
+  - **`dom-w-modrzewnicy`: ALGORITHMIC_FAIL.** Refused `METRIC_RESOLUTION_INCONCLUSIVE`, no scale adopted. First bad
+    decision `OCR_SEQUENCE_CANDIDATES` `e00013`: the condensed overall `2590` is cut into three cells by the
+    expected-width rule. `1950` is read `1410` SUPPORTED.
+  - **`dom-w-morelach`: ALGORITHMIC_FAIL.** Completed at −11.54 %, storeys 2 of 2, openings all built, on the right
+    scale (CONFIRMED/WEAK 1.9956). First bad decision `ENVELOPE` `e00427`: the box stops inside the chain extent, the
+    east bay is not built and the garage stops short.
+- **OWNER APK.** See report §AF.
+- **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005E_BLIND_CONDENSED_LABEL_AND_ENVELOPE_FAILS`). CI green is not the
+  verdict.
+
 ## Recommended technical next step
 
-**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005D round-4 ARCHON defect as the next stage's input** — the overall dimension label is misread with the printed value outside the reader's bounded readings (`dom-w-dabecjach`: `1580` read `1501`, a second misread `850` → `810` agreeing with it; `dom-w-tunbergiach`: `1173` read `1117`), and the metric layer then confirms the wrong scale or keeps it in a tie (report §AA–AD, `artifacts/analyzer-005d/holdout/`, `evidence/blind-*`). Both families join the development set (now fifteen rows); a further claim needs a new blind draw on a new frozen SHA.
+**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005E round-5 defects as the next stage's input**. The numeric reader cuts a condensed overall label into too few glyphs and reads a two-glyph misread as SUPPORTED (`dom-w-modrzewnicy`: `2590` in three cells, `1950` → `1410`). On a right scale, the envelope's box stops inside the chain extent and an attached bay is not built (`dom-w-morelach`, −11.54 %) (report §Z–AC, `artifacts/analyzer-005e/holdout/`, `evidence/blind-*`). Both families join the development set; a further claim needs a new blind draw on a new frozen SHA.
+
+The 005D analyzer recommendation below (the round-4 overall labels misread outside the bounded readings) is addressed in 005E: both round-4 houses now take the printed scale generically; see "Where the numeric reader stands".
+
+**Superseded (005D): return to the coordinator with the BUILDPLAN-ANALYZER-005D round-4 ARCHON defect as the next stage's input** — the overall dimension label is misread with the printed value outside the reader's bounded readings (`dom-w-dabecjach`: `1580` read `1501`, a second misread `850` → `810` agreeing with it; `dom-w-tunbergiach`: `1173` read `1117`), and the metric layer then confirms the wrong scale or keeps it in a tie (report §AA–AD, `artifacts/analyzer-005d/holdout/`, `evidence/blind-*`). Both families join the development set (now fifteen rows); a further claim needs a new blind draw on a new frozen SHA.
 
 The 005C analyzer recommendation below (the round-3 overall chain split by a spurious tick) is addressed in 005D — fixed in the metric layer, honestly unresolved downstream (`PLAN_RESOLUTION_INCONCLUSIVE`); see "Where dimension-chain integrity stands".
 
