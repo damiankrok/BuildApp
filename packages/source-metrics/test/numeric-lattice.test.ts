@@ -173,7 +173,7 @@ describe('touching hollow pairs (80, 00, 60, 90, 08)', () => {
   // ordinary spacing the lattice's re-cuts and ink variants recover the figure; under tight kerning and fused strokes
   // no column valley separates the glyphs and nothing recovers it (a declared limit, measured in the stage's
   // calibration tables) — there a wrong reading must at least not be CLEAR.
-  const pairs = ['1080', '2006', '3609', '4890', '6080', '8060']
+  const pairs = ['1080', '2006', '3609', '4890', '6080', '8060', '1600', '2600', '1800']
   it('ordinary spacing: the lattice holds the printed figure where the 005D bounded readings mostly do not', () => {
     let lattice = 0
     let old = 0
@@ -185,7 +185,7 @@ describe('touching hollow pairs (80, 00, 60, 90, 08)', () => {
         if (oneSubstitution(r.token).includes(text)) old += 1
       }
     }
-    expect(lattice, `lattice ${lattice}, 005D ${old} of 12`).toBeGreaterThanOrEqual(11)
+    expect(lattice, `lattice ${lattice}, 005D ${old} of 18`).toBeGreaterThanOrEqual(17)
     expect(lattice).toBeGreaterThan(old)
   })
 

@@ -38,6 +38,21 @@ cost is recorded apart (`evidence-performance.json`).
 | `evidence-summary.svg` | one page: walls, dimensions, ticks, OCR, scale, extent, envelope, bodies, final — counts, winners, rejected, first warning |
 | `README.md`, `manifest.json` | how to read it; every version, hash and file with its SHA-256 |
 
+**The OCR layer (005E).** `07-ocr-labels.svg` colours each dimension label by
+its OCR class (CLEAR, SUPPORTED, AMBIGUOUS, LOW_QUALITY) and prints the
+as-read string beside the 005D reading when they differ. Its sidecar carries
+one record per numeric lattice: the raw top read (005D), the as-read string
+and the ink variant that gave it, the class with its probability and margins,
+the top-K sequences (image score, probability, ink variants, segmentation, and
+why each one was not selected), the per-glyph candidates with runner ratios,
+holes and touching/broken flags, every segmentation tried, the span the ink
+measures, the value the span was finally given (`selected.by`, the image's
+rank and score, and the metric residual — recorded apart), and any refutation.
+Readings and boxes only; the glyphs themselves are never reproduced. In the
+timeline the candidate set is its own stage, `OCR_SEQUENCE_CANDIDATES`, before
+`OCR_READING`: a change in what the image offers is a first divergence ahead
+of the reading and the scale it changes.
+
 **No publisher pixels.** No SVG may contain `<image`, a `data:` URI,
 `xlink:href`, base64 or `<foreignObject` (the writer refuses, and
 `evidence:verify` checks committed packs). Source assets are recorded by

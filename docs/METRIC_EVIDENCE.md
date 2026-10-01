@@ -198,6 +198,64 @@ What every frame's solution records is in `metricSolutions[].topology` (marks
 by class, bindings by role, neutral inks, the hierarchy, any value ambiguity),
 and in full in the run's Evidence Pack (`docs/EVIDENCE_PACK.md`).
 
+## The numeric lattice (BUILDPLAN-ANALYZER-005E, schema 1.4.0)
+
+The reader above returns one reading per piece of ink. On the development
+houses that reading is right on under a third of the long dimension labels, and
+when it is wrong it is often wrong in two places, or in where it cut the ink —
+a `0`'s hollow middle cut instead of the junction beside it. Since 005E every
+label that lies on a dimension line (the geometric test the label assignment
+makes, before any scale) is read again from the very ink field its pass read,
+and returns a bounded, **image-only** lattice (`metrics.numeric-lattice`
+1.0.0, `numericLattices[]` in the set):
+
+- **ink variants** — the reader's own mask (`DEFAULT`), a stricter one
+  (`STRICT`) and a local mean–deviation one (`SAUVOLA`): re-readings of the
+  same ink, never independent witnesses;
+- **segmentations** — the variant's own cuts (the `ANCHOR`) and re-cuts at
+  column-profile valleys (at most two moved boundaries, sixteen hypotheses);
+- **per-glyph candidates** — from the grammar's alphabet (digits for
+  full-height cells, `, . - °` for short ones), within 0.6 of the cell's best,
+  at most four per cell;
+- **a beam over them** — at most two non-top glyphs, width 16, eight
+  sequences, a probability floor and mass bound — in place of 005D's
+  one-substitution rule.
+
+The **as-read** string is the anchor of the variant whose cells match best; a
+re-cut never becomes the as-read string. Each sequence records its image score,
+its probability among the ink's values, which glyphs left the top choice, and
+which paths reached it.
+
+**OCR classes come from the reader alone.** `LOW_QUALITY` (a glyph matched
+under the floor, or text under the legible height), `CLEAR` (the reading holds
+most of the ink's probability with a margin), `SUPPORTED`, `AMBIGUOUS`. A class
+never changes a value. Calibration and the measured tables:
+`stage-reports/artifacts/analyzer-005e/calibration/README.md`.
+
+**The metric uses reading quality, never invents a reading** (solver 1.2.0):
+
+- a `LOW_QUALITY` ink never decides; corroboration needs at least one ink of
+  the pair read better than `AMBIGUOUS` — two coin tosses that agree are not
+  two witnesses;
+- an ink's alternatives contest a scale when the ink holds them at least half
+  as strongly as its reading (every one, when `AMBIGUOUS`), or when they are
+  one glyph away at 005D's own runner bound (0.7): a contest withholds a vote,
+  never gives a span a value;
+- **false consensus** (`topology.falseConsensus`): when the class-blind verdict
+  would be STRONG but the selected scale's inks are coin tosses and a rival has
+  an ink read better (`BETTER_CLASS_RIVAL`), or the agreement holds only among
+  alternative values (`CANDIDATE_CONSENSUS`), the confidence drops and the
+  first-success challenge is triggered — the rival is never promoted
+  automatically;
+- **structural support**: a total and the children it frames may be reconciled
+  through each ink's own lattice values (children from different inks only);
+  a total refuted by its own children stops witnessing;
+- **non-circular selection**: each observation records which value its span
+  was finally given and why (`ocr.selected.by`: `AS_READ`, `STRUCTURAL`,
+  `SCALE_RANKED`, `UNRESOLVED`), with the image's rank and score and the
+  metric residual recorded separately. A scale may rank values the image
+  produced; a value the image never offered stays missing.
+
 ## The ladder of level datums
 
 The same redundancy, in the vertical. Every printed level states a height above
@@ -248,7 +306,8 @@ it.
 ## What is hashed
 
 The package and graph identities, every reader and its version, every OCR token
-with its glyphs and their runners-up, every reading, every chain, every
+with its glyphs and their runners-up, every numeric lattice (its sequences,
+classes and segmentations; not the cache flag), every reading, every chain, every
 registration with its anchors and rejections, every conflict and every named
 gap.
 
