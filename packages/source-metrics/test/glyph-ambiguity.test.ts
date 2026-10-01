@@ -81,6 +81,9 @@ describe('§28 glyph ambiguity: a misread is named, or it is no dimension', () =
    * Declared, not hidden (post-review D P0-1): under a 3×3 blur the template reader reads some figures as a
    * different dimension with the true digit outside its bounded readings — the failure this file looks for.
    * 005D does not change the reader; `it.fails` turns green the day the contract holds for blurred figures.
+   * 005E leaves this reader as it is (it is the lattice's anchor and the legacy vote's input) and closes the
+   * contract one layer up: the numeric lattice reads the same blurred figures as printed, or names the printed
+   * figure among its values without calling the reading CLEAR (`numeric-lattice.test.ts`, §28 under the lattice).
    */
   it.fails('KNOWN READER LIMIT — blurred figures: a misread is named, or it is no dimension', () => {
     for (const text of ['1200', '760']) {

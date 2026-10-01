@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { Canvas } from '@buildapp/synthetic-drawings'
 import { adaptiveInkMask, inkChannel } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
-import { chainId, chainsFromLines, findDimensionLines, readNumbers, solveFrameChains, solveFrameMetric } from '../src/index.js'
+import { chainId, chainsFromLines, dimensionLabelLattices, findDimensionLines, readNumbers, solveFrameChains, solveFrameMetric } from '../src/index.js'
 import type { DimensionLine, DimensionObservation } from '../src/index.js'
 
 /**
@@ -31,10 +31,12 @@ function analyse(raster: Raster) {
   const mask = adaptiveInkMask(grey, {})
   const lines = findDimensionLines(mask, { raster, grey })
   const chains = chainsFromLines(lines)
-  const read = readNumbers(raster, { hypotheses: true })
+  const read = readNumbers(raster, { hypotheses: true, retainPasses: true })
   const legacy = solveFrameChains(chains, read.tokens, { tolerancePx: 2.2 })
   const ids = chains.map((c) => chainId(FRAME, c.axis, c.baselinePx, c.ticks.map((t) => t.atPx)))
-  const metric = solveFrameMetric({ frameId: FRAME, assetId: 'asset', chains, chainIds: ids, raw: read.raw ?? read.tokens, legacyTokens: read.tokens, legacy, tolerancePx: 2.2 })
+  // 005E: the production path — every label on a dimension line is re-read as a numeric lattice.
+  const lattices = new Map([...dimensionLabelLattices(read, chains, raster)].map(([t, lattice], i) => [t, { id: `lattice-${i}`, lattice }]))
+  const metric = solveFrameMetric({ frameId: FRAME, assetId: 'asset', chains, chainIds: ids, raw: read.raw ?? read.tokens, legacyTokens: read.tokens, legacy, tolerancePx: 2.2, lattices })
   return { lines, chains, ids, legacy, metric, solution: metric.solution }
 }
 const run = (c: Canvas): Run => analyse(c.toRaster())
@@ -452,11 +454,12 @@ describe('§41 metamorphic: one physical drawing, imaged differently', () => {
   })
 
   /**
-   * The imagings whose scale the reader cannot recover, declared, not hidden: under a 3×3 blur the template
-   * reader reads the overall `1200` as `1100` and keeps no bounded alternative with the true digit, so the one
-   * overall reading states a wrong scale with nothing to contradict it but a single short reading. That is the
-   * reader's limit (005D does not change the reader); the topology is still right. `it.fails` turns green the
-   * day the scale clause passes, so the limit cannot linger unnoticed.
+   * The imagings whose scale the reader cannot recover, declared, not hidden: under a 3×3 blur the 005D reader
+   * read the overall `1200` as `1100` with no bounded alternative holding the true digit. The 005E lattice reads it
+   * `1700`, AMBIGUOUS, and names `1200` as its best alternative — but the part labels beside it are lost to the
+   * blur (`300` reads `700`, `450` not at all), so no reading states the true scale and the one overall reading
+   * still decides, at WEAK (which the pipeline's first-success challenge then tests). The topology is right.
+   * `it.fails` turns green the day the scale clause passes, so the limit cannot linger unnoticed.
    */
   const READER_LIMITS = new Set(['anti-aliasing'])
 

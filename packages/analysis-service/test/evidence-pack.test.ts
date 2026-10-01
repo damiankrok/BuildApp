@@ -186,3 +186,55 @@ describe('first divergence', () => {
 
   const pack0 = () => packRunDir(off, join(root, 'pack-div'), 'larchfield', { versions: {} }).pack
 })
+
+describe('Evidence Pack: the OCR extension (BUILDPLAN-ANALYZER-005E §23)', () => {
+  const ocrOf = (out: string): { latticeRecorded: boolean; lattices: Array<Record<string, unknown>> } => {
+    const p = packRunDir(off, join(root, out), 'larchfield', { versions: {} }).pack
+    return JSON.parse(String(p.files.get('07-ocr-labels.json'))) as { latticeRecorded: boolean; lattices: Array<Record<string, unknown>> }
+  }
+
+  it('records each dimension label’s lattice — raw top read, top-K, image score, per-glyph alternatives, margins, segmentation, selection, metric support, rejection reasons', () => {
+    const ocr = ocrOf('pack-ocr')
+    expect(ocr.latticeRecorded).toBe(true)
+    expect(ocr.lattices.length).toBeGreaterThan(0)
+    for (const l of ocr.lattices) {
+      for (const key of ['rawTopRead', 'asRead', 'asReadVariant', 'ocrClass', 'asReadP', 'probabilityMargin', 'sequenceMargin', 'sequences', 'glyphs', 'segmentations', 'selected', 'refutedBy']) expect(l, `${String(l.id)} ${key}`).toHaveProperty(key)
+      const sequences = l.sequences as Array<{ imageScore: number; p: number; asRead: boolean; rejected: string | null }>
+      expect(sequences.length).toBeGreaterThan(0)
+      expect(sequences.filter((q) => q.asRead)).toHaveLength(1)
+      for (const q of sequences) expect(typeof q.imageScore).toBe('number')
+      for (const g of l.glyphs as Array<{ candidates: unknown[] }>) expect(g.candidates.length).toBeGreaterThan(0)
+      expect((l.segmentations as Array<{ kind: string }>).some((s) => s.kind === 'ANCHOR')).toBe(true)
+    }
+    // Image score and metric support are recorded apart: a selected value says how the image ranked it and how far
+    // it sits from the chosen scale, separately.
+    const selected = ocr.lattices.map((l) => l.selected as { imageRank: number | null; metricSupportResidualPx: number | null } | null).filter((s) => s !== null)
+    expect(selected.length).toBeGreaterThan(0)
+    for (const s of selected) {
+      expect(s).toHaveProperty('imageRank')
+      expect(s).toHaveProperty('metricSupportResidualPx')
+    }
+  })
+
+  it('carries readings and boxes, never glyph pixels', () => {
+    const text = JSON.stringify(ocrOf('pack-ocr-pixels'))
+    expect(text).not.toMatch(/base64|data:image|"pixels"|"bitmap"|"data":\[/)
+  })
+
+  it('the candidate set is its own timeline stage, before the reading it feeds', () => {
+    const p = packRunDir(off, join(root, 'pack-ocr-timeline'), 'larchfield', { versions: {} }).pack
+    const candidates = p.timeline.filter((e) => e.stage === 'OCR_SEQUENCE_CANDIDATES')
+    expect(candidates.length).toBeGreaterThan(0)
+    const firstReading = p.timeline.findIndex((e) => e.stage === 'OCR_READING')
+    const lastCandidates = p.timeline.map((e) => e.stage).lastIndexOf('OCR_SEQUENCE_CANDIDATES')
+    if (firstReading >= 0) expect(lastCandidates).toBeLessThan(firstReading)
+    for (const e of candidates) expect(e.decision).toMatch(/^CANDIDATES:/)
+  })
+
+  it('a changed candidate set is the first divergence, ahead of the reading and the scale it changes', () => {
+    const ev = (seq: number, stage: DecisionEvent['stage'], objectId: string, decision: string): DecisionEvent => ({ eventId: `e${seq}`, seq, stage, objectId, decision, reason: '', supportIds: [], conflictIds: [], reversible: true, downstream: [] })
+    const before = [ev(1, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:2301|2101,2601'), ev(2, 'OCR_READING', 'label:a', 'READ 2301'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.67')]
+    const after = [ev(1, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:2380|2301,2360'), ev(2, 'OCR_READING', 'label:a', 'READ 2380'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.81')]
+    expect(firstDivergence(before, after)).toMatchObject({ firstDivergence: 'OCR_SEQUENCE_CANDIDATES', object: 'ink:a:HORIZONTAL' })
+  })
+})
