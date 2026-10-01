@@ -83,6 +83,11 @@ export type TextToken = {
   height: number
   /** Which way up the text was when it was read. */
   orientation: TextOrientation
+  /**
+   * 005E: the token's box in the frame of the pass that read it — the page as it lies, turned a quarter or half a
+   * turn — so the numeric lattice can re-read exactly the ink this pass read. Set only with `retainPasses`.
+   */
+  passBox?: PixelRect
 }
 
 /**
@@ -142,9 +147,14 @@ export type OcrOptions = {
   hypotheses?: boolean
   /** Told at each token group read, for progress and cancellation; nothing it does reaches the reading. */
   checkpoint?: Checkpoint
+  /**
+   * 005E: keep each pass's ink field (`OcrResult.passes`) and each raw token's box in its pass's frame (`passBox`),
+   * so a label can be re-read by the numeric lattice. Nothing about the reading changes.
+   */
+  retainPasses?: boolean
 }
 
-const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations' | 'checkpoint' | 'hypotheses'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
+const DEFAULTS: Required<Omit<OcrOptions, 'region' | 'orientations' | 'checkpoint' | 'hypotheses' | 'retainPasses'>> = { minGlyphHeight: 6, maxGlyphHeightFrac: 0.06, inkDelta: 8, minGlyphScore: 0.55 }
 
 // ---------------------------------------------------------------------------
 // prototypes
@@ -222,6 +232,8 @@ export type HoleStats = {
   cy: number
   /** Area of the largest hole, as a fraction of the glyph's box. */
   areaFrac: number
+  /** 005E: with exactly two holes, both — the upper first — for comparing hole with hole. */
+  pair?: Array<{ cy: number; areaFrac: number }>
 }
 
 /**
@@ -303,7 +315,13 @@ export function holeStats(width: number, height: number, at: (x: number, y: numb
   }
   if (regions.length === 0) return { count: 0, cy: 0.5, areaFrac: 0 }
   const largest = regions.reduce((a, b) => (b.area > a.area ? b : a))
-  return { count: regions.length, cy: round6(largest.sumY / largest.area / Math.max(1, height - 1)), areaFrac: round6(largest.area / (width * height)) }
+  const base = { count: regions.length, cy: round6(largest.sumY / largest.area / Math.max(1, height - 1)), areaFrac: round6(largest.area / (width * height)) }
+  if (regions.length !== 2) return base
+  // 005E: two counters, top first, so a two-hole cell compares hole with hole rather than its larger one with the
+  // prototype's larger one (an 8's two counters are near equal and either may be the larger by a pixel).
+  const [upper, lower] = [...regions].sort((a, b) => a.sumY / a.area - b.sumY / b.area)
+  const stat = (r: { area: number; sumY: number }): { cy: number; areaFrac: number } => ({ cy: round6(r.sumY / r.area / Math.max(1, height - 1)), areaFrac: round6(r.area / (width * height)) })
+  return { ...base, pair: [stat(upper), stat(lower)] }
 }
 
 function buildPrototype(char: string, rows: readonly string[]): Prototype {
@@ -547,8 +565,23 @@ function aspectPrior(aspect: number, p: Prototype): number {
   return Math.max(0.2, 1 - Math.abs(r) * 0.95)
 }
 
-/** Classify one glyph cell against the prototypes. */
-export function classifyCell(source: CellSource, box: PixelRect): GlyphReading {
+/**
+ * 005E matcher options. Both default off, which is the 005D matcher byte for byte; the numeric lattice turns them on.
+ *
+ * - `smallCounterFill`: a cell with FEWER holes than a prototype whose counter is under 0.15 of its box pays ×0.85
+ *   instead of ×0.5. A thick or anti-aliased stroke fills a small counter (a closed 4's) far more often than it opens a
+ *   large one, so a missing small counter is weak evidence against that prototype (pre-review B, `hfill`).
+ * - `pairedHoles`: a two-hole cell against a two-hole prototype compares upper hole with upper hole and lower with
+ *   lower, not the larger of each: an 8's counters are near equal, either may be the larger by a pixel, and the
+ *   largest-hole term otherwise floors at 0.35 on the only two-hole digit there is (pre-review A, P0-2).
+ */
+export type MatcherOptions = { smallCounterFill?: boolean; pairedHoles?: boolean }
+
+/** Every character's score for one cell — the best of its forms — and the cell's topology. */
+export type CellScores = { scores: Array<{ char: string; score: number }>; holes: HoleStats }
+
+/** Score one glyph cell against every prototype: one score per character, best first (ties by character). */
+export function scoreCell(source: CellSource, options: MatcherOptions = {}): CellScores {
   const cell = thin(resample(source.width, source.height, source.at))
   const cellField = distanceField(cell)
   const holes = holeStats(source.width, source.height, source.at)
@@ -557,8 +590,13 @@ export function classifyCell(source: CellSource, box: PixelRect): GlyphReading {
     let score = Math.max(...p.cells.map((c) => shapeScore(cell, cellField, c.cell, c.field)))
     // Topology is a far stronger signal than pixel overlap at this size: an
     // 8 and a 0 overlap heavily and differ by one enclosed region.
-    if (p.holes.count !== holes.count) score *= 0.5
-    else if (holes.count > 0) {
+    if (p.holes.count !== holes.count) score *= options.smallCounterFill && holes.count < p.holes.count && p.holes.areaFrac < 0.15 ? 0.85 : 0.5
+    else if (options.pairedHoles && holes.count === 2 && holes.pair && p.holes.pair) {
+      const [a, b] = [holes.pair, p.holes.pair]
+      // Positions only: the counters' AREA is mostly the stroke weight (a template's 1 px strokes leave large ones),
+      // and the 8 is the only two-hole digit, so an area term could only ever demote the one character it applies to.
+      score *= Math.max(0.35, 1 - (Math.abs(a[0].cy - b[0].cy) + Math.abs(a[1].cy - b[1].cy)) * 1.1)
+    } else if (holes.count > 0) {
       // Same family: WHERE the hole sits is what separates a 9 from a 6.
       score *= Math.max(0.35, 1 - Math.abs(holes.cy - p.holes.cy) * 2.2 - Math.abs(holes.areaFrac - p.holes.areaFrac) * 1.2)
     }
@@ -574,7 +612,20 @@ export function classifyCell(source: CellSource, box: PixelRect): GlyphReading {
   // closed four are one candidate rather than two competing ones.
   const byChar = new Map<string, number>()
   for (const r of perPrototype) byChar.set(r.char, Math.max(byChar.get(r.char) ?? 0, r.score))
-  const scored = [...byChar].map(([char, score]) => ({ char, score })).sort((a, b) => b.score - a.score || a.char.localeCompare(b.char))
+  const scores = [...byChar].map(([char, score]) => ({ char, score })).sort((a, b) => b.score - a.score || a.char.localeCompare(b.char))
+  return { scores, holes }
+}
+
+/** The hole counts a character's forms have (an open and a closed 4: 0 and 1). */
+export const PROTOTYPE_HOLE_COUNTS: ReadonlyMap<string, ReadonlySet<number>> = (() => {
+  const out = new Map<string, Set<number>>()
+  for (const p of PROTOTYPES) out.set(p.char, (out.get(p.char) ?? new Set<number>()).add(p.holes.count))
+  return out
+})()
+
+/** Classify one glyph cell against the prototypes. */
+export function classifyCell(source: CellSource, box: PixelRect): GlyphReading {
+  const { scores: scored, holes } = scoreCell(source)
   const best = scored[0]
   // Every reading keeps its runners-up, always. A dimension chain that has to
   // sum can then choose among them, and a chain is a far better judge of a
@@ -834,6 +885,8 @@ export type OcrResult = {
   raw?: TextToken[]
   /** The page-wide vote the legacy `tokens` were deduplicated by, as numbers, so it can be audited. */
   vote?: OrientationVote
+  /** 005E, with `retainPasses`: the ink field each pass read, in that pass's frame (the page turned as the pass turned it). */
+  passes?: Partial<Record<TextOrientation, Gray>>
 }
 
 /** The legacy page-wide orientation vote: summed merit of each vertical pass, and the pass it discarded, if any. */
@@ -967,21 +1020,27 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
   const tokens: TextToken[] = []
   let blobCount = 0
   const inside = (box: PixelRect): boolean => !options.region || !(box.x0 < options.region.x0 || box.x1 > options.region.x1 || box.y0 < options.region.y0 || box.y1 > options.region.y1)
+  const keep = options.retainPasses === true
+  const passes: Partial<Record<TextOrientation, Gray>> = {}
   const readInverted = (): TextToken[] => {
-    const r = readNumbersFromInk(invertGray(ink), { ...options, region: undefined, orientations: ['HORIZONTAL'] })
+    const turned = invertGray(ink)
+    if (keep) passes.INVERTED = turned
+    const r = readNumbersFromInk(turned, { ...options, region: undefined, orientations: ['HORIZONTAL'] })
     return r.tokens
-      .map((token) => ({ ...token, orientation: 'INVERTED' as const, box: uninvertRect(token.box, ink), glyphs: token.glyphs.map((g) => ({ ...g, box: uninvertRect(g.box, ink) })) }))
+      .map((token) => ({ ...token, orientation: 'INVERTED' as const, box: uninvertRect(token.box, ink), glyphs: token.glyphs.map((g) => ({ ...g, box: uninvertRect(g.box, ink) })), ...(keep ? { passBox: token.box } : {}) }))
       .filter((t) => inside(t.box))
   }
   for (const orientation of orientations) {
     if (orientation === 'HORIZONTAL') {
       const r = readNumbersFromInk(ink, { ...options, orientations: ['HORIZONTAL'] })
-      tokens.push(...r.tokens)
+      if (keep) passes.HORIZONTAL = ink
+      tokens.push(...(keep ? r.tokens.map((t) => ({ ...t, passBox: t.box })) : r.tokens))
       blobCount += r.blobCount
       continue
     }
     if (orientation === 'INVERTED') continue
     const rotated = rotateGray(ink, orientation)
+    if (keep) passes[orientation] = rotated
     // A region is stated in page coordinates; rotating the page rotates it too.
     const r = readNumbersFromInk(rotated, { ...options, region: undefined, orientations: ['HORIZONTAL'] })
     blobCount += r.blobCount
@@ -993,16 +1052,18 @@ export function readNumbers(raster: Raster, options: OcrOptions = {}): OcrResult
         orientation,
         box,
         glyphs: token.glyphs.map((g) => ({ ...g, box: unrotateRect(g.box, ink, orientation) })),
+        ...(keep ? { passBox: token.box } : {}),
       })
     }
   }
   tokens.sort((a, b) => a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || a.orientation.localeCompare(b.orientation))
-  if (!options.hypotheses && !orientations.includes('INVERTED')) return { tokens: dedupeOrientations(tokens), blobCount }
+  const kept = keep ? { passes } : {}
+  if (!options.hypotheses && !orientations.includes('INVERTED')) return { tokens: dedupeOrientations(tokens), blobCount, ...kept }
   // The half-turned pass is a hypothesis only: it never enters the legacy vote,
   // so the legacy `tokens` are exactly what they were without it.
   const inverted = orientations.includes('INVERTED') || options.hypotheses ? readInverted() : []
   const raw = [...tokens, ...inverted].sort(compareTokens)
-  return { tokens: dedupeOrientations(tokens), blobCount, ...(options.hypotheses ? { raw, vote: orientationVoteOf(tokens) } : {}) }
+  return { tokens: dedupeOrientations(tokens), blobCount, ...(options.hypotheses ? { raw, vote: orientationVoteOf(tokens) } : {}), ...kept }
 }
 
 /** Page order, then pass: the one order every consumer of the raw passes sees. */
@@ -1010,6 +1071,71 @@ export const compareTokens = (a: TextToken, b: TextToken): number =>
   a.box.y0 - b.box.y0 || a.box.x0 - b.box.x0 || (a.orientation < b.orientation ? -1 : a.orientation > b.orientation ? 1 : 0) || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0)
 
 const OCR_SUBPHASE = { id: 'OCR', label: 'reading printed numbers' }
+
+/** One cut of a de-skewed token, trimmed to its own ink, ready to classify (`ix0..ix1`, `y0..y1` in the sheared bitmap). */
+export type CellCut = { x0: number; x1: number; ix0: number; ix1: number; y0: number; y1: number; source: CellSource }
+
+/**
+ * The cuts of a de-skewed token as classifier inputs: each trimmed to its own ink box in BOTH directions, so a glyph is
+ * compared on its shape and proportions rather than on where it sat in the cut (an untrimmed cut is a fixed pitch wide,
+ * exactly as wide as an untrimmed seven), and measured against the token's cap line and cap height — the tallest cell
+ * in it: almost every number contains a full-height digit, and that is what tells a comma from a nought. A cut with no
+ * ink is dropped.
+ */
+export function cellSources(sheared: Bitmap, cells: ReadonlyArray<{ x0: number; x1: number }>): CellCut[] {
+  const extents = cells.map((cell) => {
+    let top = sheared.height
+    let bottom = -1
+    for (let y = 0; y < sheared.height; y += 1) {
+      for (let x = cell.x0; x <= cell.x1; x += 1) {
+        if (sheared.data[y * sheared.width + x] !== 1) continue
+        top = Math.min(top, y)
+        bottom = Math.max(bottom, y)
+        break
+      }
+    }
+    return { top, bottom, height: bottom - top + 1 }
+  })
+  const capHeight = Math.max(1, ...extents.map((e) => e.height))
+  const capTop = Math.min(...extents.filter((e) => e.height >= capHeight * 0.8).map((e) => e.top))
+  const out: CellCut[] = []
+  for (const cell of cells) {
+    let y0 = sheared.height
+    let y1 = -1
+    let ix0 = cell.x1 + 1
+    let ix1 = cell.x0 - 1
+    for (let y = 0; y < sheared.height; y += 1) {
+      for (let x = cell.x0; x <= cell.x1; x += 1) {
+        if (sheared.data[y * sheared.width + x] !== 1) continue
+        y0 = Math.min(y0, y)
+        y1 = Math.max(y1, y)
+        ix0 = Math.min(ix0, x)
+        ix1 = Math.max(ix1, x)
+      }
+    }
+    if (y1 < y0 || ix1 < ix0) continue
+    const w = ix1 - ix0 + 1
+    const h = y1 - y0 + 1
+    if (w < 1 || h < 1) continue
+    out.push({
+      x0: cell.x0,
+      x1: cell.x1,
+      ix0,
+      ix1,
+      y0,
+      y1,
+      source: { width: w, height: h, at: (x, y) => sheared.data[(y0 + y) * sheared.width + ix0 + x] === 1, relHeight: h / Math.max(1, capHeight), relTop: (y0 - capTop) / Math.max(1, capHeight) },
+    })
+  }
+  return out
+}
+
+/** 005E: a box in a pass's frame (the page turned as that pass turned it) put back on the page as it lies. */
+export function pageRectOfPass(r: PixelRect, orientation: TextOrientation, page: { width: number; height: number }): PixelRect {
+  if (orientation === 'HORIZONTAL') return r
+  if (orientation === 'INVERTED') return uninvertRect(r, page)
+  return unrotateRect(r, page, orientation)
+}
 
 /** The horizontal pass, for a caller that already has an ink field (so a page is converted once). */
 export function readNumbersFromInk(ink: Gray, options: OcrOptions = {}): OcrResult {
@@ -1058,67 +1184,19 @@ export function readNumbersFromInk(ink: Gray, options: OcrOptions = {}): OcrResu
     const { slope, sheared } = estimateShear(crop)
     const cells = segment(sheared)
     if (cells.length === 0) continue
-    // The token's cap line and cap height: the tallest cell in it. Almost
-    // every number contains at least one full-height digit, and measuring the
-    // small signs against that is what tells a comma from a nought.
-    const extents = cells.map((cell) => {
-      let top = sheared.height
-      let bottom = -1
-      for (let y = 0; y < sheared.height; y += 1) {
-        for (let x = cell.x0; x <= cell.x1; x += 1) {
-          if (sheared.data[y * sheared.width + x] !== 1) continue
-          top = Math.min(top, y)
-          bottom = Math.max(bottom, y)
-          break
-        }
-      }
-      return { top, bottom, height: bottom - top + 1 }
-    })
-    const capHeight = Math.max(1, ...extents.map((e) => e.height))
-    const capTop = Math.min(...extents.filter((e) => e.height >= capHeight * 0.8).map((e) => e.top))
-    const glyphs: GlyphReading[] = []
-    for (const cell of cells) {
-      // Trim the cell to its own ink box, in BOTH directions, so a glyph is
-      // compared on its shape and its proportions rather than on where it
-      // happened to sit in the cut. The horizontal trim is what makes the
-      // aspect signal mean anything: a cut is a fixed pitch wide, so an
-      // untrimmed one is exactly as wide as an untrimmed seven.
-      let y0 = sheared.height
-      let y1 = -1
-      let ix0 = cell.x1 + 1
-      let ix1 = cell.x0 - 1
-      for (let y = 0; y < sheared.height; y += 1) {
-        for (let x = cell.x0; x <= cell.x1; x += 1) {
-          if (sheared.data[y * sheared.width + x] !== 1) continue
-          y0 = Math.min(y0, y)
-          y1 = Math.max(y1, y)
-          ix0 = Math.min(ix0, x)
-          ix1 = Math.max(ix1, x)
-        }
-      }
-      if (y1 < y0 || ix1 < ix0) continue
-      const w = ix1 - ix0 + 1
-      const h = y1 - y0 + 1
-      if (w < 1 || h < 1) continue
-      const source: CellSource = {
-        width: w,
-        height: h,
-        at: (x, y) => sheared.data[(y0 + y) * sheared.width + ix0 + x] === 1,
-        relHeight: h / Math.max(1, capHeight),
-        relTop: (y0 - capTop) / Math.max(1, capHeight),
-      }
+    const glyphs: GlyphReading[] = cellSources(sheared, cells).map((c) => {
       // The cell's box in SOURCE pixels, undoing the shear approximately: the
       // token's own box bounds it, and the cut's fraction places it inside.
-      const fx0 = ix0 / Math.max(1, sheared.width)
-      const fx1 = (ix1 + 1) / Math.max(1, sheared.width)
+      const fx0 = c.ix0 / Math.max(1, sheared.width)
+      const fx1 = (c.ix1 + 1) / Math.max(1, sheared.width)
       const cellBox: PixelRect = {
         x0: round6(box.x0 + fx0 * boxWidth(box)),
-        y0: round6(box.y0 + (y0 / Math.max(1, sheared.height)) * height),
+        y0: round6(box.y0 + (c.y0 / Math.max(1, sheared.height)) * height),
         x1: round6(box.x0 + fx1 * boxWidth(box)),
-        y1: round6(box.y0 + ((y1 + 1) / Math.max(1, sheared.height)) * height),
+        y1: round6(box.y0 + ((c.y1 + 1) / Math.max(1, sheared.height)) * height),
       }
-      glyphs.push(classifyCell(source, cellBox))
-    }
+      return classifyCell(c.source, cellBox)
+    })
     if (glyphs.length === 0) continue
     tokens.push({
       text: glyphs.map((g) => g.char).join(''),
