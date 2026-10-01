@@ -1,0 +1,47 @@
+{
+  "run": "/home/user/work005e/blind5/h1-dom-w-modrzewnicy",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 242.44,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 137,
+      "tallestPx": 134,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 12
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 2.895277 cm/px (1 independent, plausible); 3.75 cm/px (1 independent, plausible); 1.25 cm/px (1 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 853×853 px floor plan prints no dimension chain, so nothing on it states a scale)"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 0,
+    "distinctOutlines": 0,
+    "firstReading": "PLAN_NO_DIMENSION_FRAME",
+    "outcome": "NO_ALTERNATIVE",
+    "publishedFigure": "SCORED",
+    "readings": 0,
+    "resolverVersion": "1.4.0"
+  },
+  "challenge": null,
+  "verdict": "ALGORITHMIC_FAIL"
+}

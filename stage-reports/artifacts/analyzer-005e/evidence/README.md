@@ -9,10 +9,15 @@ decision timeline. Numbers and boxes only: no glyph pixels, no publisher pixels 
 
 | pack | run | why it is here |
 | --- | --- | --- |
-| `dom-w-dabecjach` | `ebd64eb`, development matrix m3 | round-4 blind #1: a false consensus of two misread overalls (`1501`, `810`) at 2.672 cm/px |
-| `dom-w-tunbergiach` | `ebd64eb`, m3 | round-4 blind #2: the overall `1173` misread `1117`, a tie that kept a wrong scale (−12.47 %) |
-| `rarytasy-g2e` | `ebd64eb`, m3 | its relation moved from LEGACY_UNCONFIRMED to CONFIRMED/STRONG and its model moved (re-pinned in CI) |
-| `rarytasy-eoze` | `ebd64eb`, m3 | current e-OZE, MUST_COMPLETE; its model moved (+1.57 % → +1.51 %) |
+| `dom-w-dabecjach` | development matrix m3 | round-4 blind #1: a false consensus of two misread overalls (`1501`, `810`) at 2.672 cm/px |
+| `dom-w-tunbergiach` | m3 | round-4 blind #2: the overall `1173` misread `1117`, a tie that kept a wrong scale (−12.47 %) |
+| `rarytasy-g2e` | m3 | its relation moved from LEGACY_UNCONFIRMED to CONFIRMED/STRONG and its model moved (re-pinned in CI) |
+| `rarytasy-eoze` | m3 | current e-OZE, MUST_COMPLETE; its model moved (+1.57 % → +1.51 %) |
+| `blind-h1-dom-w-modrzewnicy`, `blind-h2-dom-w-morelach` | the round-5 blind runs, frozen code (`PRE_HOLDOUT_5_SHA` `9f7423d`; manifests `0afd751`, the ledger line), written during the one run and committed unchanged | the blind verdicts and their first bad decisions (`../holdout/README.md`) |
+
+m3 started on `ebd64eb`. Commits landed while it ran, and each pack's manifest names the HEAD at the time it was packed:
+`ebd64eb` (G2E), `5d1b7bd` (e-OZE), `85b226b` (dabecjach, tunbergiach). Those commits changed comments, documents and
+the CI row judge only: the non-comment diff of `packages/*/src` between `ebd64eb` and `85b226b` is empty.
 
 The "before" packs are the committed 005D ones: `../../analyzer-005d/evidence/blind-h1-dom-w-dabecjach`,
 `blind-h2-dom-w-tunbergiach`, `rarytasy-g2e` and `rarytasy-eoze`. The 005D code re-run offline on the sealed packages

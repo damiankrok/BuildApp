@@ -1,0 +1,135 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 677,
+        "x1": 709,
+        "y0": 487,
+        "y1": 519
+      },
+      "id": "metric-callout-ring-0db6173016",
+      "rawText": "440/140",
+      "value": 440
+    },
+    {
+      "box": {
+        "x0": 557,
+        "x1": 589,
+        "y0": 169,
+        "y1": 201
+      },
+      "id": "metric-callout-ring-5c752cf259",
+      "rawText": "116/230",
+      "value": 116
+    },
+    {
+      "box": {
+        "x0": 283,
+        "x1": 313,
+        "y0": 73,
+        "y1": 103
+      },
+      "id": "metric-callout-ring-6500cb50e2",
+      "rawText": "100/100",
+      "value": 100
+    },
+    {
+      "box": {
+        "x0": 288,
+        "x1": 314,
+        "y0": 25,
+        "y1": 51
+      },
+      "id": "metric-callout-ring-893051efb3",
+      "rawText": "111/111",
+      "value": 111
+    },
+    {
+      "box": {
+        "x0": 26,
+        "x1": 58,
+        "y0": 450,
+        "y1": 482
+      },
+      "id": "metric-callout-ring-8d558234f9",
+      "rawText": "100/71",
+      "value": 100
+    },
+    {
+      "box": {
+        "x0": 277,
+        "x1": 297,
+        "y0": 25,
+        "y1": 45
+      },
+      "id": "metric-callout-ring-978c91ee6c",
+      "rawText": "41/41",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 634,
+        "x1": 666,
+        "y0": 681,
+        "y1": 713
+      },
+      "id": "metric-callout-ring-aecdd84294",
+      "rawText": "126/277",
+      "value": 126
+    },
+    {
+      "box": {
+        "x0": 622,
+        "x1": 654,
+        "y0": 256,
+        "y1": 288
+      },
+      "id": "metric-callout-ring-b75b6289b8",
+      "rawText": "210/47",
+      "value": 210
+    },
+    {
+      "box": {
+        "x0": 561,
+        "x1": 593,
+        "y0": 753,
+        "y1": 785
+      },
+      "id": "metric-callout-ring-dd883d41c4",
+      "rawText": "120/274",
+      "value": 120
+    },
+    {
+      "box": {
+        "x0": 319,
+        "x1": 351,
+        "y0": 751,
+        "y1": 783
+      },
+      "id": "metric-callout-ring-e610ea032c",
+      "rawText": "140/140",
+      "value": 140
+    }
+  ],
+  "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+  "gapClasses": {
+    "DRAWING_BREAK_SUPPORTED": 288,
+    "OPENING_SUPPORTED": 23,
+    "TRUE_EXTERIOR_GAP": 80,
+    "UNKNOWN_GAP": 17
+  },
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPEN_SIDE",
+      "fromPx": 414,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 609.5,
+      "score": 0.703551,
+      "toPx": 591,
+      "why": "a 3.59 m gap between two pieces of one wall, wider than a lintel conventionally spans, with only 56% of it drawn across: where the wall stops",
+      "widthM": 3.58779
+    }
+  ]
+}

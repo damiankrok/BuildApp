@@ -1,0 +1,138 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "adapter": "archon.pl",
+        "addressesNotUsed": 14,
+        "assets": 21,
+        "failed_BYTE_IDENTICAL": 5,
+        "failed_HTTP_STATUS": 9,
+        "planAddressesLost": 0,
+        "route": "SPECIALIST",
+        "variants": 27
+      },
+      "durationMs": 15278,
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "FETCH"
+    },
+    {
+      "counts": {
+        "ELEVATION": 4,
+        "FLOOR_PLAN": 8,
+        "PERSPECTIVE_RENDER": 5,
+        "SECTION": 1,
+        "SITE_PLAN": 1,
+        "UNKNOWN": 2,
+        "drawings": 19
+      },
+      "durationMs": 1,
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 15278,
+      "status": "PASSED",
+      "substage": "ROLES"
+    },
+    {
+      "counts": {
+        "frames": 19,
+        "observations": 980,
+        "relations": 521,
+        "vision": "DETERMINISTIC_ONLY"
+      },
+      "durationMs": 15865,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 15279,
+      "status": "PASSED",
+      "substage": "OBSERVATIONS"
+    },
+    {
+      "counts": {
+        "callouts": 63,
+        "chains": 72,
+        "evidence": 89,
+        "levelDatums": 3,
+        "registrations": 2,
+        "scalesRefused": 5,
+        "undecodable": 0
+      },
+      "durationMs": 166225,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 31144,
+      "status": "PASSED",
+      "substage": "METRIC_EVIDENCE"
+    },
+    {
+      "counts": {
+        "planFrames": 8,
+        "plansRead": 2,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa"
+      },
+      "durationMs": 297,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 197369,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "compositions": 0,
+        "copies": 4,
+        "decompositions": 0,
+        "distinctOutlines": 0,
+        "firstReading": "PLAN_NO_DIMENSION_FRAME",
+        "outcome": "NO_ALTERNATIVE",
+        "publishedFigure": "SCORED",
+        "readings": 0,
+        "resolverVersion": "1.4.0"
+      },
+      "detail": "no other reading of the plan could be generated",
+      "durationMs": 287,
+      "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 197666,
+      "status": "FAILED",
+      "substage": "PLAN_RESOLUTION"
+    },
+    {
+      "counts": {
+        "builtRegions": 2,
+        "cells": 7,
+        "dimensionChains": 0,
+        "dimensionChainsRead": 0,
+        "enclosedCells": 3,
+        "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+        "gridLinesX": 8,
+        "gridLinesY": 2,
+        "independentWitnesses": 1,
+        "masses": 0,
+        "metricConfidence": "INCONCLUSIVE",
+        "metricIsotropy": "NONE",
+        "metricRelation": "NO_SCALE",
+        "planFrames": 8,
+        "planSizePx": "853x853",
+        "plansRead": 2,
+        "recessRegions": 0,
+        "scaleCmPerPx": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+        "wallBands": 43,
+        "wallThicknessPx": 12,
+        "walledEnvelope": true,
+        "wideOpenings": 4,
+        "wideOpeningsClosed": 4
+      },
+      "detail": "the 853×853 px floor plan prints no dimension chain, so nothing on it states a scale",
+      "durationMs": 0,
+      "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 197953,
+      "status": "FAILED",
+      "substage": "PLAN_READ"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

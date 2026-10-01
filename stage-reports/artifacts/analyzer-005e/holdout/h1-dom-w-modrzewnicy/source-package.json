@@ -1,0 +1,1858 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-doda-7cdce2b34d",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-fde846ff30c-9048deb061",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "8450adfc5ef8038c14260ad3b0d39ecb073cfc770dcc07a78118b962021518c6",
+          "byteLength": 1456214,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/carousel_images",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-fde846ff30c-9048deb061",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/f/projekt-dom-w-modrzewnicy-10-g2e-oze-fde846ff30cfc50b9dd27d0d1022cda5__47148.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-4f4cf7667a",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c9d64e8ed30-d6173fd407",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x543 over 550x233",
+      "variants": [
+        {
+          "aspect": 2.357274,
+          "byteHash": "03c8111a84eea56be4be5485431d4b16374d4ae91faaabe9f2571580af4bd55a",
+          "byteLength": 390027,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 543,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c9d64e8ed30-d6173fd407",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-c9d64e8ed30af6ab8aa1ea7d488cd7b1__11266.jpg"
+        },
+        {
+          "aspect": 2.360515,
+          "byteHash": "f38d1fa01d277e9078e4614ccef4dc4e5304d45c93d465d581193c2cef153405",
+          "byteLength": 90958,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 233,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-3def304cf2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze-b1acba374d4d6117e53a964987a05c3c__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-508ac45b04",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-ea9ccd2fd81-14a7c4059c",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x541 over 550x233",
+      "variants": [
+        {
+          "aspect": 2.365989,
+          "byteHash": "2b38666e00d9b7928ddf309e1a7838ddf70abb818f6bcfca949a1a682c63b09a",
+          "byteLength": 365491,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 541,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-ea9ccd2fd81-14a7c4059c",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-ea9ccd2fd817e3e62a2d34ddc5d310c1__11265.jpg"
+        },
+        {
+          "aspect": 2.360515,
+          "byteHash": "423f889deaff01f0e53b5ee938d6dda0acfe2172dbfe99d253e3364ffcffee13",
+          "byteLength": 85058,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 233,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-8aad3eafb9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze-ef6a4dd8e54b8aa4bfe7310e42ef96b8__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-90674902e0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c6b8fd739e2-64bde6fb3a",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x541 over 550x232",
+      "variants": [
+        {
+          "aspect": 2.365989,
+          "byteHash": "a71636eee4ae8f4e405a99db785583fbd5d2d8e7e1857072478752fb87c3dbd7",
+          "byteLength": 484854,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 541,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c6b8fd739e2-64bde6fb3a",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-c6b8fd739e241cbf88455d13971b0324__11264.jpg"
+        },
+        {
+          "aspect": 2.37069,
+          "byteHash": "abccfb1f0645ea1f6a7a10bf9f4b1a1f87a97b900fa926468e1748f78dff2aaa",
+          "byteLength": 113853,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 232,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-elewacja-frontowa-projekt-dom-w-modrzewnicy-10-g-4376d06504",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-frontowa-projekt-dom-w-modrzewnicy-10-g2e-oze-fa23a1d526a39ca44f6b18044ea9cd83__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-a00024b6e1",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-445a96d570f-275b339f38",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x541 over 550x232",
+      "variants": [
+        {
+          "aspect": 2.365989,
+          "byteHash": "69178ce3ecfbbec0510f883ea8f9a041b787b116b98212847226cdc82717a1d6",
+          "byteLength": 497013,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 541,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-445a96d570f-275b339f38",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-445a96d570fa22f88c87ba78c607db83__11267.jpg"
+        },
+        {
+          "aspect": 2.37069,
+          "byteHash": "708976795a80b9c550d69c73d5b3101fc16ccb46ace6c121b6d6fb8681bf5527",
+          "byteLength": 115852,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 232,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-modrzewnicy-10-g-ea7bf3983d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-ogrodowa-projekt-dom-w-modrzewnicy-10-g2e-oze-c95f5491565ce6b72937284cfce4eadc__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-prze-9284b378c6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2-375a0dc877",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "b8eacb2d2b338c466bc4097f908f4a36785ff8324c00e2a9739445d650bfb57c",
+          "byteLength": 75324,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/m8a12761847734/przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze-48a77bc4f3acf607705b2fa3a8ef4c5d__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2-375a0dc877",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze-48a77bc4f3acf607705b2fa3a8ef4c5d__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "92d70b7caddd8a6eab20120a0670dd54c52268f42110b23e31b83fac5c07c90b",
+          "byteLength": 19717,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2-b0f5145ff3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/przekroj-budynku-projekt-dom-w-modrzewnicy-10-g2e-oze-48a77bc4f3acf607705b2fa3a8ef4c5d__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-rzut-2a167ec8d6",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-o-ed1319f13d",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "74b2d709d6aa349806f28196882e32051f87c16ecb145088841d3092dbf352b8",
+          "byteLength": 33350,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-o-ed1319f13d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze-57e0954b0239135e17e079f535badfa3__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-rzut-c92f3ff423",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oz-ebde53bc8d",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "dcfc9ba01cf05025e23cd1f7f6eb8812bf171e0cc7db34c7fdac536ff2a1bcae",
+          "byteLength": 49422,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oz-ebde53bc8d",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze-6538f4968f9e6b92744e857c4712c8ee__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-sytu-fb49a17a25",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-479ce2f4188-666ea43cad",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "95346a45c292fa55c52e9b4ffd488621aec32ea65bf802764966940743a0e821",
+          "byteLength": 126216,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-479ce2f4188-666ea43cad",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-479ce2f41889b67bf9d1530c5b20977b__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "a887e6c6aa404f788ef69a5a5203a54ec8ffb276865c435c8aade232eac34d1b",
+          "byteLength": 34468,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-sytuacja-projekt-dom-w-modrzewnicy-10-g2e-oze-4f-fe2f81d74d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/sytuacja-projekt-dom-w-modrzewnicy-10-g2e-oze-4fc373faa6e7ade8019cb9cb48046621__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w modrzewnicy 10 (G2E) OZE widok 1",
+      "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-wido-2bd1f835ad",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-a3b-b08c6f8b86",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "f00affa187aa123b1c1c03e234d3921137ad5c3b59b5e4cf92943e146a979393",
+          "byteLength": 8565,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-a3b-b08c6f8b86",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-a3b36fbfe61d3f166a5f3ad3941e2ca9__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzewnicy 10 (G2E) OZE",
+      "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-5e77e25c51",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-o-6add1c99bb",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "906667b3e1b9912cac4f564da07b0d3c27c05d35bf4870c2aa82732873180f82",
+          "byteLength": 20957,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/related?scope=family",
+          "id": "var-rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-o-6add1c99bb",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze-dabd39729982a1f67b91bbabbd9838ad__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzewnicy 10 (G2E) OZE",
+      "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-7cda19ea8a",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-9c7-1fd9b81c88",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "03ad042de57ad72304886ccdd8ddd3e00eb6262855123843fea861697e5b98f6",
+          "byteLength": 30899,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-9c7-1fd9b81c88",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-9c7be821614df9f4ba05946e3ab9f609__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzewnicy 10 (G2E) OZE",
+      "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8a288eaf3a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-1bce8f2b6c6-dd21a04c23",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1eaafc89ec67456135ea9614d6d0d02b506f8fffa14c1132026ba08e007aedca",
+          "byteLength": 25883,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/related?scope=family",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-1bce8f2b6c6-dd21a04c23",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-1bce8f2b6c688df4b3ee4f2a1a101504__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w modrzewnicy 10 (G2E) OZE",
+      "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8eccb86d0d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oz-c8471eb758",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "5d0f897205a9707d15b97d9718bd8f46b67126434307aaecd3644bebd8b9483d",
+          "byteLength": 31161,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/m8a12761847734/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oz-c8471eb758",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze-ac4efbe1661133251ebd27adc770e158__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w modrzewnicy 10 g2e oze b1aecef51ac2901dc27188b343caa45a  47146",
+      "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-b1aecef51ac-1f1a8700a7",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-b1aecef51ac-73bcfdb281",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "d05861b5f52da0a55df0e45cc10348103519ce045c66f61bd27d89bfab618324",
+          "byteLength": 478850,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/m8a12761847734/image/47146?showHotspots=false",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-b1aecef51ac-73bcfdb281",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/m8a12761847734/i/projekt-dom-w-modrzewnicy-10-g2e-oze-b1aecef51ac2901dc27188b343caa45a__47146.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-6f2eb0b36f",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-modr-1d5dc882fa",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9e64a8b23293a07af9a36d7af7a5be441ab5d3ac306ebe9130e77b4f8b7f8c45",
+          "byteLength": 100757,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-modr-1d5dc882fa",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-parteru-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze-5af38b5d7dbe90fb190c6378cdb7903d__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-8d59c92ec1",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-6e5d9c73ae7-0fd678129e",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+          "byteLength": 101757,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-6e5d9c73ae7-0fd678129e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-6e5d9c73ae7730deaceecf5a5d02b8eb__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-9304612e3c",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-mod-a980d31e05",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b89edbfd69bc1bb3fadf0f9647d6129bb26fd0fc8c02e6f68e6376b061ffac2f",
+          "byteLength": 65257,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-mod-a980d31e05",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/rzut-poddasza-z-powierzchniami-projekt-dom-w-modrzewnicy-10-g2e-oze-4479e997f905f78c48530623062d71ce__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-dcec61c952",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/m8a12761847734/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c5acd6e21a1-b3677727bd",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "e03aa8a76b17705697ae8c09263d22d3a5017bff59563d285638e73064c37550",
+          "byteLength": 65227,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-projekt-dom-w-modrzewnicy-10-g2e-oze-c5acd6e21a1-b3677727bd",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-c5acd6e21a164b0537318a6f402ca4e7__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-39152c89c6",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-f14-fc8ee4f2e1",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "97a459a54ffa1024d39231b54b492afc49d6c755ecc20ace4c85d9af3a30936b",
+          "byteLength": 288703,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-f14-fc8ee4f2e1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-f14e4c87894a0535b702b931abedba66__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-eb4c2554a9",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w modrzewnicy 10 (g2e) oze widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-7a9-446d9a6da2",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "61dbe294fb98895facf6e927f325eb5323d1981e336ad2d02c1585ba42dd0f0b",
+          "byteLength": 350670,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+          "id": "var-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-7a9-446d9a6da2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/m8a12761847734/widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-7a96d976ef506e1e6a61a8123eff3ab9__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+  "contentHash": "5769fc42b7f1b8f4d7da6c57432b78f6eed41882feb53865c3263bb92309931d",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-1bce8f2b6c688df4b3ee4f2a1a101504__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze-6538f4968f9e6b92744e857c4712c8ee__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/rzut-parteru-projekt-dom-w-modrzewnicy-10-g2e-oze-ac4efbe1661133251ebd27adc770e158__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze-57e0954b0239135e17e079f535badfa3__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/rzut-poddasza-projekt-dom-w-modrzewnicy-10-g2e-oze-dabd39729982a1f67b91bbabbd9838ad__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-a3b36fbfe61d3f166a5f3ad3941e2ca9__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-f14e4c87894a0535b702b931abedba66__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-7a96d976ef506e1e6a61a8123eff3ab9__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-9c7be821614df9f4ba05946e3ab9f609__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-c9d64e8ed30af6ab8aa1ea7d488cd7b1__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze-b1acba374d4d6117e53a964987a05c3c__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-ea9ccd2fd817e3e62a2d34ddc5d310c1__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-boczna-projekt-dom-w-modrzewnicy-10-g2e-oze-ef6a4dd8e54b8aa4bfe7310e42ef96b8__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-c6b8fd739e241cbf88455d13971b0324__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-frontowa-projekt-dom-w-modrzewnicy-10-g2e-oze-fa23a1d526a39ca44f6b18044ea9cd83__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-445a96d570fa22f88c87ba78c607db83__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/elewacja-ogrodowa-projekt-dom-w-modrzewnicy-10-g2e-oze-c95f5491565ce6b72937284cfce4eadc__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/m8a12761847734/projekt-dom-w-modrzewnicy-10-g2e-oze-479ce2f41889b67bf9d1530c5b20977b__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/m8a12761847734/sytuacja-projekt-dom-w-modrzewnicy-10-g2e-oze-4fc373faa6e7ade8019cb9cb48046621__11255.jpg"
+    }
+  ],
+  "id": "src-m8a12761847734-12576c3060",
+  "pageHash": "91acd24304c32320248cbad928a1e59fb5d2dc6669c455468f77c2d46e7b9896",
+  "project": {
+    "externalId": "m8a12761847734",
+    "name": "Projekt domu Dom w modrzewnicy 10 (G2E) OZE Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "9,04 m&sup2;",
+      "unit": "m2",
+      "value": 9.04
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,12 m",
+      "unit": "m",
+      "value": 8.12
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "325,3 m&sup2;",
+      "unit": "m2",
+      "value": 325.3
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "242,44 m&sup2;",
+      "unit": "m2",
+      "value": 242.44
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "37,79 m&sup2;",
+      "unit": "m2",
+      "value": 37.79
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni, garażu, strychu",
+      "raw": "147,18 m&sup2;",
+      "unit": "m2",
+      "value": 147.18
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "295,97 m&sup2;",
+      "unit": "m2",
+      "value": 295.97
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "414,6 m&sup2;",
+      "unit": "m2",
+      "value": 414.6
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "273,93 m&sup2;",
+      "unit": "m2",
+      "value": 273.93
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "1404,77 m&sup3;",
+      "unit": "none",
+      "value": 1404.77
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 5.44,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 5,44 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 17.77,
+      "index": 2,
+      "label": "Antresola",
+      "raw": "2. Antresola | 17,77 | (20,49)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 42.93,
+      "index": 3,
+      "label": "Strych ocieplony",
+      "raw": "3. Strych ocieplony | 42,93 | (61,47)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.69,
+      "index": 4,
+      "label": "Strych ocieplony",
+      "raw": "4. Strych ocieplony | 8,69 | (15,54)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 33.74,
+      "index": 5,
+      "label": "Strych ocieplony",
+      "raw": "5. Strych ocieplony | 33,74 | (48,37)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.55,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,55 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 16.52,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 16,52 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 13,
+      "index": 3,
+      "label": "Kuchnia",
+      "raw": "3. Kuchnia | 13,00 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.58,
+      "index": 4,
+      "label": "Spiżarnia",
+      "raw": "4. Spiżarnia | 2,58 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 31.63,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 31,63 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 18.92,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 18,92 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.9,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 3,90 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.19,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 12,19 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 12.7,
+      "index": 9,
+      "label": "Pokój",
+      "raw": "9. Pokój | 12,70 | (15,00)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.98,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 6,98 | (7,87)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.04,
+      "index": 11,
+      "label": "Kotłownia z pralnią",
+      "raw": "11. Kotłownia z pralnią | 9,04 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 37.79,
+      "index": 12,
+      "label": "Garaż",
+      "raw": "12. Garaż | 37,79 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Prezentujemy „Dom w modrzewnicy 10 (G2E) OZE” – projekt domu jednorodzinnego, który zachwyca nowoczesną estetyką i funkcjonalnością. Ta współczesna rezydencja z użytkowym poddaszem oferuje eleganckie połączenie białych tynków z naturalną okładziną drewnianą, podkreślone wizualnie grafitowym tynkiem, który harmonijnie łączy przeszklenia. Wyróżniającym elementem jest dwustanowiskowy garaż, umieszczony z przodu budynku, tworzący unikalny kształt elewacji. Charakter domu podkreśla dwuspadowy dach w kolorze antracytu, nadając mu wyrafinowanego wyglądu. Projekt oferuje salon o powierzchni powyżej 30 m² stanowiący przestronne miejsce do wypoczynku. Nad jadalnią znajduje się otwarcie do połaci dachu, co zapewnia nie tylko światło naturalne, ale i wrażenie przestrzeni. Duża kuchnia z wyspą i przylegającą spiżarnią jest sercem domu, idealnym do przygotowywania posiłków i rodzinnych spotkań. Zlokalizowany na tyle domu taras osłonięty pergolą zapewnia prywatność i komfort. Dwubiegowe schody prowadzą na antresolę z funkcją rekreacyjną, Na parterze zaprojektowano trzy pokoje, z możliwością adaptacji przestrzeni strychu na dodatkowe pokoje na poddaszu. Dwie eleganckie łazienki oraz pralnia zlokalizowana w kotłowni są ukłonem w stronę praktyczności. Ogrzewanie zapewnia pompa ciepła, a dom wyposażony jest w kominek, co tworzy niepowtarzalny klimat. Dodatkowo, projekt uwzględnia wentylację mechaniczną z odzyskiem ciepła (rekuperację), co jest odpowiedzią na potrzeby ekologicznego i ekonomicznego życia. Projekt „Dom w modrzewnicy 10 (G2E) OZE” to połączenie komfortu, nowoczesności i dbałości o szczegóły, które razem tworzą idealne miejsce do życia dla każdej rodziny."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "85 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "pompa ciepła Dodatkowo do projektu dołączamy GRATIS projekt instalacji fotowoltaicznej jako alternatywne opracowanie!"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 35 st. , więźba drewniana, dachówka ceramiczna CREATON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 147.18 m² + 37.79 m² + 85.36 m² + 9.04 m² , 4 pokoje, kuchnia, 2 łazienki, spiżarka, kotłownia, antresola, kominek, garaż, strych"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

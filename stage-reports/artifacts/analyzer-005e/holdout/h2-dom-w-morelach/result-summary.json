@@ -1,0 +1,312 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.3.0"
+  },
+  "candidateHash": "8fba63ab20b191f74fc87e03d885d9115e6545cbb67c5ff4ff3515417f668927",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-morelach-n-ver-2-m95a1f6e528ef4",
+  "completedAt": "2026-10-01T20:11:49.929Z",
+  "counts": {
+    "assets": 20,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 8,
+      "PERSPECTIVE_RENDER": 5,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 1
+    },
+    "balconies": 0,
+    "callouts": 46,
+    "chimneys": 0,
+    "commands": 184,
+    "frames": 19,
+    "masses": 2,
+    "meshes": 172,
+    "metricEvidence": 135,
+    "observations": 1047,
+    "openings": 24,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 6,
+    "terraces": 3,
+    "triangles": 3924
+  },
+  "jobId": null,
+  "label": "Dom w morelach (N) (analysis)",
+  "metricEvidenceHash": "bf83fe72610a7258e8fbf41808eabc4b7be3b15713631d6e49eeb4a06a6dccfa",
+  "modelHash": "af9db2992664eb522e1df9f5b6c27679155d0aaf458cae88e2114da6d01e7ef0",
+  "modelId": "m-analysis-m95a1f6e528ef4",
+  "modelSha256": "af9db2992664eb522e1df9f5b6c27679155d0aaf458cae88e2114da6d01e7ef0",
+  "observationGraphHash": "ed50a3c83f7cc8a6570fd4d930367ab42704d1f9ea2770e114fa7583a2ae54a3",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "ATTACHED_ROOF": {
+        "L0": 1
+      },
+      "INTERIOR_DOOR": {
+        "L1": 7
+      },
+      "INTERIOR_WALL": {
+        "L0": 4,
+        "L1": 27
+      },
+      "LEVEL": {
+        "L0": 2
+      },
+      "MASS": {
+        "L1": 1,
+        "L2": 1
+      },
+      "OPENING": {
+        "L1": 22,
+        "L2": 2
+      },
+      "RECESS": {
+        "L2": 2
+      },
+      "RETURN_WALL": {
+        "L1": 2
+      },
+      "ROOM": {
+        "L1": 4,
+        "L2": 2
+      },
+      "STAIR": {
+        "L1": 1
+      },
+      "TERRACE": {
+        "L1": 3
+      }
+    },
+    "levels": {
+      "L0": 7,
+      "L1": 67,
+      "L2": 7
+    }
+  },
+  "sceneBytes": 439335,
+  "sceneContentHash": "a9885d91cadb5abf2b11362886d7c2fbda47e3fc343e908539c709beeb100ab9",
+  "sceneSha256": "c83efa223bed724546d47c464c976575cc36c0ec3e0786fe0c864335142e19c6",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "16fe10e5839cec2d7279f17663eacabb6d2d96b97e46808be9c15553e124137c",
+  "sourcePackageId": "src-m95a1f6e528ef4-5ebb3f3bcf",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-morelach-n-ver-2-m95a1f6e528ef4",
+  "startedAt": "2026-10-01T20:09:15.870Z",
+  "timings": {
+    "acquisitionMs": 11865,
+    "compileMs": 79,
+    "metricExtractionMs": 123719,
+    "observationMs": 15247,
+    "reconstructionMs": 2965,
+    "totalMs": 154059,
+    "verificationMs": 182
+  },
+  "title": "Dom w morelach (N)",
+  "unresolved": [
+    {
+      "reason": "no section states an eaves level and a ridge level, so there is no rise to test a span against",
+      "status": "AMBIGUOUS",
+      "what": "which way the ridge runs over mass-0"
+    },
+    {
+      "reason": "no printed angle, specification line or technical view describes a roof over this body separately from the main one",
+      "status": "MISSING",
+      "what": "the kind of roof over mass-1"
+    },
+    {
+      "reason": "no ridge datum was read from a section, and the elevations are registered on it",
+      "status": "MISSING",
+      "what": "a registration for the elevations"
+    },
+    {
+      "reason": "no pitched roof with a stated pitch and a ridge datum was inferred over the main body",
+      "status": "MISSING",
+      "what": "the main roof"
+    },
+    {
+      "reason": "the ladders give the topology but riser count: 5 risers over 2.80 m would be 0.560 m each; a placeholder is built over the shaft",
+      "status": "AMBIGUOUS",
+      "what": "the exact steps of the stair"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.41 m thin band at x 4.29"
+    },
+    {
+      "reason": "its 7.58 m² is 162 % off the published Wiatrołap 2.89 m²; by area it would be 3 Gabinet 7.98 or 5 Kuchnia 7.68",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-0 (read as 1)"
+    },
+    {
+      "reason": "its 7.58 m² is 162 % off the published Wiatrołap 2.89 m²; by area it would be 3 Gabinet 7.98 or 5 Kuchnia 7.68",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-0 (read as 1)"
+    },
+    {
+      "reason": "two numbers (1, 3) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-0"
+    },
+    {
+      "reason": "two numbers (2, 5) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-2"
+    },
+    {
+      "reason": "two numbers (2, 71) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-2"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 1.67 m thin band at x 8.05"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.84 m thin band at z 7.97"
+    },
+    {
+      "reason": "two numbers (1, 11) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "two numbers (1, 14) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "two numbers (1, 2) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "two numbers (1, 7) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "two numbers (1, 91) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.90 m thin band at x 3.27"
+    },
+    {
+      "reason": "its 14.94 m² is 211 % off the published Schody 4.81 m²",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-1-0 (read as 1)"
+    },
+    {
+      "reason": "two numbers (1, 5) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "two numbers (1, 8) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-1-0"
+    },
+    {
+      "reason": "narrowed from 2.10 to 1.95 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-0-east-1-0 as the drawings print it"
+    },
+    {
+      "reason": "narrowed from 0.90 to 0.79 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-0-east-1-2 as the drawings print it"
+    },
+    {
+      "reason": "narrowed from 2.70 to 2.61 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-1-east-5-0 as the drawings print it"
+    },
+    {
+      "reason": "narrowed from 3.16 to 3.05 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-1-east-5-2 as the drawings print it"
+    },
+    {
+      "reason": "narrowed from 0.70 to 0.59 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-1-west-7-3 as the drawings print it"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 4,
+      "exteriorFindings": 4,
+      "interiorFindings": 34
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer",
+      "severity": "INFO"
+    },
+    {
+      "code": "SOURCE_BYTE_IDENTICAL",
+      "message": "5 source addresses counted with another copy (byte identical)",
+      "severity": "INFO"
+    },
+    {
+      "code": "GUESSED_ADDRESS_HTTP_STATUS",
+      "message": "13 guessed larger copies not available (http status); the published copy was used",
+      "severity": "INFO"
+    },
+    {
+      "code": "LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+      "message": "the pass found 2 bodies and every elevation draws them at the same height, so the model would read as one block",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "LAYOUT_FOOTPRINT_AREA_NEAR",
+      "message": "the lowest storey covers 101.31 m² against the 114.53 m² the publisher prints",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "METRIC_SCALE_WEAK",
+      "message": "the plan's scale rests on 3 printed dimensions read as printed and nothing independent confirms it",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "EXTERIOR_JOINTS",
+      "message": "4 exterior joint findings in the closure audit",
+      "severity": "LIMITING"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses counted with another copy (byte identical)",
+    "13 guessed larger copies not available (http status); the published copy was used",
+    "the pass found 2 bodies and every elevation draws them at the same height, so the model would read as one block",
+    "the lowest storey covers 101.31 m² against the 114.53 m² the publisher prints",
+    "the plan's scale rests on 3 printed dimensions read as printed and nothing independent confirms it",
+    "4 exterior joint findings in the closure audit"
+  ]
+}
+

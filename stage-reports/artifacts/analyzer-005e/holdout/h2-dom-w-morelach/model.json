@@ -1,0 +1,3154 @@
+{
+  "assemblies": [],
+  "balconies": [],
+  "building": {
+    "id": "bld-auto-v2",
+    "name": "Dom w morelach (N) (analysis)"
+  },
+  "chimneys": [],
+  "constraints": [],
+  "doors": [
+    {
+      "frameDepth": 0.1,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "attached-0-idoor-0-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "attached-0-idoor-0-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.089066,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "attached-0-idoor-1-0-leaf",
+      "leafThickness": 0.044533,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "attached-0-idoor-1-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072128,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-0-leaf",
+      "leafThickness": 0.036064,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072128,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-1-leaf",
+      "leafThickness": 0.036064,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.072128,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-0-2-leaf",
+      "leafThickness": 0.036064,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-0-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.0668,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-0-leaf",
+      "leafThickness": 0.0334,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.0668,
+      "frameInset": 0.01,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "main-idoor-1-1-leaf",
+      "leafThickness": 0.0334,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "main-idoor-1-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-east-1-2-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-east-1-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-front-0-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-front-0-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-front-0-2-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-front-0-2",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-rear-10-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-rear-10-0",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-rear-2-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-0-rear-2-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-rear-2-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-0-rear-2-1",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-0-west-11-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-0-west-11-0",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-1-east-5-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-1-east-5-1",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-1-front-12-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-1-front-12-0",
+      "swing": "IN"
+    },
+    {
+      "assembly": {
+        "mullionWidth": 0.04,
+        "panels": [
+          {
+            "fraction": 1,
+            "glazing": "FULL",
+            "hinge": "LEFT",
+            "kind": "LEAF"
+          }
+        ]
+      },
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-1-west-15-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-glass",
+      "openAngle": 0,
+      "openingId": "opening-1-west-15-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "opening-1-west-7-3-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "opening-1-west-7-3",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "shared-opening-0-west-3-0-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "shared-opening-0-west-3-0",
+      "swing": "IN"
+    },
+    {
+      "frameDepth": 0.12,
+      "frameInset": 0.1,
+      "frameWidth": 0.06,
+      "hingeSide": "LEFT",
+      "id": "shared-opening-1-west-7-1-leaf",
+      "leafThickness": 0.045,
+      "materialId": "mat-timber",
+      "openAngle": 0,
+      "openingId": "shared-opening-1-west-7-1",
+      "swing": "IN"
+    }
+  ],
+  "evidenceSources": [],
+  "frame": {
+    "handedness": "LEFT_HANDED_AS_SPECIFIED",
+    "origin": "finished ground-floor level is y = 0; the front facade outer face is z = 0",
+    "viewerNote": "renderers working in a right-handed frame mirror z when building their scene",
+    "wallConvention": "a wall runs from start to end along its OUTER face at its base; its outward normal is up x u, so exterior rings are traversed counter-clockwise on a plan drawn with the front facade at the bottom and material lies to the left of the direction of travel",
+    "x": "right when looking at the front facade",
+    "y": "up (vertical)",
+    "z": "away from the front facade, into the building"
+  },
+  "id": "m-analysis-m95a1f6e528ef4",
+  "levels": [
+    {
+      "buildingId": "bld-auto-v2",
+      "elevation": 0,
+      "height": 2.8,
+      "id": "lvl-0",
+      "index": 0,
+      "name": "Ground"
+    },
+    {
+      "buildingId": "bld-auto-v2",
+      "elevation": 2.8,
+      "height": 2.8,
+      "id": "lvl-1",
+      "index": 1,
+      "name": "Level 1"
+    }
+  ],
+  "linearSolids": [],
+  "materials": [
+    {
+      "color": "#6d6a66",
+      "id": "mat-chimney",
+      "name": "Chimney"
+    },
+    {
+      "color": "#9fc3d8",
+      "id": "mat-glass",
+      "name": "Glazing",
+      "opacity": 0.35
+    },
+    {
+      "color": "#ece9e2",
+      "id": "mat-member",
+      "name": "Facade member"
+    },
+    {
+      "color": "#d9d5cc",
+      "id": "mat-partition",
+      "name": "Partition"
+    },
+    {
+      "color": "#3a3a3c",
+      "id": "mat-render-dark",
+      "name": "Dark render"
+    },
+    {
+      "color": "#8e8983",
+      "id": "mat-render-mid",
+      "name": "Grey render"
+    },
+    {
+      "color": "#5a5550",
+      "id": "mat-roof",
+      "name": "Roof covering"
+    },
+    {
+      "color": "#c9c6c0",
+      "id": "mat-slab",
+      "name": "Concrete slab"
+    },
+    {
+      "color": "#a49c92",
+      "id": "mat-terrace",
+      "name": "Terrace paving"
+    },
+    {
+      "color": "#b07a4a",
+      "id": "mat-timber",
+      "name": "Timber cladding"
+    },
+    {
+      "color": "#e8e4dc",
+      "id": "mat-wall",
+      "name": "Rendered wall"
+    }
+  ],
+  "meta": {
+    "createdWith": "buildapp",
+    "notes": []
+  },
+  "name": "Dom w morelach (N) (analysis)",
+  "openings": [
+    {
+      "evidence": {
+        "interpretation": "a 0.89 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "attached-0-idoor-0-0",
+      "kind": "DOOR",
+      "offset": 1.241946,
+      "sill": 0,
+      "wallId": "attached-0-iwall-0-x-0",
+      "width": 0.891045
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.72 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "attached-0-idoor-1-0",
+      "kind": "DOOR",
+      "offset": 0.907515,
+      "sill": 0,
+      "wallId": "attached-0-iwall-1-x-2",
+      "width": 0.7152
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.91 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-0",
+      "kind": "DOOR",
+      "offset": 1.655795,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-3",
+      "width": 0.91215
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.91 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-1",
+      "kind": "DOOR",
+      "offset": 0.584489,
+      "sill": 0,
+      "wallId": "main-iwall-0-z-5",
+      "width": 0.91215
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.89 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-0-2",
+      "kind": "DOOR",
+      "offset": 0.0734,
+      "sill": 0,
+      "wallId": "main-iwall-0-x-5",
+      "width": 0.891045
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.75 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-0",
+      "kind": "DOOR",
+      "offset": 1.07005,
+      "sill": 0,
+      "wallId": "main-iwall-1-z-2",
+      "width": 0.750913
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.83 m break between two pieces of the same partition",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "main-idoor-1-1",
+      "kind": "DOOR",
+      "offset": 2.150591,
+      "sill": 0,
+      "wallId": "main-iwall-1-x-4",
+      "width": 0.82523
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.98 m gap in the east wall of main on storey 0, printed 210/47, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "SOURCE_EXACT",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_EXACT"
+        },
+        "status": "SOURCE_CORROBORATED"
+      },
+      "height": 0.47,
+      "id": "opening-0-east-1-0",
+      "kind": "WINDOW",
+      "offset": 8.176116,
+      "sill": 1.73,
+      "wallId": "ring-main-0-w1",
+      "width": 1.947944
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.64 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-east-1-1",
+      "kind": "WINDOW",
+      "offset": 3.332935,
+      "sill": 0,
+      "wallId": "ring-main-0-w1",
+      "width": 2.6351
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.90 m gap in the east wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-east-1-2",
+      "kind": "DOOR",
+      "offset": 0.49594,
+      "sill": 0,
+      "wallId": "ring-main-0-w1",
+      "width": 0.789725
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.39 m gap in the front wall of main on storey 0, printed 140/140, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "UNRESOLVED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_EXACT"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 1.4,
+      "id": "opening-0-front-0-0",
+      "kind": "WINDOW",
+      "offset": 0.925474,
+      "sill": 0.8,
+      "wallId": "ring-main-0-w0",
+      "width": 1.4
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.99 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-front-0-1",
+      "kind": "DOOR",
+      "offset": 3.110549,
+      "sill": 0,
+      "wallId": "ring-main-0-w0",
+      "width": 0.99005
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.95 m gap in the front wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-front-0-2",
+      "kind": "DOOR",
+      "offset": 5.862888,
+      "sill": 0,
+      "wallId": "ring-main-0-w0",
+      "width": 0.954511
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.97 m gap in the front wall of attached-0 on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-front-8-0",
+      "kind": "WINDOW",
+      "offset": 0.455423,
+      "sill": 0,
+      "wallId": "ring-attached-0-0-w0",
+      "width": 2.967729
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.99 m gap in the rear wall of attached-0 on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-rear-10-0",
+      "kind": "DOOR",
+      "offset": 1.344676,
+      "sill": 0,
+      "wallId": "ring-attached-0-0-w2",
+      "width": 0.99005
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.78 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-rear-2-0",
+      "kind": "DOOR",
+      "offset": 2.697628,
+      "sill": 0,
+      "wallId": "ring-main-0-w2",
+      "width": 1.78209
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.93 m gap in the rear wall of main on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-rear-2-1",
+      "kind": "DOOR",
+      "offset": 0.376848,
+      "sill": 0,
+      "wallId": "ring-main-0-w2",
+      "width": 0.93471
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.82 m gap in the west wall of attached-0 on storey 0, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-0-west-11-0",
+      "kind": "DOOR",
+      "offset": 3.212097,
+      "sill": 0,
+      "wallId": "ring-attached-0-0-w3",
+      "width": 1.8243
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.70 m gap in the east wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-east-5-0",
+      "kind": "WINDOW",
+      "offset": 7.510201,
+      "sill": 0,
+      "wallId": "ring-main-1-w1",
+      "width": 2.613859
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.71 m gap in the east wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-east-5-1",
+      "kind": "DOOR",
+      "offset": 4.675506,
+      "sill": 0,
+      "wallId": "ring-main-1-w1",
+      "width": 1.708326
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.16 m gap in the east wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-east-5-2",
+      "kind": "WINDOW",
+      "offset": 0.49594,
+      "sill": 0,
+      "wallId": "ring-main-1-w1",
+      "width": 3.053197
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.73 m gap in the front wall of attached-0 on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-front-12-0",
+      "kind": "DOOR",
+      "offset": 1.350116,
+      "sill": 0,
+      "wallId": "ring-attached-0-1-w0",
+      "width": 0.733539
+    },
+    {
+      "evidence": {
+        "interpretation": "a 6.42 m gap in the front wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-front-4-0",
+      "kind": "WINDOW",
+      "offset": 0.396652,
+      "sill": 0,
+      "wallId": "ring-main-1-w0",
+      "width": 6.419282
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.66 m gap in the rear wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-rear-6-0",
+      "kind": "WINDOW",
+      "offset": 4.142593,
+      "sill": 0,
+      "wallId": "ring-main-1-w2",
+      "width": 2.655002
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.88 m gap in the rear wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-rear-6-1",
+      "kind": "WINDOW",
+      "offset": 1.153424,
+      "sill": 0,
+      "wallId": "ring-main-1-w2",
+      "width": 2.879138
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.71 m gap in the west wall of attached-0 on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-west-15-0",
+      "kind": "DOOR",
+      "offset": 2.446296,
+      "sill": 0,
+      "wallId": "ring-attached-0-1-w3",
+      "width": 1.708326
+    },
+    {
+      "evidence": {
+        "interpretation": "a 2.95 m gap in the west wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-west-7-0",
+      "kind": "WINDOW",
+      "offset": 0.819515,
+      "sill": 0,
+      "wallId": "ring-main-1-w3",
+      "width": 2.947332
+    },
+    {
+      "evidence": {
+        "interpretation": "a 3.27 m gap in the west wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-west-7-2",
+      "kind": "WINDOW",
+      "offset": 5.85063,
+      "sill": 0,
+      "wallId": "ring-main-1-w3",
+      "width": 3.26647
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.70 m gap in the west wall of main on storey 1, no callout read, not read on an elevation",
+        "properties": {
+          "head": "SOURCE_DERIVED",
+          "height": "ASSUMED",
+          "kind": "VISUAL_INFERRED",
+          "offset": "SOURCE_DERIVED",
+          "sill": "ASSUMED",
+          "width": "SOURCE_DERIVED"
+        },
+        "status": "ASSUMED"
+      },
+      "height": 2.1,
+      "id": "opening-1-west-7-3",
+      "kind": "DOOR",
+      "offset": 9.530102,
+      "sill": 0,
+      "wallId": "ring-main-1-w3",
+      "width": 0.593958
+    },
+    {
+      "evidence": {
+        "interpretation": "a 0.93 m gap in the west wall of main on storey 0, no callout read, not read on an elevation; this face is shared with attached-0, so the gap is a doorway between the two bodies",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "shared-opening-0-west-3-0",
+      "kind": "DOOR",
+      "leaves": [
+        {
+          "offset": 1.011575,
+          "wallId": "ring-attached-0-0-w1"
+        }
+      ],
+      "offset": 5.706005,
+      "sill": 0,
+      "wallId": "ring-main-0-w3",
+      "width": 0.93242
+    },
+    {
+      "evidence": {
+        "interpretation": "a 1.90 m gap in the west wall of main on storey 1, no callout read, not read on an elevation; this face is shared with attached-0, so the gap is a doorway between the two bodies",
+        "properties": {
+          "height": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.1,
+      "id": "shared-opening-1-west-7-1",
+      "kind": "DOOR",
+      "leaves": [
+        {
+          "offset": 1.893234,
+          "wallId": "ring-attached-0-1-w1"
+        }
+      ],
+      "offset": 3.860711,
+      "sill": 0,
+      "wallId": "ring-main-1-w3",
+      "width": 1.896055
+    }
+  ],
+  "platforms": [],
+  "railings": [],
+  "relationships": [],
+  "roofEdges": [],
+  "roofOpenings": [],
+  "roofPlanes": [],
+  "rooflights": [],
+  "roofs": [
+    {
+      "eaveOffset": 2.8,
+      "evidence": {
+        "interpretation": "no section draws this roof; its height is the storey height",
+        "properties": {
+          "eaveOffset": "ASSUMED"
+        },
+        "status": "ASSUMED"
+      },
+      "footprint": {
+        "maxX": 3.8,
+        "maxZ": 9.524722,
+        "minX": 0,
+        "minZ": 2.97
+      },
+      "id": "roof-attached-0",
+      "kind": "FLAT",
+      "levelId": "lvl-1",
+      "materialId": "mat-roof",
+      "overhang": 0,
+      "pitchDeg": 0,
+      "plateInset": {
+        "maxX": 0.22297,
+        "maxZ": 0.22297,
+        "minX": 0.22297,
+        "minZ": 0.22297
+      },
+      "ridgeAxis": "X",
+      "thickness": 0.28
+    }
+  ],
+  "rooms": [
+    {
+      "evidence": {
+        "interpretation": "15.79 m² enclosed by 16 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "attached-0-room-0-0",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 0.44594,
+          "z": 3.41594
+        },
+        {
+          "x": 3.34594,
+          "z": 3.41594
+        },
+        {
+          "x": 3.34594,
+          "z": 9.06594
+        },
+        {
+          "x": 0.44594,
+          "z": 9.06594
+        },
+        {
+          "x": 0.44594,
+          "z": 7.66594
+        },
+        {
+          "x": 1.69594,
+          "z": 7.66594
+        },
+        {
+          "x": 1.69594,
+          "z": 7.71594
+        },
+        {
+          "x": 2.59594,
+          "z": 7.71594
+        },
+        {
+          "x": 2.59594,
+          "z": 7.66594
+        },
+        {
+          "x": 2.99594,
+          "z": 7.66594
+        },
+        {
+          "x": 2.99594,
+          "z": 7.46594
+        },
+        {
+          "x": 2.59594,
+          "z": 7.46594
+        },
+        {
+          "x": 2.59594,
+          "z": 7.41594
+        },
+        {
+          "x": 1.69594,
+          "z": 7.41594
+        },
+        {
+          "x": 1.69594,
+          "z": 7.46594
+        },
+        {
+          "x": 0.44594,
+          "z": 7.46594
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "14.94 m² enclosed by 12 wall faces; numbered 1 = Schody 4.81 m² published (211 % off)",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "attached-0-room-1-0",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 0.44594,
+          "z": 3.56594
+        },
+        {
+          "x": 1.34594,
+          "z": 3.56594
+        },
+        {
+          "x": 1.34594,
+          "z": 3.66594
+        },
+        {
+          "x": 2.09594,
+          "z": 3.66594
+        },
+        {
+          "x": 2.09594,
+          "z": 3.61594
+        },
+        {
+          "x": 3.34594,
+          "z": 3.61594
+        },
+        {
+          "x": 3.34594,
+          "z": 8.86594
+        },
+        {
+          "x": 0.44594,
+          "z": 8.86594
+        },
+        {
+          "x": 0.44594,
+          "z": 7.51594
+        },
+        {
+          "x": 2.39594,
+          "z": 7.51594
+        },
+        {
+          "x": 2.39594,
+          "z": 7.36594
+        },
+        {
+          "x": 0.44594,
+          "z": 7.36594
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "7.58 m² enclosed by 6 wall faces; numbered 1 = Wiatrołap 2.89 m² published (162 % off); numbered 1 = Wiatrołap 2.89 m² published (162 % off)",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "main-room-0-0",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 4.24594,
+          "z": 0.44594
+        },
+        {
+          "x": 6.59594,
+          "z": 0.44594
+        },
+        {
+          "x": 6.59594,
+          "z": 3.04594
+        },
+        {
+          "x": 6.69594,
+          "z": 3.04594
+        },
+        {
+          "x": 6.69594,
+          "z": 3.64594
+        },
+        {
+          "x": 4.24594,
+          "z": 3.64594
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "2.64 m² enclosed by 8 wall faces",
+        "status": "SOURCE_DERIVED"
+      },
+      "id": "main-room-0-1",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 6.84594,
+          "z": 0.44594
+        },
+        {
+          "x": 8.69594,
+          "z": 0.44594
+        },
+        {
+          "x": 8.69594,
+          "z": 1.89594
+        },
+        {
+          "x": 7.84594,
+          "z": 1.89594
+        },
+        {
+          "x": 7.84594,
+          "z": 1.84594
+        },
+        {
+          "x": 6.89594,
+          "z": 1.84594
+        },
+        {
+          "x": 6.89594,
+          "z": 1.89594
+        },
+        {
+          "x": 6.84594,
+          "z": 1.89594
+        }
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "45.56 m² enclosed by 46 wall faces; several published rooms may share it (open plan); numbered 2 = Hol 6.06 m² published (652 % off)",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "main-room-0-2",
+      "levelId": "lvl-0",
+      "polygon": [
+        {
+          "x": 8.89594,
+          "z": 0.44594
+        },
+        {
+          "x": 10.54594,
+          "z": 0.44594
+        },
+        {
+          "x": 10.54594,
+          "z": 3.04594
+        },
+        {
+          "x": 8.89594,
+          "z": 3.04594
+        },
+        {
+          "x": 8.89594,
+          "z": 2.99594
+        },
+        {
+          "x": 8.69594,
+          "z": 2.99594
+        },
+        {
+          "x": 8.69594,
+          "z": 3.04594
+        },
+        {
+          "x": 8.39594,
+          "z": 3.04594
+        },
+        {
+          "x": 8.39594,
+          "z": 3.89594
+        },
+        {
+          "x": 8.34594,
+          "z": 3.89594
+        },
+        {
+          "x": 8.34594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.39594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.39594,
+          "z": 6.24594
+        },
+        {
+          "x": 9.19594,
+          "z": 6.24594
+        },
+        {
+          "x": 9.19594,
+          "z": 5.94594
+        },
+        {
+          "x": 8.54594,
+          "z": 5.94594
+        },
+        {
+          "x": 8.54594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.64594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.64594,
+          "z": 3.99594
+        },
+        {
+          "x": 8.69594,
+          "z": 3.99594
+        },
+        {
+          "x": 8.69594,
+          "z": 3.34594
+        },
+        {
+          "x": 10.54594,
+          "z": 3.34594
+        },
+        {
+          "x": 10.54594,
+          "z": 10.19594
+        },
+        {
+          "x": 4.24594,
+          "z": 10.19594
+        },
+        {
+          "x": 4.24594,
+          "z": 6.64594
+        },
+        {
+          "x": 4.34594,
+          "z": 6.64594
+        },
+        {
+          "x": 4.34594,
+          "z": 6.39594
+        },
+        {
+          "x": 4.64594,
+          "z": 6.39594
+        },
+        {
+          "x": 4.64594,
+          "z": 6.24594
+        },
+        {
+          "x": 4.74594,
+          "z": 6.24594
+        },
+        {
+          "x": 4.74594,
+          "z": 6.39594
+        },
+        {
+          "x": 5.24594,
+          "z": 6.39594
+        },
+        {
+          "x": 5.24594,
+          "z": 6.24594
+        },
+        {
+          "x": 5.44594,
+          "z": 6.24594
+        },
+        {
+          "x": 5.44594,
+          "z": 5.94594
+        },
+        {
+          "x": 4.24594,
+          "z": 5.94594
+        },
+        {
+          "x": 4.24594,
+          "z": 3.99594
+        },
+        {
+          "x": 6.84594,
+          "z": 3.99594
+        },
+        {
+          "x": 6.84594,
+          "z": 3.04594
+        },
+        {
+          "x": 6.89594,
+          "z": 3.04594
+        },
+        {
+          "x": 6.89594,
+          "z": 2.14594
+        },
+        {
+          "x": 7.84594,
+          "z": 2.14594
+        },
+        {
+          "x": 7.84594,
+          "z": 2.09594
+        },
+        {
+          "x": 8.69594,
+          "z": 2.09594
+        },
+        {
+          "x": 8.69594,
+          "z": 2.14594
+        },
+        {
+          "x": 8.89594,
+          "z": 2.14594
+        }
+      ],
+      "usage": "Hol"
+    },
+    {
+      "evidence": {
+        "interpretation": "57.11 m² enclosed by 52 wall faces; several published rooms may share it (open plan); numbered 1 = Schody 4.81 m² published (1087 % off)",
+        "status": "SOURCE_CORROBORATED"
+      },
+      "id": "main-room-1-0",
+      "levelId": "lvl-1",
+      "polygon": [
+        {
+          "x": 4.24594,
+          "z": 0.44594
+        },
+        {
+          "x": 10.54594,
+          "z": 0.44594
+        },
+        {
+          "x": 10.54594,
+          "z": 6.74594
+        },
+        {
+          "x": 7.99594,
+          "z": 6.74594
+        },
+        {
+          "x": 7.99594,
+          "z": 6.89594
+        },
+        {
+          "x": 10.54594,
+          "z": 6.89594
+        },
+        {
+          "x": 10.54594,
+          "z": 10.19594
+        },
+        {
+          "x": 6.99594,
+          "z": 10.19594
+        },
+        {
+          "x": 6.99594,
+          "z": 7.89594
+        },
+        {
+          "x": 6.79594,
+          "z": 7.89594
+        },
+        {
+          "x": 6.79594,
+          "z": 10.19594
+        },
+        {
+          "x": 4.24594,
+          "z": 10.19594
+        },
+        {
+          "x": 4.24594,
+          "z": 6.89594
+        },
+        {
+          "x": 6.59594,
+          "z": 6.89594
+        },
+        {
+          "x": 6.59594,
+          "z": 6.74594
+        },
+        {
+          "x": 4.24594,
+          "z": 6.74594
+        },
+        {
+          "x": 4.24594,
+          "z": 4.89594
+        },
+        {
+          "x": 6.39594,
+          "z": 4.89594
+        },
+        {
+          "x": 6.39594,
+          "z": 4.94594
+        },
+        {
+          "x": 6.04594,
+          "z": 4.94594
+        },
+        {
+          "x": 6.04594,
+          "z": 5.99594
+        },
+        {
+          "x": 7.09594,
+          "z": 5.99594
+        },
+        {
+          "x": 7.09594,
+          "z": 4.99594
+        },
+        {
+          "x": 7.24594,
+          "z": 4.99594
+        },
+        {
+          "x": 7.24594,
+          "z": 4.89594
+        },
+        {
+          "x": 7.99594,
+          "z": 4.89594
+        },
+        {
+          "x": 7.99594,
+          "z": 4.94594
+        },
+        {
+          "x": 8.14594,
+          "z": 4.94594
+        },
+        {
+          "x": 8.14594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.59594,
+          "z": 4.89594
+        },
+        {
+          "x": 8.59594,
+          "z": 4.54594
+        },
+        {
+          "x": 9.99594,
+          "z": 4.54594
+        },
+        {
+          "x": 9.99594,
+          "z": 4.39594
+        },
+        {
+          "x": 8.59594,
+          "z": 4.39594
+        },
+        {
+          "x": 8.59594,
+          "z": 4.14594
+        },
+        {
+          "x": 8.14594,
+          "z": 4.14594
+        },
+        {
+          "x": 8.14594,
+          "z": 2.94594
+        },
+        {
+          "x": 8.19594,
+          "z": 2.94594
+        },
+        {
+          "x": 8.19594,
+          "z": 2.14594
+        },
+        {
+          "x": 8.14594,
+          "z": 2.14594
+        },
+        {
+          "x": 8.14594,
+          "z": 1.04594
+        },
+        {
+          "x": 7.99594,
+          "z": 1.04594
+        },
+        {
+          "x": 7.99594,
+          "z": 2.14594
+        },
+        {
+          "x": 7.89594,
+          "z": 2.14594
+        },
+        {
+          "x": 7.89594,
+          "z": 2.94594
+        },
+        {
+          "x": 7.99594,
+          "z": 2.94594
+        },
+        {
+          "x": 7.99594,
+          "z": 4.74594
+        },
+        {
+          "x": 7.24594,
+          "z": 4.74594
+        },
+        {
+          "x": 7.24594,
+          "z": 4.64594
+        },
+        {
+          "x": 6.39594,
+          "z": 4.64594
+        },
+        {
+          "x": 6.39594,
+          "z": 4.74594
+        },
+        {
+          "x": 4.24594,
+          "z": 4.74594
+        }
+      ],
+      "usage": "Schody"
+    }
+  ],
+  "schema": "buildapp.canonical-building-model",
+  "schemaVersion": "1.6.0",
+  "slabs": [
+    {
+      "id": "slab-attached-0-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0,
+          "z": 2.97
+        },
+        {
+          "x": 3.8,
+          "z": 2.97
+        },
+        {
+          "x": 3.8,
+          "z": 9.524722
+        },
+        {
+          "x": 0,
+          "z": 9.524722
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    },
+    {
+      "id": "slab-attached-0-1",
+      "levelId": "lvl-1",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 0.44594,
+          "z": 3.41594
+        },
+        {
+          "x": 3.35406,
+          "z": 3.41594
+        },
+        {
+          "x": 3.35406,
+          "z": 9.078782
+        },
+        {
+          "x": 0.44594,
+          "z": 9.078782
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    },
+    {
+      "id": "slab-main-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 3.8,
+          "z": 0
+        },
+        {
+          "x": 10.994247,
+          "z": 0
+        },
+        {
+          "x": 10.994247,
+          "z": 10.62
+        },
+        {
+          "x": 3.8,
+          "z": 10.62
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    },
+    {
+      "holes": [
+        [
+          {
+            "x": 6.058838,
+            "z": 4.954535
+          },
+          {
+            "x": 7.08752,
+            "z": 4.954535
+          },
+          {
+            "x": 7.08752,
+            "z": 5.988305
+          },
+          {
+            "x": 6.058838,
+            "z": 5.988305
+          }
+        ]
+      ],
+      "id": "slab-main-1",
+      "levelId": "lvl-1",
+      "materialId": "mat-slab",
+      "polygon": [
+        {
+          "x": 4.24594,
+          "z": 0.44594
+        },
+        {
+          "x": 10.548307,
+          "z": 0.44594
+        },
+        {
+          "x": 10.548307,
+          "z": 10.17406
+        },
+        {
+          "x": 4.24594,
+          "z": 10.17406
+        }
+      ],
+      "thickness": 0.28,
+      "topOffset": 0
+    }
+  ],
+  "stairs": [
+    {
+      "evidence": {
+        "interpretation": "1 tread ladder (5 risers minus x at 0.260 m) with 0 corner squares between them; 5 risers over 2.80 m = 0.560 m each; the arrowhead at (5.733008, 5.313782) fixes the climb",
+        "status": "UNRESOLVED"
+      },
+      "footprint": {
+        "maxX": 7.08752,
+        "maxZ": 5.988305,
+        "minX": 6.058838,
+        "minZ": 4.954535
+      },
+      "id": "stair-main",
+      "kind": "PLACEHOLDER",
+      "levelId": "lvl-0",
+      "toLevelId": "lvl-1"
+    }
+  ],
+  "stepRuns": [],
+  "surfaceRegions": [],
+  "terraces": [
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "interpretation": "the floor of the east recess",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-main-0-w1"
+      ],
+      "id": "terrace-east-0",
+      "levelId": "lvl-0",
+      "materialId": "mat-terrace",
+      "polygon": [
+        {
+          "x": 12.094247,
+          "z": 0
+        },
+        {
+          "x": 12.094247,
+          "z": 2.866725
+        },
+        {
+          "x": 10.994247,
+          "z": 2.866725
+        },
+        {
+          "x": 10.994247,
+          "z": 0
+        }
+      ],
+      "surface": "UNKNOWN",
+      "thickness": 0.15,
+      "topOffset": 0
+    },
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "interpretation": "the floor of the east recess",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-main-0-w1"
+      ],
+      "id": "terrace-east-374",
+      "levelId": "lvl-0",
+      "materialId": "mat-terrace",
+      "polygon": [
+        {
+          "x": 12.094247,
+          "z": 3.738335
+        },
+        {
+          "x": 12.094247,
+          "z": 5.562635
+        },
+        {
+          "x": 10.994247,
+          "z": 5.562635
+        },
+        {
+          "x": 10.994247,
+          "z": 3.738335
+        }
+      ],
+      "surface": "UNKNOWN",
+      "thickness": 0.15,
+      "topOffset": 0
+    },
+    {
+      "edge": "PLINTH",
+      "evidence": {
+        "interpretation": "the floor of the east recess",
+        "properties": {
+          "thickness": "ASSUMED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "hostWallIds": [
+        "ring-main-0-w1"
+      ],
+      "id": "terrace-east-643",
+      "levelId": "lvl-0",
+      "materialId": "mat-terrace",
+      "polygon": [
+        {
+          "x": 12.094247,
+          "z": 6.434245
+        },
+        {
+          "x": 12.094247,
+          "z": 10.62
+        },
+        {
+          "x": 10.994247,
+          "z": 10.62
+        },
+        {
+          "x": 10.994247,
+          "z": 6.434245
+        }
+      ],
+      "surface": "UNKNOWN",
+      "thickness": 0.15,
+      "topOffset": 0
+    }
+  ],
+  "units": {
+    "angle": "deg",
+    "length": "m"
+  },
+  "wallJunctions": [
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-0-w0"
+      },
+      "id": "ring-attached-0-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-0-w1"
+      },
+      "id": "ring-attached-0-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-0-w2"
+      },
+      "id": "ring-attached-0-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-0-w3"
+      },
+      "id": "ring-attached-0-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-1-w0"
+      },
+      "id": "ring-attached-0-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-1-w1"
+      },
+      "id": "ring-attached-0-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-1-w2"
+      },
+      "id": "ring-attached-0-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-attached-0-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-attached-0-1-w3"
+      },
+      "id": "ring-attached-0-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-attached-0-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w0"
+      },
+      "id": "ring-main-0-j0",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w1"
+      },
+      "id": "ring-main-0-j1",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w2"
+      },
+      "id": "ring-main-0-j2",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-0-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-0-w3"
+      },
+      "id": "ring-main-0-j3",
+      "kind": "CORNER",
+      "owner": "ring-main-0-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w3"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w0"
+      },
+      "id": "ring-main-1-j0",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w0"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w1"
+      },
+      "id": "ring-main-1-j1",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w0",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w1"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w2"
+      },
+      "id": "ring-main-1-j2",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w2",
+      "tolerance": 0.001
+    },
+    {
+      "a": {
+        "end": "END",
+        "wallId": "ring-main-1-w2"
+      },
+      "b": {
+        "end": "START",
+        "wallId": "ring-main-1-w3"
+      },
+      "id": "ring-main-1-j3",
+      "kind": "CORNER",
+      "owner": "ring-main-1-w2",
+      "tolerance": 0.001
+    }
+  ],
+  "wallPanels": [],
+  "wallRings": [
+    {
+      "evidence": {
+        "interpretation": "3.80 × 6.55 m body from the plan's printed chains and wall bands",
+        "status": "SOURCE_EXACT"
+      },
+      "id": "ring-attached-0-0",
+      "junctionIds": [
+        "ring-attached-0-0-j0",
+        "ring-attached-0-0-j1",
+        "ring-attached-0-0-j2",
+        "ring-attached-0-0-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-attached-0-0-w0",
+        "ring-attached-0-0-w1",
+        "ring-attached-0-0-w2",
+        "ring-attached-0-0-w3"
+      ]
+    },
+    {
+      "id": "ring-attached-0-1",
+      "junctionIds": [
+        "ring-attached-0-1-j0",
+        "ring-attached-0-1-j1",
+        "ring-attached-0-1-j2",
+        "ring-attached-0-1-j3"
+      ],
+      "levelId": "lvl-1",
+      "wallIds": [
+        "ring-attached-0-1-w0",
+        "ring-attached-0-1-w1",
+        "ring-attached-0-1-w2",
+        "ring-attached-0-1-w3"
+      ]
+    },
+    {
+      "evidence": {
+        "interpretation": "7.19 × 10.62 m body from the plan's printed chains and wall bands",
+        "status": "SOURCE_EXACT"
+      },
+      "id": "ring-main-0",
+      "junctionIds": [
+        "ring-main-0-j0",
+        "ring-main-0-j1",
+        "ring-main-0-j2",
+        "ring-main-0-j3"
+      ],
+      "levelId": "lvl-0",
+      "wallIds": [
+        "ring-main-0-w0",
+        "ring-main-0-w1",
+        "ring-main-0-w2",
+        "ring-main-0-w3"
+      ]
+    },
+    {
+      "id": "ring-main-1",
+      "junctionIds": [
+        "ring-main-1-j0",
+        "ring-main-1-j1",
+        "ring-main-1-j2",
+        "ring-main-1-j3"
+      ],
+      "levelId": "lvl-1",
+      "wallIds": [
+        "ring-main-1-w0",
+        "ring-main-1-w1",
+        "ring-main-1-w2",
+        "ring-main-1-w3"
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.97015,
+        "z": 7.479206
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "attached-0-iwall-0-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.46094,
+        "z": 7.479206
+      },
+      "thickness": 0.180319
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.33906,
+        "z": 8.909754
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "attached-0-iwall-1-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.46094,
+        "z": 8.909754
+      },
+      "thickness": 0.167,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-attached-0"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 2.358731,
+        "z": 7.370058
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "attached-0-iwall-1-x-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.46094,
+        "z": 7.370058
+      },
+      "thickness": 0.111333,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-attached-0"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.33906,
+        "z": 3.43094
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "attached-0-iwall-1-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 0.46094,
+        "z": 3.43094
+      },
+      "thickness": 0.148444,
+      "topProfile": {
+        "kind": "FOLLOW_ROOF",
+        "roofId": "roof-attached-0"
+      }
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 5.445275,
+        "z": 5.979695
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.26094,
+        "z": 5.979695
+      },
+      "thickness": 0.260461
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.148062,
+        "z": 5.979695
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.415425,
+        "z": 5.979695
+      },
+      "thickness": 0.260461
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.831345,
+        "z": 3.689184
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.26094,
+        "z": 3.689184
+      },
+      "thickness": 0.260461
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.533307,
+        "z": 3.081085
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-4",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.415425,
+        "z": 3.081085
+      },
+      "thickness": 0.260461
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.890649,
+        "z": 1.945144
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-x-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.837149,
+        "z": 1.945144
+      },
+      "thickness": 0.120213
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 4.326988,
+        "z": 6.636945
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.326988,
+        "z": 6.255155
+      },
+      "thickness": 0.080142
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.822149,
+        "z": 3.674184
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-3",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.822149,
+        "z": 0.46094
+      },
+      "thickness": 0.120213
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.525035,
+        "z": 5.964695
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-5",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.525035,
+        "z": 3.356546
+      },
+      "thickness": 0.120213
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.881804,
+        "z": 1.930144
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.52,
+      "id": "main-iwall-0-z-9",
+      "kind": "INTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.881804,
+        "z": 0.46094
+      },
+      "thickness": 0.180319
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.244269,
+        "z": 7.914469
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-x-1",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 9.840823,
+        "z": 7.914469
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.594915,
+        "z": 6.769327
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-x-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.26094,
+        "z": 6.769327
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.533307,
+        "z": 6.769327
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-x-3",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.006977,
+        "z": 6.769327
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.117007,
+        "z": 4.760636
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-x-4",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 4.26094,
+        "z": 4.760636
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 9.950853,
+        "z": 4.422725
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-x-6",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.12349,
+        "z": 4.422725
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 6.953167,
+        "z": 10.157169
+      },
+      "evidence": {
+        "interpretation": "1 piece of partition ink on the plan",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-z-0",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 6.953167,
+        "z": 7.90443
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 8.108489,
+        "z": 4.745636
+      },
+      "evidence": {
+        "interpretation": "2 pieces of partition ink on the plan with 1 door gap",
+        "properties": {
+          "height": "SOURCE_DERIVED"
+        },
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "main-iwall-1-z-2",
+      "kind": "INTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-partition",
+      "start": {
+        "x": 8.108489,
+        "z": 1.089898
+      },
+      "thickness": 0.111333
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 3.738335
+      },
+      "evidence": {
+        "interpretation": "a 0.87 m return standing in the 1.10 m east zone on the storey 0 plan",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "return-east-0-0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-member",
+      "start": {
+        "x": 12.094247,
+        "z": 3.738335
+      },
+      "thickness": 0.87161
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 6.434245
+      },
+      "evidence": {
+        "interpretation": "a 0.87 m return standing in the 1.10 m east zone on the storey 0 plan",
+        "status": "SOURCE_DERIVED"
+      },
+      "height": 2.8,
+      "id": "return-east-0-1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-member",
+      "start": {
+        "x": 12.094247,
+        "z": 6.434245
+      },
+      "thickness": 0.87161
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 2.97
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 2.97
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 9.524722
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 2.97
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 9.524722
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 9.524722
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 2.97
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 9.524722
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 2.97
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 2.97
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 9.524722
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 2.97
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 9.524722
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 9.524722
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 0,
+        "z": 2.97
+      },
+      "height": 2.8,
+      "id": "ring-attached-0-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 0,
+        "z": 9.524722
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 0
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 10.62
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10.994247,
+        "z": 0
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 10.62
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10.994247,
+        "z": 10.62
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-0-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-0",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 10.62
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-1-w0",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 0
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 10.994247,
+        "z": 10.62
+      },
+      "height": 2.8,
+      "id": "ring-main-1-w1",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10.994247,
+        "z": 0
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 10.62
+      },
+      "height": 2.8,
+      "id": "ring-main-1-w2",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 10.994247,
+        "z": 10.62
+      },
+      "thickness": 0.44594
+    },
+    {
+      "baseOffset": 0,
+      "end": {
+        "x": 3.8,
+        "z": 0
+      },
+      "height": 2.8,
+      "id": "ring-main-1-w3",
+      "kind": "EXTERIOR",
+      "levelId": "lvl-1",
+      "materialId": "mat-wall",
+      "start": {
+        "x": 3.8,
+        "z": 10.62
+      },
+      "thickness": 0.44594
+    }
+  ],
+  "windows": [
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-east-1-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-east-1-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-east-1-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-east-1-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-0-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-0-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-0-front-8-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-0-front-8-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-east-5-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-east-5-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-east-5-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-east-5-2"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-front-4-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-front-4-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-rear-6-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-rear-6-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-rear-6-1-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-rear-6-1"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-0-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-0"
+    },
+    {
+      "divisions": 1,
+      "frameDepth": 0.08,
+      "frameInset": 0.12,
+      "frameWidth": 0.07,
+      "glassThickness": 0.024,
+      "id": "opening-1-west-7-2-unit",
+      "materialId": "mat-glass",
+      "openingId": "opening-1-west-7-2"
+    }
+  ]
+}

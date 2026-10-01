@@ -1,0 +1,66 @@
+{
+  "run": "/home/user/work005e/blind5/h2-dom-w-morelach",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 114.53,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 305,
+      "tallestPx": 46,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 16.75
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 2,
+      "plans": 2,
+      "holds": true
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 101.31,
+      "publishedM2": 114.53,
+      "residualPct": -11.54,
+      "holds": false
+    },
+    "resolvedWithAWitness": {
+      "holds": true,
+      "note": "the first reading held"
+    },
+    "replacedByTheDrawing": {
+      "holds": true,
+      "note": "the challenge kept the first reading"
+    }
+  },
+  "bodies": 2,
+  "unresolved": 27,
+  "warnings": [
+    "INFO:DETERMINISTIC_ONLY",
+    "INFO:SOURCE_BYTE_IDENTICAL",
+    "INFO:GUESSED_ADDRESS_HTTP_STATUS",
+    "LIMITING:LAYOUT_STRUCTURE_READS_AS_ONE_BLOCK",
+    "LIMITING:LAYOUT_FOOTPRINT_AREA_NEAR",
+    "LIMITING:METRIC_SCALE_WEAK",
+    "LIMITING:EXTERIOR_JOINTS"
+  ],
+  "verdict": "ALGORITHMIC_FAIL"
+}

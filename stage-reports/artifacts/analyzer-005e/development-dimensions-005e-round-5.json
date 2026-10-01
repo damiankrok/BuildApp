@@ -1,0 +1,19 @@
+{
+  "schema": "buildapp.development-dimensions",
+  "schemaVersion": "1.1.0",
+  "what": "Overall dimensions printed on the round-5 blind houses' selected ground plans, and what the frozen 005E reader took them for (as-read, in centimetres), as text facts, registered after the draw: the production hard-code guard (tests/architecture/generalization.test.ts) must fail on these identifiers from now on. The two families join the development set of the next stage. No drawing is stored.",
+  "houses": [
+    {
+      "key": "dom-w-modrzewnicy",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+      "overallDimensionsCm": [2590, 1950, 1000],
+      "misreadAsCm": [1410]
+    },
+    {
+      "key": "dom-w-morelach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-morelach-n-ver-2-m95a1f6e528ef4",
+      "overallDimensionsCm": [1212, 1062],
+      "misreadAsCm": []
+    }
+  ]
+}

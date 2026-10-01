@@ -1,0 +1,2102 @@
+{
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "diagnostics": {
+      "builtRegions": 2,
+      "cells": 7,
+      "conflictingReadings": 0,
+      "dimensionChains": 0,
+      "dimensionChainsRead": 0,
+      "enclosedCells": 3,
+      "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+      "firstFailure": "PLAN_NO_DIMENSION_FRAME",
+      "gridLinesX": 8,
+      "gridLinesY": 2,
+      "independentWitnesses": 1,
+      "masses": 0,
+      "metricConfidence": "INCONCLUSIVE",
+      "metricIsotropy": "NONE",
+      "metricRelation": "NO_SCALE",
+      "planFrames": 8,
+      "planSizePx": "853x853",
+      "plansRead": 2,
+      "recessRegions": 0,
+      "scaleCmPerPx": 0,
+      "scaleHypotheses": 6,
+      "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+      "topScales": "2.895277 cm/px (1 independent, plausible) | 3.75 cm/px (1 independent, plausible) | 1.25 cm/px (1 independent, plausible)",
+      "wallBands": 43,
+      "wallThicknessPx": 12,
+      "walledEnvelope": true,
+      "wideOpenings": 4,
+      "wideOpeningsClosed": 4
+    },
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides. The scales its readings state are 2.895277 cm/px (1 independent, plausible); 3.75 cm/px (1 independent, plausible); 1.25 cm/px (1 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 853×853 px floor plan prints no dimension chain, so nothing on it states a scale)",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTERING_VIEWS",
+    "substage": "METRIC_RESOLUTION",
+    "title": "The floor plan’s scale cannot be established"
+  },
+  "outcome": "FAILED",
+  "plans": {
+    "planFrames": 8,
+    "plans": [
+      {
+        "annotation": "DIMENSIONED",
+        "assetId": "asset-rzut-8d59c92ec1",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 264,
+              "x1": 335,
+              "y0": 11,
+              "y1": 21
+            },
+            "thickness": 15.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 312,
+              "x1": 409,
+              "y0": 112,
+              "y1": 123
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 527,
+              "x1": 557,
+              "y0": 203,
+              "y1": 213
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 480,
+              "x1": 508,
+              "y0": 264,
+              "y1": 269
+            },
+            "thickness": 5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 513,
+              "x1": 534,
+              "y0": 266,
+              "y1": 274
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 495,
+              "x1": 517,
+              "y0": 329,
+              "y1": 335
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 251,
+              "x1": 368,
+              "y0": 587,
+              "y1": 598
+            },
+            "thickness": 11.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 241,
+              "x1": 264,
+              "y0": 748,
+              "y1": 759
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 657,
+              "x1": 765,
+              "y0": 781,
+              "y1": 790
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 541,
+              "x1": 641,
+              "y0": 781,
+              "y1": 794
+            },
+            "thickness": 9.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 547,
+              "x1": 566,
+              "y0": 792,
+              "y1": 801
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 609,
+              "x1": 640,
+              "y0": 814,
+              "y1": 825
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 547,
+              "x1": 566,
+              "y0": 816,
+              "y1": 824
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 698,
+              "x1": 722,
+              "y0": 817,
+              "y1": 825
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 160,
+              "x1": 168,
+              "y0": 315,
+              "y1": 336
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 160,
+              "x1": 171,
+              "y0": 134,
+              "y1": 160
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 162,
+              "x1": 169,
+              "y0": 260,
+              "y1": 279
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 162,
+              "x1": 171,
+              "y0": 229,
+              "y1": 249
+            },
+            "thickness": 19
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 177,
+              "x1": 181,
+              "y0": 372,
+              "y1": 391
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 183,
+              "x1": 194,
+              "y0": 234,
+              "y1": 471
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 235,
+              "x1": 246,
+              "y0": 526,
+              "y1": 717
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 235,
+              "x1": 250,
+              "y0": 599,
+              "y1": 622
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 273,
+              "x1": 284,
+              "y0": 182,
+              "y1": 228
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 287,
+              "x1": 306,
+              "y0": 238,
+              "y1": 271
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 300,
+              "x1": 306,
+              "y0": 273,
+              "y1": 346
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 403,
+              "x1": 418,
+              "y0": 600,
+              "y1": 747
+            },
+            "thickness": 12.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 412,
+              "x1": 423,
+              "y0": 60,
+              "y1": 83
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 422,
+              "x1": 429,
+              "y0": 36,
+              "y1": 57
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 422,
+              "x1": 433,
+              "y0": 332,
+              "y1": 583
+            },
+            "thickness": 13.375
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 422,
+              "x1": 433,
+              "y0": 124,
+              "y1": 166
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 422,
+              "x1": 433,
+              "y0": 217,
+              "y1": 327
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 427,
+              "x1": 431,
+              "y0": 19,
+              "y1": 47
+            },
+            "thickness": 6.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 440,
+              "x1": 447,
+              "y0": 315,
+              "y1": 335
+            },
+            "thickness": 15
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 517,
+              "x1": 524,
+              "y0": 295,
+              "y1": 329
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 521,
+              "x1": 529,
+              "y0": 212,
+              "y1": 234
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 580,
+              "x1": 590,
+              "y0": 782,
+              "y1": 825
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 600,
+              "x1": 608,
+              "y0": 791,
+              "y1": 816
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 646,
+              "x1": 656,
+              "y0": 768,
+              "y1": 825
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 674,
+              "x1": 683,
+              "y0": 790,
+              "y1": 825
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 689,
+              "x1": 698,
+              "y0": 790,
+              "y1": 816
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 723,
+              "x1": 732,
+              "y0": 790,
+              "y1": 816
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 738,
+              "x1": 747,
+              "y0": 790,
+              "y1": 825
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 765,
+              "x1": 775,
+              "y0": 790,
+              "y1": 825
+            },
+            "thickness": 11
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 188.5,
+              "x1": 240.5,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 240.5,
+              "x1": 296.5,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 296.5,
+              "x1": 412.25,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 412.25,
+              "x1": 427.4375,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 427.4375,
+              "x1": 604,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 604,
+              "x1": 651,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 651,
+              "x1": 693.5,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          }
+        ],
+        "chains": [],
+        "envelope": {
+          "x0": 188.5,
+          "x1": 776,
+          "y0": 10.25,
+          "y1": 819.5
+        },
+        "extent": {
+          "x0": 182.5,
+          "x1": 776,
+          "y0": 10.25,
+          "y1": 825.5
+        },
+        "extentProvenance": {
+          "x": "WALL_GEOMETRY_EXTENT",
+          "y": "WALL_GEOMETRY_EXTENT"
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+        "hypotheses": [
+          {
+            "builtCells": 3,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 3,
+            "chosen": false,
+            "closedOpenings": 4,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          188.5,
+          240.5,
+          296.5,
+          412.25,
+          427.4375,
+          604,
+          651,
+          693.5
+        ],
+        "linesY": [
+          785.5,
+          819.5
+        ],
+        "masses": [],
+        "metric": {
+          "confidence": "INCONCLUSIVE",
+          "independentWitnesses": 1,
+          "isotropy": "NONE",
+          "relation": "NO_SCALE"
+        },
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-1-0",
+            "rect": {
+              "x0": 240.5,
+              "x1": 412.25,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-5-0",
+            "rect": {
+              "x0": 604,
+              "x1": 651,
+              "y0": 785.5,
+              "y1": 819.5
+            }
+          }
+        ],
+        "scale": null,
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "storey": "GROUND",
+        "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+        "wallPx": 12,
+        "wideOpenings": [
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 327,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 412.25,
+            "score": 0.8,
+            "toPx": 332,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 450,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 412.25,
+            "score": 0.8,
+            "toPx": 454,
+            "why": "a 4.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 4
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 450,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 427.4375,
+            "score": 0.8,
+            "toPx": 454,
+            "why": "a 4.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 4
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 783,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 651,
+            "score": 0.8,
+            "toPx": 790,
+            "why": "a 7.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 7
+          }
+        ]
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "assetId": "asset-rzut-dcec61c952",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 177,
+              "x1": 196,
+              "y0": 113,
+              "y1": 124
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 384,
+              "x1": 404,
+              "y0": 113,
+              "y1": 124
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 527,
+              "x1": 574,
+              "y0": 202,
+              "y1": 213
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 513,
+              "x1": 534,
+              "y0": 266,
+              "y1": 274
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 462,
+              "x1": 506,
+              "y0": 264,
+              "y1": 277
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 499,
+              "x1": 517,
+              "y0": 330,
+              "y1": 330
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 486,
+              "x1": 516,
+              "y0": 330,
+              "y1": 335
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 251,
+              "x1": 274,
+              "y0": 347,
+              "y1": 354
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 225,
+              "x1": 249,
+              "y0": 347,
+              "y1": 355
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 385,
+              "x1": 403,
+              "y0": 383,
+              "y1": 388
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 289,
+              "x1": 310,
+              "y0": 537,
+              "y1": 542
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 276,
+              "x1": 304,
+              "y0": 582,
+              "y1": 600
+            },
+            "thickness": 19
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 177,
+              "x1": 209,
+              "y0": 590,
+              "y1": 600
+            },
+            "thickness": 15
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 372,
+              "x1": 404,
+              "y0": 590,
+              "y1": 600
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 461,
+              "x1": 478,
+              "y0": 780,
+              "y1": 787
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 638,
+              "x1": 746,
+              "y0": 782,
+              "y1": 791
+            },
+            "thickness": 9.25
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 522,
+              "x1": 622,
+              "y0": 782,
+              "y1": 795
+            },
+            "thickness": 9.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 528,
+              "x1": 547,
+              "y0": 793,
+              "y1": 802
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 591,
+              "x1": 622,
+              "y0": 814,
+              "y1": 826
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 528,
+              "x1": 547,
+              "y0": 817,
+              "y1": 825
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 680,
+              "x1": 704,
+              "y0": 818,
+              "y1": 826
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 145,
+              "x1": 155,
+              "y0": 96,
+              "y1": 617
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 166,
+              "x1": 176,
+              "y0": 125,
+              "y1": 589
+            },
+            "thickness": 11.625
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 218,
+              "x1": 224,
+              "y0": 124,
+              "y1": 144
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 260,
+              "x1": 267,
+              "y0": 514,
+              "y1": 549
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 266,
+              "x1": 266,
+              "y0": 530,
+              "y1": 548
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 273,
+              "x1": 283,
+              "y0": 358,
+              "y1": 403
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 311,
+              "x1": 317,
+              "y0": 514,
+              "y1": 536
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 357,
+              "x1": 363,
+              "y0": 124,
+              "y1": 144
+            },
+            "thickness": 7
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 363,
+              "x1": 367,
+              "y0": 339,
+              "y1": 356
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 404,
+              "x1": 404,
+              "y0": 173,
+              "y1": 270
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 404,
+              "x1": 415,
+              "y0": 125,
+              "y1": 589
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 405,
+              "x1": 415,
+              "y0": 359,
+              "y1": 473
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 425,
+              "x1": 425,
+              "y0": 352,
+              "y1": 466
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 425,
+              "x1": 425,
+              "y0": 586,
+              "y1": 617
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 425,
+              "x1": 435,
+              "y0": 96,
+              "y1": 617
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 453,
+              "x1": 466,
+              "y0": 274,
+              "y1": 345
+            },
+            "thickness": 8.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 516,
+              "x1": 524,
+              "y0": 294,
+              "y1": 329
+            },
+            "thickness": 8
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 521,
+              "x1": 531,
+              "y0": 208,
+              "y1": 234
+            },
+            "thickness": 9
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 561,
+              "x1": 572,
+              "y0": 783,
+              "y1": 826
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 581,
+              "x1": 590,
+              "y0": 792,
+              "y1": 817
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 627,
+              "x1": 637,
+              "y0": 769,
+              "y1": 826
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 655,
+              "x1": 665,
+              "y0": 791,
+              "y1": 826
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 670,
+              "x1": 679,
+              "y0": 792,
+              "y1": 817
+            },
+            "thickness": 11
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 705,
+              "x1": 713,
+              "y0": 792,
+              "y1": 817
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 719,
+              "x1": 729,
+              "y0": 791,
+              "y1": 826
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 747,
+              "x1": 757,
+              "y0": 791,
+              "y1": 826
+            },
+            "thickness": 11
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 150,
+              "x1": 171,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 171,
+              "x1": 275.5,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 275.5,
+              "x1": 290,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 290,
+              "x1": 325.5,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 325.5,
+              "x1": 351,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 351,
+              "x1": 369,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 369,
+              "x1": 404,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 7,
+            "iy": 0,
+            "rect": {
+              "x0": 404,
+              "x1": 425,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 8,
+            "iy": 0,
+            "rect": {
+              "x0": 425,
+              "x1": 632,
+              "y0": 783.5,
+              "y1": 820
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 9,
+            "iy": 0,
+            "rect": {
+              "x0": 632,
+              "x1": 709,
+              "y0": 783.5,
+              "y1": 820
+            }
+          }
+        ],
+        "chains": [
+          {
+            "axis": "H",
+            "baselinePx": 111,
+            "read": 0,
+            "ticksPx": [
+              195,
+              210,
+              227,
+              244,
+              261,
+              278,
+              292,
+              308
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 118,
+            "read": 0,
+            "ticksPx": [
+              182,
+              219.5,
+              250,
+              290,
+              361.5,
+              398.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 357,
+            "read": 1,
+            "ticksPx": [
+              275.5,
+              290,
+              325.5,
+              351,
+              369
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 386,
+            "read": 0,
+            "ticksPx": [
+              366,
+              392.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 571,
+            "read": 0,
+            "ticksPx": [
+              211.5,
+              250,
+              258
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 595,
+            "read": 0,
+            "ticksPx": [
+              188.5,
+              224,
+              239,
+              250
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 595,
+            "read": 0,
+            "ticksPx": [
+              291,
+              342,
+              353.5,
+              392.5
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 602,
+            "read": 0,
+            "ticksPx": [
+              342,
+              356
+            ]
+          },
+          {
+            "axis": "H",
+            "baselinePx": 602,
+            "read": 0,
+            "ticksPx": [
+              221,
+              236.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 165,
+            "read": 0,
+            "ticksPx": [
+              95,
+              112
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 192,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 194,
+            "read": 0,
+            "ticksPx": [
+              460.5,
+              545.5
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 194,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 195,
+            "read": 0,
+            "ticksPx": [
+              170,
+              209,
+              238,
+              251
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 209,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 211,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 218,
+            "read": 0,
+            "ticksPx": [
+              603,
+              615.5,
+              636
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 226,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 228,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 243,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 245,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 250,
+            "read": 0,
+            "ticksPx": [
+              425.5,
+              497,
+              520,
+              562,
+              571
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 250,
+            "read": 0,
+            "ticksPx": [
+              295.5,
+              341
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 260,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 262,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 277,
+            "read": 0,
+            "ticksPx": [
+              38,
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 279,
+            "read": 0,
+            "ticksPx": [
+              38,
+              91.5,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 294,
+            "read": 0,
+            "ticksPx": [
+              38,
+              83
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 308,
+            "read": 0,
+            "ticksPx": [
+              95,
+              110
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 351,
+            "read": 0,
+            "ticksPx": [
+              513,
+              571
+            ]
+          },
+          {
+            "axis": "V",
+            "baselinePx": 351,
+            "read": 0,
+            "ticksPx": [
+              295,
+              357,
+              396
+            ]
+          }
+        ],
+        "envelope": {
+          "x0": 150,
+          "x1": 757.5,
+          "y0": 202,
+          "y1": 820
+        },
+        "extent": {
+          "x0": 144.5,
+          "x1": 757.5,
+          "y0": 202,
+          "y1": 825.5
+        },
+        "extentProvenance": {
+          "x": "WALL_GEOMETRY_EXTENT",
+          "y": "WALL_GEOMETRY_EXTENT"
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-rzut-dcec61c952-f7856a12c2",
+        "hypotheses": [
+          {
+            "builtCells": 1,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 1,
+            "chosen": false,
+            "closedOpenings": 6,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          150,
+          171,
+          275.5,
+          290,
+          325.5,
+          351,
+          369,
+          404,
+          425,
+          632,
+          709
+        ],
+        "linesY": [
+          783.5,
+          820
+        ],
+        "masses": [],
+        "metric": {
+          "cmPerPixelX": 4.732394,
+          "cmPerPixelY": 4.732394,
+          "confidence": "INCONCLUSIVE",
+          "independentWitnesses": 0,
+          "isotropy": "ASSUMED",
+          "legacyCmPerPixel": 4.732394,
+          "relation": "LEGACY_UNCONFIRMED"
+        },
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-9-0",
+            "rect": {
+              "x0": 632,
+              "x1": 709,
+              "y0": 783.5,
+              "y1": 820
+            }
+          }
+        ],
+        "scale": null,
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "storey": "ATTIC",
+        "variantByteHash": "e03aa8a76b17705697ae8c09263d22d3a5017bff59563d285638e73064c37550",
+        "wallPx": 11,
+        "wideOpenings": [
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 293,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 171,
+            "score": 0.8,
+            "toPx": 298,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 422,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 171,
+            "score": 0.8,
+            "toPx": 427,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 293,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 404,
+            "score": 0.8,
+            "toPx": 298,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 425,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 404,
+            "score": 0.8,
+            "toPx": 430,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 473,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 404,
+            "score": 0.8,
+            "toPx": 478,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 784,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 632,
+            "score": 0.8,
+            "toPx": 791,
+            "why": "a 7.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 7
+          }
+        ]
+      }
+    ],
+    "resolution": {
+      "compositions": 0,
+      "copies": 4,
+      "decompositions": 0,
+      "distinctOutlines": 0,
+      "firstReading": "PLAN_NO_DIMENSION_FRAME",
+      "outcome": "NO_ALTERNATIVE",
+      "publishedFigure": "SCORED",
+      "readings": 0,
+      "resolverVersion": "1.4.0"
+    },
+    "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+    "skipped": []
+  },
+  "schema": "buildapp.analysis-diagnostics",
+  "schemaVersion": "1.0.0",
+  "source": {
+    "assets": [
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "8450adfc5ef8038c14260ad3b0d39ecb073cfc770dcc07a78118b962021518c6",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-doda-7cdce2b34d",
+        "sizePx": "1600x900",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "03c8111a84eea56be4be5485431d4b16374d4ae91faaabe9f2571580af4bd55a",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-4f4cf7667a",
+        "sizePx": "1280x543",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "2b38666e00d9b7928ddf309e1a7838ddf70abb818f6bcfca949a1a682c63b09a",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-508ac45b04",
+        "sizePx": "1280x541",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a71636eee4ae8f4e405a99db785583fbd5d2d8e7e1857072478752fb87c3dbd7",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-90674902e0",
+        "sizePx": "1280x541",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "69178ce3ecfbbec0510f883ea8f9a041b787b116b98212847226cdc82717a1d6",
+        "document": "ELEVATION",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-elew-a00024b6e1",
+        "sizePx": "1280x541",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "b8eacb2d2b338c466bc4097f908f4a36785ff8324c00e2a9739445d650bfb57c",
+        "document": "SECTION",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-prze-9284b378c6",
+        "sizePx": "1138x854",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "74b2d709d6aa349806f28196882e32051f87c16ecb145088841d3092dbf352b8",
+        "document": "FLOOR_PLAN",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-rzut-2a167ec8d6",
+        "sizePx": "550x550",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "dcfc9ba01cf05025e23cd1f7f6eb8812bf171e0cc7db34c7fdac536ff2a1bcae",
+        "document": "FLOOR_PLAN",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-rzut-c92f3ff423",
+        "sizePx": "550x550",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "95346a45c292fa55c52e9b4ffd488621aec32ea65bf802764966940743a0e821",
+        "document": "SITE_PLAN",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-sytu-fb49a17a25",
+        "sizePx": "734x854",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f00affa187aa123b1c1c03e234d3921137ad5c3b59b5e4cf92943e146a979393",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-gotowy-projekt-dom-w-modrzewnicy-10-g2e-oze-wido-2bd1f835ad",
+        "sizePx": "200x150",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "906667b3e1b9912cac4f564da07b0d3c27c05d35bf4870c2aa82732873180f82",
+        "document": "FLOOR_PLAN",
+        "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-5e77e25c51",
+        "sizePx": "400x400",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "03ad042de57ad72304886ccdd8ddd3e00eb6262855123843fea861697e5b98f6",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-7cda19ea8a",
+        "sizePx": "400x300",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "1eaafc89ec67456135ea9614d6d0d02b506f8fffa14c1132026ba08e007aedca",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8a288eaf3a",
+        "sizePx": "400x300",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "5d0f897205a9707d15b97d9718bd8f46b67126434307aaecd3644bebd8b9483d",
+        "document": "FLOOR_PLAN",
+        "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-8eccb86d0d",
+        "sizePx": "400x400",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "d05861b5f52da0a55df0e45cc10348103519ce045c66f61bd27d89bfab618324",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-dom-w-modrzewnicy-10-g2e-oze-b1aecef51ac-1f1a8700a7",
+        "sizePx": "1600x900",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "AREA_TABLE",
+        "byteHash": "9e64a8b23293a07af9a36d7af7a5be441ab5d3ac306ebe9130e77b4f8b7f8c45",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-6f2eb0b36f",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-8d59c92ec1",
+        "sizePx": "853x853",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "AREA_TABLE",
+        "byteHash": "b89edbfd69bc1bb3fadf0f9647d6129bb26fd0fc8c02e6f68e6376b061ffac2f",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-9304612e3c",
+        "sizePx": "853x853",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "DIMENSIONED",
+        "byteHash": "e03aa8a76b17705697ae8c09263d22d3a5017bff59563d285638e73064c37550",
+        "document": "FLOOR_PLAN",
+        "id": "asset-rzut-dcec61c952",
+        "sizePx": "853x853",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "97a459a54ffa1024d39231b54b492afc49d6c755ecc20ace4c85d9af3a30936b",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-1-projekt-dom-w-modrzewnicy-10-g2e-oze-39152c89c6",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "61dbe294fb98895facf6e927f325eb5323d1981e336ad2d02c1585ba42dd0f0b",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-widok-2-projekt-dom-w-modrzewnicy-10-g2e-oze-eb4c2554a9",
+        "sizePx": "800x600",
+        "storey": "NOT_APPLICABLE"
+      }
+    ],
+    "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzewnicy-10-g2e-oze-m8a12761847734",
+    "failures": {
+      "BYTE_IDENTICAL": 5,
+      "HTTP_STATUS": 9
+    },
+    "packageHash": "5769fc42b7f1b8f4d7da6c57432b78f6eed41882feb53865c3263bb92309931d",
+    "pageHash": "91acd24304c32320248cbad928a1e59fb5d2dc6669c455468f77c2d46e7b9896",
+    "planAddressesLost": []
+  },
+  "trace": {
+    "entries": [
+      {
+        "counts": {
+          "adapter": "archon.pl",
+          "addressesNotUsed": 14,
+          "assets": 21,
+          "failed_BYTE_IDENTICAL": 5,
+          "failed_HTTP_STATUS": 9,
+          "planAddressesLost": 0,
+          "route": "SPECIALIST",
+          "variants": 27
+        },
+        "durationMs": 15278,
+        "stage": "ACQUIRING_SOURCE",
+        "startedAtMs": 0,
+        "status": "PASSED",
+        "substage": "FETCH"
+      },
+      {
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 8,
+          "PERSPECTIVE_RENDER": 5,
+          "SECTION": 1,
+          "SITE_PLAN": 1,
+          "UNKNOWN": 2,
+          "drawings": 19
+        },
+        "durationMs": 1,
+        "stage": "CLASSIFYING_SOURCES",
+        "startedAtMs": 15278,
+        "status": "PASSED",
+        "substage": "ROLES"
+      },
+      {
+        "counts": {
+          "frames": 19,
+          "observations": 980,
+          "relations": 521,
+          "vision": "DETERMINISTIC_ONLY"
+        },
+        "durationMs": 15865,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 15279,
+        "status": "PASSED",
+        "substage": "OBSERVATIONS"
+      },
+      {
+        "counts": {
+          "callouts": 63,
+          "chains": 72,
+          "evidence": 89,
+          "levelDatums": 3,
+          "registrations": 2,
+          "scalesRefused": 5,
+          "undecodable": 0
+        },
+        "durationMs": 166225,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 31144,
+        "status": "PASSED",
+        "substage": "METRIC_EVIDENCE"
+      },
+      {
+        "counts": {
+          "planFrames": 8,
+          "plansRead": 2,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa"
+        },
+        "durationMs": 297,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 197369,
+        "status": "PASSED",
+        "substage": "PLAN_READ"
+      },
+      {
+        "counts": {
+          "compositions": 0,
+          "copies": 4,
+          "decompositions": 0,
+          "distinctOutlines": 0,
+          "firstReading": "PLAN_NO_DIMENSION_FRAME",
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED",
+          "readings": 0,
+          "resolverVersion": "1.4.0"
+        },
+        "detail": "no other reading of the plan could be generated",
+        "durationMs": 287,
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 197666,
+        "status": "FAILED",
+        "substage": "PLAN_RESOLUTION"
+      },
+      {
+        "counts": {
+          "builtRegions": 2,
+          "cells": 7,
+          "dimensionChains": 0,
+          "dimensionChainsRead": 0,
+          "enclosedCells": 3,
+          "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+          "gridLinesX": 8,
+          "gridLinesY": 2,
+          "independentWitnesses": 1,
+          "masses": 0,
+          "metricConfidence": "INCONCLUSIVE",
+          "metricIsotropy": "NONE",
+          "metricRelation": "NO_SCALE",
+          "planFrames": 8,
+          "planSizePx": "853x853",
+          "plansRead": 2,
+          "recessRegions": 0,
+          "scaleCmPerPx": 0,
+          "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+          "wallBands": 43,
+          "wallThicknessPx": 12,
+          "walledEnvelope": true,
+          "wideOpenings": 4,
+          "wideOpeningsClosed": 4
+        },
+        "detail": "the 853×853 px floor plan prints no dimension chain, so nothing on it states a scale",
+        "durationMs": 0,
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 197953,
+        "status": "FAILED",
+        "substage": "PLAN_READ"
+      }
+    ],
+    "outcome": "FAILED",
+    "schema": "buildapp.analysis-trace",
+    "schemaVersion": "1.0.0"
+  }
+}
+

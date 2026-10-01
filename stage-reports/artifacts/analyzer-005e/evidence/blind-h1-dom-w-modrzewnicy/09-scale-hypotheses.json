@@ -1,0 +1,221 @@
+{
+  "confidence": "INCONCLUSIVE",
+  "conflictingObservationIds": [],
+  "final": {
+    "isotropy": "NONE",
+    "x": null,
+    "y": null
+  },
+  "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+  "hypotheses": [
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 2.895277,
+      "corroborated": false,
+      "decision": "SELECTED",
+      "groups": 1,
+      "id": "scale-2-895277-153f061917",
+      "independentAxes": [
+        "Y"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 5.553923,
+      "longestShare": 0.662585,
+      "majorWitnesses": 1,
+      "plausible": true,
+      "residualPx": 0.000035,
+      "substantialWitnesses": 1,
+      "weight": 5.553923,
+      "why": "1 independent reading on 1 chain(s): 1410/487 px",
+      "witnessIds": [
+        "dim-obs-1410-rotated-cw-168cd77c0f"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 3.75,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 1,
+      "id": "scale-3-75-6b2bf8f995",
+      "independentAxes": [
+        "Y"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 1.683891,
+      "longestShare": 0.217687,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0,
+      "substantialWitnesses": 0,
+      "weight": 1.683891,
+      "why": "1 independent reading on 1 chain(s): 600/160 px",
+      "witnessIds": [
+        "dim-obs-600-rotated-cw-666578889d"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 1.25,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 2,
+      "id": "scale-1-25-60e8241c43",
+      "independentAxes": [
+        "Y"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.925839,
+      "longestShare": 0.119728,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.212132,
+      "substantialWitnesses": 0,
+      "weight": 1.381495,
+      "why": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 76/60.5 px, 110/88 px",
+      "witnessIds": [
+        "dim-obs-16-rotated-cw-3db6ec4f58",
+        "dim-obs-991-rotated-cw-1f2205cfd1"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 3.36,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 3,
+      "id": "scale-3-36-ea8b6b7ac5",
+      "independentAxes": [
+        "X"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.494198,
+      "longestShare": 0.251004,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 0.56352,
+      "substantialWitnesses": 1,
+      "weight": 1.11171,
+      "why": "1 independent reading on 1 chain(s), and 2 not counted (short, or their way up not independent of a scale): 110/33.583333 px, 173/51 px, 210/62.5 px",
+      "witnessIds": [
+        "dim-obs-161-horizontal-9676de8de0",
+        "dim-obs-173-rotated-cw-a5a03f8723",
+        "dim-obs-210-horizontal-ad0088c473"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 11.021992,
+      "corroborated": false,
+      "decision": "RULED_OUT_BY_WALLS",
+      "groups": 2,
+      "id": "scale-11-021992-d62229e743",
+      "independentAxes": [
+        "X"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.477532,
+      "longestShare": 0.258701,
+      "majorWitnesses": 0,
+      "plausible": false,
+      "residualPx": 0.069384,
+      "substantialWitnesses": 1,
+      "weight": 1.12544,
+      "why": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 710/64.416667 px, 712/64.5 px",
+      "witnessIds": [
+        "dim-obs-176-horizontal-9b5f851e41",
+        "dim-obs-712-horizontal-8defbcc1bb"
+      ]
+    },
+    {
+      "axesMeasured": false,
+      "chains": 1,
+      "cmPerPixel": 1.955536,
+      "corroborated": false,
+      "decision": "NOT_SELECTED",
+      "groups": 3,
+      "id": "scale-1-955536-87c26d1ded",
+      "independentAxes": [
+        "Y"
+      ],
+      "independentGroups": 1,
+      "independentWeight": 0.421446,
+      "longestShare": 0.079592,
+      "majorWitnesses": 0,
+      "plausible": true,
+      "residualPx": 1.044447,
+      "substantialWitnesses": 0,
+      "weight": 1.681147,
+      "why": "1 independent reading on 1 chain(s), and 2 not counted (short, or their way up not independent of a scale): 111/58.5 px, 116/59 px, 210/107 px",
+      "witnessIds": [
+        "dim-obs-111-rotated-cw-a779f2543d",
+        "dim-obs-116-rotated-cw-9806836b3e",
+        "dim-obs-210-horizontal-8366d3c2a5"
+      ]
+    }
+  ],
+  "legacy": {
+    "correctedAnchors": 0,
+    "independentGroups": 0,
+    "independentWeight": 0,
+    "readAnchors": 0
+  },
+  "relation": "NO_SCALE",
+  "selectedHypothesisId": "scale-2-895277-153f061917",
+  "supportingObservationIds": [],
+  "topology": {
+    "bindings": {
+      "alternative": 49,
+      "ambiguous": 7,
+      "primary": 16,
+      "uncentred": 21
+    },
+    "hierarchy": {
+      "afterCorrection": 0,
+      "agreesAsRead": 0,
+      "conflictsAsRead": 1,
+      "incomplete": 1,
+      "parallelCopies": 3,
+      "totals": 2,
+      "undecidedConflict": true
+    },
+    "marks": {
+      "questionable": 56,
+      "rejected": 7,
+      "tick": 167
+    },
+    "neutralObservationIds": [],
+    "ocr": {
+      "contestedObservationIds": [],
+      "counted": {
+        "ambiguous": 0,
+        "clear": 0,
+        "supported": 1,
+        "unrated": 0
+      },
+      "demotedObservationIds": [],
+      "lowQuality": 1
+    },
+    "valueAmbiguity": {
+      "alternatives": [
+        "1450",
+        "1451",
+        "1010",
+        "1440",
+        "1910",
+        "1430",
+        "1470"
+      ],
+      "cmPerPixelHigh": 3.921971,
+      "cmPerPixelLow": 2.073922,
+      "observationId": "dim-obs-1410-rotated-cw-168cd77c0f",
+      "rawText": "1410"
+    }
+  },
+  "why": "no scale is stated by any reading that owes nothing to a scale; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides"
+}
