@@ -452,26 +452,54 @@ scale is part of why no scaling fits.
 | Run | Commit | Result |
 | --- | --- | --- |
 | 119 | `1b66eb9` | green (005C's last record; the base of this branch) |
-| **120** | `286486e` | **green**: 34 jobs, 32 green, the 2 APK publishes skipped by design (push) — every 005D gate (dimension evidence, evidence pack, the 13 development houses, generalization, plan resolver, envelope, known rows, Android, browser, container). `PRE_HOLDOUT_4_SHA` |
-| 121 | `bbe8172` (the ledger line) | superseded by the next push (concurrency group) |
-| 122 | `446207d` (the sealed blind evidence) | on the sealed evidence and the hard-code guard with the blind houses registered |
-| final | the commit that carries this report | `workflow_dispatch` with the OWNER APK; recorded with the APK in the commit after it (§AG) |
+| **120** | `286486e` | **green at the first attempt**: 34 jobs, 32 green, the 2 APK publishes skipped by design (push) — every 005D gate (dimension evidence, evidence pack, the 13 development houses, generalization, plan resolver, envelope, known rows), Android with the UI evidence gate, browser, container. `PRE_HOLDOUT_4_SHA` |
+| 121, 122, 123 | `bbe8172`, `446207d`, `d7a794f` (push) | each cancelled by the next push or by the dispatch below (concurrency group); 122 had 16 jobs green when it was cancelled |
+| **124** | `d7a794f` | **the final CI**: `workflow_dispatch` with the OWNER APK. Attempt 1: 29 green, 2 failed before any test ran — the UI evidence gate, where the runner could not install the emulator package (`Error on ZipFile unknown archive`; no emulator started), and the container smoke, whose first `/health` request ran 0.2 s before the container listened and left Node with an unsettled top-level await (exit 13; no check ran). No file outside `stage-reports/`, `PROJECT_STATUS.md` and the ledger differs from run 120, where both passed. The failed jobs re-run once (the protocol's one re-run): **attempt 2 green — 33 jobs, 1 skipped by design (`preview-latest`)**, the UI gate and the container included, the OWNER APK published |
 
-The 005D commits before the freeze were pushed together: CI ran once on them, at the freeze (run 120), green at the
-first attempt, the Android UI gate included.
+The two first-attempt failures are infrastructure (an SDK download and a start-up race in the smoke script, which
+polls `/health` but lets one rejected `fetch` end the process); they are named as a residual (§AH), not explained
+away.
 
 ## AF. Commits
 
 Reviews: `7a18d21` (four pre-reviews and the implementation contract). Implementation: `cc9f2ea` (the Evidence Pack),
 `0a83a0f` (topology, binding, value hypotheses), `09c5121` (outer totals and the first-success challenge), `6f3f996`
 (CI gates). Post-review: `3e08681` (every generic P0/P1). Matrix and packs: `286486e` = **PRE_HOLDOUT_4_SHA**. Blind
-round: `bbe8172` (the draw, burned), `446207d` (the sealed runs and packs). Report and status: the commit that carries
-this section; the APK record: the commit after it.
+round: `bbe8172` (the draw, burned), `446207d` (the sealed runs and packs). Report and status: `d7a794f` = the final
+build (run 124). The CI and APK record: the commit that carries this section.
 
 ## AG. OWNER APK
 
-Built by the final `workflow_dispatch` on the commit that carries this report (analyzer code = the frozen
-`PRE_HOLDOUT_4_SHA` code); verified from the downloaded file and recorded in the commit after it.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`, from
+`workflow_dispatch` run 124 attempt 2 (`36866028090`) on `d7a794f`, which is also the final CI. Its analyzer code is
+the frozen code (`PRE_HOLDOUT_4_SHA`; only documents and sealed evidence differ).
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | serves the APK itself: 30 747 559 bytes, `application/vnd.android.package-archive`; the release is a prerelease |
+| SHA-256 | `c659270262101aba41ef6ac0b0c321c7f130f5d323ef6487ca97ca0ef6dc5e30`, equal to the release notes and to GitHub's asset digest |
+| ABI | `aapt dump badging`: `native-code: 'arm64-v8a'`; 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1124**, versionName `0.124.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | the notes: run 124 (attempt 2) from `claude/new-session-3kzcgh` @ `d7a794f3b975c822d88ad1ff26db8928389b1e89` |
+| analyzer | the embedded bundle (`assets/local-analyzer/analyzer.mjs`, sha256 `9c0c8c1d…9a56`, equal to its manifest; Node 18.20.4) declares `METRIC_EVIDENCE_SCHEMA_VERSION = "1.3.0"`, `PLAN_RESOLVER_VERSION = "1.4.0"`, `DIMENSION_TOPOLOGY_VERSION = "1.0.0"`, `METRIC_READER_VERSION = "1.2.0"`, `METRIC_SOLVER_VERSION = "1.1.0"`, `SOLVER_V2_VERSION = "2.3.0"`, `BOUNDARY_EVIDENCE_VERSION = "1.0.0"`, `GENERIC_ADAPTER_VERSION = "1.2.0"`, and carries `classifyMarks`, `primaryBinding`, `sourceConflictOf`, `undecidedConflict`, `OUTER_TOTAL_MARKS` and `SOURCE_CONFLICT`; nothing of the Evidence Pack is in it |
+| signer | `apksigner verify --print-certs`: "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes; it installs over any preview build with a lower run number (1118 before it) |
+
+No APK binary is committed.
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over build 1118, then check each item.
+
+1. **Known houses unchanged.** Marcówki, Kosaćce (clean and tracked), Rarytasy G2E and e-OZE, dom-w-modrzykach: the
+   same houses as build 1118 (their model hashes are unchanged on the desktop).
+2. **dom-w-azaliach** (`https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e`): no house any
+   more — the analysis stops by name (the plan's reading cannot be resolved). Build 1118 built a house the published
+   figure alone had chosen.
+3. **The two blind houses, to see the open defect** (optional): `dom-w-dabecjach` stops by name (the outline);
+   `dom-w-tunbergiach` builds one storey of a twin house, visibly too small, "Model gotowy z ograniczeniami".
+4. "Przerwij" still stops an analysis within seconds.
 
 ## AH. Residual debt
 
@@ -500,6 +528,8 @@ Named, not fixed in 005D; each with its evidence.
   already ≥ 0.5 on two correct houses); D-P2 (first divergence reports record-only hierarchy entries first).
 - **Time**: the metric phase is 157–178 s of the blind runs' 202–223 s (the reader, unchanged); mark classification adds
   36–90 ms per house.
+- **CI infrastructure** (§AE): the emulator package download on the runner, and the container smoke's start-up race
+  (one rejected `fetch` of `/health` ends the process instead of being retried).
 
 ## AI. Next step
 
