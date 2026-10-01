@@ -1,0 +1,100 @@
+{
+  "boundary": {
+    "accepted": true,
+    "candidates": [
+      {
+        "areaM2": 121.63386,
+        "cells": 1040,
+        "gapsBridged": 34,
+        "id": "A_LONG_BAND_BOX",
+        "maxBridgedGapM": 4.728909,
+        "perimeterM": 46.231604,
+        "strongOpeningM": 7.620871,
+        "unsupportedM": 15.933711,
+        "wallM": 19.350846,
+        "weakOpeningM": 3.326176
+      },
+      {
+        "areaM2": 82.217839,
+        "cells": 652,
+        "gapsBridged": 34,
+        "id": "B_OPENING_AWARE_OUTLINE",
+        "maxBridgedGapM": 4.728909,
+        "perimeterM": 92.078291,
+        "strongOpeningM": 30.586536,
+        "unsupportedM": 0.949738,
+        "wallM": 57.215841,
+        "weakOpeningM": 3.326176
+      }
+    ],
+    "extensions": [
+      {
+        "accepted": false,
+        "areaM2": 2.616604,
+        "cells": 32,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": true,
+        "areaM2": 29.255723,
+        "cells": 170,
+        "continuesAcrossM": 5.16974
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.098719,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.078295,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.131865,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.038699,
+        "cells": 1,
+        "continuesAcrossM": 0
+      },
+      {
+        "accepted": false,
+        "areaM2": 0.109111,
+        "cells": 1,
+        "continuesAcrossM": 0
+      }
+    ],
+    "gaps": {
+      "DRAWING_BREAK_SUPPORTED": 839,
+      "OPENING_SUPPORTED": 29,
+      "TRUE_EXTERIOR_GAP": 306,
+      "UNKNOWN_GAP": 51
+    },
+    "policies": {
+      "disagree": true,
+      "exclusionAccepted": true,
+      "exclusionAreaM2": 150.889583,
+      "strictAccepted": false,
+      "strictAreaM2": 120.18908
+    },
+    "why": "the outline continues the box's interior past its edge (1 component): the plan is cut on the outline"
+  },
+  "cells": {
+    "enclosed": 1052,
+    "total": 1440
+  },
+  "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "longBandBox": {
+    "x0": 153,
+    "x1": 715,
+    "y0": 159,
+    "y1": 635
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 37.206582,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-0",
+      "junctionWallShare": 0.419292,
+      "mouthM": 5.07623,
+      "rect": {
+        "x0": 153,
+        "x1": 469,
+        "y0": 461,
+        "y1": 635
+      },
+      "relation": "COVERED_TERRACE",
+      "sideWallShare": 0.064614
+    },
+    {
+      "areaM2": 31.872326,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-1",
+      "junctionWallShare": 0.325203,
+      "mouthM": 1.923624,
+      "rect": {
+        "x0": 381.125,
+        "x1": 715,
+        "y0": 461,
+        "y1": 635
+      },
+      "relation": "PROJECTING_WING",
+      "sideWallShare": 0.405856
+    },
+    {
+      "areaM2": 0.098719,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-2",
+      "junctionWallShare": 0,
+      "mouthM": 0.456008,
+      "rect": {
+        "x0": 173.5,
+        "x1": 188,
+        "y0": 557,
+        "y1": 566.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 0.078295,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-3",
+      "junctionWallShare": 0,
+      "mouthM": 0.454189,
+      "rect": {
+        "x0": 213.5,
+        "x1": 225,
+        "y0": 557,
+        "y1": 566.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 0.131865,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-4",
+      "junctionWallShare": 0,
+      "mouthM": 0.6706,
+      "rect": {
+        "x0": 162,
+        "x1": 173.5,
+        "y0": 566.5,
+        "y1": 582.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 0.038699,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-5",
+      "junctionWallShare": 0,
+      "rect": {
+        "x0": 153,
+        "x1": 162,
+        "y0": 582.5,
+        "y1": 588.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0
+    },
+    {
+      "areaM2": 0.109111,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": true,
+      "id": "body-6",
+      "junctionWallShare": 0,
+      "mouthM": 5.07623,
+      "rect": {
+        "x0": 173.5,
+        "x1": 188,
+        "y0": 616,
+        "y1": 626.5
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0
+    }
+  ],
+  "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 316.5,
+        "x1": 715,
+        "y0": 159,
+        "y1": 461
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 469,
+        "x1": 715,
+        "y0": 461,
+        "y1": 635
+      }
+    }
+  ]
+}

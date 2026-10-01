@@ -1,0 +1,107 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "adapter": "archon.pl",
+        "addressesNotUsed": 14,
+        "assets": 23,
+        "failed_BYTE_IDENTICAL": 5,
+        "failed_HTTP_STATUS": 9,
+        "planAddressesLost": 0,
+        "route": "SPECIALIST",
+        "variants": 29
+      },
+      "durationMs": 18895,
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "FETCH"
+    },
+    {
+      "counts": {
+        "ELEVATION": 4,
+        "FLOOR_PLAN": 8,
+        "PERSPECTIVE_RENDER": 8,
+        "SECTION": 1,
+        "SITE_PLAN": 1,
+        "UNKNOWN": 1,
+        "drawings": 22
+      },
+      "durationMs": 0,
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 18895,
+      "status": "PASSED",
+      "substage": "ROLES"
+    },
+    {
+      "counts": {
+        "frames": 22,
+        "observations": 1080,
+        "relations": 723,
+        "vision": "DETERMINISTIC_ONLY"
+      },
+      "durationMs": 17845,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 18896,
+      "status": "PASSED",
+      "substage": "OBSERVATIONS"
+    },
+    {
+      "counts": {
+        "callouts": 121,
+        "chains": 490,
+        "evidence": 212,
+        "levelDatums": 1,
+        "registrations": 9,
+        "scalesRefused": 3,
+        "undecodable": 0
+      },
+      "durationMs": 178711,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 36741,
+      "status": "PASSED",
+      "substage": "METRIC_EVIDENCE"
+    },
+    {
+      "counts": {
+        "planFrames": 8,
+        "plansRead": 2,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-rzut-1a56066c62-10b0ec4131"
+      },
+      "durationMs": 1130,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 215452,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "compositions": 4,
+        "copies": 4,
+        "decompositions": 24,
+        "distinctOutlines": 37,
+        "firstReading": "PLAN_LAYOUT_REJECTED",
+        "outcome": "INCONCLUSIVE",
+        "publishedFigure": "SPENT",
+        "reading1": "copy dimensioned 10b0ec4131, wall-ink extent, scale 3.571429 cm/px, largest-first tiling, sides as gridded: 2 bodies, 161.3 m² (-4.4% of 168.76), UNKNOWN (the figure is spent)",
+        "reading2": "copy area_table 0fd2019dc2, wall-ink extent, scale 3.571429 cm/px, largest-first tiling, sides as gridded: 2 bodies, 161.8 m² (-4.1% of 168.76), UNKNOWN (the figure is spent)",
+        "reading3": "copy dimensioned 10b0ec4131, wall-ink extent, scale 3.571429 cm/px, largest-first tiling, outer faces: 2 bodies, 162.0 m² (-4.0% of 168.76), UNKNOWN (the figure is spent)",
+        "reading4": "copy area_table 0fd2019dc2, wall-ink extent, scale 3.571429 cm/px, largest-first tiling, outer faces: 2 bodies, 163.2 m² (-3.3% of 168.76), UNKNOWN (the figure is spent)",
+        "readings": 95,
+        "resolverVersion": "1.4.0"
+      },
+      "detail": "95 other readings of the plan were weighed and none holds: the best, copy dimensioned 10b0ec4131, wall-ink extent, scale 3.571429 cm/px, largest-first tiling, sides as gridded: 2 bodies, 161.3 m² (-4.4% of 168.76), UNKNOWN (the figure is spent), has only the published footprint behind it, and that figure already refused the first reading, so it cannot also choose the replacement",
+      "durationMs": 5868,
+      "reasonCode": "PLAN_RESOLUTION_INCONCLUSIVE",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 216582,
+      "status": "FAILED",
+      "substage": "PLAN_RESOLUTION"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

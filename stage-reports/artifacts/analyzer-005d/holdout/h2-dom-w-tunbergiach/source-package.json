@@ -1,0 +1,2264 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-elewacja-b-5fbf704ac5",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-c8ee0b54a02ed2e94-fd20394728",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x790 over 550x340",
+      "variants": [
+        {
+          "aspect": 1.620253,
+          "byteHash": "e93a8c111434b7f86e8f0dfaccc1fcff36476bad568dd632b0a58195baec8f33",
+          "byteLength": 703067,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 790,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-c8ee0b54a02ed2e94-fd20394728",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-c8ee0b54a02ed2e94c1ce42251a3eac7__11266.jpg"
+        },
+        {
+          "aspect": 1.617647,
+          "byteHash": "f4d5b7be4e025128f22682d0e07df0ed7dfdf31cc4d2210a3bad4592ca711820",
+          "byteLength": 149137,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 340,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-9-92c78e913f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-9fd349e9dead2c3cb01f6acb95e57a5d__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-elewacja-b-fb7bdee694",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-0c6405a321991ae21-6ab1250009",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x792 over 550x340",
+      "variants": [
+        {
+          "aspect": 1.616162,
+          "byteHash": "15a3bbfc54263602c37a3225d803331b476c5e16b3d3dada1ccb926415b39cbf",
+          "byteLength": 701043,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 792,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-0c6405a321991ae21-6ab1250009",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-0c6405a321991ae21b35ee900daf6c3c__11265.jpg"
+        },
+        {
+          "aspect": 1.617647,
+          "byteHash": "83f6d4af33a19792d95a5474cc657dadd41c3bb37d165c8870329f3ece1a655f",
+          "byteLength": 148629,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 340,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-1-a79aaea81b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-1570c3355b7795d0b3c20ce6d5e0b5e8__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-elewacja-f-23f0501853",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-ba03401a5114cf55e-81a784dced",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x792 over 550x340",
+      "variants": [
+        {
+          "aspect": 1.616162,
+          "byteHash": "1ea43c42c54891421dd8abe9c5955a92de95cc4e1b295935866948ddb51f55fc",
+          "byteLength": 729437,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 792,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-ba03401a5114cf55e-81a784dced",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-ba03401a5114cf55e78b2d466966957e__11264.jpg"
+        },
+        {
+          "aspect": 1.617647,
+          "byteHash": "7e1bccb764685ac7bcde9f4314b660990df4386379b072b3a2e052c778ad06a8",
+          "byteLength": 157497,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 340,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-elewacja-frontowa-projekt-dom-w-tunbergiach-7-r2-387873ca85",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-frontowa-projekt-dom-w-tunbergiach-7-r2-4ba3245a3f9954b9e4676c416f067541__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-elewacja-o-a353580eab",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w tunbergiach 7 (r2) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-ada34d89bec044afb-5bea9afee0",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x788 over 550x340",
+      "variants": [
+        {
+          "aspect": 1.624365,
+          "byteHash": "0de04fc1a624f65c7d67b0622ca382819955771cfd47e8ce3e4e5baca6d5e9ed",
+          "byteLength": 768590,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 788,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-ada34d89bec044afb-5bea9afee0",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-ada34d89bec044afb5c2808825f2b38f__11267.jpg"
+        },
+        {
+          "aspect": 1.617647,
+          "byteHash": "07b38134ebd5a10c1247d36b881b929c8b27213859ee35bc3db84fb7d7225551",
+          "byteLength": 166928,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 340,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-tunbergiach-7-r2-9845c8efac",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-ogrodowa-projekt-dom-w-tunbergiach-7-r2-aeea330eb2b22235ef13cabb48038f13__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-przekroj-b-e3b11c4f2b",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w tunbergiach 7 (r2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w tunbergiach 7 (r2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w tunbergiach 7 (r2) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-8951d6db9f",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "751f2f0db9e84e1a9f33897e3d790f5b690af0cd24a6060703b9b9381cefe70c",
+          "byteLength": 75093,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/md842941974a5c/przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-cd00f7f455c2b75a2b6aa41892eff9f3__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-8951d6db9f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-cd00f7f455c2b75a2b6aa41892eff9f3__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "6c06513e69569a2212451baf39bb6144ddc9455cb3e29784694e7a69d7a1f4ce",
+          "byteLength": 19397,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-e26144bf0d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/przekroj-budynku-projekt-dom-w-tunbergiach-7-r2-cd00f7f455c2b75a2b6aa41892eff9f3__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-parte-8bf8fac8b7",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-tunbergiach-7-r2-4f07-8fd447d0b7",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9a7dbd26396f7ffe1841f4f31d5d1e137cd0708d5cce3505b88800ea2a29c23d",
+          "byteLength": 49331,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-tunbergiach-7-r2-4f07-8fd447d0b7",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-parteru-projekt-dom-w-tunbergiach-7-r2-4f073dc78071189a952c2123c85ca631__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) rzut piętra",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-pietr-aed7923647",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-projekt-dom-w-tunbergiach-7-r2-321f0-aefc4a37d4",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "6ae6c09fb1ecce906691738f810427a23948fae003bab5073b4e69ab4a49e5ee",
+          "byteLength": 31426,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/carousel_images",
+          "id": "var-rzut-pietra-projekt-dom-w-tunbergiach-7-r2-321f0-aefc4a37d4",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-pietra-projekt-dom-w-tunbergiach-7-r2-321f048fa5212006eea9dcb5edf07b8a__709.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-rzut-podda-877407a59f",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-2f9-609c1ab6c0",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "e503ba3458ba2c3e9dda85669f1597d0f9945be7c85baf57a5fd308715968f7f",
+          "byteLength": 30337,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-2f9-609c1ab6c0",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-2f9ebbd598f5f7c45a61d351e4643e89__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-sytuacja-f271571dd6",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-c6a1cff8ba7dae7a8-f530defc38",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "e6fcf77ef5d6366f8807407c64f455d605c0ab50bd578beff37ae758bbed9b36",
+          "byteLength": 217168,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-c6a1cff8ba7dae7a8-f530defc38",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-c6a1cff8ba7dae7a8c3d808f0023ba4b__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "c4f2d0b88fab1193544bacf249fc989761d4a868564ff3a62802db460cdd4dd8",
+          "byteLength": 46292,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-sytuacja-projekt-dom-w-tunbergiach-7-r2-ef5d25a9-44b88ce45d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/sytuacja-projekt-dom-w-tunbergiach-7-r2-ef5d25a9c23f57590be2d16c77c29b2f__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w tunbergiach 7 (R2) widok 1",
+      "id": "asset-gotowy-projekt-dom-w-tunbergiach-7-r2-widok-1-a1ef129ce1",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w tunbergiach 7 (r2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-tunbergiach-7-r2-7abd31acb-ba94ce91bb",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b2ba5abee215a959f03981ec33e08b6576813059e295273fde10bfc2bac885a2",
+          "byteLength": 9051,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-widok-1-projekt-dom-w-tunbergiach-7-r2-7abd31acb-ba94ce91bb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/widok-1-projekt-dom-w-tunbergiach-7-r2-7abd31acbeeb1bc1b07215a19a419e35__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w tunbergiach 7 (R2)",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-044a679235",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-tunbergiach-7-r2-fccb-3842a44af4",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "27f79bb7b30d38e2b238f883c433691a27b1e52009f2a868c310dcdf97616a3e",
+          "byteLength": 31000,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-w-tunbergiach-7-r2-fccb-3842a44af4",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-parteru-projekt-dom-w-tunbergiach-7-r2-fccbdacf311a2a34fbeffebb5a225565__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w tunbergiach 7 (R2)",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-1b6baeb067",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-3bb-aefb4221e7",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "09cb4f974ce97d3b3bdb40cc4a72fbca2581793cc2e5555b0903ec01c206457f",
+          "byteLength": 19836,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/related?scope=family",
+          "id": "var-rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-3bb-aefb4221e7",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-3bb240c8f59cefb6bb4c282cd99f1026__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w tunbergiach 7 r2 21eee525b02c7dd747cee4f96fa60458  56578",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-21eee525b02c7dd74-64b8d03b6c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-21eee525b02c7dd74-60703cb0ab",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "af3403e0c60e581e8427f1607d8b2d00ee20d4fe04b4ac4304019d99259fbbf9",
+          "byteLength": 599592,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/md842941974a5c/image/56578?showHotspots=false",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-21eee525b02c7dd74-60703cb0ab",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/md842941974a5c/i/projekt-dom-w-tunbergiach-7-r2-21eee525b02c7dd747cee4f96fa60458__56578.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w tunbergiach 7 (R2)",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-25d8f0e4f1",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-tunbergiach-7-r2-121687a27-7ecd3c52ba",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b72fc4ee260963ea68252f6dfa0527db2126b22319ba63f007a3467bbd1a4c2d",
+          "byteLength": 29572,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/related?scope=family",
+          "id": "var-widok-2-projekt-dom-w-tunbergiach-7-r2-121687a27-7ecd3c52ba",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/widok-2-projekt-dom-w-tunbergiach-7-r2-121687a2728cf95f749f30f0c85e61ab__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w tunbergiach 7 (R2)",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-2b354a9533",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-projekt-dom-w-tunbergiach-7-r2-e358e-db33abe4ff",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "0eca25ecb2c69e8384b652333bdea40b0c63cd940d409e9b3545c3aa46fb5948",
+          "byteLength": 20710,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/related?scope=family",
+          "id": "var-rzut-pietra-projekt-dom-w-tunbergiach-7-r2-e358e-db33abe4ff",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-pietra-projekt-dom-w-tunbergiach-7-r2-e358e564978ecc5b791e44abf163222a__272.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w tunbergiach 7 (R2)",
+      "id": "asset-projekt-dom-w-tunbergiach-7-r2-c67123f603",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-2dc5cb52af00f3d73-0a43a29be2",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "2970b52c9f6b619ac4ec5c948d3a0cebaab81a143bf04587a64e3a688fea40ea",
+          "byteLength": 29871,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md842941974a5c/related?scope=family",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-2dc5cb52af00f3d73-0a43a29be2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-2dc5cb52af00f3d73a49558e613d2414__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-0b3cd56ccf",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-tunb-49e645af65",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "572d1652dc93c454c9e6ba1ea7f270fbce205a1e268cc3d3d0323cdf85e2b665",
+          "byteLength": 97839,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-tunb-49e645af65",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-parteru-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2-fe6c65a2b30eeaf41a0a5175ede0398c__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-13c10e841e",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-tun-384283b071",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "ab1b11a52b3f58393a51873289fe995ba94be981d77168ae10875b451bc3bdbd",
+          "byteLength": 53147,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-tun-384283b071",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-poddasza-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2-9ff79f7e69b11cef41e64c59264ed8cf__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-7394e69c3a",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.85,
+          "detail": "\"piętro\" is an upper storey (matched \"rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-pietra-z-powierzchniami-projekt-dom-w-tunbe-78c697ec23",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "360963ed03cc97b22c373276138be6ca0f1ae4632178889d5490c585b676ab45",
+          "byteLength": 68275,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-rzut-pietra-z-powierzchniami-projekt-dom-w-tunbe-78c697ec23",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/rzut-pietra-z-powierzchniami-projekt-dom-w-tunbergiach-7-r2-7e9496af6f46a306c1392454420d1821__11916.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-83377e8ffc",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-baa31629f46cf82e9-d64bf2e978",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+          "byteLength": 96615,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-baa31629f46cf82e9-d64bf2e978",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-baa31629f46cf82e973ccafc2d8a2ee4__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-96d0ccd771",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.72,
+          "detail": "\"piętro\" is an upper storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut pietra\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UPPER",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-35fdc10120bdded59-bbcd06fc51",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "8eaea8a58814a19daecc88fa5d7215c7d9c32d343a6486c44eb757096f5c7e01",
+          "byteLength": 66390,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-35fdc10120bdded59-bbcd06fc51",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-35fdc10120bdded5921b4d48f7b9dbc4__11816.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-b94c3eb0ba",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md842941974a5c/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w tunbergiach 7 (r2) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-tunbergiach-7-r2-0a1a46d160dc802c3-e02dba4e44",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "1d17034087fb4968ed5f2272c7f90a50453a00383c03bdca966e61d06947e3f2",
+          "byteLength": 57724,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-projekt-dom-w-tunbergiach-7-r2-0a1a46d160dc802c3-e02dba4e44",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-0a1a46d160dc802c3c3811edf7ac66aa__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-tunbergiach-7-r2-2f9ac81aeb",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w tunbergiach 7 (r2) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-tunbergiach-7-r2-f90316b5e-5a56d35cfc",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "24d904ef5960f4f5fea9f2215e22dcb2e62582089858580405e17581a6f0768a",
+          "byteLength": 357450,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-widok-1-projekt-dom-w-tunbergiach-7-r2-f90316b5e-5a56d35cfc",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/widok-1-projekt-dom-w-tunbergiach-7-r2-f90316b5e344cb720ecd93a9c18ec2e4__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-tunbergiach-7-r2-616cc55e65",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-tunbergiach-7-r2\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w tunbergiach 7 (r2) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-tunbergiach-7-r2-f50d592e3-c770361be3",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "47846f2027a880ceb199926392db70fcd470ffcbb19babbdead1d20a930d1135",
+          "byteLength": 360428,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+          "id": "var-widok-2-projekt-dom-w-tunbergiach-7-r2-f50d592e3-c770361be3",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md842941974a5c/widok-2-projekt-dom-w-tunbergiach-7-r2-f50d592e35a68c34c04306ceb44de24e__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+  "contentHash": "553253462b8d36d2d1c77fb6e37cd1135a295e446b88f7f1482904849c160970",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-2dc5cb52af00f3d73a49558e613d2414__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-parteru-projekt-dom-w-tunbergiach-7-r2-4f073dc78071189a952c2123c85ca631__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-parteru-projekt-dom-w-tunbergiach-7-r2-fccbdacf311a2a34fbeffebb5a225565__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-pietra-projekt-dom-w-tunbergiach-7-r2-321f048fa5212006eea9dcb5edf07b8a__11709.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "UPPER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-pietra-projekt-dom-w-tunbergiach-7-r2-e358e564978ecc5b791e44abf163222a__11272.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-2f9ebbd598f5f7c45a61d351e4643e89__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/rzut-poddasza-projekt-dom-w-tunbergiach-7-r2-3bb240c8f59cefb6bb4c282cd99f1026__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/widok-1-projekt-dom-w-tunbergiach-7-r2-7abd31acbeeb1bc1b07215a19a419e35__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/widok-1-projekt-dom-w-tunbergiach-7-r2-f90316b5e344cb720ecd93a9c18ec2e4__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/widok-2-projekt-dom-w-tunbergiach-7-r2-121687a2728cf95f749f30f0c85e61ab__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/widok-2-projekt-dom-w-tunbergiach-7-r2-f50d592e35a68c34c04306ceb44de24e__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-0c6405a321991ae21b35ee900daf6c3c__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-1570c3355b7795d0b3c20ce6d5e0b5e8__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-c8ee0b54a02ed2e94c1ce42251a3eac7__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-boczna-projekt-dom-w-tunbergiach-7-r2-9fd349e9dead2c3cb01f6acb95e57a5d__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-ba03401a5114cf55e78b2d466966957e__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-frontowa-projekt-dom-w-tunbergiach-7-r2-4ba3245a3f9954b9e4676c416f067541__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-ada34d89bec044afb5c2808825f2b38f__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/elewacja-ogrodowa-projekt-dom-w-tunbergiach-7-r2-aeea330eb2b22235ef13cabb48038f13__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md842941974a5c/projekt-dom-w-tunbergiach-7-r2-c6a1cff8ba7dae7a8c3d808f0023ba4b__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md842941974a5c/sytuacja-projekt-dom-w-tunbergiach-7-r2-ef5d25a9c23f57590be2d16c77c29b2f__11255.jpg"
+    }
+  ],
+  "id": "src-md842941974a5c-69ef8c8020",
+  "pageHash": "318a4bc5f4a61401f93f79df6907e746d44f2ebc8bd61a78f0f6bcc9d1eda67f",
+  "project": {
+    "externalId": "md842941974a5c",
+    "name": "Projekt domu Dom w tunbergiach 7 (R2) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "4,42 m&sup2;",
+      "unit": "m2",
+      "value": 4.42
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "9,99 m",
+      "unit": "m",
+      "value": 9.99
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "174,62 m&sup2;",
+      "unit": "m2",
+      "value": 174.62
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "117,74 m&sup2;",
+      "unit": "m2",
+      "value": 117.74
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "166,96 m&sup2;",
+      "unit": "m2",
+      "value": 166.96
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "150,94 m&sup2;",
+      "unit": "m2",
+      "value": 150.94
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "235,48 m&sup2;",
+      "unit": "m2",
+      "value": 235.48
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "162,96 m&sup2;",
+      "unit": "m2",
+      "value": 162.96
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "935,21 m&sup3;",
+      "unit": "none",
+      "value": 935.21
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 8.33,
+      "index": 1,
+      "label": "Hol",
+      "raw": "1. Hol | 8,33 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 6.78,
+      "index": 2,
+      "label": "Pokój",
+      "raw": "2. Pokój | 6,78 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.5,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 9,50 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.17,
+      "index": 4,
+      "label": "Łazienka",
+      "raw": "4. Łazienka | 5,17 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.9,
+      "index": 5,
+      "label": "Pokój",
+      "raw": "5. Pokój | 9,90 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.21,
+      "index": 6,
+      "label": "Schody",
+      "raw": "6. Schody | 4,21 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.33,
+      "index": 7,
+      "label": "Hol",
+      "raw": "7. Hol | 8,33 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 6.78,
+      "index": 8,
+      "label": "Pokój",
+      "raw": "8. Pokój | 6,78 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.5,
+      "index": 9,
+      "label": "Pokój",
+      "raw": "9. Pokój | 9,50 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.17,
+      "index": 10,
+      "label": "Łazienka",
+      "raw": "10. Łazienka | 5,17 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.9,
+      "index": 11,
+      "label": "Pokój",
+      "raw": "11. Pokój | 9,90 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.21,
+      "index": 12,
+      "label": "Schody",
+      "raw": "12. Schody | 4,21 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 3.49,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 3,49 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.51,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 1,51 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.03,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 8,03 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.13,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 11,13 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 13.03,
+      "index": 5,
+      "label": "Salon",
+      "raw": "5. Salon | 13,03 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.21,
+      "index": 6,
+      "label": "Kotłownia",
+      "raw": "6. Kotłownia | 2,21 | (3,83)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.4,
+      "index": 7,
+      "label": "Łazienka",
+      "raw": "7. Łazienka | 2,40 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 3.49,
+      "index": 8,
+      "label": "Wiatrołap",
+      "raw": "8. Wiatrołap | 3,49 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 1.51,
+      "index": 9,
+      "label": "Hol",
+      "raw": "9. Hol | 1,51 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.03,
+      "index": 10,
+      "label": "Pokój",
+      "raw": "10. Pokój | 8,03 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 11.13,
+      "index": 11,
+      "label": "Kuchnia",
+      "raw": "11. Kuchnia | 11,13 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 13.03,
+      "index": 12,
+      "label": "Salon",
+      "raw": "12. Salon | 13,03 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.21,
+      "index": 13,
+      "label": "Kotłownia",
+      "raw": "13. Kotłownia | 2,21 | (3,83)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.4,
+      "index": 14,
+      "label": "Łazienka",
+      "raw": "14. Łazienka | 2,40 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Dom w Tunbergiach 7 (R2) to wyjątkowy projekt domu, który stanowi idealne rozwiązanie zarówno dla Klienta Indywidualnego, jak i dewelopera. Jego nowoczesny charakter w połączeniu z praktycznymi rozwiązaniami z pewnością zachwyci każdego, kto marzy o wyjątkowym miejscu do życia. Zwieńczeniem bryły jest bez okapowy dwuspadowy dach w kolorze antracytu, które świetnie współgra z grafitową stolarką. Białe i szare tynki elewacji wzbogacono drewnianymi akcentami, tworząc harmonijną i elegancką całość. Dom oferuje pięć przestronnych pokoi, w tym jeden dodatkowy na parterze, który może pełnić rolę gabinetu, sypialni dla gości lub przestrzeni do pracy. Dwie łazienki zapewniają wygodę dla wszystkich mieszkańców. Z poddaszem użytkowym oraz strychem do adaptacji, ten projekt domu daje pełną swobodę w aranżacji przestrzeni. Można stworzyć dodatkowe pomieszczenia, które spełnią indywidualne potrzeby mieszkańców, tworząc tym samym wyjątkowy klimat i funkcjonalność. Pergola nad tarasem to nie tylko praktyczne zadaszenie, ale także elegancki detal, który nadaje budynkowi niepowtarzalnego charakteru. Dach bez okapów utrzymuje czysty, nowoczesny wygląd, który pasuje do współczesnych trendów architektonicznych. Kominek, tworzy przytulną atmosferę i staje się idealnym miejscem na chwile relaksu i rodzinne spotkania. Spiżarka zlokalizowana pod schodami to praktyczne rozwiązanie, które pomaga utrzymać porządek i organizację w domu. \"Dom w Tunbergiach 7 (R2)\" to projekt domu, który łączy w sobie nowoczesny styl, funkcjonalność oraz wyjątkowy charakter. Bez względu na to, czy jesteś Klientem Indywidualnym, czy deweloperem, ten projekt dostarcza wszystkich elementów, które sprawią, że to miejsce stanie się Twoim wymarzonym domem. Dom w Tunbergiach 7 (R2) należy do kategorii: projekty domów nowoczesnych , projekty domów dwulokalowych, projekty domów dla deweloperów ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "246 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 39 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom dwurodzinny (jednorodzinny dwulokalowy) z poddaszem użytkowym , strop płyta żelbetowa , 166.96 m² + 4.42 m² , 10 pokoi, 2 kuchnie, 4 łazienki, 2 kotłownie, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

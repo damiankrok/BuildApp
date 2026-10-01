@@ -14,9 +14,11 @@ checks each pack against its own manifest (CI job `analyzer-evidence-pack`).
 | `marcowki` | 005D code | a clean known project |
 | `dom-w-modrzykach` | 005D code | the opening-heavy 005C regression house |
 | `alt-marcowki`, `aster-viii`, `galaktyka`, `rarytasy-g2e`, `willa-miranda`, `dom-w-zurawkach`, `kosacce-area-copy-alone` | 005D code (the last, sealed 005A evidence) | every development fixture still failing a verdict or refused |
+| `blind-h1-dom-w-dabecjach`, `blind-h2-dom-w-tunbergiach` | the round-4 blind runs, frozen code (`PRE_HOLDOUT_4_SHA`), written during the one run and committed unchanged | the blind verdicts and their first bad decisions (`../holdout/README.md`) |
 
 The passing regressions whose model hashes are unchanged (Kosaćce clean and tracked, dom-w-jablonkach) are summary
-rows of `../development-matrix.json`, not packs. The two round-4 blind packs are added by the blind run, once.
+rows of `../development-matrix.json`, not packs. The two round-4 blind packs were added by the blind run, once: 16
+packs, the stage's bound.
 
 `first-divergence-dom-w-azaliach-005c-to-005d.json` — `npm run -s evidence:diverge -- dom-w-azaliach-005c
 dom-w-azaliach --json`: the first decision the two runs make differently.

@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 23,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 8,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+  "contentHash": "6402321e688d3716987ab8053beced8f8f21abc1fa8f80e8526a43550b41f8bd",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m1d2240bad8ffb-59e92d8801",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 6.06
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.09
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 217.27
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 168.76
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 36
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 151.58
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 220.5
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 291.29
+    },
+    {
+      "key": "usable_area",
+      "unit": "m2",
+      "value": 193.64
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 988.06
+    }
+  ],
+  "runId": "h1-dom-w-dabecjach"
+}

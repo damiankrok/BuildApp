@@ -1,0 +1,19 @@
+{
+  "schema": "buildapp.development-dimensions",
+  "schemaVersion": "1.1.0",
+  "what": "Overall dimensions printed on the round-4 blind houses' ground plans, and what the frozen 005D reader took them for, in centimetres, as text facts, registered after the draw (BUILDPLAN-ANALYZER-005D §53: the guard must fail on new blind identifiers after selection). The two families join the development set of the next stage. Read by the production hard-code guard (tests/architecture/generalization.test.ts). No drawing is stored.",
+  "houses": [
+    {
+      "key": "dom-w-dabecjach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+      "overallDimensionsCm": [1580, 1340],
+      "misreadAsCm": [1501]
+    },
+    {
+      "key": "dom-w-tunbergiach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+      "overallDimensionsCm": [1173, 1000],
+      "misreadAsCm": [1117, 1119, 1177, 1010]
+    }
+  ]
+}

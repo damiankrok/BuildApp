@@ -1,0 +1,241 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.3.0"
+  },
+  "candidateHash": "c27dd1cc7fc7b73bbea94733877fe57219d6b88226c04492aff0235ec76c7ad0",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+  "completedAt": "2026-10-01T12:51:11.720Z",
+  "counts": {
+    "assets": 24,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 12,
+      "PERSPECTIVE_RENDER": 4,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 0,
+    "callouts": 36,
+    "chimneys": 0,
+    "commands": 109,
+    "frames": 22,
+    "masses": 1,
+    "meshes": 84,
+    "metricEvidence": 80,
+    "observations": 1126,
+    "openings": 8,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 5,
+    "terraces": 2,
+    "triangles": 1788
+  },
+  "jobId": null,
+  "label": "Dom w tunbergiach 7 (R2) (analysis)",
+  "metricEvidenceHash": "ccdff0df63380aad36c5a3bd9d7e8bb400bad10e080d2c410a066780f7cf02dd",
+  "modelHash": "9d92a2eafc847cd498b61ee120a9166266eea84ffd596c7a1d2a0824f06d7958",
+  "modelId": "m-analysis-md842941974a5c",
+  "modelSha256": "9d92a2eafc847cd498b61ee120a9166266eea84ffd596c7a1d2a0824f06d7958",
+  "observationGraphHash": "cb5c695a5405dcb7ece50671b9bcaf897f120b58641f5e9c2d0c7c5f472ae4e3",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "CAMERA": {
+        "L1": 2
+      },
+      "INTERIOR_DOOR": {
+        "L1": 8
+      },
+      "INTERIOR_WALL": {
+        "L1": 22
+      },
+      "LEVEL": {
+        "L2": 1
+      },
+      "MASS": {
+        "L2": 1
+      },
+      "OPENING": {
+        "L1": 8
+      },
+      "RECESS": {
+        "L2": 2
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOM": {
+        "L1": 4,
+        "L2": 1
+      },
+      "TERRACE": {
+        "L1": 2
+      }
+    },
+    "levels": {
+      "L0": 0,
+      "L1": 46,
+      "L2": 6
+    }
+  },
+  "sceneBytes": 215700,
+  "sceneContentHash": "e553b4434682131da4ed1133b4398f2b4d7d7bded186d28421b335502bd3e80d",
+  "sceneSha256": "d2f6ce4cd8b8621fa1e6282630cca3201b1fdd47c7c649d2f4bb9c06a1650ea4",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "553253462b8d36d2d1c77fb6e37cd1135a295e446b88f7f1482904849c160970",
+  "sourcePackageId": "src-md842941974a5c-69ef8c8020",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+  "startedAt": "2026-10-01T12:47:54.495Z",
+  "timings": {
+    "acquisitionMs": 17207,
+    "compileMs": 44,
+    "metricExtractionMs": 158102,
+    "observationMs": 18345,
+    "reconstructionMs": 3318,
+    "totalMs": 197224,
+    "verificationMs": 209
+  },
+  "title": "Dom w tunbergiach 7 (R2)",
+  "unresolved": [
+    {
+      "reason": "no scaling of this plan puts its walls on the walls of the plan below",
+      "status": "AMBIGUOUS",
+      "what": "where the attic storey sits over the storey below"
+    },
+    {
+      "reason": "no scaling of this plan puts its walls on the walls of the plan below",
+      "status": "AMBIGUOUS",
+      "what": "where the upper storey sits over the storey below"
+    },
+    {
+      "reason": "neither its chains, its outer faces nor an alignment onto the base plan fixed a scale for it",
+      "status": "MISSING",
+      "what": "a registration for the storey 1 plan"
+    },
+    {
+      "reason": "neither its chains, its outer faces nor an alignment onto the base plan fixed a scale for it",
+      "status": "MISSING",
+      "what": "a registration for the storey 1 plan"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the front elevation"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the rear elevation"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 2.38 m thin band at x 4.46"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 2.36 m thin band at x 6.71"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.62 m thin band at z 7.90"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.26 m thin band at z 7.01"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.26 m thin band at z 3.41"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 0.26 m thin band at z 2.14"
+    },
+    {
+      "reason": "two numbers (1, 9) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-4"
+    },
+    {
+      "reason": "two numbers (1, 99) are printed inside it",
+      "status": "AMBIGUOUS",
+      "what": "the number of room-0-4"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 22
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer",
+      "severity": "INFO"
+    },
+    {
+      "code": "SOURCE_BYTE_IDENTICAL",
+      "message": "5 source addresses counted with another copy (byte identical)",
+      "severity": "INFO"
+    },
+    {
+      "code": "GUESSED_ADDRESS_HTTP_STATUS",
+      "message": "11 guessed larger copies not available (http status); the published copy was used",
+      "severity": "INFO"
+    },
+    {
+      "code": "LAYOUT_FOOTPRINT_AREA_NEAR",
+      "message": "the lowest storey covers 103.06 m² against the 117.74 m² the publisher prints",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "LAYOUT_NO_MASS_REACHES_UP",
+      "message": "more than one storey was read and no body reaches past the first",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "METRIC_SCALE_UNSUPPORTED",
+      "message": "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "PLAN_EXTENT_FROM_WALLS",
+      "message": "the plan’s extent was taken from its walls: its dimension chains describe only part of it",
+      "severity": "LIMITING"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses counted with another copy (byte identical)",
+    "11 guessed larger copies not available (http status); the published copy was used",
+    "the lowest storey covers 103.06 m² against the 117.74 m² the publisher prints",
+    "more than one storey was read and no body reaches past the first",
+    "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+    "the plan’s extent was taken from its walls: its dimension chains describe only part of it"
+  ]
+}
+
