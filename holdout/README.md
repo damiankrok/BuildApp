@@ -162,3 +162,31 @@ The same protocol, steps 1–6, with these differences only. Everything here is 
      A publisher whose drawings print no dimension is `SOURCE_LIMITED_PARTIAL` only once that is shown.
    - An `ALGORITHMIC_FAIL` is not patched in 005C. Its first bad evidence decision is recorded and becomes the
      next stage's input.
+
+## Round 4 (BUILDPLAN-ANALYZER-005D)
+
+The protocol of rounds 1 and 2, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two ARCHON families, one pick each, from the committed round-1 pool** (`holdout/pool.txt`,
+   `POOL_SHA256 = 800c2a1e…2ed41`). No second publisher this round: 005D is about dimension chains, and the
+   cross-publisher probe of round 3 printed none.
+2. **Excluded families** (`excluded-families-round-4.txt`, 41 families, 584 pool addresses; 2501 drawable):
+   round 3's 40 families and the round-3 ARCHON draw, now a development house (`dom-w-azaliach`). Its page,
+   read from the cache (addresses only), links to no project outside its own family.
+   - `EXCLUDED_FAMILIES_ROUND_4_SHA256 = 8c5a4a971fa5a9d9531ff0a93f793f7054a3e33fcd67e221381747c9f3ad2919`.
+3. **Freeze.** `PRE_HOLDOUT_4_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 4 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_4_SHA + "BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT")`, `i1 = seed mod n`; the second
+     pick is uniform over every drawable address of another family, `SHA256(seed + ":second") mod m` (round 1).
+   - One ledger line (`BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT`) records both picks, the seed, the indices, the
+     pool and exclusion hashes.
+5. **Run once each, with the Evidence Pack on** (`ANALYZER_EVIDENCE=1`), during that first and only run. The packs
+   are committed with the verdicts; no pack is regenerated after the draw from changed code.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze. It differs from round 3's in one condition,
+   added before the draw (005D, R9): a first reading the drawing itself contradicted may be replaced by a reading
+   it states (`METRIC_CHALLENGE REPLACED`); that holds only when the trigger names the drawing's contradiction and
+   the published figure only verified the replacement (never `SPENT`). Every other condition is unchanged.
+   - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`.
+   - An `ALGORITHMIC_FAIL` is not patched in 005D. Its first bad decision is named from the Evidence Pack
+     (stage, object, evidence) and becomes the next stage's input.

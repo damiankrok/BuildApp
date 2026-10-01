@@ -25,6 +25,9 @@ const floorPlans = (pkg?.assets ?? []).filter((a) => a.roles?.document === 'FLOO
 const labelled = new Set(floorPlans.map((a) => a.roles.storey).filter((s) => s && s !== 'UNKNOWN' && s !== 'NOT_APPLICABLE'))
 const published = pkg?.publishedFacts?.find((f) => f.key === 'footprint_area' && f.unit === 'm2')?.value
 const resolution = trace?.entries?.find((e) => e.substage === 'PLAN_RESOLUTION')?.counts
+// 005D (R9): a first reading the drawing itself contradicted may be replaced by a reading it states
+// (METRIC_CHALLENGE REPLACED); the published figure may only have verified it, never chosen it.
+const challenge = trace?.entries?.find((e) => e.substage === 'METRIC_CHALLENGE')?.counts
 
 const ringArea = (poly) => Math.abs(poly.reduce((a, p, i) => { const q = poly[(i + 1) % poly.length]; return a + p.x * q.z - q.x * p.z }, 0)) / 2
 
@@ -60,6 +63,10 @@ if (summary && model) {
     openingsAllBuilt: { holds: !warnings.some((w) => w.code === 'OPENINGS_NOT_BUILT'), message: warnings.find((w) => w.code === 'OPENINGS_NOT_BUILT')?.message ?? null },
     footprint: published === undefined ? { holds: true, builtM2: +footprint.toFixed(2), note: 'no footprint published' } : { builtM2: +footprint.toFixed(2), publishedM2: published, residualPct: +((footprint / published - 1) * 100).toFixed(2), holds: Math.abs(footprint / published - 1) <= 0.06 },
     resolvedWithAWitness: resolved ? { chosen: resolution?.chosen ?? null, corroborations: resolution?.chosenCorroborations ?? '', holds: Boolean(resolution?.chosenCorroborations) } : { holds: true, note: 'the first reading held' },
+    replacedByTheDrawing:
+      challenge?.outcome === 'REPLACED'
+        ? { chosen: challenge.chosen ?? null, trigger: challenge.trigger ?? null, publishedFigure: challenge.publishedFigure ?? null, holds: Boolean(challenge.trigger) && challenge.publishedFigure !== 'SPENT' }
+        : { holds: true, note: challenge ? `the challenge ${challenge.outcome === 'KEPT' ? 'kept' : 'did not replace'} the first reading` : 'no challenge' },
   }
   out.conditions = conditions
   out.bodies = summary.counts?.masses ?? null
@@ -69,6 +76,7 @@ if (summary && model) {
 } else {
   out.failure = failure ? { code: failure.code, reasonCode: failure.reasonCode ?? null, message: failure.message } : null
   out.resolution = resolution ?? null
+  out.challenge = challenge ?? null
   // a typed reason, and a checklist item confirmed; legibility alone waits for its raw measurement
   out.verdict = failure && sourceLimited ? 'SOURCE_LIMITED_PARTIAL' : failure && checklist.legibleOverallDimension.needsRawMeasurement ? 'PENDING_RAW_LEGIBILITY_MEASUREMENT' : 'ALGORITHMIC_FAIL'
 }

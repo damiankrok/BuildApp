@@ -819,25 +819,29 @@ jobs:
           mkdir -p known
           # ground-storey plan copies other than the area table: withheld for the "area copy alone" rows
           dimensioned() { node -e "const g=require('./$BEFORE/$1/observation-graph.json'); console.log(g.coordinateFrames.filter((f)=>f.roles.projection==='ORTHOGRAPHIC_PLAN'&&f.roles.document==='FLOOR_PLAN'&&['GROUND','UNKNOWN'].includes(f.roles.storey)&&f.roles.annotation==='DIMENSIONED').map((f)=>f.id).join(','))"; }
-          row() { # row <name> <sealed> <bodies> <must-complete|may-refuse> [drop]
+          row() { # row <name> <sealed> <bodies> <must-complete|may-refuse|legacy-compat|decoy> [drop] [decoy factor]
             status=$(cat ".cache/known-$2.status" 2>/dev/null || echo missing)
             if [ "$status" = unreachable ]; then echo "::warning::$1: not judged, the publisher could not be reached"; return 0; fi
             if [ "$status" != ok ]; then echo "::error::$1: the publisher's drawings were not fetched ($status)"; return 1; fi
-            OFFLINE=1 npm run -s analysis:second-house -- --package "$BEFORE/$2/source-package.json" --graph "$BEFORE/$2/observation-graph.json" \
-              --metrics "$BEFORE/$2/metric-evidence.json" --cache ".cache/known-$2" --out "known/$1" ${5:+--drop-frames "$5"} > "known/$1.log" 2>&1
+            OFFLINE=1 ANALYZER_EVIDENCE=1 npm run -s analysis:second-house -- --package "$BEFORE/$2/source-package.json" --graph "$BEFORE/$2/observation-graph.json" \
+              --metrics "$BEFORE/$2/metric-evidence.json" --cache ".cache/known-$2" --out "known/$1" ${5:+--drop-frames "$5"} ${6:+--decoy-footprint "$6"} > "known/$1.log" 2>&1
             tail -n 3 "known/$1.log"
-            node packages/analysis-service/scripts/known-row.mjs "known/$1" "$3" "$4"
+            node packages/analysis-service/scripts/known-row.mjs "known/$1" "$3" "$4" "$BEFORE/$2/source-package.json"
           }
           # The area copy alone reads Kosaćce two ways and only the published figure tells them apart, after it
-          # refused the first one: named, not built. e-OZE's sealed metric evidence registers both plan copies at
-          # 2.50 cm/px (18.01 m read where the drawing prints 16.01 m; the 005B reader reads it right). Until 005C
-          # its first reading stopped on the drawing (its depth framed by a 2 m interior chain); since 005C the
-          # exterior chain frames it, the whole house is built at the sealed scale, 20-23 % over the published
-          # figure, and the figure that refused it cannot also choose the replacement: named, not built (005C
-          # report §T). Today's reading of the same house is the development row rarytasy-eoze, unchanged.
+          # refused the first one: named, not built. e-OZE's sealed metric evidence (005A, an older reader) registers
+          # both plan copies at the scale of a misread overall dimension. Since 005D (resolver 1.4.0) the drawing
+          # itself contradicts that scale as read (AS_READ_REFUTATION), the reading it states replaces the first one
+          # and the published figure only verifies it. These are LEGACY_EVIDENCE_COMPATIBILITY rows: complete
+          # correctly (within 6 % of the published footprint, however reached) or refuse by name — never a
+          # wrong-scale completion, and never counted as the current reader's acceptance, which is the
+          # development row rarytasy-eoze (MUST_COMPLETE). The decoys replay the same evidence with the published
+          # footprint multiplied: a figure may verify the drawing's scale, never choose it, so both must be refused by name.
           row kosacce-area-copy-alone kosacce-clean 3 may-refuse "$(dimensioned kosacce-clean)"
-          row eoze-every-copy rarytasy-eoze 1 may-refuse
-          row eoze-area-copy-alone rarytasy-eoze 1 may-refuse "$(dimensioned rarytasy-eoze)"
+          row eoze-every-copy rarytasy-eoze 1 legacy-compat
+          row eoze-area-copy-alone rarytasy-eoze 1 legacy-compat "$(dimensioned rarytasy-eoze)"
+          row eoze-decoy-high rarytasy-eoze 1 decoy "" 1.25
+          row eoze-decoy-low rarytasy-eoze 1 decoy "" 0.8
       - name: Upload the known-set record
         if: always()
         uses: actions/upload-artifact@v4
@@ -950,6 +954,52 @@ jobs:
         run: npx vitest run apps/local-analyzer/test/source-parity.test.ts apps/local-analyzer/test/text.test.ts
       - name: Production hard-code guard
         run: npx vitest run tests/architecture/generalization.test.ts
+      # BUILDPLAN-ANALYZER-005D. Dimension-chain integrity.
+      # - dimension-chain topology: every crossing mark classified against the
+      #   line it sits on (TICK / QUESTIONABLE / REJECTED, with reasons); the
+      #   fourteen drawn topology cases; real internal ticks stay; a total that
+      #   disagrees with its children is a conflict, never forced; the same
+      #   drawing imaged eight ways keeps its topology or lowers its confidence.
+      # - label binding: a label measures the span it is centred on, across a
+      #   rejected mark; value ambiguity named, never resolved by a scale;
+      #   glyph ambiguity (3/5, 1/7, 0/6/9 turned, kerned 11, italic, broken).
+      # - metric independence: one ink is one witness; an ink whose bounded
+      #   alternative fits the rival decides nothing between them.
+      # - the first-success source conflict: T1/T2/T3 and their negatives.
+      - name: Dimension-chain topology
+        run: npx vitest run packages/source-metrics/test/dimension-topology.test.ts
+      - name: Label binding and glyph ambiguity
+        run: npx vitest run packages/source-metrics/test/label-binding.test.ts packages/source-metrics/test/glyph-ambiguity.test.ts
+      - name: Metric independence and the source conflict
+        run: npx vitest run packages/source-metrics/test/metric-solution.test.ts packages/source-metrics/test/label-binding.test.ts packages/reconstruction/test/source-conflict.test.ts packages/reconstruction/test/first-success.test.ts
+
+  analyzer-evidence-pack:
+    # BUILDPLAN-ANALYZER-005D §8–§20. The Analyzer Evidence Pack.
+    # - ON == OFF: the same run with evidence mode on and off decides the same
+    #   bytes; writing a pack changes no file of the run; mode is off by default.
+    # - deterministic manifest; every required file; a JSON sidecar for every
+    #   layer SVG; no publisher raster, data URI or reference in any SVG; size
+    #   bounds; the first-divergence helper.
+    # - nothing production depends on the pack (it is observational).
+    # - every committed pack verified against its own manifest.
+    name: Analyzer / evidence pack
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Evidence Pack ON/OFF identity, determinism, sidecars, bounds, no publisher raster
+        run: npx vitest run packages/analysis-service/test/evidence-pack.test.ts tests/architecture/generalization.test.ts
+      - name: Committed packs match their manifests
+        run: npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005d/evidence --max-packs 16
 
   analyzer-opening-aware-envelope:
     # BUILDPLAN-ANALYZER-005C. The building's outline from wall-thick ink and
@@ -1013,7 +1063,7 @@ jobs:
           fi
 
   analyzer-development-houses:
-    # BUILDPLAN-ANALYZER-005B/005C. All eleven development houses through today's
+    # BUILDPLAN-ANALYZER-005B/005C/005D. All thirteen development houses through today's
     # analyzer. Only the source package is sealed (stage-reports/artifacts/
     # analyzer-005b/dev); observations, metric evidence and the model are
     # re-extracted from the publisher's drawings, which are fetched here and
@@ -1022,7 +1072,9 @@ jobs:
     # move, are pinned, and the tracked Kosaćce link to the clean one's model; a house
     # whose metric truth is weak must carry its LIMITING warning; the alternate
     # page must stop with the typed metric reason. Only a publisher that cannot
-    # be reached at all is a warning.
+    # be reached at all is a warning. 005D: each row also writes its Evidence
+    # Pack (uploaded with the record, verified against its manifest), and the
+    # rows whose scale a dimension chain decides carry the metric gate.
     name: Analyzer / development house (${{ matrix.house }})
     if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
     runs-on: ubuntu-latest
@@ -1040,12 +1092,16 @@ jobs:
           - house: kosacce-tracked
             expect: pass
             model: 5b5ffcf1afcd2511023cdc671fd7069d916ab2e92a51e74e6430e7154d27a11f
+          # 005D: G2E's model is unchanged; its incumbent scale is now named unsupported (its readings that
+          # agree with it are neutral between it and their own alternatives), so its warning moved with its evidence.
           - house: rarytasy-g2e
             expect: "footprint:2"
             model: 8fa4a25bcd587248c91ca3510e1f440cfd7043f096d74a820f9104d8e4f91ce8
-            limits: METRIC_SCALE_WEAK
+            limits: METRIC_SCALE_UNSUPPORTED
+          # current e-OZE: MUST_COMPLETE, on a scale an overall reading states
           - house: rarytasy-eoze
             expect: pass
+            metric: "--metric REPLACED,CONFIRMED --metric-overall"
           - house: alt-marcowki
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
           - house: dom-w-jablonkach
@@ -1065,6 +1121,18 @@ jobs:
             expect: pass
           - house: aster-viii
             pkg: stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+          # 005D: the round-3 blind house whose overall chain a spurious tick split. The total now survives the
+          # tick and an overall reading decides the scale (the metric gate); the opening-aware envelope then finds
+          # no outline on the plan (its outer walls are piers between glazing), so the plan is refused by name,
+          # not resolved by the published figure alone (report §N).
+          - house: dom-w-azaliach
+            pkg: stage-reports/artifacts/analyzer-005c/holdout/h1-dom-w-azaliach/source-package.json
+            expect: "refuse:PLAN_RESOLUTION_INCONCLUSIVE"
+            metric: "--metric REPLACED,CONFIRMED --metric-overall"
+          # the round-3 cross-publisher blind house: its plans print no legible dimension; stopped by name
+          - house: galaktyka
+            pkg: stage-reports/artifacts/analyzer-005c/holdout/h2-galaktyka/source-package.json
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
     env:
       DEV: stage-reports/artifacts/analyzer-005b/dev
@@ -1095,9 +1163,10 @@ jobs:
         if: steps.fetch.outputs.status == 'ok'
         run: |
           mkdir -p dev
-          OFFLINE=1 npm run -s analysis:second-house -- --package "${{ matrix.pkg || format('{0}/{1}/source-package.json', env.DEV, matrix.house) }}" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
+          OFFLINE=1 ANALYZER_EVIDENCE=1 npm run -s analysis:second-house -- --package "${{ matrix.pkg || format('{0}/{1}/source-package.json', env.DEV, matrix.house) }}" --cache .cache/dev --out "dev/${{ matrix.house }}" > "dev/${{ matrix.house }}.log" 2>&1 || true
           tail -n 4 "dev/${{ matrix.house }}.log"
-          node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }} ${{ matrix.limits && format('--limits {0}', matrix.limits) || '' }}
+          node packages/analysis-service/scripts/dev-row.mjs "dev/${{ matrix.house }}" "${{ matrix.expect }}" ${{ matrix.model && format('--same-model {0}', matrix.model) || '' }} ${{ matrix.limits && format('--limits {0}', matrix.limits) || '' }} ${{ matrix.metric || '' }}
+          npm run -s evidence:verify -- "dev/${{ matrix.house }}/evidence-pack"
       - name: Upload the development-house record
         if: always()
         uses: actions/upload-artifact@v4

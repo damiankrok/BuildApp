@@ -15,6 +15,10 @@
 //        --dd-pool holdout/pool-dobredomy.txt --dd-pool-sha256 <hex> --pre-holdout-sha <40hex>
 // The DobreDomy draw is checked for technical material (README, round 3) by reading the drawn page's markup and
 // nothing else; an ineligible draw is recorded and the next one is `SHA256(seed + ":next:" + k)`.
+// Round 4 (BUILDPLAN-005D) draws TWO unseen ARCHON families from the same pool, less
+// holdout/excluded-families-round-4.txt (round 3's families and the round-3 ARCHON draw, now a development house),
+// exactly as rounds 1 and 2 draw, with seed = SHA256(PRE_HOLDOUT_4_SHA + "BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT"):
+//   node holdout/select.mjs select --round 4 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -28,6 +32,7 @@ const ROUNDS = {
   1: { label: LABEL, excluded: 'excluded-families.txt' },
   2: { label: 'BUILDPLAN-005B-BLIND-HOLDOUT-ROUND-2', excluded: 'excluded-families-round-2.txt' },
   3: { label: 'BUILDPLAN-005C-ARCHON-HOLDOUT', excluded: 'excluded-families-round-3.txt', picks: 1 },
+  4: { label: 'BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT', excluded: 'excluded-families-round-4.txt' },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',
@@ -168,7 +173,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (git('status', '--porcelain')) throw new Error('working tree is not clean')
     if (resolve(arg('pool') ?? '') !== join(root, 'holdout', 'pool.txt')) throw new Error('the pool is the tracked holdout/pool.txt, nothing else')
     const round = ROUNDS[arg('round') ?? '1']
-    if (!round) throw new Error('--round is 1, 2 or 3')
+    if (!round) throw new Error('--round is 1, 2, 3 or 4')
     git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', `holdout/${round.excluded}`)
     const text = readFileSync(join(root, 'holdout', 'pool.txt'), 'utf8')
     const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256

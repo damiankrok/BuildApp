@@ -1,0 +1,19 @@
+{
+  "schema": "buildapp.development-dimensions",
+  "schemaVersion": "1.1.0",
+  "what": "Overall dimensions printed on the 005D development houses' plans, and the misreadings 005D was opened for, in centimetres, as text facts (BUILDPLAN-ANALYZER-005D §53). Read by the production hard-code guard (tests/architecture/generalization.test.ts): any of these in production code or comments is a fingerprint of the benchmark, whichever spelling it takes. `misreadAsCm` is what a reader once took the printed figure for — no production rule may name it either. No drawing is stored.",
+  "houses": [
+    {
+      "key": "dom-w-azaliach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+      "overallDimensionsCm": [1035],
+      "misreadAsCm": [1055]
+    },
+    {
+      "key": "rarytasy-eoze",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+      "overallDimensionsCm": [1601],
+      "misreadAsCm": [1801]
+    }
+  ]
+}

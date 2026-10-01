@@ -95,12 +95,13 @@ const registry = registryFrom(sealed)
  * (every `development-dimensions*.json` under `stage-reports/`). One of at least four digits that is not a round
  * metre is a fingerprint of the benchmark: "1205" in a comment is a house, "1200" is a number.
  */
-export function dimensionsFrom(files: ReadonlyArray<{ houses?: Array<{ overallDimensionsCm?: number[] }> }>): Set<string> {
+export function dimensionsFrom(files: ReadonlyArray<{ houses?: Array<{ overallDimensionsCm?: number[]; misreadAsCm?: number[] }> }>): Set<string> {
   const out = new Set<string>()
-  for (const f of files) for (const h of f.houses ?? []) for (const cm of h.overallDimensionsCm ?? []) if (Number.isInteger(cm) && cm >= 1000 && cm % 100 !== 0) out.add(String(cm))
+  // 005D: what a reader once took a printed figure for is as much a fingerprint as the figure itself.
+  for (const f of files) for (const h of f.houses ?? []) for (const cm of [...(h.overallDimensionsCm ?? []), ...(h.misreadAsCm ?? [])]) if (Number.isInteger(cm) && cm >= 1000 && cm % 100 !== 0) out.add(String(cm))
   return out
 }
-const sealedDimensions = walk(join(ROOT, 'stage-reports'), (n) => /^development-dimensions.*\.json$/.test(n)).map((f) => JSON.parse(readFileSync(f, 'utf8')) as { houses?: Array<{ overallDimensionsCm?: number[] }> })
+const sealedDimensions = walk(join(ROOT, 'stage-reports'), (n) => /^development-dimensions.*\.json$/.test(n)).map((f) => JSON.parse(readFileSync(f, 'utf8')) as { houses?: Array<{ overallDimensionsCm?: number[]; misreadAsCm?: number[] }> })
 for (const d of dimensionsFrom(sealedDimensions)) registry.dimensions.add(d)
 
 // --- the scanner ---------------------------------------------------------------
@@ -202,6 +203,10 @@ describe('no development house in production (derived registry)', () => {
     const metres = (Number(dimension) / 100).toFixed(2)
     expect(scan(`// the overall is ${metres} m`, registry).map((h) => h.kind)).toContain('DIMENSION')
     expect(scan(`"${metres.replace('.', ',')} m"`, registry).map((h) => h.kind)).toContain('DIMENSION')
+    // 005D: the misreadings the stage was opened for are registered beside the printed figures
+    for (const d of ['1055', '1801']) expect(registry.dimensions.has(d), d).toBe(true)
+    expect(scan(`if (value === 1801) value = 1601`, registry).map((h) => h.kind)).toContain('DIMENSION')
+    expect(scan(`// italic 10,35 read as 10.55`, registry).filter((h) => h.kind === 'DIMENSION').length).toBeGreaterThanOrEqual(1)
     // 005C: a publisher only the generic reader knows, branched on by name
     const [host] = registry.hosts
     expect(host).toBeDefined()
@@ -211,6 +216,12 @@ describe('no development house in production (derived registry)', () => {
   it('no production file — code or comment — carries a development house\'s id, name, published figure or printed overall dimension', () => {
     const found: string[] = []
     for (const file of production) for (const h of scan(readFileSync(file, 'utf8'), registry)) found.push(`${rel(file)}: ${h.kind} ${h.term} in "${h.at}"`)
+    expect(found).toEqual([])
+  })
+
+  it('the Evidence Pack is observational: no production package depends on it or imports it (005D §9)', () => {
+    expect(closure.has('@buildapp/evidence-pack')).toBe(false)
+    const found = production.filter((f) => /from\s+['"][^'"]*evidence-pack/.test(readFileSync(f, 'utf8'))).map(rel)
     expect(found).toEqual([])
   })
 
