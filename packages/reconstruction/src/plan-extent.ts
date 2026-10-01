@@ -31,7 +31,7 @@ import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Band, Mask } from '@buildapp/source-cv'
 import { gapSignature, gapStrokes, patternAcross } from './boundary-evidence.js'
-import type { DimensionChain } from '@buildapp/source-metrics'
+import type { DimensionChain, DimensionObservation } from '@buildapp/source-metrics'
 
 export type WallWitness = {
   /** The outer faces of the building's walls: the bounds of the largest group of wall bands. */
@@ -211,4 +211,30 @@ export function exteriorSpan(chains: readonly DimensionChain[], roles: readonly 
     if (!best || hi - lo > best.hi - best.lo || (hi - lo === best.hi - best.lo && c.id < best.chainId)) best = { lo, hi, chainId: c.id }
   }
   return best
+}
+
+/**
+ * A chain the drawing states as one overall dimension (BUILDPLAN-ANALYZER-005D): its end marks
+ * are ticks, it crosses no wall-thick ink between them, and a label is bound to exactly that span
+ * as its primary binding — read or not, the draughtsman wrote one number centred across the whole
+ * of it. Decided from the dimension graph alone (the marks' classes and the bindings), never from
+ * the number and never from the wall witness, which can be a logo.
+ */
+export type OuterTotalSpan = { chainId: string; axis: 'HORIZONTAL' | 'VERTICAL'; lo: number; hi: number; baselinePx: number; labelRaw: string }
+
+export function outerTotalSpans(chains: readonly DimensionChain[], observations: readonly DimensionObservation[]): OuterTotalSpan[] {
+  const out: OuterTotalSpan[] = []
+  for (const c of chains) {
+    if (!c.marks || c.marks.length !== c.ticksPx.length) continue
+    const kept = c.marks.filter((m) => m.class !== 'REJECTED')
+    if (kept.length < 2) continue
+    const [first, last] = [kept[0], kept[kept.length - 1]]
+    if (first.class !== 'TICK' || last.class !== 'TICK') continue
+    // A line across the building meets its walls: a wide dark crossing is a wall face, not a tick.
+    if (kept.some((m) => m.reasons.includes('WEDGE_NOT_STROKE'))) continue
+    const label = observations.find((o) => o.chainId === c.id && o.binding?.role === 'PRIMARY' && Math.abs(o.fromPx - first.atPx) < 0.5 && Math.abs(o.toPx - last.atPx) < 0.5)
+    if (!label) continue
+    out.push({ chainId: c.id, axis: c.axis, lo: first.atPx, hi: last.atPx, baselinePx: c.baselinePx, labelRaw: label.rawText })
+  }
+  return out.sort((a, b) => (a.chainId < b.chainId ? -1 : a.chainId > b.chainId ? 1 : 0))
 }

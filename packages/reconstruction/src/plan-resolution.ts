@@ -85,7 +85,7 @@ import { groundStoreyOf, ringArea, ringBounds } from './structural-layout.js'
 import type { AlternativeGroup, LayoutConflict, LayoutGateReason } from './structural-layout.js'
 import { worldFrameFrom } from './v2/frame.js'
 
-export const PLAN_RESOLVER_VERSION = '1.3.0' as const
+export const PLAN_RESOLVER_VERSION = '1.4.0' as const
 
 /** Counts, never time: a slower device must reach the same answer. */
 export const RESOLVER_BUDGET = { copies: 4, decompositions: 24, compositions: 4 } as const
@@ -98,7 +98,11 @@ export type FootprintBucket = (typeof FOOTPRINT_BUCKETS)[number]
 export type Corroboration = 'ISOTROPY' | 'CROSS_COPY'
 
 /** What the published footprint did in a resolution: scored the readings, was spent refusing the first one, or was not published. */
-export type PublishedFigureUse = 'SCORED' | 'SPENT' | 'NONE'
+/**
+ * What the published footprint did in a resolution: scored the readings, was spent refusing the first one, was
+ * not published, or (1.4.0) only verified or vetoed a reading the drawing's own evidence chose.
+ */
+export type PublishedFigureUse = 'SCORED' | 'SPENT' | 'NONE' | 'VERIFIED'
 
 export type ScaleChoice =
   | { kind: 'REGISTRATION' }
@@ -567,7 +571,7 @@ export function resolvePlan(options: StructuralPassOptions, incumbent: Structura
     if (!got || !registration) continue
     const { sheet, cluster } = got
     const tolerancePx = Math.max(2, sheet.wallPx / 2)
-    const chainRect = planExtent(options.metrics.chains.filter((c) => c.frameId === frame.id), sheet.bands, sheet.wallPx, sheet.witness)?.rect ?? null
+    const chainRect = planExtent(options.metrics.chains.filter((c) => c.frameId === frame.id), sheet.bands, sheet.wallPx, sheet.witness, options.metrics.dimensionObservations?.filter((o) => o.frameId === frame.id))?.rect ?? null
     const extents: Array<PlanReadingChoice['extent']> = []
     if (chainRect) extents.push('CHAIN_RECT')
     const differs = (a: PixelRect, b: PixelRect): boolean => Math.max(Math.abs(a.x0 - b.x0), Math.abs(a.x1 - b.x1), Math.abs(a.y0 - b.y0), Math.abs(a.y1 - b.y1)) > sheet.wallPx
@@ -797,6 +801,102 @@ export function resolutionRecord(resolution: PlanResolution): Record<string, num
 }
 
 // ---------------------------------------------------------------------------
+// a source conflict, before the published figure speaks (1.4.0, BUILDPLAN-ANALYZER-005D)
+// ---------------------------------------------------------------------------
+
+/**
+ * Why the drawing itself contradicts the scale a first reading was registered at, decided from the
+ * metric evidence, the base sheet and the frame only — never from a published figure.
+ *
+ *   AS_READ_REFUTATION  the registration contradicts at least half of the chain length as read
+ *                       (WITNESS_SHARE.major), and a scale the readings state contradicts at least a
+ *                       quarter less of it (WITNESS_SHARE.substantial): the corrected anchors it rests
+ *                       on disagree with what was printed.
+ *   PARTIAL_BINDING     the registration rests on a label the metric layer binds, as its primary span,
+ *                       to a wider span: a partial segment drives the scale while the total exists.
+ *   OUTER_TOTALS        two long readings as read, on different chains and covering both axes, agree on
+ *                       a scale more than 5 % from the registration, over more length than the readings
+ *                       that agree with the registration.
+ *
+ * A corrected overall dimension alone is not a conflict (on one development house it is right): only the margin by
+ * which the printed readings prefer another scale is.
+ */
+export type SourceConflictTrigger = 'AS_READ_REFUTATION' | 'PARTIAL_BINDING' | 'OUTER_TOTALS'
+export type SourceConflict = { triggers: SourceConflictTrigger[]; why: string; evidenceIds: string[]; registrationRefuted: number; alternatives: Array<{ cmPerPx: number; refuted: number }> }
+
+const MAJOR_SHARE = 0.5
+const SUBSTANTIAL_SHARE = 0.25
+
+export function sourceConflictOf(metrics: MetricEvidenceSet, frameId: string, registration: CoordinateRegistration, judge: PixelRect, wallPx: number): SourceConflict | null {
+  const tolerancePx = Math.max(2, wallPx / 2)
+  const statements = statementsOn(metrics, frameId)
+  const solution = metricSolutionFor(metrics, frameId)
+  const regAxis = (axis: 'X' | 'Y'): number => (axis === 'X' ? registration.metresPerPixelX : registration.metresPerPixelY) * 100
+  const triggers: SourceConflictTrigger[] = []
+  const reasons: string[] = []
+  const evidenceIds = new Set<string>()
+
+  // T1: as-read refutation, against the scales the readings themselves state.
+  const registrationRefuted = refutedShareAsRead(statements, regAxis, tolerancePx)
+  const offered = solution ? metricScales(solution, registration) : latticeScales(metrics, frameId, registration, judge, tolerancePx)
+  const alternatives = offered.map((o) => ({ cmPerPx: o.cmPerPx, refuted: refutedShareAsRead(statements, () => o.cmPerPx, tolerancePx) }))
+  const better = alternatives.filter((a) => a.refuted <= registrationRefuted - SUBSTANTIAL_SHARE)
+  if (registrationRefuted >= MAJOR_SHARE && better.length > 0) {
+    triggers.push('AS_READ_REFUTATION')
+    reasons.push(`the registration (${round6(regAxis('X'))} cm/px) contradicts ${Math.round(registrationRefuted * 100)}% of the chain length as read, ${better.map((b) => `${b.cmPerPx} cm/px only ${Math.round(b.refuted * 100)}%`).join(', ')}`)
+    for (const o of offered) if (o.kind === 'LATTICE') for (const a of o.anchors) evidenceIds.add(a.evidenceId)
+  }
+
+  // T2: a partial segment drives the scale while the label's own primary span is wider.
+  if (solution && solution.relation === 'LEGACY_UNCONFIRMED') {
+    // Only a long statement drives a scale, and only a decisive binding (centred, 25 tolerances long) is the span a label measures.
+    const observations = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === frameId && o.binding?.role === 'PRIMARY' && o.spanPx >= 25 * tolerancePx)
+    const axisLength = (axis: 'X' | 'Y'): number => (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0)
+    for (const s of statements) {
+      if (s.evidence.origin !== 'READ' || !s.evidence.chainId || s.pixelLength < SUBSTANTIAL_SHARE * axisLength(s.axis)) continue
+      const wider = observations.find((o) => o.chainId === s.evidence.chainId && o.rawText === s.evidence.rawText && o.spanPx > s.pixelLength + wallPx)
+      if (!wider) continue
+      triggers.push('PARTIAL_BINDING')
+      reasons.push(`the registration rests on "${s.evidence.rawText}" over ${s.pixelLength} px, while the label is centred on the ${wider.spanPx} px span it measures`)
+      evidenceIds.add(s.evidence.id)
+      break
+    }
+  }
+
+  // T3: two long readings as read, on both axes and different chains, agree on another scale.
+  const extentOn = (axis: 'X' | 'Y'): number => (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0)
+  const longRead = statements.flatMap((s) => (s.pixelLength >= SUBSTANTIAL_SHARE * extentOn(s.axis) ? asRead(s).map((cm) => ({ s, cm })) : []))
+  const supportedLength = longRead.filter((r) => agrees(r.cm, r.s.pixelLength, regAxis(r.s.axis), tolerancePx)).reduce((a, r) => a + r.s.pixelLength, 0)
+  for (const seed of longRead) {
+    const cmPerPx = seed.cm / seed.s.pixelLength
+    if (Math.abs(cmPerPx / regAxis(seed.s.axis) - 1) <= 0.05) continue
+    const agreeing = longRead.filter((r) => agrees(r.cm, r.s.pixelLength, cmPerPx, tolerancePx))
+    const chains = new Set(agreeing.map((r) => r.s.evidence.chainId ?? r.s.evidence.id))
+    const axes = new Set(agreeing.map((r) => r.s.axis))
+    const length = agreeing.reduce((a, r) => a + r.s.pixelLength, 0)
+    if (agreeing.length >= 2 && chains.size >= 2 && axes.size === 2 && length > supportedLength) {
+      triggers.push('OUTER_TOTALS')
+      reasons.push(`${agreeing.length} long readings as printed on both axes agree on ${round6(cmPerPx)} cm/px (${agreeing.map((r) => `${r.cm}/${r.s.pixelLength} px`).join(', ')})`)
+      for (const r of agreeing) evidenceIds.add(r.s.evidence.id)
+      break
+    }
+  }
+  if (triggers.length === 0) return null
+  return { triggers, why: reasons.join('; '), evidenceIds: [...evidenceIds].sort(), registrationRefuted, alternatives }
+}
+
+/** The source conflict of a first reading's base plan, judged on its wall ink's box (else its frame). */
+export function sourceConflictFor(options: StructuralPassOptions, incumbent: StructuralPassResult): SourceConflict | null {
+  const base = incumbent.draft.base
+  if (!base) return null
+  const registration = options.metrics.coordinateRegistrations.find((r) => r.frameId === base.frame.id && r.plane === 'PLAN_XZ')
+  const sheet = planSheet(base.frame, { ...options, sheetCache: options.sheetCache ?? new Map<string, PlanSheet>() })
+  if (!registration || !sheet) return null
+  const judge = wallClusterExtent(sheet.mask, sheet.wallPx)?.rect ?? base.extent
+  return sourceConflictOf(options.metrics, base.frame.id, registration, judge, sheet.wallPx)
+}
+
+// ---------------------------------------------------------------------------
 // the confidence-aware first success (1.3.0, BUILDPLAN-ANALYZER-005B)
 // ---------------------------------------------------------------------------
 
@@ -833,8 +933,14 @@ export function firstReadingNeedsChallenge(metrics: MetricEvidenceSet, incumbent
 }
 
 export type ChallengeOutcome =
-  | { kind: 'KEPT'; why: string; considered: RankedReading[]; counts: PlanResolutionCounts }
-  | { kind: 'REPLACED'; why: string; result: StructuralPassResult; metrics: MetricEvidenceSet; chosen: RankedReading; considered: RankedReading[]; counts: PlanResolutionCounts }
+  | { kind: 'KEPT'; why: string; considered: RankedReading[]; counts: PlanResolutionCounts; conflict?: SourceConflict }
+  | { kind: 'REPLACED'; why: string; result: StructuralPassResult; metrics: MetricEvidenceSet; chosen: RankedReading; considered: RankedReading[]; counts: PlanResolutionCounts; conflict?: SourceConflict }
+  /**
+   * 1.4.0: the drawing contradicts the first reading (a source conflict), a reading it states is better
+   * supported by the drawing itself, and the published figure vetoes it (or nothing verifies it): neither
+   * is built. The figure may not keep a reading the drawing refutes, and may not choose the replacement.
+   */
+  | { kind: 'REFUSED'; why: string; considered: RankedReading[]; counts: PlanResolutionCounts; conflict: SourceConflict; diagnostics: Record<string, number | string | boolean> }
 
 /**
  * Weigh the METRIC alternatives to a first reading that completed on weak
@@ -850,12 +956,14 @@ export type ChallengeOutcome =
  * no worse against the figure. The figure alone never chooses between two
  * readings the drawing supports equally.
  */
-export function challengeFirstReading(options: StructuralPassOptions, incumbent: StructuralPassResult, progress?: ResolverProgress): ChallengeOutcome {
+export function challengeFirstReading(options: StructuralPassOptions, incumbent: StructuralPassResult, progress?: ResolverProgress, context: { conflict?: SourceConflict | null; footprintRefused?: boolean } = {}): ChallengeOutcome {
   const sheetCache = options.sheetCache ?? new Map<string, PlanSheet>()
   const shared: StructuralPassOptions = { ...options, sheetCache }
   const published = options.publishedAreas?.find((a) => a.key === 'footprint_area' && a.unit === 'm2')?.value
   const base = incumbent.draft.base
-  const counts: PlanResolutionCounts = { copies: 1, decompositions: 0, readings: 0, distinctOutlines: 0, compositions: 0, publishedFigure: published === undefined ? 'NONE' : 'SCORED' }
+  const conflict = context.conflict ?? undefined
+  // 1.4.0: a challenge a source conflict raised uses the figure only to verify or veto what the drawing chose.
+  const counts: PlanResolutionCounts = { copies: 1, decompositions: 0, readings: 0, distinctOutlines: 0, compositions: 0, publishedFigure: published === undefined ? 'NONE' : conflict ? 'VERIFIED' : 'SCORED' }
   const registration = base ? options.metrics.coordinateRegistrations.find((r) => r.frameId === base.frame.id && r.plane === 'PLAN_XZ') : undefined
   const sheet = base ? planSheet(base.frame, shared) : undefined
   if (!base || !registration || !sheet) return { kind: 'KEPT', why: 'the first reading has no registered base plan to weigh alternatives on', considered: [], counts }
@@ -879,6 +987,19 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
     const at = metricsAtScale(options.metrics, base.frame.id, scale.cmPerPx, tolerancePx)
     alts.push({ extent: 'CHAIN_RECT', scale, metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: scale.axesMeasured })
   }
+  // 1.4.0: evidence sealed before the metric schema's 1.2.0 carries no metric solution; when the drawing
+  // conflicts with its registration, the scales its long spans state as first read are its alternatives —
+  // the generator the resolver already uses for such evidence. Both axes count only where both are read.
+  if (!solution && conflict) {
+    const judge = cluster ?? base.extent
+    const statements = statementsOn(options.metrics, base.frame.id)
+    const bothAxes = (cmPerPx: number): boolean =>
+      (['X', 'Y'] as const).every((axis) => statements.some((st) => st.axis === axis && st.pixelLength >= 0.15 * (axis === 'X' ? judge.x1 - judge.x0 : judge.y1 - judge.y0) && zeroSubstitution(st).some((cm) => agrees(cm, st.pixelLength, cmPerPx, tolerancePx))))
+    for (const scale of latticeScales(options.metrics, base.frame.id, registration, judge, tolerancePx)) {
+      const at = metricsAtScale(options.metrics, base.frame.id, scale.cmPerPx, tolerancePx)
+      alts.push({ extent: 'CHAIN_RECT', scale, metrics: at.view, reread: at.reread, refutedShare: at.refutedShare, supportedOnBothAxes: bothAxes(scale.cmPerPx) })
+    }
+  }
   const regShare = refutedShareAtRegistration(options.metrics, base.frame.id, registration, tolerancePx)
   // The walls may re-frame the plan only when it was the frame that was weak: a weak scale is
   // answered by the scales the readings support, not by drawing the building somewhere else.
@@ -887,7 +1008,8 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
   if (!framedByChains && sheet.witness && differs(sheet.witness.rect, base.extent) && (!cluster || differs(sheet.witness.rect, cluster)))
     alts.push({ extent: 'WALL_WITNESS', scale: { kind: 'REGISTRATION' }, metrics: options.metrics, reread: new Set(), refutedShare: regShare, supportedOnBothAxes: registrationMeasuredOnBothAxes(solution) })
   counts.decompositions = alts.length
-  const incumbentScore = scoreReading(incumbent.draft, { published, spent: false, refutedShare: regShare, sheet, cluster, supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies, gateRefusals: [] })
+  const incumbentRefusals = context.footprintRefused ? incumbent.layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code) && !g.code.startsWith('FOOTPRINT_AREA')).map((g) => g.code).sort() : []
+  const incumbentScore = scoreReading(incumbent.draft, { published, spent: false, refutedShare: regShare, sheet, cluster, supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies, gateRefusals: incumbentRefusals })
   const incumbentHypothesis: PlanHypothesis = { id: stableId('plan-reading', 'first-reading', { frameId: base.frame.id }), frameId: base.frame.id, annotation: base.frame.roles.annotation, extent: 'CHAIN_RECT', scale: { kind: 'REGISTRATION' }, merge: 'LARGEST_FIRST', faces: 'AS_GRIDDED', mouths: 'AS_DECIDED', departures: [] }
   const incumbentRanked: RankedReading = { hypothesis: incumbentHypothesis, score: incumbentScore, stage: 2 }
   const composed: Array<RankedReading & { result: StructuralPassResult; alt: Alt }> = []
@@ -905,7 +1027,7 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
     }
     progress?.({ stage: 1, index: i + 1, total: alts.length, label: describe(hypothesis) })
     counts.readings += 1
-    const choice = choiceOf(hypothesis, alt)
+    const choice = { ...choiceOf(hypothesis, alt), alignByFitOnly: alt.scale.kind === 'LATTICE' }
     const draft = inferStructuralLayout({ ...shared, metrics: alt.metrics, plan: choice })
     const stage1 = scoreReading(draft, { published, spent: false, refutedShare: alt.refutedShare, sheet, cluster, supportedOnBothAxes: alt.supportedOnBothAxes, otherCopies, gateRefusals: [] })
     if (stage1.hard.length > 0 || stage1.footprint.bucket === 'WRONG' || stage1.masses === 0) {
@@ -922,11 +1044,12 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
   // Better on the drawing's own evidence, never on the published figure alone.
   const bucket = (v: number): number => Math.floor(v / 0.05 + 1e-9)
   const drawingTuple = (r: RankedReading): number[] => [r.score.hard.length, r.score.gateRefusals.length, bucket(r.score.refutedShare), -bucket(r.score.wallCoverage), -r.score.corroborations.length]
-  const strictlyBetter = (a: RankedReading, b: RankedReading): boolean => {
+  const drawingBetter = (a: RankedReading, b: RankedReading): boolean => {
     const [x, y] = [drawingTuple(a), drawingTuple(b)]
     const first = x.findIndex((v, i) => v !== y[i])
-    return first >= 0 && x[first] < y[first] && FOOTPRINT_BUCKETS.indexOf(a.score.footprint.bucket) <= FOOTPRINT_BUCKETS.indexOf(b.score.footprint.bucket)
+    return first >= 0 && x[first] < y[first]
   }
+  const strictlyBetter = (a: RankedReading, b: RankedReading): boolean => drawingBetter(a, b) && FOOTPRINT_BUCKETS.indexOf(a.score.footprint.bucket) <= FOOTPRINT_BUCKETS.indexOf(b.score.footprint.bucket)
   // Among the readings better than the incumbent, the drawing's own evidence ranks them, then the metric
   // evidence's order (the order the alternatives were generated in): the published figure never chooses.
   const byDrawing = (p: (typeof composed)[number], q: (typeof composed)[number]): number => {
@@ -935,7 +1058,30 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
     return i >= 0 ? x[i] - y[i] : alts.indexOf(p.alt) - alts.indexOf(q.alt)
   }
   const winner = composed.filter((c) => c.stage === 2 && acceptable(c) && strictlyBetter(c, incumbentRanked)).sort(byDrawing)[0]
-  if (!winner) return { kind: 'KEPT', why: `${alts.length} metric reading${alts.length === 1 ? '' : 's'} of the base plan weighed; none is better supported by the drawing than the first reading`, considered, counts }
+  if (!winner) {
+    // 1.4.0: the drawing contradicts the first reading, prefers another reading of its own, and the figure
+    // vetoes that one (or nothing verifies it): build neither. Keeping the reading the drawing refutes would
+    // let the figure choose it, and handing the plan on to the resolver would let the figure choose again.
+    // The drawing's preferred reading answers the conflict: another SCALE, which contradicts strictly less of
+    // what was printed. A reading that only frames or tiles the plan differently resolves nothing about it.
+    const bucketOf5 = (v: number): number => Math.floor(v / 0.05 + 1e-9)
+    const preferred = conflict
+      ? composed.filter((c) => c.alt.scale.kind !== 'REGISTRATION' && c.score.hard.length === 0 && c.score.masses > 0 && bucketOf5(c.score.refutedShare) < bucketOf5(incumbentRanked.score.refutedShare) && drawingBetter(c, incumbentRanked)).sort(byDrawing)[0]
+      : undefined
+    if (conflict && preferred) {
+      const f = (r: RankedReading): string => `${r.score.footprint.areaM2.toFixed(1)} m², ${r.score.footprint.bucket}${r.score.footprint.residual !== undefined ? ` (${r.score.footprint.residual >= 0 ? '+' : ''}${(r.score.footprint.residual * 100).toFixed(1)}%)` : ''}`
+      const message = `SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (${conflict.why}). Read at ${describe(preferred.hypothesis)} the plan is better supported by the drawing itself (${Math.round(preferred.score.refutedShare * 100)}% of the stated chain length contradicted, against ${Math.round(incumbentRanked.score.refutedShare * 100)}%), but the published footprint does not verify it (${f(preferred)}; the first reading: ${f(incumbentRanked)}). Neither is built: the figure may refuse a reading, never choose one the drawing refutes. What is missing: a second printed dimension, read as printed, that states one of the two scales`
+      return {
+        kind: 'REFUSED',
+        why: message,
+        considered,
+        counts,
+        conflict,
+        diagnostics: { sourceConflict: conflict.triggers.join(','), registrationRefuted: round6(conflict.registrationRefuted), preferred: summaryOf(preferred), preferredRefuted: round6(preferred.score.refutedShare), firstReading: summaryOf(incumbentRanked), firstRefuted: round6(incumbentRanked.score.refutedShare) },
+      }
+    }
+    return { kind: 'KEPT', why: `${alts.length} metric reading${alts.length === 1 ? '' : 's'} of the base plan weighed; none is better supported by the drawing than the first reading`, considered, counts, ...(conflict ? { conflict } : {}) }
+  }
   const h = winner.hypothesis
   const reasons: LayoutGateReason[] = [
     {
@@ -967,7 +1113,25 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
 /** What a trace records about a challenge: the outcome, the counts, the readings weighed. */
 export function challengeRecord(outcome: ChallengeOutcome, why: string): Record<string, number | string | boolean> {
   const out: Record<string, number | string | boolean> = { resolverVersion: PLAN_RESOLVER_VERSION, outcome: outcome.kind, trigger: why, ...outcome.counts }
-  if (outcome.kind === 'REPLACED') out.chosen = summaryOf(outcome.chosen)
+  if (outcome.conflict) {
+    out.sourceConflict = outcome.conflict.triggers.join(',')
+    out.registrationRefuted = round6(outcome.conflict.registrationRefuted)
+    if (outcome.conflict.evidenceIds.length > 0) out.conflictEvidence = outcome.conflict.evidenceIds.slice(0, 8).join(',')
+  }
+  if (outcome.kind === 'REPLACED') {
+    // 1.4.0: the same facts as a resolution records, so a judge holds a challenge to the same rules.
+    const c = outcome.chosen.score
+    out.chosen = summaryOf(outcome.chosen)
+    out.chosenDepartures = outcome.chosen.hypothesis.departures.join(',')
+    out.chosenAreaM2 = c.footprint.areaM2
+    out.chosenBucket = c.footprint.bucket
+    if (c.footprint.residual !== undefined) out.chosenResidualPct = round6(c.footprint.residual * 100)
+    out.chosenMasses = c.masses
+    out.chosenCorroborations = c.corroborations.join(',')
+    out.chosenRefuted = round6(c.refutedShare)
+    if (outcome.chosen.hypothesis.scale.kind !== 'REGISTRATION') out.chosenCmPerPx = outcome.chosen.hypothesis.scale.cmPerPx
+  }
+  if (outcome.kind === 'REFUSED') Object.assign(out, outcome.diagnostics)
   outcome.considered.slice(0, 4).forEach((r, i) => (out[`reading${i + 1}`] = summaryOf(r)))
   return out
 }

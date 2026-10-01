@@ -281,7 +281,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
         ? { rect: cluster.rect, weak: false, why: cluster.why }
         : witnessed
           ? { rect: witnessed.rect, weak: true, why: `the wall witness: ${witnessed.why}`, provenance: { x: 'WALL_GEOMETRY_EXTENT', y: 'WALL_GEOMETRY_EXTENT' } }
-          : planExtent(chains, bands, wallPx, sheet.witness)
+          : planExtent(chains, bands, wallPx, sheet.witness, options.metrics.dimensionObservations?.filter((o) => o.frameId === frame.id))
       if (!extent) {
         const longBands = bands.filter((b) => b.length >= wallPx * 2.5).length
         skipped.push({ frameId: frame.id, code: 'NO_EXTENT', longBands, why: `no dimension chain on it read a value and its ${longBands} long wall band${longBands === 1 ? '' : 's'} do not run along both axes` })

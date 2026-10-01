@@ -36,8 +36,8 @@ import { round6 } from '@buildapp/source-common'
 import type { Checkpoint, PixelRect } from '@buildapp/source-common'
 import { connectedComponents, dilate, dominantBandThickness, erode } from '@buildapp/source-cv'
 import type { Band, Mask } from '@buildapp/source-cv'
-import type { CoordinateRegistration, DimensionChain } from '@buildapp/source-metrics'
-import { exteriorSpan, framingChains } from './plan-extent.js'
+import type { CoordinateRegistration, DimensionChain, DimensionObservation } from '@buildapp/source-metrics'
+import { exteriorSpan, framingChains, outerTotalSpans } from './plan-extent.js'
 import type { ChainRoleRecord, WallWitness } from './plan-extent.js'
 import { BOUNDARY_EVIDENCE_VERSION, assignCallouts, cornerLegs, readWallLine, solidLayer, withCallout } from './boundary-evidence.js'
 import type { BoundaryGap, GapCallout, GapClass, SolidLayer, WallLine } from './boundary-evidence.js'
@@ -831,7 +831,7 @@ export type PlanExtent = {
   provenance?: { x: ExtentProvenance; y: ExtentProvenance }
 }
 
-export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS' | 'WALL_GEOMETRY_EXTENT'
+export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS' | 'WALL_GEOMETRY_EXTENT' | 'OUTER_TOTAL_MARKS'
 
 /**
  * With a wall witness (005B), a chain drawn across the building may not frame
@@ -846,7 +846,51 @@ export type ExtentProvenance = 'DIMENSION_CHAIN_EXTENT' | 'EXTERIOR_CHAIN_TICKS'
  * widen the building. Provenance says, per axis, what the frame came from; a
  * legacy frame the walls had to supply (weak) says so too.
  */
-export function planExtent(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
+export function planExtent(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null, observations?: readonly DimensionObservation[]): PlanExtent | null {
+  const extent = planExtentByWalls(chainsIn, bands, wallPx, witness)
+  return observations ? outspannedByOuterTotal(extent, chainsIn, observations, wallPx) : extent
+}
+
+/**
+ * 005D (§2.5 of the contract): an axis framed by a chain drawn across the building, while the
+ * drawing states the building's overall dimension on that axis in a line beside it, is framed by
+ * that overall line's end ticks instead — read or not. The overall line is the dimension graph's
+ * statement of where the faces are (`outerTotalSpans`): its ends are ticks, it crosses no wall, a
+ * label is centred on the whole of it, and it lies outside the frame on the other axis. The framing
+ * chain must cross wall-thick ink (a wall face among its marks): a read line beside the building is
+ * never outspanned this way. As for every refusal, the frame only ever widens.
+ */
+function outspannedByOuterTotal(extent: PlanExtent | null, chains: readonly DimensionChain[], observations: readonly DimensionObservation[], wallPx: number): PlanExtent | null {
+  if (!extent) return extent
+  const totals = outerTotalSpans(chains, observations)
+  if (totals.length === 0) return extent
+  let rect = extent.rect
+  const provenance = { ...(extent.provenance ?? { x: 'DIMENSION_CHAIN_EXTENT' as ExtentProvenance, y: 'DIMENSION_CHAIN_EXTENT' as ExtentProvenance }) }
+  const refused: string[] = [...(extent.refused ?? [])]
+  const reasons: string[] = []
+  for (const a of ['HORIZONTAL', 'VERTICAL'] as const) {
+    const framed = dimensionedAxis(chains, a)
+    if (!framed) continue
+    const chain = chains.find((c) => c.id === framed.chainId)
+    if (!chain?.marks?.some((m) => m.class !== 'REJECTED' && m.reasons.includes('WEDGE_NOT_STROKE'))) continue
+    const [lo, hi] = a === 'HORIZONTAL' ? [rect.x0, rect.x1] : [rect.y0, rect.y1]
+    const [olo, ohi] = a === 'HORIZONTAL' ? [rect.y0, rect.y1] : [rect.x0, rect.x1]
+    const outer = totals
+      .filter((t) => t.axis === a && (t.baselinePx < olo || t.baselinePx > ohi))
+      .filter((t) => t.lo <= framed.lo + wallPx && t.hi >= framed.hi - wallPx && t.hi - t.lo > framed.hi - framed.lo + 2 * wallPx)
+      .filter((t) => t.hi - t.lo > hi - lo + 2 * wallPx)
+      .sort((p, q) => q.hi - q.lo - (p.hi - p.lo) || (p.chainId < q.chainId ? -1 : 1))[0]
+    if (!outer) continue
+    rect = a === 'HORIZONTAL' ? { ...rect, x0: round6(Math.min(rect.x0, outer.lo)), x1: round6(Math.max(rect.x1, outer.hi)) } : { ...rect, y0: round6(Math.min(rect.y0, outer.lo)), y1: round6(Math.max(rect.y1, outer.hi)) }
+    provenance[a === 'HORIZONTAL' ? 'x' : 'y'] = 'OUTER_TOTAL_MARKS'
+    refused.push(framed.chainId)
+    reasons.push(`its ${a === 'HORIZONTAL' ? 'width' : 'depth'} was framed by a chain drawn across the building (${Math.round(framed.hi - framed.lo)} px); the overall dimension printed beside it spans ${Math.round(outer.hi - outer.lo)} px between its end ticks, with its label "${outer.labelRaw}" centred on the whole of it`)
+  }
+  if (reasons.length === 0) return extent
+  return { ...extent, rect, weak: true, why: `${extent.why}; ${reasons.join('; ')}`, refused: [...new Set(refused)].sort(), provenance }
+}
+
+function planExtentByWalls(chainsIn: readonly DimensionChain[], bands: readonly Band[], wallPx: number, witness?: WallWitness | null): PlanExtent | null {
   const legacy = planExtentOf(chainsIn, bands, wallPx)
   if (witness === undefined) return legacy
   const framing = framingChains(chainsIn, witness, wallPx)
