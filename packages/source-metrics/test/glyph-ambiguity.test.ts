@@ -76,4 +76,33 @@ describe('§28 glyph ambiguity: a misread is named, or it is no dimension', () =
       expect(values.includes(3575) || bounded(t).includes('3575'), `${t.text}`).toBe(true)
     }
   })
+
+  /**
+   * Declared, not hidden (post-review D P0-1): under a 3×3 blur the template reader reads some figures as a
+   * different dimension with the true digit outside its bounded readings — the failure this file looks for.
+   * 005D does not change the reader; `it.fails` turns green the day the contract holds for blurred figures.
+   */
+  it.fails('KNOWN READER LIMIT — blurred figures: a misread is named, or it is no dimension', () => {
+    for (const text of ['1200', '760']) {
+      const c = new Canvas(400, 160)
+      c.text(text, 40, 60, 16, { slant: 0.18 })
+      const r = c.toRaster()
+      const g = (x: number, y: number): number => (x < 0 || y < 0 || x >= r.width || y >= r.height ? 255 : r.data[(y * r.width + x) * 4])
+      const out = new Uint8ClampedArray(r.data.length)
+      for (let y = 0; y < r.height; y += 1) {
+        for (let x = 0; x < r.width; x += 1) {
+          let sum = 0
+          for (let dy = -1; dy <= 1; dy += 1) for (let dx = -1; dx <= 1; dx += 1) sum += g(x + dx, y + dy) * (dx === 0 && dy === 0 ? 4 : dx === 0 || dy === 0 ? 2 : 1)
+          const o = (y * r.width + x) * 4
+          out[o] = out[o + 1] = out[o + 2] = sum / 16
+          out[o + 3] = 255
+        }
+      }
+      for (const t of readNumbers({ width: r.width, height: r.height, data: out }, { hypotheses: true }).tokens) {
+        const values = dimensionsOf(t)
+        if (values.length === 0) continue
+        expect(values.includes(Number(text)) || bounded(t).includes(text), `${text} read ${t.text}`).toBe(true)
+      }
+    }
+  })
 })

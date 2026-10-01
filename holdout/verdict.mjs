@@ -65,7 +65,15 @@ if (summary && model) {
     resolvedWithAWitness: resolved ? { chosen: resolution?.chosen ?? null, corroborations: resolution?.chosenCorroborations ?? '', holds: Boolean(resolution?.chosenCorroborations) } : { holds: true, note: 'the first reading held' },
     replacedByTheDrawing:
       challenge?.outcome === 'REPLACED'
-        ? { chosen: challenge.chosen ?? null, trigger: challenge.trigger ?? null, publishedFigure: challenge.publishedFigure ?? null, holds: Boolean(challenge.trigger) && challenge.publishedFigure !== 'SPENT' }
+        ? {
+            chosen: challenge.chosen ?? null,
+            sourceConflict: challenge.sourceConflict ?? null,
+            publishedFigure: challenge.publishedFigure ?? null,
+            corroborations: challenge.chosenCorroborations ?? '',
+            // Replaced because the drawing contradicted the first reading (a named source conflict), the figure
+            // only verifying the replacement; or, without a conflict, chosen with a witness besides the figure.
+            holds: challenge.sourceConflict ? ['VERIFIED', 'NONE'].includes(challenge.publishedFigure) : Boolean(challenge.chosenCorroborations),
+          }
         : { holds: true, note: challenge ? `the challenge ${challenge.outcome === 'KEPT' ? 'kept' : 'did not replace'} the first reading` : 'no challenge' },
   }
   out.conditions = conditions

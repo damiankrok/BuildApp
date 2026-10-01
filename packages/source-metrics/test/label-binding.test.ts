@@ -202,3 +202,55 @@ describe('§30 independence: one ink is one witness', () => {
     expect(solution.independentWitnesses).toBeLessThanOrEqual(1)
   })
 })
+
+describe('post-review (005D D P1-2): the rules a test must fail without', () => {
+  it('I2: one ink read two ways on two chains (upright on one, turned on the other) witnesses neither', () => {
+    const chains = [hChain(700, SPAN), vChain(372, [420, 1000]), hChain(300, [100, 400])]
+    const upright = token('1055', { x0: 360, x1: 396, y0: 676, y1: 690 }, 'HORIZONTAL')
+    const turned = token('1250', { x0: 360, x1: 396, y0: 676, y1: 690 }, 'ROTATED_CW')
+    const { metric, solution } = solve(chains, [upright, turned, hLabel('600', 300, 250)])
+    const ofInk = metric.observations.filter((o) => o.rawText === '1055' || o.rawText === '1250')
+    expect(new Set(ofInk.map((o) => o.textRegionId)).size).toBe(1)
+    expect(ofInk.every((o) => o.binding?.role === 'AMBIGUOUS')).toBe(true)
+    for (const h of solution.hypotheses) if (Math.abs(h.cmPerPixel - 1055 / 556) < 0.01 || Math.abs(h.cmPerPixel - 1250 / 580) < 0.01) expect(h.independentGroups).toBe(0)
+  })
+
+  it('V3: an overall ink whose own alternative fits the page vote’s scale cannot replace the vote', () => {
+    // 720 px printed 1601 (2.2236 cm/px), half-seen as 1801 (2.5014); the vote's 2.5 comes from a reading too
+    // short to witness anything on its own.
+    const chains = [hChain(760, [60, 780]), vChain(820, [100, 140])]
+    const tokens = [hLabel('1601', 760, 420, { 1: [{ char: '8', ratio: 0.8 }] }), vLabel('100', 820, 120)]
+    const { solution, metric, legacy } = solve(chains, tokens)
+    expect(legacy.pooledScale).toBeCloseTo(2.5, 1)
+    const ink = metric.observations.find((o) => o.rawText === '1601' && o.binding?.role === 'PRIMARY')
+    expect(solution.topology?.neutralObservationIds).toContain(ink?.id)
+    expect(solution.relation).not.toBe('REPLACED')
+    expect(solution.confidence).toBe('INCONCLUSIVE')
+  })
+})
+
+describe('post-review (005D C P1-1, P1-2): conflicts the pair decides, and copies that count once', () => {
+  const s = 1055 / 556
+
+  it('a total and two children agreeing against one misread child is decided by the pair, not INCONCLUSIVE', () => {
+    const a = 100 + 400 / s
+    const b = a + 300 / s
+    const chains = [hChain(700, SPAN), hChain(735, [100, a, b, 656])]
+    // the middle child prints 300 and is read 360; the total and the other two children agree on 1055/556
+    const tokens = [hLabel('1055', 700, mid(...SPAN)), hLabel('400', 735, mid(100, a)), hLabel('360', 735, mid(a, b)), hLabel('355', 735, mid(b, 656))]
+    const { solution, metric, selected } = solve(chains, tokens)
+    expect(metric.relations.some((r) => r.kind === 'CONFLICTS_WITH')).toBe(true)
+    expect(solution.topology?.hierarchy?.undecidedConflict).toBeUndefined()
+    expect(close(selected?.cmPerPixel, s)).toBe(true)
+    expect(solution.confidence).not.toBe('INCONCLUSIVE')
+  })
+
+  it('one dimension drawn on twin lines, its value printed on each, is one witness (I5)', () => {
+    const chains = [hChain(700, SPAN), hChain(730, SPAN)]
+    const { solution, metric, selected } = solve(chains, [hLabel('1055', 700, mid(...SPAN)), hLabel('1055', 730, mid(...SPAN))])
+    expect(metric.relations.some((r) => r.kind === 'PARALLEL_COPY_OF')).toBe(true)
+    expect(close(selected?.cmPerPixel, s)).toBe(true)
+    expect(selected?.independentGroups).toBe(1)
+    expect(solution.confidence).toBe('WEAK')
+  })
+})

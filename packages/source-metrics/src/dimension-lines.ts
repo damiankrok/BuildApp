@@ -385,7 +385,9 @@ export function classifyMarks(line: DimensionLine, hitRuns: ReadonlyArray<[numbe
     return [sum[0] / n, sum[1] / n, sum[2] / n]
   }
   const norm = (v: readonly number[]): number => Math.hypot(v[0], v[1], v[2])
-  const rowOf = (d: number): number => Math.round(b + d)
+  // Symmetric about the baseline (post-review A P1-1): on a line of even thickness the baseline sits on a
+  // half pixel, and rounding both ways up put one side's rows a pixel nearer the line than the other's.
+  const rowOf = (d: number): number => (d < 0 ? Math.floor(b + d) : Math.ceil(b + d))
   const from = Math.round(line.fromPx)
   const to = Math.round(line.toPx)
 

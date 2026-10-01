@@ -12,6 +12,7 @@ import { runLengthBands } from '@buildapp/source-cv'
 import { bandWallThickness, chainRole, decomposePlan, planExtent, wallWitness } from '../src/index.js'
 import { WALL, chain, mask, partition, registration, sheet, walls } from './plan.js'
 import { BLACK, fillRect } from '../../source-cv/test/draw.js'
+import type { DimensionChain, DimensionObservation } from '@buildapp/source-metrics'
 
 const BANDS = { minThickness: 6, maxThickness: 30, minLength: 24 }
 
@@ -199,5 +200,44 @@ describe('post-review (005B): side walls running on past a facade frame a terrac
     expect(d.envelope?.rect.y1).toBeLessThanOrEqual(281)
     const built = d.regions.filter((g) => g.classification === 'BUILT')
     expect(Math.max(...built.map((g) => g.rect.y1))).toBeLessThanOrEqual(281)
+  })
+})
+
+describe('005D: an overall line beside the building frames an axis a line across it had framed', () => {
+  const { bands, wallPx, witness } = surveyOf(building())
+  const width = chain('width', 'HORIZONTAL', [40, 280], { baselinePx: 20 })
+  type Mark = NonNullable<DimensionChain['marks']>[number]
+  const mark = (atPx: number, cls: Mark['class'] = 'TICK', reasons: Mark['reasons'] = []): Mark => ({ atPx, class: cls, reasons })
+  // A read depth chain drawn ACROSS the building: it crosses a wall face (a wide dark crossing) and frames 60–300.
+  const across = { ...chain('across', 'VERTICAL', [60, 300], { baselinePx: 160 }), marks: [mark(60, 'TICK', ['WEDGE_NOT_STROKE']), mark(300)] }
+  // The overall depth printed beside the building, end tick to end tick, its label centred on the whole of it.
+  const overall = { ...chain('overall', 'VERTICAL', [40, 320], { baselinePx: 360, read: false }), marks: [mark(40), mark(320)] }
+  const label = (chainId: string, from: number, to: number, role: 'PRIMARY' | 'ALTERNATIVE' = 'PRIMARY'): DimensionObservation =>
+    ({ id: `obs-${chainId}`, frameId: 'frame-test', assetId: 'asset-test', chainId, textRegionId: 'r', orientation: 'ROTATED_CW', rawText: '1400', valueCm: 1400, axis: 'Y', fromPx: from, toPx: to, spanPx: to - from, impliedCmPerPx: 1400 / (to - from), independence: 'INDEPENDENT', status: 'RAW', ocrScore: 0.5, ocrConfidence: 0.6, leadingZero: false, binding: { role, offsetShare: 0.01, questionableEnds: 0, skipped: { tick: 0, questionable: 0, rejected: 0 } } }) as DimensionObservation
+
+  it('widens the depth to the overall line’s end ticks, weak, naming the chain it outspanned', () => {
+    const e = planExtent([width, across, overall], bands, wallPx, witness, [label('overall', 40, 320)])
+    expect(e?.rect.y0).toBe(40)
+    expect(e?.rect.y1).toBe(320)
+    expect(e?.provenance?.y).toBe('OUTER_TOTAL_MARKS')
+    expect(e?.refused).toContain('across')
+    expect(e?.weak).toBe(true)
+  })
+
+  it('does nothing when no label is bound to the whole overall line as its primary span', () => {
+    const before = planExtent([width, across, overall], bands, wallPx, witness)
+    expect(planExtent([width, across, overall], bands, wallPx, witness, [label('overall', 40, 320, 'ALTERNATIVE')])).toEqual(before)
+  })
+
+  it('does nothing when the framing chain crosses no wall face (a read line beside the building is not outspanned)', () => {
+    const beside = { ...across, marks: [mark(60), mark(300)] }
+    const before = planExtent([width, beside, overall], bands, wallPx, witness)
+    expect(planExtent([width, beside, overall], bands, wallPx, witness, [label('overall', 40, 320)])).toEqual(before)
+  })
+
+  it('does nothing when the overall line itself crosses a wall face', () => {
+    const crossing = { ...overall, marks: [mark(40), mark(180, 'TICK', ['WEDGE_NOT_STROKE']), mark(320)], ticksPx: [40, 180, 320] }
+    const before = planExtent([width, across, crossing], bands, wallPx, witness)
+    expect(planExtent([width, across, crossing], bands, wallPx, witness, [label('overall', 40, 320)])).toEqual(before)
   })
 })

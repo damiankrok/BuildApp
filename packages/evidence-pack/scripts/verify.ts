@@ -21,6 +21,8 @@ import { FORBIDDEN_IN_SVG, PACK_BOUNDS, PACK_FILES } from '../src/index.js'
 import type { PackManifest } from '../src/index.js'
 
 const PREVIEW = '16-final-model-preview.png'
+/** Independent of the writer's denylist (post-review D): the only elements an analyzer-drawn layer uses. */
+const ALLOWED_SVG_ELEMENTS = new Set(['svg', 'g', 'rect', 'line', 'circle', 'polygon', 'polyline', 'text', 'tspan', 'title', 'desc'])
 
 function packsUnder(dir: string): string[] {
   if (!existsSync(dir)) return []
@@ -49,6 +51,7 @@ export function verifyPack(dir: string): string[] {
     if (f.name.endsWith('.svg')) {
       const text = bytes.toString('utf8')
       for (const re of FORBIDDEN_IN_SVG) if (re.test(text)) problems.push(`${f.name}: embeds ${re}`)
+      for (const m of text.matchAll(/<([a-zA-Z][\w:-]*)/g)) if (!ALLOWED_SVG_ELEMENTS.has(m[1])) problems.push(`${f.name}: a <${m[1]}> element, which no analyzer layer draws`)
       const elements = (text.match(/<(?!\/)[a-z]/g) ?? []).length
       if (elements > PACK_BOUNDS.svgElements + 16) problems.push(`${f.name}: ${elements} elements, over the bound`)
       if (f.name !== 'evidence-summary.svg' && !listed.has(f.name.replace(/\.svg$/, '.json'))) problems.push(`${f.name}: no JSON sidecar`)

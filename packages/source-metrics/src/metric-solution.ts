@@ -290,19 +290,26 @@ export function bindingsFor(chain: RawChain, entries: readonly ChainToken[], idx
 }
 
 /**
- * The span a label measures (B2–B4): among the candidates centred within `centred`, the one ending
- * on fewer questionable marks, then the better centred, then the one across fewer ticks. A
- * questionable end must not win on centring alone: a label printed off centre to clear a planter
- * is "centred" on the planter-to-planter span. When another centred candidate of a different
- * length ties with it (the same questionable ends, centring within `ambiguity`), the label is
- * AMBIGUOUS and measures nothing decisively; with no centred candidate at all it is UNCENTRED.
+ * The span a label measures (B2–B4; post-review A P0-1, B P1-3). Centring decides: among the candidates
+ * centred within `centred`, the best-centred one, then the one across fewer ticks. A questionable end
+ * may only pick a LONGER span that encloses the best-centred one and is centred within `ambiguity` of
+ * it, ending on fewer questionable marks: a label printed off centre to clear a planter is "centred" on
+ * the planter-to-planter span, and the dimension it states is the one between clean ticks. A doubt
+ * about an end never hands a label to a span it is not centred on. When another centred candidate of a
+ * different length is within `ambiguity` of the primary's centring, the label is AMBIGUOUS and measures
+ * nothing decisively; with no centred candidate at all it is UNCENTRED.
  */
 export function primaryBinding(bindings: readonly SpanBinding[]): { primary?: SpanBinding; ambiguous: boolean } {
   const eligible = bindings.filter((b) => b.offsetShare <= BINDING_BOUNDS.centred)
-  const ranked = [...eligible].sort((a, b) => a.questionableEnds - b.questionableEnds || a.offsetShare - b.offsetShare || a.skipped.tick - b.skipped.tick || a.from - b.from || a.to - b.to)
-  const primary = ranked[0]
-  if (!primary) return { ambiguous: false }
-  const ambiguous = ranked.slice(1).some((b) => b.questionableEnds === primary.questionableEnds && b.offsetShare - primary.offsetShare < BINDING_BOUNDS.ambiguity && Math.abs(Math.log(b.px / primary.px)) >= BINDING_BOUNDS.distinct)
+  const ranked = [...eligible].sort((a, b) => a.offsetShare - b.offsetShare || a.skipped.tick - b.skipped.tick || a.from - b.from || a.to - b.to)
+  const best = ranked[0]
+  if (!best) return { ambiguous: false }
+  const enclosesBest = (b: SpanBinding): boolean => b !== best && b.from <= best.from && b.to >= best.to && (b.from < best.from || b.to > best.to)
+  const enclosing = ranked.find((b) => enclosesBest(b) && b.questionableEnds < best.questionableEnds && b.offsetShare - best.offsetShare < BINDING_BOUNDS.ambiguity)
+  const primary = enclosing ?? best
+  // The span the enclosing reading was preferred to is that choice, not a rival to it.
+  const settled = (b: SpanBinding): boolean => enclosing !== undefined && b === best
+  const ambiguous = ranked.some((b) => b !== primary && !settled(b) && b.offsetShare < primary.offsetShare + BINDING_BOUNDS.ambiguity && Math.abs(Math.log(b.px / primary.px)) >= BINDING_BOUNDS.distinct)
   return { primary, ambiguous }
 }
 
@@ -715,6 +722,18 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   }
   witnesses.sort((a, b) => b.weight - a.weight || (a.record.id < b.record.id ? -1 : 1))
   const bounded = witnesses.slice(0, METRIC_BOUNDS.observations)
+  // 005D (I5, post-review C P1-2): one dimension drawn twice — the same marks on a parallel line a few label
+  // heights away — is one statement, however many times its value is printed. Of the readings bound to the
+  // same span on twin lines the heaviest counts; the others stay on the record, uncounted.
+  const twins = parallelCopiesOf(chains, medianLabelHeight(labels))
+  const statementOf = new Map<string, number>()
+  for (const w of bounded) {
+    if (!w.decisive) continue
+    const key = `${twins.get(w.chain) ?? w.chain}|${Math.round(w.record.fromPx)}|${Math.round(w.record.toPx)}`
+    const first = statementOf.get(key)
+    if (first === undefined) statementOf.set(key, w.chain)
+    else if (first !== w.chain) w.decisive = false
+  }
 
   // --- 5. the scales the witnesses support -------------------------------------
   const longestOn = (axis: 'HORIZONTAL' | 'VERTICAL'): number => Math.max(1, ...chains.filter((c) => c.axis === axis).map((c) => c.ticks[c.ticks.length - 1].atPx - c.ticks[0].atPx))
@@ -775,8 +794,17 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   let undecidedRival = false
   if (selected) {
     const countedOf = (h: ScaleHypothesis): Obs[] => (clusterOf.get(h.id)?.members ?? []).filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive)
+    // Within the pixel tolerance of both spans, the rival's capped at the ink's own (post-review B P1-1): a
+    // rival resting on a short reading lends at most one more tolerance to the long one it would make neutral.
     const widest = (h: ScaleHypothesis): number => Math.max(1, ...countedOf(h).map((w) => w.px))
-    const fitsOther = (w: Obs, other: ScaleHypothesis): boolean => w.alts.some((v) => Math.abs(v / other.cmPerPixel - w.px) <= tol * (1 + w.px / widest(other)))
+    const fitsOther = (w: Obs, other: ScaleHypothesis): boolean => w.alts.some((v) => Math.abs(v / other.cmPerPixel - w.px) <= tol * (1 + Math.min(1, w.px / widest(other))))
+    // Standing: both axes, corroboration, an overall reading — the first three places of the evidence tuple.
+    const standing = (e: Evidence): number[] => evidenceTuple(e).slice(0, 3)
+    const lowerStanding = (a: Evidence, b: Evidence): boolean => {
+      const [x, y] = [standing(a), standing(b)]
+      const i = x.findIndex((v, k) => v !== y[k])
+      return i >= 0 && x[i] < y[i]
+    }
     const remaining = (h: ScaleHypothesis, other: ScaleHypothesis): { kept: Obs[]; neutral: Obs[]; evidence: Evidence } => {
       const kept = countedOf(h).filter((w) => !fitsOther(w, other))
       const neutral = countedOf(h).filter((w) => fitsOther(w, other))
@@ -788,6 +816,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       if (a.neutral.length === 0 && b.neutral.length === 0) continue
       if (b.kept.length > 0 && compareEvidence(b.evidence, a.evidence) < 0) {
         for (const w of [...a.neutral, ...b.neutral]) rivalNeutral.add(w.record.id)
+        // Neutrality never promotes a scale of lower standing than the strongest's whole evidence: then
+        // nothing decides between them (post-review B P1-1).
+        if (lowerStanding(other, strongest)) {
+          undecidedRival = true
+          break
+        }
         ;[selected, rival] = [other, strongest]
         break
       }
@@ -807,7 +841,13 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   // half-saw, it fits the other one too. Its as-read value says one scale; its own alternative the
   // other; which it is was never read. Asked only when the two scales are distinct.
   const counts = (w: Obs): boolean => w.record.independence === 'INDEPENDENT' && w.decisive
-  const distinctFromLegacy = selected !== undefined && L !== undefined && Math.abs(Math.log(selected.cmPerPixel / L)) >= DISTINCT_RATIO
+  const agreeTol = (h: ScaleHypothesis): number => {
+    const longest = Math.max(1, ...bounded.filter((w) => h.witnessIds.includes(w.record.id) && w.record.independence === 'INDEPENDENT' && w.decisive).map((w) => w.px))
+    return Math.max(0.012, tol / longest)
+  }
+  // Asked whenever the selection would not simply confirm the vote (post-review B P1-2): between the
+  // confirmation tolerance and the distinct ratio a selection was neither confirmed nor checked.
+  const distinctFromLegacy = selected !== undefined && L !== undefined && Math.abs(Math.log(selected.cmPerPixel / L)) > agreeTol(selected)
   const neutralAt = (w: Obs, cm: number | undefined): boolean => cm !== undefined && w.alts.some((v) => Math.abs(v / cm - w.px) <= tol)
   const neutral = new Set<string>()
   const legacySupport: Obs[] = []
@@ -830,10 +870,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     ...shareEvidence([...legacyRegions.values()], shareOf),
   }
   const legacyAnchors = legacy.solved.flatMap((s) => s.segments).filter((g) => g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED')
-  const agreeTol = (h: ScaleHypothesis): number => {
-    const longest = Math.max(1, ...bounded.filter((w) => h.witnessIds.includes(w.record.id) && w.record.independence === 'INDEPENDENT' && w.decisive).map((w) => w.px))
-    return Math.max(0.012, tol / longest)
-  }
+
   let relation: FrameMetricSolution['relation']
   let confidence: MetricConfidence
   // The selected scale's deciding evidence against the vote: its counted witnesses less those its
@@ -851,7 +888,9 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const conflicts = dimensionHierarchy(input.frameId, chains, chainIds, [], observationsAsRead, labelHeight).filter((r) => r.kind === 'CONFLICTS_WITH')
     return conflicts.some((r) => {
       const inPair = (w: Obs): boolean => chainIds[w.chain] === r.fromChainId || chainIds[w.chain] === r.toChainId
-      return selectedMembers.some(inPair) && rivalMembers.some(inPair) && [...selectedMembers, ...rivalMembers].every(inPair)
+      // Undecided only when the side that ranks first does not also outnumber the other: a total and two
+      // children agreeing against one misread child is decided by the pair itself (post-review C P1-1).
+      return selectedMembers.some(inPair) && rivalMembers.some(inPair) && [...selectedMembers, ...rivalMembers].every(inPair) && selectedMembers.length <= rivalMembers.length
     })
   })()
   const own: MetricConfidence = undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : selected ? confidenceOf(selected, rival) : 'INCONCLUSIVE'
@@ -1149,6 +1188,27 @@ export function chainRelations(frameId: string, chains: readonly RawChain[], cha
 // 005D: the dimension hierarchy, checked on values as read
 // ---------------------------------------------------------------------------
 
+/**
+ * Lines that are one line drawn twice (005D I5): same axis, at most four label heights apart, the same
+ * number of non-rejected marks, each within 2 px of its twin's. Each line maps to the first line of its group.
+ */
+function parallelCopiesOf(chains: readonly RawChain[], labelHeight: number): Map<number, number> {
+  const gap = 4 * Math.max(1, labelHeight)
+  const marksOf = (c: RawChain): number[] => c.ticks.filter((t) => t.class !== 'REJECTED').map((t) => t.atPx)
+  const out = new Map<number, number>()
+  for (let a = 0; a < chains.length; a += 1) {
+    if (out.has(a)) continue
+    const A = marksOf(chains[a])
+    if (A.length < 2) continue
+    for (let b = a + 1; b < chains.length; b += 1) {
+      if (out.has(b) || chains[b].axis !== chains[a].axis || Math.abs(chains[b].baselinePx - chains[a].baselinePx) > gap) continue
+      const B = marksOf(chains[b])
+      if (B.length === A.length && A.every((m, i) => Math.abs(m - B[i]) <= 2)) out.set(b, a)
+    }
+  }
+  return out
+}
+
 const medianLabelHeight = (labels: readonly TextToken[]): number => {
   const h = labels.filter((t) => t.glyphs.length >= 2).map((t) => t.height).sort((a, b) => a - b)
   return h.length > 0 ? h[Math.floor(h.length / 2)] : 14
@@ -1211,10 +1271,13 @@ export function dimensionHierarchy(
         continue
       }
       // Each span of this line between two of its marks may be the total of a run of the other's
-      // segments: the whole line over a finer one, or one segment of a middle line over an inner one.
+      // segments: the whole line over a finer one, or one segment of a middle line over an inner one —
+      // and so may the span a label on it is bound to, across marks it skips (post-review A P1-3: one
+      // extra crossing on a total line must not hide the total from the check).
+      const spansOfA: Array<[number, number]> = A.slice(0, -1).map((m, i) => [m, A[i + 1]])
+      for (const o of asRead) if (o.chain === a && !spansOfA.some(([x, y]) => near(x, o.fromPx) && near(y, o.toPx))) spansOfA.push([o.fromPx, o.toPx])
       let totals = 0
-      for (let i = 0; i + 1 < A.length; i += 1) {
-        const [s0, s1] = [A[i], A[i + 1]]
+      for (const [s0, s1] of spansOfA) {
         const k = B.findIndex((m) => near(m, s0))
         const l = B.findIndex((m) => near(m, s1))
         if (k < 0 || l < k + 2) continue

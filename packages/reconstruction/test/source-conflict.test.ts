@@ -16,8 +16,9 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { DimensionChain, DimensionObservation, FrameMetricSolution, MetricEvidence, MetricEvidenceSet, OcrToken } from '@buildapp/source-metrics'
-import { sourceConflictOf } from '../src/index.js'
-import { WALL, metricsOf, registration } from './plan.js'
+import { ReconstructionFailure, reconstructV2, sourceConflictOf } from '../src/index.js'
+import type { SolverTraceEvent } from '../src/index.js'
+import { WALL, graphOf, metricsOf, planFrame, registration, sheet, walls } from './plan.js'
 
 const FRAME = 'frame-plan'
 const JUDGE = { x0: 0, y0: 0, x1: 460, y1: 480 }
@@ -208,5 +209,68 @@ describe('T3 OUTER_TOTALS', () => {
       { chain: 'cy2', axis: 'Y', px: 440, cm: 2200 },
     ])
     expect(conflictOf(m)?.triggers ?? []).not.toContain('OUTER_TOTALS')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// post-review (005D, C P0-1): the figure verifies the drawing's choice, never chooses among its scales
+// ---------------------------------------------------------------------------
+
+describe('the published figure never chooses among the scales the drawing states', () => {
+  // The first-success house (5 cm/px registered) whose readings as printed state two scales: 4.0 cm/px
+  // contradicts a third of the chain length as read, 4.6 cm/px two thirds, the registration all of it.
+  const house = (): ReturnType<typeof sheet> => {
+    const r = sheet(460, 480)
+    walls(r, 40, 160, 400, 280, [{ side: 'S', from: 200, to: 247 }])
+    walls(r, 120, 40, 200, 171)
+    return r
+  }
+  const frame = planFrame(FRAME, 'GROUND', { width: 460, height: 480 })
+  const stated = (): MetricEvidenceSet => {
+    const at = (chain: string, axis: 'X' | 'Y', from: number, to: number, cm: number) => ({ chain, axis, px: to - from, cm, from })
+    const m = metricsWith([at('cx', 'X', 40, 120, 320), at('cx', 'X', 120, 200, 368), at('cx', 'X', 200, 400, 800), at('cy', 'Y', 40, 160, 480), at('cy', 'Y', 160, 280, 552)].map((s) => ({ chain: s.chain, axis: s.axis, px: s.px, cm: s.cm })))
+    // one chain per axis, its segments laid end to end from the house's corner
+    const byChain = new Map<string, DimensionChain>()
+    for (const c of m.chains) {
+      const key = c.axis
+      const prev = byChain.get(key)
+      const from = prev ? prev.ticksPx[prev.ticksPx.length - 1] : 40
+      const seg = { ...c.segments[0], fromPx: from, toPx: from + c.segments[0].pixelLength }
+      byChain.set(key, prev ? { ...prev, ticksPx: [...prev.ticksPx, seg.toPx], segments: [...prev.segments, { ...seg, index: prev.segments.length }] } : { ...c, id: key === 'HORIZONTAL' ? 'cx' : 'cy', baselinePx: 20, ticksPx: [from, seg.toPx], segments: [seg] })
+    }
+    const hypotheses = [
+      { id: 'scale-a', cmPerPixel: 4.0, independentGroups: 3, independentWeight: 3 },
+      { id: 'scale-b', cmPerPixel: 4.6, independentGroups: 2, independentWeight: 2 },
+    ].map((h) => ({ witnessIds: [], groups: 1, chains: 1, independentAxes: ['X'], weight: 1, longestShare: 0.5, substantialWitnesses: 1, majorWitnesses: 1, corroborated: false, axesMeasured: false, residualPx: 0, plausible: true, why: 'a fixture', ...h }))
+    return { ...m, schemaVersion: '1.3.0', chains: [...byChain.values()], metricSolutions: [{ ...unconfirmed(), hypotheses, counts: { textRegions: 0, observations: 0, hypotheses: 2 } } as FrameMetricSolution] }
+  }
+  const run = (published: number) => {
+    const trace: SolverTraceEvent[] = []
+    let completed = false
+    try {
+      reconstructV2({ label: 'fixture', slug: 'fixture', sourcePackageId: 'src-test', sourcePackageHash: 'd'.repeat(64), graph: graphOf([frame]), metrics: stated(), raster: () => house(), publishedAreas: [{ key: 'footprint_area', label: 'footprint', unit: 'm2', value: published }], trace: (e) => trace.push(e) })
+      completed = true
+    } catch (error) {
+      if (!(error instanceof ReconstructionFailure)) throw error
+    }
+    const challenges = trace.filter((e) => e.substage === 'METRIC_CHALLENGE').map((e) => e.counts as Record<string, number | string>)
+    return { completed, challenges }
+  }
+
+  it('sweeping the figure across every reading the drawing states builds one scale or none', () => {
+    const built = new Set<number>()
+    for (const published of [70, 85, 92, 100, 106, 112, 120, 140, 160]) {
+      const { completed, challenges } = run(published)
+      // one challenge, never a second one on the reading the first already answered
+      expect(challenges, `${published}`).toHaveLength(1)
+      expect(challenges[0].sourceConflict, `${published}`).toBeTruthy()
+      if (completed) {
+        expect(challenges[0].outcome).toBe('REPLACED')
+        expect(challenges[0].publishedFigure).toBe('VERIFIED')
+        built.add(Number(challenges[0].chosenCmPerPx))
+      } else expect(challenges[0].outcome, `${published}`).toBe('REFUSED')
+    }
+    // the drawing's own choice (the scale that contradicts least of what was printed), and only that
+    expect([...built]).toEqual([4])
   })
 })

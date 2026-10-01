@@ -131,7 +131,12 @@ describe('Evidence Pack: deterministic, complete, bounded, free of publisher pix
     const sourceBytes = new Set(filesUnder(join(root, 'cache')).filter((f) => f.endsWith('.bin')).map((f) => sha(readFileSync(f))))
     for (const [name, content] of p.files) {
       if (typeof content === 'string') {
-        if (name.endsWith('.svg')) for (const re of FORBIDDEN_IN_SVG) expect(re.test(content), `${name} ${re}`).toBe(false)
+        if (name.endsWith('.svg')) {
+          for (const re of FORBIDDEN_IN_SVG) expect(re.test(content), `${name} ${re}`).toBe(false)
+          // An allowlist the writer does not share: only the primitives an analyzer layer draws.
+          const elements = new Set([...content.matchAll(/<([a-zA-Z][\w:-]*)/g)].map((m) => m[1]))
+          for (const e of elements) expect(['svg', 'g', 'rect', 'line', 'circle', 'polygon', 'polyline', 'text', 'tspan', 'title', 'desc'], `${name} <${e}>`).toContain(e)
+        }
         continue
       }
       expect(name).toBe('16-final-model-preview.png')

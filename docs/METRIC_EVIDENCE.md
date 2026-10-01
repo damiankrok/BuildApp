@@ -150,7 +150,8 @@ ignored as a class: a chain whose segments are each labelled stays segmented.
 
 **A label measures the span it is centred on.** Each label is bound to every
 candidate span between non-rejected marks of its chain and the binding records
-its role: `PRIMARY` (centred within 10 % of the span), `ALTERNATIVE` (another
+its role — centring decides; a doubted end only lets a label take a longer span
+that encloses the best-centred one and is centred as well — : `PRIMARY` (centred within 10 % of the span), `ALTERNATIVE` (another
 span the same ink could measure, kept, never a witness), `AMBIGUOUS` (two
 centred spans of different length tie) or `UNCENTRED`. A total centred across
 the whole line stays a total candidate with a spurious mark beneath it
@@ -163,9 +164,12 @@ ratio is at least 0.7 are kept beside it (`valueAlternatives`). When the
 selected scale rests on one such ink, `topology.valueAmbiguity` records the
 interval its alternatives imply and the confidence is at most WEAK. An ink one
 of whose alternatives fits another scale decides nothing between the two
-(`topology.neutralObservationIds`): against the page vote's scale (V3) and
-against a rival hypothesis (V3 between rivals, within the pixel tolerance of
-both spans).
+(`topology.neutralObservationIds`): against the page vote's scale (V3, asked
+whenever the selection would not simply confirm the vote) and against a rival
+hypothesis (V3 between rivals, within at most twice the ink's own pixel
+tolerance). Neutrality never promotes a rival of lower standing than the
+strongest scale's whole evidence: that case is INCONCLUSIVE. A dimension
+drawn on twin lines, its value printed on each, is one witness (I5).
 
 **The hierarchy is checked on values as read.** Between parallel lines of the
 same family, `TOTAL_OF`/`SEGMENT_OF` (a span of one line whose ends coincide
@@ -175,17 +179,20 @@ with marks of a finer line — the whole line, or one segment of a middle line),
 `AGREES_AFTER_CORRECTION` (closed only by the solver's own values; recorded,
 never evidence). A total and its children that disagree as read, each stating
 one of two distinct scales, with no reading outside the pair to decide, make
-the solution `INCONCLUSIVE` (`hierarchy.undecidedConflict`): the conflict is
-reported, never forced consistent.
+the solution `INCONCLUSIVE` (`hierarchy.undecidedConflict`) unless the side
+that ranks first also outnumbers the other: the conflict is reported, never
+forced consistent. Totals are checked over consecutive marks and over the span
+each label on the line is bound to, so one extra crossing cannot hide them.
 
 **The first success is challenged by the drawing, before the published
 figure** (resolver 1.4.0). A first reading is challenged when the drawing
 contradicts its scale (`AS_READ_REFUTATION`, `PARTIAL_BINDING`,
 `OUTER_TOTALS`; `sourceConflictOf`, which is not given any published figure).
-A reading the drawing states replaces it; the published footprint may only
-verify that replacement (`publishedFigure: VERIFIED`). When the drawing prefers
-a scale the figure refuses, neither is built: `PLAN_RESOLUTION_INCONCLUSIVE`,
-`why: SOURCE_CONFLICT`.
+The drawing chooses first — its best-supported other scale, ranked with the
+figure's own refusal left out — and the published footprint then verifies that
+one reading (`REPLACED`, `publishedFigure: VERIFIED`) or vetoes it: then
+neither is built, `PLAN_RESOLUTION_INCONCLUSIVE`, `why: SOURCE_CONFLICT`. A
+vetoed choice is never followed by the next-best.
 
 What every frame's solution records is in `metricSolutions[].topology` (marks
 by class, bindings by role, neutral inks, the hierarchy, any value ambiguity),

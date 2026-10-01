@@ -1012,7 +1012,8 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
   const incumbentScore = scoreReading(incumbent.draft, { published, spent: false, refutedShare: regShare, sheet, cluster, supportedOnBothAxes: registrationMeasuredOnBothAxes(solution), otherCopies, gateRefusals: incumbentRefusals })
   const incumbentHypothesis: PlanHypothesis = { id: stableId('plan-reading', 'first-reading', { frameId: base.frame.id }), frameId: base.frame.id, annotation: base.frame.roles.annotation, extent: 'CHAIN_RECT', scale: { kind: 'REGISTRATION' }, merge: 'LARGEST_FIRST', faces: 'AS_GRIDDED', mouths: 'AS_DECIDED', departures: [] }
   const incumbentRanked: RankedReading = { hypothesis: incumbentHypothesis, score: incumbentScore, stage: 2 }
-  const composed: Array<RankedReading & { result: StructuralPassResult; alt: Alt }> = []
+  // `drawingRefusals`: the gate's refusals less the published figure's (FOOTPRINT_AREA_*) — what the drawing alone says.
+  const composed: Array<RankedReading & { result: StructuralPassResult; alt: Alt; drawingRefusals: string[] }> = []
   alts.forEach((alt, i) => {
     const hypothesis: PlanHypothesis = {
       id: stableId('plan-reading', `challenge-${alt.extent}`.toLowerCase(), { frameId: base.frame.id, extent: alt.extent, scale: alt.scale.kind === 'REGISTRATION' ? 'REG' : alt.scale.cmPerPx }),
@@ -1030,20 +1031,24 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
     const choice = { ...choiceOf(hypothesis, alt), alignByFitOnly: alt.scale.kind === 'LATTICE' }
     const draft = inferStructuralLayout({ ...shared, metrics: alt.metrics, plan: choice })
     const stage1 = scoreReading(draft, { published, spent: false, refutedShare: alt.refutedShare, sheet, cluster, supportedOnBothAxes: alt.supportedOnBothAxes, otherCopies, gateRefusals: [] })
-    if (stage1.hard.length > 0 || stage1.footprint.bucket === 'WRONG' || stage1.masses === 0) {
-      composed.push({ hypothesis, score: stage1, stage: 1, result: incumbent, alt })
+    // On a source conflict the figure screens nothing before the drawing has chosen: a reading is set
+    // aside here only for what the drawing itself says against it.
+    if (stage1.hard.length > 0 || (!conflict && stage1.footprint.bucket === 'WRONG') || stage1.masses === 0) {
+      composed.push({ hypothesis, score: stage1, stage: 1, result: incumbent, alt, drawingRefusals: [] })
       return
     }
     const result = composeStructuralLayout({ ...shared, metrics: alt.metrics, plan: choice })
     counts.compositions += 1
     const refusals = result.layout.gate.reasons.filter((g) => g.severity === 'BLOCKING' && LAYOUT_REFUSAL_CODES.has(g.code)).map((g) => g.code).sort()
-    composed.push({ hypothesis, stage: 2, result, alt, score: scoreReading(result.draft, { published, spent: false, refutedShare: alt.refutedShare, sheet, cluster, supportedOnBothAxes: alt.supportedOnBothAxes, otherCopies, gateRefusals: refusals }) })
+    composed.push({ hypothesis, stage: 2, result, alt, drawingRefusals: refusals.filter((c) => !c.startsWith('FOOTPRINT_AREA')), score: scoreReading(result.draft, { published, spent: false, refutedShare: alt.refutedShare, sheet, cluster, supportedOnBothAxes: alt.supportedOnBothAxes, otherCopies, gateRefusals: refusals }) })
   })
   counts.distinctOutlines = new Set([incumbentScore.outlineKey, ...composed.map((c) => c.score.outlineKey)]).size
   const considered = [incumbentRanked, ...composed.map((c) => ({ hypothesis: c.hypothesis, score: c.score, stage: c.stage }))].sort(compareReadings)
   // Better on the drawing's own evidence, never on the published figure alone.
   const bucket = (v: number): number => Math.floor(v / 0.05 + 1e-9)
-  const drawingTuple = (r: RankedReading): number[] => [r.score.hard.length, r.score.gateRefusals.length, bucket(r.score.refutedShare), -bucket(r.score.wallCoverage), -r.score.corroborations.length]
+  // On a source conflict the tuple leaves out the figure's own refusal, so the figure cannot rank the drawing's readings.
+  const refusalsOf = (r: RankedReading): number => (conflict && 'drawingRefusals' in r ? (r as { drawingRefusals: string[] }).drawingRefusals.length : r.score.gateRefusals.length)
+  const drawingTuple = (r: RankedReading): number[] => [r.score.hard.length, refusalsOf(r), bucket(r.score.refutedShare), -bucket(r.score.wallCoverage), -r.score.corroborations.length]
   const drawingBetter = (a: RankedReading, b: RankedReading): boolean => {
     const [x, y] = [drawingTuple(a), drawingTuple(b)]
     const first = x.findIndex((v, i) => v !== y[i])
@@ -1057,17 +1062,21 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
     const i = x.findIndex((v, k) => v !== y[k])
     return i >= 0 ? x[i] - y[i] : alts.indexOf(p.alt) - alts.indexOf(q.alt)
   }
-  const winner = composed.filter((c) => c.stage === 2 && acceptable(c) && strictlyBetter(c, incumbentRanked)).sort(byDrawing)[0]
+  // 1.4.0, on a source conflict: the drawing chooses first — its best-supported reading among those it supports
+  // better than the first reading — and the published figure then verifies that one reading or vetoes it. A
+  // vetoed choice is never followed by the next-best: that would let the figure choose among the drawing's scales.
+  // The conflict is about the scale: the drawing's choice is another SCALE that contradicts strictly less of what
+  // was printed. A reading that only frames or tiles the plan differently resolves nothing about it.
+  const bucketOf5 = (v: number): number => Math.floor(v / 0.05 + 1e-9)
+  const drawingChoice = conflict
+    ? composed.filter((c) => c.stage === 2 && c.alt.scale.kind !== 'REGISTRATION' && c.score.hard.length === 0 && c.score.masses > 0 && bucketOf5(c.score.refutedShare) < bucketOf5(incumbentRanked.score.refutedShare) && drawingBetter(c, incumbentRanked)).sort(byDrawing)[0]
+    : undefined
+  const winner = conflict ? (drawingChoice && acceptable(drawingChoice) ? drawingChoice : undefined) : composed.filter((c) => c.stage === 2 && acceptable(c) && strictlyBetter(c, incumbentRanked)).sort(byDrawing)[0]
   if (!winner) {
     // 1.4.0: the drawing contradicts the first reading, prefers another reading of its own, and the figure
     // vetoes that one (or nothing verifies it): build neither. Keeping the reading the drawing refutes would
     // let the figure choose it, and handing the plan on to the resolver would let the figure choose again.
-    // The drawing's preferred reading answers the conflict: another SCALE, which contradicts strictly less of
-    // what was printed. A reading that only frames or tiles the plan differently resolves nothing about it.
-    const bucketOf5 = (v: number): number => Math.floor(v / 0.05 + 1e-9)
-    const preferred = conflict
-      ? composed.filter((c) => c.alt.scale.kind !== 'REGISTRATION' && c.score.hard.length === 0 && c.score.masses > 0 && bucketOf5(c.score.refutedShare) < bucketOf5(incumbentRanked.score.refutedShare) && drawingBetter(c, incumbentRanked)).sort(byDrawing)[0]
-      : undefined
+    const preferred = drawingChoice
     if (conflict && preferred) {
       const f = (r: RankedReading): string => `${r.score.footprint.areaM2.toFixed(1)} m², ${r.score.footprint.bucket}${r.score.footprint.residual !== undefined ? ` (${r.score.footprint.residual >= 0 ? '+' : ''}${(r.score.footprint.residual * 100).toFixed(1)}%)` : ''}`
       const message = `SOURCE_CONFLICT: the drawing contradicts the scale the plan was registered at (${conflict.why}). Read at ${describe(preferred.hypothesis)} the plan is better supported by the drawing itself (${Math.round(preferred.score.refutedShare * 100)}% of the stated chain length contradicted, against ${Math.round(incumbentRanked.score.refutedShare * 100)}%), but the published footprint does not verify it (${f(preferred)}; the first reading: ${f(incumbentRanked)}). Neither is built: the figure may refuse a reading, never choose one the drawing refutes. What is missing: a second printed dimension, read as printed, that states one of the two scales`
@@ -1107,7 +1116,7 @@ export function challengeFirstReading(options: StructuralPassOptions, incumbent:
       ? [{ id: stableId('conflict', 'plan-scale', { frameId: h.frameId, cmPerPx: h.scale.cmPerPx }), kind: 'SCALE_DISAGREEMENT', what: `the plan was registered at one scale and its readings, as printed, imply another: ${h.scale.why}`, itemIds: [h.frameId], evidenceIds: [...winner.alt.reread].sort(), magnitude: round6(h.scale.cmPerPx), unit: 'none', note: `${winner.alt.reread.size} statement${winner.alt.reread.size === 1 ? '' : 's'} re-read at the new scale` }]
       : []
   const result = composeStructuralLayout({ ...shared, metrics: winner.alt.metrics, plan: choiceOf(h, winner.alt), resolution: { reasons, alternatives, conflicts } })
-  return { kind: 'REPLACED', why: `the metric reading ${describe(h)} is better supported than the first reading`, result, metrics: winner.alt.metrics, chosen: { hypothesis: h, score: winner.score, stage: 2 }, considered, counts }
+  return { kind: 'REPLACED', why: `the metric reading ${describe(h)} is better supported than the first reading`, result, metrics: winner.alt.metrics, chosen: { hypothesis: h, score: winner.score, stage: 2 }, considered, counts, ...(conflict ? { conflict } : {}) }
 }
 
 /** What a trace records about a challenge: the outcome, the counts, the readings weighed. */

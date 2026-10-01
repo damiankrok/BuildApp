@@ -313,7 +313,8 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
   } else {
     // --- 005B: a first reading that completed on weak metric evidence is weighed --------
     // 005D: so is one whose scale the drawing itself contradicts (a source conflict), whatever its confidence.
-    const need = firstReadingNeedsChallenge(metrics, incumbent)
+    // A reading that already answered the drawing's own challenge above is not challenged a second time.
+    const need = earlyConflict ? { challenge: false, why: '' } : firstReadingNeedsChallenge(metrics, incumbent)
     const conflict = earlyConflict ? null : sourceConflictFor(structuralOptions, incumbent)
     if (need.challenge || conflict) {
       const why = [need.challenge ? need.why : '', conflict ? `the drawing contradicts its scale: ${conflict.why}` : ''].filter(Boolean).join('; and ')

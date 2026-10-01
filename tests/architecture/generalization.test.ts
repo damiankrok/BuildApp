@@ -163,6 +163,15 @@ for (const stack = [...ROOTS]; stack.length > 0; ) {
 }
 const productionDirs = [...[...closure].map((n) => join(byName.get(n)?.dir ?? '', 'src')), join(ROOT, 'apps/android/app/src/main/java')]
 const production = productionDirs.flatMap((d) => walk(d, (n) => /\.(ts|tsx|mjs|js|kt)$/.test(n)))
+// 005D (post-review D): not production, but they judge production or describe it to a reviewer, so a
+// benchmark fingerprint there would leak into a verdict or a pack: the Evidence Pack, the blind verdict
+// and the row judges are held to the same rule. (The holdout selector is not: it enumerates named
+// publishers' sitemaps by design, and draws only from what it enumerates.)
+const judges = [
+  ...walk(join(ROOT, 'packages/evidence-pack/src'), (n) => /\.ts$/.test(n)),
+  join(ROOT, 'holdout/verdict.mjs'),
+  ...walk(join(ROOT, 'packages/analysis-service/scripts'), (n) => /-row\.mjs$/.test(n)),
+]
 const rel = (f: string): string => relative(ROOT, f)
 
 describe('no development house in production (derived registry)', () => {
@@ -216,6 +225,13 @@ describe('no development house in production (derived registry)', () => {
   it('no production file — code or comment — carries a development house\'s id, name, published figure or printed overall dimension', () => {
     const found: string[] = []
     for (const file of production) for (const h of scan(readFileSync(file, 'utf8'), registry)) found.push(`${rel(file)}: ${h.kind} ${h.term} in "${h.at}"`)
+    expect(found).toEqual([])
+  })
+
+  it('neither the Evidence Pack, the holdout scripts nor the row judges carry a development house\'s fingerprint (005D)', () => {
+    expect(judges.length).toBeGreaterThanOrEqual(8)
+    const found: string[] = []
+    for (const file of judges) for (const h of scan(readFileSync(file, 'utf8'), registry)) found.push(`${rel(file)}: ${h.kind} ${h.term} in "${h.at}"`)
     expect(found).toEqual([])
   })
 

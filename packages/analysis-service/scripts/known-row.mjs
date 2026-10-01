@@ -11,8 +11,8 @@
  *     chosen by a published figure the resolver was free to use (not one it had already
  *     spent refusing the first reading), and lands within 6 % of it;
  *   - a first reading the drawing itself contradicted and the resolver replaced
- *     (METRIC_CHALLENGE REPLACED, 005D) is judged the same way: the replacement was chosen by
- *     the drawing, the figure only verified it, and it lands within 6 % of that figure;
+ *     (METRIC_CHALLENGE REPLACED, 005D) is judged the same way: the record names the source
+ *     conflict, the figure only verified the replacement, and it lands within 6 % of that figure;
  *   - given the row's source package, any completion lands within 6 % of the published
  *     footprint, however it was reached: a silent wrong-scale completion fails;
  *   - a refusal is allowed only where the row says so, and only as the resolver's named
@@ -57,8 +57,10 @@ if (existsSync(join(dir, 'result-summary.json'))) {
     if (!Number.isFinite(residual) || Math.abs(residual) > 6) fail(`resolved ${resolution.chosenResidualPct ?? 'without a residual'} % from the published footprint`)
   }
   if (challenge?.outcome === 'REPLACED') {
-    if (challenge.publishedFigure === 'SPENT') fail('the replacement was chosen by a published figure that had already refused the first reading')
-    if (!challenge.trigger) fail('the first reading was replaced without the drawing contradicting it')
+    // Replaced because the drawing contradicted the first reading (a named source conflict), the figure only
+    // verifying; or, without a conflict, chosen with a witness besides the figure.
+    if (challenge.sourceConflict && !['VERIFIED', 'NONE'].includes(challenge.publishedFigure)) fail(`the replacement of a reading the drawing contradicted (${challenge.sourceConflict}) used the published figure as ${challenge.publishedFigure}, not as a verifier`)
+    if (!challenge.sourceConflict && !challenge.chosenCorroborations) fail('the first reading was replaced with nothing but the published figure behind the replacement')
     const residual = Number(challenge.chosenResidualPct)
     if (!Number.isFinite(residual) || Math.abs(residual) > 6) fail(`replaced ${challenge.chosenResidualPct ?? 'without a residual'} % from the published footprint`)
   }

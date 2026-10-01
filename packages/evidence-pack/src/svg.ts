@@ -78,8 +78,12 @@ export class Svg {
   }
 }
 
-/** What a pack may never contain in an SVG: a raster, a data URI, an external reference. */
-export const FORBIDDEN_IN_SVG = [/<image\b/i, /data:/i, /xlink:href/i, /base64/i, /<foreignObject\b/i] as const
+/**
+ * What a pack may never contain in an SVG: a raster, a data URI, any reference (an `href` of any
+ * namespace, a CSS `url(…)`, a filter image), an embedded document (post-review D: the first list
+ * missed plain `href=`, `<feImage>` and `url(`).
+ */
+export const FORBIDDEN_IN_SVG = [/<image\b/i, /data:/i, /\bhref\s*=/i, /base64/i, /<foreignObject\b/i, /<feImage\b/i, /url\s*\(/i, /<use\b/i, /<script\b/i, /@import/i] as const
 
 export const COLOURS = {
   TICK: '#1b8a3a',
