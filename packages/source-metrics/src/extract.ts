@@ -34,6 +34,9 @@ import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
 import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
+import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, labelLattice } from './numeric-lattice.js'
+import type { LabelLattice, LatticeCache } from './numeric-lattice.js'
+import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts } from './callouts.js'
 import type { TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
@@ -44,9 +47,9 @@ import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
 import { METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
-import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
+import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
-export const METRIC_READER_VERSION = '1.2.0' as const
+export const METRIC_READER_VERSION = '1.3.0' as const
 
 /** The bytes of one asset variant, decoded. Returning nothing means the variant could not be read, which is recorded as a gap. */
 export type RasterSource = (frame: SourceCoordinateFrame) => Raster | undefined
@@ -286,6 +289,9 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
   const dimensionObservations: DimensionObservation[] = []
   const metricSolutions: FrameMetricSolution[] = []
   const chainRelations: ChainRelation[] = []
+  const numericLattices: NumericLatticeRecord[] = []
+  // 005E: identical label crops (a plan's twin copies) are read once; a hit is verified byte for byte.
+  const latticeCache: LatticeCache = new Map()
 
   const checkpoint = options.checkpoint ?? NO_CHECKPOINT
   const frames = [...graph.coordinateFrames].sort((a, b) => a.id.localeCompare(b.id)).filter((f) => keep(f))
@@ -302,7 +308,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     // A floor plan's dimensions are read every way up and kept every way up (005B): which way
     // up a label is printed is decided on the chain, from evidence, not by a page-wide vote.
     const isPlan = frame.roles.document === 'FLOOR_PLAN' && plane === 'PLAN_XZ'
-    const read = readNumbers(raster, { checkpoint, hypotheses: isPlan })
+    const read = readNumbers(raster, { checkpoint, hypotheses: isPlan, retainPasses: isPlan })
     const tokensById = new Map<TextToken, OcrToken>()
     const keptByVote = new Set(read.tokens)
     for (const token of read.raw ?? read.tokens) {
@@ -350,7 +356,23 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     let scaleStands = true
     if (isPlan && read.raw) {
       const ids = rawChains.map((c) => chainId(frame.id, c.axis, c.baselinePx, c.ticks.map((t) => t.atPx)))
-      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint })
+      // 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
+      // makes, before any scale — re-read from the very ink field its pass read. Image only.
+      const lattices = new Map<TextToken, { id: string; lattice: LabelLattice }>()
+      if (read.passes) {
+        const onLine = read.raw.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS && t.passBox && rawChains.some((chain) => onDimensionLine(chain, t)))
+        for (const [i, token] of onLine.entries()) {
+          checkpoint.tick({ subphase: { id: 'OCR_LATTICE', label: 'reading dimension labels' }, counters: { label: i + 1, labelsTotal: onLine.length } })
+          const ink = read.passes[token.orientation]
+          if (!ink) continue
+          const lattice = labelLattice({ orientation: token.orientation, ink, page: { width: raster.width, height: raster.height } }, token, latticeCache)
+          if (!lattice) continue
+          const id = stableId('ocr-lattice', token.text.replace(/[^0-9a-z]/gi, '') || 'token', { frameId: frame.id, box: token.box, orientation: token.orientation })
+          lattices.set(token, { id, lattice })
+          numericLattices.push(latticeRecord(id, frame.id, token, lattice))
+        }
+      }
+      const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
       solvedChains = metric.solved
       orientationOf = metric.chainOrientation
       scaleStands = metric.solution.relation !== 'REPLACED' && metric.solution.relation !== 'ADDED'
@@ -721,6 +743,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       { name: 'metrics.axis-aligned-affine', version: '1' },
       { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
       { name: METRIC_SOLVER_NAME, version: METRIC_SOLVER_VERSION },
+      { name: NUMERIC_LATTICE_NAME, version: NUMERIC_LATTICE_VERSION },
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -732,6 +755,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     dimensionObservations: dimensionObservations.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
     metricSolutions: metricSolutions.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
     chainRelations,
+    numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
   }
   return sealMetricEvidence(draft, options.slug)
 }
@@ -946,4 +970,48 @@ function scaleConflicts(registrations: readonly MetricEvidenceSet['coordinateReg
     }
   }
   return out
+}
+
+/** 005E: labels longer than this many glyphs are no dimension (the grammar takes 2–4 digits, or a decimal). */
+const LATTICE_LABEL_GLYPHS = 6
+
+/** An ink lies on a dimension line: set along it, within its span, within a couple of its own heights of the line (`assignTokens`' test). */
+function onDimensionLine(chain: RawChain, t: TextToken): boolean {
+  if (textAxisOf(t.orientation) !== chain.axis) return false
+  const cx = (t.box.x0 + t.box.x1) / 2
+  const cy = (t.box.y0 + t.box.y1) / 2
+  const along = chain.axis === 'HORIZONTAL' ? cx : cy
+  const across = chain.axis === 'HORIZONTAL' ? cy : cx
+  return Math.abs(across - chain.baselinePx) / Math.max(1, t.height) <= 2.2 && along >= chain.ticks[0].atPx && along <= chain.ticks[chain.ticks.length - 1].atPx
+}
+
+/** The evidence record of one lattice: numbers only, bounded by the lattice's own bounds. */
+function latticeRecord(id: string, frameId: string, token: TextToken, l: LabelLattice): NumericLatticeRecord {
+  const asReadPath = l.paths.find((p) => p.kind === 'ANCHOR' && p.variant === l.asReadVariant) ?? l.paths[0]
+  return {
+    id,
+    frameId,
+    orientation: token.orientation,
+    box: token.box,
+    reader: l.reader,
+    rawTopText: l.rawTopText,
+    asRead: l.asRead,
+    ...(l.asReadValueCm !== undefined ? { asReadValueCm: l.asReadValueCm } : {}),
+    asReadVariant: l.asReadVariant,
+    ocrClass: l.ocrClass,
+    classWhy: l.classWhy,
+    asReadP: l.asReadP,
+    probabilityMargin: l.probabilityMargin,
+    sequenceMargin: l.sequenceMargin,
+    minGlyphScore: l.minGlyphScore,
+    maxRunnerRatio: l.maxRunnerRatio,
+    entropy: l.entropy,
+    capHeightPx: l.capHeightPx,
+    sequences: l.sequences.map((q) => ({ text: q.text, ...(q.valueCm !== undefined ? { valueCm: q.valueCm } : {}), logP: q.logP, p: q.p, imageScore: q.imageScore, nonTop: q.nonTop, minGlyphMargin: q.minGlyphMargin, avgGlyphMargin: q.avgGlyphMargin, variants: q.variants, pathIds: q.pathIds, asRead: q.asRead })),
+    glyphs: asReadPath.glyphs.map((g, i) => ({ box: l.glyphBoxes[i] ?? token.box, candidates: g.candidates, runnerRatio: g.runnerRatio, topologyRunnerRatio: g.topologyRunnerRatio, holes: g.holes, touching: g.touching, broken: g.broken })),
+    paths: l.paths.map((p) => ({ id: p.id, variant: p.variant, kind: p.kind, text: p.glyphs.map((g) => g.candidates[0]?.char ?? '').join('') || '?', slope: p.slope, cuts: p.cuts, changedBoundaries: p.changedBoundaries, segScore: p.segScore, ratioToBest: p.ratioToBest })),
+    expansions: l.expansions,
+    truncatedBy: l.truncatedBy,
+    cache: l.cache,
+  }
 }

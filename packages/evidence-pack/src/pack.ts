@@ -12,7 +12,7 @@
 import { sha256Bytes, sha256Hex, stableJson } from '@buildapp/source-common'
 import { COLOURS, FORBIDDEN_IN_SVG, Svg } from './svg.js'
 import { TIMELINE_STAGES } from './types.js'
-import type { ChainJson, DecisionEvent, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage } from './types.js'
+import type { ChainJson, DecisionEvent, LatticeJson, MarkJson, ObservationJson, PlanJson, Rect, RunRecord, SolutionJson, TimelineStage } from './types.js'
 
 export const EVIDENCE_PACK_SCHEMA = 'buildapp.evidence-pack' as const
 export const EVIDENCE_PACK_VERSION = '1.0.0' as const
@@ -275,33 +275,101 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
     }
   }
 
-  // 07: OCR labels
+  // 07: OCR labels — every token's box and reading, and (005E) each label ink's numeric lattice: the 005D reading, the
+  // as-read string, the image-only sequences, the glyph candidates, the class, and the value its span was given with
+  // the image score and the metric support apart. Numbers only; the glyphs themselves are not reproduced.
+  const latticeOf = new Map((metrics.numericLattices ?? []).map((l) => [l.id, l]))
   {
     const s = svg('OCR labels')
     const tokens = (metrics.ocrTokens ?? []).filter((t) => t.frameId === selected?.frameId && /\d/.test(t.text))
     const nearChain = (t: (typeof tokens)[number]): boolean => frameChains.some((c) => (c.axis === 'HORIZONTAL' ? Math.abs((t.box.y0 + t.box.y1) / 2 - c.baselinePx) < 3 * Math.max(8, t.box.y1 - t.box.y0) : Math.abs((t.box.x0 + t.box.x1) / 2 - c.baselinePx) < 3 * Math.max(8, t.box.x1 - t.box.x0)))
     const relevant = [...tokens].sort((a, b) => Number(nearChain(b)) - Number(nearChain(a)) || (a.id < b.id ? -1 : 1))
     const shown = topK(relevant)
+    const lattices = (metrics.numericLattices ?? []).filter((l) => l.frameId === selected?.frameId)
+    const classColour = (c: string): string => (c === 'CLEAR' ? COLOURS.PRIMARY : c === 'SUPPORTED' ? COLOURS.TICK : c === 'AMBIGUOUS' ? COLOURS.AMBIGUOUS : COLOURS.REJECTED)
+    const latticeAt = new Map(lattices.map((l) => [`${l.orientation}|${rectText(l.box)}`, l]))
     for (const t of shown.items) {
-      const colour = t.pageVote === 'DISCARDED' ? COLOURS.ALTERNATIVE : COLOURS.PRIMARY
-      s.rect(t.box.x0, t.box.y0, t.box.x1, t.box.y1, { stroke: colour, width: 1 }, t.id, { orientation: t.orientation ?? '', text: t.text })
-      s.text(t.box.x0, t.box.y0 - 2, t.text, 9, colour)
+      const l = latticeAt.get(`${t.orientation ?? 'HORIZONTAL'}|${rectText(t.box)}`)
+      const colour = l ? classColour(l.ocrClass) : t.pageVote === 'DISCARDED' ? COLOURS.ALTERNATIVE : COLOURS.PRIMARY
+      s.rect(t.box.x0, t.box.y0, t.box.x1, t.box.y1, { stroke: colour, width: 1 }, t.id, { orientation: t.orientation ?? '', text: t.text, ...(l ? { asRead: l.asRead, class: l.ocrClass } : {}) })
+      s.text(t.box.x0, t.box.y0 - 2, l && l.asRead !== t.text ? `${l.asRead} (${t.text})` : t.text, 9, colour)
     }
     files.set('07-ocr-labels.svg', s.render())
+    // The span each lattice's ink measures, and the value it was given there.
+    const boundObs = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === selected?.frameId && o.ocr && o.binding?.role === 'PRIMARY' && o.independence !== 'ORIENTATION_UNDECIDED')
+    const records = topK(
+      [...lattices].sort((a, b) => (b.box.x1 - b.box.x0) * (b.box.y1 - b.box.y0) - (a.box.x1 - a.box.x0) * (a.box.y1 - a.box.y0) || (a.id < b.id ? -1 : 1)).map((l) => {
+        const o = boundObs.find((x) => x.ocr?.latticeId === l.id)
+        const chosen = o?.ocr?.selected
+        const reject = (q: LatticeJson['sequences'][number]): string | null => {
+          if (q.asRead) return null
+          if (chosen && chosen.text === q.text) return null
+          if (q.valueCm === undefined) return 'NOT_A_DIMENSION'
+          if (o && o.impliedCmPerPx > 0) return 'NOT_SELECTED: the as-read value or a better image score fits the chosen scale, or no scale was chosen'
+          return 'NOT_SELECTED: unbound to a span'
+        }
+        return {
+          id: l.id,
+          orientation: l.orientation,
+          box: l.box,
+          rawTopRead: l.rawTopText,
+          asRead: l.asRead,
+          asReadValueCm: l.asReadValueCm ?? null,
+          asReadVariant: l.asReadVariant,
+          ocrClass: l.ocrClass,
+          classWhy: l.classWhy,
+          asReadP: l.asReadP,
+          probabilityMargin: l.probabilityMargin,
+          sequenceMargin: l.sequenceMargin,
+          minGlyphScore: l.minGlyphScore,
+          maxRunnerRatio: l.maxRunnerRatio,
+          entropy: l.entropy,
+          sequences: l.sequences.map((q) => ({ text: q.text, valueCm: q.valueCm ?? null, imageScore: q.imageScore, p: q.p, nonTop: q.nonTop.length, variants: q.variants, segmentation: q.pathIds[0] ?? null, asRead: q.asRead, rejected: reject(q) })),
+          glyphs: l.glyphs.map((g) => ({ box: g.box, candidates: g.candidates, runnerRatio: g.runnerRatio, topologyRunnerRatio: g.topologyRunnerRatio, holes: g.holes, touching: g.touching, broken: g.broken })),
+          segmentations: l.paths.map((p) => ({ id: p.id, variant: p.variant, kind: p.kind, text: p.text, slope: p.slope, cuts: p.cuts, changedBoundaries: p.changedBoundaries, segScore: p.segScore, ratioToBest: p.ratioToBest })),
+          expansions: l.expansions,
+          truncatedBy: l.truncatedBy,
+          span: o ? { observationId: o.id, chainId: o.chainId, from: o.fromPx, to: o.toPx, spanPx: o.spanPx } : null,
+          selected: chosen ? { by: chosen.by, text: chosen.text ?? null, valueCm: chosen.valueCm ?? null, imageScore: chosen.imageScore ?? null, imageRank: chosen.imageRank ?? null, metricSupportResidualPx: chosen.metricResidualPx ?? null } : null,
+          refutedBy: o?.ocr?.refutedBy ?? null,
+        }
+      }),
+    )
     files.set(
       '07-ocr-labels.json',
       json({
         frameId: selected?.frameId ?? null,
         note: 'boxes and readings only; the glyphs themselves are not reproduced',
+        latticeRecorded: (metrics.numericLattices ?? []).length > 0,
+        legend: { CLEAR: classColour('CLEAR'), SUPPORTED: classColour('SUPPORTED'), AMBIGUOUS: classColour('AMBIGUOUS'), LOW_QUALITY: classColour('LOW_QUALITY') },
         tokens: shown.items.map((t) => ({ id: t.id, text: t.text, orientation: t.orientation ?? null, box: t.box, pageVote: t.pageVote ?? null, confidence: t.confidence ?? null, nearChain: nearChain(t), glyphs: (t.glyphs ?? []).map((g) => ({ char: g.char, score: round(g.score), alternatives: (g.alternatives ?? []).slice(0, 3).map((a) => ({ char: a.char, score: round(a.score) })) })) })),
         omitted: shown.omitted,
+        lattices: records.items,
+        latticesOmitted: records.omitted,
       }),
     )
+  }
+  // 005E: the candidate set each bound label's ink offered, before any value was read off it — the reader's own
+  // values, keyed by ink (text region and pass), never by text. Before metric evidence 1.4.0 the set is 005D's: the
+  // text as read and its one-glyph values.
+  for (const frameId of metricFrames) {
+    const seen = new Set<string>()
+    for (const o of [...decided(observationsOf(frameId))].sort((a, b) => (a.id < b.id ? -1 : 1))) {
+      const primary = o.binding ? o.binding.role === 'PRIMARY' : o.status === 'ACCEPTED'
+      const key = `ink:${o.textRegionId}:${o.orientation}`
+      if (!primary || seen.has(key)) continue
+      seen.add(key)
+      const l = o.ocr ? latticeOf.get(o.ocr.latticeId) : undefined
+      const asRead = l ? l.asRead : o.rawText
+      const others = l ? l.sequences.filter((q) => !q.asRead).map((q) => q.text) : (o.valueAlternatives ?? []).map((a) => a.text)
+      const set = [...new Set(others)].sort()
+      event('OCR_SEQUENCE_CANDIDATES', key, `CANDIDATES:${asRead}|${set.join(',')}`, l ? `${l.ocrClass} (p ${round(l.asReadP, 3)}); read ${l.rawTopText} by the 005D reader; ${l.sequences.length} image-only values` : `005D reading; ${set.length} one-glyph value(s)`, { supportIds: [o.textRegionId] })
+    }
   }
   for (const frameId of metricFrames) {
     const bound = boundSpanOf(decided(observationsOf(frameId)))
     for (const [key, o] of bound) {
-      event('OCR_READING', key, `READ:${o.rawText}`, `${o.orientation}${o.valueAlternatives?.length ? `; within one glyph it may be ${o.valueAlternatives.map((a) => `${a.text} (${a.ratio})`).join(', ')}` : ''}`, { supportIds: [o.textRegionId] })
+      event('OCR_READING', key, `READ:${o.rawText}`, `${o.orientation}${o.ocr ? `; ${o.ocr.ocrClass}, the 005D reader read ${o.ocr.rawTopText}` : ''}${o.valueAlternatives?.length ? `; it may also be ${o.valueAlternatives.map((a) => `${a.text} (${a.ratio})`).join(', ')}` : ''}`, { supportIds: [o.textRegionId] })
       event('LABEL_BINDING', key, `BOUND:${round(o.fromPx, 1)}-${round(o.toPx, 1)}`, o.binding ? `${o.binding.role}; centred ${round(o.binding.offsetShare, 3)} of the span off; runs across ${o.binding.skipped.tick} tick(s), ${o.binding.skipped.questionable} questionable, ${o.binding.skipped.rejected} rejected` : `accepted on this span (${o.status})`, { supportIds: [o.id], confidenceAfter: o.impliedCmPerPx })
     }
   }

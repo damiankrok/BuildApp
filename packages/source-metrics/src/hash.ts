@@ -138,6 +138,8 @@ export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
     { label: 'dimensionObservations', unordered: (draft.dimensionObservations ?? []).map(observationMember) },
     { label: 'metricSolutions', unordered: (draft.metricSolutions ?? []).map(solutionMember) },
     { label: 'chainRelations', unordered: (draft.chainRelations ?? []).map(relationMember) },
+    // 1.4.0: each label ink's lattice, by content; the prose and whether its crop was met before are not content.
+    { label: 'numericLattices', unordered: (draft.numericLattices ?? []).map((l) => ({ ...l, classWhy: undefined, cache: undefined })) },
   ])
 }
 

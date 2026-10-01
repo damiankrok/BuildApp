@@ -196,7 +196,7 @@ export function chainTokens(chain: RawChain, tokens: readonly TextToken[], optio
  * whose line it sits closest to, measured in its own text heights because that
  * is the unit a draughtsman spaces by.
  */
-export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean } = {}): ChainToken[][] {
+export function assignTokens(chains: readonly RawChain[], tokens: readonly TextToken[], options: { maxOffsetHeights?: number; preferCentred?: boolean; readingsOf?: (token: TextToken) => ChainToken['readings'] | undefined } = {}): ChainToken[][] {
   const maxOffset = options.maxOffsetHeights ?? 2.2
   // 005B: a number no span of the chain is centred on (within two skipped ticks) claims an interval
   // only after every number that is centred on one has claimed its own. A logo glyph near the only
@@ -233,11 +233,15 @@ export function assignTokens(chains: readonly RawChain[], tokens: readonly TextT
       fits.push({ chain: index, along: round6(along), offset: round6(offset), interval, centred: options.preferCentred ? centredOn(chain, along) : true })
     })
     if (fits.length === 0) continue
-    const readings: ChainToken['readings'] = []
-    for (const candidate of readingLattice(token)) {
-      for (const parsed of parseNumber(candidate.text)) {
-        if (parsed.kind !== 'LINEAR_DIMENSION') continue
-        readings.push({ text: candidate.text, parsed, valueCm: round6(toCentimetres(parsed.value, parsed.unit)), confidence: round6(candidate.confidence), substitutions: candidate.substitutions })
+    // 005E: a caller may supply the token's readings (its numeric lattice); otherwise the legacy substitution list.
+    const supplied = options.readingsOf?.(token)
+    const readings: ChainToken['readings'] = supplied ? [...supplied] : []
+    if (!supplied) {
+      for (const candidate of readingLattice(token)) {
+        for (const parsed of parseNumber(candidate.text)) {
+          if (parsed.kind !== 'LINEAR_DIMENSION') continue
+          readings.push({ text: candidate.text, parsed, valueCm: round6(toCentimetres(parsed.value, parsed.unit)), confidence: round6(candidate.confidence), substitutions: candidate.substitutions })
+        }
       }
     }
     if (readings.length === 0) continue

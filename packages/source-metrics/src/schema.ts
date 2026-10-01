@@ -29,8 +29,11 @@ import { PixelPointSchema, PixelRectSchema } from '@buildapp/source-common'
 import { PixelGeometrySchema } from '@buildapp/source-observations'
 
 export const METRIC_EVIDENCE_SCHEMA = 'buildapp.metric-evidence-set' as const
-export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.3.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0'] as const
+export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.4.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0'] as const
+
+/** 005E: the four reading-quality classes the numeric lattice gives an ink, from the image alone. */
+export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -389,8 +392,38 @@ export const DimensionObservationSchema = z
       })
       .strict()
       .optional(),
-    /** 005D: the values this ink may be within one character the matcher half-saw (V1). Never witnesses on their own. */
+    /** 005D: the values this ink may be within one character the matcher half-saw (V1). Never witnesses on their own. 005E: the lattice's other values. */
     valueAlternatives: z.array(z.object({ text: z.string().min(1), valueCm: z.number().positive(), ratio: z.number().min(0).max(1) }).strict()).optional(),
+    /**
+     * 005E (schema 1.4.0): the ink's numeric lattice and what became of its values. `rawText` is the lattice's
+     * as-read string; `rawTopText` what the 005D reader read. `selected` is the value the span is given once a scale
+     * is chosen — AS_READ, STRUCTURAL (the one assignment its total and children agree on), SCALE_RANKED (the
+     * best-image value that fits the chosen scale: DERIVED, never a witness) or UNRESOLVED — with its image score and
+     * its metric support recorded apart. `refutedBy` marks an as-read value its own hierarchy refuted.
+     */
+    ocr: z
+      .object({
+        latticeId: z.string().min(1),
+        rawTopText: z.string().min(1),
+        ocrClass: OcrClassSchema,
+        asReadP: z.number().min(0).max(1),
+        probabilityMargin: z.number().finite(),
+        asReadVariant: z.enum(['DEFAULT', 'STRICT', 'SAUVOLA']),
+        selected: z
+          .object({
+            by: z.enum(['AS_READ', 'STRUCTURAL', 'SCALE_RANKED', 'UNRESOLVED']),
+            text: z.string().min(1).optional(),
+            valueCm: z.number().positive().optional(),
+            imageScore: z.number().min(0).max(1).optional(),
+            imageRank: z.number().int().nonnegative().optional(),
+            metricResidualPx: z.number().nonnegative().optional(),
+          })
+          .strict()
+          .optional(),
+        refutedBy: z.literal('STRUCTURAL').optional(),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
 export type DimensionObservation = z.infer<typeof DimensionObservationSchema>
@@ -521,6 +554,51 @@ export const FrameMetricSolutionSchema = z
         valueAmbiguity: z
           .object({ observationId: z.string().min(1), rawText: z.string().min(1), alternatives: z.array(z.string().min(1)), cmPerPixelLow: z.number().positive(), cmPerPixelHigh: z.number().positive() })
           .strict()
+          .optional(),
+        /**
+         * 005E: reading quality behind the decision — the classes of the selected scale's counted inks, how many inks
+         * could not decide (LOW_QUALITY), the inks contested between two scales (a lattice value of theirs fits a rival
+         * with standing), and the selected scale's inks the class rules demoted.
+         */
+        ocr: z
+          .object({
+            counted: z.object({ clear: z.number().int().nonnegative(), supported: z.number().int().nonnegative(), ambiguous: z.number().int().nonnegative(), unrated: z.number().int().nonnegative() }).strict(),
+            lowQuality: z.number().int().nonnegative(),
+            contestedObservationIds: z.array(z.string().min(1)),
+            demotedObservationIds: z.array(z.string().min(1)),
+          })
+          .strict()
+          .optional(),
+        /**
+         * 005E: several inks agree on the selected scale, but only as weak readings: blind to reading quality the scale
+         * would rank SUPPORTED or better, with it not — and either a rival with standing has a witness read better than
+         * a demoted one (BETTER_CLASS_RIVAL), or two ambiguous inks' own lattice values agree on another scale
+         * (CANDIDATE_CONSENSUS). The confidence is INCONCLUSIVE; the challenger is named, never selected.
+         */
+        falseConsensus: z
+          .object({
+            kind: z.enum(['BETTER_CLASS_RIVAL', 'CANDIDATE_CONSENSUS']),
+            selectedHypothesisId: z.string().min(1),
+            challengerHypothesisId: z.string().min(1).optional(),
+            candidateCmPerPixel: z.number().positive().optional(),
+            demotedObservationIds: z.array(z.string().min(1)),
+            blindConfidence: z.enum(['STRONG', 'SUPPORTED', 'WEAK', 'INCONCLUSIVE']),
+            why: z.string().min(1),
+          })
+          .strict()
+          .optional(),
+        /** 005E: totals refuted as read whose children (read SUPPORTED or better) agree with exactly one assignment of lattice values. */
+        structural: z
+          .array(
+            z
+              .object({
+                totalChainId: z.string().min(1),
+                partChainId: z.string().min(1),
+                assignment: z.array(z.object({ observationId: z.string().min(1), asReadCm: z.number().positive(), chosenCm: z.number().positive() }).strict()),
+                refutedObservationIds: z.array(z.string().min(1)),
+              })
+              .strict(),
+          )
           .optional(),
       })
       .strict()
@@ -686,6 +764,83 @@ export const SpecificationFindingSchema = z
   .strict()
 export type SpecificationFinding = z.infer<typeof SpecificationFindingSchema>
 
+/**
+ * 005E: one label ink's numeric lattice (`labelLattice`), bounded: the as-read string and the 005D one, the emitted
+ * sequences with their image-only scores, the as-read path's glyphs with every candidate, and each ink variant and
+ * segmentation the reader tried. Numbers only: no pixel of the drawing.
+ */
+export const NumericLatticeRecordSchema = z
+  .object({
+    id: z.string().min(1),
+    frameId: z.string().min(1),
+    orientation: TextOrientationSchema,
+    box: PixelRectSchema,
+    reader: z.object({ name: z.string().min(1), version: z.string().min(1) }).strict(),
+    rawTopText: z.string().min(1),
+    asRead: z.string().min(1),
+    asReadValueCm: z.number().positive().optional(),
+    asReadVariant: z.enum(['DEFAULT', 'STRICT', 'SAUVOLA']),
+    ocrClass: OcrClassSchema,
+    classWhy: z.string().min(1),
+    asReadP: z.number().min(0).max(1),
+    probabilityMargin: z.number().finite(),
+    sequenceMargin: z.number().nonnegative(),
+    minGlyphScore: z.number().min(0).max(1),
+    maxRunnerRatio: z.number().min(0),
+    entropy: z.number().nonnegative(),
+    capHeightPx: z.number().positive(),
+    sequences: z.array(
+      z
+        .object({
+          text: z.string().min(1),
+          valueCm: z.number().positive().optional(),
+          logP: z.number().finite(),
+          p: z.number().min(0).max(1),
+          imageScore: z.number().min(0).max(1),
+          nonTop: z.array(z.object({ index: z.number().int().nonnegative(), top: z.string().min(1), chosen: z.string().min(1), ratio: z.number().min(0) }).strict()),
+          minGlyphMargin: z.number().finite(),
+          avgGlyphMargin: z.number().finite(),
+          variants: z.array(z.enum(['DEFAULT', 'STRICT', 'SAUVOLA'])),
+          pathIds: z.array(z.string().min(1)),
+          asRead: z.boolean(),
+        })
+        .strict(),
+    ),
+    glyphs: z.array(
+      z
+        .object({
+          box: PixelRectSchema,
+          candidates: z.array(z.object({ char: z.string().min(1).max(2), score: z.number().min(0).max(1), p: z.number().min(0).max(1) }).strict()),
+          runnerRatio: z.number().min(0),
+          topologyRunnerRatio: z.number().min(0),
+          holes: z.number().int().nonnegative(),
+          touching: z.boolean(),
+          broken: z.boolean(),
+        })
+        .strict(),
+    ),
+    paths: z.array(
+      z
+        .object({
+          id: z.string().min(1),
+          variant: z.enum(['DEFAULT', 'STRICT', 'SAUVOLA']),
+          kind: z.enum(['ANCHOR', 'RECUT']),
+          text: z.string().min(1),
+          slope: z.number().finite(),
+          cuts: z.array(z.number().int()),
+          changedBoundaries: z.number().int().nonnegative(),
+          segScore: z.number().min(0).max(1),
+          ratioToBest: z.number().min(0),
+        })
+        .strict(),
+    ),
+    expansions: z.number().int().nonnegative(),
+    truncatedBy: z.enum(['MASS', 'COUNT', 'FLOOR', 'NONE']),
+    cache: z.enum(['HIT', 'MISS']),
+  })
+  .strict()
+export type NumericLatticeRecord = z.infer<typeof NumericLatticeRecordSchema>
+
 export const MetricEvidenceSetSchema = z
   .object({
     schema: z.literal(METRIC_EVIDENCE_SCHEMA),
@@ -711,6 +866,8 @@ export const MetricEvidenceSetSchema = z
     metricSolutions: z.array(FrameMetricSolutionSchema).optional(),
     /** 1.2.0: how the chains of a frame stand to each other; empty on older sets. */
     chainRelations: z.array(ChainRelationSchema).optional(),
+    /** 1.4.0: each dimension-label ink's numeric lattice, as the reader generated it from the image alone. */
+    numericLattices: z.array(NumericLatticeRecordSchema).optional(),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })
   .strict()

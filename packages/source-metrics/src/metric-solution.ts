@@ -48,10 +48,11 @@ import { compareTokens, textAxisOf, tokenMerit } from './ocr.js'
 import type { TextOrientation, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { toCentimetres } from './schema.js'
+import type { LabelLattice, OcrClass } from './numeric-lattice.js'
 import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricConfidence, OrientationDecision, ScaleHypothesis } from './schema.js'
 
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
-export const METRIC_SOLVER_VERSION = '1.1.0' as const
+export const METRIC_SOLVER_VERSION = '1.2.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two
@@ -101,6 +102,12 @@ export type FrameMetricInput = {
   /** What the drawing's own content allows a scale to be (the wall-thickness check for plans). */
   plausibility?: ScalePlausibility
   checkpoint?: Checkpoint
+  /**
+   * 005E: each label ink's numeric lattice (image only, `labelLattice`), by raw token. With one, the ink's witness value
+   * is the lattice's as-read string, its alternatives are the lattice's other values, and its reading quality decides
+   * whether it may count. Without one (a caller that read no lattice), the 005D reading and one-glyph alternatives.
+   */
+  lattices?: ReadonlyMap<TextToken, { id: string; lattice: LabelLattice }>
 }
 
 export type FrameMetricOutput = {
@@ -211,8 +218,22 @@ type Obs = {
   px: number
   /** Long enough to state a scale to 4 %, and the ink's one primary binding: only these count as witnesses. */
   decisive: boolean
-  /** 005D: the ink's other values within one glyph (V1), in centimetres: what the reader half-saw. */
+  /** 005D: the ink's other values within one glyph (V1), in centimetres: what the reader half-saw. 005E: the lattice's. */
   alts: number[]
+  /** 005E: the ink's reading quality (`labelLattice`); undefined when no lattice was read (treated as SUPPORTED). */
+  ocrClass?: OcrClass
+  /** 005E: for the structural check, each alternative's distance from the as-read string (non-top glyph choices). */
+  altCost: Map<number, number>
+  /**
+   * 005E: the alternatives that may contest a scale — those the ink holds at least `VALUE_BOUNDS.contestRatio` as
+   * strongly as its reading (an AMBIGUOUS ink: every one it emitted). A value the image barely supports does not make a
+   * well-read ink neutral; 005D's one-glyph values (ratio ≥ 0.7) all qualify.
+   */
+  contestAlts: number[]
+  /** 005E: the ink's lattice, for the record of which value a span is finally given. */
+  lattice?: LabelLattice
+  /** 005E: refuted as read by its own total/children arithmetic (M5): it no longer witnesses. */
+  refuted?: { chosenCm: number }
 }
 
 /** A cm dimension is printed without a leading zero; `0,45` (metres) and a lone `0` are not that. */
@@ -230,7 +251,7 @@ export const hasLeadingZero = (text: string): boolean => /^0\d/.test(text)
 export const BINDING_BOUNDS = { centred: 0.1, ambiguity: 0.05, distinct: 0.03, candidateCentring: 0.3 } as const
 
 /** The glyph ratio (alternative ÷ winner) at which a one-character alternative is a value the ink may be (V1). */
-export const VALUE_BOUNDS = { glyphRatio: 0.7, alternatives: 4 } as const
+export const VALUE_BOUNDS = { glyphRatio: 0.7, alternatives: 4, latticeAlternatives: 8, contestRatio: 0.5 } as const
 
 /** One span a label could be measuring, and how well it is placed to be the one. */
 export type SpanBinding = {
@@ -336,6 +357,21 @@ export function boundedValues(token: TextToken): Array<{ text: string; valueCm: 
   return [...out.values()].sort((a, b) => b.ratio - a.ratio || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0)).slice(0, VALUE_BOUNDS.alternatives)
 }
 
+/**
+ * 005E: the values a lattice offers besides its as-read one, as V1's records: every other dimension the image supports
+ * (at most `VALUE_BOUNDS.latticeAlternatives`), with `ratio` its probability over the as-read one's (capped at 1).
+ * They make an ink neutral or are chosen among by independent evidence; they are never readings, never witnesses.
+ */
+export function latticeAlternatives(lattice: LabelLattice): Array<{ text: string; valueCm: number; ratio: number }> {
+  const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
+  const out = new Map<number, { text: string; valueCm: number; ratio: number }>()
+  for (const q of lattice.sequences) {
+    if (q.asRead || q.valueCm === undefined || q.valueCm === lattice.asReadValueCm || out.has(q.valueCm)) continue
+    out.set(q.valueCm, { text: q.text, valueCm: q.valueCm, ratio: round6(own > 0 ? Math.min(1, q.p / own) : 1) })
+  }
+  return [...out.values()].slice(0, VALUE_BOUNDS.latticeAlternatives)
+}
+
 function observationsOf(input: FrameMetricInput, orientation: TextOrientation, assigned: readonly ChainToken[][], regionOf: Map<TextToken, Region>): Obs[] {
   const minLength = input.minPixelLength ?? 6
   const out: Obs[] = []
@@ -345,9 +381,14 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
     entries.forEach((entry, idx) => {
       const region = regionOf.get(entry.token)
       if (!region) return
-      // As read: the lattice's own first reading, with no substitution in it.
-      const reads = entry.readings.filter((r) => r.substitutions === 0)
-      const alternatives = boundedValues(entry.token)
+      // As read: the 005E lattice's as-read string when the ink was re-read (its other values are alternatives, never
+      // readings); otherwise the legacy lattice's own first reading, with no substitution in it, and 005D's V1 values.
+      const held = input.lattices?.get(entry.token)
+      const lattice = held?.lattice
+      if (lattice && lattice.asReadValueCm === undefined) return
+      const reads: Array<{ text: string; valueCm: number }> = lattice ? [{ text: lattice.asRead, valueCm: lattice.asReadValueCm as number }] : entry.readings.filter((r) => r.substitutions === 0)
+      const alternatives = lattice ? latticeAlternatives(lattice) : boundedValues(entry.token)
+      const altCost = new Map<number, number>(lattice ? lattice.sequences.filter((q) => !q.asRead && q.valueCm !== undefined).map((q) => [q.valueCm as number, Math.max(1, q.nonTop.length)]) : alternatives.map((a) => [a.valueCm, 1]))
       // 005D: a detected mark is a detection. A reading is bound to every span it could measure —
       // across up to two ticks or questionable marks and any rejected ones — and measures ONE of
       // them: the primary binding. Only that one may decide a scale; the others are recorded.
@@ -365,7 +406,7 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             chainId: input.chainIds[c],
             textRegionId: region.id,
             orientation,
-            rawText: entry.token.text,
+            rawText: lattice ? lattice.asRead : entry.token.text,
             valueCm: round6(cm),
             axis: chain.axis === 'HORIZONTAL' ? 'X' : 'Y',
             fromPx: round6(chain.ticks[from].atPx),
@@ -379,6 +420,7 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             status: 'RAW',
             binding: { role, offsetShare: binding.offsetShare, questionableEnds: binding.questionableEnds, skipped: { ...binding.skipped } },
             ...(alternatives.length > 0 ? { valueAlternatives: alternatives.map((a) => ({ text: a.text, valueCm: a.valueCm, ratio: a.ratio })) } : {}),
+            ...(lattice && held ? { ocr: { latticeId: held.id, rawTopText: lattice.rawTopText, ocrClass: lattice.ocrClass, asReadP: lattice.asReadP, probabilityMargin: lattice.probabilityMargin, asReadVariant: lattice.asReadVariant } } : {}),
           }
           // Weight rises with the span, as in the legacy vote: the ticks are located to a pixel whatever the span.
           // Only a tick run across discounts it; a questionable or rejected mark is not a statement of the draughtsman's.
@@ -390,8 +432,12 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             weight: round6(((entry.token.confidence * px) / 50) * 0.7 ** binding.skipped.tick),
             cm,
             px,
-            decisive: role === 'PRIMARY' && px >= DECISIVE_SPAN_TOLERANCES * input.tolerancePx && entry.token.height >= LEGIBLE_CAP_HEIGHT_PX && !record.leadingZero,
+            // 005E: a LOW_QUALITY reading (a glyph the matcher could not read, or text under the legible height) never decides.
+            decisive: role === 'PRIMARY' && px >= DECISIVE_SPAN_TOLERANCES * input.tolerancePx && entry.token.height >= LEGIBLE_CAP_HEIGHT_PX && !record.leadingZero && lattice?.ocrClass !== 'LOW_QUALITY',
             alts: alternatives.map((a) => a.valueCm),
+            ...(lattice ? { ocrClass: lattice.ocrClass, lattice } : {}),
+            altCost,
+            contestAlts: alternatives.filter((a) => lattice?.ocrClass === 'AMBIGUOUS' || a.ratio >= VALUE_BOUNDS.contestRatio).map((a) => a.valueCm),
           })
         }
       }
@@ -546,10 +592,12 @@ export function confidenceOf(h: Evidence, rival?: Evidence): MetricConfidence {
 }
 
 /** The shares of their axes a set of independent witnesses measure, as the evidence fields of a hypothesis. */
-function shareEvidence(members: readonly Obs[], share: (o: Obs) => number): Pick<ScaleHypothesis, 'longestShare' | 'substantialWitnesses' | 'majorWitnesses' | 'corroborated' | 'axesMeasured'> {
+function shareEvidence(members: readonly Obs[], share: (o: Obs) => number, qualified: (o: Obs) => boolean = () => true): Pick<ScaleHypothesis, 'longestShare' | 'substantialWitnesses' | 'majorWitnesses' | 'corroborated' | 'axesMeasured'> {
   const substantial = members.filter((m) => share(m) >= WITNESS_SHARE.substantial)
   const major = members.filter((m) => share(m) >= WITNESS_SHARE.major)
-  const corroborated = major.some((a) => substantial.some((b) => b.region !== a.region && b.chain !== a.chain))
+  // 005E (M3): with `qualified`, the corroborating pair must hold one ink read better than AMBIGUOUS — two coin tosses
+  // that happen to agree are not two witnesses.
+  const corroborated = major.some((a) => substantial.some((b) => b.region !== a.region && b.chain !== a.chain && (qualified(a) || qualified(b))))
   const onAxis = (axis: 'X' | 'Y'): Obs[] => substantial.filter((m) => m.record.axis === axis)
   const axesMeasured = onAxis('X').length > 0 && onAxis('Y').length > 0 && major.length > 0
   return { longestShare: round6(members.reduce((m, o) => Math.max(m, share(o)), 0)), substantialWitnesses: substantial.length, majorWitnesses: major.length, corroborated, axesMeasured }
@@ -734,6 +782,10 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     if (first === undefined) statementOf.set(key, w.chain)
     else if (first !== w.chain) w.decisive = false
   }
+  // 005E (M5): a total whose children — distinct inks, read SUPPORTED or better — refute it as read, and which agrees
+  // with them in exactly one assignment of the inks' own lattice values at the least cost (≤ 2 glyph choices), is
+  // STRUCTURAL: the as-read values that assignment replaces stop being witnesses; nothing is added to any scale.
+  const structural = structuralSupport(input.frameId, chains, chainIds, bounded, medianLabelHeight(labels))
 
   // --- 5. the scales the witnesses support -------------------------------------
   const longestOn = (axis: 'HORIZONTAL' | 'VERTICAL'): number => Math.max(1, ...chains.filter((c) => c.axis === axis).map((c) => c.ticks[c.ticks.length - 1].atPx - c.ticks[0].atPx))
@@ -780,67 +832,68 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     .sort((a, b) => b.independentWeight - a.independentWeight || b.weight - a.weight || a.cmPerPixel - b.cmPerPixel)
     .slice(0, METRIC_BOUNDS.hypotheses)
   hypotheses.forEach((h, i) => checkpoint?.tick({ subphase: { id: 'SCALE', label: 'comparing scales' }, counters: { hypothesis: i + 1, hypothesesTotal: hypotheses.length } }))
+  // 005E (M1–M3, pre-review D C2): which scale the witnesses decide, and how far — on each scale's DECIDING inks.
+  // An ink counted for one scale is contested when a value its own lattice generated (never a value fitted to a scale)
+  // fits a distinct scale with standing — a substantial counted ink of its own whose values do not fit back — within
+  // the pixel tolerance of both spans. The same rule, with the same tolerance, weighs the selection, every rival and
+  // the page vote (005D applied it one way and only when it would swap or tie the selection). Contested inks leave the
+  // ranking and the confidence; a corroborating pair must hold an ink read better than AMBIGUOUS.
+  const counts = (w: Obs): boolean => w.record.independence === 'INDEPENDENT' && w.decisive
+  const countedOf = (h: ScaleHypothesis): Obs[] => (clusterOf.get(h.id)?.members ?? []).filter(counts)
   const candidates = hypotheses.filter((h) => h.plausible && h.independentGroups >= 1).sort((a, b) => compareEvidence(a, b) || a.cmPerPixel - b.cmPerPixel)
-  let selected = candidates[0]
-  let rival = selected ? candidates.find((h) => h !== selected && Math.abs(Math.log(h.cmPerPixel / selected.cmPerPixel)) >= DISTINCT_RATIO) : undefined
-  // 005D (V3 between rivals): an ink does not decide between the strongest scale and a rival when
-  // one of its bounded alternatives, on its primary binding, fits the other one — within the pixel
-  // tolerance of both spans, since a rival's scale is itself measured on a span of its own. Each
-  // distinct rival, strongest first, is compared again with the strongest scale on their remaining
-  // inks: the first that then ranks first is the selection, and the scale it displaced its rival.
-  // When the two keep no deciding ink between them, nothing decides, and the solution says so
-  // (INCONCLUSIVE) instead of taking the stronger side.
-  const rivalNeutral = new Set<string>()
-  let undecidedRival = false
-  if (selected) {
-    const countedOf = (h: ScaleHypothesis): Obs[] => (clusterOf.get(h.id)?.members ?? []).filter((w) => w.record.independence === 'INDEPENDENT' && w.decisive)
-    // Within the pixel tolerance of both spans, the rival's capped at the ink's own (post-review B P1-1): a
-    // rival resting on a short reading lends at most one more tolerance to the long one it would make neutral.
-    const widest = (h: ScaleHypothesis): number => Math.max(1, ...countedOf(h).map((w) => w.px))
-    const fitsOther = (w: Obs, other: ScaleHypothesis): boolean => w.alts.some((v) => Math.abs(v / other.cmPerPixel - w.px) <= tol * (1 + Math.min(1, w.px / widest(other))))
-    // Standing: both axes, corroboration, an overall reading — the first three places of the evidence tuple.
-    const standing = (e: Evidence): number[] => evidenceTuple(e).slice(0, 3)
-    const lowerStanding = (a: Evidence, b: Evidence): boolean => {
-      const [x, y] = [standing(a), standing(b)]
-      const i = x.findIndex((v, k) => v !== y[k])
-      return i >= 0 && x[i] < y[i]
+  const distinctScale = (a: number, b: number): boolean => Math.abs(Math.log(a / b)) >= DISTINCT_RATIO
+  // A scale is itself measured on a span of its own: the tolerance is the ink's and, capped at as much again, the
+  // scale's widest counted span's (005D post-review B P1-1).
+  const widestOf = (members: readonly Obs[]): number => Math.max(1, ...members.map((w) => w.px))
+  const fitsAt = (w: Obs, cm: number, widest: number): boolean => w.contestAlts.some((v) => Math.abs(v / cm - w.px) <= tol * (1 + Math.min(1, w.px / widest)))
+  // Standing: a counted ink of the rival (decisive: a span long enough to state a scale, read better than LOW_QUALITY)
+  // whose own values do not fit back. Pre-review D also asked for a quarter of the axis; a true scale stated by one
+  // part a hair under that share then cannot contest a misread overall, and the misread is adopted — a contest
+  // costs at most an INCONCLUSIVE, a missed one a wrong scale.
+  const standingAgainst = (members: readonly Obs[], cm: number, widest: number): boolean => members.some((w) => !fitsAt(w, cm, widest))
+  const contestedMemo = new Map<string, Set<string>>()
+  const contestedIn = (h: ScaleHypothesis): Set<string> => {
+    const held = contestedMemo.get(h.id)
+    if (held) return held
+    const out = new Set<string>()
+    const own = countedOf(h)
+    for (const r of candidates) {
+      if (r === h || !distinctScale(r.cmPerPixel, h.cmPerPixel)) continue
+      const theirs = countedOf(r)
+      if (!standingAgainst(theirs, h.cmPerPixel, widestOf(own))) continue
+      for (const w of own) if (fitsAt(w, r.cmPerPixel, widestOf(theirs))) out.add(w.record.id)
     }
-    const remaining = (h: ScaleHypothesis, other: ScaleHypothesis): { kept: Obs[]; neutral: Obs[]; evidence: Evidence } => {
-      const kept = countedOf(h).filter((w) => !fitsOther(w, other))
-      const neutral = countedOf(h).filter((w) => fitsOther(w, other))
-      return { kept, neutral, evidence: { independentGroups: kept.length, independentWeight: round6(kept.reduce((a, w) => a + w.weight, 0)), ...shareEvidence(kept, shareOf) } }
-    }
-    const strongest = selected
-    for (const other of candidates.filter((h) => h !== strongest && Math.abs(Math.log(h.cmPerPixel / strongest.cmPerPixel)) >= DISTINCT_RATIO)) {
-      const [a, b] = [remaining(strongest, other), remaining(other, strongest)]
-      if (a.neutral.length === 0 && b.neutral.length === 0) continue
-      if (b.kept.length > 0 && compareEvidence(b.evidence, a.evidence) < 0) {
-        for (const w of [...a.neutral, ...b.neutral]) rivalNeutral.add(w.record.id)
-        // Neutrality never promotes a scale of lower standing than the strongest's whole evidence: then
-        // nothing decides between them (post-review B P1-1).
-        if (lowerStanding(other, strongest)) {
-          undecidedRival = true
-          break
-        }
-        ;[selected, rival] = [other, strongest]
-        break
-      }
-      if (a.kept.length === 0 && b.kept.length === 0) {
-        for (const w of [...a.neutral, ...b.neutral]) rivalNeutral.add(w.record.id)
-        undecidedRival = true
-        break
-      }
-    }
+    contestedMemo.set(h.id, out)
+    return out
   }
-  const contest = selected && rival && selected.independentWeight > 0 ? round6(rival.independentWeight / selected.independentWeight) : undefined
+  const decidingOf = (h: ScaleHypothesis): Obs[] => countedOf(h).filter((w) => !contestedIn(h).has(w.record.id))
+  const qualified = (w: Obs): boolean => w.ocrClass !== 'AMBIGUOUS'
+  const evidenceOf = (members: readonly Obs[], q?: (w: Obs) => boolean): Evidence => ({ independentGroups: members.length, independentWeight: round6(members.reduce((a, w) => a + w.weight, 0)), ...shareEvidence(members, shareOf, q) })
+  const blindEvidence = (h: ScaleHypothesis): Evidence => evidenceOf(countedOf(h))
+  const awareEvidence = (h: ScaleHypothesis): Evidence => evidenceOf(decidingOf(h), qualified)
+  // Standing: both axes, corroboration, an overall reading — the first three places of the evidence tuple.
+  const lowerStanding = (a: Evidence, b: Evidence): boolean => {
+    const [x, y] = [evidenceTuple(a).slice(0, 3), evidenceTuple(b).slice(0, 3)]
+    const i = x.findIndex((v, k) => v !== y[k])
+    return i >= 0 && x[i] < y[i]
+  }
+  const strongest = candidates[0]
+  const ranked = [...candidates].sort((a, b) => compareEvidence(awareEvidence(a), awareEvidence(b)) || compareEvidence(a, b) || a.cmPerPixel - b.cmPerPixel)
+  let selected = ranked[0]
+  let undecidedRival = false
+  // Contesting never promotes a scale of lower standing than the strongest's whole evidence: then nothing decides
+  // between them, and the solution says so (INCONCLUSIVE) instead of taking either side.
+  if (selected && strongest && selected !== strongest && distinctScale(selected.cmPerPixel, strongest.cmPerPixel) && lowerStanding(awareEvidence(selected), blindEvidence(strongest))) {
+    selected = strongest
+    undecidedRival = true
+  }
+  const rival = selected ? ranked.find((h) => h !== selected && distinctScale(h.cmPerPixel, selected.cmPerPixel)) : undefined
+  const rivalNeutral = new Set<string>([...(selected ? contestedIn(selected) : []), ...(rival ? contestedIn(rival) : [])])
+  const contest = selected && rival && awareEvidence(selected).independentWeight > 0 ? round6(awareEvidence(rival).independentWeight / awareEvidence(selected).independentWeight) : undefined
 
   // --- 6. what that makes of the legacy vote's scale -------------------------
   const L = legacy.pooledScale
   const legacyAxis = (axis: 'X' | 'Y'): number | undefined => (axis === 'X' ? legacy.scaleX : legacy.scaleY) ?? L
-  // 005D (V3): an ink does not decide between two scales when, within one character the matcher
-  // half-saw, it fits the other one too. Its as-read value says one scale; its own alternative the
-  // other; which it is was never read. Asked only when the two scales are distinct.
-  const counts = (w: Obs): boolean => w.record.independence === 'INDEPENDENT' && w.decisive
   const agreeTol = (h: ScaleHypothesis): number => {
     const longest = Math.max(1, ...bounded.filter((w) => h.witnessIds.includes(w.record.id) && w.record.independence === 'INDEPENDENT' && w.decisive).map((w) => w.px))
     return Math.max(0.012, tol / longest)
@@ -848,13 +901,21 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   // Asked whenever the selection would not simply confirm the vote (post-review B P1-2): between the
   // confirmation tolerance and the distinct ratio a selection was neither confirmed nor checked.
   const distinctFromLegacy = selected !== undefined && L !== undefined && Math.abs(Math.log(selected.cmPerPixel / L)) > agreeTol(selected)
-  const neutralAt = (w: Obs, cm: number | undefined): boolean => cm !== undefined && w.alts.some((v) => Math.abs(v / cm - w.px) <= tol)
+  const selectedMembers = selected ? countedOf(selected) : []
+  const voteMembers = bounded.filter((w) => {
+    const at = legacyAxis(w.record.axis)
+    return counts(w) && at !== undefined && Math.abs(w.cm / at - w.px) <= tol
+  })
+  const atVote = (w: Obs): number => legacyAxis(w.record.axis) as number
+  // The vote is the incumbent, not a rival: it never wins by a contest, it can only keep its place. So an ink whose own
+  // values fit both decides nothing between them without the vote needing standing (005D V3), now in both directions
+  // and at the one tolerance every contest uses (005D asked the vote at plain `tol`, pre-review D P1-2).
+  const selectedStands = selected !== undefined && distinctFromLegacy
+  const voteStands = selected !== undefined && distinctFromLegacy
   const neutral = new Set<string>()
   const legacySupport: Obs[] = []
-  for (const w of bounded) {
-    const at = legacyAxis(w.record.axis)
-    if (!counts(w) || at === undefined || Math.abs(w.cm / at - w.px) > tol) continue
-    if (distinctFromLegacy && selected && neutralAt(w, selected.cmPerPixel)) {
+  for (const w of voteMembers) {
+    if (selected && selectedStands && fitsAt(w, selected.cmPerPixel, widestOf(selectedMembers))) {
       neutral.add(w.record.id)
       continue
     }
@@ -867,15 +928,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     independentWeight: round6([...legacyRegions.values()].reduce((a, w) => a + w.weight, 0)),
     chains: new Set([...legacyRegions.values()].map((w) => w.chain)).size,
     independentAxes: [...new Set([...legacyRegions.values()].map((w) => w.record.axis))].sort() as Array<'X' | 'Y'>,
-    ...shareEvidence([...legacyRegions.values()], shareOf),
+    ...shareEvidence([...legacyRegions.values()], shareOf, qualified),
   }
   const legacyAnchors = legacy.solved.flatMap((s) => s.segments).filter((g) => g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED')
 
   let relation: FrameMetricSolution['relation']
   let confidence: MetricConfidence
-  // The selected scale's deciding evidence against the vote: its counted witnesses less those its
-  // own alternatives would put on the vote's scale (V3). Without a distinct vote it is all of them.
-  const selectedMembers = selected ? (clusterOf.get(selected.id)?.members ?? []).filter(counts) : []
   // 005D (§43): the hierarchy, checked on values as read — primary bindings, in each chain's decided
   // orientation. A total and the children it frames that disagree as read, the selected scale stated
   // on one side and a distinct rival on the other, with no counted reading outside the pair to decide
@@ -884,7 +942,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   const labelHeight = medianLabelHeight(labels)
   const undecidedConflict = ((): boolean => {
     if (!selected || !rival) return false
-    const rivalMembers = (clusterOf.get(rival.id)?.members ?? []).filter(counts)
+    const rivalMembers = decidingOf(rival)
+    const selectedMembers = decidingOf(selected)
     const conflicts = dimensionHierarchy(input.frameId, chains, chainIds, [], observationsAsRead, labelHeight).filter((r) => r.kind === 'CONFLICTS_WITH')
     return conflicts.some((r) => {
       const inPair = (w: Obs): boolean => chainIds[w.chain] === r.fromChainId || chainIds[w.chain] === r.toChainId
@@ -893,14 +952,66 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       return selectedMembers.some(inPair) && rivalMembers.some(inPair) && [...selectedMembers, ...rivalMembers].every(inPair) && selectedMembers.length <= rivalMembers.length
     })
   })()
-  const own: MetricConfidence = undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : selected ? confidenceOf(selected, rival) : 'INCONCLUSIVE'
-  const deciding = selectedMembers.filter((w) => {
-    if (!distinctFromLegacy || !neutralAt(w, legacyAxis(w.record.axis))) return true
+  let own: MetricConfidence = undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : selected ? confidenceOf(awareEvidence(selected), rival ? awareEvidence(rival) : undefined) : 'INCONCLUSIVE'
+  const selectedDeciding = selected ? decidingOf(selected) : []
+  const deciding = selectedDeciding.filter((w) => {
+    if (!voteStands || !fitsAt(w, atVote(w), widestOf(voteMembers))) return true
     neutral.add(w.record.id)
     return false
   })
-  const decidingEvidence: Evidence = { independentGroups: deciding.length, independentWeight: round6(deciding.reduce((a, w) => a + w.weight, 0)), ...shareEvidence(deciding, shareOf) }
-  const ownDeciding: MetricConfidence = deciding.length === 0 || undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : deciding.length === selectedMembers.length ? own : confidenceOf(decidingEvidence, rival)
+  const decidingEvidence: Evidence = evidenceOf(deciding, qualified)
+  let ownDeciding: MetricConfidence = deciding.length === 0 || undecidedConflict || undecidedRival ? 'INCONCLUSIVE' : deciding.length === selectedDeciding.length ? own : confidenceOf(decidingEvidence, rival ? awareEvidence(rival) : undefined)
+  // 005E (M4, pre-review D C3): false consensus. Blind to reading quality the scale would stand at SUPPORTED or better
+  // and, weighed by it, it does not — and the doubt points somewhere: a rival with standing has an ink read better than
+  // one this scale lost (BETTER_CLASS_RIVAL), or two ambiguous inks of this scale have lattice values agreeing on one
+  // other scale (CANDIDATE_CONSENSUS). Then the confidence is INCONCLUSIVE, so the first reading is challenged; the
+  // challenger is named, never selected, and a candidate consensus is never a hypothesis.
+  let falseConsensus: NonNullable<FrameMetricSolution['topology']>['falseConsensus']
+  const demoted: Obs[] = []
+  if (selected) {
+    const kept = new Set(decidingOf(selected).map((w) => w.record.id))
+    for (const w of countedOf(selected)) if (!kept.has(w.record.id) || w.ocrClass === 'AMBIGUOUS') demoted.push(w)
+    const blindRival = strongest ? candidates.find((h) => h !== strongest && distinctScale(h.cmPerPixel, strongest.cmPerPixel)) : undefined
+    const blindTier = strongest ? confidenceOf(blindEvidence(strongest), blindRival ? blindEvidence(blindRival) : undefined) : 'INCONCLUSIVE'
+    if (RANK[blindTier] >= RANK.SUPPORTED && RANK[own] < RANK.SUPPORTED && demoted.length > 0) {
+      const grade = (w: Obs): number => (w.ocrClass === 'CLEAR' ? 3 : w.ocrClass === 'AMBIGUOUS' ? 1 : w.ocrClass === 'LOW_QUALITY' ? 0 : 2)
+      const worst = Math.min(...demoted.map(grade))
+      const challenger = ranked.find((r) => r !== selected && distinctScale(r.cmPerPixel, (selected as ScaleHypothesis).cmPerPixel) && standingAgainst(countedOf(r), (selected as ScaleHypothesis).cmPerPixel, widestOf(selectedMembers)) && countedOf(r).some((w) => grade(w) > worst))
+      let candidateScale: number | undefined
+      if (!challenger) {
+        const ambiguous = countedOf(selected).filter((w) => w.ocrClass === 'AMBIGUOUS').sort((a, b) => (a.record.id < b.record.id ? -1 : 1))
+        search: for (let i = 0; i < ambiguous.length; i += 1) {
+          for (let j = i + 1; j < ambiguous.length; j += 1) {
+            const [u, v] = [ambiguous[i], ambiguous[j]]
+            if (u.chain === v.chain || u.region === v.region) continue
+            for (const a of [...u.alts].sort((x, y) => x - y)) {
+              for (const b of [...v.alts].sort((x, y) => x - y)) {
+                const c = (a + b) / (u.px + v.px)
+                if (Math.abs(a / c - u.px) > tol || Math.abs(b / c - v.px) > tol || !distinctScale(c, selected.cmPerPixel) || (plaus && !plaus(c).plausible)) continue
+                candidateScale = round6(c)
+                break search
+              }
+            }
+          }
+        }
+      }
+      if (challenger || candidateScale !== undefined) {
+        falseConsensus = {
+          kind: challenger ? 'BETTER_CLASS_RIVAL' : 'CANDIDATE_CONSENSUS',
+          selectedHypothesisId: selected.id,
+          ...(challenger ? { challengerHypothesisId: challenger.id } : {}),
+          ...(candidateScale !== undefined ? { candidateCmPerPixel: candidateScale } : {}),
+          demotedObservationIds: demoted.map((w) => w.record.id).sort(),
+          blindConfidence: blindTier,
+          why: challenger
+            ? `blind to reading quality ${selected.cmPerPixel} cm/px stands ${blindTier}; its inks read ${demoted.map((w) => `${w.record.rawText} (${w.ocrClass ?? 'unrated'})`).join(', ')} do not decide, and ${challenger.cmPerPixel} cm/px has an ink read better`
+            : `blind to reading quality ${selected.cmPerPixel} cm/px stands ${blindTier}; two of its inks are coin tosses whose own other values agree on ${candidateScale} cm/px`,
+        }
+        own = 'INCONCLUSIVE'
+        ownDeciding = 'INCONCLUSIVE'
+      }
+    }
+  }
   // Replacing the page vote's scale needs more than disagreeing with it: the vote had no
   // independent reading at all and this one has an overall reading or two that agree, or it is
   // beaten outright on axes, agreement and count by readings that are at least SUPPORTED.
@@ -919,7 +1030,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     confidence = ownDeciding
   } else if (L !== undefined) {
     relation = 'LEGACY_UNCONFIRMED'
-    confidence = legacyStats.independentGroups === 0 ? 'INCONCLUSIVE' : confidenceOf(legacyEvidence, selected)
+    confidence = legacyStats.independentGroups === 0 ? 'INCONCLUSIVE' : confidenceOf(legacyEvidence, selected ? awareEvidence(selected) : undefined)
   } else if (selected && RANK[own] >= RANK.SUPPORTED) {
     relation = 'ADDED'
     confidence = own
@@ -983,7 +1094,22 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       inList.add(region.id)
     }
   }
-  const perChain = assignTokens(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true })
+  // 005E (M7): read again, a chain takes its labels' lattices — the as-read value as the reading, the image-supported
+  // others as corrections a scale may choose (CHAIN_CORRECTED, DERIVED) — instead of the legacy substitution list.
+  const latticeReadings = (token: TextToken): ChainToken['readings'] | undefined => {
+    const lattice = input.lattices?.get(token)?.lattice
+    if (!lattice || lattice.asReadValueCm === undefined) return undefined
+    const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
+    const out: ChainToken['readings'] = []
+    for (const q of lattice.sequences) {
+      if (q.valueCm === undefined) continue
+      const parsed = parseNumber(q.text).find((x) => x.kind === 'LINEAR_DIMENSION')
+      if (!parsed) continue
+      out.push(q.asRead ? { text: q.text, parsed, valueCm: q.valueCm, confidence: 1, substitutions: 0 } : { text: q.text, parsed, valueCm: q.valueCm, confidence: round6(own > 0 ? Math.min(1, q.p / own) : 0), substitutions: Math.max(1, q.nonTop.length) })
+    }
+    return out.length > 0 ? out : undefined
+  }
+  const perChain = assignTokens(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined })
   const solved: SolvedChain[] = []
   const tokensPerChain: ChainToken[][] = []
   const reread: string[] = []
@@ -1031,6 +1157,31 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
   solved.forEach((s, c) => {
     for (const g of s.segments) if (g.origin === 'READ' && g.token) acceptedKeys.add(`${c}|${g.token.text}|${g.token.box.x0}|${g.token.box.y0}|${g.fromPx}|${g.toPx}`)
   })
+  // 005E (M6): the value a span is given once a scale is chosen, its image score and its metric support recorded apart.
+  // AS_READ when the reading fits (or nothing fits better); STRUCTURAL when its own hierarchy settled it; SCALE_RANKED,
+  // the best-image lattice value that fits the chosen scale — DERIVED, never a witness; UNRESOLVED when two values of
+  // different length fit within an image ratio of 0.9. Nothing here feeds back into the scale.
+  const selectedValueOf = (x: Obs, scale: number | undefined): NonNullable<NonNullable<DimensionObservation['ocr']>['selected']> => {
+    const lattice = x.lattice
+    const rankOf = (text: string): number | undefined => {
+      const i = lattice?.sequences.findIndex((q) => q.text === text) ?? -1
+      return i >= 0 ? i : undefined
+    }
+    const asIs = (): NonNullable<NonNullable<DimensionObservation['ocr']>['selected']> => {
+      const q = lattice?.sequences.find((v) => v.asRead)
+      return { by: 'AS_READ', text: x.record.rawText, valueCm: round6(x.cm), ...(q ? { imageScore: q.imageScore, imageRank: rankOf(q.text) } : {}), ...(scale !== undefined ? { metricResidualPx: round6(Math.abs(x.cm / scale - x.px)) } : {}) }
+    }
+    if (x.refuted) {
+      const q = lattice?.sequences.find((v) => v.valueCm === x.refuted?.chosenCm)
+      return { by: 'STRUCTURAL', valueCm: round6(x.refuted.chosenCm), ...(q ? { text: q.text, imageScore: q.imageScore, imageRank: rankOf(q.text) } : {}), ...(scale !== undefined ? { metricResidualPx: round6(Math.abs(x.refuted.chosenCm / scale - x.px)) } : {}) }
+    }
+    if (!lattice || scale === undefined || (Math.abs(x.cm / scale - x.px) <= tol && x.ocrClass !== 'LOW_QUALITY')) return asIs()
+    const fitting = lattice.sequences.filter((q) => q.valueCm !== undefined && Math.abs((q.valueCm as number) / scale - x.px) <= tol).sort((a, b) => b.imageScore - a.imageScore || (a.text < b.text ? -1 : 1))
+    if (fitting.length === 0) return asIs()
+    if (fitting.length >= 2 && fitting[1].valueCm !== fitting[0].valueCm && fitting[1].imageScore >= 0.9 * fitting[0].imageScore) return { by: 'UNRESOLVED', metricResidualPx: round6(Math.abs(x.cm / scale - x.px)) }
+    const q = fitting[0]
+    return { by: 'SCALE_RANKED', text: q.text, valueCm: q.valueCm, imageScore: q.imageScore, imageRank: rankOf(q.text), metricResidualPx: round6(Math.abs((q.valueCm as number) / scale - x.px)) }
+  }
   const observations: DimensionObservation[] = [...obsBy.values()]
     .flat()
     .map((x) => {
@@ -1041,7 +1192,8 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       const scale = finalScale(x.record.axis)
       const accepted = acceptedKeys.has(`${x.chain}|${x.entry.token.text}|${x.entry.token.box.x0}|${x.entry.token.box.y0}|${x.record.fromPx}|${x.record.toPx}`)
       const status: DimensionObservation['status'] = accepted && decidedHere ? 'ACCEPTED' : decidedHere && scale !== undefined && Math.abs(x.cm / scale - x.px) > tol ? 'REJECTED' : 'RAW'
-      return { ...x.record, independence, status }
+      const ocr = x.record.ocr && decidedHere && x.record.binding?.role === 'PRIMARY' ? { ...x.record.ocr, ...(x.refuted ? { refutedBy: 'STRUCTURAL' as const } : {}), selected: selectedValueOf(x, scale) } : x.record.ocr
+      return { ...x.record, independence, status, ...(ocr ? { ocr } : {}) }
     })
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
   const dedupedObservations = observations.filter((o, i) => i === 0 || o.id !== observations[i - 1].id)
@@ -1085,7 +1237,18 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       parallelCopies: relations.filter((r) => r.kind === 'PARALLEL_COPY_OF').length,
       ...(undecidedConflict ? { undecidedConflict } : {}),
     }
-    return { marks, bindings: roles, neutralObservationIds: [...new Set([...neutral, ...rivalNeutral])].sort(), hierarchy, ...(valueAmbiguity ? { valueAmbiguity } : {}) }
+    // 005E: the reading quality the decision stood on.
+    const countedSel = selected ? countedOf(selected) : []
+    const lowRegions = new Set(witnesses.filter((w) => w.ocrClass === 'LOW_QUALITY' && w.record.binding?.role === 'PRIMARY').map((w) => w.region))
+    const ocr = input.lattices
+      ? {
+          counted: { clear: countedSel.filter((w) => w.ocrClass === 'CLEAR').length, supported: countedSel.filter((w) => w.ocrClass === 'SUPPORTED').length, ambiguous: countedSel.filter((w) => w.ocrClass === 'AMBIGUOUS').length, unrated: countedSel.filter((w) => w.ocrClass === undefined).length },
+          lowQuality: lowRegions.size,
+          contestedObservationIds: [...new Set([...neutral, ...rivalNeutral])].sort(),
+          demotedObservationIds: demoted.map((w) => w.record.id).sort(),
+        }
+      : undefined
+    return { marks, bindings: roles, neutralObservationIds: [...new Set([...neutral, ...rivalNeutral])].sort(), hierarchy, ...(valueAmbiguity ? { valueAmbiguity } : {}), ...(ocr ? { ocr } : {}), ...(falseConsensus ? { falseConsensus } : {}), ...(structural.length > 0 ? { structural } : {}) }
   }
   const solution: FrameMetricSolution = {
     frameId: input.frameId,
@@ -1112,7 +1275,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     rereadChainIds: reread.sort(),
     counts: { textRegions: regions.length, observations: dedupedObservations.length, hypotheses: hypotheses.length },
     topology: topologyOf(),
-    why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too within one character, so nothing decides between them' : ''),
+    why: whyOf(relation, confidence, selected, L, legacyStats.independentGroups, contest) + (undecidedConflict ? '; a total and the children it frames disagree as read, each stating one of the two scales, and no reading outside them decides' : '') + (undecidedRival ? '; every reading that states it fits the rival scale too within one character, so nothing decides between them' : '') + (falseConsensus ? `; false consensus: ${falseConsensus.why}` : ''),
   }
   const chainOrientation = chains.map((_, c) => ({ orientation: choices[c].orientation, dependsOnScale: choices[c].decidedBy === 'OTHER_AXIS_SCALE' }))
 
@@ -1313,4 +1476,74 @@ export function dimensionHierarchy(
   const first = out.filter((r) => r.kind !== 'NESTED_IN').sort((x, y) => (order(x) < order(y) ? -1 : order(x) > order(y) ? 1 : 0))
   const nested = out.filter((r) => r.kind === 'NESTED_IN').sort((x, y) => (order(x) < order(y) ? -1 : order(x) > order(y) ? 1 : 0))
   return [...first, ...nested].slice(0, METRIC_BOUNDS.relations)
+}
+
+/**
+ * 005E (M5, pre-review D C4): the totals refuted as read by their own children, settled by the inks' lattices when
+ * exactly one assignment closes the sum. Scale-free: values and the hierarchy's agreement tolerance only. The total and
+ * its children must be distinct inks (no ink twice, no twin copy — `bounded` holds one reading per ink and span); the
+ * children must be read SUPPORTED or better; at most two glyph choices away from what was read, the cheapest
+ * agreeing assignment must be unique. Its replaced as-read values are marked refuted (they stop witnessing); its
+ * chosen values are recorded, never counted.
+ */
+function structuralSupport(frameId: string, chains: readonly RawChain[], chainIds: readonly string[], bounded: Obs[], labelHeight: number): NonNullable<NonNullable<FrameMetricSolution['topology']>['structural']> {
+  const asRead = bounded.filter((w) => w.decisive && w.record.binding?.role === 'PRIMARY' && w.record.independence !== 'ORIENTATION_UNDECIDED' && !w.record.leadingZero)
+  const relations = dimensionHierarchy(frameId, chains, chainIds, [], asRead.map((w) => ({ chain: w.chain, fromPx: w.record.fromPx, toPx: w.record.toPx, cm: w.cm })), labelHeight).filter((r) => r.kind === 'TOTAL_OF' && r.check === 'CONFLICT_AS_READ')
+  const out: NonNullable<NonNullable<FrameMetricSolution['topology']>['structural']> = []
+  const near = (a: number, b: number): boolean => Math.abs(a - b) <= 3
+  const agrees = (t: number, p: number): boolean => Math.abs(t - p) <= Math.max(2, 0.01 * t)
+  for (const r of relations) {
+    const a = chainIds.indexOf(r.fromChainId)
+    const b = chainIds.indexOf(r.toChainId)
+    if (a < 0 || b < 0) continue
+    const marks = chains[b].ticks.filter((t) => t.class !== 'REJECTED').map((t) => t.atPx)
+    const from = r.span?.fromPx ?? marks[0]
+    const to = r.span?.toPx ?? marks[marks.length - 1]
+    const total = asRead.find((w) => w.chain === a && near(w.record.fromPx, from) && near(w.record.toPx, to))
+    const inside = marks.filter((m) => m >= from - 3 && m <= to + 3)
+    const parts = inside.slice(0, -1).map((m, j) => asRead.find((w) => w.chain === b && near(w.record.fromPx, m) && near(w.record.toPx, inside[j + 1])))
+    if (!total || parts.length < 2 || parts.some((p) => p === undefined)) continue
+    const items = [total, ...(parts as Obs[])]
+    if (new Set(items.map((w) => w.region)).size !== items.length) continue
+    if ((parts as Obs[]).some((p) => p.ocrClass === 'AMBIGUOUS') || items.length > 9) continue
+    const options = items.map((w) => [{ cm: w.cm, cost: 0 }, ...[...w.altCost].map(([cm, cost]) => ({ cm, cost }))])
+    const value = (choice: number[]): { t: number; p: number } => ({ t: options[0][choice[0]].cm, p: choice.slice(1).reduce((x, c, i) => x + options[i + 1][c].cm, 0) })
+    const found: Array<{ choice: number[]; cost: number }> = []
+    const zero = items.map(() => 0)
+    // At most two inks away from what was read, each by one of its own lattice values.
+    for (let i = 0; i < items.length; i += 1) {
+      for (let x = 1; x < options[i].length; x += 1) {
+        const c1 = [...zero]
+        c1[i] = x
+        if (options[i][x].cost <= 2) {
+          const v = value(c1)
+          if (agrees(v.t, v.p)) found.push({ choice: c1, cost: options[i][x].cost })
+        }
+        for (let j = i + 1; j < items.length; j += 1) {
+          for (let y = 1; y < options[j].length; y += 1) {
+            const cost = options[i][x].cost + options[j][y].cost
+            if (cost > 2) continue
+            const c2 = [...c1]
+            c2[j] = y
+            const v = value(c2)
+            if (agrees(v.t, v.p)) found.push({ choice: c2, cost })
+          }
+        }
+      }
+    }
+    if (found.length === 0) continue
+    const least = Math.min(...found.map((f) => f.cost))
+    const cheapest = found.filter((f) => f.cost === least)
+    if (cheapest.length !== 1) continue
+    const choice = cheapest[0].choice
+    const refuted: string[] = []
+    items.forEach((w, i) => {
+      if (choice[i] === 0) return
+      w.refuted = { chosenCm: options[i][choice[i]].cm }
+      w.decisive = false
+      refuted.push(w.record.id)
+    })
+    out.push({ totalChainId: r.fromChainId, partChainId: r.toChainId, assignment: items.map((w, i) => ({ observationId: w.record.id, asReadCm: round6(w.cm), chosenCm: round6(options[i][choice[i]].cm) })), refutedObservationIds: refuted.sort() })
+  }
+  return out
 }

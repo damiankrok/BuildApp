@@ -74,6 +74,8 @@ export type ObservationJson = {
   status: string
   binding?: { role: string; offsetShare: number; questionableEnds: number; skipped: { tick: number; questionable: number; rejected: number } }
   valueAlternatives?: Array<{ text: string; valueCm: number; ratio: number }>
+  /** 005E (metric evidence 1.4.0): the ink's lattice id, reading class and the value the span was finally given. */
+  ocr?: { latticeId: string; rawTopText: string; ocrClass: string; asReadP: number; probabilityMargin: number; asReadVariant: string; selected?: { by: string; text?: string; valueCm?: number; imageScore?: number; imageRank?: number; metricResidualPx?: number }; refutedBy?: string }
 }
 export type HypothesisJson = { id: string; cmPerPixel: number; witnessIds: string[]; independentGroups: number; independentAxes: string[]; independentWeight: number; longestShare: number; corroborated: boolean; axesMeasured: boolean; plausible: boolean; why: string }
 export type SolutionJson = {
@@ -93,6 +95,32 @@ export type SolutionJson = {
   topology?: { marks: Json; bindings: Json; neutralObservationIds: string[]; hierarchy?: Json; valueAmbiguity?: { observationId: string; rawText: string; alternatives: string[]; cmPerPixelLow: number; cmPerPixelHigh: number } }
 }
 export type OcrTokenJson = { id: string; frameId: string; text: string; box: Rect; orientation?: string; pageVote?: string; confidence?: number; score?: number; heightPx?: number; glyphs?: Array<{ char: string; score: number; alternatives?: Array<{ char: string; score: number }> }> }
+/** 005E: one label ink's numeric lattice as the metric evidence records it. */
+export type LatticeJson = {
+  id: string
+  frameId: string
+  orientation: string
+  box: Rect
+  rawTopText: string
+  asRead: string
+  asReadValueCm?: number
+  asReadVariant: string
+  ocrClass: string
+  classWhy: string
+  asReadP: number
+  probabilityMargin: number
+  sequenceMargin: number
+  minGlyphScore: number
+  maxRunnerRatio: number
+  entropy: number
+  capHeightPx: number
+  sequences: Array<{ text: string; valueCm?: number; logP: number; p: number; imageScore: number; nonTop: Array<{ index: number; top: string; chosen: string; ratio: number }>; minGlyphMargin: number; avgGlyphMargin: number; variants: string[]; pathIds: string[]; asRead: boolean }>
+  glyphs: Array<{ box: Rect; candidates: Array<{ char: string; score: number; p: number }>; runnerRatio: number; topologyRunnerRatio: number; holes: number; touching: boolean; broken: boolean }>
+  paths: Array<{ id: string; variant: string; kind: string; text: string; slope: number; cuts: number[]; changedBoundaries: number; segScore: number; ratioToBest: number }>
+  expansions: number
+  truncatedBy: string
+  cache?: string
+}
 export type MetricsJson = {
   schemaVersion?: string
   contentHash?: string
@@ -102,6 +130,7 @@ export type MetricsJson = {
   metricSolutions?: SolutionJson[]
   chainRelations?: Array<{ kind: string; frameId: string; fromChainId: string; toChainId: string; check?: string; sum?: Json; span?: Json }>
   ocrTokens?: OcrTokenJson[]
+  numericLattices?: LatticeJson[]
   coordinateRegistrations?: Array<{ frameId: string; plane: string; metresPerPixelX: number; metresPerPixelY: number; anchors?: unknown[] }>
   evidence?: Array<{ id: string; kind: string; frameId: string; value: number; unit: string; origin?: string; rawText?: string; textBox?: Rect }>
 }
@@ -163,6 +192,7 @@ export type DecisionEvent = {
 export const TIMELINE_STAGES = [
   'SOURCE',
   'DIMENSION_TICK_CLASSIFICATION',
+  'OCR_SEQUENCE_CANDIDATES',
   'OCR_READING',
   'LABEL_BINDING',
   'DIMENSION_HIERARCHY',
