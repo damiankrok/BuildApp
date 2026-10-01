@@ -373,6 +373,34 @@ function contestValues(lattice: LabelLattice | undefined, alternatives: Readonly
 }
 
 /**
+ * 005E: a lattice as the readings a chain solver may use — the as-read value as the reading, and as corrections only
+ * the values the ink may plausibly be: those it holds at least `VALUE_BOUNDS.contestRatio` as strongly as its reading,
+ * or one glyph away at a glyph ratio of at least `VALUE_BOUNDS.glyphRatio` (005D's substitution bound, weighed by
+ * that ratio as 005D weighed it). A chain solver takes any correction that lands on its scale over a reading that
+ * misses it, so the size of this set — not the corrections' weights — decides how often a scale finds a value that
+ * merely fits; a value the image barely supports is never offered.
+ */
+export function correctionReadings(lattice: LabelLattice): ChainToken['readings'] | undefined {
+  if (lattice.asReadValueCm === undefined) return undefined
+  const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
+  const out: ChainToken['readings'] = []
+  for (const q of lattice.sequences) {
+    if (q.valueCm === undefined) continue
+    const parsed = parseNumber(q.text).find((x) => x.kind === 'LINEAR_DIMENSION')
+    if (!parsed) continue
+    if (q.asRead) {
+      out.push({ text: q.text, parsed, valueCm: q.valueCm, confidence: 1, substitutions: 0 })
+      continue
+    }
+    const pRatio = own > 0 ? Math.min(1, q.p / own) : 0
+    const glyph = q.nonTop.length === 1 ? q.nonTop[0].ratio : 0
+    if (pRatio < VALUE_BOUNDS.contestRatio && glyph < VALUE_BOUNDS.glyphRatio) continue
+    out.push({ text: q.text, parsed, valueCm: q.valueCm, confidence: round6(Math.min(1, Math.max(pRatio, glyph))), substitutions: Math.max(1, q.nonTop.length) })
+  }
+  return out.length > 0 ? out : undefined
+}
+
+/**
  * 005E: the values a lattice offers besides its as-read one, as V1's records: every other dimension the image supports
  * (at most `VALUE_BOUNDS.latticeAlternatives`), with `ratio` its probability over the as-read one's (capped at 1).
  * They make an ink neutral or are chosen among by independent evidence; they are never readings, never witnesses.
@@ -1109,20 +1137,12 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       inList.add(region.id)
     }
   }
-  // 005E (M7): read again, a chain takes its labels' lattices — the as-read value as the reading, the image-supported
-  // others as corrections a scale may choose (CHAIN_CORRECTED, DERIVED) — instead of the legacy substitution list.
+  // 005E (M7): read again, a chain takes its labels' lattices — the as-read value as the reading, and as corrections a
+  // scale may choose (CHAIN_CORRECTED) only the values the ink may plausibly be (`correctionReadings`) — instead of the
+  // legacy substitution list.
   const latticeReadings = (token: TextToken): ChainToken['readings'] | undefined => {
     const lattice = input.lattices?.get(token)?.lattice
-    if (!lattice || lattice.asReadValueCm === undefined) return undefined
-    const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
-    const out: ChainToken['readings'] = []
-    for (const q of lattice.sequences) {
-      if (q.valueCm === undefined) continue
-      const parsed = parseNumber(q.text).find((x) => x.kind === 'LINEAR_DIMENSION')
-      if (!parsed) continue
-      out.push(q.asRead ? { text: q.text, parsed, valueCm: q.valueCm, confidence: 1, substitutions: 0 } : { text: q.text, parsed, valueCm: q.valueCm, confidence: round6(own > 0 ? Math.min(1, q.p / own) : 0), substitutions: Math.max(1, q.nonTop.length) })
-    }
-    return out.length > 0 ? out : undefined
+    return lattice ? correctionReadings(lattice) : undefined
   }
   const perChain = assignTokens(chains, corrected, { maxOffsetHeights: input.maxOffsetHeights, preferCentred: true, readingsOf: input.lattices ? latticeReadings : undefined })
   const solved: SolvedChain[] = []
@@ -1141,7 +1161,10 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     const axisScale = pooled === undefined ? undefined : (chain.axis === 'HORIZONTAL' ? scaleX : scaleY) ?? pooled
     // 005D: a chain read again at a REPLACED scale is cut by its marks' classes: a rejected mark is no
     // cut, a questionable one costs nothing to run across. A confirmed scale keeps the vote's cuts.
-    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced })
+    // 005E: re-read from lattices, a span is given a value other than its ink's as-read one only where it is long enough
+    // to decide a scale itself (`DECISIVE_SPAN_TOLERANCES`): the scale choosing a value is the same statement reversed.
+    const minCorrectionPx = input.lattices ? DECISIVE_SPAN_TOLERANCES * tol : undefined
+    const s = axisScale === undefined ? solveChain(chain, [], { tolerancePx: tol, minPixelLength: minLength }) : solveChain(chain, mine, { tolerancePx: tol, minPixelLength: minLength, fixedScale: axisScale, topology: replaced, minCorrectionPx })
     return { solved: s, tokens: [...mine] }
   })
   const better = (c: number): boolean => {

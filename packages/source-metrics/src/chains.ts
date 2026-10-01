@@ -682,7 +682,7 @@ export function solveFrameChains(
  * only on a chain that has at least one reading confirming that scale; a span
  * whose number cannot be reconciled with the scale is left UNRESOLVED.
  */
-export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean } = {}): SolvedChain {
+export function solveChain(chain: RawChain, tokens: readonly ChainToken[], options: { tolerancePx?: number; minPixelLength?: number; fixedScale?: number; topology?: boolean; minCorrectionPx?: number } = {}): SolvedChain {
   const tolerance = options.tolerancePx ?? 2.2
   const minLength = options.minPixelLength ?? 6
   const ticks = chain.ticks
@@ -735,6 +735,9 @@ export function solveChain(chain: RawChain, tokens: readonly ChainToken[], optio
       for (const reading of entry.readings) {
         const missPx = Math.abs(reading.valueCm / cmPerPixel - pixelLength)
         if (missPx > tolerance) continue
+        // 005E: with `minCorrectionPx`, a scale may give a span one of its ink's other values only where the span is long
+        // enough for that choice to be a measurement: within a fixed pixel tolerance a short span fits a value by chance.
+        if (reading.substitutions > 0 && options.minCorrectionPx !== undefined && pixelLength < options.minCorrectionPx) continue
         // Two independent beliefs, multiplied rather than ranked. A reading the
         // classifier is sure of that misses the scale by most of the tolerance
         // is worth less than its own runner-up landing on the scale exactly —

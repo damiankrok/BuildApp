@@ -972,6 +972,20 @@ jobs:
         run: npx vitest run packages/source-metrics/test/label-binding.test.ts packages/source-metrics/test/glyph-ambiguity.test.ts
       - name: Metric independence and the source conflict
         run: npx vitest run packages/source-metrics/test/metric-solution.test.ts packages/source-metrics/test/label-binding.test.ts packages/reconstruction/test/source-conflict.test.ts packages/reconstruction/test/first-success.test.ts
+      # BUILDPLAN-ANALYZER-005E. The numeric OCR lattice.
+      # - the lattice: deterministic, bounded, image-only, the as-read string an
+      #   anchor; a truth two glyphs from the top read kept (the 005D
+      #   one-substitution set misses it); blurred figures read or named, never
+      #   CLEAR when wrong; touching hollow pairs; the corpus gate (recall,
+      #   as-read accuracy, CLEAR precision on the calibration and held-back
+      #   corpora, never below 005D per stratum).
+      # - the metric: two coin tosses agreeing on a wrong scale are not STRONG
+      #   and the rival is not promoted; confidence by OCR class; variants of one
+      #   ink are one witness; a value the image never offered stays missing.
+      - name: Numeric lattice and the corpus gate
+        run: npx vitest run packages/source-metrics/test/numeric-lattice.test.ts
+      - name: OCR quality in the metric, false consensus, geometry cannot invent OCR
+        run: npx vitest run packages/source-metrics/test/ocr-metric-adversaries.test.ts
 
   analyzer-evidence-pack:
     # BUILDPLAN-ANALYZER-005D §8–§20. The Analyzer Evidence Pack.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, chainId, solveFrameChains, solveFrameMetric } from '../src/index.js'
-import type { DimensionObservation, LabelLattice, OcrClass, RawChain, TextOrientation, TextToken } from '../src/index.js'
+import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, chainId, correctionReadings, parseNumber, solveChain, solveFrameChains, solveFrameMetric } from '../src/index.js'
+import type { ChainToken, DimensionObservation, LabelLattice, OcrClass, RawChain, TextOrientation, TextToken } from '../src/index.js'
 
 /**
  * BUILDPLAN-ANALYZER-005E §29, §31, §15–18: what the metric layer does with reading quality.
@@ -278,5 +278,48 @@ describe('§31 negative: geometry cannot invent OCR', () => {
       const { chains, tokens, lattices } = pageA(childrenAt)
       expectNonCircular(solve(chains, tokens, lattices).observations, lattices)
     }
+  })
+})
+
+// ---------------------------------------------------------------------------
+// §17 a chain read again: which values a scale may choose among
+// ---------------------------------------------------------------------------
+
+describe('§17 a chain read again chooses only among values the ink may plausibly be', () => {
+  const ink = hLabel('575', 760, 100, 371)
+  /** As read 575 (SUPPORTED), a one-glyph 535 at a glyph ratio of 0.93, a one-glyph 573 at 0.6, and a 125 another cut found. */
+  const l = (): LabelLattice => {
+    const base = lattice(ink, 'SUPPORTED', [['575', 0.48], ['535', 0.2], ['573', 0.1], ['125', 0.054]])
+    return {
+      ...base,
+      sequences: base.sequences.map((q) =>
+        q.text === '573' ? { ...q, nonTop: [{ index: 2, top: '5', chosen: '3', ratio: 0.6 }] } : q.text === '125' ? { ...q, nonTop: [], pathIds: ['STRICT:3'] } : q,
+      ),
+    }
+  }
+
+  it('offers the reading, and as corrections only values held at least half as strongly or one glyph away at 005D’s bound', () => {
+    const r = correctionReadings(l()) ?? []
+    expect(r.map((x) => x.text)).toEqual(['575', '535'])
+    expect(r[0]).toMatchObject({ confidence: 1, substitutions: 0 })
+    expect(r[1].confidence).toBeCloseTo(0.93, 6)
+  })
+
+  it('a scale does not give a short span a value its ink was not read as: within a fixed tolerance a short span fits by chance', () => {
+    // A 15 px span at 2.2 cm/px: the as-read 55 misses by 10 px; the one-glyph 35 lands within the 2.2 px tolerance.
+    const chain = hChain(282, [269, 284, 330])
+    const token = hLabel('55', 282, 269, 284)
+    const readings = (texts: Array<[string, number, number]>): ChainToken['readings'] =>
+      texts.map(([text, confidence, substitutions]) => ({ text, parsed: parseNumber(text)[0], valueCm: Number(text), confidence, substitutions }))
+    const entry: ChainToken = { token, atPx: 276.5, offset: 1, readings: readings([['55', 1, 0], ['35', 0.93, 1]]) }
+    const free = solveChain(chain, [entry], { tolerancePx: 2.2, fixedScale: 2.2 })
+    const bounded = solveChain(chain, [entry], { tolerancePx: 2.2, fixedScale: 2.2, minCorrectionPx: 55 })
+    expect(free.segments.find((g) => g.fromPx === 269 && g.toPx === 284)?.valueCm).toBe(35)
+    expect(bounded.segments.find((g) => g.fromPx === 269 && g.toPx === 284)?.origin).not.toBe('CHAIN_CORRECTED')
+    // A long span is a measurement: there the correction stands.
+    const long = hChain(760, [100, 371])
+    const longEntry: ChainToken = { token: ink, atPx: 235.5, offset: 1, readings: readings([['575', 1, 0], ['595', 0.93, 1]]) }
+    const solved = solveChain(long, [longEntry], { tolerancePx: 2.2, fixedScale: 595 / 271, minCorrectionPx: 55 })
+    expect(solved.segments[0]).toMatchObject({ valueCm: 595, origin: 'CHAIN_CORRECTED' })
   })
 })
