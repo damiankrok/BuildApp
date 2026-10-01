@@ -26,6 +26,9 @@
  * least 80 % of its axis) whose binding is primary and ends at no rejected mark — a spurious tick
  * may not cut the total that decides the scale. Whatever a later stage then makes of the plan, the
  * metric decision is judged on its own.
+ *
+ * 005E: `--metric-scale <cm/px>` requires the selected plan copy's scale (both axes) within 1.5 % of the scale the
+ * printed overall dimensions state — for a row whose defect was a wrong scale read from misread labels.
  */
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
@@ -33,7 +36,7 @@ import { join, resolve } from 'node:path'
 
 const [dir, expectation, ...rest] = process.argv.slice(2)
 if (!dir || !expectation) {
-  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>] [--limits <CODE,CODE>] [--metric <RELATION,RELATION>] [--metric-overall]\n')
+  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>] [--limits <CODE,CODE>] [--metric <RELATION,RELATION>] [--metric-overall] [--metric-scale <cm/px>]\n')
   process.exit(2)
 }
 const valueOf = (flag) => (rest.includes(flag) ? rest[rest.indexOf(flag) + 1] : undefined)
@@ -41,6 +44,7 @@ const pinned = valueOf('--same-model')
 const limits = (valueOf('--limits') ?? '').split(',').filter(Boolean)
 const metricRelations = (valueOf('--metric') ?? '').split(',').filter(Boolean)
 const metricOverall = rest.includes('--metric-overall')
+const metricScale = valueOf('--metric-scale') !== undefined ? Number(valueOf('--metric-scale')) : undefined
 const fail = (message) => {
   process.stdout.write(`::error::${dir}: ${message}\n`)
   process.exit(1)
@@ -52,7 +56,7 @@ const [kind, arg] = expectation.split(':')
 
 /** The selected plan copy's metric decision, judged on its own (005D). */
 function metricGate() {
-  if (metricRelations.length === 0 && !metricOverall) return ''
+  if (metricRelations.length === 0 && !metricOverall && metricScale === undefined) return ''
   const digest = existsSync(join(dir, 'plan-diagnostics/digest.json')) ? read('plan-diagnostics/digest.json') : undefined
   if (!existsSync(join(dir, 'metric-evidence.json'))) fail('no metric evidence to judge')
   const metrics = read('metric-evidence.json')
@@ -61,6 +65,11 @@ function metricGate() {
   if (!solution) fail(`no metric solution on the selected plan copy (${frameId ?? 'none selected'})`)
   if (metricRelations.length > 0 && !metricRelations.includes(solution.relation)) fail(`the selected plan copy's scale is ${solution.relation}/${solution.confidence}; the row requires ${metricRelations.join(' or ')}`)
   const selected = solution.hypotheses.find((h) => h.id === solution.selectedHypothesisId)
+  if (metricScale !== undefined) {
+    for (const [axis, at] of [['X', solution.cmPerPixelX], ['Y', solution.cmPerPixelY]]) {
+      if (!(at > 0) || Math.abs(at / metricScale - 1) > 0.015) fail(`the selected plan copy's ${axis} scale is ${at ?? 'none'} cm/px; the printed overall dimensions state ${metricScale}`)
+    }
+  }
   if (metricOverall) {
     if (!selected || selected.longestShare < 0.8) fail(`the selected scale is not stated by an overall reading (longest share ${selected?.longestShare ?? '-'})`)
     const observations = new Map((metrics.dimensionObservations ?? []).map((o) => [o.id, o]))
