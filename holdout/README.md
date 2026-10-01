@@ -190,3 +190,30 @@ The protocol of rounds 1 and 2, steps 1–6, with these differences only. Everyt
    - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`.
    - An `ALGORITHMIC_FAIL` is not patched in 005D. Its first bad decision is named from the Evidence Pack
      (stage, object, evidence) and becomes the next stage's input.
+
+## Round 5 (BUILDPLAN-ANALYZER-005E)
+
+The protocol of round 4, steps 1–6, with these differences only. Everything here is fixed before the freeze.
+
+1. **Two ARCHON families, one pick each, from the committed round-1 pool** (`holdout/pool.txt`,
+   `POOL_SHA256 = 800c2a1e…2ed41`). 005E is about the numeric reader on dimension labels; one publisher, as in round 4.
+2. **Excluded families** (`excluded-families-round-5.txt`, 43 families, 605 pool addresses; 2480 drawable): round 4's
+   41 families and the two round-4 draws, now development houses (`dom-w-dabecjach`, `dom-w-tunbergiach`). Their
+   pages, read from the cache (addresses only), link to no project outside their own families.
+   - `EXCLUDED_FAMILIES_ROUND_5_SHA256 = d33caf40eeb8fb08af88978ab4838ec45b23824981cd81efc7be12e37bb94340`.
+3. **Freeze.** `PRE_HOLDOUT_5_SHA` is the pushed HEAD whose full CI is green. Nothing is committed between the
+   freeze and the draw.
+4. **Draw.** `node holdout/select.mjs select --round 5 --pool holdout/pool.txt --pool-sha256 800c2a1ed9daee9efd2654c64b061e430094dc38fc459b805af27ff9fad2ed41 --pre-holdout-sha <sha>`.
+   - `seed = SHA256(PRE_HOLDOUT_5_SHA + "BUILDPLAN-005E-NUMERIC-OCR-HOLDOUT")`, `i1 = seed mod n`; the second pick is
+     uniform over every drawable address of another family, `SHA256(seed + ":second") mod m` (round 1).
+   - One ledger line (`BUILDPLAN-005E-NUMERIC-OCR-HOLDOUT`) records both picks, the seed, the indices, the pool and
+     exclusion hashes.
+5. **Run once each, with the Evidence Pack on** (`ANALYZER_EVIDENCE=1`), during that first and only run. The packs —
+   with their OCR candidate layer — are committed with the verdicts; no pack is regenerated after the draw from
+   changed code.
+6. **Verdict** by `holdout/verdict.mjs` as committed at the freeze, unchanged from round 4.
+   - `PASS`, `SOURCE_LIMITED_PARTIAL` (a checklist item confirmed on the raw copies) or `ALGORITHMIC_FAIL`.
+   - Not a clean PASS (005E §41): a published figure that selected the OCR or metric answer; low-quality wrong labels
+     that agree and dominate; a truth absent from the reader's candidates that downstream guessed.
+   - An `ALGORITHMIC_FAIL` is not patched in 005E. Its first bad decision is named from the Evidence Pack and becomes
+     the next stage's input.

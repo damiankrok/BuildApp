@@ -1,0 +1,117 @@
+{
+  "schema": "buildapp.development-dimensions",
+  "schemaVersion": "1.1.0",
+  "what": "The four-digit dimension labels printed on the 005E development houses' selected plan copies and what the frozen 005D reader read them as, in centimetres, as text facts (from calibration/development-labels.json, transcribed by eye; rarytasy-eoze's overall is printed 1600 and was read 1601). Read by the production hard-code guard (tests/architecture/generalization.test.ts): none of these may appear in production code or comments. No drawing is stored.",
+  "houses": [
+    {
+      "key": "marcowki",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+      "overallDimensionsCm": [
+        1205
+      ],
+      "misreadAsCm": []
+    },
+    {
+      "key": "kosacce-clean",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+      "overallDimensionsCm": [
+        1260,
+        1660
+      ],
+      "misreadAsCm": [
+        1000
+      ]
+    },
+    {
+      "key": "rarytasy-g2e",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+      "overallDimensionsCm": [
+        1474,
+        1720
+      ],
+      "misreadAsCm": [
+        1170,
+        1751
+      ]
+    },
+    {
+      "key": "rarytasy-eoze",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+      "overallDimensionsCm": [
+        1600
+      ],
+      "misreadAsCm": [
+        1601
+      ]
+    },
+    {
+      "key": "dom-w-jablonkach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+      "overallDimensionsCm": [
+        1100
+      ],
+      "misreadAsCm": []
+    },
+    {
+      "key": "willa-miranda",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+      "overallDimensionsCm": [
+        1410,
+        1500
+      ],
+      "misreadAsCm": [
+        1110
+      ]
+    },
+    {
+      "key": "dom-w-zurawkach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+      "overallDimensionsCm": [
+        1180
+      ],
+      "misreadAsCm": []
+    },
+    {
+      "key": "dom-w-modrzykach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+      "overallDimensionsCm": [
+        1160,
+        1850
+      ],
+      "misreadAsCm": []
+    },
+    {
+      "key": "dom-w-azaliach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+      "overallDimensionsCm": [
+        1035
+      ],
+      "misreadAsCm": [
+        1055
+      ]
+    },
+    {
+      "key": "dom-w-dabecjach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+      "overallDimensionsCm": [
+        1340,
+        1580
+      ],
+      "misreadAsCm": [
+        1501,
+        1700
+      ]
+    },
+    {
+      "key": "dom-w-tunbergiach",
+      "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+      "overallDimensionsCm": [
+        1000,
+        1173
+      ],
+      "misreadAsCm": [
+        1117
+      ]
+    }
+  ]
+}

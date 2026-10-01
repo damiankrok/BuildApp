@@ -1,0 +1,1593 @@
+{
+ "schema": "buildapp.ocr-ground-truth",
+ "schemaVersion": "1.0.0",
+ "what": "The printed values of the long dimension labels (bound PRIMARY to a span of at least 55 px) on each development house's selected plan copy, transcribed by eye from local crops of the publisher's plans (never committed), as text facts: frame, box in that frame's pixels, the pass that reads the label upright, the printed value and what the frozen 005D reader read in that pass. FIT labels may calibrate the numeric reader; HELD_BACK labels only check a calibration; TARGET labels are the round-4 houses and never fit anything. Excluded regions are listed with the reason.",
+ "notes": [
+  "rarytasy-eoze: the overall printed 1600 was read 1601 (two touching zeros cut through the second one); 005A and 005D recorded 1601 as the printed value — that record is corrected here.",
+  "alt-marcowki publishes its plan mirrored: no label reads in any rotation; it has no ground truth.",
+  "galaktyka: the one long-span region on its selected copy is a plant symbol, not a label."
+ ],
+ "counts": {
+  "labels": 81,
+  "readRightBy005D": 24,
+  "bySplit": {
+   "FIT": 48,
+   "HELD_BACK": 21,
+   "TARGET": 12
+  }
+ },
+ "labels": [
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-113-387-6cc4fbf0bb",
+   "box": {
+    "x0": 114,
+    "x1": 126,
+    "y0": 387,
+    "y1": 406
+   },
+   "spanPx": 152.5,
+   "orientation": "ROTATED_CW",
+   "printed": "414",
+   "readBy005D": null
+  },
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-196-30-26d8ed3034",
+   "box": {
+    "x0": 196,
+    "y0": 30,
+    "x1": 215,
+    "y1": 42
+   },
+   "spanPx": 299,
+   "orientation": "HORIZONTAL",
+   "printed": "790",
+   "readBy005D": "740"
+  },
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-271-9-f7035d1738",
+   "box": {
+    "x0": 271,
+    "y0": 9,
+    "x1": 296,
+    "y1": 22
+   },
+   "spanPx": 456,
+   "orientation": "HORIZONTAL",
+   "printed": "1205",
+   "readBy005D": "1205"
+  },
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-415-650-eae6706b1c",
+   "box": {
+    "x0": 415,
+    "y0": 650,
+    "x1": 435,
+    "y1": 663
+   },
+   "spanPx": 57,
+   "orientation": "HORIZONTAL",
+   "printed": "375",
+   "readBy005D": "515"
+  },
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-423-30-fcad9014a7",
+   "box": {
+    "x0": 423,
+    "y0": 30,
+    "x1": 443,
+    "y1": 42
+   },
+   "spanPx": 157,
+   "orientation": "HORIZONTAL",
+   "printed": "415",
+   "readBy005D": "115"
+  },
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-530-348-6da815b811",
+   "box": {
+    "x0": 530,
+    "y0": 348,
+    "x1": 544,
+    "y1": 368
+   },
+   "spanPx": 193,
+   "orientation": "ROTATED_CW",
+   "printed": "510",
+   "readBy005D": "510"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-112-534-815cfc351b",
+   "box": {
+    "x0": 112,
+    "y0": 534,
+    "x1": 132,
+    "y1": 547
+   },
+   "spanPx": 65,
+   "orientation": "HORIZONTAL",
+   "printed": "226",
+   "readBy005D": "226"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-112-639-4a5b160328",
+   "box": {
+    "x0": 112,
+    "y0": 639,
+    "x1": 132,
+    "y1": 652
+   },
+   "spanPx": 154.157895,
+   "orientation": "HORIZONTAL",
+   "printed": "419",
+   "readBy005D": "014"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-138-423-e012a15163",
+   "box": {
+    "x0": 138,
+    "y0": 423,
+    "x1": 152,
+    "y1": 444
+   },
+   "spanPx": 120.647059,
+   "orientation": "ROTATED_CW",
+   "printed": "310",
+   "readBy005D": "710"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-138-617-905084b442",
+   "box": {
+    "x0": 138,
+    "y0": 617,
+    "x1": 152,
+    "y1": 637
+   },
+   "spanPx": 114,
+   "orientation": "ROTATED_CW",
+   "printed": "270",
+   "readBy005D": "130"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-282-47-a05fee7f2b",
+   "box": {
+    "x0": 282,
+    "y0": 47,
+    "x1": 302,
+    "y1": 60
+   },
+   "spanPx": 276.5,
+   "orientation": "HORIZONTAL",
+   "printed": "665",
+   "readBy005D": "005"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-373-18-a52e5b1656",
+   "box": {
+    "x0": 373,
+    "y0": 18,
+    "x1": 398,
+    "y1": 31
+   },
+   "spanPx": 690,
+   "orientation": "HORIZONTAL",
+   "printed": "1660",
+   "readBy005D": "1000"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-512-461-b0697749a7",
+   "box": {
+    "x0": 512,
+    "y0": 461,
+    "x1": 526,
+    "y1": 482
+   },
+   "spanPx": 99,
+   "orientation": "ROTATED_CW",
+   "printed": "518",
+   "readBy005D": "510"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-531-47-b5c60c77dd",
+   "box": {
+    "x0": 531,
+    "y0": 47,
+    "x1": 549,
+    "y1": 60
+   },
+   "spanPx": 216.5,
+   "orientation": "HORIZONTAL",
+   "printed": "521",
+   "readBy005D": "111"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-680-47-99b6380084",
+   "box": {
+    "x0": 680,
+    "y0": 47,
+    "x1": 700,
+    "y1": 60
+   },
+   "spanPx": 85.5,
+   "orientation": "HORIZONTAL",
+   "printed": "205",
+   "readBy005D": "204"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-787-250-021fdb1aa9",
+   "box": {
+    "x0": 787,
+    "y0": 250,
+    "x1": 800,
+    "y1": 271
+   },
+   "spanPx": 153.5,
+   "orientation": "ROTATED_CW",
+   "printed": "370",
+   "readBy005D": "370"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-787-511-7fd190b22e",
+   "box": {
+    "x0": 787,
+    "y0": 511,
+    "x1": 800,
+    "y1": 532
+   },
+   "spanPx": 370,
+   "orientation": "ROTATED_CW",
+   "printed": "890",
+   "readBy005D": "840"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-812-434-61233e651e",
+   "box": {
+    "x0": 812,
+    "y0": 434,
+    "x1": 825,
+    "y1": 460
+   },
+   "spanPx": 523.5,
+   "orientation": "ROTATED_CW",
+   "printed": "1260",
+   "readBy005D": "1260"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-88-46-cde00c4962",
+   "box": {
+    "x0": 88,
+    "y0": 46,
+    "x1": 108,
+    "y1": 59
+   },
+   "spanPx": 111.5,
+   "orientation": "HORIZONTAL",
+   "printed": "269",
+   "readBy005D": "104"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-148-235-e5d0f70dc3",
+   "box": {
+    "x0": 148,
+    "y0": 235,
+    "x1": 162,
+    "y1": 254
+   },
+   "spanPx": 60,
+   "orientation": "ROTATED_CW",
+   "printed": "381",
+   "readBy005D": "101"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-169-417-d7d87d226a",
+   "box": {
+    "x0": 169,
+    "y0": 417,
+    "x1": 188,
+    "y1": 430
+   },
+   "spanPx": 58.5,
+   "orientation": "HORIZONTAL",
+   "printed": "339",
+   "readBy005D": "754"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-33-425-ead767ba42",
+   "box": {
+    "x0": 33,
+    "y0": 425,
+    "x1": 46,
+    "y1": 451
+   },
+   "spanPx": 534.5,
+   "orientation": "ROTATED_CW",
+   "printed": "1474",
+   "readBy005D": "1170"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-422-193-5693f3c9d3",
+   "box": {
+    "x0": 422,
+    "y0": 193,
+    "x1": 442,
+    "y1": 206
+   },
+   "spanPx": 59,
+   "orientation": "HORIZONTAL",
+   "printed": "315",
+   "readBy005D": "515"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-434-765-580de15d46",
+   "box": {
+    "x0": 434,
+    "x1": 459,
+    "y0": 765,
+    "y1": 778
+   },
+   "spanPx": 624,
+   "orientation": "HORIZONTAL",
+   "printed": "1720",
+   "readBy005D": "1751"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-54-314-3637104bdb",
+   "box": {
+    "x0": 54,
+    "y0": 314,
+    "x1": 68,
+    "y1": 334
+   },
+   "spanPx": 308.5,
+   "orientation": "ROTATED_CW",
+   "printed": "850",
+   "readBy005D": "850"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-54-582-aeb838f20c",
+   "box": {
+    "x0": 54,
+    "y0": 582,
+    "x1": 68,
+    "y1": 602
+   },
+   "spanPx": 226,
+   "orientation": "ROTATED_CW",
+   "printed": "624",
+   "readBy005D": "021"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-610-193-4cc992eb0a",
+   "box": {
+    "x0": 610,
+    "x1": 630,
+    "y0": 193,
+    "y1": 206
+   },
+   "spanPx": 100,
+   "orientation": "HORIZONTAL",
+   "printed": "627",
+   "readBy005D": "027"
+  },
+  {
+   "house": "rarytasy-eoze",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+   "textRegionId": "text-region-139-333-9b254a1ac3",
+   "box": {
+    "x0": 139,
+    "x1": 155,
+    "y0": 334,
+    "y1": 358
+   },
+   "spanPx": 129.347826,
+   "orientation": "ROTATED_CW",
+   "printed": "324",
+   "readBy005D": "520"
+  },
+  {
+   "house": "rarytasy-eoze",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+   "textRegionId": "text-region-3-397-090d2f0b85",
+   "box": {
+    "x0": 3,
+    "y0": 397,
+    "x1": 20,
+    "y1": 422
+   },
+   "spanPx": 342,
+   "orientation": "ROTATED_CW",
+   "printed": "760",
+   "readBy005D": "760"
+  },
+  {
+   "house": "rarytasy-eoze",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+   "textRegionId": "text-region-416-678-f54317e35e",
+   "box": {
+    "x0": 416,
+    "y0": 678,
+    "x1": 447,
+    "y1": 693
+   },
+   "spanPx": 720,
+   "orientation": "HORIZONTAL",
+   "printed": "1600",
+   "readBy005D": "1601"
+  },
+  {
+   "house": "rarytasy-eoze",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+   "textRegionId": "text-region-704-330-abfb0ffbf7",
+   "box": {
+    "x0": 704,
+    "x1": 724,
+    "y0": 331,
+    "y1": 361
+   },
+   "spanPx": 56.5,
+   "orientation": "ROTATED_CW",
+   "printed": "472",
+   "readBy005D": "351"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-152-321-f68ef4f62b",
+   "box": {
+    "x0": 152,
+    "x1": 165,
+    "y0": 322,
+    "y1": 342
+   },
+   "spanPx": 77.5,
+   "orientation": "ROTATED_CW",
+   "printed": "223",
+   "readBy005D": "335"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-324-810-373969892a",
+   "box": {
+    "x0": 324,
+    "y0": 810,
+    "x1": 349,
+    "y1": 823
+   },
+   "spanPx": 519,
+   "orientation": "HORIZONTAL",
+   "printed": "1100",
+   "readBy005D": "1100"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-397-286-0683f8f6d6",
+   "box": {
+    "x0": 397,
+    "y0": 286,
+    "x1": 416,
+    "y1": 298
+   },
+   "spanPx": 95.5,
+   "orientation": "HORIZONTAL",
+   "printed": "553",
+   "readBy005D": "513"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-535-377-836355b112",
+   "box": {
+    "x0": 535,
+    "x1": 548,
+    "y0": 378,
+    "y1": 398
+   },
+   "spanPx": 57.5,
+   "orientation": "ROTATED_CW",
+   "printed": "505",
+   "readBy005D": "501"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-762-142-f5a436d5a9",
+   "box": {
+    "x0": 762,
+    "y0": 142,
+    "x1": 776,
+    "y1": 163
+   },
+   "spanPx": 180.5,
+   "orientation": "ROTATED_CW",
+   "printed": "380",
+   "readBy005D": "590"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-762-446-5d7596da55",
+   "box": {
+    "x0": 762,
+    "y0": 446,
+    "x1": 776,
+    "y1": 466
+   },
+   "spanPx": 426,
+   "orientation": "ROTATED_CW",
+   "printed": "900",
+   "readBy005D": "400"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-150-728-223113984c",
+   "box": {
+    "x0": 150,
+    "y0": 728,
+    "x1": 170,
+    "y1": 741
+   },
+   "spanPx": 145.5,
+   "orientation": "HORIZONTAL",
+   "printed": "330",
+   "readBy005D": "130"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-18-338-c874bc5809",
+   "box": {
+    "x0": 18,
+    "y0": 338,
+    "x1": 32,
+    "y1": 364
+   },
+   "spanPx": 526,
+   "orientation": "ROTATED_CW",
+   "printed": "1410",
+   "readBy005D": "1110"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-352-408-205145a339",
+   "box": {
+    "x0": 352,
+    "y0": 408,
+    "x1": 365,
+    "y1": 428
+   },
+   "spanPx": 64.5,
+   "orientation": "ROTATED_CW",
+   "printed": "415",
+   "readBy005D": "015"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-372-694-bc7b6c1517",
+   "box": {
+    "x0": 372,
+    "x1": 391,
+    "y0": 694,
+    "y1": 707
+   },
+   "spanPx": 298.5,
+   "orientation": "HORIZONTAL",
+   "printed": "800",
+   "readBy005D": "800"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-399-217-433d99d89e",
+   "box": {
+    "x0": 399,
+    "y0": 217,
+    "x1": 419,
+    "y1": 230
+   },
+   "spanPx": 80.5,
+   "orientation": "HORIZONTAL",
+   "printed": "845",
+   "readBy005D": "805"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-499-728-774446818d",
+   "box": {
+    "x0": 499,
+    "y0": 728,
+    "x1": 524,
+    "y1": 741
+   },
+   "spanPx": 559.5,
+   "orientation": "HORIZONTAL",
+   "printed": "1500",
+   "readBy005D": "1500"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-53-122-39c2b4ebef",
+   "box": {
+    "x0": 53,
+    "y0": 122,
+    "x1": 66,
+    "y1": 143
+   },
+   "spanPx": 91.5,
+   "orientation": "ROTATED_CW",
+   "printed": "245",
+   "readBy005D": "205"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-53-340-15da471bc3",
+   "box": {
+    "x0": 53,
+    "y0": 340,
+    "x1": 66,
+    "y1": 360
+   },
+   "spanPx": 343,
+   "orientation": "ROTATED_CW",
+   "printed": "920",
+   "readBy005D": "420"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-53-557-a5d85c8bf7",
+   "box": {
+    "x0": 54,
+    "x1": 66,
+    "y0": 557,
+    "y1": 577
+   },
+   "spanPx": 91.5,
+   "orientation": "ROTATED_CW",
+   "printed": "245",
+   "readBy005D": null
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-652-694-45ab1aee99",
+   "box": {
+    "x0": 652,
+    "y0": 694,
+    "x1": 671,
+    "y1": 707
+   },
+   "spanPx": 261,
+   "orientation": "HORIZONTAL",
+   "printed": "700",
+   "readBy005D": "700"
+  },
+  {
+   "house": "willa-miranda",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-willa-miranda-11-g2-m49324d69ef143",
+   "frameId": "frame-asset-rzut-73ee27c4b6-7102a805c6",
+   "variantByteHash": "4b283439b01469a4c552b88469a517535f7259d24270ed4d7406af6ae13c65f1",
+   "textRegionId": "text-region-664-444-87320fbc48",
+   "box": {
+    "x0": 664,
+    "y0": 444,
+    "x1": 683,
+    "y1": 457
+   },
+   "spanPx": 128,
+   "orientation": "HORIZONTAL",
+   "printed": "605",
+   "readBy005D": "605"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-15-299-a567e7ab77",
+   "box": {
+    "x0": 15,
+    "y0": 299,
+    "x1": 32,
+    "y1": 324
+   },
+   "spanPx": 428.5,
+   "orientation": "ROTATED_CW",
+   "printed": "950",
+   "readBy005D": "450"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-415-678-9528bcc5a9",
+   "box": {
+    "x0": 415,
+    "y0": 678,
+    "x1": 438,
+    "y1": 694
+   },
+   "spanPx": 338,
+   "orientation": "HORIZONTAL",
+   "printed": "750",
+   "readBy005D": "750"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-45-265-da7e5a718a",
+   "box": {
+    "x0": 45,
+    "x1": 60,
+    "y0": 266,
+    "y1": 290
+   },
+   "spanPx": 361,
+   "orientation": "ROTATED_CW",
+   "printed": "800",
+   "readBy005D": "800"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-45-480-d9a46efd7f",
+   "box": {
+    "x0": 45,
+    "y0": 480,
+    "x1": 61,
+    "y1": 504
+   },
+   "spanPx": 67.5,
+   "orientation": "ROTATED_CW",
+   "printed": "150",
+   "readBy005D": "150"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-507-708-ede6401723",
+   "box": {
+    "x0": 507,
+    "y0": 708,
+    "x1": 538,
+    "y1": 724
+   },
+   "spanPx": 532,
+   "orientation": "HORIZONTAL",
+   "printed": "1180",
+   "readBy005D": "1180"
+  },
+  {
+   "house": "dom-w-zurawkach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-zurawkach-3-p-md4e2138a2d1a5",
+   "frameId": "frame-asset-rzut-0dfaf7d6ba-6fe6f9c445",
+   "variantByteHash": "10e0a72c8322cb94dbe34209a48a4ec0e40e338cf729e1fba6fd585db222d714",
+   "textRegionId": "text-region-680-678-879a2de4f2",
+   "box": {
+    "x0": 680,
+    "x1": 704,
+    "y0": 678,
+    "y1": 694
+   },
+   "spanPx": 194,
+   "orientation": "HORIZONTAL",
+   "printed": "430",
+   "readBy005D": null
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-192-655-2c5eda5218",
+   "box": {
+    "x0": 192,
+    "y0": 655,
+    "x1": 210,
+    "y1": 668
+   },
+   "spanPx": 271,
+   "orientation": "HORIZONTAL",
+   "printed": "740",
+   "readBy005D": "110"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-367-693-70b9c8bda6",
+   "box": {
+    "x0": 367,
+    "y0": 693,
+    "x1": 392,
+    "y1": 706
+   },
+   "spanPx": 673,
+   "orientation": "HORIZONTAL",
+   "printed": "1850",
+   "readBy005D": "1850"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-403-655-88bdde5f12",
+   "box": {
+    "x0": 403,
+    "y0": 655,
+    "x1": 423,
+    "y1": 668
+   },
+   "spanPx": 155,
+   "orientation": "HORIZONTAL",
+   "printed": "426",
+   "readBy005D": "016"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-406-217-cf43c4090f",
+   "box": {
+    "x0": 406,
+    "y0": 217,
+    "x1": 426,
+    "y1": 230
+   },
+   "spanPx": 110,
+   "orientation": "HORIZONTAL",
+   "printed": "285",
+   "readBy005D": "285"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-593-268-3d3bbfc587",
+   "box": {
+    "x0": 593,
+    "y0": 268,
+    "x1": 607,
+    "y1": 289
+   },
+   "spanPx": 66,
+   "orientation": "ROTATED_CW",
+   "printed": "602",
+   "readBy005D": "602"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-594-655-d5a3384520",
+   "box": {
+    "x0": 594,
+    "y0": 655,
+    "x1": 613,
+    "y1": 668
+   },
+   "spanPx": 227,
+   "orientation": "HORIZONTAL",
+   "printed": "624",
+   "readBy005D": "621"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-782-141-74c3a83cc9",
+   "box": {
+    "x0": 782,
+    "y0": 141,
+    "x1": 796,
+    "y1": 160
+   },
+   "spanPx": 71.5,
+   "orientation": "ROTATED_CW",
+   "printed": "196",
+   "readBy005D": "146"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-782-301-dd981333c2",
+   "box": {
+    "x0": 782,
+    "y0": 301,
+    "x1": 796,
+    "y1": 322
+   },
+   "spanPx": 250.5,
+   "orientation": "ROTATED_CW",
+   "printed": "689",
+   "readBy005D": "684"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-782-459-548555c19b",
+   "box": {
+    "x0": 782,
+    "y0": 459,
+    "x1": 796,
+    "y1": 478
+   },
+   "spanPx": 71,
+   "orientation": "ROTATED_CW",
+   "printed": "195",
+   "readBy005D": "145"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-817-314-4cf635ad52",
+   "box": {
+    "x0": 817,
+    "y0": 314,
+    "x1": 831,
+    "y1": 340
+   },
+   "spanPx": 422,
+   "orientation": "ROTATED_CW",
+   "printed": "1160",
+   "readBy005D": "1160"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-196-430-e3b12044f8",
+   "box": {
+    "x0": 217,
+    "x1": 233,
+    "y0": 431,
+    "y1": 456
+   },
+   "spanPx": 121.5,
+   "orientation": "ROTATED_CW",
+   "printed": "216",
+   "readBy005D": "210"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-2-333-464d4b5605",
+   "box": {
+    "x0": 2,
+    "y0": 333,
+    "x1": 19,
+    "y1": 358
+   },
+   "spanPx": 359.5,
+   "orientation": "ROTATED_CW",
+   "printed": "670",
+   "readBy005D": "010"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-301-223-121d489aeb",
+   "box": {
+    "x0": 301,
+    "x1": 326,
+    "y0": 223,
+    "y1": 239
+   },
+   "spanPx": 144.162162,
+   "orientation": "HORIZONTAL",
+   "printed": "337",
+   "readBy005D": "717"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-333-623-3fe4c96ae7",
+   "box": {
+    "x0": 333,
+    "y0": 623,
+    "x1": 364,
+    "y1": 639
+   },
+   "spanPx": 556,
+   "orientation": "HORIZONTAL",
+   "printed": "1035",
+   "readBy005D": "1055"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-550-332-b75a503076",
+   "box": {
+    "x0": 550,
+    "y0": 332,
+    "x1": 567,
+    "y1": 358
+   },
+   "spanPx": 163,
+   "orientation": "ROTATED_CW",
+   "printed": "582",
+   "readBy005D": "582"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-300-697-b6c367b1b3",
+   "box": {
+    "x0": 300,
+    "x1": 317,
+    "y0": 697,
+    "y1": 708
+   },
+   "spanPx": 316,
+   "orientation": "HORIZONTAL",
+   "printed": "888",
+   "readBy005D": "888"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-419-722-92d6d0a0b9",
+   "box": {
+    "x0": 419,
+    "y0": 722,
+    "x1": 442,
+    "y1": 733
+   },
+   "spanPx": 562,
+   "orientation": "HORIZONTAL",
+   "printed": "1580",
+   "readBy005D": "1501"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-46-389-90625e734a",
+   "box": {
+    "x0": 46,
+    "y0": 389,
+    "x1": 58,
+    "y1": 412
+   },
+   "spanPx": 476,
+   "orientation": "ROTATED_CW",
+   "printed": "1340",
+   "readBy005D": "1700"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-581-697-c88c7af282",
+   "box": {
+    "x0": 581,
+    "y0": 697,
+    "x1": 598,
+    "y1": 708
+   },
+   "spanPx": 246,
+   "orientation": "HORIZONTAL",
+   "printed": "692",
+   "readBy005D": "643"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-72-304-dcab3c0989",
+   "box": {
+    "x0": 72,
+    "y0": 304,
+    "x1": 84,
+    "y1": 322
+   },
+   "spanPx": 302,
+   "orientation": "ROTATED_CW",
+   "printed": "850",
+   "readBy005D": "810"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-72-542-c6bbf51f75",
+   "box": {
+    "x0": 72,
+    "y0": 542,
+    "x1": 84,
+    "y1": 560
+   },
+   "spanPx": 174,
+   "orientation": "ROTATED_CW",
+   "printed": "490",
+   "readBy005D": "141"
+  },
+  {
+   "house": "dom-w-dabecjach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-dabecjach-2-g2-m1d2240bad8ffb",
+   "frameId": "frame-asset-rzut-1a56066c62-10b0ec4131",
+   "variantByteHash": "699cad5cee55ed0362258926ae0ecb09b298a55eef675553592297b0f9eb7fe2",
+   "textRegionId": "text-region-72-99-5a7e5b7de1",
+   "box": {
+    "x0": 73,
+    "x1": 84,
+    "y0": 99,
+    "y1": 116
+   },
+   "spanPx": 108.5,
+   "orientation": "ROTATED_CW",
+   "printed": "304",
+   "readBy005D": null
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "variantByteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+   "textRegionId": "text-region-185-406-8daf754383",
+   "box": {
+    "x0": 185,
+    "y0": 406,
+    "x1": 202,
+    "y1": 431
+   },
+   "spanPx": 61,
+   "orientation": "ROTATED_CW",
+   "printed": "280",
+   "readBy005D": "280"
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "variantByteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+   "textRegionId": "text-region-208-577-b67728d5f0",
+   "box": {
+    "x0": 213,
+    "y0": 577,
+    "x1": 238,
+    "y1": 597
+   },
+   "spanPx": 142,
+   "orientation": "HORIZONTAL",
+   "printed": "274",
+   "readBy005D": "50"
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "variantByteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+   "textRegionId": "text-region-354-592-b70fedc985",
+   "box": {
+    "x0": 354,
+    "y0": 592,
+    "x1": 371,
+    "y1": 616
+   },
+   "spanPx": 78.5,
+   "orientation": "ROTATED_CW",
+   "printed": "130",
+   "readBy005D": "150"
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "variantByteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+   "textRegionId": "text-region-393-736-f54c4a807c",
+   "box": {
+    "x0": 393,
+    "y0": 736,
+    "x1": 423,
+    "y1": 752
+   },
+   "spanPx": 560,
+   "orientation": "HORIZONTAL",
+   "printed": "1173",
+   "readBy005D": "1117"
+  },
+  {
+   "house": "dom-w-tunbergiach",
+   "split": "TARGET",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-tunbergiach-7-r2-md842941974a5c",
+   "frameId": "frame-asset-rzut-83377e8ffc-c1a88b7f25",
+   "variantByteHash": "3cde3259908205f743260247e79e9c5261a946f15893b8ef1698c5f51633a042",
+   "textRegionId": "text-region-58-403-cc09597b26",
+   "box": {
+    "x0": 58,
+    "y0": 403,
+    "x1": 75,
+    "y1": 435
+   },
+   "spanPx": 478,
+   "orientation": "ROTATED_CW",
+   "printed": "1000",
+   "readBy005D": "1000"
+  }
+ ],
+ "excluded": [
+  {
+   "house": "marcowki",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-marcowkach-ge-m2fa281446a8ca",
+   "frameId": "frame-asset-rzut-19a11bc745-33a5ff46cd",
+   "variantByteHash": "abfdb2625576ef47745921944dc64662fd7aed144f4a0e4d67015804dc9176d6",
+   "textRegionId": "text-region-235-562-2b967bc730",
+   "box": {
+    "x0": 236,
+    "x1": 246,
+    "y0": 562,
+    "y1": 578
+   },
+   "spanPx": 149,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "kosacce-clean",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-kosaccach-46-mf6628752fa61f",
+   "frameId": "frame-asset-rzut-f530d6ebf2-668d857ed9",
+   "variantByteHash": "1cd41ad66781948ab0fe9bb5b8720ee542ee4cf0b83a1cedcce1593aa8e731fa",
+   "textRegionId": "text-region-660-616-9c4993a481",
+   "box": {
+    "x0": 660,
+    "x1": 672,
+    "y0": 624,
+    "y1": 637
+   },
+   "spanPx": 63.5,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "rarytasy-g2e",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-5-g2e-m84f2903cb8e14",
+   "frameId": "frame-asset-rzut-e8520c3ad3-59a406b738",
+   "variantByteHash": "6b142fb298e5ca0d4d546c8bcf86c887d3a6f43eed93df9327edfcc7e8a77666",
+   "textRegionId": "text-region-611-399-95780a3a6c",
+   "box": {
+    "x0": 611,
+    "x1": 630,
+    "y0": 417,
+    "y1": 430
+   },
+   "spanPx": 113.066667,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "rarytasy-eoze",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-rarytasach-e-oze-m738275b7537b0",
+   "frameId": "frame-asset-rzut-b747b42ad2-e3a3d0015d",
+   "variantByteHash": "2e1e9ff034bef3ea4e1bec708aeaf89fc2ffb4d280d54f564acc8cec5e7cdbad",
+   "textRegionId": "text-region-646-591-08c8b8c41e",
+   "box": {
+    "x0": 646,
+    "y0": 591,
+    "x1": 655,
+    "y1": 598
+   },
+   "spanPx": 106.5,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-jablonkach",
+   "split": "FIT",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-jablonkach-22-mb0e2566e7cb18",
+   "frameId": "frame-asset-rzut-a8bdd8cd1d-d80b709d74",
+   "variantByteHash": "458362f1d412515b7a11224ae711f0202a808b5ae24cd08baa26d79befc21052",
+   "textRegionId": "text-region-677-412-d306f7acf9",
+   "box": {
+    "x0": 677,
+    "x1": 686,
+    "y0": 412,
+    "y1": 421
+   },
+   "spanPx": 118.5,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzykach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-modrzykach-3-g2-mdf423d61e7247",
+   "frameId": "frame-asset-rzut-fb7476d8f1-6827e718fe",
+   "variantByteHash": "d9312ccede5a237bd2e1c4e5f6a5d13ada6ef89dc6e57a8baf79efd0810179ea",
+   "textRegionId": "text-region-639-335-6240ecc088",
+   "box": {
+    "x0": 647,
+    "x1": 657,
+    "y0": 336,
+    "y1": 351
+   },
+   "spanPx": 73,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-azaliach",
+   "split": "HELD_BACK",
+   "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+   "frameId": "frame-asset-rzut-86bef468f3-19006df9bc",
+   "variantByteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+   "textRegionId": "text-region-353-368-826e54b980",
+   "box": {
+    "x0": 353,
+    "y0": 368,
+    "x1": 373,
+    "y1": 388
+   },
+   "spanPx": 72.5,
+   "why": "not a dimension label, cut off, or text set another way than its region"
+  }
+ ]
+}
