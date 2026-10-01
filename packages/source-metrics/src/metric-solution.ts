@@ -225,9 +225,10 @@ type Obs = {
   /** 005E: for the structural check, each alternative's distance from the as-read string (non-top glyph choices). */
   altCost: Map<number, number>
   /**
-   * 005E: the alternatives that may contest a scale — those the ink holds at least `VALUE_BOUNDS.contestRatio` as
-   * strongly as its reading (an AMBIGUOUS ink: every one it emitted). A value the image barely supports does not make a
-   * well-read ink neutral; 005D's one-glyph values (ratio ≥ 0.7) all qualify.
+   * 005E: the values that may contest a scale (`contestValues`): those the ink holds at least
+   * `VALUE_BOUNDS.contestRatio` as strongly as its reading (an AMBIGUOUS ink: every one it emitted), and those one
+   * glyph away whose glyph scores at least `VALUE_BOUNDS.glyphRatio` of the cell's best (005D's substitution bound).
+   * A value the image barely supports does not make a well-read ink neutral.
    */
   contestAlts: number[]
   /** 005E: the ink's lattice, for the record of which value a span is finally given. */
@@ -358,6 +359,20 @@ export function boundedValues(token: TextToken): Array<{ text: string; valueCm: 
 }
 
 /**
+ * 005E: the values that may contest a scale on an ink's behalf — what the ink may be besides what it was read as.
+ * With a lattice: the alternatives it holds at least `VALUE_BOUNDS.contestRatio` as strongly as its reading (every one
+ * when AMBIGUOUS), and every value one glyph from the as-read string whose glyph scores at least
+ * `VALUE_BOUNDS.glyphRatio` of the cell's best — 005D's own bound on a substitution, measured on the lattice's glyphs,
+ * so that the sharper sequence probabilities never make an ink more decisive than such a runner-up left it. A
+ * contest only withholds a vote; it never gives a span a value.
+ */
+function contestValues(lattice: LabelLattice | undefined, alternatives: ReadonlyArray<{ valueCm: number; ratio: number }>): number[] {
+  if (!lattice) return alternatives.map((a) => a.valueCm)
+  const oneGlyph = new Set(lattice.sequences.filter((q) => !q.asRead && q.valueCm !== undefined && q.nonTop.length === 1 && q.nonTop[0].ratio >= VALUE_BOUNDS.glyphRatio).map((q) => q.valueCm as number))
+  return alternatives.filter((a) => lattice.ocrClass === 'AMBIGUOUS' || a.ratio >= VALUE_BOUNDS.contestRatio || oneGlyph.has(a.valueCm)).map((a) => a.valueCm)
+}
+
+/**
  * 005E: the values a lattice offers besides its as-read one, as V1's records: every other dimension the image supports
  * (at most `VALUE_BOUNDS.latticeAlternatives`), with `ratio` its probability over the as-read one's (capped at 1).
  * They make an ink neutral or are chosen among by independent evidence; they are never readings, never witnesses.
@@ -437,7 +452,7 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             alts: alternatives.map((a) => a.valueCm),
             ...(lattice ? { ocrClass: lattice.ocrClass, lattice } : {}),
             altCost,
-            contestAlts: alternatives.filter((a) => lattice?.ocrClass === 'AMBIGUOUS' || a.ratio >= VALUE_BOUNDS.contestRatio).map((a) => a.valueCm),
+            contestAlts: contestValues(lattice, alternatives),
           })
         }
       }

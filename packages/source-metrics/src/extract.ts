@@ -38,7 +38,7 @@ import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, labelLattice } from './n
 import type { LabelLattice, LatticeCache } from './numeric-lattice.js'
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts } from './callouts.js'
-import type { TextToken } from './ocr.js'
+import type { OcrResult, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { registerFrame, solveLevelLadder } from './registration.js'
 import type { ScaleAnchorInput } from './registration.js'
@@ -359,18 +359,14 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       // 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
       // makes, before any scale — re-read from the very ink field its pass read. Image only.
       const lattices = new Map<TextToken, { id: string; lattice: LabelLattice }>()
-      if (read.passes) {
-        const onLine = read.raw.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS && t.passBox && rawChains.some((chain) => onDimensionLine(chain, t)))
-        for (const [i, token] of onLine.entries()) {
-          checkpoint.tick({ subphase: { id: 'OCR_LATTICE', label: 'reading dimension labels' }, counters: { label: i + 1, labelsTotal: onLine.length } })
-          const ink = read.passes[token.orientation]
-          if (!ink) continue
-          const lattice = labelLattice({ orientation: token.orientation, ink, page: { width: raster.width, height: raster.height } }, token, latticeCache)
-          if (!lattice) continue
-          const id = stableId('ocr-lattice', token.text.replace(/[^0-9a-z]/gi, '') || 'token', { frameId: frame.id, box: token.box, orientation: token.orientation })
-          lattices.set(token, { id, lattice })
-          numericLattices.push(latticeRecord(id, frame.id, token, lattice))
-        }
+      const read5e = dimensionLabelLattices(read, rawChains, { width: raster.width, height: raster.height }, {
+        cache: latticeCache,
+        onLabel: (label, labelsTotal) => checkpoint.tick({ subphase: { id: 'OCR_LATTICE', label: 'reading dimension labels' }, counters: { label, labelsTotal } }),
+      })
+      for (const [token, lattice] of read5e) {
+        const id = stableId('ocr-lattice', token.text.replace(/[^0-9a-z]/gi, '') || 'token', { frameId: frame.id, box: token.box, orientation: token.orientation })
+        lattices.set(token, { id, lattice })
+        numericLattices.push(latticeRecord(id, frame.id, token, lattice))
       }
       const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
       solvedChains = metric.solved
@@ -974,6 +970,30 @@ function scaleConflicts(registrations: readonly MetricEvidenceSet['coordinateReg
 
 /** 005E: labels longer than this many glyphs are no dimension (the grammar takes 2–4 digits, or a decimal). */
 const LATTICE_LABEL_GLYPHS = 6
+
+/**
+ * 005E: the numeric lattice of every ink that lies on a dimension line — the geometric test the label assignment
+ * makes, before any scale — re-read from the very ink field its pass read (`readNumbers` with `retainPasses`).
+ * Image only: nothing here knows a scale, a span's length or another label's value. In the reader's token order.
+ */
+export function dimensionLabelLattices(
+  read: Pick<OcrResult, 'raw' | 'passes'>,
+  chains: readonly RawChain[],
+  page: { width: number; height: number },
+  options: { cache?: LatticeCache; onLabel?: (label: number, labelsTotal: number) => void } = {},
+): Map<TextToken, LabelLattice> {
+  const out = new Map<TextToken, LabelLattice>()
+  if (!read.passes || !read.raw) return out
+  const onLine = read.raw.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS && t.passBox && chains.some((chain) => onDimensionLine(chain, t)))
+  for (const [i, token] of onLine.entries()) {
+    options.onLabel?.(i + 1, onLine.length)
+    const ink = read.passes[token.orientation]
+    if (!ink) continue
+    const lattice = labelLattice({ orientation: token.orientation, ink, page }, token, options.cache)
+    if (lattice) out.set(token, lattice)
+  }
+  return out
+}
 
 /** An ink lies on a dimension line: set along it, within its span, within a couple of its own heights of the line (`assignTokens`' test). */
 function onDimensionLine(chain: RawChain, t: TextToken): boolean {
