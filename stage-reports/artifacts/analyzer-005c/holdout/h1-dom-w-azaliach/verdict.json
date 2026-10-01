@@ -1,0 +1,63 @@
+{
+  "run": "h1-dom-w-azaliach",
+  "completed": true,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 69.69,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 152,
+      "tallestPx": 349,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-cbf8168d6d-79ba9b7966",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 14
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "conditions": {
+    "storeys": {
+      "model": 1,
+      "plans": 2,
+      "holds": false
+    },
+    "openingsAllBuilt": {
+      "holds": true,
+      "message": null
+    },
+    "footprint": {
+      "builtM2": 67.26,
+      "publishedM2": 69.69,
+      "residualPct": -3.48,
+      "holds": true
+    },
+    "resolvedWithAWitness": {
+      "chosen": "copy area_table 79ba9b7966, wall-ink extent, scale 1.897482 cm/px, largest-first tiling, sides as gridded: 1 body, 67.3 m² (-3.5% of 69.69), AGREES",
+      "corroborations": "",
+      "holds": false
+    }
+  },
+  "bodies": 1,
+  "unresolved": 6,
+  "warnings": [
+    "INFO:DETERMINISTIC_ONLY",
+    "INFO:SOURCE_BYTE_IDENTICAL",
+    "INFO:GUESSED_ADDRESS_HTTP_STATUS",
+    "LIMITING:LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS",
+    "LIMITING:LAYOUT_NO_MASS_REACHES_UP",
+    "LIMITING:LAYOUT_SCALE_DISAGREEMENT",
+    "LIMITING:METRIC_SCALE_WEAK"
+  ],
+  "verdict": "ALGORITHMIC_FAIL"
+}

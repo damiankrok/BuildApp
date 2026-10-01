@@ -1,0 +1,1783 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 dodatkowa wizualizacja",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-dodatkowa-wizual-1d6ce1d5f1",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w azaliach 3 dodatkowa wizualizacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-b24196c38978d490d1c5e49-7b897b535e",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "7d24113f1dde3e36be0019134a0e9cf8f7335172a4ec76036abc512171106142",
+          "byteLength": 376325,
+          "declared": {
+            "height": 87,
+            "width": 116
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/carousel_images",
+          "id": "var-projekt-dom-w-azaliach-3-b24196c38978d490d1c5e49-7b897b535e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/fm/projekt-dom-w-azaliach-3-b24196c38978d490d1c5e4953a356d6a__55977.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-elewacja-boczna-1f507d49ec",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-azaliach-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w azaliach 3 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w azaliach 3 elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-eb0f626f59956be91ee5ebc-f3288d9e4d",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x661 over 550x284",
+      "variants": [
+        {
+          "aspect": 1.93646,
+          "byteHash": "ded7e295bc02a9b25f11d8193327ac682940f494dd05547b64dbeaadb4f6abc1",
+          "byteLength": 327850,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 661,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-eb0f626f59956be91ee5ebc-f3288d9e4d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-eb0f626f59956be91ee5ebcf675e218e__11266.jpg"
+        },
+        {
+          "aspect": 1.93662,
+          "byteHash": "965b9629c445f078a8c45a80a748233e4ee5846b949840b25d2a31a8b9feb43a",
+          "byteLength": 75306,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 284,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-elewacja-boczna-projekt-dom-w-azaliach-3-5be9331-a4f0be57e0",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-boczna-projekt-dom-w-azaliach-3-5be93312eba6a5956eccdd02b3e8612c__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-elewacja-boczna-c94712c115",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-azaliach-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w azaliach 3 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w azaliach 3 elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-969653f50cfc6bbcec6c4e3-ec092cbea8",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x661 over 550x284",
+      "variants": [
+        {
+          "aspect": 1.93646,
+          "byteHash": "344560a7564f8c33e9d42509978ad8ec1a2d1e0428d5198a2f64dd636f897069",
+          "byteLength": 307495,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 661,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-969653f50cfc6bbcec6c4e3-ec092cbea8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-969653f50cfc6bbcec6c4e385c218e86__11265.jpg"
+        },
+        {
+          "aspect": 1.93662,
+          "byteHash": "23b39159fb8f67ac168e905215c8e2d048e22efa23c0975de442d6fd44d2c664",
+          "byteLength": 70596,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 284,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-elewacja-boczna-projekt-dom-w-azaliach-3-776c8c1-13b1a0f4c1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-boczna-projekt-dom-w-azaliach-3-776c8c152c749ffe9bb2e0252f42eb18__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-elewacja-frontow-05d2dea532",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-azaliach-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w azaliach 3 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w azaliach 3 elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-55d67115fbc8f832c88cd83-d7c413c9b3",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x661 over 550x284",
+      "variants": [
+        {
+          "aspect": 1.93646,
+          "byteHash": "02f4d8ebc89236c6bc6af2eb68fb84b9b5b74ddb6c8f8c4478e7359c1dc76b03",
+          "byteLength": 264288,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 661,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-55d67115fbc8f832c88cd83-d7c413c9b3",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-55d67115fbc8f832c88cd8335baa58a6__11264.jpg"
+        },
+        {
+          "aspect": 1.93662,
+          "byteHash": "490e7220c6644e1b7498f9cc3c8a48b6723060d23ce3e4b523d99b1efe99b45b",
+          "byteLength": 62396,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 284,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-elewacja-frontowa-projekt-dom-w-azaliach-3-788ee-0ef21bf255",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-frontowa-projekt-dom-w-azaliach-3-788ee744a405ff96fb9779446cbb711e__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-elewacja-ogrodow-05d0e3df64",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w azaliach 3 elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-azaliach-3\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w azaliach 3 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w azaliach 3 elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-10f6fa66b24901d8d201eb8-948b80907f",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x661 over 550x284",
+      "variants": [
+        {
+          "aspect": 1.93646,
+          "byteHash": "1c731257e7fe6c802031e6e02c272325f2ff61264d22cf7fbde36a26fd61c8f7",
+          "byteLength": 266567,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 661,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-10f6fa66b24901d8d201eb8-948b80907f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-10f6fa66b24901d8d201eb85656f58dc__11267.jpg"
+        },
+        {
+          "aspect": 1.93662,
+          "byteHash": "e511f91301aefd21c9fb9992b48b4e660df2ca949a83d8b2804ea13b58d97e3f",
+          "byteLength": 62217,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 284,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-azaliach-3-d94c2-972a464e21",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-ogrodowa-projekt-dom-w-azaliach-3-d94c2deade31e525fa25dbd6136464c4__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-przekroj-budynku-415db03d6c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w azaliach 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w azaliach 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w azaliach 3 przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-azaliach-3-96e0e3-bee1631897",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 402x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "bb5a57923fe2b214371c4f28c23d76f1c23cc4772285f1a95c13710011bcb2c5",
+          "byteLength": 83445,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/ma6726144fab3e/przekroj-budynku-projekt-dom-w-azaliach-3-96e0e31f0ba15eae47da1fff1a6098e0__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-azaliach-3-96e0e3-bee1631897",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/przekroj-budynku-projekt-dom-w-azaliach-3-96e0e31f0ba15eae47da1fff1a6098e0__11256.jpg"
+        },
+        {
+          "aspect": 1.34,
+          "byteHash": "fc9f4df0a5be061deca916d559af85175b0f4bf461d881ad15d6532eadbcdb99",
+          "byteLength": 21173,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 300,
+            "width": 402
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-przekroj-budynku-projekt-dom-w-azaliach-3-96e0e3-319b9ab685",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/przekroj-budynku-projekt-dom-w-azaliach-3-96e0e31f0ba15eae47da1fff1a6098e0__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-rzut-parteru-f5c9b62b0c",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-azaliach-3-8cac457026-19c22a81fe",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "3ea86369dd7cbe0bbcaf659b2dc61a5a1de3882d3723416a20f74909372af085",
+          "byteLength": 40747,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-azaliach-3-8cac457026-19c22a81fe",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-parteru-projekt-dom-w-azaliach-3-8cac4570261569289a5340ce1ca09058__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-rzut-poddasza-6ebd36a4b1",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-azaliach-3-c2fe1c693-a2db6cf5c0",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "badf5fc7ab9852f0edc863bfdc001be34796933a82927384e71a8a7a37ae7288",
+          "byteLength": 34498,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-azaliach-3-c2fe1c693-a2db6cf5c0",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-poddasza-projekt-dom-w-azaliach-3-c2fe1c6936cfe1878093d0dee88fcfb6__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-sytuacja-235aa2ff7b",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w azaliach 3 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w azaliach 3 sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-c14f0181775c1aa9a53588b-e454a99baa",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "1dd48af2bdc23198c188429ce36870084d755a2c6206ee6aadbbf04a5c806219",
+          "byteLength": 216091,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-c14f0181775c1aa9a53588b-e454a99baa",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-c14f0181775c1aa9a53588ba18316789__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "46d21b1874c30412638fec0181fd28414994033b00fe9f7ad702760ced314658",
+          "byteLength": 46788,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-sytuacja-projekt-dom-w-azaliach-3-384645584eb6ab-b8908aec3d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/sytuacja-projekt-dom-w-azaliach-3-384645584eb6ab9e785d6e4724f60568__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w azaliach 3 widok 1",
+      "id": "asset-gotowy-projekt-dom-w-azaliach-3-widok-1-a63125573d",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w azaliach 3 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-azaliach-3-668d8ff2c750d4a-41f506fa67",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "9f98815ca6b5306c5722d048e76f4a3ef1855423d122f973abf7cd37b191ef71",
+          "byteLength": 11899,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-widok-1-projekt-dom-w-azaliach-3-668d8ff2c750d4a-41f506fa67",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-1-projekt-dom-w-azaliach-3-668d8ff2c750d4a82a7d2820266ebba2__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w azaliach 3",
+      "id": "asset-projekt-dom-w-azaliach-3-06f453c0e6",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-azaliach-3-cf5898ec1d0d82e-3ae7c3a847",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "6ef64987549bd35b0b4f3154ab634c323d4c5b25fc59a52f15c3f98e905523b8",
+          "byteLength": 39755,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/related?scope=similar",
+          "id": "var-widok-2-projekt-dom-w-azaliach-3-cf5898ec1d0d82e-3ae7c3a847",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-2-projekt-dom-w-azaliach-3-cf5898ec1d0d82e2bed0a6be15c5a340__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w azaliach 3",
+      "id": "asset-projekt-dom-w-azaliach-3-34c5ca8606",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-azaliach-3-a6215a5c56-fa2047d517",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9cb0148ba280df0dbbbc9d5eac5f5434d33ca380ab0859a756526910cbfd608a",
+          "byteLength": 27662,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/related?scope=similar",
+          "id": "var-rzut-parteru-projekt-dom-w-azaliach-3-a6215a5c56-fa2047d517",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-parteru-projekt-dom-w-azaliach-3-a6215a5c56c3125c0e5eee0fa45f5012__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w azaliach 3 4fe64c2c9f166070d7388799313a58e6  41112",
+      "id": "asset-projekt-dom-w-azaliach-3-4fe64c2c9f166070d738879-0bc6c4cc0c",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-4fe64c2c9f166070d738879-f4ace071aa",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "0fa50cf04076500fda751f81a5b223c166dfd858cc828476287765c133a0f202",
+          "byteLength": 374359,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/ma6726144fab3e/image/41112?showHotspots=false",
+          "id": "var-projekt-dom-w-azaliach-3-4fe64c2c9f166070d738879-f4ace071aa",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/ma6726144fab3e/i/projekt-dom-w-azaliach-3-4fe64c2c9f166070d7388799313a58e6__41112.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w azaliach 3",
+      "id": "asset-projekt-dom-w-azaliach-3-73b0fd883d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-azaliach-3-9e9de28c5-7aa3f12751",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c76b4cacd967d83c7f2d8a018d0878930092ec8410802c798bf6e1e87b7547fa",
+          "byteLength": 23666,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/related?scope=similar",
+          "id": "var-rzut-poddasza-projekt-dom-w-azaliach-3-9e9de28c5-7aa3f12751",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-poddasza-projekt-dom-w-azaliach-3-9e9de28c5391897e90f6a0f2657ba5a9__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w azaliach 3",
+      "id": "asset-projekt-dom-w-azaliach-3-b5b2b1f442",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-46a8f954d1504660a91080d-3f205063e8",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "0803c60a0e602f74a084e649c8030beea6269dc850a28402ce17ad1dd5ed71e9",
+          "byteLength": 39863,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/ma6726144fab3e/related?scope=similar",
+          "id": "var-projekt-dom-w-azaliach-3-46a8f954d1504660a91080d-3f205063e8",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-46a8f954d1504660a91080d90af221d9__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2468eb43d4",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-aza-447dbbc790",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2968f771d44f7b1bda5750d24743f9a9b13ed117e4261b54d3020fa9e2ef06ff",
+          "byteLength": 62567,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-aza-447dbbc790",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-poddasza-z-powierzchniami-projekt-dom-w-azaliach-3-5404205106b17fa2bc35ba2f14a2a6c8__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2e7e66ff80",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w azaliach 3 rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-32e8622788e8ba07128a63a-4de147e690",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "bd6742fc9a8bc41d15b859e9e111b6e9486524ec107023d40cfc90a569ae0c8d",
+          "byteLength": 70512,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-32e8622788e8ba07128a63a-4de147e690",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-32e8622788e8ba07128a63a9964c0012__11817.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-86bef468f3",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-azaliach-3-447e1e3a900abe90884824e-6d8ca5ca1f",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "e8269d56079363046471769a05b30aaaf20822ebce64648a31bfeb4d8eaa36be",
+          "byteLength": 81144,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-projekt-dom-w-azaliach-3-447e1e3a900abe90884824e-6d8ca5ca1f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-447e1e3a900abe90884824e4d680b449__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-cbf8168d6d",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/ma6726144fab3e/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w azaliach 3 rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-azal-2a668da43e",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "0bdd3a46c0e474df7bc730d1c4bc87ba3f34f1ad18603201d6b9f6899d3eb3b1",
+          "byteLength": 80418,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-azal-2a668da43e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-parteru-z-powierzchniami-projekt-dom-w-azaliach-3-4ca21f081bb61b6454e471825870e1b2__11915.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-azaliach-3-e99c690605",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w azaliach 3 widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-azaliach-3-c931319f90c3427-fe1f6aa037",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "b065b624dd696108d41298e63c7d5fe4a5091c05b0f7ee66f2b058f7666add02",
+          "byteLength": 214187,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-widok-1-projekt-dom-w-azaliach-3-c931319f90c3427-fe1f6aa037",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-1-projekt-dom-w-azaliach-3-c931319f90c34271cba86f7e86d595c2__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-azaliach-3-1978ffa714",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-azaliach-3\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w azaliach 3 widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-azaliach-3-3aa9b98a15ad244-af672fc66e",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1cdf3d838b94ed874b81554624cc7c03f774abc836512f763698381c2dd7f7cd",
+          "byteLength": 218485,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+          "id": "var-widok-2-projekt-dom-w-azaliach-3-3aa9b98a15ad244-af672fc66e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-2-projekt-dom-w-azaliach-3-3aa9b98a15ad2440497a96c2f4f3f7de__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+  "contentHash": "349a08e9a6b85332cbdd4644422602e989f9dde172ccd0827e9d12bfde82e6ef",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-46a8f954d1504660a91080d90af221d9__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-parteru-projekt-dom-w-azaliach-3-8cac4570261569289a5340ce1ca09058__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-parteru-projekt-dom-w-azaliach-3-a6215a5c56c3125c0e5eee0fa45f5012__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-poddasza-projekt-dom-w-azaliach-3-9e9de28c5391897e90f6a0f2657ba5a9__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/rzut-poddasza-projekt-dom-w-azaliach-3-c2fe1c6936cfe1878093d0dee88fcfb6__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-1-projekt-dom-w-azaliach-3-668d8ff2c750d4a82a7d2820266ebba2__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-1-projekt-dom-w-azaliach-3-c931319f90c34271cba86f7e86d595c2__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-2-projekt-dom-w-azaliach-3-3aa9b98a15ad2440497a96c2f4f3f7de__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/widok-2-projekt-dom-w-azaliach-3-cf5898ec1d0d82e2bed0a6be15c5a340__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-eb0f626f59956be91ee5ebcf675e218e__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-boczna-projekt-dom-w-azaliach-3-5be93312eba6a5956eccdd02b3e8612c__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-969653f50cfc6bbcec6c4e385c218e86__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-boczna-projekt-dom-w-azaliach-3-776c8c152c749ffe9bb2e0252f42eb18__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-55d67115fbc8f832c88cd8335baa58a6__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-frontowa-projekt-dom-w-azaliach-3-788ee744a405ff96fb9779446cbb711e__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-10f6fa66b24901d8d201eb85656f58dc__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/elewacja-ogrodowa-projekt-dom-w-azaliach-3-d94c2deade31e525fa25dbd6136464c4__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/ma6726144fab3e/projekt-dom-w-azaliach-3-c14f0181775c1aa9a53588ba18316789__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/ma6726144fab3e/sytuacja-projekt-dom-w-azaliach-3-384645584eb6ab9e785d6e4724f60568__11255.jpg"
+    }
+  ],
+  "id": "src-ma6726144fab3e-293e6e9c13",
+  "pageHash": "c19859b69b1cd5874337f72892994e50c3fa8e5b8282c392d703e2f458816317",
+  "project": {
+    "externalId": "ma6726144fab3e",
+    "name": "Projekt domu Dom w azaliach 3 Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "label": "Powierzchnia kotłowni",
+      "raw": "4,35 m&sup2;",
+      "unit": "m2",
+      "value": 4.35
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,02 m",
+      "unit": "m",
+      "value": 8.02
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "100,97 m&sup2;",
+      "unit": "m2",
+      "value": 100.97
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "69,69 m&sup2;",
+      "unit": "m2",
+      "value": 69.69
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez kotłowni",
+      "raw": "89,82 m&sup2;",
+      "unit": "m2",
+      "value": 89.82
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "137,98 m&sup2;",
+      "unit": "m2",
+      "value": 137.98
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "139,38 m&sup2;",
+      "unit": "m2",
+      "value": 139.38
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "90,08 m&sup2;",
+      "unit": "m2",
+      "value": 90.08
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "458,94 m&sup3;",
+      "unit": "none",
+      "value": 458.94
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.09,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 4,09 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 6.62,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 6,62 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 8.85,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 8,85 | (9,81)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.34,
+      "index": 4,
+      "label": "Łazienka",
+      "raw": "4. Łazienka | 5,34 | (6,31)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 2.74,
+      "index": 5,
+      "label": "Garderoba",
+      "raw": "5. Garderoba | 2,74 | (3,34)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.81,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 7,81 | (9,02)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.47,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 9,47 | (10,69)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.53,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 5,53 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.32,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 5,32 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.76,
+      "index": 3,
+      "label": "Łazienka",
+      "raw": "3. Łazienka | 2,76 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.35,
+      "index": 4,
+      "label": "Kotłownia z pralnią",
+      "raw": "4. Kotłownia z pralnią | 4,35 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 7.42,
+      "index": 5,
+      "label": "Kuchnia",
+      "raw": "5. Kuchnia | 7,42 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 21.21,
+      "index": 6,
+      "label": "Salon + Jadalnia",
+      "raw": "6. Salon + Jadalnia | 21,21 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.66,
+      "index": 7,
+      "label": "Spiżarnia",
+      "raw": "7. Spiżarnia | 2,66 | (4,50)",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Atrakcyjny dom o prostej bryle z dachem dwuspadowym, oferujący funkcjonalny układ pomieszczeń i komfortowe warunki użytkowania. Projekt sprawdzi się w realizacjach na małych działkach, powierzchnia zabudowy domu nie przekracza 70 m2. Kompozycja elewacji odpowiada aktualnym trendom, zastosowano tutaj połączenie jasnego i szarego tynku z drewnianą okładziną, która dodaje bryle naturalnego ciepła i klimatu. Interesująco prezentuje się strefa wejściowa z płaskim zadaszeniem oraz ażurową boczną przesłoną. Z kolei taras, za sprawą pergoli, zyskał zaciszny charakter i znakomicie spełnia swoją funkcję jako zewnętrzna przestrzeń wypoczynkowa z kącikiem kawowym lub letnią jadalnią. Do wnętrza domu prowadzi obszerny wiatrołap z pojemnymi szafami oraz miejscem na wygodne siedzisko. Otwarty plan strefy dziennej dodaje jej przestronności, a okazałe przeszklenia gwarantują doskonałe doświetlenie. Narożna sofa w salonie zaprasza domowników do wspólnego wypoczynku przed kinem domowym, w znajdującej się po sąsiedzku jadalni rodzinne posiłki uatrakcyjnia szeroki widok na ogród. Wielkość kuchni daje możliwość zastosowania zabudowy z wielofunkcyjnym półwyspem, który można zaaranżować w formie nowoczesnej strefy gotowania połączonej z barkiem śniadaniowym. Dodatkową powierzchnię do przechowywania zapewnia zaprojektowana na osi kuchni spiżarnia, która w optymalny sposób zagospodarowuje przestrzeń pod schodami. Układ funkcjonalny parteru wzbogaca łazienka z dużym prysznicem oraz kotłownia, w której jednocześnie można zorganizować praktyczną i przydatną w każdym domu pralnię. Na poddaszu, które za sprawą wysokiej ścianki kolankowej zyskało na przestronności, zaprojektowano strefą nocną. Domownicy mają tutaj do dyspozycji trzy sypialnie, łazienkę oraz garderobę. Wszystkie pokoje oferują wygodną przestrzeń do wypoczynku, uwzględniono w nich także odpowiednie miejsce do przechowywania, a optymalne doświetlenie gwarantują nowoczesne portfenetry. „Dom w azaliach 3” to interesująca propozycja należąca do kolekcji: projekty domów do 70 m2 powierzchni zabudowy , projekty domów nowoczesnych , projekty domów z poddaszem użytkowym , projekty domów z dachem dwuspadowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "167 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, dachówka ceramiczna swissporTON, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 69.69 m² + 89.82 m² + 4.35 m² , 4 pokoje, kuchnia, 2 łazienki, spiżarka, kotłownia, garderoba, kominek"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

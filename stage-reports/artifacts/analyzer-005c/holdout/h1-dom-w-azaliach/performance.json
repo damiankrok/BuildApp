@@ -1,0 +1,207 @@
+{
+  "arch": "x64",
+  "maxTelemetryGapMs": 2506,
+  "maxTickGapMs": 2361,
+  "node": "v22.22.2",
+  "peakRssMB": 736,
+  "phases": [
+    {
+      "counters": {},
+      "durationMs": 1415,
+      "maxTickGapMs": 1415,
+      "peakRssBytes": 213901312,
+      "phaseId": "ACQUIRE_PAGE",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "fetched": 32,
+        "notFetched": 8
+      },
+      "durationMs": 14741,
+      "maxTickGapMs": 2361,
+      "peakRssBytes": 223846400,
+      "phaseId": "ACQUIRE_ASSETS",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 1415,
+      "ticks": 48,
+      "unit": "ADDRESS",
+      "workDone": 47,
+      "workTotal": 48
+    },
+    {
+      "counters": {},
+      "durationMs": 0,
+      "maxTickGapMs": 0,
+      "peakRssBytes": 224239616,
+      "phaseId": "CLASSIFY",
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 16156,
+      "ticks": 0,
+      "unit": "ASSET",
+      "workDone": 0,
+      "workTotal": 21
+    },
+    {
+      "counters": {},
+      "durationMs": 24525,
+      "maxTickGapMs": 2274,
+      "peakRssBytes": 360284160,
+      "phaseId": "OBSERVE_ASSETS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 16156,
+      "ticks": 97,
+      "unit": "ASSET",
+      "workDone": 20,
+      "workTotal": 21
+    },
+    {
+      "counters": {},
+      "durationMs": 1538,
+      "maxTickGapMs": 257,
+      "peakRssBytes": 351756288,
+      "phaseId": "DECODE_RASTERS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 40681,
+      "ticks": 21,
+      "unit": "ASSET",
+      "workDone": 20,
+      "workTotal": 21
+    },
+    {
+      "counters": {
+        "chains": 17,
+        "chainsTotal": 17,
+        "evidence": 51,
+        "hypothesesTotal": 6,
+        "hypothesis": 6,
+        "readings": 37,
+        "rings": 130,
+        "ringsTotal": 130,
+        "tokenGroups": 64,
+        "tokenGroupsTotal": 64,
+        "tokens": 2023
+      },
+      "durationMs": 222748,
+      "maxTickGapMs": 1918,
+      "peakRssBytes": 733822976,
+      "phaseId": "METRIC_FRAMES",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 42219,
+      "ticks": 1235821,
+      "unit": "FRAME",
+      "workDone": 13,
+      "workTotal": 14
+    },
+    {
+      "counters": {
+        "lines": 23,
+        "linesTotal": 23
+      },
+      "durationMs": 1127,
+      "maxTickGapMs": 744,
+      "peakRssBytes": 713510912,
+      "phaseId": "REGISTER_VIEWS",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 264967,
+      "ticks": 25,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "gaps": 2,
+        "gapsTotal": 8,
+        "lines": 13,
+        "linesTotal": 13
+      },
+      "durationMs": 4381,
+      "maxTickGapMs": 769,
+      "peakRssBytes": 733945856,
+      "phaseId": "PLAN_RESOLUTION",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 266093,
+      "ticks": 466,
+      "unit": "CANDIDATE",
+      "workDone": 3,
+      "workTotal": 3
+    },
+    {
+      "counters": {},
+      "durationMs": 530,
+      "maxTickGapMs": 530,
+      "peakRssBytes": 727994368,
+      "phaseId": "SOLVE_TOPOLOGY",
+      "stage": "SOLVING_TOPOLOGY",
+      "startedAtMs": 270474,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "cameras": 5,
+        "camerasTotal": 5
+      },
+      "durationMs": 45,
+      "maxTickGapMs": 43,
+      "peakRssBytes": 728403968,
+      "phaseId": "SOLVE_METRICS",
+      "stage": "SOLVING_METRICS",
+      "startedAtMs": 271004,
+      "ticks": 5,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 189,
+      "maxTickGapMs": 189,
+      "peakRssBytes": 731811840,
+      "phaseId": "BUILD_MODEL",
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 271049,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 43,
+      "maxTickGapMs": 43,
+      "peakRssBytes": 732991488,
+      "phaseId": "COMPILE_SCENE",
+      "stage": "COMPILING_SCENE",
+      "startedAtMs": 271238,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 68,
+      "maxTickGapMs": 68,
+      "peakRssBytes": 733519872,
+      "phaseId": "VERIFY",
+      "stage": "VERIFYING",
+      "startedAtMs": 271282,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    }
+  ],
+  "telemetryEvents": 255,
+  "totalMs": 275741
+}
+

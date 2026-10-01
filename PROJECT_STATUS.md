@@ -30,6 +30,7 @@
 
 | STAGE BUILDPLAN-ANALYZER-005A — GENERALIZATION COUNCIL + MULTI-HYPOTHESIS RESOLVER + TRUE PROGRESS TELEMETRY | `analyzer/generalization-council-v1` (from `integration/house-first-adaptive-analyzer-v1` @ `7cd8e0c`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | Council `ccdbd36`, `09fe527`; source `dbfe607`; resolver `f845d21`, `a3723ec`, `f1901e9`, `daf8b8c`; progress `69b0f93`, `5671e6f`, `5dbd0fb`, `968344a`, `a815ce5`, `1094d7c`; warnings `5c3fd22`, `dd664b6`; gates `18adefa`, `f466a64`, `f773a32`, `bdd7cb0`, `b7d7198`, `a3ace7a`; holdout `2bd2593`, `c77e5a8`, `883cb46`; post-Council `616c96e`; performance `56ca1e3` = **PRE_HOLDOUT_SHA** (CI run 96 green); holdout evidence `70636bc`; report `226f9ce` = final build (CI runs 97 and 98 green; run 98 is the `workflow_dispatch` with the OWNER APK, versionCode 1098); the APK record: the commit after it | Five verdicts, recorded separately (§ "Where the analyzer's generalization stands"): **ANALYZER GENERALIZATION ARCHITECTURE: PARTIAL**; **OWNER DEVELOPMENT CASES: PARTIAL**; **TRUE PROGRESS TELEMETRY: PASS**; **BLIND ARCHON HOLDOUT 1 (`dom-w-jablonkach`): ALGORITHMIC_FAIL**; **BLIND ARCHON HOLDOUT 2 (`willa-miranda`): ALGORITHMIC_FAIL**. Both blind houses stop on adequate drawings, on one shared defect below the resolver: rotated overall-dimension labels read upside down, which a circular chain correction or an interior extent turns into the wrong house. Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005B — DIMENSION EVIDENCE REFOUNDATION + SCALE/EXTENT DECOUPLING + BLIND HOLDOUT ROUND 2 | `analyzer/dimension-evidence-refoundation-v1` (from `analyzer/generalization-council-v1` @ `bdacd42`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `c105add`; orientation `8d1204f`; scale `5896eb8`; extent `6401087`; resolver 1.3.0 `5f88060`; warnings/phone `bdbf033`; tests `daab627`; CI `9c9bfc1`; holdout protocol `8da1ee7`; acquisition router `598c1f0`; post-review `625b149`, `4a58bce`, `f57b2ad`; `27274ab` = **PRE_HOLDOUT_2_SHA** (CI run 101 green); holdout evidence `fb5b4af`; report `2e5a5bb` = final build (CI run 104 green, the `workflow_dispatch` with the OWNER APK, versionCode 1104; runs 102–103 superseded by the concurrency group); the APK record: the commit after it | Six verdicts (§ "Where metric truth stands"): **DIMENSION ORIENTATION: PASS**; **SCALE EVIDENCE INDEPENDENCE: PASS**; **PLAN EXTENT CLASSIFICATION: PARTIAL**; **OWNER DEVELOPMENT SET: PARTIAL**; **PROGRESS TELEMETRY: PASS**; **BLIND HOLDOUT ROUND 2: `dom-w-zurawkach` ALGORITHMIC_FAIL, `dom-w-modrzykach` ALGORITHMIC_FAIL** — both with the scale and printed extent right, both failing at the walled outline on a side of openings (willa-miranda's class). Not patched; next-stage input. The terminal line is PARTIAL |
+| STAGE BUILDPLAN-ANALYZER-005C — OPENING-AWARE EXTERIOR ENVELOPE + BODY RELATIONS + CROSS-PUBLISHER PROBE | `analyzer/opening-aware-envelope-v1` (from `analyzer/dimension-evidence-refoundation-v1` @ `d3235bf`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | baseline `3e76894`; round-3 protocol `e6220a9`, `cfa8640`; reviews `eef7133`, `2d45254`; boundary `7f3f557`, `a1913fc`; bodies `f62cd56`, `dfbec9f`; tests `1f26636`; source `432dbd2`, `b70aa41`, `64f7ff6`; Android `26b63e3`; matrix `1b330d3`; post-review `55a9c65`, `b0013ed`, `ca97516`; `e328121` = **PRE_HOLDOUT_3_SHA** (CI run 116 green, the UI gate on its re-run); holdout evidence and report: the commit that carries this row; final build and OWNER APK: §AE of the report | Seven verdicts (§ "Where the opening-aware envelope stands"): **OPENING-AWARE EXTERIOR ENVELOPE: PASS**; **ATTACHED BODY / BAY RECONSTRUCTION: PARTIAL**; **CROSS-PUBLISHER GENERIC SOURCE: PASS**; **005B METRIC LAYER REGRESSION: PASS**; **PROGRESS TELEMETRY: PASS**; **BLIND ARCHON ROUND 3 (`dom-w-azaliach`): ALGORITHMIC_FAIL**; **BLIND DOBREDOMY ROUND 3 (`galaktykaI`): SOURCE_LIMITED_PARTIAL**. The ARCHON house completes at −3.5 % but fails on storeys and on a plan only the published figure chose; its first bad decision is in the 005B metric layer (an overall chain split by a spurious tick, `1035` read `1055`). Not patched; next-stage input. The terminal line is PARTIAL |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -910,9 +911,44 @@ Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005B_DIMENSION_EVIDENCE_REFOUNDA
 - **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005B_BLIND_WALL_OUTLINE_FAIL`). Both new blind houses fail, in the
   walled outline (envelope and bays) on a side of openings — willa-miranda's class. CI green is not the verdict.
 
+## Where the opening-aware envelope stands (STAGE BUILDPLAN-ANALYZER-005C)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005C_OPENING_AWARE_ENVELOPE.md`. Evidence:
+`stage-reports/artifacts/analyzer-005c/`. `PRE_HOLDOUT_3_SHA = e328121b3aca2dfcec87db07db6277813eb04f34` (CI run 116 green).
+
+- **OPENING-AWARE EXTERIOR ENVELOPE — PASS.**
+  - The outline is read from wall-thick ink and classified gaps (glazing, doors, vehicle doors, weak gaps by what
+    lies behind them), never from line work; it replaces the long-band box only where it continues the box's
+    interior across an unsupported stretch of the box's own edge.
+  - dom-w-modrzykach PASS (181.72 m², −0.14 %), dom-w-jablonkach PASS (−0.40 %); willa-miranda (−5.07 %) and
+    dom-w-zurawkach (−0.81 %, the house and its garage) are built and fail on storeys; Marcówki, Kosaćce, G2E and
+    e-OZE keep their model hashes; no development house moved down.
+  - On the blind ARCHON house the outline continued through the glazed living-room side and stopped at the pergola.
+- **ATTACHED BODY / BAY RECONSTRUCTION — PARTIAL.** Bodies are named by junction, sides and mouth and built right on
+  the three envelope houses; open: party-wall garages still decided by reach in the box reading, a double garage with
+  a post, a wing behind a doorway, storeys over attached bodies.
+- **CROSS-PUBLISHER GENERIC SOURCE — PASS.** By structure, never by site: Aster VIII 0 → 11 figures and its outline
+  documents (hashed, never parsed); the blind DobreDomy page read with no DobreDomy code (11 figures, 17 assets, 4
+  documents) and stopped by name where its plans print no dimension.
+- **005B METRIC LAYER REGRESSION — PASS.** No metric-layer file changed; one 005A known-set row now allows the
+  resolver's named refusal, with its evidence (its sealed metric evidence misreads 16.01 m as 18.01 m; report §T).
+- **PROGRESS TELEMETRY — PASS.** The boundary's subphases and counters, cancellable, in Polish on Android; residual:
+  5.7 s of silence on a 1625 × 1700 px plan.
+- **BLIND ROUND 3** (one ARCHON, one DobreDomy, each run once, live):
+  - **`dom-w-azaliach`: ALGORITHMIC_FAIL** — completed at 67.26 m² (−3.48 %), every opening built, but storeys 1 of
+    2 and a plan the published figure alone chose. First bad decision, in the metric layer as 005B left it: the
+    overall chain on the dimensioned copy is split by a spurious tick and its italic `1035` read `1055`, so the
+    sheet scale is 2.46 cm/px where both printed overall dimensions agree on 1.86.
+  - **`galaktykaI`: SOURCE_LIMITED_PARTIAL** — the single ground plan prints no dimension (confirmed on the raw copy).
+- **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005C_BLIND_ARCHON_OVERALL_DIMENSION_MISREAD`). OWNER APK: report §AE.
+
 ## Recommended technical next step
 
-**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005B holdout defect as the next stage's input.**
+**For the analyzer line: return to the coordinator with the BUILDPLAN-ANALYZER-005C round-3 ARCHON defect as BUILDPLAN-ANALYZER-005D's input** — the overall-dimension chain on a dimensioned plan copy: a tick read where none is drawn splits it, the italic `1035` is read `1055` on the partial segment, and the wrong sheet scale (2.46 cm/px where both printed overall dimensions agree on 1.86) refuses the true vertical overall and lets interior chains frame the plan (`dom-w-azaliach`; report §Z). A fix is held to every development row (now thirteen, with `dom-w-azaliach` and `galaktykaI`) and a further claim needs a new blind draw on a new frozen SHA.
+
+The 005B analyzer recommendation below (the walled outline on a side of openings) is done in 005C; see "Where the opening-aware envelope stands".
+
+**Superseded (005B): return to the coordinator with the BUILDPLAN-ANALYZER-005B holdout defect as the next stage's input.**
 - **The defect.** The plan's walled outline (envelope and bays) is taken from long wall bands, and a side of the
   building that is mostly openings (a garage door between piers, a glazed front) has none:
   - on `dom-w-modrzykach` the envelope stops at an interior wall (2.02 m of 11.60 m);

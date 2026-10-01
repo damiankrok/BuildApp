@@ -1,0 +1,878 @@
+{
+  "adapter": {
+    "id": "generic.project-page",
+    "version": "1.2.0"
+  },
+  "assets": [
+    {
+      "caption": "Galaktyka I · Elewacja boczna",
+      "id": "asset-galaktyka-i-elewacja-boczna-96a166bb04",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Galaktyka I · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Galaktyka I · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-galaktykai-e2-jpg-cfba013091",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "9aaa385c1f1a47fb6b879eae48927a7e364a714bb6b00ff639a2fb8b9e57c581",
+          "byteLength": 40832,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-e2-jpg-cfba013091",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_e2.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Elewacja boczna",
+      "id": "asset-galaktyka-i-elewacja-boczna-a43d68d535",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Galaktyka I · Elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.84,
+          "detail": "\"boczna\" / \"side\" names a side without saying which (matched \"boczna\" in \"Galaktyka I · Elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-galaktykai-e3-jpg-52112f6605",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "aa0371bdf72507d9525cf5b7d263b63ad4afcd6bea401def5533f6f09ca3231e",
+          "byteLength": 40019,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-e3-jpg-52112f6605",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_e3.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Elewacja przód",
+      "id": "asset-galaktyka-i-elewacja-przod-c52a436d19",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Galaktyka I · Elewacja przód\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"frontowa\" / \"front\" is the front (matched \"przod\" in \"Galaktyka I · Elewacja przód\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-galaktykai-e1-jpg-981ebf1ce8",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "ad4f2e996d94142c7a282163145e423ab80f13fddcae383dfa1807d9763f92d6",
+          "byteLength": 39201,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-e1-jpg-981ebf1ce8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_e1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Elewacja tył",
+      "id": "asset-galaktyka-i-elewacja-ty-c9881a0507",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacja\" in \"Galaktyka I · Elewacja tył\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"elewacja\" / \"elevation\" names an elevation (matched \"elewacje\" in \"Elewacje\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "\"ogrodowa\" / \"rear\" is the rear (matched \"tyl\" in \"Galaktyka I · Elewacja tył\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-galaktykai-e4-jpg-1bc6eb9fe0",
+      "selectionReason": "only variant (709x309, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 2.294498,
+          "byteHash": "5d1efe60504c587b4e4124f6c06fbedf5d278ddfb6b6a72e3556dcf501f11365",
+          "byteLength": 40735,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 309,
+            "width": 709
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-e4-jpg-1bc6eb9fe0",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_e4.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Przekroje",
+      "id": "asset-galaktyka-i-przekroje-79f46ae4d7",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Galaktyka I · Przekroje\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"przekrój\" / \"section\" names a section (matched \"przekroje\" in \"Przekroje\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-galaktykai-p1-jpg-dd2d498ad4",
+      "selectionReason": "only variant (1689x902, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.872506,
+          "byteHash": "ddae88e10aad728b3c0fff3eea8fda35feba71616024bfb3b462bb0a0ef8b69c",
+          "byteLength": 99766,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 902,
+            "width": 1689
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-p1-jpg-dd2d498ad4",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_p1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Rzut działki",
+      "id": "asset-galaktyka-i-rzut-dzia-ki-af0036fc30",
+      "roleEvidence": [
+        {
+          "confidence": 0.84,
+          "detail": "\"sytuacja\" / \"obrys\" / \"site plan\" names a site plan (matched \"dzialki\" in \"Galaktyka I · Rzut działki\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-galaktykai-s-jpg-09fb504d2d",
+      "selectionReason": "only variant (548x490, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.118367,
+          "byteHash": "cbd8910bf7455f5da13f83f0af4e6c2e088ad04eedaee542de8c4e339e9360fe",
+          "byteLength": 46607,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 490,
+            "width": 548
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-s-jpg-09fb504d2d",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_s.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Rzut parter",
+      "id": "asset-galaktyka-i-rzut-parter-84aee7e9a4",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Galaktyka I · Rzut parter\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"parter\" / \"ground\" is the ground storey (matched \"parter\" in \"Galaktyka I · Rzut parter\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-galaktykai-r1-jpg-bbe4e591f0",
+      "selectionReason": "only variant (1625x1700, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.955882,
+          "byteHash": "a595446ea37c44005bf8ffc9378453c27e3203930ac8f854dbf7446b54f05ecb",
+          "byteLength": 228492,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1700,
+            "width": 1625
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-r1-jpg-bbe4e591f0",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_r1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Galaktyka I · Rzut poddasze",
+      "id": "asset-galaktyka-i-rzut-poddasze-03a9d2528c",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzut\" in \"Galaktyka I · Rzut poddasze\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.64,
+          "detail": "\"rzut\" / \"floor plan\" names a floor plan (matched \"rzuty\" in \"Rzuty\")",
+          "dimension": "document",
+          "signal": "context"
+        },
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddasze\" in \"Galaktyka I · Rzut poddasze\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-galaktykai-r2-jpg-9975be2d1e",
+      "selectionReason": "only variant (1626x1700, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.956471,
+          "byteHash": "aa565462a8c21905547113dc6499f82ff4c1b3d1c45cca360d0065e17adbff00",
+          "byteLength": 225534,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1700,
+            "width": 1626
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-r2-jpg-9975be2d1e",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_r2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-galaktykai-w1-jpg-531246366f",
+      "roleEvidence": [
+        {
+          "confidence": 0.4,
+          "detail": "the page’s share image is its hero picture, a visualisation unless named otherwise",
+          "dimension": "document",
+          "signal": "channel"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-galaktykai-w1-jpg-2285cb11f2",
+      "selectionReason": "only variant (1865x1200, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.554167,
+          "byteHash": "062a543e8671aa9d2704d13b17731e3db5d4aa70643bf07698f101ed472232f5",
+          "byteLength": 618358,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 1200,
+            "width": 1865
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-w1-jpg-2285cb11f2",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/galaktykaI_w1.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-115423e4f1",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-entry-png-86fbc46dd8",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+          "byteLength": 61287,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-entry-png-86fbc46dd8",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_entry.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "497a8a18ad8256e2e4b6f02c44237461c040d03758c42504d2bc064937b32ad2",
+          "byteLength": 23380,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-entry-webp-603d6ca1f6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_entry.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-2122c17c71",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-jpg-b3083b8576",
+      "selectionReason": "2 variants tie at 640x373; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 1.715818,
+          "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+          "byteLength": 66219,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-jpg-b3083b8576",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/newsletter.jpg"
+        },
+        {
+          "aspect": 1.715818,
+          "byteHash": "13224c582d8949c691fdaeb6e696945a88a85c273f127e2ce5d6d577497b0348",
+          "byteLength": 14602,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 373,
+            "width": 640
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-webp-b8b21eaba3",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/other/webp/newsletter.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Newsletter",
+      "id": "asset-newsletter-598a2abb68",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-newsletter-exit-png-0c8ef727a5",
+      "selectionReason": "2 variants tie at 239x400; broken by byte length then byte hash",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+          "byteLength": 55569,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-exit-png-0c8ef727a5",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/popups/newsletter_exit.png"
+        },
+        {
+          "aspect": 0.5975,
+          "byteHash": "bdf95205c002feed9acb131128b575298aad9d14bf1f1ae11b84ea08557b9581",
+          "byteLength": 18930,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRCSET:picture>source[srcset]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-newsletter-exit-webp-f986e909e6",
+          "mediaType": "image/webp",
+          "url": "https://www.dobredomy.pl/assets/img/popups/webp/newsletter_exit.webp"
+        }
+      ]
+    },
+    {
+      "caption": "Prezentacja",
+      "id": "asset-prezentacja-e019163552",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+      "selectionReason": "only variant (417x565, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.738053,
+          "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+          "byteLength": 71506,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 565,
+            "width": 417
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-prezentacja-popup-img-jpg-af6ce7dd5f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/other/prezentacja-popup_img.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu",
+      "id": "asset-projekt-domu-e25becc350",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+      "selectionReason": "only variant (315x203, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.551724,
+          "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+          "byteLength": 160714,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 203,
+            "width": 315
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-konkurs-fotograficzny-2026-png-1344f3b53f",
+          "mediaType": "image/png",
+          "url": "https://www.dobredomy.pl/assets/img/konkurs-fotograficzny-2026.png"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem wielospadowym Galaktyka I",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-6c468ee307",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem wielospadowym G\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-galaktykai-w2-jpg-p-prslide-2d500322be",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "0aa1e38d65519cc8544f25f55d343c486262573a70172bb1f68fed80d9e66969",
+          "byteLength": 173295,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-w2-jpg-p-prslide-2d500322be",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/galaktykaI/galaktykaI_w2.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem wielospadowym Galaktyka I",
+      "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-9d3767a36e",
+      "roleEvidence": [
+        {
+          "confidence": 0.87,
+          "detail": "\"poddasze\" / \"attic\" is the attic storey (matched \"poddaszem\" in \"Projekt domu z poddaszem, z garażem jednostanowiskowym, z dachem wielospadowym G\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "ATTIC",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-galaktykai-w1-jpg-p-prslide-3e6e98d9ce",
+      "selectionReason": "only variant (784x504, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.555556,
+          "byteHash": "f8bcc1e7f150b18b536b57d4839b4bf3d0471b1138a8b37f09acfa62041e4918",
+          "byteLength": 155218,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 504,
+            "width": 784
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-galaktykai-w1-jpg-p-prslide-3e6e98d9ce",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/img/projekty/galaktykaI/galaktykaI_w1.jpg?p=prslide"
+        }
+      ]
+    },
+    {
+      "caption": "Wycena",
+      "id": "asset-wycena-fb105e7612",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-wycena-thankyou-png-e7dd64242f",
+      "selectionReason": "only variant (239x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 0.5975,
+          "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+          "byteLength": 53872,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 239
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.dobredomy.pl/projekt/galaktykaI",
+          "id": "var-wycena-thankyou-png-e7dd64242f",
+          "mediaType": "image/jpeg",
+          "url": "https://www.dobredomy.pl/assets/img/popups/wycena-thankyou.png"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.dobredomy.pl/projekt/galaktykaI",
+  "contentHash": "e08f2565f7de0cc66ff3de435cda9e0e9d9d504377857b62a8889c4d0918c8b0",
+  "documents": [
+    {
+      "caption": "Charakterystyka energetyczna",
+      "code": "NOT_A_DRAWING",
+      "format": "PDF",
+      "kind": "ENERGY_CERTIFICATE",
+      "status": "NOT_FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/Pliki%20do%20pobrania/galaktykaI_ch.pdf",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "149b0799150a60ed1424bbd4d80b3ee9cd92dba0e8995c2441415a94befd4e20",
+      "byteLength": 61288,
+      "caption": "Obrys budynku w skali 1:500 · PDF podstawa",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/Pliki%20do%20pobrania/galaktykaI_pk.pdf",
+      "variant": "BASE"
+    },
+    {
+      "byteHash": "1bf2ae24ff125b3d97cffe3e01843bc93d853f15b2607420a178fb6783ac3aa1",
+      "byteLength": 96864,
+      "caption": "Obrys budynku w skali 1:500 · DWG",
+      "format": "DWG",
+      "kind": "OUTLINE",
+      "mediaType": "image/vnd.dwg",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/Pliki%20do%20pobrania/galaktykaI_pkdwg.dwg",
+      "variant": "UNKNOWN"
+    },
+    {
+      "byteHash": "d6f70c5846a2b8d1a8c12198476a8cfce73a873199be9d99abdd593b6b3eb3a0",
+      "byteLength": 65421,
+      "caption": "Obrys budynku w skali 1:500 · PDF lustro",
+      "format": "PDF",
+      "kind": "OUTLINE",
+      "mediaType": "application/pdf",
+      "statedScale": "1:500",
+      "status": "FETCHED",
+      "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/Pliki%20do%20pobrania/galaktykaI_pkl.pdf",
+      "variant": "MIRRORED"
+    }
+  ],
+  "failures": [],
+  "fetchedUrl": "https://www.dobredomy.pl/projekt/galaktykaI/",
+  "id": "src-www-dobredomy-pl-11925c0102",
+  "pageHash": "a5b0ee1c261ceba291f8a66b87ffc12c39bbad3f78c9c93d9f4b8018c17bb77b",
+  "project": {
+    "name": "Projekt domu Galaktyka I",
+    "publisher": "dobredomy.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "bathroom_count",
+      "label": "Liczba łazienek",
+      "raw": "2",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "8,90 m",
+      "unit": "m",
+      "value": 8.9
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "145,10 m²",
+      "unit": "m2",
+      "value": 145.1
+    },
+    {
+      "key": "garage_area",
+      "label": "+ powierzchnia garażu",
+      "raw": "23,20 m²",
+      "unit": "m2",
+      "value": 23.2
+    },
+    {
+      "key": "plot_min_depth",
+      "label": "Min. wymiary działki dł.",
+      "raw": "19,68 m",
+      "unit": "m",
+      "value": 19.68
+    },
+    {
+      "key": "plot_min_width",
+      "label": "Min. wymiary działki szer.",
+      "raw": "22,38 m",
+      "unit": "m",
+      "value": 22.38
+    },
+    {
+      "key": "roof_pitch",
+      "label": "Główny kąt nachylenia dachu",
+      "raw": "42°",
+      "unit": "deg",
+      "value": 42
+    },
+    {
+      "key": "room_count",
+      "label": "Liczba pokoi",
+      "raw": "4",
+      "unit": "count",
+      "value": 4
+    },
+    {
+      "key": "sloped_roof_area",
+      "label": "Powierzchnia dachu skośnego",
+      "raw": "250,90 m²",
+      "unit": "m2",
+      "value": 250.9
+    },
+    {
+      "key": "usable_area",
+      "label": "Powierzchnia użytkowa",
+      "raw": "135,10 m²",
+      "unit": "m2",
+      "value": 135.1
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura netto",
+      "raw": "496,90 m³",
+      "unit": "none",
+      "value": 496.9
+    }
+  ],
+  "publishedRooms": [],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Powierzchnia użytkowa - część powierzchni netto budynku, która odpowiada celom i&nbsp;przeznaczeniu tego budynku, liczona jako&nbsp;suma powierzchni pomieszczeń (wg stanu wykończonego ścian - z&nbsp;tynkiem gr&nbsp;1,2cm) o&nbsp;wysokości w&nbsp;świetle równej lub&nbsp;większej 2,20m liczonej w&nbsp;100% oraz&nbsp;o&nbsp;wysokości równej lub&nbsp;większej od&nbsp;1,4m lecz&nbsp;mniejszej od&nbsp;2,20 m liczonej w&nbsp;50% (wysokość poniżej&nbsp;1,4m pomijana jest całkowicie). Nie wlicza się powierzchni schodów, powierzchni pod&nbsp;podciągami o&nbsp;długość poniżej&nbsp;2 m oraz&nbsp;garażu, strychu, piwnicy, pomieszczeń gospodarczych dostępnych z&nbsp;garażu – powierzchnie te klasyfikuje się jako&nbsp;pomocnicze."
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Renomowana Pracownia Projektowa Dobre Domy Flak&Abramowicz oferuje gotowe projekty domów jednorodzinnych. Pośród blisko 1500 projektów znajdziesz swój wymarzony dom!"
+    },
+    {
+      "key": "summary",
+      "label": "og:description",
+      "text": "Układ funkcjonalny projektu Galaktyka I został zaprojektowany z myślą o 4-5-osobowej rodzinie. Projekt domu Galaktyka I zadowoli inwestorów skoncentrowanych na budowie domu z poddaszem użytkowym i garażem jednostanowiskowym. Na parterze znajduje się salon połączony z jadalnią i kuchnią oraz dodatkowy pokój, który doskonale sprawdzi się w charakterze sypialni lub pokoju gościnnego. Na poddaszu znajdują się trzy sypialnie i łazienka z bezpośrednim połączeniem z pomieszczeniem pralni. Projekt dostępny w wersji z garażem dwustanowiskowym - Galaktyka II, bez garażu - Galaktyka III oraz bez garażu, ale z podpiwniczeniem - Galaktyka IIIp."
+    }
+  ],
+  "requestedUrl": "https://www.dobredomy.pl/projekt/galaktykaI/",
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.3.0"
+}
+

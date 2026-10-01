@@ -1,0 +1,3145 @@
+{
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "diagnostics": {
+      "builtRegions": 3,
+      "cells": 20,
+      "conflictingReadings": 0,
+      "dimensionChains": 0,
+      "dimensionChainsRead": 0,
+      "enclosedCells": 17,
+      "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+      "firstFailure": "PLAN_NO_DIMENSION_FRAME",
+      "gridLinesX": 5,
+      "gridLinesY": 6,
+      "independentWitnesses": 0,
+      "masses": 0,
+      "metricConfidence": "INCONCLUSIVE",
+      "metricIsotropy": "NONE",
+      "metricRelation": "NO_SCALE",
+      "planFrames": 2,
+      "planSizePx": "1625x1700",
+      "plansRead": 2,
+      "recessRegions": 2,
+      "scaleCmPerPx": 0,
+      "scaleHypotheses": 5,
+      "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+      "topScales": "0.005102 cm/px (0 independent, ruled out by the walls) | 0.87747 cm/px (0 independent, plausible) | 18.895522 cm/px (0 independent, ruled out by the walls)",
+      "wallBands": 41,
+      "wallThicknessPx": 24,
+      "walledEnvelope": true,
+      "wideOpenings": 0,
+      "wideOpeningsClosed": 0
+    },
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 0.005102 cm/px (0 independent, ruled out by the walls); 0.87747 cm/px (0 independent, plausible); 18.895522 cm/px (0 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a dimension printed on the floor plan itself — it prints none. (the 1625×1700 px floor plan prints no dimension chain, so nothing on it states a scale)",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "stage": "REGISTERING_VIEWS",
+    "substage": "METRIC_RESOLUTION",
+    "title": "The floor plan’s scale cannot be established"
+  },
+  "outcome": "FAILED",
+  "plans": {
+    "planFrames": 2,
+    "plans": [
+      {
+        "annotation": "UNKNOWN",
+        "assetId": "asset-galaktyka-i-rzut-parter-84aee7e9a4",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 698,
+              "x1": 771,
+              "y0": 521,
+              "y1": 553
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 881,
+              "x1": 952,
+              "y0": 521,
+              "y1": 553
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 315,
+              "x1": 421,
+              "y0": 597,
+              "y1": 630
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 558,
+              "x1": 636,
+              "y0": 597,
+              "y1": 630
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1167,
+              "x1": 1464,
+              "y0": 648,
+              "y1": 680
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 730,
+              "x1": 771,
+              "y0": 764,
+              "y1": 776
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 994,
+              "x1": 1132,
+              "y0": 876,
+              "y1": 898
+            },
+            "thickness": 37
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 879,
+              "x1": 991,
+              "y0": 883,
+              "y1": 898
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 698,
+              "x1": 754,
+              "y0": 1039,
+              "y1": 1051
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 879,
+              "x1": 1094,
+              "y0": 1064,
+              "y1": 1077
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 315,
+              "x1": 413,
+              "y0": 1251,
+              "y1": 1263
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 899,
+              "x1": 968,
+              "y0": 1245,
+              "y1": 1277
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1061,
+              "x1": 1225,
+              "y0": 1245,
+              "y1": 1277
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1427,
+              "x1": 1464,
+              "y0": 1245,
+              "y1": 1277
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 708,
+              "x1": 865,
+              "y0": 1372,
+              "y1": 1405
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 428,
+              "x1": 501,
+              "y0": 1474,
+              "y1": 1507
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 630,
+              "x1": 673,
+              "y0": 1474,
+              "y1": 1507
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 282,
+              "x1": 314,
+              "y0": 520,
+              "y1": 796
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 282,
+              "x1": 314,
+              "y0": 900,
+              "y1": 1064
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 282,
+              "x1": 314,
+              "y0": 1167,
+              "y1": 1440
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 385,
+              "x1": 410,
+              "y0": 757,
+              "y1": 876
+            },
+            "thickness": 23.75
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 462,
+              "x1": 487,
+              "y0": 771,
+              "y1": 847
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 583,
+              "x1": 597,
+              "y0": 735,
+              "y1": 772
+            },
+            "thickness": 38.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 618,
+              "x1": 632,
+              "y0": 834,
+              "y1": 887
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 665,
+              "x1": 697,
+              "y0": 554,
+              "y1": 596
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 674,
+              "x1": 697,
+              "y0": 630,
+              "y1": 685
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 674,
+              "x1": 697,
+              "y0": 777,
+              "y1": 1038
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 674,
+              "x1": 697,
+              "y0": 1206,
+              "y1": 1371
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 674,
+              "x1": 707,
+              "y0": 1406,
+              "y1": 1473
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 852,
+              "x1": 878,
+              "y0": 759,
+              "y1": 796
+            },
+            "thickness": 28
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 866,
+              "x1": 878,
+              "y0": 554,
+              "y1": 756
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 866,
+              "x1": 878,
+              "y0": 870,
+              "y1": 1244
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 866,
+              "x1": 898,
+              "y0": 1278,
+              "y1": 1371
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 953,
+              "x1": 982,
+              "y0": 574,
+              "y1": 702
+            },
+            "thickness": 28
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 976,
+              "x1": 993,
+              "y0": 784,
+              "y1": 843
+            },
+            "thickness": 24.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 986,
+              "x1": 1005,
+              "y0": 758,
+              "y1": 806
+            },
+            "thickness": 20
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 998,
+              "x1": 1033,
+              "y0": 559,
+              "y1": 602
+            },
+            "thickness": 36
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1133,
+              "x1": 1156,
+              "y0": 681,
+              "y1": 1000
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1133,
+              "x1": 1156,
+              "y0": 1107,
+              "y1": 1160
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1133,
+              "x1": 1166,
+              "y0": 554,
+              "y1": 647
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1465,
+              "x1": 1498,
+              "y0": 681,
+              "y1": 1244
+            },
+            "thickness": 33.25
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 298,
+              "x1": 681,
+              "y0": 613.5,
+              "y1": 664
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 681,
+              "x1": 865,
+              "y0": 613.5,
+              "y1": 664
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 613.5,
+              "y1": 664
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 613.5,
+              "y1": 664
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 1,
+            "rect": {
+              "x0": 298,
+              "x1": 681,
+              "y0": 664,
+              "y1": 887
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 1,
+            "rect": {
+              "x0": 681,
+              "x1": 865,
+              "y0": 664,
+              "y1": 887
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 1,
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 664,
+              "y1": 887
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 1,
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 664,
+              "y1": 887
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 2,
+            "rect": {
+              "x0": 298,
+              "x1": 681,
+              "y0": 887,
+              "y1": 1070.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 2,
+            "rect": {
+              "x0": 681,
+              "x1": 865,
+              "y0": 887,
+              "y1": 1070.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 2,
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 887,
+              "y1": 1070.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 2,
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 887,
+              "y1": 1070.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 3,
+            "rect": {
+              "x0": 298,
+              "x1": 681,
+              "y0": 1070.5,
+              "y1": 1257
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 3,
+            "rect": {
+              "x0": 681,
+              "x1": 865,
+              "y0": 1070.5,
+              "y1": 1257
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 3,
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 1070.5,
+              "y1": 1257
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 3,
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 1070.5,
+              "y1": 1257
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 4,
+            "rect": {
+              "x0": 298,
+              "x1": 681,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 4,
+            "rect": {
+              "x0": 681,
+              "x1": 865,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 2,
+            "iy": 4,
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 4,
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          }
+        ],
+        "chains": [],
+        "envelope": {
+          "x0": 298,
+          "x1": 1481.4375,
+          "y0": 613.5,
+          "y1": 1388.5
+        },
+        "extent": {
+          "x0": 286,
+          "x1": 1493.4375,
+          "y0": 525,
+          "y1": 1502.5
+        },
+        "extentProvenance": {
+          "x": "WALL_GEOMETRY_EXTENT",
+          "y": "WALL_GEOMETRY_EXTENT"
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+        "hypotheses": [
+          {
+            "builtCells": 17,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 17,
+            "chosen": false,
+            "closedOpenings": 0,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          298,
+          681,
+          865,
+          1144.5,
+          1481.4375
+        ],
+        "linesY": [
+          613.5,
+          664,
+          887,
+          1070.5,
+          1257,
+          1388.5
+        ],
+        "masses": [],
+        "metric": {
+          "confidence": "INCONCLUSIVE",
+          "independentWitnesses": 0,
+          "isotropy": "NONE",
+          "relation": "NO_SCALE"
+        },
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-1",
+            "rect": {
+              "x0": 298,
+              "x1": 1481.4375,
+              "y0": 664,
+              "y1": 1257
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-4",
+            "rect": {
+              "x0": 298,
+              "x1": 865,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-0",
+            "rect": {
+              "x0": 298,
+              "x1": 1144.5,
+              "y0": 613.5,
+              "y1": 664
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-2-4",
+            "rect": {
+              "x0": 865,
+              "x1": 1144.5,
+              "y0": 1257,
+              "y1": 1388.5
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-3-0",
+            "rect": {
+              "x0": 1144.5,
+              "x1": 1481.4375,
+              "y0": 613.5,
+              "y1": 664
+            }
+          }
+        ],
+        "scale": null,
+        "sizePx": {
+          "height": 1700,
+          "width": 1625
+        },
+        "storey": "GROUND",
+        "variantByteHash": "a595446ea37c44005bf8ffc9378453c27e3203930ac8f854dbf7446b54f05ecb",
+        "wallPx": 24,
+        "wideOpenings": []
+      },
+      {
+        "annotation": "UNKNOWN",
+        "assetId": "asset-galaktyka-i-rzut-poddasze-03a9d2528c",
+        "bands": [
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1112,
+              "x1": 1214,
+              "y0": 452,
+              "y1": 480
+            },
+            "thickness": 22
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 312,
+              "x1": 713,
+              "y0": 452,
+              "y1": 481
+            },
+            "thickness": 30
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 217,
+              "x1": 262,
+              "y0": 452,
+              "y1": 489
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1153,
+              "x1": 1214,
+              "y0": 469,
+              "y1": 479
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 885,
+              "x1": 936,
+              "y0": 532,
+              "y1": 534
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 959,
+              "x1": 1082,
+              "y0": 520,
+              "y1": 552
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 775,
+              "x1": 821,
+              "y0": 520,
+              "y1": 553
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 845,
+              "x1": 937,
+              "y0": 532,
+              "y1": 551
+            },
+            "thickness": 22
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 886,
+              "x1": 935,
+              "y0": 543,
+              "y1": 551
+            },
+            "thickness": 17
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 528,
+              "x1": 566,
+              "y0": 554,
+              "y1": 578
+            },
+            "thickness": 26
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 609,
+              "x1": 647,
+              "y0": 554,
+              "y1": 578
+            },
+            "thickness": 26.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 366,
+              "x1": 511,
+              "y0": 557,
+              "y1": 578
+            },
+            "thickness": 24.125
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 407,
+              "x1": 713,
+              "y0": 554,
+              "y1": 578
+            },
+            "thickness": 24.984375
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1271,
+              "x1": 1389,
+              "y0": 580,
+              "y1": 609
+            },
+            "thickness": 29.875
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1392,
+              "x1": 1557,
+              "y0": 580,
+              "y1": 613
+            },
+            "thickness": 32.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 409,
+              "x1": 586,
+              "y0": 618,
+              "y1": 650
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 425,
+              "x1": 586,
+              "y0": 645,
+              "y1": 648
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 921,
+              "x1": 1034,
+              "y0": 685,
+              "y1": 715
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1113,
+              "x1": 1389,
+              "y0": 719,
+              "y1": 749
+            },
+            "thickness": 27.046875
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 608,
+              "x1": 679,
+              "y0": 789,
+              "y1": 813
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 920,
+              "x1": 1063,
+              "y0": 791,
+              "y1": 818
+            },
+            "thickness": 28
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 869,
+              "x1": 1063,
+              "y0": 830,
+              "y1": 862
+            },
+            "thickness": 32
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 698,
+              "x1": 770,
+              "y0": 895,
+              "y1": 907
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1046,
+              "x1": 1128,
+              "y0": 895,
+              "y1": 907
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 786,
+              "x1": 1043,
+              "y0": 891,
+              "y1": 908
+            },
+            "thickness": 13.625
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 425,
+              "x1": 496,
+              "y0": 924,
+              "y1": 929
+            },
+            "thickness": 30
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 406,
+              "x1": 528,
+              "y0": 924,
+              "y1": 954
+            },
+            "thickness": 28
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 530,
+              "x1": 582,
+              "y0": 934,
+              "y1": 959
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 578,
+              "x1": 674,
+              "y0": 995,
+              "y1": 997
+            },
+            "thickness": 16
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 384,
+              "x1": 674,
+              "y0": 997,
+              "y1": 1010
+            },
+            "thickness": 14.5
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 530,
+              "x1": 647,
+              "y0": 1054,
+              "y1": 1086
+            },
+            "thickness": 32
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 384,
+              "x1": 528,
+              "y0": 1054,
+              "y1": 1087
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 425,
+              "x1": 473,
+              "y0": 1080,
+              "y1": 1082
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 1196,
+              "x1": 1233,
+              "y0": 1111,
+              "y1": 1134
+            },
+            "thickness": 24
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 422,
+              "x1": 536,
+              "y0": 1187,
+              "y1": 1213
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 435,
+              "x1": 552,
+              "y0": 1340,
+              "y1": 1374
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 464,
+              "x1": 501,
+              "y0": 1368,
+              "y1": 1368
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 525,
+              "x1": 620,
+              "y0": 1473,
+              "y1": 1493
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 564,
+              "x1": 620,
+              "y0": 1485,
+              "y1": 1493
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 417,
+              "x1": 503,
+              "y0": 1473,
+              "y1": 1506
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 227,
+              "x1": 296,
+              "y0": 1548,
+              "y1": 1574
+            },
+            "thickness": 26
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 259,
+              "x1": 295,
+              "y0": 1563,
+              "y1": 1564
+            },
+            "thickness": 12
+          },
+          {
+            "axis": "H",
+            "bounds": {
+              "x0": 298,
+              "x1": 337,
+              "y0": 1560,
+              "y1": 1574
+            },
+            "thickness": 21
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 215,
+              "x1": 229,
+              "y0": 523,
+              "y1": 1503
+            },
+            "thickness": 15
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 347,
+              "x1": 364,
+              "y0": 758,
+              "y1": 858
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 347,
+              "x1": 384,
+              "y0": 1095,
+              "y1": 1138
+            },
+            "thickness": 27
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 381,
+              "x1": 410,
+              "y0": 883,
+              "y1": 928
+            },
+            "thickness": 26
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 381,
+              "x1": 411,
+              "y0": 646,
+              "y1": 731
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 408,
+              "x1": 411,
+              "y0": 662,
+              "y1": 698
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 552,
+              "x1": 579,
+              "y0": 1215,
+              "y1": 1342
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 582,
+              "x1": 587,
+              "y0": 662,
+              "y1": 776
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 586,
+              "x1": 610,
+              "y0": 648,
+              "y1": 791
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 606,
+              "x1": 641,
+              "y0": 1178,
+              "y1": 1439
+            },
+            "thickness": 30.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 675,
+              "x1": 698,
+              "y0": 1011,
+              "y1": 1203
+            },
+            "thickness": 23.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 671,
+              "x1": 698,
+              "y0": 1136,
+              "y1": 1361
+            },
+            "thickness": 23.90625
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 685,
+              "x1": 697,
+              "y0": 776,
+              "y1": 894
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 675,
+              "x1": 708,
+              "y0": 1373,
+              "y1": 1470
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 685,
+              "x1": 717,
+              "y0": 621,
+              "y1": 684
+            },
+            "thickness": 33
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 742,
+              "x1": 772,
+              "y0": 788,
+              "y1": 893
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 741,
+              "x1": 774,
+              "y0": 554,
+              "y1": 617
+            },
+            "thickness": 34
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 866,
+              "x1": 878,
+              "y0": 914,
+              "y1": 1291
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 902,
+              "x1": 920,
+              "y0": 733,
+              "y1": 791
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 968,
+              "x1": 981,
+              "y0": 1168,
+              "y1": 1207
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1029,
+              "x1": 1068,
+              "y0": 610,
+              "y1": 690
+            },
+            "thickness": 38.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1043,
+              "x1": 1055,
+              "y0": 1117,
+              "y1": 1291
+            },
+            "thickness": 13
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1059,
+              "x1": 1068,
+              "y0": 553,
+              "y1": 601
+            },
+            "thickness": 10
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1108,
+              "x1": 1120,
+              "y0": 649,
+              "y1": 686
+            },
+            "thickness": 14
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1108,
+              "x1": 1122,
+              "y0": 582,
+              "y1": 646
+            },
+            "thickness": 14.75
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1108,
+              "x1": 1122,
+              "y0": 1254,
+              "y1": 1292
+            },
+            "thickness": 14.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1108,
+              "x1": 1129,
+              "y0": 1181,
+              "y1": 1225
+            },
+            "thickness": 29
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1134,
+              "x1": 1156,
+              "y0": 793,
+              "y1": 891
+            },
+            "thickness": 23
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1212,
+              "x1": 1234,
+              "y0": 1416,
+              "y1": 1464
+            },
+            "thickness": 26
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1213,
+              "x1": 1234,
+              "y0": 501,
+              "y1": 539
+            },
+            "thickness": 22
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1344,
+              "x1": 1356,
+              "y0": 1040,
+              "y1": 1101
+            },
+            "thickness": 12.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1396,
+              "x1": 1406,
+              "y0": 1133,
+              "y1": 1168
+            },
+            "thickness": 12.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1396,
+              "x1": 1413,
+              "y0": 810,
+              "y1": 888
+            },
+            "thickness": 18.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1396,
+              "x1": 1413,
+              "y0": 1032,
+              "y1": 1130
+            },
+            "thickness": 18
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1539,
+              "x1": 1566,
+              "y0": 1295,
+              "y1": 1336
+            },
+            "thickness": 31
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1545,
+              "x1": 1566,
+              "y0": 744,
+              "y1": 1265
+            },
+            "thickness": 22
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1548,
+              "x1": 1566,
+              "y0": 663,
+              "y1": 700
+            },
+            "thickness": 20.5
+          },
+          {
+            "axis": "V",
+            "bounds": {
+              "x0": 1546,
+              "x1": 1566,
+              "y0": 703,
+              "y1": 902
+            },
+            "thickness": 22.3125
+          }
+        ],
+        "bays": [],
+        "cells": [
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 0,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 0,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 0,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 3,
+            "iy": 0,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 4,
+            "iy": 0,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 5,
+            "iy": 0,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 0,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 1,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 1,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 1,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 1,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 1,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 1,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "O",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 1,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 533,
+              "y1": 567.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 2,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 2,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 2,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 2,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 2,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 2,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 2,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 3,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 3,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 3,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 3,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 3,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 3,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 3,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 594.375,
+              "y1": 634
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 4,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 4,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 4,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 4,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 4,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 4,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 4,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 634,
+              "y1": 700
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 5,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 5,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 5,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 5,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 5,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 5,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 5,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 700,
+              "y1": 735.976563
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 6,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 6,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 6,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 6,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 6,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 6,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 6,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 735.976563,
+              "y1": 801
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 7,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 7,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 7,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 7,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 7,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 7,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 7,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 801,
+              "y1": 901
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 8,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 8,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 8,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 8,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 8,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 8,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 8,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 901,
+              "y1": 926.5
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 9,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 9,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 9,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 9,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 9,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 9,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 9,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 926.5,
+              "y1": 996
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 10,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 10,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 10,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 10,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 10,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 10,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 6,
+            "iy": 10,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 996,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 0,
+            "iy": 11,
+            "rect": {
+              "x0": 222,
+              "x1": 565.5,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 1,
+            "iy": 11,
+            "rect": {
+              "x0": 565.5,
+              "x1": 598,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 2,
+            "iy": 11,
+            "rect": {
+              "x0": 598,
+              "x1": 686.25,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 3,
+            "iy": 11,
+            "rect": {
+              "x0": 686.25,
+              "x1": 872,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 4,
+            "iy": 11,
+            "rect": {
+              "x0": 872,
+              "x1": 911,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "B",
+            "enclosed": true,
+            "ix": 5,
+            "iy": 11,
+            "rect": {
+              "x0": 911,
+              "x1": 1048.5,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "R",
+            "enclosed": false,
+            "ix": 6,
+            "iy": 11,
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 1070,
+              "y1": 1483
+            }
+          }
+        ],
+        "chains": [],
+        "envelope": {
+          "x0": 222,
+          "x1": 1552.5,
+          "y0": 466,
+          "y1": 1572.953125
+        },
+        "extent": {
+          "x0": 210.84375,
+          "x1": 1568.5625,
+          "y0": 454.84375,
+          "y1": 1572.15625
+        },
+        "extentProvenance": {
+          "x": "WALL_GEOMETRY_EXTENT",
+          "y": "WALL_GEOMETRY_EXTENT"
+        },
+        "extentWeak": true,
+        "frameId": "frame-asset-galaktyka-i-rzut-poddasze-03a9d2528c-1d3d743da5",
+        "hypotheses": [
+          {
+            "builtCells": 77,
+            "chosen": true,
+            "closedOpenings": 0,
+            "id": "H0_STRICT_ENCLOSURE",
+            "score": 1,
+            "why": "no wider gap is evidenced as an opening, so this is the whole reading"
+          },
+          {
+            "builtCells": 77,
+            "chosen": false,
+            "closedOpenings": 6,
+            "id": "H1_WIDE_OPENING_CONTINUITY",
+            "score": 1,
+            "why": "identical to H0 here"
+          }
+        ],
+        "linesX": [
+          222,
+          565.5,
+          598,
+          686.25,
+          872,
+          911,
+          1048.5,
+          1552.5
+        ],
+        "linesY": [
+          466,
+          533,
+          567.5,
+          594.375,
+          634,
+          700,
+          735.976563,
+          801,
+          901,
+          926.5,
+          996,
+          1070,
+          1483
+        ],
+        "masses": [],
+        "metric": {
+          "confidence": "INCONCLUSIVE",
+          "independentWitnesses": 0,
+          "isotropy": "NONE",
+          "relation": "NO_SCALE"
+        },
+        "regions": [
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-1",
+            "rect": {
+              "x0": 222,
+              "x1": 1048.5,
+              "y0": 533,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-6-3",
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 594.375,
+              "y1": 1070
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-6-11",
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 1070,
+              "y1": 1483
+            }
+          },
+          {
+            "cls": "BUILT",
+            "id": "region-built-0-0",
+            "rect": {
+              "x0": 222,
+              "x1": 686.25,
+              "y0": 466,
+              "y1": 533
+            }
+          },
+          {
+            "cls": "RECESS",
+            "id": "region-recess-6-2",
+            "rect": {
+              "x0": 1048.5,
+              "x1": 1552.5,
+              "y0": 567.5,
+              "y1": 594.375
+            }
+          }
+        ],
+        "scale": null,
+        "sizePx": {
+          "height": 1700,
+          "width": 1626
+        },
+        "storey": "ATTIC",
+        "variantByteHash": "aa565462a8c21905547113dc6499f82ff4c1b3d1c45cca360d0065e17adbff00",
+        "wallPx": 22.3125,
+        "wideOpenings": [
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1302,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 686.25,
+            "score": 0.8,
+            "toPx": 1306,
+            "why": "a 4.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 4
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1345,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 686.25,
+            "score": 0.8,
+            "toPx": 1349,
+            "why": "a 4.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 4
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1202,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 872,
+            "score": 0.8,
+            "toPx": 1209,
+            "why": "a 7.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 7
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1224,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 872,
+            "score": 0.8,
+            "toPx": 1231,
+            "why": "a 7.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 7
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1246,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 872,
+            "score": 0.8,
+            "toPx": 1252,
+            "why": "a 6.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 6
+          },
+          {
+            "axis": "X",
+            "decision": "OPENING_IN_WALL",
+            "fromPx": 1268,
+            "kind": "COLLINEAR_GAP",
+            "linePx": 1048.5,
+            "score": 0.8,
+            "toPx": 1273,
+            "why": "a 5.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+            "widthM": 5
+          }
+        ]
+      }
+    ],
+    "resolution": {
+      "compositions": 0,
+      "copies": 1,
+      "decompositions": 0,
+      "distinctOutlines": 0,
+      "firstReading": "PLAN_NO_DIMENSION_FRAME",
+      "outcome": "NO_ALTERNATIVE",
+      "publishedFigure": "SCORED",
+      "readings": 0,
+      "resolverVersion": "1.3.0"
+    },
+    "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+    "skipped": []
+  },
+  "schema": "buildapp.analysis-diagnostics",
+  "schemaVersion": "1.0.0",
+  "source": {
+    "assets": [
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "9aaa385c1f1a47fb6b879eae48927a7e364a714bb6b00ff639a2fb8b9e57c581",
+        "document": "ELEVATION",
+        "id": "asset-galaktyka-i-elewacja-boczna-96a166bb04",
+        "sizePx": "709x309",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "aa0371bdf72507d9525cf5b7d263b63ad4afcd6bea401def5533f6f09ca3231e",
+        "document": "ELEVATION",
+        "id": "asset-galaktyka-i-elewacja-boczna-a43d68d535",
+        "sizePx": "709x309",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "ad4f2e996d94142c7a282163145e423ab80f13fddcae383dfa1807d9763f92d6",
+        "document": "ELEVATION",
+        "id": "asset-galaktyka-i-elewacja-przod-c52a436d19",
+        "sizePx": "709x309",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "5d1efe60504c587b4e4124f6c06fbedf5d278ddfb6b6a72e3556dcf501f11365",
+        "document": "ELEVATION",
+        "id": "asset-galaktyka-i-elewacja-ty-c9881a0507",
+        "sizePx": "709x309",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "ddae88e10aad728b3c0fff3eea8fda35feba71616024bfb3b462bb0a0ef8b69c",
+        "document": "SECTION",
+        "id": "asset-galaktyka-i-przekroje-79f46ae4d7",
+        "sizePx": "1689x902",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "cbd8910bf7455f5da13f83f0af4e6c2e088ad04eedaee542de8c4e339e9360fe",
+        "document": "SITE_PLAN",
+        "id": "asset-galaktyka-i-rzut-dzia-ki-af0036fc30",
+        "sizePx": "548x490",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a595446ea37c44005bf8ffc9378453c27e3203930ac8f854dbf7446b54f05ecb",
+        "document": "FLOOR_PLAN",
+        "id": "asset-galaktyka-i-rzut-parter-84aee7e9a4",
+        "sizePx": "1625x1700",
+        "storey": "GROUND"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "aa565462a8c21905547113dc6499f82ff4c1b3d1c45cca360d0065e17adbff00",
+        "document": "FLOOR_PLAN",
+        "id": "asset-galaktyka-i-rzut-poddasze-03a9d2528c",
+        "sizePx": "1626x1700",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "062a543e8671aa9d2704d13b17731e3db5d4aa70643bf07698f101ed472232f5",
+        "document": "PERSPECTIVE_RENDER",
+        "id": "asset-galaktykai-w1-jpg-531246366f",
+        "sizePx": "1865x1200",
+        "storey": "NOT_APPLICABLE"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f5a7c51a2f24cffe819bc77b3d31b4b5b95c46edb3deb8f7b6abb2fb70a9dad6",
+        "document": "UNKNOWN",
+        "id": "asset-newsletter-115423e4f1",
+        "sizePx": "239x400",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "7c245a25e6fe3a72224e79b6f8a90f1542df790bee7ab2bbded4f40247c829a6",
+        "document": "UNKNOWN",
+        "id": "asset-newsletter-2122c17c71",
+        "sizePx": "640x373",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "a57e9aaa1eb8a9c834b134864087f1cc8dd803d99733854ca17c59ef671363bd",
+        "document": "UNKNOWN",
+        "id": "asset-newsletter-598a2abb68",
+        "sizePx": "239x400",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0fd73ebb81370611018d7eefdfd889498dd843bd38e3d35d345b51863f6459e3",
+        "document": "UNKNOWN",
+        "id": "asset-prezentacja-e019163552",
+        "sizePx": "417x565",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "ab92d966c2fa8357d04082e364ae0c3e668b47404e7ebdf071ea55e4fb0236f2",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-domu-e25becc350",
+        "sizePx": "315x203",
+        "storey": "UNKNOWN"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "0aa1e38d65519cc8544f25f55d343c486262573a70172bb1f68fed80d9e66969",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-6c468ee307",
+        "sizePx": "784x504",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "f8bcc1e7f150b18b536b57d4839b4bf3d0471b1138a8b37f09acfa62041e4918",
+        "document": "UNKNOWN",
+        "id": "asset-projekt-domu-z-poddaszem-z-garazem-jednostanowis-9d3767a36e",
+        "sizePx": "784x504",
+        "storey": "ATTIC"
+      },
+      {
+        "annotation": "UNKNOWN",
+        "byteHash": "e4748281b8f458dcf958c109b0ae6c555f9917d23cdf93222c0b0c8b9b9446e2",
+        "document": "UNKNOWN",
+        "id": "asset-wycena-fb105e7612",
+        "sizePx": "239x400",
+        "storey": "UNKNOWN"
+      }
+    ],
+    "canonicalUrl": "https://www.dobredomy.pl/projekt/galaktykaI",
+    "failures": {},
+    "packageHash": "e08f2565f7de0cc66ff3de435cda9e0e9d9d504377857b62a8889c4d0918c8b0",
+    "pageHash": "a5b0ee1c261ceba291f8a66b87ffc12c39bbad3f78c9c93d9f4b8018c17bb77b",
+    "planAddressesLost": []
+  },
+  "trace": {
+    "entries": [
+      {
+        "counts": {
+          "adapter": "generic.project-page",
+          "addressesNotUsed": 0,
+          "assets": 17,
+          "planAddressesLost": 0,
+          "route": "GENERIC",
+          "variants": 20
+        },
+        "durationMs": 4648,
+        "stage": "ACQUIRING_SOURCE",
+        "startedAtMs": 0,
+        "status": "PASSED",
+        "substage": "FETCH"
+      },
+      {
+        "counts": {
+          "ELEVATION": 4,
+          "FLOOR_PLAN": 2,
+          "PERSPECTIVE_RENDER": 1,
+          "SECTION": 1,
+          "SITE_PLAN": 1,
+          "UNKNOWN": 8,
+          "drawings": 9
+        },
+        "durationMs": 0,
+        "stage": "CLASSIFYING_SOURCES",
+        "startedAtMs": 4648,
+        "status": "PASSED",
+        "substage": "ROLES"
+      },
+      {
+        "counts": {
+          "frames": 9,
+          "observations": 386,
+          "relations": 475,
+          "vision": "DETERMINISTIC_ONLY"
+        },
+        "durationMs": 17633,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 4648,
+        "status": "PASSED",
+        "substage": "OBSERVATIONS"
+      },
+      {
+        "counts": {
+          "callouts": 7,
+          "chains": 59,
+          "evidence": 21,
+          "levelDatums": 4,
+          "registrations": 2,
+          "scalesRefused": 2,
+          "undecodable": 0
+        },
+        "durationMs": 111741,
+        "stage": "EXTRACTING_OBSERVATIONS",
+        "startedAtMs": 22281,
+        "status": "PASSED",
+        "substage": "METRIC_EVIDENCE"
+      },
+      {
+        "counts": {
+          "planFrames": 2,
+          "plansRead": 2,
+          "plansSkipped": 0,
+          "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770"
+        },
+        "durationMs": 1559,
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 134022,
+        "status": "PASSED",
+        "substage": "PLAN_READ"
+      },
+      {
+        "counts": {
+          "compositions": 0,
+          "copies": 1,
+          "decompositions": 0,
+          "distinctOutlines": 0,
+          "firstReading": "PLAN_NO_DIMENSION_FRAME",
+          "outcome": "NO_ALTERNATIVE",
+          "publishedFigure": "SCORED",
+          "readings": 0,
+          "resolverVersion": "1.3.0"
+        },
+        "detail": "no other reading of the plan could be generated",
+        "durationMs": 620,
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 135581,
+        "status": "FAILED",
+        "substage": "PLAN_RESOLUTION"
+      },
+      {
+        "counts": {
+          "builtRegions": 3,
+          "cells": 20,
+          "dimensionChains": 0,
+          "dimensionChainsRead": 0,
+          "enclosedCells": 17,
+          "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+          "gridLinesX": 5,
+          "gridLinesY": 6,
+          "independentWitnesses": 0,
+          "masses": 0,
+          "metricConfidence": "INCONCLUSIVE",
+          "metricIsotropy": "NONE",
+          "metricRelation": "NO_SCALE",
+          "planFrames": 2,
+          "planSizePx": "1625x1700",
+          "plansRead": 2,
+          "recessRegions": 2,
+          "scaleCmPerPx": 0,
+          "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+          "wallBands": 41,
+          "wallThicknessPx": 24,
+          "walledEnvelope": true,
+          "wideOpenings": 0,
+          "wideOpeningsClosed": 0
+        },
+        "detail": "the 1625×1700 px floor plan prints no dimension chain, so nothing on it states a scale",
+        "durationMs": 0,
+        "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+        "stage": "REGISTERING_VIEWS",
+        "startedAtMs": 136201,
+        "status": "FAILED",
+        "substage": "PLAN_READ"
+      }
+    ],
+    "outcome": "FAILED",
+    "schema": "buildapp.analysis-trace",
+    "schemaVersion": "1.0.0"
+  }
+}
+

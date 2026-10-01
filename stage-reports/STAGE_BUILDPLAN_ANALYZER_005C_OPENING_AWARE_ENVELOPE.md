@@ -1,6 +1,15 @@
 # STAGE BUILDPLAN-ANALYZER-005C — opening-aware exterior envelope, body relations, cross-publisher probe
 
-<!-- VERDICT TABLE -->
+| Verdict | Result |
+| --- | --- |
+| OPENING-AWARE EXTERIOR ENVELOPE | **PASS** — the walled outline crosses piers, glazing and doors: dom-w-modrzykach PASS (−0.14 %), dom-w-jablonkach PASS (−0.40 %), willa-miranda and dom-w-zurawkach built within 6 % (they fail on storeys, §M, §N); on the blind ARCHON house the outline continues through the glazed side and stops at the pergola (§Z); no development house moved down (§S) |
+| ATTACHED BODY / BAY RECONSTRUCTION | **PARTIAL** — bodies named by relation and built right on the three envelope houses (house and garage, wings, annex); open: party-wall garages still decided by reach in the box reading, a double garage with a post, a wing behind a doorway, storeys over attached bodies (§W, AF) |
+| CROSS-PUBLISHER GENERIC SOURCE | **PASS** — Aster VIII 0 → 11 figures and its outline documents (§Q); the blind DobreDomy page read with no DobreDomy code: 11 figures, 17 assets with roles, 4 documents, a typed stop where the plans print no dimension (§AB) |
+| 005B METRIC LAYER REGRESSION | **PASS** — no metric-layer file changed; every 005B metric PASS keeps its model hash; one 005A known-set row changed with its evidence (§T); the blind ARCHON defect is in the 005B layer as it was, not a regression (§Z) |
+| PROGRESS TELEMETRY | **PASS** — the boundary's own subphases and counters, cancellable, in Polish on Android; longest silence 2.6–4.6 s on the development houses, 2.5 s on the blind ARCHON run; residual: 5.7 s on the 1625 × 1700 px DobreDomy plan (§V, §AB) |
+| BLIND ARCHON ROUND 3 (`dom-w-azaliach`) | **ALGORITHMIC_FAIL** — completed at −3.48 %, but storeys 1 of 2 and resolved by the published figure alone; first bad decision: the overall chain's spurious tick and `1035` read `1055` (metric layer) (§Z) |
+| BLIND DOBREDOMY ROUND 3 (`galaktykaI`) | **SOURCE_LIMITED_PARTIAL** — the plan prints no dimension, confirmed on the raw copy; stopped by name (§AB) |
+| **Stage** | **PARTIAL** — `PARTIAL_BUILDPLAN_ANALYZER_005C_BLIND_ARCHON_OVERALL_DIMENSION_MISREAD` |
 
 Branch `analyzer/opening-aware-envelope-v1` (also pushed to `claude/new-session-3kzcgh`), from
 `analyzer/dimension-evidence-refoundation-v1` @ `d3235bf`. Legacy (`BuildPlan-PC-Legacy`) was not touched. No drawing,
@@ -447,4 +456,141 @@ now stop. A space that shallow cannot be told from a loggia, and the test now sa
 Tests: `packages/reconstruction/test/boundary-post-review.test.ts` (11) and the updated disagreement and §37 tests;
 361 reconstruction tests pass.
 
-<!-- X.. -->
+## X. PRE_HOLDOUT_3_SHA
+
+**`PRE_HOLDOUT_3_SHA = e328121b3aca2dfcec87db07db6277813eb04f34`**, pushed to `analyzer/opening-aware-envelope-v1` and
+`claude/new-session-3kzcgh`. At it: `npm run typecheck` clean; `npx vitest run` 138 files passed, 1 skipped,
+**1788 tests passed**, 9 skipped; CI run 116 (`36800959593`) green on every job, the Android UI evidence gate on its
+second attempt (§AC). The tree was clean, and nothing was committed between the freeze (CI green at 02:48:17Z) and the
+draw (02:49:03Z). The analyzer code at the freeze is `ca97516`'s; `e328121` adds only CI rows, records and the report.
+
+## Y. ARCHON pool and seed
+
+The committed round-1 pool (`holdout/pool.txt`, sha256 `800c2a1e…2ed41`) less `excluded-families-round-3.txt`
+(sha256 `330e7832…cf`: round 2's 38 families and the two round-2 draws, 583 addresses): **n = 2502**.
+Seed `SHA256(PRE_HOLDOUT_3_SHA + "BUILDPLAN-005C-ARCHON-HOLDOUT")` =
+`7b4344ee19b52b20d0373935f7cae7fb12ff7803c128c462b6b81f570237a147`, recomputed independently; `i1 = seed mod n = 375`:
+**`https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e`** (family `dom-w-azaliach`, in no
+exclusion file of any round). One ledger line (`BUILDPLAN-005C-BLIND-HOLDOUT-ROUND-3`) records both picks.
+
+## Z. ARCHON result — `dom-w-azaliach`: ALGORITHMIC_FAIL
+
+Run once, live, frozen code (280 s, peak 736 MB, longest silence 2.5 s). **Completed**: 1 body, 6 openings, model
+`2cfcc6e9…`; footprint **67.26 m² against 69.69 (−3.48 %)**; every printed opening built. **Fails** two conditions of
+the unchanged `verdict.mjs`: storeys 1 of 2 (the attic registers onto no body), and the plan was resolved by
+hypothesis with no corroboration but the published figure.
+
+**First bad evidence decision — in the metric layer, untouched by 005C.** On the dimensioned ground copy the first
+reading chose, the overall horizontal chain is read with a spurious third tick (x = 204.5 px; the true ticks are 77
+and 633), and its label, printed `1035` in italics, is read `1055` (third glyph `5` at 0.46 over `3` at 0.33) and
+attached to the partial segment 204.5–633 px: sheet scale 2.46 cm/px, where the drawing's two overall dimensions agree
+on 1.86 (1035 over 556 px, 670 over 359.5 px). The true vertical `670` then "cannot be reconciled with the sheet scale"
+and reads nothing, the extent becomes the chains' own span (a third of the house), and the first reading has no
+enclosed cell. The resolver found the house on the area-table copy at a scale departure (1.897 cm/px, −3.5 %), which
+the figure chose — no witness by rule.
+
+What 005C did on this house: on the reading the resolver kept, the long-band box held the service rooms only
+(23.95 m²); the opening-aware outline continued the interior across the glazed living-room side as a
+`PROJECTING_WING` (43.31 m²) and stopped at the pergola terrace beside it, which is not built. Not patched; evidence
+in `artifacts/analyzer-005c/holdout/` (text only).
+
+## AA. DobreDomy pool and seed
+
+`holdout/pool-dobredomy.txt` (from `robots.txt` and `sitemap.xml` only; 900 addresses in 491 families, sha256
+`42762070…8c5`) less `excluded-families-dobredomy.txt` (the Aster family and the 72 families its page links to, 203
+addresses; sha256 `3122f477…4730`): **n = 697**. Seed `SHA256(PRE_HOLDOUT_3_SHA + "BUILDPLAN-005C-DOBREDOMY-HOLDOUT")`
+= `fc19c52c3b4780af5422cdf91126e74140b87c5cbf9bb8a017ee60b68805ce8b`, recomputed independently; `i1 = 262`:
+**`https://www.dobredomy.pl/projekt/galaktykaI/`** (family `galaktyka`). Eligible at the first draw by its markup
+alone (a plan heading and an elevation heading, each followed by an image); nothing was burned.
+
+## AB. DobreDomy result — `galaktykaI`: SOURCE_LIMITED_PARTIAL
+
+Run once, live, frozen code (140 s, peak 778 MB). **Source, read by the generic reader with no DobreDomy code**:
+classified a project page; 17 assets with roles (one ground and one attic plan, a site plan, elevations, renders);
+**11 figures** from the page's own rows (usable area 135.1 m², footprint 145.1 m², garage 23.2 m² — the plan's own
+`garaż 23,2 m²` —, height 8.9 m, pitch 42°, sloped roof 250.9 m², volume 496.9 m³, rooms 4, bathrooms 2, minimum plot
+22.38 × 19.68 m); **4 documents** (outline PDF base and mirrored and DWG, fetched, signature-checked and hashed, never
+parsed; the energy certificate recorded).
+
+**Reconstruction stops by name**: `METRIC_RESOLUTION_INCONCLUSIVE` — the floor plan prints no dimension chain.
+`verdict.mjs` alone says ALGORITHMIC_FAIL (it can nominate legibility only from OCR heights, and the room areas are
+tall). The protocol's checklist item was measured on the raw copy: the single ground-floor copy (1625 × 1700 px),
+looked at whole and at full resolution in its four margins, prints room names, room areas, furniture and the terrace
+outline and **no dimension at all**; the metric layer finds 0 chains on it. "No ground-floor copy prints an overall
+dimension with glyphs 10 px tall or more" holds, so with the typed stop the verdict is **SOURCE_LIMITED_PARTIAL**.
+The publisher's scale is in the outline PDF/DWG, recorded and hashed, not read (no document reader in scope). One
+progress residual: `METRIC_FRAMES` on this 1625 × 1700 px plan ticked 4.8 s apart (telemetry gap 5.7 s).
+
+## AC. CI
+
+| Run | Commit | Result |
+| --- | --- | --- |
+| 107 | `eef7133` | green (the last before the 005C code) |
+| 108–113 | `a1913fc` … `55a9c65` | cancelled by the next push (concurrency group) |
+| 114 | `b0013ed` | failed: the known-set row e-OZE (§T), the three changed development rows, and the Android UI gate once (`ProductFlowDeviceTest`, a 5 s wait in the stage sheet at the default font scale; it passed at 1.3 in the same job) |
+| 115 | `ca97516` | cancelled by the next push; by then the same three analyzer rows had failed and nothing else |
+| 116 | `e328121` | attempt 1: every analyzer, Android, browser and container job green; the Android UI gate failed — a Compose test-harness race in the Kosaćce slice's stage sheet (`IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver`, thrown inside `performClick`) and, on the next test, a 45 s wait for the renderer at launch. Re-run once (the protocol's one re-run): **green** — the three slices and the alternate-publisher test pass (the alternate Marcówki page stops with its typed `METRIC_RESOLUTION_INCONCLUSIVE`, as designed), all 89 required screenshots valid. `PRE_HOLDOUT_3_SHA` |
+| final | the report commit | `workflow_dispatch` with the OWNER APK: §AE |
+
+The three UI-gate failures were in three different test steps, all waits or a test-framework race in the emulator
+(ANGLE on SwiftShader), none in the analyzer; the only Android change in the stage is two progress strings and a stop
+title. They are named as a residual (AF), not explained away.
+
+## AD. Commits
+
+Baseline and protocol: `3e76894` (005B baseline, Aster), `e6220a9` (round-3 pools, before the freeze), `eef7133`
+(pre-reviews). Implementation: `7f3f557` (boundary evidence), `a1913fc` (outline candidates), `f62cd56` (body
+relations), `dfbec9f` (gable door), `1f26636` (metamorphics), `432dbd2` (generic source 1.1.0), `b70aa41` (Aster gate),
+`26b63e3` (Polish progress). Matrix and report: `1b330d3`, `cfa8640`, `0575fb5`. Post-review: `2d45254` (reviews),
+`64f7ff6` (source 1.2.0), `55a9c65`, `b0013ed`, `ca97516` (boundary, openings, bodies, massing), `e328121` (rows,
+records, report M–W) = **PRE_HOLDOUT_3_SHA**. Blind round and report: the commit that carries this section; the APK
+record: the commit after it.
+
+## AE. OWNER APK
+
+<!-- AE -->
+
+## AF. Residual debt
+
+Named, not fixed in 005C; each is a bounded item with its evidence in the section given.
+
+- **Storeys over an outline frame** (§M, §N). willa-miranda's upper plan maps onto a body under a quarter of the main
+  body's width and registers onto nothing; dom-w-zurawkach reads three plans and no body reaches past the ground.
+  Both houses are right on the ground and wrong in height; the vertical chain was not in this stage's scope.
+- **The resolver and a misread overall dimension** (§T). When the first reading builds the whole house at a misread
+  scale, the published figure refuses it and cannot choose the replacement, so the run stops by name even when a
+  reading at an independent scale exists (e-OZE on its sealed 005A evidence).
+- **Jamb-policy disagreement is recorded, not resolved** (§M, §N, `boundary-performance.json`): on willa-miranda and
+  dom-w-zurawkach the strict and exclusion policies build more than 6 % apart; the exclusion reading is taken and the
+  flag only names the stop when the run stops.
+- **Openings**: the corner-material rule refuses a 0.40 m opening on willa-miranda's small annex (§M).
+- **Boundary (post-review, not fixed)**: a through-passage judged as a pocket from each end (B P1-7); a corner pier
+  read as a post (B P1-9, the safe direction); the weak-gap budget order, the 3.2 m corner-leg cap, sash joints read
+  as dashed, no corner slack, a shadow line at an outer face beyond the box's edge (−2.4 % on the reviewer's case), a
+  planter's wall-thick ink within 0.3 m of a face, a two-line balustrade (A/B P2).
+- **Bodies (post-review, not fixed)**: party-wall garages still decided by reach in the box reading, and drawing the
+  vehicle door can remove one (C P1-4); a wing joined only through a door-sized opening is attached, not continued,
+  by design (C P1-5); a double garage with a central post (C P1-8); the read window of a shallow projection (C P1-9);
+  a registered partial basement picked as the ground storey (C P1-10, as in the frozen code); a wing `baysOf` shuts,
+  dropped by the 35 % gate on box frames (C P1-11).
+- **Generic source (P2)**: a logo in the h1, gallery captions, ARIA `role=table` fact tables, the longest-paragraph
+  description, failed document fetches spending the budget, `download.php?file=` links, `http:` PDFs, documents on
+  crawled subpages.
+- **Publishers whose plans print no dimension** (§R): Aster's scale is stated only by its 1:500 outline PDF, which
+  is recorded and hashed and not parsed; a document reader is outside this stage.
+- **Blind round 3** (§Z, §AB): the overall-dimension chain on a dimensioned copy — a spurious tick splitting it and an
+  italic `1035` read `1055` on the partial segment — gives a wrong sheet scale that then refuses the true vertical
+  overall; an attic registering onto no body on `dom-w-azaliach`; `METRIC_FRAMES` ticking 4.8 s apart on a
+  1625 × 1700 px plan.
+- **The Android UI gate on the emulator** (§AC): three failures in two runs, in three different steps (a 5 s wait in
+  the stage sheet, a Compose `SnapshotStateObserver` race inside `performClick`, a 45 s renderer wait at launch), each
+  gone on the next run; the waits and the test harness's threading are named, not fixed.
+
+## AG. Next step
+
+**Return to the coordinator with the round-3 ARCHON defect as BUILDPLAN-ANALYZER-005D's input: the overall-dimension
+chain on a dimensioned plan copy — a tick read where none is drawn splits the overall chain, the italic `1035` is
+read `1055` and attached to the partial segment, and the wrong sheet scale (2.46 cm/px where both printed overall
+dimensions agree on 1.86) then refuses the true vertical overall and frames the plan from interior chains
+(`dom-w-azaliach`, `artifacts/analyzer-005c/holdout/`).**
+

@@ -1,0 +1,136 @@
+{
+  "entries": [
+    {
+      "counts": {
+        "adapter": "generic.project-page",
+        "addressesNotUsed": 0,
+        "assets": 17,
+        "planAddressesLost": 0,
+        "route": "GENERIC",
+        "variants": 20
+      },
+      "durationMs": 4648,
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "status": "PASSED",
+      "substage": "FETCH"
+    },
+    {
+      "counts": {
+        "ELEVATION": 4,
+        "FLOOR_PLAN": 2,
+        "PERSPECTIVE_RENDER": 1,
+        "SECTION": 1,
+        "SITE_PLAN": 1,
+        "UNKNOWN": 8,
+        "drawings": 9
+      },
+      "durationMs": 0,
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 4648,
+      "status": "PASSED",
+      "substage": "ROLES"
+    },
+    {
+      "counts": {
+        "frames": 9,
+        "observations": 386,
+        "relations": 475,
+        "vision": "DETERMINISTIC_ONLY"
+      },
+      "durationMs": 17633,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 4648,
+      "status": "PASSED",
+      "substage": "OBSERVATIONS"
+    },
+    {
+      "counts": {
+        "callouts": 7,
+        "chains": 59,
+        "evidence": 21,
+        "levelDatums": 4,
+        "registrations": 2,
+        "scalesRefused": 2,
+        "undecodable": 0
+      },
+      "durationMs": 111741,
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 22281,
+      "status": "PASSED",
+      "substage": "METRIC_EVIDENCE"
+    },
+    {
+      "counts": {
+        "planFrames": 2,
+        "plansRead": 2,
+        "plansSkipped": 0,
+        "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770"
+      },
+      "durationMs": 1559,
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 134022,
+      "status": "PASSED",
+      "substage": "PLAN_READ"
+    },
+    {
+      "counts": {
+        "compositions": 0,
+        "copies": 1,
+        "decompositions": 0,
+        "distinctOutlines": 0,
+        "firstReading": "PLAN_NO_DIMENSION_FRAME",
+        "outcome": "NO_ALTERNATIVE",
+        "publishedFigure": "SCORED",
+        "readings": 0,
+        "resolverVersion": "1.3.0"
+      },
+      "detail": "no other reading of the plan could be generated",
+      "durationMs": 620,
+      "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 135581,
+      "status": "FAILED",
+      "substage": "PLAN_RESOLUTION"
+    },
+    {
+      "counts": {
+        "builtRegions": 3,
+        "cells": 20,
+        "dimensionChains": 0,
+        "dimensionChainsRead": 0,
+        "enclosedCells": 17,
+        "extentProvenance": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT",
+        "gridLinesX": 5,
+        "gridLinesY": 6,
+        "independentWitnesses": 0,
+        "masses": 0,
+        "metricConfidence": "INCONCLUSIVE",
+        "metricIsotropy": "NONE",
+        "metricRelation": "NO_SCALE",
+        "planFrames": 2,
+        "planSizePx": "1625x1700",
+        "plansRead": 2,
+        "recessRegions": 2,
+        "scaleCmPerPx": 0,
+        "selectedPlanFrameId": "frame-asset-galaktyka-i-rzut-parter-84aee7e9a4-223b513770",
+        "wallBands": 41,
+        "wallThicknessPx": 24,
+        "walledEnvelope": true,
+        "wideOpenings": 0,
+        "wideOpeningsClosed": 0
+      },
+      "detail": "the 1625×1700 px floor plan prints no dimension chain, so nothing on it states a scale",
+      "durationMs": 0,
+      "reasonCode": "PLAN_NO_DIMENSION_FRAME",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 136201,
+      "status": "FAILED",
+      "substage": "PLAN_READ"
+    }
+  ],
+  "outcome": "FAILED",
+  "schema": "buildapp.analysis-trace",
+  "schemaVersion": "1.0.0"
+}
+

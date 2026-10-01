@@ -1,0 +1,194 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.3.0"
+  },
+  "candidateHash": "5df2913bc12e188f0e854c2465eee81deac3f9d4a2716cafd45cffa6efca926e",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+  "completedAt": "2026-10-01T02:53:51.279Z",
+  "counts": {
+    "assets": 21,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 8,
+      "PERSPECTIVE_RENDER": 5,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 0,
+    "callouts": 37,
+    "chimneys": 0,
+    "commands": 71,
+    "frames": 19,
+    "masses": 1,
+    "meshes": 47,
+    "metricEvidence": 65,
+    "observations": 952,
+    "openings": 6,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 3,
+    "terraces": 3,
+    "triangles": 1016
+  },
+  "jobId": null,
+  "label": "Dom w azaliach 3 (analysis)",
+  "metricEvidenceHash": "ff7593e5f15562e084077a3cdb463243658a62ce66e6315ea942c77c700becbf",
+  "modelHash": "2cfcc6e97af3d4b47f18200779fc86923b82297072c0d592dc35b4d7ff67ece0",
+  "modelId": "m-analysis-ma6726144fab3e",
+  "modelSha256": "2cfcc6e97af3d4b47f18200779fc86923b82297072c0d592dc35b4d7ff67ece0",
+  "observationGraphHash": "2d5fd6460b3520131144f52a06abea0e85c306f0dd5515f81f227ec952320c99",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "INTERIOR_DOOR": {
+        "L1": 2
+      },
+      "INTERIOR_WALL": {
+        "L1": 11
+      },
+      "LEVEL": {
+        "L0": 1
+      },
+      "MASS": {
+        "L1": 1
+      },
+      "OPENING": {
+        "L1": 6
+      },
+      "RECESS": {
+        "L2": 3
+      },
+      "ROOM": {
+        "L1": 3
+      },
+      "TERRACE": {
+        "L1": 3
+      }
+    },
+    "levels": {
+      "L0": 1,
+      "L1": 26,
+      "L2": 3
+    }
+  },
+  "sceneBytes": 117243,
+  "sceneContentHash": "52131018026e02016041a870ea332ebfa6f1a1b35a7c247b1ebc3476b3c1ba51",
+  "sceneSha256": "c47c72d03703768b7c9a01366c884e68c442ae6905396730d61309bea0dc401b",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "349a08e9a6b85332cbdd4644422602e989f9dde172ccd0827e9d12bfde82e6ef",
+  "sourcePackageId": "src-ma6726144fab3e-293e6e9c13",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-azaliach-3-ma6726144fab3e",
+  "startedAt": "2026-10-01T02:49:19.929Z",
+  "timings": {
+    "acquisitionMs": 16156,
+    "compileMs": 43,
+    "metricExtractionMs": 224279,
+    "observationMs": 24525,
+    "reconstructionMs": 6279,
+    "totalMs": 271350,
+    "verificationMs": 68
+  },
+  "title": "Dom w azaliach 3",
+  "unresolved": [
+    {
+      "reason": "no scaling of this plan puts its walls on the walls of the plan below",
+      "status": "AMBIGUOUS",
+      "what": "where the attic storey sits over the storey below"
+    },
+    {
+      "reason": "no section states an eaves level and a ridge level, so there is no rise to test a span against",
+      "status": "AMBIGUOUS",
+      "what": "which way the ridge runs over mass-0"
+    },
+    {
+      "reason": "neither its chains, its outer faces nor an alignment onto the base plan fixed a scale for it",
+      "status": "MISSING",
+      "what": "a registration for the storey 1 plan"
+    },
+    {
+      "reason": "no ridge datum was read from a section, and the elevations are registered on it",
+      "status": "MISSING",
+      "what": "a registration for the elevations"
+    },
+    {
+      "reason": "no pitched roof with a stated pitch and a ridge datum was inferred over the main body",
+      "status": "MISSING",
+      "what": "the main roof"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 1.57 m thin band at x 4.85"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 12
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer",
+      "severity": "INFO"
+    },
+    {
+      "code": "SOURCE_BYTE_IDENTICAL",
+      "message": "5 source addresses counted with another copy (byte identical)",
+      "severity": "INFO"
+    },
+    {
+      "code": "GUESSED_ADDRESS_HTTP_STATUS",
+      "message": "9 guessed larger copies not available (http status); the published copy was used",
+      "severity": "INFO"
+    },
+    {
+      "code": "LAYOUT_PLAN_RESOLVED_BY_HYPOTHESIS",
+      "message": "the building is taken from another reading of the plan: copy area_table 79ba9b7966, wall-ink extent, scale 1.897482 cm/px, largest-first tiling, sides as gridded",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "LAYOUT_NO_MASS_REACHES_UP",
+      "message": "more than one storey was read and no body reaches past the first",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "LAYOUT_SCALE_DISAGREEMENT",
+      "message": "the plan was registered at one scale and its own readings, as printed, imply another: the plan's readings as printed state 1.897482 cm/px (1 independent reading on 1 chain(s): 1055/556 px), against the 2.4679 cm/px it was registered at",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "METRIC_SCALE_WEAK",
+      "message": "the plan's scale rests on 1 printed dimension read as printed and nothing independent confirms it",
+      "severity": "LIMITING"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses counted with another copy (byte identical)",
+    "9 guessed larger copies not available (http status); the published copy was used",
+    "the building is taken from another reading of the plan: copy area_table 79ba9b7966, wall-ink extent, scale 1.897482 cm/px, largest-first tiling, sides as gridded",
+    "more than one storey was read and no body reaches past the first",
+    "the plan was registered at one scale and its own readings, as printed, imply another: the plan's readings as printed state 1.897482 cm/px (1 independent reading on 1 chain(s): 1055/556 px), against the 2.4679 cm/px it was registered at",
+    "the plan's scale rests on 1 printed dimension read as printed and nothing independent confirms it"
+  ]
+}
+
