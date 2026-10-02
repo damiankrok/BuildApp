@@ -57,7 +57,23 @@ were re-run on the freeze candidate after the last fix (§"After the fixes").
 
 ## Reviewer A
 
-(pending)
+A tried to falsify the count claims with synthetic pages built as a plan is read (faces A and B, context labels setting
+the plan's style, one target), against the frozen 005E lattice and without a style. Its fixes were measured on an
+env-gated scratch copy over the 81 development labels, both corpora, its grids and Morelach; the shipped fixes are those
+rules, placed before the SUPPORTED caps so that a stricter rule is never shadowed. Each attack is now a test that fails
+on the code before the fix (`adaptive-glyph-count.test.ts`, "post-review A"; `ocr-metric-adversaries.test.ts`, "005F
+contract A6").
+
+| ID | Sev | Finding | Resolution |
+| --- | --- | --- | --- |
+| A5F-1 | P0 | The decisive count trusted a style that is not the label's face: an ordinary `145` on a condensed page read `1115` SUPPORTED; under a wide title-block style `730` read `10` SUPPORTED. | **Fixed.** A count no ink variant's own reader cut is at most AMBIGUOUS (the style is the page's median face, not necessarily this label's). A merge is never decisive: it stays a count alternative. Development labels, corpora and Morelach: no change (A's measurement; development re-measured, below). Tests: the split and the merge pages. |
+| A5F-2 | P0 | Width doubt carried the hypothesis gates (valley depth, counter-safe cut), which contract A5 does not have, so it vanished exactly where condensed glyphs touch: the stage's own `2590` at the blind house's 11 px cap read `190` SUPPORTED (005E: AMBIGUOUS). | **Fixed.** Under the plan's style, width doubt is A5 as written: a count one away admitted and fitting at least as well. With no style the gates stay (the no-style band is wide; without them the calibration corpus would lose 17 right readings). One development change: kosacce-clean `890`, read `840` — a wrong reading — SUPPORTED → AMBIGUOUS. Tests: the cap-11 page, and ordinary touching labels on condensed pages. |
+| A5F-3 | P1 | Count alternatives contested a scale and fed M4 doubt (A6 says never): on a fixture a CONFIRMED 2.0 cm/px became a STRONG wrong 2.5. | **Fixed** (`ac5c5fc`, the D5F-6 filter). A's fixture is now a test, and fails without the filter. |
+| A5F-4 | P1 | When the ink variants cut different counts, the as-read count was chosen by template score or by which anchor states a value, and the class did not see it (`7525` read `716` SUPPORTED). | **Fixed.** Variants whose anchors differ in count make the reading at most AMBIGUOUS (contract §0: the image score cannot choose a count). Cost on the corpora: below. |
+| A5F-5 | P2 | An ink cut at a count two away, or whose width rules out its count with no count one away, keeps CLEAR (`185` read `85` CLEAR on the held-back corpus). Pre-existing (005E 82, 005F 80 on A's grid). | **Doc and debt.** `METRIC_EVIDENCE.md` no longer reads "3-vs-4 is never CLEAR" as a guarantee: the rules see the counts the lattice raised, and this is a declared limit. A's FIX_A (a count the width rules out is AMBIGUOUS) costs every right reading of an off-style face on its grid; not shipped. |
+| A5F-6 | P2 | `2590` on modrzewnicy: 0 of 420 exhaustive four-cell cuts per mask read it; the `9` scores below the `4`. The de-skew slope also spoils the `2`/`5`. | **Recorded.** Confirms the stated root cause (the classifier's 9→4 at the right count; §C). The de-skew on 11 px ink is 005D front-end debt (§AG). |
+| A5F-7 | P2 | The count recovered without its value made modrzewnicy's unreadable overall an AMBIGUOUS PRIMARY witness, the heaviest hypothesis at a wrong scale. | **Doc.** Stated in `METRIC_EVIDENCE.md`: it refuses the plan (typed `DIMENSION_EVIDENCE_INCONCLUSIVE`), it does not mislead it. |
+| A5F-8 | P2 | The gate tests used one face per page, caps 14/16 only, checked `correctionReadings` only, and guarded the tail with a regex. | **Partly fixed.** Mixed-face pages, the 11 px cap and the contest path are now tested. The tail guard stays a source scan; a type-level guard is debt (§AG). |
 
 ## After the fixes
 
