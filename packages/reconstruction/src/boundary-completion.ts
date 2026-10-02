@@ -363,7 +363,27 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       }
     }
     const allCore = core
-    const walledOff = allCore.filter((k) => !reached.has(k))
+    // Free floor not reached is a room behind a wall only when one could stand in it: a door's width across both ways.
+    // Narrower, it is a reveal or a niche of the wall zone around the part, and stays with the walls (Morelach's window
+    // reveal, a 0.5 × 0.3 m sliver behind a pier, is no yard).
+    const unreached = allCore.filter((k) => !reached.has(k))
+    const unreachedSet = new Set(unreached)
+    const walledOff: number[] = []
+    const grouped = new Set<number>()
+    for (const k0 of unreached) {
+      if (grouped.has(k0)) continue
+      const group = [k0]
+      grouped.add(k0)
+      for (let i = 0; i < group.length; i += 1) {
+        for (const n of neighbours(group[i])) {
+          if (n.j < 0 || !unreachedSet.has(n.j) || grouped.has(n.j)) continue
+          grouped.add(n.j)
+          group.push(n.j)
+        }
+      }
+      const r = rectOf(group)
+      if (Math.min((r.x1 - r.x0) * mppX, (r.y1 - r.y0) * mppY) >= B.doorM) walledOff.push(...group)
+    }
     const coreSet = new Set(allCore.filter((k) => reached.has(k)))
     const nearCore = (k: number): boolean => {
       const t = rectOfCell(k)
@@ -376,8 +396,8 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       })
     }
     // the reached rooms and their own walls (cells of no free floor within a wall of them) — never another room's floor
-    const anyCore = new Set(allCore)
-    const kept = before.filter((k) => coreSet.has(k) || (!anyCore.has(k) && nearCore(k)))
+    const walledRooms = new Set(walledOff)
+    const kept = before.filter((k) => coreSet.has(k) || (!walledRooms.has(k) && nearCore(k)))
     const mine = new Set(kept)
     // the house's own edges with the part: a window in them is the house's, not the part's (C5F-1)
     const junctionLines: Array<{ axis: 'X' | 'Y'; at: number; a: number; b: number }> = []
@@ -511,7 +531,7 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     if (core.length === 0) {
       decision = 'REJECTED'
       reason = 'WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room'
-    } else if (coreSet.size === 0 && shared > 0) {
+    } else if (coreSet.size === 0) {
       decision = 'REJECTED'
       reason = 'WALLED_OFF: no open edge or door reaches it from the house — a room or a yard behind a wall'
     } else if (shared === 0) {
