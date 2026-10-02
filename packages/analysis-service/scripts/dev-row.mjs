@@ -29,6 +29,10 @@
  *
  * 005E: `--metric-scale <cm/px>` requires the selected plan copy's scale (both axes) within 1.5 % of the scale the
  * printed overall dimensions state — for a row whose defect was a wrong scale read from misread labels.
+ *
+ * 005F: `--dimension-evidence <KIND>` requires a METRIC_RESOLUTION_INCONCLUSIVE refusal to say which dimension evidence
+ * it had (`NO_DIMENSION_EVIDENCE` or `DIMENSION_EVIDENCE_INCONCLUSIVE`): a plan whose dimensions were found and misread
+ * may not be refused as one that prints none.
  */
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
@@ -36,7 +40,7 @@ import { join, resolve } from 'node:path'
 
 const [dir, expectation, ...rest] = process.argv.slice(2)
 if (!dir || !expectation) {
-  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>] [--limits <CODE,CODE>] [--metric <RELATION,RELATION>] [--metric-overall] [--metric-scale <cm/px>]\n')
+  process.stderr.write('usage: dev-row.mjs <out dir> <pass|complete:<n>|footprint:<n>|refuse:<CODE|CODE>> [--same-model <sha256>] [--limits <CODE,CODE>] [--metric <RELATION,RELATION>] [--metric-overall] [--metric-scale <cm/px>] [--dimension-evidence <KIND>]\n')
   process.exit(2)
 }
 const valueOf = (flag) => (rest.includes(flag) ? rest[rest.indexOf(flag) + 1] : undefined)
@@ -45,6 +49,7 @@ const limits = (valueOf('--limits') ?? '').split(',').filter(Boolean)
 const metricRelations = (valueOf('--metric') ?? '').split(',').filter(Boolean)
 const metricOverall = rest.includes('--metric-overall')
 const metricScale = valueOf('--metric-scale') !== undefined ? Number(valueOf('--metric-scale')) : undefined
+const dimensionEvidence = valueOf('--dimension-evidence')
 const fail = (message) => {
   process.stdout.write(`::error::${dir}: ${message}\n`)
   process.exit(1)
@@ -101,5 +106,7 @@ if (existsSync(join(dir, 'result-summary.json'))) {
   const code = failure.reasonCode ?? failure.code
   if (kind !== 'refuse') fail(`refused (${code}); this row must complete`)
   if (!arg.split('|').includes(code)) fail(`refused with ${code}, not one of the named ${arg}`)
-  process.stdout.write(`${dir}: refused by name (${code})${metricGate()}\n`)
+  const evidence = failure.diagnostics?.dimensionEvidence
+  if (dimensionEvidence && evidence !== dimensionEvidence) fail(`refused with dimension evidence ${evidence ?? 'unstated'}; the row requires ${dimensionEvidence}`)
+  process.stdout.write(`${dir}: refused by name (${code}${evidence ? `, ${evidence}` : ''})${metricGate()}\n`)
 }

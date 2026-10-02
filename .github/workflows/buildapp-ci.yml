@@ -1102,7 +1102,7 @@ jobs:
           fi
 
   analyzer-development-houses:
-    # BUILDPLAN-ANALYZER-005B/005C/005D/005E. All fifteen development houses through today's
+    # BUILDPLAN-ANALYZER-005B/005C/005D/005E/005F. All seventeen development houses through today's
     # analyzer. Only the source package is sealed (stage-reports/artifacts/
     # analyzer-005b/dev); observations, metric evidence and the model are
     # re-extracted from the publisher's drawings, which are fetched here and
@@ -1190,6 +1190,20 @@ jobs:
             expect: "footprint:1"
             limits: METRIC_SCALE_WEAK
             metric: "--metric REPLACED --metric-scale 2.092"
+          # 005F: the round-5 blind houses. modrzewnicy's condensed overall is now cut at the plan's own glyph count,
+          # and its plan is still refused by name — honestly typed: its dimensions were found and do not settle a
+          # scale (a 9 read 4 and a confident two-glyph misread remain, report §C, §Q). morelach: the extent past the
+          # box completes its east bay as an attached room and its garage to its end wall; the scale its printed
+          # overall states is unchanged, and the doubt a confident misread casts on it is named (report §D, §R).
+          - house: dom-w-modrzewnicy
+            pkg: stage-reports/artifacts/analyzer-005e/holdout/h1-dom-w-modrzewnicy/source-package.json
+            expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+            metric: "--dimension-evidence DIMENSION_EVIDENCE_INCONCLUSIVE"
+          - house: dom-w-morelach
+            pkg: stage-reports/artifacts/analyzer-005e/holdout/h2-dom-w-morelach/source-package.json
+            expect: pass
+            limits: METRIC_SCALE_UNSUPPORTED
+            metric: "--metric CONFIRMED --metric-scale 1.996"
     env:
       DEV: stage-reports/artifacts/analyzer-005b/dev
     steps:
