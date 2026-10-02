@@ -52,7 +52,7 @@ import type { LabelLattice, OcrClass } from './numeric-lattice.js'
 import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricConfidence, OrientationDecision, ScaleHypothesis } from './schema.js'
 
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
-export const METRIC_SOLVER_VERSION = '1.2.0' as const
+export const METRIC_SOLVER_VERSION = '1.3.0' as const
 
 /**
  * Counts, never a clock, so a phone reaches the answer a server does. Two

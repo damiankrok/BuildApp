@@ -50,7 +50,7 @@ import type { PixelRect } from '@buildapp/source-common'
 import { dilate, erode } from '@buildapp/source-cv'
 import type { Mask } from '@buildapp/source-cv'
 
-export const BOUNDARY_EVIDENCE_VERSION = '1.0.0'
+export const BOUNDARY_EVIDENCE_VERSION = '1.1.0'
 
 /** One connected piece of wall-thick ink. */
 export type SolidPart = { id: number; bounds: PixelRect; pixels: number; kind: 'WALL' | 'POST' }
