@@ -93,16 +93,20 @@ function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']>
  * What a plan prints to take a scale from (005F): no dimension at all, or dimensions that were found and read but do
  * not settle one scale. The two are different refusals — the first asks for a dimension, the second for a reading of
  * the ones printed — and saying the first when the second holds tells a person the drawing lacks what it has.
- * Counted on the dimension observations (labels bound to dimension lines, the 005D topology) and the legacy chains.
+ * Counted on what could witness a scale (005F post-review D5F-1): a label bound as the PRIMARY reading of its line and
+ * read better than LOW_QUALITY, and the legacy chains. Dimensions are found when the frame keeps a legacy chain, or at
+ * least two such labels on two different lines — the least a scale needs; a stray token bound to some line is not a
+ * dimension the drawing prints.
  */
 export type DimensionEvidence = { kind: 'NO_DIMENSION_EVIDENCE' | 'DIMENSION_EVIDENCE_INCONCLUSIVE'; labels: number; lines: number }
 
 export function dimensionEvidenceOf(metrics: MetricEvidenceSet, frameId: string): DimensionEvidence {
-  const observed = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === frameId)
-  const labels = new Set(observed.map((o) => o.textRegionId)).size
+  const witnessing = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === frameId && (o.binding === undefined || o.binding.role === 'PRIMARY') && o.ocr?.ocrClass !== 'LOW_QUALITY')
+  const labels = new Set(witnessing.map((o) => o.textRegionId)).size
   const legacy = metrics.chains.filter((c) => c.frameId === frameId)
-  const lines = new Set([...observed.map((o) => o.chainId), ...legacy.map((c) => c.id)]).size
-  return { kind: labels === 0 && legacy.length === 0 ? 'NO_DIMENSION_EVIDENCE' : 'DIMENSION_EVIDENCE_INCONCLUSIVE', labels, lines }
+  const labelLines = new Set(witnessing.map((o) => o.chainId)).size
+  const lines = new Set([...witnessing.map((o) => o.chainId), ...legacy.map((c) => c.id)]).size
+  return { kind: legacy.length > 0 || (labels >= 2 && labelLines >= 2) ? 'DIMENSION_EVIDENCE_INCONCLUSIVE' : 'NO_DIMENSION_EVIDENCE', labels, lines }
 }
 
 /** The frame's independent metric solution (005B), as the digest carries it. */

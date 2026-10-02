@@ -151,6 +151,16 @@ describe('005F: a plan whose scale is not settled says whether it prints dimensi
     } as unknown as Parameters<typeof dimensionEvidenceOf>[0]
     expect(dimensionEvidenceOf(metrics, F)).toEqual({ kind: 'DIMENSION_EVIDENCE_INCONCLUSIVE', labels: 3, lines: 2 })
   })
+  it('stray tokens bound to some line are no dimension the drawing prints (005F post-review D5F-1)', () => {
+    const obs = (id: string, chainId: string, role: string, ocrClass?: string) => ({ frameId: F, textRegionId: id, chainId, binding: { role, offsetShare: 0, questionableEnds: 0, skipped: { tick: 0, questionable: 0, rejected: 0 } }, ...(ocrClass ? { ocr: { ocrClass } } : {}) })
+    const of = (observations: unknown[]) => dimensionEvidenceOf({ ...metricsOf([], []), dimensionObservations: observations } as unknown as Parameters<typeof dimensionEvidenceOf>[0], F)
+    // a token no candidate is centred on, and a LOW_QUALITY one: what a plan printing no dimension leaves bound
+    expect(of([obs('a', 'c1', 'UNCENTRED'), obs('b', 'c2', 'PRIMARY', 'LOW_QUALITY')]).kind).toBe('NO_DIMENSION_EVIDENCE')
+    // one reading on one line is not yet a scale's evidence
+    expect(of([obs('a', 'c1', 'PRIMARY', 'SUPPORTED')]).kind).toBe('NO_DIMENSION_EVIDENCE')
+    // two readings on two lines are
+    expect(of([obs('a', 'c1', 'PRIMARY', 'AMBIGUOUS'), obs('b', 'c2', 'PRIMARY', 'SUPPORTED')]).kind).toBe('DIMENSION_EVIDENCE_INCONCLUSIVE')
+  })
   it('a chain with no label read is still dimension evidence (the lines are there)', () => {
     const c = chain('c9', 'HORIZONTAL', [40, 280], { baselinePx: 12 })
     const r = dimensionEvidenceOf(metricsOf([{ ...c, frameId: F }], []), F)

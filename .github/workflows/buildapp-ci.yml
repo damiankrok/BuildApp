@@ -1165,6 +1165,8 @@ jobs:
           - house: aster-viii
             pkg: stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+            # 005F: its plans print no dimension (its scale is on a 1:500 outline PDF): the refusal must say so
+            metric: "--dimension-evidence NO_DIMENSION_EVIDENCE"
           # 005D: the round-3 blind house whose overall chain a spurious tick split. The total now survives the
           # tick and an overall reading decides the scale (the metric gate); the opening-aware envelope then finds
           # no outline on the plan (its outer walls are piers between glazing), so the plan is refused by name,
@@ -1177,6 +1179,7 @@ jobs:
           - house: galaktyka
             pkg: stage-reports/artifacts/analyzer-005c/holdout/h2-galaktyka/source-package.json
             expect: "refuse:METRIC_RESOLUTION_INCONCLUSIVE"
+            metric: "--dimension-evidence NO_DIMENSION_EVIDENCE"
           # 005E: the round-4 blind houses. Their ground plans' overall dimensions were misread into a false
           # consensus (dabecjach) and a tie (tunbergiach). The scale now matches the printed overall figures;
           # dabecjach then stops at the boundary layer by name (out of this stage's scope), tunbergiach builds
