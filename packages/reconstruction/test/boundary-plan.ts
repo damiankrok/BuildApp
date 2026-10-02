@@ -5,7 +5,7 @@
  */
 import { runLengthBands } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
-import { bandWallThickness, decomposePlan, exteriorTicksOf, planExtent, wallWitness } from '../src/index.js'
+import { bandWallThickness, decomposePlan, extentSidesOf, exteriorTicksOf, planExtent, wallWitness } from '../src/index.js'
 import type { PlanCallout, PlanDecomposition } from '../src/index.js'
 import { CM_PER_PX, WALL, chain, mask, registration } from './plan.js'
 import { BLACK, drawLine, fillRect } from '../../source-cv/test/draw.js'
@@ -38,16 +38,22 @@ export const post = (r: Raster, cx: number, cy: number): void => fillRect(r, cx 
 
 export type Run = { d: PlanDecomposition; builtM2: number }
 /** The plan as the layout pass reads it: sheet wall, witness-checked extent, exterior ticks. */
-export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; cmPerPx?: number; sheetWallPx?: number } = {}): Run {
+export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; cmPerPx?: number; sheetWallPx?: number; extentSides?: boolean; unreadTicks?: { x?: number[]; y?: number[] } } = {}): Run {
   const m = mask(r)
   const bands = runLengthBands(m, BANDS)
   const wallPx = bandWallThickness(bands, WALL)
   const chains = [chain('cx', 'HORIZONTAL', [...xs].sort((a, b) => a - b), { baselinePx: 12 }), chain('cy', 'VERTICAL', [...ys].sort((a, b) => a - b), { baselinePx: 12 })]
   const extent = planExtent(chains, bands, wallPx, wallWitness(bands, wallPx, m))
   if (!extent) throw new Error('the fixture has no frame')
-  const { cmPerPx, sheetWallPx, ...flags } = options
+  const { cmPerPx, sheetWallPx, extentSides, unreadTicks, ...flags } = options
   const reg = cmPerPx === undefined ? registration() : { ...registration(), metresPerPixelX: cmPerPx / 100, metresPerPixelY: cmPerPx / 100 }
-  const d = decomposePlan(m, chains, bands, reg, extent.rect, { callouts, sheetWallPx: sheetWallPx ?? WALL, exteriorTicks: exteriorTicksOf(chains, extent.roles), ...flags })
+  // 005F: the extent's stated sides, as the layout pass gives them (`extentSidesOf`): every fixture runs with the
+  // extent-conflict rule live unless it asks otherwise.
+  const sides = extentSides === false ? [] : extentSidesOf(chains, extent, wallPx)
+  // an unread exterior chain's ticks: the shadow grid takes them, the incumbent grid has no line for them
+  const ticks = exteriorTicksOf(chains, extent.roles)
+  const exteriorTicks = { x: [...ticks.x, ...(unreadTicks?.x ?? [])].sort((a, b) => a - b), y: [...ticks.y, ...(unreadTicks?.y ?? [])].sort((a, b) => a - b) }
+  const d = decomposePlan(m, chains, bands, reg, extent.rect, { callouts, sheetWallPx: sheetWallPx ?? WALL, exteriorTicks, extentSides: sides, ...flags })
   const builtM2 = d.cells.filter((c) => c.classification === 'BUILT').reduce((a, c) => a + (c.rect.x1 - c.rect.x0) * (c.rect.y1 - c.rect.y0), 0) * (cmPerPx === undefined ? M2_PER_PX2 : (cmPerPx / 100) ** 2)
   return { d, builtM2 }
 }

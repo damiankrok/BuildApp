@@ -46,6 +46,7 @@ import type { ExtentProvenance, PlanExtent } from './plan-decomposition.js'
 import { wallWitness } from './plan-extent.js'
 import type { WallWitness } from './plan-extent.js'
 import type { GridLine, PlanCallout, PlanDecomposition, PlanRegion } from './plan-decomposition.js'
+import type { ExtentSideStatement } from './boundary-completion.js'
 import { rectangleRing, ringArea } from './structural-layout.js'
 import type {
   AlternativeGroup,
@@ -298,7 +299,7 @@ export function readPlans(options: StructuralLayoutOptions): { plans: PlanReadin
       // resolver asks for the same one under several merges and faces.
       const shutMouths = chosen === frame && choice?.mouths === 'SHUT'
       const key = `${extent.rect.x0},${extent.rect.y0},${extent.rect.x1},${extent.rect.y1}|${registration.metresPerPixelX},${registration.metresPerPixelY}${shutMouths ? '|mouths-shut' : ''}`
-      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}) })
+      const decomposition = sheet.decompositions.get(key) ?? decomposePlan(mask, chains, bands, registration, extent.rect, { callouts: planCallouts(options.metrics, frame.id), sheetWallPx: wallPx, exteriorTicks: exteriorTicksOf(chains, extent.roles), extentSides: extentSidesOf(chains, extent, wallPx), checkpoint: options.checkpoint, ...(shutMouths ? { shutPocketMouths: true } : {}) })
       sheet.decompositions.set(key, decomposition)
       plans.push({
         frame,
@@ -372,6 +373,41 @@ export function exteriorTicksOf(chains: readonly DimensionChain[], roles: PlanEx
     for (const t of c.ticksPx) (c.axis === 'HORIZONTAL' ? x : y).add(t)
   }
   return { x: [...x].sort((a, b) => a - b), y: [...y].sort((a, b) => a - b) }
+}
+
+/**
+ * 005F (pre-review C): the sides of the plan's extent its exterior dimension chains state. A side is SUPPORTED when an
+ * exterior chain that covers the wall witness ends on it within a wall, on a mark not rejected; STRONG when two such
+ * chains on lines more than one wall apart agree, or one of them closes and carries a reading. A side the extent took
+ * from the walls themselves is stated by nothing. Geometry only: no printed value decides a side.
+ */
+export function extentSidesOf(chains: readonly DimensionChain[], extent: PlanExtent, wallPx: number): ExtentSideStatement[] {
+  const roles = new Map((extent.roles ?? []).map((r) => [r.chainId, r]))
+  const E = extent.rect
+  const sides: Array<{ side: ExtentSideStatement['side']; axis: 'HORIZONTAL' | 'VERTICAL'; at: number; low: boolean; provenance?: string }> = [
+    { side: 'W', axis: 'HORIZONTAL', at: E.x0, low: true, provenance: extent.provenance?.x },
+    { side: 'E', axis: 'HORIZONTAL', at: E.x1, low: false, provenance: extent.provenance?.x },
+    { side: 'N', axis: 'VERTICAL', at: E.y0, low: true, provenance: extent.provenance?.y },
+    { side: 'S', axis: 'VERTICAL', at: E.y1, low: false, provenance: extent.provenance?.y },
+  ]
+  const out: ExtentSideStatement[] = []
+  for (const d of sides) {
+    if (d.provenance === 'WALL_GEOMETRY_EXTENT') continue
+    const stating = chains.filter((c) => {
+      if (c.axis !== d.axis) return false
+      const role = roles.get(c.id)
+      if (!role || role.role !== 'EXTERIOR' || !role.coversWitness) return false
+      const i = d.low ? 0 : c.ticksPx.length - 1
+      if (Math.abs(c.ticksPx[i] - d.at) > wallPx) return false
+      return c.marks?.length === c.ticksPx.length ? c.marks[i].class !== 'REJECTED' : true
+    })
+    if (stating.length === 0) continue
+    const baselines = stating.map((c) => c.baselinePx).sort((a, b) => a - b)
+    const twoLines = baselines.length >= 2 && baselines[baselines.length - 1] - baselines[0] > wallPx
+    const readAndCloses = stating.some((c) => c.closes && c.segments.some((g) => g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED'))
+    out.push({ side: d.side, atPx: round6(d.at), strength: twoLines || readAndCloses ? 'STRONG' : 'SUPPORTED', chainIds: stating.map((c) => c.id).sort() })
+  }
+  return out
 }
 
 /** The opening callouts printed on one plan, as the decomposition weighs them: where each sits and every width it might say. */
@@ -459,6 +495,19 @@ export function alignmentTargets(base: PlanReading): Array<{ id: string; rect: P
   const strips = base.decomposition.envelope?.outline ? stripsOf(built, (r) => ({ w: (r.rect.x1 - r.rect.x0) * (base.registration?.metresPerPixelX ?? 1), h: (r.rect.y1 - r.rect.y0) * (base.registration?.metresPerPixelY ?? 1) })) : new Set<PlanRegion>()
   for (const region of built) if (!strips.has(region)) out.push({ id: region.id, rect: region.rect })
   if (base.decomposition.envelope) out.push({ id: 'envelope', rect: base.decomposition.envelope.rect })
+  // 005F: a room the boundary completed against the house (`boundary-completion.ts`) widens the envelope, and an
+  // upper storey over the house is then no longer the envelope's shape. The house without its attached rooms is the
+  // other reading, named as such: which of the two the upper plan stands on is the walls' question, as for any target.
+  const tolerance = base.wallPx
+  const attached = (base.decomposition.boundary?.completions ?? []).filter((p) => p.decision === 'ACCEPTED' && p.kind === 'ATTACHED_ROOM').map((p) => p.rect)
+  const inside = (r: PixelRect, c: PixelRect): boolean => r.x0 >= c.x0 - tolerance && r.x1 <= c.x1 + tolerance && r.y0 >= c.y0 - tolerance && r.y1 <= c.y1 + tolerance
+  const house = built.filter((r) => !attached.some((c) => inside(r.rect, c)))
+  if (base.decomposition.envelope && attached.length > 0 && house.length > 0 && house.length < built.length) {
+    out.push({
+      id: 'envelope-without-attached',
+      rect: { x0: Math.min(...house.map((r) => r.rect.x0)), y0: Math.min(...house.map((r) => r.rect.y0)), x1: Math.max(...house.map((r) => r.rect.x1)), y1: Math.max(...house.map((r) => r.rect.y1)) },
+    })
+  }
   return out
 }
 

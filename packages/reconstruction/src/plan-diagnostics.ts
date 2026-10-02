@@ -80,6 +80,9 @@ function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']>
     policies: { strictAreaM2: b.policies.strict.areaM2, strictAccepted: b.policies.strict.accepted, exclusionAreaM2: b.policies.exclusion.areaM2, exclusionAccepted: b.policies.exclusion.accepted, disagree: b.policies.disagree },
     bodies: b.bodies.map((x) => ({ relation: x.relation, built: x.built, enclosed: x.enclosed, areaM2: x.areaM2, rect: rect(x.rect), junctionWallShare: x.junction.wallShare, sideWallShare: x.sides.wallShare, ...(x.mouth ? { mouthM: x.mouth.widthM } : {}) })),
     shutGarageMouths: b.shutGarageMouths,
+    // 005F: recorded only where there is something to say, so a plan with none digests as it did.
+    ...(b.extentConflicts.length > 0 ? { extentConflicts: b.extentConflicts.map((c) => ({ side: c.side, strength: c.strength, chainIds: c.chainIds, extentPx: c.extentPx, boxPx: c.boxPx, gapM: c.gapM, gapWalls: c.gapWalls, stretches: c.stretches, decision: c.decision, why: c.why })) } : {}),
+    ...(b.completions.length > 0 ? { completions: b.completions.map((p) => ({ kind: p.kind, decision: p.decision, reason: p.reason, rectBefore: rect(p.rectBefore), areaBeforeM2: p.areaBeforeM2, rect: rect(p.rect), areaM2: p.areaM2, junction: p.junction, sides: p.sides, evidence: p.evidence, weakGaps: p.weakGaps, ...(p.side ? { side: p.side } : {}) })) } : {}),
     why: b.why,
   }
 }

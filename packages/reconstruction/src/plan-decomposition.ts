@@ -44,6 +44,8 @@ import type { BoundaryGap, GapCallout, GapClass, SolidLayer, WallLine } from './
 import { outlineSupport, solveOutline } from './boundary-outline.js'
 import type { OutlineEdge, OutlineGrid, OutlineResult, OutlineSupport } from './boundary-outline.js'
 import { classifyBodies } from './boundary-bodies.js'
+import { completeBoundary } from './boundary-completion.js'
+import type { CompletionPart, ExtentConflict, ExtentSideStatement } from './boundary-completion.js'
 import type { AttachedBody } from './boundary-bodies.js'
 
 /** Where a grid line came from. The two kinds are independent, and a line with both is as certain as a plan gets. */
@@ -312,9 +314,15 @@ export type PlanDecompositionOptions = {
   openingAware?: boolean
   /** Told at each boundary line read and each opening judged, for progress and cancellation. Write-only. */
   checkpoint?: Checkpoint
+  /**
+   * 005F: the sides of the plan's extent its exterior dimension chains state, and how strongly (`extentSidesOf`). A side
+   * the box stops materially inside is an ENVELOPE_EXTENT_CONFLICT (`boundary-completion.ts`): recorded always, and
+   * the only way a part beyond the box joined through a door or a drawn line may be judged an attached room.
+   */
+  extentSides?: readonly ExtentSideStatement[]
 }
 
-type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint'>>
+type CoreOptions = Required<Omit<PlanDecompositionOptions, 'sheetWallPx' | 'exteriorTicks' | 'openingAware' | 'checkpoint' | 'extentSides'>>
 
 const DEFAULTS: CoreOptions = {
   snapPx: 5,
@@ -1483,7 +1491,7 @@ export function decomposePlan(
   const incumbent = decomposeCore(mask, chains, bands, registration, extent, options)
   // A plan with no scale of its own (a unit placeholder) can state no opening width: its boundary is not read.
   if (options.openingAware === false || registration.confidence <= 0 || incumbent.linesX.length < 2 || incumbent.linesY.length < 2) return incumbent
-  const extension = boundaryExtension(mask, bands, registration, extent, incumbent, options)
+  const extension = boundaryExtension(mask, bands, registration, extent, incumbent, options, chains)
   if (!extension.override) return { ...incumbent, boundary: extension.record }
   const outlined = decomposeCore(mask, chains, bands, registration, extent, options, extension.override)
   return { ...outlined, boundary: extension.record }
@@ -1495,6 +1503,14 @@ export type OutlineOverride = {
   linesY: GridLine[]
   outline: OutlineResult
   why: string
+  /**
+   * 005F: completions the boundary accepted (`boundary-completion.ts`), each a set of cells of this grid, and — when
+   * nothing beyond the box was adopted — the box reading's own built regions, which stand as they were: a completion
+   * extends the body it ends only along that body's whole side, and is otherwise a body of its own. The incumbent
+   * bodies are never re-tiled (pre-review C P0-2: a re-tiling merged a garage into the house and lost a storey).
+   */
+  completions?: Array<Array<{ ix: number; iy: number }>>
+  seeds?: PixelRect[]
 }
 
 function decomposeCore(
@@ -1597,8 +1613,12 @@ function decomposeCore(
       // whatever thin ink it carries — its solid ink is wall, its bridges are openings, never wall.
       const cellIn = (ix: number, iy: number): boolean => ix >= 0 && iy >= 0 && ix < nx && iy < ny && override.outline.inside[iy * nx + ix] === 1
       const shut = (e: EdgeClosure, o: OutlineEdge): EdgeClosure => ({ wall: round6(Math.max(e.wall, o.solid)), line: e.line, opening: round6(Math.max(e.opening, Math.min(1 - Math.max(e.wall, o.solid), o.bridged))), closure: 1 })
-      for (let ix = 0; ix <= nx; ix += 1) for (let iy = 0; iy < ny; iy += 1) if (cellIn(ix - 1, iy) !== cellIn(ix, iy) && override.outline.vEdge[ix][iy].closed) vEdge[ix][iy] = shut(vEdge[ix][iy], override.outline.vEdge[ix][iy])
-      for (let iy = 0; iy <= ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (cellIn(ix, iy - 1) !== cellIn(ix, iy) && override.outline.hEdge[iy][ix].closed) hEdge[iy][ix] = shut(hEdge[iy][ix], override.outline.hEdge[iy][ix])
+      // 005F: with completions, the border of what is built — the box reading's own cells and the completed parts — is
+      // decided, and every edge on it is shut: the box reading's cells were never the outline's, so its edge there may
+      // not be closed, and a re-cut must not lose a room the box reading built (pre-review C P0-2).
+      const decided = override.completions !== undefined && override.completions.length > 0
+      for (let ix = 0; ix <= nx; ix += 1) for (let iy = 0; iy < ny; iy += 1) if (cellIn(ix - 1, iy) !== cellIn(ix, iy) && (decided || override.outline.vEdge[ix][iy].closed)) vEdge[ix][iy] = shut(vEdge[ix][iy], override.outline.vEdge[ix][iy])
+      for (let iy = 0; iy <= ny; iy += 1) for (let ix = 0; ix < nx; ix += 1) if (cellIn(ix, iy - 1) !== cellIn(ix, iy) && (decided || override.outline.hEdge[iy][ix].closed)) hEdge[iy][ix] = shut(hEdge[iy][ix], override.outline.hEdge[iy][ix])
     }
     if (withEvidence) {
       // A shut bay mouth shuts every edge of its far line between its two
@@ -1848,7 +1868,9 @@ function decomposeCore(
     }
   }
 
-  const regions = mergeRegions(cells, linesX, linesY, registration, nx, ny)
+  const merged = mergeRegions(cells, linesX, linesY, registration, nx, ny)
+  // 005F: with completions, the bodies the reading had stand as they were and the completions are laid against them.
+  const regions = override?.completions && override.completions.length > 0 ? stableRegions(merged, cells, linesX, linesY, registration, nx, ny, override) : merged
   if (regions.filter((r) => r.classification === 'BUILT').length === 0) {
     unresolved.push({ what: 'any built mass on this plan', reason: 'the flood fill reached every cell of the structural grid: no part of the plan is enclosed' })
   }
@@ -1935,6 +1957,109 @@ function mergeRegions(
     })
   }
   return regions.sort((a, b) => (b.rect.x1 - b.rect.x0) * (b.rect.y1 - b.rect.y0) - (a.rect.x1 - a.rect.x0) * (a.rect.y1 - a.rect.y0) || a.id.localeCompare(b.id))
+}
+
+/**
+ * 005F: the BUILT regions of a plan re-cut with completions (`OutlineOverride.completions`), without re-tiling what
+ * the reading already had (pre-review C P0-2).
+ *
+ *   base         the box reading's own built regions (`seeds`, when nothing beyond the box was adopted — each one a
+ *                union of this finer grid's cells), or else the 005C reading's own largest-first tiling of its cells;
+ *   completion   a completion that is a rectangle sharing one whole side with exactly one base region extends it (a
+ *                garage's end, the width of the garage); any other is tiled on its own, a body against the house;
+ *   leftovers    built cells neither covers are tiled largest-first, as before.
+ *
+ * The other classes' regions are `mergeRegions`' own. The result is sorted as `mergeRegions` sorts.
+ */
+function stableRegions(merged: readonly PlanRegion[], cells: readonly PlanCell[], linesX: readonly GridLine[], linesY: readonly GridLine[], registration: CoordinateRegistration, nx: number, ny: number, override: OutlineOverride): PlanRegion[] {
+  const key = (c: { ix: number; iy: number }): string => `${c.ix}:${c.iy}`
+  const byKey = new Map(cells.map((c) => [key(c), c]))
+  const isBuilt = (c: { ix: number; iy: number }): boolean => byKey.get(key(c))?.classification === 'BUILT'
+  const toMetric = (rect: PixelRect): PlanRegion['metric'] => {
+    const u0 = (rect.x0 - registration.originPx.x) * registration.metresPerPixelX
+    const u1 = (rect.x1 - registration.originPx.x) * registration.metresPerPixelX
+    const v0 = (rect.y0 - registration.originPx.y) * registration.metresPerPixelY
+    const v1 = (rect.y1 - registration.originPx.y) * registration.metresPerPixelY
+    return { x0: round6(Math.min(u0, u1)), z0: round6(Math.min(v0, v1)), x1: round6(Math.max(u0, u1)), z1: round6(Math.max(v0, v1)) }
+  }
+  const centreIn = (c: { ix: number; iy: number }, r: PixelRect): boolean => {
+    const cx = (linesX[c.ix].px + linesX[c.ix + 1].px) / 2
+    const cy = (linesY[c.iy].px + linesY[c.iy + 1].px) / 2
+    return cx >= r.x0 && cx <= r.x1 && cy >= r.y0 && cy <= r.y1
+  }
+  const rectOfCells = (members: ReadonlyArray<{ ix: number; iy: number }>): PixelRect => ({
+    x0: Math.min(...members.map((m) => linesX[m.ix].px)),
+    y0: Math.min(...members.map((m) => linesY[m.iy].px)),
+    x1: Math.max(...members.map((m) => linesX[m.ix + 1].px)),
+    y1: Math.max(...members.map((m) => linesY[m.iy + 1].px)),
+  })
+  const isRectangle = (members: ReadonlyArray<{ ix: number; iy: number }>): boolean => {
+    const ixs = members.map((m) => m.ix)
+    const iys = members.map((m) => m.iy)
+    const w = Math.max(...ixs) - Math.min(...ixs) + 1
+    const h = Math.max(...iys) - Math.min(...iys) + 1
+    return new Set(members.map(key)).size === w * h
+  }
+  const regionOf = (members: Array<{ ix: number; iy: number }>, why: string, rect: PixelRect = rectOfCells(members)): PlanRegion => {
+    const sorted = [...members].sort((a, b) => a.iy - b.iy || a.ix - b.ix)
+    return {
+      id: `region-built-${sorted[0].ix}-${sorted[0].iy}`,
+      classification: 'BUILT',
+      rect: { x0: round6(rect.x0), y0: round6(rect.y0), x1: round6(rect.x1), y1: round6(rect.y1) },
+      metric: toMetric(rect),
+      cells: sorted,
+      confidence: round6(Math.min(...sorted.map((m) => byKey.get(key(m))?.confidence ?? 0))),
+      why,
+    }
+  }
+  const tile = (members: ReadonlyArray<{ ix: number; iy: number }>, why: string): PlanRegion[] => {
+    const keep = new Set(members.map(key))
+    const only = cells.map((c) => (keep.has(key(c)) ? c : { ...c, classification: 'OUTSIDE' as CellClass }))
+    return mergeRegions(only, linesX, linesY, registration, nx, ny)
+      .filter((r) => r.classification === 'BUILT')
+      .map((r) => ({ ...r, why: `${r.why}; ${why}` }))
+  }
+  const completionCells = new Set((override.completions ?? []).flat().map(key))
+  const claimed = new Set<string>()
+  const base: PlanRegion[] = []
+  if (override.seeds) {
+    for (const rect of override.seeds) {
+      const members = cells.filter((c) => centreIn(c, rect) && !claimed.has(key(c)))
+      if (members.length === 0) continue
+      for (const m of members) claimed.add(key(m))
+      const built = members.filter(isBuilt)
+      if (built.length === members.length) base.push(regionOf(built.map((c) => ({ ix: c.ix, iy: c.iy })), 'a body of the box reading, as it was', rect))
+      else if (built.length > 0) base.push(...tile(built, 'what the re-cut still builds of a body of the box reading'))
+    }
+  } else {
+    const reading = cells.filter((c) => c.classification === 'BUILT' && !completionCells.has(key(c)))
+    for (const c of reading) claimed.add(key(c))
+    base.push(...tile(reading, 'the reading as it was'))
+  }
+  const extra: PlanRegion[] = []
+  for (const group of override.completions ?? []) {
+    const members = group.filter((m) => isBuilt(m) && !claimed.has(key(m)))
+    if (members.length === 0) continue
+    for (const m of members) claimed.add(key(m))
+    const g = rectOfCells(members)
+    // a rectangle sharing one whole side of exactly one body extends it
+    const along = isRectangle(members)
+      ? base.filter((r) => {
+          const R = r.rect
+          const eq = (a: number, b: number): boolean => Math.abs(a - b) < 0.5
+          return (eq(g.x0, R.x0) && eq(g.x1, R.x1) && (eq(g.y0, R.y1) || eq(g.y1, R.y0))) || (eq(g.y0, R.y0) && eq(g.y1, R.y1) && (eq(g.x0, R.x1) || eq(g.x1, R.x0)))
+        })
+      : []
+    if (along.length === 1) {
+      const r = along[0]
+      const rect = { x0: Math.min(r.rect.x0, g.x0), y0: Math.min(r.rect.y0, g.y0), x1: Math.max(r.rect.x1, g.x1), y1: Math.max(r.rect.y1, g.y1) }
+      Object.assign(r, { rect: { x0: round6(rect.x0), y0: round6(rect.y0), x1: round6(rect.x1), y1: round6(rect.y1) }, metric: toMetric(rect), cells: [...r.cells, ...members].sort((a, b) => a.iy - b.iy || a.ix - b.ix), why: `${r.why}; completed along its whole side` })
+    } else extra.push(...tile(members, 'a completion against the house'))
+  }
+  const leftovers = cells.filter((c) => c.classification === 'BUILT' && !claimed.has(key(c)))
+  const rest = leftovers.length > 0 ? tile(leftovers, 'left over') : []
+  const area = (r: PlanRegion): number => (r.rect.x1 - r.rect.x0) * (r.rect.y1 - r.rect.y0)
+  return [...base, ...extra, ...rest, ...merged.filter((r) => r.classification !== 'BUILT')].sort((a, b) => area(b) - area(a) || a.id.localeCompare(b.id))
 }
 
 /**
@@ -2403,6 +2528,9 @@ export type BoundaryRecord = {
   bodies: AttachedBody[]
   /** Open-mouthed garages this reading shut (only in the reading that shuts pocket mouths). */
   shutGarageMouths: number
+  /** 005F: the extent's stated sides the box stops materially inside, and the parts judged as completions. */
+  extentConflicts: ExtentConflict[]
+  completions: CompletionPart[]
   why: string
 }
 
@@ -2497,6 +2625,7 @@ export function boundaryExtension(
   extent: PixelRect,
   incumbent: PlanDecomposition,
   options: PlanDecompositionOptions,
+  chains: readonly DimensionChain[] = [],
 ): { record: BoundaryRecord; override?: OutlineOverride; walls: { x: WallLine[]; y: WallLine[] }; lines: { x: number[]; y: number[] }; outline: OutlineResult } {
   const opt = { ...DEFAULTS, ...options }
   const wallPx = options.sheetWallPx ?? bandWallThickness(bands, opt.fallbackWallPx)
@@ -2730,8 +2859,35 @@ export function boundaryExtension(
     outline = solveOutline(shutGrid, { onJudge })
     chosen = adopt(outline, forced)
   }
-  const { extensions, final } = chosen
+  const { extensions } = chosen
+  let final = chosen.final
   const anyAccepted = chosen.any
+  // 005F: the extent's stated sides against the box, and the parts the outline encloses that the reading does not
+  // build, judged as attached rooms or box completions (`boundary-completion.ts`). Pixels, walls and chain geometry
+  // only: no printed value, no published figure.
+  const completion = completeBoundary({
+    linesX: linesX.map((l) => l.px),
+    linesY: linesY.map((l) => l.px),
+    wallsX,
+    wallsY,
+    mppX,
+    mppY,
+    wallPx,
+    outline,
+    strict,
+    inA,
+    builtA,
+    accepted: chosen.accepted,
+    box: env?.rect ?? null,
+    extent,
+    solid,
+    sides: options.extentSides ?? [],
+    chains,
+  })
+  const completed = completion.parts.filter((p) => p.decision === 'ACCEPTED')
+  if (completed.length > 0) {
+    final = final.map((v, i) => (v === 1 || completion.accepted[i] === 1 ? 1 : 0))
+  }
   const supportOf = (inside: Uint8Array, result: OutlineResult = outline): OutlineSupport => outlineSupport(grid, { ...result, inside })
   const strictM2 = round6(areaOf(strictAdopted.final))
   const exclusionM2 = round6(areaOf(reading.final))
@@ -2757,14 +2913,19 @@ export function boundaryExtension(
     },
     bodies,
     shutGarageMouths: garages.length,
+    extentConflicts: completion.conflicts,
+    completions: completion.parts,
     why: !env
       ? 'the plan has no long-band box to weigh the outline against'
       : anyAccepted
-        ? `the outline continues the box's interior past its edge (${extensions.filter((e) => e.accepted).length} component${extensions.filter((e) => e.accepted).length === 1 ? '' : 's'}): the plan is cut on the outline`
-        : 'the outline adds nothing the box leaves open: the box stands',
+        ? `the outline continues the box's interior past its edge (${extensions.filter((e) => e.accepted).length} component${extensions.filter((e) => e.accepted).length === 1 ? '' : 's'}): the plan is cut on the outline${completed.length > 0 ? `, and ${completed.length} part${completed.length === 1 ? '' : 's'} it encloses completed` : ''}`
+        : completed.length > 0
+          ? `the box stands, and ${completed.length} part${completed.length === 1 ? '' : 's'} the outline encloses ${completed.length === 1 ? 'is' : 'are'} completed (${completed.map((p) => p.kind.toLowerCase().replace('_', ' ')).join(', ')}): the plan is cut on the outline with the box's bodies as they were`
+          : 'the outline adds nothing the box leaves open: the box stands',
   }
   const debug = { walls: { x: wallsX, y: wallsY }, lines: { x: linesX.map((l) => l.px), y: linesY.map((l) => l.px) }, outline }
-  if (!anyAccepted) return { record, ...debug }
+  if (!anyAccepted && completed.length === 0) return { record, ...debug }
+  const completions = completed.map((p) => p.cells)
   return {
     ...debug,
     record,
@@ -2772,7 +2933,9 @@ export function boundaryExtension(
       linesX,
       linesY,
       outline: { ...outline, inside: final },
-      why: `the opening-aware outline: wall-thick ink and ${outline.bridged.strong.length + outline.bridged.weak.length} bridged opening${outline.bridged.strong.length + outline.bridged.weak.length === 1 ? '' : 's'} enclose ${final.reduce((a, v) => a + v, 0)} cells, continuing the long-band box across an edge it could not support`,
+      why: `the opening-aware outline: wall-thick ink and ${outline.bridged.strong.length + outline.bridged.weak.length} bridged opening${outline.bridged.strong.length + outline.bridged.weak.length === 1 ? '' : 's'} enclose ${final.reduce((a, v) => a + v, 0)} cells, ${anyAccepted ? 'continuing the long-band box across an edge it could not support' : 'the long-band box and the parts completed against it'}`,
+      ...(completions.length > 0 ? { completions } : {}),
+      ...(completions.length > 0 && !anyAccepted ? { seeds: incumbent.regions.filter((r) => r.classification === 'BUILT').map((r) => r.rect) } : {}),
     },
   }
 }
