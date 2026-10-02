@@ -122,6 +122,10 @@ export type LatticeJson = {
   mergedCount?: number
   emittedMass?: number
   asReadStability?: { stable: boolean; bracket: string[] }
+  /** 005F: the glyph counts, the ambiguity tail (a record, never a reading) and what the segmentation tried. */
+  countAmbiguity?: { asRead: number; alternatives: number[]; decisive: string[]; widthAmbiguous: boolean; rivalP: number }
+  tail?: Array<{ text: string; valueCm: number; logP: number; imageScore: number; nonTop: Array<{ index: number; top: string; chosen: string; ratio: number }>; pathIds: string[] }>
+  segmentation?: { style: { pitch: number | null; samples: number }; counts: Array<{ variant: string; reader: number; anchor: number; alternatives: number[]; decisive: boolean; widthAmbiguous: boolean }>; counterCutsMoved: number; counterCutsPruned: number; segmentations: number; cellsScored: number; truncated: number }
   cache?: string
 }
 export type MetricsJson = {
@@ -166,6 +170,9 @@ export type PlanJson = {
     extensions?: Array<{ cells: number; areaM2: number; continuesAcrossM: number; accepted: boolean }>
     policies?: Json
     bodies?: Array<{ relation: string; built: boolean; enclosed: boolean; areaM2: number; rect: Rect; junctionWallShare: number; sideWallShare: number; mouthM?: number }>
+    /** 005F: the extent's stated sides the box stops materially inside, and the completions judged. */
+    extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; decision: string; why: string }>
+    completions?: Array<{ kind: string; decision: string; reason: string; rectBefore: Rect; areaBeforeM2: number; rect: Rect; areaM2: number; junction: Json; sides: Json; evidence: Json; weakGaps?: Json; side?: string }>
     why?: string
   }
   masses: Array<{ id: string; rect: Rect }>
@@ -195,6 +202,7 @@ export type DecisionEvent = {
 export const TIMELINE_STAGES = [
   'SOURCE',
   'DIMENSION_TICK_CLASSIFICATION',
+  'GLYPH_COUNT_HYPOTHESES',
   'OCR_SEQUENCE_CANDIDATES',
   'OCR_READING',
   'LABEL_BINDING',
@@ -205,6 +213,7 @@ export const TIMELINE_STAGES = [
   'FRAME_SELECTION',
   'EXTENT',
   'ENVELOPE',
+  'ENVELOPE_EXTENT_CONFLICT',
   'BODIES',
   'FIRST_SUCCESS_CHALLENGE',
   'PLAN_RESOLUTION',

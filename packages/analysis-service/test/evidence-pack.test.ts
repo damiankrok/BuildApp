@@ -21,7 +21,7 @@ import { join, relative } from 'node:path'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { fileByteCache } from '@buildapp/source-package'
 import { LARCHFIELD, syntheticPublisher } from '@buildapp/synthetic-drawings'
-import { FORBIDDEN_IN_SVG, PACK_BOUNDS, PACK_FILES, buildEvidencePack, firstDivergence } from '@buildapp/evidence-pack'
+import { FORBIDDEN_IN_SVG, PACK_BOUNDS, PACK_FILES, TIMELINE_STAGES, buildEvidencePack, firstDivergence } from '@buildapp/evidence-pack'
 import type { DecisionEvent } from '@buildapp/evidence-pack'
 import { packRunDir, readRunDir } from '../../evidence-pack/scripts/run-dir.js'
 import { runAnalysis } from '../src/index.js'
@@ -249,5 +249,41 @@ describe('Evidence Pack: the OCR extension (BUILDPLAN-ANALYZER-005E §23)', () =
     const before = [ev(1, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:2301|2101,2601'), ev(2, 'OCR_READING', 'label:a', 'READ 2301'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.67')]
     const after = [ev(1, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:2380|2301,2360'), ev(2, 'OCR_READING', 'label:a', 'READ 2380'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.81')]
     expect(firstDivergence(before, after)).toMatchObject({ firstDivergence: 'OCR_SEQUENCE_CANDIDATES', object: 'ink:a:HORIZONTAL' })
+  })
+})
+
+describe('Evidence Pack: the glyph-count and extent-conflict layers (BUILDPLAN-ANALYZER-005F)', () => {
+  const ev = (seq: number, stage: DecisionEvent['stage'], objectId: string, decision: string): DecisionEvent => ({ eventId: `e${seq}`, seq, stage, objectId, decision, reason: '', supportIds: [], conflictIds: [], reversible: true, downstream: [] })
+
+  it('the glyph count is decided before the candidate set it bounds, and the extent conflict between the envelope and the bodies', () => {
+    const at = (s: DecisionEvent['stage']): number => TIMELINE_STAGES.indexOf(s)
+    expect(at('GLYPH_COUNT_HYPOTHESES')).toBeLessThan(at('OCR_SEQUENCE_CANDIDATES'))
+    expect(at('ENVELOPE')).toBeLessThan(at('ENVELOPE_EXTENT_CONFLICT'))
+    expect(at('ENVELOPE_EXTENT_CONFLICT')).toBeLessThan(at('BODIES'))
+  })
+
+  it('a changed glyph count is the first divergence, ahead of the candidates, the reading and the scale it changes', () => {
+    const before = [ev(1, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:1011|1017'), ev(2, 'OCR_READING', 'label:a', 'READ 1011'), ev(3, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.67')]
+    const after = [ev(1, 'GLYPH_COUNT_HYPOTHESES', 'ink:a:HORIZONTAL', 'COUNTS:3|4|DECIDED'), ev(2, 'OCR_SEQUENCE_CANDIDATES', 'ink:a:HORIZONTAL', 'CANDIDATES:200|1011'), ev(3, 'OCR_READING', 'label:a', 'READ 200'), ev(4, 'SCALE_HYPOTHESIS', 'scale', 'SELECTED 2.00')]
+    expect(firstDivergence(before, after)).toMatchObject({ firstDivergence: 'GLYPH_COUNT_HYPOTHESES', object: 'ink:a:HORIZONTAL', before: 'ABSENT' })
+  })
+
+  it('a completion judged differently is the first divergence, ahead of the bodies and the masses it changes', () => {
+    const before = [ev(1, 'ENVELOPE', 'envelope:f', 'BOX:0,0,600,700'), ev(2, 'ENVELOPE_EXTENT_CONFLICT', 'extent-conflict:f:E', 'E:ZONE'), ev(3, 'BODIES', 'body:f:0:BAY', 'NOT_BUILT')]
+    const after = [ev(1, 'ENVELOPE', 'envelope:f', 'BOX:0,0,600,700'), ev(2, 'ENVELOPE_EXTENT_CONFLICT', 'extent-conflict:f:E', 'E:ACCEPTED'), ev(3, 'ENVELOPE_EXTENT_CONFLICT', 'completion:f:0:ATTACHED_ROOM', 'ACCEPTED'), ev(4, 'BODIES', 'body:f:0:BAY', 'BUILT')]
+    expect(firstDivergence(before, after)).toMatchObject({ firstDivergence: 'ENVELOPE_EXTENT_CONFLICT', object: 'extent-conflict:f:E', before: 'E:ZONE', after: 'E:ACCEPTED' })
+  })
+
+  it('each label’s lattice carries its glyph counts, the plan’s style, what the segmentation tried, and a tail marked as such', () => {
+    const p = packRunDir(off, join(root, 'pack-005f'), 'larchfield', { versions: {} }).pack
+    const ocr = JSON.parse(String(p.files.get('07-ocr-labels.json'))) as { lattices: Array<Record<string, unknown>> }
+    expect(ocr.lattices.length).toBeGreaterThan(0)
+    for (const l of ocr.lattices) {
+      for (const key of ['countHypotheses', 'style', 'segmentation', 'tail']) expect(l, `${String(l.id)} ${key}`).toHaveProperty(key)
+      for (const t of l.tail as Array<{ origin: string }>) expect(t.origin).toBe('AMBIGUITY_TAIL')
+    }
+    // the layers are recorded only where something was decided there: every event of them names a known object
+    for (const e of p.timeline.filter((x) => x.stage === 'GLYPH_COUNT_HYPOTHESES')) expect(e.decision).toMatch(/^COUNTS:/)
+    for (const e of p.timeline.filter((x) => x.stage === 'ENVELOPE_EXTENT_CONFLICT')) expect(e.objectId).toMatch(/^(extent-conflict|completion):/)
   })
 })

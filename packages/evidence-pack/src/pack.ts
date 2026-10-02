@@ -87,6 +87,9 @@ const markIdOf = (chainId: string, atPx: number): string => `tick:${chainId}:${M
 const labelIdOf = (o: Pick<ObservationJson, 'chainId' | 'orientation' | 'rawText'>): string => `label:${o.chainId}:${o.orientation}:${o.rawText}`
 const round = (v: number, d = 4): number => Math.round(v * 10 ** d) / 10 ** d
 const rectText = (r: Rect | null | undefined): string => (r ? `${round(r.x0, 1)},${round(r.y0, 1)},${round(r.x1, 1)},${round(r.y1, 1)}` : 'none')
+/** 005F: the strip between the box's face and the extent's stated side, across the extent. */
+const stripOf = (c: { side: string; extentPx: number; boxPx: number }, extent: Rect): Rect =>
+  c.side === 'W' || c.side === 'E' ? { x0: Math.min(c.extentPx, c.boxPx), x1: Math.max(c.extentPx, c.boxPx), y0: extent.y0, y1: extent.y1 } : { x0: extent.x0, x1: extent.x1, y0: Math.min(c.extentPx, c.boxPx), y1: Math.max(c.extentPx, c.boxPx) }
 const json = (v: unknown): string => stableJson(v)
 
 /** Keep the first `k`, and say how many more there were. */
@@ -332,6 +335,10 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
           mergedCount: l.mergedCount ?? null,
           emittedMass: l.emittedMass ?? null,
           asReadStability: l.asReadStability ?? null,
+          countHypotheses: l.countAmbiguity ?? null,
+          style: l.segmentation?.style ?? null,
+          segmentation: l.segmentation ? { counts: l.segmentation.counts, counterCutsMoved: l.segmentation.counterCutsMoved, counterCutsPruned: l.segmentation.counterCutsPruned, segmentations: l.segmentation.segmentations, cellsScored: l.segmentation.cellsScored, truncated: l.segmentation.truncated } : null,
+          tail: (l.tail ?? []).map((q) => ({ text: q.text, valueCm: q.valueCm, imageScore: q.imageScore, nonTop: q.nonTop.length, segmentation: q.pathIds[0] ?? null, origin: 'AMBIGUITY_TAIL' })),
           span: o ? { observationId: o.id, chainId: o.chainId, from: o.fromPx, to: o.toPx, spanPx: o.spanPx } : null,
           selected: chosen ? { by: chosen.by, text: chosen.text ?? null, valueCm: chosen.valueCm ?? null, imageScore: chosen.imageScore ?? null, imageRank: chosen.imageRank ?? null, metricSupportResidualPx: chosen.metricResidualPx ?? null } : null,
           refutedBy: o?.ocr?.refutedBy ?? null,
@@ -363,6 +370,15 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       if (!primary || seen.has(key)) continue
       seen.add(key)
       const l = o.ocr ? latticeOf.get(o.ocr.latticeId) : undefined
+      // 005F: an ink whose glyph count the plan's style changed, or that kept another count as a hypothesis — recorded
+      // only then, so an ink read at the reader's own count (and every pre-005F run) has no event here.
+      const counts = l?.segmentation?.counts ?? []
+      const countDecided = counts.some((c) => c.decisive || c.alternatives.length > 0) || l?.countAmbiguity?.widthAmbiguous === true
+      if (l && countDecided) {
+        const alternatives = [...new Set(counts.flatMap((c) => c.alternatives))].sort((a, b) => a - b)
+        const decisive = counts.filter((c) => c.decisive).map((c) => `${c.variant} ${c.reader}→${c.anchor}`)
+        event('GLYPH_COUNT_HYPOTHESES', key, `COUNTS:${l.countAmbiguity?.asRead ?? '?'}|${alternatives.join(',')}${decisive.length > 0 ? '|DECIDED' : ''}${l.countAmbiguity?.widthAmbiguous ? '|WIDTH_AMBIGUOUS' : ''}`, `${decisive.length > 0 ? `the plan's style (${l.segmentation?.style.pitch ?? '—'} of the cap, ${l.segmentation?.style.samples ?? 0} samples) ruled the reader's count out: ${decisive.join(', ')}` : 'the reader\'s count kept'}${alternatives.length > 0 ? `; other counts kept as hypotheses: ${alternatives.join(', ')}` : ''}${l.countAmbiguity?.rivalP ? `; another count holds ${l.countAmbiguity.rivalP} of the values` : ''}`, { supportIds: [o.textRegionId] })
+      }
       const asRead = l ? l.asRead : o.rawText
       const others = l ? l.sequences.filter((q) => !q.asRead).map((q) => q.text) : (o.valueAlternatives ?? []).map((a) => a.text)
       const set = [...new Set(others)].sort()
@@ -473,12 +489,18 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       if (selected.envelope) s.rect(selected.envelope.x0, selected.envelope.y0, selected.envelope.x1, selected.envelope.y1, { stroke: COLOURS.envelope, width: 2.5 }, 'envelope-long-band-box')
       for (const r of selected.regions ?? []) s.rect(r.rect.x0, r.rect.y0, r.rect.x1, r.rect.y1, { stroke: r.cls === 'BUILT' ? COLOURS.body : COLOURS.QUESTIONABLE, width: 1.5, dash: '3 2' }, r.id)
     }
+    // 005F: the extent's stated sides against the box: the extent and the box per side, the strip between them, and
+    // what was decided there (recorded only where a conflict was raised).
+    const conflicts = (selected?.boundary?.extentConflicts ?? []).map((c) => ({ ...c, missingStrip: selected ? stripOf(c, selected.extent) : null }))
+    for (const c of conflicts) if (c.missingStrip) s.rect(c.missingStrip.x0, c.missingStrip.y0, c.missingStrip.x1, c.missingStrip.y1, { stroke: c.decision === 'ACCEPTED' ? COLOURS.body : c.decision === 'RECORDED' ? COLOURS.ALTERNATIVE : COLOURS.QUESTIONABLE, width: 1.5, dash: '5 3' }, `conflict-${c.side}`, { decision: c.decision, strength: c.strength })
     files.set('11-envelope-candidates.svg', s.render())
-    files.set('11-envelope-candidates.json', json({ frameId: selected?.frameId ?? null, longBandBox: selected?.envelope ?? null, boundary: selected?.boundary ? { accepted: selected.boundary.accepted, candidates: selected.boundary.candidates ?? [], extensions: selected.boundary.extensions ?? [], policies: selected.boundary.policies ?? null, gaps: selected.boundary.gaps ?? {}, why: selected.boundary.why ?? null } : null, cells: { total: selected?.cells?.length ?? 0, enclosed: selected?.cells?.filter((c) => c.enclosed).length ?? 0 } }))
+    files.set('11-envelope-candidates.json', json({ frameId: selected?.frameId ?? null, longBandBox: selected?.envelope ?? null, boundary: selected?.boundary ? { accepted: selected.boundary.accepted, candidates: selected.boundary.candidates ?? [], extensions: selected.boundary.extensions ?? [], policies: selected.boundary.policies ?? null, gaps: selected.boundary.gaps ?? {}, why: selected.boundary.why ?? null } : null, cells: { total: selected?.cells?.length ?? 0, enclosed: selected?.cells?.filter((c) => c.enclosed).length ?? 0 }, ...(conflicts.length > 0 ? { extentConflicts: conflicts } : {}) }))
   }
   for (const f of frames) {
     event('ENVELOPE', `envelope:${f.frameId}`, f.envelope ? `BOX:${rectText(f.envelope)}` : 'NONE', `${f.cells?.filter((c) => c.enclosed).length ?? 0} of ${f.cells?.length ?? 0} cells enclosed`)
     if (f.boundary) event('ENVELOPE', `outline:${f.frameId}`, f.boundary.accepted ? 'ADOPTED' : 'NOT_ADOPTED', f.boundary.why ?? '')
+    for (const c of f.boundary?.extentConflicts ?? []) event('ENVELOPE_EXTENT_CONFLICT', `extent-conflict:${f.frameId}:${c.side}`, `${c.side}:${c.decision}`, `${c.strength}: the extent at ${round(c.extentPx, 1)} px, the box at ${round(c.boxPx, 1)} px (${round(c.gapM, 2)} m, ${round(c.gapWalls, 2)} walls); ${c.why}`, { supportIds: c.chainIds.slice(0, 8) })
+    for (const [i, p] of (f.boundary?.completions ?? []).entries()) event('ENVELOPE_EXTENT_CONFLICT', `completion:${f.frameId}:${i}:${p.kind}`, p.decision, `${rectText(p.rectBefore)} → ${rectText(p.rect)} (${round(p.areaBeforeM2, 2)} → ${round(p.areaM2, 2)} m²); ${p.reason}`)
   }
 
   // 12: openings
@@ -505,8 +527,14 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       s.text(b.rect.x0 + 3, b.rect.y0 + 12, `${b.relation} ${round(b.areaM2, 1)} m²`, 10)
     }
     for (const m of selected?.masses ?? []) s.rect(m.rect.x0, m.rect.y0, m.rect.x1, m.rect.y1, { stroke: COLOURS.PRIMARY, width: 2 }, m.id)
+    // 005F: the parts judged as completions, before and after their clip, with the guard that decided each.
+    const completions = (selected?.boundary?.completions ?? []).map((p, i) => ({ id: `completion-${i}`, ...p }))
+    for (const p of completions) {
+      s.rect(p.rectBefore.x0, p.rectBefore.y0, p.rectBefore.x1, p.rectBefore.y1, { stroke: COLOURS.QUESTIONABLE, width: 1, dash: '3 3' }, `${p.id}-before`, { kind: p.kind })
+      s.rect(p.rect.x0, p.rect.y0, p.rect.x1, p.rect.y1, { stroke: p.decision === 'ACCEPTED' ? COLOURS.body : COLOURS.rejectedBody, width: 2 }, p.id, { kind: p.kind, decision: p.decision })
+    }
     files.set('13-body-candidates.svg', s.render())
-    files.set('13-body-candidates.json', json({ frameId: selected?.frameId ?? null, bodies, masses: selected?.masses ?? [], bays: selected?.bays ?? [] }))
+    files.set('13-body-candidates.json', json({ frameId: selected?.frameId ?? null, bodies, masses: selected?.masses ?? [], bays: selected?.bays ?? [], ...(completions.length > 0 ? { completions } : {}) }))
   }
   for (const f of frames) {
     for (const [i, b] of (f.boundary?.bodies ?? []).entries()) event('BODIES', `body:${f.frameId}:${i}:${b.relation}`, b.built ? 'BUILT' : 'NOT_BUILT', `${round(b.areaM2, 2)} m², junction wall ${round(b.junctionWallShare, 2)}, side wall ${round(b.sideWallShare, 2)}`)
