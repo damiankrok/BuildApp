@@ -45,8 +45,11 @@ const fold = (s: string): string => s.normalize('NFD').replace(/\p{M}/gu, '').to
 
 type Registry = { ids: Set<string>; words: Set<string>; figures: Set<string>; dimensions: Set<string>; hosts: Set<string>; sources: number }
 
-/** Words every project page carries; they name no house. */
-const GENERIC = new Set(['projekt', 'projekty', 'projektu', 'domow', 'dom', 'domu', 'domy', 'dane', 'www', 'html', 'php'])
+/**
+ * Words every project page carries; they name no house. 005F: nor does a preposition in a house's name ("dom pod
+ * …", "dom nad …") — the noun after it does, and stays registered; registered whole, "pod" found "podłog".
+ */
+const GENERIC = new Set(['projekt', 'projekty', 'projektu', 'domow', 'dom', 'domu', 'domy', 'dane', 'www', 'html', 'php', 'pod', 'nad', 'przy', 'przed', 'obok'])
 
 export function registryFrom(packages: ReadonlyArray<{ canonicalUrl: string; project: { externalId?: string; name?: string }; publishedFacts?: Array<{ value: number; unit?: string }>; adapter?: { id: string } }>): Registry {
   const r: Registry = { ids: new Set(), words: new Set(), figures: new Set(), dimensions: new Set(), hosts: new Set(), sources: packages.length }

@@ -594,7 +594,10 @@ Neither is patched in 005F.
 | 143 | push | `145e3ba` (code `f64fda9`) | **red**: `Analyzer / development house (marcowki)` and `Core / Analyzer / Reconstruction` (the no-reference Marcówki check: "every body reaches the same storeys") — the regression §W describes; cancelled by the next push |
 | 144 | push | `9cf798c` (code `41e26be`) | 35 of 35 completed jobs green, the UI evidence gate still running; cancelled by the next push |
 | **145** | push | **`65ae015`** = PRE_HOLDOUT_6_SHA | **green**: 37 jobs, 36 green, `preview-latest` skipped by design |
-| final | `workflow_dispatch` | the report commit | §AF |
+| 149 | `workflow_dispatch` (`owner_apk`) | `05c53c5` (the report) | **red**, OWNER APK job skipped: (1) the production hard-code guard, in five jobs (`Core`, the evidence-pack, opening-aware envelope `Generic source`, dimension-evidence `Production hard-code guard` and generalization `Purity` steps — all run `tests/architecture/generalization.test.ts`). Round 6 sealed `dom-pod-milorzebem`, so the guard's registry took the preposition `pod` for a house word and found it in a generic adapter's example slug and in `podłog` (`ł` has no NFD decomposition, so `\bpod\b` matched). (2) The UI evidence gate: the default-font pass of `ProductFlowDeviceTest` timed out (5 s) waiting for the saved task (`ProductFlowDeviceTest.kt:140`), so its screenshots 03–16 were never taken; the font-1.3 pass of the same test in the same job went through that step, and no Android source, asset or workflow differs from run 145, where the gate was green |
+| final | `workflow_dispatch` (`owner_apk`) | the guard fix (below) | §AF |
+
+**After the freeze, one test-only change.** `tests/architecture/generalization.test.ts` adds Polish prepositions (`pod`, `nad`, `przy`, `przed`, `obok`) to the words that name no house. The noun after one still does and stays registered: the blind houses' `helikoniach` and `orzebem` (from `Miłorzębem`) are still caught. No production file changed after `PRE_HOLDOUT_6_SHA`, so the blind runs and their verdicts are untouched. The UI evidence gate's timeout was not patched; the next run shows whether it recurs.
 
 The 005F gates: `Adaptive glyph count`, `Numeric reader (lattice, corpus, metric adversaries) under the 005F class
 bars`, `Extent envelope and body completion`, the dimension-evidence and evidence-pack jobs (the 005F packs verified once
@@ -617,11 +620,13 @@ committed), and one development-house job per row, with modrzewnicy required to 
   finding);
 - records: `6bfd98d`, `3c50fe2`, `7e58a08`, `145e3ba`, `9cf798c`, `65ae015`.
 
+After the freeze: `951a4d0` (the ledger line), `43c6670` (the runs, packs and verdicts), `05c53c5` (this report and PROJECT_STATUS), then the guard's registry fix (§AD) and the OWNER APK record.
+
 ## AF. OWNER APK
 
-The final CI is a `workflow_dispatch` of the BuildApp CI on the commit that adds this report; it publishes the OWNER
-APK to `owner-preview-latest`. Its analyzer code is the frozen code (`PRE_HOLDOUT_6_SHA`; only documents and sealed
-evidence differ). The downloaded file's verification — ABI, version, run and commit, embedded analyzer versions,
+The final CI is a `workflow_dispatch` of the BuildApp CI on the guard fix (§AD); it publishes the OWNER APK to
+`owner-preview-latest`. Its analyzer code is the frozen code (`PRE_HOLDOUT_6_SHA`; only documents, sealed evidence
+and the guard's test registry differ). The downloaded file's verification — ABI, version, run and commit, embedded analyzer versions,
 SHA-256 and signer — is recorded in the commit after this one, in this section. No APK binary is committed.
 
 ## AG. Residual debt
