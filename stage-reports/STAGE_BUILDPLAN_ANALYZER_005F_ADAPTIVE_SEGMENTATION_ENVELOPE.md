@@ -595,9 +595,9 @@ Neither is patched in 005F.
 | 144 | push | `9cf798c` (code `41e26be`) | 35 of 35 completed jobs green, the UI evidence gate still running; cancelled by the next push |
 | **145** | push | **`65ae015`** = PRE_HOLDOUT_6_SHA | **green**: 37 jobs, 36 green, `preview-latest` skipped by design |
 | 149 | `workflow_dispatch` (`owner_apk`) | `05c53c5` (the report) | **red**, OWNER APK job skipped: (1) the production hard-code guard, in five jobs (`Core`, the evidence-pack, opening-aware envelope `Generic source`, dimension-evidence `Production hard-code guard` and generalization `Purity` steps — all run `tests/architecture/generalization.test.ts`). Round 6 sealed `dom-pod-milorzebem`, so the guard's registry took the preposition `pod` for a house word and found it in a generic adapter's example slug and in `podłog` (`ł` has no NFD decomposition, so `\bpod\b` matched). (2) The UI evidence gate: the default-font pass of `ProductFlowDeviceTest` timed out (5 s) waiting for the saved task (`ProductFlowDeviceTest.kt:140`), so its screenshots 03–16 were never taken; the font-1.3 pass of the same test in the same job went through that step, and no Android source, asset or workflow differs from run 145, where the gate was green |
-| final | `workflow_dispatch` (`owner_apk`) | the guard fix (below) | §AF |
+| **151** | `workflow_dispatch` (`owner_apk`) | **`6b22582`** (the guard fix, below) | **green** at the first attempt: 38 jobs, 37 green (the UI evidence gate and the OWNER APK among them), `preview-latest` skipped by design. Push run 150 on the same commit was superseded by the concurrency group. The final CI (§AF) |
 
-**After the freeze, one test-only change.** `tests/architecture/generalization.test.ts` adds Polish prepositions (`pod`, `nad`, `przy`, `przed`, `obok`) to the words that name no house. The noun after one still does and stays registered: the blind houses' `helikoniach` and `orzebem` (from `Miłorzębem`) are still caught. No production file changed after `PRE_HOLDOUT_6_SHA`, so the blind runs and their verdicts are untouched. The UI evidence gate's timeout was not patched; the next run shows whether it recurs.
+**After the freeze, one test-only change.** `tests/architecture/generalization.test.ts` adds Polish prepositions (`pod`, `nad`, `przy`, `przed`, `obok`) to the words that name no house. The noun after one still does and stays registered: the blind houses' `helikoniach` and `orzebem` (from `Miłorzębem`) are still caught. No production file changed after `PRE_HOLDOUT_6_SHA`, so the blind runs and their verdicts are untouched. The UI evidence gate's timeout was not patched, and it did not recur: run 151's default-font pass took all its screenshots.
 
 The 005F gates: `Adaptive glyph count`, `Numeric reader (lattice, corpus, metric adversaries) under the 005F class
 bars`, `Extent envelope and body completion`, the dimension-evidence and evidence-pack jobs (the 005F packs verified once
@@ -620,14 +620,42 @@ committed), and one development-house job per row, with modrzewnicy required to 
   finding);
 - records: `6bfd98d`, `3c50fe2`, `7e58a08`, `145e3ba`, `9cf798c`, `65ae015`.
 
-After the freeze: `951a4d0` (the ledger line), `43c6670` (the runs, packs and verdicts), `05c53c5` (this report and PROJECT_STATUS), then the guard's registry fix (§AD) and the OWNER APK record.
+After the freeze: `951a4d0` (the ledger line), `43c6670` (the runs, packs and verdicts), `05c53c5` (this report and PROJECT_STATUS), `6b22582` (the guard's registry fix, §AD; the final CI), then the OWNER APK record (the commit after it).
 
 ## AF. OWNER APK
 
-The final CI is a `workflow_dispatch` of the BuildApp CI on the guard fix (§AD); it publishes the OWNER APK to
-`owner-preview-latest`. Its analyzer code is the frozen code (`PRE_HOLDOUT_6_SHA`; only documents, sealed evidence
-and the guard's test registry differ). The downloaded file's verification — ABI, version, run and commit, embedded analyzer versions,
-SHA-256 and signer — is recorded in the commit after this one, in this section. No APK binary is committed.
+`https://github.com/damiankrok/BuildApp/releases/download/owner-preview-latest/BuildPlan-owner-preview.apk`, from
+`workflow_dispatch` run 151 attempt 1 (`37033029098`) on `6b22582`, which is also the final CI. Its analyzer code is
+the frozen code (`PRE_HOLDOUT_6_SHA`). Only documents, sealed evidence and the guard's test registry differ (§AD).
+
+Verified from the downloaded file, not from the notes:
+
+| check | result |
+| --- | --- |
+| direct link | Serves the APK itself: 30 785 427 bytes, `application/vnd.android.package-archive`. The release is a prerelease, updated 17:14:50Z; the file was downloaded after run 151 completed |
+| SHA-256 | `8aa39e7ba8eec2bf9aa836a5e85edd3b54be2f93409c2307094e130a16856067`, equal to the release notes and to GitHub's asset digest |
+| ABI | `aapt dump badging` shows `native-code: 'arm64-v8a'`. There are 5 libraries under `lib/arm64-v8a/` (`libnode`, the node bridge, Filament, `libc++_shared`, the graphics path) and no other ABI |
+| version | `com.buildplan.preview`, **versionCode 1151**, versionName `0.151.0-preview`, minSdk 26, targetSdk 35 |
+| commit / run | The notes give run 151 (attempt 1) from `claude/new-session-3kzcgh` @ `6b22582906ec1666fe37f2dfea53b56cce17e800` |
+| analyzer | The embedded bundle is `assets/local-analyzer/analyzer.mjs` (sha256 `ff2325ec…8bd6`, equal to its manifest; Node 18.20.4). It declares `NUMERIC_LATTICE_VERSION = "1.1.0"`, `METRIC_SOLVER_VERSION = "1.3.0"`, `METRIC_EVIDENCE_SCHEMA_VERSION = "1.5.0"`, `BOUNDARY_EVIDENCE_VERSION = "1.1.0"` (the four this stage raised), `METRIC_READER_VERSION = "1.3.0"`, `DIMENSION_TOPOLOGY_VERSION = "1.0.0"`, `PLAN_RESOLVER_VERSION = "1.4.0"` and `GENERIC_ADAPTER_VERSION = "1.2.0"`. It carries `COUNT_BOUNDS`, `styleBand`, `countHypotheses`, `extentConflicts`, `WALLED_OFF`, `NO_CONTINUATION` and the typed `DIMENSION_EVIDENCE_INCONCLUSIVE`. Nothing of the Evidence Pack is in it, and the pack's stage names occur only in source comments, which the bundler strips |
+| signer | `apksigner verify --print-certs` (v2): "BuildPlan Model Preview, Preview builds (not a production key)", certificate SHA-256 `6e48fac4…a0da`, equal to the notes. It installs over any preview build with a lower run number (1135 before it) |
+
+No APK binary is committed.
+
+### OWNER phone checklist
+
+Install `BuildPlan-owner-preview.apk` over build 1135, then check each item:
+
+1. **Known houses unchanged.** Marcówki, Kosaćce (clean and tracked) and Rarytasy G2E build the same houses as build
+   1135. Their model hashes are unchanged in the final development matrix (§T).
+2. **`dom-w-morelach` now builds** at about its published size (−3.12 %, was −11.54 %): the kitchen bay and the
+   garage's end to its vehicle door are there (§R).
+3. **`dom-w-modrzewnicy` still stops by name.** The refusal now says the printed dimensions are there but do not
+   decide (`DIMENSION_EVIDENCE_INCONCLUSIVE`), not that the plan prints none.
+4. **The two round-6 houses** behave as the report says: `dom-pod-milorzebem` stops by name (no house built), and
+   `dom-w-helikoniach` builds one storey of two, "Model gotowy z ograniczeniami".
+5. **The progress line** still shows "odczyt wymiarów: etykieta n z m" during the metric step, and "Przerwij" still
+   stops an analysis within seconds.
 
 ## AG. Residual debt
 
