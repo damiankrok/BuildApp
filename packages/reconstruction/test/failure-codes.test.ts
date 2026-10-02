@@ -11,7 +11,7 @@
 import { describe, expect, it } from 'vitest'
 import type { Raster } from '@buildapp/source-cv'
 import type { SourceCoordinateFrame } from '@buildapp/source-observations'
-import { ReconstructionFailure, reconstructV2 } from '../src/index.js'
+import { ReconstructionFailure, dimensionEvidenceOf, reconstructV2 } from '../src/index.js'
 import type { ReconstructionFailureCode, SolverTraceEvent } from '../src/index.js'
 import { WALL, chain, graphOf, metricsOf, planFrame, registration, sheet, walls } from './plan.js'
 import { BLACK, drawLine, fillRect } from '../../source-cv/test/draw.js'
@@ -131,5 +131,30 @@ describe('an expected structural failure is named by its first missing link', ()
     expect(r.failure.message).toMatch(/192\.00 m² against the 40 m²/)
     // the digest the overlays are drawn from is carried with it
     expect(r.failure.plans?.plans[0].masses.length).toBe(1)
+  })
+})
+
+describe('005F: a plan whose scale is not settled says whether it prints dimensions at all', () => {
+  const F = 'frame-ground'
+  it('no label on a dimension line and no chain: NO_DIMENSION_EVIDENCE', () => {
+    expect(dimensionEvidenceOf(metricsOf([], []), F)).toEqual({ kind: 'NO_DIMENSION_EVIDENCE', labels: 0, lines: 0 })
+  })
+  it('dimensions found and read that settle no scale: DIMENSION_EVIDENCE_INCONCLUSIVE, with the counts', () => {
+    const metrics = {
+      ...metricsOf([], []),
+      dimensionObservations: [
+        { frameId: F, textRegionId: 't1', chainId: 'c1' },
+        { frameId: F, textRegionId: 't2', chainId: 'c1' },
+        { frameId: F, textRegionId: 't3', chainId: 'c2' },
+        { frameId: 'frame-other', textRegionId: 't4', chainId: 'c3' },
+      ],
+    } as unknown as Parameters<typeof dimensionEvidenceOf>[0]
+    expect(dimensionEvidenceOf(metrics, F)).toEqual({ kind: 'DIMENSION_EVIDENCE_INCONCLUSIVE', labels: 3, lines: 2 })
+  })
+  it('a chain with no label read is still dimension evidence (the lines are there)', () => {
+    const c = chain('c9', 'HORIZONTAL', [40, 280], { baselinePx: 12 })
+    const r = dimensionEvidenceOf(metricsOf([{ ...c, frameId: F }], []), F)
+    expect(r.kind).toBe('DIMENSION_EVIDENCE_INCONCLUSIVE')
+    expect(r.lines).toBe(1)
   })
 })
