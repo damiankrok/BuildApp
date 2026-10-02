@@ -1,0 +1,36 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "WALL_GEOMETRY_EXTENT",
+      "y": "WALL_GEOMETRY_EXTENT"
+    },
+    "rect": {
+      "x0": 159,
+      "x1": 767.5,
+      "y0": 161.5,
+      "y1": 830
+    },
+    "refusedChains": [],
+    "weak": true
+  },
+  "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m² (-55.8% of 82.81), WRONG"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, walled-first tiling, outer faces: 3 bodies, 18.5 m² (-77.7% of 82.81), WRONG"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy area_table 0f7c5bafc8, wall-ink extent, scale 2.285714 cm/px, largest-first tiling, sides as gridded: 1 body, 4.2 m² (-94.9% of 82.81), WRONG"
+    },
+    {
+      "key": "reading4",
+      "summary": "copy area_table 0f7c5bafc8, wall-ink extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 1 body, 5.0 m² (-94.0% of 82.81), WRONG"
+    }
+  ]
+}

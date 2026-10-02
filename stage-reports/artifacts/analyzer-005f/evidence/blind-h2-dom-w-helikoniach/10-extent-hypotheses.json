@@ -1,0 +1,32 @@
+{
+  "chosen": {
+    "provenance": {
+      "x": "DIMENSION_CHAIN_EXTENT",
+      "y": "DIMENSION_CHAIN_EXTENT"
+    },
+    "rect": {
+      "x0": 158,
+      "x1": 463.5,
+      "y0": 162,
+      "y1": 752
+    },
+    "refusedChains": [],
+    "weak": false
+  },
+  "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+  "otherCopies": [],
+  "resolverReadings": [
+    {
+      "key": "reading1",
+      "summary": "copy dimensioned 4c943a2b00, chain extent, registered scale, largest-first tiling, sides as gridded: 1 body, 77.6 m² (-18.9% of 95.61), NEAR"
+    },
+    {
+      "key": "reading2",
+      "summary": "copy dimensioned 4c943a2b00, chain extent, scale 3.148148 cm/px, largest-first tiling, sides as gridded: 2 bodies, 151.4 m² (+58.3% of 95.61), WRONG"
+    },
+    {
+      "key": "reading3",
+      "summary": "copy dimensioned 4c943a2b00, chain extent, scale 1.966102 cm/px, largest-first tiling, sides as gridded: 1 body, 61.9 m² (-35.3% of 95.61), WRONG"
+    }
+  ]
+}

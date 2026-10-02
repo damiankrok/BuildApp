@@ -1,0 +1,1742 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-elewacj-8d66ac1d14",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-6de2c4bbf4b7fd-1b54f426f5",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x667 over 550x288",
+      "variants": [
+        {
+          "aspect": 1.91904,
+          "byteHash": "a5a151ac4c15bba55ee8fa17ff974a469e2268c351013b92de91c82c924c55ae",
+          "byteLength": 490567,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 667,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-6de2c4bbf4b7fd-1b54f426f5",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-6de2c4bbf4b7fde2762f3db3c003f370__11267.jpg"
+        },
+        {
+          "aspect": 1.909722,
+          "byteHash": "73b7edb203f4db3c74f5633e3669e83135dfc84643affb7401fa13756255bdda",
+          "byteLength": 116511,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 288,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-elewacja-ogrodowa-projekt-dom-w-helikoniach-3-e-7b9776ff2d",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-ogrodowa-projekt-dom-w-helikoniach-3-e-oze-675a8e7087bfb87ca638c2001bfaf238__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-elewacj-98e00bb1e6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-d768790dc93309-5d9374e9ba",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x667 over 550x288",
+      "variants": [
+        {
+          "aspect": 1.91904,
+          "byteHash": "732ff026016a9054368f56c1d80a23a344554b7138d5f296de682a1db4bf0068",
+          "byteLength": 348462,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 667,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-d768790dc93309-5d9374e9ba",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-d768790dc93309ebc62037de4960938e__11265.jpg"
+        },
+        {
+          "aspect": 1.909722,
+          "byteHash": "6f43d8c817ac1da4e283640e811ea46dca1732f2e3fe8b72e82869a36b3d3268",
+          "byteLength": 83568,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 288,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-elewacja-boczna-projekt-dom-w-helikoniach-3-e-oz-bff8ee158e",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze-3602f30b4d7d6efd6376516b8afa0e33__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-elewacj-a8d6fe26e0",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-25dd7840c82250-5ba4bfb924",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x667 over 550x288",
+      "variants": [
+        {
+          "aspect": 1.91904,
+          "byteHash": "470d258df3f60106bec2eb32572c476d6113c1b1f3629e6e0286a6e8ec6a559d",
+          "byteLength": 464033,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 667,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-25dd7840c82250-5ba4bfb924",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-25dd7840c82250dadde1a973b5a8e749__11264.jpg"
+        },
+        {
+          "aspect": 1.909722,
+          "byteHash": "89ed7c3d1617134957ed7658ca0a4d5489d2ca21bb9ecfedbf9f7bfc8903dbd1",
+          "byteLength": 111026,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 288,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-elewacja-frontowa-projekt-dom-w-helikoniach-3-e-755f76e327",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-frontowa-projekt-dom-w-helikoniach-3-e-oze-ef8ae1370bc96ce7233dbb97f80c7159__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-elewacj-c58e6e562c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom w helikoniach 3 (e) oze elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-71c1b10874f031-6aa5b5a1c5",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x667 over 550x288",
+      "variants": [
+        {
+          "aspect": 1.91904,
+          "byteHash": "5a41d3aa4cf59c601617354c9480dac8f98b5fbf45242e3020ef39c87fa27c65",
+          "byteLength": 361704,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 667,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-71c1b10874f031-6aa5b5a1c5",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-71c1b10874f031fe9bd69faaec68384f__11266.jpg"
+        },
+        {
+          "aspect": 1.909722,
+          "byteHash": "ab27cf95277786cf2840ae3c13a2ca7ccbe023fe50b69b3a7823afbb866c5207",
+          "byteLength": 82123,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 288,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-elewacja-boczna-projekt-dom-w-helikoniach-3-e-oz-d8a6e82afa",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze-1a6c3ddf8f6ee8aa2f7eee1a7a32ac32__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-przekro-b86aea228c",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w helikoniach 3 (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w helikoniach 3 (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom w helikoniach 3 (e) oze przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-w-helikoniach-3-e-o-5d2bbec7b7",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "9b681c3c2013366c6e24227ccf6c89b63ce9e2f73ff7549befd6c031dfaee6f0",
+          "byteLength": 70520,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/md6026d579e43f/przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze-04156de1c31687525657664084a3ba6f__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-w-helikoniach-3-e-o-5d2bbec7b7",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze-04156de1c31687525657664084a3ba6f__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "253aeb5bfe9e36373d834f4e52f4a44f2218570ea11ba1e4433c6782a63ffaa2",
+          "byteLength": 17552,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-przekroj-budynku-projekt-dom-w-helikoniach-3-e-o-13ae1a8e89",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/przekroj-budynku-projekt-dom-w-helikoniach-3-e-oze-04156de1c31687525657664084a3ba6f__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE rzut parteru",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-rzut-pa-9b49cf6c3c",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-0-3160b0f59e",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c04603bb749f1220b226a723c17aebab9437e2697e11fdfaf98c5c0c9e866a86",
+          "byteLength": 41183,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-0-3160b0f59e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-0ceacc418881af140e1688a771d0c572__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-rzut-po-3e45f98823",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-d700a1b6ad",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "ad22b8b40420609450e44e87a476994f350643bdd54fd2d3023fcb54bbb68238",
+          "byteLength": 32618,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-d700a1b6ad",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-2767e9430565e7e14f51140b2d2ba4b5__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE sytuacja",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-sytuacj-b23148d29f",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-925d6b36627411-c31f0085d4",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "70589389f1251b5763bd834474d5b5aad54d372f067ca84e3f7fa029d589e885",
+          "byteLength": 158022,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-925d6b36627411-c31f0085d4",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-925d6b3662741112946c9e327182d6f1__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "b7f20898b18f55b67411343d9ed72481670da815766a0794726a309a1834e1a7",
+          "byteLength": 39633,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-sytuacja-projekt-dom-w-helikoniach-3-e-oze-46da8-e145369ef1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/sytuacja-projekt-dom-w-helikoniach-3-e-oze-46da86a2a459224507d4ba6c382f5206__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom w helikoniach 3 (E) OZE widok 1",
+      "id": "asset-gotowy-projekt-dom-w-helikoniach-3-e-oze-widok-1-001cea916c",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w helikoniach 3 (e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-helikoniach-3-e-oze-b4611b-406d7c218f",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "6a6bba4eca9e5c01566b6d3975db66150123859f87f0d36f1061121c93ed4759",
+          "byteLength": 9425,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-widok-1-projekt-dom-w-helikoniach-3-e-oze-b4611b-406d7c218f",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/widok-1-projekt-dom-w-helikoniach-3-e-oze-b4611bf905c07a7cf3c7a5400e74e7ae__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w helikoniach 3 (E) OZE",
+      "id": "asset-projekt-dom-w-helikoniach-3-e-oze-74ede6172d",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-3315efefed",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "fdcf42d2cbc9dd9ed1ccc10b8d15ea2b3b08b90531d672b1070c4aa8ec196530",
+          "byteLength": 21026,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/related?scope=similar",
+          "id": "var-rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-3315efefed",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-83deca2442692512eee9df05d8af638e__270.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w helikoniach 3 (E) OZE",
+      "id": "asset-projekt-dom-w-helikoniach-3-e-oze-8a257daf21",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-1-68128f1784",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9c5972da74bcc11b1d5379c319ddcead240d2a937c63b66aa9b91c5697004e56",
+          "byteLength": 26193,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/related?scope=similar",
+          "id": "var-rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-1-68128f1784",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-1c9286a69813f233a49105eb96610e9f__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "Projekt dom w helikoniach 3 e oze 94ac7270c85ff103d398223eb9d42ab0  44745",
+      "id": "asset-projekt-dom-w-helikoniach-3-e-oze-94ac7270c85ff1-d88b07c48a",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-94ac7270c85ff1-06bb649f74",
+      "selectionReason": "only variant (1600x900, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "3df24482952c222e84ff26a6121108473ba098d52a226928a4f7c9eea7815621",
+          "byteLength": 673512,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 900,
+            "width": 1600
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/product_fancybox_hotspot/md6026d579e43f/image/44745?showHotspots=false",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-94ac7270c85ff1-06bb649f74",
+          "mediaType": "image/jpeg",
+          "url": "https://cdn1.archon.pl/images/products/md6026d579e43f/i/projekt-dom-w-helikoniach-3-e-oze-94ac7270c85ff103d398223eb9d42ab0__44745.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w helikoniach 3 (E) OZE",
+      "id": "asset-projekt-dom-w-helikoniach-3-e-oze-a08fc38b13",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-helikoniach-3-e-oze-da8b46-a5f73ca8c9",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "d8c2acbfc90cf0bce85d70fd89c2aea60840281e0713895f33ceeff08ee16bb9",
+          "byteLength": 34845,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/related?scope=similar",
+          "id": "var-widok-2-projekt-dom-w-helikoniach-3-e-oze-da8b46-a5f73ca8c9",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/widok-2-projekt-dom-w-helikoniach-3-e-oze-da8b46b685fb7b17a3cf877164e7b5b5__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom w helikoniach 3 (E) OZE",
+      "id": "asset-projekt-dom-w-helikoniach-3-e-oze-a7d543a226",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-ed82235078a851-6da2c03776",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "1a3792a0d4782781f092dbbf2c3a934b1bd4e05b3caa1d69f43919c6c3b73ef2",
+          "byteLength": 30872,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/md6026d579e43f/related?scope=similar",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-ed82235078a851-6da2c03776",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-ed82235078a851af89a274cb7b4e4304__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-6f73b6499a",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-hel-e3aca2f272",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "c7c1336c292ea722904da42012c3694d9db67d410ca1f4fbbbaaa175f605cc97",
+          "byteLength": 62415,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-w-hel-e3aca2f272",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-poddasza-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze-a836a08ae3b8516631e799f55576bbce__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-d209d7bdfe",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-heli-59cba6d3db",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "f4aea41b37672940d78d67d6d6637d927d88e0142e11d3baad8fc4bba97996d6",
+          "byteLength": 76784,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-w-heli-59cba6d3db",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-parteru-z-powierzchniami-projekt-dom-w-helikoniach-3-e-oze-a0d20ec4a31b487b85b2a4026ee51b49__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-d5842da623",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-870cf9b40c7561-bd732b9e0c",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "005854ea7f49147ad82a0d1c4bf99597c75bfab8e53257781b46f48fbc1fea07",
+          "byteLength": 79100,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-870cf9b40c7561-bd732b9e0c",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-870cf9b40c75614d9ed66b905de453c2__11815.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-f6160738fd",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/md6026d579e43f/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom w helikoniach 3 (e) oze rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-w-helikoniach-3-e-oze-5788284352be1a-b4a7b27899",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "be746f0c44c10dfb9ee1b5b3656c53aeb1d8154f2263cfcedf90dfe5fa180b99",
+          "byteLength": 62085,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-projekt-dom-w-helikoniach-3-e-oze-5788284352be1a-b4a7b27899",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-5788284352be1a12fa932390f9c48293__11817.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-w-helikoniach-3-e-oze-daf7abb5b5",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w helikoniach 3 (e) oze widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-w-helikoniach-3-e-oze-8bec17-c44fce4bdb",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "602be05b0979a7182556b7550f2bc20546f7ec5ed99fa097c60a47cac3baaf48",
+          "byteLength": 378486,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-widok-1-projekt-dom-w-helikoniach-3-e-oze-8bec17-c44fce4bdb",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/widok-1-projekt-dom-w-helikoniach-3-e-oze-8bec170c22a5e39d2fd3e275d4286fad__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-w-helikoniach-3-e-oze-57f36330eb",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-w-helikoniach-3-e-oze\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom w helikoniach 3 (e) oze widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-w-helikoniach-3-e-oze-909bc3-93d89c0427",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "e612b704cada0a2a3c17a7731bd6aed5a00c944795a9fc2ea1fbb1e451737f50",
+          "byteLength": 409591,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+          "id": "var-widok-2-projekt-dom-w-helikoniach-3-e-oze-909bc3-93d89c0427",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/md6026d579e43f/widok-2-projekt-dom-w-helikoniach-3-e-oze-909bc366fe9a4d17faebfc6dcdf889c2__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+  "contentHash": "99f7daf541223b104344e9691b73f2cf28bae87913f8079525550a60324fea88",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-ed82235078a851af89a274cb7b4e4304__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-0ceacc418881af140e1688a771d0c572__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-parteru-projekt-dom-w-helikoniach-3-e-oze-1c9286a69813f233a49105eb96610e9f__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-2767e9430565e7e14f51140b2d2ba4b5__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/rzut-poddasza-projekt-dom-w-helikoniach-3-e-oze-83deca2442692512eee9df05d8af638e__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/widok-1-projekt-dom-w-helikoniach-3-e-oze-8bec170c22a5e39d2fd3e275d4286fad__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/widok-1-projekt-dom-w-helikoniach-3-e-oze-b4611bf905c07a7cf3c7a5400e74e7ae__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/widok-2-projekt-dom-w-helikoniach-3-e-oze-909bc366fe9a4d17faebfc6dcdf889c2__11290.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/widok-2-projekt-dom-w-helikoniach-3-e-oze-da8b46b685fb7b17a3cf877164e7b5b5__11260.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-71c1b10874f031fe9bd69faaec68384f__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze-1a6c3ddf8f6ee8aa2f7eee1a7a32ac32__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-d768790dc93309ebc62037de4960938e__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-boczna-projekt-dom-w-helikoniach-3-e-oze-3602f30b4d7d6efd6376516b8afa0e33__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-25dd7840c82250dadde1a973b5a8e749__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-frontowa-projekt-dom-w-helikoniach-3-e-oze-ef8ae1370bc96ce7233dbb97f80c7159__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-6de2c4bbf4b7fde2762f3db3c003f370__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/elewacja-ogrodowa-projekt-dom-w-helikoniach-3-e-oze-675a8e7087bfb87ca638c2001bfaf238__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/md6026d579e43f/projekt-dom-w-helikoniach-3-e-oze-925d6b3662741112946c9e327182d6f1__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/md6026d579e43f/sytuacja-projekt-dom-w-helikoniach-3-e-oze-46da86a2a459224507d4ba6c382f5206__11255.jpg"
+    }
+  ],
+  "id": "src-md6026d579e43f-f5537e89dc",
+  "pageHash": "0229537359d7e177ad1b223649bc28214f5ec382f02570dd31f4727f7ce880bc",
+  "project": {
+    "externalId": "md6026d579e43f",
+    "name": "Projekt domu Dom w helikoniach 3 (E) OZE Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "7,67 m",
+      "unit": "m",
+      "value": 7.67
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "142,0 m&sup2;",
+      "unit": "m2",
+      "value": 142
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "95,61 m&sup2;",
+      "unit": "m2",
+      "value": 95.61
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "124,8 m&sup2;",
+      "unit": "m2",
+      "value": 124.8
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "187,59 m&sup2;",
+      "unit": "m2",
+      "value": 187.59
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "117,26 m&sup2;",
+      "unit": "m2",
+      "value": 117.26
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "590,94 m&sup3;",
+      "unit": "none",
+      "value": 590.94
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.97,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 4,97 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.3,
+      "index": 2,
+      "label": "Korytarz",
+      "raw": "2. Korytarz | 7,30 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.52,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 11,52 | (14,15)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.11,
+      "index": 4,
+      "label": "Garderoba",
+      "raw": "4. Garderoba | 4,11 | (6,74)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 2.06,
+      "index": 5,
+      "label": "Garderoba",
+      "raw": "5. Garderoba | 2,06 | (3,52)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.13,
+      "index": 6,
+      "label": "Pokój",
+      "raw": "6. Pokój | 9,13 | (12,20)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.13,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 9,13 | (12,20)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.18,
+      "index": 8,
+      "label": "Łazienka",
+      "raw": "8. Łazienka | 4,18 | (6,10)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 2.62,
+      "index": 9,
+      "label": "Pom. gospodarcze",
+      "raw": "9. Pom. gospodarcze | 2,62 | (4,77)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.01,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 7,01 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.39,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 4,39 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 4.49,
+      "index": 3,
+      "label": "Łazienka",
+      "raw": "3. Łazienka | 4,49 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 9.06,
+      "index": 4,
+      "label": "Kuchnia",
+      "raw": "4. Kuchnia | 9,06 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 32.01,
+      "index": 5,
+      "label": "Salon + Jadalnia",
+      "raw": "5. Salon + Jadalnia | 32,01 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2,
+      "index": 6,
+      "label": "Spiżarnia",
+      "raw": "6. Spiżarnia | 2,00 | (4,84)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 8.25,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 8,25 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Atrakcyjny projekt domu w stylu nowoczesnej stodoły o modnie zaprojektowanej elewacji, łączącej białe i szare tynki z grafitową stolarką. Energooszczędne rozwiązania w projekcie obejmują wentylację mechaniczną oraz pompę ciepła jako źródło ogrzewania domu. Panoramiczne przeszklenia doskonale doświetlą wnętrze parteru i poddasza użytkowego, a dodatkowo dodadzą lekkości wizualnej bryle. Od strony ogrodu zaprojektowano przytulny taras pod ażurową pergolą, a główne wejście znajduje się w praktycznym podcieniu. Obszerny wiatrołap otwiera dostęp do komfortowej przestrzeni parteru, gdzie zaplanowano dzienną strefę domu. Salon z narożną kanapą i miejscem do aranżacji funkcjonalnych półek oferuje sprawną komunikację ze strefa tarasową, gdzie rodzina będzie mogła wypocząć na świeżym powietrzu. Jadalnia przy dużym oknie posiada drugie wyjście do ogrodu, a kuchnia wzbogacona została o wyspę z siedziskami oraz spiżarnię zlokalizowaną pod schodami. Z holu dostępny jest również dodatkowy pokój mogący pełnić funkcję domowego biura lub gabinetu. W niewielkiej odległości znajduje się łazienka z prysznicem. Na poddaszu zaplanowano dwa wygodne pokoje dla dzieci z miejscem na ustawienie biurka i pojemnych szaf oraz ustawną sypialnię rodziców z dużą garderobą. Do wspólnego użytku rodziny pozostaje nowoczesna łazienka, pralnia oraz garderoba. Projekt „ Dom w helikoniach 3 (E) OZE” dołącza do kolekcji: projekty domów nowoczesnych , projekty domów z wentylacją mechaniczną , projekty domów bez garażu , projekty domów z poddaszem użytkowym ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "116 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "pompa ciepła Dodatkowo do projektu dołączamy GRATIS projekt instalacji fotowoltaicznej jako alternatywne opracowanie!"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "mechaniczna z odzyskiem ciepła (rekuperacja)"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 40 st. , więźba drewniana, blacha, okno dachowe FAKRO"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom jednorodzinny z poddaszem użytkowym , strop płyta żelbetowa , 122.23 m² , 5 pokoi, kuchnia, 2 łazienki, spiżarka, garderoba, pomieszczenie gospodarcze"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "bloczek z betonu komórkowego H+H 24 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

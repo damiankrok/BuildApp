@@ -1,0 +1,1873 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": [
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) elewacja frontowa",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-elewacja-0a7861bcef",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-frontowa-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja frontowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"frontowa\" is the front (matched \"elewacja-frontowa-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"frontowa\" is the front (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja frontowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "FRONT"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-c4c4bf5b87d175c-e41d5d2db3",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x630 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.031746,
+          "byteHash": "2d7e3d6347929f8450c1868524945da650e1bfdd761edee5c82e579b2a2b782b",
+          "byteLength": 183099,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 630,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-c4c4bf5b87d175c-e41d5d2db3",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-c4c4bf5b87d175c70bf27d652c970b08__11264.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "abb0f7dc63610f4a9ba289e7951eb7ee73480aeb61d4009dc5695a29f4e5a9b3",
+          "byteLength": 46809,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-elewacja-frontowa-projekt-dom-pod-milorzebem-21-9013530848",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-frontowa-projekt-dom-pod-milorzebem-21-gb-77994f8c3126ff835a242420924bddef__264.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) elewacja boczna ",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-elewacja-458845261b",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna \")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna \")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-53287f3d0e4e4bf-84493a8676",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x630 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.031746,
+          "byteHash": "98e411e1513b1b85ff3c098abb10c9b9e9cdec78b5a9fc754db28cafa657010a",
+          "byteLength": 149747,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 630,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-53287f3d0e4e4bf-84493a8676",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-53287f3d0e4e4bf7b50e0453c84b6019__11265.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "43aa24bfa05a9136d52f5d91229388786a3e4b137191ab2120d18ad5cfe0726b",
+          "byteLength": 38222,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-ecc976f0f2",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-204945f7d81866e477ead2d02c3537da__265.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) elewacja ogrodowa",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-elewacja-91af4d167a",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-ogrodowa-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja ogrodowa\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"elewacja-ogrodowa-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"ogrodowa\" (garden) is the rear (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja ogrodowa\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "REAR"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-3914ab80cb8c2c6-c448788c31",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x630 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.031746,
+          "byteHash": "3ccda0a531af544062b7c4293893e28a10e4e17728876034799c169d1901b220",
+          "byteLength": 195681,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 630,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-3914ab80cb8c2c6-c448788c31",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-3914ab80cb8c2c6f6e7425d8c6ae37ed__11267.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "3a78a3068ee923bf6135c2985bb46cfb63f7a6fafef1efaabc1051ab5b40901e",
+          "byteLength": 48610,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-elewacja-ogrodowa-projekt-dom-pod-milorzebem-21-3b5bc01a4c",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-ogrodowa-projekt-dom-pod-milorzebem-21-gb-7006102014939f6dabffcb68c45c90d4__267.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) elewacja boczna",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-elewacja-eb3097c840",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"elewacja\" names an elevation (matched \"elewacja-boczna-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"elewacja\" names an elevation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"elewacja-boczna-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "view",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"boczna\" names a side, but this publisher labels both sides identically (matched \"gotowy projekt dom pod miłorzebem 21 (gb) elewacja boczna\")",
+          "dimension": "view",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "ELEVATION",
+        "projection": "ORTHOGRAPHIC_ELEVATION",
+        "storey": "NOT_APPLICABLE",
+        "view": "SIDE_UNSPECIFIED"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-6771d5b46896e14-39450ec4e9",
+      "selectionReason": "largest decoded raster of 2 variants: 1280x630 over 550x270",
+      "variants": [
+        {
+          "aspect": 2.031746,
+          "byteHash": "3f32f22c69e02e048e8efa072606bf8809c801898ac3f93fa70df4e6cbb1805b",
+          "byteLength": 164344,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 630,
+            "width": 1280
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-6771d5b46896e14-39450ec4e9",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-6771d5b46896e146773f29cd8cc56e4f__11266.jpg"
+        },
+        {
+          "aspect": 2.037037,
+          "byteHash": "c9a59336ff723de67d2f13c50aefbc824271b4d0e29bb56e65127f03818f16f3",
+          "byteLength": 42173,
+          "declared": {
+            "height": 213,
+            "width": 550
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 270,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-a1eb677a63",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-0880f5093df2dcc00f214f96d9941c76__266.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) przekroj budynku",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-przekroj-a8e9ca1ed6",
+      "roleEvidence": [
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"przekrój\" names a section (matched \"przekroj-budynku-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod miłorzebem 21 (gb) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod miłorzebem 21 (gb) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"przekrój\" names a section (matched \"gotowy projekt dom pod miłorzebem 21 (gb) przekroj budynku\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SECTION",
+        "projection": "ORTHOGRAPHIC_SECTION",
+        "storey": "NOT_APPLICABLE",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-przekroj-budynku-projekt-dom-pod-milorzebem-21-g-c4248daf98",
+      "selectionReason": "largest decoded raster of 2 variants: 1138x854 over 400x300",
+      "variants": [
+        {
+          "aspect": 1.332553,
+          "byteHash": "db52e30166043ef26f92d1bf946c20f599e13631b80bd49b19cdd0809bb9f079",
+          "byteLength": 66361,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 1138
+          },
+          "discoveredVia": "VARIANT_CONVENTION:resolution-convention@https://assets.archon.pl/images/products/mdab2497c5cb47/przekroj-budynku-projekt-dom-pod-milorzebem-21-gb-8ae11bfc4e802577040a878d6bf137ab__256.jpg",
+          "id": "var-przekroj-budynku-projekt-dom-pod-milorzebem-21-g-c4248daf98",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/przekroj-budynku-projekt-dom-pod-milorzebem-21-gb-8ae11bfc4e802577040a878d6bf137ab__11256.jpg"
+        },
+        {
+          "aspect": 1.333333,
+          "byteHash": "12519566b62eda2ee262764d54481dbe58fb1f68737e88aa84ee7bbe386dae40",
+          "byteLength": 23282,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-przekroj-budynku-projekt-dom-pod-milorzebem-21-g-620160e609",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/przekroj-budynku-projekt-dom-pod-milorzebem-21-gb-8ae11bfc4e802577040a878d6bf137ab__256.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) rzut parteru",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rzut-par-d0b4f650b5",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-milorzebem-21-gb-e8-e045fcfc25",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "2b4856d5bd393cfca908026860a21745e6668b701d2eea2a35b516a0bcfbdde5",
+          "byteLength": 30291,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/carousel_images",
+          "id": "var-rzut-parteru-projekt-dom-pod-milorzebem-21-gb-e8-e045fcfc25",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-parteru-projekt-dom-pod-milorzebem-21-gb-e8b310edfc9e924462f80d82bb44f916__706.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) rzut poddasza",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rzut-pod-3b626afec3",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-d-238e2ad94e",
+      "selectionReason": "only variant (550x550, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "ec8ade9906db0bf5ba8032c3d6e094829cf4c6d43ff43c58c5ef17316525c012",
+          "byteLength": 29660,
+          "declared": {
+            "height": 87,
+            "width": 87
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 550,
+            "width": 550
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/carousel_images",
+          "id": "var-rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-d-238e2ad94e",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-d1e54624cc3355138b8156b756fd7674__707.gif"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) sytuacja",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-sytuacja-031fc46fc8",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"sytuacja\" names a site plan (matched \"sytuacja-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.77,
+          "detail": "\"sytuacja\" names a site plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) sytuacja\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "SITE_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "UNKNOWN",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-2a81331122155e7-7c7ffd6fb8",
+      "selectionReason": "largest decoded raster of 2 variants: 734x854 over 344x400",
+      "variants": [
+        {
+          "aspect": 0.859485,
+          "byteHash": "916f5456ce099c755a486de809ce5897161d31c2f0bffa8180e477bf157a0ccb",
+          "byteLength": 119105,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 854,
+            "width": 734
+          },
+          "discoveredVia": "ANCHOR_HREF:a[href]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-2a81331122155e7-7c7ffd6fb8",
+          "mediaType": "image/jpeg",
+          "url": "https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-2a81331122155e7868f1138e9e0a6bfa__11255.jpg"
+        },
+        {
+          "aspect": 0.86,
+          "byteHash": "af90fce280ed5e6a8eb8213f2d420730961d05a61612200a53f472f696a63145",
+          "byteLength": 41847,
+          "declared": {
+            "height": 400,
+            "width": 344
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 400,
+            "width": 344
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-sytuacja-projekt-dom-pod-milorzebem-21-gb-0e82bc-6c4fe5b279",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/sytuacja-projekt-dom-pod-milorzebem-21-gb-0e82bc6c7fb4e1ca2e94879a2bcc1764__255.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "gotowy projekt Dom pod miłorzębem 21 (GB) widok 1",
+      "id": "asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-widok-1-f28535feb4",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-milorzebem-21-gb-52cbadc-92a3d15c60",
+      "selectionReason": "only variant (200x150, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "e9fb8fac2f3e714ca5f0363ac425da08da6874478d2b41c7d5ac63a72843d434",
+          "byteLength": 9313,
+          "declared": {
+            "height": 150,
+            "width": 200
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 150,
+            "width": 200
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-widok-1-projekt-dom-pod-milorzebem-21-gb-52cbadc-92a3d15c60",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-1-projekt-dom-pod-milorzebem-21-gb-52cbadcc3e94a88e98954727955218cc__259.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod miłorzębem 21 (GB)",
+      "id": "asset-projekt-dom-pod-mi-orzebem-21-gb-516a38eeba",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-milorzebem-21-gb-56a3b9f-0e261cf619",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "499577db45ea5e1d102eb26731cce161bfc79d34f83d78978f993035a587b0eb",
+          "byteLength": 35360,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/related?scope=family",
+          "id": "var-widok-2-projekt-dom-pod-milorzebem-21-gb-56a3b9f-0e261cf619",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-2-projekt-dom-pod-milorzebem-21-gb-56a3b9ff25bd8c04d5e603b174c7c8cd__260.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod miłorzębem 21 (GB)",
+      "id": "asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88cb",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-projekt-dom-pod-milorzebem-21-gb-96-d1d45425d1",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b36646e0da67708387a7b376cde84d1e3833f28142dde8057d5ee58fdc0e024f",
+          "byteLength": 19948,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/related?scope=family",
+          "id": "var-rzut-parteru-projekt-dom-pod-milorzebem-21-gb-96-d1d45425d1",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-parteru-projekt-dom-pod-milorzebem-21-gb-96461a11a67ffb5b917efc55683959c1__269.gif"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod miłorzębem 21 (GB)",
+      "id": "asset-projekt-dom-pod-mi-orzebem-21-gb-bf49b85a3d",
+      "roleEvidence": [],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "UNKNOWN",
+        "projection": "UNKNOWN",
+        "storey": "UNKNOWN",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-2af0e40d93472f3-5c4142730b",
+      "selectionReason": "only variant (400x300, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "fb5bfa876d11d09be78b6f852c6bf6f036cf24c5ec313e3c22b26e8a9ca98c52",
+          "byteLength": 30013,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 300,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/related?scope=family",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-2af0e40d93472f3-5c4142730b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-2af0e40d93472f3e970d3c0ee923afdc__252.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "projekt Dom pod miłorzębem 21 (GB)",
+      "id": "asset-projekt-dom-pod-mi-orzebem-21-gb-f91207841a",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-e-e6b97dd145",
+      "selectionReason": "only variant (400x400, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "deeb64cb55a66678b6950e0a85e915be6199322a43addb83f76363d46a71b489",
+          "byteLength": 19078,
+          "declared": {
+            "height": 300,
+            "width": 400
+          },
+          "declaredMismatch": true,
+          "decoded": {
+            "height": 400,
+            "width": 400
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/products/mdab2497c5cb47/related?scope=family",
+          "id": "var-rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-e-e6b97dd145",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-e6c22794aec0246b1971f330abb836b9__270.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-pod-milorzebem-21-gb-473abc941a",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) wizualizacja wszystkich segmentow\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-784214e08e7dadf-77feaa1d0b",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "e0f74c516710f31d01588e2c7b30838598fb67d01885d0b15a804d52140ab959",
+          "byteLength": 356227,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-784214e08e7dadf-77feaa1d0b",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/bs/projekt-dom-pod-milorzebem-21-gb-784214e08e7dadf9dd2a32f7d1fb03d5__35238.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-projekt-dom-pod-milorzebem-21-gb-a69f5fd471",
+      "roleEvidence": [
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) wizualizacja wszystkich segmentow\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-f2dcca3a91f975a-dfd67dde13",
+      "selectionReason": "only variant (1280x720, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.777778,
+          "byteHash": "a7b6983b55211ddcb06aeca40539963542b481724ba07bae83693a43ac200191",
+          "byteLength": 450125,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 720,
+            "width": 1280
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-f2dcca3a91f975a-dfd67dde13",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/bs/projekt-dom-pod-milorzebem-21-gb-f2dcca3a91f975a6b403397d4723180d__35239.jpg"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-01cd92e4b4",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"parter\" is the ground storey (matched \"rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-mi-507fd8c338",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "7a3f15ec6f9df584f230df19290d4c16b2fe0efc68a39449aadb5a3f1ad77987",
+          "byteLength": 60151,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-rzut-parteru-z-powierzchniami-projekt-dom-pod-mi-507fd8c338",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-parteru-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb-475dcd75d1871bff3e79655decc2a80c__11915.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-2d9464b3c8",
+      "roleEvidence": [
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.9,
+          "detail": "\"z powierzchniami\" is the copy carrying the room area table (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "annotation",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.8,
+          "detail": "published through the floor-plan attribute, which carries the area-labelled copy",
+          "dimension": "document",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.92,
+          "detail": "\"poddasze\" is the attic storey (matched \"rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "storey",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "AREA_TABLE",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-rzut-poddasza-z-powierzchniami-projekt-dom-pod-m-30645b6eaf",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "b2a2d3d76045aa77bc7cb88f1b926bf59c2a9a3d150f295b82eee5cfcefcabe9",
+          "byteLength": 59216,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "FLOOR_PLAN_ATTR:img[data-floor-pom-img]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-rzut-poddasza-z-powierzchniami-projekt-dom-pod-m-30645b6eaf",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-poddasza-z-powierzchniami-projekt-dom-pod-milorzebem-21-gb-d6912a70ca44e0432582b9e04fa724f8__11917.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-3f1ea58c66",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/3",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/3",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"poddasze\" is the attic storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut poddasza\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "ATTIC",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-fd5375b1cf4d1cf-803e909c9f",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "d13956720f73eeaa46d600087bb5c63aed2a4bc2b655f4dcf113ba389d6b7554",
+          "byteLength": 58619,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-fd5375b1cf4d1cf-803e909c9f",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-fd5375b1cf4d1cf4f676f44385a4c55d__11817.gif"
+        }
+      ]
+    },
+    {
+      "caption": "rzut",
+      "id": "asset-rzut-ebe6069a09",
+      "roleEvidence": [
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.6,
+          "detail": "a plan in the page body that is not the area copy: the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "channel"
+        },
+        {
+          "confidence": 0.55,
+          "detail": "the plain plan inside a floor fragment is the dimensioned copy",
+          "dimension": "annotation",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/1",
+          "dimension": "document",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"rzut\" names a floor plan (matched \"rzut\")",
+          "dimension": "document",
+          "signal": "caption"
+        },
+        {
+          "confidence": 0.86,
+          "detail": "exposed by the publisher's floor fragment /product_fancybox_floor/mdab2497c5cb47/1",
+          "dimension": "storey",
+          "signal": "endpoint"
+        },
+        {
+          "confidence": 0.78,
+          "detail": "\"parter\" is the ground storey (matched \"gotowy projekt dom pod miłorzebem 21 (gb) rzut parteru\")",
+          "dimension": "storey",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "DIMENSIONED",
+        "document": "FLOOR_PLAN",
+        "projection": "ORTHOGRAPHIC_PLAN",
+        "storey": "GROUND",
+        "view": "NOT_APPLICABLE"
+      },
+      "selectedVariantId": "var-projekt-dom-pod-milorzebem-21-gb-5f9a49ee1ea708f-f4c19f61ef",
+      "selectionReason": "only variant (853x853, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1,
+          "byteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+          "byteLength": 58886,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 853,
+            "width": 853
+          },
+          "discoveredVia": "IMG_SRC:img[src]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-projekt-dom-pod-milorzebem-21-gb-5f9a49ee1ea708f-f4c19f61ef",
+          "mediaType": "image/gif",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-5f9a49ee1ea708f030d0802f5e867701__11815.gif"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-1-projekt-dom-pod-milorzebem-21-gb-f79c09b4ae",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-1-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) widok 1\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-1-projekt-dom-pod-milorzebem-21-gb-ba3e698-add2d22427",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "99468a75d37121b72ddc82a5b0990996d48f4f29a7a672294a044bc0582f09e8",
+          "byteLength": 140119,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-widok-1-projekt-dom-pod-milorzebem-21-gb-ba3e698-add2d22427",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-1-projekt-dom-pod-milorzebem-21-gb-ba3e6985575fedbcf748148af96e51e8__289.jpg"
+        }
+      ]
+    },
+    {
+      "id": "asset-widok-2-projekt-dom-pod-milorzebem-21-gb-e6ea18c457",
+      "roleEvidence": [
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.88,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"widok-2-projekt-dom-pod-milorzebem-21-gb\")",
+          "dimension": "document",
+          "signal": "url-slug"
+        },
+        {
+          "confidence": 0.75,
+          "detail": "\"widok\" / \"wizualizacja\" names a visualisation (matched \"gotowy projekt dom pod miłorzebem 21 (gb) widok 2\")",
+          "dimension": "document",
+          "signal": "caption"
+        }
+      ],
+      "roles": {
+        "annotation": "UNKNOWN",
+        "document": "PERSPECTIVE_RENDER",
+        "projection": "PERSPECTIVE",
+        "storey": "NOT_APPLICABLE",
+        "view": "UNKNOWN"
+      },
+      "selectedVariantId": "var-widok-2-projekt-dom-pod-milorzebem-21-gb-db1743c-2b8bad24f1",
+      "selectionReason": "only variant (800x600, decoded from bytes)",
+      "variants": [
+        {
+          "aspect": 1.333333,
+          "byteHash": "56b970493622d6c637df7116c1284047fd014194aa428c1411ba534cf9f34a14",
+          "byteLength": 176680,
+          "declaredMismatch": false,
+          "decoded": {
+            "height": 600,
+            "width": 800
+          },
+          "discoveredVia": "OG_IMAGE:meta[og:image]@https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+          "id": "var-widok-2-projekt-dom-pod-milorzebem-21-gb-db1743c-2b8bad24f1",
+          "mediaType": "image/jpeg",
+          "url": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-2-projekt-dom-pod-milorzebem-21-gb-db1743c1e40701407d853b580705bce2__290.jpg"
+        }
+      ]
+    }
+  ],
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+  "contentHash": "83dfd3d099ba06e5729b43613dd96fb89c87264ea492a5f76b1c75186af42fcb",
+  "failures": [
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-2af0e40d93472f3e970d3c0ee923afdc__11252.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-parteru-projekt-dom-pod-milorzebem-21-gb-96461a11a67ffb5b917efc55683959c1__11269.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "GROUND"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-parteru-projekt-dom-pod-milorzebem-21-gb-e8b310edfc9e924462f80d82bb44f916__11706.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-d1e54624cc3355138b8156b756fd7674__11707.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "FLOOR_PLAN",
+        "storey": "ATTIC"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/rzut-poddasza-projekt-dom-pod-milorzebem-21-gb-e6c22794aec0246b1971f330abb836b9__11270.gif"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-1-projekt-dom-pod-milorzebem-21-gb-52cbadcc3e94a88e98954727955218cc__11259.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-1-projekt-dom-pod-milorzebem-21-gb-ba3e6985575fedbcf748148af96e51e8__11289.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-2-projekt-dom-pod-milorzebem-21-gb-56a3b9ff25bd8c04d5e603b174c7c8cd__11260.jpg"
+    },
+    {
+      "claim": {
+        "channel": "VARIANT_CONVENTION",
+        "document": "PERSPECTIVE_RENDER"
+      },
+      "code": "HTTP_STATUS",
+      "message": "HTTP 404",
+      "stage": "ASSET_FETCH",
+      "status": 404,
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/widok-2-projekt-dom-pod-milorzebem-21-gb-db1743c1e40701407d853b580705bce2__11290.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-6771d5b46896e146773f29cd8cc56e4f__11266.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-0880f5093df2dcc00f214f96d9941c76__11266.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-53287f3d0e4e4bf7b50e0453c84b6019__11265.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-boczna-projekt-dom-pod-milorzebem-21-gb-204945f7d81866e477ead2d02c3537da__11265.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-c4c4bf5b87d175c70bf27d652c970b08__11264.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-frontowa-projekt-dom-pod-milorzebem-21-gb-77994f8c3126ff835a242420924bddef__11264.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-3914ab80cb8c2c6f6e7425d8c6ae37ed__11267.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/elewacja-ogrodowa-projekt-dom-pod-milorzebem-21-gb-7006102014939f6dabffcb68c45c90d4__11267.jpg"
+    },
+    {
+      "code": "BYTE_IDENTICAL",
+      "message": "byte-identical to https://www.archon.pl/images/products/mdab2497c5cb47/projekt-dom-pod-milorzebem-21-gb-2a81331122155e7868f1138e9e0a6bfa__11255.jpg: one copy published at two addresses, counted once",
+      "stage": "ROLE",
+      "target": "https://assets.archon.pl/images/products/mdab2497c5cb47/sytuacja-projekt-dom-pod-milorzebem-21-gb-0e82bc6c7fb4e1ca2e94879a2bcc1764__11255.jpg"
+    }
+  ],
+  "id": "src-mdab2497c5cb47-e5e31a3606",
+  "pageHash": "8e15940fb644a9a1b9dc3ef90aa48f2f989f37a5f0a03279f304cf0d814f90fa",
+  "project": {
+    "externalId": "mdab2497c5cb47",
+    "name": "Projekt domu Dom pod miłorzębem 21 (GB) Dane projektu",
+    "publisher": "archon.pl"
+  },
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "label": "Wysokość budynku",
+      "raw": "9,29 m",
+      "unit": "m",
+      "value": 9.29
+    },
+    {
+      "key": "floor_area",
+      "label": "Powierzchnia podłóg",
+      "raw": "121,03 m&sup2;",
+      "unit": "m2",
+      "value": 121.03
+    },
+    {
+      "key": "footprint_area",
+      "label": "Powierzchnia zabudowy",
+      "raw": "82,81 m&sup2;",
+      "unit": "m2",
+      "value": 82.81
+    },
+    {
+      "key": "garage_area",
+      "label": "Powierzchnia garażu",
+      "raw": "17,45 m&sup2;",
+      "unit": "m2",
+      "value": 17.45
+    },
+    {
+      "key": "house_net_area",
+      "label": "Powierzchnia netto domu bez garażu",
+      "raw": "99,71 m&sup2;",
+      "unit": "m2",
+      "value": 99.71
+    },
+    {
+      "key": "roof_area",
+      "label": "Powierzchnia dachu",
+      "raw": "124,74 m&sup2;",
+      "unit": "m2",
+      "value": 124.74
+    },
+    {
+      "key": "total_area",
+      "label": "Powierzchnia całkowita",
+      "raw": "163,87 m&sup2;",
+      "unit": "m2",
+      "value": 163.87
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "label": "Powierzchnia użytkowa (bez schodów)",
+      "raw": "112,65 m&sup2;",
+      "unit": "m2",
+      "value": 112.65
+    },
+    {
+      "key": "volume",
+      "label": "Kubatura",
+      "raw": "605,0 m&sup3;",
+      "unit": "none",
+      "value": 605
+    }
+  ],
+  "publishedRooms": [
+    {
+      "area": 4.51,
+      "index": 1,
+      "label": "Schody",
+      "raw": "1. Schody | 4,51 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 7.29,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 7,29 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.9,
+      "index": 3,
+      "label": "Pokój",
+      "raw": "3. Pokój | 9,90 | (10,74)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 11.72,
+      "index": 4,
+      "label": "Pokój",
+      "raw": "4. Pokój | 11,72 | (12,56)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.64,
+      "index": 5,
+      "label": "Pralnia",
+      "raw": "5. Pralnia | 4,64 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 6.53,
+      "index": 6,
+      "label": "Łazienka",
+      "raw": "6. Łazienka | 6,53 | ",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 9.35,
+      "index": 7,
+      "label": "Pokój",
+      "raw": "7. Pokój | 9,35 | (10,18)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 5.05,
+      "index": 8,
+      "label": "Garderoba",
+      "raw": "8. Garderoba | 5,05 | (5,89)",
+      "storey": "ATTIC"
+    },
+    {
+      "area": 4.43,
+      "index": 1,
+      "label": "Wiatrołap",
+      "raw": "1. Wiatrołap | 4,43 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 5.29,
+      "index": 2,
+      "label": "Hol",
+      "raw": "2. Hol | 5,29 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 2.32,
+      "index": 3,
+      "label": "Łazienka",
+      "raw": "3. Łazienka | 2,32 | (2,84)",
+      "storey": "GROUND"
+    },
+    {
+      "area": 22.29,
+      "index": 4,
+      "label": "Salon + Jadalnia",
+      "raw": "4. Salon + Jadalnia | 22,29 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 6.39,
+      "index": 5,
+      "label": "Kuchnia",
+      "raw": "5. Kuchnia | 6,39 | ",
+      "storey": "GROUND"
+    },
+    {
+      "area": 17.45,
+      "index": 6,
+      "label": "Garaż",
+      "raw": "6. Garaż | 17,45 | ",
+      "storey": "GROUND"
+    }
+  ],
+  "publishedSpecifications": [
+    {
+      "key": "description",
+      "label": "description",
+      "text": "Projekt nowoczesnego domu z poddaszem użytkowym i jednostanowiskowym garażem, do realizacji w zabudowie bliźniaczej. To budynek o racjonalnie zagospodarowanej przestrzeni wewnętrznej, oferujący mieszkańcom komfortowe warunki użytkowania. Elewacje w ciekawy sposób wykończono jasnym i grafitowym tynkiem, podkreślając granicę pomiędzy kondygnacjami. Wejściowy podcień podkreśla drewniana okładzina, którą dodaje także klimatu strefie tarasowej. Ozdobą domu są lukarny, dzięki nim część nocna na poddaszu jest bardziej przestronna i doskonale doświetlona. Przesuwne przeszklenie w salonie dodaje wnętrzu atrakcyjności i otwiera szeroki widok na ogród. Przestrzeń wypoczynkową salonu powiększa taras, w jadalni przewidziano miejsce na duży stół, a w programie kuchni uwzględniono obszerny blat roboczy oraz praktyczny układ funkcji. Plan parteru uzupełnia łazienka z prysznicem oraz dostępny przez wiatrołap jednostanowiskowy garaż. Prowadzące na poddasze schody zostały naturalnie doświetlone. W strefie prywatnej zaprojektowano dwie sypialnie dla dzieci, każda z wyjściem na balkon, oraz pokój rodziców z własną garderobą. Znajdująca się na osi schodów wspólna łazienka mieści zarówno prysznic, jak i wannę, tuż obok przewidziano pralnię. Zaprezentowany „Dom pod miłorzębem 21 (GB)\" to projekt z kolekcji: projekty bliźniaków, projekty domów z poddaszem użytkowym , projekty domów dla deweloperów ."
+    },
+    {
+      "key": "floor_structure",
+      "label": "strop",
+      "text": "płyta żelbetowa"
+    },
+    {
+      "key": "garage_door",
+      "label": "brama garażowa",
+      "text": "HÖRMANN"
+    },
+    {
+      "key": "knee_wall",
+      "label": "ścianka kolankowa",
+      "text": "130 cm"
+    },
+    {
+      "key": "other",
+      "label": "kocioł",
+      "text": "gazowy"
+    },
+    {
+      "key": "other",
+      "label": "ogrzewanie podłogowe",
+      "text": "zastosowano we wszystkich pomieszczeniach mieszkalnych"
+    },
+    {
+      "key": "other",
+      "label": "wentylacja",
+      "text": "grawitacyjna"
+    },
+    {
+      "key": "roof",
+      "label": "dach",
+      "text": "dwuspadowy, nachylenie 35 st. , więźba drewniana, dachówka ceramiczna CREATON"
+    },
+    {
+      "key": "summary",
+      "label": "meta description",
+      "text": "Dom do zabudowy bliźniaczej z poddaszem użytkowym , strop płyta żelbetowa , 99.71 m² + 17.45 m² , 4 pokoje, kuchnia, 2 łazienki, pralnia, garderoba, kominek, garaż"
+    },
+    {
+      "key": "walls",
+      "label": "ściany",
+      "text": "pustak ceramiczny Porotherm 25 cm, styropian Termo Organika 20 cm, tynk"
+    }
+  ],
+  "schema": "buildapp.source-package",
+  "schemaVersion": "1.2.0"
+}
+

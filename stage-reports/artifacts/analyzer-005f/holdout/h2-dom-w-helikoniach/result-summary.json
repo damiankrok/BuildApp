@@ -1,0 +1,247 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "analyzer": {
+    "service": "1.1.0",
+    "solver": "2.3.0"
+  },
+  "candidateHash": "8f538eee5383e542548c6c5f5d9cc9cf6ccc84845ffd9591b8d4df339f1334fa",
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+  "completedAt": "2026-10-02T15:16:09.679Z",
+  "counts": {
+    "assets": 20,
+    "assetsByDocument": {
+      "ELEVATION": 4,
+      "FLOOR_PLAN": 8,
+      "PERSPECTIVE_RENDER": 4,
+      "SECTION": 1,
+      "SITE_PLAN": 1,
+      "UNKNOWN": 2
+    },
+    "balconies": 0,
+    "callouts": 53,
+    "chimneys": 0,
+    "commands": 76,
+    "frames": 18,
+    "masses": 1,
+    "meshes": 58,
+    "metricEvidence": 101,
+    "observations": 924,
+    "openings": 8,
+    "railings": 0,
+    "rooflights": 0,
+    "rooms": 4,
+    "terraces": 1,
+    "triangles": 1368
+  },
+  "jobId": null,
+  "label": "Dom w helikoniach 3 (E) OZE (analysis)",
+  "metricEvidenceHash": "d98e661caeb89141ec105ba570da90098020b3dae87a7284fe2c14cb90e60447",
+  "modelHash": "7a59ba63f58b7cdbc13ad4c2355f91b75fd04c62403d464d53614203681e2aa6",
+  "modelId": "m-analysis-md6026d579e43f",
+  "modelSha256": "7a59ba63f58b7cdbc13ad4c2355f91b75fd04c62403d464d53614203681e2aa6",
+  "observationGraphHash": "42840c207e2bb236733cef8c45730b860a8262c38aa26eb0a7854cceebb4f57b",
+  "publisher": "archon.pl",
+  "quality": {
+    "byFamily": {
+      "INTERIOR_DOOR": {
+        "L1": 3
+      },
+      "INTERIOR_WALL": {
+        "L0": 1,
+        "L1": 9
+      },
+      "LEVEL": {
+        "L2": 1
+      },
+      "MASS": {
+        "L1": 1
+      },
+      "OPENING": {
+        "L1": 6,
+        "L2": 2
+      },
+      "RECESS": {
+        "L2": 1
+      },
+      "RETURN_WALL": {
+        "L1": 1
+      },
+      "ROOF": {
+        "L2": 1
+      },
+      "ROOM": {
+        "L1": 3,
+        "L2": 1
+      },
+      "TERRACE": {
+        "L1": 1
+      }
+    },
+    "levels": {
+      "L0": 1,
+      "L1": 24,
+      "L2": 6
+    }
+  },
+  "sceneBytes": 168659,
+  "sceneContentHash": "5bd243ec6e148d90e16f12577e673c80a3d3c276703c23efef6e8ea027a6a294",
+  "sceneSha256": "4d8de28caee81be970e40a0d08abe8c3475d26af5a5c28349ada3e7fc9f9130d",
+  "schema": "buildapp.link-analysis-result",
+  "schemaVersion": "1.0.0",
+  "sourcePackageHash": "99f7daf541223b104344e9691b73f2cf28bae87913f8079525550a60324fea88",
+  "sourcePackageId": "src-md6026d579e43f-f5537e89dc",
+  "sourceUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+  "startedAt": "2026-10-02T15:13:09.130Z",
+  "timings": {
+    "acquisitionMs": 19210,
+    "compileMs": 46,
+    "metricExtractionMs": 146205,
+    "observationMs": 12215,
+    "reconstructionMs": 2698,
+    "totalMs": 180550,
+    "verificationMs": 176
+  },
+  "title": "Dom w helikoniach 3 (E) OZE",
+  "unresolved": [
+    {
+      "reason": "its registered outline does not cover half of any body found on the plan below",
+      "status": "AMBIGUOUS",
+      "what": "which body the attic storey stands on"
+    },
+    {
+      "reason": "no section states an eaves level and a ridge level, so there is no rise to test a span against",
+      "status": "AMBIGUOUS",
+      "what": "which way the ridge runs over mass-0"
+    },
+    {
+      "reason": "it is 0.53 m across, less than the 1.00 m two 0.32 m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body",
+      "status": "AMBIGUOUS",
+      "what": "whether the 3.03 m² strip at 0.00, 6.67 is part of the building"
+    },
+    {
+      "reason": "it is 0.35 m across, less than the 1.00 m two 0.32 m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body",
+      "status": "AMBIGUOUS",
+      "what": "whether the 0.31 m² strip at 0.18, 4.95 is part of the building"
+    },
+    {
+      "reason": "it is 0.35 m across, less than the 1.00 m two 0.32 m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body",
+      "status": "AMBIGUOUS",
+      "what": "whether the 0.23 m² strip at 0.18, 2.58 is part of the building"
+    },
+    {
+      "reason": "it is 0.38 m across, less than the 1.00 m two 0.32 m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body",
+      "status": "AMBIGUOUS",
+      "what": "whether the 1.04 m² strip at 0.53, 12.01 is part of the building"
+    },
+    {
+      "reason": "it is 0.97 m across, less than the 1.00 m two 0.32 m walls and a room between them need: a wall's thickness, a step between outer faces or a pier, not a body",
+      "status": "AMBIGUOUS",
+      "what": "whether the 2.92 m² strip at 3.26, 12.01 is part of the building"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the front elevation"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the rear elevation"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the left elevation"
+    },
+    {
+      "reason": "its silhouette fits neither the walled nor the characteristic span with the ridge at its apex",
+      "status": "AMBIGUOUS",
+      "what": "a v2 registration for the right elevation"
+    },
+    {
+      "reason": "meets no wall at either end: fitted furniture or a line, not a partition",
+      "status": "AMBIGUOUS",
+      "what": "a 1.20 m thin band at z 5.17"
+    },
+    {
+      "reason": "its 15.1625 m² is 245 % off the published Hol 4.39 m²",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-1 (read as 2)"
+    },
+    {
+      "reason": "its 4.75 m² is 42 % off the published Pokój 8.25 m²; by area it would be 2 Hol 4.39 or 3 Łazienka 4.49",
+      "status": "AMBIGUOUS",
+      "what": "the label of room-0-0 (read as 7)"
+    },
+    {
+      "reason": "narrowed from 6.21 to 6.12 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-0-west-3-0 as the drawings print it"
+    },
+    {
+      "reason": "narrowed from 2.64 to 2.52 m to stay within the wall material its host's corners leave",
+      "status": "AMBIGUOUS",
+      "what": "the opening opening-0-west-3-2 as the drawings print it"
+    }
+  ],
+  "verification": {
+    "closure": {
+      "exteriorErrors": 0,
+      "exteriorFindings": 0,
+      "interiorFindings": 9
+    },
+    "replay": "BYTE_IDENTICAL",
+    "residuals": 0,
+    "residualsOutsideTolerance": 0
+  },
+  "vision": {
+    "accepted": 0,
+    "attempted": 0,
+    "mode": "DETERMINISTIC_ONLY",
+    "provider": null
+  },
+  "warningDetails": [
+    {
+      "code": "DETERMINISTIC_ONLY",
+      "message": "no vision provider ran; every observation is from the deterministic analyzer",
+      "severity": "INFO"
+    },
+    {
+      "code": "SOURCE_BYTE_IDENTICAL",
+      "message": "5 source addresses counted with another copy (byte identical)",
+      "severity": "INFO"
+    },
+    {
+      "code": "GUESSED_ADDRESS_HTTP_STATUS",
+      "message": "9 guessed larger copies not available (http status); the published copy was used",
+      "severity": "INFO"
+    },
+    {
+      "code": "LAYOUT_FOOTPRINT_AREA_NEAR",
+      "message": "the lowest storey covers 77.56 m² against the 95.61 m² the publisher prints",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "LAYOUT_NO_MASS_REACHES_UP",
+      "message": "more than one storey was read and no body reaches past the first",
+      "severity": "LIMITING"
+    },
+    {
+      "code": "METRIC_SCALE_UNSUPPORTED",
+      "message": "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it",
+      "severity": "LIMITING"
+    }
+  ],
+  "warnings": [
+    "no vision provider ran; every observation is from the deterministic analyzer",
+    "5 source addresses counted with another copy (byte identical)",
+    "9 guessed larger copies not available (http status); the published copy was used",
+    "the lowest storey covers 77.56 m² against the 95.61 m² the publisher prints",
+    "more than one storey was read and no body reaches past the first",
+    "no printed dimension read as printed supports the plan’s scale: every value that agrees with it was fitted to it"
+  ]
+}
+

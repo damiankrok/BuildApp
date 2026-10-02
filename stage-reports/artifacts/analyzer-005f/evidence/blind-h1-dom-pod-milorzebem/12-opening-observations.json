@@ -1,0 +1,66 @@
+{
+  "callouts": [
+    {
+      "box": {
+        "x0": 370,
+        "x1": 388,
+        "y0": 544,
+        "y1": 562
+      },
+      "id": "metric-callout-ring-47d4d060c4",
+      "rawText": "41/41",
+      "value": 41
+    },
+    {
+      "box": {
+        "x0": 198,
+        "x1": 220,
+        "y0": 378,
+        "y1": 400
+      },
+      "id": "metric-callout-ring-e6ca752582",
+      "rawText": "406/400",
+      "value": 406
+    }
+  ],
+  "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+  "gapClasses": {},
+  "wideOpenings": [
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 424,
+      "id": "opening-0",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 170,
+      "score": 0.8,
+      "toPx": 430,
+      "why": "a 6.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 6
+    },
+    {
+      "axis": "X",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 552,
+      "id": "opening-1",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 170,
+      "score": 0.8,
+      "toPx": 560,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    },
+    {
+      "axis": "Y",
+      "decision": "OPENING_IN_WALL",
+      "fromPx": 197,
+      "id": "opening-2",
+      "kind": "COLLINEAR_GAP",
+      "linePx": 556,
+      "score": 0.8,
+      "toPx": 205,
+      "why": "a 8.00 m gap between two pieces of one wall with 100% of it spanned by one drawn line: an opening in a wall that carries on",
+      "widthM": 8
+    }
+  ]
+}

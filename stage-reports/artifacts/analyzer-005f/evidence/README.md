@@ -14,6 +14,7 @@ own render. `npm run -s evidence:verify -- <this directory> --max-packs 16` chec
 | --- | --- | --- |
 | `dom-w-modrzewnicy` | the final development matrix (`41e26be`), offline from the sealed package | round-5 blind #1: the condensed overall is now cut at four glyphs and still misread; the refusal is typed `DIMENSION_EVIDENCE_INCONCLUSIVE` |
 | `dom-w-morelach` | the same | round-5 blind #2: the extent conflict, the attached bay and the garage end; PASS at −3.12 % |
+| `blind-h1-dom-pod-milorzebem`, `blind-h2-dom-w-helikoniach` | the round-6 blind runs, frozen code (`PRE_HOLDOUT_6_SHA` `65ae015`; ledger `951a4d0`), written during the one run and committed unchanged | the blind verdicts and their first bad decisions (`../holdout/README.md`) |
 
 The runs were made from a snapshot of `41e26be` outside the worktree (`git archive`), so the manifests carry no git SHA;
 `../development-matrix.json` names the snapshot (`snapshotSha`). The "before" packs are the committed round-5 blind runs

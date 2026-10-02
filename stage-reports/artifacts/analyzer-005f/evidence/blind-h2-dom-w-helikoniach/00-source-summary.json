@@ -1,0 +1,61 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 20,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 4,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 2
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-helikoniach-3-e-oze-md6026d579e43f",
+  "contentHash": "99f7daf541223b104344e9691b73f2cf28bae87913f8079525550a60324fea88",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-md6026d579e43f-f5537e89dc",
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 7.67
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 142
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 95.61
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 124.8
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 187.59
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 117.26
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 590.94
+    }
+  ],
+  "runId": "h2-dom-w-helikoniach"
+}

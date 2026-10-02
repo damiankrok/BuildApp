@@ -1,0 +1,71 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 21,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 6,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-pod-milorzebem-21-gb-mdab2497c5cb47",
+  "contentHash": "83dfd3d099ba06e5729b43613dd96fb89c87264ea492a5f76b1c75186af42fcb",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 9
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-mdab2497c5cb47-e5e31a3606",
+  "publishedFacts": [
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 9.29
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 121.03
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 82.81
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 17.45
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 99.71
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 124.74
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 163.87
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 112.65
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 605
+    }
+  ],
+  "runId": "h1-dom-pod-milorzebem"
+}

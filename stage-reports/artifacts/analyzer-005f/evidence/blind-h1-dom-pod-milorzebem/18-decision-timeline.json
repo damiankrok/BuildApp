@@ -1,0 +1,3241 @@
+{
+  "events": [
+    {
+      "conflictIds": [],
+      "decision": "ACQUIRED",
+      "downstream": [
+        "DIMENSION_TICK_CLASSIFICATION",
+        "GLYPH_COUNT_HYPOTHESES"
+      ],
+      "eventId": "e00001",
+      "objectId": "source:src-mdab2497c5cb47-e5e31a3606",
+      "reason": "21 assets (ELEVATION 4, SECTION 1, FLOOR_PLAN 8, SITE_PLAN 1, PERSPECTIVE_RENDER 6, UNKNOWN 1), 9 published figures, 14 failures",
+      "reversible": true,
+      "seq": 1,
+      "stage": "SOURCE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00002",
+      "objectId": "tick:chain-vertical-135-f4f63dbf60:157",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 2,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-135-f4f63dbf60"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00003",
+      "objectId": "tick:chain-vertical-135-f4f63dbf60:677",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 3,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-135-f4f63dbf60"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00004",
+      "objectId": "tick:chain-horizontal-753-e7e850a59c:161",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 4,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-753-e7e850a59c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00005",
+      "objectId": "tick:chain-horizontal-753-e7e850a59c:427",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 5,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-753-e7e850a59c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00006",
+      "objectId": "tick:chain-horizontal-785-caa83bc7fc:161",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 6,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-785-caa83bc7fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00007",
+      "objectId": "tick:chain-horizontal-785-caa83bc7fc:427",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 7,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-785-caa83bc7fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00008",
+      "objectId": "tick:chain-vertical-391-3199b7bc9a:340",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 8,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-391-3199b7bc9a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00009",
+      "objectId": "tick:chain-vertical-391-3199b7bc9a:346.5",
+      "reason": "FAINT_SIDE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 9,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-391-3199b7bc9a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00010",
+      "objectId": "tick:chain-vertical-391-3199b7bc9a:382",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 10,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-391-3199b7bc9a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00011",
+      "objectId": "tick:chain-vertical-391-3199b7bc9a:394",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 11,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-391-3199b7bc9a"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00012",
+      "objectId": "tick:chain-horizontal-614-140c7779ce:331.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 12,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-614-140c7779ce"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00013",
+      "objectId": "tick:chain-horizontal-614-140c7779ce:375.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 13,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-614-140c7779ce"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00014",
+      "objectId": "tick:chain-vertical-378-7a83d5565b:546.5",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 14,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-378-7a83d5565b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00015",
+      "objectId": "tick:chain-vertical-378-7a83d5565b:586",
+      "reason": "COLOUR_MISMATCH,NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 15,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-378-7a83d5565b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00016",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:178",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 16,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00017",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:206",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 17,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00018",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:223.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 18,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00019",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:285",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 19,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00020",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:309",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 20,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00021",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:339",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 21,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00022",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:388.5",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 22,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00023",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:402",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 23,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00024",
+      "objectId": "tick:chain-horizontal-212-b09dcc58dd:426.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 24,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-horizontal-212-b09dcc58dd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00025",
+      "objectId": "tick:chain-vertical-143-3763624935:417.5",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 25,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-3763624935"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00026",
+      "objectId": "tick:chain-vertical-143-3763624935:604",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 26,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-3763624935"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00027",
+      "objectId": "tick:chain-vertical-143-3763624935:650.5",
+      "reason": "FAINT_SIDE,LIGHTER_THAN_LINE",
+      "reversible": true,
+      "seq": 27,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-3763624935"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00028",
+      "objectId": "tick:chain-vertical-143-986a15c447:179.5",
+      "reason": "FAINT_SIDE,LIGHTER_THAN_LINE",
+      "reversible": true,
+      "seq": 28,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-986a15c447"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00029",
+      "objectId": "tick:chain-vertical-143-986a15c447:226",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 29,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-986a15c447"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00030",
+      "objectId": "tick:chain-vertical-143-986a15c447:403",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 30,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-143-986a15c447"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00031",
+      "objectId": "tick:chain-vertical-392-657c6d06cc:196",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 31,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-657c6d06cc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00032",
+      "objectId": "tick:chain-vertical-392-657c6d06cc:219",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 32,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-657c6d06cc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00033",
+      "objectId": "tick:chain-vertical-392-657c6d06cc:257.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 33,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-657c6d06cc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00034",
+      "objectId": "tick:chain-vertical-392-657c6d06cc:343.5",
+      "reason": "COLOUR_MISMATCH,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 34,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-392-657c6d06cc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00035",
+      "objectId": "tick:chain-vertical-386-7185814e53:192",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 35,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-386-7185814e53"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00036",
+      "objectId": "tick:chain-vertical-386-7185814e53:212",
+      "reason": "COLOUR_MISMATCH",
+      "reversible": false,
+      "seq": 36,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-386-7185814e53"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00037",
+      "objectId": "tick:chain-vertical-386-7185814e53:229",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 37,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-386-7185814e53"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00038",
+      "objectId": "tick:chain-vertical-402-24d18540e6:258",
+      "reason": "a stroke as dark as its line, on both sides",
+      "reversible": false,
+      "seq": 38,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-402-24d18540e6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00039",
+      "objectId": "tick:chain-vertical-402-24d18540e6:346",
+      "reason": "WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 39,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-402-24d18540e6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00040",
+      "objectId": "tick:chain-vertical-398-4bf949e277:561.5",
+      "reason": "NO_LINE_REFERENCE,WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 40,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-398-4bf949e277"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00041",
+      "objectId": "tick:chain-vertical-398-4bf949e277:586",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 41,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-398-4bf949e277"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00042",
+      "objectId": "tick:chain-vertical-398-4bf949e277:607.5",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 42,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-398-4bf949e277"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00043",
+      "objectId": "tick:chain-vertical-398-4bf949e277:635",
+      "reason": "NO_LINE_REFERENCE",
+      "reversible": false,
+      "seq": 43,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-398-4bf949e277"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00044",
+      "objectId": "tick:chain-vertical-239-85f7d10dde:333",
+      "reason": "NO_LINE_REFERENCE,WEDGE_NOT_STROKE",
+      "reversible": false,
+      "seq": 44,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-239-85f7d10dde"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00045",
+      "objectId": "tick:chain-vertical-239-85f7d10dde:358",
+      "reason": "NO_LINE_REFERENCE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 45,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-239-85f7d10dde"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "ACCEPTED_QUESTIONABLE",
+      "downstream": [
+        "GLYPH_COUNT_HYPOTHESES",
+        "OCR_SEQUENCE_CANDIDATES"
+      ],
+      "eventId": "e00046",
+      "objectId": "tick:chain-vertical-239-85f7d10dde:376",
+      "reason": "NO_LINE_REFERENCE,ONE_SIDED,WEDGE_NOT_STROKE",
+      "reversible": true,
+      "seq": 46,
+      "stage": "DIMENSION_TICK_CLASSIFICATION",
+      "supportIds": [
+        "chain-vertical-239-85f7d10dde"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:608|000,008,048,108,600,648,808",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00047",
+      "objectId": "ink:text-region-280-734-c61c6f0d9b:HORIZONTAL",
+      "reason": "SUPPORTED (p 0.487); read 008 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 47,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-280-734-c61c6f0d9b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:1270|1170,1210,1230,1370,1570,1730,1770",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00048",
+      "objectId": "ink:text-region-116-406-5116852d81:ROTATED_CW",
+      "reason": "SUPPORTED (p 0.539); read 1770 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 48,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-116-406-5116852d81"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:578|118,178,318,378,518,538,570",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00049",
+      "objectId": "ink:text-region-284-182-c8791e63c5:HORIZONTAL",
+      "reason": "AMBIGUOUS (p 0.455); read 578 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 49,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-284-182-c8791e63c5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:650|010,050,610,630,640,810,850",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00050",
+      "objectId": "ink:text-region-281-766-d0950a742e:HORIZONTAL",
+      "reason": "AMBIGUOUS (p 0.345); read 610 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 50,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-281-766-d0950a742e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:1270|100,1210,200,5170,530,550,570",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00051",
+      "objectId": "ink:text-region-85-262-4dfcad1905:ROTATED_CW",
+      "reason": "AMBIGUOUS (p 0.241); read 550 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 51,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-85-262-4dfcad1905"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:631|010,011,021,041,610,641,651",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00052",
+      "objectId": "ink:text-region-145-344-00407192e0:HORIZONTAL",
+      "reason": "LOW_QUALITY (p 0.138); read 011 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 52,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-145-344-00407192e0"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:608|000,008,048,108,600,648,808",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00053",
+      "objectId": "ink:text-region-280-734-7f01e6bf65:HORIZONTAL",
+      "reason": "SUPPORTED (p 0.467); read 008 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 53,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-280-734-7f01e6bf65"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:1270|1170,1210,1230,1370,1570,1730,1770",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00054",
+      "objectId": "ink:text-region-116-406-c2fdb98c64:ROTATED_CW",
+      "reason": "AMBIGUOUS (p 0.41); read 1770 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 54,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-116-406-c2fdb98c64"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:650|010,050,610,630,640,810,850",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00055",
+      "objectId": "ink:text-region-281-766-021c92d8a8:HORIZONTAL",
+      "reason": "AMBIGUOUS (p 0.345); read 610 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 55,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-281-766-021c92d8a8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:42|43,45,46,48,52,55,76",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00056",
+      "objectId": "ink:text-region-356-356-6c78546c36:ROTATED_CW",
+      "reason": "LOW_QUALITY (p 0.211); read 76 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 56,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-356-356-6c78546c36"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "CANDIDATES:864.1|064.1,824.,854.,860.,864.,884.,964.1",
+      "downstream": [
+        "OCR_READING",
+        "LABEL_BINDING"
+      ],
+      "eventId": "e00057",
+      "objectId": "ink:text-region-348-573-01530ea99c:ROTATED_CW",
+      "reason": "AMBIGUOUS (p 0.087); read 064.1 by the 005D reader; 8 image-only values",
+      "reversible": true,
+      "seq": 57,
+      "stage": "OCR_SEQUENCE_CANDIDATES",
+      "supportIds": [
+        "text-region-348-573-01530ea99c"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:608",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00058",
+      "objectId": "label:chain-horizontal-753-975a4904e6:HORIZONTAL:608",
+      "reason": "HORIZONTAL; SUPPORTED, the 005D reader read 008; it may also be 648 (0.223532), 600 (0.077793), 808 (0.077089), 108 (0.039441)",
+      "reversible": true,
+      "seq": 58,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-280-734-c61c6f0d9b"
+      ]
+    },
+    {
+      "confidenceAfter": 2.290019,
+      "conflictIds": [],
+      "decision": "BOUND:161-426.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00059",
+      "objectId": "label:chain-horizontal-753-975a4904e6:HORIZONTAL:608",
+      "reason": "PRIMARY; centred 0.012 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 59,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-008-horizontal-524c70d6ac"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1270",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00060",
+      "objectId": "label:chain-vertical-135-25e2d18c08:ROTATED_CW:1270",
+      "reason": "ROTATED_CW; SUPPORTED, the 005D reader read 1770; it may also be 1770 (0.381295), 1230 (0.141056), 1210 (0.1057), 1730 (0.102499), 1170 (0.049646), 1570 (0.045107), 1370 (0.031656)",
+      "reversible": true,
+      "seq": 60,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-116-406-5116852d81"
+      ]
+    },
+    {
+      "confidenceAfter": 2.444658,
+      "conflictIds": [],
+      "decision": "BOUND:157.5-677",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00061",
+      "objectId": "label:chain-vertical-135-25e2d18c08:ROTATED_CW:1270",
+      "reason": "PRIMARY; centred 0.007 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 61,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1770-rotated-cw-1e3b04e894"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:578",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00062",
+      "objectId": "label:chain-horizontal-199-64c39e0a7e:HORIZONTAL:578",
+      "reason": "HORIZONTAL; AMBIGUOUS, the 005D reader read 578; it may also be 518 (0.613243), 538 (0.191034), 118 (0.107604), 178 (0.090597), 318 (0.070844), 570 (0.065993), 378 (0.059645)",
+      "reversible": true,
+      "seq": 62,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-284-182-c8791e63c5"
+      ]
+    },
+    {
+      "confidenceAfter": 4.48062,
+      "conflictIds": [],
+      "decision": "BOUND:230-359",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00063",
+      "objectId": "label:chain-horizontal-199-64c39e0a7e:HORIZONTAL:578",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 1 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 63,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-578-horizontal-9893c299de"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:650",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00064",
+      "objectId": "label:chain-horizontal-785-6cd18f1598:HORIZONTAL:650",
+      "reason": "HORIZONTAL; AMBIGUOUS, the 005D reader read 610; it may also be 610 (0.519803), 640 (0.176214), 630 (0.175115), 850 (0.131964), 810 (0.058326)",
+      "reversible": true,
+      "seq": 64,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-281-766-d0950a742e"
+      ]
+    },
+    {
+      "confidenceAfter": 2.448211,
+      "conflictIds": [],
+      "decision": "BOUND:161-426.5",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00065",
+      "objectId": "label:chain-horizontal-785-6cd18f1598:HORIZONTAL:650",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 65,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-610-horizontal-524ed44757"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1270",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00066",
+      "objectId": "label:chain-vertical-97-80885d3144:ROTATED_CW:1270",
+      "reason": "ROTATED_CW; AMBIGUOUS, the 005D reader read 550; it may also be 1210 (0.637873), 5170 (0.261965)",
+      "reversible": true,
+      "seq": 66,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-85-262-4dfcad1905"
+      ]
+    },
+    {
+      "confidenceAfter": 3.802395,
+      "conflictIds": [],
+      "decision": "BOUND:102-436",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00067",
+      "objectId": "label:chain-vertical-97-80885d3144:ROTATED_CW:1270",
+      "reason": "PRIMARY; centred 0.009 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 67,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-550-rotated-cw-547c48a157"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:631",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00068",
+      "objectId": "label:chain-horizontal-368-6a4a6da32d:HORIZONTAL:631",
+      "reason": "HORIZONTAL; LOW_QUALITY, the 005D reader read 011; it may also be 651 (0.873363), 610 (0.75598), 641 (0.242673)",
+      "reversible": true,
+      "seq": 68,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-145-344-00407192e0"
+      ]
+    },
+    {
+      "confidenceAfter": 5.048,
+      "conflictIds": [],
+      "decision": "BOUND:88-213",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00069",
+      "objectId": "label:chain-horizontal-368-6a4a6da32d:HORIZONTAL:631",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 69,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-011-horizontal-f76282cf43"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:641",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00070",
+      "objectId": "label:chain-horizontal-353-2cc6b8fdce:HORIZONTAL:641",
+      "reason": "HORIZONTAL; LOW_QUALITY, the 005D reader read 641; it may also be 646 (0.929959), 644 (0.728943), 616 (0.698545), 645 (0.438775), 643 (0.338577), 648 (0.271785), 676 (0.227272)",
+      "reversible": true,
+      "seq": 70,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-145-344-00407192e0"
+      ]
+    },
+    {
+      "confidenceAfter": 5.128,
+      "conflictIds": [],
+      "decision": "BOUND:88-213",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00071",
+      "objectId": "label:chain-horizontal-353-2cc6b8fdce:HORIZONTAL:641",
+      "reason": "PRIMARY; centred 0.004 of the span off; runs across 0 tick(s), 0 questionable, 1 rejected",
+      "reversible": true,
+      "seq": 71,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-641-horizontal-0f9956a23f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:608",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00072",
+      "objectId": "label:chain-horizontal-753-e7e850a59c:HORIZONTAL:608",
+      "reason": "HORIZONTAL; SUPPORTED, the 005D reader read 008; it may also be 648 (0.237728), 600 (0.115829), 808 (0.080231), 108 (0.041049)",
+      "reversible": true,
+      "seq": 72,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-280-734-7f01e6bf65"
+      ]
+    },
+    {
+      "confidenceAfter": 2.285714,
+      "conflictIds": [],
+      "decision": "BOUND:161-427",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00073",
+      "objectId": "label:chain-horizontal-753-e7e850a59c:HORIZONTAL:608",
+      "reason": "PRIMARY; centred 0.013 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 73,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-008-horizontal-eab589980e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:1270",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00074",
+      "objectId": "label:chain-vertical-135-f4f63dbf60:ROTATED_CW:1270",
+      "reason": "ROTATED_CW; AMBIGUOUS, the 005D reader read 1770; it may also be 1770 (0.600009), 1230 (0.221969), 1210 (0.16633), 1730 (0.161294), 1570 (0.115702), 1370 (0.092821), 1170 (0.078123)",
+      "reversible": true,
+      "seq": 74,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-116-406-c2fdb98c64"
+      ]
+    },
+    {
+      "confidenceAfter": 2.442308,
+      "conflictIds": [],
+      "decision": "BOUND:157-677",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00075",
+      "objectId": "label:chain-vertical-135-f4f63dbf60:ROTATED_CW:1270",
+      "reason": "PRIMARY; centred 0.008 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 75,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-1770-rotated-cw-c26681c644"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:650",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00076",
+      "objectId": "label:chain-horizontal-785-caa83bc7fc:HORIZONTAL:650",
+      "reason": "HORIZONTAL; AMBIGUOUS, the 005D reader read 610; it may also be 610 (0.519672), 640 (0.176171), 630 (0.175069), 850 (0.131966), 810 (0.058312)",
+      "reversible": true,
+      "seq": 76,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-281-766-021c92d8a8"
+      ]
+    },
+    {
+      "confidenceAfter": 2.443609,
+      "conflictIds": [],
+      "decision": "BOUND:161-427",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00077",
+      "objectId": "label:chain-horizontal-785-caa83bc7fc:HORIZONTAL:650",
+      "reason": "PRIMARY; centred 0.009 of the span off; runs across 0 tick(s), 0 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 77,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-610-horizontal-c3204f4085"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:42",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00078",
+      "objectId": "label:chain-vertical-391-3199b7bc9a:ROTATED_CW:42",
+      "reason": "ROTATED_CW; LOW_QUALITY, the 005D reader read 76; it may also be 46 (0.914413), 45 (0.788796), 52 (0.632992), 55 (0.394928), 43 (0.378588), 48 (0.346035), 76 (0.276476)",
+      "reversible": true,
+      "seq": 78,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-356-356-6c78546c36"
+      ]
+    },
+    {
+      "confidenceAfter": 0.777778,
+      "conflictIds": [],
+      "decision": "BOUND:340-394",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00079",
+      "objectId": "label:chain-vertical-391-3199b7bc9a:ROTATED_CW:42",
+      "reason": "PRIMARY; centred 0.037 of the span off; runs across 1 tick(s), 1 questionable, 0 rejected",
+      "reversible": true,
+      "seq": 79,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-76-rotated-cw-a72a56ed5f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "READ:864.1",
+      "downstream": [
+        "LABEL_BINDING",
+        "DIMENSION_HIERARCHY"
+      ],
+      "eventId": "e00080",
+      "objectId": "label:chain-vertical-398-4bf949e277:ROTATED_CW:864.1",
+      "reason": "ROTATED_CW; AMBIGUOUS, the 005D reader read 064.1; it may also be 964.1 (0.488561)",
+      "reversible": true,
+      "seq": 80,
+      "stage": "OCR_READING",
+      "supportIds": [
+        "text-region-348-573-01530ea99c"
+      ]
+    },
+    {
+      "confidenceAfter": 1175.646259,
+      "conflictIds": [],
+      "decision": "BOUND:561.5-635",
+      "downstream": [
+        "DIMENSION_HIERARCHY",
+        "SCALE_HYPOTHESIS"
+      ],
+      "eventId": "e00081",
+      "objectId": "label:chain-vertical-398-4bf949e277:ROTATED_CW:864.1",
+      "reason": "PRIMARY; centred 0.044 of the span off; runs across 0 tick(s), 0 questionable, 2 rejected",
+      "reversible": true,
+      "seq": 81,
+      "stage": "LABEL_BINDING",
+      "supportIds": [
+        "dim-obs-0641-rotated-cw-8d392e4b12"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00082",
+      "objectId": "parallel_copy_of:chain-horizontal-753-975a4904e6>chain-horizontal-785-6cd18f1598",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 82,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-753-975a4904e6",
+        "chain-horizontal-785-6cd18f1598"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00083",
+      "objectId": "total_of:chain-horizontal-199-64c39e0a7e>chain-horizontal-233-0c154ec131@{\"fromPx\":359,\"toPx\":420}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 83,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-199-64c39e0a7e",
+        "chain-horizontal-233-0c154ec131"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00084",
+      "objectId": "total_of:chain-vertical-359-ea25967bd3>chain-vertical-391-82f69412a5",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 84,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-359-ea25967bd3",
+        "chain-vertical-391-82f69412a5"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00085",
+      "objectId": "parallel_copy_of:chain-horizontal-485-9be88510ab>chain-horizontal-506-f3de18fee1",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 85,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-485-9be88510ab",
+        "chain-horizontal-506-f3de18fee1"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00086",
+      "objectId": "total_of:chain-vertical-242-3576130dc6>chain-vertical-263-3fcf68a372@{\"fromPx\":222,\"toPx\":245}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 86,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-242-3576130dc6",
+        "chain-vertical-263-3fcf68a372"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00087",
+      "objectId": "total_of:chain-horizontal-368-6a4a6da32d>chain-horizontal-353-2cc6b8fdce",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 87,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-368-6a4a6da32d",
+        "chain-horizontal-353-2cc6b8fdce"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00088",
+      "objectId": "parallel_copy_of:chain-horizontal-233-fd2883689b>chain-horizontal-265-689dfa737f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 88,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-233-fd2883689b",
+        "chain-horizontal-265-689dfa737f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00089",
+      "objectId": "parallel_copy_of:chain-horizontal-753-e7e850a59c>chain-horizontal-785-caa83bc7fc",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 89,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-753-e7e850a59c",
+        "chain-horizontal-785-caa83bc7fc"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00090",
+      "objectId": "parallel_copy_of:chain-vertical-329-334b98c908>chain-vertical-378-7a83d5565b",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 90,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-329-334b98c908",
+        "chain-vertical-378-7a83d5565b"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00091",
+      "objectId": "parallel_copy_of:chain-horizontal-386-3118769c75>chain-horizontal-397-1f26ab3078",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 91,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-386-3118769c75",
+        "chain-horizontal-397-1f26ab3078"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00092",
+      "objectId": "parallel_copy_of:chain-horizontal-386-3118769c75>chain-horizontal-408-4a6d3b5ba8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 92,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-386-3118769c75",
+        "chain-horizontal-408-4a6d3b5ba8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00093",
+      "objectId": "parallel_copy_of:chain-horizontal-386-3118769c75>chain-horizontal-418-5f318d4225",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 93,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-386-3118769c75",
+        "chain-horizontal-418-5f318d4225"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00094",
+      "objectId": "parallel_copy_of:chain-horizontal-386-3118769c75>chain-horizontal-429-1e1884e0c6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 94,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-386-3118769c75",
+        "chain-horizontal-429-1e1884e0c6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00095",
+      "objectId": "parallel_copy_of:chain-horizontal-397-1f26ab3078>chain-horizontal-408-4a6d3b5ba8",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 95,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-1f26ab3078",
+        "chain-horizontal-408-4a6d3b5ba8"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00096",
+      "objectId": "parallel_copy_of:chain-horizontal-397-1f26ab3078>chain-horizontal-418-5f318d4225",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 96,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-1f26ab3078",
+        "chain-horizontal-418-5f318d4225"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00097",
+      "objectId": "parallel_copy_of:chain-horizontal-397-1f26ab3078>chain-horizontal-429-1e1884e0c6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 97,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-1f26ab3078",
+        "chain-horizontal-429-1e1884e0c6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00098",
+      "objectId": "parallel_copy_of:chain-horizontal-397-1f26ab3078>chain-horizontal-440-42ea22e488",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 98,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-1f26ab3078",
+        "chain-horizontal-440-42ea22e488"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00099",
+      "objectId": "parallel_copy_of:chain-horizontal-408-4a6d3b5ba8>chain-horizontal-418-5f318d4225",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 99,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-4a6d3b5ba8",
+        "chain-horizontal-418-5f318d4225"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00100",
+      "objectId": "parallel_copy_of:chain-horizontal-408-4a6d3b5ba8>chain-horizontal-429-1e1884e0c6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 100,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-4a6d3b5ba8",
+        "chain-horizontal-429-1e1884e0c6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00101",
+      "objectId": "parallel_copy_of:chain-horizontal-408-4a6d3b5ba8>chain-horizontal-440-42ea22e488",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 101,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-4a6d3b5ba8",
+        "chain-horizontal-440-42ea22e488"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00102",
+      "objectId": "parallel_copy_of:chain-horizontal-408-4a6d3b5ba8>chain-horizontal-450-fe34e57acd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 102,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-4a6d3b5ba8",
+        "chain-horizontal-450-fe34e57acd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00103",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5f318d4225>chain-horizontal-429-1e1884e0c6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 103,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5f318d4225",
+        "chain-horizontal-429-1e1884e0c6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00104",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5f318d4225>chain-horizontal-440-42ea22e488",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 104,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5f318d4225",
+        "chain-horizontal-440-42ea22e488"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00105",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5f318d4225>chain-horizontal-450-fe34e57acd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 105,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5f318d4225",
+        "chain-horizontal-450-fe34e57acd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00106",
+      "objectId": "parallel_copy_of:chain-horizontal-429-1e1884e0c6>chain-horizontal-440-42ea22e488",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 106,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-429-1e1884e0c6",
+        "chain-horizontal-440-42ea22e488"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00107",
+      "objectId": "parallel_copy_of:chain-horizontal-429-1e1884e0c6>chain-horizontal-450-fe34e57acd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 107,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-429-1e1884e0c6",
+        "chain-horizontal-450-fe34e57acd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00108",
+      "objectId": "parallel_copy_of:chain-horizontal-440-42ea22e488>chain-horizontal-450-fe34e57acd",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 108,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-440-42ea22e488",
+        "chain-horizontal-450-fe34e57acd"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00109",
+      "objectId": "parallel_copy_of:chain-horizontal-461-af0d4d7f2a>chain-horizontal-471-29adcd7512",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 109,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-461-af0d4d7f2a",
+        "chain-horizontal-471-29adcd7512"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00110",
+      "objectId": "parallel_copy_of:chain-vertical-206-45f7552046>chain-vertical-223-b08915135d",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 110,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-206-45f7552046",
+        "chain-vertical-223-b08915135d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00111",
+      "objectId": "parallel_copy_of:chain-vertical-288-1396dd0545>chain-vertical-321-0f977cfef6",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 111,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-288-1396dd0545",
+        "chain-vertical-321-0f977cfef6"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00112",
+      "objectId": "total_of:chain-horizontal-544-f21ae7f1ae>chain-horizontal-520-53b5223a55@{\"fromPx\":356.5,\"toPx\":391.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 112,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-544-f21ae7f1ae",
+        "chain-horizontal-520-53b5223a55"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00113",
+      "objectId": "total_of:chain-vertical-186-e16cda1211>chain-vertical-206-45f7552046@{\"fromPx\":376,\"toPx\":416.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 113,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-186-e16cda1211",
+        "chain-vertical-206-45f7552046"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00114",
+      "objectId": "total_of:chain-vertical-186-e16cda1211>chain-vertical-206-45f7552046@{\"fromPx\":416.5,\"toPx\":450}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 114,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-186-e16cda1211",
+        "chain-vertical-206-45f7552046"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00115",
+      "objectId": "total_of:chain-vertical-186-e16cda1211>chain-vertical-223-b08915135d@{\"fromPx\":416.5,\"toPx\":450}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 115,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-186-e16cda1211",
+        "chain-vertical-223-b08915135d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00116",
+      "objectId": "total_of:chain-vertical-227-5ee4155918>chain-vertical-206-45f7552046@{\"fromPx\":376,\"toPx\":416.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 116,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-227-5ee4155918",
+        "chain-vertical-206-45f7552046"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00117",
+      "objectId": "total_of:chain-vertical-227-5ee4155918>chain-vertical-223-b08915135d@{\"fromPx\":377,\"toPx\":416.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 117,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-227-5ee4155918",
+        "chain-vertical-223-b08915135d"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00118",
+      "objectId": "total_of:chain-vertical-304-e72ae0a01d>chain-vertical-267-094533b474@{\"fromPx\":646.5,\"toPx\":668}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 118,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-304-e72ae0a01d",
+        "chain-vertical-267-094533b474"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00119",
+      "objectId": "total_of:chain-vertical-304-e72ae0a01d>chain-vertical-341-fc0cc5f64f@{\"fromPx\":644.5,\"toPx\":668}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 119,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-304-e72ae0a01d",
+        "chain-vertical-341-fc0cc5f64f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00120",
+      "objectId": "total_of:chain-vertical-152-27d1d19332>chain-vertical-139-0e5e70373e@{\"fromPx\":242,\"toPx\":266.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 120,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-152-27d1d19332",
+        "chain-vertical-139-0e5e70373e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00121",
+      "objectId": "total_of:chain-vertical-152-27d1d19332>chain-vertical-149-0d917c31ff@{\"fromPx\":246.555556,\"toPx\":266.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 121,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-152-27d1d19332",
+        "chain-vertical-149-0d917c31ff"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00122",
+      "objectId": "parallel_copy_of:chain-horizontal-397-12336a355e>chain-horizontal-408-6785ab3346",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 122,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-12336a355e",
+        "chain-horizontal-408-6785ab3346"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00123",
+      "objectId": "parallel_copy_of:chain-horizontal-397-12336a355e>chain-horizontal-418-5951969499",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 123,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-12336a355e",
+        "chain-horizontal-418-5951969499"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00124",
+      "objectId": "parallel_copy_of:chain-horizontal-397-12336a355e>chain-horizontal-429-9d838b153e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 124,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-12336a355e",
+        "chain-horizontal-429-9d838b153e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00125",
+      "objectId": "parallel_copy_of:chain-horizontal-397-12336a355e>chain-horizontal-439-3cb0b5168e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 125,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-12336a355e",
+        "chain-horizontal-439-3cb0b5168e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00126",
+      "objectId": "parallel_copy_of:chain-horizontal-397-12336a355e>chain-horizontal-450-4d14f7bcd3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 126,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-397-12336a355e",
+        "chain-horizontal-450-4d14f7bcd3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00127",
+      "objectId": "parallel_copy_of:chain-horizontal-408-6785ab3346>chain-horizontal-418-5951969499",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 127,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-6785ab3346",
+        "chain-horizontal-418-5951969499"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00128",
+      "objectId": "parallel_copy_of:chain-horizontal-408-6785ab3346>chain-horizontal-429-9d838b153e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 128,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-6785ab3346",
+        "chain-horizontal-429-9d838b153e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00129",
+      "objectId": "parallel_copy_of:chain-horizontal-408-6785ab3346>chain-horizontal-439-3cb0b5168e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 129,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-6785ab3346",
+        "chain-horizontal-439-3cb0b5168e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00130",
+      "objectId": "parallel_copy_of:chain-horizontal-408-6785ab3346>chain-horizontal-450-4d14f7bcd3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 130,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-408-6785ab3346",
+        "chain-horizontal-450-4d14f7bcd3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00131",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5951969499>chain-horizontal-429-9d838b153e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 131,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5951969499",
+        "chain-horizontal-429-9d838b153e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00132",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5951969499>chain-horizontal-439-3cb0b5168e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 132,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5951969499",
+        "chain-horizontal-439-3cb0b5168e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00133",
+      "objectId": "parallel_copy_of:chain-horizontal-418-5951969499>chain-horizontal-450-4d14f7bcd3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 133,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-418-5951969499",
+        "chain-horizontal-450-4d14f7bcd3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00134",
+      "objectId": "parallel_copy_of:chain-horizontal-429-9d838b153e>chain-horizontal-439-3cb0b5168e",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 134,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-429-9d838b153e",
+        "chain-horizontal-439-3cb0b5168e"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00135",
+      "objectId": "parallel_copy_of:chain-horizontal-429-9d838b153e>chain-horizontal-450-4d14f7bcd3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 135,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-429-9d838b153e",
+        "chain-horizontal-450-4d14f7bcd3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00136",
+      "objectId": "parallel_copy_of:chain-horizontal-439-3cb0b5168e>chain-horizontal-450-4d14f7bcd3",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 136,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-horizontal-439-3cb0b5168e",
+        "chain-horizontal-450-4d14f7bcd3"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "PARALLEL_COPY_OF",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00137",
+      "objectId": "parallel_copy_of:chain-vertical-206-5558dffe50>chain-vertical-223-8b16260b5f",
+      "reason": "PARALLEL_COPY_OF",
+      "reversible": true,
+      "seq": 137,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-206-5558dffe50",
+        "chain-vertical-223-8b16260b5f"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00138",
+      "objectId": "total_of:chain-vertical-227-2b561b4cb3>chain-vertical-206-5558dffe50@{\"fromPx\":376,\"toPx\":416.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 138,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-227-2b561b4cb3",
+        "chain-vertical-206-5558dffe50"
+      ]
+    },
+    {
+      "conflictIds": [],
+      "decision": "INCOMPLETE",
+      "downstream": [
+        "SCALE_HYPOTHESIS",
+        "METRIC_RELATION"
+      ],
+      "eventId": "e00139",
+      "objectId": "total_of:chain-vertical-227-2b561b4cb3>chain-vertical-223-8b16260b5f@{\"fromPx\":377,\"toPx\":416.5}",
+      "reason": "TOTAL_OF",
+      "reversible": true,
+      "seq": 139,
+      "stage": "DIMENSION_HIERARCHY",
+      "supportIds": [
+        "chain-vertical-227-2b561b4cb3",
+        "chain-vertical-223-8b16260b5f"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00140",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:2.445",
+      "reason": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 1270/519.5 px, 650/265.5 px",
+      "reversible": true,
+      "seq": 140,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-1770-rotated-cw-1e3b04e894",
+        "dim-obs-610-horizontal-524ed44757"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00141",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:2.29",
+      "reason": "1 independent reading on 1 chain(s): 608/265.5 px",
+      "reversible": true,
+      "seq": 141,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-008-horizontal-524c70d6ac"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00142",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:4.481",
+      "reason": "1 independent reading on 1 chain(s): 578/129 px",
+      "reversible": true,
+      "seq": 142,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-578-horizontal-9893c299de"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00143",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:3.482",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 578/166 px",
+      "reversible": true,
+      "seq": 143,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-578-horizontal-9cd8ff5ac3"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00144",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:5.505",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 578/105 px",
+      "reversible": true,
+      "seq": 144,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-578-horizontal-c0cf3adf1d"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00145",
+      "objectId": "scale:frame-asset-rzut-ebe6069a09-06bbb9fc62:0.301",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 15/50 px, 16/53 px",
+      "reversible": true,
+      "seq": 145,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-15-horizontal-19aa653c72",
+        "dim-obs-56-rotated-ccw-15a9431d3c"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00146",
+      "objectId": "metric:frame-asset-rzut-ebe6069a09-06bbb9fc62",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 146,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00147",
+      "objectId": "scale:frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-c959c394d8:3.802",
+      "reason": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 651/171 px, 1270/334 px",
+      "reversible": true,
+      "seq": 147,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-091-horizontal-ec825a6019",
+        "dim-obs-550-rotated-cw-547c48a157"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00148",
+      "objectId": "metric:frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-c959c394d8",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 148,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00149",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:5.048",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 631/125 px",
+      "reversible": true,
+      "seq": 149,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-011-horizontal-f76282cf43"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00150",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:7.542",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 445/59 px",
+      "reversible": true,
+      "seq": 150,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-157-rotated-ccw-c454fef830"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00151",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:10.854",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 445/41 px",
+      "reversible": true,
+      "seq": 151,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-157-rotated-ccw-73159e8b7f"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00152",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:0.2",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 11/55 px",
+      "reversible": true,
+      "seq": 152,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-11-rotated-cw-c1723f1083"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00153",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:5.633",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 445/79 px",
+      "reversible": true,
+      "seq": 153,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-157-rotated-ccw-9b7254b748"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00154",
+      "objectId": "scale:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca:8.165",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 445/54.5 px",
+      "reversible": true,
+      "seq": 154,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-157-rotated-ccw-d31150acb6"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00155",
+      "objectId": "metric:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-9f4dcb88c-6f393519ca",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 155,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00156",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:2.442",
+      "reason": "1 independent reading on 1 chain(s), and 1 not counted (short, or their way up not independent of a scale): 1270/520 px, 650/266 px",
+      "reversible": true,
+      "seq": 156,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-1770-rotated-cw-c26681c644",
+        "dim-obs-610-horizontal-c3204f4085"
+      ]
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00157",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:2.286",
+      "reason": "1 independent reading on 1 chain(s): 608/266 px",
+      "reversible": true,
+      "seq": 157,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-008-horizontal-eab589980e"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00158",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:1.157",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 45/39.5 px, 42/35.5 px",
+      "reversible": true,
+      "seq": 158,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-45-rotated-cw-683b45b9e5",
+        "dim-obs-76-rotated-cw-4cf14e4d86"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00159",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:16.932",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 745/44 px",
+      "reversible": true,
+      "seq": 159,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-735-horizontal-54d98cf49a"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00160",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:1",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 42/42 px",
+      "reversible": true,
+      "seq": 160,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-76-rotated-cw-8400a2d125"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00161",
+      "objectId": "scale:frame-asset-rzut-01cd92e4b4-0f7c5bafc8:0.778",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 42/54 px",
+      "reversible": true,
+      "seq": 161,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-76-rotated-cw-a72a56ed5f"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [
+        "dim-obs-008-horizontal-eab589980e",
+        "dim-obs-1770-rotated-cw-c26681c644"
+      ],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00162",
+      "objectId": "metric:frame-asset-rzut-01cd92e4b4-0f7c5bafc8",
+      "reason": "the page vote's 3.041267 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it; 2.442308 cm/px, stated by 1 independent reading on 1 chain(s) does not outweigh it twice over",
+      "reversible": true,
+      "seq": 162,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "3.0413x3.0413",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00163",
+      "objectId": "registration:frame-asset-rzut-01cd92e4b4-0f7c5bafc8",
+      "reason": "3 anchors",
+      "reversible": true,
+      "seq": 163,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00164",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:3.084",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 384/124.5 px",
+      "reversible": true,
+      "seq": 164,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-301-rotated-ccw-83f580c137"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00165",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:2.603",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 384/147.5 px",
+      "reversible": true,
+      "seq": 165,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-301-rotated-ccw-0b544dcf67"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00166",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:0.883",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 102/115.5 px",
+      "reversible": true,
+      "seq": 166,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-102-horizontal-0db10accb8"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00167",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:1.661",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 102/61.5 px, 35/20 px",
+      "reversible": true,
+      "seq": 167,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-102-horizontal-ad8af7ae23",
+        "dim-obs-35-rotated-ccw-55dff05ade"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00168",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:0.953",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 102/107 px, 35/37 px",
+      "reversible": true,
+      "seq": 168,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-102-horizontal-8cbbf0dbee",
+        "dim-obs-35-rotated-ccw-002ce04334"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00169",
+      "objectId": "scale:frame-asset-rzut-3f1ea58c66-7182ea0aef:0.988",
+      "reason": "0 independent readings on 0 chain(s), and 2 not counted (short, or their way up not independent of a scale): 102/103 px, 35/37 px",
+      "reversible": true,
+      "seq": 169,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-102-horizontal-92a157fed8",
+        "dim-obs-35-rotated-ccw-002ce04334"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00170",
+      "objectId": "metric:frame-asset-rzut-3f1ea58c66-7182ea0aef",
+      "reason": "the page vote's 1.658337 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 170,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "1.6585x1.65",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00171",
+      "objectId": "registration:frame-asset-rzut-3f1ea58c66-7182ea0aef",
+      "reason": "2 anchors",
+      "reversible": true,
+      "seq": 171,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "NO_SCALE/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00172",
+      "objectId": "metric:frame-asset-gotowy-projekt-dom-pod-mi-orzebem-21-gb-rz-70d82b7242",
+      "reason": "no scale is stated by any reading that owes nothing to a scale",
+      "reversible": true,
+      "seq": 172,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00173",
+      "objectId": "metric:frame-asset-projekt-dom-pod-mi-orzebem-21-gb-f91207841-87dd091192",
+      "reason": "the page vote's 6.75 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 173,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": 1,
+      "conflictIds": [],
+      "decision": "RULED_OUT",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00174",
+      "objectId": "scale:frame-asset-rzut-2d9464b3c8-72b753f17d:1175.646",
+      "reason": "1 independent reading on 1 chain(s): 864.1/73.5 px",
+      "reversible": true,
+      "seq": 174,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-0641-rotated-cw-8d392e4b12"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00175",
+      "objectId": "scale:frame-asset-rzut-2d9464b3c8-72b753f17d:4.034",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 355/88 px",
+      "reversible": true,
+      "seq": 175,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-355-rotated-ccw-33a733209b"
+      ]
+    },
+    {
+      "confidenceAfter": 0,
+      "conflictIds": [],
+      "decision": "NOT_SELECTED",
+      "downstream": [
+        "METRIC_RELATION",
+        "REGISTRATION"
+      ],
+      "eventId": "e00176",
+      "objectId": "scale:frame-asset-rzut-2d9464b3c8-72b753f17d:1.953",
+      "reason": "0 independent readings on 0 chain(s), and 1 not counted (short, or their way up not independent of a scale): 84/43 px",
+      "reversible": true,
+      "seq": 176,
+      "stage": "SCALE_HYPOTHESIS",
+      "supportIds": [
+        "dim-obs-85-rotated-ccw-3bfb6ecf3e"
+      ]
+    },
+    {
+      "confidenceAfter": "INCONCLUSIVE",
+      "confidenceBefore": 0,
+      "conflictIds": [
+        "dim-obs-0641-rotated-cw-8d392e4b12"
+      ],
+      "decision": "LEGACY_UNCONFIRMED/INCONCLUSIVE",
+      "downstream": [
+        "REGISTRATION",
+        "FRAME_SELECTION"
+      ],
+      "eventId": "e00177",
+      "objectId": "metric:frame-asset-rzut-2d9464b3c8-72b753f17d",
+      "reason": "the page vote's 4.034091 cm/px is kept, but no reading that owes nothing to it supports it: every value that agrees with it was fitted to it",
+      "reversible": true,
+      "seq": 177,
+      "stage": "METRIC_RELATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "4.0523x4.0523",
+      "downstream": [
+        "FRAME_SELECTION",
+        "EXTENT"
+      ],
+      "eventId": "e00178",
+      "objectId": "registration:frame-asset-rzut-2d9464b3c8-72b753f17d",
+      "reason": "2 anchors",
+      "reversible": true,
+      "seq": 178,
+      "stage": "REGISTRATION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "SELECTED:frame-asset-rzut-ebe6069a09-06bbb9fc62",
+      "downstream": [
+        "EXTENT",
+        "ENVELOPE"
+      ],
+      "eventId": "e00179",
+      "objectId": "selected-plan",
+      "reason": "GROUND DIMENSIONED 853×853 px",
+      "reversible": true,
+      "seq": 179,
+      "stage": "FRAME_SELECTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "159,161.5,767.5,830",
+      "downstream": [
+        "ENVELOPE",
+        "ENVELOPE_EXTENT_CONFLICT"
+      ],
+      "eventId": "e00180",
+      "objectId": "extent:frame-asset-rzut-ebe6069a09-06bbb9fc62",
+      "reason": "WALL_GEOMETRY_EXTENT/WALL_GEOMETRY_EXTENT, weak",
+      "reversible": true,
+      "seq": 180,
+      "stage": "EXTENT",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "BOX:170,161.5,767.5,830",
+      "downstream": [
+        "ENVELOPE_EXTENT_CONFLICT",
+        "BODIES"
+      ],
+      "eventId": "e00181",
+      "objectId": "envelope:frame-asset-rzut-ebe6069a09-06bbb9fc62",
+      "reason": "7 of 18 cells enclosed",
+      "reversible": true,
+      "seq": 181,
+      "stage": "ENVELOPE",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "0",
+      "downstream": [
+        "FIRST_SUCCESS_CHALLENGE",
+        "PLAN_RESOLUTION"
+      ],
+      "eventId": "e00182",
+      "objectId": "masses:frame-asset-rzut-ebe6069a09-06bbb9fc62",
+      "reason": "none",
+      "reversible": true,
+      "seq": 182,
+      "stage": "BODIES",
+      "supportIds": []
+    },
+    {
+      "confidenceAfter": "SCORED",
+      "conflictIds": [],
+      "decision": "INCONCLUSIVE",
+      "downstream": [
+        "FINAL"
+      ],
+      "eventId": "e00183",
+      "objectId": "resolution",
+      "reason": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m² (-55.8% of 82.81), WRONG",
+      "reversible": true,
+      "seq": 183,
+      "stage": "PLAN_RESOLUTION",
+      "supportIds": []
+    },
+    {
+      "conflictIds": [],
+      "decision": "FAILED:METRIC_RESOLUTION_INCONCLUSIVE",
+      "downstream": [],
+      "eventId": "e00184",
+      "objectId": "result",
+      "reason": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles one scale — 4 dimension labels were found on 4 dimension lines, and as read they do not: an overall dimension read unambiguously, or two readings on different chains that agree. (the 853×853 px floor plan prints 4 dimension labels on 4 dimension lines, but as read they state no scale its other readings agree with; 36 other readings of the plan were weighed and none survived to a full composition)",
+      "reversible": false,
+      "seq": 184,
+      "stage": "FINAL",
+      "supportIds": []
+    }
+  ],
+  "runId": "h1-dom-pod-milorzebem",
+  "stages": [
+    "SOURCE",
+    "DIMENSION_TICK_CLASSIFICATION",
+    "GLYPH_COUNT_HYPOTHESES",
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "DIMENSION_HIERARCHY",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "REGISTRATION",
+    "FRAME_SELECTION",
+    "EXTENT",
+    "ENVELOPE",
+    "ENVELOPE_EXTENT_CONFLICT",
+    "BODIES",
+    "FIRST_SUCCESS_CHALLENGE",
+    "PLAN_RESOLUTION",
+    "FINAL"
+  ]
+}

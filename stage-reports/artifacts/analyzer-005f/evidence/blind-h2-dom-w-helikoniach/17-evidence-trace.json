@@ -1,0 +1,145 @@
+{
+  "frames": [
+    {
+      "chains": [
+        {
+          "chainId": "chain-horizontal-211-c08dacba3a",
+          "labels": [
+            "label:chain-horizontal-211-c08dacba3a:HORIZONTAL:612"
+          ],
+          "marks": [
+            "tick:chain-horizontal-211-c08dacba3a:198.5",
+            "tick:chain-horizontal-211-c08dacba3a:207",
+            "tick:chain-horizontal-211-c08dacba3a:225",
+            "tick:chain-horizontal-211-c08dacba3a:251",
+            "tick:chain-horizontal-211-c08dacba3a:258",
+            "tick:chain-horizontal-211-c08dacba3a:293",
+            "tick:chain-horizontal-211-c08dacba3a:336",
+            "tick:chain-horizontal-211-c08dacba3a:420"
+          ],
+          "primary": [
+            "dim-obs-612-horizontal-bf8b721f88"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-450-4010d692c0",
+          "labels": [
+            "label:chain-horizontal-450-4010d692c0:HORIZONTAL:268"
+          ],
+          "marks": [
+            "tick:chain-horizontal-450-4010d692c0:225",
+            "tick:chain-horizontal-450-4010d692c0:245",
+            "tick:chain-horizontal-450-4010d692c0:286"
+          ],
+          "primary": [
+            "dim-obs-168-horizontal-e78c2fe211"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-540-2d2c074a86",
+          "labels": [
+            "label:chain-horizontal-540-2d2c074a86:HORIZONTAL:60"
+          ],
+          "marks": [
+            "tick:chain-horizontal-540-2d2c074a86:459",
+            "tick:chain-horizontal-540-2d2c074a86:472.5",
+            "tick:chain-horizontal-540-2d2c074a86:487",
+            "tick:chain-horizontal-540-2d2c074a86:499"
+          ],
+          "primary": [
+            "dim-obs-61-horizontal-a7c8c13ce6"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-557-d8ced1c923",
+          "labels": [
+            "label:chain-horizontal-557-d8ced1c923:HORIZONTAL:27"
+          ],
+          "marks": [
+            "tick:chain-horizontal-557-d8ced1c923:354.5",
+            "tick:chain-horizontal-557-d8ced1c923:419",
+            "tick:chain-horizontal-557-d8ced1c923:459"
+          ],
+          "primary": [
+            "dim-obs-15-horizontal-2baa6ce86d"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-810-350deac388",
+          "labels": [
+            "label:chain-horizontal-810-350deac388:HORIZONTAL:126",
+            "label:chain-horizontal-810-350deac388:HORIZONTAL:510"
+          ],
+          "marks": [
+            "tick:chain-horizontal-810-350deac388:158",
+            "tick:chain-horizontal-810-350deac388:300",
+            "tick:chain-horizontal-810-350deac388:462"
+          ],
+          "primary": [
+            "dim-obs-126-horizontal-8e8016fa58",
+            "dim-obs-977-horizontal-30b24ce4f1"
+          ]
+        },
+        {
+          "chainId": "chain-horizontal-839-4ed45af72e",
+          "labels": [
+            "label:chain-horizontal-839-4ed45af72e:HORIZONTAL:700"
+          ],
+          "marks": [
+            "tick:chain-horizontal-839-4ed45af72e:158",
+            "tick:chain-horizontal-839-4ed45af72e:462"
+          ],
+          "primary": [
+            "dim-obs-701-horizontal-8724383a07"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-118-2fb2c6e6ce",
+          "labels": [
+            "label:chain-vertical-118-2fb2c6e6ce:ROTATED_CW:1262",
+            "label:chain-vertical-118-2fb2c6e6ce:ROTATED_CW:47"
+          ],
+          "marks": [
+            "tick:chain-vertical-118-2fb2c6e6ce:162",
+            "tick:chain-vertical-118-2fb2c6e6ce:710",
+            "tick:chain-vertical-118-2fb2c6e6ce:752"
+          ],
+          "primary": [
+            "dim-obs-1169-rotated-cw-713aafb222",
+            "dim-obs-47-rotated-cw-78b624ff09"
+          ]
+        },
+        {
+          "chainId": "chain-vertical-88-0d31f6c6bf",
+          "labels": [
+            "label:chain-vertical-88-0d31f6c6bf:ROTATED_CW:1160"
+          ],
+          "marks": [
+            "tick:chain-vertical-88-0d31f6c6bf:162",
+            "tick:chain-vertical-88-0d31f6c6bf:752"
+          ],
+          "primary": [
+            "dim-obs-1960-rotated-cw-ce1c21ef6b"
+          ]
+        }
+      ],
+      "envelope": "envelope:frame-asset-rzut-d5842da623-4c943a2b00",
+      "extent": "extent:frame-asset-rzut-d5842da623-4c943a2b00",
+      "frameId": "frame-asset-rzut-d5842da623-4c943a2b00",
+      "masses": [
+        "mass-0"
+      ],
+      "registration": "registration:frame-asset-rzut-d5842da623-4c943a2b00",
+      "relation": "CONFIRMED/INCONCLUSIVE",
+      "selectedHypothesis": "scale-2-302632-af83595f81",
+      "witnesses": [
+        "dim-obs-1169-rotated-cw-713aafb222",
+        "dim-obs-61-horizontal-a7c8c13ce6",
+        "dim-obs-701-horizontal-8724383a07"
+      ]
+    }
+  ],
+  "model": "7a59ba63f58b7cdbc13ad4c2355f91b75fd04c62403d464d53614203681e2aa6",
+  "runId": "h2-dom-w-helikoniach",
+  "selectedPlanFrameId": "frame-asset-rzut-d5842da623-4c943a2b00"
+}

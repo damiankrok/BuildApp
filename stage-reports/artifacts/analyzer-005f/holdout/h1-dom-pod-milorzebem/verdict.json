@@ -1,0 +1,51 @@
+{
+  "run": "/home/user/work005f/blind6/h1-dom-pod-milorzebem",
+  "completed": false,
+  "labelledPlanStoreys": [
+    "ATTIC",
+    "GROUND"
+  ],
+  "publishedFootprintM2": 82.81,
+  "checklist": {
+    "noFloorPlan": false,
+    "legibleOverallDimension": {
+      "ocrTokensOnGroundCopies": 75,
+      "tallestPx": 49,
+      "needsRawMeasurement": false
+    },
+    "wallsUnder4pxOnEveryGroundCopy": false,
+    "groundWallPx": [
+      {
+        "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+        "sizePx": {
+          "height": 853,
+          "width": 853
+        },
+        "wallPx": 11
+      }
+    ],
+    "floorPlanAssetsLost": []
+  },
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale. The scales its readings state are 2.444658 cm/px (1 independent, plausible); 2.290019 cm/px (1 independent, plausible); 4.48062 cm/px (1 independent, ruled out by the walls); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles one scale — 4 dimension labels were found on 4 dimension lines, and as read they do not: an overall dimension read unambiguously, or two readings on different chains that agree. (the 853×853 px floor plan prints 4 dimension labels on 4 dimension lines, but as read they state no scale its other readings agree with; 36 other readings of the plan were weighed and none survived to a full composition)"
+  },
+  "resolution": {
+    "compositions": 0,
+    "copies": 4,
+    "decompositions": 9,
+    "distinctOutlines": 19,
+    "firstReading": "PLAN_NO_DIMENSION_FRAME",
+    "outcome": "INCONCLUSIVE",
+    "publishedFigure": "SCORED",
+    "reading1": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 3 bodies, 36.6 m² (-55.8% of 82.81), WRONG",
+    "reading2": "copy area_table 0f7c5bafc8, chain extent, scale 2.285714 cm/px, walled-first tiling, outer faces: 3 bodies, 18.5 m² (-77.7% of 82.81), WRONG",
+    "reading3": "copy area_table 0f7c5bafc8, wall-ink extent, scale 2.285714 cm/px, largest-first tiling, sides as gridded: 1 body, 4.2 m² (-94.9% of 82.81), WRONG",
+    "reading4": "copy area_table 0f7c5bafc8, wall-ink extent, scale 2.285714 cm/px, largest-first tiling, outer faces: 1 body, 5.0 m² (-94.0% of 82.81), WRONG",
+    "readings": 36,
+    "resolverVersion": "1.4.0"
+  },
+  "challenge": null,
+  "verdict": "ALGORITHMIC_FAIL"
+}

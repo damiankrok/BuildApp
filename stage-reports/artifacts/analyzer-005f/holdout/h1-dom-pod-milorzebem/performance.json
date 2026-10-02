@@ -1,0 +1,175 @@
+{
+  "arch": "x64",
+  "maxTelemetryGapMs": 2260,
+  "maxTickGapMs": 2566,
+  "node": "v22.22.2",
+  "peakRssMB": 734,
+  "phases": [
+    {
+      "counters": {},
+      "durationMs": 1748,
+      "maxTickGapMs": 1748,
+      "peakRssBytes": 232812544,
+      "phaseId": "ACQUIRE_PAGE",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "fetched": 32,
+        "notFetched": 8
+      },
+      "durationMs": 12881,
+      "maxTickGapMs": 2566,
+      "peakRssBytes": 240586752,
+      "phaseId": "ACQUIRE_ASSETS",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 1749,
+      "ticks": 58,
+      "unit": "ADDRESS",
+      "workDone": 57,
+      "workTotal": 58
+    },
+    {
+      "counters": {},
+      "durationMs": 0,
+      "maxTickGapMs": 0,
+      "peakRssBytes": 241242112,
+      "phaseId": "CLASSIFY",
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 14630,
+      "ticks": 0,
+      "unit": "ASSET",
+      "workDone": 0,
+      "workTotal": 21
+    },
+    {
+      "counters": {},
+      "durationMs": 16473,
+      "maxTickGapMs": 1903,
+      "peakRssBytes": 416030720,
+      "phaseId": "OBSERVE_ASSETS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 14631,
+      "subphaseMs": {
+        "EDGES": 418,
+        "ELEVATION": 572,
+        "FLOOR_PLAN": 104,
+        "INK": 628,
+        "LINES": 14097,
+        "PERSPECTIVE_RENDER": 512,
+        "SECTION": 80,
+        "SITE_PLAN": 61,
+        "UNKNOWN": 0
+      },
+      "ticks": 101,
+      "unit": "ASSET",
+      "workDone": 20,
+      "workTotal": 21
+    },
+    {
+      "counters": {},
+      "durationMs": 1058,
+      "maxTickGapMs": 163,
+      "peakRssBytes": 413016064,
+      "phaseId": "DECODE_RASTERS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 31104,
+      "ticks": 21,
+      "unit": "ASSET",
+      "workDone": 20,
+      "workTotal": 21
+    },
+    {
+      "counters": {
+        "chains": 12,
+        "chainsTotal": 12,
+        "evidence": 64,
+        "hypothesesTotal": 6,
+        "hypothesis": 6,
+        "label": 32,
+        "labelsTotal": 32,
+        "readings": 32,
+        "rings": 73,
+        "ringsTotal": 73,
+        "tokenGroups": 43,
+        "tokenGroupsTotal": 43,
+        "tokens": 1758
+      },
+      "durationMs": 131998,
+      "maxTickGapMs": 1357,
+      "peakRssBytes": 769253376,
+      "phaseId": "METRIC_FRAMES",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 32162,
+      "subphaseMs": {
+        "CALLOUT_RINGS": 114270,
+        "CALLOUT_SEARCH": 7784,
+        "CHAINS": 1652,
+        "FRAME": 365,
+        "OCR": 3524,
+        "OCR_LATTICE": 4261,
+        "ORIENTATION": 37,
+        "SCALE": 103
+      },
+      "ticks": 1174558,
+      "unit": "FRAME",
+      "workDone": 13,
+      "workTotal": 14
+    },
+    {
+      "counters": {
+        "gaps": 1,
+        "gapsTotal": 4,
+        "lines": 23,
+        "linesTotal": 23
+      },
+      "durationMs": 708,
+      "maxTickGapMs": 293,
+      "peakRssBytes": 737705984,
+      "phaseId": "REGISTER_VIEWS",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 164160,
+      "subphaseMs": {
+        "BOUNDARY": 12,
+        "BOUNDARY_GAPS": 293,
+        "PLAN_READ": 400
+      },
+      "ticks": 26,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "gaps": 3,
+        "gapsTotal": 11,
+        "lines": 4,
+        "linesTotal": 4
+      },
+      "durationMs": 825,
+      "maxTickGapMs": 83,
+      "peakRssBytes": 725164032,
+      "phaseId": "PLAN_RESOLUTION",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 164868,
+      "subphaseMs": {
+        "BOUNDARY": 87,
+        "BOUNDARY_GAPS": 104,
+        "PLAN_READ": 633,
+        "READINGS": 1
+      },
+      "ticks": 229,
+      "unit": "CANDIDATE",
+      "workDone": 36,
+      "workTotal": 36
+    }
+  ],
+  "telemetryEvents": 158,
+  "totalMs": 165813
+}
+

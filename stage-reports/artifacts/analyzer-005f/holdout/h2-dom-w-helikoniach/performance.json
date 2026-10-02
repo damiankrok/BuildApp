@@ -1,0 +1,246 @@
+{
+  "arch": "x64",
+  "maxTelemetryGapMs": 2029,
+  "maxTickGapMs": 4571,
+  "node": "v22.22.2",
+  "peakRssMB": 790,
+  "phases": [
+    {
+      "counters": {},
+      "durationMs": 1787,
+      "maxTickGapMs": 1787,
+      "peakRssBytes": 230215680,
+      "phaseId": "ACQUIRE_PAGE",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 0,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "fetched": 31,
+        "notFetched": 8
+      },
+      "durationMs": 17423,
+      "maxTickGapMs": 4571,
+      "peakRssBytes": 244137984,
+      "phaseId": "ACQUIRE_ASSETS",
+      "stage": "ACQUIRING_SOURCE",
+      "startedAtMs": 1787,
+      "ticks": 47,
+      "unit": "ADDRESS",
+      "workDone": 46,
+      "workTotal": 47
+    },
+    {
+      "counters": {},
+      "durationMs": 0,
+      "maxTickGapMs": 0,
+      "peakRssBytes": 244400128,
+      "phaseId": "CLASSIFY",
+      "stage": "CLASSIFYING_SOURCES",
+      "startedAtMs": 19210,
+      "ticks": 0,
+      "unit": "ASSET",
+      "workDone": 0,
+      "workTotal": 20
+    },
+    {
+      "counters": {},
+      "durationMs": 12215,
+      "maxTickGapMs": 990,
+      "peakRssBytes": 357351424,
+      "phaseId": "OBSERVE_ASSETS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 19210,
+      "subphaseMs": {
+        "EDGES": 330,
+        "ELEVATION": 541,
+        "FLOOR_PLAN": 95,
+        "INK": 405,
+        "LINES": 10520,
+        "PERSPECTIVE_RENDER": 198,
+        "SECTION": 66,
+        "SITE_PLAN": 60,
+        "UNKNOWN": 0
+      },
+      "ticks": 92,
+      "unit": "ASSET",
+      "workDone": 19,
+      "workTotal": 20
+    },
+    {
+      "counters": {},
+      "durationMs": 1069,
+      "maxTickGapMs": 205,
+      "peakRssBytes": 361226240,
+      "phaseId": "DECODE_RASTERS",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 31425,
+      "ticks": 20,
+      "unit": "ASSET",
+      "workDone": 19,
+      "workTotal": 20
+    },
+    {
+      "counters": {
+        "chains": 14,
+        "chainsTotal": 14,
+        "evidence": 86,
+        "hypothesesTotal": 6,
+        "hypothesis": 6,
+        "label": 38,
+        "labelsTotal": 38,
+        "readings": 15,
+        "rings": 65,
+        "ringsTotal": 65,
+        "tokenGroups": 49,
+        "tokenGroupsTotal": 49,
+        "tokens": 1711
+      },
+      "durationMs": 145141,
+      "maxTickGapMs": 1165,
+      "peakRssBytes": 772558848,
+      "phaseId": "METRIC_FRAMES",
+      "stage": "EXTRACTING_OBSERVATIONS",
+      "startedAtMs": 32495,
+      "subphaseMs": {
+        "CALLOUT_RINGS": 124395,
+        "CALLOUT_SEARCH": 10249,
+        "CHAINS": 1850,
+        "FRAME": 368,
+        "OCR": 3828,
+        "OCR_LATTICE": 4291,
+        "ORIENTATION": 49,
+        "SCALE": 110
+      },
+      "ticks": 1268076,
+      "unit": "FRAME",
+      "workDone": 13,
+      "workTotal": 14
+    },
+    {
+      "counters": {
+        "gaps": 5,
+        "gapsTotal": 10,
+        "lines": 11,
+        "linesTotal": 11
+      },
+      "durationMs": 1270,
+      "maxTickGapMs": 671,
+      "peakRssBytes": 726351872,
+      "phaseId": "REGISTER_VIEWS",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 177636,
+      "subphaseMs": {
+        "BOUNDARY": 755,
+        "BOUNDARY_GAPS": 74,
+        "PLAN_READ": 439
+      },
+      "ticks": 62,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "gaps": 4,
+        "gapsTotal": 5,
+        "lines": 44,
+        "linesTotal": 44
+      },
+      "durationMs": 460,
+      "maxTickGapMs": 302,
+      "peakRssBytes": 765976576,
+      "phaseId": "PLAN_RESOLUTION",
+      "stage": "REGISTERING_VIEWS",
+      "startedAtMs": 178905,
+      "subphaseMs": {
+        "BOUNDARY": 60,
+        "BOUNDARY_GAPS": 73,
+        "PLAN_READ": 327,
+        "READINGS": 0
+      },
+      "ticks": 102,
+      "unit": "CANDIDATE",
+      "workDone": 2,
+      "workTotal": 2
+    },
+    {
+      "counters": {},
+      "durationMs": 511,
+      "maxTickGapMs": 511,
+      "peakRssBytes": 766238720,
+      "phaseId": "SOLVE_TOPOLOGY",
+      "stage": "SOLVING_TOPOLOGY",
+      "startedAtMs": 179366,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {
+        "cameras": 4,
+        "camerasTotal": 4
+      },
+      "durationMs": 325,
+      "maxTickGapMs": 108,
+      "peakRssBytes": 769122304,
+      "phaseId": "SOLVE_METRICS",
+      "stage": "SOLVING_METRICS",
+      "startedAtMs": 179877,
+      "subphaseMs": {
+        "CAMERAS": 270
+      },
+      "ticks": 4,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 126,
+      "maxTickGapMs": 126,
+      "peakRssBytes": 769466368,
+      "phaseId": "BUILD_MODEL",
+      "stage": "BUILDING_MODEL",
+      "startedAtMs": 180202,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 47,
+      "maxTickGapMs": 47,
+      "peakRssBytes": 770514944,
+      "phaseId": "COMPILE_SCENE",
+      "stage": "COMPILING_SCENE",
+      "startedAtMs": 180328,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    },
+    {
+      "counters": {},
+      "durationMs": 175,
+      "maxTickGapMs": 175,
+      "peakRssBytes": 772136960,
+      "phaseId": "VERIFY",
+      "stage": "VERIFYING",
+      "startedAtMs": 180374,
+      "ticks": 0,
+      "unit": "STEP",
+      "workDone": 0,
+      "workTotal": null
+    }
+  ],
+  "telemetryEvents": 179,
+  "totalMs": 183994
+}
+
