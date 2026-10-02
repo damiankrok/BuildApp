@@ -77,4 +77,25 @@ contract A6").
 
 ## After the fixes
 
-(pending)
+D5F-12 asked for the full development matrix on the freeze candidate, diffed row by row against `m-c` (`d910212`).
+The first run, on `f64fda9`, found a regression the fixes themselves had introduced, so it was fixed and the matrix run
+again.
+
+**What the `f64fda9` matrix found.** The Marcówki development row kept its scale, verdict and footprint, but its model
+moved (`6152770f` → `2eb5c3b2`). The attached garage gained a storey-1 ring, and exterior closure went from 0 errors to 4.
+The first divergence was on the attic plan:
+
+- The attic plan's box stopped short of the south wall, so the strip of two rooms below it was a BOX_COMPLETION part.
+- Its drawn wardrobes read as walls. C5F-2's reachability split therefore kept only the part's corner at the door
+  (1.53 m²) and called the rest WALLED_OFF.
+- The continuation test was asked of the kept corner alone: 0.94 of 1.52 m open. The reached floor is by construction
+  the floor next to the opening, so asked of it alone the question answers itself. As the outline encloses it, the strip
+  is mostly walled from the house (0.94 of 2.05 m) and was rejected before C5F-2.
+- Accepted, the completion re-cut the attic on its outline and moved its envelope. Its registration onto the ground plan
+  then covered the garage by more than half, and the garage gained a storey.
+
+**Fix (`41e26be`).** Continuation is judged on the part as the outline encloses it, before the split, as it was before
+C5F-2; the split still decides which floor the part takes. A test draws a strip whose corner at the door is open and whose
+rest is walled, along either axis; it fails on `f64fda9` with the same 1.50 m continuation.
+
+**The final matrix** (`41e26be`): (pending)
