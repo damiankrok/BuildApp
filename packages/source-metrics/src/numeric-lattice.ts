@@ -26,13 +26,13 @@
 import { round6 } from '@buildapp/source-common'
 import type { PixelRect } from '@buildapp/source-common'
 import type { Gray, Mask } from '@buildapp/source-cv'
-import { PROTOTYPE_HOLE_COUNTS, cellSources, cropToken, estimateShear, holeStats, pageRectOfPass, scoreCell, segment, shear } from './ocr.js'
-import type { Bitmap, CellCut, MatcherOptions, TextOrientation, TextToken } from './ocr.js'
+import { PROTOTYPE_HOLE_COUNTS, cellSources, columnProfile, cropToken, estimateShear, holeStats, pageRectOfPass, scoreCell, segment, shear } from './ocr.js'
+import type { Bitmap, CellCut, MatcherOptions, OcrResult, TextOrientation, TextToken } from './ocr.js'
 import { parseNumber } from './parse.js'
 import { toCentimetres } from './schema.js'
 
 export const NUMERIC_LATTICE_NAME = 'metrics.numeric-lattice' as const
-export const NUMERIC_LATTICE_VERSION = '1.0.0' as const
+export const NUMERIC_LATTICE_VERSION = '1.1.0' as const
 
 /**
  * The bounds, every one a count or a ratio — never a clock — so a phone and a server reach the same lattice.
@@ -83,6 +83,48 @@ export const LATTICE_BOUNDS = {
  * checked on the held-back ones.
  */
 export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.3, supportedP: 0.35, supportedMargin: 0.3 } as const
+
+/**
+ * 005F: the bounds of glyph-count hypotheses, counter-safe cuts and the plan's dimension-font style (pre-review A,
+ * `stage-reports/artifacts/analyzer-005f/pre/segmentation-count-review.md`), every one a count or a ratio. A count is
+ * decided by the width of the ink against the plan's own glyph width and by topology — never by the template score, which
+ * reads a glyph split in two as two `1`s as readily as the truth (A P0-3), and never by a scale.
+ */
+export const COUNT_BOUNDS = {
+  /** A style sample: an isolated glyph run of the reader's mask whose ink width over its token's cap lies in this band. */
+  sampleBand: [0.35, 0.8],
+  /** A label's style: the median sample over tokens whose cap is within this factor of its own, from at least `styleSamples`. */
+  styleCapRatio: 1.25,
+  styleSamples: 8,
+  /** A glyph count is admitted when its per-glyph width over the style lies in this band (development true counts 0.81–1.17). */
+  styleBand: [0.75, 1.3],
+  /** With no style, the per-glyph width over the cap (development 0.405–0.576, the corpus 0.446–0.667), and its centre. */
+  noStyleBand: [0.4, 0.7],
+  noStyleCentre: 0.49,
+  /** A boundary a count adds needs a valley at least this deep: 1 − ink / the lower of the peaks within half a pitch. */
+  addDepth: 0.35,
+  /** New texts a count alternative may add to an ink, outside the re-cut budget. */
+  countTexts: 2,
+  /** Segmentations per count of one ink variant (005E's machinery), per ink variant and per ink; cells scored per ink. */
+  segmentationsPerCount: 16,
+  segmentationsPerVariant: 48,
+  segmentationsPerInk: 144,
+  cellsPerInk: 96,
+  /** A counter: a hole at least this share of the cap tall that is a hole on at least `counterPersist` of its pixels in every other ink mask. */
+  counterHeight: 0.2,
+  counterPersist: 0.5,
+  /** A value of another digit count at this share of the ink's values or more makes its reading AMBIGUOUS. */
+  countRivalP: 0.1,
+} as const
+
+/**
+ * 005F: the ambiguity tail (pre-review B, `beam-tail-review.md`): values a reading reaches with exactly two moderate
+ * substitutions, each independently supported by the image — at least `glyphRatio` of the cell's best and within
+ * `T·ln(1/glyphShare)` of it — that the count bound cut. At most `perInk` per ink. Recorded beside the emitted values,
+ * never among them: no probability, never as-read, never a witness, a contest value, a correction or a structural
+ * option. Every tail value is at least 0.04 of its path's best (0.2²), above the beam's floor: the floor is not lowered.
+ */
+export const TAIL_BOUNDS = { substitutions: 2, glyphRatio: 0.7, glyphShare: 0.2, perInk: 2 } as const
 
 /**
  * The stability bracket (005E post-review D P1): the stricter masks' thresholds — STRICT's delta and SAUVOLA's k — scaled
@@ -195,8 +237,54 @@ export type LabelLattice = {
   emittedMass: number
   /** The as-read string under the stability bracket's masks, and whether its value held (`STABILITY_BRACKET`). */
   asReadStability: { stable: boolean; bracket: string[] }
+  /**
+   * 005F: the glyph counts the ink was read at. `asRead` is the as-read string's digit count; `alternatives` the other
+   * counts any ink variant kept a hypothesis at; `decisive` the variants whose reader count the plan's style ruled out
+   * and replaced; `widthAmbiguous` whether the as-read variant's cut admits a count one away that fits its width at
+   * least as well; `rivalP` the largest share of another digit count among the emitted values.
+   */
+  countAmbiguity: GlyphCountAmbiguity
+  /** 005F: values two moderate substitutions reach past the count bound (`TAIL_BOUNDS`). A record, never a reading. */
+  tail: LatticeTailValue[]
+  /** 005F: what the segmentation tried and what bounded it (telemetry for the Evidence Pack). */
+  segmentation: SegmentationTelemetry
   cache: 'HIT' | 'MISS'
 }
+
+export type GlyphCountAmbiguity = {
+  asRead: number
+  alternatives: number[]
+  decisive: InkVariant[]
+  widthAmbiguous: boolean
+  rivalP: number
+}
+
+export type LatticeTailValue = {
+  text: string
+  valueCm: number
+  logP: number
+  imageScore: number
+  nonTop: Array<{ index: number; top: string; chosen: string; ratio: number }>
+  pathIds: string[]
+}
+
+export type SegmentationTelemetry = {
+  /** The plan's dimension-font style at this label's cap: the median isolated glyph width over the cap, and from how many samples. */
+  style: { pitch: number | null; samples: number }
+  /** Per ink variant: the reader's count, the count kept as the anchor, and the alternatives a run admitted. */
+  counts: Array<{ variant: InkVariant; reader: number; anchor: number; alternatives: number[]; decisive: boolean; widthAmbiguous: boolean }>
+  /** Anchor cuts moved off a counter, and re-cut or count hypotheses pruned for cutting one. */
+  counterCutsMoved: number
+  counterCutsPruned: number
+  segmentations: number
+  cellsScored: number
+  /** Hypotheses not scored because a bound was reached. */
+  truncated: number
+}
+
+/** 005F: the plan's dimension-font style, as samples (`dimensionStyleOf`) and as a label sees it (`styleFor`). */
+export type DimensionStyle = { samples: Array<{ cap: number; width: number }> }
+export type LabelStyle = { pitch: number | null; samples: number }
 
 /** The pass's frame and what it holds. */
 export type PassField = { orientation: TextOrientation; ink: Gray; page: { width: number; height: number } }
@@ -386,6 +474,292 @@ export function segmentationHypotheses(sheared: Bitmap, glyphHeight: number): Ar
 }
 
 // ---------------------------------------------------------------------------
+// 005F: the plan's dimension-font style, counter-safe cuts, bounded glyph-count hypotheses (pre-review A)
+// ---------------------------------------------------------------------------
+
+/**
+ * The plan's dimension-font style: every isolated glyph the reader's own mask finds in the plan's raw tokens, as its ink
+ * width over its token's cap height. Touching glyphs make one run, so only runs of one glyph's width are samples. Image
+ * only: no value, chain, scale or published figure. Built from the reader's raw tokens rather than from CLEAR or
+ * SUPPORTED labels, because a class depends on the count the style is used to decide.
+ */
+export function dimensionStyleOf(read: Pick<OcrResult, 'raw' | 'passes'>): DimensionStyle {
+  const samples: DimensionStyle['samples'] = []
+  if (!read.raw || !read.passes) return { samples }
+  const [lo, hi] = COUNT_BOUNDS.sampleBand
+  for (const t of read.raw) {
+    const box = t.passBox
+    const ink = read.passes[t.orientation]
+    if (!box || !ink || t.glyphs.length < 1 || t.glyphs.length > 6) continue
+    const radius = pageMaskRadius(ink.width, ink.height)
+    const crop = cropGray(ink, box, radius + 2)
+    const local = { x0: Math.round(box.x0) - crop.ox, y0: Math.round(box.y0) - crop.oy, x1: Math.round(box.x1) - crop.ox, y1: Math.round(box.y1) - crop.oy }
+    const { sheared } = estimateShear(cropToken(variantMask(crop.gray, radius, 'DEFAULT'), local))
+    const anchor = segment(sheared)
+    if (anchor.length === 0) continue
+    const cap = Math.max(1, ...cellSources(sheared, anchor).map((c) => c.y1 - c.y0 + 1))
+    for (const run of runsOf(columnProfile(sheared))) {
+      const width = (run.x1 - run.x0 + 1) / cap
+      if (width >= lo && width <= hi) samples.push({ cap, width: round6(width) })
+    }
+  }
+  return { samples }
+}
+
+/** The style a label of this cap height sees: the median sample of tokens of a like cap, or none under `styleSamples`. */
+export function styleFor(style: DimensionStyle | undefined, cap: number): LabelStyle {
+  const near = (style?.samples ?? []).filter((x) => x.cap >= cap / COUNT_BOUNDS.styleCapRatio && x.cap <= cap * COUNT_BOUNDS.styleCapRatio).map((x) => x.width).sort((a, b) => a - b)
+  if (near.length < COUNT_BOUNDS.styleSamples) return { pitch: null, samples: near.length }
+  return { pitch: near[Math.floor((near.length - 1) / 2)], samples: near.length }
+}
+
+type Counter = { x0: number; x1: number }
+
+/** Background components of a bitmap that do not touch its border (4-connected), in scan order, and the hole mask. */
+function holesOf(b: Bitmap): { holes: Array<Counter & { y0: number; y1: number; px: number[] }>; isHole: Uint8Array } {
+  const w = b.width
+  const h = b.height
+  const seen = new Uint8Array(w * h)
+  const holes: Array<Counter & { y0: number; y1: number; px: number[] }> = []
+  for (let y = 0; y < h; y += 1) {
+    for (let x = 0; x < w; x += 1) {
+      const i0 = y * w + x
+      if (b.data[i0] === 1 || seen[i0] === 1) continue
+      seen[i0] = 1
+      const stack = [i0]
+      const px: number[] = []
+      let border = false
+      let x0 = x
+      let x1 = x
+      let y0 = y
+      let y1 = y
+      while (stack.length > 0) {
+        const j = stack.pop() as number
+        const cx = j % w
+        const cy = (j - cx) / w
+        px.push(j)
+        x0 = Math.min(x0, cx)
+        x1 = Math.max(x1, cx)
+        y0 = Math.min(y0, cy)
+        y1 = Math.max(y1, cy)
+        if (cx === 0 || cy === 0 || cx === w - 1 || cy === h - 1) border = true
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+          const nx = cx + dx
+          const ny = cy + dy
+          if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue
+          const k = ny * w + nx
+          if (b.data[k] === 1 || seen[k] === 1) continue
+          seen[k] = 1
+          stack.push(k)
+        }
+      }
+      if (!border) holes.push({ x0, x1, y0, y1, px })
+    }
+  }
+  const isHole = new Uint8Array(w * h)
+  for (const hole of holes) for (const j of hole.px) isHole[j] = 1
+  return { holes, isHole }
+}
+
+/**
+ * The counters of one ink variant's de-skewed token: holes at least `counterHeight` of the cap tall that are holes in
+ * every other ink mask too (re-sheared at this variant's slope). A pocket one threshold closes and another opens — the
+ * gap between two touching glyphs — is not a counter; the inside of a `0` is one in every mask (A P1-2).
+ */
+function persistentCounters(raws: ReadonlyMap<InkVariant, Bitmap>, variant: InkVariant, slope: number, sheared: Bitmap, cap: number): Counter[] {
+  const mine = holesOf(sheared)
+  const others = [...raws].filter(([v]) => v !== variant).map(([, raw]) => holesOf(slope === 0 ? raw : shear(raw, slope)).isHole)
+  const minH = Math.max(2, Math.ceil(COUNT_BOUNDS.counterHeight * cap))
+  return mine.holes
+    .filter((hole) => hole.y1 - hole.y0 + 1 >= minH && others.every((o) => hole.px.filter((j) => j < o.length && o[j] === 1).length >= COUNT_BOUNDS.counterPersist * hole.px.length))
+    .map((hole) => ({ x0: hole.x0, x1: hole.x1 }))
+}
+
+/**
+ * Whether a boundary — a cell starting at column `b` — breaks a counter: it passes through it, or it takes the counter's
+ * wall (the column beside it) unless a second counter on the other side shares that wall (two touching hollow glyphs).
+ */
+const cutsCounter = (b: number, counters: readonly Counter[]): boolean =>
+  counters.some((c) => (c.x0 < b && b <= c.x1) || (c.x1 + 1 === b && !counters.some((d) => d.x0 === b + 1)) || (c.x0 === b && !counters.some((d) => d.x1 === b - 2)))
+
+const breaksCounter = (cells: readonly Cut[], counters: readonly Counter[]): boolean => cells.slice(1).some((c, i) => cells[i].x1 + 1 === c.x0 && cutsCounter(c.x0, counters))
+
+/** How deep a valley is: 1 − its ink over the lower of the highest columns within half a pitch either side. */
+function valleyDepth(profile: readonly number[], x: number, half: number, run: Cut): number {
+  let left = 0
+  let right = 0
+  for (let i = Math.max(run.x0, x - half); i < x; i += 1) left = Math.max(left, profile[i])
+  for (let i = x + 1; i <= Math.min(run.x1, x + half); i += 1) right = Math.max(right, profile[i])
+  const m = Math.min(left, right)
+  return m <= 0 ? 0 : 1 - profile[x] / m
+}
+
+/** Per boundary of a run cut into `k` glyphs: the two deepest valleys within ±0.3 pitch, each column to either side, never through a counter. */
+function boundaryOptions(profile: readonly number[], run: Cut, k: number, counters: readonly Counter[]): Array<{ options: number[]; depth: number }> {
+  const width = run.x1 - run.x0 + 1
+  const pitch = width / k
+  const half = Math.max(1, Math.round(pitch / 2))
+  const out: Array<{ options: number[]; depth: number }> = []
+  for (let i = 1; i < k; i += 1) {
+    const centre = run.x0 + pitch * i
+    const lo = Math.max(run.x0 + 1, Math.round(centre - 0.3 * pitch))
+    const hi = Math.min(run.x1 - 1, Math.round(centre + 0.3 * pitch))
+    const valleys: Array<{ x: number; ink: number }> = []
+    for (let x = lo; x <= hi; x += 1) {
+      const left = x > lo ? profile[x - 1] : Infinity
+      if (profile[x] > left || (profile[x] === left && x > lo)) continue
+      let end = x
+      while (end + 1 <= hi && profile[end + 1] === profile[x]) end += 1
+      const right = end < hi ? profile[end + 1] : Infinity
+      if (profile[x] <= right) valleys.push({ x, ink: profile[x] })
+    }
+    valleys.sort((a, b) => a.ink - b.ink || Math.abs(a.x - centre) - Math.abs(b.x - centre) || a.x - b.x)
+    const options: number[] = []
+    let depth = 0
+    let used = 0
+    for (const v of valleys) {
+      if (used >= LATTICE_BOUNDS.valleys) break
+      const safe = [v.x, v.x + 1].filter((b) => b > run.x0 && b <= run.x1 && !cutsCounter(b, counters))
+      if (safe.length === 0) continue
+      used += 1
+      for (const b of safe) if (!options.includes(b)) options.push(b)
+      depth = Math.max(depth, valleyDepth(profile, v.x, half, run))
+    }
+    out.push({ options, depth })
+  }
+  return out
+}
+
+/** A run split at one option per boundary: the first options, then one and two moved, cells of glyph proportions only, at most `segmentationsPerCount`. */
+function splitRun(run: Cut, options: ReadonlyArray<{ options: number[] }>, others: readonly Cut[], cap: number): Cut[][] {
+  const minW = Math.max(1, Math.floor(0.2 * cap))
+  const maxW = Math.ceil(0.95 * cap)
+  const base = options.map((o) => o.options[0])
+  const out: Cut[][] = []
+  const seen = new Set<string>()
+  const push = (starts: number[]): void => {
+    if (out.length >= COUNT_BOUNDS.segmentationsPerCount) return
+    const key = starts.join(',')
+    if (seen.has(key)) return
+    seen.add(key)
+    const xs = [run.x0, ...starts, run.x1 + 1]
+    const cells: Cut[] = []
+    for (let i = 0; i + 1 < xs.length; i += 1) {
+      const w = xs[i + 1] - xs[i]
+      if (w < minW || w > maxW) return
+      cells.push({ x0: xs[i], x1: xs[i + 1] - 1 })
+    }
+    out.push([...others, ...cells].sort((a, b) => a.x0 - b.x0))
+  }
+  push(base)
+  for (let i = 0; i < options.length; i += 1) for (const x of options[i].options) push(base.map((b, j) => (j === i ? x : b)))
+  for (let i = 0; i < options.length; i += 1) for (let j = i + 1; j < options.length; j += 1) for (const xi of options[i].options) for (const xj of options[j].options) push(base.map((b, m) => (m === i ? xi : m === j ? xj : b)))
+  return out
+}
+
+type CountHypothesis = { cells: Cut[]; changed: number; kind: 'ANCHOR' | 'RECUT'; countAlt: boolean; counterCut: boolean }
+type CountReading = { hyps: CountHypothesis[]; reader: number; anchor: number; alternatives: number[]; decisive: boolean; widthAmbiguous: boolean; counterMoved: number; counterPruned: number }
+
+/**
+ * One ink variant's segmentations under the 005F rules (pre-review A, contract A2–A3):
+ *
+ *   counters      a reader cut through a persistent counter moves to the deepest valley in its window that cuts none
+ *                 (the count stays); re-cuts and count hypotheses through one are pruned;
+ *   counts        for each ink run of the anchor, the counts one either side, admitted when their per-glyph width over
+ *                 the plan's style (`pitch`) lies in the style band — or, with no style, over the cap in the no-style
+ *                 band — and they fit the width better than the anchor's, every boundary has a valley that cuts no
+ *                 counter, and an added boundary's valley is at least `addDepth` deep; at most one per direction;
+ *   decisive      with a style, an anchor count the band rules out is replaced by the admitted one: the only way the
+ *                 reader's count changes, by width and topology alone;
+ *   otherwise     an admitted count enters as re-cuts (`countAlt`), never the reader's cut.
+ *
+ * `widthAmbiguous`: some run of the final anchor admits a count one away that fits its width at least as well.
+ */
+function countHypotheses(sheared: Bitmap, cap: number, raws: ReadonlyMap<InkVariant, Bitmap>, variant: InkVariant, slope: number, pitch: number | null): CountReading {
+  const base = segmentationHypotheses(sheared, cap)
+  const counters = persistentCounters(raws, variant, slope, sheared, cap)
+  let hyps: CountHypothesis[] = base.map((h, i) => ({ cells: h.cells, changed: h.changed, kind: i === 0 ? 'ANCHOR' : 'RECUT', countAlt: false, counterCut: breaksCounter(h.cells, counters) }))
+  const reader = hyps[0].cells.length
+  const profile = columnProfile(sheared)
+  const runs = runsOf(profile)
+  let anchor = hyps[0].cells
+  let counterMoved = 0
+  if (hyps[0].counterCut) {
+    const cells: Cut[] = []
+    for (const run of runs) {
+      const inRun = anchor.filter((c) => c.x0 >= run.x0 && c.x1 <= run.x1)
+      if (inRun.length >= 2 && inRun.slice(1).some((c) => cutsCounter(c.x0, counters))) {
+        const options = boundaryOptions(profile, run, inRun.length, counters)
+        const starts = inRun.slice(1).map((c, i) => (cutsCounter(c.x0, counters) ? (options[i]?.options[0] ?? c.x0) : c.x0))
+        const xs = [run.x0, ...starts, run.x1 + 1]
+        for (let i = 0; i + 1 < xs.length; i += 1) if (xs[i + 1] > xs[i]) cells.push({ x0: xs[i], x1: xs[i + 1] - 1 })
+      } else cells.push(...inRun)
+    }
+    if (!breaksCounter(cells, counters) && cells.length === anchor.length) {
+      hyps = [{ cells, changed: 0, kind: 'ANCHOR', countAlt: false, counterCut: false }, { ...hyps[0], kind: 'RECUT' }, ...hyps.slice(1)]
+      anchor = cells
+      counterMoved = 1
+    }
+  }
+  const band = pitch === null ? COUNT_BOUNDS.noStyleBand : [pitch * COUNT_BOUNDS.styleBand[0], pitch * COUNT_BOUNDS.styleBand[1]]
+  const centre = pitch ?? COUNT_BOUNDS.noStyleCentre
+  const admitted = (w: number, k: number): boolean => k >= 1 && w / (k * cap) >= band[0] && w / (k * cap) <= band[1]
+  const misfit = (w: number, k: number): number => Math.abs(Math.log(w / (k * cap) / centre))
+  type Alt = { dir: number; k: number; misfit: number; segs: Cut[][]; decisive: boolean }
+  const alts: Alt[] = []
+  if (anchor.length <= LATTICE_BOUNDS.maxCells) {
+    for (const run of runs) {
+      const w = run.x1 - run.x0 + 1
+      const a = anchor.filter((c) => c.x0 >= run.x0 && c.x1 <= run.x1).length
+      if (a === 0) continue
+      for (const k of [a - 1, a + 1]) {
+        if (!admitted(w, k)) continue
+        if (admitted(w, a) && misfit(w, k) >= misfit(w, a)) continue
+        const options = boundaryOptions(profile, run, k, counters)
+        if (options.some((o) => o.options.length === 0)) continue
+        if (k > a && options.length > 0 && Math.min(...options.map((o) => o.depth)) < COUNT_BOUNDS.addDepth) continue
+        const others = anchor.filter((c) => c.x1 < run.x0 || c.x0 > run.x1)
+        const segs = splitRun(run, options, others, cap)
+        if (segs.length > 0) alts.push({ dir: Math.sign(k - a), k: k - a + anchor.length, misfit: misfit(w, k), segs, decisive: pitch !== null && !admitted(w, a) })
+      }
+    }
+  }
+  const chosen = [1, -1].map((d) => alts.filter((x) => x.dir === d).sort((x, y) => x.misfit - y.misfit || x.k - y.k)[0]).filter((x): x is Alt => x !== undefined)
+  const decisive = chosen.find((x) => x.decisive)
+  if (decisive) hyps = decisive.segs.map((cells, i) => ({ cells, changed: i === 0 ? 0 : 1, kind: i === 0 ? 'ANCHOR' : 'RECUT', countAlt: false, counterCut: false }))
+  else for (const alt of chosen) for (const cells of alt.segs) hyps.push({ cells, changed: 1, kind: 'RECUT', countAlt: true, counterCut: false })
+  // Width ambiguity of the final anchor: a run whose width fits a count one away at least as well, and whose image allows
+  // that count — a valley that cuts no counter at every boundary, deep enough where a boundary is added. A count the
+  // ink's topology forbids (a `000` split through a wall) is no ambiguity.
+  const finalAnchor = hyps[0].cells
+  let widthAmbiguous = false
+  for (const run of runs) {
+    const w = run.x1 - run.x0 + 1
+    const a = finalAnchor.filter((c) => c.x0 >= run.x0 && c.x1 <= run.x1).length
+    if (a === 0) continue
+    for (const k of [a - 1, a + 1]) {
+      if (!admitted(w, k) || misfit(w, k) > misfit(w, a)) continue
+      const options = boundaryOptions(profile, run, k, counters)
+      if (options.some((o) => o.options.length === 0)) continue
+      if (k > a && options.length > 0 && Math.min(...options.map((o) => o.depth)) < COUNT_BOUNDS.addDepth) continue
+      widthAmbiguous = true
+    }
+  }
+  const before = hyps.length
+  hyps = hyps.filter((h) => h.kind === 'ANCHOR' || !h.counterCut).slice(0, COUNT_BOUNDS.segmentationsPerVariant)
+  return {
+    hyps,
+    reader,
+    anchor: finalAnchor.length,
+    alternatives: decisive ? [] : [...new Set(chosen.map((x) => x.k))].sort((a, b) => a - b),
+    decisive: decisive !== undefined,
+    widthAmbiguous,
+    counterMoved,
+    counterPruned: before - hyps.length,
+  }
+}
+
+// ---------------------------------------------------------------------------
 // glyphs and sequences
 // ---------------------------------------------------------------------------
 
@@ -503,27 +877,28 @@ const hashBytes = (bytes: Uint8ClampedArray): string => {
  * Re-read one raw token from its pass's ink field and return its lattice. The token must carry `passBox`
  * (`readNumbers(…, { retainPasses: true })`). Image only: nothing here sees a scale, a chain or a published figure.
  */
-export function labelLattice(pass: PassField, token: TextToken, cache?: LatticeCache): LabelLattice | undefined {
+export function labelLattice(pass: PassField, token: TextToken, cache?: LatticeCache, style: LabelStyle = { pitch: null, samples: 0 }): LabelLattice | undefined {
   const box = token.passBox
   if (!box) return undefined
   const radius = pageMaskRadius(pass.ink.width, pass.ink.height)
   const crop = cropGray(pass.ink, box, radius + 2)
   const local = { x0: Math.round(box.x0) - crop.ox, y0: Math.round(box.y0) - crop.oy, x1: Math.round(box.x1) - crop.ox, y1: Math.round(box.y1) - crop.oy }
-  const key = `${hashBytes(crop.gray.data)}|${crop.gray.width}x${crop.gray.height}|${local.x0},${local.y0},${local.x1},${local.y1}|${radius}`
+  // The style takes part in the reading (005F): two crops alike under different styles are two readings.
+  const key = `${hashBytes(crop.gray.data)}|${crop.gray.width}x${crop.gray.height}|${local.x0},${local.y0},${local.x1},${local.y1}|${radius}|${style.pitch ?? 'none'}:${style.samples}`
   const held = cache?.get(key)
   const toPage = (r: PixelRect): PixelRect => pageRectOfPass({ x0: r.x0 + crop.ox, y0: r.y0 + crop.oy, x1: r.x1 + crop.ox, y1: r.y1 + crop.oy }, pass.orientation, pass.page)
   if (held && held.crop.length === crop.gray.data.length && held.crop.every((v, i) => v === crop.gray.data[i])) {
     const { glyphBoxesInPass, ...rest } = held.result
     return { ...rest, orientation: token.orientation, rawTopText: token.text, glyphBoxes: glyphBoxesInPass.map(toPage), cache: 'HIT' }
   }
-  const computed = computeLattice(crop.gray, local, radius)
+  const computed = computeLattice(crop.gray, local, radius, style)
   if (!computed) return undefined
   cache?.set(key, { crop: crop.gray.data.slice(), result: computed })
   const { glyphBoxesInPass, ...rest } = computed
   return { ...rest, orientation: token.orientation, rawTopText: token.text, glyphBoxes: glyphBoxesInPass.map(toPage), cache: 'MISS' }
 }
 
-function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<LabelLattice, 'glyphBoxes' | 'cache' | 'orientation' | 'rawTopText'> & { glyphBoxesInPass: PixelRect[] }) | undefined {
+function computeLattice(gray: Gray, local: PixelRect, radius: number, style: LabelStyle): (Omit<LabelLattice, 'glyphBoxes' | 'cache' | 'orientation' | 'rawTopText'> & { glyphBoxesInPass: PixelRect[] }) | undefined {
   const counter = { expansions: 0, floorDrops: 0 }
   const paths: LatticePath[] = []
   const height = local.y1 - local.y0 + 1
@@ -531,10 +906,20 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
   let anchorDefault: { path: LatticePath; cells: CellCut[]; sheared: Bitmap; slope: number } | undefined
   const anchorsByVariant = new Map<InkVariant, { path: LatticePath; cells: CellCut[]; sheared: Bitmap; slope: number }>()
   const masks = new Map<InkVariant, Mask>()
+  const raws = new Map<InkVariant, Bitmap>()
   for (const variant of INK_VARIANTS.slice(0, LATTICE_BOUNDS.variants)) {
     const mask = variantMask(gray, radius, variant)
     masks.set(variant, mask)
-    const bmp = cropToken(mask, local)
+    raws.set(variant, cropToken(mask, local))
+  }
+  // 005F: which paths are count alternatives (their own text budget), and what the segmentation tried.
+  const countAltPaths = new Set<string>()
+  const telemetry: SegmentationTelemetry = { style, counts: [], counterCutsMoved: 0, counterCutsPruned: 0, segmentations: 0, cellsScored: 0, truncated: 0 }
+  const widthAmbiguousOf = new Map<InkVariant, boolean>()
+  const decisiveVariants: InkVariant[] = []
+  const countAlternatives = new Set<number>()
+  for (const variant of INK_VARIANTS.slice(0, LATTICE_BOUNDS.variants)) {
+    const bmp = raws.get(variant) as Bitmap
     const { slope, sheared } = estimateShear(bmp)
     const anchorCells = segment(sheared)
     if (anchorCells.length === 0) continue
@@ -542,12 +927,30 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     if (variant !== 'DEFAULT' && anchorCells.length > LATTICE_BOUNDS.maxCells) continue
     // The glyph height: the tallest cut's ink, the reader's own cap height.
     const capHeight = Math.max(1, ...cellSources(sheared, anchorCells).map((c) => c.y1 - c.y0 + 1))
-    const hyps = segmentationHypotheses(sheared, capHeight)
+    const reading = countHypotheses(sheared, capHeight, raws, variant, slope, style.pitch)
+    telemetry.counts.push({ variant, reader: reading.reader, anchor: reading.anchor, alternatives: reading.alternatives, decisive: reading.decisive, widthAmbiguous: reading.widthAmbiguous })
+    telemetry.counterCutsMoved += reading.counterMoved
+    telemetry.counterCutsPruned += reading.counterPruned
+    widthAmbiguousOf.set(variant, reading.widthAmbiguous)
+    if (reading.decisive) decisiveVariants.push(variant)
+    for (const k of reading.alternatives) countAlternatives.add(k)
     const memo = new Map<string, LatticeGlyph | null>()
     const variantPaths: Array<{ path: LatticePath; cells: CellCut[] }> = []
-    hyps.forEach((h, hi) => {
+    reading.hyps.forEach((h, hi) => {
+      // Bounded per ink (005F): segmentations and scored cells. The anchor is always read.
+      if (h.kind !== 'ANCHOR' && telemetry.segmentations >= COUNT_BOUNDS.segmentationsPerInk) {
+        telemetry.truncated += 1
+        return
+      }
       const cuts = cellSources(sheared, h.cells)
       if (cuts.length === 0) return
+      const keyOf = (c: CellCut): string => `${c.x0}-${c.x1}|${c.source.relHeight}|${c.source.relTop}`
+      const fresh = new Set(cuts.map(keyOf).filter((k) => !memo.has(k))).size
+      if (h.kind !== 'ANCHOR' && telemetry.cellsScored + fresh > COUNT_BOUNDS.cellsPerInk) {
+        telemetry.truncated += 1
+        return
+      }
+      telemetry.segmentations += 1
       // A run the anchor split into several cells is touching ink.
       const runCells = new Map<number, number>()
       const runOf = (c: Cut): number => {
@@ -557,16 +960,18 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
       }
       for (const c of h.cells) runCells.set(runOf(c), (runCells.get(runOf(c)) ?? 0) + 1)
       const glyphs = cuts.map((c) => {
-        const k = `${c.x0}-${c.x1}|${c.source.relHeight}|${c.source.relTop}`
+        const k = keyOf(c)
         let g = memo.get(k)
         if (g === undefined) {
           g = glyphOf(c, (runCells.get(runOf(c)) ?? 1) > 1)
           memo.set(k, g)
+          telemetry.cellsScored += 1
         }
         return g as LatticeGlyph
       })
+      if (h.countAlt) countAltPaths.add(`${variant}:${hi}`)
       variantPaths.push({
-        path: { id: `${variant}:${hi}`, variant, kind: hi === 0 ? 'ANCHOR' : 'RECUT', slope: round6(slope), cuts: h.cells.slice(1).map((c) => c.x0), changedBoundaries: h.changed, segScore: geoMean(glyphs.map((g) => g.top)), ratioToBest: 0, glyphs },
+        path: { id: `${variant}:${hi}`, variant, kind: h.kind, slope: round6(slope), cuts: h.cells.slice(1).map((c) => c.x0), changedBoundaries: h.changed, segScore: geoMean(glyphs.map((g) => g.top)), ratioToBest: 0, glyphs },
         cells: cuts,
       })
     })
@@ -600,15 +1005,28 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
       else held.pathIds.push(path.id)
     }
   }
-  for (const path of paths.filter((p) => p.kind === 'ANCHOR')) for (const s of beam(path.glyphs, counter)) offer(path, s, s.logP)
+  // 005F: the anchors' final frontiers, kept for the ambiguity tail (`TAIL_BOUNDS`); they decide nothing.
+  const frontiers: Array<{ path: LatticePath; partials: Partial[] }> = []
+  for (const path of paths.filter((p) => p.kind === 'ANCHOR')) {
+    const partials = beam(path.glyphs, counter)
+    frontiers.push({ path, partials })
+    for (const s of partials) offer(path, s, s.logP)
+  }
+  // 005F: a count alternative is a re-cut with its own budget of new texts, outside the re-cuts' (pre-review A C4).
+  let countTexts = 0
   for (const path of paths.filter((p) => p.kind === 'RECUT')) {
     const top: Partial = { chars: path.glyphs.map((g) => g.candidates[0].char), picks: path.glyphs.map(() => 0), logP: round6(path.glyphs.reduce((a, g) => a + Math.log(Math.max(1e-12, g.candidates[0].p)), 0)), nonTop: 0 }
     counter.expansions += path.glyphs.length
     const text = top.chars.join('')
     if (!merged.has(text)) {
-      if ((recutTexts.get(path.variant) ?? 0) >= LATTICE_BOUNDS.textsPerVariant || recutTotal >= LATTICE_BOUNDS.textsPerInk) continue
-      recutTexts.set(path.variant, (recutTexts.get(path.variant) ?? 0) + 1)
-      recutTotal += 1
+      if (countAltPaths.has(path.id)) {
+        if (countTexts >= COUNT_BOUNDS.countTexts) continue
+        countTexts += 1
+      } else {
+        if ((recutTexts.get(path.variant) ?? 0) >= LATTICE_BOUNDS.textsPerVariant || recutTotal >= LATTICE_BOUNDS.textsPerInk) continue
+        recutTexts.set(path.variant, (recutTexts.get(path.variant) ?? 0) + 1)
+        recutTotal += 1
+      }
     }
     offer(path, top, round6(top.logP - LATTICE_BOUNDS.recutPenalty))
   }
@@ -621,8 +1039,11 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
   // The stability bracket: the stricter masks read again a tenth either way (DEFAULT is the reader's own and stays).
   const bracket = STABILITY_BRACKET.map((factor) => {
     const reads: AnchorRead[] = [{ text: anchorText(anchorDefault.path), segScore: anchorDefault.path.segScore, variant: 'DEFAULT' }]
+    // The masks as this bracket reads them (DEFAULT is the reader's own and stays): the counters must persist in these.
+    const bracketMasks = new Map(INK_VARIANTS.slice(0, LATTICE_BOUNDS.variants).map((v) => [v, v === 'DEFAULT' ? (masks.get(v) as Mask) : variantMask(gray, radius, v, factor)] as const))
+    const bracketRaws = new Map([...bracketMasks].map(([v, m]) => [v, cropToken(m, local)] as const))
     for (const variant of INK_VARIANTS.slice(1, LATTICE_BOUNDS.variants)) {
-      const r = anchorReading(variantMask(gray, radius, variant, factor), local, variant)
+      const r = anchorReading(bracketMasks.get(variant) as Mask, local, variant, bracketRaws, style.pitch)
       if (r) reads.push(r)
     }
     return pickAsRead(reads, reads[0]).text
@@ -709,10 +1130,35 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
   const asReadP = asReadSeq?.p ?? 0
   const probabilityMargin = asReadP > 0 && rivals.length > 0 ? round6(1 - Math.max(...rivals.map((s) => s.p)) / asReadP) : 1
   const B = OCR_CLASS_BOUNDS
-  const ocrClass = ocrClassOf({ minGlyphScore, capHeightPx: height, asReadP, probabilityMargin, stable: asReadStable })
+  let ocrClass = ocrClassOf({ minGlyphScore, capHeightPx: height, asReadP, probabilityMargin, stable: asReadStable })
+  // 005F (contract A5): how many glyphs the ink holds is part of what is read. A value of another digit count at a tenth
+  // of the ink's values, or a cut whose width fits a glyph more or fewer as well, leaves the reading AMBIGUOUS; any other
+  // value of another count keeps it from CLEAR. A 3-vs-4 ambiguity is never CLEAR.
+  const digitsOf = (t: string): number => t.replace(/[^0-9]/g, '').length
+  const asReadDigits = digitsOf(asReadText)
+  const otherCount = sequences.filter((q) => !q.asRead && q.valueCm !== undefined && digitsOf(q.text) !== asReadDigits)
+  const rivalP = round6(Math.max(0, ...otherCount.map((q) => q.p)))
+  const widthAmbiguous = widthAmbiguousOf.get(anchor.variant) === true
+  let countWhy: string | undefined
+  if (ocrClass === 'CLEAR' || ocrClass === 'SUPPORTED') {
+    // 005F: no figure is printed with a leading zero (005B): such a reading is of no dimension, however sure the glyphs.
+    if (/^0\d/.test(asReadText)) {
+      ocrClass = 'AMBIGUOUS'
+      countWhy = `read ${asReadText}, with a leading zero no printed figure has: a reading of no dimension, whatever its glyphs score`
+    } else if (rivalP >= COUNT_BOUNDS.countRivalP) {
+      ocrClass = 'AMBIGUOUS'
+      countWhy = `a value of another digit count holds ${rivalP} of the ink's values: the image does not settle how many glyphs it holds`
+    } else if (widthAmbiguous) {
+      ocrClass = 'AMBIGUOUS'
+      countWhy = `its width fits a glyph more or fewer as well as the ${asReadDigits} it was cut into: the image does not settle how many glyphs it holds`
+    } else if (otherCount.length > 0 && ocrClass === 'CLEAR') {
+      ocrClass = 'SUPPORTED'
+      countWhy = `a value of another digit count is among the ink's values (${rivalP}): never CLEAR`
+    }
+  }
   const next = rivals.length > 0 ? `the next value ${round6(1 - probabilityMargin)} of it` : 'no other value'
-  const classWhy =
-    ocrClass === 'LOW_QUALITY'
+  const classWhy = countWhy ??
+    (ocrClass === 'LOW_QUALITY'
       ? height < B.legibleCapPx
         ? `set ${height} px tall, under the ${B.legibleCapPx} px a figure is legible at`
         : `a glyph matched at ${minGlyphScore}, under ${B.lowScore}: an ink or a cut the matcher cannot read`
@@ -722,7 +1168,48 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
           ? `the reading holds ${round6(asReadP)} of the ink's values and no other value comes within ${B.clearMargin} of it`
           : ocrClass === 'SUPPORTED'
             ? `the reading holds ${round6(asReadP)} of the ink's values; ${next}`
-            : `the reading holds ${round6(asReadP)} of the ink's values; ${next}`
+            : `the reading holds ${round6(asReadP)} of the ink's values; ${next}`)
+  // 005F (contract A4, pre-review B): the ambiguity tail — values an anchor reached with exactly two moderate
+  // substitutions, each supported by the image on its own, that the count bound cut. A record beside the values: no
+  // probability, never as-read, outside every decision.
+  const emittedValues = new Set(sequences.flatMap((q) => (q.valueCm !== undefined ? [q.valueCm] : [])))
+  const shareBar = round6(LATTICE_BOUNDS.temperature * Math.log(1 / TAIL_BOUNDS.glyphShare))
+  const tailByText = new Map<string, LatticeTailValue>()
+  for (const { path, partials } of frontiers) {
+    for (const q of partials) {
+      if (q.nonTop !== TAIL_BOUNDS.substitutions) continue
+      const supported = q.picks.every((pick, i) => {
+        if (pick === 0) return true
+        const g = path.glyphs[i]
+        const c = g.candidates[pick]
+        return round6(c.score) >= round6(TAIL_BOUNDS.glyphRatio * g.top) && round6(g.top - c.score) <= shareBar
+      })
+      if (!supported) continue
+      const text = q.chars.join('')
+      const valueCm = valueOf(text)
+      if (valueCm === undefined || emittedValues.has(valueCm)) continue
+      const held = tailByText.get(text)
+      if (held) {
+        if (q.logP > held.logP) Object.assign(held, { logP: q.logP, pathIds: [path.id, ...held.pathIds] })
+        else held.pathIds.push(path.id)
+        continue
+      }
+      tailByText.set(text, {
+        text,
+        valueCm,
+        logP: q.logP,
+        imageScore: geoMean(q.picks.map((pick, i) => path.glyphs[i].candidates[pick].score)),
+        nonTop: q.picks.flatMap((pick, i) => (pick === 0 ? [] : [{ index: i, top: path.glyphs[i].candidates[0].char, chosen: path.glyphs[i].candidates[pick].char, ratio: round6(path.glyphs[i].candidates[pick].score / Math.max(1e-6, path.glyphs[i].top)) }])),
+        pathIds: [path.id],
+      })
+    }
+  }
+  const tail: LatticeTailValue[] = []
+  for (const t of [...tailByText.values()].sort((a, b) => b.logP - a.logP || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0))) {
+    if (tail.length >= TAIL_BOUNDS.perInk) break
+    if (tail.some((u) => u.valueCm === t.valueCm)) continue
+    tail.push(t)
+  }
   const ps = sequences.map((s) => s.p).filter((p) => p > 0)
   const entropy = round6(-ps.reduce((a, p) => a + p * Math.log(p), 0))
   // The as-read cells on the page: the cut's columns mapped back through the shear's fraction, as the reader does.
@@ -755,6 +1242,9 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number): (Omit<Lab
     mergedCount,
     emittedMass,
     asReadStability: { stable: asReadStable, bracket },
+    countAmbiguity: { asRead: asReadDigits, alternatives: [...countAlternatives].sort((a, b) => a - b), decisive: decisiveVariants, widthAmbiguous, rivalP },
+    tail,
+    segmentation: telemetry,
     glyphBoxesInPass,
   }
 }
@@ -773,11 +1263,17 @@ function pickAsRead<T extends AnchorRead>(anchors: readonly T[], fallback: T): T
   return [...(valued.length > 0 ? valued : plain.length > 0 ? plain : [fallback])].sort((a, b) => b.segScore - a.segScore || INK_VARIANTS.indexOf(a.variant) - INK_VARIANTS.indexOf(b.variant))[0]
 }
 
-/** One mask's anchor — the reader's own cuts of it — read cell by cell, as `computeLattice` reads it; no re-cuts, no beam. */
-function anchorReading(mask: Mask, local: PixelRect, variant: InkVariant): AnchorRead | undefined {
-  const { sheared } = estimateShear(cropToken(mask, local))
-  const cells = segment(sheared)
-  if (cells.length === 0 || (variant !== 'DEFAULT' && cells.length > LATTICE_BOUNDS.maxCells)) return undefined
+/**
+ * One mask's anchor — the reader's own cuts of it under the 005F count and counter rules — read cell by cell, as
+ * `computeLattice` reads it; no re-cuts, no beam. `raws` are the ink masks the counters must persist in.
+ */
+function anchorReading(mask: Mask, local: PixelRect, variant: InkVariant, raws: ReadonlyMap<InkVariant, Bitmap>, pitch: number | null): AnchorRead | undefined {
+  const raw = cropToken(mask, local)
+  const { sheared, slope } = estimateShear(raw)
+  const reader = segment(sheared)
+  if (reader.length === 0 || (variant !== 'DEFAULT' && reader.length > LATTICE_BOUNDS.maxCells)) return undefined
+  const capHeight = Math.max(1, ...cellSources(sheared, reader).map((c) => c.y1 - c.y0 + 1))
+  const cells = countHypotheses(sheared, capHeight, raws, variant, slope, pitch).hyps[0].cells
   const cuts = cellSources(sheared, cells)
   if (cuts.length === 0) return undefined
   const runOf = (c: Cut): number => {

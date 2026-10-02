@@ -100,6 +100,9 @@ function lattice(t: TextToken, intended: OcrClass, seqs: Array<[string, number, 
     mergedCount: seqs.length,
     emittedMass: 1,
     asReadStability: { stable: true, bracket: [asRead, asRead] },
+    countAmbiguity: { asRead: asRead.replace(/[^0-9]/g, '').length, alternatives: [], decisive: [], widthAmbiguous: false, rivalP: 0 },
+    tail: [],
+    segmentation: { style: { pitch: null, samples: 0 }, counts: [], counterCutsMoved: 0, counterCutsPruned: 0, segmentations: 0, cellsScored: 0, truncated: 0 },
     cache: 'MISS',
   }
 }

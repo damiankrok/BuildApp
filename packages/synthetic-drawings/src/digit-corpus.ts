@@ -90,6 +90,11 @@ export type LabelStyle = {
   seed: number
   /** Which stroke face: A (round, closed 4) or B (open 4, flat-topped 3, footed 1). */
   face: 'A' | 'B'
+  /**
+   * 005F: a condensed face — every glyph's width times this (1: the face as drawn). Condensed dimension faces set four
+   * digits at a pitch of 0.40–0.50 of the cap height, where the ordinary face sets them near 0.7.
+   */
+  condense?: number
 }
 
 export const DEFAULT_LABEL_STYLE: LabelStyle = { capHeight: 14, slant: 0.2, pen: 1.6, gap: 0.12, blur: 0, paper: 238, ink: 60, breaks: 0, seed: 1, face: 'A' }
@@ -127,6 +132,7 @@ export function renderLabel(text: string, style: Partial<LabelStyle> = {}, margi
   const segments: Array<[number, number, number, number]> = []
   const glyphBoxes: Array<{ x0: number; x1: number }> = []
   let cursor = 0
+  const cx = s.condense ?? 1
   for (const ch of text) {
     const g = (s.face === 'B' ? STROKE_DIGITS_B : STROKE_DIGITS)[ch]
     if (!g) throw new Error(`no stroke glyph for ${ch}`)
@@ -134,11 +140,11 @@ export function renderLabel(text: string, style: Partial<LabelStyle> = {}, margi
       for (let i = 0; i + 1 < stroke.length; i += 1) {
         const [ax, ay] = stroke[i]
         const [bx, by] = stroke[i + 1]
-        segments.push([cursor + ax * h, ay * h, cursor + bx * h, by * h])
+        segments.push([cursor + ax * h * cx, ay * h, cursor + bx * h * cx, by * h])
       }
     }
-    glyphBoxes.push({ x0: cursor, x1: cursor + g.width * h })
-    cursor += g.width * h + s.gap * h
+    glyphBoxes.push({ x0: cursor, x1: cursor + g.width * h * cx })
+    cursor += g.width * h * cx + s.gap * h
   }
   const width = cursor - s.gap * h
   // Breaks: short stretches of a stroke with no ink, at seeded places.

@@ -34,7 +34,7 @@ import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
 import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
-import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, labelLattice } from './numeric-lattice.js'
+import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
 import type { LabelLattice, LatticeCache } from './numeric-lattice.js'
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts } from './callouts.js'
@@ -986,11 +986,13 @@ export function dimensionLabelLattices(
   const out = new Map<TextToken, LabelLattice>()
   if (!read.passes || !read.raw) return out
   const onLine = read.raw.filter((t) => t.glyphs.length >= 2 && t.glyphs.length <= LATTICE_LABEL_GLYPHS && t.passBox && chains.some((chain) => onDimensionLine(chain, t)))
+  // 005F: the plan's dimension-font style, from every raw token of the plan (image only), once; each label sees it at its own cap.
+  const style = onLine.length > 0 ? dimensionStyleOf(read) : { samples: [] }
   for (const [i, token] of onLine.entries()) {
     options.onLabel?.(i + 1, onLine.length)
     const ink = read.passes[token.orientation]
     if (!ink) continue
-    const lattice = labelLattice({ orientation: token.orientation, ink, page }, token, options.cache)
+    const lattice = labelLattice({ orientation: token.orientation, ink, page }, token, options.cache, styleFor(style, token.height))
     if (lattice) out.set(token, lattice)
   }
   return out
@@ -1036,6 +1038,9 @@ function latticeRecord(id: string, frameId: string, token: TextToken, l: LabelLa
     mergedCount: l.mergedCount,
     emittedMass: l.emittedMass,
     asReadStability: l.asReadStability,
+    countAmbiguity: l.countAmbiguity,
+    tail: l.tail,
+    segmentation: l.segmentation,
     cache: l.cache,
   }
 }

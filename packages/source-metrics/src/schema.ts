@@ -29,8 +29,8 @@ import { PixelPointSchema, PixelRectSchema } from '@buildapp/source-common'
 import { PixelGeometrySchema } from '@buildapp/source-observations'
 
 export const METRIC_EVIDENCE_SCHEMA = 'buildapp.metric-evidence-set' as const
-export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.4.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0'] as const
+export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.5.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0'] as const
 
 /** 005E: the four reading-quality classes the numeric lattice gives an ink, from the image alone. */
 export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])
@@ -845,6 +845,51 @@ export const NumericLatticeRecordSchema = z
     emittedMass: z.number().min(0).max(1),
     /** The as-read string under the stability bracket's masks, and whether its value held. */
     asReadStability: z.object({ stable: z.boolean(), bracket: z.array(z.string()) }).strict(),
+    /**
+     * 005F (schema 1.5.0): the glyph counts the ink was read at (`countAmbiguity`), the values two moderate substitutions
+     * reach past the count bound (`tail`: a record, never a reading), and what the segmentation tried (`segmentation`).
+     */
+    countAmbiguity: z
+      .object({ asRead: z.number().int().nonnegative(), alternatives: z.array(z.number().int().positive()), decisive: z.array(z.enum(['DEFAULT', 'STRICT', 'SAUVOLA'])), widthAmbiguous: z.boolean(), rivalP: z.number().min(0).max(1) })
+      .strict()
+      .optional(),
+    tail: z
+      .array(
+        z
+          .object({
+            text: z.string().min(1),
+            valueCm: z.number().positive(),
+            logP: z.number().finite(),
+            imageScore: z.number().min(0).max(1),
+            nonTop: z.array(z.object({ index: z.number().int().nonnegative(), top: z.string().min(1), chosen: z.string().min(1), ratio: z.number().min(0) }).strict()),
+            pathIds: z.array(z.string().min(1)),
+          })
+          .strict(),
+      )
+      .optional(),
+    segmentation: z
+      .object({
+        style: z.object({ pitch: z.number().positive().nullable(), samples: z.number().int().nonnegative() }).strict(),
+        counts: z.array(
+          z
+            .object({
+              variant: z.enum(['DEFAULT', 'STRICT', 'SAUVOLA']),
+              reader: z.number().int().nonnegative(),
+              anchor: z.number().int().nonnegative(),
+              alternatives: z.array(z.number().int().positive()),
+              decisive: z.boolean(),
+              widthAmbiguous: z.boolean(),
+            })
+            .strict(),
+        ),
+        counterCutsMoved: z.number().int().nonnegative(),
+        counterCutsPruned: z.number().int().nonnegative(),
+        segmentations: z.number().int().nonnegative(),
+        cellsScored: z.number().int().nonnegative(),
+        truncated: z.number().int().nonnegative(),
+      })
+      .strict()
+      .optional(),
     cache: z.enum(['HIT', 'MISS']),
   })
   .strict()

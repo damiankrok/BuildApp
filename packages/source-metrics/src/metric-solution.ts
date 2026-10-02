@@ -386,8 +386,12 @@ export function correctionReadings(lattice: LabelLattice): ChainToken['readings'
   // it has no reading, only the plausible corrections — never 005D's substitution list.
   const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
   const out: ChainToken['readings'] = []
+  // 005F (contract A6): how many glyphs an ink holds is read from the image alone; a scale never chooses it. A value of
+  // another digit count than the as-read string is never a correction, so neither a re-solve nor SCALE_RANKED takes one.
+  const digits = (t: string): number => t.replace(/[^0-9]/g, '').length
   for (const q of lattice.sequences) {
     if (q.valueCm === undefined) continue
+    if (!q.asRead && digits(q.text) !== digits(lattice.asRead)) continue
     const parsed = parseNumber(q.text).find((x) => x.kind === 'LINEAR_DIMENSION')
     if (!parsed) continue
     if (q.asRead) {
