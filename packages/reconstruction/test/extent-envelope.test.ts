@@ -233,6 +233,37 @@ describe('bounds and separation', () => {
   })
 })
 
+describe('the part cap (005F post-review B5F-1)', () => {
+  // the §29 bay on a long house, and N small closed closets on its north face, each its own enclosed part beyond the box
+  const plan = (closets: number) => {
+    const r = sheet(1100, 420)
+    ring(r, 40, 80, 959, 359)
+    wall(r, 948, 160, 999, 171)
+    wall(r, 948, 248, 999, 259)
+    wall(r, 988, 160, 999, 259)
+    clear(r, 988, 180, 999, 239)
+    glazeV(r, 988, 180, 239)
+    clear(r, 948, 172, 959, 247)
+    drawLine(r, 958, 172, 958, 247, BLACK)
+    const xs = [40, 960, 1000]
+    for (let i = 0; i < closets; i += 1) {
+      const x0 = 52 + i * 48
+      ring(r, x0, 44, x0 + 35, 91)
+      xs.push(x0, x0 + 36)
+    }
+    return { r, xs: [...new Set(xs)].sort((a, b) => a - b), ys: closets > 0 ? [44, 80, 160, 260, 360] : [80, 160, 260, 360] }
+  }
+  it('more small parts than the cap: the room is judged first and built, and what the cap left is counted', () => {
+    const { r, xs, ys } = plan(18)
+    const { d } = run(r, xs, ys)
+    expect(builtAt(d, 975, 210)).toBe(true)
+    expect(d.boundary?.completions.length ?? 0).toBeLessThanOrEqual(COMPLETION_BOUNDS.maxParts)
+    expect(d.boundary?.completionsUnjudged ?? 0).toBeGreaterThan(0)
+    // no side claims "nothing enclosed reaches it" while parts went unjudged
+    for (const c of d.boundary?.extentConflicts ?? []) expect(c.decision).not.toBe('ZONE')
+  })
+})
+
 describe('glazing beside a door junction stays a window', () => {
   it('a bay whose only junction opening is glazing has no way in: not built', () => {
     const r = sheet(460, 340)

@@ -1510,6 +1510,8 @@ export type OutlineOverride = {
    * bodies are never re-tiled (pre-review C P0-2: a re-tiling merged a garage into the house and lost a storey).
    */
   completions?: Array<Array<{ ix: number; iy: number }>>
+  /** The kind of each completion, in the same order: only a box completion extends the body it ends (C5F-7). */
+  completionKinds?: CompletionPart['kind'][]
   seeds?: PixelRect[]
 }
 
@@ -2037,13 +2039,15 @@ function stableRegions(merged: readonly PlanRegion[], cells: readonly PlanCell[]
     base.push(...tile(reading, 'the reading as it was'))
   }
   const extra: PlanRegion[] = []
-  for (const group of override.completions ?? []) {
+  for (const [gi, group] of (override.completions ?? []).entries()) {
     const members = group.filter((m) => isBuilt(m) && !claimed.has(key(m)))
     if (members.length === 0) continue
     for (const m of members) claimed.add(key(m))
     const g = rectOfCells(members)
-    // a rectangle sharing one whole side of exactly one body extends it
-    const along = isRectangle(members)
+    // a box completion that is a rectangle sharing one whole side of exactly one body extends it; an attached room is a
+    // body of its own (contract B6)
+    const extendable = (override.completionKinds?.[gi] ?? 'BOX_COMPLETION') === 'BOX_COMPLETION'
+    const along = extendable && isRectangle(members)
       ? base.filter((r) => {
           const R = r.rect
           const eq = (a: number, b: number): boolean => Math.abs(a - b) < 0.5
@@ -2531,6 +2535,9 @@ export type BoundaryRecord = {
   /** 005F: the extent's stated sides the box stops materially inside, and the parts judged as completions. */
   extentConflicts: ExtentConflict[]
   completions: CompletionPart[]
+  /** 005F: enclosed parts the completion cap left unjudged (B5F-1), and the long-band box the sides were weighed against. */
+  completionsUnjudged: number
+  box: PixelRect | null
   why: string
 }
 
@@ -2887,6 +2894,12 @@ export function boundaryExtension(
   const completed = completion.parts.filter((p) => p.decision === 'ACCEPTED')
   if (completed.length > 0) {
     final = final.map((v, i) => (v === 1 || completion.accepted[i] === 1 ? 1 : 0))
+    // the bodies named before the completion: one a completion now builds is built (C5F-8)
+    for (const b of bodies) {
+      if (b.built) continue
+      const inside = completed.find((p) => p.rect.x0 >= b.rect.x0 - wallPx && p.rect.x1 <= b.rect.x1 + wallPx && p.rect.y0 >= b.rect.y0 - wallPx && p.rect.y1 <= b.rect.y1 + wallPx)
+      if (inside) Object.assign(b, { built: true, why: `${b.why}; built as ${inside.kind === 'ATTACHED_ROOM' ? 'an attached room' : 'a box completion'}, clipped to ${round6(inside.areaM2)} m² (005F)` })
+    }
   }
   const supportOf = (inside: Uint8Array, result: OutlineResult = outline): OutlineSupport => outlineSupport(grid, { ...result, inside })
   const strictM2 = round6(areaOf(strictAdopted.final))
@@ -2915,6 +2928,8 @@ export function boundaryExtension(
     shutGarageMouths: garages.length,
     extentConflicts: completion.conflicts,
     completions: completion.parts,
+    completionsUnjudged: completion.unjudged,
+    box: env?.rect ?? null,
     why: !env
       ? 'the plan has no long-band box to weigh the outline against'
       : anyAccepted
@@ -2934,7 +2949,7 @@ export function boundaryExtension(
       linesY,
       outline: { ...outline, inside: final },
       why: `the opening-aware outline: wall-thick ink and ${outline.bridged.strong.length + outline.bridged.weak.length} bridged opening${outline.bridged.strong.length + outline.bridged.weak.length === 1 ? '' : 's'} enclose ${final.reduce((a, v) => a + v, 0)} cells, ${anyAccepted ? 'continuing the long-band box across an edge it could not support' : 'the long-band box and the parts completed against it'}`,
-      ...(completions.length > 0 ? { completions } : {}),
+      ...(completions.length > 0 ? { completions, completionKinds: completed.map((p) => p.kind) } : {}),
       ...(completions.length > 0 && !anyAccepted ? { seeds: incumbent.regions.filter((r) => r.classification === 'BUILT').map((r) => r.rect) } : {}),
     },
   }

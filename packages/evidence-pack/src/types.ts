@@ -171,8 +171,10 @@ export type PlanJson = {
     policies?: Json
     bodies?: Array<{ relation: string; built: boolean; enclosed: boolean; areaM2: number; rect: Rect; junctionWallShare: number; sideWallShare: number; mouthM?: number }>
     /** 005F: the extent's stated sides the box stops materially inside, and the completions judged. */
-    extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; decision: string; why: string }>
+    extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; stretchesOmitted?: number; decision: string; why: string }>
     completions?: Array<{ kind: string; decision: string; reason: string; rectBefore: Rect; areaBeforeM2: number; rect: Rect; areaM2: number; junction: Json; sides: Json; evidence: Json; weakGaps?: Json; side?: string }>
+    completionsUnjudged?: number
+    box?: Rect
     why?: string
   }
   masses: Array<{ id: string; rect: Rect }>

@@ -402,8 +402,9 @@ export function extentSidesOf(chains: readonly DimensionChain[], extent: PlanExt
       return c.marks?.length === c.ticksPx.length ? c.marks[i].class !== 'REJECTED' : true
     })
     if (stating.length === 0) continue
-    const baselines = stating.map((c) => c.baselinePx).sort((a, b) => a - b)
-    const twoLines = baselines.length >= 2 && baselines[baselines.length - 1] - baselines[0] > wallPx
+    // two chains on lines more than a wall apart whose ends agree within a wall (contract B1, C5F-9)
+    const endOf = (c: DimensionChain): number => c.ticksPx[d.low ? 0 : c.ticksPx.length - 1]
+    const twoLines = stating.some((a, i) => stating.slice(i + 1).some((b) => Math.abs(a.baselinePx - b.baselinePx) > wallPx && Math.abs(endOf(a) - endOf(b)) <= wallPx))
     const readAndCloses = stating.some((c) => c.closes && c.segments.some((g) => g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED'))
     out.push({ side: d.side, atPx: round6(d.at), strength: twoLines || readAndCloses ? 'STRONG' : 'SUPPORTED', chainIds: stating.map((c) => c.id).sort() })
   }

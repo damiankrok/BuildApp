@@ -110,14 +110,17 @@ export type ExtentConflict = {
   gapPx: number
   gapWalls: number
   gapM: number
-  /** Stretches of the side no built cell explains, along the side's axis. */
+  /** Stretches of the side no built cell explains, along the side's axis (the longest `stretchesPerSide`). */
   stretches: Array<{ fromPx: number; toPx: number }>
+  /** Stretches the cap left out (B5F-10). */
+  stretchesOmitted?: number
   /** ACCEPTED: an attached room explains it; ZONE: nothing enclosed reaches it; INCONCLUSIVE: something enclosed reaches it and fails; RECORDED: SUPPORTED only — recorded, never acted on. */
   decision: 'ACCEPTED' | 'ZONE' | 'INCONCLUSIVE' | 'RECORDED'
   why: string
 }
 
-export type CompletionResult = { conflicts: ExtentConflict[]; parts: CompletionPart[]; accepted: Uint8Array; addedM2: number }
+/** `unjudged`: parts the `maxParts` cap left unjudged (judged largest first, so a room is never starved by slivers). */
+export type CompletionResult = { conflicts: ExtentConflict[]; parts: CompletionPart[]; accepted: Uint8Array; addedM2: number; unjudged: number }
 
 export type CompletionInput = {
   linesX: readonly number[]
@@ -158,7 +161,7 @@ const coverOf = (intervals: readonly Interval[], a: number, b: number): number =
   return total
 }
 
-type Neighbour = { j: number; edge: OutlineEdge; line: WallLine; a: number; b: number; lengthM: number }
+type Neighbour = { j: number; edge: OutlineEdge; line: WallLine; a: number; b: number; lengthM: number; axis: 'X' | 'Y'; at: number }
 
 /** Judge every part the outline encloses and the reading does not build, against the extent's stated sides. */
 export function completeBoundary(input: CompletionInput): CompletionResult {
@@ -193,14 +196,19 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     const x = k % nx
     const y = (k - x) / nx
     return [
-      { j: y > 0 ? k - nx : -1, edge: outline.hEdge[y][x], line: wallsY[y], a: LX[x], b: LX[x + 1], lengthM: (LX[x + 1] - LX[x]) * mppX },
-      { j: x < nx - 1 ? k + 1 : -1, edge: outline.vEdge[x + 1][y], line: wallsX[x + 1], a: LY[y], b: LY[y + 1], lengthM: (LY[y + 1] - LY[y]) * mppY },
-      { j: y < ny - 1 ? k + nx : -1, edge: outline.hEdge[y + 1][x], line: wallsY[y + 1], a: LX[x], b: LX[x + 1], lengthM: (LX[x + 1] - LX[x]) * mppX },
-      { j: x > 0 ? k - 1 : -1, edge: outline.vEdge[x][y], line: wallsX[x], a: LY[y], b: LY[y + 1], lengthM: (LY[y + 1] - LY[y]) * mppY },
+      { j: y > 0 ? k - nx : -1, edge: outline.hEdge[y][x], line: wallsY[y], a: LX[x], b: LX[x + 1], lengthM: (LX[x + 1] - LX[x]) * mppX, axis: 'Y', at: LY[y] },
+      { j: x < nx - 1 ? k + 1 : -1, edge: outline.vEdge[x + 1][y], line: wallsX[x + 1], a: LY[y], b: LY[y + 1], lengthM: (LY[y + 1] - LY[y]) * mppY, axis: 'X', at: LX[x + 1] },
+      { j: y < ny - 1 ? k + nx : -1, edge: outline.hEdge[y + 1][x], line: wallsY[y + 1], a: LX[x], b: LX[x + 1], lengthM: (LX[x + 1] - LX[x]) * mppX, axis: 'Y', at: LY[y + 1] },
+      { j: x > 0 ? k - 1 : -1, edge: outline.vEdge[x][y], line: wallsX[x], a: LY[y], b: LY[y + 1], lengthM: (LY[y + 1] - LY[y]) * mppY, axis: 'X', at: LX[x] },
     ]
   }
   const shareOf = (n: Neighbour, kind: 'WALL' | 'POST'): number => coverOf(n.line.pieces.filter((p) => p.kind === kind).map((p) => [p.from, p.to] as Interval), n.a, n.b) / Math.max(1e-9, n.b - n.a)
   const gapsOn = (n: Neighbour): BoundaryGap[] => n.line.gaps.filter((g) => Math.min(g.toPx, n.b) - Math.max(g.fromPx, n.a) > 0)
+  // A door-like opening: bridged, not glazing, a door wide, between wall jambs.
+  const doorLike = (n: Neighbour): boolean => n.edge.bridged > 0 && gapsOn(n).some((g) => g.boundary !== 'NONE' && g.signature !== 'GLAZING' && g.widthM >= B.doorM && g.jambs[0] !== 'POST' && g.jambs[1] !== 'POST')
+  // An edge one walks across: no ink closes it, or a door-like opening bridges it (005C `adopt`'s propagation). A solid
+  // wall, or a wall with only a window in it, is not one.
+  const passable = (n: Neighbour): boolean => !n.edge.closed || doorLike(n)
   const components = (want: (k: number) => boolean): number[][] => {
     const seen = new Uint8Array(nx * ny)
     const out: number[][] = []
@@ -254,8 +262,8 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         at = Math.max(at, q)
       }
       if (hi > at) free.push([at, hi])
-      const stretches = free
-        .filter(([p, q]) => q - p >= B.stretchWalls * W)
+      const long = free.filter(([p, q]) => q - p >= B.stretchWalls * W)
+      const stretches = long
         .sort((u, v) => v[1] - v[0] - (u[1] - u[0]) || u[0] - v[0])
         .slice(0, B.stretchesPerSide)
         .sort((u, v) => u[0] - v[0])
@@ -271,6 +279,7 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         gapWalls: round6(gapPx / W),
         gapM: round6(gapPx * (horizontal ? mppX : mppY)),
         stretches,
+        ...(long.length > stretches.length ? { stretchesOmitted: long.length - stretches.length } : {}),
         decision: s.strength === 'STRONG' ? 'ZONE' : 'RECORDED',
         why: '',
       })
@@ -336,10 +345,29 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       }
       return total > 0 && free / total >= B.coreShare
     })
-    const coreSet = new Set(core)
+    // C4 (005F post-review C5F-2): the part is what one reaches from the house — across open edges and door-like
+    // openings, never through a solid wall. A room walled off beside it is not part of it, however the cells connect.
+    const inBefore = new Set(before)
+    const reached = new Set<number>()
+    const queue: number[] = []
+    for (const k of before) if (neighbours(k).some((n) => n.j >= 0 && !inBefore.has(n.j) && house(n.j) && passable(n))) {
+      reached.add(k)
+      queue.push(k)
+    }
+    while (queue.length > 0) {
+      const k = queue.shift() as number
+      for (const n of neighbours(k)) {
+        if (n.j < 0 || !inBefore.has(n.j) || reached.has(n.j) || !passable(n)) continue
+        reached.add(n.j)
+        queue.push(n.j)
+      }
+    }
+    const allCore = core
+    const walledOff = allCore.filter((k) => !reached.has(k))
+    const coreSet = new Set(allCore.filter((k) => reached.has(k)))
     const nearCore = (k: number): boolean => {
       const t = rectOfCell(k)
-      return core.some((q) => {
+      return [...coreSet].some((q) => {
         const c = rectOfCell(q)
         // side-on, overlapping along the shared side, or corner-diagonal: within a wall both ways
         const gapX = Math.max(c.x0 - t.x1, t.x0 - c.x1)
@@ -347,8 +375,12 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         return gapX <= W && gapY <= W
       })
     }
-    const kept = before.filter((k) => coreSet.has(k) || nearCore(k))
+    // the reached rooms and their own walls (cells of no free floor within a wall of them) — never another room's floor
+    const anyCore = new Set(allCore)
+    const kept = before.filter((k) => coreSet.has(k) || (!anyCore.has(k) && nearCore(k)))
     const mine = new Set(kept)
+    // the house's own edges with the part: a window in them is the house's, not the part's (C5F-1)
+    const junctionLines: Array<{ axis: 'X' | 'Y'; at: number; a: number; b: number }> = []
     const rect = kept.length > 0 ? rectOf(kept) : rectBefore
     const areaM2 = kept.reduce((a, k) => a + areaOf(k), 0)
     // the junction with the house, its own perimeter, and what is drawn on it
@@ -364,8 +396,9 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         if (n.j >= 0 && mine.has(n.j)) continue
         if (n.j >= 0 && house(n.j)) {
           shared += n.lengthM
+          junctionLines.push({ axis: n.axis, at: n.at, a: n.a, b: n.b })
           if (!n.edge.closed) open += n.lengthM
-          else if (n.edge.bridged > 0 && gapsOn(n).some((g) => g.boundary !== 'NONE' && g.signature !== 'GLAZING' && g.widthM >= B.doorM && g.jambs[0] !== 'POST' && g.jambs[1] !== 'POST')) doorway += n.lengthM * n.edge.bridged
+          else if (doorLike(n)) doorway += n.lengthM * n.edge.bridged
           continue
         }
         side += n.lengthM
@@ -374,21 +407,25 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         for (const g of gapsOn(n)) if (!sideGaps.has(g.id)) sideGaps.set(g.id, g)
       }
     }
+    // Glazing of its own: a STRONG glazed gap between wall jambs on a line within the part's span — the same half wall
+    // either side, whichever way up the plan is drawn (C5F-1) — and not on the edge it shares with the house.
     let glazing = 0
     for (const line of [...wallsX, ...wallsY]) {
       for (const g of line.gaps) {
         if (g.signature !== 'GLAZING' || g.boundary !== 'STRONG' || g.jambs.includes('POST')) continue
         const within =
           g.axis === 'X'
-            ? g.linePx > rect.x0 + 0.5 * W && g.linePx <= rect.x1 + 0.5 * W && g.fromPx >= rect.y0 - W && g.toPx <= rect.y1 + W
-            : g.linePx > rect.y0 + 0.5 * W && g.linePx <= rect.y1 + 0.5 * W && g.fromPx >= rect.x0 - W && g.toPx <= rect.x1 + W
-        if (within) glazing += 1
+            ? g.linePx >= rect.x0 - 0.5 * W && g.linePx <= rect.x1 + 0.5 * W && g.fromPx >= rect.y0 - W && g.toPx <= rect.y1 + W
+            : g.linePx >= rect.y0 - 0.5 * W && g.linePx <= rect.y1 + 0.5 * W && g.fromPx >= rect.x0 - W && g.toPx <= rect.x1 + W
+        const onJunction = junctionLines.some((j) => j.axis === g.axis && Math.abs(j.at - g.linePx) <= W && Math.min(j.b, g.toPx) - Math.max(j.a, g.fromPx) > 0)
+        if (within && !onJunction) glazing += 1
       }
     }
+    // A chain measuring it (C5F-3): drawn across the part, with ticks within a wall of both of its ends along the chain.
     const chains = input.chains.filter((c) => {
-      const inside = c.ticksPx.filter((t) => (c.axis === 'HORIZONTAL' ? t > rect.x0 - 0.5 * W && t < rect.x1 + 0.5 * W : t > rect.y0 - 0.5 * W && t < rect.y1 + 0.5 * W)).length
+      const [p0, p1] = c.axis === 'HORIZONTAL' ? [rect.x0, rect.x1] : [rect.y0, rect.y1]
       const across = c.axis === 'HORIZONTAL' ? c.baselinePx > rect.y0 && c.baselinePx < rect.y1 : c.baselinePx > rect.x0 && c.baselinePx < rect.x1
-      return inside >= 2 && across
+      return across && c.ticksPx.some((t) => Math.abs(t - p0) <= W) && c.ticksPx.some((t) => Math.abs(t - p1) <= W)
     }).length
     const depthBehind = (g: BoundaryGap): number => (g.axis === 'Y' ? (rect.y1 - rect.y0) * mppY : (rect.x1 - rect.x0) * mppX)
     const vehicle = [...sideGaps.values()].filter(
@@ -403,22 +440,27 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     const houseDepth = (g: BoundaryGap): number => {
       let depth = depthBehind(g)
       if (kind === 'BOX_COMPLETION') {
+        // the floor a vehicle drives onto: from the part, across open edges only (never through a wall), through the
+        // built cells in the door's band — a search over edges, so the answer does not depend on which way up the plan
+        // is drawn (177dfca) nor on a room behind a wall (C5F-4)
         const along = g.axis === 'Y' ? [rect.x0, rect.x1] : [rect.y0, rect.y1]
+        const inBand = (k: number): boolean => {
+          const r = rectOfCell(k)
+          const [p, q] = g.axis === 'Y' ? [r.x0, r.x1] : [r.y0, r.y1]
+          return Math.min(q, along[1]) - Math.max(p, along[0]) > 0
+        }
         let reach = g.axis === 'Y' ? [rect.y0, rect.y1] : [rect.x0, rect.x1]
-        // grown to a fixpoint, not in one pass: a pass in cell order reaches all the way only one way, and the depth
-        // behind a door must not depend on which way up the plan is drawn
-        for (let grown = true; grown; ) {
-          grown = false
-          for (let k = 0; k < nx * ny; k += 1) {
-            if (!house(k)) continue
-            const r = rectOfCell(k)
-            const [p, q] = g.axis === 'Y' ? [r.x0, r.x1] : [r.y0, r.y1]
-            if (Math.min(q, along[1]) - Math.max(p, along[0]) <= 0) continue
+        const seen = new Set<number>(kept)
+        const stack = [...kept]
+        while (stack.length > 0) {
+          const k = stack.pop() as number
+          for (const n of neighbours(k)) {
+            if (n.j < 0 || seen.has(n.j) || n.edge.closed || !house(n.j) || !inBand(n.j)) continue
+            seen.add(n.j)
+            stack.push(n.j)
+            const r = rectOfCell(n.j)
             const [u, v] = g.axis === 'Y' ? [r.y0, r.y1] : [r.x0, r.x1]
-            if (v >= reach[0] - 0.5 && u <= reach[1] + 0.5 && (u < reach[0] || v > reach[1])) {
-              reach = [Math.min(reach[0], u), Math.max(reach[1], v)]
-              grown = true
-            }
+            reach = [Math.min(reach[0], u), Math.max(reach[1], v)]
           }
         }
         depth = (reach[1] - reach[0]) * (g.axis === 'Y' ? mppY : mppX)
@@ -460,12 +502,18 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     }
     const returns = returnsAcross(reaches?.side)
     const continues = open >= Math.max(B.doorM, B.continueShare * shared)
-    const room = open + doorway >= B.doorM && wallShare >= B.sideWallShare && postShare < B.postShare && (glazing > 0 || chains > 0 || vehicleDoors.length > 0)
+    // a dashed line across a mouth is as much a roof edge as an overhead door: it closes a garage's end (BOX_COMPLETION),
+    // never makes a room by itself (C5F-5)
+    const roomDoors = vehicleDoors.filter((g) => g.signature !== 'DASHED')
+    const room = open + doorway >= B.doorM && wallShare >= B.sideWallShare && postShare < B.postShare && (glazing > 0 || chains > 0 || roomDoors.length > 0)
     let decision: CompletionDecision = 'ACCEPTED'
     let reason: string
     if (core.length === 0) {
       decision = 'REJECTED'
       reason = 'WALL_SLIVER: no free floor three quarters of a wall across — the thickness of a wall, not a room'
+    } else if (coreSet.size === 0 && shared > 0) {
+      decision = 'REJECTED'
+      reason = 'WALLED_OFF: no open edge or door reaches it from the house — a room or a yard behind a wall'
     } else if (shared === 0) {
       decision = 'REJECTED'
       reason = 'SEPARATE: it shares no edge with the house'
@@ -477,7 +525,7 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       reason = 'NO_STRONG_EXTENT: no side the chains strongly state lies past the box where it reaches'
     } else if (kind === 'ATTACHED_ROOM' && !room) {
       decision = 'REJECTED'
-      reason = open + doorway < B.doorM ? `NO_WAY_IN: ${(open + doorway).toFixed(2)} m of open edge and door-like openings into the house` : postShare >= B.postShare ? `POSTS: ${Math.round(postShare * 100)}% of its perimeter is posts — a terrace or a canopy` : wallShare < B.sideWallShare ? `NOT_WALLED: ${Math.round(wallShare * 100)}% of its perimeter is wall` : 'NO_ROOM_EVIDENCE: no glazing between wall jambs, no chain measuring it, no vehicle door'
+      reason = open + doorway < B.doorM ? `NO_WAY_IN: ${(open + doorway).toFixed(2)} m of open edge and door-like openings into the house` : postShare >= B.postShare ? `POSTS: ${Math.round(postShare * 100)}% of its perimeter is posts — a terrace or a canopy` : wallShare < B.sideWallShare ? `NOT_WALLED: ${Math.round(wallShare * 100)}% of its perimeter is wall` : 'NO_ROOM_EVIDENCE: no glazing of its own between wall jambs, no chain measuring it, no vehicle door drawn as a leaf'
     } else if (kind === 'ATTACHED_ROOM' && returns < 2) {
       decision = 'REJECTED'
       reason = `NO_RETURNS: ${returns} wall line${returns === 1 ? '' : 's'} run across its depth; an attached room has two`
@@ -515,11 +563,50 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       weakGaps: [...sideGaps.values()].filter((g) => g.boundary === 'WEAK').map((g) => ({ widthM: round6(g.widthM), signature: g.signature, jambs: g.jambs, vehicleDoor: vehicleDoors.includes(g) })),
       ...(reaches ? { side: reaches.side } : {}),
     })
+    // what lies beside it behind a wall is recorded on its own, never carried in with it (C5F-2)
+    if (walledOff.length > 0 && coreSet.size > 0 && parts.length < B.maxParts) {
+      const off = before.filter((k) => !mine.has(k) && (walledOff.includes(k) || walledOff.some((q) => {
+        const c = rectOfCell(q)
+        const t = rectOfCell(k)
+        return Math.max(c.x0 - t.x1, t.x0 - c.x1) <= W && Math.max(c.y0 - t.y1, t.y0 - c.y1) <= W
+      })))
+      const offRect = rectOf(off)
+      const offM2 = off.reduce((a, k) => a + areaOf(k), 0)
+      parts.push({
+        kind,
+        decision: 'REJECTED',
+        reason: 'WALLED_OFF: enclosed beside it behind a wall, with no open edge or door from the house or from it',
+        cellsBefore: before.length,
+        rectBefore,
+        areaBeforeM2: round6(areaBeforeM2),
+        cells: off.map((k) => ({ ix: k % nx, iy: Math.floor(k / nx) })),
+        rect: offRect,
+        areaM2: round6(offM2),
+        junction: { lengthM: 0, openM: 0, doorM: 0 },
+        sides: { lengthM: 0, wallShare: 0, postShare: 0 },
+        evidence: { glazing: 0, chains: 0, vehicleDoors: 0, returns: 0, strictEncloses: off.every((k) => strict.inside[k] === 1) },
+        weakGaps: [],
+      })
+    }
   }
+  // Largest first (B5F-1): the cap bounds the work, and wall slivers in scan order must not use it up before a room.
+  const largestFirst = (groups: number[][]): number[][] =>
+    groups.map((g) => ({ g, a: g.reduce((t, k) => t + areaOf(k), 0) })).sort((u, v) => v.a - u.a || u.g[0] - v.g[0]).map((x) => x.g)
+  let unjudged = 0
   // Beyond the box: enclosed, not adopted. The house it attaches to is what the reading builds.
-  for (const members of components((k) => outline.inside[k] === 1 && inA[k] === 0 && accepted[k] === 0)) judge('ATTACHED_ROOM', members, (k) => builtA[k] === 1 || accepted[k] === 1 || (inA[k] === 1 && outline.inside[k] === 1))
+  for (const members of largestFirst(components((k) => outline.inside[k] === 1 && inA[k] === 0 && accepted[k] === 0))) {
+    if (parts.length >= B.maxParts) unjudged += 1
+    else judge('ATTACHED_ROOM', members, (k) => builtA[k] === 1 || accepted[k] === 1)
+  }
   // Inside the box, when nothing beyond it was adopted: enclosed, not built by the box's own reading.
-  if (!anyAdopted) for (const members of components((k) => outline.inside[k] === 1 && inA[k] === 1 && builtA[k] === 0)) judge('BOX_COMPLETION', members, (k) => builtA[k] === 1)
+  if (!anyAdopted) {
+    for (const members of largestFirst(components((k) => outline.inside[k] === 1 && inA[k] === 1 && builtA[k] === 0))) {
+      if (parts.length >= B.maxParts) unjudged += 1
+      else judge('BOX_COMPLETION', members, (k) => builtA[k] === 1)
+    }
+  }
+  // a side no judged part reached cannot claim that nothing enclosed reaches it while parts went unjudged
+  if (unjudged > 0) for (const c of conflicts) if (c.decision === 'ZONE') c.decision = 'INCONCLUSIVE'
   for (const c of conflicts) {
     c.why =
       c.decision === 'RECORDED'
@@ -527,8 +614,10 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
         : c.decision === 'ACCEPTED'
           ? `the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box is an attached room's outer wall`
           : c.decision === 'INCONCLUSIVE'
-            ? `something enclosed reaches the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box, and fails the attached-room guards: nothing is built`
+            ? unjudged > 0 && !parts.some((p) => p.side === c.side)
+              ? `the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box: ${unjudged} enclosed part${unjudged === 1 ? '' : 's'} went unjudged under the cap — nothing is built, and nothing is ruled out`
+              : `something enclosed reaches the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box, and fails the attached-room guards: nothing is built`
             : `nothing enclosed reaches the ${c.side} side the chains state ${c.gapM.toFixed(2)} m past the box: a terrace, a canopy or ground — nothing is built`
   }
-  return { conflicts, parts, accepted: acceptedOut, addedM2: round6(addedM2) }
+  return { conflicts, parts, accepted: acceptedOut, addedM2: round6(addedM2), unjudged }
 }

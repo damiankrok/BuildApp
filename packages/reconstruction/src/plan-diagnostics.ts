@@ -81,8 +81,10 @@ function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']>
     bodies: b.bodies.map((x) => ({ relation: x.relation, built: x.built, enclosed: x.enclosed, areaM2: x.areaM2, rect: rect(x.rect), junctionWallShare: x.junction.wallShare, sideWallShare: x.sides.wallShare, ...(x.mouth ? { mouthM: x.mouth.widthM } : {}) })),
     shutGarageMouths: b.shutGarageMouths,
     // 005F: recorded only where there is something to say, so a plan with none digests as it did.
-    ...(b.extentConflicts.length > 0 ? { extentConflicts: b.extentConflicts.map((c) => ({ side: c.side, strength: c.strength, chainIds: c.chainIds, extentPx: c.extentPx, boxPx: c.boxPx, gapM: c.gapM, gapWalls: c.gapWalls, stretches: c.stretches, decision: c.decision, why: c.why })) } : {}),
+    ...(b.extentConflicts.length > 0 ? { extentConflicts: b.extentConflicts.map((c) => ({ side: c.side, strength: c.strength, chainIds: c.chainIds, extentPx: c.extentPx, boxPx: c.boxPx, gapM: c.gapM, gapWalls: c.gapWalls, stretches: c.stretches, ...(c.stretchesOmitted ? { stretchesOmitted: c.stretchesOmitted } : {}), decision: c.decision, why: c.why })) } : {}),
     ...(b.completions.length > 0 ? { completions: b.completions.map((p) => ({ kind: p.kind, decision: p.decision, reason: p.reason, rectBefore: rect(p.rectBefore), areaBeforeM2: p.areaBeforeM2, rect: rect(p.rect), areaM2: p.areaM2, junction: p.junction, sides: p.sides, evidence: p.evidence, weakGaps: p.weakGaps, ...(p.side ? { side: p.side } : {}) })) } : {}),
+    ...(b.completionsUnjudged > 0 ? { completionsUnjudged: b.completionsUnjudged } : {}),
+    ...(b.box && (b.extentConflicts.length > 0 || b.completions.length > 0) ? { box: rect(b.box) } : {}),
     why: b.why,
   }
 }

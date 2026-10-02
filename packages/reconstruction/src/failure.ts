@@ -188,8 +188,11 @@ export type PlanDiagnostics = {
     bodies: Array<{ relation: string; built: boolean; enclosed: boolean; areaM2: number; rect: Rect; junctionWallShare: number; sideWallShare: number; mouthM?: number }>
     shutGarageMouths: number
     /** 005F: the extent's stated sides the box stops materially inside, and the completions judged (only when there are any). */
-    extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; decision: string; why: string }>
+    extentConflicts?: Array<{ side: string; strength: string; chainIds: string[]; extentPx: number; boxPx: number; gapM: number; gapWalls: number; stretches: Array<{ fromPx: number; toPx: number }>; stretchesOmitted?: number; decision: string; why: string }>
     completions?: Array<{ kind: string; decision: string; reason: string; rectBefore: Rect; areaBeforeM2: number; rect: Rect; areaM2: number; junction: { lengthM: number; openM: number; doorM: number }; sides: { lengthM: number; wallShare: number; postShare: number }; evidence: { glazing: number; chains: number; vehicleDoors: number; returns: number; strictEncloses: boolean }; weakGaps: Array<{ widthM: number; signature: string; jambs: string[]; vehicleDoor: boolean }>; side?: string }>
+    /** 005F: parts the completion cap left unjudged, and the long-band box (only with conflicts or completions). */
+    completionsUnjudged?: number
+    box?: Rect
     why: string
   }
   masses: Array<{ id: string; rect: Rect }>

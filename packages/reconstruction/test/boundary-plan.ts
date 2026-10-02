@@ -7,6 +7,7 @@ import { runLengthBands } from '@buildapp/source-cv'
 import type { Raster } from '@buildapp/source-cv'
 import { bandWallThickness, decomposePlan, extentSidesOf, exteriorTicksOf, planExtent, wallWitness } from '../src/index.js'
 import type { PlanCallout, PlanDecomposition } from '../src/index.js'
+import type { DimensionChain } from '@buildapp/source-metrics'
 import { CM_PER_PX, WALL, chain, mask, registration } from './plan.js'
 import { BLACK, drawLine, fillRect } from '../../source-cv/test/draw.js'
 
@@ -38,14 +39,14 @@ export const post = (r: Raster, cx: number, cy: number): void => fillRect(r, cx 
 
 export type Run = { d: PlanDecomposition; builtM2: number }
 /** The plan as the layout pass reads it: sheet wall, witness-checked extent, exterior ticks. */
-export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; cmPerPx?: number; sheetWallPx?: number; extentSides?: boolean; unreadTicks?: { x?: number[]; y?: number[] } } = {}): Run {
+export function run(r: Raster, xs: number[], ys: number[], callouts: PlanCallout[] = [], options: { openingAware?: boolean; shutPocketMouths?: boolean; cmPerPx?: number; sheetWallPx?: number; extentSides?: boolean; unreadTicks?: { x?: number[]; y?: number[] }; extraChains?: DimensionChain[] } = {}): Run {
   const m = mask(r)
   const bands = runLengthBands(m, BANDS)
   const wallPx = bandWallThickness(bands, WALL)
-  const chains = [chain('cx', 'HORIZONTAL', [...xs].sort((a, b) => a - b), { baselinePx: 12 }), chain('cy', 'VERTICAL', [...ys].sort((a, b) => a - b), { baselinePx: 12 })]
+  const chains = [chain('cx', 'HORIZONTAL', [...xs].sort((a, b) => a - b), { baselinePx: 12 }), chain('cy', 'VERTICAL', [...ys].sort((a, b) => a - b), { baselinePx: 12 }), ...(options.extraChains ?? [])]
   const extent = planExtent(chains, bands, wallPx, wallWitness(bands, wallPx, m))
   if (!extent) throw new Error('the fixture has no frame')
-  const { cmPerPx, sheetWallPx, extentSides, unreadTicks, ...flags } = options
+  const { cmPerPx, sheetWallPx, extentSides, unreadTicks, extraChains: _extra, ...flags } = options
   const reg = cmPerPx === undefined ? registration() : { ...registration(), metresPerPixelX: cmPerPx / 100, metresPerPixelY: cmPerPx / 100 }
   // 005F: the extent's stated sides, as the layout pass gives them (`extentSidesOf`): every fixture runs with the
   // extent-conflict rule live unless it asks otherwise.
