@@ -53,6 +53,26 @@ timeline the candidate set is its own stage, `OCR_SEQUENCE_CANDIDATES`, before
 `OCR_READING`: a change in what the image offers is a first divergence ahead
 of the reading and the scale it changes.
 
+**The glyph-count and extent-conflict layers (005F).** Each lattice record in
+`07-ocr-labels.json` also carries the glyph counts the ink was cut into
+(`countHypotheses`: the as-read count, the others kept, whether the width fits
+another as well, and the share another count holds), the plan's dimension-font
+style it was judged against, what the segmentation tried (per variant: the
+reader's count, the anchor's, the others; counter cuts moved and pruned; caps
+reached), and the ambiguity tail — each value marked `AMBIGUITY_TAIL`, never
+a reading. In the timeline `GLYPH_COUNT_HYPOTHESES` comes before
+`OCR_SEQUENCE_CANDIDATES`, and an ink appears there only where the plan's style
+changed the reader's count or another count was kept. `11-envelope-candidates`
+draws each extent conflict as the strip between the long-band box and the side
+the chains state, coloured by what was decided there, and its sidecar carries
+`extentConflicts` (strength, chains, gap in metres and walls, the stretches no
+built cell explains, the decision and why). `13-body-candidates` draws each
+completion before and after its clip, and its sidecar carries `completions`
+(kind, decision, the guard that decided it, junction, sides, evidence and the
+gaps the two jamb policies may disagree on). In the timeline
+`ENVELOPE_EXTENT_CONFLICT` lies between `ENVELOPE` and `BODIES`, with one
+event per side and per completion.
+
 **No publisher pixels.** No SVG may contain `<image`, a `data:` URI,
 `xlink:href`, base64 or `<foreignObject` (the writer refuses, and
 `evidence:verify` checks committed packs). Source assets are recorded by

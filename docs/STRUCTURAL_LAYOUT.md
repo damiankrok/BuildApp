@@ -138,6 +138,38 @@ whole plan as one box, made in the other direction. A body is turned back into
 a rectangle only when it IS one — when its bounding box is covered by its own
 cells and by the pockets bitten out of it.
 
+**5. The extent against the box (005F).** The plan's extent is what its
+exterior dimension chains state; the long-band box is what its long walls
+close. Where a side the chains state (SUPPORTED: an exterior chain covering
+the wall witness ends on it within a wall; STRONG: two such chains on lines
+more than a wall apart, or one that closes with a reading — geometry only, no
+printed value) lies two walls or more past the box, with stretches no built
+cell explains, the side is an `ENVELOPE_EXTENT_CONFLICT`. It is always
+recorded and fills nothing by itself: a terrace, a canopy or a yard is what
+an extent past the walls most often is. What the outline encloses there is
+judged as a part:
+
+- an **attached room** is built when it has a way in from the house (open
+  edge or door-like openings at least a door wide), its own perimeter mostly
+  wall and not posts, evidence of a room of its own (glazing between wall
+  jambs, a chain measuring it, or a vehicle door), two returns, and it reaches
+  the stated side — clipped to its own free floor (wall-thick ink is not
+  floor), never the strip's full length;
+- inside the box, a room's **end** the incumbent grid had no line for (only an
+  unread exterior chain ticks its wall) is completed when it continues the
+  built rooms across an open edge and both jamb policies close it — drawn
+  openings alone, or a vehicle door (wall jambs, 2.2–3.2 m, a stroke or a
+  dashed line in it, never blank) with a vehicle's length of built floor
+  behind it, measured whichever way up the plan is drawn;
+- everything else is rejected by name (`WALL_SLIVER`, `SEPARATE`,
+  `NO_CONTINUATION`, `NO_WAY_IN`, `POSTS`, `NOT_WALLED`, `NO_ROOM_EVIDENCE`,
+  `NO_RETURNS`, `BEYOND_EXTENT`), and a part too large or that the two
+  policies disagree on is a question (`TOO_LARGE`, `POLICIES_DISAGREE`).
+
+The decided shape keeps the bodies the box reading had as they were; the
+completed parts are laid against them. The published footprint is never an
+input: it verifies afterwards.
+
 ## Storey registration
 
 Two plans of the same building are two drawings at two scales with two origins,
@@ -146,7 +178,10 @@ search, not a fit:
 
 - **Scales**: the ratio of the two plans' own printed scales, when both state
   one, and the scale that makes the upper plan the size of one of the bodies
-  below. Anything with more than 15% of anisotropy is refused outright.
+  below — or of the house without the attached rooms the boundary completed
+  (005F), since a single-storey room against the house widens the envelope
+  without widening the storey above. Anything with more than 15% of anisotropy
+  is refused outright.
 - **Offsets**: each face of the target, the centre, and where the two plans'
   own chains put it. An upper storey does not have to be concentric with the
   one below — it steps back from one wall and stays flush with the other — so

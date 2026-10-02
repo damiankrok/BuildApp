@@ -273,6 +273,54 @@ tables and every constant's sensitivity:
   lattice; they are scale-chosen corrections (`CHAIN_CORRECTED`), never
   witnesses of the scale.
 
+## Adaptive glyph count (BUILDPLAN-ANALYZER-005F, schema 1.5.0)
+
+A lattice can only offer values of the digit count it was cut into. On a
+condensed dimension font the reader cuts a `1` and its neighbour into one cell,
+or one wide glyph into two, and no re-cut at the same count reaches the truth.
+Since 005F (`metrics.numeric-lattice` 1.1.0) the count is a hypothesis of its own:
+
+- **the plan's own dimension-font style** — the median width over cap height of
+  isolated glyph runs on the plan's own tokens of similar cap (at least eight
+  samples; `dimensionStyleOf`, `styleFor`). It is a property of the drawing,
+  measured once per plan, never of a house or a publisher;
+- **bounded count hypotheses** — besides the reader's count, a count is admitted
+  when the ink's width per glyph lies in the style's band (0.75–1.3 of the
+  style; with no style, a wide band that never decides); a count that adds a
+  boundary needs a real valley in the column profile. Each count is segmented
+  with 005E's machinery, under explicit caps (`COUNT_BOUNDS`: 16 segmentations
+  per count, 48 per variant, 144 per ink, 96 cells scored per ink), and the caps
+  are recorded (`segmentation.truncated`);
+- **counter-safe cuts** — a cut through a hole that is a hole in every other ink
+  mask (a `0`'s or an `8`'s counter) is pruned: a counter is not a junction;
+- **a count is decided by width and topology** — never by the template score,
+  which reads a glyph split in two as two `1`s as readily as the truth, and
+  never by a scale. When the style rules the reader's count out, the anchor is
+  cut at the style's count (`counts[].decisive`);
+- **count ambiguity is reading ambiguity** — a value of another digit count
+  holding a tenth of the ink's values or more, or an ink whose width fits a
+  glyph more or fewer as well (`widthAmbiguous`), makes the reading AMBIGUOUS;
+  another count among the values at all caps CLEAR at SUPPORTED: 3-vs-4 is never
+  CLEAR. A reading with a leading zero is no dimension (AMBIGUOUS);
+- **the ambiguity tail** — values an anchor reaches with exactly two moderate
+  substitutions, each supported by the image on its own, that the count bound
+  cut (`TAIL_BOUNDS`, at most two per ink). Recorded beside the values
+  (`tail[]`), never among them: no probability, never as-read, never a
+  witness, a contest value, a correction or a structural option. The beam's
+  floor is not lowered, and a scale never creates a sequence.
+
+The class bars moved with the values they read (`OCR_CLASS_BOUNDS`):
+SUPPORTED needs 0.4 of the ink and the next value at most half of it; CLEAR
+0.6 and the same margin. What decided the move, and what it costs, is in
+`stage-reports/artifacts/analyzer-005f/calibration/README.md`.
+
+**A refusal says which evidence is missing.** A plan whose scale is not settled
+stops `METRIC_RESOLUTION_INCONCLUSIVE` with `dimensionEvidence` in its
+diagnostics: `NO_DIMENSION_EVIDENCE` (no label on a dimension line and no
+chain) or `DIMENSION_EVIDENCE_INCONCLUSIVE` (dimensions were found and read,
+and as read they settle no one scale), with the label and line counts. The phone
+says which.
+
 ## The ladder of level datums
 
 The same redundancy, in the vertical. Every printed level states a height above
