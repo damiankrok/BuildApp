@@ -986,6 +986,18 @@ jobs:
         run: npx vitest run packages/source-metrics/test/numeric-lattice.test.ts
       - name: OCR quality in the metric, false consensus, geometry cannot invent OCR
         run: npx vitest run packages/source-metrics/test/ocr-metric-adversaries.test.ts
+      # BUILDPLAN-ANALYZER-005F. Adaptive glyph-count segmentation.
+      # - adaptive-glyph-count: the plan's own dimension-font style; condensed
+      #   and ordinary faces at measured proportions; a count is decided by width
+      #   and topology, never by a template score or a scale; no style never
+      #   decides; 3-vs-4 is never CLEAR; counter-safe cuts; bounded
+      #   segmentations; the ambiguity tail recorded outside every decision.
+      # - numeric reader: the 005E lattice gates and the corpus, unchanged in
+      #   kind, under the 005F class bars.
+      - name: Adaptive glyph count
+        run: npx vitest run packages/source-metrics/test/adaptive-glyph-count.test.ts
+      - name: Numeric reader (lattice, corpus, metric adversaries) under the 005F class bars
+        run: npx vitest run packages/source-metrics/test/numeric-lattice.test.ts packages/source-metrics/test/ocr-metric-adversaries.test.ts packages/reconstruction/test/failure-codes.test.ts
 
   analyzer-evidence-pack:
     # BUILDPLAN-ANALYZER-005D §8–§20. The Analyzer Evidence Pack.
@@ -1016,6 +1028,7 @@ jobs:
         run: |
           npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005d/evidence --max-packs 16
           npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005e/evidence --max-packs 16
+          npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005f/evidence --max-packs 16
 
   analyzer-opening-aware-envelope:
     # BUILDPLAN-ANALYZER-005C. The building's outline from wall-thick ink and
@@ -1053,6 +1066,15 @@ jobs:
         run: npx vitest run packages/reconstruction/test/boundary-envelope.test.ts packages/reconstruction/test/boundary-post-review.test.ts packages/reconstruction/test/wide-openings.test.ts packages/reconstruction/test/plan-decomposition.test.ts
       - name: Attached bodies
         run: npx vitest run packages/reconstruction/test/attached-bodies.test.ts packages/reconstruction/test/shape-families.test.ts packages/reconstruction/test/failure-codes.test.ts
+      # BUILDPLAN-ANALYZER-005F. The extent challenges the envelope, and fills
+      # nothing by itself: ENVELOPE_EXTENT_CONFLICT recorded on every side the
+      # chains state past the box; attached rooms (a way in, walled, room
+      # evidence, returns) clipped to their own floor; a garage end completed by
+      # a drawn vehicle door with a vehicle's length behind it, either way up;
+      # terraces on posts, yards, stores and strips stay outside; bounds; the
+      # upper storey on the house without its attached rooms.
+      - name: Extent envelope and body completion
+        run: npx vitest run packages/reconstruction/test/extent-envelope.test.ts packages/reconstruction/test/boundary-envelope.test.ts packages/reconstruction/test/attached-bodies.test.ts
       - name: Generic source
         run: npx vitest run packages/source-package/test/generic-structures.test.ts packages/source-package/test/generic-regions.test.ts packages/source-package/test/generic.test.ts tests/architecture/generalization.test.ts
       - name: Metric regression (005B gates, unchanged)
