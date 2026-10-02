@@ -1,0 +1,59 @@
+{
+  "firstDivergence": "GLYPH_COUNT_HYPOTHESES",
+  "object": "ink:text-region-341-525-f0d63660db:ROTATED_CW",
+  "before": "ABSENT",
+  "after": "COUNTS:3||DECIDED",
+  "reasonAfter": "the plan's style (0.5 of the cap, 47 samples) ruled the reader's count out: STRICT 2→3",
+  "differing": 11,
+  "examples": [
+    {
+      "object": "ink:text-region-341-525-f0d63660db:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3||DECIDED"
+    },
+    {
+      "object": "ink:text-region-93-261-1f3ce85fa2:ROTATED_CCW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-486-288-7649e85525:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3||WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-251-185-85815aa4bd:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-93-208-d16a065816:ROTATED_CCW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-356-210-73b22123f6:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-356-68-82cdd57e25:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-185-135-50e111275f:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    }
+  ],
+  "stagesDiffering": [
+    "GLYPH_COUNT_HYPOTHESES",
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "SCALE_HYPOTHESIS",
+    "REGISTRATION",
+    "ENVELOPE_EXTENT_CONFLICT"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "counts": {
+    "events": 248,
+    "files": 32
+  },
+  "evidenceModeVersion": "1.0.0",
+  "failureCode": "METRIC_RESOLUTION_INCONCLUSIVE",
+  "files": [
+    {
+      "bytes": 1548,
+      "name": "00-source-summary.json",
+      "sha256": "98958aaa94555b56d147f5d1b284eff9554fbe529b9cb437f1f81acdb5e219c9"
+    },
+    {
+      "bytes": 7642,
+      "name": "01-page-classification.json",
+      "sha256": "e7a4a8288f7c301cd236e734e385a837e705a635b3062d3d78e56aad9c117af9"
+    },
+    {
+      "bytes": 27722,
+      "name": "02-asset-inventory.json",
+      "sha256": "57e38e160c41616c9bbf7581f0f74427f2b80df235c362076a840ceb34743e09"
+    },
+    {
+      "bytes": 747,
+      "name": "03-plan-frame.json",
+      "sha256": "9b7f38b1ba0a6250e2430882ee570336ffb0d4453fbd7913e299a79c212e9606"
+    },
+    {
+      "bytes": 1489,
+      "name": "03-plan-frame.svg",
+      "sha256": "e7703c762599434e9d59fb2d10dee41582c83a03de6d85904c8454e18e3191f8"
+    },
+    {
+      "bytes": 10929,
+      "name": "04-wall-bands.json",
+      "sha256": "a21cd0f63ed9222b2857c6b3b6f0a7a36049863c8298810d3e3e0dd55274556f"
+    },
+    {
+      "bytes": 6070,
+      "name": "04-wall-bands.svg",
+      "sha256": "d106cd76a408ff35e305ba76118f48c78d554f23be2e3a2f9f40838747c3b62f"
+    },
+    {
+      "bytes": 213,
+      "name": "05-dimension-lines.json",
+      "sha256": "774982d5de5870b5d3430bb387b9c90ce051680171fe016aa2f135534511642d"
+    },
+    {
+      "bytes": 209,
+      "name": "05-dimension-lines.svg",
+      "sha256": "05c1bc6f05d5740391ba542f19afb867866c3f5769bddd09ec78aef90a27e368"
+    },
+    {
+      "bytes": 285,
+      "name": "06-tick-candidates.json",
+      "sha256": "2f9e7d4884c3a391803cab90c4681ea07cbfc7f5d2aaa6de53db3a319ea1b985"
+    },
+    {
+      "bytes": 209,
+      "name": "06-tick-candidates.svg",
+      "sha256": "18f249e1afacd26ce0196f7945fb685334e28ee4e3741902e90322cea40a66fa"
+    },
+    {
+      "bytes": 938616,
+      "name": "07-ocr-labels.json",
+      "sha256": "8fb320e2355776a7c2b3d3fbb8c3667dc7351806d06bee2d8a5e0bc356929622"
+    },
+    {
+      "bytes": 60891,
+      "name": "07-ocr-labels.svg",
+      "sha256": "23346ceb12e6cc74eb0a91ce2760f4771f446b62c9958da26e53e736ce4858d4"
+    },
+    {
+      "bytes": 68781,
+      "name": "08-dimension-span-hypotheses.json",
+      "sha256": "e342cd512e0b5b975da08a900b8064b1a3b29e41479f9093c77246d5318d251a"
+    },
+    {
+      "bytes": 219,
+      "name": "08-dimension-span-hypotheses.svg",
+      "sha256": "8734b53dac2815db41ed5ccf839ab7fcae26998cb0c31c0fe6224080cd45828d"
+    },
+    {
+      "bytes": 6505,
+      "name": "09-scale-hypotheses.json",
+      "sha256": "3e162437db801bc401fc2fe278119f0cd046fea7ae12f0232b219e2b73a46fba"
+    },
+    {
+      "bytes": 2040,
+      "name": "09-scale-hypotheses.svg",
+      "sha256": "35396e5669ea5861b116d6ad64e0267f795e2c02bbd80edbecf1c4363d2e887b"
+    },
+    {
+      "bytes": 356,
+      "name": "10-extent-hypotheses.json",
+      "sha256": "9b7677a0dfa31fdc2c33b8515b6e3a01536cb01d901257fffbe261121da32176"
+    },
+    {
+      "bytes": 395,
+      "name": "10-extent-hypotheses.svg",
+      "sha256": "20875ca3a60674170c5c76e6e82be3f653961af285164c5b221d837aee675bbe"
+    },
+    {
+      "bytes": 219,
+      "name": "11-envelope-candidates.json",
+      "sha256": "151c04dfa0338df2018c29c37011f0dbbeeeea4fd5e3859b82b04d2c5184e81b"
+    },
+    {
+      "bytes": 1802,
+      "name": "11-envelope-candidates.svg",
+      "sha256": "3e945548f6f2d8bf561dc07de7eaa911d99821ff7ebac77448269cb8aa0126ce"
+    },
+    {
+      "bytes": 6689,
+      "name": "12-opening-observations.json",
+      "sha256": "2b14f4f9f27f91ff3c816f038a96af7fdde1bf290d196382e5c48dbb594b8c5c"
+    },
+    {
+      "bytes": 4419,
+      "name": "12-opening-observations.svg",
+      "sha256": "90dff78a6f20c298c6c81f72cc0d6ac5c47716cd1c3bf1ca30f55ac8074f19e7"
+    },
+    {
+      "bytes": 104,
+      "name": "13-body-candidates.json",
+      "sha256": "9c87e6ec5e64e7015e6c290fe8d7a8ef93db65580373e00bd8c60de58191f790"
+    },
+    {
+      "bytes": 209,
+      "name": "13-body-candidates.svg",
+      "sha256": "575a5b0477eb8feaee3ebc71a9db1a9dc84de28de5465958dfe3bdb45d070429"
+    },
+    {
+      "bytes": 455,
+      "name": "14-selected-layout.json",
+      "sha256": "5925e874cf011692d177469f6c297810e2557b3be73ced333c27fbb65ead4ed0"
+    },
+    {
+      "bytes": 569,
+      "name": "14-selected-layout.svg",
+      "sha256": "c38261b7ff0286a664def0b9bccda6fa609188a14d2a8f78b448b7d50a537ba6"
+    },
+    {
+      "bytes": 1199,
+      "name": "15-canonical-model-summary.json",
+      "sha256": "a9aed979af66e3faa94928ba476656832574c278df3e7e43f3fcbfbb4c8c821c"
+    },
+    {
+      "bytes": 533,
+      "name": "17-evidence-trace.json",
+      "sha256": "d278afbb7c8af2f7245e9492977621da760e55e80fc9d6ecb965181b2dfcadcb"
+    },
+    {
+      "bytes": 132176,
+      "name": "18-decision-timeline.json",
+      "sha256": "c7ca68b9035af875709e3dfdd969fbb893cd221c67320c8511b5c97a575082ca"
+    },
+    {
+      "bytes": 1413,
+      "name": "README.md",
+      "sha256": "5bece6084608426fd3ba2f9b01c1cbba9aa33de2f1a68d71f9b8a4b0006a7342"
+    },
+    {
+      "bytes": 4576,
+      "name": "evidence-summary.svg",
+      "sha256": "a9cc8c1d915e115d43e94093141c95fdee2fbabb77c8f7ca2e851bfbddde6333"
+    }
+  ],
+  "firstWarning": null,
+  "gitSha": null,
+  "hashes": {
+    "candidate": null,
+    "metricEvidence": "8c3ce7d1fa5c841f90494486fda78bfac889468efcda51bc54a78799e4499fb5",
+    "model": null,
+    "scene": null,
+    "sceneContent": null,
+    "sourcePackage": "5769fc42b7f1b8f4d7da6c57432b78f6eed41882feb53865c3263bb92309931d"
+  },
+  "result": "FAILED",
+  "runId": "dom-w-modrzewnicy",
+  "schema": "buildapp.evidence-pack",
+  "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+  "versions": {
+    "adapter:archon.pl": "1.0.0",
+    "analysis-service": "1.1.0",
+    "boundary-evidence": "1.1.0",
+    "evidence-pack": "1.0.0",
+    "generic-reader": "1.2.0",
+    "metric-evidence-schema": "1.5.0",
+    "metrics.axis-aligned-affine": "1",
+    "metrics.chain-solver": "1.3.0",
+    "metrics.dimension-lines": "1.3.0",
+    "metrics.dimension-topology": "1.0.0",
+    "metrics.independent-scale": "1.3.0",
+    "metrics.numeric-lattice": "1.1.0",
+    "metrics.numeric-ocr": "1.3.0",
+    "plan-resolver": "1.4.0",
+    "published-specification-reader": "1.0.0",
+    "solver-v2": "2.3.0"
+  }
+}

@@ -98,4 +98,17 @@ The first divergence was on the attic plan:
 C5F-2; the split still decides which floor the part takes. A test draws a strip whose corner at the door is open and whose
 rest is walled, along either axis; it fails on `f64fda9` with the same 1.50 m continuation.
 
-**The final matrix** (`41e26be`): (pending)
+**The final matrix** (`41e26be`, `../development-matrix.json`), diffed row by row against `m-c` (`d910212`) on outcome,
+verdict, failure, model hash, footprint, storeys, bodies, openings, relation, confidence, scale, false consensus,
+refusal kind, extent conflicts and completions:
+
+- 4 of 17 development rows are identical on every field, and no row moved on outcome, verdict, model hash, footprint,
+  storeys, scale, relation or confidence. Marcówki is back at `6152770f` with no exterior closure finding.
+- Reading classes moved on 11 rows, and on none did the CLEAR+SUPPORTED count rise: the count rules of post-review A
+  take readings to AMBIGUOUS (Morelach 5/5 → 2/3 CLEAR/SUPPORTED on its plan, Marcówki 4/6 → 4/1, kosacce 2/15 →
+  2/13). A few inks changed their reading with the count rules: two LOW_QUALITY readings became AMBIGUOUS on
+  alt-marcowki, one CLEAR became LOW_QUALITY on galaktyka (neither row's outcome moved).
+- dom-w-dabecjach: its N extent side, stated by one chain closed with a scale-restated segment, is SUPPORTED, not STRONG
+  (D5F-5): `ZONE` → `RECORDED`. Still refused at the boundary, as before.
+- aster-viii and galaktyka: refused `NO_DIMENSION_EVIDENCE`, as their plans print no dimension (D5F-1).
+- The five known rows (the legacy e-OZE lane, its two decoys, the Kosaćce area copy) are identical.

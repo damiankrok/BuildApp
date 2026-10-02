@@ -1,0 +1,46 @@
+{
+  "firstDivergence": "GLYPH_COUNT_HYPOTHESES",
+  "object": "ink:text-region-642-687-b4d77b539b:HORIZONTAL",
+  "before": "ABSENT",
+  "after": "COUNTS:3||WIDTH_AMBIGUOUS",
+  "reasonAfter": "the reader's count kept",
+  "differing": 5,
+  "examples": [
+    {
+      "object": "ink:text-region-642-687-b4d77b539b:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3||WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-35-454-7811eb840f:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3||WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-427-176-a2e4a15e85:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3|4|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-341-131-2cfb32b0a6:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3||DECIDED"
+    },
+    {
+      "object": "ink:text-region-642-687-89bd2fccd4:HORIZONTAL",
+      "before": "ABSENT",
+      "after": "COUNTS:3||WIDTH_AMBIGUOUS"
+    }
+  ],
+  "stagesDiffering": [
+    "GLYPH_COUNT_HYPOTHESES",
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "SCALE_HYPOTHESIS",
+    "METRIC_RELATION",
+    "ENVELOPE",
+    "ENVELOPE_EXTENT_CONFLICT",
+    "BODIES"
+  ]
+}

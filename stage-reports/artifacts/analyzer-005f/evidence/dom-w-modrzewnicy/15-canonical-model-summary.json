@@ -1,0 +1,17 @@
+{
+  "bodies": null,
+  "failure": {
+    "code": "RECONSTRUCTION_FAILED",
+    "message": "the floor plan's scale cannot be established: no scale is stated by any reading that owes nothing to a scale; every reading that states it fits the rival scale too through one of its own other values, so nothing decides between them. The scales its readings state are 1.761978 cm/px (1 independent, plausible); 2.895277 cm/px (1 independent, plausible); 3.75 cm/px (1 independent, plausible); 0 printed readings contradict the one it was read at. What is missing: a reading of the printed dimensions that settles one scale — 9 dimension labels were found on 6 dimension lines, and as read they do not: an overall dimension read unambiguously, or two readings on different chains that agree. (the 853×853 px floor plan prints 9 dimension labels on 6 dimension lines, but as read they state no scale its other readings agree with)",
+    "reasonCode": "METRIC_RESOLUTION_INCONCLUSIVE"
+  },
+  "footprintResidualPct": null,
+  "levels": [],
+  "lowestStoreyFootprintM2": null,
+  "modelHash": null,
+  "openings": null,
+  "publishedFootprintM2": 242.44,
+  "result": "FAILED",
+  "sceneSha256": null,
+  "walls": null
+}

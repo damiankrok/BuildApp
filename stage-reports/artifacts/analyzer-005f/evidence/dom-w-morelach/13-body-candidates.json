@@ -1,0 +1,168 @@
+{
+  "bays": [],
+  "bodies": [
+    {
+      "areaM2": 4.203308,
+      "built": true,
+      "decision": "BUILT",
+      "enclosed": true,
+      "id": "body-0",
+      "junctionWallShare": 0.547074,
+      "mouthM": 1.8243,
+      "rect": {
+        "x0": 609.5,
+        "x1": 670,
+        "y0": 323,
+        "y1": 716
+      },
+      "relation": "FLUSH_ATTACHED",
+      "sideWallShare": 0.746975
+    },
+    {
+      "areaM2": 0.789889,
+      "built": false,
+      "decision": "NOT_BUILT",
+      "enclosed": false,
+      "id": "body-1",
+      "junctionWallShare": 0,
+      "mouthM": 1.8243,
+      "rect": {
+        "x0": 646,
+        "x1": 670,
+        "y0": 462,
+        "y1": 544
+      },
+      "relation": "SEPARATE_BODY",
+      "sideWallShare": 0.255753
+    }
+  ],
+  "completions": [
+    {
+      "areaBeforeM2": 4.203308,
+      "areaM2": 3.459577,
+      "decision": "ACCEPTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 1,
+        "returns": 3,
+        "strictEncloses": true,
+        "vehicleDoors": 0
+      },
+      "id": "completion-0",
+      "junction": {
+        "doorM": 2.6351,
+        "lengthM": 3.54725,
+        "openM": 0
+      },
+      "kind": "ATTACHED_ROOM",
+      "reason": "ATTACHED_ROOM: 2.64 m way in, 75% walled, glazed, 3 returns, reaching the E side the chains state",
+      "rect": {
+        "x0": 609.5,
+        "x1": 670,
+        "y0": 415,
+        "y1": 590
+      },
+      "rectBefore": {
+        "x0": 609.5,
+        "x1": 670,
+        "y0": 323,
+        "y1": 716
+      },
+      "side": "E",
+      "sides": {
+        "lengthM": 6.893619,
+        "postShare": 0,
+        "wallShare": 0.750338
+      },
+      "weakGaps": [
+        {
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "signature": "LEAF_FACE",
+          "vehicleDoor": false,
+          "widthM": 1.8243
+        }
+      ]
+    },
+    {
+      "areaBeforeM2": 5.933799,
+      "areaM2": 5.933799,
+      "decision": "ACCEPTED",
+      "evidence": {
+        "chains": 0,
+        "glazing": 0,
+        "returns": 0,
+        "strictEncloses": false,
+        "vehicleDoors": 1
+      },
+      "id": "completion-1",
+      "junction": {
+        "doorM": 0,
+        "lengthM": 5.362582,
+        "openM": 3.801792
+      },
+      "kind": "BOX_COMPLETION",
+      "reason": "CONTINUATION: 3.80 m of open edge with the built rooms it ends",
+      "rect": {
+        "x0": 61,
+        "x1": 253,
+        "y0": 590,
+        "y1": 667
+      },
+      "rectBefore": {
+        "x0": 61,
+        "x1": 253,
+        "y0": 590,
+        "y1": 667
+      },
+      "sides": {
+        "lengthM": 5.362582,
+        "postShare": 0,
+        "wallShare": 0.556907
+      },
+      "weakGaps": [
+        {
+          "jambs": [
+            "WALL",
+            "WALL"
+          ],
+          "signature": "DASHED",
+          "vehicleDoor": true,
+          "widthM": 2.37612
+        }
+      ]
+    }
+  ],
+  "frameId": "frame-asset-rzut-63ae7d4e86-027bb2e82d",
+  "masses": [
+    {
+      "id": "mass-0",
+      "rect": {
+        "x0": 253,
+        "x1": 609.5,
+        "y0": 208.5,
+        "y1": 739
+      }
+    },
+    {
+      "id": "mass-1",
+      "rect": {
+        "x0": 61,
+        "x1": 253,
+        "y0": 263,
+        "y1": 667
+      }
+    },
+    {
+      "id": "mass-2",
+      "rect": {
+        "x0": 609.5,
+        "x1": 670,
+        "y0": 415,
+        "y1": 590
+      }
+    }
+  ]
+}

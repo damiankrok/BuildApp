@@ -1,0 +1,37 @@
+{
+  "frames": [
+    {
+      "annotation": "DIMENSIONED",
+      "envelope": {
+        "x0": 188.5,
+        "x1": 776,
+        "y0": 10.25,
+        "y1": 819.5
+      },
+      "extent": {
+        "x0": 182.5,
+        "x1": 776,
+        "y0": 10.25,
+        "y1": 825.5
+      },
+      "extentProvenance": {
+        "x": "WALL_GEOMETRY_EXTENT",
+        "y": "WALL_GEOMETRY_EXTENT"
+      },
+      "extentWeak": true,
+      "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+      "gridLines": {
+        "x": 8,
+        "y": 2
+      },
+      "scale": null,
+      "sizePx": {
+        "height": 853,
+        "width": 853
+      },
+      "storey": "GROUND",
+      "wallPx": 12
+    }
+  ],
+  "selectedPlanFrameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa"
+}

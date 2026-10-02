@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "id": "archon.pl",
+    "version": "1.0.0"
+  },
+  "assets": 20,
+  "assetsByDocument": {
+    "ELEVATION": 4,
+    "FLOOR_PLAN": 8,
+    "PERSPECTIVE_RENDER": 5,
+    "SECTION": 1,
+    "SITE_PLAN": 1,
+    "UNKNOWN": 1
+  },
+  "canonicalUrl": "https://www.archon.pl/projekty-domow/projekt-dom-w-morelach-n-ver-2-m95a1f6e528ef4",
+  "contentHash": "16fe10e5839cec2d7279f17663eacabb6d2d96b97e46808be9c15553e124137c",
+  "failuresByCode": {
+    "BYTE_IDENTICAL": 5,
+    "HTTP_STATUS": 13
+  },
+  "note": "facts and hashes only; no publisher drawing, page or render is in this pack",
+  "packageId": "src-m95a1f6e528ef4-5ebb3f3bcf",
+  "publishedFacts": [
+    {
+      "key": "boiler_room_area",
+      "unit": "m2",
+      "value": 5.67
+    },
+    {
+      "key": "building_height",
+      "unit": "m",
+      "value": 8.49
+    },
+    {
+      "key": "floor_area",
+      "unit": "m2",
+      "value": 170.77
+    },
+    {
+      "key": "footprint_area",
+      "unit": "m2",
+      "value": 114.53
+    },
+    {
+      "key": "garage_area",
+      "unit": "m2",
+      "value": 19.64
+    },
+    {
+      "key": "house_net_area",
+      "unit": "m2",
+      "value": 124.4
+    },
+    {
+      "key": "roof_area",
+      "unit": "m2",
+      "value": 199.5
+    },
+    {
+      "key": "total_area",
+      "unit": "m2",
+      "value": 229.06
+    },
+    {
+      "key": "usable_area_without_stairs",
+      "unit": "m2",
+      "value": 144.9
+    },
+    {
+      "key": "volume",
+      "unit": "none",
+      "value": 741.43
+    }
+  ],
+  "runId": "dom-w-morelach"
+}

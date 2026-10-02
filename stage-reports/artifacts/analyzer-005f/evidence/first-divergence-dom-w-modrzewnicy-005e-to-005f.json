@@ -1,0 +1,42 @@
+{
+  "firstDivergence": "GLYPH_COUNT_HYPOTHESES",
+  "object": "ink:text-region-105-426-e60ff2d1a1:ROTATED_CW",
+  "before": "ABSENT",
+  "after": "COUNTS:4||DECIDED",
+  "reasonAfter": "the plan's style (0.454545 of the cap, 48 samples) ruled the reader's count out: DEFAULT 3→4, STRICT 3→4, SAUVOLA 3→4",
+  "differing": 5,
+  "examples": [
+    {
+      "object": "ink:text-region-105-426-e60ff2d1a1:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:4||DECIDED"
+    },
+    {
+      "object": "ink:text-region-127-60-c978d02e8d:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3||DECIDED"
+    },
+    {
+      "object": "ink:text-region-104-51-83f8855523:ROTATED_CCW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|5|WIDTH_AMBIGUOUS"
+    },
+    {
+      "object": "ink:text-region-127-346-6713421541:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:4|3"
+    },
+    {
+      "object": "ink:text-region-127-60-50cc2834e4:ROTATED_CW",
+      "before": "ABSENT",
+      "after": "COUNTS:3|2|WIDTH_AMBIGUOUS"
+    }
+  ],
+  "stagesDiffering": [
+    "GLYPH_COUNT_HYPOTHESES",
+    "OCR_SEQUENCE_CANDIDATES",
+    "OCR_READING",
+    "LABEL_BINDING",
+    "SCALE_HYPOTHESIS"
+  ]
+}
