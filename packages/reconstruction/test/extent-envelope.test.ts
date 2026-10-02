@@ -137,6 +137,27 @@ describe('§29 ENVELOPE_EXTENT_CONFLICT: a strong extent past the box', () => {
     for (const part of d.boundary?.completions ?? []) if (part.kind === 'ATTACHED_ROOM') expect(part.decision, part.reason).not.toBe('ACCEPTED')
   })
 
+  it('a terrace behind a parapet thinner than a wall, a glazed balustrade between its stubs: not built (post-review C5F-6)', () => {
+    // The same drawing as the glazed bay with a door in the junction, its parapet `t` px thick where the bay's walls
+    // are 12. Thickness is the only thing that tells them apart: at a wall's thickness this terrace IS the bay's drawing
+    // and is built — a declared limit (docs/STRUCTURAL_LAYOUT.md, “A declared limit”), not a rule this test hides.
+    for (const t of [7, 9]) {
+      const r = sheet(460, 340)
+      ring(r, 40, 40, 359, 279)
+      wall(r, 360, 120, 399, 120 + t - 1)
+      wall(r, 360, 220 - t, 399, 219)
+      wall(r, 400 - t, 120, 399, 219)
+      clear(r, 400 - t, 140, 399, 199)
+      drawLine(r, 400 - t + 2, 140, 400 - t + 2, 199, BLACK)
+      drawLine(r, 397, 140, 397, 199, BLACK)
+      clear(r, 348, 150, 359, 169) // the house door onto the terrace
+      drawLine(r, 353, 150, 353, 169, BLACK)
+      const { d } = run(r, X, Y)
+      expect(builtAt(d, 375, 170), `parapet ${t} px`).toBe(false)
+      for (const part of d.boundary?.completions ?? []) expect(part.decision, `parapet ${t} px: ${part.reason}`).not.toBe('ACCEPTED')
+    }
+  })
+
   it('an L-shaped body: a flush wing beyond the box through a door in a party wall, glazed, is built as its own body', () => {
     const r = sheet(560, 340)
     ring(r, 40, 40, 359, 279)
@@ -221,6 +242,27 @@ describe('bounds and separation', () => {
     const sides = extentSidesOf([chain('h', 'HORIZONTAL', [40, 360, 400], { read: false, baselinePx: 12 })], { rect: { x0: 40, y0: 40, x1: 400, y1: 280 }, weak: false, why: '' }, 12)
     // an unread chain with no role states nothing: the extent's roles decide what is exterior
     expect(sides).toEqual([])
+  })
+
+  it('one chain alone is strong only on its own readings: a restated or scale-chosen segment leaves it SUPPORTED (post-review D5F-5)', () => {
+    const extent = (id: string) => ({
+      rect: { x0: 40, y0: 40, x1: 400, y1: 280 },
+      weak: false,
+      why: '',
+      roles: [{ chainId: id, axis: 'HORIZONTAL' as const, role: 'EXTERIOR' as const, coversWitness: true, sides: { low: 0, high: 0, through: 0 } }],
+    })
+    const strengthOf = (c: ReturnType<typeof chain>) => Object.fromEntries(extentSidesOf([c], extent(c.id), 12).map((s) => [s.side, s.strength]))
+    const read = chain('h', 'HORIZONTAL', [40, 360, 400], { baselinePx: 12 })
+    expect(strengthOf(read)).toEqual({ W: 'STRONG', E: 'STRONG' })
+    // the same geometry with no reading of its own: where the sides are is unchanged, how strongly they are stated is not
+    expect(strengthOf(chain('h', 'HORIZONTAL', [40, 360, 400], { read: false, baselinePx: 12 }))).toEqual({ W: 'SUPPORTED', E: 'SUPPORTED' })
+    // one segment chosen by a scale, or restated from one: SUPPORTED
+    for (const origin of ['CHAIN_CORRECTED', 'DERIVED'] as const) {
+      const mixed = { ...read, segments: read.segments.map((g, i) => (i === 1 ? { ...g, origin } : g)) }
+      expect(strengthOf(mixed), origin).toEqual({ W: 'SUPPORTED', E: 'SUPPORTED' })
+    }
+    // a single READ segment is one printed value against two ticks: no closure of its own
+    expect(strengthOf(chain('h', 'HORIZONTAL', [40, 400], { baselinePx: 12 }))).toEqual({ W: 'SUPPORTED', E: 'SUPPORTED' })
   })
 
   it('a decomposition with no completion is the 005C decomposition byte for byte', () => {

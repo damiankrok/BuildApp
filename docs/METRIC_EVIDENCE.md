@@ -289,8 +289,13 @@ Since 005F (`metrics.numeric-lattice` 1.1.0) the count is a hypothesis of its ow
   style; with no style, a wide band that never decides); a count that adds a
   boundary needs a real valley in the column profile. Each count is segmented
   with 005E's machinery, under explicit caps (`COUNT_BOUNDS`: 16 segmentations
-  per count, 48 per variant, 144 per ink, 96 cells scored per ink), and the caps
-  are recorded (`segmentation.truncated`);
+  per count and 96 cells scored per ink; the 48 per variant and 144 per ink
+  follow from them and do not bind). The cell cap bounds the hypotheses, not
+  the ink: every variant's anchor is exempt from it and the stability bracket
+  scores up to 28 cells more (a development label reached 118 scorings). Only
+  the per-ink caps are recorded (`segmentation.truncated`); the per-count cap,
+  the count-text cap and the tail cap truncate silently, and a count
+  alternative the cell cap starved is still listed as kept (005F debt);
 - **counter-safe cuts** — a cut through a hole that is a hole in every other ink
   mask (a `0`'s or an `8`'s counter) is pruned: a counter is not a junction;
 - **a count is decided by width and topology** — never by the template score,
@@ -301,7 +306,11 @@ Since 005F (`metrics.numeric-lattice` 1.1.0) the count is a hypothesis of its ow
   holding a tenth of the ink's values or more, or an ink whose width fits a
   glyph more or fewer as well (`widthAmbiguous`), makes the reading AMBIGUOUS;
   another count among the values at all caps CLEAR at SUPPORTED: 3-vs-4 is never
-  CLEAR. A reading with a leading zero is no dimension (AMBIGUOUS);
+  CLEAR. A reading cut at the count the style chose over the reader's is a
+  judgement about the ink's width, and is never CLEAR either. A value of another
+  digit count is never one of the ink's alternatives: it neither contests a
+  scale nor is chosen among — its doubt is in the class. A reading with a
+  leading zero is no dimension (AMBIGUOUS);
 - **the ambiguity tail** — values an anchor reaches with exactly two moderate
   substitutions, each supported by the image on its own, that the count bound
   cut (`TAIL_BOUNDS`, at most two per ink). Recorded beside the values

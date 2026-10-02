@@ -421,8 +421,12 @@ function leadingZeroValue(text: string): number | undefined {
 export function latticeAlternatives(lattice: LabelLattice): Array<{ text: string; valueCm: number; ratio: number }> {
   const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
   const out = new Map<number, { text: string; valueCm: number; ratio: number }>()
+  // 005F (contract A6, post-review D5F-6): a value of another digit count is a count hypothesis, never an alternative —
+  // it neither contests a scale nor is chosen among; its doubt is in the reading's class (`countAmbiguity`)
+  const countOf = (text: string): number => text.replace(/[^0-9]/g, '').length
+  const asReadCount = countOf(lattice.asRead)
   for (const q of lattice.sequences) {
-    if (q.asRead || q.valueCm === undefined || q.valueCm === lattice.asReadValueCm || out.has(q.valueCm)) continue
+    if (q.asRead || q.valueCm === undefined || q.valueCm === lattice.asReadValueCm || out.has(q.valueCm) || countOf(q.text) !== asReadCount) continue
     out.set(q.valueCm, { text: q.text, valueCm: q.valueCm, ratio: round6(own > 0 ? Math.min(1, q.p / own) : 1) })
   }
   return [...out.values()].slice(0, VALUE_BOUNDS.latticeAlternatives)

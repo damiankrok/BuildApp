@@ -378,8 +378,9 @@ export function exteriorTicksOf(chains: readonly DimensionChain[], roles: PlanEx
 /**
  * 005F (pre-review C): the sides of the plan's extent its exterior dimension chains state. A side is SUPPORTED when an
  * exterior chain that covers the wall witness ends on it within a wall, on a mark not rejected; STRONG when two such
- * chains on lines more than one wall apart agree, or one of them closes and carries a reading. A side the extent took
- * from the walls themselves is stated by nothing. Geometry only: no printed value decides a side.
+ * chains on lines more than one wall apart end within a wall of each other, or one of them is closed by its own
+ * readings alone (no value restated or chosen by a scale). A side the extent took from the walls themselves is stated by
+ * nothing. Chain geometry decides where a side is; printed values only whether one chain alone is strong.
  */
 export function extentSidesOf(chains: readonly DimensionChain[], extent: PlanExtent, wallPx: number): ExtentSideStatement[] {
   const roles = new Map((extent.roles ?? []).map((r) => [r.chainId, r]))
@@ -405,7 +406,9 @@ export function extentSidesOf(chains: readonly DimensionChain[], extent: PlanExt
     // two chains on lines more than a wall apart whose ends agree within a wall (contract B1, C5F-9)
     const endOf = (c: DimensionChain): number => c.ticksPx[d.low ? 0 : c.ticksPx.length - 1]
     const twoLines = stating.some((a, i) => stating.slice(i + 1).some((b) => Math.abs(a.baselinePx - b.baselinePx) > wallPx && Math.abs(endOf(a) - endOf(b)) <= wallPx))
-    const readAndCloses = stating.some((c) => c.closes && c.segments.some((g) => g.origin === 'READ' || g.origin === 'CHAIN_CORRECTED'))
+    // one chain is strong when its own readings close it: at least two READ segments and none restated from a scale
+    // (DERIVED) or chosen by one (CHAIN_CORRECTED) — post-review D5F-5
+    const readAndCloses = stating.some((c) => c.closes && c.segments.filter((g) => g.origin === 'READ').length >= 2 && c.segments.every((g) => g.origin === 'READ'))
     out.push({ side: d.side, atPx: round6(d.at), strength: twoLines || readAndCloses ? 'STRONG' : 'SUPPORTED', chainIds: stating.map((c) => c.id).sort() })
   }
   return out

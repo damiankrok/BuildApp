@@ -142,29 +142,47 @@ cells and by the pockets bitten out of it.
 exterior dimension chains state; the long-band box is what its long walls
 close. Where a side the chains state (SUPPORTED: an exterior chain covering
 the wall witness ends on it within a wall; STRONG: two such chains on lines
-more than a wall apart, or one that closes with a reading — geometry only, no
-printed value) lies two walls or more past the box, with stretches no built
+more than a wall apart ending within a wall of each other, or one closed by its
+own readings alone — never by a value a scale restated or chose) lies two walls
+or more past the box, with stretches no built
 cell explains, the side is an `ENVELOPE_EXTENT_CONFLICT`. It is always
 recorded and fills nothing by itself: a terrace, a canopy or a yard is what
 an extent past the walls most often is. What the outline encloses there is
 judged as a part:
 
+- a part is the floor one reaches from the house through open edges and
+  door-like openings; floor behind a wall that nothing passable reaches is
+  split off as `WALLED_OFF` when one could stand in it (a door's width across
+  both ways), and stays with the part's walls when it is narrower (a reveal,
+  a niche);
 - an **attached room** is built when it has a way in from the house (open
   edge or door-like openings at least a door wide), its own perimeter mostly
   wall and not posts, evidence of a room of its own (glazing between wall
-  jambs, a chain measuring it, or a vehicle door), two returns, and it reaches
-  the stated side — clipped to its own free floor (wall-thick ink is not
-  floor), never the strip's full length;
+  jambs on its own outer walls — never on the line it shares with the house —,
+  a chain across it ticking within a wall of both its ends, or a vehicle door
+  that is not only a dashed line), two returns, and it reaches the stated side
+  — clipped to its own free floor (wall-thick ink is not floor), never the
+  strip's full length;
 - inside the box, a room's **end** the incumbent grid had no line for (only an
   unread exterior chain ticks its wall) is completed when it continues the
   built rooms across an open edge and both jamb policies close it — drawn
   openings alone, or a vehicle door (wall jambs, 2.2–3.2 m, a stroke or a
-  dashed line in it, never blank) with a vehicle's length of built floor
-  behind it, measured whichever way up the plan is drawn;
+  dashed line in it, never blank) with a vehicle's length of floor behind it,
+  reached across open edges only, measured whichever way up the plan is drawn;
 - everything else is rejected by name (`WALL_SLIVER`, `SEPARATE`,
-  `NO_CONTINUATION`, `NO_WAY_IN`, `POSTS`, `NOT_WALLED`, `NO_ROOM_EVIDENCE`,
-  `NO_RETURNS`, `BEYOND_EXTENT`), and a part too large or that the two
-  policies disagree on is a question (`TOO_LARGE`, `POLICIES_DISAGREE`).
+  `NO_CONTINUATION`, `NO_WAY_IN`, `WALLED_OFF`, `POSTS`, `NOT_WALLED`,
+  `NO_ROOM_EVIDENCE`, `NO_RETURNS`, `BEYOND_EXTENT`), and a part too large or
+  that the two policies disagree on is a question (`TOO_LARGE`,
+  `POLICIES_DISAGREE`). Parts are judged largest first, at most `maxParts`; the
+  ones the cap leaves are counted (`completionsUnjudged`) and keep the
+  conflict from being called a zone.
+
+**A declared limit.** A terrace whose parapet is as thick as a wall, with a
+glazed balustrade between its stubs and a door from the house, is the same
+drawing as a glazed bay, and is built as one; so is a yard whose gate is drawn
+as two lines in the wall's thickness. Thickness is the only thing that tells
+them apart — a parapet thinner than a wall is `NOT_WALLED` or encloses nothing
+— and no rule over the drawing alone can do better without room semantics.
 
 The decided shape keeps the bodies the box reading had as they were; the
 completed parts are laid against them. The published footprint is never an

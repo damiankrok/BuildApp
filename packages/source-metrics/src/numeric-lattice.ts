@@ -99,7 +99,11 @@ export const COUNT_BOUNDS = {
   /** A label's style: the median sample over tokens whose cap is within this factor of its own, from at least `styleSamples`. */
   styleCapRatio: 1.25,
   styleSamples: 8,
-  /** A glyph count is admitted when its per-glyph width over the style lies in this band (development true counts 0.81–1.17). */
+  /**
+   * A glyph count is admitted when its per-glyph width over the style lies in this band. Development true counts lie at
+   * 0.81–1.17; the upper bound 1.3 was placed with round 5's condensed four-digit overall (1.40 at three cells) in view, and the
+   * development labels alone admit any bound from 1.17 to above 1.56 (post-review D5F-4: stated, not hidden).
+   */
   styleBand: [0.75, 1.3],
   /** With no style, the per-glyph width over the cap (development 0.405–0.576, the corpus 0.446–0.667), and its centre. */
   noStyleBand: [0.4, 0.7],
@@ -108,7 +112,13 @@ export const COUNT_BOUNDS = {
   addDepth: 0.35,
   /** New texts a count alternative may add to an ink, outside the re-cut budget. */
   countTexts: 2,
-  /** Segmentations per count of one ink variant (005E's machinery), per ink variant and per ink; cells scored per ink. */
+  /**
+   * Segmentations per count of one ink variant (005E's machinery), per ink variant and per ink; cells scored per ink. The
+   * per-variant and per-ink counts follow from the per-count one and do not bind. Every variant's anchor is exempt from
+   * the cell cap and the stability bracket scores up to 28 cells more (a development label reached 118 scorings): the
+   * cell cap bounds the hypotheses, not the ink. Only the per-ink caps are recorded (`truncated`); the per-count cap, the
+   * count-text cap and the tail cap truncate silently (post-review B5F-3, B5F-4, B5F-6: stated, not hidden).
+   */
   segmentationsPerCount: 16,
   segmentationsPerVariant: 48,
   segmentationsPerInk: 144,
@@ -1157,6 +1167,11 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
     } else if (otherCount.length > 0 && ocrClass === 'CLEAR') {
       ocrClass = 'SUPPORTED'
       countWhy = `a value of another digit count is among the ink's values (${rivalP}): never CLEAR`
+    } else if (ocrClass === 'CLEAR' && decisiveVariants.includes(anchor.variant)) {
+      // post-review D5F-4: a count the plan's style chose over the reader's is a judgement about the ink's width, not a
+      // reading the image settles alone — never CLEAR until blind rounds show such changes hold
+      ocrClass = 'SUPPORTED'
+      countWhy = `cut at the count the plan's style chose over the reader's: never CLEAR`
     }
   }
   const next = rivals.length > 0 ? `the next value ${round6(1 - probabilityMargin)} of it` : 'no other value'

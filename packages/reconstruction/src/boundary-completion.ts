@@ -364,8 +364,8 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
     }
     const allCore = core
     // Free floor not reached is a room behind a wall only when one could stand in it: a door's width across both ways.
-    // Narrower, it is a reveal or a niche of the wall zone around the part, and stays with the walls (Morelach's window
-    // reveal, a 0.5 × 0.3 m sliver behind a pier, is no yard).
+    // Narrower, it is a reveal or a niche of the wall zone around the part, and stays with the walls (a window reveal
+    // behind a pier is no yard).
     const unreached = allCore.filter((k) => !reached.has(k))
     const unreachedSet = new Set(unreached)
     const walledOff: number[] = []

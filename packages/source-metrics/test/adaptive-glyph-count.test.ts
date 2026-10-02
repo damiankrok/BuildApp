@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { CORPUS_SEEDS, digitCorpus, renderLabel } from '@buildapp/synthetic-drawings'
 import type { LabelStyle as DrawnStyle } from '@buildapp/synthetic-drawings'
-import { COUNT_BOUNDS, NUMERIC_LATTICE_VERSION, OCR_CLASS_BOUNDS, TAIL_BOUNDS, correctionReadings, dimensionStyleOf, labelLattice, readNumbers, styleFor } from '../src/index.js'
+import { COUNT_BOUNDS, NUMERIC_LATTICE_VERSION, OCR_CLASS_BOUNDS, TAIL_BOUNDS, correctionReadings, dimensionStyleOf, labelLattice, latticeAlternatives, readNumbers, styleFor } from '../src/index.js'
 import type { Raster } from '@buildapp/source-cv'
 import type { LabelLattice, TextToken } from '../src/index.js'
 
@@ -188,6 +188,34 @@ describe('§28 no count hallucination: a scale never chooses a count, and doubt 
       const l = readTarget(renderLabel(sp.text, sp.style).raster, { x: 24, y: 24 }, false).lattice
       if (!l || !/^0\d/.test(l.asRead)) continue
       expect(['AMBIGUOUS', 'LOW_QUALITY'], `${sp.id} read ${l.asRead}`).toContain(l.ocrClass)
+    }
+  })
+
+  it('a count the plan’s style chose over the reader’s is never CLEAR (post-review D5F-4)', () => {
+    let decided = 0
+    for (const face of ['A', 'B'] as const) {
+      for (const cap of [14, 16, 20]) {
+        for (const text of ['2590', '12590', '1062', '730']) {
+          const { raster, at } = plan(text, { ...CONDENSED, cap, face })
+          const l = readTarget(raster, at).lattice
+          if (!l || !l.countAmbiguity.decisive.includes(l.asReadVariant)) continue
+          decided += 1
+          expect(l.ocrClass, `${text} (${face}, cap ${cap}) read ${l.asRead}: ${l.classWhy}`).not.toBe('CLEAR')
+        }
+      }
+    }
+    expect(decided, 'the condensed pages exercise a style-decided count').toBeGreaterThan(0)
+  })
+
+  it('a value of another digit count is no alternative: it neither contests a scale nor is chosen among (post-review D5F-6)', () => {
+    for (const face of ['A', 'B'] as const) {
+      for (const cap of [14, 16]) {
+        const { raster, at } = plan('2590', { ...CONDENSED, cap, face })
+        const l = readTarget(raster, at).lattice
+        if (!l) continue
+        const asRead = digits(l.asRead)
+        for (const a of latticeAlternatives(l)) expect(digits(a.text), `${a.text} against ${l.asRead}`).toBe(asRead)
+      }
     }
   })
 
