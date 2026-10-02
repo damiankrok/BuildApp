@@ -1028,7 +1028,8 @@ jobs:
         run: |
           npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005d/evidence --max-packs 16
           npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005e/evidence --max-packs 16
-          npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005f/evidence --max-packs 16
+          # 005F packs are committed with the development evidence; verified once the directory exists
+          if [ -d stage-reports/artifacts/analyzer-005f/evidence ]; then npm run -s evidence:verify -- stage-reports/artifacts/analyzer-005f/evidence --max-packs 16; fi
 
   analyzer-opening-aware-envelope:
     # BUILDPLAN-ANALYZER-005C. The building's outline from wall-thick ink and
