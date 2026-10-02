@@ -45,7 +45,7 @@ import type { PerspectiveCameraV2 } from './camera.js'
 import { emitBuilding } from './emit.js'
 import { ReconstructionFailure, planCounts } from '../failure.js'
 import type { PlanDiagnosticsReport } from '../failure.js'
-import { LAYOUT_REFUSAL_CODES, layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
+import { LAYOUT_REFUSAL_CODES, dimensionEvidenceOf, layoutRefused, layoutRejectionOf, planDiagnosticsOf, planFailureOf } from '../plan-diagnostics.js'
 import { PLAN_RESOLVER_VERSION, challengeFirstReading, challengeRecord, firstReadingNeedsChallenge, resolutionRecord, resolvePlan, sourceConflictFor } from '../plan-resolution.js'
 import { metricSolutionFor } from '@buildapp/source-metrics'
 import type { ResolverProgress } from '../plan-resolution.js'
@@ -233,10 +233,14 @@ export function reconstructV2(options: ReconstructionV2Options): ReconstructionV
     const solution = frameId ? metricSolutionFor(metrics, frameId) : undefined
     if (!solution || solution.confidence !== 'INCONCLUSIVE') return failure
     const top = solution.hypotheses.slice(0, 3).map((h) => `${h.cmPerPixel} cm/px (${h.independentGroups} independent, ${h.plausible ? 'plausible' : 'ruled out by the walls'})`)
-    const chainless = frameId !== undefined && !metrics.chains.some((c) => c.frameId === frameId)
-    const missing = chainless ? 'a dimension printed on the floor plan itself — it prints none' : 'an overall dimension read the right way up, or two readings on different chains that agree'
+    // 005F: a plan that prints dimensions and a plan that prints none are different refusals (typed, and said so).
+    const evidence = frameId !== undefined ? dimensionEvidenceOf(metrics, frameId) : { kind: 'NO_DIMENSION_EVIDENCE' as const, labels: 0, lines: 0 }
+    const missing =
+      evidence.kind === 'NO_DIMENSION_EVIDENCE'
+        ? 'a dimension printed on the floor plan itself — it prints none'
+        : `a reading of the printed dimensions that settles one scale — ${evidence.labels} dimension label${evidence.labels === 1 ? ' was' : 's were'} found on ${evidence.lines} dimension line${evidence.lines === 1 ? '' : 's'}, and as read they do not: an overall dimension read unambiguously, or two readings on different chains that agree`
     const message = `the floor plan's scale cannot be established: ${solution.why}. ${top.length > 0 ? `The scales its readings state are ${top.join('; ')}` : 'None of its readings states a scale'}; ${solution.conflictingObservationIds.length} printed reading${solution.conflictingObservationIds.length === 1 ? '' : 's'} contradict the one it was read at. What is missing: ${missing}. (${failure.message})`
-    return new ReconstructionFailure('METRIC_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', message, { ...(failure.diagnostics ?? {}), firstFailure: failure.code, metricRelation: solution.relation, metricConfidence: solution.confidence, scaleHypotheses: solution.hypotheses.length, independentWitnesses: solution.independentWitnesses, conflictingReadings: solution.conflictingObservationIds.length, ...(solution.legacy.cmPerPixel !== undefined ? { legacyCmPerPx: solution.legacy.cmPerPixel } : {}), ...(top.length > 0 ? { topScales: top.join(' | ') } : {}) }, 'METRIC_RESOLUTION', failure.plans ?? planDiagnostics)
+    return new ReconstructionFailure('METRIC_RESOLUTION_INCONCLUSIVE', 'REGISTRATION', message, { ...(failure.diagnostics ?? {}), firstFailure: failure.code, dimensionEvidence: evidence.kind, dimensionLabels: evidence.labels, dimensionLines: evidence.lines, metricRelation: solution.relation, metricConfidence: solution.confidence, scaleHypotheses: solution.hypotheses.length, independentWitnesses: solution.independentWitnesses, conflictingReadings: solution.conflictingObservationIds.length, ...(solution.legacy.cmPerPixel !== undefined ? { legacyCmPerPx: solution.legacy.cmPerPixel } : {}), ...(top.length > 0 ? { topScales: top.join(' | ') } : {}) }, 'METRIC_RESOLUTION', failure.plans ?? planDiagnostics)
   }
 
   // --- 005C: a run that stops where the plan's outline itself is in question says so -----

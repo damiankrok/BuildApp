@@ -29,6 +29,9 @@ data class FailureDetails(
     private fun flag(key: String): Boolean? = (diagnostics[key] as? JsonPrimitive)?.booleanOrNull
     private fun text(key: String): String? = (diagnostics[key] as? JsonPrimitive)?.contentOrNull
 
+    /** 005F: NO_DIMENSION_EVIDENCE or DIMENSION_EVIDENCE_INCONCLUSIVE when the run stopped on the plan's scale. */
+    fun dimensionEvidence(): String? = text("dimensionEvidence")
+
     /** Where the run stopped, in the words of the checklist; the structural steps are one "Układ konstrukcyjny". */
     fun stoppedAt(): String? {
         if (substage in STRUCTURAL_STEPS) return "Układ konstrukcyjny"

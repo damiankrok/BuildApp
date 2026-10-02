@@ -165,6 +165,8 @@ export type PlanDiagnostics = {
   extentRefused?: string[]
   /** 005B: the frame's independent metric solution, when the metric evidence carries one. */
   metric?: { relation: string; confidence: string; isotropy: string; independentWitnesses: number; cmPerPixelX?: number; cmPerPixelY?: number; legacyCmPerPixel?: number }
+  /** 005F: whether the plan prints dimensions at all — labels bound to dimension lines — or prints them and they do not settle a scale. */
+  dimensionEvidence?: { kind: 'NO_DIMENSION_EVIDENCE' | 'DIMENSION_EVIDENCE_INCONCLUSIVE'; labels: number; lines: number }
   envelope: Rect | null
   bands: Array<{ axis: 'H' | 'V'; bounds: Rect; thickness: number }>
   chains: Array<{ axis: 'H' | 'V'; baselinePx: number; ticksPx: number[]; read: number }>

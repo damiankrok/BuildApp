@@ -153,7 +153,12 @@ object AnalyzerMessages {
             else -> when (failure.details?.reasonCode) {
                 "MODEL_EMISSION_FAILED" -> "Nie udało się poprawnie połączyć części ścian. Szczegóły są poniżej."
                 "BOUNDARY_RESOLUTION_INCONCLUSIVE" -> "Nie udało się ustalić obrysu budynku: rysunek dopuszcza dwa obrysy różniące się o więcej niż 6%, a żaden z nich nie jest lepiej poparty ścianami i otworami, więc modelu nie zbudowano. Szczegóły są poniżej."
-                "METRIC_RESOLUTION_INCONCLUSIVE" -> "Nie udało się ustalić skali rzutu: wymiary odczytane z rysunku nie potwierdzają jednej skali, więc modelu nie zbudowano. Szczegóły są poniżej."
+                // 005F: a plan that prints dimensions which do not settle a scale is not a plan without dimensions.
+                "METRIC_RESOLUTION_INCONCLUSIVE" -> when (failure.details?.dimensionEvidence()) {
+                    "NO_DIMENSION_EVIDENCE" -> "Nie udało się ustalić skali rzutu: na rzucie nie znalazłem wymiarów, z których dałoby się ją odczytać, więc modelu nie zbudowano. Szczegóły są poniżej."
+                    "DIMENSION_EVIDENCE_INCONCLUSIVE" -> "Nie udało się ustalić skali rzutu: na rzucie znalazłem wymiary, ale nie udało się z nich jednoznacznie ustalić skali, więc modelu nie zbudowano. Szczegóły są poniżej."
+                    else -> "Nie udało się ustalić skali rzutu: wymiary odczytane z rysunku nie potwierdzają jednej skali, więc modelu nie zbudowano. Szczegóły są poniżej."
+                }
                 else -> "Analiza zatrzymała się: z rysunków tego projektu nie udało się zbudować modelu. Szczegóły są poniżej."
             }
         }

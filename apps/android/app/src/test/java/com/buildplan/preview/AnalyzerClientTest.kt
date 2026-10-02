@@ -11,6 +11,7 @@ import com.buildplan.preview.analyzer.AnalyzerAddress
 import com.buildplan.preview.analyzer.AnalyzerClient
 import com.buildplan.preview.analyzer.AnalyzerFailure
 import com.buildplan.preview.analyzer.AnalyzerMessages
+import com.buildplan.preview.analyzer.FailureDetails
 import com.buildplan.preview.analyzer.HttpUrlConnectionTransport
 import com.buildplan.preview.analyzer.JobIds
 import com.buildplan.preview.analyzer.Outcome
@@ -18,6 +19,7 @@ import com.buildplan.preview.analyzer.ProjectLinks
 import com.buildplan.preview.analyzer.ResponseTooLargeException
 import java.io.InputStream
 import java.net.UnknownHostException
+import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -320,5 +322,23 @@ class AnalyzerClientTest {
         assertTrue("a network failure is not blamed on the drawings: $unreachable", "rysunk" !in unreachable && "połączenie" in unreachable)
         assertEquals("Ta wersja aplikacji nie ma skonfigurowanej usługi analizy.", AnalyzerMessages.describe(AnalyzerFailure.NotConfigured))
         for (f in failures) assertTrue("$f has a Polish heading", AnalyzerMessages.title(f).isNotBlank())
+    }
+
+    @Test
+    fun `a plan that prints dimensions is never told it prints none (005F)`() {
+        fun stopped(evidence: String?) = AnalyzerMessages.describe(
+            AnalyzerFailure.JobFailed(
+                "RECONSTRUCTION_FAILED",
+                "scale",
+                FailureDetails(reasonCode = "METRIC_RESOLUTION_INCONCLUSIVE", diagnostics = evidence?.let { mapOf("dimensionEvidence" to JsonPrimitive(it)) } ?: emptyMap()),
+            ),
+        )
+        val found = stopped("DIMENSION_EVIDENCE_INCONCLUSIVE")
+        assertTrue("dimensions were found and did not settle a scale: $found", "znalazłem wymiary" in found && "jednoznacznie" in found)
+        val none = stopped("NO_DIMENSION_EVIDENCE")
+        assertTrue("no dimension was found: $none", "nie znalazłem wymiarów" in none)
+        assertTrue("the two refusals read differently", found != none)
+        assertTrue("an older analyzer without the field keeps its sentence", stopped(null).startsWith("Nie udało się ustalić skali rzutu"))
+        for (text in listOf(found, none)) assertTrue("no code in the sentence: $text", "_EVIDENCE" !in text && '{' !in text)
     }
 }

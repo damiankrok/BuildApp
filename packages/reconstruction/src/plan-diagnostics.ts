@@ -48,6 +48,7 @@ export function planDiagnosticsOf(draft: StructuralLayoutDraft, graph: SourceObs
       ...(p.extentProvenance ? { extentProvenance: p.extentProvenance } : {}),
       ...(p.extentRefused ? { extentRefused: p.extentRefused } : {}),
       ...metricOf(metrics, p.frame.id),
+      dimensionEvidence: dimensionEvidenceOf(metrics, p.frame.id),
       envelope: d.envelope ? rect(d.envelope.rect) : null,
       bands: p.bands.map((b) => ({ axis: b.axis === 'VERTICAL' ? ('V' as const) : ('H' as const), bounds: rect(b.bounds), thickness: round6(b.thickness) })),
       chains: metrics.chains
@@ -81,6 +82,22 @@ function boundaryOf(b: BoundaryRecord): NonNullable<PlanDiagnostics['boundary']>
     shutGarageMouths: b.shutGarageMouths,
     why: b.why,
   }
+}
+
+/**
+ * What a plan prints to take a scale from (005F): no dimension at all, or dimensions that were found and read but do
+ * not settle one scale. The two are different refusals — the first asks for a dimension, the second for a reading of
+ * the ones printed — and saying the first when the second holds tells a person the drawing lacks what it has.
+ * Counted on the dimension observations (labels bound to dimension lines, the 005D topology) and the legacy chains.
+ */
+export type DimensionEvidence = { kind: 'NO_DIMENSION_EVIDENCE' | 'DIMENSION_EVIDENCE_INCONCLUSIVE'; labels: number; lines: number }
+
+export function dimensionEvidenceOf(metrics: MetricEvidenceSet, frameId: string): DimensionEvidence {
+  const observed = (metrics.dimensionObservations ?? []).filter((o) => o.frameId === frameId)
+  const labels = new Set(observed.map((o) => o.textRegionId)).size
+  const legacy = metrics.chains.filter((c) => c.frameId === frameId)
+  const lines = new Set([...observed.map((o) => o.chainId), ...legacy.map((c) => c.id)]).size
+  return { kind: labels === 0 && legacy.length === 0 ? 'NO_DIMENSION_EVIDENCE' : 'DIMENSION_EVIDENCE_INCONCLUSIVE', labels, lines }
 }
 
 /** The frame's independent metric solution (005B), as the digest carries it. */
@@ -126,9 +143,11 @@ export function planFailureOf(draft: StructuralLayoutDraft, layout: StructuralLa
     return fail(
       'PLAN_NO_DIMENSION_FRAME',
       'PLAN_READ',
-      plan.chains.length === 0
+      plan.dimensionEvidence?.kind === 'NO_DIMENSION_EVIDENCE'
         ? `${sheet} prints no dimension chain, so nothing on it states a scale`
-        : `${sheet} states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have`,
+        : plan.chains.length === 0
+          ? `${sheet} prints ${plan.dimensionEvidence?.labels ?? 0} dimension label${plan.dimensionEvidence?.labels === 1 ? '' : 's'} on ${plan.dimensionEvidence?.lines ?? 0} dimension line${plan.dimensionEvidence?.lines === 1 ? '' : 's'}, but as read they state no scale its other readings agree with`
+          : `${sheet} states no usable scale: none of its dimension chains was read at a scale that makes its walls a thickness a wall can have`,
     )
   if (base.bands.length === 0) return fail('PLAN_NO_WALL_BANDS', 'PLAN_DECOMPOSITION', `no wall-thick ink was found on ${sheet}`)
   if (!base.decomposition.envelope) return fail('PLAN_NO_WALLED_ENVELOPE', 'PLAN_DECOMPOSITION', `${plan.bands.length} wall bands were found on ${sheet}, but the long ones inside the frame its dimension chains and walls draw do not span a box on both axes, so they enclose nothing`)
