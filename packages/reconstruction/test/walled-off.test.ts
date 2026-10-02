@@ -70,3 +70,52 @@ describe('floor behind a wall beside a part (C5F-2, D5F-12)', () => {
     })
   }
 })
+
+/**
+ * The split never makes a part more acceptable than it was whole. A strip below the house (5 cm/px): its corner at a
+ * 1.5 m open edge is reached; the rest, 3 m wide, lies behind a line (drawn furniture reads as one) and meets the house
+ * across a solid edge. Whole, 1.5 of 4.5 m of its edge with the house is open — not the rooms' end. The reached corner
+ * alone is open along all of its edge; asked of it, the continuation test would answer itself.
+ */
+function strip(o: { swap: boolean }) {
+  const along = [0, 30, 90]
+  const across = [0, 100, 130]
+  const LX = o.swap ? across : along
+  const LY = o.swap ? along : across
+  const nx = LX.length - 1
+  const ny = LY.length - 1
+  const piece = (from: number, to: number, axisPx: number): LinePiece => ({ from, to, axisPx, kind: 'WALL', partId: 0, along: true })
+  const full = (axis: 'X' | 'Y', px: number, a: number, b: number): WallLine => ({ axis, px, from: a, to: b, pieces: [piece(a, b, px)], gaps: [], drawingBreaks: 0 })
+  const wallsX: WallLine[] = LX.map((x) => full('X', x, 0, LY[ny]))
+  const wallsY: WallLine[] = LY.map((y) => full('Y', y, 0, LX[nx]))
+  const closed: OutlineEdge = { solid: 1, bridged: 0, closed: true }
+  const vEdge: OutlineEdge[][] = LX.map(() => Array.from({ length: ny }, () => ({ ...closed })))
+  const hEdge: OutlineEdge[][] = LY.map(() => Array.from({ length: nx }, () => ({ ...closed })))
+  const open: OutlineEdge = { solid: 0, bridged: 0, closed: false }
+  // cell (a, b): a along the strip, b across (0 the house row, 1 the strip)
+  const k = (a: number, b: number): number => (o.swap ? a * nx + b : b * nx + a)
+  if (o.swap) {
+    vEdge[1][0] = { ...open } // house → the strip's corner
+    vEdge[0][0] = { ...closed }
+  } else hEdge[1][0] = { ...open }
+  const inside = new Uint8Array(nx * ny).fill(1)
+  const builtA = new Uint8Array(nx * ny)
+  builtA[k(0, 0)] = 1
+  builtA[k(1, 0)] = 1
+  const outline = { inside, nx, ny, vEdge, hEdge, bridged: { strong: [], weak: [] }, pocketMouths: [], unjudged: 0, floods: 1 }
+  const solid = { width: LX[nx], height: LY[ny], radius: 4, wallPx: 12, labels: new Int32Array(LX[nx] * LY[ny]), parts: [] }
+  const extent = { x0: 0, y0: 0, x1: LX[nx], y1: LY[ny] }
+  return completeBoundary({ linesX: LX, linesY: LY, wallsX, wallsY, mppX: 0.05, mppY: 0.05, wallPx: 12, outline, strict: outline, inA: new Uint8Array(nx * ny).fill(1), builtA, accepted: new Uint8Array(nx * ny), box: extent, extent, solid, sides: [], chains: [] }).parts
+}
+
+describe('the split decides which floor is taken, never whether the part is the rooms’ end', () => {
+  for (const swap of [false, true]) {
+    it(`a strip mostly walled from the house is no continuation, though its corner at the door is open — ${swap ? 'along y' : 'along x'}`, () => {
+      const parts = strip({ swap })
+      expect(parts.length).toBeGreaterThan(0)
+      for (const p of parts) expect(p.decision, p.reason).not.toBe('ACCEPTED')
+      expect(parts.some((p) => p.reason.startsWith('NO_CONTINUATION'))).toBe(true)
+    })
+  }
+})
+

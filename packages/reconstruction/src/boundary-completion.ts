@@ -521,7 +521,29 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       }
     }
     const returns = returnsAcross(reaches?.side)
-    const continues = open >= Math.max(B.doorM, B.continueShare * shared)
+    // Whether a box completion continues the rooms it ends is asked of the part as the outline encloses it, before the
+    // floor nothing passable reaches is split off: the reached floor is by construction the floor next to the opening,
+    // and asked of it alone the question answers itself (a strip of rooms whose drawn furniture reads as walls kept only
+    // its corner at the door). The split decides which floor is taken, never whether the part is an end of the rooms.
+    const enclosedCore = new Set(core)
+    const nearEnclosed = (k: number): boolean => {
+      const t = rectOfCell(k)
+      return core.some((q) => {
+        const c = rectOfCell(q)
+        return Math.max(c.x0 - t.x1, t.x0 - c.x1) <= W && Math.max(c.y0 - t.y1, t.y0 - c.y1) <= W
+      })
+    }
+    const enclosed = new Set(before.filter((k) => enclosedCore.has(k) || nearEnclosed(k)))
+    let enclosedShared = 0
+    let enclosedOpen = 0
+    for (const k of enclosed) {
+      for (const n of neighbours(k)) {
+        if (n.j < 0 || enclosed.has(n.j) || !house(n.j)) continue
+        enclosedShared += n.lengthM
+        if (!n.edge.closed) enclosedOpen += n.lengthM
+      }
+    }
+    const continues = enclosedOpen >= Math.max(B.doorM, B.continueShare * enclosedShared)
     // a dashed line across a mouth is as much a roof edge as an overhead door: it closes a garage's end (BOX_COMPLETION),
     // never makes a room by itself (C5F-5)
     const roomDoors = vehicleDoors.filter((g) => g.signature !== 'DASHED')
@@ -539,7 +561,7 @@ export function completeBoundary(input: CompletionInput): CompletionResult {
       reason = 'SEPARATE: it shares no edge with the house'
     } else if (kind === 'BOX_COMPLETION' && !continues) {
       decision = 'REJECTED'
-      reason = `NO_CONTINUATION: ${open.toFixed(2)} m of open edge with the built rooms of ${shared.toFixed(2)} m shared — walled off from them, not their end`
+      reason = `NO_CONTINUATION: ${enclosedOpen.toFixed(2)} m of open edge with the built rooms of ${enclosedShared.toFixed(2)} m shared — walled off from them, not their end`
     } else if (kind === 'ATTACHED_ROOM' && !reaches) {
       decision = 'REJECTED'
       reason = 'NO_STRONG_EXTENT: no side the chains strongly state lies past the box where it reaches'
