@@ -300,17 +300,31 @@ Since 005F (`metrics.numeric-lattice` 1.1.0) the count is a hypothesis of its ow
   mask (a `0`'s or an `8`'s counter) is pruned: a counter is not a junction;
 - **a count is decided by width and topology** — never by the template score,
   which reads a glyph split in two as two `1`s as readily as the truth, and
-  never by a scale. When the style rules the reader's count out, the anchor is
-  cut at the style's count (`counts[].decisive`);
-- **count ambiguity is reading ambiguity** — a value of another digit count
-  holding a tenth of the ink's values or more, or an ink whose width fits a
-  glyph more or fewer as well (`widthAmbiguous`), makes the reading AMBIGUOUS;
-  another count among the values at all caps CLEAR at SUPPORTED: 3-vs-4 is never
-  CLEAR. A reading cut at the count the style chose over the reader's is a
-  judgement about the ink's width, and is never CLEAR either. A value of another
+  never by a scale. When the style rules the reader's count out and admits one
+  more, the anchor is cut at the style's count (`counts[].decisive`); one fewer
+  stays a re-cut, never decisive — a style wider than the label (a title block
+  at the same cap) would otherwise merge glyphs that merely touch;
+- **count ambiguity is reading ambiguity** — the reading is AMBIGUOUS when a
+  value of another digit count holds a tenth of the ink's values or more; when
+  the ink's width fits a glyph more or fewer as well (`widthAmbiguous`: under
+  the plan's style the width alone decides this, since touching glyphs leave
+  no valley to show it; with no style the image must also allow the count);
+  when it was cut at a count no ink variant's own reader cut (the style's
+  alone — and the style is the page's median face, not necessarily this
+  label's); or when the ink variants cut it into different counts. Any other
+  value of another count caps CLEAR at SUPPORTED, and so does a count the style
+  chose over the reader's when a reader agrees with it. A value of another
   digit count is never one of the ink's alternatives: it neither contests a
   scale nor is chosen among — its doubt is in the class. A reading with a
-  leading zero is no dimension (AMBIGUOUS);
+  leading zero is no dimension (AMBIGUOUS). These rules see the counts the
+  lattice raised: an ink cut at a count two away from its glyphs, or whose
+  width rules out its count with no count one away to offer, can still read
+  CLEAR at the wrong count (`185` read `85` on the held-back corpus) — a
+  declared limit, like the single-glyph misread the matcher is sure of. And a
+  count recovered without its value can make an unreadable ink a witness: an
+  overall 005E left LOW_QUALITY at the wrong count may now be read at the right
+  count and a wrong value, an AMBIGUOUS witness of a wrong scale — which
+  refuses a plan rather than misleading it;
 - **the ambiguity tail** — values an anchor reaches with exactly two moderate
   substitutions, each supported by the image on its own, that the count bound
   cut (`TAIL_BOUNDS`, at most two per ink). Recorded beside the values

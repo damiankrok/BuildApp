@@ -480,6 +480,37 @@ describe('§31 an ink re-read by the lattice gets values from its lattice only, 
 // post-review C P1/P2: the protection does not push a true scale aside; a statement drawn twice is one
 // ---------------------------------------------------------------------------
 
+describe('005F contract A6: a value of another digit count never contests a scale (post-review A5F-3, D5F-6)', () => {
+  // The true 2.0 cm/px: A (x, 400 px, read 800, AMBIGUOUS) and B (y, 350 px, read 700, CLEAR). A misread rival at
+  // 2.5 cm/px: D (x, 400 px, read 1000, SUPPORTED) and E (y, 280 px, read 700, CLEAR). A's ink also holds a value of
+  // another digit count; the solve must not depend on which one.
+  const chains = [hChain(760, [100, 500]), vChain(700, [50, 400]), hChain(840, [100, 500]), vChain(40, [30, 310])]
+  const A = hLabel('800', 760, 100, 500)
+  const B = vLabel('700', 700, 50, 400)
+  const D = hLabel('1000', 840, 100, 500)
+  const E = vLabel('700', 40, 30, 310)
+  const page = (countValue: string) => {
+    const lattices = held([
+      [A, lattice(A, 'AMBIGUOUS', [['800', 0.45], ['860', 0.33], [countValue, 0.22]])],
+      [B, lattice(B, 'CLEAR', [['700', 0.9], ['760', 0.1]])],
+      [D, lattice(D, 'SUPPORTED', [['1000', 0.55], ['1060', 0.2], ['1080', 0.2]])],
+      [E, lattice(E, 'CLEAR', [['700', 0.6], ['790', 0.25], ['780', 0.15]])],
+    ])
+    const m = solve(chains, [A, B, D, E], lattices)
+    expectNonCircular(m.observations, lattices, m)
+    return m
+  }
+  it('a four-digit value fitting the rival scale changes nothing against one fitting no scale', () => {
+    const fits = page('1000') // 1000 / 400 px = 2.5 cm/px: the rival's scale
+    const fitsNothing = page('1300')
+    expect(fits.solution.relation).toBe(fitsNothing.solution.relation)
+    expect(fits.solution.confidence).toBe(fitsNothing.solution.confidence)
+    expect(fits.solution.cmPerPixelX).toBe(fitsNothing.solution.cmPerPixelX)
+    expect(fits.solution.relation).not.toBe('REPLACED')
+    for (const o of fits.observations) for (const a of o.valueAlternatives ?? []) expect(String(a.valueCm).length, `${o.id} alternative ${a.valueCm}`).toBe(String(o.valueCm).length)
+  })
+})
+
 describe('§16 the false-consensus protection never hands the scale to a vote with no reading of its own', () => {
   it('two ambiguous inks read right replace a page vote that rests on unreadable ink, whatever an unrelated short CLEAR label states', () => {
     // True scale 2.20. The page vote reads three LOW_QUALITY labels at 1.90; a 60 px CLEAR "71" elsewhere states 1.18.

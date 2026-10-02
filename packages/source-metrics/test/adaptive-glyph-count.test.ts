@@ -236,6 +236,61 @@ describe('§28 no count hallucination: a scale never chooses a count, and doubt 
   })
 })
 
+/**
+ * Post-review A: pages whose labels are not all in one face, and the blind house's small cap. A face is given by the
+ * ink of an isolated glyph (`iso`, of the cap) as in `plan`; reviewer A's geometry, each case one it built to falsify
+ * the count rules. The claim is the class's, not the count's: a reading at the wrong digit count may happen, but it is
+ * never CLEAR or SUPPORTED.
+ */
+const faceOf = (geo: { iso: number; cap: number; face: 'A' | 'B' }): Partial<DrawnStyle> => ({ capHeight: geo.cap, slant: 0, pen: geo.cap / 10, condense: (geo.iso - 0.1) / 0.56, face: geo.face })
+const CONTEXT = ['350', '1062', '297', '415', '732', '380', '642', '100', '2590', '1950', '640', '1000']
+const condensedContext = (iso: number, face: 'A' | 'B'): Placed[] => CONTEXT.map((text, i) => ({ text, x: 30 + (i % 4) * 210, y: 30 + Math.floor(i / 4) * 60, style: { ...faceOf({ iso, cap: 16, face }), gap: 0.3 } }))
+const expectNoConfidentWrongCount = (text: string, l: LabelLattice | undefined, what: string): void => {
+  if (!l || digits(l.asRead) === digits(text)) return
+  expect(['AMBIGUOUS', 'LOW_QUALITY'], `${what}: ${text} read ${l.asRead} ${l.ocrClass} (${l.classWhy})`).toContain(l.ocrClass)
+}
+
+describe('post-review A: a style that is not the label’s face, and the blind cap', () => {
+  it('A5F-1 split: an ordinary label on a condensed page is never read at a count only the style gave it, confidently', () => {
+    const at = { x: 60, y: 300 }
+    const raster = page([...condensedContext(0.4, 'A'), { text: '145', ...at, style: { ...faceOf({ iso: 0.68, cap: 16, face: 'B' }), gap: 0.12 } }])
+    const r = readTarget(raster, at)
+    expect(r.pitch, 'the page states a style').not.toBeNull()
+    expectNoConfidentWrongCount('145', r.lattice, 'condensed page, ordinary open-4 face')
+  })
+
+  it('A5F-1 merge: a style wider than the label (a title block at the same cap) never merges its glyphs decisively', () => {
+    const title: Placed[] = Array.from({ length: 24 }, (_, i) => ({ text: ['3582', '6034', '2958', '8350', '5023', '9683'][i % 6], x: 20 + (i % 4) * 220, y: 20 + Math.floor(i / 4) * 40, style: { capHeight: 18, slant: 0, pen: 1.8, condense: 1.25, face: 'A', gap: 0.25 } }))
+    const at = { x: 60, y: 330 }
+    const raster = page([...title, { text: '730', ...at, style: { ...faceOf({ iso: 0.455, cap: 16, face: 'B' }), gap: 0.5 - 0.355 } }])
+    const l = readTarget(raster, at).lattice
+    expectNoConfidentWrongCount('730', l, 'wide title style')
+    for (const c of l?.segmentation.counts ?? []) if (c.anchor < c.reader) expect(c.decisive, JSON.stringify(c)).toBe(false)
+  })
+
+  it('A5F-2: the stage’s own condensed overall at the blind house’s 11 px cap is never read short, confidently', () => {
+    const base = faceOf({ iso: 0.455, cap: 11, face: 'B' })
+    const context: Placed[] = ['350', '1062', '297', '415', '732', '380', '642', '100', '210', '730', '60', '1417'].map((text, i) => ({ text, x: 30 + (i % 4) * 210, y: 30 + Math.floor(i / 4) * 50, style: { ...base, gap: 0.3 } }))
+    const at = { x: 60, y: 300 }
+    const raster = page([...context, { text: '2590', ...at, style: { ...base, gap: 0.46 - 0.355 } }])
+    const r = readTarget(raster, at)
+    expect(r.pitch, 'the page states a style').not.toBeNull()
+    expectNoConfidentWrongCount('2590', r.lattice, 'cap 11')
+  })
+
+  it('A5F-2, A5F-4: ordinary touching labels on a condensed page are never read at the wrong count, confidently', () => {
+    for (const iso of [0.4, 0.455]) {
+      for (const face of ['A', 'B'] as const) {
+        for (const text of ['7525', '725', '2750', '357']) {
+          const at = { x: 60, y: 300 }
+          const raster = page([...condensedContext(iso, face), { text, ...at, style: { ...faceOf({ iso: 0.56, cap: 16, face }), gap: 0 } }])
+          expectNoConfidentWrongCount(text, readTarget(raster, at).lattice, `context iso ${iso} face ${face}`)
+        }
+      }
+    }
+  })
+})
+
 describe('counter safety: a cut never runs through a hollow glyph', () => {
   it('runs of noughts and eights keep their count: no path cuts a persistent counter into two cells', () => {
     for (const text of ['1000', '800', '2008', '6080']) {

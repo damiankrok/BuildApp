@@ -733,7 +733,10 @@ function countHypotheses(sheared: Bitmap, cap: number, raws: ReadonlyMap<InkVari
         if (k > a && options.length > 0 && Math.min(...options.map((o) => o.depth)) < COUNT_BOUNDS.addDepth) continue
         const others = anchor.filter((c) => c.x1 < run.x0 || c.x0 > run.x1)
         const segs = splitRun(run, options, others, cap)
-        if (segs.length > 0) alts.push({ dir: Math.sign(k - a), k: k - a + anchor.length, misfit: misfit(w, k), segs, decisive: pitch !== null && !admitted(w, a) })
+        // Only a split is decisive (post-review A5F-1): a style wider than the label's own face (a title block or room
+        // names at the same cap) would otherwise merge touching glyphs with no valley to answer for; a merge stays a
+        // count alternative.
+        if (segs.length > 0) alts.push({ dir: Math.sign(k - a), k: k - a + anchor.length, misfit: misfit(w, k), segs, decisive: pitch !== null && !admitted(w, a) && k > a })
       }
     }
   }
@@ -741,9 +744,11 @@ function countHypotheses(sheared: Bitmap, cap: number, raws: ReadonlyMap<InkVari
   const decisive = chosen.find((x) => x.decisive)
   if (decisive) hyps = decisive.segs.map((cells, i) => ({ cells, changed: i === 0 ? 0 : 1, kind: i === 0 ? 'ANCHOR' : 'RECUT', countAlt: false, counterCut: false }))
   else for (const alt of chosen) for (const cells of alt.segs) hyps.push({ cells, changed: 1, kind: 'RECUT', countAlt: true, counterCut: false })
-  // Width ambiguity of the final anchor: a run whose width fits a count one away at least as well, and whose image allows
-  // that count — a valley that cuts no counter at every boundary, deep enough where a boundary is added. A count the
-  // ink's topology forbids (a `000` split through a wall) is no ambiguity.
+  // Width ambiguity of the final anchor: a run whose width fits a count one away at least as well (contract A5). Under the
+  // plan's style that is the whole test (post-review A5F-2): the valley and counter gates decide whether a count is worth
+  // reading, not whether the width leaves it in doubt — glyphs that touch with no valley are exactly where it is. With no
+  // style the band is wide and says little, so the image must also allow that count: a valley that cuts no counter at
+  // every boundary, deep enough where a boundary is added (a `000` split through a wall is no ambiguity).
   const finalAnchor = hyps[0].cells
   let widthAmbiguous = false
   for (const run of runs) {
@@ -752,6 +757,10 @@ function countHypotheses(sheared: Bitmap, cap: number, raws: ReadonlyMap<InkVari
     if (a === 0) continue
     for (const k of [a - 1, a + 1]) {
       if (!admitted(w, k) || misfit(w, k) > misfit(w, a)) continue
+      if (pitch !== null) {
+        widthAmbiguous = true
+        continue
+      }
       const options = boundaryOptions(profile, run, k, counters)
       if (options.some((o) => o.options.length === 0)) continue
       if (k > a && options.length > 0 && Math.min(...options.map((o) => o.depth)) < COUNT_BOUNDS.addDepth) continue
@@ -1164,6 +1173,15 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
     } else if (widthAmbiguous) {
       ocrClass = 'AMBIGUOUS'
       countWhy = `its width fits a glyph more or fewer as well as the ${asReadDigits} it was cut into: the image does not settle how many glyphs it holds`
+    } else if (!telemetry.counts.some((c) => c.reader === anchor.glyphs.length)) {
+      // post-review A5F-1: a count no ink variant's own reader cut is the style's alone — and the style is the page's
+      // median face, not necessarily this label's
+      ocrClass = 'AMBIGUOUS'
+      countWhy = `cut into ${anchor.glyphs.length}, a count only the plan's style gave it — no ink variant's reader cut it so: the image does not settle how many glyphs it holds`
+    } else if (new Set([...anchorsByVariant.values()].map((v) => v.path.glyphs.length)).size > 1) {
+      // post-review A5F-4: the image score cannot choose a count (contract §0)
+      ocrClass = 'AMBIGUOUS'
+      countWhy = `the ink variants cut it into different counts (${[...anchorsByVariant.values()].map((v) => v.path.glyphs.length).join('/')}): the image does not settle how many glyphs it holds`
     } else if (otherCount.length > 0 && ocrClass === 'CLEAR') {
       ocrClass = 'SUPPORTED'
       countWhy = `a value of another digit count is among the ink's values (${rivalP}): never CLEAR`
