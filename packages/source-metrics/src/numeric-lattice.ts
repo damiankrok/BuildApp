@@ -76,17 +76,19 @@ export const LATTICE_BOUNDS = {
  * values and its margin over the next value. On the FIT labels that probability separates a right reading from a wrong
  * one at AUC 0.75 against 0.65 for the worst glyph runner ratio (0.73 topology-aware); on the HELD_BACK labels the two
  * are a near-tie (0.81 against 0.83) — the stage's calibration tables. LOW_QUALITY: a glyph matched under the floor, or
- * text under the legible height. CLEAR: the reading holds at least `clearP` of the ink's mass (its margin is then at
- * least a third). SUPPORTED: at least `supportedP`, with no other value within `supportedMargin` of it — a two-value
- * coin toss is AMBIGUOUS whatever share it holds (005E post-review C P0). AMBIGUOUS otherwise, and whenever the as-read
- * value moves under the stability bracket (`STABILITY_BRACKET`). Chosen on the FIT labels and the calibration corpus,
- * checked on the held-back ones.
+ * text under the legible height. CLEAR: the reading holds at least `clearP` of the ink's mass and the next value at most
+ * half of it (`clearMargin`). SUPPORTED: at least `supportedP`, with the next value at most half of it
+ * (`supportedMargin`) — a two-value coin toss is AMBIGUOUS whatever share it holds (005E post-review C P0). AMBIGUOUS
+ * otherwise, and whenever the as-read value moves under the stability bracket (`STABILITY_BRACKET`). Chosen on the FIT
+ * labels and the calibration corpus, checked on the held-back ones; 005F raised `supportedP` 0.35 → 0.4 and both
+ * margins 0.3 → 0.5 once count hypotheses and counter-safe cuts changed the ink's emitted values (005F calibration
+ * record, which says what decided it).
  */
-export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.3, supportedP: 0.35, supportedMargin: 0.3 } as const
+export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.5, supportedP: 0.4, supportedMargin: 0.5 } as const
 
 /**
  * 005F: the bounds of glyph-count hypotheses, counter-safe cuts and the plan's dimension-font style (pre-review A,
- * `stage-reports/artifacts/analyzer-005f/pre/segmentation-count-review.md`), every one a count or a ratio. A count is
+ * the stage's `segmentation-count-review.md`), every one a count or a ratio. A count is
  * decided by the width of the ink against the plan's own glyph width and by topology — never by the template score, which
  * reads a glyph split in two as two `1`s as readily as the truth (A P0-3), and never by a scale.
  */

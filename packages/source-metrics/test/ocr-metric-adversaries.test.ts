@@ -248,7 +248,7 @@ describe('§15 confidence semantics', () => {
   /** Probabilities that the shipped rule classes as each class (and a glyph under the floor for LOW_QUALITY). */
   const shape = (cls: OcrClass, v: string, alt: string, other: string): { seqs: Array<[string, number]>; minGlyph: number } =>
     cls === 'CLEAR' ? { seqs: [[v, 0.8], [alt, 0.1]], minGlyph: 0.4 }
-    : cls === 'SUPPORTED' ? { seqs: [[v, 0.45], [alt, 0.25], [other, 0.2]], minGlyph: 0.4 }
+    : cls === 'SUPPORTED' ? { seqs: [[v, 0.45], [alt, 0.2], [other, 0.2]], minGlyph: 0.4 }
     : cls === 'AMBIGUOUS' ? { seqs: [[v, 0.4], [alt, 0.35], [other, 0.25]], minGlyph: 0.4 }
     : { seqs: [[v, 0.8], [alt, 0.1]], minGlyph: 0.15 }
   const page = (classX: OcrClass, classY: OcrClass) => {
