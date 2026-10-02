@@ -354,8 +354,9 @@ Command: `grep -rn "\.tail\b|countAmbiguity|\.segmentation\b|widthAmbiguous|riva
 
 Notes on the table:
 
-- **n/r.** The 005E reading of groups 3, 4, 5 and 7 was not run to completion before this review was handed over.
-  Their outputs will land in `scratch-A/eval-a3-*.out`.
+- **n/r.** The 005E reading of groups 3, 4, 5 and 7 was not run to completion. The `eval-a3` runs were stopped at
+  the coordinator's request so the freeze matrix has a quiet machine, and they produced no results. No P0 or P1
+  depends on these cells.
 - **What groups 3–7 show.** The wrong counts there are reader under-counts (005D's cut, ±1 out of reach or no valley).
   The only over-cut is one lone label, and it is not C/S. None comes from a scale.
 
