@@ -22,6 +22,10 @@
 // Round 5 (BUILDPLAN-005E) draws two ARCHON families the same way, less holdout/excluded-families-round-5.txt (round 4's
 // families and the two round-4 draws, now development houses), with seed = SHA256(PRE_HOLDOUT_5_SHA + "BUILDPLAN-005E-NUMERIC-OCR-HOLDOUT"):
 //   node holdout/select.mjs select --round 5 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 6 (BUILDPLAN-005F) draws two ARCHON families the same way, less holdout/excluded-families-round-6.txt (round 5's
+// families and the two round-5 draws, now development houses), with
+// seed = SHA256(PRE_HOLDOUT_6_SHA + "BUILDPLAN-005F-ADAPTIVE-SEGMENTATION-ENVELOPE-HOLDOUT"):
+//   node holdout/select.mjs select --round 6 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -37,6 +41,7 @@ const ROUNDS = {
   3: { label: 'BUILDPLAN-005C-ARCHON-HOLDOUT', excluded: 'excluded-families-round-3.txt', picks: 1 },
   4: { label: 'BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT', excluded: 'excluded-families-round-4.txt' },
   5: { label: 'BUILDPLAN-005E-NUMERIC-OCR-HOLDOUT', excluded: 'excluded-families-round-5.txt' },
+  6: { label: 'BUILDPLAN-005F-ADAPTIVE-SEGMENTATION-ENVELOPE-HOLDOUT', excluded: 'excluded-families-round-6.txt' },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',
@@ -177,7 +182,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (git('status', '--porcelain')) throw new Error('working tree is not clean')
     if (resolve(arg('pool') ?? '') !== join(root, 'holdout', 'pool.txt')) throw new Error('the pool is the tracked holdout/pool.txt, nothing else')
     const round = ROUNDS[arg('round') ?? '1']
-    if (!round) throw new Error('--round is 1, 2, 3, 4 or 5')
+    if (!round) throw new Error('--round is 1, 2, 3, 4, 5 or 6')
     git('ls-files', '--error-unmatch', 'holdout/pool.txt', 'holdout/pool.meta.json', `holdout/${round.excluded}`)
     const text = readFileSync(join(root, 'holdout', 'pool.txt'), 'utf8')
     const declared = JSON.parse(readFileSync(join(root, 'holdout', 'pool.meta.json'), 'utf8')).poolSha256
