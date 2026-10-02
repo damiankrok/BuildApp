@@ -309,9 +309,11 @@ Since 005F (`metrics.numeric-lattice` 1.1.0) the count is a hypothesis of its ow
   witness, a contest value, a correction or a structural option. The beam's
   floor is not lowered, and a scale never creates a sequence.
 
-The class bars moved with the values they read (`OCR_CLASS_BOUNDS`):
-SUPPORTED needs 0.4 of the ink and the next value at most half of it; CLEAR
-0.6 and the same margin. What decided the move, and what it costs, is in
+The class bars moved with the values they read (`OCR_CLASS_BOUNDS`): the next
+value may hold at most half of the reading's probability, for SUPPORTED (0.35
+of the ink) and CLEAR (0.6) alike. Count hypotheses and counter-safe cuts
+concentrate an ink's values, and at 005E's margin SUPPORTED precision fell on
+the calibration splits; what decided the margin, and what it costs, is in
 `stage-reports/artifacts/analyzer-005f/calibration/README.md`.
 
 **A refusal says which evidence is missing.** A plan whose scale is not settled

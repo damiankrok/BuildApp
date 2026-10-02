@@ -80,11 +80,12 @@ export const LATTICE_BOUNDS = {
  * half of it (`clearMargin`). SUPPORTED: at least `supportedP`, with the next value at most half of it
  * (`supportedMargin`) — a two-value coin toss is AMBIGUOUS whatever share it holds (005E post-review C P0). AMBIGUOUS
  * otherwise, and whenever the as-read value moves under the stability bracket (`STABILITY_BRACKET`). Chosen on the FIT
- * labels and the calibration corpus, checked on the held-back ones; 005F raised `supportedP` 0.35 → 0.4 and both
- * margins 0.3 → 0.5 once count hypotheses and counter-safe cuts changed the ink's emitted values (005F calibration
- * record, which says what decided it).
+ * labels and the calibration corpus, checked on the held-back ones. 005F raised both margins 0.3 → 0.5: count
+ * hypotheses and counter-safe cuts concentrate an ink's values, and SUPPORTED precision on FIT and the calibration corpus
+ * fell below 005E's; the margin restores it on both, keeping the most right readings of the bars tried (005F
+ * calibration record).
  */
-export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.5, supportedP: 0.4, supportedMargin: 0.5 } as const
+export const OCR_CLASS_BOUNDS = { lowScore: 0.2, legibleCapPx: 10, clearP: 0.6, clearMargin: 0.5, supportedP: 0.35, supportedMargin: 0.5 } as const
 
 /**
  * 005F: the bounds of glyph-count hypotheses, counter-safe cuts and the plan's dimension-font style (pre-review A,
