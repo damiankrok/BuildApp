@@ -27,6 +27,8 @@ import com.buildplan.preview.analyzer.local.LocalAvailability
 import com.buildplan.preview.analyzer.local.LocalJobs
 import com.buildplan.preview.analyzer.local.LocalRuntimeFiles
 import com.buildplan.preview.analyzer.local.MainScheduler
+import com.buildplan.preview.analyzer.local.OcrSelfTest
+import com.buildplan.preview.analyzer.local.OcrSelfTestState
 import com.buildplan.preview.analyzer.local.ServiceRuntimeHost
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import com.buildplan.preview.scene.DownloadedScenes
@@ -140,10 +142,13 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     var localRuns by mutableStateOf<List<LocalRunReport>>(emptyList())
         private set
 
+    /** One host for every run of the embedded runtime: an analysis and the self-test never share a process. */
+    private val localHost = ServiceRuntimeHost(application)
+
     private val local = LocalAnalysis(
         jobs = localJobs,
         scenes = store,
-        host = ServiceRuntimeHost(application),
+        host = localHost,
         install = { localFiles.install() },
         abi = localAvailability.abi,
         io = { work -> localIo.execute(work) },
@@ -228,8 +233,31 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         notice = null
     }
 
+    // --- the OCR parity self-test (BUILDPLAN-ANALYZER-005H, an OWNER diagnostic) ---------------
+
+    var ocrSelfTest by mutableStateOf<OcrSelfTestState>(OcrSelfTestState.Idle)
+        private set
+
+    private val selfTest = OcrSelfTest(
+        root = java.io.File(application.filesDir, LOCAL_DIR),
+        host = localHost,
+        install = { localFiles.install() },
+        io = { work -> localIo.execute(work) },
+        scheduler = MainScheduler(),
+        publish = { next -> ocrSelfTest = next },
+    )
+
+    /** Run the self-test: never while an analysis runs on this phone, and never two at once. */
+    fun runOcrSelfTest() {
+        if (isRunning || selfTest.isRunning || !localAvailability.available) return
+        selfTest.start()
+    }
+
+    fun cancelOcrSelfTest() = selfTest.cancel()
+
     override fun onCleared() {
         // The owner of a local job is going away: the job goes with it (process and scratch).
+        selfTest.cancel()
         local.shutdown()
         localIo.shutdown()
         super.onCleared()
@@ -279,6 +307,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
     fun analyze() {
         if (isRunning) return
         if (mode == AnalyzerMode.LOCAL) {
+            // The self-test holds the embedded runtime: one run at a time.
+            if (ocrSelfTest is OcrSelfTestState.Running) return
             val url = link.trim()
             ProjectLinks.problem(url)?.let { linkProblem = it; return }
             linkProblem = null

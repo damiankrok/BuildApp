@@ -30,10 +30,52 @@ import { PixelGeometrySchema } from '@buildapp/source-observations'
 
 export const METRIC_EVIDENCE_SCHEMA = 'buildapp.metric-evidence-set' as const
 export const METRIC_EVIDENCE_SCHEMA_VERSION = '1.5.0' as const
-export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0'] as const
+/**
+ * 005H (1.6.0): a set read with an external numeric recogniser carries the recogniser, each lattice's external reading
+ * and ensemble decision, and each observation's ensemble summary. A set read without one has none of them and is,
+ * byte for byte, a 1.5.0 set: it keeps that version, so its hash names the reader that produced it.
+ */
+export const METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION = '1.6.0' as const
+export const SUPPORTED_METRIC_EVIDENCE_VERSIONS = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.4.0', '1.5.0', '1.6.0'] as const
 
 /** 005E: the four reading-quality classes the numeric lattice gives an ink, from the image alone. */
 export const OcrClassSchema = z.enum(['CLEAR', 'SUPPORTED', 'AMBIGUOUS', 'LOW_QUALITY'])
+
+/** 005H: the P2 ensemble's decisions (`ensemble.ts`). */
+export const EnsembleDecisionSchema = z.enum(['NO_VALUE', 'NOT_COMPARABLE', 'NOT_CORROBORATING', 'AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS'])
+
+const Sha256Schema = z.string().regex(/^[0-9a-f]{64}$/)
+const ProbabilitySchema = z.number().min(0).max(1)
+
+/** 005H: an external recogniser's reading of one label crop — candidates, never a value (`recogniser.ts`). */
+export const ExternalReadingRecordSchema = z
+  .object({
+    engine: z.string().min(1),
+    modelSha256: Sha256Schema,
+    runtime: z.string().min(1),
+    topK: z.array(z.object({ text: z.string().min(1), p: ProbabilitySchema }).strict()),
+    greedy: z.object({ text: z.string(), meanP: ProbabilitySchema }).strict(),
+    stable: z.boolean(),
+    variants: z.array(z.object({ variant: z.enum(['BASE', 'PAD2', 'TRIM1', 'SCALE90']), top: z.string(), p: ProbabilitySchema }).strict()),
+  })
+  .strict()
+
+/** 005H: what the ensemble rule made of the lattice's and the external reader's readings of one ink. */
+export const LabelEnsembleRecordSchema = z
+  .object({
+    decision: EnsembleDecisionSchema,
+    external: z.object({ text: z.string(), valueCm: z.number().positive().optional(), posterior: ProbabilitySchema, meanP: ProbabilitySchema, stable: z.boolean(), confident: z.boolean() }).strict(),
+    lattice: z.object({ asRead: z.string(), valueCm: z.number().positive().optional(), ocrClass: OcrClassSchema }).strict(),
+    asRead: z.string(),
+    asReadValueCm: z.number().positive().optional(),
+    ocrClass: OcrClassSchema,
+    rival: z.object({ text: z.string().min(1), valueCm: z.number().positive(), witness: z.enum(['EXTERNAL', 'LATTICE']) }).strict().optional(),
+    why: z.string().min(1),
+  })
+  .strict()
+
+/** 005H: the recogniser a set was read with. */
+export const RecogniserRecordSchema = z.object({ id: z.string().min(1), model: z.object({ name: z.string().min(1), sha256: Sha256Schema }).strict(), runtime: z.string().min(1), runtimeSha256: Sha256Schema.optional() }).strict()
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -421,6 +463,14 @@ export const DimensionObservationSchema = z
           .strict()
           .optional(),
         refutedBy: z.literal('STRUCTURAL').optional(),
+        /**
+         * 005H (schema 1.6.0): when an external recogniser read the ink, what the ensemble rule decided and the two
+         * readings it decided between; `ocrClass` above and `rawText` are then the ensemble's.
+         */
+        ensemble: z
+          .object({ decision: EnsembleDecisionSchema, latticeAsRead: z.string(), latticeClass: OcrClassSchema, externalText: z.string(), externalPosterior: ProbabilitySchema, externalStable: z.boolean() })
+          .strict()
+          .optional(),
       })
       .strict()
       .optional(),
@@ -891,6 +941,9 @@ export const NumericLatticeRecordSchema = z
       .strict()
       .optional(),
     cache: z.enum(['HIT', 'MISS']),
+    /** 005H (schema 1.6.0): the external recogniser's reading of the same crop, and the ensemble rule's decision. */
+    external: ExternalReadingRecordSchema.optional(),
+    ensemble: LabelEnsembleRecordSchema.optional(),
   })
   .strict()
 export type NumericLatticeRecord = z.infer<typeof NumericLatticeRecordSchema>
@@ -922,6 +975,8 @@ export const MetricEvidenceSetSchema = z
     chainRelations: z.array(ChainRelationSchema).optional(),
     /** 1.4.0: each dimension-label ink's numeric lattice, as the reader generated it from the image alone. */
     numericLattices: z.array(NumericLatticeRecordSchema).optional(),
+    /** 1.6.0: the external numeric recogniser the labels were also read with; absent when none was. */
+    recogniser: RecogniserRecordSchema.optional(),
     contentHash: z.string().regex(/^[0-9a-f]{64}$/),
   })
   .strict()

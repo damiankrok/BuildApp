@@ -48,7 +48,9 @@ describe('runLocalAnalysis is the production pipeline', () => {
 
   it('registers exactly the publishers the analyzer API registers in production, and no vision provider', () => {
     expect(localWiring().adapters.map((a) => a.id)).toEqual(productionAdapters().map((a) => a.id))
-    expect(Object.keys(localWiring())).toEqual(['adapters'])
+    // 005H: and the recogniser a bundle ships beside itself — none from the sources, which ship no worker
+    expect(Object.keys(localWiring())).toEqual(['adapters', 'recogniser'])
+    expect(localWiring().recogniser).toBeUndefined()
   })
 })
 

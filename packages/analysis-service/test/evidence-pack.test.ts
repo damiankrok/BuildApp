@@ -287,3 +287,81 @@ describe('Evidence Pack: the glyph-count and extent-conflict layers (BUILDPLAN-A
     for (const e of p.timeline.filter((x) => x.stage === 'ENVELOPE_EXTENT_CONFLICT')) expect(e.objectId).toMatch(/^(extent-conflict|completion):/)
   })
 })
+
+describe('Evidence Pack: the external recogniser (BUILDPLAN-ANALYZER-005H)', () => {
+  // Two more runs of the same house, read with the recogniser as the phone runs it (a worker per plan): one without
+  // the pack and one with it. The recogniser changes the run (its readings are recorded); the pack still changes nothing.
+  let rec = ''
+  let recPack = ''
+  beforeAll(async () => {
+    rec = join(root, 'rec')
+    recPack = join(root, 'rec-pack')
+    const args = (out: string): string[] => ['--package', join(root, 'source-package.json'), '--graph', join(root, 'observation-graph.json'), '--cache', join(root, 'cache'), '--out', out, '--recogniser']
+    const quiet = (): void => undefined
+    expect(await secondHouse(args(rec), quiet)).toBe('COMPLETED')
+    expect(await secondHouse([...args(recPack), '--evidence', join(recPack, 'evidence-pack')], quiet)).toBe('COMPLETED')
+    writeEvidencePack(['--evidence', join(recPack, 'evidence-pack')], recPack, () => undefined)
+  }, 600_000)
+
+  type Ocr = { recogniser?: { id: string; model: { sha256: string }; runtime: string; runtimeSha256?: string }; lattices: Array<Record<string, unknown>> }
+  const ocrOf = (dir: string, out: string): { ocr: Ocr; pack: ReturnType<typeof packRunDir>['pack'] } => {
+    const pack = packRunDir(dir, join(root, out), 'larchfield', { versions: {} }).pack
+    return { ocr: JSON.parse(String(pack.files.get('07-ocr-labels.json'))) as Ocr, pack }
+  }
+
+  it('with the pack and without it, a run read with the recogniser decides the same', () => {
+    expect(hashesOfDir(recPack, TIMED)).toEqual(hashesOfDir(rec, TIMED))
+    expect(summaryHashes(recPack)).toEqual(summaryHashes(rec))
+    expect(traceDecisions(recPack)).toEqual(traceDecisions(rec))
+    expect(existsSync(join(recPack, 'evidence-pack', 'manifest.json'))).toBe(true)
+  })
+
+  it('a run without the recogniser records none of it: no external reading, no event, no version', () => {
+    const { ocr, pack } = ocrOf(off, 'pack-005h-off')
+    expect(ocr.recogniser).toBeUndefined()
+    for (const l of ocr.lattices) {
+      expect(l).not.toHaveProperty('external')
+      expect(l).not.toHaveProperty('ensemble')
+    }
+    expect(pack.timeline.filter((e) => e.stage === 'EXTERNAL_OCR_CANDIDATES')).toEqual([])
+    expect(Object.keys(pack.manifest.versions).filter((k) => k.startsWith('recogniser'))).toEqual([])
+  })
+
+  it('each label read by both carries the external reading and the rule’s decision; the manifest names the recogniser, its model and its runtime', () => {
+    const { ocr, pack } = ocrOf(rec, 'pack-005h-on')
+    expect(ocr.recogniser?.id).toMatch(/^ocr\.ppocrv6-tiny-rec@[0-9a-f]{8}$/)
+    expect(ocr.recogniser?.model.sha256).toMatch(/^[0-9a-f]{64}$/)
+    expect(ocr.recogniser?.runtimeSha256).toMatch(/^[0-9a-f]{64}$/)
+    const read = ocr.lattices.filter((l) => l.external)
+    expect(read.length).toBeGreaterThan(0)
+    expect(read.length).toBe(ocr.lattices.filter((l) => l.ensemble).length)
+    for (const l of read) {
+      const x = l.external as { engine: string; modelSha256: string; topK: Array<{ text: string; p: number }>; greedy: { text: string; meanP: number }; stable: boolean; variants: Array<{ variant: string }> }
+      expect(x.engine).toBe(ocr.recogniser?.id)
+      expect(x.modelSha256).toBe(ocr.recogniser?.model.sha256)
+      expect(x.variants.map((v) => v.variant)).toEqual(['BASE', 'PAD2', 'TRIM1', 'SCALE90'])
+      for (const c of x.topK) expect(c.text).toMatch(/^[0-9]+$/)
+      const e = l.ensemble as { decision: string; latticeAsRead: string; why: string }
+      expect(['NO_VALUE', 'NOT_COMPARABLE', 'NOT_CORROBORATING', 'AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS']).toContain(e.decision)
+      expect(typeof e.latticeAsRead).toBe('string')
+      expect(e.why.length).toBeGreaterThan(0)
+    }
+    expect(pack.manifest.versions).toMatchObject({ recogniser: ocr.recogniser?.id, 'recogniser-model-sha256': ocr.recogniser?.model.sha256, 'recogniser-runtime': ocr.recogniser?.runtime, 'recogniser-runtime-sha256': ocr.recogniser?.runtimeSha256 })
+    // and readings, never the crops it read
+    expect(JSON.stringify(ocr)).not.toMatch(/base64|data:image|"pixels"|"bitmap"|"gray"|"data":\[/)
+  })
+
+  it('the external candidates are their own timeline stage, after the custom reader’s candidates and before the reading they feed', () => {
+    const { pack } = ocrOf(rec, 'pack-005h-timeline')
+    const at = (s: DecisionEvent['stage']): number => TIMELINE_STAGES.indexOf(s)
+    expect(at('OCR_SEQUENCE_CANDIDATES')).toBeLessThan(at('EXTERNAL_OCR_CANDIDATES'))
+    expect(at('EXTERNAL_OCR_CANDIDATES')).toBeLessThan(at('OCR_READING'))
+    const external = pack.timeline.filter((e) => e.stage === 'EXTERNAL_OCR_CANDIDATES')
+    expect(external.length).toBeGreaterThan(0)
+    for (const e of external) expect(e.decision).toMatch(/^EXTERNAL:[0-9]*\|[0-9,]*\|(NO_VALUE|NOT_COMPARABLE|NOT_CORROBORATING|AGREES|CONTESTS|CONTESTS_COUNT|LEADS)$/)
+    // the run without the recogniser diverges from it first at the external stage or later — never before it
+    const off0 = packRunDir(off, join(root, 'pack-005h-div-off'), 'larchfield', { versions: {} }).pack
+    const d = firstDivergence(off0.timeline, pack.timeline)
+    if (d.firstDivergence) expect(at(d.firstDivergence as DecisionEvent['stage'])).toBeGreaterThanOrEqual(at('EXTERNAL_OCR_CANDIDATES'))
+  })
+})

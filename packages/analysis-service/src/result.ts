@@ -18,6 +18,26 @@ import type { AnalysisWarning } from './warnings.js'
 /** Whether a vision provider contributed, stated rather than implied. */
 export type VisionMode = 'DETERMINISTIC_ONLY' | 'LIVE_PROVIDER' | 'REPLAYED_GRAPH'
 
+/**
+ * BUILDPLAN-ANALYZER-005H: the external numeric recogniser a run heard, when it heard one: which (id, model hash,
+ * runtime), how many label crops it read, how many readings were stable and confident, how many corroborated the
+ * lattice, how many disagreed with it (and each decision of the ensemble rule), and how long its batches took.
+ */
+export type RecogniserSummary = {
+  id: string
+  modelSha256: string
+  runtime: string
+  runtimeSha256?: string
+  crops: number
+  stable: number
+  confident: number
+  corroborating: number
+  agrees: number
+  disagreements: number
+  decisions: Record<string, number>
+  ms: number
+}
+
 export type LinkAnalysisSummary = {
   schema: 'buildapp.link-analysis-result'
   schemaVersion: '1.0.0'
@@ -72,6 +92,8 @@ export type LinkAnalysisSummary = {
   /** BUILDPLAN-ANALYZER-005A: each warning with its code and whether it limits the result (`warnings.ts`). */
   warningDetails: AnalysisWarning[]
   vision: { mode: VisionMode; provider: string | null; attempted: number; accepted: number }
+  /** 005H: present only when an external numeric recogniser read the labels. */
+  recogniser?: RecogniserSummary
   verification: {
     replay: 'BYTE_IDENTICAL'
     residuals: number

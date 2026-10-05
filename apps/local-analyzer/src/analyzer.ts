@@ -7,5 +7,5 @@
  */
 export { LOCAL_ANALYZER_PROTOCOL, OUTPUT_FILES, EXIT, parseProgramArgs, runProgram, runtimeFacts } from './program.js'
 export { runLocalAnalysis } from './local.js'
-export { localWiring } from './wiring.js'
+export { RECOGNISER_WORKER_FILE, bundledRecogniser, localWiring } from './wiring.js'
 export { installTextAdapter, nfd, rootCompare, runtimeHasIcu } from './text.js'

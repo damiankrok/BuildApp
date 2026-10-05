@@ -52,6 +52,15 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Typecheck
         run: npm run typecheck
       - name: Unit / integration / architecture tests
@@ -261,6 +270,15 @@ jobs:
         run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
       - name: Install JS dependencies
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Regenerate mobile scene bundles
         run: npm run mobile:export-scenes
       - name: Assert committed mobile bundles are current
@@ -333,6 +351,15 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Node 18.20.4 (the runtime version inside the APK)
         run: |
           curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
@@ -356,6 +383,22 @@ jobs:
             }
             console.log('fixture parity: desktop = bundle on Node 18 = bundle on Node 22', keys.map(k => k + ' ' + d[k].slice(0, 12)).join(', '))
           "
+      - name: OCR parity self-test (005H) — the bundle on Node 22, Node 18 and Node 18 without ICU against the desktop
+        run: |
+          for run in node22:node: node18:$LOCAL_ANALYZER_NODE18: node18-no-icu:$LOCAL_ANALYZER_NODE18:--require=./apps/local-analyzer/test/support/no-icu.cjs; do
+            name=${run%%:*}; rest=${run#*:}; bin=${rest%%:*}; flag=${rest#*:}
+            out="$RUNNER_TEMP/self-test-$name"
+            "$bin" $flag apps/local-analyzer/dist/main.mjs --self-test ocr --job "$(printf '%032d' 1)" --out "$out" > "local-analyzer-host/ocr-self-test-$name-events.ndjson"
+            cp "$out/self-test.json" "local-analyzer-host/ocr-self-test-$name.json"
+          done
+          node -e "
+            const d = require('./local-analyzer-host/desktop-fixture.json').ocrSelfTest
+            for (const n of ['node22', 'node18', 'node18-no-icu']) {
+              const r = require('./local-analyzer-host/ocr-self-test-' + n + '.json')
+              if (r.parity !== 'MATCH' || r.corpus.sha256 !== d.corpusSha256 || r.outputSha256 !== d.outputSha256 || r.exact !== d.exact) { console.error(n, r.parity, r.corpus.sha256, r.outputSha256, r.exact, 'desktop', JSON.stringify(d)); process.exit(1) }
+              console.log(n + ' (' + r.runtime.node + '): MATCH, corpus ' + r.corpus.sha256.slice(0, 12) + ', output ' + r.outputSha256.slice(0, 12) + ', exact ' + r.exact + '/' + r.corpus.labels + ', ' + r.timing.perLabelMeanMs + ' ms/label')
+            }
+          " | tee -a "$GITHUB_STEP_SUMMARY"
       - name: The text adapter's tables are what this ICU generates
         # Android's runtime has no ICU (nodejs-mobile builds --with-intl=none); src/text-tables.ts
         # stands in for it and must be exactly what the desktop's ICU says (about three minutes)
@@ -416,6 +459,15 @@ jobs:
         run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
       - name: Install JS dependencies
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: APKs WITHOUT the local analyzer (the size baseline; clean build)
         working-directory: apps/android
         run: |
@@ -618,19 +670,29 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Node 18.20.4 (the runtime version inside the APK)
         run: |
           curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C "$RUNNER_TEMP"
           echo "LOCAL_ANALYZER_NODE18=$RUNNER_TEMP/node-v18.20.4-linux-x64/bin/node" >> "$GITHUB_ENV"
       - name: The live URL through the production pipeline (must complete)
+        # read with the external recogniser (005H), as the phone reads: the bundle comparison below is like for like
         run: |
           mkdir -p second-house
-          npm run -s analysis:second-house -- --url "$SECOND_HOUSE_URL" --out second-house/live --cache .cache/second-house-bytes --expect COMPLETED --tolerate-source-outage | tee second-house/live.log
+          npm run -s analysis:second-house -- --url "$SECOND_HOUSE_URL" --out second-house/live --cache .cache/second-house-bytes --expect COMPLETED --tolerate-source-outage --recogniser | tee second-house/live.log
       - name: Its sealed evidence, replayed offline, gives the same candidate, model and scene
         run: |
           if [ ! -f second-house/live/result-summary.json ]; then echo "::warning::no completed live run to replay"; exit 0; fi
           OFFLINE=1 npm run -s analysis:second-house -- --package second-house/live/source-package.json --graph second-house/live/observation-graph.json \
-            --out second-house/replay --cache .cache/second-house-bytes --expect COMPLETED --same-as second-house/live/result-summary.json
+            --out second-house/replay --cache .cache/second-house-bytes --expect COMPLETED --same-as second-house/live/result-summary.json --recogniser
       - name: The garage is a gable, not a flat slab (INTEGRATION-003B regression, evaluation only)
         run: |
           if [ ! -f second-house/live/model.json ]; then echo "::warning::no completed live run to judge"; exit 0; fi
@@ -999,6 +1061,72 @@ jobs:
       - name: Numeric reader (lattice, corpus, metric adversaries) under the 005F class bars
         run: npx vitest run packages/source-metrics/test/numeric-lattice.test.ts packages/source-metrics/test/ocr-metric-adversaries.test.ts packages/reconstruction/test/failure-codes.test.ts
 
+  analyzer-external-recogniser:
+    # BUILDPLAN-ANALYZER-005H. The external numeric recogniser — PaddleOCR
+    # PP-OCRv6_tiny_rec through ONNX Runtime Web 1.30.0 (WebAssembly, one
+    # thread) — beside the custom reader, never instead of it.
+    # - integrity: model, dictionary, WebAssembly and loader are the pinned
+    #   bytes (SHA-256 and size), the npm version is exact, the licences ship,
+    #   and nothing is fetched at run time;
+    # - non-circularity: the recogniser sees crops only, cut before the metric
+    #   solution; no runtime in source-metrics, reconstruction, geometry or the
+    #   model; with no recogniser the custom reader's bytes are reproduced;
+    # - the synthetic quality gate on 005G's 672 labels and protocol (drawn-box
+    #   crops): exact >= 650, confident-wrong <= 2. The production path (the
+    #   custom reader's token crops) is measured beside it and recorded, not
+    #   gated: the token finder in front of the recogniser is not its to answer.
+    name: Analyzer / external numeric recogniser
+    if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
+      - name: Pinned bytes, exact runtime, licences, no network; the P2 rule and the OFF identity; non-circularity
+        run: npx vitest run packages/numeric-recogniser-ort packages/source-metrics/test/recogniser-ensemble.test.ts tests/architecture/recogniser.test.ts
+      - name: Synthetic quality gate (005G's 672 labels and protocol)
+        run: |
+          mkdir -p external-recogniser
+          npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop drawn --check --out external-recogniser/synthetic-drawn.json
+      - name: The production path's crops (the custom reader's tokens; recorded, not gated)
+        run: npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop pass --out external-recogniser/synthetic-pass.json
+      - name: Summary
+        if: always() && !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence)
+        run: |
+          {
+            echo "### External numeric recogniser — synthetic quality (672 labels)"; echo
+            for f in synthetic-drawn synthetic-pass; do
+              [ -f "external-recogniser/$f.json" ] && node -e "
+                const r = require('./external-recogniser/$f.json')
+                console.log('- ' + r.crop + ': ' + (r.pass ? 'PASS' : 'below gate') + ' — exact ' + r.all.exact + '/' + r.all.n + ', confident-wrong ' + r.all.confidentWrong + ', top-3 ' + r.all.top3 + ', top-5 ' + r.all.top5 + ', false high confidence ' + r.all.falseHighConfidence + ', tokenised ' + r.all.found + '/' + r.all.n)
+              "
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload the synthetic quality record
+        if: always() && !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence)
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-recogniser
+          if-no-files-found: ignore
+          retention-days: 30
+          path: external-recogniser/**
+
   analyzer-evidence-pack:
     # BUILDPLAN-ANALYZER-005D §8–§20. The Analyzer Evidence Pack.
     # - ON == OFF: the same run with evidence mode on and off decides the same
@@ -1022,6 +1150,15 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Evidence Pack ON/OFF identity, determinism, sidecars, bounds, no publisher raster
         run: npx vitest run packages/analysis-service/test/evidence-pack.test.ts tests/architecture/generalization.test.ts
       - name: Committed packs match their manifests

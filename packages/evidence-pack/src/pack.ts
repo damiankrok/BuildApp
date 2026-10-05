@@ -339,6 +339,9 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
           style: l.segmentation?.style ?? null,
           segmentation: l.segmentation ? { counts: l.segmentation.counts, counterCutsMoved: l.segmentation.counterCutsMoved, counterCutsPruned: l.segmentation.counterCutsPruned, segmentations: l.segmentation.segmentations, cellsScored: l.segmentation.cellsScored, truncated: l.segmentation.truncated } : null,
           tail: (l.tail ?? []).map((q) => ({ text: q.text, valueCm: q.valueCm, imageScore: q.imageScore, nonTop: q.nonTop.length, segmentation: q.pathIds[0] ?? null, origin: 'AMBIGUITY_TAIL' })),
+          // 005H: the external recogniser's reading of the same crop and what the ensemble rule made of the two.
+          ...(l.external ? { external: { engine: l.external.engine, modelSha256: l.external.modelSha256, runtime: l.external.runtime, topK: l.external.topK, greedy: l.external.greedy, stable: l.external.stable, variants: l.external.variants } } : {}),
+          ...(l.ensemble ? { ensemble: { decision: l.ensemble.decision, asRead: l.ensemble.asRead, ocrClass: l.ensemble.ocrClass, latticeAsRead: l.ensemble.lattice.asRead, latticeClass: l.ensemble.lattice.ocrClass, external: l.ensemble.external, rival: l.ensemble.rival ?? null, why: l.ensemble.why } } : {}),
           span: o ? { observationId: o.id, chainId: o.chainId, from: o.fromPx, to: o.toPx, spanPx: o.spanPx } : null,
           selected: chosen ? { by: chosen.by, text: chosen.text ?? null, valueCm: chosen.valueCm ?? null, imageScore: chosen.imageScore ?? null, imageRank: chosen.imageRank ?? null, metricSupportResidualPx: chosen.metricResidualPx ?? null } : null,
           refutedBy: o?.ocr?.refutedBy ?? null,
@@ -351,6 +354,7 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
         frameId: selected?.frameId ?? null,
         note: 'boxes and readings only; the glyphs themselves are not reproduced',
         latticeRecorded: (metrics.numericLattices ?? []).length > 0,
+        ...(metrics.recogniser ? { recogniser: metrics.recogniser } : {}),
         legend: { CLEAR: classColour('CLEAR'), SUPPORTED: classColour('SUPPORTED'), AMBIGUOUS: classColour('AMBIGUOUS'), LOW_QUALITY: classColour('LOW_QUALITY') },
         tokens: shown.items.map((t) => ({ id: t.id, text: t.text, orientation: t.orientation ?? null, box: t.box, pageVote: t.pageVote ?? null, confidence: t.confidence ?? null, nearChain: nearChain(t), glyphs: (t.glyphs ?? []).map((g) => ({ char: g.char, score: round(g.score), alternatives: (g.alternatives ?? []).slice(0, 3).map((a) => ({ char: a.char, score: round(a.score) })) })) })),
         omitted: shown.omitted,
@@ -383,6 +387,12 @@ export function buildEvidencePack(run: RunRecord): EvidencePack {
       const others = l ? l.sequences.filter((q) => !q.asRead).map((q) => q.text) : (o.valueAlternatives ?? []).map((a) => a.text)
       const set = [...new Set(others)].sort()
       event('OCR_SEQUENCE_CANDIDATES', key, `CANDIDATES:${asRead}|${set.join(',')}`, l ? `${l.ocrClass} (p ${round(l.asReadP, 3)}); read ${l.rawTopText} by the 005D reader; ${l.sequences.length} image-only values` : `005D reading; ${set.length} one-glyph value(s)`, { supportIds: [o.textRegionId] })
+      // 005H: the external recogniser's candidates for the same ink, and the ensemble's decision — recorded only when
+      // a recogniser read the labels, so a run without one has no event here.
+      if (l?.external && l.ensemble) {
+        const x = l.external
+        event('EXTERNAL_OCR_CANDIDATES', key, `EXTERNAL:${x.topK[0]?.text ?? ''}|${x.topK.slice(1).map((c) => c.text).join(',')}|${l.ensemble.decision}`, `${x.engine}: ${x.topK.map((c) => `${c.text} (${round(c.p, 4)})`).join(', ') || 'no digit'}; greedy ${x.greedy.text || '—'} (mean p ${round(x.greedy.meanP, 4)}); ${x.stable ? 'stable' : 'unstable'} under the bracket (${x.variants.map((v) => v.top || '—').join(' / ')}); ${l.ensemble.why}`, { supportIds: [o.textRegionId], ...(l.ensemble.decision === 'LEADS' || l.ensemble.decision === 'CONTESTS' ? { reversible: true } : {}) })
+      }
     }
   }
   for (const frameId of metricFrames) {

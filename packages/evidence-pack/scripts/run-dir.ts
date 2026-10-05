@@ -34,6 +34,14 @@ export function versionsOfRun(record: Omit<RunRecord, 'provenance'>, extra: Reco
   const out: Record<string, string> = {}
   for (const e of record.metrics?.extractors ?? []) out[e.name] = e.version
   if (record.metrics?.schemaVersion) out['metric-evidence-schema'] = record.metrics.schemaVersion
+  // 005H: the external recogniser a run read with — its id, model, runtime and runtime binary — named in the manifest.
+  const recogniser = record.metrics?.recogniser
+  if (recogniser) {
+    out.recogniser = recogniser.id
+    out['recogniser-model-sha256'] = recogniser.model.sha256
+    out['recogniser-runtime'] = recogniser.runtime
+    if (recogniser.runtimeSha256) out['recogniser-runtime-sha256'] = recogniser.runtimeSha256
+  }
   if (record.pkg.adapter) out[`adapter:${record.pkg.adapter.id}`] = record.pkg.adapter.version
   for (const [k, v] of Object.entries(record.summary?.analyzer ?? {})) out[`analyzer-${k}`] = String(v)
   const resolver = record.trace?.entries?.map((e) => e.counts?.resolverVersion).find((v) => v !== undefined)

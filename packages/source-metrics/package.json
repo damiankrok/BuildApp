@@ -6,7 +6,17 @@
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
-  "exports": { ".": "./src/index.ts" },
-  "dependencies": { "@buildapp/source-common": "*", "@buildapp/source-cv": "*", "@buildapp/source-observations": "*", "zod": "^3.25.76" },
-  "devDependencies": { "@buildapp/synthetic-drawings": "*" }
+  "exports": {
+    ".": "./src/index.ts",
+    "./recogniser": "./src/recogniser.ts"
+  },
+  "dependencies": {
+    "@buildapp/source-common": "*",
+    "@buildapp/source-cv": "*",
+    "@buildapp/source-observations": "*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@buildapp/synthetic-drawings": "*"
+  }
 }

@@ -34,7 +34,9 @@ data class InstalledRuntime(val dir: File, val entry: File, val manifest: LocalR
 
 /**
  * The production analyzer bundle ships inside the APK as assets
- * (`local-analyzer/analyzer.mjs`, `main.mjs`, `manifest.json`). Node reads
+ * (`local-analyzer/analyzer.mjs`, `main.mjs`, `manifest.json`, and since
+ * 005H the external recogniser's `ocr-worker.mjs`, ONNX Runtime Web's
+ * `.wasm` and loader, and `models/` with the pinned model). Node reads
  * files, not APK entries, so before a job the bundle is copied into the app's
  * private storage — once per bundle version, into a folder named by the
  * bundle's own hash — and every file is checked against the sha256 the
@@ -68,7 +70,9 @@ class LocalRuntimeFiles(
             require(NAME.matches(name)) { "unexpected file name in the analyzer manifest" }
             val target = File(dir, name)
             if (target.isFile && target.length() == info.bytes && sha256Of(target) == info.sha256) continue
-            val temp = File(dir, ".$name.tmp")
+            val parent = target.parentFile ?: dir
+            if (!parent.isDirectory && !parent.mkdirs()) throw IOException("cannot create the runtime folder for $name")
+            val temp = File(parent, ".${target.name}.tmp")
             val stream = openAsset("$ASSET_DIR/$name") ?: throw IOException("the APK lacks $ASSET_DIR/$name")
             stream.use { input -> temp.outputStream().use { input.copyTo(it) } }
             val actual = sha256Of(temp)
@@ -85,7 +89,8 @@ class LocalRuntimeFiles(
     companion object {
         const val ASSET_DIR = "local-analyzer"
         private val SHA256 = Regex("^[0-9a-f]{64}$")
-        private val NAME = Regex("^[a-z0-9-]+\\.(mjs|json)$")
+        /** A file the bundle ships: a plain name, or one under `models/` (005H); never a path that climbs out. */
+        private val NAME = Regex("^(models/)?[A-Za-z0-9][A-Za-z0-9_.-]*\\.(mjs|json|wasm|onnx)$")
         private val JSON = Json { ignoreUnknownKeys = true }
 
         fun sha256Of(file: File): String {

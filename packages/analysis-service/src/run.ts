@@ -24,8 +24,8 @@ import { analyzeSourcePackage } from '@buildapp/source-analyzer'
 import type { SourceObservationGraph } from '@buildapp/source-observations'
 import { nullVisionReasoner } from '@buildapp/source-vision'
 import type { VisionReasoner } from '@buildapp/source-vision'
-import { extractMetricEvidence } from '@buildapp/source-metrics'
-import type { MetricEvidenceSet } from '@buildapp/source-metrics'
+import { extractMetricEvidenceAsync } from '@buildapp/source-metrics'
+import type { LabelRecogniser, MetricEvidenceSet } from '@buildapp/source-metrics'
 import { SOLVER_V2_VERSION, isReconstructionFailure, reconstructV2, verifyReplay } from '@buildapp/reconstruction'
 import type { PlanDiagnosticsReport, ReconstructionV2Phase, ReconstructionV2Result } from '@buildapp/reconstruction'
 import { serializeModel } from '@buildapp/model'
@@ -41,7 +41,7 @@ import type { AnalysisIdentity } from './identity.js'
 import { anySignal } from './signals.js'
 import { progressEvent } from './stages.js'
 import type { AnalysisProgress, AnalysisStage } from './stages.js'
-import type { LinkAnalysisResult, VisionMode } from './result.js'
+import type { LinkAnalysisResult, RecogniserSummary, VisionMode } from './result.js'
 import { warningsOf } from './warnings.js'
 
 export const ANALYSIS_SERVICE_VERSION = '1.1.0' as const
@@ -61,6 +61,13 @@ export type AnalysisOptions = {
   probeResolutionCandidates?: boolean
   /** A vision provider, server-side only. Absent: the deterministic analyzer alone, and the result says so. */
   vision?: VisionReasoner
+  /**
+   * BUILDPLAN-ANALYZER-005H: an external numeric recogniser, heard as a second witness beside the numeric lattice on
+   * every plan's dimension labels (`extractMetricEvidenceAsync`). Absent — the default — the lattice reads alone, and
+   * the run is byte for byte what it was before 005H. The run releases it as soon as the printed dimensions are read,
+   * before reconstruction begins, and the result says which recogniser read and what it decided.
+   */
+  recogniser?: LabelRecogniser
   /** Override the derived identity. The CLI does, to reproduce a sealed candidate under its sealed name. */
   identity?: Partial<AnalysisIdentity>
   signal?: AbortSignal
@@ -319,10 +326,35 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         checkpoint.tick(w)
       },
     }
-    const metrics = extractMetricEvidence({ checkpoint: metricCheckpoint, sourcePackageId: pkg.id, sourcePackageHash: pkg.contentHash, graph, slug: identity.slug, raster, specifications: pkg.publishedSpecifications, specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications) })
+    // 005H: the external recogniser reads each plan's labels in one batch, under its own sub-phase; whatever happens,
+    // it is released here — its worker and its memory gone — before the solver starts.
+    let recogniserMs = 0
+    let metrics: MetricEvidenceSet
+    try {
+      metrics = await extractMetricEvidenceAsync({
+        checkpoint: metricCheckpoint,
+        sourcePackageId: pkg.id,
+        sourcePackageHash: pkg.contentHash,
+        graph,
+        slug: identity.slug,
+        raster,
+        specifications: pkg.publishedSpecifications,
+        specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications),
+        recogniser: options.recogniser,
+        signal,
+        onRecognise: (e) => {
+          if (e.done === 0) recogniserMs -= clock()
+          checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } })
+          if (e.done === e.total) recogniserMs += clock()
+        },
+      })
+    } finally {
+      await options.recogniser?.release?.()
+    }
     metricsSoFar = metrics
     throwIfAborted(signal)
     const metricExtractionMs = lap()
+    const recogniser = options.recogniser ? recogniserSummaryOf(options.recogniser, metrics, Math.round(recogniserMs)) : undefined
     trace.record('EXTRACTING_OBSERVATIONS', 'METRIC_EVIDENCE', 'PASSED', {
       evidence: metrics.evidence.length,
       chains: metrics.chains.length,
@@ -331,6 +363,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       levelDatums: metrics.evidence.filter((e) => e.kind === 'LEVEL_DATUM').length,
       scalesRefused: metrics.unresolved.filter((u) => u.id.startsWith('gap-scale-implausible')).length,
       undecodable: metrics.unresolved.filter((u) => u.id.startsWith('gap-undecodable')).length,
+      ...(recogniser ? { externalReadings: recogniser.crops, externalCorroborating: recogniser.corroborating, externalDisagreements: recogniser.disagreements } : {}),
     })
 
     // --- REGISTERING_VIEWS … BUILDING_MODEL (the solver reports its own phases)
@@ -477,6 +510,7 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
       warnings: warningDetails.map((w) => w.message),
       warningDetails,
       vision: { mode: visionMode, provider: visionProvider, attempted: visionAttempted, accepted: visionAccepted },
+      ...(recogniser ? { recogniser } : {}),
       verification: {
         replay: 'BYTE_IDENTICAL',
         residuals: reconstruction.residuals.length,
@@ -520,6 +554,31 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   } finally {
     if (heartbeat) clearInterval(heartbeat)
     options.onPhaseStats?.(checkpoint.stats())
+  }
+}
+
+/**
+ * 005H: what the external recogniser read and what the ensemble rule made of it, counted off the sealed evidence (so
+ * the counts are the evidence's), with the time its batches took (diagnostics; never in a hash).
+ */
+export function recogniserSummaryOf(recogniser: Pick<LabelRecogniser, 'id' | 'model' | 'runtime' | 'runtimeSha256'>, metrics: MetricEvidenceSet, ms: number): RecogniserSummary {
+  const read = (metrics.numericLattices ?? []).filter((l) => l.external)
+  const decisions: Record<string, number> = {}
+  for (const l of read) if (l.ensemble) decisions[l.ensemble.decision] = (decisions[l.ensemble.decision] ?? 0) + 1
+  const count = (...ds: string[]): number => ds.reduce((a, d) => a + (decisions[d] ?? 0), 0)
+  return {
+    id: recogniser.id,
+    modelSha256: recogniser.model.sha256,
+    runtime: recogniser.runtime,
+    ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}),
+    crops: read.length,
+    stable: read.filter((l) => l.external?.stable).length,
+    confident: read.filter((l) => l.ensemble?.external.confident).length,
+    corroborating: count('AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS'),
+    agrees: count('AGREES'),
+    disagreements: count('CONTESTS', 'CONTESTS_COUNT', 'LEADS'),
+    decisions: Object.fromEntries(Object.entries(decisions).sort(([a], [b]) => (a < b ? -1 : 1))),
+    ms,
   }
 }
 

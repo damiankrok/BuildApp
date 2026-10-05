@@ -28,11 +28,10 @@
  * `candidate.json`. The source bytes never leave `--work/bytes`, which is
  * removed before any terminal event is written.
  */
-import { readSync, writeSync } from 'node:fs'
+import { readSync } from 'node:fs'
 import { mkdir, rename, writeFile } from 'node:fs/promises'
 import { arch, cpus, platform, totalmem } from 'node:os'
 import { isAbsolute, join } from 'node:path'
-import { Socket } from 'node:net'
 import { ANALYSIS_SERVICE_VERSION, AnalysisError, toAnalysisError } from '@buildapp/analysis-service'
 import type { AnalysisErrorCode, AnalysisFailure, AnalysisProgress, AnalysisTelemetry, AnalysisTimings, AnalysisTrace, DiagnosticsBundle, LinkAnalysisSummary, PhaseStats } from '@buildapp/analysis-service'
 import { stableJson } from '@buildapp/source-common'
@@ -45,6 +44,7 @@ import { memorySample } from './memory.js'
 import type { MemorySample } from './memory.js'
 import { installTextAdapter, textRefusal } from './text.js'
 import type { TextSupport } from './text.js'
+import { eventSink, listenForCancel } from './pipes.js'
 
 /**
  * Bumped when the event or argument shape changes; the app refuses a runtime that speaks another.
@@ -56,8 +56,12 @@ import type { TextSupport } from './text.js'
  */
 export const LOCAL_ANALYZER_PROTOCOL = 3 as const
 
-/** What this runtime can do beyond its protocol, for additive changes that need no protocol bump. */
-export const LOCAL_ANALYZER_CAPABILITIES = ['telemetry.v1', 'control.poll'] as const
+/**
+ * What this runtime can do beyond its protocol, for additive changes that need no protocol bump. `recogniser.v1`
+ * (005H): `hello` names the external numeric recogniser the job reads with (or null), telemetry may carry the
+ * `OCR_EXTERNAL` sub-phase, and the performance record carries the recogniser's batches.
+ */
+export const LOCAL_ANALYZER_CAPABILITIES = ['telemetry.v1', 'control.poll', 'recogniser.v1'] as const
 
 export const OUTPUT_FILES = { summary: 'result.json', scene: 'scene.json', model: 'model.json', candidate: 'candidate.json' } as const
 
@@ -113,18 +117,18 @@ export type RunMetrics = {
 }
 
 export type LocalAnalyzerEvent =
-  | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; capabilities: readonly string[]; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string } }
+  | { type: 'hello'; protocol: typeof LOCAL_ANALYZER_PROTOCOL; capabilities: readonly string[]; jobId: string; pid: number; runtime: RuntimeFacts; analyzer: { service: string; solver: string }; recogniser: { id: string; modelSha256: string; runtime: string } | null }
   | { type: 'progress'; event: AnalysisProgress; elapsedMs: number; rssBytes: number }
   | { type: 'telemetry'; event: AnalysisTelemetry; rssBytes: number }
   | { type: 'done'; summary: LinkAnalysisSummary; files: typeof OUTPUT_FILES; metrics: RunMetrics; sources: SourceHashes; diagnostics?: DiagnosticsFiles }
   | { type: 'failed'; code: AnalysisErrorCode | 'BAD_ARGUMENTS' | 'OUTPUT_FAILED' | 'TEXT_NOT_SUPPORTED_ON_DEVICE'; message: string; metrics: RunMetrics; failure?: AnalysisFailure; diagnostics?: DiagnosticsFiles }
   | { type: 'cancelled'; metrics: RunMetrics; diagnostics?: DiagnosticsFiles }
 
+
 export const EXIT = { DONE: 0, FAILED: 1, CANCELLED: 2, BAD_ARGUMENTS: 3 } as const
 
 const JOB_ID = /^[0-9a-f]{32}$/
 
-const PAUSE = new Int32Array(new SharedArrayBuffer(4))
 
 export class ProgramArgsError extends Error {
   constructor(message: string) {
@@ -189,47 +193,6 @@ async function writeAtomically(dir: string, name: string, text: string): Promise
 }
 
 /**
- * Where events go: a file descriptor the app handed over, or this process's
- * stdout. The descriptor stays the app's: it is never closed here, because the
- * app closes it itself once the runtime has returned, and that close is what
- * tells its reader the program is over.
- */
-function eventSink(fd: number | null): { emit: (event: LocalAnalyzerEvent) => void; emitBestEffort: (event: LocalAnalyzerEvent) => void } {
-  if (fd === null) {
-    const write = (event: LocalAnalyzerEvent): void => void process.stdout.write(`${JSON.stringify(event)}\n`)
-    return { emit: write, emitBestEffort: write }
-  }
-  const writeFrom = (line: Buffer, from: number): void => {
-    let at = from
-    while (at < line.length) {
-      try {
-        at += writeSync(fd, line, at, line.length - at)
-      } catch (error) {
-        // a non-blocking descriptor whose buffer is full: wait a moment and write the rest
-        if ((error as NodeJS.ErrnoException).code !== 'EAGAIN') throw error
-        Atomics.wait(PAUSE, 0, 0, 2)
-      }
-    }
-  }
-  return {
-    emit: (event) => writeFrom(Buffer.from(`${JSON.stringify(event)}\n`, 'utf8'), 0),
-    // A heartbeat the app is too slow to take is dropped, never waited for: a stalled reader must
-    // not stall the analysis. A line once started is finished, so the app never sees half of one.
-    emitBestEffort: (event) => {
-      const line = Buffer.from(`${JSON.stringify(event)}\n`, 'utf8')
-      let first: number
-      try {
-        first = writeSync(fd, line, 0, line.length)
-      } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === 'EAGAIN') return
-        throw error
-      }
-      if (first < line.length) writeFrom(line, first)
-    },
-  }
-}
-
-/**
  * The control pipe, read from inside the analysis's own loops. A computing
  * stage never yields to the event loop, so the socket below never sees a
  * `cancel` written while the analyzer computes; this reads the same pipe
@@ -259,24 +222,6 @@ function controlPoller(fd: number | null, controller: AbortController): () => bo
     text = (text + buffer.toString('utf8', 0, n)).slice(-64)
     return text.split('\n').some((line) => line.trim() === 'cancel') ? cancel() : false
   }
-}
-
-/** A `cancel` line, or the pipe closing, aborts the run. Returns a function that stops listening. */
-function listenForCancel(fd: number | null, controller: AbortController): () => void {
-  if (fd === null) return () => undefined
-  const socket = new Socket({ fd, readable: true, writable: false })
-  let text = ''
-  const cancel = (): void => {
-    if (!controller.signal.aborted) controller.abort(new DOMException('the analysis was cancelled', 'AbortError'))
-  }
-  socket.on('data', (chunk: Buffer) => {
-    text += chunk.toString('utf8')
-    if (text.split('\n').some((line) => line.trim() === 'cancel')) cancel()
-    text = text.slice(-64)
-  })
-  socket.on('end', cancel)
-  socket.on('error', cancel)
-  return () => socket.destroy()
 }
 
 /** The diagnostics as written: the plan digest is dropped before the bundle is allowed to grow past its bound. */
@@ -345,7 +290,7 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   }
   const started = performance.now()
   const elapsed = (): number => Math.round(performance.now() - started)
-  const sink = eventSink(args.eventsFd)
+  const sink = eventSink<LocalAnalyzerEvent>(args.eventsFd)
   const controller = new AbortController()
   const stopListening = listenForCancel(args.controlFd, controller)
   const pollCancel = controlPoller(args.controlFd, controller)
@@ -353,16 +298,19 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
   const phases = (): RunMetrics['phases'] => phaseStats.map((p) => ({ phaseId: p.phaseId, durationMs: p.durationMs, maxTickGapMs: p.maxTickGapMs, workDone: p.workDone, workTotal: p.workTotal }))
   const metrics = (extra: Partial<RunMetrics> = {}): RunMetrics => ({ elapsedMs: elapsed(), memory: memorySample(), phases: phases(), ...extra })
   // What each phase cost, beside the trace: never hashed, kept on failures and cancels too.
-  const performanceRecord = (): Record<string, unknown> => ({ node: process.version, arch: arch(), elapsedMs: elapsed(), memory: memorySample(), phases: phaseStats })
+  // 005H: this job's external recogniser (one per job; its worker exists only while a batch is read).
+  const recogniser = wiring.recogniser?.()
+  const performanceRecord = (): Record<string, unknown> => ({ node: process.version, arch: arch(), elapsedMs: elapsed(), memory: memorySample(), phases: phaseStats, ...(recogniser?.stats ? { recogniser: { id: recogniser.id, batches: recogniser.stats() } } : {}) })
 
   try {
     // before any analyzer code runs: ICU's text behaviour where the runtime lacks ICU (src/text.ts)
     const text = installTextAdapter()
-    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, capabilities: LOCAL_ANALYZER_CAPABILITIES, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(text), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION } })
+    sink.emit({ type: 'hello', protocol: LOCAL_ANALYZER_PROTOCOL, capabilities: LOCAL_ANALYZER_CAPABILITIES, jobId: args.jobId, pid: process.pid, runtime: runtimeFacts(text), analyzer: { service: ANALYSIS_SERVICE_VERSION, solver: SOLVER_V2_VERSION }, recogniser: recogniser ? { id: recogniser.id, modelSha256: recogniser.model.sha256, runtime: recogniser.runtime } : null })
     const output = await runLocalAnalysis({
       url: args.url,
       workDir: args.workDir,
       wiring,
+      recogniser,
       jobId: args.jobId,
       signal: controller.signal,
       now: options.now,
@@ -412,5 +360,7 @@ export async function runProgram(argv: readonly string[], wiring: LocalWiring, o
     return EXIT.FAILED
   } finally {
     stopListening()
+    await recogniser?.release?.()
   }
 }
+

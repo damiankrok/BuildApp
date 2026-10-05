@@ -127,6 +127,9 @@ export type LatticeJson = {
   tail?: Array<{ text: string; valueCm: number; logP: number; imageScore: number; nonTop: Array<{ index: number; top: string; chosen: string; ratio: number }>; pathIds: string[] }>
   segmentation?: { style: { pitch: number | null; samples: number }; counts: Array<{ variant: string; reader: number; anchor: number; alternatives: number[]; decisive: boolean; widthAmbiguous: boolean }>; counterCutsMoved: number; counterCutsPruned: number; segmentations: number; cellsScored: number; truncated: number }
   cache?: string
+  /** 005H: the external recogniser's reading of the same crop (candidates), and the P2 ensemble's decision. */
+  external?: { engine: string; modelSha256: string; runtime: string; topK: Array<{ text: string; p: number }>; greedy: { text: string; meanP: number }; stable: boolean; variants: Array<{ variant: string; top: string; p: number }> }
+  ensemble?: { decision: string; external: { text: string; valueCm?: number; posterior: number; meanP: number; stable: boolean; confident: boolean }; lattice: { asRead: string; valueCm?: number; ocrClass: string }; asRead: string; asReadValueCm?: number; ocrClass: string; rival?: { text: string; valueCm: number; witness: string }; why: string }
 }
 export type MetricsJson = {
   schemaVersion?: string
@@ -138,6 +141,8 @@ export type MetricsJson = {
   chainRelations?: Array<{ kind: string; frameId: string; fromChainId: string; toChainId: string; check?: string; sum?: Json; span?: Json }>
   ocrTokens?: OcrTokenJson[]
   numericLattices?: LatticeJson[]
+  /** 005H: the external numeric recogniser the labels were also read with. */
+  recogniser?: { id: string; model: { name: string; sha256: string }; runtime: string; runtimeSha256?: string }
   coordinateRegistrations?: Array<{ frameId: string; plane: string; metresPerPixelX: number; metresPerPixelY: number; anchors?: unknown[] }>
   evidence?: Array<{ id: string; kind: string; frameId: string; value: number; unit: string; origin?: string; rawText?: string; textBox?: Rect }>
 }
@@ -206,6 +211,7 @@ export const TIMELINE_STAGES = [
   'DIMENSION_TICK_CLASSIFICATION',
   'GLYPH_COUNT_HYPOTHESES',
   'OCR_SEQUENCE_CANDIDATES',
+  'EXTERNAL_OCR_CANDIDATES',
   'OCR_READING',
   'LABEL_BINDING',
   'DIMENSION_HIERARCHY',

@@ -7,7 +7,8 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./ocr-corpus": "./src/ocr-corpus.ts"
   },
   "dependencies": {
     "@buildapp/source-common": "*",

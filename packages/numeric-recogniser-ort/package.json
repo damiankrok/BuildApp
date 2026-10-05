@@ -1,0 +1,18 @@
+{
+  "name": "@buildapp/numeric-recogniser-ort",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BUILDPLAN-ANALYZER-005H: the external numeric recogniser — PaddleOCR PP-OCRv6_tiny_rec (official ONNX, pinned by SHA-256) on ONNX Runtime Web 1.30.0 (WebAssembly, one thread) — behind source-metrics' runtime-free LabelRecogniser seam. Image crops in, candidate readings out; no scale, no chain, no network. The only package that may import onnxruntime-web.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client-entry.ts",
+    "./worker": "./src/worker.ts"
+  },
+  "dependencies": {
+    "@buildapp/source-metrics": "*",
+    "onnxruntime-web": "1.30.0"
+  }
+}

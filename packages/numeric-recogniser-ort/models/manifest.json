@@ -1,0 +1,56 @@
+{
+  "schema": "buildapp.numeric-recogniser-manifest",
+  "version": 1,
+  "default": "PP-OCRv6_tiny_rec",
+  "recogniser": {
+    "id": "ocr.ppocrv6-tiny-rec@9ef676d6",
+    "runtime": "onnxruntime-web@1.30.0/wasm-simd/1-thread"
+  },
+  "models": {
+    "PP-OCRv6_tiny_rec": {
+      "upstream": {
+        "host": "huggingface.co",
+        "repo": "PaddlePaddle/PP-OCRv6_tiny_rec_onnx",
+        "commit": "2612ab37152ae0a677521bae4e1e3d4fb4cf7c30",
+        "file": "inference.onnx"
+      },
+      "file": "PP-OCRv6_tiny_rec.onnx",
+      "sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+      "bytes": 4462639,
+      "dictionary": {
+        "source": "inference.yml",
+        "sourceSha256": "66170210bad538e83fff3c4a3867e547d6bf20b50d64b20347c4b913f3034ea1",
+        "key": "PostProcess.character_dict",
+        "file": "PP-OCRv6_tiny_rec.dict.json",
+        "sha256": "9a8199f82393355db5423a9ac7ed6f821350c17237a7c9d8fc40566bc3eafd6b",
+        "entries": 6904,
+        "classes": 6906
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "evidence": "Hugging Face API cardData.license = apache-2.0 at the pinned commit (005G licensing-matrix.md)",
+        "notice": "licenses/PaddleOCR-PP-OCRv6-NOTICE.txt",
+        "text": "licenses/PaddleOCR-LICENSE-Apache-2.0.txt"
+      },
+      "trainingData": "UNDISCLOSED: PaddleOCR does not publish its recognition training sets per dataset; whether any non-commercial data was used is unverified. A named residual data-provenance risk (005G), not a licence finding."
+    }
+  },
+  "runtime": {
+    "package": "onnxruntime-web",
+    "version": "1.30.0",
+    "license": {
+      "spdx": "MIT",
+      "text": "licenses/onnxruntime-LICENSE.txt",
+      "notices": "licenses/onnxruntime-ThirdPartyNotices.txt"
+    },
+    "files": {
+      "ort-wasm-simd-threaded.wasm": { "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2", "bytes": 14239897 },
+      "ort-wasm-simd-threaded.mjs": { "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b", "bytes": 24381 }
+    }
+  },
+  "licenses": {
+    "onnxruntime-LICENSE.txt": { "source": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.30.0/LICENSE", "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c" },
+    "onnxruntime-ThirdPartyNotices.txt": { "source": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.30.0/ThirdPartyNotices.txt", "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3" },
+    "PaddleOCR-LICENSE-Apache-2.0.txt": { "source": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/v3.0.0/LICENSE", "sha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e" }
+  }
+}

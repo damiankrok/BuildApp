@@ -12,6 +12,8 @@ import com.buildplan.preview.analyzer.local.LocalAvailability
 import com.buildplan.preview.analyzer.local.LocalJobs
 import com.buildplan.preview.analyzer.local.LocalRuntimeFiles
 import com.buildplan.preview.analyzer.local.MainScheduler
+import com.buildplan.preview.analyzer.local.OcrSelfTest
+import com.buildplan.preview.analyzer.local.OcrSelfTestState
 import com.buildplan.preview.analyzer.local.ServiceRuntimeHost
 import com.buildplan.preview.scene.DownloadedScenes
 import java.io.File
@@ -51,6 +53,8 @@ import org.junit.runner.RunWith
  *   liveTimeoutMinutes    default 40
  *   liveReportName        the live run's report name, default `live` (a second
  *                         project is run under its own name, BUILDAPP-03Y2G)
+ *   expectedOcrCorpusSha256, expectedOcrOutputSha256
+ *                         005H: the desktop's OCR parity self-test hashes
  *
  * Every run writes a JSON report to the app's external files folder
  * (`local-analyzer-reports/`), which CI pulls with adb.
@@ -136,6 +140,54 @@ class LocalAnalyzerDeviceTest {
         writeReport("cancel-compute", run)
         assertTrue("expected Cancelled, got ${run.final}", run.final is AnalysisState.Cancelled)
         assertScratchGone()
+    }
+
+    /**
+     * 005H: the external numeric recogniser ON THIS DEVICE — the APK's own bundle, its ONNX Runtime WebAssembly and
+     * its pinned model, through the production launcher's `--self-test ocr` — reads the synthetic parity corpus exactly
+     * as the desktop does: the same corpus hash and the same output hash, label for label.
+     */
+    @Test
+    fun ocrSelfTestMatchesTheDesktop() {
+        val states = CopyOnWriteArrayList<OcrSelfTestState>()
+        val done = CountDownLatch(1)
+        val started = System.currentTimeMillis()
+        var test: OcrSelfTest? = null
+        instrumentation.runOnMainSync {
+            test = OcrSelfTest(
+                root = root,
+                host = ServiceRuntimeHost(app),
+                install = { files.install() },
+                io = { work -> io.execute(work) },
+                scheduler = MainScheduler(),
+                publish = { state ->
+                    states.add(state)
+                    if (state is OcrSelfTestState.Done || state is OcrSelfTestState.Failed) done.countDown()
+                },
+            )
+            assertTrue(test!!.start())
+        }
+        val finished = done.await(20 * 60_000L, TimeUnit.MILLISECONDS)
+        if (!finished) instrumentation.runOnMainSync { test?.cancel() }
+        val final = states.lastOrNull()
+        val dir = File(app.getExternalFilesDir(null), "local-analyzer-reports").apply { mkdirs() }
+        val report = buildJsonObject {
+            put("test", "ocr-self-test")
+            put("device", "${Build.MANUFACTURER} ${Build.MODEL}")
+            put("sdk", Build.VERSION.SDK_INT)
+            put("supportedAbis", Build.SUPPORTED_ABIS.joinToString(","))
+            put("wallMs", System.currentTimeMillis() - started)
+            put("final", final?.let { it::class.simpleName } ?: "TIMEOUT")
+            (final as? OcrSelfTestState.Failed)?.let { put("failure", it.message) }
+            (final as? OcrSelfTestState.Done)?.let { put("record", REPORT_JSON.parseToJsonElement(it.shareText)) }
+        }
+        File(dir, "ocr-self-test.json").writeText(REPORT_JSON.encodeToString(JsonObject.serializer(), report) + "\n")
+        val result = final as? OcrSelfTestState.Done
+        assertNotNull("expected the self-test's record, got $final", result)
+        result!!
+        args.getString("expectedOcrCorpusSha256")?.let { assertEquals("OCR corpus vs desktop", it, result.corpusSha256) }
+        args.getString("expectedOcrOutputSha256")?.let { assertEquals("OCR output vs desktop", it, result.outputSha256) }
+        assertEquals("parity against the committed desktop answer", "MATCH", result.parity)
     }
 
     @Test

@@ -48,7 +48,9 @@ import { compareTokens, textAxisOf, tokenMerit } from './ocr.js'
 import type { TextOrientation, TextToken } from './ocr.js'
 import { parseNumber, readingLattice } from './parse.js'
 import { toCentimetres } from './schema.js'
-import type { LabelLattice, OcrClass } from './numeric-lattice.js'
+import type { LatticeSequence, OcrClass } from './numeric-lattice.js'
+import { readingOf } from './ensemble.js'
+import type { EnsembledLattice as LabelLattice } from './ensemble.js'
 import type { ChainRelation, DimensionObservation, FrameMetricSolution, MetricConfidence, OrientationDecision, ScaleHypothesis } from './schema.js'
 
 export const METRIC_SOLVER_NAME = 'metrics.independent-scale' as const
@@ -370,7 +372,18 @@ export function boundedValues(token: TextToken): Array<{ text: string; valueCm: 
 function contestValues(lattice: LabelLattice | undefined, alternatives: ReadonlyArray<{ valueCm: number; ratio: number }>): number[] {
   if (!lattice) return alternatives.map((a) => a.valueCm)
   const oneGlyph = new Set(lattice.sequences.filter((q) => !q.asRead && q.valueCm !== undefined && q.nonTop.length === 1 && q.nonTop[0].ratio >= VALUE_BOUNDS.glyphRatio).map((q) => q.valueCm as number))
-  return alternatives.filter((a) => lattice.ocrClass === 'AMBIGUOUS' || a.ratio >= VALUE_BOUNDS.contestRatio || oneGlyph.has(a.valueCm)).map((a) => a.valueCm)
+  const ambiguous = readingOf(lattice).ocrClass === 'AMBIGUOUS'
+  return alternatives.filter((a) => ambiguous || a.ratio >= VALUE_BOUNDS.contestRatio || oneGlyph.has(a.valueCm)).map((a) => a.valueCm)
+}
+
+/**
+ * 005H: whether a lattice value is the one the metric layer reads the ink as. Without an external witness, or when the
+ * ensemble kept the lattice's reading, that is the lattice's own as-read value; when the external reading LEADS, it is
+ * the external value (which the lattice may also have emitted, as one of its alternatives).
+ */
+const isReading = (lattice: LabelLattice, q: LatticeSequence): boolean => {
+  const e = lattice.ensemble
+  return e && e.asRead !== lattice.asRead ? q.text === e.asRead : q.asRead
 }
 
 /**
@@ -386,16 +399,25 @@ export function correctionReadings(lattice: LabelLattice): ChainToken['readings'
   // it has no reading, only the plausible corrections — never 005D's substitution list.
   const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
   const out: ChainToken['readings'] = []
+  // 005H: with an external witness the reading is the ensemble's, and the other witness's value of the same count (the
+  // `rival`) is a correction at full strength; every other lattice value is weighed against the lattice's own reading.
+  const read = readingOf(lattice)
+  const rival = lattice.ensemble?.rival
   // 005F (contract A6): how many glyphs an ink holds is read from the image alone; a scale never chooses it. A value of
   // another digit count than the as-read string is never a correction, so neither a re-solve nor SCALE_RANKED takes one.
   const digits = (t: string): number => t.replace(/[^0-9]/g, '').length
   for (const q of lattice.sequences) {
     if (q.valueCm === undefined) continue
-    if (!q.asRead && digits(q.text) !== digits(lattice.asRead)) continue
+    const reading = isReading(lattice, q)
+    if (!reading && digits(q.text) !== digits(read.asRead)) continue
     const parsed = parseNumber(q.text).find((x) => x.kind === 'LINEAR_DIMENSION')
     if (!parsed) continue
-    if (q.asRead) {
+    if (reading) {
       out.push({ text: q.text, parsed, valueCm: q.valueCm, confidence: 1, substitutions: 0 })
+      continue
+    }
+    if (rival && q.valueCm === rival.valueCm) {
+      out.push({ text: q.text, parsed, valueCm: q.valueCm, confidence: 1, substitutions: 1 })
       continue
     }
     const pRatio = own > 0 ? Math.min(1, q.p / own) : 0
@@ -403,6 +425,22 @@ export function correctionReadings(lattice: LabelLattice): ChainToken['readings'
     if (pRatio < VALUE_BOUNDS.contestRatio && glyph < VALUE_BOUNDS.glyphRatio) continue
     out.push({ text: q.text, parsed, valueCm: q.valueCm, confidence: round6(Math.min(1, Math.max(pRatio, glyph))), substitutions: Math.max(1, q.nonTop.length) })
   }
+  // An external value the lattice never emitted: the reading, when it leads, or the full-strength candidate.
+  for (const [text, valueCm, substitutions] of externalOnly(lattice)) {
+    const parsed = parseNumber(text).find((x) => x.kind === 'LINEAR_DIMENSION')
+    if (parsed) out.push({ text, parsed, valueCm, confidence: 1, substitutions })
+  }
+  return out
+}
+
+/** 005H: the ensemble's values the lattice never emitted, as [text, cm, substitutions]: its reading (0) and its rival (1). */
+function externalOnly(lattice: LabelLattice): Array<[string, number, 0 | 1]> {
+  const e = lattice.ensemble
+  if (!e) return []
+  const emitted = (cm: number): boolean => lattice.sequences.some((q) => q.valueCm === cm)
+  const out: Array<[string, number, 0 | 1]> = []
+  if (e.asRead !== lattice.asRead && e.asReadValueCm !== undefined && !emitted(e.asReadValueCm)) out.push([e.asRead, e.asReadValueCm, 0])
+  if (e.rival && !emitted(e.rival.valueCm)) out.push([e.rival.text, e.rival.valueCm, 1])
   return out
 }
 
@@ -421,12 +459,16 @@ function leadingZeroValue(text: string): number | undefined {
 export function latticeAlternatives(lattice: LabelLattice): Array<{ text: string; valueCm: number; ratio: number }> {
   const own = lattice.sequences.find((q) => q.asRead)?.p ?? 0
   const out = new Map<number, { text: string; valueCm: number; ratio: number }>()
+  // 005H: the other witness's value first, at full strength — neither reader's value wins because of who read it.
+  const read = readingOf(lattice)
+  const rival = lattice.ensemble?.rival
+  if (rival) out.set(rival.valueCm, { text: rival.text, valueCm: rival.valueCm, ratio: 1 })
   // 005F (contract A6, post-review D5F-6): a value of another digit count is a count hypothesis, never an alternative —
   // it neither contests a scale nor is chosen among; its doubt is in the reading's class (`countAmbiguity`)
   const countOf = (text: string): number => text.replace(/[^0-9]/g, '').length
-  const asReadCount = countOf(lattice.asRead)
+  const asReadCount = countOf(read.asRead)
   for (const q of lattice.sequences) {
-    if (q.asRead || q.valueCm === undefined || q.valueCm === lattice.asReadValueCm || out.has(q.valueCm) || countOf(q.text) !== asReadCount) continue
+    if (isReading(lattice, q) || q.valueCm === undefined || q.valueCm === read.valueCm || out.has(q.valueCm) || countOf(q.text) !== asReadCount) continue
     out.set(q.valueCm, { text: q.text, valueCm: q.valueCm, ratio: round6(own > 0 ? Math.min(1, q.p / own) : 1) })
   }
   return [...out.values()].slice(0, VALUE_BOUNDS.latticeAlternatives)
@@ -445,15 +487,24 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
       // readings); otherwise the legacy lattice's own first reading, with no substitution in it, and 005D's V1 values.
       const held = input.lattices?.get(entry.token)
       const lattice = held?.lattice
+      // 005H: what the ink is read as — the ensemble's reading when an external recogniser was heard, the lattice's own otherwise.
+      const inkRead = lattice ? readingOf(lattice) : undefined
       // A lattice whose as-read string has a leading zero (a `4` read `0`) still reads the ink — never decisively, as in
       // 005D — and its values stay the ink's alternatives (post-review A P1); one that states no dimension is no reading.
-      const asReadCm = lattice ? (lattice.asReadValueCm ?? leadingZeroValue(lattice.asRead)) : undefined
+      const asReadCm = inkRead ? (inkRead.valueCm ?? leadingZeroValue(inkRead.asRead)) : undefined
       if (lattice && asReadCm === undefined) return
-      const reads: Array<{ text: string; valueCm: number }> = lattice ? [{ text: lattice.asRead, valueCm: asReadCm as number }] : entry.readings.filter((r) => r.substitutions === 0)
+      const reads: Array<{ text: string; valueCm: number }> = inkRead ? [{ text: inkRead.asRead, valueCm: asReadCm as number }] : entry.readings.filter((r) => r.substitutions === 0)
       const alternatives = lattice ? latticeAlternatives(lattice) : boundedValues(entry.token)
       // A total's or a child's structural options: only the values the ink may plausibly be (post-review B P2).
       const plausible = lattice ? new Set(correctionReadings(lattice).filter((r) => r.substitutions > 0).map((r) => r.valueCm)) : undefined
-      const altCost = new Map<number, number>(lattice ? lattice.sequences.filter((q) => !q.asRead && q.valueCm !== undefined && plausible?.has(q.valueCm)).map((q) => [q.valueCm as number, Math.max(1, q.nonTop.length)]) : alternatives.map((a) => [a.valueCm, 1]))
+      // 005H: the other witness's value is one choice away, whatever the lattice's own glyph choices make of it.
+      const rival = lattice?.ensemble?.rival
+      const altCost = new Map<number, number>(
+        lattice
+          ? [...lattice.sequences.filter((q) => !isReading(lattice, q) && q.valueCm !== undefined && plausible?.has(q.valueCm)).map((q): [number, number] => [q.valueCm as number, Math.max(1, q.nonTop.length)]), ...(rival && plausible?.has(rival.valueCm) ? [[rival.valueCm, 1] as [number, number]] : [])]
+          : alternatives.map((a) => [a.valueCm, 1]),
+      )
+      const ensemble = lattice?.ensemble
       // 005D: a detected mark is a detection. A reading is bound to every span it could measure —
       // across up to two ticks or questionable marks and any rejected ones — and measures ONE of
       // them: the primary binding. Only that one may decide a scale; the others are recorded.
@@ -471,7 +522,7 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             chainId: input.chainIds[c],
             textRegionId: region.id,
             orientation,
-            rawText: lattice ? lattice.asRead : entry.token.text,
+            rawText: inkRead ? inkRead.asRead : entry.token.text,
             valueCm: round6(cm),
             axis: chain.axis === 'HORIZONTAL' ? 'X' : 'Y',
             fromPx: round6(chain.ticks[from].atPx),
@@ -480,12 +531,24 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             impliedCmPerPx: round6(cm / px),
             ocrScore: round6(entry.token.score),
             ocrConfidence: round6(entry.token.confidence),
-            leadingZero: hasLeadingZero(lattice ? lattice.asRead : entry.token.text),
+            leadingZero: hasLeadingZero(inkRead ? inkRead.asRead : entry.token.text),
             independence: 'ORIENTATION_UNDECIDED',
             status: 'RAW',
             binding: { role, offsetShare: binding.offsetShare, questionableEnds: binding.questionableEnds, skipped: { ...binding.skipped } },
             ...(alternatives.length > 0 ? { valueAlternatives: alternatives.map((a) => ({ text: a.text, valueCm: a.valueCm, ratio: a.ratio })) } : {}),
-            ...(lattice && held ? { ocr: { latticeId: held.id, rawTopText: lattice.rawTopText, ocrClass: lattice.ocrClass, asReadP: lattice.asReadP, probabilityMargin: lattice.probabilityMargin, asReadVariant: lattice.asReadVariant } } : {}),
+            ...(lattice && held && inkRead
+              ? {
+                  ocr: {
+                    latticeId: held.id,
+                    rawTopText: lattice.rawTopText,
+                    ocrClass: inkRead.ocrClass,
+                    asReadP: lattice.asReadP,
+                    probabilityMargin: lattice.probabilityMargin,
+                    asReadVariant: lattice.asReadVariant,
+                    ...(ensemble ? { ensemble: { decision: ensemble.decision, latticeAsRead: ensemble.lattice.asRead, latticeClass: ensemble.lattice.ocrClass, externalText: ensemble.external.text, externalPosterior: ensemble.external.posterior, externalStable: ensemble.external.stable } } : {}),
+                  },
+                }
+              : {}),
           }
           // Weight rises with the span, as in the legacy vote: the ticks are located to a pixel whatever the span.
           // Only a tick run across discounts it; a questionable or rejected mark is not a statement of the draughtsman's.
@@ -498,9 +561,9 @@ function observationsOf(input: FrameMetricInput, orientation: TextOrientation, a
             cm,
             px,
             // 005E: a LOW_QUALITY reading (a glyph the matcher could not read, or text under the legible height) never decides.
-            decisive: role === 'PRIMARY' && px >= DECISIVE_SPAN_TOLERANCES * input.tolerancePx && entry.token.height >= LEGIBLE_CAP_HEIGHT_PX && !record.leadingZero && lattice?.ocrClass !== 'LOW_QUALITY',
+            decisive: role === 'PRIMARY' && px >= DECISIVE_SPAN_TOLERANCES * input.tolerancePx && entry.token.height >= LEGIBLE_CAP_HEIGHT_PX && !record.leadingZero && inkRead?.ocrClass !== 'LOW_QUALITY',
             alts: alternatives.map((a) => a.valueCm),
-            ...(lattice ? { ocrClass: lattice.ocrClass, lattice } : {}),
+            ...(lattice && inkRead ? { ocrClass: inkRead.ocrClass, lattice } : {}),
             altCost,
             contestAlts: contestValues(lattice, alternatives),
           })
@@ -1280,7 +1343,7 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
       return i >= 0 ? i : undefined
     }
     const asIs = (): NonNullable<NonNullable<DimensionObservation['ocr']>['selected']> => {
-      const q = lattice?.sequences.find((v) => v.asRead)
+      const q = lattice?.sequences.find((v) => isReading(lattice, v))
       return { by: 'AS_READ', text: x.record.rawText, valueCm: round6(x.cm), ...(q ? { imageScore: q.imageScore, imageRank: rankOf(q.text) } : {}), ...(scale !== undefined ? { metricResidualPx: round6(Math.abs(x.cm / scale - x.px)) } : {}) }
     }
     if (x.refuted) {
@@ -1291,6 +1354,14 @@ export function solveFrameMetric(input: FrameMetricInput): FrameMetricOutput {
     if (x.px < DECISIVE_SPAN_TOLERANCES * tol) return asIs()
     const allowed = new Set(correctionReadings(lattice).map((r) => r.valueCm))
     const fitting = lattice.sequences.filter((q) => q.valueCm !== undefined && allowed.has(q.valueCm) && Math.abs((q.valueCm as number) / scale - x.px) <= tol).sort((a, b) => b.imageScore - a.imageScore || (a.text < b.text ? -1 : 1))
+    // 005H: the other witness's value has no image score of the lattice's to be ranked by. When it fits, it is chosen
+    // alone; beside another value that fits it is not outranked by the lattice's image score — the two stay UNRESOLVED.
+    const rival = lattice.ensemble?.rival
+    if (rival && allowed.has(rival.valueCm) && Math.abs(rival.valueCm / scale - x.px) <= tol) {
+      if (fitting.some((q) => q.valueCm !== rival.valueCm)) return { by: 'UNRESOLVED', metricResidualPx: round6(Math.abs(x.cm / scale - x.px)) }
+      const q = fitting[0]
+      return { by: 'SCALE_RANKED', text: rival.text, valueCm: rival.valueCm, ...(q ? { imageScore: q.imageScore, imageRank: rankOf(q.text) } : {}), metricResidualPx: round6(Math.abs(rival.valueCm / scale - x.px)) }
+    }
     if (fitting.length === 0) return asIs()
     if (fitting.length >= 2 && fitting[1].valueCm !== fitting[0].valueCm && fitting[1].imageScore >= 0.9 * fitting[0].imageScore) return { by: 'UNRESOLVED', metricResidualPx: round6(Math.abs(x.cm / scale - x.px)) }
     const q = fitting[0]

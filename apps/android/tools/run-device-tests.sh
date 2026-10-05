@@ -7,7 +7,9 @@
 # 1. installs the x86_64 (or arm64) app APK and the instrumentation test APK;
 # 2. runs LocalAnalyzerDeviceTest — the runtime installed, the synthetic
 #    fixture through the PRODUCTION analyzer.mjs with the desktop pipeline's
-#    hashes required, cancel during a download, cancel during compute;
+#    hashes required, cancel during a download, cancel during compute, and
+#    (005H) the external recogniser's OCR parity self-test, its corpus and
+#    output hashes required equal to the desktop's;
 # 3. if LIVE_URL is set, runs the live test (the production launcher on a real
 #    URL) — reported separately, because it depends on a third-party site;
 #    SECOND_LIVE_URL does the same for a second project, under its own report
@@ -53,14 +55,20 @@ if [ -n "${DESKTOP_FIXTURE:-}" ] && [ -f "$DESKTOP_FIXTURE" ]; then
     cap="$(printf '%s' "${key:0:1}" | tr '[:lower:]' '[:upper:]')${key:1}"
     EXPECT+=(-e "expected$cap" "$value")
   done
+  # 005H: the OCR parity self-test's corpus and output, as the desktop computed them
+  for key in corpusSha256 outputSha256; do
+    value="$(node -e "const d=require(require('path').resolve('$DESKTOP_FIXTURE'));process.stdout.write((d.ocrSelfTest||{})['$key']||'')")"
+    cap="$(printf '%s' "${key:0:1}" | tr '[:lower:]' '[:upper:]')${key:1}"
+    [ -n "$value" ] && EXPECT+=(-e "expectedOcr$cap" "$value")
+  done
   echo "requiring the desktop pipeline's hashes: ${EXPECT[*]}"
 fi
 
-TESTS="$CLASS#theRuntimeIsInstalledForThisDevice,$CLASS#fixtureRunsTheProductionAnalyzerAndMatchesTheDesktop,$CLASS#cancelWhileDownloadingStopsAtOnceAndLeavesNothing,$CLASS#cancelWhileComputingEndsTheProcessAndLeavesNothing"
+TESTS="$CLASS#theRuntimeIsInstalledForThisDevice,$CLASS#fixtureRunsTheProductionAnalyzerAndMatchesTheDesktop,$CLASS#cancelWhileDownloadingStopsAtOnceAndLeavesNothing,$CLASS#cancelWhileComputingEndsTheProcessAndLeavesNothing,$CLASS#ocrSelfTestMatchesTheDesktop"
 adb shell am instrument -w -e class "$TESTS" "${EXPECT[@]}" "$RUNNER" | tee "$OUT/instrument-fixture.txt"
 FIXTURE_OK=1
 grep -q "FAILURES!!!\|INSTRUMENTATION_FAILED\|Process crashed" "$OUT/instrument-fixture.txt" && FIXTURE_OK=0
-grep -q "^OK (4 tests)" "$OUT/instrument-fixture.txt" || FIXTURE_OK=0
+grep -q "^OK (5 tests)" "$OUT/instrument-fixture.txt" || FIXTURE_OK=0
 
 LIVE="LIVE_ANDROID_ANALYSIS_NOT_RUN"
 if [ -n "${LIVE_URL:-}" ]; then

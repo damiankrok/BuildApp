@@ -102,6 +102,7 @@ describe('1. the analyzer the APK ships is the production pipeline', () => {
       'apps/local-analyzer/src/analyzer.ts',
       'apps/local-analyzer/src/local.ts',
       'apps/local-analyzer/src/memory.ts',
+      'apps/local-analyzer/src/pipes.ts',
       'apps/local-analyzer/src/program.ts',
       'apps/local-analyzer/src/text-tables.ts',
       'apps/local-analyzer/src/text.ts',
@@ -124,7 +125,8 @@ describe('1. the analyzer the APK ships is the production pipeline', () => {
 describe('2–4. no truth, no benchmark, no project in what the phone runs', () => {
   it('contains no reference, candidate, benchmark, research, fixture, app or stage-artefact module', () => {
     expect(inputs.filter((p) => FORBIDDEN_MODULE.test(p))).toEqual([])
-    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules'))).toEqual([])
+    // 005H: the one JSON in the analyzer is the recogniser's pins (ids and SHA-256s) — never data, never an answer
+    expect(inputs.filter((p) => p.endsWith('.json') && !p.includes('node_modules'))).toEqual(['packages/numeric-recogniser-ort/models/manifest.json'])
   })
 
   it('names no project: not the house it was tuned on, not its code', () => {
@@ -272,5 +274,59 @@ describe('the Node 18 runtime is not asked for an API it lacks', () => {
       for (const api of NEWER) if (code.includes(api)) offenders.push(`${relative(ROOT, file)}: ${api}`)
     }
     expect(offenders).toEqual([])
+  })
+})
+
+/**
+ * BUILDPLAN-ANALYZER-005H: the external numeric recogniser rides beside the analyzer, never inside it. The analyzer
+ * bundle spawns a worker and carries no ONNX Runtime; the worker bundle carries ONNX Runtime Web and the decoder and
+ * nothing of the pipeline; the self-test bundle (an owner diagnostic, loaded only for `--self-test`) carries the
+ * synthetic corpus and nothing of the analyzer; and none of them can reach the network.
+ */
+describe('005H. the recogniser beside the analyzer', () => {
+  const bundleOf = async (entry: string): Promise<{ inputs: string[]; text: string }> => {
+    const result = await build({ entryPoints: [entry], bundle: true, platform: 'node', format: 'esm', target: 'node18', write: false, metafile: true, outfile: '/virtual-out/x.mjs', logLevel: 'silent' })
+    return { inputs: Object.keys(result.metafile.inputs).map((p) => relative(ROOT, resolve(ROOT, p))), text: result.outputFiles.map((f) => f.text).join('\n') }
+  }
+
+  it('the analyzer carries no ONNX Runtime and no recogniser engine: it only spawns the worker', () => {
+    expect(inputs.filter((p) => p.includes('onnxruntime'))).toEqual([])
+    expect(inputs.filter((p) => p.startsWith('packages/numeric-recogniser-ort/')).sort()).toEqual(['packages/numeric-recogniser-ort/models/manifest.json', 'packages/numeric-recogniser-ort/src/client-entry.ts', 'packages/numeric-recogniser-ort/src/client.ts', 'packages/numeric-recogniser-ort/src/manifest.ts'])
+  })
+
+  it('the worker carries ONNX Runtime Web and the decoder, and nothing of the pipeline', async () => {
+    const worker = await bundleOf(join(ROOT, 'packages/numeric-recogniser-ort/src/worker.ts'))
+    expect(worker.inputs.some((p) => p.includes('onnxruntime-web'))).toBe(true)
+    expect(worker.inputs.filter((p) => /packages\/(?!numeric-recogniser-ort\/)/.test(p))).toEqual([])
+    expect(worker.inputs.filter((p) => FORBIDDEN_MODULE.test(p))).toEqual([])
+  })
+
+  it('the self-test carries the synthetic corpus and the recogniser client, and nothing of the analyzer', async () => {
+    const selfTest = await bundleOf(join(LOCAL, 'src/self-test-entry.ts'))
+    const own = selfTest.inputs.filter((p) => p.startsWith('packages/')).map((p) => p.split('/').slice(0, 2).join('/'))
+    expect([...new Set(own)].sort()).toEqual(['packages/numeric-recogniser-ort', 'packages/source-metrics', 'packages/synthetic-drawings'])
+    expect(selfTest.inputs.filter((p) => p.startsWith('packages/source-metrics/'))).toEqual(['packages/source-metrics/src/recogniser.ts'])
+    expect(selfTest.inputs.filter((p) => p.startsWith('packages/synthetic-drawings/')).sort()).toEqual(['packages/synthetic-drawings/src/digit-corpus.ts', 'packages/synthetic-drawings/src/ocr-corpus.ts'])
+    expect(selfTest.inputs.some((p) => p.includes('onnxruntime'))).toBe(false)
+  })
+
+  it('the launcher loads the self-test only for --self-test, and the analyzer otherwise', () => {
+    const main = readFileSync(join(LOCAL, 'runtime/main.mjs'), 'utf8')
+    expect(main).toMatch(/argv\.includes\('--self-test'\)[\s\S]*import\('\.\/ocr-self-test\.mjs'\)[\s\S]*else[\s\S]*import\('\.\/analyzer\.mjs'\)/)
+  })
+
+  it('no recogniser source names a network call or a remote address', () => {
+    for (const file of filesUnder(join(ROOT, 'packages/numeric-recogniser-ort/src'), /\.ts$/)) {
+      const code = codeOf(readFileSync(file, 'utf8'))
+      expect(code, relative(ROOT, file)).not.toMatch(/\bfetch\(|https?:\/\/|XMLHttpRequest|node:https?'|node:net'|node:dgram'/)
+    }
+  })
+
+  it('the APK packaging declares the recogniser files and no new native library or Gradle dependency', () => {
+    const gradle = readFileSync(join(ANDROID, 'app/build.gradle.kts'), 'utf8')
+    expect(gradle).toMatch(/fetchRecogniserModel/)
+    expect(gradle).not.toMatch(/onnxruntime-android|com\.microsoft\.onnxruntime|mlkit|tesseract|opencv/i)
+    const manifest = JSON.parse(readFileSync(join(ROOT, 'packages/numeric-recogniser-ort/models/manifest.json'), 'utf8')) as { runtime: { files: Record<string, unknown> } }
+    expect(Object.keys(manifest.runtime.files).every((f) => !f.endsWith('.so'))).toBe(true)
   })
 })

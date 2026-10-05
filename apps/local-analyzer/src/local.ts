@@ -28,17 +28,26 @@ import { analysisFilesOf, runAnalysis } from '@buildapp/analysis-service'
 import type { AnalysisFiles, AnalysisProgress, AnalysisRun, AnalysisTelemetry, AnalysisTimings, PhaseStats } from '@buildapp/analysis-service'
 import { fileByteCache } from '@buildapp/source-package'
 import type { FetchDeps, FetchPolicy, SourceAdapter } from '@buildapp/source-package'
+import type { LabelRecogniser } from '@buildapp/source-metrics'
 import { memorySample } from './memory.js'
 import type { MemorySample } from './memory.js'
 
-/** What a local runtime registers: the publishers it trusts and, in tests only, a network seam. No vision provider. */
-export type LocalWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy }
+/**
+ * What a local runtime registers: the publishers it trusts, the external numeric recogniser it ships (005H; a factory,
+ * one per job) and, in tests only, a network seam. No vision provider.
+ */
+export type LocalWiring = { adapters: readonly SourceAdapter[]; deps?: FetchDeps; policy?: FetchPolicy; recogniser?: () => LocalRecogniser }
+
+/** A recogniser that can say what its batches cost (the worker recogniser does): for the performance record only. */
+export type LocalRecogniser = LabelRecogniser & { stats?: () => unknown[] }
 
 export type LocalAnalysisRequest = {
   url: string
   /** This job's private scratch directory. The run's byte cache is `workDir/bytes`, removed when the run ends. */
   workDir: string
   wiring: LocalWiring
+  /** 005H: this job's recogniser, made from `wiring.recogniser` by the caller (so it can name it before the run). */
+  recogniser?: LocalRecogniser
   signal?: AbortSignal
   progress?: (event: AnalysisProgress) => void
   /** Phase, counts and heartbeat from inside the long loops (protocol 3). */
@@ -80,6 +89,7 @@ export async function runLocalAnalysis(request: LocalAnalysisRequest): Promise<L
         pollCancel: request.pollCancel,
         onPhaseStats: request.onPhaseStats,
         rss: () => process.memoryUsage.rss(),
+        recogniser: request.recogniser,
       },
     )
     return { run, files: analysisFilesOf(run), timings: run.timings, memory: memorySample() }

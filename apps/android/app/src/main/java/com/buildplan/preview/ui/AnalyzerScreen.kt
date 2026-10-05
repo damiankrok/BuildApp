@@ -83,6 +83,7 @@ import com.buildplan.preview.analyzer.LivenessTracker
 import com.buildplan.preview.analyzer.Liveness
 import com.buildplan.preview.analyzer.local.LocalAnalysis
 import com.buildplan.preview.analyzer.local.NodeRuntime
+import com.buildplan.preview.analyzer.local.OcrSelfTestState
 import com.buildplan.preview.scene.DownloadedSceneEntry
 import android.os.SystemClock
 import java.net.URI
@@ -156,6 +157,7 @@ fun AnalyzerScreen(model: AnalyzerViewModel, onBack: () -> Unit, onOpenScene: (k
                 ModeRow(model)
                 if (model.mode == AnalyzerMode.SERVICE && model.isConfigured) ServiceRow(model)
                 if (model.localRuns.isNotEmpty()) LocalRuns(model.localRuns)
+                if (model.localAvailability.available) OcrSelfTestRow(model)
             }
         }
     }
@@ -461,6 +463,8 @@ private fun AnalyzerActivity(status: JobStatus?) {
     val step = when (activity.subphaseId) {
         "OCR" -> count(counters["tokenGroups"]?.toInt(), counters["tokenGroupsTotal"]?.toInt(), R.string.analyzer_step_ocr)
         "OCR_LATTICE" -> count(counters["label"]?.toInt(), counters["labelsTotal"]?.toInt(), R.string.analyzer_step_ocr_lattice)
+        // 005H: the external recogniser reading the same labels in its worker
+        "OCR_EXTERNAL" -> count(counters["label"]?.toInt(), counters["labelsTotal"]?.toInt(), R.string.analyzer_step_ocr_external)
         "CALLOUT_RINGS" -> count(counters["rings"]?.toInt(), counters["ringsTotal"]?.toInt(), R.string.analyzer_step_callouts)
         "CAMERAS" -> count(counters["cameras"]?.toInt(), counters["camerasTotal"]?.toInt(), R.string.analyzer_step_cameras)
         "ORIENTATION" -> count(counters["chains"]?.toInt(), counters["chainsTotal"]?.toInt(), R.string.analyzer_step_orientation)
@@ -763,6 +767,46 @@ private fun LocalRuns(runs: List<LocalRunReport>) {
 }
 
 private val RUN_DATE = SimpleDateFormat("d MMM yyyy, HH:mm", PRODUCT_LOCALE)
+
+/**
+ * 005H: the OCR parity self-test, for the owner — the recogniser the analysis uses, run over a synthetic corpus on this
+ * phone, and whether it read it exactly as the desktop did. The record can be copied and sent as text.
+ */
+@Composable
+private fun OcrSelfTestRow(model: AnalyzerViewModel) {
+    val clipboard = LocalClipboardManager.current
+    Section(stringResource(R.string.analyzer_selftest_title)) {
+        Body(stringResource(R.string.analyzer_selftest_body))
+        when (val s = model.ocrSelfTest) {
+            is OcrSelfTestState.Running -> {
+                StatusText(if (s.total > 0) stringResource(R.string.analyzer_selftest_running, s.done.coerceIn(0, s.total), s.total) else stringResource(R.string.analyzer_selftest_preparing), maxLines = 1)
+                LineButton(stringResource(R.string.analyzer_cancel), onClick = { model.cancelOcrSelfTest() })
+            }
+            is OcrSelfTestState.Done -> {
+                val verdict = when (s.parity) {
+                    "MATCH" -> stringResource(R.string.analyzer_selftest_match)
+                    "CORPUS_DIFFERS" -> stringResource(R.string.analyzer_selftest_corpus_differs)
+                    else -> stringResource(R.string.analyzer_selftest_mismatch)
+                }
+                Text(verdict, style = MaterialTheme.typography.titleSmall, color = Palette.Ink, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                DataRow(stringResource(R.string.analyzer_selftest_exact), "${s.exact} / ${s.labels}")
+                DataRow(stringResource(R.string.analyzer_selftest_output), s.outputSha256.take(16))
+                DataRow(stringResource(R.string.analyzer_selftest_corpus), s.corpusSha256.take(16))
+                DataRow(stringResource(R.string.analyzer_selftest_model), "${s.recogniser} · ${s.modelSha256.take(12)}")
+                DataRow("WASM", s.wasmSha256.take(12))
+                DataRow(stringResource(R.string.analyzer_selftest_time), "${duration(s.totalMs)} · ${s.perLabelMeanMs} ms")
+                DataRow(stringResource(R.string.analyzer_peak_memory), megabytes(s.peakRssBytes))
+                LineButton(stringResource(R.string.analyzer_selftest_copy), onClick = { clipboard.setText(AnnotatedString(s.shareText)) })
+                LineButton(stringResource(R.string.analyzer_selftest_again), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
+            }
+            is OcrSelfTestState.Failed -> {
+                StatusText(stringResource(R.string.analyzer_selftest_failed, s.message), maxLines = 3)
+                LineButton(stringResource(R.string.analyzer_selftest_run), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
+            }
+            OcrSelfTestState.Idle -> LineButton(stringResource(R.string.analyzer_selftest_run), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
+        }
+    }
+}
 
 @Composable
 private fun outcomeText(report: LocalRunReport): String = when (report.outcome) {

@@ -1,0 +1,20 @@
+PP-OCRv6_tiny_rec — text-recognition model weights (ONNX)
+
+Shipped in this app as assets/local-analyzer/models/PP-OCRv6_tiny_rec.onnx and used, on the device only, to read the
+digits of dimension labels on published house plans. Nothing is downloaded at run time.
+
+Source:    https://huggingface.co/PaddlePaddle/PP-OCRv6_tiny_rec_onnx
+Commit:    2612ab37152ae0a677521bae4e1e3d4fb4cf7c30
+File:      inference.onnx
+SHA-256:   9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6 (4 462 639 bytes)
+Licence:   Apache License 2.0 (the model card's licence at that commit); full text in PaddleOCR-LICENSE-Apache-2.0.txt.
+Copyright: PaddlePaddle Authors (PaddleOCR, https://github.com/PaddlePaddle/PaddleOCR).
+
+The character dictionary (PP-OCRv6_tiny_rec.dict.json) is taken unchanged from the same commit's inference.yml
+(PostProcess.character_dict).
+
+Residual risk, stated plainly: PaddleOCR does not publish per-dataset provenance of its recognition training data.
+The weights are offered under Apache-2.0; whether any training data carried other terms is not verified.
+
+Runtime: ONNX Runtime Web 1.30.0 (WebAssembly), MIT licence — see onnxruntime-LICENSE.txt and
+onnxruntime-ThirdPartyNotices.txt.

@@ -23,6 +23,7 @@ import { LOCAL_ANALYZER_PROTOCOL } from '../src/program.js'
 import type { LinkAnalysisSummary } from '@buildapp/analysis-service'
 import { memoryByteCache } from '@buildapp/source-package'
 import { FIXTURE_PROJECTS, fixturePageUrl, fixtureWiring } from '../fixture/fixture.js'
+import { inlineRecogniser, workspaceAssetPaths } from '@buildapp/numeric-recogniser-ort'
 // @ts-expect-error — plain ES modules without type declarations
 import { bundleLocalAnalyzer } from '../build.mjs'
 // @ts-expect-error — plain ES modules without type declarations
@@ -53,10 +54,20 @@ function host(url: string, options: { node?: string; noIcu?: boolean; onEvent?: 
   return runHost({ dir: bundleDir, url, fixture: true, node: options.node ?? process.execPath, nodeArgs: options.noIcu ? NO_ICU : [], ...dirs(), onEvent: options.onEvent }) as HostRun
 }
 
+/**
+ * The desktop's answer: `runAnalysis` from the sources with the external recogniser (005H) — its engine in this
+ * process — as the bundle's launcher reads with it in a worker. Equal hashes say the two readers agreed label for label.
+ */
 const desktopHashes = async (code: string): Promise<Record<string, string>> => {
   const wiring = fixtureWiring()
-  const run = await runAnalysis({ kind: 'URL', url: fixturePageUrl(code) }, { adapters: wiring.adapters, deps: wiring.deps, cache: memoryByteCache() })
-  return hashesOf(run.result)
+  const recogniser = inlineRecogniser({ paths: workspaceAssetPaths() })
+  try {
+    const run = await runAnalysis({ kind: 'URL', url: fixturePageUrl(code) }, { adapters: wiring.adapters, deps: wiring.deps, cache: memoryByteCache(), recogniser })
+    expect(run.result.recogniser?.crops ?? 0).toBeGreaterThan(0)
+    return hashesOf(run.result)
+  } finally {
+    await recogniser.release()
+  }
 }
 
 const summaryHashes = (s: LinkAnalysisSummary): Record<string, string> => ({

@@ -124,7 +124,7 @@ const solutionMember = (m: FrameMetricSolution): unknown => ({
 const relationMember = (r: ChainRelation): unknown => r
 
 export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
-  return hashArtifact(METRIC_EVIDENCE_SCHEMA, METRIC_EVIDENCE_SCHEMA_VERSION, [
+  return hashArtifact(METRIC_EVIDENCE_SCHEMA, draft.schemaVersion ?? METRIC_EVIDENCE_SCHEMA_VERSION, [
     { label: 'package', ordered: { id: draft.sourcePackageId, hash: draft.sourcePackageHash } },
     { label: 'observations', ordered: { id: draft.observationGraphId, hash: draft.observationGraphHash } },
     { label: 'extractors', unordered: draft.extractors.map((e) => ({ name: e.name, version: e.version })) },
@@ -139,7 +139,9 @@ export function metricEvidenceContentHash(draft: MetricEvidenceDraft): string {
     { label: 'metricSolutions', unordered: (draft.metricSolutions ?? []).map(solutionMember) },
     { label: 'chainRelations', unordered: (draft.chainRelations ?? []).map(relationMember) },
     // 1.4.0: each label ink's lattice, by content; the prose and whether its crop was met before are not content.
-    { label: 'numericLattices', unordered: (draft.numericLattices ?? []).map((l) => ({ ...l, classWhy: undefined, cache: undefined })) },
+    { label: 'numericLattices', unordered: (draft.numericLattices ?? []).map((l) => ({ ...l, classWhy: undefined, cache: undefined, ensemble: l.ensemble ? { ...l.ensemble, why: undefined } : undefined })) },
+    // 1.6.0: the external recogniser, named by id, model hash and runtime; a set read without one has no such part.
+    ...(draft.recogniser ? [{ label: 'recogniser', ordered: draft.recogniser }] : []),
   ])
 }
 

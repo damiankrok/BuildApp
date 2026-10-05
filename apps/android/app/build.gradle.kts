@@ -165,7 +165,13 @@ fun javaStringLiteral(value: String): String = buildString {
  *   assets/local-analyzer/   analyzer.mjs (the pipeline, bundled from the same
  *                            TypeScript the analyzer API runs), main.mjs,
  *                            manifest.json — written at build time by
- *                            apps/local-analyzer/build.mjs, never committed
+ *                            apps/local-analyzer/build.mjs, never committed;
+ *                            and (BUILDPLAN-ANALYZER-005H) the external numeric
+ *                            recogniser: ocr-worker.mjs, ONNX Runtime Web's
+ *                            ort-wasm-simd-threaded.{wasm,mjs} and
+ *                            models/PP-OCRv6_tiny_rec.{onnx,dict.json}, each
+ *                            verified against its pin — no .so, no Gradle
+ *                            dependency, nothing downloaded at run time
  *   lib/<abi>/libnode.so     nodejs-mobile 18.20.4, fetched and verified by
  *                            tools/fetch-nodejs-mobile.mjs (arm64-v8a for
  *                            phones, x86_64 for the emulator test)
@@ -253,6 +259,17 @@ val bundleLocalAnalyzerFixture = tasks.register<BundleLocalAnalyzerTask>("bundle
     outputDir.set(layout.buildDirectory.dir("generated/local-analyzer/test-assets"))
     metaFile.set(layout.buildDirectory.file("local-analyzer/fixture-meta.json"))
 }
+
+/** 005H: the recogniser's pinned model and dictionary (SHA-256 refused on mismatch), once; the bundle copies them. */
+val fetchRecogniserModel = tasks.register<FetchNodeRuntimeTask>("fetchRecogniserModel") {
+    group = "build"
+    description = "Fetch and verify the external numeric recogniser's model (PP-OCRv6_tiny_rec, pinned by SHA-256)."
+    node.set(nodeExecutable)
+    script.set(File(repositoryRoot, "packages/numeric-recogniser-ort/tools/fetch-model.mjs").path)
+    outputDir.set(File(repositoryRoot, "packages/numeric-recogniser-ort/models"))
+}
+bundleLocalAnalyzer.configure { dependsOn(fetchRecogniserModel) }
+bundleLocalAnalyzerFixture.configure { dependsOn(fetchRecogniserModel) }
 
 val fetchNodeRuntime = tasks.register<FetchNodeRuntimeTask>("fetchNodeRuntime") {
     group = "build"

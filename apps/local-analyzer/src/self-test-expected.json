@@ -1,0 +1,10 @@
+{
+  "note": "The OCR parity self-test's desktop answer (Node 22 and Node 18.20.4, with and without ICU, x86-64): the corpus and output hashes a device must reproduce. Recomputed and held equal by apps/local-analyzer/test/self-test.test.ts; a change to the corpus, the decoder, the model or the runtime changes them, and that test says so.",
+  "recogniser": "ocr.ppocrv6-tiny-rec@9ef676d6",
+  "modelSha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6",
+  "wasmSha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+  "corpusSha256": "734300d22abe5593b57d0cc579a8306c3d5dbedb5b2fe33bf0f0a639248245a7",
+  "outputSha256": "396c9f54b64b37bfbbf2331a383817d44b1c9d839be4400f7f57b375f8c43f2a",
+  "exact": 92,
+  "labels": 96
+}

@@ -33,6 +33,11 @@ import { toCentimetres } from './schema.js'
 
 export const NUMERIC_LATTICE_NAME = 'metrics.numeric-lattice' as const
 export const NUMERIC_LATTICE_VERSION = '1.1.0' as const
+/**
+ * 005H: the lattice with an external recogniser's witness beside it (`ensemble.ts`). A run with no recogniser reads
+ * every label exactly as 1.1.0 did and says so; a run with one stamps this version on every lattice it records.
+ */
+export const NUMERIC_LATTICE_ENSEMBLE_VERSION = '1.2.0' as const
 
 /**
  * The bounds, every one a count or a ratio — never a clock — so a phone and a server reach the same lattice.
@@ -218,7 +223,7 @@ export type LatticeSequence = {
 }
 
 export type LabelLattice = {
-  reader: { name: typeof NUMERIC_LATTICE_NAME; version: typeof NUMERIC_LATTICE_VERSION }
+  reader: { name: typeof NUMERIC_LATTICE_NAME; version: typeof NUMERIC_LATTICE_VERSION | typeof NUMERIC_LATTICE_ENSEMBLE_VERSION }
   orientation: TextOrientation
   /** The 005D reader's text for this ink, unchanged. */
   rawTopText: string
@@ -870,7 +875,8 @@ function beam(glyphs: readonly LatticeGlyph[], counter: { expansions: number; fl
   return kept
 }
 
-const valueOf = (text: string): number | undefined => {
+/** The dimension a string states, in centimetres: a 2–4 digit whole number or a decimal in metres, never with a leading zero. */
+export const dimensionValueOf = (text: string): number | undefined => {
   if (/^0\d/.test(text)) return undefined
   const parsed = parseNumber(text).find((p) => p.kind === 'LINEAR_DIMENSION')
   return parsed ? round6(toCentimetres(parsed.value, parsed.unit)) : undefined
@@ -1070,7 +1076,7 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
     }
     return pickAsRead(reads, reads[0]).text
   })
-  const asReadStable = bracket.every((t) => (valueOf(asReadText) === undefined ? t === asReadText : valueOf(t) === valueOf(asReadText)))
+  const asReadStable = bracket.every((t) => (dimensionValueOf(asReadText) === undefined ? t === asReadText : dimensionValueOf(t) === dimensionValueOf(asReadText)))
   const asReadCells = asReadPath === anchorDefault.path ? anchorDefault : anchorsByVariant.get(asReadPath.variant)
   const ordered = [...merged.values()].sort((a, b) => b.logP - a.logP || a.nonTop - b.nonTop || (a.text < b.text ? -1 : a.text > b.text ? 1 : 0))
   // Emit best first until the mass or the count bound; the as-read string is always kept.
@@ -1102,7 +1108,7 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
   const sequences: LatticeSequence[] = emitted.map((m) => {
     const chosen = m.picks.map((pick, i) => m.path.glyphs[i].candidates[pick])
     const margins = m.path.glyphs.map((g) => round6(1 - g.runnerRatio))
-    const value = valueOf(m.text)
+    const value = dimensionValueOf(m.text)
     return {
       text: m.text,
       ...(value !== undefined ? { valueCm: value } : {}),
@@ -1145,7 +1151,7 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
   const maxRunnerRatio = round6(Math.max(0, ...ratios))
   const asReadSeq = sequences.find((s) => s.asRead)
   const asReadScore = asReadSeq?.imageScore ?? geoMean(anchor.glyphs.map((g) => g.top))
-  const asReadValue = valueOf(asReadText)
+  const asReadValue = dimensionValueOf(asReadText)
   const differs = (s: LatticeSequence): boolean => !s.asRead && (asReadValue === undefined ? s.text !== asReadText : s.valueCm !== undefined && s.valueCm !== asReadValue)
   const rivals = sequences.filter(differs)
   const sequenceMargin = asReadScore > 0 && rivals.length > 0 ? round6(Math.max(...rivals.map((s) => s.imageScore)) / asReadScore) : 0
@@ -1222,7 +1228,7 @@ function computeLattice(gray: Gray, local: PixelRect, radius: number, style: Lab
       })
       if (!supported) continue
       const text = q.chars.join('')
-      const valueCm = valueOf(text)
+      const valueCm = dimensionValueOf(text)
       if (valueCm === undefined || emittedValues.has(valueCm)) continue
       const held = tailByText.get(text)
       if (held) {
@@ -1294,7 +1300,7 @@ const anchorText = (p: LatticePath): string => p.glyphs.map((g) => g.candidates[
  * without a leading zero (no number is printed with one); failing that, the reader's own (DEFAULT).
  */
 function pickAsRead<T extends AnchorRead>(anchors: readonly T[], fallback: T): T {
-  const valued = anchors.filter((a) => valueOf(a.text) !== undefined)
+  const valued = anchors.filter((a) => dimensionValueOf(a.text) !== undefined)
   const plain = anchors.filter((a) => !/^0\d/.test(a.text))
   return [...(valued.length > 0 ? valued : plain.length > 0 ? plain : [fallback])].sort((a, b) => b.segScore - a.segScore || INK_VARIANTS.indexOf(a.variant) - INK_VARIANTS.indexOf(b.variant))[0]
 }

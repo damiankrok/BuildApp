@@ -9,6 +9,14 @@
  *                  self-contained ES module (esbuild inlines every workspace
  *                  package, exactly as the analyzer API's bundle does)
  *   main.mjs       the launcher the app starts (runtime/main.mjs, copied)
+ *   ocr-worker.mjs                 005H: the external numeric recogniser's worker
+ *                                  (ONNX Runtime Web's JS and the decoder inlined)
+ *   ocr-self-test.mjs              005H: the OCR parity self-test (an owner
+ *                                  diagnostic; main.mjs loads it for --self-test)
+ *   ort-wasm-simd-threaded.wasm    ONNX Runtime Web 1.30.0's WebAssembly, and
+ *   ort-wasm-simd-threaded.mjs     its loader, verified against the pins
+ *   models/PP-OCRv6_tiny_rec.onnx  the pinned model, and its dictionary
+ *   models/PP-OCRv6_tiny_rec.dict.json
  *   manifest.json  protocol, runtime target and the sha256 and size of each
  *                  file, which the app checks before it runs them
  *   meta.json      esbuild's metafile: what went in (architecture tests,
@@ -24,6 +32,7 @@
  * minified, so the phone runs the same readable code the server does.
  */
 import { build } from 'esbuild'
+import { bundleRecogniserWorker, layOutRecogniserAssets, WORKER_FILE } from '../../packages/numeric-recogniser-ort/build.mjs'
 import { createHash } from 'node:crypto'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
@@ -71,16 +80,23 @@ export async function bundleLocalAnalyzer(outdir = join(here, 'dist'), { fixture
   await mkdir(outdir, { recursive: true })
   const meta = await bundleOne(join(here, 'src/analyzer.ts'), join(outdir, 'analyzer.mjs'))
   await copyFile(join(here, 'runtime/main.mjs'), join(outdir, 'main.mjs'))
+  // 005H: the recogniser's worker and its verified runtime and model; a missing or unpinned file fails the build.
+  const workerMeta = await bundleRecogniserWorker(join(outdir, WORKER_FILE))
+  const selfTestMeta = await bundleOne(join(here, 'src/self-test-entry.ts'), join(outdir, 'ocr-self-test.mjs'))
+  const recogniserFiles = await layOutRecogniserAssets(outdir)
   const files = {}
-  for (const name of ['analyzer.mjs', 'main.mjs']) {
+  for (const name of ['analyzer.mjs', 'main.mjs', WORKER_FILE, 'ocr-self-test.mjs']) {
     const bytes = await readFile(join(outdir, name))
     files[name] = { sha256: sha256(bytes), bytes: bytes.length }
   }
+  Object.assign(files, recogniserFiles)
   const manifest = { schema: 'buildapp.local-analyzer-runtime', protocol: PROTOCOL, runtime: RUNTIME, entry: 'main.mjs', files }
   await writeFile(join(outdir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
   const metaFile = metaPath ? resolve(metaPath) : join(outdir, 'meta.json')
   await mkdir(dirname(metaFile), { recursive: true })
   await writeFile(metaFile, JSON.stringify(meta))
+  await writeFile(metaFile.replace(/\.json$/, '') + '-ocr-worker.json', JSON.stringify(workerMeta))
+  await writeFile(metaFile.replace(/\.json$/, '') + '-ocr-self-test.json', JSON.stringify(selfTestMeta))
   if (fixture) await bundleFixture(outdir)
   return { manifest, meta }
 }

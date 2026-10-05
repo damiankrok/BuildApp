@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@buildapp/analysis-service": "*",
+    "@buildapp/numeric-recogniser-ort": "*",
     "@buildapp/reconstruction": "*",
     "@buildapp/source-common": "*",
+    "@buildapp/source-metrics": "*",
     "@buildapp/source-package": "*"
   },
   "devDependencies": {

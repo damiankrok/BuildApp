@@ -25,6 +25,12 @@
  * drawing's scale (a decoy must be refused by name, never built to). The
  * script names no project and tells the analyzer nothing about what to expect.
  *
+ * `--recogniser` (005H) reads every plan's dimension labels with the external
+ * numeric recogniser as well (`@buildapp/numeric-recogniser-ort`), exactly as
+ * the phone does: its worker bundled from this checkout, its model and
+ * runtime verified against their pins, one worker per batch. Without it the
+ * lattice reads alone, as every gate before 005H did.
+ *
  * As a CI gate: `--expect COMPLETED` fails the command unless the run
  * completes; `--same-as <result-summary.json>` also requires the candidate,
  * model and scene hashes of an earlier run (a replay of sealed evidence must
@@ -54,6 +60,11 @@ import { GENERIC_ADAPTER_VERSION } from '@buildapp/source-package'
 import { ANALYSIS_SERVICE_VERSION } from '../src/index.js'
 import { EVIDENCE_PACK_VERSION } from '../../evidence-pack/src/index.js'
 import { packRunDir } from '../../evidence-pack/scripts/run-dir.js'
+import { pathToFileURL } from 'node:url'
+import { workerRecogniser, workspaceAssetPaths } from '@buildapp/numeric-recogniser-ort'
+import type { OrtRecogniser } from '@buildapp/numeric-recogniser-ort'
+// @ts-expect-error — a plain ES module without type declarations
+import { bundleRecogniserWorker } from '../../numeric-recogniser-ort/build.mjs'
 
 const value = (argv: readonly string[], name: string): string | undefined => {
   const i = argv.indexOf(`--${name}`)
@@ -154,6 +165,13 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
   // The performance record (005A): what each phase cost and how long it went silent. Never hashed.
   const telemetry: AnalysisTelemetry[] = []
   let phases: PhaseStats[] = []
+  // 005H: the external recogniser, as the phone runs it (a worker per batch), when asked for.
+  let recogniser: OrtRecogniser | undefined
+  if (argv.includes('--recogniser')) {
+    const worker = join(process.cwd(), '.cache', 'numeric-recogniser-ort', 'ocr-worker.mjs')
+    await bundleRecogniserWorker(worker)
+    recogniser = workerRecogniser({ workerUrl: pathToFileURL(worker), paths: workspaceAssetPaths() })
+  }
   const t0 = performance.now()
   const writePerformance = (): void => {
     write('performance.json', {
@@ -165,6 +183,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       telemetryEvents: telemetry.length,
       maxTelemetryGapMs: telemetry.reduce((m, e, i) => (i === 0 ? 0 : Math.max(m, e.elapsedMs - telemetry[i - 1].elapsedMs)), 0),
       phases,
+      ...(recogniser ? { recogniser: { id: recogniser.id, batches: recogniser.stats() } } : {}),
     })
     if (process.env.TELEMETRY) writeFileSync(join(out, 'telemetry.ndjson'), telemetry.map((e) => JSON.stringify(e)).join('\n') + '\n')
   }
@@ -178,6 +197,7 @@ export async function secondHouse(argv: readonly string[], log: (line: string) =
       onPhaseStats: (s) => {
         phases = s
       },
+      recogniser,
       // no identity override: the model is named from its package exactly as the
       // phone and the service name it, so their hashes can be compared with these
       progress: process.env.PROGRESS ? (e) => process.stderr.write(`  ${(e.progress * 100).toFixed(0).padStart(3)}% ${e.stage}${e.detail ? ` — ${e.detail}` : ''}\n`) : undefined,

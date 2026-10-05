@@ -28,3 +28,9 @@ apps/android/.kotlin/
 # The embedded Node runtime (nodejs-mobile libnode.so, 60+ MB per ABI), fetched and
 # verified by apps/android/tools/fetch-nodejs-mobile.mjs; never committed.
 apps/android/third_party/
+
+# BUILDPLAN-ANALYZER-005H: the external recogniser's model and dictionary, fetched and verified by
+# packages/numeric-recogniser-ort/tools/fetch-model.mjs; never committed.
+packages/numeric-recogniser-ort/models/*.onnx
+packages/numeric-recogniser-ort/models/*.dict.json
+packages/numeric-recogniser-ort/models/*.partial

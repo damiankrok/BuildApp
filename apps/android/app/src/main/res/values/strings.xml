@@ -381,6 +381,24 @@
     <string name="analyzer_count_candidate">odczyt %1$d z %2$d</string>
     <string name="analyzer_step_ocr">odczyt liczb: grupa %1$d z %2$d</string>
     <string name="analyzer_step_ocr_lattice">odczyt wymiarów: etykieta %1$d z %2$d</string>
+    <string name="analyzer_step_ocr_external">odczyt wymiarów · rozpoznawanie %1$d z %2$d</string>
+    <!-- 005H: the OCR parity self-test (owner diagnostic) -->
+    <string name="analyzer_selftest_title">Test zgodności odczytu wymiarów</string>
+    <string name="analyzer_selftest_body">Ten sam model rozpoznawania, którego używa analiza, odczytuje 96 syntetycznych etykiet narysowanych na tym telefonie. Wynik musi być identyczny z komputerem. Nic nie jest pobierane ani zapisywane.</string>
+    <string name="analyzer_selftest_run">Uruchom test</string>
+    <string name="analyzer_selftest_again">Uruchom ponownie</string>
+    <string name="analyzer_selftest_preparing">przygotowuję środowisko…</string>
+    <string name="analyzer_selftest_running">rozpoznawanie %1$d z %2$d</string>
+    <string name="analyzer_selftest_match">Zgodny z komputerem</string>
+    <string name="analyzer_selftest_mismatch">NIEZGODNY z komputerem</string>
+    <string name="analyzer_selftest_corpus_differs">Telefon narysował inne etykiety niż komputer — wynik nieporównywalny</string>
+    <string name="analyzer_selftest_exact">dokładne odczyty</string>
+    <string name="analyzer_selftest_output">skrót wyniku</string>
+    <string name="analyzer_selftest_corpus">skrót korpusu</string>
+    <string name="analyzer_selftest_model">model</string>
+    <string name="analyzer_selftest_time">czas · na etykietę</string>
+    <string name="analyzer_selftest_copy">Kopiuj wynik</string>
+    <string name="analyzer_selftest_failed">Test nie powiódł się: %1$s</string>
     <string name="analyzer_step_callouts">opisy otworów: %1$d z %2$d</string>
     <string name="analyzer_step_cameras">wizualizacje: %1$d z %2$d</string>
     <string name="analyzer_step_orientation">orientacja etykiet: łańcuch %1$d z %2$d</string>

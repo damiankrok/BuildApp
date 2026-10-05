@@ -34,8 +34,12 @@ import { DIMENSION_TOPOLOGY_NAME, DIMENSION_TOPOLOGY_VERSION, findDimensionLines
 import type { DimensionLine } from './dimension-lines.js'
 import { readNumbers } from './ocr.js'
 import { METRIC_SOLVER_NAME, METRIC_SOLVER_VERSION, solveFrameMetric, textRegions } from './metric-solution.js'
-import { NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
-import type { LabelLattice, LatticeCache } from './numeric-lattice.js'
+import { NUMERIC_LATTICE_ENSEMBLE_VERSION, NUMERIC_LATTICE_NAME, NUMERIC_LATTICE_VERSION, dimensionStyleOf, labelLattice, styleFor } from './numeric-lattice.js'
+import type { LatticeCache } from './numeric-lattice.js'
+import { OCR_ENSEMBLE_NAME, OCR_ENSEMBLE_VERSION, ensembleOf } from './ensemble.js'
+import type { EnsembledLattice as LabelLattice } from './ensemble.js'
+import { labelCrop } from './recogniser.js'
+import type { ExternalReading, LabelCrop, LabelRecogniser } from './recogniser.js'
 import { textAxisOf } from './ocr.js'
 import { readOpeningCallouts } from './callouts.js'
 import type { OcrResult, TextToken } from './ocr.js'
@@ -46,7 +50,7 @@ import { readSpecifications, SPEC_READER_NAME, SPEC_READER_VERSION } from './spe
 import type { PublishedSpecificationInput } from './specifications.js'
 import { sealMetricEvidence } from './hash.js'
 import type { MetricEvidenceDraft } from './hash.js'
-import { METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
+import { METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION, METRIC_EVIDENCE_SCHEMA_VERSION } from './schema.js'
 import type { Association, ChainRelation, DimensionChain, DimensionObservation, FrameMetricSolution, MetricConflict, MetricEvidence, MetricEvidenceSet, NumericLatticeRecord, OcrToken, RegistrationPlane, UnresolvedMetric } from './schema.js'
 
 export const METRIC_READER_VERSION = '1.3.0' as const
@@ -274,8 +278,55 @@ const UNATTACHED: Association = { kind: 'UNATTACHED', score: 0, why: 'read on th
  * registered. Everything that could not be turned into evidence is named in
  * `unresolved` rather than dropped, and everything that contradicts something
  * else is named in `conflicts` rather than averaged.
+ *
+ * Synchronous, and reads with the numeric lattice alone: what every caller had
+ * before 005H, byte for byte. `extractMetricEvidenceAsync` is the same reading
+ * with an external recogniser heard as a second witness.
  */
 export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSet {
+  const step = metricEvidenceSteps(options, undefined).next()
+  // Without a recogniser the reading never waits on one: the first step is the end.
+  if (!step.done) throw new Error('extractMetricEvidence: a reading without a recogniser asked for one')
+  return step.value
+}
+
+/** 005H: one frame's labels, handed to the recogniser in one batch. */
+export type RecogniserRequest = { frameId: string; crops: LabelCrop[] }
+
+export type ExtractAsyncOptions = ExtractOptions & {
+  /** The external numeric recogniser (005H). Absent: exactly `extractMetricEvidence`. */
+  recogniser?: LabelRecogniser
+  signal?: AbortSignal
+  /** Told before each frame's batch and after each label of it: telemetry only. */
+  onRecognise?: (event: { frameId: string; done: number; total: number }) => void
+}
+
+/**
+ * 005H: the same reading with an external recogniser heard beside the lattice. Each plan frame's dimension labels
+ * are cut from the pass fields the lattice read (`labelCrop`) and handed to the recogniser in ONE batch, before the
+ * frame's scale, chains or metric solution exist; its readings come back as candidates and the ensemble rule
+ * (`ensembleOf`) records what the two witnesses make of each label. Everything after that is the synchronous reading.
+ * With no recogniser it is `extractMetricEvidence`, and returns the same bytes.
+ */
+export async function extractMetricEvidenceAsync(options: ExtractAsyncOptions): Promise<MetricEvidenceSet> {
+  const { recogniser } = options
+  if (!recogniser) return extractMetricEvidence(options)
+  const steps = metricEvidenceSteps(options, recogniser)
+  let step = steps.next()
+  while (!step.done) {
+    const { frameId, crops } = step.value
+    options.onRecognise?.({ frameId, done: 0, total: crops.length })
+    const readings = crops.length === 0 ? [] : await recogniser.recognise(crops, { signal: options.signal, onProgress: (done, total) => options.onRecognise?.({ frameId, done, total }) })
+    step = steps.next(readings)
+  }
+  return step.value
+}
+
+/**
+ * The reading itself, as steps: it yields once per plan frame that has dimension labels when a recogniser is given,
+ * and is handed back that frame's external readings; with none it never yields. One implementation for both callers.
+ */
+function* metricEvidenceSteps(options: ExtractOptions, recogniser: Pick<LabelRecogniser, 'id' | 'model' | 'runtime' | 'runtimeSha256'> | undefined): Generator<RecogniserRequest, MetricEvidenceSet, ExternalReading[]> {
   const { graph } = options
   const keep = options.frameFilter ?? DEFAULT_FRAME_FILTER
   const tolerancePx = options.tolerancePx ?? 2.2
@@ -367,8 +418,25 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       for (const [token, lattice] of read5e) {
         const id = stableId('ocr-lattice', token.text.replace(/[^0-9a-z]/gi, '') || 'token', { frameId: frame.id, box: token.box, orientation: token.orientation })
         lattices.set(token, { id, lattice })
-        numericLattices.push(latticeRecord(id, frame.id, token, lattice))
       }
+      // 005H: the external recogniser reads the same labels, from the same pass fields, before anything below knows a
+      // scale: one batch for the frame. Its readings are candidates; the ensemble rule says what the two witnesses make
+      // of each label, and the lattice's own reading stays on the record beside it.
+      if (recogniser && lattices.size > 0) {
+        const crops: LabelCrop[] = []
+        for (const [token, { id }] of lattices) {
+          const field = read.passes?.[token.orientation]
+          if (field && token.passBox) crops.push(labelCrop(id, field, token.passBox))
+        }
+        const readings: ExternalReading[] = yield { frameId: frame.id, crops }
+        const byKey = new Map(readings.map((r) => [r.key, r]))
+        for (const [token, held] of lattices) {
+          const external = byKey.get(held.id)
+          const reader = { name: NUMERIC_LATTICE_NAME, version: NUMERIC_LATTICE_ENSEMBLE_VERSION }
+          lattices.set(token, { id: held.id, lattice: external ? { ...held.lattice, reader, external, ensemble: ensembleOf(held.lattice, external) } : { ...held.lattice, reader } })
+        }
+      }
+      for (const [token, { id, lattice }] of lattices) numericLattices.push(latticeRecord(id, frame.id, token, lattice))
       const metric = solveFrameMetric({ frameId: frame.id, assetId: frame.assetId, chains: rawChains, chainIds: ids, raw: read.raw, legacyTokens: read.tokens, legacy: solution, tolerancePx, plausibility, checkpoint, lattices })
       solvedChains = metric.solved
       orientationOf = metric.chainOrientation
@@ -727,7 +795,8 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
 
   const draft: MetricEvidenceDraft = {
     schema: 'buildapp.metric-evidence-set',
-    schemaVersion: METRIC_EVIDENCE_SCHEMA_VERSION,
+    // 005H: a set read with a recogniser says so in its version, its readers and its `recogniser`; one read without is a 1.5.0 set.
+    schemaVersion: recogniser ? METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION : METRIC_EVIDENCE_SCHEMA_VERSION,
     sourcePackageId: options.sourcePackageId,
     sourcePackageHash: options.sourcePackageHash,
     observationGraphId: graph.id,
@@ -740,7 +809,8 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
       { name: 'metrics.axis-aligned-affine', version: '1' },
       { name: SPEC_READER_NAME, version: SPEC_READER_VERSION },
       { name: METRIC_SOLVER_NAME, version: METRIC_SOLVER_VERSION },
-      { name: NUMERIC_LATTICE_NAME, version: NUMERIC_LATTICE_VERSION },
+      { name: NUMERIC_LATTICE_NAME, version: recogniser ? NUMERIC_LATTICE_ENSEMBLE_VERSION : NUMERIC_LATTICE_VERSION },
+      ...(recogniser ? [{ name: OCR_ENSEMBLE_NAME, version: OCR_ENSEMBLE_VERSION }] : []),
     ],
     ocrTokens: ocrTokens.sort((a, b) => a.id.localeCompare(b.id)),
     evidence: evidence.sort((a, b) => a.id.localeCompare(b.id)),
@@ -753,6 +823,7 @@ export function extractMetricEvidence(options: ExtractOptions): MetricEvidenceSe
     metricSolutions: metricSolutions.sort((a, b) => (a.frameId < b.frameId ? -1 : a.frameId > b.frameId ? 1 : 0)),
     chainRelations,
     numericLattices: numericLattices.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+    ...(recogniser ? { recogniser: { id: recogniser.id, model: { name: recogniser.model.name, sha256: recogniser.model.sha256 }, runtime: recogniser.runtime, ...(recogniser.runtimeSha256 ? { runtimeSha256: recogniser.runtimeSha256 } : {}) } } : {}),
   }
   return sealMetricEvidence(draft, options.slug)
 }
@@ -1042,5 +1113,10 @@ function latticeRecord(id: string, frameId: string, token: TextToken, l: LabelLa
     tail: l.tail,
     segmentation: l.segmentation,
     cache: l.cache,
+    ...(l.external ? { external: externalRecord(l.external) } : {}),
+    ...(l.ensemble ? { ensemble: l.ensemble } : {}),
   }
 }
+
+/** 005H: the external reading as recorded — its key is the lattice's id, so it is not repeated. */
+const externalRecord = (x: ExternalReading): NonNullable<NumericLatticeRecord['external']> => ({ engine: x.engine, modelSha256: x.modelSha256, runtime: x.runtime, topK: x.topK.map((c) => ({ text: c.text, p: c.p })), greedy: { text: x.greedy.text, meanP: x.greedy.meanP }, stable: x.stable, variants: x.variants.map((v) => ({ variant: v.variant, top: v.top, p: v.p })) })
