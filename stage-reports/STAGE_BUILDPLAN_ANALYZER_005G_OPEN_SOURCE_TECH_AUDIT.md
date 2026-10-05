@@ -332,7 +332,7 @@ version/hash contract.
 | `npm run typecheck` | **pass** |
 | `npm test` | **pass**: 150 files passed, 1 skipped; 2 001 tests passed, 9 skipped (the existing environment-gated ones), uncontended run, 265 s |
 | `npm run build` | **pass** (typecheck + web production build) |
-| CI | the run on the pushed head is recorded in `PROJECT_STATUS.md` by the commit after this report |
+| CI | **run 153 (id 37350693720) on `2c6b615`: green on every job**: core, Node 18 parity, APK size + emulator, the UI evidence gate, every development-house and analyzer gate. Direct-APK publishing was skipped, as on any push. This row is the docs-only commit after `2c6b615`. |
 
 **One full-suite run was contended.** It ran while the arm64 emulation job used two of the four cores, and two
 `apps/analyzer-api` worker-thread tests timed out at 120 s. The same file passed alone (8.6 s and 0.5 s). The suite was
