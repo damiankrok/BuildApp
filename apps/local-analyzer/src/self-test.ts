@@ -71,14 +71,15 @@ export type SelfTestRecord = {
   wasmSha256: string | null
   corpus: { name: string; version: number; labels: number; sha256: string }
   outputSha256: string
+  /** Labels whose top reading is the printed value — on the corpus 005G chose its policy on: a parity count, not an accuracy. */
   exact: number
   /** `drawMs`: drawing the corpus on the device (a 4×4-supersampled stroke renderer); `totalMs`: the recogniser's batch alone. */
   timing: { drawMs: number; totalMs: number; loadMs: number | null; perLabelMeanMs: number; perLabelP95Ms: number }
   peakRssBytes: number
   runtime: { node: string; v8: string; arch: string; platform: string }
   /**
-   * Against the desktop's committed answer: MATCH when the recogniser, model, runtime binary, corpus and output all
-   * equal it; CORPUS_DIFFERS when this device drew other pixels (then the output says nothing about the reader);
+   * Against the desktop's committed answer: MATCH when the recogniser, model, runtime binary (hashed here — unknown is
+   * not equal), corpus and output all equal it; CORPUS_DIFFERS when this device drew other pixels (then the output says nothing about the reader);
    * MISMATCH otherwise.
    */
   parity: 'MATCH' | 'MISMATCH' | 'CORPUS_DIFFERS'
@@ -110,7 +111,8 @@ export async function ocrSelfTest(recogniser: LabelRecogniser & { stats?: () => 
   const corpusSha256 = cropsHash(corpus)
   const outputSha256 = readingsHash(ordered)
   const E = OCR_PARITY_EXPECTED
-  const parity = corpusSha256 !== E.corpusSha256 ? 'CORPUS_DIFFERS' : outputSha256 === E.outputSha256 && recogniser.id === E.recogniser && recogniser.model.sha256 === E.modelSha256 && (wasmSha256 === null || wasmSha256 === E.wasmSha256) ? 'MATCH' : 'MISMATCH'
+  // MATCH needs every hash known and equal: a WebAssembly binary this test could not hash is not the desktop's (red team B3)
+  const parity = corpusSha256 !== E.corpusSha256 ? 'CORPUS_DIFFERS' : outputSha256 === E.outputSha256 && recogniser.id === E.recogniser && recogniser.model.sha256 === E.modelSha256 && wasmSha256 === E.wasmSha256 ? 'MATCH' : 'MISMATCH'
   return {
     kind: 'ocr-parity',
     recogniser: { id: recogniser.id, modelSha256: recogniser.model.sha256, runtime: recogniser.runtime },

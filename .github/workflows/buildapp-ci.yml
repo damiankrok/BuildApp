@@ -970,6 +970,15 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Recogniser model cache (005H; PP-OCRv6_tiny_rec, pinned by SHA-256 in the manifest)
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/numeric-recogniser-ort/models/*.onnx
+            packages/numeric-recogniser-ort/models/*.dict.json
+          key: recogniser-model-${{ hashFiles('packages/numeric-recogniser-ort/models/manifest.json') }}
+      - name: Recogniser model, fetched at its pinned commit and verified (refused on any other bytes)
+        run: node packages/numeric-recogniser-ort/tools/fetch-model.mjs
       - name: Telemetry, progress, cancellation and severities
         run: npx vitest run packages/analysis-service/test/telemetry.test.ts packages/analysis-service/test/warnings.test.ts packages/analysis-service/test/service.test.ts apps/local-analyzer/test/program.test.ts apps/analyzer-api/test/android-contract.test.ts
 
@@ -1105,16 +1114,22 @@ jobs:
           mkdir -p external-recogniser
           npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop drawn --check --out external-recogniser/synthetic-drawn.json
       - name: The production path's crops (the custom reader's tokens; recorded, not gated)
-        run: npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop pass --out external-recogniser/synthetic-pass.json
+        # on 005G's 420 x 140 page and on a 1260 x 420 one (the same label pixels, more paper: the reader bounds a glyph
+        # at 6 % of the page's larger side, which on the small page cuts every cap-25 label); then a corpus no policy
+        # was chosen on — seed 7001, two-digit labels, every label also turned a quarter either way
+        run: |
+          npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop pass --out external-recogniser/synthetic-pass.json
+          npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --crop pass --page 1260x420 --out external-recogniser/synthetic-pass-page.json
+          npx vite-node packages/numeric-recogniser-ort/scripts/synthetic-gate.ts -- --corpus fresh --page 1260x420 --out external-recogniser/synthetic-fresh.json
       - name: Summary
         if: always() && !(github.event_name == 'workflow_dispatch' && inputs.only_ui_evidence)
         run: |
           {
             echo "### External numeric recogniser — synthetic quality (672 labels)"; echo
-            for f in synthetic-drawn synthetic-pass; do
+            for f in synthetic-drawn synthetic-pass synthetic-pass-page synthetic-fresh; do
               [ -f "external-recogniser/$f.json" ] && node -e "
                 const r = require('./external-recogniser/$f.json')
-                console.log('- ' + r.crop + ': ' + (r.pass ? 'PASS' : 'below gate') + ' — exact ' + r.all.exact + '/' + r.all.n + ', confident-wrong ' + r.all.confidentWrong + ', top-3 ' + r.all.top3 + ', top-5 ' + r.all.top5 + ', false high confidence ' + r.all.falseHighConfidence + ', tokenised ' + r.all.found + '/' + r.all.n)
+                console.log('- ' + r.corpus + ', ' + r.crop + ', page ' + r.page.width + 'x' + r.page.height + ': ' + (r.gate === null ? 'recorded' : r.pass ? 'PASS' : 'below gate') + ' — exact ' + r.all.exact + '/' + r.all.n + ', confident-wrong ' + r.all.confidentWrong + ', top-3 ' + r.all.top3 + ', top-5 ' + r.all.top5 + ', false high confidence ' + r.all.falseHighConfidence + ', tokenised ' + r.all.found + '/' + r.all.n)
               "
             done
           } >> "$GITHUB_STEP_SUMMARY"

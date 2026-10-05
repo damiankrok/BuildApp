@@ -33,7 +33,10 @@ sealed interface OcrSelfTestState {
         val shareText: String,
     ) : OcrSelfTestState
 
-    data class Failed(val message: String) : OcrSelfTestState
+    /** Why the test gave no record: the screen words each reason (strings.xml); `detail` is the program's own code, if any. */
+    data class Failed(val reason: Reason, val detail: String? = null) : OcrSelfTestState
+
+    enum class Reason { PREPARE_FAILED, CANCELLED, START_FAILED, EXITED, PROCESS_STOPPED, TEST_FAILED }
 }
 
 /**
@@ -44,7 +47,12 @@ sealed interface OcrSelfTestState {
  * the phone (`apps/local-analyzer/src/self-test.ts`), and answers with a few
  * hashes that say whether this phone read the corpus exactly as the desktop
  * did. No publisher's pixel, no network, no file kept: the job's folder is
- * removed when the test ends.
+ * removed when the test ends, and any folder an earlier test left (the app
+ * ended mid-test) is removed before the next one starts.
+ *
+ * The result is published only once the runtime's process is gone (or after
+ * a short wait, as `LocalAnalysis` does), so nothing — a retried analysis, a
+ * second test — can bind the process while it is still dying.
  */
 class OcrSelfTest(
     private val root: File,
@@ -54,6 +62,11 @@ class OcrSelfTest(
     private val scheduler: Scheduler,
     private val publish: (OcrSelfTestState) -> Unit,
     private val newId: () -> String = { LocalJobs.randomJobId() },
+    private val processGoneWaitMs: Long = LocalAnalysis.PROCESS_GONE_WAIT_MS,
+    /** The phone the record was made on, added to what the person copies. */
+    private val device: () -> String = {
+        "${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT}) · ${Build.SUPPORTED_ABIS.firstOrNull() ?: "?"}"
+    },
 ) {
     private var active: Run? = null
 
@@ -67,12 +80,14 @@ class OcrSelfTest(
         publish(OcrSelfTestState.Running(0, 0))
         io(
             Runnable {
+                // whatever an earlier test left behind (the app ended mid-test) goes first
+                File(root, "self-test").deleteRecursively()
                 val installed = runCatching { install() }
                 scheduler.post {
                     if (active !== run) return@post
                     installed.fold(
                         onSuccess = { run.begin(it) },
-                        onFailure = { run.finish(OcrSelfTestState.Failed(it.message ?: "the analyzer could not be prepared on this phone")) },
+                        onFailure = { run.finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.PREPARE_FAILED, it.javaClass.simpleName)) },
                     )
                 }
             },
@@ -82,7 +97,7 @@ class OcrSelfTest(
 
     /** Stop the test now. */
     fun cancel() {
-        active?.finish(OcrSelfTestState.Failed("przerwano"))
+        active?.finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.CANCELLED))
     }
 
     private inner class Run(val jobId: String) : LocalRunListener {
@@ -90,6 +105,10 @@ class OcrSelfTest(
         private val outDir = File(dir, "out")
         private var handle: LocalRunHandle? = null
         private var terminal = false
+        private var processGone = false
+        private var cleaned = false
+        private var outcome: OcrSelfTestState? = null
+        private var goneFallback: (() -> Unit)? = null
 
         fun begin(runtime: InstalledRuntime) {
             outDir.mkdirs()
@@ -109,38 +128,48 @@ class OcrSelfTest(
             when ((event["type"] as? JsonPrimitive)?.contentOrNull) {
                 "self-test-progress" -> publish(OcrSelfTestState.Running(event.int("done"), event.int("total")))
                 "self-test" -> finish(doneOf(event["record"]?.jsonObject ?: return))
-                "failed" -> finish(OcrSelfTestState.Failed(event.string("message") ?: "the self-test failed"))
-                "cancelled" -> finish(OcrSelfTestState.Failed("przerwano"))
+                "failed" -> finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.TEST_FAILED, event.string("code")))
+                "cancelled" -> finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.CANCELLED))
             }
         }
 
         override fun onExited(code: Int) {
-            if (!terminal) finish(OcrSelfTestState.Failed("the runtime ended without a result (exit code $code)"))
+            if (!terminal) finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.EXITED, code.toString()))
         }
 
         override fun onProcessGone() {
-            if (!terminal) finish(OcrSelfTestState.Failed("the analyzer process stopped before the test finished"))
+            processGone = true
+            if (!terminal) finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.PROCESS_STOPPED))
+            if (terminal) cleanUp()
         }
 
         override fun onStartFailed(code: String, message: String) {
-            if (!terminal) finish(OcrSelfTestState.Failed("$code: $message"))
+            if (!terminal) finish(OcrSelfTestState.Failed(OcrSelfTestState.Reason.START_FAILED, code))
         }
 
+        /** The test is over: end the process, and publish once it is gone (or after a short wait). */
         fun finish(state: OcrSelfTestState) {
             if (terminal) return
             terminal = true
+            outcome = state
             handle?.terminate()
+            if (processGone) cleanUp() else goneFallback = scheduler.postDelayed(processGoneWaitMs) { cleanUp() }
+        }
+
+        private fun cleanUp() {
+            if (cleaned) return
+            cleaned = true
+            goneFallback?.invoke()
             if (active === this) active = null
             io(Runnable { dir.deleteRecursively() })
-            publish(state)
+            outcome?.let(publish)
         }
 
         private fun doneOf(record: JsonObject): OcrSelfTestState.Done {
             val recogniser = record["recogniser"]?.jsonObject
             val corpus = record["corpus"]?.jsonObject
             val timing = record["timing"]?.jsonObject
-            val device = "${Build.MANUFACTURER} ${Build.MODEL} · Android ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT}) · ${Build.SUPPORTED_ABIS.firstOrNull() ?: "?"}"
-            val share = JSON.encodeToString(JsonObject.serializer(), JsonObject(record + ("device" to JsonPrimitive(device))))
+            val share = JSON.encodeToString(JsonObject.serializer(), JsonObject(record + ("device" to JsonPrimitive(device()))))
             return OcrSelfTestState.Done(
                 parity = record.string("parity") ?: "?",
                 recogniser = recogniser?.string("id") ?: "?",

@@ -89,6 +89,41 @@ export class AnalysisError extends Error {
   }
 }
 
+/** How an external recogniser failed (005H): what a person and the diagnostics are told, never its raw message. */
+export type RecogniserFailureKind = 'OUT_OF_MEMORY' | 'WORKER_EXITED' | 'ASSETS_REFUSED' | 'TIMEOUT' | 'FAILED'
+
+/**
+ * 005H: the external numeric recogniser could not read a batch — its worker ran out of memory, exited, refused an
+ * unpinned file or hung. The run stops here with this named failure: there is no fallback to the custom reader alone
+ * (005G measured fallback as the wrong design), and an unexpected internal error is not what happened.
+ */
+export class RecogniserFailure extends Error {
+  readonly kind: RecogniserFailureKind
+  constructor(override readonly cause: unknown) {
+    super('the external numeric recogniser failed')
+    this.name = 'RecogniserFailure'
+    this.kind = recogniserFailureKind(cause)
+  }
+}
+
+export function recogniserFailureKind(error: unknown): RecogniserFailureKind {
+  const e = error as { name?: unknown; code?: unknown; message?: unknown } | null
+  const text = `${String(e?.message ?? '')} ${String(e?.code ?? '')}`
+  if (e?.code === 'ERR_WORKER_OUT_OF_MEMORY' || /out of memory|OOM|memory access out of bounds|Cannot allocate|WebAssembly\.Memory/i.test(text)) return 'OUT_OF_MEMORY'
+  if (e?.name === 'RecogniserAssetError') return 'ASSETS_REFUSED'
+  if (e?.name === 'RecogniserTimeout') return 'TIMEOUT'
+  if (/exited|worker/i.test(text)) return 'WORKER_EXITED'
+  return 'FAILED'
+}
+
+const RECOGNISER_WORDS: Record<RecogniserFailureKind, string> = {
+  OUT_OF_MEMORY: 'ran out of memory on this device',
+  WORKER_EXITED: 'stopped before it finished',
+  ASSETS_REFUSED: 'found its model or runtime files changed and refused them',
+  TIMEOUT: 'stopped answering',
+  FAILED: 'failed',
+}
+
 const REFUSAL_CODES = new Set(['SCHEME_NOT_ALLOWED', 'URL_INVALID', 'URL_HAS_CREDENTIALS', 'PORT_NOT_ALLOWED', 'HOST_BLOCKED', 'TOO_MANY_REDIRECTS', 'REDIRECT_INVALID', 'MEDIA_TYPE_NOT_ALLOWED', 'TOO_LARGE'])
 
 const REFUSAL_WORDS: Record<string, string> = {
@@ -136,6 +171,15 @@ export function toAnalysisError(error: unknown, signal?: AbortSignal, context: {
   }
   // A cancellation polled from inside a loop, when no signal was there to abort.
   if ((error as { name?: unknown } | null)?.name === 'AbortError') return new AnalysisError('CANCELLED', 'the analysis was cancelled', context.stage ? { stage: context.stage } : {})
+  if (error instanceof RecogniserFailure) {
+    return new AnalysisError('ANALYSIS_FAILED', `the dimension-label reader ${RECOGNISER_WORDS[error.kind]}; no building was reconstructed without it`, {
+      reasonCode: 'EXTERNAL_RECOGNISER_FAILED',
+      stage: 'EXTRACTING_OBSERVATIONS',
+      substage: 'OCR_EXTERNAL',
+      title: 'The dimension reader could not run',
+      diagnostics: { recogniserFailure: error.kind },
+    })
+  }
   if (isReconstructionFailure(error)) {
     return new AnalysisError('RECONSTRUCTION_FAILED', error.message, {
       reasonCode: error.code,

@@ -33,9 +33,14 @@ export type RecogniserSummary = {
   confident: number
   corroborating: number
   agrees: number
+  /** CONTESTS and CONTESTS_COUNT: the external reading disagreed with the lattice's own. */
   disagreements: number
+  /** LEADS: a corroborated reading read where the lattice's was in doubt or stated no dimension. */
+  leads: number
   decisions: Record<string, number>
   ms: number
+  /** Releasing the recogniser failed after the reading (recorded, never in place of the run's outcome). */
+  releaseFailure?: string
 }
 
 export type LinkAnalysisSummary = {

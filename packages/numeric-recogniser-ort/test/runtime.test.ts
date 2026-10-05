@@ -3,15 +3,15 @@
  * worker the analyzer runs reads exactly what the in-process engine reads; a batch reports its progress, can be
  * cancelled at once, and leaves no worker behind.
  */
-import { mkdtempSync } from 'node:fs'
+import { mkdtempSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { cropForToken } from '@buildapp/source-metrics'
 import type { LabelCrop } from '@buildapp/source-metrics'
 import { renderLabel } from '@buildapp/synthetic-drawings'
-import { RecogniserAssetError, inlineRecogniser, openEngine, workerRecogniser, workspaceAssetPaths } from '../src/index.js'
+import { RecogniserAssetError, forbidNetwork, inlineRecogniser, openEngine, workerRecogniser, workspaceAssetPaths } from '../src/index.js'
 // @ts-expect-error — a plain ES module without type declarations
 import { bundleRecogniserWorker } from '../build.mjs'
 
@@ -74,10 +74,12 @@ describe('the worker the analyzer runs', () => {
     const progress: number[] = []
     const got = await worker.recognise(crops, { onProgress: (done) => progress.push(done) })
     expect(got).toEqual(expected)
-    expect(progress).toEqual(crops.map((_, i) => i + 1))
+    // while it loads it says so (0 of n: the files verified, the session created), then each label once, forward
+    expect(progress).toEqual([0, 0, ...crops.map((_, i) => i + 1)])
     const [stats] = worker.stats()
-    expect(stats.crops).toBe(crops.length)
-    expect(stats.mode).toBe('WORKER')
+    expect(stats).toMatchObject({ crops: crops.length, mode: 'WORKER', outcome: 'READ' })
+    expect(stats.rss?.afterLoadBytes).toBeGreaterThan(0)
+    expect(stats.rss?.afterOcrBytes).toBeGreaterThan(0)
     expect(stats.rss?.afterExitBytes).toBeGreaterThan(0)
     await worker.release()
     await worker.release()
@@ -90,7 +92,37 @@ describe('the worker the analyzer runs', () => {
     const run = worker.recognise([...crops, ...crops, ...crops, ...crops], { signal: controller.signal, onProgress: (done) => (done === 1 ? controller.abort() : undefined) })
     await expect(run).rejects.toMatchObject({ name: 'AbortError' })
     expect(performance.now() - started).toBeLessThan(30_000)
-    expect(worker.stats()).toEqual([])
+    // the cancelled batch is on the record too, with what memory it reached (red team C7)
+    const [stats] = worker.stats()
+    expect(stats).toMatchObject({ outcome: 'CANCELLED', error: 'AbortError', perCropMs: [] })
+    expect(stats.rss?.afterLoadBytes).toBeGreaterThan(0)
+    expect(stats.rss?.afterOcrBytes).toBeUndefined()
+  })
+
+  it('a worker silent past its watchdog is ended, by name (red team C3)', async () => {
+    const worker = workerRecogniser({ workerUrl, paths: workspaceAssetPaths(), watchdog: { loadMs: 1, cropMs: 1 } })
+    await expect(worker.recognise(crops)).rejects.toMatchObject({ name: 'RecogniserTimeout' })
+    expect(worker.stats()[0]).toMatchObject({ outcome: 'FAILED', error: 'RecogniserTimeout' })
+  })
+
+  it('release ends every batch in flight, as a cancel (red team C9)', async () => {
+    const worker = workerRecogniser({ workerUrl, paths: workspaceAssetPaths() })
+    // both outcomes are held before the release, so neither rejection is ever unhandled
+    const outcomes = Promise.allSettled([worker.recognise(crops), worker.recognise(crops)])
+    await worker.release()
+    const [a, b] = await outcomes
+    expect(a).toMatchObject({ status: 'rejected', reason: { name: 'AbortError' } })
+    expect(b).toMatchObject({ status: 'rejected', reason: { name: 'AbortError' } })
+    expect(worker.stats().map((x) => x.outcome)).toEqual(['CANCELLED', 'CANCELLED'])
+  })
+
+  it('in the worker, fetch fails by name: no code path can reach the network (red team B4)', async () => {
+    const scope: { fetch?: unknown } = { fetch: () => Promise.resolve('network') }
+    forbidNetwork(scope)
+    await expect((scope.fetch as () => Promise<unknown>)()).rejects.toThrow(/no network/)
+    // and the bundled worker installs that guard before it opens the engine
+    const source = readFileSync(fileURLToPath(workerUrl), 'utf8')
+    expect(source.indexOf('the recogniser has no network')).toBeGreaterThan(0)
   })
 
   it('a listener that throws (the analysis cancelling from its checkpoint) ends the batch with that error', async () => {

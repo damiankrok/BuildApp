@@ -59,7 +59,7 @@ describe('the recogniser sees image crops and nothing else', () => {
   it('the crops are cut from the pass field and the token’s box, before the frame’s metric solution exists', () => {
     const extract = codeOf(read('packages/source-metrics/src/extract.ts'))
     const loop = extract.slice(extract.indexOf('function* metricEvidenceSteps('))
-    const cut = loop.indexOf('labelCrop(id, field, token.passBox)')
+    const cut = loop.indexOf('labelCrop(key, field, token.passBox)')
     const ask = loop.indexOf('yield { frameId: frame.id, crops }')
     const solve = loop.indexOf('solveFrameMetric(')
     expect(cut).toBeGreaterThan(0)
@@ -68,6 +68,8 @@ describe('the recogniser sees image crops and nothing else', () => {
     // the crop's inputs: the lattice id, the pass field of the token's own orientation, the token's own box
     const block = loop.slice(loop.indexOf('if (recogniser && lattices.size > 0)'), ask)
     expect(block).toMatch(/const field = read\.passes\?\.\[token\.orientation\]/)
+    // keyed opaquely: a lattice id carries the custom reader's text, and only pixels may cross (red team A5)
+    expect(block).toMatch(/const key = `c\$\{crops\.length\}`/)
     for (const forbidden of ['solution', 'chain', 'scale', 'cmPerPixel', 'published', 'plausibility', 'tolerancePx', 'specification', 'observation']) expect(block.toLowerCase(), forbidden).not.toContain(forbidden.toLowerCase())
   })
 

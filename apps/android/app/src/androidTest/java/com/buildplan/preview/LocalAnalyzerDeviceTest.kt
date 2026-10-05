@@ -178,7 +178,7 @@ class LocalAnalyzerDeviceTest {
             put("supportedAbis", Build.SUPPORTED_ABIS.joinToString(","))
             put("wallMs", System.currentTimeMillis() - started)
             put("final", final?.let { it::class.simpleName } ?: "TIMEOUT")
-            (final as? OcrSelfTestState.Failed)?.let { put("failure", it.message) }
+            (final as? OcrSelfTestState.Failed)?.let { put("failure", "${it.reason}${it.detail?.let { d -> " ($d)" } ?: ""}") }
             (final as? OcrSelfTestState.Done)?.let { put("record", REPORT_JSON.parseToJsonElement(it.shareText)) }
         }
         File(dir, "ocr-self-test.json").writeText(REPORT_JSON.encodeToString(JsonObject.serializer(), report) + "\n")

@@ -97,7 +97,8 @@ export type PhaseStats = {
 
 export type RunCheckpoint = Checkpoint & {
   /** A heartbeat from a timer while the run awaits I/O; emitted only when one is due. */
-  idle(): void
+  /** The loops are not ticking: the run awaits the network or the disk (IO_WAIT), or a worker computes for it (COMPUTE, 005H). */
+  idle(activity?: 'COMPUTE' | 'IO_WAIT'): void
   /** Close the phase in hand, for the performance record. */
   end(): void
   stats(): PhaseStats[]
@@ -292,9 +293,9 @@ export function createCheckpoint(options: CheckpointOptions): RunCheckpoint {
       check(at)
       if (at - lastEmit >= heartbeatMs) emit('HEARTBEAT', 'COMPUTE', at)
     },
-    idle() {
+    idle(activity = 'IO_WAIT') {
       const at = options.clock()
-      if (at - lastEmit >= heartbeatMs) emit('HEARTBEAT', 'IO_WAIT', at)
+      if (at - lastEmit >= heartbeatMs) emit('HEARTBEAT', activity, at)
     },
     end() {
       close(options.clock())

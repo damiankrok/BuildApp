@@ -32,6 +32,9 @@ data class FailureDetails(
     /** 005F: NO_DIMENSION_EVIDENCE or DIMENSION_EVIDENCE_INCONCLUSIVE when the run stopped on the plan's scale. */
     fun dimensionEvidence(): String? = text("dimensionEvidence")
 
+    /** 005H: how the external numeric recogniser failed (OUT_OF_MEMORY, WORKER_EXITED, ASSETS_REFUSED, TIMEOUT, FAILED). */
+    fun recogniserFailure(): String? = text("recogniserFailure")
+
     /** Where the run stopped, in the words of the checklist; the structural steps are one "Układ konstrukcyjny". */
     fun stoppedAt(): String? {
         if (substage in STRUCTURAL_STEPS) return "Układ konstrukcyjny"

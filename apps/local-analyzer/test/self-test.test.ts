@@ -74,7 +74,8 @@ function expectMatch(result: { code: number | null; events: Event[]; outDir: str
   // the record on disk is the record on the pipe
   expect(JSON.parse(readFileSync(join(result.outDir, 'self-test.json'), 'utf8'))).toEqual(record)
   // progress counts every label once, forward
-  const done = result.events.filter((e) => e.type === 'self-test-progress').map((e) => e.done as number)
+  // the worker says it is loading (done 0) before the first label; after that every label once, forward
+  const done = result.events.filter((e) => e.type === 'self-test-progress' && (e.done as number) > 0).map((e) => e.done as number)
   expect(done).toEqual(done.map((_, i) => i + 1))
   expect(done.at(-1)).toBe(OCR_PARITY_EXPECTED.labels)
   return record

@@ -3,15 +3,19 @@
  *
  * The runtime is configured so that nothing can reach the network and nothing runs but this: one thread (no worker
  * pool, no SharedArrayBuffer), no proxy worker, the WebAssembly binary handed over as the verified bytes
- * (`wasmBinary`) rather than located, and its loader imported from the one verified file path. The model is handed
- * over as verified bytes too. A session is opened per batch of crops and released after it (`release`); the process
+ * (`wasmBinary`) rather than located, and its loader imported from a private copy of the verified bytes — written to a
+ * fresh temporary directory and removed on release, so the code that runs is the code that was hashed. The model is
+ * handed over as verified bytes too. A session is opened per batch of crops and released after it (`release`); the process
  * that holds it is the one that gives its memory back — which is why the analyzer runs it in a worker that exits.
  */
 import * as ort from 'onnxruntime-web'
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import type { ExternalReading, LabelCrop } from '@buildapp/source-metrics'
 import { BRACKET, variantOf } from './bracket.js'
-import { MODEL, RECOGNISER_ID, RECOGNISER_RUNTIME, verifiedAssets } from './manifest.js'
+import { MODEL, RECOGNISER_ID, RECOGNISER_RUNTIME, WASM_LOADER_FILE, verifiedAssets } from './manifest.js'
 import type { RecogniserAssetPaths } from './manifest.js'
 import { classesOf, digitClasses, digitPrefixBeam, greedyDecode, paddleTensor } from './paddle.js'
 import type { GrayImage } from './paddle.js'
@@ -24,18 +28,33 @@ export type Engine = {
   loadMs: number
 }
 
+/** Where opening the engine has got to: the files verified, then the session created (the WebAssembly compiled). */
+export type EngineStep = 'VERIFIED' | 'SESSION'
+
 /** Open a session over the verified model. Refuses unpinned files before the runtime sees a byte of them. */
-export async function openEngine(paths: RecogniserAssetPaths, clock: () => number = () => performance.now()): Promise<Engine> {
+export async function openEngine(paths: RecogniserAssetPaths, clock: () => number = () => performance.now(), onStep?: (step: EngineStep) => void): Promise<Engine> {
   const started = clock()
   const assets = verifiedAssets(paths)
-  ort.env.wasm.numThreads = 1
-  ort.env.wasm.proxy = false
-  ort.env.wasm.wasmBinary = assets.wasm
-  ort.env.wasm.wasmPaths = { mjs: pathToFileURL(assets.wasmLoaderPath).href }
-  ort.env.logLevel = 'error'
-  const session = await ort.InferenceSession.create(assets.model, { executionProviders: ['wasm'], graphOptimizationLevel: 'all', intraOpNumThreads: 1, interOpNumThreads: 1, logSeverityLevel: 3 })
   const classes = classesOf(assets.dictionary)
   if (classes.length !== MODEL.dictionary.classes) throw new Error(`the dictionary gives ${classes.length} classes, the manifest ${MODEL.dictionary.classes}`)
+  onStep?.('VERIFIED')
+  const loaderDir = mkdtempSync(join(tmpdir(), 'ort-loader-'))
+  const removeLoader = (): void => rmSync(loaderDir, { recursive: true, force: true })
+  let session: ort.InferenceSession
+  try {
+    const loader = join(loaderDir, WASM_LOADER_FILE)
+    writeFileSync(loader, assets.wasmLoader, { mode: 0o600 })
+    ort.env.wasm.numThreads = 1
+    ort.env.wasm.proxy = false
+    ort.env.wasm.wasmBinary = assets.wasm
+    ort.env.wasm.wasmPaths = { mjs: pathToFileURL(loader).href }
+    ort.env.logLevel = 'error'
+    session = await ort.InferenceSession.create(assets.model, { executionProviders: ['wasm'], graphOptimizationLevel: 'all', intraOpNumThreads: 1, interOpNumThreads: 1, logSeverityLevel: 3 })
+  } catch (error) {
+    removeLoader()
+    throw error
+  }
+  onStep?.('SESSION')
   const digits = digitClasses(classes)
   const input = session.inputNames[0]
   const output = session.outputNames[0]
@@ -72,7 +91,11 @@ export async function openEngine(paths: RecogniserAssetPaths, clock: () => numbe
     release: async () => {
       if (released) return
       released = true
-      await session.release()
+      try {
+        await session.release()
+      } finally {
+        removeLoader()
+      }
     },
   }
 }

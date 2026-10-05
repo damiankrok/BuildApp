@@ -3,7 +3,7 @@
  * PP-OCRv6_tiny_rec on ONNX Runtime Web (WebAssembly, one thread), behind source-metrics' `LabelRecogniser`.
  * The only package in the repository that imports `onnxruntime-web`.
  */
-export { recogniserIdentity, workerRecogniser } from './client.js'
+export { RecogniserTimeout, WATCHDOG, recogniserIdentity, workerRecogniser } from './client.js'
 export type { BatchStats, OrtRecogniser } from './client.js'
 export { inlineRecogniser } from './inline.js'
 export { MANIFEST, MODEL, RECOGNISER_ID, RECOGNISER_RUNTIME, WASM_FILE, WASM_LOADER_FILE, RecogniserAssetError, assetsPresent, bundledAssetPaths, readPinned, sha256Hex, verifiedAssets, workspaceAssetPaths } from './manifest.js'
@@ -12,5 +12,6 @@ export { DECODER, classesOf, digitClasses, digitPrefixBeam, greedyDecode, paddle
 export type { GrayImage } from './paddle.js'
 export { BRACKET, variantOf } from './bracket.js'
 export { openEngine } from './engine.js'
-export type { Engine } from './engine.js'
+export type { Engine, EngineStep } from './engine.js'
+export { forbidNetwork } from './worker.js'
 export type { WorkerReply, WorkerRequest } from './worker.js'

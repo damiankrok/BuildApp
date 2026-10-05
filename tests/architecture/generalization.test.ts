@@ -174,6 +174,12 @@ const judges = [
   ...walk(join(ROOT, 'packages/evidence-pack/src'), (n) => /\.ts$/.test(n)),
   join(ROOT, 'holdout/verdict.mjs'),
   ...walk(join(ROOT, 'packages/analysis-service/scripts'), (n) => /-row\.mjs$/.test(n)),
+  // 005H (red team D9): the OCR parity self-test ships in the APK with the synthetic corpus it draws, outside the
+  // dependency closure above (synthetic-drawings is a devDependency); its sources are held to the same rule
+  join(ROOT, 'apps/local-analyzer/src/self-test.ts'),
+  join(ROOT, 'apps/local-analyzer/src/self-test-entry.ts'),
+  join(ROOT, 'packages/synthetic-drawings/src/ocr-corpus.ts'),
+  join(ROOT, 'packages/synthetic-drawings/src/digit-corpus.ts'),
 ]
 const rel = (f: string): string => relative(ROOT, f)
 

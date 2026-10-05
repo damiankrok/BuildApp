@@ -26,6 +26,10 @@
 // families and the two round-5 draws, now development houses), with
 // seed = SHA256(PRE_HOLDOUT_6_SHA + "BUILDPLAN-005F-ADAPTIVE-SEGMENTATION-ENVELOPE-HOLDOUT"):
 //   node holdout/select.mjs select --round 6 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
+// Round 7 (BUILDPLAN-005H) draws two ARCHON families the same way, less holdout/excluded-families-round-7.txt (round 6's
+// families and the two round-6 draws, now development houses; 005G's bake-off read no other family), with
+// seed = SHA256(PRE_HOLDOUT_7_SHA + "BUILDPLAN-005H-EXTERNAL-NUMERIC-RECOGNISER-HOLDOUT"):
+//   node holdout/select.mjs select --round 7 --pool holdout/pool.txt --pool-sha256 <hex> --pre-holdout-sha <40hex>
 // `select` draws from the committed pool less the committed excluded families (holdout/excluded-families.txt:
 // families the development pages link to), and refuses unless HEAD is the declared SHA, the tree is clean, and
 // the pool is the tracked holdout/pool.txt whose hash both the operator and pool.meta.json declare.
@@ -42,6 +46,7 @@ const ROUNDS = {
   4: { label: 'BUILDPLAN-005D-DIMENSION-CHAIN-HOLDOUT', excluded: 'excluded-families-round-4.txt' },
   5: { label: 'BUILDPLAN-005E-NUMERIC-OCR-HOLDOUT', excluded: 'excluded-families-round-5.txt' },
   6: { label: 'BUILDPLAN-005F-ADAPTIVE-SEGMENTATION-ENVELOPE-HOLDOUT', excluded: 'excluded-families-round-6.txt' },
+  7: { label: 'BUILDPLAN-005H-EXTERNAL-NUMERIC-RECOGNISER-HOLDOUT', excluded: 'excluded-families-round-7.txt' },
 }
 const DOBREDOMY = {
   host: 'https://www.dobredomy.pl',

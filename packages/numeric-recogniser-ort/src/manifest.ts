@@ -85,7 +85,8 @@ export function readPinned(path: string, pin: { sha256: string; bytes?: number }
   return bytes
 }
 
-export type VerifiedAssets = { model: Uint8Array; dictionary: string[]; wasm: Uint8Array; wasmLoaderPath: string }
+/** The verified bytes. The loader's bytes are kept so the engine runs exactly them, not a later read of the file (red team B2). */
+export type VerifiedAssets = { model: Uint8Array; dictionary: string[]; wasm: Uint8Array; wasmLoader: Uint8Array }
 
 /** Read and verify the four files. Nothing is fetched: a file that is not here and pinned is an error. */
 export function verifiedAssets(paths: RecogniserAssetPaths): VerifiedAssets {
@@ -94,8 +95,8 @@ export function verifiedAssets(paths: RecogniserAssetPaths): VerifiedAssets {
   const dictionary = JSON.parse(Buffer.from(dictionaryBytes).toString('utf8')) as string[]
   if (!Array.isArray(dictionary) || dictionary.length !== MODEL.dictionary.entries) throw new RecogniserAssetError(`the dictionary ${MODEL.dictionary.file} does not hold ${MODEL.dictionary.entries} entries`)
   const wasm = readPinned(paths.wasm, MANIFEST.runtime.files[WASM_FILE], WASM_FILE)
-  readPinned(paths.wasmLoader, MANIFEST.runtime.files[WASM_LOADER_FILE], WASM_LOADER_FILE)
-  return { model, dictionary, wasm, wasmLoaderPath: paths.wasmLoader }
+  const wasmLoader = readPinned(paths.wasmLoader, MANIFEST.runtime.files[WASM_LOADER_FILE], WASM_LOADER_FILE)
+  return { model, dictionary, wasm, wasmLoader }
 }
 
 /** Whether all four files are present and pinned, without loading anything. */

@@ -32,7 +32,8 @@ import { serializeModel } from '@buildapp/model'
 import { compileBuilding, geometryClosureAudit } from '@buildapp/geometry'
 import type { ClosureReport } from '@buildapp/geometry'
 import { buildMobileSceneBundle, loadBundle, serializeBundle, sha256 } from '@buildapp/mobile-scene'
-import { AnalysisError, PHASE_STAGE as FAILURE_STAGE, reconstructionError, throwIfAborted, toAnalysisError } from './errors.js'
+import { AnalysisError, PHASE_STAGE as FAILURE_STAGE, RecogniserFailure, reconstructionError, recogniserFailureKind, throwIfAborted, toAnalysisError } from './errors.js'
+import type { RecogniserFailureKind } from './errors.js'
 import { TraceRecorder } from './trace.js'
 import type { AnalysisTrace } from './trace.js'
 import { diagnosticsBundle, lostPlanAddresses } from './diagnostics.js'
@@ -187,7 +188,9 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
   // The loops' ticks become telemetry here; nothing recorded is read back by the computation.
   const checkpoint = createCheckpoint({ clock, now, signal, pollCancel: options.pollCancel, emit: options.telemetry, overall: () => Math.max(0, last), rss: options.rss })
   // While the run awaits the network or the disk the loops are not ticking; a timer says so.
-  const heartbeat = options.telemetry ? setInterval(() => checkpoint.idle(), 1000) : undefined
+  // 005H: while a recogniser batch runs, the work is in its worker: the heartbeat says COMPUTE, not IO_WAIT.
+  let externalBusy = false
+  const heartbeat = options.telemetry ? setInterval(() => checkpoint.idle(externalBusy ? 'COMPUTE' : 'IO_WAIT'), 1000) : undefined
   heartbeat?.unref?.()
   // What the run has so far, for a failure's diagnostics bundle.
   let pkgSoFar: SourcePackage | undefined
@@ -329,6 +332,28 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
     // 005H: the external recogniser reads each plan's labels in one batch, under its own sub-phase; whatever happens,
     // it is released here — its worker and its memory gone — before the solver starts.
     let recogniserMs = 0
+    let releaseFailure: RecogniserFailureKind | undefined
+    const reader = options.recogniser
+    // The recogniser as the reading sees it: timed, marked busy, and a failure of its own named as such.
+    const timed: LabelRecogniser | undefined = reader && {
+      id: reader.id,
+      model: reader.model,
+      runtime: reader.runtime,
+      ...(reader.runtimeSha256 ? { runtimeSha256: reader.runtimeSha256 } : {}),
+      recognise: async (crops, o) => {
+        const started = clock()
+        externalBusy = true
+        try {
+          return await reader.recognise(crops, o)
+        } catch (error) {
+          if (signal?.aborted || (error as { name?: unknown } | null)?.name === 'AbortError') throw error
+          throw new RecogniserFailure(error)
+        } finally {
+          externalBusy = false
+          recogniserMs += clock() - started
+        }
+      },
+    }
     let metrics: MetricEvidenceSet
     try {
       metrics = await extractMetricEvidenceAsync({
@@ -340,21 +365,22 @@ export async function runAnalysis(input: AnalysisInput, options: AnalysisOptions
         raster,
         specifications: pkg.publishedSpecifications,
         specificationHash: publishedSpecificationsHash(pkg.publishedSpecifications),
-        recogniser: options.recogniser,
+        recogniser: timed,
         signal,
-        onRecognise: (e) => {
-          if (e.done === 0) recogniserMs -= clock()
-          checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } })
-          if (e.done === e.total) recogniserMs += clock()
-        },
+        onRecognise: (e) => checkpoint.tick({ subphase: { id: 'OCR_EXTERNAL', label: 'recognising dimension labels' }, counters: { label: e.done, labelsTotal: e.total } }),
       })
     } finally {
-      await options.recogniser?.release?.()
+      // released here whatever happened; a failure to release is recorded, never put in place of the run's own error
+      try {
+        await reader?.release?.()
+      } catch (error) {
+        releaseFailure = recogniserFailureKind(error)
+      }
     }
     metricsSoFar = metrics
     throwIfAborted(signal)
     const metricExtractionMs = lap()
-    const recogniser = options.recogniser ? recogniserSummaryOf(options.recogniser, metrics, Math.round(recogniserMs)) : undefined
+    const recogniser = reader ? { ...recogniserSummaryOf(reader, metrics, Math.round(recogniserMs)), ...(releaseFailure ? { releaseFailure } : {}) } : undefined
     trace.record('EXTRACTING_OBSERVATIONS', 'METRIC_EVIDENCE', 'PASSED', {
       evidence: metrics.evidence.length,
       chains: metrics.chains.length,
@@ -574,9 +600,12 @@ export function recogniserSummaryOf(recogniser: Pick<LabelRecogniser, 'id' | 'mo
     crops: read.length,
     stable: read.filter((l) => l.external?.stable).length,
     confident: read.filter((l) => l.ensemble?.external.confident).length,
-    corroborating: count('AGREES', 'CONTESTS', 'CONTESTS_COUNT', 'LEADS'),
+    // corroborating: confident, stable and the model's own reading — what may agree as CLEAR or lead (red team A7)
+    corroborating: read.filter((l) => l.ensemble?.external.confident && l.ensemble.external.stable && l.external?.greedy.text === l.ensemble.external.text).length,
     agrees: count('AGREES'),
-    disagreements: count('CONTESTS', 'CONTESTS_COUNT', 'LEADS'),
+    // disagreements with the lattice's own reading; a reading that led over none is counted apart
+    disagreements: count('CONTESTS', 'CONTESTS_COUNT'),
+    leads: count('LEADS'),
     decisions: Object.fromEntries(Object.entries(decisions).sort(([a], [b]) => (a < b ? -1 : 1))),
     ms,
   }

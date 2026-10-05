@@ -199,6 +199,12 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
             return s is AnalysisState.Submitting || s is AnalysisState.Polling || s is AnalysisState.Finishing || local.isBusy
         }
 
+    /**
+     * Whether the embedded runtime is taken: an analysis, or the OCR parity self-test (005H). The analyze, retry and
+     * mode controls wait on this; the app-wide "analysing" indicators read `isRunning` alone.
+     */
+    val runtimeBusy: Boolean get() = isRunning || ocrSelfTest is OcrSelfTestState.Running
+
     init {
         refreshDownloads()
         localJobs.recoverInterrupted()?.let { left ->
@@ -226,7 +232,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
 
     /** Switch between the analyzer on this phone and the service. Not while a job runs. */
     fun selectMode(next: AnalyzerMode) {
-        if (isRunning || next == mode) return
+        if (runtimeBusy || next == mode) return
         if (next == AnalyzerMode.LOCAL && !localAvailability.available) return
         mode = next
         state = AnalysisState.Idle
@@ -308,7 +314,7 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         if (isRunning) return
         if (mode == AnalyzerMode.LOCAL) {
             // The self-test holds the embedded runtime: one run at a time.
-            if (ocrSelfTest is OcrSelfTestState.Running) return
+            if (selfTest.isRunning) return
             val url = link.trim()
             ProjectLinks.problem(url)?.let { linkProblem = it; return }
             linkProblem = null
@@ -333,6 +339,8 @@ class AnalyzerViewModel(application: Application) : AndroidViewModel(application
         val failed = state as? AnalysisState.Failed ?: return
         notice = null
         if (failed.local != null) {
+            // the self-test holds the embedded runtime: a retry now would bind its dying process (red team C5)
+            if (selfTest.isRunning) return
             if (failed.retry == RetryAction.RESUBMIT && mode == AnalyzerMode.LOCAL) {
                 val url = failed.sourceUrl ?: link.trim()
                 if (ProjectLinks.problem(url) == null) local.start(url)

@@ -152,6 +152,12 @@ object AnalyzerMessages {
             "TIMEOUT" -> "Analiza trwała zbyt długo i została przerwana. Możesz spróbować ponownie."
             else -> when (failure.details?.reasonCode) {
                 "MODEL_EMISSION_FAILED" -> "Nie udało się poprawnie połączyć części ścian. Szczegóły są poniżej."
+                // 005H: the external numeric recogniser could not run on this phone; there is no reading without it.
+                "EXTERNAL_RECOGNISER_FAILED" -> when (failure.details?.recogniserFailure()) {
+                    "OUT_OF_MEMORY" -> "Do odczytu wymiarów z rysunku zabrakło pamięci telefonu, więc modelu nie zbudowano. Zamknij inne aplikacje i spróbuj ponownie. Szczegóły są poniżej."
+                    "ASSETS_REFUSED" -> "Pliki modelu odczytu wymiarów w aplikacji są uszkodzone lub zmienione, więc ich nie użyto. Zainstaluj aplikację ponownie. Szczegóły są poniżej."
+                    else -> "Odczyt wymiarów z rysunku zatrzymał się przed końcem, więc modelu nie zbudowano. Możesz spróbować ponownie. Szczegóły są poniżej."
+                }
                 "BOUNDARY_RESOLUTION_INCONCLUSIVE" -> "Nie udało się ustalić obrysu budynku: rysunek dopuszcza dwa obrysy różniące się o więcej niż 6%, a żaden z nich nie jest lepiej poparty ścianami i otworami, więc modelu nie zbudowano. Szczegóły są poniżej."
                 // 005F: a plan that prints dimensions which do not settle a scale is not a plan without dimensions.
                 "METRIC_RESOLUTION_INCONCLUSIVE" -> when (failure.details?.dimensionEvidence()) {

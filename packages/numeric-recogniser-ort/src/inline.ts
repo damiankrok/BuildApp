@@ -18,9 +18,17 @@ export function inlineRecogniser(options: { paths: RecogniserAssetPaths; clock?:
     ...recogniserIdentity,
     async recognise(crops, o = {}) {
       if (crops.length === 0) return []
+      if (o.signal?.aborted) throw abortError(o.signal)
       const fresh = engine === undefined
       engine ??= openEngine(options.paths, clock)
-      const e = await engine
+      let e: Engine
+      try {
+        e = await engine
+      } catch (error) {
+        // a load that failed is not kept: the next batch tries again, and `release` has nothing to rethrow
+        engine = undefined
+        throw error
+      }
       const started = clock()
       const out: ExternalReading[] = []
       const perCropMs: number[] = []
@@ -31,7 +39,7 @@ export function inlineRecogniser(options: { paths: RecogniserAssetPaths; clock?:
         perCropMs.push(Math.round(clock() - t0))
         o.onProgress?.(i + 1, crops.length)
       }
-      history.push({ crops: crops.length, loadMs: fresh ? e.loadMs : 0, ocrMs: Math.round(clock() - started), perCropMs, mode: 'INLINE' })
+      history.push({ crops: crops.length, loadMs: fresh ? e.loadMs : 0, ocrMs: Math.round(clock() - started), perCropMs, mode: 'INLINE', outcome: 'READ' })
       return out
     },
     stats: () => history.slice(),

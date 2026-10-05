@@ -3,8 +3,9 @@
  * Runtime here. What is held:
  *
  *  - the rule (`ensembleOf`) decision by decision: agreement corroborates, a disagreement with a CLEAR/SUPPORTED reading
- *    is AMBIGUOUS with both values, an unstable or unconfident external never corroborates or leads, a value of another
- *    digit count is recorded and never a candidate, a decimal separator is outside the digit-constrained reading;
+ *    is AMBIGUOUS — with both values only when the external one corroborates —, an unstable or unconfident external, or
+ *    a digit string that is not the model's own answer, never corroborates or leads, a value of another digit count is
+ *    recorded and never a candidate, a decimal separator is compared by its digits and separators;
  *  - the metric layer reads the ensemble's reading and offers the other witness at full strength — and nothing else;
  *  - the seam is image-only: the recogniser receives crops cut from the pass field at the label's box, keyed, with no
  *    other field, once per plan frame, before any scale exists — and the same crops whatever the chains decide;
@@ -38,6 +39,8 @@ const reading = (text: string, p = 0.99, meanP = 0.99, stable = true, extra: Arr
     { variant: 'SCALE90', top: text, p },
   ],
 })
+/** A reading whose model answered `own` over its whole alphabet while the digit beam's top is `top` (005H red team D). */
+const heardAs = (top: string, own: string, p = 0.99, meanP = 0.99): ExternalReading => ({ ...reading(top, p, meanP), greedy: { text: own, meanP } })
 const lat = (asRead: string, ocrClass: 'CLEAR' | 'SUPPORTED' | 'AMBIGUOUS' | 'LOW_QUALITY') => ({ asRead, asReadValueCm: /^[1-9]\d{1,3}$/.test(asRead) ? Number(asRead) : undefined, ocrClass })
 
 describe('the P2 rule, decision by decision', () => {
@@ -51,16 +54,47 @@ describe('the P2 rule, decision by decision', () => {
     }
   })
 
-  it('a disagreement with a CLEAR or SUPPORTED reading is AMBIGUOUS, the lattice still read, both values candidates — confident or not', () => {
-    for (const cls of ['CLEAR', 'SUPPORTED'] as const)
-      for (const x of [reading('1950'), reading('1950', 0.6, 0.7, false)]) {
-        const e = ensembleOf(lat('1410', cls), x)
-        expect(e.decision).toBe('CONTESTS')
-        expect(e.ocrClass).toBe('AMBIGUOUS')
-        expect(e.asRead).toBe('1410')
-        expect(e.rival).toEqual({ text: '1950', valueCm: 1950, witness: 'EXTERNAL' })
-        expect(e.lattice).toEqual({ asRead: '1410', valueCm: 1410, ocrClass: cls })
+  it('a disagreement with a CLEAR or SUPPORTED reading is AMBIGUOUS, the lattice still read — the external value a candidate only when it corroborates', () => {
+    for (const cls of ['CLEAR', 'SUPPORTED'] as const) {
+      const e = ensembleOf(lat('1410', cls), reading('1950'))
+      expect(e.decision).toBe('CONTESTS')
+      expect(e.ocrClass).toBe('AMBIGUOUS')
+      expect(e.asRead).toBe('1410')
+      expect(e.rival).toEqual({ text: '1950', valueCm: 1950, witness: 'EXTERNAL' })
+      expect(e.lattice).toEqual({ asRead: '1410', valueCm: 1410, ocrClass: cls })
+      // unconfident, unstable or both: doubt, and no candidate (red team A1 / D5)
+      for (const x of [reading('1950', 0.05, 0.2, false), reading('1950', 0.6, 0.95), reading('1950', 0.99, 0.99, false)]) {
+        const d = ensembleOf(lat('1410', cls), x)
+        expect(d).toMatchObject({ decision: 'CONTESTS', ocrClass: 'AMBIGUOUS', asRead: '1410' })
+        expect(d.rival).toBeUndefined()
       }
+    }
+  })
+
+  it('a digit string the model did not itself read is no reading: it never corroborates, leads or offers a value (red team D1)', () => {
+    // `2·5`: the digit beam hands the dot's frame to a digit and reads 25 at p ≈ 1
+    expect(ensembleOf(lat('25', 'CLEAR'), heardAs('25', '2·5', 0.997, 0.97))).toMatchObject({ decision: 'CONTESTS', ocrClass: 'AMBIGUOUS', asRead: '25' })
+    expect(ensembleOf(lat('25', 'CLEAR'), heardAs('25', '2·5', 0.997, 0.97)).rival).toBeUndefined()
+    expect(ensembleOf(lat('25', 'AMBIGUOUS'), heardAs('25', '2·5', 0.997, 0.97))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'AMBIGUOUS', asRead: '25' })
+    // a slash tick before 12: the beam reads 112
+    expect(ensembleOf({ asRead: '', asReadValueCm: undefined, ocrClass: 'LOW_QUALITY' }, heardAs('112', '/12', 0.93))).toMatchObject({ decision: 'NOT_COMPARABLE', asRead: '', ocrClass: 'LOW_QUALITY' })
+    // superscript millimetres: 12⁵ is not 125
+    expect(ensembleOf(lat('125', 'CLEAR'), heardAs('125', '12⁵'))).toMatchObject({ decision: 'CONTESTS_COUNT', ocrClass: 'AMBIGUOUS' })
+    // a stray dot with other digits doubts a CLEAR reading instead of slipping past it (red team A3)
+    expect(ensembleOf(lat('1410', 'CLEAR'), heardAs('1910', '1.910', 0.97))).toMatchObject({ decision: 'CONTESTS', ocrClass: 'AMBIGUOUS' })
+    expect(ensembleOf(lat('1410', 'CLEAR'), heardAs('1910', '1.910', 0.97)).rival).toBeUndefined()
+    // and the same digits with a stray dot change nothing either way
+    expect(ensembleOf(lat('1410', 'AMBIGUOUS'), heardAs('1410', '1.410', 0.97))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'AMBIGUOUS' })
+    // letters: no digit read at all
+    expect(ensembleOf(lat('1410', 'CLEAR'), heardAs('0', 'WC', 0.95))).toMatchObject({ decision: 'NO_VALUE', ocrClass: 'CLEAR' })
+  })
+
+  it('stability is read from the bracket itself, not taken on the recogniser’s word (red team A8)', () => {
+    const claimed = { ...reading('2590'), variants: reading('2590').variants.map((v) => (v.variant === 'TRIM1' ? { ...v, top: '2580' } : v)) }
+    expect(claimed.stable).toBe(true)
+    expect(ensembleOf(lat('1140', 'AMBIGUOUS'), claimed)).toMatchObject({ decision: 'NOT_CORROBORATING', asRead: '1140' })
+    const missingVariant = { ...reading('2590'), variants: reading('2590').variants.filter((v) => v.variant !== 'SCALE90') }
+    expect(ensembleOf(lat('1140', 'AMBIGUOUS'), missingVariant).decision).toBe('NOT_CORROBORATING')
   })
 
   it('a value of another digit count is recorded, never a candidate: it doubts the reading and contests no scale', () => {
@@ -100,18 +134,27 @@ describe('the P2 rule, decision by decision', () => {
     expect(ensembleOf(lat('11405', 'SUPPORTED'), reading('11408')).rival).toBeUndefined()
   })
 
-  it('a decimal separator is outside the digit-constrained reading: the digits may agree, nothing else is compared', () => {
-    expect(ensembleOf(lat('4,50', 'SUPPORTED'), reading('450'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'SUPPORTED' })
+  it('a decimal separator is compared by its digits and separators: a different reading doubts, nothing agrees on digits alone, nothing leads', () => {
     const metres = { asRead: '4,50', asReadValueCm: 450, ocrClass: 'AMBIGUOUS' as const }
-    expect(ensembleOf(metres, reading('450'))).toMatchObject({ decision: 'AGREES', ocrClass: 'CLEAR', asRead: '4,50' })
-    expect(ensembleOf(metres, reading('480'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'AMBIGUOUS' })
+    // the model read no comma: another number, not an agreement (the production-path gate's light_ink-5001-2 `72,408`)
+    expect(ensembleOf(metres, reading('450'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'AMBIGUOUS', asRead: '4,50' })
+    expect(ensembleOf(metres, reading('480'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'AMBIGUOUS', asRead: '4,50' })
+    expect(ensembleOf({ asRead: '72,408', asReadValueCm: undefined, ocrClass: 'LOW_QUALITY' }, reading('72408'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'LOW_QUALITY' })
+    // a confident decimal reading the external reader reads otherwise is in doubt — never a candidate (red team A3)
+    const sure = { ...metres, ocrClass: 'SUPPORTED' as const }
+    expect(ensembleOf(sure, reading('480'))).toMatchObject({ decision: 'CONTESTS', ocrClass: 'AMBIGUOUS', asRead: '4,50' })
+    expect(ensembleOf(sure, reading('480')).rival).toBeUndefined()
+    expect(ensembleOf(sure, reading('4500'))).toMatchObject({ decision: 'CONTESTS_COUNT', ocrClass: 'AMBIGUOUS' })
+    // a confident decimal reading the model read without its comma is in doubt too
+    expect(ensembleOf(sure, reading('450'))).toMatchObject({ decision: 'CONTESTS', ocrClass: 'AMBIGUOUS' })
+    // the same reading in the model's own words, separator and all, changes nothing
+    expect(ensembleOf(sure, heardAs('450', '4.50'))).toMatchObject({ decision: 'NOT_COMPARABLE', ocrClass: 'SUPPORTED' })
   })
 
   it('is a function of the two readings only', () => {
     const a = ensembleOf(lat('1410', 'SUPPORTED'), reading('1950'))
     const b = ensembleOf(lat('1410', 'SUPPORTED'), reading('1950'))
     expect(a).toEqual(b)
-    expect(ensembleOf.length).toBe(2)
   })
 })
 
@@ -220,18 +263,27 @@ describe('the seam: one batch per plan, crops only, and the OFF path unchanged',
     expect(calls.length).toBe(1)
     expect(calls[0].length).toBe(lattices.length)
     for (const c of calls[0]) expect(Object.keys(c).sort()).toEqual(['capPx', 'gray', 'key'])
-    expect(new Set(calls[0].map((c) => c.key))).toEqual(new Set(lattices.map((l) => l.id)))
-    // with readings for none, nothing is decided differently — but the set names the reader it was read with
+    // keyed opaquely, in order: nothing of the custom reader's text crosses (red team A5)
+    expect(calls[0].map((c) => c.key)).toEqual(calls[0].map((_, i) => `c${i}`))
+    // with readings for none, nothing was read: the set is the 1.5.0 set, byte for byte (red team A6)
     const off = extractMetricEvidence(options)
-    expect(set.dimensionObservations).toEqual(off.dimensionObservations)
-    expect(set.metricSolutions).toEqual(off.metricSolutions)
+    expect(set.schemaVersion).toBe(METRIC_EVIDENCE_SCHEMA_VERSION)
+    expect(set.recogniser).toBeUndefined()
+    expect(set.contentHash).toBe(off.contentHash)
+    expect(JSON.stringify(set)).toBe(JSON.stringify(off))
+  })
+
+  it('a set the recogniser read in names the reader it was read with', async () => {
+    const { recogniser } = spyRecogniser(() => reading('9999', 0.2, 0.2, false))
+    const set = await extractMetricEvidenceAsync({ ...options, recogniser })
+    const off = extractMetricEvidence(options)
     expect(set.schemaVersion).toBe(METRIC_EVIDENCE_ENSEMBLE_SCHEMA_VERSION)
     expect(set.recogniser).toEqual({ id: 'ocr.spy@0', model: { name: 'spy', sha256: 'b'.repeat(64) }, runtime: 'fixture' })
-    expect(lattices.every((l) => l.reader.version === NUMERIC_LATTICE_ENSEMBLE_VERSION)).toBe(true)
+    expect((set.numericLattices ?? []).every((l) => l.reader.version === NUMERIC_LATTICE_ENSEMBLE_VERSION && l.external !== undefined && !('key' in l.external))).toBe(true)
     expect(set.contentHash).not.toBe(off.contentHash)
   })
 
-  it('sends the same crops whatever the chains and the printed specification make of the page', async () => {
+  it('sends the same crops whatever the chain tolerance and the printed specification (inputs the crops must not depend on)', async () => {
     const a = spyRecogniser(() => undefined)
     const b = spyRecogniser(() => undefined)
     await extractMetricEvidenceAsync({ ...options, recogniser: a.recogniser })

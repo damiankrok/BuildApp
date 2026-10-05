@@ -186,7 +186,7 @@ private fun ModeRow(model: AnalyzerViewModel) {
         LineButton(
             stringResource(if (local) R.string.analyzer_use_service else R.string.analyzer_use_local),
             onClick = { model.selectMode(if (local) AnalyzerMode.SERVICE else AnalyzerMode.LOCAL) },
-            enabled = !model.isRunning && (local || model.localAvailability.available),
+            enabled = !model.runtimeBusy && (local || model.localAvailability.available),
         )
     }
 }
@@ -271,7 +271,7 @@ private fun LinkForm(model: AnalyzerViewModel) {
             label = { Text(stringResource(R.string.analyzer_link)) },
             placeholder = { Text("https://www.archon.pl/projekty-domow/…") },
             singleLine = true,
-            enabled = !model.isRunning,
+            enabled = !model.runtimeBusy,
             isError = model.linkProblem != null,
             supportingText = model.linkProblem?.let { problem -> { Text(problem) } },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Go, autoCorrectEnabled = false),
@@ -284,7 +284,7 @@ private fun LinkForm(model: AnalyzerViewModel) {
             LineButton(
                 stringResource(R.string.analyzer_analyze),
                 onClick = start,
-                enabled = !model.isRunning && model.link.isNotBlank(),
+                enabled = !model.runtimeBusy && model.link.isNotBlank(),
                 borderColor = Palette.Ink,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -292,11 +292,12 @@ private fun LinkForm(model: AnalyzerViewModel) {
             InkButton(
                 stringResource(R.string.analyzer_analyze),
                 onClick = start,
-                enabled = !model.isRunning && model.link.isNotBlank(),
+                enabled = !model.runtimeBusy && model.link.isNotBlank(),
                 modifier = Modifier.fillMaxWidth(),
             )
         }
         if (model.isRunning) StatusText(stringResource(R.string.analyzer_analyze_disabled))
+        else if (model.runtimeBusy) StatusText(stringResource(R.string.analyzer_selftest_busy))
     }
 }
 
@@ -800,7 +801,17 @@ private fun OcrSelfTestRow(model: AnalyzerViewModel) {
                 LineButton(stringResource(R.string.analyzer_selftest_again), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
             }
             is OcrSelfTestState.Failed -> {
-                StatusText(stringResource(R.string.analyzer_selftest_failed, s.message), maxLines = 3)
+                val why = stringResource(
+                    when (s.reason) {
+                        OcrSelfTestState.Reason.PREPARE_FAILED -> R.string.analyzer_selftest_failed_prepare
+                        OcrSelfTestState.Reason.CANCELLED -> R.string.analyzer_selftest_failed_cancelled
+                        OcrSelfTestState.Reason.START_FAILED -> R.string.analyzer_selftest_failed_start
+                        OcrSelfTestState.Reason.EXITED -> R.string.analyzer_selftest_failed_exited
+                        OcrSelfTestState.Reason.PROCESS_STOPPED -> R.string.analyzer_selftest_failed_stopped
+                        OcrSelfTestState.Reason.TEST_FAILED -> R.string.analyzer_selftest_failed_program
+                    },
+                )
+                StatusText(stringResource(R.string.analyzer_selftest_failed, if (s.detail != null) "$why (${s.detail})" else why), maxLines = 3)
                 LineButton(stringResource(R.string.analyzer_selftest_run), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
             }
             OcrSelfTestState.Idle -> LineButton(stringResource(R.string.analyzer_selftest_run), onClick = { model.runOcrSelfTest() }, enabled = !model.isRunning)
