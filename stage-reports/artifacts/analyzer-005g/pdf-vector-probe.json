@@ -1,0 +1,501 @@
+{
+ "schema": "buildapp.analyzer-005g.pdf-vector-probe",
+ "version": "1.0.0",
+ "what": "Mozilla PDF.js (pdfjs-dist 4.8.69, legacy build) on the outline PDFs a sealed SourcePackage already recorded and hashed (005C). Text facts and numbers only: no PDF byte, page raster or glyph is committed. Each document is identified by the SHA-256 the sealed package recorded; the bytes came from the 005C byte cache and were checked against it.",
+ "documents": [
+  {
+   "label": "aster-viii-base",
+   "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/Pliki%20do%20pobrania/asterVIII_pk.pdf",
+   "recordedAs": "OUTLINE / BASE / statedScale 1:500",
+   "recordedIn": "stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json",
+   "sha256": "14189ed5b513d52025320a1a0918edabfcb2353ec9d38a7904e0c40366dc511c",
+   "bytes": 0,
+   "producer": "GPL Ghostscript 8.15",
+   "creator": "PScript5.dll Version 5.2.2",
+   "pages": 1,
+   "page": {
+    "sizeMm": {
+     "w": 209.9,
+     "h": 297
+    },
+    "viewPt": {
+     "x0": 0,
+     "y0": 0,
+     "x1": 595,
+     "y1": 842
+    },
+    "rotate": 0,
+    "userUnit": 1
+   },
+   "text": {
+    "items": 45,
+    "nonEmpty": 28,
+    "numericItems": 8,
+    "scaleRelevantItems": [
+     {
+      "str": "1:500",
+      "x": 502.32,
+      "y": 96.56,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 28.49
+     },
+     {
+      "str": "5",
+      "x": 304.44,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 6.29
+     },
+     {
+      "str": "0",
+      "x": 276.12,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 6.29
+     },
+     {
+      "str": "10",
+      "x": 327.48,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "15",
+      "x": 357.48,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "20",
+      "x": 386.4,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "25",
+      "x": 414.47,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "30",
+      "x": 443.27,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "[m]",
+      "x": 464.39,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 15.74
+     }
+    ]
+   },
+   "operators": {
+    "total": 642,
+    "glyphRuns": 19,
+    "images": 0,
+    "counts": {
+     "save": 7,
+     "transform": 6,
+     "setLineWidth": 3,
+     "setLineCap": 1,
+     "setLineJoin": 1,
+     "setFlatness": 1,
+     "setStrokeRGBColor": 1,
+     "constructPath": 278,
+     "stroke": 177,
+     "setFillRGBColor": 1,
+     "eoFill": 1,
+     "beginText": 5,
+     "dependency": 1,
+     "setFont": 8,
+     "setTextMatrix": 8,
+     "showText": 19,
+     "moveText": 11,
+     "endText": 5,
+     "restore": 7,
+     "fill": 99,
+     "clip": 1,
+     "endPath": 1
+    }
+   },
+   "vector": {
+    "segments": 12644,
+    "axisAligned": 1553,
+    "paintedPolylines": 385,
+    "closedPainted": 314
+   },
+   "scale": {
+    "statedText": "1:500",
+    "scaleBarFit": {
+     "labels": 7,
+     "ticksUsed": 7,
+     "mPerPt": 0.176393,
+     "impliedScale": 500,
+     "maxResidualM": 0.009
+    },
+    "barVsStatedRelative": 3e-05
+   },
+   "outline": {
+    "drawingFilledPaths": 1,
+    "filledUnion": [
+     {
+      "vertices": 40,
+      "holes": 0,
+      "outerM2ByBar": 33.12,
+      "outerM2ByStated": 33.12,
+      "netM2ByBar": 33.12,
+      "widthM": 18.31,
+      "depthM": 17.48
+     }
+    ],
+    "enclosedByFilledShapesOnly": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": 33.05,
+     "enclosedM2ByStated": 33.04
+    },
+    "enclosedByFilledShapesAndStrokes": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": 331.66,
+     "enclosedM2ByStated": 331.64
+    }
+   },
+   "parseMsNode18": 387.9,
+   "parseMsNode22": 388.5
+  },
+  {
+   "label": "aster-viii-mirrored",
+   "url": "https://www.dobredomy.pl/dd_files/Image/projekty/asterVIII/Pliki%20do%20pobrania/asterVIII_pkl.pdf",
+   "recordedAs": "OUTLINE / MIRRORED / statedScale 1:500",
+   "recordedIn": "stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json",
+   "sha256": "6cc483dfc3c14934101bbfcecbe15f3e47ee498315ab0ef31ba47247ad4763b6",
+   "bytes": 0,
+   "producer": "GPL Ghostscript 8.15",
+   "creator": "PScript5.dll Version 5.2.2",
+   "pages": 1,
+   "page": {
+    "sizeMm": {
+     "w": 209.9,
+     "h": 297
+    },
+    "viewPt": {
+     "x0": 0,
+     "y0": 0,
+     "x1": 595,
+     "y1": 842
+    },
+    "rotate": 0,
+    "userUnit": 1
+   },
+   "text": {
+    "items": 48,
+    "nonEmpty": 29,
+    "numericItems": 8,
+    "scaleRelevantItems": [
+     {
+      "str": "5",
+      "x": 304.44,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 6.29
+     },
+     {
+      "str": "0",
+      "x": 276.12,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 6.29
+     },
+     {
+      "str": "10",
+      "x": 327.48,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "15",
+      "x": 357.48,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "20",
+      "x": 386.4,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "25",
+      "x": 414.47,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "30",
+      "x": 443.27,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 12.65
+     },
+     {
+      "str": "[m]",
+      "x": 464.39,
+      "y": 263.6,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 15.74
+     },
+     {
+      "str": "1:500",
+      "x": 502.32,
+      "y": 96.56,
+      "h": 13.8,
+      "angleDeg": 0,
+      "w": 28.49
+     }
+    ]
+   },
+   "operators": {
+    "total": 650,
+    "glyphRuns": 20,
+    "images": 0,
+    "counts": {
+     "save": 7,
+     "transform": 6,
+     "constructPath": 278,
+     "clip": 1,
+     "endPath": 1,
+     "setLineWidth": 4,
+     "setLineCap": 2,
+     "setLineJoin": 2,
+     "setFlatness": 1,
+     "setStrokeRGBColor": 2,
+     "stroke": 177,
+     "restore": 7,
+     "setFillRGBColor": 1,
+     "beginText": 5,
+     "dependency": 1,
+     "setFont": 10,
+     "setTextMatrix": 10,
+     "showText": 20,
+     "moveText": 10,
+     "endText": 5,
+     "fill": 99,
+     "eoFill": 1
+    }
+   },
+   "vector": {
+    "segments": 12644,
+    "axisAligned": 1553,
+    "paintedPolylines": 385,
+    "closedPainted": 314
+   },
+   "scale": {
+    "statedText": "1:500",
+    "scaleBarFit": {
+     "labels": 7,
+     "ticksUsed": 7,
+     "mPerPt": 0.176393,
+     "impliedScale": 500,
+     "maxResidualM": 0.009
+    },
+    "barVsStatedRelative": 3e-05
+   },
+   "outline": {
+    "drawingFilledPaths": 1,
+    "filledUnion": [
+     {
+      "vertices": 40,
+      "holes": 0,
+      "outerM2ByBar": 33.11,
+      "outerM2ByStated": 33.11,
+      "netM2ByBar": 33.11,
+      "widthM": 18.31,
+      "depthM": 17.48
+     }
+    ],
+    "enclosedByFilledShapesOnly": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": 33.04,
+     "enclosedM2ByStated": 33.04
+    },
+    "enclosedByFilledShapesAndStrokes": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": 331.55,
+     "enclosedM2ByStated": 331.53
+    }
+   },
+   "parseMsNode18": 355.7,
+   "parseMsNode22": 343.2
+  },
+  {
+   "label": "galaktyka-i-base",
+   "url": "https://www.dobredomy.pl/dd_files/Image/projekty/galaktykaI/Pliki%20do%20pobrania/galaktykaI_pk.pdf",
+   "recordedAs": "OUTLINE / BASE / statedScale 1:500",
+   "recordedIn": "stage-reports/artifacts/analyzer-005c/holdout/h2-galaktyka/source-package.json",
+   "sha256": "149b0799150a60ed1424bbd4d80b3ee9cd92dba0e8995c2441415a94befd4e20",
+   "bytes": 0,
+   "producer": "GPL Ghostscript 8.15",
+   "creator": "PScript5.dll Version 5.2.2",
+   "pages": 1,
+   "page": {
+    "sizeMm": {
+     "w": 209.9,
+     "h": 297
+    },
+    "viewPt": {
+     "x0": 0,
+     "y0": 0,
+     "x1": 595,
+     "y1": 842
+    },
+    "rotate": 0,
+    "userUnit": 1
+   },
+   "text": {
+    "items": 0,
+    "nonEmpty": 0,
+    "numericItems": 0,
+    "scaleRelevantItems": []
+   },
+   "operators": {
+    "total": 2033,
+    "glyphRuns": 0,
+    "images": 0,
+    "counts": {
+     "save": 1,
+     "transform": 1,
+     "setLineWidth": 1,
+     "setLineCap": 1,
+     "setLineJoin": 1,
+     "setFlatness": 1,
+     "setStrokeRGBColor": 1,
+     "constructPath": 1012,
+     "stroke": 55,
+     "setFillRGBColor": 1,
+     "eoFill": 957,
+     "restore": 1
+    }
+   },
+   "vector": {
+    "segments": 19401,
+    "axisAligned": 2553,
+    "paintedPolylines": 1115,
+    "closedPainted": 138
+   },
+   "scale": {
+    "statedText": null,
+    "scaleBarFit": null,
+    "barVsStatedRelative": null
+   },
+   "outline": {
+    "drawingFilledPaths": 957,
+    "filledUnion": {
+     "note": "no scale readable as text: geometry in points only",
+     "polygons": 6
+    },
+    "enclosedByFilledShapesOnly": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": null,
+     "enclosedM2ByStated": null
+    },
+    "enclosedByFilledShapesAndStrokes": {
+     "rasterPxPerPt": 8,
+     "enclosedM2ByBar": null,
+     "enclosedM2ByStated": null
+    }
+   },
+   "parseMsNode18": 371.4,
+   "parseMsNode22": 387.6
+  }
+ ],
+ "parity": {
+  "node18_20_4_vs_node22_22_2": "identical outputs (all fields except timings) for all 3 documents × {probe, outline}"
+ },
+ "pdfbox": {
+  "engine": "Apache PDFBox 3.0.8 (pdfbox-app jar, JVM 21)",
+  "aster-viii-base": "every text item at the same x and baseline y as PDF.js to 0.01 pt (28 items; 1:500 at (502.32, 96.56), scale labels 0…30 at y 263.60)",
+  "galaktyka-i-base": "0 text items — the same as PDF.js: the glyphs are filled paths",
+  "parseMs": {
+   "aster": 518.0,
+   "galaktyka": 240.1
+  }
+ },
+ "outlinedText": {
+  "sha256": "149b0799150a60ed1424bbd4d80b3ee9cd92dba0e8995c2441415a94befd4e20",
+  "textItemsExtractedByPdfjs": 0,
+  "filledPaths": 957,
+  "model": {
+   "dir": "PP-OCRv6_tiny_rec_onnx",
+   "sha256": "9ef676d6ed3c88256a2d92c640c44f25b0c40947e111b14b8be8f594091563e6"
+  },
+  "node": "v22.22.2",
+  "results": [
+   {
+    "region": "scale-bar-labels",
+    "boxPt": {
+     "x0": 270,
+     "y0": 258,
+     "x1": 485,
+     "y1": 276
+    },
+    "glyphFillsInRegion": 40,
+    "recognised": "0 5 10 15 20 25 30 [m]",
+    "meanCharP": 0.9566
+   },
+   {
+    "region": "title-block-scale",
+    "boxPt": {
+     "x0": 495,
+     "y0": 92,
+     "x1": 540,
+     "y1": 108
+    },
+    "glyphFillsInRegion": 12,
+    "recognised": "1:500",
+    "meanCharP": 0.9998
+   }
+  ]
+ },
+ "bundle": {
+  "esbuildTarget": "node18, ESM, one file, worker in-thread (globalThis.pdfjsWorker)",
+  "bundleBytes": 3081099,
+  "deflateBytes": 654780,
+  "node18NoIcu": "identical text and operator count under apps/local-analyzer/test/support/no-icu.cjs (the phone's no-ICU V8)",
+  "optionalNativeDeps": "canvas (native, prebuilt download at install) and path2d are NOT needed for text/operators: install with --omit=optional / mark external"
+ },
+ "publishedFigureForComparison": {
+  "aster-viii": {
+   "footprintM2": 278.3,
+   "source": "stage-reports/artifacts/analyzer-005c/aster-viii/source-package.json (page figure, 005C §Q)",
+   "use": "comparison only — not an input of the probe"
+  }
+ }
+}

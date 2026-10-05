@@ -1,0 +1,1757 @@
+{
+ "node": "v18.20.4",
+ "libraries": {
+  "polygon-clipping": "0.15.7",
+  "polyclip-ts": "0.16.8",
+  "clipper2-js": "1.2.4",
+  "jsts": "2.12.1"
+ },
+ "cases": 35,
+ "results": [
+  {
+   "id": "walls:analyzer-v2/marcowki-model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 24,
+   "engines": {
+    "polygon-clipping": {
+     "area": 34.559969479154084,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "dcf79ae9601f0617",
+     "ms": 16.68,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.88e-15
+    },
+    "polyclip-ts": {
+     "area": 34.559969479154084,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "dcf79ae9601f0617",
+     "ms": 43.72,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.88e-15
+    },
+    "clipper2": {
+     "area": 34.55996914679004,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "2c4ffe2dd1664700",
+     "ms": 10.74,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": -9.62e-9
+    },
+    "jsts (oracle)": {
+     "area": 34.559969479153985,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "64f870ca08a64218",
+     "ms": 123.38,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:analyzer-v2/marcowki-model.json:lvl-1",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 16,
+   "engines": {
+    "polygon-clipping": {
+     "area": 26.463518854688022,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "672d2d78b5c1b22e",
+     "ms": 5.66,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 4.03e-16
+    },
+    "polyclip-ts": {
+     "area": 26.463518854688022,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "672d2d78b5c1b22e",
+     "ms": 13.69,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 4.03e-16
+    },
+    "clipper2": {
+     "area": 26.463518854688026,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "92f8b131dae7e0bd",
+     "ms": 1.1,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 5.37e-16
+    },
+    "jsts (oracle)": {
+     "area": 26.46351885468801,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "672d2d78b5c1b22e",
+     "ms": 27.11,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:artifacts/building-model.json:ground",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 8,
+   "engines": {
+    "polygon-clipping": {
+     "area": 16.434000000000054,
+     "polygons": 1,
+     "holes": 3,
+     "hash": "d4985c8694d1f964",
+     "ms": 2.74,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 8.65e-16
+    },
+    "polyclip-ts": {
+     "area": 16.434000000000054,
+     "polygons": 1,
+     "holes": 3,
+     "hash": "d4985c8694d1f964",
+     "ms": 6.01,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 8.65e-16
+    },
+    "clipper2": {
+     "area": 16.43400000000004,
+     "polygons": 1,
+     "holes": 3,
+     "hash": "6fe763fcf00d5fd1",
+     "ms": 1.19,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 16.43400000000004,
+     "polygons": 1,
+     "holes": 3,
+     "hash": "58b1a65708eee83d",
+     "ms": 19.28,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:artifacts/building-model.json:upper",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 4,
+   "engines": {
+    "polygon-clipping": {
+     "area": 10.800000000000011,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "626004b461f9c99a",
+     "ms": 0.92,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -1.32e-15
+    },
+    "polyclip-ts": {
+     "area": 10.800000000000011,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "626004b461f9c99a",
+     "ms": 2.27,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -1.32e-15
+    },
+    "clipper2": {
+     "area": 10.800000000000026,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "095478e0f20c4a98",
+     "ms": 0.8,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 10.800000000000026,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "f23261cc7fe53a4c",
+     "ms": 3.89,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:kosacce/model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 39,
+   "engines": {
+    "polygon-clipping": {
+     "area": 30.099924404727176,
+     "polygons": 14,
+     "holes": 3,
+     "hash": "5bdc9fe524e07ba1",
+     "ms": 7.39,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.71e-15
+    },
+    "polyclip-ts": {
+     "area": 30.099924404727176,
+     "polygons": 14,
+     "holes": 3,
+     "hash": "5bdc9fe524e07ba1",
+     "ms": 25.92,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.71e-15
+    },
+    "clipper2": {
+     "area": 30.099889166938972,
+     "polygons": 14,
+     "holes": 3,
+     "hash": "9dfb41ab350292a2",
+     "ms": 2.92,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": -0.00000117
+    },
+    "jsts (oracle)": {
+     "area": 30.099924404727258,
+     "polygons": 14,
+     "holes": 3,
+     "hash": "2d3ea7815ab5910b",
+     "ms": 34.06,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:h1-dom-w-azaliach/model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 13,
+   "engines": {
+    "polygon-clipping": {
+     "area": 17.431018177649996,
+     "polygons": 9,
+     "holes": 1,
+     "hash": "25f653d56fa1ad24",
+     "ms": 1.03,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 4.08e-16
+    },
+    "polyclip-ts": {
+     "area": 17.431018177649996,
+     "polygons": 9,
+     "holes": 1,
+     "hash": "25f653d56fa1ad24",
+     "ms": 4.73,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 4.08e-16
+    },
+    "clipper2": {
+     "area": 17.431020600937998,
+     "polygons": 9,
+     "holes": 1,
+     "hash": "d2de26bd307367cc",
+     "ms": 0.89,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": 1.39e-7
+    },
+    "jsts (oracle)": {
+     "area": 17.43101817764999,
+     "polygons": 9,
+     "holes": 1,
+     "hash": "104ede5ce51d4692",
+     "ms": 6.3,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:h2-dom-w-tunbergiach/model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 18,
+   "engines": {
+    "polygon-clipping": {
+     "area": 16.786058437529984,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "1237a1bab42005d3",
+     "ms": 1.4,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.12e-16
+    },
+    "polyclip-ts": {
+     "area": 16.786058437529984,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "1237a1bab42005d3",
+     "ms": 6.12,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.12e-16
+    },
+    "clipper2": {
+     "area": 16.786046994910976,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "232758b85af645a7",
+     "ms": 1.07,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": -6.82e-7
+    },
+    "jsts (oracle)": {
+     "area": 16.78605843752998,
+     "polygons": 8,
+     "holes": 1,
+     "hash": "410cafa5345c347a",
+     "ms": 9.68,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:h2-dom-w-morelach/model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 20,
+   "engines": {
+    "polygon-clipping": {
+     "area": 28.388336336997,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "b0b366f75c982ca7",
+     "ms": 2.94,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -8.76e-16
+    },
+    "polyclip-ts": {
+     "area": 28.388336336997,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "b0b366f75c982ca7",
+     "ms": 7.75,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -8.76e-16
+    },
+    "clipper2": {
+     "area": 28.388335936649995,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "cc66fb40d1e27c0c",
+     "ms": 1.43,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": -1.41e-8
+    },
+    "jsts (oracle)": {
+     "area": 28.388336336997025,
+     "polygons": 7,
+     "holes": 2,
+     "hash": "3ab0198b047b79c2",
+     "ms": 28.92,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:h2-dom-w-morelach/model.json:lvl-1",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 18,
+   "engines": {
+    "polygon-clipping": {
+     "area": 25.12486322604003,
+     "polygons": 9,
+     "holes": 2,
+     "hash": "e500eb7c03ad1d5f",
+     "ms": 1.09,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.26e-15
+    },
+    "polyclip-ts": {
+     "area": 25.12486322604003,
+     "polygons": 9,
+     "holes": 2,
+     "hash": "e500eb7c03ad1d5f",
+     "ms": 6.6,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.26e-15
+    },
+    "clipper2": {
+     "area": 25.124863003374013,
+     "polygons": 9,
+     "holes": 2,
+     "hash": "9f35178f3f385c9f",
+     "ms": 1.41,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": -8.86e-9
+    },
+    "jsts (oracle)": {
+     "area": 25.124863226039974,
+     "polygons": 9,
+     "holes": 2,
+     "hash": "9fc2ee7c3b29afd7",
+     "ms": 9.16,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "walls:h2-dom-w-helikoniach/model.json:lvl-0",
+   "kind": "MODEL_WALLS",
+   "unit": "m",
+   "inputs": 11,
+   "engines": {
+    "polygon-clipping": {
+     "area": 20.49575316906646,
+     "polygons": 3,
+     "holes": 1,
+     "hash": "34c9bcf79c002b91",
+     "ms": 0.8,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.77e-15
+    },
+    "polyclip-ts": {
+     "area": 20.49575316906646,
+     "polygons": 3,
+     "holes": 1,
+     "hash": "34c9bcf79c002b91",
+     "ms": 4.85,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.77e-15
+    },
+    "clipper2": {
+     "area": 20.495760698836968,
+     "polygons": 3,
+     "holes": 1,
+     "hash": "eb536e0804ff7cec",
+     "ms": 0.68,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": 3.67e-7
+    },
+    "jsts (oracle)": {
+     "area": 20.495753169066518,
+     "polygons": 3,
+     "holes": 1,
+     "hash": "76a5db9c86c4b22a",
+     "ms": 13.41,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/alt-marcowki",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 77447.71875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "c5309bfd4bca3697",
+     "ms": 0.38,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 77447.71875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "c5309bfd4bca3697",
+     "ms": 2.45,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 77447.71875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3d4d5586106a1b85",
+     "ms": 1.31,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 77447.71875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "2f0115c341f8e950",
+     "ms": 1.93,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/blind-h1-dom-w-dabecjach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 12,
+   "engines": {
+    "polygon-clipping": {
+     "area": 193602.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3d2873633eaf3cda",
+     "ms": 0.91,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 193602.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3d2873633eaf3cda",
+     "ms": 12.21,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 193602.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0118b0f54de90945",
+     "ms": 1.45,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 193602.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "004b0592fe54c77a",
+     "ms": 10.79,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/dom-w-modrzykach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 15,
+   "engines": {
+    "polygon-clipping": {
+     "area": 242757.25,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "9cd9e52fdad3d158",
+     "ms": 1.19,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 242757.25,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "9cd9e52fdad3d158",
+     "ms": 5.42,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 242757.25,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "e9fa1662cae7cb9c",
+     "ms": 0.94,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 242757.25,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "36e947ca158bab44",
+     "ms": 7.83,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/dom-w-zurawkach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 8,
+   "engines": {
+    "polygon-clipping": {
+     "area": 199835.0833245,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "d9c3bddded954e55",
+     "ms": 0.55,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 199835.0833245,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "d9c3bddded954e55",
+     "ms": 5.55,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 199835.0833245,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "f9f037ca500037d4",
+     "ms": 0.94,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 199835.0833245,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "dcb13ccebd1e6b52",
+     "ms": 4.57,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/galaktyka",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 3,
+   "engines": {
+    "polygon-clipping": {
+     "area": 819087.1875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "a44a6f57ee39c31e",
+     "ms": 0.27,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 819087.1875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "a44a6f57ee39c31e",
+     "ms": 0.76,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 819087.1875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "813b3a08cb3f3c29",
+     "ms": 0.34,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 819087.1875,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "562b4bbe6c900ec9",
+     "ms": 1.22,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/kosacce-area-copy-alone",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 3,
+   "engines": {
+    "polygon-clipping": {
+     "area": 315500,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "bbc08787a966b293",
+     "ms": 0.19,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 315500,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "bbc08787a966b293",
+     "ms": 0.95,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 315500,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "99c66e5ec4874abb",
+     "ms": 0.35,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 315500,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "1b48439c693107ad",
+     "ms": 2.67,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/marcowki",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 186983,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "7e2bc701e7ebf7ef",
+     "ms": 0.17,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 186983,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "7e2bc701e7ebf7ef",
+     "ms": 0.37,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 186983,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "ca35c510f0d572f4",
+     "ms": 0.25,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 186983,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "b59558f477be98c9",
+     "ms": 0.82,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/rarytasy-g2e",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 0.2,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 0.44,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0299955f11841679",
+     "ms": 0.29,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 0.56,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005d/willa-miranda",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 9,
+   "engines": {
+    "polygon-clipping": {
+     "area": 231956.03125,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "9c983192f9f4381d",
+     "ms": 0.55,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 231956.03125,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "9c983192f9f4381d",
+     "ms": 4.15,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 231956.03125,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "2226535fd7bab522",
+     "ms": 0.81,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 231956.03125,
+     "polygons": 1,
+     "holes": 1,
+     "hash": "cd72a3882ebf691b",
+     "ms": 5.41,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005e/blind-h1-dom-w-modrzewnicy",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.16,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.37,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "f9b36092827282d9",
+     "ms": 0.31,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.25,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005e/blind-h2-dom-w-morelach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 251907.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "bbe5d64049a3e8ea",
+     "ms": 0.16,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 251907.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "bbe5d64049a3e8ea",
+     "ms": 0.43,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 251907.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "cdbff132c000f08a",
+     "ms": 0.21,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 251907.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "bbe5d64049a3e8ea",
+     "ms": 0.73,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005e/dom-w-dabecjach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 16,
+   "engines": {
+    "polygon-clipping": {
+     "area": 114164.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "8dc910e4d00e56a1",
+     "ms": 0.68,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 114164.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "8dc910e4d00e56a1",
+     "ms": 3.19,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 114164.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "938a721bb4b17aad",
+     "ms": 0.95,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 114164.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3744a48e2cbea810",
+     "ms": 9.14,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005e/rarytasy-g2e",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 0.28,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 0.76,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0299955f11841679",
+     "ms": 0.37,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 245084.25,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0f90d6ca9941ecf3",
+     "ms": 1.32,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005f/blind-h1-dom-pod-milorzebem",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 4,
+   "engines": {
+    "polygon-clipping": {
+     "area": 85101.75,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "64f207e91ffef57e",
+     "ms": 0.21,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 85101.75,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "64f207e91ffef57e",
+     "ms": 1.82,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 85101.75,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "674213fd1ec2001d",
+     "ms": 0.3,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 85101.75,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "0ead8d147ba3cd50",
+     "ms": 0.97,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005f/blind-h2-dom-w-helikoniach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 9,
+   "engines": {
+    "polygon-clipping": {
+     "area": 158132.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "6305f6bcab086fdb",
+     "ms": 0.38,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 158132.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "6305f6bcab086fdb",
+     "ms": 1.84,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 158132.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "104abc93ae509be6",
+     "ms": 0.59,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 158132.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "eb0e9209567cd8da",
+     "ms": 3.06,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005f/dom-w-modrzewnicy",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.15,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.38,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "f9b36092827282d9",
+     "ms": 0.32,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 7437.5,
+     "polygons": 2,
+     "holes": 0,
+     "hash": "1c3515e24d13bb2d",
+     "ms": 0.18,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "layout:analyzer-005f/dom-w-morelach",
+   "kind": "LAYOUT_REGIONS",
+   "unit": "px",
+   "inputs": 5,
+   "engines": {
+    "polygon-clipping": {
+     "area": 275310.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "e5212be73d4094f9",
+     "ms": 0.3,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 275310.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "e5212be73d4094f9",
+     "ms": 1.74,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 275310.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "1d2903226ec56baa",
+     "ms": 0.35,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 275310.75,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "a2c90c7b5e61f875",
+     "ms": 2.06,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:shared-edge",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "a05db59ecb8c2161",
+     "ms": 0.59,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "a05db59ecb8c2161",
+     "ms": 0.59,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "c61067808c6f6f8d",
+     "ms": 1,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "c748b40e9c51630f",
+     "ms": 0.73,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:collinear-overlap",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 3,
+   "engines": {
+    "polygon-clipping": {
+     "area": 34,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "7a3c0860a47a04f3",
+     "ms": 0.66,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 34,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "7a3c0860a47a04f3",
+     "ms": 0.94,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 34,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "392c4dbf02f1a0e4",
+     "ms": 0.46,
+     "orderInvariantArea": true,
+     "orderInvariantShape": false,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 34,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "f29e3f193aedde78",
+     "ms": 1.14,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:near-coincident-1e-9",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 3,
+   "engines": {
+    "polygon-clipping": {
+     "area": 53.999999996,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "d42f1f212f569f31",
+     "ms": 0.33,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 53.999999996,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "d42f1f212f569f31",
+     "ms": 4,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 54,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "b9339cea38bef59c",
+     "ms": 0.33,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 7.41e-11
+    },
+    "jsts (oracle)": {
+     "area": 53.999999996,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "887ca24a360e63cb",
+     "ms": 1.66,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:near-coincident-1e-12",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 3,
+   "engines": {
+    "polygon-clipping": {
+     "area": 53.99999999999599,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "dc1c08c7c9406067",
+     "ms": 0.32,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.63e-16
+    },
+    "polyclip-ts": {
+     "area": 53.99999999999599,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "dc1c08c7c9406067",
+     "ms": 3.43,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": -2.63e-16
+    },
+    "clipper2": {
+     "area": 54,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "b9339cea38bef59c",
+     "ms": 0.37,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 7.39e-14
+    },
+    "jsts (oracle)": {
+     "area": 53.99999999999601,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "dc1c08c7c9406067",
+     "ms": 1.69,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:sliver",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 80.0000075,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "8ed9e2c596f93ceb",
+     "ms": 0.23,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 1.78e-16
+    },
+    "polyclip-ts": {
+     "area": 80.0000075,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "8ed9e2c596f93ceb",
+     "ms": 1.07,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 1.78e-16
+    },
+    "clipper2": {
+     "area": 80.00000999999997,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3ac9e3b7e147a27e",
+     "ms": 0.33,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 3.12e-8
+    },
+    "jsts (oracle)": {
+     "area": 80.00000749999998,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "fe764bafc80e7833",
+     "ms": 1.8,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:t-junction-pile",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 24,
+   "engines": {
+    "polygon-clipping": {
+     "area": 58.05066666666667,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "6d61c61a9a3b7486",
+     "ms": 1.6,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 58.05066666666667,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "6d61c61a9a3b7486",
+     "ms": 15.42,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 58.05066672000001,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "cd7cb6f7a6794c67",
+     "ms": 3.97,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 9.19e-10
+    },
+    "jsts (oracle)": {
+     "area": 58.05066666666667,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "818f46168279d222",
+     "ms": 13.7,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:self-touching-ring",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 2,
+   "engines": {
+    "polygon-clipping": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "961b15f7bca9ffda",
+     "ms": 0.43,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "polyclip-ts": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "961b15f7bca9ffda",
+     "ms": 0.6,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "clipper2": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "3b5f14ab9ab366db",
+     "ms": 0.42,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    },
+    "jsts (oracle)": {
+     "area": 36,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "31dcae57ca4e3932",
+     "ms": 11.41,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  },
+  {
+   "id": "adv:rotated-walls",
+   "kind": "ADVERSARIAL",
+   "unit": "m",
+   "inputs": 12,
+   "engines": {
+    "polygon-clipping": {
+     "error": "Unable to complete output ring starting at [-5, -0.2999999999999994]. Last matching segment found ends at [-0.29999999999999966, 5]."
+    },
+    "polyclip-ts": {
+     "area": 17.06469256391281,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "1916c6e51158f12e",
+     "ms": 17.49,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 2.08e-16
+    },
+    "clipper2": {
+     "area": 17.064698764866,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "0355afe0134bc622",
+     "ms": 2.07,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 3.63e-7
+    },
+    "jsts (oracle)": {
+     "area": 17.064692563912807,
+     "polygons": 1,
+     "holes": 0,
+     "hash": "1916c6e51158f12e",
+     "ms": 14.92,
+     "orderInvariantArea": true,
+     "orderInvariantShape": true,
+     "relAreaVsOracle": 0
+    }
+   }
+  }
+ ],
+ "offsets": [
+  {
+   "id": "walls:analyzer-v2/marcowki-model.json:lvl-0",
+   "clipper2InflateUnionM2": 34.559973,
+   "jstsBufferUnionM2": 34.559969,
+   "rectUnionM2": 34.559969,
+   "clipperMs": 21.8
+  },
+  {
+   "id": "walls:analyzer-v2/marcowki-model.json:lvl-1",
+   "clipper2InflateUnionM2": 26.463523,
+   "jstsBufferUnionM2": 26.463519,
+   "rectUnionM2": 26.463519,
+   "clipperMs": 4.3
+  },
+  {
+   "id": "walls:artifacts/building-model.json:ground",
+   "clipper2InflateUnionM2": 16.434,
+   "jstsBufferUnionM2": 16.434,
+   "rectUnionM2": 16.434,
+   "clipperMs": 1.1
+  },
+  {
+   "id": "walls:artifacts/building-model.json:upper",
+   "clipper2InflateUnionM2": 10.8,
+   "jstsBufferUnionM2": 10.8,
+   "rectUnionM2": 10.8,
+   "clipperMs": 0.5
+  },
+  {
+   "id": "walls:kosacce/model.json:lvl-0",
+   "clipper2InflateUnionM2": 30.099922,
+   "jstsBufferUnionM2": 30.099924,
+   "rectUnionM2": 30.099924,
+   "clipperMs": 8.8
+  },
+  {
+   "id": "walls:h1-dom-w-azaliach/model.json:lvl-0",
+   "clipper2InflateUnionM2": 17.431018,
+   "jstsBufferUnionM2": 17.431018,
+   "rectUnionM2": 17.431018,
+   "clipperMs": 1.8
+  },
+  {
+   "id": "walls:h2-dom-w-tunbergiach/model.json:lvl-0",
+   "clipper2InflateUnionM2": 16.786068,
+   "jstsBufferUnionM2": 16.786058,
+   "rectUnionM2": 16.786058,
+   "clipperMs": 3.5
+  },
+  {
+   "id": "walls:h2-dom-w-morelach/model.json:lvl-0",
+   "clipper2InflateUnionM2": 28.388336,
+   "jstsBufferUnionM2": 28.388336,
+   "rectUnionM2": 28.388336,
+   "clipperMs": 2
+  },
+  {
+   "id": "walls:h2-dom-w-morelach/model.json:lvl-1",
+   "clipper2InflateUnionM2": 25.124863,
+   "jstsBufferUnionM2": 25.124863,
+   "rectUnionM2": 25.124863,
+   "clipperMs": 2
+  },
+  {
+   "id": "walls:h2-dom-w-helikoniach/model.json:lvl-0",
+   "clipper2InflateUnionM2": 20.495753,
+   "jstsBufferUnionM2": 20.495753,
+   "rectUnionM2": 20.495753,
+   "clipperMs": 1
+  }
+ ]
+}

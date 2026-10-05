@@ -1,0 +1,735 @@
+{
+ "engine": "@techstark/opencv-js (OpenCV 5.0.0) vs @buildapp/source-cv",
+ "node": "v22.22.2",
+ "lsdAvailable": false,
+ "houses": [
+  {
+   "house": "Larchfield",
+   "size": [
+    605,
+    514
+   ],
+   "inkPixels": 14566,
+   "components": {
+    "sourceCv": 33,
+    "opencv": 33,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 24.4,
+     "opencv": 51.1
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 16.2,
+     "opencvErode": 6,
+     "sourceCvDilate": 30.8,
+     "opencvDilate": 5.8
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 29,
+    "sourceCvHough": 400,
+    "opencvHoughP": 81,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.339,
+     "houghPBySourceCv": 0.807,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 31.7,
+     "sourceCvHough": 330.2,
+     "opencvHoughP": 36.7,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Holloway",
+   "size": [
+    696,
+    628
+   ],
+   "inkPixels": 21151,
+   "components": {
+    "sourceCv": 28,
+    "opencv": 28,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 17.1,
+     "opencv": 3.9
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 10,
+     "opencvErode": 1.8,
+     "sourceCvDilate": 30.4,
+     "opencvDilate": 3.3
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 28,
+    "sourceCvHough": 400,
+    "opencvHoughP": 112,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.316,
+     "houghPBySourceCv": 0.734,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 10.9,
+     "sourceCvHough": 372.5,
+     "opencvHoughP": 25.5,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Redmire",
+   "size": [
+    639,
+    548
+   ],
+   "inkPixels": 16040,
+   "components": {
+    "sourceCv": 27,
+    "opencv": 27,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.9,
+     "opencv": 2.4
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 6.5,
+     "opencvErode": 1.5,
+     "sourceCvDilate": 19.3,
+     "opencvDilate": 1.6
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 25,
+    "sourceCvHough": 400,
+    "opencvHoughP": 77,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.335,
+     "houghPBySourceCv": 0.807,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 7.5,
+     "sourceCvHough": 269.2,
+     "opencvHoughP": 21.3,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Ashby",
+   "size": [
+    536,
+    476
+   ],
+   "inkPixels": 16013,
+   "components": {
+    "sourceCv": 17,
+    "opencv": 17,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 4.2,
+     "opencv": 3
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 8.6,
+     "opencvErode": 2,
+     "sourceCvDilate": 19.6,
+     "opencvDilate": 2
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 16,
+    "sourceCvHough": 400,
+    "opencvHoughP": 72,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.284,
+     "houghPBySourceCv": 0.767,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 8.1,
+     "sourceCvHough": 319.8,
+     "opencvHoughP": 28.6,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Brackenholt",
+   "size": [
+    567,
+    498
+   ],
+   "inkPixels": 16920,
+   "components": {
+    "sourceCv": 17,
+    "opencv": 17,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 3.9,
+     "opencv": 2.9
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 8.9,
+     "opencvErode": 2.2,
+     "sourceCvDilate": 20,
+     "opencvDilate": 1.2
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 18,
+    "sourceCvHough": 400,
+    "opencvHoughP": 94,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.275,
+     "houghPBySourceCv": 0.705,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 12.2,
+     "sourceCvHough": 231.3,
+     "opencvHoughP": 18.8,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Coldharbour",
+   "size": [
+    681,
+    491
+   ],
+   "inkPixels": 21883,
+   "components": {
+    "sourceCv": 22,
+    "opencv": 22,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 3.2,
+     "opencv": 2.2
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 6.8,
+     "opencvErode": 1.5,
+     "sourceCvDilate": 18.3,
+     "opencvDilate": 1.6
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 23,
+    "sourceCvHough": 400,
+    "opencvHoughP": 135,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.264,
+     "houghPBySourceCv": 0.674,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 6.2,
+     "sourceCvHough": 280,
+     "opencvHoughP": 25.5,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Dunmore",
+   "size": [
+    559,
+    529
+   ],
+   "inkPixels": 17671,
+   "components": {
+    "sourceCv": 20,
+    "opencv": 20,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.6,
+     "opencv": 2
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.7,
+     "opencvErode": 1.3,
+     "sourceCvDilate": 15.9,
+     "opencvDilate": 1.4
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 22,
+    "sourceCvHough": 400,
+    "opencvHoughP": 103,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.272,
+     "houghPBySourceCv": 0.807,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.8,
+     "sourceCvHough": 287.5,
+     "opencvHoughP": 21.7,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Elmbridge",
+   "size": [
+    544,
+    483
+   ],
+   "inkPixels": 17268,
+   "components": {
+    "sourceCv": 21,
+    "opencv": 21,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.5,
+     "opencv": 1.8
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5,
+     "opencvErode": 1.2,
+     "sourceCvDilate": 14.1,
+     "opencvDilate": 1.2
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 20,
+    "sourceCvHough": 400,
+    "opencvHoughP": 81,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.295,
+     "houghPBySourceCv": 0.703,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.6,
+     "sourceCvHough": 242.9,
+     "opencvHoughP": 30.1,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Foxlow",
+   "size": [
+    574,
+    491
+   ],
+   "inkPixels": 18371,
+   "components": {
+    "sourceCv": 18,
+    "opencv": 18,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.8,
+     "opencv": 2
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.4,
+     "opencvErode": 1.2,
+     "sourceCvDilate": 15.2,
+     "opencvDilate": 1.4
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 20,
+    "sourceCvHough": 400,
+    "opencvHoughP": 102,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.304,
+     "houghPBySourceCv": 0.739,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.7,
+     "sourceCvHough": 296.1,
+     "opencvHoughP": 33.2,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Greywell",
+   "size": [
+    552,
+    483
+   ],
+   "inkPixels": 17520,
+   "components": {
+    "sourceCv": 18,
+    "opencv": 18,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.8,
+     "opencv": 1.9
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.4,
+     "opencvErode": 1.2,
+     "sourceCvDilate": 14.7,
+     "opencvDilate": 1.2
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 18,
+    "sourceCvHough": 400,
+    "opencvHoughP": 87,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.279,
+     "houghPBySourceCv": 0.683,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.8,
+     "sourceCvHough": 233.5,
+     "opencvHoughP": 19.1,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Hatherleigh",
+   "size": [
+    529,
+    498
+   ],
+   "inkPixels": 15594,
+   "components": {
+    "sourceCv": 17,
+    "opencv": 17,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.3,
+     "opencv": 1.9
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.1,
+     "opencvErode": 1.4,
+     "sourceCvDilate": 14.6,
+     "opencvDilate": 1.4
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 16,
+    "sourceCvHough": 400,
+    "opencvHoughP": 96,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.297,
+     "houghPBySourceCv": 0.782,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 6.9,
+     "sourceCvHough": 243.5,
+     "opencvHoughP": 17.9,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Ivybank",
+   "size": [
+    521,
+    476
+   ],
+   "inkPixels": 15357,
+   "components": {
+    "sourceCv": 17,
+    "opencv": 17,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 3.1,
+     "opencv": 4.8
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 14.9,
+     "opencvErode": 1.2,
+     "sourceCvDilate": 13.4,
+     "opencvDilate": 1.3
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 16,
+    "sourceCvHough": 400,
+    "opencvHoughP": 84,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.255,
+     "houghPBySourceCv": 0.746,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.4,
+     "sourceCvHough": 231.5,
+     "opencvHoughP": 17.5,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Kelsall",
+   "size": [
+    559,
+    533
+   ],
+   "inkPixels": 16775,
+   "components": {
+    "sourceCv": 20,
+    "opencv": 20,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 2.6,
+     "opencv": 2
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.7,
+     "opencvErode": 1.4,
+     "sourceCvDilate": 16.2,
+     "opencvDilate": 1.3
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 18,
+    "sourceCvHough": 400,
+    "opencvHoughP": 97,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.268,
+     "houghPBySourceCv": 0.713,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 4.3,
+     "sourceCvHough": 250.4,
+     "opencvHoughP": 20,
+     "opencvLsd": null
+    }
+   }
+  },
+  {
+   "house": "Lindale",
+   "size": [
+    590,
+    517
+   ],
+   "inkPixels": 17570,
+   "components": {
+    "sourceCv": 20,
+    "opencv": 20,
+    "sameBoxesAndPixelCounts": false,
+    "sameUpToInclusiveBounds": true,
+    "ms": {
+     "sourceCv": 3.4,
+     "opencv": 2.5
+    }
+   },
+   "morphology": {
+    "erodeDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "dilateDiff": {
+     "inner": 0,
+     "border": 0
+    },
+    "ms": {
+     "sourceCvErode": 5.9,
+     "opencvErode": 1.4,
+     "sourceCvDilate": 17.9,
+     "opencvDilate": 2.3
+    }
+   },
+   "lines": {
+    "sourceCvAxis": 20,
+    "sourceCvHough": 400,
+    "opencvHoughP": 91,
+    "opencvLsd": null,
+    "coverage": {
+     "sourceCvByHoughP": 0.26,
+     "houghPBySourceCv": 0.674,
+     "sourceCvByLsd": null,
+     "lsdBySourceCv": null
+    },
+    "ms": {
+     "sourceCvAxis": 3.9,
+     "sourceCvHough": 251.7,
+     "opencvHoughP": 19,
+     "opencvLsd": null
+    }
+   }
+  }
+ ]
+}
