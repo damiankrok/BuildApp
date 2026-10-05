@@ -4,6 +4,12 @@
 > agent. The external orchestrator owns long-term direction; this file records
 > what actually exists.
 
+> **Stage-report convention (from BUILDPLAN-ANALYZER-005G, preferred for every future stage).** The complete report
+> is committed to `stage-reports/STAGE_<ID>.md` (with its artifacts under `stage-reports/artifacts/`); the chat
+> handoff to the coordinator is only the short block — `STAGE`, `VERDICT`, `BRANCH`, `HEAD`, `CI`, `FULL_REPORT`,
+> `TOP_RECOMMENDATION`, `ADOPT_NEXT`, `IMPORTANT_REJECT/DEFER`, `NEXT_STEP`, `FINAL_TOKEN` — at most about twelve
+> lines. The full report is never pasted into chat.
+
 ## Completed stages
 
 | stage | branch | final commit | result |
@@ -34,6 +40,7 @@
 | STAGE BUILDPLAN-ANALYZER-005D — DIMENSION-CHAIN INTEGRITY + SPURIOUS-TICK REJECTION + OVERALL-SPAN CONSENSUS + ANALYZER EVIDENCE PACK | `analyzer/dimension-chain-integrity-v1` (from `analyzer/opening-aware-envelope-v1` @ `1b66eb9`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `7a18d21`; Evidence Pack `cc9f2ea`; metric topology `0a83a0f`; challenge `09c5121`; CI gates `6f3f996`; post-review `3e08681`; matrix and packs `286486e` = **PRE_HOLDOUT_4_SHA** (CI run 120 green); round-4 draw `bbe8172`; sealed blind runs `446207d`; report and status `d7a794f` = final build (CI run 124, the `workflow_dispatch` with the OWNER APK, versionCode 1124, green on its one re-run of two jobs that failed before any test ran; runs 121–123 superseded by the concurrency group); the APK record: the commit after it | Ten verdicts (§ "Where dimension-chain integrity stands"): **DIMENSION CHAIN TOPOLOGY: PASS**; **OCR LABEL-TO-SPAN BINDING: PARTIAL**; **METRIC EVIDENCE INDEPENDENCE: PARTIAL**; **CURRENT e-OZE DEVELOPMENT: PASS**; **LEGACY e-OZE COMPATIBILITY: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **005C BOUNDARY REGRESSION: PASS**; **005C GENERIC SOURCE REGRESSION: PASS**; **BLIND ARCHON ROUND 4 / PROJECT 1 (`dom-w-dabecjach`): ALGORITHMIC_FAIL**; **BLIND ARCHON ROUND 4 / PROJECT 2 (`dom-w-tunbergiach`): ALGORITHMIC_FAIL**. Azalia's spurious tick is rejected and its overall bound across it; both blind houses fail on the overall label's value, misread outside the reader's bounded readings (`1580` → `1501`, `1173` → `1117`). Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005E — NUMERIC OCR CANDIDATE LATTICE + GLYPH CONFIDENCE + NON-CIRCULAR SEQUENCE DECODING | `analyzer/numeric-ocr-lattice-v1` (from `analyzer/dimension-chain-integrity-v1` @ `d8ba4e8`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `39db89c`; lattice `0427773`; metric `af9f2ca`, `d4bf229`, `8b8bd39`; adversaries `a8ba3db`; post-review `ebd64eb`; CI rows and round-4 evidence `9f7423d` = **PRE_HOLDOUT_5_SHA** (CI run 131 green); round-5 draw `0afd751`; sealed blind runs `18295c2`; report and status `dab64d6` = final build (CI run 135, the `workflow_dispatch` with the OWNER APK, versionCode 1135, green at the first attempt); the APK record: the commit after it | Ten verdicts (§ "Where the numeric reader stands"): **NUMERIC OCR CANDIDATE RECALL: PARTIAL**; **MULTI-GLYPH SEQUENCE DECODING: PARTIAL**; **OCR CONFIDENCE CALIBRATION: PARTIAL**; **METRIC EVIDENCE INDEPENDENCE: PASS** (legacy-chain exemption declared); **FALSE CONSENSUS PROTECTION: PASS**; **CURRENT e-OZE: PASS**; **005D CHAIN TOPOLOGY REGRESSION: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **BLIND ROUND 5 PROJECT 1 (`dom-w-modrzewnicy`): ALGORITHMIC_FAIL** (numeric reader: a condensed overall cut into three cells; refused, no scale adopted); **BLIND ROUND 5 PROJECT 2 (`dom-w-morelach`): ALGORITHMIC_FAIL** (envelope, on a right scale). The round-4 houses are fixed generically (dabecjach REPLACED/STRONG at the printed scale; tunbergiach −12.47 % → −0.54 %). Not patched; next-stage input. The terminal line is PARTIAL |
 | STAGE BUILDPLAN-ANALYZER-005F — ADAPTIVE GLYPH-COUNT SEGMENTATION + EXTENT-CONSISTENT ENVELOPE | `analyzer/adaptive-segmentation-envelope-v1` (from `analyzer/numeric-ocr-lattice-v1` @ `9b619ec`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | reviews `e6f76d2`; count hypotheses `5eb2a5b`; typed refusal `8906546`; extent conflict and completions `177dfca`; pack layers `489e2b5`; class bars `d910212`; post-review `4fd2f8e`, `65ebbdd`, `2e1889a`, `ac5c5fc`, `f64fda9`, `41e26be` (the matrix's finding); matrix and evidence `65ae015` = **PRE_HOLDOUT_6_SHA** (CI run 145 green); round-6 draw `951a4d0`; sealed blind runs `43c6670`; report and status `05c53c5` (CI run 149 red: the hard-code guard read the preposition in a sealed blind name; one UI-gate timeout); the guard's registry fix `6b22582` (test only) = final build (CI run 151 green at the first attempt, the `workflow_dispatch` with the OWNER APK, versionCode 1151); the APK record: the commit after it | Ten verdicts (§ "Where glyph counts and the envelope stand"): **ADAPTIVE GLYPH-COUNT SEGMENTATION: PARTIAL**; **CONDENSED NUMERIC LABEL RECALL: PARTIAL**; **NUMERIC OCR NON-CIRCULARITY: PASS**; **EXTENT-CONSISTENT ENVELOPE: PARTIAL**; **ATTACHED BODY COMPLETION: PARTIAL**; **TERRACE / FALSE-CLOSURE SAFETY: PASS**; **ANALYZER EVIDENCE PACK: PASS**; **CURRENT e-OZE: PASS**; **BLIND ROUND 6 PROJECT 1 (`dom-pod-milorzebem`): ALGORITHMIC_FAIL** (a confident misread at the right count; refused, no scale adopted); **BLIND ROUND 6 PROJECT 2 (`dom-w-helikoniach`): ALGORITHMIC_FAIL** (upper-plan scale; ground outline). Morelach is fixed generically (−11.54 % → −3.12 %, PASS); modrzewnicy is not (its count is right, its `9` still reads `4`). Not patched; next-stage input. The terminal line is PARTIAL |
+| STAGE BUILDPLAN-ANALYZER-005G — OPEN-SOURCE ANALYZER TECHNOLOGY AUDIT + CONTROLLED BAKE-OFF | `analyzer/open-source-technology-audit-v1` (from `analyzer/adaptive-segmentation-envelope-v1` @ `6b4ab1f`; every push also to `claude/new-session-3kzcgh`; Legacy untouched) | audit, research harness and report: the commits after `6b4ab1f` on the branch (`git log analyzer/open-source-technology-audit-v1 ^6b4ab1f`); CI: recorded in § "Where the open-source technology audit stands" | **PASS_BUILDPLAN_ANALYZER_005G_OPEN_SOURCE_TECH_AUDIT_READY_FOR_COORDINATOR** — audit and bake-off only, **no production change** (§ "Where the open-source technology audit stands"). On the same 775 crops (103 real, 672 synthetic) the production reader trusts 309 readings and 75 are wrong; PaddleOCR PP-OCRv6 tiny (official ONNX, Apache-2.0, 4.46 MB) is wrong in 4 of 707 (real: 103/103 exact, 0 of 99). It runs as ONNX Runtime Web (WASM) inside the existing Node-18 analyzer bundle, bit-identical across Node 18/22 and arm64 V8. **ADOPT_NEXT:** PP-OCRv6 tiny on onnxruntime-web, as an ensemble member with a stability bracket (005H). PILOT: PDF.js document evidence (after 005H). REJECT: ONNX Runtime Android (telemetry provider + permissions ≥ 1.29, second engine), Tesseract, ML Kit, OpenCV Android, every pretrained floor-plan model (weights/data) |
 ## Current capabilities
 
 - **CanonicalBuildingModel** (`packages/model`): versioned Zod schema
@@ -1099,7 +1106,74 @@ green).
 - **Stage: PARTIAL** (`PARTIAL_BUILDPLAN_ANALYZER_005F_GLYPH_MISREADS_AND_BLIND_ROUND_6_FAILS`). CI green is not the
   verdict.
 
+## Where the open-source technology audit stands (STAGE BUILDPLAN-ANALYZER-005G)
+
+Report: `stage-reports/STAGE_BUILDPLAN_ANALYZER_005G_OPEN_SOURCE_TECH_AUDIT.md`. Evidence:
+`stage-reports/artifacts/analyzer-005g/`:
+- the architecture map and integration map;
+- the technology matrix (38 candidates × 26 criteria) and the licensing matrix (code / weights / data separately);
+- the OCR bake-off, the PDF probe, the CV and geometry probes, the floor-plan ML audit;
+- the deployment matrix, the recommendation and the sources.
+
+The harness is in `research/analyzer-005g/` (research-only, not a workspace).
+
+**Audit only.** No production file, model hash, resolver bound or APK dependency changed. 005G consumed no blind
+project.
+
+- **SINGLE_REPO_AUDIT — PASS.** BuildApp has no production dependency on Legacy; Legacy was not touched.
+- **OCR BAKE-OFF — PASS.** Same crops for every engine. Real labels: 81 from 005E plus 22 transcribed for 005G on
+  modrzewnicy and pod-milorzebem. On real labels (exact / trusted / trusted-wrong):
+
+  | engine | result |
+  | --- | --- |
+  | production reader | 49 / 44 / **10** |
+  | PaddleOCR PP-OCRv6 tiny | **103 / 99 / 0** |
+  | en PP-OCRv5 mobile | 101 / 96 / 0 |
+  | Tesseract | 94 / 86 / 2 |
+
+  On all 775: 309 / **75** wrong against **707 / 4**. The blind-round misreads (`1950 → 1410`, `648 → 608`,
+  condensed `2590`) read right at p ≥ 0.997.
+  - The best design is **OCR-2 ensemble with a stability bracket**: 631 trusted, 2 wrong on 775; 88 trusted, 0 wrong
+    on real.
+  - A fallback design is the worst (64 trusted-wrong): the reader's own confident misreads never reach the external
+    engine.
+- **DEPLOYMENT — PASS on desktop, Node 18 and arm64 V8; device pending.**
+  - ONNX Runtime Web 1.30.0 (WASM) runs the pinned model inside the existing analyzer bundle on Node 18.20.4,
+    including without ICU, at 44 ms per label.
+  - It adds 0 `.so` and about 7.8 MB for every ABI, with no telemetry, and is bit-identical on Node 18 and Node 22 and
+    on arm64 V8 (official Node 18 arm64 under qemu).
+  - Rejected: native ONNX Runtime Android (+12.4 MB per ABI; ≥ 1.29 adds `INTERNET`, `ACCESS_NETWORK_STATE` and a
+    telemetry provider) and ML Kit.
+- **PDF / VECTOR — PASS.** PDF.js 4.8.69 (the last Node-18 line) reads Aster VIII's outline PDF: "1:500" and the
+  scale bar fitted as geometry agree to 3e-5, and the walls come out as an exact polygon. Galaktyka I's PDF has no
+  text; its outlined "1:500" and scale bar are read by the same recogniser. Closing the envelope stays a resolver
+  decision.
+- **CV — DEFER OpenCV.** `source-cv` is bit-identical on components and morphology.
+- **Floor-plan ML — none usable.** No model has commercially clean code + weights + data.
+- **Geometry — DEFER.** polygon-clipping throws on rotated walls (REJECT); polyclip-ts and Clipper2 DEFER; JSTS is the
+  oracle.
+- **Answers to the brief's twelve decision questions**: report §J and `recommendation.md`.
+
+**CI:** CI_RECORD
+
 ## Recommended technical next step
+
+**For the analyzer line: BUILDPLAN-ANALYZER-005H — external numeric recogniser ensemble.**
+- **What it is:** PaddleOCR PP-OCRv6 tiny (official ONNX, SHA-256 `9ef676d6…`) on ONNX Runtime Web (WASM) inside the
+  existing analyzer bundle.
+- **How it is used:** as a second, image-only candidate source in the numeric lattice with a stability bracket; the
+  metric resolver still decides.
+- **Specification:** files, interfaces, tests, Evidence Pack additions, CI gates and the version/hash contract in
+  `stage-reports/artifacts/analyzer-005g/integration-map.md`.
+- **First gates:**
+  1. bit-identical per-label outputs on the x86_64 emulator and the OWNER's arm64 phone;
+  2. the synthetic regression;
+  3. existing gates with the recogniser off (unchanged) and on (every hash change explained);
+  4. a fresh blind protocol.
+- **After it:** PDF.js document evidence (PILOT).
+
+The 005F recommendation below is answered by 005G: the glyph classifier's confident misreads at the right count are
+the defect an external recogniser removes on the same crops (`ocr-bakeoff.md`).
 
 **For the analyzer line: return to the coordinator with the glyph classifier's confident misreads at the right digit count as the next stage's input** — blind round 6's first bad decision (`dom-pod-milorzebem`, `648` read `608` SUPPORTED) and the reason modrzewnicy stays unread (`2590`'s `9` read `4` in every four-cell cut), the same failure in the matcher on small, condensed digits after 005F's count fix (report §AA, §AH, `artifacts/analyzer-005f/holdout/`, `evidence/blind-*`). Both round-6 families join the development set; `dom-w-helikoniach`'s attic-plan scale and ground outline faces are recorded for the stage after. A further claim needs a new blind draw on a new frozen SHA.
 

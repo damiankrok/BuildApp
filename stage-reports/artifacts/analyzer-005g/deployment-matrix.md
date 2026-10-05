@@ -10,7 +10,9 @@ A library is adoptable only when **both** questions have a measured answer:
 - the no-ICU shim the repository already uses for phone parity (`apps/local-analyzer/test/support/no-icu.cjs`);
 - the actual Android artefacts (AARs from Maven Central and Google Maven) and the phone's own `libnode.so`.
 
-**Not measured:** an arm64 device run. This session has no emulator or device. That is the integration stage's
+**Measured on arm64, emulated:** the official Node 18.20.4 linux-arm64 build under qemu (bit parity only).
+
+**Not measured:** an Android device run. This session has no emulator or device. That is the integration stage's
 first gate.
 
 ## Baseline
@@ -29,7 +31,7 @@ first gate.
 
 | route | CI | phone | new `.so` | APK delta (compressed) | model asset | cold load | per label | RAM | parity | telemetry | verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **A. `onnxruntime-web` 1.30.0 (WASM SIMD, 1 thread) inside the Node analyzer bundle** | yes (Node 22 and Node 18 measured) | the same bundle and the same `.wasm` on nodejs-mobile 18.20.4 (runs under the no-ICU shim; arm64 device **not yet run**) | **0** | runtime `.wasm` 14 239 897 B → **3.67 MB** + loader 24 KB + glue bundled into `analyzer.mjs` (+78 KB) → **≈ 3.7 MB, once for every ABI** | PP-OCRv6 tiny 4 462 639 B → **4.11 MB** | 522 ms (Node 18) | **44 ms** mean, 61 ms p95 (Node 18, x86-64) | session +160–200 MiB RSS, stays for the process (the WASM instance is a singleton): run OCR in a worker thread that exits | **WASM Node 18 ≡ Node 22 bit-identical on 775/775**; bundled tensor hash `1cc3d1a9…` identical on Node 18, Node 18 no-ICU and Node 22 | **none** (no endpoint strings in any `.wasm`) | **ADOPT_NEXT** |
+| **A. `onnxruntime-web` 1.30.0 (WASM SIMD, 1 thread) inside the Node analyzer bundle** | yes (Node 22 and Node 18 measured) | the same bundle and the same `.wasm` on nodejs-mobile 18.20.4 (runs under the no-ICU shim; **arm64 V8 bit-identical under qemu**; arm64 *device* not yet run) | **0** | runtime `.wasm` 14 239 897 B → **3.67 MB** + loader 24 KB + glue bundled into `analyzer.mjs` (+78 KB) → **≈ 3.7 MB, once for every ABI** | PP-OCRv6 tiny 4 462 639 B → **4.11 MB** | 522 ms (Node 18) | **44 ms** mean, 61 ms p95 (Node 18, x86-64) | session +160–200 MiB RSS, stays for the process (the WASM instance is a singleton): run OCR in a worker thread that exits | **WASM Node 18 ≡ Node 22 bit-identical on 775/775**; bundled tensor hash `1cc3d1a9…` identical on Node 18, Node 18 no-ICU and Node 22 | **none** (no endpoint strings in any `.wasm`) | **ADOPT_NEXT** |
 | B. `onnxruntime-android` 1.30.0 AAR + JNI, results handed to Node | CI would need `onnxruntime-node` (a different binary) | Kotlin side, then marshalled into the Node analyzer per label | `libonnxruntime.so` + `libonnxruntime4j_jni.so` **per ABI** | arm64 32 990 480 B → **12.38 MB**; armeabi-v7a 23.3 MB, x86_64 39.3 MB raw | same | not measured | not measured | not measured | **broken**: two engines; native-vs-WASM probabilities already differ by 3e-5 on one machine, and MLAS kernels differ by CPU | **yes**: AAR adds `INTERNET`, `ACCESS_NETWORK_STATE`, `ai.onnxruntime.TelemetryInitializer`; 1DS endpoint in the `.so`. 1.28.0 has none. | **REJECT** |
 | C. `onnxruntime-node` inside nodejs-mobile | yes | **no Android prebuild** (`os: win32, darwin, linux`); would need a cross-built ORT + N-API addon against nodejs-mobile | ≥ 1 per ABI | ≈ the AAR's | same | — | 14.5 ms (desktop native) | 178 MiB | needs separate builds per arch | yes (≥ 1.29 native) | **REJECT** |
 | D. Tesseract via `tesseract.js` (WASM) | yes | same WASM (Node 18 measured: 775/775 same text) | 0 | core `.wasm` 2.86 MB → 1.06 MB, glue 3.9 MB → 1.46 MB | `eng` best_int 2.95 MB | 443 ms | 20 ms | 180 MiB | yes | none (offline `langPath`; the default fetches from jsDelivr) | **REJECT** (quality: `ocr-bakeoff.md`) |
@@ -61,7 +63,14 @@ CI (Node 22, and Node 18 in the LOCAL_ANALYZER_NODE18 job)        phone (nodejs-
 - **The `.wasm` contains no relaxed-SIMD instruction.** Proof: it compiles and runs on Node 18.20.4, whose V8
   10.2.154 has relaxed SIMD off by default (`--noexperimental-wasm-relaxed-simd`), and that V8 would reject such an
   instruction at compile time.
-- So the same `.wasm` should give bit-identical tensors on x86-64 and arm64 V8. This is **measured on x86-64 only**.
+- So the same `.wasm` should give bit-identical tensors on x86-64 and arm64 V8.
+- **Measured on arm64.** The official Node 18.20.4 linux-arm64 build (V8 10.2.154, nodejs-mobile's line) under
+  qemu-aarch64 8.2.2, with an Ubuntu noble arm64 glibc sysroot whose packages were hash-checked against the archive
+  index:
+  - the bundled ORT-web run's raw output tensor hashes to `1cc3d1a9a2725624`, as on x86-64;
+  - 39 real labels (34 blind + TARGET, 5 Marcówki) give identical text, confidences and top-K posteriors.
+
+  Emulated timings (≈ 240 s WASM compile, 7–19 s per label) are not phone timings.
 
 **The gate the integration stage must pass.** Run the 775-label corpus, or its 103 real labels, through the APK's own
 bundle on the CI x86_64 emulator and on the OWNER's arm64 phone. The per-label output hashes must equal the desktop

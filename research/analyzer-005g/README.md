@@ -43,5 +43,23 @@ All commands run from the BuildApp root.
 6. **Technology matrix.**
    `python3 research/analyzer-005g/technology-matrix.py stage-reports/artifacts/analyzer-005g/technology-matrix.json`
 
+## arm64 parity (emulated)
+
+**Ingredients:**
+- the official `node-v18.20.4-linux-arm64` (SHA-256 checked against `SHASUMS256.txt`);
+- `qemu-aarch64-static` from Ubuntu noble's `qemu-user-static` 8.2.2 (extracted with `dpkg-deb -x`, not installed);
+- an arm64 sysroot from noble `libc6`, `libgcc-s1` and `libstdc++6` arm64 debs (hashes checked against the ports
+  `Packages` index), with `lib/ld-linux-aarch64.so.1` linked to `usr/lib/aarch64-linux-gnu/`.
+
+**Run:**
+
+```bash
+QEMU_LD_PREFIX=<sysroot> qemu-aarch64-static node-v18.20.4-linux-arm64/bin/node \
+  research/analyzer-005g/run-external.mjs --engine paddle:PP-OCRv6_tiny_rec_onnx --backend wasm \
+  --set REAL --splits BLIND_R5,BLIND_R6,TARGET --out arm64-blind.json
+```
+
+Compare `arm64-blind.json` with the x86-64 WASM run, field by field.
+
 `blind-labels-005g.json` holds the 22 labels transcribed for 005G on the round-5/6 blind houses, as text facts. 005E's
 `development-labels.json` holds the other 81.

@@ -109,7 +109,8 @@ trim −1 px and scale 90 %; the reading is *stable* when all four top-1 values 
 3. **Node 18 parity.** In the existing "Local analyzer / Node 18 parity" job (`buildapp-ci.yml:315–363`), the per-label
    external outputs on Node 18 (with and without ICU) equal Node 22's, hash for hash.
 4. **Emulator parity.** On the x86_64 emulator, the APK's bundle gives the same per-label hashes as the desktop.
-   **First device gate: the OWNER's arm64 phone gives the same hashes.**
+   **First device gate: the OWNER's arm64 phone gives the same hashes.** 005G measured arm64 V8 bit-identical under
+   qemu.
 5. **Existing gates.** Marcówki / Kosaćce / e-OZE audits and evaluations run with the recogniser **off** (unchanged
    hashes) and **on**. Any model-hash change is listed and explained per house.
 6. **Fresh blind protocol** for the next stage. 005G consumed none.

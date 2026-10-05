@@ -33,7 +33,7 @@ decides, and a disagreement stays AMBIGUOUS with both values.
 | 1 | Keep improving the custom numeric classifier alone? | **No.** Stop tuning the template classifier. Keep the lattice around it: orientation hypotheses, segmentation and glyph-count hypotheses, stability bracket, non-circular metric. It becomes the second witness. |
 | 2 | Adopt an external OCR recogniser? | **Yes.** |
 | 3 | Which, and as replacement, ensemble or fallback? | **PP-OCRv6_tiny_rec** (`9ef676d6…`, 4.46 MB) as an **ensemble** member (P2: external confident and stable corroborates; a CLEAR/SUPPORTED lattice disagreement → AMBIGUOUS with both). **Not replacement**: it loses the independent witness. **Not fallback**: OCR-3 had 64 confident errors on 775, because the lattice's own confident misreads never trigger it. en_PP-OCRv5_mobile is the PILOT alternative or second model. |
-| 4 | Can it run in CI and on Android? | **Yes, as the same bytes.** `onnxruntime-web` WASM inside the existing Node-18 analyzer bundle. Measured on Node 22, Node 18 and Node 18 without ICU. The phone's `libnode.so` has WebAssembly and is started without `--jitless`. **Not yet run on an arm64 device**: that is 005H's first gate. |
+| 4 | Can it run in CI and on Android? | **Yes, as the same bytes.** `onnxruntime-web` WASM inside the existing Node-18 analyzer bundle. Measured on Node 22, Node 18 and Node 18 without ICU. The phone's `libnode.so` has WebAssembly and is started without `--jitless`. **arm64 V8 is bit-identical** (official Node 18.20.4 arm64 under qemu: the raw tensor and 39 labels). **Not yet run on an Android device**: that is 005H's first gate. |
 | 5 | Add ONNX Runtime? | **Yes: `onnxruntime-web` 1.30.0 (WASM) only.** **Not** `onnxruntime-android`: a second engine, +12.4 MB per ABI, and the 1.29+ AAR adds INTERNET plus a telemetry provider. **Not** `onnxruntime-node` in production: no Android build, telemetry code, an install-time CUDA download. |
 | 6 | Integrate PDF.js next for vector/text PDF evidence? | **Yes, as the stage after 005H (PILOT).** On Aster VIII's outline PDF it reads "1:500" and the scale bar exactly (agreement 3e-5) and the walls as an exact polygon, on Node 18 and without ICU. Text-less PDFs such as Galaktyka need the recogniser for their outlined glyphs (proven: "0 5 10 … 30 [m]", "1:500"), so PDF.js comes second. Pin 4.8.69 (the last Node-18 line); upgrading nodejs-mobile is the lasting fix. |
 | 7 | Does OpenCV solve enough current defects to justify its footprint? | **No.** Components and morphology are bit-identical to `source-cv`. LSD is absent from the WASM build. The Android SDK is +9.8 MB per ABI on a JNI path the analyzer cannot call. No blind failure is in a CV primitive. **DEFER** opencv.js, **REJECT** OpenCV Android. |
@@ -55,9 +55,9 @@ decides, and a disagreement stays AMBIGUOUS with both values.
 
 ## Risks the next stage inherits
 
-1. **No arm64 device run yet.** The determinism argument says the tensors match (no relaxed SIMD, IEEE-754), but
-   it is measured on x86-64 only. If arm64 hashes differ, only decoded strings and rounded posteriors may enter the
-   evidence record.
+1. **No Android device run yet.** arm64 V8 (Node 18.20.4 arm64 under qemu) is bit-identical to x86-64 on the raw
+   tensor and 39 labels. nodejs-mobile on a phone is a different build of the same V8. If its hashes differ, only
+   decoded strings and rounded posteriors may enter the evidence record.
 2. **PaddleOCR training data is undisclosed.** The weights are Apache-2.0. Record the residual risk; counsel review
    is optional.
 3. **Memory.** The WASM instance adds +160–200 MiB RSS for the process. Run OCR in a worker thread that exits.

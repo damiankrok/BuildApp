@@ -150,6 +150,9 @@ stable when all four agree.
 - **WASM on Node 18 and WASM on Node 22 are bit-identical** (Δ = 0).
 - A bundled ORT-web run on Node 18 with the no-ICU shim gives the same output tensor hash as on Node 22
   (`deployment-matrix.md`).
+- **arm64 V8.** The official Node 18.20.4 linux-arm64 build under qemu (WASM): 39 real labels (34 blind + TARGET,
+  5 Marcówki) identical to x86-64 in text, confidences and top-K posteriors; 34/34 exact. The raw output tensor hash
+  also matches (`deployment-matrix.md`).
 - Tesseract on Node 18 and on Node 22: 775/775 same text.
 
 ## Verdicts and answers
@@ -159,7 +162,7 @@ stable when all four agree.
 | Q1. Keep improving the custom classifier alone? | **No.** On these crops the template matcher's trusted readings are wrong 75 times in 309. 005F's own calibration record says the class "cannot see a misread the matcher is sure of" (`analyzer-005f/calibration/README.md`). A pretrained 4.5 MB recogniser is wrong 4 times in 707 trusted readings on the same crops. Keep the lattice (orientation, segmentation, count hypotheses, non-circular metric); stop tuning the glyph classifier. |
 | Q2. Adopt an external OCR recogniser? | **Yes.** |
 | Q3. Which, and how? | **PP-OCRv6_tiny_rec, official ONNX, SHA-256 `9ef676d6…`**, as an **OCR-2 ensemble member with a stability bracket** (P2). The external reading is a candidate source in the lattice. BuildPlan's values stay candidates. A disagreement with a CLEAR/SUPPORTED lattice reading is AMBIGUOUS with both values, and the metric resolver decides. Never replacement (loses a witness); never fallback (does not see confident misreads). en_PP-OCRv5_mobile is the PILOT alternative if v6 tiny misses the next blind protocol. |
-| Q4. CI and Android? | **Yes, the same bytes.** `onnxruntime-web` WASM runs inside the existing Node-18 analyzer bundle in CI and on the phone (`deployment-matrix.md`). Not yet run on an arm64 device: that is the integration stage's first gate. |
+| Q4. CI and Android? | **Yes, the same bytes.** `onnxruntime-web` WASM runs inside the existing Node-18 analyzer bundle in CI and on the phone (`deployment-matrix.md`). It is bit-identical on arm64 V8 under emulation. Not yet run on an Android device: that is the integration stage's first gate. |
 
 **Tesseract: REJECT.** It is 89.5 % exact with 28–52 confident misreads on 775, collapses on condensed (24/48) and
 condensed italic (6/24), and offers no top-K beyond per-symbol choices.
