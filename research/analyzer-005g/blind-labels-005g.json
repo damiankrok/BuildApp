@@ -1,0 +1,739 @@
+{
+ "schema": "buildapp.ocr-ground-truth",
+ "schemaVersion": "1.0.0",
+ "what": "005G blind-house labels: every box the production analyzer latticed on the selected plan frame of the round-5 (dom-w-modrzewnicy) and round-6 (dom-pod-milorzebem) blind houses, deduplicated, transcribed by eye from local upright crops (never committed) in the pass that reads each label upright. Text facts only. These houses are sealed blind evidence of earlier stages; 005G uses them only to MEASURE recognisers and changes no analyzer bound.",
+ "counts": {
+  "labels": 22,
+  "excluded": 38
+ },
+ "labels": [
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 106,
+    "x1": 116,
+    "y0": 426,
+    "y1": 446
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "2590"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 128,
+    "x1": 138,
+    "y0": 346,
+    "y1": 365
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "1950"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 298,
+    "x1": 317,
+    "y0": 827,
+    "y1": 836
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "1000"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 201,
+    "x1": 217,
+    "y0": 807,
+    "y1": 817
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "210"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 128,
+    "x1": 138,
+    "y0": 672,
+    "y1": 687
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "640"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 128,
+    "x1": 138,
+    "y0": 60,
+    "y1": 76
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "350"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 319,
+    "x1": 334,
+    "y0": 807,
+    "y1": 817
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "730"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 311,
+    "x1": 325,
+    "y0": 560,
+    "y1": 570
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "120"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 275,
+    "x1": 285,
+    "y0": 431,
+    "y1": 446
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "273"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 321,
+    "x1": 331,
+    "y0": 358,
+    "y1": 376
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "1417"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 375,
+    "x1": 389,
+    "y0": 561,
+    "y1": 570
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "332"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 357,
+    "x1": 367,
+    "y0": 360,
+    "y1": 375
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "376"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 406,
+    "x1": 415,
+    "y0": 155,
+    "y1": 185
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "271"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 316,
+    "x1": 325,
+    "y0": 562,
+    "y1": 571
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "120"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 357,
+    "x1": 367,
+    "y0": 195,
+    "y1": 210
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "433"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 264,
+    "x1": 279,
+    "y0": 560,
+    "y1": 570
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "226"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "split": "BLIND_R5",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "variantByteHash": "6f51934d453bcd912ceb0b9a2a93a5e1b9d4aa8ff0956f6b556fd5e2abe52a3b",
+   "box": {
+    "x0": 400,
+    "x1": 414,
+    "y0": 257,
+    "y1": 267
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "332"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "split": "BLIND_R6",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "variantByteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+   "box": {
+    "x0": 280,
+    "x1": 301,
+    "y0": 734,
+    "y1": 748
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "648"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "split": "BLIND_R6",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "variantByteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+   "box": {
+    "x0": 281,
+    "x1": 302,
+    "y0": 766,
+    "y1": 780
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "650"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "split": "BLIND_R6",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "variantByteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+   "box": {
+    "x0": 284,
+    "x1": 306,
+    "y0": 182,
+    "y1": 196
+   },
+   "orientation": "HORIZONTAL",
+   "printed": "578"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "split": "BLIND_R6",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "variantByteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+   "box": {
+    "x0": 117,
+    "x1": 131,
+    "y0": 406,
+    "y1": 434
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "1270"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "split": "BLIND_R6",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "variantByteHash": "9787f16dcfa4f2111d79c5397688baa11364f66572b3609e7b4686eb5b65c86f",
+   "box": {
+    "x0": 334,
+    "x1": 356,
+    "y0": 241,
+    "y1": 269
+   },
+   "orientation": "ROTATED_CW",
+   "printed": "400"
+  }
+ ],
+ "excluded": [
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 384,
+    "x1": 442,
+    "y0": 679,
+    "y1": 737
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 405,
+    "x1": 414,
+    "y0": 155,
+    "y1": 164
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 160,
+    "x1": 170,
+    "y0": 378,
+    "y1": 391
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 198,
+    "x1": 219,
+    "y0": 347,
+    "y1": 364
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 197,
+    "x1": 280,
+    "y0": 348,
+    "y1": 365
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 319,
+    "x1": 326,
+    "y0": 498,
+    "y1": 510
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 236,
+    "x1": 260,
+    "y0": 380,
+    "y1": 393
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 305,
+    "x1": 322,
+    "y0": 791,
+    "y1": 807
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 392,
+    "x1": 405,
+    "y0": 541,
+    "y1": 553
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 232,
+    "x1": 261,
+    "y0": 375,
+    "y1": 388
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 376,
+    "x1": 387,
+    "y0": 285,
+    "y1": 296
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 436,
+    "x1": 458,
+    "y0": 432,
+    "y1": 454
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 436,
+    "x1": 458,
+    "y0": 397,
+    "y1": 419
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 385,
+    "x1": 391,
+    "y0": 730,
+    "y1": 741
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 371,
+    "x1": 390,
+    "y0": 282,
+    "y1": 301
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 267,
+    "x1": 275,
+    "y0": 288,
+    "y1": 301
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 357,
+    "x1": 367,
+    "y0": 289,
+    "y1": 298
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 357,
+    "x1": 366,
+    "y0": 661,
+    "y1": 670
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 433,
+    "x1": 460,
+    "y0": 544,
+    "y1": 565
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 357,
+    "x1": 402,
+    "y0": 281,
+    "y1": 301
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 372,
+    "x1": 381,
+    "y0": 829,
+    "y1": 837
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 293,
+    "x1": 298,
+    "y0": 443,
+    "y1": 448
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 202,
+    "x1": 207,
+    "y0": 807,
+    "y1": 817
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 231,
+    "x1": 272,
+    "y0": 251,
+    "y1": 270
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 294,
+    "x1": 299,
+    "y0": 442,
+    "y1": 447
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 313,
+    "x1": 322,
+    "y0": 791,
+    "y1": 800
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 294,
+    "x1": 303,
+    "y0": 808,
+    "y1": 817
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-w-modrzewnicy",
+   "frameId": "frame-asset-rzut-8d59c92ec1-b1cad0f4fa",
+   "box": {
+    "x0": 294,
+    "x1": 311,
+    "y0": 801,
+    "y1": 817
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 216,
+    "x1": 222,
+    "y0": 597,
+    "y1": 610
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 182,
+    "x1": 196,
+    "y0": 465,
+    "y1": 479
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 182,
+    "x1": 260,
+    "y0": 595,
+    "y1": 677
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 341,
+    "x1": 355,
+    "y0": 240,
+    "y1": 254
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 342,
+    "x1": 355,
+    "y0": 558,
+    "y1": 612
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 342,
+    "x1": 354,
+    "y0": 597,
+    "y1": 611
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 341,
+    "x1": 355,
+    "y0": 372,
+    "y1": 386
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 398,
+    "x1": 406,
+    "y0": 346,
+    "y1": 357
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 204,
+    "x1": 214,
+    "y0": 489,
+    "y1": 506
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  },
+  {
+   "house": "dom-pod-milorzebem",
+   "frameId": "frame-asset-rzut-ebe6069a09-06bbb9fc62",
+   "box": {
+    "x0": 443,
+    "x1": 477,
+    "y0": 356,
+    "y1": 412
+   },
+   "why": "not a dimension label (symbol, hatch, room label, single glyph, several labels in one region), cut off, or text set another way than its region"
+  }
+ ]
+}

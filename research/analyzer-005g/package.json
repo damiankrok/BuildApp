@@ -1,0 +1,18 @@
+{
+  "name": "buildapp-research-analyzer-005g",
+  "private": true,
+  "type": "module",
+  "description": "BUILDPLAN-ANALYZER-005G research-only harness: OCR bake-off, PDF/vector probe, CV and geometry probes. Not a workspace, never imported by production code. Install with: ONNXRUNTIME_NODE_INSTALL=skip npm ci --prefix research/analyzer-005g",
+  "dependencies": {
+    "@techstark/opencv-js": "5.0.0-release.1",
+    "@tesseract.js-data/eng": "1.0.0",
+    "clipper2-js": "1.2.4",
+    "jsts": "2.12.1",
+    "onnxruntime-node": "1.30.0",
+    "onnxruntime-web": "1.30.0",
+    "pdfjs-dist": "4.8.69",
+    "polyclip-ts": "0.16.8",
+    "polygon-clipping": "0.15.7",
+    "tesseract.js": "7.0.0"
+  }
+}
