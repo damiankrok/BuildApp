@@ -25,3 +25,20 @@ fixed or stated below with the reason they are not.
 | E8 | P2 | the isolation gate did not cover runners | `packages/*/scripts`, `apps/*/scripts` and app bundler configs scanned | `tests/architecture/research-isolation.test.ts` |
 | E10 | P3 | DOWNGRADED feeds a challenge the figure can veto | stated in architecture.md (veto, never selector; the challenge re-decides no binding or end span) | architecture §8 test (end-span rules read no published fact) |
 | E11 | P3 | `performance.json` missing | written from the final matrix (`performance.json`) | — |
+
+## Reviewer C — licensing (`reviewer-C-licensing.md`, CONDITIONAL PASS, no P0 / P1)
+
+| id | sev | finding | resolution |
+| --- | --- | --- | --- |
+| C1 | P2 | the DeepLSD refine path is not "BSD/MIT/MPL/Apache": GC-RANSAC bundles gco-v3.0 (research-only, patent notice); distro Ceres links GPL-2+ SuiteSparse | corrected in the licensing matrix, the dependency matrix and the recommendation; the refine row's worst open item is the research-only clause |
+| C2 | P2 | ONNX tooling misdescribed and unpinned; onnxruntime-web's licence unrecorded | tooling table added (torch.onnx BSD-3, onnx 1.17.0 Apache-2.0, onnxruntime-web 1.30.0 MIT); onnx pinned in `build.sh` and `manifest.json`; exported graphs carry the weights' licence and provenance |
+| C3 | P2 | isolation-gate gaps (checkpoint extensions, build scripts, version catalog, app / root manifests) | `.tar .ort .pkl .h5 .pb .gguf` refused anywhere, `.bin` outside the BUILDAPP-03R byte cache; `build.*` scripts of apps and packages scanned; `libs.versions.toml` read; root and app `package.json` dependencies checked |
+| C4 | P2 | the mirror's weight licence not conditioned on provenance | "MIT (authors) only if byte-identical to the official file — unverified" |
+| C5 | P3 | OpenCV ≥ 4.10 ships an Apache-2.0 LSD | nuance added to the deployment estimate; not a drop-in for pytlsd's variant |
+| C6 | P3 | MobileSAM weights "implied" | decoder licence stated by Meta (Apache-2.0); SA-1B attribution cited to the paper, not the README |
+| C7 | P3 | "audited before any external code was executed" overstated | "before any provider was run" |
+| C8 | P3 | attribution | none missing; nothing redistributed |
+
+Pre-existing, outside 005I: the repository has tracked `.cache/source-bytes/*.bin` (publisher bytes) since BUILDAPP-03R
+(2026-09-16). None is a frame of the bake-off (reviewer C compared hashes), none was added in 005I, and removing them
+is an OWNER decision (it would not remove them from history). Recorded in the stage report.

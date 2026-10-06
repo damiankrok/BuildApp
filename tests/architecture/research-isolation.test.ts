@@ -50,6 +50,9 @@ const productionSources = (): string[] => [
   ...readdirSync(join(ROOT, 'packages')).flatMap((p) => filesUnder(`packages/${p}/scripts`, /\.(ts|tsx|mjs|js|cjs)$/)),
   ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}/scripts`, /\.(ts|tsx|mjs|js|cjs)$/)),
   ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}`, /^(vite|vitest|rollup|esbuild|webpack)\.config\.(ts|mjs|js|cjs)$/)),
+  // post-review C3: the build scripts that decide what enters the bundle and the APK
+  ...readdirSync(join(ROOT, 'apps')).flatMap((a) => filesUnder(`apps/${a}`, /^build\.(mjs|js|cjs|ts)$/)),
+  ...readdirSync(join(ROOT, 'packages')).flatMap((p) => filesUnder(`packages/${p}`, /^build\.(mjs|js|cjs|ts)$/)),
   ...filesUnder('apps/android/app/src/main', /\.(kt|java)$/),
   ...filesUnder('apps/android', /\.gradle\.kts$/),
 ]
@@ -78,9 +81,9 @@ describe('§42 production cannot reach the boundary bake-off', () => {
     expect(workspaces.some((w) => w.startsWith('research'))).toBe(false)
     expect(JSON.stringify(JSON.parse(read('tsconfig.json')).include)).not.toMatch(/research/)
     expect(read('vitest.config.ts')).not.toMatch(/['"`]research\//)
-    // and no production package declares a research package or a Python bridge as a dependency
-    for (const p of readdirSync(join(ROOT, 'packages'))) {
-      const file = `packages/${p}/package.json`
+    // and no production package, app or the root declares a research package or a Python bridge as a dependency
+    const manifests = ['package.json', ...readdirSync(join(ROOT, 'packages')).map((p) => `packages/${p}/package.json`), ...readdirSync(join(ROOT, 'apps')).map((a) => `apps/${a}/package.json`)]
+    for (const file of manifests) {
       if (!existsSync(join(ROOT, file))) continue
       const pkg = JSON.parse(read(file)) as Record<string, Record<string, string> | undefined>
       const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies, ...pkg.optionalDependencies, ...pkg.peerDependencies })
@@ -90,13 +93,16 @@ describe('§42 production cannot reach the boundary bake-off', () => {
 
   it('no model checkpoint is tracked anywhere, and the research harness tracks no binary', () => {
     const tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean)
-    expect(tracked.filter((f) => /\.(pt|pth|ckpt|safetensors|onnx|npz|npy|tflite)$/i.test(f))).toEqual([])
+    // post-review C3: DeepLSD's own checkpoints are `.tar`; `.bin` is checked outside the byte cache BUILDAPP-03R
+    // committed (`.cache/source-bytes`, publisher bytes from before the rule, no model among them).
+    expect(tracked.filter((f) => /\.(pt|pth|ckpt|safetensors|onnx|ort|npz|npy|tflite|tar|pkl|h5|pb|gguf)$/i.test(f))).toEqual([])
+    expect(tracked.filter((f) => /\.bin$/i.test(f) && !f.startsWith('.cache/source-bytes/'))).toEqual([])
     const harness = tracked.filter((f) => f.startsWith('research/analyzer-005i-boundary-bakeoff/'))
     expect(harness.filter((f) => !/\.(py|ts|mjs|cjs|js|json|md|txt|sh|cpp|h|hpp|cmake|toml|cfg|ya?ml|csv)$|(^|\/)(CMakeLists\.txt|\.gitignore)$/i.test(f))).toEqual([])
   })
 
   it('the Android build declares no Python, PyTorch or OpenCV dependency and packages nothing from research/', () => {
-    for (const f of filesUnder('apps/android', /\.gradle\.kts$/)) {
+    for (const f of [...filesUnder('apps/android', /\.gradle\.kts$/), ...filesUnder('apps/android', /^libs\.versions\.toml$/)]) {
       const gradle = codeOf(read(f))
       expect(gradle, f).not.toMatch(/pytorch|torch|opencv|chaquopy|python|deeplsd|elsed|mobilesam|research\//i)
     }

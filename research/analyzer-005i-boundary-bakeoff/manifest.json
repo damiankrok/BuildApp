@@ -42,7 +42,7 @@
   "runtime": {
     "apt": {"libceres-dev": "2.2.0+dfsg-4.1ubuntu2", "libeigen3-dev": "3.4.0-4build0.1", "libgflags-dev": "2.2.2-2build1", "libgoogle-glog-dev": "0.6.0-2.1build1", "libopencv-dev": "4.6.0+dfsg-13.1ubuntu1"},
     "os": "Ubuntu 24.04.4 LTS x86-64, 4 vCPU, no GPU",
-    "pip": {"kornia": "0.8.3", "numpy": "1.26.4", "omegaconf": "2.3.1", "opencv-python-headless": "4.10.0.84", "psutil": "7.2.2", "pybind11": "3.1.0", "scikit-image": "0.26.0", "scipy": "1.17.1", "shapely": "2.1.2", "timm": "0.9.16", "torch": "2.5.1+cpu", "torchvision": "0.20.1+cpu"},
+    "pip": {"kornia": "0.8.3", "numpy": "1.26.4", "onnx": "1.17.0", "omegaconf": "2.3.1", "opencv-python-headless": "4.10.0.84", "psutil": "7.2.2", "pybind11": "3.1.0", "scikit-image": "0.26.0", "scipy": "1.17.1", "shapely": "2.1.2", "timm": "0.9.16", "torch": "2.5.1+cpu", "torchvision": "0.20.1+cpu"},
     "python": "3.11.15",
     "node": "v22.22.2 (harness TypeScript via vite-node, from a git-archive snapshot of 29ab643)"
   }

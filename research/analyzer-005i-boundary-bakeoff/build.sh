@@ -19,7 +19,7 @@ python3 -m venv "$WORK/venv"
 P=$WORK/venv/bin/pip
 $P install -q --upgrade pip setuptools wheel
 $P install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
-$P install -q numpy==1.26.4 opencv-python-headless==4.10.0.84 omegaconf==2.3.1 scikit-image==0.26.0 shapely==2.1.2 kornia==0.8.3 scipy==1.17.1 pyyaml tqdm psutil==7.2.2 scikit-build cmake pybind11==3.1.0 timm==0.9.16 matplotlib
+$P install -q numpy==1.26.4 opencv-python-headless==4.10.0.84 omegaconf==2.3.1 scikit-image==0.26.0 shapely==2.1.2 kornia==0.8.3 scipy==1.17.1 pyyaml tqdm psutil==7.2.2 scikit-build cmake pybind11==3.1.0 timm==0.9.16 onnx==1.17.0 matplotlib
 
 # ELSED (library unchanged) + the research CLI
 mkdir -p "$WORK/build/elsed"
